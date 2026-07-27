@@ -16,17 +16,17 @@ Mirror this into `apps/tabletop/README.md`, `notes/GLOSSARY.md`, and prep-screen
 
 ## Technology choices
 
-| Decision | Choice | Rationale |
-|---|---|---|
-| Canvas | `tldraw` (v3.x) React component | mandated; watermark worn happily |
-| Sync | `@tldraw/sync` (`useSync`) client + self-hosted `@tldraw/sync-core` (`TLSocketRoom`) server on Node + `ws` | hosted demo server can't take server-side shape injection or our OTel; self-hosting is the documented production path |
-| Server frame | One Node/Express process: Vite-built static app, `/connect/:roomId` websocket, `POST /api/tables/:tableName/cards`, OTLP proxy, `/health` | one container; sync server stays deliberately dumb |
-| Build | Vite + React + TypeScript | standard for a tldraw app |
+| Decision          | Choice                                                                                                                                                                                                                                                                   | Rationale                                                                                                                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Canvas            | `tldraw` (v3.x) React component                                                                                                                                                                                                                                          | mandated; watermark worn happily                                                                                                                                                    |
+| Sync              | `@tldraw/sync` (`useSync`) client + self-hosted `@tldraw/sync-core` (`TLSocketRoom`) server on Node + `ws`                                                                                                                                                               | hosted demo server can't take server-side shape injection or our OTel; self-hosting is the documented production path                                                               |
+| Server frame      | One Node/Express process: Vite-built static app, `/connect/:roomId` websocket, `POST /api/tables/:tableName/cards`, OTLP proxy, `/health`                                                                                                                                | one container; sync server stays deliberately dumb                                                                                                                                  |
+| Build             | Vite + React + TypeScript                                                                                                                                                                                                                                                | standard for a tldraw app                                                                                                                                                           |
 | Card rendering v0 | tldraw image shape + `TLImageAsset`, `src` = Scryfall URL of the **played face**. `shape.meta` = `{ instanceId, scryfallId, cardName }` — **no traceparent**: traces follow requests until fulfilled; cards persist. Correlation is by `card.instance_id` span attribute | Scryfall scans' round corners are physically-round-things, style-legal. Sleeves/rectangular frames arrive naturally with the custom CardShape (Mountain 2) — buoy, don't accelerate |
-| Room registry | in-memory `Map<slug(tableName), { tableId, room: TLSocketRoom }>` — a tldraw room corresponds to a Table in the core domain: **name is the alias, id is the identity** (contract Decision 1). **SCAFFOLDING**: the Spine absorbs table identity later | interim-GUID question: JESS TODO 1 |
-| Dedup | on event `id` (a retried request) **and** on `instanceId` already on the table (a retried play — one instance exists once, so a second arrival is a physical no-op) | Jess: covers the worked-but-failed-to-ack case |
-| Browser OTel | **standard OpenTelemetry web SDK**, nothing Honeycomb-specific, wrapped in our own module `src/client/observability/` (`initTracing`, `inSpan`, `setGlobalAttrs`); spans proxied through our server (JESS TODO 5); dataset `mtg-tabletop-web` | Jess: standard library + a wrapper module of our own, useful later |
-| Unit tests | Vitest for the tabletop; Shuffler stays Jest | Jess: stick with what works per component, no coupling |
+| Room registry     | in-memory `Map<slug(tableName), { tableId, room: TLSocketRoom }>` — a tldraw room corresponds to a Table in the core domain: **name is the alias, id is the identity** (contract Decision 1). **SCAFFOLDING**: the Spine absorbs table identity later                    | interim-GUID question: JESS TODO 1                                                                                                                                                  |
+| Dedup             | on event `id` (a retried request) **and** on `instanceId` already on the table (a retried play — one instance exists once, so a second arrival is a physical no-op)                                                                                                      | Jess: covers the worked-but-failed-to-ack case                                                                                                                                      |
+| Browser OTel      | **standard OpenTelemetry web SDK**, nothing Honeycomb-specific, wrapped in our own module `src/client/observability/` (`initTracing`, `inSpan`, `setGlobalAttrs`); spans proxied through our server (JESS TODO 5); dataset `mtg-tabletop-web`                            | Jess: standard library + a wrapper module of our own, useful later                                                                                                                  |
+| Unit tests        | Vitest for the tabletop; Shuffler stays Jest                                                                                                                                                                                                                             | Jess: stick with what works per component, no coupling                                                                                                                              |
 
 ## F — fleet-level steps (first: they unblock A ∥ B parallelism)
 
@@ -53,29 +53,29 @@ Mirror this into `apps/tabletop/README.md`, `notes/GLOSSARY.md`, and prep-screen
 - **A1. Scaffold the workspace** — package.json (tldraw, @tldraw/sync{,-core},
   express, ws, react, OTel), tsconfig, vite.config, src/client + src/server; root
   pass-through scripts. **First task: verify server-side shape injection
-  (`room.updateStore`) against the pinned tldraw version.** *Test: build compiles,
-  vitest smoke.*
+  (`room.updateStore`) against the pinned tldraw version.** _Test: build compiles,
+  vitest smoke._
 - **A2. OTel from the first commit** — server: `src/server/tracing.ts` modeled on
   the Shuffler's (ESM register hook, OTLP http, kube-probe-aware sampler,
   `node --import`). Browser: the `observability/` wrapper module (standard OTel web
   SDK), initialized before mount, `table.name` as a global attribute, exporting to
   our server's OTLP proxy. `run` script + `.env` pattern (`.be` before `.env` — same
-  trap). *Test: spans in Honeycomb env `local`, datasets `mtg-tabletop` /
-  `mtg-tabletop-web`.*
+  trap). _Test: spans in Honeycomb env `local`, datasets `mtg-tabletop` /
+  `mtg-tabletop-web`._
 - **A3. Sync server + room registry (scaffolding)** — `rooms.ts` per the registry
   row; Express + ws upgrade at `/connect/:roomSlug`; `traceparent` accepted on the
-  connection URL (propagation belongs to the connection *request* only); SPA
+  connection URL (propagation belongs to the connection _request_ only); SPA
   fallback for `/t/*`; `/health`; one shared slugify. Rooms are **in-memory only**,
   ephemeral, accepted for v0. `table.id` + `table.name` on spans; room lifecycle
-  (created/emptied/evicted) as span events. *Test: vitest, real server on an
-  ephemeral port, two ws clients share a room.*
+  (created/emptied/evicted) as span events. _Test: vitest, real server on an
+  ephemeral port, two ws clients share a room._
 - **A4. The `/t/:tableName` page** — `/` landing takes a table name only (player
   name is a Shuffler-prep concern); `/t/:tableName` renders `<Tldraw>` with
   `useSync`. Spectators come free: anyone with the URL joins. Square corners,
-  tablet-friendly targets. *Test: Playwright, two contexts, draw in one, see it in
-  the other; a tabletop `verify.sh` mirroring the Shuffler's.*
+  tablet-friendly targets. _Test: Playwright, two contexts, draw in one, see it in
+  the other; a tabletop `verify.sh` mirroring the Shuffler's._
 - **A5. Card-arrival API — the seam the Spine absorbs** — `POST
-  /api/tables/:tableName/cards`, payload per F0. Dedup on `id` **and** on
+/api/tables/:tableName/cards`, payload per F0. Dedup on `id` **and** on
   `instanceId` already present (no-op). **Arrival layout (regions, v0-minimal)**:
   a fixed **Stack area**, plus a **battlefield row per player** keyed by
   `initiator`, allocated in first-play order — Jess: lands arrive in the player's
@@ -88,16 +88,16 @@ Mirror this into `apps/tabletop/README.md`, `notes/GLOSSARY.md`, and prep-screen
   by `card.instance_id` (not propagation — the play trace ends when the ingestion
   request is fulfilled). SCAFFOLDING banner naming the future: Shuffler emits
   `card.played` to the Spine; Tabletop subscribes to the table's public feed.
-  *Test: vitest POST + both dedup paths; Playwright: a land and a nonland arrive
-  in different areas.*
+  _Test: vitest POST + both dedup paths; Playwright: a land and a nonland arrive
+  in different areas._
 - **A6. Docker, k8s, deploy** — Dockerfile with repo root as build context; `k8s/`:
   deployment (`mtg-tabletop`, key from `mtg-deck-shuffler-secret`), service,
   ingress on ALB group `only-one-alb-please`, host **`table.jessitron.honeydemo.io`**
   (decided: subdomain — easiest, copies the Shuffler's external-dns + TLS host
   block, spares Vite base-path and ws-path juggling). The Shuffler's server-side
   POST uses in-cluster DNS (`TABLETOP_URL=http://mtg-tabletop-service`), not the
-  public host. Check ALB idle timeout vs tldraw keepalive. *Test: container boot;
-  prod spans after deploy.*
+  public host. Check ALB idle timeout vs tldraw keepalive. _Test: container boot;
+  prod spans after deploy._
 - **A7. Docs** — tabletop SEAMAP progress, README (Modes + SCAFFOLDING callouts),
   root CLAUDE.md layout, notes/AGENT-NOTES.md gotchas.
 
@@ -114,9 +114,9 @@ Mirror this into `apps/tabletop/README.md`, `notes/GLOSSARY.md`, and prep-screen
   on `PersistedGameState` (optional-field exception, **no version bump**);
   `/restart-game` carries both. Player name is load-bearing in table mode (it keys
   the battlefield row) — default to "player" if blank rather than block. Game page
-  header shows "at table *name*" linking to `/t/:tableName` in a new tab — that
-  link is also the spectator-share mechanism (Jess: yes please). *Test: unit
-  persistence; Playwright types both fields, sees the link.*
+  header shows "at table _name_" linking to `/t/:tableName` in a new tab — that
+  link is also the spectator-share mechanism (Jess: yes please). _Test: unit
+  persistence; Playwright types both fields, sees the link._
 - **B2. A Tabletop port (fakes, not mocks)** — `src/port-tabletop/`: `TabletopPort`,
   `HttpTabletopGateway` (fetch to `TABLETOP_URL`, auto-instrumented so trace
   context propagates free), `FakeTabletopGateway` (records; can be told to fail).
@@ -129,7 +129,7 @@ Mirror this into `apps/tabletop/README.md`, `notes/GLOSSARY.md`, and prep-screen
   **optional field, no version bump**: `fromPersistedGameState` **mints-on-load**
   when missing, so in-flight games get ids the next time they're touched. Files:
   `src/GameState.ts`, `src/port-persist-state/types.ts`, `test/generators.ts`.
-  *Test: mint-on-load unit test; the F0 no-index test.*
+  _Test: mint-on-load unit test; the F0 no-index test._
 - **B3. Play sends the card — send-then-commit** — in `POST /play-card`
   (`apps/shuffler/src/app.ts:1230`), table mode: **send to the table first; only
   on success run `game.playCard()` and persist**; on failure return an error
@@ -138,13 +138,13 @@ Mirror this into `apps/tabletop/README.md`, `notes/GLOSSARY.md`, and prep-screen
   the tabletop's `instanceId` no-op covers worked-but-unacked). Solo mode:
   clipboard flow exactly as today (Mural workflow unbroken — joining a table is
   optional). Button feedback "Sent to table". Zone hint: land → battlefield,
-  nonland → stack. *Test: fake fails → error + hand unchanged; Playwright two-app
-  flow (verify orchestrates both apps with health-check waits).*
+  nonland → stack. _Test: fake fails → error + hand unchanged; Playwright two-app
+  flow (verify orchestrates both apps with health-check waits)._
 - **B4. Discard** — new hand-modal button + `POST /discard-card/...`; history verb
   "discarded"; card lands in `TableLocation` (graveyard is table geography, not
   Shuffler state). Solo mode: identical to Play except the verb (Jess: yes, same
-  as Play). Table mode: `zoneHint: "graveyard"` — placement JESS TODO 3. *Test:
-  unit verb + history text; Playwright.*
+  as Play). Table mode: `zoneHint: "graveyard"` — placement JESS TODO 3. _Test:
+  unit verb + history text; Playwright._
 - **B5. Docs + owners** — CLAUDE.md (routes, TABLETOP_URL), GLOSSARY (Modes), both
   seamaps, feature-owner `-update`s.
 
@@ -184,23 +184,27 @@ correlation is by `card.instance_id` attribute on spans from every component
   custom CardShape work at Mountain 2 — the natural moment; a sleeve image is
   exactly what a face-down card back needs.
 
-## JESS TODO — new questions your answers surfaced
+## Round-2 answers — DECIDED (apply these over the plan body)
 
-1. **JESS TODO — interim tableId in the scaffolding**: the contract has the Spine
-   minting `tableId`. Until the Spine exists, may the tabletop's registry mint
-   interim GUIDs that die with the process, or does v0 run name-only?
-2. **JESS TODO — blocked play vs tabletop downtime**: with send-then-commit, a
-   tabletop outage makes a joined game unplayable mid-game. Acceptable for v0, or
-   should the game page get a "leave table / go solo" control?
-3. **JESS TODO — where does a Discard land on the canvas?** Stack and battlefield
-   are defined. Proposal: a per-player graveyard spot at the end of that player's
-   battlefield row.
-4. **JESS TODO — player-name collisions** (two "Jess"es at one table): battlefield
-   rows are keyed by player name now. v0 last-writer-shares-a-row, or
-   disambiguate with a suffix?
-5. **JESS TODO — OTLP proxy for browser spans**: OK to route them through the
-   tabletop server (`POST /otlp/v1/traces`, Honeycomb key stays server-side),
-   rather than shipping an ingest key to the page?
+1. **Registry is name-only in v0** — no interim `tableId` GUIDs; v0 doesn't wait on
+   the Spine. (Delete the `tableId` half of the registry row.)
+2. **Tabletop downtime blocking plays is acceptable.** And: **the Prep object
+   records all needed Table info** (table name, player name, seat id) — the Prep
+   page is where the Shuffler joins a table, and that record is what enables
+   rejoining later. So B1 persists onto `PersistedGamePrep` as well as
+   `PersistedGameState` (both optional fields, no version bumps).
+3. **Canvas regions per player**: battlefield row + a **Graveyard spot** and a
+   **smaller Exile spot** at the end of it. Discard → graveyard spot.
+4. **Player names are not unique — seats get their own IDs.** The Shuffler mints a
+   short GUID `seatId` at prep/join time (a sequence once the Spine owns seats);
+   battlefield rows are keyed by `seatId`, labeled with the player name. F0's
+   payload changes: `initiator` becomes `{ seatId, playerName }`. The contract's
+   `seat.taken` payload now carries `seatId` too.
+5. **Browser spans route to an OpenTelemetry Collector**, not a proxy endpoint in
+   the tabletop server and not a key in the page. Collectors already run in the
+   cluster — find one (or stand one up in `apps/tabletop/k8s/`) with an
+   OTLP-http receiver + CORS for the tabletop origin; locally, a collector config
+   in the repo or fall back to the server-side key only for `local` env.
 
 ## Critical files
 

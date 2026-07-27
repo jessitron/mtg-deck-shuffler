@@ -92,7 +92,9 @@ truth-of-order and truth-of-time stay with the log (Spine-assigned `seq`,
 ## Decision 2: The v0 event catalog — DECIDED (three kinds)
 
 - `table.created` — payload: table name, creator. Response/log carries the minted `tableId`.
-- `seat.taken` — payload: seat number (1–4), player name
+- `seat.taken` — payload: `seatId` (a short GUID — player names are not unique;
+  seat identity is its own thing, mintable as a sequence once the Spine owns it),
+  seat number (1–4), player name (display only)
 - `card.played` — from the Shuffler (Decision 3: **decided, game event**) —
   payload: `card: { scryfallId, instanceId }`, `face`, from which seat, zone hint
 
