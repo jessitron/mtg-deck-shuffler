@@ -9,7 +9,8 @@ import { formatHistoryModalHtmlFragment } from "./view/play-game/history-compone
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
-import { GameState, GameCard } from "./GameState.js";
+import { GameState, GameCard, TableInfo } from "./GameState.js";
+import { randomUUID } from "node:crypto";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState, IncompatibleStateVersionError } from "./port-persist-state/types.js";
@@ -453,9 +454,30 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         }
       }
 
+      // Table mode (JES-127): optional table + player name from the prep form.
+      // Player name is load-bearing at a table (it labels the battlefield row) —
+      // default to "player" rather than block. The seat's short-GUID seatId is
+      // minted here at join time (prep keeps it for rejoining).
+      const tableNameInput = typeof req.body["table-name"] === "string" ? req.body["table-name"].trim() : "";
+      const playerNameInput = typeof req.body["player-name"] === "string" ? req.body["player-name"].trim() : "";
+      let tableInfo: TableInfo | undefined;
+      if (tableNameInput) {
+        tableInfo = {
+          tableName: tableNameInput,
+          playerName: playerNameInput || "player",
+          seatId: prep.seatId ?? randomUUID().slice(0, 8),
+        };
+        // The Prep records all table info — that's what enables rejoining later.
+        prep.tableName = tableInfo.tableName;
+        prep.playerName = tableInfo.playerName;
+        prep.seatId = tableInfo.seatId;
+        prep.updatedAt = new Date();
+        await persistPrepPort.savePrep(prep);
+      }
+
       // Create new game from prep
       const gameId = persistStatePort.newGameId();
-      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck);
+      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo);
       game.startGame(browserTabId);
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -554,9 +576,20 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
         return;
       }
 
+      // Restart carries the table info forward (JES-127): prefer what the game
+      // itself recorded, fall back to the prep's record.
+      const carriedTableName = persistedGame.tableName ?? prep.tableName;
+      const tableInfo: TableInfo | undefined = carriedTableName
+        ? {
+            tableName: carriedTableName,
+            playerName: persistedGame.playerName ?? prep.playerName ?? "player",
+            seatId: persistedGame.seatId ?? prep.seatId ?? randomUUID().slice(0, 8),
+          }
+        : undefined;
+
       // Create new game from the same prep
       const newGameId = persistStatePort.newGameId();
-      const newGame = GameState.newGame(newGameId, prep.prepId, prep.version, prep.deck);
+      const newGame = GameState.newGame(newGameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo);
       newGame.startGame(browserTabId);
       await persistStatePort.save(newGame.toPersistedGameState());
 

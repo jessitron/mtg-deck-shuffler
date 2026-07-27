@@ -731,3 +731,14 @@ footer {
   justify-content: flex-end;
   margin-top: 10px;
 }
+
+/* "at table <name>" banner (JES-127): links to the Tabletop page in a new
+   tab — that URL is also the spectator-share mechanism. Square corners. */
+.at-table-banner {
+  font-size: 0.9rem;
+}
+
+.at-table-link {
+  font-weight: 600;
+  text-decoration: underline;
+}

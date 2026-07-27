@@ -11,6 +11,9 @@ interface StoredPrep {
   deck: PersistedDeck;
   createdAt: Date;
   updatedAt: Date;
+  tableName?: string;
+  playerName?: string;
+  seatId?: string;
 }
 
 export class SqlitePersistPrepAdapter implements PersistPrepPort {
@@ -93,6 +96,9 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
         deck: hydratedDeck,
         createdAt: storedPrep.createdAt,
         updatedAt: storedPrep.updatedAt,
+        tableName: storedPrep.tableName,
+        playerName: storedPrep.playerName,
+        seatId: storedPrep.seatId,
       };
     }
     return null;

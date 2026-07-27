@@ -263,3 +263,26 @@
   flex-direction: column;
   align-items: center;
 }
+
+/* Table-mode join fields (JES-127): optional table + player name beside Shuffle Up.
+   Square corners — these are UI chrome, not physical objects. */
+.join-table-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.join-table-label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  gap: 2px;
+}
+
+.join-table-fields input {
+  border: 1px solid #888;
+  border-radius: 0;
+  padding: 4px 6px;
+  font-size: 0.9rem;
+}

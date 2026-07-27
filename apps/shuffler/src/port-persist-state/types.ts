@@ -122,6 +122,13 @@ export interface PersistedGameState {
   totalCards: number;
   gameCards: PersistedGameCard[]; // Changed from GameCard[] to PersistedGameCard[]
   events: GameEvent[];
+  // Table info (JES-127): present only when this game joined a table on the
+  // Tabletop. Optional with graceful fallbacks (solo play) — NO version bump;
+  // see the "optional fields" exception in notes/DESIGN-persistence-versioning.md.
+  tableName?: string;
+  playerName?: string;
+  /** The seat's short GUID — player names are not unique; this is the seat's identity. */
+  seatId?: string;
 }
 
 export interface GameHistorySummary {

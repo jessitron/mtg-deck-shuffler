@@ -60,6 +60,17 @@ export function isInCommandZone(gameCard: GameCard): gameCard is GameCard & { lo
 /** The number of cards drawn for an opening hand (and on each mulligan). */
 export const OPENING_HAND_SIZE = 7;
 
+/**
+ * Everything the Shuffler knows about the table a game joined (JES-127).
+ * Minted at prep/join time; the seatId is the seat's identity (player names
+ * are not unique) — a short GUID until the Spine owns seats.
+ */
+export interface TableInfo {
+  tableName: string;
+  playerName: string;
+  seatId: string;
+}
+
 export interface WhatHappened {
   shuffling?: boolean;
   movedRight?: GameCard[];
@@ -80,8 +91,13 @@ export class GameState {
   private readonly gameCards: GameCard[];
   private readonly eventLog: GameEventLog;
   private readonly randomSeed?: number;
+  // Table info (JES-127): present only when this game joined a table.
+  public readonly tableName?: string;
+  public readonly playerName?: string;
+  public readonly seatId?: string;
 
-  static newGame(gameId: GameId, prepId: PrepId, prepVersion: number, deck: Deck, randomSeed?: number) {
+  /** Table info: set when this game joined a table on the Tabletop (JES-127). */
+  static newGame(gameId: GameId, prepId: PrepId, prepVersion: number, deck: Deck, randomSeed?: number, tableInfo?: TableInfo) {
     if (deck.commanders.length > 2) {
       // TODO: make a warning function, somehow get it into WhatHappened?
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
@@ -119,6 +135,9 @@ export class GameState {
       cards: gameCards,
       events: [],
       randomSeed,
+      tableName: tableInfo?.tableName,
+      playerName: tableInfo?.playerName,
+      seatId: tableInfo?.seatId,
     });
   }
 
@@ -133,6 +152,9 @@ export class GameState {
     cards: GameCard[];
     events: GameEvent[];
     randomSeed?: number;
+    tableName?: string;
+    playerName?: string;
+    seatId?: string;
   }) {
     this.gameId = params.gameId;
     this.status = params.gameStatus;
@@ -145,6 +167,9 @@ export class GameState {
     this.gameCards = params.cards;
     this.eventLog = GameEventLog.fromPersisted(params.events);
     this.randomSeed = params.randomSeed;
+    this.tableName = params.tableName;
+    this.playerName = params.playerName;
+    this.seatId = params.seatId;
   }
 
   static async fromPersistedGameState(
@@ -820,6 +845,9 @@ export class GameState {
       totalCards: this.totalCards,
       gameCards: dehydrateGameCards(this.gameCards), // Dehydrate to PersistedGameCard[]
       events: this.eventLog.getEvents(),
+      tableName: this.tableName,
+      playerName: this.playerName,
+      seatId: this.seatId,
     };
   }
 }

@@ -10,6 +10,9 @@ interface StoredPrep {
   deck: PersistedDeck;
   createdAt: Date;
   updatedAt: Date;
+  tableName?: string;
+  playerName?: string;
+  seatId?: string;
 }
 
 export class InMemoryPersistPrepAdapter implements PersistPrepPort {
@@ -45,6 +48,9 @@ export class InMemoryPersistPrepAdapter implements PersistPrepPort {
       deck: hydratedDeck,
       createdAt: stored.createdAt,
       updatedAt: stored.updatedAt,
+      tableName: stored.tableName,
+      playerName: stored.playerName,
+      seatId: stored.seatId,
     };
   }
 

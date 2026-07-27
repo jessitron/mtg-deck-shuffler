@@ -37,6 +37,16 @@
             <form method="post" action="/start-game" class="inline-form">
               <input type="hidden" name="prep-id" value="<%= prep.prepId %>" />
               <input type="hidden" name="expected-version" value="<%= prep.version %>" />
+              <div class="join-table-fields">
+                <label class="join-table-label">table name
+                  <input type="text" name="table-name" value="<%= prep.tableName || '' %>"
+                         placeholder="(optional) play at a table" autocomplete="off" />
+                </label>
+                <label class="join-table-label">player name
+                  <input type="text" name="player-name" value="<%= prep.playerName || '' %>"
+                         placeholder="your name at the table" autocomplete="off" />
+                </label>
+              </div>
               <button type="submit" class="button-base begin-button">Shuffle Up</button>
             </form>
           </div>
