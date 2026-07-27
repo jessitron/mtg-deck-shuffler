@@ -27,6 +27,11 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - Game flip uses `POST /flip-card-modal/` replacing `#card-modal-container`
 - Prep flip uses `GET /prep-card-modal/` with `?face=` query parameter
 
+### Prep vs Game Id Spaces
+- `prepId` (`game_preps`) and `gameId` (`game_states`) are **independent** auto-increment sequences — the same number can name both a prep and an unrelated game
+- `validateStateVersion` treats a missing `expected-version` as valid, so a stray game-route call is not caught by the optimistic lock
+- Therefore prep surfaces must call prep routes. `FlipRequest` (`{page:"game"|"prep"}`) makes the asking page explicit rather than letting a prepId masquerade as a gameId
+
 ### Optimistic Locking
 - Both flip routes use `requireValidVersion` middleware
 - Flip changes state version (via persist), so stale clients get version errors
@@ -83,9 +88,11 @@ These are specific things that could break two-faced cards if changed elsewhere:
 
 4. **Modal re-render on flip**: The modal flip route re-renders the ENTIRE modal. If the card modal template adds new data requirements, the `/flip-card-modal/` route must also provide them.
 
-5. **HTMX swap targets**: The inline flip button targets `#card-N-outer-flip-container-with-button` with `outerHTML` swap. Changing the flip container's ID scheme or adding wrapper elements will break this.
+5. **HTMX swap targets**: The inline flip button targets `#card-N-outer-flip-container-with-button` with `outerHTML` swap. Changing the flip container's ID scheme or adding wrapper elements will break this — on the game page **and** on the prepare screen, since `/prep-flip-card/` returns the same container from the same function.
 
-6. **Prep flip gaining persistence**: Currently prep flip is stateless (query param). When this changes, the prep page will need a persistence mechanism for flip state, and the prep-card-modal route will need to read/write that state.
+6. **Prep flip gaining persistence**: Currently prep flip is stateless (query param) on both surfaces — the card modal (`/prep-card-modal/?face=`) and the inline commander (`/prep-flip-card/?face=`). When this changes, the prep page will need a persistence mechanism for flip state, and **both** prep routes will need to read/write it. Related: the two surfaces don't share a face — flipping the commander inline and then opening its modal shows the front, because each reads its own URL.
+
+6a. **New prep card surfaces**: Anything new on the prepare screen that renders a two-faced card inline must pass `flipRequest: { page: "prep", prepId }` to `formatCardContainer()`. Omitting it falls back to the game flip route with `gameId` — the JES-90 bug (see "Prep vs Game Id Spaces" above). Note that `renderPrepCommanderCard`'s regex rewrite of `/card-modal/` → `/prep-card-modal/` does **not** cover the flip button, and can't: the flip URL encodes the target face, so it has to be built where `currentFace` is known.
 
 7. **New deck adapters**: Must determine `twoFaced` via `isDoubleSidedLayout(layout)` (from `twoFacedLayouts.ts`) and set `cardTypes` to the union of ALL faces'/parts' types. Do NOT infer two-faced from "two faces in the data" — split/adventure/prepare cards have two faces but one image (so `twoFaced=false`) yet still contribute both parts' types to `cardTypes`.
 

@@ -25,6 +25,7 @@
 | `POST /flip-card-modal/:gameId/:gameCardIndex` | ~1264-1377 | Modal flip — returns full card modal with navigation |
 | `GET /card-modal/:gameId/:cardIndex` | ~580-696 | Card modal — shows flip button if `twoFaced` |
 | `GET /prep-card-modal/:prepId/:cardIndex` | ~698-804 | Prep card modal — flip via `?face=` query param |
+| `GET /prep-flip-card/:prepId/:cardIndex` | ~886-919 | Prep inline flip (commander on the prepare screen) — stateless, `?face=` query param, returns `formatFlippingContainer()` |
 | `GET /library-modal/:gameId` | ~500-542 | Game library modal — maps `cardTypes` (already unioned) |
 | `GET /prep-library-modal/:prepId` | ~807-845 | Prep library modal — maps `cardTypes` (already unioned) |
 
@@ -32,8 +33,10 @@
 
 | File | Role |
 |---|---|
-| `src/view/common/shared-components.ts:33-71` | `formatCardContainer()` — branches on `twoFaced` |
-| `src/view/common/shared-components.ts:73-93` | `formatFlippingContainer()` — builds 3D flip HTML structure |
+| `src/view/common/shared-components.ts` | `FlipRequest` type — `{page:"game"; gameId; expectedVersion?}` \| `{page:"prep"; prepId}` |
+| `src/view/common/shared-components.ts` | `formatCardContainer()` — branches on `twoFaced`; optional `flipRequest` (defaults to game) |
+| `src/view/common/shared-components.ts` | `formatFlippingContainer(gameCard, flipRequest)` — builds 3D flip HTML structure and the flip button per `flipRequest` |
+| `src/view/common/prep-view-helpers.ts` | `renderPrepCommanderCard()` — passes `flipRequest: {page:"prep", prepId}` and rewrites `/card-modal/` → `/prep-card-modal/` |
 | `views/partials/card-modal.ejs` | Card modal template — receives `currentFace`, renders flip button |
 
 ## Styling
@@ -84,6 +87,7 @@
 | `test/port-card-repository/InMemoryCardRepositoryAdapter.test.ts` | Persistence round-trip tests |
 | `test/port-card-repository/SqliteCardRepositoryAdapter.test.ts` | Persistence round-trip tests |
 | `test/verification/verify-library-grouping.spec.ts` | E2E: flip preserves group-scoped navigation (game + prep) |
+| `test/verification/verify-prep-commander-flip.spec.ts` | E2E: inline flip of a two-faced commander on the prepare screen (JES-90 regression guard) |
 
 ## Test Data
 

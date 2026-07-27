@@ -72,6 +72,8 @@ User clicks "Flip" button
 
 ## Data Flow: Flip on Prep Page
 
+There are two prep flip surfaces, both stateless:
+
 ```
 User clicks "Flip" in prep card modal
   → GET /prep-card-modal/:prepId/:cardIndex?face=back(&navList=...)
@@ -82,24 +84,47 @@ User clicks "Flip" in prep card modal
     → No state mutation — purely URL-driven
 ```
 
-Key difference from game flip: prep flip is stateless. The face is a query parameter, not persisted. If the modal closes and reopens, the card shows front face again.
+```
+User clicks "Flip" under the commander on the prepare screen (inline)
+  → GET /prep-flip-card/:prepId/:cardIndex?face=back
+    → Reads prep from persistence (404 if absent)
+    → Finds the card via createPrepViewHelpers — same commanders-then-library-cards
+      indexing as /prep-card-modal (404 unknown index, 400 single-faced)
+    → Response: formatFlippingContainer() for the requested face
+    → hx-swap="outerHTML" onto #card-N-outer-flip-container-with-button
+    → No state mutation, nothing persisted
+```
+
+Key difference from game flip: prep flip is stateless. The face is a query parameter, not persisted. If the modal closes and reopens, or the page reloads, the card shows front face again.
+
+**Never point a prep surface at a game flip route.** `prepId` and `gameId` come from independent SQLite sequences (`game_preps` vs `game_states`), so a prepId handed to `/flip-card/:gameId/...` either finds no game or finds an unrelated one — and `validateStateVersion` allows a missing `expected-version`, so the unrelated game would be mutated and saved. This was the JES-90 bug.
 
 ## View Rendering
 
-### `formatCardContainer()` (`src/view/common/shared-components.ts:33-71`)
+### `formatCardContainer()` (`src/view/common/shared-components.ts`)
 Branches on `gameCard.card.twoFaced`:
 - **Two-faced**: wraps card in `formatFlippingContainer()` with flip animation structure
 - **Single-faced**: simple `<img>` tag
 
-### `formatFlippingContainer()` (`src/view/common/shared-components.ts:73-93`)
-Builds the 3D CSS flip structure:
+Takes an optional `flipRequest?: FlipRequest` that says how the flip button should ask for the other face. It defaults to `{ page: "game", gameId, expectedVersion }`, so game call sites pass nothing and get the POST behavior; the prepare screen passes `{ page: "prep", prepId }`.
+
+### `FlipRequest` (`src/view/common/shared-components.ts`)
+```typescript
+type FlipRequest =
+  | { page: "game"; gameId: number; expectedVersion?: number }  // POST, mutates state
+  | { page: "prep"; prepId: number };                           // GET ?face=, stateless
+```
+This exists so the page asking for the flip is explicit rather than inferred from a numeric id — the two id spaces are not interchangeable (see the prep flip data flow above).
+
+### `formatFlippingContainer()` (`src/view/common/shared-components.ts`)
+Signature is `(gameCard: GameCard, flipRequest: FlipRequest)`. Builds the 3D CSS flip structure:
 ```
 div.flip-container-with-button
   div.flip-container-outer [.card-flipped if back face showing]
     div.flip-container-inner
       img.two-sided-back  (back face image)
       img.two-sided-front (front face image)
-  button.flip-button (POST to /flip-card/)
+  button.flip-button (per flipRequest: POST /flip-card/ in game, GET /prep-flip-card/?face= in prep)
 ```
 Both face images are always in the DOM. CSS 3D transforms with `backface-visibility: hidden` show only the current face. The `.card-flipped` class triggers a 180-degree Y rotation.
 

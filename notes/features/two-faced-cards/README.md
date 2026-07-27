@@ -7,7 +7,7 @@ Many Magic: The Gathering cards have two faces (transform, modal double-faced, r
 ## Who Uses It and How
 
 Players encounter two-faced cards throughout the app:
-- **Prep page**: Browse a deck and flip two-faced cards in the card modal to inspect both sides. Flip state is not persisted here (yet).
+- **Prep page**: Flip the commander in place on the prepare screen, and flip any two-faced card in the card modal to inspect both sides. Flip state is not persisted here (yet) — both surfaces carry the face in the URL.
 - **Game page**: Two-faced cards display with a flip button both inline (command zone, hand, etc.) and in the card modal. Flip state persists across page reloads.
 - **Library search**: Multi-face cards appear in type groups for every face's/part's types, so a Creature//Planeswalker card shows up under both "Creature" and "Planeswalker." This is driven by `CardDefinition.cardTypes` (the union of all faces' types), not by a flip flag.
 
@@ -26,8 +26,8 @@ Players encounter two-faced cards throughout the app:
 | Type definitions | `src/types.ts` (CardDefinition), `src/port-persist-state/types.ts` (GameCard) |
 | State mutation | `GameState.flipCard()` in `src/GameState.ts` |
 | Game routes | `POST /flip-card/:gameId/:gameCardIndex`, `POST /flip-card-modal/:gameId/:gameCardIndex` |
-| Prep route | `GET /prep-card-modal/:prepId/:cardIndex?face=back` |
-| View rendering | `formatFlippingContainer()` in `src/view/common/shared-components.ts` |
+| Prep routes | `GET /prep-card-modal/:prepId/:cardIndex?face=back` (modal), `GET /prep-flip-card/:prepId/:cardIndex?face=back` (inline commander) — both stateless |
+| View rendering | `formatFlippingContainer(gameCard, flipRequest)` in `src/view/common/shared-components.ts`; `FlipRequest` says which page is asking (game POST vs prep GET) |
 | CSS (game) | `public/game.css` lines 104-143 |
 | CSS (prep) | `public/prepare.css` lines 221-276 |
 | Image URLs | `getCardImageUrl(card, format, face)` (prefers stored) + `constructCardImageUrl(scryfallId, format, face)` (fallback) in `src/types.ts`; stored in `CardDefinition.imageUris`/`backImageUris` |

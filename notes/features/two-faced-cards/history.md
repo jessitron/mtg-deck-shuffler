@@ -128,6 +128,18 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
   - `src/mulligan/recommendMulligan.ts` was the long-anticipated "is this hand worth keeping?" feature (referenced in the `f76b49c` cardTypes simplification and watch point #1). As predicted, it did **not** re-store per-face card text — it read `cardTypes`, the pre-unioned set of all faces' types, via `isLand(card) = card.cardTypes.includes("Land")`.
   - Consequence for two-faced cards: an MDFC whose union included `"Land"` was counted as a land with no special-casing. While it existed, `cardTypes` had **two** silent dependents on being the full union (library-search grouping + mulligan land counts). No `CardDefinition`/adapter/persistence changes.
 
+## Prep Screen Inline Flip (JES-90)
+
+- **`e7e59f1`** - Fix Flip on the prepare screen
+  - **Bug**: a two-faced commander on `/prepare/:prepId` rendered its inline flip button pointing at the **game** route — `hx-post="/flip-card/<prepId>/<index>"` — because `renderPrepCommanderCard()` passed `prep.prepId` as `formatCardContainer`'s `gameId`. The route 404s ("Game N not found"), and HTMX doesn't swap non-2xx responses, so **clicking Flip did nothing at all**. Verified live before the fix.
+  - **The scarier half**: `prepId` and `gameId` come from independent SQLite sequences (`game_preps` vs `game_states`), and `validateStateVersion` treats a missing `expected-version` as valid. On a numeric collision the prepare screen's Flip would have flipped a card in an unrelated game and persisted it. Nothing in the optimistic lock would have caught it.
+  - **Fix**: new stateless route `GET /prep-flip-card/:prepId/:cardIndex?face=front|back` returning `formatFlippingContainer()` for the requested face — the same `?face=` idiom `/prep-card-modal` already used, and the same card indexing (via `createPrepViewHelpers`, commanders then library cards). Nothing persisted.
+  - **Design**: `formatFlippingContainer`'s signature changed from `(gameCard, gameId, expectedVersion?)` to `(gameCard, flipRequest: FlipRequest)`, where `FlipRequest` is `{page:"game"; gameId; expectedVersion?} | {page:"prep"; prepId}`. `formatCardContainer` gained an optional `flipRequest` defaulting to the game variant, so every game call site and its emitted HTML are byte-identical (verified by diffing rendered buttons). The asking page is now explicit instead of being inferred from a bare number.
+  - Why not extend `renderPrepCommanderCard`'s `/card-modal/` → `/prep-card-modal/` regex rewrite to the flip button: the prep flip URL encodes the **target** face, so it has to be built where `currentFace` is known — a post-hoc string rewrite can't produce it.
+  - No `CardDefinition`, persistence, or version changes; prep flip is still stateless (watch point #6 stands). No CSS changes — `public/prepare.css` already had the `.card-flipped` rules, unexercised until now.
+  - Known limitation, deliberate: the inline flip and the card modal don't share a face. Flip the commander inline, open its modal, and it shows the front. Both are URL-driven with separate URLs.
+  - Test: `test/verification/verify-prep-commander-flip.spec.ts` (From Cute to Brute / Esika) — clicks Flip, asserts `.card-flipped` and the back-face image, then flips back. Failed before the fix, passes after.
+
 ## What Was Tried and Abandoned
 
 - **FlipCardEvent**: Recording flip as a game event was added and removed. It cluttered history without purpose since flipping doesn't change the game's logical state.
