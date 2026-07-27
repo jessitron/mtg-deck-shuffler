@@ -11,6 +11,7 @@ import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
+import { TabletopPort, buildCardPlayedEvent, ZoneHint } from "./port-tabletop/types.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState, IncompatibleStateVersionError } from "./port-persist-state/types.js";
@@ -23,7 +24,13 @@ import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: PersistStatePort, persistPrepPort: PersistPrepPort, cardRepository: CardRepositoryPort): express.Application {
+export function createApp(
+  deckRetriever: RetrieveDeckPort,
+  persistStatePort: PersistStatePort,
+  persistPrepPort: PersistPrepPort,
+  cardRepository: CardRepositoryPort,
+  tabletopPort?: TabletopPort
+): express.Application {
   const app = express();
 
   // Configure EJS view engine

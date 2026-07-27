@@ -10,6 +10,8 @@ import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { InMemoryCardRepositoryAdapter } from "./port-card-repository/InMemoryCardRepositoryAdapter.js";
 import { SqliteCardRepositoryAdapter } from "./port-card-repository/SqliteCardRepositoryAdapter.js";
 import { ScryfallCardImagesGateway } from "./port-card-images/ScryfallCardImagesGateway.js";
+import { TabletopPort } from "./port-tabletop/types.js";
+import { HttpTabletopGateway } from "./port-tabletop/HttpTabletopGateway.js";
 import { createApp } from "./app.js";
 
 function createPersistStateAdapter(cardRepository: CardRepositoryPort): PersistStatePort {
@@ -59,7 +61,15 @@ const cardRepository: CardRepositoryPort = createCardRepositoryAdapter();
 const persistStatePort: PersistStatePort = createPersistStateAdapter(cardRepository);
 const persistPrepPort: PersistPrepPort = createPersistPrepAdapter(cardRepository);
 
-const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository);
+// SCAFFOLDING (JES-127): the Shuffler talks straight to the Tabletop today;
+// the Spine absorbs this seam later (see src/port-tabletop/types.ts).
+// In production TABLETOP_URL is in-cluster DNS (http://mtg-tabletop-service);
+// locally the tabletop dev server listens on 5180.
+const tabletopUrl = process.env.TABLETOP_URL || "http://localhost:5180";
+console.log(`Sending played cards to tabletop at ${tabletopUrl} (for games at a table)`);
+const tabletopPort: TabletopPort = new HttpTabletopGateway(tabletopUrl);
+
+const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository, tabletopPort);
 const PORT = process.env.PORT || 3333;
 
 
