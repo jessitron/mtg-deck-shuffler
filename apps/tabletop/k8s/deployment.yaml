@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mtg-tabletop
+  labels:
+    app: mtg-tabletop
+spec:
+  # Rooms are in-memory: exactly one replica, and a redeploy wipes the board
+  # (accepted for v0; durable reconstruction is a filed buoy).
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mtg-tabletop
+  template:
+    metadata:
+      labels:
+        app: mtg-tabletop
+    spec:
+      containers:
+        - name: mtg-tabletop
+          image: <your-ecr-repo>/mtg-tabletop:latest
+          ports:
+            - containerPort: 5180
+          env:
+            - name: OTEL_EXPORTER_OTLP_HEADERS
+              value: "x-honeycomb-team=$(HONEYCOMB_API_KEY)"
+          envFrom:
+            - configMapRef:
+                name: mtg-tabletop-config
+            - secretRef:
+                name: mtg-deck-shuffler-secret
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5180
+            initialDelaySeconds: 15
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5180
+            initialDelaySeconds: 5
+            periodSeconds: 5

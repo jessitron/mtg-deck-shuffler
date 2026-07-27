@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mtg-tabletop-service
+  labels:
+    app: mtg-tabletop
+spec:
+  selector:
+    app: mtg-tabletop
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5180
+  type: ClusterIP # Internal service for ALB Ingress; the Shuffler also POSTs here in-cluster (TABLETOP_URL=http://mtg-tabletop-service)
