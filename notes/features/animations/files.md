@@ -22,7 +22,7 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
   - Line 34: calls `getAnimationClassHelper()` in `formatCardContainer()`
   - Lines 129-138: `formatLibraryStack()` — applies `.shuffling` class
 - `src/view/play-game/game-modals.ts`
-  - Lines 70-72: `data-card-id` and `data-current-face` attributes for clipboard copy
+  - `formatModalActionButton()`: `data-card-id`/`data-current-face` attributes for clipboard copy — now added for Play OR Discard, and only when NOT in table mode (table-mode buttons get `table-play-button` instead of `play-button` and a conditional `hx-on::after-request` that closes `#modal-container` only on success)
 - `src/view/play-game/revealed-cards-components.ts`
   - Lines 54-56: `data-card-id` and `data-current-face` attributes for clipboard copy
 
@@ -30,7 +30,8 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 
 - `public/game.js`
   - `htmx:beforeSwap`/`htmx:afterSwap` handlers near the top — stash/restore hand & revealed scroll positions; `afterSwap` also calls `syncMenuToggleAria()`. Note: the hamburger menu's open state is NOT restored here (it lives on `document.body`, which swaps never touch — see architecture.md "settle phase" gotcha).
-  - `htmx:beforeRequest` handler — copies card image to clipboard on Play
+  - `htmx:beforeRequest` handler (table mode, JES-127) — on `table-play-button` sets optimistic "Sent to table" text + disables; no clipboard
+  - `htmx:beforeRequest` handler — copies card image to clipboard on Play/Discard (keyed on `play-button` class; solo Discard buttons carry both `discard-button` and `play-button`)
   - Drag-and-drop setup — removes animation classes on drag start
   - (Line numbers shifted down ~55 lines after the hamburger-menu code was added at the top.)
 - `public/deck-selection.js`

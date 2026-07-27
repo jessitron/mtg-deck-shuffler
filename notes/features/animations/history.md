@@ -103,6 +103,13 @@
 - **`1034189`** - `hand-components.ts` rendered a `<div class="mulligan-recommendation">` sibling next to the mulligan button during the hand-acceptance stage (`formatMulliganRecommendationHtmlFragment`). It was **static, server-rendered, read-only text — no keyframes, transitions, or client JS**, so it touched none of the animation machinery (no `WhatHappened` fields, no `game.js` class cleanup).
 - `game.css` gained `.mulligan-recommendation` rules gated by `body.dev-mode` (default `display:none`), exactly mirroring the `.menu-debug` developer-mode pattern. Because the gate lived on `body` (never HTMX-swapped) and the fragment re-rendered server-side on every game-state swap, it survived swaps with **no `afterSwap` handling** — at the time, a third clean example of the "anchor swap-surviving state on `body`" principle.
 
+### 2026-07-27: Table mode (JES-127, Tabletop v0 Part B)
+
+- `game.js` gained a second `htmx:beforeRequest` listener keyed on `table-play-button` (table-mode Play/Discard): optimistic "Sent to table" text + disable — same spirit as "Copied!". The clipboard hook (`play-button`) is untouched and never fires in table mode because the server renders the other class.
+- New Discard action: `GameState.discardCard` returns the same `WhatHappened` shape as `playCard` (`{movedLeft}`) — **no new animation classes**, `getAnimationClassHelper()` unchanged. Solo Discard buttons carry both `discard-button` and `play-button` so the clipboard flow applies.
+- `htmx.config.responseHandling` gained `{code: "502", swap: true, error: true}` — `error: true` is load-bearing: it keeps `event.detail.successful` false so table-mode buttons' conditional `hx-on::after-request` leaves the tabletop-failure error modal (retargeted into `#modal-container`) visible. First discovered as a modal-appears-then-vanishes bug.
+- Flake lesson: Playwright-speed clicks on freshly-opened modal buttons can straddle htmx swap/settle (mousedown on a node replaced before mouseup → no click). Specs use retry `toPass()` (verify-discard, verify-tabletop-integration).
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.
