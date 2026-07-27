@@ -1,51 +1,29 @@
 {
-  "name": "mtg-deck-shuffler",
+  "name": "mtg-table-fleet",
   "version": "1.0.0",
-  "description": "Simple MTG deck app for remote play",
+  "private": true,
+  "description": "Monorepo for the Table: the Shuffler, the Tabletop, and the Spine",
   "author": "Jessica Kerr <jessitron@gmail.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/jessitron/mtg-deck-shuffler.git"
   },
-  "type": "module",
-  "main": "server.js",
+  "workspaces": [
+    "apps/*",
+    "services/*"
+  ],
   "scripts": {
-    "build": "npx tsc",
-    "clean": "rm -rf dist",
-    "start": "npm run build && node --import ./dist/tracing.js dist/server.js",
-    "test": "jest",
-    "test:verify": "./verify.sh",
-    "deck:download": "node dist/scripts/download-deck.js",
-    "decks:backfill-images": "npm run build && node dist/scripts/backfill-deck-images.js",
-    "decks:backfill-set-names": "npm run build && node dist/scripts/backfill-set-names.js",
-    "card:inspect": "node dist/scripts/inspect-archidekt-card.js",
-    "precons:fetch-mtgjson": "node dist/scripts/fetch-mtgjson-precons.js"
-  },
-  "dependencies": {
-    "@opentelemetry/api": "^1.9.0",
-    "@opentelemetry/auto-instrumentations-node": "^0.77.0",
-    "@opentelemetry/exporter-trace-otlp-http": "^0.219.0",
-    "@opentelemetry/sdk-node": "^0.219.0",
-    "better-sqlite3": "^12.6.2",
-    "ejs": "^3.1.10",
-    "express": "^4.22.1",
-    "tar": "^7.5.9"
+    "build": "npm run build --workspace apps/shuffler",
+    "clean": "npm run clean --workspace apps/shuffler",
+    "start": "npm run start --workspace apps/shuffler",
+    "test": "npm run test --workspace apps/shuffler",
+    "deck:download": "npm run deck:download --workspace apps/shuffler --",
+    "decks:backfill-images": "npm run decks:backfill-images --workspace apps/shuffler --",
+    "decks:backfill-set-names": "npm run decks:backfill-set-names --workspace apps/shuffler --",
+    "card:inspect": "npm run card:inspect --workspace apps/shuffler --",
+    "precons:fetch-mtgjson": "npm run precons:fetch-mtgjson --workspace apps/shuffler --"
   },
   "engines": {
     "node": ">=24"
-  },
-  "devDependencies": {
-    "@playwright/test": "^1.57.0",
-    "@types/better-sqlite3": "^7.6.13",
-    "@types/express": "^5.0.3",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^24.2.1",
-    "@types/tar": "^6.1.13",
-    "fast-check": "^4.3.0",
-    "jest": "^30.1.3",
-    "stream-json": "^3.4.0",
-    "ts-jest": "^29.4.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
   }
 }
