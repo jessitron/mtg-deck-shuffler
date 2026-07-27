@@ -57,4 +57,48 @@ test.describe('Prepare screen - flipping a two-faced commander', () => {
     await expect(page.locator('#card-0-outer-flip-container')).not.toHaveClass(/card-flipped/, { timeout: 5000 });
     await expect(page.locator('#card-0-front-face')).toBeVisible();
   });
+
+  test('the card modal opens on whichever face the page is showing', async ({ page }) => {
+    const prepId = await setupPrepWithTwoFacedCommander(page);
+
+    await page.goto(`${BASE_URL}/prepare/${prepId}`);
+    await page.waitForLoadState('networkidle');
+
+    // Clicking the unflipped card opens the modal on the front face
+    await page.locator('#card-0-container').click();
+    await expect(page.locator('.card-modal-overlay')).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('.modal-card-image')).toHaveAttribute('src', /\/front\//);
+    await page.locator('.card-modal-close').click();
+    await expect(page.locator('.card-modal-overlay')).toHaveCount(0);
+
+    // Flip the card on the page, then open the modal again
+    await page.locator('#card-0-flip-button').click();
+    await expect(page.locator('#card-0-outer-flip-container')).toHaveClass(/card-flipped/, { timeout: 5000 });
+
+    await page.locator('#card-0-container').click();
+    await expect(page.locator('.card-modal-overlay')).toBeVisible({ timeout: 5000 });
+    // The modal follows the page's face rather than resetting to the front
+    await expect(page.locator('.modal-card-image')).toHaveAttribute('src', /\/back\//);
+  });
+
+  test('flipping inside the modal leaves the page as it was', async ({ page }) => {
+    const prepId = await setupPrepWithTwoFacedCommander(page);
+
+    await page.goto(`${BASE_URL}/prepare/${prepId}`);
+    await page.waitForLoadState('networkidle');
+
+    await page.locator('#card-0-container').click();
+    await expect(page.locator('.card-modal-overlay')).toBeVisible({ timeout: 5000 });
+
+    // Flip within the modal — deliberately a modal-only concern
+    await page.locator('.modal-action-button.flip-button').click();
+    await expect(page.locator('.modal-card-image')).toHaveAttribute('src', /\/back\//, { timeout: 5000 });
+
+    await page.locator('.card-modal-close').click();
+    await expect(page.locator('.card-modal-overlay')).toHaveCount(0);
+
+    // The card on the page is untouched
+    await expect(page.locator('#card-0-outer-flip-container')).not.toHaveClass(/card-flipped/);
+    await expect(page.locator('#card-0-front-face')).toBeVisible();
+  });
 });

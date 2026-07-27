@@ -883,9 +883,10 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
     }
   });
 
-  // Returns card fragment - flips a two-faced card on the prepare screen. There is no
-  // game yet, so this is stateless: the face to show comes from ?face= rather than from
-  // persisted state, and nothing is saved.
+  // Returns card fragment - flips a two-faced card on the prepare screen. There is no game
+  // yet, so this is stateless: the face to show comes from ?face= rather than from persisted
+  // state, and nothing is saved. Returns the whole card container, not just the flip
+  // container, because the container's modal URL is what carries the face to the card modal.
   app.get("/prep-flip-card/:prepId/:cardIndex", async (req, res) => {
     const prepId = parseInt(req.params.prepId);
     const cardIndex = parseInt(req.params.cardIndex);
@@ -898,7 +899,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       // Same card indexing as /prep-card-modal: commanders first, then library cards
-      const { commanders, libraryCards } = createPrepViewHelpers(prep);
+      const { commanders, libraryCards, renderCommanderCard } = createPrepViewHelpers(prep);
       const gameCard = [...commanders, ...libraryCards].find((gc) => gc.gameCardIndex === cardIndex);
       if (!gameCard) {
         res.status(404).send(`<div>Card ${cardIndex} not found</div>`);
@@ -910,7 +911,7 @@ export function createApp(deckRetriever: RetrieveDeckPort, persistStatePort: Per
       }
 
       const face: "front" | "back" = req.query.face === "back" ? "back" : "front";
-      res.send(formatFlippingContainer({ ...gameCard, currentFace: face }, { page: "prep", prepId }));
+      res.send(renderCommanderCard({ ...gameCard, currentFace: face }));
     } catch (error) {
       console.error("Error flipping prep card:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);

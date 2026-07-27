@@ -51,14 +51,18 @@ export function formatCardContainer({ gameCard, gameId, expectedVersion, actions
       // TODO: make required everywhere
       throw new Error("Game ID is required for two-faced cards");
     }
+    const flip: FlipRequest = flipRequest ?? { page: "game", gameId, expectedVersion };
+    // On the prepare screen which face is showing is page state, so the click has to tell
+    // the modal. In a game the modal reads currentFace from the game itself.
+    const modalQuery = flip.page === "prep" ? `?face=${gameCard.currentFace}` : versionParam;
     return `<div id="${cardId}-container" class="card-container clickable-card ${finalAnimationClass}"
                  ${draggableAttr}
                  ${handPositionAttr}
-                 hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}${versionParam}"
+                 hx-get="/card-modal/${gameId}/${gameCard.gameCardIndex}${modalQuery}"
                  hx-target="#card-modal-container"
                  hx-swap="innerHTML"
                  style="cursor: pointer;">
-      ${formatFlippingContainer(gameCard, flipRequest ?? { page: "game", gameId, expectedVersion })}
+      ${formatFlippingContainer(gameCard, flip)}
       ${actions}
     </div>`;
   } else {
@@ -91,7 +95,11 @@ export function formatFlippingContainer(gameCard: GameCard, flipRequest: FlipReq
           flipRequest.expectedVersion !== undefined ? `hx-vals='{"expected-version": ${flipRequest.expectedVersion}}'` : ""
         }`
       : `hx-get="/prep-flip-card/${flipRequest.prepId}/${gameCard.gameCardIndex}?face=${otherFace}"`;
-  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" ${requestAttrs} hx-swap="outerHTML" hx-target="#${flipContainerId}-with-button" onclick="event.stopPropagation()">Flip</button>`;
+  // In a game the new face is in the game state, so only the flip container needs replacing.
+  // On the prepare screen the face lives in the page, and the card container is what carries
+  // it (in its modal URL) — so the whole container is replaced.
+  const swapTarget = flipRequest.page === "prep" ? `#${cardId}-container` : `#${flipContainerId}-with-button`;
+  const flipButton = `<button class="flip-button" id="${cardId}-flip-button" ${requestAttrs} hx-swap="outerHTML" hx-target="${swapTarget}" onclick="event.stopPropagation()">Flip</button>`;
 
   return `<div id="${flipContainerId}-with-button" class="flip-container-with-button">
             <div id="${flipContainerId}" class=" flip-container-outer${flippedClass}">
