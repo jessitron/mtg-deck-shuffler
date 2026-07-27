@@ -22,7 +22,17 @@ This is a polyglot monorepo (npm workspaces). The fleet level holds `notes/`,
 
 - `apps/shuffler/` — the Shuffler (all the code described below)
 - `apps/tabletop/` — not built yet, seamap only
-- `services/spine/` — not built yet, seamap only
+- `services/spine/` — the Spine: Ruby on Rails 8 + SQLite. Tables, seats, one
+  append-only event log per table; ingestion validates against `contracts/` and
+  fails loudly. Admin screen (a table's log, with Honeycomb trace links) at
+  `/admin/tables`. Run with `PORT=4600 ./run` from `services/spine/` (sources
+  repo-root `.be` before `.env`, same telemetry rule as the Shuffler); tests with
+  `bin/rails test`; deploy with `./deploy.sh` (spine.jessitron.honeydemo.io). See
+  `services/spine/README.md`.
+- `contracts/` — the fleet's published language: JSON Schema for the event
+  envelope and per-kind payloads. Both the Spine (Ruby) and the TS apps validate
+  on receipt and fail loudly on unknown name/version. See `contracts/README.md`
+  and `notes/DESIGN-event-contract-v0.md`.
 
 **Convention: every Shuffler path in this file and in `notes/` is relative to
 `apps/shuffler/`.** So `src/app.ts` means `apps/shuffler/src/app.ts`. Shuffler

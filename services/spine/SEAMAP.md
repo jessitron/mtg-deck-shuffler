@@ -1,8 +1,9 @@
 # SEAMAP — Spine (ship)
 
 One ship in [the fleet](../../SEAMAP.md). The Spine is the event hub and the central
-domain language: Tables, Seats, the log, and — for now — the Interpreter. _(Not yet
-built; this map precedes the ship.)_
+domain language: Tables, Seats, the log, and — for now — the Interpreter. _(Walking
+skeleton afloat, JES-129: Rails 8 + SQLite, contract-validated ingestion of the v0
+catalog, seats projection, admin screen at /admin/tables, OTel to Honeycomb.)_
 
 ## North Star
 
@@ -13,9 +14,15 @@ believe it.
 
 1. **Tables and Seats** ← _active_ — a table you can join by name (from the Shuffler's
    Prep screen); seats for 1–4 players; spectators welcome without one.
+   _Spine side landed (create/lookup/seats API); the Shuffler's Prep screen doesn't
+   call it yet._
 2. **The event log** — append-only, one per table; visibility on every event; private
    events cast public shadows; projections (current reading, public view for
    spectators, narration feed).
+   _v0 landed: append-only log with Spine-assigned seq/acceptedAt, dedup on sender id,
+   loud contract validation, seats projection, admin screen with Honeycomb trace
+   links. Still ahead: public-only is the whole visibility story so far; richer
+   projections and a subscription feed for the Tabletop._
 3. **The Interpreter** — physical events in, game events out, with provenance,
    causality, confidence, and commentary. Guesses; asks in chat; is corrected;
    supersedes itself. Later: ears (transcript events join the evidence), then
