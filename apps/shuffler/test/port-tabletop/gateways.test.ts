@@ -19,6 +19,13 @@ function handCard(): GameCard {
 
 const initiator = { seatId: "abc12345", playerName: "Jess" };
 
+function containsValue(obj: unknown, value: unknown): boolean {
+  if (obj === value) return true;
+  if (Array.isArray(obj)) return obj.some((item) => containsValue(item, value));
+  if (obj && typeof obj === "object") return Object.values(obj).some((v) => containsValue(v, value));
+  return false;
+}
+
 function anEvent(): CardPlayedEvent {
   const gameCard = handCard();
   return buildCardPlayedEvent(gameCard, gameCard.cardInstanceId!, initiator, "stack");
@@ -50,7 +57,10 @@ describe("FakeTabletopGateway", () => {
     const serialized = JSON.stringify(fake.sentEvents);
     expect(serialized).not.toContain("gameCardIndex");
     expect(serialized).not.toContain("Index");
-    expect(serialized).not.toContain("42"); // the card's index value must not leak in any field
+    // Check the actual index value (42), not a substring match on the serialized JSON:
+    // the event also carries a random UUID and timestamp, either of which occasionally
+    // contains "42" by coincidence and would fail this test for the wrong reason.
+    expect(containsValue(fake.sentEvents, 42)).toBe(false);
   });
 });
 
