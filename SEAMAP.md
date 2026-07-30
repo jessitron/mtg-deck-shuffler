@@ -36,6 +36,7 @@ table to look — public events, commentary, hand counts but never hands.
 ## Safe Harbor
 
 A change is home when:
+
 - it's deployed and observable in Honeycomb (prod environment `mtg-deck-shuffler`);
 - tests are green;
 - documentation — including each ship's seamap — is consistent with the code;
@@ -52,18 +53,16 @@ A change is home when:
 
 ## Enabling Constraints
 
-- **Playable at all times.** Every rung of the ladder is a game you'd actually play.
-- **Physics vs meaning.** The Tabletop knows what hands do at a table; only the
-  interpreter knows what it means. The interpreter reads players, not rules.
+- **Playable at all times.** Every safe harbor is a game you'd actually play.
+- **Physics vs meaning.** The Tabletop knows what got moved around at a table; only the
+  interpreter knows what it means. Both make it into the Table's event log.
 - **One append-only event log per table.** Visibility on every event; private events
   cast public shadows. Never replace — supersede. Provenance on every inferred event.
   The log is the eval dataset.
 - **The Spine's language is the published language**; the event contract is
-  language-neutral (JSON Schema), versioned, validated on both sides.
+  programming-language-neutral (JSON Schema), versioned, validated on both sides.
 - **Monorepo, polyglot**: TypeScript owns pixels (Shuffler, Tabletop), Ruby owns
-  meaning (Spine; the **Journeys** pattern is the architectural direction for its
-  Interpreter component — docs at `services/spine/interpreter/docs/journeys/`).
-- **Don't carry what you can listen to**: Discord keeps the voice call; we transcribe.
+  meaning
 - **Observability is mandatory.** Every component sends telemetry to Honeycomb with
   OpenTelemetry and propagates trace context; all interesting info goes on spans.
   From each ship's first commit, not retrofitted.
@@ -71,7 +70,6 @@ A change is home when:
 - Everything persisted is versioned (`notes/DESIGN-persistence-versioning.md`).
 - Feature owners hold deep context for tricky features and watch for cross-feature
   interactions.
-- Made with tldraw — we wear the watermark happily.
 
 ## Non-goals
 
