@@ -11,25 +11,25 @@ The original spoken ramble this was distilled from is preserved at the end.
 ## The goal
 
 When I sit down to play Magic, I put out a playmat. Everything I do happens in
-relation to it. A table on the Tabletop should be recognizable as *that* — not as
+relation to it. A table on the Tabletop should be recognizable as _that_ — not as
 a whiteboard that happens to have cards on it. Concretely: **when a table is set
 up and I open it, I should see my playmat, my library, my graveyard, my exile,
-and the stack — before a single card is played.** That's the bar.
+and the stack — before a single card is played.**
 
 ## Vocabulary
 
-| Term | What it is |
-|---|---|
-| **Table** | the shared board. A tldraw "room"; `/t/:tableName`. One per game. |
-| **Seat** | a player at the table. Identity is `seatId`; `playerName` is display-only. |
-| **Player area** | everything belonging to one seat: playmat + library + graveyard + exile + name label. A rectangle. |
-| **Playmat** | the horizontal rectangle with the picture on it. On the Tabletop it *is* the battlefield — nothing else lives on it. |
-| **Library** | the deck. Modeled in the Shuffler (hidden zone); pictured here as a card back with a shadow. |
-| **Graveyard** | a labeled grey box you can drag cards into. |
-| **Exile** | a labeled black box. Physically a sideways pile; here just a smaller box. |
-| **The Stack** | a shared blue strip above all the player areas. Non-land plays arrive here. |
+| Term            | What it is                                                                                                           |
+| --------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Table**       | the shared board. A tldraw "room"; `/t/:tableName`. One per game.                                                    |
+| **Seat**        | a player at the table. Identity is `seatId`; `playerName` is display-only.                                           |
+| **Player area** | everything belonging to one seat: playmat + library + graveyard + exile + name label. A rectangle.                   |
+| **Playmat**     | the horizontal rectangle with the picture on it. On the Tabletop it _is_ the battlefield — nothing else lives on it. |
+| **Library**     | the deck. Modeled in the Shuffler (hidden zone); pictured here as a card back with a shadow.                         |
+| **Graveyard**   | a labeled grey box you can drag cards into.                                                                          |
+| **Exile**       | a labeled black box. Physically a sideways pile; here just a smaller box.                                            |
+| **The Stack**   | a shared blue strip above all the player areas. Non-land plays arrive here.                                          |
 
-"Player area" and "playmat" are *not* synonyms — the playmat is one part of the
+"Player area" and "playmat" are _not_ synonyms — the playmat is one part of the
 player area. This distinction is the point of the vocabulary table.
 
 ## The picture
@@ -72,16 +72,16 @@ Derived from the physical objects, so proportions feel right:
 Today's canvas card is `CARD_W = 170`, `CARD_H = 238`, which fixes the scale at
 **68 canvas units per inch**. Everything else follows:
 
-| Thing | Size (canvas units) | In cards |
-|---|---|---|
-| Card | 170 × 238 | 1 × 1 |
-| Playmat | 1632 × 952 | 9.6 × 4 |
-| Right-hand column | 425 wide | 2.5 |
-| Library slot | 170 × 238 | 1 × 1 (top-left of the column) |
-| Exile box | ~240 × 238 | (top-right of the column, beside the library) |
-| Graveyard box | 425 × ~694 | 2.5 wide; fills from under the library to the playmat's bottom edge |
-| Player area | ~2077 × 952 | playmat + 20 gap + column |
-| Stack strip | full width of all player areas × ~300 | "a little taller than a card" |
+| Thing             | Size (canvas units)                   | In cards                                                            |
+| ----------------- | ------------------------------------- | ------------------------------------------------------------------- |
+| Card              | 170 × 238                             | 1 × 1                                                               |
+| Playmat           | 1632 × 952                            | 9.6 × 4                                                             |
+| Right-hand column | 425 wide                              | 2.5                                                                 |
+| Library slot      | 170 × 238                             | 1 × 1 (top-left of the column)                                      |
+| Exile box         | ~240 × 238                            | (top-right of the column, beside the library)                       |
+| Graveyard box     | 425 × ~694                            | 2.5 wide; fills from under the library to the playmat's bottom edge |
+| Player area       | ~2077 × 952                           | playmat + 20 gap + column                                           |
+| Stack strip       | full width of all player areas × ~350 | "taller than a card"                                                |
 
 Vertical order, top to bottom: **stack strip → player name label → player area**.
 
@@ -106,7 +106,7 @@ doesn't create anything; shuffling up does.
 2. The Stack strip widens to span all player areas.
 
 **Consequence for the wiring:** the Tabletop needs a message it doesn't have today.
-Player areas are currently allocated lazily, on a seat's *first card*. That's too
+Player areas are currently allocated lazily, on a seat's _first card_. That's too
 late: the whole point is that the table looks like a table before anyone plays.
 
 **Decided:** an event-shaped `seat.joined`, in the same envelope-lite style as
@@ -135,31 +135,15 @@ everyone gets the standard Magic card back (`apps/shuffler/public/images/mtg-car
 
 ### `playmatImageUrl` is a public, absolute URL — any image on the internet
 
-The long game is that a player pastes *any* image URL in prep and gets that playmat.
+The long game is that a player pastes _any_ image URL in prep and gets that playmat.
 So the field is an absolute `https://` URL the browser loads directly, and the
 Tabletop treats it as opaque — it never proxies, caches, or validates the picture.
 Same posture as card art: Scryfall URLs are already hotlinked into tldraw image
 assets, and a playmat is that with a different aspect ratio.
 
-Consequences worth writing down before anyone implements it:
-
-- **The Shuffler's own bundled playmats must be absolutized.** Today's playmat is a
-  same-origin `/images/aeoe-43-cascading-cataracts.png` in CSS. That relative path is
-  meaningless in a browser pointed at the Tabletop's origin, so the Shuffler sends
-  `TABLETOP`-visible absolute URLs (its public base + path) for bundled playmats too.
-  One code path for "mine" and "off the internet," not two.
-  → Prerequisite: the Shuffler needs to know its own public base URL. It knows
-  `TABLETOP_PUBLIC_URL` (outbound); the mirror of that for its own origin may not
-  exist yet.
-- **Anything can 404, redirect, or not be an image.** A broken playmat must degrade to
-  a plain empty mat, not a broken player area. The battlefield is a region that
-  happens to have a picture; the picture is the optional part.
-- **Sending a URL to the table publishes it to everyone at the table.** Fine — the
-  table is already shared — but it does mean a player's paste reaches other people's
-  browsers, which fetch it. Worth a word in the prep UI when that field exists.
-- **CSP.** Whatever CSP the Tabletop grows must allow `img-src` from arbitrary hosts,
-  or arbitrary playmats silently fail. No CSP today; note it so a future hardening
-  pass doesn't quietly break this.
+**Anything can 404, redirect, or not be an image.** A broken playmat must degrade to
+a plain empty mat, not a broken player area. The battlefield is a region that
+happens to have a picture; the picture is the optional part.
 
 ## Where cards arrive
 
@@ -176,7 +160,7 @@ From the stack, a human drags it where it goes: creature/artifact/enchantment on
 the battlefield, instant/sorcery into the graveyard. **That's a person's job, not
 the Tabletop's** — which is why the rest of my physical habits (creatures in a front
 row, artifacts and enchantments bottom-right and right-justified) are recorded here
-as *description only*, not as placement rules to implement. Cards hold wherever
+as _description only_, not as placement rules to implement. Cards hold wherever
 they're dropped.
 
 Nobody is restricted from moving anybody else's cards. That's not an oversight.
@@ -184,8 +168,8 @@ Nobody is restricted from moving anybody else's cards. That's not an oversight.
 ## Deferred
 
 - **Per-seat rotated views.** What I actually want is a circle of playmats — two
-  facing each other, three as a triangle, four as a square — with *my* mat in front
-  of *me* and the stack in the middle. tldraw (as far as we know) can't rotate the
+  facing each other, three as a triangle, four as a square — with _my_ mat in front
+  of _me_ and the stack in the middle. tldraw (as far as Jess knows) can't rotate the
   view per viewer on a shared board. The row is the workaround, chosen only because
   everything must be right side up for everyone. Worth revisiting.
 - **Playmat selection** in prep (a dropdown; see `notes/FEATURE-playmat.md`).
@@ -195,31 +179,26 @@ Nobody is restricted from moving anybody else's cards. That's not an oversight.
 
 `src/server/cardLayout.ts` + `cardArrival.ts` currently give:
 
-| Today | This design |
-|---|---|
-| A "battlefield row" per seat: bare canvas, cards in one horizontal line | A player area with an actual playmat image; lands fill the bottom half and wrap |
-| Graveyard + exile spots at the end of the row, card-sized | A 2.5-card-wide graveyard and an exile box in a right-hand column, sized to the playmat |
-| Rows allocated lazily on a seat's first card | Player area drawn at shuffle-up, before any card |
-| Stack: a fixed box at top-left | A strip spanning all player areas, widening per seat |
-| No library on the canvas | Library as a card back with a shadow |
-| Card arrival is the only Shuffler → Tabletop message | Plus a seat-joined message carrying the playmat image |
-| `zoneHint: battlefield` auto-places in a row | Lands auto-place; nothing else is auto-arranged |
+| Today                                                                   | This design                                                                             |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| A "battlefield row" per seat: bare canvas, cards in one horizontal line | A player area with an actual playmat image; lands fill the bottom half and wrap         |
+| Graveyard + exile spots at the end of the row, card-sized               | A 2.5-card-wide graveyard and an exile box in a right-hand column, sized to the playmat |
+| Rows allocated lazily on a seat's first card                            | Player area drawn at shuffle-up, before any card                                        |
+| Stack: a fixed box at top-left                                          | A strip spanning all player areas, widening per seat                                    |
+| No library on the canvas                                                | Library as a card back with a shadow                                                    |
+| Card arrival is the only Shuffler → Tabletop message                    | Plus a seat-joined message carrying the playmat image                                   |
+| `zoneHint: battlefield` auto-places in a row                            | Lands auto-place; nothing else is auto-arranged                                         |
 
 ## Open questions
 
 1. **Graveyard height** — filling the full remainder under the library (~694, ~3
    cards tall) makes a tidy rectangle and room to spread a pile out. Alternative:
-   one card tall, floating in that space. Recommending: fill.
+   one card tall, floating in that space. Recommending: fill. JESS: yes fill
 2. **Exile placement** — the ramble says both "farther off to my right" and "above
    the graveyard, to the right of the library." Taken the latter (it makes the
-   rectangle close). Confirm.
+   rectangle close). Confirm. JESS: yes
 3. **Name label** — between the stack strip and the playmat, as written above. Any
-   objection to it eating vertical space there?
-Resolved:
-
-- The seat-joined message is event-shaped `seat.joined` — see above.
-- `playmatImageUrl` is a public absolute URL; any image on the internet works — see
-  above for what that costs.
+   objection to it eating vertical space there? JESS: it's correct there
 
 ---
 
