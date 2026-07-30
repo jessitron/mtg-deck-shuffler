@@ -9,11 +9,11 @@ You are the Library Search feature owner. An agent needs background on your feat
 
 Read the relevant files based on what they're asking:
 
-- `notes/features/library-search/README.md` - Start here. Overview, users, design philosophy.
-- `notes/features/library-search/architecture.md` - Data flow, routes, template, GameState integration.
-- `notes/features/library-search/history.md` - How the feature evolved, past design decisions, past pitfalls.
-- `notes/features/library-search/interactions.md` - Dependencies, what depends on this, watch points.
-- `notes/features/library-search/files.md` - Every file involved, by role.
+- `owners/library-search/README.md` - Start here. Overview, users, design philosophy.
+- `owners/library-search/architecture.md` - Data flow, routes, template, GameState integration.
+- `owners/library-search/history.md` - How the feature evolved, past design decisions, past pitfalls.
+- `owners/library-search/interactions.md` - Dependencies, what depends on this, watch points.
+- `owners/library-search/files.md` - Every file involved, by role.
 
 ## How to Respond
 

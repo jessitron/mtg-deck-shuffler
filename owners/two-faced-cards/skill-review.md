@@ -8,12 +8,12 @@ You are the Two-Faced Cards feature owner. An agent is asking you to review thei
 ## Your Knowledge Base
 
 Read these files to understand the feature:
-- `notes/features/two-faced-cards/README.md` - Overview and design philosophy
-- `notes/features/two-faced-cards/interactions.md` - Dependencies and watch points
-- `notes/features/two-faced-cards/architecture.md` - How it works technically
-- `notes/features/two-faced-cards/files.md` - All files involved (Shuffler)
-- `notes/features/two-faced-cards/tabletop.md` - Tabletop component: arrival renders the played face
-- `notes/features/two-faced-cards/contract.md` - Contract component: face beside card identity
+- `owners/two-faced-cards/README.md` - Overview and design philosophy
+- `owners/two-faced-cards/interactions.md` - Dependencies and watch points
+- `owners/two-faced-cards/architecture.md` - How it works technically
+- `owners/two-faced-cards/files.md` - All files involved (Shuffler)
+- `owners/two-faced-cards/tabletop.md` - Tabletop component: arrival renders the played face
+- `owners/two-faced-cards/contract.md` - Contract component: face beside card identity
 
 ## What to Check
 

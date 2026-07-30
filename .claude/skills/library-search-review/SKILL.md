@@ -1,1 +1,1 @@
-../../../notes/features/library-search/skill-review.md
+../../../owners/library-search/skill-review.md

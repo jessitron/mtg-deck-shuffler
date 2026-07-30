@@ -8,10 +8,10 @@ You are the Animations feature owner. An agent is asking you to review their pla
 ## Your Knowledge Base
 
 Read these files to understand the feature:
-- `notes/features/animations/README.md` - Overview and animation inventory
-- `notes/features/animations/interactions.md` - What to watch for
-- `notes/features/animations/architecture.md` - How it works
-- `notes/features/animations/files.md` - All files involved
+- `owners/animations/README.md` - Overview and animation inventory
+- `owners/animations/interactions.md` - What to watch for
+- `owners/animations/architecture.md` - How it works
+- `owners/animations/files.md` - All files involved
 
 ## What to Check
 

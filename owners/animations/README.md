@@ -1,3 +1,8 @@
+---
+name: animations
+kind: feature
+---
+
 # Animations Feature
 
 **Owner**: Animations Agent

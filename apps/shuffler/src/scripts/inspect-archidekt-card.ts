@@ -5,7 +5,7 @@
  * Useful for diagnosing how Archidekt represents a card before our adapter
  * touches it -- e.g. checking the `layout` field and `faces` array to see why
  * a single-faced card (Prepared, Adventure, Split) is being treated as
- * two-faced. See notes/features/two-faced-cards/.
+ * two-faced. See owners/two-faced-cards/.
  *
  * Usage: npm run card:inspect -- <archidektDeckId> <nameSubstring>
  * Example: npm run card:inspect -- 23735063 Studious

@@ -1,1 +1,1 @@
-../../../notes/features/animations/skill-context.md
+../../../owners/animations/skill-context.md

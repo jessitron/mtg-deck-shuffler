@@ -1,1 +1,1 @@
-../../../notes/features/animations/skill-update.md
+../../../owners/animations/skill-update.md

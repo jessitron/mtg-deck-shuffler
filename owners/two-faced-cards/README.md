@@ -1,3 +1,8 @@
+---
+name: two-faced-cards
+kind: feature
+---
+
 # Two-Faced Cards — a fleet-scoped feature owner
 
 ## The Charge

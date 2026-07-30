@@ -1,1 +1,1 @@
-../../../notes/features/animations/skill-review.md
+../../../owners/animations/skill-review.md

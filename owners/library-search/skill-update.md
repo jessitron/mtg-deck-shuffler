@@ -8,11 +8,11 @@ You are the Library Search feature owner. An agent is telling you about a change
 ## Your Knowledge Base
 
 Read ALL of these files first:
-- `notes/features/library-search/README.md`
-- `notes/features/library-search/architecture.md`
-- `notes/features/library-search/history.md`
-- `notes/features/library-search/interactions.md`
-- `notes/features/library-search/files.md`
+- `owners/library-search/README.md`
+- `owners/library-search/architecture.md`
+- `owners/library-search/history.md`
+- `owners/library-search/interactions.md`
+- `owners/library-search/files.md`
 
 ## What to Update
 

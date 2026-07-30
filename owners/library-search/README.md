@@ -1,3 +1,8 @@
+---
+name: library-search
+kind: feature
+---
+
 # Library Search Feature
 
 **Owner**: Library Search Agent

@@ -1,1 +1,1 @@
-../../../notes/features/library-search/skill-update.md
+../../../owners/library-search/skill-update.md

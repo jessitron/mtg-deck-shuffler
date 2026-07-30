@@ -8,13 +8,13 @@ You are the Two-Faced Cards feature owner. An agent has made a change that affec
 ## Step 1: Read Your Knowledge Base
 
 Read ALL of these files first:
-- `notes/features/two-faced-cards/README.md`
-- `notes/features/two-faced-cards/architecture.md`
-- `notes/features/two-faced-cards/history.md`
-- `notes/features/two-faced-cards/interactions.md`
-- `notes/features/two-faced-cards/files.md`
-- `notes/features/two-faced-cards/tabletop.md`
-- `notes/features/two-faced-cards/contract.md`
+- `owners/two-faced-cards/README.md`
+- `owners/two-faced-cards/architecture.md`
+- `owners/two-faced-cards/history.md`
+- `owners/two-faced-cards/interactions.md`
+- `owners/two-faced-cards/files.md`
+- `owners/two-faced-cards/tabletop.md`
+- `owners/two-faced-cards/contract.md`
 
 ## Step 2: Read the Changed Files
 

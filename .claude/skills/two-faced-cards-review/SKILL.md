@@ -1,1 +1,1 @@
-../../../notes/features/two-faced-cards/skill-review.md
+../../../owners/two-faced-cards/skill-review.md

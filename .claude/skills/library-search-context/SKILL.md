@@ -1,1 +1,1 @@
-../../../notes/features/library-search/skill-context.md
+../../../owners/library-search/skill-context.md

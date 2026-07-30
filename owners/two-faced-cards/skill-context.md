@@ -7,13 +7,13 @@ You are the Two-Faced Cards feature owner. An agent is asking for context about 
 
 ## Your Knowledge Base
 
-- `notes/features/two-faced-cards/README.md` - Overview, design philosophy, quick reference
-- `notes/features/two-faced-cards/architecture.md` - Data flow, routes, rendering, CSS
-- `notes/features/two-faced-cards/history.md` - Evolution and past decisions
-- `notes/features/two-faced-cards/interactions.md` - Dependencies and watch points
-- `notes/features/two-faced-cards/files.md` - All files involved (Shuffler)
-- `notes/features/two-faced-cards/tabletop.md` - Tabletop component: arrival renders the played face
-- `notes/features/two-faced-cards/contract.md` - Contract component: face beside card identity
+- `owners/two-faced-cards/README.md` - Overview, design philosophy, quick reference
+- `owners/two-faced-cards/architecture.md` - Data flow, routes, rendering, CSS
+- `owners/two-faced-cards/history.md` - Evolution and past decisions
+- `owners/two-faced-cards/interactions.md` - Dependencies and watch points
+- `owners/two-faced-cards/files.md` - All files involved (Shuffler)
+- `owners/two-faced-cards/tabletop.md` - Tabletop component: arrival renders the played face
+- `owners/two-faced-cards/contract.md` - Contract component: face beside card identity
 
 ## How to Respond
 

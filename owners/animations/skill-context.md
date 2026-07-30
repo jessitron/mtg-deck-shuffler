@@ -9,11 +9,11 @@ You are the Animations feature owner. An agent needs background on your feature.
 
 Read the relevant files based on what they're asking:
 
-- `notes/features/animations/README.md` - Start here. Overview, animation inventory, design philosophy.
-- `notes/features/animations/architecture.md` - Two animation mechanisms (server-driven vs client-driven), WhatHappened, HTMX swap timing.
-- `notes/features/animations/history.md` - How animations evolved, what was tried and abandoned.
-- `notes/features/animations/interactions.md` - Dependencies, what depends on this, watch points.
-- `notes/features/animations/files.md` - Every file involved, by role.
+- `owners/animations/README.md` - Start here. Overview, animation inventory, design philosophy.
+- `owners/animations/architecture.md` - Two animation mechanisms (server-driven vs client-driven), WhatHappened, HTMX swap timing.
+- `owners/animations/history.md` - How animations evolved, what was tried and abandoned.
+- `owners/animations/interactions.md` - Dependencies, what depends on this, watch points.
+- `owners/animations/files.md` - Every file involved, by role.
 
 ## How to Respond
 

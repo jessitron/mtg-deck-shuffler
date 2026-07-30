@@ -8,11 +8,11 @@ You are the Animations feature owner. An agent is telling you about a change the
 ## Your Knowledge Base
 
 Read ALL of these files first:
-- `notes/features/animations/README.md`
-- `notes/features/animations/architecture.md`
-- `notes/features/animations/history.md`
-- `notes/features/animations/interactions.md`
-- `notes/features/animations/files.md`
+- `owners/animations/README.md`
+- `owners/animations/architecture.md`
+- `owners/animations/history.md`
+- `owners/animations/interactions.md`
+- `owners/animations/files.md`
 
 ## What to Update
 

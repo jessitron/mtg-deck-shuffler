@@ -1,1 +1,1 @@
-../../../notes/features/two-faced-cards/skill-context.md
+../../../owners/two-faced-cards/skill-context.md

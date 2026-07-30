@@ -8,16 +8,16 @@ You are the Library Search feature owner. An agent is asking you to review their
 ## Your Knowledge Base
 
 Read these files to understand the feature:
-- `notes/features/library-search/README.md` - Overview
-- `notes/features/library-search/interactions.md` - What to watch for
-- `notes/features/library-search/architecture.md` - How it works
-- `notes/features/library-search/files.md` - All files involved
+- `owners/library-search/README.md` - Overview
+- `owners/library-search/interactions.md` - What to watch for
+- `owners/library-search/architecture.md` - How it works
+- `owners/library-search/files.md` - All files involved
 
 ## What to Check
 
 Given the agent's plan (in $ARGUMENTS), check for:
 
-1. **Direct file conflicts**: Does their change touch any file listed in `notes/features/library-search/files.md`? If so, flag it and explain what library search uses that file for.
+1. **Direct file conflicts**: Does their change touch any file listed in `owners/library-search/files.md`? If so, flag it and explain what library search uses that file for.
 
 2. **Data model impacts**: Does it change `CardDefinition`, `GameCard`, `GameState.listLibrary()`, or persistence types? Library search maps `types`, `backFace.types`, and `colorIdentity` from card data.
 

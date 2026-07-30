@@ -72,5 +72,5 @@ which was non-optional with no fallback → full bump + reject + mandatory regen
 
 ## Feature owners with this in scope
 
-- **two-faced-cards** (`notes/features/two-faced-cards/`): the most cross-cutting feature; card-data shape changes ripple into all three versions. Its `interactions.md` watch points #8 (deck regeneration) and #9 (game/prep state version) point here.
+- **two-faced-cards** (`owners/two-faced-cards/`): the most cross-cutting feature; card-data shape changes ripple into all three versions. Its `interactions.md` watch points #8 (deck regeneration) and #9 (game/prep state version) point here.
 - **library-search**: consumes persisted card data (`cardTypes`) but doesn't own version bumping; tangential.
