@@ -20,12 +20,16 @@ explains it, and the volume stays affordable.** The trace follows HTTP calls wit
 
 ## Invariants
 
-### 1. Add great attributes to spans. Favor attributes over additional spans or logs.
+### 1. Add great attributes to spans. Attributes are ALWAYS better than a log. _(Jess, authoritative)_
 
 Attributes are free in Honeycomb, and they make every span more valuable, because they correlate with each other.
 When receiving a request, add all parameters as attributes. Add return values.
 When there is a conditional in the code, but the condition in an attribute; this reveals code paths.
 There is no PII to worry about in this app.
+
+**A log is for when there is no span to hang it on** — startup, shutdown, callbacks, timers. If
+there's an active span, `setAttributes` on it instead. This is also the thing that keeps log volume
+affordable, so it is not merely a style preference.
 
 ### 1. Never add events to spans. Create trace-participating logs instead. _(Jess, authoritative)_
 
@@ -57,12 +61,23 @@ Full inventory of current violations (4, not 2 — all in the Tabletop server):
 | `apps/tabletop/src/server/rooms.ts:66`        | `room.created`         | Sometimes — depends who calls `getOrCreateRoom` (a request, or a ws connect, or nothing).              |
 | `apps/tabletop/src/server/cardArrival.ts:128` | `row.allocated`        | Usually yes (inside a request) — still a violation; should be attributes on the request span or a log. |
 
-**Caveat an implementer must know:** there is currently **no OTel logs pipeline anywhere in this
-fleet.** No `@opentelemetry/api-logs`, no `sdk-logs`, no `OTLPLogExporter`, no Ruby logs exporter,
-no `OTEL_LOGS_*` config. So "create logs instead" is today a _direction_, not a paved road. Honoring
-it means either standing up a logs pipeline (the real fix) or, in the meantime, putting the
-information on a span you created and therefore own. Do **not** treat "there's no logger yet" as
-license to reach for `addEvent`.
+**How to honor this today:** the Node ships have a paved road — `log.info/warn/error(message,
+attributes, error?)` from `apps/shuffler/src/log.ts` or `apps/tabletop/src/server/log.ts`. The
+Spine and the browser do **not** yet (JES-137, JES-136); there, put the information on a span you
+created and therefore own. Never treat a missing logger as license to reach for `addEvent`.
+
+**Why this loses nothing:** Honeycomb renders a log that carries trace and span ids with
+`meta.annotation_type = span_event` — it lands on the trace looking exactly like a span event
+would. Verified in env `local` when the pipeline went in. So the invariant costs no fidelity; it
+only buys the cases `addEvent` can't serve (arrives before the span ends, works with no active
+span, arrives if the span never ends).
+
+**Logs are deliberately NOT sampled.** A LogRecord does not inherit its span's sampling decision,
+and we chose not to make it. See Invariant 4 — the sampler keeps 1% of health-check traces so we
+can see the probe passing; if the probe starts *failing* we want every log explaining why, not 1%
+of them. The OTel spec defaults `traceBased` to `false` for the same reason. What keeps log volume
+affordable is **not logging on the hot path**, which Invariant 1 already produces: attributes are
+the default answer and a log is the exception.
 
 ### 3. While ingest keys are OK to commit to git and publish in the browser, Collectors are better.
 
@@ -83,19 +98,32 @@ attribute it depends on.
 
 _(This is the negotiable part — update this section whenever telemetry wiring changes.)_
 
-We want but don't yet have: logging libraries that participate in traces.
+Have, as of JES-134: logging libraries that participate in traces — **in the two Node ships only**.
+The Spine (JES-137) and the browser (JES-136) still have none.
 We want but don't yet have: a wrapper module around OpenTelemetry libraries, especially in JavaScript.
 
-**There is no shared OTel library.** Root `package.json` workspaces glob only `apps/*` and
-`services/*`; there is no `packages/` or `libs/`. Each of the three ships wires OTel itself, and
-they have already diverged.
+**There is no shared OTel library, and that is now a decision rather than drift.** Root
+`package.json` workspaces glob only `apps/*` and `services/*`; there is no `packages/` or `libs/`.
+When the log pipeline went in, Jess chose per-ship duplication over creating a shared
+`packages/telemetry` — a shared package is a new build-and-deploy surface for two Dockerfiles, and
+tracing was already duplicated this way. **Don't extract it.** Each of the three ships wires OTel
+itself, and they have diverged.
+
+**The two Node ships are on different OTel version lines** (Shuffler 0.219, Tabletop 0.221) and the
+same class can have a different constructor: `new BatchLogRecordProcessor(exporter)` in 0.219 vs
+`new BatchLogRecordProcessor({ exporter })` in 0.221 (same for `SimpleLogRecordProcessor`). Passing
+the wrong shape leaves the exporter `undefined`, the export throws inside a promise into the global
+error handler, and **nothing reaches Honeycomb while the code looks right**. Duplicated telemetry
+files therefore get a test in *each* ship — that is the only reason this was caught.
 
 | Where                                                 | What it is                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `apps/shuffler/src/tracing.ts`                        | Node SDK init. ESM loader hook (`register("@opentelemetry/instrumentation/hook.mjs")`) + `node --import`. Auto-instrumentations; `fs` off; **Express middleware spans off** (`ignoreLayersType: [ExpressLayerType.MIDDLEWARE]`). `ParentBasedSampler({root: BackgroundChatterSampler})`.                                                                                                                                                              |
+| `apps/shuffler/src/tracing.ts`                        | Node SDK init. ESM loader hook (`register("@opentelemetry/instrumentation/hook.mjs")`) + `node --import`. Auto-instrumentations; `fs` off; **Express middleware spans off** (`ignoreLayersType: [ExpressLayerType.MIDDLEWARE]`). `ParentBasedSampler({root: BackgroundChatterSampler})`. Also `logRecordProcessors: [BatchLogRecordProcessor(OTLPLogExporter)]` — logs ride the same NodeSDK so they share the resource (`service.name`) and shutdown path with traces, and land in the same datasets. **Passing `logRecordProcessors` makes the SDK skip its `OTEL_LOGS_EXPORTER` branch entirely** (`sdk-node/build/src/sdk.js:144-156`), so that env var would be dead config on these two ships — don't add it. (The Spine's `OTEL_LOGS_EXPORTER=none` is real; it has no pipeline.)                                                                                                                                                              |
 | `apps/shuffler/src/telemetry-sampler.ts`              | `BackgroundChatterSampler` — keeps `CHATTER_SAMPLE_RATIO = 0.01` of probes (`kube-probe`, `elb-healthchecker` by UA) + `/health` + static assets by extension; 100% of everything else. Reads `http.user_agent`/`user_agent.original` and `http.target`/`url.path`. Unit tested.                                                                                                                                                                      |
+| `apps/shuffler/src/log.ts`                            | The log surface: `log.info/warn/error(message, attributes, error?)`. Writes to **stdout and OTLP**. Takes its logger from the `api-logs` global, so it no-ops cleanly where no provider was registered (tests, `src/scripts/*`). An `Error` becomes `exception.type`/`.message`/`.stacktrace` attributes. Tested: `test/log.test.ts`. Duplicated in the Tabletop on purpose.                                                             |
+| `apps/tabletop/src/server/log.ts`                     | The same file, at the 0.221 version line. Tested: `apps/tabletop/test/log.test.ts` (vitest).                                                                                                                                                                                                                                                                                                                                          |
 | `apps/shuffler/src/tracing_util.ts`                   | **Helpers, not a wrapper**: `setCommonSpanAttributes()` (a `CommonAttributes` → span-attribute-name table), `stampRouteParamsOnSpan()` (writes `http.route.param.<key>`), `markCurrentSpanAsError()`. Callers still `import { trace } from "@opentelemetry/api"` directly.                                                                                                                                                                            |
-| `apps/tabletop/src/server/tracing.ts`                 | A **separate** Node SDK init, "modeled on the Shuffler's". Own inline `KubeProbeAwareSampler` (0.001 kube-probe / 0.01 ELB). **No middleware suppression, no static-asset or `/health` handling, reads only `http.user_agent`, and no test.** See Watch points.                                                                                                                                                                                       |
+| `apps/tabletop/src/server/tracing.ts`                 | A **separate** Node SDK init, "modeled on the Shuffler's". Own inline `KubeProbeAwareSampler` (0.001 kube-probe / 0.01 ELB). **No middleware suppression, no static-asset or `/health` handling, reads only `http.user_agent`, and no test.** See Watch points. Same `logRecordProcessors` wiring as the Shuffler but with the 0.221 options-object constructor.                                                                                                                                                                                       |
 | `apps/tabletop/src/client/observability/index.ts`     | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific". Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
 | `services/spine/config/initializers/opentelemetry.rb` | Ruby, ~4 effective lines: `SDK.configure` + `use_all`. No wrapper. Rack instrumentation extracts inbound W3C context, so a Shuffler-initiated trace continues through event ingestion. In test nothing is configured and the SDK exports nowhere — fine by design.                                                                                                                                                                                    |
 
@@ -141,6 +169,19 @@ Local → env `local`, datasets `mtg-deck-shuffler`, `mtg-deck-shuffler-web`, `m
   `ignoreLayersType: [ExpressLayerType.MIDDLEWARE]`, taking a typical trace from 8 spans to 2.
 - The `-r` → `--import` ESM migration (`notes/add-opentelemetry.md`): with `-r`, `import`ed modules
   are never patched, so you get bare `GET` spans with no `http.route` and no framework spans.
+- `ca6553f` "Log pipeline for both Node ships (JES-134)" — Invariant 2 stopped being aspirational.
+  Three things were learned building it, each a near-miss of the same kind:
+  - **The planned `SampledOnlyLogProcessor` was wrong twice over.** It was designed as a *sibling*
+    processor, which cannot drop anything — `MultiLogRecordProcessor.onEmit` forwards to every
+    processor unconditionally and `onEmit` returns `void`. It would have exported everything while
+    looking correct: the same fails-open-invisibly shape as the sampler bug above. And it wasn't
+    wanted anyway (see Invariant 2 → logs are not sampled). Filtering, if ever needed, must be a
+    decorator wrapping the batch processor, or the SDK's built-in `traceBased` logger config.
+  - **The 0.219/0.221 constructor skew** silently exported nothing in the Tabletop. Caught only
+    because the duplicated file had a test in the second ship too. This is the standing argument
+    for testing *both* copies of anything deliberately duplicated.
+  - Confirmed in env `local` that trace-correlated logs render as `meta.annotation_type =
+    span_event`, which is the evidence that banning `addEvent` costs no fidelity.
 
 ## Related reading
 
