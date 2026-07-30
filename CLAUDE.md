@@ -1,6 +1,8 @@
 # CLAUDE.md
 
 This file provides guidance to Claude Code when working with code in this repository.
+This is the fleet-level file; each ship has its own `CLAUDE.md` with its architecture,
+commands, and gotchas — read it when working on that ship.
 
 ## interacting with the user
 
@@ -18,94 +20,24 @@ The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-t
 ## Repo Layout
 
 This is a polyglot monorepo (npm workspaces). The fleet level holds `notes/`,
-`.claude/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`. The ships:
+`.claude/`, `owners/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`.
+The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and `./deploy.sh`):
 
-- `apps/shuffler/` — the Shuffler (all the code described below)
-- `apps/tabletop/` — the Tabletop: Vite + React + tldraw synced canvas with an
-  Express/ws sync server. `/t/:tableName` is a shared board; the card-arrival API
-  (`POST /api/tables/:tableName/cards`, SCAFFOLDING for the Spine's future feed)
-  places cards from the Shuffler. Run with `./run` from `apps/tabletop/` (port 5180);
-  tests `npx vitest run`; Playwright via `./verify.sh`; deploy with `./deploy.sh`
-  (table.jessitron.honeydemo.io). See `apps/tabletop/README.md` for Modes and
-  SCAFFOLDING callouts. **Deploying needs `TLDRAW_LICENSE_KEY` in the repo-root
-  `.be`** — tldraw ≥ 4 blanks the canvas 5s after load on any HTTPS non-loopback
-  host, and localhost can't reproduce it. See README → Licensing and
-  `notes/AGENT-NOTES.md`.
-- `services/spine/` — the Spine: Ruby on Rails 8 + SQLite. Tables, seats, one
-  append-only event log per table; ingestion validates against `contracts/` and
-  fails loudly. Admin screen (a table's log, with Honeycomb trace links) at
-  `/admin/tables`. Run with `PORT=4600 ./run` from `services/spine/` (sources
-  repo-root `.be` before `.env`, same telemetry rule as the Shuffler); tests with
-  `bin/rails test`; deploy with `./deploy.sh` (spine.jessitron.honeydemo.io). See
-  `services/spine/README.md`.
+- `apps/shuffler/` — the Shuffler: Express + HTMX deck manager and game screen;
+  hidden zones (library, hand). The original app.
+- `apps/tabletop/` — the Tabletop: Vite + React + tldraw synced canvas
+  (`/t/:tableName` is a shared board) where cards arrive from the Shuffler.
+- `services/spine/` — the Spine: Rails 8 + SQLite; tables, seats, one append-only
+  event log per table, validated against `contracts/`.
 - `contracts/` — the fleet's published language: JSON Schema for the event
   envelope and per-kind payloads. Both the Spine (Ruby) and the TS apps validate
   on receipt and fail loudly on unknown name/version. See `contracts/README.md`
   and `notes/DESIGN-event-contract-v0.md`.
 
-**Convention: every Shuffler path in this file and in `notes/` is relative to
-`apps/shuffler/`.** So `src/app.ts` means `apps/shuffler/src/app.ts`. Shuffler
-commands (`./run`, `./verify.sh`, `./deploy.sh`, `npm start`) are run **from
-`apps/shuffler/`**; `npm run build` and `npm test` also work from the root, where
-they pass through to the workspace.
+**Convention: every Shuffler path in `notes/` is relative to `apps/shuffler/`.**
+So `src/app.ts` means `apps/shuffler/src/app.ts`.
 
-## Project Overview
-
-MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks from MTGJSON or custom decks from Archidekt, displaying card info for remote gameplay via Mural/Miro and Discord.
-
-**Application Flow**: Home → Deck Selection → Deck Review → Play Game
-
-## Architecture
-
-- **Frontend**: HTML with HTMX for interactivity. Custom JS for tracing and HTMX-incompatible interactions.
-- **Templating**: Two systems:
-  - **EJS templates** (`views/`): Informational and pre-game pages. Use `res.render("template-name")`.
-  - **TypeScript functions** (`src/view/`): Active gameplay pages returning HTML strings. Use `res.send(formatSomethingHtmlPage(...))`.
-- **Backend**: Express.js server
-- **Build**: TypeScript → JavaScript in `dist/`
-
-## Development Guidelines
-
-- **Workflow**: Use subagents - research agent to understand codebase, then separate agents for each conceptual change.
-- **Testing**: User hates mocks. Use only fakes. Use generators in `test/generators.ts` for Deck objects. For PersistedGameState, instantiate GameState with generated Deck and call methods.
-- **Cleanup**: Look for newly-unused code to delete after each change. Especially unused CSS.
-
-## UI Style
-
-- Square corners except on physical round elements (cards, playmats)
-- Latest styling in `public/site.css`
-- The site pages (/, /choose-any-deck) have different styles from the play pages (/prepare, /game)
-
-## Key Files
-
-**Application Core**:
-
-- `src/app.ts` - Express routes and middleware
-- `src/server.ts` - Server initialization and dependency creation
-- `run` - Shell script that sources `.env` and runs the app. Jess uses this
-
-- `Dockerfile` - Multi-stage build; its build **context is the repo root** (npm workspaces keeps the lockfile there)
-- `deploy.sh` - Build, push to ECR, apply `k8s/`. Run from `apps/shuffler/`
-
-**Views** (EJS templates):
-
-- `views/index.ejs`, `docs.ejs`, `about.ejs`, `choose-any-deck.ejs`, `prepare.ejs`
-- `views/partials/` - Shared components (header, footer, head, deck-selection-precon, deck-selection-archidekt)
-
-**Views** (TypeScript):
-
-- `src/view/play-game/` - Active game screen components
-- `src/view/common/` - Shared components and layout
-- `src/view/debug/` - Debug utilities
-- `src/view/error-view.ts` - Error page
-
-**Styles**:
-
-- `public/site.css` (site-wide), `styles.css` (game and prepare), `game.css`, `prepare.css`, `deck-selection.css`, `docs.css`
-
-## Development Commands
-
-**Run the whole fleet locally:**
+## Run the whole fleet locally
 
 - `./run` **from the repo root** — starts all three services with prefixed logs:
   Spine (:4600, admin at `/admin/tables`), Tabletop (:5180, tables at `/t/<name>`),
@@ -113,116 +45,35 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
   once for telemetry (Honeycomb env `local`). Ctrl-C stops everything. Override
   ports with `SHUFFLER_PORT`/`TABLETOP_PORT`/`SPINE_PORT`.
 
-**Build & Run:** (from `apps/shuffler/`, except where noted)
+Single-ship commands (build, test, run, deploy) are in each ship's `CLAUDE.md`.
+`npm install` runs **from the root**; the lockfile lives here.
 
-- `npm run build` - Compile TypeScript (also works from the root)
-- `npm run clean` - Remove `dist/` (also works from the root)
-- `npm start` - Build and run
-- `PORT=3344 ./run` - Run with `.env` (preferred). Must be from `apps/shuffler/`
-- `npm install` - Run this **from the root**; the lockfile lives there
+## Development Guidelines
 
-**Deck Management Scripts:**
-
-- `npm run precons:fetch-mtgjson -- --convert` - Download and convert all MTGJSON Commander precon decks to `decks/` directory
-  - Default: **replaces all** existing deck files (rewrites every file, including a fresh `provenance.retrievedDate` — a noisy diff)
-  - Add `--skip-existing` to convert only newly-released precons and leave existing files untouched (clean diff — use this when just picking up new precons)
-  - Downloads from https://mtgjson.com/api/v5/AllDeckFiles.tar.gz, plus AllIdentifiers.json for two-faced back-face lookups (stream-parsed, since it exceeds Node's max string length)
-  - Converts to internal format (`cardTypes`, `twoFaced`, etc.) and fetches Scryfall image URLs (`imageUris`/`backImageUris`) via `port-card-images/`
-- `npm run deck:download -- <deckId>` - Download a specific Archidekt deck by ID
-  - Example: `npm run deck:download -- 14669648`
-  - Saves to `decks/deck-<deckId>.json` in internal format (includes Scryfall image URLs)
-- `npm run decks:backfill-images [-- <file>...]` - Add/refresh Scryfall `imageUris` on existing `decks/*.json` **without** re-downloading from MTGJSON/Archidekt
-  - Clean, additive diff (only adds image-URL fields; no `retrievedDate` churn), unlike the full `precons:fetch-mtgjson` rewrite
-  - Defaults to all decks; pass filenames to target specific ones. Throttled + retries on Scryfall 429s. Use this to pick up image URLs for freshly-released cards.
-- `npm run decks:backfill-set-names` - Rewrite the `set` field in `precon-mtgjson-*.json` from set codes to full set names (e.g. `SLD` → `Secret Lair Drop`) using Scryfall's `/sets`
-  - The displayed set text comes from the commander's `set` (deck tiles). MTGJSON gives only codes; Archidekt decks already store names. This aligns the precons. Clean diff (only `set` lines). Idempotent and Archidekt decks are left untouched.
-  - The MTGJSON adapter also takes set names now, so `precons:fetch-mtgjson -- --convert` produces names directly going forward.
-- `npm run card:inspect -- <deckId> <nameSubstring>` - Dump raw Archidekt `oracleCard` data for matching cards
-  - Example: `npm run card:inspect -- 23735063 Studious`
-  - Useful for diagnosing layout/faces issues (e.g. why a single-faced card is treated as two-faced)
-
-## Testing
-
-Verify changes with (from `apps/shuffler/`):
-
-- `npm run build`
-- `npm run test`
-- `PORT=3344 ./run` - Verify app starts, click through to what you changed
-- `./verify.sh` - Playwright verification (builds, starts on 3001, runs the specs)
-
-## Environment & Persistence
-
-Requires `apps/shuffler/.env` for OpenTelemetry config. SQLite persistence by default — `data.db` is created in the server's cwd, so `apps/shuffler/data.db`. Set `PORT_PERSIST_STATE=in-memory` for ephemeral state.
-
-Changing the shape of anything persisted (a `CardDefinition` field, `Deck`, `PersistedGameState`, `PersistedGamePrep`)? Follow `notes/DESIGN-persistence-versioning.md` — it covers which of the version constants to bump and how to fail loudly on old data.
-
-## Table Mode (Tabletop integration, JES-127)
-
-Games can join a table on the Tabletop (`apps/tabletop`). Prep screen takes optional
-table name + player name; the Shuffler mints a short-GUID `seatId` at join and records
-all three on BOTH `PersistedGamePrep` and `PersistedGameState` (optional fields, no
-version bumps). `/restart-game` carries them forward.
-
-- **Routes**: `POST /play-card/:gameId/:gameCardIndex` and `POST /discard-card/:gameId/:gameCardIndex`
-  are **send-then-commit** in table mode: send to the tabletop FIRST via
-  `src/port-tabletop/` (`HttpTabletopGateway`; `FakeTabletopGateway` for tests); only on
-  success mutate + persist. Failure → 502 error modal, card stays in hand. Solo mode
-  (no table): clipboard flow, untouched. Zone hints: land→battlefield, nonland→stack,
-  discard→graveyard.
-- **Env**: `TABLETOP_URL` (server-to-server sends; default `http://localhost:5180`,
-  prod `http://mtg-tabletop-service`), `TABLETOP_PUBLIC_URL` (browser "at table" link;
-  default `https://table.jessitron.honeydemo.io`).
-- **Identity**: each GameCard gets a `cardInstanceId` GUID (minted in `newGame`,
-  mint-on-load for old saves). `gameCardIndex` NEVER crosses the Shuffler's boundary
-  (decodable secret — see `src/port-tabletop/types.ts`, JES-128).
-- **Two-app verification**: `test/verification/verify-tabletop-integration.spec.ts`
-  spawns the tabletop from `apps/tabletop/dist` (build it first) on port 5180.
-
-## Data Sources & Adapters
-
-- **MTGJSON**: `https://mtgjson.com/api/v5/AllDeckFiles.tar.gz` (precons with release dates)
-- **Archidekt API**: `https://archidekt.com/api/decks/{deckId}/` (custom decks)
-- **Scryfall**: image URLs fetched at ingestion via `POST /cards/collection` and stored on the card (`imageUris`/`backImageUris`). `getCardImageUrl()` prefers the stored URL and falls back to `constructCardImageUrl()` (bare CDN path) — the bare path 404s for freshly-released cards, which is why we store the versioned URLs.
-
-**Adapters** in `src/port-deck-retrieval/`:
-
-- `mtgjsonAdapter/` - MTGJSON → internal format
-- `archidektAdapter/` - Archidekt → internal format (enriches with Scryfall images when given an images port)
-- `localFileAdapter/` - Read `decks/` files
-- `compositeAdapters/` - Combine adapters with fallback
-
-**Card images** in `src/port-card-images/` (`CardImagesPort`): `ScryfallCardImagesGateway` (batched, throttled, 429-retrying), `FakeCardImagesGateway`, and `enrichDeckWithImages()`. Wired into the Archidekt adapter at runtime (`server.ts`) and into the deck scripts.
-
-## Port Configuration
-
-Use `PORT=3344 ./run` to avoid conflict with user's testing server on the default port.
+- **Workflow**: Use subagents - research agent to understand codebase, then separate agents for each conceptual change.
+- **Testing**: User hates mocks. Use only fakes.
+- **Cleanup**: Look for newly-unused code to delete after each change. Especially unused CSS.
 
 ## Observability
 
 Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernity`):
 
-- **Sampling**: `src/telemetry-sampler.ts` keeps 1% of "background chatter" — health-check
-  probes (by user agent, and the `/health` route) and static assets (by file extension) —
-  and 100% of everything else. Kept at 1% rather than dropped so you can still confirm from
-  traces that the app is up and serving. Unit tested in `test/telemetry-sampler.test.ts`;
-  see `notes/AGENT-NOTES.md` for why that test exists.
-- **Express middleware spans are off** (`ignoreLayersType`), so a normal trace is the root
-  server span plus `request handler - <route>`, not eight spans of parser middleware.
-- **`/health`** is the probe endpoint (k8s liveness/readiness and the ALB) — deliberately
-  the cheapest route in the app.
-
-- **Local tests**: environment `local`, dataset `mtg-deck-shuffler` (web/browser spans go to `mtg-deck-shuffler-web`).
+- **Local tests**: environment `local`.
 - **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).
-- **API key sourcing**: `apps/shuffler/.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` **at the repo root** (sourced on `cd` into the repo). So `.be` must be sourced **before** `.env`, or OTLP export silently 401s ("unknown API key"). `verify.sh` sources both in that order (it looks for `.be` in its own dir, then the git toplevel); if you start the server by hand for telemetry, do the same.
+- **API key sourcing**: each ship's `.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` **at the repo root** (sourced on `cd` into the repo). So `.be` must be sourced **before** `.env`, or OTLP export silently 401s ("unknown API key"). The `verify.sh` scripts source both in that order; if you start a server by hand for telemetry, do the same.
+
+Ship-specific telemetry details (sampling, datasets, probe endpoints) are in each
+ship's `CLAUDE.md`. Before touching telemetry wiring, consult
+`owners/fleet-is-observable.md`.
 
 ## Documentation
 
 Design directives, features, vocabulary, and code structure in `notes/`. Keep updated with changes.
 
 `notes/AGENT-NOTES.md` collects gotchas learned while working here — non-obvious "oh,
-*that's* why" findings (why `./run` doesn't source `.be`, why the Docker build context is
-the repo root, and so on). Read it when something surprises you; append to it when
-something surprises you and wasn't written down.
+*that's* why" findings (why the Shuffler's `./run` doesn't source `.be`, why its Docker
+build context is the repo root, and so on). Read it when something surprises you; append
+to it when something surprises you and wasn't written down.
 
 Update this file when anything in it changes.
 
