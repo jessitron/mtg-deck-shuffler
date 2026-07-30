@@ -105,11 +105,28 @@ doesn't create anything; shuffling up does.
 1. Their player area is drawn to the **right** of the last one.
 2. The Stack strip widens to span all player areas.
 
-**Consequence for the wiring:** the Tabletop needs a message it doesn't have today
-— a seat-joined message sent at shuffle-up, carrying at least
-`{ seatId, playerName, playmatImageUrl }`. Player areas are currently allocated
-lazily, on a seat's *first card*. That's too late: the whole point is that the table
-looks like a table before anyone plays.
+**Consequence for the wiring:** the Tabletop needs a message it doesn't have today.
+Player areas are currently allocated lazily, on a seat's *first card*. That's too
+late: the whole point is that the table looks like a table before anyone plays.
+
+**Decided:** an event-shaped `seat.joined`, in the same envelope-lite style as
+`card.played` (SCAFFOLDING, same seam the Spine absorbs) — so the eventual swap to
+the Spine's event feed changes the gateway, not the callers.
+
+```
+POST /api/tables/:tableName/events
+{
+  id: "<guid, fresh per attempt — idempotency key>",
+  name: "seat.joined",
+  occurredAt: "<ISO 8601, the Shuffler's clock>",
+  initiator: { seatId, playerName },
+  playmatImageUrl: "https://…/aeoe-43-cascading-cataracts.png"
+}
+```
+
+Dedup on `seatId` already seated, the same way card arrival dedups on `instanceId`:
+a second `seat.joined` for a seat is a physical no-op. `gameCardIndex` stays
+forbidden here as everywhere past the Shuffler's boundary.
 
 The playmat image is the Shuffler's to choose (eventually in prep; there's one
 hard-coded playmat today) and must ride along on that message. Same channel later
@@ -173,9 +190,8 @@ Nobody is restricted from moving anybody else's cards. That's not an oversight.
 4. **Playmat image hosting** — the Tabletop would load it from the Shuffler's
    origin. Fine cross-origin, or should the URL be absolute/public
    (`TABLETOP_PUBLIC_URL`-style) so a deployed table can reach it?
-5. **Seat-joined message shape** — a new SCAFFOLDING endpoint alongside
-   `POST /api/tables/:tableName/cards`, or the same event-shaped payload with a
-   different `name` (`seat.joined`)? The latter is closer to where the Spine is going.
+
+Resolved: the seat-joined message is event-shaped `seat.joined` — see above.
 
 ---
 
