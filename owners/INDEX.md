@@ -8,18 +8,20 @@ animating skills — `<slug>-context`, `<slug>-review`, `<slug>-update` — syml
 
 When you plan a change, scan the one-liners below; for any owner whose trigger matches, invoke its
 `-context` skill (research), its `-review` skill (on the plan), and its `-update` skill (after the
-change lands). See CLAUDE.md → Task Implementation Process.
+change lands). See CLAUDE.md → Task Implementation Process. Each entry stamps *kind, scope* —
+scope is a ship, or *fleet* when the charge crosses ships; a change confined to one ship may skip
+owners stamped with a different ship, never the fleet-scoped ones.
 
-- [two-faced cards](two-faced-cards/README.md) — *feature* — consult me before changes to card
+- [two-faced cards](two-faced-cards/README.md) — *feature, fleet* — consult me before changes to card
   display/rendering, CardDefinition/CardFace types, deck adapters, card persistence, flip buttons,
   CSS card animations, card modals, library search grouping, game state, the Tabletop's card
   rendering, or the event contract's card/face fields.
-- [library search](library-search/README.md) — *feature* — consult me before changes to card
+- [library search](library-search/README.md) — *feature, Shuffler* — consult me before changes to card
   definitions, modals, persistence, game state, deck adapters, or the prep/game pages.
-- [animations](animations/README.md) — *feature* — consult me before changes to card
+- [animations](animations/README.md) — *feature, Shuffler* — consult me before changes to card
   display/rendering, game.css, WhatHappened, HTMX swap attributes, card containers, drag-and-drop,
   game.js event handlers, or CSS keyframes/transitions.
-- [the fleet is observable](fleet-is-observable/README.md) — *capability* — consult me before
+- [the fleet is observable](fleet-is-observable/README.md) — *capability, fleet* — consult me before
   changes to telemetry wiring, env/secret sourcing, run/deploy scripts, OTel dependency versions,
   HTTP middleware, or trace-context propagation — and before recording that something happened
   (**never `span.addEvent`; attributes or a log instead**).
