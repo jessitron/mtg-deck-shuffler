@@ -133,6 +133,34 @@ hard-coded playmat today) and must ride along on that message. Same channel late
 carries the sleeve / card-back image, once prep offers sleeve choice; until then
 everyone gets the standard Magic card back (`apps/shuffler/public/images/mtg-card-back.jpg`).
 
+### `playmatImageUrl` is a public, absolute URL — any image on the internet
+
+The long game is that a player pastes *any* image URL in prep and gets that playmat.
+So the field is an absolute `https://` URL the browser loads directly, and the
+Tabletop treats it as opaque — it never proxies, caches, or validates the picture.
+Same posture as card art: Scryfall URLs are already hotlinked into tldraw image
+assets, and a playmat is that with a different aspect ratio.
+
+Consequences worth writing down before anyone implements it:
+
+- **The Shuffler's own bundled playmats must be absolutized.** Today's playmat is a
+  same-origin `/images/aeoe-43-cascading-cataracts.png` in CSS. That relative path is
+  meaningless in a browser pointed at the Tabletop's origin, so the Shuffler sends
+  `TABLETOP`-visible absolute URLs (its public base + path) for bundled playmats too.
+  One code path for "mine" and "off the internet," not two.
+  → Prerequisite: the Shuffler needs to know its own public base URL. It knows
+  `TABLETOP_PUBLIC_URL` (outbound); the mirror of that for its own origin may not
+  exist yet.
+- **Anything can 404, redirect, or not be an image.** A broken playmat must degrade to
+  a plain empty mat, not a broken player area. The battlefield is a region that
+  happens to have a picture; the picture is the optional part.
+- **Sending a URL to the table publishes it to everyone at the table.** Fine — the
+  table is already shared — but it does mean a player's paste reaches other people's
+  browsers, which fetch it. Worth a word in the prep UI when that field exists.
+- **CSP.** Whatever CSP the Tabletop grows must allow `img-src` from arbitrary hosts,
+  or arbitrary playmats silently fail. No CSP today; note it so a future hardening
+  pass doesn't quietly break this.
+
 ## Where cards arrive
 
 Only two arrival rules matter, and they're the two the Shuffler already knows how
@@ -187,11 +215,11 @@ Nobody is restricted from moving anybody else's cards. That's not an oversight.
    rectangle close). Confirm.
 3. **Name label** — between the stack strip and the playmat, as written above. Any
    objection to it eating vertical space there?
-4. **Playmat image hosting** — the Tabletop would load it from the Shuffler's
-   origin. Fine cross-origin, or should the URL be absolute/public
-   (`TABLETOP_PUBLIC_URL`-style) so a deployed table can reach it?
+Resolved:
 
-Resolved: the seat-joined message is event-shaped `seat.joined` — see above.
+- The seat-joined message is event-shaped `seat.joined` — see above.
+- `playmatImageUrl` is a public absolute URL; any image on the internet works — see
+  above for what that costs.
 
 ---
 
