@@ -166,5 +166,20 @@ sourcing) is in the root `CLAUDE.md`. Shuffler specifics:
   the cheapest route in the app.
 - **Datasets**: server spans go to `mtg-deck-shuffler`; web/browser spans go to
   `mtg-deck-shuffler-web`.
+- **Logging**: `src/log.ts` — `log.info/warn/error(message, attributes, error?)`. Each
+  record goes to stdout and to Honeycomb, carrying the trace/span id of the active span.
+  **Reach for a span attribute first**; a log is for when there's no span to hang it on
+  (startup, shutdown, callbacks, timers). Never `span.addEvent`. Wired up by
+  `logRecordProcessors` in `src/tracing.ts`; tested in `test/log.test.ts`.
+- **Logs are not sampled.** A LogRecord doesn't inherit its span's sampling decision and we
+  don't want it to — if the health check starts failing we want every log explaining why,
+  not the 1% the sampler kept. What keeps volume affordable is not logging on the hot path.
+- **`src/scripts/*` keeps `console.*` on purpose.** Those are CLI tools, not the server;
+  their output belongs on the terminal. Don't sweep them into `log.ts`.
+- **`log.ts` is duplicated in the Tabletop deliberately** — there is no shared telemetry
+  package and we chose not to create one (the workspaces glob is `apps/*`/`services/*`, and
+  a shared package is a new build surface for two Dockerfiles). The two copies are also on
+  different OTel version lines with genuinely incompatible APIs; see `notes/AGENT-NOTES.md`.
+  Don't "helpfully" extract them.
 
 Update this file when anything in it changes.

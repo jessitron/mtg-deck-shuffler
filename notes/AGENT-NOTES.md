@@ -137,4 +137,43 @@ took a typical trace from 8 spans to 2. That replaced the old
 existed (keeping the root server span active through `res.end`) is satisfied by having no
 middleware spans at all.
 
+## The two ships are on different OTel version lines, and the APIs differ
+
+The Shuffler pins `@opentelemetry/*` at the **0.219** line, the Tabletop at **0.221**. That
+skew is fine and deliberate — but the same class can have a different constructor:
+
+```ts
+new BatchLogRecordProcessor(exporter)              // 0.219 — Shuffler
+new BatchLogRecordProcessor({ exporter })          // 0.221 — Tabletop
+```
+
+Same for `SimpleLogRecordProcessor`. Pass 0.219's shape to 0.221 and `options.exporter` is
+`undefined`; the export throws inside a promise, goes to the global error handler, and
+**nothing reaches Honeycomb while the code looks correct**. This was caught only because
+`log.ts` has a test in both ships, which is the argument for testing both copies of a
+deliberately-duplicated file rather than trusting the copy.
+
+So: don't paste telemetry lines between ships without checking the signature, and when you
+touch one ship's telemetry, run the other's tests too.
+
+## Logs, not span events — and logs are not sampled
+
+`log.ts` (both Node ships) emits OTel logs that carry the active span's trace/span id.
+Honeycomb renders those with `meta.annotation_type = span_event`, so they appear on the
+trace exactly like a span event would — which is the whole reason we can ban `addEvent`
+and lose nothing. Logs with no active span arrive untethered, which is the point: that's
+the case `addEvent` cannot serve (see the `rooms.ts` timer callback).
+
+**Logs deliberately ignore the trace sampler.** A LogRecord does not inherit its span's
+sampling decision, and enabling that (`traceBased` in the logger config) would be a
+mistake: the sampler keeps 1% of health-check traces so we can see the probe passing, but
+if the probe starts *failing* we want every log that explains why. Volume stays affordable
+by not logging on the hot path, not by filtering.
+
+One landmine if you ever do need to filter: a sibling `LogRecordProcessor` **cannot** drop
+a record. `MultiLogRecordProcessor.onEmit` forwards to every processor unconditionally and
+`onEmit` returns `void`. `logRecordProcessors: [filter, batch]` exports everything while
+looking right — the same fails-open-invisibly shape as the sampler bug above. Filtering has
+to be a decorator wrapping the batch processor, or the built-in `traceBased` config.
+
 _2026-07-27._

@@ -1,0 +1,95 @@
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { context, trace, TraceFlags } from "@opentelemetry/api";
+import { logs, SeverityNumber } from "@opentelemetry/api-logs";
+import { LoggerProvider, InMemoryLogRecordExporter, SimpleLogRecordProcessor } from "@opentelemetry/sdk-logs";
+import { BasicTracerProvider } from "@opentelemetry/sdk-trace-base";
+import { AsyncLocalStorageContextManager } from "@opentelemetry/context-async-hooks";
+import { log } from "../src/server/log";
+
+// The contract we depend on: a log carries the trace context when there is an
+// active span, and still gets emitted when there isn't. The second half is the
+// whole reason this file exists on THIS ship — rooms.ts records room lifecycle
+// from a throttled timer callback with no ambient span, where addEvent throws.
+
+let exported: InMemoryLogRecordExporter;
+
+beforeEach(() => {
+  exported = new InMemoryLogRecordExporter();
+  // Options object, not a positional exporter — the 0.221 line changed this;
+  // the Shuffler's copy of this test is on 0.219 and passes it positionally.
+  logs.setGlobalLoggerProvider(new LoggerProvider({ processors: [new SimpleLogRecordProcessor({ exporter: exported })] }));
+
+  // Without a context manager, context.with() is a no-op and context.active()
+  // always returns ROOT_CONTEXT — so no log could ever pick up trace context,
+  // and these tests would pass or fail for reasons unrelated to log.ts. In the
+  // running app the NodeSDK registers this for us.
+  context.setGlobalContextManager(new AsyncLocalStorageContextManager().enable());
+});
+
+afterEach(() => {
+  logs.disable();
+  context.disable();
+});
+
+describe("log", () => {
+  it("emits with no active span — the pruneSessions callback case", () => {
+    log.info("room emptied", { "room.name": "kitchen-table" });
+
+    const records = exported.getFinishedLogRecords();
+    expect(records).toHaveLength(1);
+    expect(records[0].body).toBe("room emptied");
+    expect(records[0].attributes).toMatchObject({ "room.name": "kitchen-table" });
+    expect(records[0].spanContext).toBeUndefined();
+  });
+
+  it("carries the active span's trace and span ids", () => {
+    const span = new BasicTracerProvider().getTracer("test").startSpan("ws connect");
+
+    context.with(trace.setSpan(context.active(), span), () => {
+      log.info("room created", { "room.name": "kitchen-table" });
+    });
+    span.end();
+
+    const [record] = exported.getFinishedLogRecords();
+    expect(record.spanContext?.traceId).toBe(span.spanContext().traceId);
+    expect(record.spanContext?.spanId).toBe(span.spanContext().spanId);
+  });
+
+  it("emits under an unsampled span — logs are independent of trace sampling", () => {
+    const unsampled = trace.wrapSpanContext({
+      traceId: "0af7651916cd43dd8448eb211c80319c",
+      spanId: "b7ad6b7169203331",
+      traceFlags: TraceFlags.NONE,
+    });
+
+    context.with(trace.setSpan(context.active(), unsampled), () => {
+      log.warn("health check failing");
+    });
+
+    expect(exported.getFinishedLogRecords()).toHaveLength(1);
+  });
+
+  it("carries severity", () => {
+    log.info("a");
+    log.warn("b");
+    log.error("c");
+
+    expect(exported.getFinishedLogRecords().map(r => r.severityNumber)).toEqual([
+      SeverityNumber.INFO,
+      SeverityNumber.WARN,
+      SeverityNumber.ERROR,
+    ]);
+  });
+
+  it("records an Error as exception attributes, not stringified into the message", () => {
+    log.error("card arrival failed", { "table.name": "kitchen-table" }, new Error("no free row"));
+
+    const [record] = exported.getFinishedLogRecords();
+    expect(record.body).toBe("card arrival failed");
+    expect(record.attributes).toMatchObject({
+      "table.name": "kitchen-table",
+      "exception.type": "Error",
+      "exception.message": "no free row",
+    });
+  });
+});

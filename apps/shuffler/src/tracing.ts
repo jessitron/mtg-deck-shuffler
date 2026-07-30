@@ -1,6 +1,8 @@
 import { register } from "node:module";
 import { NodeSDK } from "@opentelemetry/sdk-node";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
+import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
+import { BatchLogRecordProcessor } from "@opentelemetry/sdk-logs";
 import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
 import { ParentBasedSampler } from "@opentelemetry/sdk-trace-node";
 import { ExpressLayerType } from "@opentelemetry/instrumentation-express";
@@ -17,6 +19,22 @@ register("@opentelemetry/instrumentation/hook.mjs", import.meta.url);
 
 const sdk: NodeSDK = new NodeSDK({
   traceExporter: new OTLPTraceExporter(),
+  // Logs go through the NodeSDK rather than a LoggerProvider of their own, so
+  // they share the resource (service.name and friends) and the shutdown path
+  // with traces. The destination comes from the same generic
+  // OTEL_EXPORTER_OTLP_ENDPOINT the traces use; the exporter appends /v1/logs.
+  //
+  // Deliberately unfiltered by the sampler below. A LogRecord does not inherit
+  // its span's sampling decision, and we don't want it to: the sampler keeps 1%
+  // of health-check traces so we can see the probe passing, but if the probe
+  // starts FAILING we want every log that explains why. The thing that keeps
+  // log volume affordable is not logging on the hot path — see log.ts.
+  //
+  // Passing logRecordProcessors makes the SDK skip its OTEL_LOGS_EXPORTER
+  // branch entirely, so don't add that env var here expecting it to do
+  // something — it would be dead config. (The Spine sets it to "none"; that one
+  // is real, because the Spine has no logs pipeline yet.)
+  logRecordProcessors: [new BatchLogRecordProcessor(new OTLPLogExporter())],
   // Health checks and static assets are sampled down hard; everything else is
   // traced in full. See telemetry-sampler.ts for what counts and why.
   sampler: new ParentBasedSampler({
