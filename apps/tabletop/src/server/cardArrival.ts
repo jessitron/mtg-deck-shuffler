@@ -125,7 +125,10 @@ async function ensureSeatRow(entry: RoomEntry, pageId: string, seatId: string, p
     );
   });
 
-  trace.getActiveSpan()?.addEvent("row.allocated", { "seat.id": seatId, "player.name": playerName, "row.index": rowIndex });
+  // Attributes on the request span, not an event: this always runs inside
+  // handleCardArrival, and the fact that THIS arrival allocated a row is part of
+  // what that request did.
+  trace.getActiveSpan()?.setAttributes({ "row.allocated": true, "seat.id": seatId, "player.name": playerName, "row.index": rowIndex });
   return seatRow;
 }
 

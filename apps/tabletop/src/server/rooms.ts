@@ -1,5 +1,6 @@
 import { TLSocketRoom } from "@tldraw/sync-core";
 import { trace } from "@opentelemetry/api";
+import { log } from "./log.js";
 
 // ============================================================================
 // SCAFFOLDING — the in-memory room registry.
@@ -45,13 +46,23 @@ export function getOrCreateRoom(tableName: string): RoomEntry {
   const entry: RoomEntry = {
     tableName,
     room: new TLSocketRoom({
+      // Logs, not span events. tldraw calls this from its throttled
+      // pruneSessions timer, long after the span that opened the room has ENDED
+      // — measured at ~13s after a 2.4ms "ws connect" span.
+      //
+      // The context is still present (AsyncLocalStorage carries it into the
+      // timer), so trace.getActiveSpan() returns that *ended* span rather than
+      // undefined. Which is why addEvent threw "Operation attempted on ended
+      // Span" in production rather than quietly no-op'ing, and the record was
+      // lost. A log has no such constraint: it's emitted immediately, and it
+      // still carries the trace id, so it lands on the trace anyway.
       onSessionRemoved(room, args) {
-        trace.getActiveSpan()?.addEvent("room.session_removed", {
+        log.info("room session removed", {
           "table.name": tableName,
           "room.sessions_remaining": args.numSessionsRemaining,
         });
         if (args.numSessionsRemaining === 0) {
-          trace.getActiveSpan()?.addEvent("room.emptied", { "table.name": tableName });
+          log.info("room emptied", { "table.name": tableName });
           // Deliberately NOT evicting: an empty room keeps its cards until the
           // process restarts (v0 accepts restart-wipes; mid-game everyone
           // refreshing at once shouldn't lose the table).
@@ -63,6 +74,11 @@ export function getOrCreateRoom(tableName: string): RoomEntry {
     createdAt: new Date(),
   };
   registry.set(tableName, entry);
-  trace.getActiveSpan()?.addEvent("room.created", { "table.name": tableName });
+  // An attribute, not a log: both callers of this function run inside a span
+  // (handleCardArrival's request span, and the "ws connect" span in server.ts),
+  // so this belongs on the span that caused the creation — where it correlates
+  // with everything else about that request. Attributes beat logs whenever
+  // there's a span to hang them on.
+  trace.getActiveSpan()?.setAttributes({ "room.created": true, "table.name": tableName });
   return entry;
 }

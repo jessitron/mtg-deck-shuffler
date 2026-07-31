@@ -8,10 +8,10 @@
  * long after the request that created them has ended.
  *
  * (Never `span.addEvent`. This ship is where that lesson came from: rooms.ts
- * calls addEvent from tldraw's throttled pruneSessions callback, which has no
- * ambient span, so production logs fill with "Operation attempted on ended
- * Span" and the room-lifecycle events are silently dropped. That is what this
- * file exists to fix.)
+ * used to call addEvent from tldraw's throttled pruneSessions callback, which
+ * fires long after the span that opened the room has ended. Production logs
+ * filled with "Operation attempted on ended Span" and the room-lifecycle
+ * records were dropped. Fixed in JES-136 by using this file instead.)
  *
  * Each record goes two places: stdout, so `./run`'s prefixed local logs stay
  * readable, and OTLP, so it lands in Honeycomb carrying the trace_id/span_id of
