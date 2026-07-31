@@ -127,6 +127,18 @@ files therefore get a test in *each* ship — that is the only reason this was c
 | `apps/tabletop/src/client/observability/index.ts`     | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific". Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
 | `services/spine/config/initializers/opentelemetry.rb` | Ruby, ~4 effective lines: `SDK.configure` + `use_all`. No wrapper. Rack instrumentation extracts inbound W3C context, so a Shuffler-initiated trace continues through event ingestion. In test nothing is configured and the SDK exports nowhere — fine by design.                                                                                                                                                                                    |
 
+**The house pattern for a failure path**, established at `apps/shuffler/src/app.ts` `POST /deck`
+(`dc2df7e`, the fleet's first real `log.ts` caller):
+
+1. **Attributes first** — `markCurrentSpanAsError(message, {...})` with the failure kind, the
+   inputs, and the reason. This answers "what broke, and for which deck."
+2. **Then the log, only for the stack** — `log.error("deck retrieval failed", {…}, error)`. The
+   third argument becomes `exception.type`/`.message`/`.stacktrace`, which is the part a span has
+   no room for. Don't duplicate onto the log what's already on the span.
+
+Many of the Shuffler's remaining catch blocks already do step 1 well (the game-loading middleware
+is a good example); for those the conversion is only step 2. Re-stamping is noise.
+
 **Manual span creation is almost nonexistent.** Across all three ships there are ~5 call sites:
 `apps/tabletop/src/server/server.ts:89` (`tracer.startActiveSpan("ws connect", {kind: SpanKind.SERVER}, …)`,
 hand-rolled), `apps/tabletop/src/client/TablePage.tsx:47`, `apps/tabletop/src/client/useCardArrivalSpans.ts:21`,
@@ -152,6 +164,31 @@ or export silently 401s ("unknown API key"). Who does what:
 Local → env `local`, datasets `mtg-deck-shuffler`, `mtg-deck-shuffler-web`, `mtg-tabletop`,
 `mtg-tabletop-web`. Prod → env `mtg-deck-shuffler` (orion cluster, jessitron-sandbox). The Spine's
 `/admin/tables` renders Honeycomb trace links per event.
+
+## Evidence: how to show a change is observable
+
+Safe Harbor says a change is home when it's "deployed and observable in Honeycomb." That claim
+should be **linkable**, not just asserted.
+
+**Honeycomb query runs never expire — they are visible forever. So are traces, once viewed.**
+_(Jess, authoritative.)_ A query-run URL (`…/datasets/<dataset>/result/<pk>`) and a trace URL are
+therefore permanent citations: put them in the commit message, the Linear issue, or here, and they
+will still resolve later. Don't hedge about them going stale, and don't re-run a query just to get
+a "fresh" link.
+
+Worked examples from the log-pipeline work (team `modernity`, env `local`) — this is what
+"verified in Honeycomb" looks like for this fleet:
+
+| Shows | Link |
+| --- | --- |
+| A real failure end to end: root `POST /deck` ERROR/500 → `request handler - /deck` → the log as a `span_event` → client `GET` 404 from Archidekt | [trace](https://ui.honeycomb.io/modernity/environments/local/result/JuiA57ZyqG1/trace?trace_id=f73482b9f01d9903db99b5b94f8a72c8) |
+| The log record: `exception.type`/`.message`/`.stacktrace`, and `trace.parent_id` tying it to the span | [CmtTT79DdNd](https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-deck-shuffler/result/CmtTT79DdNd) |
+| The span's error attributes (`deck.retrieval.failure`, `deck.source`, `deck.archidektId`, …) | [D4vCFvASCyh](https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-deck-shuffler/result/D4vCFvASCyh) |
+| `http.route` still present after editing `tracing.ts` — the standing check that ESM patching didn't break | [XjiiDPeuDc](https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-deck-shuffler/result/XjiiDPeuDc) |
+| The in-span / no-span log pair, both ships | [Shuffler](https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-deck-shuffler/result/m8jpkmTgaBd) · [Tabletop](https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-tabletop/result/pnCKeMhpkDR) |
+
+Note the last row is a **synthetic** emitter, not real app code — worth distinguishing when you
+claim something is verified. The Tabletop's `log.ts` still has no real callers (JES-136).
 
 ## History (why these rules exist)
 

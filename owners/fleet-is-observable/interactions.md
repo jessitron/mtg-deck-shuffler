@@ -17,6 +17,7 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
 - **Every production diagnosis** — the North Star includes "when something breaks, Honeycomb shows you why."
 - **The Spine's `/admin/tables`** — renders per-event Honeycomb trace links; assumes trace context propagates Shuffler → Spine (Rack extracts W3C headers).
 - **`verify.sh` telemetry checks** and the "app is up" confirmation from 1%-sampled probe traces.
+- **Safe Harbor's "deployed and observable in Honeycomb"** — that claim should ship with a link. Honeycomb query runs and viewed traces never expire, so the URL is a permanent citation (README → Evidence).
 
 ## Watch points
 
