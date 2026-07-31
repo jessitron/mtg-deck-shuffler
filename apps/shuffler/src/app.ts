@@ -15,6 +15,7 @@ import { TabletopPort } from "./port-tabletop/types.js";
 import { sendCardToTableFirst, zoneHintForPlay } from "./port-tabletop/sendToTable.js";
 import { formatTabletopSendErrorModal } from "./view/play-game/game-modals.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
+import { log } from "./log.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState, IncompatibleStateVersionError } from "./port-persist-state/types.js";
 import { PersistPrepPort, PersistedGamePrep, PERSISTED_GAME_PREP_VERSION, IncompatiblePrepVersionError } from "./port-persist-prep/types.js";
@@ -353,7 +354,18 @@ export function createApp(
 
       res.redirect(`/prepare/${prepId}`);
     } catch (error) {
-      console.error("Error fetching deck:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "deck.retrieval.failure": true,
+        "deck.source": deckSource,
+        "deck.archidektId": deckNumber ?? "",
+        "deck.precon_file": preconFile ?? "",
+      });
+      // The span now says what failed and for which deck; the log carries the
+      // stack, which the span has no room for.
+      log.error("deck retrieval failed", { "deck.source": deckSource }, error);
       res.status(500).send(
         formatErrorPageHtmlPage({
           icon: "🚫",
