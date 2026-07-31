@@ -5,12 +5,16 @@
  * (with CORS for this origin); locally it may fall back to a direct endpoint.
  * No API key ever ships in the page except the documented local-only fallback.
  *
- * Surface: initTracing(), inSpan(), setGlobalAttrs(), currentTraceparent().
+ * Surface: initTracing(), inSpan(), setGlobalAttrs(), currentTraceparent(),
+ * logError().
  */
 import { trace, SpanStatusCode, Span, Attributes, context } from "@opentelemetry/api";
 import { WebTracerProvider, BatchSpanProcessor, SpanProcessor, ReadableSpan } from "@opentelemetry/sdk-trace-web";
 import { Span as SdkSpan } from "@opentelemetry/sdk-trace-base";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
+import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
+import { LoggerProvider, BatchLogRecordProcessor } from "@opentelemetry/sdk-logs";
+import { logs, SeverityNumber, LogAttributes } from "@opentelemetry/api-logs";
 import { resourceFromAttributes } from "@opentelemetry/resources";
 import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
 
@@ -39,6 +43,7 @@ class GlobalAttributesSpanProcessor implements SpanProcessor {
 
 interface OtelBrowserConfig {
   tracesUrl: string | null;
+  logsUrl?: string | null;
   headers?: Record<string, string>;
 }
 
@@ -80,6 +85,55 @@ export async function initTracing(): Promise<void> {
   });
   provider.register();
   console.log(`Tabletop tracing: exporting to ${config.tracesUrl}`);
+
+  if (config.logsUrl) {
+    logs.setGlobalLoggerProvider(
+      new LoggerProvider({
+        resource: resourceFromAttributes({ [ATTR_SERVICE_NAME]: WEB_SERVICE_NAME }),
+        processors: [new BatchLogRecordProcessor({ exporter: new OTLPLogExporter({ url: config.logsUrl, headers: config.headers ?? {} }) })],
+      })
+    );
+    reportUncaughtErrors();
+    console.log(`Tabletop logging: exporting to ${config.logsUrl}`);
+  }
+}
+
+/**
+ * Record an error that happened outside any span.
+ *
+ * As everywhere in this fleet: if you're inside `inSpan`, put the information
+ * on the span instead — `inSpan` already records exceptions for you. This is
+ * for the browser's genuinely span-less moments.
+ */
+export function logError(message: string, attributes: LogAttributes = {}, error?: unknown): void {
+  const withException =
+    error instanceof Error
+      ? { ...attributes, "exception.type": error.name, "exception.message": error.message, "exception.stacktrace": error.stack ?? "" }
+      : attributes;
+
+  logs.getLogger(WEB_SERVICE_NAME).emit({
+    severityNumber: SeverityNumber.ERROR,
+    severityText: "ERROR",
+    body: message,
+    attributes: { ...globalAttrs, ...withException } as LogAttributes,
+  });
+}
+
+/**
+ * Uncaught errors and unhandled rejections are the browser's version of the
+ * server's timer callback: something went wrong with no span in scope, so
+ * before this they went nowhere at all — the user saw a broken table and
+ * Honeycomb showed a clean session.
+ */
+function reportUncaughtErrors(): void {
+  window.addEventListener("error", (event) => {
+    logError("uncaught error", { "browser.url": window.location.pathname }, event.error ?? new Error(event.message));
+  });
+
+  window.addEventListener("unhandledrejection", (event) => {
+    const reason = event.reason;
+    logError("unhandled promise rejection", { "browser.url": window.location.pathname }, reason instanceof Error ? reason : new Error(String(reason)));
+  });
 }
 
 /** Run a function inside a span; errors are recorded and rethrown. */

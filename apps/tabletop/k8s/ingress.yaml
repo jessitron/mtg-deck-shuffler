@@ -36,6 +36,14 @@ spec:
                 name: mtg-tabletop-collector-service
                 port:
                   number: 4318
+          # Browser OTLP logs — uncaught errors and unhandled rejections
+          - path: /v1/logs
+            pathType: Prefix
+            backend:
+              service:
+                name: mtg-tabletop-collector-service
+                port:
+                  number: 4318
           - path: /
             pathType: Prefix
             backend:

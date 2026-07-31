@@ -45,6 +45,23 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`; the browser side is in
   0.219) with **incompatible constructor signatures**; don't copy telemetry lines between
   ships without checking. See `notes/AGENT-NOTES.md`.
 
+Browser side (`src/client/observability/index.ts`, the fleet's only real OTel wrapper):
+
+- **`logError(message, attributes, error?)`** for errors with no span in scope. Inside
+  `inSpan`, don't use it — `inSpan` already records the exception on the span.
+- **Uncaught errors and unhandled rejections are reported automatically** (`window`
+  `error` / `unhandledrejection`). That's the browser's equivalent of the server's timer
+  callback: before this they went nowhere, so a user saw a broken table and Honeycomb
+  showed a clean session. Lands in `mtg-tabletop-web` with `browser.url` and the global
+  attrs (e.g. `table.name`).
+- **The three `console.log`s in that file stay `console.log`.** They report whether
+  telemetry is on; routing them through the telemetry pipeline would be circular.
+- **Destination** is `logsUrl` from `/otel-config.json`, same collector-or-fallback shape
+  as traces: prod `BROWSER_OTLP_LOGS_URL` → same-origin `/v1/logs` → ALB → collector
+  (`k8s/collector.yaml` has a `logs` pipeline, `k8s/ingress.yaml` the path). Locally,
+  either `otel-collector-local.yaml` or the `ALLOW_BROWSER_DIRECT_HONEYCOMB` fallback.
+  No `logsUrl` → browser logging quietly off, same as tracing.
+
 ## Deploy gotcha: tldraw license
 
 **Deploying needs `TLDRAW_LICENSE_KEY` in the repo-root `.be`** — tldraw ≥ 4 blanks

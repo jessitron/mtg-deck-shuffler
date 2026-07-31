@@ -9,6 +9,7 @@
 #     -e HONEYCOMB_API_KEY \
 #     otel/opentelemetry-collector-contrib:latest
 # then in .env: export BROWSER_OTLP_TRACES_URL=http://localhost:4318/v1/traces
+#               export BROWSER_OTLP_LOGS_URL=http://localhost:4318/v1/logs
 #               (and unset ALLOW_BROWSER_DIRECT_HONEYCOMB)
 
 receivers:
@@ -29,5 +30,8 @@ exporters:
 service:
   pipelines:
     traces:
+      receivers: [otlp]
+      exporters: [otlphttp]
+    logs:
       receivers: [otlp]
       exporters: [otlphttp]

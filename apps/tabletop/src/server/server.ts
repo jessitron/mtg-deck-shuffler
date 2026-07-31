@@ -33,17 +33,18 @@ export function createApp() {
   app.get("/otel-config.json", (_req, res) => {
     const collectorUrl = process.env.BROWSER_OTLP_TRACES_URL;
     if (collectorUrl) {
-      res.json({ tracesUrl: collectorUrl });
+      res.json({ tracesUrl: collectorUrl, logsUrl: process.env.BROWSER_OTLP_LOGS_URL ?? null });
       return;
     }
     if (process.env.ALLOW_BROWSER_DIRECT_HONEYCOMB === "true" && process.env.HONEYCOMB_API_KEY) {
       res.json({
         tracesUrl: "https://api.honeycomb.io/v1/traces",
+        logsUrl: "https://api.honeycomb.io/v1/logs",
         headers: { "x-honeycomb-team": process.env.HONEYCOMB_API_KEY },
       });
       return;
     }
-    res.json({ tracesUrl: null });
+    res.json({ tracesUrl: null, logsUrl: null });
   });
 
   // The card-arrival seam (A5) — SCAFFOLDING the Spine absorbs; see cardArrival.ts

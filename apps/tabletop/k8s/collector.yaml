@@ -57,6 +57,13 @@ data:
           receivers: [otlp]
           processors: [memory_limiter, resource/provenance, batch]
           exporters: [otlphttp/honeycomb]
+        # Browser logs — chiefly uncaught errors and unhandled rejections,
+        # which have no span to hang attributes on. Same receiver and the same
+        # provenance stamping as traces; reached at /v1/logs on this host.
+        logs:
+          receivers: [otlp]
+          processors: [memory_limiter, resource/provenance, batch]
+          exporters: [otlphttp/honeycomb]
 ---
 apiVersion: apps/v1
 kind: Deployment
