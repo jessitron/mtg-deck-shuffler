@@ -29,7 +29,7 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
 - **Adding logging to a hot path**: logs are not sampled, on purpose. That's affordable only because nothing logs per-request. If you're about to, put it on the span instead — or reopen the sampling question deliberately (README → Invariant 2).
 - **Adding HTTP middleware or changing routes**: confirm spans still get `http.route` and the route-param stamping (`stampRouteParamsOnSpan`) still fires.
 - **A new service/ship**: OTel from its first commit (`notes/add-opentelemetry.md` is the runbook).
-- **Callbacks and timers**: they have no ambient span; anything recorded there is lost or errors (`rooms.ts` is the live example).
+- **Callbacks and timers**: they outlive the span that scheduled them. AsyncLocalStorage still hands you the *context*, so `getActiveSpan()` returns an **ended** span — `addEvent` throws there rather than no-op'ing. Use a log; it still carries the trace id, so it lands on the trace anyway. (`rooms.ts` was the worked example; fixed in JES-136, kept in README as the argument.)
 
 ## Not related to
 

@@ -33,33 +33,47 @@ affordable, so it is not merely a style preference.
 
 ### 1. Never add events to spans. Create trace-participating logs instead. _(Jess, authoritative)_
 
-Logs arrive before the span ends; they work when there is no active span; and they arrive if the span never ends.
+Logs arrive before the span ends; they work when there is no active span; they arrive if the span never ends; and — the case that actually bit us — they arrive when the span has **already ended**.
 Logs cost the same in Honeycomb, and when they have the trace and Span ID, they show up the same as events.
 
-Some things to fix when we have a chance:
+**Violations: none.** All four (all in the Tabletop server) were fixed in `6f319a2` / JES-136.
+`grep -rn "addEvent" apps/*/src services/spine` should return only comments and DOM
+`addEventListener`. Keep it that way.
 
-**Worked example — a live violation, deliberately left unfixed as evidence:**
-`apps/tabletop/src/server/rooms.ts` (`getOrCreateRoom`) does
+**Worked example, kept because it is the best argument for the rule.**
+`apps/tabletop/src/server/rooms.ts` used to call
 `trace.getActiveSpan()?.addEvent("room.session_removed", …)` / `"room.emptied"` inside tldraw's
-`onSessionRemoved` callback. That callback fires from tldraw's throttled `pruneSessions` timer,
-long after the request span ended. Production logs show, repeatedly:
+`onSessionRemoved`, which fires from a throttled `pruneSessions` timer. Production logs showed,
+repeatedly:
 
 ```
 Cannot execute the operation on ended Span ... Error: Operation attempted on ended Span
   at Object.onSessionRemoved (rooms.js:15:40)
 ```
 
-The room-lifecycle events are silently dropped. This is the whole argument for the invariant in one
-callback: **span events need an ambient span that outlives the caller, and callbacks don't have one.**
+**The obvious diagnosis is wrong, and this KB carried the wrong one for a while.** It said the
+callback had *no ambient span*. It has one. AsyncLocalStorage carries the context into the timer,
+so `trace.getActiveSpan()` returns the span that opened the room — **already ended**. That is
+exactly why `addEvent` *threw* rather than quietly doing nothing: with no span at all, the `?.`
+would have short-circuited and you'd have seen silence, not an error. The error message says
+"ended Span"; read it literally.
 
-Full inventory of current violations (4, not 2 — all in the Tabletop server):
+Measured in env `local` when the fix landed: a **2.4 ms** `ws connect` span, and the room-lifecycle
+records emitted **~13 s later**. So the real statement of the rule is:
 
-| Site                                          | Event                  | Ambient span?                                                                                          |
-| --------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------ |
-| `apps/tabletop/src/server/rooms.ts:49`        | `room.session_removed` | **No** — throttled timer callback. Actively erroring in prod.                                          |
-| `apps/tabletop/src/server/rooms.ts:54`        | `room.emptied`         | **No** — same callback.                                                                                |
-| `apps/tabletop/src/server/rooms.ts:66`        | `room.created`         | Sometimes — depends who calls `getOrCreateRoom` (a request, or a ws connect, or nothing).              |
-| `apps/tabletop/src/server/cardArrival.ts:128` | `row.allocated`        | Usually yes (inside a request) — still a violation; should be attributes on the request span or a log. |
+> A callback outlives the span that scheduled it. Span events must be written while the span is
+> open; logs need not be. A log emitted from that callback is still stamped with the trace and span
+> id from the surviving context, so **it lands on the trace anyway** — strictly better than the
+> span event, which was being dropped.
+
+The four sites split by whether a *live* span was available, which is the general rule:
+
+| Was | Became | Why |
+| --- | --- | --- |
+| `rooms.ts` `room.created` | span **attributes** | Both callers (`handleCardArrival`, `server.ts` `ws connect`) are inside a live span; the fact belongs on the request that caused it. |
+| `cardArrival.ts` `row.allocated` | span **attributes** | Always inside `handleCardArrival`'s request span. |
+| `rooms.ts` `room.session_removed` | **log** | Throttled timer; span already ended. |
+| `rooms.ts` `room.emptied` | **log** | Same callback. |
 
 **How to honor this today:** the Node ships have a paved road — `log.info/warn/error(message,
 attributes, error?)` from `apps/shuffler/src/log.ts` or `apps/tabletop/src/server/log.ts`. The
