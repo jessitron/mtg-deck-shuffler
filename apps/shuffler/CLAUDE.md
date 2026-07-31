@@ -140,6 +140,8 @@ version bumps). `/restart-game` carries them forward.
 - **MTGJSON**: `https://mtgjson.com/api/v5/AllDeckFiles.tar.gz` (precons with release dates)
 - **Archidekt API**: `https://archidekt.com/api/decks/{deckId}/` (custom decks)
 - **Scryfall**: image URLs fetched at ingestion via `POST /cards/collection` and stored on the card (`imageUris`/`backImageUris`). `getCardImageUrl()` prefers the stored URL and falls back to `constructCardImageUrl()` (bare CDN path) — the bare path 404s for freshly-released cards, which is why we store the versioned URLs.
+  - **Always call Scryfall through `fetchScryfall()` (`src/scryfall-http.ts`), never bare `fetch`.** Node's default `User-Agent: node` gets a **400** from Scryfall's Cloudflare front end — the API *and* the image CDN. The 400 looks like our bug even though the URL is fine; see `notes/AGENT-NOTES.md`.
+  - `test/verification/verify-proxy-image.sh` checks `/proxy-image` against the live CDN (both faces). Needs network, so it's a script rather than a jest test.
 
 **Adapters** in `src/port-deck-retrieval/`:
 

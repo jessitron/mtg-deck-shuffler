@@ -8,7 +8,7 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - Image URLs are **stored** on the card (`imageUris`/`backImageUris`), fetched from Scryfall at ingestion via `src/port-card-images/` (`ScryfallCardImagesGateway` → `POST /cards/collection`). `getCardImageUrl(card, format, face)` prefers the stored URL; `constructCardImageUrl(scryfallId, format, face)` is the fallback.
 - Both faces still share the same `scryfallId`. At render the back is read from `card.backImageUris`; at ingestion it comes from `card_faces[1].image_uris`. When stored URLs are absent (legacy data, Scryfall miss), the back falls back to the constructed `face=back` path — so the old "same id, swap the path segment" behavior still exists as the fallback.
 - **Why stored:** bare constructed `normal` URLs 404 for freshly-released cards; Scryfall only serves them at the versioned URL (`...jpg?<timestamp>`).
-- Scryfall requires `User-Agent` + `Accept` headers (else 400) — set in `ScryfallCardImagesGateway.fetchBatch`.
+- Scryfall requires a real `User-Agent` (else 400 — Node's default `User-Agent: node` is rejected by their Cloudflare front end, on the image CDN as well as the API). All outbound Scryfall calls go through `fetchScryfall()` in `src/scryfall-http.ts`, which sets it; `/proxy-image` shipped without one and 400'd every card copy until JES-136. Use `fetchScryfall`, not bare `fetch`, for any new Scryfall request.
 - If Scryfall's path scheme changes, the stored URLs still work (verbatim from Scryfall); only the fallback `constructCardImageUrl()` in `src/types.ts` would need updating.
 
 ### Card Repository
@@ -67,6 +67,7 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - Card copy uses the current face's image URL
 - The `copyCardImageToClipboard()` call in the modal receives the face-specific image URL
 - The `/proxy-image` route (CORS proxy for copy) now **looks up the card** from `cardRepository` to use its stored URL, falling back to `constructCardImageUrl(cardId, "png", face)` when the card isn't cached
+- `/proxy-image` fetches from Scryfall via `fetchScryfall()` — see the Scryfall section above. Covered end-to-end (both faces, live CDN) by `test/verification/verify-proxy-image.sh`
 
 ### Being-Played Animation
 - CSS animation for cards being played must target images inside the flip container's nested structure

@@ -1,5 +1,6 @@
 import { CardImageUris, ImageFormat } from "../types.js";
 import { CardImagesPort, FetchedCardImages } from "./types.js";
+import { fetchScryfall } from "../scryfall-http.js";
 
 /** The image formats the app actually requests. We store only these (rather than
  * Scryfall's full image_uris) to keep deck files lean. */
@@ -97,12 +98,11 @@ export class ScryfallCardImagesGateway implements CardImagesPort {
 
     for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
       await this.throttle();
-      const response = await fetch(SCRYFALL_COLLECTION_URL, {
+      const response = await fetchScryfall(SCRYFALL_COLLECTION_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Scryfall requires a User-Agent and Accept header on API requests.
-          "User-Agent": "mtg-deck-shuffler/1.0 (https://github.com/jessitron/mtg-deck-shuffler)",
+          // fetchScryfall adds the User-Agent Scryfall requires; Accept is ours.
           Accept: "application/json",
         },
         body: JSON.stringify({ identifiers: ids.map((id) => ({ id })) }),

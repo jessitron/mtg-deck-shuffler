@@ -53,6 +53,7 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 
 | File | Role |
 |---|---|
+| `src/scryfall-http.ts` | **One door for every outbound Scryfall request.** `SCRYFALL_USER_AGENT` + `fetchScryfall(url, init?, fetchFn?)`. Node's default `User-Agent: node` gets a 400 from Scryfall's Cloudflare front end (API *and* image CDN), so never use bare `fetch` for Scryfall. Used by `/proxy-image`, `ScryfallCardImagesGateway`, and `scryfallSetNames` |
 | `src/port-card-images/types.ts` | `CardImagesPort`, `FetchedCardImages` (`{front, back?}`) |
 | `src/port-card-images/ScryfallCardImagesGateway.ts` | Batches `POST /cards/collection`; pure `mapScryfallCardToImages` reads `card_faces[0/1].image_uris` for DFCs, top-level `image_uris` for single-faced |
 | `src/port-card-images/FakeCardImagesGateway.ts` | Test fake (synthesizes/seeds image URLs) |
@@ -93,6 +94,8 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 | `test/port-card-repository/SqliteCardRepositoryAdapter.test.ts` | Persistence round-trip tests |
 | `test/verification/verify-library-grouping.spec.ts` | E2E: flip preserves group-scoped navigation (game + prep) |
 | `test/verification/verify-prep-commander-flip.spec.ts` | E2E: inline flip of a two-faced commander on the prepare screen (JES-90 regression guard) |
+| `test/scryfallHttp.test.ts` | `fetchScryfall` sends our User-Agent, not Node's default; preserves caller headers (fake fetch, no network) |
+| `test/verification/verify-proxy-image.sh` | Live-CDN check that `/proxy-image` returns real image bytes for **front and back** faces (Archangel Avacyn `485211cd…` is the two-faced case). A shell script, not jest, because it needs network — a unit test can prove we *send* a UA, not that Scryfall *accepts* it |
 | `test/port-tabletop/cardPlayedEvent.test.ts` | F0: payload sends the CURRENT face + face-specific image; never leaks gameCardIndex |
 | `test/port-tabletop/gateways.test.ts`, `sendToTable.test.ts` | Gateways record/fail; send-then-commit sending half |
 | `test/GameState-cardInstanceId.test.ts` | Instance ids: minted in newGame, mint-on-load durable across saves |

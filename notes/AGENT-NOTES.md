@@ -177,3 +177,29 @@ looking right — the same fails-open-invisibly shape as the sampler bug above. 
 to be a decorator wrapping the batch processor, or the built-in `traceBased` config.
 
 _2026-07-27._
+
+## `User-Agent: node` gets a 400 from Scryfall, and it looks like our bug
+
+Node's built-in `fetch` sends `User-Agent: node`. Scryfall — both `api.scryfall.com`
+and the `cards.scryfall.io` image CDN — sits behind Cloudflare, which answers that UA
+with **400 BAD REQUEST**. Not 403, not a rate-limit message: a bare 400, which reads
+like *we* sent a malformed request.
+
+That's what made it slow to diagnose. `/proxy-image` was returning 400 for card copies,
+and the URL it was fetching was completely correct — paste it in a browser, or `curl` it,
+and you get the image. The tell was in the trace: the 400 was on the **outbound** client
+span to `cards.scryfall.io`, not on our own handler's logic. Then:
+
+```
+curl -s -o /dev/null -w '%{http_code}\n' -A node "$url"   # 400
+curl -s -o /dev/null -w '%{http_code}\n'         "$url"   # 200
+```
+
+Two of the three Scryfall callers already set a real User-Agent; `/proxy-image` shipped
+without one. All three now go through `fetchScryfall()` in `apps/shuffler/src/scryfall-http.ts`,
+which sets it — use that for any new Scryfall call rather than bare `fetch`.
+
+Verify with `test/verification/verify-proxy-image.sh` (hits the live CDN; a unit test can
+only prove we *send* a UA, not that Scryfall *accepts* it).
+
+_2026-07-31._

@@ -9,6 +9,8 @@
  * Keys are upper-cased so they line up with MTGJSON's upper-case setCodes.
  */
 
+import { fetchScryfall } from "../../scryfall-http.js";
+
 const SCRYFALL_SETS_URL = "https://api.scryfall.com/sets";
 
 interface ScryfallSet {
@@ -26,12 +28,9 @@ export async function fetchScryfallSetNames(): Promise<Map<string, string>> {
   let url: string | undefined = SCRYFALL_SETS_URL;
 
   while (url) {
-    const response = await fetch(url, {
-      headers: {
-        // Scryfall requires a User-Agent and Accept header on API requests.
-        "User-Agent": "mtg-deck-shuffler/1.0 (https://github.com/jessitron/mtg-deck-shuffler)",
-        Accept: "application/json",
-      },
+    const response = await fetchScryfall(url, {
+      // fetchScryfall adds the User-Agent Scryfall requires; Accept is ours.
+      headers: { Accept: "application/json" },
     });
     if (!response.ok) {
       throw new Error(`Scryfall /sets failed: ${response.status} ${response.statusText}`);

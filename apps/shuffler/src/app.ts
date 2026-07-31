@@ -22,6 +22,7 @@ import { PersistPrepPort, PersistedGamePrep, PERSISTED_GAME_PREP_VERSION, Incomp
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { trace } from "@opentelemetry/api";
 import { getCardImageUrl, constructCardImageUrl } from "./types.js";
+import { fetchScryfall } from "./scryfall-http.js";
 import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -1678,7 +1679,7 @@ export function createApp(
       const card = await cardRepository.getCard(cardId);
       const imageUrl = card ? getCardImageUrl(card, "png", cardFace) : constructCardImageUrl(cardId, "png", cardFace);
 
-      const response = await fetch(imageUrl);
+      const response = await fetchScryfall(imageUrl);
       if (!response.ok) {
         return res.status(response.status).send("Failed to fetch image");
       }

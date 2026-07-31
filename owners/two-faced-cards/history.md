@@ -162,3 +162,30 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
 
 - **`9e3ca60`** - Event contract v0 written as JSON Schema in `contracts/` — `card.played.v1.json` carries `card: {scryfallId, instanceId}` + required sibling `face: "front"|"back"`, exactly the shape this owner's contract.md specified
 - **`2fa5f30`** - The Spine (services/spine/, Ruby on Rails) ingests and validates `card.played` against the schema, failing loudly on unknown name/version; `card.instance_id`/`card.scryfall_id` go onto the ingestion span
+
+## Card Copy Was Broken by a User-Agent (JES-136, 2026-07-31)
+
+Found from telemetry, not a bug report: 400s on `GET /proxy-image` in the `local` Honeycomb
+environment. The trace made the diagnosis — the error was on the **outbound client span** to
+`cards.scryfall.io`, not in our handler — so `/proxy-image` was faithfully passing through a
+400 that Scryfall gave *us*.
+
+- **Cause**: `app.ts` fetched the image with bare `fetch`, so Node sent its default
+  `User-Agent: node`, which Scryfall's Cloudflare front end answers with **400 BAD REQUEST**.
+  The stored image URL was perfectly good — `curl` and a browser both got 200 for it, which is
+  what made this read like our bug. Reproduced in one line: `curl -A node <url>` → 400,
+  any other UA → 200. **Every** card copy was failing, both faces.
+- **Fix**: new `src/scryfall-http.ts` (`SCRYFALL_USER_AGENT`, `fetchScryfall`) — one door for
+  outbound Scryfall calls, setting the header. All three call sites now go through it:
+  `/proxy-image` (the actual fix) plus `ScryfallCardImagesGateway.fetchBatch` and
+  `scryfallSetNames`, which had each duplicated the UA string inline and so were unaffected.
+- **Why the duplication mattered**: this owner's `interactions.md` already recorded "Scryfall
+  requires `User-Agent` + `Accept` headers (else 400)" — but scoped the note to
+  `ScryfallCardImagesGateway`. The knowledge existed and the newest call site never got it.
+  That's why the constant is now shared rather than re-noted.
+- **No face logic changed**: `getCardImageUrl`, `constructCardImageUrl`, `backImageUris`, and
+  the `face=front|back` param handling are untouched.
+- **Tests**: `test/scryfallHttp.test.ts` (fake fetch, asserts the UA goes out) and
+  `test/verification/verify-proxy-image.sh` (live CDN, front + back). The script exists because
+  the unit test can only prove we *send* a User-Agent, not that Scryfall *accepts* it — which
+  is exactly the gap the bug lived in.
