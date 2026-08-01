@@ -16,3 +16,9 @@
 - is it possible to make something happen when we drag a card into exile or the library? for instance, could it get smaller or grayer?
 
 - The areas are immovable. I want to understand that. Are they part of the background? Can we change their appearance? Can we make it possible for players to change their size or move them?
+
+- lands should leave a space between each other and the side of the playmat
+
+- we need a way to flip cards. Is that something we could add to the card's submenu?
+
+- persistence. Right now, shutting down the app and starting it up, the table is gone.
