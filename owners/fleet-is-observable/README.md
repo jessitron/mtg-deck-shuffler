@@ -291,6 +291,25 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers (
   - Confirmed in env `local` that trace-correlated logs render as `meta.annotation_type =
     span_event`, which is the evidence that banning `addEvent` costs no fidelity.
 
+- **JES-140 (2026-08-01) "The player area as a real table"** — a new Tabletop
+  endpoint, `POST /api/tables/:tableName/events` (`seatJoined.ts`,
+  `handleSeatJoined`), follows the exact same posture as the existing
+  card-arrival endpoint: `trace.getActiveSpan()?.setAttributes(...)` inside the
+  request span (`event.id`, `table.name`, `seat.id`, `player.name`, dedup
+  outcome), never `span.addEvent`. The shared shape-drawing helper
+  `tableFurniture.ts`'s `ensurePlayerArea()` stamps `seat.id`/`player.name`/
+  `seat.index`/`playmat.image_present`/`card_back.image_present` on the active
+  span — the same pattern as the row-allocation attribute it replaced. New on
+  the Shuffler side: `sendToTable.ts`'s `sendSeatJoinedBestEffort()` is the
+  fleet's first *deliberately* best-effort send (unlike `sendCardToTableFirst`,
+  which throws) — on gateway failure it sets span attributes
+  (`seat_joined.send_failed`, `table.name`, `seat.id`) **and** calls
+  `log.warn(...)` with the error, because Shuffle Up must not fail just because
+  the Tabletop is unreachable. This is a genuine "log for a real failure path"
+  callers can imitate: attributes first, then the log for the stack, exactly
+  the house pattern above. No new telemetry init path, ship, or OTel dependency
+  change.
+
 - `4dbebbd` "Deploy markers in Honeycomb, post-rollout, for all three ships" — deploys had left no
   trace in Honeycomb at all, so correlating a change with a release meant matching wall-clock against
   local-only git tags. What the wiring taught, both worth remembering:
