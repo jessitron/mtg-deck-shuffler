@@ -20,7 +20,9 @@ The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-t
 ## Repo Layout
 
 This is a polyglot monorepo (npm workspaces). The fleet level holds `notes/`,
-`.claude/`, `owners/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`.
+`.claude/`, `owners/`, `scripts/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`.
+`scripts/` is for shell helpers shared by the ships' own scripts — currently
+`preflight-aws.sh` (`check_aws_credentials`), sourced by all three `deploy.sh`.
 The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and `./deploy.sh`):
 
 - `apps/shuffler/` — the Shuffler: Express + HTMX deck manager and game screen;

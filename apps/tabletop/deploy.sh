@@ -52,8 +52,13 @@ echo "📋 Checking prerequisites..."
 command -v docker >/dev/null 2>&1 || { echo "❌ Docker not installed"; exit 1; }
 command -v kubectl >/dev/null 2>&1 || { echo "❌ kubectl not installed"; exit 1; }
 command -v aws >/dev/null 2>&1 || { echo "❌ AWS CLI not installed"; exit 1; }
+
+# Credentials first — see scripts/preflight-aws.sh for why this precedes the kubectl check.
+source "$REPO_ROOT/scripts/preflight-aws.sh"
+check_aws_credentials "$ECR_REPO" || exit 1
+
 kubectl cluster-info >/dev/null 2>&1 || { echo "❌ kubectl not connected to cluster"; exit 1; }
-echo "✅ Prerequisites check passed"
+echo "✅ Prerequisites check passed (AWS account ${AWS_ACCOUNT}, cluster $(kubectl config current-context))"
 
 echo ""
 echo "🐳 Building Docker image..."

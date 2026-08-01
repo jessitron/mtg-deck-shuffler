@@ -209,10 +209,18 @@ _2026-07-31._
 An expired AWS SSO token used to surface at the ECR push — several minutes into
 `apps/shuffler/deploy.sh`, after a clean, a `tsc` build, and a full Docker build — as
 `aws: [ERROR]: Error when retrieving token from sso` followed by the cryptic
-`password is empty`. There's now a preflight `aws sts get-caller-identity` at the top
-that fails in under a second with the exact `aws sso login` command to run. It also
-compares the account against the one in `ECR_REPO`, since a valid login to the *wrong*
-account otherwise fails much later with an opaque permissions error.
+`password is empty`. There's now a preflight `aws sts get-caller-identity` that fails in
+under a second with the exact `aws sso login` command to run. It also compares the account
+against the one in the ECR URL, since a valid login to the *wrong* account otherwise fails
+much later with an opaque permissions error.
+
+It lives in **`scripts/preflight-aws.sh`** at the repo root — `check_aws_credentials <ecr-url>`,
+sourced by all three ships' `deploy.sh`. Shared rather than pasted three times *because* of
+the bug in the entry above this one: three Scryfall call sites each carried their own copy of
+a required header, the newest didn't, and card copy was broken in prod for a week. (The
+Tabletop's deliberately-duplicated `log.ts` is not a counterexample — that duplication buys
+independence between two Dockerfiles on incompatible OTel versions. A shell helper that runs
+only on Jess's machine, from one checkout, buys nothing by being copied.)
 
 **The credential check must stay ahead of the `kubectl cluster-info` check.** EKS auth
 goes through the aws CLI, so an expired token makes `kubectl cluster-info` fail too — and
@@ -223,7 +231,7 @@ depending on cache state — the worst kind.)
 
 `aws sso login` opens a browser, so it's Jess's to run, not an agent's.
 
-Only the Shuffler's `deploy.sh` has this guard; `apps/tabletop/deploy.sh` and
-`services/spine/deploy.sh` don't yet.
+All three ships' `deploy.sh` use it. If you add a fourth, source the helper and call it
+before the `kubectl cluster-info` check.
 
 _2026-08-01._
