@@ -30,12 +30,32 @@ that new arrival trigger.
   not face. Face is state; if a future gesture flips the card on the table, the
   shape's image swaps but its `meta` identity does not change.
 
+## Rotation has a custom ShapeUtil now (JES-144, 2026-08-01)
+
+`apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx` extends tldraw's
+built-in `ImageShapeUtil` (cards stay `type: "image"` — no new shape type) and
+overrides only `onClick`: if `shape.meta?.instanceId` is present (an MTG card,
+not a furniture image like the playmat/library background, which are also
+`type: "image"` but `isLocked: true` and never reach `onClick`), it rotates the
+shape 90° and returns the partial; otherwise it returns `undefined` and tldraw's
+default behavior applies. Registered via `shapeUtils={[MtgCardImageShapeUtil]}`
+on `<Tldraw>` in `TablePage.tsx`. `rotation` is a base tldraw shape-record field
+(already present, hardcoded to `0` at arrival) — this didn't need a schema or
+contract change. Verified by `test/verification/verify-card-rotate.spec.ts`
+(bounding-box width/height swap after click).
+
+**Watch point:** `onClick` is now spoken for by rotate. The future flip gesture
+(below) needs a different trigger — a context-menu action, per JES-144's own
+scoping — not `onClick`.
+
 ## Future: the flip gesture (Mountain 2)
 
-When the custom CardShape lands, flipping on the table becomes a physical event the
-Spine can hear (`card.flipped` or similar, carrying the new `face`). The back image
-URL is derivable from `scryfallId` (or sent along); do NOT bake "front-ness" into
-shape identity.
+When flip lands, it should reuse this same `MtgCardImageShapeUtil` (the shared
+custom-ShapeUtil investment JES-144/JES-149 were built for) but via a
+context-menu action, not `onClick` (that's rotate's). Flipping on the table
+becomes a physical event the Spine can hear (`card.flipped` or similar,
+carrying the new `face`). The back image URL is derivable from `scryfallId` (or
+sent along); do NOT bake "front-ness" into shape identity.
 
 ## Watch points
 

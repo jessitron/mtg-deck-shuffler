@@ -4,6 +4,9 @@ import "tldraw/tldraw.css";
 import { useSync } from "@tldraw/sync";
 import { setGlobalAttrs, currentTraceparent, inSpan } from "./observability";
 import { useCardArrivalSpans } from "./useCardArrivalSpans";
+import { MtgCardImageShapeUtil } from "./shapes/MtgCardImageShapeUtil";
+
+const shapeUtils = [MtgCardImageShapeUtil];
 
 /**
  * The table: a synced tldraw canvas. Anyone with the URL joins — spectators
@@ -76,7 +79,7 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
       {store.status === "loading" ? (
         <div style={centered}>Joining table &ldquo;{tableSlug}&rdquo;…</div>
       ) : (
-        <Tldraw store={store.store} deepLinks licenseKey={licenseKey} />
+        <Tldraw store={store.store} deepLinks licenseKey={licenseKey} shapeUtils={shapeUtils} />
       )}
     </div>
   );
