@@ -70,8 +70,21 @@ _2026-07-27._
 - **Card shapes carry no trace context**: correlation is by `card.instance_id` span
   attribute (traces follow requests; cards persist). Don't add a traceparent to
   `shape.meta`.
+- **tldraw (5.2.5, `@tldraw/editor`'s `ShapeUtil`) has the hooks the game needs, confirmed
+  by reading the installed `.d.ts`**: `onDragShapesOver`/`onDropShapesOver` fire on a
+  *target* shape's `ShapeUtil` when another shape is dragged over/dropped onto it — this is
+  literally how tldraw's own frame shape does reparenting, and it's the primitive for "card
+  dragged into graveyard/exile/library." `onRotateStart`/`onRotate`/`onRotateEnd` and
+  `onTranslate`/`onTranslateEnd` live on the moving shape's `ShapeUtil` and give rotation and
+  move-from-here-to-there. **The catch**: cards and the zone regions are stock `image`/`geo`
+  shapes today (no custom `ShapeUtil` at all — see `apps/tabletop/src/server/cardArrival.ts`,
+  `tableFurniture.ts`). None of these callbacks fire on stock shapes; getting them means
+  subclassing `ShapeUtil` for cards (rotate/translate hooks) and for the zone regions
+  (drag/drop-over hooks) client-side, registered via `<Tldraw shapeUtils={...}>` in
+  `TablePage.tsx`. So: architecture works, but it's a client-side rewrite of how shapes are
+  registered, not a prop tweak.
 
-_2026-07-27, Tabletop v0._
+_2026-07-27, Tabletop v0. Updated 2026-08-01 with tldraw ShapeUtil hook findings._
 
 ## A blank table in prod is the tldraw license gate, not your code
 
