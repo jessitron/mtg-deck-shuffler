@@ -21,8 +21,8 @@ The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-t
 
 This is a polyglot monorepo (npm workspaces). The fleet level holds `notes/`,
 `.claude/`, `owners/`, `scripts/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`.
-`scripts/` is for shell helpers shared by the ships' own scripts — currently
-`preflight-aws.sh` (`check_aws_credentials`), sourced by all three `deploy.sh`.
+`scripts/` is for shell helpers shared by the ships' own scripts — `preflight-aws.sh`
+(`check_aws_credentials`) and `deploy-marker.sh`, both used by all three `deploy.sh`.
 The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and `./deploy.sh`):
 
 - `apps/shuffler/` — the Shuffler: Express + HTMX deck manager and game screen;
@@ -63,6 +63,8 @@ Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernit
 - **Local tests**: environment `local`.
 - **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).
 - **API key sourcing**: each ship's `.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` **at the repo root** (sourced on `cd` into the repo). So `.be` must be sourced **before** `.env`, or OTLP export silently 401s ("unknown API key"). The `verify.sh` scripts source both in that order; if you start a server by hand for telemetry, do the same.
+- **Two keys, two environments.** `HONEYCOMB_API_KEY` is the **`local`** ingest key (access: `createDatasets` only). `HONEYCOMB_MARKER_KEY`, also in `.be`, is a **`mtg-deck-shuffler`** (prod) key with Markers access — used only by `scripts/deploy-marker.sh`. Don't cross them: the ingest key cannot write markers, and marking the wrong environment succeeds silently, which is why the marker script checks the key's environment via `/1/auth` before posting.
+- **Deploys leave a marker.** All three `deploy.sh` call `scripts/deploy-marker.sh <ship>` *after* a successful rollout (type `deploy`, message `deploy <ship> <short-sha>`, linking the GitHub commit), and each tags the commit `deploy-<ship>-<timestamp>` locally. The marker call is best-effort (`|| true`) — the deploy has already landed, so a marker problem must never read as a failed deploy.
 
 - **Recording that something happened**: put it on the span as **attributes** — always the
   first choice, and free in Honeycomb. When there's no live span to hang it on (startup,

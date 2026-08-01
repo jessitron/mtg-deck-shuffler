@@ -4,7 +4,12 @@ set -e
 # Configuration - EDIT THESE VALUES
 AWS_REGION="us-west-2"  # Change to your region
 
-# Load local config (ECR_REPO lives here, alongside the app's OTEL settings)
+# .be before .env, the fleet's standing rule (root CLAUDE.md → Observability). .be holds
+# the Honeycomb keys the deploy marker needs; .env holds ECR_REPO and the app's OTEL settings.
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo ../..)"
+if [ -f "$REPO_ROOT/.be" ]; then
+    source "$REPO_ROOT/.be"
+fi
 if [ -f .env ]; then
     source .env
 fi
@@ -13,8 +18,6 @@ if [ -z "$ECR_REPO" ]; then
     echo "ECR_REPO not set. Add 'export ECR_REPO=<your-ecr-repo>/mtg-deck-shuffler' to .env"
     exit 1
 fi
-HONEYCOMB_API_KEY=""  # Add your Honeycomb API key here
-
 # Derived values
 IMAGE_TAG="$(git rev-parse --short HEAD)"
 FULL_IMAGE_NAME="${ECR_REPO}:${IMAGE_TAG}"
@@ -31,7 +34,6 @@ command -v kubectl >/dev/null 2>&1 || { echo "❌ kubectl not installed"; exit 1
 command -v aws >/dev/null 2>&1 || { echo "❌ AWS CLI not installed"; exit 1; }
 
 # Credentials first — see scripts/preflight-aws.sh for why this precedes the kubectl check.
-REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo ../..)"
 source "$REPO_ROOT/scripts/preflight-aws.sh"
 check_aws_credentials "$ECR_REPO" || exit 1
 
@@ -105,6 +107,11 @@ ALB_URL=$(kubectl get ingress mtg-deck-shuffler-ingress -o jsonpath='{.status.lo
 echo ""
 echo "🌐 App will be available at: http://${ALB_URL}"
 echo "   (ALB may take a few minutes to provision and configure)"
+
+# Marker AFTER a successful rollout, so a graph line means a deploy that actually landed.
+# Non-fatal: the deploy is already done, and a missing marker must not report as failure.
+echo ""
+"$REPO_ROOT/scripts/deploy-marker.sh" shuffler || true
 
 echo ""
 echo "🏷️  Creating git tag..."

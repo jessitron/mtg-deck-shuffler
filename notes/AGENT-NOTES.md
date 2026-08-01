@@ -259,4 +259,19 @@ depending on cache state — the worst kind.)
 All three ships' `deploy.sh` use it. If you add a fourth, source the helper and call it
 before the `kubectl cluster-info` check.
 
+Its companion is `scripts/deploy-marker.sh` — same shared-helper pattern, called at the
+*end* of each deploy. Two gotchas worth knowing there:
+
+- **`HONEYCOMB_API_KEY` cannot write markers.** It's the **`local`** environment's ingest
+  key with `createDatasets` access only. Deploys target prod, so the marker needs
+  `HONEYCOMB_MARKER_KEY` (environment `mtg-deck-shuffler`, Markers access) — a separate
+  variable in `.be`. Both live there; don't assume one key covers Honeycomb.
+- **A marker in the wrong environment succeeds.** There's no error to notice; the line just
+  appears somewhere you never look. So the script resolves the key's environment through
+  `GET /1/auth` and refuses to post on a mismatch, rather than trusting the variable name.
+
+The Shuffler's `deploy.sh` now sources `.be` (the other two already did) because the marker
+key lives there — and its old `HONEYCOMB_API_KEY=""` line, left over from the commented-out
+`kubectl create secret` block, was deleted: it blanked the key it claimed to hold.
+
 _2026-08-01._

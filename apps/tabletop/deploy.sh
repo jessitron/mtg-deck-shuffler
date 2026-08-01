@@ -105,6 +105,12 @@ if ! node test/verification/check-deployed-canvas.mjs https://table.jessitron.ho
     echo "⚠️  Deploy succeeded but the table renders BLANK. See above."
 fi
 
+# Marker AFTER a successful rollout, so a graph line means a deploy that actually landed.
+# Non-fatal: the deploy is already done, and a missing marker must not report as failure.
+# Still posted when the canvas check above warns — the deploy landed; that's what's marked.
+echo ""
+"$REPO_ROOT/scripts/deploy-marker.sh" tabletop || true
+
 echo ""
 echo "🏷️  Creating git tag..."
 DEPLOY_TAG="deploy-tabletop-$(date +%Y%m%d-%H%M%S)"

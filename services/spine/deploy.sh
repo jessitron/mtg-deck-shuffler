@@ -79,6 +79,17 @@ echo "🎉 Deployment complete!"
 kubectl get pods -l app=spine
 echo ""
 echo "🌐 Admin screen: https://spine.jessitron.honeydemo.io/admin/tables"
+# Marker AFTER a successful rollout, so a graph line means a deploy that actually landed.
+# Non-fatal: the deploy is already done, and a missing marker must not report as failure.
+echo ""
+"$REPO_ROOT/scripts/deploy-marker.sh" spine || true
+
+echo ""
+echo "🏷️  Creating git tag..."
+DEPLOY_TAG="deploy-spine-$(date +%Y%m%d-%H%M%S)"
+git tag "$DEPLOY_TAG"
+echo "   Tagged as: $DEPLOY_TAG"
+
 echo ""
 echo "🔍 Useful commands:"
 echo "   View logs: kubectl logs -f deployment/spine"
