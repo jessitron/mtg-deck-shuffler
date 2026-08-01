@@ -203,3 +203,27 @@ Verify with `test/verification/verify-proxy-image.sh` (hits the live CDN; a unit
 only prove we *send* a UA, not that Scryfall *accepts* it).
 
 _2026-07-31._
+
+## `deploy.sh` checks AWS credentials first, and the order matters
+
+An expired AWS SSO token used to surface at the ECR push — several minutes into
+`apps/shuffler/deploy.sh`, after a clean, a `tsc` build, and a full Docker build — as
+`aws: [ERROR]: Error when retrieving token from sso` followed by the cryptic
+`password is empty`. There's now a preflight `aws sts get-caller-identity` at the top
+that fails in under a second with the exact `aws sso login` command to run. It also
+compares the account against the one in `ECR_REPO`, since a valid login to the *wrong*
+account otherwise fails much later with an opaque permissions error.
+
+**The credential check must stay ahead of the `kubectl cluster-info` check.** EKS auth
+goes through the aws CLI, so an expired token makes `kubectl cluster-info` fail too — and
+it reports "❌ kubectl not connected to cluster", which sends you off debugging your
+kubeconfig when the real problem is the token. (Not hypothetical: `cluster-info` can also
+*succeed* on cached creds while the token is expired, so the failure is intermittent
+depending on cache state — the worst kind.)
+
+`aws sso login` opens a browser, so it's Jess's to run, not an agent's.
+
+Only the Shuffler's `deploy.sh` has this guard; `apps/tabletop/deploy.sh` and
+`services/spine/deploy.sh` don't yet.
+
+_2026-08-01._

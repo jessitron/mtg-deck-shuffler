@@ -30,9 +30,41 @@ command -v docker >/dev/null 2>&1 || { echo "❌ Docker not installed"; exit 1; 
 command -v kubectl >/dev/null 2>&1 || { echo "❌ kubectl not installed"; exit 1; }
 command -v aws >/dev/null 2>&1 || { echo "❌ AWS CLI not installed"; exit 1; }
 
+# Check AWS credentials BEFORE building anything. An expired SSO token used to
+# surface at the ECR push -- after a clean, a tsc build, and a full Docker build,
+# several minutes in, as the cryptic "password is empty". This fails in under a second.
+#
+# This runs BEFORE the kubectl check on purpose: EKS auth goes through the aws CLI,
+# so an expired token ALSO makes `kubectl cluster-info` fail, with the misleading
+# "not connected to cluster". Diagnose the real cause first.
+if ! AWS_ACCOUNT="$(aws sts get-caller-identity --query Account --output text 2>/dev/null)"; then
+    echo "❌ AWS credentials aren't valid${AWS_PROFILE:+ for profile '$AWS_PROFILE'}."
+    echo "   Your SSO token has almost certainly expired."
+    echo ""
+    echo "   Refresh it (this opens a browser, so run it yourself):"
+    echo "       aws sso login${AWS_PROFILE:+ --profile $AWS_PROFILE}"
+    echo ""
+    echo "   Then run ./deploy.sh again. Nothing has been built or deployed."
+    exit 1
+fi
+
+# The ECR repo is account-qualified, so a valid login to the WRONG account would
+# otherwise fail much later with an opaque permissions error on push.
+ECR_ACCOUNT="${ECR_REPO%%.*}"
+if [ "$AWS_ACCOUNT" != "$ECR_ACCOUNT" ]; then
+    echo "❌ Logged into the wrong AWS account."
+    echo "   You are:      ${AWS_ACCOUNT}${AWS_PROFILE:+ (profile '$AWS_PROFILE')}"
+    echo "   ECR wants:    ${ECR_ACCOUNT}  (from ECR_REPO in .env)"
+    echo ""
+    echo "   Switch profiles with AWS_PROFILE=<profile> ./deploy.sh, or fix ECR_REPO in .env."
+    echo "   Nothing has been built or deployed."
+    exit 1
+fi
+
 # Test kubectl connection
 kubectl cluster-info >/dev/null 2>&1 || { echo "❌ kubectl not connected to cluster"; exit 1; }
-echo "✅ Prerequisites check passed"
+
+echo "✅ Prerequisites check passed (AWS account ${AWS_ACCOUNT}, cluster $(kubectl config current-context))"
 
 # Build application
 echo ""
