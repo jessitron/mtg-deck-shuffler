@@ -108,6 +108,29 @@ lives in its own module with tests (`apps/shuffler/src/telemetry-sampler.ts` +
 `apps/shuffler/test/telemetry-sampler.test.ts`), and reads **both** semconv spellings of every
 attribute it depends on.
 
+### 5. Every span says which build it came from. _(FUTURE — not true yet; JES-139)_
+
+**Not yet implemented.** Recorded here at Jess's request (2026-08-01) so it's held as an invariant
+from the moment it lands rather than being rediscovered later.
+
+The intent: each ship carries its deployed git version as an OTel **resource attribute**
+(`service.version` and/or `deployment.sha`), fed by the short sha `deploy.sh` already computes for the
+image tag — Docker build arg → env var → SDK init. A resource attribute lands on every span *and*
+every log for free, with no per-call-site work.
+
+Why it isn't covered by deploy markers: a marker marks **a moment on the time axis**. Nothing on an
+individual span says which build emitted it, so "is this error only on the new build?" is answered by
+eyeballing which side of a marker line events fall on. That breaks down with overlapping pods,
+gradual rollouts, or two deploys close together. Today's `/proxy-image` fix was confirmed by querying
+a window *after* rollout and trusting the traffic came from the new pod; a `deployment.sha` breakdown
+would have shown it outright.
+
+**When it lands, this becomes a standing check**: a new ship, or a new telemetry init path, must carry
+the deployed version. Otherwise a fourth ship ships silently without it — precisely how
+`/proxy-image` came to be the one Scryfall call site missing the required `User-Agent` (`dbb2244`).
+The Tabletop's **browser** telemetry counts too: a user holding a stale bundle after a deploy is
+currently invisible, and is arguably the more valuable half.
+
 ## How it works now
 
 _(This is the negotiable part — update this section whenever telemetry wiring changes.)_
@@ -169,10 +192,44 @@ or export silently 401s ("unknown API key"). Who does what:
 - repo-root `run` — sources `.be`, warns if absent, then delegates. ✅
 - `apps/tabletop/run`, `services/spine/run`, `apps/shuffler/verify.sh`, `apps/tabletop/verify.sh` —
   each walk `.be` then `"$REPO_ROOT/.be"`, then `.env`. ✅
+- all three `deploy.sh` — `.be` then `.env`. `apps/shuffler/deploy.sh` joined them on 2026-08-01
+  because the deploy marker's key lives in `.be`; the same commit deleted its dead
+  `HONEYCOMB_API_KEY=""` line (left over from a commented-out `kubectl create secret` block), which
+  **blanked the key it claimed to hold**. ✅
 - **`apps/shuffler/run` deliberately does NOT source `.be`** — it sources only `.env`. `.be` also
-  runs `aws sso login` / kubectl setup, too heavy for an ordinary app start. Documented in
-  `notes/AGENT-NOTES.md` → "Don't source `.be` from `./run`". If a hand-started Shuffler 401s,
-  source `.be` in your shell first, then `.env` (or start via the repo-root `run`).
+  runs `kubectl config use-context orion`, a side effect on your kube context that's wrong for an
+  ordinary app start. Documented in `notes/AGENT-NOTES.md` → "Don't source `.be` from `./run`". If a
+  hand-started Shuffler 401s, source `.be` in your shell first, then `.env` (or use the repo-root `run`).
+
+**There are TWO Honeycomb keys in `.be`, and they are not interchangeable.** This is the newest way
+to get telemetry wiring wrong:
+
+| Variable                | Environment          | Access                     | Used by                     |
+| ----------------------- | -------------------- | -------------------------- | --------------------------- |
+| `HONEYCOMB_API_KEY`     | `local`              | `createDatasets` only      | OTLP export from every ship |
+| `HONEYCOMB_MARKER_KEY`  | `mtg-deck-shuffler`  | `markers`, `events`, `queries`, … | `scripts/deploy-marker.sh` only |
+
+The ingest key **cannot** write markers *and* points at the wrong environment, so reaching for the
+familiar variable name fails twice over. Verify a key with
+`curl -s https://api.honeycomb.io/1/auth -H "X-Honeycomb-Team: $KEY"` — it returns the environment
+and the access flags.
+
+**Deploys leave a marker** (`scripts/deploy-marker.sh`, shared by all three `deploy.sh` alongside
+`scripts/preflight-aws.sh`). Called as `scripts/deploy-marker.sh <ship> || true` **after** a
+successful `kubectl rollout status`, so a line on a graph means a deploy that actually landed. Posts
+type `deploy`, message `deploy <ship> <short-sha>`, `url` linking the GitHub commit. Two deliberate
+properties:
+
+- **Best-effort.** The deploy has already happened by the time it runs, so a marker problem must
+  never read as a failed deploy — hence `|| true` and warnings instead of errors.
+- **It refuses to mark the wrong environment.** A marker posted to the wrong environment
+  **succeeds** — no error, the line just lands somewhere nobody looks. Same fails-open-invisibly
+  shape as the sampler bug in History. So the script resolves the key's environment through
+  `GET /1/auth` and declines on mismatch rather than trusting a variable name.
+
+Each `deploy.sh` also tags the commit locally (`deploy-<ship>-<timestamp>`; the Spine gained its tag
+in the same change). **Those tags are never pushed**, so the Honeycomb marker is the more durable
+record of what shipped when.
 
 **Where the data lands.** Honeycomb team `modernity`, MCP server `honeycomb-modernity`.
 Local → env `local`, datasets `mtg-deck-shuffler`, `mtg-deck-shuffler-web`, `mtg-tabletop`,
@@ -233,6 +290,20 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers (
     for testing *both* copies of anything deliberately duplicated.
   - Confirmed in env `local` that trace-correlated logs render as `meta.annotation_type =
     span_event`, which is the evidence that banning `addEvent` costs no fidelity.
+
+- `4dbebbd` "Deploy markers in Honeycomb, post-rollout, for all three ships" — deploys had left no
+  trace in Honeycomb at all, so correlating a change with a release meant matching wall-clock against
+  local-only git tags. What the wiring taught, both worth remembering:
+  - **`HONEYCOMB_API_KEY` is not the only Honeycomb key any more.** It's the `local` environment's
+    ingest key with `createDatasets` access only — it cannot write markers, and it targets the wrong
+    environment. Markers use `HONEYCOMB_MARKER_KEY`. Reaching for the familiar name would have failed
+    twice.
+  - **Writing to the wrong Honeycomb environment succeeds.** There's no error to notice; the data
+    lands somewhere you never look. That's the third instance of the fails-open-invisibly pattern in
+    this file (sampler needle, sibling log processor, now markers), which is why the marker script
+    resolves the key's environment via `GET /1/auth` instead of trusting configuration.
+
+  Filed `JES-139` off the back of it: markers mark a moment, not a build — see Invariant 5.
 
 ## Related reading
 
