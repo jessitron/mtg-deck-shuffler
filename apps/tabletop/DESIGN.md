@@ -7,6 +7,7 @@ sizes, and who creates what when. It deliberately says nothing about rules.
 Status: **design, not yet built.** Today's canvas has a v0-minimal geography
 (see `src/server/cardLayout.ts`) that this supersedes. The delta is at the bottom.
 The original spoken ramble this was distilled from is preserved at the end.
+Tracked as [JES-140](https://linear.app/honeycombio/issue/JES-140).
 
 ## The goal
 

@@ -204,6 +204,8 @@ Discord anyway, I'll tell you the table name."
   interpreter gradually learns to read.
 - Emits physical events to the Spine. Knows card identity, never card meaning.
 - Hosts the collapsible narration/chat panel UI.
+- Geometry and behavior of the player area (playmat, library, graveyard, exile, Stack):
+  `apps/tabletop/DESIGN.md` (JES-140).
 
 ### Spine
 

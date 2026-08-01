@@ -19,6 +19,9 @@ event the Spine can hear.
 2. **The physics of Magic** — a custom CardShape that taps (rotate), flips, holds
    counters and notes; zone areas for Graveyard, Exile, and the Stack (geography, not
    rules). Common movements become gestures; every gesture is a physical event.
+   _Geometry and behavior specified in `DESIGN.md` (in this directory) — a full player
+   area (playmat, library, graveyard, exile) drawn at shuffle-up, before any card is
+   played. Not yet built._
 3. **The window on the game** — the collapsible narration/chat panel: the running
    interpretation, the interpreter's questions, players' answers and corrections.
    Spectators get the public view.

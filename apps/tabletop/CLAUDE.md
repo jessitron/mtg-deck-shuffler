@@ -14,6 +14,11 @@ places cards from the Shuffler.
 
 See `README.md` (in this directory) for Modes and SCAFFOLDING callouts.
 
+The next mountain — a real player area (playmat, library, graveyard, exile, Stack) drawn
+at shuffle-up instead of today's bare battlefield row — is specified in `DESIGN.md` (in
+this directory, JES-140). Read it before touching `src/server/cardLayout.ts` or
+`cardArrival.ts`.
+
 ## Commands
 
 All from `apps/tabletop/`:
