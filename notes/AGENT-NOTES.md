@@ -161,8 +161,19 @@ touch one ship's telemetry, run the other's tests too.
 `log.ts` (both Node ships) emits OTel logs that carry the active span's trace/span id.
 Honeycomb renders those with `meta.annotation_type = span_event`, so they appear on the
 trace exactly like a span event would — which is the whole reason we can ban `addEvent`
-and lose nothing. Logs with no active span arrive untethered, which is the point: that's
-the case `addEvent` cannot serve (see the `rooms.ts` timer callback).
+and lose nothing. Logs with no active span arrive untethered, which is fine.
+
+**The case `addEvent` cannot serve is subtler than "no span", and the first version of
+this note got it wrong.** In `rooms.ts`, tldraw's throttled `pruneSessions` callback *does*
+have an ambient span — AsyncLocalStorage carries the context into the timer — but that span
+has **ended** (measured: 2.4 ms `ws connect` span, records emitted ~13 s later). So
+`getActiveSpan()` returns a live object you cannot write to, which is why `addEvent` threw
+`Operation attempted on ended Span` rather than silently no-op'ing through the `?.`. If you
+see that error, the fix is a log, not a null check. And the log still carries the trace id,
+so it lands on the trace anyway.
+
+The rule to carry: **a callback outlives the span that scheduled it.** Span events must be
+written while the span is open; logs need not be.
 
 **Logs deliberately ignore the trace sampler.** A LogRecord does not inherit its span's
 sampling decision, and enabling that (`traceBased` in the logger config) would be a
@@ -176,7 +187,21 @@ a record. `MultiLogRecordProcessor.onEmit` forwards to every processor unconditi
 looking right — the same fails-open-invisibly shape as the sampler bug above. Filtering has
 to be a decorator wrapping the batch processor, or the built-in `traceBased` config.
 
-_2026-07-27._
+_2026-07-27, corrected 2026-07-31 (the ended-span finding)._
+
+## A throwaway script that imports a ship's deps has to live inside that ship
+
+Verifying telemetry by hand means running something that imports `@opentelemetry/api` or
+`@playwright/test`. Put that file in your scratchpad and it fails with `ERR_MODULE_NOT_FOUND`:
+Node resolves from the **file's** location, not the cwd, and the scratchpad is outside the
+workspace. Worse, the two ships have *different* copies of the OTel packages (0.219 hoisted
+at the root, 0.221 nested under `apps/tabletop/node_modules`), so resolving from the wrong
+place can silently pick the wrong version rather than just failing.
+
+Copy the entry into that ship's gitignored `dist/` and run it from there, with a
+`trap 'rm -f "$ENTRY"' EXIT` to clean up. Cost two round-trips before the penny dropped.
+
+_2026-07-31._
 
 ## `User-Agent: node` gets a 400 from Scryfall, and it looks like our bug
 

@@ -64,6 +64,13 @@ Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernit
 - **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).
 - **API key sourcing**: each ship's `.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` **at the repo root** (sourced on `cd` into the repo). So `.be` must be sourced **before** `.env`, or OTLP export silently 401s ("unknown API key"). The `verify.sh` scripts source both in that order; if you start a server by hand for telemetry, do the same.
 
+- **Recording that something happened**: put it on the span as **attributes** — always the
+  first choice, and free in Honeycomb. When there's no live span to hang it on (startup,
+  callbacks, timers, uncaught browser errors), use that ship's logger: `src/log.ts` in the
+  Shuffler, `src/server/log.ts` in the Tabletop, `logError()` in the Tabletop's browser
+  wrapper. The Spine has no logs pipeline yet (JES-137). **Never `span.addEvent`** — a
+  callback outlives the span that scheduled it, and writing to an ended span throws.
+
 Ship-specific telemetry details (sampling, datasets, probe endpoints) are in each
 ship's `CLAUDE.md`. Before touching telemetry wiring, consult the fleet-is-observable
 owner (`owners/fleet-is-observable/`).
