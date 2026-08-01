@@ -163,6 +163,20 @@ This was one of the hardest parts. Multiple attempts to make flip work inside th
 - **`9e3ca60`** - Event contract v0 written as JSON Schema in `contracts/` — `card.played.v1.json` carries `card: {scryfallId, instanceId}` + required sibling `face: "front"|"back"`, exactly the shape this owner's contract.md specified
 - **`2fa5f30`** - The Spine (services/spine/, Ruby on Rails) ingests and validates `card.played` against the schema, failing loudly on unknown name/version; `card.instance_id`/`card.scryfall_id` go onto the ingestion span
 
+## The Table Got a Real Geography, Face Logic Untouched (JES-140, 2026-08-01)
+
+- The Tabletop's player-area geometry was rewritten per `apps/tabletop/DESIGN.md`:
+  a playmat/library/graveyard/exile/Stack per seat, drawn at a new `seat.joined`
+  event (Shuffle Up) instead of lazily on a seat's first card. This owner's only
+  stake — the card-arrival payload's `face`/`imageUrl` handling and the card
+  shape's identity-only `meta` — was verified unchanged before the rewrite
+  (`tabletop.md`'s watch points) and confirmed unchanged after: `handleCardArrival`
+  still renders whatever `face`/`imageUrl` arrives and dedups on `instanceId`.
+  Only *where* a card lands (geometry) changed, not *how* its face renders.
+- `cardLayout.ts`'s old row-based functions were deleted outright (no
+  back-compat shim) since nothing outside the Tabletop imports them.
+- No `CardDefinition`, contract, or persistence-version changes.
+
 ## Card Copy Was Broken by a User-Agent (JES-136, 2026-07-31)
 
 Found from telemetry, not a bug report: 400s on `GET /proxy-image` in the `local` Honeycomb
