@@ -21,6 +21,10 @@ owners stamped with a different ship, never the fleet-scoped ones.
 - [animations](animations/README.md) — *feature, Shuffler* — consult me before changes to card
   display/rendering, game.css, WhatHappened, HTMX swap attributes, card containers, drag-and-drop,
   game.js event handlers, or CSS keyframes/transitions.
+- [the Shuffler looks like itself](shuffler-looks-like-itself/README.md) — *capability, Shuffler* —
+  consult me before adding or changing any UI: new buttons/panels/inputs/states, any Shuffler
+  stylesheet, CSS tokens, colors, fonts, corner radius, focus states, the `<head>`s, or the
+  `/design` gallery. **New UI pulls toward the standard; never copy a raw Material/Bootstrap hex.**
 - [the fleet is observable](fleet-is-observable/README.md) — *capability, fleet* — consult me before
   changes to telemetry wiring, env/secret sourcing, run/deploy scripts, OTel dependency versions,
   HTTP middleware, or trace-context propagation — and before recording that something happened

@@ -33,9 +33,27 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 
 ## UI Style
 
-- Square corners except on physical round elements (cards, playmats)
-- Latest styling in `public/site.css`
-- The site pages (/, /choose-any-deck) have different styles from the play pages (/prepare, /game)
+**Before adding or changing any UI, consult the design owner** —
+`owners/shuffler-looks-like-itself/` and its `-context` / `-review` / `-update` skills.
+Look at **`/design`** first: the component gallery renders every component using the
+app's own stylesheets, so it can't drift from the app. Add a specimen there in the same
+commit that adds a component.
+
+The short version:
+
+- **Square corners except on physical round elements** (cards, playmats, `.page-container`,
+  count discs)
+- **Never write a raw hex.** Use a token from `public/styles.css` `:root`. Material and
+  Bootstrap defaults already in the CSS are drift, not precedent — don't copy them
+- **Orbitron for chrome, Ovo for content** (card names are content). Risque only on site
+  pages. No fourth typeface
+- **Every interactive element gets a visible `:focus-visible` state**
+- The card is the layout unit: **200 × 278**
+- The site pages (/, /choose-any-deck) have different styles from the play pages
+  (/prepare, /game)
+- `playmat.css` is shared by game and prepare; `game.css` and `prepare.css` are
+  page-specific; `site.css` is the site pages; `styles.css` holds the tokens. Watch for the
+  modal, flip, and library-list blocks, which are currently duplicated across files
 
 ## Key Files
 
@@ -62,7 +80,10 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 
 **Styles**:
 
-- `public/site.css` (site-wide), `styles.css` (game and prepare), `game.css`, `prepare.css`, `deck-selection.css`, `docs.css`
+- `public/site.css` (site-wide), `styles.css` (tokens + global), `playmat.css` (shared by game and prepare), `game.css`, `prepare.css`, `deck-selection.css`, `docs.css`
+- `/design` → `views/design.ejs` — the component gallery (see UI Style above).
+  `public/design-candidates.css` holds proposals not yet adopted; `public/design-gallery.css`
+  is gallery chrome only and must never be copied into the app
 
 ## Development Commands
 
