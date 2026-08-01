@@ -32,6 +32,8 @@ Oracle Card: this word is defined by Archidekt, referring to a definition in the
 
 Card Name: this is ambiguous in the Archidekt and Scryfall domains. Usually the Card Display Name and the Card Oracle Name are the same, but not always. The Card Oracle Name is the unique identifier for a card. The Card Display Name is at the very top of the card, and this is what we use in MTG Deck Shuffler.
 
+Card vs Face: cards have names, and faces have names. A two-faced card's canonical (Display) Name contains both face names, joined by ` // ` — e.g. "Eiganjo Dynastorian // Replenish". **Zones contain cards, not faces**: the library, the hand, and the table hold cards. So anything that identifies or orders cards — sorting a list, matching a name — uses the canonical card name, not whichever face happens to be showing. The face only decides which image and which text is displayed right now (`GameCard.currentFace`).
+
 Scryfall ID: Scryfall's card ID. This is a UUID. From this, we can derive a card image URL on Scryfall. Archidekt calls it `uid`.
 
 Multiverse ID: Gatherer's card ID. This is an integer. From this, we can derive a link to the card's page on Gatherer.
