@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('partials/head', {
+  pageTitle: 'Design System - MTG Deck Shuffler',
+  additionalFonts: ['Ovo', 'Risque'],
+  additionalStyles: [
+    '/playmat.css',
+    '/game.css',
+    '/prepare.css',
+    '/deck-selection.css',
+    '/design-candidates.css',
+    '/design-gallery.css'
+  ]
+}) %>
+
+<body>
+  <div class="design-page">
+    <%- include('partials/header', { linksInNewTabs: true }) %>
+
+    <div class="gallery-container">
+
+      <div class="gallery-intro">
+        <h1>Design System</h1>
+        <p>
+          Every specimen below is rendered by the app's own stylesheets — the same
+          <code>styles.css</code>, <code>site.css</code>, <code>playmat.css</code>,
+          <code>game.css</code>, <code>prepare.css</code> and <code>deck-selection.css</code>
+          the real pages load. If a component changes in the app, it changes here. The gallery's
+          own chrome (labels, frames, swatch grids) is the only thing styled by
+          <code>design-gallery.css</code>, and proposals not yet adopted live in
+          <code>design-candidates.css</code>.
+        </p>
+        <p style="margin-top: 1rem;">
+          Sections are tagged <span class="badge badge-standard">standard</span> where the app is
+          already consistent, <span class="badge badge-choose">choose one</span> where more than one
+          treatment is in use and you need to pick, and <span class="badge badge-drift">drift</span>
+          where there's no standard at all yet.
+        </p>
+        <nav class="gallery-toc">
+          <a href="#color">Color</a>
+          <a href="#type">Typography</a>
+          <a href="#geometry">Geometry &amp; spacing</a>
+          <a href="#buttons">Buttons</a>
+          <a href="#focus">Focus states</a>
+          <a href="#inputs">Text inputs</a>
+          <a href="#surfaces">Surfaces</a>
+          <a href="#cards">Cards &amp; playmat</a>
+          <a href="#rules">House rules</a>
+        </nav>
+      </div>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="color">
+        <h2>Color <span class="badge badge-drift">drift</span></h2>
+        <p class="section-note">
+          Six named tokens carry the brand, and they're used well where they're used at all — but
+          only 46 <code>var()</code> references exist across 2,772 lines of CSS, against
+          <strong>57 distinct hex values</strong>. Most of the rest is imported palette: Material
+          Design and Bootstrap defaults that arrived one button at a time.
+        </p>
+
+        <h3>Named tokens — the real palette</h3>
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #221534;"></div>
+            <div class="swatch-meta">
+              <span class="swatch-name">--deep-space</span>
+              <span class="swatch-hex">#221534</span>
+              <span class="swatch-use">header, footer, slogan bars</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #bb5277;"></div>
+            <div class="swatch-meta">
+              <span class="swatch-name">--dark-pink</span>
+              <span class="swatch-hex">#bb5277</span>
+              <span class="swatch-use">borders, rules, accents, focus</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #ddc7dd;"></div>
+            <div class="swatch-meta">
+              <span class="swatch-name">--light-pink</span>
+              <span class="swatch-hex">#ddc7dd</span>
+              <span class="swatch-use">button bevels, title slab, card frame</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #f0f0f0;"></div>
+            <div class="swatch-meta">
+              <span class="swatch-name">--background-color</span>
+              <span class="swatch-hex">#f0f0f0</span>
+              <span class="swatch-use">page background behind the playmat</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #9134d2;"></div>
+            <div class="swatch-meta">
+              <span class="swatch-name">--cute-heading-color</span>
+              <span class="swatch-hex">#9134d2</span>
+              <span class="swatch-use">h5 only</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #f5dc8b;"></div>
+            <div class="swatch-meta">
+              <span class="swatch-name">--playmat-one</span>
+              <span class="swatch-hex">#f5dc8b</span>
+              <span class="swatch-use">hamburger toggle, menu hover</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #4b7bba;"></div>
+            <div class="swatch-meta">
+              <span class="swatch-name">--playmat-two</span>
+              <span class="swatch-hex">#4b7bba</span>
+              <span class="swatch-use">history buttons</span>
+            </div>
+          </div>
+        </div>
+
+        <h3>Mana colors — a closed, correct set</h3>
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #f0e68c;"></div>
+            <div class="swatch-meta"><span class="swatch-name">--mana-W</span><span class="swatch-hex">#f0e68c</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #3c99e5;"></div>
+            <div class="swatch-meta"><span class="swatch-name">--mana-U</span><span class="swatch-hex">#3c99e5</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #530aae;"></div>
+            <div class="swatch-meta"><span class="swatch-name">--mana-B</span><span class="swatch-hex">#530aae</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #bd0a0a;"></div>
+            <div class="swatch-meta"><span class="swatch-name">--mana-R</span><span class="swatch-hex">#bd0a0a</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #2a8439;"></div>
+            <div class="swatch-meta"><span class="swatch-name">--mana-G</span><span class="swatch-hex">#2a8439</span></div>
+          </div>
+        </div>
+
+        <h3>Orphans — hex values with no name and no home</h3>
+        <p class="section-note">
+          These are the colors an agent finds when it greps for precedent. Each one is used once or
+          twice, mostly on a single button.
+        </p>
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #4caf50;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Material green</span><span class="swatch-hex">#4caf50</span><span class="swatch-use">gatherer button, start-game event</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #2196f3;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Material blue</span><span class="swatch-hex">#2196f3</span><span class="swatch-use">recover + copy buttons</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #ff9800;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Material orange</span><span class="swatch-hex">#ff9800</span><span class="swatch-use">flip button</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #e91e63;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Material pink</span><span class="swatch-hex">#e91e63</span><span class="swatch-use">play button</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #9c27b0;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Material purple</span><span class="swatch-hex">#9c27b0</span><span class="swatch-use">put-in-hand button</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #3f51b5;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Material indigo</span><span class="swatch-hex">#3f51b5</span><span class="swatch-use">put-on-top button</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #673ab7;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Material deep purple</span><span class="swatch-hex">#673ab7</span><span class="swatch-use">put-on-bottom button</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #607d8b;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Material blue-grey</span><span class="swatch-hex">#607d8b</span><span class="swatch-use">modal secondary button</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #f44336;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Material red</span><span class="swatch-hex">#f44336</span><span class="swatch-use">error + validation text</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #007bff;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Bootstrap primary</span><span class="swatch-hex">#007bff</span><span class="swatch-use">card name links, type header rule</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #28a745;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Bootstrap success</span><span class="swatch-hex">#28a745</span><span class="swatch-use">card action button</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #6c757d;"></div>
+            <div class="swatch-meta"><span class="swatch-name">Bootstrap secondary</span><span class="swatch-hex">#6c757d</span><span class="swatch-use">end-game buttons, undo text</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #007acc;"></div>
+            <div class="swatch-meta"><span class="swatch-name">VS Code blue</span><span class="swatch-hex">#007acc</span><span class="swatch-use">debug copy button</span></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: #4122b1;"></div>
+            <div class="swatch-meta"><span class="swatch-name">(unnamed)</span><span class="swatch-hex">#4122b1</span><span class="swatch-use">shuffle-library event text</span></div>
+          </div>
+        </div>
+
+        <div class="choice">
+          <div class="choice-question">
+            Three different grays currently mean "secondary button". Which one wins?
+          </div>
+          <div class="options">
+            <div class="option">
+              <div class="option-label">A — Bootstrap secondary</div>
+              <div class="stage stage-dark">
+                <button class="modal-action-button" style="background-color: #6c757d; color: white;">Secondary</button>
+              </div>
+              <div class="option-where">#6c757d — .end-game-actions, .card-action-button.secondary</div>
+              <div class="option-note">Most-used of the three. Cool neutral, reads as "Bootstrap".</div>
+            </div>
+            <div class="option">
+              <div class="option-label">B — Material blue-grey</div>
+              <div class="stage stage-dark">
+                <button class="modal-action-button secondary">Secondary</button>
+              </div>
+              <div class="option-where">#607d8b — .modal-action-button.secondary</div>
+              <div class="option-note">Slightly bluer. Only in the card modal.</div>
+            </div>
+            <div class="option">
+              <div class="option-label">C — deep-space, tokenized</div>
+              <div class="stage stage-dark">
+                <button class="modal-action-button" style="background-color: #221534; color: var(--light-pink);">Secondary</button>
+              </div>
+              <div class="option-where">var(--deep-space) + var(--light-pink)</div>
+              <div class="option-note">On-brand: no new color enters the palette. Recommended.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="choice">
+          <div class="choice-question">
+            The seven rainbow card-modal action buttons: keep color-coded actions, or collapse to a
+            primary/secondary pair?
+          </div>
+          <div class="options">
+            <div class="option">
+              <div class="option-label">A — Keep color coding (current)</div>
+              <div class="stage stage-dark">
+                <button class="modal-action-button play-button">Play</button>
+                <button class="modal-action-button put-in-hand-button">Put in Hand</button>
+                <button class="modal-action-button put-on-top-button">Put on Top</button>
+                <button class="modal-action-button put-on-bottom-button">Put on Bottom</button>
+                <button class="modal-action-button flip-button">Flip</button>
+                <button class="modal-action-button gatherer-button">Gatherer</button>
+              </div>
+              <div class="option-where">.modal-action-button.* in playmat.css</div>
+              <div class="option-note">
+                Each destination has its own hue, so you learn the colors. But the hues are seven
+                unrelated Material values and none of them are brand colors.
+              </div>
+            </div>
+            <div class="option">
+              <div class="option-label">B — One primary, rest secondary</div>
+              <div class="stage stage-dark">
+                <button class="modal-action-button" style="background-color: #bb5277; color: white;">Play</button>
+                <button class="modal-action-button" style="background-color: #221534; color: var(--light-pink);">Put in Hand</button>
+                <button class="modal-action-button" style="background-color: #221534; color: var(--light-pink);">Put on Top</button>
+                <button class="modal-action-button" style="background-color: #221534; color: var(--light-pink);">Put on Bottom</button>
+                <button class="modal-action-button" style="background-color: #221534; color: var(--light-pink);">Flip</button>
+                <button class="modal-action-button" style="background-color: #221534; color: var(--light-pink);">Gatherer</button>
+              </div>
+              <div class="option-where">var(--dark-pink) / var(--deep-space)</div>
+              <div class="option-note">
+                Two tokens instead of seven hexes, and the most likely action stands out. Loses the
+                learnable per-destination color.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="type">
+        <h2>Typography <span class="badge badge-standard">standard</span></h2>
+        <p class="section-note">
+          Three faces, used with real discipline. This is the most consistent thing in the app —
+          don't introduce a fourth.
+        </p>
+
+        <div class="type-row">
+          <div class="type-meta">Risque 400 · display<br>hero title, slogan, step verbs</div>
+          <span style="font-family: 'Risque', cursive; font-size: 3rem; color: white;">Shuffle Up</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Orbitron 700 · headings + chrome<br>nav, buttons, titles, tiles, inputs</div>
+          <span style="font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.75rem; color: white;">MTG Deck Shuffler</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Orbitron 400 · nav links</div>
+          <span style="font-family: 'Orbitron', sans-serif; font-weight: 400; font-size: 1.5rem; color: white;">play · docs · about</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Ovo 400 · body + card names<br>prose, card names, metadata</div>
+          <span style="font-family: 'Ovo', serif; font-size: 1.1rem; color: white;">Atraxa, Praetors' Voice</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">monospace · debug only<br>tab ids, JSON dumps</div>
+          <span style="font-family: monospace; font-size: 0.85rem; color: #9a91a6;">game.browser_tab_id = 3f9c…</span>
+        </div>
+
+        <h3>The rule</h3>
+        <ul class="rule-list">
+          <li><strong>Orbitron</strong> for anything the user acts on or navigates by — buttons, nav, headings, form labels, form fields.</li>
+          <li><strong>Ovo</strong> for anything the user reads — prose, and card names specifically. A card name is content, not chrome.</li>
+          <li><strong>Risque</strong> only for the big splashy marketing words on the site pages. Never on the play pages.</li>
+        </ul>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="geometry">
+        <h2>Geometry &amp; spacing <span class="badge badge-choose">choose one</span></h2>
+        <p class="section-note">
+          The stated rule is <em>square corners except on physical round elements</em> — cards,
+          playmats, the card-back stack. Recent code follows it. Older CSS uses
+          <strong>13 different <code>border-radius</code> values</strong>: 2, 3, 4, 5, 6, 8, 10, 20,
+          30, 80px, 50%, 3vh, and 0.
+        </p>
+
+        <table class="gallery-table">
+          <thead>
+            <tr><th>Radius</th><th>Where</th><th>Physical object?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>0</code></td><td>join-table panel, hamburger, precon tiles, inputs</td><td>no — correct</td></tr>
+            <tr><td><code>2px</code></td><td><code>.cool-command-zone-surround</code>, <code>.table-cards-button</code></td><td>no</td></tr>
+            <tr><td><code>3px</code></td><td><code>.card-action-button</code></td><td>no</td></tr>
+            <tr><td><code>4px</code></td><td>menu panel + menu buttons, <code>.modal-close</code>, debug blocks</td><td>no</td></tr>
+            <tr><td><code>5px</code></td><td><code>.flip-button</code>, <code>.hand-drop-zone</code></td><td>no</td></tr>
+            <tr><td><code>6px</code></td><td><code>.card-modal-position-indicator</code></td><td>no</td></tr>
+            <tr><td><code>8px</code></td><td><code>.modal-action-button</code>, <code>.card-modal-nav-button</code>, library card-back inner rule</td><td>the inner rule, yes</td></tr>
+            <tr><td><code>10px</code></td><td><code>.mtg-card-image</code>, <code>.modal-dialog</code>, <code>.commander-placeholder</code></td><td>cards yes, modal no</td></tr>
+            <tr><td><code>20px</code></td><td><code>.playmat</code>, <code>.hand-drop-zone.drag-over</code></td><td>playmat yes</td></tr>
+            <tr><td><code>30px</code> / <code>3vh</code></td><td><code>.modal-card-image</code>, <code>.card-modal-image</code></td><td>yes — a big card</td></tr>
+            <tr><td><code>50%</code></td><td><code>.hand-count</code>, <code>.card-modal-close</code></td><td>arguably — they're tokens/discs</td></tr>
+            <tr><td><code>80px</code></td><td><code>.page-container</code></td><td>yes — it's a giant Magic card</td></tr>
+          </tbody>
+        </table>
+
+        <div class="choice">
+          <div class="choice-question">
+            What does "square corners" mean for chrome that currently has a small radius
+            (modals, menu buttons, action buttons)?
+          </div>
+          <div class="options">
+            <div class="option">
+              <div class="option-label">A — Truly 0</div>
+              <div class="stage stage-dark">
+                <button class="modal-action-button" style="background-color: #bb5277; border-radius: 0;">Play</button>
+                <button class="modal-action-button" style="background-color: #221534; color: var(--light-pink); border-radius: 0;">Cancel</button>
+              </div>
+              <div class="option-where">border-radius: 0</div>
+              <div class="option-note">
+                Matches the stated rule exactly, and matches the newest code (join-table, hamburger).
+                Hardest-edged; pairs well with the outset bevels.
+              </div>
+            </div>
+            <div class="option">
+              <div class="option-label">B — A single small radius</div>
+              <div class="stage stage-dark">
+                <button class="modal-action-button" style="background-color: #bb5277; border-radius: 4px;">Play</button>
+                <button class="modal-action-button" style="background-color: #221534; color: var(--light-pink); border-radius: 4px;">Cancel</button>
+              </div>
+              <div class="option-where">border-radius: 4px — the de facto value in the game menu</div>
+              <div class="option-note">
+                Softer, and closer to where most of the CSS already sits, so less to change. But it
+                contradicts the written rule.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Spacing <span class="badge badge-drift">drift</span></h3>
+        <p class="section-note">
+          There is no scale. Padding, gap, and margin use 2, 4, 5, 6, 8, 10, 12, 14, 15, 16, 18, 20,
+          24, 30 and 40px, intermixed with rem values. A proposed 4px-based scale:
+          <code>4 · 8 · 12 · 16 · 24 · 32 · 48</code> — every existing value rounds to one of these
+          within 2px except 5, 15, and 18.
+        </p>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="buttons">
+        <h2>Buttons <span class="badge badge-choose">choose one</span></h2>
+        <p class="section-note">
+          The app has one interaction <em>idea</em> — lift on hover, press down on click — expressed
+          seven different ways. The travel distance, the shadow, the easing, and the border
+          treatment all differ per button. This is the section to settle first: it's the thing that
+          makes new UI feel bolted on.
+        </p>
+
+        <h3>What's in use today</h3>
+        <div class="options">
+          <div class="option">
+            <div class="option-label">Big CTA — .button-base .begin-button</div>
+            <div class="stage stage-site">
+              <a href="#buttons" class="button-base begin-button">BEGIN</a>
+            </div>
+            <div class="option-where">site.css — 10px outset light-pink, hover −2px + shadow, active inset +2px</div>
+            <div class="option-note">The signature button. Chunky, physical, unmistakable.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Playmat button — .library-buttons button</div>
+            <div class="stage stage-playmat">
+              <div class="library-buttons" style="grid-template-areas: 'draw draw' 'shuffle shuffle' 'search reveal';">
+                <button class="draw-button">Draw</button>
+                <button class="shuffle-button">Shuffle</button>
+                <button class="search-button">Search</button>
+                <button class="reveal-button">Reveal</button>
+              </div>
+            </div>
+            <div class="option-where">playmat.css — 2px outset gray on black, hover −1px + white glow, active inset</div>
+            <div class="option-note">The workhorse. Same idea as the CTA at 1/5 the scale.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Modal action — .modal-action-button</div>
+            <div class="stage stage-dark">
+              <button class="modal-action-button play-button">Play</button>
+              <button class="modal-action-button secondary">Cancel</button>
+            </div>
+            <div class="option-where">playmat.css — no border, radius 8px, hover −2px + white glow</div>
+            <div class="option-note">No bevel at all. Flat Material rectangle with a lift.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Menu item — .menu-section button</div>
+            <div class="stage stage-dark">
+              <div class="game-menu-panel" style="position: static; opacity: 1; transform: none; pointer-events: auto; min-width: 0; width: 100%;">
+                <div class="menu-section history-actions">
+                  <button>Show history</button>
+                </div>
+                <div class="menu-section end-game-actions">
+                  <button>Restart game</button>
+                </div>
+              </div>
+            </div>
+            <div class="option-where">game.css — flat, radius 4px, left-aligned, hover = color swap only</div>
+            <div class="option-note">No lift, no press. Deliberately calmer, or just different?</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Toggle — .group-by-type-toggle</div>
+            <div class="stage stage-white">
+              <button class="group-by-type-toggle">Group by type</button>
+              <button class="group-by-type-toggle active">Group by type</button>
+            </div>
+            <div class="option-where">playmat.css — 1px border, square, no lift, .active = Bootstrap blue</div>
+            <div class="option-note">The only two-state button. Square already.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Hamburger — .menu-toggle</div>
+            <div class="stage stage-playmat">
+              <button class="menu-toggle">☰</button>
+            </div>
+            <div class="option-where">game.css — 2px solid black, square, hover swaps playmat-one → playmat-two</div>
+            <div class="option-note">Square corners, on-brand colors, no lift. Newest of the bunch.</div>
+          </div>
+        </div>
+
+        <div class="choice">
+          <div class="choice-question">
+            Pick the canonical press behaviour. Whatever wins becomes the one hover/active treatment
+            every button in the app shares.
+          </div>
+          <div class="options">
+            <div class="option">
+              <div class="option-label">A — Today's lift-and-shadow, unified</div>
+              <div class="stage stage-playmat">
+                <div class="library-buttons" style="grid-template-areas: 'draw draw'; grid-template-columns: 1fr;">
+                  <button class="draw-button">Draw</button>
+                </div>
+              </div>
+              <div class="stage stage-site" style="margin-top: 0.5rem;">
+                <a href="#buttons" class="button-base begin-button" style="width: 160px; height: 64px; font-size: 1.25rem;">BEGIN</a>
+              </div>
+              <div class="option-where">existing CSS, with the −1px/−2px travel and easing made identical</div>
+              <div class="option-note">
+                Cheapest — no markup change, no new file. Keeps the <code>outset</code>/<code>inset</code>
+                bevel, which is the app's most distinctive texture. But the bevel is a browser-drawn
+                border: you can't control its color precisely, and it renders differently across engines.
+              </div>
+            </div>
+
+            <div class="option">
+              <div class="option-label">B — Comeau pushable, faithful</div>
+              <div class="stage stage-playmat">
+                <button class="pushable">
+                  <span class="shadow"></span>
+                  <span class="edge"></span>
+                  <span class="front">Draw</span>
+                </button>
+                <button class="pushable pushable-dark">
+                  <span class="shadow"></span>
+                  <span class="edge"></span>
+                  <span class="front">Shuffle</span>
+                </button>
+              </div>
+              <div class="stage stage-site" style="margin-top: 0.5rem;">
+                <button class="pushable">
+                  <span class="shadow"></span>
+                  <span class="edge"></span>
+                  <span class="front">SHUFFLE UP</span>
+                </button>
+              </div>
+              <div class="option-where">design-candidates.css — .pushable / .shadow / .edge / .front</div>
+              <div class="option-note">
+                The real thing: a ground shadow, a lit edge with darker left/right faces, and a front
+                that travels 4px on press with a 34ms snap. The springy overshoot on hover is the
+                <code>cubic-bezier(.3,.7,.4,1.5)</code>. <strong>Cost:</strong> every button needs three
+                nested spans, so every button-emitting template and HTMX fragment changes.
+              </div>
+            </div>
+
+            <div class="option">
+              <div class="option-label">C — Comeau's feel, drop-in</div>
+              <div class="stage stage-playmat">
+                <button class="pushable-flat pushable-small">Draw</button>
+                <button class="pushable-flat pushable-small pushable-dark">Shuffle</button>
+                <button class="pushable-flat pushable-small" disabled>Draw</button>
+              </div>
+              <div class="stage stage-site" style="margin-top: 0.5rem;">
+                <button class="pushable-flat">SHUFFLE UP</button>
+              </div>
+              <div class="option-where">design-candidates.css — .pushable-flat</div>
+              <div class="option-note">
+                Same travel, same spring easing, same 34ms snap — built from a hard
+                <code>box-shadow</code> instead of layered spans, so it drops onto an existing
+                <code>&lt;button&gt;</code> with <em>no markup change</em>. <strong>Tradeoff:</strong>
+                the edge is one flat color; it can't have B's lit left and right faces.
+                Also shown: the disabled state, which sits flat on the ground with no travel left.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="section-note">
+          Hover and press these. B and C should feel nearly identical under the cursor; the
+          difference is visible mainly when you look straight at the edge, and in what adopting each
+          one costs.
+        </p>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="focus">
+        <h2>Focus states <span class="badge badge-drift">drift</span></h2>
+        <p class="section-note">
+          The app has <strong>exactly one</strong> focus rule:
+          <code>.button-base:focus { outline: 3px solid var(--dark-pink) }</code>. Every playmat
+          button, modal button, input, toggle and menu item is invisible to keyboard navigation.
+          Whichever option wins should be applied globally via <code>:focus-visible</code>, so it
+          appears for keyboard users and not on mouse clicks.
+        </p>
+
+        <div class="choice">
+          <div class="choice-question">
+            Tab into these to compare. Which focus ring?
+          </div>
+          <div class="options">
+            <div class="option">
+              <div class="option-label">A — dark-pink, flush</div>
+              <div class="stage stage-playmat">
+                <button class="pushable-flat pushable-small candidate-focus-dark-pink">Tab to me</button>
+              </div>
+              <div class="stage stage-white" style="margin-top: 0.5rem;">
+                <button class="group-by-type-toggle candidate-focus-dark-pink">Tab to me</button>
+              </div>
+              <div class="option-where">outline: 3px solid var(--dark-pink)</div>
+              <div class="option-note">Matches the one rule that already exists. Can vanish against the darker playmat art.</div>
+            </div>
+            <div class="option">
+              <div class="option-label">B — light-pink, offset</div>
+              <div class="stage stage-playmat">
+                <button class="pushable-flat pushable-small candidate-focus-light-pink">Tab to me</button>
+              </div>
+              <div class="stage stage-white" style="margin-top: 0.5rem;">
+                <button class="group-by-type-toggle candidate-focus-light-pink">Tab to me</button>
+              </div>
+              <div class="option-where">outline: 3px solid var(--light-pink); outline-offset: 3px</div>
+              <div class="option-note">Reads on the playmat art and on black buttons. Weaker on white.</div>
+            </div>
+            <div class="option">
+              <div class="option-label">C — light ring on a dark halo</div>
+              <div class="stage stage-playmat">
+                <button class="pushable-flat pushable-small candidate-focus-double">Tab to me</button>
+              </div>
+              <div class="stage stage-white" style="margin-top: 0.5rem;">
+                <button class="group-by-type-toggle candidate-focus-double">Tab to me</button>
+              </div>
+              <div class="option-where">light-pink outline + 6px deep-space box-shadow</div>
+              <div class="option-note">Visible on every background the app has. Heaviest look.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="inputs">
+        <h2>Text inputs <span class="badge badge-choose">choose one</span></h2>
+        <p class="section-note">
+          Three treatments in use, differing in border weight, border color, font size and font family.
+        </p>
+
+        <div class="choice">
+          <div class="choice-question">One input style for the whole app — which?</div>
+          <div class="options">
+            <div class="option">
+              <div class="option-label">A — precon search (current, deck selection)</div>
+              <div class="stage stage-site">
+                <input class="precon-search-input" placeholder="Search precon decks" />
+              </div>
+              <div class="option-where">deck-selection.css — 2px #ddd, 12px pad, Orbitron, focus = dark-pink border + glow</div>
+              <div class="option-note">Largest and most legible. The gray border isn't a token.</div>
+            </div>
+            <div class="option">
+              <div class="option-label">B — join-table field (current, prepare)</div>
+              <div class="stage stage-playmat">
+                <div class="join-table-fields">
+                  <label class="join-table-label">Table name
+                    <input type="text" placeholder="kitchen" />
+                  </label>
+                </div>
+              </div>
+              <div class="option-where">prepare.css — 1px #888, 4px pad, 0.9rem, inherits Ovo</div>
+              <div class="option-note">Compact, square, has an opaque panel behind it so it reads on the playmat.</div>
+            </div>
+            <div class="option">
+              <div class="option-label">C — tokenized proposal</div>
+              <div class="stage stage-site">
+                <input class="candidate-input" placeholder="Search precon decks" />
+              </div>
+              <div class="stage stage-playmat" style="margin-top: 0.5rem;">
+                <input class="candidate-input" style="font-size: 0.9rem; padding: 6px 8px;" placeholder="kitchen" />
+              </div>
+              <div class="option-where">design-candidates.css — 2px deep-space, Orbitron, focus = dark-pink outline</div>
+              <div class="option-note">
+                One rule with a size variant, no untokenized grays, and a real focus state.
+                Recommended.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="surfaces">
+        <h2>Surfaces <span class="badge badge-standard">standard</span></h2>
+        <p class="section-note">
+          Panels, modals and tiles. These are consistent enough to codify — the note on each is what
+          a new one has to match.
+        </p>
+
+        <h3>Modal dialog</h3>
+        <p class="section-note">
+          Shown without its <code>.modal-overlay</code>, which is <code>position: fixed</code>.
+          <strong>Careful:</strong> this block is copy-pasted verbatim into both
+          <code>playmat.css</code> and <code>prepare.css</code> — editing one does not change the
+          other page.
+        </p>
+        <div class="stage stage-dark" style="display: block;">
+          <div class="modal-dialog" style="max-width: 640px; margin: 0 auto;">
+            <div class="modal-header">
+              <h2 class="modal-title">Library Contents</h2>
+              <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+              <p class="modal-subtitle">
+                <span>99 cards in library, ordered by position</span>
+                <button class="group-by-type-toggle">Group by type</button>
+              </p>
+              <h4 class="card-type-header"><span class="card-type-header-icon" data-icon="creature"></span> Creature</h4>
+              <ul class="library-search-list">
+                <li class="library-card-item"><a class="card-name-link clickable-card-name">Atraxa, Praetors' Voice</a></li>
+                <li class="library-card-item"><a class="card-name-link clickable-card-name">Aggressive Mammoth</a></li>
+                <li class="library-card-item"><a class="card-name-link clickable-card-name">Academy Manufactor</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h3>Command zone surround</h3>
+        <p class="section-note">
+          The metal-gradient frame with a groove-bordered title slab. Shared by prepare and game.
+        </p>
+        <div class="stage stage-playmat" style="--min-title-slab-height: 4rem;">
+          <div class="cool-command-zone-surround">
+            <div class="game-title">
+              <div class="game-name">Corrupting Influence</div>
+              <div>Precon · Warhammer 40,000</div>
+            </div>
+            <div class="multiple-cards">
+              <img class="mtg-card-image" src="/images/mtg-card-back.jpg" alt="commander" />
+            </div>
+          </div>
+        </div>
+
+        <h3>Precon deck tile</h3>
+        <div class="stage stage-site" style="display: block;">
+          <div class="precon-tiles-container search-active" style="max-width: 560px;">
+            <button class="precon-tile">
+              <span class="tile-commander-art"><img src="/images/mtg-card-back.jpg" alt="" /></span>
+              <span class="tile-content">
+                <span class="tile-deck-name">Corrupting Influence</span>
+                <span class="tile-commanders">
+                  <span class="tile-commander">
+                    <span class="commander-name">Tyranid Swarm</span>
+                    <span class="commander-colors">
+                      <img class="color-icon" src="/images/B.svg" alt="B" />
+                      <img class="color-icon" src="/images/G.svg" alt="G" />
+                    </span>
+                  </span>
+                </span>
+                <span class="tile-meta"><span>Warhammer 40,000</span><span>2022</span></span>
+              </span>
+            </button>
+            <button class="precon-tile">
+              <span class="tile-commander-art"><img src="/images/mtg-card-back.jpg" alt="" /></span>
+              <span class="tile-content">
+                <span class="tile-deck-name">Necron Dynasties</span>
+                <span class="tile-commanders">
+                  <span class="tile-commander">
+                    <span class="commander-name">Szarekh, the Silent King</span>
+                    <span class="commander-colors">
+                      <img class="color-icon" src="/images/B.svg" alt="B" />
+                    </span>
+                  </span>
+                </span>
+                <span class="tile-meta"><span>Warhammer 40,000</span><span>2022</span></span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <h3>Game menu panel</h3>
+        <div class="stage stage-dark">
+          <div class="game-menu-panel" style="position: static; opacity: 1; transform: none; pointer-events: auto;">
+            <div class="menu-section history-actions">
+              <button>Show history</button>
+              <button>Undo last action</button>
+            </div>
+            <div class="menu-section end-game-actions">
+              <button>Restart game</button>
+              <a href="#surfaces">Choose another deck</a>
+            </div>
+          </div>
+        </div>
+
+        <h3>Card type icons</h3>
+        <p class="section-note">
+          SVG masks tinted by <code>background-color</code>, so they take any color. See
+          <code>notes/DESIGN-card-type-symbols.md</code>.
+        </p>
+        <div class="stage stage-white">
+          <span class="card-type-header-icon" data-icon="artifact"></span>
+          <span class="card-type-header-icon" data-icon="creature"></span>
+          <span class="card-type-header-icon" data-icon="enchantment"></span>
+          <span class="card-type-header-icon" data-icon="instant"></span>
+          <span class="card-type-header-icon" data-icon="land"></span>
+          <span class="card-type-header-icon" data-icon="planeswalker"></span>
+          <span class="card-type-header-icon" data-icon="sorcery"></span>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="cards">
+        <h2>Cards &amp; playmat <span class="badge badge-standard">standard</span></h2>
+        <p class="section-note">
+          The card is the layout unit: <strong>200 × 278</strong>, radius 10px, soft drop shadow.
+          Every column width, button grid and drop zone is sized off that 200. Cards are the one
+          place round corners belong — they're physical objects.
+        </p>
+
+        <div class="stage stage-playmat">
+          <div>
+            <div class="library-stack">
+              <img class="mtg-card-image library-card-back" src="/images/mtg-card-back.jpg" alt="" />
+              <img class="mtg-card-image library-card-back" src="/images/mtg-card-back.jpg" alt="" />
+              <img class="mtg-card-image library-card-back" src="/images/mtg-card-back.jpg" alt="" />
+            </div>
+          </div>
+          <div class="commander-placeholder">No commander</div>
+          <div class="hand-symbol">
+            <img src="/images/hand.png" alt="hand" />
+            <span class="hand-count">7</span>
+          </div>
+        </div>
+
+        <table class="gallery-table">
+          <thead><tr><th>Element</th><th>Size</th><th>Radius</th></tr></thead>
+          <tbody>
+            <tr><td><code>.mtg-card-image</code></td><td>200 × 278</td><td>10px</td></tr>
+            <tr><td><code>.library-stack</code></td><td>200 × 280</td><td>—</td></tr>
+            <tr><td><code>.commander-placeholder</code></td><td>200 × 280</td><td>10px</td></tr>
+            <tr><td><code>.flip-container-outer</code></td><td>200 × 278</td><td>—</td></tr>
+            <tr><td><code>.card-buttons</code> grid</td><td>200 wide, 2 × 2</td><td>—</td></tr>
+            <tr><td><code>.library-buttons</code> grid</td><td>216 max</td><td>—</td></tr>
+            <tr><td><code>.hand-drop-zone</code></td><td>80 × 278, −35 margins</td><td>5px</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="rules">
+        <h2>House rules</h2>
+        <p class="section-note">
+          What an agent adding a small UI feature needs to know. These are the settled ones; the
+          <span class="badge badge-choose">choose one</span> sections above become rules once picked.
+        </p>
+        <ul class="rule-list">
+          <li><strong>Never write a raw hex.</strong> Use a named token. If no token fits, that's a design decision — ask, don't invent. Material and Bootstrap defaults are especially forbidden: they're how the drift got here.</li>
+          <li><strong>Square corners on chrome.</strong> Round corners belong only to physical objects: cards, the playmat, the page-container, count discs.</li>
+          <li><strong>Orbitron for chrome, Ovo for content.</strong> Card names are content. No fourth typeface.</li>
+          <li><strong>Every interactive element gets a visible focus state.</strong> No exceptions, and use <code>:focus-visible</code>.</li>
+          <li><strong>The card is 200px wide.</strong> Size adjacent layout off that, not off arbitrary values.</li>
+          <li><strong>Respect the z-index ladder:</strong> content 1–3, menu panel 500, <code>.modal-overlay</code> 1000, <code>.card-modal-overlay</code> 2000, its close button 2001.</li>
+          <li><strong>Know which file owns the component.</strong> <code>playmat.css</code> is shared by game and prepare; <code>game.css</code> and <code>prepare.css</code> are page-specific; <code>site.css</code> is the marketing pages; <code>styles.css</code> holds the tokens. The modal, flip, and library-list blocks are currently duplicated — fix the duplication rather than editing one copy.</li>
+          <li><strong>Add new components to this page</strong> in the same commit that adds them to the app.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <%- include('partials/footer') %>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+/* CANDIDATE styles — proposals shown on /design, NOT yet used by the app.
+ *
+ * Nothing in this file is loaded by any real page. When Jess picks an option,
+ * move it into the stylesheet that owns that component (playmat.css for shared
+ * playmat chrome, site.css for site pages) and delete it from here.
+ *
+ * Every candidate obeys the house rules: square corners on chrome, Orbitron for
+ * button labels, palette from the named tokens in styles.css.
+ */
+
+/* ===========================================================================
+ * Candidate B — Josh Comeau's pushable 3D button, faithful.
+ * https://www.joshwcomeau.com/animation/3d-button/
+ * Three layers: a blurred shadow on the ground, a dark "edge" the button sits
+ * on, and the "front" face that travels down when pressed. Requires nested
+ * markup: <button class="pushable"><span class="shadow"></span>
+ *         <span class="edge"></span><span class="front">Label</span></button>
+ * ========================================================================= */
+
+.pushable {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+  transition: filter 250ms;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pushable .shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsl(0deg 0% 0% / 0.25);
+  will-change: transform;
+  transform: translateY(2px);
+  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.pushable .edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Lit from the left, like the outset borders elsewhere in the app. */
+  background: linear-gradient(to left, #5e2739 0%, #8a3a55 8%, #8a3a55 92%, #5e2739 100%);
+}
+
+.pushable .front {
+  display: block;
+  position: relative;
+  padding: 12px 24px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  background: var(--dark-pink);
+  will-change: transform;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.pushable:hover {
+  filter: brightness(110%);
+}
+
+/* The overshoot in the easing (the 1.5) is what makes it feel springy. */
+.pushable:hover .front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.pushable:hover .shadow {
+  transform: translateY(4px);
+  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.pushable:active .front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.pushable:active .shadow {
+  transform: translateY(1px);
+  transition: transform 34ms;
+}
+
+.pushable:focus-visible {
+  outline: 3px solid var(--light-pink);
+}
+
+/* Dark variant, for the black-button contexts on the playmat. */
+.pushable.pushable-dark .front {
+  background: var(--deep-space);
+}
+
+.pushable.pushable-dark .edge {
+  background: linear-gradient(to left, #0a0510 0%, #150c22 8%, #150c22 92%, #0a0510 100%);
+}
+
+/* ===========================================================================
+ * Candidate C — Comeau's feel, drop-in. Same spring easing and same travel,
+ * built from a hard box-shadow instead of layered spans, so it can be applied
+ * to an existing <button> with no markup change at all.
+ * Tradeoff vs. B: the edge is one flat colour — no lit left/right sides.
+ * ========================================================================= */
+
+.pushable-flat {
+  position: relative;
+  border: none;
+  padding: 12px 24px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  background: var(--dark-pink);
+  cursor: pointer;
+  will-change: transform;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 0 #7d354c, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
+    box-shadow 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.pushable-flat:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 0 #7d354c, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5),
+    box-shadow 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.pushable-flat:active {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0 #7d354c, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  transition: transform 34ms, box-shadow 34ms;
+}
+
+.pushable-flat:focus-visible {
+  outline: 3px solid var(--light-pink);
+  outline-offset: 4px;
+}
+
+.pushable-flat.pushable-dark {
+  background: var(--deep-space);
+  box-shadow: 0 4px 0 #0d0716, 0 7px 7px hsl(0deg 0% 0% / 0.35);
+}
+
+.pushable-flat.pushable-dark:hover {
+  box-shadow: 0 6px 0 #0d0716, 0 10px 10px hsl(0deg 0% 0% / 0.35);
+}
+
+.pushable-flat.pushable-dark:active {
+  box-shadow: 0 2px 0 #0d0716, 0 3px 3px hsl(0deg 0% 0% / 0.35);
+}
+
+/* Small variant — the size the playmat buttons actually need. */
+.pushable-flat.pushable-small {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+}
+
+/* Disabled: sits flat on the ground, no travel left. */
+.pushable-flat:disabled {
+  background: #7a7285;
+  color: #d8d4de;
+  cursor: not-allowed;
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ===========================================================================
+ * Candidate focus rings. The app has exactly one focus rule today
+ * (.button-base:focus). Whichever wins should apply to every interactive
+ * element, via :focus-visible so it doesn't fire on mouse clicks.
+ * ========================================================================= */
+
+.candidate-focus-dark-pink:focus-visible {
+  outline: 3px solid var(--dark-pink);
+  outline-offset: 0;
+}
+
+.candidate-focus-light-pink:focus-visible {
+  outline: 3px solid var(--light-pink);
+  outline-offset: 3px;
+}
+
+.candidate-focus-double:focus-visible {
+  outline: 3px solid var(--light-pink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--deep-space);
+}
+
+/* ===========================================================================
+ * Candidate unified text input. Today there are three treatments
+ * (.precon-search-input, .archidekt-input-section input, .join-table-fields
+ * input) that differ in border weight, colour, and font.
+ * ========================================================================= */
+
+.candidate-input {
+  padding: 10px 12px;
+  border: 2px solid var(--deep-space);
+  border-radius: 0;
+  background: white;
+  color: var(--deep-space);
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+}
+
+.candidate-input::placeholder {
+  color: #7a7285;
+}
+
+.candidate-input:focus-visible {
+  outline: 3px solid var(--dark-pink);
+  outline-offset: 0;
+  border-color: var(--dark-pink);
+}

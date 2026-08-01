@@ -246,6 +246,14 @@ export function createApp(
     res.render("about");
   });
 
+  // Returns whole page - the design system gallery. Every specimen is rendered by
+  // the app's own stylesheets, so the gallery can't drift from the app. Unlisted
+  // in the nav on purpose: it's a working tool for design decisions, not a
+  // destination for players. See owners/shuffler-looks-like-itself/.
+  app.get("/design", (req, res) => {
+    res.render("design");
+  });
+
   // Returns whole page - game history page
   app.get("/history", async (req, res) => {
     try {

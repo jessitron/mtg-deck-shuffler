@@ -1,0 +1,328 @@
+/* Chrome for the /design gallery itself — labels, grids, swatches, stages.
+ *
+ * This is NOT part of the app's design language. Nothing here should ever be
+ * copied into a real page. The specimens on the gallery are styled entirely by
+ * the app's own stylesheets (and design-candidates.css for proposals); this
+ * file only builds the museum around them.
+ *
+ * Everything is scoped under .design-page so the app stylesheets loaded
+ * alongside it stay untouched.
+ */
+
+.design-page {
+  background: #17101f;
+  color: #e8e8e8;
+  font-family: "Ovo", serif;
+  min-height: 100vh;
+  padding-bottom: 6rem;
+}
+
+.design-page .gallery-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.design-page .gallery-intro {
+  padding: 3rem 0 2rem;
+  border-bottom: 3px solid var(--dark-pink);
+}
+
+.design-page .gallery-intro h1 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 2.25rem;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.design-page .gallery-intro p {
+  max-width: 62ch;
+  line-height: 1.6;
+  color: #c9c2d2;
+  font-size: 1.05rem;
+}
+
+.design-page .gallery-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1.5rem;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.85rem;
+}
+
+.design-page .gallery-toc a {
+  color: var(--light-pink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.design-page .gallery-toc a:hover {
+  border-bottom-color: var(--dark-pink);
+}
+
+/* === Sections === */
+
+.design-page .gallery-section {
+  padding-top: 3.5rem;
+  scroll-margin-top: 1rem;
+}
+
+.design-page .gallery-section > h2 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.5rem;
+  color: white;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--dark-pink);
+  margin-bottom: 0.5rem;
+}
+
+.design-page .gallery-section > .section-note {
+  max-width: 70ch;
+  line-height: 1.6;
+  color: #c9c2d2;
+  margin-bottom: 1.5rem;
+}
+
+.design-page .gallery-section h3 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.05rem;
+  color: var(--light-pink);
+  margin: 2rem 0 0.75rem;
+}
+
+/* === Status badges === */
+
+.design-page .badge {
+  display: inline-block;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+  border: 1px solid currentColor;
+}
+
+.design-page .badge-standard {
+  color: #7fd18a;
+}
+
+.design-page .badge-choose {
+  color: #ffcf5c;
+}
+
+.design-page .badge-drift {
+  color: #ff8f8f;
+}
+
+.design-page .badge-candidate {
+  color: #8fc8ff;
+}
+
+/* === Choice blocks: two or more options, pick one === */
+
+.design-page .choice {
+  border: 2px solid #ffcf5c;
+  background: rgba(255, 207, 92, 0.05);
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin: 1rem 0 2rem;
+}
+
+.design-page .choice > .choice-question {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffcf5c;
+  margin-bottom: 1rem;
+}
+
+.design-page .options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.design-page .option {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid #463d55;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.design-page .option-label {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+}
+
+.design-page .option-where {
+  font-size: 0.8rem;
+  color: #9a91a6;
+  font-family: monospace;
+  word-break: break-word;
+}
+
+.design-page .option-note {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #c9c2d2;
+  margin-top: auto;
+}
+
+/* === Stages: reproduce a component's native background === */
+
+.design-page .stage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  min-height: 90px;
+}
+
+.design-page .stage-playmat {
+  background-image: url("/images/aeoe-43-cascading-cataracts.png");
+  background-size: cover;
+  background-position: center;
+  border: 3px solid black;
+}
+
+.design-page .stage-dark {
+  background: #1e1e1e;
+  border: 1px solid #444;
+}
+
+.design-page .stage-site {
+  background: linear-gradient(90deg, #43276c 1.92%, #221534 65.38%, #3b1855 100%);
+  border: 1px solid #463d55;
+}
+
+.design-page .stage-white {
+  background: white;
+  border: 1px solid #463d55;
+}
+
+.design-page .stage-light {
+  background: #f0f0f0;
+  border: 1px solid #463d55;
+}
+
+/* Specimens must not inherit the gallery's light-on-dark text. In the real app
+ * the body colour is the browser default, and any component needing white sets
+ * it itself — so a stage resets to black and lets the app's CSS take over.
+ * Without this, e.g. the command zone's title slab renders white-on-light-pink
+ * here and black-on-light-pink in the app. */
+.design-page .stage {
+  color: black;
+}
+
+/* === Swatches === */
+
+.design-page .swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.design-page .swatch {
+  border: 1px solid #463d55;
+}
+
+.design-page .swatch-chip {
+  height: 56px;
+}
+
+.design-page .swatch-meta {
+  padding: 6px 8px;
+  font-family: monospace;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.design-page .swatch-name {
+  display: block;
+  color: white;
+}
+
+.design-page .swatch-hex {
+  display: block;
+  color: #9a91a6;
+}
+
+.design-page .swatch-use {
+  display: block;
+  color: #7c7388;
+  font-family: "Ovo", serif;
+  font-size: 0.72rem;
+}
+
+/* === Type specimens === */
+
+.design-page .type-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #332b40;
+}
+
+.design-page .type-meta {
+  flex: 0 0 190px;
+  font-family: monospace;
+  font-size: 0.72rem;
+  color: #9a91a6;
+}
+
+/* === Plain tables for inventory listings === */
+
+.design-page .gallery-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.design-page .gallery-table th,
+.design-page .gallery-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #332b40;
+  vertical-align: top;
+}
+
+.design-page .gallery-table th {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--light-pink);
+}
+
+.design-page .gallery-table code {
+  font-size: 0.78rem;
+  color: #c9c2d2;
+}
+
+.design-page .rule-list {
+  max-width: 70ch;
+  line-height: 1.7;
+  padding-left: 1.25rem;
+  color: #c9c2d2;
+}
+
+.design-page .rule-list li {
+  margin-bottom: 0.5rem;
+}
+
+.design-page .rule-list strong {
+  color: white;
+}
