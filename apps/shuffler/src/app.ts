@@ -12,7 +12,7 @@ import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play
 import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
 import { TabletopPort } from "./port-tabletop/types.js";
-import { sendCardToTableFirst, zoneHintForPlay } from "./port-tabletop/sendToTable.js";
+import { sendCardToTableFirst, sendSeatJoinedBestEffort, zoneHintForPlay } from "./port-tabletop/sendToTable.js";
 import { formatTabletopSendErrorModal } from "./view/play-game/game-modals.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { log } from "./log.js";
@@ -511,6 +511,12 @@ export function createApp(
       game.startGame(browserTabId);
       await persistStatePort.save(game.toPersistedGameState());
 
+      // JES-140: announce the seat joining its table so the Tabletop draws
+      // the player area before any card is played. Best-effort — see sendToTable.ts.
+      if (tableInfo) {
+        await sendSeatJoinedBestEffort(tabletopPort, tableInfo.tableName, tableInfo.seatId, tableInfo.playerName);
+      }
+
       res.redirect(`/game/${gameId}`);
     } catch (error) {
       console.error("Error starting game:", error);
@@ -622,6 +628,12 @@ export function createApp(
       const newGame = GameState.newGame(newGameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo);
       newGame.startGame(browserTabId);
       await persistStatePort.save(newGame.toPersistedGameState());
+
+      // JES-140: re-announce the seat (idempotent — a physical no-op if the
+      // Tabletop process still has this seat's player area from before restart).
+      if (tableInfo) {
+        await sendSeatJoinedBestEffort(tabletopPort, tableInfo.tableName, tableInfo.seatId, tableInfo.playerName);
+      }
 
       res.redirect(`/game/${newGameId}`);
     } catch (error) {

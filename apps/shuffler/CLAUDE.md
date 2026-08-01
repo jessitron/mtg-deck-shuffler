@@ -126,9 +126,19 @@ version bumps). `/restart-game` carries them forward.
   success mutate + persist. Failure → 502 error modal, card stays in hand. Solo mode
   (no table): clipboard flow, untouched. Zone hints: land→battlefield, nonland→stack,
   discard→graveyard.
+- **`seat.joined` (JES-140)**: `/start-game` and `/restart-game` call
+  `sendSeatJoinedBestEffort()` (`src/port-tabletop/sendToTable.ts`) right after `tableInfo`
+  is built, so the Tabletop draws the seat's player area (playmat, library, graveyard,
+  exile) before any card is played. Unlike `sendCardToTableFirst`, this is **best-effort**:
+  a Tabletop that's unreachable at Shuffle Up must not block starting the game — failure is
+  a span attribute + `log.warn`, not a thrown error. The Tabletop's own `ensurePlayerArea`
+  is idempotent and re-runs defensively on first card arrival, so a missed `seat.joined`
+  self-heals.
 - **Env**: `TABLETOP_URL` (server-to-server sends; default `http://localhost:5180`,
   prod `http://mtg-tabletop-service`), `TABLETOP_PUBLIC_URL` (browser "at table" link;
-  default `https://table.jessitron.honeydemo.io`).
+  default `https://table.jessitron.honeydemo.io`), `SHUFFLER_PUBLIC_URL` (JES-140 — lets
+  the Tabletop hotlink the standard card-back image as an absolute URL; default
+  `https://mtg.jessitron.honeydemo.io`).
 - **Identity**: each GameCard gets a `cardInstanceId` GUID (minted in `newGame`,
   mint-on-load for old saves). `gameCardIndex` NEVER crosses the Shuffler's boundary
   (decodable secret — see `src/port-tabletop/types.ts`, JES-128).

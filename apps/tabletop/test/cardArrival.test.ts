@@ -2,12 +2,16 @@ import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import type { Server } from "node:http";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
-import { STACK_AREA, rowOrigin, GRAVEYARD_X } from "../src/server/cardLayout";
+import { playmatBounds, graveyardBounds, stackStripBounds } from "../src/server/cardLayout";
 
 /**
- * A5: POST /api/tables/:tableName/cards — the seam the Spine absorbs.
- * Dedup on event id AND on instanceId; lands go to the player's battlefield
- * row, everything else to the stack; discards to the graveyard spot.
+ * A5/JES-140: POST /api/tables/:tableName/cards — the seam the Spine absorbs.
+ * Dedup on event id AND on instanceId; lands go to the player's playmat,
+ * everything else to the stack; discards to the graveyard box.
+ *
+ * These tests post cards WITHOUT a prior seat.joined, exercising
+ * handleCardArrival's defensive fallback (ensurePlayerArea is idempotent and
+ * seat.joined normally runs first — see seatJoined.test.ts for that path).
  */
 let server: Server;
 let port: number;
@@ -57,7 +61,7 @@ function shapesOf(tableName: string) {
 }
 
 describe("card arrival", () => {
-  it("puts a stack-hinted card in the stack area with identity meta", async () => {
+  it("puts a stack-hinted card in the stack strip with identity meta", async () => {
     const event = cardPlayed();
     const response = await post("arrival-basic", event);
     expect(response.status).toBe(201);
@@ -69,8 +73,9 @@ describe("card arrival", () => {
       scryfallId: event.card.scryfallId,
       cardName: "Lightning Bolt",
     });
-    expect(shapes[0].x).toBeGreaterThanOrEqual(STACK_AREA.x);
-    expect(shapes[0].y).toBeGreaterThanOrEqual(STACK_AREA.y);
+    const stackBounds = stackStripBounds(1);
+    expect(shapes[0].x).toBeGreaterThanOrEqual(stackBounds.x);
+    expect(shapes[0].y).toBeGreaterThanOrEqual(stackBounds.y);
     // no index anywhere in what the tabletop stores
     expect(JSON.stringify(shapes[0].meta)).not.toContain("Index");
   });
@@ -93,29 +98,30 @@ describe("card arrival", () => {
     expect(shapesOf("arrival-dedup-instance")).toHaveLength(1);
   });
 
-  it("puts a battlefield-hinted card (a land) in the player's battlefield row", async () => {
+  it("puts a battlefield-hinted card (a land) on the player's playmat", async () => {
     await post("arrival-zones", cardPlayed({ zoneHint: "battlefield", cardName: "Forest" }));
     const [land] = shapesOf("arrival-zones");
-    const origin = rowOrigin(0);
-    expect(land.y).toBeGreaterThanOrEqual(origin.y);
+    const mat = playmatBounds(0);
+    expect(land.y).toBeGreaterThanOrEqual(mat.y + mat.h / 2); // bottom half of the playmat
 
     await post("arrival-zones", cardPlayed({ zoneHint: "stack", cardName: "Llanowar Elves" }));
     const stackCard = shapesOf("arrival-zones").find((s) => s.meta.cardName === "Llanowar Elves")!;
-    expect(stackCard.y).toBeLessThan(land.y); // stack area sits above the player rows
+    expect(stackCard.y).toBeLessThan(land.y); // the Stack sits above the player areas
   });
 
-  it("allocates battlefield rows per seatId in first-play order, keyed by seat not name", async () => {
+  it("allocates player areas per seatId in join order, keyed by seat not name", async () => {
     await post("arrival-rows", cardPlayed({ zoneHint: "battlefield", initiator: { seatId: "seat-A", playerName: "Sam" } }));
     await post("arrival-rows", cardPlayed({ zoneHint: "battlefield", initiator: { seatId: "seat-B", playerName: "Sam" } }));
     const shapes = shapesOf("arrival-rows");
     expect(shapes).toHaveLength(2);
-    expect(shapes[0].y).not.toBe(shapes[1].y); // same display name, different seats, different rows
+    expect(shapes[0].x).not.toBe(shapes[1].x); // same display name, different seats, different player areas
   });
 
-  it("puts a graveyard-hinted card in the player's graveyard spot", async () => {
+  it("puts a graveyard-hinted card in the player's graveyard box", async () => {
     await post("arrival-graveyard", cardPlayed({ zoneHint: "graveyard", cardName: "Doomed Dissenter" }));
     const [card] = shapesOf("arrival-graveyard");
-    expect(card.x).toBeGreaterThanOrEqual(GRAVEYARD_X);
+    const graveyard = graveyardBounds(0);
+    expect(card.x).toBeGreaterThanOrEqual(graveyard.x);
   });
 
   it("rejects a payload missing required fields (JES-128 validation point)", async () => {

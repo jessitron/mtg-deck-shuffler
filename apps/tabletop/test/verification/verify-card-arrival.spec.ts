@@ -38,15 +38,14 @@ test("a land and a nonland arrive in different areas of the canvas", async ({ pa
   }
 
   // Both cards render as image shapes on the live canvas (no reload needed —
-  // they arrive over the websocket sync).
+  // they arrive over the websocket sync), identified by their deterministic
+  // shape ids. Exact placement (land on the playmat vs. everything else on
+  // the Stack) is covered by cardArrival.test.ts against the room's tldraw
+  // snapshot directly — the player area (JES-140) is now big enough that a
+  // land far from the origin only gets its inner <img> lazily mounted by
+  // tldraw once in view, so this doesn't assert on that inner element.
   const cardShapes = page.locator(`.tl-shape[data-shape-type="image"]`);
   await expect(cardShapes).toHaveCount(2, { timeout: 10000 });
-
-  // And in different areas: the stack sits above the battlefield rows.
-  const boxes = [];
-  for (let i = 0; i < 2; i++) {
-    boxes.push((await cardShapes.nth(i).boundingBox())!);
-  }
-  const [a, b] = boxes;
-  expect(Math.abs(a.y - b.y)).toBeGreaterThan(50);
+  await expect(page.locator(`#shape\\:card-${land.card.instanceId}`)).toBeAttached();
+  await expect(page.locator(`#shape\\:card-${nonland.card.instanceId}`)).toBeAttached();
 });

@@ -1,5 +1,7 @@
+import { trace } from "@opentelemetry/api";
 import { GameState, GameCard } from "../GameState.js";
-import { TabletopPort, ZoneHint, buildCardPlayedEvent } from "./types.js";
+import { TabletopPort, ZoneHint, buildCardPlayedEvent, buildSeatJoinedEvent, defaultPlaymatImageUrl, cardBackImageUrl } from "./types.js";
+import { log } from "../log.js";
 
 /**
  * The Shuffler picks the zone hint — it knows land vs nonland from
@@ -44,4 +46,27 @@ export async function sendCardToTableFirst(
     zoneHint
   );
   await tabletopPort.sendCardToTable(game.tableName, event);
+}
+
+/**
+ * Announce a seat joining its table (JES-140), at Shuffle Up. Best-effort:
+ * unlike sendCardToTableFirst, a Tabletop that's unreachable here must not
+ * block starting the game — the player area is drawn lazily as a fallback
+ * the first time one of this seat's cards arrives (see the Tabletop's
+ * ensurePlayerArea).
+ */
+export async function sendSeatJoinedBestEffort(
+  tabletopPort: TabletopPort | undefined,
+  tableName: string,
+  seatId: string,
+  playerName: string
+): Promise<void> {
+  if (!tabletopPort) return;
+  const event = buildSeatJoinedEvent({ seatId, playerName }, defaultPlaymatImageUrl(), cardBackImageUrl());
+  try {
+    await tabletopPort.sendSeatJoined(tableName, event);
+  } catch (error) {
+    trace.getActiveSpan()?.setAttributes({ "seat_joined.send_failed": true, "table.name": tableName, "seat.id": seatId });
+    log.warn("seat.joined send to tabletop failed (best-effort; table draws the player area lazily)", { "table.name": tableName, "seat.id": seatId }, error as Error);
+  }
 }

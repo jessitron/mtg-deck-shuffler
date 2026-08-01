@@ -8,16 +8,19 @@ This ship's seamap: `SEAMAP.md` (in this directory).
 ## What this is
 
 Vite + React + tldraw synced canvas with an Express/ws sync server.
-`/t/:tableName` is a shared board; the card-arrival API
-(`POST /api/tables/:tableName/cards`, SCAFFOLDING for the Spine's future feed)
-places cards from the Shuffler.
+`/t/:tableName` is a shared board; two SCAFFOLDING endpoints (for the Spine's
+future feed) place things on it: `POST /api/tables/:tableName/events`
+(`seat.joined`, `src/server/seatJoined.ts`) draws a seat's player area at
+Shuffle Up, and `POST /api/tables/:tableName/cards` (`cardArrival.ts`) places
+cards from the Shuffler onto it.
 
 See `README.md` (in this directory) for Modes and SCAFFOLDING callouts.
 
-The next mountain — a real player area (playmat, library, graveyard, exile, Stack) drawn
-at shuffle-up instead of today's bare battlefield row — is specified in `DESIGN.md` (in
-this directory, JES-140). Read it before touching `src/server/cardLayout.ts` or
-`cardArrival.ts`.
+The player area (playmat, library, graveyard, exile, Stack) is specified in
+`DESIGN.md` (in this directory, JES-140) — read it before touching
+`src/server/cardLayout.ts`, `tableFurniture.ts`, `cardArrival.ts`, or
+`seatJoined.ts`. One piece is deliberately deferred: the playmat never grows
+taller when lands overflow its bottom half (JES-141).
 
 ## Commands
 

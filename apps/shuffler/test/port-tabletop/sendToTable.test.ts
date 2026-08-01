@@ -1,6 +1,6 @@
 import { GameState, TableInfo } from "../../src/GameState.js";
 import { FakeTabletopGateway } from "../../src/port-tabletop/FakeTabletopGateway.js";
-import { sendCardToTableFirst, zoneHintForPlay } from "../../src/port-tabletop/sendToTable.js";
+import { sendCardToTableFirst, sendSeatJoinedBestEffort, zoneHintForPlay } from "../../src/port-tabletop/sendToTable.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
 import { lightningBolt, testProvenance } from "../generators.js";
 
@@ -101,5 +101,33 @@ describe("sendCardToTableFirst", () => {
     const bolt = cardNamed(game, "Lightning Bolt");
 
     await expect(sendCardToTableFirst(undefined, game, bolt, "stack")).rejects.toThrow("TABLETOP_URL");
+  });
+});
+
+describe("sendSeatJoinedBestEffort", () => {
+  it("sends a seat.joined event carrying the seat's identity and both image URLs", async () => {
+    const fake = new FakeTabletopGateway();
+
+    await sendSeatJoinedBestEffort(fake, "Friday Night", "abc12345", "Jess");
+
+    expect(fake.sentSeatJoinedEvents).toHaveLength(1);
+    const { tableName, event } = fake.sentSeatJoinedEvents[0];
+    expect(tableName).toBe("Friday Night");
+    expect(event.name).toBe("seat.joined");
+    expect(event.initiator).toEqual({ seatId: "abc12345", playerName: "Jess" });
+    expect(event.playmatImageUrl).toMatch(/^https:\/\//);
+    expect(event.cardBackImageUrl).toMatch(/^https:\/\//);
+  });
+
+  it("is a no-op when no tabletop is configured — Shuffle Up must not fail", async () => {
+    await expect(sendSeatJoinedBestEffort(undefined, "Friday Night", "abc12345", "Jess")).resolves.toBeUndefined();
+  });
+
+  it("swallows a gateway failure — best-effort, unlike sendCardToTableFirst", async () => {
+    const fake = new FakeTabletopGateway();
+    fake.failWith(new Error("connection refused"));
+
+    await expect(sendSeatJoinedBestEffort(fake, "Friday Night", "abc12345", "Jess")).resolves.toBeUndefined();
+    expect(fake.sentSeatJoinedEvents).toHaveLength(0);
   });
 });

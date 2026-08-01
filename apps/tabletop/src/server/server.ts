@@ -7,6 +7,7 @@ import { trace, context, propagation, SpanKind } from "@opentelemetry/api";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
 import { handleCardArrival } from "./cardArrival.js";
+import { handleSeatJoined } from "./seatJoined.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -49,6 +50,9 @@ export function createApp() {
 
   // The card-arrival seam (A5) — SCAFFOLDING the Spine absorbs; see cardArrival.ts
   app.post("/api/tables/:tableName/cards", handleCardArrival);
+
+  // The seat-joined seam (JES-140) — SCAFFOLDING the Spine absorbs; see seatJoined.ts
+  app.post("/api/tables/:tableName/events", handleSeatJoined);
 
   // Static app (Vite build output)
   app.use(express.static(CLIENT_DIR));

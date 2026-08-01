@@ -1,4 +1,4 @@
-import { CardPlayedEvent, TabletopPort } from "./types.js";
+import { CardPlayedEvent, SeatJoinedEvent, TabletopPort } from "./types.js";
 
 /**
  * Fake (not mock) Tabletop for tests: records every event it accepts, and can
@@ -6,6 +6,7 @@ import { CardPlayedEvent, TabletopPort } from "./types.js";
  */
 export class FakeTabletopGateway implements TabletopPort {
   public readonly sentEvents: { tableName: string; event: CardPlayedEvent }[] = [];
+  public readonly sentSeatJoinedEvents: { tableName: string; event: SeatJoinedEvent }[] = [];
   private failure: Error | null = null;
 
   failWith(error: Error): void {
@@ -21,5 +22,12 @@ export class FakeTabletopGateway implements TabletopPort {
       throw this.failure;
     }
     this.sentEvents.push({ tableName, event });
+  }
+
+  async sendSeatJoined(tableName: string, event: SeatJoinedEvent): Promise<void> {
+    if (this.failure) {
+      throw this.failure;
+    }
+    this.sentSeatJoinedEvents.push({ tableName, event });
   }
 }

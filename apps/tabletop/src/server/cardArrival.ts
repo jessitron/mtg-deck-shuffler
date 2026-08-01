@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { trace } from "@opentelemetry/api";
-import { AssetRecordType, createShapeId, toRichText, TLAssetId, TLShapeId } from "@tldraw/tlschema";
-import { IndexKey, getIndexAbove, ZERO_INDEX_KEY } from "@tldraw/utils";
-import { getOrCreateRoom, RoomEntry, SeatRow } from "./rooms.js";
+import { AssetRecordType, createShapeId, TLAssetId } from "@tldraw/tlschema";
+import { getOrCreateRoom, RoomEntry } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
-import { CARD_W, CARD_H, STACK_AREA, EXILE_X, EXILE_SCALE, GRAVEYARD_X, rowOrigin, stackPosition, battlefieldPosition, graveyardPosition } from "./cardLayout.js";
+import { CARD_W, CARD_H, landPosition, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
+import { ensurePlayerArea, pageIdOf, nextIndex } from "./tableFurniture.js";
 
 // ============================================================================
 // SCAFFOLDING — the seam the Spine absorbs.
@@ -57,112 +57,13 @@ function validationError(body: unknown): string | null {
   return null;
 }
 
-// Per-room monotonically increasing z-order index for injected shapes.
-const lastIndexByRoom = new Map<string, IndexKey>();
-function nextIndex(tableName: string): IndexKey {
-  const next = getIndexAbove(lastIndexByRoom.get(tableName) ?? ZERO_INDEX_KEY);
-  lastIndexByRoom.set(tableName, next);
-  return next;
-}
-
 // Per-room count of cards placed on the stack (drives the cascade).
 const stackCountByRoom = new Map<string, number>();
-
-function pageIdOf(entry: RoomEntry): string {
-  const page = entry.room.getCurrentSnapshot().documents.find((d) => (d.state as any).typeName === "page");
-  return page ? (page.state as any).id : "page:page";
-}
 
 function instanceAlreadyOnTable(entry: RoomEntry, instanceId: string): boolean {
   return entry.room
     .getCurrentSnapshot()
     .documents.some((d) => (d.state as any).typeName === "shape" && (d.state as any).meta?.instanceId === instanceId);
-}
-
-/** Region furniture drawn once per table: the stack area outline. */
-async function ensureStackArea(entry: RoomEntry, pageId: string): Promise<void> {
-  const stackId = createShapeId(`region-stack-${entry.tableName}`);
-  if (entry.room.getRecord(stackId)) return;
-  await entry.room.updateStore((store) => {
-    store.put(regionShape(stackId, pageId, STACK_AREA.x - 20, STACK_AREA.y - 20, CARD_W + 260, CARD_H + 120, STACK_AREA.label, nextIndex(entry.tableName)));
-  });
-}
-
-/**
- * Allocate a battlefield row for a seat (first-play order), with the player's
- * name label and the row's Graveyard + smaller Exile spots.
- */
-async function ensureSeatRow(entry: RoomEntry, pageId: string, seatId: string, playerName: string): Promise<SeatRow> {
-  const existing = entry.seats.get(seatId);
-  if (existing) return existing;
-
-  const rowIndex = entry.seats.size;
-  const seatRow: SeatRow = { rowIndex, playerName, battlefieldCount: 0, graveyardCount: 0, exileCount: 0 };
-  entry.seats.set(seatId, seatRow);
-
-  const origin = rowOrigin(rowIndex);
-  const labelId = createShapeId(`row-label-${entry.tableName}-${seatId}`);
-  const graveyardId = createShapeId(`region-graveyard-${entry.tableName}-${seatId}`);
-  const exileId = createShapeId(`region-exile-${entry.tableName}-${seatId}`);
-  await entry.room.updateStore((store) => {
-    store.put({
-      id: labelId,
-      typeName: "shape",
-      type: "text",
-      x: origin.x,
-      y: origin.y - 52,
-      rotation: 0,
-      index: nextIndex(entry.tableName),
-      parentId: pageId,
-      isLocked: false,
-      opacity: 1,
-      props: { richText: toRichText(playerName), color: "green", size: "m", font: "serif", textAlign: "start", autoSize: true, w: 200, scale: 1 },
-      meta: {},
-    } as any);
-    store.put(regionShape(graveyardId, pageId, GRAVEYARD_X - 10, origin.y - 10, CARD_W + 40, CARD_H + 40, "Graveyard", nextIndex(entry.tableName)));
-    store.put(
-      regionShape(exileId, pageId, EXILE_X - 10, origin.y - 10, CARD_W * EXILE_SCALE + 30, CARD_H * EXILE_SCALE + 30, "Exile", nextIndex(entry.tableName))
-    );
-  });
-
-  // Attributes on the request span, not an event: this always runs inside
-  // handleCardArrival, and the fact that THIS arrival allocated a row is part of
-  // what that request did.
-  trace.getActiveSpan()?.setAttributes({ "row.allocated": true, "seat.id": seatId, "player.name": playerName, "row.index": rowIndex });
-  return seatRow;
-}
-
-function regionShape(id: TLShapeId, pageId: string, x: number, y: number, w: number, h: number, label: string, index: IndexKey) {
-  return {
-    id,
-    typeName: "shape",
-    type: "geo",
-    x,
-    y,
-    rotation: 0,
-    index,
-    parentId: pageId,
-    isLocked: true, // furniture: don't let a stray drag eat the graveyard
-    opacity: 0.5,
-    props: {
-      geo: "rectangle",
-      w,
-      h,
-      dash: "dashed",
-      fill: "none",
-      color: "grey",
-      labelColor: "grey",
-      size: "s",
-      font: "serif",
-      align: "start-legacy",
-      verticalAlign: "start",
-      growY: 0,
-      url: "",
-      scale: 1,
-      richText: toRichText(label),
-    },
-    meta: {},
-  } as any;
 }
 
 /**
@@ -212,21 +113,23 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
   }
 
   const pageId = pageIdOf(entry);
-  await ensureStackArea(entry, pageId);
-  const seatRow = await ensureSeatRow(entry, pageId, arrival.initiator.seatId, arrival.initiator.playerName);
+  // Defensive fallback: normally seat.joined already drew this seat's player
+  // area before any card arrives. If a card somehow arrives first, draw a
+  // plain area now rather than fail — ensurePlayerArea is idempotent on seatId.
+  const playerArea = await ensurePlayerArea(entry, pageId, arrival.initiator.seatId, arrival.initiator.playerName);
 
   let position: { x: number; y: number };
   switch (arrival.zoneHint) {
-    case "battlefield":
-      position = battlefieldPosition(seatRow.rowIndex, seatRow.battlefieldCount++);
+    case "battlefield": // a land, going straight to the playmat
+      position = landPosition(playerArea.seatIndex, playerArea.landCount++);
       break;
     case "graveyard":
-      position = graveyardPosition(seatRow.rowIndex, seatRow.graveyardCount++);
+      position = graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++);
       break;
     case "stack": {
       const count = stackCountByRoom.get(tableName) ?? 0;
       stackCountByRoom.set(tableName, count + 1);
-      position = stackPosition(count);
+      position = stackCardPosition(count);
       break;
     }
   }

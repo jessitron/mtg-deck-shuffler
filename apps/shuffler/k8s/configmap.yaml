@@ -13,3 +13,4 @@ data:
   OTEL_LOG_LEVEL: "info"
   TABLETOP_URL: "http://mtg-tabletop-service"
   TABLETOP_PUBLIC_URL: "https://table.jessitron.honeydemo.io"
+  SHUFFLER_PUBLIC_URL: "https://mtg.jessitron.honeydemo.io"

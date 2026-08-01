@@ -14,13 +14,14 @@ import { log } from "./log.js";
 // filed buoy.
 // ============================================================================
 
-export interface SeatRow {
-  /** battlefield row number, allocated in first-play order */
-  rowIndex: number;
+export interface PlayerArea {
+  /** position in the row of player areas, assigned in join order (JES-140) */
+  seatIndex: number;
   playerName: string;
-  battlefieldCount: number;
+  playmatImageUrl?: string;
+  cardBackImageUrl?: string;
+  landCount: number;
   graveyardCount: number;
-  exileCount: number;
 }
 
 export interface RoomEntry {
@@ -28,8 +29,8 @@ export interface RoomEntry {
   room: TLSocketRoom;
   /** event ids already ingested — dedup for retried requests (A5) */
   seenEventIds: Set<string>;
-  /** seatId -> battlefield row allocation (A5) */
-  seats: Map<string, SeatRow>;
+  /** seatId -> player area allocation, in join order (JES-140) */
+  seats: Map<string, PlayerArea>;
   createdAt: Date;
 }
 

@@ -1,6 +1,6 @@
 import { createServer, IncomingMessage, Server, ServerResponse } from "node:http";
 import { AddressInfo } from "node:net";
-import { buildCardPlayedEvent, CardPlayedEvent } from "../../src/port-tabletop/types.js";
+import { buildCardPlayedEvent, buildSeatJoinedEvent, CardPlayedEvent } from "../../src/port-tabletop/types.js";
 import { FakeTabletopGateway } from "../../src/port-tabletop/FakeTabletopGateway.js";
 import { HttpTabletopGateway } from "../../src/port-tabletop/HttpTabletopGateway.js";
 import { GameCard } from "../../src/GameState.js";
@@ -113,5 +113,22 @@ describe("HttpTabletopGateway", () => {
   it("throws when the tabletop is unreachable", async () => {
     const gateway = new HttpTabletopGateway("http://localhost:1"); // nothing listens here
     await expect(gateway.sendCardToTable("Friday Night", anEvent())).rejects.toThrow();
+  });
+
+  it("POSTs a seat.joined event to /api/tables/:tableName/events", async () => {
+    const gateway = new HttpTabletopGateway(baseUrl);
+    const event = buildSeatJoinedEvent(initiator, "https://mtg.example/playmat.png", "https://mtg.example/card-back.jpg");
+    await gateway.sendSeatJoined("Friday Night", event);
+
+    expect(received).toHaveLength(1);
+    expect(received[0].url).toBe("/api/tables/Friday%20Night/events");
+    expect(received[0].body).toEqual(JSON.parse(JSON.stringify(event)));
+  });
+
+  it("throws on a non-2xx response for seat.joined", async () => {
+    respondWithStatus = 503;
+    const gateway = new HttpTabletopGateway(baseUrl);
+    const event = buildSeatJoinedEvent(initiator);
+    await expect(gateway.sendSeatJoined("Friday Night", event)).rejects.toThrow(/503/);
   });
 });
