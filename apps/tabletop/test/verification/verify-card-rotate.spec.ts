@@ -48,5 +48,13 @@ test("clicking a card rotates it 90 degrees", async ({ page, baseURL }) => {
     expect(after!.width).toBeLessThan(before!.height * 1.1);
     expect(after!.height).toBeGreaterThan(before!.width * 0.9);
     expect(after!.height).toBeLessThan(before!.width * 1.1);
+    // It rotates around its own center, not a corner — the center point
+    // shouldn't move.
+    const beforeCenter = { x: before!.x + before!.width / 2, y: before!.y + before!.height / 2 };
+    const afterCenter = { x: after!.x + after!.width / 2, y: after!.y + after!.height / 2 };
+    expect(afterCenter.x).toBeGreaterThan(beforeCenter.x - 5);
+    expect(afterCenter.x).toBeLessThan(beforeCenter.x + 5);
+    expect(afterCenter.y).toBeGreaterThan(beforeCenter.y - 5);
+    expect(afterCenter.y).toBeLessThan(beforeCenter.y + 5);
   }).toPass({ timeout: 5000 });
 });
