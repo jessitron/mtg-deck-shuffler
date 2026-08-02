@@ -2,7 +2,7 @@
 
 **Status: awaiting Jess's answers.** As of 2026-08-02 she has decided them but hasn't
 written them down here yet; she'll give them at the top of the session that implements
-this.
+this. Tracked as **[JES-155](https://linear.app/honeycombio/issue/JES-155)**.
 
 This is the handoff doc for converging the Shuffler's design drift. Each choice below is
 staged on **`/design`** with its options rendered side by side, and each has its exact
