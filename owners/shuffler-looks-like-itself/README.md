@@ -89,8 +89,12 @@ than leaving the choice visible.
 
 ## Open choices — staged on `/design`, not yet decided
 
-These are live. Until Jess picks, don't hard-code an answer; follow the existing
-treatment nearest the component and flag the choice.
+**→ [open-choices.md](open-choices.md) is the work list**: every option, its exact
+implementation steps with file:line, and the checklist for resolving one. Start there if
+you've been sent to converge the design.
+
+Until Jess picks, don't hard-code an answer; follow the existing treatment nearest the
+component and flag the choice.
 
 | Choice | Options on the page |
 | --- | --- |
@@ -120,6 +124,8 @@ Candidate CSS for the unadopted options lives in
 
 ## The other files
 
+- [open-choices.md](open-choices.md) — **the work list.** The six undecided questions with
+  implementation steps, plus the mechanical cleanups that fall out of them.
 - [interactions.md](interactions.md) — what this leans on, who breaks it, and the concrete
   watch points. **The review skill's fuel.**
 - [architecture.md](architecture.md) — how the stylesheets are organised, which file owns

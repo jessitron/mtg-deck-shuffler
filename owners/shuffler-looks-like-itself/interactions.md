@@ -45,8 +45,10 @@ Concrete, in rough order of how often they bite.
 - New chrome gets **square corners** (`border-radius: 0`). Round corners are for cards,
   the playmat, `.page-container`, and count discs only.
 - Button labels are **Orbitron**. Card names are **Ovo**. No fourth typeface.
-- Give it a **visible `:focus-visible` state**. The app has exactly one focus rule today
-  (`.button-base:focus` in `site.css`); don't add to the deficit.
+- Give it a **visible `:focus-visible` state**. The app has exactly one focus *outline*
+  today (`site.css:330`, `.button-base:focus`) — and two rules that make things worse by
+  setting `outline: none` (`deck-selection.css:59` and `:86`). Don't add to the deficit,
+  and never write `outline: none` without replacing it with something visible.
 - Neighbouring drift is not permission. Jess's call: pull toward the standard.
 
 **Adding a stylesheet**

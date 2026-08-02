@@ -23,6 +23,9 @@ to add or change UI and wants background before starting.
 - **`README.md`** — the charge, the design language (typefaces, tokens, bevels, square
   corners, the 200px card unit, the two style worlds), the design philosophy, and the
   table of **open choices** not yet decided.
+- **`open-choices.md`** — the work list for converging the drift: each undecided question
+  with its options, exact `file:line` implementation steps, and the resolve checklist.
+  Read this if the asker was sent to *settle* the design rather than add to it.
 - **`interactions.md`** — what the language depends on, who depends on it, and the
   concrete watch points. Read this if the question is "what will I break?"
 - **`architecture.md`** — which stylesheet owns which component, the two separate

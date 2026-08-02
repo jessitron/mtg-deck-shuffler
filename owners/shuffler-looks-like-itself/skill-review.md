@@ -54,7 +54,9 @@ you skipped.
 **Interaction & accessibility**
 
 - [ ] Does every new interactive element have a visible `:focus-visible` state? The app
-      has exactly one focus rule today — don't add to the deficit.
+      has exactly one focus outline today (`site.css:330`) plus two rules that set
+      `outline: none` — don't add to the deficit, and reject any new `outline: none` that
+      isn't replaced with something visible.
 - [ ] Is hover the *only* affordance for anything? It shouldn't be.
 - [ ] Does the hover/press behaviour match the nearest existing family, or invent a new
       one?

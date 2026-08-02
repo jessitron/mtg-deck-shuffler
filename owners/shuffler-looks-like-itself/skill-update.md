@@ -16,8 +16,8 @@ drifts becomes a confident lie, which is worse than no owner.
 
 ## Procedure
 
-1. **Read all four KB files first:** `owners/shuffler-looks-like-itself/README.md`,
-   `interactions.md`, `architecture.md`, `history.md`.
+1. **Read all five KB files first:** `owners/shuffler-looks-like-itself/README.md`,
+   `open-choices.md`, `interactions.md`, `architecture.md`, `history.md`.
 
 2. **Read the actual diff, not the summary.** `git diff` / `git show` on the changed
    files. Descriptions of CSS changes are unreliable — a summary saying "styled the new
@@ -34,6 +34,10 @@ drifts becomes a confident lie, which is worse than no owner.
      rule, a new component family), or if an **open choice was resolved**. When a choice
      is resolved: remove its row from the open-choices table and state the decision in the
      design-language section.
+   - **`open-choices.md`** — mark the resolved choice **DECIDED** with the date and the
+     reasoning (don't delete it — the reasoning is the valuable part), and tick off any
+     mechanical cleanup that landed. Follow its "when a choice is resolved" checklist; it
+     is the authority on what else must move.
    - **`architecture.md`** — if a stylesheet was added/removed, a component moved between
      files, a duplicated block was fixed (**delete it from the traps list**), the
      `<head>`s changed, the z-index ladder changed, or the gallery's structure changed.
