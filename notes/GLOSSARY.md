@@ -18,7 +18,7 @@ MTG Deck Shuffler Game State: this is where we track the game state. The vocabul
 
 Spine: the central bounded context of the larger system (Ruby service, planned). Its language — Tables, Seats, events of every kind — is the published language the other contexts translate themselves into. See "Spine terms" below.
 
-Tabletop: the tldraw-based shared canvas (planned). Its language is the *physics* of Magic — card identity, zone geography, gestures, notes — never card meaning. It emits Physical Events to the Spine.
+Tabletop: the tldraw-based shared canvas (planned). Its language is the _physics_ of Magic — card identity, zone geography, gestures, notes — never card meaning. It emits Physical Events to the Spine.
 
 Interpreter: the translation layer from Tabletop physics to Spine meaning — an anti-corruption layer that happens to be an AI. Lives inside the Spine app for now; its boundary (physical events in, game events out) is sacred regardless.
 
@@ -32,9 +32,7 @@ Oracle Card: this word is defined by Archidekt, referring to a definition in the
 
 Card Name: this is ambiguous in the Archidekt and Scryfall domains. Usually the Card Display Name and the Card Oracle Name are the same, but not always. The Card Oracle Name is the unique identifier for a card. The Card Display Name is at the very top of the card, and this is what we use in MTG Deck Shuffler.
 
-Card vs Face: cards have names, and faces have names. A two-faced card's canonical (Display) Name contains both face names, joined by ` // ` — e.g. "Eiganjo Dynastorian // Replenish". **Zones contain cards, not faces**: the library, the hand, and the table hold cards. So anything that identifies or orders cards — sorting a list, matching a name — uses the canonical card name, not whichever face happens to be showing. The face only decides which image and which text is displayed right now (`GameCard.currentFace`).
-
-Faces matter on the real table — a permanent is on the battlefield front-face-up or back-face-up, and that's part of the game state there. The Shuffler doesn't model that; it knows cards, and passes the current face outward (in `card.played`) as display information for the Tabletop to act on. So: face is a boundary-crossing display fact, never an identity.
+Card vs Face: cards have names, and faces have names. A two-faced card's canonical (Display) Name contains both face names, joined by `//` — e.g. "Eiganjo Dynastorian // Replenish". Deck Shuffler zones contain cards, not faces: the library, the hand, and the table hold cards. So anything that identifies or orders cards — sorting a list, matching a name — uses the canonical card name.
 
 Scryfall ID: Scryfall's card ID. This is a UUID. From this, we can derive a card image URL on Scryfall. Archidekt calls it `uid`.
 
@@ -122,7 +120,7 @@ Visibility: an attribute of every event. Public events are seen by everyone at t
 
 Public Shadow: the public event cast by a private one. "Jess drew a card" (hand count 6→7) is the public shadow of "Jess drew Lyra Dawnbringer." **The shadow is created at the source**: the Shuffler sends only the shadow; the Spine never receives hidden-zone card identities. The Spine's log knows exactly what a person standing at the table would know. (Visibility in the Spine is for audience scoping — reveals to some players, private tutor-chats — not zone secrecy.)
 
-Look At vs Reveal (Spine, not yet designed): *look at* is private — a player sees hidden information (top of library, an opponent's hand via an effect); its public shadow says only that the looking happened. *Reveal* is deliberate publication of a card's identity, with an audience scope (everyone, or chosen players). The Shuffler's Reveal button is a look-at.
+Look At vs Reveal (Spine, not yet designed): _look at_ is private — a player sees hidden information (top of library, an opponent's hand via an effect); its public shadow says only that the looking happened. _Reveal_ is deliberate publication of a card's identity, with an audience scope (everyone, or chosen players). The Shuffler's Reveal button is a look-at.
 
 Table Event (Spine): joining a table, taking a seat, someday matching. Not a game event.
 
