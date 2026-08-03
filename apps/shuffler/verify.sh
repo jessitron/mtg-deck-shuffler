@@ -2,13 +2,19 @@
 
 # Run verification tests with server lifecycle management
 # This script:
-# 1. Starts the app on port 3001
+# 1. Starts the app on a random port (so concurrent runs in other worktrees
+#    don't collide on a fixed port)
 # 2. Waits for the server to be ready
 # 3. Runs Playwright verification tests
 # 4. Shuts down the server
 # 5. Returns the test exit code
 
 set -e
+
+# Random high port per run. .env exports a fixed PORT (for ./run), but the
+# inline `PORT=$VERIFY_PORT node ...` below overrides that for this process only.
+VERIFY_PORT=$(( (RANDOM % 20000) + 20000 ))
+BASE_URL="http://localhost:$VERIFY_PORT"
 
 # Colors for output
 GREEN='\033[0;32m'
@@ -36,9 +42,9 @@ if [ -f .env ]; then
     source .env
 fi
 
-# Start server on port 3001 in the background
-echo -e "${YELLOW}Starting server on port 3001...${NC}"
-PORT=3001 node --import ./dist/tracing.js dist/server.js &
+# Start server on the chosen port in the background
+echo -e "${YELLOW}Starting server on port $VERIFY_PORT...${NC}"
+PORT=$VERIFY_PORT node --import ./dist/tracing.js dist/server.js &
 SERVER_PID=$!
 
 # Function to cleanup server on exit
@@ -56,7 +62,7 @@ trap cleanup EXIT INT TERM
 # Wait for server to be ready (max 10 seconds)
 echo -e "${YELLOW}Waiting for server to be ready...${NC}"
 for i in {1..20}; do
-    if curl -s http://localhost:3001/ > /dev/null 2>&1; then
+    if curl -s "$BASE_URL/" > /dev/null 2>&1; then
         echo -e "${GREEN}Server is ready!${NC}"
         break
     fi
@@ -67,9 +73,11 @@ for i in {1..20}; do
     sleep 0.5
 done
 
-# Run Playwright tests
+# Run Playwright tests (pass through any args, e.g. ./verify.sh verify-design-gallery
+# to run just one spec by name). BASE_URL tells playwright.config.ts and each spec
+# which port this run's server is actually on.
 echo -e "${YELLOW}Running verification tests...${NC}"
-npx playwright test
+BASE_URL="$BASE_URL" npx playwright test "$@"
 
 # Capture the exit code
 TEST_EXIT_CODE=$?

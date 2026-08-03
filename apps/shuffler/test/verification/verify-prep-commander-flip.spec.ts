@@ -12,7 +12,7 @@
 
 import { test, expect, Page } from '@playwright/test';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 // "From Cute to Brute" — its commander, Esika, God of the Tree // The Prismatic
 // Bridge, is a genuine two-faced (modal DFC) card, so it gets a flip button.

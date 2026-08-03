@@ -15,7 +15,7 @@
 
 import { test, expect, Page } from '@playwright/test';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 const TWO_FACED_DECK = 'precon-mtgjson-FromCutetoBrute_SLD.json';
 
 test.setTimeout(90000);

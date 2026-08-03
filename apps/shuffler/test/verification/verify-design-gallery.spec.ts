@@ -15,7 +15,7 @@
 
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 // The app stylesheets the gallery must render its specimens with. If a page adds
 // a new stylesheet, add it here and to views/design.ejs.

@@ -19,7 +19,7 @@ import { spawn, ChildProcess } from 'node:child_process';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 const TABLETOP_URL = 'http://localhost:5180';
 const TABLETOP_DIR = path.resolve(process.cwd(), '..', 'tabletop');
 const TABLETOP_SERVER = path.join(TABLETOP_DIR, 'dist', 'server', 'server.js');
