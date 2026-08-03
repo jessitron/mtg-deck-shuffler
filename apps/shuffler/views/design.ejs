@@ -460,6 +460,16 @@
             </div>
             <div class="option-where">styles.css — sits flat on the ground, no travel left</div>
           </div>
+          <div class="option">
+            <div class="option-label">Tab / radio pair — .hero-button (decided 2026-08-02, standalone)</div>
+            <div class="stage stage-site">
+              <div class="hero-buttons">
+                <button class="button-base pushable-flat hero-button active">Precon</button>
+                <button class="button-base pushable-flat hero-button">Archidekt</button>
+              </div>
+            </div>
+            <div class="option-where">site.css — same fill for both (this is a radio choice, not two independent buttons); the active one gets a dark-pink underline, since elevation alone read as too subtle to signal "this one, not the other"</div>
+          </div>
         </div>
 
         <h3>The rule</h3>
@@ -474,6 +484,10 @@
             reproduce the same numbers directly in their own stylesheet rather than taking on the
             class.</li>
           <li>No more <code>outset</code>/<code>inset</code> borders for press feedback anywhere.</li>
+          <li><strong>A radio/tab pair needs a selection signal beyond press physics.</strong>
+            <code>.hero-button.active</code> gets a <code>4px</code> dark-pink underline
+            (<code>::after</code>) on top of the shared shape — a standalone decision, not part of
+            JES-155, made when the underline-only elevation difference proved too subtle.</li>
         </ul>
       </section>
 

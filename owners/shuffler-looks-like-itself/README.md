@@ -70,6 +70,13 @@ category. Don't collapse the BFC into "just a bigger primary button" — that's 
 distinction the app actually draws, not drift (caught 2026-08-02, see
 [history.md](history.md)).
 
+**A radio/tab pair needs its own selection signal (decided 2026-08-02, standalone —
+not part of JES-155).** `.hero-button.active` (Precon/Archidekt on `/choose-any-deck`)
+gets a `4px` dark-pink underline via `::after`, on top of the shared press physics.
+Elevation alone (the "already pressed" look from choice 1) read as too subtle to signal
+mutual exclusivity. This is a one-off pattern for exclusive-choice controls, not a new
+button color rule — don't reuse it for ordinary buttons.
+
 **Square corners on chrome.** Round corners belong only to physical objects: cards, the
 playmat, the `.page-container` (which is itself a giant Magic card), count discs.
 

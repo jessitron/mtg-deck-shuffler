@@ -381,6 +381,20 @@ body {
   transition: none;
 }
 
+/* This is a radio choice (Precon vs Archidekt), not two independent buttons —
+ * "which one is selected" needs its own signal beyond the shared press
+ * physics. A dark-pink underline on the active tab, standalone decision,
+ * not part of JES-155. */
+.hero-button.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--dark-pink);
+}
+
 /* Hero buttons container - for multiple buttons side by side */
 .hero-buttons {
   display: flex;

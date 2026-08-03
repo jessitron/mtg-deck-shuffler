@@ -155,3 +155,18 @@ next agent that greps for "buttons".
 `#6c757d` — both are *text*, not buttons, so out of scope for this choice; they're
 candidates for the "tokenize the orphan colors" mechanical cleanup in
 [open-choices.md](open-choices.md).
+
+## 2026-08-02 — a standalone decision: the Precon/Archidekt tab pair needs a selection signal
+
+Jess noticed the Precon/Archidekt control on `/choose-any-deck` had stopped reading as a
+radio choice — both tabs looked identical apart from a 2px elevation difference (the
+"already pressed" look from choice 1), which was too subtle to say "this one, not the
+other." Explicitly **not** folded into JES-155 — it's a distinct kind of component (a
+mutually-exclusive tab/radio pair), not another button-fill decision.
+
+Given three options (fill inversion, unselected-recedes, underline accent), she picked
+**the underline**: both tabs keep the same light-pink fill; `.hero-button.active` gets a
+`4px` solid dark-pink bar via `::after`, layered on top of the shared press physics
+rather than replacing it. Added a specimen for it in the Buttons section of `/design`
+(tagged as its own standalone decision, not a JES-155 choice) so it doesn't get
+mistaken for one of the six and re-litigated.
