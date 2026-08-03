@@ -108,3 +108,29 @@ dark-pink. Caught in review: a leftover `.hero-button.active { background-color:
 #f0f0f0 }` rule (a relic of the old outset/inset press system) was still overriding the
 tab toggle's color after the press-physics rewrite — removed, since the "already
 pressed" look now comes from the shared transform/shadow values, not a color swap.
+
+## 2026-08-02 — choice 2 decided: secondary-button gray
+
+Jess picked **option C: `var(--deep-space)` fill + `var(--light-pink)` text** —
+on-brand, no new color enters the palette. Replaced `#6c757d` (Bootstrap) and `#607d8b`
+(Material) across `game.css` `.end-game-actions button/a`, `game.css`
+`.card-action-button.secondary`, and `playmat.css` `.modal-action-button.secondary`
+(base, `:hover`, `:active` for each). All three now reuse `#0d0716` as their box-shadow
+bevel color — the same darkened-`--deep-space` shade already established for
+`.pushable-flat.pushable-dark` in `styles.css` — rather than computing a fresh shadow
+shade per site.
+
+Found in the process: three sites also darkened their fill *again* on `:hover`
+(`#5a6268`, the Bootstrap `:hover`-darken riding along with `#6c757d`) —
+`.table-cards-button`, `.end-game-actions`, `.card-action-button.secondary`. None of the
+canonical `.pushable-flat`-shaped siblings (`.modal-action-button.play-button` and its
+kin in `playmat.css`) touch `background-color` on `:hover`, only `box-shadow` +
+`transform`. Read as drift rather than a deliberate secondary-button affordance, so the
+override was dropped on all three rather than recolored — `.table-cards-button`'s base
+fill is black and unrelated to the "secondary gray" family, but it carried the exact
+same stray hex, so it got the same cleanup.
+
+`.event-undo` (`game.css`) and `.cancel-link` (`src/view/debug/load-state.ts`) still use
+`#6c757d` — both are *text*, not buttons, so out of scope for this choice; they're
+candidates for the "tokenize the orphan colors" mechanical cleanup in
+[open-choices.md](open-choices.md).

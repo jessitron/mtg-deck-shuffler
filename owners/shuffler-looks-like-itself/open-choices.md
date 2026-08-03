@@ -1,6 +1,6 @@
 # Open choices — the work list
 
-**Status: in progress.** Choice 1 is DECIDED (2026-08-02). Choices 2–6 await Jess's
+**Status: in progress.** Choices 1 and 2 are DECIDED (2026-08-02). Choices 3–6 await Jess's
 answers, one commit at a time. Tracked as
 **[JES-155](https://linear.app/honeycombio/issue/JES-155)**.
 
@@ -53,19 +53,32 @@ Choices 2 and 3 (below) are still open.
 
 ## 2. Secondary-button gray
 
-Three grays currently mean "secondary".
+Three grays used to mean "secondary".
 
 | Option | Value | Where |
 | --- | --- | --- |
-| A | `#6c757d` (Bootstrap) | `game.css:579`, `game.css:667-668` |
-| B | `#607d8b` (Material) | `playmat.css:565` |
-| **C (recommended)** | `var(--deep-space)` + `var(--light-pink)` text | new |
+| A | `#6c757d` (Bootstrap) | `game.css` `.end-game-actions`, `.card-action-button.secondary` |
+| B | `#607d8b` (Material) | `playmat.css` `.modal-action-button.secondary` |
+| **C — DECIDED** | `var(--deep-space)` fill + `var(--light-pink)` text | now live |
 
-**Decision:** _(pending)_
+**Decision: C (2026-08-02).** `var(--deep-space)` + `var(--light-pink)`, on-brand, no new
+color enters the palette. Changed: `game.css` `.end-game-actions button/a` and
+`.card-action-button.secondary` (base, `:hover`, `:active`); `playmat.css`
+`.modal-action-button.secondary` (base, `:hover`, `:active`). The shadow color on all of
+these is `#0d0716` — the same darkened-`--deep-space` shade already established for
+`.pushable-flat.pushable-dark` in `styles.css`, reused rather than computed fresh.
 
-**Sites to change:** `game.css:238` and `:585` and `:672` are the matching `#5a6268`
-hover states — they go too. `game.css:242` (`.event-undo`) is *text*, not a button; treat
-it separately.
+The three sites that darkened their fill *again* on hover (`#5a6268`, riding along with
+the `#6c757d` family) also had that override dropped entirely — `.table-cards-button`,
+`.end-game-actions`, `.card-action-button.secondary`. None of the canonical
+`.pushable-flat`-shaped siblings (e.g. `.modal-action-button.play-button`) change
+`background-color` on `:hover`, only `box-shadow` + `transform` — this was drift, not a
+deliberate secondary affordance, so it was removed rather than recolored.
+
+`game.css` `.event-undo { color: #6c757d }` (text, not a button) and
+`src/view/debug/load-state.ts` `.cancel-link { color: #6c757d }` (same — text) were left
+untouched; they're not part of this choice. They're candidates for the "tokenize the
+orphan colors" cleanup below.
 
 ---
 

@@ -650,17 +650,17 @@
 }
 
 .modal-action-button.secondary {
-  background-color: #607d8b;
-  color: white;
-  box-shadow: 0 4px 0 #3b4d56, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  background-color: var(--deep-space);
+  color: var(--light-pink);
+  box-shadow: 0 4px 0 #0d0716, 0 7px 7px hsl(0deg 0% 0% / 0.25);
 }
 
 .modal-action-button.secondary:hover {
-  box-shadow: 0 6px 0 #3b4d56, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  box-shadow: 0 6px 0 #0d0716, 0 10px 10px hsl(0deg 0% 0% / 0.25);
 }
 
 .modal-action-button.secondary:active {
-  box-shadow: 0 2px 0 #3b4d56, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  box-shadow: 0 2px 0 #0d0716, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 /* Responsive adjustments for smaller screens */

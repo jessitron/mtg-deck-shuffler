@@ -92,6 +92,11 @@ Look at it before designing; add to it when you add a component.
 does not pick — it surfaces both on `/design` and waits. Inventing a resolution is worse
 than leaving the choice visible.
 
+**Secondary-button gray (decided 2026-08-02, JES-155 choice 2):** `var(--deep-space)`
+fill + `var(--light-pink)` text. Replaces the three grays (`#6c757d` Bootstrap, `#607d8b`
+Material, and the `#5a6268` hover-darken riding along with them) across
+`.end-game-actions`, `.card-action-button.secondary`, and `.modal-action-button.secondary`.
+
 ## Open choices — staged on `/design`, not yet decided
 
 **→ [open-choices.md](open-choices.md) is the work list**: every option, its exact
@@ -103,7 +108,6 @@ component and flag the choice.
 
 | Choice | Options on the page |
 | --- | --- |
-| Secondary-button gray | Bootstrap #6c757d · Material #607d8b · `--deep-space` (recommended) |
 | Card-modal action buttons | Keep seven color-coded hues · collapse to primary/secondary |
 | Corner radius on chrome | truly 0 · a single 4px |
 | Focus ring | dark-pink flush · light-pink offset · light ring on dark halo |
