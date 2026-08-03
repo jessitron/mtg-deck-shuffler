@@ -112,3 +112,69 @@ p {
 .hidden {
   display: none;
 }
+
+/* ===========================================================================
+ * Canonical button press behaviour (JES-155 choice 1: "C — Comeau's feel,
+ * drop-in"). One travel distance, one spring easing, one press-down snap,
+ * built from box-shadow instead of a browser-drawn outset/inset border so the
+ * bevel color is exact. Global because every page loads styles.css; each
+ * button site keeps its own background color (choices 2 and 3 are still
+ * open) and reproduces this same shape with its own shadow color.
+ * ========================================================================= */
+.pushable-flat {
+  position: relative;
+  border: none;
+  padding: 12px 24px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  background: var(--dark-pink);
+  cursor: pointer;
+  will-change: transform;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 0 #7d354c, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
+    box-shadow 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.pushable-flat:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 0 #7d354c, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5),
+    box-shadow 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.pushable-flat:active {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0 #7d354c, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  transition: transform 34ms, box-shadow 34ms;
+}
+
+.pushable-flat.pushable-dark {
+  background: var(--deep-space);
+  box-shadow: 0 4px 0 #0d0716, 0 7px 7px hsl(0deg 0% 0% / 0.35);
+}
+
+.pushable-flat.pushable-dark:hover {
+  box-shadow: 0 6px 0 #0d0716, 0 10px 10px hsl(0deg 0% 0% / 0.35);
+}
+
+.pushable-flat.pushable-dark:active {
+  box-shadow: 0 2px 0 #0d0716, 0 3px 3px hsl(0deg 0% 0% / 0.35);
+}
+
+.pushable-flat.pushable-small {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+}
+
+.pushable-flat:disabled {
+  background: #7a7285;
+  color: #d8d4de;
+  cursor: not-allowed;
+  transform: translateY(0);
+  box-shadow: none;
+}

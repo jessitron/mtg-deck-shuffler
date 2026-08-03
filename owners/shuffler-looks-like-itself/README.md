@@ -47,13 +47,18 @@ pages. There is no fourth typeface.
 and slabs. Plus `--playmat-one`/`--playmat-two` on the game page and the closed
 `--mana-W/U/B/R/G` set.
 
-**Chunky physical controls.** `outset` / `inset` / `groove` borders, pressed states that
-switch `outset → inset`. This is the app's most distinctive texture — it reads as
-1990s tabletop hardware, and it's deliberate.
+**Chunky physical controls, except on buttons now.** `outset` / `inset` / `groove`
+borders remain on non-button chrome (the command-zone surround, the title slab). Button
+press feedback moved to the box-shadow bevel described below (JES-155 choice 1) — no
+more `outset → inset` border switch anywhere.
 
-**Lift on hover, press on click.** `translateY(-1px…-2px)` plus a shadow on hover;
-`translateY(+1px…+2px)` plus an inset shadow on active. The *idea* is consistent; the
-numbers and easings are not (see "open choices").
+**Lift on hover, press on click — one canonical shape (decided 2026-08-02, JES-155
+choice 1).** `.pushable-flat` in `apps/shuffler/public/styles.css`: `translateY(-4px)`
+at rest, `-6px` on hover (springy `cubic-bezier(.3,.7,.4,1.5)`, 250ms), `-2px` on press
+(34ms snap), with a two-layer `box-shadow` bevel instead of a browser-drawn
+`outset`/`inset` border. It's global (every page loads `styles.css`); each button site
+keeps its own fill color and reproduces the same shape with its own shadow color —
+colors are separate open choices (2 and 3).
 
 **Square corners on chrome.** Round corners belong only to physical objects: cards, the
 playmat, the `.page-container` (which is itself a giant Magic card), count discs.
@@ -98,7 +103,6 @@ component and flag the choice.
 
 | Choice | Options on the page |
 | --- | --- |
-| Canonical button press behaviour | A: today's lift-and-shadow, unified · B: Comeau `.pushable` (faithful, needs 3 nested spans) · C: `.pushable-flat` (same feel, drop-in, no markup change) |
 | Secondary-button gray | Bootstrap #6c757d · Material #607d8b · `--deep-space` (recommended) |
 | Card-modal action buttons | Keep seven color-coded hues · collapse to primary/secondary |
 | Corner radius on chrome | truly 0 · a single 4px |

@@ -222,20 +222,38 @@ body {
   gap: 10px;
 }
 
+/* Press physics unified with the rest of the app (JES-155 choice 1). */
 .table-cards-button {
+  position: relative;
   padding: 10px 20px;
   font-size: 1rem;
-  border: 1px solid gray;
+  border: none;
   border-radius: 2px;
   cursor: pointer;
   background-color: black;
   color: white;
-  transition: background-color 0.2s;
   width: 70%;
+  will-change: transform;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 0 #333333, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
+    box-shadow 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
 .table-cards-button:hover {
   background-color: #5a6268;
+  transform: translateY(-6px);
+  box-shadow: 0 6px 0 #333333, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5),
+    box-shadow 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.table-cards-button:active {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0 #333333, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  transition: transform 34ms, box-shadow 34ms;
 }
 
 .event-undo {
@@ -478,19 +496,38 @@ body {
   position: relative;
 }
 
+/* Press physics unified with the rest of the app (JES-155 choice 1). */
 .menu-toggle {
+  position: relative;
   font-size: 1.6rem;
   line-height: 1;
   padding: 4px 14px;
-  border: 2px solid black;
+  border: none;
   cursor: pointer;
   background-color: var(--playmat-one);
   color: black;
+  will-change: transform;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 0 #978856, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
+    box-shadow 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
 .menu-toggle:hover {
   background-color: var(--playmat-two);
   color: white;
+  transform: translateY(-6px);
+  box-shadow: 0 6px 0 #978856, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5),
+    box-shadow 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.menu-toggle:active {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0 #978856, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  transition: transform 34ms, box-shadow 34ms;
 }
 
 .game-menu-panel {
@@ -543,8 +580,10 @@ body.game-menu-open .game-menu-panel {
   border-top: none;
 }
 
+/* Press physics unified with the rest of the app (JES-155 choice 1). */
 .menu-section button,
 .end-game-actions a {
+  position: relative;
   width: 100%;
   box-sizing: border-box;
   padding: 10px 16px;
@@ -553,6 +592,25 @@ body.game-menu-open .game-menu-panel {
   cursor: pointer;
   text-align: left;
   border-radius: 4px;
+  will-change: transform;
+  transform: translateY(-4px);
+  transition:
+    transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
+    box-shadow 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.menu-section button:hover,
+.end-game-actions a:hover {
+  transform: translateY(-6px);
+  transition:
+    transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5),
+    box-shadow 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.menu-section button:active,
+.end-game-actions a:active {
+  transform: translateY(-2px);
+  transition: transform 34ms, box-shadow 34ms;
 }
 
 .end-game-actions a {
@@ -567,22 +625,35 @@ body.game-menu-open .game-menu-panel {
 .history-actions button {
   background-color: var(--playmat-two);
   color: white;
+  box-shadow: 0 4px 0 #2e4c73, 0 7px 7px hsl(0deg 0% 0% / 0.25);
 }
 
 .history-actions button:hover {
   background-color: var(--playmat-one);
   color: black;
+  box-shadow: 0 6px 0 #2e4c73, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.history-actions button:active {
+  box-shadow: 0 2px 0 #2e4c73, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 .end-game-actions button,
 .end-game-actions a {
   background-color: #6c757d;
   color: white;
+  box-shadow: 0 4px 0 #42484d, 0 7px 7px hsl(0deg 0% 0% / 0.25);
 }
 
 .end-game-actions button:hover,
 .end-game-actions a:hover {
   background-color: #5a6268;
+  box-shadow: 0 6px 0 #42484d, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.end-game-actions button:active,
+.end-game-actions a:active {
+  box-shadow: 0 2px 0 #42484d, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 /* The debug block is part of developer mode: hidden by default, revealed only
@@ -648,28 +719,51 @@ body.dev-mode .menu-debug {
   flex: 1;
 }
 
+/* Press physics unified with the rest of the app (JES-155 choice 1). */
 .card-action-button {
+  position: relative;
   padding: 4px 8px;
   font-size: 0.8rem;
-  border: 1px solid #28a745;
+  border: none;
   border-radius: 3px;
   cursor: pointer;
   background-color: #28a745;
   color: white;
-  transition: background-color 0.2s;
+  will-change: transform;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 0 #18672a, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
+    box-shadow 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
 .card-action-button:hover {
   background-color: #218838;
+  transform: translateY(-6px);
+  box-shadow: 0 6px 0 #18672a, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5),
+    box-shadow 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.card-action-button:active {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0 #18672a, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  transition: transform 34ms, box-shadow 34ms;
 }
 
 .card-action-button.secondary {
   background-color: #6c757d;
-  border-color: #6c757d;
+  box-shadow: 0 4px 0 #42484d, 0 7px 7px hsl(0deg 0% 0% / 0.25);
 }
 
 .card-action-button.secondary:hover {
   background-color: #5a6268;
+  box-shadow: 0 6px 0 #42484d, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.card-action-button.secondary:active {
+  box-shadow: 0 2px 0 #42484d, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 .history-list {

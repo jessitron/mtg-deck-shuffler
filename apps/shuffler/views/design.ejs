@@ -393,23 +393,25 @@
 
       <!-- ================================================================ -->
       <section class="gallery-section" id="buttons">
-        <h2>Buttons <span class="badge badge-choose">choose one</span></h2>
+        <h2>Buttons <span class="badge badge-standard">standard</span></h2>
         <p class="section-note">
-          The app has one interaction <em>idea</em> — lift on hover, press down on click — expressed
-          seven different ways. The travel distance, the shadow, the easing, and the border
-          treatment all differ per button. This is the section to settle first: it's the thing that
-          makes new UI feel bolted on.
+          <strong>Decided 2026-08-02 (JES-155, choice 1): option C, <code>.pushable-flat</code>.</strong>
+          One travel distance, one spring easing, one press-down snap, built from a hard
+          <code>box-shadow</code> bevel instead of a browser-drawn <code>outset</code>/<code>inset</code>
+          border — so it drops onto an existing <code>&lt;button&gt;</code> with no markup change, and
+          the edge color is exact instead of engine-dependent. The base rule lives in
+          <code>styles.css</code> (global, since every page loads it); each button site keeps its own
+          fill color — colors are separate open choices (2 and 3) — and reproduces this same shape with
+          its own darker shadow color.
         </p>
 
-        <h3>What's in use today</h3>
         <div class="options">
           <div class="option">
-            <div class="option-label">Big CTA — .button-base .begin-button</div>
+            <div class="option-label">Big CTA — .button-base .pushable-flat .begin-button</div>
             <div class="stage stage-site">
-              <a href="#buttons" class="button-base begin-button">BEGIN</a>
+              <a href="#buttons" class="button-base pushable-flat begin-button">BEGIN</a>
             </div>
-            <div class="option-where">site.css — 10px outset light-pink, hover −2px + shadow, active inset +2px</div>
-            <div class="option-note">The signature button. Chunky, physical, unmistakable.</div>
+            <div class="option-where">site.css + styles.css — dark-pink fill</div>
           </div>
           <div class="option">
             <div class="option-label">Playmat button — .library-buttons button</div>
@@ -421,8 +423,7 @@
                 <button class="reveal-button">Reveal</button>
               </div>
             </div>
-            <div class="option-where">playmat.css — 2px outset gray on black, hover −1px + white glow, active inset</div>
-            <div class="option-note">The workhorse. Same idea as the CTA at 1/5 the scale.</div>
+            <div class="option-where">playmat.css — same shape, black fill</div>
           </div>
           <div class="option">
             <div class="option-label">Modal action — .modal-action-button</div>
@@ -430,8 +431,7 @@
               <button class="modal-action-button play-button">Play</button>
               <button class="modal-action-button secondary">Cancel</button>
             </div>
-            <div class="option-where">playmat.css — no border, radius 8px, hover −2px + white glow</div>
-            <div class="option-note">No bevel at all. Flat Material rectangle with a lift.</div>
+            <div class="option-where">playmat.css — same shape, per-destination hue (choice 3, still open)</div>
           </div>
           <div class="option">
             <div class="option-label">Menu item — .menu-section button</div>
@@ -445,109 +445,37 @@
                 </div>
               </div>
             </div>
-            <div class="option-where">game.css — flat, radius 4px, left-aligned, hover = color swap only</div>
-            <div class="option-note">No lift, no press. Deliberately calmer, or just different?</div>
-          </div>
-          <div class="option">
-            <div class="option-label">Toggle — .group-by-type-toggle</div>
-            <div class="stage stage-white">
-              <button class="group-by-type-toggle">Group by type</button>
-              <button class="group-by-type-toggle active">Group by type</button>
-            </div>
-            <div class="option-where">playmat.css — 1px border, square, no lift, .active = Bootstrap blue</div>
-            <div class="option-note">The only two-state button. Square already.</div>
+            <div class="option-where">game.css — same shape, keeps its own hover recolor on top</div>
           </div>
           <div class="option">
             <div class="option-label">Hamburger — .menu-toggle</div>
             <div class="stage stage-playmat">
               <button class="menu-toggle">☰</button>
             </div>
-            <div class="option-where">game.css — 2px solid black, square, hover swaps playmat-one → playmat-two</div>
-            <div class="option-note">Square corners, on-brand colors, no lift. Newest of the bunch.</div>
+            <div class="option-where">game.css — same shape, playmat-one fill</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Disabled</div>
+            <div class="stage stage-playmat">
+              <button class="pushable-flat pushable-small" disabled>Draw</button>
+            </div>
+            <div class="option-where">styles.css — sits flat on the ground, no travel left</div>
           </div>
         </div>
 
-        <div class="choice">
-          <div class="choice-question">
-            Pick the canonical press behaviour. Whatever wins becomes the one hover/active treatment
-            every button in the app shares.
-          </div>
-          <div class="options">
-            <div class="option">
-              <div class="option-label">A — Today's lift-and-shadow, unified</div>
-              <div class="stage stage-playmat">
-                <div class="library-buttons" style="grid-template-areas: 'draw draw'; grid-template-columns: 1fr;">
-                  <button class="draw-button">Draw</button>
-                </div>
-              </div>
-              <div class="stage stage-site" style="margin-top: 0.5rem;">
-                <a href="#buttons" class="button-base begin-button" style="width: 160px; height: 64px; font-size: 1.25rem;">BEGIN</a>
-              </div>
-              <div class="option-where">existing CSS, with the −1px/−2px travel and easing made identical</div>
-              <div class="option-note">
-                Cheapest — no markup change, no new file. Keeps the <code>outset</code>/<code>inset</code>
-                bevel, which is the app's most distinctive texture. But the bevel is a browser-drawn
-                border: you can't control its color precisely, and it renders differently across engines.
-              </div>
-            </div>
-
-            <div class="option">
-              <div class="option-label">B — Comeau pushable, faithful</div>
-              <div class="stage stage-playmat">
-                <button class="pushable">
-                  <span class="shadow"></span>
-                  <span class="edge"></span>
-                  <span class="front">Draw</span>
-                </button>
-                <button class="pushable pushable-dark">
-                  <span class="shadow"></span>
-                  <span class="edge"></span>
-                  <span class="front">Shuffle</span>
-                </button>
-              </div>
-              <div class="stage stage-site" style="margin-top: 0.5rem;">
-                <button class="pushable">
-                  <span class="shadow"></span>
-                  <span class="edge"></span>
-                  <span class="front">SHUFFLE UP</span>
-                </button>
-              </div>
-              <div class="option-where">design-candidates.css — .pushable / .shadow / .edge / .front</div>
-              <div class="option-note">
-                The real thing: a ground shadow, a lit edge with darker left/right faces, and a front
-                that travels 4px on press with a 34ms snap. The springy overshoot on hover is the
-                <code>cubic-bezier(.3,.7,.4,1.5)</code>. <strong>Cost:</strong> every button needs three
-                nested spans, so every button-emitting template and HTMX fragment changes.
-              </div>
-            </div>
-
-            <div class="option">
-              <div class="option-label">C — Comeau's feel, drop-in</div>
-              <div class="stage stage-playmat">
-                <button class="pushable-flat pushable-small">Draw</button>
-                <button class="pushable-flat pushable-small pushable-dark">Shuffle</button>
-                <button class="pushable-flat pushable-small" disabled>Draw</button>
-              </div>
-              <div class="stage stage-site" style="margin-top: 0.5rem;">
-                <button class="pushable-flat">SHUFFLE UP</button>
-              </div>
-              <div class="option-where">design-candidates.css — .pushable-flat</div>
-              <div class="option-note">
-                Same travel, same spring easing, same 34ms snap — built from a hard
-                <code>box-shadow</code> instead of layered spans, so it drops onto an existing
-                <code>&lt;button&gt;</code> with <em>no markup change</em>. <strong>Tradeoff:</strong>
-                the edge is one flat color; it can't have B's lit left and right faces.
-                Also shown: the disabled state, which sits flat on the ground with no travel left.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <p class="section-note">
-          Hover and press these. B and C should feel nearly identical under the cursor; the
-          difference is visible mainly when you look straight at the edge, and in what adopting each
-          one costs.
-        </p>
+        <h3>The rule</h3>
+        <ul class="rule-list">
+          <li>Every button: <code>transform: translateY(-4px)</code> at rest, <code>-6px</code> on
+            hover (spring easing, <code>cubic-bezier(.3,.7,.4,1.5)</code>, 250ms), <code>-2px</code> on
+            press (34ms snap) — plus a matching two-layer <code>box-shadow</code> (a solid "edge" layer
+            and a soft ground shadow) that shrinks and grows with the travel.</li>
+          <li><strong>Fill color is not part of this rule</strong> — each site keeps its own background
+            and picks a shadow color roughly 60% as light. <code>.pushable-flat</code> in
+            <code>styles.css</code> is the reusable drop-in for new buttons; existing components
+            reproduce the same numbers directly in their own stylesheet rather than taking on the
+            class.</li>
+          <li>No more <code>outset</code>/<code>inset</code> borders for press feedback anywhere.</li>
+        </ul>
       </section>
 
       <!-- ================================================================ -->
@@ -824,6 +752,7 @@
           <li><strong>Respect the z-index ladder:</strong> content 1–3, menu panel 500, <code>.modal-overlay</code> 1000, <code>.card-modal-overlay</code> 2000, its close button 2001.</li>
           <li><strong>Know which file owns the component.</strong> <code>playmat.css</code> is shared by game and prepare; <code>game.css</code> and <code>prepare.css</code> are page-specific; <code>site.css</code> is the marketing pages; <code>styles.css</code> holds the tokens. The modal, flip, and library-list blocks are currently duplicated — fix the duplication rather than editing one copy.</li>
           <li><strong>Add new components to this page</strong> in the same commit that adds them to the app.</li>
+          <li><strong>Every button presses the same way.</strong> <code>translateY(-4px)</code> at rest, <code>-6px</code> on hover (springy, 250ms), <code>-2px</code> on press (34ms snap), with a matching box-shadow bevel. No <code>outset</code>/<code>inset</code> borders for press feedback. See <a href="#buttons">Buttons</a>.</li>
         </ul>
       </section>
 

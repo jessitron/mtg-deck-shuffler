@@ -1,8 +1,8 @@
 # Open choices — the work list
 
-**Status: awaiting Jess's answers.** As of 2026-08-02 she has decided them but hasn't
-written them down here yet; she'll give them at the top of the session that implements
-this. Tracked as **[JES-155](https://linear.app/honeycombio/issue/JES-155)**.
+**Status: in progress.** Choice 1 is DECIDED (2026-08-02). Choices 2–6 await Jess's
+answers, one commit at a time. Tracked as
+**[JES-155](https://linear.app/honeycombio/issue/JES-155)**.
 
 This is the handoff doc for converging the Shuffler's design drift. Each choice below is
 staged on **`/design`** with its options rendered side by side, and each has its exact
@@ -35,23 +35,19 @@ with different travel, easing, shadow and border treatment.
 several of them inside HTMX fragments. Option C touches only CSS plus class names.
 Option A touches only CSS.
 
-**Decision:** _(pending)_
+**Decision: C — `.pushable-flat` (2026-08-02).** Same travel and spring easing as
+Comeau's faithful three-span `.pushable`, but built from a `box-shadow` bevel so it
+drops onto an existing `<button>` with no markup change. Reasoning: cheapest of the two
+"real" options that don't keep a browser-drawn (and therefore imprecise, engine-variable)
+`outset`/`inset` bevel, at zero markup cost across 17 files. See
+[history.md](history.md#2026-08-02--choice-1-decided-canonical-button-press-behaviour)
+for what actually happened implementing it — notably, the base rule ended up in
+`styles.css`, not `playmat.css`/`site.css` as guessed below, because the press behaviour
+also touches `game.css`-only components.
 
-**If A:** unify the numbers across `site.css:346-384` (`.begin-button`, `.hero-button`),
-`playmat.css:63-87` (`.card-buttons button`, `.library-buttons button`),
-`playmat.css:429-456` (`.modal-action-button`), `game.css:546-586` (`.menu-section
-button`), `game.css:481-494` (`.menu-toggle`), `game.css:225-239`
-(`.table-cards-button`), `game.css:651-673` (`.card-action-button`). Pick one travel
-distance, one easing, one shadow; apply to all.
-
-**If B or C:** move the winning block out of `design-candidates.css` into `playmat.css`
-(the shared playmat chrome) and `site.css` (the big CTA), then migrate call sites. For C
-that's a class swap; for B it's a markup change in all 17 files. Delete the losing
-candidates and the superseded rules listed under A.
-
-Either way: **delete `.button-base`'s `border: 10px outset var(--light-pink)` only if the
-chunky bevel genuinely loses** — it's the app's most distinctive texture, and B/C replace
-it with a different kind of physicality, not with flatness.
+Colors were **not** decided by this choice — each site kept its own fill and computed
+its own darker shadow color rather than adopting `.pushable-flat`'s default dark-pink.
+Choices 2 and 3 (below) are still open.
 
 ---
 

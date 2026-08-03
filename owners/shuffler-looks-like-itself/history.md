@@ -86,3 +86,25 @@ So the rule works when it's known; it just wasn't discoverable enough.
 - Jess's standing decision, made when this owner was created: **new UI pulls toward the
   standard**, rather than matching whatever drift it sits next to. Accepts a temporarily
   mixed look in exchange for convergence.
+
+## 2026-08-02 — choice 1 decided: canonical button press behaviour
+
+First of the six open choices to converge (JES-155). Jess picked **option C,
+`.pushable-flat`** — same travel and spring easing as Comeau's faithful three-span
+`.pushable`, but built from a `box-shadow` bevel so it drops onto an existing `<button>`
+with no markup change. The base rule moved from `design-candidates.css` into
+`apps/shuffler/public/styles.css` rather than `playmat.css`/`site.css` as the
+open-choices doc originally guessed — it turned out the press behaviour touches
+`game.css`-only components too (`.table-cards-button`, `.card-action-button`,
+`.menu-section button`), and `styles.css` is the one sheet every page loads. The losing
+candidate (`.pushable`, the three-span version) and the adopted candidate were both
+removed from `design-candidates.css`.
+
+Colors were deliberately **not** touched — the seven modal-action hues (choice 3) and
+the three secondary grays (choice 2) are still open, so each button site reproduces the
+same shape (travel, easing, shadow structure) with its own fill color and a shadow color
+computed at roughly 60% of it, rather than taking on `.pushable-flat`'s default
+dark-pink. Caught in review: a leftover `.hero-button.active { background-color:
+#f0f0f0 }` rule (a relic of the old outset/inset press system) was still overriding the
+tab toggle's color after the press-physics rewrite — removed, since the "already
+pressed" look now comes from the shared transform/shadow values, not a color swap.

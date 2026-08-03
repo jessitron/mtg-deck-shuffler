@@ -60,12 +60,14 @@ test.describe('design gallery', () => {
     expect(box?.width).toBeCloseTo(200, 0);
     expect(box?.height).toBeCloseTo(278, 0);
 
-    // .begin-button / .button-base come from site.css, including the signature
-    // 10px outset bevel.
+    // .begin-button / .button-base / .pushable-flat come from site.css + styles.css:
+    // the canonical box-shadow bevel (JES-155 choice 1), dark-pink fill, no border.
     const beginButton = page.locator('.button-base.begin-button').first();
     await expect(beginButton).toBeVisible();
     const borderStyle = await beginButton.evaluate((el) => getComputedStyle(el).borderTopStyle);
-    expect(borderStyle).toBe('outset');
+    expect(borderStyle).toBe('none');
+    const beginBg = await beginButton.evaluate((el) => getComputedStyle(el).backgroundColor);
+    expect(beginBg).toBe('rgb(187, 82, 119)');
 
     // .library-buttons button comes from playmat.css: white on black.
     const drawButton = page.locator('.library-buttons .draw-button').first();
@@ -93,38 +95,23 @@ test.describe('design gallery', () => {
     }
   });
 
-  test('both candidate buttons travel when pressed', async ({ page }) => {
+  test('the canonical button travels when pressed', async ({ page }) => {
     await page.goto(`${BASE_URL}/design`);
     await page.waitForLoadState('networkidle');
 
-    // Candidate B — the faithful pushable: the .front span is what moves.
-    const pushable = page.locator('.pushable').first();
-    const pushableFront = pushable.locator('.front');
-    await expect(pushableFront).toBeVisible();
-
-    // Scroll into view BEFORE measuring — hover() scrolls, and a pre-scroll
-    // bounding box isn't comparable to a post-scroll one.
-    await pushable.scrollIntoViewIfNeeded();
-    await pushable.hover();
-    const frontHovering = (await pushableFront.boundingBox())!;
-
-    await page.mouse.down();
-    // Comeau's press transition is 34ms; give it room to settle.
-    await expect(async () => {
-      const pressed = (await pushableFront.boundingBox())!;
-      expect(pressed.y).toBeGreaterThan(frontHovering.y);
-    }).toPass({ timeout: 2000 });
-    await page.mouse.up();
-
-    // Candidate C — the drop-in: the button itself moves.
+    // JES-155 choice 1 (.pushable-flat): the button itself moves, via box-shadow
+    // + transform — no nested spans.
     const flat = page.locator('.pushable-flat').first();
     await expect(flat).toBeVisible();
 
+    // Scroll into view BEFORE measuring — hover() scrolls, and a pre-scroll
+    // bounding box isn't comparable to a post-scroll one.
     await flat.scrollIntoViewIfNeeded();
     await flat.hover();
     const flatHovering = (await flat.boundingBox())!;
 
     await page.mouse.down();
+    // The press transition is 34ms; give it room to settle.
     await expect(async () => {
       const pressed = (await flat.boundingBox())!;
       expect(pressed.y).toBeGreaterThan(flatHovering.y);

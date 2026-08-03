@@ -59,31 +59,42 @@
 }
 
 
-/* card buttons are only on the game page, library buttons are on game and prepare */
+/* card buttons are only on the game page, library buttons are on game and prepare.
+ * Press physics unified with the rest of the app (JES-155 choice 1) — same
+ * travel, easing and box-shadow bevel as .pushable-flat, own black fill. */
 .card-buttons button,
 .library-buttons button {
+  position: relative;
   padding: 6px 6px;
   font-size: 0.8rem;
-  border: 2px outset gray;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
   color: white;
   background-color: black;
-  transition: all 0.2s ease;
   width: 100%;
-}
-
-.card-buttons button:active,
-.library-buttons button:active {
-  border: 2px inset gray;
-  transform: translateY(1px);
-  background-color: #333;
+  will-change: transform;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 0 #333333, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
+    box-shadow 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
 .card-buttons button:hover,
 .library-buttons button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(256, 256, 256, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 6px 0 #333333, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  transition:
+    transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5),
+    box-shadow 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.card-buttons button:active,
+.library-buttons button:active {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0 #333333, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  transition: transform 34ms, box-shadow 34ms;
 }
 
 #hand-section {
@@ -426,43 +437,84 @@
   align-items: center;
 }
 
+/* Press physics unified with the rest of the app (JES-155 choice 1) — same
+ * travel, easing and box-shadow bevel as .pushable-flat. Corner radius and
+ * the seven per-destination hues are separate open choices (4 and 3);
+ * untouched here. Each hue below carries its own darker shadow color. */
 .modal-action-button {
+  position: relative;
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s;
   min-width: 160px;
   text-decoration: none;
   display: inline-block;
   text-align: center;
+  will-change: transform;
+  transform: translateY(-4px);
+  transition:
+    transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
+    box-shadow 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
-.modal-action-button.recover-button {
+.modal-action-button:hover {
+  transform: translateY(-6px);
+  transition:
+    transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5),
+    box-shadow 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.modal-action-button:active {
+  transform: translateY(-2px);
+  transition: transform 34ms, box-shadow 34ms;
+}
+
+.modal-action-button.recover-button,
+.modal-action-button.copy-button {
   background-color: #2196f3;
   color: white;
+  box-shadow: 0 4px 0 #145d96, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.recover-button:hover,
+.modal-action-button.copy-button:hover {
+  box-shadow: 0 6px 0 #145d96, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.recover-button:active,
+.modal-action-button.copy-button:active {
+  box-shadow: 0 2px 0 #145d96, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 .modal-action-button.gatherer-button {
   background-color: #4caf50;
   color: white;
+  box-shadow: 0 4px 0 #2f6c31, 0 7px 7px hsl(0deg 0% 0% / 0.25);
 }
 
-.modal-action-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(256, 256, 256, 0.4);
+.modal-action-button.gatherer-button:hover {
+  box-shadow: 0 6px 0 #2f6c31, 0 10px 10px hsl(0deg 0% 0% / 0.25);
 }
 
-.modal-action-button.copy-button {
-  background-color: #2196f3;
-  color: white;
+.modal-action-button.gatherer-button:active {
+  box-shadow: 0 2px 0 #2f6c31, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 .modal-action-button.flip-button {
   background-color: #ff9800;
   color: white;
+  box-shadow: 0 4px 0 #9e5e00, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.flip-button:hover {
+  box-shadow: 0 6px 0 #9e5e00, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.flip-button:active {
+  box-shadow: 0 2px 0 #9e5e00, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 /* Card modal button groups */
@@ -544,26 +596,71 @@
 .modal-action-button.play-button {
   background-color: #e91e63;
   color: white;
+  box-shadow: 0 4px 0 #90123d, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.play-button:hover {
+  box-shadow: 0 6px 0 #90123d, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.play-button:active {
+  box-shadow: 0 2px 0 #90123d, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 .modal-action-button.put-in-hand-button {
   background-color: #9c27b0;
   color: white;
+  box-shadow: 0 4px 0 #60186d, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.put-in-hand-button:hover {
+  box-shadow: 0 6px 0 #60186d, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.put-in-hand-button:active {
+  box-shadow: 0 2px 0 #60186d, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 .modal-action-button.put-on-top-button {
   background-color: #3f51b5;
   color: white;
+  box-shadow: 0 4px 0 #273270, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.put-on-top-button:hover {
+  box-shadow: 0 6px 0 #273270, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.put-on-top-button:active {
+  box-shadow: 0 2px 0 #273270, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 .modal-action-button.put-on-bottom-button {
   background-color: #673ab7;
   color: white;
+  box-shadow: 0 4px 0 #3f2371, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.put-on-bottom-button:hover {
+  box-shadow: 0 6px 0 #3f2371, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.put-on-bottom-button:active {
+  box-shadow: 0 2px 0 #3f2371, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 .modal-action-button.secondary {
   background-color: #607d8b;
   color: white;
+  box-shadow: 0 4px 0 #3b4d56, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.secondary:hover {
+  box-shadow: 0 6px 0 #3b4d56, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.secondary:active {
+  box-shadow: 0 2px 0 #3b4d56, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 /* Responsive adjustments for smaller screens */
