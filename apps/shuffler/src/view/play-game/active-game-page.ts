@@ -35,15 +35,27 @@ function escapeHtml(text: string): string {
 }
 
 /**
- * "at table <name>" — shown when the game joined a table (JES-127). The link
- * opens the table page in a new tab; sharing that URL is how spectators join.
+ * The "N Cards on table" modal toggle. Full-size (the only control) when solo;
+ * shrunk to a secondary button when a "Go to Table" CTA is also present.
  */
-function formatAtTableBannerHtmlFragment(game: GameState): string {
+function formatTableCardsButtonHtmlFragment(game: GameState, tableCardsCount: number): string {
+  const sizeClass = game.tableName ? "pushable-dark pushable-small" : "";
+  return `<button class="pushable-flat ${sizeClass} table-cards-button"
+            hx-get="/table-modal/${game.gameId}"
+            hx-target="#modal-container"
+            hx-swap="innerHTML">${tableCardsCount} Cards on table</button>`;
+}
+
+/**
+ * "Go to Table <name>" — shown when the game joined a table (JES-127). Opens
+ * the table page in a new tab; sharing that URL is how spectators join.
+ */
+function formatGoToTableButtonHtmlFragment(game: GameState): string {
   if (!game.tableName) {
     return "";
   }
   const tableUrl = `${tabletopPublicUrl()}/t/${encodeURIComponent(game.tableName)}`;
-  return `<div class="at-table-banner">at table <a class="at-table-link" href="${tableUrl}" target="_blank" rel="noopener">${escapeHtml(game.tableName)}</a></div>`;
+  return `<a class="pushable-flat go-to-table-button" href="${tableUrl}" target="_blank" rel="noopener">Go to Table: ${escapeHtml(game.tableName)}</a>`;
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {
@@ -55,11 +67,8 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const handSectionHtml = formatHandSectionHtmlFragment(game, whatHappened);
   const menuHtml = formatGameMenuHtmlFragment(game);
   const tableSectionHtml = ` <div id="table-section" class="table-section">
-          ${formatAtTableBannerHtmlFragment(game)}
-          <button class="table-cards-button"
-            hx-get="/table-modal/${game.gameId}"
-            hx-target="#modal-container"
-            hx-swap="innerHTML">${tableCardsCount} Cards on table</button>
+          ${formatGoToTableButtonHtmlFragment(game)}
+          ${formatTableCardsButtonHtmlFragment(game, tableCardsCount)}
         </div>`;
 
   return `<div id="game-container"

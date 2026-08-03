@@ -12,7 +12,7 @@
 
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
@@ -36,10 +36,10 @@ test.describe('Table mode', () => {
     // Leave both blank: solo mode, unchanged
     await page.locator('button.begin-button').click();
     await page.waitForURL('**/game/*', { timeout: 30000 });
-    await expect(page.locator('.at-table-link')).toHaveCount(0);
+    await expect(page.locator('.go-to-table-button')).toHaveCount(0);
   });
 
-  test('joining a table shows "at table" spectator link on the game page, surviving restart', async ({ page }) => {
+  test('joining a table shows a "Go to Table" spectator link on the game page, surviving restart', async ({ page }) => {
     await goToPrepare(page);
 
     await page.locator('input[name="table-name"]').fill('verify-table');
@@ -47,7 +47,7 @@ test.describe('Table mode', () => {
     await page.locator('button.begin-button').click();
     await page.waitForURL('**/game/*', { timeout: 30000 });
 
-    const link = page.locator('.at-table-link');
+    const link = page.locator('.go-to-table-button');
     await expect(link).toBeVisible();
     await expect(link).toContainText('verify-table');
     await expect(link).toHaveAttribute('target', '_blank');
@@ -58,7 +58,7 @@ test.describe('Table mode', () => {
     await page.locator('#menu-toggle').click();
     await page.locator('button:has-text("Restart Game")').click();
     await page.waitForURL('**/game/*', { timeout: 30000 });
-    await expect(page.locator('.at-table-link')).toContainText('verify-table');
+    await expect(page.locator('.go-to-table-button')).toContainText('verify-table');
   });
 
   test('send-then-commit: when the tabletop is unreachable, the play is blocked and the card stays in hand', async ({ page }) => {

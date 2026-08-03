@@ -179,10 +179,6 @@
             <div class="swatch-meta"><span class="swatch-name">Material deep purple</span><span class="swatch-hex">#673ab7</span><span class="swatch-use">put-on-bottom button</span></div>
           </div>
           <div class="swatch">
-            <div class="swatch-chip" style="background: #607d8b;"></div>
-            <div class="swatch-meta"><span class="swatch-name">Material blue-grey</span><span class="swatch-hex">#607d8b</span><span class="swatch-use">modal secondary button</span></div>
-          </div>
-          <div class="swatch">
             <div class="swatch-chip" style="background: #f44336;"></div>
             <div class="swatch-meta"><span class="swatch-name">Material red</span><span class="swatch-hex">#f44336</span><span class="swatch-use">error + validation text</span></div>
           </div>
@@ -196,7 +192,7 @@
           </div>
           <div class="swatch">
             <div class="swatch-chip" style="background: #6c757d;"></div>
-            <div class="swatch-meta"><span class="swatch-name">Bootstrap secondary</span><span class="swatch-hex">#6c757d</span><span class="swatch-use">end-game buttons, undo text</span></div>
+            <div class="swatch-meta"><span class="swatch-name">Bootstrap secondary</span><span class="swatch-hex">#6c757d</span><span class="swatch-use">undo text (.event-undo)</span></div>
           </div>
           <div class="swatch">
             <div class="swatch-chip" style="background: #007acc;"></div>
@@ -208,35 +204,28 @@
           </div>
         </div>
 
-        <div class="choice">
-          <div class="choice-question">
-            Three different grays currently mean "secondary button". Which one wins?
+        <p class="section-note">
+          <strong>Decided 2026-08-02 (JES-155, choice 2): option C, <code>var(--deep-space)</code>
+          fill + <code>var(--light-pink)</code> text.</strong> Replaces the three grays
+          (<code>#6c757d</code> Bootstrap, <code>#607d8b</code> Material, and the <code>#5a6268</code>
+          hover-darken that rode along with them) that all meant "secondary button". On-brand: no new
+          color enters the palette. Applies to <code>.end-game-actions</code>,
+          <code>.card-action-button.secondary</code>, and <code>.modal-action-button.secondary</code>.
+        </p>
+        <div class="options">
+          <div class="option">
+            <div class="option-label">.end-game-actions button</div>
+            <div class="stage stage-dark">
+              <button class="pushable-flat" style="background-color: var(--deep-space); color: var(--light-pink); box-shadow: 0 4px 0 #0d0716, 0 7px 7px hsl(0deg 0% 0% / 0.25);">Restart game</button>
+            </div>
+            <div class="option-where">game.css</div>
           </div>
-          <div class="options">
-            <div class="option">
-              <div class="option-label">A — Bootstrap secondary</div>
-              <div class="stage stage-dark">
-                <button class="modal-action-button" style="background-color: #6c757d; color: white;">Secondary</button>
-              </div>
-              <div class="option-where">#6c757d — .end-game-actions, .card-action-button.secondary</div>
-              <div class="option-note">Most-used of the three. Cool neutral, reads as "Bootstrap".</div>
+          <div class="option">
+            <div class="option-label">.modal-action-button.secondary</div>
+            <div class="stage stage-dark">
+              <button class="modal-action-button secondary">Cancel</button>
             </div>
-            <div class="option">
-              <div class="option-label">B — Material blue-grey</div>
-              <div class="stage stage-dark">
-                <button class="modal-action-button secondary">Secondary</button>
-              </div>
-              <div class="option-where">#607d8b — .modal-action-button.secondary</div>
-              <div class="option-note">Slightly bluer. Only in the card modal.</div>
-            </div>
-            <div class="option">
-              <div class="option-label">C — deep-space, tokenized</div>
-              <div class="stage stage-dark">
-                <button class="modal-action-button" style="background-color: #221534; color: var(--light-pink);">Secondary</button>
-              </div>
-              <div class="option-where">var(--deep-space) + var(--light-pink)</div>
-              <div class="option-note">On-brand: no new color enters the palette. Recommended.</div>
-            </div>
+            <div class="option-where">playmat.css — card modal</div>
           </div>
         </div>
 
@@ -334,8 +323,8 @@
             <tr><th>Radius</th><th>Where</th><th>Physical object?</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>0</code></td><td>join-table panel, hamburger, precon tiles, inputs</td><td>no — correct</td></tr>
-            <tr><td><code>2px</code></td><td><code>.cool-command-zone-surround</code>, <code>.table-cards-button</code></td><td>no</td></tr>
+            <tr><td><code>0</code></td><td>join-table panel, hamburger, precon tiles, inputs, <code>.table-cards-button</code>, <code>.go-to-table-button</code></td><td>no — correct</td></tr>
+            <tr><td><code>2px</code></td><td><code>.cool-command-zone-surround</code></td><td>no</td></tr>
             <tr><td><code>3px</code></td><td><code>.card-action-button</code></td><td>no</td></tr>
             <tr><td><code>4px</code></td><td>menu panel + menu buttons, <code>.modal-close</code>, debug blocks</td><td>no</td></tr>
             <tr><td><code>5px</code></td><td><code>.flip-button</code>, <code>.hand-drop-zone</code></td><td>no</td></tr>
@@ -445,7 +434,17 @@
                 </div>
               </div>
             </div>
-            <div class="option-where">game.css — same shape, keeps its own hover recolor on top</div>
+            <div class="option-where">game.css — same shape, <code>var(--deep-space)</code> fill (choice 2, decided)</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Table section — .table-section</div>
+            <div class="stage stage-playmat">
+              <div class="table-section" style="width: 220px;">
+                <a href="#buttons" class="pushable-flat go-to-table-button">Go to Table: verify-table</a>
+                <button class="pushable-flat pushable-dark pushable-small table-cards-button">3 Cards on table</button>
+              </div>
+            </div>
+            <div class="option-where">game.css — primary CTA to the joined table, secondary (choice 2 fill) opens the card list. Solo games (no table joined) show only the full-size "N Cards on table" button.</div>
           </div>
           <div class="option">
             <div class="option-label">Hamburger — .menu-toggle</div>

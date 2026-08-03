@@ -222,38 +222,13 @@ body {
   gap: 10px;
 }
 
-/* Press physics unified with the rest of the app (JES-155 choice 1). */
-.table-cards-button {
-  position: relative;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  background-color: black;
-  color: white;
+/* Press physics come from .pushable-flat (JES-155 choice 1); this rule keeps
+   only this component's own layout. */
+.table-section .pushable-flat {
   width: 70%;
-  will-change: transform;
-  transform: translateY(-4px);
-  box-shadow: 0 4px 0 #333333, 0 7px 7px hsl(0deg 0% 0% / 0.25);
-  transition:
-    transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
-    box-shadow 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
-}
-
-.table-cards-button:hover {
-  background-color: #5a6268;
-  transform: translateY(-6px);
-  box-shadow: 0 6px 0 #333333, 0 10px 10px hsl(0deg 0% 0% / 0.25);
-  transition:
-    transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5),
-    box-shadow 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
-}
-
-.table-cards-button:active {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 0 #333333, 0 3px 3px hsl(0deg 0% 0% / 0.25);
-  transition: transform 34ms, box-shadow 34ms;
+  text-align: center;
+  text-decoration: none;
+  display: block;
 }
 
 .event-undo {
@@ -640,20 +615,19 @@ body.game-menu-open .game-menu-panel {
 
 .end-game-actions button,
 .end-game-actions a {
-  background-color: #6c757d;
-  color: white;
-  box-shadow: 0 4px 0 #42484d, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  background-color: var(--deep-space);
+  color: var(--light-pink);
+  box-shadow: 0 4px 0 #0d0716, 0 7px 7px hsl(0deg 0% 0% / 0.25);
 }
 
 .end-game-actions button:hover,
 .end-game-actions a:hover {
-  background-color: #5a6268;
-  box-shadow: 0 6px 0 #42484d, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  box-shadow: 0 6px 0 #0d0716, 0 10px 10px hsl(0deg 0% 0% / 0.25);
 }
 
 .end-game-actions button:active,
 .end-game-actions a:active {
-  box-shadow: 0 2px 0 #42484d, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  box-shadow: 0 2px 0 #0d0716, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 /* The debug block is part of developer mode: hidden by default, revealed only
@@ -753,17 +727,17 @@ body.dev-mode .menu-debug {
 }
 
 .card-action-button.secondary {
-  background-color: #6c757d;
-  box-shadow: 0 4px 0 #42484d, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  background-color: var(--deep-space);
+  color: var(--light-pink);
+  box-shadow: 0 4px 0 #0d0716, 0 7px 7px hsl(0deg 0% 0% / 0.25);
 }
 
 .card-action-button.secondary:hover {
-  background-color: #5a6268;
-  box-shadow: 0 6px 0 #42484d, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  box-shadow: 0 6px 0 #0d0716, 0 10px 10px hsl(0deg 0% 0% / 0.25);
 }
 
 .card-action-button.secondary:active {
-  box-shadow: 0 2px 0 #42484d, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  box-shadow: 0 2px 0 #0d0716, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 .history-list {
@@ -826,13 +800,5 @@ footer {
   margin-top: 10px;
 }
 
-/* "at table <name>" banner (JES-127): links to the Tabletop page in a new
-   tab — that URL is also the spectator-share mechanism. Square corners. */
-.at-table-banner {
-  font-size: 0.9rem;
-}
-
-.at-table-link {
-  font-weight: 600;
-  text-decoration: underline;
-}
+/* "Go to Table <name>" CTA (JES-127): links to the Tabletop page in a new
+   tab — that URL is also the spectator-share mechanism. */
