@@ -338,6 +338,25 @@ body {
   box-shadow: none;
 }
 
+/* Big Fat CTA — .begin-button is its own thing, not just a scaled-up primary
+ * button: white fill behind the app's signature chunky light-pink border.
+ * Press physics (travel/easing/shadow) are still the shared pushable-flat
+ * shape; only the border and fill are unique to the CTA. */
+.begin-button {
+  background: white;
+  color: black;
+  border: 10px solid var(--light-pink);
+  box-shadow: 0 4px 0 #897b89, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+}
+
+.begin-button:hover {
+  box-shadow: 0 6px 0 #897b89, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.begin-button:active {
+  box-shadow: 0 2px 0 #897b89, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+}
+
 /* Hero Button - the Precon/Archidekt tab toggle. Own color (light-pink, not
  * the CTA's dark-pink) but the same lift/press physics as everything else. */
 .hero-button {

@@ -130,6 +130,27 @@ override was dropped on all three rather than recolored — `.table-cards-button
 fill is black and unrelated to the "secondary gray" family, but it carried the exact
 same stray hex, so it got the same cleanup.
 
+## 2026-08-02 — a concept choice 1 missed: the Big Fat CTA is not a primary button
+
+Choice 1's first pass collapsed `.begin-button` into the same solid-fill look as every
+other `.pushable-flat` user (dark-pink, like a primary button). Jess caught it: BEGIN
+(home page) and Shuffle Up (prepare page) are a **distinct category** — the Big Fat CTA
+— not a large instance of a generic primary button. She wanted its old look back
+(white fill, the signature chunky `10px` light-pink border) with only the *press
+physics* unified, not the fill/border.
+
+`.begin-button` in `site.css` now overrides `.pushable-flat`'s background and border
+back to white + `10px solid var(--light-pink)`, keeping the shared
+`translateY`/box-shadow-bevel physics from choice 1. Same pattern as `.hero-button`:
+own color, shared shape.
+
+**Lesson for future choices:** "unify the press behaviour" is not license to unify
+everything else that happens to differ between button sites. A component can be
+genuinely distinct in kind (BFC vs. primary vs. secondary), not just drifted — and the
+gallery caption is where that distinction should be stated explicitly (`option-where`
+now reads "not just a scaled-up primary button") so it doesn't get re-collapsed by the
+next agent that greps for "buttons".
+
 `.event-undo` (`game.css`) and `.cancel-link` (`src/view/debug/load-state.ts`) still use
 `#6c757d` — both are *text*, not buttons, so out of scope for this choice; they're
 candidates for the "tokenize the orphan colors" mechanical cleanup in

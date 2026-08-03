@@ -61,13 +61,15 @@ test.describe('design gallery', () => {
     expect(box?.height).toBeCloseTo(278, 0);
 
     // .begin-button / .button-base / .pushable-flat come from site.css + styles.css:
-    // the canonical box-shadow bevel (JES-155 choice 1), dark-pink fill, no border.
+    // the canonical box-shadow press physics (JES-155 choice 1), but the Big Fat CTA
+    // keeps its own white fill + signature chunky light-pink border — it's not just a
+    // scaled-up primary button.
     const beginButton = page.locator('.button-base.begin-button').first();
     await expect(beginButton).toBeVisible();
     const borderStyle = await beginButton.evaluate((el) => getComputedStyle(el).borderTopStyle);
-    expect(borderStyle).toBe('none');
+    expect(borderStyle).toBe('solid');
     const beginBg = await beginButton.evaluate((el) => getComputedStyle(el).backgroundColor);
-    expect(beginBg).toBe('rgb(187, 82, 119)');
+    expect(beginBg).toBe('rgb(255, 255, 255)');
 
     // .library-buttons button comes from playmat.css: white on black.
     const drawButton = page.locator('.library-buttons .draw-button').first();

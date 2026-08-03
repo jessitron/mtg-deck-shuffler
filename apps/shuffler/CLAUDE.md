@@ -52,7 +52,11 @@ The short version:
   `public/styles.css` — `translateY(-4px)` at rest, `-6px` on hover (springy, 250ms),
   `-2px` on press (34ms snap), plus a matching box-shadow bevel. No `outset`/`inset`
   borders for press feedback. Colors stay per-site (own fill, own darker shadow color) —
-  don't reach for `.pushable-flat`'s default dark-pink on a component that isn't the CTA
+  don't reach for `.pushable-flat`'s default dark-pink just because it's the class name
+- **The Big Fat CTA is its own button kind, not a big primary button.**
+  `.begin-button` (BEGIN, Shuffle Up) keeps white fill + the signature chunky `10px
+  solid` light-pink border — only the press physics above are shared with other
+  buttons. Don't recolor it to match primary/secondary buttons elsewhere
 - The card is the layout unit: **200 × 278**
 - The site pages (/, /choose-any-deck) have different styles from the play pages
   (/prepare, /game)

@@ -50,7 +50,9 @@ and slabs. Plus `--playmat-one`/`--playmat-two` on the game page and the closed
 **Chunky physical controls, except on buttons now.** `outset` / `inset` / `groove`
 borders remain on non-button chrome (the command-zone surround, the title slab). Button
 press feedback moved to the box-shadow bevel described below (JES-155 choice 1) — no
-more `outset → inset` border switch anywhere.
+more `outset → inset` border switch anywhere. The Big Fat CTA (below) still carries a
+visible `10px solid` light-pink border — it just doesn't switch to `inset` on press
+anymore.
 
 **Lift on hover, press on click — one canonical shape (decided 2026-08-02, JES-155
 choice 1).** `.pushable-flat` in `apps/shuffler/public/styles.css`: `translateY(-4px)`
@@ -59,6 +61,14 @@ at rest, `-6px` on hover (springy `cubic-bezier(.3,.7,.4,1.5)`, 250ms), `-2px` o
 `outset`/`inset` border. It's global (every page loads `styles.css`); each button site
 keeps its own fill color and reproduces the same shape with its own shadow color —
 colors are separate open choices (2 and 3).
+
+**Three kinds of button, not just colors.** The Big Fat CTA (`.begin-button` — BEGIN,
+Shuffle Up) is its own category: white fill behind the signature chunky light-pink
+border, reserved for the one action per page that matters most. Primary and secondary
+buttons (dark-pink / deep-space fills elsewhere) are a different, smaller-scale
+category. Don't collapse the BFC into "just a bigger primary button" — that's a
+distinction the app actually draws, not drift (caught 2026-08-02, see
+[history.md](history.md)).
 
 **Square corners on chrome.** Round corners belong only to physical objects: cards, the
 playmat, the `.page-container` (which is itself a giant Magic card), count discs.

@@ -49,6 +49,14 @@ Colors were **not** decided by this choice — each site kept its own fill and c
 its own darker shadow color rather than adopting `.pushable-flat`'s default dark-pink.
 Choices 2 and 3 (below) are still open.
 
+**Correction (2026-08-02):** the first pass also collapsed `.begin-button` (BEGIN,
+Shuffle Up) into a plain dark-pink `.pushable-flat` fill, on the theory that "unify the
+press behaviour" meant unify everything. It doesn't — the Big Fat CTA is a distinct
+button *kind*, not a bigger primary button, and keeps its own white fill + chunky
+`10px solid` light-pink border. Only the press physics (`translateY`/box-shadow) are
+shared. See
+[history.md](history.md#2026-08-02--a-concept-choice-1-missed-the-big-fat-cta-is-not-a-primary-button).
+
 ---
 
 ## 2. Secondary-button gray
