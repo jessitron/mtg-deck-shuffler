@@ -47,13 +47,26 @@ expensive way round.
   exactly what this map is for, so expect to revisit the choice, not inherit it.
 - Notification is a bare `console.log`, an explicit descope, flagged for whoever builds a real
   consumer. Not this map's job to wire it — see map 5.
+- [What does tldraw 5.2.5 actually require of a custom shape
+  type?](issues/01-tldraw-custom-shape-facts.md) — resolved 2026-08-06, full findings in
+  [research/tldraw-custom-shapes.md](research/tldraw-custom-shapes.md). Declaring a custom shape
+  is cheap (four methods, no tool or toolbar entry needed); **syncing one is a mandatory
+  three-place change** and `TLSocketRoom` *disconnects* a client that pushes an unknown type
+  rather than dropping it. The sharpest finding: one util serves **every** `image` shape, so
+  cards, locked furniture, and stray dropped JPEGs all run through `MtgCardImageShapeUtil` today,
+  separated only by an `if` on `meta.instanceId`. Migrations are free now but bite when two
+  deploys share a room — earlier than persistence does. Tap is free either way; don't let it
+  argue the case.
 
 ## Not yet specified
 
-- **What "grouped" means for a counter riding a card.** tldraw has real grouping, real
-  parenting (frames reparent children), and `meta` — three mechanisms, and the right one
-  probably differs for a counter, a post-it, and a card tucked behind another card. Can't be
-  phrased sharply until the shape architecture is decided.
+- **Which attachment mechanism suits which passenger.** The [research
+  ticket](issues/01-tldraw-custom-shape-facts.md) narrowed the field: *parenting* is the cheap
+  one (children ride the parent transform, no custom type); *grouping* auto-dissolves at one
+  child, so it cannot hold a single counter; *bindings* move nothing by themselves and cost the
+  same registration as a shape; only a **custom container** (`BaseFrameLikeShapeUtil` /
+  `onDragShapesIn`) gives furniture the target-side hooks. Which one a counter, a post-it, and a
+  tucked card each want still can't be phrased sharply until the shape architecture is decided.
 - **Whether a face-down card is a different shape, a prop, or a different image.** The Shuffler
   currently bakes the face into `imageUrl`, so the Tabletop cannot change a card's face at all
   today; whether that stays true is a `two-faced-cards` question this map will reach.

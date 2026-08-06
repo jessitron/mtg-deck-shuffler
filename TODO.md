@@ -30,6 +30,13 @@ section is just a wall between Jess and the live work.
     one-sitting change that doesn't need a ticket.
   - Consult `shuffler-looks-like-itself` — layout change on a page that owner watches.
 
+- [ ] `deeplinks-prop-moved` Check whether `<Tldraw deepLinks>` still does anything
+  - tldraw **v5.0.0 moved `deepLinks` from a top-level `<Tldraw>` prop into `options`**, and
+    `apps/tabletop/src/client/TablePage.tsx:82` still passes it top-level. Found incidentally by
+    the tldraw custom-shape research (2026-08-06); **not verified either way** — it may still
+    work, or viewport-in-the-URL may have been silently dead since the v5 upgrade.
+  - One-sitting check: load a table, pan, and see whether the URL updates.
+
 ## Backlog
 
 - [ ] `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there  ← was: JES-85
