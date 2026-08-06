@@ -47,4 +47,63 @@ export class MtgCardImageShapeUtil extends ImageShapeUtil {
       rotation,
     };
   }
+
+  // Ticket 01-zone-entry-events: name "this card instance entered this
+  // zone" as a distinct occurrence, once per real zone change — not once
+  // per drag frame, and not re-fired for staying in (or returning to) the
+  // same zone.
+  //
+  // `onTranslateEnd` (fired once, on the *moved* card, when a drag settles)
+  // rather than `onDragShapesOver`/`onDropShapesOver` (fired on the
+  // *target*, every frame while dragging): the zones tableFurniture.ts
+  // draws are stock, locked `geo`/`image` shapes, not a custom ShapeUtil,
+  // so there's nothing to hang a target-side hook on without giving zones
+  // their own ShapeUtil — a bigger change this ticket doesn't need. Firing
+  // once on settle also matches what the acceptance criteria actually
+  // wants: a single occurrence per drag, named by where the card came to
+  // rest, not a stream of over/under events during the drag.
+  //
+  // Debounce state rides on the card's own `meta.zone` (alongside the
+  // existing `instanceId`/`scryfallId`/`cardName` identity fields) — the
+  // last zone this card was known to be in — so re-entering a zone it
+  // already left still counts as a fresh entry, but staying put (or a tiny
+  // in-zone nudge) doesn't.
+  override onTranslateEnd(_initial: TLImageShape, current: TLImageShape): TLShapePartial<TLImageShape> | undefined {
+    if (!current.meta?.instanceId) return undefined;
+
+    const zone = this.zoneAt(current);
+    const previousZone = (current.meta?.zone as string | undefined) ?? undefined;
+    if (zone === previousZone) return undefined;
+
+    if (zone) {
+      // Descoped 2026-08-06 (Jess): no callback/emitter/queue yet — nothing
+      // downstream consumes this. A plain console.log is the whole
+      // notification surface for now, proving the detection logic; wiring
+      // a real consumer (and, eventually, routing this through the
+      // Tabletop's telemetry as a span attribute or log.ts call) is later
+      // tickets' job (tabletop-survives-restart).
+      console.log(`zone-entry ${current.meta.instanceId} ${zone}`);
+    }
+
+    return {
+      id: current.id,
+      type: current.type,
+      meta: { ...current.meta, zone: zone ?? null },
+    };
+  }
+
+  /** Which zone (if any) the shape's center currently rests in. */
+  private zoneAt(shape: TLImageShape): string | undefined {
+    const bounds = this.editor.getShapePageBounds(shape);
+    if (!bounds) return undefined;
+    const center = bounds.center;
+
+    for (const candidate of this.editor.getCurrentPageShapes()) {
+      const zone = candidate.meta?.zone;
+      if (typeof zone !== "string") continue;
+      const candidateBounds = this.editor.getShapePageBounds(candidate);
+      if (candidateBounds?.containsPoint(center)) return zone;
+    }
+    return undefined;
+  }
 }

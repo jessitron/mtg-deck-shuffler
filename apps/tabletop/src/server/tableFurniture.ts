@@ -31,7 +31,24 @@ export function nextIndex(tableName: string): IndexKey {
   return next;
 }
 
-export function regionShape(id: TLShapeId, pageId: string, x: number, y: number, w: number, h: number, label: string, index: IndexKey) {
+/**
+ * Zones a card can be detected entering (01-zone-entry-events). Matches the
+ * identifiers this file already builds shapes for — command zone isn't
+ * built yet, so it isn't listed here; add it here once it exists.
+ */
+export type Zone = "playmat" | "library" | "graveyard" | "exile";
+
+export function regionShape(
+  id: TLShapeId,
+  pageId: string,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  label: string,
+  index: IndexKey,
+  zone?: Zone
+) {
   return {
     id,
     typeName: "shape",
@@ -60,11 +77,22 @@ export function regionShape(id: TLShapeId, pageId: string, x: number, y: number,
       scale: 1,
       richText: toRichText(label),
     },
-    meta: {},
+    meta: zone ? { zone } : {},
   } as any;
 }
 
-function imageShape(id: TLShapeId, pageId: string, x: number, y: number, w: number, h: number, assetId: TLAssetId, altText: string, index: IndexKey) {
+function imageShape(
+  id: TLShapeId,
+  pageId: string,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  assetId: TLAssetId,
+  altText: string,
+  index: IndexKey,
+  zone?: Zone
+) {
   return {
     id,
     typeName: "shape",
@@ -77,7 +105,7 @@ function imageShape(id: TLShapeId, pageId: string, x: number, y: number, w: numb
     isLocked: true, // furniture: an image background, not something to drag
     opacity: 1,
     props: { w, h, assetId, playing: true, url: "", crop: null, flipX: false, flipY: false, altText },
-    meta: {},
+    meta: zone ? { zone } : {},
   } as any;
 }
 
@@ -140,23 +168,29 @@ export async function ensurePlayerArea(
 
   await entry.room.updateStore((store) => {
     // The mat outline is always drawn — the fallback if the image is missing/broken.
-    store.put(regionShape(matId, pageId, mat.x, mat.y, mat.w, mat.h, "", nextIndex(entry.tableName)));
+    store.put(regionShape(matId, pageId, mat.x, mat.y, mat.w, mat.h, "", nextIndex(entry.tableName), "playmat"));
     if (images.playmatImageUrl) {
       const assetId = AssetRecordType.createId(`playmat-${entry.tableName}-${seatId}`);
       store.put(imageAsset(assetId, `${playerName}'s playmat`, images.playmatImageUrl, mat.w, mat.h));
-      store.put(imageShape(matImageId, pageId, mat.x, mat.y, mat.w, mat.h, assetId, `${playerName}'s playmat`, nextIndex(entry.tableName)));
+      store.put(
+        imageShape(matImageId, pageId, mat.x, mat.y, mat.w, mat.h, assetId, `${playerName}'s playmat`, nextIndex(entry.tableName), "playmat")
+      );
     }
 
     if (images.cardBackImageUrl) {
       const assetId = AssetRecordType.createId(`library-${entry.tableName}-${seatId}`);
       store.put(imageAsset(assetId, "Library", images.cardBackImageUrl, library.w, library.h));
-      store.put(imageShape(libraryId, pageId, library.x, library.y, library.w, library.h, assetId, "Library", nextIndex(entry.tableName)));
+      store.put(
+        imageShape(libraryId, pageId, library.x, library.y, library.w, library.h, assetId, "Library", nextIndex(entry.tableName), "library")
+      );
     } else {
-      store.put(regionShape(libraryId, pageId, library.x, library.y, library.w, library.h, "Library", nextIndex(entry.tableName)));
+      store.put(regionShape(libraryId, pageId, library.x, library.y, library.w, library.h, "Library", nextIndex(entry.tableName), "library"));
     }
 
-    store.put(regionShape(graveyardId, pageId, graveyard.x, graveyard.y, graveyard.w, graveyard.h, "Graveyard", nextIndex(entry.tableName)));
-    store.put(regionShape(exileId, pageId, exile.x, exile.y, exile.w, exile.h, "Exile", nextIndex(entry.tableName)));
+    store.put(
+      regionShape(graveyardId, pageId, graveyard.x, graveyard.y, graveyard.w, graveyard.h, "Graveyard", nextIndex(entry.tableName), "graveyard")
+    );
+    store.put(regionShape(exileId, pageId, exile.x, exile.y, exile.w, exile.h, "Exile", nextIndex(entry.tableName), "exile"));
 
     store.put({
       id: labelId,
