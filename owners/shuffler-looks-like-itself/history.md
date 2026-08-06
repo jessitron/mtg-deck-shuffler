@@ -173,7 +173,7 @@ mistaken for one of the six and re-litigated.
 
 ## 2026-08-06 — choice 5 decided: one global focus ring
 
-`b802576` **Choice 5: one global focus ring, and bring the design KB with it**
+`8b23d21` **Choice 5: one global focus ring, and bring the design KB with it**
 
 Jess picked **option B: `3px solid var(--light-pink)` at `outline-offset: 3px`**, declared
 **once** in `styles.css` as a `:focus-visible` rule on `a, button, input, select, textarea,
