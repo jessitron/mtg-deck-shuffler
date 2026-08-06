@@ -22,22 +22,53 @@ pointer, and sweep it to `## Done`.
     project — 39 Backlog + 1 Todo are the ones that need a decision; 16 Canceled and 12 Done
     need nothing. Then archive the project in Linear and stop writing there.
   - **Watch out:** 9 of the 68 (JES-144…JES-154, all Tabletop) have **no Linear project** — they
-    were filed from `apps/tabletop/notes/todo.md` on 2026-08-01 without one. That's why the
-    script has a `--repo` mode; a plain project snapshot silently misses them. They overlap the
-    7 live items still sitting in that file, so do `tabletop-todo-fold` and this one together
-    or you'll triage the same work twice.
+    were filed from the old `apps/tabletop/notes/todo.md` on 2026-08-01 without one. That's why
+    the script has a `--repo` mode; a plain project snapshot silently misses them.
 
-- [ ] `tabletop-todo-fold` Decide what happens to `apps/tabletop/notes/todo.md`  ← priority: medium
-  - It's already an inbox — its first line is "jess writes notes here" — and it has 7 live items
-    at the top plus a historical section of items already promoted to Linear on 2026-08-01.
-  - Now that the fleet has a root `TODO.md`, two inboxes is the thing the convention exists to
-    avoid. Options: fold the 7 live items up into this file and leave the historical section as a
-    ship-local record; or keep it as a deliberate ship-scoped inbox and teach `orient` to read
-    both. Jess's call — the items are hers and nothing has been moved.
+Folded up from `apps/tabletop/notes/todo.md` (2026-08-06), Jess's wording preserved as the quote.
+None of these are in Linear — they postdate the 2026-08-01 promotion.
+
+- [ ] `deck-title-placement` Move the deck title out of the command zone on the game screen  ← mountain: The Tabletop replaces Mural
+  - > on the game screen, let's move the title of the deck out of the command zone; put it above
+    > the table button(s), top-aligned with the hamburger menu.
+
+- [ ] `playmat-command-zone` Redraw the player area to include the command zone  ← mountain: The Tabletop replaces Mural
+  - > the Tabletop drawing needs to change: I forgot the command zone. Move exile down to replace
+    > the bottom third of the Graveyard, instead.
+  - Touches `apps/tabletop/DESIGN.md` and `src/server/tableFurniture.ts` — the design doc is the
+    spec for the player area, so change it first.
+
+- [ ] `seat-label-deck-name` Show the deck name with the player name above the playmat  ← mountain: The Tabletop replaces Mural
+  - > have the player name include the deck name, above the playmat on the Tabletop
+
+- [ ] `commander-in-command-zone` Place the commander in the command zone when the Tabletop loads  ← mountain: The Tabletop replaces Mural
+  - > When the Tabletop loads, have the commander appear in the command zone. Also place a
+    > transparent version of the commander in its spot, one that doesn't move when they play the
+    > commander.
+  - The ghost copy is the interesting half: it marks *where the commander lives* so the zone still
+    reads as the commander's home once the real card is out on the table.
+
+- [ ] `no-doubleclick-crop` Turn off the crop tool on double-clicking a card  ← mountain: The Tabletop replaces Mural
+  - > On the Tabletop, double-clicking a card brings up something useless, a weird cropping thing.
+    > Turn that off.
+  - Adjacent to JES-144 (remove crop/download from the card *context menu*) but distinct — that's
+    the menu, this is the double-click gesture. Both want the custom card `ShapeUtil` that JES-149
+    needs anyway.
+
+- [ ] `animate-tap` Animate tapping a card  ← mountain: The Tabletop replaces Mural
+  - > Can we animate tapping the card?
+  - Rides on the same custom card shape as rotation (JES-143/JES-144). Consult the `animations`
+    owner — the Shuffler already has a card-movement animation vocabulary worth matching.
 
 ## Backlog
 
 ## Done
+
+- [x] ~~`tabletop-todo-fold` Decide what happens to `apps/tabletop/notes/todo.md`~~
+  done: 2026-08-06 — folded and deleted. Its historical section was pure duplication of
+  `notes/linear-archive.md` (all 8 `JES-` ids verified present there). Its 6 undone live items
+  moved to `## Next` above with Jess's wording quoted; the 7th (Precon/Archidekt tabs not
+  toggling as primary buttons) was already fixed in `d77b1ae` / `55c459d`. One inbox again.
 
 - [x] ~~`tracker-migrate` Move the Linear coordinates into `docs/agents/issue-tracker.md`~~
   done: 2026-08-06 — resolved differently. Rather than declaring Linear in the shared location,
