@@ -12,8 +12,8 @@ commands, and gotchas — read it when working on that ship.
   research and fan-out reads are exactly what she wants delegated.
 - **When Jess delegates a judgment call, finish the whole thing — don't come back per item.**
   2026-08-06, part-way through a seven-part triage she'd been answering one question at a time:
-  *"dude I don't care, what will help you get it done?"* and *"it's ok if this process is a
-  little lossy."* A skill that says "one ticket per session" is describing a default, not a
+  _"dude I don't care, what will help you get it done?"_ and _"it's ok if this process is a
+  little lossy."_ A skill that says "one ticket per session" is describing a default, not a
   constraint she's asked for. Fan out, decide, report the shape of what you decided and what
   you threw away. She'd rather lose a marginal item than spend another round-trip on it — what
   matters resurfaces the next time she hits it.
@@ -38,8 +38,7 @@ Work lives in three places, and only the last one varies per repo:
   That file is written by `/setup-matt-pocock-skills` and read by both his engineering skills
   and the seamap skills; **read it, never write it.**
 
-An inbox item becomes real work via `/triage`, or `/to-spec` + `/to-tickets`; strike the line
-through with a `promoted:` pointer when it goes.
+An inbox item becomes real work via `/triage`, or `/to-spec` + `/to-tickets`; delete the line from TODO.md.
 
 **There is no external tracker.** `SEAMAP.md`, `TODO.md` and `.scratch/` are the whole system —
 a file round-trip beats an API call, and git carries the state between Jess's computers. If a
@@ -114,7 +113,7 @@ Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernit
 - **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).
 - **API key sourcing**: each ship's `.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` **at the repo root** (sourced on `cd` into the repo). So `.be` must be sourced **before** `.env`, or OTLP export silently 401s ("unknown API key"). The `verify.sh` scripts source both in that order; if you start a server by hand for telemetry, do the same.
 - **Two keys, two environments.** `HONEYCOMB_API_KEY` is the **`local`** ingest key (access: `createDatasets` only). `HONEYCOMB_MARKER_KEY`, also in `.be`, is a **`mtg-deck-shuffler`** (prod) key with Markers access — used only by `scripts/deploy-marker.sh`. Don't cross them: the ingest key cannot write markers, and marking the wrong environment succeeds silently, which is why the marker script checks the key's environment via `/1/auth` before posting.
-- **Deploys leave a marker.** All three `deploy.sh` call `scripts/deploy-marker.sh <ship>` *after* a successful rollout (type `deploy`, message `deploy <ship> <short-sha>`, linking the GitHub commit), and each tags the commit `deploy-<ship>-<timestamp>` locally. The marker call is best-effort (`|| true`) — the deploy has already landed, so a marker problem must never read as a failed deploy.
+- **Deploys leave a marker.** All three `deploy.sh` call `scripts/deploy-marker.sh <ship>` _after_ a successful rollout (type `deploy`, message `deploy <ship> <short-sha>`, linking the GitHub commit), and each tags the commit `deploy-<ship>-<timestamp>` locally. The marker call is best-effort (`|| true`) — the deploy has already landed, so a marker problem must never read as a failed deploy.
 
 - **Recording that something happened**: put it on the span as **attributes** — always the
   first choice, and free in Honeycomb. When there's no live span to hang it on (startup,
@@ -133,7 +132,7 @@ owner (`owners/fleet-is-observable/`).
 Design directives, features, vocabulary, and code structure in `notes/`. Keep updated with changes.
 
 `notes/AGENT-NOTES.md` collects gotchas learned while working here — non-obvious "oh,
-*that's* why" findings (why the Shuffler's `./run` doesn't source `.be`, why its Docker
+_that's_ why" findings (why the Shuffler's `./run` doesn't source `.be`, why its Docker
 build context is the repo root, and so on). Read it when something surprises you; append
 to it when something surprises you and wasn't written down.
 
