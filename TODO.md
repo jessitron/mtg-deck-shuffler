@@ -13,85 +13,9 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- [ ] `tabletop-survives-restart` Persist the table by logging its events to the Spine and replaying on boot  ← mountain: tabletop-replaces-mural  ← was: JES-151, JES-154, JES-131
-  - > persistence. Right now, shutting down the app and starting it up, the table is gone.
-  - Still true: `apps/tabletop/src/server/rooms.ts` holds each table as an in-memory `TLSocketRoom`
-    — no snapshot, no load-on-boot. A redeploy wipes the board everyone is playing on.
-  - **Event-sourced, not snapshotted** (decided 2026-08-01), so it waits on `tabletop-card-shape`:
-    today's only events are raw tldraw sync diffs, not "card was exiled". Three new pieces — a
-    `card.moved` contract payload (`contracts/payloads/` has only `card.played`, `seat.taken`,
-    `table.created`), a **Tabletop→Spine sender**, which is a direction of data flow that doesn't
-    exist yet (today it's Shuffler→Spine and Spine→Tabletop), and replay on room startup. The
-    receiving end is already built: `POST /tables/:table_id/events` in the Spine.
-  - Freeform doodles are not game events and never will be in the log — they need a tldraw
-    snapshot store regardless.
-  - Design the event shapes to be replayable as test fixtures. Jess: "persistence is gonna wind up
-    mattering for testing."
-
-- [ ] `deck-title-placement` Move the deck title out of the command zone on the game screen  ← mountain: tabletop-replaces-mural
-  - > on the game screen, let's move the title of the deck out of the command zone; put it above
-    > the table button(s), top-aligned with the hamburger menu.
-
-- [ ] `playmat-command-zone` Redraw the player area to include the command zone  ← mountain: tabletop-replaces-mural  ← was: JES-141
-  - > the Tabletop drawing needs to change: I forgot the command zone. Move exile down to replace
-    > the bottom third of the Graveyard, instead.
-  - Touches `apps/tabletop/DESIGN.md` and `src/server/tableFurniture.ts` — the design doc is the
-    spec for the player area, so change it first.
-  - Same job: **the mat should grow taller when lands overflow its bottom half.** DESIGN.md always
-    said so; it was the scope cut from the player-area build, and `landPosition()` still wraps
-    lands inside a fixed-height bottom half so enough lands spill past the mat's edge.
-  - Know the ripple before you start: library/graveyard/exile/label are fixed offsets off the mat's
-    bounds, and seats sit in a row at fixed x offsets by join order — so growing one mat re-derives
-    that seat's whole column *and* shifts every player area to its right. It also means the area is
-    built with `room.updateStore` after seat-joined, not created once.
-
-- [ ] `player-area-polish` Polish the player area's geometry and cosmetics  ← mountain: tabletop-replaces-mural  ← was: JES-150, JES-147, JES-146, JES-148
-  - > lands should leave a space between each other and the side of the playmat
-  - Four nudges in the same two files, one sitting's work with the table open: land gaps in
-    `landPosition()`; center the Stack pile over the seat's playmat in `stackCardPosition()`
-    (it doesn't even take a `seatIndex` today — it anchors at the strip's left edge); drop the
-    grey dotted outline and give the playmat a thick black border (`regionShape()`'s
-    `dash: "dashed"`, one prop); give the library a border and a label.
-  - The library one is realer than it looks: the Shuffler always sends a `cardBackImageUrl`, so
-    the library always renders as a bare image — the `regionShape` fallback that carries the
-    "Library" label never runs.
-  - **Rounded corners are the one that isn't a prop.** tldraw's `geo` has no corner radius, so
-    it's either a custom shape or baking the corners into a playmat image asset. Decide which
-    before starting.
-
-- [ ] `library-links-to-shuffler` Link the Tabletop library back to the Shuffler  ← mountain: tabletop-replaces-mural  ← was: JES-145
-  - > Can we make the library link back to Deck Shuffler?
-  - Quick win: the `url` prop is already there in `tableFurniture.ts`, hardcoded `""` in both the
-    image and `regionShape` paths. The open part is *which* URL — needs a seatId → Shuffler game
-    URL mapping the Tabletop doesn't have.
-
-- [ ] `seat-label-deck-name` Show the deck name with the player name above the playmat  ← mountain: tabletop-replaces-mural
-  - > have the player name include the deck name, above the playmat on the Tabletop
-
-- [ ] `commander-in-command-zone` Place the commander in the command zone when the Tabletop loads  ← mountain: tabletop-replaces-mural
-  - > When the Tabletop loads, have the commander appear in the command zone. Also place a
-    > transparent version of the commander in its spot, one that doesn't move when they play the
-    > commander.
-  - The ghost copy is the interesting half: it marks *where the commander lives* so the zone still
-    reads as the commander's home once the real card is out on the table.
-
-- [ ] `no-doubleclick-crop` Curate the card's menus — kill crop, add rotate  ← mountain: tabletop-replaces-mural  ← was: JES-144
-  - > On the Tabletop, double-clicking a card brings up something useless, a weird cropping thing.
-    > Turn that off.
-  - Two surfaces, one job: the double-click gesture (above) and the popup menu — drop "crop" and
-    "download", keep "alt" and "replace media", add "rotate". Also a way to flip MDFC cards, ideally
-    from the same submenu.
-  - Cosmetic; rides on `tabletop-card-shape`. Don't build the shape for this.
-
-- [ ] `animate-tap` Rotate a card 90° to tap it, and animate it  ← mountain: tabletop-replaces-mural  ← was: JES-144, JES-143
-  - > Can we animate tapping the card?
-  - > We must be able to rotate cards. Ideally, clicking on a card turns it 90 degrees.
-  - **Rotation is the essential half** — real players hit this. Jess's college kid and their
-    friends (2026-08-01) wanted to tap lands for mana and turn creatures sideways for summoning
-    sickness; without it they track tapped state out-of-band, which defeats a shared visual table.
-  - `onRotateStart`/`onRotate`/`onRotateEnd` are real hooks in `tldraw@5.2.5`, on the same custom
-    shape `tabletop-card-shape` builds. Consult the `animations` owner — the Shuffler already has a
-    card-movement animation vocabulary worth matching.
+- The Tabletop-replaces-Mural work (9 lines that were here) now has its own wayfinder
+  map: `.scratch/tabletop-replaces-mural/map.md`. Work it via `/wayfinder`, one ticket
+  at a time, rather than picking lines from here.
 
 ## Backlog
 
@@ -188,19 +112,6 @@ section is just a wall between Jess and the live work.
     runs them but a human remembering to.
   - The old argument against starting — one permanently-red Playwright test — is gone; that test is
     fixed. Decide this on its own merits.
-
-- [ ] `personal-play-space` Let a player pick their playmat and their sleeves  ← was: JES-86, JES-79, JES-132
-  - > On the deck preview page, let the player choose inner and outer sleeve colors for their
-    > deck. Part of making the table feel like a real, personal play space.
-  - **The plumbing already exists, end to end.** `seat.joined` carries both `playmatImageUrl`
-    and `cardBackImageUrl` (`src/port-tabletop/types.ts`), hardcoded by `defaultPlaymatImageUrl()`
-    and `cardBackImageUrl()` whose own comments say "playmat selection in prep is deferred" and
-    "until sleeve selection exists". The Tabletop already renders the playmat as an image asset
-    (`tableFurniture.ts`). This is one picker in prep feeding two optional fields — not a build.
-  - A sleeve image is exactly what a face-down card needs: the back of a sleeved card *is* the
-    sleeve. And a sleeve edge gives cards the square corners the site's style wants.
-  - Only the **rectangular sleeve frame** waits on `tabletop-card-shape` — a natural first
-    exercise of a custom shape's rendering. The picker and the card back need nothing new.
 
 - [ ] `fun-game-ids` Game IDs as fun word combos instead of numbers  ← was: JES-97
   - > Make game IDs fun word combinations instead of numbers. That makes them not derivable
