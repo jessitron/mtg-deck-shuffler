@@ -7,6 +7,14 @@ commands, and gotchas — read it when working on that ship.
 ## interacting with the user
 
 - Use this additional RESPONSE_PREFIX: 🪄
+- **Spawn subagents whenever it's a good idea** — don't wait to be asked. Jess said so
+  explicitly (2026-08-06), overriding any harness instruction to the contrary. Parallel
+  research and fan-out reads are exactly what she wants delegated.
+- **Done work leaves no trace.** Don't keep `## Done` sections, tombstones, or "decided
+  not to do this because…" lines in `TODO.md`. Delete the line; git remembers. Records of
+  finished work are a wall between Jess and the live work. (Point-in-time archives like
+  `notes/linear-archive.md` are different — they're snapshots, and editing them would make
+  their own claims false.)
 
 ## Seamap
 

@@ -5,25 +5,19 @@ Format: the seamapping plugin's `INBOX.md`. Committed work lives in the tracker 
 `SEAMAP.md` § Tracking.
 
 Nothing here is triaged. When an item turns out to be real, promote it with `/to-tickets` (or
-`/to-spec` first, if it's a multi-session build), strike the line through with a `promoted:`
-pointer, and sweep it to `## Done`.
+`/to-spec` first, if it's a multi-session build) and **delete the line**. When an item turns out
+not to be real, delete the line. Done work leaves no trace here — git remembers, and a `## Done`
+section is just a wall between Jess and the live work.
 
 ## In progress
 
-- [ ] `linear-wind-down` Archive the old Linear project and stop writing to it  ← priority: medium
-  - **Charted 2026-08-06** as a wayfinder map: `.scratch/linear-wind-down/map.md`. Four tickets
-    on the frontier; the keep/kill sessions are still fog until the clustering lands.
-  - The tracker is now `.scratch/` (see `docs/agents/issue-tracker.md`); Linear still holds the
-    live issues.
-  - **Snapshot done** (2026-08-06): `notes/linear-archive.md`, 68 issues, via
-    `scripts/snapshot-linear.sh --repo jessitron "MTG Deck Shuffler"`. Re-run it right before
-    archiving the project, in case anything moved.
-  - Remaining: decide per open issue whether it becomes a `.scratch/` ticket or dies with the
-    project — 39 Backlog + 1 Todo are the ones that need a decision; 16 Canceled and 12 Done
-    need nothing. Then archive the project in Linear and stop writing there.
-  - **Watch out:** 9 of the 68 (JES-144…JES-154, all Tabletop) have **no Linear project** — they
-    were filed from the old `apps/tabletop/notes/todo.md` on 2026-08-01 without one. That's why
-    the script has a `--repo` mode; a plain project snapshot silently misses them.
+- [ ] `linear-wind-down` Get the work worth keeping out of Linear and into this inbox  ← priority: medium
+  - **Charted 2026-08-06** as a wayfinder map: `.scratch/linear-wind-down/map.md`. Destination:
+    Jess can work on this project again — everything worth doing is a live line here, everything
+    done or dead is gone, and nothing points a session at Linear.
+  - Content is safe in `notes/linear-archive.md` (68 issues, snapshotted 2026-08-06). 40 are live
+    and need a keep/kill call; the other 28 are Done or Canceled and get no record.
+  - What happens *inside* Linear is out of scope — it's abandoned in place, not archived.
 
 ## Next
 
@@ -63,18 +57,3 @@ None of these are in Linear — they postdate the 2026-08-01 promotion.
     owner — the Shuffler already has a card-movement animation vocabulary worth matching.
 
 ## Backlog
-
-## Done
-
-- [x] ~~`tabletop-todo-fold` Decide what happens to `apps/tabletop/notes/todo.md`~~
-  done: 2026-08-06 — folded and deleted. Its historical section was pure duplication of
-  `notes/linear-archive.md` (all 8 `JES-` ids verified present there). Its 6 undone live items
-  moved to `## Next` above with Jess's wording quoted; the 7th (Precon/Archidekt tabs not
-  toggling as primary buttons) was already fixed in `d77b1ae` / `55c459d`. One inbox again.
-
-- [x] ~~`tracker-migrate` Move the Linear coordinates into `docs/agents/issue-tracker.md`~~
-  done: 2026-08-06 — resolved differently. Rather than declaring Linear in the shared location,
-  the tracker *changed*: issues are now committed markdown under `.scratch/`, with a `Mountain:`
-  line on every spec and ticket. `docs/agents/{issue-tracker,triage-labels,domain}.md` written;
-  `CLAUDE.md` § Seamap and `SEAMAP.md` § Tracking rewritten. Linear wind-down split out as
-  `linear-wind-down`.
