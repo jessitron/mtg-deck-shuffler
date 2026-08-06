@@ -163,8 +163,11 @@
   z-index: 1000;
 }
 
-/* Both overlays carry tabindex="0" (to catch click-outside and Escape), so the
- * global [tabindex]:focus-visible ring in styles.css applies to them. They're
+/* Both overlays carry tabindex="0", so the global [tabindex]:focus-visible ring
+ * in styles.css applies to them. (Why they carry it is unclear — the Escape
+ * trigger is `keyup … from:body` and the click trigger is `click[target==this]`,
+ * and neither needs a focusable element. See `vestigial-modal-tabindex` in
+ * TODO.md; if the attributes go, this rule goes with them.) They're
  * full-viewport and fixed, so the standard +3px offset would draw the ring
  * *outside* the viewport, where it clips to nothing — a keyboard stop that
  * looks unfocused. Turn the offset inward so it reads as a frame instead.

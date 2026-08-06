@@ -50,7 +50,11 @@ Per-view `additionalStyles` today:
 **Duplicated blocks.** Editing one copy silently leaves the other page unchanged.
 
 - The modal block — `.modal-overlay`, `.modal-dialog`, `.modal-header`, `.modal-title`,
-  `.modal-close`, `.modal-body` — is verbatim in **both** `playmat.css` and `prepare.css`.
+  `.modal-close`, `.modal-body` — is in **both** `playmat.css` and `prepare.css`. It was
+  verbatim until choice 5 (2026-08-06) added `.modal-overlay:focus-visible` to the
+  `playmat.css` copy **only** — deliberately, so the duplicate wouldn't grow. That rule
+  reaches `/prepare` anyway: prepare loads both sheets, and `:focus-visible` (0,2,0) beats
+  `prepare.css`'s plain `.modal-overlay` regardless of load order.
 - The flip **container** block — `.flip-container-outer/-inner`, `.two-sided-front/-back`
   — is verbatim in **both** `game.css:97-133` and `prepare.css:210-244`.
 - The flip **button** is a *separate* duplicate, and it has **already diverged**:

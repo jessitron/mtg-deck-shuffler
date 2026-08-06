@@ -276,6 +276,10 @@ section is just a wall between Jess and the live work.
     open library modal and card modal** — the white-surface and full-viewport-overlay cases.
   - The suspected weak spot is the flat-white `.modal-dialog` interior: `--light-pink` on white is
     ~1.35:1, under WCAG 1.4.11's 3:1 floor for non-text indicators.
+  - **Look at `.begin-button` specifically** (BEGIN on `/`, Shuffle Up on `/prepare`) — the ticket
+    named it as the one place this treatment could mush, since a light-pink ring sits 3px off a
+    10px light-pink border. The argument that it holds (the gap shows the page, not the button) is
+    only an argument; on `/prepare` that gap shows card art rather than the dark gradient.
 
 - [ ] `focus-ring-on-white-decision` Decide what to do about --light-pink's 1.35:1 on white
   - Depends on the tab-through above. Real flat-white surfaces exist: `.modal-dialog`

@@ -127,7 +127,7 @@ test.describe('design gallery', () => {
 
     // shuffler-design-choices choice 5: one global :focus-visible rule in
     // styles.css — 3px light-pink at 3px offset — replacing the app's single
-    // plain :focus and two `outline: none` regressions.
+    // plain :focus and three `outline: none` regressions.
     //
     // Asserted on the #focus specimens, which carry only real app classes (no
     // candidate class), so the ring can only be coming from the global rule.
