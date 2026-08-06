@@ -23,7 +23,11 @@ What happens *inside* Linear is not part of this — see Out of scope.
   recording that something isn't happening. This is why the ticket count keeps shrinking rather
   than growing; that's the effort working, not scope loss.
 - **Keep/kill is HITL, cluster by cluster.** Jess calls it herself, walking themed clusters rather
-  than 40 individual issues or one blanket rule.
+  than 40 individual issues or one blanket rule. Tickets 06–12, one per cluster; each carries its
+  issues inline so it stays walkable after the archive is deleted.
+- **A dangling `JES-` reference follows the work.** Jess, 2026-08-06: if the issue survives, re-point
+  the reference at its new home; only if it's killed or already done do you inline the prose and
+  drop the id. This is why [ticket 05](issues/05-cut-the-linear-pointers.md) waits on the clusters.
 - Source of truth for issue content is `notes/linear-archive.md` (68 issues, snapshotted
   2026-08-06). It is a point-in-time snapshot and stays intact — pruning it would make its own
   opening claim false. The "no trace" rule governs `TODO.md` and this map, not the archive.
@@ -32,19 +36,25 @@ What happens *inside* Linear is not part of this — see Out of scope.
 
 ## Decisions so far
 
-<!-- one line per resolved ticket -->
+- [Cluster the 40 live issues into themed groups](issues/01-cluster-the-live-issues.md) — seven
+  clusters, no miscellaneous needed. Three serve the active Mountain and are walked first, in
+  dependency order (custom card shape → table furniture → durability). **8 already done or
+  superseded, 2 too vague** — those get deleted, not walked. Four `TODO.md` items already overlap
+  clusters 1/2/6, so survivors merge into those lines rather than sitting beside them.
+- [Find every remaining pointer at Linear](issues/04-find-remaining-linear-pointers.md) — six
+  misdirects, no dead weight, `CLAUDE.md`/`SEAMAP.md` verified clean and no ship mentions Linear
+  at all. The three `mcp__claude_ai_Linear__save_*` permissions are already deleted from
+  `.claude/settings.local.json`; the rest is [ticket 05](issues/05-cut-the-linear-pointers.md).
 
 ## Not yet specified
 
-- **One keep/kill session per cluster.** Can't be ticketed until [Cluster the 40 live issues into
-  themed groups](issues/01-cluster-the-live-issues.md) names the clusters. Each is a HITL grilling
-  ticket: walk the cluster, Jess says keep or gone. Clusters serving the active Mountain
-  (Tabletop replaces Mural) go first — those are the ones standing between her and working.
 - **Writing the survivors into `TODO.md`.** A task ticket, once the format is settled and at least
   one cluster is decided. Probably one write per cluster, so the inbox becomes usable
   incrementally rather than in one big-bang commit at the end.
-- **Deleting what's already done.** Falls out of clustering: any issue the codebase has moved past
-  is deleted on sight, no session needed. May not need a ticket at all.
+- **Deleting `notes/linear-archive.md`.** Jess wants it gone (2026-08-06); it's already committed
+  in `944a111`, so `git show 944a111:notes/linear-archive.md` recovers it. Sequenced **last** —
+  every cluster ticket and ticket 05's inline expansions read from it. Its opening paragraph also
+  claims to be a live snapshot, which stops being true either way.
 
 ## Out of scope
 
