@@ -13,17 +13,6 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- [ ] `tabletop-card-shape` Give Tabletop cards a custom `ShapeUtil` that reports zone entry  ← mountain: tabletop-replaces-mural  ← was: JES-149
-  - > "card was dragged into the graveyard" / "card was dragged from here to here" are essential
-    > game events — not cosmetic, core to whether this architecture works at all.
-  - **The keystone.** Cards and zones are stock tldraw `image`/`geo` records today
-    (`src/server/cardArrival.ts`, `tableFurniture.ts`), rendered by a bare `<Tldraw store={...}>`
-    in `TablePage.tsx` with no `shapeUtils` registered — so no hook fires. Confirmed present in
-    `tldraw@5.2.5`: `onDragShapesOver`/`onDropShapesOver` on the *target* (how tldraw's own frame
-    shape reparents), `onTranslateEnd` on the mover.
-  - Do this **first**. `no-doubleclick-crop` and `animate-tap` both want this same custom shape,
-    and the persistence work waits on having named domain events instead of raw sync-protocol diffs.
-
 - [ ] `tabletop-survives-restart` Persist the table by logging its events to the Spine and replaying on boot  ← mountain: tabletop-replaces-mural  ← was: JES-151, JES-154, JES-131
   - > persistence. Right now, shutting down the app and starting it up, the table is gone.
   - Still true: `apps/tabletop/src/server/rooms.ts` holds each table as an in-memory `TLSocketRoom`
