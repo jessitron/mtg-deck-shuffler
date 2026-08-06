@@ -29,9 +29,11 @@ An inbox item becomes real work via `/triage`, or `/to-spec` + `/to-tickets`; st
 through with a `promoted:` pointer when it goes.
 
 Linear is no longer the tracker for this repo — issues moved to `.scratch/` because a file
-round-trip beats an API call. The old Linear project still holds content; wind it down with
-`scripts/snapshot-linear.sh [project] [outfile]`, which archives it to greppable markdown
-(default `notes/linear-archive.md`). Read-only and re-runnable; needs `LINEAR_API_KEY` in `.be`.
+round-trip beats an API call. The old Linear project still holds content, archived to
+`notes/linear-archive.md` (68 issues, 2026-08-06) by
+`scripts/snapshot-linear.sh --repo jessitron "MTG Deck Shuffler"`. Read-only and re-runnable;
+needs `LINEAR_API_KEY` in `.be`. **Use `--repo TEAM PROJECT`, not bare project mode** — 9 of this
+repo's Tabletop issues have no Linear project and a project-scoped run misses them silently.
 
 The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-table-vision.md`.
 

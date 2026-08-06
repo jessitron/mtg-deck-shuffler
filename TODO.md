@@ -14,9 +14,18 @@ pointer, and sweep it to `## Done`.
 
 - [ ] `linear-wind-down` Archive the old Linear project and stop writing to it  ← priority: medium
   - The tracker is now `.scratch/` (see `docs/agents/issue-tracker.md`); Linear still holds the
-    live issues. Jess needs a fresh `LINEAR_API_KEY` before anything can read them.
-  - Then: `scripts/snapshot-linear.sh` → `notes/linear-archive.md`, and decide per open issue
-    whether it becomes a `.scratch/` ticket or dies with the project.
+    live issues.
+  - **Snapshot done** (2026-08-06): `notes/linear-archive.md`, 68 issues, via
+    `scripts/snapshot-linear.sh --repo jessitron "MTG Deck Shuffler"`. Re-run it right before
+    archiving the project, in case anything moved.
+  - Remaining: decide per open issue whether it becomes a `.scratch/` ticket or dies with the
+    project — 39 Backlog + 1 Todo are the ones that need a decision; 16 Canceled and 12 Done
+    need nothing. Then archive the project in Linear and stop writing there.
+  - **Watch out:** 9 of the 68 (JES-144…JES-154, all Tabletop) have **no Linear project** — they
+    were filed from `apps/tabletop/notes/todo.md` on 2026-08-01 without one. That's why the
+    script has a `--repo` mode; a plain project snapshot silently misses them. They overlap the
+    7 live items still sitting in that file, so do `tabletop-todo-fold` and this one together
+    or you'll triage the same work twice.
 
 - [ ] `tabletop-todo-fold` Decide what happens to `apps/tabletop/notes/todo.md`  ← priority: medium
   - It's already an inbox — its first line is "jess writes notes here" — and it has 7 live items
