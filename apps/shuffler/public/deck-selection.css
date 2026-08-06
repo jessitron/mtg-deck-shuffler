@@ -56,12 +56,6 @@
   font-family: "Orbitron", sans-serif;
 }
 
-.precon-search-input:focus {
-  border-color: var(--dark-pink);
-  outline: none;
-  box-shadow: 0 0 5px rgba(219, 39, 119, 0.3);
-}
-
 .precon-search-input::placeholder {
   color: #888;
   font-family: "Orbitron", sans-serif;
@@ -81,12 +75,6 @@
   font-size: 1rem;
   background: white;
   font-family: "Orbitron", sans-serif;
-}
-
-.archidekt-input-section input:focus {
-  border-color: var(--dark-pink);
-  outline: none;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
 .archidekt-input-section #deck-number {

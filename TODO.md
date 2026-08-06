@@ -267,3 +267,31 @@ section is just a wall between Jess and the live work.
   - Nothing exists yet — no cast count in `src/` at all — but the command zone is a real rendered
     surface (`formatCommandZoneHtmlFragment`, `src/view/common/shared-components.ts`), so this is an
     addition to something that's already there. Small, and genuinely useful mid-game.
+
+- [ ] `focus-ring-manual-tabthrough` Actually tab through the app and look at the new focus ring
+  - Choice 5 (global `:focus-visible` ring) shipped 2026-08-06 with build, 224 unit tests and the
+    5-test gallery spec all green — but **no human has tabbed the pages**, which is the real test.
+  - Cover `/`, `/choose-any-deck`, `/prepare`, `/game`, `/docs` (link-dense, and it has its own
+    second `:root`), `/design`, the debug state view (the app's only `<summary>`), and **inside an
+    open library modal and card modal** — the white-surface and full-viewport-overlay cases.
+  - The suspected weak spot is the flat-white `.modal-dialog` interior: `--light-pink` on white is
+    ~1.35:1, under WCAG 1.4.11's 3:1 floor for non-text indicators.
+
+- [ ] `focus-ring-on-white-decision` Decide what to do about --light-pink's 1.35:1 on white
+  - Depends on the tab-through above. Real flat-white surfaces exist: `.modal-dialog`
+    (`playmat.css:180` + the `prepare.css` duplicate), `docs.css:130`, `.button-base:disabled`.
+  - **This is Jess's call, not a local patch.** The sanctioned fallback (a hairline `--deep-space`
+    companion) can only be drawn with `box-shadow`, which doesn't accumulate across rules — so it
+    would erase `.pushable-flat`'s two-layer press bevel on every focused button. Taking it means
+    re-declaring the bevel inside `:focus-visible` for `.pushable-flat` and `.pushable-flat.pushable-dark`.
+    See `owners/shuffler-looks-like-itself/open-choices.md` choice 5.
+
+- [ ] `vestigial-modal-tabindex` Is `tabindex="0"` on the modal overlays doing anything?
+  - It appears in exactly four places, all the modal overlay: `views/partials/card-modal.ejs:21`,
+    `views/partials/library-modal.ejs:59`, `src/view/play-game/game-modals.ts:12`,
+    `src/view/play-game/history-components.ts:11`.
+  - Looks vestigial: the Escape trigger is `keyup … from:body` and the click-outside trigger is
+    `click[target==this]` — neither needs the overlay to be focusable. If it goes, so does the
+    `playmat.css:173-176` inward-offset companion rule that exists only to serve it, and the app
+    stops having a keyboard stop on a whole-viewport div.
+  - Not done during choice 5 because it's four files of modal behaviour, not a CSS change.

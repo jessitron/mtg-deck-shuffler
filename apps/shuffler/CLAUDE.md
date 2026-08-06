@@ -47,7 +47,13 @@ The short version:
   Bootstrap defaults already in the CSS are drift, not precedent — don't copy them
 - **Orbitron for chrome, Ovo for content** (card names are content). Risque only on site
   pages. No fourth typeface
-- **Every interactive element gets a visible `:focus-visible` state**
+- **Every interactive element gets a visible `:focus-visible` state — and it's already
+  written** (`shuffler-design-choices` choice 5): one global rule in `public/styles.css`
+  draws `3px solid var(--light-pink)` at `outline-offset: 3px` on every `a`, `button`,
+  `input`, `select`, `textarea`, `summary` and `[tabindex]`. **Don't add per-component focus
+  rules, and never write `outline: none`.** If a new control isn't one of those tags, give it
+  a real tag or a `tabindex` so the global rule reaches it. `outline` is now the focus
+  channel app-wide — use `border` or `box-shadow` for decoration on anything focusable
 - **Every button presses the same way** (`shuffler-design-choices` choice 1): `.pushable-flat` in
   `public/styles.css` — `translateY(-4px)` at rest, `-6px` on hover (springy, 250ms),
   `-2px` on press (34ms snap), plus a matching box-shadow bevel. No `outset`/`inset`

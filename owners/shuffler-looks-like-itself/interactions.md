@@ -26,9 +26,11 @@
 - **The two-faced-cards owner** — flip button styling and the `.flip-container-*` blocks.
 - **The library-search owner** — modal and list styling.
 - **`test/verification/verify-design-gallery.spec.ts`** — asserts specific computed
-  values (200×278 card, `outset` border, black playmat buttons). Deliberate changes to
-  those will fail this test; that's the test doing its job, not a bug. Update it in the
-  same commit.
+  values (200×278 card, `outset` border, black playmat buttons, and the global focus ring's
+  3px / `rgb(221, 199, 221)` / 3px offset). Deliberate changes to those will fail this test;
+  that's the test doing its job, not a bug. Update it in the same commit. **If you change the
+  focus ring's color or width, that spec is the thing that will tell you** — it reads the
+  computed style off specimens carrying no candidate classes.
 
 ## Watch points
 
@@ -45,14 +47,24 @@ Concrete, in rough order of how often they bite.
 - New chrome gets **square corners** (`border-radius: 0`). Round corners are for cards,
   the playmat, `.page-container`, and count discs only.
 - Button labels are **Orbitron**. Card names are **Ovo**. No fourth typeface.
-- Give it a **visible `:focus-visible` state**. **No shipped stylesheet uses
-  `:focus-visible` at all** — it appears only in `design-candidates.css`, which nothing
-  but `/design` loads. The app has exactly one focus *outline* today (`site.css:325`,
-  `.button-base:focus`, a plain `:focus`) — and two rules that make things worse by
-  setting `outline: none` (`deck-selection.css:59` and `:86`, whose replacement glows
-  have themselves drifted apart: pink on one, Material green on the other). Don't add to
-  the deficit, and never write `outline: none` without replacing it with something
-  visible.
+- **The focus state is already written for you** (choice 5, 2026-08-06). One global
+  `:focus-visible` rule in `styles.css:200-209` draws `3px solid var(--light-pink)` at
+  `outline-offset: 3px` on `a, button, input, select, textarea, summary, [tabindex]`. So a
+  new element that is one of those tags inherits it and needs nothing. **Don't write a
+  per-component focus rule**, and **never write `outline: none`** — that's what three
+  now-deleted rules did (`deck-selection.css` ×2 plus `.json-summary` in
+  `src/view/debug/state-copy.ts`; it was **three**, not two as this file used to say).
+  Two things that do need care:
+  - If your new element is focusable but **not** one of those tags (a `div` with a click
+    handler, say), give it a real tag or a `tabindex` so the global rule reaches it.
+  - **`outline` is globally spoken for.** Three rules still use it decoratively —
+    `site.css:422` (`.main-footer`), `prepare.css:25` (`.playmat`), `game.css:458`
+    (`.hand-drop-zone.drag-over`). None is focusable today, so nothing conflicts; but a
+    decorative `outline` on anything focusable **will be clobbered on focus**. Use `border`
+    or `box-shadow` for decoration on anything a keyboard can reach.
+  - If the ring looks wrong on a pale surface, that's a **known open risk**, not a bug to
+    patch locally — `--light-pink` on white is ~1.35:1, and the fix is a decision for Jess
+    (it collides with the press bevel). See [open-choices.md](open-choices.md) choice 5.
 - Neighbouring drift is not permission. Jess's call: pull toward the standard.
 
 **Adding a stylesheet**
@@ -67,7 +79,7 @@ Concrete, in rough order of how often they bite.
 
 - Modal styles: `playmat.css` **and** `prepare.css`.
 - Flip *container* styles: `game.css` **and** `prepare.css` (still identical).
-- Flip *button* styles: `playmat.css:506` **and** `prepare.css:246` — **already
+- Flip *button* styles: `playmat.css:518` **and** `prepare.css:246` — **already
   diverged**; fixing one will not fix the other, and they no longer look alike.
 - Library-list styles: `playmat.css` **and** `prepare.css`.
 - Prefer deleting the duplicate over editing one copy. If you must edit one, edit both and

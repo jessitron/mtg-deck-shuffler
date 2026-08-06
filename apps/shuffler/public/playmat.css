@@ -163,6 +163,18 @@
   z-index: 1000;
 }
 
+/* Both overlays carry tabindex="0" (to catch click-outside and Escape), so the
+ * global [tabindex]:focus-visible ring in styles.css applies to them. They're
+ * full-viewport and fixed, so the standard +3px offset would draw the ring
+ * *outside* the viewport, where it clips to nothing — a keyboard stop that
+ * looks unfocused. Turn the offset inward so it reads as a frame instead.
+ * Here rather than in prepare.css: prepare loads playmat.css, and the modal
+ * block is already duplicated across the two files. Don't grow that. */
+.modal-overlay:focus-visible,
+.card-modal-overlay:focus-visible {
+  outline-offset: -3px;
+}
+
 .modal-dialog {
   background: white;
   border-radius: 10px;

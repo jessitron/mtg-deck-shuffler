@@ -121,15 +121,37 @@ test.describe('design gallery', () => {
     await page.mouse.up();
   });
 
-  test('candidate focus rings are visible to the keyboard', async ({ page }) => {
+  test('the global focus ring reaches the keyboard', async ({ page }) => {
     await page.goto(`${BASE_URL}/design`);
     await page.waitForLoadState('networkidle');
 
-    for (const cls of ['candidate-focus-dark-pink', 'candidate-focus-light-pink', 'candidate-focus-double']) {
-      const button = page.locator(`.${cls}`).first();
-      await button.focus();
-      const outlineWidth = await button.evaluate((el) => getComputedStyle(el).outlineWidth);
-      expect(outlineWidth, `${cls} should draw a focus outline`).toBe('3px');
+    // shuffler-design-choices choice 5: one global :focus-visible rule in
+    // styles.css — 3px light-pink at 3px offset — replacing the app's single
+    // plain :focus and two `outline: none` regressions.
+    //
+    // Asserted on the #focus specimens, which carry only real app classes (no
+    // candidate class), so the ring can only be coming from the global rule.
+    // .focus() rather than keyboard.press('Tab'): Chromium matches
+    // :focus-visible on programmatic focus, and the candidate-ring test this
+    // replaced relied on the same behaviour. If it ever flakes, tab to the
+    // element — don't weaken the CSS to a plain :focus.
+    for (const selector of ['#focus .pushable-flat', '#focus .group-by-type-toggle']) {
+      const el = page.locator(selector).first();
+      await expect(el).toBeVisible();
+      await el.focus();
+
+      // Poll rather than read once: .group-by-type-toggle (playmat.css) carries
+      // `transition: all 0.2s ease`, and outline-width animates, so an immediate
+      // read catches the ring part-way in (1px) and looks like a missing rule.
+      await expect(async () => {
+        const ring = await el.evaluate((node) => {
+          const s = getComputedStyle(node);
+          return { width: s.outlineWidth, color: s.outlineColor, offset: s.outlineOffset };
+        });
+        expect(ring.width, `${selector} outline width`).toBe('3px');
+        expect(ring.color, `${selector} outline color is --light-pink`).toBe('rgb(221, 199, 221)');
+        expect(ring.offset, `${selector} outline offset`).toBe('3px');
+      }).toPass({ timeout: 2000 });
     }
   });
 });

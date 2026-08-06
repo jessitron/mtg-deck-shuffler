@@ -170,3 +170,72 @@ Given three options (fill inversion, unselected-recedes, underline accent), she 
 rather than replacing it. Added a specimen for it in the Buttons section of `/design`
 (tagged as its own standalone decision, not a `shuffler-design-choices` choice) so it doesn't get
 mistaken for one of the six and re-litigated.
+
+## 2026-08-06 — choice 5 decided: one global focus ring
+
+`b802576` **Choice 5: one global focus ring, and bring the design KB with it**
+
+Jess picked **option B: `3px solid var(--light-pink)` at `outline-offset: 3px`**, declared
+**once** in `styles.css` as a `:focus-visible` rule on `a, button, input, select, textarea,
+summary, [tabindex]`. Reasoning in `.scratch/shuffler-design-choices/spec.md` §5; executed by
+`issues/01-global-focus-ring.md`.
+
+Why not the others: option A (`--dark-pink`, flush) matched the one focus rule that already
+existed, but dark-pink vanishes against the playmat's dark card art — the surface most of the
+app's buttons sit on. Option C (light-pink ring + `--deep-space` halo) was the most visible
+and turned out to be **structurally expensive**, for a reason nobody had noticed while
+staging the candidates: a halo can only be drawn with `box-shadow`, `box-shadow` does not
+accumulate across rules, and `.pushable-flat`'s press bevel from choice 1 *is* a two-layer
+`box-shadow` — so option C would have erased the press bevel on every focused button.
+`::after` is no escape hatch either, since inputs can't carry pseudo-elements. Option B's
+offset does the same legibility work for free: the gap shows the *page* behind the control
+rather than the control's own fill, which is what keeps the ring readable against
+`.begin-button`'s 10px light-pink border.
+
+**This was the accessibility item, and the app was worse than "missing".** It had exactly one
+focus outline (`.button-base:focus` in `site.css` — a plain `:focus`, so it fired on mouse
+clicks) and **three** rules that actively set `outline: none`. The KB had recorded two; the
+third was `.json-summary` in the inline `<style>` of `src/view/debug/state-copy.ts`, on the
+app's only `<summary>` element. That one was already dead code by specificity
+(`summary:focus-visible` (0,1,1) beats `.json-summary` (0,1,0)) but it was still a written
+instruction to hide focus, and finding it is why the global selector list carries a `summary`
+clause. The two `deck-selection.css` rules were deleted whole, taking two off-palette colors
+with them: `rgba(219,39,119,.3)` (Tailwind's pink, never `--dark-pink` `#bb5277`) and
+`rgba(76,175,80,.3)` (**Material green**, on an input, for no reason anyone chose).
+
+**Deliberate behaviour change worth knowing:** those two deleted input rules were plain
+`:focus`, so they responded to mouse clicks. The global rule is `:focus-visible` only — so
+clicking into the precon search or the Archidekt deck-number field now produces no border
+change at all, just the native caret. Intended, not a regression.
+
+**One companion rule was needed, and it came from the markup, not the design.** `tabindex="0"`
+appears in exactly four places in the app and **all four are the modal overlay**
+(`views/partials/card-modal.ejs:21`, `views/partials/library-modal.ejs:59`,
+`src/view/play-game/game-modals.ts:12`, `src/view/play-game/history-components.ts:11`). Those
+overlays are `position: fixed` and full-viewport, so the standard `+3px` offset draws the ring
+*outside* the viewport, where it clips to nothing — producing a keyboard stop that looks
+unfocused, which is the precise deficit this choice existed to close. `playmat.css:173-176`
+turns the offset inward to `-3px` so it reads as a frame. It lives in `playmat.css` alone
+because prepare loads playmat, and the modal block is already duplicated across the two files.
+
+**Lesson: a global rule meets markup you didn't design for.** The choice was staged and
+argued as a pure appearance decision — three swatches on `/design`. What actually decided the
+shape of the implementation was two structural facts discovered only by writing it: that
+`box-shadow` is already load-bearing for choice 1's press bevel (killing option C), and that
+the only `[tabindex]` elements in the app are full-viewport overlays where a positive offset
+is invisible. Staging candidates on the gallery shows you what a treatment *looks* like; it
+doesn't show you what it *collides* with.
+
+**Gotcha, cost a debug cycle:** the gallery test must **poll** the computed outline
+(`expect(...).toPass`), not read it once. `.group-by-type-toggle` (`playmat.css:235`) carries
+`transition: all 0.2s ease` and `outline-width` is animatable, so an immediate read catches
+the ring mid-transition at `1px` — indistinguishable from a missing CSS rule.
+
+**Two risks recorded rather than resolved** (details in
+[open-choices.md](open-choices.md#5-focus-ring--decided-2026-08-06-shipped)): `--light-pink`
+measures ~1.35:1 on white, under WCAG 1.4.11's 3:1 floor, and the flat-white `.modal-dialog`
+interior is a likelier failure than the card art that `spec.md` worried about; and the
+sanctioned fallback (a `--deep-space` companion) collides with the press bevel as described
+above, so it goes back to Jess rather than being absorbed. Also outstanding: the **manual
+keyboard tab-through**, which is the real test of this ticket. Build, 224 unit tests and the
+5-test gallery spec all pass, but no human has tabbed the pages yet.

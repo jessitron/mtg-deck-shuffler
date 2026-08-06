@@ -493,52 +493,49 @@
 
       <!-- ================================================================ -->
       <section class="gallery-section" id="focus">
-        <h2>Focus states <span class="badge badge-drift">drift</span></h2>
+        <h2>Focus states <span class="badge badge-standard">standard</span></h2>
         <p class="section-note">
-          The app has <strong>exactly one</strong> focus rule:
-          <code>.button-base:focus { outline: 3px solid var(--dark-pink) }</code>. Every playmat
-          button, modal button, input, toggle and menu item is invisible to keyboard navigation.
-          Whichever option wins should be applied globally via <code>:focus-visible</code>, so it
-          appears for keyboard users and not on mouse clicks.
+          One ring for the whole app: <code>3px solid var(--light-pink)</code> at
+          <code>outline-offset: 3px</code>, declared once in <code>styles.css</code> as a
+          <code>:focus-visible</code> rule covering <code>a</code>, <code>button</code>,
+          <code>input</code>, <code>select</code>, <code>textarea</code>, <code>summary</code>
+          and <code>[tabindex]</code>. <code>:focus-visible</code> rather than
+          <code>:focus</code>, so it appears for keyboard users and not on mouse clicks —
+          which is what the single plain <code>:focus</code> rule it replaced got wrong.
+          Decided 2026-08-06.
+        </p>
+        <p class="section-note">
+          <strong>Tab into both stages below.</strong> The gap the offset opens shows the
+          <em>page</em> behind the control, not the control's own fill, which is what keeps the
+          ring legible against the CTA's light-pink border. Light-pink measures about
+          <strong>10.9:1</strong> on the site pages' dark gradient and only about
+          <strong>1.35:1</strong> on white — so the white stage is the honest one, and the
+          surface to watch is <code>.modal-dialog</code>, which is flat white. If the ring ever
+          needs help there, the fix is a hairline <code>--deep-space</code> companion, not a
+          different color — but note that a halo can only be drawn with
+          <code>box-shadow</code>, which would erase the press bevel on every focused button.
         </p>
 
-        <div class="choice">
-          <div class="choice-question">
-            Tab into these to compare. Which focus ring?
+        <div class="options">
+          <div class="option">
+            <div class="option-label">On the playmat — the strong ground</div>
+            <div class="stage stage-playmat">
+              <button class="pushable-flat pushable-small">Tab to me</button>
+            </div>
+            <div class="option-where">styles.css — global <code>:focus-visible</code></div>
+            <div class="option-note">
+              No focus class on this button: the ring can only be coming from the global rule.
+            </div>
           </div>
-          <div class="options">
-            <div class="option">
-              <div class="option-label">A — dark-pink, flush</div>
-              <div class="stage stage-playmat">
-                <button class="pushable-flat pushable-small candidate-focus-dark-pink">Tab to me</button>
-              </div>
-              <div class="stage stage-white" style="margin-top: 0.5rem;">
-                <button class="group-by-type-toggle candidate-focus-dark-pink">Tab to me</button>
-              </div>
-              <div class="option-where">outline: 3px solid var(--dark-pink)</div>
-              <div class="option-note">Matches the one rule that already exists. Can vanish against the darker playmat art.</div>
+          <div class="option">
+            <div class="option-label">On white — the weak case, kept on purpose</div>
+            <div class="stage stage-white" style="margin-top: 0;">
+              <button class="group-by-type-toggle">Tab to me</button>
             </div>
-            <div class="option">
-              <div class="option-label">B — light-pink, offset</div>
-              <div class="stage stage-playmat">
-                <button class="pushable-flat pushable-small candidate-focus-light-pink">Tab to me</button>
-              </div>
-              <div class="stage stage-white" style="margin-top: 0.5rem;">
-                <button class="group-by-type-toggle candidate-focus-light-pink">Tab to me</button>
-              </div>
-              <div class="option-where">outline: 3px solid var(--light-pink); outline-offset: 3px</div>
-              <div class="option-note">Reads on the playmat art and on black buttons. Weaker on white.</div>
-            </div>
-            <div class="option">
-              <div class="option-label">C — light ring on a dark halo</div>
-              <div class="stage stage-playmat">
-                <button class="pushable-flat pushable-small candidate-focus-double">Tab to me</button>
-              </div>
-              <div class="stage stage-white" style="margin-top: 0.5rem;">
-                <button class="group-by-type-toggle candidate-focus-double">Tab to me</button>
-              </div>
-              <div class="option-where">light-pink outline + 6px deep-space box-shadow</div>
-              <div class="option-note">Visible on every background the app has. Heaviest look.</div>
+            <div class="option-where">styles.css — same rule, ~1.35:1 against white</div>
+            <div class="option-note">
+              This is the surface to check first when something looks wrong, and the reason the
+              modal interior is worth tabbing through.
             </div>
           </div>
         </div>
@@ -582,7 +579,7 @@
               <div class="stage stage-playmat" style="margin-top: 0.5rem;">
                 <input class="candidate-input" style="font-size: 0.9rem; padding: 6px 8px;" placeholder="kitchen" />
               </div>
-              <div class="option-where">design-candidates.css — 2px deep-space, Orbitron, focus = dark-pink outline</div>
+              <div class="option-where">design-candidates.css — 2px deep-space, Orbitron, no focus rule of its own (the global ring applies)</div>
               <div class="option-note">
                 One rule with a size variant, no untokenized grays, and a real focus state.
                 Recommended.
@@ -760,7 +757,7 @@
           <li><strong>Never write a raw hex.</strong> Use a named token. If no token fits, that's a design decision — ask, don't invent. Material and Bootstrap defaults are especially forbidden: they're how the drift got here.</li>
           <li><strong>Square corners on chrome.</strong> Round corners belong only to physical objects: cards, the playmat, the page-container, count discs.</li>
           <li><strong>Orbitron for chrome, Ovo for content.</strong> Card names are content. No fourth typeface.</li>
-          <li><strong>Every interactive element gets a visible focus state.</strong> No exceptions, and use <code>:focus-visible</code>.</li>
+          <li><strong>Every interactive element gets a visible focus state</strong> — and it's already written for you: one global <code>:focus-visible</code> rule in <code>styles.css</code> draws <code>3px solid var(--light-pink)</code> at <code>outline-offset: 3px</code> on every <code>a</code>, <code>button</code>, <code>input</code>, <code>select</code>, <code>textarea</code>, <code>summary</code> and <code>[tabindex]</code>. Don't add a per-component focus rule, and never write <code>outline: none</code>. See <a href="#focus">Focus states</a>.</li>
           <li><strong>The card is 200px wide.</strong> Size adjacent layout off that, not off arbitrary values.</li>
           <li><strong>Respect the z-index ladder:</strong> content 1–3, menu panel 500, <code>.modal-overlay</code> 1000, <code>.card-modal-overlay</code> 2000, its close button 2001.</li>
           <li><strong>Know which file owns the component.</strong> <code>playmat.css</code> is shared by game and prepare; <code>game.css</code> and <code>prepare.css</code> are page-specific; <code>site.css</code> is the marketing pages; <code>styles.css</code> holds the tokens. The modal, flip, and library-list blocks are currently duplicated — fix the duplication rather than editing one copy.</li>

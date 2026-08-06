@@ -27,7 +27,6 @@ export function formatDebugStateModalHtmlFragment(persistedGameState: PersistedG
           .json-summary {
             cursor: pointer;
             list-style: none;
-            outline: none;
           }
           .json-summary::-webkit-details-marker {
             display: none;

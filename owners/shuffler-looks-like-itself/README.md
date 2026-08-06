@@ -24,7 +24,9 @@ isolation.
 **Layer 1 — craft. Fleet-wide, enforceable everywhere, today.** Ship-agnostic rules
 about doing UI *well*, independent of any aesthetic: text has breathing room beneath it;
 things that should align, align; colors and spacing come from tokens, not literals;
-every interactive element has a visible `:focus-visible` state; no raw
+every interactive element has a visible `:focus-visible` state (**the Shuffler now
+satisfies this with one global rule — see the design language below; that's the pattern
+for the Tabletop to copy, not a per-component chore**); no raw
 Material/Bootstrap hex ever. These apply to the Tabletop right now, even before it has
 an identity. The mechanically checkable subset is being turned into a script
 (`.scratch/design-lint/issues/01-design-lint-script.md`) — the owner guards the
@@ -148,6 +150,19 @@ the gallery lives in the Shuffler, but it speaks for the Tabletop too.
 does not pick — it surfaces both on `/design` and waits. Inventing a resolution is worse
 than leaving the choice visible.
 
+**One focus ring, declared once (decided 2026-08-06, `shuffler-design-choices` choice 5):**
+`3px solid var(--light-pink)` at `outline-offset: 3px`, as a single global `:focus-visible`
+rule in `styles.css:200-209` covering `a, button, input, select, textarea, summary,
+[tabindex]`. **Don't write per-component focus rules and never write `outline: none`** — the
+app previously had one plain `:focus` outline and *three* rules that hid focus outright. The
+offset matters: the gap shows the page behind the control rather than the control's own fill,
+which is what keeps the ring legible against `.begin-button`'s light-pink border. One
+sanctioned exception exists — `playmat.css:173-176` flips the offset inward to `-3px` on the
+two full-viewport modal overlays, where `+3px` would draw off-screen. **Known open risk:**
+`--light-pink` measures ~1.35:1 on white (against WCAG 1.4.11's 3:1 floor for non-text
+indicators), and the flat-white `.modal-dialog` interior is the likeliest failure. The fix is
+Jess's call, not a local patch — see [open-choices.md](open-choices.md) choice 5.
+
 **Secondary-button gray (decided 2026-08-02, `shuffler-design-choices` choice 2):** `var(--deep-space)`
 fill + `var(--light-pink)` text. Replaces the three grays (`#6c757d` Bootstrap, `#607d8b`
 Material, and the `#5a6268` hover-darken riding along with them) across
@@ -166,7 +181,6 @@ component and flag the choice.
 | --- | --- |
 | Card-modal action buttons | Keep seven color-coded hues · collapse to primary/secondary |
 | Corner radius on chrome | truly 0 · a single 4px |
-| Focus ring | dark-pink flush · light-pink offset · light ring on dark halo |
 | Text input | precon-search · join-table · tokenized proposal (recommended) |
 
 Candidate CSS for the unadopted options lives in
@@ -188,8 +202,9 @@ Candidate CSS for the unadopted options lives in
 
 ## The other files
 
-- [open-choices.md](open-choices.md) — **the work list.** The six undecided questions with
-  implementation steps, plus the mechanical cleanups that fall out of them.
+- [open-choices.md](open-choices.md) — **the work list.** All six choices, with the three
+  still-undecided ones carrying implementation steps, plus the mechanical cleanups that fall
+  out of them. Resolved choices keep their reasoning rather than being deleted.
 - [interactions.md](interactions.md) — what this leans on, who breaks it, and the concrete
   watch points. **The review skill's fuel.**
 - [architecture.md](architecture.md) — how the stylesheets are organised, which file owns

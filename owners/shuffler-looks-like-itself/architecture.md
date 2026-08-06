@@ -30,7 +30,7 @@ Per-view `additionalStyles` today:
 
 | File | Owns | Loaded by |
 | --- | --- | --- |
-| `styles.css` | **The `:root` tokens.** Global reset, body font, `.mtg-card-image`, error/debug helpers, `.hidden` | every page |
+| `styles.css` | **The `:root` tokens.** Global reset, body font, `.mtg-card-image`, error/debug helpers, `.hidden`, `.pushable-flat`, **the global `:focus-visible` ring** (`:200-209`) | every page |
 | `site.css` | Site pages: header, footer, hero, slogan, steps, `.button-base` family | every EJS page |
 | `playmat.css` | **Shared by game and prepare**: library stack, card/library buttons, command zone, all modal styles, card-type icons, card modal | game (TS) + prepare (EJS) |
 | `game.css` | Game page only: `.page-container`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks | game (TS) |
@@ -54,13 +54,23 @@ Per-view `additionalStyles` today:
 - The flip **container** block — `.flip-container-outer/-inner`, `.two-sided-front/-back`
   — is verbatim in **both** `game.css:97-133` and `prepare.css:210-244`.
 - The flip **button** is a *separate* duplicate, and it has **already diverged**:
-  `playmat.css:506` `.modal-action-button.flip-button` carries the choice-1
+  `playmat.css:518` `.modal-action-button.flip-button` carries the choice-1
   `.pushable-flat` box-shadow bevel; `prepare.css:246` bare `.flip-button` is still the
   pre-choice-1 flat control (`border-radius: 5px`, hover recolor to `#f57c00`). They
   agree only on the `#ff9800` fill. Different selectors on different markup — so this
   pair converges by the prepare copy *adopting* the playmat treatment, not by deletion.
 - `.library-search-list`, `.library-card-item`, `.card-name-link` are in **both**
   `playmat.css` and `prepare.css` (the prepare copy adds `font-family: "Ovo"`).
+
+**`outline` is globally spoken for.** Since choice 5, `outline` is the focus channel app-wide
+(`styles.css:200-209`). Three rules still use it **decoratively**: `site.css:422`
+(`.main-footer`, a `--dark-pink` rule), `prepare.css:25` (`.playmat`, its 10px black frame),
+and `game.css:458` (`.hand-drop-zone.drag-over`, `2px solid gray`). None of those three is
+focusable today, so nothing conflicts — but a decorative `outline` on anything focusable will
+be clobbered the moment it takes focus. Use `border` or `box-shadow` for decoration on
+anything a keyboard can reach. Only one rule deliberately *tunes* the focus ring:
+`playmat.css:173-176` flips the offset to `-3px` on the two full-viewport modal overlays,
+because the standard `+3px` would draw outside the viewport and clip to nothing.
 
 **A second `:root`.** `docs.css` re-declares `--deep-space`, `--dark-pink` and
 `--light-pink` rather than using the ones from `styles.css`, and adds `--text-light`,
@@ -102,7 +112,15 @@ swatches, and `.stage-*` classes that reproduce each component's native backgrou
    playmat buttons are black),
 3. every section renders and every `.choice` offers ≥2 options,
 4. both candidate buttons actually travel downward when pressed,
-5. all three candidate focus rings draw a 3px outline.
+5. **the global focus ring reaches the keyboard** — the `#focus` specimens (which carry
+   only real app classes, no candidate class) compute to a 3px `rgb(221, 199, 221)` outline
+   at 3px offset, so the ring can only be coming from `styles.css`'s global rule.
+
+**Gotcha in that last test:** it **polls** (`expect(...).toPass`) rather than reading the
+computed style once. `.group-by-type-toggle` (`playmat.css:235`) carries
+`transition: all 0.2s ease`, and `outline-width` is animatable — so an immediate read catches
+the ring mid-transition at `1px`, which looks exactly like a missing CSS rule. If you add a
+focus assertion to a transitioned element, poll.
 
 If you add a stylesheet to the app, add it to `APP_STYLESHEETS` in that spec **and** to
 `design.ejs`.

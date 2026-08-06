@@ -322,10 +322,6 @@ body {
   text-decoration: none;
 }
 
-.button-base:focus {
-  outline: 3px solid var(--dark-pink);
-}
-
 .button-2 {
   margin: auto;
 }

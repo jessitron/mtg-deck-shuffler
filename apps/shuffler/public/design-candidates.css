@@ -15,26 +15,10 @@
  * ========================================================================= */
 
 /* ===========================================================================
- * Candidate focus rings. The app has exactly one focus rule today
- * (.button-base:focus). Whichever wins should apply to every interactive
- * element, via :focus-visible so it doesn't fire on mouse clicks.
+ * Choice 5 (focus ring) is DECIDED — 3px light-pink at 3px offset, as a global
+ * :focus-visible rule in styles.css. The three candidates that used to live
+ * here are gone.
  * ========================================================================= */
-
-.candidate-focus-dark-pink:focus-visible {
-  outline: 3px solid var(--dark-pink);
-  outline-offset: 0;
-}
-
-.candidate-focus-light-pink:focus-visible {
-  outline: 3px solid var(--light-pink);
-  outline-offset: 3px;
-}
-
-.candidate-focus-double:focus-visible {
-  outline: 3px solid var(--light-pink);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 6px var(--deep-space);
-}
 
 /* ===========================================================================
  * Candidate unified text input. Today there are three treatments
@@ -56,8 +40,6 @@
   color: #7a7285;
 }
 
-.candidate-input:focus-visible {
-  outline: 3px solid var(--dark-pink);
-  outline-offset: 0;
-  border-color: var(--dark-pink);
-}
+/* No focus rule here on purpose: choice 6 adopts this input *without* one, so
+ * the global ring from styles.css applies. The dark-pink flush rule this
+ * candidate used to carry was choice 5's rejected option. */
