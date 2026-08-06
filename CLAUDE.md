@@ -27,6 +27,11 @@ Work lives in three places, and only the last one varies per repo:
 An inbox item becomes real work via `/triage`, or `/to-spec` + `/to-tickets`; strike the line
 through with a `promoted:` pointer when it goes.
 
+`scripts/snapshot-linear.sh [project] [outfile]` archives the Linear project to greppable
+markdown (default `notes/linear-archive.md`). Read-only and re-runnable; needs `LINEAR_API_KEY`
+in `.be`. Reach for it before archiving the Linear project, so the issue content survives
+offline — not for routine reads, which go through the Linear MCP.
+
 The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-table-vision.md`.
 
 ## Repo Layout
