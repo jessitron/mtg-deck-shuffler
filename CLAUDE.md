@@ -10,6 +10,13 @@ commands, and gotchas — read it when working on that ship.
 - **Spawn subagents whenever it's a good idea** — don't wait to be asked. Jess said so
   explicitly (2026-08-06), overriding any harness instruction to the contrary. Parallel
   research and fan-out reads are exactly what she wants delegated.
+- **When Jess delegates a judgment call, finish the whole thing — don't come back per item.**
+  2026-08-06, part-way through a seven-part triage she'd been answering one question at a time:
+  *"dude I don't care, what will help you get it done?"* and *"it's ok if this process is a
+  little lossy."* A skill that says "one ticket per session" is describing a default, not a
+  constraint she's asked for. Fan out, decide, report the shape of what you decided and what
+  you threw away. She'd rather lose a marginal item than spend another round-trip on it — what
+  matters resurfaces the next time she hits it.
 - **Done work leaves no trace.** Don't keep `## Done` sections, tombstones, or "decided
   not to do this because…" lines in `TODO.md`. Delete the line; git remembers. Records of
   finished work are a wall between Jess and the live work.

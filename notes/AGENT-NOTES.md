@@ -46,6 +46,38 @@ Two more ways this bites, both hit for real on 2026-07-27:
 
 _2026-07-27._
 
+## There is a second worktree, and its branch's docs contradict `main`
+
+`git worktree list` shows `../mtg-deck-shuffler-worktree1` on branch `library-alphabet`
+(`9a3c1b5`). That branch makes the game's library search alphabetical **and edits
+`owners/library-search/` to say so** — but it has never merged, and it is 19 commits behind.
+So the owner docs *on that branch* describe behaviour `main` does not have, while `main`'s
+copy of those docs is correct.
+
+Two consequences:
+
+- **A knowledge base can be wrong by being on the wrong branch.** Consulting an owner tells
+  you what's true *where you are standing*. If a claim surprises you, check which worktree
+  you're in before trusting or "fixing" it.
+- **Don't rebuild what's sitting on that branch.** Landing or deleting `library-alphabet` is
+  the first sub-bullet of the `library-sort-toggle` inbox line; do that before touching
+  library sort order.
+
+Found 2026-08-06 while triaging — the old tracker had called this work Done, which it was, on
+a branch nobody merged. _2026-08-06._
+
+## Documented line numbers rot silently, and owner KBs are full of them
+
+The `shuffler-looks-like-itself` KB cited `file:line` for nearly every open design choice.
+After two of those choices landed — each inserting rules **above** the others — essentially
+every citation was stale: all nine of choice 3's were wrong, choice 5's and choice 6's were
+off, `.button-base:focus` had moved five lines. Nothing broke; the docs just quietly started
+pointing at the wrong rules.
+
+If you write `file:line` into a doc, something has to re-verify it. That owner's resolve
+checklist now has a step for it (step 8). Prefer citing a **selector or symbol name** over a
+line number where you can — it survives edits above it. _2026-08-06._
+
 ## The deck-selection page is `/choose-any-deck`
 
 Not `/choose`. Routes are declared in `src/app.ts`; the site pages are `/`, `/docs`,
