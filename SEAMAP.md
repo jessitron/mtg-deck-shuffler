@@ -84,10 +84,16 @@ A change is home when:
 
 ## Tracking
 
-Where the live work for this project is recorded. The Mountains above are mirrored as
-Linear milestones (re-mirroring needed after this re-charting); landings, sea monsters,
-and treasures live as issues — never in this doc.
+Where the live work for this project is recorded. The Mountains above are mirrored as Linear
+milestones (re-mirroring needed after this re-charting); landings, sea monsters, and treasures
+live as issues — never in this doc. (Contract: the seamapping plugin's `TRACKING-ADAPTER.md`.)
 
-- backend: linear
-- project: [MTG Deck Shuffler](https://linear.app/honeycombio/project/mtg-deck-shuffler-7e9e20cc93e9)
-- team: jessitron
+- inbox: `TODO.md` at the repo root — raw captures, pre-decision, for the whole fleet.
+- tracker: `docs/agents/issue-tracker.md` — specs and tickets, post-decision.
+
+*Migration pending.* The tracker is still declared here rather than in the shared location: the
+Linear project
+[MTG Deck Shuffler](https://linear.app/honeycombio/project/mtg-deck-shuffler-7e9e20cc93e9), team
+`jessitron`, worked per the plugin's `adapters/linear.md`. Until `docs/agents/issue-tracker.md`
+exists, skills fall back to reading this section — the documented legacy path. See `TODO.md` →
+`tracker-migrate`.

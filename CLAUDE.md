@@ -10,10 +10,22 @@ commands, and gotchas — read it when working on that ship.
 
 ## Seamap
 
-This repo's seamap — the chart (North Star, Mountains, Safe Harbor) and the tracking adapter —
-lives in `SEAMAP.md`. That's the fleet-level map; each major component has its own seamap
-(`apps/shuffler/SEAMAP.md`, `apps/tabletop/SEAMAP.md`, `services/spine/SEAMAP.md`).
+This repo's seamap — the chart (North Star, Mountains, Safe Harbor) plus pointers to where the
+live work is recorded — lives in `SEAMAP.md`. That's the fleet-level map; each major component has
+its own seamap (`apps/shuffler/SEAMAP.md`, `apps/tabletop/SEAMAP.md`, `services/spine/SEAMAP.md`).
 Orient, capture, and log proactively; use `drop-buoy` to capture work without derailing.
+
+Work lives in three places, and only the last one varies per repo:
+
+- **The chart** — `SEAMAP.md`. North Star, Mountains, Safe Harbor. Mountains are never tickets.
+- **The inbox** — `TODO.md` at the repo root. Raw captures, pre-decision; `drop-buoy` writes here
+  and so does Jess. Everything in it is untriaged by definition.
+- **The tracker** — `docs/agents/issue-tracker.md` names it (Linear, for this repo). That file is
+  written by `/setup-matt-pocock-skills` and read by both his engineering skills and the seamap
+  skills; **read it, never write it.** Migration to it is pending — see `SEAMAP.md` § Tracking.
+
+An inbox item becomes real work via `/triage`, or `/to-spec` + `/to-tickets`; strike the line
+through with a `promoted:` pointer when it goes.
 
 The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-table-vision.md`.
 
