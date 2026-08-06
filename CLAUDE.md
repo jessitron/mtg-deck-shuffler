@@ -20,19 +20,39 @@ Work lives in three places, and only the last one varies per repo:
 - **The chart** — `SEAMAP.md`. North Star, Mountains, Safe Harbor. Mountains are never tickets.
 - **The inbox** — `TODO.md` at the repo root. Raw captures, pre-decision; `drop-buoy` writes here
   and so does Jess. Everything in it is untriaged by definition.
-- **The tracker** — `docs/agents/issue-tracker.md` names it (Linear, for this repo). That file is
-  written by `/setup-matt-pocock-skills` and read by both his engineering skills and the seamap
-  skills; **read it, never write it.** Migration to it is pending — see `SEAMAP.md` § Tracking.
+- **The tracker** — `docs/agents/issue-tracker.md` names it: committed markdown under
+  `.scratch/<feature>/`, one file per spec and per ticket, each carrying a `Mountain:` line.
+  That file is written by `/setup-matt-pocock-skills` and read by both his engineering skills
+  and the seamap skills; **read it, never write it.**
 
 An inbox item becomes real work via `/triage`, or `/to-spec` + `/to-tickets`; strike the line
 through with a `promoted:` pointer when it goes.
 
-`scripts/snapshot-linear.sh [project] [outfile]` archives the Linear project to greppable
-markdown (default `notes/linear-archive.md`). Read-only and re-runnable; needs `LINEAR_API_KEY`
-in `.be`. Reach for it before archiving the Linear project, so the issue content survives
-offline — not for routine reads, which go through the Linear MCP.
+Linear is no longer the tracker for this repo — issues moved to `.scratch/` because a file
+round-trip beats an API call. The old Linear project still holds content; wind it down with
+`scripts/snapshot-linear.sh [project] [outfile]`, which archives it to greppable markdown
+(default `notes/linear-archive.md`). Read-only and re-runnable; needs `LINEAR_API_KEY` in `.be`.
 
 The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-table-vision.md`.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs live as committed markdown under `.scratch/<feature>/`; every spec and ticket
+carries a `Mountain:` line naming which of `SEAMAP.md`'s Mountains it serves.
+See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five canonical roles, unrenamed, recorded as a `Status:` line in each issue file.
+See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Multi-context: shared vocabulary in `notes/GLOSSARY.md`, per-ship `CONTEXT.md`, and a
+translations table in `CONTEXT-MAP.md` for terms that differ between ships.
+See `docs/agents/domain.md`.
 
 ## Repo Layout
 

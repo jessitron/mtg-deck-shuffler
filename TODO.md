@@ -12,16 +12,11 @@ pointer, and sweep it to `## Done`.
 
 ## Next
 
-- [ ] `tracker-migrate` Move the Linear coordinates into `docs/agents/issue-tracker.md`  ← priority: high
-  - The seamap skills and Matt Pocock's engineering skills now share one answer to "where do
-    issues live": `docs/agents/issue-tracker.md`. This repo still declares Linear in `SEAMAP.md`'s
-    `## Tracking`, which the skills read as the documented legacy path — it works, it's just not
-    the shared location yet.
-  - Run `/setup-matt-pocock-skills`, choose **Other**, give it the project + team below, and point
-    its prose at the plugin's `adapters/linear.md`. Then reduce `## Tracking` to the two pointers.
-  - His setup also wants to write `docs/agents/domain.md` and expects a root `CONTEXT.md`. This
-    repo already has `notes/GLOSSARY.md` and `notes/` full of DESIGN docs — point `domain.md` at
-    those rather than starting a second glossary.
+- [ ] `linear-wind-down` Archive the old Linear project and stop writing to it  ← priority: medium
+  - The tracker is now `.scratch/` (see `docs/agents/issue-tracker.md`); Linear still holds the
+    live issues. Jess needs a fresh `LINEAR_API_KEY` before anything can read them.
+  - Then: `scripts/snapshot-linear.sh` → `notes/linear-archive.md`, and decide per open issue
+    whether it becomes a `.scratch/` ticket or dies with the project.
 
 - [ ] `tabletop-todo-fold` Decide what happens to `apps/tabletop/notes/todo.md`  ← priority: medium
   - It's already an inbox — its first line is "jess writes notes here" — and it has 7 live items
@@ -34,3 +29,10 @@ pointer, and sweep it to `## Done`.
 ## Backlog
 
 ## Done
+
+- [x] ~~`tracker-migrate` Move the Linear coordinates into `docs/agents/issue-tracker.md`~~
+  done: 2026-08-06 — resolved differently. Rather than declaring Linear in the shared location,
+  the tracker *changed*: issues are now committed markdown under `.scratch/`, with a `Mountain:`
+  line on every spec and ticket. `docs/agents/{issue-tracker,triage-labels,domain}.md` written;
+  `CLAUDE.md` § Seamap and `SEAMAP.md` § Tracking rewritten. Linear wind-down split out as
+  `linear-wind-down`.
