@@ -45,12 +45,25 @@ What happens *inside* Linear is not part of this — see Out of scope.
   misdirects, no dead weight, `CLAUDE.md`/`SEAMAP.md` verified clean and no ship mentions Linear
   at all. The three `mcp__claude_ai_Linear__save_*` permissions are already deleted from
   `.claude/settings.local.json`; the rest is [ticket 05](issues/05-cut-the-linear-pointers.md).
+- [Choose the inbox line format for a migrated issue](issues/02-inbox-line-format.md) — a migrated
+  line is an **ordinary inbox line**, indistinguishable from a fresh capture, with a dead
+  `← was: JES-NNN` label that dies when the line is promoted or deleted. **The line stands alone** —
+  no pointer back to the archive, since the cluster tickets' verified detail beats the months-old
+  Linear bodies. `← mountain:` only for the active Mountain; no priority, no Linear URL. Active-
+  Mountain survivors to `## Next`, the rest to `## Backlog`. Survivors overlapping the four existing
+  inbox items merge into those lines rather than sitting beside them.
 
 ## Not yet specified
 
-- **Writing the survivors into `TODO.md`.** A task ticket, once the format is settled and at least
-  one cluster is decided. Probably one write per cluster, so the inbox becomes usable
-  incrementally rather than in one big-bang commit at the end.
+- **Writing the survivors into `TODO.md`.** A task ticket. The format half is now settled by
+  [ticket 02](issues/02-inbox-line-format.md); still waiting on at least one cluster being
+  decided. Probably one write per cluster, so the inbox becomes usable incrementally rather than
+  in one big-bang commit at the end.
+- **What happens to this map's own working files.** The cluster tickets 06–12 carry `JES-` ids
+  inline on purpose, so they stay walkable once the archive is gone — which means `JES-` survives
+  in `.scratch/linear-wind-down/` even after `TODO.md` is clean. Whether the destination's "nothing
+  points a future session at Linear" reaches that far is undecided. Downstream of the clusters
+  being walked; raised 2026-08-06 while resolving ticket 02.
 - **Deleting `notes/linear-archive.md`.** Jess wants it gone (2026-08-06); it's already committed
   in `944a111`, so `git show 944a111:notes/linear-archive.md` recovers it. Sequenced **last** —
   every cluster ticket and ticket 05's inline expansions read from it. Its opening paragraph also
