@@ -120,18 +120,25 @@ What happens *inside* Linear is not part of this — see Out of scope.
   accessibility regression inside "design choices" would have killed it just as surely, and deleting
   `outline: none` needs no decision from Jess. JES-97 stands alone: a privacy change wearing a
   cosmetic hat.
+- [Cut the Linear pointers](issues/05-cut-the-linear-pointers.md) — **every `linear.app` URL is gone
+  from the repo.** Thirteen files re-pointed or inlined, including two live citations in
+  `owners/two-faced-cards/tabletop.md` that ticket 04's search missed. The observability tension was
+  real: re-pointing the "browser has no logger" sentences would have restated a falsehood in a new
+  place, so each now names only the Spine as the real gap and marks the browser clause stale against
+  `logs-docs-catch-up`. Every surviving `JES-` is a `← was:` label or provenance for finished work.
 
 ## Not yet specified
 
-- **What happens to this map's own working files.** The cluster tickets 06–12 carry `JES-` ids
-  inline on purpose, so they stay walkable once the archive is gone — which means `JES-` survives
-  in `.scratch/linear-wind-down/` even after `TODO.md` is clean. Whether the destination's "nothing
-  points a future session at Linear" reaches that far is undecided. Downstream of the clusters
-  being walked; raised 2026-08-06 while resolving ticket 02.
-- **Deleting `notes/linear-archive.md`.** Jess wants it gone (2026-08-06); it's already committed
-  in `944a111`, so `git show 944a111:notes/linear-archive.md` recovers it. Sequenced **last** —
-  every cluster ticket and ticket 05's inline expansions read from it. Its opening paragraph also
-  claims to be a live snapshot, which stops being true either way.
+**Nothing. The way to the destination is clear and the voyage is complete** (2026-08-06). The two
+remaining patches were resolved in the closing session rather than ticketed:
+
+- **The archive is deleted**, along with `scripts/snapshot-linear.sh` — a re-runnable snapshot
+  script is an instruction to go back to Linear, which the destination forbids. Both are in
+  `944a111`; `git show 944a111:notes/linear-archive.md` recovers the content if it's ever wanted.
+- **This effort's own working files stay, `JES-` ids and all.** The destination says nothing may
+  *point a future session at* Linear. A resolved ticket in a finished effort's records points
+  nowhere — it's the reasoning behind eleven kills, and it's the only place that reasoning exists,
+  since `TODO.md` by design carries no tombstones. Keeping it costs a directory nobody has to read.
 
 ## Out of scope
 

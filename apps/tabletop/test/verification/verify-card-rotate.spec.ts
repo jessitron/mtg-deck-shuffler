@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
 
 /**
- * JES-144: clicking a card on the table taps/untaps it — a toggle between
- * 0° and 90°, not a 4-way rotation cycle. Essential slice — rotate only, no
- * menu cleanup or flip yet.
+ * Clicking a card on the table taps/untaps it — a toggle between 0° and 90°,
+ * not a 4-way rotation cycle. Essential slice — rotate only, no menu cleanup or
+ * flip yet. The rest is live work: `animate-tap` and `no-doubleclick-crop` in
+ * the repo-root `TODO.md`.
  */
 function cardPlayed(overrides: Record<string, unknown>) {
   return {

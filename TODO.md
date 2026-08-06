@@ -11,14 +11,6 @@ section is just a wall between Jess and the live work.
 
 ## In progress
 
-- [ ] `linear-wind-down` Get the work worth keeping out of Linear and into this inbox  ← priority: medium
-  - **Charted 2026-08-06** as a wayfinder map: `.scratch/linear-wind-down/map.md`. Destination:
-    Jess can work on this project again — everything worth doing is a live line here, everything
-    done or dead is gone, and nothing points a session at Linear.
-  - Content is safe in `notes/linear-archive.md` (68 issues, snapshotted 2026-08-06). 40 are live
-    and need a keep/kill call; the other 28 are Done or Canceled and get no record.
-  - What happens *inside* Linear is out of scope — it's abandoned in place, not archived.
-
 ## Next
 
 - [ ] `tabletop-card-shape` Give Tabletop cards a custom `ShapeUtil` that reports zone entry  ← mountain: tabletop-replaces-mural  ← was: JES-149

@@ -36,7 +36,7 @@ affordable, so it is not merely a style preference.
 Logs arrive before the span ends; they work when there is no active span; they arrive if the span never ends; and — the case that actually bit us — they arrive when the span has **already ended**.
 Logs cost the same in Honeycomb, and when they have the trace and Span ID, they show up the same as events.
 
-**Violations: none.** All four (all in the Tabletop server) were fixed in `6f319a2` / JES-136.
+**Violations: none.** All four (all in the Tabletop server) were fixed in `6f319a2`.
 `grep -rn "addEvent" apps/*/src services/spine` should return only comments and DOM
 `addEventListener`. Keep it that way.
 
@@ -77,7 +77,8 @@ The four sites split by whether a *live* span was available, which is the genera
 
 **How to honor this today:** the Node ships have a paved road — `log.info/warn/error(message,
 attributes, error?)` from `apps/shuffler/src/log.ts` or `apps/tabletop/src/server/log.ts`. The
-Spine and the browser do **not** yet (JES-137, JES-136); there, put the information on a span you
+Spine does **not** yet (`spine-logs-in-traces` in `TODO.md`), and this file's claim that the
+browser doesn't is stale (`logs-docs-catch-up` will fix it); there, put the information on a span you
 created and therefore own. Never treat a missing logger as license to reach for `addEvent`.
 
 **Why this loses nothing:** Honeycomb renders a log that carries trace and span ids with
@@ -108,7 +109,7 @@ lives in its own module with tests (`apps/shuffler/src/telemetry-sampler.ts` +
 `apps/shuffler/test/telemetry-sampler.test.ts`), and reads **both** semconv spellings of every
 attribute it depends on.
 
-### 5. Every span says which build it came from. _(FUTURE — not true yet; JES-139)_
+### 5. Every span says which build it came from. _(FUTURE — not true yet; `build-sha-on-every-span` in `TODO.md`)_
 
 **Not yet implemented.** Recorded here at Jess's request (2026-08-01) so it's held as an invariant
 from the moment it lands rather than being rediscovered later.
@@ -135,8 +136,9 @@ currently invisible, and is arguably the more valuable half.
 
 _(This is the negotiable part — update this section whenever telemetry wiring changes.)_
 
-Have, as of JES-134: logging libraries that participate in traces — **in the two Node ships only**.
-The Spine (JES-137) and the browser (JES-136) still have none.
+Have, as of `ca6553f`: logging libraries that participate in traces — **in the two Node ships only**.
+The Spine still has none (`spine-logs-in-traces` in `TODO.md`); the browser claim here is stale
+(`logs-docs-catch-up`).
 We want but don't yet have: a wrapper module around OpenTelemetry libraries, especially in JavaScript.
 
 **There is no shared OTel library, and that is now a decision rather than drift.** Root
@@ -243,7 +245,7 @@ should be **linkable**, not just asserted.
 
 **Honeycomb query runs never expire — they are visible forever. So are traces, once viewed.**
 _(Jess, authoritative.)_ A query-run URL (`…/datasets/<dataset>/result/<pk>`) and a trace URL are
-therefore permanent citations: put them in the commit message, the Linear issue, or here, and they
+therefore permanent citations: put them in the commit message or here, and they
 will still resolve later. Don't hedge about them going stale, and don't re-run a query just to get
 a "fresh" link.
 
@@ -259,7 +261,7 @@ Worked examples from the log-pipeline work (team `modernity`, env `local`) — t
 | The in-span / no-span log pair, both ships | [Shuffler](https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-deck-shuffler/result/m8jpkmTgaBd) · [Tabletop](https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-tabletop/result/pnCKeMhpkDR) |
 
 Note the last row is a **synthetic** emitter, not real app code — worth distinguishing when you
-claim something is verified. The Tabletop's `log.ts` still has no real callers (JES-136).
+claim something is verified. The Tabletop's `log.ts` still has no real callers.
 
 ## History (why these rules exist)
 
@@ -322,7 +324,8 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers (
     this file (sampler needle, sibling log processor, now markers), which is why the marker script
     resolves the key's environment via `GET /1/auth` instead of trusting configuration.
 
-  Filed `JES-139` off the back of it: markers mark a moment, not a build — see Invariant 5.
+  Filed `build-sha-on-every-span` off the back of it: markers mark a moment, not a build — see
+  Invariant 5.
 
 ## Related reading
 

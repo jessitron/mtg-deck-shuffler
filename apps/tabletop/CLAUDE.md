@@ -17,10 +17,11 @@ cards from the Shuffler onto it.
 See `README.md` (in this directory) for Modes and SCAFFOLDING callouts.
 
 The player area (playmat, library, graveyard, exile, Stack) is specified in
-`DESIGN.md` (in this directory, JES-140) — read it before touching
+`DESIGN.md` (in this directory) — read it before touching
 `src/server/cardLayout.ts`, `tableFurniture.ts`, `cardArrival.ts`, or
 `seatJoined.ts`. One piece is deliberately deferred: the playmat never grows
-taller when lands overflow its bottom half (JES-141).
+taller when lands overflow its bottom half — picked up by the `playmat-command-zone`
+line in the repo-root `TODO.md`.
 
 ## Commands
 
@@ -47,7 +48,7 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`; the browser side is in
 - **Never `span.addEvent`.** This ship is where that rule came from: `rooms.ts` calls it
   from tldraw's throttled `pruneSessions` callback, which has no ambient span, so prod logs
   fill with "Operation attempted on ended Span" and the events are dropped. `log.ts` exists
-  to fix that (JES-136).
+  to fix that.
 - **`log.ts` is duplicated from the Shuffler deliberately** — no shared telemetry package,
   by choice. The copies are on different OTel version lines (this ship 0.221, the Shuffler
   0.219) with **incompatible constructor signatures**; don't copy telemetry lines between

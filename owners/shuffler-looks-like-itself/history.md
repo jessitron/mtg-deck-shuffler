@@ -89,7 +89,7 @@ So the rule works when it's known; it just wasn't discoverable enough.
 
 ## 2026-08-02 — choice 1 decided: canonical button press behaviour
 
-First of the six open choices to converge (JES-155). Jess picked **option C,
+First of the six open choices to converge (`shuffler-design-choices`). Jess picked **option C,
 `.pushable-flat`** — same travel and spring easing as Comeau's faithful three-span
 `.pushable`, but built from a `box-shadow` bevel so it drops onto an existing `<button>`
 with no markup change. The base rule moved from `design-candidates.css` into
@@ -161,12 +161,12 @@ candidates for the "tokenize the orphan colors" mechanical cleanup in
 Jess noticed the Precon/Archidekt control on `/choose-any-deck` had stopped reading as a
 radio choice — both tabs looked identical apart from a 2px elevation difference (the
 "already pressed" look from choice 1), which was too subtle to say "this one, not the
-other." Explicitly **not** folded into JES-155 — it's a distinct kind of component (a
+other." Explicitly **not** folded into `shuffler-design-choices` — it's a distinct kind of component (a
 mutually-exclusive tab/radio pair), not another button-fill decision.
 
 Given three options (fill inversion, unselected-recedes, underline accent), she picked
 **the underline**: both tabs keep the same light-pink fill; `.hero-button.active` gets a
 `4px` solid dark-pink bar via `::after`, layered on top of the shared press physics
 rather than replacing it. Added a specimen for it in the Buttons section of `/design`
-(tagged as its own standalone decision, not a JES-155 choice) so it doesn't get
+(tagged as its own standalone decision, not a `shuffler-design-choices` choice) so it doesn't get
 mistaken for one of the six and re-litigated.

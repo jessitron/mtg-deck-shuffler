@@ -1,8 +1,8 @@
 # Open choices — the work list
 
 **Status: in progress.** Choices 1 and 2 are DECIDED (2026-08-02). Choices 3–6 await Jess's
-answers, one commit at a time. Tracked as
-**[JES-155](https://linear.app/honeycombio/issue/JES-155)**.
+answers, one commit at a time. Tracked as **`shuffler-design-choices`** in the repo-root
+`TODO.md`.
 
 This is the handoff doc for converging the Shuffler's design drift. Each choice below is
 staged on **`/design`** with its options rendered side by side, and each has its exact

@@ -1,6 +1,6 @@
 # DESIGN — Event Contract v0 (the fleet's published language)
 
-Tracking: [JES-128](https://linear.app/honeycombio/issue/JES-128) · Status: **draft v2, incorporating Jess's first commentary round** (round 1 is in git history)
+Status: **draft v2, incorporating Jess's first commentary round** (round 1 is in git history)
 
 The language-neutral event contract the Spine publishes and both TS apps validate
 against. Will become JSON Schema in `contracts/` at the repo root; this doc is where
@@ -25,7 +25,8 @@ Guiding constraints (from SEAMAP.md / the vision doc, as amended by round 1):
   we know the scopes (Decision 6).
 - **The developer can see the log**: the Spine includes an admin screen (a webapp
   component is fine) that shows a table's log human-readably, linking each event to
-  its trace in Honeycomb. (Scoped into JES-129.)
+  its trace in Honeycomb. (Built with the Spine's walking skeleton; it lives at
+  `/admin/tables`.)
 
 ---
 

@@ -49,12 +49,12 @@ and slabs. Plus `--playmat-one`/`--playmat-two` on the game page and the closed
 
 **Chunky physical controls, except on buttons now.** `outset` / `inset` / `groove`
 borders remain on non-button chrome (the command-zone surround, the title slab). Button
-press feedback moved to the box-shadow bevel described below (JES-155 choice 1) — no
+press feedback moved to the box-shadow bevel described below (`shuffler-design-choices` choice 1) — no
 more `outset → inset` border switch anywhere. The Big Fat CTA (below) still carries a
 visible `10px solid` light-pink border — it just doesn't switch to `inset` on press
 anymore.
 
-**Lift on hover, press on click — one canonical shape (decided 2026-08-02, JES-155
+**Lift on hover, press on click — one canonical shape (decided 2026-08-02, `shuffler-design-choices`
 choice 1).** `.pushable-flat` in `apps/shuffler/public/styles.css`: `translateY(-4px)`
 at rest, `-6px` on hover (springy `cubic-bezier(.3,.7,.4,1.5)`, 250ms), `-2px` on press
 (34ms snap), with a two-layer `box-shadow` bevel instead of a browser-drawn
@@ -71,7 +71,7 @@ distinction the app actually draws, not drift (caught 2026-08-02, see
 [history.md](history.md)).
 
 **A radio/tab pair needs its own selection signal (decided 2026-08-02, standalone —
-not part of JES-155).** `.hero-button.active` (Precon/Archidekt on `/choose-any-deck`)
+not part of `shuffler-design-choices`).** `.hero-button.active` (Precon/Archidekt on `/choose-any-deck`)
 gets a `4px` dark-pink underline via `::after`, on top of the shared press physics.
 Elevation alone (the "already pressed" look from choice 1) read as too subtle to signal
 mutual exclusivity. This is a one-off pattern for exclusive-choice controls, not a new
@@ -109,7 +109,7 @@ Look at it before designing; add to it when you add a component.
 does not pick — it surfaces both on `/design` and waits. Inventing a resolution is worse
 than leaving the choice visible.
 
-**Secondary-button gray (decided 2026-08-02, JES-155 choice 2):** `var(--deep-space)`
+**Secondary-button gray (decided 2026-08-02, `shuffler-design-choices` choice 2):** `var(--deep-space)`
 fill + `var(--light-pink)` text. Replaces the three grays (`#6c757d` Bootstrap, `#607d8b`
 Material, and the `#5a6268` hover-darken riding along with them) across
 `.end-game-actions`, `.card-action-button.secondary`, and `.modal-action-button.secondary`.

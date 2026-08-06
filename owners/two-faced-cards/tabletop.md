@@ -45,13 +45,15 @@ contract change. Verified by `test/verification/verify-card-rotate.spec.ts`
 (bounding-box width/height swap after click).
 
 **Watch point:** `onClick` is now spoken for by rotate. The future flip gesture
-(below) needs a different trigger — a context-menu action, per JES-144's own
-scoping — not `onClick`.
+(below) needs a different trigger — a context-menu action, per the menu-curation
+scoping now carried by `no-doubleclick-crop` in the repo-root `TODO.md` — not
+`onClick`.
 
 ## Future: the flip gesture (Mountain 2)
 
 When flip lands, it should reuse this same `MtgCardImageShapeUtil` (the shared
-custom-ShapeUtil investment JES-144/JES-149 were built for) but via a
+custom-ShapeUtil investment that rotation started and `tabletop-card-shape` in
+the repo-root `TODO.md` carries forward) but via a
 context-menu action, not `onClick` (that's rotate's). Flipping on the table
 becomes a physical event the Spine can hear (`card.flipped` or similar,
 carrying the new `face`). The back image URL is derivable from `scryfallId` (or

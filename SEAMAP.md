@@ -94,4 +94,4 @@ The Mountains above are mirrored onto issues by the tracker's `Mountain:` line: 
 every ticket names the Mountain it serves (or `safe-harbor`, or `none` with a reason). So there
 are no milestones to keep in sync — `grep -r 'Mountain: ' .scratch/` is the roll-up.
 
-Linear is no longer the tracker; see `CLAUDE.md` § Seamap for winding down the old project.
+There is no external tracker — see `CLAUDE.md` § Seamap.

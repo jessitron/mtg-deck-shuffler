@@ -5,12 +5,13 @@ the target for Mountain 2 ("the physics of Magic") at the geography level: zones
 sizes, and who creates what when. It deliberately says nothing about rules.
 
 Status: **built (2026-08-01), except the "playmat grows taller" edge case**
-(deferred as [JES-141](https://linear.app/honeycombio/issue/JES-141)). `src/server/cardLayout.ts`
+(deferred; it now rides along with the `playmat-command-zone` inbox line in the
+repo-root `TODO.md`). `src/server/cardLayout.ts`
 and `cardArrival.ts` now implement the geometry below; the seat-joined trigger
 lives in `src/server/seatJoined.ts`, and the shared shape-drawing helpers in
 `src/server/tableFurniture.ts`. The delta table at the bottom describes what
 this replaced. The original spoken ramble this was distilled from is preserved
-at the end. Tracked as [JES-140](https://linear.app/honeycombio/issue/JES-140).
+at the end.
 
 ## The goal
 

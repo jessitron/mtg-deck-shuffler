@@ -48,7 +48,7 @@ The short version:
 - **Orbitron for chrome, Ovo for content** (card names are content). Risque only on site
   pages. No fourth typeface
 - **Every interactive element gets a visible `:focus-visible` state**
-- **Every button presses the same way** (JES-155 choice 1): `.pushable-flat` in
+- **Every button presses the same way** (`shuffler-design-choices` choice 1): `.pushable-flat` in
   `public/styles.css` — `translateY(-4px)` at rest, `-6px` on hover (springy, 250ms),
   `-2px` on press (34ms snap), plus a matching box-shadow bevel. No `outset`/`inset`
   borders for press feedback. Colors stay per-site (own fill, own darker shadow color) —

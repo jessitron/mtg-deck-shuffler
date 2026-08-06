@@ -12,9 +12,7 @@ commands, and gotchas — read it when working on that ship.
   research and fan-out reads are exactly what she wants delegated.
 - **Done work leaves no trace.** Don't keep `## Done` sections, tombstones, or "decided
   not to do this because…" lines in `TODO.md`. Delete the line; git remembers. Records of
-  finished work are a wall between Jess and the live work. (Point-in-time archives like
-  `notes/linear-archive.md` are different — they're snapshots, and editing them would make
-  their own claims false.)
+  finished work are a wall between Jess and the live work.
 
 ## Seamap
 
@@ -36,12 +34,10 @@ Work lives in three places, and only the last one varies per repo:
 An inbox item becomes real work via `/triage`, or `/to-spec` + `/to-tickets`; strike the line
 through with a `promoted:` pointer when it goes.
 
-Linear is no longer the tracker for this repo — issues moved to `.scratch/` because a file
-round-trip beats an API call. The old Linear project still holds content, archived to
-`notes/linear-archive.md` (68 issues, 2026-08-06) by
-`scripts/snapshot-linear.sh --repo jessitron "MTG Deck Shuffler"`. Read-only and re-runnable;
-needs `LINEAR_API_KEY` in `.be`. **Use `--repo TEAM PROJECT`, not bare project mode** — 9 of this
-repo's Tabletop issues have no Linear project and a project-scoped run misses them silently.
+**There is no external tracker.** `SEAMAP.md`, `TODO.md` and `.scratch/` are the whole system —
+a file round-trip beats an API call, and git carries the state between Jess's computers. If a
+`JES-NNN` id turns up in an old comment, it's dated provenance for finished work, not a handle
+you can resolve; read the sentence around it and move on.
 
 The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-table-vision.md`.
 
@@ -117,7 +113,8 @@ Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernit
   first choice, and free in Honeycomb. When there's no live span to hang it on (startup,
   callbacks, timers, uncaught browser errors), use that ship's logger: `src/log.ts` in the
   Shuffler, `src/server/log.ts` in the Tabletop, `logError()` in the Tabletop's browser
-  wrapper. The Spine has no logs pipeline yet (JES-137). **Never `span.addEvent`** — a
+  wrapper. The Spine has no logs pipeline yet (`spine-logs-in-traces` in `TODO.md`).
+  **Never `span.addEvent`** — a
   callback outlives the span that scheduled it, and writing to an ended span throws.
 
 Ship-specific telemetry details (sampling, datasets, probe endpoints) are in each

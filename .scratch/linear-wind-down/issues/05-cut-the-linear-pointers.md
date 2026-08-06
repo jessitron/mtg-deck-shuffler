@@ -2,7 +2,7 @@
 
 Mountain: safe-harbor
 Type: task
-Status: needs-triage
+Status: resolved
 Blocked by: 02, and every cluster ticket whose issues are cited below
 
 ## Question
@@ -89,3 +89,69 @@ on its own; nobody needs the issue body to read them.
 The inline expansions read from `notes/linear-archive.md`. Jess wants that file deleted — so
 **this ticket runs before the deletion**, or the expansions come out of
 `git show 944a111:notes/linear-archive.md` instead. Either works; don't discover it late.
+
+## Answer
+
+**Every `linear.app` URL is gone from the repo outside `notes/linear-archive.md` and this
+effort's own working files.** Every remaining `JES-NNN` is either a `← was:` label in
+`TODO.md` or a provenance mention of finished work that reads fine without a tracker.
+
+### Misdirects (all five open ones cut)
+
+1. `owners/fleet-is-observable/README.md` — "put them in the commit message, the Linear issue,
+   or here" → "in the commit message or here". The last standing instruction to *write* to Linear.
+2. `owners/shuffler-looks-like-itself/open-choices.md` — "Tracked as **[JES-155](url)**" →
+   "Tracked as **`shuffler-design-choices`** in the repo-root `TODO.md`".
+3. `notes/DESIGN-event-contract-v0.md` — dropped the `Tracking: [JES-128](url) · ` header prefix;
+   the line below already says the contract becomes JSON Schema in `contracts/`.
+4. `apps/tabletop/DESIGN.md` — "(deferred as [JES-141](url))" → "(deferred; it now rides along
+   with the `playmat-command-zone` inbox line in the repo-root `TODO.md`)".
+5. `apps/tabletop/DESIGN.md` — "Tracked as [JES-140](url)." deleted; JES-140 is Done and the
+   paragraph already says "built (2026-08-01)".
+
+### Re-pointed at TODO.md slugs
+
+- `CLAUDE.md` — Spine logs → `spine-logs-in-traces`
+- `owners/fleet-is-observable/README.md` — Invariant 5's FUTURE marker → `build-sha-on-every-span`;
+  "Filed `JES-139` off the back of it" → "Filed `build-sha-on-every-span`"; both Spine-has-no-logger
+  sentences → `spine-logs-in-traces`
+- `owners/fleet-is-observable/interactions.md` — "once JES-139 lands" → `build-sha-on-every-span`;
+  the Spine half of the no-logger pair → `spine-logs-in-traces`
+- `apps/tabletop/CLAUDE.md` — playmat-grows-taller deferral → `playmat-command-zone`
+- `apps/tabletop/test/verification/verify-card-rotate.spec.ts` — JES-144 → `animate-tap` and
+  `no-doubleclick-crop` (one of the two named exceptions to the leave-alone ruling)
+- `owners/two-faced-cards/tabletop.md` — two live citations ticket 04's search missed: the flip
+  watch-point's "per JES-144's own scoping" → `no-doubleclick-crop`, and "the investment
+  JES-144/JES-149 were built for" → `tabletop-card-shape`
+- `owners/shuffler-looks-like-itself/{README,history}.md` and `apps/shuffler/CLAUDE.md` — every
+  "JES-155 choice N" → "`shuffler-design-choices` choice N" (8 sites)
+
+### Inlined (Done or killed, id dropped)
+
+- `notes/DESIGN-event-contract-v0.md` — "(Scoped into JES-129.)" → "(Built with the Spine's
+  walking skeleton; it lives at `/admin/tables`.)" Expanded from the archive before deletion;
+  confirmed against `services/spine/config/routes.rb`.
+- `owners/fleet-is-observable/README.md` — "fixed in `6f319a2` / JES-136" → "fixed in `6f319a2`";
+  "Have, as of JES-134" → "as of `ca6553f`"; "no real callers (JES-136)" → "no real callers"
+- `owners/fleet-is-observable/interactions.md` — "fixed in JES-136" → "fixed in `6f319a2`"
+- `notes/DESIGN-the-table-vision.md`, `apps/tabletop/CLAUDE.md` — bare "(JES-140)" / "(JES-136)"
+  provenance parentheses on done work, dropped where the sentence lost nothing
+
+### The observability staleness tension
+
+Ticket 09's warning held. The three "the browser has no logger" sentences are **false today** —
+the browser *does* have `logError` — so re-pointing them at `spine-logs-in-traces` alone would
+have asserted the falsehood in a new place. Each now names only the Spine as the real gap and
+flags the browser clause as stale, pointing at `logs-docs-catch-up`. The substantive rewrite is
+still that line's job; nothing here pre-empts it.
+
+### Not done, on purpose
+
+- The ~90 provenance comments in source and tests (JES-90/127/128/129/134/136/140) stand under
+  the leave-alone ruling. That includes `verify-design-gallery.spec.ts`'s two "JES-155 choice 1"
+  comments — a *test*, and choice 1 is decided, so no live tracker is needed to read it. If Jess
+  wants label consistency there it's a one-line sed.
+- `scripts/snapshot-linear.sh`, `CLAUDE.md` § Seamap's Linear paragraph, `SEAMAP.md:97`, and
+  `TODO.md`'s `linear-wind-down` line all still say "Linear" — they *describe the wind-down*
+  rather than direct anyone to the tracker. The CLAUDE.md paragraph names the archive, so it goes
+  stale the moment `notes/linear-archive.md` is deleted; that belongs to the deletion ticket.
