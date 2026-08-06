@@ -13,9 +13,11 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- The Tabletop-replaces-Mural work (9 lines that were here) now has its own wayfinder
-  map: `.scratch/tabletop-replaces-mural/map.md`. Work it via `/wayfinder`, one ticket
-  at a time, rather than picking lines from here.
+- The card-physics/player-area work (9 lines that were here) now has its own wayfinder
+  map: `.scratch/tabletop-card-physics-starter/map.md`. Work it via `/wayfinder`, one
+  ticket at a time, rather than picking lines from here. **This is only a first slice**
+  of the Tabletop-replaces-Mural mountain, not the whole thing — the real map for that
+  still needs Jess grilled properly about everything Mural does today.
 
 ## Backlog
 
