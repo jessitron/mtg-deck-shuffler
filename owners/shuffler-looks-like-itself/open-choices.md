@@ -1,8 +1,14 @@
 # Open choices — the work list
 
-**Status: in progress.** Choices 1 and 2 are DECIDED (2026-08-02). Choices 3–6 await Jess's
-answers, one commit at a time. Tracked as **`shuffler-design-choices`** in the repo-root
-`TODO.md`.
+**Status: in progress.** Choices 1 and 2 are DECIDED (2026-08-02). **Jess answered choices 3,
+4, 5 and 6 on 2026-08-06** — the answers and their reasoning are in
+`.scratch/shuffler-design-choices/spec.md`, and `issues/01`–`04` execute them one commit at a
+time. Each choice below is still marked `_(pending)_` until its commit lands and runs the
+resolve checklist.
+
+**Choice 4's citations below are stale** — `.table-cards-button` doesn't exist, three rules
+are missing, and three are duplicated across files. `issues/04-radius-sweep.md` has the
+verified list; trust it over this file until this one is rewritten.
 
 This is the handoff doc for converging the Shuffler's design drift. Each choice below is
 staged on **`/design`** with its options rendered side by side, and each has its exact

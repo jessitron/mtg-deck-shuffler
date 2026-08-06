@@ -213,27 +213,6 @@ section is just a wall between Jess and the live work.
   - Only the **rectangular sleeve frame** waits on `tabletop-card-shape` — a natural first
     exercise of a custom shape's rendering. The picker and the card back need nothing new.
 
-- [ ] `shuffler-design-choices` Answer the four open Shuffler design choices  ← was: JES-155, JES-80
-  - Choices 1 and 2 (button press physics, secondary gray) landed 2026-08-02. Still `_(pending)_`:
-    **3** card-modal buttons (seven Material hues vs. primary/secondary), **4** corner radius on
-    chrome (`0` vs. `4px`), **6** text-input treatment. Each is staged side by side on `/design`.
-  - The blocker is Jess's answers, not the work: `owners/shuffler-looks-like-itself/open-choices.md`
-    already holds every option with exact `file:line` steps and a resolve checklist. One choice
-    per commit; consult the owner's `-context` / `-review` / `-update` skills.
-  - Choice 5 (the focus ring) is split out as `keyboard-focus-visible` — it's a regression, not
-    a taste question.
-
-- [ ] `keyboard-focus-visible` Give the Shuffler a real focus ring; stop deleting the browser's
-  - **An accessibility regression, not a missing style.** `deck-selection.css:61` and `:88` set
-    `outline: none` on the precon-search and Archidekt-number inputs and substitute a
-    border-colour change — actively worse for keyboard users than never having styled it.
-  - The whole app has exactly one focus rule, `site.css:325` `.button-base:focus`. No shipped
-    stylesheet uses `:focus-visible` at all. Everything else has nothing.
-  - **Deleting the two `outline: none` rules is correct under all three ring options**, so this
-    doesn't wait on `shuffler-design-choices`. Picking the replacement ring does — it's choice 5,
-    with candidates already written in `design-candidates.css`. The global rule belongs in
-    `styles.css`, the only sheet every page loads.
-
 - [ ] `fun-game-ids` Game IDs as fun word combos instead of numbers  ← was: JES-97
   - > Make game IDs fun word combinations instead of numbers. That makes them not derivable
     > (a small privacy win) and still looks pretty.
