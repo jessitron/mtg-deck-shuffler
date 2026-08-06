@@ -1,6 +1,6 @@
 # Keep/kill: knowing-the-fleet-works
 
-Mountain: safe-harbor
+Mountain: overhead
 Type: grilling
 Status: resolved
 
@@ -41,7 +41,7 @@ Consult the `fleet-is-observable` owner before deciding; several of these are ci
 ## Answer
 
 **Six survive, two die.** All six go to `## Backlog` with no `← mountain:` marker —
-this cluster is safe-harbor, and per [ticket 02](02-inbox-line-format.md) safe-harbor is the
+this cluster is overhead, and per [ticket 02](02-inbox-line-format.md) overhead is the
 *absence* of a Mountain. Nothing merges: the four existing inbox items ticket 01 flagged are all
 Tabletop cosmetics, and `## Backlog` is currently empty, so every line here is new.
 

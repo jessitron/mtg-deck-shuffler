@@ -1,6 +1,6 @@
 # Design lint: mechanize the checkable half of the design review
 
-Mountain: safe-harbor
+Mountain: overhead
 Status: ready-for-agent
 
 No spec — single ticket, born from a conversation with Jess (2026-08-06): the

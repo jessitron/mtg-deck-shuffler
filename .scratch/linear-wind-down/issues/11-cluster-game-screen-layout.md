@@ -1,6 +1,6 @@
 # Keep/kill: game-screen-layout-and-finding-cards
 
-Mountain: safe-harbor
+Mountain: overhead
 Type: grilling
 Status: resolved
 
@@ -39,7 +39,7 @@ JES-88) before deciding.
 ## Answer
 
 **Seven issues become four `TODO.md` § Backlog lines. Five keep, two kill, none defer.** No
-`← mountain:` markers — this cluster is safe-harbor. Keep/kill was the agent's call under Jess's
+`← mountain:` markers — this cluster is overhead. Keep/kill was the agent's call under Jess's
 delegation (2026-08-06): *"dude I don't care, what will help you get it done?"*
 
 Every headline claim was re-checked against `main` today. One of them was wrong, and it is the

@@ -22,7 +22,7 @@ call, and git carries the state between machines. There is no collaborative tick
 ### `Mountain:`
 
 Which of `SEAMAP.md`'s Mountains this work serves. **Required** on every spec and every issue —
-a ticket that can't name its Mountain is a ticket worth questioning. Valid values:
+a ticket that can't say where it belongs is a ticket worth questioning. Valid values:
 
 | Value                        | Meaning                                                        |
 | ---------------------------- | -------------------------------------------------------------- |
@@ -30,8 +30,15 @@ a ticket that can't name its Mountain is a ticket worth questioning. Valid value
 | `spine-tells-the-story`      | Mountain 2 — one event log per table, narration               |
 | `interpreter-learns-to-read` | Mountain 3 — guesses, ears, proactive help                    |
 | `someday-asks-to-play`       | Mountain 4                                                     |
-| `safe-harbor`                | No Mountain; keeps an existing thing working or true. See `SEAMAP.md` § Safe Harbor. |
-| `none — <one-line why>`      | Genuinely serves no Mountain. Say so out loud rather than guessing a Mountain. |
+| `overhead`                   | **Not a Mountain.** Keeps an existing thing working or true — the upkeep that holds `SEAMAP.md` § Safe Harbor. |
+| `none — <one-line why>`      | Genuinely serves no Mountain and isn't upkeep either. Say so out loud rather than guessing a Mountain. |
+
+Only the first four are Mountains. `overhead` and `none` are the two ways of saying "no
+Mountain" — the first because the work is upkeep, the second because it's neither.
+
+**Safe Harbor is never a value here.** It's a *state* the repo is either in or out of
+(deployed, green, docs true, nothing wrong), not a destination you sail toward, so nothing
+can "serve" it. Work that keeps that state true is `overhead`.
 
 Issues inherit their spec's Mountain unless a ticket plainly serves a different one.
 Mountains themselves are never tickets — they live only in `SEAMAP.md`.

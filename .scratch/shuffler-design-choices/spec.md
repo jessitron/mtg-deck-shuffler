@@ -1,6 +1,6 @@
 # Resolve the four open Shuffler design choices
 
-Mountain: safe-harbor
+Mountain: overhead
 Status: ready-for-agent
 
 Jess answered choices 3, 4, 5 and 6 on **2026-08-06**. Choices 1 and 2 landed 2026-08-02.

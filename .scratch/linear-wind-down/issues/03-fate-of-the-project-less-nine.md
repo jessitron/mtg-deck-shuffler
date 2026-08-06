@@ -1,6 +1,6 @@
 # Decide the fate of the 9 project-less Tabletop issues
 
-Mountain: safe-harbor
+Mountain: overhead
 Type: grilling
 Status: out-of-scope
 

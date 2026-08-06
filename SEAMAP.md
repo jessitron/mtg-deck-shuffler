@@ -91,7 +91,9 @@ issues — never in this doc. (Contract: the seamapping plugin's `TRACKING-ADAPT
 - tracker: `docs/agents/issue-tracker.md` — specs and tickets, post-decision.
 
 The Mountains above are mirrored onto issues by the tracker's `Mountain:` line: every spec and
-every ticket names the Mountain it serves (or `safe-harbor`, or `none` with a reason). So there
-are no milestones to keep in sync — `grep -r 'Mountain: ' .scratch/` is the roll-up.
+every ticket names the Mountain it serves — or `overhead` for upkeep that climbs no Mountain,
+or `none` with a reason. Safe Harbor is a **state**, not a Mountain, so it is never a value on
+that line. So there are no milestones to keep in sync — `grep -r 'Mountain: ' .scratch/` is the
+roll-up.
 
 There is no external tracker — see `CLAUDE.md` § Seamap.

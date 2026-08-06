@@ -1,6 +1,6 @@
 # Split the card-modal buttons by kind
 
-Mountain: safe-harbor
+Mountain: overhead
 Status: ready-for-agent
 
 Resolves **choice 3**. Third, because it restructures `playmat.css` and shifts every line

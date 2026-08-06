@@ -1,6 +1,6 @@
 # Collapse three text inputs into one
 
-Mountain: safe-harbor
+Mountain: overhead
 Status: ready-for-agent
 
 Resolves **choice 6**. Depends on [01](01-global-focus-ring.md) — the input deliberately

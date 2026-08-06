@@ -1,6 +1,6 @@
 # Choose the inbox line format for a migrated issue
 
-Mountain: safe-harbor
+Mountain: overhead
 Type: grilling
 Status: resolved
 
@@ -49,7 +49,7 @@ provenance is a dead `JES-` id carried as a label.
   label, not a handle — nothing is expected to resolve it. It dies with the line when the
   line is promoted or deleted, which is how `JES-` finally leaves the repo.
 - **`← mountain:`** — only for the active Mountain (`tabletop-replaces-mural`, clusters 1–3).
-  `safe-harbor` is the *absence* of a Mountain, so stamping it on a line is noise. Clusters
+  `overhead` is the *absence* of a Mountain, so stamping it on a line is noise. Clusters
   4–7 get no marker.
 - **No `← priority:`** — Linear's priority field is the stalest thing in the archive.
 - **No Linear URL.** A URL is a live pointer and will 404; the destination says nothing in

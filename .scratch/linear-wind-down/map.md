@@ -1,6 +1,6 @@
 # Linear wind-down
 
-Mountain: safe-harbor
+Mountain: overhead
 Type: wayfinder:map
 
 ## Destination

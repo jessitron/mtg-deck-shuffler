@@ -1,6 +1,6 @@
 # Sweep every chrome corner to the decided radius
 
-Mountain: safe-harbor
+Mountain: overhead
 Status: ready-for-agent
 
 Resolves **choice 4**. Last, so it catches the rules issues 02 and 03 introduce. These are

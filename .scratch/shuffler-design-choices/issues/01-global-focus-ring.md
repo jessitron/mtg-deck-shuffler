@@ -1,6 +1,6 @@
 # Give the Shuffler one global focus ring
 
-Mountain: safe-harbor
+Mountain: overhead
 Status: ready-for-agent
 
 Resolves **choice 5**. Do this first: it's the accessibility item, it's purely additive, and

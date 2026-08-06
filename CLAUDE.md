@@ -63,7 +63,8 @@ The larger vision — Tabletop, Spine, Interpreter — is in `notes/DESIGN-the-t
 ### Issue tracker
 
 Issues and specs live as committed markdown under `.scratch/<feature>/`; every spec and ticket
-carries a `Mountain:` line naming which of `SEAMAP.md`'s Mountains it serves.
+carries a `Mountain:` line naming which of `SEAMAP.md`'s Mountains it serves — or `overhead` for
+upkeep that climbs no Mountain. Safe Harbor is a **state**, never a value on that line.
 See `docs/agents/issue-tracker.md`.
 
 ### Triage labels

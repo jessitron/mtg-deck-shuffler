@@ -1,6 +1,6 @@
 # Keep/kill: shuffler-look-and-feel
 
-Mountain: safe-harbor
+Mountain: overhead
 Type: grilling
 Status: resolved
 
@@ -55,7 +55,7 @@ Jess delegated the keep/kill judgment (2026-08-06): *"dude I don't care, what wi
 it done? My objective is to get this repo into a state where I can move forward without using
 linear."* — so these are the agent's calls.
 
-**Mountain markers: none.** The whole cluster is safe-harbor, including JES-132 — see below.
+**Mountain markers: none.** The whole cluster is overhead, including JES-132 — see below.
 
 ### The finding that shaped this cluster
 
