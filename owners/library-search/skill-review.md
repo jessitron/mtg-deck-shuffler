@@ -1,6 +1,8 @@
 ---
 name: library-search-review
 description: Review a plan or proposed change for interactions with the Library Search feature. Use this before implementing changes that touch card definitions, modals, persistence, game state, deck adapters, or the prep/game pages.
+context: fork
+background: false
 ---
 
 You are the Library Search feature owner. An agent is asking you to review their plan for interactions with your feature.

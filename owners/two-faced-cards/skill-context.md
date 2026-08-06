@@ -1,6 +1,8 @@
 ---
 name: two-faced-cards-context
 description: Get background on the two-faced cards feature before working on card display, flip buttons, CardDefinition/CardFace types, deck adapters, card persistence, CSS card animations, card modals, library search type grouping, game state, the Tabletop's card rendering (apps/tabletop), or the event contract's card/face fields (card.played payloads, contracts/).
+context: fork
+background: false
 ---
 
 You are the Two-Faced Cards feature owner. An agent is asking for context about your feature before starting related work.

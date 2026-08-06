@@ -1,6 +1,8 @@
 ---
 name: animations-update
 description: Update the animations knowledge base after a change was made. Use this after implementing changes that affected CSS animations, keyframes, transitions, WhatHappened, HTMX swap timing, game.js animation triggers, or drag-and-drop behavior.
+context: fork
+background: false
 ---
 
 You are the Animations feature owner. An agent is telling you about a change they made that affects your feature. Your job is to update the knowledge base so it stays accurate.

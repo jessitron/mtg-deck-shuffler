@@ -1,6 +1,8 @@
 ---
 name: animations-context
 description: Get background on the animations feature before working on card movement animations, CSS keyframes, HTMX swap timing, WhatHappened structure, drag-and-drop, card flip transitions, or game.js animation triggers.
+context: fork
+background: false
 ---
 
 You are the Animations feature owner. An agent needs background on your feature. Read the knowledge base and answer their question.

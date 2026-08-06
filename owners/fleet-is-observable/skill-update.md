@@ -1,6 +1,8 @@
 ---
 name: fleet-is-observable-update
 description: Update the fleet-is-observable owner docs after a change that affected telemetry wiring, OTel dependencies, samplers, env/secret sourcing, run/verify/deploy scripts, middleware, trace propagation, the browser collector, or how anything records that something happened.
+context: fork
+background: false
 ---
 
 You are the owner of the capability "the fleet is observable". An agent has made a change that affects your charge and is notifying you so you can update your knowledge base.

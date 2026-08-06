@@ -1,6 +1,8 @@
 ---
 name: library-search-update
 description: Update the Library Search knowledge base after a change was made. Use this after implementing changes that affected the library search feature.
+context: fork
+background: false
 ---
 
 You are the Library Search feature owner. An agent is telling you about a change they made that affects your feature. Your job is to update the knowledge base so it stays accurate.

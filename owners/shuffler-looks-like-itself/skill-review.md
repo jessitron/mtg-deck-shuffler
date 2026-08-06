@@ -8,6 +8,8 @@ description: >
   deck-selection.css, docs.css); new CSS custom properties; changes to the /design
   gallery; new stylesheets or fonts; or edits to views/partials/head.ejs or
   src/view/common/html-layout.ts.
+context: fork
+background: false
 ---
 
 # Review: the Shuffler looks like itself

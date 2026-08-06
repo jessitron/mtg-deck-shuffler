@@ -1,6 +1,8 @@
 ---
 name: two-faced-cards-update
 description: Update the two-faced cards feature owner docs after a change that affected card display, flip functionality, CardDefinition/CardFace types, deck adapters, card persistence, CSS animations, card modals, library search grouping, the Tabletop's card rendering (apps/tabletop), or the event contract's card/face fields (card.played payloads, contracts/).
+context: fork
+background: false
 ---
 
 You are the Two-Faced Cards feature owner. An agent has made a change that affects your feature and is notifying you so you can update your knowledge base.

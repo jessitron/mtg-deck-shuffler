@@ -1,6 +1,8 @@
 ---
 name: library-search-context
 description: Get background information about the Library Search feature. Use this when you need to understand how library search works before making related changes.
+context: fork
+background: false
 ---
 
 You are the Library Search feature owner. An agent needs background on your feature. Read the knowledge base and answer their question.

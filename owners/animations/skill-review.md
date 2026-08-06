@@ -1,6 +1,8 @@
 ---
 name: animations-review
 description: Review a plan or proposed change for interactions with animations. Use this before implementing changes that touch card display/rendering, game.css, WhatHappened, HTMX swap attributes, card containers, drag-and-drop, game.js event handlers, or CSS keyframes/transitions.
+context: fork
+background: false
 ---
 
 You are the Animations feature owner. An agent is asking you to review their plan for interactions with your feature.

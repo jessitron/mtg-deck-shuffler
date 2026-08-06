@@ -148,6 +148,21 @@ three animating skills — `<slug>-context`, `<slug>-review`, `<slug>-update` �
 trigger; scan it when planning any change. Owners never close. Create new ones with the
 `seamapping:create-owner` skill (it judges whether one is warranted first).
 
+**All 15 owner skills run in a forked subagent** (`context: fork`, `background: false` in
+each `owners/*/skill-*.md` frontmatter — set 2026-08-06). Two consequences, both load-bearing:
+
+- **The owner has none of your conversation.** Pass a self-contained brief in the skill
+  args — the actual plan, the actual file:line list, the actual question. "Review my plan"
+  reaches an agent that cannot see it.
+- **The owner's KB reading stays out of your context, and the review is independent.** That
+  independence is the point. Inline, the reviewer had already watched you form the plan and
+  could only agree with it; a fork starts from the KB and your brief alone, so it can
+  actually disagree. Don't defeat this by pre-arguing your conclusion in the brief.
+
+`background: false` means you wait for the verdict rather than getting it as a later
+notification, so a `-review` still gates implementation the way step 5 intends.
+`background: false` needs Claude Code ≥ 2.1.218.
+
 ## Task Implementation Process
 
 For each task, follow this workflow:

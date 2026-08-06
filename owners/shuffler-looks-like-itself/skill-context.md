@@ -9,6 +9,8 @@ description: >
   views/partials/head.ejs or src/view/common/html-layout.ts — and any time the task is
   "add a button", "style this", "how should this look", or produces something a player
   sees.
+context: fork
+background: false
 ---
 
 # Context: the Shuffler looks like itself

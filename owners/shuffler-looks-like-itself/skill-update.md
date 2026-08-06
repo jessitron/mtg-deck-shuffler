@@ -7,6 +7,8 @@ description: >
   docs.css, design-candidates.css), added or renamed a CSS token, changed the /design
   gallery, added a stylesheet or font, resolved one of the open design choices, or
   touched views/partials/head.ejs or src/view/common/html-layout.ts.
+context: fork
+background: false
 ---
 
 # Update: the Shuffler looks like itself
