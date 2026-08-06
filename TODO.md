@@ -220,10 +220,6 @@ section is just a wall between Jess and the live work.
   - The blocker is Jess's answers, not the work: `owners/shuffler-looks-like-itself/open-choices.md`
     already holds every option with exact `file:line` steps and a resolve checklist. One choice
     per commit; consult the owner's `-context` / `-review` / `-update` skills.
-  - Ride-along, found while triaging: **the flip button looks sad.** Jess wants a circle of two
-    arrows centered under the card. It's Material orange `#ff9800`, duplicated and already
-    diverged across `prepare.css:246` and `playmat.css:506`, with a `5px` radius that's on
-    choice 4's list. Three pieces of drift on one component.
   - Choice 5 (the focus ring) is split out as `keyboard-focus-visible` — it's a regression, not
     a taste question.
 

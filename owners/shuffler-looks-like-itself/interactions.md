@@ -45,10 +45,14 @@ Concrete, in rough order of how often they bite.
 - New chrome gets **square corners** (`border-radius: 0`). Round corners are for cards,
   the playmat, `.page-container`, and count discs only.
 - Button labels are **Orbitron**. Card names are **Ovo**. No fourth typeface.
-- Give it a **visible `:focus-visible` state**. The app has exactly one focus *outline*
-  today (`site.css:330`, `.button-base:focus`) — and two rules that make things worse by
-  setting `outline: none` (`deck-selection.css:59` and `:86`). Don't add to the deficit,
-  and never write `outline: none` without replacing it with something visible.
+- Give it a **visible `:focus-visible` state**. **No shipped stylesheet uses
+  `:focus-visible` at all** — it appears only in `design-candidates.css`, which nothing
+  but `/design` loads. The app has exactly one focus *outline* today (`site.css:325`,
+  `.button-base:focus`, a plain `:focus`) — and two rules that make things worse by
+  setting `outline: none` (`deck-selection.css:59` and `:86`, whose replacement glows
+  have themselves drifted apart: pink on one, Material green on the other). Don't add to
+  the deficit, and never write `outline: none` without replacing it with something
+  visible.
 - Neighbouring drift is not permission. Jess's call: pull toward the standard.
 
 **Adding a stylesheet**
@@ -62,7 +66,9 @@ Concrete, in rough order of how often they bite.
 **Editing a duplicated block** (see [architecture.md](architecture.md) for the list)
 
 - Modal styles: `playmat.css` **and** `prepare.css`.
-- Flip styles: `game.css` **and** `prepare.css`.
+- Flip *container* styles: `game.css` **and** `prepare.css` (still identical).
+- Flip *button* styles: `playmat.css:506` **and** `prepare.css:246` — **already
+  diverged**; fixing one will not fix the other, and they no longer look alike.
 - Library-list styles: `playmat.css` **and** `prepare.css`.
 - Prefer deleting the duplicate over editing one copy. If you must edit one, edit both and
   say so.

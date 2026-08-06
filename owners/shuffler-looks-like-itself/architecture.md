@@ -51,8 +51,14 @@ Per-view `additionalStyles` today:
 
 - The modal block — `.modal-overlay`, `.modal-dialog`, `.modal-header`, `.modal-title`,
   `.modal-close`, `.modal-body` — is verbatim in **both** `playmat.css` and `prepare.css`.
-- The flip block — `.flip-container-outer/-inner`, `.two-sided-front/-back` — is verbatim
-  in **both** `game.css` and `prepare.css`.
+- The flip **container** block — `.flip-container-outer/-inner`, `.two-sided-front/-back`
+  — is verbatim in **both** `game.css:97-133` and `prepare.css:210-244`.
+- The flip **button** is a *separate* duplicate, and it has **already diverged**:
+  `playmat.css:506` `.modal-action-button.flip-button` carries the choice-1
+  `.pushable-flat` box-shadow bevel; `prepare.css:246` bare `.flip-button` is still the
+  pre-choice-1 flat control (`border-radius: 5px`, hover recolor to `#f57c00`). They
+  agree only on the `#ff9800` fill. Different selectors on different markup — so this
+  pair converges by the prepare copy *adopting* the playmat treatment, not by deletion.
 - `.library-search-list`, `.library-card-item`, `.card-name-link` are in **both**
   `playmat.css` and `prepare.css` (the prepare copy adds `font-family: "Ovo"`).
 
