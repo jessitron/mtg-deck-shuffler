@@ -22,7 +22,13 @@ What happens *inside* Linear is not part of this — see Out of scope.
   deleted — no tombstone, no "killed because…" line, no `## Done` section. Don't spend a sentence
   recording that something isn't happening. This is why the ticket count keeps shrinking rather
   than growing; that's the effort working, not scope loss.
-- **Keep/kill is HITL, cluster by cluster.** Jess calls it herself, walking themed clusters rather
+- **Lossy is fine, and the keep/kill calls are delegated.** Jess, 2026-08-06, part-way through the
+  clusters: *"dude I don't care, what will help you get it done? My objective is to get this repo
+  into a state where I can move forward without using linear"* and *"it's ok if this process is a
+  little lossy."* This supersedes the HITL rule below for clusters 06–12 — the agent decides, bias
+  toward killing, and losing a marginal item costs less than another round-trip. What's actually
+  worth doing will resurface the next time Jess hits it.
+- ~~**Keep/kill is HITL, cluster by cluster.**~~ Jess calls it herself, walking themed clusters rather
   than 40 individual issues or one blanket rule. Tickets 06–12, one per cluster; each carries its
   issues inline so it stays walkable after the archive is deleted.
 - **A dangling `JES-` reference follows the work.** Jess, 2026-08-06: if the issue survives, re-point
@@ -59,6 +65,61 @@ What happens *inside* Linear is not part of this — see Out of scope.
   onto `animate-tap`. JES-132 deferred to [ticket 12](issues/12-cluster-shuffler-look-and-feel.md)
   so both halves of the sleeves idea are called at once. Jess delegated the keep/kill judgment to
   the agent here: *"I don't care, what will help you get it done?"*
+- [Keep/kill: tabletop-table-furniture](issues/07-cluster-tabletop-table-furniture.md) — **six issues'
+  live content survives as three `## Next` lines instead of six.** JES-150/147/146 and JES-148's
+  library half collapse into `player-area-polish` — four prop nudges in the same two files, one
+  sitting's work, with rounded corners flagged as the one item tldraw's `geo` can't do. JES-148's
+  exile half killed as pre-empted: `playmat-command-zone` moves exile out from beside the library
+  anyway. JES-141 merged into `playmat-command-zone`, carrying its real content — growing one mat
+  re-derives that seat's whole column and shifts every seat to its right. JES-145 stands alone as
+  `library-links-to-shuffler`. Cluster 6's block was advice about not over-investing in cosmetics,
+  not a prerequisite.
+- [Keep/kill: table-durability-and-the-event-log](issues/08-cluster-table-durability-and-event-log.md)
+  — **four issues become one `## Next` line**, `tabletop-survives-restart`. JES-151/154/131 are one
+  job seen three ways; two lines would both have said "build Tabletop→Spine `card.moved`". Every
+  claim re-verified — `rooms.ts` still in-memory, three payloads in `contracts/`, no Spine client in
+  the Tabletop — plus one thing the archive didn't know: the Spine's `POST /tables/:table_id/events`
+  already exists, so only the sending half is missing. JES-92 (spectator mode) killed as a category
+  error: `SEAMAP.md` and `notes/DESIGN-the-table-vision.md` already say it better, as a constraint
+  on every Mountain rather than a checkbox that can never be checked.
+- [Keep/kill: card-actions-and-undo](issues/10-cluster-card-actions-and-undo.md) — **six issues become
+  four `## Backlog` lines.** JES-82 killed as shipped (cmd-Z verified in `game.js`, guarded against
+  inputs and modals). JES-83 and JES-99 merged into `finish-undo`, which carries a task and a decision
+  together — neither stands alone, and a reflex key with no redo is where people get hurt. JES-85
+  rescoped: discard already landed, so the survivor is exile plus provenance in the Cards-on-Table
+  modal. JES-84 survives **stronger than filed** — the `animations` owner's history shows the exit
+  animation was removed as broken in `943ece6` and the client-driven pattern abandoned, making its
+  server-computes-destination sketch the untried replacement rather than a loose idea. JES-81 kept.
+- [Keep/kill: knowing-the-fleet-works](issues/09-cluster-knowing-the-fleet-works.md) — **six survive,
+  two die; six new `## Backlog` lines, no merges.** JES-133 killed as an umbrella whose every child is
+  done or has its own line — its two unique ideas are already permanent in the `fleet-is-observable`
+  README and `notes/AGENT-NOTES.md`. JES-98 killed as done: `tracing_util.ts` *is* the library it
+  asked for, and "crucial fields" is now Invariant 1, stated more strongly than the issue asked.
+  Survivors all re-verified against today's code: `shuffler-logs-not-console` (53 sites),
+  `spine-logs-in-traces` (kept mainly for its undecided gem-vs-lograge fork), `build-sha-on-every-span`
+  (zero hits fleet-wide), `spine-probe-sampling` (no sampler at all in the initializer), `set-up-ci`
+  (no `.github/`, three real suites), and `logs-docs-catch-up` — JES-138 shrunk from a five-part
+  closeout to the two parts still false today.
+- [Keep/kill: game-screen-layout-and-finding-cards](issues/11-cluster-game-screen-layout.md) — **four
+  `## Backlog` lines.** JES-78 kept as `game-page-to-ejs`, the rendering substrate the rest of the
+  game-screen work edits. JES-89 + JES-87 merged into `game-screen-table-layout` — thin alone, one ask
+  together. JES-88 killed: superseded by `deck-title-placement`, and its premise has drifted. JES-142
+  killed as too vague, its real-user provenance moved onto the library line. JES-152 kept but
+  **reframed**, because this cluster found **JES-153 never landed on `main`** — it's on branch
+  `library-alphabet` in `../mtg-deck-shuffler-worktree1`, 19 commits behind, carrying `owners/library-search/`
+  edits that describe work `main` doesn't have. Landing or dropping that branch is now the line's first
+  sub-bullet. JES-96 kept and upgraded by reading the adapter: `displayName` and `card.uid` are both the
+  localized printing, so name and image go foreign together.
+- [Keep/kill: shuffler-look-and-feel](issues/12-cluster-shuffler-look-and-feel.md) — **nothing killed;
+  six issues become four `## Backlog` lines.** JES-79 + JES-86 + JES-132 collapse into
+  `personal-play-space`: `seat.joined` already carries `playmatImageUrl` *and* `cardBackImageUrl` end to
+  end, hardcoded, each with a comment naming the missing picker — never three features, just one
+  prep-screen picker nobody wrote. JES-155 survives as a *decision* line pointing at the live
+  `open-choices.md` rather than copying it, with JES-80's sad flip button riding along as one more piece
+  of the same drift. **Choice 5 split onto its own line, `keyboard-focus-visible`** — burying an
+  accessibility regression inside "design choices" would have killed it just as surely, and deleting
+  `outline: none` needs no decision from Jess. JES-97 stands alone: a privacy change wearing a
+  cosmetic hat.
 
 ## Not yet specified
 

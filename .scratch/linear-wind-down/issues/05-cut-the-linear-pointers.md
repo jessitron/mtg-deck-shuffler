@@ -60,6 +60,30 @@ each one landed.
 **Leave alone:** the ~90 `JES-NNN` provenance comments in source and tests. Each sentence stands
 on its own; nobody needs the issue body to read them.
 
+### Amendments from the cluster sessions
+
+- **Cluster 1 is discharged.** `TODO.md`'s JES-143/144/149 mentions were rewritten to slugs while
+  [ticket 06](06-cluster-tabletop-custom-card-shape.md) merged those lines. Only `← was:` labels
+  remain there, which are dated artifacts by design. Two fewer sites to visit.
+- **Two exceptions to "leave alone"**, found by
+  [ticket 08](08-cluster-table-durability-and-event-log.md) sweeping the Tabletop for *bare*,
+  unlinked ids that ticket 04's linked-pointer search didn't see. The blanket rule still holds for
+  the rest — these two name **live** work, so the follow-the-work rule applies:
+  - `apps/tabletop/src/**/verify-card-rotate.spec.ts:4` — JES-144 → now split between
+    `animate-tap` and `no-doubleclick-crop`
+  - `apps/tabletop/CLAUDE.md:23` — JES-141 → now merged into `playmat-command-zone`
+    (already listed above; ticket 08 confirms it from the other direction)
+- **Do the `fleet-is-observable` edits in one pass, not two.** From
+  [ticket 09](09-cluster-knowing-the-fleet-works.md): the paragraphs in that owner's `README.md` and
+  `interactions.md` carrying JES-133/136/137/139 are the *same* stale "browser has no logger"
+  paragraphs the surviving `logs-docs-catch-up` line will rewrite. Touching them twice is wasted
+  work — and this ticket's re-pointing pass can't be done well without knowing the claims are false.
+- **The slug map for re-pointing**, now that the clusters have landed:
+  `JES-137` → `spine-logs-in-traces` (fleet `CLAUDE.md:112` and the owner docs) ·
+  `JES-139` → `build-sha-on-every-span` (Invariant 5's FUTURE marker) ·
+  `JES-133`, `JES-136` → **killed or done**, so inline and drop the id ·
+  `JES-155` → cluster 12's call · `JES-141` → `playmat-command-zone`
+
 ### Ordering hazard
 
 The inline expansions read from `notes/linear-archive.md`. Jess wants that file deleted — so
