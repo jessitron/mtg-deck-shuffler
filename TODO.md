@@ -10,9 +10,9 @@ pointer, and sweep it to `## Done`.
 
 ## In progress
 
-## Next
-
 - [ ] `linear-wind-down` Archive the old Linear project and stop writing to it  ← priority: medium
+  - **Charted 2026-08-06** as a wayfinder map: `.scratch/linear-wind-down/map.md`. Four tickets
+    on the frontier; the keep/kill sessions are still fog until the clustering lands.
   - The tracker is now `.scratch/` (see `docs/agents/issue-tracker.md`); Linear still holds the
     live issues.
   - **Snapshot done** (2026-08-06): `notes/linear-archive.md`, 68 issues, via
@@ -24,6 +24,8 @@ pointer, and sweep it to `## Done`.
   - **Watch out:** 9 of the 68 (JES-144…JES-154, all Tabletop) have **no Linear project** — they
     were filed from the old `apps/tabletop/notes/todo.md` on 2026-08-01 without one. That's why
     the script has a `--repo` mode; a plain project snapshot silently misses them.
+
+## Next
 
 Folded up from `apps/tabletop/notes/todo.md` (2026-08-06), Jess's wording preserved as the quote.
 None of these are in Linear — they postdate the 2026-08-01 promotion.
