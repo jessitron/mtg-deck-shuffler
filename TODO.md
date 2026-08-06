@@ -13,11 +13,22 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- The card-physics/player-area work (9 lines that were here) now has its own wayfinder
-  map: `.scratch/tabletop-card-physics-starter/map.md`. Work it via `/wayfinder`, one
-  ticket at a time, rather than picking lines from here. **This is only a first slice**
-  of the Tabletop-replaces-Mural mountain, not the whole thing — the real map for that
-  still needs Jess grilled properly about everything Mural does today.
+- **The Tabletop-replaces-Mural mountain is charted.** The parity list, the six maps it
+  splits into, and their order: `notes/DESIGN-tabletop-replaces-mural.md`. Two maps exist
+  so far — work them with `/wayfinder`, one ticket at a time, rather than picking lines
+  from here:
+  - `.scratch/tabletop-physics/map.md` — cards and furniture become real shapes. **Start
+    here**; it blocks the other one.
+  - `.scratch/tabletop-table-layout/map.md` — the square, the command zone, life totals.
+    (Formerly `tabletop-card-physics-starter`.)
+
+- [ ] `deck-title-placement` On the game screen, move the deck title out of the command zone
+  - > Put it above the table button(s), top-aligned with the hamburger menu.
+  - This is the **Shuffler's** game screen (`formatCommandZoneHtmlFragment` in
+    `src/view/common/shared-components.ts`), not the Tabletop canvas — it came back here from the
+    old card-physics map because it isn't really the Tabletop-replaces-Mural mountain, and it's a
+    one-sitting change that doesn't need a ticket.
+  - Consult `shuffler-looks-like-itself` — layout change on a page that owner watches.
 
 ## Backlog
 

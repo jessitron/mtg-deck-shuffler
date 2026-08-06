@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Type: grilling
-Status: open
+Status: parked — belongs to map 5, The table reports (not charted). See `README.md` in this directory.
 
 ## Question
 

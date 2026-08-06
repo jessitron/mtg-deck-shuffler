@@ -22,7 +22,8 @@ Mural, not a rewrite.
 
 1. **The Tabletop replaces Mural** ← _active_ — a synced tldraw canvas where cards
    arrive from the Shuffler instead of the clipboard; then card shapes and gestures
-   (tap, counters, zone areas) make common movements easy.
+   (tap, counters, zone areas) make common movements easy. The full parity list and the
+   six maps that climb it: `notes/DESIGN-tabletop-replaces-mural.md`.
 2. **The Spine tells the story** — one event log per table; a narration panel showing
    what happened, before any AI fills it.
 3. **The Interpreter learns to read the play** — guesses at unexplained physical

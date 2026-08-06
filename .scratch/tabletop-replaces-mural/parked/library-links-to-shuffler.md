@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Type: grilling
-Status: open
+Status: parked — belongs to map 3, Cards come and go (not charted). See `README.md` in this directory.
 
 ## Question
 
