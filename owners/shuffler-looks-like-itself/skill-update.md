@@ -1,12 +1,13 @@
 ---
 name: shuffler-looks-like-itself-update
 description: >
-  Update the Shuffler design-language knowledge base after a change landed. Use after
-  implementing anything that added or changed UI, edited a Shuffler stylesheet
-  (styles.css, site.css, playmat.css, game.css, prepare.css, deck-selection.css,
-  docs.css, design-candidates.css), added or renamed a CSS token, changed the /design
-  gallery, added a stylesheet or font, resolved one of the open design choices, or
-  touched views/partials/head.ejs or src/view/common/html-layout.ts.
+  Update the fleet design-language knowledge base after a change landed. Use after
+  implementing anything that added or changed UI on any ship, edited a Shuffler
+  stylesheet (styles.css, site.css, playmat.css, game.css, prepare.css,
+  deck-selection.css, docs.css, design-candidates.css) or any Tabletop CSS, added or
+  renamed a CSS token, changed the /design gallery, added a stylesheet or font, resolved
+  one of the open design choices, hit a tldraw styling limit worth recording, or touched
+  views/partials/head.ejs or src/view/common/html-layout.ts.
 context: fork
 background: false
 ---

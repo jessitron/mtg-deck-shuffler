@@ -1,14 +1,14 @@
 ---
 name: shuffler-looks-like-itself-context
 description: >
-  Get background on the Shuffler's visual design language before adding or changing UI.
-  Use when the task touches any Shuffler stylesheet (styles.css, site.css, playmat.css,
-  game.css, prepare.css, deck-selection.css, docs.css, design-candidates.css), the
-  /design gallery, CSS custom properties/tokens, colors, fonts, border-radius, spacing,
-  buttons, focus states, inputs, modals, panels, tiles, or the <head> in
-  views/partials/head.ejs or src/view/common/html-layout.ts — and any time the task is
-  "add a button", "style this", "how should this look", or produces something a player
-  sees.
+  Get background on the fleet's visual design language before adding or changing UI on
+  any ship (Shuffler or Tabletop). Use when the task touches any Shuffler stylesheet
+  (styles.css, site.css, playmat.css, game.css, prepare.css, deck-selection.css,
+  docs.css, design-candidates.css), any Tabletop CSS or tldraw-adjacent UI, the /design
+  gallery, CSS custom properties/tokens, colors, fonts, border-radius, spacing, buttons,
+  focus states, inputs, modals, panels, tiles, or the <head> in views/partials/head.ejs
+  or src/view/common/html-layout.ts — and any time the task is "add a button", "style
+  this", "how should this look", or produces something a player sees.
 context: fork
 background: false
 ---

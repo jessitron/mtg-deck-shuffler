@@ -1,13 +1,16 @@
 ---
 name: shuffler-looks-like-itself
 kind: capability
-scope: shuffler
+scope: fleet
 ---
 
 # The Shuffler looks like itself
 
-**The charge:** when someone adds UI to the Shuffler, the result looks like it was
-always there. New buttons, panels, fields and states adopt the app's existing design
+*(The slug predates the fleet scope. The charge is now fleet-wide: Shuffler and
+Tabletop are one app with two faces, and they should feel like the same app.)*
+
+**The charge:** when someone adds UI anywhere in the fleet, the result looks like it was
+always there. New buttons, panels, fields and states adopt the fleet's existing design
 language instead of importing a foreign one.
 
 This is a **capability**, not a feature. No single screen breaks when it lapses — the
@@ -15,6 +18,38 @@ app just gets a little less like itself, one button at a time, until it reads as
 of widgets from four different design systems. That's the failure mode this owner exists
 to prevent, and it's a slow one: every individual violation looks reasonable in
 isolation.
+
+## Two layers (established 2026-08-06, Jess's call)
+
+**Layer 1 — craft. Fleet-wide, enforceable everywhere, today.** Ship-agnostic rules
+about doing UI *well*, independent of any aesthetic: text has breathing room beneath it;
+things that should align, align; colors and spacing come from tokens, not literals;
+every interactive element has a visible `:focus-visible` state; no raw
+Material/Bootstrap hex ever. These apply to the Tabletop right now, even before it has
+an identity. The mechanically checkable subset is being turned into a script
+(`.scratch/design-lint/issues/01-design-lint-script.md`) — the owner guards the
+judgment-required rest.
+
+**Layer 2 — identity. One identity, shared across ships.** Jess wants the Shuffler and
+Tabletop to *feel like the same app* — not sibling apps with separate faces. The
+identity below ("The design language") was won on the Shuffler and is described from it,
+but it is the fleet's identity: when the Tabletop gets its design pass, it pulls toward
+these same tokens, typefaces, and shapes. Two honest caveats:
+
+- **Some components are ship-specific.** The playmat page-container is the Shuffler's;
+  the tldraw canvas is the Tabletop's. Shared identity ≠ identical screens.
+- **tldraw constrains.** The Tabletop is built on tldraw, which owns much of its own
+  chrome and rendering. Where tldraw limits a rule (fonts inside the canvas, its
+  built-in UI), record the limit here rather than fighting it or silently dropping the
+  rule.
+
+**Promotion path:** rules start where they're proven (usually the Shuffler) and get
+promoted to fleet-wide as the other ships adopt them. When a rule below is
+Shuffler-only, it says so; absence of a marker means it's aspiration for the fleet.
+
+The Tabletop today has hit "can't implement anything else until it has a design
+identity" (Jess, 2026-08-06). Its design pass should start from this identity — tokens
+and typefaces first — not from a blank page, and its findings come back into this KB.
 
 ## Why this owner exists
 
@@ -101,9 +136,13 @@ gradually and looks briefly mixed, rather than the drift replicating forever. So
 "the button next to it is Material orange" is *not* a reason to make yours Material
 orange.
 
-**The gallery is the source of truth for appearance.** [`/design`](../../apps/shuffler/views/design.ejs)
-renders every component using the app's own stylesheets, so it cannot drift from the app.
-Look at it before designing; add to it when you add a component.
+**The gallery is the source of truth for appearance — and for direction.**
+[`/design`](../../apps/shuffler/views/design.ejs) renders every component using the
+app's own stylesheets, so it cannot drift from the app. Look at it before designing; add
+to it when you add a component. Candidates staged there (`design-candidates.css`) are
+the *direction*: when your change touches something a candidate reimagines, pull toward
+the candidate rather than replicating the outgoing treatment. This holds fleet-wide —
+the gallery lives in the Shuffler, but it speaks for the Tabletop too.
 
 **Some things are Jess's to decide.** Where more than one treatment is in use, this owner
 does not pick — it surfaces both on `/design` and waits. Inventing a resolution is worse

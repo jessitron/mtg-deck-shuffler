@@ -1,12 +1,13 @@
 ---
 name: shuffler-looks-like-itself-review
 description: >
-  Review a plan or proposed change for interactions with the Shuffler's visual design
-  language. Use before implementing anything that adds or changes UI — new buttons,
-  panels, modals, inputs, banners, badges, states, or layout; edits to any Shuffler
-  stylesheet (styles.css, site.css, playmat.css, game.css, prepare.css,
-  deck-selection.css, docs.css); new CSS custom properties; changes to the /design
-  gallery; new stylesheets or fonts; or edits to views/partials/head.ejs or
+  Review a plan or proposed change for interactions with the fleet's visual design
+  language. Use before implementing anything that adds or changes UI on ANY ship —
+  Shuffler or Tabletop — new buttons, panels, modals, inputs, banners, badges, states,
+  or layout; edits to any Shuffler stylesheet (styles.css, site.css, playmat.css,
+  game.css, prepare.css, deck-selection.css, docs.css) or any Tabletop CSS or
+  tldraw-adjacent UI; new CSS custom properties; changes to the /design gallery; new
+  stylesheets or fonts; or edits to views/partials/head.ejs or
   src/view/common/html-layout.ts.
 context: fork
 background: false
@@ -14,16 +15,38 @@ background: false
 
 # Review: the Shuffler looks like itself
 
-An agent has a plan. Your job is to catch the ways it would make the Shuffler look less
-like itself — before it's written, when it's cheap.
+An agent has a plan. Your job is to catch the ways it would make the fleet's UI look
+less like itself — before it's written, when it's cheap.
 
-**Load first:** `owners/shuffler-looks-like-itself/interactions.md` and `README.md`.
-Pull in `architecture.md` if the plan touches file organisation or the `<head>`s.
+**Load first:** `owners/shuffler-looks-like-itself/interactions.md` and `README.md`
+(especially its "Two layers" section — Layer 1 craft is fleet-wide; Layer 2 identity is
+shared across ships but described from the Shuffler). Pull in `architecture.md` if the
+plan touches file organisation or the `<head>`s.
 
-## Checklist
+## Layer 1 — craft (EVERY ship, including the Tabletop, no exceptions)
+
+These are ship-agnostic. A plan on the Tabletop doesn't escape them just because the
+Tabletop has no settled identity yet.
+
+- [ ] **Breathing room:** does text have space beneath it? Cramped line-height,
+      zero-margin headings, and labels touching their borders are all rejections.
+- [ ] **Alignment:** do things that should line up actually line up (labels with
+      fields, buttons in a row, edges of stacked panels)? "Roughly" is a no.
+- [ ] **Tokens:** every color and (where tokens exist) spacing value comes from a
+      `var(--…)`, not a literal. On the Tabletop, use the Shuffler's tokens from
+      `styles.css :root` as the palette of record — copy the *token*, not a hex.
+- [ ] **Focus:** every new interactive element has a visible `:focus-visible` state.
+- [ ] **Show me, don't tell me:** if the change is visual, the review wants a rendered
+      screenshot (Playwright) — CSS text can't prove that text breathes or aligns.
+- [ ] **tldraw limits:** if tldraw genuinely prevents a rule (canvas-internal fonts,
+      its own chrome), say so explicitly and note it for the KB — don't silently drop
+      the rule, and don't fight the library.
+
+## Layer 2 — identity checklist
 
 Work through these against the actual plan. Skip what genuinely doesn't apply; say what
-you skipped.
+you skipped. These are written from the Shuffler's files; on the Tabletop, apply the
+*rule* (tokens, typefaces, square chrome) even where the named file doesn't.
 
 **Color**
 
