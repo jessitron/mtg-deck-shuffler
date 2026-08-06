@@ -28,34 +28,34 @@ pointer, and sweep it to `## Done`.
 Folded up from `apps/tabletop/notes/todo.md` (2026-08-06), Jess's wording preserved as the quote.
 None of these are in Linear — they postdate the 2026-08-01 promotion.
 
-- [ ] `deck-title-placement` Move the deck title out of the command zone on the game screen  ← mountain: The Tabletop replaces Mural
+- [ ] `deck-title-placement` Move the deck title out of the command zone on the game screen  ← mountain: tabletop-replaces-mural
   - > on the game screen, let's move the title of the deck out of the command zone; put it above
     > the table button(s), top-aligned with the hamburger menu.
 
-- [ ] `playmat-command-zone` Redraw the player area to include the command zone  ← mountain: The Tabletop replaces Mural
+- [ ] `playmat-command-zone` Redraw the player area to include the command zone  ← mountain: tabletop-replaces-mural
   - > the Tabletop drawing needs to change: I forgot the command zone. Move exile down to replace
     > the bottom third of the Graveyard, instead.
   - Touches `apps/tabletop/DESIGN.md` and `src/server/tableFurniture.ts` — the design doc is the
     spec for the player area, so change it first.
 
-- [ ] `seat-label-deck-name` Show the deck name with the player name above the playmat  ← mountain: The Tabletop replaces Mural
+- [ ] `seat-label-deck-name` Show the deck name with the player name above the playmat  ← mountain: tabletop-replaces-mural
   - > have the player name include the deck name, above the playmat on the Tabletop
 
-- [ ] `commander-in-command-zone` Place the commander in the command zone when the Tabletop loads  ← mountain: The Tabletop replaces Mural
+- [ ] `commander-in-command-zone` Place the commander in the command zone when the Tabletop loads  ← mountain: tabletop-replaces-mural
   - > When the Tabletop loads, have the commander appear in the command zone. Also place a
     > transparent version of the commander in its spot, one that doesn't move when they play the
     > commander.
   - The ghost copy is the interesting half: it marks *where the commander lives* so the zone still
     reads as the commander's home once the real card is out on the table.
 
-- [ ] `no-doubleclick-crop` Turn off the crop tool on double-clicking a card  ← mountain: The Tabletop replaces Mural
+- [ ] `no-doubleclick-crop` Turn off the crop tool on double-clicking a card  ← mountain: tabletop-replaces-mural
   - > On the Tabletop, double-clicking a card brings up something useless, a weird cropping thing.
     > Turn that off.
   - Adjacent to JES-144 (remove crop/download from the card *context menu*) but distinct — that's
     the menu, this is the double-click gesture. Both want the custom card `ShapeUtil` that JES-149
     needs anyway.
 
-- [ ] `animate-tap` Animate tapping a card  ← mountain: The Tabletop replaces Mural
+- [ ] `animate-tap` Animate tapping a card  ← mountain: tabletop-replaces-mural
   - > Can we animate tapping the card?
   - Rides on the same custom card shape as rotation (JES-143/JES-144). Consult the `animations`
     owner — the Shuffler already has a card-movement animation vocabulary worth matching.
