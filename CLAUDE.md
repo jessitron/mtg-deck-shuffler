@@ -20,6 +20,11 @@ commands, and gotchas — read it when working on that ship.
 - **Done work leaves no trace.** Don't keep `## Done` sections, tombstones, or "decided
   not to do this because…" lines in `TODO.md`. Delete the line; git remembers. Records of
   finished work are a wall between Jess and the live work.
+- **Every skill run ends with "here's how to keep going."** The pocock skills (and others)
+  finish without saying what comes next, which strands Jess mid-pipeline. Whenever a skill
+  completes, close your message with the concrete next command or action — "now run
+  `/to-tickets` on that spec", "say 'do ticket 01' to start it" — so the thread never dies
+  at a skill boundary.
 
 ## Seamap
 
@@ -39,6 +44,12 @@ Work lives in three places, and only the last one varies per repo:
   and the seamap skills; **read it, never write it.**
 
 An inbox item becomes real work via `/triage`, or `/to-spec` + `/to-tickets`; delete the line from TODO.md.
+
+**Size threshold — the spec→tickets pipeline is a freight crane, not a grocery bag.**
+Work that fits in one sitting goes: TODO.md line → do it → delete the line. No spec, no
+ticket, no ceremony. Only genuinely multi-session features (dependency-ordered work,
+survives across computers) earn `/to-spec` + `/to-tickets`. When in doubt, skip the
+tracker; if the work turns out bigger than a sitting, promote it then.
 
 **There is no external tracker.** `SEAMAP.md`, `TODO.md` and `.scratch/` are the whole system —
 a file round-trip beats an API call, and git carries the state between Jess's computers. If a
