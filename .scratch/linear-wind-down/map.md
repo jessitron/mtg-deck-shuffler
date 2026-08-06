@@ -52,13 +52,16 @@ What happens *inside* Linear is not part of this — see Out of scope.
   Linear bodies. `← mountain:` only for the active Mountain; no priority, no Linear URL. Active-
   Mountain survivors to `## Next`, the rest to `## Backlog`. Survivors overlapping the four existing
   inbox items merge into those lines rather than sitting beside them.
+- [Keep/kill: tabletop-custom-card-shape](issues/06-cluster-tabletop-custom-card-shape.md) — **written
+  into `TODO.md` § Next, three lines.** JES-149 is a new line, `tabletop-card-shape`, the spike
+  everything else waits on. JES-144 split in half — rotate into `animate-tap`, menu curation and
+  MDFC flip into `no-doubleclick-crop`. JES-143 killed as superseded, its real-user provenance moved
+  onto `animate-tap`. JES-132 deferred to [ticket 12](issues/12-cluster-shuffler-look-and-feel.md)
+  so both halves of the sleeves idea are called at once. Jess delegated the keep/kill judgment to
+  the agent here: *"I don't care, what will help you get it done?"*
 
 ## Not yet specified
 
-- **Writing the survivors into `TODO.md`.** A task ticket. The format half is now settled by
-  [ticket 02](issues/02-inbox-line-format.md); still waiting on at least one cluster being
-  decided. Probably one write per cluster, so the inbox becomes usable incrementally rather than
-  in one big-bang commit at the end.
 - **What happens to this map's own working files.** The cluster tickets 06–12 carry `JES-` ids
   inline on purpose, so they stay walkable once the archive is gone — which means `JES-` survives
   in `.scratch/linear-wind-down/` even after `TODO.md` is clean. Whether the destination's "nothing

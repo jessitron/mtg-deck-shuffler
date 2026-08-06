@@ -21,8 +21,16 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-Folded up from `apps/tabletop/notes/todo.md` (2026-08-06), Jess's wording preserved as the quote.
-None of these are in Linear — they postdate the 2026-08-01 promotion.
+- [ ] `tabletop-card-shape` Give Tabletop cards a custom `ShapeUtil` that reports zone entry  ← mountain: tabletop-replaces-mural  ← was: JES-149
+  - > "card was dragged into the graveyard" / "card was dragged from here to here" are essential
+    > game events — not cosmetic, core to whether this architecture works at all.
+  - **The keystone.** Cards and zones are stock tldraw `image`/`geo` records today
+    (`src/server/cardArrival.ts`, `tableFurniture.ts`), rendered by a bare `<Tldraw store={...}>`
+    in `TablePage.tsx` with no `shapeUtils` registered — so no hook fires. Confirmed present in
+    `tldraw@5.2.5`: `onDragShapesOver`/`onDropShapesOver` on the *target* (how tldraw's own frame
+    shape reparents), `onTranslateEnd` on the mover.
+  - Do this **first**. `no-doubleclick-crop` and `animate-tap` both want this same custom shape,
+    and the persistence work waits on having named domain events instead of raw sync-protocol diffs.
 
 - [ ] `deck-title-placement` Move the deck title out of the command zone on the game screen  ← mountain: tabletop-replaces-mural
   - > on the game screen, let's move the title of the deck out of the command zone; put it above
@@ -44,16 +52,22 @@ None of these are in Linear — they postdate the 2026-08-01 promotion.
   - The ghost copy is the interesting half: it marks *where the commander lives* so the zone still
     reads as the commander's home once the real card is out on the table.
 
-- [ ] `no-doubleclick-crop` Turn off the crop tool on double-clicking a card  ← mountain: tabletop-replaces-mural
+- [ ] `no-doubleclick-crop` Curate the card's menus — kill crop, add rotate  ← mountain: tabletop-replaces-mural  ← was: JES-144
   - > On the Tabletop, double-clicking a card brings up something useless, a weird cropping thing.
     > Turn that off.
-  - Adjacent to JES-144 (remove crop/download from the card *context menu*) but distinct — that's
-    the menu, this is the double-click gesture. Both want the custom card `ShapeUtil` that JES-149
-    needs anyway.
+  - Two surfaces, one job: the double-click gesture (above) and the popup menu — drop "crop" and
+    "download", keep "alt" and "replace media", add "rotate". Also a way to flip MDFC cards, ideally
+    from the same submenu.
+  - Cosmetic; rides on `tabletop-card-shape`. Don't build the shape for this.
 
-- [ ] `animate-tap` Animate tapping a card  ← mountain: tabletop-replaces-mural
+- [ ] `animate-tap` Rotate a card 90° to tap it, and animate it  ← mountain: tabletop-replaces-mural  ← was: JES-144, JES-143
   - > Can we animate tapping the card?
-  - Rides on the same custom card shape as rotation (JES-143/JES-144). Consult the `animations`
-    owner — the Shuffler already has a card-movement animation vocabulary worth matching.
+  - > We must be able to rotate cards. Ideally, clicking on a card turns it 90 degrees.
+  - **Rotation is the essential half** — real players hit this. Jess's college kid and their
+    friends (2026-08-01) wanted to tap lands for mana and turn creatures sideways for summoning
+    sickness; without it they track tapped state out-of-band, which defeats a shared visual table.
+  - `onRotateStart`/`onRotate`/`onRotateEnd` are real hooks in `tldraw@5.2.5`, on the same custom
+    shape `tabletop-card-shape` builds. Consult the `animations` owner — the Shuffler already has a
+    card-movement animation vocabulary worth matching.
 
 ## Backlog
