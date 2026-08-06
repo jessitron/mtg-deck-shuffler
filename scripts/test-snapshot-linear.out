@@ -1,0 +1,75 @@
+=== run against the fake API ===
+page 1: 2 issues
+page 2: 1 issues
+Wrote 3 issues to /var/folders/v3/gj9sh6kd7x3fxxnpm7bfyx_r0000gn/T/tmp.2oqCcsDZ6B/archive.md
+exit=0
+
+=== generated archive ===
+# Linear archive — MTG Deck Shuffler
+
+Point-in-time snapshot of every issue in [MTG Deck Shuffler](https://linear.app/honeycombio/project/fake), taken 2026-08-06 by `scripts/snapshot-linear.sh`.
+
+This is an **archive, not a tracker** — nothing here is live and nothing here is worked.
+It exists so the content survives archiving the Linear project, greppable offline and on
+every machine. Live work is in `TODO.md` (inbox) and the tracker named in `SEAMAP.md`.
+
+3 issues.
+
+---
+
+## JES-149 — Card zone-entry events
+
+- **URL:** https://linear.app/honeycombio/issue/JES-149
+- **State:** Todo (unstarted)
+- **Milestone:** The Tabletop replaces Mural
+- **Priority:** High
+- **Labels:** tabletop
+- **Created:** 2026-07-01
+
+Body text.
+
+Second paragraph.
+
+---
+
+## JES-144 — Rotate cards
+
+- **URL:** https://linear.app/honeycombio/issue/JES-144
+- **State:** Todo (unstarted)
+- **Milestone:** The Tabletop replaces Mural
+- **Priority:** High
+- **Labels:** tabletop
+- **Relations:** blocks → JES-145, inverse blocks ← JES-140
+- **Created:** 2026-07-01
+
+Body text.
+
+Second paragraph.
+
+---
+
+## JES-151 — Persistence
+
+- **URL:** https://linear.app/honeycombio/issue/JES-151
+- **State:** Done (completed)
+- **Created:** 2026-07-01
+- **Completed:** 2026-07-20
+
+_No description._
+
+---
+
+
+=== assertions ===
+PASS  paginated: page-2 issue present
+PASS  page-1 issue present
+PASS  issue count is 3
+PASS  milestone rendered
+PASS  relations rendered
+PASS  inverse relations rendered
+PASS  completed date rendered
+PASS  empty description handled
+PASS  absent milestone omitted, not 'null'
+PASS  empty priority omitted
+
+ALL PASS
