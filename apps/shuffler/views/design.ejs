@@ -506,14 +506,8 @@
         </p>
         <p class="section-note">
           <strong>Tab into both stages below.</strong> The gap the offset opens shows the
-          <em>page</em> behind the control, not the control's own fill, which is what keeps the
-          ring legible against the CTA's light-pink border. Light-pink measures about
-          <strong>10.9:1</strong> on the site pages' dark gradient and only about
-          <strong>1.35:1</strong> on white — so the white stage is the honest one, and the
-          surface to watch is <code>.modal-dialog</code>, which is flat white. If the ring ever
-          needs help there, the fix is a hairline <code>--deep-space</code> companion, not a
-          different color — but note that a halo can only be drawn with
-          <code>box-shadow</code>, which would erase the press bevel on every focused button.
+          <em>page</em> behind the control, not the control's own fill — which is what keeps the
+          ring legible even against the CTA's own light-pink border.
         </p>
 
         <div class="options">
@@ -534,11 +528,50 @@
             </div>
             <div class="option-where">styles.css — same rule, ~1.35:1 against white</div>
             <div class="option-note">
-              This is the surface to check first when something looks wrong, and the reason the
-              modal interior is worth tabbing through.
+              This is the surface to check first when something looks wrong. See the known
+              limitation below.
             </div>
           </div>
         </div>
+
+        <h3>Known limitation: the ring is weak on white
+          <span class="badge badge-drift">unresolved</span>
+        </h3>
+        <p class="section-note">
+          Light-pink was chosen for the dark grounds that make up most of the app, and there it is
+          excellent. On the app's <strong>flat-white</strong> surfaces it falls below
+          <a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html">WCAG 2.2
+          SC 1.4.11</a>, which asks for <strong>3:1</strong> for a focus indicator. This is a
+          known, recorded gap — <strong>not</strong> a licence to add a local override.
+        </p>
+        <table class="gallery-table">
+          <thead><tr><th>Ground</th><th>Where</th><th>Ring contrast</th><th>vs 3:1</th></tr></thead>
+          <tbody>
+            <tr><td>Dark purple gradient</td><td><code>site.css</code> — <code>/</code>, <code>/choose-any-deck</code></td><td>~10.9:1</td><td>passes comfortably</td></tr>
+            <tr><td>Playmat / page-container art</td><td><code>playmat.css</code>, <code>game.css</code></td><td>varies with the art</td><td>unmeasured — pale passages are the risk</td></tr>
+            <tr><td><strong>Flat white</strong></td><td><code>.modal-dialog</code>, <code>docs.css</code>, <code>.button-base:disabled</code></td><td><strong>~1.35:1</strong></td><td><strong>fails</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="section-note">
+          <strong>Why it is still open.</strong> The sanctioned fix is a hairline
+          <code>--deep-space</code> companion behind the ring — not a different color. But a halo
+          can only be drawn with <code>box-shadow</code>, and <code>box-shadow</code> does not
+          accumulate across rules: adding one would <em>erase</em> the two-layer press bevel that
+          every button gets from <code>.pushable-flat</code> (see <a href="#buttons">Buttons</a>).
+          A pseudo-element is no escape either, because an <code>&lt;input&gt;</code> cannot have
+          one. So the real fix means re-declaring the bevel inside <code>:focus-visible</code> for
+          both <code>.pushable-flat</code> and <code>.pushable-flat.pushable-dark</code>. That is
+          a decision with a cost, so it waits for Jess rather than being patched in locally.
+        </p>
+        <p class="section-note">
+          <strong>And it cannot be judged yet.</strong> The white surface that matters most is the
+          modal interior — but the modals manage no focus at all: opening one leaves focus on the
+          button behind the overlay, and Tab walks the page underneath instead of staying inside.
+          Fix that first, then tab into a modal and decide whether the ring on white is really a
+          problem in practice. Tracked in <code>TODO.md</code> as
+          <code>modals-are-not-modal</code>, <code>focus-ring-manual-tabthrough</code> and
+          <code>focus-ring-on-white-decision</code>.
+        </p>
       </section>
 
       <!-- ================================================================ -->
@@ -757,7 +790,7 @@
           <li><strong>Never write a raw hex.</strong> Use a named token. If no token fits, that's a design decision — ask, don't invent. Material and Bootstrap defaults are especially forbidden: they're how the drift got here.</li>
           <li><strong>Square corners on chrome.</strong> Round corners belong only to physical objects: cards, the playmat, the page-container, count discs.</li>
           <li><strong>Orbitron for chrome, Ovo for content.</strong> Card names are content. No fourth typeface.</li>
-          <li><strong>Every interactive element gets a visible focus state</strong> — and it's already written for you: one global <code>:focus-visible</code> rule in <code>styles.css</code> draws <code>3px solid var(--light-pink)</code> at <code>outline-offset: 3px</code> on every <code>a</code>, <code>button</code>, <code>input</code>, <code>select</code>, <code>textarea</code>, <code>summary</code> and <code>[tabindex]</code>. Don't add a per-component focus rule, and never write <code>outline: none</code>. See <a href="#focus">Focus states</a>.</li>
+          <li><strong>Every interactive element gets a visible focus state</strong> — and it's already written for you: one global <code>:focus-visible</code> rule in <code>styles.css</code> draws <code>3px solid var(--light-pink)</code> at <code>outline-offset: 3px</code> on every <code>a</code>, <code>button</code>, <code>input</code>, <code>select</code>, <code>textarea</code>, <code>summary</code> and <code>[tabindex]</code>. Don't add a per-component focus rule, and never write <code>outline: none</code>. <strong>Known gap:</strong> the ring is only ~1.35:1 on flat-white surfaces, below WCAG's 3:1 — recorded and waiting on a decision, so don't "fix" it locally. See <a href="#focus">Focus states</a>.</li>
           <li><strong>The card is 200px wide.</strong> Size adjacent layout off that, not off arbitrary values.</li>
           <li><strong>Respect the z-index ladder:</strong> content 1–3, menu panel 500, <code>.modal-overlay</code> 1000, <code>.card-modal-overlay</code> 2000, its close button 2001.</li>
           <li><strong>Know which file owns the component.</strong> <code>playmat.css</code> is shared by game and prepare; <code>game.css</code> and <code>prepare.css</code> are page-specific; <code>site.css</code> is the marketing pages; <code>styles.css</code> holds the tokens. The modal, flip, and library-list blocks are currently duplicated — fix the duplication rather than editing one copy.</li>

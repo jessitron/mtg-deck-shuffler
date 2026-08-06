@@ -299,3 +299,29 @@ section is just a wall between Jess and the live work.
     `playmat.css:173-176` inward-offset companion rule that exists only to serve it, and the app
     stops having a keyboard stop on a whole-viewport div.
   - Not done during choice 5 because it's four files of modal behaviour, not a CSS change.
+  - **Read `modals-are-not-modal` below first — it probably answers this.** That attribute looks
+    like the fossil of a focus trap nobody finished, so the answer is likely "build the trap"
+    rather than "delete the attribute".
+
+- [ ] `modals-are-not-modal` The modals do not manage focus at all (Jess found this 2026-08-06)
+  - Jess, tabbing the app: *"the Library Content box doesn't even work for focus flow. It's a
+    modal and the things behind it get focus. It's a mess."* Confirmed by reading every
+    non-vendor JS file and all three modal templates. There is no focus management **anywhere**:
+    - nothing calls `.focus()`, so opening a modal never moves focus into it — focus stays on
+      the button now hidden behind the overlay;
+    - nothing sets `inert` or `aria-hidden` on the background, so Tab walks the page underneath;
+    - no `role="dialog"`, no `aria-modal="true"` (the only `aria` in the templates is `role="img"`
+      on card-type icons), so a screen reader is never told a dialog opened;
+    - nothing restores focus to the opener when the modal closes.
+  - `game.js:311` *looks* like it participates but doesn't: it tests whether `.modal-overlay`
+    exists in the DOM before letting Ctrl-Z through. Its comment says "while a modal is focused",
+    which is not what it checks. Fix that comment whenever this is touched.
+  - Not caused by choice 5 — but choice 5 is why it's visible. With no focus rings, focus
+    wandering behind an overlay was unobservable. The ring surfaced it on day one.
+  - **Blocks `focus-ring-manual-tabthrough` and `focus-ring-on-white-decision`**: you cannot
+    judge whether the ring is visible inside the white modal interior while Tab refuses to stay
+    inside the modal. Do this first, then re-run the tab-through.
+  - Sites: `views/partials/library-modal.ejs`, `views/partials/card-modal.ejs`,
+    `src/view/play-game/game-modals.ts`, `src/view/play-game/history-components.ts`. All four are
+    HTMX-swapped fragments, so whatever moves focus has to run on swap (`htmx:afterSwap`), not on
+    page load — and closing is also an HTMX swap, so focus restore hooks the same place.
