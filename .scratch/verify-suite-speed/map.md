@@ -115,3 +115,6 @@ ticket 11.
   visit](issues/05-deck-chooser-ships-191-images.md) — ruled out of scope 2026-08-07 once ticket
   03's decision 1 (seed via API) removed 41 of 42 `/choose-any-deck` navigations from the suite.
   A real problem for real players, just not a test-speed one anymore; moved to `TODO.md`.
+- [Route card images through the backend instead of straight to Scryfall](issues/11-route-card-images-through-the-backend.md)
+  — ruled out of scope 2026-08-07. Jess wants the change, just not as part of this effort right
+  now; moved to `TODO.md` as `card-images-through-backend`.
