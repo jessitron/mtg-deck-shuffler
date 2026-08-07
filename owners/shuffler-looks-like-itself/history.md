@@ -408,6 +408,27 @@ and "don't add a third." There are **four** — `styles.css`, `docs.css`, `game.
 (`--playmat-*`) and `playmat.css` (`--mana-*`). The rule was right, the count was two years
 of drift out of date.
 
+## 2026-08-07 — the Mulligan button stopped being an unstyled browser button
+
+The Mulligan button (`hand-components.ts` → `formatMulliganButtonHtmlFragment`,
+`.mulligan-button`) had no fill, no font, no press physics — plain browser-button drift, the
+same failure mode this owner exists to name and stop. Jess's call: it's secondary, not a CTA
+— a routine, repeated in-game action, not the one thing that matters most on the screen.
+
+Implemented by adding `pushable-flat pushable-dark pushable-small` alongside the existing
+`.mulligan-button` class (kept only as a test hook), reusing the **exact** classes already on
+`active-game-page.ts`'s `.table-cards-button` ("3 Cards on table") rather than writing any
+bespoke CSS. `game.css`'s now-redundant `.mulligan-button` rule (`padding`, `font-weight`,
+`cursor`) was deleted — fully subsumed by `.pushable-flat`/`.pushable-small`. A specimen went
+onto `/design` right next to the table-cards-button specimen it copies.
+
+**Why this didn't need a choice or a new candidate.** Choice 2 (secondary-button gray) and
+choice 1 (press physics) are both already decided and both already have a live precedent
+(`.table-cards-button`) doing exactly this job. Applying a settled pattern to a newly-noticed
+unstyled button is convergence, not a new decision — nothing to stage, nothing to ask. No
+border-radius or focus CSS was added; neither exists on the reused classes, and that's
+consistent, not an oversight.
+
 ## 2026-08-07 — the playmat converged: one appearance, two scales
 
 `a4991f3` **Harden the playmat: one appearance, two scales**
@@ -777,3 +798,66 @@ the other, and a museum set in a foreign typeface would look unlike the fleet it
 Both ships' `verify-fleet-tokens.spec.ts` assert the four new tokens resolve. The Tabletop's copy
 matters most: nothing there sets a font yet, so a broken import would otherwise be invisible until
 ticket 11.
+
+## 2026-08-07 — Jess shipped two appearance commits directly, outside `/design`
+
+`f42a99a` **Jess does some CSS updates to get the prep screen looking like she wants it**, then
+`63d4c08` **Jess updates appearance**. Neither went through the `/design` → stage → decide →
+implement process this owner normally mediates. Recorded here as facts that happened, brought back
+into sync by this `-update` pass — not as resolved choices, because nothing was staged or asked.
+
+**The last chunky 3D border is gone.** `.cool-command-zone-surround` (`playmat.css`) went from
+`5px outset black` with a diagonal black/gray gradient fill to `3px solid black` +
+`var(--light-pink)` — the exact border and fill `.game-title` already used. Jess: *"I simplified
+the command zone and made it match the deck title."* This is the site [choice 7](open-choices.md#7-deck-title-plaque-border--decided-2026-08-07-shipped)'s
+writeup had explicitly flagged as load-bearing — "the surround keeps its `outset`, so the chunky
+3D-border language still has a home... it is the only one left" — and had deferred removing as
+Jess's call, not a cleanup (see open-choices.md → "Deferred by Jess"). She made that call herself,
+by direct edit, the same day choice 7 shipped. Grepping `outset`/`inset`/`groove` (as a border
+style) across `playmat.css`, `game.css` and `prepare.css` now returns nothing but stale comments —
+the vocabulary this owner had been protecting for months is retired.
+
+**The commander card lost its own frame inside the surround.** `.cool-command-zone-surround
+.multiple-cards` went from a bordered, backgrounded, fixed-height box (`border-width: 7px;
+border-style: inset; background-color: var(--light-pink); height: calc(278px + 7px*2)`) to bare
+flex layout with none of that — the card floats directly in the surround now, sized by its own
+content. A new companion rule, `.cool-command-zone-surround .mtg-card-image { box-shadow: none;
+}`, suppresses the card's usual drop shadow specifically inside the surround, so it doesn't
+compete with the frame's own edge.
+
+**The load-order hazard this owner and the animations owner had both flagged twice is resolved —
+as a side effect, not the point.** `html-layout.ts`'s `formatHtmlHead()` swapped from `game.css`
+then `playmat.css` to `playmat.css` then `game.css`, matching `/prepare`'s order. Neither commit
+message mentions load order; the diff is adjacent to the command-zone/plaque styling and reads
+like an incidental reorder. Effect: both play pages now resolve a `.playmat`/`.playmat-*` cascade
+tie the same way (the page modifier wins), where they used to resolve it in opposite directions.
+The `CAREFUL` comment that used to sit above the bare `.playmat` rule explaining the old hazard
+was deleted in the same edit — correctly, since the hazard it warned about no longer exists. Full
+detail in [architecture.md](architecture.md) and [interactions.md](interactions.md).
+
+**A numeric coupling this owner had documented broke again, and only half of it was caught.**
+`f42a99a` renamed `prepare.css`'s `.section-that-is-horizontally-aligned-with-command-zone` to
+`.prepare-container .library-section` and deleted its `margin-top: 22px` outright, with no
+replacement — `/prepare`'s library stack now has no vertical-alignment offset against the
+commander card at all. `game.css`'s copy (`padding-top: 22px`, with a comment computing 22px from
+5px surround border + 10px surround padding + 7px `.multiple-cards` inset) was not touched by
+either commit — but `63d4c08`, right after, changed every number that 22px depends on (surround
+border 5px → 3px, `.multiple-cards`'s border/inset removed entirely). `game.css`'s comment and
+value are now stale, describing arithmetic that doesn't match any real dimension on the page
+anymore. **Not fixed as part of this KB sync** — flagged as a likely visual regression on `/game`
+worth Jess's attention; it's a CSS/behavior question, not a documentation one.
+
+**Other placement changes in `f42a99a` (prepare only, pure layout, no appearance rule changed):**
+the deck-title plaque moved from centered spanning the full grid row (`grid-column: 1 / -1;
+justify-self: center`) to starting in column 2 with `justify-self: start` and a new
+`margin-bottom: 20px`; the command-zone surround's `justify-self` went `center` → `start`
+(matching the plaque); and `.shuffle-up-section`'s `justify-content` flipped `start` → `end`.
+Several explanatory comments in `prepare.css` — the column-swap and row-choice reasoning, the
+22px derivation — were deleted along with the rules they annotated rather than being preserved
+elsewhere; the "why" for those choices no longer lives anywhere in the codebase, only in this
+entry now.
+
+**Deliberately not treated as choices, and not retroactively staged.** This owner's usual practice
+is "stage it, don't argue it" — build the candidate, put both options on `/design`, ask Jess. That
+didn't happen here; Jess decided and shipped directly. The KB records the outcome as fact rather
+than inventing a `.choice` block after the fact for a decision that's already made and shipped.

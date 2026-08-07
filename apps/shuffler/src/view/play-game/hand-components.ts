@@ -43,7 +43,7 @@ function formatMulliganButtonHtmlFragment(game: GameState): string {
   const label = count === 0 ? "Mulligan" : `Mulligan #${count + 1}`;
 
   return `<div class="mulligan-row">
-          <button class="mulligan-button"
+          <button class="mulligan-button pushable-flat pushable-dark pushable-small"
                   hx-post="/mulligan/${game.gameId}"
                   hx-vals='{"expected-version": ${game.getStateVersion()}}'
                   hx-target="#game-container"

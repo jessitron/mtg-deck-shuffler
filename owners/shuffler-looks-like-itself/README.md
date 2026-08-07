@@ -177,18 +177,22 @@ and slabs, `--cute-heading-color` (#9134d2), `--narrow-border` (3px), the closed
   (`.scratch/shuffler-design-choices/issues/04-radius-sweep.md`), and those values are still
   drift, not precedent. A comment in `tokens.css` says so.
 
-**Chunky physical controls — down to a single site.** `outset` / `inset` / `groove`
-borders survive in **exactly one place** in the app: `.cool-command-zone-surround`'s
-`5px outset black` metal frame (`playmat.css`). It is the last of them. The deck-title
-plaque was the other, and gave up its `groove` on 2026-08-07 (choice 7) once it left the
-surround and had nothing left to join to — it is now `3px solid black`. **Know what that
-makes the surround:** any future change to it isn't trimming one instance of a language,
-it's deciding whether the app still speaks that language at all. That's Jess's call, not a
-cleanup — see [open-choices.md](open-choices.md) → "Deferred by Jess". Button
-press feedback moved to the box-shadow bevel described below (`shuffler-design-choices` choice 1) — no
-more `outset → inset` border switch anywhere. The Big Fat CTA (below) still carries a
-visible `10px solid` light-pink border — it just doesn't switch to `inset` on press
-anymore.
+**Chunky physical controls — the language is retired (2026-08-07, Jess's direct edit,
+`63d4c08`).** `outset` / `inset` / `groove` borders no longer survive anywhere in the app.
+The deck-title plaque gave up its `groove` first (choice 7, staged on `/design` and decided
+by Jess) once it left the command-zone surround and had nothing left to join to — it became
+`3px solid black`. The surround itself — `.cool-command-zone-surround` in `playmat.css` —
+then followed on the same day, but **not through `/design`**: Jess edited the CSS directly,
+changing its `5px outset black` frame and diagonal gradient fill to the exact same
+`3px solid black` border and `var(--light-pink)` fill as the plaque, unifying the two.
+That was the last surviving 3D-border site (see [open-choices.md](open-choices.md) →
+"Deferred by Jess" — a prior entry there had flagged this exact change as "ending the
+language, not thinning it" and deferred it as Jess's call to make). She made it, directly,
+outside the choice-staging process this owner normally uses — recorded here as a fact, not
+a resolved choice. Button press feedback moved to the box-shadow bevel described below
+(`shuffler-design-choices` choice 1) — no more `outset → inset` border switch anywhere. The
+Big Fat CTA (below) still carries a visible `10px solid` light-pink border — it just doesn't
+switch to `inset` on press anymore.
 
 **Lift on hover, press on click — one canonical shape (decided 2026-08-02, `shuffler-design-choices`
 choice 1).** `.pushable-flat` in `apps/shuffler/public/styles.css`: `translateY(-4px)`
@@ -287,18 +291,28 @@ anywhere, it's stale. Three things follow:
   — the grid parent — not relative to one page's dressing of it. Appearance goes in the
   shared rule or under the modifier; placement keys off the bare class.
 
-**Load-order hazard on the mat — flagged by two owners.** `.playmat`, `.playmat-game` and
-`.playmat-prepare` are all one class of specificity, and the two pages load their sheets in
-*opposite* order (`/game`: `game.css` then `playmat.css`; `/prepare`: `playmat.css` then
-`prepare.css`). So a property added to the bare rule silently **overrides** `.playmat-game`
-on `/game` but **loses** to `.playmat-prepare` on `/prepare`. Keep each property in the
-shared rule or in a modifier — never both. There's a `CAREFUL` comment on the rule saying so.
+**Load-order hazard on the mat — RESOLVED 2026-08-07, incidentally, by Jess's own edit
+(`63d4c08`).** `.playmat`, `.playmat-game` and `.playmat-prepare` are all one class of
+specificity, and the two pages used to load their sheets in *opposite* order (`/game`:
+`game.css` then `playmat.css`; `/prepare`: `playmat.css` then `prepare.css`), so a property
+added to the bare rule silently overrode `.playmat-game` on `/game` but lost to
+`.playmat-prepare` on `/prepare`. `html-layout.ts`'s `formatHtmlHead()` now loads
+`playmat.css` **before** `game.css` (it used to be the other way round) — matching
+`/prepare`'s order (`prepare.ejs`'s `additionalStyles` is still `['/playmat.css',
+'/prepare.css']`, unchanged). **Both pages now load the bare `.playmat` rule before their
+own modifier**, so a property added to the bare rule is overridden by the modifier on
+*both* pages, the same way, every time. The trap this paragraph used to warn about is gone.
+**This was a side effect, not the point of the commit** ("Jess updates appearance" doesn't
+mention load order), and the `CAREFUL` comment that used to sit above `.playmat` explaining
+the hazard was deleted in the same edit — correctly, since the hazard it described no longer
+exists. Still keep each shared-mat property in the shared rule or in a modifier, never
+both — that discipline is good hygiene regardless of load order.
 
 **`black` as a keyword is the play pages' frame color.** The mats' `10px solid black`,
-`.game-title`'s `3px solid black`, and `.cool-command-zone-surround`'s `5px outset black`
-all use the CSS keyword; no black token exists in `styles.css` `:root`. That's a real, if
-untokenised, part of the language — don't substitute `--deep-space` for it, and don't
-introduce a near-black hex.
+`.game-title`'s `3px solid black`, and (as of 2026-08-07) `.cool-command-zone-surround`'s
+own `3px solid black` all use the CSS keyword; no black token exists in `styles.css`
+`:root`. That's a real, if untokenised, part of the language — don't substitute
+`--deep-space` for it, and don't introduce a near-black hex.
 
 **Appearance in the shared sheet, placement in the page sheet (established 2026-08-07 by
 the deck-title plaque).** A component that appears on both play pages declares its *looks*

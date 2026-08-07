@@ -320,10 +320,19 @@ on the mat, did it still want one?
 with your option B, the black border. That looks great in /design."* Landed in `20b83aa`.
 
 Reasoning: the groove was the plaque's **join** to the metal command-zone surround, and out
-on the mat it has nothing to join to. The surround keeps its `5px outset black`, so the
-chunky 3D-border language still has a home — it is just down to one site instead of two.
-That cost was argued explicitly before the decision (halving the surviving vocabulary is a
-real loss of identity, not a cleanup) and Jess took it anyway, by eye.
+on the mat it has nothing to join to. At the time, the surround kept its `5px outset
+black`, so the chunky 3D-border language still had a home — it was down to one site instead
+of two. That cost was argued explicitly before the decision (halving the surviving
+vocabulary is a real loss of identity, not a cleanup) and Jess took it anyway, by eye.
+
+**Update, same day (`63d4c08`): the last site went too, and not through this process.**
+Jess edited `.cool-command-zone-surround` directly — `5px outset black` and its diagonal
+gradient fill became `3px solid black` + `var(--light-pink)`, the exact same border and
+fill as `.game-title`. She said: *"I simplified the command zone and made it match the
+deck title."* The chunky `outset`/`inset`/`groove` vocabulary this choice's writeup treated
+as "the last one, load-bearing, don't remove without asking" is now retired entirely. This
+wasn't staged on `/design` or asked about — it's recorded here as a fact that happened, not
+as an eighth choice.
 
 **How it was decided, and this is the reusable part.** The owner's `-review` pass on the
 plaque *move* **blocked** the flat border: Jess had approved a placement change, and an
@@ -362,11 +371,16 @@ unbidden either.
   6 (it's option B's input). Jess deferred it explicitly. **It will look worse before it
   looks better — that's expected, not a regression to patch.**
 - **Removing `.cool-command-zone-surround` entirely**, so commanders sit bare on the mat
-  (raised 2026-08-07, deferred as its own change). The stakes went **up** when choice 7
-  landed: the surround's `5px outset black` is now the **only** `groove`/`outset`/`inset`
-  border left in the app. Removing it doesn't thin the chunky-3D vocabulary, it ends it. That
-  may well be the right call — but it's a decision about the app's identity, not a cleanup,
-  and it goes to Jess as one.
+  (raised 2026-08-07, deferred as its own change). **Partially overtaken by events, same
+  day:** the surround's `5px outset black` — the concern this deferral was protecting — is
+  gone; Jess changed it directly to `3px solid black` + `var(--light-pink)` (matching
+  `.game-title`), which already ended the chunky-3D vocabulary this item worried about
+  ending. The element itself still exists (a flat-bordered frame around the commander card,
+  now with the card's own border/background/fixed-height removed too — it floats bare
+  inside a flatter frame). So the *specific* question this item raised — "does removing the
+  surround end the app's last 3D-border site" — is moot; whether the surround should be
+  removed *as an element* (frame and all, commanders sitting bare on the mat) is still open
+  and still Jess's call.
 
 ---
 
