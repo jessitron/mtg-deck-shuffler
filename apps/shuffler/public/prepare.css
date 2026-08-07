@@ -34,9 +34,9 @@
 }
 
 .section-that-is-horizontally-aligned-with-command-zone {
-  grid-column: 2;
+  grid-column: 4;
   grid-row: 3;
-  justify-self: end; /* left-align, overflow right */
+  justify-self: start; /* left-align, overflow right */
   margin-top: 7px; /* border of commander card inset */
   width: 210px;
 }
@@ -74,14 +74,18 @@
  * library stack. (This used to be a subgrid spanning rows 2-4 so the title could
  * occupy its own row inside the surround; the title left, so the subgrid went.) */
 .playmat .cool-command-zone-surround {
-  grid-column: 4;
+  grid-column: 2;
   grid-row: 3;
   justify-self: center;
   align-self: start;
 }
 
+/* Mirrors the surround's column swap (library/command-zone swap, 2026-08-07).
+ * Placeholder and surround are mutually exclusive renders of the same slot
+ * (commanders.length === 0 ? placeholder : surround), so overflowing right into
+ * column 2 is safe -- nothing else occupies it while the placeholder is showing. */
 .playmat .commander-placeholder {
-  grid-column: 5;
+  grid-column: 1;
   grid-row: 3;
   justify-self: start; /* left-align, overflow right */
   align-self: start;

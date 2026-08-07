@@ -155,7 +155,7 @@ body {
   padding-top: 20px;
 }
 
-/* Top row: library, revealed cards, command zone, and table */
+/* Top row: command zone, revealed cards, library, and table */
 .game-top-row {
   display: flex;
   min-height: 300px;
