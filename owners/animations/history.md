@@ -158,6 +158,38 @@
   `playmat-game`. Bare `.playmat` also matches /prepare's mat, so a rule meant for the game
   stage alone must use `.playmat-game`.
 
+### 2026-08-07: Tap is state, rotation is a delta — tabletop-physics ticket 04 (`3f14d02`)
+
+**A decision, not code.** No source file changed;
+`.scratch/tabletop-physics/issues/04-tap-is-state.md` is self-contained and authoritative.
+Resolved by grilling with Jess plus this owner, `shuffler-looks-like-itself`, and a throwaway
+Playwright prototype (branch `proto/multi-tap`, deleted).
+
+- **The decision**: `props.tapped: boolean` is the stored truth on the Tabletop's `mtg-card`
+  shape, never read back out of an angle; the visual is tldraw's real `shape.rotation` written
+  as a **delta** (+90 tap / −90 untap, relative to the card's own angle), keeping the existing
+  centre-preserving `Vec.Rot` math. Free rotate and resize both stay.
+- **I withdrew my own `-context` recommendation.** I had advised boolean + CSS-transform
+  rotation inside the card component. On `-review`, after Jess decided the resize handle stays
+  live, I withdrew it: CSS-only rotation is invisible to tldraw, so the drawn card and its
+  hit-test box / selection indicator / resize handles disagree — *"a lie about where the object
+  is, on the gesture players repeat more than any other."* **The withdrawal is the decision.**
+  Don't re-issue the superseded advice. Also rejected with reasons: `getGeometry()` box-swap,
+  `editor.animateShapes()`.
+- **Ticket 05 (`05-rotate-to-tap.md`) inherits four constraints verbatim** — key off
+  `props.tapped`, not a ±90 delta sniff; don't animate on first render; comment the
+  centre-preserving/transform-origin coupling; no `overflow: hidden` on the path. All four are
+  written up in architecture.md.
+- **"This is not FLIP"** is recorded because a future reviewer would otherwise veto it citing
+  the no-FLIP rule. FLIP's forbidden part is *measuring* an unknown delta; ±90 is a constant.
+- **Deliberately not decided**: duration and easing. That's 05's, with the design owner. This
+  will also be the Tabletop's first owned styling, and the ship has no CSS source file yet
+  (`tabletop-css-tokens` in `TODO.md`).
+- **New empirical facts**: undo is per-client in a synced tldraw room (one player's undo syncs
+  to peers as an ordinary edit); because the animation trigger is a prop change, undo animates
+  the card back for free and remote peers animate identically for free; a tapped card's page
+  bounds are the rotated bounds.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.
@@ -167,6 +199,10 @@
 
 ## What Was Tried and Abandoned
 
+- **CSS-only rotation for the Tabletop's tap** (recommended by this owner in `-context`,
+  withdrawn by this owner in `-review`, 2026-08-07): invisible to tldraw, so the card's drawn
+  orientation and its hit-test / selection / resize geometry disagree. Killed by the decision
+  to keep resize handles live.
 - Using WhatHappened structure for card flip animations (reverted in `c8bf381`)
 - JS-driven flip animation timing (reverted in `db5885a`)
 - Client-driven card play exit animation using JS class application + HTMX swap delay (removed in `943ece6` — was broken, never properly worked)

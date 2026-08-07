@@ -1,6 +1,7 @@
 # Animations Files
 
-_All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps/shuffler/src/app.ts`._
+_All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps/shuffler/src/app.ts`,
+**except** the Tabletop section at the bottom, which spells out full paths._
 
 ## CSS (animation definitions)
 
@@ -67,6 +68,22 @@ of value that gets tokenized into a custom property.
 
 - `src/GameState.ts`
   - Lines 58-64: `WhatHappened` interface definition
+
+## Tabletop (decided 2026-08-07, NOT yet implemented)
+
+Full paths from the repo root. Nothing here animates today.
+
+- `apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx` — today's `onClick` toggles
+  `shape.rotation` between 0 and π/2 with centre-preserving `Vec.Add`/`Vec.Rot` math, and reads
+  tap back out of the angle via `UNTAPPED_EPSILON`. Ticket 04 kills that read: `props.tapped`
+  becomes the truth and rotation is written as a ±90 **delta**. The tap animation hooks off the
+  prop change here.
+- `apps/tabletop/src/client/TablePage.tsx` — registers the shape util.
+- **No CSS source file exists on the Tabletop yet** (`tabletop-css-tokens` in `TODO.md`). The
+  tap swing will be this ship's first owned styling, which is why duration/easing are ticket
+  05's call with the design owner rather than 04's.
+- Decisions: `.scratch/tabletop-physics/issues/04-tap-is-state.md` (resolved, `3f14d02`) and
+  `.scratch/tabletop-physics/issues/05-rotate-to-tap.md` (open).
 
 ## Tests
 

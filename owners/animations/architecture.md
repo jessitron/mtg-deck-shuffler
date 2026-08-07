@@ -76,6 +76,71 @@ already is. What *can* break an animation is a change to the element's **own box
 This is what made the deck-title plaque move (`2d33c2f`) a no-interaction review even
 though it raised `.game-top-row` by roughly the plaque's height.
 
+## Third mechanism (DECIDED, NOT BUILT): prop-derived local catch-up on a synced tldraw shape
+
+The two mechanisms above are both Shuffler-side: **server-driven** (WhatHappened → class on
+render) and **client-driven class toggle** (the card flip). A third was decided on 2026-08-07
+for the Tabletop and is **not implemented yet** — full reasoning in
+`.scratch/tabletop-physics/issues/04-tap-is-state.md`, implementation in
+`.scratch/tabletop-physics/issues/05-rotate-to-tap.md`.
+
+**The state model.** `props.tapped: boolean` on the `mtg-card` shape is the stored truth, and
+it is **never read back out of an angle** (the current `UNTAPPED_EPSILON` check in
+`apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx` is the bug it causes, and dies with
+it). The *visual* stays tldraw's real `shape.rotation`, written as a **delta**: +90° clockwise
+on tap, −90° on untap, relative to the card's own current angle, keeping the existing
+centre-preserving `Vec.Add`/`Vec.Rot` math. Free rotation composes on top; resize stays,
+aspect-ratio locked.
+
+**The animation.** A tap is *one synced write*, so there is nothing for CSS to interpolate.
+The motion is a **local catch-up**: on the frame the prop changes, apply an inner
+counter-transform of ∓90° and transition it to 0. Because the trigger is a prop change,
+**undo animates the card back for free and remote peers animate identically with no extra
+work**.
+
+**This is NOT the banned FLIP pattern.** FLIP's forbidden part is *measuring* an unknown
+delta at runtime; ±90° is a constant known from the state change. Mechanically it is the same
+thing as the Shuffler's `.card-flipped`. Recorded here explicitly so a future reviewer doesn't
+veto it by citing "no FLIP" from the Design Philosophy list.
+
+**I withdrew my own earlier recommendation, and the withdrawal is the decision.** In `-context`
+I advised storing only the boolean and rendering the rotation as a **CSS transform inside the
+card's component** (one synced write, free local animation, composes with free rotation). I
+**withdrew it in `-review`** once Jess decided tldraw's resize handle stays live on cards:
+CSS-only rotation is invisible to tldraw, so a tapped card draws landscape while its hit-test
+box, selection indicator and resize handles stay portrait — *a lie about where the object is,
+on the gesture players repeat more than any other*. **Do not hand out the CSS-only advice
+again**; it was considered and killed on that specific ground. Also rejected in the ticket:
+overriding `getGeometry()` to swap the box (resize then operates in a swapped frame), and
+`editor.animateShapes()` (per-frame synced writes plus an undo trail).
+
+Four constraints handed to ticket 05, inherited verbatim:
+
+1. **Key the catch-up off `props.tapped` changing, not off a ±90 rotation delta.** A delta
+   sniffer is reading tap back out of the angle again, relocated into the view layer; it
+   misfires when a player free-rotates through 90°.
+2. **Don't animate on first render.** Initialize the previous-value ref to the *first-seen*
+   `tapped`, not `false`, or a card that arrives tapped swings on mount — and again on a store
+   reconnect. Precedent: `3970e53` (fade-in suppressed during search).
+3. **Comment the coupling** between the centre-preserving x/y write and the transform origin.
+   Frame 0 is pixel-identical only because both hold the centre; deleting the `Vec.Rot` math
+   "because tldraw handles rotation now" makes the first frame jump.
+4. **Nothing on the path may clip.** Mid-swing the counter-rotated card extends outside its own
+   `w × h` box; any `overflow: hidden` ancestor chops the animation.
+
+**Duration and easing are deliberately undecided** — 05's, with the design owner. The
+Shuffler's vocabulary is 0.8s (flip transition) and 0.5s (card motion); tap is a flip-like
+reorientation, not a translation.
+
+Empirical facts from the throwaway Playwright prototype (branch `proto/multi-tap`, deleted,
+nothing landed):
+
+- **Undo is per-client in a synced tldraw room.** A client who has done nothing gets nothing
+  from Ctrl+Z; one player's undo syncs to others as an ordinary edit. Nobody can rewind your
+  board.
+- **A tapped card's page bounds are the ROTATED bounds** — a marquee around three upright cards
+  also sweeps in a tapped card beside them. The geometry is honest, which is the point.
+
 ## Drag-and-Drop Interaction
 
 `game.js` (lines 183-186) removes animation classes when a drag starts, preventing animation flicker when a card is dropped in a new position. After drop, HTMX swaps in the new hand state, which may include new animation classes from `WhatHappened`.

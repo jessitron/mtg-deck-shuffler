@@ -6,6 +6,11 @@
 - **HTMX**: Animations depend on HTMX swap behavior. All game actions use immediate `hx-swap="outerHTML"`.
 - **View rendering**: `shared-components.ts` applies animation classes during HTML generation. Changes to card rendering (container structure, class names, nesting) can break CSS selectors that target animated elements.
 - **Two-faced cards**: The flip animation uses `.flip-container-outer`, `.flip-container-inner`, `.card-flipped`. Changes to two-faced card DOM structure will break flip animations.
+- **The Tabletop's `mtg-card` shape (decided, unbuilt)**: the tap animation's trigger is
+  `props.tapped` changing on a synced tldraw shape. That couples this owner to
+  `apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx`, to the shape's prop schema
+  (ticket 02), and to tldraw's own `shape.rotation` write. If tap ever stops being a stored
+  boolean, the animation's trigger disappears.
 
 ## Depended On By
 
@@ -42,6 +47,15 @@
   row's right edge. The `gap` on `.game-header-row` does **not** offset the panel either;
   it's needed so a long deck name doesn't butt into the hamburger.
 
+- **Tabletop tap animation (decided 2026-08-07, not built)** — four standing constraints for
+  whoever implements `.scratch/tabletop-physics/issues/05-rotate-to-tap.md`: key the catch-up
+  off `props.tapped` changing (never off a ±90 rotation delta — that misfires when a player
+  free-rotates through 90°); initialize the previous-value ref to the first-seen `tapped` so a
+  card arriving tapped doesn't swing on mount or on store reconnect; comment the coupling
+  between the centre-preserving x/y write and the transform origin; and keep **`overflow:
+  hidden` off every ancestor on the path**, because mid-swing the counter-rotated card extends
+  outside its own `w × h` box. Also: do not re-derive the CSS-only rotation route (killed — see
+  architecture.md), and do not veto the local catch-up by citing "no FLIP" (it isn't).
 - **State that must survive swaps**: Anything toggled by JS that needs to outlive a `game-state-updated` swap must NOT be re-applied to swapped-in content in `afterSwap` — the settle phase reverts it (see architecture.md). Anchor such state on `document.body` or another non-swapped ancestor. The hamburger menu (`body.game-menu-open`) is the reference example; developer mode (`body.dev-mode`, set server-side from a cookie, gating `.menu-debug` visibility) is a second, JS-free example.
 
 ## Not Related To
