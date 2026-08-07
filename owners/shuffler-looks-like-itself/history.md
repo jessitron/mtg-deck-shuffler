@@ -357,3 +357,53 @@ changes riding along, not to defend the status quo.** A block that ends in "so s
 choice and ask" is a success even when the blocked option wins — it lands decided instead of
 smuggled. Written into [README.md](README.md)'s design philosophy so the next review doesn't
 soften itself to avoid looking overruled.
+
+## 2026-08-07 — the game screen's surface got its domain name back
+
+`7487393` **Call the game screen's surface what it is: the playmat**
+
+`/game`'s big art-backed surface — the one the library stack, command zone and hand sit on
+— was `.page-container`. In the domain it IS the playmat, the same object `/prepare` calls
+`.playmat`. Zero visual change: `/prepare` renders byte-identical and `/game`'s computed
+geometry is unchanged (80px radius, `5px solid black`, `5px 5px` shadow, 2rem child
+margins).
+
+**Why it mattered enough to rename.** An agent read the class names and concluded "the
+`/game` screen has no playmat" — true of the CSS, false of the app — and built a question
+to Jess on that false premise. **This KB was part of the problem**: its own "square corners
+on chrome" rule listed "the playmat, the `.page-container`" as two round objects, and the
+`/design` radius table listed `20px .playmat` and `80px .page-container` as two different
+things. The naming didn't just fail to describe the app; it taught readers something false,
+in three places at once, and the owner was one of them. **A class name is documentation, and
+this KB inherits whatever it says.**
+
+**The shape, and why not a straight rename.** Both play pages now carry the bare `playmat`
+class plus a page modifier — `playmat-prepare` / `playmat-game` — with appearance behind the
+modifier in each page sheet. Collapsing both to a bare `.playmat` was the obvious move and
+is wrong: `/design` co-loads `game.css` and `prepare.css`, so two bare `.playmat` rules would
+have made it **structurally impossible for the gallery to show both mats truthfully** — load
+order would silently pick a winner. The gallery being unable to lie about the app is a
+constraint on how the app's selectors are allowed to be organised, not just a property of the
+gallery. `playmat.css` keeps an empty, commented slot for the bare rule against convergence.
+
+**Placement stays on the bare class.** `prepare.css`'s three descendant rules
+(`.playmat > .game-title`, `.playmat .cool-command-zone-surround`,
+`.playmat .commander-placeholder`) are keyed on `.playmat`, deliberately: placement is
+relative to the mat *as a domain object* — the grid parent — not to one page's dressing of
+it. The first draft of the reasoning said these stayed because a Playwright spec pins
+`.playmat > .game-title`; the `-review` corrected it. **A Playwright locator matches the DOM
+regardless of CSS**, so a spec never pins a *stylesheet* selector. Don't reach for that
+argument again.
+
+**What it left behind.** The rename removed the last justification for the two mats looking
+different — "the game one is a giant Magic card, a different thing" only worked while they
+had different names. They still differ (20px radius / `outline: 10px solid black` / no shadow
+/ local Cascading Cataracts vs 80px / `border: 5px solid black` / `box-shadow: 5px 5px black`
+/ hotlinked Scryfall art). Deliberately **not** converged in this change and deliberately not
+promoted to an open choice; it sits as `playmat-two-visual-metaphors` in the repo-root
+`TODO.md`.
+
+**Also corrected while in here:** this KB had said `docs.css` holds the only second `:root`
+and "don't add a third." There are **four** — `styles.css`, `docs.css`, `game.css`
+(`--playmat-*`) and `playmat.css` (`--mana-*`). The rule was right, the count was two years
+of drift out of date.

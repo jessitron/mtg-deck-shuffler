@@ -64,8 +64,9 @@ you skipped. These are written from the Shuffler's files; on the Tabletop, apply
 
 **Geometry**
 
-- [ ] Any `border-radius` on chrome? Chrome is square. Round is for cards, the playmat,
-      `.page-container`, and count discs.
+- [ ] Any `border-radius` on chrome? Chrome is square. Round is for cards, the playmat
+      (`.playmat-prepare` / `.playmat-game` — one domain object, two dressings; **there is
+      no `.page-container` any more**), and count discs.
 - [ ] Any `groove` / `outset` / `inset` border? Reject — borders are flat `solid`. Since
       choice 7 (2026-08-07) exactly **one** survives app-wide,
       `playmat.css` → `.cool-command-zone-surround`. Equally, a plan that *removes* that

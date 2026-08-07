@@ -36,9 +36,9 @@ Per-view `additionalStyles` today:
 | --- | --- | --- |
 | `styles.css` | **The `:root` tokens.** Global reset, body font, `.mtg-card-image`, error/debug helpers, `.hidden`, `.pushable-flat`, **the global `:focus-visible` ring** | every page |
 | `site.css` | Site pages: header, footer, hero, slogan, steps, `.button-base` family | every EJS page |
-| `playmat.css` | **Shared by game and prepare**: library stack, card/library buttons, command zone, **the deck-title plaque's *appearance* (`.game-title`)**, all modal styles, card-type icons, card modal | game (TS) + prepare (EJS) |
-| `game.css` | Game page only: `.page-container`, `.game-header-row`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks | game (TS) |
-| `prepare.css` | Prepare page only: playmat grid, commander placeholder, join-table panel | prepare (EJS) |
+| `playmat.css` | **Shared by game and prepare**: library stack, card/library buttons, command zone, **the deck-title plaque's *appearance* (`.game-title`)**, all modal styles, card-type icons, card modal, the `--mana-*` `:root`. **Also the reserved (empty, commented) slot for a bare `.playmat` appearance rule** | game (TS) + prepare (EJS) |
+| `game.css` | Game page only: `.playmat-game` (the game page's playmat — was `.page-container` until `7487393`), `.game-header-row`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks, the `--playmat-one`/`--playmat-two` `:root` | game (TS) |
+| `prepare.css` | Prepare page only: `.playmat-prepare` (the prepare page's playmat — appearance **and** the grid), the bare-`.playmat` placement rules, commander placeholder, join-table panel | prepare (EJS) |
 | `deck-selection.css` | `/choose-any-deck`: precon tiles, search + Archidekt inputs | choose-any-deck |
 | `docs.css` | `/docs`, `/about`, `/history`: sidebar + prose layout | those three |
 | `design-candidates.css` | **Proposals only.** Nothing in the app loads it | `/design` only |
@@ -81,7 +81,7 @@ write appearance rules that name an ancestor.
 
 **`outline` is globally spoken for.** Since choice 5, `outline` is the focus channel app-wide
 (`styles.css`, grep `:focus-visible`). Three rules still use it **decoratively**: `site.css` →
-`.main-footer` (a `--dark-pink` rule), `prepare.css` → `.playmat` (its 10px black frame),
+`.main-footer` (a `--dark-pink` rule), `prepare.css` → `.playmat-prepare` (its 10px black frame),
 and `game.css` → `.hand-drop-zone.drag-over` (`2px solid gray`). None of those three is
 focusable today, so nothing conflicts — but a decorative `outline` on anything focusable will
 be clobbered the moment it takes focus. Use `border` or `box-shadow` for decoration on
@@ -90,9 +90,20 @@ anything a keyboard can reach. Only one rule deliberately *tunes* the focus ring
 offset to `-3px` on the two full-viewport modal overlays,
 because the standard `+3px` would draw outside the viewport and clip to nothing.
 
-**A second `:root`.** `docs.css` re-declares `--deep-space`, `--dark-pink` and
-`--light-pink` rather than using the ones from `styles.css`, and adds `--text-light`,
-`--link-color`, `--link-hover` that exist nowhere else. Don't add a third.
+**There are FOUR `:root` blocks, not two** (corrected 2026-08-07 — this file said "don't
+add a third" while three extras already existed). `grep -n ':root' public/*.css`:
+
+| File | What's in it | Verdict |
+| --- | --- | --- |
+| `styles.css` | The token set of record | the one true `:root` — new tokens go here |
+| `docs.css` | **Re-declares** `--deep-space`, `--dark-pink`, `--light-pink`, plus `--text-light`, `--link-color`, `--link-hover` that exist nowhere else | drift; on the cleanup list in [open-choices.md](open-choices.md) → "Collapse the second `:root`" |
+| `game.css` | `--playmat-one`, `--playmat-two` | legitimate-ish but misplaced — page-scoped tokens in a page sheet |
+| `playmat.css` | The closed `--mana-W/U/B/R/G` set | legitimate-ish, same caveat |
+
+**Add nothing to any of them but `styles.css`.** The `game.css`/`playmat.css` pairs are
+component-local color sets rather than re-declarations, which is why they've never
+conflicted — but a *general* token in a page sheet only reaches the pages that load it,
+and that failure is silent.
 
 **Cascade order on `/design`.** The gallery loads every app stylesheet at once, so
 conflicting `body` rules (`styles.css` and `game.css` say Ovo, `site.css` says Orbitron)

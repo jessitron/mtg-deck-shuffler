@@ -57,7 +57,8 @@ Concrete, in rough order of how often they bite.
   `#28a745`, `#6c757d`, `#007acc`. These are the drift; grepping the CSS will find them
   and they are not precedent.
 - New chrome gets **square corners** (`border-radius: 0`). Round corners are for cards,
-  the playmat, `.page-container`, and count discs only.
+  the playmat (`.playmat-prepare` 20px, `.playmat-game` 80px — one object, two dressings),
+  and count discs only.
 - **Don't add a `groove`/`outset`/`inset` border.** As of choice 7 (2026-08-07) exactly one
   survives in the whole app — `playmat.css` → `.cool-command-zone-surround`, `5px outset
   black`. Borders are flat (`solid`); press feedback is `.pushable-flat`'s box-shadow bevel,
@@ -75,7 +76,8 @@ Concrete, in rough order of how often they bite.
   - If your new element is focusable but **not** one of those tags (a `div` with a click
     handler, say), give it a real tag or a `tabindex` so the global rule reaches it.
   - **`outline` is globally spoken for.** Three rules still use it decoratively —
-    `site.css` → `.main-footer`, `prepare.css` → `.playmat`, `game.css` →
+    `site.css` → `.main-footer`, `prepare.css` → `.playmat-prepare` (its 10px black frame),
+    `game.css` →
     `.hand-drop-zone.drag-over`. None is focusable today, so nothing conflicts; but a
     decorative `outline` on anything focusable **will be clobbered on focus**. Use `border`
     or `box-shadow` for decoration on anything a keyboard can reach.
@@ -94,12 +96,27 @@ Concrete, in rough order of how often they bite.
   its looks travel with it; only the two placement rules (`prepare.css` → `.playmat >
   .game-title`, `game.css` → `.game-header-row`) need attention, plus
   `verify-deck-title-placement.spec.ts`.
+
+**Styling either play page's mat** (learned 2026-08-07, `7487393`)
+
+- **`.playmat` alone is not a rule you can write today.** Appearance lives under the page
+  modifier — `prepare.css` → `.playmat-prepare`, `game.css` → `.playmat-game`. A bare
+  `.playmat` rule in a *page* sheet would leak across `/design`, which co-loads both sheets.
+  `playmat.css` holds a commented, empty slot for the bare rule against the day the two
+  treatments converge; that's the only sanctioned home for it.
+- **Placement keys off the bare `.playmat`, deliberately.** `prepare.css` →
+  `.playmat > .game-title`, `.playmat .cool-command-zone-surround`,
+  `.playmat .commander-placeholder`. Don't "tidy" these to `.playmat-prepare` — the mat as a
+  domain object is the grid parent, and that's what these are relative to.
+- **`.page-container` no longer exists.** If a doc, comment or plan names it, it's stale;
+  it's `.playmat-game`. (`.error-page-container` in `src/view/common/html-layout.ts` is an
+  unrelated class and was not touched.)
 - **On `/game`, anything you put in the top strip must be a SIBLING of `#game-menu`, not a
   child.** `game.js` dismisses the open menu on `!evt.target.closest("#game-menu")`, and
   `#game-menu` is the dropdown panel's positioning ancestor — so nesting swallows the
   dismiss click *and* pushes the panel down by your element's height. `.game-header-row` is
   the sibling wrapper that exists for this; put new top-strip chrome there.
-- **A fixed grid track will clip, not grow.** `prepare.css` `.playmat` row 1 had to become
+- **A fixed grid track will clip, not grow.** `prepare.css` `.playmat-prepare` row 1 had to become
   `minmax(50px, auto)` when the plaque landed in it, because a long deck name wraps. If you
   place text in a fixed-height track, make it `minmax`.
 - **HTML that interpolates user-supplied text must escape it.** Deck names come from
@@ -128,8 +145,9 @@ Concrete, in rough order of how often they bite.
 
 **Adding or renaming a token**
 
-- New tokens go in the `:root` in `styles.css`. Do not create a third `:root` — `docs.css`
-  already has a second one that re-declares three tokens.
+- New tokens go in the `:root` in `styles.css`. **Do not create a fifth `:root` — there are
+  already four** (`styles.css`, `docs.css`, `game.css` `--playmat-*`, `playmat.css`
+  `--mana-*`); see [architecture.md](architecture.md) for which are drift.
 - Add the swatch to the "Named tokens" grid in `design.ejs` in the same commit.
 
 **Adding a component**

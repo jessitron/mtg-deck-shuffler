@@ -38,8 +38,9 @@ identity below ("The design language") was won on the Shuffler and is described 
 but it is the fleet's identity: when the Tabletop gets its design pass, it pulls toward
 these same tokens, typefaces, and shapes. Two honest caveats:
 
-- **Some components are ship-specific.** The playmat page-container is the Shuffler's;
-  the tldraw canvas is the Tabletop's. Shared identity ≠ identical screens.
+- **Some components are ship-specific.** The playmat as the Shuffler dresses it is the
+  Shuffler's; the tldraw canvas is the Tabletop's. Shared identity ≠ identical screens.
+  (The Tabletop has playmats too — one per seat — but they're tldraw-rendered, not CSS.)
 - **tldraw constrains.** The Tabletop is built on tldraw, which owns much of its own
   chrome and rendering. Where tldraw limits a rule (fonts inside the canvas, its
   built-in UI), record the limit here rather than fighting it or silently dropping the
@@ -121,15 +122,43 @@ mutual exclusivity. This is a one-off pattern for exclusive-choice controls, not
 button color rule — don't reuse it for ordinary buttons.
 
 **Square corners on chrome.** Round corners belong only to physical objects: cards, the
-playmat, the `.page-container` (which is itself a giant Magic card), count discs.
+playmat, count discs. (That used to say "the playmat, the `.page-container`" — two names
+for one object; see "The playmat is one object" below.)
 
 **The card is the layout unit.** 200 × 278, radius 10px. Column widths, button grids and
 drop zones are sized off that 200.
 
 **Two style worlds.** Site pages (`/`, `/choose-any-deck`, `/docs`, `/about`) use the
 purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages
-(`/prepare`, `/game`) use the `.page-container` — a Magic card blown up to page size,
-5px black border, hard `5px 5px` offset shadow. Don't mix them.
+(`/prepare`, `/game`) put a **playmat** on screen — a big art-backed surface everything
+else sits on. Don't mix them.
+
+**The playmat is one object, dressed two ways (named 2026-08-07, `7487393`).** Both play
+pages carry the bare class `playmat` plus a page modifier: `/prepare` is
+`class="playmat playmat-prepare"` (`prepare.css` → `.playmat-prepare`), `/game` is
+`class="playmat playmat-game"` (`game.css` → `.playmat-game`). The game one was called
+`.page-container` until this KB's own text was leading readers to conclude the game screen
+had no playmat — if you meet that name anywhere, it's stale. Two things follow:
+
+- **`playmat.css` holds the reserved, deliberately empty slot for a bare `.playmat`
+  appearance rule** (there's a comment there saying why it's empty). The day the two
+  treatments converge, the shared looks go *there*, not in a page sheet. It is not a
+  straight rename to `.playmat` today because `/design` co-loads `game.css` and
+  `prepare.css`, so two bare `.playmat` rules would make it structurally impossible for
+  the gallery to show both mats truthfully — load order would silently pick a winner.
+- **Placement rules stay keyed on the bare `.playmat`.** `prepare.css`'s three descendant
+  rules (`.playmat > .game-title`, `.playmat .cool-command-zone-surround`,
+  `.playmat .commander-placeholder`) place things relative to the mat *as a domain object*
+  — the grid parent — not relative to one page's dressing of it. Appearance goes under the
+  modifier; placement keys off the bare class.
+
+**The two treatments still differ, and nothing now justifies that** — the "the game one is
+a giant Magic card, a different thing" argument died with the rename. Captured as a buoy in
+the repo-root `TODO.md` (`playmat-two-visual-metaphors`), not yet promoted to an open
+choice; no `.choice` block exists on `/design` for it. Values today: `.playmat-prepare` 20px
+radius / `outline: 10px solid black` / no shadow / local Cascading Cataracts art;
+`.playmat-game` 80px radius / `border: 5px solid black` / `box-shadow: 5px 5px black` /
+hotlinked Scryfall art.
 
 **Appearance in the shared sheet, placement in the page sheet (established 2026-08-07 by
 the deck-title plaque).** A component that appears on both play pages declares its *looks*

@@ -150,7 +150,9 @@ button` 4px, `.cool-command-zone-surround` 2px, `.cool-command-zone-surround .mu
 `.card-modal-position-indicator` 6px.
 
 **Keep round regardless** (these are physical objects): `.mtg-card-image` 10px,
-`.commander-placeholder` 10px, `.playmat` 20px, `.page-container` 80px,
+`.commander-placeholder` 10px, `.playmat-prepare` 20px, `.playmat-game` 80px
+*(both are the playmat — renamed 2026-08-07, `7487393`; they were `.playmat` and
+`.page-container`)*,
 `.card-modal-image` 3vh, `.modal-card-image` 30px, `.library-card-back::before` 8px,
 `.hand-count` 50%, `.card-modal-close` 50%.
 
@@ -373,9 +375,12 @@ Do these as their own commits once the choices are settled. They're mechanical.
   settles the radius question it's entangled with, and it should de-duplicate at the same
   time rather than restyle two copies. The `#ff9800` swatch on `/design`
   (`design.ejs`, in the orphan-hex grid) goes with it.
-- **Collapse the second `:root`.** The `:root` at the top of `docs.css` re-declares
-  `--deep-space`, `--dark-pink`, `--light-pink` and adds three link tokens that exist
-  nowhere else.
+- **Collapse the extra `:root` blocks.** There are **four** (verified 2026-08-07), not two:
+  `styles.css` (the real one), `docs.css` (re-declares `--deep-space`, `--dark-pink`,
+  `--light-pink` and adds three link tokens that exist nowhere else — this is the drift),
+  `game.css` (`--playmat-one`/`--playmat-two`) and `playmat.css` (`--mana-W/U/B/R/G`). Only
+  `docs.css`'s is a straight re-declaration; the other two are component-local color sets
+  that would still be better named in `styles.css`.
 - **Delete the debug leftover:** `site.css` → `.step > * { border: 0px solid red }`.
 - **Adopt a spacing scale.** No scale exists. Proposed: `4 · 8 · 12 · 16 · 24 · 32 · 48`
   — every current value rounds to one of these within 2px except 5, 15 and 18.
