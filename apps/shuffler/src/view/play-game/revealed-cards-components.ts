@@ -32,7 +32,7 @@ export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: W
     })
     .join("");
 
-  return `<div id="revealed-cards-section" class="revealed-cards-section section-that-is-horizontally-aligned-with-command-zone" >
+  return `<div id="revealed-cards-section" class="revealed-cards-section" >
       <div id="revealed-cards-area" class="revealed-cards-area">
         ${revealedCardsArea}
         ${revealedCards.length === 0 ? '<p class="no-revealed-cards">No cards revealed yet</p>' : ""}

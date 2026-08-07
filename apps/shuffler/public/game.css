@@ -200,13 +200,6 @@ body {
   gap: 10px;
 }
 
-/* Drops the library stack so its top edge meets the commander card's, not the
- * top of the metal surround: 5px surround border + 10px surround padding + 7px
- * .multiple-cards inset border. */
-.section-that-is-horizontally-aligned-with-command-zone {
-  padding-top: 22px;
-}
-
 #command-zone {
   flex-shrink: 0;
 }

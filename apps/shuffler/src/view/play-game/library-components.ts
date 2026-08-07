@@ -3,7 +3,7 @@ import { formatLibraryStack } from "../common/shared-components.js";
 
 export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const expectedVersion = game.getStateVersion();
-  return `<div id="library-section" class="section-that-is-horizontally-aligned-with-command-zone" data-testid="library-section">
+  return `<div id="library-section" data-testid="library-section">
         ${formatLibraryStack(whatHappened, game.listLibrary().length)}
         <div class="library-buttons">
 
