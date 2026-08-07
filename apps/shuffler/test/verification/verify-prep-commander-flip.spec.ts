@@ -11,6 +11,7 @@
  */
 
 import { test, expect, Page } from '@playwright/test';
+import { seedPrep } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
@@ -21,12 +22,7 @@ const TWO_FACED_COMMANDER_DECK = 'precon-mtgjson-FromCutetoBrute_SLD.json';
 test.setTimeout(90000);
 
 async function setupPrepWithTwoFacedCommander(page: Page): Promise<string> {
-  const response = await page.request.post(`${BASE_URL}/deck`, {
-    form: { 'deck-source': 'precon', 'precon-deck': TWO_FACED_COMMANDER_DECK },
-  });
-  const match = response.url().match(/\/prepare\/(\d+)/);
-  if (!match) throw new Error(`Failed to create prep, landed at ${response.url()}`);
-  return match[1];
+  return seedPrep(page, TWO_FACED_COMMANDER_DECK);
 }
 
 test.describe('Prepare screen - flipping a two-faced commander', () => {

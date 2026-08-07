@@ -16,25 +16,15 @@
  */
 
 import { test, expect } from '@playwright/test';
+import { seedGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
 async function setupGame(page: any): Promise<void> {
-  await page.goto(`${BASE_URL}/choose-any-deck`);
-
-  const preconTiles = page.locator('.precon-tile');
-  await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
-  await preconTiles.first().click();
-
-  await page.waitForURL('**/prepare/*', { timeout: 30000 });
-
-  const shuffleUpButton = page.locator('button.begin-button, button.start-game-button, button:has-text("Shuffle Up")');
-  await expect(shuffleUpButton).toBeVisible();
-  await shuffleUpButton.click();
-
-  await page.waitForURL('**/game/*', { timeout: 30000 });
+  const gameId = await seedGame(page);
+  await page.goto(`${BASE_URL}/game/${gameId}`);
 }
 
 test.describe('Opening hand & Mulligan', () => {
@@ -104,10 +94,17 @@ test.describe('Opening hand & Mulligan', () => {
     await expect(page.locator('.hand-count')).toHaveText('8');
 
     // Undo via the standard hotkey — the stage is derived from the event log,
-    // so undoing the draw restores it and the button reappears.
-    await page.keyboard.press('ControlOrMeta+z');
+    // so undoing the draw restores it and the button reappears. game.js's
+    // keydown handler clicks the hamburger's live `.undo-button`, swapped in
+    // out-of-band after every action — a keypress landing mid-swap is the same
+    // click-straddles-settle race documented in owners/animations/interactions.md,
+    // just fired via keyboard. Retry until it lands.
+    await expect(async () => {
+      if ((await page.locator('.hand-count').textContent()) === '7') return;
+      await page.keyboard.press('ControlOrMeta+z');
+      await expect(page.locator('.hand-count')).toHaveText('7', { timeout: 3000 });
+    }).toPass({ timeout: 20000 });
 
-    await expect(page.locator('.hand-count')).toHaveText('7');
     await expect(mulligan).toBeVisible();
     await expect(mulligan).toHaveText(/^Mulligan$/);
 
@@ -125,12 +122,17 @@ test.describe('Opening hand & Mulligan', () => {
     await expect(mulligan).toHaveText('Mulligan #2');
 
     // Undo the mulligan via the standard hotkey — it's one atomic event.
-    await page.keyboard.press('ControlOrMeta+z');
+    // Same click-straddles-settle race as above (owners/animations/interactions.md),
+    // via keyboard: retry until the undo-button click actually lands.
+    await expect(async () => {
+      if (/^Mulligan$/.test((await mulligan.textContent()) ?? '')) return;
+      await page.keyboard.press('ControlOrMeta+z');
+      await expect(mulligan).toHaveText(/^Mulligan$/, { timeout: 3000 });
+    }).toPass({ timeout: 20000 });
 
     // Back to the first mulligan offer, still seven cards, still deciding.
     await expect(page.locator('.hand-count')).toHaveText('7');
     await expect(mulligan).toBeVisible();
-    await expect(mulligan).toHaveText(/^Mulligan$/);
 
     console.log('SUCCESS: a mulligan can be undone, returning to the first mulligan offer');
   });

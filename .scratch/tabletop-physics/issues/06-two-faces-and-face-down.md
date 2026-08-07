@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Type: grilling
-Status: claimed
+Status: resolved
 Blocked by: 02
 
 ## Question
@@ -58,3 +58,40 @@ What's left for this ticket:
 `CardDefinition`/`CardFace` types, flip buttons, the Tabletop's card rendering, and the event
 contract's card/face fields — all four are in this question. Do not design a parallel
 Tabletop-side flip mechanism without going through it.
+
+## Answer
+
+**Trigger: two separate context-menu items, not one combined gesture.** "Flip" and "Turn face
+down" each live in tldraw's right-click/long-press context menu — the same surface furniture's
+Lock/Unlock already uses — rather than a hover affordance or a keyboard-modifier click. Each item
+is shown/enabled based on the card's own state (no "Flip" entry on a one-faced card, since
+`backImageUrl` is null and `face:'back'` is unreachable per ticket 02). Jess: two separate
+actions, surfaced as menu items.
+
+**`currentFace` authority: the divergence is accepted, table-local.** The `two-faced-cards` owner
+confirmed there is no Spine→Shuffler inbound path today for *anything* — the Shuffler only ever
+sends `card.played`; nothing consumes events back into `GameState`. "Table becomes authoritative"
+would mean building that channel for the first time (a new `card.flipped`-shaped event with an
+explicit axis discriminator, per `contract.md`'s rule, plus the Shuffler's first-ever inbound
+listener) — real new infrastructure, not a small add. Jess chose to accept the known divergence
+instead: flip-on-table stays table-local, and a table-flipped Table-zone card that's later
+discarded may show its pre-flip face on the Shuffler's screen/clipboard. Known, not a bug to fix
+here.
+
+**`faceDown` visual: plain image swap, no extra treatment.** Confirmed against the
+`shuffler-looks-like-itself` owner: the Shuffler's own library furniture already renders "face-down"
+as nothing but `<img src=CARD_BACK>` with the card's normal round-corner/shadow treatment — no
+border, dimming, or badge exists anywhere in the fleet for concealment. Land the same: `faceDown`
+swaps to the table's generic card-back image (`cardBackImageUrl`, the same asset the sleeve
+picker will use for "no sleeve chosen") and nothing else. If a distinct "concealed from you
+specifically" cue is ever wanted, that's a new choice for a future ticket, not implied here.
+
+**Leaving the table resets both axes.** A card returning to hand or library goes back to
+`face:'front'`, `faceDown:false` — its regular face-up state — regardless of how it was sitting
+on the table. Jess: *"if a card goes back to the hand or library, it goes to its regular face-up
+again. This is desired."* Matches the Shuffler's own `mulligan()`, which already resets
+`currentFace` to `"front"` when a card returns to the library. Which mechanism performs the reset
+(the zone-entry detection from
+[Tabletop cards report zone entry as named events](../tabletop-card-shape/issues/01-zone-entry-events.md),
+now keyed on `type === 'mtg-zone'` per ticket 03) is an implementation detail for whoever builds
+this, not a further decision — the target state is unambiguous.

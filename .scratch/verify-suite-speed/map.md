@@ -49,6 +49,12 @@ in under a minute and every remaining test is one we'd miss, this effort is done
   — swept `waitForTimeout` and `networkidle` out of the specs: **225.0s → 106.5s**. The
   animations owner confirms the mulligan/shuffle path has no sleep left to reclaim. This lever
   is spent; everything remaining is structural.
+- [The suite's setup cost: 42 trips to /choose-any-deck](issues/03-setup-cost-and-isolation.md)
+  — seed, don't navigate: `test/verification/seedGame.ts` seeds every spec but one (the real
+  click-through stays in `verify-precon-to-prepare.spec.ts`) through `POST /deck` +
+  `POST /start-game`. **106.5s → ~55s.** Uncovered a pre-existing Ctrl+Z undo race (same
+  click-straddles-settle class as the animations owner's documented click flake); fixed with
+  the suite's usual `toPass()` retry.
 
 ## Measured baseline (run `96588aeb`, git `e1ca060`, warm)
 
@@ -83,9 +89,9 @@ ticket 11.
 - **A regression alarm.** The suite now traces itself, so "the suite got slower" is a queryable
   fact. Whether that becomes a Honeycomb trigger, a threshold in `verify.sh`, or nothing at all
   is undecided — and probably shouldn't be decided until the suite is at its target.
-- **Whether 60s survives contact.** If 03 + 04 + 06 + 11 land and the suite sits at, say, 68s,
-  the remaining gap may be a long tail of small things with no single lever. What that tail
-  looks like isn't visible until the big levers land.
+- **Whether 60s survives contact.** 03 landed at ~55s, already under the 60s destination on
+  its own — but 04, 06, and 11 haven't landed yet, so this isn't the map's close. Re-measure
+  once they do; the number may move either direction.
 - **The other two ships.** The Tabletop (`vitest`) and Spine (Rails `test/`) suites have never
   been measured. Whether they have the same disease is unknown; see Out of scope.
 

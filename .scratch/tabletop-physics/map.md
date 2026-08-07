@@ -157,6 +157,21 @@ expensive way round.
   `onTranslateEnd` never fires when only its parent moves), so it has to be driven from the
   card's own zone-transition code or a store-level side effect. Player-level loose counters
   (poison, energy, experience) are explicitly out of scope — see below.
+- **Flip and turn-face-down are two separate context-menu items; `currentFace` divergence between
+  table and Shuffler is accepted, not fixed** — [Decide how a card flips, and how it sits
+  face-down](issues/06-two-faces-and-face-down.md), resolved 2026-08-07. Each gesture is its own
+  entry in tldraw's right-click menu (same surface as furniture's Lock/Unlock), shown/enabled per
+  the card's own state — no combined "turn over" gesture, no hover affordance, no keyboard
+  modifier. The `two-faced-cards` owner confirmed the Shuffler has **no inbound path from the
+  table at all today** — it only ever sends `card.played`; nothing consumes events back into
+  `GameState`. Building "table authoritative for `currentFace`" would mean standing up that
+  channel for the first time, so Jess chose the cheaper path: flip-on-table stays table-local, and
+  a table-flipped Table-zone card later discarded may show its pre-flip face on the Shuffler's
+  screen/clipboard — known, not a bug. `faceDown` is a plain image swap to `cardBackImageUrl`
+  (same asset the sleeve picker will reuse), matching the Shuffler's own precedent of zero extra
+  visual treatment for concealment. **Leaving the table resets both axes** — a card returning to
+  hand or library goes back to `face:'front'`, `faceDown:false`, mirroring the Shuffler's
+  `mulligan()` reset; which zone-entry mechanism performs it is implementation, not decision.
 
 ## Not yet specified
 

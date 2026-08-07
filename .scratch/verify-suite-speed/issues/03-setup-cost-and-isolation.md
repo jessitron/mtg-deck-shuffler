@@ -1,7 +1,7 @@
 # The suite's setup cost: 42 trips to /choose-any-deck
 
 Mountain: overhead
-Status: claimed
+Status: resolved
 Type: grilling
 Map: ../map.md
 
@@ -178,3 +178,33 @@ distinct changes that absolutely should not be implemented in the same session..
 change is a deep conceptual change in the app, and should totally be its own ticket." Right
 call — decision 1 is a test-only change; decision 2 changes how every card image is served,
 for every real player, not just the suite.
+
+### Landed, 2026-08-07
+
+`test/verification/seedGame.ts` — `seedPrep()`/`startGame()`/`seedGame()`, all built on
+`page.request.post()` against `/deck` and `/start-game` so cookies land in the same browser
+context the test goes on to interact with. `getPreconDisplayName()` mirrors
+`LocalFileAdapter`'s title cleanup for the one spec (`verify-deck-title-placement.spec.ts`)
+that asserts on the deck title text without a tile to read it off first.
+
+Every spec but `verify-precon-to-prepare.spec.ts` converted — including
+`verify-library-command-zone-swap.spec.ts`, not listed above but found with the same
+`setupGame`/`selectDeck` shape during the sweep. Table-mode specs pass `table-name`/
+`player-name` straight to `POST /start-game` (the route reads `req.body` either way) instead
+of filling and submitting the real disclosure form — `verify-table-mode.spec.ts`'s first test
+still opens the disclosure to assert the inputs render, since that's a real assertion about
+the prepare page, not test setup.
+
+**Full suite: 106.5s → ~55s**, under the map's 60s destination — though ticket 04
+(superfluous tests), 06 (parallelism), and 11 (image proxy) aren't landed yet, so this alone
+doesn't close the map.
+
+**Found in the process, not part of decision 1:** seeding through the API skips whatever
+settle time the real click-through happened to absorb, which uncovered a pre-existing race in
+the Ctrl+Z undo hotkey — `game.js`'s keydown handler clicks a `.undo-button` that's swapped in
+out-of-band, the same click-straddles-settle class of flake `owners/animations/interactions.md`
+already documents for direct clicks, just via keyboard. Two specs
+(`verify-mulligan.spec.ts`, `verify-game-menu.spec.ts`) got the same `toPass()` retry pattern
+already used elsewhere in the suite. Confirmed by running the *original* click-through suite
+twice back-to-back (both clean) against the seeded suite three times (2 of 3 flaked before the
+retry fix, 0 of 5 after) — the race was always there, seeding just stopped masking it.

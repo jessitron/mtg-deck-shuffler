@@ -6,38 +6,14 @@
  */
 
 import { test, expect, Page } from '@playwright/test';
+import { seedPrep } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
-function extractPrepId(url: string): string | null {
-  const match = url.match(/\/prepare\/(\d+)/);
-  return match ? match[1] : null;
-}
-
 async function setupPrep(page: Page): Promise<string> {
-  await page.goto(`${BASE_URL}/choose-any-deck`);
-
-  const firstTile = page.locator('.precon-tile').first();
-  await expect(firstTile).toBeVisible({ timeout: 15000 });
-  const deckFile = await firstTile.getAttribute('value');
-
-  await page.evaluate((file: string) => {
-    const form = document.querySelector('form.precon-input-section') as HTMLFormElement;
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'precon-deck';
-    input.value = file;
-    form.appendChild(input);
-    form.submit();
-  }, deckFile!);
-
-  await page.waitForURL('**/prepare/*', { timeout: 60000 });
-
-  const prepId = extractPrepId(page.url());
-  if (!prepId) throw new Error('Failed to create prep');
-  return prepId;
+  return seedPrep(page);
 }
 
 test.describe('Prepare screen - clicking the library opens search modal', () => {

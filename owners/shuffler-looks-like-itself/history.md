@@ -862,6 +862,38 @@ is "stage it, don't argue it" — build the candidate, put both options on `/des
 didn't happen here; Jess decided and shipped directly. The KB records the outcome as fact rather
 than inventing a `.choice` block after the fact for a decision that's already made and shipped.
 
+## 2026-08-07 — the hand's growth was jumping the playmat's background crop
+
+`e930da8` **Reserve 2 rows of hand height so drawing to 8 cards doesn't shift the playmat
+background**
+
+Not an appearance change and not one of `/design`'s open choices — a stability fix inside
+`.playmat-game`'s own box. `.playmat-game` sizes itself off its children, and the bare
+`.playmat` rule's `background-size: cover` recomputes its crop every time that height
+changes. `#hand-section` only reserved one row of height (the shared `278px` on
+`#command-zone, #library-section, #revealed-cards-section, #hand-section`), so a hand
+drawing up through its normal maximum — 8 cards, opening 7 plus a draw — wrapped from 1 row
+to 2, grew the mat, and re-cropped the art. Visible as the playmat background "jumping"
+mid-game with no color or layout change to explain it.
+
+**Fix scope was deliberately narrow.** The obvious-looking fix — pin the art with
+`background-attachment` or move something into the bare `.playmat` rule in `playmat.css` —
+was raised and rejected in the same session: `.playmat` is the one appearance shared by both
+`/game` and `/prepare` at two scales (`a4991f3`), and touching it to solve a `/game`-only
+hand-layout problem would have re-opened that boundary. Instead a dedicated `#hand-section`
+rule landed in `game.css` — page-specific, right where the siblings' shared `278px` already
+lives — giving `#hand-section` its own `min-height: 579px` after the shared block, and
+leaving the other three siblings' `278px` untouched.
+
+**The number is measured, not derived.** 579px is the 2-row hand height at both 1440px and
+1900px viewport widths — the mat's height stays flat from an empty hand through 8 cards
+(verified via a throwaway, uncommitted Playwright script: `.playmat-game`'s height held at
+1189px from 8 through 11 cards). **A hand past 8 still grows the mat** — the 3rd row shift
+happens at 12 cards — and that residual jump was explicitly accepted as fine rather than
+chased further. If the hand's row height, gap, or the 7-card assumption ever changes, this
+number needs re-measuring; nothing else in the CSS derives it. Full reasoning in
+[interactions.md](interactions.md) → "Styling either play page's mat."
+
 ## 2026-08-07 — the last numeric coupling on the library-alignment class is gone
 
 `c19f49c` **Manual: Jess tweaks to game page. section-that-aligns-with-command-zone is no
