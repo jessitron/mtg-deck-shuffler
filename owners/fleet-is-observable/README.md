@@ -251,12 +251,21 @@ The shape, and why each piece:
   the Tabletop's and Spine's suites can export to the same place and be compared.
 - **Run identity on EVERY span**, via a `RunAttributesSpanProcessor` that stamps at `onStart` —
   copied from the Tabletop browser wrapper's `GlobalAttributesSpanProcessor`, which is now the fleet's
-  established way to do this. Carries `verify.run.id`, `verify.ship`, `verify.git.sha`, and the
-  cold/warm condition `verify.data_db.existed` / `verify.data_db.bytes`. On every span, not just the
-  root, so the run survives a fragmented trace and so per-condition breakdowns are possible.
-- **The condition is part of the measurement.** `data.db` is never reset, and four identical runs went
-  9.5 → 5.4 → 5.2 → 3.6 minutes. A duration without its cold/warm flag is not a number, it's a
-  rumour. `verify.sh` measures the db **before the server boots**, because boot creates the file.
+  established way to do this. Carries `verify.run.id`, `verify.ship`, `verify.git.sha`. On every span,
+  not just the root, so the run survives a fragmented trace and so per-condition breakdowns are
+  possible.
+- **RETIRED (2026-08-07, `verify-suite-speed` ticket 07): `verify.data_db.existed` /
+  `verify.data_db.bytes`.** These used to carry the cold/warm condition, because `data.db` was never
+  reset between runs and four identical runs went 9.5 → 5.4 → 5.2 → 3.6 minutes purely from cache
+  warmth — a duration without its cold/warm flag was not a number, it was a rumour. Ticket 07 gave
+  every `verify.sh` run its **own fresh SQLite file** (`VERIFY_DB_PATH`, deleted in the exit trap;
+  see "How it works now" below), so every run is cold now, on purpose, and measured as no slower
+  (52.0s cold, in line with prior warm runs). Once every run answers the same, the attribute answers
+  nothing — worse, it would read as still-meaningful telemetry that is now permanently `false`/`0`, a
+  fails-open-invisibly regression of the same shape this file keeps cataloguing. So the attribute-setting
+  code was deleted from `otelReporter.ts` rather than left to silently stop meaning anything. **If you
+  go looking for `verify.data_db.existed`/`.bytes` in Honeycomb, they stopped being emitted after this
+  commit — don't read their absence as a pipeline break.**
 - **Non-default `BatchSpanProcessor` settings are required at this volume**: `maxQueueSize: 8192`,
   `scheduledDelayMillis: 1000`. The defaults (2048 / 5000ms) drop on overflow **silently**, and the
   root's own `verify.span.count` counts spans *emitted*, not *exported* — invisible twice over.
@@ -362,6 +371,17 @@ on the machine where the file exists.
   robustness gap, not a live bug: worth doing when either ship's telemetry init is next opened, and
   worth remembering the moment anyone wraps or decorates an exporter (the natural place to introduce a
   synchronous throw). Not buoyed as its own ticket.
+
+**Per-run isolation follows the same one-line-override pattern as the port.** `verify.sh` already
+gave each run its own `VERIFY_PORT`; since `verify-suite-speed` ticket 07 (2026-08-07) it does the
+same for persistence: `VERIFY_DB_PATH="$(mktemp -u -t "mtg-verify-$VERIFY_RUN_ID").db"`, passed
+inline as `SQLITE_DB_PATH="$VERIFY_DB_PATH"` on the same `node --import ./dist/tracing.js
+dist/server.js &` line that sets `PORT=$VERIFY_PORT` — no app change needed, since
+`src/server.ts` already read `SQLITE_DB_PATH || "./data.db"` at all three adapter construction
+sites. `cleanup()`'s `EXIT INT TERM` trap does `rm -f "$VERIFY_DB_PATH"` alongside the existing
+server `kill`. This is env wiring, not a secret, but it lives in the same script and follows the
+same "override on the command line, never `export`" discipline as `VERIFY_*` below — the fresh
+path only exists for the one `node` invocation it's set on.
 
 **Secrets and source order.** `.env` in each ship sets
 `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**.
@@ -602,6 +622,23 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
     tolerated a slower-to-exit process.
   - This is the Tabletop's gap too (its `tracing.ts` also calls `sdk.start()` with no shutdown
     hook) — not yet fixed there; the pattern is now available to copy.
+
+- **`verify-suite-speed` ticket 07 (2026-08-07, `6d0a67a`) "fresh data.db per verify run"** — removed
+  the mechanism that the `verify.data_db.existed`/`.bytes` attributes existed to measure. Every
+  `verify.sh` run now gets its own `SQLITE_DB_PATH` (mktemp'd, deleted in the exit trap) instead of
+  the shared, never-reset `./data.db`; a cold run measured at 52.0s, no slower than warm, so
+  isolation cost nothing. Two things worth carrying forward:
+  - **A condition that stops varying makes its own telemetry attribute worthless, and worse than
+    absent.** Once every run is cold, `verify.data_db.existed` would read `false` forever and
+    `verify.data_db.bytes` would read `0` forever — not an error, just quietly meaningless, which is
+    the same fails-open-invisibly shape this file keeps finding elsewhere (the sampler needle, the
+    sibling log processor, deploy markers to the wrong environment). The fix here was to **delete**
+    the attribute-setting code in `otelReporter.ts`, not leave it emitting a constant. See "Dev-tooling
+    telemetry" above for where they used to be documented.
+  - **Per-run isolation for a resource (SQLite file) followed the exact shape already established for
+    a resource of the same kind (the port)**: mint a fresh value keyed to the run, pass it inline on
+    the one command that needs it, clean it up in the exit trap. No new pattern was invented; the
+    existing `VERIFY_PORT` shape just got a sibling.
 
 ## Related reading
 
