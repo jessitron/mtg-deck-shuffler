@@ -12,6 +12,7 @@
  */
 
 import { test, expect } from '@playwright/test';
+import { seedPrep, startGame, DEFAULT_PRECON_DECK, getPreconDisplayName } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
@@ -21,17 +22,9 @@ test.describe('Deck title placement', () => {
 
   test('the deck title sits on the playmat, not in the command zone', async ({ page }) => {
     // --- Get to /prepare with a real deck ---
-    await page.goto(`${BASE_URL}/choose-any-deck`);
-
-    const preconTiles = page.locator('.precon-tile');
-    await expect(preconTiles.first()).toBeVisible({ timeout: 15000 });
-
-    const deckName = (await preconTiles.first().locator('.tile-deck-name').textContent())?.trim();
-    expect(deckName).toBeTruthy();
-    console.log(`Selected precon deck: ${deckName}`);
-
-    await preconTiles.first().click();
-    await page.waitForURL('**/prepare/*', { timeout: 30000 });
+    const deckName = getPreconDisplayName(DEFAULT_PRECON_DECK);
+    const prepId = await seedPrep(page, DEFAULT_PRECON_DECK);
+    await page.goto(`${BASE_URL}/prepare/${prepId}`);
 
     // --- /prepare: title is on the mat ---
     const prepTitle = page.locator('.playmat > .game-title');
@@ -52,8 +45,8 @@ test.describe('Deck title placement', () => {
     console.log('SUCCESS: /prepare title is on the playmat');
 
     // --- Shuffle up into /game ---
-    await page.locator('button.begin-button').click();
-    await page.waitForURL('**/game/*', { timeout: 30000 });
+    const gameId = await startGame(page, prepId);
+    await page.goto(`${BASE_URL}/game/${gameId}`);
 
     // --- /game: title is in the header row, beside the hamburger ---
     const gameTitle = page.locator('.game-header-row > .game-title');

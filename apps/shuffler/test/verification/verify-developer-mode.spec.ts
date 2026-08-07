@@ -14,34 +14,15 @@
  */
 
 import { test, expect } from '@playwright/test';
+import { seedGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
-function extractGameId(url: string): string | null {
-  const match = url.match(/\/game\/(\d+)/);
-  return match ? match[1] : null;
-}
-
 async function setupGame(page: any): Promise<string> {
-  await page.goto(`${BASE_URL}/choose-any-deck`);
-
-  const preconTiles = page.locator('.precon-tile');
-  await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
-  await preconTiles.first().click();
-
-  await page.waitForURL('**/prepare/*', { timeout: 30000 });
-
-  const shuffleUpButton = page.locator('button.begin-button, button.start-game-button, button:has-text("Shuffle Up")');
-  await expect(shuffleUpButton).toBeVisible();
-  await shuffleUpButton.click();
-
-  await page.waitForURL('**/game/*', { timeout: 30000 });
-
-  const gameId = extractGameId(page.url());
-  if (!gameId) throw new Error('Failed to create game');
-
+  const gameId = await seedGame(page);
+  await page.goto(`${BASE_URL}/game/${gameId}`);
   return gameId;
 }
 
