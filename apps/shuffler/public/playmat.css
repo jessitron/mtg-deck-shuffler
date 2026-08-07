@@ -3,31 +3,14 @@
 
 /* === The Playmat === */
 /* One domain object, one appearance, two scales. Both play pages mark theirs
- * `class="playmat playmat-<page>"`; this rule is everything they share. The two
- * treatments used to differ (5px vs 10px frame, hotlinked Scryfall card art vs
- * local art) — Jess ruled 2026-08-07 that those were historical accidents, not
- * design. `border-radius` stays in the page sheets because it is genuinely
- * per-page: the mat is drawn smaller on /prepare, and radius is a matter of
- * scale.
- *
- * CAREFUL — `.playmat`, `.playmat-game` and `.playmat-prepare` are all equal
- * specificity (one class each), and the two pages load their sheets in OPPOSITE
- * order: /game is game.css then playmat.css, /prepare is playmat.css then
- * prepare.css. So a property added here silently OVERRIDES `.playmat-game` on
- * /game but LOSES to `.playmat-prepare` on /prepare. Keep each property in this
- * rule or in a modifier — never both. */
+ * `class="playmat playmat-<page>"`; this rule is everything they share. 
+ */
 .playmat {
   background-image: url('/images/aeoe-43-cascading-cataracts.png');
   background-size: cover;
   background-position: center;
   border: 10px solid black;
 }
-
-/* The mana colours (--mana-W/U/B/R/G) MOVED to @fleet/design-tokens
- * (packages/design-tokens/tokens.css). They're domain vocabulary rather than
- * Shuffler chrome — Magic's colour pie, a closed set — so any ship tinting by
- * colour identity uses exactly those five. Not mirrored here; see the note in
- * styles.css. */
 
 /* === Library Stack === */
 .library-stack {
@@ -124,30 +107,12 @@
 
 /* === Command Zone === */
 .cool-command-zone-surround {
-  border: 5px outset black;
+  border: 3px solid black;
   border-radius: 2px;
   padding: 10px;
-    background: linear-gradient(
-    45deg,
-    #000000 0%,
-    #333333 20%,
-    #666666 40%,
-    #666666 60%,
-    #333333 80%,
-    #000000 100%
-  );
+  background: var(--light-pink);
 }
 
-/* === Deck title plaque === */
-/* Appearance only — it lives on the mat now, so placement belongs to the page
- * sheets (prepare.css puts it in the mat's top row, game.css in the header row).
- * Opaque on purpose: the playmat is background art and will eventually vary, so
- * bare text can't be relied on to stay readable. Square corners — this is UI
- * chrome, not a physical object; the mat underneath is the physical object.
- * Flat border, not `groove` (choice 7, resolved 2026-08-07): the groove was the
- * plaque's join to the metal surround, and out on the mat it has nothing to join
- * to. The surround keeps its `outset`, so the 3D-border language still has a
- * home. */
 .game-title {
   background-color: var(--light-pink);
   border: 3px solid black;
@@ -165,12 +130,10 @@
   justify-content: flex-end;
   align-items: flex-start;
   width: fit-content;
-  border-color: black;
-  border-width: 7px;
-  border-radius: 2px;
-  border-style: inset;
-  background-color: var(--light-pink);
-  height: calc(278px + (7px * 2)); /* card height + border */
+}
+
+.cool-command-zone-surround .mtg-card-image {
+  box-shadow: none;
 }
 
 .game-name {
