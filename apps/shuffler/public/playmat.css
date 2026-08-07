@@ -1,13 +1,27 @@
 /* Shared styles for playmat components (library stack, command zone) */
 /* Used by both game.css and prepare.css */
 
-/* There is deliberately NO bare `.playmat` rule here yet. Both play pages put a
- * playmat on the screen — /prepare and /game each mark theirs `class="playmat
- * playmat-<page>"` — but they dress it differently today (20px radius, 10px
- * outline, no shadow, local Cascading Cataracts art vs 80px radius, 5px border,
- * a drop shadow, hotlinked Scryfall art), so each page sheet owns its own
- * appearance under the modifier. This is the slot the shared appearance goes in
- * the day those two treatments converge — put it here, not in a page sheet. */
+/* === The Playmat === */
+/* One domain object, one appearance, two scales. Both play pages mark theirs
+ * `class="playmat playmat-<page>"`; this rule is everything they share. The two
+ * treatments used to differ (5px vs 10px frame, hotlinked Scryfall card art vs
+ * local art) — Jess ruled 2026-08-07 that those were historical accidents, not
+ * design. `border-radius` stays in the page sheets because it is genuinely
+ * per-page: the mat is drawn smaller on /prepare, and radius is a matter of
+ * scale.
+ *
+ * CAREFUL — `.playmat`, `.playmat-game` and `.playmat-prepare` are all equal
+ * specificity (one class each), and the two pages load their sheets in OPPOSITE
+ * order: /game is game.css then playmat.css, /prepare is playmat.css then
+ * prepare.css. So a property added here silently OVERRIDES `.playmat-game` on
+ * /game but LOSES to `.playmat-prepare` on /prepare. Keep each property in this
+ * rule or in a modifier — never both. */
+.playmat {
+  background-image: url('/images/aeoe-43-cascading-cataracts.png');
+  background-size: cover;
+  background-position: center;
+  border: 10px solid black;
+}
 
 /* Mana colors for card type icons */
 :root {

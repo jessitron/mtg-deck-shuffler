@@ -7,21 +7,19 @@
 body {
   font-family: "Ovo", serif;
 }
-/* The playmat, as the game page dresses it: a giant Magic card, centered in the
- * viewport up to its max-width. Same domain object as /prepare's mat (both
- * elements carry the bare `playmat` class); the two treatments differ today, so
- * the appearance lives behind a page modifier. See playmat.css for the slot the
- * shared appearance would go in if they ever converge. */
+/* The playmat at game scale: centered in the viewport up to its max-width. Art
+ * and frame are shared — see the `.playmat` rule in playmat.css, which wins over
+ * this one on /game (equal specificity, and game.css loads first). Only what is
+ * genuinely per-page lives here. */
 .playmat-game {
   width: 100%;
   max-width: 1800px;
   margin: 0 auto;
-  background-image: url(https://cards.scryfall.io/png/front/3/3/33ea0047-bb86-4908-bb73-902d8db3b6de.png);
-  background-size: cover;
-  border: 5px black solid;
   box-shadow: 5px 5px black;
   margin-bottom: 5px;
   /* have to account for the shadow */
+  /* Bigger mat, bigger corner — radius is scale, not drift (Jess, 2026-08-07).
+   * /prepare draws the same object smaller at 20px. */
   border-radius: 80px;
   padding-bottom: 20px;
 }

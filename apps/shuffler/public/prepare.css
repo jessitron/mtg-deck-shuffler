@@ -13,22 +13,21 @@
   padding: 40px 20px;
 }
 
-/* The playmat, as the prepare page dresses it. Same domain object as the game
- * page's mat (both elements carry the bare `playmat` class); the two treatments
- * differ today, so appearance lives behind a page modifier. The grid, however,
- * IS the mat — placement rules below stay keyed on the bare `.playmat`. */
+/* The playmat at prepare scale. Art and frame are shared — see the `.playmat`
+ * rule in playmat.css. Only what is genuinely per-page lives here. The grid,
+ * however, IS the mat: placement rules below stay keyed on the bare `.playmat`,
+ * because they position things relative to the mat as a domain object rather
+ * than to this page's dressing of it. */
 .playmat-prepare {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   /* Row 1 is the deck title's band. minmax, not a fixed 50px: a long deck name
    * wraps, and a fixed track would let the plaque overflow instead of growing. */
   grid-template-rows: minmax(50px, auto) auto auto auto;
-  background-image: url('/images/aeoe-43-cascading-cataracts.png');
-  background-size: cover;
-  background-position: center;
+  /* Smaller mat, smaller corner — radius is scale, not drift (Jess, 2026-08-07).
+   * /game draws the same object bigger at 80px. */
   border-radius: 20px;
   margin: 50px auto 50px auto;
-  outline: 10px solid black;
   min-height: 500px;
   padding: 40px 0;
   max-width: calc(100vw * 7 / 9);

@@ -334,7 +334,7 @@
             <tr><td><code>20px</code></td><td><code>.playmat-prepare</code>, <code>.hand-drop-zone.drag-over</code></td><td>playmat yes — see the 80px row</td></tr>
             <tr><td><code>30px</code> / <code>3vh</code></td><td><code>.modal-card-image</code>, <code>.card-modal-image</code></td><td>yes — a big card</td></tr>
             <tr><td><code>50%</code></td><td><code>.hand-count</code>, <code>.card-modal-close</code></td><td>arguably — they're tokens/discs</td></tr>
-            <tr><td><code>80px</code></td><td><code>.playmat-game</code></td><td>yes — but <strong>it's the same object as the 20px row</strong>, one playmat dressed two ways. Open question, not a settled distinction</td></tr>
+            <tr><td><code>80px</code></td><td><code>.playmat-game</code></td><td>yes — <strong>the same object as the 20px row</strong>. Settled 2026-08-07: one playmat, one appearance, two radii, because <em>radius is a matter of scale</em> — /prepare draws the mat smaller. Everything else the two mats used to differ on (frame width, art) has converged into the shared <code>.playmat</code> rule</td></tr>
           </tbody>
         </table>
 
@@ -548,7 +548,7 @@
           <thead><tr><th>Ground</th><th>Where</th><th>Ring contrast</th><th>vs 3:1</th></tr></thead>
           <tbody>
             <tr><td>Dark purple gradient</td><td><code>site.css</code> — <code>/</code>, <code>/choose-any-deck</code></td><td>~10.9:1</td><td>passes comfortably</td></tr>
-            <tr><td>Playmat art (both play pages)</td><td><code>prepare.css</code>, <code>game.css</code></td><td>varies with the art</td><td>unmeasured — pale passages are the risk</td></tr>
+            <tr><td>Playmat art (both play pages)</td><td><code>playmat.css</code></td><td>one named asset, both pages</td><td>unmeasured — pale passages are the risk</td></tr>
             <tr><td><strong>Flat white</strong></td><td><code>.modal-dialog</code>, <code>docs.css</code>, <code>.button-base:disabled</code></td><td><strong>~1.35:1</strong></td><td><strong>fails</strong></td></tr>
           </tbody>
         </table>
