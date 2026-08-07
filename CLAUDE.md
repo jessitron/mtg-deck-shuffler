@@ -24,7 +24,9 @@ commands, and gotchas — read it when working on that ship.
   finish without saying what comes next, which strands Jess mid-pipeline. Whenever a skill
   completes, close your message with the concrete next command or action — "now run
   `/to-tickets` on that spec", "say 'do ticket 01' to start it" — so the thread never dies
-  at a skill boundary.
+  at a skill boundary. `/mattpocock-skills:ask-matt` is the map of the main flow and its
+  on-ramps — consult it to know what "next" actually is (main flow vs. on-ramp vs.
+  standalone) rather than guessing.
 
 ## Seamap
 
