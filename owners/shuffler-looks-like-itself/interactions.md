@@ -202,6 +202,24 @@ Concrete, in rough order of how often they bite.
 - **`.page-container` no longer exists.** If a doc, comment or plan names it, it's stale;
   it's `.playmat-game`. (`.error-page-container` in `src/view/common/html-layout.ts` is an
   unrelated class and was not touched.)
+- **`#hand-section`'s `min-height: 579px` (`game.css`, added `e930da8`, 2026-08-07) exists
+  to protect the mat's crop, not the hand's layout.** `.playmat-game` sizes itself off its
+  children's height, and the bare `.playmat` rule's `background-size: cover` recomputes its
+  crop/zoom every time that height changes — so a hand growing from empty to 8 cards (7
+  opening + a draw), which wraps from 1 row to 2, used to visibly shift the playmat art. The
+  fixed `579px` (measured: 2-row height at both 1440px and 1900px viewport widths) reserves
+  the 2-row height up front so the box height — and therefore the crop — stays constant
+  across that range. **This did not touch the bare `.playmat` rule or
+  `background-attachment`**; fixing the art in place at the `.playmat` level was raised and
+  rejected the same session, because it would cut across "one appearance, two scales" between
+  `/game` and `/prepare`. Instead it stabilizes what `background-size: cover` computes
+  *against*, entirely inside `.playmat-game`'s (page-specific) box, via the shared
+  `#command-zone, #library-section, #revealed-cards-section, #hand-section` selector's
+  page-specific sibling — no siblings' `278px` value moved. **A hand past 8 cards still grows
+  the mat and re-triggers the crop shift** — accepted, not fixed (measured stable 8–11 cards
+  at 1189px mat height, jumping again only at 12 cards = 3rd row). If the hand's row height,
+  gap, or the 7-card-opening-hand assumption ever changes, re-measure and update this number
+  — it isn't derived from anything else in the CSS.
 - **On `/game`, anything you put in the top strip must be a SIBLING of `#game-menu`, not a
   child.** `game.js` dismisses the open menu on `!evt.target.closest("#game-menu")`, and
   `#game-menu` is the dropdown panel's positioning ancestor — so nesting swallows the
