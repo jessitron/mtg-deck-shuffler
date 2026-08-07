@@ -658,6 +658,40 @@ styles remain the default by inertia. Loading Orbitron also does **not** put it 
 text — the `geo` `font` enum still has no Orbitron in it, so on-brand canvas text still needs a
 self-rendering shape. Necessary, not sufficient.
 
+## 2026-08-07 — library and command zone swapped sides
+
+No commit sha yet (working-tree change). Jess wanted the library on the right and the
+command zone on the left, on both `/prepare` and `/game` — a pure placement swap, no
+appearance change on either component.
+
+**Two different layout mechanisms, two different levers.** `/game`'s `.game-top-row` is a
+flex row with no `order` property, so visual order is DOM order — `active-game-page.ts`
+now emits `commandZoneHtml`, `revealedCardsHtml`, `librarySectionHtml` in that sequence,
+where it used to emit library first. `/prepare`'s mat is a CSS grid, so the swap is
+`grid-column` on two rules in `prepare.css`: `.playmat .cool-command-zone-surround` (4→2)
+and `.section-that-is-horizontally-aligned-with-command-zone` — the library-side rule —
+(2→4), with the library's `justify-self` flipped `end`→`start` so it still hugs the side
+nearer the command zone. Verified with a new spec,
+`test/verification/verify-library-command-zone-swap.spec.ts`, which reads actual
+`boundingBox()` left edges rather than trusting DOM/markup order, precisely because the two
+pages use opposite ordering mechanisms and either could regress independently.
+
+**`.playmat .commander-placeholder` moved too, and it's the part worth remembering.** It's
+the "no commander" alt-render of the exact same grid slot the surround occupies
+(`commanders.length === 0 ? placeholder : surround`), so when the surround's column changed
+the placeholder's had to mirror it — `grid-column` 5→1, keeping `justify-self: start`, so it
+overflows right into column 2. That's only safe because the two never render at the same
+time. A comment above the placeholder rule in `prepare.css` says so. If a future change to
+this grid moves the surround again without also checking the placeholder, the col4/col5 (now
+col2/col1) offset between them will look like an unexplained accident instead of the mirrored
+pair it actually is.
+
+**Also incidentally became true, not newly written:** the library rule's existing comment
+— `justify-self: end; /* left-align, overflow right */` — had been describing the *opposite*
+of what the code did (an `end` justify-self right-aligns, it doesn't left-align). Flipping
+`justify-self` to `start` for this swap made the comment's claim match the code for the
+first time; it was stale before this change, not fixed by it, and stayed stale until it did.
+
 ## 2026-08-07 — the typefaces got role names, and 39 literals went with them
 
 `f79bc7d` **Name the typefaces by role, and sweep the 39 literals onto the tokens**

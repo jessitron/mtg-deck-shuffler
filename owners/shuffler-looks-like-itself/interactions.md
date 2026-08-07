@@ -204,6 +204,20 @@ Concrete, in rough order of how often they bite.
   Archidekt. `escapeHtml` lives in `src/view/common/shared-components.ts` (moved there from
   `active-game-page.ts` on 2026-08-07, where it was module-private) — import it rather than
   writing a second copy.
+- **Library and command zone swapped sides (2026-08-07): library is now RIGHT, command zone
+  LEFT, on both play pages — pure placement, no appearance change.** On `/game`,
+  `.game-top-row` is a flex row with no `order` property, so DOM order **is** visual order;
+  `formatActiveGameHtmlSection` (`active-game-page.ts`) now emits `commandZoneHtml`,
+  `revealedCardsHtml`, `librarySectionHtml` in that sequence. On `/prepare`,
+  `.playmat .cool-command-zone-surround` and `.section-that-is-horizontally-aligned-with-command-zone`
+  (the library-side rule) swapped `grid-column` (surround 4→2, library 2→4) and the
+  library's `justify-self` flipped `end`→`start` to keep it hugging the side nearer the
+  command zone. **If you ever change this grid again, `.playmat .commander-placeholder`
+  moved too** (`grid-column` 5→1, `justify-self: start`, so it overflows right into
+  column 2) — it's the "no commander" alt-render of the *same* slot the surround occupies,
+  and the two are safe to sit in different columns **only** because `commanders.length
+  === 0` renders exactly one of them, never both. Don't "tidy" them back into alignment
+  without re-checking that mutual exclusivity still holds.
 
 **Testing that a token or a font actually arrived** (added 2026-08-07, `4396aea`)
 
