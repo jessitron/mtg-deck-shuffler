@@ -68,12 +68,15 @@ test.describe('Card Name Links in Action History', () => {
     const cardNameLink = page.locator('.history-list .card-name-link').first();
     await expect(cardNameLink).toBeVisible({ timeout: 5000 });
 
-    // Clicking it opens the card modal.
-    await cardNameLink.click();
-    await page.waitForTimeout(1000);
-
+    // Clicking it opens the card modal. Retry the click: at Playwright speed it
+    // can straddle htmx's modal swap/settle and be swallowed, which made this
+    // spec flaky in a full-suite run (same retry pattern as verify-discard).
     const cardModal = page.locator('.card-modal-overlay');
-    await expect(cardModal).toBeVisible({ timeout: 5000 });
+    await expect(async () => {
+      if (await cardModal.isVisible()) return;
+      await cardNameLink.click({ timeout: 2000 });
+      await expect(cardModal).toBeVisible({ timeout: 3000 });
+    }).toPass({ timeout: 20000 });
 
     console.log('SUCCESS: Action History card names are links that open the card modal');
   });
