@@ -26,6 +26,13 @@
   exist in a stylesheet the *host page* already loads.
 - **The animations owner** (tight coupling — see "not related to" for the boundary). Both
   care about `game.css`, transitions, and card containers.
+- **`.scratch/tabletop-physics/`** — the Tabletop's shape-architecture maps lean on this KB by
+  name. `issues/03-what-furniture-is.md` (resolved 2026-08-07) deferred *all* appearance to this
+  owner and to `/design`, and `issues/11-what-a-zone-looks-like.md` is the ticket that will spend
+  it. Two consequences: **the design language now gates a Tabletop implementation ticket**, and
+  the stock tldraw look 03's implementer reproduces as scaffolding is **explicitly exempt from
+  the Layer-1 token rule** — it's a knowingly-untokenized placeholder with a comment saying so,
+  so a design-lint sweep must not "fix" it into a decision.
 - **The two-faced-cards owner** — flip button styling and the `.flip-container-*` blocks.
 - **The library-search owner** — modal and list styling.
 - **`test/verification/verify-deck-title-placement.spec.ts`** (added 2026-08-07) — pins the
@@ -208,6 +215,27 @@ Concrete, in rough order of how often they bite.
 **Touching `game.css`**
 
 - Consult the **animations** owner too. Its charge lives in the same file.
+
+**Designing anything that lives inside the tldraw canvas** (added 2026-08-07)
+
+- **Read [README.md](README.md) → "tldraw limits" first.** Four rules behave differently on the
+  canvas, and three of them are hard limits rather than choices: no Orbitron in the `geo` `font`
+  enum (so on-brand canvas text requires a self-rendering shape), the global `:focus-visible`
+  rule can't reach a shape (tldraw owns selection indication), a locked shape can never be a
+  drop target (so "reacts to what's over it" must be a derived render, not a hook), and an
+  opaque `image` shape layered over a box hides that box's interior.
+- **A self-rendering shape needs its own `toSvg`, or it vanishes from canvas exports.** The cost
+  scales with the treatment — gradients, shadows and a webfont all have to be hand-written into
+  the SVG. **Budget it inside the option comparison**, not after Jess has picked.
+- **Size canvas things in card widths, and use the *right* card.** The Tabletop's card is
+  **170 × 238** (`apps/tabletop/DESIGN.md`, 68 units/inch). The Shuffler's CSS card is 200 × 278.
+  They are both "the card is the layout unit" and they are **not the same number** — don't cross
+  them.
+- **`apps/tabletop` has no stylesheet and no font link**, so a `var(--…)` there resolves to
+  nothing and Orbitron silently becomes a system serif. See [open-choices.md](open-choices.md)
+  → "Fleet gaps — the Tabletop side" before writing any Tabletop CSS.
+- **Deciding a canvas treatment is not blocked by that plumbing; implementing it is.** Staging
+  happens on `/design` in the Shuffler, which already has the tokens and the fonts. Stage first.
 
 ## Not related to
 

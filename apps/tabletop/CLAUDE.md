@@ -23,6 +23,29 @@ The player area (playmat, library, graveyard, exile, Stack) is specified in
 taller when lands overflow its bottom half — picked up by the `playmat-command-zone`
 line in the repo-root `TODO.md`.
 
+## UI Style
+
+**The Tabletop is in scope for the fleet's design owner** — `owners/shuffler-looks-like-itself/`
+(the slug predates the fleet scope) and its `-context` / `-review` / `-update` skills. The
+Shuffler and Tabletop are meant to feel like **one app with two faces**, so pull toward the
+Shuffler's purple-and-pink tokens, Orbitron-for-chrome typography and square corners rather than
+inventing a look here. `/design` on the Shuffler is the gallery; look at it first.
+
+Two things to know before you write any styling here:
+
+- **There is nowhere to put it yet.** This ship has **no CSS source file** (only a built
+  `dist/client/assets/*.css`) and **no font `<link>`/`@font-face`** — the client's only CSS
+  import is `import "tldraw/tldraw.css"`. A `var(--…)` resolves to nothing and Orbitron falls
+  back to a system serif, **both silently**. Tracked as `tabletop-css-tokens` in the repo-root
+  `TODO.md`; **don't resolve it by copying the Shuffler's `:root`.** Also: the green/cream inline
+  palette in `src/client/LandingPage.tsx` is a known violation, not a house style — don't match it.
+- **tldraw limits four rules**, recorded in the owner's README under "tldraw limits": no Orbitron
+  in the `geo` `font` enum (on-brand canvas text needs a self-rendering shape); the global
+  `:focus-visible` ring can't reach a canvas shape; a **locked** shape can never be a drop target
+  (`getDraggingOverShape` filters `!isLocked` before checking drag hooks), so "furniture reacts to
+  what's over it" must be a derived render; and an opaque `image` shape layered over a box hides
+  that box's interior. Record new limits there rather than fighting them or dropping the rule.
+
 ## Commands
 
 All from `apps/tabletop/`:

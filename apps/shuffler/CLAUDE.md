@@ -41,7 +41,11 @@ commit that adds a component.
 
 The short version:
 
-- **Square corners except on physical round elements** (cards, playmats, count discs).
+- **Square corners except on physical round elements** (cards, playmats, count discs) — with
+  one decided refinement not yet swept into the CSS: **soften what you press.**
+  `--radius-soft: 4px` on pressables, `0` on flat surfaces, physical objects keep their real
+  radii (Jess, 2026-08-06). *The line falls at "do you touch it", not at "is it small."*
+  The 13 radius values still in the CSS are drift awaiting that sweep, not precedent.
   Both play pages put a playmat on screen: `class="playmat playmat-prepare"` on `/prepare`,
   `class="playmat playmat-game"` on `/game`. Same domain object, **one appearance, two
   scales** — the `/game` one used to be called `.page-container`, which hid that fact

@@ -75,6 +75,42 @@ expensive way round.
   the controller may…"**, and don't build concealment — a face-down card's identity stays readable
   because any player could just turn the card over anyway.
 
+- **Furniture is one custom `mtg-zone` type; zones notice what lands on them but never hold it** —
+  [Decide what furniture is, and who owns zone membership](issues/03-what-furniture-is.md), resolved
+  2026-08-07. One registration covers playmat/library/graveyard/exile/Stack/command with a `zone`
+  prop, `seatId` (naming, not gating), and `label`; the playmat and library *pictures* stay separate
+  stock `image` shapes; the seat name label isn't a zone but does get locked (it isn't today —
+  a live bug). `canReceiveNewChildrenOfType` stays `false`: a zone carries nothing about its
+  contents, mirroring ticket 02's card that carries nothing about its passengers. Frame-likeness
+  rejected — `getClipPath` clips children and the playmat would parent every permanent.
+- **Furniture stays locked by default, and that decided the mechanism** — same ticket. Jess:
+  *"adjustable by the players if they want to move it, but locked by default because I don't want to
+  move it by accident."* tldraw's context-menu Lock/Unlock **is** the affordance. The discovery that
+  forced everything else: `getDraggingOverShape` filters `!s.isLocked` **before** checking for
+  `onDragShapesOver`/`onDropShapesOver`, so **a locked shape can never be a drag target** — the
+  target-side hooks are unavailable, permanently, and there is no `canMove`/`canDrag` on `ShapeUtil`
+  to substitute. So the two jobs split: **zone entry stays card-side** in `onTranslateEnd` (but
+  matching `type === 'mtg-zone'`, not a freeform `meta.zone` — the old choice's reason is gone and
+  the choice is re-made on a new one), and the **armed highlight is derived reactively inside the
+  zone's `component()`**, never written to the store. Strictly better than the hook route:
+  `onDragShapesOver` fires every frame, so a prop-writing hook meant per-frame synced writes and an
+  undo trail.
+- **Overlap: topmost index wins, so draw order is now a precedence declaration** — same ticket.
+  Matches tldraw's own top-down convention. Two constraints follow: furniture must be drawn
+  least-specific-first (playmat before the command zone that sits on it), and re-putting a zone must
+  **preserve** its index — `ensureStackStripWidth` mints a fresh one on every seat join, a latent
+  precedence bug. Behaviour is unchanged today; it's deliberate now rather than accidental.
+- **Appearance was deliberately split out, not decided** — same ticket, on the
+  `shuffler-looks-like-itself` owner's advice. Today's dashed-grey-serif is *stock tldraw*, i.e.
+  scaffolding nobody chose. The implementer reproduces it **loosely and deliberately without
+  chasing fidelity** — "verbatim" is unimplementable, since the look comes from tldraw's prop enums
+  rendered through its own stroke geometry, and an implementer told "verbatim" will approximate
+  while believing they copied. So: comment that it is provisional, and that its literal values are
+  a **knowingly-untokenized placeholder exempt from the Layer-1 token rule**, or a design-lint
+  sweep will promote the placeholder into a decision. The real treatment is
+  [what a zone looks like](issues/11-what-a-zone-looks-like.md), to be staged on `/design` rather
+  than argued in prose.
+
 ## Not yet specified
 
 - **Which attachment mechanism suits which passenger.** The [research
@@ -88,6 +124,21 @@ expensive way round.
   foggy is per-passenger: whether a counter, a post-it, and a tucked card each want parenting or
   a binding, and whether a *card* must itself become frame-like to catch a counter dropped on it
   (`onDragShapesIn` is a frame behaviour). Tickets 07/08/09 will phrase those.
+- **Where Tabletop CSS tokens and fonts live.** `apps/tabletop` has **no CSS source file at all**
+  (only a built `dist/client/assets/*.css`) and no font `<link>` or `@font-face` anywhere, while the
+  fleet's Layer-1 craft rule says "use `var(--…)`, not a literal" applies to the Tabletop today. A
+  self-rendering `mtg-zone` hits both the moment it draws its own box with an Orbitron label — and
+  the font half **fails silently**, falling back to a system serif. Shared file? A duplicated
+  `:root`, à la the deliberately duplicated `log.ts`? (The design owner warns specifically against
+  a copied `:root` — a diverged palette fails silently.) It's fleet design plumbing rather than
+  physics, and it's entangled with the Tabletop's whole design pass, which is bigger than this map.
+  It does **not** block deciding [ticket 11](issues/11-what-a-zone-looks-like.md), which stages on
+  `/design` in the Shuffler; it blocks implementing it. Also a `TODO.md` line.
+- **Whether the armed highlight should be shared with the whole table.** Decided local-only for now
+  (ticket 03) because it's far easier and Jess didn't mind. It becomes worth revisiting *only* if
+  tldraw exposes a presence lane — cursors and selections already ride outside the undoable
+  document — since that's what would make shared arming cheap without per-frame writes to the
+  synced document. Additive, never a reversal.
 - **What happens to a counter when its card leaves the table** in ways other than the graveyard
   — exile, back to library, back to hand. Jess named the graveyard case ("they disappear");
   the others follow from whatever mechanism the counter ticket picks.

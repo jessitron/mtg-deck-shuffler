@@ -2,6 +2,13 @@
 
 The negotiable part: which file owns what, what loads where, and the traps.
 
+**Everything below is the Shuffler.** The owner is fleet-scoped, but the Tabletop has no
+architecture to describe yet: `apps/tabletop` has **no CSS source file** (only a built
+`dist/client/assets/*.css`), **no `:root`**, and **no font link** — the client's only CSS import
+is `import "tldraw/tldraw.css"`. Verified 2026-08-07. So "which file owns this" has no answer
+there; see [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side". When it
+acquires one, this file grows a second half rather than the Shuffler's table growing rows.
+
 **Citations here are file + selector, never `file:NNN`** — see
 [README.md → How to cite code in this KB](README.md#how-to-cite-code-in-this-kb-standing-convention-2026-08-07).
 Grep the selector.
@@ -180,3 +187,13 @@ focus assertion to a transitioned element, poll.
 
 If you add a stylesheet to the app, add it to `APP_STYLESHEETS` in that spec **and** to
 `design.ejs`.
+
+**The gallery cannot currently stage anything from another ship (open, 2026-08-07).** Every
+specimen today is a Shuffler component styled by a Shuffler stylesheet. A Tabletop specimen
+would need the Tabletop's CSS to be a real stylesheet `/design` can serve — a cross-app
+question nobody has answered, and the Tabletop has no stylesheet to serve in the first place.
+`.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md` will be the first to want one.
+Two rules for whoever gets there: **a mock built from `design-candidates.css` must be labelled
+a mock**, and a canvas specimen must not quietly hide the layering the real canvas has (see
+[README.md](README.md) → tldraw limits — the playmat's and library's opaque pictures sit *over*
+their zone box, so a flat CSS box misrepresents them).

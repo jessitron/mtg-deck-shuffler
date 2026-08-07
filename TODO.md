@@ -143,43 +143,33 @@ section is just a wall between Jess and the live work.
     makes a constraint on every mountain: "public events, commentary, hand counts but never hands."
   ← mountain: tabletop-replaces-mural
 
-- [ ] `verify-suite-speed` Instrument the **test harness**, then optimize the suite
-  - `apps/shuffler/verify.sh` runs 52 Playwright tests in 3.6–9.5 minutes. That's slow enough
-    that nobody runs it, so nobody learns whether a change broke something — and red stops
-    meaning anything. Three table-mode specs were broken for weeks before anyone looked
-    (fixed 2026-08-07; the cause was a `<details>` disclosure the specs never learned about).
-  - **The work is instrumenting the harness. The app is already ruled out — measured, not
-    assumed.** A run does emit app traces (`verify.sh` sources `.be` then `.env`, so the server
-    exports to Honeycomb team `modernity`, env `local`, dataset `mtg-deck-shuffler`; browser
-    spans go to `mtg-deck-shuffler-web`). Reading them on 2026-08-07 across four full runs:
-    **total `SUM(duration_ms)` over all 3,570 spans in 6 hours was ~48 seconds**, and that's
-    inflated because parent and child spans both count. The same window contained ~22 minutes
-    of suite runs. **So server-side work is ~1–2% of wall clock.**
-    Query: https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-deck-shuffler/result/vZWiRDexbsm
-  - So the existing traces answer exactly one question — *it isn't the server* — and then stop.
-    The other ~98% is Playwright, browser startup, process spawn, and the fixed sleeps, and
-    **none of it is instrumented.** That's the gap to close first: get spans around test
-    lifecycle (per-spec, per-hook, browser launch, server boot, `page.goto`, each explicit
-    wait) so the suite's own time is queryable the way the app's already is. Only then optimize.
-  - Worth having in view while designing that: a run's spans should share a trace or a run id,
-    so one run is one queryable thing rather than a smear across a time window.
-  - **Two app-side facts found while ruling the app out** — small, but they're the only real
-    server-side costs, so don't lose them: `tls.connect` (4 spans, **4.5s p95**) means the suite
-    still reaches the internet, almost certainly Scryfall; and `GET /proxy-image` (4 calls,
-    **2.4s total**) is by far the slowest route per call. Everything else is single-digit ms.
-  - **An observation the harness instrumentation will have to account for** — recorded so it
-    isn't lost, *not* a lead to chase: four consecutive runs, same tests, no changes, went
-    9.5 → 5.4 → 5.2 → **3.6 minutes**. `data.db` is never reset between runs. Don't theorize
-    about it in advance; measure, and see whether it shows up.
-  - Consequence worth keeping in view: the suite doesn't have *one* duration, so "how slow is
-    it" needs a stated condition (cold vs warm) before it has an answer.
-  - Worth knowing: `workers: 1` and `fullyParallel: false` in `playwright.config.ts` are
-    deliberate ("we're testing concurrent state"), so parallelism is a decision to make, not a
-    free win.
-  - Jess asked for this on 2026-08-07, mid-fix on those three specs, and confirmed the same day
-    that harness instrumentation is what she's after.
-  - Related: `set-up-ci` below — a cold-start suite is what CI actually pays per push, so these
-    two want deciding together.
+- **The verify suite's speed is now tracked**, split into two tickets under
+  `.scratch/verify-suite-speed/`: `01-instrument-the-harness.md` is `ready-for-agent` (say
+  "do ticket 01" to start it), and `02-optimize-the-suite.md` holds the goal and the leads
+  but stays unspecified until 01 reports. All the measurement work from this inbox line
+  moved into those two files.
+
+- [ ] `no-ship-flushes-on-sigterm` Spans are probably lost on every shutdown, everywhere
+  - `apps/shuffler/src/tracing.ts` calls `sdk.start()` and registers **no shutdown hook**, and
+    `verify.sh`'s `cleanup()` kills the server with SIGTERM. Node exits immediately on SIGTERM,
+    so up to `scheduledDelayMillis` (5s default) of the last `BatchSpanProcessor` batch is very
+    likely dropped **every verify run** — and k8s terminates with SIGTERM too, so prod has the
+    same hole.
+  - Consequence worth naming: the ~48s app-side figure in `.scratch/verify-suite-speed/` is a
+    **floor, not a measurement**.
+  - Found 2026-08-07 by `fleet-is-observable-context` while triaging the verify suite; it
+    recorded this as a gap in its own KB (the wiring table says log processors "share the
+    shutdown path with traces", which is true of the SDK but misleading — nothing calls
+    `sdk.shutdown()`).
+  ← mountain: overhead
+
+- [ ] `verify-sh-dead-failure-branch` `verify.sh`'s "tests failed" message is unreachable
+  - `set -e` is on, so a nonzero `npx playwright test` aborts the script before
+    `TEST_EXIT_CODE=$?` runs. The branch that prints "Verification tests failed!" can only ever
+    see 0. Observable behavior is still right (the trap runs cleanup, the shell exit code is
+    still Playwright's) — it's the message that's dead. One-sitting fix.
+  - Found 2026-08-07 while triaging `verify-suite-speed`.
+  ← mountain: overhead
 
 - [ ] `deeplinks-prop-moved` Check whether `<Tldraw deepLinks>` still does anything
   - tldraw **v5.0.0 moved `deepLinks` from a top-level `<Tldraw>` prop into `options`**, and
@@ -396,3 +386,17 @@ section is just a wall between Jess and the live work.
     `src/view/play-game/game-modals.ts`, `src/view/play-game/history-components.ts`. All four are
     HTMX-swapped fragments, so whatever moves focus has to run on swap (`htmx:afterSwap`), not on
     page load — and closing is also an HTMX swap, so focus restore hooks the same place.
+
+- **tabletop-css-tokens** — `apps/tabletop` has no CSS source file at all, only a built
+  `dist/client/assets/*.css`, and **no font `<link>` or `@font-face` anywhere** (the only CSS import
+  in the client is `import "tldraw/tldraw.css"`). The fleet's Layer-1 craft rule ("use `var(--…)`,
+  not a literal") applies to the Tabletop *today*, but there is nowhere to declare the tokens, and
+  Orbitron — the fleet's chrome typeface — has no way to load. **Both halves fail silently:** CSS
+  drops an unknown `var()`, and a missing font falls back to a system serif. Decide where they
+  live: a shared file both ships load, or a duplicated `:root` in the spirit of the deliberately
+  duplicated `log.ts` — but **not** a copied `:root`, per the design owner: a diverged palette
+  fails silently and there are already four `:root` blocks. Surfaced by `.scratch/tabletop-physics/issues/03-what-furniture-is.md`,
+  which makes furniture a self-rendering custom shape; it blocks
+  `.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md`. Related and unrecorded:
+  `apps/tabletop/src/client/LandingPage.tsx` carries an off-brand green/cream palette in inline
+  styles (`#1a2a1f`, `#f5f1e8`, `#3d5a45`) — a live Layer-1 violation.

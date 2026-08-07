@@ -477,3 +477,62 @@ cause.
 pages' frame color — the mats, `.game-title`, and `.cool-command-zone-surround` all use it,
 and no black token exists in `styles.css` `:root`. And the mat art URL is down to two sites
 from three (`playmat.css`, `design-gallery.css`); `design-playmat-specimen` would make it one.
+
+## 2026-08-07 — the design language reached the canvas, and hit four tldraw walls
+
+No CSS changed. `.scratch/tabletop-physics/issues/03-what-furniture-is.md` decided that Tabletop
+furniture becomes one custom tldraw shape type, `mtg-zone` (playmat, library, graveyard, exile,
+Stack, future command zone), rendering itself in React instead of being a stock locked `geo` shape
+tagged `meta.zone`. This owner was consulted **mid-interview**, before a recommendation had formed
+— which is the pattern the README asks for, and it paid twice.
+
+**What it bought, and this is the reusable lesson: consulting early moved a decision, not just a
+review comment.** The owner's answer that the `geo` `font` prop enum has no Orbitron in it — so a
+stock label can *never* be on-brand — became "the single strongest design argument for the custom
+shape." A design fact, arriving before the architecture was fixed, changed the architecture.
+
+**Appearance was deliberately split out into a new ticket** rather than decided inside the
+architecture ticket, on this owner's advice. The reasoning is the same one the README states:
+today's dashed-grey-serif zone look is **stock tldraw** — scaffolding nobody chose, appearing in
+no history entry and no open choice — and "new UI pulls toward the standard, not toward what it
+sits next to" bites hardest when what it sits next to is a framework default.
+
+**Four tldraw limits got recorded** (now in [README.md](README.md) → tldraw limits): the `font`
+enum; the global `:focus-visible` rule cannot reach a canvas shape, so that's a genuine exemption
+rather than an oversight; `getDraggingOverShape` filters `!s.isLocked` **before** checking for drag
+hooks and there is no `canMove` on `ShapeUtil`, so locked furniture can never be a drop target and
+any "reacts to what's over it" treatment must be a derived render; and an opaque picture layered
+over a zone box hides its interior, which kills the interior-tint pattern for the playmat and
+library specifically.
+
+**Three review findings worth keeping, because each is a failure mode this owner will meet again:**
+
+- **"Reproduce it verbatim" was unimplementable and therefore dangerous.** The stock look comes
+  from tldraw's prop *enums* rendered through its own hand-drawn stroke geometry and theme. A
+  `component()` drawing `border: 1px dashed grey` is an approximation, and an implementer told
+  "verbatim" will approximate *while believing they copied* — after which the next agent cites it
+  as precedent. Fix: approximate on purpose, and mark the literals a **knowingly-untokenized
+  placeholder, exempt from the Layer-1 token rule**, so a lint sweep can't promote the placeholder
+  into a decision.
+- **"Pending" in this KB meant *unshipped* and was read as *undecided*.** Choice 4 (chrome radius)
+  was answered by Jess on 2026-08-06, but this KB's tables still said pending because the commits
+  hadn't landed — so the Tabletop ticket derived `border-radius: 0` from first principles, missing
+  that the decided rule splits (`0` on flat surfaces, `--radius-soft: 4px` on pressables, *"the
+  line falls at 'do you touch it'"*). Fix: choices 3, 4 and 6 now state Jess's actual answer inline
+  in [open-choices.md](open-choices.md) and in the README table, with "shipped?" as a separate
+  column. **Decided-but-unshipped is a state this KB has to name explicitly.**
+- **An audience question was hiding inside a mechanism paragraph.** "The armed highlight is derived
+  locally, not written to the store" reads as implementation — but *who sees the library light up*
+  is player-visible behaviour and therefore Jess's. Pulled out and asked: *"honestly, whichever is
+  easier"* → local to the dragging player only. The door stays open at no cost (tldraw sync already
+  carries cursors and selections outside the undoable document, so a presence lane would make
+  shared arming cheap), recorded in the map's fog. **When a mechanism sentence implies who can see
+  something, that's a design decision wearing a mechanism's clothes.**
+
+**Two gaps got a permanent home** in [open-choices.md](open-choices.md) → "Fleet gaps — the
+Tabletop side": `apps/tabletop` has no CSS source file and no font link at all (so Layer 1 applies
+with nothing to apply it *with*, and both halves fail silently), and `LandingPage.tsx`'s off-brand
+green/cream inline palette (`#1a2a1f`, `#f5f1e8`, `#3d5a45`) is a live Layer-1 violation. The
+second had been recorded only inside a Tabletop ticket as "not a precedent to match" — the wrong
+home, because it outlives the ticket. Also stated up front: **the tokens gap must not be solved by
+copying `styles.css`'s `:root`.**

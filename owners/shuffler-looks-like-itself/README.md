@@ -54,6 +54,50 @@ The Tabletop today has hit "can't implement anything else until it has a design
 identity" (Jess, 2026-08-06). Its design pass should start from this identity — tokens
 and typefaces first — not from a blank page, and its findings come back into this KB.
 
+**And it has nowhere to start from yet.** `apps/tabletop` has **no CSS source file at all**
+(only a built `dist/client/assets/*.css`) and **no font `<link>` or `@font-face` anywhere** —
+the only CSS import in the client is `import "tldraw/tldraw.css"`. So Layer 1's "use a token,
+not a literal" currently has nowhere to point, and Orbitron has no way to load. **Both halves
+fail silently:** CSS drops an unknown `var()`, and a missing font falls back to a system serif.
+Tracked as `tabletop-css-tokens` in the repo-root `TODO.md`. **When it gets solved, do not solve
+it by copying `styles.css`'s `:root`** — a second source of truth for the palette diverges
+silently, and this owner is already fighting four `:root` blocks.
+
+## tldraw limits — recorded, not fought (2026-08-07)
+
+Layer 2 says to write these down rather than silently dropping a rule. All four were found
+while `.scratch/tabletop-physics/issues/03-what-furniture-is.md` decided that Tabletop
+furniture becomes a custom `mtg-zone` shape.
+
+- **tldraw's `geo` `font` prop is an enum with no Orbitron in it.** So a stock `geo` label
+  can *never* be on-brand — today's `serif` zone labels aren't a design choice, they're the
+  enum. This is the strongest design argument for a custom shape, and it generalizes: **any
+  text the fleet wants on a canvas in a fleet typeface has to come from a self-rendering
+  shape.**
+- **Layer 1's focus rule cannot reach a canvas shape.** The global `:focus-visible` rule is
+  DOM-only, and tldraw owns selection indication for shapes. This is a genuine exemption from
+  the "every interactive element gets a visible focus state" rule, not an oversight — say so
+  out loud when designing canvas UI instead of inventing a shape-level ring that would fight
+  tldraw's.
+- **A locked shape can never be a drop target.** `Editor.getDraggingOverShape`
+  (`Editor.ts`, currently around `:6571-6585`) filters `!s.isLocked` **before** it checks
+  whether a util defines `onDragShapesOver`/`onDropShapesOver`, and there is no
+  `canMove`/`canDrag`/`canTranslate` on `ShapeUtil` — `isLocked` is tldraw's only shape-level
+  brake. Furniture is locked on purpose (Jess: locked by default so she doesn't move it by
+  accident, unlockable via the context menu on purpose), so **any "this furniture reacts to
+  what's over it" treatment has to be a derived render** (`useValue` over the shapes being
+  translated), never a hook writing a prop. That's also better hygiene: the hooks fire every
+  frame, so a prop-writing version means per-frame writes to a synced document plus an undo
+  trail.
+- **An opaque picture layered over a zone box hides that box's interior.** The playmat's and
+  library's *pictures* stay separate stock `image` shapes on top of the `mtg-zone` box, so
+  border, interior tint and inset shadow are all invisible for those two. Any "armed" or
+  "about to receive" treatment for them must read as an **outward** effect — which rules out
+  the app's one existing armed pattern (`.hand-drop-zone.drag-over`'s "restate the boundary +
+  tint the interior") for exactly the two zones that need it most. A pure-CSS `/design`
+  specimen will hide this; include a stand-in image layer or scope the specimen to the
+  unpictured zones and say so.
+
 ## Why this owner exists
 
 The Shuffler has a real, specific, coherent aesthetic — and it is almost entirely
@@ -240,20 +284,27 @@ fill + `var(--light-pink)` text. Replaces the three grays (`#6c757d` Bootstrap, 
 Material, and the `#5a6268` hover-darken riding along with them) across
 `.end-game-actions`, `.card-action-button.secondary`, and `.modal-action-button.secondary`.
 
-## Open choices — staged on `/design`, not yet decided
+## Open choices — answered by Jess, not yet shipped
+
+**All three are DECIDED** — Jess answered choices 3, 4 and 6 on 2026-08-06, and the answers
+with her reasoning are in `.scratch/shuffler-design-choices/spec.md`. What's outstanding is the
+*commits*, one per choice (`issues/02`–`04`). **So do not treat these as open questions and do
+not re-derive an answer** — cite spec.md. (This bit somebody on 2026-08-07: a Tabletop ticket
+asserted `border-radius: 0` on a zone as though radius were still open, because this table and
+`open-choices.md` both still read "pending".)
+
+| Choice | Jess's answer (spec.md) | Shipped? |
+| --- | --- | --- |
+| 3 · Card-modal action buttons | **Two families, split so the color carries meaning** — *this moves the card* vs *this is a tool*. Neither staged option | not yet |
+| 4 · Corner radius on chrome | **Soften what you press:** `--radius-soft: 4px` on pressables, `0` on flat surfaces, physical objects keep their real radii. *"The line falls at 'do you touch it', not at 'is it small'"* | not yet |
+| 6 · Text input | option C, `.candidate-input` — 2px `--deep-space`, Orbitron, one rule with a size variant | not yet |
 
 **→ [open-choices.md](open-choices.md) is the work list**: every option, its exact
 implementation steps by file and selector, and the checklist for resolving one. Start there if
 you've been sent to converge the design.
 
-Until Jess picks, don't hard-code an answer; follow the existing treatment nearest the
-component and flag the choice.
-
-| Choice | Options on the page |
-| --- | --- |
-| Card-modal action buttons | Keep seven color-coded hues · collapse to primary/secondary |
-| Corner radius on chrome | truly 0 · a single 4px |
-| Text input | precon-search · join-table · tokenized proposal (recommended) |
+Because the CSS hasn't caught up, the *code* still shows 13 radius values and seven Material
+hues. Those are not precedent — new UI follows the decided rule above.
 
 Candidate CSS for the unadopted options lives in
 `apps/shuffler/public/design-candidates.css`, loaded by nothing but the gallery.
