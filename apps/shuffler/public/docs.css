@@ -1,9 +1,13 @@
 /* Docs Page Styles */
 
+/* --deep-space, --dark-pink and --light-pink used to be re-declared here,
+ * byte-identical to styles.css. They now come from @fleet/design-tokens, loaded
+ * by head.ejs on every page. That duplication is the reason the fleet has one
+ * dictionary rather than a deliberate copy: nobody neglected this block, and it
+ * still diverged — by ADDITION, growing the three tokens below, which exist
+ * nowhere else. Those three stay: they're genuinely docs-only, and promoting
+ * them to the shared set is its own decision. */
 :root {
-  --deep-space: #221534;
-  --dark-pink: #bb5277;
-  --light-pink: #ddc7dd;
   --text-light: #e8e8e8;
   --link-color: #dda0c5;
   --link-hover: #f0c0dd;
