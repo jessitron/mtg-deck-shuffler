@@ -143,11 +143,10 @@ section is just a wall between Jess and the live work.
     makes a constraint on every mountain: "public events, commentary, hand counts but never hands."
   ← mountain: tabletop-replaces-mural
 
-- **The verify suite's speed is now tracked**, split into two tickets under
-  `.scratch/verify-suite-speed/`: `01-instrument-the-harness.md` is `ready-for-agent` (say
-  "do ticket 01" to start it), and `02-optimize-the-suite.md` holds the goal and the leads
-  but stays unspecified until 01 reports. All the measurement work from this inbox line
-  moved into those two files.
+- **The verify suite's speed has a wayfinder map**: `.scratch/verify-suite-speed/map.md`.
+  Destination: no useless tests, no wasted time in tests, **full suite under 60s** (from
+  106.5s). 01 and 02 are resolved; the frontier is 03 (setup cost), 04 (superfluous tests),
+  and 07 (the never-reset 37 MB `data.db`). Say "work the verify-suite-speed map" to continue.
 
 - [ ] `no-ship-flushes-on-sigterm` Spans are probably lost on every shutdown, everywhere
   - `apps/shuffler/src/tracing.ts` calls `sdk.start()` and registers **no shutdown hook**, and
