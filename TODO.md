@@ -197,6 +197,46 @@ section is just a wall between Jess and the live work.
     even though 06 lands first and this doesn't block it.
   ← priority: later
 
+- [ ] `tabletop-landing-page-palette` Bring the Tabletop's landing page onto the fleet's identity
+  - `apps/tabletop/src/client/LandingPage.tsx` styles itself with an off-brand green/cream palette
+    in **inline styles** — `#1a2a1f` (dark green field), `#f5f1e8` (cream text), `#3d5a45` (mid
+    green) — while the fleet's identity is purple-and-pink. A live Layer-1 violation ("use
+    `var(--…)`, not a literal") sitting on the Tabletop's front door.
+  - **Surfaced by** the `tabletop-css-tokens` work (`4396aea` + two follow-ups), which created
+    `packages/design-tokens` (`@fleet/design-tokens`) — the fleet palette, `--narrow-border`, and
+    the mana colours, served by the Shuffler at `/fleet/tokens.css` and imported by the Tabletop
+    through Vite — and loaded Orbitron/Ovo on the Tabletop via a Google Fonts `<link>` in
+    `apps/tabletop/index.html`. The landing page was left **byte-for-byte unchanged** on purpose.
+    Landing the tokens makes fixing this *possible*; it is **not permission** to fix it.
+  - **Not a mechanical `var(--…)` swap.** This is the Tabletop's *only* styled surface, so
+    restyling it is the Tabletop's design pass in miniature: what the Tabletop looks like when it
+    isn't tldraw. It's an **appearance decision and needs Jess's explicit sign-off** — the design
+    owner (`owners/shuffler-looks-like-itself/`) flagged it as the largest possible ride-along on
+    the token change, which is exactly why it didn't ride along.
+  - **Staging it on `/design` is blocked today**: the Shuffler's gallery has no Tabletop specimens
+    and no Tabletop stage, so there's nowhere to show Jess the options side by side. Same shape of
+    blocker as `design-playmat-specimen` above.
+  - **There is still no ship-local stylesheet on the Tabletop.** Shared tokens have a home now, but
+    the first Tabletop-*only* CSS rule has nowhere to live — inline styles are the status quo by
+    default, not by choice. Whoever does this work decides that too.
+
+- [ ] `playmat-colours-fleet-or-shuffler` Do the playmat colours belong to the fleet, or to the Shuffler?
+  - `--playmat-one` (`#f5dc8b`) and `--playmat-two` (`#4b7bba`) were **deliberately left** in
+    `apps/shuffler/public/game.css` when everything else moved into `packages/design-tokens`
+    (`tabletop-css-tokens`, `4396aea`). Recording why, because the omission looks like an oversight
+    and isn't.
+  - The design owner's recorded position — *"the playmat is one object, one appearance, two
+    scales"* — was decided about the Shuffler's two **pages** (/prepare and /game). Extending "one
+    object" **across the ship boundary**, to a tldraw-rendered seat mat, is a different and
+    unratified identity claim. Moving the tokens into the shared package would silently assert an
+    answer to it.
+  - The question is real, not hypothetical: the Tabletop does draw playmats. If the answer is
+    "yes, one object fleet-wide", the tokens move and the Tabletop's mats inherit them. If "no,
+    a seat mat is its own thing", they stay put and the Tabletop picks its own.
+  - Related: `.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md` — deciding what a
+    zone looks like, armed and at rest. Overlapping territory; that ticket decides zones, this
+    decides whether the mat under them is fleet-owned. Link, don't merge.
+
 ## Backlog
 
 - [ ] `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there  ← was: JES-85
@@ -405,17 +445,3 @@ section is just a wall between Jess and the live work.
     `src/view/play-game/game-modals.ts`, `src/view/play-game/history-components.ts`. All four are
     HTMX-swapped fragments, so whatever moves focus has to run on swap (`htmx:afterSwap`), not on
     page load — and closing is also an HTMX swap, so focus restore hooks the same place.
-
-- **tabletop-css-tokens** — `apps/tabletop` has no CSS source file at all, only a built
-  `dist/client/assets/*.css`, and **no font `<link>` or `@font-face` anywhere** (the only CSS import
-  in the client is `import "tldraw/tldraw.css"`). The fleet's Layer-1 craft rule ("use `var(--…)`,
-  not a literal") applies to the Tabletop *today*, but there is nowhere to declare the tokens, and
-  Orbitron — the fleet's chrome typeface — has no way to load. **Both halves fail silently:** CSS
-  drops an unknown `var()`, and a missing font falls back to a system serif. Decide where they
-  live: a shared file both ships load, or a duplicated `:root` in the spirit of the deliberately
-  duplicated `log.ts` — but **not** a copied `:root`, per the design owner: a diverged palette
-  fails silently and there are already four `:root` blocks. Surfaced by `.scratch/tabletop-physics/issues/03-what-furniture-is.md`,
-  which makes furniture a self-rendering custom shape; it blocks
-  `.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md`. Related and unrecorded:
-  `apps/tabletop/src/client/LandingPage.tsx` carries an off-brand green/cream palette in inline
-  styles (`#1a2a1f`, `#f5f1e8`, `#3d5a45`) — a live Layer-1 violation.
