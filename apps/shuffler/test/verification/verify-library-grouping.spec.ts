@@ -169,15 +169,15 @@ test.describe('Library Modal - Card Type Grouping', () => {
         const totalInGroup = positionMatch ? parseInt(positionMatch[2]) : 0;
         expect(totalInGroup).toBe(targetGroupSize);
 
-        // Flip the card.
-        // NOTE: unlike the clicks above, this one is not retried, because the
-        // assertion that follows cannot tell whether it landed — the position
-        // indicator reads the same before and after a flip, which is precisely
-        // what the test is asserting. A swallowed flip would still pass. That
-        // gap predates this change; see .scratch/verify-suite-speed/issues/02.
-        await flipButton.click();
+        // Flip the card and confirm the face actually changed — retried like
+        // the clicks above, since this one is also an htmx swap that can
+        // straddle the settle.
+        await expect(async () => {
+          await flipButton.click();
+          await expect(cardModal).toHaveAttribute('data-current-face', 'back', { timeout: 3000 });
+        }).toPass({ timeout: 20000 });
 
-        // After flip, position indicator should still show group-scoped count
+        // The flip preserves group-scoped navigation: position indicator unchanged
         await expect(positionIndicator).toHaveText(`Card ${currentPosition} of ${totalInGroup}`);
 
         // Navigate to next card (if not at end)
@@ -267,15 +267,15 @@ test.describe('Library Modal - Card Type Grouping', () => {
         const totalInGroup = positionMatch ? parseInt(positionMatch[2]) : 0;
         expect(totalInGroup).toBe(targetGroupSize);
 
-        // Flip the card.
-        // NOTE: unlike the clicks above, this one is not retried, because the
-        // assertion that follows cannot tell whether it landed — the position
-        // indicator reads the same before and after a flip, which is precisely
-        // what the test is asserting. A swallowed flip would still pass. That
-        // gap predates this change; see .scratch/verify-suite-speed/issues/02.
-        await flipButton.click();
+        // Flip the card and confirm the face actually changed — retried like
+        // the clicks above, since this one is also an htmx swap that can
+        // straddle the settle.
+        await expect(async () => {
+          await flipButton.click();
+          await expect(cardModal).toHaveAttribute('data-current-face', 'back', { timeout: 3000 });
+        }).toPass({ timeout: 20000 });
 
-        // After flip, position indicator should still show group-scoped count
+        // The flip preserves group-scoped navigation: position indicator unchanged
         await expect(positionIndicator).toHaveText(`Card ${currentPosition} of ${totalInGroup}`);
 
         // Navigate to next card (if not at end)
