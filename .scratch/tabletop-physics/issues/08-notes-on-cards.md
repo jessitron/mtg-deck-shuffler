@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Type: grilling
-Status: claimed
+Status: resolved
 Blocked by: 07
 
 ## Question
@@ -36,3 +36,28 @@ a decision: Jess pictures the counter as a purpose-built attaching shape (`mtg-c
 note as tldraw's stock sticky note, and she's fine with the note *not* attaching to a card via
 the same mechanism the counter uses. Start from that steer rather than re-opening "one thing or
 two" from scratch.
+
+## Answer
+
+**A note is its own object — tldraw's stock note shape, never `mtg-counter`.** Confirmed, not
+just leaned on: a post-it and a counter stay visually and structurally distinct types. No
+"counter with a text-only variant that looks like a note."
+
+**But it rides the card exactly like a counter does.** The card's drag-attach accept-list
+(`canReceiveNewChildrenOfType`/`onDropShapesOver`, from ticket 07) is extended to accept the
+stock `note` type alongside `mtg-counter` — dropping a note on a card parents it the same way a
+counter does. "Separate object" was never "separate mechanism": Jess's first answer here treated
+those as the same question, but they aren't — the shape *type* differs, the *attachment plumbing*
+doesn't. Once parented, a note inherits the same battlefield-exit behavior ticket 07 gave
+counters: leaving the battlefield (graveyard, exile, hand, library) detaches it and nudges it to
+an open spot near the zone's edge. **One rule, no per-note distinction** — Jess did not want a
+special case for notes like "Sarah's, don't shuffle in" that should survive a zone change; every
+attached note detaches on exit, same as every counter. If a note needs to survive independent of
+any card's lifecycle, the answer is: don't attach it — leave it free-floating.
+
+**Free-floating and attached are the same shape, not two variants.** tldraw's stock note that
+already exists on the canvas today *is* the attachable note — there's no separate purpose-built
+"attachable post-it" type. Whether a note is "attached" or "free-floating" is purely a function
+of whether it currently has a parent shape; dragging a free note onto a card parents it, dragging
+it off unparents it. Nothing for map 4 to build here beyond leaving the stock note tool in the
+toolbar (a decision map 4 already owns) and the card's accept-list extension above.

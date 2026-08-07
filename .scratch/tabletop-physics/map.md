@@ -173,6 +173,17 @@ expensive way round.
   hand or library goes back to `face:'front'`, `faceDown:false`, mirroring the Shuffler's
   `mulligan()` reset; which zone-entry mechanism performs it is implementation, not decision.
 
+- **A note is tldraw's stock note shape, never `mtg-counter`, but it attaches and detaches exactly
+  like one** — [Decide how a note attaches to a card, and how it differs from a
+  counter](issues/08-notes-on-cards.md), resolved 2026-08-07. Type stays distinct — no
+  counter-with-a-text-variant — but the card's drag-attach accept-list is extended to parent the
+  stock `note` type alongside `mtg-counter`, and once parented a note inherits ticket 07's
+  battlefield-exit rule (detach, nudge to an open spot near the zone's edge) with no per-note
+  exception: a note meant to survive a zone change is simply left unattached, never a special
+  case on the attached path. Free-floating and attached are the same shape, not two variants —
+  "attached" is purely "currently has a parent"; the stock note tool needs no change beyond that
+  and stays in the toolbar (map 4's call, not touched here).
+
 ## Not yet specified
 
 - **Which attachment mechanism suits which passenger.** The [research
