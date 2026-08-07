@@ -69,6 +69,11 @@ The short version:
 - `playmat.css` is shared by game and prepare; `game.css` and `prepare.css` are
   page-specific; `site.css` is the site pages; `styles.css` holds the tokens. Watch for the
   modal, flip, and library-list blocks, which are currently duplicated across files
+- **Appearance in the shared sheet, placement in the page sheet.** A component on both play
+  pages declares how it *looks* once in `playmat.css`, as a **bare class selector**; each
+  page sheet says only where it *sits*. `.game-title` (the deck-title plaque) is the worked
+  example. Don't write `.some-parent .the-component` for appearance — it unstyles the
+  component the moment it moves
 
 ## Key Files
 

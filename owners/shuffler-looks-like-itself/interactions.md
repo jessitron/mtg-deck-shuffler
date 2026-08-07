@@ -1,5 +1,8 @@
 # Interactions
 
+**Citations here are file + selector, never `file:NNN`** — see
+[README.md → How to cite code in this KB](README.md#how-to-cite-code-in-this-kb-standing-convention-2026-08-07).
+
 ## Depends on
 
 - **`styles.css` `:root`** — the token set. Everything downstream assumes these names
@@ -25,6 +28,12 @@
   care about `game.css`, transitions, and card containers.
 - **The two-faced-cards owner** — flip button styling and the `.flip-container-*` blocks.
 - **The library-search owner** — modal and list styling.
+- **`test/verification/verify-deck-title-placement.spec.ts`** (added 2026-08-07) — pins the
+  deck-title plaque's *structure*, not its looks: `.playmat > .game-title` on `/prepare`,
+  `.game-header-row > .game-title` on `/game`, zero matches for
+  `.cool-command-zone-surround .game-title` on either, the title never inside `#game-menu`,
+  and clicking the title dismisses an open menu. Restyling `.game-title` won't touch it;
+  **re-parenting it will**, which is the point.
 - **`test/verification/verify-design-gallery.spec.ts`** — asserts specific computed
   values (200×278 card, `outset` border, black playmat buttons, and the global focus ring's
   3px / `rgb(221, 199, 221)` / 3px offset). Deliberate changes to those will fail this test;
@@ -48,7 +57,7 @@ Concrete, in rough order of how often they bite.
   the playmat, `.page-container`, and count discs only.
 - Button labels are **Orbitron**. Card names are **Ovo**. No fourth typeface.
 - **The focus state is already written for you** (choice 5, 2026-08-06). One global
-  `:focus-visible` rule in `styles.css:200-209` draws `3px solid var(--light-pink)` at
+  `:focus-visible` rule in `styles.css` (grep `:focus-visible`) draws `3px solid var(--light-pink)` at
   `outline-offset: 3px` on `a, button, input, select, textarea, summary, [tabindex]`. So a
   new element that is one of those tags inherits it and needs nothing. **Don't write a
   per-component focus rule**, and **never write `outline: none`** — that's what three
@@ -58,14 +67,37 @@ Concrete, in rough order of how often they bite.
   - If your new element is focusable but **not** one of those tags (a `div` with a click
     handler, say), give it a real tag or a `tabindex` so the global rule reaches it.
   - **`outline` is globally spoken for.** Three rules still use it decoratively —
-    `site.css:422` (`.main-footer`), `prepare.css:25` (`.playmat`), `game.css:458`
-    (`.hand-drop-zone.drag-over`). None is focusable today, so nothing conflicts; but a
+    `site.css` → `.main-footer`, `prepare.css` → `.playmat`, `game.css` →
+    `.hand-drop-zone.drag-over`. None is focusable today, so nothing conflicts; but a
     decorative `outline` on anything focusable **will be clobbered on focus**. Use `border`
     or `box-shadow` for decoration on anything a keyboard can reach.
   - If the ring looks wrong on a pale surface, that's a **known open risk**, not a bug to
     patch locally — `--light-pink` on white is ~1.35:1, and the fix is a decision for Jess
     (it collides with the press bevel). See [open-choices.md](open-choices.md) choice 5.
 - Neighbouring drift is not permission. Jess's call: pull toward the standard.
+
+**Moving an existing component to a new parent** (learned 2026-08-07, the deck-title plaque)
+
+- **Check whether its appearance is written as a descendant rule first.**
+  `grep -n '\.the-class' public/*.css` — if what you find is `.some-parent .the-class`,
+  the move will silently unstyle it. Promote the rule to a bare class selector in the
+  sheet that owns the *component*, and leave only placement behind in the page sheet.
+- **`.game-title` is now such a bare rule** in `playmat.css`. If you re-parent it again,
+  its looks travel with it; only the two placement rules (`prepare.css` → `.playmat >
+  .game-title`, `game.css` → `.game-header-row`) need attention, plus
+  `verify-deck-title-placement.spec.ts`.
+- **On `/game`, anything you put in the top strip must be a SIBLING of `#game-menu`, not a
+  child.** `game.js` dismisses the open menu on `!evt.target.closest("#game-menu")`, and
+  `#game-menu` is the dropdown panel's positioning ancestor — so nesting swallows the
+  dismiss click *and* pushes the panel down by your element's height. `.game-header-row` is
+  the sibling wrapper that exists for this; put new top-strip chrome there.
+- **A fixed grid track will clip, not grow.** `prepare.css` `.playmat` row 1 had to become
+  `minmax(50px, auto)` when the plaque landed in it, because a long deck name wraps. If you
+  place text in a fixed-height track, make it `minmax`.
+- **HTML that interpolates user-supplied text must escape it.** Deck names come from
+  Archidekt. `escapeHtml` lives in `src/view/common/shared-components.ts` (moved there from
+  `active-game-page.ts` on 2026-08-07, where it was module-private) — import it rather than
+  writing a second copy.
 
 **Adding a stylesheet**
 
@@ -79,7 +111,8 @@ Concrete, in rough order of how often they bite.
 
 - Modal styles: `playmat.css` **and** `prepare.css`.
 - Flip *container* styles: `game.css` **and** `prepare.css` (still identical).
-- Flip *button* styles: `playmat.css:518` **and** `prepare.css:246` — **already
+- Flip *button* styles: `playmat.css` → `.modal-action-button.flip-button` **and**
+  `prepare.css` → `.flip-button` — **already
   diverged**; fixing one will not fix the other, and they no longer look alike.
 - Library-list styles: `playmat.css` **and** `prepare.css`.
 - Prefer deleting the duplicate over editing one copy. If you must edit one, edit both and
@@ -121,8 +154,11 @@ Concrete, in rough order of how often they bite.
   like*. A hover-lift on a button is this owner's; a card sliding into the hand is theirs.
   They overlap on `game.css` and on transition easing — consult both.
 - **Which cards render and when** — game state, zones, deck adapters. Not a design concern.
-- **The Tabletop's appearance** (`apps/tabletop`). Different ship, tldraw-based, and not
-  far enough along to have standards. This owner is scoped to the Shuffler.
+- ~~**The Tabletop's appearance**~~ — **no longer true.** This owner went fleet-wide on
+  2026-08-06 (see [README.md](README.md), "Two layers"): Layer 1 craft rules apply to
+  `apps/tabletop` today, and Layer 2 identity is meant to be shared. What *is* still true
+  is that tldraw owns much of the Tabletop's chrome — record those limits in the README
+  rather than fighting them.
 - **Telemetry, persistence, the event contract.** No overlap.
 - **`notes/DESIGN-interface.md`** — that's wireframes and information architecture (what
   goes on which screen), not visual language. It's stale in places; don't treat its ASCII

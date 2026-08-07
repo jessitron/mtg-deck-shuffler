@@ -78,10 +78,13 @@ you skipped. These are written from the Shuffler's files; on the Tabletop, apply
 
 **Interaction & accessibility**
 
-- [ ] Does every new interactive element have a visible `:focus-visible` state? The app
-      has exactly one focus outline today (`site.css:330`) plus two rules that set
-      `outline: none` — don't add to the deficit, and reject any new `outline: none` that
-      isn't replaced with something visible.
+- [ ] Does every new interactive element have a visible `:focus-visible` state? **This is
+      already written** (choice 5, shipped 2026-08-06): one global `:focus-visible` rule in
+      `styles.css` covers `a, button, input, select, textarea, summary, [tabindex]`. So
+      **reject any per-component focus rule**, reject any `outline: none`, and check that a
+      new focusable element is one of those tags (or carries a `tabindex`) so the global
+      rule reaches it. Decorative `outline` on a focusable element is also a reject — it
+      gets clobbered on focus; use `border` or `box-shadow`.
 - [ ] Is hover the *only* affordance for anything? It shouldn't be.
 - [ ] Does the hover/press behaviour match the nearest existing family, or invent a new
       one?

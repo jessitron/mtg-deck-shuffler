@@ -4,10 +4,13 @@
 shipped (2026-08-06)**. **Jess answered choices 3, 4 and 6 on 2026-08-06** — the answers and
 their reasoning are in `.scratch/shuffler-design-choices/spec.md`, and `issues/02`–`04`
 execute them one commit at a time. Choices 3, 4 and 6 are still marked `_(pending)_` below
-until their commits land and run the resolve checklist.
+until their commits land and run the resolve checklist. **Choice 7 is new (2026-08-07)** and
+has never been asked.
 
-**Line numbers below were re-verified 2026-08-06 after choice 5 landed** (its insert shifted
-everything below `playmat.css:172` by +12).
+**Citations here are file + selector, never `file:NNN` (convention adopted 2026-08-07 — see
+[README.md](README.md#how-to-cite-code-in-this-kb-standing-convention-2026-08-07)).** Grep the
+selector; don't trust a remembered line. The line numbers that used to be here rotted four
+separate times.
 
 **Choice 4's list of rules below is still incomplete** — `.table-cards-button` doesn't exist,
 three rules are missing, and three are duplicated across files. `issues/04-radius-sweep.md`
@@ -101,19 +104,19 @@ orphan colors" cleanup below.
 
 ## 3. Card-modal action buttons
 
-Seven unrelated Material hues, none of them brand colors (line numbers re-verified
-2026-08-06 **after choice 5 landed** — all shifted `+12` by its `playmat.css` insert):
+Seven unrelated Material hues, none of them brand colors. All eight rules are in
+`playmat.css`; grep the selector.
 
-| Rule | `playmat.css` | Fill |
-| --- | --- | --- |
-| `.recover-button, .copy-button` (one shared rule) | `:487` | `#2196f3` blue |
-| `.gatherer-button` | `:504` | `#4caf50` green |
-| `.flip-button` | `:518` | `#ff9800` orange |
-| `.play-button` | `:608` | `#e91e63` pink |
-| `.put-in-hand-button` | `:622` | `#9c27b0` purple |
-| `.put-on-top-button` | `:636` | `#3f51b5` indigo |
-| `.put-on-bottom-button` | `:650` | `#673ab7` deep purple |
-| `.secondary` | `:664` | `var(--deep-space)` — already settled by choice 2 |
+| Rule (all `.modal-action-button.*` in `playmat.css`) | Fill |
+| --- | --- |
+| `.recover-button, .copy-button` (one shared rule) | `#2196f3` blue |
+| `.gatherer-button` | `#4caf50` green |
+| `.flip-button` | `#ff9800` orange |
+| `.play-button` | `#e91e63` pink |
+| `.put-in-hand-button` | `#9c27b0` purple |
+| `.put-on-top-button` | `#3f51b5` indigo |
+| `.put-on-bottom-button` | `#673ab7` deep purple |
+| `.secondary` | `var(--deep-space)` — already settled by choice 2 |
 
 | Option | Tradeoff |
 | --- | --- |
@@ -138,11 +141,13 @@ If B, the `.modal-action-button.*` variant rules collapse into two classes; upda
 
 **Decision:** _(pending)_
 
-**`playmat.css` line numbers, re-verified 2026-08-06 after choice 5:** `:71` (4px) and `:138`
-(2px) are unchanged — both sit above choice 5's insert at `:172`. Everything below shifted
-`+12`: `.modal-dialog` 10px is now `:180`, `.modal-close` 4px now `:211`, and the 8px/8px/6px
-trio now at `:460`, `:567`, `:603`. `game.css` and `prepare.css` radius lines were untouched
-by choice 5.
+**The `playmat.css` radius rules, by selector** (grep `border-radius` in that file to see all
+twelve at once): `.library-card-back::before` 8px *(keep — physical)*, `.library-buttons
+button` 4px, `.cool-command-zone-surround` 2px, `.cool-command-zone-surround .multiple-cards`
+2px *(not in the change-list below; add it)*, `.modal-dialog` 10px, `.modal-close` 4px,
+`.hand-count`/`.card-modal-close` 50% *(keep)*, `.card-modal-image` 3vh *(keep)*,
+`.modal-card-image` 30px *(keep)*, `.modal-action-button` 8px, `.card-modal-nav-button` 8px,
+`.card-modal-position-indicator` 6px.
 
 **Keep round regardless** (these are physical objects): `.mtg-card-image` 10px,
 `.commander-placeholder` 10px, `.playmat` 20px, `.page-container` 80px,
@@ -161,7 +166,7 @@ by choice 5.
 ## 5. Focus ring — **DECIDED 2026-08-06, shipped**
 
 **Decision: B — `3px solid var(--light-pink)` with `outline-offset: 3px`, as ONE global
-`:focus-visible` rule** in `styles.css:200-209` on `a, button, input, select, textarea,
+`:focus-visible` rule** in `styles.css` (grep `:focus-visible`) on `a, button, input, select, textarea,
 summary, [tabindex]`. Reasoning in `.scratch/shuffler-design-choices/spec.md` §5; ticket
 `.scratch/shuffler-design-choices/issues/01-global-focus-ring.md`.
 
@@ -195,18 +200,18 @@ not a regression.
 
 **What else landed:**
 
-- `playmat.css:173-176` — a companion rule, `.modal-overlay:focus-visible,
+- `playmat.css` — a companion rule, `.modal-overlay:focus-visible,
   .card-modal-overlay:focus-visible { outline-offset: -3px }`. `tabindex="0"` appears in
-  exactly four places and all four are the modal overlay (`views/partials/card-modal.ejs:21`,
-  `views/partials/library-modal.ejs:59`, `src/view/play-game/game-modals.ts:12`,
-  `src/view/play-game/history-components.ts:11`). Those are fixed full-viewport elements, so
+  exactly four places and all four are the modal overlay (grep it: `views/partials/card-modal.ejs`,
+  `views/partials/library-modal.ejs`, `src/view/play-game/game-modals.ts`,
+  `src/view/play-game/history-components.ts`). Those are fixed full-viewport elements, so
   the standard `+3px` offset draws the ring *outside* the viewport where it clips to nothing —
   a keyboard stop that looks unfocused, i.e. the exact deficit this choice closes. The offset
   is turned inward so it reads as a frame. In `playmat.css` only (prepare loads it, and the
   modal block is already duplicated across playmat/prepare — don't grow that).
 - `site.css` — `.button-base:focus` deleted. Verified nothing was lost: `.button-base` only
-  ever lands on `<a>`/`<button>` (`views/index.ejs:33,53`, `views/prepare.ejs:53`,
-  `views/choose-any-deck.ejs:20,28`, `views/partials/deck-selection-archidekt.ejs:5`), both
+  ever lands on `<a>`/`<button>` (grep `button-base`: `views/index.ejs` ×2, `views/prepare.ejs`,
+  `views/choose-any-deck.ejs` ×2, `views/partials/deck-selection-archidekt.ejs`), both
   covered by the global selector.
 - `design-candidates.css` — the three focus candidates deleted, plus
   `.candidate-input:focus-visible` (it *was* choice 5's rejected dark-pink flush treatment,
@@ -218,13 +223,14 @@ not a regression.
 1. **`--light-pink` on white measures ~1.35:1**, under WCAG 1.4.11's 3:1 floor for non-text
    indicators. `spec.md` frames the residual risk as pale passages in the playmat's card art,
    but the app has real flat-white surfaces: `.modal-dialog { background: white }`
-   (`playmat.css:180` and the `prepare.css` duplicate), `docs.css:130`, and
+   (`playmat.css` → `.modal-dialog`, and the `prepare.css` duplicate), `docs.css` →
+   `.docs-content`, and
    `.button-base:disabled` `#f0f0f0`. **The library/history modal interior is the likeliest
    failure, ahead of the card art.** Not yet verified by eye.
 2. **The sanctioned fallback collides with choice 1.** If the ring needs help, spec.md says
    add a hairline `--deep-space` companion. A halo can only be drawn with `box-shadow`, and
    `box-shadow` does not accumulate across rules — so it would **erase** `.pushable-flat`'s
-   two-layer press bevel (`styles.css:150-180`) on every focused button. `::after` is not an
+   two-layer press bevel (`styles.css` → `.pushable-flat`) on every focused button. `::after` is not an
    escape hatch (inputs can't have pseudo-elements). So the companion means re-declaring the
    bevel inside `:focus-visible` for both `.pushable-flat` and `.pushable-flat.pushable-dark`.
    That's a real cost that goes **back to Jess** rather than being absorbed. A warning to this
@@ -242,22 +248,69 @@ this ticket is a human tabbing through `/`, `/choose-any-deck`, `/prepare`, `/ga
 
 | Option | |
 | --- | --- |
-| A | `.precon-search-input` — `deck-selection.css:49`, 2px `#ddd`, Orbitron, largest |
-| B | `.join-table-fields input` — `prepare.css:311`, 1px `#888`, compact, inherits Ovo |
+| A | `.precon-search-input` — `deck-selection.css`, 2px `#ddd`, Orbitron, largest |
+| B | `.join-table-fields input` — `prepare.css`, 1px `#888`, compact, inherits Ovo |
 | **C (recommended)** | `.candidate-input` in `design-candidates.css` — 2px `--deep-space`, Orbitron, one rule with a size variant |
 
 **Decision:** _(pending)_
 
-**Sites, re-verified 2026-08-06 after choice 5** (which deleted the two `:focus` rules that
-used to sit inside these ranges): `.precon-search-input` `deck-selection.css:49-57` with its
-`::placeholder` at `:59-62`; `.archidekt-input-section input` `:72-78`; `#deck-number`
-`:80-86`; `.join-table-fields input` `prepare.css:311` (unchanged).
+**The four sites** (choice 5 deleted the two `:focus` rules that used to sit among them): in
+`deck-selection.css` — `.precon-search-input` and its `::placeholder`,
+`.archidekt-input-section input`, `#deck-number`; in `prepare.css` —
+`.join-table-fields input`.
 
 **Note for `issues/02`:** the candidate no longer carries a focus rule of its own —
 `.candidate-input:focus-visible` was **already deleted** by choice 5 (it was that choice's
 rejected dark-pink flush treatment, and spec.md §6 decided the adopted input takes the global
 ring instead). So "real focus state" is no longer a point in C's favour; the global ring gives
 it to all three options equally. `.candidate-input` and its `::placeholder` remain.
+
+---
+
+## 7. Deck-title plaque border — groove or flat? (new 2026-08-07)
+
+The deck-title plaque left `.cool-command-zone-surround` and now rests on the playmat
+itself (see [history.md](history.md#2026-08-07--the-deck-title-plaque-moved-onto-the-playmat)).
+Its `3px groove black` border was, arguably, the *join* between slab and metal frame. Alone
+on the mat, does it still want one?
+
+| Option | Where |
+| --- | --- |
+| **A — keep `3px groove black`** (current, shipped) | `playmat.css` → `.game-title` |
+| **B — flat `3px solid black`** | `design-candidates.css` → `.candidate-game-title-flat` |
+
+**Decision:** _(pending — Jess asked for both to be staged rather than decided, 2026-08-07)_
+
+The stake: `groove`/`outset`/`inset` borders survive in exactly **two** places in the app —
+this plaque and the command-zone surround. Picking B halves the remaining chunky-3D-border
+vocabulary, which is a real loss of identity, not a cleanup. Picking A keeps the plaque
+reading as the same family of physical object as the frame it left.
+
+Only the `border` line differs between the two; everything else about `.game-title` is
+already shared. If B wins: change the `border` in `playmat.css` → `.game-title`, delete
+`.candidate-game-title-flat` from `design-candidates.css`, collapse the `.choice` block in
+`design.ejs` to a plain `badge-standard` specimen, and update the "chunky physical controls"
+paragraph in [README.md](README.md) — it currently names both surviving sites.
+
+---
+
+## Deferred by Jess — raised, consciously not done
+
+Not choices staged on `/design`; just things she looked at and said "not now." Recorded so
+the next session doesn't re-discover them as if they were news, and doesn't do them
+unbidden either.
+
+- **The `.join-table-fields` panel is now the odd one out on `/prepare`** (raised
+  2026-08-07). Its white fill and `#888` 1px borders were one pale slab among several;
+  after the deck-title plaque moved onto the mat, the panel is the *only* pale untokenized
+  slab left on that screen, so it reads as foreign. Converging it is entangled with choice
+  6 (it's option B's input). Jess deferred it explicitly. **It will look worse before it
+  looks better — that's expected, not a regression to patch.**
+- **Removing `.cool-command-zone-surround` entirely**, so commanders sit bare on the mat
+  (raised 2026-08-07, deferred as its own change). Worth knowing about before touching the
+  plaque or choice 7: the surround is the plaque's former parent and the *other* surviving
+  `groove`/`outset` site. If the frame goes, choice 7's argument changes completely — the
+  plaque would be the last chunky 3D border in the app rather than one of a pair.
 
 ---
 
@@ -270,16 +323,16 @@ Do these as their own commits once the choices are settled. They're mechanical.
   Whatever survives needs a name in `styles.css` `:root` and a swatch on `/design`.
   Choice 5 took two off the list — the `rgba(219,39,119,.3)` Tailwind pink and one
   `rgba(76,175,80,.3)` **Material green** both left with the deleted input `:focus` rules.
-  Material green **survives once**, at `game.css:455` (`.hand-drop-zone.drag-over`,
-  `background-color: rgba(76,175,80,.2)`), and now belongs to this cleanup rather than to
+  Material green **survives once**, in `game.css` → `.hand-drop-zone.drag-over`
+  (`background-color: rgba(76,175,80,.2)`), and now belongs to this cleanup rather than to
   focus work.
 - **De-duplicate the copy-pasted blocks** (see `architecture.md` → Traps). There are
   **four**, and "flip" is two separate ones — the container and the button:
   - modal styles in `playmat.css` + `prepare.css`;
   - flip **container** styles (`.flip-container-outer/-inner`, `.two-sided-front/-back`)
-    in `game.css:97-133` + `prepare.css:210-244` — still verbatim identical;
-  - flip **button** styles in **`playmat.css:518`** (`.modal-action-button.flip-button`)
-    + **`prepare.css:246`** (bare `.flip-button`) — **already diverged** (verified
+    in `game.css` + `prepare.css` — still verbatim identical;
+  - flip **button** styles in **`playmat.css`** (`.modal-action-button.flip-button`)
+    + **`prepare.css`** (bare `.flip-button`) — **already diverged** (verified
     2026-08-06). Choice 1 converted the playmat copy to the `.pushable-flat` box-shadow
     bevel; the prepare copy is still the pre-choice-1 flat control (`border-radius: 5px`,
     `background-color: #f57c00` on hover, no press physics). They now only agree on the
@@ -294,15 +347,17 @@ Do these as their own commits once the choices are settled. They're mechanical.
 - **Restyle the flip button as a circle of two arrows.** Jess's stated want: *"a circle
   of two arrows, centered under the card"* — an icon affordance, not a labelled text
   button. Today it's Material orange `#ff9800` with white text in two places
-  (`playmat.css:518`, `prepare.css:246`; see the de-duplication item above), and the
+  (`playmat.css` → `.modal-action-button.flip-button`, `prepare.css` → `.flip-button`; see
+  the de-duplication item above), and the
   prepare copy's `border-radius: 5px` is one of the values choice 4 governs. No decision
   needed on the *look* — Jess has said what she wants — but it can't land until choice 4
   settles the radius question it's entangled with, and it should de-duplicate at the same
   time rather than restyle two copies. The `#ff9800` swatch on `/design`
-  (`design.ejs:162`) goes with it.
-- **Collapse the second `:root`.** `docs.css:3-10` re-declares `--deep-space`,
-  `--dark-pink`, `--light-pink` and adds three link tokens that exist nowhere else.
-- **Delete the debug leftover:** `site.css:171-174`, `.step > * { border: 0px solid red }`.
+  (`design.ejs`, in the orphan-hex grid) goes with it.
+- **Collapse the second `:root`.** The `:root` at the top of `docs.css` re-declares
+  `--deep-space`, `--dark-pink`, `--light-pink` and adds three link tokens that exist
+  nowhere else.
+- **Delete the debug leftover:** `site.css` → `.step > * { border: 0px solid red }`.
 - **Adopt a spacing scale.** No scale exists. Proposed: `4 · 8 · 12 · 16 · 24 · 32 · 48`
   — every current value rounds to one of these within 2px except 5, 15 and 18.
 
@@ -324,15 +379,13 @@ Do these as their own commits once the choices are settled. They're mechanical.
 7. Run the gallery test: `npx playwright test verify-design-gallery` against a running
    server (see `verify.sh`). It asserts computed values — a deliberate change may
    legitimately break it; update the spec in the same commit.
-8. **Re-verify the `file:line` citations in every *remaining* choice.** Resolving a choice inserts
-   or deletes rules, which silently shifts every line number below it in that stylesheet. This has
-   already happened twice: after choices 1 and 2 landed, essentially every citation in this file
-   was stale — choice 3's nine were all wrong, choice 5's and choice 6's each off, and
-   `.button-base:focus` had moved. A wrong line number sends the next session editing the wrong
-   rule, and it's the one kind of rot nobody notices until they're mid-change.
-   **Choice 5 (2026-08-06) shifted them a third time** — a 12-line insert at `playmat.css:172`
-   moved all 8 of choice 3's citations and 5 of choice 4's, and deleting the two input `:focus`
-   rules moved choice 6's. All re-verified in the same commit. Cheap way to do it: `grep -n` the
-   selector rather than trusting the recorded number, and remember the citations in
-   [interactions.md](interactions.md) and [architecture.md](architecture.md) shift too.
+8. **Cite by selector, never by line number** — see
+   [README.md → How to cite code in this KB](README.md#how-to-cite-code-in-this-kb-standing-convention-2026-08-07).
+   This step used to read "re-verify every `file:line` citation after each choice lands," which
+   was a whole manual sweep, every time, forever. It rotted anyway: after choices 1 and 2,
+   essentially every citation here was stale (choice 3's nine all wrong); choice 5's 12-line
+   `playmat.css` insert moved 8 of choice 3's and 5 of choice 4's; the deck-title move
+   (2026-08-07) invalidated ~20 across this file, `interactions.md` and `architecture.md` at
+   once. That fourth time is what retired the practice. **If you find a surviving `file:NNN`
+   anywhere in this KB, convert it as you pass.**
 9. Commit, tagged `- claude`.

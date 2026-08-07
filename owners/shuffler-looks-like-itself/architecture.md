@@ -2,6 +2,10 @@
 
 The negotiable part: which file owns what, what loads where, and the traps.
 
+**Citations here are file + selector, never `file:NNN`** — see
+[README.md → How to cite code in this KB](README.md#how-to-cite-code-in-this-kb-standing-convention-2026-08-07).
+Grep the selector.
+
 ## Two page-building systems, two heads
 
 The Shuffler renders pages two ways, and each has its own `<head>`. **A new stylesheet
@@ -30,10 +34,10 @@ Per-view `additionalStyles` today:
 
 | File | Owns | Loaded by |
 | --- | --- | --- |
-| `styles.css` | **The `:root` tokens.** Global reset, body font, `.mtg-card-image`, error/debug helpers, `.hidden`, `.pushable-flat`, **the global `:focus-visible` ring** (`:200-209`) | every page |
+| `styles.css` | **The `:root` tokens.** Global reset, body font, `.mtg-card-image`, error/debug helpers, `.hidden`, `.pushable-flat`, **the global `:focus-visible` ring** | every page |
 | `site.css` | Site pages: header, footer, hero, slogan, steps, `.button-base` family | every EJS page |
-| `playmat.css` | **Shared by game and prepare**: library stack, card/library buttons, command zone, all modal styles, card-type icons, card modal | game (TS) + prepare (EJS) |
-| `game.css` | Game page only: `.page-container`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks | game (TS) |
+| `playmat.css` | **Shared by game and prepare**: library stack, card/library buttons, command zone, **the deck-title plaque's *appearance* (`.game-title`)**, all modal styles, card-type icons, card modal | game (TS) + prepare (EJS) |
+| `game.css` | Game page only: `.page-container`, `.game-header-row`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks | game (TS) |
 | `prepare.css` | Prepare page only: playmat grid, commander placeholder, join-table panel | prepare (EJS) |
 | `deck-selection.css` | `/choose-any-deck`: precon tiles, search + Archidekt inputs | choose-any-deck |
 | `docs.css` | `/docs`, `/about`, `/history`: sidebar + prose layout | those three |
@@ -44,6 +48,15 @@ Per-view `additionalStyles` today:
 `playmat.css`. One play page only? → that page's file. A site page? → `site.css` (or
 `deck-selection.css`/`docs.css` if it's local to those). A new token? → `styles.css`
 `:root`, never a second `:root` elsewhere.
+
+**Split appearance from placement (2026-08-07).** For a component on both play pages, the
+question isn't one file or the other — it's both, with a clean seam. `.game-title` is the
+worked example: `playmat.css` declares everything about how it *looks* (fill, border,
+padding, font, wrapping) as a **bare class selector**; `prepare.css` (`.playmat >
+.game-title`) and `game.css` (`.game-header-row`) each say only where it *sits* on that
+page. Before this, the appearance lived in `.cool-command-zone-surround .game-title` — a
+descendant selector — and moving the element out of that parent silently unstyled it. Don't
+write appearance rules that name an ancestor.
 
 ## Traps
 
@@ -56,10 +69,10 @@ Per-view `additionalStyles` today:
   reaches `/prepare` anyway: prepare loads both sheets, and `:focus-visible` (0,2,0) beats
   `prepare.css`'s plain `.modal-overlay` regardless of load order.
 - The flip **container** block — `.flip-container-outer/-inner`, `.two-sided-front/-back`
-  — is verbatim in **both** `game.css:97-133` and `prepare.css:210-244`.
+  — is verbatim in **both** `game.css` and `prepare.css`.
 - The flip **button** is a *separate* duplicate, and it has **already diverged**:
-  `playmat.css:518` `.modal-action-button.flip-button` carries the choice-1
-  `.pushable-flat` box-shadow bevel; `prepare.css:246` bare `.flip-button` is still the
+  `playmat.css` → `.modal-action-button.flip-button` carries the choice-1
+  `.pushable-flat` box-shadow bevel; `prepare.css` → bare `.flip-button` is still the
   pre-choice-1 flat control (`border-radius: 5px`, hover recolor to `#f57c00`). They
   agree only on the `#ff9800` fill. Different selectors on different markup — so this
   pair converges by the prepare copy *adopting* the playmat treatment, not by deletion.
@@ -67,13 +80,14 @@ Per-view `additionalStyles` today:
   `playmat.css` and `prepare.css` (the prepare copy adds `font-family: "Ovo"`).
 
 **`outline` is globally spoken for.** Since choice 5, `outline` is the focus channel app-wide
-(`styles.css:200-209`). Three rules still use it **decoratively**: `site.css:422`
-(`.main-footer`, a `--dark-pink` rule), `prepare.css:25` (`.playmat`, its 10px black frame),
-and `game.css:458` (`.hand-drop-zone.drag-over`, `2px solid gray`). None of those three is
+(`styles.css`, grep `:focus-visible`). Three rules still use it **decoratively**: `site.css` →
+`.main-footer` (a `--dark-pink` rule), `prepare.css` → `.playmat` (its 10px black frame),
+and `game.css` → `.hand-drop-zone.drag-over` (`2px solid gray`). None of those three is
 focusable today, so nothing conflicts — but a decorative `outline` on anything focusable will
 be clobbered the moment it takes focus. Use `border` or `box-shadow` for decoration on
 anything a keyboard can reach. Only one rule deliberately *tunes* the focus ring:
-`playmat.css:173-176` flips the offset to `-3px` on the two full-viewport modal overlays,
+`playmat.css` → `.modal-overlay:focus-visible, .card-modal-overlay:focus-visible` flips the
+offset to `-3px` on the two full-viewport modal overlays,
 because the standard `+3px` would draw outside the viewport and clip to nothing.
 
 **A second `:root`.** `docs.css` re-declares `--deep-space`, `--dark-pink` and
@@ -121,7 +135,7 @@ swatches, and `.stage-*` classes that reproduce each component's native backgrou
    at 3px offset, so the ring can only be coming from `styles.css`'s global rule.
 
 **Gotcha in that last test:** it **polls** (`expect(...).toPass`) rather than reading the
-computed style once. `.group-by-type-toggle` (`playmat.css:235`) carries
+computed style once. `.group-by-type-toggle` (`playmat.css`) carries
 `transition: all 0.2s ease`, and `outline-width` is animatable — so an immediate read catches
 the ring mid-transition at `1px`, which looks exactly like a missing CSS rule. If you add a
 focus assertion to a transitioned element, poll.

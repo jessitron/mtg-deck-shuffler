@@ -210,12 +210,12 @@ change at all, just the native caret. Intended, not a regression.
 
 **One companion rule was needed, and it came from the markup, not the design.** `tabindex="0"`
 appears in exactly four places in the app and **all four are the modal overlay**
-(`views/partials/card-modal.ejs:21`, `views/partials/library-modal.ejs:59`,
-`src/view/play-game/game-modals.ts:12`, `src/view/play-game/history-components.ts:11`). Those
+(grep `tabindex="0"`: `views/partials/card-modal.ejs`, `views/partials/library-modal.ejs`,
+`src/view/play-game/game-modals.ts`, `src/view/play-game/history-components.ts`). Those
 overlays are `position: fixed` and full-viewport, so the standard `+3px` offset draws the ring
 *outside* the viewport, where it clips to nothing — producing a keyboard stop that looks
-unfocused, which is the precise deficit this choice existed to close. `playmat.css:173-176`
-turns the offset inward to `-3px` so it reads as a frame. It lives in `playmat.css` alone
+unfocused, which is the precise deficit this choice existed to close. `playmat.css` →
+`.modal-overlay:focus-visible, .card-modal-overlay:focus-visible` turns the offset inward to `-3px` so it reads as a frame. It lives in `playmat.css` alone
 because prepare loads playmat, and the modal block is already duplicated across the two files.
 
 **Lesson: a global rule meets markup you didn't design for.** The choice was staged and
@@ -227,7 +227,7 @@ is invisible. Staging candidates on the gallery shows you what a treatment *look
 doesn't show you what it *collides* with.
 
 **Gotcha, cost a debug cycle:** the gallery test must **poll** the computed outline
-(`expect(...).toPass`), not read it once. `.group-by-type-toggle` (`playmat.css:235`) carries
+(`expect(...).toPass`), not read it once. `.group-by-type-toggle` (`playmat.css`) carries
 `transition: all 0.2s ease` and `outline-width` is animatable, so an immediate read catches
 the ring mid-transition at `1px` — indistinguishable from a missing CSS rule.
 
@@ -239,3 +239,82 @@ sanctioned fallback (a `--deep-space` companion) collides with the press bevel a
 above, so it goes back to Jess rather than being absorbed. Also outstanding: the **manual
 keyboard tab-through**, which is the real test of this ticket. Build, 224 unit tests and the
 5-test gallery spec all pass, but no human has tabbed the pages yet.
+
+## 2026-08-07 — the deck-title plaque moved onto the playmat
+
+The deck name used to be a slab *inside* `.cool-command-zone-surround`, the metal frame that
+holds the commander(s). It now rests on the playmat itself: centered in the mat's top grid
+row on `/prepare`, and left of the hamburger in a new `.game-header-row` on `/game`. The
+surround is back to exactly one child, `.multiple-cards`.
+
+**Why it's an owner-relevant change and not just a move.** Three things came out of it that
+outlive the change itself:
+
+**1. Appearance and placement got separated, and that's now the pattern.** The plaque's looks
+had been written as `.cool-command-zone-surround .game-title` — a descendant selector. Moving
+the element out of that parent would have silently unstyled it. The rule was promoted to a
+bare `.game-title` in `playmat.css` (fill, `3px groove black`, `padding: 8px 16px`, Orbitron,
+centered, `overflow-wrap: break-word`), and each page sheet now contributes *only* placement.
+General lesson recorded in [architecture.md](architecture.md): don't name an ancestor in an
+appearance rule for a component that could move.
+
+**2. A layout token died of the move.** `--min-title-slab-height` existed so the library stack
+could be padded down past the title slab's height (`padding-top: calc(32px + var(--min-title-slab-height))`).
+With the title gone from the surround, the library stack should align with the commander
+*card*, which is a fixed offset: `22px` = 5px surround border + 10px surround padding + 7px
+`.multiple-cards` inset border. Flat value, comment explaining the arithmetic, token deleted —
+zero references remain. Likewise `prepare.css`'s subgrid on `.cool-command-zone-surround`,
+which only existed to give the title its own row inside the frame, collapsed to a plain
+`grid-row: 3`. **A variable that exists to make one thing dodge another thing dies when they
+stop overlapping** — worth checking for, because it stays in the codebase looking meaningful.
+
+**3. The `/game` top strip has a structural rule now.** The title is a **sibling** of
+`#game-menu`, never a child, wrapped together in `.game-header-row` (flex,
+`justify-content: space-between`, `gap: 20px`). Two independent reasons, both discovered
+rather than designed: `game.js` dismisses the open menu on `!closest("#game-menu")`, so a
+nested title would swallow the dismiss click; and `#game-menu` is the dropdown panel's
+positioning ancestor, so nesting would push the panel down by the plaque's height. The `gap`
+is the animations owner's contribution — it doesn't offset the panel, and without it a long
+deck name butts into the hamburger. `verify-deck-title-placement.spec.ts` pins all of this,
+including "clicking the title dismisses an open menu."
+
+**What was fixed in passing.** Both renderers interpolated the deck name **raw**, and
+Archidekt deck names are user-supplied. `escapeHtml` moved from module-private in
+`active-game-page.ts` to exported from `shared-components.ts`, and the new
+`formatDeckTitleHtmlFragment(deckName)` uses it. A real XSS fix, found by reading the code
+being moved. Also: the plaque now renders for **commander-less decks**, which previously got
+no title at all because the title lived on the `commanders.length > 0` branch. And the
+gallery's old command-zone specimen carried a fictitious second line — "Precon · Warhammer
+40,000" — that the app has never rendered; it was deleted, not reproduced.
+
+**Left open on purpose.** The `groove` border was arguably the plaque's *join* to the metal
+frame; alone on the mat it joins nothing. The design owner's review flagged this and Jess
+asked for **both** treatments staged on `/design` rather than a decision — so it's
+[choice 7](open-choices.md#7-deck-title-plaque-border--groove-or-flat-new-2026-08-07), with
+`.candidate-game-title-flat` in `design-candidates.css` as option B. The groove shipped
+unchanged in the meantime. Two other things Jess looked at and deferred — converging the
+`.join-table-fields` panel (now the only pale untokenized slab on `/prepare`, and more
+conspicuous for this change) and removing the metal surround altogether — are recorded under
+"Deferred by Jess" in open-choices.md.
+
+**Lesson, and it's the same one as choice 5.** What decided the implementation wasn't the
+appearance question everyone was arguing about; it was structure discovered by writing the
+thing — a descendant selector that would have unstyled the element, a click-dismiss handler
+that a wrapper would have broken, a fixed grid track that would have clipped a long name.
+Stage the look on `/design`; find the collisions in the code.
+
+## 2026-08-07 — citations in this KB stopped being line numbers
+
+During the `-context` and `-review` passes on the change above, the owner spent a substantial
+section enumerating ~20 `file:NNN` citations across `open-choices.md`, `interactions.md` and
+`architecture.md` that the edit was about to invalidate. That was the **fourth** time (after
+choices 1, 2 and 5) that a single change stranded most of this KB's citations, and the
+`open-choices.md` resolve-checklist had a whole step — "re-verify every `file:line`" — that
+existed only to service the problem.
+
+**Jess's call: cite selectors and symbol names, not lines.** `playmat.css:122-128` becomes
+`playmat.css` → `.game-title`. A selector is greppable, survives every edit above it, and
+fails *honestly* — a grep returning nothing tells you the rule is gone, where a stale line
+number confidently points at an innocent neighbour. Converted in the same commit as the
+plaque move; the convention is written up in [README.md](README.md), and checklist step 8
+now says "cite by selector" instead of "re-verify the lines."

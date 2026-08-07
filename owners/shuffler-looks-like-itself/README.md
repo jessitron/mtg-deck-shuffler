@@ -85,7 +85,11 @@ and slabs. Plus `--playmat-one`/`--playmat-two` on the game page and the closed
 `--mana-W/U/B/R/G` set.
 
 **Chunky physical controls, except on buttons now.** `outset` / `inset` / `groove`
-borders remain on non-button chrome (the command-zone surround, the title slab). Button
+borders remain on non-button chrome — exactly two places now: the command-zone surround
+(`outset` metal frame) and the deck-title plaque (`3px groove black`). Those two are no
+longer nested: as of 2026-08-07 the plaque left the surround and rests on the playmat
+itself, so the groove no longer joins anything. Whether it keeps the groove alone on the
+mat is **open choice 7** — both options are staged on `/design`. Button
 press feedback moved to the box-shadow bevel described below (`shuffler-design-choices` choice 1) — no
 more `outset → inset` border switch anywhere. The Big Fat CTA (below) still carries a
 visible `10px solid` light-pink border — it just doesn't switch to `inset` on press
@@ -125,6 +129,15 @@ purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages
 (`/prepare`, `/game`) use the `.page-container` — a Magic card blown up to page size,
 5px black border, hard `5px 5px` offset shadow. Don't mix them.
 
+**Appearance in the shared sheet, placement in the page sheet (established 2026-08-07 by
+the deck-title plaque).** A component that appears on both play pages declares its *looks*
+once in `playmat.css` — fill, border, padding, font — and each page sheet contributes only
+where it sits (`prepare.css` puts `.game-title` in the mat's top grid row; `game.css` puts
+it in `.game-header-row` beside the hamburger). Don't write a descendant selector like
+`.some-container .game-title` for appearance; that welds the look to one parent and it
+breaks the moment the component moves. This is the pattern to copy for the next shared
+component.
+
 ## Design philosophy
 
 **Descriptive before prescriptive.** This owner starts from what the app *is*, not from
@@ -152,12 +165,13 @@ than leaving the choice visible.
 
 **One focus ring, declared once (decided 2026-08-06, `shuffler-design-choices` choice 5):**
 `3px solid var(--light-pink)` at `outline-offset: 3px`, as a single global `:focus-visible`
-rule in `styles.css:200-209` covering `a, button, input, select, textarea, summary,
+rule in `styles.css` (grep `:focus-visible`) covering `a, button, input, select, textarea, summary,
 [tabindex]`. **Don't write per-component focus rules and never write `outline: none`** — the
 app previously had one plain `:focus` outline and *three* rules that hid focus outright. The
 offset matters: the gap shows the page behind the control rather than the control's own fill,
 which is what keeps the ring legible against `.begin-button`'s light-pink border. One
-sanctioned exception exists — `playmat.css:173-176` flips the offset inward to `-3px` on the
+sanctioned exception exists — `playmat.css` → `.modal-overlay:focus-visible,
+.card-modal-overlay:focus-visible` flips the offset inward to `-3px` on the
 two full-viewport modal overlays, where `+3px` would draw off-screen. **Known open risk:**
 `--light-pink` measures ~1.35:1 on white (against WCAG 1.4.11's 3:1 floor for non-text
 indicators), and the flat-white `.modal-dialog` interior is the likeliest failure. The fix is
@@ -171,7 +185,7 @@ Material, and the `#5a6268` hover-darken riding along with them) across
 ## Open choices — staged on `/design`, not yet decided
 
 **→ [open-choices.md](open-choices.md) is the work list**: every option, its exact
-implementation steps with file:line, and the checklist for resolving one. Start there if
+implementation steps by file and selector, and the checklist for resolving one. Start there if
 you've been sent to converge the design.
 
 Until Jess picks, don't hard-code an answer; follow the existing treatment nearest the
@@ -182,6 +196,7 @@ component and flag the choice.
 | Card-modal action buttons | Keep seven color-coded hues · collapse to primary/secondary |
 | Corner radius on chrome | truly 0 · a single 4px |
 | Text input | precon-search · join-table · tokenized proposal (recommended) |
+| Deck-title plaque border (new 2026-08-07) | keep `3px groove black` (current) · flat `3px solid black` |
 
 Candidate CSS for the unadopted options lives in
 `apps/shuffler/public/design-candidates.css`, loaded by nothing but the gallery.
@@ -200,9 +215,27 @@ Candidate CSS for the unadopted options lives in
 | Gallery test | `apps/shuffler/test/verification/verify-design-gallery.spec.ts` |
 | Stated UI rule | `apps/shuffler/CLAUDE.md` → "UI Style" |
 
+## How to cite code in this KB (standing convention, 2026-08-07)
+
+**Cite `file` + selector or symbol name. Do not cite `file:NNN`.** Write
+``playmat.css → `.game-title` `` , not ``playmat.css:122-128``.
+
+Why: a line number is invalidated by any edit *above* it, in a file nobody was thinking
+about this KB while editing. That rot has bitten four times now — after choices 1, 2 and 5
+landed, and again when the deck-title plaque moved (2026-08-07), when a single change
+invalidated roughly twenty citations across three KB files at once. Nobody notices a stale
+line number until they're already editing the wrong rule. A selector, by contrast, is
+greppable (`grep -n '\.game-title' public/*.css` finds it wherever it went) and survives
+every edit that doesn't touch the rule itself — and if the selector *is* gone, the grep
+returning nothing tells you so honestly instead of pointing at an innocent neighbour.
+
+Keep a line number only where nothing else identifies the spot — an unnamed block, a
+particular line inside a long function — and make it visibly secondary (`…, currently
+around :455`) so the next reader knows to grep first.
+
 ## The other files
 
-- [open-choices.md](open-choices.md) — **the work list.** All six choices, with the three
+- [open-choices.md](open-choices.md) — **the work list.** All seven choices, with the four
   still-undecided ones carrying implementation steps, plus the mechanical cleanups that fall
   out of them. Resolved choices keep their reasoning rather than being deleted.
 - [interactions.md](interactions.md) — what this leans on, who breaks it, and the concrete
