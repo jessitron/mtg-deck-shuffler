@@ -19,7 +19,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'Ovo', serif;
+  font-family: var(--font-content);
 }
 
 /* Typography */
@@ -29,7 +29,7 @@
 .docs-page h4,
 .docs-page h5,
 .docs-page h6 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-chrome);
   font-weight: 700;
 }
 
@@ -53,7 +53,7 @@
   flex-shrink: 0;
   padding-top: 32px;
   /* match main */
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-chrome);
 }
 
 .docs-sidebar h1 {
@@ -79,11 +79,11 @@
 
 .docs-sidebar>ul>li {
   margin-bottom: 1rem;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-chrome);
 }
 
 .docs-sidebar>ul>li>ul>li {
-  font-family: 'Ovo', serif;
+  font-family: var(--font-content);
 }
 
 .docs-sidebar a {

@@ -141,7 +141,7 @@
   color: #007bff;
   text-decoration: none;
   font-weight: 500;
-  font-family: "Ovo", serif;
+  font-family: var(--font-content);
 }
 
 .card-name-link:hover {

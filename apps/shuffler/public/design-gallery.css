@@ -12,7 +12,7 @@
 .design-page {
   background: #17101f;
   color: #e8e8e8;
-  font-family: "Ovo", serif;
+  font-family: var(--font-content);
   min-height: 100vh;
   padding-bottom: 6rem;
 }
@@ -29,7 +29,7 @@
 }
 
 .design-page .gallery-intro h1 {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: 2.25rem;
   color: white;
   margin-bottom: 0.75rem;
@@ -47,7 +47,7 @@
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
   margin-top: 1.5rem;
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: 0.85rem;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .design-page .gallery-section > h2 {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: 1.5rem;
   color: white;
   padding-bottom: 0.5rem;
@@ -85,7 +85,7 @@
 }
 
 .design-page .gallery-section h3 {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: 1.05rem;
   color: var(--light-pink);
   margin: 2rem 0 0.75rem;
@@ -95,7 +95,7 @@
 
 .design-page .badge {
   display: inline-block;
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -132,7 +132,7 @@
 }
 
 .design-page .choice > .choice-question {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: 0.95rem;
   font-weight: 700;
   color: #ffcf5c;
@@ -155,7 +155,7 @@
 }
 
 .design-page .option-label {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: 0.8rem;
   font-weight: 700;
   color: white;
@@ -260,7 +260,7 @@
 .design-page .swatch-use {
   display: block;
   color: #7c7388;
-  font-family: "Ovo", serif;
+  font-family: var(--font-content);
   font-size: 0.72rem;
 }
 
@@ -300,7 +300,7 @@
 }
 
 .design-page .gallery-table th {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;

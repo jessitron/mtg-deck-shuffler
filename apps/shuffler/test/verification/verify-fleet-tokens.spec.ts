@@ -27,7 +27,13 @@ const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 // One token from each group that moved out of this ship and into the package.
 // --deep-space is identity; --mana-G is the (closed) colour pie.
-const SHARED_TOKENS = ['--deep-space', '--dark-pink', '--light-pink', '--cute-heading-color', '--narrow-border', '--mana-G'];
+const SHARED_TOKENS = [
+  '--deep-space', '--dark-pink', '--light-pink', '--cute-heading-color', '--narrow-border', '--mana-G',
+  // Type by role, and the pressable radius. The typeface literals used to be
+  // written out ~39 times across these stylesheets, and had already drifted
+  // (Ovo's fallback stack differed in one place, quoting in several).
+  '--font-chrome', '--font-content', '--font-display', '--radius-soft',
+];
 
 // This ship has two heads, and they're separate code: views/partials/head.ejs
 // (site and pre-game pages) and src/view/common/html-layout.ts (the play pages).

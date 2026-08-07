@@ -40,4 +40,38 @@
   --mana-B: #530aae; /* Swamp — purple */
   --mana-R: #bd0a0a; /* Mountain — red */
   --mana-G: #2a8439; /* Forest — green */
+
+  /*
+   * Type, named by ROLE rather than by typeface. Three faces, fixed jobs, and
+   * there is no fourth — so the role is the stable name and the face is the
+   * detail. Card names are content, not chrome.
+   *
+   * Two reasons these are tokens and not literals:
+   *
+   * 1. The literals had already drifted. Ovo's fallback stack was `"Ovo", serif`
+   *    in nine places and `"Ovo", Arial, sans-serif` in one, with quoting split
+   *    between single and double. Same rot as the duplicated colours above.
+   * 2. THE CANVAS CANNOT USE CSS. A self-rendering tldraw shape passes a font
+   *    *string* from TypeScript — there is no class to hang a rule on — so
+   *    without a name here, the literal gets retyped into a .tsx file where none
+   *    of the stylesheet-level conventions can reach it.
+   */
+  --font-chrome: "Orbitron", sans-serif; /* UI chrome: headings, buttons, labels */
+  --font-content: "Ovo", serif; /* Prose and card names */
+  --font-display: "Risque", cursive; /* Hero titles, slogans — site pages only */
+
+  /*
+   * Soften what you press. Decided 2026-08-06 (Jess): --radius-soft on
+   * pressables, 0 on flat surfaces, and physical objects (cards, playmats,
+   * count discs) keep their own real radii. The line falls at "do you touch
+   * it", not at "is it small".
+   *
+   * Shared rather than ship-local because the rule is stated fleet-wide and a
+   * tldraw shape has the same canvas-can't-use-CSS problem as the fonts above.
+   *
+   * ⚠️ The Shuffler still has ~13 hand-written radius values that predate this
+   * and have NOT been swept onto the token. They're drift awaiting that sweep,
+   * not precedent — don't copy one.
+   */
+  --radius-soft: 4px;
 }

@@ -23,7 +23,13 @@ import { test, expect } from "@playwright/test";
 
 const BASE_URL = process.env.BASE_URL ?? "http://localhost:5183";
 
-const SHARED_TOKENS = ["--deep-space", "--dark-pink", "--light-pink", "--cute-heading-color", "--narrow-border", "--mana-G"];
+const SHARED_TOKENS = [
+  "--deep-space", "--dark-pink", "--light-pink", "--cute-heading-color", "--narrow-border", "--mana-G",
+  // Type by role, and the pressable radius. These two matter most to THIS ship:
+  // a self-rendering tldraw shape passes a font string and a radius from
+  // TypeScript, where no stylesheet convention can reach it.
+  "--font-chrome", "--font-content", "--font-display", "--radius-soft",
+];
 
 test.describe("the fleet palette reaches the Tabletop", () => {
   test("every shared token resolves in the browser", async ({ page }) => {
