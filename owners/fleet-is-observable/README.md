@@ -268,15 +268,27 @@ The shape, and why each piece:
   `verify.run.id` in the app dataset errors with "unknown column" — the cleanest possible proof that
   no harness attribute leaked across.
 
-**Volume verdict: one trace per run STANDS, at 1,090 spans.** _(Owner's call, 2026-08-07.)_ The
-"above ~1,000 spans, split to trace-per-spec" steer given at review time was a pre-measurement
-heuristic, and the measurement retired it: 1,090 is 9% over a round number, every acceptance query is
-an aggregate that never opens the waterfall, and `verify.run.id` is on every span so splitting later
-costs almost nothing. **The number that actually matters is spans-per-run against env `local`'s
-budget, not waterfall usability** — a dev tool must not become the largest single span source in the
-environment, which is the ~3,000/run figure the expect threshold was introduced to avoid. Revisit if
-the suite grows past roughly 2,000 spans/run, or the day someone genuinely needs to read one run's
-waterfall and can't.
+**Volume verdict: one trace per run STANDS, at 1,090 spans — with ~9× headroom.**
+
+**Fact, with provenance: a trace becomes hard to read around ~10,000 spans; ~1,000 is comfortable.**
+_(Jess, 2026-08-07, after opening the harness's actual 1,090-span waterfall in Honeycomb: "oh yeah, a
+thousand spans is totally manageable. ten thousand gets bad.")_ This number got re-guessed three times
+before anyone looked — triage said "a few hundred", this owner's review said "~1,000", this owner
+post-measurement said "~2,000", and each guess was conservative. **It is now measured and
+human-confirmed; use it instead of re-deriving it.** Splitting the verify harness into a trace per
+spec is off the table for the foreseeable future.
+
+**Two different questions, two different numbers — do not collapse them.**
+
+1. **Waterfall usability** — can a human read one trace? Ceiling ~10,000 spans. Settled above.
+2. **Span volume against env `local`'s budget** — a dev tool must not become the environment's
+   largest single span source. **Jess's number says nothing about this one.** It is the constraint
+   the expect threshold was introduced for (it avoided a ~3,000-span/run harness), and it is the
+   reason Invariant 1's "attributes, not spans" is also a volume control. Revisit *this* whenever
+   the suite's spans/run grows materially, regardless of how comfortable the waterfall still is.
+
+Supporting the trace-per-run call either way: every acceptance query is an aggregate that never opens
+the waterfall, and `verify.run.id` is on every span, so splitting later costs almost nothing.
 
 **Synthesizing a span from shell timestamps — the recipe, because we want more of these.**
 `verify build` is a full `tsc` on every run and was invisible; it is exactly the kind of phase that
@@ -485,6 +497,14 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
     worked around.
   - **Instrumenting our own tooling is now a thing we do.** Also the first measured proof that
     Invariant 5's "new init paths must carry the build sha" check works: this one did, unprompted.
+  - **The trace-size ceiling was guessed three times before anyone looked, always low.** "A few
+    hundred" (triage) → "~1,000" (this owner's review) → "~2,000" (this owner, post-measurement) →
+    **~10,000, from Jess opening the actual waterfall** (2026-08-07). Nobody was reasoning badly; the
+    number is just unknowable from the armchair, and every armchair estimate erred toward caution and
+    toward more engineering. Two rules fall out: **record human-confirmed numbers as facts with their
+    provenance**, so the next agent inherits the observation instead of re-deriving a safer one; and
+    **keep "can a human read this trace" separate from "what does this cost the environment"** — one
+    measurement retires only the question it measured.
   - It immediately overturned the standing assumption about *why* the suite is slow —
     `waitForLoadState("networkidle")` at 141 calls / 76.5s beat the fixed sleeps at 38.8s. Which is
     the whole argument for the change: ~98% of the wait had been unmeasured.

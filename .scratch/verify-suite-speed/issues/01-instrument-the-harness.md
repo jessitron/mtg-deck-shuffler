@@ -195,12 +195,13 @@ Slowest specs: `verify-mulligan` 28.6s, `verify-library-grouping` 27.2s,
 
 Query: https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-fleet-verify/result/7ccsqR9NcZq
 
-**Decision left standing for Jess to overrule if she likes: one trace per run, at 1,090
-spans.** The owner's steer was "above ~1,000, split into a trace per spec joined by
-`verify.run.id`". 1,090 is 9% over a round number chosen as a usability heuristic, the ticket's
-own criterion says one run is one trace, and every query above is an aggregate that never opens
-the waterfall. The run id is on every span, so flipping to trace-per-spec later is a small
-change. Raising `EXPECT_THRESHOLD_MS` in `otelReporter.ts` is the other dial.
+**One trace per run — settled, and the threshold is an order of magnitude away.** The owner's
+pre-measurement steer was "above ~1,000, split into a trace per spec"; it retired that heuristic
+after seeing the number, then set ~2,000. **Jess looked at the actual waterfall and gave the
+real figure: a thousand spans is "totally manageable", ten thousand "gets bad."** So there is
+about 9× of headroom and no reason to split. If a future change ever does approach it, the dials
+are `EXPECT_THRESHOLD_MS` in `otelReporter.ts` first, and trace-per-spec joined on
+`verify.run.id` second (cheap, because the run id is already on every span).
 
 **Two things found by writing the tests, both fixed in the harness rather than the test:**
 `shutdown()` rejected when the exporter threw (now swallowed — no telemetry problem may reach
