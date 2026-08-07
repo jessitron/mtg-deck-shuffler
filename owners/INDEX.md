@@ -15,7 +15,12 @@ owners stamped with a different ship, never the fleet-scoped ones.
 - [two-faced cards](two-faced-cards/README.md) — *feature, fleet* — consult me before changes to card
   display/rendering, CardDefinition/CardFace types, deck adapters, card persistence, flip buttons,
   CSS card animations, card modals, library search grouping, game state, the Tabletop's card
-  rendering, or the event contract's card/face fields.
+  *face/image* rendering, or the event contract's card/face fields. Not click/drag/selection
+  mechanics — see tabletop shape mechanics below.
+- [tabletop shape mechanics](tabletop-shape-mechanics/README.md) — *capability, Tabletop* — consult
+  me before changes to tldraw `ShapeUtil` hooks (`onClick`, `onTranslateEnd`, drag/drop), custom
+  shape types under `apps/tabletop/src/client/shapes/`, shape selection state, or zone detection —
+  regardless of what the shape displays.
 - [library search](library-search/README.md) — *feature, Shuffler* — consult me before changes to card
   definitions, modals, persistence, game state, deck adapters, or the prep/game pages.
 - [animations](animations/README.md) — *feature, Shuffler* — consult me before changes to card
