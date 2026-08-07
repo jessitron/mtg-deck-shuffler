@@ -16,7 +16,11 @@ something interesting that happened.
 each ship's SEAMAP). The North Star includes **"When something breaks, Honeycomb shows you why."**
 
 What must keep working: **for any interesting thing a user does, there is a trace in Honeycomb that
-explains it, and the volume stays affordable.** The trace follows HTTP calls within this app.
+explains it, and the data stays queryable.** The trace follows HTTP calls within this app.
+
+**Volume is not a cost concern on this fleet.** _(Jess, 2026-08-07: "I work at Honeycomb.
+Ingestion is free.")_ See "Volume: what still matters and what doesn't" below before you plan
+around a budget.
 
 ## Invariants
 
@@ -28,8 +32,12 @@ When there is a conditional in the code, but the condition in an attribute; this
 There is no PII to worry about in this app.
 
 **A log is for when there is no span to hang it on** — startup, shutdown, callbacks, timers. If
-there's an active span, `setAttributes` on it instead. This is also the thing that keeps log volume
-affordable, so it is not merely a style preference.
+there's an active span, `setAttributes` on it instead.
+
+This was never a cost argument, and don't let anyone turn it into one. An attribute on the span
+that already exists is *more* useful than a separate record: it correlates with everything else on
+that span, and it doesn't add a row someone has to filter past. The reason to prefer it is signal,
+not billing.
 
 ### 1. Never add events to spans. Create trace-participating logs instead. _(Jess, authoritative)_
 
@@ -90,9 +98,9 @@ span, arrives if the span never ends).
 **Logs are deliberately NOT sampled.** A LogRecord does not inherit its span's sampling decision,
 and we chose not to make it. See Invariant 4 — the sampler keeps 1% of health-check traces so we
 can see the probe passing; if the probe starts *failing* we want every log explaining why, not 1%
-of them. The OTel spec defaults `traceBased` to `false` for the same reason. What keeps log volume
-affordable is **not logging on the hot path**, which Invariant 1 already produces: attributes are
-the default answer and a log is the exception.
+of them. The OTel spec defaults `traceBased` to `false` for the same reason. Unsampled logs stay
+*readable* because nothing logs on the hot path — which Invariant 1 already produces: attributes are
+the default answer and a log is the exception. (Cost was never the reason; see "Volume" below.)
 
 ### 3. While ingest keys are OK to commit to git and publish in the browser, Collectors are better.
 
@@ -253,16 +261,23 @@ The shape, and why each piece:
   root's own `verify.span.count` counts spans *emitted*, not *exported* — invisible twice over.
   Measured on the first full run: 1,090 spans, and `verify.span.count` matched the dataset count
   exactly, so nothing was dropped.
-- **Attributes beat spans here too (Invariant 1, applied to volume).** An `expect` faster than 100ms
+- **Attributes beat spans here too (Invariant 1, applied to signal).** An `expect` faster than 100ms
   hid no time by definition, so it becomes `test.expect.count` / `.total_ms` /
-  `.suppressed_count` on the test span instead of a span of its own.
+  `.suppressed_count` on the test span instead of a span of its own. `EXPECT_THRESHOLD_MS` in
+  `otelReporter.ts`. **This threshold is not a cost measure** — it exists because a 3ms assertion
+  span answers no question anybody asks. Owner's call (2026-08-07): **keep it at 100ms**, including
+  while `verify-suite-speed` ticket 02 is active. The suite is optimizing against *where the time
+  went*, and by construction the suppressed spans contain none of it; dropping to 0 would add
+  ~1,000–2,000 spans of confirmed-empty duration to every waterfall. If a specific ticket-02
+  question actually needs sub-100ms fidelity, lower it for that run rather than for the default —
+  the dial is one constant and the aggregates all carry `verify.run.id`.
 - **Telemetry is never fatal and never blocking.** Same posture as `deploy-marker.sh`'s `|| true`:
   an empty Honeycomb team key counts as unconfigured, `shutdown()` is bounded by a `Promise.race`
   with an `unref`'d timer, and every reporter hook is wrapped. Proven end to end with a
   syntactically-valid-but-wrong key: exit code 0.
 - **Trace context is deliberately NOT propagated into the browser.** The app's `ParentBasedSampler`
   would honor a sampled remote parent and never consult `BackgroundChatterSampler`, tracing every
-  static asset at 100% across 51 tests — the exact volume regression `0f42c95` fixed, wearing the
+  static asset at 100% across 51 tests — the exact noise regression `0f42c95` fixed, wearing the
   costume of success. Harness and app spans correlate by `verify.run.id` and time, in separate
   datasets. Verified: 33% of app spans are still their own trace roots (unchanged), and querying
   `verify.run.id` in the app dataset errors with "unknown column" — the cleanest possible proof that
@@ -278,17 +293,39 @@ post-measurement said "~2,000", and each guess was conservative. **It is now mea
 human-confirmed; use it instead of re-deriving it.** Splitting the verify harness into a trace per
 spec is off the table for the foreseeable future.
 
-**Two different questions, two different numbers — do not collapse them.**
-
-1. **Waterfall usability** — can a human read one trace? Ceiling ~10,000 spans. Settled above.
-2. **Span volume against env `local`'s budget** — a dev tool must not become the environment's
-   largest single span source. **Jess's number says nothing about this one.** It is the constraint
-   the expect threshold was introduced for (it avoided a ~3,000-span/run harness), and it is the
-   reason Invariant 1's "attributes, not spans" is also a volume control. Revisit *this* whenever
-   the suite's spans/run grows materially, regardless of how comfortable the waterfall still is.
-
 Supporting the trace-per-run call either way: every acceptance query is an aggregate that never opens
 the waterfall, and `verify.run.id` is on every span, so splitting later costs almost nothing.
+
+### Volume: what still matters and what doesn't
+
+**RETIRED (2026-08-07): "span volume against env `local`'s budget."** This KB carried a numbered
+concern that "a dev tool must not become the environment's largest single span source," with a
+~3,000-spans/run figure framed against a budget. **There is no budget.** _(Jess, directly,
+2026-08-07: "I work at Honeycomb. Ingestion is free.")_ Ingest volume is not a cost constraint on
+this fleet's telemetry decisions, in env `local` or in prod. Do not reintroduce it, in any ship, for
+any signal — spans, logs, or attributes.
+
+It is written down as retired rather than deleted on purpose. An agent who finds *no* guidance
+invents a conservative one, and this file has already documented that exact loop: the trace-size
+ceiling was guessed "a few hundred" → "~1,000" → "~2,000" before anyone looked and got ~10,000.
+Absence of a rule is not silence; it reads as license to be cautious.
+
+**Do not overshoot into "volume never matters."** Two reasons to be deliberate survive, and neither
+is money:
+
+1. **Can a human read the trace?** ~10,000 spans is where a waterfall gets hard; ~1,000 is
+   comfortable (Jess, 2026-08-07, measured — above). Unaffected by the cost correction; it was always
+   a usability ceiling.
+2. **Does this span tell anyone anything?** A dataset of 10,000 mostly-trivial spans is harder to
+   query well than 1,000 informative ones — noise crowds out the `GROUP BY` you actually wanted and
+   makes every heatmap flatter. This is the surviving reason to threshold or aggregate, and it's the
+   reason Invariant 1 prefers attributes: an attribute on an existing span sharpens it, a trivial
+   child span dilutes the dataset.
+
+So the question to ask of a proposed span is **"what would I learn from it?"**, never "what does it
+cost?". If the answer is "nothing, by construction" — a 3ms assertion, 200 static-asset fetches — roll it
+into a count attribute. If the answer is "which of 51 specs burned the minute", emit it, however many
+that turns out to be.
 
 **Synthesizing a span from shell timestamps — the recipe, because we want more of these.**
 `verify build` is a full `tsc` on every run and was invisible; it is exactly the kind of phase that
@@ -424,6 +461,12 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
   ~1440 probes per 2h × 8 spans each, the single largest source of spans in production. The
   `kube-probe` branch beside it worked only by luck of casing. Lesson: **a sampler that fails open
   is invisible**, so it gets its own module and its own test.
+
+  **Re-framed 2026-08-07: this was a signal problem, not a billing one.** The commit title says
+  "drowning Honeycomb", which reads like a cost story; it isn't, and ingestion is free here anyway
+  (see "Volume" above). The damage was that identical health-check traces outnumbered real user
+  traces, so every dataset-wide query answered a question about the load balancer. The sampler is
+  still right and still wanted — for that reason.
 - Middleware spans: an older `ignoreLayers: ["middleware - stampRouteParams"]` hack was replaced by
   `ignoreLayersType: [ExpressLayerType.MIDDLEWARE]`, taking a typical trace from 8 spans to 2.
 - The `-r` → `--import` ESM migration (`notes/add-opentelemetry.md`): with `-r`, `import`ed modules
@@ -503,11 +546,35 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
     number is just unknowable from the armchair, and every armchair estimate erred toward caution and
     toward more engineering. Two rules fall out: **record human-confirmed numbers as facts with their
     provenance**, so the next agent inherits the observation instead of re-deriving a safer one; and
-    **keep "can a human read this trace" separate from "what does this cost the environment"** — one
-    measurement retires only the question it measured.
+    **one measurement retires only the question it measured** — so "can a human read this trace"
+    stayed separate from a second, cost-framed question. That second question turned out not to
+    exist at all; Jess retired it hours later. See the next entry.
   - It immediately overturned the standing assumption about *why* the suite is slow —
     `waitForLoadState("networkidle")` at 141 calls / 76.5s beat the fixed sleeps at 38.8s. Which is
     the whole argument for the change: ~98% of the wait had been unmeasured.
+
+- **2026-08-07, hours after `1a5d3a6`: "I work at Honeycomb. Ingestion is free." _(Jess, directly.)_**
+  This voided a constraint the KB had reasoned under since its first version — that telemetry volume
+  is a cost to be managed — and retired the numbered "span volume against env `local`'s budget"
+  concern along with its ~3,000-spans/run figure. Recorded as **retired, not deleted** (see "Volume:
+  what still matters and what doesn't"), because this file has documented the failure mode: an agent
+  who finds no guidance invents a conservative one, which is the same "few hundred → ~1,000 →
+  ~2,000" chain one entry up. What changed and what didn't:
+  - Gone: cost as a reason to sample, threshold, aggregate, or not log. Everywhere, on every ship.
+  - Unchanged: the ~10,000-span waterfall ceiling (always usability), the health-check sampler
+    (always signal — that history entry is re-framed above), and Invariant 1's preference for
+    attributes (never a cost argument; an attribute on an existing span is simply more useful than a
+    row beside it).
+  - New shape of the question: **"what would I learn from this span?"**, not "what does it cost?"
+  - Two owner's calls made on the spot: **`EXPECT_THRESHOLD_MS` stays at 100** even with ~9× trace
+    headroom and ticket 02 active, because the suppressed spans are empty *by construction* and
+    would dilute the dataset they're meant to explain; and **the correction does not license
+    volume-indifference** — this KB now names signal-to-noise as the surviving reason to be
+    deliberate, so the next agent can't read "free" as "unbounded".
+  - The general lesson: an *economic* premise can be as wrong as a technical one, and this KB had no
+    provenance on that one at all — nobody ever measured or asked, it was just assumed from habits
+    formed elsewhere. Assumptions about the world outside the code deserve the same "measure, don't
+    reason" treatment as `node_modules`. Ask Jess.
 
 ## Related reading
 
