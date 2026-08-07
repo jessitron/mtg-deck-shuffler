@@ -192,7 +192,8 @@ Consequences worth holding:
 
 | Where                                                 | What it is                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `apps/shuffler/src/tracing.ts`                        | Node SDK init. ESM loader hook (`register("@opentelemetry/instrumentation/hook.mjs")`) + `node --import`. Auto-instrumentations; `fs` off; **Express middleware spans off** (`ignoreLayersType: [ExpressLayerType.MIDDLEWARE]`). `ParentBasedSampler({root: BackgroundChatterSampler})`. Also `logRecordProcessors: [BatchLogRecordProcessor(OTLPLogExporter)]` — logs ride the same NodeSDK so they share the resource (`service.name`) and shutdown path with traces, and land in the same datasets. **Passing `logRecordProcessors` makes the SDK skip its `OTEL_LOGS_EXPORTER` branch entirely** (`sdk-node/build/src/sdk.js:144-156`), so that env var would be dead config on these two ships — don't add it. (The Spine's `OTEL_LOGS_EXPORTER=none` is real; it has no pipeline.)                                                                                                                                                              |
+| `apps/shuffler/src/tracing.ts`                        | Node SDK init. ESM loader hook (`register("@opentelemetry/instrumentation/hook.mjs")`) + `node --import`. Auto-instrumentations; `fs` off; **Express middleware spans off** (`ignoreLayersType: [ExpressLayerType.MIDDLEWARE]`). `ParentBasedSampler({root: BackgroundChatterSampler})`. Also `logRecordProcessors: [BatchLogRecordProcessor(OTLPLogExporter)]` — logs ride the same NodeSDK so they share the resource (`service.name`) and, **since `08-no-shutdown-flush-hook` (2026-08-07), the shutdown path with traces for real** — see the next row; before that fix "share the shutdown path" was true of the SDK's design but nothing ever called `sdk.shutdown()`, so it was aspirational. **Passing `logRecordProcessors` makes the SDK skip its `OTEL_LOGS_EXPORTER` branch entirely** (`sdk-node/build/src/sdk.js:144-156`), so that env var would be dead config on these two ships — don't add it. (The Spine's `OTEL_LOGS_EXPORTER=none` is real; it has no pipeline.)                                                                                                                                                              |
+| `apps/shuffler/src/shutdownHooks.ts`                  | `installShutdownHandlers(drain, options)` — the SIGTERM/SIGINT flush-and-exit hook, called from `tracing.ts` right after `sdk.start()` as `installShutdownHandlers(() => sdk.shutdown(), { onTimeout, onDrainError })`. Listens on an injectable `signalSource` (default `process`), races `drain()` against an `unref()`'d `setTimeout` (default 5000ms — same bounded-wait shape as the verify harness's `bounded()` helper), and calls an injectable `exit` (default `process.exit`) **exactly once** regardless of how many signals fire or whether `drain()` resolves, rejects, or times out. `onTimeout`/`onDrainError` let the caller log without this file depending on `log.ts` — `tracing.ts` wires both to `log.warn`. **Installing this handler changes Node's default SIGTERM behavior**: with no handler, SIGTERM terminates the process immediately; once one exists, Node no longer exits on its own, so the file must call `exit()` itself once the race settles. Tested with a real `EventEmitter` as the fake signal source (no mocks) in `apps/shuffler/test/shutdownHooks.test.ts`: happy path, hung drain, rejecting drain, double-signal idempotency, SIGINT.                                                                                                                                                              |
 | `apps/shuffler/src/telemetry-sampler.ts`              | `BackgroundChatterSampler` — keeps `CHATTER_SAMPLE_RATIO = 0.01` of probes (`kube-probe`, `elb-healthchecker` by UA) + `/health` + static assets by extension; 100% of everything else. Reads `http.user_agent`/`user_agent.original` and `http.target`/`url.path`. Unit tested.                                                                                                                                                                      |
 | `apps/shuffler/src/log.ts`                            | The log surface: `log.info/warn/error(message, attributes, error?)`. Writes to **stdout and OTLP**. Takes its logger from the `api-logs` global, so it no-ops cleanly where no provider was registered (tests, `src/scripts/*`). An `Error` becomes `exception.type`/`.message`/`.stacktrace` attributes. Tested: `test/log.test.ts`. Duplicated in the Tabletop on purpose.                                                             |
 | `apps/tabletop/src/server/log.ts`                     | The same file, at the 0.221 version line. Tested: `apps/tabletop/test/log.test.ts` (vitest).                                                                                                                                                                                                                                                                                                                                          |
@@ -575,6 +576,32 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
     provenance on that one at all — nobody ever measured or asked, it was just assumed from habits
     formed elsewhere. Assumptions about the world outside the code deserve the same "measure, don't
     reason" treatment as `node_modules`. Ask Jess.
+
+- **`08-no-shutdown-flush-hook` (2026-08-07)** — closed the gap this KB's own wiring table had
+  been carrying: "logs share the shutdown path with traces" described the SDK's design, not
+  reality, because `apps/shuffler/src/tracing.ts` called `sdk.start()` and registered no
+  shutdown hook at all. With no handler, Node terminates on SIGTERM immediately — dropping
+  whatever batch hadn't flushed (up to `BatchSpanProcessor`'s 5s `scheduledDelayMillis`) — on
+  **every** `verify.sh` run (its `cleanup()` sends SIGTERM) and **every** k8s pod termination
+  in prod. Fixed with a new `apps/shuffler/src/shutdownHooks.ts` (`installShutdownHandlers`,
+  see the wiring table). Worth carrying forward, all previously flagged by this owner's
+  `-review` and confirmed true:
+  - **Installing a signal handler changes Node's default behavior.** Once one exists, Node no
+    longer exits on its own — the handler must call `exit()` itself after the drain settles, or
+    every SIGTERM hangs the process forever. The easiest way to get this exactly backwards.
+  - **`sdk.shutdown()` can hang or reject** (the exporter-robustness findings under "Volume"
+    above are the same family of bug), so the drain is bounded by a `Promise.race` against an
+    `unref()`'d timer — copying the harness's `bounded()` shape rather than inventing a new one.
+  - **Idempotency**: both SIGTERM and SIGINT must trigger shutdown, but only once.
+  - Verified end to end, not just "didn't hang": built `dist/`, ran the real server with
+    `.be`/`.env` sourced (the fleet's real order), curled a request, sent SIGTERM ~6s later, and
+    confirmed via the `honeycomb-modernity` MCP server (team `modernity`, env `local`, dataset
+    `mtg-deck-shuffler`) that both spans for that exact request (matching PID) landed. Process
+    exited code 0, no hang, no force-kill.
+  - No change needed to `apps/shuffler/verify.sh` — its existing `kill`/`wait` cleanup already
+    tolerated a slower-to-exit process.
+  - This is the Tabletop's gap too (its `tracing.ts` also calls `sdk.start()` with no shutdown
+    hook) — not yet fixed there; the pattern is now available to copy.
 
 ## Related reading
 
