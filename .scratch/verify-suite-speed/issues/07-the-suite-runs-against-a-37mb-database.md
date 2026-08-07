@@ -1,7 +1,7 @@
 # The suite runs against a shared 37 MB data.db that is never reset
 
 Mountain: overhead
-Status: ready-for-human
+Status: claimed
 Type: grilling
 Map: ../map.md
 
