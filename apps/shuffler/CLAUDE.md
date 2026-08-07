@@ -83,7 +83,9 @@ The short version:
 - The site pages (/, /choose-any-deck) have different styles from the play pages
   (/prepare, /game)
 - `playmat.css` is shared by game and prepare; `game.css` and `prepare.css` are
-  page-specific; `site.css` is the site pages; `styles.css` holds the tokens. Watch for the
+  page-specific; `site.css` is the site pages; `styles.css` is global (reset, `.pushable-flat`,
+  the focus ring, `--background-color`) — the **shared tokens live outside the ship**, in
+  `packages/design-tokens/tokens.css`, served at `/fleet/tokens.css`. Watch for the
   modal, flip, and library-list blocks, which are currently duplicated across files
 - **Appearance in the shared sheet, placement in the page sheet.** A component on both play
   pages declares how it *looks* once in `playmat.css`, as a **bare class selector**; each
@@ -116,7 +118,7 @@ The short version:
 
 **Styles**:
 
-- `public/site.css` (site-wide), `styles.css` (tokens + global), `playmat.css` (shared by game and prepare), `game.css`, `prepare.css`, `deck-selection.css`, `docs.css`
+- `packages/design-tokens/tokens.css` (**repo root, not this ship** — the fleet's shared tokens, served at `/fleet/tokens.css`), `public/site.css` (site-wide), `styles.css` (global reset, `.pushable-flat`, the focus ring, `--background-color`), `playmat.css` (shared by game and prepare), `game.css`, `prepare.css`, `deck-selection.css`, `docs.css`
 - `/design` → `views/design.ejs` — the component gallery (see UI Style above).
   `public/design-candidates.css` holds proposals not yet adopted; `public/design-gallery.css`
   is gallery chrome only and must never be copied into the app

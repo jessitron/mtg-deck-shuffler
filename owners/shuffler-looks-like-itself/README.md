@@ -54,14 +54,19 @@ The Tabletop today has hit "can't implement anything else until it has a design
 identity" (Jess, 2026-08-06). Its design pass should start from this identity — tokens
 and typefaces first — not from a blank page, and its findings come back into this KB.
 
-**And it has nowhere to start from yet.** `apps/tabletop` has **no CSS source file at all**
-(only a built `dist/client/assets/*.css`) and **no font `<link>` or `@font-face` anywhere** —
-the only CSS import in the client is `import "tldraw/tldraw.css"`. So Layer 1's "use a token,
-not a literal" currently has nowhere to point, and Orbitron has no way to load. **Both halves
-fail silently:** CSS drops an unknown `var()`, and a missing font falls back to a system serif.
-Tracked as `tabletop-css-tokens` in the repo-root `TODO.md`. **When it gets solved, do not solve
-it by copying `styles.css`'s `:root`** — a second source of truth for the palette diverges
-silently, and this owner is already fighting four `:root` blocks.
+**It now has somewhere to start from — half of it (resolved 2026-08-07, `4396aea`).** The
+Tabletop used to have no CSS source file and no font link at all, so a `var(--…)` resolved to
+nothing and Orbitron fell back to a system serif, both silently. That is closed: the fleet's
+shared tokens live in **`packages/design-tokens/tokens.css`** (`@fleet/design-tokens`), imported
+by the Tabletop through Vite and served by the Shuffler at `/fleet/tokens.css`; Orbitron and Ovo
+load from a Google Fonts `<link>` in `apps/tabletop/index.html`. The tokens **moved** — they are
+not mirrored in any ship's `:root` — which was this owner's non-negotiable and is why the
+`docs.css` re-declaration went too.
+
+**What is still missing: a ship-local stylesheet on the Tabletop.** Shared tokens have a home;
+the first *Tabletop-only* rule does not, so inline styles remain the default by inertia rather
+than by choice. Whoever writes that rule decides where Tabletop CSS lives. See
+[open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side".
 
 ## tldraw limits — recorded, not fought (2026-08-07)
 
@@ -124,10 +129,27 @@ buttons, headings, form labels and fields, the game title slab. Ovo (serif) for 
 (display cursive) only for the big splashy words on the site pages, never on the play
 pages. There is no fourth typeface.
 
-**Purple and pink, from tokens.** `--deep-space` (#221534) for bars and dark surfaces,
+**Purple and pink, from tokens — and the tokens are the fleet's, not the Shuffler's
+(2026-08-07, `4396aea`).** `--deep-space` (#221534) for bars and dark surfaces,
 `--dark-pink` (#bb5277) for borders/rules/accents, `--light-pink` (#ddc7dd) for bevels
-and slabs. Plus `--playmat-one`/`--playmat-two` on the game page and the closed
-`--mana-W/U/B/R/G` set.
+and slabs, `--cute-heading-color` (#9134d2), `--narrow-border` (3px), and the closed
+`--mana-W/U/B/R/G` set. **All of those live in `packages/design-tokens/tokens.css`**
+(`@fleet/design-tokens`) — one file, both ships, served by the Shuffler at
+`/fleet/tokens.css` and imported by the Tabletop through Vite.
+
+- **Add or change a shared token in the package**, never in a ship's `:root`. They are
+  deliberately **not** mirrored anywhere: a "fallback" copy is a second dictionary, and it
+  turns a broken load — loud and obvious — into a silent near-miss. A Playwright test fails
+  if any of them is re-declared in `styles.css`.
+- **What did *not* travel.** `--background-color` (#f0f0f0) stayed in `styles.css`: generic
+  site chrome, not fleet identity. `--playmat-one`/`--playmat-two` stayed in `game.css`
+  **on purpose** — "the playmat is one object, one appearance" was decided about the
+  Shuffler's two *pages*, and extending it across the ship boundary to a tldraw-rendered
+  seat mat is an unratified Layer-2 claim. Buoyed as `playmat-colours-fleet-or-shuffler`;
+  the omission is a decision, not an oversight.
+- **Font tokens are still unresolved, not rejected.** `--font-chrome` / `--font-content` /
+  `--font-display` were proposed with this change and Jess hasn't answered; colours shipped
+  alone. Typefaces are still named literally in the two heads and `index.html`.
 
 **Chunky physical controls — down to a single site.** `outset` / `inset` / `groove`
 borders survive in **exactly one place** in the app: `.cool-command-zone-surround`'s
@@ -348,7 +370,9 @@ Candidate CSS for the unadopted options lives in
 | | |
 | --- | --- |
 | Gallery route | `/design` → `apps/shuffler/views/design.ejs` (`src/app.ts`, near `/about`) |
-| Tokens | `apps/shuffler/public/styles.css` `:root` |
+| **Shared tokens (fleet)** | `packages/design-tokens/tokens.css` — served at `/fleet/tokens.css`, imported by the Tabletop via Vite |
+| Shuffler-only tokens | `apps/shuffler/public/styles.css` `:root` — now just `--background-color` |
+| Fonts | Google Fonts `<link>` in **three** places: `views/partials/head.ejs`, `src/view/common/html-layout.ts`, `apps/tabletop/index.html` |
 | Site pages | `apps/shuffler/public/site.css` |
 | Shared playmat chrome | `apps/shuffler/public/playmat.css` (game **and** prepare) |
 | Page-specific | `game.css`, `prepare.css`, `deck-selection.css`, `docs.css` |

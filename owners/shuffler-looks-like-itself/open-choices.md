@@ -160,8 +160,11 @@ exactly where the pointiness reason applies (raised things, pressed things). Thi
 fleet-wide, including to canvas shapes: a zone boundary is a flat surface you don't press, so
 it's `0`; a pressable drawn on the canvas would be `4px`.
 
-`--radius-soft` is a **new token** and needs a home in `styles.css` `:root` plus a swatch in
-`design.ejs`'s "Named tokens" grid, in the same commit as the sweep.
+`--radius-soft` is a **new token** and needs a swatch in `design.ejs`'s "Named tokens" grid in
+the same commit as the sweep. **Where it lives is now a question, not a given** (since
+`4396aea`): the decided rule is stated as applying *fleet-wide, including to canvas shapes*,
+which argues for `packages/design-tokens/tokens.css`; but nothing on the Tabletop uses it yet,
+which argues for `styles.css`. Decide it explicitly in the sweep rather than defaulting.
 
 **The `playmat.css` radius rules, by selector** (grep `border-radius` in that file to see all
 twelve at once): `.library-card-back::before` 8px *(keep — physical)*, `.library-buttons
@@ -365,7 +368,8 @@ Do these as their own commits once the choices are settled. They're mechanical.
 
 - **Tokenize the orphan colors.** 57 distinct hex values today; ~14 of them are
   Material/Bootstrap defaults on single buttons. Choices 2, 3 and 6 kill most of them.
-  Whatever survives needs a name in `styles.css` `:root` and a swatch on `/design`.
+  Whatever survives needs a name — in `packages/design-tokens/tokens.css` if it's fleet
+  identity, in `styles.css` `:root` if it's Shuffler-only chrome — and a swatch on `/design`.
   Choice 5 took two off the list — the `rgba(219,39,119,.3)` Tailwind pink and one
   `rgba(76,175,80,.3)` **Material green** both left with the deleted input `:focus` rules.
   Material green **survives once**, in `game.css` → `.hand-drop-zone.drag-over`
@@ -411,12 +415,21 @@ Do these as their own commits once the choices are settled. They're mechanical.
   settles the radius question it's entangled with, and it should de-duplicate at the same
   time rather than restyle two copies. The `#ff9800` swatch on `/design`
   (`design.ejs`, in the orphan-hex grid) goes with it.
-- **Collapse the extra `:root` blocks.** There are **four** (verified 2026-08-07), not two:
-  `styles.css` (the real one), `docs.css` (re-declares `--deep-space`, `--dark-pink`,
-  `--light-pink` and adds three link tokens that exist nowhere else — this is the drift),
-  `game.css` (`--playmat-one`/`--playmat-two`) and `playmat.css` (`--mana-W/U/B/R/G`). Only
-  `docs.css`'s is a straight re-declaration; the other two are component-local color sets
-  that would still be better named in `styles.css`.
+- **~~Collapse the extra `:root` blocks.~~ Mostly done 2026-08-07 (`4396aea` + `a8e2427`).**
+  There were four in the Shuffler; there are now **three, and one of them is authoritative
+  and lives outside the ship**:
+
+  | `:root` | What's in it | Verdict |
+  | --- | --- | --- |
+  | `packages/design-tokens/tokens.css` | the identity palette, `--narrow-border`, `--mana-*` | the fleet's one dictionary — shared tokens go **here** |
+  | `styles.css` | `--background-color` only | Shuffler-only site chrome; fine |
+  | `docs.css` | `--text-light`, `--link-color`, `--link-hover` | no longer a re-declaration — three genuinely docs-only tokens. Promoting them is its own decision |
+  | `game.css` | `--playmat-one`, `--playmat-two` | **deliberately left**, not an oversight — see `playmat-colours-fleet-or-shuffler` in `TODO.md` |
+
+  `playmat.css` no longer has a `:root` at all. The remaining question isn't "collapse them",
+  it's the one buoy: do the playmat colours belong to the fleet or to the Shuffler? Extending
+  "the playmat is one object, one appearance" **across the ship boundary** to a tldraw-rendered
+  seat mat is an unratified Layer-2 claim, so moving those two tokens would silently answer it.
 - **Delete the debug leftover:** `site.css` → `.step > * { border: 0px solid red }`.
 - **Adopt a spacing scale.** No scale exists. Proposed: `4 · 8 · 12 · 16 · 24 · 32 · 48`
   — every current value rounds to one of these within 2px except 5, 15 and 18.
@@ -430,16 +443,48 @@ Not `/design` choices. These are places where this owner's charge already applie
 `.scratch/tabletop-physics/issues/03-what-furniture-is.md` making Tabletop furniture a
 self-rendering custom shape.
 
-- **There is nowhere to declare a Tabletop token, and no way to load Orbitron.**
-  `apps/tabletop` has no CSS source file at all (only a built `dist/client/assets/*.css`) and
-  no font `<link>`/`@font-face` anywhere; the only CSS import in the client is
-  `import "tldraw/tldraw.css"`. Layer 1 applies today regardless, so this is a real block, not
-  a nicety. Both halves **fail silently** — CSS drops an unknown `var()`, a missing font falls
-  back to a system serif. Tracked as `tabletop-css-tokens` in the repo-root `TODO.md`.
-  **The one thing this owner rules out up front: don't solve it by copying `styles.css`'s
-  `:root`.** A second source of truth for the palette diverges silently, and there are already
-  four `:root` blocks. A shared file both ships load, or a deliberate duplication in the spirit
-  of the duplicated `log.ts`, are both on the table — that's Jess's call.
+- **~~There is nowhere to declare a Tabletop token, and no way to load Orbitron.~~
+  RESOLVED 2026-08-07 (`4396aea`, `db79bf8`, `a8e2427`) — `tabletop-css-tokens`.** The answer
+  was a shared workspace, not a deliberate duplicate: `packages/design-tokens`
+  (`@fleet/design-tokens`, `packages/*` added to the root workspaces glob), holding the identity
+  palette, `--narrow-border` and the mana colours. The Shuffler serves it at `/fleet/tokens.css`
+  (an `express.static` mount in `src/app.ts`, resolved via `import.meta.resolve` rather than by
+  walking up from `__dirname`, because the depth differs between dev and container); the Tabletop
+  imports `@fleet/design-tokens/tokens.css` in `src/client/main.tsx` so Vite inlines it. Orbitron
+  and Ovo come from a Google Fonts `<link>` in `apps/tabletop/index.html`, matching the two
+  existing sites.
+
+  **This owner's two non-negotiables both held.** (1) The tokens **moved**, they are not
+  mirrored — `styles.css` `:root` now holds only `--background-color`, `playmat.css`'s `--mana-*`
+  `:root` is gone entirely, and a Playwright test fails if any shared token is re-declared in
+  `styles.css`. (2) It landed **with checks**, because both halves fail silently:
+  `verify-fleet-tokens.spec.ts` on each ship asserts every shared token resolves non-empty via
+  `getComputedStyle` and that Orbitron loads, `test/html-layout-fleet-tokens.test.ts` covers the
+  Shuffler's *other* head cheaply, and `scripts/check-fleet-tokens.sh` is a fast local smoke check.
+
+  **Why not the `log.ts`-style deliberate duplicate.** That duplication is *forced* — the two
+  copies sit on incompatible OTel version lines — and it drifts **loudly**, breaking the build.
+  A palette drifts silently. `docs.css` was the fleet's own evidence: it re-declared three of
+  these tokens, never diverged in what it copied, and diverged **by addition** anyway.
+
+  **Ordering that mattered, and is worth reusing:** `docs.css`'s three re-declarations were
+  deleted in a **separate, later commit** (`a8e2427`), after the plumbing was verified —
+  because while they existed, `/docs`, `/about` and `/history` would have kept their colours
+  even if the shared sheet failed to load, masking the failure on exactly three pages.
+  `--text-light`, `--link-color`, `--link-hover` stay; they're genuinely docs-only, and
+  promoting them is its own decision.
+
+- **Still open: there is no ship-local stylesheet on the Tabletop.** Shared tokens have a home;
+  the first *Tabletop-only* rule does not. Inline styles are the status quo by inertia, not by
+  choice. Ticket 05 (tap motion) and ticket 11 (what a zone looks like) will both want one.
+  Whoever writes that rule decides where Tabletop CSS lives — and it must not be answered by
+  starting a `:root` there.
+- **Still open: font tokens.** `--font-chrome` / `--font-content` / `--font-display` were put to
+  Jess with the token package and she has **not answered** — so they are *unresolved*, not
+  rejected. Colours shipped alone. Today the three typefaces are named literally in three places
+  (`views/partials/head.ejs`, `src/view/common/html-layout.ts`, `apps/tabletop/index.html`), and
+  the font `<link>` is duplicated across all three; one delivery mechanism fleet-wide (a `<link>`
+  **or** `@font-face`, never both), and self-hosting would be a change to all three at once.
 - **`LandingPage.tsx` is a live, unrecorded Layer-1 violation.**
   `apps/tabletop/src/client/LandingPage.tsx` carries an off-brand green/cream palette in inline
   styles — `#1a2a1f`, `#f5f1e8`, `#3d5a45` — with no relationship to purple-and-pink. It is the

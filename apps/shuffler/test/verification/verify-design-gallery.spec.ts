@@ -20,6 +20,11 @@ const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 // The app stylesheets the gallery must render its specimens with. If a page adds
 // a new stylesheet, add it here and to views/design.ejs.
 const APP_STYLESHEETS = [
+  // The fleet's shared palette (@fleet/design-tokens), served by app.ts from the
+  // workspace package. Every page loads it ahead of styles.css, and the swatches
+  // in this gallery are describing ITS values — so if it 404s (the container
+  // symlink trap), the gallery lies about the palette rather than losing it.
+  '/fleet/tokens.css',
   '/styles.css',
   '/site.css',
   '/playmat.css',
@@ -40,7 +45,6 @@ test.describe('design gallery', () => {
     });
 
     await page.goto(`${BASE_URL}/design`);
-    await page.waitForLoadState('networkidle');
 
     for (const href of [...APP_STYLESHEETS, '/design-candidates.css', '/design-gallery.css']) {
       expect(cssResponses.get(href), `${href} should have been requested`).toBeDefined();
@@ -50,7 +54,6 @@ test.describe('design gallery', () => {
 
   test('specimens are styled by the real app CSS, not by the gallery', async ({ page }) => {
     await page.goto(`${BASE_URL}/design`);
-    await page.waitForLoadState('networkidle');
 
     // .mtg-card-image is defined in styles.css — the card unit the whole layout
     // is built on. If this drifts, the gallery is lying about the app.
@@ -80,7 +83,6 @@ test.describe('design gallery', () => {
 
   test('shows each section that needs a decision', async ({ page }) => {
     await page.goto(`${BASE_URL}/design`);
-    await page.waitForLoadState('networkidle');
 
     for (const id of ['color', 'type', 'geometry', 'buttons', 'focus', 'inputs', 'surfaces', 'cards', 'rules']) {
       await expect(page.locator(`#${id}`)).toBeVisible();
@@ -99,7 +101,6 @@ test.describe('design gallery', () => {
 
   test('the canonical button travels when pressed', async ({ page }) => {
     await page.goto(`${BASE_URL}/design`);
-    await page.waitForLoadState('networkidle');
 
     // JES-155 choice 1 (.pushable-flat): the button itself moves, via box-shadow
     // + transform — no nested spans.
@@ -123,7 +124,6 @@ test.describe('design gallery', () => {
 
   test('the global focus ring reaches the keyboard', async ({ page }) => {
     await page.goto(`${BASE_URL}/design`);
-    await page.waitForLoadState('networkidle');
 
     // shuffler-design-choices choice 5: one global :focus-visible rule in
     // styles.css — 3px light-pink at 3px offset — replacing the app's single

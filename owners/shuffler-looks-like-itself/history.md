@@ -589,3 +589,71 @@ translation — match one, don't invent a third tempo.
 **Decided but unbuilt**, in the state this KB now names explicitly (see the choice-4 lesson
 above). The Tabletop still has no CSS source file and no font link (`tabletop-css-tokens`);
 04 needed no styling so it wasn't blocked, but 05 will be.
+
+## 2026-08-07 — the fleet got one dictionary
+
+`4396aea` **Give the fleet one dictionary: @fleet/design-tokens**, then `db79bf8` (CLAUDE.md
+truth-up) and `a8e2427` (delete `docs.css`'s duplicated tokens).
+
+The Tabletop had no CSS source file and no font link at all, so a `var(--…)` resolved to
+nothing and Orbitron fell back to a system serif — **both silently** — which blocked every
+Tabletop implementation ticket. The fix was a new workspace, `packages/design-tokens`
+(`@fleet/design-tokens`, with `packages/*` added to the root `workspaces` glob), holding the
+identity palette, `--narrow-border` and Magic's colour pie. The Shuffler serves it at
+`/fleet/tokens.css`; the Tabletop imports it so Vite inlines it.
+
+**The tokens MOVED; they are not mirrored, and that was the load-bearing constraint.**
+`styles.css` `:root` now holds only `--background-color`, `playmat.css`'s `--mana-*` `:root` is
+gone, and a Playwright assertion fails if any shared token reappears in `styles.css`. A
+"fallback" copy is a second dictionary, and it would turn a broken load — loud and obvious —
+into a silent near-miss.
+
+**Why not the deliberate `log.ts` duplicate, which someone will cite.** That duplication is
+*forced* (incompatible OTel version lines) and drifts **loudly**: the build breaks. A palette
+drifts silently — the app just quietly stops looking like itself on one face. And the fleet had
+already run the experiment: `docs.css` re-declared three of these tokens, **never diverged in
+what it copied**, and diverged **by addition** anyway, growing three link tokens that exist
+nowhere else. *That's* the failure mode — a chosen duplicate doesn't rot by drifting apart, it
+rots by growing.
+
+**Ordering as a design decision.** `docs.css`'s three re-declarations came out in a **separate,
+later commit**, after the plumbing was verified — because while they existed, `/docs`, `/about`
+and `/history` would have kept their colours even if the shared sheet failed to load, masking
+the failure on exactly three pages. Deleting a duplicate *before* you trust the original is how
+you keep a false negative.
+
+**Two container traps, both prod-only, and one of them this owner had flagged.** Every workspace
+in the glob needs its `package.json` COPYed before `npm ci` (missed → build fails outright), and
+npm links workspaces as **relative** symlinks, so the Shuffler's runtime stage — which flattens
+`/repo/apps/shuffler` to `/app` — must copy `packages/` or the link dangles and every page loses
+its colours in the container only. **`verify-container-boot.sh` would not have caught the
+dangling link**: `import.meta.resolve` doesn't check the file exists, so the server boots fine
+and only the route 404s. It was closed by building the image and curling it. A boot check is not
+a link check — worth remembering the next time "it starts" is offered as evidence.
+
+**A test finding that generalises.** `document.fonts.check('16px Orbitron')` returns **false** on
+the Tabletop even with a correct `<link>`, because browsers fetch a webfont **lazily** — only
+when something on the page actually uses the family — and nothing on the Tabletop does yet (its
+only styled surface is the off-brand landing page). The test became `await
+document.fonts.load(...)` then `check(...)`, asserting **fetchability** rather than loadedness.
+The Shuffler's equivalent needs no `load()` because plenty there is set in Orbitron. Any future
+"is our font working" test on a ship with no on-brand surface hits this.
+
+**What deliberately did NOT ride along**, each buoyed instead of decided:
+
+- **`LandingPage.tsx` was left byte for byte.** It is the Tabletop's only styled surface and the
+  largest possible ride-along on a token change — restyling it *is* the Tabletop's design pass in
+  miniature, and it needs Jess's sign-off. `tabletop-landing-page-palette`.
+- **`--playmat-one`/`--playmat-two` stayed in `game.css`.** "The playmat is one object, one
+  appearance" was decided about the Shuffler's two *pages*; extending it across the ship boundary
+  to a tldraw-rendered seat mat is an unratified Layer-2 claim, and moving the tokens would have
+  answered it silently. `playmat-colours-fleet-or-shuffler`.
+- **Font tokens** (`--font-chrome`/`--font-content`/`--font-display`) were **asked about rather
+  than slipped in**, and Jess hasn't answered — so they are *unresolved*, not rejected. Colours
+  shipped alone.
+
+**What this closes and what it doesn't.** The Tabletop can now write on-brand CSS; it still has
+**no stylesheet of its own**, so the first Tabletop-only rule has nowhere to live and inline
+styles remain the default by inertia. Loading Orbitron also does **not** put it on tldraw canvas
+text — the `geo` `font` enum still has no Orbitron in it, so on-brand canvas text still needs a
+self-rendering shape. Necessary, not sufficient.

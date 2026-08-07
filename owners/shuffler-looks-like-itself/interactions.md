@@ -5,12 +5,20 @@
 
 ## Depends on
 
-- **`styles.css` `:root`** — the token set. Everything downstream assumes these names
-  exist and mean what they mean. Renaming or removing a token breaks silently (CSS just
-  drops the declaration).
-- **Google Fonts** — Orbitron, Ovo, Risque, loaded from `fonts.googleapis.com` by both
-  heads. If a page forgets its `additionalFonts` entry, the text silently falls back to a
-  system serif and looks wrong without erroring.
+- **`packages/design-tokens/tokens.css` (`@fleet/design-tokens`)** — the fleet's token set,
+  since `4396aea` (2026-08-07). Everything downstream on **both ships** assumes these names
+  exist and mean what they mean. Renaming or removing one breaks silently (CSS just drops the
+  declaration) — and now it breaks silently in two apps. Reaching each ship differently:
+  `express.static` at `/fleet` in the Shuffler's `src/app.ts`, a Vite import in the Tabletop's
+  `src/client/main.tsx`. **Also depends on the npm workspace plumbing**: `packages/*` in the
+  root `workspaces` glob, and each Dockerfile copying `packages/` — see
+  [architecture.md](architecture.md) for the three container facts.
+- **`styles.css` `:root`** — now just `--background-color`. Shuffler-only.
+- **Google Fonts** — Orbitron, Ovo, Risque, loaded from `fonts.googleapis.com` by **three**
+  heads now: the two Shuffler ones plus `apps/tabletop/index.html`. If a page forgets its
+  `additionalFonts` entry, the text silently falls back to a system serif and looks wrong
+  without erroring. **One delivery mechanism fleet-wide** — a `<link>` *or* `@font-face`,
+  never both; self-hosting would be a change to all three sites at once.
 - **The two heads** — `views/partials/head.ejs` and `formatHtmlHead()` in
   `src/view/common/html-layout.ts`. A stylesheet only exists on the pages whose head
   lists it.
@@ -49,6 +57,12 @@
   `.cool-command-zone-surround .game-title` on either, the title never inside `#game-menu`,
   and clicking the title dismisses an open menu. Restyling `.game-title` won't touch it;
   **re-parenting it will**, which is the point.
+- **The fleet-token wiring specs** (added 2026-08-07): `apps/shuffler/test/verification/verify-fleet-tokens.spec.ts`,
+  `apps/tabletop/test/verification/verify-fleet-tokens.spec.ts`,
+  `apps/shuffler/test/html-layout-fleet-tokens.test.ts`, and `scripts/check-fleet-tokens.sh`.
+  They assert the shared tokens **resolve** and Orbitron **fetches** — plumbing, not palette —
+  plus that no shared token is re-declared in `styles.css`. Changing a colour must not break
+  them; if it does, the test is asserting the wrong thing. See the testing watch point below.
 - **`test/verification/verify-design-gallery.spec.ts`** — asserts specific computed
   values (200×278 card, `.button-base.begin-button`'s border-style — **`solid`**, since
   choice 1 retired the `outset` bevel; this KB called it `outset` until 2026-08-07, black
@@ -176,6 +190,32 @@ Concrete, in rough order of how often they bite.
   `active-game-page.ts` on 2026-08-07, where it was module-private) — import it rather than
   writing a second copy.
 
+**Testing that a token or a font actually arrived** (added 2026-08-07, `4396aea`)
+
+The whole reason the token package carries tests is that **both halves fail silently** — CSS
+drops an unknown `var()`, a missing webfont falls back to a system serif. Four things the
+existing specs learned, in the order they'll bite you:
+
+- **`document.fonts.check('16px Orbitron')` returns FALSE on a ship where nothing uses
+  Orbitron yet, even when the `<link>` is perfectly correct.** Browsers fetch a webfont
+  **lazily** — only once something on the page actually sets that family — and the Tabletop's
+  only styled surface is the off-brand landing page. The Tabletop's spec therefore does
+  `await document.fonts.load("16px Orbitron")` *then* `check(...)`, asserting **fetchability**
+  rather than loadedness. The Shuffler's equivalent needs no explicit `load()` because plenty
+  there is set in Orbitron. **Any future "is our font working" test on a ship with no on-brand
+  surface will hit this**; swap back to a plain `check()` the day a real surface sets the
+  family, which is the stronger assertion.
+- **Assert non-empty, not a specific hex.** `verify-fleet-tokens.spec.ts` protects the
+  *plumbing*; changing a colour is this owner's call and must not break wiring tests. The one
+  concrete value asserted anywhere is `--deep-space` on the Tabletop, and only to prove the two
+  ships share a dictionary.
+- **Cover the second head cheaply.** `test/html-layout-fleet-tokens.test.ts` is a jest test on
+  `src/view/common/html-layout.ts` because reaching a play page in Playwright needs a whole
+  game set up. The two heads are the thing most likely to diverge.
+- **A boot check is not a link check.** `import.meta.resolve` doesn't verify the file exists,
+  so `verify-container-boot.sh` passes with a dangling workspace symlink — the server starts
+  fine and only `/fleet/tokens.css` 404s. Curl the route, don't trust the boot.
+
 **Adding a stylesheet**
 
 - Add it to the right head — `head.ejs` `additionalStyles` for an EJS view,
@@ -195,12 +235,23 @@ Concrete, in rough order of how often they bite.
 - Prefer deleting the duplicate over editing one copy. If you must edit one, edit both and
   say so.
 
-**Adding or renaming a token**
+**Adding or renaming a token** (rewritten 2026-08-07, `4396aea`)
 
-- New tokens go in the `:root` in `styles.css`. **Do not create a fifth `:root` — there are
-  already four** (`styles.css`, `docs.css`, `game.css` `--playmat-*`, `playmat.css`
-  `--mana-*`); see [architecture.md](architecture.md) for which are drift.
-- Add the swatch to the "Named tokens" grid in `design.ejs` in the same commit.
+- **Ask first: is it fleet identity or ship chrome?** Fleet identity goes in
+  `packages/design-tokens/tokens.css`; a genuinely Shuffler-only value goes in `styles.css`
+  `:root`. If you can't tell, it's a design decision — surface it rather than defaulting.
+- **Never re-declare a shared token in a ship**, not even "as a fallback". A Playwright
+  assertion fails if any of them reappears in `styles.css`.
+- **Renaming or removing one now breaks two apps silently.** Grep both `apps/` trees, not
+  just the Shuffler's CSS.
+- **Adding a token to the shared package has a container cost**, and it's already paid — but
+  adding a *new* `packages/` workspace does not: every Dockerfile running `npm ci` must COPY
+  that workspace's `package.json` first, and any runtime stage needing the files must copy
+  `packages/` too or the relative symlink dangles. Fails in the image only.
+- Add the swatch to the "Named tokens" grid in `design.ejs` in the same commit. (The chips
+  hard-code their hex today — see [architecture.md](architecture.md).)
+- Don't create a new `:root` anywhere. There are three in the Shuffler and each has a reason;
+  see [architecture.md](architecture.md).
 
 **Adding a component**
 
@@ -250,9 +301,11 @@ Concrete, in rough order of how often they bite.
   is its own design decision needing its own sign-off — the classic ride-along. If an
   implementation ticket for `mtg-card` reaches you with a custom indicator in it, that's the
   thing to block.
-- **`apps/tabletop` has no stylesheet and no font link**, so a `var(--…)` there resolves to
-  nothing and Orbitron silently becomes a system serif. See [open-choices.md](open-choices.md)
-  → "Fleet gaps — the Tabletop side" before writing any Tabletop CSS.
+- **`apps/tabletop` now has the fleet tokens and the fonts** (`4396aea`), so a `var(--deep-space)`
+  there resolves and Orbitron loads. What it still lacks is a **stylesheet of its own** — the
+  first Tabletop-only rule has nowhere to live, and inline styles are the status quo by inertia.
+  See [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side" before writing any
+  Tabletop CSS, and don't answer the question by starting a `:root` there.
 - **Deciding a canvas treatment is not blocked by that plumbing; implementing it is.** Staging
   happens on `/design` in the Shuffler, which already has the tokens and the fonts. Stage first.
 
