@@ -11,6 +11,11 @@ to the workspace.
 
 This ship's seamap: `SEAMAP.md` (in this directory).
 
+**Stay in this ship.** Don't edit files outside `apps/shuffler/` (`contracts/` is fair
+game when a contract change is the explicit point of the task). If finishing the task
+needs a change in the Tabletop or the Spine, stop and say so instead of reaching across
+— that's a cross-ship task, and it deserves its own look at both ships' `CLAUDE.md`s.
+
 ## Project Overview
 
 MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks from MTGJSON or custom decks from Archidekt, displaying card info for remote gameplay via Mural/Miro and Discord.

@@ -14,6 +14,7 @@ call, and git carries the state between machines. There is no collaborative tick
 - Every spec and every issue opens with a header block, directly under the `# Title`:
 
       Mountain: tabletop-replaces-mural
+      Ship: tabletop
       Status: needs-triage
 
 - Comments and conversation history append to the bottom of the file under a `## Comments`
@@ -42,6 +43,17 @@ can "serve" it. Work that keeps that state true is `overhead`.
 
 Issues inherit their spec's Mountain unless a ticket plainly serves a different one.
 Mountains themselves are never tickets — they live only in `SEAMAP.md`.
+
+### `Ship:`
+
+Which ship's `CLAUDE.md` governs this work — **required** on every spec and every issue,
+same as `Mountain:`. Valid values: `shuffler`, `tabletop`, `spine`, or `fleet` for work
+that genuinely spans more than one (a contract change, a cross-ship feature). This is
+what tells an agent picking up the ticket which directory to stay in and which ship's
+`CLAUDE.md` to read first — a Mountain can span ships even when a given ticket doesn't,
+so `Mountain:` alone doesn't answer this.
+
+Issues inherit their spec's Ship unless a ticket plainly touches a different one.
 
 ### `Status:`
 

@@ -200,17 +200,22 @@ notification, so a `-review` still gates implementation the way step 5 intends.
 
 For each task, follow this workflow:
 
-1. **Research**: Look at the task and do any research needed
-2. **Consult owners**: Read `owners/INDEX.md` (one line each). For every owner whose "consult me when…" trigger the task could plausibly touch, invoke its `-context` skill (via the Skill tool) with a brief summary of the task. Note any concerns or relevant context they raise.
-3. **Clarify**: Ask questions one at a time if needed
-4. **Plan**: Design the implementation approach
-5. **Review with owners**: For each owner that flagged potential interactions in step 2, invoke its `-review` skill with your plan. Adjust the plan based on their feedback.
-6. **Verify First**: Decide how to verify functionality and write the test before implementing:
+1. **Scope to a ship**: Decide which ship(s) — `apps/shuffler/`, `apps/tabletop/`,
+   `services/spine/`, or `fleet` when the task genuinely spans more than one — the
+   task belongs to, then read that ship's `CLAUDE.md`, which will tell you to stay
+   inside its directory. If a task that looked single-ship turns out to need a
+   change elsewhere, stop and say so rather than reaching across silently.
+2. **Research**: Look at the task and do any research needed
+3. **Consult owners**: Read `owners/INDEX.md` (one line each). For every owner whose "consult me when…" trigger the task could plausibly touch, invoke its `-context` skill (via the Skill tool) with a brief summary of the task. Note any concerns or relevant context they raise.
+4. **Clarify**: Ask questions one at a time if needed
+5. **Plan**: Design the implementation approach
+6. **Review with owners**: For each owner that flagged potential interactions in step 3, invoke its `-review` skill with your plan. Adjust the plan based on their feedback.
+7. **Verify First**: Decide how to verify functionality and write the test before implementing:
    - **User-visible changes**: Playwright test (browser verification)
    - **Internal logic**: Unit test
    - Run the test and confirm it fails
-7. **Implement**: Build the functionality
-8. **Verify Again**: Run the test and see it pass (or fix the implementation)
-9. **Update owners**: For any owner whose files were touched or whose concerns were relevant, invoke its `-update` skill with a summary of what changed.
-10. **Refactor**: Consider refactoring for clarity
-11. **Celebrate**: Print a trumpet in ASCII art
+8. **Implement**: Build the functionality
+9. **Verify Again**: Run the test and see it pass (or fix the implementation)
+10. **Update owners**: For any owner whose files were touched or whose concerns were relevant, invoke its `-update` skill with a summary of what changed.
+11. **Refactor**: Consider refactoring for clarity
+12. **Celebrate**: Print a trumpet in ASCII art
