@@ -158,11 +158,10 @@ section is just a wall between Jess and the live work.
 
 - **The verify suite's speed has a wayfinder map**: `.scratch/verify-suite-speed/map.md`.
   Destination: no useless tests, no wasted time in tests, **full suite under 60s** (from
-  106.5s). 01, 02, 04, and 05 are resolved; 11 ruled out of scope (see
+  106.5s, now **~50s**). 01, 02, 04, 05, and 07 are resolved; 11 ruled out of scope (see
   `card-images-through-backend` above); 03's decisions are settled (seed via API, one shared
-  helper, always fresh) but not yet implemented. Ticket 07 (the never-reset 37 MB `data.db`) is
-  claimed, cold-start measured (52s, no slower than warm) — open question left is determinism/
-  reproducibility. Say "work the verify-suite-speed map" to continue.
+  helper, always fresh) but not yet implemented. 06 (parallelism) stays blocked on 03's
+  implementation landing. Say "work the verify-suite-speed map" to continue.
 
 - [ ] `card-images-through-backend` Route every rendered card image through our backend instead of straight to Scryfall — full spec at `.scratch/verify-suite-speed/issues/11-route-card-images-through-the-backend.md` (closed there, out of scope for that map)
 

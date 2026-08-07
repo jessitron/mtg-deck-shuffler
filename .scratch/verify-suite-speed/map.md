@@ -61,6 +61,12 @@ in under a minute and every remaining test is one we'd miss, this effort is done
   and trimmed `verify-query-parameter-modals.spec.ts` from 14 browser cases to 5, moving the
   other 9 to a new fast unit test (`test/modal-query-params.test.ts`, loads the real script via
   `vm`, no jsdom). **56.3s → 50.2s.**
+- [The suite runs against a shared 37 MB `data.db` that is never reset](issues/07-the-suite-runs-against-a-37mb-database.md)
+  — measured cold start first: 52.0s, no slower than warm, so speed was never the risk. Chose
+  fresh SQLite file per run anyway, for determinism: `VERIFY_DB_PATH` → `SQLITE_DB_PATH`, deleted
+  in the exit trap, zero app changes needed. Retired the now-meaningless
+  `verify.data_db.existed`/`.bytes` telemetry attributes. **50.2s → 49.7s** (within noise; the
+  win here is reproducibility, not speed) — and removes the shared-state race 06 was worried about.
 
 ## Measured baseline (run `96588aeb`, git `e1ca060`, warm)
 
@@ -88,10 +94,6 @@ ticket 11.
 
 ## Not yet specified
 
-- **Cold start is unmeasured.** All 13 runs in telemetry have `verify.data_db.existed = true`.
-  `verify.sh` never resets the 37 MB `data.db`, which grows ~1 MB per run. The cold/warm delta
-  is *absent from the data*, not merely unqueried — and CI pays cold every time. Ticket 07 opens
-  this; what it finds may graduate further work.
 - **A regression alarm.** The suite now traces itself, so "the suite got slower" is a queryable
   fact. Whether that becomes a Honeycomb trigger, a threshold in `verify.sh`, or nothing at all
   is undecided — and probably shouldn't be decided until the suite is at its target.

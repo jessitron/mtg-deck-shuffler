@@ -1,7 +1,7 @@
 # The suite runs against a shared 37 MB data.db that is never reset
 
 Mountain: overhead
-Status: claimed
+Status: resolved
 Type: grilling
 Map: ../map.md
 
@@ -99,3 +99,26 @@ hard." All three are already this ticket's territory: "reset it" is the third op
 "tests delete their own game" is a lighter-weight variant of isolation than a fresh file, and
 "sounds hard" is accurate — that's why the first step is to measure the cold-start cost before
 picking an option, not to reach for the hardest-sounding one by default.
+
+## Answer
+
+**Fresh SQLite file per run** — first option, and it turned out not to be hard. Cold start
+already measured as free (see comment above), so full isolation cost nothing.
+
+Landed in `verify.sh`: `VERIFY_DB_PATH` is generated alongside the existing per-run
+`VERIFY_PORT`/`VERIFY_TABLETOP_PORT`, passed to the server as `SQLITE_DB_PATH` (already read by
+all three SQLite adapters, `src/server.ts:24,37,50` — zero app changes needed, since the schema
+is `CREATE TABLE IF NOT EXISTS` and self-inits on any path, no WAL mode so no sidecar files), and
+deleted in the existing `cleanup()` trap. No seed file, no migration.
+
+Consulted `fleet-is-observable` first (per Owners to consult, above): confirmed no env-sourcing
+conflict, and flagged that `VERIFY_DATA_DB_EXISTED`/`.bytes` would go permanently-false/zero
+once every run is cold — a fails-open-invisibly telemetry regression if left in. Removed both
+attributes from `otelReporter.ts` and the two env vars from `verify.sh` rather than let them
+silently stop meaning anything; updated the stale "data.db is never reset" comment/claim in
+`verify.sh` and `apps/shuffler/CLAUDE.md`.
+
+Verified: `npm test` (285 passing) and two consecutive `./verify.sh` runs (49 passed, 53.7s then
+49.7s) — dev `data.db`'s checksum unchanged across both, temp file gone after each. Also answers
+06's "single worker for state isolation" question — a per-run file removes the shared-state race
+that motivated serial execution, feeding directly into that ticket.

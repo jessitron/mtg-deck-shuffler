@@ -84,15 +84,6 @@ export default class OtelReporter implements Reporter {
       const gitSha = process.env.VERIFY_GIT_SHA?.trim();
       if (gitSha) runAttributes["verify.git.sha"] = gitSha;
 
-      // The cold-vs-warm condition, measured by verify.sh BEFORE the server
-      // booted (it creates data.db, after which the question is unanswerable).
-      // On every span, not just the root: "how much of a run is fixed sleeps"
-      // is only a fair question once it can be asked per condition.
-      const dbExisted = process.env.VERIFY_DATA_DB_EXISTED?.trim();
-      if (dbExisted) runAttributes["verify.data_db.existed"] = dbExisted === "true";
-      const dbBytes = envNumber("VERIFY_DATA_DB_BYTES");
-      if (dbBytes !== undefined) runAttributes["verify.data_db.bytes"] = dbBytes;
-
       this.runAttributes = runAttributes;
       this.tracing = startHarnessTracing(process.env, { runAttributes, serviceVersion: gitSha });
     } catch (error) {
