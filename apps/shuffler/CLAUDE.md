@@ -158,7 +158,27 @@ Verify changes with (from `apps/shuffler/`):
 - `npm run build`
 - `npm run test`
 - `PORT=3344 ./run` - Verify app starts, click through to what you changed
-- `./verify.sh` - Playwright verification (builds, starts on 3001, runs the specs)
+- `./verify.sh` - Playwright verification (builds, starts on a random high port, runs the specs)
+
+**The suite traces itself.** `test/harness-telemetry/` holds a Playwright reporter that sends
+spans about the *run* — one trace per run, a span per spec, test and step (every `page.goto`,
+every `waitForTimeout`) — to service **`mtg-fleet-verify`**, team `modernity`, env `local`.
+`verify.sh` prints the run id; group by `verify.run.id` to isolate one run. Things to know:
+
+- **The service name is written in code, not from `OTEL_SERVICE_NAME`**, and nothing telemetry-ish
+  is `export`ed after `.env` is sourced — exporting it would rename the app server too and
+  silently move its spans. **Never swap the provider for `NodeSDK`**: it merges env-detected
+  resource attributes on *top* of explicit ones, so `.env` would reclaim these spans. The
+  reasoning is in `harnessTracing.ts`; there's a regression test for it.
+- **Trace context is deliberately NOT propagated into the browser.** The app's
+  `ParentBasedSampler` would honor a sampled remote parent and bypass `BackgroundChatterSampler`,
+  tracing every static asset at 100%. Harness and app spans correlate by run id and time instead.
+- **Telemetry is never fatal and never blocking**: no `.be`, a bad key, or a hung exporter all
+  leave the suite's exit code alone. A bare `npx playwright test` with nothing sourced stays silent.
+- **`data.db` is never reset**, so runs get faster as it warms (9.5 → 3.6 min has been seen).
+  `verify.data_db.existed` / `.bytes` are on every span for exactly this reason — a timing number
+  without its cold/warm condition means nothing.
+- Suite-speed findings and the optimization work: `.scratch/verify-suite-speed/`.
 
 ## Environment & Persistence
 
@@ -230,7 +250,8 @@ sourcing) is in the root `CLAUDE.md`. Shuffler specifics:
 - **`/health`** is the probe endpoint (k8s liveness/readiness and the ALB) — deliberately
   the cheapest route in the app.
 - **Datasets**: server spans go to `mtg-deck-shuffler`; web/browser spans go to
-  `mtg-deck-shuffler-web`.
+  `mtg-deck-shuffler-web`. **The verify suite traces itself** to `mtg-fleet-verify` — see
+  Testing below.
 - **Logging**: `src/log.ts` — `log.info/warn/error(message, attributes, error?)`. Each
   record goes to stdout and to Honeycomb, carrying the trace/span id of the active span.
   **Reach for a span attribute first**; a log is for when there's no span to hang it on
