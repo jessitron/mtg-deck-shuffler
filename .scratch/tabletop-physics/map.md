@@ -125,6 +125,14 @@ expensive way round.
   "`CARD_W` defines the coordinate system" argument against resize was **not accepted** — the playmat
   is 9.6 *default* cards wide. Crop disappears by construction once the card stops being an `image`
   subclass.
+- **Tap keeps its click trigger; the animation is a 0.5s catch-up, not a new gesture** —
+  [Rotate a card 90° to tap it, and animate it](issues/05-rotate-to-tap.md), resolved 2026-08-07.
+  `onClick` stays the trigger — tldraw's rotate handle stays reserved for free-rotation
+  ("attacking"), never repurposed for tap, so the two gestures stay visually distinct exactly as
+  ticket 04 required. Duration is 0.5s `ease-out`, matching the Shuffler's card-motion slides
+  rather than its 0.8s flip — Jess's call, against the `animations` owner's lean toward the flip,
+  because tap happens often mid-turn and reads better snappier. The counter-transform mechanism
+  itself was already fully specified by the `animations` owner and just gets applied here.
 - **Untap-many is "click one card in a selection and the whole selection follows"** — same ticket,
   prototyped in Playwright and confirmed, including two-client sync. The clicked card's *new* state
   propagates (not a per-card toggle). Needs no turn concept and no ownership concept. **The other
