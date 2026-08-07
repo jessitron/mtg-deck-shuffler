@@ -91,3 +91,15 @@ Full paths from the repo root. Nothing here animates today.
 - `test/verification/verify-deck-title-placement.spec.ts` — Playwright. Guards the
   sibling-not-child rule: clicking the deck title must dismiss an open hamburger menu.
   Copy this assertion for any new sibling added to `.game-header-row`.
+- **Swap/settle retry pattern** — `expect(async () => { click; assert }).toPass()`. Reference
+  implementations: `test/verification/verify-prep-commander-flip.spec.ts:99-105` and
+  `test/verification/verify-discard.spec.ts:39-50`. Also used in
+  `verify-library-grouping.spec.ts` (×8, including both flip loops),
+  `verify-query-parameter-modals.spec.ts`, `verify-tabletop-integration.spec.ts`,
+  `verify-history-card-links.spec.ts`, `verify-design-gallery.spec.ts`.
+- `test/verification/verify-mulligan.spec.ts` — carries comments at the two former 1800ms
+  sleep sites explaining why no animation wait is needed, and at line ~120 marking the
+  `Mulligan #2` assertion as **load-bearing synchronization** for the following Ctrl+Z.
+  Don't "simplify" that assertion away.
+- **No spec asserts on animation state**, and none can — see architecture.md, "Animation
+  completion is NOT observable from the DOM."

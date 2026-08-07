@@ -39,7 +39,7 @@ Same as the app: people Jessitron invites for remote MTG games. Animations serve
 |-----------|-----------|--------|----------|---------|
 | Card slide left/right | `.card-moved-left`, `.card-moved-right` | Working | 0.5s | `WhatHappened.movedLeft/Right` |
 | Card drop from side | `.dropped-from-left`, `.dropped-from-right` | Working (a bit weird) | 0.5s | `WhatHappened.dropppedFromLeft/Right` |
-| Library shuffle | `.shuffling` on `.library-stack` | Working | 1.5s | `WhatHappened.shuffling` (from `shuffle()` and `mulligan()`) |
+| Library shuffle | `.shuffling` on `.library-stack` | Working | 1.5s | `WhatHappened.shuffling` (from `shuffle()` and `mulligan()`) — class is never removed; see architecture.md |
 | Deck tile fade-in | `.precon-tile` with `fadeInTile` | Working | 0.4s + stagger | CSS animation-delay on load |
 | Card flip | `.card-flipped` on `.flip-container-outer` | Working | 0.8s | CSS transition on class toggle |
 | Button shimmer | `.start-game-button:hover::before` | Working | 0.8s | CSS hover pseudo-element |

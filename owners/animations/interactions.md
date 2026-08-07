@@ -24,7 +24,16 @@
 - **Drag-and-drop cleanup**: `game.js` lines 183-186 remove specific animation class names. If new animation classes are added, they may need to be cleaned up here too.
 - **Duplicate flip CSS**: Card flip styles exist in both `game.css` (lines 104-142) and `prepare.css` (lines 221-256). Changes to one must be mirrored in the other.
 - **Table mode's button classes (JES-127)**: the clipboard hook is keyed on `play-button`; table-mode Play/Discard buttons deliberately get `table-play-button` instead (server-rendered — deterministic, no runtime branching in the hook). If you rename either class, both `game.js` listeners and `game-modals.ts` must change together. The 502 entry in `htmx.config.responseHandling` (`html-layout.ts`) carries `error: true` so `event.detail.successful` stays false and the table-mode buttons' conditional close leaves the failure modal visible — removing that flag silently eats the error modal.
-- **Click-straddles-settle flake (tests)**: a Playwright-speed click right after the card modal opens can land its mousedown on a node htmx replaces before mouseup — no click event fires. Impossible at human speed. Specs that click freshly-opened modal buttons use a retry `expect(...).toPass()` pattern (see `verify-discard.spec.ts`, `verify-tabletop-integration.spec.ts`).
+- **Click-straddles-settle flake (tests)**: a Playwright-speed click right after the card modal opens can land its mousedown on a node htmx replaces before mouseup — no click event fires. Impossible at human speed. Specs that click freshly-opened modal buttons use a retry `expect(async () => { click; assert }).toPass()` pattern (reference implementations: `verify-discard.spec.ts:39-50`, `verify-prep-commander-flip.spec.ts:99-105`, and since `65f12e8` also `verify-library-grouping.spec.ts` and `verify-query-parameter-modals.spec.ts`).
+
+  **`{ force: true }` on such a click is a *cause* of this flake, not a workaround for it.**
+  `force` skips Playwright's actionability/stability wait — precisely the wait that would
+  otherwise absorb the swap. So a forced click on a freshly-swapped modal button is *more*
+  likely to straddle settle than an ordinary one. Nine sites still pass `force: true`
+  (`verify-library-grouping.spec.ts` ×3, `verify-query-parameter-modals.spec.ts` ×2 plus the
+  comment sites); each is currently paired with a `toPass` retry, which papers over it.
+  Removing them is filed in `TODO.md` — measured cost of the retries today is ~8.2s across a
+  run for 13 `toPass` steps, cheap, so this is cleanup rather than urgency.
 - **`#game-menu` containment is a markup constraint on the game's top strip.** Anything
   rendered *inside* the `#game-menu` subtree becomes menu-internal in two ways at once, and
   both are silent:

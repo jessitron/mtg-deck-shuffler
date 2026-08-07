@@ -190,6 +190,38 @@ Playwright prototype (branch `proto/multi-tap`, deleted).
   the card back for free and remote peers animate identically for free; a tapped card's page
   bounds are the rotated bounds.
 
+### 2026-08-07: Verify suite de-sleeped — every `networkidle` and fixed timeout deleted (`65f12e8`)
+
+Ticket `.scratch/verify-suite-speed/issues/02-optimize-the-suite.md`, plan in
+`.scratch/verify-suite-speed/plan-02.md`. **No app code changed** — no CSS, keyframes,
+`game.js`, HTMX attributes or `WhatHappened`. Only `test/verification/*.spec.ts`.
+225.0s → 106.5s, three consecutive green runs (113/107/107s) via the new `verify-thrice.sh`.
+
+Three things landed in this owner's territory:
+
+- **`.shuffling` is never removed** — established by grep, not by inference: no JS matches
+  `shuffl` at all. The class rides until the next htmx swap re-renders the stack, so animation
+  completion is not class-observable and `not.toHaveClass(/shuffling/)` would be wrong and
+  would pass instantly. Written up in architecture.md as a general property of *all* animation
+  classes here.
+- **Both 1800ms mulligan sleeps deleted** (`verify-mulligan.spec.ts`), on this owner's
+  reasoning: the 1.5s shuffle animates `.library-card-back` transforms that no asserted
+  locator touches, and the class arrives in the same swap as the asserted state, so the
+  state assertion *is* the synchronization. Comments left at both sites, plus one marking the
+  `Mulligan #2` assertion as load-bearing for the following Ctrl+Z.
+- **`{ force: true }` CAUSES the swap/settle flake this KB already warned about** — it
+  disables the actionability wait that would absorb the swap. That's the missing half of the
+  existing interactions.md entry and is now recorded there. Nine sites still use it; removing
+  them was deliberately deferred to `TODO.md` rather than changing two things at once.
+
+The `toPass` retry pattern spread to 4 more sites; measured cost is 13 `toPass` steps / 8.2s
+per run, against 125s saved. Reference implementations listed in files.md.
+
+**Left open, and it isn't this owner's**: both flip loops in `verify-library-grouping.spec.ts`
+assert the position indicator is unchanged after the flip — the property under test, but a
+flip that never happened also passes, so that click is unverifiable and deliberately not
+wrapped in `toPass`. Written up as ticket 04; belongs with `two-faced-cards`.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.

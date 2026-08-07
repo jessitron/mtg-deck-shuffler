@@ -52,6 +52,29 @@ This bit the hamburger menu: keeping its open state as an `.open` class on `#gam
 
 **Second example — `body.dev-mode` (developer mode).** The debug block (`.menu-debug`) lives inside the swapped `#game-container`, but its visibility is gated by `body.dev-mode .menu-debug { display: block }`. The `dev-mode` class is rendered server-side onto `<body>` by `formatPageWrapper` (from a `devMode` cookie — see `/dontdie` in `app.ts`), and `<body>` is never swapped, so the debug block reveals/hides correctly across every game-state swap with **zero `afterSwap` JS**. This is the cleanest form of the pattern: when the swap-surviving state is known at full-page render time, set the body class on the server and let CSS do everything — no JS class management at all.
 
+## Animation completion is NOT observable from the DOM
+
+Verified 2026-08-07 (`65f12e8`). **No JS anywhere removes an animation class.** `grep -rn
+shuffl apps/shuffler/public/` matches only `game.css`; nothing in `game.js`. `.shuffling` is
+added server-side by `formatLibraryStack()` (`shared-components.ts:164`) and simply **rides on
+`.library-stack` until the next htmx swap re-renders the stack** — it is never taken off when
+the 1.5s shuffle finishes. The same is true of `.card-moved-*` / `.dropped-from-*`: the only
+removal is the drag-start cleanup in `game.js`.
+
+Two consequences:
+
+- **A test that waits for `not.toHaveClass(/shuffling/)` is wrong and passes instantly** — it
+  would be waiting on a swap, not on the animation.
+- **The animation class arrives in the same swap as the post-action state**, so asserting the
+  post-action state *is* the synchronization. A separate wait for the animation buys nothing
+  unless the assertion touches a property the animation is transforming — and none do: the
+  shuffle animates `.library-card-back` transforms, which no asserted locator reads. This is
+  why both 1800ms mulligan sleeps could be deleted outright in `65f12e8`.
+
+If a future animation ever *does* need a completion signal, it has to be added deliberately
+(an `animationend` listener setting a class on a non-swapped ancestor — see the settle-phase
+gotcha above); there is nothing to observe today.
+
 ## CSS Keyframes
 
 All animation keyframes live in `public/game.css` except:
