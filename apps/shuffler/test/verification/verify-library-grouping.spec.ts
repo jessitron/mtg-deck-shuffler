@@ -153,10 +153,9 @@ test.describe('Library Modal - Card Type Grouping', () => {
     const nextButton = page.locator('.card-modal-nav-next');
     await expect(nextButton).toBeVisible();
 
-    // Click next. Retried — `force: true` disables the actionability wait that
-    // would otherwise absorb an htmx swap/settle straddle.
+    // Click next. Retried in case the click straddles an htmx swap/settle.
     await expect(async () => {
-      await nextButton.click({ force: true });
+      await nextButton.click();
       await expect(positionIndicator).toHaveText(`Card 2 of ${groupCount}`, { timeout: 3000 });
     }).toPass({ timeout: 20000 });
 
@@ -236,11 +235,10 @@ test.describe('Library Modal - Card Type Grouping', () => {
         if (currentPosition < totalInGroup) {
           const nextButton = page.locator('.card-modal-nav-next');
           await expect(nextButton).toBeVisible();
-          // Same swap/settle straddle as opening the modal, and `force: true`
-          // turns off the actionability wait that would absorb it. Retry until
-          // the position indicator advances within the group.
+          // Same swap/settle straddle as opening the modal. Retry until the
+          // position indicator advances within the group.
           await expect(async () => {
-            await nextButton.click({ force: true });
+            await nextButton.click();
             await expect(positionIndicator).toHaveText(
               `Card ${currentPosition + 1} of ${totalInGroup}`,
               { timeout: 3000 }
@@ -335,11 +333,10 @@ test.describe('Library Modal - Card Type Grouping', () => {
         if (currentPosition < totalInGroup) {
           const nextButton = page.locator('.card-modal-nav-next');
           await expect(nextButton).toBeVisible();
-          // Same swap/settle straddle as opening the modal, and `force: true`
-          // turns off the actionability wait that would absorb it. Retry until
-          // the position indicator advances within the group.
+          // Same swap/settle straddle as opening the modal. Retry until the
+          // position indicator advances within the group.
           await expect(async () => {
-            await nextButton.click({ force: true });
+            await nextButton.click();
             await expect(positionIndicator).toHaveText(
               `Card ${currentPosition + 1} of ${totalInGroup}`,
               { timeout: 3000 }

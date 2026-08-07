@@ -363,13 +363,12 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
 
     // The nav arrows are plain hx-get into #card-modal-container. A click at
     // Playwright speed can put its mousedown on a node htmx is about to replace
-    // and its mouseup on the replacement, so no click event fires at all — and
-    // `force: true` disables the actionability wait that would have absorbed it.
+    // and its mouseup on the replacement, so no click event fires at all.
     // Retry the click until the title actually changes.
     const nextButton = page.locator('.card-modal-nav-next');
     await expect(nextButton).toBeVisible({ timeout: 5000 });
     await expect(async () => {
-      await nextButton.click({ force: true });
+      await nextButton.click();
       await expect(cardTitle).not.toHaveText(initialTitle, { timeout: 3000 });
     }).toPass({ timeout: 20000 });
 
@@ -377,7 +376,7 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
     const prevButton = page.locator('.card-modal-nav-prev');
     await expect(prevButton).toBeVisible({ timeout: 5000 });
     await expect(async () => {
-      await prevButton.click({ force: true });
+      await prevButton.click();
       await expect(cardTitle).toHaveText(initialTitle, { timeout: 3000 });
     }).toPass({ timeout: 20000 });
 

@@ -1,7 +1,7 @@
 # `{ force: true }` on the modal-nav clicks is the cause of the flake, not the fix
 
 Mountain: overhead
-Status: ready-for-agent
+Status: resolved
 Type: task
 Map: ../map.md
 
@@ -65,4 +65,12 @@ File this as its own step rather than riding it along here.
 `animations-context`, 2026-08-07 — verdict: ready-for-agent. Also flagged a KB gap worth an
 addendum once this resolves: `interactions.md` doesn't record where the "viewport issues"
 phrase originated or whether it was ever verified real — worth one line so nobody re-litigates
-it. `-review` before landing, `-update` after (should close that gap too).
+it. `-update` after landing closed that gap (see `owners/animations/history.md`).
+
+## Answer
+
+Landed: dropped `{ force: true }` from all five sites, updated the adjacent comments, kept the
+`toPass` wrappers as a safety net (step 2 — trying without them — is a separate follow-up, not
+done here). Verified: `./verify.sh verify-library-grouping verify-query-parameter-modals` twice
+in a row, 19/19 both times, no new flakiness. `animations-update` recorded the resolution and
+the KB-gap closure in `owners/animations/interactions.md` and `history.md`.
