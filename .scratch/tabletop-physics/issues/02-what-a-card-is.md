@@ -167,7 +167,13 @@ is ever wanted.
   the Shuffler stores `backImageUris` (commit `eb48f4f`).
 - **No `twoFaced` flag**, though the owner suggested one. `backImageUrl !== null` says it precisely,
   `twoFacedLayouts.ts` stays the single decider, and two fields that must agree is a bug waiting to
-  happen.
+  happen. ⚠️ **The owner accepted this but named the constraint it relocates, and whoever implements
+  it must honour this:** `buildCardPlayedEvent` must derive `backImageUrl` from **`card.twoFaced`**,
+  *not* from whether `card.backImageUris` happens to be present. `getCardImageUrl` always returns a
+  string (it falls back to `constructCardImageUrl`), so gating on `twoFaced` is safe; gating on the
+  stored URIs would make a two-faced card whose Scryfall image fetch missed arrive as
+  `backImageUrl: null` and be **silently unflippable on the table** — the same
+  two-fields-must-agree bug, just moved into the sender.
 - **`face` stays**, still contract, but its meaning shifts from "which face I baked in" to "which
   face is up on arrival."
 
