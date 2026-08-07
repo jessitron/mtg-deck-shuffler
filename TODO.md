@@ -157,8 +157,19 @@ section is just a wall between Jess and the live work.
   - Worth knowing: `workers: 1` and `fullyParallel: false` in `playwright.config.ts` are
     deliberate ("we're testing concurrent state"), so parallelism is a decision to make, not a
     free win.
+  - **Start here — the same suite got faster on every run with no test changes:**
+    9.5 → 5.4 → 5.2 → **3.6 minutes**, four consecutive full runs on 2026-08-07. Something is
+    warming between runs and `data.db` is never reset, so a large share of what everyone
+    experiences as "the suite is slow" may be **first-run cold cost**, not the tests. Find out
+    what's warming (SQLite page cache? decks parsed off disk? Scryfall image responses cached
+    by the OS?) before touching a single `waitForTimeout` — the fixed sleeps are the obvious
+    suspect and may be nearly irrelevant next to this.
+  - This is also why the number to optimize is ambiguous: a cold CI runner gets the 9.5-minute
+    experience every time, while a laptop mid-session gets 3.6. Decide which one you're
+    optimizing before you start.
   - Jess asked for this on 2026-08-07, mid-fix on those three specs.
-  - Related: `set-up-ci` below — a 9.5-minute suite shapes what CI can reasonably run per push.
+  - Related: `set-up-ci` below — a cold-start suite is what CI actually pays per push, so these
+    two want deciding together.
 
 - [ ] `deeplinks-prop-moved` Check whether `<Tldraw deepLinks>` still does anything
   - tldraw **v5.0.0 moved `deepLinks` from a top-level `<Tldraw>` prop into `options`**, and
