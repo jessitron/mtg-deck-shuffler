@@ -13,6 +13,19 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- [ ] `tabletop-no-shutdown-flush` The Tabletop's server has the same dropped-telemetry-on-shutdown gap the Shuffler just fixed
+  - Surfaced 2026-08-07 while resolving `.scratch/verify-suite-speed/issues/08-no-shutdown-flush-hook.md`
+    (the Shuffler's `tracing.ts` had no SIGTERM/SIGINT handler, so `verify.sh`'s `cleanup()` and every
+    k8s pod termination dropped the last OTel batch). `fleet-is-observable-context`/`-update` grepped
+    `apps/tabletop/src/server/tracing.ts` while updating the owner KB and confirmed: same gap, unfixed.
+  - The fix shape already exists and is proven in production use: `apps/shuffler/src/shutdownHooks.ts`'s
+    `installShutdownHandlers()` — bounded drain via an `unref()`'d timeout, exactly-once exit even if
+    both signals fire, `onTimeout`/`onDrainError` callbacks so the caller can log without coupling the
+    helper to `log.ts`. Copy the pattern into the Tabletop rather than sharing the module — its
+    `tracing.ts` and `log.ts` are already deliberately duplicated (different OTel version lines; see
+    fleet `CLAUDE.md` and `notes/AGENT-NOTES.md`).
+  ← mountain: overhead
+
 - [ ] `playmat-drop-shadow` Does the playmat cast a shadow — on both pages, or neither?
   - **Mostly resolved already.** Jess ruled 2026-08-07 that the two mats are one object and their
     differences were historical accidents, not design. Landed in `a4991f3`: shared art and
