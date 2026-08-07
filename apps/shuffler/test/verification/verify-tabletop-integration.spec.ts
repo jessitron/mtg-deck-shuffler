@@ -101,6 +101,11 @@ async function actOnFirstHandCard(page: Page, buttonText: string, expectedHandCo
   }).toPass({ timeout: 30000 });
 }
 
+/** Card shapes on the canvas — `shape:card-<instanceId>`, per cardArrival.ts. */
+function cardShapes(page: Page) {
+  return page.locator('.tl-shape[data-shape-id^="shape:card-"]');
+}
+
 test.describe('Two-app flow: Shuffler plays to the Tabletop', () => {
   test.skip(!tabletopBuilt, 'apps/tabletop is not built — run `cd apps/tabletop && npm run build` for the two-app flow');
 
@@ -117,13 +122,15 @@ test.describe('Two-app flow: Shuffler plays to the Tabletop', () => {
     await actOnFirstHandCard(page, 'Play', '6');
     await expect(page.locator('.table-cards-button')).toContainText('1 Cards on table');
 
-    // The card arrives on the canvas over the websocket sync
-    await expect(spectator.locator('.tl-shape[data-shape-type="image"]')).toHaveCount(1, { timeout: 15000 });
+    // The card arrives on the canvas over the websocket sync. Match on the shape
+    // id, not just the type: the seat's furniture (playmat, library) are image
+    // shapes too, and only cards get the `shape:card-<instanceId>` id.
+    await expect(cardShapes(spectator)).toHaveCount(1, { timeout: 15000 });
 
     // Discard the next card: zoneHint graveyard, also lands on the canvas
     await actOnFirstHandCard(page, 'Discard', '5');
     await expect(page.locator('.table-cards-button')).toContainText('2 Cards on table');
-    await expect(spectator.locator('.tl-shape[data-shape-type="image"]')).toHaveCount(2, { timeout: 15000 });
+    await expect(cardShapes(spectator)).toHaveCount(2, { timeout: 15000 });
 
     // And history tells the two verbs apart
     await page.locator('#menu-toggle').click();
