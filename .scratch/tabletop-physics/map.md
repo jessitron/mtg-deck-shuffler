@@ -142,6 +142,21 @@ expensive way round.
   accepted on condition of a **Playwright undo regression test**. Undo is per-client; nobody can
   rewind your board.
 
+- **A counter is a genuine custom shape, card-hosted, blank-text, and non-self-detecting** —
+  [Decide what a counter is, and how it rides a card](issues/07-counters-that-ride-along.md),
+  resolved 2026-08-07. `mtg-counter` is its own `ShapeUtil`; attach is native tldraw
+  drag-and-drop on the card (`canReceiveNewChildrenOfType`/`onDropShapesOver`, live hover
+  highlight during drag) — a deliberate, narrow exception to ticket 02's "the card knows nothing
+  about its passengers," accepted for the free feedback. Detach is dragging off; multiple
+  counters on one card can overlap with no auto-spacing, same as physical cardboard. A counter
+  carries free editable text, blank by default — not a number field — clicked into place to
+  edit. Leaving the battlefield (graveyard, exile, hand, or library, uniformly) detaches every
+  counter from the card and nudges it to an open spot near the zone's edge — "so it feels
+  real" — which needs real open-spot-finding logic, not a bare reparent; the `tabletop-shape-mechanics`
+  owner confirmed this can't be counter-side self-detection (a parented shape's own
+  `onTranslateEnd` never fires when only its parent moves), so it has to be driven from the
+  card's own zone-transition code or a store-level side effect. Player-level loose counters
+  (poison, energy, experience) are explicitly out of scope — see below.
 - **Flip and turn-face-down are two separate context-menu items; `currentFace` divergence between
   table and Shuffler is accepted, not fixed** — [Decide how a card flips, and how it sits
   face-down](issues/06-two-faces-and-face-down.md), resolved 2026-08-07. Each gesture is its own
@@ -157,6 +172,17 @@ expensive way round.
   visual treatment for concealment. **Leaving the table resets both axes** — a card returning to
   hand or library goes back to `face:'front'`, `faceDown:false`, mirroring the Shuffler's
   `mulligan()` reset; which zone-entry mechanism performs it is implementation, not decision.
+
+- **A note is tldraw's stock note shape, never `mtg-counter`, but it attaches and detaches exactly
+  like one** — [Decide how a note attaches to a card, and how it differs from a
+  counter](issues/08-notes-on-cards.md), resolved 2026-08-07. Type stays distinct — no
+  counter-with-a-text-variant — but the card's drag-attach accept-list is extended to parent the
+  stock `note` type alongside `mtg-counter`, and once parented a note inherits ticket 07's
+  battlefield-exit rule (detach, nudge to an open spot near the zone's edge) with no per-note
+  exception: a note meant to survive a zone change is simply left unattached, never a special
+  case on the attached path. Free-floating and attached are the same shape, not two variants —
+  "attached" is purely "currently has a parent"; the stock note tool needs no change beyond that
+  and stays in the toolbar (map 4's call, not touched here).
 
 ## Not yet specified
 
@@ -186,9 +212,13 @@ expensive way round.
   tldraw exposes a presence lane — cursors and selections already ride outside the undoable
   document — since that's what would make shared arming cheap without per-frame writes to the
   synced document. Additive, never a reversal.
-- **What happens to a counter when its card leaves the table** in ways other than the graveyard
-  — exile, back to library, back to hand. Jess named the graveyard case ("they disappear");
-  the others follow from whatever mechanism the counter ticket picks.
+- **Pre-made preset counters** (a "+1/+1" counter, already labeled, droppable from stock)
+  are a real want Jess named while resolving ticket 07, but not built now — the shape (ticket
+  07) supports blank free-text counters only; a stock tray of common presets is future work.
+- **The open-spot-finding algorithm for a detached counter landing near a zone's edge**
+  (ticket 07) — the rule ("nudge to an open spot, don't just overlap") is decided; the
+  concrete placement/collision logic and whether it animates is implementation's job, not yet
+  specified here.
 
 ## Out of scope
 
@@ -199,3 +229,6 @@ expensive way round.
 - **Curating the tldraw UI** — killing crop, the toolbar, the context menu — map 4. The one
   exception is where the stock handles actively break physics (tap), which is in scope here.
 - **Undo** — map 4, because it's a board-wide question rather than a shape-level one.
+- **Player-level loose counters** (poison, energy, experience) — [ticket 07](issues/07-counters-that-ride-along.md).
+  Jess: *"out of scope for now, I'll use a sticky note."* A stand-in already exists; nobody
+  needs to build a mechanism for these.
