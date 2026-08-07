@@ -69,7 +69,10 @@ those are fast, and the answer probably matters.
 
 This also corrects ticket 03's "the suite reaches the live internet — 4 spans, 4.5s". That
 counted *server-side* fetches only. The browser's 191-images-per-navigation are invisible to
-server telemetry and are the actual dependency.
+server telemetry, and are *one* real dependency, but not the whole of it: grilling 03 further
+(2026-08-07) found every rendered hand/battlefield card also carries a live `cards.scryfall.io`
+`<img src>` (`shared-components.ts`), independent of `/choose-any-deck` entirely. That part is
+ticket 11.
 
 ## Not yet specified
 
@@ -80,9 +83,9 @@ server telemetry and are the actual dependency.
 - **A regression alarm.** The suite now traces itself, so "the suite got slower" is a queryable
   fact. Whether that becomes a Honeycomb trigger, a threshold in `verify.sh`, or nothing at all
   is undecided — and probably shouldn't be decided until the suite is at its target.
-- **Whether 60s survives contact.** If 03 + 04 + 06 land and the suite sits at, say, 68s, the
-  remaining gap may be a long tail of small things with no single lever. What that tail looks
-  like isn't visible until the big levers land.
+- **Whether 60s survives contact.** If 03 + 04 + 06 + 11 land and the suite sits at, say, 68s,
+  the remaining gap may be a long tail of small things with no single lever. What that tail
+  looks like isn't visible until the big levers land.
 - **The other two ships.** The Tabletop (`vitest`) and Spine (Rails `test/`) suites have never
   been measured. Whether they have the same disease is unknown; see Out of scope.
 
@@ -95,8 +98,7 @@ server telemetry and are the actual dependency.
 - **The Tabletop and Spine test suites.** Named in the fog above only because the question
   occurs; the destination says "the suite", meaning the Shuffler's verification suite. If they
   need the same treatment, that's a fresh map.
-- **General app performance work.** `/choose-any-deck` shipping 191 remote images is very
-  likely a real problem for real players, but this map only cares about it while it's costing
-  the suite 55 seconds. Ticket 05 holds the part that serves the destination; if it turns out
-  the fix is purely a product improvement with no test benefit, it leaves here and goes to
-  `TODO.md`.
+- **General app performance work.** [The deck chooser ships 191 remote Scryfall images on every
+  visit](issues/05-deck-chooser-ships-191-images.md) — ruled out of scope 2026-08-07 once ticket
+  03's decision 1 (seed via API) removed 41 of 42 `/choose-any-deck` navigations from the suite.
+  A real problem for real players, just not a test-speed one anymore; moved to `TODO.md`.

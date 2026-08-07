@@ -158,8 +158,28 @@ section is just a wall between Jess and the live work.
 
 - **The verify suite's speed has a wayfinder map**: `.scratch/verify-suite-speed/map.md`.
   Destination: no useless tests, no wasted time in tests, **full suite under 60s** (from
-  106.5s). 01 and 02 are resolved; the frontier is 03 (setup cost), 04 (superfluous tests),
-  and 07 (the never-reset 37 MB `data.db`). Say "work the verify-suite-speed map" to continue.
+  106.5s). 01, 02, and 05 are resolved; 03's decisions are settled (seed via API, one shared
+  helper, always fresh) but not yet implemented. The frontier is 04 (superfluous tests), 07
+  (the never-reset 37 MB `data.db`), and 11 (route card images through the backend — split out
+  of 03, a deep app change, deliberately its own ticket). Say "work the verify-suite-speed map"
+  to continue.
+
+- [ ] `deck-chooser-lazy-images` `/choose-any-deck` ships 191 remote Scryfall images on every visit, un-lazy-loaded
+  - Surfaced 2026-08-07 grilling `.scratch/verify-suite-speed/issues/03-setup-cost-and-isolation.md`
+    (ticket 05, closed out of that map once seeding removed the suite's reason to care).
+    `views/partials/deck-selection-precon.ejs:17` renders a remote `<img>` per precon deck — 191
+    of them, plus per-colour SVGs — nothing lazy-loaded, paginated, or virtualised. Real cost to a
+    real player: server renders in 26.6 ms, browser then waits ~1,280 ms for `load`.
+  - Options already scoped: `loading="lazy"` (one attribute), pagination/virtualisation, or serving
+    the art through the Shuffler's own (cached) route rather than 191 cross-origin connections —
+    the last option converges with `card-images-through-backend`-style work if that lands first.
+  - Consult `shuffler-looks-like-itself` — lazy-loading or pagination changes what a player sees,
+    not just how fast it loads.
+  - **Free and unrelated to the decision above:** `GET /choose-any-deck` (`src/app.ts:303`) calls
+    `deckRetriever.listAvailableDecks()` and passes it to a template that never reads
+    `availableDecks` — `LocalFileAdapter.listAvailableDecks()` synchronously parses all 191 deck
+    files (~15 MB) for nothing, twice per navigation. OS page cache is absorbing it today (hence
+    26.6 ms), but it's a dead parse either way — delete it whenever someone's in the file.
 
 - [ ] `deeplinks-prop-moved` Check whether `<Tldraw deepLinks>` still does anything
   - tldraw **v5.0.0 moved `deepLinks` from a top-level `<Tldraw>` prop into `options`**, and
