@@ -446,6 +446,20 @@ self-rendering custom shape.
   Tabletop's only styled surface, which makes it the thing an agent will grep for precedent.
   **It is not a house style and not a precedent to match.** Its home was previously only inside
   a Tabletop ticket; it belongs here, because it outlives that ticket.
+- **Coming to this owner: the tap motion's tempo** (`.scratch/tabletop-physics/issues/05-rotate-to-tap.md`,
+  opened by ticket 04 on 2026-08-07). A card tapping is a 90° rotation played as a local
+  catch-up transform. **Ticket 04 decided no duration, easing, colour or literal** — that is
+  deliberately 05's, and 05 is to be decided *with* this owner. The calibration 04 handed
+  forward: the Shuffler's motion vocabulary is **0.8s** (the flip transition) and **0.5s**
+  (card motion), and a tap is a flip-like **reorientation**, not a translation — so match one
+  of those two rather than inventing a third tempo. **Decidable now, not implementable** — it
+  needs a Tabletop stylesheet (`tabletop-css-tokens`, above) to land in. This is not a
+  `/design` `.choice` yet; staging it would mean animating a specimen, and the gallery has no
+  Tabletop stage.
+- **Also undecided, and it must not ride along: a card's `indicator()`.** Ticket 04 records
+  explicitly that an `indicator()` looking like anything other than tldraw's default is a
+  **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket
+  is where it will try to hitch a ride.
 - **The gallery has zero Tabletop specimens, and the cross-app stylesheet question is
   unresolved.** The gallery's credibility rests on rendering the *app's own* stylesheets. A
   Tabletop specimen only keeps that property if the Tabletop's CSS is a real stylesheet

@@ -536,3 +536,56 @@ green/cream inline palette (`#1a2a1f`, `#f5f1e8`, `#3d5a45`) is a live Layer-1 v
 second had been recorded only inside a Tabletop ticket as "not a precedent to match" — the wrong
 home, because it outlives the ticket. Also stated up front: **the tokens gap must not be solved by
 copying `styles.css`'s `:root`.**
+
+## 2026-08-07 — a card keeps all its handles, and this owner lost the argument
+
+`3f14d02` **Resolve tabletop-physics 04: tap is a boolean, rotation is a delta**
+
+No CSS changed; nothing was built. `.scratch/tabletop-physics/issues/04-tap-is-state.md`
+decided that a Tabletop card stores `props.tapped` as a boolean and writes rotation as a
+**delta** (+90° from the card's own current angle), rather than reading tap back out of an
+absolute angle. The design consequences outlive the ticket.
+
+**This owner argued resize should be suppressed on cards, and was overruled — deliberately,
+with reasons, and that's why it's written down.** The argument was that `CARD_W = 170` fixes
+the canvas coordinate system at 68 units/inch, every other dimension derives from it, and a
+player-resized card falsifies the sentence "the playmat is 9.6 cards wide." Jess's counter:
+the playmat is 9.6 **default** cards wide, one scaled creature doesn't falsify that, and she
+resizes cards in Mural on purpose — *"I like to make creatures bigger than lands."* The
+rejection is recorded in the ticket *and* in [README.md](README.md) so the next agent doesn't
+re-run it from scratch and arrive at the same overruled place.
+
+**The half that was adopted is the half that mattered.** The constraint this owner correctly
+identified — the board's premise is *physical proportion*, so a card may change size but never
+shape — landed as `isAspectRatioLocked = () => true`. Worth noting as a pattern: a design
+objection that gets refused wholesale can still be right about the invariant underneath it.
+**State the invariant separately from the remedy**, or it goes down with the remedy.
+
+**Free-rotate stays too**, which is the opposite of where the `-context` brief was leaning:
+*"people might want to angle a card a little bit to indicate that it's attacking (even if
+vigilant)."* It costs nothing precisely *because* tap became a delta — tap composes on top of
+any player-chosen angle with neither mechanism knowing about the other. So **no handles are
+suppressed on a card at all**, and the earlier "I would not object to fewer handles" is moot.
+Recorded as decided so nobody suppresses them later thinking it's an obvious cleanup.
+
+**The board is now deliberately non-uniform on handles.** All furniture is `isLocked`, so most
+shapes already have none; cards keep the full set. That asymmetry is a decision, not drift —
+this owner had flagged the uniformity gap and this is its answer.
+
+**Crop dies for free, and it was never the same objection as resize.** `DefaultImageToolbar`
+gates on `shape.type !== 'image'`, so the crop button exists only while a card is an
+`ImageShapeUtil` subclass; becoming `mtg-card` removes it with no work. Jess's *"I don't want
+the weird cropping thing"* was about crop, not resize — a useful reminder to hear the specific
+complaint rather than the category it seems to fall in.
+
+**The ride-along warning was honoured.** Nothing in 04 decides a custom `indicator()`, and the
+ticket says out loud that an indicator differing from tldraw's default is a separate design
+decision needing its own sign-off. Likewise no duration, easing, colour or literal: the tap
+**motion** is [ticket 05](../../.scratch/tabletop-physics/issues/05-rotate-to-tap.md), to be
+decided *with* this owner, carrying forward the calibration that the Shuffler's vocabulary is
+0.8s (flip) and 0.5s (card motion) and that a tap is a flip-like reorientation rather than a
+translation — match one, don't invent a third tempo.
+
+**Decided but unbuilt**, in the state this KB now names explicitly (see the choice-4 lesson
+above). The Tabletop still has no CSS source file and no font link (`tabletop-css-tokens`);
+04 needed no styling so it wasn't blocked, but 05 will be.

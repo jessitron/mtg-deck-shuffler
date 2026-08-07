@@ -170,7 +170,41 @@ playmat, count discs. (That used to say "the playmat, the `.page-container`" —
 for one object; see "The playmat is one object" below.)
 
 **The card is the layout unit.** 200 × 278, radius 10px. Column widths, button grids and
-drop zones are sized off that 200.
+drop zones are sized off that 200. On the canvas the Tabletop's card is 170 × 238 (68
+units/inch) and everything else derives from it — but see the next paragraph: that
+derivation describes the **default** card, not every card on the board.
+
+**On the canvas, a card keeps its full handle set — resize AND free-rotate — and that is
+decided, not an oversight (2026-08-07, `.scratch/tabletop-physics/issues/04-tap-is-state.md`,
+`3f14d02`).** No handles are suppressed on a card at all.
+
+- **Resize stays, aspect-ratio locked** (`isAspectRatioLocked = () => true`). Jess resizes
+  cards deliberately — *"I like to make creatures bigger than lands"* — and she does it in
+  Mural today. The aspect-ratio lock is this owner's constraint and it **was** adopted: the
+  board's whole premise is physical proportion, so a card may change size but never shape.
+- **This owner argued resize should die and was overruled.** The argument: `CARD_W = 170`
+  fixes the canvas coordinate system, so a player-scaled card falsifies "the playmat is 9.6
+  cards wide." The counter, from Jess and the ticket: the playmat is 9.6 **default** cards
+  wide, and one scaled creature doesn't falsify that. **Recorded so the argument isn't
+  re-run from scratch** — if you find yourself re-deriving it, you're re-deriving a settled
+  question.
+- **Free-rotate stays** — *"people might want to angle a card a little bit to indicate that
+  it's attacking (even if vigilant)."* It costs nothing because tap became a rotation
+  **delta** (+90° relative to the card's own angle), so tap composes on top of any
+  player-chosen angle without either mechanism knowing about the other.
+- **Crop disappears for free.** `DefaultImageToolbar` gates on `shape.type !== 'image'`, so
+  the crop button exists only while the card is an `ImageShapeUtil` subclass; becoming the
+  custom `mtg-card` type removes it with no work. That was the thing Jess actually objected
+  to (*"I don't want the weird cropping thing"*), and it is not the same objection as
+  resize.
+- **So the board is deliberately non-uniform on handles.** All *furniture* is `isLocked` and
+  therefore has no handles; *cards* have all of them. Don't "tidy" that into consistency in
+  either direction.
+- **A custom `indicator()` is still undecided.** Ticket 04 decided nothing about how a
+  selected card looks. An `indicator()` that looks like anything other than tldraw's default
+  is a **separate design decision needing its own sign-off** — don't let it ride along on the
+  `mtg-card` implementation. (Related: the global `:focus-visible` rule cannot reach a canvas
+  shape — see tldraw limits above.)
 
 **Two style worlds.** Site pages (`/`, `/choose-any-deck`, `/docs`, `/about`) use the
 purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages

@@ -33,6 +33,14 @@
   the stock tldraw look 03's implementer reproduces as scaffolding is **explicitly exempt from
   the Layer-1 token rule** — it's a knowingly-untokenized placeholder with a comment saying so,
   so a design-lint sweep must not "fix" it into a decision.
+  `issues/04-tap-is-state.md` (resolved 2026-08-07) is the second: it settled a card's handle
+  set (see the canvas watch points below) and **handed this owner an open question**,
+  `issues/05-rotate-to-tap.md` — the tap motion's duration and easing, to be decided *with*
+  this owner. 04 deliberately decided no duration, easing, colour or literal. The calibration
+  it recorded for 05: the Shuffler's vocabulary is **0.8s** (flip transition) and **0.5s**
+  (card motion), and a tap is a flip-like *reorientation*, not a translation — so match one of
+  those two rather than inventing a third tempo. **The tempo can be decided now but not
+  implemented** — `tabletop-css-tokens` still blocks any Tabletop CSS.
 - **The two-faced-cards owner** — flip button styling and the `.flip-container-*` blocks.
 - **The library-search owner** — modal and list styling.
 - **`test/verification/verify-deck-title-placement.spec.ts`** (added 2026-08-07) — pins the
@@ -230,7 +238,18 @@ Concrete, in rough order of how often they bite.
 - **Size canvas things in card widths, and use the *right* card.** The Tabletop's card is
   **170 × 238** (`apps/tabletop/DESIGN.md`, 68 units/inch). The Shuffler's CSS card is 200 × 278.
   They are both "the card is the layout unit" and they are **not the same number** — don't cross
-  them.
+  them. **170 is the *default* card, not every card**: players may resize cards
+  (aspect-ratio locked), decided 2026-08-07. Derive layout from 170; don't assume every card
+  on the board measures it.
+- **Don't suppress a card's resize or free-rotate handles** (decided 2026-08-07, ticket 04,
+  `3f14d02`). Both stay, deliberately; the board is non-uniform on handles because furniture
+  is `isLocked` and cards are not. This owner argued for suppressing resize and was overruled
+  — see [README.md](README.md) → "On the canvas, a card keeps its full handle set" before
+  reopening it.
+- **A card's `indicator()` has no decided appearance.** Styling it away from tldraw's default
+  is its own design decision needing its own sign-off — the classic ride-along. If an
+  implementation ticket for `mtg-card` reaches you with a custom indicator in it, that's the
+  thing to block.
 - **`apps/tabletop` has no stylesheet and no font link**, so a `var(--…)` there resolves to
   nothing and Orbitron silently becomes a system serif. See [open-choices.md](open-choices.md)
   → "Fleet gaps — the Tabletop side" before writing any Tabletop CSS.
