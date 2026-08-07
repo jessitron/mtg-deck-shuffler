@@ -49,7 +49,7 @@ decided but unbuilt:
 
 | Animation | Where | Status | Duration | Trigger |
 |-----------|-------|--------|----------|---------|
-| Tap / untap swing (90°) | Tabletop, `MtgCardImageShapeUtil` | **Decided, NOT implemented** — `.scratch/tabletop-physics/issues/05-rotate-to-tap.md` | Undecided on purpose (05's, with the design owner) | `props.tapped` changing on a synced tldraw shape |
+| Tap / untap swing (90°) | Tabletop, `MtgCardImageShapeUtil` | **Decided, NOT implemented** — `.scratch/tabletop-physics/issues/05-rotate-to-tap.md` (resolved) | 0.5s ease-out (Jess overrode this owner's 0.8s lean) | `onClick` toggling `props.tapped` on a synced tldraw shape (tldraw's own rotate handle stays reserved for free rotation, never repurposed for tap) |
 
 This will be the Tabletop's **first owned styling**, and the ship has no CSS source file
 yet (`tabletop-css-tokens` in `TODO.md`) — that blocks implementing 05, not deciding it.

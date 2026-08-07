@@ -83,7 +83,8 @@ Full paths from the repo root. Nothing here animates today.
   tap swing will be this ship's first owned styling, which is why duration/easing are ticket
   05's call with the design owner rather than 04's.
 - Decisions: `.scratch/tabletop-physics/issues/04-tap-is-state.md` (resolved, `3f14d02`) and
-  `.scratch/tabletop-physics/issues/05-rotate-to-tap.md` (open).
+  `.scratch/tabletop-physics/issues/05-rotate-to-tap.md` (resolved 2026-08-07 — trigger stays
+  `onClick`, duration/easing is 0.5s ease-out).
 
 ## Tests
 

@@ -222,6 +222,28 @@ assert the position indicator is unchanged after the flip — the property under
 flip that never happened also passes, so that click is unverifiable and deliberately not
 wrapped in `toPass`. Written up as ticket 04; belongs with `two-faced-cards`.
 
+### 2026-08-07: Tap trigger and animation timing settled — tabletop-physics ticket 05 resolved
+
+**A decision, not code.** No source file changed;
+`.scratch/tabletop-physics/issues/05-rotate-to-tap.md` is self-contained and authoritative.
+The mechanism this owner had already specified (local catch-up counter-transform keyed off
+`props.tapped` changing, CSS-transitioned to 0) was unchanged — only the trigger-gesture
+question and the duration/easing value were open in `-context`, and both are now settled.
+
+- **Trigger stays plain `onClick`, no new gesture.** The click that already toggles
+  `props.tapped` on `MtgCardImageShapeUtil` keeps doing so. tldraw's own
+  `onRotateStart`/`onRotate`/`onRotateEnd` hooks (confirmed real in `tldraw@5.2.5`) are
+  **confirmed NOT used for tap at all** — the rotate handle stays reserved for free rotation
+  ("attacking" per ticket 04), keeping the two gestures visually distinct since tap is never
+  read back out of angle.
+- **Duration/easing: 0.5s `ease-out`, matching the Shuffler's card-motion slides
+  (`slideFromLeft`/`slideFromRight`/`growFromLeft`/`growFromRight`) — not the 0.8s flip
+  transition this owner had leaned toward.** Jess overrode that lean deliberately: tap happens
+  often mid-turn and reads better snappier than an 0.8s reorientation-style transition.
+- Both README.md's animation inventory and architecture.md's "Third mechanism" section are
+  updated accordingly; the "deliberately undecided" line in architecture.md is removed since
+  it's no longer true.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.

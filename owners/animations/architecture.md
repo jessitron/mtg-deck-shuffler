@@ -105,7 +105,26 @@ The two mechanisms above are both Shuffler-side: **server-driven** (WhatHappened
 render) and **client-driven class toggle** (the card flip). A third was decided on 2026-08-07
 for the Tabletop and is **not implemented yet** — full reasoning in
 `.scratch/tabletop-physics/issues/04-tap-is-state.md`, implementation in
-`.scratch/tabletop-physics/issues/05-rotate-to-tap.md`.
+`.scratch/tabletop-physics/issues/05-rotate-to-tap.md` (resolved 2026-08-07).
+
+**Trigger gesture: settled as plain `onClick`, no new gesture.** The click that already
+toggles `props.tapped` on `MtgCardImageShapeUtil` keeps doing so. tldraw's own
+`onRotateStart`/`onRotate`/`onRotateEnd` hooks (confirmed real in `tldraw@5.2.5`) are **not
+used for tap at all** — they stay reserved for free rotation ("attacking" per ticket 04). This
+was an open question in `-context`; it's now closed. Keeping tap on `onClick` and free-rotation
+on the rotate handle is deliberate: the two gestures must stay visually distinct, since tap is
+never read back out of angle (that's the bug ticket 04 killed) — if tap ever moved onto the
+rotate handle, telling a 90° tap from a free 90° rotate would reopen exactly that ambiguity.
+**Don't reopen this path**: a future session proposing to wire tap through
+`onRotateStart`/`onRotate`/`onRotateEnd` is re-litigating a settled call.
+
+**Duration and easing: settled as 0.5s `ease-out`, matching the Shuffler's card-motion
+slides — NOT the 0.8s flip.** This owner's own lean in `-context` was 0.8s (reasoning: a tap
+is a reorientation, like the flip). Jess **overrode that lean, deliberately**: tap happens
+often mid-turn, and it reads better snappier than an 0.8s reorientation-style transition. The
+value now matches `game.css`'s `slideFromLeft`/`slideFromRight`/`growFromLeft`/`growFromRight`
+(0.5s) rather than `.card-flipped` (0.8s, unspecified default `ease`). **Don't recommend 0.8s
+again** — it was considered and specifically turned down for this animation.
 
 **The state model.** `props.tapped: boolean` on the `mtg-card` shape is the stored truth, and
 it is **never read back out of an angle** (the current `UNTAPPED_EPSILON` check in
@@ -150,10 +169,6 @@ Four constraints handed to ticket 05, inherited verbatim:
    "because tldraw handles rotation now" makes the first frame jump.
 4. **Nothing on the path may clip.** Mid-swing the counter-rotated card extends outside its own
    `w × h` box; any `overflow: hidden` ancestor chops the animation.
-
-**Duration and easing are deliberately undecided** — 05's, with the design owner. The
-Shuffler's vocabulary is 0.8s (flip transition) and 0.5s (card motion); tap is a flip-like
-reorientation, not a translation.
 
 Empirical facts from the throwaway Playwright prototype (branch `proto/multi-tap`, deleted,
 nothing landed):

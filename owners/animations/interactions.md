@@ -56,15 +56,21 @@
   row's right edge. The `gap` on `.game-header-row` does **not** offset the panel either;
   it's needed so a long deck name doesn't butt into the hamburger.
 
-- **Tabletop tap animation (decided 2026-08-07, not built)** — four standing constraints for
-  whoever implements `.scratch/tabletop-physics/issues/05-rotate-to-tap.md`: key the catch-up
-  off `props.tapped` changing (never off a ±90 rotation delta — that misfires when a player
-  free-rotates through 90°); initialize the previous-value ref to the first-seen `tapped` so a
-  card arriving tapped doesn't swing on mount or on store reconnect; comment the coupling
-  between the centre-preserving x/y write and the transform origin; and keep **`overflow:
-  hidden` off every ancestor on the path**, because mid-swing the counter-rotated card extends
-  outside its own `w × h` box. Also: do not re-derive the CSS-only rotation route (killed — see
-  architecture.md), and do not veto the local catch-up by citing "no FLIP" (it isn't).
+- **Tabletop tap animation (decided 2026-08-07, ticket 05 resolved, not built)** — four
+  standing constraints for whoever implements `.scratch/tabletop-physics/issues/
+  05-rotate-to-tap.md`: key the catch-up off `props.tapped` changing (never off a ±90 rotation
+  delta — that misfires when a player free-rotates through 90°); initialize the previous-value
+  ref to the first-seen `tapped` so a card arriving tapped doesn't swing on mount or on store
+  reconnect; comment the coupling between the centre-preserving x/y write and the transform
+  origin; and keep **`overflow: hidden` off every ancestor on the path**, because mid-swing the
+  counter-rotated card extends outside its own `w × h` box. Also: do not re-derive the CSS-only
+  rotation route (killed — see architecture.md), and do not veto the local catch-up by citing
+  "no FLIP" (it isn't). **Now also settled**: the trigger stays plain `onClick` — tldraw's
+  `onRotateStart`/`onRotate`/`onRotateEnd` are confirmed real hooks but are **not used for tap**,
+  staying reserved for free rotation instead, so tap and free-rotation stay visually
+  distinguishable. Duration/easing is 0.5s `ease-out` (Shuffler's card-motion vocabulary), not
+  this owner's originally-recommended 0.8s flip-style transition — Jess overrode that
+  recommendation deliberately.
 - **State that must survive swaps**: Anything toggled by JS that needs to outlive a `game-state-updated` swap must NOT be re-applied to swapped-in content in `afterSwap` — the settle phase reverts it (see architecture.md). Anchor such state on `document.body` or another non-swapped ancestor. The hamburger menu (`body.game-menu-open`) is the reference example; developer mode (`body.dev-mode`, set server-side from a cookie, gating `.menu-debug` visibility) is a second, JS-free example.
 
 ## Not Related To
