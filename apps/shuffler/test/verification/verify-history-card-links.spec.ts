@@ -22,21 +22,18 @@ function extractGameId(url: string): string | null {
 
 async function setupGame(page: any): Promise<string> {
   await page.goto(`${BASE_URL}/choose-any-deck`);
-  await page.waitForLoadState('networkidle');
 
   const preconTiles = page.locator('.precon-tile');
   await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
   await preconTiles.first().click();
 
   await page.waitForURL('**/prepare/*', { timeout: 30000 });
-  await page.waitForLoadState('networkidle');
 
   const shuffleUpButton = page.locator('button.begin-button, button.start-game-button, button:has-text("Shuffle Up")');
   await expect(shuffleUpButton).toBeVisible();
   await shuffleUpButton.click();
 
   await page.waitForURL('**/game/*', { timeout: 30000 });
-  await page.waitForLoadState('networkidle');
 
   const gameId = extractGameId(page.url());
   if (!gameId) throw new Error('Failed to create game');
@@ -54,12 +51,9 @@ test.describe('Card Name Links in Action History', () => {
     const drawButton = page.locator('button.draw-button');
     await expect(drawButton).toBeVisible({ timeout: 5000 });
     await drawButton.click();
-    await page.waitForTimeout(500);
 
     // Open the action history modal.
     await page.goto(`${BASE_URL}/game/${gameId}?openHistory=true`);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
 
     const historyModal = page.locator('#modal-container .modal-overlay');
     await expect(historyModal).toBeVisible({ timeout: 5000 });

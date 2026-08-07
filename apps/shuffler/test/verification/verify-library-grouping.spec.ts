@@ -35,7 +35,6 @@ function extractGameId(url: string): string | null {
  */
 async function selectDeck(page: Page, deckFilename?: string): Promise<void> {
   await page.goto(`${BASE_URL}/choose-any-deck`);
-  await page.waitForLoadState('networkidle');
 
   const firstTile = page.locator('.precon-tile').first();
   await expect(firstTile).toBeVisible({ timeout: 15000 });
@@ -59,7 +58,6 @@ async function selectDeck(page: Page, deckFilename?: string): Promise<void> {
 
 async function setupPrep(page: Page, deckFilename?: string): Promise<string> {
   await selectDeck(page, deckFilename);
-  await page.waitForLoadState('networkidle');
 
   const prepId = extractPrepId(page.url());
   if (!prepId) throw new Error('Failed to create prep');
@@ -68,7 +66,6 @@ async function setupPrep(page: Page, deckFilename?: string): Promise<string> {
 
 async function setupGame(page: Page, deckFilename?: string): Promise<string> {
   await selectDeck(page, deckFilename);
-  await page.waitForLoadState('networkidle');
 
   const shuffleButton = page.locator(
     'button.begin-button, button.start-game-button, button:has-text("Shuffle Up")'
@@ -77,7 +74,6 @@ async function setupGame(page: Page, deckFilename?: string): Promise<string> {
   await shuffleButton.click();
 
   await page.waitForURL('**/game/*', { timeout: 30000 });
-  await page.waitForLoadState('networkidle');
 
   const gameId = extractGameId(page.url());
   if (!gameId) throw new Error('Failed to create game');
@@ -90,8 +86,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
     const prepId = await setupPrep(page);
 
     await page.goto(`${BASE_URL}/prepare/${prepId}?openLibrary=true`);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
 
     const libraryModal = page.locator('.modal-overlay');
     await expect(libraryModal).toBeVisible({ timeout: 5000 });
@@ -105,8 +99,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
     const prepId = await setupPrep(page);
 
     await page.goto(`${BASE_URL}/prepare/${prepId}?openLibrary=true&groupBy=type`);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
 
     const libraryModal = page.locator('.modal-overlay');
     await expect(libraryModal).toBeVisible({ timeout: 5000 });
@@ -127,8 +119,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
 
     // Open grouped library modal
     await page.goto(`${BASE_URL}/game/${gameId}?openLibrary=true&groupBy=type`);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
 
     const libraryModal = page.locator('.modal-overlay');
     await expect(libraryModal).toBeVisible({ timeout: 5000 });
@@ -142,14 +132,14 @@ test.describe('Library Modal - Card Type Grouping', () => {
     const groupCount = groupCountMatch ? parseInt(groupCountMatch[1]) : 0;
     expect(groupCount).toBeGreaterThan(1);
 
-    // Click the first card name in the first group
+    // Click the first card name in the first group. Retried: the click is an
+    // htmx swap and can be swallowed if it straddles the settle.
     const firstCardInGroup = firstGroup.locator('.clickable-card-name').first();
-    await firstCardInGroup.click();
-    await page.waitForTimeout(500);
-
-    // Card modal should be open
     const cardModal = page.locator('.card-modal-overlay');
-    await expect(cardModal).toBeVisible({ timeout: 5000 });
+    await expect(async () => {
+      await firstCardInGroup.click();
+      await expect(cardModal).toBeVisible({ timeout: 3000 });
+    }).toPass({ timeout: 20000 });
 
     // Position indicator should show "Card 1 of <groupCount>" (not the full library count)
     const positionIndicator = page.locator('.card-modal-position-indicator');
@@ -163,12 +153,12 @@ test.describe('Library Modal - Card Type Grouping', () => {
     const nextButton = page.locator('.card-modal-nav-next');
     await expect(nextButton).toBeVisible();
 
-    // Click next
-    await nextButton.click({ force: true });
-    await page.waitForTimeout(500);
-
-    // Position should now be "Card 2 of <groupCount>"
-    await expect(positionIndicator).toHaveText(`Card 2 of ${groupCount}`);
+    // Click next. Retried — `force: true` disables the actionability wait that
+    // would otherwise absorb an htmx swap/settle straddle.
+    await expect(async () => {
+      await nextButton.click({ force: true });
+      await expect(positionIndicator).toHaveText(`Card 2 of ${groupCount}`, { timeout: 3000 });
+    }).toPass({ timeout: 20000 });
 
     // Now prev button should appear
     await expect(page.locator('.card-modal-nav-prev')).toBeVisible();
@@ -179,8 +169,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
 
     // Open grouped library modal
     await page.goto(`${BASE_URL}/game/${gameId}?openLibrary=true&groupBy=type`);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
 
     const libraryModal = page.locator('.modal-overlay');
     await expect(libraryModal).toBeVisible({ timeout: 5000 });
@@ -212,11 +200,14 @@ test.describe('Library Modal - Card Type Grouping', () => {
     let foundFlipCard = false;
 
     for (let i = 0; i < cardCount; i++) {
-      await cardNames.nth(i).click();
-      await page.waitForTimeout(500);
-
+      // Opening a card is an htmx swap into #card-modal-container. A click at
+      // Playwright speed can land its mousedown on a node htmx then replaces, so
+      // no click event fires; retry until the modal actually opens.
       const cardModal = page.locator('.card-modal-overlay');
-      await expect(cardModal).toBeVisible({ timeout: 5000 });
+      await expect(async () => {
+        await cardNames.nth(i).click();
+        await expect(cardModal).toBeVisible({ timeout: 3000 });
+      }).toPass({ timeout: 20000 });
 
       const flipButton = page.locator('.card-modal-overlay .flip-button');
       if (await flipButton.isVisible()) {
@@ -230,9 +221,13 @@ test.describe('Library Modal - Card Type Grouping', () => {
         const totalInGroup = positionMatch ? parseInt(positionMatch[2]) : 0;
         expect(totalInGroup).toBe(targetGroupSize);
 
-        // Flip the card
+        // Flip the card.
+        // NOTE: unlike the clicks above, this one is not retried, because the
+        // assertion that follows cannot tell whether it landed — the position
+        // indicator reads the same before and after a flip, which is precisely
+        // what the test is asserting. A swallowed flip would still pass. That
+        // gap predates this change; see .scratch/verify-suite-speed/issues/02.
         await flipButton.click();
-        await page.waitForTimeout(500);
 
         // After flip, position indicator should still show group-scoped count
         await expect(positionIndicator).toHaveText(`Card ${currentPosition} of ${totalInGroup}`);
@@ -241,20 +236,29 @@ test.describe('Library Modal - Card Type Grouping', () => {
         if (currentPosition < totalInGroup) {
           const nextButton = page.locator('.card-modal-nav-next');
           await expect(nextButton).toBeVisible();
-          await nextButton.click({ force: true });
-          await page.waitForTimeout(500);
-
-          // Position should advance within the group
-          await expect(positionIndicator).toHaveText(`Card ${currentPosition + 1} of ${totalInGroup}`);
+          // Same swap/settle straddle as opening the modal, and `force: true`
+          // turns off the actionability wait that would absorb it. Retry until
+          // the position indicator advances within the group.
+          await expect(async () => {
+            await nextButton.click({ force: true });
+            await expect(positionIndicator).toHaveText(
+              `Card ${currentPosition + 1} of ${totalInGroup}`,
+              { timeout: 3000 }
+            );
+          }).toPass({ timeout: 20000 });
         }
 
         break;
       }
 
-      // Close the modal and try the next card
+      // Close the modal and try the next card. Retried for the same reason:
+      // a swallowed close leaves the modal up and the next iteration clicks
+      // into the wrong thing.
       const closeButton = page.locator('.card-modal-close');
-      await closeButton.click();
-      await page.waitForTimeout(300);
+      await expect(async () => {
+        await closeButton.click();
+        await expect(cardModal).toBeHidden({ timeout: 3000 });
+      }).toPass({ timeout: 20000 });
     }
 
     expect(foundFlipCard).toBe(true);
@@ -265,8 +269,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
 
     // Open grouped library modal
     await page.goto(`${BASE_URL}/prepare/${prepId}?openLibrary=true&groupBy=type`);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
 
     const libraryModal = page.locator('.modal-overlay');
     await expect(libraryModal).toBeVisible({ timeout: 5000 });
@@ -297,11 +299,14 @@ test.describe('Library Modal - Card Type Grouping', () => {
     let foundFlipCard = false;
 
     for (let i = 0; i < cardCount; i++) {
-      await cardNames.nth(i).click();
-      await page.waitForTimeout(500);
-
+      // Opening a card is an htmx swap into #card-modal-container. A click at
+      // Playwright speed can land its mousedown on a node htmx then replaces, so
+      // no click event fires; retry until the modal actually opens.
       const cardModal = page.locator('.card-modal-overlay');
-      await expect(cardModal).toBeVisible({ timeout: 5000 });
+      await expect(async () => {
+        await cardNames.nth(i).click();
+        await expect(cardModal).toBeVisible({ timeout: 3000 });
+      }).toPass({ timeout: 20000 });
 
       const flipButton = page.locator('.card-modal-overlay .flip-button');
       if (await flipButton.isVisible()) {
@@ -315,9 +320,13 @@ test.describe('Library Modal - Card Type Grouping', () => {
         const totalInGroup = positionMatch ? parseInt(positionMatch[2]) : 0;
         expect(totalInGroup).toBe(targetGroupSize);
 
-        // Flip the card
+        // Flip the card.
+        // NOTE: unlike the clicks above, this one is not retried, because the
+        // assertion that follows cannot tell whether it landed — the position
+        // indicator reads the same before and after a flip, which is precisely
+        // what the test is asserting. A swallowed flip would still pass. That
+        // gap predates this change; see .scratch/verify-suite-speed/issues/02.
         await flipButton.click();
-        await page.waitForTimeout(500);
 
         // After flip, position indicator should still show group-scoped count
         await expect(positionIndicator).toHaveText(`Card ${currentPosition} of ${totalInGroup}`);
@@ -326,20 +335,29 @@ test.describe('Library Modal - Card Type Grouping', () => {
         if (currentPosition < totalInGroup) {
           const nextButton = page.locator('.card-modal-nav-next');
           await expect(nextButton).toBeVisible();
-          await nextButton.click({ force: true });
-          await page.waitForTimeout(500);
-
-          // Position should advance within the group
-          await expect(positionIndicator).toHaveText(`Card ${currentPosition + 1} of ${totalInGroup}`);
+          // Same swap/settle straddle as opening the modal, and `force: true`
+          // turns off the actionability wait that would absorb it. Retry until
+          // the position indicator advances within the group.
+          await expect(async () => {
+            await nextButton.click({ force: true });
+            await expect(positionIndicator).toHaveText(
+              `Card ${currentPosition + 1} of ${totalInGroup}`,
+              { timeout: 3000 }
+            );
+          }).toPass({ timeout: 20000 });
         }
 
         break;
       }
 
-      // Close the modal and try the next card
+      // Close the modal and try the next card. Retried for the same reason:
+      // a swallowed close leaves the modal up and the next iteration clicks
+      // into the wrong thing.
       const closeButton = page.locator('.card-modal-close');
-      await closeButton.click();
-      await page.waitForTimeout(300);
+      await expect(async () => {
+        await closeButton.click();
+        await expect(cardModal).toBeHidden({ timeout: 3000 });
+      }).toPass({ timeout: 20000 });
     }
 
     expect(foundFlipCard).toBe(true);

@@ -18,7 +18,6 @@ function extractPrepId(url: string): string | null {
 
 async function setupPrep(page: Page): Promise<string> {
   await page.goto(`${BASE_URL}/choose-any-deck`);
-  await page.waitForLoadState('networkidle');
 
   const firstTile = page.locator('.precon-tile').first();
   await expect(firstTile).toBeVisible({ timeout: 15000 });
@@ -35,7 +34,6 @@ async function setupPrep(page: Page): Promise<string> {
   }, deckFile!);
 
   await page.waitForURL('**/prepare/*', { timeout: 60000 });
-  await page.waitForLoadState('networkidle');
 
   const prepId = extractPrepId(page.url());
   if (!prepId) throw new Error('Failed to create prep');
@@ -47,7 +45,6 @@ test.describe('Prepare screen - clicking the library opens search modal', () => 
     const prepId = await setupPrep(page);
 
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
-    await page.waitForLoadState('networkidle');
 
     // Modal not open yet
     await expect(page.locator('.modal-overlay')).toHaveCount(0);

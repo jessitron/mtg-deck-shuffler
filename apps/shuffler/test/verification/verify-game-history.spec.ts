@@ -16,7 +16,6 @@ test.describe('Game History Feature', () => {
     console.log('Testing: History page accessible via direct URL...');
 
     await page.goto(`${BASE_URL}/history`);
-    await page.waitForLoadState('networkidle');
 
     // Verify page loads
     const historyContent = page.locator('.docs-content, .history-content').first();

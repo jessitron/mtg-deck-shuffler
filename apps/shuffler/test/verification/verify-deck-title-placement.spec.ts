@@ -22,7 +22,6 @@ test.describe('Deck title placement', () => {
   test('the deck title sits on the playmat, not in the command zone', async ({ page }) => {
     // --- Get to /prepare with a real deck ---
     await page.goto(`${BASE_URL}/choose-any-deck`);
-    await page.waitForLoadState('networkidle');
 
     const preconTiles = page.locator('.precon-tile');
     await expect(preconTiles.first()).toBeVisible({ timeout: 15000 });

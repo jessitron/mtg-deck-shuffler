@@ -445,3 +445,12 @@ section is just a wall between Jess and the live work.
     `src/view/play-game/game-modals.ts`, `src/view/play-game/history-components.ts`. All four are
     HTMX-swapped fragments, so whatever moves focus has to run on swap (`htmx:afterSwap`), not on
     page load — and closing is also an HTMX swap, so focus restore hooks the same place.
+
+- **`{ force: true }` on the card-modal nav clicks — is it still needed?** Nine sites across
+  `verify-library-grouping.spec.ts` and `verify-query-parameter-modals.spec.ts`. It was added
+  "in case of viewport issues with modal positioning", and it *disables* Playwright's
+  actionability/stability wait — which is precisely why a click can straddle an htmx swap and be
+  swallowed (`owners/animations/interactions.md:27`). Ticket 02 worked around the symptom with
+  `expect(...).toPass()` rather than changing two things at once. If the viewport issue is gone,
+  dropping `force: true` would let Playwright absorb the straddle for free and the retries could
+  come back out.
