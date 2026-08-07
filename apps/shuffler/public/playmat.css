@@ -1,6 +1,14 @@
 /* Shared styles for playmat components (library stack, command zone) */
 /* Used by both game.css and prepare.css */
 
+/* There is deliberately NO bare `.playmat` rule here yet. Both play pages put a
+ * playmat on the screen — /prepare and /game each mark theirs `class="playmat
+ * playmat-<page>"` — but they dress it differently today (20px radius, 10px
+ * outline, no shadow, local Cascading Cataracts art vs 80px radius, 5px border,
+ * a drop shadow, hotlinked Scryfall art), so each page sheet owns its own
+ * appearance under the modifier. This is the slot the shared appearance goes in
+ * the day those two treatments converge — put it here, not in a page sheet. */
+
 /* Mana colors for card type icons */
 :root {
   --mana-W: #f0e68c; /* Plains — warm gold */

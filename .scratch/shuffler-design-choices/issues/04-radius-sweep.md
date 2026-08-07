@@ -42,8 +42,8 @@ two collapsed button classes need it too.
 
 ## Untouched — physical objects
 
-`.mtg-card-image` 10, `.commander-placeholder` 10 (**both copies**), `.playmat` 20,
-`.page-container` 80, `.card-modal-image` 3vh, `.modal-card-image` 30px,
+`.mtg-card-image` 10, `.commander-placeholder` 10 (**both copies**), `.playmat-prepare` 20,
+`.playmat-game` 80, `.card-modal-image` 3vh, `.modal-card-image` 30px,
 `.library-card-back::before` 8, `.hand-count` 50%, `.card-modal-close` 50%.
 
 ## Corrections to `open-choices.md`'s list
@@ -64,7 +64,7 @@ values. Update the spec in the same commit.
 
 Then look at `/game` and `/prepare`: the menu panel, modal dialog, command-zone surround and
 drop zone should read hard square, while every button and the text inputs keep a soft 4px.
-Cards, playmat and page-container unchanged.
+Cards and both playmats unchanged.
 
 ## Then
 

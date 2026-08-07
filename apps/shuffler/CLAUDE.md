@@ -41,8 +41,10 @@ commit that adds a component.
 
 The short version:
 
-- **Square corners except on physical round elements** (cards, playmats, `.page-container`,
-  count discs)
+- **Square corners except on physical round elements** (cards, playmats, count discs).
+  Both play pages put a playmat on screen: `class="playmat playmat-prepare"` on `/prepare`,
+  `class="playmat playmat-game"` on `/game`. Same domain object, two dressings — the
+  `/game` one used to be called `.page-container`, which hid that fact
 - **Never write a raw hex.** Use a token from `public/styles.css` `:root`. Material and
   Bootstrap defaults already in the CSS are drift, not precedent — don't copy them
 - **Orbitron for chrome, Ovo for content** (card names are content). Risque only on site

@@ -331,10 +331,10 @@
             <tr><td><code>6px</code></td><td><code>.card-modal-position-indicator</code></td><td>no</td></tr>
             <tr><td><code>8px</code></td><td><code>.modal-action-button</code>, <code>.card-modal-nav-button</code>, library card-back inner rule</td><td>the inner rule, yes</td></tr>
             <tr><td><code>10px</code></td><td><code>.mtg-card-image</code>, <code>.modal-dialog</code>, <code>.commander-placeholder</code></td><td>cards yes, modal no</td></tr>
-            <tr><td><code>20px</code></td><td><code>.playmat</code>, <code>.hand-drop-zone.drag-over</code></td><td>playmat yes</td></tr>
+            <tr><td><code>20px</code></td><td><code>.playmat-prepare</code>, <code>.hand-drop-zone.drag-over</code></td><td>playmat yes</td></tr>
             <tr><td><code>30px</code> / <code>3vh</code></td><td><code>.modal-card-image</code>, <code>.card-modal-image</code></td><td>yes — a big card</td></tr>
             <tr><td><code>50%</code></td><td><code>.hand-count</code>, <code>.card-modal-close</code></td><td>arguably — they're tokens/discs</td></tr>
-            <tr><td><code>80px</code></td><td><code>.page-container</code></td><td>yes — it's a giant Magic card</td></tr>
+            <tr><td><code>80px</code></td><td><code>.playmat-game</code></td><td>yes — it's a giant Magic card</td></tr>
           </tbody>
         </table>
 
@@ -548,7 +548,7 @@
           <thead><tr><th>Ground</th><th>Where</th><th>Ring contrast</th><th>vs 3:1</th></tr></thead>
           <tbody>
             <tr><td>Dark purple gradient</td><td><code>site.css</code> — <code>/</code>, <code>/choose-any-deck</code></td><td>~10.9:1</td><td>passes comfortably</td></tr>
-            <tr><td>Playmat / page-container art</td><td><code>playmat.css</code>, <code>game.css</code></td><td>varies with the art</td><td>unmeasured — pale passages are the risk</td></tr>
+            <tr><td>Playmat art (both play pages)</td><td><code>prepare.css</code>, <code>game.css</code></td><td>varies with the art</td><td>unmeasured — pale passages are the risk</td></tr>
             <tr><td><strong>Flat white</strong></td><td><code>.modal-dialog</code>, <code>docs.css</code>, <code>.button-base:disabled</code></td><td><strong>~1.35:1</strong></td><td><strong>fails</strong></td></tr>
           </tbody>
         </table>
@@ -806,7 +806,7 @@
         </p>
         <ul class="rule-list">
           <li><strong>Never write a raw hex.</strong> Use a named token. If no token fits, that's a design decision — ask, don't invent. Material and Bootstrap defaults are especially forbidden: they're how the drift got here.</li>
-          <li><strong>Square corners on chrome.</strong> Round corners belong only to physical objects: cards, the playmat, the page-container, count discs.</li>
+          <li><strong>Square corners on chrome.</strong> Round corners belong only to physical objects: cards, the playmat, count discs.</li>
           <li><strong>Orbitron for chrome, Ovo for content.</strong> Card names are content. No fourth typeface.</li>
           <li><strong>Every interactive element gets a visible focus state</strong> — and it's already written for you: one global <code>:focus-visible</code> rule in <code>styles.css</code> draws <code>3px solid var(--light-pink)</code> at <code>outline-offset: 3px</code> on every <code>a</code>, <code>button</code>, <code>input</code>, <code>select</code>, <code>textarea</code>, <code>summary</code> and <code>[tabindex]</code>. Don't add a per-component focus rule, and never write <code>outline: none</code>. <strong>Known gap:</strong> the ring is only ~1.35:1 on flat-white surfaces, below WCAG's 3:1 — recorded and waiting on a decision, so don't "fix" it locally. See <a href="#focus">Focus states</a>.</li>
           <li><strong>The card is 200px wide.</strong> Size adjacent layout off that, not off arbitrary values.</li>

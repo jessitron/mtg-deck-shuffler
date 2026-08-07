@@ -13,7 +13,11 @@
   padding: 40px 20px;
 }
 
-.playmat {
+/* The playmat, as the prepare page dresses it. Same domain object as the game
+ * page's mat (both elements carry the bare `playmat` class); the two treatments
+ * differ today, so appearance lives behind a page modifier. The grid, however,
+ * IS the mat — placement rules below stay keyed on the bare `.playmat`. */
+.playmat-prepare {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   /* Row 1 is the deck title's band. minmax, not a fixed 50px: a long deck name
@@ -57,7 +61,9 @@
 }
 
 /* Deck title plaque — banner across the top of the mat. Appearance is in
- * playmat.css; this is placement only. */
+ * playmat.css; this is placement only.
+ * Keyed on the bare `.playmat` deliberately: placement is relative to the mat as
+ * a domain object (the grid parent), not to the prepare page's dressing of it. */
 .playmat > .game-title {
   grid-column: 1 / -1;
   grid-row: 1;

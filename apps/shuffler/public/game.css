@@ -7,8 +7,12 @@
 body {
   font-family: "Ovo", serif;
 }
-/* Page container for game pages. Centered in the viewport up to its max-width. */
-.page-container {
+/* The playmat, as the game page dresses it: a giant Magic card, centered in the
+ * viewport up to its max-width. Same domain object as /prepare's mat (both
+ * elements carry the bare `playmat` class); the two treatments differ today, so
+ * the appearance lives behind a page modifier. See playmat.css for the slot the
+ * shared appearance would go in if they ever converge. */
+.playmat-game {
   width: 100%;
   max-width: 1800px;
   margin: 0 auto;
@@ -22,7 +26,7 @@ body {
   padding-bottom: 20px;
 }
 
-.page-container>* {
+.playmat-game>* {
   margin-left: 2rem;
   margin-right: 2rem;
 }

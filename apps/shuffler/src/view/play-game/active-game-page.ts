@@ -9,7 +9,7 @@ import { formatGameMenuHtmlFragment } from "./game-menu.js";
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}, devMode: boolean = false): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
   const contentWithModal = `
-    <div class="page-container">
+    <div class="playmat playmat-game">
       ${gameContent}
       <div id="modal-container"></div>
       <div id="card-modal-container"></div>

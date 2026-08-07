@@ -125,7 +125,7 @@ export function cardBackImageUrl(): string {
 /**
  * The one hard-coded playmat (DESIGN.md — playmat selection in prep is
  * deferred), as an absolute URL. Same image already used as the prepare
- * screen's playmat background (public/prepare.css `.playmat`).
+ * screen's playmat background (public/prepare.css `.playmat-prepare`).
  */
 export function defaultPlaymatImageUrl(): string {
   return `${shufflerPublicUrl()}/images/aeoe-43-cascading-cataracts.png`;
