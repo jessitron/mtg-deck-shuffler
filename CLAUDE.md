@@ -87,11 +87,6 @@ This is a polyglot monorepo (npm workspaces — the glob is `apps/*`, `services/
 (`check_aws_credentials`) and `deploy-marker.sh`, both used by all three `deploy.sh`,
 plus `check-fleet-tokens.sh` (a fast smoke check that the shared palette reaches both ships).
 
-**Adding a workspace under `packages/` has a container cost, in two places.** Every
-Dockerfile that runs `npm ci` must `COPY` the new package's `package.json` **before** the
-install — the glob makes it mandatory, and a miss fails the build outright. And npm links
-workspaces as **relative** symlinks, so any runtime stage that needs the package at run time
-must copy `packages/` too, or the link dangles and it 404s **in the container only**.
 The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and `./deploy.sh`):
 
 - `apps/shuffler/` — the Shuffler: Express + HTMX deck manager and game screen;
@@ -111,6 +106,15 @@ The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and
 
 **Convention: every Shuffler path in `notes/` is relative to `apps/shuffler/`.**
 So `src/app.ts` means `apps/shuffler/src/app.ts`.
+
+**Adding a workspace under `packages/` has a container cost, in two places** — both of which
+fail only inside the image, never in dev. Every Dockerfile that runs `npm ci` must `COPY` the
+new package's `package.json` **before** the install; the workspaces glob makes it mandatory,
+and a miss fails the build outright. And npm links workspaces as **relative** symlinks, so any
+runtime stage needing the package at run time must copy `packages/` too, or the link dangles
+and it 404s in prod only. Note that `verify-container-boot.sh` does **not** catch the second
+one: `import.meta.resolve` doesn't check that the file exists, so the server boots happily and
+only the route is broken. Curl the running image.
 
 ## Run the whole fleet locally
 
@@ -181,6 +185,22 @@ trigger; scan it when planning any change. Owners never close. Create new ones w
   recommendation, and the contradiction only surfaces at `-review`, after she's committed.
 - **On the plan** — `-review` before implementing (step 5 below).
 - **After the change** — `-update` with what actually landed (step 9 below).
+
+**Match the consult to the question, not to the file list.** Scanning `INDEX.md` tells you
+whose territory a change *touches*; it doesn't tell you who can *answer* you. Ask what you
+actually need to know, then consult the owner who knows it — usually one, sometimes none.
+Consulting all five because the diff brushes all five is noise, and it trains you to skim
+the answers.
+
+**Test-only changes are not exempt, but they're narrow.** Deleting a wait from a test is a
+claim about app behaviour — that nothing needs that time. That claim needs the owner of the
+*timing*, not the owner of every feature the spec happens to exercise. Worked example
+(2026-08-07, ticket `verify-suite-speed/02`): sweeping sleeps out of the Playwright suite,
+`animations-context` was decisive — it supplied the htmx swap/settle mechanism, the fact that
+`{ force: true }` disables the actionability wait that would otherwise absorb it, and the
+repo's existing `expect(...).toPass()` convention. `two-faced-cards` and `library-search` own
+the features those specs cover and would have added nothing to that question. One consult, not
+three. Conversely, a test change that only renames or reorganises needs no owner at all.
 
 **Be precise about what's being approved.** "Move this element" is a *placement* decision.
 Restyling it on the way is a *second* decision needing its own explicit sign-off — never let
