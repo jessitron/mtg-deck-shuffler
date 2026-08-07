@@ -13,6 +13,18 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- **`playmat-two-visual-metaphors`** — a future design open-choice. Now that both play pages
+  say "playmat" in the markup (`.playmat playmat-prepare` / `.playmat playmat-game`), the app
+  asserts one domain object wearing two looks, and the old "the game one is a giant Magic card,
+  a different thing" justification is gone. `.playmat-prepare` (`prepare.css`): 20px radius,
+  `outline: 10px solid black`, no shadow, local `/images/aeoe-43-cascading-cataracts.png`.
+  `.playmat-game` (`game.css`): 80px radius, `border: 5px solid black`,
+  `box-shadow: 5px 5px black`, hotlinked Scryfall PNG `33ea0047…`. Decide: intentional
+  per-page treatment, or drift to converge? If they converge, the shared appearance goes in
+  `playmat.css` as a bare `.playmat` rule — the slot is reserved and commented. Sub-question:
+  the game mat hotlinks Scryfall while prepare uses a local asset; `notes/FEATURE-playmat.md`
+  wants playmat selection to become a prep setting anyway.
+
 - **The Tabletop-replaces-Mural mountain is charted.** The parity list, the six maps it
   splits into, and their order: `notes/DESIGN-tabletop-replaces-mural.md`. Two maps exist
   so far — work them with `/wayfinder`, one ticket at a time, rather than picking lines
@@ -21,6 +33,32 @@ section is just a wall between Jess and the live work.
     here**; it blocks the other one.
   - `.scratch/tabletop-table-layout/map.md` — the square, the command zone, life totals.
     (Formerly `tabletop-card-physics-starter`.)
+
+- [ ] `face-down-is-a-real-thing` Make Face-Down Card a real fleet concept, and decide if the Shuffler gets a "Play Face-Down" button
+  - Surfaced 2026-08-07 grilling `.scratch/tabletop-physics/issues/02-what-a-card-is.md`. Jess:
+    *"In our domain model, 'Face Down Card' will be a real thing, and it looks like a card back
+    (in the future: a card sleeve) **even if the card itself is two-faced**."*
+  - **The model, as decided:** two independent axes, not one. `face` = which *printed* side is up,
+    and only ranges over sides that exist (so it's unreachable on a one-faced card). Face-down =
+    concealment, showing the shared card back. They compose: a two-faced card **cannot be turned**
+    face down, but it **can be played** face down, and then it shows the card back regardless.
+  - **The two ships differ on purpose:** in the Deck Shuffler a one-faced card cannot be flipped;
+    on the Tabletop *any* card can be turned over, and a turned-over one-faced card **is** face-down
+    — a real domain event, not just a picture. Already recorded in the `two-faced-cards` owner KB
+    (commit `0337e00`) with a "flip" translation table; it wants to move to `CONTEXT-MAP.md`, which
+    doesn't exist yet even though the root `CLAUDE.md` references it.
+  - Glossary work: `notes/GLOSSARY.md` has no face-down entry, and **nothing in the fleet models it
+    at all** — no field on `CardDefinition`/`GameCard`, nothing in `contracts/`.
+  - ⚠️ **Scope contradiction, Jess's call.** She said "Play Face-Down" *"needs to happen for full
+    Mural replacement"* — but `notes/DESIGN-tabletop-replaces-mural.md:127` already lists
+    *"Playing a card from the library face-down onto the table"* under **Out of scope**, reasoning
+    "Mural doesn't do it either, so it isn't parity. Real Magic wants it; a later mountain can have
+    it." One of those has to give: either edit that line and take it into the parity list, or keep
+    it parked and treat the Shuffler button as post-parity. Don't build it until that's settled.
+  - Related: `.scratch/tabletop-table-layout/issues/09-sleeve-and-playmat-picker.md` already notes
+    "a sleeve image is what a face-down card needs anyway" — the sleeve picker and this share an asset.
+  - **Not** the Tabletop shape design for face-down; that's inside the physics map (tickets 02/06).
+  ← mountain: tabletop-replaces-mural
 
 - [ ] `deck-title-placement` On the game screen, move the deck title out of the command zone
   - > Put it above the table button(s), top-aligned with the hamburger menu.
