@@ -94,8 +94,15 @@ test.describe('Prepare screen - flipping a two-faced commander', () => {
     await page.locator('.modal-action-button.flip-button').click();
     await expect(page.locator('.modal-card-image')).toHaveAttribute('src', /\/back\//, { timeout: 5000 });
 
-    await page.locator('.card-modal-close').click();
-    await expect(page.locator('.card-modal-overlay')).toHaveCount(0);
+    // Retry the close: a click landing during the flip's htmx swap/settle gets
+    // swallowed, which made this flaky in a full-suite run (same pattern as
+    // verify-discard).
+    const modal = page.locator('.card-modal-overlay');
+    await expect(async () => {
+      if ((await modal.count()) === 0) return;
+      await page.locator('.card-modal-close').click({ timeout: 2000 });
+      await expect(modal).toHaveCount(0, { timeout: 3000 });
+    }).toPass({ timeout: 20000 });
 
     // The card on the page is untouched
     await expect(page.locator('#card-0-outer-flip-container')).not.toHaveClass(/card-flipped/);
