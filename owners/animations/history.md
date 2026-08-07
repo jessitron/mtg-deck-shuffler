@@ -52,14 +52,15 @@
 > **Removed in the Trainer chat rip-out** (the whole window is being re-implemented
 > from scratch). The `.advisor-chat` drawer, its width/`flex-basis` transition, the
 > `body.advisor-chat-open` state, the `.game-layout` flex row, and `public/trainer-chat.js`
-> are all gone. The game page now renders `.page-container` directly (no flex sibling).
+> are all gone. The game page now renders the playmat directly (no flex sibling) — the
+> element then called `.page-container`, since `7487393` `class="playmat playmat-game"`.
 > The surviving body-anchored swap-surviving examples are `body.game-menu-open` and
 > `body.dev-mode`. The two sub-sections below are kept as historical record.
 
 (Formerly "Mulligan Advisor chat drawer" — the chat agent was the **Trainer**; the Advisor was the deterministic recommender function. Both are gone as of 2026-07-26, and the vocabulary has been dropped from the glossary — it belongs to the future recommendation service's bounded context, not this app's.)
 
 - **`d0fa14d`** - A right-side chat drawer (`.advisor-chat`) for the Trainer, opening with a **0.25s CSS transition (dev mode)**.
-- **Layout (final shape):** the drawer is a **real flex sibling** of the playmat inside a `.game-layout` flex row (`formatGamePageHtmlPage`). Opening animates the drawer's **width / `flex-basis` from 0 to 380px**; the playmat (`.page-container`, `flex: 0 1 auto`, `min-width: 0`) shrinks to make room and stays centered via `margin: 0 auto`. An inner `.advisor-chat-inner` holds a fixed 380px width so the content doesn't reflow while the outer width animates. (An earlier cut used a `position: fixed` `translateX(100%)` off-canvas overlay with a `margin-right` push on `#game-container` and `body.dev-mode { overflow-x: hidden }` to suppress the resulting horizontal scrollbar — all replaced by the flex-sibling approach, which needs no overflow hack.)
+- **Layout (final shape):** the drawer is a **real flex sibling** of the playmat inside a `.game-layout` flex row (`formatGamePageHtmlPage`). Opening animates the drawer's **width / `flex-basis` from 0 to 380px**; the playmat (then `.page-container`, today `.playmat-game`; `flex: 0 1 auto`, `min-width: 0`) shrinks to make room and stays centered via `margin: 0 auto`. An inner `.advisor-chat-inner` holds a fixed 380px width so the content doesn't reflow while the outer width animates. (An earlier cut used a `position: fixed` `translateX(100%)` off-canvas overlay with a `margin-right` push on `#game-container` and `body.dev-mode { overflow-x: hidden }` to suppress the resulting horizontal scrollbar — all replaced by the flex-sibling approach, which needs no overflow hack.)
 - **Third instance of the body-anchored swap-surviving pattern**: open state is `body.advisor-chat-open` (joins `body.game-menu-open` and `body.dev-mode`). The drawer is rendered once **outside `#game-container`** (but inside `.game-layout`), so its content + open state both survive game-state swaps with **zero `afterSwap` JS** — visibility/width are pure CSS off the body class.
 
 ### Trainer chat: backend conversation state + auto-open + End Chat (dev mode)
@@ -137,6 +138,25 @@
   keeps the library stack aligned with the commander card.
 - Checked and settled: the dropdown panel still anchors flush right under the toggle even
   though `#game-menu` shrink-wraps as a flex item, and the row's `gap` does not offset it.
+
+### 2026-08-07: `.page-container` renamed to `.playmat-game` (`7487393`)
+
+- The /game screen's big surface — the animation stage that holds the library stack, command
+  zone and hand — is now `<div class="playmat playmat-game">` (`formatGamePageHtmlPage` in
+  `src/view/play-game/active-game-page.ts`). `game.css`'s `.page-container` /
+  `.page-container>*` became `.playmat-game` / `.playmat-game>*` with **no declarations
+  changed**. Symmetrically, /prepare's mat is `class="playmat playmat-prepare"` and
+  `prepare.css`'s appearance rule is `.playmat-prepare` (its three descendant *placement*
+  rules stay keyed on the bare `.playmat`). `.page-container` no longer exists anywhere.
+- **Zero animation interaction, verified**: no keyframes, no `.card-moved-*` /
+  `.dropped-from-*` / flip classes, no HTMX swap targets (`#game-container`, the OOB
+  `#modal-container` / `#card-modal-container`), no `game.js`, no `WhatHappened` touched.
+  Same self-relative-transform reason as the deck-title move above: the mat is only an
+  ancestor box, and every card animation is an offset → `translateX(0)` in the element's
+  own box.
+- **Handle to use going forward**: the game page's mat carries **both** `playmat` and
+  `playmat-game`. Bare `.playmat` also matches /prepare's mat, so a rule meant for the game
+  stage alone must use `.playmat-game`.
 
 ## Design Decisions
 
