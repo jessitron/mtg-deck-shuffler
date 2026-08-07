@@ -92,8 +92,8 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 | `test/port-deck-retrieval/mtgjson-deck-adapter.test.ts` | Two-faced card extraction tests |
 | `test/port-card-repository/InMemoryCardRepositoryAdapter.test.ts` | Persistence round-trip tests |
 | `test/port-card-repository/SqliteCardRepositoryAdapter.test.ts` | Persistence round-trip tests |
-| `test/verification/verify-library-grouping.spec.ts` | E2E: flip preserves group-scoped navigation (game + prep) |
-| `test/verification/verify-prep-commander-flip.spec.ts` | E2E: inline flip of a two-faced commander on the prepare screen (JES-90 regression guard) |
+| `test/verification/verify-library-grouping.spec.ts` | E2E: flip preserves group-scoped navigation (game + prep). **Both flip loops cannot detect a flip that didn't happen** — they assert the position indicator is unchanged, which is what a swallowed click also produces. See interactions.md watch point 16 |
+| `test/verification/verify-prep-commander-flip.spec.ts` | E2E: inline flip of a two-faced commander on the prepare screen (JES-90 regression guard). The good pattern: asserts `.card-flipped` plus the back-face image, so a swallowed click fails |
 | `test/scryfallHttp.test.ts` | `fetchScryfall` sends our User-Agent, not Node's default; preserves caller headers (fake fetch, no network) |
 | `test/verification/verify-proxy-image.sh` | Live-CDN check that `/proxy-image` returns real image bytes for **front and back** faces (Archangel Avacyn `485211cd…` is the two-faced case). A shell script, not jest, because it needs network — a unit test can prove we *send* a UA, not that Scryfall *accepts* it |
 | `test/port-tabletop/cardPlayedEvent.test.ts` | F0: payload sends the CURRENT face + face-specific image; never leaks gameCardIndex |

@@ -182,6 +182,38 @@ Two separate CSS files define flip styles:
 ### `public/playmat.css` (line 463)
 - `.modal-action-button.flip-button` — styles the flip button inside the card modal
 
+## How to Tell Which Face Is Showing (observables for tests)
+
+Face state is **weakly observable** in the DOM, and differently on each surface. There is no
+`data-face` attribute, no class on the modal, and no face-dependent text anywhere: `card.name`
+is the whole `"Front // Back"` string on a DFC, so the modal title and the `alt` text are
+identical on both faces. Recorded because a test that clicks Flip and asserts something
+face-independent cannot tell a flip from a swallowed click.
+
+**Inline (game and prep pages)** — the strong one:
+- `.flip-container-outer` gains the class **`.card-flipped`** when `currentFace === "back"`
+  (`formatFlippingContainer`, `shared-components.ts:104`). Assert on the class, not the
+  animation — the 0.8s transition is the animations owner's territory and `.card-flipped`
+  is applied server-side, present the instant the swap settles.
+- Both face images are always in the DOM (`.two-sided-front` / `.two-sided-back`), so image
+  presence proves nothing; only the class distinguishes.
+
+**Card modal (game and prep)** — no class, no attribute. Two indirect observables:
+- **`img.modal-card-image`'s `src`** — `getCardImageUrl(card, "large", currentFace)`, so it
+  differs between faces on both pages. With stored URLs the two faces are different Scryfall
+  files (`card_faces[0]` vs `[1]`); with the constructed fallback the path segment is
+  `/large/front/` vs `/large/back/`. Same URL also appears in the Copy button's `onclick`.
+  This is the only face observable available in the **game** modal.
+- **Prep only: the flip button's own `hx-get`** carries the *target* face —
+  `/prep-card-modal/:prepId/:i?face=<other>` (`app.ts:945-951`). Showing the front ⇒ the
+  button reads `?face=back`, and vice versa. Cheaper and more stable than comparing image
+  URLs. The **game** flip button is a `hx-post` to a toggling route, byte-identical on both
+  faces, so it is useless as an observable.
+- `currentFace` *is* passed into `card-modal.ejs` but the template never renders it. If a
+  face assertion is needed in the game modal often enough, emitting
+  `data-current-face="<%= currentFace %>"` on `.card-modal-overlay` would be the cheap fix —
+  not done, because nothing needs it yet.
+
 ## Type Merging for Library Search
 
 In both game and prep library modal routes (`src/app.ts`), when mapping cards for the library search template:
