@@ -43,8 +43,14 @@ The short version:
 
 - **Square corners except on physical round elements** (cards, playmats, count discs).
   Both play pages put a playmat on screen: `class="playmat playmat-prepare"` on `/prepare`,
-  `class="playmat playmat-game"` on `/game`. Same domain object, two dressings — the
-  `/game` one used to be called `.page-container`, which hid that fact
+  `class="playmat playmat-game"` on `/game`. Same domain object, **one appearance, two
+  scales** — the `/game` one used to be called `.page-container`, which hid that fact
+- **The playmat's shared looks live in the bare `.playmat` rule in `public/playmat.css`**
+  (art, `border: 10px solid black`). Page modifiers carry only layout and `border-radius`
+  (80px game / 20px prepare — radius is a matter of scale, Jess 2026-08-07). **Careful:**
+  the three selectors are equal specificity and the pages load their sheets in opposite
+  order, so a property added to the bare rule overrides `.playmat-game` but loses to
+  `.playmat-prepare`. Keep each property in one place, never both
 - **Never write a raw hex.** Use a token from `public/styles.css` `:root`. Material and
   Bootstrap defaults already in the CSS are drift, not precedent — don't copy them
 - **Orbitron for chrome, Ovo for content** (card names are content). Risque only on site

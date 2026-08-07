@@ -57,8 +57,8 @@ Concrete, in rough order of how often they bite.
   `#28a745`, `#6c757d`, `#007acc`. These are the drift; grepping the CSS will find them
   and they are not precedent.
 - New chrome gets **square corners** (`border-radius: 0`). Round corners are for cards,
-  the playmat (`.playmat-prepare` 20px, `.playmat-game` 80px — one object, two dressings),
-  and count discs only.
+  the playmat (`.playmat-prepare` 20px, `.playmat-game` 80px — one object at two scales;
+  settled 2026-08-07, not drift), and count discs only.
 - **Don't add a `groove`/`outset`/`inset` border.** As of choice 7 (2026-08-07) exactly one
   survives in the whole app — `playmat.css` → `.cool-command-zone-surround`, `5px outset
   black`. Borders are flat (`solid`); press feedback is `.pushable-flat`'s box-shadow bevel,
@@ -75,12 +75,20 @@ Concrete, in rough order of how often they bite.
   Two things that do need care:
   - If your new element is focusable but **not** one of those tags (a `div` with a click
     handler, say), give it a real tag or a `tabindex` so the global rule reaches it.
-  - **`outline` is globally spoken for.** Three rules still use it decoratively —
-    `site.css` → `.main-footer`, `prepare.css` → `.playmat-prepare` (its 10px black frame),
-    `game.css` →
-    `.hand-drop-zone.drag-over`. None is focusable today, so nothing conflicts; but a
-    decorative `outline` on anything focusable **will be clobbered on focus**. Use `border`
-    or `box-shadow` for decoration on anything a keyboard can reach.
+  - **`outline` is globally spoken for.** **Two** rules still use it decoratively —
+    `site.css` → `.main-footer` and `game.css` → `.hand-drop-zone.drag-over`. It was three
+    until `a4991f3` (2026-08-07) converged the playmat frame: `.playmat-prepare`'s
+    `outline: 10px solid black` became the shared `.playmat` rule's `border: 10px solid
+    black`. Neither survivor is focusable today, so nothing conflicts; but a decorative
+    `outline` on anything focusable **will be clobbered on focus**. Use `border` or
+    `box-shadow` for decoration on anything a keyboard can reach.
+    - **The outline→border swap is not free** (learned the hard way, `a4991f3`): `outline`
+      paints *outside* the border box and consumes no space, so swapping it for a `border`
+      shrinks the visible element by twice the width in each dimension, and any
+      `min-height` starts including the frame. On `/prepare` the mat lost 20px each way and
+      the top inset went 40px → 50px, dropping the title plaque 10px. `box-sizing:
+      border-box` does **not** save you here — it governs `border` vs `padding`, not
+      `outline`. Budget for the geometry change; don't claim the footprint is unchanged.
   - If the ring looks wrong on a pale surface, that's a **known open risk**, not a bug to
     patch locally — `--light-pink` on white is ~1.35:1, and the fix is a decision for Jess
     (it collides with the press bevel). See [open-choices.md](open-choices.md) choice 5.
@@ -97,17 +105,46 @@ Concrete, in rough order of how often they bite.
   .game-title`, `game.css` → `.game-header-row`) need attention, plus
   `verify-deck-title-placement.spec.ts`.
 
-**Styling either play page's mat** (learned 2026-08-07, `7487393`)
+**Styling either play page's mat** (learned 2026-08-07, `7487393` then `a4991f3`)
 
-- **`.playmat` alone is not a rule you can write today.** Appearance lives under the page
-  modifier — `prepare.css` → `.playmat-prepare`, `game.css` → `.playmat-game`. A bare
-  `.playmat` rule in a *page* sheet would leak across `/design`, which co-loads both sheets.
-  `playmat.css` holds a commented, empty slot for the bare rule against the day the two
-  treatments converge; that's the only sanctioned home for it.
+- **The shared appearance is the bare `.playmat` rule in `playmat.css`** — art,
+  `background-size`/`-position`, `border: 10px solid black`. Put shared looks there. A bare
+  `.playmat` rule in a *page* sheet would leak across `/design`, which co-loads both sheets;
+  `playmat.css` is the only sanctioned home for it.
+- **Load order is a trap here, and two owners have now hit it.** `.playmat`,
+  `.playmat-game` and `.playmat-prepare` are equal specificity (one class each), and the
+  pages load their sheets in opposite order: `/game` is `game.css` → `playmat.css`,
+  `/prepare` is `playmat.css` → `prepare.css`. **A property added to the bare `.playmat`
+  rule silently overrides `.playmat-game` on `/game` but loses to `.playmat-prepare` on
+  `/prepare`** — same declaration, opposite outcome per page, no error either way. Keep
+  each property in the shared rule *or* in a modifier, never both. The `CAREFUL` comment
+  above the rule in `playmat.css` says this; keep it there. (Adding a `!important` or a
+  second class to break the tie would just move the trap.)
+- **What legitimately stays per-page:** `border-radius` (80px game / 20px prepare — scale,
+  Jess 2026-08-07), each page's layout, and `.playmat-game`'s `box-shadow: 5px 5px black`.
+  That shadow is the only difference with no stated reason; it's buoyed as
+  `playmat-drop-shadow`, blocked on `design-playmat-specimen`. **Don't converge it as
+  tidying** — it's a survivor of the "giant Magic card" reading and Jess hasn't ruled.
 - **Placement keys off the bare `.playmat`, deliberately.** `prepare.css` →
   `.playmat > .game-title`, `.playmat .cool-command-zone-surround`,
   `.playmat .commander-placeholder`. Don't "tidy" these to `.playmat-prepare` — the mat as a
   domain object is the grid parent, and that's what these are relative to.
+- **The mat art is one asset named in two places**, down from three: `playmat.css` → the
+  bare `.playmat` rule, and `design-gallery.css` → `.stage-playmat` (which hand-copies the
+  URL because the gallery renders a *lookalike*, not the real mat — see
+  `design-playmat-specimen` in `TODO.md`). `site.css` uses the same file for its own
+  purposes and is unrelated. Changing the art means editing both playmat sites, or fixing
+  the gallery first. **No hotlink to `cards.scryfall.io` remains for the mat** — the game
+  mat used one until `a4991f3`; don't reintroduce a third-party image host for chrome.
+- **The mat art at scale is fine and was checked.** The asset is 1040×745, drawn at up to
+  1800px on `/game`; it's painterly and abstract, which upscales forgivingly, and it was
+  *already* being upscaled ~2.4× through the old Scryfall card. Verified at a 1900px
+  viewport 2026-08-07. Don't re-derive this, and don't buoy a higher-res asset without a
+  new reason.
+- **Animations does not reach the mat** (checked 2026-08-07): no animation selector matches
+  `.playmat*`, the mat sets no `overflow` so shuffle keyframes still spill past its edge,
+  and `#revealed-cards-section { background-color: inherit }` inherits a computed *color*,
+  not the art. Still consult the animations owner for `game.css` generally.
 - **`.page-container` no longer exists.** If a doc, comment or plan names it, it's stale;
   it's `.playmat-game`. (`.error-page-container` in `src/view/common/html-layout.ts` is an
   unrelated class and was not touched.)

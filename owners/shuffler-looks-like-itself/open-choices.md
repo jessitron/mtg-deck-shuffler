@@ -151,8 +151,10 @@ button` 4px, `.cool-command-zone-surround` 2px, `.cool-command-zone-surround .mu
 
 **Keep round regardless** (these are physical objects): `.mtg-card-image` 10px,
 `.commander-placeholder` 10px, `.playmat-prepare` 20px, `.playmat-game` 80px
-*(both are the playmat — renamed 2026-08-07, `7487393`; they were `.playmat` and
-`.page-container`)*,
+*(both are the playmat — renamed 2026-08-07 `7487393`; they were `.playmat` and
+`.page-container`. The two radii are **settled**, not drift: `a4991f3` converged everything
+else the mats differed on and Jess ruled radius is per-page because it is a matter of scale.
+Whatever this choice picks for chrome, leave these two alone.)*,
 `.card-modal-image` 3vh, `.modal-card-image` 30px, `.library-card-back::before` 8px,
 `.hand-count` 50%, `.card-modal-close` 50%.
 

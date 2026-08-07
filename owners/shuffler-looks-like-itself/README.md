@@ -133,32 +133,46 @@ purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages
 (`/prepare`, `/game`) put a **playmat** on screen — a big art-backed surface everything
 else sits on. Don't mix them.
 
-**The playmat is one object, dressed two ways (named 2026-08-07, `7487393`).** Both play
-pages carry the bare class `playmat` plus a page modifier: `/prepare` is
-`class="playmat playmat-prepare"` (`prepare.css` → `.playmat-prepare`), `/game` is
-`class="playmat playmat-game"` (`game.css` → `.playmat-game`). The game one was called
-`.page-container` until this KB's own text was leading readers to conclude the game screen
-had no playmat — if you meet that name anywhere, it's stale. Two things follow:
+**The playmat is one object, one appearance, two scales (named 2026-08-07 `7487393`,
+converged 2026-08-07 `a4991f3`).** Both play pages carry the bare class `playmat` plus a
+page modifier: `/prepare` is `class="playmat playmat-prepare"` (`prepare.css` →
+`.playmat-prepare`), `/game` is `class="playmat playmat-game"` (`game.css` →
+`.playmat-game`). The game one was called `.page-container` until this KB's own text was
+leading readers to conclude the game screen had no playmat — if you meet that name
+anywhere, it's stale. Three things follow:
 
-- **`playmat.css` holds the reserved, deliberately empty slot for a bare `.playmat`
-  appearance rule** (there's a comment there saying why it's empty). The day the two
-  treatments converge, the shared looks go *there*, not in a page sheet. It is not a
-  straight rename to `.playmat` today because `/design` co-loads `game.css` and
-  `prepare.css`, so two bare `.playmat` rules would make it structurally impossible for
-  the gallery to show both mats truthfully — load order would silently pick a winner.
+- **The shared appearance lives in the bare `.playmat` rule in `playmat.css`** — art
+  (`/images/aeoe-43-cascading-cataracts.png`), `background-size: cover`,
+  `background-position: center`, `border: 10px solid black`. The reserved empty slot the
+  rename left is now filled. New shared playmat looks go *there*, never in a page sheet.
+- **Only genuinely per-page things stay under the modifier.** `border-radius` is the
+  sanctioned one: 80px on `/game`, 20px on `/prepare`, because **radius is a matter of
+  scale** and `/prepare` draws the mat smaller (Jess, 2026-08-07). `.playmat-game` also
+  keeps its layout (`width`, `max-width: 1800px`, centering, `padding-bottom`) and its
+  `box-shadow: 5px 5px black`; `.playmat-prepare` keeps the grid, `margin`, `min-height`,
+  `padding`, `max-width`. The shadow is the **one remaining unexplained difference** —
+  buoyed as `playmat-drop-shadow` in the repo-root `TODO.md`, blocked on
+  `design-playmat-specimen`. It is a survivor of the "giant Magic card" reading: `/game`'s
+  art used to be a literal Magic card face (portrait, cover-cropped), so 80px + shadow +
+  card art read as one big card. The landscape art half-retired that.
 - **Placement rules stay keyed on the bare `.playmat`.** `prepare.css`'s three descendant
   rules (`.playmat > .game-title`, `.playmat .cool-command-zone-surround`,
   `.playmat .commander-placeholder`) place things relative to the mat *as a domain object*
-  — the grid parent — not relative to one page's dressing of it. Appearance goes under the
-  modifier; placement keys off the bare class.
+  — the grid parent — not relative to one page's dressing of it. Appearance goes in the
+  shared rule or under the modifier; placement keys off the bare class.
 
-**The two treatments still differ, and nothing now justifies that** — the "the game one is
-a giant Magic card, a different thing" argument died with the rename. Captured as a buoy in
-the repo-root `TODO.md` (`playmat-two-visual-metaphors`), not yet promoted to an open
-choice; no `.choice` block exists on `/design` for it. Values today: `.playmat-prepare` 20px
-radius / `outline: 10px solid black` / no shadow / local Cascading Cataracts art;
-`.playmat-game` 80px radius / `border: 5px solid black` / `box-shadow: 5px 5px black` /
-hotlinked Scryfall art.
+**Load-order hazard on the mat — flagged by two owners.** `.playmat`, `.playmat-game` and
+`.playmat-prepare` are all one class of specificity, and the two pages load their sheets in
+*opposite* order (`/game`: `game.css` then `playmat.css`; `/prepare`: `playmat.css` then
+`prepare.css`). So a property added to the bare rule silently **overrides** `.playmat-game`
+on `/game` but **loses** to `.playmat-prepare` on `/prepare`. Keep each property in the
+shared rule or in a modifier — never both. There's a `CAREFUL` comment on the rule saying so.
+
+**`black` as a keyword is the play pages' frame color.** The mats' `10px solid black`,
+`.game-title`'s `3px solid black`, and `.cool-command-zone-surround`'s `5px outset black`
+all use the CSS keyword; no black token exists in `styles.css` `:root`. That's a real, if
+untokenised, part of the language — don't substitute `--deep-space` for it, and don't
+introduce a near-black hex.
 
 **Appearance in the shared sheet, placement in the page sheet (established 2026-08-07 by
 the deck-title plaque).** A component that appears on both play pages declares its *looks*

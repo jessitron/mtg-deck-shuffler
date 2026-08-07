@@ -407,3 +407,73 @@ promoted to an open choice; it sits as `playmat-two-visual-metaphors` in the rep
 and "don't add a third." There are **four** — `styles.css`, `docs.css`, `game.css`
 (`--playmat-*`) and `playmat.css` (`--mana-*`). The rule was right, the count was two years
 of drift out of date.
+
+## 2026-08-07 — the playmat converged: one appearance, two scales
+
+`a4991f3` **Harden the playmat: one appearance, two scales**
+
+The sequel to `7487393`, which gave both play screens the domain word but deliberately left
+the two mats dressed differently behind page modifiers and dropped a buoy
+(`playmat-two-visual-metaphors`) asking whether they should converge. Jess answered:
+*"The playmat is a concept we haven't hardened yet. The inconsistencies are historical
+reasons, they're not good."* She named exactly three convergences — local art rather than
+Scryfall's, both frames 10px, and **radius stays per-page because it is a matter of scale**,
+`/prepare` simply draws the mat smaller.
+
+So the reserved empty slot in `playmat.css` got filled: a bare `.playmat` rule carrying art,
+`background-size: cover`, `background-position: center`, `border: 10px solid black`.
+`.playmat-game` and `.playmat-prepare` kept only layout and their own radius, each now
+commented with Jess's ruling and its date so the two numbers don't read as drift to the next
+reader.
+
+**Radius stayed different on purpose, and that's now recorded where people look.** The
+`/design` radius table had been saying "Open question, not a settled distinction"; it now
+says settled, with the reason. The contrast table's "Playmat art" row went from naming two
+stylesheets to one.
+
+**The outline→border swap was not geometry-neutral, and the plan said it was.** The `-review`
+caught it. `outline` paints outside the border box and consumes no space, so swapping
+`.playmat-prepare`'s `outline: 10px solid black` for the shared `border` shrank the *visible*
+mat 20px in each dimension, and because `min-height: 500px` now includes the frame the top
+inset went 40px → 50px, dropping the title plaque 10px. `box-sizing: border-box` does not
+help — it governs `border` vs `padding`, never `outline`. The correction went into the commit
+message so the shift doesn't read as unexplained later, and into
+[interactions.md](interactions.md) so the next person doesn't make the same claim. It also
+took the app's decorative-`outline` sites from three to two.
+
+**A cascade tie that resolves in opposite directions per page.** `.playmat`, `.playmat-game`
+and `.playmat-prepare` are all one class of specificity, and `/game` loads `game.css` then
+`playmat.css` while `/prepare` loads `playmat.css` then `prepare.css`. A property added to
+the bare rule therefore *overrides* the game modifier and *loses* to the prepare modifier —
+same declaration, opposite outcome, silent either way. Written as a `CAREFUL` comment on the
+rule and recorded in [architecture.md](architecture.md). The animations owner found it
+independently in the same review round, which is why it's flagged twice rather than trusted
+to one comment.
+
+**What was deliberately not converged.** `.playmat-game`'s `box-shadow: 5px 5px black` is now
+the only difference between the mats with no stated reason. Jess named three changes and this
+wasn't one, so converging it would have been an appearance change riding along on an approved
+one — the scope-of-approval rule, same one that produced choice 7. It's buoyed as
+`playmat-drop-shadow`, explicitly `blocked-by: design-playmat-specimen`: the owner **declined
+to stage it as a `/design` `.choice`** because the gallery cannot render a real playmat yet,
+and staging a choice Jess can't look at defeats the point of staging. That's a new wrinkle on
+"stage it, don't argue it" — *staging presupposes the gallery can show the thing*.
+
+The shadow's argument both ways is worth keeping: `/game`'s art used to be a literal Magic
+card face (Scryfall `/png/front/…`, portrait, cover-cropped), so 80px radius + drop shadow +
+an actual card face read as **one giant Magic card**. Landscape art half-retires that reading.
+The shadow is either the last thread of a metaphor worth keeping or the leftover of a dead
+one — and it landed *decided to defer*, not silently swapped.
+
+**The bug that prompted this is NOT confirmed fixed.** Jess reported the game mat's art not
+loading. The Scryfall URL returned 200 and the art rendered fine in headless Chromium; the
+symptom was never reproduced. Hotlinking `cards.scryfall.io` is a *plausible* cause (an
+extension or Scryfall's own hotlink protection could block it) and dropping the third-party
+dependency is right regardless — but do not record this as a fix. The falsifying question was
+put to Jess: did `/prepare`'s mat art fail for her too? If it did, the hotlink was never the
+cause.
+
+**Also learned, and now in [README.md](README.md):** `black` as a bare CSS keyword is the play
+pages' frame color — the mats, `.game-title`, and `.cool-command-zone-surround` all use it,
+and no black token exists in `styles.css` `:root`. And the mat art URL is down to two sites
+from three (`playmat.css`, `design-gallery.css`); `design-playmat-specimen` would make it one.

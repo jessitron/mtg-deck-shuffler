@@ -36,9 +36,9 @@ Per-view `additionalStyles` today:
 | --- | --- | --- |
 | `styles.css` | **The `:root` tokens.** Global reset, body font, `.mtg-card-image`, error/debug helpers, `.hidden`, `.pushable-flat`, **the global `:focus-visible` ring** | every page |
 | `site.css` | Site pages: header, footer, hero, slogan, steps, `.button-base` family | every EJS page |
-| `playmat.css` | **Shared by game and prepare**: library stack, card/library buttons, command zone, **the deck-title plaque's *appearance* (`.game-title`)**, all modal styles, card-type icons, card modal, the `--mana-*` `:root`. **Also the reserved (empty, commented) slot for a bare `.playmat` appearance rule** | game (TS) + prepare (EJS) |
-| `game.css` | Game page only: `.playmat-game` (the game page's playmat — was `.page-container` until `7487393`), `.game-header-row`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks, the `--playmat-one`/`--playmat-two` `:root` | game (TS) |
-| `prepare.css` | Prepare page only: `.playmat-prepare` (the prepare page's playmat — appearance **and** the grid), the bare-`.playmat` placement rules, commander placeholder, join-table panel | prepare (EJS) |
+| `playmat.css` | **Shared by game and prepare**: **the bare `.playmat` rule — the mat's whole shared appearance (art, `background-size`/`-position`, `border: 10px solid black`), filled in by `a4991f3`**, library stack, card/library buttons, command zone, **the deck-title plaque's *appearance* (`.game-title`)**, all modal styles, card-type icons, card modal, the `--mana-*` `:root` | game (TS) + prepare (EJS) |
+| `game.css` | Game page only: `.playmat-game` (the mat *at game scale* — layout, 80px radius, `box-shadow`; was `.page-container` until `7487393`), `.game-header-row`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks, the `--playmat-one`/`--playmat-two` `:root` | game (TS) |
+| `prepare.css` | Prepare page only: `.playmat-prepare` (the mat *at prepare scale* — the grid, layout, 20px radius), the bare-`.playmat` placement rules, commander placeholder, join-table panel | prepare (EJS) |
 | `deck-selection.css` | `/choose-any-deck`: precon tiles, search + Archidekt inputs | choose-any-deck |
 | `docs.css` | `/docs`, `/about`, `/history`: sidebar + prose layout | those three |
 | `design-candidates.css` | **Proposals only.** Nothing in the app loads it | `/design` only |
@@ -80,9 +80,12 @@ write appearance rules that name an ancestor.
   `playmat.css` and `prepare.css` (the prepare copy adds `font-family: "Ovo"`).
 
 **`outline` is globally spoken for.** Since choice 5, `outline` is the focus channel app-wide
-(`styles.css`, grep `:focus-visible`). Three rules still use it **decoratively**: `site.css` →
-`.main-footer` (a `--dark-pink` rule), `prepare.css` → `.playmat-prepare` (its 10px black frame),
-and `game.css` → `.hand-drop-zone.drag-over` (`2px solid gray`). None of those three is
+(`styles.css`, grep `:focus-visible`). **Two** rules still use it **decoratively**: `site.css` →
+`.main-footer` (a `--dark-pink` rule) and `game.css` → `.hand-drop-zone.drag-over`
+(`2px solid gray`). It was three until `a4991f3` moved `.playmat-prepare`'s
+`outline: 10px solid black` into the shared `.playmat` rule as a `border` — which shrank the
+visible mat 20px in each dimension, because an outline paints outside the box and takes no
+space. Neither survivor is
 focusable today, so nothing conflicts — but a decorative `outline` on anything focusable will
 be clobbered the moment it takes focus. Use `border` or `box-shadow` for decoration on
 anything a keyboard can reach. Only one rule deliberately *tunes* the focus ring:
@@ -104,6 +107,21 @@ add a third" while three extras already existed). `grep -n ':root' public/*.css`
 component-local color sets rather than re-declarations, which is why they've never
 conflicted — but a *general* token in a page sheet only reaches the pages that load it,
 and that failure is silent.
+
+**The playmat's cascade tie, resolved in opposite directions per page** (added `a4991f3`).
+`.playmat` (`playmat.css`), `.playmat-game` (`game.css`) and `.playmat-prepare`
+(`prepare.css`) are all a single class — equal specificity — and the two pages load their
+sheets in opposite order:
+
+| Page | Load order | Who wins a shared property |
+| --- | --- | --- |
+| `/game` | `styles.css`, `game.css`, `playmat.css` | the bare `.playmat` rule |
+| `/prepare` | `styles.css`, `site.css`, `playmat.css`, `prepare.css` | `.playmat-prepare` |
+
+So the same declaration added to the bare rule takes effect on one page and is ignored on
+the other, silently. **Keep each property in the shared rule or in a modifier, never both.**
+There's a `CAREFUL` comment on the rule in `playmat.css`; the animations owner independently
+found this too, so it is flagged twice on purpose.
 
 **Cascade order on `/design`.** The gallery loads every app stylesheet at once, so
 conflicting `body` rules (`styles.css` and `game.css` say Ovo, `site.css` says Orbitron)
@@ -134,11 +152,20 @@ makes it impossible for the gallery to lie about the app.
 swatches, and `.stage-*` classes that reproduce each component's native background
 (playmat art, purple gradient, white modal interior, `#1e1e1e` menu panel).
 
+**Known exception to that rule — `.stage-playmat` is a lookalike, not the mat.** It
+hand-copies the art URL, `background-size: cover`, `background-position: center` and its own
+`3px solid black` border, so the gallery has been *describing* the playmat in its tables
+while *rendering* an imitation. This is the one place the gallery can currently lie about the
+app. It only became fixable with `a4991f3`, which created a bare `.playmat` rule worth
+inheriting; tracked as `design-playmat-specimen` in the repo-root `TODO.md`. It is gallery
+surgery, not a one-line swap — the stage needs a thinner frame at specimen scale.
+
 `test/verification/verify-design-gallery.spec.ts` protects the arrangement:
 
 1. every declared stylesheet actually returns 200,
-2. specimens pick up real app rules (card is 200×278, `.begin-button` border is `outset`,
-   playmat buttons are black),
+2. specimens pick up real app rules (card is 200×278, `.begin-button` border-style is
+   **`solid`** — choice 1 retired the `outset` bevel; this file said `outset` until
+   2026-08-07 — playmat buttons are black),
 3. every section renders and every `.choice` offers ≥2 options,
 4. both candidate buttons actually travel downward when pressed,
 5. **the global focus ring reaches the keyboard** — the `#focus` specimens (which carry
