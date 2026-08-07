@@ -6,6 +6,11 @@
 - **HTMX**: Animations depend on HTMX swap behavior. All game actions use immediate `hx-swap="outerHTML"`.
 - **View rendering**: `shared-components.ts` applies animation classes during HTML generation. Changes to card rendering (container structure, class names, nesting) can break CSS selectors that target animated elements.
 - **Two-faced cards**: The flip animation uses `.flip-container-outer`, `.flip-container-inner`, `.card-flipped`. Changes to two-faced card DOM structure will break flip animations.
+- **The Tabletop's `mtg-card` shape (decided, unbuilt)**: the tap animation's trigger is
+  `props.tapped` changing on a synced tldraw shape. That couples this owner to
+  `apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx`, to the shape's prop schema
+  (ticket 02), and to tldraw's own `shape.rotation` write. If tap ever stops being a stored
+  boolean, the animation's trigger disappears.
 
 ## Depended On By
 
@@ -19,7 +24,26 @@
 - **Drag-and-drop cleanup**: `game.js` lines 183-186 remove specific animation class names. If new animation classes are added, they may need to be cleaned up here too.
 - **Duplicate flip CSS**: Card flip styles exist in both `game.css` (lines 104-142) and `prepare.css` (lines 221-256). Changes to one must be mirrored in the other.
 - **Table mode's button classes (JES-127)**: the clipboard hook is keyed on `play-button`; table-mode Play/Discard buttons deliberately get `table-play-button` instead (server-rendered — deterministic, no runtime branching in the hook). If you rename either class, both `game.js` listeners and `game-modals.ts` must change together. The 502 entry in `htmx.config.responseHandling` (`html-layout.ts`) carries `error: true` so `event.detail.successful` stays false and the table-mode buttons' conditional close leaves the failure modal visible — removing that flag silently eats the error modal.
-- **Click-straddles-settle flake (tests)**: a Playwright-speed click right after the card modal opens can land its mousedown on a node htmx replaces before mouseup — no click event fires. Impossible at human speed. Specs that click freshly-opened modal buttons use a retry `expect(...).toPass()` pattern (see `verify-discard.spec.ts`, `verify-tabletop-integration.spec.ts`).
+- **Click-straddles-settle flake (tests)**: a Playwright-speed click right after the card modal opens can land its mousedown on a node htmx replaces before mouseup — no click event fires. Impossible at human speed. Specs that click freshly-opened modal buttons use a retry `expect(async () => { click; assert }).toPass()` pattern (reference implementations: `verify-discard.spec.ts:39-50`, `verify-prep-commander-flip.spec.ts:99-105`, and since `65f12e8` also `verify-library-grouping.spec.ts` and `verify-query-parameter-modals.spec.ts`).
+
+  **`{ force: true }` on such a click was a *cause* of this flake, not a workaround for it.**
+  `force` skips Playwright's actionability/stability wait — precisely the wait that would
+  otherwise absorb the swap. So a forced click on a freshly-swapped modal button was *more*
+  likely to straddle settle than an ordinary one. **Resolved** (ticket
+  `.scratch/verify-suite-speed/issues/10-force-true-causes-the-flake-it-claims-to-fix.md`,
+  2026-08-07): all five sites (`verify-library-grouping.spec.ts` ×3, was lines 159/243/342;
+  `verify-query-parameter-modals.spec.ts` ×2, was lines 372/380) now use plain `.click()`.
+  Playwright's own actionability wait absorbs the swap/settle straddle instead. The `toPass`
+  retry wrappers were **kept** as a safety net (removing those is a separate, independently
+  verifiable follow-up, deliberately not bundled here). Verified clean by running
+  `./verify.sh verify-library-grouping verify-query-parameter-modals` twice in a row:
+  19/19 passed both times, no new flakiness.
+
+  **KB gap closed while resolving this**: the "in case of viewport issues with modal
+  positioning" justification that originally motivated `force: true` (per the old `TODO.md`
+  capture) was checked and has no trace anywhere — no git history, no comment near any of the
+  five sites, no actual viewport constraint documented. It was unverifiable folk memory, not a
+  real constraint. Don't re-add `force: true` on the strength of that phrase resurfacing.
 - **`#game-menu` containment is a markup constraint on the game's top strip.** Anything
   rendered *inside* the `#game-menu` subtree becomes menu-internal in two ways at once, and
   both are silent:
@@ -42,6 +66,21 @@
   row's right edge. The `gap` on `.game-header-row` does **not** offset the panel either;
   it's needed so a long deck name doesn't butt into the hamburger.
 
+- **Tabletop tap animation (decided 2026-08-07, ticket 05 resolved, not built)** — four
+  standing constraints for whoever implements `.scratch/tabletop-physics/issues/
+  05-rotate-to-tap.md`: key the catch-up off `props.tapped` changing (never off a ±90 rotation
+  delta — that misfires when a player free-rotates through 90°); initialize the previous-value
+  ref to the first-seen `tapped` so a card arriving tapped doesn't swing on mount or on store
+  reconnect; comment the coupling between the centre-preserving x/y write and the transform
+  origin; and keep **`overflow: hidden` off every ancestor on the path**, because mid-swing the
+  counter-rotated card extends outside its own `w × h` box. Also: do not re-derive the CSS-only
+  rotation route (killed — see architecture.md), and do not veto the local catch-up by citing
+  "no FLIP" (it isn't). **Now also settled**: the trigger stays plain `onClick` — tldraw's
+  `onRotateStart`/`onRotate`/`onRotateEnd` are confirmed real hooks but are **not used for tap**,
+  staying reserved for free rotation instead, so tap and free-rotation stay visually
+  distinguishable. Duration/easing is 0.5s `ease-out` (Shuffler's card-motion vocabulary), not
+  this owner's originally-recommended 0.8s flip-style transition — Jess overrode that
+  recommendation deliberately.
 - **State that must survive swaps**: Anything toggled by JS that needs to outlive a `game-state-updated` swap must NOT be re-applied to swapped-in content in `afterSwap` — the settle phase reverts it (see architecture.md). Anchor such state on `document.body` or another non-swapped ancestor. The hamburger menu (`body.game-menu-open`) is the reference example; developer mode (`body.dev-mode`, set server-side from a cookie, gating `.menu-debug` visibility) is a second, JS-free example.
 
 ## Not Related To

@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: "Ovo", serif;
+  font-family: var(--font-content);
 }
 /* The playmat at game scale: centered in the viewport up to its max-width. Art
  * and frame are shared — see the `.playmat` rule in playmat.css, which wins over
@@ -155,7 +155,7 @@ body {
   padding-top: 20px;
 }
 
-/* Top row: library, revealed cards, command zone, and table */
+/* Top row: command zone, revealed cards, library, and table */
 .game-top-row {
   display: flex;
   min-height: 300px;

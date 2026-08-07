@@ -4,6 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Tabletop</title>
+    <!--
+      Orbitron for chrome, Ovo for content — the same Google Fonts <link> the
+      Shuffler uses in views/partials/head.ejs and src/view/common/html-layout.ts.
+      One delivery mechanism across the fleet: a <link> OR @font-face, never both,
+      and self-hosting would be a change to all three sites at once, not this one.
+
+      NOTE: this does NOT put Orbitron on tldraw canvas text. tldraw's `geo` shape
+      takes a `font` enum with no Orbitron in it, so only a self-rendering custom
+      shape can use the typeface on canvas. What this serves today is the
+      Tabletop's DOM chrome and the future mtg-zone shape.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ovo&family=Orbitron:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="root"></div>

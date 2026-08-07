@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Type: grilling
-Status: open
+Status: resolved
 Blocked by: 04
 
 ## Question
@@ -21,3 +21,27 @@ animation vocabulary worth matching rather than inventing a second one.
 of the state change, so the state model has to settle first. This ticket came across from the
 former `tabletop-card-physics-starter` map (2026-08-06) — it was unblocked there only because
 that map didn't ask what a card is.
+
+## Answer
+
+**Trigger stays `onClick`, unchanged.** No new gesture — the click that already toggles
+`props.tapped` keeps doing so; `onRotateStart`/`onRotate`/`onRotateEnd` go unused for tap. Jess
+confirmed rather than reaching for tldraw's rotate handle, which stays reserved for free-rotation
+("attacking") per ticket 04 — the two gestures must stay visually distinct since tap is never
+read back out of angle.
+
+**Animation is 0.5s, matching the Shuffler's card-motion slides, not the 0.8s flip.** The
+`animations` owner leaned toward 0.8s (reorientation, like a flip) but left the call open; Jess
+picked the faster 0.5s instead — tap happens often mid-turn and reads better snappier. Implied
+easing: `ease-out`, matching that same slide vocabulary (`game.css`'s `slideFromRight`/
+`slideFromLeft`/`growFromRight`/`growFromLeft`), rather than the flip's unspecified default
+`ease`.
+
+**Mechanism is already fully specified by the `animations` owner** (`owners/animations/
+architecture.md` lines 102-166) and doesn't reopen here: a local "catch-up" counter-transform
+keyed off `props.tapped` **changing** (never off reading an angle, which is exactly the
+ambiguity ticket 04 killed) — apply an inner ∓90° counter-rotation on the tap-toggling frame and
+CSS-transition it to 0 over 0.5s `ease-out`. One synced write; nothing to interpolate over the
+wire, so undo and remote peers animate identically for free. Init the prev-`tapped` ref to the
+first-seen value (never hardcode `false`), and nothing on the path may `overflow: hidden`-clip,
+since mid-swing the card extends outside its own box.

@@ -6,7 +6,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   background: linear-gradient(90deg, #43276C 1.92%, #221534 65.38%, #3B1855 100%);
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-optical-sizing: auto;
 }
 
@@ -43,7 +43,7 @@ body {
 
 .header-title span,
 .header-title a {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: clamp(1rem, 2.3077vw, 1.5rem);
   font-weight: 400;
   color: white;
@@ -58,7 +58,7 @@ body {
 
 .right-nav span,
 .right-nav a {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: clamp(1rem, 2.3077vw, 1.5rem);
   font-weight: 400;
   color: white;
@@ -100,7 +100,7 @@ body {
 }
 
 .hero-title {
-  font-family: "Risque", cursive;
+  font-family: var(--font-display);
   font-size: min(42.31vw, 440px);
   /* 440px ÷ 1040px = 42.31% of container width */
   font-weight: 400;
@@ -111,7 +111,7 @@ body {
 }
 
 .hero-subtitle {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: min(9.23vw, 96px);
   /* 96px ÷ 1040px = 9.23% of container width */
   font-weight: 700;
@@ -133,7 +133,7 @@ body {
 }
 
 .slogan p {
-  font-family: "Risque", cursive;
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 300;
   margin: 0;
@@ -222,7 +222,7 @@ body {
 }
 
 .step-action {
-  font-family: "Risque", cursive;
+  font-family: var(--font-display);
   font-size: clamp(3rem, 15.3846vw, 160px);
   font-weight: 400;
   color: var(--deep-space);
@@ -237,7 +237,7 @@ body {
 }
 
 .step-object {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-weight: 700;
   color: white;
   margin: 0;
@@ -248,7 +248,7 @@ body {
 }
 
 .step-description {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: clamp(1rem, 2.3077vw, 1.5rem);
   font-weight: 600;
   color: white;
@@ -428,7 +428,7 @@ body {
 }
 
 .main-footer p {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: clamp(0.75rem, 2.3077vw, 1.5rem);
   font-weight: 400;
   color: white;

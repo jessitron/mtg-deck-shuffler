@@ -46,7 +46,13 @@ commit that adds a component.
 
 The short version:
 
-- **Square corners except on physical round elements** (cards, playmats, count discs).
+- **Square corners except on physical round elements** (cards, playmats, count discs) — with
+  one decided refinement not yet swept into the CSS: **soften what you press.**
+  `--radius-soft: 4px` on pressables, `0` on flat surfaces, physical objects keep their real
+  radii (Jess, 2026-08-06). *The line falls at "do you touch it", not at "is it small."*
+  **The token exists** in `packages/design-tokens/tokens.css` (shared, because a tldraw shape
+  passes a radius from TypeScript where no stylesheet reaches) — but the 13 radius values
+  still in the CSS are drift awaiting that sweep, not precedent.
   Both play pages put a playmat on screen: `class="playmat playmat-prepare"` on `/prepare`,
   `class="playmat playmat-game"` on `/game`. Same domain object, **one appearance, two
   scales** — the `/game` one used to be called `.page-container`, which hid that fact
@@ -56,10 +62,21 @@ The short version:
   the three selectors are equal specificity and the pages load their sheets in opposite
   order, so a property added to the bare rule overrides `.playmat-game` but loses to
   `.playmat-prepare`. Keep each property in one place, never both
-- **Never write a raw hex.** Use a token from `public/styles.css` `:root`. Material and
+- **Never write a raw hex.** Use a token. The fleet's shared ones — the identity palette,
+  `--narrow-border`, the mana colours, the three `--font-*` roles and `--radius-soft` —
+  live in `packages/design-tokens/tokens.css`
+  (`@fleet/design-tokens`), served here at `/fleet/tokens.css` and loaded by the Tabletop
+  too, so the two ships share one dictionary. They are **not** mirrored in
+  `public/styles.css`, which now holds only `--background-color`. Material and
   Bootstrap defaults already in the CSS are drift, not precedent — don't copy them
 - **Orbitron for chrome, Ovo for content** (card names are content). Risque only on site
-  pages. No fourth typeface
+  pages. No fourth typeface. **Write the role token, never the face:**
+  `font-family: var(--font-chrome)` / `var(--font-content)` / `var(--font-display)`, from
+  `packages/design-tokens/tokens.css`. All 39 literals were swept onto these on 2026-08-07;
+  the only `font-family` literals left in the CSS are `monospace` and `inherit`. The
+  typeface *names* still appear in the three `<head>`s — that's the Google Fonts `<link>`
+  fetching the files, which no token can reach, so a new page needs **both** the token in
+  its CSS and its `additionalFonts` entry
 - **Every interactive element gets a visible `:focus-visible` state — and it's already
   written** (`shuffler-design-choices` choice 5): one global rule in `public/styles.css`
   draws `3px solid var(--light-pink)` at `outline-offset: 3px` on every `a`, `button`,
@@ -80,7 +97,9 @@ The short version:
 - The site pages (/, /choose-any-deck) have different styles from the play pages
   (/prepare, /game)
 - `playmat.css` is shared by game and prepare; `game.css` and `prepare.css` are
-  page-specific; `site.css` is the site pages; `styles.css` holds the tokens. Watch for the
+  page-specific; `site.css` is the site pages; `styles.css` is global (reset, `.pushable-flat`,
+  the focus ring, `--background-color`) — the **shared tokens live outside the ship**, in
+  `packages/design-tokens/tokens.css`, served at `/fleet/tokens.css`. Watch for the
   modal, flip, and library-list blocks, which are currently duplicated across files
 - **Appearance in the shared sheet, placement in the page sheet.** A component on both play
   pages declares how it *looks* once in `playmat.css`, as a **bare class selector**; each
@@ -113,7 +132,7 @@ The short version:
 
 **Styles**:
 
-- `public/site.css` (site-wide), `styles.css` (tokens + global), `playmat.css` (shared by game and prepare), `game.css`, `prepare.css`, `deck-selection.css`, `docs.css`
+- `packages/design-tokens/tokens.css` (**repo root, not this ship** — the fleet's shared tokens, served at `/fleet/tokens.css`), `public/site.css` (site-wide), `styles.css` (global reset, `.pushable-flat`, the focus ring, `--background-color`), `playmat.css` (shared by game and prepare), `game.css`, `prepare.css`, `deck-selection.css`, `docs.css`
 - `/design` → `views/design.ejs` — the component gallery (see UI Style above).
   `public/design-candidates.css` holds proposals not yet adopted; `public/design-gallery.css`
   is gallery chrome only and must never be copied into the app
@@ -159,7 +178,27 @@ Verify changes with (from `apps/shuffler/`):
 - `npm run build`
 - `npm run test`
 - `PORT=3344 ./run` - Verify app starts, click through to what you changed
-- `./verify.sh` - Playwright verification (builds, starts on 3001, runs the specs)
+- `./verify.sh` - Playwright verification (builds, starts on a random high port, runs the specs)
+
+**The suite traces itself.** `test/harness-telemetry/` holds a Playwright reporter that sends
+spans about the *run* — one trace per run, a span per spec, test and step (every `page.goto`,
+every `waitForTimeout`) — to service **`mtg-fleet-verify`**, team `modernity`, env `local`.
+`verify.sh` prints the run id; group by `verify.run.id` to isolate one run. Things to know:
+
+- **The service name is written in code, not from `OTEL_SERVICE_NAME`**, and nothing telemetry-ish
+  is `export`ed after `.env` is sourced — exporting it would rename the app server too and
+  silently move its spans. **Never swap the provider for `NodeSDK`**: it merges env-detected
+  resource attributes on *top* of explicit ones, so `.env` would reclaim these spans. The
+  reasoning is in `harnessTracing.ts`; there's a regression test for it.
+- **Trace context is deliberately NOT propagated into the browser.** The app's
+  `ParentBasedSampler` would honor a sampled remote parent and bypass `BackgroundChatterSampler`,
+  tracing every static asset at 100%. Harness and app spans correlate by run id and time instead.
+- **Telemetry is never fatal and never blocking**: no `.be`, a bad key, or a hung exporter all
+  leave the suite's exit code alone. A bare `npx playwright test` with nothing sourced stays silent.
+- **`data.db` is never reset**, so runs get faster as it warms (9.5 → 3.6 min has been seen).
+  `verify.data_db.existed` / `.bytes` are on every span for exactly this reason — a timing number
+  without its cold/warm condition means nothing.
+- Suite-speed findings and the optimization work: `.scratch/verify-suite-speed/`.
 
 ## Environment & Persistence
 
@@ -231,7 +270,8 @@ sourcing) is in the root `CLAUDE.md`. Shuffler specifics:
 - **`/health`** is the probe endpoint (k8s liveness/readiness and the ALB) — deliberately
   the cheapest route in the app.
 - **Datasets**: server spans go to `mtg-deck-shuffler`; web/browser spans go to
-  `mtg-deck-shuffler-web`.
+  `mtg-deck-shuffler-web`. **The verify suite traces itself** to `mtg-fleet-verify` — see
+  Testing below.
 - **Logging**: `src/log.ts` — `log.info/warn/error(message, attributes, error?)`. Each
   record goes to stdout and to Honeycomb, carrying the trace/span id of the active span.
   **Reach for a span attribute first**; a log is for when there's no span to hang it on
@@ -243,8 +283,11 @@ sourcing) is in the root `CLAUDE.md`. Shuffler specifics:
 - **`src/scripts/*` keeps `console.*` on purpose.** Those are CLI tools, not the server;
   their output belongs on the terminal. Don't sweep them into `log.ts`.
 - **`log.ts` is duplicated in the Tabletop deliberately** — there is no shared telemetry
-  package and we chose not to create one (the workspaces glob is `apps/*`/`services/*`, and
-  a shared package is a new build surface for two Dockerfiles). The two copies are also on
+  package and we chose not to create one. (The old reason — "the workspaces glob is
+  `apps/*`/`services/*`, and a shared package is a new build surface for two Dockerfiles" —
+  **no longer holds**: `packages/*` is in the glob and `@fleet/design-tokens` pays that build
+  cost already. The reason that still holds is the next sentence, and it's the load-bearing
+  one.) The two copies are also on
   different OTel version lines with genuinely incompatible APIs; see `notes/AGENT-NOTES.md`.
   Don't "helpfully" extract them.
 

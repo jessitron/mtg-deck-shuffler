@@ -5,12 +5,25 @@
 
 ## Depends on
 
-- **`styles.css` `:root`** — the token set. Everything downstream assumes these names
-  exist and mean what they mean. Renaming or removing a token breaks silently (CSS just
-  drops the declaration).
-- **Google Fonts** — Orbitron, Ovo, Risque, loaded from `fonts.googleapis.com` by both
-  heads. If a page forgets its `additionalFonts` entry, the text silently falls back to a
-  system serif and looks wrong without erroring.
+- **`packages/design-tokens/tokens.css` (`@fleet/design-tokens`)** — the fleet's token set,
+  since `4396aea` (2026-08-07). Everything downstream on **both ships** assumes these names
+  exist and mean what they mean. Renaming or removing one breaks silently (CSS just drops the
+  declaration) — and now it breaks silently in two apps. Reaching each ship differently:
+  `express.static` at `/fleet` in the Shuffler's `src/app.ts`, a Vite import in the Tabletop's
+  `src/client/main.tsx`. **Also depends on the npm workspace plumbing**: `packages/*` in the
+  root `workspaces` glob, and each Dockerfile copying `packages/` — see
+  [architecture.md](architecture.md) for the three container facts.
+- **`styles.css` `:root`** — now just `--background-color`. Shuffler-only.
+- **Google Fonts** — Orbitron, Ovo, Risque, loaded from `fonts.googleapis.com` by **three**
+  heads now: the two Shuffler ones plus `apps/tabletop/index.html`. If a page forgets its
+  `additionalFonts` entry, the text silently falls back to a system serif and looks wrong
+  without erroring. **One delivery mechanism fleet-wide** — a `<link>` *or* `@font-face`,
+  never both; self-hosting would be a change to all three sites at once.
+  **Two separate things, and don't conflate them (since `f79bc7d`, 2026-08-07):** the `<link>`
+  *fetches* the face and still names it literally — a custom property cannot reach a `<link>
+  href`. Every place that *applies* a face goes through `var(--font-chrome/-content/-display)`.
+  So a new page needs **both**: the token in its CSS *and* its `additionalFonts` entry. The
+  token resolving is not evidence the font arrived — that's the lazy-fetch trap below.
 - **The two heads** — `views/partials/head.ejs` and `formatHtmlHead()` in
   `src/view/common/html-layout.ts`. A stylesheet only exists on the pages whose head
   lists it.
@@ -26,6 +39,21 @@
   exist in a stylesheet the *host page* already loads.
 - **The animations owner** (tight coupling — see "not related to" for the boundary). Both
   care about `game.css`, transitions, and card containers.
+- **`.scratch/tabletop-physics/`** — the Tabletop's shape-architecture maps lean on this KB by
+  name. `issues/03-what-furniture-is.md` (resolved 2026-08-07) deferred *all* appearance to this
+  owner and to `/design`, and `issues/11-what-a-zone-looks-like.md` is the ticket that will spend
+  it. Two consequences: **the design language now gates a Tabletop implementation ticket**, and
+  the stock tldraw look 03's implementer reproduces as scaffolding is **explicitly exempt from
+  the Layer-1 token rule** — it's a knowingly-untokenized placeholder with a comment saying so,
+  so a design-lint sweep must not "fix" it into a decision.
+  `issues/04-tap-is-state.md` (resolved 2026-08-07) is the second: it settled a card's handle
+  set (see the canvas watch points below) and **handed this owner an open question**,
+  `issues/05-rotate-to-tap.md` — the tap motion's duration and easing, to be decided *with*
+  this owner. 04 deliberately decided no duration, easing, colour or literal. The calibration
+  it recorded for 05: the Shuffler's vocabulary is **0.8s** (flip transition) and **0.5s**
+  (card motion), and a tap is a flip-like *reorientation*, not a translation — so match one of
+  those two rather than inventing a third tempo. **The tempo can be decided now but not
+  implemented** — `tabletop-css-tokens` still blocks any Tabletop CSS.
 - **The two-faced-cards owner** — flip button styling and the `.flip-container-*` blocks.
 - **The library-search owner** — modal and list styling.
 - **`test/verification/verify-deck-title-placement.spec.ts`** (added 2026-08-07) — pins the
@@ -34,6 +62,16 @@
   `.cool-command-zone-surround .game-title` on either, the title never inside `#game-menu`,
   and clicking the title dismisses an open menu. Restyling `.game-title` won't touch it;
   **re-parenting it will**, which is the point.
+- **The fleet-token wiring specs** (added 2026-08-07): `apps/shuffler/test/verification/verify-fleet-tokens.spec.ts`,
+  `apps/tabletop/test/verification/verify-fleet-tokens.spec.ts`,
+  `apps/shuffler/test/html-layout-fleet-tokens.test.ts`, and `scripts/check-fleet-tokens.sh`.
+  They assert the shared tokens **resolve** and Orbitron **fetches** — plumbing, not palette —
+  plus that no shared token is re-declared in `styles.css`. **Both ships' `SHARED_TOKENS` lists
+  grew by four on 2026-08-07 (`f79bc7d`): `--font-chrome`, `--font-content`, `--font-display`,
+  `--radius-soft`. Add every new shared token to both lists** — the Tabletop's copy is the one
+  that matters most, since nothing there uses these yet and a broken import would otherwise be
+  invisible. Changing a colour must not break
+  them; if it does, the test is asserting the wrong thing. See the testing watch point below.
 - **`test/verification/verify-design-gallery.spec.ts`** — asserts specific computed
   values (200×278 card, `.button-base.begin-button`'s border-style — **`solid`**, since
   choice 1 retired the `outset` bevel; this KB called it `outset` until 2026-08-07, black
@@ -64,7 +102,13 @@ Concrete, in rough order of how often they bite.
   black`. Borders are flat (`solid`); press feedback is `.pushable-flat`'s box-shadow bevel,
   not a border switch. Conversely, **don't strip the surround's `outset` as tidying** —
   it's the last of its kind, and ending that language is Jess's call.
-- Button labels are **Orbitron**. Card names are **Ovo**. No fourth typeface.
+- Button labels are **Orbitron**, card names are **Ovo**, and **you write neither name**.
+  `font-family: var(--font-chrome)` for chrome, `var(--font-content)` for content,
+  `var(--font-display)` for site-page hero words. No fourth typeface, and no typeface literal:
+  since `f79bc7d` (2026-08-07) the only `font-family` literals left in the Shuffler's CSS are
+  `monospace` and `inherit`. If you write `"Orbitron", sans-serif` you have reintroduced the
+  drift the sweep removed — grep `font-family` in `apps/shuffler/public/*.css` and you'll see
+  what the file expects.
 - **The focus state is already written for you** (choice 5, 2026-08-06). One global
   `:focus-visible` rule in `styles.css` (grep `:focus-visible`) draws `3px solid var(--light-pink)` at
   `outline-offset: 3px` on `a, button, input, select, textarea, summary, [tabindex]`. So a
@@ -160,6 +204,46 @@ Concrete, in rough order of how often they bite.
   Archidekt. `escapeHtml` lives in `src/view/common/shared-components.ts` (moved there from
   `active-game-page.ts` on 2026-08-07, where it was module-private) — import it rather than
   writing a second copy.
+- **Library and command zone swapped sides (2026-08-07): library is now RIGHT, command zone
+  LEFT, on both play pages — pure placement, no appearance change.** On `/game`,
+  `.game-top-row` is a flex row with no `order` property, so DOM order **is** visual order;
+  `formatActiveGameHtmlSection` (`active-game-page.ts`) now emits `commandZoneHtml`,
+  `revealedCardsHtml`, `librarySectionHtml` in that sequence. On `/prepare`,
+  `.playmat .cool-command-zone-surround` and `.section-that-is-horizontally-aligned-with-command-zone`
+  (the library-side rule) swapped `grid-column` (surround 4→2, library 2→4) and the
+  library's `justify-self` flipped `end`→`start` to keep it hugging the side nearer the
+  command zone. **If you ever change this grid again, `.playmat .commander-placeholder`
+  moved too** (`grid-column` 5→1, `justify-self: start`, so it overflows right into
+  column 2) — it's the "no commander" alt-render of the *same* slot the surround occupies,
+  and the two are safe to sit in different columns **only** because `commanders.length
+  === 0` renders exactly one of them, never both. Don't "tidy" them back into alignment
+  without re-checking that mutual exclusivity still holds.
+
+**Testing that a token or a font actually arrived** (added 2026-08-07, `4396aea`)
+
+The whole reason the token package carries tests is that **both halves fail silently** — CSS
+drops an unknown `var()`, a missing webfont falls back to a system serif. Four things the
+existing specs learned, in the order they'll bite you:
+
+- **`document.fonts.check('16px Orbitron')` returns FALSE on a ship where nothing uses
+  Orbitron yet, even when the `<link>` is perfectly correct.** Browsers fetch a webfont
+  **lazily** — only once something on the page actually sets that family — and the Tabletop's
+  only styled surface is the off-brand landing page. The Tabletop's spec therefore does
+  `await document.fonts.load("16px Orbitron")` *then* `check(...)`, asserting **fetchability**
+  rather than loadedness. The Shuffler's equivalent needs no explicit `load()` because plenty
+  there is set in Orbitron. **Any future "is our font working" test on a ship with no on-brand
+  surface will hit this**; swap back to a plain `check()` the day a real surface sets the
+  family, which is the stronger assertion.
+- **Assert non-empty, not a specific hex.** `verify-fleet-tokens.spec.ts` protects the
+  *plumbing*; changing a colour is this owner's call and must not break wiring tests. The one
+  concrete value asserted anywhere is `--deep-space` on the Tabletop, and only to prove the two
+  ships share a dictionary.
+- **Cover the second head cheaply.** `test/html-layout-fleet-tokens.test.ts` is a jest test on
+  `src/view/common/html-layout.ts` because reaching a play page in Playwright needs a whole
+  game set up. The two heads are the thing most likely to diverge.
+- **A boot check is not a link check.** `import.meta.resolve` doesn't verify the file exists,
+  so `verify-container-boot.sh` passes with a dangling workspace symlink — the server starts
+  fine and only `/fleet/tokens.css` 404s. Curl the route, don't trust the boot.
 
 **Adding a stylesheet**
 
@@ -168,6 +252,30 @@ Concrete, in rough order of how often they bite.
 - Add it to `design.ejs` and to `APP_STYLESHEETS` in
   `test/verification/verify-design-gallery.spec.ts`, or the gallery silently stops
   representing the app.
+
+**A shared class split across two files can carry a numeric coupling, not just a
+duplicated block** (2026-08-07, `5c69aa3`)
+
+- `.section-that-is-horizontally-aligned-with-command-zone` exists in both `prepare.css`
+  (`margin-top`) and `game.css` (`padding-top`) -- different properties, but both exist to
+  push the library stack down until its card art meets the commander card's art, not the
+  top of `.cool-command-zone-surround`'s metal frame. The real number is **22px**: 5px
+  surround border + 10px surround padding + 7px `.multiple-cards` inset border (game.css's
+  comment already had this breakdown right). `prepare.css` had `margin-top: 7px` -- only the
+  innermost inset -- silently undershooting by the outer 15px, for however long that went
+  unnoticed.
+- **This is a fixed-px inset, not a scaled one.** The surround's border/padding are literal
+  pixels, unaffected by the playmat's own scale (`border-radius: 80px` game vs `20px`
+  prepare). So `/prepare`'s smaller mat still needs the *same* 22px as `/game`'s larger one
+  -- don't be tempted to scale it down.
+- **The library/command-zone swap (`e7b393e`) didn't cause this bug** -- grid-column and
+  flex-order changes can't affect cross-axis alignment. It just moved the two elements into
+  a direct side-by-side comparison, which is what made a pre-existing 15px gap visible.
+  Lesson: a layout reorder can *expose* a latent alignment bug it didn't create; check the
+  actual rendered `<img>` rects (not just the outer container boxes) before assuming the
+  reorder itself is the culprit.
+- If the surround's border or padding ever changes, both files' copies of this number need
+  updating together -- there's no shared token for it.
 
 **Editing a duplicated block** (see [architecture.md](architecture.md) for the list)
 
@@ -180,12 +288,35 @@ Concrete, in rough order of how often they bite.
 - Prefer deleting the duplicate over editing one copy. If you must edit one, edit both and
   say so.
 
-**Adding or renaming a token**
+**Adding or renaming a token** (rewritten 2026-08-07, `4396aea`)
 
-- New tokens go in the `:root` in `styles.css`. **Do not create a fifth `:root` — there are
-  already four** (`styles.css`, `docs.css`, `game.css` `--playmat-*`, `playmat.css`
-  `--mana-*`); see [architecture.md](architecture.md) for which are drift.
-- Add the swatch to the "Named tokens" grid in `design.ejs` in the same commit.
+- **Ask first: is it fleet identity or ship chrome?** Fleet identity goes in
+  `packages/design-tokens/tokens.css`; a genuinely Shuffler-only value goes in `styles.css`
+  `:root`. If you can't tell, it's a design decision — surface it rather than defaulting.
+  **A rule the fonts and `--radius-soft` both turned on: if a tldraw shape will need the value,
+  it's fleet.** A self-rendering shape passes a *string* from TypeScript — no class, no rule —
+  so the alternative to a shared token is the literal retyped into a `.tsx` file where no
+  stylesheet convention reaches it.
+- **Add and sweep in the same commit** (`f79bc7d`, 2026-08-07). A token nobody uses is just a
+  second way to say the same thing — which is the strongest argument *against* adding one, so
+  don't hand it to the next reviewer. The 39-literal font sweep was scripted
+  (`scripts/sweep-font-literals.sh`) precisely so the substitutions stayed reviewable and a
+  stray variant showed up as a leftover instead of being silently missed. **Grep for the literal
+  afterwards and expect zero.** The one exception on record is `--radius-soft`, where naming the
+  value and sweeping the ~13 sites were split deliberately — because the sweep is a visible
+  change to 13 components and the name is not.
+- **Never re-declare a shared token in a ship**, not even "as a fallback". A Playwright
+  assertion fails if any of them reappears in `styles.css`.
+- **Renaming or removing one now breaks two apps silently.** Grep both `apps/` trees, not
+  just the Shuffler's CSS.
+- **Adding a token to the shared package has a container cost**, and it's already paid — but
+  adding a *new* `packages/` workspace does not: every Dockerfile running `npm ci` must COPY
+  that workspace's `package.json` first, and any runtime stage needing the files must copy
+  `packages/` too or the relative symlink dangles. Fails in the image only.
+- Add the swatch to the "Named tokens" grid in `design.ejs` in the same commit. (The chips
+  hard-code their hex today — see [architecture.md](architecture.md).)
+- Don't create a new `:root` anywhere. There are three in the Shuffler and each has a reason;
+  see [architecture.md](architecture.md).
 
 **Adding a component**
 
@@ -208,6 +339,46 @@ Concrete, in rough order of how often they bite.
 **Touching `game.css`**
 
 - Consult the **animations** owner too. Its charge lives in the same file.
+
+**Designing anything that lives inside the tldraw canvas** (added 2026-08-07)
+
+- **Read [README.md](README.md) → "tldraw limits" first.** Four rules behave differently on the
+  canvas, and three of them are hard limits rather than choices: no Orbitron in the `geo` `font`
+  enum (so on-brand canvas text requires a self-rendering shape), the global `:focus-visible`
+  rule can't reach a shape (tldraw owns selection indication), a locked shape can never be a
+  drop target (so "reacts to what's over it" must be a derived render, not a hook), and an
+  opaque `image` shape layered over a box hides that box's interior.
+- **A self-rendering shape needs its own `toSvg`, or it vanishes from canvas exports.** The cost
+  scales with the treatment — gradients, shadows and a webfont all have to be hand-written into
+  the SVG. **Budget it inside the option comparison**, not after Jess has picked.
+- **Size canvas things in card widths, and use the *right* card.** The Tabletop's card is
+  **170 × 238** (`apps/tabletop/DESIGN.md`, 68 units/inch). The Shuffler's CSS card is 200 × 278.
+  They are both "the card is the layout unit" and they are **not the same number** — don't cross
+  them. **170 is the *default* card, not every card**: players may resize cards
+  (aspect-ratio locked), decided 2026-08-07. Derive layout from 170; don't assume every card
+  on the board measures it.
+- **Don't suppress a card's resize or free-rotate handles** (decided 2026-08-07, ticket 04,
+  `3f14d02`). Both stay, deliberately; the board is non-uniform on handles because furniture
+  is `isLocked` and cards are not. This owner argued for suppressing resize and was overruled
+  — see [README.md](README.md) → "On the canvas, a card keeps its full handle set" before
+  reopening it.
+- **A card's `indicator()` has no decided appearance.** Styling it away from tldraw's default
+  is its own design decision needing its own sign-off — the classic ride-along. If an
+  implementation ticket for `mtg-card` reaches you with a custom indicator in it, that's the
+  thing to block.
+- **A canvas shape has a name for its font and its radius now** (`f79bc7d`, 2026-08-07).
+  `--font-chrome`/`--font-content`/`--font-display` and `--radius-soft` are in the shared package
+  specifically for this case. A `.tsx` shape can't `var()`, but it can read them off the computed
+  root style, or at minimum cite them — **what it must not do is retype `"Orbitron", sans-serif`
+  or a bare `4px` as if it were choosing.** Nothing on the Tabletop uses them yet; ticket 11's
+  `mtg-zone` is the first customer.
+- **`apps/tabletop` now has the fleet tokens and the fonts** (`4396aea`), so a `var(--deep-space)`
+  there resolves and Orbitron loads. What it still lacks is a **stylesheet of its own** — the
+  first Tabletop-only rule has nowhere to live, and inline styles are the status quo by inertia.
+  See [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side" before writing any
+  Tabletop CSS, and don't answer the question by starting a `:root` there.
+- **Deciding a canvas treatment is not blocked by that plumbing; implementing it is.** Staging
+  happens on `/design` in the Shuffler, which already has the tokens and the fonts. Stage first.
 
 ## Not related to
 

@@ -62,6 +62,39 @@ question, with menu placement scoped by `no-doubleclick-crop` in the repo-root `
 Note this whole util is being replaced by `mtg-card extends BaseBoxShapeUtil` (ticket 02),
 which keeps `onClick` as a base hook — so the trigger constraint survives the rewrite.
 
+## Drag picked up the wrong card after a previous drag — fixed (2026-08-07, `959831c`)
+
+**Bug**: play two cards, drag one, then drag the *other* (still-unmoved) card — the first
+card silently moved again instead of the one under the pointer.
+
+**Root cause, and why it's this feature's territory**: `onClick`'s presence on
+`MtgCardImageShapeUtil` (added for tap/untap, JES-144 above) makes tldraw's `SelectTool`
+defer selecting the pointed-at shape until pointer-up
+(`PointingShape.onEnter` in `node_modules/tldraw/src/lib/tools/SelectTool/childStates/
+PointingShape.ts` skips select-on-enter whenever `getShapeUtil(shape).onClick` is
+truthy). The drag-start safety net (`startTranslating`) only force-reselects the
+actually-hit shape when *nothing* is currently selected. tldraw leaves the just-dragged
+card selected after a drag ends, so that guard is false on the next drag — translating
+silently continued to act on the stale selection (the previous card) instead of the
+shape under the pointer.
+
+**Fix**: `onTranslateEnd` now calls `this.editor.setSelectedShapes([])`
+**unconditionally**, right after the `!current.meta?.instanceId` guard and *before* the
+zone-equality early return — so every drag settle leaves selection empty and the next
+drag's guard correctly re-selects whichever card the pointer lands on.
+
+**Verified by** `apps/tabletop/test/verification/verify-drag-identity.spec.ts`: plays two
+non-overlapping lands, drags the first, then drags the second, and asserts the second
+moved while the first stayed put.
+
+**Porting note for ticket 02's replacement, `mtg-card extends BaseBoxShapeUtil`**: that
+rewrite is a full replacement, not an extension of this util (see "What a card will be"
+below), and it **keeps `onClick`** (spoken for by tap, per the watch point above) — so it
+inherits the same tldraw selection-deferral bug. **This selection-clearing behavior must
+be ported forward into the new shape util's `onTranslateEnd`/drag-settle handling when
+ticket 02 is implemented.** Tracked as an implementation requirement in
+`.scratch/tabletop-physics/issues/02-what-a-card-is.md`.
+
 ## Face and face-down are two axes (decided 2026-08-07)
 
 Jess, while resolving `.scratch/tabletop-physics/issues/02-what-a-card-is.md`:

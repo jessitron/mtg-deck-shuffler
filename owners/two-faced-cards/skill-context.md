@@ -1,6 +1,6 @@
 ---
 name: two-faced-cards-context
-description: Get background on the two-faced cards feature before working on card display, flip buttons, CardDefinition/CardFace types, deck adapters, card persistence, CSS card animations, card modals, library search type grouping, game state, the Tabletop's card rendering (apps/tabletop), or the event contract's card/face fields (card.played payloads, contracts/).
+description: Get background on the two-faced cards feature before working on card display, flip buttons, CardDefinition/CardFace types, deck adapters, card persistence, CSS card animations, card modals, library search type grouping, game state, the Tabletop's card *face/image* rendering (which face/imageUrl arrives and displays, apps/tabletop), or the event contract's card/face fields (card.played payloads, contracts/). Not for the Tabletop's click/drag/selection mechanics (tldraw ShapeUtil hooks) — that's owners/tabletop-shape-mechanics.
 context: fork
 background: false
 ---

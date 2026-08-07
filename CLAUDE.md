@@ -80,10 +80,13 @@ See `docs/agents/domain.md`.
 
 ## Repo Layout
 
-This is a polyglot monorepo (npm workspaces). The fleet level holds `notes/`,
-`.claude/`, `owners/`, `scripts/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`.
+This is a polyglot monorepo (npm workspaces — the glob is `apps/*`, `services/*`,
+`packages/*`). The fleet level holds `notes/`, `.claude/`, `owners/`, `scripts/`,
+`packages/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`.
 `scripts/` is for shell helpers shared by the ships' own scripts — `preflight-aws.sh`
-(`check_aws_credentials`) and `deploy-marker.sh`, both used by all three `deploy.sh`.
+(`check_aws_credentials`) and `deploy-marker.sh`, both used by all three `deploy.sh`,
+plus `check-fleet-tokens.sh` (a fast smoke check that the shared palette reaches both ships).
+
 The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and `./deploy.sh`):
 
 - `apps/shuffler/` — the Shuffler: Express + HTMX deck manager and game screen;
@@ -92,6 +95,10 @@ The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and
   (`/t/:tableName` is a shared board) where cards arrive from the Shuffler.
 - `services/spine/` — the Spine: Rails 8 + SQLite; tables, seats, one append-only
   event log per table, validated against `contracts/`.
+- `packages/design-tokens/` — the fleet's shared visual vocabulary (`@fleet/design-tokens`):
+  the identity palette, `--narrow-border`, and Magic's colour pie. One dictionary, both ships
+  — the Shuffler serves it at `/fleet/tokens.css`, the Tabletop imports it through Vite.
+  Owned by `owners/shuffler-looks-like-itself/`; consult that owner before changing a value.
 - `contracts/` — the fleet's published language: JSON Schema for the event
   envelope and per-kind payloads. Both the Spine (Ruby) and the TS apps validate
   on receipt and fail loudly on unknown name/version. See `contracts/README.md`
@@ -100,6 +107,15 @@ The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and
 **`notes/` at the fleet level holds only genuinely fleet-wide docs.** Ship-specific notes
 live under each ship's own `notes/` (e.g. `apps/shuffler/notes/`, `apps/tabletop/notes/`),
 relative to that ship's own directory — see that ship's `CLAUDE.md`.
+
+**Adding a workspace under `packages/` has a container cost, in two places** — both of which
+fail only inside the image, never in dev. Every Dockerfile that runs `npm ci` must `COPY` the
+new package's `package.json` **before** the install; the workspaces glob makes it mandatory,
+and a miss fails the build outright. And npm links workspaces as **relative** symlinks, so any
+runtime stage needing the package at run time must copy `packages/` too, or the link dangles
+and it 404s in prod only. Note that `verify-container-boot.sh` does **not** catch the second
+one: `import.meta.resolve` doesn't check that the file exists, so the server boots happily and
+only the route is broken. Curl the running image.
 
 ## Run the whole fleet locally
 
@@ -153,26 +169,40 @@ Update this file when anything in it changes.
 
 ## Owners
 
-Owners are standing guardians for things that must keep holding — a **feature** that must keep
-serving its users, or a **capability** that must keep working (invariants are capabilities that
+Owners are standing guardians for things that must keep holding — a **capability** that must keep working (invariants are capabilities that
 aren't externally visible). Each owner is a knowledge base directory in **`owners/<slug>/`** plus
 three animating skills — `<slug>-context`, `<slug>-review`, `<slug>-update` — symlinked into
 `.claude/skills/`. **`owners/INDEX.md`** lists every owner with a one-line "consult me when…"
 trigger; scan it when planning any change. Owners never close. Create new ones with the
 `seamapping:create-owner` skill (it judges whether one is warranted first).
 
-**Consulting owners — at three moments, not two:**
+**Consulting owners — at three moments**
 
 - **When a decision is being formed** — including mid-interview, while a design skill like
   `/grilling` has you putting questions to Jess. A recommended answer that lands in an
   owner's territory needs that owner's `-context` **first**. Finding facts is the agent's
-  job, and an owner is a fact source. Skipping this is cheap and expensive: Jess accepts a
-  recommendation, and the contradiction only surfaces at `-review`, after she's committed.
+  job, and an owner is a fact source.
 - **On the plan** — `-review` before implementing (step 5 below).
 - **After the change** — `-update` with what actually landed (step 9 below).
 
-**Be precise about what's being approved.** "Move this element" is a *placement* decision.
-Restyling it on the way is a *second* decision needing its own explicit sign-off — never let
+**Match the consult to the question, not to the file list.** Scanning `INDEX.md` tells you
+whose territory a change _touches_; it doesn't tell you who can _answer_ you. Ask what you
+actually need to know, then consult the owner who knows it — usually one, sometimes none.
+Consulting all five because the diff brushes all five is noise, and it trains you to skim
+the answers.
+
+**Test-only changes are not exempt, but they're narrow.** Deleting a wait from a test is a
+claim about app behaviour — that nothing needs that time. That claim needs the owner of the
+_timing_, not the owner of every feature the spec happens to exercise. Worked example
+(2026-08-07, ticket `verify-suite-speed/02`): sweeping sleeps out of the Playwright suite,
+`animations-context` was decisive — it supplied the htmx swap/settle mechanism, the fact that
+`{ force: true }` disables the actionability wait that would otherwise absorb it, and the
+repo's existing `expect(...).toPass()` convention. `two-faced-cards` and `library-search` own
+the features those specs cover and would have added nothing to that question. One consult, not
+three. Conversely, a test change that only renames or reorganises needs no owner at all.
+
+**Be precise about what's being approved.** "Move this element" is a _placement_ decision.
+Restyling it on the way is a _second_ decision needing its own explicit sign-off — never let
 an appearance change ride along on a placement change. When you catch one riding along,
 the right move isn't to drop it: stage both options on `/design` and let Jess pick.
 
@@ -219,4 +249,5 @@ For each task, follow this workflow:
 9. **Verify Again**: Run the test and see it pass (or fix the implementation)
 10. **Update owners**: For any owner whose files were touched or whose concerns were relevant, invoke its `-update` skill with a summary of what changed.
 11. **Refactor**: Consider refactoring for clarity
-12. **Celebrate**: Print a trumpet in ASCII art
+12. **Merge to main**: If you are in a worktree, merge the work to main.
+13. **Celebrate**: Print a trumpet in ASCII art

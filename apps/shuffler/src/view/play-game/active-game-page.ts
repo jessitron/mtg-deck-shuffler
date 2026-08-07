@@ -81,9 +81,9 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
            </div>
            ${tableSectionHtml}
       <div class="game-top-row">
-        ${librarySectionHtml}
-        ${revealedCardsHtml}
         ${commandZoneHtml}
+        ${revealedCardsHtml}
+        ${librarySectionHtml}
 
       </div>
 

@@ -304,3 +304,42 @@ environment. The trace made the diagnosis — the error was on the **outbound cl
   `currentFace` for Table-zone cards** — this owner's watch point (a table-flipped card
   discarded to the graveyard shows the pre-flip face on the Shuffler) is written in there as
   a must-decide, not a maybe.
+
+## Face State Is Barely Observable in the Modal (finding, 2026-08-07, `65f12e8`)
+
+**No app code changed.** Ticket `.scratch/verify-suite-speed/issues/02-optimize-the-suite.md`
+deleted every `networkidle` and fixed `waitForTimeout` from `test/verification/*.spec.ts`
+(225s → 106.5s). Routed here by the animations owner: the finding is about whether a flip
+*occurred* (face state), not about the 0.8s `.card-flipped` transition.
+
+- **The gap**: both `foundFlipCard` loops in `verify-library-grouping.spec.ts` (game page and
+  prep page) click `.card-modal-overlay .flip-button` and then assert the position indicator
+  reads the **same** text as before. That's the property under test — flipping must not
+  renumber group-scoped navigation — so a flip that never happened passes identically. It
+  matters more now that the suite has demonstrated htmx-swap clicks being swallowed
+  (`owners/animations/interactions.md:27`); every other such click got wrapped in
+  `expect(async () => {…}).toPass()`, and this one deliberately did not, because no available
+  assertion could tell the retry whether it landed. A comment marks each site; ticket 04
+  (`04-which-tests-are-superfluous.md`) asks whether to strengthen or drop them.
+- **Answering the question put to this owner — what distinguishes front from back?** Checked
+  the code rather than guessing. Inline surfaces are well covered: `.flip-container-outer`
+  carries `.card-flipped` server-side (`shared-components.ts:104`), which is why
+  `verify-prep-commander-flip.spec.ts` is a sound test. **In the modal there is no class, no
+  attribute, and no face-dependent text** — a DFC's `card.name` is the whole `"Front // Back"`
+  string, so title and `alt` are identical on both faces. What's left: `img.modal-card-image`'s
+  `src` (`getCardImageUrl(card,"large",currentFace)`, differs on both pages), and on **prep
+  only** the flip button's own `hx-get?face=<target>`. The **game** modal's flip button is a
+  `hx-post` to a toggling route, byte-identical on both faces.
+- **The cheap fix, identified but not made** (out of ticket 02's scope, and a second change
+  riding along on a wait-removal): `currentFace` is already passed into `card-modal.ejs` and
+  never rendered. Emitting `data-current-face` on `.card-modal-overlay` would give the game
+  modal its first real face observable and make these two tests verifiable.
+- Recorded as interactions.md watch point 16, an architecture.md observables section, and a
+  files.md caveat on the spec.
+## Tabletop Drag Picked Up the Wrong Card — Moved Out (2026-08-07, `959831c`)
+
+Fixed 2026-08-07 (`959831c`): dragging a second card after a first silently re-moved the first
+instead. Pure tldraw `SelectTool`/selection-state mechanics, unrelated to card faces or
+`CardDefinition` — this finding, and the owner that now tracks its territory, moved to
+`owners/tabletop-shape-mechanics/history.md` the same day. See that owner if a new
+click/drag/selection bug turns up in `MtgCardImageShapeUtil.tsx` or its successors.

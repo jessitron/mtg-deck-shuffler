@@ -18,12 +18,10 @@ test.setTimeout(90000);
 
 async function goToPrepare(page: any): Promise<void> {
   await page.goto(`${BASE_URL}/choose-any-deck`);
-  await page.waitForLoadState('networkidle');
   const preconTiles = page.locator('.precon-tile');
   await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
   await preconTiles.first().click();
   await page.waitForURL('**/prepare/*', { timeout: 30000 });
-  await page.waitForLoadState('networkidle');
 }
 
 /**

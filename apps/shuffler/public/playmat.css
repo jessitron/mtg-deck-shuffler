@@ -23,14 +23,11 @@
   border: 10px solid black;
 }
 
-/* Mana colors for card type icons */
-:root {
-  --mana-W: #f0e68c; /* Plains — warm gold */
-  --mana-U: #3c99e5; /* Island — blue */
-  --mana-B: #530aae; /* Swamp — purple */
-  --mana-R: #bd0a0a; /* Mountain — red */
-  --mana-G: #2a8439; /* Forest — green */
-}
+/* The mana colours (--mana-W/U/B/R/G) MOVED to @fleet/design-tokens
+ * (packages/design-tokens/tokens.css). They're domain vocabulary rather than
+ * Shuffler chrome — Magic's colour pie, a closed set — so any ship tinting by
+ * colour identity uses exactly those five. Not mirrored here; see the note in
+ * styles.css. */
 
 /* === Library Stack === */
 .library-stack {
@@ -155,7 +152,7 @@
   background-color: var(--light-pink);
   border: 3px solid black;
   padding: 8px 16px;
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   text-align: center;
   max-width: 100%;
   min-width: 0;
@@ -472,7 +469,7 @@
 }
 
 .card-modal-title {
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   font-size: 1.8rem;
   font-weight: bold;
   margin: 0 0 30px 0;

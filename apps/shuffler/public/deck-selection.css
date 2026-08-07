@@ -53,12 +53,12 @@
   font-size: 1rem;
   background: white;
   color: var(--deep-space);
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
 }
 
 .precon-search-input::placeholder {
   color: #888;
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
 }
 
 /* Archidekt-specific styles */
@@ -74,7 +74,7 @@
   border: 2px solid #ddd;
   font-size: 1rem;
   background: white;
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
 }
 
 .archidekt-input-section #deck-number {
@@ -90,7 +90,7 @@
   margin-top: 5px;
   color: #f44336;
   margin-bottom: 20px;
-  font-family: "Ovo", serif;
+  font-family: var(--font-content);
 }
 
 /* Precon Deck Tiles */
@@ -109,7 +109,7 @@
   min-height: 140px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: "Orbitron", sans-serif;
+  font-family: var(--font-chrome);
   color: var(--deep-space);
   text-align: left;
   display: flex;
@@ -202,7 +202,7 @@
 
 .commander-name {
   /* font-weight: 600; */
-  font-family: "Ovo", serif;
+  font-family: var(--font-content);
 }
 
 .commander-colors {
@@ -221,7 +221,7 @@
   display: flex;
   gap: 0.5rem;
   font-size: 0.75rem;
-  font-family: "Ovo", serif;
+  font-family: var(--font-content);
   color: #888;
   margin-top: auto;
   padding-top: 0.5rem;

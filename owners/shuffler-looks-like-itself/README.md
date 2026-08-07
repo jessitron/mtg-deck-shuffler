@@ -54,6 +54,55 @@ The Tabletop today has hit "can't implement anything else until it has a design
 identity" (Jess, 2026-08-06). Its design pass should start from this identity — tokens
 and typefaces first — not from a blank page, and its findings come back into this KB.
 
+**It now has somewhere to start from — half of it (resolved 2026-08-07, `4396aea`).** The
+Tabletop used to have no CSS source file and no font link at all, so a `var(--…)` resolved to
+nothing and Orbitron fell back to a system serif, both silently. That is closed: the fleet's
+shared tokens live in **`packages/design-tokens/tokens.css`** (`@fleet/design-tokens`), imported
+by the Tabletop through Vite and served by the Shuffler at `/fleet/tokens.css`; Orbitron and Ovo
+load from a Google Fonts `<link>` in `apps/tabletop/index.html`. The tokens **moved** — they are
+not mirrored in any ship's `:root` — which was this owner's non-negotiable and is why the
+`docs.css` re-declaration went too.
+
+**What is still missing: a ship-local stylesheet on the Tabletop.** Shared tokens have a home;
+the first *Tabletop-only* rule does not, so inline styles remain the default by inertia rather
+than by choice. Whoever writes that rule decides where Tabletop CSS lives. See
+[open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side".
+
+## tldraw limits — recorded, not fought (2026-08-07)
+
+Layer 2 says to write these down rather than silently dropping a rule. All four were found
+while `.scratch/tabletop-physics/issues/03-what-furniture-is.md` decided that Tabletop
+furniture becomes a custom `mtg-zone` shape.
+
+- **tldraw's `geo` `font` prop is an enum with no Orbitron in it.** So a stock `geo` label
+  can *never* be on-brand — today's `serif` zone labels aren't a design choice, they're the
+  enum. This is the strongest design argument for a custom shape, and it generalizes: **any
+  text the fleet wants on a canvas in a fleet typeface has to come from a self-rendering
+  shape.**
+- **Layer 1's focus rule cannot reach a canvas shape.** The global `:focus-visible` rule is
+  DOM-only, and tldraw owns selection indication for shapes. This is a genuine exemption from
+  the "every interactive element gets a visible focus state" rule, not an oversight — say so
+  out loud when designing canvas UI instead of inventing a shape-level ring that would fight
+  tldraw's.
+- **A locked shape can never be a drop target.** `Editor.getDraggingOverShape`
+  (`Editor.ts`, currently around `:6571-6585`) filters `!s.isLocked` **before** it checks
+  whether a util defines `onDragShapesOver`/`onDropShapesOver`, and there is no
+  `canMove`/`canDrag`/`canTranslate` on `ShapeUtil` — `isLocked` is tldraw's only shape-level
+  brake. Furniture is locked on purpose (Jess: locked by default so she doesn't move it by
+  accident, unlockable via the context menu on purpose), so **any "this furniture reacts to
+  what's over it" treatment has to be a derived render** (`useValue` over the shapes being
+  translated), never a hook writing a prop. That's also better hygiene: the hooks fire every
+  frame, so a prop-writing version means per-frame writes to a synced document plus an undo
+  trail.
+- **An opaque picture layered over a zone box hides that box's interior.** The playmat's and
+  library's *pictures* stay separate stock `image` shapes on top of the `mtg-zone` box, so
+  border, interior tint and inset shadow are all invisible for those two. Any "armed" or
+  "about to receive" treatment for them must read as an **outward** effect — which rules out
+  the app's one existing armed pattern (`.hand-drop-zone.drag-over`'s "restate the boundary +
+  tint the interior") for exactly the two zones that need it most. A pure-CSS `/design`
+  specimen will hide this; include a stand-in image layer or scope the specimen to the
+  unpictured zones and say so.
+
 ## Why this owner exists
 
 The Shuffler has a real, specific, coherent aesthetic — and it is almost entirely
@@ -74,16 +123,59 @@ already there**, and stop the drift from replicating.
 
 The things that are genuinely consistent today, and that new UI must match:
 
-**Three typefaces, with distinct jobs.** Orbitron (geometric sans) for chrome — nav,
-buttons, headings, form labels and fields, the game title slab. Ovo (serif) for content
-— prose and **card names specifically**; a card name is content, not chrome. Risque
-(display cursive) only for the big splashy words on the site pages, never on the play
-pages. There is no fourth typeface.
+**Three typefaces, with distinct jobs — and they are named by ROLE, not by face
+(2026-08-07, `f79bc7d`).** `--font-chrome` (Orbitron, geometric sans) for chrome — nav,
+buttons, headings, form labels and fields, the game title slab. `--font-content` (Ovo,
+serif) for content — prose and **card names specifically**; a card name is content, not
+chrome. `--font-display` (Risque, display cursive) only for the big splashy words on the
+site pages, never on the play pages. There is no fourth typeface.
 
-**Purple and pink, from tokens.** `--deep-space` (#221534) for bars and dark surfaces,
+- **Write the role token, never the face.** `font-family: var(--font-chrome)`, not
+  `font-family: "Orbitron", sans-serif`. All 39 literals across the Shuffler's nine
+  stylesheets were swept onto the tokens in the same commit that added them — deliberately,
+  because a token nobody uses is just a second way to say the same thing, which was the main
+  argument *against* having one. The only surviving `font-family` literals in the CSS are
+  `monospace` (debug blocks) and `inherit`; both are genuine one-offs.
+- **The role is the stable name and the face is the detail.** If Ovo were ever replaced, the
+  word "content" would still be true. Three faces with fixed jobs is exactly the situation
+  where role names hold.
+- **The canvas is the reason these are tokens and not a convention.** A self-rendering
+  tldraw shape passes a font *string* from TypeScript — there is no class to hang a rule on
+  — so without a name here, the literal gets retyped into a `.tsx` file where no
+  stylesheet-level convention can reach it. Same argument as `--radius-soft`.
+
+**Purple and pink, from tokens — and the tokens are the fleet's, not the Shuffler's
+(2026-08-07, `4396aea`).** `--deep-space` (#221534) for bars and dark surfaces,
 `--dark-pink` (#bb5277) for borders/rules/accents, `--light-pink` (#ddc7dd) for bevels
-and slabs. Plus `--playmat-one`/`--playmat-two` on the game page and the closed
-`--mana-W/U/B/R/G` set.
+and slabs, `--cute-heading-color` (#9134d2), `--narrow-border` (3px), the closed
+`--mana-W/U/B/R/G` set, the three type roles above, and `--radius-soft` (4px).
+**All of those live in `packages/design-tokens/tokens.css`**
+(`@fleet/design-tokens`) — one file, both ships, served by the Shuffler at
+`/fleet/tokens.css` and imported by the Tabletop through Vite.
+
+- **Add or change a shared token in the package**, never in a ship's `:root`. They are
+  deliberately **not** mirrored anywhere: a "fallback" copy is a second dictionary, and it
+  turns a broken load — loud and obvious — into a silent near-miss. A Playwright test fails
+  if any of them is re-declared in `styles.css`.
+- **What did *not* travel.** `--background-color` (#f0f0f0) stayed in `styles.css`: generic
+  site chrome, not fleet identity. `--playmat-one`/`--playmat-two` stayed in `game.css`
+  **on purpose** — "the playmat is one object, one appearance" was decided about the
+  Shuffler's two *pages*, and extending it across the ship boundary to a tldraw-rendered
+  seat mat is an unratified Layer-2 claim. Buoyed as `playmat-colours-fleet-or-shuffler`;
+  the omission is a decision, not an oversight.
+- **Font tokens: RESOLVED 2026-08-07 (`f79bc7d`).** Jess: *"yeah, go for it! I'm all for more
+  tokens."* `--font-chrome` / `--font-content` / `--font-display` are in the package and every
+  Shuffler stylesheet uses them. **The typeface names still appear in the three `<head>`s** —
+  that's the Google Fonts `<link>` fetching the files, a separate concern from naming a face
+  in a rule, and it does not go through a token.
+- **`--radius-soft: 4px` is also in the package (2026-08-07, `f79bc7d`), and where it lives
+  was decided deliberately.** Shared, not `styles.css`, for the same canvas-can't-use-CSS
+  reason as the fonts: choice 4's rule is stated fleet-wide *including canvas shapes*, and a
+  tldraw shape passes a radius from TypeScript. This is choice 4's already-decided value
+  (Jess, 2026-08-06) getting a **name** — no new appearance decision rode along. **The ~13
+  hand-written radius values in the Shuffler are NOT swept**; that sweep is still its own job
+  (`.scratch/shuffler-design-choices/issues/04-radius-sweep.md`), and those values are still
+  drift, not precedent. A comment in `tokens.css` says so.
 
 **Chunky physical controls — down to a single site.** `outset` / `inset` / `groove`
 borders survive in **exactly one place** in the app: `.cool-command-zone-surround`'s
@@ -126,7 +218,41 @@ playmat, count discs. (That used to say "the playmat, the `.page-container`" —
 for one object; see "The playmat is one object" below.)
 
 **The card is the layout unit.** 200 × 278, radius 10px. Column widths, button grids and
-drop zones are sized off that 200.
+drop zones are sized off that 200. On the canvas the Tabletop's card is 170 × 238 (68
+units/inch) and everything else derives from it — but see the next paragraph: that
+derivation describes the **default** card, not every card on the board.
+
+**On the canvas, a card keeps its full handle set — resize AND free-rotate — and that is
+decided, not an oversight (2026-08-07, `.scratch/tabletop-physics/issues/04-tap-is-state.md`,
+`3f14d02`).** No handles are suppressed on a card at all.
+
+- **Resize stays, aspect-ratio locked** (`isAspectRatioLocked = () => true`). Jess resizes
+  cards deliberately — *"I like to make creatures bigger than lands"* — and she does it in
+  Mural today. The aspect-ratio lock is this owner's constraint and it **was** adopted: the
+  board's whole premise is physical proportion, so a card may change size but never shape.
+- **This owner argued resize should die and was overruled.** The argument: `CARD_W = 170`
+  fixes the canvas coordinate system, so a player-scaled card falsifies "the playmat is 9.6
+  cards wide." The counter, from Jess and the ticket: the playmat is 9.6 **default** cards
+  wide, and one scaled creature doesn't falsify that. **Recorded so the argument isn't
+  re-run from scratch** — if you find yourself re-deriving it, you're re-deriving a settled
+  question.
+- **Free-rotate stays** — *"people might want to angle a card a little bit to indicate that
+  it's attacking (even if vigilant)."* It costs nothing because tap became a rotation
+  **delta** (+90° relative to the card's own angle), so tap composes on top of any
+  player-chosen angle without either mechanism knowing about the other.
+- **Crop disappears for free.** `DefaultImageToolbar` gates on `shape.type !== 'image'`, so
+  the crop button exists only while the card is an `ImageShapeUtil` subclass; becoming the
+  custom `mtg-card` type removes it with no work. That was the thing Jess actually objected
+  to (*"I don't want the weird cropping thing"*), and it is not the same objection as
+  resize.
+- **So the board is deliberately non-uniform on handles.** All *furniture* is `isLocked` and
+  therefore has no handles; *cards* have all of them. Don't "tidy" that into consistency in
+  either direction.
+- **A custom `indicator()` is still undecided.** Ticket 04 decided nothing about how a
+  selected card looks. An `indicator()` that looks like anything other than tldraw's default
+  is a **separate design decision needing its own sign-off** — don't let it ride along on the
+  `mtg-card` implementation. (Related: the global `:focus-visible` rule cannot reach a canvas
+  shape — see tldraw limits above.)
 
 **Two style worlds.** Site pages (`/`, `/choose-any-deck`, `/docs`, `/about`) use the
 purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages
@@ -240,20 +366,27 @@ fill + `var(--light-pink)` text. Replaces the three grays (`#6c757d` Bootstrap, 
 Material, and the `#5a6268` hover-darken riding along with them) across
 `.end-game-actions`, `.card-action-button.secondary`, and `.modal-action-button.secondary`.
 
-## Open choices — staged on `/design`, not yet decided
+## Open choices — answered by Jess, not yet shipped
+
+**All three are DECIDED** — Jess answered choices 3, 4 and 6 on 2026-08-06, and the answers
+with her reasoning are in `.scratch/shuffler-design-choices/spec.md`. What's outstanding is the
+*commits*, one per choice (`issues/02`–`04`). **So do not treat these as open questions and do
+not re-derive an answer** — cite spec.md. (This bit somebody on 2026-08-07: a Tabletop ticket
+asserted `border-radius: 0` on a zone as though radius were still open, because this table and
+`open-choices.md` both still read "pending".)
+
+| Choice | Jess's answer (spec.md) | Shipped? |
+| --- | --- | --- |
+| 3 · Card-modal action buttons | **Two families, split so the color carries meaning** — *this moves the card* vs *this is a tool*. Neither staged option | not yet |
+| 4 · Corner radius on chrome | **Soften what you press:** `--radius-soft: 4px` on pressables, `0` on flat surfaces, physical objects keep their real radii. *"The line falls at 'do you touch it', not at 'is it small'"* | **token named** in `tokens.css` (`f79bc7d`); the ~13-value sweep not yet |
+| 6 · Text input | option C, `.candidate-input` — 2px `--deep-space`, Orbitron, one rule with a size variant | not yet |
 
 **→ [open-choices.md](open-choices.md) is the work list**: every option, its exact
 implementation steps by file and selector, and the checklist for resolving one. Start there if
 you've been sent to converge the design.
 
-Until Jess picks, don't hard-code an answer; follow the existing treatment nearest the
-component and flag the choice.
-
-| Choice | Options on the page |
-| --- | --- |
-| Card-modal action buttons | Keep seven color-coded hues · collapse to primary/secondary |
-| Corner radius on chrome | truly 0 · a single 4px |
-| Text input | precon-search · join-table · tokenized proposal (recommended) |
+Because the CSS hasn't caught up, the *code* still shows 13 radius values and seven Material
+hues. Those are not precedent — new UI follows the decided rule above.
 
 Candidate CSS for the unadopted options lives in
 `apps/shuffler/public/design-candidates.css`, loaded by nothing but the gallery.
@@ -263,7 +396,11 @@ Candidate CSS for the unadopted options lives in
 | | |
 | --- | --- |
 | Gallery route | `/design` → `apps/shuffler/views/design.ejs` (`src/app.ts`, near `/about`) |
-| Tokens | `apps/shuffler/public/styles.css` `:root` |
+| **Shared tokens (fleet)** | `packages/design-tokens/tokens.css` — served at `/fleet/tokens.css`, imported by the Tabletop via Vite. Colours + `--narrow-border` + `--mana-*` + `--font-chrome/-content/-display` + `--radius-soft` |
+| Shuffler-only tokens | `apps/shuffler/public/styles.css` `:root` — now just `--background-color` |
+| Typefaces in CSS | **always `var(--font-*)`** — no `font-family` literal survives in the Shuffler except `monospace` and `inherit` |
+| Fonts (delivery) | Google Fonts `<link>` in **three** places: `views/partials/head.ejs`, `src/view/common/html-layout.ts`, `apps/tabletop/index.html`. This is the one place a typeface is still named by name, and it isn't tokenisable |
+| One-shot sweep script | `scripts/sweep-font-literals.sh` — kept so the exact substitutions stay reviewable |
 | Site pages | `apps/shuffler/public/site.css` |
 | Shared playmat chrome | `apps/shuffler/public/playmat.css` (game **and** prepare) |
 | Page-specific | `game.css`, `prepare.css`, `deck-selection.css`, `docs.css` |

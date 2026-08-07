@@ -1,9 +1,13 @@
 /* Docs Page Styles */
 
+/* --deep-space, --dark-pink and --light-pink used to be re-declared here,
+ * byte-identical to styles.css. They now come from @fleet/design-tokens, loaded
+ * by head.ejs on every page. That duplication is the reason the fleet has one
+ * dictionary rather than a deliberate copy: nobody neglected this block, and it
+ * still diverged — by ADDITION, growing the three tokens below, which exist
+ * nowhere else. Those three stay: they're genuinely docs-only, and promoting
+ * them to the shared set is its own decision. */
 :root {
-  --deep-space: #221534;
-  --dark-pink: #bb5277;
-  --light-pink: #ddc7dd;
   --text-light: #e8e8e8;
   --link-color: #dda0c5;
   --link-hover: #f0c0dd;
@@ -15,7 +19,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'Ovo', serif;
+  font-family: var(--font-content);
 }
 
 /* Typography */
@@ -25,7 +29,7 @@
 .docs-page h4,
 .docs-page h5,
 .docs-page h6 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-chrome);
   font-weight: 700;
 }
 
@@ -49,7 +53,7 @@
   flex-shrink: 0;
   padding-top: 32px;
   /* match main */
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-chrome);
 }
 
 .docs-sidebar h1 {
@@ -75,11 +79,11 @@
 
 .docs-sidebar>ul>li {
   margin-bottom: 1rem;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-chrome);
 }
 
 .docs-sidebar>ul>li>ul>li {
-  font-family: 'Ovo', serif;
+  font-family: var(--font-content);
 }
 
 .docs-sidebar a {

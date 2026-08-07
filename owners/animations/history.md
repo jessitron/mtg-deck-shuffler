@@ -158,6 +158,111 @@
   `playmat-game`. Bare `.playmat` also matches /prepare's mat, so a rule meant for the game
   stage alone must use `.playmat-game`.
 
+### 2026-08-07: Tap is state, rotation is a delta — tabletop-physics ticket 04 (`3f14d02`)
+
+**A decision, not code.** No source file changed;
+`.scratch/tabletop-physics/issues/04-tap-is-state.md` is self-contained and authoritative.
+Resolved by grilling with Jess plus this owner, `shuffler-looks-like-itself`, and a throwaway
+Playwright prototype (branch `proto/multi-tap`, deleted).
+
+- **The decision**: `props.tapped: boolean` is the stored truth on the Tabletop's `mtg-card`
+  shape, never read back out of an angle; the visual is tldraw's real `shape.rotation` written
+  as a **delta** (+90 tap / −90 untap, relative to the card's own angle), keeping the existing
+  centre-preserving `Vec.Rot` math. Free rotate and resize both stay.
+- **I withdrew my own `-context` recommendation.** I had advised boolean + CSS-transform
+  rotation inside the card component. On `-review`, after Jess decided the resize handle stays
+  live, I withdrew it: CSS-only rotation is invisible to tldraw, so the drawn card and its
+  hit-test box / selection indicator / resize handles disagree — *"a lie about where the object
+  is, on the gesture players repeat more than any other."* **The withdrawal is the decision.**
+  Don't re-issue the superseded advice. Also rejected with reasons: `getGeometry()` box-swap,
+  `editor.animateShapes()`.
+- **Ticket 05 (`05-rotate-to-tap.md`) inherits four constraints verbatim** — key off
+  `props.tapped`, not a ±90 delta sniff; don't animate on first render; comment the
+  centre-preserving/transform-origin coupling; no `overflow: hidden` on the path. All four are
+  written up in architecture.md.
+- **"This is not FLIP"** is recorded because a future reviewer would otherwise veto it citing
+  the no-FLIP rule. FLIP's forbidden part is *measuring* an unknown delta; ±90 is a constant.
+- **Deliberately not decided**: duration and easing. That's 05's, with the design owner. This
+  will also be the Tabletop's first owned styling, and the ship has no CSS source file yet
+  (`tabletop-css-tokens` in `TODO.md`).
+- **New empirical facts**: undo is per-client in a synced tldraw room (one player's undo syncs
+  to peers as an ordinary edit); because the animation trigger is a prop change, undo animates
+  the card back for free and remote peers animate identically for free; a tapped card's page
+  bounds are the rotated bounds.
+
+### 2026-08-07: Verify suite de-sleeped — every `networkidle` and fixed timeout deleted (`65f12e8`)
+
+Ticket `.scratch/verify-suite-speed/issues/02-optimize-the-suite.md`, plan in
+`.scratch/verify-suite-speed/plan-02.md`. **No app code changed** — no CSS, keyframes,
+`game.js`, HTMX attributes or `WhatHappened`. Only `test/verification/*.spec.ts`.
+225.0s → 106.5s, three consecutive green runs (113/107/107s) via the new `verify-thrice.sh`.
+
+Three things landed in this owner's territory:
+
+- **`.shuffling` is never removed** — established by grep, not by inference: no JS matches
+  `shuffl` at all. The class rides until the next htmx swap re-renders the stack, so animation
+  completion is not class-observable and `not.toHaveClass(/shuffling/)` would be wrong and
+  would pass instantly. Written up in architecture.md as a general property of *all* animation
+  classes here.
+- **Both 1800ms mulligan sleeps deleted** (`verify-mulligan.spec.ts`), on this owner's
+  reasoning: the 1.5s shuffle animates `.library-card-back` transforms that no asserted
+  locator touches, and the class arrives in the same swap as the asserted state, so the
+  state assertion *is* the synchronization. Comments left at both sites, plus one marking the
+  `Mulligan #2` assertion as load-bearing for the following Ctrl+Z.
+- **`{ force: true }` CAUSES the swap/settle flake this KB already warned about** — it
+  disables the actionability wait that would absorb the swap. That's the missing half of the
+  existing interactions.md entry and is now recorded there. Nine sites still use it; removing
+  them was deliberately deferred to `TODO.md` rather than changing two things at once.
+
+The `toPass` retry pattern spread to 4 more sites; measured cost is 13 `toPass` steps / 8.2s
+per run, against 125s saved. Reference implementations listed in files.md.
+
+**Left open, and it isn't this owner's**: both flip loops in `verify-library-grouping.spec.ts`
+assert the position indicator is unchanged after the flip — the property under test, but a
+flip that never happened also passes, so that click is unverifiable and deliberately not
+wrapped in `toPass`. Written up as ticket 04; belongs with `two-faced-cards`.
+
+### 2026-08-07: Tap trigger and animation timing settled — tabletop-physics ticket 05 resolved
+
+**A decision, not code.** No source file changed;
+`.scratch/tabletop-physics/issues/05-rotate-to-tap.md` is self-contained and authoritative.
+The mechanism this owner had already specified (local catch-up counter-transform keyed off
+`props.tapped` changing, CSS-transitioned to 0) was unchanged — only the trigger-gesture
+question and the duration/easing value were open in `-context`, and both are now settled.
+
+- **Trigger stays plain `onClick`, no new gesture.** The click that already toggles
+  `props.tapped` on `MtgCardImageShapeUtil` keeps doing so. tldraw's own
+  `onRotateStart`/`onRotate`/`onRotateEnd` hooks (confirmed real in `tldraw@5.2.5`) are
+  **confirmed NOT used for tap at all** — the rotate handle stays reserved for free rotation
+  ("attacking" per ticket 04), keeping the two gestures visually distinct since tap is never
+  read back out of angle.
+- **Duration/easing: 0.5s `ease-out`, matching the Shuffler's card-motion slides
+  (`slideFromLeft`/`slideFromRight`/`growFromLeft`/`growFromRight`) — not the 0.8s flip
+  transition this owner had leaned toward.** Jess overrode that lean deliberately: tap happens
+  often mid-turn and reads better snappier than an 0.8s reorientation-style transition.
+- Both README.md's animation inventory and architecture.md's "Third mechanism" section are
+  updated accordingly; the "deliberately undecided" line in architecture.md is removed since
+  it's no longer true.
+
+### 2026-08-07: `{ force: true }` removed from the five card-modal-nav click sites (ticket 10)
+
+Ticket `.scratch/verify-suite-speed/issues/10-force-true-causes-the-flake-it-claims-to-fix.md`,
+resolving the "Removing them is filed in `TODO.md`" line left open by the `65f12e8` de-sleeping
+pass above. `force: true` removed from all five sites — `verify-library-grouping.spec.ts` (was
+lines 159, 243, 342) and `verify-query-parameter-modals.spec.ts` (was lines 372, 380) — updating
+the adjacent comments to stop describing an effect that's no longer there. The `toPass` retry
+wrappers were **kept** as a safety net; trying to remove those too is a deliberately separate
+follow-up (step 2 in the ticket), not bundled into this change. Verified by running
+`./verify.sh verify-library-grouping verify-query-parameter-modals` twice in a row: 19/19 passed
+both times, no new flakiness.
+
+**Also closed a KB gap this owner flagged during `-context`**: the "in case of viewport issues
+with modal positioning" justification that originally motivated `force: true` was checked and
+found to have no trace anywhere in the codebase — no git history, no comment, no documented
+viewport constraint. It was unverifiable folk memory carried into the original `TODO.md`
+capture, not a real constraint, which is why removing `force: true` was safe. Recorded in
+interactions.md so nobody re-adds it on the strength of that phrase alone.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.
@@ -167,6 +272,10 @@
 
 ## What Was Tried and Abandoned
 
+- **CSS-only rotation for the Tabletop's tap** (recommended by this owner in `-context`,
+  withdrawn by this owner in `-review`, 2026-08-07): invisible to tldraw, so the card's drawn
+  orientation and its hit-test / selection / resize geometry disagree. Killed by the decision
+  to keep resize handles live.
 - Using WhatHappened structure for card flip animations (reverted in `c8bf381`)
 - JS-driven flip animation timing (reverted in `db5885a`)
 - Client-driven card play exit animation using JS class application + HTMX swap delay (removed in `943ece6` — was broken, never properly worked)

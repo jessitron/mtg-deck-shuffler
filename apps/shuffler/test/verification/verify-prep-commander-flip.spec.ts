@@ -34,7 +34,6 @@ test.describe('Prepare screen - flipping a two-faced commander', () => {
     const prepId = await setupPrepWithTwoFacedCommander(page);
 
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
-    await page.waitForLoadState('networkidle');
 
     const flipContainer = page.locator('#card-0-outer-flip-container');
     const flipButton = page.locator('#card-0-flip-button');
@@ -62,7 +61,6 @@ test.describe('Prepare screen - flipping a two-faced commander', () => {
     const prepId = await setupPrepWithTwoFacedCommander(page);
 
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
-    await page.waitForLoadState('networkidle');
 
     // Clicking the unflipped card opens the modal on the front face
     await page.locator('#card-0-container').click();
@@ -85,7 +83,6 @@ test.describe('Prepare screen - flipping a two-faced commander', () => {
     const prepId = await setupPrepWithTwoFacedCommander(page);
 
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
-    await page.waitForLoadState('networkidle');
 
     await page.locator('#card-0-container').click();
     await expect(page.locator('.card-modal-overlay')).toBeVisible({ timeout: 5000 });

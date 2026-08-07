@@ -1,5 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+// The fleet's shared palette — one dictionary, both ships. Imported here rather
+// than in a page component so every Tabletop surface has the tokens, and so the
+// Shuffler and the Tabletop are loading the same bytes. Orbitron itself is a
+// <link> in index.html; see packages/design-tokens/tokens.css.
+import "@fleet/design-tokens/tokens.css";
 import { App } from "./App";
 import { initTracing } from "./observability";
 

@@ -48,21 +48,18 @@ function extractPrepId(url: string): string | null {
  */
 async function setupGame(page: any): Promise<string> {
   await page.goto(`${BASE_URL}/choose-any-deck`);
-  await page.waitForLoadState('networkidle');
 
   const preconTiles = page.locator('.precon-tile');
   await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
   await preconTiles.first().click();
 
   await page.waitForURL('**/prepare/*', { timeout: 30000 });
-  await page.waitForLoadState('networkidle');
 
   const shuffleUpButton = page.locator('button.begin-button, button.start-game-button, button:has-text("Shuffle Up")');
   await expect(shuffleUpButton).toBeVisible();
   await shuffleUpButton.click();
 
   await page.waitForURL('**/game/*', { timeout: 30000 });
-  await page.waitForLoadState('networkidle');
 
   const gameId = extractGameId(page.url());
   if (!gameId) throw new Error('Failed to create game');
@@ -75,14 +72,12 @@ async function setupGame(page: any): Promise<string> {
  */
 async function setupPrep(page: any): Promise<string> {
   await page.goto(`${BASE_URL}/choose-any-deck`);
-  await page.waitForLoadState('networkidle');
 
   const preconTiles = page.locator('.precon-tile');
   await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
   await preconTiles.first().click();
 
   await page.waitForURL('**/prepare/*', { timeout: 30000 });
-  await page.waitForLoadState('networkidle');
 
   const prepId = extractPrepId(page.url());
   if (!prepId) throw new Error('Failed to create prep');
@@ -100,10 +95,6 @@ test.describe('Query Parameter Modal Auto-Opening - Game Page', () => {
 
     // Navigate to game with ?openCard=0 query parameter
     await page.goto(`${BASE_URL}/game/${gameId}?openCard=0`);
-    await page.waitForLoadState('networkidle');
-
-    // Wait a bit for the auto-open to trigger
-    await page.waitForTimeout(1000);
 
     // Verify card modal container is populated
     const cardModalContainer = page.locator('#card-modal-container');
@@ -123,10 +114,6 @@ test.describe('Query Parameter Modal Auto-Opening - Game Page', () => {
 
     // Navigate to game with ?openLibrary=true query parameter
     await page.goto(`${BASE_URL}/game/${gameId}?openLibrary=true`);
-    await page.waitForLoadState('networkidle');
-
-    // Wait for the auto-open to trigger
-    await page.waitForTimeout(1000);
 
     // Verify modal container is populated
     const modalContainer = page.locator('#modal-container');
@@ -146,10 +133,6 @@ test.describe('Query Parameter Modal Auto-Opening - Game Page', () => {
 
     // Navigate to game with both parameters
     await page.goto(`${BASE_URL}/game/${gameId}?openLibrary=true&openCard=5`);
-    await page.waitForLoadState('networkidle');
-
-    // Wait for the auto-open to trigger
-    await page.waitForTimeout(1500);
 
     // Verify library modal is open
     const modalContainer = page.locator('#modal-container');
@@ -169,10 +152,6 @@ test.describe('Query Parameter Modal Auto-Opening - Game Page', () => {
 
     // Navigate to game with ?openTable=true query parameter
     await page.goto(`${BASE_URL}/game/${gameId}?openTable=true`);
-    await page.waitForLoadState('networkidle');
-
-    // Wait for the auto-open to trigger
-    await page.waitForTimeout(1000);
 
     // Verify modal container is populated
     const modalContainer = page.locator('#modal-container');
@@ -189,10 +168,6 @@ test.describe('Query Parameter Modal Auto-Opening - Game Page', () => {
     // First, we need to play a card to the table so there's something to show
     // Let's just test that the query params trigger the modal requests
     await page.goto(`${BASE_URL}/game/${gameId}?openTable=true&openCard=0`);
-    await page.waitForLoadState('networkidle');
-
-    // Wait for the auto-open to trigger
-    await page.waitForTimeout(1500);
 
     // Verify table modal is open
     const modalContainer = page.locator('#modal-container');
@@ -212,10 +187,6 @@ test.describe('Query Parameter Modal Auto-Opening - Game Page', () => {
 
     // Navigate to game with ?openHistory=true query parameter
     await page.goto(`${BASE_URL}/game/${gameId}?openHistory=true`);
-    await page.waitForLoadState('networkidle');
-
-    // Wait for the auto-open to trigger
-    await page.waitForTimeout(1000);
 
     // Verify modal container is populated
     const modalContainer = page.locator('#modal-container');
@@ -231,10 +202,6 @@ test.describe('Query Parameter Modal Auto-Opening - Game Page', () => {
 
     // Navigate to game with ?openDebug=true query parameter
     await page.goto(`${BASE_URL}/game/${gameId}?openDebug=true`);
-    await page.waitForLoadState('networkidle');
-
-    // Wait for the auto-open to trigger
-    await page.waitForTimeout(1000);
 
     // Verify modal container is populated
     const modalContainer = page.locator('#modal-container');
@@ -250,10 +217,15 @@ test.describe('Query Parameter Modal Auto-Opening - Game Page', () => {
 
     // Navigate to game without query parameters
     await page.goto(`${BASE_URL}/game/${gameId}`);
-    await page.waitForLoadState('networkidle');
 
-    // Wait to ensure no auto-open happens
-    await page.waitForTimeout(1000);
+    // Proving a negative needs care: toBeEmpty() would pass instantly even if a
+    // modal were about to open. It's sound here without a sleep because
+    // modal-query-params.js decides SYNCHRONOUSLY in its DOMContentLoaded
+    // handler and returns early when there are no params — and page.goto()
+    // resolves on 'load', which is after DOMContentLoaded. So the decision has
+    // already been made and cannot change. Anchor on rendered content first, so
+    // this can't pass merely because the page never arrived.
+    await expect(page.locator('.playmat-game')).toBeVisible();
 
     // Verify modal containers are empty
     const modalContainer = page.locator('#modal-container');
@@ -276,10 +248,6 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
 
     // Navigate to prep with ?openCard=0 query parameter
     await page.goto(`${BASE_URL}/prepare/${prepId}?openCard=0`);
-    await page.waitForLoadState('networkidle');
-
-    // Wait for the auto-open to trigger
-    await page.waitForTimeout(1000);
 
     // Verify card modal container is populated
     const cardModalContainer = page.locator('#card-modal-container');
@@ -299,10 +267,6 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
 
     // Navigate to prep with ?openLibrary=true query parameter
     await page.goto(`${BASE_URL}/prepare/${prepId}?openLibrary=true`);
-    await page.waitForLoadState('networkidle');
-
-    // Wait for the auto-open to trigger
-    await page.waitForTimeout(1000);
 
     // Verify modal container is populated
     const modalContainer = page.locator('#modal-container');
@@ -322,10 +286,6 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
 
     // Navigate to prep with both parameters
     await page.goto(`${BASE_URL}/prepare/${prepId}?openLibrary=true&openCard=10`);
-    await page.waitForLoadState('networkidle');
-
-    // Wait for the auto-open to trigger
-    await page.waitForTimeout(1500);
 
     // Verify library modal is open
     const modalContainer = page.locator('#modal-container');
@@ -345,10 +305,12 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
 
     // Navigate to prep without query parameters
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
-    await page.waitForLoadState('networkidle');
 
-    // Wait to ensure no auto-open happens
-    await page.waitForTimeout(1000);
+    // Same reasoning as the game-page baseline above: the auto-open decision is
+    // made synchronously on DOMContentLoaded, which has already fired by the
+    // time goto() resolves, so there is nothing to wait out. Anchor on rendered
+    // content so an empty assertion can't pass on an empty page.
+    await expect(page.locator('.playmat-prepare')).toBeVisible();
 
     // Verify modal containers are empty
     const modalContainer = page.locator('#modal-container');
@@ -368,8 +330,6 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
     // Open a library card (card index after commanders, e.g., index 10 should be in library)
     // Commanders are typically indices 0-1, library starts after
     await page.goto(`${BASE_URL}/prepare/${prepId}?openCard=10`);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
 
     // Verify card modal is open
     const cardModal = page.locator('.card-modal-overlay');
@@ -393,34 +353,32 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
 
     // Open a library card in the middle of the deck
     await page.goto(`${BASE_URL}/prepare/${prepId}?openCard=10`);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
 
     const cardModal = page.locator('.card-modal-overlay');
     await expect(cardModal).toBeVisible({ timeout: 5000 });
 
     // Get the initial card title
-    const initialTitle = await page.locator('.card-modal-title').textContent();
+    const cardTitle = page.locator('.card-modal-title');
+    const initialTitle = (await cardTitle.textContent()) ?? '';
 
-    // Click next button (use force: true in case of viewport issues with modal positioning)
+    // The nav arrows are plain hx-get into #card-modal-container. A click at
+    // Playwright speed can put its mousedown on a node htmx is about to replace
+    // and its mouseup on the replacement, so no click event fires at all.
+    // Retry the click until the title actually changes.
     const nextButton = page.locator('.card-modal-nav-next');
     await expect(nextButton).toBeVisible({ timeout: 5000 });
-    await nextButton.click({ force: true });
-    await page.waitForTimeout(500);
-
-    // Verify we're on a different card
-    const nextTitle = await page.locator('.card-modal-title').textContent();
-    expect(nextTitle).not.toBe(initialTitle);
+    await expect(async () => {
+      await nextButton.click();
+      await expect(cardTitle).not.toHaveText(initialTitle, { timeout: 3000 });
+    }).toPass({ timeout: 20000 });
 
     // Click prev button to go back
     const prevButton = page.locator('.card-modal-nav-prev');
     await expect(prevButton).toBeVisible({ timeout: 5000 });
-    await prevButton.click({ force: true });
-    await page.waitForTimeout(500);
-
-    // Verify we're back on the original card
-    const backTitle = await page.locator('.card-modal-title').textContent();
-    expect(backTitle).toBe(initialTitle);
+    await expect(async () => {
+      await prevButton.click();
+      await expect(cardTitle).toHaveText(initialTitle, { timeout: 3000 });
+    }).toPass({ timeout: 20000 });
 
     console.log('SUCCESS: Prep card modal navigation clicking works');
   });

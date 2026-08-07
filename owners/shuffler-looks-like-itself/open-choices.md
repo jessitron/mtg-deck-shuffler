@@ -1,11 +1,16 @@
 # Open choices — the work list
 
-**Status: in progress.** Choices 1 and 2 are DECIDED (2026-08-02); **choice 5 is DECIDED and
-shipped (2026-08-06)**; **choice 7 is DECIDED and shipped (2026-08-07)**. **Jess answered
-choices 3, 4 and 6 on 2026-08-06** — the answers and their reasoning are in
-`.scratch/shuffler-design-choices/spec.md`, and `issues/02`–`04` execute them one commit at a
-time. Choices 3, 4 and 6 are still marked `_(pending)_` below until their commits land and run
-the resolve checklist.
+**Status: every choice is answered; three are unshipped.** Choices 1 and 2 DECIDED
+(2026-08-02); **choice 5 DECIDED and shipped (2026-08-06)**; **choice 7 DECIDED and shipped
+(2026-08-07)**. **Jess answered choices 3, 4 and 6 on 2026-08-06** — reasoning in
+`.scratch/shuffler-design-choices/spec.md`, executed one commit at a time by `issues/02`–`04`.
+
+⚠️ **"Pending" used to appear on 3, 4 and 6 below, meaning *unshipped*, and it read as
+*undecided*.** On 2026-08-07 a Tabletop ticket (`.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md`)
+asserted `border-radius: 0` on a canvas zone from first principles because this file said choice
+4 was pending — reaching the wrong answer, since the decided rule is `0` on flat surfaces but
+`4px` on pressables. So each answer is now stated **inline** below with its spec.md section.
+**Nothing here is an open question.** What's outstanding is CSS commits.
 
 **Citations here are file + selector, never `file:NNN` (convention adopted 2026-08-07 — see
 [README.md](README.md#how-to-cite-code-in-this-kb-standing-convention-2026-08-07)).** Grep the
@@ -123,7 +128,9 @@ Seven unrelated Material hues, none of them brand colors. All eight rules are in
 | A | Keep color coding — learnable per-destination color, but seven off-brand hues |
 | B | One primary (`--dark-pink`) + rest secondary — two tokens, most likely action stands out, loses the color learning |
 
-**Decision:** _(pending)_
+**Decision: ANSWERED 2026-08-06 (spec.md §3), not yet shipped — and it was neither staged
+option.** Jess picked a third: **two families, split so the color carries meaning** — *this
+moves the card* vs *this is a tool*. Don't go looking for it on the old options page.
 
 If B, the `.modal-action-button.*` variant rules collapse into two classes; update
 `views/partials/card-modal.ejs` and `src/view/play-game/game-modals.ts` accordingly.
@@ -139,7 +146,33 @@ If B, the `.modal-action-button.*` variant rules collapse into two classes; upda
 | A | Truly `0` — matches the written rule and the newest code |
 | B | A single `4px` — closer to where most CSS already sits, but contradicts the rule |
 
-**Decision:** _(pending)_
+**Decision: ANSWERED 2026-08-06 (spec.md §4) — "soften what you press" — not yet shipped.**
+Also neither staged option, but a *split*: **`--radius-soft: 4px` on pressables, `0` on flat
+surfaces, physical objects keep their real radii.** Jess, worth keeping verbatim because it's
+the rule agents will follow: *"While I want square corners, there are times when the square
+gets painfully pointy. So on buttons and stuff, there is a 'not too pointy' minimal border
+radius. (4px is acceptable.) Of course cards have their border radius, that's how they really
+are."*
+
+**The test is "do you touch it", not "is it small"** — deliberately, so the next agent can
+*apply* it rather than guess. Square is the aesthetic; the softening is a concession applied
+exactly where the pointiness reason applies (raised things, pressed things). This applies
+fleet-wide, including to canvas shapes: a zone boundary is a flat surface you don't press, so
+it's `0`; a pressable drawn on the canvas would be `4px`.
+
+**The token now exists — the sweep does not (2026-08-07, `f79bc7d`).** `--radius-soft: 4px`
+landed in `packages/design-tokens/tokens.css` alongside the font tokens. **Where it lives was
+decided, not defaulted:** shared, for the same canvas-can't-use-CSS reason as the fonts — the
+rule is stated fleet-wide *including canvas shapes*, and a tldraw shape passes a radius from
+TypeScript where no stylesheet convention reaches. Naming the already-decided value is not a
+new appearance decision, which is why it was allowed to ride with the font work.
+
+So what remains here is purely the **sweep**: the ~13 hand-written values below still say `2px`,
+`5px`, `10px`… **They are drift, not precedent** — a comment in `tokens.css` says so, and so
+does `/design` → Geometry. `--radius-soft` is documented in the Geometry section of
+`design.ejs` rather than as a colour swatch in the "Named tokens" grid; when the sweep lands,
+convert that section's `.choice` block (whose two staged options are the *original* question —
+Jess picked neither) into a plain specimen.
 
 **The `playmat.css` radius rules, by selector** (grep `border-radius` in that file to see all
 twelve at once): `.library-card-back::before` 8px *(keep — physical)*, `.library-buttons
@@ -256,7 +289,7 @@ this ticket is a human tabbing through `/`, `/choose-any-deck`, `/prepare`, `/ga
 | B | `.join-table-fields input` — `prepare.css`, 1px `#888`, compact, inherits Ovo |
 | **C (recommended)** | `.candidate-input` in `design-candidates.css` — 2px `--deep-space`, Orbitron, one rule with a size variant |
 
-**Decision:** _(pending)_
+**Decision: C, ANSWERED 2026-08-06 (spec.md §6), not yet shipped.**
 
 **The four sites** (choice 5 deleted the two `:focus` rules that used to sit among them): in
 `deck-selection.css` — `.precon-search-input` and its `::placeholder`,
@@ -343,12 +376,25 @@ Do these as their own commits once the choices are settled. They're mechanical.
 
 - **Tokenize the orphan colors.** 57 distinct hex values today; ~14 of them are
   Material/Bootstrap defaults on single buttons. Choices 2, 3 and 6 kill most of them.
-  Whatever survives needs a name in `styles.css` `:root` and a swatch on `/design`.
+  Whatever survives needs a name — in `packages/design-tokens/tokens.css` if it's fleet
+  identity, in `styles.css` `:root` if it's Shuffler-only chrome — and a swatch on `/design`.
   Choice 5 took two off the list — the `rgba(219,39,119,.3)` Tailwind pink and one
   `rgba(76,175,80,.3)` **Material green** both left with the deleted input `:focus` rules.
   Material green **survives once**, in `game.css` → `.hand-drop-zone.drag-over`
   (`background-color: rgba(76,175,80,.2)`), and now belongs to this cleanup rather than to
-  focus work.
+  focus work. **That one rule violates three rules at once**, which is why it keeps coming up:
+  the Material green, `border-radius: 20px` (soft corners on chrome), and
+  `outline: 2px solid gray` (one of only two surviving decorative outlines). It is also the
+  app's **only** existing "armed / about to receive" treatment, so it is the thing an agent
+  designing a drop target will find and copy — it nearly got ported into the Tabletop on
+  2026-08-07 (`.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md`). **Its *shape*
+  is instructive and worth keeping — "restate the boundary + tint the interior" — its *values*
+  are not.** Don't port it anywhere; reproduce the shape with tokens.
+- **`.commander-placeholder`'s literals** (`2px dashed #ccc` on `#f9f9f9`, duplicated in
+  `game.css` *and* `prepare.css`) belong to this cleanup too. Noted 2026-08-07 because the
+  **pattern** is good and being reused: dashed-on-a-card-sized-box already means "empty
+  receptacle where a card goes" in this app, at exactly the card unit, which makes it the
+  right starting point for a Tabletop zone at rest. Port the pattern, retokenize the values.
 - **De-duplicate the copy-pasted blocks** (see `architecture.md` → Traps). There are
   **four**, and "flip" is two separate ones — the container and the button:
   - modal styles in `playmat.css` + `prepare.css`;
@@ -377,17 +423,121 @@ Do these as their own commits once the choices are settled. They're mechanical.
   settles the radius question it's entangled with, and it should de-duplicate at the same
   time rather than restyle two copies. The `#ff9800` swatch on `/design`
   (`design.ejs`, in the orphan-hex grid) goes with it.
-- **Collapse the extra `:root` blocks.** There are **four** (verified 2026-08-07), not two:
-  `styles.css` (the real one), `docs.css` (re-declares `--deep-space`, `--dark-pink`,
-  `--light-pink` and adds three link tokens that exist nowhere else — this is the drift),
-  `game.css` (`--playmat-one`/`--playmat-two`) and `playmat.css` (`--mana-W/U/B/R/G`). Only
-  `docs.css`'s is a straight re-declaration; the other two are component-local color sets
-  that would still be better named in `styles.css`.
+- **~~Collapse the extra `:root` blocks.~~ Mostly done 2026-08-07 (`4396aea` + `a8e2427`).**
+  There were four in the Shuffler; there are now **three, and one of them is authoritative
+  and lives outside the ship**:
+
+  | `:root` | What's in it | Verdict |
+  | --- | --- | --- |
+  | `packages/design-tokens/tokens.css` | the identity palette, `--narrow-border`, `--mana-*`, **`--font-chrome/-content/-display`, `--radius-soft`** (added `f79bc7d`, 2026-08-07) | the fleet's one dictionary — shared tokens go **here** |
+  | `styles.css` | `--background-color` only | Shuffler-only site chrome; fine |
+  | `docs.css` | `--text-light`, `--link-color`, `--link-hover` | no longer a re-declaration — three genuinely docs-only tokens. Promoting them is its own decision |
+  | `game.css` | `--playmat-one`, `--playmat-two` | **deliberately left**, not an oversight — see `playmat-colours-fleet-or-shuffler` in `TODO.md` |
+
+  `playmat.css` no longer has a `:root` at all. The remaining question isn't "collapse them",
+  it's the one buoy: do the playmat colours belong to the fleet or to the Shuffler? Extending
+  "the playmat is one object, one appearance" **across the ship boundary** to a tldraw-rendered
+  seat mat is an unratified Layer-2 claim, so moving those two tokens would silently answer it.
 - **Delete the debug leftover:** `site.css` → `.step > * { border: 0px solid red }`.
 - **Adopt a spacing scale.** No scale exists. Proposed: `4 · 8 · 12 · 16 · 24 · 32 · 48`
   — every current value rounds to one of these within 2px except 5, 15 and 18.
 
 ---
+
+## Fleet gaps — the Tabletop side (opened 2026-08-07)
+
+Not `/design` choices. These are places where this owner's charge already applies to
+`apps/tabletop` and there is nothing to apply it *with*. Surfaced by
+`.scratch/tabletop-physics/issues/03-what-furniture-is.md` making Tabletop furniture a
+self-rendering custom shape.
+
+- **~~There is nowhere to declare a Tabletop token, and no way to load Orbitron.~~
+  RESOLVED 2026-08-07 (`4396aea`, `db79bf8`, `a8e2427`) — `tabletop-css-tokens`.** The answer
+  was a shared workspace, not a deliberate duplicate: `packages/design-tokens`
+  (`@fleet/design-tokens`, `packages/*` added to the root workspaces glob), holding the identity
+  palette, `--narrow-border` and the mana colours. The Shuffler serves it at `/fleet/tokens.css`
+  (an `express.static` mount in `src/app.ts`, resolved via `import.meta.resolve` rather than by
+  walking up from `__dirname`, because the depth differs between dev and container); the Tabletop
+  imports `@fleet/design-tokens/tokens.css` in `src/client/main.tsx` so Vite inlines it. Orbitron
+  and Ovo come from a Google Fonts `<link>` in `apps/tabletop/index.html`, matching the two
+  existing sites.
+
+  **This owner's two non-negotiables both held.** (1) The tokens **moved**, they are not
+  mirrored — `styles.css` `:root` now holds only `--background-color`, `playmat.css`'s `--mana-*`
+  `:root` is gone entirely, and a Playwright test fails if any shared token is re-declared in
+  `styles.css`. (2) It landed **with checks**, because both halves fail silently:
+  `verify-fleet-tokens.spec.ts` on each ship asserts every shared token resolves non-empty via
+  `getComputedStyle` and that Orbitron loads, `test/html-layout-fleet-tokens.test.ts` covers the
+  Shuffler's *other* head cheaply, and `scripts/check-fleet-tokens.sh` is a fast local smoke check.
+
+  **Why not the `log.ts`-style deliberate duplicate.** That duplication is *forced* — the two
+  copies sit on incompatible OTel version lines — and it drifts **loudly**, breaking the build.
+  A palette drifts silently. `docs.css` was the fleet's own evidence: it re-declared three of
+  these tokens, never diverged in what it copied, and diverged **by addition** anyway.
+
+  **Ordering that mattered, and is worth reusing:** `docs.css`'s three re-declarations were
+  deleted in a **separate, later commit** (`a8e2427`), after the plumbing was verified —
+  because while they existed, `/docs`, `/about` and `/history` would have kept their colours
+  even if the shared sheet failed to load, masking the failure on exactly three pages.
+  `--text-light`, `--link-color`, `--link-hover` stay; they're genuinely docs-only, and
+  promoting them is its own decision.
+
+- **Still open: there is no ship-local stylesheet on the Tabletop.** Shared tokens have a home;
+  the first *Tabletop-only* rule does not. Inline styles are the status quo by inertia, not by
+  choice. Ticket 05 (tap motion) and ticket 11 (what a zone looks like) will both want one.
+  Whoever writes that rule decides where Tabletop CSS lives — and it must not be answered by
+  starting a `:root` there.
+- **~~Still open: font tokens.~~ DECIDED and shipped 2026-08-07 (`f79bc7d`).** Jess: *"yeah, go
+  for it! I'm all for more tokens."* `--font-chrome` / `--font-content` / `--font-display` are in
+  `packages/design-tokens/tokens.css`, **named by role rather than by typeface** because three
+  faces with fixed jobs make the role the stable name and the face the detail. All **39**
+  `font-family` literals across nine Shuffler stylesheets were swept onto them in the same
+  commit — swept rather than merely added, because a token nobody uses is just a second way to
+  say the same thing, which was the main argument against having one. `scripts/sweep-font-literals.sh`
+  keeps the exact substitutions reviewable. Both ships' `verify-fleet-tokens.spec.ts` now assert
+  the three (plus `--radius-soft`) resolve.
+
+  **A real convergence rode along and is recorded as a decision, not an accident.** `styles.css`'s
+  `body` said `font-family: "Ovo", Arial, sans-serif` while all nine other Ovo sites said
+  `"Ovo", serif`; the token settles it as `"Ovo", serif`. Only observable if Ovo fails to load —
+  but it *is* a behaviour change, and it was the agent's to make, not Jess's. That drift, plus
+  quoting split between single and double quotes, is the concrete evidence that justified
+  tokenising type at all.
+
+  **What is still literal, and correctly so:** the typeface names in the three `<head>`s
+  (`views/partials/head.ejs`, `src/view/common/html-layout.ts`, `apps/tabletop/index.html`), where
+  the Google Fonts `<link>` *fetches* the files. That is delivery, not naming a face in a rule, and
+  a CSS custom property can't reach it. The standing rule holds: one delivery mechanism fleet-wide
+  (a `<link>` **or** `@font-face`, never both), and self-hosting is a change to all three at once.
+
+  **The Tabletop uses none of these yet** — nothing there sets a font. They exist for ticket 11's
+  `mtg-zone` shape, which is exactly the case the tokens were created for.
+- **`LandingPage.tsx` is a live, unrecorded Layer-1 violation.**
+  `apps/tabletop/src/client/LandingPage.tsx` carries an off-brand green/cream palette in inline
+  styles — `#1a2a1f`, `#f5f1e8`, `#3d5a45` — with no relationship to purple-and-pink. It is the
+  Tabletop's only styled surface, which makes it the thing an agent will grep for precedent.
+  **It is not a house style and not a precedent to match.** Its home was previously only inside
+  a Tabletop ticket; it belongs here, because it outlives that ticket.
+- **Coming to this owner: the tap motion's tempo** (`.scratch/tabletop-physics/issues/05-rotate-to-tap.md`,
+  opened by ticket 04 on 2026-08-07). A card tapping is a 90° rotation played as a local
+  catch-up transform. **Ticket 04 decided no duration, easing, colour or literal** — that is
+  deliberately 05's, and 05 is to be decided *with* this owner. The calibration 04 handed
+  forward: the Shuffler's motion vocabulary is **0.8s** (the flip transition) and **0.5s**
+  (card motion), and a tap is a flip-like **reorientation**, not a translation — so match one
+  of those two rather than inventing a third tempo. **Decidable now, not implementable** — it
+  needs a Tabletop stylesheet (`tabletop-css-tokens`, above) to land in. This is not a
+  `/design` `.choice` yet; staging it would mean animating a specimen, and the gallery has no
+  Tabletop stage.
+- **Also undecided, and it must not ride along: a card's `indicator()`.** Ticket 04 records
+  explicitly that an `indicator()` looking like anything other than tldraw's default is a
+  **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket
+  is where it will try to hitch a ride.
+- **The gallery has zero Tabletop specimens, and the cross-app stylesheet question is
+  unresolved.** The gallery's credibility rests on rendering the *app's own* stylesheets. A
+  Tabletop specimen only keeps that property if the Tabletop's CSS is a real stylesheet
+  `/design` can load — across ships, which nobody has decided. Ticket 11 will be the first to
+  hit it. **If you mock a Tabletop specimen with candidate CSS, label it a mock.** Don't settle
+  the architecture quietly on the way past.
 
 ## When a choice is resolved — the checklist
 

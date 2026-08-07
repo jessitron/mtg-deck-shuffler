@@ -477,3 +477,303 @@ cause.
 pages' frame color — the mats, `.game-title`, and `.cool-command-zone-surround` all use it,
 and no black token exists in `styles.css` `:root`. And the mat art URL is down to two sites
 from three (`playmat.css`, `design-gallery.css`); `design-playmat-specimen` would make it one.
+
+## 2026-08-07 — the design language reached the canvas, and hit four tldraw walls
+
+No CSS changed. `.scratch/tabletop-physics/issues/03-what-furniture-is.md` decided that Tabletop
+furniture becomes one custom tldraw shape type, `mtg-zone` (playmat, library, graveyard, exile,
+Stack, future command zone), rendering itself in React instead of being a stock locked `geo` shape
+tagged `meta.zone`. This owner was consulted **mid-interview**, before a recommendation had formed
+— which is the pattern the README asks for, and it paid twice.
+
+**What it bought, and this is the reusable lesson: consulting early moved a decision, not just a
+review comment.** The owner's answer that the `geo` `font` prop enum has no Orbitron in it — so a
+stock label can *never* be on-brand — became "the single strongest design argument for the custom
+shape." A design fact, arriving before the architecture was fixed, changed the architecture.
+
+**Appearance was deliberately split out into a new ticket** rather than decided inside the
+architecture ticket, on this owner's advice. The reasoning is the same one the README states:
+today's dashed-grey-serif zone look is **stock tldraw** — scaffolding nobody chose, appearing in
+no history entry and no open choice — and "new UI pulls toward the standard, not toward what it
+sits next to" bites hardest when what it sits next to is a framework default.
+
+**Four tldraw limits got recorded** (now in [README.md](README.md) → tldraw limits): the `font`
+enum; the global `:focus-visible` rule cannot reach a canvas shape, so that's a genuine exemption
+rather than an oversight; `getDraggingOverShape` filters `!s.isLocked` **before** checking for drag
+hooks and there is no `canMove` on `ShapeUtil`, so locked furniture can never be a drop target and
+any "reacts to what's over it" treatment must be a derived render; and an opaque picture layered
+over a zone box hides its interior, which kills the interior-tint pattern for the playmat and
+library specifically.
+
+**Three review findings worth keeping, because each is a failure mode this owner will meet again:**
+
+- **"Reproduce it verbatim" was unimplementable and therefore dangerous.** The stock look comes
+  from tldraw's prop *enums* rendered through its own hand-drawn stroke geometry and theme. A
+  `component()` drawing `border: 1px dashed grey` is an approximation, and an implementer told
+  "verbatim" will approximate *while believing they copied* — after which the next agent cites it
+  as precedent. Fix: approximate on purpose, and mark the literals a **knowingly-untokenized
+  placeholder, exempt from the Layer-1 token rule**, so a lint sweep can't promote the placeholder
+  into a decision.
+- **"Pending" in this KB meant *unshipped* and was read as *undecided*.** Choice 4 (chrome radius)
+  was answered by Jess on 2026-08-06, but this KB's tables still said pending because the commits
+  hadn't landed — so the Tabletop ticket derived `border-radius: 0` from first principles, missing
+  that the decided rule splits (`0` on flat surfaces, `--radius-soft: 4px` on pressables, *"the
+  line falls at 'do you touch it'"*). Fix: choices 3, 4 and 6 now state Jess's actual answer inline
+  in [open-choices.md](open-choices.md) and in the README table, with "shipped?" as a separate
+  column. **Decided-but-unshipped is a state this KB has to name explicitly.**
+- **An audience question was hiding inside a mechanism paragraph.** "The armed highlight is derived
+  locally, not written to the store" reads as implementation — but *who sees the library light up*
+  is player-visible behaviour and therefore Jess's. Pulled out and asked: *"honestly, whichever is
+  easier"* → local to the dragging player only. The door stays open at no cost (tldraw sync already
+  carries cursors and selections outside the undoable document, so a presence lane would make
+  shared arming cheap), recorded in the map's fog. **When a mechanism sentence implies who can see
+  something, that's a design decision wearing a mechanism's clothes.**
+
+**Two gaps got a permanent home** in [open-choices.md](open-choices.md) → "Fleet gaps — the
+Tabletop side": `apps/tabletop` has no CSS source file and no font link at all (so Layer 1 applies
+with nothing to apply it *with*, and both halves fail silently), and `LandingPage.tsx`'s off-brand
+green/cream inline palette (`#1a2a1f`, `#f5f1e8`, `#3d5a45`) is a live Layer-1 violation. The
+second had been recorded only inside a Tabletop ticket as "not a precedent to match" — the wrong
+home, because it outlives the ticket. Also stated up front: **the tokens gap must not be solved by
+copying `styles.css`'s `:root`.**
+
+## 2026-08-07 — a card keeps all its handles, and this owner lost the argument
+
+`3f14d02` **Resolve tabletop-physics 04: tap is a boolean, rotation is a delta**
+
+No CSS changed; nothing was built. `.scratch/tabletop-physics/issues/04-tap-is-state.md`
+decided that a Tabletop card stores `props.tapped` as a boolean and writes rotation as a
+**delta** (+90° from the card's own current angle), rather than reading tap back out of an
+absolute angle. The design consequences outlive the ticket.
+
+**This owner argued resize should be suppressed on cards, and was overruled — deliberately,
+with reasons, and that's why it's written down.** The argument was that `CARD_W = 170` fixes
+the canvas coordinate system at 68 units/inch, every other dimension derives from it, and a
+player-resized card falsifies the sentence "the playmat is 9.6 cards wide." Jess's counter:
+the playmat is 9.6 **default** cards wide, one scaled creature doesn't falsify that, and she
+resizes cards in Mural on purpose — *"I like to make creatures bigger than lands."* The
+rejection is recorded in the ticket *and* in [README.md](README.md) so the next agent doesn't
+re-run it from scratch and arrive at the same overruled place.
+
+**The half that was adopted is the half that mattered.** The constraint this owner correctly
+identified — the board's premise is *physical proportion*, so a card may change size but never
+shape — landed as `isAspectRatioLocked = () => true`. Worth noting as a pattern: a design
+objection that gets refused wholesale can still be right about the invariant underneath it.
+**State the invariant separately from the remedy**, or it goes down with the remedy.
+
+**Free-rotate stays too**, which is the opposite of where the `-context` brief was leaning:
+*"people might want to angle a card a little bit to indicate that it's attacking (even if
+vigilant)."* It costs nothing precisely *because* tap became a delta — tap composes on top of
+any player-chosen angle with neither mechanism knowing about the other. So **no handles are
+suppressed on a card at all**, and the earlier "I would not object to fewer handles" is moot.
+Recorded as decided so nobody suppresses them later thinking it's an obvious cleanup.
+
+**The board is now deliberately non-uniform on handles.** All furniture is `isLocked`, so most
+shapes already have none; cards keep the full set. That asymmetry is a decision, not drift —
+this owner had flagged the uniformity gap and this is its answer.
+
+**Crop dies for free, and it was never the same objection as resize.** `DefaultImageToolbar`
+gates on `shape.type !== 'image'`, so the crop button exists only while a card is an
+`ImageShapeUtil` subclass; becoming `mtg-card` removes it with no work. Jess's *"I don't want
+the weird cropping thing"* was about crop, not resize — a useful reminder to hear the specific
+complaint rather than the category it seems to fall in.
+
+**The ride-along warning was honoured.** Nothing in 04 decides a custom `indicator()`, and the
+ticket says out loud that an indicator differing from tldraw's default is a separate design
+decision needing its own sign-off. Likewise no duration, easing, colour or literal: the tap
+**motion** is [ticket 05](../../.scratch/tabletop-physics/issues/05-rotate-to-tap.md), to be
+decided *with* this owner, carrying forward the calibration that the Shuffler's vocabulary is
+0.8s (flip) and 0.5s (card motion) and that a tap is a flip-like reorientation rather than a
+translation — match one, don't invent a third tempo.
+
+**Decided but unbuilt**, in the state this KB now names explicitly (see the choice-4 lesson
+above). The Tabletop still has no CSS source file and no font link (`tabletop-css-tokens`);
+04 needed no styling so it wasn't blocked, but 05 will be.
+
+## 2026-08-07 — the fleet got one dictionary
+
+`4396aea` **Give the fleet one dictionary: @fleet/design-tokens**, then `db79bf8` (CLAUDE.md
+truth-up) and `a8e2427` (delete `docs.css`'s duplicated tokens).
+
+The Tabletop had no CSS source file and no font link at all, so a `var(--…)` resolved to
+nothing and Orbitron fell back to a system serif — **both silently** — which blocked every
+Tabletop implementation ticket. The fix was a new workspace, `packages/design-tokens`
+(`@fleet/design-tokens`, with `packages/*` added to the root `workspaces` glob), holding the
+identity palette, `--narrow-border` and Magic's colour pie. The Shuffler serves it at
+`/fleet/tokens.css`; the Tabletop imports it so Vite inlines it.
+
+**The tokens MOVED; they are not mirrored, and that was the load-bearing constraint.**
+`styles.css` `:root` now holds only `--background-color`, `playmat.css`'s `--mana-*` `:root` is
+gone, and a Playwright assertion fails if any shared token reappears in `styles.css`. A
+"fallback" copy is a second dictionary, and it would turn a broken load — loud and obvious —
+into a silent near-miss.
+
+**Why not the deliberate `log.ts` duplicate, which someone will cite.** That duplication is
+*forced* (incompatible OTel version lines) and drifts **loudly**: the build breaks. A palette
+drifts silently — the app just quietly stops looking like itself on one face. And the fleet had
+already run the experiment: `docs.css` re-declared three of these tokens, **never diverged in
+what it copied**, and diverged **by addition** anyway, growing three link tokens that exist
+nowhere else. *That's* the failure mode — a chosen duplicate doesn't rot by drifting apart, it
+rots by growing.
+
+**Ordering as a design decision.** `docs.css`'s three re-declarations came out in a **separate,
+later commit**, after the plumbing was verified — because while they existed, `/docs`, `/about`
+and `/history` would have kept their colours even if the shared sheet failed to load, masking
+the failure on exactly three pages. Deleting a duplicate *before* you trust the original is how
+you keep a false negative.
+
+**Two container traps, both prod-only, and one of them this owner had flagged.** Every workspace
+in the glob needs its `package.json` COPYed before `npm ci` (missed → build fails outright), and
+npm links workspaces as **relative** symlinks, so the Shuffler's runtime stage — which flattens
+`/repo/apps/shuffler` to `/app` — must copy `packages/` or the link dangles and every page loses
+its colours in the container only. **`verify-container-boot.sh` would not have caught the
+dangling link**: `import.meta.resolve` doesn't check the file exists, so the server boots fine
+and only the route 404s. It was closed by building the image and curling it. A boot check is not
+a link check — worth remembering the next time "it starts" is offered as evidence.
+
+**A test finding that generalises.** `document.fonts.check('16px Orbitron')` returns **false** on
+the Tabletop even with a correct `<link>`, because browsers fetch a webfont **lazily** — only
+when something on the page actually uses the family — and nothing on the Tabletop does yet (its
+only styled surface is the off-brand landing page). The test became `await
+document.fonts.load(...)` then `check(...)`, asserting **fetchability** rather than loadedness.
+The Shuffler's equivalent needs no `load()` because plenty there is set in Orbitron. Any future
+"is our font working" test on a ship with no on-brand surface hits this.
+
+**What deliberately did NOT ride along**, each buoyed instead of decided:
+
+- **`LandingPage.tsx` was left byte for byte.** It is the Tabletop's only styled surface and the
+  largest possible ride-along on a token change — restyling it *is* the Tabletop's design pass in
+  miniature, and it needs Jess's sign-off. `tabletop-landing-page-palette`.
+- **`--playmat-one`/`--playmat-two` stayed in `game.css`.** "The playmat is one object, one
+  appearance" was decided about the Shuffler's two *pages*; extending it across the ship boundary
+  to a tldraw-rendered seat mat is an unratified Layer-2 claim, and moving the tokens would have
+  answered it silently. `playmat-colours-fleet-or-shuffler`.
+- **Font tokens** (`--font-chrome`/`--font-content`/`--font-display`) were **asked about rather
+  than slipped in**, and Jess hasn't answered — so they are *unresolved*, not rejected. Colours
+  shipped alone.
+
+**What this closes and what it doesn't.** The Tabletop can now write on-brand CSS; it still has
+**no stylesheet of its own**, so the first Tabletop-only rule has nowhere to live and inline
+styles remain the default by inertia. Loading Orbitron also does **not** put it on tldraw canvas
+text — the `geo` `font` enum still has no Orbitron in it, so on-brand canvas text still needs a
+self-rendering shape. Necessary, not sufficient.
+
+## 2026-08-07 — library and command zone swapped sides
+
+No commit sha yet (working-tree change). Jess wanted the library on the right and the
+command zone on the left, on both `/prepare` and `/game` — a pure placement swap, no
+appearance change on either component.
+
+**Two different layout mechanisms, two different levers.** `/game`'s `.game-top-row` is a
+flex row with no `order` property, so visual order is DOM order — `active-game-page.ts`
+now emits `commandZoneHtml`, `revealedCardsHtml`, `librarySectionHtml` in that sequence,
+where it used to emit library first. `/prepare`'s mat is a CSS grid, so the swap is
+`grid-column` on two rules in `prepare.css`: `.playmat .cool-command-zone-surround` (4→2)
+and `.section-that-is-horizontally-aligned-with-command-zone` — the library-side rule —
+(2→4), with the library's `justify-self` flipped `end`→`start` so it still hugs the side
+nearer the command zone. Verified with a new spec,
+`test/verification/verify-library-command-zone-swap.spec.ts`, which reads actual
+`boundingBox()` left edges rather than trusting DOM/markup order, precisely because the two
+pages use opposite ordering mechanisms and either could regress independently.
+
+**`.playmat .commander-placeholder` moved too, and it's the part worth remembering.** It's
+the "no commander" alt-render of the exact same grid slot the surround occupies
+(`commanders.length === 0 ? placeholder : surround`), so when the surround's column changed
+the placeholder's had to mirror it — `grid-column` 5→1, keeping `justify-self: start`, so it
+overflows right into column 2. That's only safe because the two never render at the same
+time. A comment above the placeholder rule in `prepare.css` says so. If a future change to
+this grid moves the surround again without also checking the placeholder, the col4/col5 (now
+col2/col1) offset between them will look like an unexplained accident instead of the mirrored
+pair it actually is.
+
+**Also incidentally became true, not newly written:** the library rule's existing comment
+— `justify-self: end; /* left-align, overflow right */` — had been describing the *opposite*
+of what the code did (an `end` justify-self right-aligns, it doesn't left-align). Flipping
+`justify-self` to `start` for this swap made the comment's claim match the code for the
+first time; it was stale before this change, not fixed by it, and stayed stale until it did.
+
+## 2026-08-07 — the swap exposed a 15px vertical-alignment bug it didn't cause
+
+`5c69aa3` **Fix /prepare card-art vertical alignment: 7px undershot the real 22px inset**
+
+Jess reported, right after the library/command-zone swap above, that the library card and
+the commander card had lost vertical alignment on `/prepare`. The swap itself couldn't be
+the cause -- `grid-column` and `justify-self` are horizontal, and flex/grid reordering
+doesn't touch cross-axis alignment. Confirmed by walking the actual DOM to the `<img>`
+elements on both `/prepare` and `/game` (using Jess's own live game, prep 1707, on her
+running dev server): on `/game` the two card images landed on the identical y-coordinate;
+on `/prepare` they were 15px apart.
+
+**Root cause:** `.section-that-is-horizontally-aligned-with-command-zone`'s
+`margin-top: 7px` in `prepare.css` only accounted for the `.card-container` inset inside
+`.cool-command-zone-surround`, missing the outer `.multiple-cards` inset (15px). The real
+total is 22px -- which `game.css`'s `padding-top: 22px` on the same class already had
+right, comment and all. `prepare.css`'s 7px was wrong before the swap too; the swap just
+put the two elements close enough together, side by side, that the 15px gap became visible
+for the first time. Fixed by changing `margin-top` to `22px`, with a comment cross-referencing
+game.css's number. See [interactions.md](interactions.md) for the durable lesson (the
+numeric coupling between the two files' copies of this class).
+
+## 2026-08-07 — the typefaces got role names, and 39 literals went with them
+
+`f79bc7d` **Name the typefaces by role, and sweep the 39 literals onto the tokens**
+
+The sequel to `4396aea`, which shipped the colour tokens alone because Jess hadn't answered the
+font question. She answered: *"yeah, go for it! I'm all for more tokens."* So
+`--font-chrome` (Orbitron), `--font-content` (Ovo) and `--font-display` (Risque) joined the
+package, along with `--radius-soft: 4px`.
+
+**Named by ROLE, not by typeface, and that's the part worth keeping.** Not `--orbitron`. Three
+faces with fixed, long-settled jobs is exactly the situation where the role is the stable name and
+the face is the detail — if Ovo were ever replaced, "content" would still be true. The type
+sections of this KB and of `/design` had been describing the jobs in prose for months; the tokens
+just made the prose enforceable.
+
+**Swept, not merely added — deliberately, and this is now the standing rule.** All 39
+`font-family` literals across nine stylesheets were converted in the same commit, because *a token
+nobody uses is just a second way to say the same thing*, which was the main argument **against**
+adding one. The substitutions ran through a kept script (`scripts/sweep-font-literals.sh`) rather
+than a shell one-liner so they stay reviewable and a stray variant surfaces as a leftover instead
+of being silently missed. Only `monospace` and `inherit` survive as literals, both genuine
+one-offs.
+
+**The literals had already drifted, which is the evidence that justified the whole exercise.**
+`styles.css`'s `body` said `"Ovo", Arial, sans-serif` while all **nine** other Ovo sites said
+`"Ovo", serif`, and quoting was split between single and double quotes. The token settles it as
+`"Ovo", serif` — **a real behaviour change**, observable only if Ovo fails to load, made by the
+agent rather than by Jess, and recorded as a decision rather than left to look like a typo fix.
+Same rot as `docs.css`'s duplicated colours: a copy doesn't announce itself when it diverges.
+
+**The real reason, though, was the canvas.** A self-rendering tldraw shape passes a font *string*
+from TypeScript — there is no class to hang a rule on — so without a name in the shared
+dictionary, ticket 11 would have retyped `"Orbitron", sans-serif` into a `.tsx` file where none of
+the stylesheet-level conventions can reach it. **A convention that only exists in CSS stops at the
+canvas boundary; a token crosses it.** That argument is what also settled where `--radius-soft`
+lives.
+
+**`--radius-soft` got a home, answering a question the last `-update` had opened.** Choice 4's
+value was decided by Jess on 2026-08-06; `4396aea` left *where it lives* genuinely open, since the
+rule is stated fleet-wide including canvas shapes (argues shared) but nothing on the Tabletop uses
+it (argues ship-local). **Decided: shared**, on the canvas argument above. Naming an
+already-decided value is not a new appearance decision, which is why it was allowed to ride along
+with the fonts — **and the ~13 hand-written radius values were pointedly NOT swept**, because
+*that* is 13 visible component changes and belongs to its own ticket. A comment in `tokens.css`
+says so out loud, so the next agent can't read the token's existence as evidence the sweep
+happened.
+
+**A gallery-honesty gap closed in passing.** `/design`'s four type specimens were inline
+`font-family: 'Risque', cursive` literals — *describing* the palette exactly the way the
+`.swatch-chip` hexes do. They now use the tokens and each names its own, so the section fails
+visibly if `/fleet/tokens.css` doesn't load. **That's the template for finishing the colour
+swatches:** swapping a literal for a `var()` whose value *is* that literal is not an appearance
+change and needs no sign-off.
+
+**Also settled, since it looks wrong at a glance:** `design-gallery.css` and
+`design-candidates.css` were swept too. The "gallery chrome must never be copied into the app"
+rule is about *components* — it runs one direction. Consuming the fleet's shared dictionary runs
+the other, and a museum set in a foreign typeface would look unlike the fleet it exhibits.
+**Take tokens from the fleet; don't give selectors to the app.**
+
+Both ships' `verify-fleet-tokens.spec.ts` assert the four new tokens resolve. The Tabletop's copy
+matters most: nothing there sets a font yet, so a broken import would otherwise be invisible until
+ticket 11.

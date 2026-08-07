@@ -22,7 +22,6 @@ test.describe('Load a Precon Deck', () => {
   test('selecting a precon deck navigates to /prepare with deck content', async ({ page }) => {
     // Go to deck selection
     await page.goto(`${BASE_URL}/choose-any-deck`);
-    await page.waitForLoadState('networkidle');
 
     // Wait for precon tiles to load via HTMX
     const preconTiles = page.locator('.precon-tile');

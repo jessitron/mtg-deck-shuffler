@@ -31,6 +31,38 @@ The player area (playmat, library, graveyard, exile, Stack) is specified in
 taller when lands overflow its bottom half — picked up by the `playmat-command-zone`
 line in the repo-root `TODO.md`.
 
+## UI Style
+
+**The Tabletop is in scope for the fleet's design owner** — `owners/shuffler-looks-like-itself/`
+(the slug predates the fleet scope) and its `-context` / `-review` / `-update` skills. The
+Shuffler and Tabletop are meant to feel like **one app with two faces**, so pull toward the
+Shuffler's purple-and-pink tokens, Orbitron-for-chrome typography and square corners rather than
+inventing a look here. `/design` on the Shuffler is the gallery; look at it first.
+
+Two things to know before you write any styling here:
+
+- **The tokens and the font are wired up now** (`tabletop-css-tokens`, resolved 2026-08-07).
+  `src/client/main.tsx` imports `@fleet/design-tokens/tokens.css` — the *same file* the
+  Shuffler serves, not a copy — so the identity palette, `--narrow-border` and the mana
+  colours all resolve on every Tabletop surface. Orbitron and Ovo load from a Google Fonts
+  `<link>` in `index.html`. **Add a shared token by editing `packages/design-tokens/tokens.css`,
+  never by declaring a `:root` here**; a second dictionary is exactly what that package exists
+  to prevent. There is still **no ship-local stylesheet** — the first Tabletop-only rule needs
+  somewhere to live, and that's an open choice, not a solved one.
+  - **Orbitron still doesn't reach tldraw canvas text.** The `geo` shape's `font` prop is a
+    closed enum with no Orbitron in it, so only a self-rendering custom shape can use it on
+    canvas. Loading it was necessary, not sufficient.
+  - The green/cream inline palette in `src/client/LandingPage.tsx` (`#1a2a1f`, `#f5f1e8`,
+    `#3d5a45`) is still a known violation, not a house style — don't match it. Fixing it is a
+    real appearance decision needing Jess's sign-off, not a mechanical `var()` swap; buoyed as
+    `tabletop-landing-page-palette`.
+- **tldraw limits four rules**, recorded in the owner's README under "tldraw limits": no Orbitron
+  in the `geo` `font` enum (on-brand canvas text needs a self-rendering shape); the global
+  `:focus-visible` ring can't reach a canvas shape; a **locked** shape can never be a drop target
+  (`getDraggingOverShape` filters `!isLocked` before checking drag hooks), so "furniture reacts to
+  what's over it" must be a derived render; and an opaque `image` shape layered over a box hides
+  that box's interior. Record new limits there rather than fighting them or dropping the rule.
+
 ## Commands
 
 All from `apps/tabletop/`:

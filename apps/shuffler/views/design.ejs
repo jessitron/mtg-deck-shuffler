@@ -24,7 +24,7 @@
         <h1>Design System</h1>
         <p>
           Every specimen below is rendered by the app's own stylesheets — the same
-          <code>styles.css</code>, <code>site.css</code>, <code>playmat.css</code>,
+          <code>/fleet/tokens.css</code>, <code>styles.css</code>, <code>site.css</code>, <code>playmat.css</code>,
           <code>game.css</code>, <code>prepare.css</code> and <code>deck-selection.css</code>
           the real pages load. If a component changes in the app, it changes here. The gallery's
           own chrome (labels, frames, swatch grids) is the only thing styled by
@@ -61,6 +61,19 @@
         </p>
 
         <h3>Named tokens — the real palette</h3>
+        <p class="section-note">
+          <strong>These are the fleet's, not the Shuffler's.</strong> Since 2026-08-07 the identity
+          palette, <code>--narrow-border</code> and the mana colours live in
+          <code>packages/design-tokens/tokens.css</code> (<code>@fleet/design-tokens</code>), served
+          here at <code>/fleet/tokens.css</code> and imported by the Tabletop through Vite — one
+          dictionary, both ships. They are deliberately <em>not</em> mirrored in
+          <code>styles.css</code>, which now holds only <code>--background-color</code>. Add or change
+          a shared token in the package; never re-declare one in a ship's own <code>:root</code>.
+          The package holds four non-colour tokens too, shown where they belong rather than as
+          swatches: <code>--font-chrome</code>, <code>--font-content</code> and
+          <code>--font-display</code> under <a href="#type">Typography</a>, and
+          <code>--radius-soft</code> under <a href="#geometry">Geometry</a>.
+        </p>
         <div class="swatch-grid">
           <div class="swatch">
             <div class="swatch-chip" style="background: #221534;"></div>
@@ -276,24 +289,30 @@
         <h2>Typography <span class="badge badge-standard">standard</span></h2>
         <p class="section-note">
           Three faces, used with real discipline. This is the most consistent thing in the app —
-          don't introduce a fourth.
+          don't introduce a fourth. Since 2026-08-07 they are <strong>named by role, not by
+          typeface</strong>, in <code>packages/design-tokens/tokens.css</code>: the role is the
+          stable thing and the face is the detail. Every <code>font-family</code> in the Shuffler
+          goes through one of these — 39 hand-written literals were swept onto them, and they had
+          already drifted (Ovo's fallback stack differed in one place, quoting in several).
+          <strong>The specimens below are set with the tokens</strong>, so if
+          <code>/fleet/tokens.css</code> fails to load, this section shows it.
         </p>
 
         <div class="type-row">
-          <div class="type-meta">Risque 400 · display<br>hero title, slogan, step verbs</div>
-          <span style="font-family: 'Risque', cursive; font-size: 3rem; color: white;">Shuffle Up</span>
+          <div class="type-meta"><code>--font-display</code> · Risque 400<br>hero title, slogan, step verbs</div>
+          <span style="font-family: var(--font-display); font-size: 3rem; color: white;">Shuffle Up</span>
         </div>
         <div class="type-row">
-          <div class="type-meta">Orbitron 700 · headings + chrome<br>nav, buttons, titles, tiles, inputs</div>
-          <span style="font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.75rem; color: white;">MTG Deck Shuffler</span>
+          <div class="type-meta"><code>--font-chrome</code> · Orbitron 700<br>nav, buttons, titles, tiles, inputs</div>
+          <span style="font-family: var(--font-chrome); font-weight: 700; font-size: 1.75rem; color: white;">MTG Deck Shuffler</span>
         </div>
         <div class="type-row">
-          <div class="type-meta">Orbitron 400 · nav links</div>
-          <span style="font-family: 'Orbitron', sans-serif; font-weight: 400; font-size: 1.5rem; color: white;">play · docs · about</span>
+          <div class="type-meta"><code>--font-chrome</code> · Orbitron 400<br>nav links</div>
+          <span style="font-family: var(--font-chrome); font-weight: 400; font-size: 1.5rem; color: white;">play · docs · about</span>
         </div>
         <div class="type-row">
-          <div class="type-meta">Ovo 400 · body + card names<br>prose, card names, metadata</div>
-          <span style="font-family: 'Ovo', serif; font-size: 1.1rem; color: white;">Atraxa, Praetors' Voice</span>
+          <div class="type-meta"><code>--font-content</code> · Ovo 400<br>prose, card names, metadata</div>
+          <span style="font-family: var(--font-content); font-size: 1.1rem; color: white;">Atraxa, Praetors' Voice</span>
         </div>
         <div class="type-row">
           <div class="type-meta">monospace · debug only<br>tab ids, JSON dumps</div>
@@ -305,6 +324,8 @@
           <li><strong>Orbitron</strong> for anything the user acts on or navigates by — buttons, nav, headings, form labels, form fields.</li>
           <li><strong>Ovo</strong> for anything the user reads — prose, and card names specifically. A card name is content, not chrome.</li>
           <li><strong>Risque</strong> only for the big splashy marketing words on the site pages. Never on the play pages.</li>
+          <li><strong>Write the token, not the face.</strong> <code>font-family: var(--font-chrome)</code>, never <code>font-family: "Orbitron", sans-serif</code>. There is one exception in the CSS — <code>monospace</code> in debug blocks — and it stays a literal on purpose.</li>
+          <li><strong>The canvas needs these too.</strong> A self-rendering tldraw shape passes a font <em>string</em> from TypeScript, with no class to hang a rule on. That is the reason these are tokens rather than a convention.</li>
         </ul>
       </section>
 
@@ -316,6 +337,17 @@
           playmats, the card-back stack. Recent code follows it. Older CSS uses
           <strong>13 different <code>border-radius</code> values</strong>: 2, 3, 4, 5, 6, 8, 10, 20,
           30, 80px, 50%, 3vh, and 0.
+        </p>
+        <p class="section-note">
+          <strong>Decided, and now it has a name — but the CSS below has NOT caught up.</strong>
+          Jess ruled on 2026-08-06: <em>soften what you press.</em> <code>--radius-soft: 4px</code> on
+          pressables, <code>0</code> on flat surfaces, physical objects keep their real radii —
+          <em>"the line falls at 'do you touch it', not at 'is it small'."</em> The token landed in
+          <code>packages/design-tokens/tokens.css</code> on 2026-08-07 (shared, not ship-local,
+          because the rule is stated fleet-wide and a tldraw shape passes a radius from TypeScript
+          where no stylesheet reaches). <strong>The 13 values in the table below are drift awaiting
+          the sweep, not precedent</strong>, and the two options staged underneath are the
+          <em>original</em> question — Jess picked neither of them. New UI follows the decided rule.
         </p>
 
         <table class="gallery-table">
@@ -807,11 +839,11 @@
         <ul class="rule-list">
           <li><strong>Never write a raw hex.</strong> Use a named token. If no token fits, that's a design decision — ask, don't invent. Material and Bootstrap defaults are especially forbidden: they're how the drift got here.</li>
           <li><strong>Square corners on chrome.</strong> Round corners belong only to physical objects: cards, the playmat, count discs.</li>
-          <li><strong>Orbitron for chrome, Ovo for content.</strong> Card names are content. No fourth typeface.</li>
+          <li><strong>Orbitron for chrome, Ovo for content.</strong> Card names are content. No fourth typeface. Write the <em>role</em> token — <code>var(--font-chrome)</code>, <code>var(--font-content)</code>, <code>var(--font-display)</code> — never the typeface literal. See <a href="#type">Typography</a>.</li>
           <li><strong>Every interactive element gets a visible focus state</strong> — and it's already written for you: one global <code>:focus-visible</code> rule in <code>styles.css</code> draws <code>3px solid var(--light-pink)</code> at <code>outline-offset: 3px</code> on every <code>a</code>, <code>button</code>, <code>input</code>, <code>select</code>, <code>textarea</code>, <code>summary</code> and <code>[tabindex]</code>. Don't add a per-component focus rule, and never write <code>outline: none</code>. <strong>Known gap:</strong> the ring is only ~1.35:1 on flat-white surfaces, below WCAG's 3:1 — recorded and waiting on a decision, so don't "fix" it locally. See <a href="#focus">Focus states</a>.</li>
           <li><strong>The card is 200px wide.</strong> Size adjacent layout off that, not off arbitrary values.</li>
           <li><strong>Respect the z-index ladder:</strong> content 1–3, menu panel 500, <code>.modal-overlay</code> 1000, <code>.card-modal-overlay</code> 2000, its close button 2001.</li>
-          <li><strong>Know which file owns the component.</strong> <code>playmat.css</code> is shared by game and prepare; <code>game.css</code> and <code>prepare.css</code> are page-specific; <code>site.css</code> is the marketing pages; <code>styles.css</code> holds the tokens. The modal, flip, and library-list blocks are currently duplicated — fix the duplication rather than editing one copy.</li>
+          <li><strong>Know which file owns the component.</strong> <code>playmat.css</code> is shared by game and prepare; <code>game.css</code> and <code>prepare.css</code> are page-specific; <code>site.css</code> is the marketing pages; <code>styles.css</code> is global (reset, <code>.pushable-flat</code>, the focus ring). The <strong>shared tokens live outside the ship</strong>, in <code>packages/design-tokens/tokens.css</code> served at <code>/fleet/tokens.css</code>. The modal, flip, and library-list blocks are currently duplicated — fix the duplication rather than editing one copy.</li>
           <li><strong>Add new components to this page</strong> in the same commit that adds them to the app.</li>
           <li><strong>Every button presses the same way.</strong> <code>translateY(-4px)</code> at rest, <code>-6px</code> on hover (springy, 250ms), <code>-2px</code> on press (34ms snap), with a matching box-shadow bevel. No <code>outset</code>/<code>inset</code> borders for press feedback. See <a href="#buttons">Buttons</a>.</li>
         </ul>

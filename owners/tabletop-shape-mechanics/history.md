@@ -1,0 +1,76 @@
+# History
+
+## Origin: Tap/Untap (JES-144)
+
+- **`7bb13f8`** - Tabletop: rotate a card 90° by clicking it (essential slice) — first
+  `onClick` override on `MtgCardImageShapeUtil`, introducing the tldraw quirk this owner exists
+  to track (see below).
+- **`98f8bea`** - Fix card rotation to pivot around its center, not top-left corner — tldraw
+  rotates shapes around `x,y` (top-left), so the initial rotation implementation swung the card
+  around its corner instead of spinning in place. Fixed with the `halfExtent`/`center`/`topLeft`
+  math still in `onClick` today.
+- **`263d1d6`** - Tap/untap toggle instead of a 4-way rotation cycle — changed the gesture from
+  "rotate 90° each click" to "toggle between 0° and 90°," matching the physical tap/untap
+  gesture rather than a generic rotation control.
+
+## Zone Entry Detection
+
+- **`600cac1`** - Detect card zone entry via `onTranslateEnd`, log it
+  (`.scratch/tabletop-physics/issues/01-instrument-the-harness.md`-adjacent ticket
+  `01-zone-entry-events`). Chose `onTranslateEnd` (fires once, on the moved card, when a drag
+  settles) over `onDragShapesOver`/`onDropShapesOver` (fire on the *target*, every frame during
+  drag) because zones are stock locked `geo`/`image` shapes with no ShapeUtil of their own to
+  hang a target-side hook on. Debounces on the card's own `meta.zone` so re-entering a
+  previously-left zone still counts as fresh, but staying put doesn't. Notification is a bare
+  `console.log` for now (Jess, 2026-08-06: no consumer wired yet — that's a later ticket's job).
+
+## Tabletop Drag Picked Up the Wrong Card — Found and Fixed (2026-08-07, `959831c`)
+
+**Bug** (reported by Jess): play two cards, drag one, then drag the *other* (still-unmoved) card
+— the first card silently moved again instead of the one under the pointer.
+
+- **Root cause**, confirmed with a Playwright reproduction, not guessed: `MtgCardImageShapeUtil`
+  defines `onClick` (for tap/untap, above), which makes tldraw's own `SelectTool` treat card
+  shapes specially. tldraw's `PointingShape.onEnter` defers selecting the pointed-at shape until
+  pointer-up whenever the hit ShapeUtil defines `onClick`. Its `startTranslating` safety net only
+  force-reselects the actually-hit shape when *nothing* is currently selected — but tldraw
+  leaves the just-dragged card selected after a drag ends. So on the next drag (of a *different*
+  card), the safety net's guard is false, nothing gets reselected, and `Translating.onEnter`
+  translates the still-selected *first* card using the pointer deltas from the second drag.
+  Verified with `document.elementFromPoint` during the repro: the pointer correctly resolved to
+  the second card's DOM element, yet the first card moved — confirming the bug lived in tldraw's
+  selection state machine, not hit-testing or DOM z-order.
+- **Fix**: `onTranslateEnd` now calls `this.editor.setSelectedShapes([])` unconditionally, right
+  after the `meta.instanceId` guard and *before* the zone-equality early return (some drags — two
+  lands on the same playmat — hit that early return, so the clear has to happen first). This
+  empties the selection on every drag settle, so the next drag's `startTranslating` safety net
+  correctly fires and reselects whichever card is actually under the pointer.
+- **Test**: `apps/tabletop/test/verification/verify-drag-identity.spec.ts` — plays two
+  non-overlapping lands, drags the first, then drags the second, and asserts the second card
+  moves while the first stays exactly where its own drag left it. Failed before the fix,
+  reproducing the bug bit-for-bit; passes after.
+- **Full detail in `architecture.md`** — this is the load-bearing mechanism this owner exists to
+  track.
+
+### This owner's own origin story
+
+The finding above initially landed entirely in `owners/two-faced-cards/` — its trigger ("the
+Tabletop's card rendering (apps/tabletop)") was broad enough to catch a change to
+`MtgCardImageShapeUtil.tsx` even though the bug had nothing to do with card faces, flip, or
+`CardDefinition`. That cost a real round-trip: the fix required consulting `two-faced-cards`
+for a question it had no stake in, and the finding then lived in the wrong owner's history and
+watch points (watch point 16 in `owners/two-faced-cards/interactions.md`, and the matching
+`history.md` entry there — both migrated out to this owner on creation, 2026-08-07, leaving a
+short cross-reference behind in `two-faced-cards`).
+
+Jess's call (2026-08-07): shape-selection mechanics is complex enough, and distinct enough from
+card-face rendering, to warrant its own standing owner — `tabletop-shape-mechanics` — so future
+tldraw shape/selection/drag bugs route here instead of being caught incidentally by a
+card-rendering owner's overly broad trigger. This KB (`README.md`, `architecture.md`,
+`interactions.md`, this file) was seeded from that fix and from reading
+`MtgCardImageShapeUtil.tsx` and tldraw's `PointingShape.ts`/`Translating.ts` end to end.
+
+## What Was Tried and Abandoned
+
+Nothing yet — this owner is new. If a future fix attempt for a similar quirk is tried and
+reverted, record it here so the next person doesn't repeat it.

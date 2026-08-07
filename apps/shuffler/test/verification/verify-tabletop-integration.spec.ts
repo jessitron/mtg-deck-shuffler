@@ -60,7 +60,6 @@ test.afterAll(() => {
 
 async function startGameAtTable(page: Page, tableName: string): Promise<void> {
   await page.goto(`${BASE_URL}/choose-any-deck`);
-  await page.waitForLoadState('networkidle');
   const preconTiles = page.locator('.precon-tile');
   await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
   await preconTiles.first().click();
@@ -79,7 +78,6 @@ async function startGameAtTable(page: Page, tableName: string): Promise<void> {
   await page.locator('input[name="player-name"]').fill('E2E Jess');
   await page.locator('button.begin-button').click();
   await page.waitForURL('**/game/*', { timeout: 30000 });
-  await page.waitForLoadState('networkidle');
 }
 
 /**

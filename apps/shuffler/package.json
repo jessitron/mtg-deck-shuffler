@@ -22,6 +22,7 @@
     "precons:fetch-mtgjson": "node dist/scripts/fetch-mtgjson-precons.js"
   },
   "dependencies": {
+    "@fleet/design-tokens": "1.0.0",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/api-logs": "^0.219.0",
     "@opentelemetry/auto-instrumentations-node": "^0.77.0",
@@ -39,6 +40,10 @@
     "node": ">=24"
   },
   "devDependencies": {
+    "@opentelemetry/core": "^2.8.0",
+    "@opentelemetry/resources": "^2.8.0",
+    "@opentelemetry/sdk-trace-base": "^2.8.0",
+    "@opentelemetry/semantic-conventions": "^1.43.0",
     "@playwright/test": "^1.57.0",
     "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.3",

@@ -24,21 +24,18 @@ function extractGameId(url: string): string | null {
 
 async function setupGame(page: any): Promise<string> {
   await page.goto(`${BASE_URL}/choose-any-deck`);
-  await page.waitForLoadState('networkidle');
 
   const preconTiles = page.locator('.precon-tile');
   await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
   await preconTiles.first().click();
 
   await page.waitForURL('**/prepare/*', { timeout: 30000 });
-  await page.waitForLoadState('networkidle');
 
   const shuffleUpButton = page.locator('button.begin-button, button.start-game-button, button:has-text("Shuffle Up")');
   await expect(shuffleUpButton).toBeVisible();
   await shuffleUpButton.click();
 
   await page.waitForURL('**/game/*', { timeout: 30000 });
-  await page.waitForLoadState('networkidle');
 
   const gameId = extractGameId(page.url());
   if (!gameId) throw new Error('Failed to create game');
@@ -84,7 +81,6 @@ test.describe('Game Hamburger Menu', () => {
     // which is outside the menu, also dismisses the menu — standard
     // click-outside behavior — so we draw first, then open the menu.)
     await page.locator('button.draw-button').click();
-    await page.waitForTimeout(800);
 
     await page.locator('#menu-toggle').click();
     const panel = page.locator('#game-menu-panel');
@@ -93,7 +89,6 @@ test.describe('Game Hamburger Menu', () => {
     // Undo from inside the menu triggers a #game-container swap. The menu lives
     // inside that swapped region, so it should re-open itself after the swap.
     await panel.locator('.undo-button').click();
-    await page.waitForTimeout(800);
 
     await expect(panel).toHaveCSS('opacity', '1');
 
@@ -109,7 +104,6 @@ test.describe('Game Hamburger Menu', () => {
 
     // The draw button is outside the menu — clicking it should close the menu.
     await page.locator('button.draw-button').click();
-    await page.waitForTimeout(800);
 
     await expect(panel).toHaveCSS('opacity', '0');
 
@@ -123,12 +117,10 @@ test.describe('Game Hamburger Menu', () => {
     const before = parseInt((await handCount.textContent()) ?? '0', 10);
 
     await page.locator('button.draw-button').click();
-    await page.waitForTimeout(800);
     await expect(handCount).toHaveText(String(before + 1));
 
     // Standard undo hotkey (Ctrl on Linux/Win, Meta on Mac).
     await page.keyboard.press('ControlOrMeta+z');
-    await page.waitForTimeout(800);
 
     await expect(handCount).toHaveText(String(before));
 

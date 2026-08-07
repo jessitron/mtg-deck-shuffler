@@ -13,6 +13,19 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- [ ] `tabletop-no-shutdown-flush` The Tabletop's server has the same dropped-telemetry-on-shutdown gap the Shuffler just fixed
+  - Surfaced 2026-08-07 while resolving `.scratch/verify-suite-speed/issues/08-no-shutdown-flush-hook.md`
+    (the Shuffler's `tracing.ts` had no SIGTERM/SIGINT handler, so `verify.sh`'s `cleanup()` and every
+    k8s pod termination dropped the last OTel batch). `fleet-is-observable-context`/`-update` grepped
+    `apps/tabletop/src/server/tracing.ts` while updating the owner KB and confirmed: same gap, unfixed.
+  - The fix shape already exists and is proven in production use: `apps/shuffler/src/shutdownHooks.ts`'s
+    `installShutdownHandlers()` — bounded drain via an `unref()`'d timeout, exactly-once exit even if
+    both signals fire, `onTimeout`/`onDrainError` callbacks so the caller can log without coupling the
+    helper to `log.ts`. Copy the pattern into the Tabletop rather than sharing the module — its
+    `tracing.ts` and `log.ts` are already deliberately duplicated (different OTel version lines; see
+    fleet `CLAUDE.md` and `notes/AGENT-NOTES.md`).
+  ← mountain: overhead
+
 - [ ] `playmat-drop-shadow` Does the playmat cast a shadow — on both pages, or neither?
   - **Mostly resolved already.** Jess ruled 2026-08-07 that the two mats are one object and their
     differences were historical accidents, not design. Landed in `a4991f3`: shared art and
@@ -143,43 +156,30 @@ section is just a wall between Jess and the live work.
     makes a constraint on every mountain: "public events, commentary, hand counts but never hands."
   ← mountain: tabletop-replaces-mural
 
-- [ ] `verify-suite-speed` Instrument the **test harness**, then optimize the suite
-  - `apps/shuffler/verify.sh` runs 52 Playwright tests in 3.6–9.5 minutes. That's slow enough
-    that nobody runs it, so nobody learns whether a change broke something — and red stops
-    meaning anything. Three table-mode specs were broken for weeks before anyone looked
-    (fixed 2026-08-07; the cause was a `<details>` disclosure the specs never learned about).
-  - **The work is instrumenting the harness. The app is already ruled out — measured, not
-    assumed.** A run does emit app traces (`verify.sh` sources `.be` then `.env`, so the server
-    exports to Honeycomb team `modernity`, env `local`, dataset `mtg-deck-shuffler`; browser
-    spans go to `mtg-deck-shuffler-web`). Reading them on 2026-08-07 across four full runs:
-    **total `SUM(duration_ms)` over all 3,570 spans in 6 hours was ~48 seconds**, and that's
-    inflated because parent and child spans both count. The same window contained ~22 minutes
-    of suite runs. **So server-side work is ~1–2% of wall clock.**
-    Query: https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-deck-shuffler/result/vZWiRDexbsm
-  - So the existing traces answer exactly one question — *it isn't the server* — and then stop.
-    The other ~98% is Playwright, browser startup, process spawn, and the fixed sleeps, and
-    **none of it is instrumented.** That's the gap to close first: get spans around test
-    lifecycle (per-spec, per-hook, browser launch, server boot, `page.goto`, each explicit
-    wait) so the suite's own time is queryable the way the app's already is. Only then optimize.
-  - Worth having in view while designing that: a run's spans should share a trace or a run id,
-    so one run is one queryable thing rather than a smear across a time window.
-  - **Two app-side facts found while ruling the app out** — small, but they're the only real
-    server-side costs, so don't lose them: `tls.connect` (4 spans, **4.5s p95**) means the suite
-    still reaches the internet, almost certainly Scryfall; and `GET /proxy-image` (4 calls,
-    **2.4s total**) is by far the slowest route per call. Everything else is single-digit ms.
-  - **An observation the harness instrumentation will have to account for** — recorded so it
-    isn't lost, *not* a lead to chase: four consecutive runs, same tests, no changes, went
-    9.5 → 5.4 → 5.2 → **3.6 minutes**. `data.db` is never reset between runs. Don't theorize
-    about it in advance; measure, and see whether it shows up.
-  - Consequence worth keeping in view: the suite doesn't have *one* duration, so "how slow is
-    it" needs a stated condition (cold vs warm) before it has an answer.
-  - Worth knowing: `workers: 1` and `fullyParallel: false` in `playwright.config.ts` are
-    deliberate ("we're testing concurrent state"), so parallelism is a decision to make, not a
-    free win.
-  - Jess asked for this on 2026-08-07, mid-fix on those three specs, and confirmed the same day
-    that harness instrumentation is what she's after.
-  - Related: `set-up-ci` below — a cold-start suite is what CI actually pays per push, so these
-    two want deciding together.
+- **The verify suite's speed has a wayfinder map**: `.scratch/verify-suite-speed/map.md`.
+  Destination: no useless tests, no wasted time in tests, **full suite under 60s** (from
+  106.5s). 01, 02, and 05 are resolved; 03's decisions are settled (seed via API, one shared
+  helper, always fresh) but not yet implemented. The frontier is 04 (superfluous tests), 07
+  (the never-reset 37 MB `data.db`), and 11 (route card images through the backend — split out
+  of 03, a deep app change, deliberately its own ticket). Say "work the verify-suite-speed map"
+  to continue.
+
+- [ ] `deck-chooser-lazy-images` `/choose-any-deck` ships 191 remote Scryfall images on every visit, un-lazy-loaded
+  - Surfaced 2026-08-07 grilling `.scratch/verify-suite-speed/issues/03-setup-cost-and-isolation.md`
+    (ticket 05, closed out of that map once seeding removed the suite's reason to care).
+    `views/partials/deck-selection-precon.ejs:17` renders a remote `<img>` per precon deck — 191
+    of them, plus per-colour SVGs — nothing lazy-loaded, paginated, or virtualised. Real cost to a
+    real player: server renders in 26.6 ms, browser then waits ~1,280 ms for `load`.
+  - Options already scoped: `loading="lazy"` (one attribute), pagination/virtualisation, or serving
+    the art through the Shuffler's own (cached) route rather than 191 cross-origin connections —
+    the last option converges with `card-images-through-backend`-style work if that lands first.
+  - Consult `shuffler-looks-like-itself` — lazy-loading or pagination changes what a player sees,
+    not just how fast it loads.
+  - **Free and unrelated to the decision above:** `GET /choose-any-deck` (`src/app.ts:303`) calls
+    `deckRetriever.listAvailableDecks()` and passes it to a template that never reads
+    `availableDecks` — `LocalFileAdapter.listAvailableDecks()` synchronously parses all 191 deck
+    files (~15 MB) for nothing, twice per navigation. OS page cache is absorbing it today (hence
+    26.6 ms), but it's a dead parse either way — delete it whenever someone's in the file.
 
 - [ ] `deeplinks-prop-moved` Check whether `<Tldraw deepLinks>` still does anything
   - tldraw **v5.0.0 moved `deepLinks` from a top-level `<Tldraw>` prop into `options`**, and
@@ -187,6 +187,65 @@ section is just a wall between Jess and the live work.
     the tldraw custom-shape research (2026-08-06); **not verified either way** — it may still
     work, or viewport-in-the-URL may have been silently dead since the v5 upgrade.
   - One-sitting check: load a table, pan, and see whether the URL updates.
+
+- [ ] `card-zoom-modal` Give a Tabletop card a modal overlay that shows its text really big, and offers flip
+  - Jess, verbatim, 2026-08-07: *"Something cards do need to offer: a modal overlay that displays
+    the card text really big, and offers flip, similar to Deck Shuffler. This is not needed to
+    replace Mural though, it's later."*
+  - **This is the Tabletop** (`apps/tabletop`), not the Shuffler. A card there is becoming a custom
+    tldraw shape type `mtg-card` — decided in `.scratch/tabletop-physics/issues/02-what-a-card-is.md`,
+    which gives it `frontImageUrl` / `backImageUrl` / `face` / `faceDown` props and makes the shape
+    render its own image. A zoom modal renders off those same props; nothing new needs fetching.
+  - *"similar to Deck Shuffler"* points at the Shuffler's existing card modals. The `library-search`
+    and `two-faced-cards` owners both know that surface — consult them before designing a
+    parallel one.
+  - **Explicitly not Mural parity.** Jess scoped it as later work, after the
+    `tabletop-replaces-mural` mountain. No `mountain:` below because it isn't confidently placed.
+  - Related: `.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` must choose a **flip
+    trigger**, and `onClick` on a card is already taken by tap (ticket 04, being resolved now). A
+    zoom modal is a plausible home for the flip affordance — so 06 may want to know this exists,
+    even though 06 lands first and this doesn't block it.
+  ← priority: later
+
+- [ ] `tabletop-landing-page-palette` Bring the Tabletop's landing page onto the fleet's identity
+  - `apps/tabletop/src/client/LandingPage.tsx` styles itself with an off-brand green/cream palette
+    in **inline styles** — `#1a2a1f` (dark green field), `#f5f1e8` (cream text), `#3d5a45` (mid
+    green) — while the fleet's identity is purple-and-pink. A live Layer-1 violation ("use
+    `var(--…)`, not a literal") sitting on the Tabletop's front door.
+  - **Surfaced by** the `tabletop-css-tokens` work (`4396aea` + two follow-ups), which created
+    `packages/design-tokens` (`@fleet/design-tokens`) — the fleet palette, `--narrow-border`, and
+    the mana colours, served by the Shuffler at `/fleet/tokens.css` and imported by the Tabletop
+    through Vite — and loaded Orbitron/Ovo on the Tabletop via a Google Fonts `<link>` in
+    `apps/tabletop/index.html`. The landing page was left **byte-for-byte unchanged** on purpose.
+    Landing the tokens makes fixing this *possible*; it is **not permission** to fix it.
+  - **Not a mechanical `var(--…)` swap.** This is the Tabletop's *only* styled surface, so
+    restyling it is the Tabletop's design pass in miniature: what the Tabletop looks like when it
+    isn't tldraw. It's an **appearance decision and needs Jess's explicit sign-off** — the design
+    owner (`owners/shuffler-looks-like-itself/`) flagged it as the largest possible ride-along on
+    the token change, which is exactly why it didn't ride along.
+  - **Staging it on `/design` is blocked today**: the Shuffler's gallery has no Tabletop specimens
+    and no Tabletop stage, so there's nowhere to show Jess the options side by side. Same shape of
+    blocker as `design-playmat-specimen` above.
+  - **There is still no ship-local stylesheet on the Tabletop.** Shared tokens have a home now, but
+    the first Tabletop-*only* CSS rule has nowhere to live — inline styles are the status quo by
+    default, not by choice. Whoever does this work decides that too.
+
+- [ ] `playmat-colours-fleet-or-shuffler` Do the playmat colours belong to the fleet, or to the Shuffler?
+  - `--playmat-one` (`#f5dc8b`) and `--playmat-two` (`#4b7bba`) were **deliberately left** in
+    `apps/shuffler/public/game.css` when everything else moved into `packages/design-tokens`
+    (`tabletop-css-tokens`, `4396aea`). Recording why, because the omission looks like an oversight
+    and isn't.
+  - The design owner's recorded position — *"the playmat is one object, one appearance, two
+    scales"* — was decided about the Shuffler's two **pages** (/prepare and /game). Extending "one
+    object" **across the ship boundary**, to a tldraw-rendered seat mat, is a different and
+    unratified identity claim. Moving the tokens into the shared package would silently assert an
+    answer to it.
+  - The question is real, not hypothetical: the Tabletop does draw playmats. If the answer is
+    "yes, one object fleet-wide", the tokens move and the Tabletop's mats inherit them. If "no,
+    a seat mat is its own thing", they stay put and the Tabletop picks its own.
+  - Related: `.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md` — deciding what a
+    zone looks like, armed and at rest. Overlapping territory; that ticket decides zones, this
+    decides whether the mat under them is fleet-owned. Link, don't merge.
 
 ## Backlog
 
@@ -396,3 +455,4 @@ section is just a wall between Jess and the live work.
     `src/view/play-game/game-modals.ts`, `src/view/play-game/history-components.ts`. All four are
     HTMX-swapped fragments, so whatever moves focus has to run on swap (`htmx:afterSwap`), not on
     page load — and closing is also an HTMX swap, so focus restore hooks the same place.
+

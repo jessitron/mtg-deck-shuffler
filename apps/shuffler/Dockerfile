@@ -16,7 +16,15 @@ FROM node:24-slim AS builder
 WORKDIR /repo
 COPY package.json package-lock.json ./
 COPY apps/shuffler/package.json ./apps/shuffler/
+# Every workspace named by the root package.json's `workspaces` glob must have its
+# package.json present before `npm ci`, or the install fails outright. That's why
+# this line exists and why it sits above the install.
+COPY packages/design-tokens/package.json ./packages/design-tokens/
 RUN npm ci
+
+# The shared palette itself. Served at /fleet by app.ts, so unlike the Tabletop
+# (which bundles it through Vite) this ship needs the real file at RUNTIME too.
+COPY packages/design-tokens/ ./packages/design-tokens/
 
 WORKDIR /repo/apps/shuffler
 COPY apps/shuffler/tsconfig.json ./
@@ -31,6 +39,12 @@ RUN npm run build
 FROM node:24-slim
 WORKDIR /app
 COPY --from=builder /repo/node_modules ./node_modules
+# MUST accompany the node_modules copy above. npm links the workspace as a
+# RELATIVE symlink (node_modules/@fleet/design-tokens -> ../../packages/design-tokens),
+# so flattening /repo/apps/shuffler to /app leaves it pointing at /app/packages.
+# Without this line the symlink dangles, /fleet/tokens.css 404s, and every page
+# loses its colours — in the container only, never in dev.
+COPY --from=builder /repo/packages ./packages
 COPY --from=builder /repo/apps/shuffler/dist ./dist
 COPY --from=builder /repo/apps/shuffler/views ./views
 COPY --from=builder /repo/apps/shuffler/public ./public

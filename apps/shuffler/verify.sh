@@ -11,6 +11,21 @@
 
 set -e
 
+# Epoch MILLIS. macOS ships bash 3.2 and BSD `date` has no %N, so there is no
+# cheap sub-second clock in this script — node costs ~40ms per call, which is
+# nothing against a 4-minute suite. Millis (not seconds, not nanos) is what OTel
+# reads a bare number as; the reporter re-checks plausibility anyway.
+now_ms() {
+    node -e 'console.log(Date.now())'
+}
+
+# Phase boundaries for the harness spans. The reporter turns these into
+# `verify build` and `verify server boot` spans — the parts of a run Playwright
+# cannot see from the inside, and `npm run build` is a full tsc every time.
+VERIFY_SCRIPT_START_MS=$(now_ms)
+VERIFY_RUN_ID=$(node -e 'console.log(crypto.randomUUID())')
+VERIFY_GIT_SHA=$(git rev-parse --short HEAD 2>/dev/null || echo unknown)
+
 # Random high port per run. .env exports a fixed PORT (for ./run), but the
 # inline `PORT=$VERIFY_PORT node ...` below overrides that for this process only.
 VERIFY_PORT=$(( (RANDOM % 20000) + 20000 ))
@@ -25,7 +40,9 @@ NC='\033[0m' # No Color
 
 # Build the app first
 echo -e "${YELLOW}Building app...${NC}"
+VERIFY_BUILD_START_MS=$(now_ms)
 npm run build
+VERIFY_BUILD_END_MS=$(now_ms)
 
 # Source .be BEFORE .env: .env's OTEL_EXPORTER_OTLP_HEADERS interpolates
 # $HONEYCOMB_API_KEY at source time, and that key is defined in .be. Wrong order
@@ -33,12 +50,21 @@ npm run build
 # .be lives at the repo root (it is sourced by a shell hook on cd into the repo),
 # while this script runs from apps/shuffler/ — so look in both places.
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo ..)"
+FOUND_BE=""
 for candidate in .be "$REPO_ROOT/.be"; do
     if [ -f "$candidate" ]; then
         source "$candidate"
+        FOUND_BE="$candidate"
         break
     fi
 done
+# Say so rather than falling through in silence: without .be, .env still sets
+# OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=" — present but keyless — and
+# every telemetry export 401s. The reporter treats that as "telemetry off"
+# rather than retrying all run, but the run is then unmeasured, so say it out loud.
+if [ -z "$FOUND_BE" ]; then
+    echo -e "${YELLOW}No .be found (looked in . and $REPO_ROOT) — telemetry will be off for this run${NC}"
+fi
 if [ -f .env ]; then
     source .env
 fi
@@ -51,8 +77,25 @@ fi
 export TABLETOP_URL="http://localhost:$VERIFY_TABLETOP_PORT"
 echo -e "${YELLOW}Tabletop address for this run: $TABLETOP_URL${NC}"
 
+# Cold or warm? data.db is never reset between runs, and four identical runs once
+# went 9.5 -> 5.4 -> 5.2 -> 3.6 minutes. So the suite has no single duration, and
+# every timing number needs its condition attached to mean anything.
+#
+# This has to happen BEFORE the server starts, because the server creates data.db
+# at boot and after that the question is unanswerable. Note the [ -f ] guard:
+# `stat` on a missing file exits nonzero, and `set -e` would turn a
+# telemetry-only addition into a hard verify failure on a fresh clone.
+if [ -f data.db ]; then
+    VERIFY_DATA_DB_EXISTED=true
+    VERIFY_DATA_DB_BYTES=$(wc -c < data.db | tr -d ' ')
+else
+    VERIFY_DATA_DB_EXISTED=false
+    VERIFY_DATA_DB_BYTES=0
+fi
+
 # Start server on the chosen port in the background
 echo -e "${YELLOW}Starting server on port $VERIFY_PORT...${NC}"
+VERIFY_SERVER_START_MS=$(now_ms)
 PORT=$VERIFY_PORT node --import ./dist/tracing.js dist/server.js &
 SERVER_PID=$!
 
@@ -72,6 +115,7 @@ trap cleanup EXIT INT TERM
 echo -e "${YELLOW}Waiting for server to be ready...${NC}"
 for i in {1..20}; do
     if curl -s "$BASE_URL/" > /dev/null 2>&1; then
+        VERIFY_SERVER_READY_MS=$(now_ms)
         echo -e "${GREEN}Server is ready!${NC}"
         break
     fi
@@ -85,11 +129,40 @@ done
 # Run Playwright tests (pass through any args, e.g. ./verify.sh verify-design-gallery
 # to run just one spec by name). BASE_URL tells playwright.config.ts and each spec
 # which port this run's server is actually on.
+#
+# The VERIFY_* vars feed the OTel reporter (test/harness-telemetry/), which traces
+# the SUITE — spec, test and step spans, plus the build and server-boot phases
+# above. They are passed HERE, on this one command, and never `export`ed:
+# `.env` already exports OTEL_SERVICE_NAME for the app server, and the harness
+# gets its own service name (mtg-fleet-verify) from code, not from the
+# environment. Exporting telemetry env after `.env` would rename the app server
+# too and silently move its spans to another dataset — see
+# test/harness-telemetry/harnessTracing.ts.
 echo -e "${YELLOW}Running verification tests...${NC}"
-BASE_URL="$BASE_URL" npx playwright test "$@"
+echo -e "${YELLOW}Verify run id: $VERIFY_RUN_ID (data.db existed: $VERIFY_DATA_DB_EXISTED)${NC}"
+# set -e is off around this one command: `set -e` treats the whole env-var-prefixed
+# `npx playwright test` invocation as a single simple command, so a nonzero exit
+# would abort the script right here — before TEST_EXIT_CODE=$? below ever runs —
+# making the failure-message branch further down unreachable dead code. Turning
+# set -e off just for this command (and back on right after) is what makes that
+# capture real instead of decorative.
+set +e
+BASE_URL="$BASE_URL" \
+    VERIFY_RUN_ID="$VERIFY_RUN_ID" \
+    VERIFY_SHIP=shuffler \
+    VERIFY_GIT_SHA="$VERIFY_GIT_SHA" \
+    VERIFY_SCRIPT_START_MS="$VERIFY_SCRIPT_START_MS" \
+    VERIFY_BUILD_START_MS="$VERIFY_BUILD_START_MS" \
+    VERIFY_BUILD_END_MS="$VERIFY_BUILD_END_MS" \
+    VERIFY_SERVER_START_MS="$VERIFY_SERVER_START_MS" \
+    VERIFY_SERVER_READY_MS="$VERIFY_SERVER_READY_MS" \
+    VERIFY_DATA_DB_EXISTED="$VERIFY_DATA_DB_EXISTED" \
+    VERIFY_DATA_DB_BYTES="$VERIFY_DATA_DB_BYTES" \
+    npx playwright test "$@"
 
 # Capture the exit code
 TEST_EXIT_CODE=$?
+set -e
 
 # The cleanup function will run automatically due to the trap
 # Return the test exit code
