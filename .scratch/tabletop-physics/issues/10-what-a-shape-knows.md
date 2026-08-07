@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Type: grilling
-Status: open
+Status: claimed
 Blocked by: 03
 
 ## Question
