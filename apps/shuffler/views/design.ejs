@@ -385,7 +385,8 @@
               <div class="option-where">border-radius: 0</div>
               <div class="option-note">
                 Matches the stated rule exactly, and matches the newest code (join-table, hamburger).
-                Hardest-edged; pairs well with the outset bevels.
+                Hardest-edged; matches the app's borders, which are all flat now — no
+                <code>outset</code>/<code>inset</code>/<code>groove</code> survives anywhere.
               </div>
             </div>
             <div class="option">
@@ -699,9 +700,16 @@
 
         <h3>Command zone surround</h3>
         <p class="section-note">
-          The metal-gradient frame that holds the commander(s). Shared by prepare and game.
-          The deck title used to sit inside it; it now rests on the mat itself — see
-          <em>Deck title plaque</em> below.
+          The frame that holds the commander(s). Shared by prepare and game. The deck title
+          used to sit inside it; it now rests on the mat itself — see <em>Deck title plaque</em>
+          below. <strong>Unified with the plaque (2026-08-07, Jess's own edit):</strong> the
+          border is now flat <code>3px solid black</code> (was <code>5px outset black</code>)
+          and the fill is <code>var(--light-pink)</code> (was a diagonal black/gray gradient) —
+          the exact same border and fill as <code>.game-title</code>, just different padding and
+          radius. The commander card itself now floats directly in the surround with no border,
+          background or fixed height of its own, and its usual drop shadow is suppressed here
+          (<code>.cool-command-zone-surround .mtg-card-image { box-shadow: none; }</code>) so it
+          doesn't fight the frame's own edge.
         </p>
         <div class="stage stage-playmat">
           <div class="cool-command-zone-surround">
@@ -724,8 +732,12 @@
         <p class="section-note">
           The border is flat <code>3px solid black</code>, not <code>groove</code> — decided
           2026-08-07 after staging both here. The groove was the plaque's join to the metal
-          command-zone surround; out on the mat it has nothing to join to. The surround keeps
-          its <code>outset</code>, so the chunky 3D-border language still has a home.
+          command-zone surround; out on the mat it has nothing to join to.
+          <strong>The surround has since lost its own <code>outset</code> border too</strong>
+          (same day, Jess's direct edit, not staged on this page) — it now carries the exact
+          same flat border and fill as this plaque. The app's chunky
+          <code>outset</code>/<code>inset</code>/<code>groove</code> vocabulary is retired
+          entirely, not down to one last site.
         </p>
         <div class="stage stage-playmat">
           <div class="game-title"><span class="game-name">Corrupting Influence</span></div>

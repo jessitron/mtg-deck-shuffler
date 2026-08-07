@@ -48,7 +48,7 @@ must be added to whichever one(s) need it — they do not share a list.**
 | | EJS pages | TypeScript pages |
 | --- | --- | --- |
 | Head | `views/partials/head.ejs` | `formatHtmlHead()` in `src/view/common/html-layout.ts` |
-| Always loads | **`/fleet/tokens.css`**, `styles.css`, `site.css` | **`/fleet/tokens.css`**, `styles.css`, `game.css`, `playmat.css` |
+| Always loads | **`/fleet/tokens.css`**, `styles.css`, `site.css` | **`/fleet/tokens.css`**, `styles.css`, `playmat.css`, `game.css` (swapped from `game.css`-then-`playmat.css` 2026-08-07, `63d4c08` — see the cascade-tie note in Traps) |
 | Fonts | Orbitron; `additionalFonts` array adds more | Ovo + Orbitron, hard-coded |
 | Extra CSS | `additionalStyles` array per view | `additionalStylesheets` option |
 | Pages | `/`, `/docs`, `/about`, `/history`, `/choose-any-deck`, `/prepare`, `/design` | `/game`, error pages |
@@ -154,20 +154,29 @@ obvious — into a silent near-miss. A Playwright assertion enforces this for `s
 The old warning still holds for anything else: a *general* token in a page sheet only reaches
 the pages that load it, and that failure is silent.
 
-**The playmat's cascade tie, resolved in opposite directions per page** (added `a4991f3`).
-`.playmat` (`playmat.css`), `.playmat-game` (`game.css`) and `.playmat-prepare`
-(`prepare.css`) are all a single class — equal specificity — and the two pages load their
-sheets in opposite order:
+**The playmat's cascade tie — RESOLVED 2026-08-07 (`63d4c08`), as a side effect of an
+unrelated appearance commit.** `.playmat` (`playmat.css`), `.playmat-game` (`game.css`) and
+`.playmat-prepare` (`prepare.css`) are all a single class — equal specificity — so who wins
+a shared property depends entirely on load order:
 
 | Page | Load order | Who wins a shared property |
 | --- | --- | --- |
-| `/game` | `styles.css`, `game.css`, `playmat.css` | the bare `.playmat` rule |
+| `/game` | `styles.css`, `playmat.css`, `game.css` | `.playmat-game` |
 | `/prepare` | `styles.css`, `site.css`, `playmat.css`, `prepare.css` | `.playmat-prepare` |
 
-So the same declaration added to the bare rule takes effect on one page and is ignored on
-the other, silently. **Keep each property in the shared rule or in a modifier, never both.**
-There's a `CAREFUL` comment on the rule in `playmat.css`; the animations owner independently
-found this too, so it is flagged twice on purpose.
+**Both pages now load `playmat.css` before their own modifier sheet.** `/game` used to load
+`game.css` then `playmat.css` (`html-layout.ts` → `formatHtmlHead()`); the commit "Jess
+updates appearance" swapped that to `playmat.css` then `game.css`, with no comment noting
+why — the commit's own content is all `.cool-command-zone-surround`/`.game-title` styling,
+not load order. `/prepare`'s order (`prepare.ejs`'s `additionalStyles`:
+`['/playmat.css', '/prepare.css']`) was already this way and is unchanged. **The upshot: a
+property added to the bare `.playmat` rule is now overridden by the page modifier on both
+pages, identically** — the old hazard, where the same declaration took effect on one page
+and was silently ignored on the other, no longer exists. The `CAREFUL` comment that used to
+sit above `.playmat` explaining the old hazard was deleted in the same commit — correctly,
+since it no longer applies. **Still true regardless:** keep each shared-mat property in the
+shared rule or in a modifier, never both — that's good hygiene independent of load order,
+and if a future change reintroduces divergent load order, the hazard returns.
 
 **Cascade order on `/design`.** The gallery loads every app stylesheet at once, so
 conflicting `body` rules (`styles.css` and `game.css` say Ovo, `site.css` says Orbitron)

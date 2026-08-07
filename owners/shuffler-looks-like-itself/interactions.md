@@ -97,11 +97,16 @@ Concrete, in rough order of how often they bite.
 - New chrome gets **square corners** (`border-radius: 0`). Round corners are for cards,
   the playmat (`.playmat-prepare` 20px, `.playmat-game` 80px — one object at two scales;
   settled 2026-08-07, not drift), and count discs only.
-- **Don't add a `groove`/`outset`/`inset` border.** As of choice 7 (2026-08-07) exactly one
-  survives in the whole app — `playmat.css` → `.cool-command-zone-surround`, `5px outset
-  black`. Borders are flat (`solid`); press feedback is `.pushable-flat`'s box-shadow bevel,
-  not a border switch. Conversely, **don't strip the surround's `outset` as tidying** —
-  it's the last of its kind, and ending that language is Jess's call.
+- **Don't add a `groove`/`outset`/`inset` border.** None survives in the app as of
+  2026-08-07: choice 7 flattened the deck-title plaque's `groove`, and later the same day
+  Jess directly edited `.cool-command-zone-surround` (`playmat.css`) from `5px outset black`
+  to `3px solid black`, unifying it with the plaque. Borders are flat (`solid`) everywhere
+  now; press feedback is `.pushable-flat`'s box-shadow bevel, not a border switch. That
+  surround edit ended the chunky-3D vocabulary this owner had been protecting as "the last
+  one, don't strip it as tidying, ending it is Jess's call" — she made that call herself,
+  directly, outside the `/design` staging process. Nothing left to protect here; if a new
+  `outset`/`inset`/`groove` shows up, it's new drift, not a regression toward something the
+  app used to have.
 - Button labels are **Orbitron**, card names are **Ovo**, and **you write neither name**.
   `font-family: var(--font-chrome)` for chrome, `var(--font-content)` for content,
   `var(--font-display)` for site-page hero words. No fourth typeface, and no typeface literal:
@@ -155,15 +160,20 @@ Concrete, in rough order of how often they bite.
   `background-size`/`-position`, `border: 10px solid black`. Put shared looks there. A bare
   `.playmat` rule in a *page* sheet would leak across `/design`, which co-loads both sheets;
   `playmat.css` is the only sanctioned home for it.
-- **Load order is a trap here, and two owners have now hit it.** `.playmat`,
-  `.playmat-game` and `.playmat-prepare` are equal specificity (one class each), and the
-  pages load their sheets in opposite order: `/game` is `game.css` → `playmat.css`,
-  `/prepare` is `playmat.css` → `prepare.css`. **A property added to the bare `.playmat`
-  rule silently overrides `.playmat-game` on `/game` but loses to `.playmat-prepare` on
-  `/prepare`** — same declaration, opposite outcome per page, no error either way. Keep
-  each property in the shared rule *or* in a modifier, never both. The `CAREFUL` comment
-  above the rule in `playmat.css` says this; keep it there. (Adding a `!important` or a
-  second class to break the tie would just move the trap.)
+- **Load order used to be a trap here — RESOLVED 2026-08-07 (`63d4c08`), as a side effect
+  of an unrelated appearance commit.** `.playmat`, `.playmat-game` and `.playmat-prepare`
+  are equal specificity (one class each). The pages used to load their sheets in *opposite*
+  order (`/game` was `game.css` → `playmat.css`, `/prepare` is `playmat.css` →
+  `prepare.css`), so a property added to the bare `.playmat` rule silently overrode
+  `.playmat-game` on `/game` but lost to `.playmat-prepare` on `/prepare` — same
+  declaration, opposite outcome per page, no error either way. **`html-layout.ts`'s
+  `formatHtmlHead()` now loads `playmat.css` before `game.css`**, matching `/prepare`'s
+  order, so both pages now resolve a shared-property tie the same way (the modifier wins on
+  both). The `CAREFUL` comment that used to sit above `.playmat` was deleted in the same
+  commit — correctly, since the hazard it described is gone. **Still keep each property in
+  the shared rule or in a modifier, never both** — that discipline doesn't depend on load
+  order staying aligned, and if a future change makes the two pages diverge again, the trap
+  is back.
 - **What legitimately stays per-page:** `border-radius` (80px game / 20px prepare — scale,
   Jess 2026-08-07), each page's layout, and `.playmat-game`'s `box-shadow: 5px 5px black`.
   That shadow is the only difference with no stated reason; it's buoyed as
@@ -212,7 +222,10 @@ Concrete, in rough order of how often they bite.
   `.playmat .cool-command-zone-surround` and `.section-that-is-horizontally-aligned-with-command-zone`
   (the library-side rule) swapped `grid-column` (surround 4→2, library 2→4) and the
   library's `justify-self` flipped `end`→`start` to keep it hugging the side nearer the
-  command zone. **If you ever change this grid again, `.playmat .commander-placeholder`
+  command zone. **On `/prepare` only, that library-side selector was later renamed** to
+  `.prepare-container .library-section` (2026-08-07, `f42a99a`) — `game.css` still uses the
+  original name, so grepping for `.section-that-is-horizontally-aligned-with-command-zone`
+  now finds only the `game.css` copy. **If you ever change this grid again, `.playmat .commander-placeholder`
   moved too** (`grid-column` 5→1, `justify-self: start`, so it overflows right into
   column 2) — it's the "no commander" alt-render of the *same* slot the surround occupies,
   and the two are safe to sit in different columns **only** because `commanders.length
@@ -256,17 +269,17 @@ existing specs learned, in the order they'll bite you:
 **A shared class split across two files can carry a numeric coupling, not just a
 duplicated block** (2026-08-07, `5c69aa3`)
 
-- `.section-that-is-horizontally-aligned-with-command-zone` exists in both `prepare.css`
-  (`margin-top`) and `game.css` (`padding-top`) -- different properties, but both exist to
-  push the library stack down until its card art meets the commander card's art, not the
-  top of `.cool-command-zone-surround`'s metal frame. The real number is **22px**: 5px
-  surround border + 10px surround padding + 7px `.multiple-cards` inset border (game.css's
-  comment already had this breakdown right). `prepare.css` had `margin-top: 7px` -- only the
-  innermost inset -- silently undershooting by the outer 15px, for however long that went
-  unnoticed.
+- `.section-that-is-horizontally-aligned-with-command-zone` used to exist in both
+  `prepare.css` (`margin-top`) and `game.css` (`padding-top`) -- different properties, but
+  both existed to push the library stack down until its card art meets the commander card's
+  art, not the top of `.cool-command-zone-surround`'s metal frame. The real number was
+  **22px**: 5px surround border + 10px surround padding + 7px `.multiple-cards` inset border
+  (game.css's comment had this breakdown right). `prepare.css` had `margin-top: 7px` -- only
+  the innermost inset -- silently undershooting by the outer 15px, for however long that
+  went unnoticed.
 - **This is a fixed-px inset, not a scaled one.** The surround's border/padding are literal
   pixels, unaffected by the playmat's own scale (`border-radius: 80px` game vs `20px`
-  prepare). So `/prepare`'s smaller mat still needs the *same* 22px as `/game`'s larger one
+  prepare). So `/prepare`'s smaller mat still needs the *same* number as `/game`'s larger one
   -- don't be tempted to scale it down.
 - **The library/command-zone swap (`e7b393e`) didn't cause this bug** -- grid-column and
   flex-order changes can't affect cross-axis alignment. It just moved the two elements into
@@ -274,8 +287,19 @@ duplicated block** (2026-08-07, `5c69aa3`)
   Lesson: a layout reorder can *expose* a latent alignment bug it didn't create; check the
   actual rendered `<img>` rects (not just the outer container boxes) before assuming the
   reorder itself is the culprit.
-- If the surround's border or padding ever changes, both files' copies of this number need
-  updating together -- there's no shared token for it.
+- **The coupling broke again 2026-08-07 (`f42a99a`), and this time only one side was
+  touched.** Jess renamed the prepare-side selector to `.prepare-container .library-section`
+  and **deleted the whole 22px `margin-top` rule and its comment** — `/prepare`'s library
+  stack now has no vertical-alignment offset against the commander card at all.
+  `game.css`'s copy, `.section-that-is-horizontally-aligned-with-command-zone {
+  padding-top: 22px; }`, was **not touched**, and the very next commit (`63d4c08`) changed
+  every number that 22px was computed from: the surround's border went 5px → 3px, and
+  `.multiple-cards` lost its border and inset entirely (was `border-width: 7px;
+  border-style: inset`). **`game.css`'s comment and value are now stale** — the arithmetic
+  it states no longer matches any real dimension on the page. Not fixed as part of this
+  update; flagged as a likely visual regression on `/game` for whoever picks it up next.
+  If the surround's border or padding changes again, there is now no `prepare.css` copy of
+  this number left to keep in sync — only `game.css`'s, and it's already wrong.
 
 **Editing a duplicated block** (see [architecture.md](architecture.md) for the list)
 

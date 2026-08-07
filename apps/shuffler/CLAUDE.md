@@ -58,10 +58,11 @@ The short version:
   scales** — the `/game` one used to be called `.page-container`, which hid that fact
 - **The playmat's shared looks live in the bare `.playmat` rule in `public/playmat.css`**
   (art, `border: 10px solid black`). Page modifiers carry only layout and `border-radius`
-  (80px game / 20px prepare — radius is a matter of scale, Jess 2026-08-07). **Careful:**
-  the three selectors are equal specificity and the pages load their sheets in opposite
-  order, so a property added to the bare rule overrides `.playmat-game` but loses to
-  `.playmat-prepare`. Keep each property in one place, never both
+  (80px game / 20px prepare — radius is a matter of scale, Jess 2026-08-07). The three
+  selectors are equal specificity; both pages now load `playmat.css` before their own
+  modifier sheet (as of 2026-08-07), so a property added to the bare rule is overridden by
+  the modifier on both pages, consistently. Keep each property in one place, never both —
+  that discipline matters regardless of load order
 - **Never write a raw hex.** Use a token. The fleet's shared ones — the identity palette,
   `--narrow-border`, the mana colours, the three `--font-*` roles and `--radius-soft` —
   live in `packages/design-tokens/tokens.css`
