@@ -408,6 +408,27 @@ and "don't add a third." There are **four** — `styles.css`, `docs.css`, `game.
 (`--playmat-*`) and `playmat.css` (`--mana-*`). The rule was right, the count was two years
 of drift out of date.
 
+## 2026-08-07 — the Mulligan button stopped being an unstyled browser button
+
+The Mulligan button (`hand-components.ts` → `formatMulliganButtonHtmlFragment`,
+`.mulligan-button`) had no fill, no font, no press physics — plain browser-button drift, the
+same failure mode this owner exists to name and stop. Jess's call: it's secondary, not a CTA
+— a routine, repeated in-game action, not the one thing that matters most on the screen.
+
+Implemented by adding `pushable-flat pushable-dark pushable-small` alongside the existing
+`.mulligan-button` class (kept only as a test hook), reusing the **exact** classes already on
+`active-game-page.ts`'s `.table-cards-button` ("3 Cards on table") rather than writing any
+bespoke CSS. `game.css`'s now-redundant `.mulligan-button` rule (`padding`, `font-weight`,
+`cursor`) was deleted — fully subsumed by `.pushable-flat`/`.pushable-small`. A specimen went
+onto `/design` right next to the table-cards-button specimen it copies.
+
+**Why this didn't need a choice or a new candidate.** Choice 2 (secondary-button gray) and
+choice 1 (press physics) are both already decided and both already have a live precedent
+(`.table-cards-button`) doing exactly this job. Applying a settled pattern to a newly-noticed
+unstyled button is convergence, not a new decision — nothing to stage, nothing to ask. No
+border-radius or focus CSS was added; neither exists on the reused classes, and that's
+consistent, not an oversight.
+
 ## 2026-08-07 — the playmat converged: one appearance, two scales
 
 `a4991f3` **Harden the playmat: one appearance, two scales**
