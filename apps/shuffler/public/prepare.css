@@ -33,18 +33,10 @@
   max-width: calc(100vw * 7 / 9);
 }
 
-.section-that-is-horizontally-aligned-with-command-zone {
+.prepare-container .library-section {
   grid-column: 4;
   grid-row: 3;
-  justify-self: start; /* left-align, overflow right */
-  /* Drops the library stack so its top edge meets the commander card's art, not
-   * the top of the metal surround: 15px .multiple-cards inset + 7px .card-container
-   * inset = 22px. Same total as game.css's padding-top:22px on this class -- the
-   * surround's border/padding are fixed px, not scaled, so prepare needs the same
-   * number despite the smaller playmat. The old margin-top:7px only covered the
-   * inner inset and undershot by 15px, a latent bug the library/command-zone swap
-   * (2026-08-07) made visible by putting the two side by side for direct comparison. */
-  margin-top: 22px;
+  justify-self: start;
   width: 210px;
 }
 
@@ -67,34 +59,26 @@
 }
 
 /* Deck title plaque — banner across the top of the mat. Appearance is in
- * playmat.css; this is placement only.
- * Keyed on the bare `.playmat` deliberately: placement is relative to the mat as
- * a domain object (the grid parent), not to the prepare page's dressing of it. */
+ * playmat.css; this is placement only. */
 .playmat > .game-title {
-  grid-column: 1 / -1;
+  grid-column: 2 / -1;
   grid-row: 1;
-  justify-self: center;
+  justify-self: start;
   align-self: center;
+  margin-bottom:20px;
 }
 
-/* Row 3, matching #library-section, so the commander card sits level with the
- * library stack. (This used to be a subgrid spanning rows 2-4 so the title could
- * occupy its own row inside the surround; the title left, so the subgrid went.) */
 .playmat .cool-command-zone-surround {
   grid-column: 2;
   grid-row: 3;
-  justify-self: center;
+  justify-self: start;
   align-self: start;
 }
 
-/* Mirrors the surround's column swap (library/command-zone swap, 2026-08-07).
- * Placeholder and surround are mutually exclusive renders of the same slot
- * (commanders.length === 0 ? placeholder : surround), so overflowing right into
- * column 2 is safe -- nothing else occupies it while the placeholder is showing. */
 .playmat .commander-placeholder {
   grid-column: 1;
   grid-row: 3;
-  justify-self: start; /* left-align, overflow right */
+  justify-self: start;
   align-self: start;
 }
 
@@ -122,7 +106,7 @@
   grid-row: 3;
   display: flex;
   align-items: start;
-  justify-content: start;
+  justify-content: end;
 }
 
 .begin-button {
