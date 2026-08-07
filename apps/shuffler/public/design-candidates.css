@@ -43,16 +43,3 @@
 /* No focus rule here on purpose: choice 6 adopts this input *without* one, so
  * the global ring from styles.css applies. The dark-pink flush rule this
  * candidate used to carry was choice 5's rejected option. */
-
-/* =========================================================================
- * Deck title plaque — flat border
- *
- * Option B of the groove-vs-flat choice on /design. The plaque left the metal
- * command-zone surround and now rests on the mat; this candidate asks whether
- * it should drop the `groove` join it inherited from the frame. Only the border
- * differs from the shipped `.game-title` in playmat.css.
- * ========================================================================= */
-
-.candidate-game-title-flat {
-  border: 3px solid black;
-}

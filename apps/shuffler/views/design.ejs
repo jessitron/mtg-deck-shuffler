@@ -682,45 +682,14 @@
           under it is the physical object. Appearance lives in <code>playmat.css</code>;
           each page sheet owns only its placement.
         </p>
+        <p class="section-note">
+          The border is flat <code>3px solid black</code>, not <code>groove</code> — decided
+          2026-08-07 after staging both here. The groove was the plaque's join to the metal
+          command-zone surround; out on the mat it has nothing to join to. The surround keeps
+          its <code>outset</code>, so the chunky 3D-border language still has a home.
+        </p>
         <div class="stage stage-playmat">
           <div class="game-title"><span class="game-name">Corrupting Influence</span></div>
-        </div>
-
-        <div class="choice">
-          <div class="choice-question">
-            Now that the plaque has left the metal frame, does it keep its <code>groove</code>
-            border?
-          </div>
-          <div class="options">
-            <div class="option">
-              <div class="option-label">A — Keep the groove (current)</div>
-              <div class="stage stage-playmat">
-                <div class="game-title"><span class="game-name">Corrupting Influence</span></div>
-              </div>
-              <div class="option-where">playmat.css — <code>border: 3px groove black</code></div>
-              <div class="option-note">
-                The title slab is one of only two places the app still speaks the chunky
-                3D-border language (the command-zone surround is the other). Keeping it means
-                the plaque still reads as a physical object of the same family, even away from
-                the frame.
-              </div>
-            </div>
-            <div class="option">
-              <div class="option-label">B — Flat border</div>
-              <div class="stage stage-playmat">
-                <div class="game-title candidate-game-title-flat">
-                  <span class="game-name">Corrupting Influence</span>
-                </div>
-              </div>
-              <div class="option-where">design-candidates.css — <code>border: 3px solid black</code></div>
-              <div class="option-note">
-                The groove was the plaque's join to the metal frame; alone on the mat it has
-                nothing to join to. Flat matches every other panel edge in the app. But it
-                deletes half the surviving 3D-border language, so it's a real loss, not just
-                a cleanup.
-              </div>
-            </div>
-          </div>
         </div>
 
         <h3>Precon deck tile</h3>

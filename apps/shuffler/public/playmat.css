@@ -124,10 +124,14 @@
  * sheets (prepare.css puts it in the mat's top row, game.css in the header row).
  * Opaque on purpose: the playmat is background art and will eventually vary, so
  * bare text can't be relied on to stay readable. Square corners — this is UI
- * chrome, not a physical object; the mat underneath is the physical object. */
+ * chrome, not a physical object; the mat underneath is the physical object.
+ * Flat border, not `groove` (choice 7, resolved 2026-08-07): the groove was the
+ * plaque's join to the metal surround, and out on the mat it has nothing to join
+ * to. The surround keeps its `outset`, so the 3D-border language still has a
+ * home. */
 .game-title {
   background-color: var(--light-pink);
-  border: 3px groove black;
+  border: 3px solid black;
   padding: 8px 16px;
   font-family: "Orbitron", sans-serif;
   text-align: center;
