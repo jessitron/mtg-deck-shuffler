@@ -110,6 +110,34 @@
 - `htmx.config.responseHandling` gained `{code: "502", swap: true, error: true}` — `error: true` is load-bearing: it keeps `event.detail.successful` false so table-mode buttons' conditional `hx-on::after-request` leaves the tabletop-failure error modal (retargeted into `#modal-container`) visible. First discovered as a modal-appears-then-vanishes bug.
 - Flake lesson: Playwright-speed clicks on freshly-opened modal buttons can straddle htmx swap/settle (mousedown on a node replaced before mouseup → no click). Specs use retry `toPass()` (verify-discard, verify-tabletop-integration).
 
+### 2026-08-07: Deck-title plaque moved onto the playmat (`2d33c2f`, `20b83aa`)
+
+- The deck title left `.cool-command-zone-surround` and now rests on the mat: centered in
+  the mat's top grid row on /prepare, and on /game inside a **new `.game-header-row`** —
+  the first child of `#game-container`, holding the plaque and `#game-menu` as **siblings**.
+  Border went flat `3px solid black` in `20b83aa` after Jess picked it over `groove` from
+  two options staged on /design.
+- **No animation interaction, and the reason is worth keeping**: every card animation is a
+  self-relative transform (offset → `translateX(0)` in the element's own box), so raising
+  `.game-top-row` by roughly the plaque's height couldn't move any animation's target.
+  Written up in architecture.md as the general principle — it's what makes layout-move
+  reviews cheap.
+- **New standing constraint** (interactions.md): nothing may be nested inside `#game-menu`,
+  because `game.js` dismisses the menu on `!closest("#game-menu")` *and* `.game-menu` is the
+  dropdown's `position: relative` ancestor. `.game-header-row` exists to give top-strip
+  siblings a home. `test/verification/verify-deck-title-placement.spec.ts` guards it.
+- **New standing hazard** (files.md): `--min-title-slab-height` was defined in `game.css`
+  and consumed in the shared `playmat.css`, so it resolved on /game and silently did nothing
+  on /prepare. The variable is deleted; the pattern — page-sheet property read by the shared
+  sheet — is recorded, since animation durations and offsets are prime candidates for it.
+- Also deleted: the `.game-top-row { --min-title-slab-height }` husk, and
+  `.cool-command-zone-surround .multiple-cards { margin-left: auto }`. The
+  `.section-that-is-horizontally-aligned-with-command-zone` padding-top is now a flat `22px`
+  (5px surround border + 10px surround padding + 7px `.multiple-cards` inset border), which
+  keeps the library stack aligned with the commander card.
+- Checked and settled: the dropdown panel still anchors flush right under the toggle even
+  though `#game-menu` shrink-wraps as a flex item, and the row's `gap` does not offset it.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.

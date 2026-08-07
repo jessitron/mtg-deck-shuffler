@@ -20,6 +20,28 @@
 - **Duplicate flip CSS**: Card flip styles exist in both `game.css` (lines 104-142) and `prepare.css` (lines 221-256). Changes to one must be mirrored in the other.
 - **Table mode's button classes (JES-127)**: the clipboard hook is keyed on `play-button`; table-mode Play/Discard buttons deliberately get `table-play-button` instead (server-rendered — deterministic, no runtime branching in the hook). If you rename either class, both `game.js` listeners and `game-modals.ts` must change together. The 502 entry in `htmx.config.responseHandling` (`html-layout.ts`) carries `error: true` so `event.detail.successful` stays false and the table-mode buttons' conditional close leaves the failure modal visible — removing that flag silently eats the error modal.
 - **Click-straddles-settle flake (tests)**: a Playwright-speed click right after the card modal opens can land its mousedown on a node htmx replaces before mouseup — no click event fires. Impossible at human speed. Specs that click freshly-opened modal buttons use a retry `expect(...).toPass()` pattern (see `verify-discard.spec.ts`, `verify-tabletop-integration.spec.ts`).
+- **`#game-menu` containment is a markup constraint on the game's top strip.** Anything
+  rendered *inside* the `#game-menu` subtree becomes menu-internal in two ways at once, and
+  both are silent:
+  1. `game.js`'s document-level click handler closes the menu on
+     `!evt.target.closest("#game-menu")`. A control nested in that subtree **swallows its own
+     dismiss click** — the menu stays open when the player clicks it.
+  2. `.game-menu` carries `position: relative` and is the dropdown panel's positioning
+     ancestor. Anything nested there **pushes `.game-menu-panel` down by its own height**.
+
+  So new chrome in the top strip must be a **sibling** of `#game-menu`, not a child.
+  `.game-header-row` (`game.css`, `display:flex; justify-content:space-between`) exists
+  precisely to give such siblings a home — the deck-title plaque is the first tenant. Put
+  the next one there too. `test/verification/verify-deck-title-placement.spec.ts` guards
+  this by asserting that clicking the deck title dismisses an open menu; if you add a
+  sibling, that spec is the pattern to copy.
+
+  Checked and settled (don't re-litigate): `#game-menu` shrink-wraps as a flex item, so the
+  panel's `right: 0` resolves to the toggle's right edge rather than the row's. Verified by
+  screenshot 2026-08-07 — visually identical to before, because the toggle *was* already the
+  row's right edge. The `gap` on `.game-header-row` does **not** offset the panel either;
+  it's needed so a long deck name doesn't butt into the hamburger.
+
 - **State that must survive swaps**: Anything toggled by JS that needs to outlive a `game-state-updated` swap must NOT be re-applied to swapped-in content in `afterSwap` — the settle phase reverts it (see architecture.md). Anchor such state on `document.body` or another non-swapped ancestor. The hamburger menu (`body.game-menu-open`) is the reference example; developer mode (`body.dev-mode`, set server-side from a cookie, gating `.menu-debug` visibility) is a second, JS-free example.
 
 ## Not Related To

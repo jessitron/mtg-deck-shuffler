@@ -58,6 +58,24 @@ All animation keyframes live in `public/game.css` except:
 - `fadeInTile` in `public/deck-selection.css`
 - Card flip uses `transition` (not keyframes) in both `game.css` and `prepare.css`
 
+## Every card animation is a self-relative transform
+
+Verified 2026-08-07 across `game.css`: every card animation — `slideFromLeft`,
+`slideFromRight`, `growFromLeft`, `growFromRight`, `shuffle-card-1/2/3`, and the flip
+`transition` — animates **from an offset back to the element's own resting position**
+(`translateX(0)` / `rotateY(0)`) within its own box. None of them reference a page
+coordinate, a viewport offset, or a sibling's position.
+
+**Consequence, and it's the reason most layout reviews here are cheap**: moving an
+animated element around the page — raising it, re-parenting it, changing its grid cell —
+cannot break the animation, because the animation only ever knows where the element
+already is. What *can* break an animation is a change to the element's **own box**
+(display type, transform context, `overflow` clipping on a new ancestor) or to the
+**selectors** that reach it. Check those two things; don't re-derive the geometry.
+
+This is what made the deck-title plaque move (`2d33c2f`) a no-interaction review even
+though it raised `.game-top-row` by roughly the plaque's height.
+
 ## Drag-and-Drop Interaction
 
 `game.js` (lines 183-186) removes animation classes when a drag starts, preventing animation flicker when a card is dropped in a new position. After drop, HTMX swaps in the new hand state, which may include new animation classes from `WhatHappened`.

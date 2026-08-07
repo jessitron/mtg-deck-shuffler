@@ -4,16 +4,39 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 
 ## CSS (animation definitions)
 
-- `public/game.css` — Primary animation file
-  - Lines 40-70: `slideFromLeft`, `slideFromRight` keyframes (card slide)
-  - Lines 72-102: `growFromLeft`, `growFromRight` keyframes (card drop)
-  - Lines 104-142: Card flip transition (`.flip-container-*` classes)
-  - Lines 186-206: `shimmer` keyframe (button hover effect)
-  - Lines 430-497: `shuffle-card-1/2/3` keyframes (library shuffle)
-  - Lines 528-552: Drag-and-drop styling (`.dragging`, `.drag-over`)
+- `public/game.css` — Primary animation file. **Cited by selector, not line number** — this
+  file's line numbers rot (they shifted again in `2d33c2f`); `grep` the selector instead.
+  - `@keyframes slideFromLeft` / `slideFromRight` — card slide
+  - `@keyframes growFromLeft` / `growFromRight` — card drop
+  - `.flip-container-*` — card flip transition
+  - `@keyframes shimmer` — button hover effect
+  - `@keyframes shuffle-card-1` / `-2` / `-3` — library shuffle
+  - `.dragging`, `.drag-over` — drag-and-drop styling
+  - `.game-header-row` — the game's top strip (deck-title plaque + hamburger as
+    **siblings**); carries the comment explaining why nothing may nest inside `#game-menu`
 - `public/prepare.css` — Duplicate flip animation CSS (lines 221-256)
 - `public/deck-selection.css` — `fadeInTile` keyframe (lines 136-164)
-- `public/playmat.css` — Shared transition properties for buttons and hover states
+- `public/playmat.css` — Shared transition properties for buttons and hover states.
+  Also holds **appearance** for components shared by /game and /prepare, as bare class
+  selectors (`.game-title`); the page sheets hold only placement.
+
+### Hazard: custom properties that cross a page sheet into the shared sheet
+
+`playmat.css` is loaded by **both** /game and /prepare, but `game.css` and `prepare.css`
+are loaded by only one page each. So a custom property **defined in a page sheet and
+consumed in `playmat.css`** resolves on one page and silently falls back to nothing on the
+other — no error, no warning, just a rule that quietly does less.
+
+This actually happened: `--min-title-slab-height` was defined on `.game-top-row` in
+`game.css` and read by the shared deck-title rule. On /game it reserved the plaque's
+height; on /prepare the plaque simply had no min-height and nobody noticed for months.
+(The variable is gone as of `2d33c2f` — this is recorded for the pattern, not the name.)
+
+**Rule**: anything `playmat.css` consumes must be defined somewhere both pages load —
+`styles.css` `:root` for tokens, or `playmat.css` itself. If a value genuinely differs per
+page, define it in `playmat.css` with a real fallback and let the page sheet override it.
+This matters for animations because durations, distances, and offsets are exactly the kind
+of value that gets tokenized into a custom property.
 
 ## TypeScript (animation class application)
 
@@ -32,6 +55,9 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
   - `htmx:beforeSwap`/`htmx:afterSwap` handlers near the top — stash/restore hand & revealed scroll positions; `afterSwap` also calls `syncMenuToggleAria()`. Note: the hamburger menu's open state is NOT restored here (it lives on `document.body`, which swaps never touch — see architecture.md "settle phase" gotcha).
   - `htmx:beforeRequest` handler (table mode, JES-127) — on `table-play-button` sets optimistic "Sent to table" text + disables; no clipboard
   - `htmx:beforeRequest` handler — copies card image to clipboard on Play/Discard (keyed on `play-button` class; solo Discard buttons carry both `discard-button` and `play-button`)
+  - `click` handler (document-level) — opens/closes the hamburger; closes on
+    `!evt.target.closest("#game-menu")`. This containment check is a **markup constraint on
+    anything added to the top strip** — see interactions.md
   - Drag-and-drop setup — removes animation classes on drag start
   - (Line numbers shifted down ~55 lines after the hamburger-menu code was added at the top.)
 - `public/deck-selection.js`
@@ -45,3 +71,6 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 ## Tests
 
 - `test/GameState.test.ts` — Tests for GameState methods that produce WhatHappened objects
+- `test/verification/verify-deck-title-placement.spec.ts` — Playwright. Guards the
+  sibling-not-child rule: clicking the deck title must dismiss an open hamburger menu.
+  Copy this assertion for any new sibling added to `.game-header-row`.
