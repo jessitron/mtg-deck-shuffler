@@ -140,6 +140,13 @@ done
 # test/harness-telemetry/harnessTracing.ts.
 echo -e "${YELLOW}Running verification tests...${NC}"
 echo -e "${YELLOW}Verify run id: $VERIFY_RUN_ID (data.db existed: $VERIFY_DATA_DB_EXISTED)${NC}"
+# set -e is off around this one command: `set -e` treats the whole env-var-prefixed
+# `npx playwright test` invocation as a single simple command, so a nonzero exit
+# would abort the script right here — before TEST_EXIT_CODE=$? below ever runs —
+# making the failure-message branch further down unreachable dead code. Turning
+# set -e off just for this command (and back on right after) is what makes that
+# capture real instead of decorative.
+set +e
 BASE_URL="$BASE_URL" \
     VERIFY_RUN_ID="$VERIFY_RUN_ID" \
     VERIFY_SHIP=shuffler \
@@ -155,6 +162,7 @@ BASE_URL="$BASE_URL" \
 
 # Capture the exit code
 TEST_EXIT_CODE=$?
+set -e
 
 # The cleanup function will run automatically due to the trap
 # Return the test exit code
