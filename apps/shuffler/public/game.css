@@ -176,6 +176,15 @@ body {
   min-height: 278px;
 }
 
+/* A hand reliably reaches 8 cards (opening 7 + a draw), which wraps to 2 rows
+ * at typical window widths (measured: 579px at both 1440px and 1900px wide).
+ * Reserving that height even for a smaller hand keeps the playmat's own box
+ * height — and therefore its background-size:cover crop — stable across the
+ * range a hand normally lives in. A hand beyond 8 still grows the mat. */
+#hand-section {
+  min-height: 579px;
+}
+
 .mulligan-row {
   display: flex;
   margin-bottom: 8px;
