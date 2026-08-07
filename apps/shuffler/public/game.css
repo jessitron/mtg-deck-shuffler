@@ -181,12 +181,6 @@ body {
   margin-bottom: 8px;
 }
 
-.mulligan-button {
-  padding: 6px 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
 /* Top strip: deck title plaque on the left, hamburger on the right. The title is
  * deliberately a SIBLING of #game-menu, not a child — game.js dismisses the menu
  * on !closest("#game-menu"), and #game-menu is also the panel's positioning
