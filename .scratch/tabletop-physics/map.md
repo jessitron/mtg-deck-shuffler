@@ -57,6 +57,23 @@ expensive way round.
   separated only by an `if` on `meta.instanceId`. Migrations are free now but bite when two
   deploys share a room — earlier than persistence does. Tap is free either way; don't let it
   argue the case.
+- **A card is a genuine custom shape type, `meta` is empty, and face-down is depicted not
+  enforced** — [Decide what a card is](issues/02-what-a-card-is.md), resolved 2026-08-07. `mtg-card`
+  extends `BaseBoxShapeUtil` and renders its own image; the deciding argument was "one util, three
+  meanings," not crop and not tap. Nine `props` (`instanceId`, `scryfallId`, `cardName`,
+  `frontImageUrl`, `backImageUrl | null`, `face`, `faceDown`, `tapped`, plus `w`/`h`), nothing in
+  `meta`, no `zone` (left unplaced for ticket 03), no owner/seat field. The per-instance image asset
+  goes away, so flip is a pure prop change. The arrival payload unbakes the face into two URLs —
+  zero contract churn, since `imageUrl` was never contract.
+- **Two axes, not one: `face` is which printed side, `faceDown` is concealment** — same ticket. A
+  two-faced card can't be *turned* face down but can be *played* face down, which is why one bit
+  won't do. A turned-over one-faced card is `faceDown`, not `face: 'back'`. The ships differ on
+  purpose: the Shuffler can't flip a one-faced card; the Tabletop can turn over anything.
+- **The Tabletop has no ownership or permission model** — same ticket, and now a fleet principle in
+  `notes/DESIGN-the-table-vision.md` § Principles: *"everything that can be done by one player is
+  doable by any player."* Binding on the rest of this map: **never design a gesture around "only
+  the controller may…"**, and don't build concealment — a face-down card's identity stays readable
+  because any player could just turn the card over anyway.
 
 ## Not yet specified
 
@@ -65,11 +82,12 @@ expensive way round.
   one (children ride the parent transform, no custom type); *grouping* auto-dissolves at one
   child, so it cannot hold a single counter; *bindings* move nothing by themselves and cost the
   same registration as a shape; only a **custom container** (`BaseFrameLikeShapeUtil` /
-  `onDragShapesIn`) gives furniture the target-side hooks. Which one a counter, a post-it, and a
-  tucked card each want still can't be phrased sharply until the shape architecture is decided.
-- **Whether a face-down card is a different shape, a prop, or a different image.** The Shuffler
-  currently bakes the face into `imageUrl`, so the Tabletop cannot change a card's face at all
-  today; whether that stays true is a `two-faced-cards` question this map will reach.
+  `onDragShapesIn`) gives furniture the target-side hooks. Ticket 02 settled the half that was
+  blocking this: the shape architecture is a custom type, and **a card carries nothing about its
+  passengers** — a passenger knows which card it's parented to, not the reverse. What's still
+  foggy is per-passenger: whether a counter, a post-it, and a tucked card each want parenting or
+  a binding, and whether a *card* must itself become frame-like to catch a counter dropped on it
+  (`onDragShapesIn` is a frame behaviour). Tickets 07/08/09 will phrase those.
 - **What happens to a counter when its card leaves the table** in ways other than the graveyard
   — exile, back to library, back to hand. Jess named the graveyard case ("they disappear");
   the others follow from whatever mechanism the counter ticket picks.
