@@ -89,9 +89,10 @@ ticket 11.
 - **A regression alarm.** The suite now traces itself, so "the suite got slower" is a queryable
   fact. Whether that becomes a Honeycomb trigger, a threshold in `verify.sh`, or nothing at all
   is undecided — and probably shouldn't be decided until the suite is at its target.
-- **Whether 60s survives contact.** 03 landed at ~55s, already under the 60s destination on
-  its own — but 04, 06, and 11 haven't landed yet, so this isn't the map's close. Re-measure
-  once they do; the number may move either direction.
+- ~~**Whether 60s survives contact.**~~ Resolved: re-measured post-03 (ticket 04's resolution
+  thread), **56.3s total**, comfortably under 60s — before 04, 06, or 11 land. The destination's
+  third clause is met; 04, 06, 11 are now about the first two clauses (no useless tests, no
+  wasted time), not about clawing back to 60s.
 - **The other two ships.** The Tabletop (`vitest`) and Spine (Rails `test/`) suites have never
   been measured. Whether they have the same disease is unknown; see Out of scope.
 
