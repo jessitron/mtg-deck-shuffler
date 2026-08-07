@@ -55,7 +55,11 @@ The short version:
   the three selectors are equal specificity and the pages load their sheets in opposite
   order, so a property added to the bare rule overrides `.playmat-game` but loses to
   `.playmat-prepare`. Keep each property in one place, never both
-- **Never write a raw hex.** Use a token from `public/styles.css` `:root`. Material and
+- **Never write a raw hex.** Use a token. The fleet's shared ones — the identity palette,
+  `--narrow-border`, and the mana colours — live in `packages/design-tokens/tokens.css`
+  (`@fleet/design-tokens`), served here at `/fleet/tokens.css` and loaded by the Tabletop
+  too, so the two ships share one dictionary. They are **not** mirrored in
+  `public/styles.css`, which now holds only `--background-color`. Material and
   Bootstrap defaults already in the CSS are drift, not precedent — don't copy them
 - **Orbitron for chrome, Ovo for content** (card names are content). Risque only on site
   pages. No fourth typeface
@@ -263,8 +267,11 @@ sourcing) is in the root `CLAUDE.md`. Shuffler specifics:
 - **`src/scripts/*` keeps `console.*` on purpose.** Those are CLI tools, not the server;
   their output belongs on the terminal. Don't sweep them into `log.ts`.
 - **`log.ts` is duplicated in the Tabletop deliberately** — there is no shared telemetry
-  package and we chose not to create one (the workspaces glob is `apps/*`/`services/*`, and
-  a shared package is a new build surface for two Dockerfiles). The two copies are also on
+  package and we chose not to create one. (The old reason — "the workspaces glob is
+  `apps/*`/`services/*`, and a shared package is a new build surface for two Dockerfiles" —
+  **no longer holds**: `packages/*` is in the glob and `@fleet/design-tokens` pays that build
+  cost already. The reason that still holds is the next sentence, and it's the load-bearing
+  one.) The two copies are also on
   different OTel version lines with genuinely incompatible APIs; see `notes/AGENT-NOTES.md`.
   Don't "helpfully" extract them.
 

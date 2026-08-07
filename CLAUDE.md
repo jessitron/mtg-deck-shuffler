@@ -80,10 +80,18 @@ See `docs/agents/domain.md`.
 
 ## Repo Layout
 
-This is a polyglot monorepo (npm workspaces). The fleet level holds `notes/`,
-`.claude/`, `owners/`, `scripts/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`.
+This is a polyglot monorepo (npm workspaces — the glob is `apps/*`, `services/*`,
+`packages/*`). The fleet level holds `notes/`, `.claude/`, `owners/`, `scripts/`,
+`packages/`, `SEAMAP.md`, and the root `package.json`/`package-lock.json`.
 `scripts/` is for shell helpers shared by the ships' own scripts — `preflight-aws.sh`
-(`check_aws_credentials`) and `deploy-marker.sh`, both used by all three `deploy.sh`.
+(`check_aws_credentials`) and `deploy-marker.sh`, both used by all three `deploy.sh`,
+plus `check-fleet-tokens.sh` (a fast smoke check that the shared palette reaches both ships).
+
+**Adding a workspace under `packages/` has a container cost, in two places.** Every
+Dockerfile that runs `npm ci` must `COPY` the new package's `package.json` **before** the
+install — the glob makes it mandatory, and a miss fails the build outright. And npm links
+workspaces as **relative** symlinks, so any runtime stage that needs the package at run time
+must copy `packages/` too, or the link dangles and it 404s **in the container only**.
 The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and `./deploy.sh`):
 
 - `apps/shuffler/` — the Shuffler: Express + HTMX deck manager and game screen;
@@ -92,6 +100,10 @@ The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and
   (`/t/:tableName` is a shared board) where cards arrive from the Shuffler.
 - `services/spine/` — the Spine: Rails 8 + SQLite; tables, seats, one append-only
   event log per table, validated against `contracts/`.
+- `packages/design-tokens/` — the fleet's shared visual vocabulary (`@fleet/design-tokens`):
+  the identity palette, `--narrow-border`, and Magic's colour pie. One dictionary, both ships
+  — the Shuffler serves it at `/fleet/tokens.css`, the Tabletop imports it through Vite.
+  Owned by `owners/shuffler-looks-like-itself/`; consult that owner before changing a value.
 - `contracts/` — the fleet's published language: JSON Schema for the event
   envelope and per-kind payloads. Both the Spine (Ruby) and the TS apps validate
   on receipt and fail loudly on unknown name/version. See `contracts/README.md`
