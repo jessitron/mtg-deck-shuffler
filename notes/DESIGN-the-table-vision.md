@@ -158,18 +158,25 @@ Visibility cuts across all kinds orthogonally.
   rules engine (still a non-goal).
 - **The players own the game experience.** They enforce the rules, not the app. Jess,
   2026-08-07: _"I don't mind if people can cheat here. If people wanna cheat, it's their
-  game."_ This is the positive form of "not a rules engine," and it decides designs, not
-  just features: **the app need not conceal information, and need not prevent actions.**
-  A face-down card on the Tabletop is *depicted* face-down, not cryptographically hidden
-  — its identity stays in the shape, readable by anyone who looks, because the table is
-  trust-based and the players are on a call together. It also means capabilities can be
-  left deliberately unguarded: "let a player look at a face-down card" needed no feature,
-  because turning a card over already does it and nothing stops them. Before building a
-  restriction, ask whether the players would rather just be trusted.
-  (Contrast the one thing that *is* guarded: `gameCardIndex` never crosses the wire,
-  because a decodable secret leaks the **hidden zones the Shuffler exists to keep** —
-  library order and hands. Concealing what a player chose to place is not the same as
-  leaking what nobody chose to reveal.)
+  game."_ The positive form of "not a rules engine," and it decides designs, not just
+  features: the app need not prevent actions, and need not conceal information.
+- **On the shared canvas, anything one player can do, every player can do.** Jess's
+  sharpening of the above, 2026-08-07: not "everything on the canvas *should be* public"
+  — rather **there is no privileged actor.** The Tabletop has no ownership or permission
+  model: any player can tap, move, turn over, or annotate any card, whoever's deck it came
+  from. A card may record *where it came from*, but provenance grants no rights.
+  Two consequences worth having in advance:
+  - **Concealment on the canvas is theatre, so don't build it.** A face-down card is
+    *depicted* face-down, not cryptographically hidden — its identity stays in the shape
+    where any client can read it. Guarding it would be pointless anyway, since any player
+    can simply turn the card over. For the same reason "let a player peek at a face-down
+    card" needed no feature: turning it over already does it, and nothing stops them.
+  - **Don't reach for "only the controller may…"** when designing gestures. If a
+    restriction seems necessary, ask whether the players would rather just be trusted.
+  (Contrast the one thing that *is* guarded, and note it isn't on the canvas:
+  `gameCardIndex` never crosses the wire, because a decodable secret leaks the **hidden
+  zones the Shuffler exists to keep** — library order and hands. Not concealing what a
+  player chose to place is different from leaking what nobody chose to reveal.)
 - **The humans teach the AI in public, during play.** The chat panel is the eval
   machine, and the teaching is part of the game record.
 - **Don't carry what you can listen to.** Discord keeps the voice call; we transcribe.
