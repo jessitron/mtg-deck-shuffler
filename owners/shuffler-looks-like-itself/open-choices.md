@@ -1,11 +1,11 @@
 # Open choices — the work list
 
 **Status: in progress.** Choices 1 and 2 are DECIDED (2026-08-02); **choice 5 is DECIDED and
-shipped (2026-08-06)**. **Jess answered choices 3, 4 and 6 on 2026-08-06** — the answers and
-their reasoning are in `.scratch/shuffler-design-choices/spec.md`, and `issues/02`–`04`
-execute them one commit at a time. Choices 3, 4 and 6 are still marked `_(pending)_` below
-until their commits land and run the resolve checklist. **Choice 7 is new (2026-08-07)** and
-has never been asked.
+shipped (2026-08-06)**; **choice 7 is DECIDED and shipped (2026-08-07)**. **Jess answered
+choices 3, 4 and 6 on 2026-08-06** — the answers and their reasoning are in
+`.scratch/shuffler-design-choices/spec.md`, and `issues/02`–`04` execute them one commit at a
+time. Choices 3, 4 and 6 are still marked `_(pending)_` below until their commits land and run
+the resolve checklist.
 
 **Citations here are file + selector, never `file:NNN` (convention adopted 2026-08-07 — see
 [README.md](README.md#how-to-cite-code-in-this-kb-standing-convention-2026-08-07)).** Grep the
@@ -267,30 +267,48 @@ it to all three options equally. `.candidate-input` and its `::placeholder` rema
 
 ---
 
-## 7. Deck-title plaque border — groove or flat? (new 2026-08-07)
+## 7. Deck-title plaque border — **DECIDED 2026-08-07, shipped**
 
 The deck-title plaque left `.cool-command-zone-surround` and now rests on the playmat
 itself (see [history.md](history.md#2026-08-07--the-deck-title-plaque-moved-onto-the-playmat)).
 Its `3px groove black` border was, arguably, the *join* between slab and metal frame. Alone
-on the mat, does it still want one?
+on the mat, did it still want one?
 
 | Option | Where |
 | --- | --- |
-| **A — keep `3px groove black`** (current, shipped) | `playmat.css` → `.game-title` |
-| **B — flat `3px solid black`** | `design-candidates.css` → `.candidate-game-title-flat` |
+| A — keep `3px groove black` (was shipped) | `playmat.css` → `.game-title` |
+| **B — DECIDED — flat `3px solid black`** | now live in `playmat.css` → `.game-title` |
 
-**Decision:** _(pending — Jess asked for both to be staged rather than decided, 2026-08-07)_
+**Decision: B — flat `3px solid black` (2026-08-07).** Jess, seeing both on `/design`: *"go
+with your option B, the black border. That looks great in /design."* Landed in `20b83aa`.
 
-The stake: `groove`/`outset`/`inset` borders survive in exactly **two** places in the app —
-this plaque and the command-zone surround. Picking B halves the remaining chunky-3D-border
-vocabulary, which is a real loss of identity, not a cleanup. Picking A keeps the plaque
-reading as the same family of physical object as the frame it left.
+Reasoning: the groove was the plaque's **join** to the metal command-zone surround, and out
+on the mat it has nothing to join to. The surround keeps its `5px outset black`, so the
+chunky 3D-border language still has a home — it is just down to one site instead of two.
+That cost was argued explicitly before the decision (halving the surviving vocabulary is a
+real loss of identity, not a cleanup) and Jess took it anyway, by eye.
 
-Only the `border` line differs between the two; everything else about `.game-title` is
-already shared. If B wins: change the `border` in `playmat.css` → `.game-title`, delete
-`.candidate-game-title-flat` from `design-candidates.css`, collapse the `.choice` block in
-`design.ejs` to a plain `badge-standard` specimen, and update the "chunky physical controls"
-paragraph in [README.md](README.md) — it currently names both surviving sites.
+**How it was decided, and this is the reusable part.** The owner's `-review` pass on the
+plaque *move* **blocked** the flat border: Jess had approved a placement change, and an
+appearance change was riding along unapproved. That block was honoured — the groove shipped
+unchanged, both treatments were staged side by side on `/design` as a `.choice` block, and
+Jess was asked properly. She then picked the very treatment the review had blocked. **That
+is the process succeeding, not reversing itself:** the job is to stop unapproved changes
+riding along, not to defend the status quo. A block that ends in "so stage it as a choice
+and ask" is the good outcome. It's also the second time (after choice 5) that staging real
+options on `/design` beat arguing them in prose — Jess asked for pixels, not paragraphs.
+
+**Resolve checklist — done:** `.candidate-game-title-flat` deleted from
+`design-candidates.css` (no dangling references — grepped); `playmat.css` → `.game-title`
+carries the flat border with the decision, date and reasoning in the comment above it; the
+`.choice` block in `design.ejs` is gone and the "Deck title plaque" specimen — which renders
+the real shipped `.game-title` — now carries a `section-note` recording the outcome; the row
+is out of [README.md](README.md)'s open-choices table and the "chunky physical controls"
+paragraph now says the surround is the **last** 3D-border site; entry added to
+[history.md](history.md). No stated rule in `apps/shuffler/CLAUDE.md` → UI Style changed (it
+never named the plaque's border). `npm run build` clean; `./verify.sh verify-design-gallery
+verify-deck-title-placement` — 6/6 pass. The gallery spec asserts nothing about `.game-title`,
+so it needed no update.
 
 ---
 
@@ -307,10 +325,11 @@ unbidden either.
   6 (it's option B's input). Jess deferred it explicitly. **It will look worse before it
   looks better — that's expected, not a regression to patch.**
 - **Removing `.cool-command-zone-surround` entirely**, so commanders sit bare on the mat
-  (raised 2026-08-07, deferred as its own change). Worth knowing about before touching the
-  plaque or choice 7: the surround is the plaque's former parent and the *other* surviving
-  `groove`/`outset` site. If the frame goes, choice 7's argument changes completely — the
-  plaque would be the last chunky 3D border in the app rather than one of a pair.
+  (raised 2026-08-07, deferred as its own change). The stakes went **up** when choice 7
+  landed: the surround's `5px outset black` is now the **only** `groove`/`outset`/`inset`
+  border left in the app. Removing it doesn't thin the chunky-3D vocabulary, it ends it. That
+  may well be the right call — but it's a decision about the app's identity, not a cleanup,
+  and it goes to Jess as one.
 
 ---
 

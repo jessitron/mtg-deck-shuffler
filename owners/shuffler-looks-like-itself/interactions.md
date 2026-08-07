@@ -35,8 +35,11 @@
   and clicking the title dismisses an open menu. Restyling `.game-title` won't touch it;
   **re-parenting it will**, which is the point.
 - **`test/verification/verify-design-gallery.spec.ts`** — asserts specific computed
-  values (200×278 card, `outset` border, black playmat buttons, and the global focus ring's
-  3px / `rgb(221, 199, 221)` / 3px offset). Deliberate changes to those will fail this test;
+  values (200×278 card, `.button-base.begin-button`'s border-style — **`solid`**, since
+  choice 1 retired the `outset` bevel; this KB called it `outset` until 2026-08-07, black
+  playmat buttons, and the global focus ring's
+  3px / `rgb(221, 199, 221)` / 3px offset). It asserts **nothing** about `.game-title`, so
+  the choice-7 border change needed no update to it. Deliberate changes to those will fail this test;
   that's the test doing its job, not a bug. Update it in the same commit. **If you change the
   focus ring's color or width, that spec is the thing that will tell you** — it reads the
   computed style off specimens carrying no candidate classes.
@@ -55,6 +58,11 @@ Concrete, in rough order of how often they bite.
   and they are not precedent.
 - New chrome gets **square corners** (`border-radius: 0`). Round corners are for cards,
   the playmat, `.page-container`, and count discs only.
+- **Don't add a `groove`/`outset`/`inset` border.** As of choice 7 (2026-08-07) exactly one
+  survives in the whole app — `playmat.css` → `.cool-command-zone-surround`, `5px outset
+  black`. Borders are flat (`solid`); press feedback is `.pushable-flat`'s box-shadow bevel,
+  not a border switch. Conversely, **don't strip the surround's `outset` as tidying** —
+  it's the last of its kind, and ending that language is Jess's call.
 - Button labels are **Orbitron**. Card names are **Ovo**. No fourth typeface.
 - **The focus state is already written for you** (choice 5, 2026-08-06). One global
   `:focus-visible` rule in `styles.css` (grep `:focus-visible`) draws `3px solid var(--light-pink)` at

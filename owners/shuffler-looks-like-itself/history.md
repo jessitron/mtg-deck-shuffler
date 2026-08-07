@@ -287,10 +287,11 @@ no title at all because the title lived on the `commanders.length > 0` branch. A
 gallery's old command-zone specimen carried a fictitious second line — "Precon · Warhammer
 40,000" — that the app has never rendered; it was deleted, not reproduced.
 
-**Left open on purpose.** The `groove` border was arguably the plaque's *join* to the metal
-frame; alone on the mat it joins nothing. The design owner's review flagged this and Jess
-asked for **both** treatments staged on `/design` rather than a decision — so it's
-[choice 7](open-choices.md#7-deck-title-plaque-border--groove-or-flat-new-2026-08-07), with
+**Left open on purpose, then closed the same day — see the next entry.** The `groove` border
+was arguably the plaque's *join* to the metal frame; alone on the mat it joins nothing. The
+design owner's review flagged this and Jess asked for **both** treatments staged on `/design`
+rather than a decision — so it became
+[choice 7](open-choices.md#7-deck-title-plaque-border--decided-2026-08-07-shipped), with
 `.candidate-game-title-flat` in `design-candidates.css` as option B. The groove shipped
 unchanged in the meantime. Two other things Jess looked at and deferred — converging the
 `.join-table-fields` panel (now the only pale untokenized slab on `/prepare`, and more
@@ -318,3 +319,41 @@ fails *honestly* — a grep returning nothing tells you the rule is gone, where 
 number confidently points at an innocent neighbour. Converted in the same commit as the
 plaque move; the convention is written up in [README.md](README.md), and checklist step 8
 now says "cite by selector" instead of "re-verify the lines."
+
+## 2026-08-07 — choice 7 decided: the deck-title plaque goes flat
+
+`20b83aa` **Adopt the flat border on the deck title plaque (choice 7)**
+
+Jess picked **option B, `3px solid black`**, after seeing both staged on `/design`: *"go with
+your option B, the black border. That looks great in /design."* `playmat.css` → `.game-title`
+carries the flat border (with the decision and its reasoning in the comment above the rule);
+`.candidate-game-title-flat` is gone from `design-candidates.css`; the `.choice` block in
+`design.ejs` collapsed to the plain specimen it already had, now with a `section-note`
+recording the outcome.
+
+**Why flat won.** The `groove` was the plaque's **join** to the metal command-zone surround.
+When the plaque moved onto the mat (entry above) the join survived as decoration of a
+connection that no longer existed. The counter-argument was real and was put to Jess plainly:
+`groove`/`outset`/`inset` survived in only two places, so choosing flat halves the app's
+chunky-3D vocabulary. **It is now down to one** — `.cool-command-zone-surround`'s `5px outset
+black`, the last of them. That raises the stakes on the separately-deferred "remove the
+surround entirely" idea, which would end the language rather than thin it; recorded under
+"Deferred by Jess" in [open-choices.md](open-choices.md).
+
+**Method, stated as a practice: stage it, don't argue it.** This is the second time (choice 5
+was the first) that a question nobody could settle in prose was settled in one sentence once
+Jess could see both options rendered by the app's own CSS. The gallery isn't only
+documentation — it's the **decision instrument**. When a choice comes up, the cheapest next
+move is usually to build the candidate and put it on `/design`, not to write a better essay
+about it. Corollary from choice 5, still true: the gallery shows what a treatment *looks*
+like, not what it *collides* with — find that in the code.
+
+**And a note on how this owner should read its own blocks.** The `-review` pass on the plaque
+move had **blocked** exactly this flat border, on the grounds that Jess approved a *placement*
+change and an appearance change was riding along unapproved. The block was honoured: the
+groove shipped, both options were staged, Jess was asked. She then chose the thing that had
+been blocked. That is the process working, not reversing: **the job is to stop unapproved
+changes riding along, not to defend the status quo.** A block that ends in "so stage it as a
+choice and ask" is a success even when the blocked option wins — it lands decided instead of
+smuggled. Written into [README.md](README.md)'s design philosophy so the next review doesn't
+soften itself to avoid looking overruled.

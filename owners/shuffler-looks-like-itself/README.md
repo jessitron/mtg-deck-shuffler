@@ -84,12 +84,14 @@ pages. There is no fourth typeface.
 and slabs. Plus `--playmat-one`/`--playmat-two` on the game page and the closed
 `--mana-W/U/B/R/G` set.
 
-**Chunky physical controls, except on buttons now.** `outset` / `inset` / `groove`
-borders remain on non-button chrome — exactly two places now: the command-zone surround
-(`outset` metal frame) and the deck-title plaque (`3px groove black`). Those two are no
-longer nested: as of 2026-08-07 the plaque left the surround and rests on the playmat
-itself, so the groove no longer joins anything. Whether it keeps the groove alone on the
-mat is **open choice 7** — both options are staged on `/design`. Button
+**Chunky physical controls — down to a single site.** `outset` / `inset` / `groove`
+borders survive in **exactly one place** in the app: `.cool-command-zone-surround`'s
+`5px outset black` metal frame (`playmat.css`). It is the last of them. The deck-title
+plaque was the other, and gave up its `groove` on 2026-08-07 (choice 7) once it left the
+surround and had nothing left to join to — it is now `3px solid black`. **Know what that
+makes the surround:** any future change to it isn't trimming one instance of a language,
+it's deciding whether the app still speaks that language at all. That's Jess's call, not a
+cleanup — see [open-choices.md](open-choices.md) → "Deferred by Jess". Button
 press feedback moved to the box-shadow bevel described below (`shuffler-design-choices` choice 1) — no
 more `outset → inset` border switch anywhere. The Big Fat CTA (below) still carries a
 visible `10px solid` light-pink border — it just doesn't switch to `inset` on press
@@ -163,6 +165,19 @@ the gallery lives in the Shuffler, but it speaks for the Tabletop too.
 does not pick — it surfaces both on `/design` and waits. Inventing a resolution is worse
 than leaving the choice visible.
 
+**Stage it, don't argue it.** Twice now (choice 5, choice 7) a question that read as
+unanswerable in prose was settled in one sentence once Jess could *see* both options
+rendered on `/design`. Build the candidate; don't write the essay.
+
+**Blocking is not defending the status quo.** The owner's job is to stop an unapproved
+change riding along with an approved one — not to protect whatever shipped last. The
+worked example is choice 7 (2026-08-07): the `-review` blocked a flat border that was
+hitching a ride on an approved *placement* change; the groove shipped unchanged, both
+treatments were staged, Jess was asked, and she chose the flat border. The blocked outcome
+is the outcome that landed — but it landed **decided** instead of smuggled. So a block that
+ends in "stage it as a choice and ask" is a success. Don't read a later reversal as
+evidence the block was wrong, and don't soften the next one to avoid looking wrong.
+
 **One focus ring, declared once (decided 2026-08-06, `shuffler-design-choices` choice 5):**
 `3px solid var(--light-pink)` at `outline-offset: 3px`, as a single global `:focus-visible`
 rule in `styles.css` (grep `:focus-visible`) covering `a, button, input, select, textarea, summary,
@@ -196,7 +211,6 @@ component and flag the choice.
 | Card-modal action buttons | Keep seven color-coded hues · collapse to primary/secondary |
 | Corner radius on chrome | truly 0 · a single 4px |
 | Text input | precon-search · join-table · tokenized proposal (recommended) |
-| Deck-title plaque border (new 2026-08-07) | keep `3px groove black` (current) · flat `3px solid black` |
 
 Candidate CSS for the unadopted options lives in
 `apps/shuffler/public/design-candidates.css`, loaded by nothing but the gallery.
@@ -235,9 +249,9 @@ around :455`) so the next reader knows to grep first.
 
 ## The other files
 
-- [open-choices.md](open-choices.md) — **the work list.** All seven choices, with the four
-  still-undecided ones carrying implementation steps, plus the mechanical cleanups that fall
-  out of them. Resolved choices keep their reasoning rather than being deleted.
+- [open-choices.md](open-choices.md) — **the work list.** All seven choices, with the three
+  still-undecided ones (3, 4, 6) carrying implementation steps, plus the mechanical cleanups
+  that fall out of them. Resolved choices keep their reasoning rather than being deleted.
 - [interactions.md](interactions.md) — what this leans on, who breaks it, and the concrete
   watch points. **The review skill's fuel.**
 - [architecture.md](architecture.md) — how the stylesheets are organised, which file owns

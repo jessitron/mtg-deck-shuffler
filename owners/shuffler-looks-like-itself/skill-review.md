@@ -66,6 +66,10 @@ you skipped. These are written from the Shuffler's files; on the Tabletop, apply
 
 - [ ] Any `border-radius` on chrome? Chrome is square. Round is for cards, the playmat,
       `.page-container`, and count discs.
+- [ ] Any `groove` / `outset` / `inset` border? Reject — borders are flat `solid`. Since
+      choice 7 (2026-08-07) exactly **one** survives app-wide,
+      `playmat.css` → `.cool-command-zone-surround`. Equally, a plan that *removes* that
+      one as cleanup is a blocker: it ends a design language, and that's Jess's call.
 - [ ] Does it size things off the 200px card unit where it sits next to cards?
 
 **Typography**
@@ -114,14 +118,20 @@ you skipped. These are written from the Shuffler's files; on the Tabletop, apply
       belongs on `/design` as a `.choice` block with both options — surfaced for Jess, not
       silently resolved.
 - [ ] Does it change something the gallery test asserts (card 200×278, `.begin-button`
-      `outset` border, playmat buttons black)? Update the spec in the same commit.
+      border-style `solid`, playmat buttons black, the focus ring's 3px/`rgb(221, 199, 221)`
+      /3px offset)? Update the spec in the same commit.
 
 **Open choices**
 
-- [ ] Does the plan land on one of the undecided questions in `README.md` (button press
-      behaviour, secondary gray, card-modal action buttons, chrome radius, focus ring,
-      input style)? Don't let it pick unilaterally. Follow the nearest existing treatment
-      and flag the choice.
+- [ ] Does the plan land on one of the still-undecided questions (card-modal action
+      buttons, chrome radius, input style — choices 3, 4 and 6; the rest are DECIDED, see
+      `open-choices.md`)? Don't let it pick unilaterally. Follow the nearest existing
+      treatment and flag the choice.
+- [ ] **Is an appearance change riding along with an approved change of something else?**
+      Placement, structure, markup and behaviour changes love to carry an unapproved
+      restyle with them. That's a blocker regardless of whether the restyle is an
+      improvement — say "ship the approved part unchanged, stage both treatments on
+      `/design`, ask Jess." See choice 7 in `open-choices.md` for the worked example.
 
 **Neighbours**
 
@@ -141,9 +151,16 @@ review was real.
 3. an actionable alternative — the token to use, the file to put it in, the class to
    reuse.
 
-Distinguish **blockers** (raw Material hex, round corners on chrome, a fourth typeface,
-unilaterally resolving an open choice) from **notes** (nice-to-haves, follow-ups worth a
-buoy).
+Distinguish **blockers** (raw Material hex, round corners on chrome, a fourth typeface, a
+new 3D border, unilaterally resolving an open choice, an unapproved restyle riding along
+with an approved change) from **notes** (nice-to-haves, follow-ups worth a buoy).
+
+**Block freely — you are not defending the status quo.** The point of a block is that the
+change lands *decided* rather than smuggled, so the right ending is almost always "stage
+both treatments on `/design` and ask Jess," not "keep what's there." It is a **success** if
+Jess then picks the thing you blocked; that happened with choice 7 on 2026-08-07 and the
+process worked exactly as intended. Don't soften a review to avoid being overruled, and
+don't argue an aesthetic in prose when you could build the candidate and let her look at it.
 
 End with:
 
