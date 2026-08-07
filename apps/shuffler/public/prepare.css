@@ -37,7 +37,14 @@
   grid-column: 4;
   grid-row: 3;
   justify-self: start; /* left-align, overflow right */
-  margin-top: 7px; /* border of commander card inset */
+  /* Drops the library stack so its top edge meets the commander card's art, not
+   * the top of the metal surround: 15px .multiple-cards inset + 7px .card-container
+   * inset = 22px. Same total as game.css's padding-top:22px on this class -- the
+   * surround's border/padding are fixed px, not scaled, so prepare needs the same
+   * number despite the smaller playmat. The old margin-top:7px only covered the
+   * inner inset and undershot by 15px, a latent bug the library/command-zone swap
+   * (2026-08-07) made visible by putting the two side by side for direct comparison. */
+  margin-top: 22px;
   width: 210px;
 }
 
