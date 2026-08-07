@@ -3,7 +3,7 @@
 Written work belonging to a map that doesn't exist yet.
 
 These came out of the former `tabletop-card-physics-starter` map when the
-[Tabletop-replaces-Mural chart](../../../notes/DESIGN-tabletop-replaces-mural.md) split that
+[Tabletop-replaces-Mural chart](../../../apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md) split that
 mountain into six maps (2026-08-06). Each one is good material aimed at a map nobody has charted.
 
 They sit here rather than in any `issues/` directory **on purpose**: a wayfinder frontier scan

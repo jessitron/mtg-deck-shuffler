@@ -97,7 +97,7 @@ export interface GameCard {
 // Bumped 10 -> 11 when the deal/mulligan events became atomic and carry their
 // `moves` (so a mulligan is one undoable event). v10 events lack `moves`, so an
 // old mulligan couldn't be undone — rejected, not migrated.
-// When/how to bump: notes/DESIGN-persistence-versioning.md
+// When/how to bump: apps/shuffler/notes/DESIGN-persistence-versioning.md
 export const PERSISTED_GAME_STATE_VERSION: 11 = 11;
 
 /** Thrown when a persisted game was saved in a format this build can't load. */
@@ -124,7 +124,7 @@ export interface PersistedGameState {
   events: GameEvent[];
   // Table info (JES-127): present only when this game joined a table on the
   // Tabletop. Optional with graceful fallbacks (solo play) — NO version bump;
-  // see the "optional fields" exception in notes/DESIGN-persistence-versioning.md.
+  // see the "optional fields" exception in apps/shuffler/notes/DESIGN-persistence-versioning.md.
   tableName?: string;
   playerName?: string;
   /** The seat's short GUID — player names are not unique; this is the seat's identity. */

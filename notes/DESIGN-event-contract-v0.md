@@ -135,7 +135,7 @@ decision, not assumed.)
 - The envelope itself carries one version (file-level in `contracts/`), bumped
   rarely.
 - Both readers validate on receipt and **fail loudly** on unknown name or version —
-  consistent with `notes/DESIGN-persistence-versioning.md`.
+  consistent with `apps/shuffler/notes/DESIGN-persistence-versioning.md`.
 
 Where TS receives events: eventually the **Tabletop subscribes to a table's public
 feed** from the Spine — it needs `card.played` to put things on the stack — and that

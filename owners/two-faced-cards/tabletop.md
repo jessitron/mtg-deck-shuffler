@@ -107,7 +107,7 @@ one-faced card only the face-down axis exists.
 The Shuffler has **no face-down concept at all** today — nothing in `CardDefinition`,
 `GameCard`, or the contract expresses concealment. A "Play Face-Down" button for the
 Shuffler was considered and **dropped** (2026-08-07) onto the Mural-parity list as a
-buoy; `notes/DESIGN-tabletop-replaces-mural.md` already lists "flip a card over (MDFC,
+buoy; `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md` already lists "flip a card over (MDFC,
 and face-down)" as parity work and puts playing from the library face-down out of scope.
 Don't confuse this with the "Card Back" note in [interactions.md](interactions.md) — the
 Shuffler's `CARD_BACK` image is *library stack decoration*, not modeled concealment. When

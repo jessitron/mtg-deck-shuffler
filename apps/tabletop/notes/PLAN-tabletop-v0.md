@@ -12,7 +12,7 @@ Status: **v2 — Jess's round-1 answers folded in; 5 new JESS TODOs at the botto
 - **Spectating** — open `/t/:tableName` with no Shuffler game at all. Full canvas
   access in v0 (no seat concept).
 
-Mirror this into `apps/tabletop/README.md`, `notes/GLOSSARY.md`, and prep-screen copy.
+Mirror this into `apps/tabletop/README.md`, the fleet's `notes/GLOSSARY.md`, and prep-screen copy.
 
 ## Technology choices
 
@@ -99,7 +99,7 @@ Mirror this into `apps/tabletop/README.md`, `notes/GLOSSARY.md`, and prep-screen
   public host. Check ALB idle timeout vs tldraw keepalive. _Test: container boot;
   prod spans after deploy._
 - **A7. Docs** — tabletop SEAMAP progress, README (Modes + SCAFFOLDING callouts),
-  root CLAUDE.md layout, notes/AGENT-NOTES.md gotchas.
+  root CLAUDE.md layout, the fleet's notes/AGENT-NOTES.md gotchas.
 
 ## Part B — Shuffler integration (parallel with A once F0 lands; only B3's end-to-end verification and prod wiring wait for A5/A6)
 

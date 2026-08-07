@@ -97,8 +97,9 @@ The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and
   on receipt and fail loudly on unknown name/version. See `contracts/README.md`
   and `notes/DESIGN-event-contract-v0.md`.
 
-**Convention: every Shuffler path in `notes/` is relative to `apps/shuffler/`.**
-So `src/app.ts` means `apps/shuffler/src/app.ts`.
+**`notes/` at the fleet level holds only genuinely fleet-wide docs.** Ship-specific notes
+live under each ship's own `notes/` (e.g. `apps/shuffler/notes/`, `apps/tabletop/notes/`),
+relative to that ship's own directory — see that ship's `CLAUDE.md`.
 
 ## Run the whole fleet locally
 

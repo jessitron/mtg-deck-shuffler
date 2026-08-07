@@ -22,7 +22,7 @@ v0 catalog: `table.created`, `seat.taken`, `card.played`.
 - **Fail loudly.** An unknown `name`, an unknown `schemaVersion`, or an envelope
   that doesn't validate is a hard error (HTTP 422 at the Spine, a thrown error in
   TS) — never a warning, never a best-effort parse. Consistent with
-  `notes/DESIGN-persistence-versioning.md`: old data fails loudly; a deploy may
+  `apps/shuffler/notes/DESIGN-persistence-versioning.md`: old data fails loudly; a deploy may
   invalidate a Table, and we accept that today.
 - **Uniqueness travels with the event; truth-of-order stays with the log.**
   Senders mint `id` (idempotency — the Spine elides retried duplicates). The Spine

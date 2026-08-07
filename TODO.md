@@ -45,7 +45,7 @@ section is just a wall between Jess and the live work.
   - Doing this unblocks `playmat-drop-shadow` above.
 
 - **The Tabletop-replaces-Mural mountain is charted.** The parity list, the six maps it
-  splits into, and their order: `notes/DESIGN-tabletop-replaces-mural.md`. Two maps exist
+  splits into, and their order: `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md`. Two maps exist
   so far — work them with `/wayfinder`, one ticket at a time, rather than picking lines
   from here:
   - `.scratch/tabletop-physics/map.md` — cards and furniture become real shapes. **Start
@@ -69,7 +69,7 @@ section is just a wall between Jess and the live work.
   - Glossary work: `notes/GLOSSARY.md` has no face-down entry, and **nothing in the fleet models it
     at all** — no field on `CardDefinition`/`GameCard`, nothing in `contracts/`.
   - ✅ **Scope settled 2026-08-07: Play Face-Down stays OUT of scope.** Jess briefly said it was
-    needed for Mural parity, then confirmed sticking with `notes/DESIGN-tabletop-replaces-mural.md:127`
+    needed for Mural parity, then confirmed sticking with `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md:127`
     — *"Mural doesn't do it either, so it isn't parity. Real Magic wants it; a later mountain can
     have it."* (Technically it *is* reachable in Mural by pasting a card back, and low priority
     besides; workable around in test games.) **So there is no Shuffler button in this item** — what

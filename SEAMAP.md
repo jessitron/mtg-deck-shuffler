@@ -23,7 +23,7 @@ Mural, not a rewrite.
 1. **The Tabletop replaces Mural** ← _active_ — a synced tldraw canvas where cards
    arrive from the Shuffler instead of the clipboard; then card shapes and gestures
    (tap, counters, zone areas) make common movements easy. The full parity list and the
-   six maps that climb it: `notes/DESIGN-tabletop-replaces-mural.md`.
+   six maps that climb it: `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md`.
 2. **The Spine tells the story** — one event log per table; a narration panel showing
    what happened, before any AI fills it.
 3. **The Interpreter learns to read the play** — guesses at unexplained physical
@@ -68,7 +68,7 @@ A change is home when:
   OpenTelemetry and propagates trace context; all interesting info goes on spans.
   From each ship's first commit, not retrofitted.
 - Square corners (border-radius ≤ 4px) except on physically round things. A me thing.
-- Everything persisted is versioned (`notes/DESIGN-persistence-versioning.md`).
+- Everything persisted is versioned (`apps/shuffler/notes/DESIGN-persistence-versioning.md`).
 - Feature owners hold deep context for tricky features and watch for cross-feature
   interactions.
 

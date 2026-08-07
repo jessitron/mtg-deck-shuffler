@@ -4,7 +4,7 @@ status: current
 
 # External interfaces are behind ports, adapters, and gateways.
 
-See notes/PATTERN-port-adapter-gateway.md
+See the fleet's `notes/PATTERN-port-adapter-gateway.md`
 
 For a good example of this in the code, see @src/port-deck-retrieval/index.ts and the files it references.
 

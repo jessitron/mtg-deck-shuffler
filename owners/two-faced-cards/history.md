@@ -243,7 +243,7 @@ environment. The trace made the diagnosis — the error was on the **outbound cl
   leaking identity through **synced tldraw props** (every client gets the whole shape record —
   the `gameCardIndex` decodable-secret problem in a new costume).
 - A Shuffler **"Play Face-Down" button was dropped** as a buoy onto the Mural-parity list
-  (`notes/DESIGN-tabletop-replaces-mural.md` already lists "flip a card over (MDFC, and
+  (`apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md` already lists "flip a card over (MDFC, and
   face-down)" as parity work, and puts playing from the library face-down out of scope).
 - **Face-down remains unmodeled fleet-wide**: no field on `CardDefinition`, `GameCard`,
   `PersistedGameCard`, and nothing in `contracts/`. New watch points 12–14 in interactions.md.

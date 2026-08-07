@@ -3,7 +3,7 @@
 Guidance for Claude Code when working in `apps/shuffler/`. Fleet-level guidance
 (owners, workflow, telemetry key sourcing) is in the repo-root `CLAUDE.md`.
 
-**All paths in this file — and every Shuffler path in `notes/` — are relative to
+**All paths in this file — and every path in `apps/shuffler/notes/` — are relative to
 `apps/shuffler/`.** So `src/app.ts` means `apps/shuffler/src/app.ts`. Commands
 (`./run`, `./verify.sh`, `./deploy.sh`, `npm start`) are run **from `apps/shuffler/`**;
 `npm run build` and `npm test` also work from the repo root, where they pass through
@@ -165,7 +165,7 @@ Verify changes with (from `apps/shuffler/`):
 
 Requires `apps/shuffler/.env` for OpenTelemetry config. SQLite persistence by default — `data.db` is created in the server's cwd, so `apps/shuffler/data.db`. Set `PORT_PERSIST_STATE=in-memory` for ephemeral state.
 
-Changing the shape of anything persisted (a `CardDefinition` field, `Deck`, `PersistedGameState`, `PersistedGamePrep`)? Follow `notes/DESIGN-persistence-versioning.md` — it covers which of the version constants to bump and how to fail loudly on old data.
+Changing the shape of anything persisted (a `CardDefinition` field, `Deck`, `PersistedGameState`, `PersistedGamePrep`)? Follow `apps/shuffler/notes/DESIGN-persistence-versioning.md` — it covers which of the version constants to bump and how to fail loudly on old data.
 
 ## Table Mode (Tabletop integration, JES-127)
 

@@ -65,4 +65,4 @@ All files involved in the library search feature, grouped by role.
 |------|-----------|
 | `notes/FEATURE-card-type-grouping.md` | Task notes for implementing grouping |
 | `notes/DESIGN-card-type-symbols.md` | Available SVG icons and which types have them |
-| `notes/pages-and-modals.md` | Query parameter states including library modal |
+| `apps/shuffler/notes/pages-and-modals.md` | Query parameter states including library modal |

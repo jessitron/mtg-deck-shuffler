@@ -83,7 +83,7 @@ The commits `034d264` / `ddecc39` did the job.
   is kept; it authorizes a read-only snapshot, not a write.
 - `.be:11` — `LINEAR_API_KEY`. Required by the snapshot script; git-ignored (via
   `dotfiles/gitexcludes`). Keep while the script is kept.
-- `notes/PLAN-tabletop-v0.md:1` — title carries `(JES-127)` as provenance for completed work.
+- `apps/tabletop/notes/PLAN-tabletop-v0.md:1` — title carries `(JES-127)` as provenance for completed work.
 - `.scratch/linear-wind-down/issues/01,03` — this effort's own tickets, which are *about* the
   Linear issues. Correct by construction.
 - ~90 `JES-NNN` comments in source and tests (`apps/shuffler/src/**`, `apps/tabletop/src/**`,

@@ -4,7 +4,7 @@ Mountain: tabletop-replaces-mural
 Type: wayfinder:map
 
 **Map 1 of six.** The chart above this one is
-[The Tabletop replaces Mural](../../notes/DESIGN-tabletop-replaces-mural.md) — read it first
+[The Tabletop replaces Mural](../../apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md) — read it first
 for the whole parity list, the other five maps, and why they're split this way.
 
 ## Destination

@@ -34,7 +34,7 @@ export interface DeckProvenance {
 }
 
 // Bump when the deck-file / Deck shape changes; regenerate decks/*.json.
-// Runbook: notes/DESIGN-persistence-versioning.md
+// Runbook: apps/shuffler/notes/DESIGN-persistence-versioning.md
 export const PERSISTED_DECK_VERSION: 3 = 3;
 
 export interface Deck {

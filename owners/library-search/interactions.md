@@ -41,7 +41,7 @@ How library search connects to other parts of the app.
 ### URL Query Parameter System
 - `public/modal-query-params.js` auto-opens library modal on page load
 - Used for testing: direct URLs to specific modal states
-- Documented in `notes/pages-and-modals.md`
+- Documented in `apps/shuffler/notes/pages-and-modals.md`
 
 ## Interaction Points to Watch
 
