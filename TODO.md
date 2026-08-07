@@ -68,6 +68,23 @@ section is just a wall between Jess and the live work.
     one-sitting change that doesn't need a ticket.
   - Consult `shuffler-looks-like-itself` — layout change on a page that owner watches.
 
+- [ ] `verify-suite-speed` Instrument the verification suite, *then* optimize it
+  - `apps/shuffler/verify.sh` runs 52 Playwright tests in **~9.5 minutes**. That's slow enough
+    that nobody runs it, so nobody learns whether a change broke something — and red stops
+    meaning anything. Three table-mode specs were broken for weeks before anyone looked
+    (fixed 2026-08-07; the cause was a `<details>` disclosure the specs never learned about).
+  - **Instrument before optimizing.** The fleet already exports OTel to Honeycomb and
+    `verify.sh` sources `.be`/`.env`, so a full run is already emitting traces to environment
+    `local` — go read them rather than guessing. Where does the time actually go: server
+    startup? deck loading from disk (or Scryfall) on `/choose-any-deck`? the precon-tile HTMX
+    load? Playwright's own auto-waits? The specs are also littered with fixed
+    `waitForTimeout(500|1000)` calls, which are pure unconditional cost.
+  - Worth knowing: `workers: 1` and `fullyParallel: false` in `playwright.config.ts` are
+    deliberate ("we're testing concurrent state"), so parallelism is a decision to make, not a
+    free win.
+  - Jess asked for this on 2026-08-07, mid-fix on those three specs.
+  - Related: `set-up-ci` below — a 9.5-minute suite shapes what CI can reasonably run per push.
+
 - [ ] `deeplinks-prop-moved` Check whether `<Tldraw deepLinks>` still does anything
   - tldraw **v5.0.0 moved `deepLinks` from a top-level `<Tldraw>` prop into `options`**, and
     `apps/tabletop/src/client/TablePage.tsx:82` still passes it top-level. Found incidentally by
