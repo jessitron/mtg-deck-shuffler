@@ -9,19 +9,15 @@
  */
 
 import { test, expect } from '@playwright/test';
+import { seedGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
 async function setupGame(page: any): Promise<void> {
-  await page.goto(`${BASE_URL}/choose-any-deck`);
-  const preconTiles = page.locator('.precon-tile');
-  await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
-  await preconTiles.first().click();
-  await page.waitForURL('**/prepare/*', { timeout: 30000 });
-  await page.locator('button.begin-button').click();
-  await page.waitForURL('**/game/*', { timeout: 30000 });
+  const gameId = await seedGame(page);
+  await page.goto(`${BASE_URL}/game/${gameId}`);
 }
 
 test.describe('Discard from hand', () => {

@@ -10,35 +10,14 @@
  */
 
 import { test, expect } from '@playwright/test';
+import { seedGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
-function extractGameId(url: string): string | null {
-  const match = url.match(/\/game\/(\d+)/);
-  return match ? match[1] : null;
-}
-
 async function setupGame(page: any): Promise<string> {
-  await page.goto(`${BASE_URL}/choose-any-deck`);
-
-  const preconTiles = page.locator('.precon-tile');
-  await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
-  await preconTiles.first().click();
-
-  await page.waitForURL('**/prepare/*', { timeout: 30000 });
-
-  const shuffleUpButton = page.locator('button.begin-button, button.start-game-button, button:has-text("Shuffle Up")');
-  await expect(shuffleUpButton).toBeVisible();
-  await shuffleUpButton.click();
-
-  await page.waitForURL('**/game/*', { timeout: 30000 });
-
-  const gameId = extractGameId(page.url());
-  if (!gameId) throw new Error('Failed to create game');
-
-  return gameId;
+  return seedGame(page);
 }
 
 test.describe('Card Name Links in Action History', () => {
@@ -46,6 +25,7 @@ test.describe('Card Name Links in Action History', () => {
   test('move-card events show card names as links that open the card modal', async ({ page }) => {
     const gameId = await setupGame(page);
     console.log(`Game ID: ${gameId}`);
+    await page.goto(`${BASE_URL}/game/${gameId}`);
 
     // Draw a card to produce a "move card" event with a card name in the history.
     const drawButton = page.locator('button.draw-button');

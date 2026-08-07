@@ -11,17 +11,16 @@
  */
 
 import { test, expect } from '@playwright/test';
+import { seedPrep, startGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
-async function goToPrepare(page: any): Promise<void> {
-  await page.goto(`${BASE_URL}/choose-any-deck`);
-  const preconTiles = page.locator('.precon-tile');
-  await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
-  await preconTiles.first().click();
-  await page.waitForURL('**/prepare/*', { timeout: 30000 });
+async function goToPrepare(page: any): Promise<string> {
+  const prepId = await seedPrep(page);
+  await page.goto(`${BASE_URL}/prepare/${prepId}`);
+  return prepId;
 }
 
 /**
@@ -40,26 +39,22 @@ async function openJoinTable(page: any): Promise<void> {
 
 test.describe('Table mode', () => {
   test('prep screen has optional table and player name inputs; solo (blank) games show no table link', async ({ page }) => {
-    await goToPrepare(page);
+    const prepId = await goToPrepare(page);
     await openJoinTable(page);
 
     await expect(page.locator('input[name="table-name"]')).toBeVisible();
     await expect(page.locator('input[name="player-name"]')).toBeVisible();
 
     // Leave both blank: solo mode, unchanged
-    await page.locator('button.begin-button').click();
-    await page.waitForURL('**/game/*', { timeout: 30000 });
+    const gameId = await startGame(page, prepId);
+    await page.goto(`${BASE_URL}/game/${gameId}`);
     await expect(page.locator('.go-to-table-button')).toHaveCount(0);
   });
 
   test('joining a table shows a "Go to Table" spectator link on the game page, surviving restart', async ({ page }) => {
-    await goToPrepare(page);
-    await openJoinTable(page);
-
-    await page.locator('input[name="table-name"]').fill('verify-table');
-    await page.locator('input[name="player-name"]').fill('Playwright Jess');
-    await page.locator('button.begin-button').click();
-    await page.waitForURL('**/game/*', { timeout: 30000 });
+    const prepId = await seedPrep(page);
+    const gameId = await startGame(page, prepId, { tableName: 'verify-table', playerName: 'Playwright Jess' });
+    await page.goto(`${BASE_URL}/game/${gameId}`);
 
     const link = page.locator('.go-to-table-button');
     await expect(link).toBeVisible();
@@ -80,12 +75,9 @@ test.describe('Table mode', () => {
     // TABLETOP_URL at a random per-run port that nothing is listening on (so the
     // dev fleet's tabletop on 5180 can't accidentally satisfy the send); the
     // two-app spec spawns its own tabletop there, after this spec has run.
-    await goToPrepare(page);
-    await openJoinTable(page);
-    await page.locator('input[name="table-name"]').fill('unreachable-table');
-    await page.locator('input[name="player-name"]').fill('Blocked Jess');
-    await page.locator('button.begin-button').click();
-    await page.waitForURL('**/game/*', { timeout: 30000 });
+    const prepId = await seedPrep(page);
+    const gameId = await startGame(page, prepId, { tableName: 'unreachable-table', playerName: 'Blocked Jess' });
+    await page.goto(`${BASE_URL}/game/${gameId}`);
 
     await expect(page.locator('.hand-count')).toHaveText('7');
 

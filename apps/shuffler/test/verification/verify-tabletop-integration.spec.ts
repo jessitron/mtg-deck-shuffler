@@ -18,6 +18,7 @@ import { test, expect, Page } from '@playwright/test';
 import { spawn, ChildProcess } from 'node:child_process';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
+import { seedGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 // verify.sh gives each run its own tabletop port and exports TABLETOP_URL to
@@ -59,25 +60,8 @@ test.afterAll(() => {
 });
 
 async function startGameAtTable(page: Page, tableName: string): Promise<void> {
-  await page.goto(`${BASE_URL}/choose-any-deck`);
-  const preconTiles = page.locator('.precon-tile');
-  await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
-  await preconTiles.first().click();
-  await page.waitForURL('**/prepare/*', { timeout: 30000 });
-
-  // The table/player inputs live inside a `<details class="join-table-details">`
-  // disclosure, rendered `open` only when the prep already has a table or player
-  // name — so on a fresh prep they are display:none until the summary is clicked.
-  const details = page.locator('details.join-table-details');
-  if (!(await details.evaluate((el: HTMLDetailsElement) => el.open))) {
-    await page.locator('summary.join-table-summary').click();
-  }
-  await expect(page.locator('input[name="table-name"]')).toBeVisible();
-
-  await page.locator('input[name="table-name"]').fill(tableName);
-  await page.locator('input[name="player-name"]').fill('E2E Jess');
-  await page.locator('button.begin-button').click();
-  await page.waitForURL('**/game/*', { timeout: 30000 });
+  const gameId = await seedGame(page, undefined, { tableName, playerName: 'E2E Jess' });
+  await page.goto(`${BASE_URL}/game/${gameId}`);
 }
 
 /**
