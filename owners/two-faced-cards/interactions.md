@@ -179,17 +179,12 @@ These are specific things that could break two-faced cards if changed elsewhere:
       better, emit `data-current-face` on `.card-modal-overlay` from `card-modal.ejs`** (the
       value is already passed to the template and unused) and assert on that. Emitting it
       would also give the game modal its first real face observable.
-16. **tldraw defers shape selection to pointer-up whenever a ShapeUtil defines `onClick`**
-    (`959831c`, 2026-08-07) — a tldraw mechanics fact, but this feature's territory owns
-    the only ShapeUtil it applies to. `MtgCardImageShapeUtil` defines `onClick` for
-    tap/untap (JES-144), so `PointingShape.onEnter` skips select-on-enter; the drag-start
-    safety net only force-reselects when nothing is currently selected, and tldraw leaves
-    the just-dragged card selected — so a second drag on a different card silently
-    re-translated the first. Fixed by calling `this.editor.setSelectedShapes([])`
-    unconditionally in `onTranslateEnd`. **Any ShapeUtil that defines `onClick` inherits
-    this quirk**, including ticket 02's replacement `mtg-card` shape (which keeps
-    `onClick` for tap) — port the selection-clearing forward when that lands. See
-    tabletop.md.
+16. **tldraw shape-selection/drag mechanics moved to its own owner** (2026-08-07). The
+    `onClick`-defers-selection quirk found while fixing `959831c` (drag picking up the
+    wrong card) is pure tldraw `SelectTool` mechanics, not a card-face concern — it and its
+    watch points now live in `owners/tabletop-shape-mechanics/`. Consult that owner, not
+    this one, for anything touching click/drag/selection behavior on `MtgCardImageShapeUtil`
+    or its successors (including ticket 02's `mtg-card` rewrite).
 
 ## Not Related To
 

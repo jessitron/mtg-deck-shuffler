@@ -336,26 +336,10 @@ deleted every `networkidle` and fixed `waitForTimeout` from `test/verification/*
   modal its first real face observable and make these two tests verifiable.
 - Recorded as interactions.md watch point 16, an architecture.md observables section, and a
   files.md caveat on the spec.
-## Tabletop Drag Picked Up the Wrong Card — Fixed (2026-08-07, `959831c`)
+## Tabletop Drag Picked Up the Wrong Card — Moved Out (2026-08-07, `959831c`)
 
-**Bug**: play two cards, drag one, then drag the *other* (still-unmoved) card — the first
-card silently moved again instead of the one under the pointer.
-
-- **Cause**: `MtgCardImageShapeUtil` defines `onClick` (for tap/untap, JES-144 above),
-  which makes tldraw's `SelectTool` defer selecting the pointed-at shape until pointer-up.
-  Its drag-start safety net only force-reselects the hit shape when nothing is currently
-  selected — but tldraw leaves the just-dragged card selected after a drag ends, so a
-  second drag on a different card silently re-translated the first card instead.
-- **Fix**: `onTranslateEnd` now calls `this.editor.setSelectedShapes([])`
-  unconditionally — right after the `!current.meta?.instanceId` guard, before the
-  zone-equality early return — so every drag settle clears selection and the next drag
-  re-selects whatever the pointer actually lands on.
-- **Pure selection-mechanics fix**: touches neither `CardDefinition`/`CardFace` types,
-  persistence, nor flip logic.
-- **New test**: `apps/tabletop/test/verification/verify-drag-identity.spec.ts` — drags
-  two non-overlapping lands in sequence, asserts the second drag moves only the second
-  card.
-- **Porting note**: ticket 02's replacement `mtg-card` ShapeUtil (full rewrite, not an
-  extension of this one) keeps `onClick` too, so it inherits the same tldraw bug — this
-  selection-clearing behavior needs to be ported forward when ticket 02 is implemented.
-  Recorded in tabletop.md.
+Fixed 2026-08-07 (`959831c`): dragging a second card after a first silently re-moved the first
+instead. Pure tldraw `SelectTool`/selection-state mechanics, unrelated to card faces or
+`CardDefinition` — this finding, and the owner that now tracks its territory, moved to
+`owners/tabletop-shape-mechanics/history.md` the same day. See that owner if a new
+click/drag/selection bug turns up in `MtgCardImageShapeUtil.tsx` or its successors.

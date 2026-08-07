@@ -1,6 +1,6 @@
 ---
 name: two-faced-cards-review
-description: Review a plan or proposed change for interactions with the two-faced cards feature. Use this before implementing changes that touch card display/rendering, CardDefinition or CardFace types, deck adapters, card persistence, flip buttons, CSS card animations, card modals, library search grouping, game state mutation, the prep/game pages, the Tabletop's card rendering (apps/tabletop), or the event contract's card/face fields (card.played payloads, contracts/).
+description: Review a plan or proposed change for interactions with the two-faced cards feature. Use this before implementing changes that touch card display/rendering, CardDefinition or CardFace types, deck adapters, card persistence, flip buttons, CSS card animations, card modals, library search grouping, game state mutation, the prep/game pages, the Tabletop's card *face/image* rendering (apps/tabletop), or the event contract's card/face fields (card.played payloads, contracts/). Not for the Tabletop's click/drag/selection mechanics — that's owners/tabletop-shape-mechanics.
 context: fork
 background: false
 ---
