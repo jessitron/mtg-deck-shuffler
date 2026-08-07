@@ -99,6 +99,7 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 | `test/port-tabletop/cardPlayedEvent.test.ts` | F0: payload sends the CURRENT face + face-specific image; never leaks gameCardIndex |
 | `test/port-tabletop/gateways.test.ts`, `sendToTable.test.ts` | Gateways record/fail; send-then-commit sending half |
 | `test/GameState-cardInstanceId.test.ts` | Instance ids: minted in newGame, mint-on-load durable across saves |
+| `apps/tabletop/test/verification/verify-drag-identity.spec.ts` | E2E: drags two non-overlapping played cards in sequence, asserts the second drag moves only the second card (regression guard for the `959831c` selection-clearing fix — not a two-faced-cards feature per se, but the ShapeUtil it guards, `MtgCardImageShapeUtil`, is tracked here — see tabletop.md) |
 
 ## Test Data
 
