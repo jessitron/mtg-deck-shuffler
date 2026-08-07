@@ -660,16 +660,65 @@
 
         <h3>Command zone surround</h3>
         <p class="section-note">
-          The metal-gradient frame with a groove-bordered title slab. Shared by prepare and game.
+          The metal-gradient frame that holds the commander(s). Shared by prepare and game.
+          The deck title used to sit inside it; it now rests on the mat itself — see
+          <em>Deck title plaque</em> below.
         </p>
-        <div class="stage stage-playmat" style="--min-title-slab-height: 4rem;">
+        <div class="stage stage-playmat">
           <div class="cool-command-zone-surround">
-            <div class="game-title">
-              <div class="game-name">Corrupting Influence</div>
-              <div>Precon · Warhammer 40,000</div>
-            </div>
             <div class="multiple-cards">
               <img class="mtg-card-image" src="/images/mtg-card-back.jpg" alt="commander" />
+            </div>
+          </div>
+        </div>
+
+        <h3>Deck title plaque</h3>
+        <p class="section-note">
+          The deck name, resting on the playmat: centered in the mat's top row on
+          <code>/prepare</code>, left of the hamburger in <code>.game-header-row</code> on
+          <code>/game</code>. Non-interactive — no <code>tabindex</code>, no focus rule.
+          Opaque on purpose: the mat is background art and will eventually vary, so bare text
+          can't be relied on to stay readable. Square corners — the plaque is chrome; the mat
+          under it is the physical object. Appearance lives in <code>playmat.css</code>;
+          each page sheet owns only its placement.
+        </p>
+        <div class="stage stage-playmat">
+          <div class="game-title"><span class="game-name">Corrupting Influence</span></div>
+        </div>
+
+        <div class="choice">
+          <div class="choice-question">
+            Now that the plaque has left the metal frame, does it keep its <code>groove</code>
+            border?
+          </div>
+          <div class="options">
+            <div class="option">
+              <div class="option-label">A — Keep the groove (current)</div>
+              <div class="stage stage-playmat">
+                <div class="game-title"><span class="game-name">Corrupting Influence</span></div>
+              </div>
+              <div class="option-where">playmat.css — <code>border: 3px groove black</code></div>
+              <div class="option-note">
+                The title slab is one of only two places the app still speaks the chunky
+                3D-border language (the command-zone surround is the other). Keeping it means
+                the plaque still reads as a physical object of the same family, even away from
+                the frame.
+              </div>
+            </div>
+            <div class="option">
+              <div class="option-label">B — Flat border</div>
+              <div class="stage stage-playmat">
+                <div class="game-title candidate-game-title-flat">
+                  <span class="game-name">Corrupting Influence</span>
+                </div>
+              </div>
+              <div class="option-where">design-candidates.css — <code>border: 3px solid black</code></div>
+              <div class="option-note">
+                The groove was the plaque's join to the metal frame; alone on the mat it has
+                nothing to join to. Flat matches every other panel edge in the app. But it
+                deletes half the surviving 3D-border language, so it's a real loss, not just
+                a cleanup.
+              </div>
             </div>
           </div>
         </div>

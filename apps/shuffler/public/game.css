@@ -185,8 +185,16 @@ body {
   cursor: pointer;
 }
 
-.game-top-row {
-  --min-title-slab-height: 6rem;
+/* Top strip: deck title plaque on the left, hamburger on the right. The title is
+ * deliberately a SIBLING of #game-menu, not a child — game.js dismisses the menu
+ * on !closest("#game-menu"), and #game-menu is also the panel's positioning
+ * ancestor, so nesting the title would both swallow the dismiss click and push
+ * the dropdown down by the plaque's height. */
+.game-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
 /* Game page-specific command zone overrides */
@@ -196,12 +204,11 @@ body {
   gap: 10px;
 }
 
-.cool-command-zone-surround .multiple-cards {
-  margin-left: auto;
-}
-
+/* Drops the library stack so its top edge meets the commander card's, not the
+ * top of the metal surround: 5px surround border + 10px surround padding + 7px
+ * .multiple-cards inset border. */
 .section-that-is-horizontally-aligned-with-command-zone {
-  padding-top: calc(32px + var(--min-title-slab-height));
+  padding-top: 22px;
 }
 
 #command-zone {

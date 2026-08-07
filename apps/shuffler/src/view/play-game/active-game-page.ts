@@ -3,7 +3,7 @@ import { formatPageWrapper } from "../common/html-layout.js";
 import { formatHandSectionHtmlFragment } from "./hand-components.js";
 import { formatLibrarySectionHtmlFragment } from "./library-components.js";
 import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js";
-import { formatCommandZoneHtmlFragment } from "../common/shared-components.js";
+import { escapeHtml, formatCommandZoneHtmlFragment, formatDeckTitleHtmlFragment } from "../common/shared-components.js";
 import { formatGameMenuHtmlFragment } from "./game-menu.js";
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}, devMode: boolean = false): string {
@@ -28,10 +28,6 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
  */
 export function tabletopPublicUrl(): string {
   return process.env.TABLETOP_PUBLIC_URL || "https://table.jessitron.honeydemo.io";
-}
-
-function escapeHtml(text: string): string {
-  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 /**
@@ -79,7 +75,10 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
            hx-target="#game-container"
            hx-swap="outerHTML">
 
-           ${menuHtml}
+           <div class="game-header-row">
+             ${formatDeckTitleHtmlFragment(game.deckName)}
+             ${menuHtml}
+           </div>
            ${tableSectionHtml}
       <div class="game-top-row">
         ${librarySectionHtml}

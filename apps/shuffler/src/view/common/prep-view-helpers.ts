@@ -1,6 +1,6 @@
 import { PersistedGamePrep } from "../../port-persist-prep/types.js";
 import { GameCard } from "../../GameState.js";
-import { formatCardContainer, formatLibraryStack } from "./shared-components.js";
+import { formatCardContainer, formatDeckTitleHtmlFragment, formatLibraryStack } from "./shared-components.js";
 
 
 export function createPrepViewHelpers(prep: PersistedGamePrep) {
@@ -38,13 +38,9 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
 
   // Prep-specific version of command zone that uses /prep-card-modal route
   function renderPrepCommandZone(): string {
-    const title = `
-      <span class="game-name">${prep.deck.name}</span>
-    `;
     return commanders.length === 0
       ? `<div class="commander-placeholder">No Commander</div>`
       : `<div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}">
-          <div class="game-title"><p>${title}</p></div>
           <div class="multiple-cards">
             ${commanders.map((commander) => renderPrepCommanderCard(commander)).join("")}
           </div>
@@ -56,6 +52,7 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
     libraryCards,
     renderCommanderCard: renderPrepCommanderCard,
     renderCommandZone: renderPrepCommandZone,
+    renderDeckTitle: () => formatDeckTitleHtmlFragment(prep.deck.name),
     renderLibraryStack: () =>
       formatLibraryStack({}, libraryCards.length),
   };

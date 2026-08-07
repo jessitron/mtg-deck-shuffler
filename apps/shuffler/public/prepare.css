@@ -16,7 +16,9 @@
 .playmat {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  grid-template-rows: 50px auto auto auto;
+  /* Row 1 is the deck title's band. minmax, not a fixed 50px: a long deck name
+   * wraps, and a fixed track would let the plaque overflow instead of growing. */
+  grid-template-rows: minmax(50px, auto) auto auto auto;
   background-image: url('/images/aeoe-43-cascading-cataracts.png');
   background-size: cover;
   background-position: center;
@@ -54,27 +56,28 @@
   grid-area: search;
 }
 
+/* Deck title plaque — banner across the top of the mat. Appearance is in
+ * playmat.css; this is placement only. */
+.playmat > .game-title {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: center;
+  align-self: center;
+}
+
+/* Row 3, matching #library-section, so the commander card sits level with the
+ * library stack. (This used to be a subgrid spanning rows 2-4 so the title could
+ * occupy its own row inside the surround; the title left, so the subgrid went.) */
 .playmat .cool-command-zone-surround {
   grid-column: 4;
-  grid-row: 2 / 4;
-  display: grid;
-  grid-template-rows: subgrid;
+  grid-row: 3;
   justify-self: center;
-}
-
-.playmat .cool-command-zone-surround .game-title {
-  grid-row: 1;
-  margin-bottom: auto;
-  text-align: center;
-}
-
-.playmat .cool-command-zone-surround .multiple-cards {
-  grid-row: 2;
-
+  align-self: start;
 }
 
 .playmat .commander-placeholder {
   grid-column: 5;
+  grid-row: 3;
   justify-self: start; /* left-align, overflow right */
   align-self: start;
 }

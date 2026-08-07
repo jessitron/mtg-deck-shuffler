@@ -3,6 +3,24 @@ import { GameCard, GameState, WhatHappened } from "../../GameState.js";
 
 export const CARD_BACK = "/images/mtg-card-back.jpg";
 
+export function escapeHtml(text: string): string {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+/**
+ * The deck-title plaque. It used to live inside `.cool-command-zone-surround`;
+ * it now rests on the playmat itself — centered in the mat's top row on /prepare,
+ * left of the hamburger in `.game-header-row` on /game. Appearance lives in
+ * `playmat.css` (shared), placement in `prepare.css` / `game.css`.
+ *
+ * On /game it must stay a SIBLING of `#game-menu`, never a child: game.js closes
+ * the menu on `!evt.target.closest("#game-menu")`, so a title nested inside would
+ * swallow the dismiss click.
+ */
+export function formatDeckTitleHtmlFragment(deckName: string): string {
+  return `<div class="game-title"><span class="game-name">${escapeHtml(deckName)}</span></div>`;
+}
+
 export function formatCardNameAsModalLink(cardName: string, gameId: number, cardIndex: number, expectedVersion?: number): string {
   const versionParam = expectedVersion !== undefined ? `?expected-version=${expectedVersion}` : '';
   return `<span class="card-name-link clickable-card-name"
@@ -114,9 +132,6 @@ export function formatFlippingContainer(gameCard: GameCard, flipRequest: FlipReq
 
 // Function for displaying commanders when we have GameCard objects (in active game)
 export function formatCommandZoneHtmlFragment(game: GameState): string {
-  const title = `
-      <span class="game-name">${game.deckName}</span>
-`;
   const commanders = game.listCommanders();
   const gameId = game.gameId;
   const expectedVersion = game.getStateVersion();
@@ -124,7 +139,6 @@ export function formatCommandZoneHtmlFragment(game: GameState): string {
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
     <div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}">
-        <div class="game-title"><p>${title}</p></div>
       <div class="multiple-cards">
         ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId, expectedVersion })).join("")}
       </div>
