@@ -111,6 +111,29 @@ expensive way round.
   [what a zone looks like](issues/11-what-a-zone-looks-like.md), to be staged on `/design` rather
   than argued in prose.
 
+- **Tap is a stored boolean, but rotation stays the visual, written as a delta** — [Make tap a state
+  the card holds](issues/04-tap-is-state.md), resolved 2026-08-07. `props.tapped` is the truth and is
+  never read back out of an angle (`UNTAPPED_EPSILON` dies); tap writes `rotation ± 90°` clockwise
+  relative to the card's own angle, keeping the centre-preserving math, so no `baseRotation` prop is
+  needed. The `animations` owner's first recommendation — CSS-only rotation, invisible to tldraw —
+  was **withdrawn by the owner itself** once resize stayed: a tapped card would draw landscape with
+  its hit-test box, indicator and resize handles still portrait. Don't re-derive it.
+- **Resize and free-rotate both stay; crop leaves for free** — same ticket. Jess resizes cards in
+  Mural deliberately (*"bigger creatures than lands"*) and wants angling kept (*"to indicate that
+  it's attacking"*). Both cost nothing: `BaseBoxShapeUtil` supplies `onResize`, and tap-as-delta
+  composes on top of any player angle. Resize is aspect-ratio locked. The design owner's
+  "`CARD_W` defines the coordinate system" argument against resize was **not accepted** — the playmat
+  is 9.6 *default* cards wide. Crop disappears by construction once the card stops being an `image`
+  subclass.
+- **Untap-many is "click one card in a selection and the whole selection follows"** — same ticket,
+  prototyped in Playwright and confirmed, including two-client sync. The clicked card's *new* state
+  propagates (not a per-card toggle). Needs no turn concept and no ownership concept. **The other
+  cards must be written in a `queueMicrotask`** — measured: writing them synchronously puts them in
+  the *previous* undo entry, so one Ctrl+Z reverted only the clicked card and the next welded the
+  rest onto an unrelated earlier action. This leans on undocumented tldraw ordering, which Jess
+  accepted on condition of a **Playwright undo regression test**. Undo is per-client; nobody can
+  rewind your board.
+
 ## Not yet specified
 
 - **Which attachment mechanism suits which passenger.** The [research
