@@ -60,6 +60,38 @@ section is just a wall between Jess and the live work.
   - **Not** the Tabletop shape design for face-down; that's inside the physics map (tickets 02/06).
   ← mountain: tabletop-replaces-mural
 
+- [ ] `let-gamecardindex-out` Reverse the decision that `gameCardIndex` never leaves the Shuffler
+  - **Jess is reversing her own earlier call** (2026-08-07): *"gameCardIndex never passes out of
+    Shuffler because I made the wrong call on that and I wish it did. I don't want you to have to
+    reason about what is hidden and what isn't."* The cost being paid isn't secrecy — it's that
+    every agent and every future payload has to carry a model of what may cross which boundary.
+    Simplicity of reasoning beats a guard nobody's threat model needs, on a trust-based table.
+    Follows from the principle in `notes/DESIGN-the-table-vision.md` § Principles: the players own
+    the game experience; the app doesn't enforce.
+  - **What it actually is** (verified, since the docs describe it only as "a decodable secret"):
+    `gameCardIndex` is the card's index in the *initial deck-list array* (`GameState.ts:120`).
+    It is **not** library order — that's `location.position`, shuffled by Fisher-Yates
+    (`shuffleCollectingMoves`). So what it decodes to is *which card in the decklist this is*,
+    and decklists are public on Archidekt.
+  - **The sites to undo** — the guard is small, which is part of why keeping it looked free:
+    - `apps/tabletop/src/server/cardArrival.ts:56` and `apps/tabletop/src/server/seatJoined.ts:35`
+      — the two rejection checks (the `// JES-128` markers).
+    - `apps/tabletop/test/cardArrival.test.ts:132` and `apps/tabletop/test/seatJoined.test.ts:132`
+      — the two tests asserting rejection. They invert rather than delete.
+    - The field-by-field comment block in `apps/shuffler/src/port-tabletop/types.ts`, plus the
+      claims in `apps/shuffler/CLAUDE.md:186`, `apps/tabletop/README.md:40`, `apps/tabletop/DESIGN.md:133`.
+    - There is also a unit test under `apps/shuffler/test/port-tabletop/` guarding the same thing.
+  - ⚠️ **Reconcile with a stated constraint before landing.** `SEAMAP.md` says spectator mode gets
+    "public events, commentary, **hand counts but never hands**." Once `gameCardIndex` can cross,
+    a future shadow event ("seat 2 drew a card") carrying it names the card, so that sentence
+    either changes or the *shadow-event* payloads carry the restriction instead of the boundary
+    doing it. **Decide which, and say so in `SEAMAP.md`** — don't just delete the checks and leave
+    the promise standing. This is the one piece of real thinking in the ticket.
+  - Separately: does anything *want* `gameCardIndex` on the far side, or is this purely removing a
+    constraint? If nothing needs it, the win is only conceptual — still worth it, but it means the
+    Tabletop keeps using `instanceId` as its identity and nothing downstream changes.
+  ← mountain: overhead
+
 - [ ] `deck-title-placement` On the game screen, move the deck title out of the command zone
   - > Put it above the table button(s), top-aligned with the hamburger menu.
   - This is the **Shuffler's** game screen (`formatCommandZoneHtmlFragment` in
