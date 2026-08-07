@@ -180,8 +180,13 @@ Visibility cuts across all kinds orthogonally.
   what is hidden and what isn't."_ The `gameCardIndex`-may-not-cross guard in
   `cardArrival.ts` / `seatJoined.ts` is the last of that kind and is slated for removal
   (`let-gamecardindex-out` in `TODO.md`); the constraint it was standing in for —
-  `SEAMAP.md`'s "hand counts but never hands" — belongs on the payloads that could actually
-  leak a hand, not on every door in the fleet.
+  `SEAMAP.md`'s "hand counts but never hands" — is about what the app *volunteers*, so it
+  belongs on the payloads that could actually leak a hand, not on every door in the fleet.
+  The harder and still-open question is the opposite one: **how hidden information gets
+  shared when it _should_ be** (reveal the top card; look at target player's hand). The
+  likely shape is that *symmetric* reveals are physical and belong on the Tabletop — you
+  reveal by putting cards where everyone can see them — while *asymmetric* ones can't live
+  on a canvas with no privileged actor. See `sharing-hidden-zones` in `TODO.md`.
 - **The humans teach the AI in public, during play.** The chat panel is the eval
   machine, and the teaching is part of the game record.
 - **Don't carry what you can listen to.** Discord keeps the voice call; we transcribe.

@@ -49,12 +49,13 @@ section is just a wall between Jess and the live work.
     doesn't exist yet even though the root `CLAUDE.md` references it.
   - Glossary work: `notes/GLOSSARY.md` has no face-down entry, and **nothing in the fleet models it
     at all** — no field on `CardDefinition`/`GameCard`, nothing in `contracts/`.
-  - ⚠️ **Scope contradiction, Jess's call.** She said "Play Face-Down" *"needs to happen for full
-    Mural replacement"* — but `notes/DESIGN-tabletop-replaces-mural.md:127` already lists
-    *"Playing a card from the library face-down onto the table"* under **Out of scope**, reasoning
-    "Mural doesn't do it either, so it isn't parity. Real Magic wants it; a later mountain can have
-    it." One of those has to give: either edit that line and take it into the parity list, or keep
-    it parked and treat the Shuffler button as post-parity. Don't build it until that's settled.
+  - ✅ **Scope settled 2026-08-07: Play Face-Down stays OUT of scope.** Jess briefly said it was
+    needed for Mural parity, then confirmed sticking with `notes/DESIGN-tabletop-replaces-mural.md:127`
+    — *"Mural doesn't do it either, so it isn't parity. Real Magic wants it; a later mountain can
+    have it."* (Technically it *is* reachable in Mural by pasting a card back, and low priority
+    besides; workable around in test games.) **So there is no Shuffler button in this item** — what
+    remains is the domain/glossary work below, which is real regardless, because the Tabletop side
+    of face-down is being built by the physics map either way.
   - Related: `.scratch/tabletop-table-layout/issues/09-sleeve-and-playmat-picker.md` already notes
     "a sleeve image is what a face-down card needs anyway" — the sleeve picker and this share an asset.
   - **Not** the Tabletop shape design for face-down; that's inside the physics map (tickets 02/06).
@@ -81,16 +82,47 @@ section is just a wall between Jess and the live work.
     - The field-by-field comment block in `apps/shuffler/src/port-tabletop/types.ts`, plus the
       claims in `apps/shuffler/CLAUDE.md:186`, `apps/tabletop/README.md:40`, `apps/tabletop/DESIGN.md:133`.
     - There is also a unit test under `apps/shuffler/test/port-tabletop/` guarding the same thing.
-  - ⚠️ **Reconcile with a stated constraint before landing.** `SEAMAP.md` says spectator mode gets
-    "public events, commentary, **hand counts but never hands**." Once `gameCardIndex` can cross,
-    a future shadow event ("seat 2 drew a card") carrying it names the card, so that sentence
-    either changes or the *shadow-event* payloads carry the restriction instead of the boundary
-    doing it. **Decide which, and say so in `SEAMAP.md`** — don't just delete the checks and leave
-    the promise standing. This is the one piece of real thinking in the ticket.
+  - **On `SEAMAP.md`'s "hand counts but never hands":** that promise is about what the app
+    *volunteers*, and it survives fine — a shadow event simply shouldn't carry a card identity
+    whether or not a boundary check exists. So this is payload design, not a guard: put the
+    restriction on the events that could leak a hand, and stop making every door enforce it.
+    Add a sentence to `SEAMAP.md` saying so rather than leaving the promise looking unowned.
+  - The genuinely hard part is **not** here — it's *deliberate* sharing, which is its own item:
+    see `sharing-hidden-zones` below.
   - Separately: does anything *want* `gameCardIndex` on the far side, or is this purely removing a
     constraint? If nothing needs it, the win is only conceptual — still worth it, but it means the
     Tabletop keeps using `instanceId` as its identity and nothing downstream changes.
   ← mountain: overhead
+
+- [ ] `sharing-hidden-zones` Decide how library/hand information gets shared when it *should* be
+  - Jess, 2026-08-07, working out where "never hands" really lives: *"there's actually an
+    outstanding decision: how do we share library/hand information when it **should** be shared?
+    …Sometimes there's 'look at target player's hand' and we need a way to share that — it might
+    wind up in Shuffler, probably not Tabletop."*
+  - The fleet keeps hidden zones (that's the Shuffler's whole job) but Magic constantly demands
+    **deliberate** revealing: reveal the top card, reveal until you hit a land, Thoughtseize
+    someone's hand, play with the top card revealed. None of it has a home today.
+  - **Half the mechanism already exists**, which makes this smaller than it looks: `GameState`
+    has a real **`Revealed` zone** — `reveal(position)`, `revealByGameCardIndex()`,
+    `listRevealed()`, `RevealedLocation` — and `playCard` already accepts a card that's in hand
+    *or* revealed. What's missing is that a `Revealed` card is only visible in **that player's own
+    browser**; no other player can see it. Sharing today is "turn your screen" / Discord.
+  - **The split that probably decides it — symmetric vs asymmetric reveals:**
+    - **Symmetric** ("reveal the top card of your library to everyone") is *physical*. At a real
+      table you reveal by **putting the cards where everyone can see them** — which is what the
+      Tabletop is. That argues the Tabletop, not a Shuffler view: revealed cards become real card
+      shapes on the shared canvas, and it composes with everything already decided there.
+    - **Asymmetric** ("look at target player's hand" — one opponent sees it, nobody else) **cannot**
+      be the Tabletop: the canvas has no privileged actor and hides nothing
+      (`notes/DESIGN-the-table-vision.md` § Principles). So Jess's instinct is right for this half —
+      it's a Shuffler affordance, or, per the players-own-the-game principle, possibly not a feature
+      at all: hold your hand up to the camera.
+    Worth checking whether that split is real before designing either half; if it holds, this is two
+    small items rather than one hard one.
+  - Interacts with `let-gamecardindex-out` above (that one removes an accidental-leak guard; this one
+    is about intentional revealing — don't conflate them) and with spectator mode, which `SEAMAP.md`
+    makes a constraint on every mountain: "public events, commentary, hand counts but never hands."
+  ← mountain: tabletop-replaces-mural
 
 - [ ] `deck-title-placement` On the game screen, move the deck title out of the command zone
   - > Put it above the table button(s), top-aligned with the hamburger menu.
