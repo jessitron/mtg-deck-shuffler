@@ -247,3 +247,60 @@ environment. The trace made the diagnosis — the error was on the **outbound cl
   face-down)" as parity work, and puts playing from the library face-down out of scope).
 - **Face-down remains unmodeled fleet-wide**: no field on `CardDefinition`, `GameCard`,
   `PersistedGameCard`, and nothing in `contracts/`. New watch points 12–14 in interactions.md.
+
+## Ticket 02 Resolved: What a Tabletop Card Is (design decision, 2026-08-07, `c956949`)
+
+**No code changed.** The follow-up to the entry above: the items it correctly recorded as
+"still being decided in ticket 02" are now closed. Full reasoning in
+`.scratch/tabletop-physics/issues/02-what-a-card-is.md` § Answer.
+
+- **The card becomes a genuine custom tldraw shape type** — `mtg-card` extending
+  `BaseBoxShapeUtil`, **rendering its own image**. tabletop.md's old "reuse
+  `MtgCardImageShapeUtil` for flip" advice is now definitively superseded. The deciding
+  argument was *"one util, three meanings"* (one `type: "image"` util serves cards, locked
+  furniture, and stray dropped JPEGs today), not crop and not tap.
+- **`meta` empties out; everything moves into validated, migratable `props`** — including
+  identity, which was previously unvalidated and unmigratable. `zone` was deliberately left
+  *unplaced* so ticket 03 decides it rather than inheriting it.
+- **The per-instance tldraw image asset goes away.** This owner argued it and the argument
+  carried: since the card holds both URLs, **flip is a pure shape-prop change** — no asset
+  mutation, clean undo.
+- **`backImageUrl` is the printed back only; `null` means no printed back exists. No
+  `twoFaced` flag** — Jess declined the one this owner suggested: `backImageUrl !== null`
+  says it precisely, `twoFacedLayouts.ts` stays the single decider, and two fields that must
+  agree is a bug waiting to happen. **Accepted, with one recorded sharp edge** (now a
+  tabletop.md watch point, flagged for ticket 06): the equivalence only holds if
+  `buildCardPlayedEvent` derives the field from `card.twoFaced`, *not* from whether
+  `card.backImageUris` happens to be stored. `getCardImageUrl` always returns a string
+  (falling back to `constructCardImageUrl`), so gating on `twoFaced` is safe; gating on the
+  stored URIs would make an MDFC whose Scryfall image fetch missed arrive `backImageUrl:
+  null` and be **silently unflippable on the table** — the same "two fields that must agree"
+  bug, relocated to the sender.
+- **The generic card back is NOT a card property** — `faceDown` resolves against the
+  *table's* `cardBackImageUrl` (already on `seat.joined`), because sleeves are coming and a
+  sleeve belongs to a player/table. Honours this owner's "concealment is state, the card
+  back is only its rendering" rule from a different direction than we proposed.
+- **The arrival payload unbakes the face, as this owner recommended, with zero contract
+  churn**: `imageUrl` → `frontImageUrl` + `backImageUrl` (replacing, not coexisting);
+  `face` stays contract but now means "which face is up on arrival." Two edit sites:
+  `buildCardPlayedEvent` in `src/port-tabletop/types.ts` and the `validationError` in
+  `apps/tabletop/src/server/cardArrival.ts`. This owner's point that the back URL must be
+  **sent, not derived** (bare Scryfall URLs 404 for new cards, hence `backImageUris`,
+  `eb48f4f`) is recorded there as the reason.
+- **The concealment/leak finding was resolved by NOT guarding it.** New principle in
+  `notes/DESIGN-the-table-vision.md` § Principles: *"everything that can be done by one
+  player is doable by any player"* — no ownership or permission model. Now a **standing
+  constraint** on this territory (interactions.md watch point 15): identity stays in `props`
+  on a face-down card, and **never gate a flip/turn-over/peek gesture on who controls the
+  card.** That closes a design space rather than leaving it unexplored.
+- **The `gameCardIndex` rule is being reversed** — Jess: *"I don't want you to have to reason
+  about what is hidden and what isn't."* Buoy `let-gamecardindex-out` in `TODO.md`. The KB's
+  framing was softened from an inviolable boundary rule to "was a rule, being reversed"; the
+  *reason* it existed (SEAMAP's "hand counts but never hands") is kept, re-homed onto payload
+  *design* rather than a check at every door.
+- **Still open, now scoped to exactly two questions in ticket 06**
+  (`.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md`): the flip/turn-over
+  **trigger gesture** (`onClick` is spoken for by tap), and **who is authoritative about
+  `currentFace` for Table-zone cards** — this owner's watch point (a table-flipped card
+  discarded to the graveyard shows the pre-flip face on the Shuffler) is written in there as
+  a must-decide, not a maybe.

@@ -79,7 +79,9 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 
 ### The Tabletop port (card.played sender, JES-127)
 - `src/port-tabletop/types.ts` `buildCardPlayedEvent` is the ONE door where a GameCard is serialized for the table: it sends `face: gameCard.currentFace` and the face-specific `imageUrl` via `getCardImageUrl(card, "normal", currentFace)`. Any new face semantics (a third face? partner backs?) must go through here and the contract (`contracts/payloads/card.played.v1.json` — schemaVersion bump, new file).
+- **This door is about to change** (decided 2026-08-07, ticket 02, not yet implemented): `imageUrl` is **replaced** by `frontImageUrl` + `backImageUrl: string | null` so the Tabletop can flip client-side, and `face` comes to mean "which face is up on arrival" rather than "which face I baked in". Zero contract churn — those fields are scaffolding, not contract. Keep the field-by-field comment block above `CardPlayedEvent` in sync; it is the de-facto spec of F0. **Compute `backImageUrl` from `card.twoFaced`, not from `card.backImageUris`** — see the watch point in [tabletop.md](tabletop.md#watch-points). The matching edit is the hand-rolled `validationError` in `apps/tabletop/src/server/cardArrival.ts`, and `test/port-tabletop/cardPlayedEvent.test.ts` asserts on the current shape.
 - Discard keeps `currentFace` (a flipped card is discarded as the face it was); mulligan resets it. If you add zone-moving operations, decide face-reset explicitly.
+- **Open: who is authoritative about `currentFace` for Table-zone cards.** Once the table can flip, "discard keeps `currentFace`" becomes a concrete divergence: a card flipped *on the table* and then discarded shows the **pre-flip** face on the Shuffler's screen (and in copy-to-clipboard). This owner raised it; it is now a must-decide in `.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` — either the table becomes authoritative for `{type:"Table"}` cards and the Shuffler stops trusting its copy, or flip-on-table is table-local and the divergence is accepted knowingly. Don't let an implementation settle this by accident.
 
 ## Watch Points
 
@@ -131,21 +133,35 @@ These are specific things that could break two-faced cards if changed elsewhere:
     translation table in [tabletop.md](tabletop.md); this is the kind of divergence a
     `CONTEXT-MAP.md` would carry if the repo had one.
 
-14. **Face-down is not modeled anywhere yet, and adding it touches all three components.**
-    There is no concealment field on `CardDefinition`, `GameCard`, `PersistedGameCard`, or
-    in `contracts/`. Whoever adds it must decide: does the Shuffler need it (a "Play
-    Face-Down" button was dropped to the Mural-parity buoy list, 2026-08-07), does it cross
-    the contract (a new/bumped payload — see [contract.md](contract.md)), and how does a
-    concealed card avoid leaking its identity through **synced tldraw props**, where every
-    client receives the whole shape record. That last one is the `gameCardIndex`
-    decodable-secret problem in a new costume.
+14. **Face-down is modeled only on the Tabletop, and only on paper so far.** Ticket 02
+    (2026-08-07, `c956949`) gives it a home: `faceDown: boolean` in the `mtg-card` shape's
+    `props`, rendered against the **table's** `cardBackImageUrl` — not a card property,
+    because sleeves are coming. **No code exists yet.** Still nothing on `CardDefinition`,
+    `GameCard`, `PersistedGameCard`, or in `contracts/`; a Shuffler "Play Face-Down" button
+    remains dropped to the Mural-parity buoy list.
+
+15. **Concealment is depicted, never enforced — and no gesture may be gated on control.**
+    The leak question this owner raised (a face-down card's identity is readable by every
+    client through synced tldraw props) was resolved by **not guarding it**, on Jess's
+    principle in `notes/DESIGN-the-table-vision.md` § Principles: *"everything that can be
+    done by one player is doable by any player."* The Tabletop has **no ownership or
+    permission model**. Two standing consequences: identity stays in `props` on a face-down
+    card, and **never gate a flip / turn-over / peek on who controls the card** — that
+    design space is closed, not unexplored. Related: the old "`gameCardIndex` never leaves
+    the Shuffler" rule is **being reversed** (buoy `let-gamecardindex-out` in `TODO.md`) —
+    don't cite it as binding. What survives is that payloads should say what happened and no
+    more (SEAMAP's "hand counts but never hands"), which is a constraint on payload *design*,
+    not a check on every boundary. Full reasoning in [contract.md](contract.md) and
+    [tabletop.md](tabletop.md).
 
 ## Not Related To
 
 ### Card Back (library face-down rendering)
 The MTG card back image (`/images/mtg-card-back.jpg`, `CARD_BACK` constant) is the generic card back shown for library cards. It is unrelated to two-faced cards' **back face**: don't confuse "card back" (the picture) with "back face" (the second printed side of a two-faced card).
 
-Note the 2026-08-07 nuance: the *concept* of a face-down card **is** this owner's territory (it's the second axis alongside `face` — see watch points 12–14), but `CARD_BACK` today is only library-stack decoration, not modeled state. When face-down becomes real, `CARD_BACK` (or a sleeve image) is what renders it — the picture stays a rendering detail, the concealment is the state.
+Note the 2026-08-07 nuance: the *concept* of a face-down card **is** this owner's territory (it's the second axis alongside `face` — see watch points 12–15), but `CARD_BACK` today is only library-stack decoration, not modeled state. When face-down becomes real, `CARD_BACK` (or a sleeve image) is what renders it — the picture stays a rendering detail, the concealment is the state.
+
+Ticket 02 settled *where the picture lives* on the Tabletop, and it is emphatically **not on the card**: `faceDown` resolves against the **table's** `cardBackImageUrl` (already arriving on `seat.joined`), because a sleeve belongs to a player or table and baking it per-card would mean rewriting every shape on the board when someone changes sleeves. Same separation, arrived at from the sleeve-picker direction.
 
 ### Deck Selection Search
 The text filter on the deck selection page (`deck-selection.js`) is a UI filter for finding decks, not cards. Unrelated to two-faced card display or data.

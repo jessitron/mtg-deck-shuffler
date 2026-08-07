@@ -77,7 +77,7 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 |---|---|
 | `src/port-card-repository/SqliteCardRepositoryAdapter.ts` | Stores `card_types`/`image_uris`/`back_image_uris` as JSON, `two_faced` as integer; rebuilds the cache table on old schema, adds image columns via `ALTER TABLE` |
 | `src/port-card-repository/hydration.ts:80-123` | Hydrates/dehydrates `currentFace` (and `cardInstanceId`) between GameCard and PersistedGameCard |
-| `src/port-tabletop/types.ts` | `buildCardPlayedEvent` — the ONE place a GameCard becomes a card.played payload; sends `face: currentFace` + the face-specific `imageUrl` (JES-127/128) |
+| `src/port-tabletop/types.ts` | `buildCardPlayedEvent` — the ONE place a GameCard becomes a card.played payload; sends `face: currentFace` + the face-specific `imageUrl` (JES-127/128). **Pending edit (ticket 02, decided not implemented):** `imageUrl` → `frontImageUrl` + `backImageUrl \| null`, the latter derived from `card.twoFaced`; keep the field comment block in sync |
 | `src/port-tabletop/sendToTable.ts` | `sendCardToTableFirst` (send-then-commit) + `zoneHintForPlay` (reads `cardTypes` for land vs nonland) |
 | `src/port-tabletop/HttpTabletopGateway.ts`, `FakeTabletopGateway.ts` | Real/fake gateways behind `TabletopPort` |
 

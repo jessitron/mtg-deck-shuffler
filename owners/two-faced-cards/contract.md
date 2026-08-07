@@ -16,17 +16,28 @@ that doesn't match.
 - **`face` is a sibling field, not part of the card reference.** Events about
   playing/revealing a card carry `face: "front" | "back"` beside `card`, because
   MDFCs are played as a chosen face. Events that don't reveal a face don't carry one.
+  Its **meaning** shifts once the Tabletop can flip (ticket 02, 2026-08-07): from "which
+  face the sender baked into the image" to "**which face is up on arrival**." Same schema,
+  same enum — no version bump, because the field was never the picture.
 - **`face` ranges over printed sides only** (decided 2026-08-07). The enum is exactly the
   card's physical faces, so `face: "back"` is unreachable for a one-faced card. It is NOT a
   "which side is up" bit, and it does NOT express concealment.
 - **Concealment (face-down) is a second, orthogonal axis, and it is not in the contract
   yet.** A card can be face down *while* having a chosen `face` (a two-faced card can be
   played face down). No schema in `contracts/` carries it. When one does, it is a sibling
-  concept to `face`, not a third value of it.
+  concept to `face`, not a third value of it. The Tabletop's own model calls it
+  `faceDown: boolean` (ticket 02) — use that name if it ever reaches the contract.
 - Names and image URLs are derivable conveniences and do NOT belong in the
   contract's card reference. (The pre-Spine Shuffler→Tabletop scaffolding payload
   carries `imageUrl`/`cardName` for rendering without a Scryfall lookup — that is
   the scaffolding's business, explicitly not contract.)
+- **That scaffolding freedom is what makes unbaking the face free.** `imageUrl` is being
+  replaced by `frontImageUrl` + `backImageUrl: string | null` in the arrival payload
+  (ticket 02, 2026-08-07) so the Tabletop can flip client-side — and because those fields
+  are *scaffolding, not contract*, it is **zero contract churn**: two hand-edits, no
+  `card.played.v2.json`. Worth remembering as the general lesson: rendering conveniences
+  kept out of the contract can be reshaped at will; anything promoted into `contracts/`
+  cannot.
 
 ## Watch points
 
@@ -37,11 +48,27 @@ that doesn't match.
 
 - Adding a new card-referencing event kind? Ask "does this event reveal or choose a
   face?" If yes, `face` goes beside `card`, same shape as `card.played`.
-- Never let a face leak *identity*: a shadow event ("seat 2 drew a card") must not
-  carry face any more than it carries the card. **A face-down card is the same problem**:
-  if an event (or a synced tldraw shape record) about a concealed card carries `scryfallId`,
-  `face`, or a face image URL, the card is concealed only in the rendering. Same class as
-  `gameCardIndex` below.
-- `gameCardIndex` is forbidden in any payload — it is a decodable secret
-  (alphabetical rank in a known decklist). The no-index unit test lives in
-  `apps/shuffler/test/port-tabletop/`.
+- **Design the payload so it doesn't need to carry what it doesn't mean.** A shadow event
+  ("seat 2 drew a card") shouldn't carry a face any more than it carries the card — not
+  because a leak is dangerous, but because an event should say what happened and no more.
+
+  This used to be phrased as a hard concealment rule, and **it has been softened
+  deliberately** (2026-08-07):
+
+  - **On the canvas, concealment is not enforced at all.** A face-down card keeps
+    `scryfallId`, `cardName`, and both image URLs in its synced tldraw `props`. Guarding
+    that would be theatre — any player can turn the card over. Principle in
+    `notes/DESIGN-the-table-vision.md` § Principles: *"everything that can be done by one
+    player is doable by any player"*; the Tabletop has no ownership or permission model.
+    See [tabletop.md](tabletop.md).
+  - **`gameCardIndex`: Jess reversed her own call.** It was forbidden in any payload as a
+    decodable secret (alphabetical rank in a known decklist). She now wants it *out* —
+    *"I don't want you to have to reason about what is hidden and what isn't."* Buoy
+    `let-gamecardindex-out` in the repo-root `TODO.md`; the no-index unit test in
+    `apps/shuffler/test/port-tabletop/` still exists and will go with it. **Don't cite the
+    old rule as binding, and don't re-erect it.**
+
+  What the guard was protecting still has a home, just one level up: SEAMAP's *"hand counts
+  but never hands"* is about **what an event means** — the Spine's log says a card was
+  drawn, not which card — so it constrains payload *design*, not a boundary check on every
+  door.

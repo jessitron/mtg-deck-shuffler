@@ -3,6 +3,11 @@
 The Tabletop (`apps/tabletop/`) renders cards it is told about; it never interprets
 them. Its whole face knowledge in v0:
 
+> **Read "What a card will be" below before advising on anything Tabletop-side.** Ticket 02
+> (`.scratch/tabletop-physics/issues/02-what-a-card-is.md`, resolved 2026-08-07, commit
+> `c956949`) decided the card's whole shape, and **the sections describing today's `image`
+> shape are now a description of what is about to be replaced.** No code has changed yet.
+
 **JES-140 (2026-08-01) moved the card-placement code but not the face logic.**
 `apps/tabletop/src/server/cardArrival.ts` (`handleCardArrival`) still builds the
 card's image shape and its `meta` exactly as below — untouched. What moved: the
@@ -34,9 +39,10 @@ that new arrival trigger.
   It never did; corrected 2026-08-07.)
 - The tldraw shape's `meta` is `{ instanceId, scryfallId, cardName }` — identity,
   not face. Face is state; if a future gesture flips the card on the table, the
-  shape's image swaps but its `meta` identity does not change.
+  shape's image swaps but its identity does not change. **(Ticket 02 moves all of this
+  into `props`; `meta` empties out entirely. See "What a card will be" below.)**
 
-## Rotation has a custom ShapeUtil now (JES-144, 2026-08-01)
+## Rotation has a custom ShapeUtil now (JES-144, 2026-08-01) — being replaced
 
 `apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx` extends tldraw's
 built-in `ImageShapeUtil` (cards stay `type: "image"` — no new shape type) and
@@ -50,10 +56,11 @@ on `<Tldraw>` in `TablePage.tsx`. `rotation` is a base tldraw shape-record field
 contract change. Verified by `test/verification/verify-card-rotate.spec.ts`
 (bounding-box width/height swap after click).
 
-**Watch point:** `onClick` is now spoken for by rotate. The future flip gesture
-(below) needs a different trigger — a context-menu action, per the menu-curation
-scoping now carried by `no-doubleclick-crop` in the repo-root `TODO.md` — not
-`onClick`.
+**Watch point:** `onClick` is spoken for — by rotate today, by tap once ticket 04 lands
+either way. The flip gesture needs a different trigger; that's ticket 06's remaining
+question, with menu placement scoped by `no-doubleclick-crop` in the repo-root `TODO.md`.
+Note this whole util is being replaced by `mtg-card extends BaseBoxShapeUtil` (ticket 02),
+which keeps `onClick` as a base hook — so the trigger constraint survives the rewrite.
 
 ## Face and face-down are two axes (decided 2026-08-07)
 
@@ -107,40 +114,129 @@ Shuffler's `CARD_BACK` image is *library stack decoration*, not modeled concealm
 face-down becomes real, that constant is the picture it should use, but concealment is
 state and the card back is only its rendering.
 
-## Still open — do NOT record as decided
+## What a card will be — decided, ticket 02 (2026-08-07, commit `c956949`)
 
-Ticket 02 (`.scratch/tabletop-physics/issues/02-what-a-card-is.md`, map
-`.scratch/tabletop-physics/map.md`) is still deciding:
+**No code changed yet.** This is the shape the implementation must take; read the ticket's
+§ Answer for the full reasoning before implementing.
 
-- Whether these two axes live in the shape's `props` (schema'd, validated, migratable) or
-  `meta` (freeform).
-- Whether the card renders its own image (so it can pick a face client-side) — which
-  implies **both** image URLs crossing the wire, a contract-shaped change.
-- How a genuinely concealed card avoids **leaking its identity through synced tldraw
-  props** — every client gets the whole shape record, so a face-down card whose record
-  carries `scryfallId` or a face image URL is concealed only in the rendering, not in the
-  data. This is the same class of problem as `gameCardIndex` being a decodable secret
-  (see [contract.md](contract.md)).
-
-**Decided so far in ticket 02:** the card **will** become a genuine custom tldraw shape
-type (`mtg-card`-ish) rather than continuing to extend `ImageShapeUtil`. Syncing a custom
+**A card becomes a genuine custom tldraw shape type**, `mtg-card` extending
+`BaseBoxShapeUtil`, and **it renders its own image**. `MtgCardImageShapeUtil extends
+ImageShapeUtil` is being *replaced*, not extended — the deciding argument was "one util,
+three meanings" (one `type: "image"` util today serves cards, locked furniture, and any
+JPEG a player drags in, separated only by `if (shape.meta.instanceId)`). Syncing a custom
 type is a mandatory three-place change and `TLSocketRoom` *disconnects* a client that
-pushes an unknown type — see `.scratch/tabletop-physics/research/tldraw-custom-shapes.md`.
+pushes an unknown type — see `.scratch/tabletop-physics/research/tldraw-custom-shapes.md`
+and the ticket's "Blast radius".
 
-## Future: the flip gesture (Mountain 2)
+**`meta` empties out; both axes live in `props`** (validated, migratable — `meta` is only
+"is it JSON", and `createShapePropsMigrationSequence` cannot touch it):
 
-When flip lands it rides on the custom shape type ticket 02 has now chosen (superseding
-this file's earlier "reuse `MtgCardImageShapeUtil`" advice — the util is being replaced,
-not extended), and via a context-menu action, not `onClick` (that's rotate's). Flipping on
-the table becomes a physical event the Spine can hear (`card.flipped` or similar) — and it
-must say **which axis** moved: a transform to the other printed `face`, or a change of
-concealment (face-down). See "the two ships mean different things by flip" above.
+```ts
+'mtg-card': {
+  w, h,                          // from BaseBoxShapeUtil
+  instanceId: string,            // this card in this game; the dedup key, never composite
+  scryfallId: string,            // the printing (all faces)
+  cardName: string,              // rendering: alt text / a11y
+  frontImageUrl: string,
+  backImageUrl: string | null,   // the PRINTED back face. null = no printed back exists
+  face: 'front' | 'back',
+  faceDown: boolean,
+  tapped: boolean,               // ticket 04 owns how this relates to rotation
+}
+```
 
-Do NOT bake "front-ness" into shape identity. And do not assume the back image URL is
-derivable from `scryfallId`: bare constructed Scryfall URLs 404 for freshly-released cards
-(that's the whole reason `backImageUris` is stored on `CardDefinition` — see
-[interactions.md](interactions.md)). If the Tabletop needs the other face, the URL has to
-be **sent**, which is a contract change, not a client-side derivation.
+Three consequences this owner cares about:
+
+- **The per-instance tldraw image asset goes away.** `cardArrival.ts:137` mints one asset
+  per card (`AssetRecordType.createId(instanceId)`) and the shape points at it via
+  `props.assetId`. Since the card holds both URLs and renders its own `<img>`, **flip
+  becomes a pure shape-prop change** — no asset mutation, clean undo. This was this
+  owner's argument and it carried.
+- **`backImageUrl` is the printed back only, and `null` means "no printed back exists."**
+  There is deliberately **no `twoFaced` flag** on the shape or the payload: Jess declined
+  one on the grounds that `backImageUrl !== null` says it precisely, `twoFacedLayouts.ts`
+  stays the single decider of flippability, and two fields that must agree is a bug waiting
+  to happen. Accepted — but see the sharp edge in "Watch points" below, which the sender
+  must honour for that equivalence to hold.
+- **The generic card back is NOT a card property.** Rendering resolves `faceDown` against
+  the **table's** `cardBackImageUrl` (already arriving on `seat.joined`, already used by the
+  library furniture). Reason: sleeves are coming
+  (`.scratch/tabletop-table-layout/issues/09-sleeve-and-playmat-picker.md`), and a sleeve
+  belongs to a player or a table, not to a card — bake it per-card and changing your sleeve
+  rewrites every shape on the board. This honours this owner's rule that concealment is
+  *state* and the card back is only its *rendering*, arriving from a different direction
+  than we proposed.
+
+Also decided, and outside this owner's territory but worth not re-deriving: the card knows
+nothing about its counters, notes, or what it's tucked behind (the passenger knows its
+parent, not the reverse); there is **no seat/controller/owner field**; and `zone` is left
+deliberately *unplaced* so ticket 03 can decide it rather than inherit it.
+
+## The arrival payload unbakes the face — decided, ticket 02
+
+Exactly as this owner recommended, with **zero contract churn** (`imageUrl`/`cardName` are
+blessed scaffolding, not contract — `card.played.v1.json` carries only `card`, `face`,
+`initiator`, `occurredAt`):
+
+- **`imageUrl` → `frontImageUrl` + `backImageUrl: string | null`** — *replacing* it, not
+  coexisting. A baked-face field left lying around is the bug being removed.
+- **`face` stays contract**, but its meaning shifts from "which face I baked in" to
+  "**which face is up on arrival**."
+- The back URL must be **sent, not derived**: bare constructed Scryfall URLs 404 for
+  freshly-released cards, which is the whole reason `backImageUris` is stored on
+  `CardDefinition` (commit `eb48f4f`).
+
+Two edit sites, both known: `buildCardPlayedEvent` in
+`apps/shuffler/src/port-tabletop/types.ts` (keep its field-by-field comment block in sync —
+it is the de-facto spec of F0) and the hand-rolled `validationError` in
+`apps/tabletop/src/server/cardArrival.ts`.
+
+## Face-down is depicted, not enforced — and no gesture may be gated on control
+
+**This is a standing constraint on this owner's territory.** The concealment/leak finding
+this owner raised (a face-down card's identity is readable by every client, since tldraw
+sync broadcasts whole shape records) was resolved by **not guarding it**, on a principle
+Jess stated and which now lives in `notes/DESIGN-the-table-vision.md` § Principles:
+
+> *"everything that can be done by one player is doable by any player"* — there is no
+> privileged actor. The Tabletop has **no ownership or permission model**.
+
+So, binding on all future Tabletop face work:
+
+- Identity (`scryfallId`, `cardName`, both image URLs) **stays in `props`** on a face-down
+  card. Guarding it is theatre: any player can just turn the card over.
+- **Never gate a flip / turn-over / peek gesture on who controls the card.** This kills a
+  whole class of design before it starts — "only the controller may reveal" is not
+  available. A card may record *where it came from*; provenance grants no rights.
+- "Let a player peek at a face-down card" needs no feature.
+
+Related, and a softening of this owner's own framing: Jess **reversed** the rule that
+`gameCardIndex` never leaves the Shuffler — *"I don't want you to have to reason about what
+is hidden and what isn't."* Buoy `let-gamecardindex-out` in the repo-root `TODO.md`. The
+*reason* the guard existed (SEAMAP's "hand counts but never hands") still holds — it just
+belongs on **payload design**, not as a boundary check on every door. See
+[contract.md](contract.md).
+
+## Still open — narrowed to ticket 06
+
+`.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` was narrowed to exactly
+two questions, both of which this owner must be consulted on:
+
+1. **The trigger gesture.** `onClick` is spoken for by tap (ticket 04), so flip and
+   turn-over each need a different gesture — context menu, hover affordance, one "turn
+   over" that does the right thing per card, or two separate actions. Menu *placement* is
+   map 4's business; the gesture is decided here.
+2. **Who is authoritative about `currentFace` for Table-zone cards.** Written into ticket 06
+   as a must-decide, from this owner's watch point: the Shuffler keeps `currentFace` on a
+   card at `{type:"Table"}`, and **discard keeps `currentFace`** — so a table-flipped card
+   sent to the graveyard shows the **pre-flip** face on the Shuffler's screen. Either the
+   table becomes authoritative for Table-zone cards and the Shuffler stops trusting its
+   copy, or flip-on-table is table-local and the divergence is accepted knowingly.
+
+When flip lands, turning a card over on the table is a physical event the Spine can hear
+(`card.flipped` or similar) — and it must say **which axis** moved: a transform to the other
+printed `face`, or a change of concealment (`faceDown`). See "the two ships mean different
+things by flip" above. Do NOT bake "front-ness" into shape identity.
 
 ## Watch points
 
@@ -149,3 +245,14 @@ be **sent**, which is a contract change, not a client-side derivation.
 - Dedup is on `instanceId` (the card exists once on the table), NOT on
   scryfallId+face — two Forests are two instances; one MDFC flipped is still one
   instance.
+- **`backImageUrl` must be derived from `card.twoFaced`, never from whether
+  `backImageUris` happens to be stored.** This is the one sharp edge in the
+  no-`twoFaced`-flag decision, and it lives entirely in `buildCardPlayedEvent`. The
+  equivalence "`backImageUrl !== null` ⇔ this card has a printed back" holds only if the
+  sender computes the field as `card.twoFaced ? getCardImageUrl(card, "normal", "back") :
+  null`. `getCardImageUrl` always returns a string (it falls back to
+  `constructCardImageUrl`), so gating on `twoFaced` is safe; gating on
+  `card.backImageUris` instead would make a two-faced card whose Scryfall image fetch
+  missed arrive as `backImageUrl: null` and be **silently unflippable on the table** —
+  exactly the "two fields that must agree" bug the decision was meant to avoid, relocated.
+  `twoFacedLayouts.ts` remains the single decider; the payload just has to ask it.

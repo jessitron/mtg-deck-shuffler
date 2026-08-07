@@ -33,8 +33,11 @@ Every component of the fleet that touches cards must hold this:
   (architecture, interactions, files, history) is Shuffler-component knowledge.
 - **Tabletop** — renders the *played* face on arrival (the Shuffler bakes it into
   `imageUrl`; the Tabletop validates `face` and drops it, so it cannot change a card's
-  face today). Turning over, transform, and face-down are Tabletop physics, being
-  designed now. See [tabletop.md](tabletop.md).
+  face today). **That footing is decided away**: ticket 02 (2026-08-07, `c956949`) makes a
+  card a custom `mtg-card` tldraw shape that carries `frontImageUrl`, `backImageUrl | null`,
+  `face`, and `faceDown` in validated `props` and renders its own image, so flip becomes a
+  pure prop change. Not implemented yet. The remaining open questions are the trigger
+  gesture and `currentFace` authority (ticket 06). See [tabletop.md](tabletop.md).
 - **Contract** — every event about playing/revealing a card carries `face` beside
   `card: { scryfallId, instanceId }`. Names and image URLs are derivable
   conveniences, not identity. See [contract.md](contract.md).
@@ -64,7 +67,8 @@ Players encounter two-faced cards throughout the app:
 | Aspect | Details |
 |---|---|
 | Data type | `CardDefinition.twoFaced` flag, `CardDefinition.cardTypes` (union of all faces' types), `GameCard.currentFace` |
-| Face-down (concealment) | **Not modeled anywhere in the fleet yet** — no field on `CardDefinition`/`GameCard`, nothing in `contracts/`. Being designed on the Tabletop (ticket 02); a Shuffler "Play Face-Down" button was dropped to the Mural-parity buoy list. The Shuffler's `CARD_BACK` image is library-stack decoration, not modeled state |
+| Face-down (concealment) | **No code anywhere in the fleet yet**; designed for the Tabletop only, as `faceDown: boolean` in the `mtg-card` shape's `props`, rendered against the *table's* `cardBackImageUrl` (ticket 02, `c956949`). Nothing on `CardDefinition`/`GameCard`, nothing in `contracts/`; a Shuffler "Play Face-Down" button was dropped to the Mural-parity buoy list. The Shuffler's `CARD_BACK` image is library-stack decoration, not modeled state |
+| Concealment is depicted, not enforced | A face-down card keeps its identity in synced tldraw `props`; no permission model, and **no gesture may be gated on who controls a card** (`notes/DESIGN-the-table-vision.md` § Principles, 2026-08-07) |
 | Type definitions | `src/types.ts` (CardDefinition), `src/port-persist-state/types.ts` (GameCard) |
 | State mutation | `GameState.flipCard()` in `src/GameState.ts` |
 | Game routes | `POST /flip-card/:gameId/:gameCardIndex`, `POST /flip-card-modal/:gameId/:gameCardIndex` |
