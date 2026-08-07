@@ -13,17 +13,36 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- **`playmat-two-visual-metaphors`** — a future design open-choice. Now that both play pages
-  say "playmat" in the markup (`.playmat playmat-prepare` / `.playmat playmat-game`), the app
-  asserts one domain object wearing two looks, and the old "the game one is a giant Magic card,
-  a different thing" justification is gone. `.playmat-prepare` (`prepare.css`): 20px radius,
-  `outline: 10px solid black`, no shadow, local `/images/aeoe-43-cascading-cataracts.png`.
-  `.playmat-game` (`game.css`): 80px radius, `border: 5px solid black`,
-  `box-shadow: 5px 5px black`, hotlinked Scryfall PNG `33ea0047…`. Decide: intentional
-  per-page treatment, or drift to converge? If they converge, the shared appearance goes in
-  `playmat.css` as a bare `.playmat` rule — the slot is reserved and commented. Sub-question:
-  the game mat hotlinks Scryfall while prepare uses a local asset; `notes/FEATURE-playmat.md`
-  wants playmat selection to become a prep setting anyway.
+- [ ] `playmat-drop-shadow` Does the playmat cast a shadow — on both pages, or neither?
+  - **Mostly resolved already.** Jess ruled 2026-08-07 that the two mats are one object and their
+    differences were historical accidents, not design. Landed in `a4991f3`: shared art and
+    `border: 10px solid black` moved into a bare `.playmat` rule in `playmat.css`; radius stays
+    per-page (80px/20px) because *radius is a matter of scale* — /prepare draws the mat smaller.
+  - **What's left is one declaration.** `.playmat-game` still has `box-shadow: 5px 5px black`;
+    `.playmat-prepare` has none. Not converged because Jess named three changes and this wasn't
+    one — converging it would have been an appearance change riding along on an approved one.
+    It is now the only difference between the mats with no stated reason.
+  - The argument both ways: the shadow is a survivor of the "giant Magic card" reading — /game's
+    art used to be a literal Magic card face (Scryfall `/png/front/…`, portrait, cover-cropped),
+    and 80px radius + shadow + card art read as one big card. Landscape art half-retired that.
+    So the shadow is either the last thread of a reading worth keeping, or a leftover of a dead one.
+  - ← blocked-by: `design-playmat-specimen` — the design owner declined to stage this as a
+    `/design` `.choice` because the gallery can't render a real playmat yet, and staging a choice
+    Jess can't look at defeats the point.
+  - Full rationale: `.scratch/playmat-hardening/plan.md`.
+
+- [ ] `design-playmat-specimen` `/design` renders a fake playmat, not the real one
+  - `.stage-playmat` in `design-gallery.css` is gallery *chrome* that hand-copies the mat's art
+    URL, `background-size: cover`, `background-position: center` and its own `3px solid black`
+    border. It's a lookalike. So the gallery has been describing the playmat in its tables while
+    rendering an imitation — exactly the drift `/design` exists to prevent ("if a component
+    changes in the app, it changes here").
+  - **Newly possible.** Before `a4991f3` there was no shared playmat rule to reuse; now there is a
+    bare `.playmat` in `playmat.css`, so `.stage-playmat` could honestly become
+    `class="stage playmat"` and inherit the real appearance.
+  - Not a one-line swap: it's gallery surgery, and the stage needs a thinner border at specimen
+    scale (3px, not the real 10px).
+  - Doing this unblocks `playmat-drop-shadow` above.
 
 - **The Tabletop-replaces-Mural mountain is charted.** The parity list, the six maps it
   splits into, and their order: `notes/DESIGN-tabletop-replaces-mural.md`. Two maps exist
@@ -123,14 +142,6 @@ section is just a wall between Jess and the live work.
     is about intentional revealing — don't conflate them) and with spectator mode, which `SEAMAP.md`
     makes a constraint on every mountain: "public events, commentary, hand counts but never hands."
   ← mountain: tabletop-replaces-mural
-
-- [ ] `deck-title-placement` On the game screen, move the deck title out of the command zone
-  - > Put it above the table button(s), top-aligned with the hamburger menu.
-  - This is the **Shuffler's** game screen (`formatCommandZoneHtmlFragment` in
-    `src/view/common/shared-components.ts`), not the Tabletop canvas — it came back here from the
-    old card-physics map because it isn't really the Tabletop-replaces-Mural mountain, and it's a
-    one-sitting change that doesn't need a ticket.
-  - Consult `shuffler-looks-like-itself` — layout change on a page that owner watches.
 
 - [ ] `verify-suite-speed` Instrument the verification suite, *then* optimize it
   - `apps/shuffler/verify.sh` runs 52 Playwright tests in **~9.5 minutes**. That's slow enough
