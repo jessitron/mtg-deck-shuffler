@@ -1,0 +1,12 @@
+{
+  "name": "@fleet/design-tokens",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The fleet's shared visual vocabulary: one dictionary, all ships",
+  "files": [
+    "tokens.css"
+  ],
+  "exports": {
+    "./tokens.css": "./tokens.css"
+  }
+}

@@ -277,6 +277,19 @@ export function createApp(
   app.use(express.static(path.join(__dirname, "..", "public")));
   app.use("/decks", express.static(path.join(__dirname, "..", "decks")));
 
+  // The fleet's shared palette (@fleet/design-tokens) is served at /fleet so both
+  // ships load the same bytes — see packages/design-tokens/tokens.css for why it's
+  // shared rather than duplicated. The Tabletop imports it through Vite instead.
+  //
+  // Resolved through node_modules rather than by walking up from __dirname,
+  // because the depth differs between the two layouts: dev runs from
+  // apps/shuffler/dist, the container from /app/dist with the workspace flattened.
+  // The workspace symlink is the one thing shaped the same in both — which is why
+  // the Dockerfile must copy packages/ into the RUNTIME stage too. If it doesn't,
+  // the symlink dangles, this 404s, and every page loses its colours in prod only.
+  // verify-container-boot.sh is what catches that.
+  app.use("/fleet", express.static(path.dirname(fileURLToPath(import.meta.resolve("@fleet/design-tokens/tokens.css")))));
+
   // ============================================================================
   // DYNAMIC PAGES (in the game) - Use TypeScript functions from src/view/
   // These pages display and manipulate game state: deck selection, deck review,

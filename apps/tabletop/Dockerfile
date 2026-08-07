@@ -11,7 +11,14 @@ FROM node:24-slim AS builder
 WORKDIR /repo
 COPY package.json package-lock.json ./
 COPY apps/tabletop/package.json ./apps/tabletop/
+# Every workspace named by the root package.json's `workspaces` glob must have its
+# package.json present before `npm ci`, or the install fails outright.
+COPY packages/design-tokens/package.json ./packages/design-tokens/
 RUN npm ci
+
+# The shared palette. Vite bakes it into the client bundle at build time, so this
+# ship needs it in the BUILDER only — but see the runtime copy below.
+COPY packages/design-tokens/ ./packages/design-tokens/
 
 WORKDIR /repo/apps/tabletop
 COPY apps/tabletop/tsconfig.json apps/tabletop/tsconfig.server.json apps/tabletop/vite.config.ts apps/tabletop/index.html ./
@@ -37,6 +44,11 @@ FROM node:24-slim
 WORKDIR /repo/apps/tabletop
 COPY --from=builder /repo/node_modules /repo/node_modules
 COPY --from=builder /repo/package.json /repo/package.json
+# Not needed to serve the app — Vite already inlined the tokens into the client
+# bundle. Copied anyway so the workspace symlink in /repo/node_modules resolves
+# instead of dangling; a dangling link is a trap for the next thing that reaches
+# for the package at runtime, and it would only show up in the container.
+COPY --from=builder /repo/packages /repo/packages
 COPY --from=builder /repo/apps/tabletop/node_modules ./node_modules
 COPY --from=builder /repo/apps/tabletop/dist ./dist
 COPY --from=builder /repo/apps/tabletop/package.json ./

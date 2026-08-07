@@ -1,0 +1,43 @@
+/*
+ * The fleet's shared visual vocabulary — one dictionary, all ships.
+ *
+ * Both the Shuffler and the Tabletop load this file, so the two ships look
+ * like one app with two faces. Owned by `owners/shuffler-looks-like-itself/`
+ * (the slug predates the fleet scope); consult that owner before adding,
+ * renaming, or changing a value here.
+ *
+ * WHY A SHARED FILE AND NOT A DELIBERATE DUPLICATE. The fleet does duplicate
+ * `log.ts` on purpose, and someone will cite it here. It doesn't transfer:
+ * that duplication is *forced* (the two copies sit on different OTel version
+ * lines with incompatible constructor signatures), and when loggers drift the
+ * build breaks loudly. `#221534` is `#221534` on every ship forever, and when
+ * a palette drifts nothing fails — the app just quietly stops looking like
+ * itself on one face. We also already ran the experiment: `docs.css` re-declared
+ * three of these tokens and, while never neglected, still diverged by addition
+ * inside a year.
+ *
+ * These tokens are NOT mirrored in any ship's own `:root`. A "fallback" copy
+ * is just another dictionary, and it would turn a broken load — which is
+ * loud and obvious — into a silent near-miss.
+ */
+
+:root {
+  /* Identity — the fleet's purple-and-pink. */
+  --deep-space: #221534;
+  --dark-pink: #bb5277;
+  --light-pink: #ddc7dd;
+  --cute-heading-color: #9134d2;
+
+  --narrow-border: 3px;
+
+  /*
+   * Magic's colour pie. Domain vocabulary rather than chrome, and a closed
+   * set — there will never be a sixth. Any ship tinting by colour identity
+   * uses exactly these; none of them invents its own red.
+   */
+  --mana-W: #f0e68c; /* Plains — warm gold */
+  --mana-U: #3c99e5; /* Island — blue */
+  --mana-B: #530aae; /* Swamp — purple */
+  --mana-R: #bd0a0a; /* Mountain — red */
+  --mana-G: #2a8439; /* Forest — green */
+}

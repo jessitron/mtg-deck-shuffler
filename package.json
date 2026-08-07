@@ -10,7 +10,8 @@
   },
   "workspaces": [
     "apps/*",
-    "services/*"
+    "services/*",
+    "packages/*"
   ],
   "scripts": {
     "build": "npm run build --workspace apps/shuffler",

@@ -16,14 +16,15 @@ button {
   font-family: inherit;
 }
 
+/* The identity palette, --narrow-border and the mana colours MOVED to
+ * @fleet/design-tokens (packages/design-tokens/tokens.css), loaded ahead of
+ * this sheet by head.ejs and html-layout.ts. They are deliberately NOT
+ * mirrored here: a "fallback" copy is a second dictionary, and it would turn a
+ * broken load — loud and obvious — into a silent near-miss.
+ *
+ * --background-color stays: it's generic site-page chrome, not fleet identity. */
 :root {
   --background-color: #f0f0f0;
-  --cute-heading-color: #9134d2;
-
-  --dark-pink: #bb5277;
-  --light-pink: #ddc7dd;
-  --deep-space: #221534;
-  --narrow-border: 3px;
 }
 
 
