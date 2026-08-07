@@ -173,10 +173,18 @@ Visibility cuts across all kinds orthogonally.
     card" needed no feature: turning it over already does it, and nothing stops them.
   - **Don't reach for "only the controller may…"** when designing gestures. If a
     restriction seems necessary, ask whether the players would rather just be trusted.
-  (Contrast the one thing that *is* guarded, and note it isn't on the canvas:
-  `gameCardIndex` never crosses the wire, because a decodable secret leaks the **hidden
-  zones the Shuffler exists to keep** — library order and hands. Not concealing what a
-  player chose to place is different from leaking what nobody chose to reveal.)
+  **Scope: this is a statement about the shared canvas.** The Shuffler is the other half
+  of the same idea — its entire job is hidden zones, so library and hand stay hidden there
+  because that *is* the product, not because a rule says so. The two principles don't
+  conflict; they describe different ships, and the boundary between them is where the one
+  real guard sits. `gameCardIndex` never crosses out of the Shuffler
+  (`cardArrival.ts`, `seatJoined.ts` — the only two doors) because it is a decodable
+  pointer into the decklist, and decklists are public: an event carrying it names a card
+  nobody revealed. That serves `SEAMAP.md`'s spectator constraint — "hand counts but never
+  hands" — which is a promise the app made, not a rule it enforces between players.
+  Not concealing what a player chose to place is a different thing from leaking what
+  nobody chose to reveal. (`gameCardIndex` is the deck-list index, `GameState.ts:120`;
+  library *order* is `location.position` and is not the secret.)
 - **The humans teach the AI in public, during play.** The chat panel is the eval
   machine, and the teaching is part of the game record.
 - **Don't carry what you can listen to.** Discord keeps the voice call; we transcribe.
