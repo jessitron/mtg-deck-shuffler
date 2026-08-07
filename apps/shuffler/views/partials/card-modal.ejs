@@ -14,6 +14,7 @@
   - locationActionsHtml: HTML for location-specific action buttons (optional, only for game page)
 %>
 <div class="card-modal-overlay"
+     data-current-face="<%= currentFace %>"
      hx-get="/close-card-modal"
      hx-target="#card-modal-container"
      hx-swap="innerHTML"

@@ -1,7 +1,7 @@
 # Decide which verification tests are superfluous
 
 Mountain: overhead
-Status: claimed
+Status: resolved
 Type: grilling
 Map: ../map.md
 
@@ -180,3 +180,31 @@ top candidate even at its post-03 price.
 
 `verify-library-grouping` (the vacuous-assertion and near-duplicate-loop candidates) is 4.5s, not
 9.2s — but per this ticket's own words, the vacuous assertion "is wrong at *any* speed."
+
+## Answer
+
+Grilled with Jess, 2026-08-07. Three decisions:
+
+1. **Strengthen the vacuous flip assertion.** `views/partials/card-modal.ejs` now emits
+   `data-current-face="<%= currentFace %>"` on `.card-modal-overlay` (cleared by the
+   two-faced-cards owner — additive, no collision, no route change needed since `currentFace`
+   already reaches the template). Both flip loops in `verify-library-grouping.spec.ts` now
+   assert `data-current-face` actually flips to `back`, retried with `toPass()` like every other
+   click in the suite — a flip that never happened can no longer pass.
+2. **Keep both flip loops** (game and prep). Confirmed load-bearing: the two pages drive the
+   flip button through different mechanisms (prep `hx-get` with `?face=`, game `hx-post` to a
+   toggling route).
+3. **Trim `verify-query-parameter-modals.spec.ts`** from 14 browser tests to 5: `?openCard` on
+   game, `?openCard` on prep, one no-params baseline, plus the two nav-arrow tests (unrelated to
+   the query-param mechanism — they use `?openCard` only to get a modal open). The other 9 cases
+   (`?openLibrary`, `?openTable`, `?openHistory`, `?openDebug`, and three combinations) moved to
+   `test/modal-query-params.test.ts`, a new unit test that loads `public/modal-query-params.js`
+   verbatim via Node's `vm` module (no jsdom dependency, no change to how the script is served)
+   and exercises `planAutoOpenActions()` — a pure function extracted from the file so the
+   URL-to-action decision is testable without a browser. 16 cases, ~1ms total vs. the browser
+   tests they replace.
+
+Re-measured after all three: **50.2s total, 46.1s specs** (`verify.sh` run `a2d760e6`), down from
+56.3s. `verify-query-parameter-modals` dropped from 11.3s to 4.3s and is no longer the top spec.
+48 Playwright tests pass (57 → 48, the 9 moved to the unit suite), plus 285 Jest unit tests
+(269 → 285, +16 for `modal-query-params.test.ts`).

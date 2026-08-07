@@ -55,6 +55,12 @@ in under a minute and every remaining test is one we'd miss, this effort is done
   `POST /start-game`. **106.5s → ~55s.** Uncovered a pre-existing Ctrl+Z undo race (same
   click-straddles-settle class as the animations owner's documented click flake); fixed with
   the suite's usual `toPass()` retry.
+- [Decide which verification tests are superfluous](issues/04-which-tests-are-superfluous.md)
+  — three cuts: strengthened the vacuous flip assertion (`data-current-face` on the card modal,
+  cleared by the two-faced-cards owner), kept both game/prep flip loops (different mechanisms),
+  and trimmed `verify-query-parameter-modals.spec.ts` from 14 browser cases to 5, moving the
+  other 9 to a new fast unit test (`test/modal-query-params.test.ts`, loads the real script via
+  `vm`, no jsdom). **56.3s → 50.2s.**
 
 ## Measured baseline (run `96588aeb`, git `e1ca060`, warm)
 
