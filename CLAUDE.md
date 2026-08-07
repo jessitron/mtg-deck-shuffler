@@ -166,6 +166,12 @@ each `owners/*/skill-*.md` frontmatter — set 2026-08-06). Two consequences, bo
 - **The owner has none of your conversation.** Pass a self-contained brief in the skill
   args — the actual plan, the actual file:line list, the actual question. "Review my plan"
   reaches an agent that cannot see it.
+- **Write the plan to a file, then point the owners at it.** For anything more than a
+  one-liner, the brief is mostly you re-typing the plan — once per owner, and again for
+  each `-review`. Put it in `.scratch/<feature>/plan.md` instead and let the brief be
+  "read `<path>`, here's my specific question for you." Cheaper for you, identical for
+  the owner, and the reviews stay comparable because every owner read the same words.
+  The file is also what you hand `-update` afterwards.
 - **The owner's KB reading stays out of your context, and the review is independent.** That
   independence is the point. Inline, the reviewer had already watched you form the plan and
   could only agree with it; a fork starts from the KB and your brief alone, so it can
