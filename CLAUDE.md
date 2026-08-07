@@ -160,6 +160,21 @@ three animating skills — `<slug>-context`, `<slug>-review`, `<slug>-update` �
 trigger; scan it when planning any change. Owners never close. Create new ones with the
 `seamapping:create-owner` skill (it judges whether one is warranted first).
 
+**Consulting owners — at three moments, not two:**
+
+- **When a decision is being formed** — including mid-interview, while a design skill like
+  `/grilling` has you putting questions to Jess. A recommended answer that lands in an
+  owner's territory needs that owner's `-context` **first**. Finding facts is the agent's
+  job, and an owner is a fact source. Skipping this is cheap and expensive: Jess accepts a
+  recommendation, and the contradiction only surfaces at `-review`, after she's committed.
+- **On the plan** — `-review` before implementing (step 5 below).
+- **After the change** — `-update` with what actually landed (step 9 below).
+
+**Be precise about what's being approved.** "Move this element" is a *placement* decision.
+Restyling it on the way is a *second* decision needing its own explicit sign-off — never let
+an appearance change ride along on a placement change. When you catch one riding along,
+the right move isn't to drop it: stage both options on `/design` and let Jess pick.
+
 **All 15 owner skills run in a forked subagent** (`context: fork`, `background: false` in
 each `owners/*/skill-*.md` frontmatter — set 2026-08-06). Two consequences, both load-bearing:
 
