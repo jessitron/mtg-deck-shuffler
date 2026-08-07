@@ -45,7 +45,9 @@ The short version:
   one decided refinement not yet swept into the CSS: **soften what you press.**
   `--radius-soft: 4px` on pressables, `0` on flat surfaces, physical objects keep their real
   radii (Jess, 2026-08-06). *The line falls at "do you touch it", not at "is it small."*
-  The 13 radius values still in the CSS are drift awaiting that sweep, not precedent.
+  **The token exists** in `packages/design-tokens/tokens.css` (shared, because a tldraw shape
+  passes a radius from TypeScript where no stylesheet reaches) — but the 13 radius values
+  still in the CSS are drift awaiting that sweep, not precedent.
   Both play pages put a playmat on screen: `class="playmat playmat-prepare"` on `/prepare`,
   `class="playmat playmat-game"` on `/game`. Same domain object, **one appearance, two
   scales** — the `/game` one used to be called `.page-container`, which hid that fact
@@ -56,13 +58,20 @@ The short version:
   order, so a property added to the bare rule overrides `.playmat-game` but loses to
   `.playmat-prepare`. Keep each property in one place, never both
 - **Never write a raw hex.** Use a token. The fleet's shared ones — the identity palette,
-  `--narrow-border`, and the mana colours — live in `packages/design-tokens/tokens.css`
+  `--narrow-border`, the mana colours, the three `--font-*` roles and `--radius-soft` —
+  live in `packages/design-tokens/tokens.css`
   (`@fleet/design-tokens`), served here at `/fleet/tokens.css` and loaded by the Tabletop
   too, so the two ships share one dictionary. They are **not** mirrored in
   `public/styles.css`, which now holds only `--background-color`. Material and
   Bootstrap defaults already in the CSS are drift, not precedent — don't copy them
 - **Orbitron for chrome, Ovo for content** (card names are content). Risque only on site
-  pages. No fourth typeface
+  pages. No fourth typeface. **Write the role token, never the face:**
+  `font-family: var(--font-chrome)` / `var(--font-content)` / `var(--font-display)`, from
+  `packages/design-tokens/tokens.css`. All 39 literals were swept onto these on 2026-08-07;
+  the only `font-family` literals left in the CSS are `monospace` and `inherit`. The
+  typeface *names* still appear in the three `<head>`s — that's the Google Fonts `<link>`
+  fetching the files, which no token can reach, so a new page needs **both** the token in
+  its CSS and its `additionalFonts` entry
 - **Every interactive element gets a visible `:focus-visible` state — and it's already
   written** (`shuffler-design-choices` choice 5): one global rule in `public/styles.css`
   draws `3px solid var(--light-pink)` at `outline-offset: 3px` on every `a`, `button`,

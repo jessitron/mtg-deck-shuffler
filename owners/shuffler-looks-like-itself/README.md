@@ -123,17 +123,33 @@ already there**, and stop the drift from replicating.
 
 The things that are genuinely consistent today, and that new UI must match:
 
-**Three typefaces, with distinct jobs.** Orbitron (geometric sans) for chrome — nav,
-buttons, headings, form labels and fields, the game title slab. Ovo (serif) for content
-— prose and **card names specifically**; a card name is content, not chrome. Risque
-(display cursive) only for the big splashy words on the site pages, never on the play
-pages. There is no fourth typeface.
+**Three typefaces, with distinct jobs — and they are named by ROLE, not by face
+(2026-08-07, `f79bc7d`).** `--font-chrome` (Orbitron, geometric sans) for chrome — nav,
+buttons, headings, form labels and fields, the game title slab. `--font-content` (Ovo,
+serif) for content — prose and **card names specifically**; a card name is content, not
+chrome. `--font-display` (Risque, display cursive) only for the big splashy words on the
+site pages, never on the play pages. There is no fourth typeface.
+
+- **Write the role token, never the face.** `font-family: var(--font-chrome)`, not
+  `font-family: "Orbitron", sans-serif`. All 39 literals across the Shuffler's nine
+  stylesheets were swept onto the tokens in the same commit that added them — deliberately,
+  because a token nobody uses is just a second way to say the same thing, which was the main
+  argument *against* having one. The only surviving `font-family` literals in the CSS are
+  `monospace` (debug blocks) and `inherit`; both are genuine one-offs.
+- **The role is the stable name and the face is the detail.** If Ovo were ever replaced, the
+  word "content" would still be true. Three faces with fixed jobs is exactly the situation
+  where role names hold.
+- **The canvas is the reason these are tokens and not a convention.** A self-rendering
+  tldraw shape passes a font *string* from TypeScript — there is no class to hang a rule on
+  — so without a name here, the literal gets retyped into a `.tsx` file where no
+  stylesheet-level convention can reach it. Same argument as `--radius-soft`.
 
 **Purple and pink, from tokens — and the tokens are the fleet's, not the Shuffler's
 (2026-08-07, `4396aea`).** `--deep-space` (#221534) for bars and dark surfaces,
 `--dark-pink` (#bb5277) for borders/rules/accents, `--light-pink` (#ddc7dd) for bevels
-and slabs, `--cute-heading-color` (#9134d2), `--narrow-border` (3px), and the closed
-`--mana-W/U/B/R/G` set. **All of those live in `packages/design-tokens/tokens.css`**
+and slabs, `--cute-heading-color` (#9134d2), `--narrow-border` (3px), the closed
+`--mana-W/U/B/R/G` set, the three type roles above, and `--radius-soft` (4px).
+**All of those live in `packages/design-tokens/tokens.css`**
 (`@fleet/design-tokens`) — one file, both ships, served by the Shuffler at
 `/fleet/tokens.css` and imported by the Tabletop through Vite.
 
@@ -147,9 +163,19 @@ and slabs, `--cute-heading-color` (#9134d2), `--narrow-border` (3px), and the cl
   Shuffler's two *pages*, and extending it across the ship boundary to a tldraw-rendered
   seat mat is an unratified Layer-2 claim. Buoyed as `playmat-colours-fleet-or-shuffler`;
   the omission is a decision, not an oversight.
-- **Font tokens are still unresolved, not rejected.** `--font-chrome` / `--font-content` /
-  `--font-display` were proposed with this change and Jess hasn't answered; colours shipped
-  alone. Typefaces are still named literally in the two heads and `index.html`.
+- **Font tokens: RESOLVED 2026-08-07 (`f79bc7d`).** Jess: *"yeah, go for it! I'm all for more
+  tokens."* `--font-chrome` / `--font-content` / `--font-display` are in the package and every
+  Shuffler stylesheet uses them. **The typeface names still appear in the three `<head>`s** —
+  that's the Google Fonts `<link>` fetching the files, a separate concern from naming a face
+  in a rule, and it does not go through a token.
+- **`--radius-soft: 4px` is also in the package (2026-08-07, `f79bc7d`), and where it lives
+  was decided deliberately.** Shared, not `styles.css`, for the same canvas-can't-use-CSS
+  reason as the fonts: choice 4's rule is stated fleet-wide *including canvas shapes*, and a
+  tldraw shape passes a radius from TypeScript. This is choice 4's already-decided value
+  (Jess, 2026-08-06) getting a **name** — no new appearance decision rode along. **The ~13
+  hand-written radius values in the Shuffler are NOT swept**; that sweep is still its own job
+  (`.scratch/shuffler-design-choices/issues/04-radius-sweep.md`), and those values are still
+  drift, not precedent. A comment in `tokens.css` says so.
 
 **Chunky physical controls — down to a single site.** `outset` / `inset` / `groove`
 borders survive in **exactly one place** in the app: `.cool-command-zone-surround`'s
@@ -352,7 +378,7 @@ asserted `border-radius: 0` on a zone as though radius were still open, because 
 | Choice | Jess's answer (spec.md) | Shipped? |
 | --- | --- | --- |
 | 3 · Card-modal action buttons | **Two families, split so the color carries meaning** — *this moves the card* vs *this is a tool*. Neither staged option | not yet |
-| 4 · Corner radius on chrome | **Soften what you press:** `--radius-soft: 4px` on pressables, `0` on flat surfaces, physical objects keep their real radii. *"The line falls at 'do you touch it', not at 'is it small'"* | not yet |
+| 4 · Corner radius on chrome | **Soften what you press:** `--radius-soft: 4px` on pressables, `0` on flat surfaces, physical objects keep their real radii. *"The line falls at 'do you touch it', not at 'is it small'"* | **token named** in `tokens.css` (`f79bc7d`); the ~13-value sweep not yet |
 | 6 · Text input | option C, `.candidate-input` — 2px `--deep-space`, Orbitron, one rule with a size variant | not yet |
 
 **→ [open-choices.md](open-choices.md) is the work list**: every option, its exact
@@ -370,9 +396,11 @@ Candidate CSS for the unadopted options lives in
 | | |
 | --- | --- |
 | Gallery route | `/design` → `apps/shuffler/views/design.ejs` (`src/app.ts`, near `/about`) |
-| **Shared tokens (fleet)** | `packages/design-tokens/tokens.css` — served at `/fleet/tokens.css`, imported by the Tabletop via Vite |
+| **Shared tokens (fleet)** | `packages/design-tokens/tokens.css` — served at `/fleet/tokens.css`, imported by the Tabletop via Vite. Colours + `--narrow-border` + `--mana-*` + `--font-chrome/-content/-display` + `--radius-soft` |
 | Shuffler-only tokens | `apps/shuffler/public/styles.css` `:root` — now just `--background-color` |
-| Fonts | Google Fonts `<link>` in **three** places: `views/partials/head.ejs`, `src/view/common/html-layout.ts`, `apps/tabletop/index.html` |
+| Typefaces in CSS | **always `var(--font-*)`** — no `font-family` literal survives in the Shuffler except `monospace` and `inherit` |
+| Fonts (delivery) | Google Fonts `<link>` in **three** places: `views/partials/head.ejs`, `src/view/common/html-layout.ts`, `apps/tabletop/index.html`. This is the one place a typeface is still named by name, and it isn't tokenisable |
+| One-shot sweep script | `scripts/sweep-font-literals.sh` — kept so the exact substitutions stay reviewable |
 | Site pages | `apps/shuffler/public/site.css` |
 | Shared playmat chrome | `apps/shuffler/public/playmat.css` (game **and** prepare) |
 | Page-specific | `game.css`, `prepare.css`, `deck-selection.css`, `docs.css` |

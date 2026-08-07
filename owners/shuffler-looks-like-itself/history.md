@@ -657,3 +657,67 @@ The Shuffler's equivalent needs no `load()` because plenty there is set in Orbit
 styles remain the default by inertia. Loading Orbitron also does **not** put it on tldraw canvas
 text — the `geo` `font` enum still has no Orbitron in it, so on-brand canvas text still needs a
 self-rendering shape. Necessary, not sufficient.
+
+## 2026-08-07 — the typefaces got role names, and 39 literals went with them
+
+`f79bc7d` **Name the typefaces by role, and sweep the 39 literals onto the tokens**
+
+The sequel to `4396aea`, which shipped the colour tokens alone because Jess hadn't answered the
+font question. She answered: *"yeah, go for it! I'm all for more tokens."* So
+`--font-chrome` (Orbitron), `--font-content` (Ovo) and `--font-display` (Risque) joined the
+package, along with `--radius-soft: 4px`.
+
+**Named by ROLE, not by typeface, and that's the part worth keeping.** Not `--orbitron`. Three
+faces with fixed, long-settled jobs is exactly the situation where the role is the stable name and
+the face is the detail — if Ovo were ever replaced, "content" would still be true. The type
+sections of this KB and of `/design` had been describing the jobs in prose for months; the tokens
+just made the prose enforceable.
+
+**Swept, not merely added — deliberately, and this is now the standing rule.** All 39
+`font-family` literals across nine stylesheets were converted in the same commit, because *a token
+nobody uses is just a second way to say the same thing*, which was the main argument **against**
+adding one. The substitutions ran through a kept script (`scripts/sweep-font-literals.sh`) rather
+than a shell one-liner so they stay reviewable and a stray variant surfaces as a leftover instead
+of being silently missed. Only `monospace` and `inherit` survive as literals, both genuine
+one-offs.
+
+**The literals had already drifted, which is the evidence that justified the whole exercise.**
+`styles.css`'s `body` said `"Ovo", Arial, sans-serif` while all **nine** other Ovo sites said
+`"Ovo", serif`, and quoting was split between single and double quotes. The token settles it as
+`"Ovo", serif` — **a real behaviour change**, observable only if Ovo fails to load, made by the
+agent rather than by Jess, and recorded as a decision rather than left to look like a typo fix.
+Same rot as `docs.css`'s duplicated colours: a copy doesn't announce itself when it diverges.
+
+**The real reason, though, was the canvas.** A self-rendering tldraw shape passes a font *string*
+from TypeScript — there is no class to hang a rule on — so without a name in the shared
+dictionary, ticket 11 would have retyped `"Orbitron", sans-serif` into a `.tsx` file where none of
+the stylesheet-level conventions can reach it. **A convention that only exists in CSS stops at the
+canvas boundary; a token crosses it.** That argument is what also settled where `--radius-soft`
+lives.
+
+**`--radius-soft` got a home, answering a question the last `-update` had opened.** Choice 4's
+value was decided by Jess on 2026-08-06; `4396aea` left *where it lives* genuinely open, since the
+rule is stated fleet-wide including canvas shapes (argues shared) but nothing on the Tabletop uses
+it (argues ship-local). **Decided: shared**, on the canvas argument above. Naming an
+already-decided value is not a new appearance decision, which is why it was allowed to ride along
+with the fonts — **and the ~13 hand-written radius values were pointedly NOT swept**, because
+*that* is 13 visible component changes and belongs to its own ticket. A comment in `tokens.css`
+says so out loud, so the next agent can't read the token's existence as evidence the sweep
+happened.
+
+**A gallery-honesty gap closed in passing.** `/design`'s four type specimens were inline
+`font-family: 'Risque', cursive` literals — *describing* the palette exactly the way the
+`.swatch-chip` hexes do. They now use the tokens and each names its own, so the section fails
+visibly if `/fleet/tokens.css` doesn't load. **That's the template for finishing the colour
+swatches:** swapping a literal for a `var()` whose value *is* that literal is not an appearance
+change and needs no sign-off.
+
+**Also settled, since it looks wrong at a glance:** `design-gallery.css` and
+`design-candidates.css` were swept too. The "gallery chrome must never be copied into the app"
+rule is about *components* — it runs one direction. Consuming the fleet's shared dictionary runs
+the other, and a museum set in a foreign typeface would look unlike the fleet it exhibits.
+**Take tokens from the fleet; don't give selectors to the app.**
+
+Both ships' `verify-fleet-tokens.spec.ts` assert the four new tokens resolve. The Tabletop's copy
+matters most: nothing there sets a font yet, so a broken import would otherwise be invisible until
+ticket 11.

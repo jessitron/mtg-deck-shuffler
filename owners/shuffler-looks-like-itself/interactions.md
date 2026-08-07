@@ -19,6 +19,11 @@
   `additionalFonts` entry, the text silently falls back to a system serif and looks wrong
   without erroring. **One delivery mechanism fleet-wide** — a `<link>` *or* `@font-face`,
   never both; self-hosting would be a change to all three sites at once.
+  **Two separate things, and don't conflate them (since `f79bc7d`, 2026-08-07):** the `<link>`
+  *fetches* the face and still names it literally — a custom property cannot reach a `<link>
+  href`. Every place that *applies* a face goes through `var(--font-chrome/-content/-display)`.
+  So a new page needs **both**: the token in its CSS *and* its `additionalFonts` entry. The
+  token resolving is not evidence the font arrived — that's the lazy-fetch trap below.
 - **The two heads** — `views/partials/head.ejs` and `formatHtmlHead()` in
   `src/view/common/html-layout.ts`. A stylesheet only exists on the pages whose head
   lists it.
@@ -61,7 +66,11 @@
   `apps/tabletop/test/verification/verify-fleet-tokens.spec.ts`,
   `apps/shuffler/test/html-layout-fleet-tokens.test.ts`, and `scripts/check-fleet-tokens.sh`.
   They assert the shared tokens **resolve** and Orbitron **fetches** — plumbing, not palette —
-  plus that no shared token is re-declared in `styles.css`. Changing a colour must not break
+  plus that no shared token is re-declared in `styles.css`. **Both ships' `SHARED_TOKENS` lists
+  grew by four on 2026-08-07 (`f79bc7d`): `--font-chrome`, `--font-content`, `--font-display`,
+  `--radius-soft`. Add every new shared token to both lists** — the Tabletop's copy is the one
+  that matters most, since nothing there uses these yet and a broken import would otherwise be
+  invisible. Changing a colour must not break
   them; if it does, the test is asserting the wrong thing. See the testing watch point below.
 - **`test/verification/verify-design-gallery.spec.ts`** — asserts specific computed
   values (200×278 card, `.button-base.begin-button`'s border-style — **`solid`**, since
@@ -93,7 +102,13 @@ Concrete, in rough order of how often they bite.
   black`. Borders are flat (`solid`); press feedback is `.pushable-flat`'s box-shadow bevel,
   not a border switch. Conversely, **don't strip the surround's `outset` as tidying** —
   it's the last of its kind, and ending that language is Jess's call.
-- Button labels are **Orbitron**. Card names are **Ovo**. No fourth typeface.
+- Button labels are **Orbitron**, card names are **Ovo**, and **you write neither name**.
+  `font-family: var(--font-chrome)` for chrome, `var(--font-content)` for content,
+  `var(--font-display)` for site-page hero words. No fourth typeface, and no typeface literal:
+  since `f79bc7d` (2026-08-07) the only `font-family` literals left in the Shuffler's CSS are
+  `monospace` and `inherit`. If you write `"Orbitron", sans-serif` you have reintroduced the
+  drift the sweep removed — grep `font-family` in `apps/shuffler/public/*.css` and you'll see
+  what the file expects.
 - **The focus state is already written for you** (choice 5, 2026-08-06). One global
   `:focus-visible` rule in `styles.css` (grep `:focus-visible`) draws `3px solid var(--light-pink)` at
   `outline-offset: 3px` on `a, button, input, select, textarea, summary, [tabindex]`. So a
@@ -240,6 +255,18 @@ existing specs learned, in the order they'll bite you:
 - **Ask first: is it fleet identity or ship chrome?** Fleet identity goes in
   `packages/design-tokens/tokens.css`; a genuinely Shuffler-only value goes in `styles.css`
   `:root`. If you can't tell, it's a design decision — surface it rather than defaulting.
+  **A rule the fonts and `--radius-soft` both turned on: if a tldraw shape will need the value,
+  it's fleet.** A self-rendering shape passes a *string* from TypeScript — no class, no rule —
+  so the alternative to a shared token is the literal retyped into a `.tsx` file where no
+  stylesheet convention reaches it.
+- **Add and sweep in the same commit** (`f79bc7d`, 2026-08-07). A token nobody uses is just a
+  second way to say the same thing — which is the strongest argument *against* adding one, so
+  don't hand it to the next reviewer. The 39-literal font sweep was scripted
+  (`scripts/sweep-font-literals.sh`) precisely so the substitutions stayed reviewable and a
+  stray variant showed up as a leftover instead of being silently missed. **Grep for the literal
+  afterwards and expect zero.** The one exception on record is `--radius-soft`, where naming the
+  value and sweeping the ~13 sites were split deliberately — because the sweep is a visible
+  change to 13 components and the name is not.
 - **Never re-declare a shared token in a ship**, not even "as a fallback". A Playwright
   assertion fails if any of them reappears in `styles.css`.
 - **Renaming or removing one now breaks two apps silently.** Grep both `apps/` trees, not
@@ -301,6 +328,12 @@ existing specs learned, in the order they'll bite you:
   is its own design decision needing its own sign-off — the classic ride-along. If an
   implementation ticket for `mtg-card` reaches you with a custom indicator in it, that's the
   thing to block.
+- **A canvas shape has a name for its font and its radius now** (`f79bc7d`, 2026-08-07).
+  `--font-chrome`/`--font-content`/`--font-display` and `--radius-soft` are in the shared package
+  specifically for this case. A `.tsx` shape can't `var()`, but it can read them off the computed
+  root style, or at minimum cite them — **what it must not do is retype `"Orbitron", sans-serif`
+  or a bare `4px` as if it were choosing.** Nothing on the Tabletop uses them yet; ticket 11's
+  `mtg-zone` is the first customer.
 - **`apps/tabletop` now has the fleet tokens and the fonts** (`4396aea`), so a `var(--deep-space)`
   there resolves and Orbitron loads. What it still lacks is a **stylesheet of its own** — the
   first Tabletop-only rule has nowhere to live, and inline styles are the status quo by inertia.

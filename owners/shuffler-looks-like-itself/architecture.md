@@ -6,8 +6,9 @@ The negotiable part: which file owns what, what loads where, and the traps.
 
 **The fleet's shared tokens live outside both ships** (`4396aea`, 2026-08-07).
 `packages/design-tokens/tokens.css` (`@fleet/design-tokens`, a workspace — `packages/*` is in
-the root `workspaces` glob) holds the identity palette, `--narrow-border` and `--mana-*`. Two
-delivery paths for one file:
+the root `workspaces` glob) holds the identity palette, `--narrow-border`, `--mana-*`, the three
+type roles `--font-chrome`/`--font-content`/`--font-display`, and `--radius-soft` (the last five
+added `f79bc7d`, 2026-08-07). Two delivery paths for one file:
 
 | Ship | How it arrives | Consequence |
 | --- | --- | --- |
@@ -72,7 +73,7 @@ Per-view `additionalStyles` today:
 
 | File | Owns | Loaded by |
 | --- | --- | --- |
-| `packages/design-tokens/tokens.css` | **The fleet's shared tokens** — identity palette, `--narrow-border`, `--mana-*`. Not a Shuffler file | every page of **both ships** |
+| `packages/design-tokens/tokens.css` | **The fleet's shared tokens** — identity palette, `--narrow-border`, `--mana-*`, the three type roles, `--radius-soft`. Not a Shuffler file | every page of **both ships** |
 | `styles.css` | Global reset, body font, `.mtg-card-image`, error/debug helpers, `.hidden`, `.pushable-flat`, **the global `:focus-visible` ring**, and a `:root` holding only `--background-color` | every page |
 | `site.css` | Site pages: header, footer, hero, slogan, steps, `.button-base` family | every EJS page |
 | `playmat.css` | **Shared by game and prepare**: **the bare `.playmat` rule — the mat's whole shared appearance (art, `background-size`/`-position`, `border: 10px solid black`), filled in by `a4991f3`**, library stack, card/library buttons, command zone, **the deck-title plaque's *appearance* (`.game-title`)**, all modal styles, card-type icons, card modal | game (TS) + prepare (EJS) |
@@ -139,7 +140,7 @@ them** (was four; corrected 2026-08-07 after `4396aea` + `a8e2427`).
 
 | File | What's in it | Verdict |
 | --- | --- | --- |
-| `packages/design-tokens/tokens.css` | identity palette, `--narrow-border`, `--mana-W/U/B/R/G` | **the one true `:root`** — shared tokens go here, and it isn't in this ship |
+| `packages/design-tokens/tokens.css` | identity palette, `--narrow-border`, `--mana-W/U/B/R/G`, `--font-chrome`/`--font-content`/`--font-display`, `--radius-soft` | **the one true `:root`** — shared tokens go here, and it isn't in this ship |
 | `styles.css` | `--background-color` only | Shuffler-only site chrome; fine |
 | `docs.css` | `--text-light`, `--link-color`, `--link-hover` | **no longer a re-declaration** — the three shared tokens it copied were deleted in `a8e2427`. These three are genuinely docs-only |
 | `game.css` | `--playmat-one`, `--playmat-two` | **deliberately left behind**, not overlooked — whether the playmat colours are the fleet's is buoyed as `playmat-colours-fleet-or-shuffler` |
@@ -205,12 +206,28 @@ app. It only became fixable with `a4991f3`, which created a bare `.playmat` rule
 inheriting; tracked as `design-playmat-specimen` in the repo-root `TODO.md`. It is gallery
 surgery, not a one-line swap — the stage needs a thinner frame at specimen scale.
 
-**Second, smaller exception — the token swatches hard-code their hexes.** Each `.swatch-chip`
-in the "Named tokens" grid carries `style="background: #221534"` rather than
+**Second, smaller exception — the *colour* swatches still hard-code their hexes.** Each
+`.swatch-chip` in the "Named tokens" grid carries `style="background: #221534"` rather than
 `var(--deep-space)`, so the grid *describes* the palette instead of *rendering* it. Harmless
 while the values are right, but it means the grid would keep showing the brand colours even if
 `/fleet/tokens.css` 404'd. The spec's stylesheet-200 assertion is what covers that today;
-switching the chips to `var()` would make the gallery self-checking. Noted, not done.
+switching the chips to `var()` would make the grid self-checking. Noted, not done.
+
+**The equivalent gap in Typography is CLOSED (2026-08-07, with `f79bc7d`).** The four type
+specimens used to be inline `font-family: 'Risque', cursive` literals — describing the palette,
+exactly like the swatch chips. They now read `var(--font-display)` / `var(--font-chrome)` /
+`var(--font-content)` and each `type-meta` names its token, so the section fails visibly if the
+shared sheet doesn't load. **This is the pattern for finishing the swatch chips**: a `var()` swap
+is not an appearance change when the token's value is the literal it replaces. `monospace` stays
+a literal in the fifth row on purpose — it's a genuine one-off with no token.
+
+**`design-gallery.css` uses the type tokens, and that is deliberate, not a leak.** The rule
+"gallery chrome must never be copied into the app" is about *components* — `.badge`, `.stage-*`,
+`.option-label` have no business in the app. Consuming the fleet's shared dictionary runs the
+other way: the gallery renders specimens, and gallery chrome set in a foreign typeface would make
+the museum look unlike the fleet it exhibits. Same for `design-candidates.css`, whose whole
+purpose is to stage things that will become app CSS. **Take tokens from the fleet; don't give
+selectors to the app.**
 
 `test/verification/verify-design-gallery.spec.ts` protects the arrangement:
 

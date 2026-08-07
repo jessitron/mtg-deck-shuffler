@@ -160,11 +160,19 @@ exactly where the pointiness reason applies (raised things, pressed things). Thi
 fleet-wide, including to canvas shapes: a zone boundary is a flat surface you don't press, so
 it's `0`; a pressable drawn on the canvas would be `4px`.
 
-`--radius-soft` is a **new token** and needs a swatch in `design.ejs`'s "Named tokens" grid in
-the same commit as the sweep. **Where it lives is now a question, not a given** (since
-`4396aea`): the decided rule is stated as applying *fleet-wide, including to canvas shapes*,
-which argues for `packages/design-tokens/tokens.css`; but nothing on the Tabletop uses it yet,
-which argues for `styles.css`. Decide it explicitly in the sweep rather than defaulting.
+**The token now exists — the sweep does not (2026-08-07, `f79bc7d`).** `--radius-soft: 4px`
+landed in `packages/design-tokens/tokens.css` alongside the font tokens. **Where it lives was
+decided, not defaulted:** shared, for the same canvas-can't-use-CSS reason as the fonts — the
+rule is stated fleet-wide *including canvas shapes*, and a tldraw shape passes a radius from
+TypeScript where no stylesheet convention reaches. Naming the already-decided value is not a
+new appearance decision, which is why it was allowed to ride with the font work.
+
+So what remains here is purely the **sweep**: the ~13 hand-written values below still say `2px`,
+`5px`, `10px`… **They are drift, not precedent** — a comment in `tokens.css` says so, and so
+does `/design` → Geometry. `--radius-soft` is documented in the Geometry section of
+`design.ejs` rather than as a colour swatch in the "Named tokens" grid; when the sweep lands,
+convert that section's `.choice` block (whose two staged options are the *original* question —
+Jess picked neither) into a plain specimen.
 
 **The `playmat.css` radius rules, by selector** (grep `border-radius` in that file to see all
 twelve at once): `.library-card-back::before` 8px *(keep — physical)*, `.library-buttons
@@ -421,7 +429,7 @@ Do these as their own commits once the choices are settled. They're mechanical.
 
   | `:root` | What's in it | Verdict |
   | --- | --- | --- |
-  | `packages/design-tokens/tokens.css` | the identity palette, `--narrow-border`, `--mana-*` | the fleet's one dictionary — shared tokens go **here** |
+  | `packages/design-tokens/tokens.css` | the identity palette, `--narrow-border`, `--mana-*`, **`--font-chrome/-content/-display`, `--radius-soft`** (added `f79bc7d`, 2026-08-07) | the fleet's one dictionary — shared tokens go **here** |
   | `styles.css` | `--background-color` only | Shuffler-only site chrome; fine |
   | `docs.css` | `--text-light`, `--link-color`, `--link-hover` | no longer a re-declaration — three genuinely docs-only tokens. Promoting them is its own decision |
   | `game.css` | `--playmat-one`, `--playmat-two` | **deliberately left**, not an oversight — see `playmat-colours-fleet-or-shuffler` in `TODO.md` |
@@ -479,12 +487,31 @@ self-rendering custom shape.
   choice. Ticket 05 (tap motion) and ticket 11 (what a zone looks like) will both want one.
   Whoever writes that rule decides where Tabletop CSS lives — and it must not be answered by
   starting a `:root` there.
-- **Still open: font tokens.** `--font-chrome` / `--font-content` / `--font-display` were put to
-  Jess with the token package and she has **not answered** — so they are *unresolved*, not
-  rejected. Colours shipped alone. Today the three typefaces are named literally in three places
-  (`views/partials/head.ejs`, `src/view/common/html-layout.ts`, `apps/tabletop/index.html`), and
-  the font `<link>` is duplicated across all three; one delivery mechanism fleet-wide (a `<link>`
-  **or** `@font-face`, never both), and self-hosting would be a change to all three at once.
+- **~~Still open: font tokens.~~ DECIDED and shipped 2026-08-07 (`f79bc7d`).** Jess: *"yeah, go
+  for it! I'm all for more tokens."* `--font-chrome` / `--font-content` / `--font-display` are in
+  `packages/design-tokens/tokens.css`, **named by role rather than by typeface** because three
+  faces with fixed jobs make the role the stable name and the face the detail. All **39**
+  `font-family` literals across nine Shuffler stylesheets were swept onto them in the same
+  commit — swept rather than merely added, because a token nobody uses is just a second way to
+  say the same thing, which was the main argument against having one. `scripts/sweep-font-literals.sh`
+  keeps the exact substitutions reviewable. Both ships' `verify-fleet-tokens.spec.ts` now assert
+  the three (plus `--radius-soft`) resolve.
+
+  **A real convergence rode along and is recorded as a decision, not an accident.** `styles.css`'s
+  `body` said `font-family: "Ovo", Arial, sans-serif` while all nine other Ovo sites said
+  `"Ovo", serif`; the token settles it as `"Ovo", serif`. Only observable if Ovo fails to load —
+  but it *is* a behaviour change, and it was the agent's to make, not Jess's. That drift, plus
+  quoting split between single and double quotes, is the concrete evidence that justified
+  tokenising type at all.
+
+  **What is still literal, and correctly so:** the typeface names in the three `<head>`s
+  (`views/partials/head.ejs`, `src/view/common/html-layout.ts`, `apps/tabletop/index.html`), where
+  the Google Fonts `<link>` *fetches* the files. That is delivery, not naming a face in a rule, and
+  a CSS custom property can't reach it. The standing rule holds: one delivery mechanism fleet-wide
+  (a `<link>` **or** `@font-face`, never both), and self-hosting is a change to all three at once.
+
+  **The Tabletop uses none of these yet** — nothing there sets a font. They exist for ticket 11's
+  `mtg-zone` shape, which is exactly the case the tokens were created for.
 - **`LandingPage.tsx` is a live, unrecorded Layer-1 violation.**
   `apps/tabletop/src/client/LandingPage.tsx` carries an off-brand green/cream palette in inline
   styles — `#1a2a1f`, `#f5f1e8`, `#3d5a45` — with no relationship to purple-and-pink. It is the
