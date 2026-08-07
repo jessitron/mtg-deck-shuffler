@@ -178,6 +178,25 @@ section is just a wall between Jess and the live work.
     work, or viewport-in-the-URL may have been silently dead since the v5 upgrade.
   - One-sitting check: load a table, pan, and see whether the URL updates.
 
+- [ ] `card-zoom-modal` Give a Tabletop card a modal overlay that shows its text really big, and offers flip
+  - Jess, verbatim, 2026-08-07: *"Something cards do need to offer: a modal overlay that displays
+    the card text really big, and offers flip, similar to Deck Shuffler. This is not needed to
+    replace Mural though, it's later."*
+  - **This is the Tabletop** (`apps/tabletop`), not the Shuffler. A card there is becoming a custom
+    tldraw shape type `mtg-card` — decided in `.scratch/tabletop-physics/issues/02-what-a-card-is.md`,
+    which gives it `frontImageUrl` / `backImageUrl` / `face` / `faceDown` props and makes the shape
+    render its own image. A zoom modal renders off those same props; nothing new needs fetching.
+  - *"similar to Deck Shuffler"* points at the Shuffler's existing card modals. The `library-search`
+    and `two-faced-cards` owners both know that surface — consult them before designing a
+    parallel one.
+  - **Explicitly not Mural parity.** Jess scoped it as later work, after the
+    `tabletop-replaces-mural` mountain. No `mountain:` below because it isn't confidently placed.
+  - Related: `.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` must choose a **flip
+    trigger**, and `onClick` on a card is already taken by tap (ticket 04, being resolved now). A
+    zoom modal is a plausible home for the flip affordance — so 06 may want to know this exists,
+    even though 06 lands first and this doesn't block it.
+  ← priority: later
+
 ## Backlog
 
 - [ ] `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there  ← was: JES-85
