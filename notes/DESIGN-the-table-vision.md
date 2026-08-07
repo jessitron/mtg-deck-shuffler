@@ -156,6 +156,20 @@ Visibility cuts across all kinds orthogonally.
 - **Consensus is expressed physically.** At a real table, agreement looks like nobody
   stopping you. The interpreter reads the players, not the rules — it can never be a
   rules engine (still a non-goal).
+- **The players own the game experience.** They enforce the rules, not the app. Jess,
+  2026-08-07: _"I don't mind if people can cheat here. If people wanna cheat, it's their
+  game."_ This is the positive form of "not a rules engine," and it decides designs, not
+  just features: **the app need not conceal information, and need not prevent actions.**
+  A face-down card on the Tabletop is *depicted* face-down, not cryptographically hidden
+  — its identity stays in the shape, readable by anyone who looks, because the table is
+  trust-based and the players are on a call together. It also means capabilities can be
+  left deliberately unguarded: "let a player look at a face-down card" needed no feature,
+  because turning a card over already does it and nothing stops them. Before building a
+  restriction, ask whether the players would rather just be trusted.
+  (Contrast the one thing that *is* guarded: `gameCardIndex` never crosses the wire,
+  because a decodable secret leaks the **hidden zones the Shuffler exists to keep** —
+  library order and hands. Concealing what a player chose to place is not the same as
+  leaking what nobody chose to reveal.)
 - **The humans teach the AI in public, during play.** The chat panel is the eval
   machine, and the teaching is part of the game record.
 - **Don't carry what you can listen to.** Discord keeps the voice call; we transcribe.
