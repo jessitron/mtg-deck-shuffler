@@ -143,28 +143,41 @@ section is just a wall between Jess and the live work.
     makes a constraint on every mountain: "public events, commentary, hand counts but never hands."
   ← mountain: tabletop-replaces-mural
 
-- [ ] `verify-suite-speed` Instrument the verification suite, *then* optimize it
-  - `apps/shuffler/verify.sh` runs 52 Playwright tests in **~9.5 minutes**. That's slow enough
+- [ ] `verify-suite-speed` Instrument the **test harness**, then optimize the suite
+  - `apps/shuffler/verify.sh` runs 52 Playwright tests in 3.6–9.5 minutes. That's slow enough
     that nobody runs it, so nobody learns whether a change broke something — and red stops
     meaning anything. Three table-mode specs were broken for weeks before anyone looked
     (fixed 2026-08-07; the cause was a `<details>` disclosure the specs never learned about).
-  - **Instrument before optimizing.** The fleet already exports OTel to Honeycomb and
-    `verify.sh` sources `.be`/`.env`, so a full run is already emitting traces to environment
-    `local` — go read them rather than guessing. Where does the time actually go: server
-    startup? deck loading from disk (or Scryfall) on `/choose-any-deck`? the precon-tile HTMX
-    load? Playwright's own auto-waits? The specs are also littered with fixed
-    `waitForTimeout(500|1000)` calls, which are pure unconditional cost.
+  - **The work is instrumenting the harness. The app is already ruled out — measured, not
+    assumed.** A run does emit app traces (`verify.sh` sources `.be` then `.env`, so the server
+    exports to Honeycomb team `modernity`, env `local`, dataset `mtg-deck-shuffler`; browser
+    spans go to `mtg-deck-shuffler-web`). Reading them on 2026-08-07 across four full runs:
+    **total `SUM(duration_ms)` over all 3,570 spans in 6 hours was ~48 seconds**, and that's
+    inflated because parent and child spans both count. The same window contained ~22 minutes
+    of suite runs. **So server-side work is ~1–2% of wall clock.**
+    Query: https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-deck-shuffler/result/vZWiRDexbsm
+  - So the existing traces answer exactly one question — *it isn't the server* — and then stop.
+    The other ~98% is Playwright, browser startup, process spawn, and the fixed sleeps, and
+    **none of it is instrumented.** That's the gap to close first: get spans around test
+    lifecycle (per-spec, per-hook, browser launch, server boot, `page.goto`, each explicit
+    wait) so the suite's own time is queryable the way the app's already is. Only then optimize.
+  - Worth having in view while designing that: a run's spans should share a trace or a run id,
+    so one run is one queryable thing rather than a smear across a time window.
+  - **Two app-side facts found while ruling the app out** — small, but they're the only real
+    server-side costs, so don't lose them: `tls.connect` (4 spans, **4.5s p95**) means the suite
+    still reaches the internet, almost certainly Scryfall; and `GET /proxy-image` (4 calls,
+    **2.4s total**) is by far the slowest route per call. Everything else is single-digit ms.
+  - **An observation the harness instrumentation will have to account for** — recorded so it
+    isn't lost, *not* a lead to chase: four consecutive runs, same tests, no changes, went
+    9.5 → 5.4 → 5.2 → **3.6 minutes**. `data.db` is never reset between runs. Don't theorize
+    about it in advance; measure, and see whether it shows up.
+  - Consequence worth keeping in view: the suite doesn't have *one* duration, so "how slow is
+    it" needs a stated condition (cold vs warm) before it has an answer.
   - Worth knowing: `workers: 1` and `fullyParallel: false` in `playwright.config.ts` are
     deliberate ("we're testing concurrent state"), so parallelism is a decision to make, not a
     free win.
-  - **One observation the instrumentation will have to account for**, recorded so it isn't
-    lost — *not* a lead to chase first: four consecutive full runs on 2026-08-07, same tests,
-    no changes, went 9.5 → 5.4 → 5.2 → **3.6 minutes**. `data.db` is never reset between runs.
-    Whatever the traces say, they have to explain that spread. Don't theorize about it in
-    advance; measure, and see whether it shows up.
-  - Consequence worth keeping in view: the suite doesn't have *one* duration, so "how slow is
-    it" needs a stated condition (cold vs warm) before it has an answer.
-  - Jess asked for this on 2026-08-07, mid-fix on those three specs.
+  - Jess asked for this on 2026-08-07, mid-fix on those three specs, and confirmed the same day
+    that harness instrumentation is what she's after.
   - Related: `set-up-ci` below — a cold-start suite is what CI actually pays per push, so these
     two want deciding together.
 
