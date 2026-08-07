@@ -173,6 +173,21 @@ expensive way round.
   hand or library goes back to `face:'front'`, `faceDown:false`, mirroring the Shuffler's
   `mulligan()` reset; which zone-entry mechanism performs it is implementation, not decision.
 
+- **A card tucks behind another card via the same card-hosted parenting counters use, defaults to
+  the front on drop, and is explicitly reordered backward when it needs to read as underneath** —
+  [Decide how a card tucks behind another card](issues/09-cards-behind-cards.md), resolved
+  2026-08-07. No card-type-aware default (the Tabletop has no card-type prop to key one on):
+  dropping any passenger — counter, note, or card — lands wherever dropped, on top by default;
+  reading as tucked-under is a "send backward" context-menu command, the same surface as tap/
+  flip/lock, and the same drop-position + send-backward combo covers both a partial peek
+  (equipment) and a fully solid cover (an ability's more literal "put it under this card") — the
+  Tabletop draws no distinction between the two, the table does. Rotation does **not** ride along
+  with the host's tap (Jess rejected that — an aura shouldn't visibly tap with its creature),
+  which costs an explicit counter-rotation compensation ticket 04's free tap-delta didn't need,
+  reconciled back to zero at detach. A host leaving the battlefield auto-detaches every passenger,
+  which stays behind, unattached, wherever it was — never routed to a "correct" destination
+  (graveyard, exile, back to the battlefield), because that destination is rules knowledge the
+  physics layer doesn't have: *"let the players sort that out."*
 - **A note is tldraw's stock note shape, never `mtg-counter`, but it attaches and detaches exactly
   like one** — [Decide how a note attaches to a card, and how it differs from a
   counter](issues/08-notes-on-cards.md), resolved 2026-08-07. Type stays distinct — no
@@ -186,17 +201,6 @@ expensive way round.
 
 ## Not yet specified
 
-- **Which attachment mechanism suits which passenger.** The [research
-  ticket](issues/01-tldraw-custom-shape-facts.md) narrowed the field: *parenting* is the cheap
-  one (children ride the parent transform, no custom type); *grouping* auto-dissolves at one
-  child, so it cannot hold a single counter; *bindings* move nothing by themselves and cost the
-  same registration as a shape; only a **custom container** (`BaseFrameLikeShapeUtil` /
-  `onDragShapesIn`) gives furniture the target-side hooks. Ticket 02 settled the half that was
-  blocking this: the shape architecture is a custom type, and **a card carries nothing about its
-  passengers** — a passenger knows which card it's parented to, not the reverse. What's still
-  foggy is per-passenger: whether a counter, a post-it, and a tucked card each want parenting or
-  a binding, and whether a *card* must itself become frame-like to catch a counter dropped on it
-  (`onDragShapesIn` is a frame behaviour). Tickets 07/08/09 will phrase those.
 - **Where Tabletop CSS tokens and fonts live.** `apps/tabletop` has **no CSS source file at all**
   (only a built `dist/client/assets/*.css`) and no font `<link>` or `@font-face` anywhere, while the
   fleet's Layer-1 craft rule says "use `var(--…)`, not a literal" applies to the Tabletop today. A
