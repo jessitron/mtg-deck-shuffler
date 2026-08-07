@@ -148,28 +148,6 @@ section is just a wall between Jess and the live work.
   106.5s). 01 and 02 are resolved; the frontier is 03 (setup cost), 04 (superfluous tests),
   and 07 (the never-reset 37 MB `data.db`). Say "work the verify-suite-speed map" to continue.
 
-- [ ] `no-ship-flushes-on-sigterm` Spans are probably lost on every shutdown, everywhere
-  - `apps/shuffler/src/tracing.ts` calls `sdk.start()` and registers **no shutdown hook**, and
-    `verify.sh`'s `cleanup()` kills the server with SIGTERM. Node exits immediately on SIGTERM,
-    so up to `scheduledDelayMillis` (5s default) of the last `BatchSpanProcessor` batch is very
-    likely dropped **every verify run** — and k8s terminates with SIGTERM too, so prod has the
-    same hole.
-  - Consequence worth naming: the ~48s app-side figure in `.scratch/verify-suite-speed/` is a
-    **floor, not a measurement**.
-  - Found 2026-08-07 by `fleet-is-observable-context` while triaging the verify suite; it
-    recorded this as a gap in its own KB (the wiring table says log processors "share the
-    shutdown path with traces", which is true of the SDK but misleading — nothing calls
-    `sdk.shutdown()`).
-  ← mountain: overhead
-
-- [ ] `verify-sh-dead-failure-branch` `verify.sh`'s "tests failed" message is unreachable
-  - `set -e` is on, so a nonzero `npx playwright test` aborts the script before
-    `TEST_EXIT_CODE=$?` runs. The branch that prints "Verification tests failed!" can only ever
-    see 0. Observable behavior is still right (the trap runs cleanup, the shell exit code is
-    still Playwright's) — it's the message that's dead. One-sitting fix.
-  - Found 2026-08-07 while triaging `verify-suite-speed`.
-  ← mountain: overhead
-
 - [ ] `deeplinks-prop-moved` Check whether `<Tldraw deepLinks>` still does anything
   - tldraw **v5.0.0 moved `deepLinks` from a top-level `<Tldraw>` prop into `options`**, and
     `apps/tabletop/src/client/TablePage.tsx:82` still passes it top-level. Found incidentally by
@@ -445,11 +423,3 @@ section is just a wall between Jess and the live work.
     HTMX-swapped fragments, so whatever moves focus has to run on swap (`htmx:afterSwap`), not on
     page load — and closing is also an HTMX swap, so focus restore hooks the same place.
 
-- **`{ force: true }` on the card-modal nav clicks — is it still needed?** Nine sites across
-  `verify-library-grouping.spec.ts` and `verify-query-parameter-modals.spec.ts`. It was added
-  "in case of viewport issues with modal positioning", and it *disables* Playwright's
-  actionability/stability wait — which is precisely why a click can straddle an htmx swap and be
-  swallowed (`owners/animations/interactions.md:27`). Ticket 02 worked around the symptom with
-  `expect(...).toPass()` rather than changing two things at once. If the viewport issue is gone,
-  dropping `force: true` would let Playwright absorb the straddle for free and the retries could
-  come back out.
