@@ -6,9 +6,9 @@
  * appears on the table's canvas; Discard does the same with zoneHint
  * "graveyard".
  *
- * This spec starts its own tabletop server on port 5180 (the Shuffler's
- * default TABLETOP_URL) from apps/tabletop/dist. If the tabletop isn't built
- * yet, the spec is skipped with a note — build it with
+ * This spec starts its own tabletop server at TABLETOP_URL (verify.sh gives
+ * each run its own random port; 5180 otherwise) from apps/tabletop/dist. If the
+ * tabletop isn't built yet, the spec is skipped with a note — build it with
  * `cd apps/tabletop && npm run build`.
  *
  * RUN: npm run test:verify
@@ -20,7 +20,11 @@ import * as path from 'node:path';
 import * as fs from 'node:fs';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
-const TABLETOP_URL = 'http://localhost:5180';
+// verify.sh gives each run its own tabletop port and exports TABLETOP_URL to
+// both the Shuffler server and this process, so we spawn the tabletop exactly
+// where the Shuffler will look for it.
+const TABLETOP_URL = process.env.TABLETOP_URL ?? 'http://localhost:5180';
+const TABLETOP_PORT = new URL(TABLETOP_URL).port || '5180';
 const TABLETOP_DIR = path.resolve(process.cwd(), '..', 'tabletop');
 const TABLETOP_SERVER = path.join(TABLETOP_DIR, 'dist', 'server', 'server.js');
 
@@ -34,7 +38,7 @@ test.beforeAll(async () => {
   if (!tabletopBuilt) return;
   tabletop = spawn('node', [TABLETOP_SERVER], {
     cwd: TABLETOP_DIR,
-    env: { ...process.env, PORT: '5180' },
+    env: { ...process.env, PORT: TABLETOP_PORT },
     stdio: 'ignore',
   });
   // Wait for the tabletop to answer /health
@@ -47,7 +51,7 @@ test.beforeAll(async () => {
     }
     await new Promise((r) => setTimeout(r, 500));
   }
-  throw new Error('Tabletop server did not become healthy on port 5180');
+  throw new Error(`Tabletop server did not become healthy at ${TABLETOP_URL}`);
 });
 
 test.afterAll(() => {
@@ -61,6 +65,15 @@ async function startGameAtTable(page: Page, tableName: string): Promise<void> {
   await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
   await preconTiles.first().click();
   await page.waitForURL('**/prepare/*', { timeout: 30000 });
+
+  // The table/player inputs live inside a `<details class="join-table-details">`
+  // disclosure, rendered `open` only when the prep already has a table or player
+  // name — so on a fresh prep they are display:none until the summary is clicked.
+  const details = page.locator('details.join-table-details');
+  if (!(await details.evaluate((el: HTMLDetailsElement) => el.open))) {
+    await page.locator('summary.join-table-summary').click();
+  }
+  await expect(page.locator('input[name="table-name"]')).toBeVisible();
 
   await page.locator('input[name="table-name"]').fill(tableName);
   await page.locator('input[name="player-name"]').fill('E2E Jess');

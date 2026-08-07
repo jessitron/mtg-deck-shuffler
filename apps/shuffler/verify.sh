@@ -15,6 +15,7 @@ set -e
 # inline `PORT=$VERIFY_PORT node ...` below overrides that for this process only.
 VERIFY_PORT=$(( (RANDOM % 20000) + 20000 ))
 BASE_URL="http://localhost:$VERIFY_PORT"
+VERIFY_TABLETOP_PORT=$(( (RANDOM % 20000) + 40000 ))
 
 # Colors for output
 GREEN='\033[0;32m'
@@ -41,6 +42,14 @@ done
 if [ -f .env ]; then
     source .env
 fi
+
+# The tabletop this run talks to gets its own random port, so a verification run
+# never sees (or is seen by) the dev fleet's tabletop on the default 5180. Set
+# AFTER .env so it wins. Two specs depend on it: verify-tabletop-integration
+# spawns ITS OWN tabletop at this address, and verify-table-mode's
+# send-then-commit case needs the address to be unreachable while it runs.
+export TABLETOP_URL="http://localhost:$VERIFY_TABLETOP_PORT"
+echo -e "${YELLOW}Tabletop address for this run: $TABLETOP_URL${NC}"
 
 # Start server on the chosen port in the background
 echo -e "${YELLOW}Starting server on port $VERIFY_PORT...${NC}"

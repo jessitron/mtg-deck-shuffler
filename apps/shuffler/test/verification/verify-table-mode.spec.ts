@@ -26,9 +26,24 @@ async function goToPrepare(page: any): Promise<void> {
   await page.waitForLoadState('networkidle');
 }
 
+/**
+ * The table/player name inputs live inside a `<details class="join-table-details">`
+ * disclosure that is only rendered `open` when the prep already has a table or
+ * player name — so on a freshly-prepared deck they are display:none. Click the
+ * "Join a table" summary to reveal them.
+ */
+async function openJoinTable(page: any): Promise<void> {
+  const details = page.locator('details.join-table-details');
+  if (!(await details.evaluate((el: HTMLDetailsElement) => el.open))) {
+    await page.locator('summary.join-table-summary').click();
+  }
+  await expect(page.locator('input[name="table-name"]')).toBeVisible();
+}
+
 test.describe('Table mode', () => {
   test('prep screen has optional table and player name inputs; solo (blank) games show no table link', async ({ page }) => {
     await goToPrepare(page);
+    await openJoinTable(page);
 
     await expect(page.locator('input[name="table-name"]')).toBeVisible();
     await expect(page.locator('input[name="player-name"]')).toBeVisible();
@@ -41,6 +56,7 @@ test.describe('Table mode', () => {
 
   test('joining a table shows a "Go to Table" spectator link on the game page, surviving restart', async ({ page }) => {
     await goToPrepare(page);
+    await openJoinTable(page);
 
     await page.locator('input[name="table-name"]').fill('verify-table');
     await page.locator('input[name="player-name"]').fill('Playwright Jess');
@@ -62,9 +78,12 @@ test.describe('Table mode', () => {
   });
 
   test('send-then-commit: when the tabletop is unreachable, the play is blocked and the card stays in hand', async ({ page }) => {
-    // This test relies on no tabletop running at TABLETOP_URL (verify.sh does
-    // not start one for this suite; the two-app spec manages its own).
+    // This test relies on no tabletop running at TABLETOP_URL. verify.sh points
+    // TABLETOP_URL at a random per-run port that nothing is listening on (so the
+    // dev fleet's tabletop on 5180 can't accidentally satisfy the send); the
+    // two-app spec spawns its own tabletop there, after this spec has run.
     await goToPrepare(page);
+    await openJoinTable(page);
     await page.locator('input[name="table-name"]').fill('unreachable-table');
     await page.locator('input[name="player-name"]').fill('Blocked Jess');
     await page.locator('button.begin-button').click();
