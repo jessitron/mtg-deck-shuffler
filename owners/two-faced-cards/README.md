@@ -12,14 +12,29 @@ kind: feature
 Identity is the Scryfall ID — it captures the exact printing, all faces, all names,
 all image URIs. Which face is showing is *state* that travels with the card instance,
 matters at play time (MDFCs are played as a chosen face), and is never part of the
-card's identity. Every component of the fleet that touches cards must hold this:
+card's identity.
+
+**And face is two axes, not one** (decided 2026-08-07): **`face`** (`front`|`back` — which
+*printed side* is chosen) is orthogonal to **face-down** (concealment — the identity is
+hidden, and it looks like a card back or sleeve *even on a two-faced card*). A one-bit
+"which side is up" model was proposed and rejected. So `face: "back"` is unreachable on a
+one-faced card; a one-faced card turned over is **face-down**, not `face: back`.
+
+**"Flip" does not mean the same thing on the two ships.** On the Shuffler, flip is
+*inspection of a two-faced card* — a one-faced card cannot be flipped and shows no flip
+affordance. On the Tabletop, *any* card can be turned over, because a card on a table is a
+physical object with two sides; turning over a one-faced card puts it **face down**, which
+is a real domain event. Full table in [tabletop.md](tabletop.md).
+
+Every component of the fleet that touches cards must hold this:
 
 - **Shuffler** — tracks `currentFace` on each GameCard, renders flip buttons, sends
   the current face when a card leaves its boundary. The bulk of this knowledge base
   (architecture, interactions, files, history) is Shuffler-component knowledge.
-- **Tabletop** — renders the *played* face on arrival (`face` in the card.played
-  payload picks front/back image); a future flip gesture is Tabletop physics.
-  See [tabletop.md](tabletop.md).
+- **Tabletop** — renders the *played* face on arrival (the Shuffler bakes it into
+  `imageUrl`; the Tabletop validates `face` and drops it, so it cannot change a card's
+  face today). Turning over, transform, and face-down are Tabletop physics, being
+  designed now. See [tabletop.md](tabletop.md).
 - **Contract** — every event about playing/revealing a card carries `face` beside
   `card: { scryfallId, instanceId }`. Names and image URLs are derivable
   conveniences, not identity. See [contract.md](contract.md).
@@ -49,6 +64,7 @@ Players encounter two-faced cards throughout the app:
 | Aspect | Details |
 |---|---|
 | Data type | `CardDefinition.twoFaced` flag, `CardDefinition.cardTypes` (union of all faces' types), `GameCard.currentFace` |
+| Face-down (concealment) | **Not modeled anywhere in the fleet yet** — no field on `CardDefinition`/`GameCard`, nothing in `contracts/`. Being designed on the Tabletop (ticket 02); a Shuffler "Play Face-Down" button was dropped to the Mural-parity buoy list. The Shuffler's `CARD_BACK` image is library-stack decoration, not modeled state |
 | Type definitions | `src/types.ts` (CardDefinition), `src/port-persist-state/types.ts` (GameCard) |
 | State mutation | `GameState.flipCard()` in `src/GameState.ts` |
 | Game routes | `POST /flip-card/:gameId/:gameCardIndex`, `POST /flip-card-modal/:gameId/:gameCardIndex` |

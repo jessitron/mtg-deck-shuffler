@@ -203,3 +203,47 @@ environment. The trace made the diagnosis — the error was on the **outbound cl
   `test/verification/verify-proxy-image.sh` (live CDN, front + back). The script exists because
   the unit test can only prove we *send* a User-Agent, not that Scryfall *accepts* it — which
   is exactly the gap the bug lived in.
+
+## Face and Face-Down Are Two Axes; the Two Ships Differ (design decision, 2026-08-07)
+
+**No code changed.** Jess made this call while resolving
+`.scratch/tabletop-physics/issues/02-what-a-card-is.md` (map
+`.scratch/tabletop-physics/map.md`), which this owner had been consulted on.
+
+- **Two-axis model confirmed and sharpened.** This owner had argued `face` (`front`|`back`,
+  which printed side) and face-down (concealment, generic card back) are orthogonal, on the
+  strength of manifest/morph. Jess gave a better reason: **a two-faced card can be _played_
+  face down** — so both axes are reachable in ordinary play, not just in a rules corner.
+  Her words: *"In our domain model, 'Face Down Card' will be a real thing, and it looks like
+  a card back (in the future: a card sleeve) even if the card itself is two-faced."*
+- **A one-bit "which side is up" model was proposed and rejected.** Consequence now recorded
+  in interactions.md watch point 12: `face` ranges over **printed sides only**, so
+  `face: "back"` is unreachable on a one-faced card — a one-faced card turned over is
+  face-down.
+- **The load-bearing new fact: the ships diverge deliberately.** Jess: *"in Deck Shuffler, a
+  one-faced card cannot be flipped. On Tabletop, it can. We need to be very clear on that."*
+  The Shuffler's flip is *inspection of a two-faced card*; the Tabletop's is *turning over a
+  physical object*, and turning over a one-faced card is a real domain event (this card is
+  now face down). Turning over a two-faced card is a **transform**, not face-down. A
+  `CONTEXT-MAP.md`-shaped divergence in the word "flip"; there is no `CONTEXT-MAP.md` in the
+  repo yet, so the translation table lives in tabletop.md. **Shuffler behavior unchanged.**
+- **Correction to tabletop.md.** It claimed the Tabletop "stores `face` for later." It never
+  did — `apps/tabletop/src/server/cardArrival.ts:50` validates `face` and then drops it;
+  nothing in the shape record, `props`, `meta`, or asset carries it, and the face reaches the
+  canvas only as baked-in pixels in `imageUrl`. Verified in code. Hence: **the Tabletop cannot
+  change a card's face today.** Also corrected the flip-gesture section's claim that the back
+  image URL is "derivable from `scryfallId`" — bare constructed URLs 404 for fresh cards,
+  which is why `backImageUris` is stored; the URL must be *sent*.
+- **Decided so far in ticket 02** (recorded, since it changes this owner's future advice): the
+  card **will** become a genuine custom tldraw shape type rather than continuing to extend
+  `ImageShapeUtil`. tabletop.md's old "reuse `MtgCardImageShapeUtil` for flip" advice is
+  superseded.
+- **Still open, not decided:** props vs `meta`, whether the card renders its own image (which
+  would put both image URLs on the wire — a contract change), and how a concealed card avoids
+  leaking identity through **synced tldraw props** (every client gets the whole shape record —
+  the `gameCardIndex` decodable-secret problem in a new costume).
+- A Shuffler **"Play Face-Down" button was dropped** as a buoy onto the Mural-parity list
+  (`notes/DESIGN-tabletop-replaces-mural.md` already lists "flip a card over (MDFC, and
+  face-down)" as parity work, and puts playing from the library face-down out of scope).
+- **Face-down remains unmodeled fleet-wide**: no field on `CardDefinition`, `GameCard`,
+  `PersistedGameCard`, and nothing in `contracts/`. New watch points 12–14 in interactions.md.

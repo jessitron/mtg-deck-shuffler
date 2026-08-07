@@ -115,10 +115,37 @@ These are specific things that could break two-faced cards if changed elsewhere:
 
 11. **Stale cached deck files**: `twoFaced`/`cardTypes` are baked into `decks/*.json` at download time. Changing adapter logic does NOT retroactively fix already-downloaded decks — they keep their old values until re-downloaded (`npm run deck:download -- <id>` for Archidekt, `npm run precons:fetch-mtgjson -- --convert` for MTGJSON). The deck-file format is version-gated (`PERSISTED_DECK_VERSION`, currently 3); `LocalFileAdapter` rejects mismatched files, so a format change means regenerating all decks.
 
+12. **Don't collapse `face` and face-down into one bit** (decided 2026-08-07). `face`
+    (`front`|`back`) is *which printed side*; face-down is *concealment*, and a two-faced
+    card can be played face down — so both axes are reachable in normal play. A one-bit
+    "which side is up" model was proposed and **rejected**; don't re-derive it. Corollary
+    that catches people: `face: "back"` is **unreachable on a one-faced card** — a
+    one-faced card turned over is face-down. If you find yourself wanting `face: "back"`
+    for a card with one printed side, you want face-down instead.
+
+13. **"Flip" means different things on the Shuffler and the Tabletop — on purpose.** On the
+    Shuffler a one-faced card **cannot** be flipped (no affordance; `GameState.flipCard()`
+    throws). On the Tabletop **any** card can be turned over, because it's a physical
+    object. Do not "fix" the Shuffler to allow flipping one-faced cards for consistency,
+    and do not port the Shuffler's `twoFaced` gate onto a Tabletop turn-over gesture. Full
+    translation table in [tabletop.md](tabletop.md); this is the kind of divergence a
+    `CONTEXT-MAP.md` would carry if the repo had one.
+
+14. **Face-down is not modeled anywhere yet, and adding it touches all three components.**
+    There is no concealment field on `CardDefinition`, `GameCard`, `PersistedGameCard`, or
+    in `contracts/`. Whoever adds it must decide: does the Shuffler need it (a "Play
+    Face-Down" button was dropped to the Mural-parity buoy list, 2026-08-07), does it cross
+    the contract (a new/bumped payload — see [contract.md](contract.md)), and how does a
+    concealed card avoid leaking its identity through **synced tldraw props**, where every
+    client receives the whole shape record. That last one is the `gameCardIndex`
+    decodable-secret problem in a new costume.
+
 ## Not Related To
 
-### Card Back (library face-down)
-The MTG card back image (`/images/mtg-card-back.jpg`, `CARD_BACK` constant) is the generic card back shown for face-down library cards. This is completely unrelated to two-faced cards' back face. Don't confuse "card back" (library stack display) with "back face" (second face of a two-faced card).
+### Card Back (library face-down rendering)
+The MTG card back image (`/images/mtg-card-back.jpg`, `CARD_BACK` constant) is the generic card back shown for library cards. It is unrelated to two-faced cards' **back face**: don't confuse "card back" (the picture) with "back face" (the second printed side of a two-faced card).
+
+Note the 2026-08-07 nuance: the *concept* of a face-down card **is** this owner's territory (it's the second axis alongside `face` — see watch points 12–14), but `CARD_BACK` today is only library-stack decoration, not modeled state. When face-down becomes real, `CARD_BACK` (or a sleeve image) is what renders it — the picture stays a rendering detail, the concealment is the state.
 
 ### Deck Selection Search
 The text filter on the deck selection page (`deck-selection.js`) is a UI filter for finding decks, not cards. Unrelated to two-faced card display or data.
