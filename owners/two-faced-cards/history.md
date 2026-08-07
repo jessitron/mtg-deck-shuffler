@@ -336,6 +336,30 @@ deleted every `networkidle` and fixed `waitForTimeout` from `test/verification/*
   modal its first real face observable and make these two tests verifiable.
 - Recorded as interactions.md watch point 16, an architecture.md observables section, and a
   files.md caveat on the spec.
+## The Modal's Face Observable Gap Was Closed (2026-08-07, ticket `verify-suite-speed/04`)
+
+Follow-up to the finding recorded above (`65f12e8`): added
+`data-current-face="<%= currentFace %>"` to `.card-modal-overlay` in
+`views/partials/card-modal.ejs` — a pure additive attribute, no route change, since
+`currentFace` was already threaded into the template and previously just never rendered.
+
+- Used it to fix the vacuous flip assertion in
+  `test/verification/verify-library-grouping.spec.ts`: both the game and prep `foundFlipCard`
+  loops now assert the modal's `data-current-face` actually changed to `"back"`
+  (`await expect(cardModal).toHaveAttribute('data-current-face', 'back', { timeout: 3000 })`),
+  in addition to the pre-existing assertion that the position indicator is unchanged (the
+  property genuinely under test — flipping must not renumber group-scoped navigation). A
+  flip that never happened (a swallowed click) now fails the test instead of passing
+  silently.
+- This gives the **game** card modal its first strong face observable — previously its flip
+  button was a `hx-post` to a toggling route, byte-identical on both faces, and the only
+  indirect signal was `img.modal-card-image`'s `src`. The **prep** modal already had a weaker
+  indirect signal (the flip button's `hx-get` target face) but now uses the same strong
+  attribute for consistency.
+- Architecture.md's "How to Tell Which Face Is Showing" section and interactions.md watch
+  point 16 updated to make `data-current-face` the first-choice observable in the modal.
+  No `CardDefinition`, persistence, or contract changes.
+
 ## Tabletop Drag Picked Up the Wrong Card — Moved Out (2026-08-07, `959831c`)
 
 Fixed 2026-08-07 (`959831c`): dragging a second card after a first silently re-moved the first
