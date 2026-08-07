@@ -4,6 +4,14 @@ Please help me add OpenTelemetry instrumentation to a TypeScript Node.js service
 
 This instruction is applicable only to a Node.js project written in TypeScript. It is based on documentation at https://docs.honeycomb.io/send-data/javascript-nodejs/opentelemetry-sdk/
 
+**Instrumenting a dev tool rather than a service? This runbook is the wrong shape.** A test
+harness, build script or CLI wants a `BasicTracerProvider` it owns and flushes, no
+auto-instrumentation, no NodeSDK, and manual parenting. The fleet's worked example is
+`apps/shuffler/test/harness-telemetry/` (the Playwright verify reporter → service
+`mtg-fleet-verify`); the pattern, the traps, and the recipe for synthesizing spans from shell
+timestamps are written up in `owners/fleet-is-observable/README.md` → "Dev-tooling telemetry".
+Read that first, then come back here only for the Honeycomb/env bits.
+
 ## Prerequisites
 
 [] Do you have tools to access Honeycomb data? If not, ask the user to set this up. Give them this link: https://docs.honeycomb.io/integrations/mcp/configuration-guide/

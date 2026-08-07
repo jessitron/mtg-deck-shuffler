@@ -109,10 +109,16 @@ lives in its own module with tests (`apps/shuffler/src/telemetry-sampler.ts` +
 `apps/shuffler/test/telemetry-sampler.test.ts`), and reads **both** semconv spellings of every
 attribute it depends on.
 
-### 5. Every span says which build it came from. _(FUTURE — not true yet; `build-sha-on-every-span` in `TODO.md`)_
+### 5. Every span says which build it came from. _(True for ONE init path; `build-sha-on-every-span` in `TODO.md` for the ships)_
 
-**Not yet implemented.** Recorded here at Jess's request (2026-08-01) so it's held as an invariant
-from the moment it lands rather than being rediscovered later.
+**Not yet implemented on any ship.** Recorded here at Jess's request (2026-08-01) so it's held as
+an invariant from the moment it lands rather than being rediscovered later.
+
+**One init path now satisfies it, and it's the newest one**: the verify harness
+(`apps/shuffler/test/harness-telemetry/harnessTracing.ts`) puts the git short sha on its resource
+as `service.version` from day one, plus `verify.git.sha` on every span. That is the standing check
+below working as intended on its first outing — a new init path carried the version without being
+told twice. The three ships still don't.
 
 The intent: each ship carries its deployed git version as an OTel **resource attribute**
 (`service.version` and/or `deployment.sha`), fed by the short sha `deploy.sh` already computes for the
@@ -155,6 +161,27 @@ the wrong shape leaves the exporter `undefined`, the export throws inside a prom
 error handler, and **nothing reaches Honeycomb while the code looks right**. Duplicated telemetry
 files therefore get a test in *each* ship — that is the only reason this was caught.
 
+**`service.name` from a resource vs. from the environment: the two providers behave OPPOSITELY.**
+Checked in `node_modules` at OTel JS 2.8 (2026-08-07), not reasoned:
+
+| Provider | What it does with your `resource` | Sees `OTEL_SERVICE_NAME`? |
+| --- | --- | --- |
+| `BasicTracerProvider` (`sdk-trace-base`) | `mergedConfig.resource ?? defaultResource()` — a plain `??`. An explicit resource **replaces** the default entirely. | **No.** `defaultResource()` never runs `envDetector`; only `EnvDetector` reads the var, and only `NodeSDK` wires it up. Structurally incapable. |
+| `NodeSDK` (`sdk-node`) | `this._resource = this._resource.merge(detectResources(...))` — **detected wins**. | **Yes, and it OVERRIDES you.** An ambient `OTEL_SERVICE_NAME` beats an explicitly configured `service.name`. |
+
+Consequences worth holding:
+
+- Writing `service.name` into the resource in code is **safe under `BasicTracerProvider` and unsafe
+  under `NodeSDK`**. Swapping one for the other silently relocates a service's spans to another
+  dataset. There is a comment against exactly that swap at the call site in `harnessTracing.ts`, and
+  a regression test asserting `service.name` is `mtg-fleet-verify` even with
+  `OTEL_SERVICE_NAME=mtg-deck-shuffler` in the environment.
+- **Don't `export` anything telemetry-ish in a script after `.env` is sourced.** `.env` exports
+  `OTEL_SERVICE_NAME` for the app server; a second process launched from the same script inherits it.
+  `verify.sh` passes its `VERIFY_*` vars on the one `npx playwright test` command line instead.
+- If you ever want `telemetry.sdk.*` back on a `BasicTracerProvider`, the order matters:
+  `defaultResource().merge(yours)`, never the reverse.
+
 | Where                                                 | What it is                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `apps/shuffler/src/tracing.ts`                        | Node SDK init. ESM loader hook (`register("@opentelemetry/instrumentation/hook.mjs")`) + `node --import`. Auto-instrumentations; `fs` off; **Express middleware spans off** (`ignoreLayersType: [ExpressLayerType.MIDDLEWARE]`). `ParentBasedSampler({root: BackgroundChatterSampler})`. Also `logRecordProcessors: [BatchLogRecordProcessor(OTLPLogExporter)]` — logs ride the same NodeSDK so they share the resource (`service.name`) and shutdown path with traces, and land in the same datasets. **Passing `logRecordProcessors` makes the SDK skip its `OTEL_LOGS_EXPORTER` branch entirely** (`sdk-node/build/src/sdk.js:144-156`), so that env var would be dead config on these two ships — don't add it. (The Spine's `OTEL_LOGS_EXPORTER=none` is real; it has no pipeline.)                                                                                                                                                              |
@@ -165,6 +192,7 @@ files therefore get a test in *each* ship — that is the only reason this was c
 | `apps/tabletop/src/server/tracing.ts`                 | A **separate** Node SDK init, "modeled on the Shuffler's". Own inline `KubeProbeAwareSampler` (0.001 kube-probe / 0.01 ELB). **No middleware suppression, no static-asset or `/health` handling, reads only `http.user_agent`, and no test.** See Watch points. Same `logRecordProcessors` wiring as the Shuffler but with the 0.221 options-object constructor.                                                                                                                                                                                       |
 | `apps/tabletop/src/client/observability/index.ts`     | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific". Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
 | `services/spine/config/initializers/opentelemetry.rb` | Ruby, ~4 effective lines: `SDK.configure` + `use_all`. No wrapper. Rack instrumentation extracts inbound W3C context, so a Shuffler-initiated trace continues through event ingestion. In test nothing is configured and the SDK exports nowhere — fine by design.                                                                                                                                                                                    |
+| `apps/shuffler/test/harness-telemetry/`               | **The fourth init path, and the first that isn't a ship** — the verify suite tracing itself. `harnessTracing.ts` (provider), `spanPlan.ts` (pure + tested), `otelReporter.ts` (Playwright reporter). Service `mtg-fleet-verify`. See "Dev-tooling telemetry" below.                                                                                                                                                                                    |
 
 **The house pattern for a failure path**, established at `apps/shuffler/src/app.ts` `POST /deck`
 (`dc2df7e`, the fleet's first real `log.ts` caller):
@@ -186,6 +214,105 @@ auto-instrumentation plus stamping attributes onto whatever span already exists.
 `markCurrentSpanAsError` / `setCommonSpanAttributes` matter so much, and why anything that removes
 the ambient span (see Watch points) is dangerous here.
 
+### Dev-tooling telemetry (the pattern for instrumenting our own tools)
+
+`277bdfd` (2026-08-07) added the fleet's **first instrumentation of a tool rather than a ship**: the
+Shuffler's Playwright verify suite traces itself to service **`mtg-fleet-verify`**, team `modernity`,
+env `local`. Files: `apps/shuffler/test/harness-telemetry/`. It exists because the suite took 3.6–9.5
+minutes while the app — the only instrumented part — was already known to be ~1–2% of wall clock, so
+~98% of a developer-facing wait was invisible. **This is the shape `notes/add-opentelemetry.md` should
+point at when the next tool wants tracing.**
+
+The shape, and why each piece:
+
+- **One emitter, and it's the reporter.** With `workers: 1`, Playwright's step tree already carries
+  every `page.goto`, every `waitForTimeout` and every auto-retrying assertion. So one process = one
+  provider = one flush, **no spec-file changes**, no per-worker lifecycle to get wrong. Spans are
+  *built at the end from recorded timestamps* rather than held open across hooks — which is what lets
+  the shape logic (`spanPlan.ts`) be a pure, unit-tested function.
+- **Own `BasicTracerProvider` + `BatchSpanProcessor`.** No `NodeSDK` (see the resource table above),
+  no auto-instrumentation (it would trace the runner's own fs/http/child_process — noise on top of the
+  signal), no sampler, no context manager, no propagators.
+- **No context manager means parenting is manual.** `context.active()` is always `ROOT_CONTEXT`, so
+  every child is parented by hand via `trace.setSpan(parentContext, span)`. Forgetting it doesn't
+  error — you get a few thousand sibling roots that still carry the right run id and still answer most
+  queries. That's how it would land unnoticed, so the parent-child assertions in `spanPlan.test.ts`
+  are a guard, not thoroughness.
+- **Fleet-neutral service name.** `mtg-fleet-verify`, with the ship as a `verify.ship` attribute, so
+  the Tabletop's and Spine's suites can export to the same place and be compared.
+- **Run identity on EVERY span**, via a `RunAttributesSpanProcessor` that stamps at `onStart` —
+  copied from the Tabletop browser wrapper's `GlobalAttributesSpanProcessor`, which is now the fleet's
+  established way to do this. Carries `verify.run.id`, `verify.ship`, `verify.git.sha`, and the
+  cold/warm condition `verify.data_db.existed` / `verify.data_db.bytes`. On every span, not just the
+  root, so the run survives a fragmented trace and so per-condition breakdowns are possible.
+- **The condition is part of the measurement.** `data.db` is never reset, and four identical runs went
+  9.5 → 5.4 → 5.2 → 3.6 minutes. A duration without its cold/warm flag is not a number, it's a
+  rumour. `verify.sh` measures the db **before the server boots**, because boot creates the file.
+- **Non-default `BatchSpanProcessor` settings are required at this volume**: `maxQueueSize: 8192`,
+  `scheduledDelayMillis: 1000`. The defaults (2048 / 5000ms) drop on overflow **silently**, and the
+  root's own `verify.span.count` counts spans *emitted*, not *exported* — invisible twice over.
+  Measured on the first full run: 1,090 spans, and `verify.span.count` matched the dataset count
+  exactly, so nothing was dropped.
+- **Attributes beat spans here too (Invariant 1, applied to volume).** An `expect` faster than 100ms
+  hid no time by definition, so it becomes `test.expect.count` / `.total_ms` /
+  `.suppressed_count` on the test span instead of a span of its own.
+- **Telemetry is never fatal and never blocking.** Same posture as `deploy-marker.sh`'s `|| true`:
+  an empty Honeycomb team key counts as unconfigured, `shutdown()` is bounded by a `Promise.race`
+  with an `unref`'d timer, and every reporter hook is wrapped. Proven end to end with a
+  syntactically-valid-but-wrong key: exit code 0.
+- **Trace context is deliberately NOT propagated into the browser.** The app's `ParentBasedSampler`
+  would honor a sampled remote parent and never consult `BackgroundChatterSampler`, tracing every
+  static asset at 100% across 51 tests — the exact volume regression `0f42c95` fixed, wearing the
+  costume of success. Harness and app spans correlate by `verify.run.id` and time, in separate
+  datasets. Verified: 33% of app spans are still their own trace roots (unchanged), and querying
+  `verify.run.id` in the app dataset errors with "unknown column" — the cleanest possible proof that
+  no harness attribute leaked across.
+
+**Volume verdict: one trace per run STANDS, at 1,090 spans.** _(Owner's call, 2026-08-07.)_ The
+"above ~1,000 spans, split to trace-per-spec" steer given at review time was a pre-measurement
+heuristic, and the measurement retired it: 1,090 is 9% over a round number, every acceptance query is
+an aggregate that never opens the waterfall, and `verify.run.id` is on every span so splitting later
+costs almost nothing. **The number that actually matters is spans-per-run against env `local`'s
+budget, not waterfall usability** — a dev tool must not become the largest single span source in the
+environment, which is the ~3,000/run figure the expect threshold was introduced to avoid. Revisit if
+the suite grows past roughly 2,000 spans/run, or the day someone genuinely needs to read one run's
+waterfall and can't.
+
+**Synthesizing a span from shell timestamps — the recipe, because we want more of these.**
+`verify build` is a full `tsc` on every run and was invisible; it is exactly the kind of phase that
+lives outside the instrumented process. `verify.sh` captures epoch **millis** with
+`node -e 'console.log(Date.now())'` (macOS bash 3.2 + BSD `date` have no `%N`; ~40ms per call, 6
+calls) and passes them on the `npx playwright test` line; the reporter emits spans with explicit
+start/end times. Measured: `verify build` 1.6s, `verify server boot` 0.7s.
+
+Three guards, all unit tested, because **OTel reads a bare number as millis and errors on none of
+the ways you can get it wrong**:
+
+1. A **plausibility window** (within 24h of now) — seconds gives you a span in 1970, nanos one in the
+   year 55000, neither of which throws.
+2. **Absent means skip the span**, not `Number(undefined)` → `NaN` → nonsense timestamps.
+3. **End-before-start is rejected.**
+
+And in the shell: `stat`/`wc` on a file that may not exist needs a `[ -f ]` guard, or `set -e` turns a
+telemetry-only addition into a hard verify failure on a fresh clone — a failure that never reproduces
+on the machine where the file exists.
+
+**Two exporter-robustness findings from this work, and one applies to the ships.**
+
+- `provider.shutdown()` **rejects** when the exporter throws. Swallowed inside a `bounded()` helper:
+  no telemetry problem may reach the caller.
+- A **synchronously-throwing exporter leaves `BatchSpanProcessor`'s flush timer armed forever** — the
+  result callback never arrives. Surfaced here as jest force-exiting a worker; in a long-lived process
+  it is a real leak. Fixed with a `NeverThrowingExporter` wrapper: *a failed export must look like a
+  failed export, not like an exception.* **Owner's judgment (2026-08-07): the ships want this too, but
+  not urgently, and not as a copy-paste.** `apps/shuffler/src/tracing.ts` and the Tabletop's hand
+  their bare `OTLPTraceExporter`/`OTLPLogExporter` to `NodeSDK`, so the same armed-timer path exists —
+  but the observed trigger was a *test* exporter throwing synchronously, and `OTLPTraceExporter`
+  reports transport failures through the callback rather than by throwing. So this is a latent
+  robustness gap, not a live bug: worth doing when either ship's telemetry init is next opened, and
+  worth remembering the moment anyone wraps or decorates an exporter (the natural place to introduce a
+  synchronous throw). Not buoyed as its own ticket.
+
 **Secrets and source order.** `.env` in each ship sets
 `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**.
 `HONEYCOMB_API_KEY` lives in `.be` **at the repo root**. So `.be` must be sourced **before** `.env`,
@@ -193,7 +320,15 @@ or export silently 401s ("unknown API key"). Who does what:
 
 - repo-root `run` — sources `.be`, warns if absent, then delegates. ✅
 - `apps/tabletop/run`, `services/spine/run`, `apps/shuffler/verify.sh`, `apps/tabletop/verify.sh` —
-  each walk `.be` then `"$REPO_ROOT/.be"`, then `.env`. ✅
+  each walk `.be` then `"$REPO_ROOT/.be"`, then `.env`. ✅ `apps/shuffler/verify.sh` also **warns
+  when neither candidate is found** (2026-08-07) instead of falling through in silence, matching the
+  repo-root `run`.
+
+**"Configured" is not "present": `.env` alone produces a keyless header.** Without `.be`, `.env` still
+sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team="` — present, non-empty, and useless. A presence
+check passes and you then 401 once per batch for the whole run. Any silent-off guard must treat an
+**empty team key as unconfigured**; `isTelemetryConfigured()` in `harnessTracing.ts` is the reference
+implementation.
 - all three `deploy.sh` — `.be` then `.env`. `apps/shuffler/deploy.sh` joined them on 2026-08-01
   because the deploy marker's key lives in `.be`; the same commit deleted its dead
   `HONEYCOMB_API_KEY=""` line (left over from a commented-out `kubectl create secret` block), which
@@ -235,8 +370,10 @@ record of what shipped when.
 
 **Where the data lands.** Honeycomb team `modernity`, MCP server `honeycomb-modernity`.
 Local → env `local`, datasets `mtg-deck-shuffler`, `mtg-deck-shuffler-web`, `mtg-tabletop`,
-`mtg-tabletop-web`. Prod → env `mtg-deck-shuffler` (orion cluster, jessitron-sandbox). The Spine's
-`/admin/tables` renders Honeycomb trace links per event.
+`mtg-tabletop-web`, and — since `277bdfd` — **`mtg-fleet-verify`**, the verify harness's own dataset
+(dev tooling, not a ship; fleet-wide by design so other suites can join it). Prod → env
+`mtg-deck-shuffler` (orion cluster, jessitron-sandbox). The Spine's `/admin/tables` renders Honeycomb
+trace links per event.
 
 ## Evidence: how to show a change is observable
 
@@ -326,6 +463,31 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
 
   Filed `build-sha-on-every-span` off the back of it: markers mark a moment, not a build — see
   Invariant 5.
+
+- `277bdfd` (2026-08-07) "Trace the verify suite itself, to a new `mtg-fleet-verify` service" — the
+  first non-ship init path, and the first time this owner's own review guidance was **overturned by
+  measurement**. Full pattern in "Dev-tooling telemetry" above; what it taught the rules:
+  - **The owner's non-negotiable was wrong, and checking `node_modules` is why we know.** The review
+    demanded `OTEL_SERVICE_NAME` be set per-invocation. Reading the source showed
+    `BasicTracerProvider` *cannot see that variable at all*, while `NodeSDK` lets it **override** an
+    explicit `service.name`. So setting nothing was strictly safer than setting it. Two lessons:
+    resource-vs-env merge behavior is per-provider and must be looked up, not recalled; and "measure,
+    don't reason" applies to this KB's own claims. See the table under "How it works now".
+  - **Fails-open-invisibly, instances four through six.** (1) `BatchSpanProcessor`'s default
+    `maxQueueSize` drops on overflow while a span-count attribute — counting *emitted*, not
+    *exported* — reports success. (2) A presence check on `OTEL_EXPORTER_OTLP_HEADERS` passes on
+    `x-honeycomb-team=`, then 401s all run. (3) Manual parenting with no context manager: omit it and
+    you get thousands of sibling roots that still answer most queries. Each got a test or a guard;
+    none would have produced an error.
+  - **A telemetry-only addition can still break the thing it measures**, in two ways that don't
+    reproduce locally: `set -e` plus `stat` on a `data.db` that doesn't exist on a fresh clone, and
+    `provider.shutdown()` rejecting when the exporter throws. Both fixed at the source rather than
+    worked around.
+  - **Instrumenting our own tooling is now a thing we do.** Also the first measured proof that
+    Invariant 5's "new init paths must carry the build sha" check works: this one did, unprompted.
+  - It immediately overturned the standing assumption about *why* the suite is slow —
+    `waitForLoadState("networkidle")` at 141 calls / 76.5s beat the fixed sleeps at 38.8s. Which is
+    the whole argument for the change: ~98% of the wait had been unmeasured.
 
 ## Related reading
 
