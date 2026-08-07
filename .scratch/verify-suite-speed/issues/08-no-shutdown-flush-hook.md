@@ -1,7 +1,7 @@
 # No shutdown hook: the last OTel batch is dropped on every SIGTERM
 
 Mountain: overhead
-Status: ready-for-agent
+Status: resolved
 Type: task
 Map: ../map.md
 
@@ -58,4 +58,35 @@ already full of — silently-wrong-only-in-the-failure-case:
 
 `fleet-is-observable-context`, 2026-08-07 — verdict: ready-for-agent, conditional on the three
 traps above being named in the fix, not left as "add a handler that calls `sdk.shutdown()`".
-`-review` before landing, `-update` after.
+
+`-review` before landing flagged two gaps in the first draft, both closed before landing:
+1. Drain failures/timeouts were swallowed with no record at all — added `onDrainError` and
+   `onTimeout` callbacks to the handler so `tracing.ts` can `log.warn` them (there's no live
+   span to hang it on by then, per this owner's own logging guidance).
+2. The manual verification hadn't actually exercised telemetry (no `.be` sourced, so drain was
+   a no-op) — redone with `.be`/`.env` sourced; see Answer below.
+
+## Answer
+
+Landed:
+- `apps/shuffler/src/shutdownHooks.ts` — `installShutdownHandlers(drain, options)`. Listens for
+  SIGTERM/SIGINT, races `drain()` against an `unref()`'d timeout (default 5000ms), calls an
+  injectable `exit` (default `process.exit`) exactly once no matter which signal(s) fire or
+  whether `drain()` resolves, rejects, or hangs. `onTimeout`/`onDrainError` callbacks let the
+  caller log without this file needing to know about `log.ts`.
+- `apps/shuffler/src/tracing.ts` — calls `installShutdownHandlers(() => sdk.shutdown(), {
+  onTimeout, onDrainError })` right after `sdk.start()`, wiring both callbacks to `log.warn`.
+- `apps/shuffler/test/shutdownHooks.test.ts` — 5 unit tests using a real `EventEmitter` as a
+  fake signal source (no mocks): happy path, hung drain (exits anyway, reports timeout),
+  rejecting drain (exits anyway, reports the error), double-signal idempotency, SIGINT.
+
+Verified:
+- Full jest suite (269 tests, all passing) plus the 5 new ones.
+- Manual: built `dist/`, ran the real server with `.be` then `.env` sourced (this repo's real
+  sourcing order), `curl`'d `/` to emit a span, sent SIGTERM ~6s later, confirmed via
+  `mcp__honeycomb-modernity__run_query` (team `modernity`, env `local`, dataset
+  `mtg-deck-shuffler`) that both the `GET /` and `request handler - /` spans for that exact
+  request (matching PID) landed in Honeycomb — the actual regression this ticket fixes,
+  end to end, not just "the process didn't hang."
+- Separately confirmed the process exits promptly on SIGTERM (not hung, not force-killed):
+  `kill -TERM` on the server PID, process exited with code 0 within ~1s.
