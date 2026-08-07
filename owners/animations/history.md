@@ -244,6 +244,25 @@ question and the duration/easing value were open in `-context`, and both are now
   updated accordingly; the "deliberately undecided" line in architecture.md is removed since
   it's no longer true.
 
+### 2026-08-07: `{ force: true }` removed from the five card-modal-nav click sites (ticket 10)
+
+Ticket `.scratch/verify-suite-speed/issues/10-force-true-causes-the-flake-it-claims-to-fix.md`,
+resolving the "Removing them is filed in `TODO.md`" line left open by the `65f12e8` de-sleeping
+pass above. `force: true` removed from all five sites — `verify-library-grouping.spec.ts` (was
+lines 159, 243, 342) and `verify-query-parameter-modals.spec.ts` (was lines 372, 380) — updating
+the adjacent comments to stop describing an effect that's no longer there. The `toPass` retry
+wrappers were **kept** as a safety net; trying to remove those too is a deliberately separate
+follow-up (step 2 in the ticket), not bundled into this change. Verified by running
+`./verify.sh verify-library-grouping verify-query-parameter-modals` twice in a row: 19/19 passed
+both times, no new flakiness.
+
+**Also closed a KB gap this owner flagged during `-context`**: the "in case of viewport issues
+with modal positioning" justification that originally motivated `force: true` was checked and
+found to have no trace anywhere in the codebase — no git history, no comment, no documented
+viewport constraint. It was unverifiable folk memory carried into the original `TODO.md`
+capture, not a real constraint, which is why removing `force: true` was safe. Recorded in
+interactions.md so nobody re-adds it on the strength of that phrase alone.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.

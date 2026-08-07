@@ -26,14 +26,24 @@
 - **Table mode's button classes (JES-127)**: the clipboard hook is keyed on `play-button`; table-mode Play/Discard buttons deliberately get `table-play-button` instead (server-rendered — deterministic, no runtime branching in the hook). If you rename either class, both `game.js` listeners and `game-modals.ts` must change together. The 502 entry in `htmx.config.responseHandling` (`html-layout.ts`) carries `error: true` so `event.detail.successful` stays false and the table-mode buttons' conditional close leaves the failure modal visible — removing that flag silently eats the error modal.
 - **Click-straddles-settle flake (tests)**: a Playwright-speed click right after the card modal opens can land its mousedown on a node htmx replaces before mouseup — no click event fires. Impossible at human speed. Specs that click freshly-opened modal buttons use a retry `expect(async () => { click; assert }).toPass()` pattern (reference implementations: `verify-discard.spec.ts:39-50`, `verify-prep-commander-flip.spec.ts:99-105`, and since `65f12e8` also `verify-library-grouping.spec.ts` and `verify-query-parameter-modals.spec.ts`).
 
-  **`{ force: true }` on such a click is a *cause* of this flake, not a workaround for it.**
+  **`{ force: true }` on such a click was a *cause* of this flake, not a workaround for it.**
   `force` skips Playwright's actionability/stability wait — precisely the wait that would
-  otherwise absorb the swap. So a forced click on a freshly-swapped modal button is *more*
-  likely to straddle settle than an ordinary one. Nine sites still pass `force: true`
-  (`verify-library-grouping.spec.ts` ×3, `verify-query-parameter-modals.spec.ts` ×2 plus the
-  comment sites); each is currently paired with a `toPass` retry, which papers over it.
-  Removing them is filed in `TODO.md` — measured cost of the retries today is ~8.2s across a
-  run for 13 `toPass` steps, cheap, so this is cleanup rather than urgency.
+  otherwise absorb the swap. So a forced click on a freshly-swapped modal button was *more*
+  likely to straddle settle than an ordinary one. **Resolved** (ticket
+  `.scratch/verify-suite-speed/issues/10-force-true-causes-the-flake-it-claims-to-fix.md`,
+  2026-08-07): all five sites (`verify-library-grouping.spec.ts` ×3, was lines 159/243/342;
+  `verify-query-parameter-modals.spec.ts` ×2, was lines 372/380) now use plain `.click()`.
+  Playwright's own actionability wait absorbs the swap/settle straddle instead. The `toPass`
+  retry wrappers were **kept** as a safety net (removing those is a separate, independently
+  verifiable follow-up, deliberately not bundled here). Verified clean by running
+  `./verify.sh verify-library-grouping verify-query-parameter-modals` twice in a row:
+  19/19 passed both times, no new flakiness.
+
+  **KB gap closed while resolving this**: the "in case of viewport issues with modal
+  positioning" justification that originally motivated `force: true` (per the old `TODO.md`
+  capture) was checked and has no trace anywhere — no git history, no comment near any of the
+  five sites, no actual viewport constraint documented. It was unverifiable folk memory, not a
+  real constraint. Don't re-add `force: true` on the strength of that phrase resurfacing.
 - **`#game-menu` containment is a markup constraint on the game's top strip.** Anything
   rendered *inside* the `#game-menu` subtree becomes menu-internal in two ways at once, and
   both are silent:
