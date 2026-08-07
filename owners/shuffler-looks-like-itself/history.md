@@ -861,3 +861,31 @@ entry now.
 is "stage it, don't argue it" — build the candidate, put both options on `/design`, ask Jess. That
 didn't happen here; Jess decided and shipped directly. The KB records the outcome as fact rather
 than inventing a `.choice` block after the fact for a decision that's already made and shipped.
+
+## 2026-08-07 — the last numeric coupling on the library-alignment class is gone
+
+`c19f49c` **Manual: Jess tweaks to game page. section-that-aligns-with-command-zone is no
+more**
+
+The sequel to the entry above (`f42a99a` then `63d4c08`), which had left `game.css`'s
+`.section-that-is-horizontally-aligned-with-command-zone { padding-top: 22px; }` computing
+an offset from numbers that no longer existed — the surround's border had gone 5px → 3px and
+`.multiple-cards` had lost its border and inset entirely, so the comment's arithmetic matched
+nothing on the page. Flagged in the prior `-update` pass as a likely visual regression on
+`/game`, not fixed at the time.
+
+Jess closed it herself, directly, the same way she'd already closed the `/prepare` side in
+`f42a99a`: delete the rule rather than recompute a new number for it. She deleted the whole
+`padding-top: 22px` rule and its explanatory comment from `game.css`, and dropped the
+`section-that-is-horizontally-aligned-with-command-zone` class from both places it still
+named — `library-components.ts`'s `#library-section` and
+`revealed-cards-components.ts`'s `#revealed-cards-section`. Grepping the selector across the
+app now returns nothing outside this KB's own history.
+
+**The class is fully retired, not fixed.** `/game`'s library stack and command zone now sit
+at their natural position, with no vertical-alignment offset between them at all — consistent
+with the surround having shrunk (no more `.multiple-cards` inset/border to align past). This
+closes the numeric-coupling watch point in [interactions.md](interactions.md) for good: there
+is no replacement number on either page to keep in sync, so a future surround change starts
+from zero rather than from a stale 22px.
+

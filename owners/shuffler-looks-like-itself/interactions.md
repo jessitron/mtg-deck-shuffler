@@ -267,7 +267,8 @@ existing specs learned, in the order they'll bite you:
   representing the app.
 
 **A shared class split across two files can carry a numeric coupling, not just a
-duplicated block** (2026-08-07, `5c69aa3`)
+duplicated block** (2026-08-07, `5c69aa3`) — **RESOLVED 2026-08-07 (`c19f49c`), by deletion,
+not by recomputing new numbers.**
 
 - `.section-that-is-horizontally-aligned-with-command-zone` used to exist in both
   `prepare.css` (`margin-top`) and `game.css` (`padding-top`) -- different properties, but
@@ -295,11 +296,20 @@ duplicated block** (2026-08-07, `5c69aa3`)
   padding-top: 22px; }`, was **not touched**, and the very next commit (`63d4c08`) changed
   every number that 22px was computed from: the surround's border went 5px → 3px, and
   `.multiple-cards` lost its border and inset entirely (was `border-width: 7px;
-  border-style: inset`). **`game.css`'s comment and value are now stale** — the arithmetic
-  it states no longer matches any real dimension on the page. Not fixed as part of this
-  update; flagged as a likely visual regression on `/game` for whoever picks it up next.
-  If the surround's border or padding changes again, there is now no `prepare.css` copy of
-  this number left to keep in sync — only `game.css`'s, and it's already wrong.
+  border-style: inset`) — leaving `game.css`'s comment and value stale, describing arithmetic
+  that matched no real dimension on the page.
+- **Closed 2026-08-07 (`c19f49c`), directly by Jess, the same way she'd already closed the
+  prepare side: delete, don't recompute.** She removed the whole
+  `.section-that-is-horizontally-aligned-with-command-zone { padding-top: 22px; }` rule and
+  its comment from `game.css`, and dropped the class itself from the markup
+  (`library-components.ts`'s `#library-section`, `revealed-cards-components.ts`'s
+  `#revealed-cards-section`). The selector no longer exists anywhere in the app — grep
+  confirms it. `/game` no longer offsets the library stack against the commander card at
+  all; both now sit at their natural position now that the surround shrank. **The numeric
+  coupling didn't get fixed, it got retired** — there is no replacement number to keep in
+  sync on either page anymore, so this watch point no longer applies. If a future change
+  reintroduces a vertical-alignment need between the library stack and the command zone, it
+  starts from zero, not from 22px.
 
 **Editing a duplicated block** (see [architecture.md](architecture.md) for the list)
 
