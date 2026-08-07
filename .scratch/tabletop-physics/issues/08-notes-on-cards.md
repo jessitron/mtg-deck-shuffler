@@ -28,3 +28,11 @@ Decide:
   when dragged onto a card, or is the attachable post-it a separate object from the freeform one?
   Whichever way, map 4 decides whether the stock note tool stays in the toolbar; say what this
   ticket needs from it.
+
+## Comments
+
+[Ticket 07](07-counters-that-ride-along.md)'s resolution (2026-08-07) surfaced a strong lean, not
+a decision: Jess pictures the counter as a purpose-built attaching shape (`mtg-counter`) and the
+note as tldraw's stock sticky note, and she's fine with the note *not* attaching to a card via
+the same mechanism the counter uses. Start from that steer rather than re-opening "one thing or
+two" from scratch.
