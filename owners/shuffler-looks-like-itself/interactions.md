@@ -253,6 +253,30 @@ existing specs learned, in the order they'll bite you:
   `test/verification/verify-design-gallery.spec.ts`, or the gallery silently stops
   representing the app.
 
+**A shared class split across two files can carry a numeric coupling, not just a
+duplicated block** (2026-08-07, `5c69aa3`)
+
+- `.section-that-is-horizontally-aligned-with-command-zone` exists in both `prepare.css`
+  (`margin-top`) and `game.css` (`padding-top`) -- different properties, but both exist to
+  push the library stack down until its card art meets the commander card's art, not the
+  top of `.cool-command-zone-surround`'s metal frame. The real number is **22px**: 5px
+  surround border + 10px surround padding + 7px `.multiple-cards` inset border (game.css's
+  comment already had this breakdown right). `prepare.css` had `margin-top: 7px` -- only the
+  innermost inset -- silently undershooting by the outer 15px, for however long that went
+  unnoticed.
+- **This is a fixed-px inset, not a scaled one.** The surround's border/padding are literal
+  pixels, unaffected by the playmat's own scale (`border-radius: 80px` game vs `20px`
+  prepare). So `/prepare`'s smaller mat still needs the *same* 22px as `/game`'s larger one
+  -- don't be tempted to scale it down.
+- **The library/command-zone swap (`e7b393e`) didn't cause this bug** -- grid-column and
+  flex-order changes can't affect cross-axis alignment. It just moved the two elements into
+  a direct side-by-side comparison, which is what made a pre-existing 15px gap visible.
+  Lesson: a layout reorder can *expose* a latent alignment bug it didn't create; check the
+  actual rendered `<img>` rects (not just the outer container boxes) before assuming the
+  reorder itself is the culprit.
+- If the surround's border or padding ever changes, both files' copies of this number need
+  updating together -- there's no shared token for it.
+
 **Editing a duplicated block** (see [architecture.md](architecture.md) for the list)
 
 - Modal styles: `playmat.css` **and** `prepare.css`.

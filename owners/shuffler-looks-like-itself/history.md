@@ -692,6 +692,28 @@ of what the code did (an `end` justify-self right-aligns, it doesn't left-align)
 `justify-self` to `start` for this swap made the comment's claim match the code for the
 first time; it was stale before this change, not fixed by it, and stayed stale until it did.
 
+## 2026-08-07 — the swap exposed a 15px vertical-alignment bug it didn't cause
+
+`5c69aa3` **Fix /prepare card-art vertical alignment: 7px undershot the real 22px inset**
+
+Jess reported, right after the library/command-zone swap above, that the library card and
+the commander card had lost vertical alignment on `/prepare`. The swap itself couldn't be
+the cause -- `grid-column` and `justify-self` are horizontal, and flex/grid reordering
+doesn't touch cross-axis alignment. Confirmed by walking the actual DOM to the `<img>`
+elements on both `/prepare` and `/game` (using Jess's own live game, prep 1707, on her
+running dev server): on `/game` the two card images landed on the identical y-coordinate;
+on `/prepare` they were 15px apart.
+
+**Root cause:** `.section-that-is-horizontally-aligned-with-command-zone`'s
+`margin-top: 7px` in `prepare.css` only accounted for the `.card-container` inset inside
+`.cool-command-zone-surround`, missing the outer `.multiple-cards` inset (15px). The real
+total is 22px -- which `game.css`'s `padding-top: 22px` on the same class already had
+right, comment and all. `prepare.css`'s 7px was wrong before the swap too; the swap just
+put the two elements close enough together, side by side, that the 15px gap became visible
+for the first time. Fixed by changing `margin-top` to `22px`, with a comment cross-referencing
+game.css's number. See [interactions.md](interactions.md) for the durable lesson (the
+numeric coupling between the two files' copies of this class).
+
 ## 2026-08-07 — the typefaces got role names, and 39 literals went with them
 
 `f79bc7d` **Name the typefaces by role, and sweep the 39 literals onto the tokens**
