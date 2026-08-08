@@ -158,6 +158,21 @@ expensive way round.
   hand or library goes back to `face:'front'`, `faceDown:false`, mirroring the Shuffler's
   `mulligan()` reset; which zone-entry mechanism performs it is implementation, not decision.
 
+- **A shape's vocabulary is generous by default, announcement is centralized, and identity stays
+  narrow** — [Decide what a shape knows and announces, without wiring it anywhere](issues/10-what-a-shape-knows.md),
+  resolved 2026-08-07. Named words (`card.tapped`/`untapped`, `counter.attached`,
+  `card.attachedBelow`/`noteAttached`, `card.zoneMoved`, `card.flipped`, `card.turnedFaceDown`)
+  for gestures physics already understands, generic `shape.moved`/`created`/`changed` for
+  everything else — Jess's bar is "a completed motion happened," not "physics judges it
+  interesting," so in-zone repositioning and unnamed custom shapes announce too, just generically.
+  Only cards and zones carry identity; counters/notes carry text as an attribute, tracked across
+  no lifetime. Detection stays per-shape-hook exactly as ticket 09 left it; the *announcement* is
+  centralized in one `store.listen()` beside `useCardArrivalSpans.ts`, translating mutations
+  (including undo's, since tldraw's `ChangeSource` is only `'user'|'remote'`, never `'undo'`) into
+  `inSpan()` calls — Honeycomb only, for now; the Spine wire is map 5's. Every announcement carries
+  `actor` = tldraw's ephemeral per-session sync id, a stand-in until the Tabletop gets real
+  seat/player identity (not decided here, not blocking).
+
 ## Not yet specified
 
 - **Which attachment mechanism suits which passenger.** The [research
