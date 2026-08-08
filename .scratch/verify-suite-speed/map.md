@@ -111,6 +111,12 @@ ticket 11.
 - **Whether `fullyParallel: true` is worth measuring.** 06's answer suggests it'd be safe (no
   spec needs cross-test serialization), but no spec needs it either — the suite is already at
   ~17.5s, well under 60s. Undecided whether it's worth the measurement at all.
+- **`verify-tabletop-integration.spec.ts` may be a real cost, invisible to the ticket 06
+  measurement.** That measurement ran with `apps/tabletop` unbuilt (the spec self-skips), so it
+  never touched this file. One post-merge run on the main checkout, with the Tabletop built,
+  clocked this single spec at 30.5s alone — by far the slowest thing in the suite if real. Not
+  yet confirmed as a pattern (one data point) or investigated for cause (own server spawn in
+  `beforeAll`, 120s timeout, `waitForTimeout`-based websocket polling are candidates).
 
 ## Out of scope
 
