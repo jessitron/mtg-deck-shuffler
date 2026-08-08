@@ -206,6 +206,48 @@ easy to reopen:**
   as the zones around it. Also not `mtg-zone`-specific (the label stayed a stock `text` shape,
   not converted to a zone), but fixed in the same pass.
 
+## Ticket 14: zone appearance (dashed at rest, glow when armed) — `topmostZoneAt` extracted, shared
+
+`.scratch/tabletop-physics/issues/14-*.md` (landed 2026-08-08) gave zones a visual "armed" state —
+glowing when the card currently being dragged is hovering over them — on top of ticket 13's
+dashed-at-rest look. This needed the same topmost-zone-wins hit test `MtgCardShapeUtil.zoneAt()`
+already did (drag-*settle* zone entry), but now also as a live drag-*in-progress* check (is a zone
+under the card's center *right now*, mid-drag) — a second consumer, exactly what watch point 8's
+prior wording anticipated when it said the tie-break "lives in one place." It now actually does:
+
+`apps/tabletop/src/client/shapes/zoneHitTest.ts` (new) extracts the hit test into
+`topmostZoneAt(editor, center)`, returning `{ id, zone }` for the topmost `mtg-zone` shape whose
+page bounds contain `center` (same greatest-`index` tie-break as before, now with its rationale and
+watch-point-8 caveat written once instead of duplicated per caller). `MtgCardShapeUtil.zoneAt()`
+now calls `topmostZoneAt(...)?.zone` instead of walking shapes itself.
+
+**New reactive-signal pattern**: the same file also exports `useIsZoneArmed(editor, zoneId)`, built
+on one `computed()` per `Editor` instance (a lazy `WeakMap<Editor, Computed<TLShapeId | undefined>>`
+— not one `computed` per zone shape). The computed checks `editor.isIn("select.translating")` (the
+same `select.translating` state `Translating.ts` — see the drag-identity bug above — governs) and,
+if in it, resolves `topmostZoneAt` against the currently-selected shape's center. **Sharing one
+signal across all zones, rather than each zone shape's `component()` independently rescanning, is
+the point**: tldraw's `Translating` state updates shape position on every raw pointer-move (not
+throttled), so N zones each doing their own O(zones) scan would be O(zones²) work per tick during a
+drag; one shared computed makes it O(zones) regardless of how many zones exist. Confirmed against
+tldraw source (`PointingShape.ts`'s `startTranslating` calls `this.parent.transition('translating',
+info)` on the `select` tool node — i.e. exactly the string `"select.translating"`) and against a
+live Playwright drag, not assumed from the state name.
+
+**First "read reactively, write nothing" hook in this KB.** Every prior `ShapeUtil.component()`
+hook documented here (`onClick`, `onTranslateEnd`) *writes* to the store — a tap, a zone stamp, a
+selection clear. `MtgZoneShapeUtil.component()` calls `useIsZoneArmed(this.editor, shape.id)`
+unconditionally at the top, before any conditional branching, purely to *read* derived state for
+rendering. It produces no store write and therefore no undo entry, no sync traffic, and (confirmed
+with a two-browser-context Playwright test) no visibility on another client's copy of the same zone
+shape — the armed glow is genuinely local to whichever browser is doing the dragging. Any future
+hook that wants to render transient, per-viewer state (not game state) should follow this shape:
+a shared `computed()` behind a `use*` hook, read in `component()`, never written to `props`/`meta`.
+
+`MtgZoneShapeUtil` still defines no `onClick`/`onTranslateEnd`/`onDragShapesOver` — the armed-glow
+feature lives entirely inside `component()`, consistent with watch point 7 (a locked shape needs no
+interaction hooks; this ticket didn't need to add any to get a dynamic, drag-reactive appearance).
+
 ## Registering a shape into tldraw's own `TLShape` union
 
 A hand-rolled `TLBaseShape<'my-type', Props>` is never a member of tldraw's closed `TLShape`

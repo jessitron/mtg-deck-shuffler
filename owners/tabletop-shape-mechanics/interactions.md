@@ -15,6 +15,13 @@
   regression test (`verify-drag-identity.spec.ts`) would notice the *symptom* resurfacing, not
   the cause changing. If a tldraw upgrade is ever done, re-read `PointingShape.ts`/
   `Translating.ts` for this class of change.
+- **The string `"select.translating"`, used by `editor.isIn(...)`** (ticket 14's armed-zone
+  check, `zoneHitTest.ts`) is the same state `PointingShape.ts`'s `startTranslating` transitions
+  into (`this.parent.transition('translating', info)` on the `select` tool node) — confirmed
+  against that source, not assumed from the string. A tldraw version bump that renames or
+  restructures this state transition would silently break `useIsZoneArmed` (it would just always
+  return `false`, the drag would still work) — no test currently guards this beyond
+  `verify-zone-armed.spec.ts`'s happy-path check.
 
 ### Shape identity (`props.instanceId`)
 - Minted once in `apps/tabletop/src/server/cardArrival.ts` at shape creation, never elsewhere, now
@@ -52,9 +59,13 @@
   `meta.zone` string. `zoneAt()` in `MtgCardShapeUtil.tsx` now filters
   `candidate.type === "mtg-zone"` and reads the validated `candidate.props.zone`, instead of
   scanning every shape for a truthy `meta.zone`.
-- `zoneAt()` also now resolves overlapping zones — previously undefined behavior — by picking
-  whichever candidate has the greatest `index` (an `IndexKey`; plain string `>` comparison already
-  reflects z-order for tldraw's fractional-indexing scheme), i.e. the topmost-drawn zone wins.
+- **The hit test itself moved, ticket 14 (landed 2026-08-08).** `zoneAt()` no longer walks shapes
+  itself — it calls `topmostZoneAt(this.editor, bounds.center)` from the new
+  `apps/tabletop/src/client/shapes/zoneHitTest.ts`, which now resolves overlapping zones by
+  picking whichever candidate has the greatest `index` (an `IndexKey`; plain string `>` comparison
+  already reflects z-order for tldraw's fractional-indexing scheme), i.e. the topmost-drawn zone
+  wins. That same function is now also the basis of `MtgZoneShapeUtil`'s armed-state check (below)
+  — the second consumer watch point 8 anticipated. See `architecture.md`'s "Ticket 14" section.
 - `MtgZoneShapeUtil` defines **no** `onClick`/`onTranslateEnd`/`onDragShapesOver` — see
   `architecture.md`'s "Ticket 13" section for why that's provably safe rather than just
   convenient: zones are always `isLocked: true`, `SelectTool`'s `Idle` state gates on `isLocked`
@@ -133,10 +144,13 @@
    selection in the first place. This distinction (locked-with-onClick vs. unlocked-with-onClick)
    is worth remembering exactly because it looks like it should matter and doesn't.
 
-8. **`zoneAt()` is first-match-not-closest-match, with no orientation awareness — a new risk
-   once zones cluster around a shared center.** `zoneAt()` (`MtgCardShapeUtil.tsx`, see
-   `architecture.md`) walks `getCurrentPageShapes()` and returns the *first* candidate shape
-   whose `meta.zone` bounds contain the dragged card's center — not the closest, not the
+8. **`topmostZoneAt()` is first-match-by-z-order-not-closest-match, with no orientation
+   awareness — a new risk once zones cluster around a shared center.** The tie-break logic
+   (originally inline in `MtgCardShapeUtil.zoneAt()`, extracted to
+   `apps/tabletop/src/client/shapes/zoneHitTest.ts`'s `topmostZoneAt()` by ticket 14, 2026-08-08,
+   when a second caller — the zone's own armed-state check — needed the identical hit test; see
+   `architecture.md`) walks `getCurrentPageShapes()` and returns the *topmost-drawn* candidate
+   shape whose bounds contain the given center — not the closest, not the
    smallest, not the one the player was visually dropping into. That was never a problem worth
    naming while zones (playmat/library/command-zone/graveyard/exile per seat) sat spread out in
    a row with clear gaps between player areas — bounds essentially never overlapped, so "first
@@ -145,14 +159,26 @@
    2026-08-08, not yet built — see `apps/tabletop/DESIGN.md`'s "The square" section) moves player
    areas from the row into compass slots (N/E/S/W) packed around a fixed-size centered Stack. If
    that packing puts E/W zones close to the Stack's corners, overlapping or abutting zone AABBs
-   become possible for the first time, and `zoneAt()`'s first-match iteration order (whatever
-   `getCurrentPageShapes()` happens to return) — not proximity, not which zone visually contains
-   more of the card — would decide the winner. Flagged during the grilling session for "the
+   become possible for the first time, and `topmostZoneAt()`'s z-order tie-break (greatest
+   `index`, not proximity, not which zone visually contains more of the card) — now shared by
+   *both* callers (`MtgCardShapeUtil.zoneAt()` and `MtgZoneShapeUtil`'s armed-state check) — would
+   decide the winner for both at once. Flagged during the grilling session for "the
    square" as a risk worth recording before implementation starts, not yet a bug (no code has
    changed for this ticket; `cardLayout.ts`/`tableFurniture.ts` are untouched). Whoever builds
-   "the square" should re-check `zoneAt()` against the actual N/E/S/W geometry once it's drawn,
-   and consider closest-match-by-distance or smallest-containing-zone as a tiebreak if AABBs do
+   "the square" should re-check `topmostZoneAt()` against the actual N/E/S/W geometry once it's
+   drawn, and consider closest-match-by-distance or smallest-containing-zone as a tiebreak if AABBs do
    end up overlapping.
+
+9. **A new reactive-read pattern exists now — a `computed()` shared per-`Editor`, read via a
+   `use*` hook, that writes nothing to the store.** `zoneHitTest.ts`'s `armedZoneIdSignal`/
+   `useIsZoneArmed` (ticket 14, 2026-08-08) is the first hook in this KB that reads live
+   drag-in-progress state (`editor.isIn("select.translating")`) purely to drive `component()`
+   rendering, with no store write, no undo entry, and no sync traffic. It's keyed one-per-`Editor`
+   in a `WeakMap`, not one-per-shape, specifically to avoid O(zones²) rescanning during a drag
+   (tldraw's `Translating` state updates position on every raw pointer-move, unthrottled) — see
+   `architecture.md`'s "Ticket 14" section. **Any future per-viewer, transient (not game-state)
+   visual reaction to drag/selection state should follow this shape**, not invent a per-shape
+   scan or a store write for something that's purely local render state.
 
 ## Not Related To
 
