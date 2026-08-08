@@ -1,5 +1,6 @@
 import { BaseBoxShapeUtil, HTMLContainer, TLShapePartial, Vec } from "tldraw";
 import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
+import { MtgZoneShapeProps } from "../../shared/mtgZoneShape";
 
 const TAP_ANGLE = Math.PI / 2;
 
@@ -93,10 +94,11 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   //
   // `onTranslateEnd` (fired once, on the *moved* card, when a drag settles)
   // rather than `onDragShapesOver`/`onDropShapesOver` (fired on the
-  // *target*, every frame while dragging): the zones tableFurniture.ts
-  // draws are stock, locked `geo`/`image` shapes, not a custom ShapeUtil,
-  // so there's nothing to hang a target-side hook on without giving zones
-  // their own ShapeUtil (ticket 13's job, not this one).
+  // *target*, every frame while dragging): zones are `mtg-zone` shapes
+  // (ticket 13) but always `isLocked: true`, and `Editor.getDraggingOverShape`
+  // filters out locked shapes before checking for target-side hooks at all —
+  // so a target-side hook on the zone could never fire regardless of whether
+  // `MtgZoneShapeUtil` defined one.
   //
   // Debounce state rides on the card's `meta.zone` — the last zone this card
   // was known to be in — so re-entering a zone it already left still counts
@@ -139,18 +141,30 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     };
   }
 
-  /** Which zone (if any) the shape's center currently rests in. */
+  /**
+   * Which zone (if any) the shape's center currently rests in. Matches real
+   * `mtg-zone` shapes (tabletop-physics ticket 13) rather than a bare
+   * `meta.zone` string tag — a locked shape can never be a drag target
+   * (`Editor.getDraggingOverShape` filters `!isLocked` first), so this stays
+   * a card-side scan rather than a zone-side `onDragShapesOver` hook. When
+   * the card's center overlaps more than one zone, the topmost-drawn zone
+   * (greatest `index`) wins — `index` is a fractional-indexing `IndexKey`
+   * whose plain string comparison already reflects z-order.
+   */
   private zoneAt(shape: MtgCardShape): string | undefined {
     const bounds = this.editor.getShapePageBounds(shape);
     if (!bounds) return undefined;
     const center = bounds.center;
 
+    let winner: { zone: string; index: string } | undefined;
     for (const candidate of this.editor.getCurrentPageShapes()) {
-      const zone = candidate.meta?.zone;
-      if (typeof zone !== "string") continue;
+      if (candidate.type !== "mtg-zone") continue;
       const candidateBounds = this.editor.getShapePageBounds(candidate);
-      if (candidateBounds?.containsPoint(center)) return zone;
+      if (!candidateBounds?.containsPoint(center)) continue;
+      if (!winner || candidate.index > winner.index) {
+        winner = { zone: (candidate.props as MtgZoneShapeProps).zone, index: candidate.index };
+      }
     }
-    return undefined;
+    return winner?.zone;
   }
 }
