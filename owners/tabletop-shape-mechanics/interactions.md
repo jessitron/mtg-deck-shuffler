@@ -16,26 +16,32 @@
   the cause changing. If a tldraw upgrade is ever done, re-read `PointingShape.ts`/
   `Translating.ts` for this class of change.
 
-### Shape identity (`meta.instanceId`)
-- Minted once in `apps/tabletop/src/server/cardArrival.ts` at shape creation, never elsewhere.
-  Every hook in this owner's ShapeUtil guards on it (`if (!shape.meta?.instanceId) return
-  undefined`) to distinguish real cards from locked furniture/stray images that share the same
-  tldraw `type: "image"`.
-- Ticket 02's `mtg-card` rewrite moves identity from `meta` into validated `props` — when that
-  lands, update this section and `architecture.md`'s guard-pattern description.
+### Shape identity (`props.instanceId`)
+- Minted once in `apps/tabletop/src/server/cardArrival.ts` at shape creation, never elsewhere, now
+  directly in the shape's validated `props` (moved out of `meta` by ticket 12, 2026-08-08).
+- No hook needs a defensive identity guard anymore: `mtg-card` is its own exclusive tldraw shape
+  type (registered via the `TLGlobalShapePropsMap` augmentation in
+  `apps/tabletop/src/shared/mtgCardShape.ts` — see `architecture.md`), so every instance of it is
+  a real card by construction. The old `if (!shape.meta?.instanceId) return undefined` guard,
+  needed only because cards/furniture/stray-drops used to share `type: "image"`, was removed.
+- `meta` still exists on the shape but now carries *only* `zone` (zone-entry dedup, see
+  `onTranslateEnd`) — ticket 13 plans to move even that to reading `mtg-zone` shapes' props
+  instead.
 
 ## Depended On By
 
 ### `two-faced-cards` (card rendering, not mechanics)
-- Shares one file today (`MtgCardImageShapeUtil.tsx`) but a different concern: that owner cares
-  what image/face renders, this owner cares whether the right shape responds to the pointer. See
+- Shares one file today (`MtgCardShapeUtil.tsx`) but a different concern: that owner cares what
+  image/face renders, this owner cares whether the right shape responds to the pointer. See
   `owners/two-faced-cards/interactions.md` watch point 16 and `architecture.md`'s "How to tell
   this owner's territory from `two-faced-cards`'s" section.
-- **Ticket 02's `mtg-card` rewrite is a joint dependent**: it needs this owner's sign-off on
-  carrying the `setSelectedShapes([])` selection-cleanup forward (any ShapeUtil with `onClick`
-  inherits the tldraw quirk), and `two-faced-cards`'s sign-off on the props-based flip/identity
-  model. Consult both, but for different questions — don't let one owner's review stand in for
-  the other's.
+- **Ticket 12's `mtg-card` rewrite landed as a joint change** (2026-08-08): the
+  `setSelectedShapes([])` selection-cleanup was carried forward into the new ShapeUtil unchanged
+  (any ShapeUtil with `onClick` inherits the tldraw quirk — watch point 1 below), and
+  `two-faced-cards`'s props-based flip/identity model landed alongside it (flip is now a pure
+  `props.face` write, no per-instance tldraw asset). Both owners' territory changed in the same
+  commit; consult `owners/two-faced-cards/` for anything about *which face renders*, this owner
+  for anything about *what responds to the pointer*.
 
 ### Zone detection (`tableFurniture.ts`, `cardLayout.ts`)
 - `zoneAt()` in `MtgCardImageShapeUtil.tsx` walks every shape on the page looking for one whose
@@ -51,8 +57,9 @@
    custom shape type defines `onClick` (tap, a button, anything), its equivalent of
    `onTranslateEnd`/drag-settle must also call `this.editor.setSelectedShapes([])` — otherwise
    the drag-picks-up-the-wrong-shape bug reopens for that shape type. This is the single most
-   important watch point in this KB; it will bite ticket 02's `mtg-card` rewrite specifically
-   (see `architecture.md`).
+   important watch point in this KB; it already bit — and was correctly ported forward into —
+   ticket 12's `mtg-card` rewrite (see `architecture.md`). Any *next* new custom shape type with
+   `onClick` needs the same treatment.
 
 2. **The selection-clear must run before any early return in the drag-settle hook.** In
    `onTranslateEnd`, the zone-equality check (`if (zone === previousZone) return undefined`) is
@@ -61,10 +68,12 @@
    still clear selection. Moving it after, or adding a new early return above it, silently
    reopens the bug for whatever drags hit that return.
 
-3. **`meta.instanceId` (or its `props` successor after ticket 02) is the only signal that
-   distinguishes a real card from furniture/stray images sharing the same tldraw shape type.**
-   Any new hook added to this ShapeUtil must guard on it the same way, or it will fire for
-   furniture too.
+3. **`mtg-card` is now its own exclusive tldraw shape type — no identity guard needed, but don't
+   assume that generalizes.** Since ticket 12, every `mtg-card` shape is a real card by
+   construction, so hooks no longer guard on `props.instanceId` before acting. If a *future*
+   shape type is ever added that shares a tldraw `type` string across meanings again (unlikely,
+   but it's exactly how the old `image`-sharing bug happened), that guard pattern needs to come
+   back for it.
 
 4. **Rotation pivots around `x,y` (top-left), not the shape's center.** Any new hook that moves
    or rotates a card must recompute `x`/`y` to hold the center fixed under the new rotation (see
@@ -77,6 +86,20 @@
    interacting with `onClick`-bearing shapes, or a tldraw upgrade changing the guard conditions
    themselves. Treat new drag/select/tap behavior as needing its own explicit test, not coverage
    by association.
+
+6. **Registering a new custom shape type needs FOUR separate steps, and missing any one fails
+   differently.** (1) The `declare module "@tldraw/tlschema" { interface TLGlobalShapePropsMap`
+   augmentation — miss it and `BaseBoxShapeUtil<Shape>` fails to *typecheck*, caught at build
+   time. (2) Client `useSync({ shapeUtils: [...defaultShapeUtils, MyUtil] })` in `TablePage.tsx`
+   — miss the `defaultShapeUtils` spread and *furniture* silently fails client-side validation,
+   not the new shape. (3) Server `createTLSchema({ shapes: { ...defaultShapeSchemas, ... } })` in
+   `rooms.ts` — miss the `defaultShapeSchemas` spread and the *server* schema rejects furniture,
+   disconnecting clients outright. (4) The ShapeUtil's `component()` must wrap interactive content
+   in `.tl-image-container`/`.tl-image` (or otherwise defeat `.tl-html-container`'s
+   `pointer-events: none`) or clicks silently never land, which Playwright will report as "element
+   intercepts pointer events" rather than anything shape-specific. See `architecture.md`'s
+   Registration sections for all four. This bit on ticket 12's implementation (item 4, the
+   pointer-events trap, broke every click-based Playwright spec until traced).
 
 ## Not Related To
 

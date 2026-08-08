@@ -3,97 +3,99 @@
 The Tabletop (`apps/tabletop/`) renders cards it is told about; it never interprets
 them. Its whole face knowledge in v0:
 
-> **Read "What a card will be" below before advising on anything Tabletop-side.** Ticket 02
+> **Read "What a card is" below before advising on anything Tabletop-side.** Ticket 02
 > (`.scratch/tabletop-physics/issues/02-what-a-card-is.md`, resolved 2026-08-07, commit
-> `c956949`) decided the card's whole shape, and **the sections describing today's `image`
-> shape are now a description of what is about to be replaced.** No code has changed yet.
+> `c956949`) decided the card's whole shape, and **ticket 12 (2026-08-08) implemented it.**
+> The card is now a genuine `mtg-card` tldraw shape; the sections below describing the old
+> borrowed `image` shape are historical record of what was replaced, not current behavior.
 
-**JES-140 (2026-08-01) moved the card-placement code but not the face logic.**
-`apps/tabletop/src/server/cardArrival.ts` (`handleCardArrival`) still builds the
-card's image shape and its `meta` exactly as below — untouched. What moved: the
-shared shape-building helpers (`regionShape`, `nextIndex`, `pageIdOf`, and the new
-`ensurePlayerArea`) live in `apps/tabletop/src/server/tableFurniture.ts` now, and
-geometry (playmat/library/graveyard/exile/Stack bounds) lives in
-`apps/tabletop/src/server/cardLayout.ts` — a full rewrite of that file's old
-row-based functions (`rowOrigin`, `battlefieldPosition`, `graveyardPosition`,
-`GRAVEYARD_X`, `EXILE_X`, `STACK_AREA` are gone; see `apps/tabletop/DESIGN.md` for
-the geometry they were replaced with). A new endpoint,
-`apps/tabletop/src/server/seatJoined.ts` (`POST /api/tables/:tableName/events`,
-`seat.joined`), draws a seat's whole player area before any card arrives — the
-card image shape and its `meta`/dedup rules this file describes are unaffected by
-that new arrival trigger.
+**JES-140 (2026-08-01) moved the card-placement code but not the face logic; ticket 12
+(2026-08-08) later changed the face logic itself.** JES-140's geometry move: shared
+shape-building helpers (`regionShape`, `nextIndex`, `pageIdOf`, `ensurePlayerArea`) live
+in `apps/tabletop/src/server/tableFurniture.ts`, and geometry (playmat/library/
+graveyard/exile/Stack bounds) lives in `apps/tabletop/src/server/cardLayout.ts` — a full
+rewrite of that file's old row-based functions (`rowOrigin`, `battlefieldPosition`,
+`graveyardPosition`, `GRAVEYARD_X`, `EXILE_X`, `STACK_AREA` are gone; see
+`apps/tabletop/DESIGN.md` for the geometry they were replaced with). `seatJoined.ts`
+(`POST /api/tables/:tableName/events`, `seat.joined`) draws a seat's whole player area
+before any card arrives — unaffected by ticket 12's shape-type change. What ticket 12
+changed, still in `cardArrival.ts` (`handleCardArrival`): the shape it builds is now
+`type: "mtg-card"` with identity/face/image-URLs in `props` and an empty `meta`, not the
+old `type: "image"` shape with identity in `meta` and a minted per-card asset — see
+"Arrival renders the played face" below for the current shape.
 
 ## Arrival renders the played face
 
 - The card-arrival payload (`POST /api/tables/:tableName/cards`, frozen in F0/JES-128)
-  carries `face: "front" | "back"` beside `card: { scryfallId, instanceId }`.
-- The Shuffler computes the face-specific `imageUrl` (a blessed scaffolding
-  convenience) from `currentFace` via `getCardImageUrl(card, "normal", face)`. An MDFC
-  played on its back face arrives showing its back face.
-- **The Tabletop does NOT store `face`.** `cardArrival.ts:50` *validates* it
-  (`face must be "front" or "back"`) and then drops it on the floor: nothing in the
-  shape record, `props`, `meta`, or the asset carries it. The face reaches the canvas
-  only as baked-in pixels inside `imageUrl`. **Consequence: the Tabletop cannot change
-  a card's face today** — it doesn't know which face is showing, and it has no URL for
-  the other one. (This file previously claimed the Tabletop "stores `face` for later."
-  It never did; corrected 2026-08-07.)
-- The tldraw shape's `meta` is `{ instanceId, scryfallId, cardName }` — identity,
-  not face. Face is state; if a future gesture flips the card on the table, the
-  shape's image swaps but its identity does not change. **(Ticket 02 moves all of this
-  into `props`; `meta` empties out entirely. See "What a card will be" below.)**
+  carries `face: "front" | "back"` beside `card: { scryfallId, instanceId }`, plus (since
+  ticket 12, 2026-08-08) `frontImageUrl: string` and `backImageUrl: string | null`
+  (replacing the old baked `imageUrl`).
+- The Shuffler always sends `frontImageUrl` (`getCardImageUrl(card, "normal", "front")`)
+  and sends `backImageUrl` only when `card.twoFaced` (else `null`) —
+  `apps/shuffler/src/port-tabletop/types.ts`'s `buildCardPlayedEvent`. `face:
+  currentFace` still says which face is up on arrival.
+- **The Tabletop now stores everything it's given, directly in shape `props`.**
+  `cardArrival.ts`'s `handleCardArrival` writes `frontImageUrl`, `backImageUrl`, and
+  `face` straight onto the new `mtg-card` shape (`type: "mtg-card"`) — no baking, no
+  dropping. **Consequence: flip is now structurally a pure `props.face` write** — the
+  shape already holds both URLs, so a future flip gesture needs only to change one enum
+  field. (This file previously said the Tabletop "does NOT store `face`" and "cannot
+  change a card's face today." That was true through ticket 02; ticket 12 changed it. No
+  gesture writes `props.face` yet, though — see "Still open" below.)
+- The shape's `meta` is now `{}` at arrival — genuinely empty, not `{ instanceId,
+  scryfallId, cardName }` as before. Identity moved into validated `props` (`instanceId`,
+  `scryfallId`, `cardName`, alongside the image URLs and face state); `meta` is reserved
+  for zone membership, written later by `onTranslateEnd` (`meta.zone`) — see "What a card
+  is" below.
 
-## Rotation has a custom ShapeUtil now (JES-144, 2026-08-01) — being replaced
+## Rotation and tap: `MtgCardImageShapeUtil` was replaced by `MtgCardShapeUtil` (ticket 12, 2026-08-08)
 
-`apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx` extends tldraw's
-built-in `ImageShapeUtil` (cards stay `type: "image"` — no new shape type) and
-overrides only `onClick`: if `shape.meta?.instanceId` is present (an MTG card,
-not a furniture image like the playmat/library background, which are also
-`type: "image"` but `isLocked: true` and never reach `onClick`), it rotates the
-shape 90° and returns the partial; otherwise it returns `undefined` and tldraw's
-default behavior applies. Registered via `shapeUtils={[MtgCardImageShapeUtil]}`
-on `<Tldraw>` in `TablePage.tsx`. `rotation` is a base tldraw shape-record field
-(already present, hardcoded to `0` at arrival) — this didn't need a schema or
-contract change. Verified by `test/verification/verify-card-rotate.spec.ts`
-(bounding-box width/height swap after click).
+`apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx` (JES-144, 2026-08-01,
+`extends ImageShapeUtil`) is **gone** — deleted outright, not deprecated. Its
+`onClick` tap/untap behavior now lives on
+`apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` (`extends BaseBoxShapeUtil`),
+registered the same way (`shapeUtils={[MtgCardShapeUtil]}` on `<Tldraw>` in
+`TablePage.tsx`) but for the new `type: "mtg-card"` shape instead of a borrowed
+`type: "image"`. Semantics are unchanged: a toggle (`props.tapped`), rotation applied
+as a delta around the card's center (not its corner) so it composes with any free
+rotation already applied, not read back out of `rotation` itself. Still verified by
+`test/verification/verify-card-rotate.spec.ts`.
 
-**Watch point:** `onClick` is spoken for — by rotate today, by tap once ticket 04 lands
-either way. The flip gesture needs a different trigger; that's ticket 06's remaining
-question, with menu placement scoped by `no-doubleclick-crop` in the repo-root `TODO.md`.
-Note this whole util is being replaced by `mtg-card extends BaseBoxShapeUtil` (ticket 02),
-which keeps `onClick` as a base hook — so the trigger constraint survives the rewrite.
+**Watch point, unchanged in substance:** `onClick` is still spoken for — by tap. The
+flip gesture still needs a different trigger; that's still ticket 06's open question,
+with menu placement scoped by `no-doubleclick-crop` in the repo-root `TODO.md`. The
+prediction in this section (when it described `MtgCardImageShapeUtil`) that the
+`BaseBoxShapeUtil` rewrite would "keep `onClick` as a base hook" held — it did.
 
-## Drag picked up the wrong card after a previous drag — fixed (2026-08-07, `959831c`)
+## Drag picked up the wrong card after a previous drag — fixed (2026-08-07, `959831c`), ported forward (ticket 12, 2026-08-08)
 
-**Bug**: play two cards, drag one, then drag the *other* (still-unmoved) card — the first
-card silently moved again instead of the one under the pointer.
+**Bug** (original, on `MtgCardImageShapeUtil`): play two cards, drag one, then drag the
+*other* (still-unmoved) card — the first card silently moved again instead of the one
+under the pointer.
 
-**Root cause, and why it's this feature's territory**: `onClick`'s presence on
-`MtgCardImageShapeUtil` (added for tap/untap, JES-144 above) makes tldraw's `SelectTool`
-defer selecting the pointed-at shape until pointer-up
-(`PointingShape.onEnter` in `node_modules/tldraw/src/lib/tools/SelectTool/childStates/
-PointingShape.ts` skips select-on-enter whenever `getShapeUtil(shape).onClick` is
-truthy). The drag-start safety net (`startTranslating`) only force-reselects the
-actually-hit shape when *nothing* is currently selected. tldraw leaves the just-dragged
-card selected after a drag ends, so that guard is false on the next drag — translating
-silently continued to act on the stale selection (the previous card) instead of the
-shape under the pointer.
+**Root cause**: any `ShapeUtil` with an `onClick` makes tldraw's `SelectTool` defer
+selecting the pointed-at shape until pointer-up (`PointingShape.onEnter` in
+`node_modules/tldraw/src/lib/tools/SelectTool/childStates/PointingShape.ts` skips
+select-on-enter whenever `getShapeUtil(shape).onClick` is truthy). The drag-start
+safety net (`startTranslating`) only force-reselects the actually-hit shape when
+*nothing* is currently selected, and tldraw leaves the just-dragged card selected after
+a drag ends — so the guard is false on the next drag, and translating kept acting on
+the stale selection instead of the shape under the pointer.
 
-**Fix**: `onTranslateEnd` now calls `this.editor.setSelectedShapes([])`
-**unconditionally**, right after the `!current.meta?.instanceId` guard and *before* the
-zone-equality early return — so every drag settle leaves selection empty and the next
-drag's guard correctly re-selects whichever card the pointer lands on.
+**Fix, and where it lives now**: `onTranslateEnd` calls
+`this.editor.setSelectedShapes([])` **unconditionally**, right after the empty-selection
+guard and *before* the zone-equality early return, so every drag settle leaves
+selection empty and the next drag correctly re-selects whichever card the pointer lands
+on. **This was ported forward into `MtgCardShapeUtil.onTranslateEnd` when ticket 12
+replaced the util** (`apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx`), exactly as
+the porting note below (written when ticket 02 was only decided) required. The
+`959831c` fix on the old `MtgCardImageShapeUtil` is now historical — the live copy is on
+the new util.
 
-**Verified by** `apps/tabletop/test/verification/verify-drag-identity.spec.ts`: plays two
-non-overlapping lands, drags the first, then drags the second, and asserts the second
-moved while the first stayed put.
-
-**Porting note for ticket 02's replacement, `mtg-card extends BaseBoxShapeUtil`**: that
-rewrite is a full replacement, not an extension of this util (see "What a card will be"
-below), and it **keeps `onClick`** (spoken for by tap, per the watch point above) — so it
-inherits the same tldraw selection-deferral bug. **This selection-clearing behavior must
-be ported forward into the new shape util's `onTranslateEnd`/drag-settle handling when
-ticket 02 is implemented.** Tracked as an implementation requirement in
-`.scratch/tabletop-physics/issues/02-what-a-card-is.md`.
+**Verified by** `apps/tabletop/test/verification/verify-drag-identity.spec.ts` (and its
+renamed/updated sibling `verify-card-drag-identity.spec.ts`): plays two non-overlapping
+lands, drags the first, then drags the second, and asserts the second moved while the
+first stayed put.
 
 ## Face and face-down are two axes (decided 2026-08-07)
 
@@ -147,19 +149,20 @@ Shuffler's `CARD_BACK` image is *library stack decoration*, not modeled concealm
 face-down becomes real, that constant is the picture it should use, but concealment is
 state and the card back is only its rendering.
 
-## What a card will be — decided, ticket 02 (2026-08-07, commit `c956949`)
+## What a card is — decided ticket 02 (2026-08-07, `c956949`), implemented ticket 12 (2026-08-08)
 
-**No code changed yet.** This is the shape the implementation must take; read the ticket's
-§ Answer for the full reasoning before implementing.
+Read the ticket's § Answer for the full reasoning. **This is now live code**, not a plan.
 
-**A card becomes a genuine custom tldraw shape type**, `mtg-card` extending
-`BaseBoxShapeUtil`, and **it renders its own image**. `MtgCardImageShapeUtil extends
-ImageShapeUtil` is being *replaced*, not extended — the deciding argument was "one util,
-three meanings" (one `type: "image"` util today serves cards, locked furniture, and any
+**A card is a genuine custom tldraw shape type**, `mtg-card` extending
+`BaseBoxShapeUtil` (`apps/tabletop/src/shared/mtgCardShape.ts` for the validated
+`props` schema, `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` for the util),
+and **it renders its own image**. `MtgCardImageShapeUtil extends ImageShapeUtil` **was
+replaced**, not extended, and deleted outright — the deciding argument was "one util,
+three meanings" (the old `type: "image"` util served cards, locked furniture, and any
 JPEG a player drags in, separated only by `if (shape.meta.instanceId)`). Syncing a custom
-type is a mandatory three-place change and `TLSocketRoom` *disconnects* a client that
-pushes an unknown type — see `.scratch/tabletop-physics/research/tldraw-custom-shapes.md`
-and the ticket's "Blast radius".
+type was a mandatory three-place change (`TLSocketRoom` *disconnects* a client that
+pushes an unknown type) — see `.scratch/tabletop-physics/research/tldraw-custom-shapes.md`
+and the ticket's "Blast radius" — and it landed clean; no disconnects reported.
 
 **`meta` empties out; both axes live in `props`** (validated, migratable — `meta` is only
 "is it JSON", and `createShapePropsMigrationSequence` cannot touch it):
@@ -180,11 +183,13 @@ and the ticket's "Blast radius".
 
 Three consequences this owner cares about:
 
-- **The per-instance tldraw image asset goes away.** `cardArrival.ts:137` mints one asset
-  per card (`AssetRecordType.createId(instanceId)`) and the shape points at it via
-  `props.assetId`. Since the card holds both URLs and renders its own `<img>`, **flip
-  becomes a pure shape-prop change** — no asset mutation, clean undo. This was this
-  owner's argument and it carried.
+- **The per-instance tldraw image asset is gone.** `cardArrival.ts` no longer calls
+  `AssetRecordType.create`/`createId` at all — the old code minted one asset per card and
+  the shape pointed at it via `props.assetId`. Since the card holds both URLs and renders
+  its own `<img>` in `MtgCardShapeUtil.component()`, **flip is now a pure shape-prop
+  change** — no asset mutation, clean undo. This was this owner's argument and it
+  carried. (No flip gesture writes `props.face` yet — see "Still open" below — but the
+  structural work that makes it a one-field write is done.)
 - **`backImageUrl` is the printed back only, and `null` means "no printed back exists."**
   There is deliberately **no `twoFaced` flag** on the shape or the payload: Jess declined
   one on the grounds that `backImageUrl !== null` says it precisely, `twoFacedLayouts.ts`
@@ -202,27 +207,35 @@ Three consequences this owner cares about:
 
 Also decided, and outside this owner's territory but worth not re-deriving: the card knows
 nothing about its counters, notes, or what it's tucked behind (the passenger knows its
-parent, not the reverse); there is **no seat/controller/owner field**; and `zone` is left
-deliberately *unplaced* so ticket 03 can decide it rather than inherit it.
+parent, not the reverse); there is **no seat/controller/owner field**; and `zone` stays
+**deliberately out of `props`** — it's tracked in `meta.zone` instead (written by
+`MtgCardShapeUtil.onTranslateEnd`, per ticket 01's zone-entry detection), so ticket 13
+(the ownership-boundary/zone-shape-type question) can decide it rather than inherit it.
+(This section previously said "ticket 03"; the renumbered spec calls it ticket 13 — see
+`mtgCardShape.ts`'s own doc comment.)
 
-## The arrival payload unbakes the face — decided, ticket 02
+## The arrival payload unbakes the face — implemented, ticket 12 (2026-08-08)
 
-Exactly as this owner recommended, with **zero contract churn** (`imageUrl`/`cardName` are
-blessed scaffolding, not contract — `card.played.v1.json` carries only `card`, `face`,
-`initiator`, `occurredAt`):
+Exactly as this owner recommended in ticket 02, with **zero contract churn**
+(`frontImageUrl`/`backImageUrl`/`cardName` are blessed scaffolding, not contract —
+`card.played.v1.json` carries only `card`, `face`, `initiator`, `occurredAt`):
 
-- **`imageUrl` → `frontImageUrl` + `backImageUrl: string | null`** — *replacing* it, not
-  coexisting. A baked-face field left lying around is the bug being removed.
-- **`face` stays contract**, but its meaning shifts from "which face I baked in" to
-  "**which face is up on arrival**."
-- The back URL must be **sent, not derived**: bare constructed Scryfall URLs 404 for
-  freshly-released cards, which is the whole reason `backImageUris` is stored on
-  `CardDefinition` (commit `eb48f4f`).
+- **`imageUrl` → `frontImageUrl` + `backImageUrl: string | null`** — *replaced* it, not
+  coexisting alongside it. A baked-face field left lying around would have been the bug
+  left unfixed.
+- **`face` stays contract**, and its meaning has shifted from "which face I baked in" to
+  "**which face is up on arrival**" — both the doc comment and the interface reflect this
+  now.
+- The back URL is **sent, not derived**: `buildCardPlayedEvent` reads
+  `getCardImageUrl(card, "normal", "back")`, not a path-swapped `scryfallId` — bare
+  constructed Scryfall URLs 404 for freshly-released cards, the whole reason
+  `backImageUris` is stored on `CardDefinition` (commit `eb48f4f`).
 
-Two edit sites, both known: `buildCardPlayedEvent` in
-`apps/shuffler/src/port-tabletop/types.ts` (keep its field-by-field comment block in sync —
+Two edit sites, both landed: `buildCardPlayedEvent` in
+`apps/shuffler/src/port-tabletop/types.ts` (field-by-field comment block kept in sync —
 it is the de-facto spec of F0) and the hand-rolled `validationError` in
-`apps/tabletop/src/server/cardArrival.ts`.
+`apps/tabletop/src/server/cardArrival.ts` (now requires `frontImageUrl: string` +
+`backImageUrl: string | null`).
 
 ## Face-down is depicted, not enforced — and no gesture may be gated on control
 
@@ -252,8 +265,12 @@ belongs on **payload design**, not as a boundary check on every door. See
 
 ## Still open — narrowed to ticket 06
 
-`.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` was narrowed to exactly
-two questions, both of which this owner must be consulted on:
+Ticket 12 (2026-08-08) built the structural foundation — both image URLs and `face` live
+on the shape now — but **did not build a flip gesture or set `faceDown` from anywhere**;
+`faceDown` exists in `props` with a hardcoded `false` at arrival and nothing writes it
+yet. `.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` was narrowed to
+exactly two questions, both of which this owner must be consulted on before that gesture
+is built, and ticket 13 (zone ownership boundary) is also still open:
 
 1. **The trigger gesture.** `onClick` is spoken for by tap (ticket 04), so flip and
    turn-over each need a different gesture — context menu, hover affordance, one "turn
@@ -277,7 +294,9 @@ things by flip" above. Do NOT bake "front-ness" into shape identity.
   assume front.
 - Dedup is on `instanceId` (the card exists once on the table), NOT on
   scryfallId+face — two Forests are two instances; one MDFC flipped is still one
-  instance.
+  instance. **Since ticket 12, `instanceAlreadyOnTable` reads `props.instanceId`**
+  (was `meta.instanceId` when identity lived in `meta`) — if a future change moves
+  identity again, this dedup check has to move with it.
 - **`backImageUrl` must be derived from `card.twoFaced`, never from whether
   `backImageUris` happens to be stored.** This is the one sharp edge in the
   no-`twoFaced`-flag decision, and it lives entirely in `buildCardPlayedEvent`. The

@@ -1,12 +1,17 @@
 import React, { useEffect, useMemo } from "react";
-import { Tldraw, TLAssetStore } from "tldraw";
+import { defaultShapeUtils, Tldraw, TLAssetStore } from "tldraw";
 import "tldraw/tldraw.css";
 import { useSync } from "@tldraw/sync";
 import { setGlobalAttrs, currentTraceparent, inSpan } from "./observability";
 import { useCardArrivalSpans } from "./useCardArrivalSpans";
-import { MtgCardImageShapeUtil } from "./shapes/MtgCardImageShapeUtil";
+import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
 
-const shapeUtils = [MtgCardImageShapeUtil];
+// useSync (unlike <Tldraw>) builds its store schema from exactly the
+// shapeUtils it's given — it does NOT fold in tldraw's own defaults the way
+// <Tldraw> does — so the stock shapes furniture and name labels still use
+// (geo, image, text, ...) have to be listed here explicitly alongside
+// mtg-card, or the client store rejects them outright.
+const shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil];
 
 /**
  * The table: a synced tldraw canvas. Anyone with the URL joins — spectators
@@ -62,7 +67,7 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
     return connectionUri;
   }, [tableSlug]);
 
-  const store = useSync({ uri, assets: inlineAssets });
+  const store = useSync({ uri, assets: inlineAssets, shapeUtils });
 
   useCardArrivalSpans(store);
 

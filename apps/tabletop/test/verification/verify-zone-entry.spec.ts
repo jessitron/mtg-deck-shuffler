@@ -19,7 +19,8 @@ function cardPlayed(overrides: Record<string, unknown>) {
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
     face: "front",
-    imageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+    backImageUrl: null,
     zoneHint: "stack",
     ...overrides,
   };

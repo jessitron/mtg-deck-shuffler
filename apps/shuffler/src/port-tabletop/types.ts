@@ -28,9 +28,10 @@ import { CARD_BACK } from "../view/common/shared-components.js";
 //       scryfallId: string, // definition identity — the exact printing
 //       instanceId: string, // instance identity — THIS particular Forest (GUID, minted per game)
 //     },
-//     face: "front" | "back",           // face is card state, not identity — but it matters at play time
+//     face: "front" | "back",           // which face is up on arrival — card state, not identity
 //     zoneHint: "stack" | "battlefield" | "graveyard",  // the Shuffler knows land vs nonland; the tabletop stays meaning-free
-//     imageUrl: string,     // blessed scaffolding convenience (render without a Scryfall lookup) — NOT contract
+//     frontImageUrl: string,  // blessed scaffolding convenience (render without a Scryfall lookup) — NOT contract
+//     backImageUrl: string | null,  // present whenever card.twoFaced — NOT derived from backImageUris presence
 //     cardName: string,     // blessed scaffolding convenience — NOT contract
 //   }
 //
@@ -60,7 +61,8 @@ export interface CardPlayedEvent {
   };
   face: "front" | "back";
   zoneHint: ZoneHint;
-  imageUrl: string;
+  frontImageUrl: string;
+  backImageUrl: string | null;
   cardName: string;
 }
 
@@ -84,7 +86,8 @@ export function buildCardPlayedEvent(gameCard: GameCard, instanceId: string, ini
     },
     face: gameCard.currentFace,
     zoneHint,
-    imageUrl: getCardImageUrl(gameCard.card, "normal", gameCard.currentFace),
+    frontImageUrl: getCardImageUrl(gameCard.card, "normal", "front"),
+    backImageUrl: gameCard.card.twoFaced ? getCardImageUrl(gameCard.card, "normal", "back") : null,
     cardName: gameCard.card.name,
   };
 }

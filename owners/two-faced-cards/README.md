@@ -31,13 +31,18 @@ Every component of the fleet that touches cards must hold this:
 - **Shuffler** — tracks `currentFace` on each GameCard, renders flip buttons, sends
   the current face when a card leaves its boundary. The bulk of this knowledge base
   (architecture, interactions, files, history) is Shuffler-component knowledge.
-- **Tabletop** — renders the *played* face on arrival (the Shuffler bakes it into
-  `imageUrl`; the Tabletop validates `face` and drops it, so it cannot change a card's
-  face today). **That footing is decided away**: ticket 02 (2026-08-07, `c956949`) makes a
-  card a custom `mtg-card` tldraw shape that carries `frontImageUrl`, `backImageUrl | null`,
-  `face`, and `faceDown` in validated `props` and renders its own image, so flip becomes a
-  pure prop change. Not implemented yet. The remaining open questions are the trigger
-  gesture and `currentFace` authority (ticket 06). See [tabletop.md](tabletop.md).
+- **Tabletop** — renders the *played* face on arrival. **Ticket 12 landed
+  (2026-08-08)**: the card is now a genuine custom `mtg-card` tldraw shape (`BaseBoxShapeUtil`)
+  carrying `frontImageUrl`, `backImageUrl | null`, `face`, and `faceDown` in validated,
+  migratable `props`, and it renders its own `<img>` — no per-instance tldraw image asset is
+  minted anymore. The arrival payload was unbaked to match: `card.played`'s scaffolding
+  `imageUrl` field is gone, replaced by `frontImageUrl` + `backImageUrl: string | null`
+  (`buildCardPlayedEvent` in `apps/shuffler/src/port-tabletop/types.ts`). Flip is now
+  structurally a pure `props.face` write — but **writing a new `face` is not built yet**;
+  this ticket only unbaked the URLs so a future flip gesture has something to flip. Zone
+  membership still lives in `meta.zone`, deliberately not moved into `props` (ticket 13's
+  job). The remaining open questions are the trigger gesture and `currentFace` authority
+  for Table-zone cards (ticket 06). See [tabletop.md](tabletop.md).
 - **Contract** — every event about playing/revealing a card carries `face` beside
   `card: { scryfallId, instanceId }`. Names and image URLs are derivable
   conveniences, not identity. See [contract.md](contract.md).
