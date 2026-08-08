@@ -1,7 +1,8 @@
 import { test, expect } from "@jest/globals";
 import * as fc from "fast-check";
 import { GameState } from "../src/GameState.js";
-import { GameStatus, PERSISTED_GAME_STATE_VERSION, IncompatibleStateVersionError } from "../src/port-persist-state/types.js";
+import { GameStatus } from "../src/domain-types.js";
+import { PERSISTED_GAME_STATE_VERSION, IncompatibleStateVersionError } from "../src/port-persist-state/types.js";
 import { deckWithOneCommander } from "./generators.js";
 import { InMemoryCardRepositoryAdapter } from "../src/port-card-repository/InMemoryCardRepositoryAdapter.js";
 
