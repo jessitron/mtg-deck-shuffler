@@ -29,27 +29,30 @@ card-rendering owner. See `history.md` for the full migration note.
 ## Scope
 
 Everything under `apps/tabletop/src/client/shapes/` — currently one file,
-`MtgCardImageShapeUtil.tsx` — and its interaction with tldraw's own `SelectTool` child states
+`MtgCardShapeUtil.tsx` — and its interaction with tldraw's own `SelectTool` child states
 (`PointingShape`, `Translating`, in `node_modules/tldraw/src/lib/tools/SelectTool/childStates/`).
 Concretely: click/tap toggling, drag-and-drop, shape selection state, zone detection via shape
 bounds, and any tldraw quirk discovered while implementing these.
 
-**Ticket 02** (`.scratch/tabletop-physics/issues/02-what-a-card-is.md`, resolved 2026-08-07,
-`c956949`) decided the card becomes a genuine custom shape type, `mtg-card` extending
-`BaseBoxShapeUtil` (not `ImageShapeUtil`) — a full rewrite, not yet implemented. This owner's
-watch points apply to whatever ShapeUtil renders a card, present or future; **the file path in
-this KB will change when that rewrite lands** — update `files.md` then.
+**Ticket 02/12** (`.scratch/tabletop-physics/issues/12-*.md`, landed 2026-08-08) carried out the
+rewrite decided by ticket 02: the card is now a genuine custom shape type, `mtg-card`, defined in
+`apps/tabletop/src/shared/mtgCardShape.ts` and rendered by `MtgCardShapeUtil` extending
+`BaseBoxShapeUtil` (not `ImageShapeUtil`). The old `MtgCardImageShapeUtil.tsx` is deleted. See
+`architecture.md` for the mechanics and the tldraw registration gotchas this rewrite surfaced.
 
 ## Design philosophy
 
-- **Extend tldraw's built-in shape utils rather than reimplementing them.**
-  `MtgCardImageShapeUtil` extends `ImageShapeUtil` today specifically so crop/resize/rendering/
-  migrations stay exactly as tldraw ships them — only click/drag behavior differs. (Ticket 02's
-  `mtg-card` rewrite breaks from this for a different reason — see `architecture.md`.)
+- **Extend tldraw's built-in shape utils rather than reimplementing them, where that's still
+  possible.** The original `MtgCardImageShapeUtil` extended `ImageShapeUtil` specifically so
+  crop/resize/rendering/migrations stayed exactly as tldraw ships them — only click/drag behavior
+  differed. The ticket 12 rewrite deliberately breaks from this (see `architecture.md`'s "one
+  util, three meanings" rationale), rendering its own `<img>` inside `BaseBoxShapeUtil` instead.
 - **When tldraw does something surprising, read its source, don't guess.** The drag-bug fix was
   found by reading `PointingShape.ts` and `Translating.ts` in
   `node_modules/tldraw/src/lib/tools/SelectTool/childStates/`, not by trial and error. tldraw
-  ships its TypeScript source in `node_modules` — use it.
+  ships its TypeScript source in `node_modules` — use it. The same discipline found the
+  `TLGlobalShapePropsMap` augmentation mechanism and the `useSync`/`createTLSchema`
+  default-shapes gap documented in `architecture.md`.
 - **Record tldraw limits rather than fighting them.** This mirrors the convention already
   established in `owners/shuffler-looks-like-itself/README.md`'s "tldraw limits" section (no
   Orbitron in the `geo` font enum, `:focus-visible` can't reach canvas shapes, a locked shape can
@@ -60,9 +63,11 @@ this KB will change when that rewrite lands** — update `files.md` then.
 
 | What | Where |
 |---|---|
-| Card ShapeUtil (tap/untap, drag settle, zone detection) | `apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx` |
-| ShapeUtil registration | `apps/tabletop/src/client/TablePage.tsx` (`shapeUtils = [MtgCardImageShapeUtil]`) |
-| Shape identity is minted | `apps/tabletop/src/server/cardArrival.ts` (`meta.instanceId`, `createShapeId`) |
+| Card ShapeUtil (tap/untap, drag settle, zone detection) | `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` |
+| Card shape's props/type definition | `apps/tabletop/src/shared/mtgCardShape.ts` (`MtgCardShapeProps`, `TLGlobalShapePropsMap` augmentation) |
+| ShapeUtil registration (client) | `apps/tabletop/src/client/TablePage.tsx` (`shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil]` passed to `useSync`) |
+| Shape schema registration (server) | `apps/tabletop/src/server/rooms.ts` (`createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...} } })`) |
+| Shape identity is minted | `apps/tabletop/src/server/cardArrival.ts` (`props.instanceId`, `createShapeId`) |
 | tldraw's selection state machine (read, don't modify) | `node_modules/tldraw/src/lib/tools/SelectTool/childStates/PointingShape.ts`, `Translating.ts` |
 | Regression test for the drag-identity bug | `apps/tabletop/test/verification/verify-drag-identity.spec.ts` |
 

@@ -1,19 +1,39 @@
 # Files
 
+**Rewritten wholesale 2026-08-08** when ticket 12 (`.scratch/tabletop-physics/issues/12-*.md`)
+landed the `mtg-card` custom-shape rewrite decided by ticket 02. `MtgCardImageShapeUtil.tsx` is
+deleted; its replacement is split across a shared props/type file and the ShapeUtil itself.
+
+## Shared (the shape's type/props definition)
+
+- `apps/tabletop/src/shared/mtgCardShape.ts` — `MtgCardShapeProps` (the validated prop shape:
+  `w`, `h`, `instanceId`, `scryfallId`, `cardName`, `frontImageUrl`, `backImageUrl`, `face`,
+  `faceDown`, `tapped`), the `TLGlobalShapePropsMap` module augmentation that registers `mtg-card`
+  into tldraw's `TLShape` union, and `mtgCardShapeProps` (the `RecordProps` validators, imported
+  by both client `MtgCardShapeUtil.tsx` and server `rooms.ts`).
+
 ## Client (the ShapeUtil itself)
 
-- `apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx` — the whole territory today:
-  `onClick` (tap/untap), `onTranslateEnd` (selection cleanup + zone-entry detection), `zoneAt()`
-  (private helper). **Will be replaced/renamed** when ticket 02's `mtg-card` `BaseBoxShapeUtil`
-  rewrite lands — update this file list then.
-- `apps/tabletop/src/client/TablePage.tsx` — registers `shapeUtils = [MtgCardImageShapeUtil]`
-  with the `<Tldraw>` component. Add new custom ShapeUtils here.
+- `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — the whole territory today: extends
+  `BaseBoxShapeUtil<MtgCardShape>`; `onClick` (tap/untap, now toggling `props.tapped` with
+  rotation as a pure visual delta), `onTranslateEnd` (selection cleanup + zone-entry detection),
+  `zoneAt()` (private helper), `component()`/`getIndicatorPath()` (new — renders its own `<img>`
+  since it no longer delegates to tldraw's image machinery).
+- `apps/tabletop/src/client/TablePage.tsx` — registers
+  `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil]`, passed to `useSync` (not `<Tldraw>` —
+  this app uses the sync hook directly, which is why `defaultShapeUtils` must be spread in
+  explicitly; see `architecture.md`). Add new custom ShapeUtils here.
 
 ## Server (identity is minted here, mechanics is not)
 
-- `apps/tabletop/src/server/cardArrival.ts` — mints `meta.instanceId` at shape creation
-  (`createShapeId`, `AssetRecordType.createId`). Not this owner's mechanics territory per se, but
-  the identity contract every hook in `MtgCardImageShapeUtil` depends on.
+- `apps/tabletop/src/server/cardArrival.ts` — mints `props.instanceId` (moved out of `meta` by
+  ticket 12) at shape creation (`createShapeId`; no longer mints a tldraw asset record — flip is
+  a pure `props.face` write now). Not this owner's mechanics territory per se, but the identity
+  contract every hook in `MtgCardShapeUtil` depends on.
+- `apps/tabletop/src/server/rooms.ts` — builds the server-side `TLSocketRoom` schema via
+  `createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": { props: mtgCardShapeProps } } })`.
+  The server-side twin of `TablePage.tsx`'s client registration; same "must spread the defaults
+  explicitly" gotcha applies here, on the schema-validation side (see `architecture.md`).
 - `apps/tabletop/src/server/tableFurniture.ts` — draws zone shapes (`meta.zone` stamped, stock
   locked `geo`/`image` shapes). Consulted by `zoneAt()` but not itself a custom ShapeUtil.
 

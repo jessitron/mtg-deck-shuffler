@@ -70,7 +70,49 @@ card-rendering owner's overly broad trigger. This KB (`README.md`, `architecture
 `interactions.md`, this file) was seeded from that fix and from reading
 `MtgCardImageShapeUtil.tsx` and tldraw's `PointingShape.ts`/`Translating.ts` end to end.
 
+## Ticket 12: `mtg-card` becomes a genuine custom shape type (2026-08-08)
+
+Implements the rewrite decided by ticket 02 (`.scratch/tabletop-physics/issues/02-what-a-card-is.md`,
+resolved 2026-08-07). Replaced `MtgCardImageShapeUtil` (extended tldraw's `ImageShapeUtil`,
+sharing tldraw `type: "image"` with furniture and stray drops) with `mtg-card`, a genuine custom
+shape type: `apps/tabletop/src/shared/mtgCardShape.ts` (props, validators, `TLGlobalShapePropsMap`
+registration) and `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` (extends
+`BaseBoxShapeUtil<MtgCardShape>`; old file deleted).
+
+- **New tldraw fact** (a KB gap an earlier `-context` call flagged): a custom shape needs
+  `declare module "@tldraw/tlschema" { interface TLGlobalShapePropsMap { 'my-type': MyProps } }`
+  to join tldraw's ambient `TLShape` union — without it, `BaseBoxShapeUtil<MyShape>`'s generic
+  constraint fails to typecheck, since a hand-rolled `TLBaseShape<'my-type', Props>` is never a
+  member of that closed union on its own. tldraw's own documented pattern; now in
+  `architecture.md`.
+- **New gotcha**: `useSync`'s schema-building does NOT fold in tldraw's own default shape utils
+  the way `<Tldraw shapeUtils={...}>` does — passing `shapeUtils: [MtgCardShapeUtil]` alone to
+  `useSync` silently dropped geo/image/text/etc. from the *client* store's validation schema,
+  breaking furniture sync. Fixed by spreading `defaultShapeUtils` in (`TablePage.tsx`). The
+  server side has the mirror gotcha: `createTLSchema({ shapes: {...} })` also doesn't
+  default-fill omitted shapes — fixed by spreading `defaultShapeSchemas` in `rooms.ts`. Missing
+  either breaks furniture, not cards, and the server-side miss disconnects clients outright
+  rather than degrading quietly.
+- **New gotcha, the one that broke every click-based Playwright spec until found**: tldraw's
+  `.tl-html-container` is `pointer-events: none` by default, and pointer-events inherits, so a
+  bare `<img>` inside `<HTMLContainer>` was unclickable ("tl-background intercepts pointer
+  events"). Fixed by reusing tldraw's own `.tl-image-container`/`.tl-image` classes (which set
+  `pointer-events: all`) instead of inventing inline styles.
+- The `meta.instanceId`/`meta.scryfallId`/`meta.cardName` guard at the top of
+  `onClick`/`onTranslateEnd` — needed only because cards/furniture/stray-drops shared
+  `type: "image"` — is now dead weight and was removed. `mtg-card` is its own exclusive type, so
+  every instance is a real card by construction; identity now lives in validated `props`. `meta`
+  survives only for zone-entry dedup (`meta.zone`) — ticket 13 will move that to reading
+  `mtg-zone` shapes' props instead.
+- Rotation-as-delta and the `onTranslateEnd` selection-clearing workaround (both already
+  documented above) carried forward unchanged in substance: tap is now `props.tapped` (no more
+  `UNTAPPED_EPSILON` float-tolerance readback from rotation), with rotation applied as
+  `shape.rotation ± 90°` (a pure visual delta) so free rotation and tap compose independently.
+
+Full detail in `architecture.md` (Registration sections, "The `meta` guard is gone", "Ticket
+02/12: the rewrite, landed") and `interactions.md` (watch point 6, new).
+
 ## What Was Tried and Abandoned
 
-Nothing yet — this owner is new. If a future fix attempt for a similar quirk is tried and
-reverted, record it here so the next person doesn't repeat it.
+Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,
+record it here so the next person doesn't repeat it.
