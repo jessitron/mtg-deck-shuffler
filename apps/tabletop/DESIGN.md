@@ -4,14 +4,16 @@ What the Tabletop canvas should look like and how it comes into being. This is
 the target for Mountain 2 ("the physics of Magic") at the geography level: zones,
 sizes, and who creates what when. It deliberately says nothing about rules.
 
-Status: **built (2026-08-01), except the "playmat grows taller" edge case**
-(deferred; it now rides along with the `playmat-command-zone` inbox line in the
-repo-root `TODO.md`). `src/server/cardLayout.ts`
-and `cardArrival.ts` now implement the geometry below; the seat-joined trigger
-lives in `src/server/seatJoined.ts`, and the shared shape-drawing helpers in
-`src/server/tableFurniture.ts`. The delta table at the bottom describes what
-this replaced. The original spoken ramble this was distilled from is preserved
-at the end.
+Status: **the row layout below is built (2026-08-01); the Command Zone redraw
+(2026-08-08, decided in `.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`)
+is decided but not yet built.** The "playmat grows taller" edge case is still
+separately deferred — see Deferred, below. `src/server/cardLayout.ts`
+and `cardArrival.ts` implement the row-layout geometry as it stood before this
+redraw; the seat-joined trigger lives in `src/server/seatJoined.ts`, and the
+shared shape-drawing helpers in `src/server/tableFurniture.ts`. Building this
+redraw touches those three files, `DESIGN.md`-first. The delta table at the
+bottom describes what the row layout replaced. The original spoken ramble this
+was distilled from is preserved at the end.
 
 ## The goal
 
@@ -27,9 +29,10 @@ and the stack — before a single card is played.**
 | --------------- | -------------------------------------------------------------------------------------------------------------------- |
 | **Table**       | the shared board. A tldraw "room"; `/t/:tableName`. One per game.                                                    |
 | **Seat**        | a player at the table. Identity is `seatId`; `playerName` is display-only.                                           |
-| **Player area** | everything belonging to one seat: playmat + library + graveyard + exile + name label. A rectangle.                   |
+| **Player area** | everything belonging to one seat: playmat + library + command zone + graveyard + exile + name label. A rectangle.    |
 | **Playmat**     | the horizontal rectangle with the picture on it. On the Tabletop it _is_ the battlefield — nothing else lives on it. |
 | **Library**     | the deck. Modeled in the Shuffler (hidden zone); pictured here as a card back with a shadow.                         |
+| **Command Zone**| a labeled box beside the library, sized for **two** cards side by side (partner commanders). Home for the commander(s) when not on the battlefield. |
 | **Graveyard**   | a labeled grey box you can drag cards into.                                                                          |
 | **Exile**       | a labeled black box. Physically a sideways pile; here just a smaller box.                                            |
 | **The Stack**   | a shared blue strip above all the player areas. Non-land plays arrive here.                                          |
@@ -43,29 +46,40 @@ Everything is right side up for everyone. Player areas sit in a **row**, left to
 right, in join order.
 
 ```
- ┌───────────────────────────────────────────────────────────────────────────┐
- │  The Stack                                                                │
- │  (shared; spans all player areas; widens as each seat joins)              │
- └───────────────────────────────────────────────────────────────────────────┘
+ ┌───────────────────────────────────────────────────────────────────────────────┐
+ │  The Stack                                                                    │
+ │  (shared; spans all player areas; widens as each seat joins)                  │
+ └───────────────────────────────────────────────────────────────────────────────┘
 
-   Jess                                    Sam
- ┌──────────────────────┬────────┬──────┐ ┌──────────────────────┬────────┬──────┐
- │                      │ Library│Exile │ │                      │ Library│Exile │
- │  playmat             │ (card  │(box) │ │  playmat             │ (card  │(box) │
- │  = battlefield       │  back) │      │ │  = battlefield       │  back) │      │
- │                      ├────────┴──────┤ │                      ├────────┴──────┤
- │  (image background)  │               │ │  (image background)  │               │
- │                      │  Graveyard    │ │                      │  Graveyard    │
- │                      │  (box)        │ │                      │  (box)        │
- └──────────────────────┴───────────────┘ └──────────────────────┴───────────────┘
- └────────── one player area ───────────┘
+   Jess                                        Sam
+ ┌──────────────────────┬────────┬──────────┐ ┌──────────────────────┬────────┬──────────┐
+ │                      │ Library│ Command  │ │                      │ Library│ Command  │
+ │  playmat             │ (card  │  Zone    │ │  playmat             │ (card  │  Zone    │
+ │  = battlefield       │  back) │(2 cards) │ │  = battlefield       │  back) │(2 cards) │
+ │                      ├────────┴──────────┤ │                      ├────────┴──────────┤
+ │  (image background)  │                   │ │  (image background)  │                   │
+ │                      │    Graveyard      │ │                      │    Graveyard      │
+ │                      │      (box)        │ │                      │      (box)        │
+ │                      ├───────────────────┤ │                      ├───────────────────┤
+ │                      │   Exile (box)     │ │                      │   Exile (box)     │
+ └──────────────────────┴───────────────────┘ └──────────────────────┴───────────────────┘
+ └───────────── one player area ────────────┘
 ```
 
 Reading of the physical table this comes from: library at the top right, graveyard
-below it (closer to me), exile between/beside them. Here the library/exile/graveyard
-column moves **off** the playmat, to its right, so the playmat stays purely
-battlefield. The column's height matches the playmat's, so the whole player area is
-a clean rectangle.
+below it (closer to me), exile between/beside them. Here the library/command-zone
+row and the graveyard/exile column below it move **off** the playmat, to its right,
+so the playmat stays purely battlefield. The column's height matches the playmat's,
+so the whole player area is a clean rectangle.
+
+**Command Zone redraw (2026-08-08).** Jess: "the command zone is its own area... it
+has to accommodate 2 cards, some commanders have partner." Decided in
+`.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`: the
+Command Zone takes the **old Exile spot**, next to the Library. Exile moves down
+into the **bottom third** of the old Graveyard footprint; Graveyard shrinks to the
+**top two-thirds** of that space. The column has to widen to fit Library + a
+two-card-wide Command Zone side by side — and that ripples: every player area to
+the seat's right shifts over (see Geometry, below).
 
 ## Geometry
 
@@ -77,21 +91,30 @@ Derived from the physical objects, so proportions feel right:
 Today's canvas card is `CARD_W = 170`, `CARD_H = 238`, which fixes the scale at
 **68 canvas units per inch**. Everything else follows:
 
-| Thing             | Size (canvas units)                   | In cards                                                            |
-| ----------------- | ------------------------------------- | ------------------------------------------------------------------- |
-| Card              | 170 × 238                             | 1 × 1                                                               |
-| Playmat           | 1632 × 952                            | 9.6 × 4                                                             |
-| Right-hand column | 425 wide                              | 2.5                                                                 |
+| Thing             | Size (canvas units)                   | In cards                                                             |
+| ----------------- | ------------------------------------- | --------------------------------------------------------------------- |
+| Card              | 170 × 238                             | 1 × 1                                                                |
+| Playmat           | 1632 × 952                            | 9.6 × 4                                                              |
+| Right-hand column | ~545 wide                             | ~3.2 (was 2.5, before the Command Zone redraw)                       |
 | Library slot      | 170 × 238                             | 1 × 1 (top-left of the column)                                      |
-| Exile box         | ~240 × 238                            | (top-right of the column, beside the library)                       |
-| Graveyard box     | 425 × ~694                            | 2.5 wide; fills from under the library to the playmat's bottom edge |
-| Player area       | ~2077 × 952                           | playmat + 20 gap + column                                           |
+| Command Zone      | ~360 × 238                            | 2 × 1 (top-right of the column, beside the library; two commanders) |
+| Graveyard box      | ~545 × ~463                           | fills the top two-thirds of the space under Library/Command Zone    |
+| Exile box         | ~545 × ~231                           | fills the bottom third of that same space, below Graveyard          |
+| Player area       | ~2197 × 952                           | playmat + 20 gap + column                                           |
 | Stack strip       | full width of all player areas × ~350 | "taller than a card"                                                |
 
 Vertical order, top to bottom: **stack strip → player name label → player area**.
 
-Graveyard width comes from "two or three times as wide as the library"; its height
-from "it fits under the library and above the bottom of the playmat."
+Graveyard+Exile width comes from the column's own width (Library + gap + Command
+Zone); their combined height is unchanged from before the redraw — "it fits under
+the library and above the bottom of the playmat" — just now split two-thirds
+Graveyard, one-third Exile instead of being one box.
+
+**The ripple.** `Right-hand column` growing from 425 to ~545 grows `Player area`
+the same amount, and `playerAreaX(seatIndex)` in `cardLayout.ts` places every seat
+at a fixed offset by join order — so this widens every seat's column by ~120 units
+**and shifts every player area to the right of a widened one over to match**. In
+scope for this redraw, not deferred.
 
 ## How a table comes into being
 
@@ -172,11 +195,20 @@ Nobody is restricted from moving anybody else's cards. That's not an oversight.
 
 ## Deferred
 
-- **Per-seat rotated views.** What I actually want is a circle of playmats — two
-  facing each other, three as a triangle, four as a square — with _my_ mat in front
-  of _me_ and the stack in the middle. tldraw (as far as Jess knows) can't rotate the
-  view per viewer on a shared board. The row is the workaround, chosen only because
-  everything must be right side up for everyone. Worth revisiting.
+- **Per-seat rotated views / the square.** What I actually want is a circle of
+  playmats — two facing each other, three as a triangle, four as a square — with
+  _my_ mat in front of _me_ and the stack in the middle. tldraw (as far as Jess
+  knows) can't rotate the view per viewer on a shared board. The row is the
+  workaround, chosen only because everything must be right side up for everyone.
+  Confirmed still wanted 2026-08-08, while resolving the Command Zone redraw —
+  now its own ticket, [Design the square](../../.scratch/tabletop-table-layout/issues/10-the-square.md).
+- **"Playmat grows taller" when lands overflow the bottom half.** Deliberately
+  kept deferred, separately from the 2026-08-08 Command Zone redraw
+  (`.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`):
+  it's a *runtime* resize that cascades to everything below the playmat (Library,
+  Command Zone, Graveyard, Exile all shift down when the mat grows), a different
+  shape of problem from that redraw's one-time *static* geometry change. Bundling
+  them would have made the redraw's ripple harder to review on its own.
 - **Playmat selection** in prep (a dropdown; see `notes/FEATURE-playmat.md`).
 - **Sleeve selection** in prep, which makes the card back vary per seat.
 

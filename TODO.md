@@ -13,6 +13,20 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- [ ] `zone-look-not-landed` `tableFurniture.ts`'s zone boxes still draw the old provisional look, not the decided one
+  - Surfaced 2026-08-08 by `shuffler-looks-like-itself-context` while starting
+    `.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`. `regionShape()` in
+    `apps/tabletop/src/server/tableFurniture.ts` still draws dashed grey, `serif` label, opacity
+    0.5, no radius/tokens — but `.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md`
+    (resolved 2026-08-07, staged and confirmed on `/design`) decided and confirmed a different
+    look: `2px dashed var(--dark-pink)` at rest, `--armed-glow` amber ring+tint when a card is
+    dragged over, Orbitron (`--font-chrome`) label — plus the playmat's own exception (`10px solid
+    black`, radius computed as 5% of the shape's height).
+  - Matters now because ticket 01 is about to draw a new command-zone box through this same stale
+    code path — worth fixing `regionShape()` before or alongside that, so the new zone doesn't
+    inherit the wrong look.
+  ← mountain: tabletop-replaces-mural
+
 - [ ] `tabletop-no-shutdown-flush` The Tabletop's server has the same dropped-telemetry-on-shutdown gap the Shuffler just fixed
   - Surfaced 2026-08-07 while resolving `.scratch/verify-suite-speed/issues/08-no-shutdown-flush-hook.md`
     (the Shuffler's `tracing.ts` had no SIGTERM/SIGINT handler, so `verify.sh`'s `cleanup()` and every
