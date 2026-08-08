@@ -39,6 +39,14 @@ that doesn't match.
   kept out of the contract can be reshaped at will; anything promoted into `contracts/`
   cannot.
 
+- **Sleeve color is seat data and stays out of card events** (table-layout ticket 11,
+  2026-08-08, decision only). When sleeves land, optional `sleeveColor` (hex) joins the
+  player data on `seat.joined`, and `cardBackImageUrl` there becomes optional (omitted when
+  a sleeve is defined; `sleeveColor` wins if both arrive). **`card.played` is NOT revved**:
+  it already carries `seat`, and its charter keeps derivable seat conveniences out of the
+  payload. `seat.joined` has no schema in `contracts/` yet; writing one converges with
+  table-layout ticket 06's deck-name field — one schema session covers both.
+
 ## Watch points
 
 - Changing `face`'s shape (or the card reference) in `contracts/payloads/card.played.v1.json`

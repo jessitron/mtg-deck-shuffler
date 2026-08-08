@@ -78,6 +78,7 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 | `src/port-card-repository/SqliteCardRepositoryAdapter.ts` | Stores `card_types`/`image_uris`/`back_image_uris` as JSON, `two_faced` as integer; rebuilds the cache table on old schema, adds image columns via `ALTER TABLE` |
 | `src/port-card-repository/hydration.ts:80-123` | Hydrates/dehydrates `currentFace` (and `cardInstanceId`) between GameCard and PersistedGameCard |
 | `src/port-tabletop/types.ts` | `buildCardPlayedEvent` — the ONE place a GameCard becomes a card.played payload; sends `face: currentFace` (which face is up on arrival) + `frontImageUrl: string` + `backImageUrl: string \| null` (derived from `card.twoFaced`, landed ticket 12, 2026-08-08) |
+| `src/port-tabletop/types.ts:~124` | `cardBackImageUrl()` — the standard Magic card back as an absolute URL, sent on `seat.joined`; also consumed by the Tabletop's library furniture image. Per table-layout ticket 11 (decided 2026-08-08, not built): becomes optional when a seat has a `sleeveColor`; its "until sleeve selection exists" comment should point at that ticket when implemented |
 | `src/port-tabletop/sendToTable.ts` | `sendCardToTableFirst` (send-then-commit) + `zoneHintForPlay` (reads `cardTypes` for land vs nonland) |
 | `src/port-tabletop/HttpTabletopGateway.ts`, `FakeTabletopGateway.ts` | Real/fake gateways behind `TabletopPort` |
 

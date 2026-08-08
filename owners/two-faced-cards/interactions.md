@@ -136,8 +136,14 @@ These are specific things that could break two-faced cards if changed elsewhere:
 
 14. **Face-down is modeled only on the Tabletop, and only on paper so far.** Ticket 02
     (2026-08-07, `c956949`) gives it a home: `faceDown: boolean` in the `mtg-card` shape's
-    `props`, rendered against the **table's** `cardBackImageUrl` — not a card property,
-    because sleeves are coming. **No code exists yet.** Still nothing on `CardDefinition`,
+    `props`. Its *rendering* was revised by table-layout ticket 11 (2026-08-08,
+    `.scratch/tabletop-table-layout/issues/11-sleeve-color-to-card-back.md`): for a
+    **sleeved** seat, face-down renders as a solid `sleeveColor` rectangle whose color the
+    Tabletop server **bakes into the shape's props at mint time** (legal because sleeve
+    color is a game constant — see watch point 17); for an **unsleeved** seat, face-down
+    renders against the standard Magic card back (`cardBackImageUrl`). Ticket 02's original
+    "rendered against the table's `cardBackImageUrl`, never per-card" sentence is
+    superseded. **No face-down code exists yet.** Still nothing on `CardDefinition`,
     `GameCard`, `PersistedGameCard`, or in `contracts/`; a Shuffler "Play Face-Down" button
     remains dropped to the Mural-parity buoy list.
 
@@ -188,6 +194,26 @@ These are specific things that could break two-faced cards if changed elsewhere:
     this one, for anything touching click/drag/selection behavior on `MtgCardImageShapeUtil`
     or its successors (including ticket 02's `mtg-card` rewrite).
 
+17. **Sleeve color is a separate prop, never smuggled into `backImageUrl` — decided,
+    not built (table-layout ticket 11, 2026-08-08).** When sleeves land: `sleeveColor`
+    (optional hex) travels as its own field on `seat.joined` player data (not a data:
+    URI, not a Shuffler-served image — it's *player identity* and counters need the raw
+    hex); `cardBackImageUrl` becomes optional, omitted when a sleeve is defined, and
+    `sleeveColor` wins if both arrive. At card arrival the Tabletop server bakes the
+    seat's sleeve color into the `mtg-card` shape's props — legal because **sleeve color
+    is a game constant** (chosen pre-game, immutable mid-game; that immutability is what
+    dissolved ticket 02's "never bake per-card" rule). This owner's invariant held and
+    stays binding: **`backImageUrl: null` ⇔ no printed back exists** is untouched;
+    sleeve data must never overload it. Rendering model: face-down / library pile =
+    solid sleeve rectangle; face-up sleeved card = image centered inside a sleeve-color
+    border rectangle; unsleeved cards keep today's look. Exact margins/radius are
+    reserved for `shuffler-looks-like-itself` at implementation time. **No `card.played`
+    rev**: it already carries `seat`, and its charter keeps derivable seat data out.
+    Jess's stated future (not v1): a sleeve may someday carry an image URL and two
+    colors (front border vs back). When implementing, also update the "until sleeve
+    selection exists" comment on `cardBackImageUrl()` in
+    `apps/shuffler/src/port-tabletop/types.ts` (~line 124) to point at the ticket.
+
 ## Not Related To
 
 ### Card Back (library face-down rendering)
@@ -195,7 +221,9 @@ The MTG card back image (`/images/mtg-card-back.jpg`, `CARD_BACK` constant) is t
 
 Note the 2026-08-07 nuance: the *concept* of a face-down card **is** this owner's territory (it's the second axis alongside `face` — see watch points 12–15), but `CARD_BACK` today is only library-stack decoration, not modeled state. When face-down becomes real, `CARD_BACK` (or a sleeve image) is what renders it — the picture stays a rendering detail, the concealment is the state.
 
-Ticket 02 settled *where the picture lives* on the Tabletop, and it is emphatically **not on the card**: `faceDown` resolves against the **table's** `cardBackImageUrl` (already arriving on `seat.joined`), because a sleeve belongs to a player or table and baking it per-card would mean rewriting every shape on the board when someone changes sleeves. Same separation, arrived at from the sleeve-picker direction.
+Ticket 02 settled *where the picture lives* on the Tabletop as "not on the card" — `faceDown` resolving against the seat's `cardBackImageUrl` — because baking per-card would mean rewriting every shape when someone changes sleeves mid-game. **Table-layout ticket 11 (2026-08-08) amended this**: sleeve color is a game constant (never changes mid-game), so per-card baking is now legal and is the chosen design — the Tabletop server bakes the seat's `sleeveColor` into the shape's props at mint time, dodging the client-side seat-lookup gap. `cardBackImageUrl` remains the rendering for *unsleeved* seats only. See watch point 17.
+
+Also note (KB gap closed 2026-08-08): the **library furniture image is a second consumer of the card back** — whatever renders a seat's face-down cards (sleeve rectangle or standard back) must render its library pile the same way.
 
 ### Deck Selection Search
 The text filter on the deck selection page (`deck-selection.js`) is a UI filter for finding decks, not cards. Unrelated to two-faced card display or data.
