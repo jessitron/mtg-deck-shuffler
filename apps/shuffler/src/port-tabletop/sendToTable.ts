@@ -19,6 +19,7 @@ export function zoneHintForPlay(gameCard: GameCard): ZoneHint {
  * failure — a play that silently missed the tabletop is worse than one that
  * says it failed. (A send that worked but wasn't acknowledged is covered by
  * the tabletop's dedup on instanceId: re-sending is a physical no-op.)
+ * Full protocol, all stations: notes/DESIGN-send-then-commit.md.
  *
  * A fresh event id is minted per attempt (inside buildCardPlayedEvent), so
  * retries are distinguishable from duplicates.

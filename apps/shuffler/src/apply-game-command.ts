@@ -22,6 +22,7 @@ export type CommandOutcome =
  * persists anything. Carries pre-rendered HTML for the caller's error
  * modal. Any other error `beforeMutate` throws propagates uncaught, same
  * as `mutate`'s contract.
+ * Full protocol, all stations: notes/DESIGN-send-then-commit.md.
  */
 export class TableSendFailedError extends Error {
   constructor(public readonly errorHtml: string) {

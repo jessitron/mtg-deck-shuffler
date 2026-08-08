@@ -3,7 +3,7 @@
 Mountain: overhead
 Ship: shuffler
 Type: task
-Status: needs-triage
+Status: resolved
 
 ## Context
 
@@ -35,3 +35,22 @@ that work rather than separately, since ticket 02 will already be reading all fo
 ## Ship
 
 `apps/shuffler/` only. Documentation-only; no test changes.
+
+## Answer
+
+Resolved 2026-08-08. The canonical statement is a new doc,
+`apps/shuffler/notes/DESIGN-send-then-commit.md`, following the ship's `DESIGN-*.md`
+convention — the protocol crosses four modules (route / command protocol / gateway /
+view / layout), so no single code file was a natural home. It states the invariant
+(send FIRST, mutate+persist only on success; failure blocks the action), the why, the
+retry/dedup safety, the contrast with best-effort `seat.joined`, and the six stations
+a failure travels in order: `sendCardToTableFirst` → `sendCardBeforeMutate` →
+`applyGameCommand`'s `send-failed` outcome → `renderCommandOutcome`'s 502 +
+HX-Retarget → htmx `responseHandling`'s `{502, swap:true, error:true}` → the
+conditional close-modal in the Play/Discard button.
+
+Each of the five code sites got a one-line pointer ("Full protocol, all stations:
+notes/DESIGN-send-then-commit.md"), and CLAUDE.md § Table Mode links it. Note the
+ticket's snapshot predated ticket 02: the app.ts try/catch it described is now the
+`beforeMutate` hook — the doc describes today's shape. No runtime changes; build and
+all 302 tests green.

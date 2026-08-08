@@ -219,7 +219,9 @@ version bumps). `/restart-game` carries them forward.
   `src/port-tabletop/` (`HttpTabletopGateway`; `FakeTabletopGateway` for tests); only on
   success mutate + persist. Failure → 502 error modal, card stays in hand. Solo mode
   (no table): clipboard flow, untouched. Zone hints: land→battlefield, nonland→stack,
-  discard→graveyard.
+  discard→graveyard. The full failure protocol, station by station (send → abort →
+  `applyGameCommand` → 502 response → htmx config → modal choreography):
+  `notes/DESIGN-send-then-commit.md`.
 - **`seat.joined` (JES-140)**: `/start-game` and `/restart-game` call
   `sendSeatJoinedBestEffort()` (`src/port-tabletop/sendToTable.ts`) right after `tableInfo`
   is built, so the Tabletop draws the seat's player area (playmat, library, graveyard,
