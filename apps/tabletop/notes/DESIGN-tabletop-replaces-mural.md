@@ -1,20 +1,20 @@
 # The Tabletop replaces Mural
 
-The high-level path for `SEAMAP.md`'s **Mountain 1**. This document is the chart *above*
+The high-level path for `SEAMAP.md`'s **Mountain 1**. This document is the chart _above_
 the wayfinder maps: it holds the whole parity list in one place, splits it into six maps,
 and says what order they go in. Each map points back here; this points at each map.
 
 Source: `notes/ramble-tabletop-replaces-mural.md` (Jess, 2026-08-06) — a dictated pass over
 everything the Tabletop needs before it can take Mural's place — grilled into shape the same
 day. It's kept as a primary source: when this document and the ramble disagree, the ramble is
-what she actually said. 
+what she actually said.
 
 ## The destination
 
 **Parity, judged before the first real game — not discovered during it.**
 
 Mural is not a fallback. You cannot start a game on the Tabletop and reach for Mural when
-something is missing, so the list has to be complete *before* you play on it, not after.
+something is missing, so the list has to be complete _before_ you play on it, not after.
 That rules out the tempting alternative destination ("play one real game and see what
 breaks"): one game wouldn't exercise everything, and a gap found mid-game is a ruined game.
 
@@ -126,7 +126,7 @@ Recorded so it's ruled out rather than forgotten:
   meaning is not its job.
 - **Playing a card from the library face-down onto the table** — Mural doesn't do it either, so
   it isn't parity. Real Magic wants it; a later mountain can have it.
-- **Everything else needed to play Magic *correctly*.** This chart is bounded by what Mural
+- **Everything else needed to play Magic _correctly_.** This chart is bounded by what Mural
   solves today, not by the game's full surface.
 - **Rules enforcement** — a standing fleet non-goal.
 
@@ -134,14 +134,14 @@ Recorded so it's ruled out rather than forgotten:
 
 Charted with `/wayfinder`, one at a time. Each map's own `map.md` links back to this document.
 
-| # | Map | Tracker | Status |
-|---|-----|---------|--------|
-| 1 | Physics — cards and furniture are real shapes | `.scratch/tabletop-physics/` | charted 2026-08-06 |
-| 2 | Table layout | `.scratch/tabletop-table-layout/` | charted (was `tabletop-card-physics-starter`) |
-| 3 | Cards come and go | — | not charted |
-| 4 | Only Magic moves | — | not charted |
-| 5 | The table reports | — | not charted |
-| 6 | The table remembers | — | not charted |
+| #   | Map                                           | Tracker                           | Status                                        |
+| --- | --------------------------------------------- | --------------------------------- | --------------------------------------------- |
+| 1   | Physics — cards and furniture are real shapes | `.scratch/tabletop-physics/`      | charted 2026-08-06                            |
+| 2   | Table layout                                  | `.scratch/tabletop-table-layout/` | charted (was `tabletop-card-physics-starter`) |
+| 3   | Cards come and go                             | —                                 | not charted                                   |
+| 4   | Only Magic moves                              | —                                 | not charted                                   |
+| 5   | The table reports                             | —                                 | not charted                                   |
+| 6   | The table remembers                           | —                                 | not charted                                   |
 
 **Order.** Map 1 blocks map 2: the square layout, the command zone, and life counters all want
 furniture that behaves, and rebuilding the shape layer underneath finished geometry is the
