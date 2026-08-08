@@ -113,11 +113,13 @@
    intercepts pointer events" rather than anything shape-specific. See `architecture.md`'s
    Registration sections for all four. This bit on ticket 12's implementation (item 4, the
    pointer-events trap, broke every click-based Playwright spec until traced). **Item 4 is
-   conditional on the shape being clickable**: ticket 13's `mtg-zone` generalized steps 1-3
-   cleanly (see `architecture.md`) but didn't need step 4 at all — a locked shape's `component()`
-   is never subject to a Playwright actionability check because nothing ever clicks it, so
-   `MtgZoneShapeUtil.component()` renders a plain `<div>` with no `.tl-image-container` treatment
-   and that's correct, not an oversight.
+   conditional on the component's content being interactive — NOT on the shape being unlocked**:
+   ticket 13's `mtg-zone` generalized steps 1-3 cleanly (see `architecture.md`) but didn't need
+   step 4 at all, because nothing ever clicks a zone — `MtgZoneShapeUtil.component()` renders a
+   plain `<div>` with no `.tl-image-container` treatment and that's correct, not an oversight.
+   The decided-but-unbuilt `mtg-counter` (see `architecture.md`) is the counterexample that
+   forced this precision: it will be *locked* yet its `component()` hosts buttons and an input,
+   so it pays step 4 in full — locking gates tldraw's gesture state machine, not DOM events.
 
 7. **A locked shape needs no interaction hooks — now demonstrated, not just asserted.**
    `MtgZoneShapeUtil` (ticket 13, `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx`) defines
@@ -131,7 +133,11 @@
    quirk, because that quirk's gate (`PointingShape.onEnter`) sits behind the very same
    `isLocked` check — a locked shape with `onClick` never reaches the code path that defers
    selection in the first place. This distinction (locked-with-onClick vs. unlocked-with-onClick)
-   is worth remembering exactly because it looks like it should matter and doesn't.
+   is worth remembering exactly because it looks like it should matter and doesn't. **"No
+   interaction hooks" does not mean "no interactivity"**: locking gates ShapeUtil hooks (the
+   gesture state machine), not DOM events inside `component()` — a locked shape can still host
+   working buttons via the `HyperlinkButton` pattern (see watch point 9 and `architecture.md`'s
+   `mtg-counter` section).
 
 8. **`zoneAt()` is first-match-not-closest-match, with no orientation awareness — a new risk
    once zones cluster around a shared center.** `zoneAt()` (`MtgCardShapeUtil.tsx`, see
@@ -153,6 +159,20 @@
    "the square" should re-check `zoneAt()` against the actual N/E/S/W geometry once it's drawn,
    and consider closest-match-by-distance or smallest-containing-zone as a tiebreak if AABBs do
    end up overlapping.
+
+9. **Locked-but-interactive shapes: the `mtg-counter` pattern (decided 2026-08-08, not yet
+   built).** A life counter will be a new locked custom shape whose `component()` renders +/-
+   buttons and a typeable number field (see `architecture.md`'s "`mtg-counter`: decided, not
+   built"). Whoever builds it — or any future locked shape with live controls — has three
+   specific hazards on record: (a) each control needs `pointer-events: all` plus
+   `editor.markEventAsHandled(e)` in its pointer handlers (tldraw's own `HyperlinkButton`
+   pattern; preferred over the older `stopEventPropagation` util) or the canvas swallows the
+   press; (b) the typeable field must shield keystrokes from tldraw's tool hotkeys, or typing a
+   life total switches tools; (c) tldraw sync is last-writer-wins, so simultaneous presses on
+   the same counter can lose one increment — accepted for counters, and the reason
+   story-quality life-change records need an explicit event per press (parked at
+   `.scratch/tabletop-replaces-mural/parked/life-change-events.md`). Watch point 1 does NOT
+   apply to it (locked shapes never reach `PointingShape`), but watch point 6's step 4 does.
 
 ## Not Related To
 

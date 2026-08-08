@@ -180,6 +180,39 @@ but becomes a live risk once the square packs E/W zones close to the Stack's cor
 overlapping/abutting zone AABBs could cause wrong-zone detection. Recorded as watch point 8 in
 `interactions.md` so it's on record before implementation starts, not discovered mid-build.
 
+## Life counters — `mtg-counter` decided, mechanics facts recorded (2026-08-08)
+
+`.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md` resolved the
+wayfinder ticket "Life totals and commander damage." **Design only — no code changed.** (Not to
+be confused with `tabletop-physics` ticket 12, the `mtg-card` rewrite above — two maps, two
+"ticket 12"s.) Decision: a life counter is a **third custom shape type**, working name
+`mtg-counter` — locked furniture whose `component()` renders a number with +/- buttons and a
+directly-typeable field; everyone can press anyone's buttons; syncs as ordinary shape props.
+
+This owner was consulted during the grilling session (via `-context`) and its findings — read
+from tldraw source, explicitly asked to be recorded here — settled the core design question:
+
+- **Locking gates tldraw's gesture state machine, not DOM events.** `SelectTool`'s `Idle`
+  filters `isLocked` before `PointingShape`; `getDraggingOverShape` filters `!isLocked`; neither
+  touches DOM dispatch inside `component()`. A locked shape can host working buttons — this fact
+  is what made "locked furniture with live controls" viable.
+- **The canonical control pattern is tldraw's own `HyperlinkButton`**: `pointer-events: all` on
+  the control + `editor.markEventAsHandled(e)` in `onPointerDown`/`onPointerUp` (`Editor.ts:10876`,
+  checked by `useCanvasEvents`' `wasEventAlreadyHandled`), preferred over the older
+  `stopEventPropagation` util.
+- **tldraw sync is last-writer-wins, not a CRDT** — simultaneous prop writes can lose an
+  increment. Accepted for counters; also why story-quality life-change records need an event per
+  press (parked at `.scratch/tabletop-replaces-mural/parked/life-change-events.md` for Map 5).
+
+KB consequences: new `architecture.md` section ("`mtg-counter`: decided, not built"), new watch
+point 9 in `interactions.md`, and a precision fix to watch point 6's item-4 caveat — its
+condition was restated from "the shape is clickable" (which `mtg-zone`'s writeup had justified
+with "locked shapes are never clicked") to "the component's content is interactive," since
+`mtg-counter` will be locked *and* clicked. Watch point 7 gained the matching clarification that
+"no interaction hooks" never meant "no interactivity." Forward-looking cautions recorded for the
+implementer: full four-step registration cost including the pointer-events step `mtg-zone` never
+exercised, and keystroke shielding for the typeable field.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,
