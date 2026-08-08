@@ -15,10 +15,9 @@ commander in and out of, **life totals and commander damage** you can change, an
 space looking like theirs (playmat, sleeves, name, deck). Done when every one of those is
 designed and decided — not built.
 
-**Blocked, as a map, by [Physics](../tabletop-physics/map.md).** Furniture here has to recognise
-what lands on it (a commander entering the command zone, a card leaving a playmat), and map 1
-decides what furniture *is*. Rebuilding the shape layer under finished geometry is the expensive
-way round.
+**Unblocked 2026-08-08** — [Physics](../tabletop-physics/map.md) is fully resolved (all 11
+tickets closed): furniture is `mtg-zone`, cards are `mtg-card`, both real custom shape types.
+This map builds the geography on top of that settled shape layer.
 
 Three of the tickets below don't touch shape architecture and can be worked in parallel if you
 want motion: seat label deck name, sleeve/playmat picker, and the cosmetic half of player-area
