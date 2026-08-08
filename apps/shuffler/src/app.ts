@@ -121,104 +121,6 @@ export function createApp(
     return { valid: true };
   }
 
-  // Middleware: Load game from route params (:gameId)
-  async function loadGameFromParams(req: express.Request, res: express.Response, next: express.NextFunction) {
-    const gameIdParam = req.params.gameId;
-    const gameId = Number(gameIdParam);
-    const span = trace.getActiveSpan();
-
-    if (!gameIdParam || !Number.isInteger(gameId)) {
-      const errorMessage = "Missing or invalid game ID";
-      markCurrentSpanAsError(errorMessage, {
-        "error.message": errorMessage,
-        "game.load.failure": "invalid_game_id",
-        "game.game_id.param": gameIdParam ?? "",
-        "game.game_id.valid": false,
-        "game.game_id.missing": !gameIdParam,
-        "game.game_id.integer": Number.isInteger(gameId),
-      });
-      res.status(400).send(`<div>${errorMessage}</div>`);
-      return;
-    }
-
-    span?.setAttributes({
-      "game.game_id": gameId,
-      "game.game_id.param": gameIdParam,
-      "game.game_id.valid": true,
-    });
-
-    try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        const errorMessage = `Game ${gameId} not found`;
-        markCurrentSpanAsError(errorMessage, {
-          "error.message": errorMessage,
-          "game.load.failure": "not_found",
-          "game.game_id": gameId,
-          "game.game_id.param": gameIdParam,
-          "game.game_id.valid": true,
-          "game.found": false,
-        });
-        res.status(404).send(`<div>${errorMessage}</div>`);
-        return;
-      }
-
-      res.locals.game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
-      res.locals.gameId = gameId;
-      next();
-    } catch (error) {
-      if (error instanceof IncompatibleStateVersionError) {
-        markCurrentSpanAsError(error.message, {
-          "error.message": error.message,
-          "game.load.failure": "incompatible_state_version",
-          "game.game_id": gameId,
-          "game.game_id.param": gameIdParam,
-          "game.game_id.valid": true,
-          "game.state.version.compatible": false,
-          "game.state.version.found": String(error.foundVersion),
-          "game.state.version.expected": error.expectedVersion,
-        });
-        console.warn(`Game ${gameId} has incompatible version:`, error.message);
-        res.status(410).send(
-          formatErrorPageHtmlPage({
-            icon: "🕰️",
-            title: "Game Too Old to Load",
-            message: `Game <strong>${gameId}</strong> was saved in an older, incompatible format.`,
-            details: error.message,
-          })
-        );
-        return;
-      }
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      markCurrentSpanAsError(errorMessage, {
-        "error.message": errorMessage,
-        "game.load.failure": "unexpected_error",
-        "game.game_id": gameId,
-        "game.game_id.param": gameIdParam,
-        "game.game_id.valid": true,
-        "error.type": error instanceof Error ? error.name : typeof error,
-      });
-      console.error("Error loading game:", error);
-      res.status(500).send(`<div>Error loading game ${gameId}</div>`);
-    }
-  }
-
-  // Middleware: Require valid version for optimistic concurrency control
-  function requireValidVersion(req: express.Request, res: express.Response, next: express.NextFunction) {
-    const game = res.locals.game as GameState;
-    const versionCheck = validateStateVersion(req, game);
-
-    if (!versionCheck.valid) {
-      res.status(409)
-         .setHeader('HX-Retarget', '#modal-container')
-         .setHeader('HX-Reswap', 'innerHTML')
-         .send(versionCheck.errorHtml);
-      return;
-    }
-
-    next();
-  }
-
   // Parses and validates the :gameId route param, 400ing (and stamping the
   // span) on failure. Shared by every route built on applyGameCommand, since
   // that function takes an already-valid numeric gameId.
@@ -265,7 +167,9 @@ export function createApp(
     gameId: number,
     outcome: CommandOutcome,
     notActiveMessage: string,
-    renderApplied: (game: GameState, whatHappened: WhatHappened | undefined) => string
+    // Returns the fragment to send, or sends the response itself (e.g. via
+    // res.render) and returns undefined.
+    renderApplied: (game: GameState, whatHappened: WhatHappened | undefined) => string | void
   ): void {
     switch (outcome.kind) {
       case "not-found":
@@ -289,10 +193,12 @@ export function createApp(
       case "not-active":
         res.status(400).send(`<div>${notActiveMessage}</div>`);
         return;
-      case "applied":
+      case "applied": {
         res.setHeader("HX-Trigger", "game-state-updated");
-        res.send(renderApplied(outcome.game, outcome.whatHappened));
+        const html = renderApplied(outcome.game, outcome.whatHappened);
+        if (html !== undefined) res.send(html);
         return;
+      }
     }
   }
 
@@ -1572,29 +1478,21 @@ export function createApp(
   });
 
   // Flip a commander card - Returns only the commander container
-  app.post("/flip-card/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const gameId = res.locals.gameId as number;
+  app.post("/flip-card/:gameId/:gameCardIndex", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.flipCard(gameCardIndex, browserTabId); // TODO: I don't need whatHappened, it's in the card state
+      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
+        game.flipCard(gameCardIndex, browserTabId);
+      });
 
-      await persistStatePort.save(game.toPersistedGameState());
-
-      // Get the flipped card
-      const flippedCard = game.getCards().find((gc) => gc.gameCardIndex === gameCardIndex);
-      console.log("current face: ", flippedCard?.currentFace);
-      if (!flippedCard) {
-        res.status(404).send(`<div>Card ${gameCardIndex} not found</div>`);
-        return;
-      }
-
-      // Return the commander container
-      const html = formatFlippingContainer(flippedCard, { page: "game", gameId });
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
+      renderCommandOutcome(res, gameId, outcome, "Cannot flip card: Game is not active", (game) => {
+        const flippedCard = game.getCards().find((gc) => gc.gameCardIndex === gameCardIndex)!;
+        return formatFlippingContainer(flippedCard, { page: "game", gameId });
+      });
     } catch (error) {
       console.error("Error flipping card:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);
@@ -1602,114 +1500,108 @@ export function createApp(
   });
 
   // Flip a card and return updated modal HTML
-  app.post("/flip-card-modal/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const gameId = res.locals.gameId as number;
+  app.post("/flip-card-modal/:gameId/:gameCardIndex", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.flipCard(gameCardIndex, browserTabId);
+      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
+        game.flipCard(gameCardIndex, browserTabId);
+      });
 
-      await persistStatePort.save(game.toPersistedGameState());
+      renderCommandOutcome(res, gameId, outcome, "Cannot flip card: Game is not active", (game) => {
+        const flippedCard = game.getCards().find((gc) => gc.gameCardIndex === gameCardIndex)!;
 
-      // Get the flipped card
-      const flippedCard = game.getCards().find((gc) => gc.gameCardIndex === gameCardIndex);
-      if (!flippedCard) {
-        res.status(404).send(`<div>Card ${gameCardIndex} not found</div>`);
-        return;
-      }
+        // Calculate navigation indices — use navList if provided, else zone order
+        const navListParam = req.body.navList as string | undefined;
+        const navListNav = resolveNavListNavigation(navListParam, gameCardIndex);
 
-      // Trigger game-state-updated event to refresh the game container
-      res.setHeader("HX-Trigger", "game-state-updated");
+        let prevCardIndex: number | null;
+        let nextCardIndex: number | null;
+        let currentPosition = 1;
+        let totalCardsInZone = 1;
 
-      // Calculate navigation indices — use navList if provided, else zone order
-      const navListParam = req.body.navList as string | undefined;
-      const navListNav = resolveNavListNavigation(navListParam, gameCardIndex);
+        if (navListNav) {
+          prevCardIndex = navListNav.prevCardIndex;
+          nextCardIndex = navListNav.nextCardIndex;
+          currentPosition = navListNav.currentPosition;
+          totalCardsInZone = navListNav.totalCardsInZone;
+        } else {
+          prevCardIndex = game.findPrevCardInZone(gameCardIndex);
+          nextCardIndex = game.findNextCardInZone(gameCardIndex);
+          const location = flippedCard.location;
 
-      let prevCardIndex: number | null;
-      let nextCardIndex: number | null;
-      let currentPosition = 1;
-      let totalCardsInZone = 1;
+          if (location.type !== "Table") {
+            let cardsInZone: readonly GameCard[];
+            if (location.type === "Library") {
+              cardsInZone = game.listLibrary();
+            } else if (location.type === "Hand") {
+              cardsInZone = game.listHand();
+            } else if (location.type === "Revealed") {
+              cardsInZone = game.listRevealed();
+            } else if (location.type === "CommandZone") {
+              cardsInZone = game.listCommandZone();
+            } else {
+              cardsInZone = [];
+            }
 
-      if (navListNav) {
-        prevCardIndex = navListNav.prevCardIndex;
-        nextCardIndex = navListNav.nextCardIndex;
-        currentPosition = navListNav.currentPosition;
-        totalCardsInZone = navListNav.totalCardsInZone;
-      } else {
-        prevCardIndex = game.findPrevCardInZone(gameCardIndex);
-        nextCardIndex = game.findNextCardInZone(gameCardIndex);
-        const location = flippedCard.location;
-
-        if (location.type !== "Table") {
-          let cardsInZone: readonly GameCard[];
-          if (location.type === "Library") {
-            cardsInZone = game.listLibrary();
-          } else if (location.type === "Hand") {
-            cardsInZone = game.listHand();
-          } else if (location.type === "Revealed") {
-            cardsInZone = game.listRevealed();
-          } else if (location.type === "CommandZone") {
-            cardsInZone = game.listCommandZone();
-          } else {
-            cardsInZone = [];
+            totalCardsInZone = cardsInZone.length;
+            currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === gameCardIndex) + 1;
           }
-
-          totalCardsInZone = cardsInZone.length;
-          currentPosition = cardsInZone.findIndex(gc => gc.gameCardIndex === gameCardIndex) + 1;
         }
-      }
 
-      const expectedVersion = game.getStateVersion();
-      const imageUrl = getCardImageUrl(flippedCard.card, "large", flippedCard.currentFace);
-      const gathererUrl =
-        flippedCard.card.multiverseid
-          ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${flippedCard.card.multiverseid}`
-          : `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${flippedCard.card.oracleCardName || flippedCard.card.name}"`)}`;
+        const expectedVersion = game.getStateVersion();
+        const imageUrl = getCardImageUrl(flippedCard.card, "large", flippedCard.currentFace);
+        const gathererUrl =
+          flippedCard.card.multiverseid
+            ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${flippedCard.card.multiverseid}`
+            : `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${flippedCard.card.oracleCardName || flippedCard.card.name}"`)}`;
 
-      // Build utility buttons HTML
-      let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
+        // Build utility buttons HTML
+        let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
         <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
         <button class="modal-action-button copy-button"
                 onclick="copyCardImageToClipboard(event, '${imageUrl}', '${flippedCard.card.name}')">Copy</button>`;
 
-      if (flippedCard.card.twoFaced) {
-        const flipVals: Record<string, string | number> = { "expected-version": expectedVersion };
-        if (navListParam) flipVals["navList"] = navListParam;
-        utilityButtonsHtml += `
+        if (flippedCard.card.twoFaced) {
+          const flipVals: Record<string, string | number> = { "expected-version": expectedVersion };
+          if (navListParam) flipVals["navList"] = navListParam;
+          utilityButtonsHtml += `
         <button class="modal-action-button flip-button"
                 hx-post="/flip-card-modal/${gameId}/${flippedCard.gameCardIndex}"
                 hx-vals='${JSON.stringify(flipVals)}'
                 hx-target="#card-modal-container"
                 hx-swap="innerHTML"
                 title="Flip card to see other side">Flip</button>`;
-      }
+        }
 
-      utilityButtonsHtml += `</div>`;
+        utilityButtonsHtml += `</div>`;
 
-      // Build location-specific action buttons HTML
-      const locationActions = getModalCardActionsByLocation(flippedCard, gameId, expectedVersion, !!game.tableName);
-      const locationActionsHtml = locationActions ? `<div class="card-modal-location-actions">${locationActions}</div>` : "";
+        // Build location-specific action buttons HTML
+        const locationActions = getModalCardActionsByLocation(flippedCard, gameId, expectedVersion, !!game.tableName);
+        const locationActionsHtml = locationActions ? `<div class="card-modal-location-actions">${locationActions}</div>` : "";
 
-      // Build navigation URLs, preserving navList if present
-      const navListSuffix = navListQueryParam(navListParam);
-      const prevNavUrl = prevCardIndex !== null ? `/card-modal/${gameId}/${prevCardIndex}?expected-version=${expectedVersion}${navListSuffix}` : "";
-      const nextNavUrl = nextCardIndex !== null ? `/card-modal/${gameId}/${nextCardIndex}?expected-version=${expectedVersion}${navListSuffix}` : "";
+        // Build navigation URLs, preserving navList if present
+        const navListSuffix = navListQueryParam(navListParam);
+        const prevNavUrl = prevCardIndex !== null ? `/card-modal/${gameId}/${prevCardIndex}?expected-version=${expectedVersion}${navListSuffix}` : "";
+        const nextNavUrl = nextCardIndex !== null ? `/card-modal/${gameId}/${nextCardIndex}?expected-version=${expectedVersion}${navListSuffix}` : "";
 
-      res.render("partials/card-modal", {
-        card: flippedCard.card,
-        imageUrl,
-        gathererUrl,
-        currentFace: flippedCard.currentFace,
-        prevCardIndex,
-        nextCardIndex,
-        prevNavUrl,
-        nextNavUrl,
-        currentPosition,
-        totalCardsInZone,
-        utilityButtonsHtml,
-        locationActionsHtml,
+        res.render("partials/card-modal", {
+          card: flippedCard.card,
+          imageUrl,
+          gathererUrl,
+          currentFace: flippedCard.currentFace,
+          prevCardIndex,
+          nextCardIndex,
+          prevNavUrl,
+          nextNavUrl,
+          currentPosition,
+          totalCardsInZone,
+          utilityButtonsHtml,
+          locationActionsHtml,
+        });
       });
     } catch (error) {
       console.error("Error flipping card in modal:", error);
