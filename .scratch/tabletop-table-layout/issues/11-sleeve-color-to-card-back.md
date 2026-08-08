@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: fleet
 Type: grilling
-Status: open
+Status: claimed
 
 ## Question
 
