@@ -24,6 +24,8 @@ import { trace } from "@opentelemetry/api";
 import { getCardImageUrl, constructCardImageUrl } from "./types.js";
 import { fetchScryfall } from "./scryfall-http.js";
 import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
+import { applyGameCommand, CommandOutcome } from "./apply-game-command.js";
+import { WhatHappened } from "./GameState.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -215,6 +217,83 @@ export function createApp(
     }
 
     next();
+  }
+
+  // Parses and validates the :gameId route param, 400ing (and stamping the
+  // span) on failure. Shared by every route built on applyGameCommand, since
+  // that function takes an already-valid numeric gameId.
+  function parseGameIdParam(req: express.Request, res: express.Response): number | null {
+    const gameIdParam = req.params.gameId;
+    const gameId = Number(gameIdParam);
+
+    if (!gameIdParam || !Number.isInteger(gameId)) {
+      const errorMessage = "Missing or invalid game ID";
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "game.load.failure": "invalid_game_id",
+        "game.game_id.param": gameIdParam ?? "",
+        "game.game_id.valid": false,
+        "game.game_id.missing": !gameIdParam,
+        "game.game_id.integer": Number.isInteger(gameId),
+      });
+      res.status(400).send(`<div>${errorMessage}</div>`);
+      return null;
+    }
+
+    trace.getActiveSpan()?.setAttributes({
+      "game.game_id": gameId,
+      "game.game_id.param": gameIdParam,
+      "game.game_id.valid": true,
+    });
+
+    return gameId;
+  }
+
+  // Extracts the optimistic-concurrency version the client last saw, if any.
+  // Absent means "skip the check" (backward compatibility), same as before.
+  function expectedVersionFromRequest(req: express.Request): number | undefined {
+    const expectedVersionStr = req.body["expected-version"];
+    return expectedVersionStr === undefined ? undefined : parseInt(expectedVersionStr);
+  }
+
+  // Renders a CommandOutcome from applyGameCommand. Shared by every route
+  // built on that protocol; each route supplies its own "not active" message
+  // and its own success rendering (some send the whole game section, some a
+  // narrower fragment; some pass whatHappened through for animation, some don't).
+  function renderCommandOutcome(
+    res: express.Response,
+    gameId: number,
+    outcome: CommandOutcome,
+    notActiveMessage: string,
+    renderApplied: (game: GameState, whatHappened: WhatHappened | undefined) => string
+  ): void {
+    switch (outcome.kind) {
+      case "not-found":
+        res.status(404).send(`<div>Game ${gameId} not found</div>`);
+        return;
+      case "incompatible-version":
+        res.status(410).send(
+          formatErrorPageHtmlPage({
+            icon: "🕰️",
+            title: "Game Too Old to Load",
+            message: `Game <strong>${gameId}</strong> was saved in an older, incompatible format.`,
+            details: outcome.error.message,
+          })
+        );
+        return;
+      case "version-conflict": {
+        const errorHtml = formatStaleStateErrorModal(outcome.expectedVersion, outcome.currentVersion, outcome.missedEvents, outcome.game);
+        res.status(409).setHeader("HX-Retarget", "#modal-container").setHeader("HX-Reswap", "innerHTML").send(errorHtml);
+        return;
+      }
+      case "not-active":
+        res.status(400).send(`<div>${notActiveMessage}</div>`);
+        return;
+      case "applied":
+        res.setHeader("HX-Trigger", "game-state-updated");
+        res.send(renderApplied(outcome.game, outcome.whatHappened));
+        return;
+    }
   }
 
   // ============================================================================
@@ -1173,21 +1252,18 @@ export function createApp(
 
   // Card action endpoints
   // Returns active game fragment - updated game board
-  app.post("/reveal-card/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const gameId = res.locals.gameId as number;
+  app.post("/reveal-card/:gameId/:gameCardIndex", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.moveByGameCardIndex(gameCardIndex, "Revealed", browserTabId);
+      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
+        game.moveByGameCardIndex(gameCardIndex, "Revealed", browserTabId);
+      });
 
-      // Persist the updated state
-      await persistStatePort.save(game.toPersistedGameState());
-
-      const html = formatActiveGameHtmlSection(game);
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
+      renderCommandOutcome(res, gameId, outcome, "Cannot reveal card: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
       console.error("Error revealing card:", error);
       res.status(500).send(`<div>Error revealing card</div>`);
