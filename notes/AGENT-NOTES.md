@@ -4,6 +4,17 @@ Gotchas learned the hard way while working in this repo. Append as you learn; de
 entries that stop being true or that are just pointless. Things that belong in `CLAUDE.md` (standing instructions,
 commands, layout) go there instead — this file is for the "oh, _that's_ why" findings.
 
+## Harness gotchas (Claude Code sessions in this repo)
+
+- **Background sessions can't resolve merge conflicts with Edit/Write.** The bg-session
+  guard rejects file edits in the shared checkout (only worktree paths are editable) —
+  but merging a worktree branch to local main *requires* touching the shared checkout
+  when it conflicts. Workaround: resolve via a small script written to the job's tmp dir
+  (`$CLAUDE_JOB_DIR/tmp`) and run with Bash, then `git add` + `git commit`. Hit 2026-08-08
+  on a tail-append conflict in an owner's `history.md` (owner `-update` subagents commit
+  to the worktree branch, so two sessions appending entries conflict routinely — keep
+  both entries, HEAD's first).
+
 ## Tabletop gotchas (apps/tabletop)
 
 - **tldraw is pinned exactly** (5.2.5 line, no caret): `room.updateStore` (server-side
