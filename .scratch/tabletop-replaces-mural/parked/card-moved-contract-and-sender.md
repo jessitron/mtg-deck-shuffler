@@ -31,3 +31,14 @@ map's Not yet specified, not blocked tickets, until this resolves.
 
 Unblocked: the semantic event this needs already exists ([Tabletop cards report zone
 entry as named events](../../tabletop-card-shape/issues/01-zone-entry-events.md)).
+
+## Note (2026-08-07): the sender needs identity the session doesn't have yet
+
+Whatever sends `card.moved` (and friends) to the Spine needs to stamp each event with
+**player name and the Shuffler game id**. Checked the code: `playerName` already rides
+in on `seat.joined`'s `initiator.playerName` (used for the seat label and the
+`player.name` span attribute in `seatJoined.ts`/`cardArrival.ts`), but **`gameId` appears
+nowhere in `apps/tabletop/src`** — it has never crossed from the Shuffler. So part of
+this ticket's scope is getting both onto the tldraw session/room state (not just
+per-request) so the outbound sender can read them when an event fires, not just at
+`seat.joined` time.
