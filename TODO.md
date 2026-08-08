@@ -42,7 +42,6 @@ section is just a wall between Jess and the live work.
   - ← blocked-by: `design-playmat-specimen` — the design owner declined to stage this as a
     `/design` `.choice` because the gallery can't render a real playmat yet, and staging a choice
     Jess can't look at defeats the point.
-  - Full rationale: `.scratch/playmat-hardening/plan.md`.
 
 - [ ] `design-playmat-specimen` `/design` renders a fake playmat, not the real one
   - `.stage-playmat` in `design-gallery.css` is gallery *chrome* that hand-copies the mat's art
