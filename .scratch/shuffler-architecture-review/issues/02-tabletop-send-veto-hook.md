@@ -39,24 +39,32 @@ It isn't a veto (a gate deciding whether the command is *allowed*) — it's an i
 side-effecting call (telling the Tabletop about the card) whose failure means the command
 can't safely proceed. Keep calling it a pre-commit side effect / `beforeMutate`, not a veto.
 
-**Settled design:**
+**Settled design (revised — Jess changed her mind back to the typed-outcome shape):**
 
 - `applyGameCommand` gains one new optional parameter:
   `beforeMutate?: (game: GameState) => Promise<void>`, called right after the existing
   status/version checks, before `mutate`.
-- If it throws, `applyGameCommand` lets the error propagate uncaught — the exact same contract
-  `mutate` errors already have today. Update the function's doc comment to say so.
-- **No new `CommandOutcome` kind, no typed error class.** `renderCommandOutcome` is untouched.
-- `/play-card` and `/discard-card` each pass a `beforeMutate` closure (closing over `res`,
-  `gameCardIndex`, etc.) that reproduces today's inline logic: look up the card, check
-  `game.tableName` + zone, and if applicable, `await sendCardToTableFirst(...)`. On failure, the
-  closure writes the 502 + `formatTabletopSendErrorModal` response itself (via the closured
-  `res`), then throws a bare sentinel just to unwind out of `applyGameCommand` without
-  persisting.
-- The route's existing outer `catch` gets one new guard line at the top:
-  `if (res.headersSent) return;` — so it doesn't try to send a second response over the one
-  `beforeMutate` already sent. This is a new pattern in this codebase (not used elsewhere in
-  `app.ts` today) but needs nothing beyond the one line.
+- On failure, `beforeMutate` throws a dedicated `TableSendFailedError(errorHtml)` — a small typed
+  error class carrying the pre-rendered `errorHtml` (from `formatTabletopSendErrorModal`).
+  `applyGameCommand` catches specifically that class and returns a new `CommandOutcome` kind,
+  `{ kind: "send-failed"; errorHtml: string }`. Any other error (a real bug) still propagates
+  uncaught, same contract `mutate` errors already have today.
+- `renderCommandOutcome` gets one new `case "send-failed"`: `502`, `HX-Retarget`/`HX-Reswap` to
+  the modal container, send `outcome.errorHtml` — same headers the inline code sets today.
+- `/play-card` and `/discard-card` fully migrate onto `applyGameCommand` + `renderCommandOutcome`,
+  same as the other 9 routes — no bespoke `res.headersSent` guard, no route doing its own
+  rendering mid-flight. Each route's `beforeMutate` closure reproduces today's inline logic: look
+  up the card, check `game.tableName` + zone, and if applicable `await
+  sendCardToTableFirst(...)`, catching its failure and re-throwing as
+  `TableSendFailedError(formatTabletopSendErrorModal(verb, cardName, tableName))`.
+- Naming stays `"send-failed"`, not `"vetoed"` — per the correction above, this is a required
+  side effect failing, not a permission check being denied.
+
+This is a clean win over the self-rendering-closure alternative considered earlier: because the
+outcome is typed, `/play-card`/`/discard-card` can now go through the *exact* same
+`applyGameCommand`/`renderCommandOutcome` pair as the other 9 routes, rather than staying
+bespoke routes with their own response-writing inside the hook. That was the whole point of this
+ticket's migration, so the typed outcome earns its extra machinery.
 
 This was chosen over collapsing tabletop-send failures into the generic `500` catch-all: that
 distinction is real, tested behavior (`verify-table-mode.spec.ts` exercises the
