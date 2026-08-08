@@ -51,6 +51,19 @@ polish.
   third of the old Graveyard box, Graveyard keeps the top two-thirds; the column widens
   (~425 → ~545) and that ripple — shifting every seat to the right of a widened one — is in scope,
   not deferred. "Mat grows taller" stays separately deferred. Recorded in `apps/tabletop/DESIGN.md`.
+- [Polish the player area's geometry and cosmetics](issues/04-player-area-polish.md) (2026-08-08) —
+  implemented the four mechanical items (land gap, centered Stack-pile cards, playmat border
+  approximated to the decided `solid black xl` look, library border+label as an outward frame
+  around the opaque image). Rounded playmat corners stayed out — already decided (5% of height,
+  `tabletop-physics` ticket 11) but blocked on the not-yet-built `mtg-zone` custom shape; tracked
+  on the `zone-look-not-landed` line in `TODO.md`, not a fresh ticket.
+- [Show the deck name with the player name above the playmat](issues/06-seat-label-deck-name.md)
+  (2026-08-08) — deck name does not flow end-to-end today; it stops at the Shuffler. Needs a
+  new field threaded through five spots: the `sendSeatJoinedBestEffort` call site, the
+  `SeatJoinedEvent` type, a new/extended `contracts/` schema (no `seat.joined` schema exists
+  yet, unlike `seat.taken.v1.json`), the Tabletop's `seatJoined.ts` validation, and the
+  player-name label render in `tableFurniture.ts`. Label rendering itself is small once the
+  data exists — the work is the threading. Implementation, not a further decision.
 
 ## Not yet specified
 

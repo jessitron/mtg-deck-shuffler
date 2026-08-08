@@ -129,7 +129,7 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
     case "stack": {
       const count = stackCountByRoom.get(tableName) ?? 0;
       stackCountByRoom.set(tableName, count + 1);
-      position = stackCardPosition(count);
+      position = stackCardPosition(playerArea.seatIndex, count);
       break;
     }
   }

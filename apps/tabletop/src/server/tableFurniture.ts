@@ -38,6 +38,26 @@ export function nextIndex(tableName: string): IndexKey {
  */
 export type Zone = "playmat" | "library" | "graveyard" | "exile";
 
+export interface RegionStyle {
+  dash: "dashed" | "solid";
+  color: string;
+  size: "s" | "m" | "l" | "xl";
+}
+
+/** Default look for furniture regions: a light dashed grey outline. */
+const DEFAULT_REGION_STYLE: RegionStyle = { dash: "dashed", color: "grey", size: "s" };
+
+/**
+ * The playmat's border reads as the Shuffler's own playmat: black, solid, and
+ * heavier than the other regions — one identity across both ships (decided
+ * for the eventual mtg-zone custom shape in tabletop-physics ticket 11; `xl`
+ * is the closest stock tldraw `geo` size to that target until that shape exists).
+ */
+export const PLAYMAT_REGION_STYLE: RegionStyle = { dash: "solid", color: "black", size: "xl" };
+
+/** How far the library's card-back image insets from its box, so the box's border and "Library" label peek out as a frame around the opaque image. */
+const LIBRARY_IMAGE_INSET = 12;
+
 export function regionShape(
   id: TLShapeId,
   pageId: string,
@@ -47,7 +67,8 @@ export function regionShape(
   h: number,
   label: string,
   index: IndexKey,
-  zone?: Zone
+  zone?: Zone,
+  style: RegionStyle = DEFAULT_REGION_STYLE
 ) {
   return {
     id,
@@ -64,11 +85,11 @@ export function regionShape(
       geo: "rectangle",
       w,
       h,
-      dash: "dashed",
+      dash: style.dash,
       fill: "none",
-      color: "grey",
-      labelColor: "grey",
-      size: "s",
+      color: style.color,
+      labelColor: style.color,
+      size: style.size,
       font: "serif",
       align: "start-legacy",
       verticalAlign: "start",
@@ -162,13 +183,16 @@ export async function ensurePlayerArea(
   const matId = createShapeId(`playmat-${entry.tableName}-${seatId}`);
   const matImageId = createShapeId(`playmat-image-${entry.tableName}-${seatId}`);
   const libraryId = createShapeId(`library-${entry.tableName}-${seatId}`);
+  const libraryImageId = createShapeId(`library-image-${entry.tableName}-${seatId}`);
   const graveyardId = createShapeId(`region-graveyard-${entry.tableName}-${seatId}`);
   const exileId = createShapeId(`region-exile-${entry.tableName}-${seatId}`);
   const labelId = createShapeId(`name-label-${entry.tableName}-${seatId}`);
 
   await entry.room.updateStore((store) => {
     // The mat outline is always drawn — the fallback if the image is missing/broken.
-    store.put(regionShape(matId, pageId, mat.x, mat.y, mat.w, mat.h, "", nextIndex(entry.tableName), "playmat"));
+    store.put(
+      regionShape(matId, pageId, mat.x, mat.y, mat.w, mat.h, "", nextIndex(entry.tableName), "playmat", PLAYMAT_REGION_STYLE)
+    );
     if (images.playmatImageUrl) {
       const assetId = AssetRecordType.createId(`playmat-${entry.tableName}-${seatId}`);
       store.put(imageAsset(assetId, `${playerName}'s playmat`, images.playmatImageUrl, mat.w, mat.h));
@@ -178,10 +202,30 @@ export async function ensurePlayerArea(
     }
 
     if (images.cardBackImageUrl) {
-      const assetId = AssetRecordType.createId(`library-${entry.tableName}-${seatId}`);
-      store.put(imageAsset(assetId, "Library", images.cardBackImageUrl, library.w, library.h));
+      // An opaque image shape hides whatever's underneath it (tldraw limit), so the
+      // border and "Library" label have to read as an outward frame: draw the box at
+      // full bounds first, then the image inset within it so the box's edge — and the
+      // label riding on it — stays visible as a ring around the picture.
       store.put(
-        imageShape(libraryId, pageId, library.x, library.y, library.w, library.h, assetId, "Library", nextIndex(entry.tableName), "library")
+        regionShape(libraryId, pageId, library.x, library.y, library.w, library.h, "Library", nextIndex(entry.tableName), "library")
+      );
+      const assetId = AssetRecordType.createId(`library-${entry.tableName}-${seatId}`);
+      const insetW = library.w - 2 * LIBRARY_IMAGE_INSET;
+      const insetH = library.h - 2 * LIBRARY_IMAGE_INSET;
+      store.put(imageAsset(assetId, "Library", images.cardBackImageUrl, insetW, insetH));
+      store.put(
+        imageShape(
+          libraryImageId,
+          pageId,
+          library.x + LIBRARY_IMAGE_INSET,
+          library.y + LIBRARY_IMAGE_INSET,
+          insetW,
+          insetH,
+          assetId,
+          "Library",
+          nextIndex(entry.tableName),
+          "library"
+        )
       );
     } else {
       store.put(regionShape(libraryId, pageId, library.x, library.y, library.w, library.h, "Library", nextIndex(entry.tableName), "library"));
