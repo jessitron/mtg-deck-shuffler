@@ -291,6 +291,21 @@ treatment reaches for the sleeve color rather than inventing a new signal. The c
 shape itself is placement-decided, appearance-undecided — see
 [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side".
 
+**Sleeve color is domain data, not a stylesheet value (decided 2026-08-08, ticket 11 of the
+Table-layout map).** It travels as an optional raw hex (`sleeveColor` on `seat.joined`'s
+player data) and gets baked into `mtg-card` props at mint — a game constant, never changed
+mid-game. **The raw-hex-in-stylesheets ban does not govern it**: like card art, it's content
+the player chose, not chrome an agent colored. The rendering model is decided: a sleeve is a
+solid-color rectangle slightly larger than the card (a few px per side, like real sleeves);
+a face-down card and the library pile render as the bare sleeve rectangle; a face-up sleeved
+card renders as its image centered inside the sleeve rectangle — every face-up sleeved card
+gets a sleeve-color border. Unsleeved decks keep the standard Magic card-back image, so the
+library furniture now has **two** looks keyed on whether the seat has a sleeve. **Reserved
+for this owner at implementation time**: exact sleeve margin, corner radius (a sleeve is a
+physical object, so the physical-rounding rule applies), any border/sheen/texture, and the
+picker's default/swatch palette. v1 is one color; distinct front/back colors or an image
+sleeve are someday-maybes, deferred.
+
 **Two style worlds.** Site pages (`/`, `/choose-any-deck`, `/docs`, `/about`) use the
 purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages
 (`/prepare`, `/game`) put a **playmat** on screen — a big art-backed surface everything

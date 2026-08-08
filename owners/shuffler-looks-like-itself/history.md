@@ -1126,3 +1126,46 @@ can host working buttons (`pointer-events: all` + `editor.markEventAsHandled()`,
 coherent object and not a contradiction — the same early-consult pattern that moved the
 `mtg-zone` architecture decision on 2026-08-07.
 
+## 2026-08-08 — sleeve color travels as data, and the sleeve got a rendering model
+
+`7585bf1` **Resolve table-layout ticket 11: sleeve color travels as data, baked per-card at
+mint** (`.scratch/tabletop-table-layout/issues/11-sleeve-color-to-card-back.md`, grilled with
+Jess). No CSS changed, nothing built — a transport-and-rendering-model decision, and this
+owner's stake in it is a category question it settles plus an appearance decision it
+explicitly reserves.
+
+**The category question: is a player's sleeve hex "a raw hex value"?** No. `sleeveColor`
+travels as an optional raw hex string on `seat.joined`'s player data — not as a URL, not as a
+generated image — because ticket 12 already made sleeve color *player identity*, and the
+commander-damage counters need the raw value, which a URL would lock away. This owner's
+raw-hex ban governs values **agents pick for chrome**; a sleeve hex is **domain data the
+player picked**, same category as card art. The ban was never in tension with this, but the
+question had not been stated before, and an agent grepping "no raw hex ever" could have
+blocked the field. Now it's stated: data-hexes are exempt; what an agent must not do is
+*choose* one (no default color exists — unsleeved seats keep the standard Magic card back).
+
+**The rendering model is decided; the treatment is not — the seam this owner keeps.** A
+sleeve is a solid-color rectangle slightly larger than the card (a few px per side, mirroring
+real sleeves). Face-down card and library pile render as the bare sleeve rectangle; a face-up
+sleeved card renders as its image centered inside the sleeve rectangle — so every face-up
+sleeved card wears a sleeve-color border, the IRL look. **Reserved for implementation time,
+with this owner:** exact margin, corner radius (a sleeve is a physical object, so the
+physical-rounding rule applies — and it's canvas geometry, so it's computed in TypeScript at
+render time, the ticket-11-radius lesson), any border/sheen/texture, and the picker's swatch
+palette (ticket 09's artifact, now carrying identity weight per ticket 12). Nothing rode
+along.
+
+**A KB gap this owner had flagged got confirmed and became decision-relevant.** The
+`-context` consult had noted the library furniture is a *second consumer* of the card back;
+the decision leans on exactly that — a sleeved seat's library pile becomes the solid sleeve
+rectangle, so the library now has two looks keyed on sleeve presence.
+
+**Why baking per-card is legal, worth keeping because it retires an old rule.** Sleeve color
+is a **game constant** — chosen before the game, never changed mid-game. That immutability
+dissolves tabletop-physics ticket 02's "never bake per-card" rule, whose whole rationale was
+mid-game sleeve changes rewriting every shape. A someday-maybe stays deferred: distinct
+front/back sleeve colors, or an image sleeve — v1 is one color doing both jobs.
+
+**Also landed:** `notes/GLOSSARY.md` now carries a **Sleeve** definition stating the same
+model, so the vocabulary outlives the ticket.
+
