@@ -39,9 +39,15 @@ bundled in. Done when each ticket below is either resolved or explicitly parked 
   `flip-card`, `flip-card-modal`, `play-card`, `discard-card` deliberately stayed on the old
   middleware pair — see tickets 01 and 02.
 
+- **[Migrate flip-card and flip-card-modal onto applyGameCommand](issues/01-flip-card-migration.md) —
+  done** (2026-08-08). The `renderApplied` assumption held for `/flip-card` (no change to
+  `applyGameCommand` needed); `/flip-card-modal` needed `renderApplied`'s signature widened
+  to `(game, whatHappened) => string | void` since it sends its own response via `res.render`.
+  `loadGameFromParams`/`requireValidVersion` are now fully unused and deleted — only
+  `play-card`/`discard-card` remain on the old middleware pair (ticket 02).
+
 ## Fog — not yet specified
 
-- [Migrate flip-card and flip-card-modal onto applyGameCommand](issues/01-flip-card-migration.md)
 - [Design the tabletop-send veto hook, then migrate play-card/discard-card](issues/02-tabletop-send-veto-hook.md)
 - [Shrink active-game-page.ts's interface](issues/03-active-game-page-interface.md)
 - [Move domain types out of port-persist-state/types.ts](issues/04-domain-types-out-of-port.md)
