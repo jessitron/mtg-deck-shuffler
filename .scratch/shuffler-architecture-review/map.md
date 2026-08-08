@@ -24,10 +24,15 @@ bundled in. Done when each ticket below is either resolved or explicitly parked 
   2026-08-08) on which of app.ts's game routes are on the new `applyGameCommand` protocol vs.
   the old `loadGameFromParams`/`requireValidVersion` middleware pair — read that before
   extending either.
-- Ticket 02's veto-hook design is genuinely open — it wasn't grilled with Jess, only
-  fact-gathered. Run `/grilling` on it before implementing.
-
 ## Decisions so far
+
+- **[Design the tabletop-send pre-commit hook](issues/02-tabletop-send-veto-hook.md) —
+  design settled** (2026-08-08, `/grilling`), not yet implemented. `applyGameCommand` gains an
+  optional `beforeMutate` hook, thrown errors propagate uncaught same as `mutate`'s do today, no
+  new `CommandOutcome` kind — the route's own `beforeMutate` closure self-renders the 502+modal
+  and throws a sentinel to unwind, guarded by `if (res.headersSent) return;` in the outer catch.
+  Also: it isn't a veto (permission check), it's a required side effect — renamed accordingly.
+  Status is `ready-for-agent`.
 
 - **Candidate #1 — collapse app.ts's route-mutation protocol: done** (2026-08-08, merged to
   main). Deleted the dead `/put-down` route, collapsed GameState's four `*ByGameCardIndex`
@@ -48,7 +53,6 @@ bundled in. Done when each ticket below is either resolved or explicitly parked 
 
 ## Fog — not yet specified
 
-- [Design the tabletop-send veto hook, then migrate play-card/discard-card](issues/02-tabletop-send-veto-hook.md)
 - [Shrink active-game-page.ts's interface](issues/03-active-game-page-interface.md)
 - [Move domain types out of port-persist-state/types.ts](issues/04-domain-types-out-of-port.md)
 - [Name the send-then-commit failure protocol](issues/05-name-send-then-commit-protocol.md)
