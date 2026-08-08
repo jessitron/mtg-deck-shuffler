@@ -41,11 +41,15 @@
   care about `game.css`, transitions, and card containers.
 - **`.scratch/tabletop-physics/`** — the Tabletop's shape-architecture maps lean on this KB by
   name. `issues/03-what-furniture-is.md` (resolved 2026-08-07) deferred *all* appearance to this
-  owner and to `/design`, and `issues/11-what-a-zone-looks-like.md` is the ticket that will spend
-  it. Two consequences: **the design language now gates a Tabletop implementation ticket**, and
-  the stock tldraw look 03's implementer reproduces as scaffolding is **explicitly exempt from
-  the Layer-1 token rule** — it's a knowingly-untokenized placeholder with a comment saying so,
-  so a design-lint sweep must not "fix" it into a decision.
+  owner and to `/design`, and `issues/11-what-a-zone-looks-like.md` (resolved 2026-08-07,
+  `a304c52` — the last open ticket on the map) spent it: zone at-rest/armed looks, playmat
+  border and corner radius, and the Stack's treatment, all staged and picked on `/design` §
+  Tabletop zones. Two consequences: **the design language now gates a Tabletop implementation
+  ticket**, and the stock tldraw look 03's implementer reproduces as scaffolding is **explicitly
+  exempt from the Layer-1 token rule** — it's a knowingly-untokenized placeholder with a comment
+  saying so, so a design-lint sweep must not "fix" it into a decision. **Decided, not built** —
+  ticket 11's picks have nowhere to land until the Tabletop has its own stylesheet
+  (`tabletop-css-tokens` in the repo-root `TODO.md`).
   `issues/04-tap-is-state.md` (resolved 2026-08-07) is the second: it settled a card's handle
   set (see the canvas watch points below) and **handed this owner an open question**,
   `issues/05-rotate-to-tap.md` — the tap motion's duration and easing, to be decided *with*
@@ -424,6 +428,26 @@ not by recomputing new numbers.**
   root style, or at minimum cite them — **what it must not do is retype `"Orbitron", sans-serif`
   or a bare `4px` as if it were choosing.** Nothing on the Tabletop uses them yet; ticket 11's
   `mtg-zone` is the first customer.
+- **A geometry value meant to look consistent across zoom/resize cannot be a static CSS
+  value at all — it has to be computed in TypeScript at render time** (decided 2026-08-07,
+  ticket 11, `a304c52`; playmat corner radius). Two wrong framings, in order, worth expecting
+  again: **(1)** a literal pixel value (`20px`, ported from the Shuffler's fixed-scale DOM
+  pages) drifts out of proportion to the object as the object is resized/zoomed on tldraw's
+  continuously-zoomable canvas — a concern that doesn't exist on a page that never zooms.
+  **(2)** the seemingly-obvious fix, a bare CSS percentage (`border-radius: 12%`), is *also*
+  wrong: percentage border-radius uses width for the horizontal corner and height for the
+  vertical one **separately**, so on a non-square box it draws an ellipse, not a round corner.
+  **The actual fix**: one radius value, computed from the shape's own height (`props.h`) at
+  render time, applied equally to both axes. Not expressible as a static class — a `/design`
+  mock can only bake in the already-computed px result to *show* a round corner, which is what
+  ticket 11's `.playmat-mock--radius-a`/`-b` do. Expect this same two-step trap for any future
+  canvas-shape geometry decision (radius, stroke width, anything meant to hold constant across
+  zoom/resize) — a fixed pixel assumes a scale the canvas doesn't have, and a CSS percentage
+  silently assumes a square box.
+- **Stage Tabletop mocks on `.stage-white`, not `.stage-dark`** (ticket 11, `a304c52`). The
+  first draft of the zone/playmat specimens copied `.stage-dark` — the Shuffler's own play-page
+  convention — and Jess caught it immediately: the Tabletop's canvas is white. Default to
+  `.stage-white` for any Tabletop specimen; don't inherit the Shuffler's own stage by habit.
 - **`apps/tabletop` now has the fleet tokens and the fonts** (`4396aea`), so a `var(--deep-space)`
   there resolves and Orbitron loads. What it still lacks is a **stylesheet of its own** — the
   first Tabletop-only rule has nowhere to live, and inline styles are the status quo by inertia.

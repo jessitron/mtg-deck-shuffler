@@ -148,8 +148,11 @@ site pages, never on the play pages. There is no fourth typeface.
 (2026-08-07, `4396aea`).** `--deep-space` (#221534) for bars and dark surfaces,
 `--dark-pink` (#bb5277) for borders/rules/accents, `--light-pink` (#ddc7dd) for bevels
 and slabs, `--cute-heading-color` (#9134d2), `--narrow-border` (3px), the closed
-`--mana-W/U/B/R/G` set, the three type roles above, and `--radius-soft` (4px).
-**All of those live in `packages/design-tokens/tokens.css`**
+`--mana-W/U/B/R/G` set, the three type roles above, `--radius-soft` (4px), and
+`--armed-glow` (#e6a33d, decided 2026-08-07, ticket 11 — a Tabletop canvas zone about to
+receive a dragged card; deliberately not `--light-pink`, since that's the global focus-ring
+colour, and not part of the `--dark-pink`/`--deep-space` identity pair). **All of those live
+in `packages/design-tokens/tokens.css`**
 (`@fleet/design-tokens`) — one file, both ships, served by the Shuffler at
 `/fleet/tokens.css` and imported by the Tabletop through Vite.
 
