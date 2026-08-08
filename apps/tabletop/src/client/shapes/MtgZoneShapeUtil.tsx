@@ -49,8 +49,12 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
             boxSizing: "border-box",
             border: playmat ? "10px solid black" : "2px dashed grey",
             color: playmat ? "black" : "grey",
-            fontFamily: "Georgia, serif",
-            fontSize: 14,
+            // tldraw's own serif token (loaded font-face, see tldraw.css
+            // --tl-font-serif), matching the label's stock-geo look this
+            // shape replaces — not a design decision, parity with the size
+            // tldraw's own "s"/"xl" geo label rendering used before ticket 13.
+            fontFamily: "var(--tl-font-serif)",
+            fontSize: 24,
             padding: 4,
           }}
         >
