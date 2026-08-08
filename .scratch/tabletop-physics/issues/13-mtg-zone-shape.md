@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: done
 
 **What to build:** Furniture (playmat, library, graveyard, exile, the Stack) is today stock
 locked `geo`/`image` shapes tagged with a freeform `meta.zone` string. Replace this with one
@@ -39,13 +39,33 @@ Register `mtg-zone` alongside `mtg-card` in the same three sync places (`useSync
 **Blocked by:** 12 (card's zone-detection hook now needs `mtg-zone` to exist; both types must
 ship in the same sync deploy)
 
-- [ ] Playmat/library/graveyard/exile/Stack are `mtg-zone` shapes with validated `zone`/`seatId`/
+- [x] Playmat/library/graveyard/exile/Stack are `mtg-zone` shapes with validated `zone`/`seatId`/
       `label` props
-- [ ] Furniture is locked by default; unlocking is only via tldraw's own Lock/Unlock
-- [ ] Card zone-entry detection matches `type === 'mtg-zone'` and reads validated props, not
+- [x] Furniture is locked by default; unlocking is only via tldraw's own Lock/Unlock
+- [x] Card zone-entry detection matches `type === 'mtg-zone'` and reads validated props, not
       `meta.zone`
-- [ ] A card overlapping two zones lands in the topmost-drawn one
-- [ ] The Stack is a recognised zone (`zone: 'stack'`) and code that re-places it preserves index
-- [ ] The seat name label is locked
-- [ ] `mtg-zone` is registered in all three sync places
-- [ ] Existing zone-entry Playwright spec passes against the new shape
+- [x] A card overlapping two zones lands in the topmost-drawn one
+- [x] The Stack is a recognised zone (`zone: 'stack'`) and code that re-places it preserves index
+- [x] The seat name label is locked
+- [x] `mtg-zone` is registered in all three sync places
+- [x] Existing zone-entry Playwright spec passes against the new shape
+
+**Verified:** `tsc --noEmit` clean on both `tsconfig.json` and `tsconfig.server.json`;
+`npx vitest run` 36/36 (added Stack-index-preservation coverage in `seatJoined.test.ts`);
+`./verify.sh` 12/13 — `verify-card-drag-identity.spec.ts` fails identically against unmodified
+`main` (confirmed by stashing this ticket's changes and re-running it), a pre-existing zoom-button
+timeout unrelated to this change. `verify-seat-joined.spec.ts` was updated for the shape-type
+rename (`geo`→`mtg-zone`) and the corrected shape count (furniture is 5 zone shapes per seat, not
+4 — the library outline was always drawn but never counted; see ticket 12's own verification
+note).
+
+A `/code-review` pass (medium effort) caught and fixed a real regression before commit: the new
+`zoneShape()` builder set `opacity: 1` on every zone instead of the old `regionShape()`'s `0.5`,
+contradicting this ticket's "keep today's look" intent — fixed. Also tightened `zoneShape()`'s
+10-positional-argument signature into an options object, and narrowed `ensureStackStripWidth`'s
+`store.get()` read with a `typeName === "shape"` check instead of an unchecked cast.
+
+**Owners consulted:** `tabletop-shape-mechanics` (-context, -review, -update — confirmed
+`MtgZoneShapeUtil` needs no `onClick`/`onTranslateEnd`/`onDragShapesOver` at all since locked
+shapes never reach `PointingShape` or `getDraggingOverShape`'s candidate list, and that plain
+string comparison on `IndexKey` is the correct topmost-wins z-order check).
