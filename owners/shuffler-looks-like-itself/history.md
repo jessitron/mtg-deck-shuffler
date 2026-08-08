@@ -1126,3 +1126,26 @@ can host working buttons (`pointer-events: all` + `editor.markEventAsHandled()`,
 coherent object and not a contradiction — the same early-consult pattern that moved the
 `mtg-zone` architecture decision on 2026-08-07.
 
+## 2026-08-08 — dev-only chrome gets no visual dev-marker (the "yo!" link)
+
+Branch `worktree-yo-fast-start`. A dev-mode-only fast-start link — a bare
+`<a href="/yo">yo!</a>` at the front of `.right-nav` in `views/partials/header.ejs`,
+server-side-conditional on `locals.showYo` (only `index.ejs` passes it, from the `devMode`
+cookie), landing on a new `GET /yo` route that 404s without the cookie. **Zero new CSS**:
+the anchor is styled by the existing `site.css` → `.right-nav a` rule, exactly like its
+siblings, and as an `<a>` it inherits the global `:focus-visible` ring for free.
+
+**The precedent, set by this owner's own `-context` and honoured by the implementation:
+a dev-only affordance carries no invented visual marker.** No dashed border, no debug
+color, no badge saying "dev". Its dev-ness is expressed by *when it renders*
+(server-side conditional), not by *how it looks* — when present, it adopts the rule for
+its slot verbatim. That parallels `/dontdie` (undocumented, invisible) rather than the
+`monospace` debug blocks (a genuine one-off treatment for a genuinely different kind of
+surface). No `/design` specimen was added, correctly: the gallery documents visual
+treatments, and this link introduces none — a specimen would exhibit `.right-nav a`,
+which is not a new component.
+
+Nothing in the KB's rules, tokens, files, or open choices moved. Recorded so the next
+dev-only affordance doesn't invent a "dev look" that would then need naming, staging,
+and defending.
+
