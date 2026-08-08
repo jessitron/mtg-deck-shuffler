@@ -34,8 +34,9 @@
         <p style="margin-top: 1rem;">
           Sections are tagged <span class="badge badge-standard">standard</span> where the app is
           already consistent, <span class="badge badge-choose">choose one</span> where more than one
-          treatment is in use and you need to pick, and <span class="badge badge-drift">drift</span>
-          where there's no standard at all yet.
+          treatment is in use and you need to pick, <span class="badge badge-drift">drift</span>
+          where there's no standard at all yet, and <span class="badge badge-candidate">candidate</span>
+          where a decision has been made but the real component doesn't exist yet to receive it.
         </p>
         <nav class="gallery-toc">
           <a href="#color">Color</a>
@@ -105,7 +106,7 @@
             <div class="swatch-meta">
               <span class="swatch-name">--armed-glow</span>
               <span class="swatch-hex">#e6a33d</span>
-              <span class="swatch-use">staged, not decided — see <a href="#zones">Tabletop zones</a></span>
+              <span class="swatch-use">decided 2026-08-07, not yet built — see <a href="#zones">Tabletop zones</a></span>
             </div>
           </div>
           <div class="swatch">
@@ -859,18 +860,20 @@
 
       <!-- ================================================================ -->
       <section class="gallery-section" id="zones">
-        <h2>Tabletop zones <span class="badge badge-choose">choose one</span></h2>
+        <h2>Tabletop zones <span class="badge badge-candidate">candidate</span></h2>
         <p class="section-note">
-          <strong>Mock, not the real component.</strong> These are staged for the
-          tabletop-physics map's <code>11-what-a-zone-looks-like</code> ticket
-          — deciding what tldraw's self-rendering <code>mtg-zone</code> shape (library,
-          graveyard, exile, the Stack, command; the playmat separately) looks like at rest and
-          armed. The Tabletop has no CSS source file and no Orbitron <code>&lt;link&gt;</code>
-          today, so these specimens borrow the Shuffler's tokens and fonts to render a stand-in;
-          the winner gets re-implemented in TypeScript once the Tabletop has somewhere to put
-          them. Scoped to the <strong>unpictured</strong> zones (graveyard, exile, Stack,
-          command) — the library and playmat layer an opaque image over the same box, which a
-          flat CSS mock can't show.
+          <strong>Mock, not the real component — all four decisions below are made, resolved
+          2026-08-07.</strong> Staged for the tabletop-physics map's
+          <code>11-what-a-zone-looks-like</code> ticket, deciding what tldraw's self-rendering
+          <code>mtg-zone</code> shape (library, graveyard, exile, the Stack, command; the
+          playmat separately) looks like at rest and armed. The Tabletop has no CSS source file
+          and no Orbitron <code>&lt;link&gt;</code> today, so these specimens borrow the
+          Shuffler's tokens and fonts to render a stand-in; the real shape re-implements the
+          picks in TypeScript once the Tabletop has somewhere to put tokens and fonts (the
+          <code>tabletop-css-tokens</code> line in the repo-root <code>TODO.md</code>). Scoped
+          to the <strong>unpictured</strong> zones (graveyard, exile, Stack, command) — the
+          library and playmat layer an opaque image over the same box, which a flat CSS mock
+          can't show.
         </p>
 
         <h3>At rest</h3>
@@ -882,7 +885,7 @@
           <a href="#geometry">Geometry &amp; spacing</a>, not the <code>10px</code> the
           precedent uses for its own physical-card-sized box.
         </p>
-        <div class="stage stage-dark">
+        <div class="stage stage-white">
           <div class="zone-mock zone-mock--rest">Graveyard</div>
         </div>
         <div class="option-where">design-candidates.css → .zone-mock--rest</div>
@@ -896,8 +899,8 @@
           </div>
           <div class="options">
             <div class="option">
-              <div class="option-label">A — Glow ring</div>
-              <div class="stage stage-dark">
+              <div class="option-label">A — Glow ring (picked)</div>
+              <div class="stage stage-white">
                 <div class="zone-mock zone-mock--armed-glow">Graveyard</div>
               </div>
               <div class="option-where">.zone-mock--armed-glow — new --armed-glow token</div>
@@ -909,7 +912,7 @@
             </div>
             <div class="option">
               <div class="option-label">B — Boundary solidifies</div>
-              <div class="stage stage-dark">
+              <div class="stage stage-white">
                 <div class="zone-mock zone-mock--armed-border">Graveyard</div>
               </div>
               <div class="option-where">.zone-mock--armed-border — new --armed-glow token</div>
@@ -934,8 +937,8 @@
           <div class="choice-question">Same black frame as the Shuffler's mats, or the identity pink?</div>
           <div class="options">
             <div class="option">
-              <div class="option-label">A — Black (matches the Shuffler)</div>
-              <div class="stage stage-dark">
+              <div class="option-label">A — Black (matches the Shuffler) (picked)</div>
+              <div class="stage stage-white">
                 <div class="playmat-mock playmat-mock--border-black">Playmat</div>
               </div>
               <div class="option-where">.playmat-mock--border-black</div>
@@ -946,7 +949,7 @@
             </div>
             <div class="option">
               <div class="option-label">B — --dark-pink</div>
-              <div class="stage stage-dark">
+              <div class="stage stage-white">
                 <div class="playmat-mock playmat-mock--border-pink">Playmat</div>
               </div>
               <div class="option-where">.playmat-mock--border-pink</div>
@@ -960,25 +963,33 @@
 
         <h3>The playmat's corner radius</h3>
         <p class="section-note">
-          The Shuffler's one playmat object has two radii at two scales — <code>20px</code> on
-          <code>/prepare</code>, <code>80px</code> on <code>/game</code>, "a matter of scale."
-          The Tabletop has one canvas at one scale, with no second page to pick the other value
-          for — the open <code>playmat-two-visual-metaphors</code> buoy.
+          <strong>Not the Shuffler's 20px/80px.</strong> Those are DOM pixels on a page that
+          never zooms; the Tabletop's playmat is a shape on a tldraw canvas the player zooms
+          continuously, and a radius fixed in viewport pixels would drift out of proportion to
+          the object as the object is resized — Jess: <em>"it shouldn't get rounder as I zoom
+          out."</em> A bare CSS percentage doesn't fix this the way it looks like it would
+          either: percentage radii use width for the horizontal corner and height for the
+          vertical one <em>separately</em>, so on this non-square box it draws an ellipse, not a
+          round corner. A real round corner needs one radius, computed from the shape's own
+          height and applied equally to both axes — for a self-rendering tldraw shape, that's
+          computed from <code>props.h</code> at render time, not a CSS percentage. The two
+          candidates below bake that computed value in as px purely so the corner reads as
+          actually round here; still open which proportion of height reads right.
         </p>
         <div class="options">
           <div class="option">
-            <div class="option-label">A — 20px</div>
-            <div class="stage stage-dark">
-              <div class="playmat-mock playmat-mock--border-black playmat-mock--radius-20">Playmat</div>
+            <div class="option-label">A — 5% (picked)</div>
+            <div class="stage stage-white">
+              <div class="playmat-mock playmat-mock--border-black playmat-mock--radius-a">Playmat</div>
             </div>
-            <div class="option-where">.playmat-mock--radius-20</div>
+            <div class="option-where">.playmat-mock--radius-a</div>
           </div>
           <div class="option">
-            <div class="option-label">B — 80px</div>
-            <div class="stage stage-dark">
-              <div class="playmat-mock playmat-mock--border-black playmat-mock--radius-80">Playmat</div>
+            <div class="option-label">B — 12%</div>
+            <div class="stage stage-white">
+              <div class="playmat-mock playmat-mock--border-black playmat-mock--radius-b">Playmat</div>
             </div>
-            <div class="option-where">.playmat-mock--radius-80</div>
+            <div class="option-where">.playmat-mock--radius-b</div>
           </div>
         </div>
 
@@ -993,8 +1004,8 @@
           <div class="choice-question">Same family as the other zones, or its own thing?</div>
           <div class="options">
             <div class="option">
-              <div class="option-label">A — Same zone family</div>
-              <div class="stage stage-dark">
+              <div class="option-label">A — Same zone family (picked)</div>
+              <div class="stage stage-white">
                 <div class="zone-mock zone-mock--rest" style="width: 260px; height: 40px;">The Stack</div>
               </div>
               <div class="option-where">.zone-mock--rest, resized</div>
@@ -1002,7 +1013,7 @@
             </div>
             <div class="option">
               <div class="option-label">B — Distinct strip</div>
-              <div class="stage stage-dark">
+              <div class="stage stage-white">
                 <div class="zone-mock--stack-distinct">The Stack</div>
               </div>
               <div class="option-where">.zone-mock--stack-distinct</div>

@@ -214,6 +214,22 @@ expensive way round.
   `actor` = tldraw's ephemeral per-session sync id, a stand-in until the Tabletop gets real
   seat/player identity (not decided here, not blocking).
 
+- **A zone at rest ports `.commander-placeholder`'s dashed pattern; armed is a glow ring plus a
+  background tint, uniform across every zone type** — [Decide what a zone looks like, armed and
+  at rest](issues/11-what-a-zone-looks-like.md), resolved 2026-08-07, staged on `/design`. A new
+  `--armed-glow` token drives the armed state; the tint half is invisible on the library and
+  playmat (they sit under an opaque picture per ticket 03) and Jess accepted that rather than
+  forking the treatment by zone kind. **The playmat's border stays black**, matching the
+  Shuffler's mats — one identity across ships, not this page's pink zone family. **The playmat's
+  corner radius is a proportion of the shape's own height (5%, picked), computed and applied
+  equally to both axes at render time — not a fixed pixel value and not a bare CSS percentage.**
+  Both of those were staged first and both were wrong, caught live: a pixel radius drifts out of
+  proportion as the object is resized on a continuously-zoomable canvas, and a CSS percentage
+  radius uses width and height *separately* for the two axes, drawing an ellipse on this non-
+  square shape instead of a round corner. **The Stack reads as the same zone family as
+  graveyard/exile/command** — no distinct treatment, no literal "blue." Implementing any of this
+  stays blocked on the fog item below (Tabletop CSS tokens and fonts); only the decision shipped.
+
 ## Not yet specified
 
 - **Where Tabletop CSS tokens and fonts live.** `apps/tabletop` has **no CSS source file at all**

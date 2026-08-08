@@ -71,21 +71,25 @@
 }
 
 /* At rest: the .commander-placeholder "empty receptacle" pattern (dashed
- * border at the card unit), ported and retokenized — was #ccc/#f9f9f9. */
+ * border at the card unit), ported and retokenized — was #ccc/#f9f9f9.
+ * The Tabletop's canvas is white, not the Shuffler's dark play pages — full
+ * opacity reads fine here, unlike the washed-out translucent pass this
+ * started as. */
 .zone-mock--rest {
-  border: 2px dashed rgba(187, 82, 119, 0.5); /* --dark-pink at reduced weight */
-  color: rgba(187, 82, 119, 0.85);
-  background: rgba(187, 82, 119, 0.04);
+  border: 2px dashed var(--dark-pink);
+  color: var(--dark-pink);
+  background: rgba(187, 82, 119, 0.03);
 }
 
 /* Armed, option A — outward glow only. Works even where the zone's interior
  * is hidden under a separate image layer (playmat, library). */
 .zone-mock--armed-glow {
-  border: 2px dashed rgba(187, 82, 119, 0.5);
-  color: var(--armed-glow);
+  border: 2px dashed var(--dark-pink);
+  color: var(--deep-space);
+  background: rgba(230, 163, 61, 0.1);
   box-shadow:
     0 0 0 3px var(--armed-glow),
-    0 0 18px 4px rgba(230, 163, 61, 0.55); /* --armed-glow, #e6a33d */
+    0 0 16px 5px rgba(230, 163, 61, 0.65); /* --armed-glow, #e6a33d */
 }
 
 /* Armed, option B — the boundary solidifies and thickens, same "restate the
@@ -94,9 +98,9 @@
  * (untokenized green, 20px radius on chrome, outline as decoration). */
 .zone-mock--armed-border {
   border: 3px solid var(--armed-glow);
-  color: var(--armed-glow);
-  background: rgba(230, 163, 61, 0.08);
-  box-shadow: 0 0 10px 1px rgba(230, 163, 61, 0.4);
+  color: var(--deep-space);
+  background: rgba(230, 163, 61, 0.12);
+  box-shadow: 0 0 10px 2px rgba(230, 163, 61, 0.5);
 }
 
 /* Playmat border-color candidates — is a pink border on the Tabletop's
@@ -122,15 +126,28 @@
   border: 8px solid var(--dark-pink);
 }
 
-/* Playmat corner-radius candidates — the Shuffler's one playmat object has
- * two radii at two scales (20px /prepare, 80px /game); the Tabletop has one
- * canvas, no second scale to pick the other value for. */
-.playmat-mock--radius-20 {
-  border-radius: 20px;
+/* Playmat corner-radius candidates. NOT the Shuffler's 20px/80px — those are
+ * DOM pixels on a page that never zooms. The Tabletop's playmat is a shape on
+ * a tldraw canvas the player zooms continuously; a radius fixed in viewport
+ * pixels would drift out of proportion to the object as the object is
+ * resized (Jess: "it shouldn't get rounder as I zoom out").
+ *
+ * A bare CSS percentage (`border-radius: 12%`) does NOT fix this the way it
+ * looks like it would: percentage radii use width for the horizontal corner
+ * and height for the vertical one *separately*, so on a non-square box (this
+ * one is 280×150) it draws an ellipse, not a round corner (Jess caught this).
+ * A real round corner needs ONE radius value, computed from the shape's own
+ * height and applied equally to both axes — which for a self-rendering
+ * tldraw shape means computing it from props.h in the render function, not
+ * a CSS percentage. These two candidates are that computed value already
+ * baked in as px (8px = 5% of this mock's 150px height, 18px = 12%), purely
+ * so the corner reads as actually round here. */
+.playmat-mock--radius-a {
+  border-radius: 8px; /* 5% of this mock's 150px height, equal on both axes */
 }
 
-.playmat-mock--radius-80 {
-  border-radius: 80px;
+.playmat-mock--radius-b {
+  border-radius: 18px; /* 12% of this mock's 150px height, equal on both axes */
 }
 
 /* The Stack — DESIGN.md calls it "a shared blue strip" with nothing further

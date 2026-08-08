@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Type: prototype
-Status: claimed
+Status: resolved
 Blocked by: 03
 
 ## Question
@@ -136,3 +136,59 @@ copying `styles.css`'s `:root` into a Tabletop stylesheet. Everything downstream
 names exist and mean what they mean, and a renamed or diverged copy fails silently — CSS just drops
 the declaration. A second source of truth for the palette is the failure mode that owner exists to
 prevent, and it's already fighting four separate `:root` blocks.
+
+## Answer
+
+Resolved 2026-08-07, staged on `/design` (`apps/shuffler/views/design.ejs` § Tabletop zones,
+candidate CSS in `apps/shuffler/public/design-candidates.css`). All specimens are mocked on
+`stage-white` — **not** the gallery's usual `stage-dark` — because the Tabletop's canvas is
+white; the first draft staged everything dark by copying the Shuffler's own convention and Jess
+caught it immediately ("the tabletop is white so why is the background in these examples dark?").
+
+**At rest**: `.commander-placeholder`'s dashed "empty receptacle" pattern, ported and
+retokenized — `2px dashed var(--dark-pink)`, radius `0`. Not controversial, no options staged.
+
+**Armed — glow ring, same treatment on every zone type, no exception for the pictured ones.**
+A new `--armed-glow` token (`#e6a33d`, an amber, deliberately not `--light-pink` since that's the
+global focus-ring color) drives a `box-shadow` ring plus a background tint. Jess's read on staging:
+the tint is what actually sells the effect ("what actually works is that the background color of
+the zone changed") — but the tint is exactly the half ticket 03 already ruled unavailable for the
+library and playmat, since those two sit under an opaque picture layered over the same box. Told
+this, Jess chose to accept the degradation rather than fork the treatment by zone kind: **one
+`.zone-mock--armed-glow`-equivalent rule everywhere**, tint invisible on the two pictured zones,
+ring still visible there. Not verified in the real app yet — Jess plans to eyeball it live once
+built and flag if the ring alone reads as too subtle on the pictured zones.
+
+**Playmat border: black, matching the Shuffler's mats exactly** (`10px solid black`, untokenized
+on purpose) — one identity across both ships, not the pink that would match this page's zone
+family. `--dark-pink` was staged and rejected.
+
+**Playmat corner radius: a proportion of the shape's own height, not a fixed pixel value — and
+NOT a bare CSS percentage either.** Two corrections from Jess mid-staging, both substantive:
+
+1. First draft staged `20px` vs `80px`, ported straight from the Shuffler's own two literal
+   values. Jess: *"the playmat's border should be stable on the table when I zoom in and out...
+   the border-radius in pixels would key it to my viewport, instead of the canvas."* A fixed
+   pixel radius drifts out of proportion to the object as the object is resized on a
+   continuously-zoomable canvas — the Shuffler's two literals exist at two *fixed* page scales,
+   a frame of reference the Tabletop doesn't have.
+2. Restaged as a bare CSS percentage (`border-radius: 5%` / `12%`) — still wrong, and Jess caught
+   it a second time: *"the border-radius should be round. The percentage doesn't work because the
+   height and width are different."* CSS percentage radii use width for the horizontal corner and
+   height for the vertical one **separately**, so on a non-square box it draws an ellipse, not a
+   round corner.
+
+**The actual answer: one radius value, computed from `props.h` at render time, applied equally to
+both axes.** Not expressible as a static CSS class at all — the real `mtg-zone`/playmat shape has
+to compute it in TypeScript from its own height each render. The two candidates staged (equal-axis
+`8px`/`18px`, i.e. what 5%/12% of this mock's fixed 150px height comes out to) exist only so the
+gallery could show an actually-round corner to pick between. **Picked: 5%** — the subtler, closer-
+to-square option.
+
+**The Stack: same zone family as graveyard/exile/command, not a distinct treatment.** No new
+decision needed — dashed pink at rest, same armed treatment as everything else. `DESIGN.md`'s
+"shared blue strip" language doesn't get a literal blue; no such token exists and none was minted.
+
+**Implementing all four is still blocked**, unchanged from the ticket's own framing: the Tabletop
+has no CSS source file and no Orbitron `<link>` yet (`tabletop-css-tokens` in the repo-root
+`TODO.md`). The real `mtg-zone` shape doesn't exist until that lands.
