@@ -262,6 +262,22 @@ section is just a wall between Jess and the live work.
     zone looks like, armed and at rest. Overlapping territory; that ticket decides zones, this
     decides whether the mat under them is fleet-owned. Link, don't merge.
 
+- [ ] `applygamecommand-as-journey` `applyGameCommand`'s protocol looks like a Journey — worth a future look
+  - Surfaced 2026-08-08 while grilling `.scratch/shuffler-architecture-review/issues/02-tabletop-send-veto-hook.md`
+    (designing a pre-mutate hook for `/play-card`/`/discard-card`'s send-then-commit protocol).
+    `apps/shuffler/src/apply-game-command.ts`'s shared retrieve/reconstruct/version-check/status-check/
+    mutate/persist protocol is exactly the shape `services/spine/interpreter/docs/journeys/`
+    (`Briefasaurus::Journey` — stages, needs, enactments, explicit outcomes) exists to name.
+  - Specifically: the tabletop send in send-then-commit reads as an **Enactment** — a declared
+    effect handed to the world, with idempotency and an explicit outcome — not a permission-check
+    veto. That reframing is worth keeping even without adopting the framework.
+  - Jess's call in the moment: capture the resemblance, don't build it now — ticket 02 still gets a
+    small, non-Journey shape (a typed pre-mutate hook). Two ways this could go later: a TypeScript
+    port of the relevant Journey concepts for the Shuffler, or moving game-command orchestration to
+    the Spine as an actual Journey (cross-ship, and the framework's Ruby home already).
+  - Related: `.scratch/shuffler-architecture-review/issues/02-tabletop-send-veto-hook.md`,
+    `services/spine/interpreter/docs/journeys/README.md`.
+
 ## Backlog
 
 - [ ] `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there  ← was: JES-85
