@@ -221,6 +221,7 @@ export function getModalCardActionsByLocation(gameCard: GameCard, gameId: number
 /**
  * Send-then-commit's failure face (JES-127): the tabletop didn't take the
  * card, so the action was blocked and the card stays where it was.
+ * Full protocol, all stations: notes/DESIGN-send-then-commit.md.
  */
 export function formatTabletopSendErrorModal(action: string, cardName: string, tableName: string): string {
   return formatModalHtmlFragment(

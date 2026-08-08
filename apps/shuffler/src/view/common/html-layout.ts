@@ -50,6 +50,7 @@ ${additionalStylesheetsHtml}
         // Bad Gateway: tabletop rejected/unreachable. swap:true renders the
         // error modal; error:true keeps event.detail.successful false so the
         // table-play-button's conditional close-modal leaves the modal visible.
+        // Full protocol, all stations: notes/DESIGN-send-then-commit.md.
         {code: "502", swap: true, error: true},
       ];
     </script>

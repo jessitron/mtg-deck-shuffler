@@ -74,7 +74,15 @@ bundled in. Done when each ticket below is either resolved or explicitly parked 
   `GameState.ts` still re-exports the vocabulary, now sourced from its sibling. Pure move —
   build + all 302 tests green with only import-path changes.
 
+- **[Name the send-then-commit failure protocol](issues/05-name-send-then-commit-protocol.md) —
+  done** (2026-08-08). Canonical statement lives in a new doc,
+  `apps/shuffler/notes/DESIGN-send-then-commit.md`: the invariant, the retry/dedup safety,
+  the best-effort contrast with `seat.joined`, and the six stations a failure travels
+  (`sendCardToTableFirst` → `sendCardBeforeMutate` → `applyGameCommand` `send-failed` →
+  502 + HX-Retarget → htmx `responseHandling` → conditional close-modal). All five code
+  sites and CLAUDE.md § Table Mode now point at it. Documentation-only; build + 302 tests
+  green.
+
 ## Fog — not yet specified
 
-- [Name the send-then-commit failure protocol](issues/05-name-send-then-commit-protocol.md)
 - [Unify the Shuffler's two page-shell builders](issues/06-unify-page-shell.md)

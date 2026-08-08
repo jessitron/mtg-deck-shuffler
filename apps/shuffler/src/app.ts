@@ -135,6 +135,7 @@ export function createApp(
   // Shared beforeMutate body for /play-card and /discard-card's send-then-commit
   // (JES-127): send the card to the table first; on failure, throw
   // TableSendFailedError to abort the command before mutate/persist run.
+  // Full protocol, all stations: notes/DESIGN-send-then-commit.md.
   async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint, action: "play" | "discard"): Promise<void> {
     const attributes = { "table.name": game.tableName!, "card.instance_id": card.cardInstanceId ?? "missing", "zone.hint": zoneHint };
     trace.getActiveSpan()?.setAttributes(attributes);
