@@ -238,6 +238,15 @@ expensive way round.
   (ticket 07) — the rule ("nudge to an open spot, don't just overlap") is decided; the
   concrete placement/collision logic and whether it animates is implementation's job, not yet
   specified here.
+- **What real actor/seat identity looks like on the Tabletop.** Ticket 10 stubbed `actor` with
+  tldraw's ephemeral per-session sync id because the client has no durable identity today at
+  all — `useSync` passes no `user`, and `seatId` exists only server-side. Jess called this
+  important and said she'd find it a home; not designed yet, and it likely touches how seats
+  work on the canvas more than physics proper.
+- **What a duplicated card is.** Ticket 10 gave the announcement a cheap fallback
+  (`shape.created` + `copiedFrom`), but token semantics — what a copy inherits, whether it's a
+  "real" independent card — aren't designed. Jess copies cards routinely on Mural and expects
+  to eventually here; someday, after sleeves exist.
 
 ## Out of scope
 
@@ -247,7 +256,11 @@ expensive way round.
   is somebody else's.
 - **Curating the tldraw UI** — killing crop, the toolbar, the context menu — map 4. The one
   exception is where the stock handles actively break physics (tap), which is in scope here.
-- **Undo** — map 4, because it's a board-wide question rather than a shape-level one.
+- **Undo** — map 4, because it's a board-wide question rather than a shape-level one. Ticket 10
+  confirmed this reaches further than "who owns the undo stack": distinguishing an undo-caused
+  change from a fresh action needs overriding tldraw's default undo action, since the store's
+  own `ChangeSource` is only `'user'|'remote'` and the app runs stock `<Tldraw>` UI. Jess doesn't
+  like the limit but accepted it for this map.
 - **Player-level loose counters** (poison, energy, experience) — [ticket 07](issues/07-counters-that-ride-along.md).
   Jess: *"out of scope for now, I'll use a sticky note."* A stand-in already exists; nobody
   needs to build a mechanism for these.
