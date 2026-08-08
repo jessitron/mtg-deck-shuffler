@@ -74,9 +74,19 @@ polish.
   `isCommander` is set. The "home marker" is a second, faded, locked `mtg-card` shape in the
   zone, not zone-drawn chrome. Amends `tabletop-physics` ticket 02's "no owner field" line — see
   the addendum there.
+- [Let a player pick their playmat and their sleeves](issues/09-sleeve-and-playmat-picker.md)
+  (2026-08-08) — v1 splits the two fields: playmat gets curated image swatches
+  (`.precon-tile` + `.hero-button.active`, seeded from the `aeoe-*.png` art-card images
+  already used as home-page hero backgrounds), sleeves get a color picker plus quick color
+  swatches (rendered as a solid color, not an image). Image swatches and custom URL for
+  both fields are deferred to a later phase.
 
 ## Not yet specified
 
+- **How a sleeve's chosen color travels and renders.** `cardBackImageUrl` is a URL field
+  today; ticket 09 decided sleeves are color-picked in v1, but not how a color becomes
+  that field's value (or a new field) through `seat.joined` and onto the card back shape.
+  Graduated 2026-08-08 out of ticket 09's resolution.
 - **Life totals and commander damage.** Numbers a player can modify, and a commander-damage
   count per opponent. Nothing exists in code. What kind of object is a modifiable number here —
   furniture, a shape, or something outside the canvas entirely? Map 1 is resolved now, so this
