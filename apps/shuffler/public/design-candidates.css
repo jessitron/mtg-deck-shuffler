@@ -43,3 +43,131 @@
 /* No focus rule here on purpose: choice 6 adopts this input *without* one, so
  * the global ring from styles.css applies. The dark-pink flush rule this
  * candidate used to carry was choice 5's rejected option. */
+
+/* ===========================================================================
+ * Ticket 11 (tabletop-physics map) — what a zone looks like, armed and at
+ * rest. MOCK, not the shape's own stylesheet: the Tabletop has no CSS source
+ * file at all today (only a built dist/client/assets/*.css) and no Orbitron
+ * <link>, both open dependencies the ticket names but doesn't block on. These
+ * classes are plain HTML/CSS stand-ins for tldraw's self-rendering `mtg-zone`
+ * shape so Jess can pick a treatment; the real shape re-implements the winner
+ * in TypeScript once the Tabletop has somewhere to put tokens and fonts.
+ * See .scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md.
+ * ========================================================================= */
+
+.zone-mock {
+  width: 170px;
+  height: 238px; /* the Tabletop's own card unit — 68 units/inch, NOT the Shuffler's 200x278 */
+  box-sizing: border-box;
+  padding: 6px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-radius: 0; /* flat surface, not pressable — --radius-soft rule doesn't apply here */
+  font-family: var(--font-chrome);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* At rest: the .commander-placeholder "empty receptacle" pattern (dashed
+ * border at the card unit), ported and retokenized — was #ccc/#f9f9f9.
+ * The Tabletop's canvas is white, not the Shuffler's dark play pages — full
+ * opacity reads fine here, unlike the washed-out translucent pass this
+ * started as. */
+.zone-mock--rest {
+  border: 2px dashed var(--dark-pink);
+  color: var(--dark-pink);
+  background: rgba(187, 82, 119, 0.03);
+}
+
+/* Armed, option A — outward glow only. Works even where the zone's interior
+ * is hidden under a separate image layer (playmat, library). */
+.zone-mock--armed-glow {
+  border: 2px dashed var(--dark-pink);
+  color: var(--deep-space);
+  background: rgba(230, 163, 61, 0.1);
+  box-shadow:
+    0 0 0 3px var(--armed-glow),
+    0 0 16px 5px rgba(230, 163, 61, 0.65); /* --armed-glow, #e6a33d */
+}
+
+/* Armed, option B — the boundary solidifies and thickens, same "restate the
+ * boundary" shape as the app's one existing armed treatment
+ * (.hand-drop-zone.drag-over), without that rule's three violations
+ * (untokenized green, 20px radius on chrome, outline as decoration). */
+.zone-mock--armed-border {
+  border: 3px solid var(--armed-glow);
+  color: var(--deep-space);
+  background: rgba(230, 163, 61, 0.12);
+  box-shadow: 0 0 10px 2px rgba(230, 163, 61, 0.5);
+}
+
+/* Playmat border-color candidates — is a pink border on the Tabletop's
+ * playmat the same object as the Shuffler's, or a different one? */
+.playmat-mock {
+  width: 280px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--deep-space);
+  color: var(--light-pink);
+  font-family: var(--font-chrome);
+  font-size: 0.8rem;
+  box-sizing: border-box;
+}
+
+.playmat-mock--border-black {
+  border: 8px solid black; /* the Shuffler's play-page mats: 10px solid black, untokenized on purpose */
+}
+
+.playmat-mock--border-pink {
+  border: 8px solid var(--dark-pink);
+}
+
+/* Playmat corner-radius candidates. NOT the Shuffler's 20px/80px — those are
+ * DOM pixels on a page that never zooms. The Tabletop's playmat is a shape on
+ * a tldraw canvas the player zooms continuously; a radius fixed in viewport
+ * pixels would drift out of proportion to the object as the object is
+ * resized (Jess: "it shouldn't get rounder as I zoom out").
+ *
+ * A bare CSS percentage (`border-radius: 12%`) does NOT fix this the way it
+ * looks like it would: percentage radii use width for the horizontal corner
+ * and height for the vertical one *separately*, so on a non-square box (this
+ * one is 280×150) it draws an ellipse, not a round corner (Jess caught this).
+ * A real round corner needs ONE radius value, computed from the shape's own
+ * height and applied equally to both axes — which for a self-rendering
+ * tldraw shape means computing it from props.h in the render function, not
+ * a CSS percentage. These two candidates are that computed value already
+ * baked in as px (8px = 5% of this mock's 150px height, 18px = 12%), purely
+ * so the corner reads as actually round here. */
+.playmat-mock--radius-a {
+  border-radius: 8px; /* 5% of this mock's 150px height, equal on both axes */
+}
+
+.playmat-mock--radius-b {
+  border-radius: 18px; /* 12% of this mock's 150px height, equal on both axes */
+}
+
+/* The Stack — DESIGN.md calls it "a shared blue strip" with nothing further
+ * decided. Option A treats it as the same zone family as graveyard/exile/
+ * command (no new decision needed); option B stages it as visually distinct.
+ * No "blue" token exists in the palette, so option B uses --deep-space rather
+ * than inventing an untokenized hex — if a literal blue is wanted, that's a
+ * new token to mint, not something to assert here. */
+.zone-mock--stack-distinct {
+  width: 260px;
+  height: 40px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  background: var(--deep-space);
+  color: var(--light-pink);
+  font-family: var(--font-chrome);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

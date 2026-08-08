@@ -74,4 +74,18 @@
    * not precedent — don't copy one.
    */
   --radius-soft: 4px;
+
+  /*
+   * Decided 2026-08-07 (tabletop-physics map, ticket 11) for the Tabletop's
+   * "armed" zone state: a zone about to receive a dragged card gets a glow
+   * ring plus a background tint (invisible on the library/playmat, which sit
+   * under an opaque picture — accepted, not a bug). Shared here (not
+   * ship-local) because the consumer is a tldraw shape on the canvas, same
+   * reasoning as --radius-soft above. Deliberately not --light-pink (that's
+   * the global focus-ring colour) and not part of the --dark-pink/--deep-space
+   * identity pair, since "armed" needs to read as a distinct signal from
+   * either. Not yet consumed anywhere — the real `mtg-zone` shape doesn't
+   * exist yet (blocked on the Tabletop having somewhere to put tokens/fonts).
+   */
+  --armed-glow: #e6a33d;
 }
