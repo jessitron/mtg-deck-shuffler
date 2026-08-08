@@ -1,5 +1,6 @@
 import Database from "better-sqlite3";
-import { PersistStatePort, PersistedGameState, GameId, GameHistorySummary } from "./types.js";
+import { PersistStatePort, PersistedGameState, GameHistorySummary } from "./types.js";
+import { GameId } from "../domain-types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
 
 export class SqlitePersistStateAdapter implements PersistStatePort {

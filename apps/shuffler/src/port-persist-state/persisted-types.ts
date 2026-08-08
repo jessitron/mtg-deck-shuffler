@@ -1,5 +1,5 @@
 import { DeckProvenance } from "../types.js";
-import { CardLocation } from "./types.js";
+import { CardLocation } from "../domain-types.js";
 
 /**
  * Persisted representation of a Deck.

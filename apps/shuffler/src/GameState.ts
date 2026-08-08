@@ -1,7 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { CardDefinition, DeckProvenance, Deck } from "./types.js";
 import {
-  PersistedGameState,
   GameId,
   GameStatus,
   CardLocation,
@@ -11,10 +10,9 @@ import {
   RevealedLocation,
   TableLocation,
   CommandZoneLocation,
-  PERSISTED_GAME_STATE_VERSION,
-  IncompatibleStateVersionError,
   printLocation,
-} from "./port-persist-state/types.js";
+} from "./domain-types.js";
+import { PersistedGameState, PERSISTED_GAME_STATE_VERSION, IncompatibleStateVersionError } from "./port-persist-state/types.js";
 import { PrepId } from "./port-persist-prep/types.js";
 import { CardMove, GameEvent, GameEventLog, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
 import { trace } from "@opentelemetry/api";

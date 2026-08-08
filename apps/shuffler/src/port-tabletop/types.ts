@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { getCardImageUrl } from "../types.js";
-import { GameCard } from "../port-persist-state/types.js";
+import { GameCard } from "../domain-types.js";
 import { CARD_BACK } from "../view/common/shared-components.js";
 
 // ============================================================================

@@ -3,7 +3,7 @@ import * as fc from "fast-check";
 import { applyGameCommand, TableSendFailedError } from "../src/apply-game-command.js";
 import { InMemoryPersistStateAdapter } from "../src/port-persist-state/InMemoryPersistStateAdapter.js";
 import { InMemoryCardRepositoryAdapter } from "../src/port-card-repository/InMemoryCardRepositoryAdapter.js";
-import { GameStatus } from "../src/port-persist-state/types.js";
+import { GameStatus } from "../src/domain-types.js";
 import { CardRepositoryPort } from "../src/port-card-repository/types.js";
 import { GameState } from "../src/GameState.js";
 import { deckWithOneCommander, createTestPersistedGameState } from "./generators.js";

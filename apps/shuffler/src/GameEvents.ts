@@ -1,4 +1,4 @@
-import { CardLocation } from "./port-persist-state/types";
+import { CardLocation } from "./domain-types.js";
 
 type GameEventIdentifier = {
   gameEventIndex: number;

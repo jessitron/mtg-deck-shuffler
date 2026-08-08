@@ -1,7 +1,7 @@
 import { describe, test, expect } from "@jest/globals";
 import * as fc from "fast-check";
 import { GameState } from "../src/GameState.js";
-import { GameStatus, GameCard, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../src/port-persist-state/types.js";
+import { GameStatus, GameCard, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../src/domain-types.js";
 import { CardDefinition, Deck, DeckProvenance } from "../src/types.js";
 import {
   lightningBolt,
