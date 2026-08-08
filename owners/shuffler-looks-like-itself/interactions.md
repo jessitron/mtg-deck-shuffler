@@ -398,12 +398,15 @@ not by recomputing new numbers.**
 
 **Designing anything that lives inside the tldraw canvas** (added 2026-08-07)
 
-- **Read [README.md](README.md) → "tldraw limits" first.** Four rules behave differently on the
-  canvas, and three of them are hard limits rather than choices: no Orbitron in the `geo` `font`
+- **Read [README.md](README.md) → "tldraw limits" first.** Five rules behave differently on the
+  canvas, and four of them are hard limits rather than choices: no Orbitron in the `geo` `font`
   enum (so on-brand canvas text requires a self-rendering shape), the global `:focus-visible`
   rule can't reach a shape (tldraw owns selection indication), a locked shape can never be a
-  drop target (so "reacts to what's over it" must be a derived render, not a hook), and an
-  opaque `image` shape layered over a box hides that box's interior.
+  drop target (so "reacts to what's over it" must be a derived render, not a hook), an
+  opaque `image` shape layered over a box hides that box's interior, and (added 2026-08-08)
+  **tldraw cannot rotate the view per viewer on a shared board** — every player area is
+  upright for everyone, always, which is why the square/compass layout repositions player
+  areas without ever rotating them.
 - **A self-rendering shape needs its own `toSvg`, or it vanishes from canvas exports.** The cost
   scales with the treatment — gradients, shadows and a webfont all have to be hand-written into
   the SVG. **Budget it inside the option comparison**, not after Jess has picked.

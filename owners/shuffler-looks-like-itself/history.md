@@ -991,3 +991,38 @@ closes the numeric-coupling watch point in [interactions.md](interactions.md) fo
 is no replacement number on either page to keep in sync, so a future surround change starts
 from zero rather than from a stale 22px.
 
+## 2026-08-08 — the square: a pure placement decision, and a tldraw limit made explicit
+
+`.scratch/tabletop-table-layout/issues/10-the-square.md`, resolved as part of the Table-layout
+map. No CSS changed and nothing was implemented — `src/server/cardLayout.ts` and
+`tableFurniture.ts` are untouched — this was a design decision recorded in
+`apps/tabletop/DESIGN.md`'s new "The square" section: player areas move from a row into
+compass slots (N/E/S/W) around a fixed-size, centered Stack, by join order.
+
+**Worth this owner's attention for one reason: "no per-viewer rotation" is a hard tldraw
+platform limit, not a deferred wish, and it now has a fifth entry in
+[README.md](README.md) → "tldraw limits."** Jess re-raised the want — a physical table where
+each player's mat faces them — and it was reconfirmed still impossible on a shared tldraw
+board without an iframe-level trick, same posture as Mural ("Mural doesn't rotate either").
+That's the same category as the `font` enum and the locked-shape drop-target limit already in
+that list: something to design *around*, permanently, not a gap to keep re-litigating. The
+consequence is concrete: every player area, including the two E/W compass slots, stays upright
+in world space, so a wide-short rectangle parked at an E/W slot reads "sideways" — an accepted
+cosmetic quirk, explicitly not worth a second internal layout to fix for a purely cosmetic
+payoff.
+
+**A clean instance of placement-without-appearance, this time on the canvas rather than in
+CSS.** The pattern this owner has been enforcing in stylesheets since the deck-title plaque
+move (2026-08-07) — a placement change is not a license for an appearance change to ride
+along — held here too, on different terrain: only the *position* of the player-area rectangle
+changes; its internal layout (playmat, library, Command Zone, Graveyard, Exile, same
+footprint from ticket 01) is untouched, and no color, radius, or token question rode along
+with the reposition. The geometry-computed-in-TypeScript guidance this owner gave ticket 01
+(bake the widened player-area rectangle's dimensions in `cardLayout.ts` at render time, not as
+hardcoded pixels) was consulted again and held without needing to be re-argued — this ticket
+arranges already-parametrized rectangles in space, it doesn't introduce a new static value.
+
+**Explicitly provisional, and said so out loud.** Jess: *"this is all gonna be tweaked after
+play experience."* Recorded as a first build to react to, not a layout to defend — worth
+remembering before anyone treats the N/E/S/W assignment as more settled than it is.
+
