@@ -9,6 +9,7 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
 - **Express instrumentation config** — `ignoreLayersType: [MIDDLEWARE]` keeps traces at 2 spans, not 8.
 - **Samplers reading both semconv spellings** (`http.user_agent`/`user_agent.original`, `http.target`/`url.path`) — a sampler that stops matching fails open, silently.
 - **The Tabletop's browser collector** (`apps/tabletop/k8s/collector.yaml`, same-origin `/v1/traces`) — keyless browser export.
+- **The Shuffler's one page shell** (`formatHtmlHead` in `apps/shuffler/src/view/common/html-layout.ts`, since `b268414`) — every page's browser telemetry bootstrap (tab-id script → `hny.js` → guarded `Hny.initializeTracing`, in that order) comes from this one function; EJS pages reach it through `views/partials/head.ejs`. The `X-Browser-Tab-Id`/`game.browser_tab_id` browser↔server correlation depends on it.
 - **Auto-instrumentation carrying the trace** — the Shuffler creates zero manual spans; everything hangs off the ambient request span.
 - **The NodeSDK owning logs as well as traces** (`logRecordProcessors`) — that shared wiring is what gives log records the same resource (`service.name`, so the same dataset) and shutdown path as spans. It also means `OTEL_LOGS_EXPORTER` is inert on those ships.
 - **`apps/shuffler/src/shutdownHooks.ts`'s `installShutdownHandlers`** — the SIGTERM/SIGINT flush-and-exit hook `tracing.ts` calls right after `sdk.start()`. Without it, SIGTERM (from `verify.sh`'s `cleanup()`, and from k8s on every pod termination) killed the process before the last OTel batch flushed. Fixed 2026-08-07 (`08-no-shutdown-flush-hook`). The Tabletop's `tracing.ts` has the same gap, not yet fixed.
@@ -56,6 +57,16 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
 - **Touching either Node ship's `log.ts` or its `logRecordProcessors`**: the two ships are on different OTel version lines (0.219 / 0.221) with **incompatible constructor signatures** for the same classes. Don't paste between ships; run both ships' tests. Wrong shape = silent no-export.
 - **Adding logging to a hot path**: logs are not sampled, on purpose. That's *readable* only because nothing logs per-request (not a money question — ingest is free). If you're about to, put it on the span instead, where it correlates with everything else — or reopen the sampling question deliberately (README → Invariant 2).
 - **Adding HTTP middleware or changing routes**: confirm spans still get `http.route` and the route-param stamping (`stampRouteParamsOnSpan`) still fires.
+- **Editing `apps/shuffler/src/view/common/html-layout.ts` or `views/partials/head.ejs`**: the
+  browser bootstrap's script order is load-bearing — `browser-tab-id.js` must run before the
+  inline `Hny.initializeTracing`, because the tab id goes into the OTel **resource**, immutable
+  after init. Keep the `window.Hny && window.browserTabId` guard; know its gap — an unset key
+  interpolates as the truthy string `"undefined"` and 401s silently (`browser-tracing-key-guard`
+  in `TODO.md`). Keep the two-var apiKey fallback (`HONEYCOMB_INGEST_API_KEY ||
+  HONEYCOMB_API_KEY`): the first is set nowhere in-repo but is the deliberate override slot —
+  check prod before "simplifying" it. Key-in-page is sanctioned (Invariant 3; the Shuffler has no
+  collector). And never add a **second** bootstrap anywhere — one shell is the whole point
+  (README → The Shuffler's browser bootstrap).
 - **Adding a game-mutation route in `apps/shuffler/src/app.ts`**: **all 13** game-mutation routes
   (`reveal-card`, `put-in-hand`, `put-on-top`, `put-on-bottom`, `shuffle`, `mulligan`,
   `move-hand-card`, `undo`, `draw`, `flip-card`, `flip-card-modal`, `play-card`, `discard-card`)

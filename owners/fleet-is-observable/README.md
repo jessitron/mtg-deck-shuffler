@@ -200,6 +200,7 @@ Consequences worth holding:
 | `apps/shuffler/src/tracing_util.ts`                   | **Helpers, not a wrapper**: `setCommonSpanAttributes()` (a `CommonAttributes` → span-attribute-name table), `stampRouteParamsOnSpan()` (writes `http.route.param.<key>`), `markCurrentSpanAsError()`. Callers still `import { trace } from "@opentelemetry/api"` directly.                                                                                                                                                                            |
 | `apps/shuffler/src/apply-game-command.ts`             | **First route-protocol module with `markCurrentSpanAsError` calls living outside `app.ts`**, and the first route-level protocol logic in this app with unit-test coverage that needs neither Express nor Playwright (`test/apply-game-command.test.ts`, against the in-memory fakes). `applyGameCommand(deps, gameId, expectedVersion, mutate, beforeMutate?)` is Express-free — no `req`/`res` — and owns the "not-found" / "incompatible-version" `markCurrentSpanAsError` calls (moved verbatim from the old `loadGameFromParams` middleware) plus the persist-then-return protocol shared by **all 13** of `app.ts`'s game-mutation routes (`reveal-card`, `put-in-hand`, `put-on-top`, `put-on-bottom`, `shuffle`, `mulligan`, `move-hand-card`, `undo`, `draw`, `flip-card`, `flip-card-modal`, and — as of the tabletop-send veto hook (2026-08-08) — `play-card`/`discard-card`). This works because `markCurrentSpanAsError` itself has no Express dependency — just `trace.getActiveSpan()` — so centralizing it here continues the house pattern rather than breaking it, and guarantees the two error outcomes get identical telemetry across every route regardless of each route's rendering. Two request-parsing facts (`game.game_id.param`, `game.game_id.valid`) stayed in `app.ts`'s new `parseGameIdParam()` helper, since that's where the `:gameId` route param is actually parsed. `renderCommandOutcome`'s `renderApplied` callback widened from `(game, whatHappened) => string` to `(game, whatHappened) => string | void`, so a route that must send the response itself — `flip-card-modal` calls `res.render("partials/card-modal", …)` rather than returning a fragment string — can do so; `renderCommandOutcome` sends nothing further when the callback returns `undefined`. **The optional 5th parameter, `beforeMutate?: (game: GameState) => Promise<void>`, runs after the status/version checks and before `mutate`** — added so `play-card`/`discard-card` could keep their send-then-commit shape (tabletop gets the card first; only on success does `mutate` run) without forking back onto a hand-rolled protocol. A new `TableSendFailedError` class (message + `errorHtml`) is the only error `beforeMutate` may throw to abort the command before `mutate`/persist run; `applyGameCommand` catches specifically that class into a new `CommandOutcome` kind, `{ kind: "send-failed"; errorHtml: string }` — any other error `beforeMutate` throws propagates uncaught, same contract as `mutate`. `app.ts`'s `renderCommandOutcome` grew a matching `"send-failed"` case: 502 + `HX-Retarget`/`HX-Reswap` to `#modal-container` + the pre-rendered `errorHtml`, the same header shape as `"version-conflict"`. Both routes' `beforeMutate` closures call a shared local helper, `sendCardBeforeMutate(game, card, zoneHint, action)` in `app.ts`: it builds one attributes object (`table.name`, `card.instance_id`, `zone.hint`), stamps it on the active span via `trace.getActiveSpan()?.setAttributes`, and on `sendCardToTableFirst`'s failure calls `markCurrentSpanAsError(message, attributes)` then `log.error(message, attributes, error)` — attributes first, then the log for the stack, the house failure-path pattern — before throwing `TableSendFailedError`. `loadGameFromParams`/`requireValidVersion` themselves were already **deleted from `app.ts`** once `flip-card`/`flip-card-modal` (2026-08-08) left them with no remaining callers; with `play-card`/`discard-card` migrated too, **no route in `app.ts` still runs the old inline retrieve/reconstruct/status-check/version-check/mutate/persist protocol.** **Open, not done**: stamping `CommandOutcome.kind` on the span for every outcome (not just the error paths) was recommended in review but not implemented this pass — would make the "put the condition in an attribute" invariant apply to `not-active`/`version-conflict`/`applied` too. |
 | `apps/tabletop/src/server/tracing.ts`                 | A **separate** Node SDK init, "modeled on the Shuffler's". Own inline `KubeProbeAwareSampler` (0.001 kube-probe / 0.01 ELB). **No middleware suppression, no static-asset or `/health` handling, reads only `http.user_agent`, and no test.** See Watch points. Same `logRecordProcessors` wiring as the Shuffler but with the 0.221 options-object constructor.                                                                                                                                                                                       |
+| `apps/shuffler/src/view/common/html-layout.ts`        | **The Shuffler's browser telemetry bootstrap — single-sourced since arch ticket 06 (`b268414`, 2026-08-08).** `formatHtmlHead(options)` is the one page shell: every Shuffler page's `<head>` — EJS pages via `views/partials/head.ejs` (a thin adapter reached through `app.locals`) and TS pages (`/game`, error pages) via `formatPageWrapper` — comes from here, so the bootstrap appears exactly once and cannot diverge again. See "The Shuffler's browser bootstrap" below for the script order, the ordering constraint, the guard, and the apiKey fallback.                                                                                                                                                              |
 | `apps/tabletop/src/client/observability/index.ts`     | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific". Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
 | `services/spine/config/initializers/opentelemetry.rb` | Ruby, ~4 effective lines: `SDK.configure` + `use_all`. No wrapper. Rack instrumentation extracts inbound W3C context, so a Shuffler-initiated trace continues through event ingestion. In test nothing is configured and the SDK exports nowhere — fine by design.                                                                                                                                                                                    |
 | `apps/shuffler/test/harness-telemetry/`               | **The fourth init path, and the first that isn't a ship** — the verify suite tracing itself. `harnessTracing.ts` (provider), `spanPlan.ts` (pure + tested), `otelReporter.ts` (Playwright reporter). Service `mtg-fleet-verify`. See "Dev-tooling telemetry" below.                                                                                                                                                                                    |
@@ -223,6 +224,54 @@ plus `inSpan` itself. **The Shuffler creates zero manual spans** — it lives en
 auto-instrumentation plus stamping attributes onto whatever span already exists. That is why
 `markCurrentSpanAsError` / `setCommonSpanAttributes` matter so much, and why anything that removes
 the ambient span (see Watch points) is dangerous here.
+
+### The Shuffler's browser bootstrap (one shell, `html-layout.ts`)
+
+Since arch ticket 06 (`b268414`, 2026-08-08) there is exactly ONE place the Shuffler's browser
+telemetry starts: `formatHtmlHead()` in `apps/shuffler/src/view/common/html-layout.ts`. Before
+that, `/game` carried its own inline copy of the tab-id logic and a duplicate `htmx:configRequest`
+listener, and the two heads had drifted (the EJS head's init was guarded, `/game`'s wasn't — the
+guarded one was kept).
+
+**Script order, and why it's load-bearing:**
+
+1. `<script src="/browser-tab-id.js">` — sets `window.browserTabId` from sessionStorage key
+   `"browserTabId"` (mints a `crypto.randomUUID()` on first use; sessionStorage = **per-tab**,
+   survives reload). Also registers the document-level `htmx:configRequest` listener that adds
+   `X-Browser-Tab-Id` to every htmx request — one registration, every page.
+2. `<script src="/hny.js">` — the vendored Honeycomb web SDK.
+3. Inline init, guarded by `if (window.Hny && window.browserTabId)`, calling
+   `Hny.initializeTracing({ apiKey, serviceName: "mtg-deck-shuffler-web", debug: false,
+   provideOneLinkToHoneycomb: true, resourceAttributes: { "game.browser_tab_id": window.browserTabId } })`.
+
+The order is a real constraint, stated in a code comment at the site: **the tab id is baked into
+the OTel resource, which is immutable after init** — so `browser-tab-id.js` must have run before
+the init. Don't reorder, and don't move the init into a deferred script.
+
+**How the correlation works:** `game.browser_tab_id` lands on every browser span (resource
+attribute), and the `X-Browser-Tab-Id` header lands on every htmx request, where `app.ts:52-57`
+middleware stamps it on the server span via `setCommonSpanAttributes({ browserTabId })`. That
+pair is the browser↔server join key, per tab.
+
+**The apiKey**: `process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY`, read
+per-render. `HONEYCOMB_INGEST_API_KEY` is set **nowhere in this repo**; in prod the k8s secret
+supplies `HONEYCOMB_API_KEY`, so the fallback is what actually fires everywhere today. **Don't
+simplify away the first choice without checking prod** — it's the deliberate override slot.
+Key-in-page is **sanctioned here** (Invariant 3: ingest keys are OK to publish in the browser;
+Collectors are better, but the Shuffler has no collector — only the Tabletop does).
+
+**The guard's known gap (open buoy: `browser-tracing-key-guard` in `TODO.md`):** the guard checks
+`window.Hny && window.browserTabId` but **not the key**. When neither env var is set, the template
+interpolation emits the truthy literal string `"undefined"` and export silently 401s — the browser
+cousin of the `x-honeycomb-team=` keyless-header entry below, fails-open-invisibly again. The
+agreed fix (recorded in the buoy): skip init with a `console.warn` when the key is empty or
+`"undefined"`, so tracing-off is visible instead of silent.
+
+`/game`'s page-specific scripts (`htmx.js`, then the 409/502 `responseHandling` block — which must
+stay after `htmx.js` — then `game.js`, `modal-query-params.js`) ride in the shell's `scriptsHtml`
+tail as `GAME_HEAD_SCRIPTS_HTML`. One side effect of unification: `/game` now fetches
+`/browser-tab-id.js` as a static asset instead of inlining it — covered by the existing
+by-extension asset sampling, not a new noise source.
 
 ### Dev-tooling telemetry (the pattern for instrumenting our own tools)
 
@@ -666,6 +715,19 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
   a second responsibility (send-then-commit), diff it against a sibling route's callback, not just
   against its own pre-migration behavior** — the attributes are easy to drop because they're pure
   side effect on the span, not something a functional test would catch missing.
+
+- **2026-08-08, arch ticket 06 (`b268414`): the Shuffler's two page-shell builders became one,
+  and the browser telemetry bootstrap became single-sourced.** Before this, the EJS head and the
+  `/game` head each carried their own copy of the tab-id + `Hny.initializeTracing` bootstrap, and
+  they had **already drifted**: the EJS copy guarded init with `if (window.Hny &&
+  window.browserTabId)`, `/game`'s was unguarded; `/game` also had its own inline tab-id
+  implementation and a second `htmx:configRequest` listener. The unification kept the guarded
+  variant and one listener registration. Two lessons: duplicated telemetry bootstrap drifts
+  exactly like duplicated telemetry init does (the 0.219/0.221 story, browser edition — this KB
+  had **no section on the browser bootstrap at all**, which is how the drift went unnoticed); and
+  the review surfaced a latent fails-open-invisibly (the `"undefined"`-apiKey gap, buoyed as
+  `browser-tracing-key-guard`) precisely because unifying forced someone to read both copies side
+  by side. Full wiring now documented in "The Shuffler's browser bootstrap" above.
 
 ## Related reading
 
