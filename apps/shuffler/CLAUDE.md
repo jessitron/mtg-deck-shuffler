@@ -25,9 +25,14 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 ## Architecture
 
 - **Frontend**: HTML with HTMX for interactivity. Custom JS for tracing and HTMX-incompatible interactions.
-- **Templating**: Two systems:
+- **Templating**: Two systems for page *bodies*, one shared page shell:
   - **EJS templates** (`views/`): Informational and pre-game pages. Use `res.render("template-name")`.
   - **TypeScript functions** (`src/view/`): Active gameplay pages returning HTML strings. Use `res.send(formatSomethingHtmlPage(...))`.
+  - **The `<head>` comes from one place** for both: `formatHtmlHead` in
+    `src/view/common/html-layout.ts` (tokens.css first, fonts, browser-tab-id + tracing
+    bootstrap). EJS pages reach it through `views/partials/head.ejs`, a thin adapter
+    exposed via `app.locals`; that adapter is also the one spot that adds `site.css`
+    (which must never reach `/game`).
 - **Backend**: Express.js server
 - **Build**: TypeScript → JavaScript in `dist/`
 
@@ -75,9 +80,10 @@ The short version:
   `font-family: var(--font-chrome)` / `var(--font-content)` / `var(--font-display)`, from
   `packages/design-tokens/tokens.css`. All 39 literals were swept onto these on 2026-08-07;
   the only `font-family` literals left in the CSS are `monospace` and `inherit`. The
-  typeface *names* still appear in the three `<head>`s — that's the Google Fonts `<link>`
-  fetching the files, which no token can reach, so a new page needs **both** the token in
-  its CSS and its `additionalFonts` entry
+  typeface *names* still appear in the two `<head>` sources (the Shuffler's one shell,
+  `formatHtmlHead` in `src/view/common/html-layout.ts`, and the Tabletop's `index.html`) —
+  that's the Google Fonts `<link>` fetching the files, which no token can reach, so a new
+  page needs **both** the token in its CSS and its `additionalFonts` entry
 - **Every interactive element gets a visible `:focus-visible` state — and it's already
   written** (`shuffler-design-choices` choice 5): one global rule in `public/styles.css`
   draws `3px solid var(--light-pink)` at `outline-offset: 3px` on every `a`, `button`,

@@ -13,6 +13,17 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- [ ] `browser-tracing-key-guard` the browser tracing init should skip (with a `console.warn`) when the apiKey is empty or the literal string `"undefined"`
+  - Surfaced 2026-08-08 by `fleet-is-observable-context` during arch ticket 06 (unify page shell,
+    `.scratch/shuffler-architecture-review/issues/06-unify-page-shell.md`). The shell's
+    `Hny.initializeTracing` guard (`window.Hny && window.browserTabId`, now in
+    `apps/shuffler/src/view/common/html-layout.ts`) doesn't cover the key: when neither
+    `HONEYCOMB_INGEST_API_KEY` nor `HONEYCOMB_API_KEY` is set, the interpolation emits the
+    truthy string `"undefined"` and export silently 401s — the browser cousin of the
+    "`x-honeycomb-team=` present, non-empty, useless" finding in the fleet-is-observable KB.
+    Owner asked that this be its own visible decision, and that the silent-skip family get a
+    `console.warn` in the same pass.
+
 - [ ] `zone-look-not-landed` `tableFurniture.ts`'s zone boxes still draw the old provisional look, not the decided one
   - Surfaced 2026-08-08 by `shuffler-looks-like-itself-context` while starting
     `.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`. `regionShape()` in

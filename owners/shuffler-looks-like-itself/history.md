@@ -1253,3 +1253,47 @@ front/back sleeve colors, or an image sleeve — v1 is one color doing both jobs
 **Also landed:** `notes/GLOSSARY.md` now carries a **Sleeve** definition stating the same
 model, so the vocabulary outlives the ticket.
 
+## 2026-08-08 — the Shuffler's two heads became one page shell
+
+`b268414` **Unify the Shuffler's two page-shell builders (arch ticket 06)**. Every page's
+`<head>` now comes from one place: `formatHtmlHead(options)` in
+`src/view/common/html-layout.ts` — `{title, stylesheets?, additionalFonts?, scriptsHtml?}`.
+The EJS pages reach it through `views/partials/head.ejs`, now a thin adapter over
+`app.locals.formatHtmlHead` (wired in `src/app.ts`) that prepends `/site.css` and converts
+`locals.script` to a deferred tag; `/game` and the error pages reach it through
+`formatPageWrapper`, which passes `["/playmat.css", "/game.css", ...]` (with an inline
+comment saying the order is the deliberate cascade-tie resolution), `additionalFonts:
+["Ovo"]`, and a `GAME_HEAD_SCRIPTS_HTML` constant (htmx.js, the 409/502 `responseHandling`
+config, game.js, modal-query-params.js). The skeleton — tokens.css **first**, fonts,
+browser-tab-id, guarded tracing bootstrap — can no longer diverge between page families.
+No page's stylesheet *set* changed; `APP_STYLESHEETS` untouched.
+
+**Three visible fixes rode along, and all three were flagged by this owner's `-review`
+rather than smuggled:** the EJS pages gained meta charset + viewport (a real phone-rendering
+change — 375px screenshots of `/` and `/prepare` were taken for Jess and render sensibly);
+`/game`'s tracing init gained the `window.Hny && window.browserTabId` guard the EJS head
+already had; and `/game`'s duplicate `htmx:configRequest` listener was deleted. The review's
+other catch became code: **the title is now `escapeHtml`'d inside the shell** — the TS path
+had interpolated it raw, and deck names come from Archidekt. That's the second
+user-supplied-text escape fix in this KB (the first was the deck-title plaque move).
+
+**The jest seam survived, deliberately.** `test/html-layout-fleet-tokens.test.ts` kept its
+file and its job (the cheap gate on the `/game` path), retitled "the one page shell links the
+fleet palette", with the new options signature and new assertions: tokens before styles, page
+sheets after both in the given order, Orbitron always, `additionalFonts`, title escaping.
+Full `./verify.sh` (50 specs) and `npm test` (305) green.
+
+**A premise correction worth keeping: the ticket said this KB was "awaiting a sweep," and
+that was a misreading — the note itself was accurate and unchanged.** The open-choices note
+about typeface names in the heads was correct as written; the ticket inferred pending work
+from it that the note never claimed. Same failure family as "pending read as undecided"
+(choice 4, 2026-08-07): a reader inferring a work item from a description. The KB's defense
+is the same — state what is decided, what is shipped, and what is merely *described*,
+explicitly.
+
+**KB consequences, all landed with this entry:** architecture.md's "two heads" section is
+now "two page-body systems, ONE page shell"; interactions.md's dependency and
+adding-a-stylesheet watch points name the real doors (`additionalStyles` for EJS views,
+`additionalStylesheets` on `formatPageWrapper`, `stylesheets` only on the shell itself);
+the README's Fonts row and the font-token notes say **two** `<head>` sources, not three.
+`apps/shuffler/CLAUDE.md`'s Templating and fonts bullets were updated in the commit itself.

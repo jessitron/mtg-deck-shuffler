@@ -8,6 +8,7 @@ import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
 import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
+import { formatHtmlHead } from "./view/common/html-layout.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
@@ -42,6 +43,8 @@ export function createApp(
   // Configure EJS view engine
   app.set("view engine", "ejs");
   app.set("views", path.join(__dirname, "..", "views"));
+  // The one page shell: views/partials/head.ejs renders through this too
+  app.locals.formatHtmlHead = formatHtmlHead;
 
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
   app.use(express.json({ limit: "10mb" }));
