@@ -159,8 +159,8 @@ These are specific things that could break two-faced cards if changed elsewhere:
     DFC's `card.name` is the whole `"Front // Back"` string, so the modal title and `alt` are
     identical on both faces), which meant a flip test could pass without a flip. Fixed by
     adding `data-current-face="<%= currentFace %>"` to `.card-modal-overlay` in
-    `views/partials/card-modal.ejs` (ticket `verify-suite-speed/04`) — a pure additive
-    attribute, `currentFace` was already threaded into the template. Consequences:
+    `views/partials/card-modal.ejs` — a pure additive attribute, `currentFace` was already
+    threaded into the template. Consequences:
     - **Inline surfaces**: still assert `.flip-container-outer.card-flipped`. It's
       server-rendered, so it's true the moment the htmx swap settles — no animation wait.
       `verify-prep-commander-flip.spec.ts` does exactly this.

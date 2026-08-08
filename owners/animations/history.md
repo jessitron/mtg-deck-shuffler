@@ -192,10 +192,9 @@ Playwright prototype (branch `proto/multi-tap`, deleted).
 
 ### 2026-08-07: Verify suite de-sleeped — every `networkidle` and fixed timeout deleted (`65f12e8`)
 
-Ticket `.scratch/verify-suite-speed/issues/02-optimize-the-suite.md`, plan in
-`.scratch/verify-suite-speed/plan-02.md`. **No app code changed** — no CSS, keyframes,
-`game.js`, HTMX attributes or `WhatHappened`. Only `test/verification/*.spec.ts`.
-225.0s → 106.5s, three consecutive green runs (113/107/107s) via the new `verify-thrice.sh`.
+**No app code changed** — no CSS, keyframes, `game.js`, HTMX attributes or `WhatHappened`.
+Only `test/verification/*.spec.ts`. 225.0s → 106.5s, three consecutive green runs
+(113/107/107s) via the new `verify-thrice.sh`.
 
 Three things landed in this owner's territory:
 
@@ -244,10 +243,9 @@ question and the duration/easing value were open in `-context`, and both are now
   updated accordingly; the "deliberately undecided" line in architecture.md is removed since
   it's no longer true.
 
-### 2026-08-07: `{ force: true }` removed from the five card-modal-nav click sites (ticket 10)
+### 2026-08-07: `{ force: true }` removed from the five card-modal-nav click sites
 
-Ticket `.scratch/verify-suite-speed/issues/10-force-true-causes-the-flake-it-claims-to-fix.md`,
-resolving the "Removing them is filed in `TODO.md`" line left open by the `65f12e8` de-sleeping
+Resolving the "Removing them is filed in `TODO.md`" line left open by the `65f12e8` de-sleeping
 pass above. `force: true` removed from all five sites — `verify-library-grouping.spec.ts` (was
 lines 159, 243, 342) and `verify-query-parameter-modals.spec.ts` (was lines 372, 380) — updating
 the adjacent comments to stop describing an effect that's no longer there. The `toPass` retry

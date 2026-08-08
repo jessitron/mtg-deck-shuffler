@@ -307,9 +307,9 @@ environment. The trace made the diagnosis — the error was on the **outbound cl
 
 ## Face State Is Barely Observable in the Modal (finding, 2026-08-07, `65f12e8`)
 
-**No app code changed.** Ticket `.scratch/verify-suite-speed/issues/02-optimize-the-suite.md`
-deleted every `networkidle` and fixed `waitForTimeout` from `test/verification/*.spec.ts`
-(225s → 106.5s). Routed here by the animations owner: the finding is about whether a flip
+**No app code changed.** A verify-suite speedup pass deleted every `networkidle` and fixed
+`waitForTimeout` from `test/verification/*.spec.ts` (225s → 106.5s). Routed here by the
+animations owner: the finding is about whether a flip
 *occurred* (face state), not about the 0.8s `.card-flipped` transition.
 
 - **The gap**: both `foundFlipCard` loops in `verify-library-grouping.spec.ts` (game page and
@@ -319,8 +319,8 @@ deleted every `networkidle` and fixed `waitForTimeout` from `test/verification/*
   matters more now that the suite has demonstrated htmx-swap clicks being swallowed
   (`owners/animations/interactions.md:27`); every other such click got wrapped in
   `expect(async () => {…}).toPass()`, and this one deliberately did not, because no available
-  assertion could tell the retry whether it landed. A comment marks each site; ticket 04
-  (`04-which-tests-are-superfluous.md`) asks whether to strengthen or drop them.
+  assertion could tell the retry whether it landed. A comment marks each site, flagging
+  whether to strengthen or drop them.
 - **Answering the question put to this owner — what distinguishes front from back?** Checked
   the code rather than guessing. Inline surfaces are well covered: `.flip-container-outer`
   carries `.card-flipped` server-side (`shared-components.ts:104`), which is why
@@ -330,13 +330,14 @@ deleted every `networkidle` and fixed `waitForTimeout` from `test/verification/*
   `src` (`getCardImageUrl(card,"large",currentFace)`, differs on both pages), and on **prep
   only** the flip button's own `hx-get?face=<target>`. The **game** modal's flip button is a
   `hx-post` to a toggling route, byte-identical on both faces.
-- **The cheap fix, identified but not made** (out of ticket 02's scope, and a second change
-  riding along on a wait-removal): `currentFace` is already passed into `card-modal.ejs` and
+- **The cheap fix, identified but not made** (a second change riding along on a
+  wait-removal pass, deliberately deferred): `currentFace` is already passed into
+  `card-modal.ejs` and
   never rendered. Emitting `data-current-face` on `.card-modal-overlay` would give the game
   modal its first real face observable and make these two tests verifiable.
 - Recorded as interactions.md watch point 16, an architecture.md observables section, and a
   files.md caveat on the spec.
-## The Modal's Face Observable Gap Was Closed (2026-08-07, ticket `verify-suite-speed/04`)
+## The Modal's Face Observable Gap Was Closed (2026-08-07)
 
 Follow-up to the finding recorded above (`65f12e8`): added
 `data-current-face="<%= currentFace %>"` to `.card-modal-overlay` in

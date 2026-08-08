@@ -29,9 +29,8 @@
   **`{ force: true }` on such a click was a *cause* of this flake, not a workaround for it.**
   `force` skips Playwright's actionability/stability wait — precisely the wait that would
   otherwise absorb the swap. So a forced click on a freshly-swapped modal button was *more*
-  likely to straddle settle than an ordinary one. **Resolved** (ticket
-  `.scratch/verify-suite-speed/issues/10-force-true-causes-the-flake-it-claims-to-fix.md`,
-  2026-08-07): all five sites (`verify-library-grouping.spec.ts` ×3, was lines 159/243/342;
+  likely to straddle settle than an ordinary one. **Resolved**: all five sites
+  (`verify-library-grouping.spec.ts` ×3, was lines 159/243/342;
   `verify-query-parameter-modals.spec.ts` ×2, was lines 372/380) now use plain `.click()`.
   Playwright's own actionability wait absorbs the swap/settle straddle instead. The `toPass`
   retry wrappers were **kept** as a safety net (removing those is a separate, independently

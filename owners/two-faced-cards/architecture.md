@@ -194,8 +194,7 @@ Face state is observable in the DOM, differently on each surface.
 - Both face images are always in the DOM (`.two-sided-front` / `.two-sided-back`), so image
   presence proves nothing; only the class distinguishes.
 
-**Card modal (game and prep)** — as of 2026-08-07 (ticket `verify-suite-speed/04`), the strong
-observable here too:
+**Card modal (game and prep)** — the strong observable here too:
 - **`.card-modal-overlay` carries `data-current-face="<%= currentFace %>"`** (added to
   `views/partials/card-modal.ejs`; `currentFace` was already passed into the template, just
   never rendered). Assert `data-current-face` equals `"front"`/`"back"` — this works

@@ -198,10 +198,8 @@ every `waitForTimeout`) — to service **`mtg-fleet-verify`**, team `modernity`,
   leave the suite's exit code alone. A bare `npx playwright test` with nothing sourced stays silent.
 - **Each run gets its own fresh SQLite file** (`VERIFY_DB_PATH` in `verify.sh`, passed to the
   server as `SQLITE_DB_PATH`, deleted in the exit trap). Every run starts cold and reproducible,
-  never touching `./data.db` (the file `./run` uses). Ticket 07 measured a cold run at 52.0s — no
-  slower than warm — so this cost nothing; the old `verify.data_db.existed`/`.bytes` attributes
-  are gone, since every run's answer is now the same.
-- Suite-speed findings and the optimization work: `.scratch/verify-suite-speed/`.
+  never touching `./data.db` (the file `./run` uses) — a cold start costs no more than a warm
+  one, so this is free.
 
 ## Environment & Persistence
 

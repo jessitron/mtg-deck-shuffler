@@ -156,14 +156,7 @@ section is just a wall between Jess and the live work.
     makes a constraint on every mountain: "public events, commentary, hand counts but never hands."
   ← mountain: tabletop-replaces-mural
 
-- **The verify suite's speed has a wayfinder map**: `.scratch/verify-suite-speed/map.md`.
-  Destination: no useless tests, no wasted time in tests, **full suite under 60s** (from
-  106.5s, now **~50s**). 01, 02, 04, 05, and 07 are resolved; 11 ruled out of scope (see
-  `card-images-through-backend` above); 03's decisions are settled (seed via API, one shared
-  helper, always fresh) but not yet implemented. 06 (parallelism) stays blocked on 03's
-  implementation landing. Say "work the verify-suite-speed map" to continue.
-
-- [ ] `card-images-through-backend` Route every rendered card image through our backend instead of straight to Scryfall — full spec at `.scratch/verify-suite-speed/issues/11-route-card-images-through-the-backend.md` (closed there, out of scope for that map)
+- [ ] `card-images-through-backend` Route every rendered card image through our backend instead of straight to Scryfall — ruled out of scope for the verify-suite-speed effort (commit `50ca157`); real product work whenever it's picked up
 
 - [ ] `deck-chooser-lazy-images` `/choose-any-deck` ships 191 remote Scryfall images on every visit, un-lazy-loaded
   - Surfaced 2026-08-07 grilling `.scratch/verify-suite-speed/issues/03-setup-cost-and-isolation.md`
