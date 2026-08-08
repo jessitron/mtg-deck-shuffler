@@ -10,10 +10,12 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './test/verification',
-  fullyParallel: false, // Run tests sequentially - we're testing concurrent state
+  fullyParallel: false, // parallelizes across spec files only; untested within a file (see ticket 06)
   forbidOnly: !!process.env.CI,
   retries: 0, // No retries - we want to see failures clearly
-  workers: 1, // Single worker for state isolation
+  // Each spec seeds its own game (seedGame.ts), so specs are independent; measured
+  // 10 clean runs at 4 workers before raising this. See .scratch/verify-suite-speed/issues/06-parallelism.md
+  workers: 4,
   // `list` owns the terminal; the OTel reporter traces the suite itself (spec,
   // test and step spans to the mtg-fleet-verify service, so "why is the suite
   // slow" is a query). It stays quiet when there's nowhere to send spans, so a
