@@ -1,7 +1,7 @@
 # Tabletop cards report zone entry as named events
 
 Mountain: tabletop-replaces-mural
-Status: ready-for-human
+Status: done
 
 ## Context
 
