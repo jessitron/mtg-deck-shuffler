@@ -279,6 +279,18 @@ decided, not an oversight (2026-08-07, `.scratch/tabletop-physics/issues/04-tap-
   `mtg-card` implementation. (Related: the global `:focus-visible` rule cannot reach a canvas
   shape — see tldraw limits above.)
 
+**Sleeve color is a player-identity signal (decided 2026-08-08, ticket 12 of the
+Table-layout map).** On the Tabletop, each player's sleeve color — a solid color, ticket
+09's v1 decision — identifies that player beyond their own card backs: commander-damage
+counters on the coming `mtg-counter` shape are labelled by opponent name + sleeve color.
+**There is no separate player-color concept**, deliberately, and playmats (images) were
+explicitly rejected as the identity carrier. Two consequences: whatever palette the sleeve
+picker offers must keep players distinguishable at a glance (two near-identical sleeves now
+confuse damage tracking, not just card backs), and any future "which player is this"
+treatment reaches for the sleeve color rather than inventing a new signal. The counter
+shape itself is placement-decided, appearance-undecided — see
+[open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side".
+
 **Two style worlds.** Site pages (`/`, `/choose-any-deck`, `/docs`, `/about`) use the
 purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages
 (`/prepare`, `/game`) put a **playmat** on screen — a big art-backed surface everything

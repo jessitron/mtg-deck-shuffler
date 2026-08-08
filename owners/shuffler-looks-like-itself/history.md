@@ -1081,3 +1081,48 @@ plain black — remains today's placeholder look, explicitly deferred to ticket 
 owns the armed-glow retokenization. Only the label typeface was settled territory; nothing
 about the border question moved.
 
+## 2026-08-08 — life totals and commander damage: a new player-visible surface is coming, placement decided, appearance deliberately not
+
+`.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md`, grilled and
+resolved with Jess 2026-08-08. No CSS changed, nothing built — a design decision, and this
+owner's job is to know exactly which half of it was decided.
+
+**What was decided: kind, content, and placement.** Life totals and commander damage become
+a new **locked custom tldraw shape**, working name **`mtg-counter`** — a number with +/-
+buttons, also directly typeable, synced through the room like any shape. Layout of the name
+row (above the command zone/library, per ticket 01's geometry), **dictated by Jess
+verbatim**: player name, large font, left-justified; then right-justified, all the
+commander-damage counters, followed by the life counter (bigger) on the far right. Life
+starts at 40; commander-damage counters start at 0, always visible, **one per commander**
+(a partner-deck opponent gets two). Everyone can change everything — no ownership
+enforcement, per the fleet's "players own the game experience" principle.
+
+**What was NOT decided, and must not ride along: the counter's appearance.** Font, exact
+sizes, colors beyond the sleeve swatch — all open. This was placement + content only, the
+same seam this owner has enforced since the deck-title plaque move. The `mtg-counter`
+implementation ticket is where an unapproved appearance will try to hitch a ride (exactly
+like the `mtg-card` `indicator()` warning): it needs this owner's `-context` before design
+forms and `-review` on the plan. "Large font" and "bigger" are **relative placement-scale
+facts from Jess's dictation, not typography decisions** — which face (presumably
+`--font-chrome`, but presume out loud, don't assume silently), what px/em, what weight are
+all still to decide. And it's a canvas shape, so the whole tldraw-limits list applies:
+self-rendering for any fleet typeface, no `:focus-visible` reach, geometry computed in
+TypeScript at render time rather than static CSS values.
+
+**A fleet-wide identity fact fell out: sleeve color is now a player-identity signal.** Each
+commander-damage counter is identified by the opponent's **name + sleeve color** — leaning
+on ticket 09's decision that v1 sleeves are solid colors, and on ticket 11
+(`11-sleeve-color-to-card-back.md`, the map's next open ticket) for how the color travels
+per seat. **No separate player-color concept was created**, and playmats (images) were
+explicitly rejected as the identity carrier. So sleeve color now does double duty — card
+backs *and* counter identification — which raises the stakes on whatever palette ticket 09's
+picker offers: two players with near-identical sleeves now confuse damage tracking, not just
+card backs. Recorded in [README.md](README.md)'s design language.
+
+**Mechanically grounded before deciding** (via `tabletop-shape-mechanics-context`): locking
+gates tldraw's gesture state machine but not DOM events, so a locked shape's `component()`
+can host working buttons (`pointer-events: all` + `editor.markEventAsHandled()`, the
+`HyperlinkButton` pattern). That's why "locked furniture with live +/- buttons" is a
+coherent object and not a contradiction — the same early-consult pattern that moved the
+`mtg-zone` architecture decision on 2026-08-07.
+

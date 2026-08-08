@@ -545,6 +545,21 @@ self-rendering custom shape.
   needs a Tabletop stylesheet (`tabletop-css-tokens`, above) to land in. This is not a
   `/design` `.choice` yet; staging it would mean animating a specimen, and the gallery has no
   Tabletop stage.
+- **Coming to this owner: the `mtg-counter` shape's appearance**
+  (`.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md`, resolved
+  2026-08-08 — placement + content only). Life totals and commander damage become a locked
+  custom shape rendering a number with +/- buttons (also directly typeable), in the name row
+  above the command zone/library. **Decided**: the row's layout (Jess verbatim — player name
+  large, left-justified; commander-damage counters then a bigger life counter,
+  right-justified), life starts at 40, commander damage starts at 0 and is always visible,
+  one counter **per commander**, each identified by opponent name + **sleeve color** (ticket
+  09's solid-color sleeves, traveling via ticket 11 — no separate player-color concept;
+  playmats rejected as the identity carrier). **Undecided, reserved for this owner's
+  `-context`/`-review` at implementation time**: font, exact sizes, colors beyond the sleeve
+  swatch. Same posture as the tap tempo and the `mtg-card` indicator — the appearance must
+  not ride along on the implementation ticket. All the canvas rules apply: self-rendering
+  shape for any fleet typeface, geometry computed in TypeScript at render time, `.stage-white`
+  for any `/design` mock.
 - **Also undecided, and it must not ride along: a card's `indicator()`.** Ticket 04 records
   explicitly that an `indicator()` looking like anything other than tldraw's default is a
   **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket

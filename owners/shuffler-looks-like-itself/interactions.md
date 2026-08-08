@@ -58,6 +58,17 @@
   (card motion), and a tap is a flip-like *reorientation*, not a translation — so match one of
   those two rather than inventing a third tempo. **The tempo can be decided now but not
   implemented** — `tabletop-css-tokens` still blocks any Tabletop CSS.
+- **`.scratch/tabletop-table-layout/`** — the Table-layout map's tickets also lean on this KB.
+  `issues/10-the-square.md` (resolved 2026-08-08) added the fifth tldraw limit (no per-viewer
+  rotation). `issues/12-life-totals-and-commander-damage.md` (resolved 2026-08-08) decided a
+  **new player-visible surface**: life totals and commander damage as a locked custom
+  `mtg-counter` shape in the name row, placement dictated verbatim by Jess, **appearance
+  deliberately undecided** — the implementation ticket owes this owner a `-context` and
+  `-review` before any font/size/color lands (see the canvas watch points below). It also made
+  **sleeve color a player-identity signal fleet-wide** (opponent name + sleeve color identifies
+  each commander-damage counter; no separate player-color concept; playmats rejected as the
+  identity carrier) — so ticket 09's sleeve palette and ticket 11's color plumbing now carry
+  identity weight beyond card backs.
 - **The two-faced-cards owner** — flip button styling and the `.flip-container-*` blocks.
 - **The library-search owner** — modal and list styling.
 - **`test/verification/verify-deck-title-placement.spec.ts`** (added 2026-08-07) — pins the
@@ -425,6 +436,16 @@ not by recomputing new numbers.**
   is its own design decision needing its own sign-off — the classic ride-along. If an
   implementation ticket for `mtg-card` reaches you with a custom indicator in it, that's the
   thing to block.
+- **The `mtg-counter` shape (life totals / commander damage) has decided placement and
+  UNDECIDED appearance** (ticket 12, 2026-08-08). The name-row layout is Jess's verbatim
+  dictation — player name large and left-justified, commander-damage counters then a bigger
+  life counter right-justified — but font, exact sizes, and colors beyond the sleeve-color
+  swatch were **not** decided. Its implementation ticket must consult this owner's `-context`
+  before design forms and `-review` on the plan; an appearance arriving fully-formed in that
+  ticket is the ride-along to block. "Large" and "bigger" are relative scale facts, not a
+  typography decision. The sleeve-color swatch on each commander-damage counter is
+  **identity**, not decoration — it must be the opponent's actual sleeve color (ticket 11's
+  plumbing), never a palette value this owner picks.
 - **A canvas shape has a name for its font and its radius now** (`f79bc7d`, 2026-08-07).
   `--font-chrome`/`--font-content`/`--font-display` and `--radius-soft` are in the shared package
   specifically for this case. **Correction: a `.tsx` shape *can* `var()`** — this was written
