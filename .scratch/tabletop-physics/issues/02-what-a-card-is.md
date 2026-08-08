@@ -209,6 +209,22 @@ it sees, and that assert lives in the shared rendering computation — so it whi
 canvas, not one shape. Mitigation is "reload after deploy"; since redeploy wipes the room there is
 no board to lose.
 
+### Addendum 2026-08-08: the "no owner field" line above is superseded
+
+Resolving [table-layout ticket 08](../../tabletop-table-layout/issues/08-commander-in-command-zone.md)
+needed the Command Zone to arm only for the matching player's own commander, which needs the
+Tabletop to know whose card is being dragged. Jess's call, grilled directly on that ticket:
+**owner is a first-class property of `mtg-card`** — real domain data, not a derived/cosmetic-only
+workaround. It changes no capability: "it doesn't limit who can move it," so the symmetry
+principle above still holds — this adds identity, not permission. `mtg-card.props` gains:
+
+```ts
+owner: string,          // seatId; whose card this is, as domain fact
+isCommander: boolean,   // alongside owner, marks this specific card as its owner's commander
+```
+
+See ticket 08's `## Answer` for the full design (arming logic, ghost-copy rendering).
+
 ### Not decided here
 
 The tap/rotation relationship (ticket 04), how the flip gesture is triggered — `onClick` is spoken

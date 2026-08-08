@@ -65,6 +65,16 @@ polish.
   player-name label render in `tableFurniture.ts`. Label rendering itself is small once the
   data exists — the work is the threading. Implementation, not a further decision.
 
+- [Place the commander in the command zone when the Tabletop loads](issues/08-commander-in-command-zone.md)
+  (2026-08-08) — `mtg-card` gains two new first-class props: `owner: string` (seatId — real
+  domain data, not a permission gate; Jess: "it doesn't limit who can move it") and
+  `isCommander: boolean`. The Command Zone arms locally (via `useValue` in the zone's own
+  `component()`, per ticket 03's pattern — zones stay `isLocked`, so `onDragShapesOver` hooks are
+  unavailable) only when a dragged card's `owner` matches the zone's `seatId` and
+  `isCommander` is set. The "home marker" is a second, faded, locked `mtg-card` shape in the
+  zone, not zone-drawn chrome. Amends `tabletop-physics` ticket 02's "no owner field" line — see
+  the addendum there.
+
 ## Not yet specified
 
 - **Life totals and commander damage.** Numbers a player can modify, and a commander-damage
@@ -74,11 +84,6 @@ polish.
 - **Seat position across a restart.** Seat index is `entry.seats.size` at join time, so after a
   server restart players re-joining in a different order land in different places. Belongs
   here (it's geography) but can't be decided until map 6 says what survives a restart.
-- **Commander identity and arming.** How the Tabletop knows a card is *the* commander (a new
-  Shuffler → Tabletop event, a card property) and how the Command Zone arms only for that
-  player's own commander. Jess sketched the shape of it 2026-08-08 while resolving ticket 01;
-  captured as a comment on [ticket 08](issues/08-commander-in-command-zone.md) rather than
-  ticketed fresh, since 08 already asks this question and is still blocked-then-open.
 
 ## Out of scope
 
