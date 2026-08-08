@@ -23,7 +23,7 @@ const testDeck: Deck = {
 function gameWithHand(): GameState {
   const game = GameState.newGame(1, 1, 1, testDeck);
   for (const gc of game.getCards()) {
-    game.putInHandByGameCardIndex(gc.gameCardIndex);
+    game.moveByGameCardIndex(gc.gameCardIndex, "Hand");
   }
   return game;
 }

@@ -493,7 +493,7 @@ describe("GameState", () => {
         // Reveal cards to populate revealed zone using revealByGameCardIndex
         const libraryCards = gameState.listLibrary();
         for (let i = 0; i < 4; i++) {
-          gameState.revealByGameCardIndex(libraryCards[i].gameCardIndex);
+          gameState.moveByGameCardIndex(libraryCards[i].gameCardIndex, "Revealed");
         }
 
         const revealedBefore = gameState.listRevealed();
@@ -888,6 +888,79 @@ describe("GameState", () => {
         });
       })
     );
+  });
+
+  describe("moveByGameCardIndex", () => {
+    test("Revealed adds the card to the revealed zone", () => {
+      fc.assert(
+        fc.property(anyDeck, (deck) => {
+          fc.pre(deck.cards.length >= 1);
+          const gameState = GameState.newGame(1, 1, 1, deck);
+          const card = gameState.listLibrary()[0];
+
+          gameState.moveByGameCardIndex(card.gameCardIndex, "Revealed");
+
+          expect(gameState.listRevealed().map((c) => c.card.name)).toContain(card.card.name);
+        })
+      );
+    });
+
+    test("Hand adds the card to the hand", () => {
+      fc.assert(
+        fc.property(anyDeck, (deck) => {
+          fc.pre(deck.cards.length >= 1);
+          const gameState = GameState.newGame(1, 1, 1, deck);
+          const card = gameState.listLibrary()[0];
+
+          gameState.moveByGameCardIndex(card.gameCardIndex, "Hand");
+
+          expect(gameState.listHand().map((c) => c.card.name)).toContain(card.card.name);
+        })
+      );
+    });
+
+    test("LibraryTop adds the card to the top of the library", () => {
+      fc.assert(
+        fc.property(anyDeck, (deck) => {
+          fc.pre(deck.cards.length >= 2);
+          const gameState = GameState.newGame(1, 1, 1, deck);
+          const cards = gameState.listLibrary();
+          const card = cards[1];
+
+          gameState.moveByGameCardIndex(card.gameCardIndex, "LibraryTop");
+
+          expect(gameState.listLibrary()[0].card.name).toBe(card.card.name);
+        })
+      );
+    });
+
+    test("LibraryBottom adds the card to the bottom of the library", () => {
+      fc.assert(
+        fc.property(anyDeck, (deck) => {
+          fc.pre(deck.cards.length >= 2);
+          const gameState = GameState.newGame(1, 1, 1, deck);
+          const cards = gameState.listLibrary();
+          const card = cards[0];
+
+          gameState.moveByGameCardIndex(card.gameCardIndex, "LibraryBottom");
+
+          const library = gameState.listLibrary();
+          expect(library[library.length - 1].card.name).toBe(card.card.name);
+        })
+      );
+    });
+
+    test("throws on an out-of-bounds gameCardIndex", () => {
+      fc.assert(
+        fc.property(anyDeck, (deck) => {
+          const gameState = GameState.newGame(1, 1, 1, deck);
+
+          expect(() => gameState.moveByGameCardIndex(999999, "Revealed")).toThrow(
+            "Invalid game card index: 999999"
+          );
+        })
+      );
+    });
   });
 
   describe("opening hand & mulligan", () => {

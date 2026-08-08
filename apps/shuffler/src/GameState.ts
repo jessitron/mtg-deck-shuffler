@@ -23,6 +23,8 @@ import { hydrateGameCards, dehydrateGameCards } from "./port-card-repository/hyd
 
 export { GameId, GameStatus, CardLocation, GameCard, LibraryLocation, CommandZoneLocation };
 
+export type CardMoveDestination = "Revealed" | "Hand" | "LibraryTop" | "LibraryBottom";
+
 class SeededRandom {
   private seed: number;
 
@@ -583,57 +585,28 @@ export class GameState {
     return this;
   }
 
-  public revealByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
+  public moveByGameCardIndex(gameCardIndex: number, destination: CardMoveDestination, browserTabId?: string): this {
     const allCards = this.getCards();
     if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
       throw new Error(`Invalid game card index: ${gameCardIndex}`);
     }
 
-    const cardToReveal = allCards[gameCardIndex];
+    const cardToMove = allCards[gameCardIndex];
 
-    this.addToRevealed(cardToReveal, browserTabId);
-
-    this.validateInvariants();
-    return this;
-  }
-
-  public putInHandByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
-    const allCards = this.getCards();
-    if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
-      throw new Error(`Invalid game card index: ${gameCardIndex}`);
+    switch (destination) {
+      case "Revealed":
+        this.addToRevealed(cardToMove, browserTabId);
+        break;
+      case "Hand":
+        this.addToHand(cardToMove, browserTabId);
+        break;
+      case "LibraryTop":
+        this.addToTopOfLibrary(cardToMove, browserTabId);
+        break;
+      case "LibraryBottom":
+        this.addToBottomOfLibrary(cardToMove, browserTabId);
+        break;
     }
-
-    const cardToPutInHand = allCards[gameCardIndex];
-
-    this.addToHand(cardToPutInHand, browserTabId);
-
-    this.validateInvariants();
-    return this;
-  }
-
-  public putOnTopByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
-    const allCards = this.getCards();
-    if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
-      throw new Error(`Invalid game card index: ${gameCardIndex}`);
-    }
-
-    const cardToPutOnTop = allCards[gameCardIndex];
-
-    this.addToTopOfLibrary(cardToPutOnTop, browserTabId);
-
-    this.validateInvariants();
-    return this;
-  }
-
-  public putOnBottomByGameCardIndex(gameCardIndex: number, browserTabId?: string): this {
-    const allCards = this.getCards();
-    if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
-      throw new Error(`Invalid game card index: ${gameCardIndex}`);
-    }
-
-    const cardToPutOnBottom = allCards[gameCardIndex];
-
-    this.addToBottomOfLibrary(cardToPutOnBottom, browserTabId);
 
     this.validateInvariants();
     return this;

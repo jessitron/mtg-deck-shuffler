@@ -1180,7 +1180,7 @@ export function createApp(
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.revealByGameCardIndex(gameCardIndex, browserTabId);
+      game.moveByGameCardIndex(gameCardIndex, "Revealed", browserTabId);
 
       // Persist the updated state
       await persistStatePort.save(game.toPersistedGameState());
@@ -1202,7 +1202,7 @@ export function createApp(
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.putInHandByGameCardIndex(gameCardIndex, browserTabId);
+      game.moveByGameCardIndex(gameCardIndex, "Hand", browserTabId);
 
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -1223,7 +1223,7 @@ export function createApp(
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.putOnTopByGameCardIndex(gameCardIndex, browserTabId);
+      game.moveByGameCardIndex(gameCardIndex, "LibraryTop", browserTabId);
 
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -1244,7 +1244,7 @@ export function createApp(
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.putOnBottomByGameCardIndex(gameCardIndex, browserTabId);
+      game.moveByGameCardIndex(gameCardIndex, "LibraryBottom", browserTabId);
 
       await persistStatePort.save(game.toPersistedGameState());
 
