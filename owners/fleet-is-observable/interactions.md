@@ -56,14 +56,20 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
 - **Touching either Node ship's `log.ts` or its `logRecordProcessors`**: the two ships are on different OTel version lines (0.219 / 0.221) with **incompatible constructor signatures** for the same classes. Don't paste between ships; run both ships' tests. Wrong shape = silent no-export.
 - **Adding logging to a hot path**: logs are not sampled, on purpose. That's *readable* only because nothing logs per-request (not a money question — ingest is free). If you're about to, put it on the span instead, where it correlates with everything else — or reopen the sampling question deliberately (README → Invariant 2).
 - **Adding HTTP middleware or changing routes**: confirm spans still get `http.route` and the route-param stamping (`stampRouteParamsOnSpan`) still fires.
-- **Adding a game-mutation route in `apps/shuffler/src/app.ts`**: 9 of them (`reveal-card`,
+- **Adding a game-mutation route in `apps/shuffler/src/app.ts`**: 11 of them (`reveal-card`,
   `put-in-hand`, `put-on-top`, `put-on-bottom`, `shuffle`, `mulligan`, `move-hand-card`, `undo`,
-  `draw`) now go through `apply-game-command.ts`'s `applyGameCommand()`, which owns the
-  "not-found"/"incompatible-version" `markCurrentSpanAsError` calls for all of them — don't
-  re-add per-route copies of those two. `flip-card`/`flip-card-modal`/`play-card`/`discard-card`
-  are still on the old `loadGameFromParams`/`requireValidVersion` middleware pair and have their
-  own copies; a new route belongs on whichever protocol it needs, not a third copy-paste. README →
-  wiring table (`apply-game-command.ts` row) and History.
+  `draw`, `flip-card`, `flip-card-modal`) now go through `apply-game-command.ts`'s
+  `applyGameCommand()`, which owns the "not-found"/"incompatible-version" `markCurrentSpanAsError`
+  calls for all of them — don't re-add per-route copies of those two. Only `play-card`/
+  `discard-card` (they need a tabletop-send veto hook `applyGameCommand` doesn't support yet)
+  still run the old inline retrieve/reconstruct/status-check/version-check/mutate/persist protocol
+  with their own copies of those calls. `loadGameFromParams`/`requireValidVersion` — the middleware
+  pair the first 9 routes used to share — are **gone**, deleted once `flip-card`/`flip-card-modal`
+  left them with no callers; don't resurrect that pair for a new route. A route whose response
+  can't be expressed as a returned string (e.g. it calls `res.render(...)` itself, like
+  `flip-card-modal`) can still use `applyGameCommand`/`renderCommandOutcome` — `renderApplied` may
+  return `string | void`; returning `undefined` tells `renderCommandOutcome` the callback already
+  sent the response. README → wiring table (`apply-game-command.ts` row) and History.
 - **A new service/ship**: OTel from its first commit (`notes/add-opentelemetry.md` is the runbook).
 - **Installing or editing a process signal handler for shutdown**: installing a SIGTERM/SIGINT handler changes Node's *default* behavior — with no handler, Node exits immediately on the signal; once a handler exists, Node no longer exits on its own, so the handler must call `exit()` itself once the drain settles or the process hangs forever on every signal. `apps/shuffler/src/shutdownHooks.ts` is the reference shape: bound the drain with a `Promise.race` against an `unref()`'d timer (a hung exporter must not outlast a k8s termination grace period), and guard idempotency so a second signal doesn't fire twice. The Tabletop's `tracing.ts` still has no such hook — copy this pattern there, don't re-derive it.
 - **Callbacks and timers**: they outlive the span that scheduled them. AsyncLocalStorage still hands you the *context*, so `getActiveSpan()` returns an **ended** span — `addEvent` throws there rather than no-op'ing. Use a log; it still carries the trace id, so it lands on the trace anyway. (`rooms.ts` was the worked example; fixed in `6f319a2`, kept in README as the argument.)
