@@ -1,47 +1,62 @@
-function formatHtmlHead(title: string, additionalStylesheets: string[] = []): string {
-  const additionalStylesheetsHtml = additionalStylesheets.map(href => `    <link rel="stylesheet" href="${href}" />`).join('\n');
+import { escapeHtml } from "./shared-components.js";
+
+interface HtmlHeadOptions {
+  title: string;
+  // Loaded after /fleet/tokens.css and /styles.css, in the order given.
+  stylesheets?: string[];
+  // Google font families fetched in addition to Orbitron (e.g. ["Ovo"]).
+  additionalFonts?: string[];
+  // Trusted HTML only — appended verbatim at the end of the head.
+  // Never interpolate user-supplied data into this.
+  scriptsHtml?: string;
+}
+
+// The one page shell. Every page's <head> — EJS-rendered (via
+// views/partials/head.ejs, which reaches this through app.locals) and
+// TS-rendered (/game, error pages) — comes from here, so the skeleton
+// (tokens first, fonts, tab-id + tracing bootstrap) cannot diverge again.
+function formatHtmlHead(options: HtmlHeadOptions): string {
+  const { title, stylesheets = [], additionalFonts = [], scriptsHtml = "" } = options;
+
+  const fontFamilies = ["Orbitron:wght@400;600;700;900", ...additionalFonts];
+  const fontsParam = fontFamilies.map((f) => `family=${f}`).join("&");
+  const stylesheetsHtml = stylesheets.map((href) => `    <link rel="stylesheet" href="${href}" />`).join("\n");
 
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${title}</title>
+    <title>${escapeHtml(title)}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ovo&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?${fontsParam}&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/fleet/tokens.css" />
     <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/playmat.css" />
-    <link rel="stylesheet" href="/game.css" />
-${additionalStylesheetsHtml}
-    <script>
-      // Generate browserTabId first, before tracing initialization
-      const SESSION_STORAGE_KEY = "browserTabId";
-      let browserTabId = sessionStorage.getItem(SESSION_STORAGE_KEY);
-      if (!browserTabId) {
-        browserTabId = crypto.randomUUID();
-        sessionStorage.setItem(SESSION_STORAGE_KEY, browserTabId);
-      }
-      window.browserTabId = browserTabId;
-    </script>
+${stylesheetsHtml}
+    <script src="/browser-tab-id.js"></script>
     <script src="/hny.js"></script>
     <script>
-      Hny.initializeTracing({
-        apiKey: "${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}",
-        serviceName: "mtg-deck-shuffler-web",
-        debug: false,
-        provideOneLinkToHoneycomb: true,
-        resourceAttributes: {
-          "game.browser_tab_id": window.browserTabId
-        }
-      });
+      // Initialize Honeycomb tracing for the browser. browserTabId must exist
+      // before this runs: it's baked into the resource, immutable after init.
+      if (window.Hny && window.browserTabId) {
+        Hny.initializeTracing({
+          apiKey: "${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}",
+          serviceName: "mtg-deck-shuffler-web",
+          debug: false,
+          provideOneLinkToHoneycomb: true,
+          resourceAttributes: {
+            "game.browser_tab_id": window.browserTabId
+          }
+        });
+      }
     </script>
-    <script src="/htmx.js"></script>
-    <script>
-      // Configure HTMX to include browserTabId in all requests
-      document.addEventListener("htmx:configRequest", function (event) {
-        event.detail.headers["X-Browser-Tab-Id"] = window.browserTabId;
-      });
+${scriptsHtml}
+  </head>`;
+}
 
+// The /game head's page-specific scripts. responseHandling references the
+// htmx global, so this block must stay after htmx.js loads.
+const GAME_HEAD_SCRIPTS_HTML = `    <script src="/htmx.js"></script>
+    <script>
       // Configure HTMX to swap on 409 Conflict responses
       htmx.config.responseHandling = [
         {code: "204", swap: false},  // No Content
@@ -55,9 +70,7 @@ ${additionalStylesheetsHtml}
       ];
     </script>
     <script src="/game.js"></script>
-    <script src="/modal-query-params.js"></script>
-  </head>`;
-}
+    <script src="/modal-query-params.js"></script>`;
 
 interface PageWrapperOptions {
   title: string;
@@ -78,7 +91,14 @@ function formatPageWrapper(options: PageWrapperOptions): string {
     devMode = false
   } = options;
 
-  const headHtml = formatHtmlHead(title, additionalStylesheets);
+  const headHtml = formatHtmlHead({
+    title,
+    // playmat before game: the bare .playmat rule and the page modifiers are
+    // equal specificity, so the tie is resolved by load order — deliberate.
+    stylesheets: ["/playmat.css", "/game.css", ...additionalStylesheets],
+    additionalFonts: ["Ovo"],
+    scriptsHtml: GAME_HEAD_SCRIPTS_HTML,
+  });
   const bodyClasses = [devMode ? "dev-mode" : ""].filter(Boolean);
   const bodyClass = bodyClasses.length ? ` class="${bodyClasses.join(" ")}"` : ``;
   const footerHtml = includeFooter ? `

@@ -1,40 +1,11 @@
-<head>
-  <title><%= pageTitle %></title>
-  <link rel="stylesheet" href="/fleet/tokens.css" />
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="stylesheet" href="/site.css" />
-  <% if (locals.additionalStyles) { %>
-    <% additionalStyles.forEach(function(style) { %>
-      <link rel="stylesheet" href="<%= style %>" />
-    <% }); %>
-  <% } %>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <%
-    // additionalFonts is optional array of additional Google Fonts beyond Orbitron
-    const additionalFontsParam = (locals.additionalFonts && additionalFonts.length > 0)
-      ? '&family=' + additionalFonts.join('&family=')
-      : '';
-  %>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900<%= additionalFontsParam %>&display=swap"
-    rel="stylesheet" />
-  <script src="/browser-tab-id.js"></script>
-  <script src="/hny.js"></script>
-  <script>
-    // Initialize Honeycomb tracing for frontend
-    if (window.Hny && window.browserTabId) {
-      Hny.initializeTracing({
-        apiKey: "<%= process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY %>",
-        serviceName: "mtg-deck-shuffler-web",
-        debug: false,
-        provideOneLinkToHoneycomb: true,
-        resourceAttributes: {
-          "game.browser_tab_id": window.browserTabId
-        }
-      });
-    }
-  </script>
-  <% if (locals.script) { %>
-    <script src="<%= script %>" defer></script>
-  <% } %>
-</head>
+<%#
+  Thin adapter over the one page shell (formatHtmlHead in
+  src/view/common/html-layout.ts, exposed via app.locals). The EJS pages'
+  only head-shape difference from /game lives here: they all load site.css.
+%>
+<%- formatHtmlHead({
+  title: pageTitle,
+  stylesheets: ['/site.css'].concat(locals.additionalStyles || []),
+  additionalFonts: locals.additionalFonts,
+  scriptsHtml: locals.script ? '<script src="' + script + '" defer></script>' : ''
+}) %>

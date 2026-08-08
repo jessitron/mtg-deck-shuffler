@@ -3,7 +3,7 @@
 Mountain: overhead
 Ship: shuffler
 Type: task
-Status: needs-triage
+Status: resolved
 
 ## Context
 
@@ -44,3 +44,18 @@ context it can supply directly.
 
 `apps/shuffler/` only. Verify with `./verify.sh` from `apps/shuffler/` — this touches every
 page's `<head>`, so the full Playwright suite is the right check, not a targeted one.
+
+## Comments
+
+**2026-08-08 — resolved, direction (a).** One canonical shell: `formatHtmlHead(options)` in
+`src/view/common/html-layout.ts`, reached by EJS via `app.locals` through a thin
+`views/partials/head.ejs` adapter (which is also the one spot adding `site.css`). `/game`'s
+page-specific scripts (htmx + 409/502 responseHandling, game.js, modal-query-params.js) ride
+in a `scriptsHtml` tail constant. Both owners (shuffler-looks-like-itself,
+fleet-is-observable) consulted and reviewed; plan at
+`.scratch/shuffler-architecture-review/plan-06-unify-page-shell.md`. Three deliberate fixes
+landed with the unification: meta charset/viewport now on EJS pages, the tracing-init guard
+now on /game, and the title is HTML-escaped in the shell (it wasn't, on the TS path).
+Correction to this ticket's premise: the design KB note about typeface names in the heads
+says they are *correctly* literal (font delivery, not tokenisable) — no sweep was pending.
+Follow-up buoy in TODO.md: `browser-tracing-key-guard`.
