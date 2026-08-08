@@ -520,11 +520,13 @@ self-rendering custom shape.
   quoting split between single and double quotes, is the concrete evidence that justified
   tokenising type at all.
 
-  **What is still literal, and correctly so:** the typeface names in the three `<head>`s
-  (`views/partials/head.ejs`, `src/view/common/html-layout.ts`, `apps/tabletop/index.html`), where
+  **What is still literal, and correctly so:** the typeface names in the two `<head>` sources
+  (down from three since `b268414`, 2026-08-08: `formatHtmlHead` in
+  `src/view/common/html-layout.ts` — the Shuffler's one page shell, which `head.ejs` now
+  adapts — and `apps/tabletop/index.html`), where
   the Google Fonts `<link>` *fetches* the files. That is delivery, not naming a face in a rule, and
   a CSS custom property can't reach it. The standing rule holds: one delivery mechanism fleet-wide
-  (a `<link>` **or** `@font-face`, never both), and self-hosting is a change to all three at once.
+  (a `<link>` **or** `@font-face`, never both), and self-hosting is a change to both at once.
 
   **Built and confirmed working 2026-08-08 (ticket 13).** `MtgZoneShapeUtil`'s zone labels
   ("Graveyard", "Exile", "Library", "The Stack") render with `fontFamily: "var(--font-chrome)"`,

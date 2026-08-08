@@ -14,19 +14,22 @@
   root `workspaces` glob, and each Dockerfile copying `packages/` — see
   [architecture.md](architecture.md) for the three container facts.
 - **`styles.css` `:root`** — now just `--background-color`. Shuffler-only.
-- **Google Fonts** — Orbitron, Ovo, Risque, loaded from `fonts.googleapis.com` by **three**
-  heads now: the two Shuffler ones plus `apps/tabletop/index.html`. If a page forgets its
+- **Google Fonts** — Orbitron, Ovo, Risque, loaded from `fonts.googleapis.com` by **two**
+  head sources (down from three since `b268414`, 2026-08-08): the Shuffler's one page shell
+  (`formatHtmlHead` in `src/view/common/html-layout.ts` — `head.ejs` is just an adapter over
+  it) and `apps/tabletop/index.html`. If a page forgets its
   `additionalFonts` entry, the text silently falls back to a system serif and looks wrong
   without erroring. **One delivery mechanism fleet-wide** — a `<link>` *or* `@font-face`,
-  never both; self-hosting would be a change to all three sites at once.
+  never both; self-hosting would be a change to both sources at once.
   **Two separate things, and don't conflate them (since `f79bc7d`, 2026-08-07):** the `<link>`
   *fetches* the face and still names it literally — a custom property cannot reach a `<link>
   href`. Every place that *applies* a face goes through `var(--font-chrome/-content/-display)`.
   So a new page needs **both**: the token in its CSS *and* its `additionalFonts` entry. The
   token resolving is not evidence the font arrived — that's the lazy-fetch trap below.
-- **The two heads** — `views/partials/head.ejs` and `formatHtmlHead()` in
-  `src/view/common/html-layout.ts`. A stylesheet only exists on the pages whose head
-  lists it.
+- **The one page shell** — `formatHtmlHead(options)` in `src/view/common/html-layout.ts`
+  (since `b268414`, 2026-08-08; `views/partials/head.ejs` is now a thin adapter over it via
+  `app.locals`, and the only spot that adds `site.css`). A stylesheet only exists on the
+  pages whose call passes it — the shell unifies the skeleton, not the per-page lists.
 - **The `/design` gallery** — the only place the language is visible all at once.
 - **`apps/shuffler/CLAUDE.md` → "UI Style"** — the short public statement of the rules.
 
@@ -293,17 +296,25 @@ existing specs learned, in the order they'll bite you:
   *plumbing*; changing a colour is this owner's call and must not break wiring tests. The one
   concrete value asserted anywhere is `--deep-space` on the Tabletop, and only to prove the two
   ships share a dictionary.
-- **Cover the second head cheaply.** `test/html-layout-fleet-tokens.test.ts` is a jest test on
-  `src/view/common/html-layout.ts` because reaching a play page in Playwright needs a whole
-  game set up. The two heads are the thing most likely to diverge.
+- **Cover the `/game` path cheaply.** `test/html-layout-fleet-tokens.test.ts` is a jest test
+  on `src/view/common/html-layout.ts` because reaching a play page in Playwright needs a
+  whole game set up. The seam survived the shell unification (`b268414`, 2026-08-08 —
+  retitled "the one page shell links the fleet palette", new object-options signature, plus
+  assertions on page-sheet order, `additionalFonts`, and title escaping). "The two heads are
+  the thing most likely to diverge" is retired: there is one shell now, and this test is
+  what guards its skeleton.
 - **A boot check is not a link check.** `import.meta.resolve` doesn't verify the file exists,
   so `verify-container-boot.sh` passes with a dangling workspace symlink — the server starts
   fine and only `/fleet/tokens.css` 404s. Curl the route, don't trust the boot.
 
 **Adding a stylesheet**
 
-- Add it to the right head — `head.ejs` `additionalStyles` for an EJS view,
-  `additionalStylesheets` for a TS page. They are separate lists.
+- Get it into the one shell through the right door — `additionalStyles` in an EJS view's
+  locals (the `head.ejs` adapter passes it through, after `/site.css`), or
+  `additionalStylesheets` on `formatPageWrapper` for a TS page (lands after `/playmat.css`
+  and `/game.css`). The shell's own parameter is named `stylesheets`; only the adapter and
+  `formatPageWrapper` call it directly. The per-page lists are still separate — the shell
+  unified the skeleton, not the manifests.
 - Add it to `design.ejs` and to `APP_STYLESHEETS` in
   `test/verification/verify-design-gallery.spec.ts`, or the gallery silently stops
   representing the app.

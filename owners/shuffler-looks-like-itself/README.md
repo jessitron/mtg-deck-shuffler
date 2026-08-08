@@ -190,7 +190,9 @@ of those live in `packages/design-tokens/tokens.css`**
   the omission is a decision, not an oversight.
 - **Font tokens: RESOLVED 2026-08-07 (`f79bc7d`).** Jess: *"yeah, go for it! I'm all for more
   tokens."* `--font-chrome` / `--font-content` / `--font-display` are in the package and every
-  Shuffler stylesheet uses them. **The typeface names still appear in the three `<head>`s** —
+  Shuffler stylesheet uses them. **The typeface names still appear in the two `<head>`
+  sources** (down from three since `b268414`, 2026-08-08: the Shuffler's one page shell,
+  `formatHtmlHead` in `src/view/common/html-layout.ts`, plus the Tabletop's `index.html`) —
   that's the Google Fonts `<link>` fetching the files, a separate concern from naming a face
   in a rule, and it does not go through a token.
 - **`--radius-soft: 4px` is also in the package (2026-08-07, `f79bc7d`), and where it lives
@@ -465,7 +467,7 @@ Candidate CSS for the unadopted options lives in
 | **Shared tokens (fleet)** | `packages/design-tokens/tokens.css` — served at `/fleet/tokens.css`, imported by the Tabletop via Vite. Colours + `--narrow-border` + `--mana-*` + `--font-chrome/-content/-display` + `--radius-soft` |
 | Shuffler-only tokens | `apps/shuffler/public/styles.css` `:root` — now just `--background-color` |
 | Typefaces in CSS | **always `var(--font-*)`** — no `font-family` literal survives in the Shuffler except `monospace` and `inherit` |
-| Fonts (delivery) | Google Fonts `<link>` in **three** places: `views/partials/head.ejs`, `src/view/common/html-layout.ts`, `apps/tabletop/index.html`. This is the one place a typeface is still named by name, and it isn't tokenisable |
+| Fonts (delivery) | Google Fonts `<link>` in **two** sources (since `b268414`, 2026-08-08): the Shuffler's one page shell — `formatHtmlHead` in `src/view/common/html-layout.ts`, which `views/partials/head.ejs` is now a thin adapter over — and `apps/tabletop/index.html`. This is the one place a typeface is still named by name, and it isn't tokenisable |
 | One-shot sweep script | `scripts/sweep-font-literals.sh` — kept so the exact substitutions stay reviewable |
 | Site pages | `apps/shuffler/public/site.css` |
 | Shared playmat chrome | `apps/shuffler/public/playmat.css` (game **and** prepare) |

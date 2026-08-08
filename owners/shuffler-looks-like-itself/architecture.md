@@ -40,26 +40,45 @@ Tabletop-only rule has to decide it. See [open-choices.md](open-choices.md) → 
 [README.md → How to cite code in this KB](README.md#how-to-cite-code-in-this-kb-standing-convention-2026-08-07).
 Grep the selector.
 
-## Two page-building systems, two heads
+## Two page-body systems, ONE page shell (unified 2026-08-08, `b268414`)
 
-The Shuffler renders pages two ways, and each has its own `<head>`. **A new stylesheet
-must be added to whichever one(s) need it — they do not share a list.**
+The Shuffler renders page *bodies* two ways (EJS templates, TS functions), but every
+page's `<head>` now comes from **one place**: `formatHtmlHead(options)` in
+`src/view/common/html-layout.ts` — `options: {title, stylesheets?, additionalFonts?,
+scriptsHtml?}`. The skeleton, in fixed order: meta charset + viewport, **escaped** title
+(`escapeHtml` inside the shell — deck names come from Archidekt), font preconnects + one
+Google Fonts `<link>` (Orbitron always, plus `additionalFonts`), **`/fleet/tokens.css`
+FIRST**, `/styles.css`, then `options.stylesheets` in the order given, then
+`/browser-tab-id.js`, `/hny.js`, the guarded `Hny.initializeTracing` block, then
+`options.scriptsHtml` verbatim (commented "trusted HTML only" — never interpolate
+user-supplied data into it).
+
+Two routes into the shell:
 
 | | EJS pages | TypeScript pages |
 | --- | --- | --- |
-| Head | `views/partials/head.ejs` | `formatHtmlHead()` in `src/view/common/html-layout.ts` |
-| Always loads | **`/fleet/tokens.css`**, `styles.css`, `site.css` | **`/fleet/tokens.css`**, `styles.css`, `playmat.css`, `game.css` (swapped from `game.css`-then-`playmat.css` 2026-08-07, `63d4c08` — see the cascade-tie note in Traps) |
-| Fonts | Orbitron; `additionalFonts` array adds more | Ovo + Orbitron, hard-coded |
-| Extra CSS | `additionalStyles` array per view | `additionalStylesheets` option |
-| Pages | `/`, `/docs`, `/about`, `/history`, `/choose-any-deck`, `/prepare`, `/design` | `/game`, error pages |
+| Route in | `views/partials/head.ejs` — a **thin adapter** calling `app.locals.formatHtmlHead` (wired in `src/app.ts` next to the view-engine setup) | `formatPageWrapper` calls `formatHtmlHead` directly |
+| Adapter/caller adds | prepends `/site.css` to `locals.additionalStyles`; converts `locals.script` to a deferred script tag | `stylesheets: ["/playmat.css", "/game.css", ...]` (order deliberate — cascade tie, inline comment says so), `additionalFonts: ["Ovo"]`, `scriptsHtml = GAME_HEAD_SCRIPTS_HTML` (htmx.js, the 409/502 `responseHandling` config, game.js, modal-query-params.js) |
+| Per-page CSS | `additionalStyles` array per view — the EJS-facing name is unchanged | `additionalStylesheets` option on `formatPageWrapper` |
+| Pages | `/`, `/docs`, `/about`, `/history`, `/choose-any-deck`, `/prepare`, `/design` | `/game`, debug load-state, error pages |
 
-Note the asymmetry: EJS pages get `site.css` by default and must opt into the playmat
-styles; TS pages get the playmat styles by default and never load `site.css`.
+The old asymmetry stands, but it's now expressed as **adapter defaults**, not duplicated
+skeletons: EJS pages get `site.css` (the adapter is the one spot that adds it — `site.css`
+must never reach `/game`; `/prepare` still gets it, deliberately not tidied in the
+unification), TS pages get the playmat sheets. Three fixes rode along, all owner-reviewed
+and deliberate: EJS pages gained meta charset + viewport (changes phone rendering — 375px
+screenshots of `/` and `/prepare` were taken and look sensible); `/game`'s tracing init
+gained the `window.Hny && window.browserTabId` guard the EJS head already had; `/game`'s
+duplicate `htmx:configRequest` listener was deleted (browser-tab-id.js already registers
+one).
 
-**`/fleet/tokens.css` is first in both heads, and it is the one thing they cannot diverge on** —
-every `var()` in every sheet depends on it. There is a cheap jest test for the TS head
-(`test/html-layout-fleet-tokens.test.ts`) precisely because reaching a play page in Playwright
-needs a whole game set up; the EJS head is covered by `verify-fleet-tokens.spec.ts`.
+**`/fleet/tokens.css` is first, and that can no longer diverge between page families** —
+every `var()` in every sheet depends on it. The cheap jest test survived the seam
+(`test/html-layout-fleet-tokens.test.ts`, retitled "the one page shell links the fleet
+palette"): tokens before `styles.css`, page sheets after both in the given order, Orbitron
+always, `additionalFonts`, and title escaping. It remains the cheap gate for the `/game`
+path (reaching a play page in Playwright needs a whole game set up); the EJS/adapter path
+is covered in the browser by `verify-fleet-tokens.spec.ts`.
 
 Per-view `additionalStyles` today:
 
@@ -166,9 +185,10 @@ a shared property depends entirely on load order:
 
 **Both pages now load `playmat.css` before their own modifier sheet.** `/game` used to load
 `game.css` then `playmat.css` (`html-layout.ts` → `formatHtmlHead()`); the commit "Jess
-updates appearance" swapped that to `playmat.css` then `game.css`, with no comment noting
-why — the commit's own content is all `.cool-command-zone-surround`/`.game-title` styling,
-not load order. `/prepare`'s order (`prepare.ejs`'s `additionalStyles`:
+updates appearance" swapped that to `playmat.css` then `game.css`, originally with no
+comment noting why. **Since the shell unification (`b268414`, 2026-08-08) the order lives
+in `formatPageWrapper`'s `stylesheets` argument, with an inline comment stating it's
+deliberate** (equal-specificity cascade tie resolved by load order). `/prepare`'s order (`prepare.ejs`'s `additionalStyles`:
 `['/playmat.css', '/prepare.css']`) was already this way and is unchanged. **The upshot: a
 property added to the bare `.playmat` rule is now overridden by the page modifier on both
 pages, identically** — the old hazard, where the same declaration took effect on one page

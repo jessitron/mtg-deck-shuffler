@@ -101,9 +101,10 @@ you skipped. These are written from the Shuffler's files; on the Tabletop, apply
 - [ ] Is it editing one of the **duplicated blocks** — modal styles (`playmat.css` +
       `prepare.css`), flip styles (`game.css` + `prepare.css`), library-list styles
       (`playmat.css` + `prepare.css`)? Both copies must change, or the duplicate must go.
-- [ ] New stylesheet? It must be added to the right `<head>` (`head.ejs`
-      `additionalStyles` for EJS, `additionalStylesheets` for TS pages — separate lists),
-      **and** to `design.ejs`, **and** to `APP_STYLESHEETS` in
+- [ ] New stylesheet? It must reach the one page shell through the right door
+      (`additionalStyles` in the EJS view's locals, `additionalStylesheets` on
+      `formatPageWrapper` for TS pages — the shell unified the skeleton, not the per-page
+      lists), **and** be added to `design.ejs`, **and** to `APP_STYLESHEETS` in
       `test/verification/verify-design-gallery.spec.ts`.
 
 **HTMX**
