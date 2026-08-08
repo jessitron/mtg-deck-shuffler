@@ -45,21 +45,27 @@ polish.
 - **Player-area geometry is built** for the row layout (`apps/tabletop/DESIGN.md`, 2026-08-01):
   playmat, library, graveyard, exile, and a shared Stack strip along the top. The square is a
   *change* to this, not a first draft.
+- [Design command-zone geometry and redraw the player
+  area](issues/01-command-zone-and-player-area.md) (2026-08-08) — the Command Zone takes the old
+  Exile spot next to Library, sized for two cards (partner commanders); Exile drops to the bottom
+  third of the old Graveyard box, Graveyard keeps the top two-thirds; the column widens
+  (~425 → ~545) and that ripple — shifting every seat to the right of a widened one — is in scope,
+  not deferred. "Mat grows taller" stays separately deferred. Recorded in `apps/tabletop/DESIGN.md`.
 
 ## Not yet specified
 
-- **The square itself.** `playerAreaX(seatIndex) = MARGIN_X + seatIndex * (PLAYER_AREA_W + GAP)`
-  in `cardLayout.ts` puts seats in a row; the Stack is a strip across the top, widened on each
-  join. Jess wants a square with the Stack in the middle, some mats sideways to the others.
-  `DESIGN.md:173+` already considered and deferred this — "tldraw can't rotate per viewer" —
-  so the deferral has to be revisited, not just reversed. Too unformed to ticket until map 1
-  says what furniture is.
 - **Life totals and commander damage.** Numbers a player can modify, and a commander-damage
   count per opponent. Nothing exists in code. What kind of object is a modifiable number here —
-  furniture, a shape, or something outside the canvas entirely? Waits on map 1.
+  furniture, a shape, or something outside the canvas entirely? Map 1 is resolved now, so this
+  is ticketable whenever someone sits down with it — not waiting on anything anymore.
 - **Seat position across a restart.** Seat index is `entry.seats.size` at join time, so after a
   server restart players re-joining in a different order land in different places. Belongs
   here (it's geography) but can't be decided until map 6 says what survives a restart.
+- **Commander identity and arming.** How the Tabletop knows a card is *the* commander (a new
+  Shuffler → Tabletop event, a card property) and how the Command Zone arms only for that
+  player's own commander. Jess sketched the shape of it 2026-08-08 while resolving ticket 01;
+  captured as a comment on [ticket 08](issues/08-commander-in-command-zone.md) rather than
+  ticketed fresh, since 08 already asks this question and is still blocked-then-open.
 
 ## Out of scope
 
