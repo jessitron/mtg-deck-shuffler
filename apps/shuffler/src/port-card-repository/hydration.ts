@@ -1,5 +1,5 @@
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../types.js";
-import { GameCard } from "../port-persist-state/types.js";
+import { GameCard } from "../domain-types.js";
 import { PersistedDeck, PersistedGameCard } from "../port-persist-state/persisted-types.js";
 import { CardRepositoryPort } from "./types.js";
 

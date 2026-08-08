@@ -1571,6 +1571,59 @@ export function createApp(
     }
   });
 
+  // Dev-mode fast start (undocumented, like /dontdie): one click from the home
+  // page's "yo!" link to the game screen. Loads the Timey-Wimey precon, preps
+  // it, and starts a game at table "Yo" as player "Jess" — the same steps as
+  // POST /deck followed by POST /start-game, minus the two pages in between.
+  app.get("/yo", async (req, res) => {
+    if (!res.locals.devMode) {
+      res.status(404).sendFile(path.join(__dirname, "..", "public", "404.html"));
+      return;
+    }
+
+    try {
+      const deck = await deckRetriever.retrieveDeck({ deckSource: "precon", localFile: "precon-mtgjson-TimeyWimey_WHO.json" });
+      await cardRepository.saveCards([...deck.cards, ...deck.commanders]);
+
+      const sortedDeck = {
+        ...deck,
+        cards: [...deck.cards].sort((a, b) => a.name.localeCompare(b.name)),
+      };
+      const tableInfo: TableInfo = { tableName: "Yo", playerName: "Jess", seatId: randomUUID().slice(0, 8) };
+      const prepId = persistPrepPort.newPrepId();
+      const prep: PersistedGamePrep = {
+        version: PERSISTED_GAME_PREP_VERSION,
+        prepId,
+        deck: sortedDeck,
+        tableName: tableInfo.tableName,
+        playerName: tableInfo.playerName,
+        seatId: tableInfo.seatId,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      await persistPrepPort.savePrep(prep);
+
+      const gameId = persistStatePort.newGameId();
+      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo);
+      game.startGame(res.locals.browserTabId as string | undefined);
+      await persistStatePort.save(game.toPersistedGameState());
+
+      await sendSeatJoinedBestEffort(tabletopPort, tableInfo.tableName, tableInfo.seatId, tableInfo.playerName);
+
+      res.redirect(`/game/${gameId}`);
+    } catch (error) {
+      log.error("yo fast-start failed", {}, error);
+      res.status(500).send(
+        formatErrorPageHtmlPage({
+          icon: "🎲",
+          title: "Yo Didn't Work",
+          message: "Could not fast-start a Timey-Wimey game.",
+          details: error instanceof Error ? error.message : String(error),
+        })
+      );
+    }
+  });
+
   // Developer mode entrance (undocumented). Sets a long-lived cookie and sends
   // you back where you came from. The exit link in the game menu hits /off.
   app.get("/dontdie", (req, res) => {

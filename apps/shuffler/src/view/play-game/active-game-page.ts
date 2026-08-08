@@ -1,3 +1,6 @@
+// This file's one job: game screen layout/composition order, including the HTMX
+// swap contract on #game-container. It's the assembly seam — new business logic
+// belongs in the section components it composes, not here.
 import { GameState, WhatHappened } from "../../GameState.js";
 import { formatPageWrapper } from "../common/html-layout.js";
 import { formatHandSectionHtmlFragment } from "./hand-components.js";
@@ -26,32 +29,8 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
  * Distinct from TABLETOP_URL (the server-to-server address used to send cards,
  * in-cluster DNS in production).
  */
-export function tabletopPublicUrl(): string {
+function tabletopPublicUrl(): string {
   return process.env.TABLETOP_PUBLIC_URL || "https://table.jessitron.honeydemo.io";
-}
-
-/**
- * The "N Cards on table" modal toggle. Full-size (the only control) when solo;
- * shrunk to a secondary button when a "Go to Table" CTA is also present.
- */
-function formatTableCardsButtonHtmlFragment(game: GameState, tableCardsCount: number): string {
-  const sizeClass = game.tableName ? "pushable-dark pushable-small" : "";
-  return `<button class="pushable-flat ${sizeClass} table-cards-button"
-            hx-get="/table-modal/${game.gameId}"
-            hx-target="#modal-container"
-            hx-swap="innerHTML">${tableCardsCount} Cards on table</button>`;
-}
-
-/**
- * "Go to Table <name>" — shown when the game joined a table (JES-127). Opens
- * the table page in a new tab; sharing that URL is how spectators join.
- */
-function formatGoToTableButtonHtmlFragment(game: GameState): string {
-  if (!game.tableName) {
-    return "";
-  }
-  const tableUrl = `${tabletopPublicUrl()}/t/${encodeURIComponent(game.tableName)}`;
-  return `<a class="pushable-flat go-to-table-button" href="${tableUrl}" target="_blank" rel="noopener">Go to Table: ${escapeHtml(game.tableName)}</a>`;
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {
@@ -62,9 +41,24 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const revealedCardsHtml = formatRevealedCardsHtmlFragment(game, whatHappened);
   const handSectionHtml = formatHandSectionHtmlFragment(game, whatHappened);
   const menuHtml = formatGameMenuHtmlFragment(game);
+
+  // "Go to Table <name>" — shown when the game joined a table (JES-127). Opens
+  // the table page in a new tab; sharing that URL is how spectators join.
+  const goToTableButtonHtml = game.tableName
+    ? `<a class="pushable-flat go-to-table-button" href="${tabletopPublicUrl()}/t/${encodeURIComponent(game.tableName)}" target="_blank" rel="noopener">Go to Table: ${escapeHtml(game.tableName)}</a>`
+    : "";
+
+  // The "N Cards on table" modal toggle. Full-size (the only control) when solo;
+  // shrunk to a secondary button when the "Go to Table" CTA is also present.
+  const tableCardsSizeClass = game.tableName ? "pushable-dark pushable-small" : "";
+  const tableCardsButtonHtml = `<button class="pushable-flat ${tableCardsSizeClass} table-cards-button"
+            hx-get="/table-modal/${game.gameId}"
+            hx-target="#modal-container"
+            hx-swap="innerHTML">${tableCardsCount} Cards on table</button>`;
+
   const tableSectionHtml = ` <div id="table-section" class="table-section">
-          ${formatGoToTableButtonHtmlFragment(game)}
-          ${formatTableCardsButtonHtmlFragment(game, tableCardsCount)}
+          ${goToTableButtonHtml}
+          ${tableCardsButtonHtml}
         </div>`;
 
   return `<div id="game-container"

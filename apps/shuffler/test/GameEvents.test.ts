@@ -1,6 +1,6 @@
 import { describe, test, expect } from "@jest/globals";
 import { GameEventLog, GameStartedEvent, StartGameEvent } from "../src/GameEvents.js";
-import { CardLocation } from "../src/port-persist-state/types.js";
+import { CardLocation } from "../src/domain-types.js";
 
 describe("GameEventLog", () => {
   const libraryLocation: CardLocation = { type: "Library", position: 0 };

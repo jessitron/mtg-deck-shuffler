@@ -280,6 +280,48 @@ image/video shapes avoid it by wrapping content in `<div className="tl-image-con
 inventing inline pointer-events styles. Any future custom shape that renders interactive content
 in `<HTMLContainer>` needs the same treatment.
 
+## `mtg-counter`: decided, not built (table-layout ticket 12, 2026-08-08)
+
+`.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md` (resolved
+2026-08-08 — note this is a *different* "ticket 12" from the `tabletop-physics` ticket 12 that
+landed the `mtg-card` rewrite) decided that a life counter is a **third custom shape type**,
+working name `mtg-counter`: **locked furniture** whose `component()` renders a number with +/-
+buttons and a directly-typeable number field. Everyone can press anyone's buttons; state syncs
+as ordinary shape props. **No code exists yet.** Three mechanics facts were established from
+tldraw source during this owner's `-context` consult for that grilling session, and belong here
+so the implementer doesn't re-derive them:
+
+1. **Locking gates tldraw's gesture state machine, NOT DOM events inside `component()`.**
+   `SelectTool`'s `Idle` state filters `isLocked` before a shape ever reaches `PointingShape`,
+   and `Editor.getDraggingOverShape` filters `!isLocked` — but neither touches DOM event
+   dispatch to the shape's rendered HTML. A locked shape can host fully working buttons and
+   inputs. This is the load-bearing fact that makes "locked furniture with live controls" a
+   coherent design at all.
+2. **The canonical pattern for interactive controls inside a shape is tldraw's own
+   `HyperlinkButton`** (the bookmark shape): `pointer-events: all` on the control, plus
+   `editor.markEventAsHandled(e)` in `onPointerDown`/`onPointerUp` (`Editor.ts:10876`;
+   `useCanvasEvents` checks `wasEventAlreadyHandled` and skips its own canvas handling).
+   Preferred over the older `stopEventPropagation` util.
+3. **tldraw sync is last-writer-wins state replication, not a CRDT.** Simultaneous prop writes
+   to the same shape can lose one increment. Accepted for counters — rare, and self-evident on
+   screen. This is also why story-quality life-change records need an explicit event per press
+   rather than diffing synced state; that work is parked at
+   `.scratch/tabletop-replaces-mural/parked/life-change-events.md` for Map 5 ("The table
+   reports").
+
+Implementation cautions, recorded now so they're not discovered mid-build:
+
+- **The full four-step registration cost applies (watch point 6), *including* step 4** — the
+  pointer-events item. `mtg-counter` will be the first *locked* shape to exercise it: `mtg-zone`
+  skipped step 4 because nothing clicks it, but the condition was always "is the component's
+  content interactive," never "is the shape unlocked."
+- **The typeable number field must shield keystrokes from tldraw's tool hotkeys** — a focused
+  input inside the canvas otherwise triggers tool switches (e.g. a digit or letter keypress) as
+  the player types a life total.
+- Watch point 1 (the `onClick` selection-deferral quirk) does **not** apply: locked shapes never
+  reach `PointingShape`, and the counter's interactivity lives in DOM handlers, not a ShapeUtil
+  `onClick`.
+
 ## Ticket 02/12: the rewrite, landed
 
 `.scratch/tabletop-physics/issues/02-what-a-card-is.md` (resolved 2026-08-07, `c956949`) decided
