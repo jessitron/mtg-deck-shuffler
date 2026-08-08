@@ -154,31 +154,32 @@ These are specific things that could break two-faced cards if changed elsewhere:
     not a check on every boundary. Full reasoning in [contract.md](contract.md) and
     [tabletop.md](tabletop.md).
 
-16. **Face state is barely observable in the card modal — a flip test can pass without a
-    flip.** There is no `data-face`, no class, and no face-dependent text (a DFC's
-    `card.name` is the whole `"Front // Back"` string, so the modal title and `alt` are
-    identical on both faces). Consequences, in order of how often they bite:
-    - **Inline surfaces are fine**: assert `.flip-container-outer.card-flipped`. It's
+16. **Face state in the card modal is now strongly observable — resolved 2026-08-07.**
+    Previously there was no `data-face`, no class, and no face-dependent text in the modal (a
+    DFC's `card.name` is the whole `"Front // Back"` string, so the modal title and `alt` are
+    identical on both faces), which meant a flip test could pass without a flip. Fixed by
+    adding `data-current-face="<%= currentFace %>"` to `.card-modal-overlay` in
+    `views/partials/card-modal.ejs` (ticket `verify-suite-speed/04`) — a pure additive
+    attribute, `currentFace` was already threaded into the template. Consequences:
+    - **Inline surfaces**: still assert `.flip-container-outer.card-flipped`. It's
       server-rendered, so it's true the moment the htmx swap settles — no animation wait.
       `verify-prep-commander-flip.spec.ts` does exactly this.
-    - **In the modal**, the observables are `img.modal-card-image`'s `src` (both pages) and,
-      **on prep only**, the flip button's own `hx-get` carrying the *target* face
-      (`?face=back` while showing the front). The **game** modal's flip button is a `hx-post`
-      to a toggling route — identical on both faces, useless for assertion. Full list in
-      [architecture.md](architecture.md#how-to-tell-which-face-is-showing-observables-for-tests).
-    - **Known live gap** (found 2026-08-07 during the verify-suite speed work, commit
-      `65f12e8`): both `foundFlipCard` loops in `test/verification/verify-library-grouping.spec.ts`
-      click the modal flip button and then assert the position indicator is *unchanged* —
-      which is precisely the property under test (flipping must not renumber group-scoped
-      navigation) and therefore also what a flip that never happened produces. The click
-      isn't wrapped in `expect(...).toPass()` like the suite's other htmx-swap clicks,
-      because no available assertion could tell the retry whether it landed. A comment marks
-      each site; ticket `.scratch/verify-suite-speed/issues/04-which-tests-are-superfluous.md`
-      asks whether to strengthen or drop them. **If you strengthen them, add
-      `await expect(page.locator('.modal-card-image')).toHaveAttribute('src', /…back…/)` or,
-      better, emit `data-current-face` on `.card-modal-overlay` from `card-modal.ejs`** (the
-      value is already passed to the template and unused) and assert on that. Emitting it
-      would also give the game modal its first real face observable.
+    - **In the modal**, assert `.card-modal-overlay`'s `data-current-face` attribute — works
+      identically on game and prep. The older indirect observables (`img.modal-card-image`'s
+      `src` on both pages; on prep only, the flip button's `hx-get` target face) still work
+      and are documented in
+      [architecture.md](architecture.md#how-to-tell-which-face-is-showing-observables-for-tests)
+      but `data-current-face` is now the first choice, and the only strong one available in
+      the **game** modal (whose flip button is a `hx-post` to a toggling route, identical on
+      both faces).
+    - **The gap this closed**: both `foundFlipCard` loops in
+      `test/verification/verify-library-grouping.spec.ts` used to click the modal flip button
+      and assert only that the position indicator was unchanged — the property genuinely
+      under test (flipping must not renumber group-scoped navigation), but also what a
+      swallowed click produces. Both loops now additionally assert
+      `await expect(cardModal).toHaveAttribute('data-current-face', 'back', { timeout: 3000 })`
+      after the click, in both the game and prep flow, so a swallowed click now fails the test
+      instead of passing silently.
 16. **tldraw shape-selection/drag mechanics moved to its own owner** (2026-08-07). The
     `onClick`-defers-selection quirk found while fixing `959831c` (drag picking up the
     wrong card) is pure tldraw `SelectTool` mechanics, not a card-face concern — it and its

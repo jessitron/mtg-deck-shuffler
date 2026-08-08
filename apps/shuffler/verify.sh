@@ -32,6 +32,13 @@ VERIFY_PORT=$(( (RANDOM % 20000) + 20000 ))
 BASE_URL="http://localhost:$VERIFY_PORT"
 VERIFY_TABLETOP_PORT=$(( (RANDOM % 20000) + 40000 ))
 
+# A fresh SQLite file per run, same mechanism as the port above: the server
+# already reads SQLITE_DB_PATH (src/server.ts), falling back to ./data.db,
+# which is what Jess's own `./run` uses. Giving verify runs their own path
+# makes every run reproducible from a clean slate instead of inheriting
+# whatever the last run (or manual poking) left behind.
+VERIFY_DB_PATH="$(mktemp -u -t "mtg-verify-$VERIFY_RUN_ID").db"
+
 # Colors for output
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -77,26 +84,13 @@ fi
 export TABLETOP_URL="http://localhost:$VERIFY_TABLETOP_PORT"
 echo -e "${YELLOW}Tabletop address for this run: $TABLETOP_URL${NC}"
 
-# Cold or warm? data.db is never reset between runs, and four identical runs once
-# went 9.5 -> 5.4 -> 5.2 -> 3.6 minutes. So the suite has no single duration, and
-# every timing number needs its condition attached to mean anything.
-#
-# This has to happen BEFORE the server starts, because the server creates data.db
-# at boot and after that the question is unanswerable. Note the [ -f ] guard:
-# `stat` on a missing file exits nonzero, and `set -e` would turn a
-# telemetry-only addition into a hard verify failure on a fresh clone.
-if [ -f data.db ]; then
-    VERIFY_DATA_DB_EXISTED=true
-    VERIFY_DATA_DB_BYTES=$(wc -c < data.db | tr -d ' ')
-else
-    VERIFY_DATA_DB_EXISTED=false
-    VERIFY_DATA_DB_BYTES=0
-fi
-
-# Start server on the chosen port in the background
+# Start server on the chosen port in the background, against its own fresh
+# data.db (see VERIFY_DB_PATH above). The cold-vs-warm question this used to
+# guard against is answered — ticket 07 measured a cold run at 52.0s, no
+# slower than warm — so every run now starts cold on purpose.
 echo -e "${YELLOW}Starting server on port $VERIFY_PORT...${NC}"
 VERIFY_SERVER_START_MS=$(now_ms)
-PORT=$VERIFY_PORT node --import ./dist/tracing.js dist/server.js &
+PORT=$VERIFY_PORT SQLITE_DB_PATH="$VERIFY_DB_PATH" node --import ./dist/tracing.js dist/server.js &
 SERVER_PID=$!
 
 # Function to cleanup server on exit
@@ -106,6 +100,7 @@ cleanup() {
         kill $SERVER_PID 2>/dev/null || true
         wait $SERVER_PID 2>/dev/null || true
     fi
+    rm -f "$VERIFY_DB_PATH"
 }
 
 # Register cleanup function to run on script exit
@@ -139,7 +134,7 @@ done
 # too and silently move its spans to another dataset — see
 # test/harness-telemetry/harnessTracing.ts.
 echo -e "${YELLOW}Running verification tests...${NC}"
-echo -e "${YELLOW}Verify run id: $VERIFY_RUN_ID (data.db existed: $VERIFY_DATA_DB_EXISTED)${NC}"
+echo -e "${YELLOW}Verify run id: $VERIFY_RUN_ID${NC}"
 # set -e is off around this one command: `set -e` treats the whole env-var-prefixed
 # `npx playwright test` invocation as a single simple command, so a nonzero exit
 # would abort the script right here — before TEST_EXIT_CODE=$? below ever runs —
@@ -156,8 +151,6 @@ BASE_URL="$BASE_URL" \
     VERIFY_BUILD_END_MS="$VERIFY_BUILD_END_MS" \
     VERIFY_SERVER_START_MS="$VERIFY_SERVER_START_MS" \
     VERIFY_SERVER_READY_MS="$VERIFY_SERVER_READY_MS" \
-    VERIFY_DATA_DB_EXISTED="$VERIFY_DATA_DB_EXISTED" \
-    VERIFY_DATA_DB_BYTES="$VERIFY_DATA_DB_BYTES" \
     npx playwright test "$@"
 
 # Capture the exit code

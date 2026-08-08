@@ -14,70 +14,19 @@
  */
 
 import { test, expect, Page } from '@playwright/test';
+import { seedPrep, seedGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 const TWO_FACED_DECK = 'precon-mtgjson-FromCutetoBrute_SLD.json';
 
 test.setTimeout(90000);
 
-function extractPrepId(url: string): string | null {
-  const match = url.match(/\/prepare\/(\d+)/);
-  return match ? match[1] : null;
-}
-
-function extractGameId(url: string): string | null {
-  const match = url.match(/\/game\/(\d+)/);
-  return match ? match[1] : null;
-}
-
-/**
- * Select a specific precon deck by filename, submitting the form directly.
- */
-async function selectDeck(page: Page, deckFilename?: string): Promise<void> {
-  await page.goto(`${BASE_URL}/choose-any-deck`);
-
-  const firstTile = page.locator('.precon-tile').first();
-  await expect(firstTile).toBeVisible({ timeout: 15000 });
-
-  const deckFile = deckFilename
-    ? deckFilename
-    : await firstTile.getAttribute('value');
-
-  await page.evaluate((file: string) => {
-    const form = document.querySelector('form.precon-input-section') as HTMLFormElement;
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'precon-deck';
-    input.value = file;
-    form.appendChild(input);
-    form.submit();
-  }, deckFile!);
-
-  await page.waitForURL('**/prepare/*', { timeout: 60000 });
-}
-
 async function setupPrep(page: Page, deckFilename?: string): Promise<string> {
-  await selectDeck(page, deckFilename);
-
-  const prepId = extractPrepId(page.url());
-  if (!prepId) throw new Error('Failed to create prep');
-  return prepId;
+  return seedPrep(page, deckFilename);
 }
 
 async function setupGame(page: Page, deckFilename?: string): Promise<string> {
-  await selectDeck(page, deckFilename);
-
-  const shuffleButton = page.locator(
-    'button.begin-button, button.start-game-button, button:has-text("Shuffle Up")'
-  );
-  await expect(shuffleButton).toBeVisible({ timeout: 10000 });
-  await shuffleButton.click();
-
-  await page.waitForURL('**/game/*', { timeout: 30000 });
-
-  const gameId = extractGameId(page.url());
-  if (!gameId) throw new Error('Failed to create game');
-  return gameId;
+  return seedGame(page, deckFilename);
 }
 
 test.describe('Library Modal - Card Type Grouping', () => {
@@ -220,15 +169,15 @@ test.describe('Library Modal - Card Type Grouping', () => {
         const totalInGroup = positionMatch ? parseInt(positionMatch[2]) : 0;
         expect(totalInGroup).toBe(targetGroupSize);
 
-        // Flip the card.
-        // NOTE: unlike the clicks above, this one is not retried, because the
-        // assertion that follows cannot tell whether it landed — the position
-        // indicator reads the same before and after a flip, which is precisely
-        // what the test is asserting. A swallowed flip would still pass. That
-        // gap predates this change; see .scratch/verify-suite-speed/issues/02.
-        await flipButton.click();
+        // Flip the card and confirm the face actually changed — retried like
+        // the clicks above, since this one is also an htmx swap that can
+        // straddle the settle.
+        await expect(async () => {
+          await flipButton.click();
+          await expect(cardModal).toHaveAttribute('data-current-face', 'back', { timeout: 3000 });
+        }).toPass({ timeout: 20000 });
 
-        // After flip, position indicator should still show group-scoped count
+        // The flip preserves group-scoped navigation: position indicator unchanged
         await expect(positionIndicator).toHaveText(`Card ${currentPosition} of ${totalInGroup}`);
 
         // Navigate to next card (if not at end)
@@ -318,15 +267,15 @@ test.describe('Library Modal - Card Type Grouping', () => {
         const totalInGroup = positionMatch ? parseInt(positionMatch[2]) : 0;
         expect(totalInGroup).toBe(targetGroupSize);
 
-        // Flip the card.
-        // NOTE: unlike the clicks above, this one is not retried, because the
-        // assertion that follows cannot tell whether it landed — the position
-        // indicator reads the same before and after a flip, which is precisely
-        // what the test is asserting. A swallowed flip would still pass. That
-        // gap predates this change; see .scratch/verify-suite-speed/issues/02.
-        await flipButton.click();
+        // Flip the card and confirm the face actually changed — retried like
+        // the clicks above, since this one is also an htmx swap that can
+        // straddle the settle.
+        await expect(async () => {
+          await flipButton.click();
+          await expect(cardModal).toHaveAttribute('data-current-face', 'back', { timeout: 3000 });
+        }).toPass({ timeout: 20000 });
 
-        // After flip, position indicator should still show group-scoped count
+        // The flip preserves group-scoped navigation: position indicator unchanged
         await expect(positionIndicator).toHaveText(`Card ${currentPosition} of ${totalInGroup}`);
 
         // Navigate to next card (if not at end)

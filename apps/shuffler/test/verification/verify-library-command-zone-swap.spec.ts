@@ -11,27 +11,16 @@
  */
 
 import { test, expect, Page } from '@playwright/test';
+import { seedPrep, startGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
 async function setupGame(page: Page): Promise<{ prepUrl: string; gameUrl: string }> {
-  await page.goto(`${BASE_URL}/choose-any-deck`);
-
-  const preconTiles = page.locator('.precon-tile');
-  await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
-  await preconTiles.first().click();
-
-  await page.waitForURL('**/prepare/*', { timeout: 30000 });
-  const prepUrl = page.url();
-
-  const shuffleUpButton = page.locator('button.begin-button, button.start-game-button, button:has-text("Shuffle Up")');
-  await expect(shuffleUpButton).toBeVisible();
-  await shuffleUpButton.click();
-
-  await page.waitForURL('**/game/*', { timeout: 30000 });
-  return { prepUrl, gameUrl: page.url() };
+  const prepId = await seedPrep(page);
+  const gameId = await startGame(page, prepId);
+  return { prepUrl: `${BASE_URL}/prepare/${prepId}`, gameUrl: `${BASE_URL}/game/${gameId}` };
 }
 
 async function expectLibraryRightOfCommandZone(page: Page) {

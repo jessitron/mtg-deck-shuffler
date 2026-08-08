@@ -38,6 +38,15 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
 - **Adding a span type to a high-volume emitter**: ask **"what would I learn from this span?"**, never "what does it cost?". If the answer is "nothing, by construction" (a 3ms assertion, 200 static-asset fetches), threshold it and roll the small ones into attributes on the span that already exists (`test.expect.count`/`.total_ms`/`.suppressed_count` is the worked example). If it would answer a real question, emit it however many that is. Invariant 1 is a *signal* control, not a volume control.
 - **Deciding whether a trace is "too big"**: don't re-guess it — **~10,000 spans is where a waterfall gets hard to read; ~1,000 is comfortable** (Jess, 2026-08-07, from the real 1,090-span harness waterfall; three agent guesses before that were all too conservative). That is a *usability* ceiling, and it is unaffected by ingestion being free. The other surviving question is signal-to-noise: 10,000 trivial spans are harder to query well than 1,000 informative ones. README → Volume.
 - **Lowering `EXPECT_THRESHOLD_MS` in `otelReporter.ts`**: owner's call 2026-08-07 is **keep it at 100ms**, including while `verify-suite-speed` ticket 02 is active. It was never a cost measure — an assertion that resolved in 3ms hid no time by definition, so those spans are confirmed-empty. Lower it for one investigative run if a specific question needs it; don't change the default.
+- **Looking for `verify.data_db.existed` / `verify.data_db.bytes` in Honeycomb**: they're gone,
+  retired in `verify-suite-speed` ticket 07 (2026-08-07, `6d0a67a`) — `verify.sh` now gives every
+  run its own fresh `SQLITE_DB_PATH`, so the cold/warm condition they tracked no longer varies.
+  Don't reintroduce them as a "helpful" restore; a condition that's now constant makes the
+  attribute worthless, not just outdated. README → Dev-tooling telemetry.
+- **Adding a per-run resource override in `verify.sh` (a temp file, a temp path, anything scoped to
+  one run)**: copy the existing shape — mint it keyed to `VERIFY_RUN_ID` (or similarly unique),
+  pass it inline on the one command that needs it (never `export`), clean it up in the `cleanup()`
+  trap. `VERIFY_PORT` and `VERIFY_DB_PATH` are both this shape now; don't invent a second one.
 - **Synthesizing spans from timestamps captured outside the process**: OTel reads a bare number as **millis** and errors on none of the ways you can get it wrong (seconds → 1970, nanos → year 55000, `undefined` → `NaN`). Validate against a plausibility window and skip the span rather than emit garbage. Recipe in README → Dev-tooling telemetry.
 - **Upgrading `@opentelemetry/*`**: bare `GET` spans with no `http.route` afterward = ESM patching broke. Check the loader wiring (`node --import`, `register(...)`).
 - **Touching `apps/shuffler/src/telemetry-sampler.ts`**: keep `test/telemetry-sampler.test.ts` passing and meaningful — the previous inline sampler was silently broken for months (see README → History).

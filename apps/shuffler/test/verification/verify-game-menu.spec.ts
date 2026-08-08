@@ -12,34 +12,15 @@
  */
 
 import { test, expect } from '@playwright/test';
+import { seedGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
-function extractGameId(url: string): string | null {
-  const match = url.match(/\/game\/(\d+)/);
-  return match ? match[1] : null;
-}
-
 async function setupGame(page: any): Promise<string> {
-  await page.goto(`${BASE_URL}/choose-any-deck`);
-
-  const preconTiles = page.locator('.precon-tile');
-  await expect(preconTiles.first()).toBeVisible({ timeout: 10000 });
-  await preconTiles.first().click();
-
-  await page.waitForURL('**/prepare/*', { timeout: 30000 });
-
-  const shuffleUpButton = page.locator('button.begin-button, button.start-game-button, button:has-text("Shuffle Up")');
-  await expect(shuffleUpButton).toBeVisible();
-  await shuffleUpButton.click();
-
-  await page.waitForURL('**/game/*', { timeout: 30000 });
-
-  const gameId = extractGameId(page.url());
-  if (!gameId) throw new Error('Failed to create game');
-
+  const gameId = await seedGame(page);
+  await page.goto(`${BASE_URL}/game/${gameId}`);
   return gameId;
 }
 
@@ -119,10 +100,16 @@ test.describe('Game Hamburger Menu', () => {
     await page.locator('button.draw-button').click();
     await expect(handCount).toHaveText(String(before + 1));
 
-    // Standard undo hotkey (Ctrl on Linux/Win, Meta on Mac).
-    await page.keyboard.press('ControlOrMeta+z');
-
-    await expect(handCount).toHaveText(String(before));
+    // Standard undo hotkey (Ctrl on Linux/Win, Meta on Mac). game.js's keydown
+    // handler clicks the hamburger's live `.undo-button`, which is swapped in
+    // out-of-band after every action — a keypress landing mid-swap is the same
+    // click-straddles-settle race documented in owners/animations/interactions.md,
+    // just fired via keyboard instead of a direct click. Retry until it lands.
+    await expect(async () => {
+      if ((await handCount.textContent()) === String(before)) return;
+      await page.keyboard.press('ControlOrMeta+z');
+      await expect(handCount).toHaveText(String(before), { timeout: 3000 });
+    }).toPass({ timeout: 20000 });
 
     console.log('SUCCESS: Ctrl/Cmd+Z undid the draw');
   });

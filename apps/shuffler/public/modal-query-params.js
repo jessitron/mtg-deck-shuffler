@@ -20,23 +20,26 @@
  * - ?openLibrary=true&openCard=N - Opens library modal with card N overlaid
  */
 
-function autoOpenModalsFromQueryParams() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const currentPath = window.location.pathname;
+/**
+ * Pure: decides which modal(s) should auto-open from the URL alone, as a list
+ * of actions for autoOpenModalsFromQueryParams to execute. No DOM access, so
+ * this is what test/modal-query-params.test.ts exercises directly across all
+ * the parameter combinations — the DOM-touching executor below stays a thin,
+ * untested-by-necessity wrapper.
+ */
+function planAutoOpenActions(search, pathname) {
+  const urlParams = new URLSearchParams(search);
 
-  // Extract game ID or prep ID from the URL
-  const gameMatch = currentPath.match(/\/game\/(\d+)/);
-  const prepMatch = currentPath.match(/\/prepare\/(\d+)/);
+  const gameMatch = pathname.match(/\/game\/(\d+)/);
+  const prepMatch = pathname.match(/\/prepare\/(\d+)/);
 
   if (!gameMatch && !prepMatch) {
-    return; // Not on a game or prep page
+    return []; // Not on a game or prep page
   }
 
   const isGamePage = !!gameMatch;
-  const isPrepPage = !!prepMatch;
   const id = gameMatch ? gameMatch[1] : prepMatch[1];
 
-  // Check which modals to open
   const openCard = urlParams.get('openCard');
   const openLibrary = urlParams.get('openLibrary');
   const groupBy = urlParams.get('groupBy');
@@ -44,59 +47,64 @@ function autoOpenModalsFromQueryParams() {
   const openHistory = urlParams.get('openHistory');
   const openDebug = urlParams.get('openDebug');
 
-  // Determine which modal(s) to open and in what order
-  // Card modal overlays on other modals, so open it last
-  // For modals with buttons, click the button to avoid duplicating HTMX logic
+  const actions = [];
 
+  // Card modal overlays on other modals, so it's always planned last.
   if (isGamePage) {
-    // Game page modals - click the corresponding button
     if (openLibrary === 'true') {
-      if (groupBy) {
-        const gameContainer = document.querySelector('#game-container');
-        const expectedVersion = gameContainer?.dataset.expectedVersion;
-        const versionParam = expectedVersion ? `&expected-version=${expectedVersion}` : '';
-        htmx.ajax('GET', `/library-modal/${id}?groupBy=${groupBy}${versionParam}`, { target: '#modal-container' });
-      } else {
-        document.querySelector('.search-button')?.click();
-      }
+      actions.push(groupBy
+        ? { type: 'ajax', method: 'GET', path: `/library-modal/${id}?groupBy=${groupBy}`, target: '#modal-container', withExpectedVersion: true }
+        : { type: 'click', selector: '.search-button' });
     } else if (openTable === 'true') {
-      document.querySelector('.table-cards-button')?.click();
+      actions.push({ type: 'click', selector: '.table-cards-button' });
     } else if (openHistory === 'true') {
-      document.querySelector('.history-button')?.click();
+      actions.push({ type: 'click', selector: '.history-button' });
     } else if (openDebug === 'true') {
-      document.querySelector('.debug-button')?.click();
+      actions.push({ type: 'click', selector: '.debug-button' });
     }
 
-    // Open card modal (possibly overlaying another modal)
-    // Card modals don't have a simple button, so use htmx.ajax directly
     if (openCard !== null) {
-      // Use a small delay if another modal is being opened first
       const delay = (openLibrary === 'true' || openTable === 'true') ? 300 : 0;
-      setTimeout(() => {
-        // Get expected version from game container if available
-        const gameContainer = document.querySelector('#game-container');
-        const expectedVersion = gameContainer?.dataset.expectedVersion;
-        const versionParam = expectedVersion ? `?expected-version=${expectedVersion}` : '';
-        htmx.ajax('GET', `/card-modal/${id}/${openCard}${versionParam}`, { target: '#card-modal-container' });
-      }, delay);
+      actions.push({ type: 'ajax', method: 'GET', path: `/card-modal/${id}/${openCard}`, target: '#card-modal-container', delay, withExpectedVersion: true });
     }
-  } else if (isPrepPage) {
-    // Prep page modals - click the search button
+  } else {
     if (openLibrary === 'true') {
-      if (groupBy) {
-        htmx.ajax('GET', `/prep-library-modal/${id}?groupBy=${groupBy}`, { target: '#modal-container' });
-      } else {
-        document.querySelector('.search-button')?.click();
-      }
+      actions.push(groupBy
+        ? { type: 'ajax', method: 'GET', path: `/prep-library-modal/${id}?groupBy=${groupBy}`, target: '#modal-container' }
+        : { type: 'click', selector: '.search-button' });
     }
 
-    // Open card modal (possibly overlaying library modal)
-    // Card modals don't have a simple button, so use htmx.ajax directly
     if (openCard !== null) {
       const delay = (openLibrary === 'true') ? 300 : 0;
-      setTimeout(() => {
-        htmx.ajax('GET', `/prep-card-modal/${id}/${openCard}`, { target: '#card-modal-container' });
-      }, delay);
+      actions.push({ type: 'ajax', method: 'GET', path: `/prep-card-modal/${id}/${openCard}`, target: '#card-modal-container', delay });
+    }
+  }
+
+  return actions;
+}
+
+function runAjaxAction(action) {
+  let path = action.path;
+  if (action.withExpectedVersion) {
+    const gameContainer = document.querySelector('#game-container');
+    const expectedVersion = gameContainer?.dataset.expectedVersion;
+    if (expectedVersion) {
+      path += (path.includes('?') ? '&' : '?') + `expected-version=${expectedVersion}`;
+    }
+  }
+  htmx.ajax(action.method, path, { target: action.target });
+}
+
+function autoOpenModalsFromQueryParams() {
+  const actions = planAutoOpenActions(window.location.search, window.location.pathname);
+
+  for (const action of actions) {
+    if (action.type === 'click') {
+      document.querySelector(action.selector)?.click();
+    } else if (action.delay) {
+      setTimeout(() => runAjaxAction(action), action.delay);
+    } else {
+      runAjaxAction(action);
     }
   }
 }

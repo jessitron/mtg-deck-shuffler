@@ -196,9 +196,11 @@ every `waitForTimeout`) — to service **`mtg-fleet-verify`**, team `modernity`,
   tracing every static asset at 100%. Harness and app spans correlate by run id and time instead.
 - **Telemetry is never fatal and never blocking**: no `.be`, a bad key, or a hung exporter all
   leave the suite's exit code alone. A bare `npx playwright test` with nothing sourced stays silent.
-- **`data.db` is never reset**, so runs get faster as it warms (9.5 → 3.6 min has been seen).
-  `verify.data_db.existed` / `.bytes` are on every span for exactly this reason — a timing number
-  without its cold/warm condition means nothing.
+- **Each run gets its own fresh SQLite file** (`VERIFY_DB_PATH` in `verify.sh`, passed to the
+  server as `SQLITE_DB_PATH`, deleted in the exit trap). Every run starts cold and reproducible,
+  never touching `./data.db` (the file `./run` uses). Ticket 07 measured a cold run at 52.0s — no
+  slower than warm — so this cost nothing; the old `verify.data_db.existed`/`.bytes` attributes
+  are gone, since every run's answer is now the same.
 - Suite-speed findings and the optimization work: `.scratch/verify-suite-speed/`.
 
 ## Environment & Persistence

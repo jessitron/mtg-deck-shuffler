@@ -49,6 +49,24 @@ in under a minute and every remaining test is one we'd miss, this effort is done
   — swept `waitForTimeout` and `networkidle` out of the specs: **225.0s → 106.5s**. The
   animations owner confirms the mulligan/shuffle path has no sleep left to reclaim. This lever
   is spent; everything remaining is structural.
+- [The suite's setup cost: 42 trips to /choose-any-deck](issues/03-setup-cost-and-isolation.md)
+  — seed, don't navigate: `test/verification/seedGame.ts` seeds every spec but one (the real
+  click-through stays in `verify-precon-to-prepare.spec.ts`) through `POST /deck` +
+  `POST /start-game`. **106.5s → ~55s.** Uncovered a pre-existing Ctrl+Z undo race (same
+  click-straddles-settle class as the animations owner's documented click flake); fixed with
+  the suite's usual `toPass()` retry.
+- [Decide which verification tests are superfluous](issues/04-which-tests-are-superfluous.md)
+  — three cuts: strengthened the vacuous flip assertion (`data-current-face` on the card modal,
+  cleared by the two-faced-cards owner), kept both game/prep flip loops (different mechanisms),
+  and trimmed `verify-query-parameter-modals.spec.ts` from 14 browser cases to 5, moving the
+  other 9 to a new fast unit test (`test/modal-query-params.test.ts`, loads the real script via
+  `vm`, no jsdom). **56.3s → 50.2s.**
+- [The suite runs against a shared 37 MB `data.db` that is never reset](issues/07-the-suite-runs-against-a-37mb-database.md)
+  — measured cold start first: 52.0s, no slower than warm, so speed was never the risk. Chose
+  fresh SQLite file per run anyway, for determinism: `VERIFY_DB_PATH` → `SQLITE_DB_PATH`, deleted
+  in the exit trap, zero app changes needed. Retired the now-meaningless
+  `verify.data_db.existed`/`.bytes` telemetry attributes. **50.2s → 49.7s** (within noise; the
+  win here is reproducibility, not speed) — and removes the shared-state race 06 was worried about.
 
 ## Measured baseline (run `96588aeb`, git `e1ca060`, warm)
 
@@ -76,16 +94,13 @@ ticket 11.
 
 ## Not yet specified
 
-- **Cold start is unmeasured.** All 13 runs in telemetry have `verify.data_db.existed = true`.
-  `verify.sh` never resets the 37 MB `data.db`, which grows ~1 MB per run. The cold/warm delta
-  is *absent from the data*, not merely unqueried — and CI pays cold every time. Ticket 07 opens
-  this; what it finds may graduate further work.
 - **A regression alarm.** The suite now traces itself, so "the suite got slower" is a queryable
   fact. Whether that becomes a Honeycomb trigger, a threshold in `verify.sh`, or nothing at all
   is undecided — and probably shouldn't be decided until the suite is at its target.
-- **Whether 60s survives contact.** If 03 + 04 + 06 + 11 land and the suite sits at, say, 68s,
-  the remaining gap may be a long tail of small things with no single lever. What that tail
-  looks like isn't visible until the big levers land.
+- ~~**Whether 60s survives contact.**~~ Resolved: re-measured post-03 (ticket 04's resolution
+  thread), **56.3s total**, comfortably under 60s — before 04, 06, or 11 land. The destination's
+  third clause is met; 04, 06, 11 are now about the first two clauses (no useless tests, no
+  wasted time), not about clawing back to 60s.
 - **The other two ships.** The Tabletop (`vitest`) and Spine (Rails `test/`) suites have never
   been measured. Whether they have the same disease is unknown; see Out of scope.
 
@@ -102,3 +117,6 @@ ticket 11.
   visit](issues/05-deck-chooser-ships-191-images.md) — ruled out of scope 2026-08-07 once ticket
   03's decision 1 (seed via API) removed 41 of 42 `/choose-any-deck` navigations from the suite.
   A real problem for real players, just not a test-speed one anymore; moved to `TODO.md`.
+- [Route card images through the backend instead of straight to Scryfall](issues/11-route-card-images-through-the-backend.md)
+  — ruled out of scope 2026-08-07. Jess wants the change, just not as part of this effort right
+  now; moved to `TODO.md` as `card-images-through-backend`.
