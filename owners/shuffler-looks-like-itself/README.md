@@ -78,7 +78,15 @@ furniture becomes a custom `mtg-zone` shape.
   can *never* be on-brand — today's `serif` zone labels aren't a design choice, they're the
   enum. This is the strongest design argument for a custom shape, and it generalizes: **any
   text the fleet wants on a canvas in a fleet typeface has to come from a self-rendering
-  shape.**
+  shape.** **Confirmed working, not just argued, 2026-08-08** (tabletop-physics ticket 13):
+  `MtgZoneShapeUtil`'s `component()` sets `fontFamily: "var(--font-chrome)"` on a plain `div`
+  inside `HTMLContainer`, and it resolves to Orbitron — checked both by reading the DOM's
+  computed `font-family` in a live browser and by screenshot. `HTMLContainer` is an
+  unshadowed div, so the `:root` custom properties from `main.tsx`'s
+  `@fleet/design-tokens/tokens.css` import reach it by ordinary CSS inheritance, no special
+  plumbing required. This is the first fleet-token consumer inside a genuine self-rendering
+  canvas shape — the mechanism was designed for exactly this case (`f79bc7d`) but had never
+  been exercised until now. See [history.md](history.md) for the verification detail.
 - **Layer 1's focus rule cannot reach a canvas shape.** The global `:focus-visible` rule is
   DOM-only, and tldraw owns selection indication for shapes. This is a genuine exemption from
   the "every interactive element gets a visible focus state" rule, not an oversight — say so

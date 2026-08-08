@@ -427,10 +427,15 @@ not by recomputing new numbers.**
   thing to block.
 - **A canvas shape has a name for its font and its radius now** (`f79bc7d`, 2026-08-07).
   `--font-chrome`/`--font-content`/`--font-display` and `--radius-soft` are in the shared package
-  specifically for this case. A `.tsx` shape can't `var()`, but it can read them off the computed
-  root style, or at minimum cite them — **what it must not do is retype `"Orbitron", sans-serif`
-  or a bare `4px` as if it were choosing.** Nothing on the Tabletop uses them yet; ticket 11's
-  `mtg-zone` is the first customer.
+  specifically for this case. **Correction: a `.tsx` shape *can* `var()`** — this was written
+  when nothing had tried it. `MtgZoneShapeUtil` (ticket 13, 2026-08-08) sets
+  `fontFamily: "var(--font-chrome)"` directly in an inline style on a plain div inside
+  `HTMLContainer`, and it resolves to Orbitron: `HTMLContainer` is unshadowed DOM, so `:root`
+  custom properties reach it the same way they'd reach any other element on the page. **What it
+  must not do is retype `"Orbitron", sans-serif` or a bare `4px` as if it were choosing** — that
+  part still holds, it's just enforced by writing `var(--font-chrome)` rather than by copying a
+  computed value. `mtg-zone` is the first customer, confirmed working; `--radius-soft` on a
+  canvas shape is still unexercised.
 - **A geometry value meant to look consistent across zoom/resize cannot be a static CSS
   value at all — it has to be computed in TypeScript at render time** (decided 2026-08-07,
   ticket 11, `a304c52`; playmat corner radius). Two wrong framings, in order, worth expecting

@@ -1026,3 +1026,58 @@ arranges already-parametrized rectangles in space, it doesn't introduce a new st
 play experience."* Recorded as a first build to react to, not a layout to defend — worth
 remembering before anyone treats the N/E/S/W assignment as more settled than it is.
 
+## 2026-08-08 — a fleet token resolved inside a canvas shape for the first time
+
+`.scratch/tabletop-physics/issues/13-*.md`, `f66b0a5` (**Replace furniture with the mtg-zone
+custom shape**) then `d35c090` (label-size follow-up), then a same-day working-tree fix. The
+`mtg-zone` custom shape (`MtgZoneShapeUtil.tsx`) landed with its zone labels ("Graveyard",
+"Exile", "Library", "The Stack") in `d35c090` set to `var(--tl-font-serif)` — a deliberate
+placeholder, tldraw's own token, chosen for size/legibility parity with the stock `geo` label
+it replaced, with a comment saying the retokenized look was ticket 14's job. That placeholder
+was then swapped for `fontFamily: "var(--font-chrome)"` the same day, because — unlike the
+*border* colour, which really is ticket 14's undecided territory — the label's typeface was
+never actually open: Orbitron-for-chrome is the settled fleet rule, and nothing about a canvas
+region label is different from a UI heading.
+
+**This is the first time a fleet token has been asked to resolve inside a genuine
+self-rendering canvas shape, and it worked, which retires two years-old open questions at
+once.** `f79bc7d` (2026-08-07) named `--font-chrome` partly *for* this future case but nobody
+had tried it; this owner's own [interactions.md](interactions.md) said flatly "a `.tsx` shape
+can't `var()`, but it can read them off the computed root style" — wrong, and now corrected.
+`MtgZoneShapeUtil`'s `component()` sets `fontFamily: "var(--font-chrome)"` as a plain inline
+style on a `<div>` inside tldraw's `HTMLContainer`, and it resolves to Orbitron.
+
+**Why it works, mechanically, worth remembering because it generalizes beyond fonts.**
+`HTMLContainer` (`node_modules/@tldraw/editor`) is an ordinary unshadowed `div` — tldraw does
+not put shape content behind a Shadow DOM boundary or an iframe. `main.tsx` imports
+`@fleet/design-tokens/tokens.css` at module scope, which defines the tokens on `:root` before
+`<App/>` ever renders. A custom property defined on `:root` cascades into any descendant DOM
+node exactly the way it would on a normal page, and an inline `style={{ fontFamily: "var(...)"
+}}` is resolved by the browser's ordinary CSS engine at computed-style time — inline styles
+are not special-cased out of custom-property resolution. So **any DOM-rendering custom
+shape** — not just `mtg-zone` — can consume `--font-chrome`/`--font-content`/`--font-display`/
+`--radius-soft` (or any future shared token) the same way, with no per-shape plumbing. The
+caveat that *does* still hold: this is the live DOM only. `toSvg()` canvas export still has to
+hand-write the resolved value into the exported SVG, since an exported SVG has no live `:root`
+to inherit from — that cost (flagged in [interactions.md](interactions.md) → "designing
+anything inside the tldraw canvas") is unaffected by this finding.
+
+**Verified two ways**, not just asserted: (1) DOM inspection in a live browser — the label
+`div`'s computed `font-family` is `Orbitron, sans-serif`, and the inline style literally reads
+`var(--font-chrome)`; (2) a screenshot showing the labels rendering in Orbitron's geometric
+look, not a system serif/sans fallback.
+
+**Corrected as stale by this finding:** [README.md](README.md) → "tldraw limits" used to imply
+the font-token mechanism was theoretical ("should reach the canvas"); it now says confirmed,
+with the verification method. `apps/tabletop/CLAUDE.md` → "UI Style" had a line reading
+"Orbitron still doesn't reach tldraw canvas text... loading it was necessary, not sufficient" —
+true when only stock `geo` shapes existed (the `font` enum still has no Orbitron in it, so that
+half is unchanged), but stated as if no canvas text could ever be on-brand, which `mtg-zone`
+now disproves for self-rendering shapes. Needs its own fix in that file, tracked separately
+since it isn't part of this owner's KB.
+
+**What's still open, unchanged by this:** the zone's *border* — dashed-grey at rest, playmat's
+plain black — remains today's placeholder look, explicitly deferred to ticket 14, which also
+owns the armed-glow retokenization. Only the label typeface was settled territory; nothing
+about the border question moved.
+

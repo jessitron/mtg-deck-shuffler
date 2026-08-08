@@ -49,9 +49,14 @@ Two things to know before you write any styling here:
   never by declaring a `:root` here**; a second dictionary is exactly what that package exists
   to prevent. There is still **no ship-local stylesheet** — the first Tabletop-only rule needs
   somewhere to live, and that's an open choice, not a solved one.
-  - **Orbitron still doesn't reach tldraw canvas text.** The `geo` shape's `font` prop is a
-    closed enum with no Orbitron in it, so only a self-rendering custom shape can use it on
-    canvas. Loading it was necessary, not sufficient.
+  - **Orbitron reaches tldraw canvas text only through a self-rendering custom shape — never
+    through a stock `geo` shape.** The `geo` shape's `font` prop is a closed enum with no
+    Orbitron in it, so a stock label can never be on-brand no matter what's loaded. A custom
+    shape has no such limit: `MtgZoneShapeUtil` (tabletop-physics ticket 13, 2026-08-08) sets
+    `fontFamily: "var(--font-chrome)"` on a plain `div` inside `HTMLContainer` and it resolves
+    to Orbitron, confirmed in a live browser. `HTMLContainer` is an unshadowed div, so `:root`
+    tokens reach it by ordinary CSS inheritance — loading the font was necessary and, for a
+    self-rendering shape, sufficient. See the owner's README → "tldraw limits" for the detail.
   - The green/cream inline palette in `src/client/LandingPage.tsx` (`#1a2a1f`, `#f5f1e8`,
     `#3d5a45`) is still a known violation, not a house style — don't match it. Fixing it is a
     real appearance decision needing Jess's sign-off, not a mechanical `var()` swap; buoyed as
