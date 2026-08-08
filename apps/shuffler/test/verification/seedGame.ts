@@ -1,9 +1,7 @@
 /**
  * Seed a prep/game directly through the API instead of clicking through
- * /choose-any-deck. See `.scratch/verify-suite-speed/issues/03-setup-cost-and-isolation.md`
- * (decision 1): the click-through costs ~1.3s per navigation because the deck
- * chooser renders 191 remote Scryfall images, and 41 of 42 specs don't need to
- * re-prove that path — `verify-precon-to-prepare.spec.ts` is the one that does.
+ * /choose-any-deck. `verify-precon-to-prepare.spec.ts` is the one spec that
+ * still exercises the real click-through.
  *
  * `page.request` is used (not a bare `request` fixture) so the seeded prep/game
  * cookies land in the same browser context the test goes on to interact with.

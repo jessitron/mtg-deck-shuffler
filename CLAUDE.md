@@ -195,13 +195,13 @@ the answers.
 
 **Test-only changes are not exempt, but they're narrow.** Deleting a wait from a test is a
 claim about app behaviour — that nothing needs that time. That claim needs the owner of the
-_timing_, not the owner of every feature the spec happens to exercise. Worked example
-(2026-08-07, ticket `verify-suite-speed/02`): sweeping sleeps out of the Playwright suite,
-`animations-context` was decisive — it supplied the htmx swap/settle mechanism, the fact that
-`{ force: true }` disables the actionability wait that would otherwise absorb it, and the
-repo's existing `expect(...).toPass()` convention. `two-faced-cards` and `library-search` own
-the features those specs cover and would have added nothing to that question. One consult, not
-three. Conversely, a test change that only renames or reorganises needs no owner at all.
+_timing_, not the owner of every feature the spec happens to exercise. Worked example: sweeping
+sleeps out of the Playwright suite, `animations-context` was decisive — it supplied the htmx
+swap/settle mechanism, the fact that `{ force: true }` disables the actionability wait that
+would otherwise absorb it, and the repo's existing `expect(...).toPass()` convention.
+`two-faced-cards` and `library-search` own the features those specs cover and would have added
+nothing to that question. One consult, not three. Conversely, a test change that only renames or
+reorganises needs no owner at all.
 
 **Be precise about what's being approved.** "Move this element" is a _placement_ decision.
 Restyling it on the way is a _second_ decision needing its own explicit sign-off — never let

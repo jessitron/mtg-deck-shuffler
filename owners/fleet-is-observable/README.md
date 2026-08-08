@@ -254,18 +254,18 @@ The shape, and why each piece:
   established way to do this. Carries `verify.run.id`, `verify.ship`, `verify.git.sha`. On every span,
   not just the root, so the run survives a fragmented trace and so per-condition breakdowns are
   possible.
-- **RETIRED (2026-08-07, `verify-suite-speed` ticket 07): `verify.data_db.existed` /
-  `verify.data_db.bytes`.** These used to carry the cold/warm condition, because `data.db` was never
-  reset between runs and four identical runs went 9.5 → 5.4 → 5.2 → 3.6 minutes purely from cache
-  warmth — a duration without its cold/warm flag was not a number, it was a rumour. Ticket 07 gave
-  every `verify.sh` run its **own fresh SQLite file** (`VERIFY_DB_PATH`, deleted in the exit trap;
-  see "How it works now" below), so every run is cold now, on purpose, and measured as no slower
-  (52.0s cold, in line with prior warm runs). Once every run answers the same, the attribute answers
-  nothing — worse, it would read as still-meaningful telemetry that is now permanently `false`/`0`, a
-  fails-open-invisibly regression of the same shape this file keeps cataloguing. So the attribute-setting
-  code was deleted from `otelReporter.ts` rather than left to silently stop meaning anything. **If you
-  go looking for `verify.data_db.existed`/`.bytes` in Honeycomb, they stopped being emitted after this
-  commit — don't read their absence as a pipeline break.**
+- **RETIRED: `verify.data_db.existed` / `verify.data_db.bytes`.** These used to carry the
+  cold/warm condition, because `data.db` was never reset between runs and four identical runs
+  went 9.5 → 5.4 → 5.2 → 3.6 minutes purely from cache warmth — a duration without its cold/warm
+  flag was not a number, it was a rumour. Every `verify.sh` run now gets its **own fresh SQLite
+  file** (`VERIFY_DB_PATH`, deleted in the exit trap; see "How it works now" below), so every run
+  is cold now, on purpose, and measured as no slower (52.0s cold, in line with prior warm runs).
+  Once every run answers the same, the attribute answers nothing — worse, it would read as
+  still-meaningful telemetry that is now permanently `false`/`0`, a fails-open-invisibly
+  regression of the same shape this file keeps cataloguing. So the attribute-setting code was
+  deleted from `otelReporter.ts` rather than left to silently stop meaning anything. **If you go
+  looking for `verify.data_db.existed`/`.bytes` in Honeycomb, they stopped being emitted — don't
+  read their absence as a pipeline break.**
 - **Non-default `BatchSpanProcessor` settings are required at this volume**: `maxQueueSize: 8192`,
   `scheduledDelayMillis: 1000`. The defaults (2048 / 5000ms) drop on overflow **silently**, and the
   root's own `verify.span.count` counts spans *emitted*, not *exported* — invisible twice over.
@@ -275,12 +275,11 @@ The shape, and why each piece:
   hid no time by definition, so it becomes `test.expect.count` / `.total_ms` /
   `.suppressed_count` on the test span instead of a span of its own. `EXPECT_THRESHOLD_MS` in
   `otelReporter.ts`. **This threshold is not a cost measure** — it exists because a 3ms assertion
-  span answers no question anybody asks. Owner's call (2026-08-07): **keep it at 100ms**, including
-  while `verify-suite-speed` ticket 02 is active. The suite is optimizing against *where the time
-  went*, and by construction the suppressed spans contain none of it; dropping to 0 would add
-  ~1,000–2,000 spans of confirmed-empty duration to every waterfall. If a specific ticket-02
-  question actually needs sub-100ms fidelity, lower it for that run rather than for the default —
-  the dial is one constant and the aggregates all carry `verify.run.id`.
+  span answers no question anybody asks. Owner's call: **keep it at 100ms**. The suite optimizes
+  against *where the time went*, and by construction the suppressed spans contain none of it;
+  dropping to 0 would add ~1,000–2,000 spans of confirmed-empty duration to every waterfall. If a
+  specific investigation actually needs sub-100ms fidelity, lower it for that run rather than for
+  the default — the dial is one constant and the aggregates all carry `verify.run.id`.
 - **Telemetry is never fatal and never blocking.** Same posture as `deploy-marker.sh`'s `|| true`:
   an empty Honeycomb team key counts as unconfigured, `shutdown()` is bounded by a `Promise.race`
   with an `unref`'d timer, and every reporter hook is wrapped. Proven end to end with a
@@ -373,8 +372,8 @@ on the machine where the file exists.
   synchronous throw). Not buoyed as its own ticket.
 
 **Per-run isolation follows the same one-line-override pattern as the port.** `verify.sh` already
-gave each run its own `VERIFY_PORT`; since `verify-suite-speed` ticket 07 (2026-08-07) it does the
-same for persistence: `VERIFY_DB_PATH="$(mktemp -u -t "mtg-verify-$VERIFY_RUN_ID").db"`, passed
+gave each run its own `VERIFY_PORT`; it does the same for persistence:
+`VERIFY_DB_PATH="$(mktemp -u -t "mtg-verify-$VERIFY_RUN_ID").db"`, passed
 inline as `SQLITE_DB_PATH="$VERIFY_DB_PATH"` on the same `node --import ./dist/tracing.js
 dist/server.js &` line that sets `PORT=$VERIFY_PORT` — no app change needed, since
 `src/server.ts` already read `SQLITE_DB_PATH || "./data.db"` at all three adapter construction
@@ -588,7 +587,7 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
     row beside it).
   - New shape of the question: **"what would I learn from this span?"**, not "what does it cost?"
   - Two owner's calls made on the spot: **`EXPECT_THRESHOLD_MS` stays at 100** even with ~9× trace
-    headroom and ticket 02 active, because the suppressed spans are empty *by construction* and
+    headroom, because the suppressed spans are empty *by construction* and
     would dilute the dataset they're meant to explain; and **the correction does not license
     volume-indifference** — this KB now names signal-to-noise as the surviving reason to be
     deliberate, so the next agent can't read "free" as "unbounded".
@@ -597,48 +596,16 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
     formed elsewhere. Assumptions about the world outside the code deserve the same "measure, don't
     reason" treatment as `node_modules`. Ask Jess.
 
-- **`08-no-shutdown-flush-hook` (2026-08-07)** — closed the gap this KB's own wiring table had
-  been carrying: "logs share the shutdown path with traces" described the SDK's design, not
-  reality, because `apps/shuffler/src/tracing.ts` called `sdk.start()` and registered no
-  shutdown hook at all. With no handler, Node terminates on SIGTERM immediately — dropping
-  whatever batch hadn't flushed (up to `BatchSpanProcessor`'s 5s `scheduledDelayMillis`) — on
-  **every** `verify.sh` run (its `cleanup()` sends SIGTERM) and **every** k8s pod termination
-  in prod. Fixed with a new `apps/shuffler/src/shutdownHooks.ts` (`installShutdownHandlers`,
-  see the wiring table). Worth carrying forward, all previously flagged by this owner's
-  `-review` and confirmed true:
-  - **Installing a signal handler changes Node's default behavior.** Once one exists, Node no
-    longer exits on its own — the handler must call `exit()` itself after the drain settles, or
-    every SIGTERM hangs the process forever. The easiest way to get this exactly backwards.
-  - **`sdk.shutdown()` can hang or reject** (the exporter-robustness findings under "Volume"
-    above are the same family of bug), so the drain is bounded by a `Promise.race` against an
-    `unref()`'d timer — copying the harness's `bounded()` shape rather than inventing a new one.
-  - **Idempotency**: both SIGTERM and SIGINT must trigger shutdown, but only once.
-  - Verified end to end, not just "didn't hang": built `dist/`, ran the real server with
-    `.be`/`.env` sourced (the fleet's real order), curled a request, sent SIGTERM ~6s later, and
-    confirmed via the `honeycomb-modernity` MCP server (team `modernity`, env `local`, dataset
-    `mtg-deck-shuffler`) that both spans for that exact request (matching PID) landed. Process
-    exited code 0, no hang, no force-kill.
-  - No change needed to `apps/shuffler/verify.sh` — its existing `kill`/`wait` cleanup already
-    tolerated a slower-to-exit process.
-  - This is the Tabletop's gap too (its `tracing.ts` also calls `sdk.start()` with no shutdown
-    hook) — not yet fixed there; the pattern is now available to copy.
-
-- **`verify-suite-speed` ticket 07 (2026-08-07, `6d0a67a`) "fresh data.db per verify run"** — removed
-  the mechanism that the `verify.data_db.existed`/`.bytes` attributes existed to measure. Every
-  `verify.sh` run now gets its own `SQLITE_DB_PATH` (mktemp'd, deleted in the exit trap) instead of
-  the shared, never-reset `./data.db`; a cold run measured at 52.0s, no slower than warm, so
-  isolation cost nothing. Two things worth carrying forward:
-  - **A condition that stops varying makes its own telemetry attribute worthless, and worse than
-    absent.** Once every run is cold, `verify.data_db.existed` would read `false` forever and
-    `verify.data_db.bytes` would read `0` forever — not an error, just quietly meaningless, which is
-    the same fails-open-invisibly shape this file keeps finding elsewhere (the sampler needle, the
-    sibling log processor, deploy markers to the wrong environment). The fix here was to **delete**
-    the attribute-setting code in `otelReporter.ts`, not leave it emitting a constant. See "Dev-tooling
-    telemetry" above for where they used to be documented.
-  - **Per-run isolation for a resource (SQLite file) followed the exact shape already established for
-    a resource of the same kind (the port)**: mint a fresh value keyed to the run, pass it inline on
-    the one command that needs it, clean it up in the exit trap. No new pattern was invented; the
-    existing `VERIFY_PORT` shape just got a sibling.
+- **Installing a signal handler changes Node's default behavior.** Once one exists, Node no
+  longer exits on its own — the handler must call `exit()` itself after the drain settles, or
+  every SIGTERM hangs the process forever. The easiest way to get this exactly backwards; it's
+  why `apps/shuffler/src/shutdownHooks.ts` exists (see the wiring table) rather than a bare
+  `sdk.start()` with no handler, which was the Shuffler's own state until this was found —
+  dropping whatever batch hadn't flushed on **every** `verify.sh` run and **every** k8s pod
+  termination in prod. `sdk.shutdown()` can hang or reject, so the drain is bounded by a
+  `Promise.race` against an `unref()`'d timer, and both SIGTERM and SIGINT must trigger it
+  exactly once. The Tabletop has the same gap, unfixed (`tabletop-no-shutdown-flush` in
+  `TODO.md`).
 
 ## Related reading
 

@@ -7,8 +7,7 @@
  * parameter and combination — that table (?openLibrary, ?openTable,
  * ?openHistory, ?openDebug, and the combinations) is covered fast and
  * without a browser by test/modal-query-params.test.ts, which exercises the
- * same source file's decision logic directly. See
- * .scratch/verify-suite-speed/issues/04-which-tests-are-superfluous.md.
+ * same source file's decision logic directly.
  *
  * RUN: npm run test:verify
  */
