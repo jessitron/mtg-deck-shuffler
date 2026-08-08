@@ -77,12 +77,15 @@ export function stackStripBounds(seatCount: number): { x: number; y: number; w: 
   return { x: MARGIN_X, y: STACK_Y, w, h: STACK_HEIGHT };
 }
 
-/** Cards on the stack cascade so earlier arrivals stay visible. */
-export function stackCardPosition(stackCount: number): { x: number; y: number } {
-  return { x: MARGIN_X + GAP + stackCount * 36, y: STACK_Y + GAP + stackCount * 14 };
+/** Cards on the stack cascade so earlier arrivals stay visible, centered over the owning seat's playmat. */
+export function stackCardPosition(seatIndex: number, stackCount: number): { x: number; y: number } {
+  const mat = playmatBounds(seatIndex);
+  return { x: mat.x + mat.w / 2 - CARD_W / 2 + stackCount * 36, y: STACK_Y + GAP + stackCount * 14 };
 }
 
 const LAND_COLS = Math.floor(PLAYMAT_W / CARD_W); // 9
+/** Small gap so adjacent land cards don't touch; smaller than GAP since lands pack densely. */
+const LAND_GAP = 6;
 
 /**
  * Lands fill the playmat's bottom half, left to right, wrapping to a new row
@@ -93,7 +96,7 @@ export function landPosition(seatIndex: number, landCount: number): { x: number;
   const mat = playmatBounds(seatIndex);
   const col = landCount % LAND_COLS;
   const row = Math.floor(landCount / LAND_COLS);
-  return { x: mat.x + col * CARD_W, y: mat.y + mat.h / 2 + row * CARD_H };
+  return { x: mat.x + col * (CARD_W + LAND_GAP), y: mat.y + mat.h / 2 + row * (CARD_H + LAND_GAP) };
 }
 
 /** Graveyard cards pile with a small offset so the count is visible. */

@@ -25,6 +25,14 @@ section is just a wall between Jess and the live work.
   - Matters now because ticket 01 is about to draw a new command-zone box through this same stale
     code path — worth fixing `regionShape()` before or alongside that, so the new zone doesn't
     inherit the wrong look.
+  - **Partial progress 2026-08-08**, resolving `.scratch/tabletop-table-layout/issues/04-player-area-polish.md`:
+    `regionShape()` now takes an optional per-call `RegionStyle` override, and the playmat call
+    site passes `{ dash: "solid", color: "black", size: "xl" }` — the closest stock `geo` props
+    get to the decided `10px solid black` look. Still an approximation: tldraw's `geo` size enum
+    has no arbitrary pixel width, and there's still no corner radius at all (needs a self-rendering
+    `mtg-zone` custom shape to do `5%` of the shape's height at render time, per
+    `.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md`). Other zones (library,
+    graveyard, exile, stack) are untouched — still the old dashed grey.
   ← mountain: tabletop-replaces-mural
 
 - [ ] `tabletop-no-shutdown-flush` The Tabletop's server has the same dropped-telemetry-on-shutdown gap the Shuffler just fixed
