@@ -74,4 +74,16 @@
    * not precedent — don't copy one.
    */
   --radius-soft: 4px;
+
+  /*
+   * Staged, not yet decided — proposed 2026-08-07 for the Tabletop's "armed"
+   * zone state (tabletop-physics map, ticket 11): a zone about to receive a
+   * dragged card. Shared here (not ship-local) because the consumer is a
+   * tldraw shape on the canvas, same reasoning as --radius-soft above.
+   * Deliberately not --light-pink (that's the global focus-ring colour) and
+   * not part of the --dark-pink/--deep-space identity pair, since "armed"
+   * needs to read as a distinct signal from either. Delete this comment and
+   * the "staged" framing once Jess picks a candidate on /design.
+   */
+  --armed-glow: #e6a33d;
 }

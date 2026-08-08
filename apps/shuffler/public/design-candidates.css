@@ -43,3 +43,114 @@
 /* No focus rule here on purpose: choice 6 adopts this input *without* one, so
  * the global ring from styles.css applies. The dark-pink flush rule this
  * candidate used to carry was choice 5's rejected option. */
+
+/* ===========================================================================
+ * Ticket 11 (tabletop-physics map) — what a zone looks like, armed and at
+ * rest. MOCK, not the shape's own stylesheet: the Tabletop has no CSS source
+ * file at all today (only a built dist/client/assets/*.css) and no Orbitron
+ * <link>, both open dependencies the ticket names but doesn't block on. These
+ * classes are plain HTML/CSS stand-ins for tldraw's self-rendering `mtg-zone`
+ * shape so Jess can pick a treatment; the real shape re-implements the winner
+ * in TypeScript once the Tabletop has somewhere to put tokens and fonts.
+ * See .scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md.
+ * ========================================================================= */
+
+.zone-mock {
+  width: 170px;
+  height: 238px; /* the Tabletop's own card unit — 68 units/inch, NOT the Shuffler's 200x278 */
+  box-sizing: border-box;
+  padding: 6px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-radius: 0; /* flat surface, not pressable — --radius-soft rule doesn't apply here */
+  font-family: var(--font-chrome);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* At rest: the .commander-placeholder "empty receptacle" pattern (dashed
+ * border at the card unit), ported and retokenized — was #ccc/#f9f9f9. */
+.zone-mock--rest {
+  border: 2px dashed rgba(187, 82, 119, 0.5); /* --dark-pink at reduced weight */
+  color: rgba(187, 82, 119, 0.85);
+  background: rgba(187, 82, 119, 0.04);
+}
+
+/* Armed, option A — outward glow only. Works even where the zone's interior
+ * is hidden under a separate image layer (playmat, library). */
+.zone-mock--armed-glow {
+  border: 2px dashed rgba(187, 82, 119, 0.5);
+  color: var(--armed-glow);
+  box-shadow:
+    0 0 0 3px var(--armed-glow),
+    0 0 18px 4px rgba(230, 163, 61, 0.55); /* --armed-glow, #e6a33d */
+}
+
+/* Armed, option B — the boundary solidifies and thickens, same "restate the
+ * boundary" shape as the app's one existing armed treatment
+ * (.hand-drop-zone.drag-over), without that rule's three violations
+ * (untokenized green, 20px radius on chrome, outline as decoration). */
+.zone-mock--armed-border {
+  border: 3px solid var(--armed-glow);
+  color: var(--armed-glow);
+  background: rgba(230, 163, 61, 0.08);
+  box-shadow: 0 0 10px 1px rgba(230, 163, 61, 0.4);
+}
+
+/* Playmat border-color candidates — is a pink border on the Tabletop's
+ * playmat the same object as the Shuffler's, or a different one? */
+.playmat-mock {
+  width: 280px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--deep-space);
+  color: var(--light-pink);
+  font-family: var(--font-chrome);
+  font-size: 0.8rem;
+  box-sizing: border-box;
+}
+
+.playmat-mock--border-black {
+  border: 8px solid black; /* the Shuffler's play-page mats: 10px solid black, untokenized on purpose */
+}
+
+.playmat-mock--border-pink {
+  border: 8px solid var(--dark-pink);
+}
+
+/* Playmat corner-radius candidates — the Shuffler's one playmat object has
+ * two radii at two scales (20px /prepare, 80px /game); the Tabletop has one
+ * canvas, no second scale to pick the other value for. */
+.playmat-mock--radius-20 {
+  border-radius: 20px;
+}
+
+.playmat-mock--radius-80 {
+  border-radius: 80px;
+}
+
+/* The Stack — DESIGN.md calls it "a shared blue strip" with nothing further
+ * decided. Option A treats it as the same zone family as graveyard/exile/
+ * command (no new decision needed); option B stages it as visually distinct.
+ * No "blue" token exists in the palette, so option B uses --deep-space rather
+ * than inventing an untokenized hex — if a literal blue is wanted, that's a
+ * new token to mint, not something to assert here. */
+.zone-mock--stack-distinct {
+  width: 260px;
+  height: 40px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  background: var(--deep-space);
+  color: var(--light-pink);
+  font-family: var(--font-chrome);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
