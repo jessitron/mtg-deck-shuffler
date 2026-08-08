@@ -1,7 +1,7 @@
 # A skip-external-content mode: no live Scryfall calls, sized placeholders
 
 Mountain: overhead
-Status: ready-for-human
+Status: wontfix
 Type: grilling
 Map: ../map.md
 
@@ -59,3 +59,11 @@ port, no lazy-loading decision, same mechanism Jess uses on a plane. Re-visit 03
   guarantee are both design decisions, not just plumbing.
 - `library-search` — card images and card definitions are its territory; check whether an
   offline mode interacts with search/grouping by image-derived data.
+
+## Ruled out of scope for this map, 2026-08-07
+
+Jess: this is covered by [Route card images through the backend instead of straight to
+Scryfall](11-route-card-images-through-the-backend.md), which is itself already ruled out of
+scope for the verify-speed effort — real product work, not a test-speed question. No separate
+test-only or app-only version of "skip external content" belongs in this map; whenever 11 is
+picked up, it's the natural home for the offline-mode flag this ticket asked about.

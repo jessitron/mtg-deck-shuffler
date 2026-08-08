@@ -134,3 +134,7 @@ ticket 11.
 - [Route card images through the backend instead of straight to Scryfall](issues/11-route-card-images-through-the-backend.md)
   — ruled out of scope 2026-08-07. Jess wants the change, just not as part of this effort right
   now; moved to `TODO.md` as `card-images-through-backend`.
+- [A skip-external-content mode: no live Scryfall calls, sized placeholders](issues/08-skip-external-content-flag.md)
+  — ruled out of scope 2026-08-07, same reasoning as 11 above: it's the same territory (an
+  app-wide flag for the same offline/no-Scryfall behavior 11 would give every player), and 11 is
+  already out of scope here. No separate test-only version belongs in this map.
