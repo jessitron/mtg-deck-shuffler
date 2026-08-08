@@ -1216,33 +1216,6 @@ export function createApp(
   });
 
   // Returns active game fragment - updated game board
-  app.post("/put-down/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const gameId = res.locals.gameId as number;
-    const gameCardIndex = parseInt(req.params.gameCardIndex);
-    const browserTabId = res.locals.browserTabId as string | undefined;
-
-    try {
-      game.revealByGameCardIndex(gameCardIndex, browserTabId);
-
-      // Persist the updated state
-      await persistStatePort.save(game.toPersistedGameState());
-
-      trace.getActiveSpan()?.setAttributes({
-        "game.cardsInHand": game.listHand().length,
-        "game.cardsRevealed": game.listRevealed().length,
-      });
-
-      const html = formatActiveGameHtmlSection(game);
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
-    } catch (error) {
-      console.error("Error putting card down:", error);
-      res.status(500).send(`<div>Error putting card down</div>`);
-    }
-  });
-
-  // Returns active game fragment - updated game board
   app.post("/put-on-top/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
     const game = res.locals.game as GameState;
     const gameId = res.locals.gameId as number;
