@@ -60,6 +60,11 @@ modifiable by anyone, synced to everyone.
 23. As a player, I want to be able to change any counter at the table — mine or anyone's — so that the app stays out of adjudication, per the fleet's players-own-the-game principle.
 24. As a player, I want every counter change to sync live to all browsers at the table, so that everyone reads the same game state.
 25. As a returning player mid-game, I want the furniture, ghost, and counters to be locked against accidental dragging, so that reaching for a card can't smear the table.
+26. As a player, I want every card put into the graveyard (discarded, or dragged in from outside) to take the next spot in a tidy stack, so that my graveyard reads as an ordered pile instead of a scatter.
+27. As a player, I want a card I reposition *within* the graveyard to stay where I put it, so that auto-stacking never fights my deliberate arrangement.
+28. As a player, I want the stack to start a new row when the next spot in line would fall outside the graveyard, and to wrap back to the top-left when the rows run out, so that cards never pile up outside the zone.
+29. As a player, I want clicking a card that's behind another card in the graveyard to bring it to the front — and keep it there — so that I can read any card in the pile without dragging things apart.
+30. As a player, I want exile to behave the same as the graveyard for both stacking and click-to-front, except that its smaller footprint stacks cards directly on top of each other, so that both discard-ish zones feel consistent.
 
 ## Implementation Decisions
 
@@ -125,6 +130,21 @@ tables and the square's compass-slot model.
   `pointer-events: all` plus marking pointer events handled (tldraw's own hyperlink-button
   pattern); typing must shield keystrokes from tldraw's tool hotkeys; the new shape type
   pays the four-step registration cost.
+- **Graveyard/exile auto-stacking (ticket 22, added 2026-08-08).** *Entering* the zone
+  places the card; *moving within* the zone never does. On "put in graveyard" — a discard
+  arriving from the Shuffler, or a card dragged in from outside the zone — the card snaps
+  to the next spot in line in a row-based stack; when that spot would fall outside the
+  zone, start a new row, and when the rows run out, wrap to the top-left. A card already
+  in the graveyard that a player moves around stays exactly where they put it. Exile gets
+  the same entry-snap rule, but its smaller footprint stacks cards directly on top of one
+  another (all slots coincide). How the "next spot" is derived (counter vs. scan of
+  occupied slots) and exact card spacing within the stack are implementer's choices.
+- **Click-to-front in graveyard and exile (ticket 23, added 2026-08-08).** Clicking a
+  card inside the graveyard or exile brings it to the front of the z-order, persistently
+  (z-order is document state, so it syncs like any reorder). This composes with — never
+  replaces — whatever click already does on a card; scoped to these two zones, not the
+  whole board. Consult `tabletop-shape-mechanics` for the onClick/selection-deferral
+  watch points.
 - **Zone look convergence.** New and redrawn furniture should land through the `mtg-zone`
   self-rendering shape with the decided zone look (dashed dark-pink at rest, armed amber
   glow, Orbitron labels; playmat exception: thick solid black with radius 5% of height) —
@@ -155,6 +175,12 @@ Test external behavior at existing seams; no mocks, fakes only (fleet rule).
   lights; click + → number increments in a second browser context).
 - Prep-screen picker changes are user-visible Shuffler work: Playwright there, per the
   fleet workflow rule (user-visible → browser verification).
+- Graveyard/exile stacking splits by seam: next-slot/row-wrap derivation is pure geometry
+  — unit-test it directly; placement of a card *arriving* through a server-handled event
+  asserts at the server event-handler seam; drag-a-card-in snapping and click-to-front
+  are client mechanics on zone entry and pointer events → Playwright, few and behavioral
+  (discard two → they tile; move one, discard again → moved card stays; click a buried
+  card → it's on top in both browser contexts).
 - No new seams are proposed.
 
 ## Out of Scope
@@ -166,7 +192,9 @@ Test external behavior at existing seams; no mocks, fakes only (fleet rule).
   `.scratch/tabletop-replaces-mural/parked/life-change-events.md`.
 - **Phase-2 pickers** — image sleeves, custom URLs for either field, and the two-color
   (front/back) sleeve model.
-- **Card-shape mechanics** — flip, counters-on-cards, notes, stacking: map 1 (Physics).
+- **Card-shape mechanics** — flip, counters-on-cards, notes: map 1 (Physics). (Pile
+  arrangement *inside* the graveyard and exile was pulled into this spec 2026-08-08 —
+  tickets 22–23; general card stacking anywhere else on the board remains map 1's.)
 - **Seat position across a restart** — the map's one fog line; waits on map 6.
 - **Play Face-Down, narration/chat, spectator mode, rules enforcement** — ruled out at
   the map/fleet level.
