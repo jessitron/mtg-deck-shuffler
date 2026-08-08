@@ -102,6 +102,16 @@ furniture becomes a custom `mtg-zone` shape.
   tint the interior") for exactly the two zones that need it most. A pure-CSS `/design`
   specimen will hide this; include a stand-in image layer or scope the specimen to the
   unpictured zones and say so.
+- **tldraw cannot rotate the view per viewer on a shared board.** Reconfirmed 2026-08-08
+  (`.scratch/tabletop-table-layout/issues/10-the-square.md`), same posture as Mural — "Mural
+  doesn't rotate either." This is a hard platform limit, not a deferred nicety: every player
+  area on the Tabletop stays upright and unrotated in world space, for everyone, always. A
+  design that wants "my mat faces me" (the physical-table framing Jess keeps returning to)
+  cannot have it without the canvas in an iframe or similar — out of scope for this fleet.
+  Consequence recorded in `apps/tabletop/DESIGN.md` → "The square": seats can move into
+  compass slots (N/E/S/W) around a centered Stack, but a wide-short player-area rectangle
+  parked at an E/W slot reads "sideways" rather than rotating to face the Stack — an accepted
+  cosmetic quirk, not a bug, until (if ever) this limit lifts.
 
 ## Why this owner exists
 

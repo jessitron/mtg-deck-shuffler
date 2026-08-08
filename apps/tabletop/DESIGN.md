@@ -6,7 +6,9 @@ sizes, and who creates what when. It deliberately says nothing about rules.
 
 Status: **the row layout below is built (2026-08-01); the Command Zone redraw
 (2026-08-08, decided in `.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`)
-is decided but not yet built.** The "playmat grows taller" edge case is still
+and the square/compass layout (2026-08-08, decided in
+`.scratch/tabletop-table-layout/issues/10-the-square.md`, see "The square" below)
+are both decided but not yet built.** The "playmat grows taller" edge case is still
 separately deferred — see Deferred, below. `src/server/cardLayout.ts`
 and `cardArrival.ts` implement the row-layout geometry as it stood before this
 redraw; the seat-joined trigger lives in `src/server/seatJoined.ts`, and the
@@ -116,6 +118,45 @@ at a fixed offset by join order — so this widens every seat's column by ~120 u
 **and shifts every player area to the right of a widened one over to match**. In
 scope for this redraw, not deferred.
 
+## The square (decided 2026-08-08, not yet built)
+
+Player areas move from a row into compass slots (N/E/S/W) around a central Stack.
+Decided in `.scratch/tabletop-table-layout/issues/10-the-square.md`; replaces the
+row entirely (no row fallback mode) once built.
+
+**No per-viewer rotation** — confirmed still a hard tldraw limit, and out of scope
+for this fleet (same posture as Mural: it doesn't rotate either). Every player area
+stays **upright in world space, unrotated**, exactly like today — same playmat +
+library + Command Zone + Graveyard + Exile arrangement, same ~2197 × 952 footprint
+from Geometry above. Only the *position* of that rectangle on the board changes;
+nothing about its internal layout does.
+
+Seats take compass slots by join order:
+
+| Seat count | Positions (join order) |
+| ---------- | ----------------------- |
+| 1          | S                       |
+| 2          | S, N                    |
+| 3          | S, N, E                 |
+| 4          | S, N, E, W              |
+
+N/S areas sit above/below the Stack, the same relationship the row has today.
+E/W areas sit to the sides — since they don't rotate, their wide-short rectangle
+ends up oriented "against the grain" of an E/W slot (visually sideways relative to
+a viewer expecting it to read top-to-bottom toward the Stack). That's a known,
+accepted cosmetic quirk, not a defect: it goes away once per-viewer rotation exists
+(see Deferred), and isn't worth solving by giving E/W a different internal shape —
+that would be a second player-area layout to build and maintain for a purely
+cosmetic payoff.
+
+The Stack becomes a **fixed-size square, centered**, same footprint regardless of
+player count — the board's occupied compass slots change as seats join or leave;
+the Stack's size and position don't.
+
+**Explicitly provisional.** Jess: "this is all gonna be tweaked after play
+experience" — treat this geometry as a first build to react to, not a final layout
+to defend.
+
 ## How a table comes into being
 
 The trigger is **Shuffle Up on the Shuffler's prep screen**. Typing a table name
@@ -195,13 +236,14 @@ Nobody is restricted from moving anybody else's cards. That's not an oversight.
 
 ## Deferred
 
-- **Per-seat rotated views / the square.** What I actually want is a circle of
-  playmats — two facing each other, three as a triangle, four as a square — with
-  _my_ mat in front of _me_ and the stack in the middle. tldraw (as far as Jess
-  knows) can't rotate the view per viewer on a shared board. The row is the
-  workaround, chosen only because everything must be right side up for everyone.
-  Confirmed still wanted 2026-08-08, while resolving the Command Zone redraw —
-  now its own ticket, [Design the square](../../.scratch/tabletop-table-layout/issues/10-the-square.md).
+- **Per-seat rotated views.** What Jess actually wants is each player's own mat
+  rotated to face them, like sitting at a physical table. Confirmed 2026-08-08
+  (while resolving [Design the square](../../.scratch/tabletop-table-layout/issues/10-the-square.md))
+  that tldraw still can't rotate the view per viewer on a shared board — out of
+  scope for this fleet, same as Mural. The **square arrangement itself** is no
+  longer deferred — decided, see "The square" above — but every area stays
+  upright rather than rotating to face its player, and the "E/W areas look
+  sideways" quirk (see "The square") stays until per-viewer rotation exists.
 - **"Playmat grows taller" when lands overflow the bottom half.** Deliberately
   kept deferred, separately from the 2026-08-08 Command Zone redraw
   (`.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`):

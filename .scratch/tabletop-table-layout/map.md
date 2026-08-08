@@ -80,6 +80,14 @@ polish.
   already used as home-page hero backgrounds), sleeves get a color picker plus quick color
   swatches (rendered as a solid color, not an image). Image swatches and custom URL for
   both fields are deferred to a later phase.
+- [Design the square — seats around the Stack instead of a
+  row](issues/10-the-square.md) (2026-08-08) — no per-viewer rotation, reconfirmed still
+  out of scope; player areas stay upright and unrotated, just repositioned into compass
+  slots (N/E/S/W) around a fixed-size, centered Stack, by join order (1→S, 2→S,N,
+  3→S,N,E, 4→S,N,E,W). Replaces the row model outright. E/W areas will look "sideways"
+  until per-viewer rotation exists someday — accepted, not solved here. Explicitly
+  provisional pending play experience. Recorded in `apps/tabletop/DESIGN.md`'s new
+  "The square" section.
 
 ## Not yet specified
 
