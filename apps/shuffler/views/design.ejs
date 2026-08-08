@@ -866,12 +866,13 @@
           2026-08-07.</strong> Staged for the tabletop-physics map's
           <code>11-what-a-zone-looks-like</code> ticket, deciding what tldraw's self-rendering
           <code>mtg-zone</code> shape (library, graveyard, exile, the Stack, command; the
-          playmat separately) looks like at rest and armed. The Tabletop has no CSS source file
-          and no Orbitron <code>&lt;link&gt;</code> today, so these specimens borrow the
-          Shuffler's tokens and fonts to render a stand-in; the real shape re-implements the
-          picks in TypeScript once the Tabletop has somewhere to put tokens and fonts (the
-          <code>tabletop-css-tokens</code> line in the repo-root <code>TODO.md</code>). Scoped
-          to the <strong>unpictured</strong> zones (graveyard, exile, Stack, command) — the
+          playmat separately) looks like at rest and armed. These specimens still borrow the
+          Shuffler's tokens and fonts to render a stand-in, but as of <code>4396aea</code>
+          (2026-08-07) the Tabletop has its own route to both: <code>@fleet/design-tokens</code>
+          via Vite and an Orbitron/Ovo <code>&lt;link&gt;</code> in
+          <code>apps/tabletop/index.html</code>. Nothing blocks building the real
+          <code>mtg-zone</code>/playmat shape in TypeScript anymore. Scoped to the
+          <strong>unpictured</strong> zones (graveyard, exile, Stack, command) — the
           library and playmat layer an opaque image over the same box, which a flat CSS mock
           can't show.
         </p>

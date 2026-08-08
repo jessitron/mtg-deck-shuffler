@@ -189,6 +189,9 @@ to-square option.
 decision needed — dashed pink at rest, same armed treatment as everything else. `DESIGN.md`'s
 "shared blue strip" language doesn't get a literal blue; no such token exists and none was minted.
 
-**Implementing all four is still blocked**, unchanged from the ticket's own framing: the Tabletop
-has no CSS source file and no Orbitron `<link>` yet (`tabletop-css-tokens` in the repo-root
-`TODO.md`). The real `mtg-zone` shape doesn't exist until that lands.
+**Update 2026-08-08: the implementation blocker is gone.** `4396aea` ("Give the fleet one
+dictionary: @fleet/design-tokens") landed `packages/design-tokens`, wired the Tabletop to import
+`@fleet/design-tokens/tokens.css` through Vite, and loaded Orbitron/Ovo via a Google Fonts
+`<link>` in `apps/tabletop/index.html` — both dependencies this ticket named. `--armed-glow` is
+already in that shared file. Building the real `mtg-zone`/playmat shape in TypeScript no longer
+waits on anything from this map.
