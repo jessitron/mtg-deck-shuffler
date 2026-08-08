@@ -1081,6 +1081,67 @@ plain black — remains today's placeholder look, explicitly deferred to ticket 
 owns the armed-glow retokenization. Only the label typeface was settled territory; nothing
 about the border question moved.
 
+## 2026-08-08 — ticket 11's zone decision got built, not just decided
+
+`.scratch/tabletop-physics/issues/14-zone-appearance.md`. Sequel to the entry above (ticket 13)
+and, further back, to [choice 11's decision](open-choices.md#the-tabletop-side-fleet-gaps)
+(`a304c52`, 2026-08-07, § Tabletop zones on `/design`). Ticket 13 shipped the placeholder
+border with the label typeface fixed; ticket 14 replaced the placeholder with the picked
+options themselves in `MtgZoneShapeUtil.tsx`.
+
+**Verified against the literal candidate rules, not the ticket's prose "Answer," and that
+distinction mattered.** An earlier `-review` pass on the implementation plan caught that
+ticket 11's written summary of its own decision didn't match the actual staged pixel values in
+`apps/shuffler/public/design-candidates.css` — the KB is right to insist citations point at
+selectors, not remembered prose, and this is a second instance of the same lesson landing one
+level up (a decision's *summary* can drift from the decision's *artifact* too). What shipped
+was checked against `.zone-mock--rest` / `.zone-mock--armed-glow` directly:
+
+- **At rest:** `border: 2px dashed var(--dark-pink)`, `color: var(--dark-pink)`,
+  `background: rgba(187, 82, 119, 0.03)` — verbatim from `.zone-mock--rest`.
+- **Armed:** option **A, the glow ring** (not option B, "armed-border," which this owner's
+  candidate CSS also staged) — `color: var(--deep-space)`,
+  `background: rgba(230, 163, 61, 0.1)`,
+  `box-shadow: 0 0 0 3px var(--armed-glow), 0 0 16px 5px rgba(230, 163, 61, 0.65)` — verbatim
+  from `.zone-mock--armed-glow`.
+- **The playmat kept its own identity, untouched by the zone family.** `border: 10px solid
+  black`, untokenized, exactly as decided; `borderRadius: h * 0.05`, computed fresh from
+  `props.h` every render — not a CSS percent (draws an ellipse on a non-square box) and not a
+  fixed px (drifts out of proportion as the canvas zooms). This is ticket 11's twice-corrected
+  geometry lesson (see the entry above, "a canvas-geometry lesson worth generalising") landing
+  in real code rather than a `/design` mock's baked-in px.
+- **The armed glow is additive, not a replacement, and that's why it survives the picture
+  overlay.** `box-shadow` spreads *outward* from the border edge, unlike `border-box`'s
+  inward-drawn border — so on the playmat and library, where an opaque `image` shape sits on
+  top and hides any interior tint (README.md → tldraw limits), the glow ring still shows around
+  the outside. Confirmed by screenshot, not just argued from the CSS box model.
+- **The Stack got no distinct treatment** — same dashed-pink/armed-glow family as
+  graveyard/exile, per the ticket's own instruction not to invent a fifth look.
+
+**The armed state is derived, not stored, and a new test proves the two halves of that claim
+separately.** `useIsZoneArmed` (`zoneHitTest.ts`) computes arming reactively inside the zone's
+own `component()` — never written to the tldraw document, so no sync write and no undo entry.
+`test/verification/verify-zone-armed.spec.ts` checks this isn't just an implementation detail
+but a player-visible fact: one test polls `getComputedStyle(...).boxShadow` on a zone mid-drag
+and confirms it reverts to `none` on drop; a second test drives two separate browser contexts
+against the same table and confirms client B's copy of the zone shows nothing while client A is
+mid-drag over it — the local-only promise ticket 14 made, checked cross-client rather than
+trusted.
+
+**A card-side helper got a name and a shared home in the process.** `MtgCardShapeUtil`'s
+`zoneAt()` (the topmost-zone-at-a-point scan used to detect drop zones) and the new arming
+check both need "which zone is under this point," so the scan moved into
+`apps/tabletop/src/client/shapes/zoneHitTest.ts` as `topmostZoneAt`, and `zoneAt()` became a
+one-line caller. Not a design decision — noted because the tabletop-shape-mechanics owner
+records the mechanism side of this same change.
+
+**This is the third time "stage it, don't argue it" cashed out as literally true — the built
+code matches pixels that were already decided and already visible on `/design`,** with the one
+new wrinkle that *verifying* the port also meant re-reading the candidate CSS rather than
+trusting the ticket's own recap of it. `/design`'s § Tabletop zones section still reads "Mock,
+not the real component" and needs its own pass to say the real component now exists (tracked as
+a gap, not fixed in this pass — see [open-choices.md](open-choices.md)).
+
 ## 2026-08-08 — life totals and commander damage: a new player-visible surface is coming, placement decided, appearance deliberately not
 
 `.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md`, grilled and

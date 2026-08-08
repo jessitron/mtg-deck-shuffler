@@ -159,6 +159,36 @@ Full detail in `architecture.md` ("Ticket 13: furniture becomes a genuine custom
 `mtg-zone`") and `interactions.md` (zone-detection section, watch point 6's item-4 caveat, new
 watch point 7).
 
+## Ticket 14: zone appearance, dashed at rest / glow when armed (2026-08-08)
+
+`.scratch/tabletop-physics/issues/14-*.md` gave zones a live "armed" visual state on top of
+ticket 13's dashed-at-rest look: a glow while a dragged card hovers over them. This is the first
+change in this KB's history driven purely by a *rendering* need that nonetheless required new
+*mechanics* — a live, drag-in-progress hit test, not just the existing drag-*settle* one.
+
+- **`topmostZoneAt()` extracted** from `MtgCardShapeUtil.zoneAt()`'s inline scan into new
+  `apps/tabletop/src/client/shapes/zoneHitTest.ts`, confirming watch point 8's prediction that a
+  second consumer of the topmost-zone-wins tie-break would show up. `zoneAt()` now just calls it.
+- **New reactive-signal pattern**: `zoneHitTest.ts` also exports `useIsZoneArmed(editor, zoneId)`,
+  backed by one `computed()` per `Editor` instance (a lazy `WeakMap`, not one `computed` per zone
+  shape — avoiding O(zones²) rescanning during a drag, since tldraw's `Translating` state updates
+  position on every raw pointer-move, unthrottled). The computed checks
+  `editor.isIn("select.translating")` — confirmed against tldraw source
+  (`PointingShape.ts`'s `startTranslating` transitions into exactly that state string) and against
+  a live Playwright drag, not assumed from the name.
+- **First "read reactively, write nothing" hook in this KB.** `MtgZoneShapeUtil.component()` calls
+  `useIsZoneArmed` unconditionally at the top, purely to drive rendering — no store write, no undo
+  entry, no sync traffic. Confirmed via a two-browser-context Playwright test
+  (`verify-zone-armed.spec.ts`) that the armed state is genuinely local: client A's drag never
+  shows armed styling on client B's copy of the same zone. Every prior hook in this KB (`onClick`,
+  `onTranslateEnd`) writes to the store; this is the first one that doesn't.
+- `MtgZoneShapeUtil` still defines no `onClick`/`onTranslateEnd`/`onDragShapesOver` — the whole
+  feature lives inside `component()`, consistent with watch point 7.
+
+Full detail in `architecture.md`'s "Ticket 14" section and `interactions.md` (watch point 8's
+tie-break language repointed at `topmostZoneAt`, new watch point 9, and a new `Depends On` note
+about `"select.translating"`).
+
 ## "The Square" — design decided, `zoneAt()` risk flagged (2026-08-08)
 
 `.scratch/tabletop-table-layout/issues/10-the-square.md` resolved the wayfinder ticket "Design

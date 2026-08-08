@@ -4,7 +4,9 @@
 issues/12-*.md`) landed the `mtg-card` custom-shape rewrite decided by ticket 02, deleting
 `MtgCardImageShapeUtil.tsx`. Ticket 13 (`.scratch/tabletop-physics/issues/13-*.md`) did the same
 for furniture, adding `mtg-zone` alongside it — no file was deleted for this one since furniture
-was never its own file (it lived inside `tableFurniture.ts`'s shape-builder functions).
+was never its own file (it lived inside `tableFurniture.ts`'s shape-builder functions). Ticket 14
+(`.scratch/tabletop-physics/issues/14-*.md`, same day) added `zoneHitTest.ts`, extracting the
+zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShapeUtil`.
 
 ## Shared (each shape's type/props definition)
 
@@ -25,14 +27,23 @@ was never its own file (it lived inside `tableFurniture.ts`'s shape-builder func
 - `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — the whole card territory: extends
   `BaseBoxShapeUtil<MtgCardShape>`; `onClick` (tap/untap, now toggling `props.tapped` with
   rotation as a pure visual delta), `onTranslateEnd` (selection cleanup + zone-entry detection),
-  `zoneAt()` (private helper — since ticket 13, matches real `mtg-zone` shapes by
-  `candidate.type === "mtg-zone"` and reads validated `candidate.props.zone`, resolving overlaps
-  by greatest `index`), `component()`/`getIndicatorPath()` (renders its own `<img>`).
-- `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — **new, ticket 13**: extends
-  `BaseBoxShapeUtil<MtgZoneShape>`; defines no interaction hooks at all (`onClick`/
-  `onTranslateEnd`/`onDragShapesOver` are all absent — see `architecture.md`/`interactions.md`
-  watch point 7 for why that's safe); `component()` renders a plain `<div>` (solid black border
-  for `playmat`, dashed grey for everything else) and `getIndicatorPath()`.
+  `zoneAt()` (private helper — since ticket 14, a thin wrapper around `zoneHitTest.ts`'s
+  `topmostZoneAt()`, below), `component()`/`getIndicatorPath()` (renders its own `<img>`).
+- `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — extends `BaseBoxShapeUtil<MtgZoneShape>`
+  (ticket 13); still defines no interaction hooks at all (`onClick`/`onTranslateEnd`/
+  `onDragShapesOver` are all absent — see `architecture.md`/`interactions.md` watch point 7 for why
+  that's safe). `component()` renders a plain `<div>` — solid black border for `playmat`, dashed
+  `--dark-pink` for everything else — and, since ticket 14 (2026-08-08), reads
+  `useIsZoneArmed(this.editor, shape.id)` from `zoneHitTest.ts` to add a glow (`box-shadow` +
+  tinted background/border color) while a dragged card is hovering over it. `getIndicatorPath()`.
+- `apps/tabletop/src/client/shapes/zoneHitTest.ts` — **new, ticket 14**: `topmostZoneAt(editor,
+  center)`, the topmost-zone-wins hit test extracted out of `MtgCardShapeUtil.zoneAt()` so a second
+  caller (`MtgZoneShapeUtil`, above) can share it; and `useIsZoneArmed(editor, zoneId)`, a `use*`
+  hook backed by one `computed()` per `Editor` (lazy `WeakMap<Editor, Computed<...>>`) that checks
+  `editor.isIn("select.translating")` plus the selected shape's center against `topmostZoneAt` to
+  decide which zone (if any) is currently "armed" for the in-progress drag. Read-only: writes
+  nothing to the store. Imported by both `MtgCardShapeUtil.tsx` (`zoneAt()`, drag-settle) and
+  `MtgZoneShapeUtil.tsx` (`component()`, live armed-glow rendering).
 - `apps/tabletop/src/client/TablePage.tsx` — registers
   `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil]`, passed to both
   `useSync` and the `<Tldraw shapeUtils={...}>` prop (this app uses the sync hook directly, which
@@ -64,6 +75,10 @@ was never its own file (it lived inside `tableFurniture.ts`'s shape-builder func
 
 ## Tests
 
+- `apps/tabletop/test/verification/verify-zone-armed.spec.ts` — **new, ticket 14**: verifies the
+  armed-glow appearance during a live drag, and (via a two-browser-context setup) that the armed
+  state is genuinely local/unsynced — dragging on client A never shows armed styling on client B's
+  copy of the same zone shape.
 - `apps/tabletop/test/verification/verify-drag-identity.spec.ts` — regression test for the
   `959831c` drag-identity bug. Plays two lands, drags first, drags second, asserts only the
   second moved.

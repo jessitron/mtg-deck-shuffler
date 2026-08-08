@@ -1,6 +1,6 @@
 import { BaseBoxShapeUtil, HTMLContainer, TLShapePartial, Vec } from "tldraw";
 import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
-import { MtgZoneShapeProps } from "../../shared/mtgZoneShape";
+import { topmostZoneAt } from "./zoneHitTest";
 
 const TAP_ANGLE = Math.PI / 2;
 
@@ -148,23 +148,11 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
    * (`Editor.getDraggingOverShape` filters `!isLocked` first), so this stays
    * a card-side scan rather than a zone-side `onDragShapesOver` hook. When
    * the card's center overlaps more than one zone, the topmost-drawn zone
-   * (greatest `index`) wins — `index` is a fractional-indexing `IndexKey`
-   * whose plain string comparison already reflects z-order.
+   * wins — see `topmostZoneAt` (shared with the zone's own armed-state
+   * check, tabletop-physics ticket 14).
    */
   private zoneAt(shape: MtgCardShape): string | undefined {
     const bounds = this.editor.getShapePageBounds(shape);
-    if (!bounds) return undefined;
-    const center = bounds.center;
-
-    let winner: { zone: string; index: string } | undefined;
-    for (const candidate of this.editor.getCurrentPageShapes()) {
-      if (candidate.type !== "mtg-zone") continue;
-      const candidateBounds = this.editor.getShapePageBounds(candidate);
-      if (!candidateBounds?.containsPoint(center)) continue;
-      if (!winner || candidate.index > winner.index) {
-        winner = { zone: (candidate.props as MtgZoneShapeProps).zone, index: candidate.index };
-      }
-    }
-    return winner?.zone;
+    return bounds ? topmostZoneAt(this.editor, bounds.center)?.zone : undefined;
   }
 }

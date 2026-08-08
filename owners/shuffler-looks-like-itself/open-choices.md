@@ -498,9 +498,11 @@ self-rendering custom shape.
 
 - **Still open: there is no ship-local stylesheet on the Tabletop.** Shared tokens have a home;
   the first *Tabletop-only* rule does not. Inline styles are the status quo by inertia, not by
-  choice. Ticket 05 (tap motion) and ticket 11 (what a zone looks like — now **decided but
-  unbuilt**, see below) both want one. Whoever writes that rule decides where Tabletop CSS
-  lives — and it must not be answered by starting a `:root` there.
+  choice. Ticket 05 (tap motion) still wants one; ticket 11 (what a zone looks like) no longer
+  does — it landed as inline `CSSProperties` objects in `MtgZoneShapeUtil.tsx` (ticket 14,
+  2026-08-08, see below), not CSS, so it didn't end up needing a stylesheet after all. Whoever
+  writes the Tabletop's first CSS rule still decides where it lives — and it must not be
+  answered by starting a `:root` there.
 - **~~Still open: font tokens.~~ DECIDED and shipped 2026-08-07 (`f79bc7d`).** Jess: *"yeah, go
   for it! I'm all for more tokens."* `--font-chrome` / `--font-content` / `--font-display` are in
   `packages/design-tokens/tokens.css`, **named by role rather than by typeface** because three
@@ -529,6 +531,26 @@ self-rendering custom shape.
   and the token resolves to Orbitron inside the canvas — the first fleet-token consumer inside a
   genuine self-rendering shape, exactly the case the tokens were created for. See
   [README.md](README.md) → "tldraw limits" and [history.md](history.md) for how it was verified.
+
+- **~~Choice: what a zone looks like (ticket 11).~~ DECIDED 2026-08-07, BUILT 2026-08-08
+  (ticket 14).** `MtgZoneShapeUtil.tsx` now carries the real visual treatment in place of
+  ticket 13's plain placeholder — verified against `design-candidates.css`'s literal rules,
+  not ticket 11's prose summary of them (an earlier `-review` pass caught that the two didn't
+  match). At rest: `border: 2px dashed var(--dark-pink)`, `color: var(--dark-pink)`,
+  `background: rgba(187, 82, 119, 0.03)`, ported verbatim from `.zone-mock--rest`. Armed:
+  option **A, "glow ring"** (not B, "armed-border") — `color: var(--deep-space)`,
+  `background: rgba(230, 163, 61, 0.1)`,
+  `box-shadow: 0 0 0 3px var(--armed-glow), 0 0 16px 5px rgba(230, 163, 61, 0.65)`, ported
+  verbatim from `.zone-mock--armed-glow`. The playmat keeps its own identity — untokenized
+  `10px solid black`, `borderRadius: h * 0.05` computed fresh from `props.h` every render
+  (never a CSS percent, which draws an ellipse on a non-square box, and never a fixed px,
+  which drifts out of proportion as the canvas zooms) — and the armed glow rides on top of it
+  via `box-shadow`, additive rather than replacing the border, which is exactly why it survives
+  being covered by the playmat's/library's opaque `image` overlay (see README.md → tldraw
+  limits, "an opaque picture layered over a zone box"). The Stack got no distinct treatment —
+  same dashed-pink/armed-glow family as graveyard/exile, per the ticket. See
+  [history.md](history.md) for the verification detail (Playwright, both single- and
+  two-client).
 - **`LandingPage.tsx` is a live, unrecorded Layer-1 violation.**
   `apps/tabletop/src/client/LandingPage.tsx` carries an off-brand green/cream palette in inline
   styles — `#1a2a1f`, `#f5f1e8`, `#3d5a45` — with no relationship to purple-and-pink. It is the
@@ -575,6 +597,15 @@ self-rendering custom shape.
   Tabletop specimen with candidate CSS, label it a mock** (ticket 11 did) — and stage it on
   `.stage-white`, not `.stage-dark` (ticket 11's first draft got this wrong and was corrected
   live). Don't settle the architecture quietly on the way past.
+
+  **The cross-app stylesheet question is still genuinely unresolved, now that the real thing
+  is built (ticket 14, 2026-08-08).** `mtg-zone`'s visual treatment landed as inline
+  `CSSProperties` objects in the shape's own `.tsx`, not as CSS classes — so there was never a
+  Tabletop stylesheet for `/design` to try to load, and the mock's honesty was never actually
+  tested against a real one. The question this bullet raised (can `/design` load a genuine
+  Tabletop stylesheet across the ship boundary) is exactly as open as it was after ticket 11;
+  ticket 14 is evidence the mock was *good enough to decide by*, not evidence the architecture
+  question was answered.
 
 ## When a choice is resolved — the checklist
 

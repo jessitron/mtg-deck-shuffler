@@ -1,5 +1,7 @@
 import { BaseBoxShapeUtil, HTMLContainer } from "tldraw";
 import { MtgZoneShape, mtgZoneShapeProps } from "../../shared/mtgZoneShape";
+import { useIsZoneArmed } from "./zoneHitTest";
+import type { CSSProperties } from "react";
 
 /**
  * tabletop-physics ticket 13: `mtg-zone`, a genuine custom shape for
@@ -21,11 +23,20 @@ import { MtgZoneShape, mtgZoneShapeProps } from "../../shared/mtgZoneShape";
  * Zone-entry detection stays card-side (MtgCardShapeUtil's `onTranslateEnd`)
  * for exactly this reason: a locked shape can't be a drag target.
  *
- * The retokenized border/glow look (dashed --dark-pink at rest, armed glow)
- * is ticket 14's job; this keeps today's plain dashed-grey / solid-black-
- * playmat border, just moved onto a real shape type. The label's typeface
- * is already on the fleet's --font-chrome token, though — Orbitron for a
- * canvas region label is settled, not an open design question deferred to 14.
+ * Visual treatment (tabletop-physics ticket 14) is the design already staged
+ * and picked on `/design` (`.scratch/tabletop-physics/issues/
+ * 11-what-a-zone-looks-like.md`'s "Answer", verified against the literal
+ * candidate CSS in `apps/shuffler/public/design-candidates.css`'s
+ * `.zone-mock--rest`/`.zone-mock--armed-glow` rather than just its prose
+ * summary): dashed `--dark-pink` at rest with a faint tint, an amber
+ * `--armed-glow` ring + tint when a dragged card is about to land here, and
+ * the playmat keeping the Shuffler's own plain-black-border identity rather
+ * than joining the dashed-pink family. The armed ring is additive on top of
+ * whichever border a zone already has — `box-shadow` spreads *outward* from
+ * the border edge (unlike `border-box`'s inward-drawn border), so it's the
+ * one part of this treatment that survives being covered by the playmat's/
+ * library's opaque `image` overlay (ticket 03): "the ring still shows" even
+ * where the tint doesn't.
  */
 export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
   static override type = "mtg-zone" as const;
@@ -42,15 +53,45 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
   component(shape: MtgZoneShape) {
     const { w, h, zone, label } = shape.props;
     const playmat = zone === "playmat";
+    // Reactive-only: never written to the store, so it produces no synced
+    // document write and no undo entry, and is never visible on another
+    // client's copy of this same zone shape — this player's drag is local.
+    const armed = useIsZoneArmed(this.editor, shape.id);
+
+    const style: CSSProperties = playmat
+      ? {
+          width: w,
+          height: h,
+          boxSizing: "border-box",
+          border: "10px solid black", // untokenized on purpose — matches the Shuffler's mats exactly
+          borderRadius: h * 0.05, // a proportion of the shape's own height, not a CSS % (draws an
+          // ellipse on a non-square box) and not a fixed px (drifts out of proportion as the
+          // canvas zooms) — computed fresh from props.h every render instead.
+          color: "black",
+        }
+      : {
+          width: w,
+          height: h,
+          boxSizing: "border-box",
+          border: "2px dashed var(--dark-pink)",
+          color: armed ? "var(--deep-space)" : "var(--dark-pink)",
+          background: armed ? "rgba(230, 163, 61, 0.1)" : "rgba(187, 82, 119, 0.03)",
+        };
+
+    if (armed) {
+      // A single box-shadow value assigned once — not two style objects each
+      // setting boxShadow — sidesteps "box-shadow doesn't accumulate across
+      // cascading CSS rules" (design choice 5); that gotcha is a stylesheet-
+      // cascade problem, not one a single JS style object can hit.
+      style.boxShadow = "0 0 0 3px var(--armed-glow), 0 0 16px 5px rgba(230, 163, 61, 0.65)"; /* --armed-glow, #e6a33d */
+    }
+
     return (
       <HTMLContainer id={shape.id}>
         <div
+          data-testid="zone-box"
           style={{
-            width: w,
-            height: h,
-            boxSizing: "border-box",
-            border: playmat ? "10px solid black" : "2px dashed grey",
-            color: playmat ? "black" : "grey",
+            ...style,
             // @fleet/design-tokens' --font-chrome (Orbitron): a zone label
             // names a canvas region, the same job as a UI label/heading, not
             // prose or a card name (--font-content). This is the first
