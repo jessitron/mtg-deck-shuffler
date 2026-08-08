@@ -1328,30 +1328,23 @@ export function createApp(
   });
 
   // Returns active game fragment - updated game board
-  app.post("/draw/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const gameId = res.locals.gameId as number;
+  app.post("/draw/:gameId", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const browserTabId = res.locals.browserTabId as string | undefined;
 
-    if (game.gameStatus() !== "Active") {
-      res.status(400).send(`<div>Cannot draw: Game is not active</div>`);
-      return;
-    }
-
     try {
-      game.draw(browserTabId);
-      const persistedGameState = game.toPersistedGameState();
-      trace.getActiveSpan()?.setAttributes({
-        "game.gameStatus()": game.gameStatus(),
-        "game.cardsInLibrary": game.listLibrary().length,
-        "game.cardsInHand": game.listHand().length,
-        "game.full_json": JSON.stringify(persistedGameState),
+      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
+        game.draw(browserTabId);
+        trace.getActiveSpan()?.setAttributes({
+          "game.gameStatus()": game.gameStatus(),
+          "game.cardsInLibrary": game.listLibrary().length,
+          "game.cardsInHand": game.listHand().length,
+          "game.full_json": JSON.stringify(game.toPersistedGameState()),
+        });
       });
-      await persistStatePort.save(persistedGameState);
 
-      const html = formatActiveGameHtmlSection(game);
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
+      renderCommandOutcome(res, gameId, outcome, "Cannot draw: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
       if (error instanceof Error && error.message === "Cannot draw: Library is empty") {
         const lossModal = formatLossModalHtmlFragment();
