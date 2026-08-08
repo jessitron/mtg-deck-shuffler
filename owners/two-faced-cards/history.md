@@ -361,6 +361,50 @@ Follow-up to the finding recorded above (`65f12e8`): added
   point 16 updated to make `data-current-face` the first-choice observable in the modal.
   No `CardDefinition`, persistence, or contract changes.
 
+## Ticket 12 Implemented: mtg-card Becomes a Real Shape, the Payload Unbakes (2026-08-08)
+
+Implements what ticket 02 (2026-08-07, `c956949`, recorded above) only decided. No new
+decisions — this is the "now build it" pass, and it landed exactly as specified.
+
+- **Shuffler side**: `buildCardPlayedEvent` (`apps/shuffler/src/port-tabletop/types.ts`) now
+  sends `frontImageUrl` (always `getCardImageUrl(card, "normal", "front")`) and
+  `backImageUrl` (`getCardImageUrl(card, "normal", "back")` when `card.twoFaced`, else
+  `null`) instead of a single `imageUrl` chosen by `currentFace`. `face:
+  gameCard.currentFace` is unchanged but its doc comment now says "which face is up on
+  arrival" instead of "which face was baked into imageUrl" — the correction this owner
+  flagged in ticket 02 finally lands in the code, not just the KB. Both the field-by-field
+  comment block above `CardPlayedEvent` and the interface itself were updated together.
+  `test/port-tabletop/cardPlayedEvent.test.ts` gained cases for: `backImageUrl` null for a
+  non-twoFaced card; both URLs populated for a twoFaced card (back containing `/back/`);
+  and — the sharp edge this owner called out — a twoFaced card with `backImageUris`
+  *unset* still gets a populated `backImageUrl` via the `constructCardImageUrl` fallback,
+  proving the field is derived from `twoFaced`, not from stored-URI presence.
+- **Tabletop side**: `cardArrival.ts`'s `CardArrival` interface and `validationError` now
+  require `frontImageUrl: string` + `backImageUrl: string | null` instead of `imageUrl`.
+  Two new files carry the shape itself: `apps/tabletop/src/shared/mtgCardShape.ts`
+  (`MtgCardShapeProps` — `frontImageUrl`, `backImageUrl: string | null`, `face: "front" |
+  "back"`, `faceDown: boolean`, `tapped: boolean`, plus `w`/`h`/`instanceId`/`scryfallId`/
+  `cardName`; validated via `RecordProps`) and
+  `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` (`extends BaseBoxShapeUtil`,
+  replacing `MtgCardImageShapeUtil extends ImageShapeUtil`). `component()` picks
+  `frontImageUrl`/`backImageUrl` by `props.face` and renders its own `<img>` — no per-instance
+  tldraw image asset is minted anymore (`cardArrival.ts` no longer calls
+  `AssetRecordType.create`; the shape is written directly with `type: "mtg-card"`). Dedup
+  switched from reading `meta.instanceId` to `props.instanceId` to match.
+  `MtgCardShapeUtil` also carries forward: `onClick` (tap/untap, unchanged semantics, now a
+  base-hook override instead of the old `ImageShapeUtil` override), and the
+  `959831c` selection-clearing fix in `onTranslateEnd` (ported forward exactly as
+  `tabletop.md`'s porting note required) plus ticket 01's zone-entry detection (unchanged,
+  still keyed on `meta.zone`).
+- **What this ticket did NOT do**: no flip gesture writes `props.face` yet — the ticket
+  scope was "unbake the URLs," not "build flip." `zone` stays in `meta`, not `props`
+  (ticket 13's ownership-boundary question, still open). `faceDown` exists in `props` with
+  a default of `false` and is not yet set by anything. Card-facing flip UI and ticket 13
+  remain future work.
+- Reviewed against this owner's `tabletop.md` ("the arrival payload unbakes the face") and
+  the `twoFaced`-derivation watch point before landing — both confirmed correct, no
+  deviation.
+
 ## Tabletop Drag Picked Up the Wrong Card — Moved Out (2026-08-07, `959831c`)
 
 Fixed 2026-08-07 (`959831c`): dragging a second card after a first silently re-moved the first

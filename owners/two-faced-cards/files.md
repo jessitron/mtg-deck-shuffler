@@ -77,7 +77,7 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 |---|---|
 | `src/port-card-repository/SqliteCardRepositoryAdapter.ts` | Stores `card_types`/`image_uris`/`back_image_uris` as JSON, `two_faced` as integer; rebuilds the cache table on old schema, adds image columns via `ALTER TABLE` |
 | `src/port-card-repository/hydration.ts:80-123` | Hydrates/dehydrates `currentFace` (and `cardInstanceId`) between GameCard and PersistedGameCard |
-| `src/port-tabletop/types.ts` | `buildCardPlayedEvent` — the ONE place a GameCard becomes a card.played payload; sends `face: currentFace` + the face-specific `imageUrl` (JES-127/128). **Pending edit (ticket 02, decided not implemented):** `imageUrl` → `frontImageUrl` + `backImageUrl \| null`, the latter derived from `card.twoFaced`; keep the field comment block in sync |
+| `src/port-tabletop/types.ts` | `buildCardPlayedEvent` — the ONE place a GameCard becomes a card.played payload; sends `face: currentFace` (which face is up on arrival) + `frontImageUrl: string` + `backImageUrl: string \| null` (derived from `card.twoFaced`, landed ticket 12, 2026-08-08) |
 | `src/port-tabletop/sendToTable.ts` | `sendCardToTableFirst` (send-then-commit) + `zoneHintForPlay` (reads `cardTypes` for land vs nonland) |
 | `src/port-tabletop/HttpTabletopGateway.ts`, `FakeTabletopGateway.ts` | Real/fake gateways behind `TabletopPort` |
 
@@ -96,10 +96,10 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 | `test/verification/verify-prep-commander-flip.spec.ts` | E2E: inline flip of a two-faced commander on the prepare screen (JES-90 regression guard). The good pattern: asserts `.card-flipped` plus the back-face image, so a swallowed click fails |
 | `test/scryfallHttp.test.ts` | `fetchScryfall` sends our User-Agent, not Node's default; preserves caller headers (fake fetch, no network) |
 | `test/verification/verify-proxy-image.sh` | Live-CDN check that `/proxy-image` returns real image bytes for **front and back** faces (Archangel Avacyn `485211cd…` is the two-faced case). A shell script, not jest, because it needs network — a unit test can prove we *send* a UA, not that Scryfall *accepts* it |
-| `test/port-tabletop/cardPlayedEvent.test.ts` | F0: payload sends the CURRENT face + face-specific image; never leaks gameCardIndex |
+| `test/port-tabletop/cardPlayedEvent.test.ts` | F0: payload sends the CURRENT face + `frontImageUrl`/`backImageUrl` (ticket 12, 2026-08-08 — was a single face-specific `imageUrl`); asserts `backImageUrl` null for non-twoFaced, populated for twoFaced (including when `backImageUris` is unset, proving derivation from `twoFaced` not stored-URI presence); never leaks gameCardIndex |
 | `test/port-tabletop/gateways.test.ts`, `sendToTable.test.ts` | Gateways record/fail; send-then-commit sending half |
 | `test/GameState-cardInstanceId.test.ts` | Instance ids: minted in newGame, mint-on-load durable across saves |
-| `apps/tabletop/test/verification/verify-drag-identity.spec.ts` | E2E: drags two non-overlapping played cards in sequence, asserts the second drag moves only the second card (regression guard for the `959831c` selection-clearing fix — not a two-faced-cards feature per se, but the ShapeUtil it guards, `MtgCardImageShapeUtil`, is tracked here — see tabletop.md) |
+| `apps/tabletop/test/verification/verify-drag-identity.spec.ts`, `verify-card-drag-identity.spec.ts` | E2E: drags two non-overlapping played cards in sequence, asserts the second drag moves only the second card (regression guard for the `959831c` selection-clearing fix, ported forward to `MtgCardShapeUtil` in ticket 12 — not a two-faced-cards feature per se, but the ShapeUtil it guards is tracked here — see tabletop.md) |
 
 ## Test Data
 
