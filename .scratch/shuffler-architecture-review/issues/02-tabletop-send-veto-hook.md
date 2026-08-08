@@ -3,7 +3,7 @@
 Mountain: overhead
 Ship: shuffler
 Type: task
-Status: ready-for-agent
+Status: resolved
 
 ## Context
 

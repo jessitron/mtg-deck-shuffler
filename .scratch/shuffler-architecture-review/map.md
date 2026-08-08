@@ -27,15 +27,21 @@ bundled in. Done when each ticket below is either resolved or explicitly parked 
 
 ## Decisions so far
 
-- **[Design the tabletop-send pre-commit hook](issues/02-tabletop-send-veto-hook.md) —
-  design settled** (2026-08-08, `/grilling`), not yet implemented. `applyGameCommand` gains an
-  optional `beforeMutate` hook; on failure it throws a typed `TableSendFailedError(errorHtml)`,
-  which `applyGameCommand` catches into a new `CommandOutcome` kind, `{ kind: "send-failed",
-  errorHtml }` — any other thrown error still propagates uncaught, same as `mutate`'s do today.
-  `renderCommandOutcome` gets one new case. `/play-card`/`/discard-card` fully migrate onto
-  `applyGameCommand` + `renderCommandOutcome`, same as the other 9 routes. Also: it isn't a veto
-  (permission check), it's a required side effect — renamed accordingly, so the kind is
-  `"send-failed"` not `"vetoed"`. Status is `ready-for-agent`.
+- **[Design and implement the tabletop-send pre-commit hook](issues/02-tabletop-send-veto-hook.md) —
+  done** (2026-08-08). `applyGameCommand` gained an optional `beforeMutate` hook (runs after
+  status/version checks, before `mutate`); on failure it throws a typed
+  `TableSendFailedError(errorHtml)`, which `applyGameCommand` catches into a new
+  `CommandOutcome` kind, `{ kind: "send-failed", errorHtml }` — any other thrown error still
+  propagates uncaught, same as `mutate`'s do today. `renderCommandOutcome` got the matching
+  case. `/play-card`/`/discard-card` fully migrated onto `applyGameCommand` +
+  `renderCommandOutcome`, same as the other 9 routes; the now-dead `validateStateVersion`
+  helper was deleted. Both routes' `beforeMutate` closures share one local helper,
+  `sendCardBeforeMutate`, so the span-attribute set and the send-failure logging (now
+  `log.error`, not `console.error`, per `fleet-is-observable`) live in one place, not two.
+  A code-review pass before commit caught and fixed one real regression (lost span
+  attributes in `/play-card`'s mutate callback). Also: it isn't a veto (permission check),
+  it's a required side effect — renamed accordingly, so the kind is `"send-failed"` not
+  `"vetoed"`.
 
 - **Candidate #1 — collapse app.ts's route-mutation protocol: done** (2026-08-08, merged to
   main). Deleted the dead `/put-down` route, collapsed GameState's four `*ByGameCardIndex`
@@ -45,14 +51,14 @@ bundled in. Done when each ticket below is either resolved or explicitly parked 
   `move-hand-card`, `undo`, `draw`. All 9 now uniformly check `gameStatus() === "Active"`
   (6 of them didn't before — deliberate behavior change, approved by Jess, not a side effect).
   `flip-card`, `flip-card-modal`, `play-card`, `discard-card` deliberately stayed on the old
-  middleware pair — see tickets 01 and 02.
+  middleware pair — see tickets 01 and 02 (both now done; all 13 game-mutating routes are on
+  `applyGameCommand`).
 
 - **[Migrate flip-card and flip-card-modal onto applyGameCommand](issues/01-flip-card-migration.md) —
   done** (2026-08-08). The `renderApplied` assumption held for `/flip-card` (no change to
   `applyGameCommand` needed); `/flip-card-modal` needed `renderApplied`'s signature widened
   to `(game, whatHappened) => string | void` since it sends its own response via `res.render`.
-  `loadGameFromParams`/`requireValidVersion` are now fully unused and deleted — only
-  `play-card`/`discard-card` remain on the old middleware pair (ticket 02).
+  `loadGameFromParams`/`requireValidVersion` are now fully unused and deleted.
 
 ## Fog — not yet specified
 
