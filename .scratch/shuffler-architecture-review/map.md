@@ -24,15 +24,18 @@ bundled in. Done when each ticket below is either resolved or explicitly parked 
   2026-08-08) on which of app.ts's game routes are on the new `applyGameCommand` protocol vs.
   the old `loadGameFromParams`/`requireValidVersion` middleware pair — read that before
   extending either.
+
 ## Decisions so far
 
 - **[Design the tabletop-send pre-commit hook](issues/02-tabletop-send-veto-hook.md) —
   design settled** (2026-08-08, `/grilling`), not yet implemented. `applyGameCommand` gains an
-  optional `beforeMutate` hook, thrown errors propagate uncaught same as `mutate`'s do today, no
-  new `CommandOutcome` kind — the route's own `beforeMutate` closure self-renders the 502+modal
-  and throws a sentinel to unwind, guarded by `if (res.headersSent) return;` in the outer catch.
-  Also: it isn't a veto (permission check), it's a required side effect — renamed accordingly.
-  Status is `ready-for-agent`.
+  optional `beforeMutate` hook; on failure it throws a typed `TableSendFailedError(errorHtml)`,
+  which `applyGameCommand` catches into a new `CommandOutcome` kind, `{ kind: "send-failed",
+  errorHtml }` — any other thrown error still propagates uncaught, same as `mutate`'s do today.
+  `renderCommandOutcome` gets one new case. `/play-card`/`/discard-card` fully migrate onto
+  `applyGameCommand` + `renderCommandOutcome`, same as the other 9 routes. Also: it isn't a veto
+  (permission check), it's a required side effect — renamed accordingly, so the kind is
+  `"send-failed"` not `"vetoed"`. Status is `ready-for-agent`.
 
 - **Candidate #1 — collapse app.ts's route-mutation protocol: done** (2026-08-08, merged to
   main). Deleted the dead `/put-down` route, collapsed GameState's four `*ByGameCardIndex`
