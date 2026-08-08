@@ -7,7 +7,7 @@ and says what order they go in. Each map points back here; this points at each m
 Source: `notes/ramble-tabletop-replaces-mural.md` (Jess, 2026-08-06) — a dictated pass over
 everything the Tabletop needs before it can take Mural's place — grilled into shape the same
 day. It's kept as a primary source: when this document and the ramble disagree, the ramble is
-what she actually said.
+what she actually said. 
 
 ## The destination
 

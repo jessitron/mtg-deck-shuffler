@@ -1,5 +1,8 @@
 # Parked tickets
 
+Reference:  apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md
+
+
 Written work belonging to a map that doesn't exist yet.
 
 These came out of the former `tabletop-card-physics-starter` map when the
