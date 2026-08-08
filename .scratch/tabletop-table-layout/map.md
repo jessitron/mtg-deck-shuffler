@@ -51,6 +51,12 @@ polish.
   third of the old Graveyard box, Graveyard keeps the top two-thirds; the column widens
   (~425 → ~545) and that ripple — shifting every seat to the right of a widened one — is in scope,
   not deferred. "Mat grows taller" stays separately deferred. Recorded in `apps/tabletop/DESIGN.md`.
+- [Polish the player area's geometry and cosmetics](issues/04-player-area-polish.md) (2026-08-08) —
+  implemented the four mechanical items (land gap, centered Stack-pile cards, playmat border
+  approximated to the decided `solid black xl` look, library border+label as an outward frame
+  around the opaque image). Rounded playmat corners stayed out — already decided (5% of height,
+  `tabletop-physics` ticket 11) but blocked on the not-yet-built `mtg-zone` custom shape; tracked
+  on the `zone-look-not-landed` line in `TODO.md`, not a fresh ticket.
 
 ## Not yet specified
 
