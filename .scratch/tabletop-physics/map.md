@@ -228,20 +228,15 @@ expensive way round.
   radius uses width and height *separately* for the two axes, drawing an ellipse on this non-
   square shape instead of a round corner. **The Stack reads as the same zone family as
   graveyard/exile/command** — no distinct treatment, no literal "blue." Implementing any of this
-  stays blocked on the fog item below (Tabletop CSS tokens and fonts); only the decision shipped.
+  was blocked on the Tabletop having somewhere to put tokens and fonts — resolved 2026-08-07 by
+  `4396aea` ("Give the fleet one dictionary: @fleet/design-tokens"), outside this map's own
+  tickets. `packages/design-tokens` now holds the shared palette (including `--armed-glow`), the
+  Shuffler serves it at `/fleet/tokens.css`, the Tabletop imports it through Vite, and
+  Orbitron/Ovo load via a Google Fonts `<link>` in `apps/tabletop/index.html`. Nothing on this map
+  blocks building the real `mtg-zone`/playmat shape anymore.
 
 ## Not yet specified
 
-- **Where Tabletop CSS tokens and fonts live.** `apps/tabletop` has **no CSS source file at all**
-  (only a built `dist/client/assets/*.css`) and no font `<link>` or `@font-face` anywhere, while the
-  fleet's Layer-1 craft rule says "use `var(--…)`, not a literal" applies to the Tabletop today. A
-  self-rendering `mtg-zone` hits both the moment it draws its own box with an Orbitron label — and
-  the font half **fails silently**, falling back to a system serif. Shared file? A duplicated
-  `:root`, à la the deliberately duplicated `log.ts`? (The design owner warns specifically against
-  a copied `:root` — a diverged palette fails silently.) It's fleet design plumbing rather than
-  physics, and it's entangled with the Tabletop's whole design pass, which is bigger than this map.
-  It does **not** block deciding [ticket 11](issues/11-what-a-zone-looks-like.md), which stages on
-  `/design` in the Shuffler; it blocks implementing it. Also a `TODO.md` line.
 - **Whether the armed highlight should be shared with the whole table.** Decided local-only for now
   (ticket 03) because it's far easier and Jess didn't mind. It becomes worth revisiting *only* if
   tldraw exposes a presence lane — cursors and selections already ride outside the undoable
