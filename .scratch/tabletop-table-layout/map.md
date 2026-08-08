@@ -91,14 +91,6 @@ polish.
 
 ## Not yet specified
 
-- **How a sleeve's chosen color travels and renders.** `cardBackImageUrl` is a URL field
-  today; ticket 09 decided sleeves are color-picked in v1, but not how a color becomes
-  that field's value (or a new field) through `seat.joined` and onto the card back shape.
-  Graduated 2026-08-08 out of ticket 09's resolution.
-- **Life totals and commander damage.** Numbers a player can modify, and a commander-damage
-  count per opponent. Nothing exists in code. What kind of object is a modifiable number here —
-  furniture, a shape, or something outside the canvas entirely? Map 1 is resolved now, so this
-  is ticketable whenever someone sits down with it — not waiting on anything anymore.
 - **Seat position across a restart.** Seat index is `entry.seats.size` at join time, so after a
   server restart players re-joining in a different order land in different places. Belongs
   here (it's geography) but can't be decided until map 6 says what survives a restart.
