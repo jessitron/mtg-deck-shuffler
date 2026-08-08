@@ -1506,18 +1506,17 @@ export function createApp(
   });
 
   // Returns active game fragment - updated game board
-  app.post("/shuffle/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const gameId = res.locals.gameId as number;
+  app.post("/shuffle/:gameId", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      const whatHappened = game.shuffle(browserTabId);
-      await persistStatePort.save(game.toPersistedGameState());
+      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
+        return game.shuffle(browserTabId);
+      });
 
-      const html = formatActiveGameHtmlSection(game, whatHappened);
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
+      renderCommandOutcome(res, gameId, outcome, "Cannot shuffle: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
     } catch (error) {
       console.error("Error shuffling library:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not shuffle library"}</div>`);
