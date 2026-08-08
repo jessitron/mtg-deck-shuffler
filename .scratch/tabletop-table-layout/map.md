@@ -57,6 +57,13 @@ polish.
   around the opaque image). Rounded playmat corners stayed out — already decided (5% of height,
   `tabletop-physics` ticket 11) but blocked on the not-yet-built `mtg-zone` custom shape; tracked
   on the `zone-look-not-landed` line in `TODO.md`, not a fresh ticket.
+- [Show the deck name with the player name above the playmat](issues/06-seat-label-deck-name.md)
+  (2026-08-08) — deck name does not flow end-to-end today; it stops at the Shuffler. Needs a
+  new field threaded through five spots: the `sendSeatJoinedBestEffort` call site, the
+  `SeatJoinedEvent` type, a new/extended `contracts/` schema (no `seat.joined` schema exists
+  yet, unlike `seat.taken.v1.json`), the Tabletop's `seatJoined.ts` validation, and the
+  player-name label render in `tableFurniture.ts`. Label rendering itself is small once the
+  data exists — the work is the threading. Implementation, not a further decision.
 
 ## Not yet specified
 
