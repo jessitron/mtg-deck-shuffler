@@ -16,12 +16,12 @@ function seatJoined(overrides: Record<string, unknown>) {
   };
 }
 
-async function widestGeoShapeWidth(page: import("@playwright/test").Page): Promise<number> {
-  const geoShapes = page.locator(`.tl-shape[data-shape-type="geo"]`);
-  const count = await geoShapes.count();
+async function widestZoneShapeWidth(page: import("@playwright/test").Page): Promise<number> {
+  const zoneShapes = page.locator(`.tl-shape[data-shape-type="mtg-zone"]`);
+  const count = await zoneShapes.count();
   let widest = 0;
   for (let i = 0; i < count; i++) {
-    const box = await geoShapes.nth(i).boundingBox();
+    const box = await zoneShapes.nth(i).boundingBox();
     if (box) widest = Math.max(widest, box.width);
   }
   return widest;
@@ -36,28 +36,29 @@ test("a player area appears before any card, and the Stack widens for a second s
   const firstResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, { data: first });
   expect(firstResponse.status()).toBe(201);
 
-  // Player area furniture (playmat outline + graveyard + exile) plus the
-  // Stack strip render as geo shapes; the playmat/library images and the name
-  // label render too — all before any card is posted.
-  const geoShapes = page.locator(`.tl-shape[data-shape-type="geo"]`);
-  await expect(geoShapes).toHaveCount(4, { timeout: 10000 }); // mat outline, graveyard, exile, stack
+  // Player area furniture (playmat outline + library outline + graveyard +
+  // exile) plus the Stack strip render as mtg-zone shapes; the playmat/
+  // library images and the name label render too — all before any card is
+  // posted.
+  const zoneShapes = page.locator(`.tl-shape[data-shape-type="mtg-zone"]`);
+  await expect(zoneShapes).toHaveCount(5, { timeout: 10000 }); // mat, library, graveyard, exile, stack
   const imageShapes = page.locator(`.tl-shape[data-shape-type="image"]`);
   await expect(imageShapes).toHaveCount(2); // playmat picture, library card back
   const textShapes = page.locator(`.tl-shape[data-shape-type="text"]`);
   await expect(textShapes).toHaveCount(1); // name label
 
-  const widestBefore = await widestGeoShapeWidth(page);
+  const widestBefore = await widestZoneShapeWidth(page);
 
   const second = seatJoined({ initiator: { seatId: `e2e-seat-b-${Date.now()}`, playerName: "Sam" } });
   const secondResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, { data: second });
   expect(secondResponse.status()).toBe(201);
 
   await expect(textShapes).toHaveCount(2, { timeout: 10000 });
-  await expect(geoShapes).toHaveCount(7); // two player areas' furniture (3 each) + one shared stack
+  await expect(zoneShapes).toHaveCount(9); // two player areas' furniture (4 each) + one shared stack
   await expect(imageShapes).toHaveCount(4);
 
-  // The Stack strip is the widest geo shape (it spans every player area), and
-  // it widened rather than staying the same size.
-  const widestAfter = await widestGeoShapeWidth(page);
+  // The Stack strip is the widest zone shape (it spans every player area),
+  // and it widened rather than staying the same size.
+  const widestAfter = await widestZoneShapeWidth(page);
   expect(widestAfter).toBeGreaterThan(widestBefore);
 });

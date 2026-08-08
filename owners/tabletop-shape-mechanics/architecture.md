@@ -120,10 +120,91 @@ shapes either. Miss `...defaultShapeSchemas` here and the *server's* schema reje
 not just cards — and unlike the client-side gap, this one disconnects the client outright rather
 than degrading quietly, since `TLSocketRoom` validates every incoming record against `schema`.
 
-Zones/furniture (`tableFurniture.ts`) are drawn as stock, locked `geo`/`image` shapes — no custom
-ShapeUtil of their own (see `MtgCardShapeUtil.tsx`'s own comment on why `onTranslateEnd` rather
-than `onDragShapesOver`/`onDropShapesOver` was chosen for zone detection: zones have nothing to
-hang a target-side hook on without giving them their own ShapeUtil).
+Zones/furniture used to be drawn as stock, locked `geo`/`image` shapes with no custom ShapeUtil of
+their own — ticket 13 (below) gave them one, `mtg-zone`. `MtgCardShapeUtil.tsx`'s own comment
+still explains why `onTranslateEnd` (card-side) rather than `onDragShapesOver`/`onDropShapesOver`
+(zone-side) is the right place for zone detection, and that reasoning is unchanged by ticket 13:
+`Editor.getDraggingOverShape` filters out locked shapes before checking drag-over hooks at all, so
+a target-side hook on `MtgZoneShapeUtil` could never fire regardless of whether zones have their
+own ShapeUtil now. The playmat/library background *pictures* remain stock `image` shapes layered
+on top of the `mtg-zone` outline — those never participate in zone detection either way.
+
+## Ticket 13: furniture becomes a genuine custom shape type, `mtg-zone`
+
+`.scratch/tabletop-physics/issues/03-what-furniture-is.md` (buoyed alongside ticket 02, resolved
+2026-08-08) asked the same "one shared type, several meanings" question ticket 02 asked about
+cards — furniture used stock, locked `geo`/`image` shapes tagged with a freeform `meta.zone`
+string, indistinguishable at the type level from a stray dropped JPEG or a `geo` shape drawn by a
+player for some other reason. Ticket 13 gives furniture its own type, `mtg-zone`:
+`apps/tabletop/src/shared/mtgZoneShape.ts` (props/validators/`TLGlobalShapePropsMap`
+registration, same pattern as `mtgCardShape.ts`) and
+`apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` (`BaseBoxShapeUtil<MtgZoneShape>`).
+`props.zone` is a closed enum (`"playmat" | "library" | "graveyard" | "exile" | "stack" |
+"command"`) plus `seatId` and `label` — validated, unlike the old bare `meta.zone` string that any
+shape could carry.
+
+**New working example of a pattern this KB only had in the abstract before: a locked shape needs
+no interaction hooks at all.** `MtgZoneShapeUtil` defines none of `onClick`/`onTranslateEnd`/
+`onDragShapesOver` — not because they'd be no-ops, but because they're genuinely unreachable for a
+locked shape:
+- Zones are minted `isLocked: true` in `tableFurniture.ts`'s `zoneShape()` builder, and stay that
+  way — tldraw's own context-menu Lock/Unlock is the sole unlock affordance, per the ticket.
+- `SelectTool`'s `Idle` state gates on `isLocked` before a shape ever reaches `PointingShape` — so
+  a locked shape never enters the click/drag flow this owner's watch point 1 warns about.
+  **Consequence worth naming explicitly: `mtg-zone` defining `onClick` later (e.g. some future
+  unlock affordance) would NOT reopen the `mtg-card` selection-deferral quirk**, because that
+  quirk's `PointingShape.onEnter` check is gated behind the same `isLocked` test — a locked shape
+  with `onClick` still never reaches the code path that defers selection.
+- `Editor.getDraggingOverShape` filters out locked shapes before checking for drag-over hooks —
+  so `onDragShapesOver`/`onDropShapesOver` on the zone side could never fire either, locked or
+  not. This is why zone-entry detection has always lived card-side (`onTranslateEnd`'s `zoneAt()`)
+  and still does.
+
+Confirmed against tldraw source during `-review`, not assumed from the pattern above.
+
+**`zoneAt()` upgraded from a bare `meta.zone` string scan to matching real `mtg-zone` shapes.**
+`MtgCardShapeUtil.tsx`'s private `zoneAt()` now filters `candidate.type === "mtg-zone"` (instead
+of "any shape with a truthy `meta.zone`") and reads the validated `candidate.props.zone` (instead
+of the unvalidated `meta.zone`). It also now resolves overlapping zones — previously undefined
+behavior — by picking the **topmost-drawn zone**: comparing candidates' `index` (an `IndexKey`,
+tldraw's fractional-indexing base62 string) with plain string `>` and keeping the greatest. Plain
+string comparison already reflects z-order for `IndexKey`s — confirmed against
+`@tldraw/utils`'s `fractionalIndexing.ts` source during `-review`, not just the docs. `meta.zone`
+survives on the *card* shape only as the zone-entry dedup ("what zone was this card last known to
+be in") — reading zone membership from the environment now goes through real `mtg-zone` shapes,
+not a tag on the card.
+
+**Registration follows the exact four-step pattern watch point 6 already generalized from
+`mtg-card`** — `TLGlobalShapePropsMap` augmentation in `mtgZoneShape.ts`; client
+`useSync({ shapeUtils: [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil] })` in
+`TablePage.tsx` (same array reused by the `<Tldraw shapeUtils={...}>` prop); server
+`createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-zone": {...} } })` in
+`rooms.ts`. No new registration mechanic turned up this time — the pattern generalized cleanly to
+a second shape type, which is itself worth recording as confirmation it's the right pattern.
+
+**Visual treatment moved off a separate style-parameter machinery and into
+`MtgZoneShapeUtil.component()`.** `tableFurniture.ts` used to carry a `RegionStyle`/
+`DEFAULT_REGION_STYLE`/`PLAYMAT_REGION_STYLE` set of constants that got threaded through to style
+the stock `geo` shapes' border. That's gone; `MtgZoneShapeUtil.component()` now branches directly
+on `props.zone === "playmat"` to choose a solid black border vs. the other zones' dashed grey —
+the visual decision lives with the shape that renders it, not in a server-side styling parameter
+object. Ticket 14 (retokenizing to `--dark-pink`/armed-glow) will edit `component()` in place;
+nothing about *this* ticket's plumbing anticipates that beyond leaving a comment pointing at it.
+
+**Two incidental fixes rode along with the ticket, both worth recording here because they're
+easy to reopen:**
+- `ensureStackStripWidth` (`tableFurniture.ts`) used to call `nextIndex()` — minting a fresh,
+  always-highest z-order index — on *every* call, including when widening an already-existing
+  Stack strip for a newly-joined seat. That silently promoted the Stack to the top of z-order
+  every time a seat joined, potentially covering shapes placed above it since. Fixed by reading
+  the existing shape via `store.get(stackId)` inside `updateStore` and reusing its `.index` when
+  present; `nextIndex()` is now called only on first creation. Not a `mtg-zone`-specific bug — it
+  would have bitten the old `geo`-shape Stack too — but it surfaced while touching this code for
+  the rewrite.
+- The seat name label (`tableFurniture.ts`, the `type: "text"` shape) was `isLocked: false`,
+  meaning any player could drag or delete another player's name label. Now `isLocked: true`, same
+  as the zones around it. Also not `mtg-zone`-specific (the label stayed a stock `text` shape,
+  not converted to a zone), but fixed in the same pass.
 
 ## Registering a shape into tldraw's own `TLShape` union
 

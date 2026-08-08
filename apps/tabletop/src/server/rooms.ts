@@ -3,14 +3,19 @@ import { createTLSchema, defaultShapeSchemas, TLRecord } from "@tldraw/tlschema"
 import { trace } from "@opentelemetry/api";
 import { log } from "./log.js";
 import { mtgCardShapeProps } from "../shared/mtgCardShape.js";
+import { mtgZoneShapeProps } from "../shared/mtgZoneShape.js";
 
 // Every room's store validates against this schema — the server-side twin of
 // the client's `shapeUtils` list in TablePage.tsx (@tldraw/tlschema
 // createTLSchema, not the React shapeUtils constructors: the server never
-// renders). Missing `mtg-card` here doesn't silently fail like the client
-// schema would — it disconnects any client that pushes one.
+// renders). Missing `mtg-card`/`mtg-zone` here doesn't silently fail like the
+// client schema would — it disconnects any client that pushes one.
 const tableSchema = createTLSchema({
-  shapes: { ...defaultShapeSchemas, "mtg-card": { props: mtgCardShapeProps } },
+  shapes: {
+    ...defaultShapeSchemas,
+    "mtg-card": { props: mtgCardShapeProps },
+    "mtg-zone": { props: mtgZoneShapeProps },
+  },
 });
 
 // ============================================================================

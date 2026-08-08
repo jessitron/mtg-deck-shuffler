@@ -6,8 +6,9 @@ import { T } from "@tldraw/validate";
  * type, not a stock `image` shape borrowed for cards. Both faces' URLs travel
  * with the card from arrival, so flip is a pure `props.face` write — no
  * re-fetch, no per-instance tldraw asset. `zone` deliberately isn't here:
- * zone membership stays tracked via `meta.zone` (ticket 13 gives zones their
- * own shape type; this ticket doesn't move that).
+ * zone membership stays tracked via `meta.zone` on the card (ticket 13 gave
+ * zones their own `mtg-zone` shape type; the card's own debounce state
+ * deliberately didn't move into `props`).
  */
 export interface MtgCardShapeProps {
   w: number;

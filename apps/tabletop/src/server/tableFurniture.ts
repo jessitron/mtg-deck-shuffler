@@ -2,6 +2,7 @@ import { trace } from "@opentelemetry/api";
 import { AssetRecordType, createShapeId, toRichText, TLAssetId, TLShapeId } from "@tldraw/tlschema";
 import { IndexKey, getIndexAbove, ZERO_INDEX_KEY } from "@tldraw/utils";
 import { RoomEntry, PlayerArea } from "./rooms.js";
+import { MtgZoneShapeProps } from "../shared/mtgZoneShape.js";
 import {
   playmatBounds,
   libraryBounds,
@@ -32,48 +33,41 @@ export function nextIndex(tableName: string): IndexKey {
 }
 
 /**
- * Zones a card can be detected entering (01-zone-entry-events). Matches the
- * identifiers this file already builds shapes for — command zone isn't
- * built yet, so it isn't listed here; add it here once it exists.
+ * Zones a card can be detected entering (01-zone-entry-events, upgraded in
+ * tabletop-physics ticket 13 to real `mtg-zone` shapes). `command` isn't
+ * placed by this file yet, but is a valid value once it exists.
  */
-export type Zone = "playmat" | "library" | "graveyard" | "exile";
-
-export interface RegionStyle {
-  dash: "dashed" | "solid";
-  color: string;
-  size: "s" | "m" | "l" | "xl";
-}
-
-/** Default look for furniture regions: a light dashed grey outline. */
-const DEFAULT_REGION_STYLE: RegionStyle = { dash: "dashed", color: "grey", size: "s" };
-
-/**
- * The playmat's border reads as the Shuffler's own playmat: black, solid, and
- * heavier than the other regions — one identity across both ships (decided
- * for the eventual mtg-zone custom shape in tabletop-physics ticket 11; `xl`
- * is the closest stock tldraw `geo` size to that target until that shape exists).
- */
-export const PLAYMAT_REGION_STYLE: RegionStyle = { dash: "solid", color: "black", size: "xl" };
+export type Zone = MtgZoneShapeProps["zone"];
 
 /** How far the library's card-back image insets from its box, so the box's border and "Library" label peek out as a frame around the opaque image. */
 const LIBRARY_IMAGE_INSET = 12;
 
-export function regionShape(
-  id: TLShapeId,
-  pageId: string,
-  x: number,
-  y: number,
-  w: number,
-  h: number,
-  label: string,
-  index: IndexKey,
-  zone?: Zone,
-  style: RegionStyle = DEFAULT_REGION_STYLE
-) {
+export interface ZoneShapeArgs {
+  id: TLShapeId;
+  pageId: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  label: string;
+  index: IndexKey;
+  zone: Zone;
+  seatId: string | null;
+}
+
+/**
+ * Furniture (playmat, library, graveyard, exile, the Stack) as an `mtg-zone`
+ * shape (tabletop-physics ticket 13) — always locked; tldraw's own
+ * context-menu Lock/Unlock is the sole unlock affordance. `MtgZoneShapeUtil`
+ * decides the visual treatment (dashed vs. playmat's solid border) from
+ * `props.zone`. `opacity: 0.5` matches the pre-ticket-13 `regionShape`'s
+ * look (furniture read as a faint outline, not a solid block).
+ */
+export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId }: ZoneShapeArgs) {
   return {
     id,
     typeName: "shape",
-    type: "geo",
+    type: "mtg-zone",
     x,
     y,
     rotation: 0,
@@ -81,24 +75,8 @@ export function regionShape(
     parentId: pageId,
     isLocked: true, // furniture: don't let a stray drag eat the graveyard
     opacity: 0.5,
-    props: {
-      geo: "rectangle",
-      w,
-      h,
-      dash: style.dash,
-      fill: "none",
-      color: style.color,
-      labelColor: style.color,
-      size: style.size,
-      font: "serif",
-      align: "start-legacy",
-      verticalAlign: "start",
-      growY: 0,
-      url: "",
-      scale: 1,
-      richText: toRichText(label),
-    },
-    meta: zone ? { zone } : {},
+    props: { w, h, zone, seatId, label } satisfies MtgZoneShapeProps,
+    meta: {},
   } as any;
 }
 
@@ -111,8 +89,7 @@ function imageShape(
   h: number,
   assetId: TLAssetId,
   altText: string,
-  index: IndexKey,
-  zone?: Zone
+  index: IndexKey
 ) {
   return {
     id,
@@ -126,7 +103,7 @@ function imageShape(
     isLocked: true, // furniture: an image background, not something to drag
     opacity: 1,
     props: { w, h, assetId, playing: true, url: "", crop: null, flipX: false, flipY: false, altText },
-    meta: zone ? { zone } : {},
+    meta: {},
   } as any;
 }
 
@@ -191,14 +168,12 @@ export async function ensurePlayerArea(
   await entry.room.updateStore((store) => {
     // The mat outline is always drawn — the fallback if the image is missing/broken.
     store.put(
-      regionShape(matId, pageId, mat.x, mat.y, mat.w, mat.h, "", nextIndex(entry.tableName), "playmat", PLAYMAT_REGION_STYLE)
+      zoneShape({ id: matId, pageId, x: mat.x, y: mat.y, w: mat.w, h: mat.h, label: "", index: nextIndex(entry.tableName), zone: "playmat", seatId })
     );
     if (images.playmatImageUrl) {
       const assetId = AssetRecordType.createId(`playmat-${entry.tableName}-${seatId}`);
       store.put(imageAsset(assetId, `${playerName}'s playmat`, images.playmatImageUrl, mat.w, mat.h));
-      store.put(
-        imageShape(matImageId, pageId, mat.x, mat.y, mat.w, mat.h, assetId, `${playerName}'s playmat`, nextIndex(entry.tableName), "playmat")
-      );
+      store.put(imageShape(matImageId, pageId, mat.x, mat.y, mat.w, mat.h, assetId, `${playerName}'s playmat`, nextIndex(entry.tableName)));
     }
 
     if (images.cardBackImageUrl) {
@@ -207,7 +182,18 @@ export async function ensurePlayerArea(
       // full bounds first, then the image inset within it so the box's edge — and the
       // label riding on it — stays visible as a ring around the picture.
       store.put(
-        regionShape(libraryId, pageId, library.x, library.y, library.w, library.h, "Library", nextIndex(entry.tableName), "library")
+        zoneShape({
+          id: libraryId,
+          pageId,
+          x: library.x,
+          y: library.y,
+          w: library.w,
+          h: library.h,
+          label: "Library",
+          index: nextIndex(entry.tableName),
+          zone: "library",
+          seatId,
+        })
       );
       const assetId = AssetRecordType.createId(`library-${entry.tableName}-${seatId}`);
       const insetW = library.w - 2 * LIBRARY_IMAGE_INSET;
@@ -223,18 +209,54 @@ export async function ensurePlayerArea(
           insetH,
           assetId,
           "Library",
-          nextIndex(entry.tableName),
-          "library"
+          nextIndex(entry.tableName)
         )
       );
     } else {
-      store.put(regionShape(libraryId, pageId, library.x, library.y, library.w, library.h, "Library", nextIndex(entry.tableName), "library"));
+      store.put(
+        zoneShape({
+          id: libraryId,
+          pageId,
+          x: library.x,
+          y: library.y,
+          w: library.w,
+          h: library.h,
+          label: "Library",
+          index: nextIndex(entry.tableName),
+          zone: "library",
+          seatId,
+        })
+      );
     }
 
     store.put(
-      regionShape(graveyardId, pageId, graveyard.x, graveyard.y, graveyard.w, graveyard.h, "Graveyard", nextIndex(entry.tableName), "graveyard")
+      zoneShape({
+        id: graveyardId,
+        pageId,
+        x: graveyard.x,
+        y: graveyard.y,
+        w: graveyard.w,
+        h: graveyard.h,
+        label: "Graveyard",
+        index: nextIndex(entry.tableName),
+        zone: "graveyard",
+        seatId,
+      })
     );
-    store.put(regionShape(exileId, pageId, exile.x, exile.y, exile.w, exile.h, "Exile", nextIndex(entry.tableName), "exile"));
+    store.put(
+      zoneShape({
+        id: exileId,
+        pageId,
+        x: exile.x,
+        y: exile.y,
+        w: exile.w,
+        h: exile.h,
+        label: "Exile",
+        index: nextIndex(entry.tableName),
+        zone: "exile",
+        seatId,
+      })
+    );
 
     store.put({
       id: labelId,
@@ -245,7 +267,7 @@ export async function ensurePlayerArea(
       rotation: 0,
       index: nextIndex(entry.tableName),
       parentId: pageId,
-      isLocked: false,
+      isLocked: true, // fixes a live bug: any player could drag/delete another player's name
       opacity: 1,
       props: { richText: toRichText(playerName), color: "green", size: "m", font: "serif", textAlign: "start", autoSize: true, w: 200, scale: 1 },
       meta: {},
@@ -267,13 +289,24 @@ export async function ensurePlayerArea(
   return area;
 }
 
-/** Create or widen the shared Stack strip to span every player area joined so far. */
+/**
+ * Create or widen the shared Stack strip to span every player area joined so
+ * far. The shape id is deterministic (one Stack per table), so widening an
+ * existing strip must reuse its current `index` rather than minting a fresh
+ * one — a new seat joining (and the Stack widening) must not silently
+ * promote the Stack to the top of z-order over whatever else was placed
+ * above it since (tabletop-physics ticket 13).
+ */
 export async function ensureStackStripWidth(entry: RoomEntry, pageId: string): Promise<void> {
   const seatCount = entry.seats.size;
   if (seatCount === 0) return;
   const bounds = stackStripBounds(seatCount);
   const stackId = createShapeId(`region-stack-${entry.tableName}`);
   await entry.room.updateStore((store) => {
-    store.put(regionShape(stackId, pageId, bounds.x, bounds.y, bounds.w, bounds.h, "The Stack", nextIndex(entry.tableName)));
+    const existing = store.get(stackId);
+    const index = existing?.typeName === "shape" ? existing.index : nextIndex(entry.tableName);
+    store.put(
+      zoneShape({ id: stackId, pageId, x: bounds.x, y: bounds.y, w: bounds.w, h: bounds.h, label: "The Stack", index, zone: "stack", seatId: null })
+    );
   });
 }
