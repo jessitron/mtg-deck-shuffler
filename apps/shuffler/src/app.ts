@@ -11,7 +11,7 @@ import { formatLoadStateHtmlPage } from "./view/debug/load-state.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
-import { TabletopPort } from "./port-tabletop/types.js";
+import { TabletopPort, ZoneHint } from "./port-tabletop/types.js";
 import { sendCardToTableFirst, sendSeatJoinedBestEffort, zoneHintForPlay } from "./port-tabletop/sendToTable.js";
 import { formatTabletopSendErrorModal } from "./view/play-game/game-modals.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
@@ -24,7 +24,7 @@ import { trace } from "@opentelemetry/api";
 import { getCardImageUrl, constructCardImageUrl } from "./types.js";
 import { fetchScryfall } from "./scryfall-http.js";
 import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
-import { applyGameCommand, CommandOutcome } from "./apply-game-command.js";
+import { applyGameCommand, CommandOutcome, TableSendFailedError } from "./apply-game-command.js";
 import { WhatHappened } from "./GameState.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -95,32 +95,6 @@ export function createApp(
     next();
   });
   
-  // Helper function to validate state version for optimistic concurrency control
-  function validateStateVersion(
-    req: express.Request,
-    game: GameState
-  ): { valid: true } | { valid: false; errorHtml: string } {
-    const expectedVersionStr = req.body["expected-version"];
-    if (expectedVersionStr === undefined) {
-      // No version provided - allow the operation (backward compatibility)
-      return { valid: true };
-    }
-
-    const expectedVersion = parseInt(expectedVersionStr);
-    const currentVersion = game.getStateVersion();
-
-    if (expectedVersion !== currentVersion) {
-      // Extract the events that happened since the client's version
-      const allEvents = game.getEventLog().getEvents();
-      const missedEvents = allEvents.slice(expectedVersion, currentVersion);
-
-      const errorHtml = formatStaleStateErrorModal(expectedVersion, currentVersion, missedEvents, game);
-      return { valid: false, errorHtml };
-    }
-
-    return { valid: true };
-  }
-
   // Parses and validates the :gameId route param, 400ing (and stamping the
   // span) on failure. Shared by every route built on applyGameCommand, since
   // that function takes an already-valid numeric gameId.
@@ -158,6 +132,21 @@ export function createApp(
     return expectedVersionStr === undefined ? undefined : parseInt(expectedVersionStr);
   }
 
+  // Shared beforeMutate body for /play-card and /discard-card's send-then-commit
+  // (JES-127): send the card to the table first; on failure, throw
+  // TableSendFailedError to abort the command before mutate/persist run.
+  async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint, action: "play" | "discard"): Promise<void> {
+    const attributes = { "table.name": game.tableName!, "card.instance_id": card.cardInstanceId ?? "missing", "zone.hint": zoneHint };
+    trace.getActiveSpan()?.setAttributes(attributes);
+    try {
+      await sendCardToTableFirst(tabletopPort, game, card, zoneHint);
+    } catch (error) {
+      markCurrentSpanAsError(`Tabletop send failed: ${error instanceof Error ? error.message : String(error)}`, attributes);
+      log.error(`Tabletop did not accept the card; blocking the ${action}`, attributes, error as Error);
+      throw new TableSendFailedError(formatTabletopSendErrorModal(action, card.card.name, game.tableName!));
+    }
+  }
+
   // Renders a CommandOutcome from applyGameCommand. Shared by every route
   // built on that protocol; each route supplies its own "not active" message
   // and its own success rendering (some send the whole game section, some a
@@ -192,6 +181,9 @@ export function createApp(
       }
       case "not-active":
         res.status(400).send(`<div>${notActiveMessage}</div>`);
+        return;
+      case "send-failed":
+        res.status(502).setHeader("HX-Retarget", "#modal-container").setHeader("HX-Reswap", "innerHTML").send(outcome.errorHtml);
         return;
       case "applied": {
         res.setHeader("HX-Trigger", "game-state-updated");
@@ -1264,76 +1256,43 @@ export function createApp(
     }
   });
 
-  // Returns active game fragment - updated game board
+  // Returns active game fragment - updated game board. Send-then-commit
+  // (JES-127, B3): at a table, the tabletop gets the card FIRST, as
+  // applyGameCommand's beforeMutate hook; only on success does mutate run and
+  // the game state change. On failure the play is blocked and the card stays
+  // in hand — a play that silently missed the tabletop is worse than one
+  // that says it failed.
   app.post("/play-card/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
-
-      if (game.gameStatus() !== "Active") {
-        res.status(400).send(`<div>Cannot play card: Game is not active</div>`);
-        return;
-      }
-
-      // Validate state version for optimistic concurrency control
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
-      // Send-then-commit (JES-127, B3): at a table, the tabletop gets the card
-      // FIRST; only on success does the game state change. On failure the play
-      // is blocked and the card stays in hand — a play that silently missed the
-      // tabletop is worse than one that says it failed.
-      const cardToPlay = game.findCardByIndex(gameCardIndex);
-      if (game.tableName && cardToPlay && (cardToPlay.location.type === "Hand" || cardToPlay.location.type === "Revealed")) {
-        const zoneHint = zoneHintForPlay(cardToPlay);
-        trace.getActiveSpan()?.setAttributes({
-          "table.name": game.tableName,
-          "card.instance_id": cardToPlay.cardInstanceId ?? "missing",
-          "zone.hint": zoneHint,
-        });
-        try {
-          await sendCardToTableFirst(tabletopPort, game, cardToPlay, zoneHint);
-        } catch (error) {
-          console.error("Tabletop did not accept the card; blocking the play:", error);
-          markCurrentSpanAsError(`Tabletop send failed: ${error instanceof Error ? error.message : String(error)}`);
-          res
-            .status(502)
-            .setHeader("HX-Retarget", "#modal-container")
-            .setHeader("HX-Reswap", "innerHTML")
-            .send(formatTabletopSendErrorModal("play", cardToPlay.card.name, game.tableName));
-          return;
+      const outcome = await applyGameCommand(
+        { persistStatePort, cardRepository },
+        gameId,
+        expectedVersionFromRequest(req),
+        (game) => {
+          const whatHappened = game.playCard(gameCardIndex, browserTabId);
+          trace.getActiveSpan()?.setAttributes({
+            "game.gameStatus()": game.gameStatus(),
+            "game.cardsInLibrary": game.listLibrary().length,
+            "game.cardsInHand": game.listHand().length,
+            "game.full_json": JSON.stringify(game.toPersistedGameState()),
+          });
+          return whatHappened;
+        },
+        async (game) => {
+          const cardToPlay = game.findCardByIndex(gameCardIndex);
+          if (!game.tableName || !cardToPlay || (cardToPlay.location.type !== "Hand" && cardToPlay.location.type !== "Revealed")) {
+            return;
+          }
+          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay), "play");
         }
-      }
+      );
 
-      const whatHappened = game.playCard(gameCardIndex, browserTabId);
-      const persistedGameState = game.toPersistedGameState();
-      trace.getActiveSpan()?.setAttributes({
-        "game.gameStatus()": game.gameStatus(),
-        "game.cardsInLibrary": game.listLibrary().length,
-        "game.cardsInHand": game.listHand().length,
-        "game.full_json": JSON.stringify(persistedGameState),
-      });
-
-      await persistStatePort.save(persistedGameState);
-
-      const html = formatActiveGameHtmlSection(game, whatHappened);
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
+      renderCommandOutcome(res, gameId, outcome, "Cannot play card: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
     } catch (error) {
       console.error("Error playing card:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not play card"}</div>`);
@@ -1344,60 +1303,27 @@ export function createApp(
   // (JES-127, B4). The card lands in TableLocation; at a table it is sent
   // FIRST with zoneHint "graveyard" (send-then-commit, same as /play-card).
   app.post("/discard-card/:gameId/:gameCardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      const persistedGame = await persistStatePort.retrieve(gameId);
-      if (!persistedGame) {
-        res.status(404).send(`<div>Game ${gameId} not found</div>`);
-        return;
-      }
-
-      const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
-
-      if (game.gameStatus() !== "Active") {
-        res.status(400).send(`<div>Cannot discard card: Game is not active</div>`);
-        return;
-      }
-
-      const versionCheck = validateStateVersion(req, game);
-      if (!versionCheck.valid) {
-        res.status(409)
-           .setHeader('HX-Retarget', '#modal-container')
-           .setHeader('HX-Reswap', 'innerHTML')
-           .send(versionCheck.errorHtml);
-        return;
-      }
-
-      const cardToDiscard = game.findCardByIndex(gameCardIndex);
-      if (game.tableName && cardToDiscard && cardToDiscard.location.type === "Hand") {
-        trace.getActiveSpan()?.setAttributes({
-          "table.name": game.tableName,
-          "card.instance_id": cardToDiscard.cardInstanceId ?? "missing",
-          "zone.hint": "graveyard",
-        });
-        try {
-          await sendCardToTableFirst(tabletopPort, game, cardToDiscard, "graveyard");
-        } catch (error) {
-          console.error("Tabletop did not accept the card; blocking the discard:", error);
-          markCurrentSpanAsError(`Tabletop send failed: ${error instanceof Error ? error.message : String(error)}`);
-          res
-            .status(502)
-            .setHeader("HX-Retarget", "#modal-container")
-            .setHeader("HX-Reswap", "innerHTML")
-            .send(formatTabletopSendErrorModal("discard", cardToDiscard.card.name, game.tableName));
-          return;
+      const outcome = await applyGameCommand(
+        { persistStatePort, cardRepository },
+        gameId,
+        expectedVersionFromRequest(req),
+        (game) => game.discardCard(gameCardIndex, browserTabId),
+        async (game) => {
+          const cardToDiscard = game.findCardByIndex(gameCardIndex);
+          if (!game.tableName || !cardToDiscard || cardToDiscard.location.type !== "Hand") {
+            return;
+          }
+          await sendCardBeforeMutate(game, cardToDiscard, "graveyard", "discard");
         }
-      }
+      );
 
-      const whatHappened = game.discardCard(gameCardIndex, browserTabId);
-      await persistStatePort.save(game.toPersistedGameState());
-
-      const html = formatActiveGameHtmlSection(game, whatHappened);
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
+      renderCommandOutcome(res, gameId, outcome, "Cannot discard card: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
     } catch (error) {
       console.error("Error discarding card:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not discard card"}</div>`);
