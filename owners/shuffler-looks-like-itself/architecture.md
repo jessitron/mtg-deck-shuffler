@@ -262,14 +262,18 @@ If you add a stylesheet to the app, add it to `APP_STYLESHEETS` in that spec **a
 is what would catch the container symlink trap on the one page whose swatches *describe* those
 values.
 
-**The gallery cannot currently stage anything from another ship (open, 2026-08-07).** Every
-specimen today is a Shuffler component styled by a Shuffler stylesheet. A Tabletop specimen
-would need the Tabletop's CSS to be a real stylesheet `/design` can serve — a cross-app
-question that is now **half** answered: since `4396aea` the two ships genuinely share one
-token file, so a specimen using only shared tokens would be honest. The Tabletop still has no
-stylesheet of its own, so anything ship-specific remains unstageable.
-`.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md` will be the first to want one.
-Two rules for whoever gets there: **a mock built from `design-candidates.css` must be labelled
-a mock**, and a canvas specimen must not quietly hide the layering the real canvas has (see
-[README.md](README.md) → tldraw limits — the playmat's and library's opaque pictures sit *over*
-their zone box, so a flat CSS box misrepresents them).
+**The gallery has its first Tabletop specimens, and they are mocks, not the cross-app answer
+(2026-08-07, `a304c52`, ticket 11).** The § Tabletop zones section (between `#cards` and
+`#rules`) stages five zone/playmat decisions using `design-candidates.css` classes and the
+shared fleet tokens — but the Tabletop still has no stylesheet of its own, so this did **not**
+answer "can `/design` serve a real Tabletop stylesheet." It answered the narrower, sufficient
+question: a mock built entirely from shared tokens is honest enough to decide by. **Two rules
+this mock followed, now precedent for the next one:** it's labelled a mock in its own
+`section-note` rather than presented as the real component, and it's scoped to the
+**unpictured** zones (graveyard, exile, Stack, command) rather than pretending to show the
+library/playmat, whose opaque picture layer a flat CSS box can't represent (see
+[README.md](README.md) → tldraw limits). **A second precedent, easy to get wrong by default:**
+stage Tabletop specimens on `.stage-white`, not the Shuffler's own `.stage-dark` — the first
+draft here copied `.stage-dark` and Jess caught it immediately (the Tabletop's canvas is
+white). The cross-app "real Tabletop stylesheet on `/design`" question remains open for
+whichever ticket needs to render actual Tabletop CSS, not a mock.

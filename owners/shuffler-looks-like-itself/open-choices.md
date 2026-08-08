@@ -498,9 +498,9 @@ self-rendering custom shape.
 
 - **Still open: there is no ship-local stylesheet on the Tabletop.** Shared tokens have a home;
   the first *Tabletop-only* rule does not. Inline styles are the status quo by inertia, not by
-  choice. Ticket 05 (tap motion) and ticket 11 (what a zone looks like) will both want one.
-  Whoever writes that rule decides where Tabletop CSS lives — and it must not be answered by
-  starting a `:root` there.
+  choice. Ticket 05 (tap motion) and ticket 11 (what a zone looks like — now **decided but
+  unbuilt**, see below) both want one. Whoever writes that rule decides where Tabletop CSS
+  lives — and it must not be answered by starting a `:root` there.
 - **~~Still open: font tokens.~~ DECIDED and shipped 2026-08-07 (`f79bc7d`).** Jess: *"yeah, go
   for it! I'm all for more tokens."* `--font-chrome` / `--font-content` / `--font-display` are in
   `packages/design-tokens/tokens.css`, **named by role rather than by typeface** because three
@@ -525,7 +525,8 @@ self-rendering custom shape.
   (a `<link>` **or** `@font-face`, never both), and self-hosting is a change to all three at once.
 
   **The Tabletop uses none of these yet** — nothing there sets a font. They exist for ticket 11's
-  `mtg-zone` shape, which is exactly the case the tokens were created for.
+  `mtg-zone` shape, which is exactly the case the tokens were created for, and ticket 11 has now
+  decided its label wants Orbitron (see below) — still unbuilt, same blocker.
 - **`LandingPage.tsx` is a live, unrecorded Layer-1 violation.**
   `apps/tabletop/src/client/LandingPage.tsx` carries an off-brand green/cream palette in inline
   styles — `#1a2a1f`, `#f5f1e8`, `#3d5a45` — with no relationship to purple-and-pink. It is the
@@ -546,12 +547,17 @@ self-rendering custom shape.
   explicitly that an `indicator()` looking like anything other than tldraw's default is a
   **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket
   is where it will try to hitch a ride.
-- **The gallery has zero Tabletop specimens, and the cross-app stylesheet question is
-  unresolved.** The gallery's credibility rests on rendering the *app's own* stylesheets. A
-  Tabletop specimen only keeps that property if the Tabletop's CSS is a real stylesheet
-  `/design` can load — across ships, which nobody has decided. Ticket 11 will be the first to
-  hit it. **If you mock a Tabletop specimen with candidate CSS, label it a mock.** Don't settle
-  the architecture quietly on the way past.
+- **~~The gallery has zero Tabletop specimens~~ — it has its first five now (2026-08-07,
+  `a304c52`, ticket 11), and the cross-app stylesheet question is still unresolved.** The
+  gallery's credibility rests on rendering the *app's own* stylesheets. Ticket 11's § Tabletop
+  zones section sidestepped rather than answered the hard version of this: its specimens use
+  only `design-candidates.css` mock classes and the shared fleet tokens, explicitly labelled a
+  mock in the section's own note, scoped to the zones an opaque picture layer doesn't hide. A
+  Tabletop specimen using the Tabletop's **own** stylesheet, once it has one, still needs
+  `/design` to be able to load it — across ships, which nobody has decided. **If you mock a
+  Tabletop specimen with candidate CSS, label it a mock** (ticket 11 did) — and stage it on
+  `.stage-white`, not `.stage-dark` (ticket 11's first draft got this wrong and was corrected
+  live). Don't settle the architecture quietly on the way past.
 
 ## When a choice is resolved — the checklist
 

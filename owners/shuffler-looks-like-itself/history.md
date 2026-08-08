@@ -894,6 +894,76 @@ chased further. If the hand's row height, gap, or the 7-card assumption ever cha
 number needs re-measuring; nothing else in the CSS derives it. Full reasoning in
 [interactions.md](interactions.md) → "Styling either play page's mat."
 
+## 2026-08-07 — a Tabletop zone got its first design decisions, and a canvas-geometry lesson worth generalising
+
+`a304c52` **wayfinder tabletop-physics: resolve ticket 11 (what a zone looks like)**
+
+`.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md` — the last open ticket on the
+tabletop-physics map — decided what the self-rendering `mtg-zone` shape looks like at rest and
+armed, plus the playmat's border and corner radius, and whether the Stack is its own thing. All
+five were staged as `.choice` blocks on `/design` (§ Tabletop zones, between `#cards` and
+`#rules` — the gallery's first Tabletop specimens) and picked live. Nothing was implemented in
+the real Tabletop app: it still has no CSS source file and no Orbitron `<link>`
+(`tabletop-css-tokens` in the repo-root `TODO.md`), so the real `mtg-zone`/playmat shape doesn't
+exist yet to receive these decisions. New mock classes in `design-candidates.css`
+(`.zone-mock` family, `.playmat-mock` family) and one new fleet token,
+`packages/design-tokens/tokens.css` → `--armed-glow: #e6a33d` (amber — deliberately distinct
+from `--light-pink`, the global focus-ring colour, and from the `--dark-pink`/`--deep-space`
+identity pair).
+
+**The five decisions:**
+
+1. **At rest**: ports `.commander-placeholder`'s dashed-border "empty receptacle" pattern,
+   retokenized (`2px dashed var(--dark-pink)`, was `#ccc`/`#f9f9f9`), radius `0`.
+2. **Armed**: glow ring + background tint via `--armed-glow`, applied **uniformly to every zone
+   type** — even though the tint half is invisible on the library/playmat, since those two sit
+   under an opaque picture (ticket 03). Jess's read on staging: the tint is what actually sells
+   the effect, but told that the tint is unavailable on the pictured zones, she chose to accept
+   the degradation rather than fork the treatment by zone kind. One rule everywhere, not two.
+3. **Playmat border**: black, matching the Shuffler's own playmat exactly (`10px solid black`,
+   untokenized — one identity across ships). `--dark-pink` was staged and rejected.
+4. **Playmat corner radius: 5%, and the *how* is the durable lesson — see below.**
+5. **The Stack**: same zone family as graveyard/exile/command, no distinct treatment, no
+   invented "blue" token (`DESIGN.md`'s "shared blue strip" language doesn't get a literal).
+
+**The corner-radius decision is a canvas-geometry lesson worth generalising to any future
+self-rendering tldraw shape.** Three drafts, two corrections, both substantive:
+
+- **Draft 1 staged the Shuffler's literal `20px`/`80px` values.** Jess: *"the playmat's border
+  should be stable on the table when I zoom in and out... the border-radius in pixels would key
+  it to my viewport, instead of the canvas."* A fixed pixel radius drifts out of proportion to
+  the object as it's resized/zoomed on a continuously-zoomable tldraw canvas — a concern that
+  doesn't exist on the Shuffler's fixed-scale DOM pages, where `20px`/`80px` are two literal
+  values at two *fixed* page scales.
+- **Draft 2 restaged as a bare CSS percentage** (`border-radius: 5%`/`12%`). Jess caught a
+  *second* problem: *"the border-radius should be round. The percentage doesn't work because the
+  height and width are different."* CSS percentage border-radius uses **width** for the
+  horizontal radius and **height** for the vertical radius, separately — so on a non-square box
+  it draws an ellipse, not a round corner.
+- **The actual answer: one radius value, computed from the shape's own height at render time,
+  applied equally to both axes.** Not expressible as a static CSS class at all — for a
+  self-rendering tldraw shape this means computing the value in TypeScript from `props.h` when
+  the real shape is built, never a CSS percentage. The two candidates staged on `/design`
+  (`.playmat-mock--radius-a`/`-b`, `8px`/`18px`) exist only so the gallery could show an
+  *already-computed*, actually-round corner to pick between — they bake in what 5%/12% of the
+  mock's fixed 150px height comes out to as px. **Picked: 5%** (the subtler, closer-to-square
+  option). **Any future canvas-shape geometry decision** — radius, stroke width, anything meant
+  to look consistent across zoom/resize — should expect this same two-step trap: a literal
+  pixel value assumes a fixed scale the canvas doesn't have, and the seemingly-obvious fix (a
+  CSS percentage) silently assumes a square box.
+
+**A second, smaller correction: staged on the wrong stage.** All five specimens were first put
+on `/design`'s usual `.stage-dark` — the Shuffler's own play-page convention. Jess caught it
+immediately: *"the tabletop is white so why is the background in these examples dark?"* Restaged
+on `.stage-white`. **`.stage-white` is correct for any future Tabletop specimen** — copying
+`.stage-dark` because that's what the Shuffler's own components use is exactly the kind of
+default a future agent would reach for and get wrong; the Tabletop's canvas is white, full stop.
+
+**What this owner's `-review` flagged and how it resolved.** The armed state's uniform
+treatment (no fork by zone kind) and the radius's render-time computation were both flagged as
+needing Jess's explicit sign-off rather than an agent's default — both got it, live on `/design`,
+consistent with "stage it, don't argue it."
+
 ## 2026-08-07 — the last numeric coupling on the library-alignment class is gone
 
 `c19f49c` **Manual: Jess tweaks to game page. section-that-aligns-with-command-zone is no
