@@ -21,9 +21,11 @@ import { MtgZoneShape, mtgZoneShapeProps } from "../../shared/mtgZoneShape";
  * Zone-entry detection stays card-side (MtgCardShapeUtil's `onTranslateEnd`)
  * for exactly this reason: a locked shape can't be a drag target.
  *
- * The retokenized look (dashed --dark-pink at rest, armed glow) is ticket
- * 14's job; this keeps today's plain dashed-grey / solid-black-playmat look,
- * just moved onto a real shape type.
+ * The retokenized border/glow look (dashed --dark-pink at rest, armed glow)
+ * is ticket 14's job; this keeps today's plain dashed-grey / solid-black-
+ * playmat border, just moved onto a real shape type. The label's typeface
+ * is already on the fleet's --font-chrome token, though — Orbitron for a
+ * canvas region label is settled, not an open design question deferred to 14.
  */
 export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
   static override type = "mtg-zone" as const;
@@ -49,11 +51,16 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
             boxSizing: "border-box",
             border: playmat ? "10px solid black" : "2px dashed grey",
             color: playmat ? "black" : "grey",
-            // tldraw's own serif token (loaded font-face, see tldraw.css
-            // --tl-font-serif), matching the label's stock-geo look this
-            // shape replaces — not a design decision, parity with the size
-            // tldraw's own "s"/"xl" geo label rendering used before ticket 13.
-            fontFamily: "var(--tl-font-serif)",
+            // @fleet/design-tokens' --font-chrome (Orbitron): a zone label
+            // names a canvas region, the same job as a UI label/heading, not
+            // prose or a card name (--font-content). This is the first
+            // fleet-token consumer inside an actual canvas shape — tokens.css
+            // anticipated it ("blocked on the Tabletop having somewhere to
+            // put tokens/fonts"); mtg-zone is that somewhere. Resolves via
+            // ordinary DOM inheritance: HTMLContainer is a plain unshadowed
+            // div, and main.tsx imports tokens.css onto :root before <App/>
+            // renders, same as any other DOM element on the page.
+            fontFamily: "var(--font-chrome)",
             fontSize: 24,
             padding: 4,
           }}
