@@ -101,6 +101,27 @@
    Registration sections for all four. This bit on ticket 12's implementation (item 4, the
    pointer-events trap, broke every click-based Playwright spec until traced).
 
+7. **`zoneAt()` is first-match-not-closest-match, with no orientation awareness — a new risk
+   once zones cluster around a shared center.** `zoneAt()` (`MtgCardShapeUtil.tsx`, see
+   `architecture.md`) walks `getCurrentPageShapes()` and returns the *first* candidate shape
+   whose `meta.zone` bounds contain the dragged card's center — not the closest, not the
+   smallest, not the one the player was visually dropping into. That was never a problem worth
+   naming while zones (playmat/library/command-zone/graveyard/exile per seat) sat spread out in
+   a row with clear gaps between player areas — bounds essentially never overlapped, so "first
+   match" and "correct match" were the same thing by construction of the layout, not the code.
+   **"The square"** (`.scratch/tabletop-table-layout/issues/10-the-square.md`, decided
+   2026-08-08, not yet built — see `apps/tabletop/DESIGN.md`'s "The square" section) moves player
+   areas from the row into compass slots (N/E/S/W) packed around a fixed-size centered Stack. If
+   that packing puts E/W zones close to the Stack's corners, overlapping or abutting zone AABBs
+   become possible for the first time, and `zoneAt()`'s first-match iteration order (whatever
+   `getCurrentPageShapes()` happens to return) — not proximity, not which zone visually contains
+   more of the card — would decide the winner. Flagged during the grilling session for "the
+   square" as a risk worth recording before implementation starts, not yet a bug (no code has
+   changed for this ticket; `cardLayout.ts`/`tableFurniture.ts` are untouched). Whoever builds
+   "the square" should re-check `zoneAt()` against the actual N/E/S/W geometry once it's drawn,
+   and consider closest-match-by-distance or smallest-containing-zone as a tiebreak if AABBs do
+   end up overlapping.
+
 ## Not Related To
 
 ### Card face/image rendering

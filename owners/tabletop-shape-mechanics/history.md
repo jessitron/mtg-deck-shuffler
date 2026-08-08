@@ -112,6 +112,27 @@ registration) and `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` (extend
 Full detail in `architecture.md` (Registration sections, "The `meta` guard is gone", "Ticket
 02/12: the rewrite, landed") and `interactions.md` (watch point 6, new).
 
+## "The Square" — design decided, `zoneAt()` risk flagged (2026-08-08)
+
+`.scratch/tabletop-table-layout/issues/10-the-square.md` resolved the wayfinder ticket "Design
+the square — seats around the Stack instead of a row." **Design only — no code changed.**
+`apps/tabletop/src/server/cardLayout.ts` and `tableFurniture.ts` are untouched; building this is
+separate future work. Decision recorded in `apps/tabletop/DESIGN.md`'s new "The square" section:
+player areas move from a row into compass slots (N/E/S/W) around a fixed-size centered Stack, by
+join order (1→S, 2→S,N, 3→S,N,E, 4→S,N,E,W). No per-viewer rotation (reconfirmed hard tldraw/
+platform limit, out of scope). Every player area stays upright/unrotated in world space — same
+internal layout as today, just repositioned.
+
+This owner was consulted during the grilling session (via `-context`) and flagged a real risk for
+whoever eventually builds this: `zoneAt()` in `MtgCardShapeUtil.tsx` is first-match-not-
+closest-match, with no orientation awareness — it only tests whether a card's center falls
+inside a candidate zone's AABB, first match wins in whatever order
+`getCurrentPageShapes()` returns. That "wasn't a problem worth naming when zones were spread out
+in a row" (gaps between player areas made bounds essentially non-overlapping by construction),
+but becomes a live risk once the square packs E/W zones close to the Stack's corners —
+overlapping/abutting zone AABBs could cause wrong-zone detection. Recorded as watch point 7 in
+`interactions.md` so it's on record before implementation starts, not discovered mid-build.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,
