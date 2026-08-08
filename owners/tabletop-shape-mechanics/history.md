@@ -189,6 +189,36 @@ Full detail in `architecture.md`'s "Ticket 14" section and `interactions.md` (wa
 tie-break language repointed at `topmostZoneAt`, new watch point 9, and a new `Depends On` note
 about `"select.translating"`).
 
+### Correction, same day (`05235aa`): armed zone is one, keyed on the pointer, not one per selected shape
+
+A code-review finding on the first cut of `useIsZoneArmed` argued the single-shape version missed
+multi-card drags, and pushed the signal toward computing a *set* of armed zone ids — one per
+`editor.getSelectedShapeIds()` entry. Jess corrected that directly: selecting several cards and
+dragging one moves the whole group together to **one** destination ("select six cards, drag one to
+the graveyard — I want all of them to go to the graveyard"), so arming multiple zones during a
+multi-select drag was wrong, not a missed edge case. The review finding optimized for "handles more
+inputs" without checking that against what the app is actually supposed to do.
+
+- Reverted to a single armed zone id, but re-derived how it's found: instead of reading each
+  selected shape's own bounds (which also depended on `getSelectedShapeIds()`'s iteration order to
+  mean anything when there were several), `armedZoneIdSignal` now resolves `topmostZoneAt` against
+  **`editor.inputs.currentPagePoint`** — the pointer's own page-space position, confirmed
+  atom-backed/reactive at `node_modules/@tldraw/editor/src/lib/editor/managers/InputsManager/
+  InputsManager.ts:90`. This is robust regardless of selection size: single-card and six-card drags
+  both arm exactly one zone, the one under the cursor.
+- New regression test in `verify-zone-armed.spec.ts`: "dragging a multi-card selection arms only
+  the one zone under the pointer, not one per card" — shift-clicks two cards into a selection,
+  drags the group toward the graveyard, and asserts only the graveyard arms while a second zone
+  (exile) that one of the other selected card's own unmoved bounds would otherwise have overlapped
+  does not. Uses `zoneHint: "battlefield"`, not `"stack"`, so the two cards land at distinct grid
+  positions rather than stacking exactly on top of each other — same-position stacking made
+  click-selecting the second card ambiguous in the test.
+- The O(zones²)-avoidance rationale for one shared `computed()` per editor (rather than one per
+  zone shape) is unchanged by this correction — only what the computed resolves *against* changed.
+
+Full detail in `architecture.md`'s "Corrected, 2026-08-08" subsection and `interactions.md`'s watch
+point 9 (rewritten to describe the pointer-based approach, not the per-selected-shape one).
+
 ## "The Square" — design decided, `zoneAt()` risk flagged (2026-08-08)
 
 `.scratch/tabletop-table-layout/issues/10-the-square.md` resolved the wayfinder ticket "Design

@@ -36,13 +36,16 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
   `--dark-pink` for everything else — and, since ticket 14 (2026-08-08), reads
   `useIsZoneArmed(this.editor, shape.id)` from `zoneHitTest.ts` to add a glow (`box-shadow` +
   tinted background/border color) while a dragged card is hovering over it. `getIndicatorPath()`.
-- `apps/tabletop/src/client/shapes/zoneHitTest.ts` — **new, ticket 14**: `topmostZoneAt(editor,
-  center)`, the topmost-zone-wins hit test extracted out of `MtgCardShapeUtil.zoneAt()` so a second
-  caller (`MtgZoneShapeUtil`, above) can share it; and `useIsZoneArmed(editor, zoneId)`, a `use*`
-  hook backed by one `computed()` per `Editor` (lazy `WeakMap<Editor, Computed<...>>`) that checks
-  `editor.isIn("select.translating")` plus the selected shape's center against `topmostZoneAt` to
-  decide which zone (if any) is currently "armed" for the in-progress drag. Read-only: writes
-  nothing to the store. Imported by both `MtgCardShapeUtil.tsx` (`zoneAt()`, drag-settle) and
+- `apps/tabletop/src/client/shapes/zoneHitTest.ts` — **new, ticket 14; corrected same day
+  (`05235aa`)**: `topmostZoneAt(editor, center)`, the topmost-zone-wins hit test extracted out of
+  `MtgCardShapeUtil.zoneAt()` so a second caller (`MtgZoneShapeUtil`, above) can share it; and
+  `useIsZoneArmed(editor, zoneId)`, a `use*` hook backed by one `computed()` per `Editor` (lazy
+  `WeakMap<Editor, Computed<...>>`) that checks `editor.isIn("select.translating")` plus
+  **`editor.inputs.currentPagePoint` — the pointer's own position, not any selected shape's
+  bounds** — against `topmostZoneAt` to decide which single zone (if any) is currently "armed" for
+  the in-progress drag. Arms exactly one zone regardless of selection size, matching "drag one of
+  several selected cards moves them all to one destination." Read-only: writes nothing to the
+  store. Imported by both `MtgCardShapeUtil.tsx` (`zoneAt()`, drag-settle) and
   `MtgZoneShapeUtil.tsx` (`component()`, live armed-glow rendering).
 - `apps/tabletop/src/client/TablePage.tsx` — registers
   `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil]`, passed to both

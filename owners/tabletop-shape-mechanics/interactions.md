@@ -185,6 +185,25 @@
    `architecture.md`'s "Ticket 14" section. **Any future per-viewer, transient (not game-state)
    visual reaction to drag/selection state should follow this shape**, not invent a per-shape
    scan or a store write for something that's purely local render state.
+   **The signal computes exactly one armed zone id, keyed on the pointer's own
+   `editor.inputs.currentPagePoint`, not on any selected shape's bounds** — corrected 2026-08-08
+   after a code-review finding briefly pushed it toward a *set* of armed zone ids, one per
+   `getSelectedShapeIds()` entry, to "handle" multi-card drags. Jess corrected that: selecting
+   several cards and dragging one moves the whole group together to **one** destination ("select
+   six cards, drag one to the graveyard — I want all of them to go to the graveyard"), so arming
+   one zone per selected card was wrong, not a missed edge case — and it also depended on
+   `getSelectedShapeIds()`'s iteration order to mean anything. The pointer-keyed version is
+   simultaneously correct for the app's mental model and more robust: single-card and six-card
+   drags both arm exactly one zone, the one under the cursor, with no dependence on selection
+   size or order. See `architecture.md`'s "Corrected, 2026-08-08" subsection and
+   `verify-zone-armed.spec.ts`'s "dragging a multi-card selection arms only the one zone under the
+   pointer, not one per card" for the regression test (uses `zoneHint: "battlefield"`, not
+   `"stack"`, so the two selected cards land at distinct positions instead of stacking exactly on
+   top of each other — same-position stacking made click-selecting the second card ambiguous).
+   **Lesson for future code-review findings against this signal**: a finding that argues for
+   *more* granularity (one armed zone per shape) needs to be checked against what a multi-select
+   drag is actually supposed to do in this app, not assumed correct because it covers more cases
+   — "handles more inputs" isn't the same as "matches the domain."
 10. **Locked-but-interactive shapes: the `mtg-counter` pattern (decided 2026-08-08, not yet
     built).** A life counter will be a new locked custom shape whose `component()` renders +/-
     buttons and a typeable number field (see `architecture.md`'s "`mtg-counter`: decided, not
