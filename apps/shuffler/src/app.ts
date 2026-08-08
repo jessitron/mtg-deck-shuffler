@@ -1271,20 +1271,18 @@ export function createApp(
   });
 
   // Returns active game fragment - updated game board
-  app.post("/put-in-hand/:gameId/:gameCardIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const gameId = res.locals.gameId as number;
+  app.post("/put-in-hand/:gameId/:gameCardIndex", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      game.moveByGameCardIndex(gameCardIndex, "Hand", browserTabId);
+      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
+        game.moveByGameCardIndex(gameCardIndex, "Hand", browserTabId);
+      });
 
-      await persistStatePort.save(game.toPersistedGameState());
-
-      const html = formatActiveGameHtmlSection(game);
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
+      renderCommandOutcome(res, gameId, outcome, "Cannot put card in hand: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
       console.error("Error putting card in hand:", error);
       res.status(500).send(`<div>Error putting card in hand</div>`);
