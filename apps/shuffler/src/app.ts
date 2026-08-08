@@ -1524,22 +1524,17 @@ export function createApp(
   });
 
   // Returns active game fragment - mulligan: hand back to library, shuffle, redraw
-  app.post("/mulligan/:gameId", loadGameFromParams, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
+  app.post("/mulligan/:gameId", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const browserTabId = res.locals.browserTabId as string | undefined;
 
-    if (game.gameStatus() !== "Active") {
-      res.status(400).send(`<div>Cannot mulligan: Game is not active</div>`);
-      return;
-    }
-
     try {
-      const whatHappened = game.mulligan(browserTabId);
-      await persistStatePort.save(game.toPersistedGameState());
+      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
+        return game.mulligan(browserTabId);
+      });
 
-      const html = formatActiveGameHtmlSection(game, whatHappened);
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
+      renderCommandOutcome(res, gameId, outcome, "Cannot mulligan: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
     } catch (error) {
       console.error("Error taking mulligan:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not mulligan"}</div>`);
