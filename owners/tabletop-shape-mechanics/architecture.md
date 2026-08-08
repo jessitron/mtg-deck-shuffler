@@ -225,14 +225,41 @@ now calls `topmostZoneAt(...)?.zone` instead of walking shapes itself.
 on one `computed()` per `Editor` instance (a lazy `WeakMap<Editor, Computed<TLShapeId | undefined>>`
 — not one `computed` per zone shape). The computed checks `editor.isIn("select.translating")` (the
 same `select.translating` state `Translating.ts` — see the drag-identity bug above — governs) and,
-if in it, resolves `topmostZoneAt` against the currently-selected shape's center. **Sharing one
-signal across all zones, rather than each zone shape's `component()` independently rescanning, is
-the point**: tldraw's `Translating` state updates shape position on every raw pointer-move (not
+if in it, resolves `topmostZoneAt` against **the pointer's own current page point**
+(`editor.inputs.currentPagePoint`), not against any selected shape's bounds — see "Corrected,
+2026-08-08: armed zone is keyed on the pointer, not per selected shape" below for why. **Sharing
+one signal across all zones, rather than each zone shape's `component()` independently rescanning,
+is the point**: tldraw's `Translating` state updates shape position on every raw pointer-move (not
 throttled), so N zones each doing their own O(zones) scan would be O(zones²) work per tick during a
 drag; one shared computed makes it O(zones) regardless of how many zones exist. Confirmed against
 tldraw source (`PointingShape.ts`'s `startTranslating` calls `this.parent.transition('translating',
 info)` on the `select` tool node — i.e. exactly the string `"select.translating"`) and against a
 live Playwright drag, not assumed from the state name.
+
+### Corrected, 2026-08-08: armed zone is keyed on the pointer, not per selected shape
+
+A code-review finding on the first cut of `useIsZoneArmed` argued that keying the armed signal on
+a single selected shape's bounds missed a multi-card-drag case, and pushed toward computing a *set*
+of armed zone ids — one per shape in `editor.getSelectedShapeIds()`. That landed briefly, then Jess
+corrected it: selecting several cards and dragging one moves the whole selection together, as one
+rigid group, to **one** destination — "select six cards, drag one to the graveyard — I want all of
+them to go to the graveyard." A multi-card drag lighting up one zone per card misrepresents what's
+actually about to happen; the "fix" solved a problem that isn't real for this app's mental model of
+multi-select drag.
+
+`zoneHitTest.ts` now computes a single armed zone id, unconditionally, keyed on
+`editor.inputs.currentPagePoint` — the pointer's own page-space position, confirmed atom-backed and
+reactive (`node_modules/@tldraw/editor/src/lib/editor/managers/InputsManager/InputsManager.ts:90`)
+— rather than any selected shape's own bounds. This is deliberately robust to selection size: a
+single-card drag and a six-card drag both arm exactly one zone, whichever one is under the cursor,
+with no dependence on `getSelectedShapeIds()`'s iteration order (the thing the per-shape version
+depended on to pick "the" shape when there were several). Regression test:
+`verify-zone-armed.spec.ts`'s "dragging a multi-card selection arms only the one zone under the
+pointer, not one per card" — selects two cards via shift-click and drags the group, asserting the
+zone under the pointer arms and a second zone (that one of the other selected cards' own bounds
+would otherwise have overlapped) does not. Uses `zoneHint: "battlefield"` rather than `"stack"` for
+the two cards, because same-position stacking made click-selection of the second card ambiguous in
+the test.
 
 **First "read reactively, write nothing" hook in this KB.** Every prior `ShapeUtil.component()`
 hook documented here (`onClick`, `onTranslateEnd`) *writes* to the store — a tap, a zone stamp, a

@@ -31,52 +31,37 @@ export function topmostZoneAt(editor: Editor, center: VecLike): ZoneHit | undefi
 }
 
 /**
- * The ids of every zone currently "armed": the topmost zone under the center
- * of each shape mid-drag, if any. tldraw's default multi-select lets several
- * cards be dragged together, each potentially over a different zone, so this
- * is a set rather than a single id. One `computed` per editor (not one per
- * zone shape) — during a drag, tldraw's `Translating` state updates shape
- * position on every raw pointer-move (not throttled), so N zones each
- * independently rescanning all zones would be O(zones²) work per tick;
- * sharing one signal drops that to O(zones).
+ * The id of the single zone currently "armed", if any — the zone under the
+ * pointer while a drag is in progress. Deliberately keyed on the *pointer*,
+ * not on each individually-selected shape's own bounds: selecting several
+ * cards and dragging one moves the whole group together as a single rigid
+ * unit, to a single destination ("select six cards, drag one to the
+ * graveyard — I want all of them to go to the graveyard," not six
+ * independently-lit zones). One `computed` per editor (not one per zone
+ * shape) — during a drag, tldraw's `Translating` state updates on every raw
+ * pointer-move (not throttled), so N zones each independently rescanning all
+ * zones would be O(zones²) work per tick; sharing one signal drops that to
+ * O(zones).
  */
-const EMPTY_ARMED_SET: ReadonlySet<TLShapeId> = new Set();
-const armedZoneIdsByEditor = new WeakMap<Editor, Computed<ReadonlySet<TLShapeId>>>();
-function armedZoneIdsSignal(editor: Editor) {
-  let signal = armedZoneIdsByEditor.get(editor);
+const armedZoneIdByEditor = new WeakMap<Editor, Computed<TLShapeId | undefined>>();
+function armedZoneIdSignal(editor: Editor) {
+  let signal = armedZoneIdByEditor.get(editor);
   if (!signal) {
-    signal = computed(
-      "armedZoneIds",
-      () => {
-        if (!editor.isIn("select.translating")) return EMPTY_ARMED_SET;
-        const armed = new Set<TLShapeId>();
-        for (const id of editor.getSelectedShapeIds()) {
-          const shape = editor.getShape(id);
-          const bounds = shape && editor.getShapePageBounds(shape);
-          const hit = bounds && topmostZoneAt(editor, bounds.center);
-          if (hit) armed.add(hit.id);
-        }
-        return armed.size > 0 ? armed : EMPTY_ARMED_SET;
-      },
-      { isEqual: setsEqual }
-    );
-    armedZoneIdsByEditor.set(editor, signal);
+    signal = computed("armedZoneId", () => {
+      if (!editor.isIn("select.translating")) return undefined;
+      return topmostZoneAt(editor, editor.inputs.currentPagePoint)?.id;
+    });
+    armedZoneIdByEditor.set(editor, signal);
   }
   return signal;
 }
 
-function setsEqual<T>(a: ReadonlySet<T>, b: ReadonlySet<T>): boolean {
-  if (a.size !== b.size) return false;
-  for (const item of a) if (!b.has(item)) return false;
-  return true;
-}
-
 /**
- * Is `zoneId` one of the currently-armed zones? A pure reactive read — never
- * written to the store, so it produces no synced document write and no undo
- * entry, and (since it's derived purely from this browser's own editor
- * instance) is never visible on another client's copy of the same zone shape.
+ * Is `zoneId` the currently-armed zone? A pure reactive read — never written
+ * to the store, so it produces no synced document write and no undo entry,
+ * and (since it's derived purely from this browser's own editor instance) is
+ * never visible on another client's copy of the same zone shape.
  */
 export function useIsZoneArmed(editor: Editor, zoneId: TLShapeId): boolean {
-  return useValue("isZoneArmed", () => armedZoneIdsSignal(editor).get().has(zoneId), [editor, zoneId]);
+  return useValue("isZoneArmed", () => armedZoneIdSignal(editor).get() === zoneId, [editor, zoneId]);
 }
