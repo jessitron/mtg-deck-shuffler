@@ -1541,25 +1541,19 @@ export function createApp(
     }
   });
 
-  app.post("/move-hand-card/:gameId/:from/:to", loadGameFromParams, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const gameId = res.locals.gameId as number;
+  app.post("/move-hand-card/:gameId/:from/:to", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const from = parseInt(req.params.from);
     const to = parseInt(req.params.to);
     const browserTabId = res.locals.browserTabId as string | undefined;
 
-    if (game.gameStatus() !== "Active") {
-      res.status(400).send(`<div>Cannot move card: Game is not active</div>`);
-      return;
-    }
-
     try {
-      const whatHappened = game.moveHandCard(from, to, browserTabId);
-      await persistStatePort.save(game.toPersistedGameState());
+      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
+        return game.moveHandCard(from, to, browserTabId);
+      });
 
-      const html = formatActiveGameHtmlSection(game, whatHappened);
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
+      renderCommandOutcome(res, gameId, outcome, "Cannot move card: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
     } catch (error) {
       console.error("Error moving hand card:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not move hand card"}</div>`);
