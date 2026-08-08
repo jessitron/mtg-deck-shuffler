@@ -109,7 +109,11 @@ furniture becomes a custom `mtg-zone` shape.
   the app's one existing armed pattern (`.hand-drop-zone.drag-over`'s "restate the boundary +
   tint the interior") for exactly the two zones that need it most. A pure-CSS `/design`
   specimen will hide this; include a stand-in image layer or scope the specimen to the
-  unpictured zones and say so.
+  unpictured zones and say so. **Confirmed in the built shape, not just argued (2026-08-08,
+  ticket 14).** `MtgZoneShapeUtil`'s armed treatment is a `box-shadow` ring, which spreads
+  outward from the border edge rather than being drawn inside it — so it rides on top of the
+  playmat's opaque black border and (per this rule) would survive an image overlay the same
+  way. Screenshot-verified the ring shows.
 - **tldraw cannot rotate the view per viewer on a shared board.** Reconfirmed 2026-08-08
   (`.scratch/tabletop-table-layout/issues/10-the-square.md`), same posture as Mural — "Mural
   doesn't rotate either." This is a hard platform limit, not a deferred nicety: every player
@@ -167,10 +171,10 @@ site pages, never on the play pages. There is no fourth typeface.
 `--dark-pink` (#bb5277) for borders/rules/accents, `--light-pink` (#ddc7dd) for bevels
 and slabs, `--cute-heading-color` (#9134d2), `--narrow-border` (3px), the closed
 `--mana-W/U/B/R/G` set, the three type roles above, `--radius-soft` (4px), and
-`--armed-glow` (#e6a33d, decided 2026-08-07, ticket 11 — a Tabletop canvas zone about to
-receive a dragged card; deliberately not `--light-pink`, since that's the global focus-ring
-colour, and not part of the `--dark-pink`/`--deep-space` identity pair). **All of those live
-in `packages/design-tokens/tokens.css`**
+`--armed-glow` (#e6a33d, decided 2026-08-07 ticket 11, built 2026-08-08 ticket 14 — a Tabletop
+canvas zone about to receive a dragged card; deliberately not `--light-pink`, since that's the
+global focus-ring colour, and not part of the `--dark-pink`/`--deep-space` identity pair). **All
+of those live in `packages/design-tokens/tokens.css`**
 (`@fleet/design-tokens`) — one file, both ships, served by the Shuffler at
 `/fleet/tokens.css` and imported by the Tabletop through Vite.
 

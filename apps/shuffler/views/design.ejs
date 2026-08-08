@@ -106,7 +106,7 @@
             <div class="swatch-meta">
               <span class="swatch-name">--armed-glow</span>
               <span class="swatch-hex">#e6a33d</span>
-              <span class="swatch-use">decided 2026-08-07, not yet built — see <a href="#zones">Tabletop zones</a></span>
+              <span class="swatch-use">decided 2026-08-07, built 2026-08-08 — see <a href="#zones">Tabletop zones</a></span>
             </div>
           </div>
           <div class="swatch">
@@ -862,16 +862,16 @@
       <section class="gallery-section" id="zones">
         <h2>Tabletop zones <span class="badge badge-candidate">candidate</span></h2>
         <p class="section-note">
-          <strong>Mock, not the real component — all four decisions below are made, resolved
-          2026-08-07.</strong> Staged for the tabletop-physics map's
-          <code>11-what-a-zone-looks-like</code> ticket, deciding what tldraw's self-rendering
-          <code>mtg-zone</code> shape (library, graveyard, exile, the Stack, command; the
-          playmat separately) looks like at rest and armed. These specimens still borrow the
-          Shuffler's tokens and fonts to render a stand-in, but as of <code>4396aea</code>
-          (2026-08-07) the Tabletop has its own route to both: <code>@fleet/design-tokens</code>
-          via Vite and an Orbitron/Ovo <code>&lt;link&gt;</code> in
-          <code>apps/tabletop/index.html</code>. Nothing blocks building the real
-          <code>mtg-zone</code>/playmat shape in TypeScript anymore. Scoped to the
+          <strong>Mock rendering of a component that is now actually built.</strong> Staged for
+          the tabletop-physics map's <code>11-what-a-zone-looks-like</code> ticket (resolved
+          2026-08-07), deciding what tldraw's self-rendering <code>mtg-zone</code> shape
+          (library, graveyard, exile, the Stack, command; the playmat separately) looks like at
+          rest and armed — and built 2026-08-08 by ticket 14 into
+          <code>MtgZoneShapeUtil.tsx</code>, verified against these same candidate rules pixel
+          for pixel. These specimens still borrow the Shuffler's tokens and fonts to render a
+          stand-in rather than the Tabletop's own component — the cross-app question of whether
+          <code>/design</code> can load a real Tabletop stylesheet is still open (there isn't
+          one; ticket 14 landed as inline <code>CSSProperties</code>, not CSS). Scoped to the
           <strong>unpictured</strong> zones (graveyard, exile, Stack, command) — the
           library and playmat layer an opaque image over the same box, which a flat CSS mock
           can't show.
