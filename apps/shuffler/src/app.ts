@@ -1560,19 +1560,18 @@ export function createApp(
     }
   });
 
-  app.post("/undo/:gameId/:gameEventIndex", loadGameFromParams, requireValidVersion, async (req, res) => {
-    const game = res.locals.game as GameState;
-    const gameId = res.locals.gameId as number;
+  app.post("/undo/:gameId/:gameEventIndex", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
     const gameEventIndex = parseInt(req.params.gameEventIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
-      const updatedGame = game.undo(gameEventIndex, browserTabId);
-      await persistStatePort.save(updatedGame.toPersistedGameState());
+      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
+        game.undo(gameEventIndex, browserTabId);
+      });
 
-      const html = formatActiveGameHtmlSection(updatedGame);
-      res.setHeader("HX-Trigger", "game-state-updated");
-      res.send(html);
+      renderCommandOutcome(res, gameId, outcome, "Cannot undo: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
       console.error("Error undoing event:", error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not undo event"}</div>`);
