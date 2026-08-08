@@ -11,7 +11,8 @@ function cardPlayed(overrides: Record<string, unknown>) {
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
     face: "front",
-    imageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+    backImageUrl: null,
     ...overrides,
   };
 }
@@ -37,14 +38,15 @@ test("a land and a nonland arrive in different areas of the canvas", async ({ pa
     expect(response.status()).toBe(201);
   }
 
-  // Both cards render as image shapes on the live canvas (no reload needed —
-  // they arrive over the websocket sync), identified by their deterministic
-  // shape ids. Exact placement (land on the playmat vs. everything else on
-  // the Stack) is covered by cardArrival.test.ts against the room's tldraw
-  // snapshot directly — the player area (JES-140) is now big enough that a
-  // land far from the origin only gets its inner <img> lazily mounted by
-  // tldraw once in view, so this doesn't assert on that inner element.
-  const cardShapes = page.locator(`.tl-shape[data-shape-type="image"]`);
+  // Both cards render as mtg-card shapes on the live canvas (no reload
+  // needed — they arrive over the websocket sync), identified by their
+  // deterministic shape ids. Exact placement (land on the playmat vs.
+  // everything else on the Stack) is covered by cardArrival.test.ts against
+  // the room's tldraw snapshot directly — the player area (JES-140) is now
+  // big enough that a land far from the origin only gets its inner <img>
+  // lazily mounted by tldraw once in view, so this doesn't assert on that
+  // inner element.
+  const cardShapes = page.locator(`.tl-shape[data-shape-type="mtg-card"]`);
   await expect(cardShapes).toHaveCount(2, { timeout: 10000 });
   await expect(page.locator(`#shape\\:card-${land.card.instanceId}`)).toBeAttached();
   await expect(page.locator(`#shape\\:card-${nonland.card.instanceId}`)).toBeAttached();

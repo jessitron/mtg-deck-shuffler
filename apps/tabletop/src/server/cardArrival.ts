@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { trace } from "@opentelemetry/api";
-import { AssetRecordType, createShapeId, TLAssetId } from "@tldraw/tlschema";
+import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom, RoomEntry } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
 import { CARD_W, CARD_H, landPosition, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
@@ -33,7 +33,8 @@ interface CardArrival {
   card: { scryfallId: string; instanceId: string };
   face: "front" | "back";
   zoneHint: ZoneHint;
-  imageUrl: string;
+  frontImageUrl: string;
+  backImageUrl: string | null;
   cardName: string;
 }
 
@@ -49,7 +50,8 @@ function validationError(body: unknown): string | null {
   if (typeof b.card?.instanceId !== "string" || !b.card.instanceId) return "card.instanceId (string) is required";
   if (b.face !== "front" && b.face !== "back") return 'face must be "front" or "back"';
   if (!ZONE_HINTS.includes(b.zoneHint)) return `zoneHint must be one of ${ZONE_HINTS.join("|")}`;
-  if (typeof b.imageUrl !== "string" || !b.imageUrl) return "imageUrl (string) is required";
+  if (typeof b.frontImageUrl !== "string" || !b.frontImageUrl) return "frontImageUrl (string) is required";
+  if (b.backImageUrl !== null && typeof b.backImageUrl !== "string") return "backImageUrl (string or null) is required";
   if (typeof b.cardName !== "string" || !b.cardName) return "cardName (string) is required";
   // The decodable secret must not cross the boundary — reject loudly if a
   // sender ever tries (defense in depth; the Shuffler also never sends it).
@@ -63,7 +65,7 @@ const stackCountByRoom = new Map<string, number>();
 function instanceAlreadyOnTable(entry: RoomEntry, instanceId: string): boolean {
   return entry.room
     .getCurrentSnapshot()
-    .documents.some((d) => (d.state as any).typeName === "shape" && (d.state as any).meta?.instanceId === instanceId);
+    .documents.some((d) => (d.state as any).typeName === "shape" && (d.state as any).props?.instanceId === instanceId);
 }
 
 /**
@@ -134,30 +136,16 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
     }
   }
 
-  const assetId: TLAssetId = AssetRecordType.createId(arrival.card.instanceId);
   const shapeId = createShapeId(`card-${arrival.card.instanceId}`);
 
   await entry.room.updateStore((store) => {
-    store.put(
-      AssetRecordType.create({
-        id: assetId,
-        type: "image",
-        typeName: "asset",
-        props: {
-          name: arrival.cardName,
-          src: arrival.imageUrl,
-          w: 488, // Scryfall "normal" natural size
-          h: 680,
-          mimeType: "image/jpeg",
-          isAnimated: false,
-        },
-        meta: {},
-      })
-    );
+    // No per-instance tldraw asset: the card renders its own <img> straight
+    // from frontImageUrl/backImageUrl (mtg-card, tabletop-physics ticket 12),
+    // so flip is a pure props.face write later, not an asset swap.
     store.put({
       id: shapeId,
       typeName: "shape",
-      type: "image",
+      type: "mtg-card",
       x: position.x,
       y: position.y,
       rotation: 0,
@@ -165,10 +153,22 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
       parentId: pageId,
       isLocked: false,
       opacity: 1,
-      props: { w: CARD_W, h: CARD_H, assetId, playing: true, url: "", crop: null, flipX: false, flipY: false, altText: arrival.cardName },
-      // Identity, not face: face is card state (see the two-faced-cards owner).
-      // No traceparent in meta — cards persist; traces don't.
-      meta: { instanceId: arrival.card.instanceId, scryfallId: arrival.card.scryfallId, cardName: arrival.cardName },
+      props: {
+        w: CARD_W,
+        h: CARD_H,
+        instanceId: arrival.card.instanceId,
+        scryfallId: arrival.card.scryfallId,
+        cardName: arrival.cardName,
+        frontImageUrl: arrival.frontImageUrl,
+        backImageUrl: arrival.backImageUrl,
+        face: arrival.face,
+        faceDown: false,
+        tapped: false,
+      },
+      // No traceparent in meta — cards persist; traces don't. Zone
+      // membership lands here once a card is dragged (see
+      // MtgCardShapeUtil.onTranslateEnd) — empty at arrival.
+      meta: {},
     } as any);
   });
 

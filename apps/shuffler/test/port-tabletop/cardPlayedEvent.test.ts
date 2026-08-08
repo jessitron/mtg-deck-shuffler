@@ -26,7 +26,8 @@ describe("buildCardPlayedEvent (F0 — the frozen card-arrival payload, JES-128)
     expect(event.face).toBe("front");
     expect(event.zoneHint).toBe("stack");
     expect(event.cardName).toBe(lightningBolt.name);
-    expect(event.imageUrl).toContain(lightningBolt.scryfallId.substring(0, 1));
+    expect(event.frontImageUrl).toContain(lightningBolt.scryfallId.substring(0, 1));
+    expect(event.backImageUrl).toBeNull(); // not twoFaced
   });
 
   it("mints a fresh event id per attempt (retries are distinguishable)", () => {
@@ -35,11 +36,22 @@ describe("buildCardPlayedEvent (F0 — the frozen card-arrival payload, JES-128)
     expect(one.id).not.toBe(two.id);
   });
 
-  it("sends the CURRENT face and its face-specific image", () => {
+  it("sends the CURRENT face flag, independent of which image URLs are attached", () => {
     const flipped: GameCard = { ...handCard(nicolBolas), currentFace: "back" };
     const event = buildCardPlayedEvent(flipped, "i-2", initiator, "stack");
     expect(event.face).toBe("back");
-    expect(event.imageUrl).toContain("/back/");
+  });
+
+  it("sends both front and back image URLs for a two-faced card", () => {
+    const event = buildCardPlayedEvent(handCard(nicolBolas), "i-2b", initiator, "stack");
+    expect(event.frontImageUrl).not.toContain("/back/");
+    expect(event.backImageUrl).toContain("/back/");
+  });
+
+  it("derives backImageUrl from twoFaced, never from backImageUris happening to be populated", () => {
+    const missingBackUris: GameCard = handCard({ ...nicolBolas, backImageUris: undefined });
+    const event = buildCardPlayedEvent(missingBackUris, "i-2c", initiator, "stack");
+    expect(event.backImageUrl).not.toBeNull(); // falls back to constructCardImageUrl, still populated
   });
 
   it("NEVER leaks gameCardIndex — an index is a decodable secret (alphabetical rank in a known decklist)", () => {

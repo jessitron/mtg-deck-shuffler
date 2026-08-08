@@ -1,6 +1,17 @@
 import { TLSocketRoom } from "@tldraw/sync-core";
+import { createTLSchema, defaultShapeSchemas, TLRecord } from "@tldraw/tlschema";
 import { trace } from "@opentelemetry/api";
 import { log } from "./log.js";
+import { mtgCardShapeProps } from "../shared/mtgCardShape.js";
+
+// Every room's store validates against this schema — the server-side twin of
+// the client's `shapeUtils` list in TablePage.tsx (@tldraw/tlschema
+// createTLSchema, not the React shapeUtils constructors: the server never
+// renders). Missing `mtg-card` here doesn't silently fail like the client
+// schema would — it disconnects any client that pushes one.
+const tableSchema = createTLSchema({
+  shapes: { ...defaultShapeSchemas, "mtg-card": { props: mtgCardShapeProps } },
+});
 
 // ============================================================================
 // SCAFFOLDING — the in-memory room registry.
@@ -26,7 +37,7 @@ export interface PlayerArea {
 
 export interface RoomEntry {
   tableName: string; // the slug
-  room: TLSocketRoom;
+  room: TLSocketRoom<TLRecord>;
   /** event ids already ingested — dedup for retried requests (A5) */
   seenEventIds: Set<string>;
   /** seatId -> player area allocation, in join order (JES-140) */
@@ -47,6 +58,7 @@ export function getOrCreateRoom(tableName: string): RoomEntry {
   const entry: RoomEntry = {
     tableName,
     room: new TLSocketRoom({
+      schema: tableSchema,
       // Logs, not span events. tldraw calls this from its throttled
       // pruneSessions timer, long after the span that opened the room has ENDED
       // — measured at ~13s after a 2.4ms "ws connect" span.

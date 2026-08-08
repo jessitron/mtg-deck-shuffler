@@ -37,7 +37,8 @@ function cardPlayed(overrides: Record<string, unknown> = {}) {
     card: { scryfallId: "11111111-2222-3333-4444-555555555555", instanceId: `instance-${eventCounter}` },
     face: "front",
     zoneHint: "stack",
-    imageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
+    frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
+    backImageUrl: null,
     cardName: "Lightning Bolt",
     ...overrides,
   };
@@ -57,21 +58,25 @@ function shapesOf(tableName: string) {
   return entry.room
     .getCurrentSnapshot()
     .documents.map((d) => d.state as any)
-    .filter((r) => r.typeName === "shape" && r.type === "image" && r.meta?.instanceId);
+    .filter((r) => r.typeName === "shape" && r.type === "mtg-card" && r.props?.instanceId);
 }
 
 describe("card arrival", () => {
-  it("puts a stack-hinted card in the stack strip with identity meta", async () => {
+  it("puts a stack-hinted card in the stack strip with identity props", async () => {
     const event = cardPlayed();
     const response = await post("arrival-basic", event);
     expect(response.status).toBe(201);
 
     const shapes = shapesOf("arrival-basic");
     expect(shapes).toHaveLength(1);
-    expect(shapes[0].meta).toMatchObject({
+    expect(shapes[0].props).toMatchObject({
       instanceId: event.card.instanceId,
       scryfallId: event.card.scryfallId,
       cardName: "Lightning Bolt",
+      frontImageUrl: event.frontImageUrl,
+      backImageUrl: null,
+      face: "front",
+      tapped: false,
     });
     const stackBounds = stackStripBounds(1);
     expect(shapes[0].x).toBeGreaterThanOrEqual(stackBounds.x);
@@ -105,7 +110,7 @@ describe("card arrival", () => {
     expect(land.y).toBeGreaterThanOrEqual(mat.y + mat.h / 2); // bottom half of the playmat
 
     await post("arrival-zones", cardPlayed({ zoneHint: "stack", cardName: "Llanowar Elves" }));
-    const stackCard = shapesOf("arrival-zones").find((s) => s.meta.cardName === "Llanowar Elves")!;
+    const stackCard = shapesOf("arrival-zones").find((s) => s.props.cardName === "Llanowar Elves")!;
     expect(stackCard.y).toBeLessThan(land.y); // the Stack sits above the player areas
   });
 
