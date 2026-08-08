@@ -89,6 +89,14 @@ polish.
   provisional pending play experience. Recorded in `apps/tabletop/DESIGN.md`'s new
   "The square" section.
 
+- [Life totals and commander damage](issues/12-life-totals-and-commander-damage.md)
+  (2026-08-08) — a life counter is a new **locked custom shape** (number + +/- buttons +
+  direct typing) on the name row: name large left; right-justified, commander-damage
+  counters then a bigger life counter. Life starts 40, commander damage 0, per
+  **commander** (partners get two), identified by opponent name + sleeve color (rides on
+  ticket 11). Everyone can change everything. Life-change *events* parked for Map 5 at
+  `../tabletop-replaces-mural/parked/life-change-events.md`.
+
 ## Not yet specified
 
 - **Seat position across a restart.** Seat index is `entry.seats.size` at join time, so after a
