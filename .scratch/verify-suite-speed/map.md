@@ -67,6 +67,11 @@ in under a minute and every remaining test is one we'd miss, this effort is done
   in the exit trap, zero app changes needed. Retired the now-meaningless
   `verify.data_db.existed`/`.bytes` telemetry attributes. **50.2s → 49.7s** (within noise; the
   win here is reproducibility, not speed) — and removes the shared-state race 06 was worried about.
+- [Should the verify suite run in parallel?](issues/06-parallelism.md) — raised `workers: 1` →
+  `4` (`fullyParallel` stays `false`, untested). Neither of the comments it replaced held up:
+  no spec exercises two actors mutating one game concurrently, and 03's per-test seeded games
+  already made worker count irrelevant to isolation. Measured, not reasoned: ten consecutive
+  clean runs, 48/48 passing every time. **~49.7s → ~17.5s.**
 
 ## Measured baseline (run `96588aeb`, git `e1ca060`, warm)
 
@@ -103,6 +108,9 @@ ticket 11.
   wasted time), not about clawing back to 60s.
 - **The other two ships.** The Tabletop (`vitest`) and Spine (Rails `test/`) suites have never
   been measured. Whether they have the same disease is unknown; see Out of scope.
+- **Whether `fullyParallel: true` is worth measuring.** 06's answer suggests it'd be safe (no
+  spec needs cross-test serialization), but no spec needs it either — the suite is already at
+  ~17.5s, well under 60s. Undecided whether it's worth the measurement at all.
 
 ## Out of scope
 
