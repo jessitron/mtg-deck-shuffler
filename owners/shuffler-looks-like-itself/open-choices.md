@@ -524,9 +524,11 @@ self-rendering custom shape.
   a CSS custom property can't reach it. The standing rule holds: one delivery mechanism fleet-wide
   (a `<link>` **or** `@font-face`, never both), and self-hosting is a change to all three at once.
 
-  **The Tabletop uses none of these yet** — nothing there sets a font. They exist for ticket 11's
-  `mtg-zone` shape, which is exactly the case the tokens were created for, and ticket 11 has now
-  decided its label wants Orbitron (see below) — still unbuilt, same blocker.
+  **Built and confirmed working 2026-08-08 (ticket 13).** `MtgZoneShapeUtil`'s zone labels
+  ("Graveyard", "Exile", "Library", "The Stack") render with `fontFamily: "var(--font-chrome)"`,
+  and the token resolves to Orbitron inside the canvas — the first fleet-token consumer inside a
+  genuine self-rendering shape, exactly the case the tokens were created for. See
+  [README.md](README.md) → "tldraw limits" and [history.md](history.md) for how it was verified.
 - **`LandingPage.tsx` is a live, unrecorded Layer-1 violation.**
   `apps/tabletop/src/client/LandingPage.tsx` carries an off-brand green/cream palette in inline
   styles — `#1a2a1f`, `#f5f1e8`, `#3d5a45` — with no relationship to purple-and-pink. It is the
