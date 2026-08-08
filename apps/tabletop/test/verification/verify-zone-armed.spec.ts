@@ -80,6 +80,68 @@ test("dragging a card over a zone arms it (box-shadow ring), and disarms it once
   }).toPass({ timeout: 5000 });
 });
 
+test("dragging a multi-card selection arms only the one zone under the pointer, not one per card", async ({
+  page,
+  baseURL,
+}) => {
+  const tableSlug = `verify-armed-multi-${Date.now()}`;
+  await page.goto(`/t/${tableSlug}`);
+  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+
+  const instanceIdA = `armed-multi-a-${Date.now()}`;
+  const instanceIdB = `armed-multi-b-${Date.now()}`;
+  for (const [instanceId, scryfallId] of [
+    [instanceIdA, "aaaaaaaa-0000-0000-0000-000000000009"],
+    [instanceIdB, "aaaaaaaa-0000-0000-0000-00000000000a"],
+  ]) {
+    // "battlefield" (not "stack") so the two cards land at distinct grid
+    // positions instead of stacked exactly on top of each other — otherwise
+    // clicking one always hits whichever landed on top.
+    const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, {
+      data: cardPlayed({ cardName: "Llanowar Elves", card: { scryfallId, instanceId }, zoneHint: "battlefield" }),
+    });
+    expect(response.status()).toBe(201);
+  }
+
+  const cardA = page.locator(`#shape\\:card-${instanceIdA}`);
+  const cardB = page.locator(`#shape\\:card-${instanceIdB}`);
+  await expect(cardA).toBeAttached();
+  await expect(cardB).toBeAttached();
+
+  const graveyard = `[data-shape-id="shape:region-graveyard-${tableSlug}-e2e-seat"]`;
+  const exile = `[data-shape-id="shape:region-exile-${tableSlug}-e2e-seat"]`;
+  await expect(page.locator(graveyard)).toBeAttached();
+  await expect(page.locator(exile)).toBeAttached();
+  await zoomToFit(page);
+
+  // Select both cards as a group (click A, shift-click B), then drag from A
+  // — tldraw moves the whole selection together, to one destination.
+  await cardA.click();
+  await cardB.click({ modifiers: ["Shift"] });
+
+  const cardBox = await cardA.boundingBox();
+  const graveyardBox = await page.locator(graveyard).boundingBox();
+  if (!cardBox || !graveyardBox) throw new Error("missing bounding box");
+
+  await page.mouse.move(cardBox.x + cardBox.width / 2, cardBox.y + cardBox.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(graveyardBox.x + graveyardBox.width / 2, graveyardBox.y + graveyardBox.height / 2, {
+    steps: 10,
+  });
+
+  await expect(async () => {
+    expect(await boxShadowOf(page, graveyard)).toContain("230, 163, 61");
+  }).toPass({ timeout: 5000 });
+
+  // The whole selection is moving as one rigid group toward the pointer —
+  // only the zone the pointer is actually over arms, not a second zone one
+  // of the other selected cards' own (unmoved-relative-to-the-group) bounds
+  // might otherwise have overlapped.
+  expect(await boxShadowOf(page, exile)).toBe("none");
+
+  await page.mouse.up();
+});
+
 test("the armed glow is local to the dragging player, never synced to another client", async ({ browser, baseURL }) => {
   const tableSlug = `verify-armed-local-${Date.now()}`;
   const contexts: BrowserContext[] = [];
