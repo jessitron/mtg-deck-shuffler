@@ -2,7 +2,7 @@
 
 Mountain: overhead
 Type: task
-Status: in-progress
+Status: done — landed in a4991f3; kept as rationale for the open `playmat-drop-shadow` TODO item
 
 ## Why now
 
