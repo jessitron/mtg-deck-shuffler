@@ -96,7 +96,7 @@ describe("seat joined", () => {
     const shapes = shapesOf("seat-no-image");
     const mat = playmatBounds(0);
     // The mat outline is still drawn; no image shape was created for it.
-    expect(shapes.some((s) => s.x === mat.x && s.y === mat.y && s.type === "geo")).toBe(true);
+    expect(shapes.some((s) => s.x === mat.x && s.y === mat.y && s.type === "mtg-zone")).toBe(true);
     expect(shapes.some((s) => s.type === "image")).toBe(false);
   });
 
@@ -113,15 +113,25 @@ describe("seat joined", () => {
 
   it("widens the Stack strip as each seat joins", async () => {
     await post("seat-stack-widen", seatJoined({ initiator: { seatId: "seat-widen-A", playerName: "Sam" } }));
-    const afterOne = shapesOf("seat-stack-widen").find((s) => s.props?.richText && JSON.stringify(s.props.richText).includes("Stack"));
+    const afterOne = shapesOf("seat-stack-widen").find((s) => s.props?.label === "The Stack");
     const oneSeatBounds = stackStripBounds(1);
     expect(afterOne.props.w).toBe(oneSeatBounds.w);
 
     await post("seat-stack-widen", seatJoined({ initiator: { seatId: "seat-widen-B", playerName: "Alex" } }));
-    const afterTwo = shapesOf("seat-stack-widen").find((s) => s.props?.richText && JSON.stringify(s.props.richText).includes("Stack"));
+    const afterTwo = shapesOf("seat-stack-widen").find((s) => s.props?.label === "The Stack");
     const twoSeatBounds = stackStripBounds(2);
     expect(afterTwo.props.w).toBe(twoSeatBounds.w);
     expect(afterTwo.props.w).toBeGreaterThan(afterOne.props.w);
+  });
+
+  it("preserves the Stack shape's z-order index as it widens, instead of minting a fresh one", async () => {
+    await post("seat-stack-index", seatJoined({ initiator: { seatId: "seat-index-A", playerName: "Sam" } }));
+    const afterOne = shapesOf("seat-stack-index").find((s) => s.props?.label === "The Stack");
+
+    await post("seat-stack-index", seatJoined({ initiator: { seatId: "seat-index-B", playerName: "Alex" } }));
+    const afterTwo = shapesOf("seat-stack-index").find((s) => s.props?.label === "The Stack");
+
+    expect(afterTwo.index).toBe(afterOne.index);
   });
 
   it("rejects a payload missing required fields", async () => {

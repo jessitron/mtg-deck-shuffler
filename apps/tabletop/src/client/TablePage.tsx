@@ -5,13 +5,14 @@ import { useSync } from "@tldraw/sync";
 import { setGlobalAttrs, currentTraceparent, inSpan } from "./observability";
 import { useCardArrivalSpans } from "./useCardArrivalSpans";
 import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
+import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
 
 // useSync (unlike <Tldraw>) builds its store schema from exactly the
 // shapeUtils it's given — it does NOT fold in tldraw's own defaults the way
-// <Tldraw> does — so the stock shapes furniture and name labels still use
-// (geo, image, text, ...) have to be listed here explicitly alongside
-// mtg-card, or the client store rejects them outright.
-const shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil];
+// <Tldraw> does — so the stock shapes the name label still uses (text, ...)
+// have to be listed here explicitly alongside mtg-card/mtg-zone, or the
+// client store rejects them outright.
+const shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil];
 
 /**
  * The table: a synced tldraw canvas. Anyone with the URL joins — spectators
