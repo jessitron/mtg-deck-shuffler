@@ -2,6 +2,7 @@ import { GameState, WhatHappened, GameId } from "./GameState.js";
 import { PersistStatePort, IncompatibleStateVersionError } from "./port-persist-state/types.js";
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { GameEvent } from "./GameEvents.js";
+import { markCurrentSpanAsError } from "./tracing_util.js";
 
 export interface ApplyGameCommandDeps {
   persistStatePort: PersistStatePort;
@@ -33,6 +34,11 @@ export async function applyGameCommand(
 ): Promise<CommandOutcome> {
   const persistedGame = await deps.persistStatePort.retrieve(gameId);
   if (!persistedGame) {
+    markCurrentSpanAsError(`Game ${gameId} not found`, {
+      "game.load.failure": "not_found",
+      "game.game_id": gameId,
+      "game.found": false,
+    });
     return { kind: "not-found" };
   }
 
@@ -41,6 +47,13 @@ export async function applyGameCommand(
     game = await GameState.fromPersistedGameState(persistedGame, deps.cardRepository);
   } catch (error) {
     if (error instanceof IncompatibleStateVersionError) {
+      markCurrentSpanAsError(error.message, {
+        "game.load.failure": "incompatible_state_version",
+        "game.game_id": gameId,
+        "game.state.version.compatible": false,
+        "game.state.version.found": String(error.foundVersion),
+        "game.state.version.expected": error.expectedVersion,
+      });
       return { kind: "incompatible-version", error };
     }
     throw error;
