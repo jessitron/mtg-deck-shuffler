@@ -24,9 +24,11 @@
   `apps/tabletop/src/shared/mtgCardShape.ts` — see `architecture.md`), so every instance of it is
   a real card by construction. The old `if (!shape.meta?.instanceId) return undefined` guard,
   needed only because cards/furniture/stray-drops used to share `type: "image"`, was removed.
-- `meta` still exists on the shape but now carries *only* `zone` (zone-entry dedup, see
-  `onTranslateEnd`) — ticket 13 plans to move even that to reading `mtg-zone` shapes' props
-  instead.
+- `meta` still exists on the *card* shape but now carries *only* `zone` (zone-entry dedup, see
+  `onTranslateEnd`) — this is the card's own "what zone was I last known to be in," not a copy of
+  anything on the zone shape. Ticket 13 (landed 2026-08-08) upgraded the *other* half — how
+  `zoneAt()` finds the zone in the first place — from scanning any shape's bare `meta.zone` string
+  to matching real `mtg-zone` shapes' validated `props.zone`; see the next section.
 
 ## Depended On By
 
@@ -43,13 +45,24 @@
   commit; consult `owners/two-faced-cards/` for anything about *which face renders*, this owner
   for anything about *what responds to the pointer*.
 
-### Zone detection (`tableFurniture.ts`, `cardLayout.ts`)
-- `zoneAt()` in `MtgCardImageShapeUtil.tsx` walks every shape on the page looking for one whose
-  `meta.zone` is a string and whose bounds contain the dragged card's center. Furniture shapes
-  are stock, locked `geo`/`image` shapes stamped with `meta.zone` — not a custom ShapeUtil of
-  their own. If furniture ever becomes a custom shape type (buoyed in `.scratch/tabletop-physics/
-  issues/03-what-furniture-is.md` as `mtg-zone`), `zoneAt()`'s reliance on `meta.zone` as a bare
-  string tag should be revisited here.
+### Zone detection (`tableFurniture.ts`, `MtgZoneShapeUtil.tsx`, `cardLayout.ts`)
+- Furniture is now `mtg-zone`, a genuine custom shape type (ticket 13, landed 2026-08-08;
+  `apps/tabletop/src/shared/mtgZoneShape.ts` + `apps/tabletop/src/client/shapes/
+  MtgZoneShapeUtil.tsx`) — no longer stock, locked `geo`/`image` shapes stamped with a bare
+  `meta.zone` string. `zoneAt()` in `MtgCardShapeUtil.tsx` now filters
+  `candidate.type === "mtg-zone"` and reads the validated `candidate.props.zone`, instead of
+  scanning every shape for a truthy `meta.zone`.
+- `zoneAt()` also now resolves overlapping zones — previously undefined behavior — by picking
+  whichever candidate has the greatest `index` (an `IndexKey`; plain string `>` comparison already
+  reflects z-order for tldraw's fractional-indexing scheme), i.e. the topmost-drawn zone wins.
+- `MtgZoneShapeUtil` defines **no** `onClick`/`onTranslateEnd`/`onDragShapesOver` — see
+  `architecture.md`'s "Ticket 13" section for why that's provably safe rather than just
+  convenient: zones are always `isLocked: true`, `SelectTool`'s `Idle` state gates on `isLocked`
+  before a locked shape ever reaches `PointingShape` (so watch point 1's quirk can't apply to it,
+  even if it grew an `onClick` later), and `Editor.getDraggingOverShape` filters out locked shapes
+  before checking drag-over hooks (so a target-side hook on the zone could never fire regardless).
+  This is now the KB's concrete working example of "a locked shape needs no interaction hooks at
+  all" — previously only asserted in the abstract (see watch point 7, new, below).
 
 ## Watch Points
 
@@ -99,7 +112,26 @@
    `pointer-events: none`) or clicks silently never land, which Playwright will report as "element
    intercepts pointer events" rather than anything shape-specific. See `architecture.md`'s
    Registration sections for all four. This bit on ticket 12's implementation (item 4, the
-   pointer-events trap, broke every click-based Playwright spec until traced).
+   pointer-events trap, broke every click-based Playwright spec until traced). **Item 4 is
+   conditional on the shape being clickable**: ticket 13's `mtg-zone` generalized steps 1-3
+   cleanly (see `architecture.md`) but didn't need step 4 at all — a locked shape's `component()`
+   is never subject to a Playwright actionability check because nothing ever clicks it, so
+   `MtgZoneShapeUtil.component()` renders a plain `<div>` with no `.tl-image-container` treatment
+   and that's correct, not an oversight.
+
+7. **A locked shape needs no interaction hooks — now demonstrated, not just asserted.**
+   `MtgZoneShapeUtil` (ticket 13, `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx`) defines
+   none of `onClick`/`onTranslateEnd`/`onDragShapesOver`, and that's correct by construction:
+   zones are minted `isLocked: true` and stay that way (tldraw's context-menu Lock/Unlock is the
+   sole unlock path), `SelectTool`'s `Idle` state gates on `isLocked` before a shape ever reaches
+   `PointingShape` (so watch point 1's `onClick`-selection-deferral quirk is structurally
+   unreachable for it), and `Editor.getDraggingOverShape` filters `!isLocked` before checking
+   drag-over hooks (so a target-side hook could never fire either). **If `mtg-zone` ever grows an
+   `onClick`** (e.g. a future custom unlock affordance), it still would NOT reopen watch point 1's
+   quirk, because that quirk's gate (`PointingShape.onEnter`) sits behind the very same
+   `isLocked` check — a locked shape with `onClick` never reaches the code path that defers
+   selection in the first place. This distinction (locked-with-onClick vs. unlocked-with-onClick)
+   is worth remembering exactly because it looks like it should matter and doesn't.
 
 ## Not Related To
 

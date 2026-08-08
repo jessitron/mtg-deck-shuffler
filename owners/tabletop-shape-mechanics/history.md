@@ -112,6 +112,53 @@ registration) and `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` (extend
 Full detail in `architecture.md` (Registration sections, "The `meta` guard is gone", "Ticket
 02/12: the rewrite, landed") and `interactions.md` (watch point 6, new).
 
+## Ticket 13: furniture becomes a genuine custom shape type, `mtg-zone` (2026-08-08)
+
+Implements the rewrite buoyed alongside ticket 02 (`.scratch/tabletop-physics/
+issues/03-what-furniture-is.md`) for the same "one shared type, several meanings" reason: the
+playmat, library, graveyard, exile, and the Stack were stock, locked `geo`/`image` shapes tagged
+with a freeform `meta.zone` string — indistinguishable at the type level from a stray dropped
+JPEG. Ticket 13 gives furniture its own type: `apps/tabletop/src/shared/mtgZoneShape.ts`
+(`MtgZoneShapeProps` — a closed `zone` enum, `seatId`, `label` — plus the `TLGlobalShapePropsMap`
+registration, same pattern as `mtgCardShape.ts`) and `apps/tabletop/src/client/shapes/
+MtgZoneShapeUtil.tsx` (`BaseBoxShapeUtil<MtgZoneShape>`).
+
+- **Confirms, rather than introduces, the KB's core patterns** — a good sign the patterns
+  generalize. The four-step registration recipe (watch point 6) applied cleanly to a second shape
+  type with no new gotcha, except that step 4 (the `.tl-image-container` pointer-events fix)
+  turned out to be *conditional*: it only matters for a clickable shape, and `mtg-zone` isn't one,
+  so `MtgZoneShapeUtil.component()` correctly skips it.
+- **New concrete example, not just an abstract claim**: `MtgZoneShapeUtil` defines no
+  `onClick`/`onTranslateEnd`/`onDragShapesOver` at all. Confirmed safe during `-review`, by
+  reading tldraw source rather than assuming: zones are always `isLocked: true`, `SelectTool`'s
+  `Idle` state gates on `isLocked` before a shape ever reaches `PointingShape` (so watch point 1's
+  quirk is structurally unreachable — even a future `onClick` on a locked shape wouldn't reopen
+  it, since the quirk's own gate sits behind the same `isLocked` check), and
+  `Editor.getDraggingOverShape` filters `!isLocked` before checking drag-over hooks (so a
+  target-side hook on the zone could never fire regardless). New watch point 7 records this.
+- **Card-side `zoneAt()` upgraded** (`MtgCardShapeUtil.tsx`): from scanning any shape for a bare
+  `meta.zone` string to filtering `candidate.type === "mtg-zone"` and reading the validated
+  `candidate.props.zone`. Also newly resolves overlapping zones — previously undefined — by
+  picking the greatest `index` (an `IndexKey`; plain string comparison already reflects z-order
+  for tldraw's fractional-indexing scheme, confirmed against `@tldraw/utils`'s
+  `fractionalIndexing.ts` source during `-review`, not just the docs), i.e. topmost-drawn wins.
+  `meta.zone` on the *card* survives only as the zone-entry dedup value, unchanged in role.
+- **Server-side** (`tableFurniture.ts`): `zoneShape()` builds real `mtg-zone` records; the old
+  `RegionStyle`/`DEFAULT_REGION_STYLE`/`PLAYMAT_REGION_STYLE` machinery is deleted — visual
+  treatment (dashed vs. playmat's solid border) now lives in `MtgZoneShapeUtil.component()`,
+  branching on `props.zone`. The playmat/library background *pictures* remain stock `image`
+  shapes, unaffected.
+- **Two incidental bug fixes landed in the same pass** (recorded in `architecture.md`, not
+  specific to `mtg-zone` itself but surfaced while touching this code): `ensureStackStripWidth`
+  was minting a fresh top-of-z-order `index` on every call, silently promoting the Stack over
+  other shapes every time a new seat joined — fixed to reuse the existing shape's `.index` when
+  present. The seat name label's `isLocked` was `false`, letting any player drag/delete another
+  player's name — fixed to `true`.
+
+Full detail in `architecture.md` ("Ticket 13: furniture becomes a genuine custom shape type,
+`mtg-zone`") and `interactions.md` (zone-detection section, watch point 6's item-4 caveat, new
+watch point 7).
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,

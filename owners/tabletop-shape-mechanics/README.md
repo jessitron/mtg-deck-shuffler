@@ -28,8 +28,8 @@ card-rendering owner. See `history.md` for the full migration note.
 
 ## Scope
 
-Everything under `apps/tabletop/src/client/shapes/` — currently one file,
-`MtgCardShapeUtil.tsx` — and its interaction with tldraw's own `SelectTool` child states
+Everything under `apps/tabletop/src/client/shapes/` — `MtgCardShapeUtil.tsx` and
+`MtgZoneShapeUtil.tsx` — and their interaction with tldraw's own `SelectTool` child states
 (`PointingShape`, `Translating`, in `node_modules/tldraw/src/lib/tools/SelectTool/childStates/`).
 Concretely: click/tap toggling, drag-and-drop, shape selection state, zone detection via shape
 bounds, and any tldraw quirk discovered while implementing these.
@@ -37,8 +37,16 @@ bounds, and any tldraw quirk discovered while implementing these.
 **Ticket 02/12** (`.scratch/tabletop-physics/issues/12-*.md`, landed 2026-08-08) carried out the
 rewrite decided by ticket 02: the card is now a genuine custom shape type, `mtg-card`, defined in
 `apps/tabletop/src/shared/mtgCardShape.ts` and rendered by `MtgCardShapeUtil` extending
-`BaseBoxShapeUtil` (not `ImageShapeUtil`). The old `MtgCardImageShapeUtil.tsx` is deleted. See
-`architecture.md` for the mechanics and the tldraw registration gotchas this rewrite surfaced.
+`BaseBoxShapeUtil` (not `ImageShapeUtil`). The old `MtgCardImageShapeUtil.tsx` is deleted.
+
+**Ticket 13** (`.scratch/tabletop-physics/issues/13-*.md`, landed 2026-08-08) did the same for
+furniture: the playmat, library, graveyard, exile, and the Stack are now a genuine custom shape
+type, `mtg-zone`, defined in `apps/tabletop/src/shared/mtgZoneShape.ts` and rendered by
+`MtgZoneShapeUtil` extending `BaseBoxShapeUtil`. Furniture is **no longer** "stock locked
+`geo`/`image` shapes with no custom ShapeUtil" — that was true before this ticket, isn't now.
+`MtgZoneShapeUtil` defines no interaction hooks at all (see `architecture.md`), which makes it
+the KB's working example of "a locked shape needs none." See `architecture.md` for the mechanics
+and the tldraw registration gotchas both rewrites surfaced.
 
 ## Design philosophy
 
@@ -65,8 +73,10 @@ rewrite decided by ticket 02: the card is now a genuine custom shape type, `mtg-
 |---|---|
 | Card ShapeUtil (tap/untap, drag settle, zone detection) | `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` |
 | Card shape's props/type definition | `apps/tabletop/src/shared/mtgCardShape.ts` (`MtgCardShapeProps`, `TLGlobalShapePropsMap` augmentation) |
-| ShapeUtil registration (client) | `apps/tabletop/src/client/TablePage.tsx` (`shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil]` passed to `useSync`) |
-| Shape schema registration (server) | `apps/tabletop/src/server/rooms.ts` (`createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...} } })`) |
+| Zone ShapeUtil (furniture — no interaction hooks) | `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` |
+| Zone shape's props/type definition | `apps/tabletop/src/shared/mtgZoneShape.ts` (`MtgZoneShapeProps`, `TLGlobalShapePropsMap` augmentation) |
+| ShapeUtil registration (client) | `apps/tabletop/src/client/TablePage.tsx` (`shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil]` passed to both `useSync` and `<Tldraw>`) |
+| Shape schema registration (server) | `apps/tabletop/src/server/rooms.ts` (`createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-zone": {...} } })`) |
 | Shape identity is minted | `apps/tabletop/src/server/cardArrival.ts` (`props.instanceId`, `createShapeId`) |
 | tldraw's selection state machine (read, don't modify) | `node_modules/tldraw/src/lib/tools/SelectTool/childStates/PointingShape.ts`, `Translating.ts` |
 | Regression test for the drag-identity bug | `apps/tabletop/test/verification/verify-drag-identity.spec.ts` |
