@@ -3,7 +3,7 @@
 Mountain: overhead
 Ship: shuffler
 Type: task
-Status: needs-triage
+Status: resolved
 
 ## Context
 
@@ -30,3 +30,16 @@ about eliminating the module, just shrinking its interface in place.
 `apps/shuffler/` only. Small enough that a Playwright smoke check
 (`./verify.sh` from `apps/shuffler/`) covering `/game` is sufficient; no new test needed since
 this changes no behavior, only which function owns which HTML fragment.
+
+## Answer
+
+Done (2026-08-08). Both single-use fragment helpers folded inline into
+`formatActiveGameHtmlSection` as local template expressions (`goToTableButtonHtml`,
+`tableCardsButtonHtml`), keeping their explanatory comments. A file-header comment now names
+the file's one job: game screen layout/composition order, including the HTMX swap contract on
+`#game-container` — the assembly seam, not a home for business logic. Bonus interface shrink
+found while checking call sites: `tabletopPublicUrl()` had no importers anywhere in src/ or
+test/, so its `export` was dropped too (the doc comment distinguishing it from `TABLETOP_URL`
+stays). The file's exports are now exactly its two jobs: `formatGamePageHtmlPage` and
+`formatActiveGameHtmlSection`. No behavior change; build + 302 unit tests + full Playwright
+verify (48 passed) all green.

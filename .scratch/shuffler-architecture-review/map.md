@@ -60,9 +60,14 @@ bundled in. Done when each ticket below is either resolved or explicitly parked 
   to `(game, whatHappened) => string | void` since it sends its own response via `res.render`.
   `loadGameFromParams`/`requireValidVersion` are now fully unused and deleted.
 
+- **[Shrink active-game-page.ts's interface](issues/03-active-game-page-interface.md) —
+  done** (2026-08-08). Both single-use fragment helpers folded inline into
+  `formatActiveGameHtmlSection`; file-header comment names the assembly-seam job (HTMX swap
+  contract on `#game-container`). Bonus: `tabletopPublicUrl()` un-exported (no importers).
+  Exports are now exactly the two jobs. No behavior change; full verify green.
+
 ## Fog — not yet specified
 
-- [Shrink active-game-page.ts's interface](issues/03-active-game-page-interface.md)
 - [Move domain types out of port-persist-state/types.ts](issues/04-domain-types-out-of-port.md)
 - [Name the send-then-commit failure protocol](issues/05-name-send-then-commit-protocol.md)
 - [Unify the Shuffler's two page-shell builders](issues/06-unify-page-shell.md)
