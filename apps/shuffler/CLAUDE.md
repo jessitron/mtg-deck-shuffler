@@ -180,6 +180,8 @@ Verify changes with (from `apps/shuffler/`):
 - `npm run test`
 - `PORT=3344 ./run` - Verify app starts, click through to what you changed
 - `./verify.sh` - Playwright verification (builds, starts on a random high port, runs the specs)
+  - Forwards its arguments to `npx playwright test`, so `./verify.sh verify-yo-fast-start`
+    runs just the specs matching that name — full server lifecycle, one spec's runtime
 
 **The suite traces itself.** `test/harness-telemetry/` holds a Playwright reporter that sends
 spans about the *run* — one trace per run, a span per spec, test and step (every `page.goto`,
