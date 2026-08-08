@@ -19,9 +19,10 @@ designed and decided — not built.
 tickets closed): furniture is `mtg-zone`, cards are `mtg-card`, both real custom shape types.
 This map builds the geography on top of that settled shape layer.
 
-Three of the tickets below don't touch shape architecture and can be worked in parallel if you
-want motion: seat label deck name, sleeve/playmat picker, and the cosmetic half of player-area
-polish.
+**All tickets resolved 2026-08-08.** The destination's decisions are made; what remains here
+is one fog line (seat position across a restart) that can't be specified until map 6 decides
+what survives a restart. The decided-but-unbuilt work now lives in the tickets' resolutions,
+`apps/tabletop/DESIGN.md`, and `TODO.md` — implementation is the next voyage, not this map's.
 
 ## Notes
 
@@ -89,6 +90,15 @@ polish.
   provisional pending play experience. Recorded in `apps/tabletop/DESIGN.md`'s new
   "The square" section.
 
+- [How a sleeve's chosen color travels and renders](issues/11-sleeve-color-to-card-back.md)
+  (2026-08-08) — as a color, not a URL: optional `sleeveColor` (hex) joins `seat.joined`
+  player data, `cardBackImageUrl` goes optional (omitted when a sleeve is defined). Sleeve
+  color is a **game constant** — never changed mid-game — so the Tabletop bakes it into
+  `mtg-card` props at mint time (legal now; amends physics ticket 02's no-baking rule). No
+  `card.played` rev: it already carries `seat`, and sleeve is seat data. A sleeve renders as
+  a solid color rectangle slightly larger than the card — face-down/library = solid
+  rectangle, face-up = card image centered inside it. Seat-schema work converges with
+  ticket 06's.
 - [Life totals and commander damage](issues/12-life-totals-and-commander-damage.md)
   (2026-08-08) — a life counter is a new **locked custom shape** (number + +/- buttons +
   direct typing) on the name row: name large left; right-justified, commander-damage

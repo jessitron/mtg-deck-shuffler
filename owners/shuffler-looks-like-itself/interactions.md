@@ -69,6 +69,15 @@
   each commander-damage counter; no separate player-color concept; playmats rejected as the
   identity carrier) — so ticket 09's sleeve palette and ticket 11's color plumbing now carry
   identity weight beyond card backs.
+  `issues/11-sleeve-color-to-card-back.md` (resolved 2026-08-08) settled that plumbing:
+  `sleeveColor` is an optional raw hex on `seat.joined`'s player data, baked into `mtg-card`
+  props at mint (a game constant, never changed mid-game — that immutability is what makes
+  per-card baking legal), and decided the rendering *model* — solid rectangle slightly larger
+  than the card; face-down cards and the library pile render as the bare sleeve rectangle; a
+  face-up sleeved card shows its image centered inside it; unsleeved keeps the standard back.
+  Appearance specifics (margin, radius, border/sheen, swatch palette) are explicitly reserved
+  for this owner at implementation time — see [open-choices.md](open-choices.md) → "Fleet
+  gaps — the Tabletop side".
 - **The two-faced-cards owner** — flip button styling and the `.flip-container-*` blocks.
 - **The library-search owner** — modal and list styling.
 - **`test/verification/verify-deck-title-placement.spec.ts`** (added 2026-08-07) — pins the
@@ -446,6 +455,17 @@ not by recomputing new numbers.**
   typography decision. The sleeve-color swatch on each commander-damage counter is
   **identity**, not decoration — it must be the opponent's actual sleeve color (ticket 11's
   plumbing), never a palette value this owner picks.
+- **The sleeve's rendered appearance has a decided MODEL and an undecided treatment** (ticket
+  11, 2026-08-08). The model — solid rectangle a few px larger than the card; face-down cards
+  and the library pile render as the bare sleeve rectangle; a face-up sleeved card centers
+  its image inside it; unsleeved keeps the standard Magic back — is settled. The treatment —
+  exact margin, corner radius (a sleeve is a physical object → real radius, computed in
+  TypeScript at render time like all canvas geometry), border/sheen/texture, and the picker's
+  swatch palette — is reserved for this owner's `-context`/`-review` at implementation time.
+  An `mtg-card` sleeve implementation arriving with those fully formed is the ride-along to
+  block. The `sleeveColor` hex itself is **domain data** (player-chosen, like card art) —
+  exempt from the stylesheet raw-hex ban; the ban governs values agents pick, not values
+  players pick.
 - **A canvas shape has a name for its font and its radius now** (`f79bc7d`, 2026-08-07).
   `--font-chrome`/`--font-content`/`--font-display` and `--radius-soft` are in the shared package
   specifically for this case. **Correction: a `.tsx` shape *can* `var()`** — this was written

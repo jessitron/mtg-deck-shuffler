@@ -72,7 +72,7 @@ Players encounter two-faced cards throughout the app:
 | Aspect | Details |
 |---|---|
 | Data type | `CardDefinition.twoFaced` flag, `CardDefinition.cardTypes` (union of all faces' types), `GameCard.currentFace` |
-| Face-down (concealment) | **No code anywhere in the fleet yet**; designed for the Tabletop only, as `faceDown: boolean` in the `mtg-card` shape's `props`, rendered against the *table's* `cardBackImageUrl` (ticket 02, `c956949`). Nothing on `CardDefinition`/`GameCard`, nothing in `contracts/`; a Shuffler "Play Face-Down" button was dropped to the Mural-parity buoy list. The Shuffler's `CARD_BACK` image is library-stack decoration, not modeled state |
+| Face-down (concealment) | **No code anywhere in the fleet yet**; designed for the Tabletop only, as `faceDown: boolean` in the `mtg-card` shape's `props` (ticket 02, `c956949`). Rendering (revised by table-layout ticket 11, 2026-08-08): a sleeved seat's card renders face-down as a solid `sleeveColor` rectangle **baked into the shape's props at mint time**; an unsleeved seat's card renders against the standard Magic card back (`cardBackImageUrl`). Nothing on `CardDefinition`/`GameCard`, nothing in `contracts/`; a Shuffler "Play Face-Down" button was dropped to the Mural-parity buoy list. The Shuffler's `CARD_BACK` image is library-stack decoration, not modeled state |
 | Concealment is depicted, not enforced | A face-down card keeps its identity in synced tldraw `props`; no permission model, and **no gesture may be gated on who controls a card** (`notes/DESIGN-the-table-vision.md` § Principles, 2026-08-07) |
 | Type definitions | `src/types.ts` (CardDefinition), `src/port-persist-state/types.ts` (GameCard) |
 | State mutation | `GameState.flipCard()` in `src/GameState.ts` |

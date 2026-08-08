@@ -26,6 +26,15 @@ Interpreter: the translation layer from Tabletop physics to Spine meaning — an
 
 Player (MTG Deck Shuffler): this is what we call the user of the app. They're here to play a game of MTG; this app will track part of the game state for them.
 
+Sleeve: the colored cover a player puts their whole deck in before the game. On the Tabletop
+it renders as a rectangle of solid color slightly larger than the card: a face-down card or
+the library pile shows only the sleeve; a face-up card shows its image centered inside the
+sleeve rectangle. The sleeve color is that player's visual identity on the table (commander
+damage is tracked by opponent name + sleeve color). It is a game constant — chosen before the
+game, never changed mid-game. Real sleeves have distinct front and back colors; v1 models one
+color. Sleeves are optional; an unsleeved deck shows the standard Magic card back. (Decided
+2026-08-08, table-layout tickets 09/11/12.)
+
 Card - this is ambiguous. Are we talking about a card conceptually, or a particular card in a deck? A card by name, or a particular edition of it? This word by itself does not have a specific meaning.
 
 Oracle Card: this word is defined by Archidekt, referring to a definition in the Scryfall domain. It references a card by name.

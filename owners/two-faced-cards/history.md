@@ -412,3 +412,35 @@ instead. Pure tldraw `SelectTool`/selection-state mechanics, unrelated to card f
 `CardDefinition` — this finding, and the owner that now tracks its territory, moved to
 `owners/tabletop-shape-mechanics/history.md` the same day. See that owner if a new
 click/drag/selection bug turns up in `MtgCardImageShapeUtil.tsx` or its successors.
+
+## Sleeve Color Decided: Baked Per-Card, as a Color, No card.played Rev (2026-08-08)
+
+Table-layout ticket 11 resolved (`.scratch/tabletop-table-layout/issues/11-sleeve-color-to-card-back.md`
+§ Answer) — a wayfinder DECISION, no code changed. What it settled for this owner's territory:
+
+- **Sleeve color travels as a color**: optional `sleeveColor` hex on `seat.joined` player
+  data; `cardBackImageUrl` becomes optional (omitted when a sleeve is defined; sleeveColor
+  wins if both arrive). Unsleeved seats keep the standard Magic card back.
+- **Sleeve color is a game constant** (pre-game choice, immutable mid-game) — which makes
+  per-card baking legal and **amends ticket 02's rule** this KB recorded: instead of
+  "faceDown renders against the seat/table's `cardBackImageUrl`," the Tabletop server now
+  (when built) bakes the seat's sleeveColor into the `mtg-card` shape's props at mint time;
+  the renderer reads its own props. The seat-lookup gap this owner flagged in its -context
+  consult is dodged by baking, not by syncing.
+- **No `card.played` rev** — it already carries `seat`, and its charter keeps derivable
+  seat data out. Only contract work is the `seat.joined` schema (converges with
+  table-layout ticket 06's deck-name field).
+- **Rendering model**: face-down card and library pile = solid sleeve rectangle slightly
+  larger than the card; face-up sleeved card = image centered inside the sleeve rectangle.
+  Exact margins/radius reserved for `shuffler-looks-like-itself` at implementation time.
+- **This owner's watch point held**: sleeve data stays out of `backImageUrl`; `sleeveColor`
+  is its own prop, and `backImageUrl: null` ⇔ no printed back is untouched. KB gap closed:
+  the library furniture image is a second consumer of the card back.
+- Future (not v1), per Jess: a sleeve may someday carry an image URL and two colors
+  (front border vs back).
+
+KB files updated: README quick-reference face-down row; interactions watch points 14 + new
+17 and the Card Back section; tabletop.md new "Sleeve color" section and the amended
+"generic card back" consequence; contract.md seat.joined note. Follow-up for
+implementation: update the "until sleeve selection exists" comment on `cardBackImageUrl()`
+in `apps/shuffler/src/port-tabletop/types.ts` (~124) to point at the ticket.

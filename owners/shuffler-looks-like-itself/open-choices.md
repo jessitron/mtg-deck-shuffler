@@ -582,6 +582,22 @@ self-rendering custom shape.
   not ride along on the implementation ticket. All the canvas rules apply: self-rendering
   shape for any fleet typeface, geometry computed in TypeScript at render time, `.stage-white`
   for any `/design` mock.
+- **Coming to this owner: the sleeve's rendered appearance**
+  (`.scratch/tabletop-table-layout/issues/11-sleeve-color-to-card-back.md`, resolved
+  2026-08-08 — transport + rendering *model* only). Decided there: `sleeveColor` travels as an
+  optional raw hex on `seat.joined`'s player data and is baked into `mtg-card` props at mint
+  (legal because sleeve color is a game constant, never changed mid-game); a sleeve renders as
+  a solid rectangle slightly larger than the card; face-down cards and the **library pile**
+  become the bare sleeve rectangle (the library furniture is a second consumer of the card
+  back — confirmed, now decision-relevant); a face-up sleeved card shows its image centered
+  inside the sleeve rectangle; unsleeved decks keep the standard Magic back. **Reserved for
+  this owner's `-context`/`-review` at implementation time**: exact margin (the "few px per
+  side"), corner radius (a sleeve is a physical object — the physical-rounding rule applies,
+  and it's canvas geometry, so compute it in TypeScript at render time, not a static CSS
+  value), any border/sheen/texture, and the picker's default/swatch palette (ticket 09's
+  quick-swatch list — which now carries identity weight: players must stay distinguishable at
+  a glance, per ticket 12). The raw hex itself is domain data like card art and is exempt from
+  the stylesheet hex ban; what an agent must not do is *pick* one.
 - **Also undecided, and it must not ride along: a card's `indicator()`.** Ticket 04 records
   explicitly that an `indicator()` looking like anything other than tldraw's default is a
   **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket

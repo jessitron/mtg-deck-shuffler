@@ -196,14 +196,15 @@ Three consequences this owner cares about:
   stays the single decider of flippability, and two fields that must agree is a bug waiting
   to happen. Accepted — but see the sharp edge in "Watch points" below, which the sender
   must honour for that equivalence to hold.
-- **The generic card back is NOT a card property.** Rendering resolves `faceDown` against
-  the **table's** `cardBackImageUrl` (already arriving on `seat.joined`, already used by the
-  library furniture). Reason: sleeves are coming
-  (`.scratch/tabletop-table-layout/issues/09-sleeve-and-playmat-picker.md`), and a sleeve
-  belongs to a player or a table, not to a card — bake it per-card and changing your sleeve
-  rewrites every shape on the board. This honours this owner's rule that concealment is
-  *state* and the card back is only its *rendering*, arriving from a different direction
-  than we proposed.
+- **The generic card back is NOT a card property** — *as ticket 02 decided it*: rendering
+  resolves `faceDown` against the **table's** `cardBackImageUrl` (arriving on `seat.joined`,
+  already used by the library furniture), because a mid-game sleeve change would otherwise
+  rewrite every shape on the board. **Amended by table-layout ticket 11 (2026-08-08 — see
+  "Sleeve color" section below)**: sleeve color was since declared a *game constant*, which
+  makes per-card baking legal; the chosen design bakes the seat's `sleeveColor` into the
+  shape's props at mint time, and `cardBackImageUrl` remains the rendering for unsleeved
+  seats only. The deeper rule survives intact: concealment is *state*, and the card
+  back/sleeve is only its *rendering*.
 
 Also decided, and outside this owner's territory but worth not re-deriving: the card knows
 nothing about its counters, notes, or what it's tucked behind (the passenger knows its
@@ -236,6 +237,41 @@ Two edit sites, both landed: `buildCardPlayedEvent` in
 it is the de-facto spec of F0) and the hand-rolled `validationError` in
 `apps/tabletop/src/server/cardArrival.ts` (now requires `frontImageUrl: string` +
 `backImageUrl: string | null`).
+
+## Sleeve color: how the card back gets its look — decided, table-layout ticket 11 (2026-08-08)
+
+Decision only, no code yet (`.scratch/tabletop-table-layout/issues/11-sleeve-color-to-card-back.md`
+§ Answer; graduated out of ticket 09's "sleeves are color-picked in v1"). Four decisions,
+all binding on future face-down/card-back rendering work:
+
+1. **A sleeve is a solid-color rectangle slightly larger than the card** (a few px per side
+   at canvas scale). v1 has one color doing both jobs (front border + back). **Sleeve color
+   is a game constant** — chosen pre-game, never changed mid-game. That immutability is
+   load-bearing: it is what makes per-card baking legal, dissolving ticket 02's
+   "never bake per-card" rule (whose whole rationale was mid-game sleeve changes).
+2. **It travels as a color, not a URL**: optional `sleeveColor` (hex) joins the player data
+   on `seat.joined` — as data because ticket 12 (table-layout) made sleeve color *player
+   identity*, and commander-damage counters need the raw hex, which a URL would lock away.
+   `cardBackImageUrl` becomes **optional**, omitted when a sleeve is defined; `sleeveColor`
+   wins if both arrive. No default color: unsleeved seats keep the standard Magic card back.
+3. **No `card.played` rev.** It already carries `seat`, and its charter keeps derivable
+   seat data out of the payload. The only contract work is the `seat.joined` schema,
+   converging with table-layout ticket 06's deck-name field — one schema session for both.
+4. **Rendering**: at card arrival the Tabletop server looks up the seat's sleeve and **bakes
+   the color into the `mtg-card` shape's props at mint time**; the client renderer reads its
+   own props (the seat-lookup gap is dodged by baking, not by syncing). Face-down card and
+   library pile = solid sleeve rectangle; face-up sleeved card = card image centered inside
+   the sleeve rectangle (the IRL sleeve-border look). Unsleeved cards keep today's look.
+   Exact margin, corner radius, border/sheen are appearance choices reserved for
+   implementation time with the `shuffler-looks-like-itself` owner.
+
+Two standing notes: **sleeve data stays out of `backImageUrl`** — `sleeveColor` is its own
+prop, and `backImageUrl: null` ⇔ "no printed back exists" is untouched (this owner's watch
+point held). And the **library furniture image is a second consumer of the card back**:
+whatever renders face-down must render the library pile identically. Redeploy fragility
+(seat memory wiped → later cards arrive sleeveless) is accepted, same class as playmat and
+deck name. Jess's stated future, not v1: a sleeve may someday carry an image URL and two
+colors (front border vs back).
 
 ## Face-down is depicted, not enforced — and no gesture may be gated on control
 
