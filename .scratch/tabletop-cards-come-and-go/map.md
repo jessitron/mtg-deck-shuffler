@@ -98,14 +98,17 @@ Founding decisions from the charting session (Jess, 2026-08-08):
   map touches; `seat.taken` vs `seat.joined` are two facts from two flows, documented,
   not unified.
 
+- [The portal gesture — the library swallows a card](issues/04-portal-gesture.md)
+  (2026-08-09, prototyped live) — **Vortex · inhale won**: pointer-keyed arming swirl
+  over the library (standing policy, recorded with the shape-mechanics owner: the
+  pointer picks the one destination, so a multi-select drop swallows the whole group),
+  swallow = spin-shrink-fade ~500ms into the library; **only your own library**
+  (owner-gated in principle — the Shuffler can't handle someone else's card — pending
+  the `owner` card prop from table-layout ticket 18). Prototype preserved on branch
+  `prototype/portal-gesture-ticket-04`.
+
 ## Not yet specified
 
-- **Edge gestures at the portal** — multi-select drags, dragging a card out of a
-  graveyard/exile stack straight into the portal. May need decisions once the prototype
-  shows the feel; can't be phrased sharper than that yet.
-- **What the poof looks like** — the appearance of a card being un-played or swallowed.
-  A design/feel question that the prototype and the `/design` gallery flow can carry;
-  not sharp enough to ticket until the mechanics are decided.
 - **Who deletes the table on restart** — decided to be something outside the Tabletop,
   but *which* component, triggered how, isn't specifiable yet; it touches map 6 (what
   survives a restart) and possibly the Spine. Revisit when those sharpen.
