@@ -78,3 +78,9 @@ probably fold that gate into the shared signal. Arming visuals can't render insi
 zone shape (opaque library image on top) — the prototype draws them in viewport space via
 `TLComponents.InFrontOfTheCanvas`, which works well and pans/zooms correctly via
 `pageToViewport` reads.
+
+**Parked (2026-08-09, claude).** Jess's temporary tldraw license expired mid-review. The
+prototype is preserved on branch `prototype/portal-gesture-ticket-04` (same commits as the
+worktree branch, which may get cleaned up). To resume: check out that branch (or
+`git worktree add` it somewhere), `./run` from its root, and react to the variants per the
+comment above.
