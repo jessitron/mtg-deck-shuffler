@@ -279,7 +279,10 @@ decisions, all held in the implementation:
    - **sleeved** (either `face`; image picked per `face` with the `?? frontImageUrl`
      fallback preserved) → the face image centered inside the sleeve frame. Geometry is
      **proportional to the shape's own width** (cards are aspect-locked resizable):
-     corner radius `w * 0.05`, padding `w * 0.03`.
+     padding `w * 0.03`. Corners are **square** (`e53a27e`, 2026-08-09 — Jess: "sleeves
+     are rectangular"; the original ticket-17 `w * 0.05` radius was removed from both the
+     card sleeve and the library pile, matching issue 09's "a sleeve edge gives cards
+     the square corners the fleet's style wants").
    - **unsleeved** → today's bare `<img className="tl-image">`. An unsleeved `faceDown`
      card *should* show the standard Magic back — **deferred to tabletop-physics ticket
      06** (the flip/turn-over gesture; nothing sets `faceDown` yet), marked by a code
