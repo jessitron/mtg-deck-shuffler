@@ -13,6 +13,15 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- [ ] `design-text-link-specimen` Stage the nav-link idiom (text links) on `/design`
+  - Surfaced 2026-08-09 by the `shuffler-looks-like-itself` update after `6b6b927` (Tabletop
+    landing page's Shuffler link) named the idiom: white `--font-chrome` on dark, two live
+    instances (`site.css` → `.right-nav a`, `LandingPage.tsx` → `styles.shufflerLink`), two
+    underline variants (none-at-rest with hover vs. always-underlined for inline-style
+    contexts). The gallery has a typography row for nav links but no component specimen; a
+    Tabletop-side mock follows the ticket-11 precedents (labelled a mock, `.stage-white` —
+    though this link sits on a dark page, so the stage choice needs a thought).
+
 - [ ] `design-sleeve-specimen` Stage a sleeved-card mock specimen on `/design`
   - Surfaced 2026-08-08 by the `shuffler-looks-like-itself` review of table-layout ticket 17,
     which shipped sleeve rendering on the Tabletop canvas (card image centered in a

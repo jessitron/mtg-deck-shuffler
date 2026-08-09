@@ -591,7 +591,13 @@ not by recomputing new numbers.**
   there resolves and Orbitron loads. What it still lacks is a **stylesheet of its own** — the
   first Tabletop-only rule has nowhere to live, and inline styles are the status quo by inertia.
   See [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side" before writing any
-  Tabletop CSS, and don't answer the question by starting a `:root` there.
+  Tabletop CSS, and don't answer the question by starting a `:root` there. **The Tabletop's
+  first DOM (non-canvas) fleet-token consumer is the landing page's Shuffler link**
+  (`LandingPage.tsx` → `styles.shufflerLink`, 2026-08-09, `6b6b927`) — the nav-link idiom,
+  always-underlined because inline styles can't express `:hover` (the accepted degradation,
+  see [README.md](README.md)). It also means the landing page's Orbitron is no longer
+  lazily unfetched — a `document.fonts.check` there may now pass without an explicit
+  `load()`, the lazy-fetch trap in reverse.
 - **Deciding a canvas treatment is not blocked by that plumbing; implementing it is.** Staging
   happens on `/design` in the Shuffler, which already has the tokens and the fonts. Stage first.
 

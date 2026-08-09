@@ -562,6 +562,16 @@ self-rendering custom shape.
   Tabletop's only styled surface, which makes it the thing an agent will grep for precedent.
   **It is not a house style and not a precedent to match.** Its home was previously only inside
   a Tabletop ticket; it belongs here, because it outlives that ticket.
+  **The page now also carries one on-brand element, and it is not part of the violation
+  (2026-08-09, `6b6b927`):** the "Manage your decks in the Shuffler" link
+  (`styles.shufflerLink`) — the fleet's nav-link idiom (white `var(--font-chrome)` on the
+  dark page background), placed deliberately **below and outside** the cream card so it
+  neither inherits nor ratifies the buoyed palette (`tabletop-landing-page-palette`). Pull
+  toward the link, not the card, when grepping this file for precedent. Its
+  always-underlined treatment is the inline-style degradation recorded in
+  [README.md](README.md)'s design language — a third concrete cost of the missing
+  ship-local stylesheet (no `:hover` expressible), alongside tickets 14 and 18's inline
+  `CSSProperties` calls above.
 - **Coming to this owner: the tap motion's tempo** (`.scratch/tabletop-physics/issues/05-rotate-to-tap.md`,
   opened by ticket 04 on 2026-08-07). A card tapping is a 90° rotation played as a local
   catch-up transform. **Ticket 04 decided no duration, easing, colour or literal** — that is

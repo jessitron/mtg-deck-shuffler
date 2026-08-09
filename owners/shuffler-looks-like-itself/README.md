@@ -264,6 +264,20 @@ Elevation alone (the "already pressed" look from choice 1) read as too subtle to
 mutual exclusivity. This is a one-off pattern for exclusive-choice controls, not a new
 button color rule — don't reuse it for ordinary buttons.
 
+**The nav-link idiom is the fleet's only text-link treatment, and it now has two live
+instances (second: 2026-08-09, `6b6b927`).** White `--font-chrome` type on a dark surface.
+The original: the Shuffler's header (`site.css` → `.right-nav a` — `text-decoration: none`,
+opacity fade on `:hover`, underline marks `.active`). The second, and the Tabletop's first:
+the landing page's "Manage your decks in the Shuffler" link (`LandingPage.tsx` →
+`styles.shufflerLink`), below the cream card on the dark page background — **always
+underlined**, which is the accepted degradation for inline-style contexts: React inline
+styles can't express `:hover`, and a standalone link in body position needs the underline
+to read as a link at all. No other tokenized link styling exists — `docs.css`'s content
+links (`--link-color`/`--link-hover`) are that page family's own docs-only tokens, not
+this idiom, and its raw-hex sites remain drift. The next text link copies this
+composition; if one ever lands in a stylesheet context, hover behaviour becomes
+expressible again and choosing it is a small new decision, not a port.
+
 **Square corners on chrome.** Round corners belong only to physical objects: cards, the
 playmat, count discs. (That used to say "the playmat, the `.page-container`" — two names
 for one object; see "The playmat is one object" below.)

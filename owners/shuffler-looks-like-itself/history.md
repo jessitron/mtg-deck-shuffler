@@ -1573,3 +1573,34 @@ larger), and a 4× eyeball — "3" full size, "+1/+1" one line, "lifelink" two r
 lines, "first strike" two words, all inside the disc. The `.counter-mock` comment in
 `design-candidates.css` ("long labels shrink to fit") never mentioned chords, so it's
 still accurate unchanged.
+
+## 2026-08-09 — the nav-link idiom crossed to the Tabletop, and got named on the way
+
+`6b6b927` (merged as `847661d`) **Tabletop landing page links back to the Shuffler**
+
+Fourteen lines: a plain `<a href="https://mtg.jessitron.honeydemo.io">` ("Manage your decks
+in the Shuffler", `data-testid="shuffler-link"`) below the landing page's cream card, and
+the page container going flex-row → flex-column with a `1.5rem` gap to seat it. Decided
+with this owner's `-context` before implementation, and the prescription held exactly:
+white `var(--font-chrome)` on the dark `#1a2a1f` page background, outside the cream card;
+no radius, no new tokens, no ship-local stylesheet started, no outline rules; the buoyed
+green/cream palette (`tabletop-landing-page-palette`) untouched.
+
+**What the consult surfaced, now recorded in [README.md](README.md)'s design language:
+the fleet had a text-link treatment in use but never written down.** The Shuffler's header
+(`site.css` → `.right-nav a` — white chrome type on dark, no underline at rest, opacity
+hover, underline on `.active`) was the only tokenized link styling anywhere; `docs.css`'s
+content links are its own docs-only tokens plus raw-hex drift. This change is the idiom's
+second live instance and the first on the Tabletop, which is what earned it a name.
+
+**The always-underline variant is the accepted degradation, not a divergence.** React
+inline styles can't express `:hover`, and a standalone link in body position (unlike a
+header, where position says "nav") needs the underline to read as a link at all. Recorded
+so the next inline-style link doesn't get "fixed" toward the header's `none`, and so a
+future stylesheet-context link knows hover behaviour reopens as a small decision.
+
+**One structural nuance worth keeping:** the link sits deliberately *outside* the cream
+card, on the page background — so the page's one Layer-1 violation (the green/cream card)
+stays exactly the same size, and the on-brand element doesn't ratify the off-brand one by
+nesting inside it. An agent grepping `LandingPage.tsx` for precedent now finds both; the
+open-choices bullet says which one to pull toward.
