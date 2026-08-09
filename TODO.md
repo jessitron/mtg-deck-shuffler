@@ -47,6 +47,10 @@ section is just a wall between Jess and the live work.
     the mouse-drag helper, and the `Shift+1` + settle-wait zoom idiom now exist in at least
     three specs (`verify-counter`, `verify-zone-entry`, `verify-drag-identity`). Third
     occurrence — extract a shared test-helper module under `test/verification/`.
+  - Re-surfaced 2026-08-09 by the code review on tabletop-physics ticket 15:
+    `verify-tap-animation.spec.ts` added a fourth copy of `cardPlayed()` (plus a `placeCard()`
+    wrapper it shares with `verify-card-rotate`). The count keeps climbing; the helper module
+    would now pay for itself four times over.
 
 - [ ] `browser-tracing-key-guard` the browser tracing init should skip (with a `console.warn`) when the apiKey is empty or the literal string `"undefined"`
   - Surfaced 2026-08-08 by `fleet-is-observable-context` during arch ticket 06 (unify page shell,
