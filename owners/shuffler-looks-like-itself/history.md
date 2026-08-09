@@ -1604,3 +1604,61 @@ card, on the page background — so the page's one Layer-1 violation (the green/
 stays exactly the same size, and the on-brand element doesn't ratify the off-brand one by
 nesting inside it. An agent grepping `LandingPage.tsx` for precedent now finds both; the
 open-choices bullet says which one to pull toward.
+
+## 2026-08-09 — the zone label band: every card-holding zone fits a card AND its title
+
+`0d61890` **Zone label band: every card-holding zone fits a card AND its title**
+
+Pure Tabletop geometry — no CSS, no token, no label-rendering change, and the geometry
+itself lives in `apps/tabletop/DESIGN.md`'s table per the standing division (this KB keeps
+the reasoning, DESIGN.md keeps the numbers). What happened: the Library and Command Zone
+were exactly one card tall, so a card covered the zone's title; Exile was 225 — shorter
+than a card outright. Every card-holding zone now reserves `ZONE_LABEL_BAND` (40) of
+headroom at its top: library and command zone grew to 278, exile to 278, and the graveyard
+fills the column's remainder (356 — still the bigger box, preserving DESIGN.md's "exile is
+smaller" ordering, though less dramatically; the owner's `-review` was asked exactly that
+and said the ordering surviving is what matters). The library's card-back image, the
+sleeve pile, and the graveyard card cascade all start below the band.
+
+**The band is headroom, not chrome — deliberately.** Nothing draws it: no rule, no tint,
+no visible boundary. The label's own rendering (`MtgZoneShapeUtil`, fontSize 24, top-left)
+did not move; the content moved down instead. So there is no `/design` specimen to add and
+no appearance decision was made — the zone's at-rest/armed treatment (ticket 14) is
+untouched.
+
+**Why taller zones and not smaller cards — worth keeping, because Jess floated the
+alternative.** The card is the layout unit: `CARD_W/CARD_H = 170×238` fixes the table's
+physical scale (2.5″×3.5″ at 68 units/inch) and every zone in `cardLayout.ts` *derives*
+from it. Shrinking cards shrinks the zones proportionally and leaves the titles exactly as
+covered — the missing element was headroom for the label, so it was added explicitly. Same
+shape of argument as the resize debate (README → "the card is the layout unit"): the card
+anchors the coordinate system; fix the thing that's wrong, don't move the anchor.
+
+**Two coincidences named so they don't get read as references:**
+
+- **40 matches `NAME_LABEL_HEIGHT` on purpose** — one label-headroom rhythm across the
+  player area (the seat name label above the mat, the zone labels inside their boxes).
+  That's stated in the constant's comment in `src/shared/mtgZoneShape.ts`.
+- **278 equals the Shuffler's CSS card height by accident** — 238 + 40 happens to land on
+  the Shuffler's 200×278 card. A comment in `cardLayout.ts` says derived, not a reference;
+  the two ships' card units remain deliberately different numbers (the "don't cross them"
+  rule in the canvas watch points).
+
+**`ZONE_LABEL_BAND` is shared server/client for the same reason as `LIBRARY_PILE_INSET`**
+— it sits next to it in `src/shared/mtgZoneShape.ts`, and both the server's geometry
+(`cardLayout.ts`, `tableFurniture.ts`) and the client's sleeve pile (`MtgZoneShapeUtil`)
+must agree on where content starts. The sleeve-pile watch point in
+[interactions.md](interactions.md) carries the updated geometry.
+
+**Card placement in the command zone and exile needed no insetting** — verified, not
+assumed: `cardArrival.ts` server-places only into battlefield/graveyard/stack; cards reach
+the command zone and exile by human drag alone and sit where dropped, so the band buys
+headroom there without any placement code to move. The graveyard cascade was the one
+server-placed pile inside a labelled box, and it moved (`graveyardCardPosition` starts at
+`box.y + ZONE_LABEL_BAND + 10`).
+
+Verified in a live browser: all four labels (Orbitron, dark pink) fully visible above the
+card-back pile and a graveyard card. Unit assertions in `test/cardLayout.test.ts` pin the
+new invariants: every card-holding zone ≥ `CARD_H + ZONE_LABEL_BAND`, library and command
+zone equal heights (the graveyard's gap from the command zone exists only while they
+match), graveyard pile below the band.

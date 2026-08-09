@@ -542,7 +542,14 @@ not by recomputing new numbers.**
   - **`LIBRARY_PILE_INSET` (12) in `src/shared/mtgZoneShape.ts` is shared server/client** —
     `tableFurniture.ts` uses it for the card-back image geometry, `MtgZoneShapeUtil` for the
     sleeve pile. Change it there and both move together; hand-writing a `12` in either place
-    reintroduces the split it was created to close.
+    reintroduces the split it was created to close. **`ZONE_LABEL_BAND` (40) joined it there
+    2026-08-09 (`0d61890`), shared for the same reason**: every card-holding zone reserves 40
+    units of label headroom at its top, and both the card-back image (`tableFurniture.ts`) and
+    the sleeve pile (`MtgZoneShapeUtil`) now start below the band — top inset is
+    `ZONE_LABEL_BAND`, height is `h − ZONE_LABEL_BAND − LIBRARY_PILE_INSET`, the other three
+    sides keep the 12. The band is **pure headroom, not chrome** — nothing draws it, and the
+    label's own rendering (position, font, size) did not move. If you place content inside a
+    zone box, start it below the band or you re-cover the title this change uncovered.
   - **The sleeve treatment lives in two `.tsx` files** — the card's ring in
     `MtgCardShapeUtil.tsx` (the `sleeve` object), the library pile in `MtgZoneShapeUtil.tsx`
     (the `sleevePile` block). Changing the sleeve look means both.
