@@ -25,18 +25,29 @@ const NAME_LABEL_HEIGHT = 40;
 export const PLAYMAT_W = Math.round(9.6 * CARD_W); // 1632
 export const PLAYMAT_H = 4 * CARD_H; // 952
 
-/** The library/exile/graveyard column beside the playmat: 2.5 cards wide. */
-export const COLUMN_W = Math.round(2.5 * CARD_W); // 425
-
-export const PLAYER_AREA_W = PLAYMAT_W + GAP + COLUMN_W; // ~2077
-
 export const LIBRARY_W = CARD_W;
 export const LIBRARY_H = CARD_H;
-export const EXILE_W = 240;
-export const EXILE_H = CARD_H;
+
+/** Sized for two cards side by side — some commanders have partner. */
+export const COMMAND_ZONE_W = 2 * CARD_W + GAP; // 360
+export const COMMAND_ZONE_H = CARD_H;
+
+/** The library/command-zone/graveyard/exile column beside the playmat. */
+export const COLUMN_W = LIBRARY_W + GAP + COMMAND_ZONE_W; // 550
+
+export const PLAYER_AREA_W = PLAYMAT_W + GAP + COLUMN_W; // 2202
+
+/**
+ * The space under the library row, down to the playmat's bottom edge (694),
+ * split two-thirds graveyard / one-third exile with a gap between — gaps keep
+ * every zone's bounding box strictly disjoint, since zone detection resolves
+ * an overlap by draw order, which is meaningless as a semantic tiebreak.
+ */
+const BELOW_LIBRARY_H = PLAYMAT_H - LIBRARY_H - GAP; // 694
 export const GRAVEYARD_W = COLUMN_W;
-/** Fills from under the library to the playmat's bottom edge. */
-export const GRAVEYARD_H = PLAYMAT_H - CARD_H - GAP; // 694
+export const GRAVEYARD_H = Math.round(((BELOW_LIBRARY_H - GAP) * 2) / 3); // 449
+export const EXILE_W = COLUMN_W;
+export const EXILE_H = BELOW_LIBRARY_H - GAP - GRAVEYARD_H; // 225
 
 const PLAYMAT_Y = STACK_Y + STACK_HEIGHT + GAP + NAME_LABEL_HEIGHT + GAP;
 
@@ -61,14 +72,20 @@ export function libraryBounds(seatIndex: number): { x: number; y: number; w: num
   return { x: columnX(seatIndex), y: PLAYMAT_Y, w: LIBRARY_W, h: LIBRARY_H };
 }
 
-/** Top-right of the column, beside the library. */
-export function exileBounds(seatIndex: number): { x: number; y: number; w: number; h: number } {
-  return { x: columnX(seatIndex) + LIBRARY_W, y: PLAYMAT_Y, w: EXILE_W, h: EXILE_H };
+/** Top-right of the column, beside the library; room for two commanders. */
+export function commandZoneBounds(seatIndex: number): { x: number; y: number; w: number; h: number } {
+  return { x: columnX(seatIndex) + LIBRARY_W + GAP, y: PLAYMAT_Y, w: COMMAND_ZONE_W, h: COMMAND_ZONE_H };
 }
 
-/** Below the library, filling to the playmat's bottom edge. */
+/** Below the library, the top two-thirds of the space above the playmat's bottom edge. */
 export function graveyardBounds(seatIndex: number): { x: number; y: number; w: number; h: number } {
   return { x: columnX(seatIndex), y: PLAYMAT_Y + LIBRARY_H + GAP, w: GRAVEYARD_W, h: GRAVEYARD_H };
+}
+
+/** The bottom third of that same space, below the graveyard, flush with the playmat's bottom edge. */
+export function exileBounds(seatIndex: number): { x: number; y: number; w: number; h: number } {
+  const graveyard = graveyardBounds(seatIndex);
+  return { x: graveyard.x, y: graveyard.y + graveyard.h + GAP, w: EXILE_W, h: EXILE_H };
 }
 
 /** The shared Stack strip, spanning every player area joined so far. */

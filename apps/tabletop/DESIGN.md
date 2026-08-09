@@ -4,11 +4,11 @@ What the Tabletop canvas should look like and how it comes into being. This is
 the target for Mountain 2 ("the physics of Magic") at the geography level: zones,
 sizes, and who creates what when. It deliberately says nothing about rules.
 
-Status: **the row layout below is built (2026-08-01); the Command Zone redraw
-(2026-08-08, decided in `.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`)
-and the square/compass layout (2026-08-08, decided in
+Status: **the row layout below is built (2026-08-01), including the Command Zone
+redraw (decided in `.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`,
+built 2026-08-08, ticket 13); the square/compass layout (2026-08-08, decided in
 `.scratch/tabletop-table-layout/issues/10-the-square.md`, see "The square" below)
-are both decided but not yet built.** The "playmat grows taller" edge case is still
+is decided but not yet built.** The "playmat grows taller" edge case is still
 separately deferred — see Deferred, below. `src/server/cardLayout.ts`
 and `cardArrival.ts` implement the row-layout geometry as it stood before this
 redraw; the seat-joined trigger lives in `src/server/seatJoined.ts`, and the
@@ -97,12 +97,12 @@ Today's canvas card is `CARD_W = 170`, `CARD_H = 238`, which fixes the scale at
 | ----------------- | ------------------------------------- | --------------------------------------------------------------------- |
 | Card              | 170 × 238                             | 1 × 1                                                                |
 | Playmat           | 1632 × 952                            | 9.6 × 4                                                              |
-| Right-hand column | ~545 wide                             | ~3.2 (was 2.5, before the Command Zone redraw)                       |
+| Right-hand column | 550 wide                              | ~3.2 (was 2.5, before the Command Zone redraw): library + 20 gap + Command Zone |
 | Library slot      | 170 × 238                             | 1 × 1 (top-left of the column)                                      |
-| Command Zone      | ~360 × 238                            | 2 × 1 (top-right of the column, beside the library; two commanders) |
-| Graveyard box      | ~545 × ~463                           | fills the top two-thirds of the space under Library/Command Zone    |
-| Exile box         | ~545 × ~231                           | fills the bottom third of that same space, below Graveyard          |
-| Player area       | ~2197 × 952                           | playmat + 20 gap + column                                           |
+| Command Zone      | 360 × 238                             | 2 × 1 plus a 20 gap (top-right of the column, beside the library; two commanders) |
+| Graveyard box      | 550 × 449                             | the top two-thirds of the space under Library/Command Zone          |
+| Exile box         | 550 × 225                             | the bottom third of that same space, below Graveyard (20 gap between) |
+| Player area       | 2202 × 952                            | playmat + 20 gap + column                                           |
 | Stack strip       | full width of all player areas × ~350 | "taller than a card"                                                |
 
 Vertical order, top to bottom: **stack strip → player name label → player area**.
@@ -110,13 +110,16 @@ Vertical order, top to bottom: **stack strip → player name label → player ar
 Graveyard+Exile width comes from the column's own width (Library + gap + Command
 Zone); their combined height is unchanged from before the redraw — "it fits under
 the library and above the bottom of the playmat" — just now split two-thirds
-Graveyard, one-third Exile instead of being one box.
+Graveyard, one-third Exile instead of being one box. Every pair of zone boxes has
+a 20-unit gap between them, so all zone bounding boxes are strictly disjoint —
+zone detection resolves an overlapping point by z-order, which for furniture is
+draw order, meaningless as a semantic tiebreak (asserted in `test/cardLayout.test.ts`).
 
-**The ripple.** `Right-hand column` growing from 425 to ~545 grows `Player area`
-the same amount, and `playerAreaX(seatIndex)` in `cardLayout.ts` places every seat
-at a fixed offset by join order — so this widens every seat's column by ~120 units
-**and shifts every player area to the right of a widened one over to match**. In
-scope for this redraw, not deferred.
+**The ripple** (built with the redraw, 2026-08-08): `Right-hand column` growing
+from 425 to 550 grows `Player area` the same amount, and `playerAreaX(seatIndex)`
+in `cardLayout.ts` places every seat at a fixed offset by join order — so this
+widens every seat's column by 125 units **and shifts every player area to the
+right of a widened one over to match**.
 
 ## The square (decided 2026-08-08, not yet built)
 
@@ -261,7 +264,7 @@ Nobody is restricted from moving anybody else's cards. That's not an oversight.
 | Today                                                                   | This design                                                                             |
 | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | A "battlefield row" per seat: bare canvas, cards in one horizontal line | A player area with an actual playmat image; lands fill the bottom half and wrap         |
-| Graveyard + exile spots at the end of the row, card-sized               | A 2.5-card-wide graveyard and an exile box in a right-hand column, sized to the playmat |
+| Graveyard + exile spots at the end of the row, card-sized               | A right-hand column sized to the playmat: Library + two-card Command Zone on top, Graveyard (top two-thirds) over Exile (bottom third) below |
 | Rows allocated lazily on a seat's first card                            | Player area drawn at shuffle-up, before any card                                        |
 | Stack: a fixed box at top-left                                          | A strip spanning all player areas, widening per seat                                    |
 | No library on the canvas                                                | Library as a card back with a shadow                                                    |

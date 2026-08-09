@@ -3,9 +3,12 @@ import {
   PLAYMAT_W,
   PLAYMAT_H,
   COLUMN_W,
+  COMMAND_ZONE_W,
   GRAVEYARD_H,
+  EXILE_H,
   playmatBounds,
   libraryBounds,
+  commandZoneBounds,
   exileBounds,
   graveyardBounds,
   stackStripBounds,
@@ -13,9 +16,26 @@ import {
   playerAreaX,
 } from "../src/server/cardLayout";
 
+type Bounds = { x: number; y: number; w: number; h: number };
+
+function overlaps(a: Bounds, b: Bounds): boolean {
+  return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+}
+
+function seatZones(seatIndex: number): Record<string, Bounds> {
+  return {
+    playmat: playmatBounds(seatIndex),
+    library: libraryBounds(seatIndex),
+    command: commandZoneBounds(seatIndex),
+    graveyard: graveyardBounds(seatIndex),
+    exile: exileBounds(seatIndex),
+  };
+}
+
 /**
  * JES-140 geometry — apps/tabletop/DESIGN.md's numbers, checked exactly so a
  * future tweak to CARD_W/CARD_H can't silently drift the playmat proportions.
+ * Command Zone redraw: .scratch/tabletop-table-layout/issues/13.
  */
 describe("cardLayout — player area geometry", () => {
   it("derives the playmat at 9.6 x 4 cards (1632 x 952)", () => {
@@ -23,12 +43,14 @@ describe("cardLayout — player area geometry", () => {
     expect(PLAYMAT_H).toBe(952);
   });
 
-  it("derives the column at 2.5 cards wide (425)", () => {
-    expect(COLUMN_W).toBe(425);
+  it("derives the column as library + gap + two-card command zone (550)", () => {
+    expect(COMMAND_ZONE_W).toBe(360);
+    expect(COLUMN_W).toBe(550);
   });
 
-  it("derives the graveyard height as the remainder under the library (694)", () => {
-    expect(GRAVEYARD_H).toBe(694);
+  it("splits the space under the library two-thirds graveyard, one-third exile", () => {
+    expect(GRAVEYARD_H).toBe(449);
+    expect(EXILE_H).toBe(225);
   });
 
   it("places the library at the top-left of the column, beside the playmat", () => {
@@ -38,17 +60,46 @@ describe("cardLayout — player area geometry", () => {
     expect(library.y).toBe(mat.y);
   });
 
-  it("places the exile box beside the library, at the top of the column", () => {
+  it("places the command zone beside the library, sized for two cards", () => {
     const library = libraryBounds(0);
-    const exile = exileBounds(0);
-    expect(exile.x).toBe(library.x + library.w);
-    expect(exile.y).toBe(library.y);
+    const command = commandZoneBounds(0);
+    expect(command.x).toBe(library.x + library.w + 20);
+    expect(command.y).toBe(library.y);
+    expect(command.w).toBe(360);
+    expect(command.h).toBe(library.h);
   });
 
-  it("places the graveyard below the library, filling to the playmat's bottom edge", () => {
+  it("places the graveyard below the library, spanning the column's full width", () => {
+    const library = libraryBounds(0);
+    const graveyard = graveyardBounds(0);
+    expect(graveyard.y).toBe(library.y + library.h + 20);
+    expect(graveyard.w).toBe(COLUMN_W);
+  });
+
+  it("places the exile box below the graveyard, flush with the playmat's bottom edge", () => {
     const mat = playmatBounds(0);
     const graveyard = graveyardBounds(0);
-    expect(graveyard.y + graveyard.h).toBe(mat.y + mat.h);
+    const exile = exileBounds(0);
+    expect(exile.x).toBe(graveyard.x);
+    expect(exile.y).toBe(graveyard.y + graveyard.h + 20);
+    expect(exile.w).toBe(COLUMN_W);
+    expect(exile.y + exile.h).toBe(mat.y + mat.h);
+  });
+
+  // Zone detection resolves an overlapping point to the topmost zone by
+  // z-order, and furniture z-order is chronological (draw order), not
+  // semantic — so overlapping zones would resolve deterministically but
+  // meaninglessly. Strict disjointness is the guarantee.
+  it("keeps every zone bounding box disjoint, within and between player areas", () => {
+    const zones = [
+      ...Object.entries(seatZones(0)).map(([name, b]) => [`seat0.${name}`, b] as const),
+      ...Object.entries(seatZones(1)).map(([name, b]) => [`seat1.${name}`, b] as const),
+    ];
+    for (let i = 0; i < zones.length; i++) {
+      for (let j = i + 1; j < zones.length; j++) {
+        expect(overlaps(zones[i][1], zones[j][1]), `${zones[i][0]} overlaps ${zones[j][0]}`).toBe(false);
+      }
+    }
   });
 
   it("places player areas in a row, left to right, in join order", () => {
