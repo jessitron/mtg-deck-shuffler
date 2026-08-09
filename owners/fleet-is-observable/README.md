@@ -169,6 +169,16 @@ the wrong shape leaves the exporter `undefined`, the export throws inside a prom
 error handler, and **nothing reaches Honeycomb while the code looks right**. Duplicated telemetry
 files therefore get a test in *each* ship — that is the only reason this was caught.
 
+**The same skew also produces PHANTOM type errors — a build failure against correct code.**
+(2026-08-09.) A fresh worktree has no `node_modules`, and because worktrees live *inside* the repo
+(`.claude/worktrees/…`), tsc walks up and resolves the main checkout's hoisted sdk-logs **0.219**
+types — so the Tabletop's correct 0.221 options-object line at
+`apps/tabletop/src/server/tracing.ts:64` "fails" with `'exporter' does not exist in type
+'LogRecordExporter'`. **The fix is `npm install` from the worktree root, never a code change** —
+"fixing" the line to the positional shape would compile clean and silently export nothing (the
+exact bug the comment at that line warns about). Documented in `notes/AGENT-NOTES.md` → "Harness
+gotchas"; a STOP verdict from this owner prevented exactly that miscorrection.
+
 **`service.name` from a resource vs. from the environment: the two providers behave OPPOSITELY.**
 Checked in `node_modules` at OTel JS 2.8 (2026-08-07), not reasoned:
 
@@ -728,6 +738,19 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
   the review surfaced a latent fails-open-invisibly (the `"undefined"`-apiKey gap, buoyed as
   `browser-tracing-key-guard`) precisely because unifying forced someone to read both copies side
   by side. Full wiring now documented in "The Shuffler's browser bootstrap" above.
+
+- **2026-08-09 (`11b6230`): the 0.219/0.221 skew gained a second failure mode, and this time the
+  danger ran the other way.** An agent in a fresh worktree hit TS2561 on the Tabletop's correct
+  `BatchLogRecordProcessor({ exporter })` line and came asking how to "fix" it. The build error was
+  the *environment*: no `node_modules` in the worktree, so tsc resolved the main checkout's hoisted
+  sdk-logs 0.219 types. The tempting fix — rewriting to 0.219's positional shape — would have
+  compiled and **silently exported nothing**, the original skew bug reintroduced by its own
+  compiler-shaped disguise. This owner's context consult said STOP, no code change; `npm install`
+  from the worktree root resolved it and all tests (including the constructor-shape assertion in
+  `apps/tabletop/test/log.test.ts`) pass. Lesson: **when duplicated-on-purpose telemetry code
+  suddenly fails to typecheck, suspect the resolver before the code** — the constructor-shape test
+  exists precisely so the code's correctness is a checkable fact, not a judgment call under a red
+  build. Gotcha recorded in `notes/AGENT-NOTES.md`.
 
 ## Related reading
 
