@@ -380,6 +380,66 @@ Three fixes off the ticket's code review, all touching things this KB leans on:
   `cardLayout.test.ts`. If `tableFurniture.ts` ever drifts from `cardLayout.ts`'s geometry, this
   test fails where the pure-geometry one can't.
 
+## Ticket 18: `mtg-counter` — counters ride on cards (2026-08-08, `4c64ef2`)
+
+`.scratch/tabletop-physics/issues/18-counters.md` (worktree `ticket-18-counters`). A third
+custom shape type, `mtg-counter` (`apps/tabletop/src/shared/mtgCounterShape.ts` +
+`src/client/shapes/MtgCounterShapeUtil.tsx`): an **unlocked, draggable, text-editable disc**
+(props `{w, h, text}`) a player drops onto a card. Attachment is tldraw drag-and-drop
+*parenting* (the counter's `parentId`), mediated by new drag hooks on `mtg-card`; detach is
+dragging it off, or automatic eviction when the host card enters graveyard/exile/library.
+
+- **NAME COLLISION resolved in ticket 18's favor**: table-layout ticket 12's
+  decided-but-unbuilt life counter had used `mtg-counter` as its working name. This ticket
+  claimed the type string per the tabletop-physics spec; the life counter needs a new name when
+  built (buoyed in `TODO.md` as `life-counter-needs-own-name`). The KB's old `mtg-counter`
+  cautions (locked furniture, `HyperlinkButton` buttons, LWW increments) describe *that* shape
+  — `architecture.md`'s life-counter section now says so explicitly.
+- **Watch point 1's cleanup obligation generalized beyond `onClick`-bearing utils.**
+  `MtgCounterShapeUtil` deliberately has no `onClick` (editing is stock double-click-to-edit
+  via `canEdit()`), yet its `onTranslateEnd` unconditionally calls `setSelectedShapes([])` —
+  a stale counter selection would defeat the card's `startTranslating` safety net and make the
+  next card drag silently move the counter. This owner's `-review` flagged it; implemented and
+  covered by `verify-counter.spec.ts`'s drag-counter-then-drag-card test. Watch point 1
+  rewritten: any unlocked draggable shape sharing a canvas with an `onClick`-bearing shape
+  needs the drag-settle cleanup.
+- **New drag-hook facts** (watch points 11-12): defining any drag hook makes every card a drag
+  target (`getDraggingOverShape` checks only hook existence), so `canReceiveNewChildrenOfType`
+  is narrowed to `type === "mtg-counter" && !isLocked` and `canRemoveChildrenOfType` to
+  `type === "mtg-counter"` (its default is `true` for ALL types — without it, dragging card A
+  across card B fires `B.onDragShapesOut(B, [cardA])`). And `reparentShapes` preserves *page*
+  rotation, so `onDragShapesIn` zeroes each dropped counter's local rotation with the
+  center-preserving `halfExtent`/`center`/`topLeft` math (same as `onClick`'s tap pivot) —
+  otherwise a counter dropped on a tapped card stays tilted forever after untap.
+- **Eviction lives in the card's `onTranslateEnd` zone-change branch** (a parented shape's own
+  `onTranslateEnd` never fires when only its parent moves). `NON_BATTLEFIELD_ZONES =
+  {graveyard, exile, library}` — **NOT the stack, deliberately**: cards ARRIVE on the Stack
+  (`zoneHint`), so their first settled move fires a stack zone-entry and would strip counters
+  attached there. Found empirically — the plan's first draft included stack; the Playwright
+  test caught it. `evictCounters` reparents to the page and `animateShapes` to spots from
+  `findOpenSpotsNearZoneEdge` (new pure seam, `openSpotNearZoneEdge.ts`, unit-tested; occupied
+  = only card/counter bounds, furniture is fair ground). `zoneAt()` refactored to return the
+  full `ZoneHit` (id+zone), since eviction needs the zone's bounds.
+- **New empirical tldraw/Playwright facts** (watch point 13): (a) tldraw's focus management
+  beats `autoFocus`, ref-callback focus, and a bare effect for a custom editing input —
+  `document.activeElement` ends on `body`; fix is `setTimeout(0)` inside the `isEditing`
+  effect. (b) A creation click followed within tldraw's double-click window by a grab at the
+  same point classifies as a double-click and opens editing — tests need a ~500ms cooldown
+  after creating a shape before dragging (`createCounter` helper). (c) `.nth()` on shape
+  testids is paint order and reorders when a shape reparents — drag from known creation points.
+- **Editing hotkey shield comes free**: tldraw's `areShortcutsDisabled` is true while
+  `getEditingShapeId() !== null` (`useKeyboardShortcuts.ts`) — supersedes the always-live-input
+  caution for shapes that edit through tldraw's editing state. Enter/Escape handled in the
+  input's own `onKeyDown` (`editor.complete()`); pointer-downs use `markEventAsHandled`.
+- **First custom tool**: `MtgCounterTool` (`StateNode`, id `"mtg-counter"`) — click-to-place,
+  returns to select. Wired in `TablePage.tsx` via `<Tldraw tools>`, `uiOverrides.tools`, and a
+  custom `Toolbar` component; sync registration in the usual three places (`useSync`
+  `shapeUtils`, `<Tldraw>`, `rooms.ts` schema).
+
+Full detail in `architecture.md`'s "Ticket 18" section; watch points 1, 6, 10 updated and
+11-13 added in `interactions.md`; `files.md` gained the four new files and the two new tests.
+(Ticket 18 landed on main in parallel with table-layout ticket 14 above; both are 2026-08-08.)
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,

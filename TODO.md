@@ -13,6 +13,28 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- [ ] `life-counter-needs-own-name` table-layout ticket 12's life/commander-damage shape can't be called `mtg-counter` anymore
+  - Surfaced 2026-08-08 by both owner reviews on tabletop-physics ticket 18: that ticket (and the
+    tabletop-physics spec) explicitly assign the type string `mtg-counter` to the drag-onto-a-card
+    counter, and it's now registered in the sync schema with `{w, h, text}` props. Table-layout
+    ticket 12 (`.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md`,
+    resolved) used `mtg-counter` as the *working name* for a different shape — locked furniture
+    with a number and +/- buttons. When that gets built it needs its own name
+    (`mtg-life-counter`?), and the tabletop-shape-mechanics KB's old `mtg-counter` cautions
+    (locked, HyperlinkButton, LWW increments) describe *that* shape, not this one.
+
+- [ ] `custom-shapes-lack-toSvg` none of the three custom shapes render in tldraw's SVG/image export
+  - Surfaced 2026-08-08 by the design owner's review on tabletop-physics ticket 18. `mtg-card`,
+    `mtg-zone`, and `mtg-counter` all skip `toSvg`, so an exported table image is missing all of
+    them. A three-shape gap, worth solving in one pass (the counter's needs the Orbitron webfont
+    hand-carried into the SVG per the design KB's standing rule) rather than piecemeal.
+
+- [ ] `tabletop-verify-helpers` the Tabletop's Playwright specs triplicate their helpers
+  - Surfaced 2026-08-08 by the standards review on tabletop-physics ticket 18: `cardPlayed()`,
+    the mouse-drag helper, and the `Shift+1` + settle-wait zoom idiom now exist in at least
+    three specs (`verify-counter`, `verify-zone-entry`, `verify-drag-identity`). Third
+    occurrence — extract a shared test-helper module under `test/verification/`.
+
 - [ ] `browser-tracing-key-guard` the browser tracing init should skip (with a `console.warn`) when the apiKey is empty or the literal string `"undefined"`
   - Surfaced 2026-08-08 by `fleet-is-observable-context` during arch ticket 06 (unify page shell,
     `.scratch/shuffler-architecture-review/issues/06-unify-page-shell.md`). The shell's

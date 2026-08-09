@@ -1,0 +1,275 @@
+import { test, expect, Page, Locator } from "@playwright/test";
+
+/**
+ * Ticket 18 (tabletop-physics): counters ride along on a card.
+ *
+ * - The toolbar's counter tool creates a blank mtg-counter disc.
+ * - Dragging a counter onto a card attaches it (tldraw parenting): moving the
+ *   card afterward carries the counter along.
+ * - Dragging a counter off the card detaches it.
+ * - Multiple counters on one card may overlap — no forced spacing.
+ * - The instant the host card enters a non-battlefield zone (graveyard),
+ *   every counter detaches and lands near the zone's edge, outside it.
+ * - A counter's text is freely editable in place (double-click), blank by default.
+ * - Hazard A regression (tabletop-shape-mechanics owner): after dragging a
+ *   counter, dragging a card must move the CARD, not the stale-selected counter.
+ */
+
+function cardPlayed(overrides: Record<string, unknown>) {
+  return {
+    id: `e2e-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    name: "card.played",
+    occurredAt: new Date().toISOString(),
+    initiator: { seatId: "e2e-seat", playerName: "Jess" },
+    face: "front",
+    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+    backImageUrl: null,
+    zoneHint: "stack",
+    ...overrides,
+  };
+}
+
+async function dragPointTo(page: Page, from: { x: number; y: number }, to: { x: number; y: number }) {
+  await page.mouse.move(from.x, from.y);
+  await page.mouse.down();
+  await page.mouse.move(to.x, to.y, { steps: 10 });
+  await page.mouse.up();
+}
+
+async function dragCenterTo(page: Page, from: Locator, to: { x: number; y: number }) {
+  await dragPointTo(page, await center(from), to);
+}
+
+async function center(locator: Locator): Promise<{ x: number; y: number }> {
+  const box = await locator.boundingBox();
+  if (!box) throw new Error("missing bounding box");
+  return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+}
+
+/** A grip near the card's top edge — counters in these tests sit lower on the
+ * card, so grabbing here reliably hits the CARD, not a counter riding it. */
+async function topGrip(card: Locator): Promise<{ x: number; y: number }> {
+  const box = await card.boundingBox();
+  if (!box) throw new Error("missing bounding box");
+  return { x: box.x + box.width / 2, y: box.y + box.height * 0.12 };
+}
+
+/** Create a blank counter via the toolbar tool, clicking at the given screen point. */
+async function createCounter(page: Page, at: { x: number; y: number }) {
+  await page.getByTestId("tools.mtg-counter").click();
+  await page.mouse.click(at.x, at.y);
+  // Outlive tldraw's double-click window: grabbing the new counter at the
+  // same point right away would classify as a double-click and open editing.
+  await page.waitForTimeout(500);
+}
+
+async function placeCard(page: Page, baseURL: string | undefined, tableSlug: string, instanceId: string) {
+  const event = cardPlayed({
+    cardName: "Llanowar Elves",
+    card: { scryfallId: "aaaaaaaa-0000-0000-0000-000000000018", instanceId },
+    zoneHint: "stack",
+  });
+  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  expect(response.status()).toBe(201);
+  const card = page.locator(`#shape\\:card-${instanceId}`);
+  await expect(card).toBeAttached();
+  return card;
+}
+
+async function openTable(page: Page, tableSlug: string) {
+  await page.goto(`/t/${tableSlug}`);
+  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+}
+
+test("a counter attaches to a card, rides along, and detaches when dragged off", async ({ page, baseURL }) => {
+  const tableSlug = `verify-counter-${Date.now()}`;
+  await openTable(page, tableSlug);
+
+  const instanceId = `counter-host-${Date.now()}`;
+  const card = await placeCard(page, baseURL, tableSlug, instanceId);
+
+  // Zoom to fit so the card (and future drop targets) are actually rendered.
+  await page.keyboard.press("Shift+1");
+  await page.waitForTimeout(300);
+
+  // 1. The toolbar tool creates a blank counter on the table.
+  const cardCenter = await center(card);
+  await createCounter(page, { x: cardCenter.x + 300, y: cardCenter.y });
+  const counter = page.getByTestId("mtg-counter");
+  await expect(counter).toHaveCount(1);
+  await expect(counter).toHaveText("");
+
+  // 2. Drag the counter onto the card's lower half: it attaches. (Lower half
+  // so the card's top edge stays free to grab.)
+  const cardBox = await card.boundingBox();
+  if (!cardBox) throw new Error("missing card box");
+  await dragCenterTo(page, counter, { x: cardCenter.x, y: cardBox.y + cardBox.height * 0.7 });
+
+  // Attached = dragging the card carries the counter along.
+  const counterBefore = await center(counter);
+  const grip = await topGrip(card);
+  await dragPointTo(page, grip, { x: grip.x + 150, y: grip.y + 80 });
+  await expect(async () => {
+    const counterAfter = await center(counter);
+    expect(counterAfter.x - counterBefore.x).toBeCloseTo(150, -1);
+    expect(counterAfter.y - counterBefore.y).toBeCloseTo(80, -1);
+  }).toPass({ timeout: 5000 });
+
+  // 3. Drag the counter off the card: it detaches and stays where dropped.
+  const counterOnCard = await center(counter);
+  const detachSpot = { x: counterOnCard.x + 400, y: counterOnCard.y };
+  await dragCenterTo(page, counter, detachSpot);
+  const gripNow = await topGrip(card);
+  await dragPointTo(page, gripNow, { x: gripNow.x - 60, y: gripNow.y - 40 });
+  await page.waitForTimeout(300);
+  const counterFinal = await center(counter);
+  expect(Math.abs(counterFinal.x - detachSpot.x)).toBeLessThan(10);
+  expect(Math.abs(counterFinal.y - detachSpot.y)).toBeLessThan(10);
+});
+
+test("after dragging a counter, dragging a card moves the card (stale-selection regression)", async ({
+  page,
+  baseURL,
+}) => {
+  const tableSlug = `verify-counter-sel-${Date.now()}`;
+  await openTable(page, tableSlug);
+
+  const instanceId = `counter-sel-${Date.now()}`;
+  const card = await placeCard(page, baseURL, tableSlug, instanceId);
+  await page.keyboard.press("Shift+1");
+  await page.waitForTimeout(300);
+
+  const cardCenter = await center(card);
+  await createCounter(page, { x: cardCenter.x + 300, y: cardCenter.y + 120 });
+  const counter = page.getByTestId("mtg-counter");
+  await expect(counter).toHaveCount(1);
+
+  // Drag the counter somewhere neutral (NOT onto the card) — tldraw leaves it
+  // selected after the drag settles unless the counter cleans up after itself.
+  await dragCenterTo(page, counter, { x: cardCenter.x + 300, y: cardCenter.y + 220 });
+
+  // Now drag the card. With a stale counter selection, tldraw's PointingShape
+  // guard would translate the counter instead of the card.
+  const counterCenter = await center(counter);
+  const before = await center(card);
+  const grip = await topGrip(card);
+  await dragPointTo(page, grip, { x: grip.x + 120, y: grip.y });
+
+  await expect(async () => {
+    const after = await center(card);
+    expect(after.x - before.x).toBeCloseTo(120, -1);
+  }).toPass({ timeout: 5000 });
+  const counterAfter = await center(counter);
+  expect(Math.abs(counterAfter.x - counterCenter.x)).toBeLessThan(5);
+});
+
+test("two counters can share a card and overlap; both detach near the graveyard's edge when the card dies", async ({
+  page,
+  baseURL,
+}) => {
+  const tableSlug = `verify-counter-gy-${Date.now()}`;
+  await openTable(page, tableSlug);
+
+  const instanceId = `counter-gy-${Date.now()}`;
+  const card = await placeCard(page, baseURL, tableSlug, instanceId);
+
+  const graveyard = page.locator(`[data-shape-id="shape:region-graveyard-${tableSlug}-e2e-seat"]`);
+  await expect(graveyard).toBeAttached();
+
+  await page.keyboard.press("Shift+1");
+  await page.waitForTimeout(300);
+
+  const cardCenter = await center(card);
+  const counters = page.getByTestId("mtg-counter");
+
+  // Attach two counters at nearly the same spot on the card's lower half —
+  // overlap is allowed, and the lower half keeps the card's top edge free to
+  // grab. Create → attach, one at a time, dragging from the known creation
+  // point: locator .nth() order is paint order, which changes when a counter
+  // reparents onto the card, so it can't name "the second counter" reliably.
+  const cardBox = await card.boundingBox();
+  if (!cardBox) throw new Error("missing card box");
+  const dropSpot = { x: cardCenter.x, y: cardBox.y + cardBox.height * 0.7 };
+  const spawn = { x: cardCenter.x + 300, y: cardCenter.y };
+  await createCounter(page, spawn);
+  await expect(counters).toHaveCount(1);
+  await dragPointTo(page, spawn, dropSpot);
+  await createCounter(page, spawn);
+  await expect(counters).toHaveCount(2);
+  await dragPointTo(page, spawn, { x: dropSpot.x + 6, y: dropSpot.y - 6 });
+
+  // Both ride the card on a small in-battlefield move (proves both attached).
+  // Order-insensitive: compare position multisets, sorted.
+  const sortedPositions = async () => {
+    const boxes = [await center(counters.nth(0)), await center(counters.nth(1))];
+    return boxes.sort((a, b) => a.x - b.x || a.y - b.y);
+  };
+  const positionsBefore = await sortedPositions();
+  const grip = await topGrip(card);
+  await dragPointTo(page, grip, { x: grip.x + 80, y: grip.y });
+  await expect(async () => {
+    const moved = await sortedPositions();
+    expect(moved[0].x - positionsBefore[0].x).toBeCloseTo(80, -1);
+    expect(moved[1].x - positionsBefore[1].x).toBeCloseTo(80, -1);
+  }).toPass({ timeout: 5000 });
+
+  // Card to the graveyard: every counter detaches and lands outside the
+  // graveyard, near its edge, still on the table.
+  const graveyardCenter = await center(graveyard);
+  // Zone entry is decided by the CARD CENTER; the grip is near the card's top
+  // edge, so aim the grip above the graveyard's center by that offset.
+  const gripNow = await topGrip(card);
+  const cardBoxNow = await card.boundingBox();
+  if (!cardBoxNow) throw new Error("missing card box");
+  await dragPointTo(page, gripNow, {
+    x: graveyardCenter.x,
+    y: graveyardCenter.y - cardBoxNow.height * 0.38,
+  });
+
+  await expect(async () => {
+    const graveyardBox = await graveyard.boundingBox();
+    if (!graveyardBox) throw new Error("missing graveyard box");
+    for (const i of [0, 1]) {
+      const c = await center(counters.nth(i));
+      const inside =
+        c.x > graveyardBox.x &&
+        c.x < graveyardBox.x + graveyardBox.width &&
+        c.y > graveyardBox.y &&
+        c.y < graveyardBox.y + graveyardBox.height;
+      expect(inside).toBe(false);
+      // Near the zone's edge: within a few counter-widths of its bounds.
+      const margin = 200;
+      expect(c.x).toBeGreaterThan(graveyardBox.x - margin);
+      expect(c.x).toBeLessThan(graveyardBox.x + graveyardBox.width + margin);
+      expect(c.y).toBeGreaterThan(graveyardBox.y - margin);
+      expect(c.y).toBeLessThan(graveyardBox.y + graveyardBox.height + margin);
+    }
+  }).toPass({ timeout: 5000 });
+
+  // The card itself moves in the graveyard afterward without dragging counters back.
+  const countersSettled = [await center(counters.nth(0)), await center(counters.nth(1))];
+  const cardNow = await center(card);
+  await dragCenterTo(page, card, { x: cardNow.x + 15, y: cardNow.y + 15 });
+  await page.waitForTimeout(300);
+  for (const i of [0, 1]) {
+    const c = await center(counters.nth(i));
+    expect(Math.abs(c.x - countersSettled[i].x)).toBeLessThan(5);
+    expect(Math.abs(c.y - countersSettled[i].y)).toBeLessThan(5);
+  }
+});
+
+test("a counter's text is editable in place", async ({ page }) => {
+  const tableSlug = `verify-counter-text-${Date.now()}`;
+  await openTable(page, tableSlug);
+
+  await page.mouse.move(400, 300);
+  await createCounter(page, { x: 400, y: 300 });
+  const counter = page.getByTestId("mtg-counter");
+  await expect(counter).toHaveCount(1);
+
+  await counter.dblclick();
+  await page.keyboard.type("+1/+1");
+  await page.keyboard.press("Escape");
+
+  await expect(counter).toHaveText("+1/+1");
+});

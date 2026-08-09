@@ -83,15 +83,33 @@
   This is now the KB's concrete working example of "a locked shape needs no interaction hooks at
   all" — previously only asserted in the abstract (see watch point 7, new, below).
 
+### Counter attachment (`mtg-counter`, ticket 18, 2026-08-08)
+- A counter's attachment to a card IS tldraw parenting (`parentId`) — there is no attachment
+  prop on either shape. So anything that reparents shapes (tldraw's own group/frame machinery,
+  future features, undo) is silently also attach/detach for counters, and the drag hooks on
+  `MtgCardShapeUtil` (`canReceiveNewChildrenOfType`/`canRemoveChildrenOfType`/`onDragShapesIn`/
+  `onDragShapesOut`) are the mediating surface. Counter eviction on battlefield exit rides
+  inside `MtgCardShapeUtil.onTranslateEnd`'s zone-change branch — changing the zone-entry
+  debounce or the `NON_BATTLEFIELD_ZONES` set changes when counters detach. The Stack is
+  deliberately not an evicting zone (cards *arrive* there; see `architecture.md`'s Ticket 18
+  section).
+
 ## Watch Points
 
-1. **Any ShapeUtil that defines `onClick` inherits the selection-deferral quirk.** If a new
+1. **Any ShapeUtil that defines `onClick` inherits the selection-deferral quirk — and the
+   cleanup obligation extends to EVERY unlocked draggable shape on the same canvas.** If a new
    custom shape type defines `onClick` (tap, a button, anything), its equivalent of
    `onTranslateEnd`/drag-settle must also call `this.editor.setSelectedShapes([])` — otherwise
    the drag-picks-up-the-wrong-shape bug reopens for that shape type. This is the single most
    important watch point in this KB; it already bit — and was correctly ported forward into —
-   ticket 12's `mtg-card` rewrite (see `architecture.md`). Any *next* new custom shape type with
-   `onClick` needs the same treatment.
+   ticket 12's `mtg-card` rewrite (see `architecture.md`). **Ticket 18 (2026-08-08) proved the
+   obligation generalizes**: `MtgCounterShapeUtil` has NO `onClick`, yet its `onTranslateEnd`
+   still unconditionally clears selection (no early return above it) — because a stale
+   *counter* selection defeats the *card's* `startTranslating` safety net (`!getSelectedShapeIds
+   ().length` is false) and the next card drag would silently move the counter. The rule as now
+   understood: any shape a player can drag must clear selection on drag-settle, as long as any
+   `onClick`-bearing shape shares the canvas. Regression test: `verify-counter.spec.ts`'s
+   drag-counter-then-drag-card sequence.
 
 2. **The selection-clear must run before any early return in the drag-settle hook.** In
    `onTranslateEnd`, the zone-equality check (`if (zone === previousZone) return undefined`) is
@@ -136,9 +154,12 @@
    ticket 13's `mtg-zone` generalized steps 1-3 cleanly (see `architecture.md`) but didn't need
    step 4 at all, because nothing ever clicks a zone — `MtgZoneShapeUtil.component()` renders a
    plain `<div>` with no `.tl-image-container` treatment and that's correct, not an oversight.
-   The decided-but-unbuilt `mtg-counter` (see `architecture.md`) is the counterexample that
-   forced this precision: it will be *locked* yet its `component()` hosts buttons and an input,
-   so it pays step 4 in full — locking gates tldraw's gesture state machine, not DOM events.
+   The decided-but-unbuilt life counter (see `architecture.md`; formerly working-named
+   `mtg-counter`, a string ticket 18 has since claimed for a different shape) is the
+   counterexample that forced this precision: it will be *locked* yet its `component()` hosts
+   buttons and an input, so it pays step 4 in full — locking gates tldraw's gesture state
+   machine, not DOM events. Ticket 18's `mtg-counter` (unlocked, editable) exercised step 4 too:
+   without `pointerEvents: "all"` on its container, double-click-to-edit never reaches it.
 
 7. **A locked shape needs no interaction hooks — now demonstrated, not just asserted.**
    `MtgZoneShapeUtil` (ticket 13, `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx`) defines
@@ -235,19 +256,55 @@
    *more* granularity (one armed zone per shape) needs to be checked against what a multi-select
    drag is actually supposed to do in this app, not assumed correct because it covers more cases
    — "handles more inputs" isn't the same as "matches the domain."
-10. **Locked-but-interactive shapes: the `mtg-counter` pattern (decided 2026-08-08, not yet
-    built).** A life counter will be a new locked custom shape whose `component()` renders +/-
-    buttons and a typeable number field (see `architecture.md`'s "`mtg-counter`: decided, not
-    built"). Whoever builds it — or any future locked shape with live controls — has three
+10. **Locked-but-interactive shapes: the life-counter pattern (decided 2026-08-08, not yet
+    built — and no longer nameable `mtg-counter`, which ticket 18 claimed for the
+    drag-onto-a-card counter; buoyed as `life-counter-needs-own-name` in `TODO.md`).** A life
+    counter will be a new locked custom shape whose `component()` renders +/-
+    buttons and a typeable number field (see `architecture.md`'s life-counter section). Whoever
+    builds it — or any future locked shape with live controls — has three
     specific hazards on record: (a) each control needs `pointer-events: all` plus
     `editor.markEventAsHandled(e)` in its pointer handlers (tldraw's own `HyperlinkButton`
     pattern; preferred over the older `stopEventPropagation` util) or the canvas swallows the
     press; (b) the typeable field must shield keystrokes from tldraw's tool hotkeys, or typing a
-    life total switches tools; (c) tldraw sync is last-writer-wins, so simultaneous presses on
+    life total switches tools — note ticket 18 showed shapes editing through tldraw's own
+    editing state get this for free (`areShortcutsDisabled` while `getEditingShapeId() !==
+    null`), but an *always-live* input (no editing state) still pays it; (c) tldraw sync is
+    last-writer-wins, so simultaneous presses on
     the same counter can lose one increment — accepted for counters, and the reason
     story-quality life-change records need an explicit event per press (parked at
     `.scratch/tabletop-replaces-mural/parked/life-change-events.md`). Watch point 1 does NOT
     apply to it (locked shapes never reach `PointingShape`), but watch point 6's step 4 does.
+
+11. **Defining ANY drag hook on a ShapeUtil makes every instance of that shape a drag target
+    for every unlocked dragged shape — narrow both `can*` gates.** (Ticket 18, 2026-08-08.)
+    `Editor.getDraggingOverShape` checks only that hooks *exist*; the filtering is the gates'
+    job. `mtg-card`'s `canReceiveNewChildrenOfType` is narrowed to
+    `!shape.isLocked && type === "mtg-counter"`, and `canRemoveChildrenOfType` to
+    `type === "mtg-counter"` — the latter's default is `true` for ALL types, so omitting it
+    means dragging card A across card B fires `B.onDragShapesOut(B, [cardA])`. Any future host
+    shape (or new draggable type near cards) must re-check both gates. `onDragShapesOut` also
+    needs the frame-style `parentId` filter (`shapes.filter(s => s.parentId === card.id)`) so a
+    multi-shape drag containing another card's counter doesn't get touched.
+
+12. **`reparentShapes` preserves PAGE rotation — a child reparented under a rotated parent gets
+    a compensating local rotation that outlives the parent's rotation.** (Ticket 18.) A counter
+    dropped on a tapped card would stay tilted forever after the card untaps. Fix in
+    `onDragShapesIn`: zero each dropped child's local rotation, holding its center fixed with
+    the same `halfExtent`/`center`/`topLeft` math as `onClick`'s tap pivot (watch point 4 —
+    rotation pivots around the top-left, so a bare `rotation: 0` write swings the shape
+    sideways). Also: **a parented shape's own `onTranslateEnd` never fires when only its parent
+    moves** — anything that must happen to passengers on the parent's move (e.g. counter
+    eviction) has to be driven from the *parent's* hooks.
+
+13. **Playwright-vs-tldraw facts for shape tests** (ticket 18, `verify-counter.spec.ts`):
+    (a) a creation click followed within tldraw's double-click window by a grab at the same
+    point classifies as a double-click and opens editing — wait ~500ms after creating a shape
+    before dragging it (see the `createCounter` helper); (b) `.nth()` on shape testids is paint
+    order, which reorders when a shape reparents — drag from known creation points instead of
+    trusting locator indices across a reparent; (c) focusing a custom editing input needs
+    `setTimeout(0)` inside the `isEditing` effect — `autoFocus`, ref-callback focus, and a bare
+    effect all lose to tldraw's end-of-gesture focus handling (`document.activeElement` ends on
+    `body`).
 
 ## Not Related To
 

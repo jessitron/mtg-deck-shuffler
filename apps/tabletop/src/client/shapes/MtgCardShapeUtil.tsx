@@ -1,8 +1,20 @@
-import { BaseBoxShapeUtil, HTMLContainer, TLShapePartial, Vec } from "tldraw";
+import { BaseBoxShapeUtil, HTMLContainer, TLDragShapesOutInfo, TLShape, TLShapePartial, Vec } from "tldraw";
 import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
-import { topmostZoneAt } from "./zoneHitTest";
+import { MtgCounterShape } from "../../shared/mtgCounterShape";
+import { findOpenSpotsNearZoneEdge, Rect } from "./openSpotNearZoneEdge";
+import { topmostZoneAt, ZoneHit } from "./zoneHitTest";
 
 const TAP_ANGLE = Math.PI / 2;
+
+// Ticket 18: counters detach the instant their host card leaves the
+// battlefield — one rule, no per-zone special-casing. Battlefield = the
+// playmat, the command zone, the bare table (no zone at all) — and the
+// Stack, deliberately: cards ARRIVE on the Stack, so their first settled
+// move fires a zone-entry for it, and evicting counters for a nudge around
+// the Stack would strip every counter the moment one was attached there.
+// The detach set is exactly the ticket's list minus "hand", which doesn't
+// exist as a zone here yet.
+const NON_BATTLEFIELD_ZONES = new Set(["graveyard", "exile", "library"]);
 
 /**
  * JES-144, tabletop-physics ticket 12: `mtg-card`, a genuine custom shape
@@ -87,6 +99,64 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     };
   }
 
+  // Ticket 18 (counters): the card hosts counters via tldraw's native
+  // drag-and-drop parenting — a deliberate, narrow exception to "the card
+  // carries nothing about its passengers": the card's util MEDIATES the drop,
+  // but the resulting parent relationship (the counter's parentId, not any
+  // list on the card's props) is what carries the state. Defining any of
+  // these hooks makes every card a drag target for every unlocked dragged
+  // shape (getDraggingOverShape checks only that hooks exist), so both `can*`
+  // gates are type-narrowed to counters — without the canRemoveChildrenOfType
+  // gate (default: true for ALL types), dragging card A across card B would
+  // fire B.onDragShapesOut(B, [cardA]).
+  override canReceiveNewChildrenOfType(shape: MtgCardShape, type: TLShape["type"]): boolean {
+    return !shape.isLocked && type === "mtg-counter";
+  }
+
+  override canRemoveChildrenOfType(_shape: MtgCardShape, type: TLShape["type"]): boolean {
+    return type === "mtg-counter";
+  }
+
+  // Live reparent during the drag (the frame pattern) — DragAndDropManager
+  // has already filtered `shapes` through canReceiveNewChildrenOfType, and it
+  // hints this card (the hover-highlight) whenever any shape is receivable.
+  override onDragShapesIn(card: MtgCardShape, shapes: TLShape[]): void {
+    if (shapes.some((s) => this.editor.hasAncestor(card, s.id))) return;
+    this.editor.reparentShapes(shapes, card.id);
+
+    // reparentShapes preserves page rotation, so a counter dropped on an
+    // already-tapped card would keep a compensating local rotation forever —
+    // visibly tilted after the card untaps. Counters are card-aligned: zero
+    // the local rotation, holding the counter's center fixed (rotation pivots
+    // around the top-left corner; zeroing it alone would swing a disc ~40%
+    // of its size sideways — same math as onClick's tap pivot).
+    for (const dropped of shapes) {
+      const fresh = this.editor.getShape<MtgCounterShape>(dropped.id);
+      if (!fresh || fresh.rotation === 0) continue;
+      const halfExtent = { x: fresh.props.w / 2, y: fresh.props.h / 2 };
+      const center = Vec.Add(fresh, Vec.Rot(halfExtent, fresh.rotation));
+      const topLeft = Vec.Sub(center, halfExtent);
+      this.editor.updateShape<MtgCounterShape>({
+        id: fresh.id,
+        type: fresh.type,
+        x: topLeft.x,
+        y: topLeft.y,
+        rotation: 0,
+      });
+    }
+  }
+
+  // Dragged off the card and not into another receiver: detached, staying
+  // wherever it's dropped. Only the dragged shapes that are currently THIS
+  // card's children — a multi-shape drag containing someone else's counter
+  // must not touch it, and this card's other counters stay put.
+  override onDragShapesOut(card: MtgCardShape, shapes: TLShape[], info: TLDragShapesOutInfo): void {
+    if (info.nextDraggingOverShapeId) return;
+    const mine = shapes.filter((s) => s.parentId === card.id);
+    if (mine.length === 0) return;
+    this.editor.reparentShapes(mine, this.editor.getCurrentPageId());
+  }
+
   // Ticket 01-zone-entry-events: name "this card instance entered this
   // zone" as a distinct occurrence, once per real zone change — not once
   // per drag frame, and not re-fired for staying in (or returning to) the
@@ -122,16 +192,26 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     // up whichever card the pointer actually lands on.
     this.editor.setSelectedShapes([]);
 
-    const zone = this.zoneAt(current);
+    const zoneHit = this.zoneAt(current);
+    const zone = zoneHit?.zone;
     const previousZone = (current.meta?.zone as string | undefined) ?? undefined;
     if (zone === previousZone) return undefined;
 
-    if (zone) {
+    if (zoneHit) {
       // Descoped 2026-08-06 (Jess): no callback/emitter/queue yet — nothing
       // downstream consumes this. A plain console.log is the whole
       // notification surface for now, proving the detection logic; wiring
       // a real consumer is later tickets' job (tabletop-survives-restart).
-      console.log(`zone-entry ${current.props.instanceId} ${zone}`);
+      console.log(`zone-entry ${current.props.instanceId} ${zoneHit.zone}`);
+
+      // Ticket 18: the card just left the battlefield — its counters don't
+      // follow it into the graveyard/exile/library. They detach and
+      // scoot to an open spot near the zone's edge, staying on the table.
+      // This has to be driven from here: a parented shape's own
+      // onTranslateEnd never fires when only its parent moves.
+      if (NON_BATTLEFIELD_ZONES.has(zoneHit.zone)) {
+        this.evictCounters(current, zoneHit);
+      }
     }
 
     return {
@@ -151,8 +231,50 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
    * wins — see `topmostZoneAt` (shared with the zone's own armed-state
    * check, tabletop-physics ticket 14).
    */
-  private zoneAt(shape: MtgCardShape): string | undefined {
+  private zoneAt(shape: MtgCardShape): ZoneHit | undefined {
     const bounds = this.editor.getShapePageBounds(shape);
-    return bounds ? topmostZoneAt(this.editor, bounds.center)?.zone : undefined;
+    return bounds ? topmostZoneAt(this.editor, bounds.center) : undefined;
+  }
+
+  // Ticket 18: detach every counter riding this card and land each at an
+  // open spot near the destination zone's edge — outside the zone, on the
+  // table. "Occupied" considers only the small movable stuff (cards and
+  // counters); furniture is fair ground to sit on, same as real cardboard.
+  private evictCounters(card: MtgCardShape, zoneHit: ZoneHit): void {
+    const counters = this.editor
+      .getSortedChildIdsForParent(card.id)
+      .map((id) => this.editor.getShape<MtgCounterShape>(id))
+      .filter((s): s is MtgCounterShape => s?.type === "mtg-counter");
+    if (counters.length === 0) return;
+
+    const zoneBounds = this.editor.getShapePageBounds(zoneHit.id);
+    const cardBounds = this.editor.getShapePageBounds(card);
+    if (!zoneBounds || !cardBounds) return;
+
+    const counterIds = new Set(counters.map((c) => c.id));
+    const occupied: Rect[] = [];
+    for (const shape of this.editor.getCurrentPageShapes()) {
+      if (shape.type !== "mtg-card" && shape.type !== "mtg-counter") continue;
+      if (counterIds.has(shape.id as MtgCounterShape["id"])) continue;
+      const bounds = this.editor.getShapePageBounds(shape);
+      if (bounds) occupied.push({ x: bounds.x, y: bounds.y, w: bounds.w, h: bounds.h });
+    }
+
+    const spots = findOpenSpotsNearZoneEdge({
+      zone: { x: zoneBounds.x, y: zoneBounds.y, w: zoneBounds.w, h: zoneBounds.h },
+      entry: { x: cardBounds.center.x, y: cardBounds.center.y },
+      spotSize: counters[0].props.w,
+      occupied,
+      count: counters.length,
+    });
+
+    this.editor.reparentShapes(
+      counters.map((c) => c.id),
+      this.editor.getCurrentPageId(),
+    );
+    this.editor.animateShapes(
+      counters.map((c, i) => ({ id: c.id, type: c.type, x: spots[i].x, y: spots[i].y, rotation: 0 })),
+      { animation: { duration: 200 } },
+    );
   }
 }

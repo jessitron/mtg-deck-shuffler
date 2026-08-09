@@ -3,6 +3,7 @@ import { createTLSchema, defaultShapeSchemas, TLRecord } from "@tldraw/tlschema"
 import { trace } from "@opentelemetry/api";
 import { log } from "./log.js";
 import { mtgCardShapeProps } from "../shared/mtgCardShape.js";
+import { mtgCounterShapeProps } from "../shared/mtgCounterShape.js";
 import { mtgZoneShapeProps } from "../shared/mtgZoneShape.js";
 
 // Every room's store validates against this schema — the server-side twin of
@@ -14,6 +15,7 @@ const tableSchema = createTLSchema({
   shapes: {
     ...defaultShapeSchemas,
     "mtg-card": { props: mtgCardShapeProps },
+    "mtg-counter": { props: mtgCounterShapeProps },
     "mtg-zone": { props: mtgZoneShapeProps },
   },
 });

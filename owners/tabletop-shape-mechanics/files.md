@@ -6,7 +6,9 @@ issues/12-*.md`) landed the `mtg-card` custom-shape rewrite decided by ticket 02
 for furniture, adding `mtg-zone` alongside it — no file was deleted for this one since furniture
 was never its own file (it lived inside `tableFurniture.ts`'s shape-builder functions). Ticket 14
 (`.scratch/tabletop-physics/issues/14-*.md`, same day) added `zoneHitTest.ts`, extracting the
-zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShapeUtil`.
+zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShapeUtil`. Ticket 18
+(`.scratch/tabletop-physics/issues/18-counters.md`, 2026-08-08, `4c64ef2`) added the third shape
+type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 
 ## Shared (each shape's type/props definition)
 
@@ -21,14 +23,26 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
   registering `mtg-zone`, and `mtgZoneShapeProps` validators, imported by client
   `MtgZoneShapeUtil.tsx`, server `rooms.ts`, and server `tableFurniture.ts` (for the `Zone` type
   alias it re-exports).
+- `apps/tabletop/src/shared/mtgCounterShape.ts` — the same pattern for counters (ticket 18):
+  `MtgCounterShapeProps` (`w`, `h`, `text` — free string, blank by default; no domain identity
+  beyond its text), the `TLGlobalShapePropsMap` augmentation registering `mtg-counter`, and
+  `mtgCounterShapeProps` validators, imported by client `MtgCounterShapeUtil.tsx` and server
+  `rooms.ts`. Its doc comment carries the naming-collision note (table-layout ticket 12's life
+  counter used `mtg-counter` as a working name; that shape needs its own name — see `TODO.md`).
 
 ## Client (the ShapeUtils themselves)
 
 - `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — the whole card territory: extends
   `BaseBoxShapeUtil<MtgCardShape>`; `onClick` (tap/untap, now toggling `props.tapped` with
-  rotation as a pure visual delta), `onTranslateEnd` (selection cleanup + zone-entry detection),
-  `zoneAt()` (private helper — since ticket 14, a thin wrapper around `zoneHitTest.ts`'s
-  `topmostZoneAt()`, below), `component()`/`getIndicatorPath()` (renders its own `<img>`).
+  rotation as a pure visual delta), `onTranslateEnd` (selection cleanup + zone-entry detection +
+  counter eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`, deliberately
+  excluding the Stack), `zoneAt()` (private helper — since ticket 14, a thin wrapper around
+  `zoneHitTest.ts`'s `topmostZoneAt()`, below; since ticket 18 returning the full `ZoneHit`,
+  id+zone), the counter-hosting drag hooks (`canReceiveNewChildrenOfType`/
+  `canRemoveChildrenOfType`, both type-narrowed to `mtg-counter`; `onDragShapesIn` with the
+  rotation-zeroing math; `onDragShapesOut` with the `parentId` filter), `evictCounters()`
+  (private — calls `findOpenSpotsNearZoneEdge`, below), and `component()`/`getIndicatorPath()`
+  (renders its own `<img>`).
 - `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — extends `BaseBoxShapeUtil<MtgZoneShape>`
   (ticket 13); still defines no interaction hooks at all (`onClick`/`onTranslateEnd`/
   `onDragShapesOver` are all absent — see `architecture.md`/`interactions.md` watch point 7 for why
@@ -47,11 +61,29 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
   several selected cards moves them all to one destination." Read-only: writes nothing to the
   store. Imported by both `MtgCardShapeUtil.tsx` (`zoneAt()`, drag-settle) and
   `MtgZoneShapeUtil.tsx` (`component()`, live armed-glow rendering).
+- `apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx` — **new, ticket 18**: extends
+  `BaseBoxShapeUtil<MtgCounterShape>`. Deliberately no `onClick` (text editing is stock
+  double-click-to-edit via `canEdit()`, avoiding the selection-deferral quirk), but
+  `onTranslateEnd` still clears selection unconditionally (watch point 1's generalized cleanup).
+  `component()` renders the disc (or, while editing, an `<input>` with the `setTimeout(0)` focus
+  workaround, `markEventAsHandled` on pointer-down, and Enter/Escape → `editor.complete()`);
+  `isAspectRatioLocked()` keeps it square. Exports `COUNTER_SIZE` (44).
+- `apps/tabletop/src/client/shapes/MtgCounterTool.ts` — **new, ticket 18**: `StateNode` with id
+  `"mtg-counter"`; click-to-place one counter at the pointer, then back to the select tool. The
+  minimal creation affordance (flagged as an assumption in the ticket outcome).
+- `apps/tabletop/src/client/shapes/openSpotNearZoneEdge.ts` — **new, ticket 18**:
+  `findOpenSpotsNearZoneEdge(request)`, pure geometry over plain `Rect`s (no `Editor`, unit-
+  tested) — picks the zone edge nearest the card's entry point and alternates slots outward,
+  skipping occupied rects; overlap beats failure. Used only by `evictCounters`.
 - `apps/tabletop/src/client/TablePage.tsx` — registers
-  `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil]`, passed to both
+  `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil]`,
+  passed to both
   `useSync` and the `<Tldraw shapeUtils={...}>` prop (this app uses the sync hook directly, which
   is why `defaultShapeUtils` must be spread in explicitly; see `architecture.md`). Add new custom
-  ShapeUtils here. Also home to `aimCameraAtTheTable()` (table-layout ticket 14, `5eeac70`;
+  ShapeUtils here. Since ticket 18 it also wires the counter tool: `tools={[MtgCounterTool]}`,
+  `overrides` (`uiOverrides.tools` adds the toolbar item), and `components`
+  (`ToolbarWithCounter`, a `DefaultToolbar` with the counter item prepended).
+  Also home to `aimCameraAtTheTable()` (table-layout ticket 14, `5eeac70`;
   corrected same day, `96159be`): since the square's furniture centers on the origin (mostly
   negative page coordinates, off tldraw's default viewport), the mount hook does one
   **deterministic** `editor.zoomToBounds(TABLE_EXTENT, { inset: 24 })`, where `TABLE_EXTENT`
@@ -71,7 +103,8 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
   a pure `props.face` write now). Not this owner's mechanics territory per se, but the identity
   contract every hook in `MtgCardShapeUtil` depends on.
 - `apps/tabletop/src/server/rooms.ts` — builds the server-side `TLSocketRoom` schema via
-  `createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-zone": {...} } })`.
+  `createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-counter": {...},
+  "mtg-zone": {...} } })`.
   The server-side twin of `TablePage.tsx`'s client registration; same "must spread the defaults
   explicitly" gotcha applies here, on the schema-validation side (see `architecture.md`).
 - `apps/tabletop/src/server/tableFurniture.ts` — **ticket 13**: `zoneShape()` now builds real
@@ -122,6 +155,13 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
   Stack), and that a fifth `seat.joined` gets 409 instead of a player area drawn on top of the
   S seat's. Catches `tableFurniture.ts` drifting from `cardLayout.ts` where the geometry test
   can't.
+- `apps/tabletop/test/verification/verify-counter.spec.ts` — **new, ticket 18**: counter
+  attach/ride/detach, the stale-counter-selection regression (drag counter, then drag card —
+  the card must move), two counters evicting to the graveyard's edge when the host card dies,
+  and in-place text editing. Its `createCounter` helper carries the ~500ms
+  post-creation cooldown (tldraw's double-click window; see watch point 13).
+- `apps/tabletop/test/openSpotNearZoneEdge.test.ts` — **new, ticket 18**: unit tests for the
+  pure eviction geometry.
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 

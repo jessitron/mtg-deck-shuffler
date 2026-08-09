@@ -28,11 +28,14 @@ card-rendering owner. See `history.md` for the full migration note.
 
 ## Scope
 
-Everything under `apps/tabletop/src/client/shapes/` — `MtgCardShapeUtil.tsx` and
-`MtgZoneShapeUtil.tsx` — and their interaction with tldraw's own `SelectTool` child states
-(`PointingShape`, `Translating`, in `node_modules/tldraw/src/lib/tools/SelectTool/childStates/`).
-Concretely: click/tap toggling, drag-and-drop, shape selection state, zone detection via shape
-bounds, and any tldraw quirk discovered while implementing these.
+Everything under `apps/tabletop/src/client/shapes/` — `MtgCardShapeUtil.tsx`,
+`MtgZoneShapeUtil.tsx`, `MtgCounterShapeUtil.tsx`, `MtgCounterTool.ts`, plus the pure seams
+`zoneHitTest.ts` and `openSpotNearZoneEdge.ts` — and their interaction with tldraw's own
+`SelectTool` child states (`PointingShape`, `Translating`, in
+`node_modules/tldraw/src/lib/tools/SelectTool/childStates/`).
+Concretely: click/tap toggling, drag-and-drop (including drag-and-drop *parenting* — counters
+attaching to cards), shape selection state, zone detection via shape bounds, custom creation
+tools, and any tldraw quirk discovered while implementing these.
 
 **Ticket 02/12** (`.scratch/tabletop-physics/issues/12-*.md`, landed 2026-08-08) carried out the
 rewrite decided by ticket 02: the card is now a genuine custom shape type, `mtg-card`, defined in
@@ -47,6 +50,17 @@ type, `mtg-zone`, defined in `apps/tabletop/src/shared/mtgZoneShape.ts` and rend
 `MtgZoneShapeUtil` defines no interaction hooks at all (see `architecture.md`), which makes it
 the KB's working example of "a locked shape needs none." See `architecture.md` for the mechanics
 and the tldraw registration gotchas both rewrites surfaced.
+
+**Ticket 18** (`.scratch/tabletop-physics/issues/18-counters.md`, landed 2026-08-08, `4c64ef2`)
+added a third custom shape type: `mtg-counter`, an **unlocked, draggable, text-editable disc**
+a player drops onto a card. Attachment is tldraw drag-and-drop *parenting*, mediated by drag
+hooks on `mtg-card` (`canReceiveNewChildrenOfType`/`onDragShapesIn`/`onDragShapesOut`); a card
+entering graveyard/exile/library evicts its counters to open spots near the zone's edge.
+**Naming caution**: table-layout ticket 12's decided-but-unbuilt life counter also used the
+working name `mtg-counter` — ticket 18 claimed the type string per the tabletop-physics spec,
+so the life counter needs a new name when built (buoyed in `TODO.md` as
+`life-counter-needs-own-name`). The old locked-furniture `mtg-counter` cautions in this KB
+describe *that* shape, not this one — see `architecture.md`.
 
 ## Design philosophy
 
@@ -71,15 +85,20 @@ and the tldraw registration gotchas both rewrites surfaced.
 
 | What | Where |
 |---|---|
-| Card ShapeUtil (tap/untap, drag settle, zone detection) | `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` |
+| Card ShapeUtil (tap/untap, drag settle, zone detection, counter hosting) | `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` |
 | Card shape's props/type definition | `apps/tabletop/src/shared/mtgCardShape.ts` (`MtgCardShapeProps`, `TLGlobalShapePropsMap` augmentation) |
 | Zone ShapeUtil (furniture — no interaction hooks) | `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` |
 | Zone shape's props/type definition | `apps/tabletop/src/shared/mtgZoneShape.ts` (`MtgZoneShapeProps`, `TLGlobalShapePropsMap` augmentation) |
-| ShapeUtil registration (client) | `apps/tabletop/src/client/TablePage.tsx` (`shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil]` passed to both `useSync` and `<Tldraw>`) |
-| Shape schema registration (server) | `apps/tabletop/src/server/rooms.ts` (`createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-zone": {...} } })`) |
+| Counter ShapeUtil (unlocked disc, double-click-to-edit text) | `apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx` |
+| Counter shape's props/type definition | `apps/tabletop/src/shared/mtgCounterShape.ts` (`MtgCounterShapeProps`, `TLGlobalShapePropsMap` augmentation) |
+| Counter creation tool (click-to-place `StateNode`) | `apps/tabletop/src/client/shapes/MtgCounterTool.ts`, wired via `tools`/`uiOverrides`/`Toolbar` in `TablePage.tsx` |
+| Counter eviction geometry (pure, unit-tested) | `apps/tabletop/src/client/shapes/openSpotNearZoneEdge.ts` |
+| ShapeUtil registration (client) | `apps/tabletop/src/client/TablePage.tsx` (`shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil]` passed to both `useSync` and `<Tldraw>`) |
+| Shape schema registration (server) | `apps/tabletop/src/server/rooms.ts` (`createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-counter": {...}, "mtg-zone": {...} } })`) |
 | Shape identity is minted | `apps/tabletop/src/server/cardArrival.ts` (`props.instanceId`, `createShapeId`) |
 | tldraw's selection state machine (read, don't modify) | `node_modules/tldraw/src/lib/tools/SelectTool/childStates/PointingShape.ts`, `Translating.ts` |
 | Regression test for the drag-identity bug | `apps/tabletop/test/verification/verify-drag-identity.spec.ts` |
+| Counter attach/detach/evict/edit tests | `apps/tabletop/test/verification/verify-counter.spec.ts`, `apps/tabletop/test/openSpotNearZoneEdge.test.ts` |
 
 See `architecture.md` for how the pieces fit together, `interactions.md` for what depends on
 this and the watch points, `history.md` for how we got here, `files.md` for the full file list.
