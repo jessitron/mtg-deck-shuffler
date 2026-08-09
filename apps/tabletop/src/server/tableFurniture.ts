@@ -149,6 +149,7 @@ export async function ensurePlayerArea(
     cardBackImageUrl: look.cardBackImageUrl,
     landCount: 0,
     graveyardCount: 0,
+    stackCount: 0,
   };
   entry.seats.set(seatId, area);
 

@@ -143,10 +143,28 @@ export function exileBounds(seatIndex: number): Bounds {
   return { x: graveyard.x, y: graveyard.y + graveyard.h + GAP, w: EXILE_W, h: EXILE_H };
 }
 
-/** Cards on the stack cascade from the square's top-left so earlier arrivals stay visible. */
-export function stackCardPosition(stackCount: number): { x: number; y: number } {
+/**
+ * A stack card lands on the Stack's side facing its player's mat — S bottom,
+ * N top, E right, W left — centered on that side, so everyone can see at a
+ * glance who played it. A seat's cascade walks along its side and inward,
+ * keeping earlier arrivals visible.
+ */
+export function stackCardPosition(seatIndex: number, stackCount: number): { x: number; y: number } {
   const stack = stackBounds();
-  return { x: stack.x + GAP + stackCount * 36, y: stack.y + GAP + stackCount * 14 };
+  const along = stackCount * 36;
+  const inset = GAP + stackCount * 14;
+  switch (SLOT_ORDER[seatIndex]) {
+    case "S":
+      return { x: -CARD_W / 2 + along, y: stack.y + stack.h - inset - CARD_H };
+    case "N":
+      return { x: -CARD_W / 2 + along, y: stack.y + inset };
+    case "E":
+      return { x: stack.x + stack.w - inset - CARD_W, y: -CARD_H / 2 + along };
+    case "W":
+      return { x: stack.x + inset, y: -CARD_H / 2 + along };
+    default:
+      throw new Error(`no compass slot for seat ${seatIndex}: the table seats ${MAX_SEATS}`);
+  }
 }
 
 const LAND_COLS = Math.floor(PLAYMAT_W / CARD_W); // 9

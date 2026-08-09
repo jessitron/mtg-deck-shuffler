@@ -176,9 +176,10 @@ link wins):
 - Player-area origins (top-left of the 2202 × 952 rectangle): S (-1101, 600),
   N (-1101, -1552), E (600, -476), W (-2802, -476) — `playerAreaOrigin()` in
   `cardLayout.ts`.
-- Cards played to the Stack cascade from the square's top-left
-  (`stackCardPosition`), no longer anchored over the owning seat's playmat —
-  there is no "over the owning seat" in a square.
+- A card played to the Stack lands on the square's side facing its player's
+  mat — S bottom, N top, E right, W left — centered on that side, so everyone
+  can see at a glance who played it (`stackCardPosition`). Each seat's cascade
+  walks along its own side and inward, keeping earlier arrivals visible.
 
 **Explicitly provisional.** Jess: "this is all gonna be tweaked after play
 experience" — treat this geometry as a first build to react to, not a final layout

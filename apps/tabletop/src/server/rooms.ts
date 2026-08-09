@@ -40,6 +40,7 @@ export interface PlayerArea {
   cardBackImageUrl?: string;
   landCount: number;
   graveyardCount: number;
+  stackCount: number;
 }
 
 export interface RoomEntry {

@@ -338,8 +338,9 @@ Implements the design recorded above ("The Square — design decided"). `.scratc
   (Stack silently jumping to top of z-order on every seat join) unreproducible **by construction**
   — there is no longer a "widen the existing Stack" code path at all.
 - `stackCardPosition(stackCount)` lost its `seatIndex` parameter — stack cards cascade from the
-  square's top-left. The cascade walks out of the square around the ~23rd simultaneous stack
-  card; cosmetic only (cards are *placed* there, not zone-detected there).
+  square's top-left. **Superseded same day — see the "stack cards land on their seat's side"
+  correction below**; the parameter came back, and the top-left cascade (and its ~23rd-card
+  overflow quirk) is gone.
 - All 15 Playwright verification specs pass with the new layout, including
   `verify-drag-identity` and `verify-zone-armed`; `verify-seat-joined.spec.ts` was rewritten
   (Stack fixed instead of widening; zone counts now include the Command Zone: 6 after one seat,
@@ -379,6 +380,33 @@ Three fixes off the ticket's code review, all touching things this KB leans on:
   in `apps/tabletop/test/seatJoined.test.ts` — not just over the pure geometry in
   `cardLayout.test.ts`. If `tableFurniture.ts` ever drifts from `cardLayout.ts`'s geometry, this
   test fails where the pure-geometry one can't.
+
+### Stack cards land on their seat's side of the square (same day, worktree `stack-card-per-seat-side`)
+
+Per Jess's request, `stackCardPosition` changed again — the `seatIndex` parameter is back:
+`stackCardPosition(seatIndex, stackCount)` (`cardLayout.ts`). A stack card now lands on the
+Stack square's side **facing its player's mat** — S seat on the bottom edge, N top, E right,
+W left — centered on that side, so everyone can see at a glance who played it. A seat's
+cascade walks *along* its side (+36/card) and *inward* off its edge (+14/card), keeping
+earlier arrivals visible. Purely placement territory, but three record-keeping consequences:
+
+- **The cascade count is per-seat now, not per-room.** `cardArrival.ts`'s module-level
+  `stackCountByRoom` map is deleted; the count lives as `PlayerArea.stackCount` in `rooms.ts`,
+  alongside the existing `landCount`/`graveyardCount` — one uniform pattern for all three
+  per-seat card counters.
+- **Same throw backstop as `playerAreaOrigin`**: `SLOT_ORDER[seatIndex]` undefined (a seat
+  past `MAX_SEATS`) throws rather than placing a card off the map — unreachable in practice
+  because `seatJoined.ts`/`cardArrival.ts` already 409 first (`96159be`), but consistent with
+  the disjointness backstop watch point 8 records.
+- **The ~23rd-card overflow note above no longer applies in that form**: a long cascade now
+  walks along its seat's side, and containment inside the square is asserted per seat in
+  `test/cardLayout.test.ts` (at cascade depth 3). Still cosmetic either way — stack cards are
+  *placed* there, not zone-detected there.
+
+Tests: 5 new cases in `apps/tabletop/test/cardLayout.test.ts` (one per compass side asserting
+the centered-on-the-facing-edge landing, plus a four-seat cascade test asserting each seat's
+inward direction and containment), replacing the old single top-left cascade test. 51 unit +
+19 Playwright pass. `DESIGN.md`'s square section updated to match.
 
 ## Ticket 18: `mtg-counter` — counters ride on cards (2026-08-08, `4c64ef2`)
 
