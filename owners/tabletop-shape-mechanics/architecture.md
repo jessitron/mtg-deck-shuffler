@@ -227,11 +227,18 @@ Stack**, strengthened to a ≥ `GAP` empty band between every pair of AABBs (`se
 in `test/cardLayout.test.ts`) — `STACK_SIZE` deliberately exceeds `PLAYMAT_H` so E/W areas never
 overlap N/S. Most furniture now sits at **negative** page coordinates; `topmostZoneAt()` was
 verified sign-agnostic during this owner's `-review`. The client compensates for the
-centered-on-origin layout with `aimCameraAtTheTable()` in `TablePage.tsx` (mount-time
-`zoomToFit`, or a one-shot `{ scope: "document", source: "remote" }` store listener on an empty
-table — `source: "remote"` so a player's own first stroke doesn't yank their camera; `?d=` deep
-links suppress it) — this is what keeps Playwright actionability working. Watch point 8's
-"square" risk is resolved: the tiebreak question never had to be answered.
+centered-on-origin layout with `aimCameraAtTheTable()` in `TablePage.tsx` — since `96159be`
+(same-day code-review fixes), one deterministic mount-time `editor.zoomToBounds(TABLE_EXTENT,
+{ inset: 24 })` over the table's fixed extent, never a fit-to-content or a store listener (the
+first cut zoomed on the first *remote* shape arrival, and that reactive zoom raced Playwright
+measurements and flaked; `?d=` deep links still suppress the framing). This is what keeps
+Playwright actionability working, and it matters doubly because tldraw culls off-viewport
+shapes from the DOM — `.tl-shape` counts are only reliable with everything in view. Also
+`96159be`: `playerAreaOrigin` throws past the new `MAX_SEATS` export (4) instead of wrapping a
+fifth seat onto S, both `seatJoined.ts` and `cardArrival.ts` 409 first ("table is full: 4
+seats"), and the disjointness invariant is additionally asserted over the actually-drawn
+`mtg-zone` shapes at the handler seam (`test/seatJoined.test.ts`, 21 zones at a full table).
+Watch point 8's "square" risk is resolved: the tiebreak question never had to be answered.
 
 ## Ticket 14: zone appearance (dashed at rest, glow when armed) — `topmostZoneAt` extracted, shared
 

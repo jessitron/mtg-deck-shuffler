@@ -51,13 +51,18 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
   `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil]`, passed to both
   `useSync` and the `<Tldraw shapeUtils={...}>` prop (this app uses the sync hook directly, which
   is why `defaultShapeUtils` must be spread in explicitly; see `architecture.md`). Add new custom
-  ShapeUtils here. Also home to `aimCameraAtTheTable()` (table-layout ticket 14, `5eeac70`):
-  since the square's furniture centers on the origin (mostly negative page coordinates, off
-  tldraw's default viewport), the mount hook `zoomToFit`s — or, on an empty table, listens with
-  `{ scope: "document", source: "remote" }` and zooms once on the first *remote* shape arrival
-  (a player's own first stroke must not yank their camera; `?d=` deep links suppress the
-  auto-zoom). Not selection mechanics per se, but Playwright actionability for every drag/click
-  spec in this KB depends on it putting the furniture on screen.
+  ShapeUtils here. Also home to `aimCameraAtTheTable()` (table-layout ticket 14, `5eeac70`;
+  corrected same day, `96159be`): since the square's furniture centers on the origin (mostly
+  negative page coordinates, off tldraw's default viewport), the mount hook does one
+  **deterministic** `editor.zoomToBounds(TABLE_EXTENT, { inset: 24 })`, where `TABLE_EXTENT`
+  (`Box(-2802, -1612, 5604, 3164)`) is the fixed four-compass-slots-plus-Stack extent mirroring
+  `cardLayout.ts` — and the camera never moves on its own again (`?d=` deep links suppress the
+  framing). The first cut zoomed-to-fit content and listened for the first remote shape arrival;
+  that reactive zoom raced Playwright measurements and flaked — see `history.md`'s `96159be`
+  entry. Not selection mechanics per se, but Playwright actionability for every drag/click spec
+  in this KB depends on it putting the furniture on screen — and tldraw culls off-viewport
+  shapes from the DOM, so even bare `.tl-shape` counts need the camera to have everything in
+  view.
 
 ## Server (identity is minted here, mechanics is not)
 
@@ -96,7 +101,11 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
   helper in `apps/tabletop/test/cardLayout.test.ts`, because overlapping AABBs would make
   `topmostZoneAt()`'s draw-order tiebreak decide zone membership, which is deterministic but
   meaningless (watch point 8). Most furniture now sits at negative page coordinates;
-  `topmostZoneAt()` is sign-agnostic (verified at ticket 14's `-review`).
+  `topmostZoneAt()` is sign-agnostic (verified at ticket 14's `-review`). Since `96159be`:
+  `MAX_SEATS` (= 4, the compass slot count) is exported, and `playerAreaOrigin(seatIndex)`
+  **throws** past it instead of wrapping a fifth seat onto the S slot (which would have silently
+  broken the disjointness invariant); `seatJoined.ts` and `cardArrival.ts` refuse with 409
+  ("table is full: 4 seats") before ever reaching the throw.
 
 ## Tests
 
@@ -107,6 +116,12 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
 - `apps/tabletop/test/verification/verify-drag-identity.spec.ts` — regression test for the
   `959831c` drag-identity bug. Plays two lands, drags first, drags second, asserts only the
   second moved.
+- `apps/tabletop/test/seatJoined.test.ts` — since `96159be`, the event-handler-seam twin of
+  `cardLayout.test.ts`'s pure-geometry invariant: asserts the ≥ `GAP` zone-AABB disjointness
+  over the 21 actually-drawn `mtg-zone` shapes at a full 4-seat table (five per seat + the
+  Stack), and that a fifth `seat.joined` gets 409 instead of a player area drawn on top of the
+  S seat's. Catches `tableFurniture.ts` drifting from `cardLayout.ts` where the geometry test
+  can't.
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 

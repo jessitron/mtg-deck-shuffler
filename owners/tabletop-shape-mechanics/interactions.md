@@ -192,7 +192,19 @@
    but any future hit-test change must not assume positive coords; (b) if anyone shrinks
    `STACK_SIZE` below `PLAYMAT_H` or repacks the compass slots, the pairwise test fails loudly,
    which is the feature: it forces the tiebreak question (closest-match / smallest-containing-zone
-   vs. z-order) to be answered explicitly rather than silently inherited.
+   vs. z-order) to be answered explicitly rather than silently inherited. Since the same-day
+   code-review fixes (`96159be`), the invariant is guarded at three layers: the pure geometry
+   (`cardLayout.test.ts`), the event-handler seam over the actually-drawn `mtg-zone` shapes at a
+   full 4-seat table (`test/seatJoined.test.ts`, 21 zones — catches `tableFurniture.ts` drifting
+   from `cardLayout.ts`), and a runtime backstop — `playerAreaOrigin` **throws** past the new
+   `MAX_SEATS` export (4) instead of wrapping a fifth seat onto the S slot's exact AABBs, with
+   `seatJoined.ts`/`cardArrival.ts` refusing with 409 before the throw can ever fire. And (c),
+   a testing caution that outlived ticket 14 itself: **reactive camera moves triggered by remote
+   arrivals flake any spec that measures screen coordinates** — the first cut of
+   `aimCameraAtTheTable()` zoomed on the first remote shape arrival and raced Playwright's
+   measurements; the fix (`96159be`) is one deterministic `zoomToBounds` over the table's fixed
+   extent at mount, camera never moving on its own after. tldraw also culls off-viewport shapes
+   from the DOM, so `.tl-shape` counts are only reliable with the whole table in view.
 
 9. **A new reactive-read pattern exists now — a `computed()` shared per-`Editor`, read via a
    `use*` hook, that writes nothing to the store.** `zoneHitTest.ts`'s `armedZoneIdSignal`/

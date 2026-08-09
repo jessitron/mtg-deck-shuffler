@@ -326,12 +326,12 @@ Implements the design recorded above ("The Square — design decided"). `.scratc
   sign-agnostic during this owner's `-review` (it compares page bounds, no assumption of positive
   coords). The camera risk the review flagged — tldraw opens with page (0,0) at the viewport's
   top-left, so a centered-on-origin layout is mostly off-screen, breaking Playwright's
-  actionability checks — is handled in `TablePage.tsx`: `aimCameraAtTheTable()` on mount calls
-  `editor.zoomToFit()`, or, if the table is empty at mount, listens on the store with
-  `{ scope: "document", source: "remote" }` and zooms once on the first **remote** shape arrival.
-  `source: "remote"` is load-bearing: a player's own first stroke on an empty table must not yank
-  their camera; server-injected furniture/cards arrive as remote. A tldraw deep link (`?d=` in
-  the URL) suppresses the auto-zoom entirely.
+  actionability checks — is handled in `TablePage.tsx`'s `aimCameraAtTheTable()`. *As first
+  landed* (`5eeac70`) it zoomed-to-fit current content at mount, or listened on the store for the
+  first **remote** shape arrival on an empty table — **superseded the same day; see the `96159be`
+  correction below.** It now does one deterministic `editor.zoomToBounds(TABLE_EXTENT,
+  { inset: 24 })` at mount and never moves the camera on its own again. A tldraw deep link
+  (`?d=` in the URL) still suppresses it.
 - **`ensureStackStripWidth` is now `ensureStackDrawn`** (`tableFurniture.ts`): draws the fixed
   Stack square once, guarded by `store.get(stackId)` existence rather than seat count; later seat
   joins are a no-op. This makes the z-order-promotion bug tabletop-physics ticket 13 fixed
@@ -347,6 +347,38 @@ Implements the design recorded above ("The Square — design decided"). `.scratc
 
 Full detail: watch point 8 rewritten in `interactions.md`; `files.md`'s `cardLayout.ts`/
 `tableFurniture.ts`/`TablePage.tsx` entries updated.
+
+### Code-review fixes, same day (`96159be`)
+
+Three fixes off the ticket's code review, all touching things this KB leans on:
+
+- **The camera is now deterministic, not reactive** (the correction promised above).
+  `aimCameraAtTheTable()` (`TablePage.tsx`) no longer zooms-to-fit current content or listens on
+  the store for the first remote shape arrival — that reactive design raced Playwright
+  measurements (a zoom firing on an async remote arrival could land *between* a spec measuring a
+  bounding box and acting on it) and flaked across `verify.sh` runs. It now does exactly one
+  `editor.zoomToBounds(TABLE_EXTENT, { inset: 24 })` at mount, where
+  `TABLE_EXTENT = new Box(-2802, -1612, 5604, 3164)` — the fixed four-compass-slots-plus-Stack
+  extent mirroring `cardLayout.ts` (provisional geometry; tweak it alongside the layout). The
+  camera never moves on its own after mount; `?d=` deep links still suppress the framing.
+  **Lesson worth keeping: reactive camera moves triggered by remote arrivals are a flake source
+  for any spec that measures screen coordinates — deterministic mount-time framing is the stable
+  shape.** Related fact: tldraw CULLS off-viewport shapes from the DOM, so Playwright counts of
+  `.tl-shape` elements are only reliable when the camera has everything in view — another reason
+  the framing must be deterministic and total.
+- **`playerAreaOrigin(seatIndex)` now throws past `MAX_SEATS`** (new export from `cardLayout.ts`,
+  = 4) instead of wrapping seat 4 back onto S — a wrapped fifth area would have landed exactly on
+  the S seat's AABBs, silently breaking the disjointness invariant watch point 8 guards. Both
+  entry points refuse first, so the throw is a backstop: `handleSeatJoined` (`seatJoined.ts`)
+  returns 409 `"table is full: 4 seats"` when every compass slot is taken, and
+  `handleCardArrival` (`cardArrival.ts`) returns the same 409 for a card from an *unseated* seat
+  at a full table (its defensive `ensurePlayerArea` would otherwise need a fifth slot). Tested at
+  the seam in `apps/tabletop/test/seatJoined.test.ts`.
+- **Zone-AABB disjointness is now also asserted at the event-handler seam**, over the
+  actually-drawn `mtg-zone` shapes at a full 4-seat table (21 zones: five per seat + the Stack),
+  in `apps/tabletop/test/seatJoined.test.ts` — not just over the pure geometry in
+  `cardLayout.test.ts`. If `tableFurniture.ts` ever drifts from `cardLayout.ts`'s geometry, this
+  test fails where the pure-geometry one can't.
 
 ## What Was Tried and Abandoned
 
