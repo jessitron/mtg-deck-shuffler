@@ -6,6 +6,7 @@ import { MtgZoneShapeProps } from "../shared/mtgZoneShape.js";
 import {
   playmatBounds,
   libraryBounds,
+  commandZoneBounds,
   exileBounds,
   graveyardBounds,
   nameLabelPosition,
@@ -34,8 +35,7 @@ export function nextIndex(tableName: string): IndexKey {
 
 /**
  * Zones a card can be detected entering (01-zone-entry-events, upgraded in
- * tabletop-physics ticket 13 to real `mtg-zone` shapes). `command` isn't
- * placed by this file yet, but is a valid value once it exists.
+ * tabletop-physics ticket 13 to real `mtg-zone` shapes).
  */
 export type Zone = MtgZoneShapeProps["zone"];
 
@@ -153,6 +153,7 @@ export async function ensurePlayerArea(
 
   const mat = playmatBounds(seatIndex);
   const library = libraryBounds(seatIndex);
+  const commandZone = commandZoneBounds(seatIndex);
   const exile = exileBounds(seatIndex);
   const graveyard = graveyardBounds(seatIndex);
   const namePos = nameLabelPosition(seatIndex);
@@ -161,6 +162,7 @@ export async function ensurePlayerArea(
   const matImageId = createShapeId(`playmat-image-${entry.tableName}-${seatId}`);
   const libraryId = createShapeId(`library-${entry.tableName}-${seatId}`);
   const libraryImageId = createShapeId(`library-image-${entry.tableName}-${seatId}`);
+  const commandZoneId = createShapeId(`region-command-${entry.tableName}-${seatId}`);
   const graveyardId = createShapeId(`region-graveyard-${entry.tableName}-${seatId}`);
   const exileId = createShapeId(`region-exile-${entry.tableName}-${seatId}`);
   const labelId = createShapeId(`name-label-${entry.tableName}-${seatId}`);
@@ -229,6 +231,20 @@ export async function ensurePlayerArea(
       );
     }
 
+    store.put(
+      zoneShape({
+        id: commandZoneId,
+        pageId,
+        x: commandZone.x,
+        y: commandZone.y,
+        w: commandZone.w,
+        h: commandZone.h,
+        label: "Command Zone",
+        index: nextIndex(entry.tableName),
+        zone: "command",
+        seatId,
+      })
+    );
     store.put(
       zoneShape({
         id: graveyardId,

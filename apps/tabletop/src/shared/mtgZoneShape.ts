@@ -3,10 +3,9 @@ import { T } from "@tldraw/validate";
 
 /**
  * The `mtg-zone` custom shape (tabletop-physics ticket 13): furniture
- * (playmat, library, graveyard, exile, the Stack) as a genuine shape type
- * instead of stock locked `geo`/`image` shapes tagged with a freeform
- * `meta.zone` string. `command` is included even though no server code
- * places a command zone yet — same posture as `mtg-card`'s validated props.
+ * (playmat, library, command zone, graveyard, exile, the Stack) as a genuine
+ * shape type instead of stock locked `geo`/`image` shapes tagged with a
+ * freeform `meta.zone` string.
  */
 export interface MtgZoneShapeProps {
   w: number;

@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import type { Server } from "node:http";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
-import { playmatBounds, libraryBounds, graveyardBounds, exileBounds, stackStripBounds } from "../src/server/cardLayout";
+import { playmatBounds, libraryBounds, commandZoneBounds, graveyardBounds, exileBounds, stackStripBounds } from "../src/server/cardLayout";
 
 /**
  * JES-140: POST /api/tables/:tableName/events (seat.joined) — the player area
@@ -54,7 +54,7 @@ function shapesOf(tableName: string) {
 }
 
 describe("seat joined", () => {
-  it("draws a full player area — playmat, library, graveyard, exile, name label — before any card", async () => {
+  it("draws a full player area — playmat, library, command zone, graveyard, exile, name label — before any card", async () => {
     const event = seatJoined();
     const response = await post("seat-basic", event);
     expect(response.status).toBe(201);
@@ -62,13 +62,17 @@ describe("seat joined", () => {
     const shapes = shapesOf("seat-basic");
     const mat = playmatBounds(0);
     const library = libraryBounds(0);
+    const command = commandZoneBounds(0);
     const graveyard = graveyardBounds(0);
     const exile = exileBounds(0);
 
     expect(shapes.some((s) => s.x === mat.x && s.y === mat.y)).toBe(true);
     expect(shapes.some((s) => s.x === library.x && s.y === library.y)).toBe(true);
-    expect(shapes.some((s) => s.x === graveyard.x && s.y === graveyard.y)).toBe(true);
-    expect(shapes.some((s) => s.x === exile.x && s.y === exile.y)).toBe(true);
+    expect(
+      shapes.some((s) => s.type === "mtg-zone" && s.props?.zone === "command" && s.x === command.x && s.y === command.y && s.props?.w === command.w)
+    ).toBe(true);
+    expect(shapes.some((s) => s.x === graveyard.x && s.y === graveyard.y && s.props?.w === graveyard.w && s.props?.h === graveyard.h)).toBe(true);
+    expect(shapes.some((s) => s.x === exile.x && s.y === exile.y && s.props?.w === exile.w && s.props?.h === exile.h)).toBe(true);
     expect(shapes.some((s) => s.type === "text")).toBe(true);
   });
 

@@ -66,6 +66,13 @@
   already reflects z-order for tldraw's fractional-indexing scheme), i.e. the topmost-drawn zone
   wins. That same function is now also the basis of `MtgZoneShapeUtil`'s armed-state check (below)
   — the second consumer watch point 8 anticipated. See `architecture.md`'s "Ticket 14" section.
+- **The command zone is placed furniture now, and zone AABBs are strictly disjoint by tested
+  invariant** (*table-layout* ticket 13, 2026-08-08 — a different ticket 13 from the
+  `tabletop-physics` one; see `history.md`). `ensurePlayerArea` (`tableFurniture.ts`) draws a
+  locked `mtg-zone` with `zone: "command"` per seat, no interaction hooks; `cardLayout.ts`
+  guarantees a 20-unit gap between every pair of zone boxes, asserted pairwise in
+  `test/cardLayout.test.ts` — see watch point 8. Pre-existing tables keep their old furniture
+  (no Command Zone) because `ensurePlayerArea` never redraws; detection degrades gracefully.
 - `MtgZoneShapeUtil` defines **no** `onClick`/`onTranslateEnd`/`onDragShapesOver` — see
   `architecture.md`'s "Ticket 13" section for why that's provably safe rather than just
   convenient: zones are always `isLocked: true`, `SelectTool`'s `Idle` state gates on `isLocked`
@@ -159,8 +166,14 @@
    shape whose bounds contain the given center — not the closest, not the
    smallest, not the one the player was visually dropping into. That was never a problem worth
    naming while zones (playmat/library/command-zone/graveyard/exile per seat) sat spread out in
-   a row with clear gaps between player areas — bounds essentially never overlapped, so "first
-   match" and "correct match" were the same thing by construction of the layout, not the code.
+   a row with clear gaps — and since the command-zone redraw (*table-layout* ticket 13,
+   2026-08-08, commits `1046b93`+`b18bd16` — a different ticket 13 from the `tabletop-physics`
+   one that created `mtg-zone`) that's a **tested invariant, not an accident of layout**: every
+   pair of zone AABBs, within a seat's column and between player areas, keeps a 20-unit gap
+   (`GAP`, exported from `cardLayout.ts`), asserted pairwise in
+   `apps/tabletop/test/cardLayout.test.ts` with a comment naming exactly this watch point's
+   reason — an overlap would resolve by draw order, deterministic but semantically meaningless.
+   So today "first match" and "correct match" are the same thing by asserted construction.
    **"The square"** (`.scratch/tabletop-table-layout/issues/10-the-square.md`, decided
    2026-08-08, not yet built — see `apps/tabletop/DESIGN.md`'s "The square" section) moves player
    areas from the row into compass slots (N/E/S/W) packed around a fixed-size centered Stack. If
@@ -169,11 +182,13 @@
    `index`, not proximity, not which zone visually contains more of the card) — now shared by
    *both* callers (`MtgCardShapeUtil.zoneAt()` and `MtgZoneShapeUtil`'s armed-state check) — would
    decide the winner for both at once. Flagged during the grilling session for "the
-   square" as a risk worth recording before implementation starts, not yet a bug (no code has
-   changed for this ticket; `cardLayout.ts`/`tableFurniture.ts` are untouched). Whoever builds
+   square" as a risk worth recording before implementation starts, not yet a bug (the square
+   itself hasn't touched any code). Whoever builds
    "the square" should re-check `topmostZoneAt()` against the actual N/E/S/W geometry once it's
    drawn, and consider closest-match-by-distance or smallest-containing-zone as a tiebreak if AABBs do
-   end up overlapping.
+   end up overlapping — the pairwise-disjointness test in `cardLayout.test.ts` will fail loudly
+   if the square's geometry breaks the gap invariant, which is a feature: it forces the tiebreak
+   question to be answered explicitly rather than silently inherited.
 
 9. **A new reactive-read pattern exists now — a `computed()` shared per-`Editor`, read via a
    `use*` hook, that writes nothing to the store.** `zoneHitTest.ts`'s `armedZoneIdSignal`/

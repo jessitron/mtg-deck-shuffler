@@ -529,7 +529,8 @@ self-rendering custom shape.
   (a `<link>` **or** `@font-face`, never both), and self-hosting is a change to both at once.
 
   **Built and confirmed working 2026-08-08 (ticket 13).** `MtgZoneShapeUtil`'s zone labels
-  ("Graveyard", "Exile", "Library", "The Stack") render with `fontFamily: "var(--font-chrome)"`,
+  ("Graveyard", "Exile", "Library", "The Stack", and — since table-layout ticket 13 the same
+  day, `1046b93` — "Command Zone") render with `fontFamily: "var(--font-chrome)"`,
   and the token resolves to Orbitron inside the canvas — the first fleet-token consumer inside a
   genuine self-rendering shape, exactly the case the tokens were created for. See
   [README.md](README.md) → "tldraw limits" and [history.md](history.md) for how it was verified.

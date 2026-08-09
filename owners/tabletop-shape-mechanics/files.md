@@ -73,8 +73,16 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
   `architecture.md`'s "Ticket 13" section) to reuse an existing Stack shape's `.index` instead of
   minting a fresh top-of-z-order one on every seat join. The seat name label (`type: "text"`,
   built inline in `ensurePlayerArea`) is now `isLocked: true` (was `false` — any player could
-  previously drag/delete another player's name label). Consulted by `zoneAt()` but not itself a
-  custom ShapeUtil.
+  previously drag/delete another player's name label). Since *table-layout* ticket 13
+  (2026-08-08, a different ticket 13 — see `history.md`), `ensurePlayerArea` also draws a
+  Command Zone per seat (`zone: "command"`, id `region-command-<table>-<seatId>`, locked, no
+  interaction hooks). Consulted by `zoneAt()` but not itself a custom ShapeUtil.
+- `apps/tabletop/src/server/cardLayout.ts` — placement geometry, mostly *not* this owner's
+  territory, except for one invariant zone detection leans on (since table-layout ticket 13):
+  every pair of zone bounding boxes is strictly disjoint, with a 20-unit gap (`GAP`, exported,
+  along with a `Bounds` interface), asserted pairwise in `apps/tabletop/test/cardLayout.test.ts`
+  — because overlapping AABBs would make `topmostZoneAt()`'s draw-order tiebreak decide zone
+  membership, which is deterministic but meaningless (watch point 8).
 
 ## Tests
 

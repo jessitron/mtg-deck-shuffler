@@ -1297,3 +1297,32 @@ adding-a-stylesheet watch points name the real doors (`additionalStyles` for EJS
 `additionalStylesheets` on `formatPageWrapper`, `stylesheets` only on the shell itself);
 the README's Fonts row and the font-token notes say **two** `<head>` sources, not three.
 `apps/shuffler/CLAUDE.md`'s Templating and fonts bullets were updated in the commit itself.
+
+## 2026-08-08 — the Command Zone arrived on the canvas wearing the standard zone look
+
+`1046b93` (**Command-zone redraw of the player area, table-layout ticket 13**) +
+`b18bd16` (code-review fixes). The Table-layout map's first *implementation* ticket to
+land. The player area got a Command Zone (two cards wide, for partner commanders) beside
+the Library; Exile dropped to the bottom third under Graveyard; the right-hand column
+widened 425 → 550 and every seat re-derived. All of that is geometry, recorded with exact
+numbers in `apps/tabletop/DESIGN.md`'s table — not this owner's territory.
+
+**What is this owner's territory is what *didn't* happen, and it went exactly as the
+`-context` consult advised.** The new furniture is a plain `mtg-zone` — dashed dark-pink
+at rest, armed glow, `--font-chrome` Orbitron label — with **no new CSS, no new tokens,
+no stock-`geo` regression, and no invented "commander lives here" treatment**. The label
+is "Command Zone": Title Case, the two-word glossary term, matching "Library" /
+"Graveyard" / "Exile" / "The Stack". Verified by reading the diff: the only client-side
+surface touched is `tableFurniture.ts` calling the existing `zoneShape` helper;
+`MtgZoneShapeUtil.tsx` is untouched.
+
+**A distinct commander-zone look remains a future decision, not a gap.** If tickets
+08/18/19 (or anyone) ever want the Command Zone to look different from its siblings,
+that's a new appearance decision for this owner to stage — don't read the current
+sameness as an oversight to fix in passing.
+
+**A stale-comment debt this KB was owed got paid.** `src/shared/mtgZoneShape.ts`'s doc
+comment said "`command` is included even though no server code places a command zone
+yet" — true when written (tabletop-physics ticket 13), false the moment this landed. The
+same change that falsified it deleted it. That's the pattern to copy: a comment describing
+"not yet" state should die in the commit that changes the state, not wait for a sweep.
