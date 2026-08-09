@@ -53,7 +53,8 @@ for i in {1..20}; do
 done
 
 echo -e "${YELLOW}Running verification tests...${NC}"
-npx playwright test
+# Any arguments are passed through to Playwright, e.g. ./verify.sh verify-tap-animation
+npx playwright test "$@"
 TEST_EXIT_CODE=$?
 
 if [ $TEST_EXIT_CODE -eq 0 ]; then

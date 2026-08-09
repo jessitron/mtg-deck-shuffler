@@ -6,11 +6,13 @@
 - **HTMX**: Animations depend on HTMX swap behavior. All game actions use immediate `hx-swap="outerHTML"`.
 - **View rendering**: `shared-components.ts` applies animation classes during HTML generation. Changes to card rendering (container structure, class names, nesting) can break CSS selectors that target animated elements.
 - **Two-faced cards**: The flip animation uses `.flip-container-outer`, `.flip-container-inner`, `.card-flipped`. Changes to two-faced card DOM structure will break flip animations.
-- **The Tabletop's `mtg-card` shape (decided, unbuilt)**: the tap animation's trigger is
+- **The Tabletop's `mtg-card` shape (built, `65276e6`)**: the tap animation's trigger is
   `props.tapped` changing on a synced tldraw shape. That couples this owner to
-  `apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx`, to the shape's prop schema
-  (ticket 02), and to tldraw's own `shape.rotation` write. If tap ever stops being a stored
-  boolean, the animation's trigger disappears.
+  `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` (ticket 12 replaced the old
+  `MtgCardImageShapeUtil` image-shape subclass with this genuine custom shape), to the
+  shape's prop schema, and to tldraw's own `shape.rotation` write. If tap ever stops being
+  a stored boolean, the animation's trigger disappears. It also leans on tldraw's own
+  `.tl-image-container` class — see Watch Points.
 
 ## Depended On By
 
@@ -65,21 +67,28 @@
   row's right edge. The `gap` on `.game-header-row` does **not** offset the panel either;
   it's needed so a long deck name doesn't butt into the hamburger.
 
-- **Tabletop tap animation (decided 2026-08-07, ticket 05 resolved, not built)** — four
-  standing constraints for whoever implements `.scratch/tabletop-physics/issues/
-  05-rotate-to-tap.md`: key the catch-up off `props.tapped` changing (never off a ±90 rotation
-  delta — that misfires when a player free-rotates through 90°); initialize the previous-value
-  ref to the first-seen `tapped` so a card arriving tapped doesn't swing on mount or on store
-  reconnect; comment the coupling between the centre-preserving x/y write and the transform
-  origin; and keep **`overflow: hidden` off every ancestor on the path**, because mid-swing the
-  counter-rotated card extends outside its own `w × h` box. Also: do not re-derive the CSS-only
-  rotation route (killed — see architecture.md), and do not veto the local catch-up by citing
-  "no FLIP" (it isn't). **Now also settled**: the trigger stays plain `onClick` — tldraw's
-  `onRotateStart`/`onRotate`/`onRotateEnd` are confirmed real hooks but are **not used for tap**,
-  staying reserved for free rotation instead, so tap and free-rotation stay visually
-  distinguishable. Duration/easing is 0.5s `ease-out` (Shuffler's card-motion vocabulary), not
-  this owner's originally-recommended 0.8s flip-style transition — Jess overrode that
-  recommendation deliberately.
+- **Tabletop tap animation (BUILT 2026-08-09, `65276e6`, ticket 15)** — the four standing
+  constraints are now invariants of the code in `MtgCardShapeUtil.tsx` `component()`, and
+  they must keep holding: the catch-up is keyed off `props.tapped` changing (never off a
+  ±90 rotation delta — that misfires when a player free-rotates through 90°); the
+  previous-value ref initializes to the first-seen `tapped` so a card arriving tapped
+  doesn't swing on mount or on store reconnect; the coupling between the centre-preserving
+  x/y write and the default 50% 50% transform-origin is commented in the code — don't
+  delete either half; and **`overflow: hidden` must stay off every ancestor on the path**
+  (verified against tldraw 5.2.5: `.tl-shape` is `overflow: visible`, no clipping on
+  `.tl-html-container`/`.tl-image-container` — recheck on tldraw upgrades). Also: do not
+  re-derive the CSS-only rotation route (killed — see architecture.md), and do not veto
+  the local catch-up by citing "no FLIP" (it isn't). The trigger stays plain `onClick` —
+  tldraw's `onRotateStart`/`onRotate`/`onRotateEnd` are **not used for tap**, staying
+  reserved for free rotation. Duration/easing is 0.5s `ease-out` (Shuffler's card-motion
+  vocabulary), not this owner's originally-recommended 0.8s — Jess overrode that
+  deliberately. **New watch points from the build**: the animated element is
+  `.tl-image-container` itself, so if a tldraw upgrade ever puts a `transform` on that
+  class, the WAAPI animation overrides it; running animations are cancelled before a new
+  one starts, so smooth reversal on a fast double-tap is an accepted gap (one clean jump);
+  and `verify-tap-animation.spec.ts` observes the animation via `getAnimations()` — a
+  switch from WAAPI to a CSS transition would need `getAnimations()`-compatible assertions
+  rechecked (CSS transitions do appear in `getAnimations()`, but keyframe shape differs).
 - **State that must survive swaps**: Anything toggled by JS that needs to outlive a `game-state-updated` swap must NOT be re-applied to swapped-in content in `afterSwap` — the settle phase reverts it (see architecture.md). Anchor such state on `document.body` or another non-swapped ancestor. The hamburger menu (`body.game-menu-open`) is the reference example; developer mode (`body.dev-mode`, set server-side from a cookie, gating `.menu-debug` visibility) is a second, JS-free example.
 
 ## Not Related To
