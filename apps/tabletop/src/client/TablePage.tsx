@@ -16,6 +16,7 @@ import {
 import "tldraw/tldraw.css";
 import { useSync } from "@tldraw/sync";
 import { setGlobalAttrs, currentTraceparent, inSpan } from "./observability";
+import { chooseLicenseKey } from "./chooseLicenseKey";
 import { useCardArrivalSpans } from "./useCardArrivalSpans";
 import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
 import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
@@ -67,37 +68,23 @@ const components: TLComponents = {
  * The "made with tldraw" watermark stays, worn happily.
  */
 
-// tldraw >= 4 HIDES THE WHOLE EDITOR 5 SECONDS AFTER LOAD when it decides it's
-// an unlicensed production deployment — the canvas is replaced by a hidden
-// <div data-testid="tl-license-expired">, i.e. a blank white page. "Production"
-// is decided by URL alone: any HTTPS non-loopback hostname. So
-// table.jessitron.honeydemo.io always needs a key, and localhost never does —
-// but see below: localhost must also never be GIVEN one. See
-// @tldraw/editor/src/lib/license/LicenseProvider.tsx.
+// tldraw's license gate blanks the canvas on unlicensed HTTPS non-loopback
+// origins — prod serves http:// on purpose to stay exempt. The whole story,
+// including why the key must be WITHHELD wherever the gate can't fire, lives
+// with chooseLicenseKey.
 //
-// Baked into the bundle at build time from the shell's TLDRAW_LICENSE_KEY (see
-// vite.config.ts `define`). Empty string => undefined, which is what tldraw
-// wants when there is no key. The key is domain-bound and ships to browsers by
-// design, so it is not a secret — but it still lives in the repo-root .be
-// (untracked), NOT in apps/tabletop/.env, which is committed to a public repo.
+// The key is baked into the bundle at build time from the shell's
+// TLDRAW_LICENSE_KEY (see vite.config.ts `define`). Empty string => undefined,
+// which is what tldraw wants when there is no key. The key is domain-bound and
+// ships to browsers by design, so it is not a secret — but it still lives in
+// the repo-root .be (untracked), NOT in apps/tabletop/.env, which is committed
+// to a public repo.
 const bakedLicenseKey = import.meta.env.VITE_TLDRAW_LICENSE_KEY || undefined;
-
-// The dev exemption above only covers MISSING or unparseable keys: a parseable
-// but EXPIRED key returns 'expired' from getLicenseState unconditionally and
-// blanks the canvas even at localhost. On a loopback host tldraw neither needs
-// nor wants a key, so withhold it — then local dev works no matter what state
-// the key in .be is in. Loopback test mirrors tldraw's own isLoopbackHost.
-//
-// Withholding means EMPTY STRING, not undefined: when the prop is undefined,
-// LicenseProvider falls back to reading the key from the environment itself —
-// including import.meta.env.VITE_TLDRAW_LICENSE_KEY, which vite's `define`
-// rewrote to the key literal inside tldraw's own bundled code. "" defeats the
-// fallback and still takes the no-key path in getLicenseFromKey.
-function isLoopbackHost(hostname: string): boolean {
-  const host = hostname.toLowerCase().replace(/^\[|\]$/g, "");
-  return host === "localhost" || host === "::1" || /^127(?:\.\d{1,3}){3}$/.test(host);
-}
-const licenseKey = isLoopbackHost(window.location.hostname) ? "" : bakedLicenseKey;
+const licenseKey = chooseLicenseKey(
+  window.location.protocol,
+  window.location.hostname,
+  bakedLicenseKey,
+);
 
 // The table is laid out around the board origin (DESIGN.md "The square"), so
 // most furniture sits at negative page coordinates — but tldraw's default
