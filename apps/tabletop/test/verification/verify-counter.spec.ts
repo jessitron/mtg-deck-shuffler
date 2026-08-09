@@ -273,3 +273,49 @@ test("a counter's text is editable in place", async ({ page }) => {
 
   await expect(counter).toHaveText("+1/+1");
 });
+
+test("a long label like 'lifelink' shrinks to fit inside the disc", async ({ page }) => {
+  const tableSlug = `verify-counter-fit-${Date.now()}`;
+  await openTable(page, tableSlug);
+
+  await createCounter(page, { x: 400, y: 300 });
+  const counter = page.getByTestId("mtg-counter");
+  await expect(counter).toHaveCount(1);
+
+  await counter.dblclick();
+  // Focus lands in the editor a tick after editing starts (see the shape's
+  // setTimeout(0) comment) — typing before that goes to the canvas.
+  await expect(page.getByTestId("mtg-counter-input")).toBeFocused();
+  await page.keyboard.type("lifelink");
+  await page.keyboard.press("Escape");
+
+  // Whitespace-insensitive: the circle-aware fit may split the word across
+  // line divs, whose block boundaries read back as whitespace.
+  await expect(async () => {
+    const squished = await counter.evaluate((el) => (el.textContent ?? "").replace(/\s+/g, ""));
+    expect(squished).toBe("lifelink");
+  }).toPass({ timeout: 5000 });
+  // Fits = nothing is clipped by the disc's overflow:hidden: the rendered
+  // content is no bigger than the visible box.
+  const fits = await counter.evaluate((el) => ({
+    scrollWidth: el.scrollWidth,
+    clientWidth: el.clientWidth,
+    scrollHeight: el.scrollHeight,
+    clientHeight: el.clientHeight,
+  }));
+  expect(fits.scrollWidth).toBeLessThanOrEqual(fits.clientWidth);
+  expect(fits.scrollHeight).toBeLessThanOrEqual(fits.clientHeight);
+  // And it genuinely shrank: a short label renders larger than "lifelink".
+  const longSize = await counter.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+  // Outlive the double-click window from the clicks that ended the previous
+  // edit, so this reads as a fresh double-click.
+  await page.waitForTimeout(600);
+  await counter.dblclick();
+  await expect(page.getByTestId("mtg-counter-input")).toBeFocused();
+  await page.keyboard.press("ControlOrMeta+a");
+  await page.keyboard.type("3");
+  await page.keyboard.press("Escape");
+  await expect(counter).toHaveText("3");
+  const shortSize = await counter.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+  expect(shortSize).toBeGreaterThan(longSize);
+});
