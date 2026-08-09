@@ -104,11 +104,26 @@ the default answer and a log is the exception. (Cost was never the reason; see "
 
 ### 3. While ingest keys are OK to commit to git and publish in the browser, Collectors are better.
 
-Prod: same-origin `/v1/traces`, ALB-routed to a dedicated
-`mtg-tabletop-collector` (`apps/tabletop/k8s/collector.yaml`, `BROWSER_OTLP_TRACES_URL` in
-`apps/tabletop/k8s/configmap.yaml`) — no key in the page, no CORS. Local: `otel-collector-local.yaml`,
-or the local-only `ALLOW_BROWSER_DIRECT_HONEYCOMB=true` key fallback in
-`apps/tabletop/src/server/server.ts:33-45`.
+Prod: same-origin `/v1/traces` and `/v1/logs`, ALB-routed to a dedicated
+`mtg-tabletop-collector` (`apps/tabletop/k8s/collector.yaml`, `BROWSER_OTLP_TRACES_URL` /
+`BROWSER_OTLP_LOGS_URL` in `apps/tabletop/k8s/configmap.yaml`) — no key in the page, no CORS.
+Local: `otel-collector-local.yaml`, or the local-only `ALLOW_BROWSER_DIRECT_HONEYCOMB=true` key
+fallback in `apps/tabletop/src/server/server.ts:33-45`.
+
+**Since `tabletop-http` (2026-08-09) the destination is `http://`, not `https://`, on purpose.**
+The Tabletop left the shared `only-one-alb-please` IngressGroup for its own group `tabletop-http`
+(`apps/tabletop/k8s/ingress.yaml`): a dedicated ALB with a single HTTP:80 listener and **no 443
+listener at all** — tldraw's license gate blanks an unlicensed canvas on HTTPS non-loopback
+origins, and `ssl-redirect` is exclusive across an IngressGroup, so there was no per-host http
+carve-out in the shared group. Consequence for this invariant: an `https://` browser OTLP URL is
+**connection-refused**, silently killing all browser telemetry including the uncaught-error
+pipeline. **Four config spots are scheme-coupled and must agree**: `BROWSER_OTLP_TRACES_URL` and
+`BROWSER_OTLP_LOGS_URL` in `apps/tabletop/k8s/configmap.yaml`, the CORS `allowed_origins` in
+`apps/tabletop/k8s/collector.yaml`, and the Shuffler's `TABLETOP_PUBLIC_URL`
+(`apps/shuffler/k8s/configmap.yaml`, fallback in `apps/shuffler/src/view/play-game/active-game-page.ts`).
+The collector→Honeycomb leg stays `https://api.honeycomb.io`. Access logs: both ALBs write to the
+same bucket/prefix (`orion-alb-access-logs` / `orion-alb`); object keys embed the ALB name, so
+they stay distinguishable.
 
 ### 4. Head-sample heath checks; keep all user activity.
 
@@ -751,6 +766,30 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
   suddenly fails to typecheck, suspect the resolver before the code** — the constructor-shape test
   exists precisely so the code's correctness is a checkable fact, not a judgment call under a red
   build. Gotcha recorded in `notes/AGENT-NOTES.md`.
+
+- **2026-08-09, `tabletop-http` (branch worktree-tabletop-http): prod Tabletop went plain http,
+  and the browser telemetry destination moved with it.** tldraw ≥ 4 blanks an unlicensed canvas 5s
+  after load on HTTPS non-loopback origins; plain http is exempt, so
+  `table.jessitron.honeydemo.io` now rides its own ALB (IngressGroup `tabletop-http`, HTTP:80
+  only, no TLS). What this owner learned and caught:
+  - **The review caught a would-be silent outage before it shipped**: the first draft left
+    `BROWSER_OTLP_TRACES_URL`/`BROWSER_OTLP_LOGS_URL` as `https://` absolute URLs. With no 443
+    listener that's connection-refused — every browser span *and* the uncaught-error log pipeline
+    gone, with a page that otherwise works perfectly. Fails-open-invisibly, browser-transport
+    edition. Fixed in the same change; the configmap now carries a comment saying why http.
+  - **Scheme is now coupled config across ships**: the four spots listed under Invariant 3 must
+    agree (tabletop configmap ×2, collector CORS `allowed_origins`, Shuffler
+    `TABLETOP_PUBLIC_URL`). "Add TLS back" is a four-file change plus reading the Tabletop
+    README → Licensing, not an ingress tweak.
+  - Also landed: `apps/tabletop/deploy.sh` dropped its `TLDRAW_LICENSE_KEY` hard-fail and checks
+    the deployed canvas over http; a new runtime guard
+    (`apps/tabletop/src/client/chooseLicenseKey.ts`) withholds any baked tldraw key on non-https
+    origins — withholding means **empty string, not `undefined`** (undefined lets tldraw read the
+    vite-baked env key itself). Healthcheck annotations (path `/health`, 30s interval — the probe
+    sampling story) carried over to the new ALB unchanged; `KubeProbeAwareSampler` untouched;
+    marker call and `.be`/`.env` sourcing in `deploy.sh` untouched.
+  - **Post-deploy verification still owed at time of writing**: open the deployed table over http
+    and confirm browser spans land in `mtg-tabletop-web` (env `mtg-deck-shuffler`).
 
 ## Related reading
 

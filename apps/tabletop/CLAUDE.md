@@ -116,14 +116,18 @@ Browser side (`src/client/observability/index.ts`, the fleet's only real OTel wr
   either `otel-collector-local.yaml` or the `ALLOW_BROWSER_DIRECT_HONEYCOMB` fallback.
   No `logsUrl` → browser logging quietly off, same as tracing.
 
-## Deploy gotcha: tldraw license
+## Deploy gotcha: tldraw license → prod is http-only
 
-**Deploying needs `TLDRAW_LICENSE_KEY` in the repo-root `.be`** — tldraw ≥ 4 blanks
-the canvas 5s after load on any HTTPS non-loopback host, and localhost can't
-reproduce it. Localhost itself never needs (or uses) a key: `TablePage.tsx` passes an
-empty-string `licenseKey` on loopback hosts, so an expired key in `.be` can't blank
-local dev (it used to — tldraw's dev exemption doesn't cover parseable-but-expired
-keys, and an undefined prop falls back to the env). See README → Licensing and
-`notes/AGENT-NOTES.md`.
+**The deployed table serves plain http:// on purpose and needs no tldraw key** —
+tldraw ≥ 4 blanks the canvas 5s after load on unlicensed **HTTPS** non-loopback
+hosts, and plain http is exempt (decided 2026-08-09; the app has no auth to protect
+anyway). The ALB has no 443 listener and its own IngressGroup (`tabletop-http`) —
+it can't share `only-one-alb-please`, because `ssl-redirect` is exclusive across a
+group. **Don't add TLS/443 back without reading README → Licensing.** All four
+absolute-URL config spots must agree on the scheme: `k8s/configmap.yaml` (browser
+OTLP ×2), `k8s/collector.yaml` (CORS origin), and the Shuffler's
+`TABLETOP_PUBLIC_URL`. `chooseLicenseKey` (`src/client/chooseLicenseKey.ts`)
+withholds any baked key wherever the gate can't fire, so a stale key in `.be` can't
+blank local dev or http prod. See README → Licensing and `notes/AGENT-NOTES.md`.
 
 Update this file when anything in it changes.
