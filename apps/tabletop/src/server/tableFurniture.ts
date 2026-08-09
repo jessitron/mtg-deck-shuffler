@@ -285,20 +285,19 @@ export async function ensurePlayerArea(
       parentId: pageId,
       isLocked: true, // fixes a live bug: any player could drag/delete another player's name
       opacity: 1,
-      // Two lines, player name first (design ruling 2026-08-08): line position is
-      // the only hierarchy a stock text shape offers, and two lines keep a long
-      // deck name from growing the autoSized label toward the neighboring seat.
-      // No deck name (e.g. the defensive redraw at card arrival) → today's
-      // one-line label, no dangling blank line.
+      // One line, player name first, at double size (design ruling 2026-08-09,
+      // superseding the 2026-08-08 two-line ruling): `Name 〜 Deck`, joined by a
+      // wave-dash swoosh. A very long deck name can grow the autoSized label
+      // toward the neighboring seat — accepted trade-off for the bigger label.
       props: {
-        richText: toRichText(look.deckName ? `${playerName}\n${look.deckName}` : playerName),
+        richText: toRichText(look.deckName ? `${playerName} 〜 ${look.deckName}` : playerName),
         color: "green",
         size: "m",
         font: "serif",
         textAlign: "start",
         autoSize: true,
         w: 200,
-        scale: 1,
+        scale: 2,
       },
       meta: {},
     } as any);
