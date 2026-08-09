@@ -29,6 +29,18 @@ export interface MtgZoneShapeProps {
  */
 export const LIBRARY_PILE_INSET = 12;
 
+/**
+ * Headroom reserved at the top of every card-holding zone box so the zone's
+ * label (fontSize 24, drawn inside the box's top-left) stays readable with a
+ * card or pile in the zone (zone-label-band, 2026-08-09). Pure headroom, not
+ * chrome — nothing draws the band itself. Matches NAME_LABEL_HEIGHT's 40 so
+ * label headroom keeps one rhythm across the player area. Shared for the same
+ * reason as LIBRARY_PILE_INSET: the server's geometry (cardLayout.ts,
+ * tableFurniture.ts) and the client's sleeve pile (MtgZoneShapeUtil) must
+ * agree on where content starts.
+ */
+export const ZONE_LABEL_BAND = 40;
+
 declare module "@tldraw/tlschema" {
   interface TLGlobalShapePropsMap {
     "mtg-zone": MtgZoneShapeProps;

@@ -2,7 +2,7 @@ import { trace } from "@opentelemetry/api";
 import { AssetRecordType, createShapeId, toRichText, TLAssetId, TLShapeId } from "@tldraw/tlschema";
 import { IndexKey, getIndexAbove, ZERO_INDEX_KEY } from "@tldraw/utils";
 import { RoomEntry, PlayerArea } from "./rooms.js";
-import { MtgZoneShapeProps, LIBRARY_PILE_INSET } from "../shared/mtgZoneShape.js";
+import { MtgZoneShapeProps, LIBRARY_PILE_INSET, ZONE_LABEL_BAND } from "../shared/mtgZoneShape.js";
 import {
   playmatBounds,
   libraryBounds,
@@ -210,17 +210,18 @@ export async function ensurePlayerArea(
       // An opaque image shape hides whatever's underneath it (tldraw limit), so the
       // border and "Library" label have to read as an outward frame: the box is at
       // full bounds above, and the image insets within it so the box's edge — and
-      // the label riding on it — stays visible as a ring around the picture.
+      // the label riding on it — stays visible as a ring around the picture. The
+      // top inset is the label band, so the label sits fully above the pile.
       const assetId = AssetRecordType.createId(`library-${entry.tableName}-${seatId}`);
       const insetW = library.w - 2 * LIBRARY_PILE_INSET;
-      const insetH = library.h - 2 * LIBRARY_PILE_INSET;
+      const insetH = library.h - ZONE_LABEL_BAND - LIBRARY_PILE_INSET;
       store.put(imageAsset(assetId, "Library", area.cardBackImageUrl, insetW, insetH));
       store.put(
         imageShape(
           libraryImageId,
           pageId,
           library.x + LIBRARY_PILE_INSET,
-          library.y + LIBRARY_PILE_INSET,
+          library.y + ZONE_LABEL_BAND,
           insetW,
           insetH,
           assetId,

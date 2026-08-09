@@ -96,10 +96,10 @@ Today's canvas card is `CARD_W = 170`, `CARD_H = 238`, which fixes the scale at
 | Card              | 170 × 238                             | 1 × 1                                                                |
 | Playmat           | 1632 × 952                            | 9.6 × 4                                                              |
 | Right-hand column | 550 wide                              | ~3.2 (was 2.5, before the Command Zone redraw): library + 20 gap + Command Zone |
-| Library slot      | 170 × 238                             | 1 × 1 (top-left of the column)                                      |
-| Command Zone      | 360 × 238                             | 2 × 1 plus a 20 gap (top-right of the column, beside the library; two commanders) |
-| Graveyard box      | 550 × 449                             | the top two-thirds of the space under Library/Command Zone          |
-| Exile box         | 550 × 225                             | the bottom third of that same space, below Graveyard (20 gap between) |
+| Library slot      | 170 × 278                             | 1 × 1 plus a 40 label band on top (top-left of the column)          |
+| Command Zone      | 360 × 278                             | 2 × 1 plus a 20 gap and the label band (top-right of the column, beside the library; two commanders) |
+| Graveyard box      | 550 × 356                             | what's left of the space under Library/Command Zone after Exile takes its share — still the bigger box |
+| Exile box         | 550 × 278                             | 1 card plus the label band, below Graveyard (20 gap between), flush with the playmat's bottom |
 | Player area       | 2202 × 952                            | playmat + 20 gap + column                                           |
 | The Stack         | 1000 × 1000, centered on the origin   | a fixed square; must exceed the playmat's height (see "The square") |
 
@@ -107,10 +107,18 @@ Within each compass slot: the **player name label sits just above the player
 area** (between the Stack and the S seat's playmat — the slot margin is sized
 for it).
 
+**The label band (2026-08-09).** Every card-holding zone reserves 40 units of
+headroom at its top (`ZONE_LABEL_BAND`, `src/shared/mtgZoneShape.ts`) so its label
+stays readable with a card in it — before this, Library and Command Zone were
+exactly a card tall (the card covered the title) and Exile was 225, shorter than
+a card. The band is headroom, not chrome: nothing draws it. The library's
+card-back pile and the graveyard's card cascade start below it.
+
 Graveyard+Exile width comes from the column's own width (Library + gap + Command
-Zone); their combined height is unchanged from before the redraw — "it fits under
-the library and above the bottom of the playmat" — just now split two-thirds
-Graveyard, one-third Exile instead of being one box. Every pair of zone boxes has
+Zone); their combined height still fits under the library row and above the bottom
+of the playmat. The split (revised 2026-08-09, was two-thirds/one-third): **Exile
+gets exactly a card plus the label band; Graveyard fills the rest** — still the
+bigger box, per the original "exile is a smaller box" intent. Every pair of zone boxes has
 a 20-unit gap between them, so all zone bounding boxes are strictly disjoint —
 zone detection resolves an overlapping point by z-order, which for furniture is
 draw order, meaningless as a semantic tiebreak (asserted in `test/cardLayout.test.ts`).
