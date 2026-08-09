@@ -1,5 +1,5 @@
 import { trace } from "@opentelemetry/api";
-import { GameState, GameCard } from "../GameState.js";
+import { GameState, GameCard, TableInfo } from "../GameState.js";
 import { TabletopPort, ZoneHint, buildCardPlayedEvent, buildSeatJoinedEvent, defaultPlaymatImageUrl, cardBackImageUrl } from "./types.js";
 import { log } from "../log.js";
 
@@ -56,14 +56,9 @@ export async function sendCardToTableFirst(
  * the first time one of this seat's cards arrives (see the Tabletop's
  * ensurePlayerArea).
  */
-export async function sendSeatJoinedBestEffort(
-  tabletopPort: TabletopPort | undefined,
-  tableName: string,
-  seatId: string,
-  playerName: string,
-  deckName: string
-): Promise<void> {
+export async function sendSeatJoinedBestEffort(tabletopPort: TabletopPort | undefined, tableInfo: TableInfo, deckName: string): Promise<void> {
   if (!tabletopPort) return;
+  const { tableName, seatId, playerName } = tableInfo;
   const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, defaultPlaymatImageUrl(), cardBackImageUrl());
   try {
     await tabletopPort.sendSeatJoined(tableName, event);

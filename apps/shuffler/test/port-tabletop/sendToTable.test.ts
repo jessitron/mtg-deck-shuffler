@@ -108,7 +108,7 @@ describe("sendSeatJoinedBestEffort", () => {
   it("sends a seat.joined event carrying the seat's identity, the deck's name, and both image URLs", async () => {
     const fake = new FakeTabletopGateway();
 
-    await sendSeatJoinedBestEffort(fake, "Friday Night", "abc12345", "Jess", "Test Deck");
+    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck");
 
     expect(fake.sentSeatJoinedEvents).toHaveLength(1);
     const { tableName, event } = fake.sentSeatJoinedEvents[0];
@@ -121,14 +121,14 @@ describe("sendSeatJoinedBestEffort", () => {
   });
 
   it("is a no-op when no tabletop is configured — Shuffle Up must not fail", async () => {
-    await expect(sendSeatJoinedBestEffort(undefined, "Friday Night", "abc12345", "Jess", "Test Deck")).resolves.toBeUndefined();
+    await expect(sendSeatJoinedBestEffort(undefined, tableInfo, "Test Deck")).resolves.toBeUndefined();
   });
 
   it("swallows a gateway failure — best-effort, unlike sendCardToTableFirst", async () => {
     const fake = new FakeTabletopGateway();
     fake.failWith(new Error("connection refused"));
 
-    await expect(sendSeatJoinedBestEffort(fake, "Friday Night", "abc12345", "Jess", "Test Deck")).resolves.toBeUndefined();
+    await expect(sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck")).resolves.toBeUndefined();
     expect(fake.sentSeatJoinedEvents).toHaveLength(0);
   });
 });
