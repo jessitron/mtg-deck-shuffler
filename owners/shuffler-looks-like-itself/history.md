@@ -1383,6 +1383,10 @@ undecided and still owes this owner a `-context`/`-review`.
 
 ## 2026-08-08 — the deck name joined the seat label: the fleet's first name/deck pairing
 
+*(The two-line composition this entry decided was **superseded 2026-08-09** — one line at
+double size, `name 〜 deck`, `75bae71`; see that entry below. The reasoning here is kept
+because it explains what the trade-off was and why it was originally taken the other way.)*
+
 `4263ef8` **Deck name travels to the table's name label (ticket 15)** (+ `a291020`,
 a parameter-clump refactor with no design content).
 
@@ -1731,3 +1735,35 @@ the two CSS sites remain (`design-playmat-specimen` still tracks the gallery one
 **Verified:** `verify-prep-picker.spec.ts` (5 specs), a picked-mat assertion in the two-app
 integration spec, unit tests on the send and validators, and the gallery spec passing with
 the new `#table-look` section.
+
+## 2026-08-09 — the seat label went one-line at double size: a ruling superseded, on purpose
+
+`75bae71` **Tabletop seat label: one line at double size, name 〜 deck**
+
+Jess's direct request, one day after ticket 15's two-line ruling: the seat name label —
+still the locked stock tldraw `text` shape in `tableFurniture.ts` → `ensurePlayerArea` —
+now reads ``toRichText(`${playerName} 〜 ${deckName}`)`` on **one line**, joined by a
+`〜` wave-dash swoosh, at `size: "m"` with **`scale: 2`** for twice the rendered size.
+Missing deck name still degrades to the bare player name.
+
+**Why this supersedes rather than contradicts.** The 2026-08-08 two-line choice existed to
+keep a long deck name growing the autoSized label *downward* instead of toward the
+neighboring seat. Jess wanted the label bigger and single-line, and took that growth
+direction as an **accepted trade-off** — named in the code comment so the next reader sees
+it was traded, not missed. Player-first and deck-name-verbatim carry forward unchanged; the
+"no separator glyph" choice died with the second line (on one line, something has to mark
+the seam, and the wave-dash is it).
+
+**Two mechanics worth keeping:** `scale: 2` was used rather than stepping the `size` enum
+(`"xl"`), keeping the size continuous instead of enum-quantized — the same shape of move as
+computing canvas geometry in TypeScript rather than accepting a stock step. And the stock
+`serif`/`green` enum props are still untouched — the tldraw font-enum limit holds; this
+change is composition and scale only, no new appearance decision on face or colour.
+
+**Process note.** A ruling this owner recorded on 2026-08-08 was reversed by Jess within a
+day, directly. Same lesson as the command-zone surround (2026-08-07): a recorded ruling is
+a fact about what was decided, not a wall against Jess deciding again — the KB's job is to
+make the supersession *visible* (old entry annotated, README rewritten, watch point updated)
+rather than to defend the earlier text. No `/design` specimen, same reasoning as ticket 15:
+stock tldraw chrome whose decided property is text composition, which a CSS specimen can't
+exhibit honestly.

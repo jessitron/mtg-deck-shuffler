@@ -404,22 +404,28 @@ on a card* (buoyed as `design-sleeve-specimen` in `TODO.md` — the picker panel
 does have a specimen, `#table-look`; they are different things). v1 is one color;
 distinct front/back colors or an image sleeve are someday-maybes, deferred.
 
-**The seat name label pairs player name and deck name as two lines, player first (decided
-2026-08-08, ticket 15 of the Table-layout map, `4263ef8`).** The Tabletop's seat label — the
-locked stock tldraw `text` shape `ensurePlayerArea` draws in
-`apps/tabletop/src/server/tableFurniture.ts` — reads player name on line one, deck name
-verbatim on line two, via ``toRichText(`${playerName}\n${deckName}`)``. This is the fleet's
-first player-name + deck-name pairing; the next label that shows both copies this
-composition. The choices, each deliberate: **player first**, because line position is the
-only hierarchy a stock text shape offers; **two lines rather than one**, so a long deck name
-grows the autoSized label downward instead of toward the neighboring seat; **no prefix, no
-separator glyph**; **deck name verbatim**, no truncation (it's player-chosen content, same
-category as card art). A missing deck name (the defensive redraw at card arrival) degrades to
-exactly the old one-line label — never a blank line. The stock props stay untouched: `serif`
-and `green` are the `text` shape's enum (the tldraw limit above), not choices. If the label
-ever becomes a self-rendering shape, the two-line structure carries forward and per-line
-hierarchy (size, face) becomes possible for the first time — that would be a new appearance
-decision, not a port.
+**The seat name label pairs player name and deck name on ONE line at double size, player
+first, joined by a wave-dash (decided 2026-08-09 at Jess's direct request, `75bae71` —
+superseding the 2026-08-08 two-line ruling from ticket 15, `4263ef8`).** The Tabletop's seat
+label — the locked stock tldraw `text` shape `ensurePlayerArea` draws in
+`apps/tabletop/src/server/tableFurniture.ts` — reads
+``toRichText(`${playerName} 〜 ${deckName}`)``, size `"m"` with `scale: 2` for twice the
+rendered size. This is the fleet's one player-name + deck-name pairing; the next label that
+shows both copies this composition. The choices, each deliberate: **player first** (carried
+forward from the 2026-08-08 ruling); **one line at double size rather than two lines**,
+because Jess wanted the label bigger and single-line — with the **accepted trade-off**,
+named in the code comment, that a long deck name can grow the autoSized label toward the
+neighboring seat (exactly the hazard the two-line ruling existed to avoid — Jess took it
+knowingly); **the `〜` wave-dash swoosh as separator** (the old "no separator glyph" choice
+is gone — on one line, something has to mark the seam); **deck name verbatim**, no
+truncation (player-chosen content, same category as card art). A missing deck name (the
+defensive redraw at card arrival) degrades to the bare player name — same behaviour as
+before, now also at scale 2. The stock props stay untouched: `serif` and `green` are the
+`text` shape's enum (the tldraw limit above), not choices — and `scale: 2` rather than
+`size: "xl"` keeps the size continuous rather than enum-stepped. If the label ever becomes
+a self-rendering shape, the one-line name-〜-deck composition carries forward and typographic
+hierarchy (size, face per part) becomes possible for the first time — that would be a new
+appearance decision, not a port.
 
 **Two style worlds.** Site pages (`/`, `/choose-any-deck`, `/docs`, `/about`) use the
 purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages
