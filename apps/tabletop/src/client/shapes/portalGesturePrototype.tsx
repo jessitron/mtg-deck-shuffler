@@ -25,9 +25,9 @@ const VARIANTS = ["A", "B", "C"] as const;
 export type PortalVariant = (typeof VARIANTS)[number];
 
 const VARIANT_LABELS: Record<PortalVariant, string> = {
-  A: "Ring · instant poof (arms under the pointer)",
-  B: "Maw · slide under (arms under the card)",
-  C: "Vortex · inhale (arms under the card)",
+  A: "Ring · instant poof",
+  B: "Maw · slide under",
+  C: "Vortex · inhale",
 };
 
 function initialVariant(): PortalVariant {
@@ -55,12 +55,9 @@ function setPortalVariant(v: PortalVariant) {
  * zoneHitTest's armedZoneIdSignal (one computed per editor) but portal-gated:
  * only while an mtg-card is what's being dragged — a counter dragged across
  * the library must not threaten a swallow — and only for zone === "library".
- * Variant A keys on the pointer (matches the existing armed signal and the
- * multi-select "one destination" rationale); B and C key on the dragged
- * card's own center, which is what drop detection (zoneAt) actually uses —
- * grab a card by its corner and the two disagree; that disagreement is one
- * of the things this prototype exists to let Jess feel. Multi-select: first
- * selected card's center stands in for the group.
+ * Pointer-keyed, decided (Jess 2026-08-09): the multi-select policy — the
+ * pointer picks the one destination — holds for a single card too, so both
+ * arming and the swallow key on the pointer in every variant.
  */
 const portalSignalByEditor = new WeakMap<Editor, Computed<TLShapeId | undefined>>();
 function portalArmedLibrarySignal(editor: Editor): Computed<TLShapeId | undefined> {
@@ -70,10 +67,7 @@ function portalArmedLibrarySignal(editor: Editor): Computed<TLShapeId | undefine
       if (!editor.isIn("select.translating")) return undefined;
       const card = editor.getSelectedShapes().find((s) => s.type === "mtg-card");
       if (!card) return undefined;
-      const point: VecLike | undefined =
-        portalVariantAtom.get() === "A" ? editor.inputs.currentPagePoint : editor.getShapePageBounds(card.id)?.center;
-      if (!point) return undefined;
-      const hit = topmostZoneAt(editor, point);
+      const hit = topmostZoneAt(editor, editor.inputs.currentPagePoint);
       return hit?.zone === "library" ? hit.id : undefined;
     });
     portalSignalByEditor.set(editor, signal);

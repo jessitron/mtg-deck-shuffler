@@ -269,6 +269,24 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     // up whichever card the pointer actually lands on.
     this.editor.setSelectedShapes([]);
 
+    // PROTOTYPE (portal gesture, wayfinder cards-come-and-go ticket 04):
+    // the library swallows the card — POINTER-keyed, not center-keyed
+    // (Jess 2026-08-09: the multi-select "the pointer picks the one
+    // destination" policy holds for a single card too). This hook fires once
+    // per moving card, each checking the same pointer, so dropping a
+    // multi-select on the library swallows the whole group — each hook
+    // deleting only itself, deferred (see swallowIntoLibraryPortal).
+    // Placed ABOVE the zone-dedup early return: a group member whose own
+    // center-zone didn't change must still be swallowed. Counters fall off
+    // here (center-driven eviction below may not fire for this card), and
+    // no meta write for a card that's about to be deleted.
+    const pointerHit = topmostZoneAt(this.editor, this.editor.inputs.currentPagePoint);
+    if (pointerHit?.zone === "library") {
+      this.evictCounters(current, pointerHit);
+      swallowIntoLibraryPortal(this.editor, current, pointerHit);
+      return undefined;
+    }
+
     const zoneHit = this.zoneAt(current);
     const zone = zoneHit?.zone;
     const previousZone = (current.meta?.zone as string | undefined) ?? undefined;
@@ -288,13 +306,6 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       // onTranslateEnd never fires when only its parent moves.
       if (NON_BATTLEFIELD_ZONES.has(zoneHit.zone)) {
         this.evictCounters(current, zoneHit);
-      }
-
-      // PROTOTYPE (portal gesture, wayfinder cards-come-and-go ticket 04):
-      // the library swallows the card. Deletes only `current` (self), and
-      // deferred — see swallowIntoLibraryPortal.
-      if (zoneHit.zone === "library") {
-        swallowIntoLibraryPortal(this.editor, current, zoneHit);
       }
     }
 

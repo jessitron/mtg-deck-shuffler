@@ -54,17 +54,18 @@ table, then drag a card onto the library. Flip variants with the floating bottom
 
 1. Which arming feel — A/B/C or a mix ("B's veil with A's ring")?
 2. Which swallow moment — instant, slide-under, or inhale?
-3. Keying: pointer vs card-center. To feel the difference, grab a card by its **corner**
-   and hover the library's edge — pointer-keyed arming (A) can glow while the drop
-   (always card-center today) misses, and vice versa. If card-center wins for the portal,
-   it diverges from the existing all-zones armed signal (deliberately pointer-keyed for
-   the multi-select "one destination" rationale) — fine, but then the spec should say so.
+3. ~~Keying: pointer vs card-center.~~ **Decided (Jess, 2026-08-09): pointer-keyed.**
+   The multi-select policy — the pointer picks the one destination — holds for a single
+   card too. Prototype updated: arming and the swallow both key on the pointer in every
+   variant. Recorded with the `tabletop-shape-mechanics` owner (its KB notes the tension:
+   generic zone-entry `zoneAt()` is still center-keyed and needs reconciling when next
+   touched).
 4. Whose library? Owner-gating **cannot be prototyped yet** — cards have no `owner` prop
    until table-layout ticket 18 lands. Decide in principle; the command-zone plan
    (ticket 19's `isCommander && owner === seatId` gate) is the pattern it would share.
-5. Multi-select: dropping several cards swallows only those whose **centers** land in the
-   library (onTranslateEnd fires per moving card, each with its own center check). Is
-   that right, or should "drag one to the library, all go" hold (the graveyard rationale)?
+5. ~~Multi-select behavior.~~ **Decided by 3:** dropping a multi-select with the pointer
+   on the library swallows the whole group (each card's settle hook checks the same
+   pointer, deleting only itself). Smoke-tested.
 
 **Mechanics facts learned (for the spec and the shape-mechanics owner's -update when this
 resolves):** `onTranslateEnd` fires once *per moving shape* in a multi-select drag, and
