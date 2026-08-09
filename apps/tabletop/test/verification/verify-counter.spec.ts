@@ -289,12 +289,7 @@ test("a long label like 'lifelink' shrinks to fit inside the disc", async ({ pag
   await page.keyboard.type("lifelink");
   await page.keyboard.press("Escape");
 
-  // Whitespace-insensitive: the circle-aware fit may split the word across
-  // line divs, whose block boundaries read back as whitespace.
-  await expect(async () => {
-    const squished = await counter.evaluate((el) => (el.textContent ?? "").replace(/\s+/g, ""));
-    expect(squished).toBe("lifelink");
-  }).toPass({ timeout: 5000 });
+  await expect(counter).toHaveText("lifelink");
   // Fits = nothing is clipped by the disc's overflow:hidden: the rendered
   // content is no bigger than the visible box.
   const fits = await counter.evaluate((el) => ({

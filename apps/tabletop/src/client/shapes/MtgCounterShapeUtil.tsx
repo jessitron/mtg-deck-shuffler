@@ -1,21 +1,9 @@
 import { BaseBoxShapeUtil, HTMLContainer, TLShapePartial, useValue } from "tldraw";
 import { MtgCounterShape, mtgCounterShapeProps } from "../../shared/mtgCounterShape";
-import { fitCounterText, makeCanvasMeasure, MeasureText } from "./counterTextFit";
+import { fitCounterFont } from "./counterTextFit";
 import { useEffect, useRef, type CSSProperties } from "react";
 
 export const COUNTER_SIZE = 44;
-
-// One shared canvas-backed text measurer, resolving --font-chrome once — the
-// fit is only as good as its measurements, and Orbitron's glyph widths are
-// nothing like a generic estimate.
-let cachedMeasure: MeasureText | undefined;
-function counterMeasure(): MeasureText | undefined {
-  if (!cachedMeasure && typeof document !== "undefined") {
-    const family = getComputedStyle(document.documentElement).getPropertyValue("--font-chrome").trim() || "Orbitron";
-    cachedMeasure = makeCanvasMeasure(family);
-  }
-  return cachedMeasure;
-}
 
 /**
  * tabletop-physics ticket 18: `mtg-counter`, the disc a player drops onto a
@@ -82,10 +70,10 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
     // its proportions (the playmat-radius lesson: fixed px drifts as the
     // shape scales). Border width is --narrow-border (3px) at the default
     // 44px size, scaled with the disc. Font size shrinks to fit long labels
-    // like "lifelink" (Jess, 2026-08-08) and the LINE BREAKS are computed
-    // here, not by CSS — the browser wraps to the square content box and the
-    // round clip eats the corners of top/bottom lines. See counterTextFit.ts.
-    const { fontSize, lines } = fitCounterText(text, w, h, counterMeasure());
+    // like "lifelink" (Jess, 2026-08-08); the browser wraps within the
+    // square content box, and the round clip nibbling the corners of long
+    // labels is accepted — close enough. See counterTextFit.ts.
+    const { fontSize, lineCount } = fitCounterFont(text, w, h);
     const disc: CSSProperties = {
       width: w,
       height: h,
@@ -102,6 +90,7 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
       fontWeight: 700,
       lineHeight: 1.1,
       textAlign: "center",
+      overflowWrap: "anywhere", // a long single word ("lifelink") wraps rather than overflowing
       overflow: "hidden",
     };
 
@@ -114,9 +103,9 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
         <div className="tl-image-container" style={{ pointerEvents: "all" }}>
           {isEditing ? (
             // A textarea (not an input) so long labels wrap while editing,
-            // exactly as they will display. It can't flex-center its own
-            // text, so vertical centering is estimated padding from the same
-            // line arithmetic the fit uses.
+            // roughly as they will display. It can't flex-center its own
+            // text, so vertical centering is estimated padding from the
+            // fit's line count.
             <textarea
               data-testid="mtg-counter-input"
               ref={rInput}
@@ -143,14 +132,9 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
               style={{
                 ...disc,
                 display: "block",
-                // Approximate the display's centered, chord-wrapped layout
-                // while editing: side padding narrows the wrap toward the
-                // circle's chords, top padding vertically centers the block.
-                paddingLeft: w * 0.12,
-                paddingRight: w * 0.12,
                 paddingTop: Math.max(
                   0,
-                  (h - 2 * (h * (3 / COUNTER_SIZE)) - Math.max(1, lines.length) * 1.1 * fontSize) / 2,
+                  (h - 2 * (h * (3 / COUNTER_SIZE)) - Math.max(1, lineCount) * 1.1 * fontSize) / 2,
                 ),
                 resize: "none",
                 // Invisible chrome: editing changes nothing visually except
@@ -164,15 +148,7 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
             />
           ) : (
             <div data-testid="mtg-counter" style={disc}>
-              {/* Pre-broken lines from the circle-aware fit; whiteSpace: pre
-                  keeps the browser from re-wrapping them. */}
-              <div>
-                {lines.map((line, i) => (
-                  <div key={i} style={{ whiteSpace: "pre" }}>
-                    {line}
-                  </div>
-                ))}
-              </div>
+              {text}
             </div>
           )}
         </div>
