@@ -34,6 +34,11 @@ for (const variant of ["A", "B", "C"] as const) {
     await page.goto(`/t/${tableSlug}?variant=${variant}`);
     await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
+    // The switcher bar must be visible on loopback even in a production
+    // build — the fleet's ./run serves the built bundle, and an
+    // import.meta.env.DEV gate once hid the bar exactly where Jess reviews.
+    await expect(page.getByText(`PROTOTYPE ${variant}`)).toBeVisible();
+
     const instanceId = `portal-${variant}-${Date.now()}`;
     const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, {
       data: cardPlayed({

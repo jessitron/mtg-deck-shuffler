@@ -227,7 +227,10 @@ function cycle(delta: number) {
 /**
  * Floating bottom-center variant switcher — deliberately NOT part of the
  * design being judged (high-contrast pill). Arrows or ←/→ cycle; the URL
- * search param keeps the choice shareable and reload-stable. Dev-only.
+ * search param keeps the choice shareable and reload-stable. Loopback-only
+ * (NOT import.meta.env.DEV — the fleet's ./run serves a production Vite
+ * build, which would hide the bar exactly where Jess reviews it; same
+ * localhost test as TablePage's license-key handling).
  */
 export function PortalVariantSwitcher() {
   const variant = useValue("portalVariantBar", () => portalVariantAtom.get(), []);
@@ -243,7 +246,9 @@ export function PortalVariantSwitcher() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  if (!import.meta.env.DEV) return null;
+  const host = window.location.hostname.toLowerCase();
+  const loopback = host === "localhost" || host === "::1" || host === "[::1]" || /^127(?:\.\d{1,3}){3}$/.test(host);
+  if (!loopback) return null;
 
   const arrow: CSSProperties = {
     background: "none",
