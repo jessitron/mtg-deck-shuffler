@@ -6,7 +6,7 @@ Type: task
 Status: ready-for-agent
 Blocked by: 13 — build command-zone redraw (there must be a Command Zone to arrive in)
 
-note: Jess updated this on 8/9/26 to jive with decisions made since this ticket was defined.
+note: Jess updated this on 8/9/26 to jive with decisions made since this ticket was defined. See /Users/jessitron/code/jessitron/mtg-deck-shuffler/.scratch/tabletop-cards-come-and-go/map.md line 75
 
 **What to build:** When a player joins the table, the `seat.joined` event comes with an array of commanders (0-2). Create these cards as part of setup, and place them in the command zone (side by side if there are two, centered if 1).
 `mtg-card` gains two first-class, schema'd, synced props: `owner` (seatId) and `isCommander`
