@@ -21,6 +21,7 @@ import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
 import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
 import { MtgCounterTool } from "./shapes/MtgCounterTool";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
+import { PortalArmingOverlay, PortalVariantSwitcher } from "./shapes/portalGesturePrototype";
 
 // useSync (unlike <Tldraw>) builds its store schema from exactly the
 // shapeUtils it's given — it does NOT fold in tldraw's own defaults the way
@@ -59,6 +60,10 @@ function ToolbarWithCounter(props: React.ComponentProps<typeof DefaultToolbar>) 
 
 const components: TLComponents = {
   Toolbar: ToolbarWithCounter,
+  // PROTOTYPE (portal gesture ticket 04): library-arming visuals, drawn in
+  // viewport space over the canvas (the library's zone box is hidden under
+  // its opaque image, so arming can't render inside the shape).
+  InFrontOfTheCanvas: PortalArmingOverlay,
 };
 
 /**
@@ -158,6 +163,8 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
           onMount={aimCameraAtTheTable}
         />
       )}
+      {/* PROTOTYPE (portal gesture ticket 04) */}
+      <PortalVariantSwitcher />
     </div>
   );
 }

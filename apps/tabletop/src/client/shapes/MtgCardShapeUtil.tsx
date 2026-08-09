@@ -2,6 +2,7 @@ import { BaseBoxShapeUtil, HTMLContainer, TLDragShapesOutInfo, TLShape, TLShapeP
 import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
 import { MtgCounterShape } from "../../shared/mtgCounterShape";
 import { findOpenSpotsNearZoneEdge, Rect } from "./openSpotNearZoneEdge";
+import { swallowIntoLibraryPortal } from "./portalGesturePrototype";
 import { topmostZoneAt, ZoneHit } from "./zoneHitTest";
 
 const TAP_ANGLE = Math.PI / 2;
@@ -67,6 +68,17 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     const path = new Path2D();
     path.rect(0, 0, shape.props.w, shape.props.h);
     return path;
+  }
+
+  // PROTOTYPE (portal gesture ticket 04): animateShapes only interpolates
+  // x/y/rotation/opacity itself; props interpolation is delegated here. Lerp
+  // w/h so the swallow's shrink actually animates instead of snapping.
+  override getInterpolatedProps(start: MtgCardShape, end: MtgCardShape, t: number): MtgCardShape["props"] {
+    return {
+      ...end.props,
+      w: start.props.w + (end.props.w - start.props.w) * t,
+      h: start.props.h + (end.props.h - start.props.h) * t,
+    };
   }
 
   // JES-144: tap/untap a card by clicking it — a toggle, not a 4-way
@@ -211,6 +223,13 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       // onTranslateEnd never fires when only its parent moves.
       if (NON_BATTLEFIELD_ZONES.has(zoneHit.zone)) {
         this.evictCounters(current, zoneHit);
+      }
+
+      // PROTOTYPE (portal gesture, wayfinder cards-come-and-go ticket 04):
+      // the library swallows the card. Deletes only `current` (self), and
+      // deferred — see swallowIntoLibraryPortal.
+      if (zoneHit.zone === "library") {
+        swallowIntoLibraryPortal(this.editor, current, zoneHit);
       }
     }
 
