@@ -486,14 +486,25 @@ not by recomputing new numbers.**
   **the chip recipe now lives in three places** — `game.css` → `.hand-count` (the original),
   `design-candidates.css` → `.counter-mock` (the specimen), and the inline `disc` object in
   `MtgCounterShapeUtil.tsx`. Changing the chip look means all three, and if Jess rejects the
-  staged look, the mock and the shape change together. **The text layout is a fourth file:**
-  `counterTextFit.ts` computes font-size AND line breaks against the circle's chord widths,
-  because text inside a round-clipped element is laid out by CSS to the *square* content box
-  and the `border-radius` clip eats the corners of top/bottom lines — a general fact about
-  any round-clipped element, not a tldraw quirk. It measures with a real canvas
-  `measureText` on the resolved `--font-chrome`: Orbitron's glyph widths run far narrower
-  than a per-character estimate, so an estimate would break "lifelink" onto two lines that
-  genuinely fits on one. Its editing textarea (was an input pre-fit) carries the fleet's
+  staged look, the mock and the shape change together. **The text layout is a fourth file,
+  and it is deliberately MINIMAL (reverted to this same-day, 2026-08-08 — see
+  [history.md](history.md)):** `counterTextFit.ts` (~40 lines) exposes
+  `fitCounterFont(text, w, h)`, which shrinks the font from the `0.32 × h` base until an
+  ESTIMATED wrapped block (0.8em/char, 0.85 wrap slack) fits the SQUARE content box. The
+  browser does the actual wrapping (`overflowWrap: anywhere` on the disc); the display div
+  renders plain `{text}`. Two facts to keep straight: **(1)** a `border-radius` clip does
+  not change where CSS lays out text — the browser wraps to the square content box and the
+  round clip eats the corners of top/bottom lines (a general fact about any round-clipped
+  element, not a tldraw quirk) — but the app's posture is now **accept the corner nibble**,
+  not fix it. A circle-aware chord-wrapping fit was built and Jess reverted it ("too much
+  code and not core to this app... I'd put it in a library"). Don't rebuild it. **(2)**
+  Width is estimated, not canvas-measured, on purpose: canvas `measureText` **lies when the
+  webfont hasn't loaded** — an empty table renders no Orbitron, so the browser never even
+  fetches the font, and measurements come back in fallback-sans metrics (verified:
+  "lifelink" at 14px measured 44.6px vs real Orbitron ~90px). Any future canvas measurement
+  of `--font-chrome` must handle font loading first. The editing textarea keeps the same
+  shrinking font plus a `paddingTop` from the fit's estimated `lineCount` (no side padding
+  anymore); it (was an input pre-fit) carries the fleet's
   one sanctioned `outline: none` (see README → tldraw limits); its indicator is tldraw's
   default box (a plain rect via `getIndicatorPath` — not a custom treatment, per the
   indicator rule above).

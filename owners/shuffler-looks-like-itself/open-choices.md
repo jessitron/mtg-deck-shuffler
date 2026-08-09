@@ -580,9 +580,11 @@ self-rendering custom shape.
   discs are a sanctioned round category), 44px default. Border width is **proportional to
   `props.h`** (`h * 3/44` px); font-size starts at `h * 0.32` and **shrinks to fit long
   labels** (`counterTextFit.ts`, 2026-08-08 follow-up — Jess: "lifelink" was invisible at the
-  fixed size). The rest of the recipe is unchanged; the fit also computes the LINE BREAKS
-  against the circle's chord widths, because CSS wraps to the square content box and the round
-  clip eats the corners of top/bottom lines. Implemented as inline `CSSProperties` in
+  fixed size). The rest of the recipe is unchanged. The fit is deliberately minimal (a
+  circle-aware chord-wrapping version was built and reverted the same day — Jess: "too much
+  code and not core to this app"): the font shrinks until an estimated wrapped block fits the
+  square content box, the browser does the wrapping, and the round clip nibbling the corners
+  of long labels is **accepted** — see [history.md](history.md). Implemented as inline `CSSProperties` in
   `MtgCounterShapeUtil.tsx` (still no Tabletop ship-local stylesheet — ticket 18 deliberately
   didn't start one). **Staged on `/design` § `#counter-disc` (`.counter-mock` in
   `design-candidates.css`, badge `candidate`) in the same commit — this is

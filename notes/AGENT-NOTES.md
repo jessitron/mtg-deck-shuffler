@@ -15,6 +15,17 @@ commands, layout) go there instead — this file is for the "oh, _that's_ why" f
   to the worktree branch, so two sessions appending entries conflict routinely — keep
   both entries, HEAD's first).
 
+## Working-with-Jess gotchas
+
+- **Don't build library-grade infrastructure inside the app.** 2026-08-08: a
+  shrink-text-to-fit request grew into custom circle-aware line wrapping (chord widths,
+  word-preference thresholds) — Jess reverted it: *"too much code and not core to this
+  app. If that was a thing I was gonna do, I'd put it in a library... Not something I
+  wanna spend time testing properly."* The bar is the simplest close-enough behavior
+  (there: shrink font to fit the square box, let CSS wrap, accept the round clip
+  nibbling corners). If a mechanism deserves real testing rigor, that's the signal it
+  doesn't belong in this repo.
+
 ## Tabletop gotchas (apps/tabletop)
 
 - **tldraw is pinned exactly** (5.2.5 line, no caret): `room.updateStore` (server-side
