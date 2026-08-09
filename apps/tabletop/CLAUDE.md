@@ -121,9 +121,11 @@ Browser side (`src/client/observability/index.ts`, the fleet's only real OTel wr
 **The deployed table serves plain http:// on purpose and needs no tldraw key** —
 tldraw ≥ 4 blanks the canvas 5s after load on unlicensed **HTTPS** non-loopback
 hosts, and plain http is exempt (decided 2026-08-09; the app has no auth to protect
-anyway). The ALB has no 443 listener and its own IngressGroup (`tabletop-http`) —
-it can't share `only-one-alb-please`, because `ssl-redirect` is exclusive across a
-group. **Don't add TLS/443 back without reading README → Licensing.** All four
+anyway). The ALB rides its own IngressGroup (`tabletop-http`) — it can't share
+`only-one-alb-please`, because `ssl-redirect` is exclusive across a group. The main
+ingress is HTTP:80-only; `k8s/ingress-https-downgrade.yaml` (same group, 443 only)
+301s https-first browsers down to http. **Don't serve the app itself over 443
+without reading README → Licensing.** All four
 absolute-URL config spots must agree on the scheme: `k8s/configmap.yaml` (browser
 OTLP ×2), `k8s/collector.yaml` (CORS origin), and the Shuffler's
 `TABLETOP_PUBLIC_URL`. `chooseLicenseKey` (`src/client/chooseLicenseKey.ts`)
