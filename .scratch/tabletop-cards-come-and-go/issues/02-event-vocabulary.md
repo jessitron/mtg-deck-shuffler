@@ -41,3 +41,15 @@ for map 5? Today the Shuffler sends `seat.joined` while the contract file is nam
 than the schemas describe, and no code on either side loads `contracts/`. Minting new
 conformant messages next to unvalidated old ones is coherent only if it's a recorded
 choice.
+
+## Comments
+
+2026-08-08 (claude, on resolving ticket 01): This ticket is now unblocked. The channel is
+a **generic event inbox** per game (`eventsUrl`, handed out in `seat.joined`), so this
+ticket is purely vocabulary. Facts to reconcile deliberately (details in
+[ticket 01's answer](01-return-channel.md)): live wire traffic already diverges from
+`contracts/payloads/` (`seat.joined` vs `seat.taken`, initiator object vs string, envelope
+requires a Spine `tableId` nobody has — the table name is the key for now); the inbox
+handler must look up cards by `instanceId` (no such inbound path exists yet); TS-side
+contract validation is hand-rolled everywhere ("JES-128" TODO) — decide whether the new
+inbox makes it real or stays consistent.
