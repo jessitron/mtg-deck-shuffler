@@ -82,7 +82,7 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - **Landed (2026-08-08, ticket 12)**: `imageUrl` is gone, **replaced** by `frontImageUrl: string` (always `getCardImageUrl(card, "normal", "front")`) and `backImageUrl: string | null` (`getCardImageUrl(card, "normal", "back")` when `card.twoFaced`, else `null` — computed from `twoFaced`, never from whether `card.backImageUris` happens to be populated, per the watch point in [tabletop.md](tabletop.md#watch-points)). `face: gameCard.currentFace` is unchanged but now documented as "which face is up on arrival," not "which face I baked in." Zero contract churn — those fields are scaffolding, not contract. The field-by-field comment block above `CardPlayedEvent` and the interface itself were updated together. The matching edit is the hand-rolled `validationError` in `apps/tabletop/src/server/cardArrival.ts` (now requires `frontImageUrl: string` + `backImageUrl: string | null`). `test/port-tabletop/cardPlayedEvent.test.ts` asserts the new shape, including a case with `backImageUris` unset on a `twoFaced` card to prove the derivation is from `twoFaced`, not from stored-URI presence.
 - **On the Tabletop side, the payload now lands directly in shape `props`** — no baking, no unbaking. `cardArrival.ts`'s `CardArrival` interface mirrors the sender's shape 1:1, and `handleCardArrival` writes `frontImageUrl`/`backImageUrl`/`face` straight into the new `mtg-card` shape's `props` (see [tabletop.md](tabletop.md)). Flip is now structurally a pure `props.face` write; no gesture writes it yet.
 - Discard keeps `currentFace` (a flipped card is discarded as the face it was); mulligan resets it. If you add zone-moving operations, decide face-reset explicitly.
-- **Open: who is authoritative about `currentFace` for Table-zone cards.** Once the table can flip, "discard keeps `currentFace`" becomes a concrete divergence: a card flipped *on the table* and then discarded shows the **pre-flip** face on the Shuffler's screen (and in copy-to-clipboard). This owner raised it; it is now a must-decide in `.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` — either the table becomes authoritative for `{type:"Table"}` cards and the Shuffler stops trusting its copy, or flip-on-table is table-local and the divergence is accepted knowingly. Don't let an implementation settle this by accident.
+- **SETTLED (2026-08-08): the Shuffler is authoritative for `currentFace`; flip-on-table is table-local.** Decided in two halves. Physics ticket 06 (`575416b`): Jess accepted the divergence knowingly — a table-flipped card later discarded shows the pre-flip face on the Shuffler's screen and in copy-to-clipboard; "table becomes authoritative" would have required the Shuffler's first-ever inbound event listener. Cards-come-and-go ticket 02 (`7b7f868`) confirmed it on the wire: **`card.returned.v1` carries no `face` and no `faceDown`** (Jess: "cards removed from play no longer have a face up") — the table resets both axes locally on exit (ticket 06's rule), the Shuffler applies its own face rules on arrival, and the wire says nothing. Don't add a face field to return/removal events, and don't build a table→Shuffler face-sync channel.
 
 ## Watch Points
 
@@ -213,6 +213,22 @@ These are specific things that could break two-faced cards if changed elsewhere:
     colors (front border vs back). When implementing, also update the "until sleeve
     selection exists" comment on `cardBackImageUrl()` in
     `apps/shuffler/src/port-tabletop/types.ts` (~line 124) to point at the ticket.
+
+18. **`face` rides only events that show a card; removal events are faceless — decided,
+    not built (cards-come-and-go ticket 02, 2026-08-08).** The event vocabulary sorts
+    card events into face-carrying and faceless by one question: does this event reveal
+    or choose a face? `card.played` and the new `card.discarded.v1` carry `face` (a
+    discard shows the card publicly); `card.returned.v1`, `undo.card.played.v1`,
+    `undo.card.discarded.v1`, and the `commanders` entries on `seat.joined` carry
+    **none** (commanders always arrive in the command zone face up; table-flipping one
+    afterward is table-local). When adding a new card event kind, apply the same
+    question — don't cargo-cult `face` onto it. Two corollaries: `card.played.v1`'s
+    `zoneHint` narrows to `stack | battlefield` (graveyard traffic moves to
+    `card.discarded`), and the commanders' off-schema scaffolding
+    (`cardName`/`frontImageUrl`/`backImageUrl`) makes `seat.joined` a **second sender
+    site** bound by the `backImageUrl`-derived-from-`twoFaced` rule (see
+    [tabletop.md](tabletop.md#watch-points)), with the same test treatment as
+    `cardPlayedEvent.test.ts`.
 
 ## Not Related To
 

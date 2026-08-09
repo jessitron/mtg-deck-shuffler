@@ -41,10 +41,16 @@ Every component of the fleet that touches cards must hold this:
   structurally a pure `props.face` write — but **writing a new `face` is not built yet**;
   this ticket only unbaked the URLs so a future flip gesture has something to flip. Zone
   membership still lives in `meta.zone`, deliberately not moved into `props` (ticket 13's
-  job). The remaining open questions are the trigger gesture and `currentFace` authority
-  for Table-zone cards (ticket 06). See [tabletop.md](tabletop.md).
-- **Contract** — every event about playing/revealing a card carries `face` beside
-  `card: { scryfallId, instanceId }`. Names and image URLs are derivable
+  job). **Physics ticket 06 resolved (2026-08-08)** the two questions that were open here:
+  the trigger is two separate context-menu items ("Flip" / "Turn face down"), and
+  `currentFace` authority stays with the Shuffler — flip-on-table is table-local, the
+  divergence knowingly accepted. Neither gesture is built yet. See [tabletop.md](tabletop.md).
+- **Contract** — every event that *reveals or chooses* a face carries `face` beside
+  `card: { scryfallId, instanceId }` (`card.played`, and `card.discarded` once built —
+  a discard shows the card publicly). Events that remove a card from view carry **no**
+  face: `card.returned`, the `undo.*` kinds, and commanders riding `seat.joined` are all
+  faceless by decision (cards-come-and-go ticket 02, 2026-08-08 — Jess: "cards removed
+  from play no longer have a face up"). Names and image URLs are derivable
   conveniences, not identity. See [contract.md](contract.md).
 
 The sections below are the Shuffler-component view (the feature's birthplace).

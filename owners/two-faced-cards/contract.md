@@ -47,6 +47,35 @@ that doesn't match.
   payload. `seat.joined` has no schema in `contracts/` yet; writing one converges with
   table-layout ticket 06's deck-name field — one schema session covers both.
 
+## The vocabulary grew — cards-come-and-go ticket 02 (2026-08-08, `7b7f868`, decisions only)
+
+`.scratch/tabletop-cards-come-and-go/issues/02-event-vocabulary.md` § Answer named every
+message for cards leaving the table, undo, and commanders at seating. No schemas written
+yet — files to write/amend are listed in the ticket for build time. The face rules per kind:
+
+| Kind | `face`? | Why |
+|---|---|---|
+| `card.played.v1` | yes | plays reveal a chosen face; `zoneHint` **narrows to `stack \| battlefield`** |
+| `card.discarded.v1` (new, split from `card.played`) | yes | a discard shows the card publicly; payload `card`+`face`+`seat`, no `zoneHint` (graveyard *is* its meaning) |
+| `card.returned.v1` (new, one kind for BOTH table exits) | **no** — and no `faceDown` | Jess: "cards removed from play no longer have a face up." The table is not authoritative for a card's face (physics ticket 06); the Shuffler keeps its own `currentFace`. `occurredIn: "tabletop"` (portal drag) vs `"shuffler"` (Return button et al.) distinguishes the exits; payload `card`+`seat`+optional `fromZone` (absent when `occurredIn:"shuffler"`) |
+| `undo.card.played.v1` / `undo.card.discarded.v1` (new) | **no** | deletion neither reveals nor chooses a face; payload `card`+`seat`; undo kinds are named `undo.<full name of the event undone>` |
+| `commanders` on `seat.joined.v1` (new optional array, 0–2 of `{ card: { scryfallId, instanceId } }`) | **no** | a commander always arrives in the command zone face up; flipping it there afterward is table-local. Scaffolding (`cardName`/`frontImageUrl`/`backImageUrl`) rides off-schema, with `backImageUrl` derived from `twoFaced` — never stored-URI presence — making this a second sender site bound by that watch point |
+
+Also decided there, adjacent to this owner's territory:
+
+- **`envelope.v1` is amended in place** (free exactly now — zero conforming producers or
+  consumers exist): `tableId` drops `format: uuid` (pre-Spine, the table name IS the id),
+  and `initiator` becomes the object `{ seatId?, playerName }`.
+- **Contract validation gets real in this map, not map 5**: every receiver the map touches
+  loads `contracts/` and validates on receipt (ajv-style), rejecting unknown name/version
+  loudly. This retires the hand-rolled "JES-128" `if`-chains, including
+  `apps/tabletop/src/server/cardArrival.ts`'s `validationError` — when that lands, the
+  "two edit sites" for payload changes become one schema file plus real validators.
+- **`seat.taken` vs `seat.joined` are two facts, not two names for one** — `seat.joined`
+  (Shuffler→Tabletop: a seat's game connected, carrying how the player's stuff looks) vs
+  `seat.taken` (Spine's own join flow). Documented, deliberately not unified; convergence
+  is map-5 work.
+
 ## Watch points
 
 - Changing `face`'s shape (or the card reference) in `contracts/payloads/card.played.v1.json`
@@ -55,7 +84,9 @@ that doesn't match.
   old senders keep validating against v1.
 
 - Adding a new card-referencing event kind? Ask "does this event reveal or choose a
-  face?" If yes, `face` goes beside `card`, same shape as `card.played`.
+  face?" If yes, `face` goes beside `card`, same shape as `card.played`. This rule now
+  has worked precedent (ticket 02, see the vocabulary table above): `card.discarded`
+  yes; `card.returned`, both `undo.*` kinds, and `seat.joined`'s `commanders` no.
 - **Design the payload so it doesn't need to carry what it doesn't mean.** A shadow event
   ("seat 2 drew a card") shouldn't carry a face any more than it carries the card — not
   because a leak is dangerous, but because an event should say what happened and no more.

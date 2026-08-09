@@ -61,11 +61,13 @@ as a delta around the card's center (not its corner) so it composes with any fre
 rotation already applied, not read back out of `rotation` itself. Still verified by
 `test/verification/verify-card-rotate.spec.ts`.
 
-**Watch point, unchanged in substance:** `onClick` is still spoken for — by tap. The
-flip gesture still needs a different trigger; that's still ticket 06's open question,
-with menu placement scoped by `no-doubleclick-crop` in the repo-root `TODO.md`. The
-prediction in this section (when it described `MtgCardImageShapeUtil`) that the
-`BaseBoxShapeUtil` rewrite would "keep `onClick` as a base hook" held — it did.
+**Watch point, updated:** `onClick` is spoken for — by tap. Ticket 06 (resolved
+2026-08-08) chose the flip trigger accordingly: **two separate context-menu items**
+("Flip" / "Turn face down"), not any pointer gesture on the card — see "Resolved:
+ticket 06" below. Menu placement remains map 4's business (`no-doubleclick-crop` in
+the repo-root `TODO.md`). The prediction in this section (when it described
+`MtgCardImageShapeUtil`) that the `BaseBoxShapeUtil` rewrite would "keep `onClick` as
+a base hook" held — it did.
 
 ## Drag picked up the wrong card after a previous drag — fixed (2026-08-07, `959831c`), ported forward (ticket 12, 2026-08-08)
 
@@ -299,30 +301,41 @@ is hidden and what isn't."* Buoy `let-gamecardindex-out` in the repo-root `TODO.
 belongs on **payload design**, not as a boundary check on every door. See
 [contract.md](contract.md).
 
-## Still open — narrowed to ticket 06
+## Resolved: ticket 06 — flip gesture and face authority (2026-08-08, `575416b`)
 
-Ticket 12 (2026-08-08) built the structural foundation — both image URLs and `face` live
-on the shape now — but **did not build a flip gesture or set `faceDown` from anywhere**;
-`faceDown` exists in `props` with a hardcoded `false` at arrival and nothing writes it
-yet. `.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` was narrowed to
-exactly two questions, both of which this owner must be consulted on before that gesture
-is built, and ticket 13 (zone ownership boundary) is also still open:
+Ticket 12 built the structural foundation — both image URLs and `face` live on the shape —
+and ticket 06 (`.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` § Answer)
+then decided the two questions this section used to carry as open. **Decisions only —
+nothing writes `props.face` or `props.faceDown` yet**, and ticket 13 (zone ownership
+boundary) is still open. The four decisions, all binding on whoever builds flip:
 
-1. **The trigger gesture.** `onClick` is spoken for by tap (ticket 04), so flip and
-   turn-over each need a different gesture — context menu, hover affordance, one "turn
-   over" that does the right thing per card, or two separate actions. Menu *placement* is
-   map 4's business; the gesture is decided here.
-2. **Who is authoritative about `currentFace` for Table-zone cards.** Written into ticket 06
-   as a must-decide, from this owner's watch point: the Shuffler keeps `currentFace` on a
-   card at `{type:"Table"}`, and **discard keeps `currentFace`** — so a table-flipped card
-   sent to the graveyard shows the **pre-flip** face on the Shuffler's screen. Either the
-   table becomes authoritative for Table-zone cards and the Shuffler stops trusting its
-   copy, or flip-on-table is table-local and the divergence is accepted knowingly.
+1. **Trigger: two separate context-menu items** — "Flip" and "Turn face down" in tldraw's
+   right-click/long-press context menu (the surface furniture Lock/Unlock already uses).
+   Not a hover affordance, not a modifier-click, not one combined "turn over." Each item
+   shown/enabled from the card's own state: no "Flip" entry when `backImageUrl` is null
+   (`face:'back'` unreachable). Menu *placement/curation* is map 4's business.
+2. **`currentFace` authority: divergence accepted — flip-on-table is table-local.** The
+   Shuffler keeps trusting its own `currentFace`; a table-flipped Table-zone card later
+   discarded may show its pre-flip face on the Shuffler's screen/clipboard. Known, chosen
+   knowingly. Deciding fact (supplied by this owner): there is no inbound event path into
+   `GameState` today — "table authoritative" meant building the Shuffler's first inbound
+   listener plus a `card.flipped`-shaped event. **Confirmed on the wire by
+   cards-come-and-go ticket 02** (2026-08-08, `7b7f868`): `card.returned.v1` carries no
+   `face` and no `faceDown` — Jess: "cards removed from play no longer have a face up."
+3. **`faceDown` renders as a plain image swap** — the card-back/sleeve rendering, no
+   border/dimming/badge (confirmed with `shuffler-looks-like-itself`: no concealment
+   idiom exists anywhere in the fleet).
+4. **Leaving the table resets both axes**: a card returning to hand or library goes back
+   to `face:'front'`, `faceDown:false`, however it sat on the table. Matches the
+   Shuffler's `mulligan()` reset. The reset is performed **table-locally** (mechanism =
+   implementation detail); the return event says nothing about faces, and the Shuffler
+   applies its own face rules on arrival.
 
-When flip lands, turning a card over on the table is a physical event the Spine can hear
-(`card.flipped` or similar) — and it must say **which axis** moved: a transform to the other
-printed `face`, or a change of concealment (`faceDown`). See "the two ships mean different
-things by flip" above. Do NOT bake "front-ness" into shape identity.
+Consequence of decision 2 for the old closing note here: there is **no** `card.flipped`
+event toward the Shuffler — that design was considered and declined with the authority
+question. If a table-flip event is ever minted for the *Spine's* log, it must still say
+**which axis** moved (transform of `face` vs change of `faceDown`) — that rule stands. Do
+NOT bake "front-ness" into shape identity.
 
 ## Watch points
 
@@ -332,7 +345,10 @@ things by flip" above. Do NOT bake "front-ness" into shape identity.
   scryfallId+face — two Forests are two instances; one MDFC flipped is still one
   instance. **Since ticket 12, `instanceAlreadyOnTable` reads `props.instanceId`**
   (was `meta.instanceId` when identity lived in `meta`) — if a future change moves
-  identity again, this dedup check has to move with it.
+  identity again, this dedup check has to move with it. The coming **removal handlers**
+  (`card.returned` shuffler-initiated, `undo.card.played`, `undo.card.discarded` — all
+  poof the shape, attachments stay detached) will likewise look cards up by
+  `props.instanceId`, per cards-come-and-go ticket 02.
 - **`backImageUrl` must be derived from `card.twoFaced`, never from whether
   `backImageUris` happens to be stored.** This is the one sharp edge in the
   no-`twoFaced`-flag decision, and it lives entirely in `buildCardPlayedEvent`. The
