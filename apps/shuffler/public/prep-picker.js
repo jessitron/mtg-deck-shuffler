@@ -1,0 +1,84 @@
+// The table-look picker on /prepare (ticket 16). Each pick live-previews on
+// the page and persists into the prep with a fire-and-forget POST, so a
+// reload — and the seat.joined send at Shuffle Up — sees it.
+(function () {
+  const panel = document.querySelector(".table-look-panel");
+  if (!panel) return;
+  const prepId = panel.dataset.prepId;
+
+  function persist(fields) {
+    fetch("/prep-table-look/" + prepId, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(fields).toString(),
+    }).catch(function () {
+      // Fire-and-forget: the preview already happened; a lost pick just
+      // falls back to the previous saved state on reload.
+    });
+  }
+
+  function selectAmong(el, selector) {
+    panel.querySelectorAll(selector).forEach(function (b) {
+      b.classList.remove("table-look-selected");
+    });
+    el.classList.add("table-look-selected");
+  }
+
+  // Live preview: this IS the mat you're standing on. background-image
+  // longhand only — the shorthand would wipe the cover/center the shared
+  // .playmat rule declares.
+  function applyMatPreview(path) {
+    document.querySelectorAll(".playmat").forEach(function (mat) {
+      mat.style.backgroundImage = "url('" + path + "')";
+    });
+  }
+
+  // Live preview: the sleeve color is the player-identity signal — it tints
+  // the command-zone surround and the deck-title plaque. (Dressing the
+  // library is a later, separate task.) Inline style on purpose: sleeve hex
+  // is domain data, and a page-sheet rule on these shared components would
+  // leak onto /design.
+  function applySleeveTint(hex) {
+    document.querySelectorAll(".cool-command-zone-surround, .game-title").forEach(function (el) {
+      el.style.backgroundColor = hex || "";
+    });
+  }
+
+  panel.querySelectorAll(".table-look-mat").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      selectAmong(btn, ".table-look-mat");
+      applyMatPreview(btn.dataset.matPath);
+      persist({ "playmat-path": btn.dataset.matPath });
+    });
+  });
+
+  panel.querySelectorAll(".table-look-sleeve").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      selectAmong(btn, ".table-look-sleeve, .table-look-custom");
+      applySleeveTint(btn.dataset.sleeveColor);
+      persist({ "sleeve-color": btn.dataset.sleeveColor });
+    });
+  });
+
+  const custom = panel.querySelector(".table-look-custom");
+  const colorInput = panel.querySelector(".table-look-color-input");
+  if (custom && colorInput) {
+    // Tint on every drag of the native picker; persist only on commit.
+    colorInput.addEventListener("input", function () {
+      selectAmong(custom, ".table-look-sleeve, .table-look-custom");
+      applySleeveTint(colorInput.value);
+    });
+    colorInput.addEventListener("change", function () {
+      persist({ "sleeve-color": colorInput.value });
+    });
+  }
+
+  // A saved sleeve pick tints on load too (the mat arrives server-rendered).
+  const selectedSleeve = panel.querySelector(".table-look-sleeves .table-look-selected");
+  if (selectedSleeve) {
+    const hex = selectedSleeve.classList.contains("table-look-custom")
+      ? colorInput.value
+      : selectedSleeve.dataset.sleeveColor;
+    if (hex) applySleeveTint(hex);
+  }
+})();

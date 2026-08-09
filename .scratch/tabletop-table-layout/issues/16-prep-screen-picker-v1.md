@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: shuffler
 Type: task
-Status: ready-for-agent
+Status: done
 Blocked by: None — can start immediately
 
 **What to build:** On the Shuffler's prep screen, one surface with two fields. **Playmat:**
@@ -34,8 +34,19 @@ table; pick a sleeve color, see it captured).
 Consult owners: `shuffler-looks-like-itself` (picker appearance — swatch tiles, selection
 signal, color picker styling).
 
-- [ ] Prep screen offers curated playmat swatches, defaulting to the current hardcoded mat
-- [ ] A picked playmat renders on that seat's player area on the Tabletop (existing plumbing)
-- [ ] Prep screen offers a sleeve color picker plus quick swatches; choosing nothing is valid
-- [ ] Chosen sleeve color is held in the seat's prep state where the seat-joined send can reach it
-- [ ] Playwright covers the playmat pick end-to-end and the sleeve pick's capture
+- [x] Prep screen offers curated playmat swatches, defaulting to the current hardcoded mat
+- [x] A picked playmat renders on that seat's player area on the Tabletop (existing plumbing)
+- [x] Prep screen offers a sleeve color picker plus quick swatches; choosing nothing is valid
+- [x] Chosen sleeve color is held in the seat's prep state where the seat-joined send can reach it
+- [x] Playwright covers the playmat pick end-to-end and the sleeve pick's capture
+
+**Built (2026-08-09):** variant A landed as `views/partials/table-look-panel.ejs` +
+`public/prep-picker.js` + a `prepare.css` block; curated data in `src/table-look.ts`
+(5 aeoe mats, mana-pie quick picks). Picks persist immediately via
+`POST /prep-table-look/:prepId` into `PersistedGamePrep.playmatImagePath` /
+`.sleeveColor`; `sendSeatJoinedBestEffort` sends the picked mat as an absolute URL
+(default when unpicked). Live previews as designed. `/design` got a table-look-panel
+specimen. Verified: `verify-prep-picker.spec.ts` (5 specs) plus a picked-mat
+assertion in `verify-tabletop-integration.spec.ts`, and unit tests on the send +
+validators. Caveat, buoyed as `game-page-picked-mat`: /game still paints the
+default mat. Plan: `../plan-16.md`.

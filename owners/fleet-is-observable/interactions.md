@@ -8,7 +8,7 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
 - **OTel dependency versions and the ESM `--import` loader** (Shuffler, Tabletop) — the `-r` require hook silently fails to patch `import`ed modules.
 - **Express instrumentation config** — `ignoreLayersType: [MIDDLEWARE]` keeps traces at 2 spans, not 8.
 - **Samplers reading both semconv spellings** (`http.user_agent`/`user_agent.original`, `http.target`/`url.path`) — a sampler that stops matching fails open, silently.
-- **The Tabletop's browser collector** (`apps/tabletop/k8s/collector.yaml`, same-origin `/v1/traces`) — keyless browser export.
+- **The Tabletop's browser collector** (`apps/tabletop/k8s/collector.yaml`, same-origin `/v1/traces` + `/v1/logs`) — keyless browser export. Since `tabletop-http` (2026-08-09) the destination is **`http://`** on a dedicated ALB with no 443 listener (tldraw license gate); an `https://` browser OTLP URL is connection-refused and silently kills browser telemetry.
 - **The Shuffler's one page shell** (`formatHtmlHead` in `apps/shuffler/src/view/common/html-layout.ts`, since `b268414`) — every page's browser telemetry bootstrap (tab-id script → `hny.js` → guarded `Hny.initializeTracing`, in that order) comes from this one function; EJS pages reach it through `views/partials/head.ejs`. The `X-Browser-Tab-Id`/`game.browser_tab_id` browser↔server correlation depends on it.
 - **Auto-instrumentation carrying the trace** — the Shuffler creates zero manual spans; everything hangs off the ambient request span.
 - **The NodeSDK owning logs as well as traces** (`logRecordProcessors`) — that shared wiring is what gives log records the same resource (`service.name`, so the same dataset) and shutdown path as spans. It also means `OTEL_LOGS_EXPORTER` is inert on those ships.
@@ -51,10 +51,22 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
   pass it inline on the one command that needs it (never `export`), clean it up in the `cleanup()`
   trap. `VERIFY_PORT` and `VERIFY_DB_PATH` are both this shape now; don't invent a second one.
 - **Synthesizing spans from timestamps captured outside the process**: OTel reads a bare number as **millis** and errors on none of the ways you can get it wrong (seconds → 1970, nanos → year 55000, `undefined` → `NaN`). Validate against a plausibility window and skip the span rather than emit garbage. Recipe in README → Dev-tooling telemetry.
+- **Touching the Tabletop's ingress, its URL scheme, or "just adding TLS back"**: prod
+  `table.jessitron.honeydemo.io` is **plain http on purpose** (tldraw license gate — see
+  `apps/tabletop/README.md` → Licensing), on its own ALB (IngressGroup `tabletop-http`,
+  HTTP:80 only, no 443 listener). Four config spots are scheme-coupled and must agree, and
+  three of them are telemetry: `BROWSER_OTLP_TRACES_URL` + `BROWSER_OTLP_LOGS_URL`
+  (`apps/tabletop/k8s/configmap.yaml`), CORS `allowed_origins`
+  (`apps/tabletop/k8s/collector.yaml`), plus the Shuffler's `TABLETOP_PUBLIC_URL`. An
+  `https://` OTLP URL against this ALB is **connection-refused** — all browser spans and the
+  uncaught-error log pipeline vanish while the page works fine. Keep the healthcheck
+  annotations (`/health`, 30s) if the ingress moves again — they're part of the probe-noise
+  story. Both ALBs share the access-log bucket/prefix; ALB name in the object key tells them
+  apart.
 - **Upgrading `@opentelemetry/*`**: bare `GET` spans with no `http.route` afterward = ESM patching broke. Check the loader wiring (`node --import`, `register(...)`).
 - **Touching `apps/shuffler/src/telemetry-sampler.ts`**: keep `test/telemetry-sampler.test.ts` passing and meaningful — the previous inline sampler was silently broken for months (see README → History).
 - **Recording that something happened**: never `span.addEvent`. Attributes on the span you're in — always the first choice — or, when there's no span to hang it on, `log.info/warn/error` from that ship's `log.ts`. The two Node ships have that; the Spine doesn't yet (`spine-logs-in-traces` in `TODO.md`). The browser claim in README is stale — `logs-docs-catch-up` will fix it. Violation inventory in README.
-- **Touching either Node ship's `log.ts` or its `logRecordProcessors`**: the two ships are on different OTel version lines (0.219 / 0.221) with **incompatible constructor signatures** for the same classes. Don't paste between ships; run both ships' tests. Wrong shape = silent no-export.
+- **Touching either Node ship's `log.ts` or its `logRecordProcessors`**: the two ships are on different OTel version lines (0.219 / 0.221) with **incompatible constructor signatures** for the same classes. Don't paste between ships; run both ships' tests. Wrong shape = silent no-export. **And if the correct shape suddenly fails to typecheck, suspect the resolver, not the code**: a fresh worktree with no `node_modules` resolves the main checkout's hoisted types from the *other* version line — phantom TS errors against correct code, "fixed" only by `npm install` in the worktree, never by changing the constructor shape (`notes/AGENT-NOTES.md` → worktree node_modules leak; README → History 2026-08-09).
 - **Adding logging to a hot path**: logs are not sampled, on purpose. That's *readable* only because nothing logs per-request (not a money question — ingest is free). If you're about to, put it on the span instead, where it correlates with everything else — or reopen the sampling question deliberately (README → Invariant 2).
 - **Adding HTTP middleware or changing routes**: confirm spans still get `http.route` and the route-param stamping (`stampRouteParamsOnSpan`) still fires.
 - **Editing `apps/shuffler/src/view/common/html-layout.ts` or `views/partials/head.ejs`**: the

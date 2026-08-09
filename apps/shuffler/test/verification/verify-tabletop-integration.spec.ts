@@ -18,7 +18,7 @@ import { test, expect, Page } from '@playwright/test';
 import { spawn, ChildProcess } from 'node:child_process';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
-import { seedGame } from './seedGame.js';
+import { seedPrep, startGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 // verify.sh gives each run its own tabletop port and exports TABLETOP_URL to
@@ -59,8 +59,13 @@ test.afterAll(() => {
   tabletop?.kill();
 });
 
+/** A non-default mat picked on /prepare — seat.joined must carry it (ticket 16). */
+const PICKED_MAT = '/images/aeoe-6-seam-rip.png';
+
 async function startGameAtTable(page: Page, tableName: string): Promise<void> {
-  const gameId = await seedGame(page, undefined, { tableName, playerName: 'E2E Jess' });
+  const prepId = await seedPrep(page);
+  await page.request.post(`${BASE_URL}/prep-table-look/${prepId}`, { form: { 'playmat-path': PICKED_MAT } });
+  const gameId = await startGame(page, prepId, { tableName, playerName: 'E2E Jess' });
   await page.goto(`${BASE_URL}/game/${gameId}`);
 }
 
@@ -99,6 +104,12 @@ test.describe('Two-app flow: Shuffler plays to the Tabletop', () => {
     const spectator = await context.newPage();
     await spectator.goto(`${TABLETOP_URL}/t/${tableName}`);
     await expect(spectator.locator('.tl-canvas')).toBeVisible({ timeout: 15000 });
+
+    // The playmat picked on /prepare (ticket 16) dresses this seat's player
+    // area — the mat image asset carries the picked URL, not the default.
+    await expect(
+      spectator.locator('[style*="aeoe-6-seam-rip"], img[src*="aeoe-6-seam-rip"]').first()
+    ).toBeVisible({ timeout: 15000 });
 
     // Play the first hand card: send-then-commit succeeds against the real tabletop
     await actOnFirstHandCard(page, 'Play', '6');

@@ -43,6 +43,7 @@
           <a href="#type">Typography</a>
           <a href="#geometry">Geometry &amp; spacing</a>
           <a href="#buttons">Buttons</a>
+          <a href="#table-look">Table look picker</a>
           <a href="#focus">Focus states</a>
           <a href="#inputs">Text inputs</a>
           <a href="#surfaces">Surfaces</a>
@@ -539,6 +540,50 @@
             (<code>::after</code>) on top of the shared shape — a standalone decision, not part of
             JES-155, made when the underline-only elevation difference proved too subtle.</li>
         </ul>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="table-look">
+        <h2>Table look picker <span class="badge badge-standard">standard</span></h2>
+        <p class="section-note">
+          The prep screen's setup panel (ticket 16, prototype variant A approved 2026-08-09):
+          curated playmat swatches and a sleeve color row — None (the standard Magic back,
+          null ⇔ unsleeved), the mana pie, and a custom color input. Selection signal is the
+          <code>.hero-button.active</code> pattern: locked lift + 4px dark-pink underline.
+          The picked sleeve color tints the command-zone surround and the deck-title plaque
+          as a live preview (inline style — sleeve hex is domain data, a player's choice).
+        </p>
+
+        <div class="options">
+          <div class="option">
+            <div class="option-label">Setup panel — .table-look-panel</div>
+            <div class="stage stage-playmat">
+              <section class="table-look-panel" aria-label="Playmat and sleeves (specimen)">
+                <div class="table-look-row">
+                  <span class="table-look-label">Playmat</span>
+                  <div class="table-look-mats">
+                    <button type="button" class="table-look-mat table-look-selected" title="Cascading Cataracts" style="background-image: url('/images/aeoe-43-cascading-cataracts.png')"></button>
+                    <button type="button" class="table-look-mat" title="Seam Rip" style="background-image: url('/images/aeoe-6-seam-rip.png')"></button>
+                    <button type="button" class="table-look-mat" title="Terrasymbiosis" style="background-image: url('/images/aeoe-41-terrasymbiosis.png')"></button>
+                  </div>
+                </div>
+                <div class="table-look-row">
+                  <span class="table-look-label">Sleeves</span>
+                  <div class="table-look-sleeves">
+                    <button type="button" class="table-look-sleeve table-look-none-chip table-look-selected" title="No sleeves (standard Magic back)"></button>
+                    <button type="button" class="table-look-sleeve" title="Green" style="background-color: #2a8439"></button>
+                    <button type="button" class="table-look-sleeve" title="Blue" style="background-color: #3c99e5"></button>
+                    <label class="table-look-custom">
+                      custom
+                      <input type="color" class="table-look-color-input" value="#bb5277" />
+                    </label>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="option-where">prepare.css — /prepare only. Panel frame is the play pages' <code>black</code>, square corners; the pressable swatches get <code>--radius-soft</code>. The color input reproduces <code>.candidate-input</code>'s values (choice 6) at <code>--radius-soft</code> — a color input is pressed, not typed into.</div>
+          </div>
+        </div>
       </section>
 
       <!-- ================================================================ -->

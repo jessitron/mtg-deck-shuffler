@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { getCardImageUrl } from "../types.js";
 import { GameCard } from "../domain-types.js";
 import { CARD_BACK } from "../view/common/shared-components.js";
+import { DEFAULT_PLAYMAT_PATH } from "../table-look.js";
 
 // ============================================================================
 // SCAFFOLDING — the seam the Spine absorbs.
@@ -130,12 +131,20 @@ export function cardBackImageUrl(): string {
 }
 
 /**
- * The one hard-coded playmat (DESIGN.md — playmat selection in prep is
- * deferred), as an absolute URL. Same image already used as the prepare
- * screen's playmat background (public/prepare.css `.playmat-prepare`).
+ * The playmat an unpicked seat gets (ticket 16 added the prep-screen picker),
+ * as an absolute URL. Same image the bare `.playmat` rule paints by default
+ * (public/playmat.css).
  */
 export function defaultPlaymatImageUrl(): string {
-  return `${shufflerPublicUrl()}/images/aeoe-43-cascading-cataracts.png`;
+  return playmatImageUrlFromPath(DEFAULT_PLAYMAT_PATH);
+}
+
+/**
+ * A picked playmat travels as an absolute URL (opaque to the Tabletop); the
+ * prep stores only the relative path — see PersistedGamePrep.playmatImagePath.
+ */
+export function playmatImageUrlFromPath(path: string): string {
+  return `${shufflerPublicUrl()}${path}`;
 }
 
 export const SEAT_JOINED_EVENT_NAME = "seat.joined" as const;
@@ -152,10 +161,10 @@ export interface SeatJoinedEvent {
 }
 
 /**
- * Build the seat.joined payload. There's only one hard-coded playmat today
- * (DESIGN.md — playmat selection is deferred prep work); the card back is the
- * standard Magic card back for an unsleeved seat, and omitted for a sleeved
- * one — sleeveColor wins if both ever arrive (contract: seat.joined.v1).
+ * Build the seat.joined payload. The playmat is the prep-screen pick (ticket
+ * 16) or the default; the card back is the standard Magic card back for an
+ * unsleeved seat, and omitted for a sleeved one — sleeveColor wins if both
+ * ever arrive (contract: seat.joined.v1).
  */
 export function buildSeatJoinedEvent(
   initiator: Initiator,

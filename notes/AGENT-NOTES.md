@@ -15,6 +15,16 @@ commands, layout) go there instead — this file is for the "oh, _that's_ why" f
   to the worktree branch, so two sessions appending entries conflict routinely — keep
   both entries, HEAD's first).
 
+- **A fresh worktree has no `node_modules`, and resolution silently leaks to the main
+  checkout's hoisted copy.** Worktrees live *inside* the repo (`.claude/worktrees/…`), so
+  Node/tsc walk up past the worktree root and find the shared checkout's root
+  `node_modules`. Where the ships pin different versions of the same package — notably
+  OTel: Tabletop sdk-logs 0.221 (options-object `BatchLogRecordProcessor({ exporter })`),
+  Shuffler 0.219 (positional) — this produces phantom type errors against the *wrong
+  ship's* types (hit 2026-08-09: `'exporter' does not exist in type 'LogRecordExporter'`
+  in `apps/tabletop/src/server/tracing.ts`, which is correct code). Fix: run
+  `npm install` from the worktree root before believing any build failure.
+
 ## Working-with-Jess gotchas
 
 - **Don't build library-grade infrastructure inside the app.** 2026-08-08: a

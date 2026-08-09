@@ -104,11 +104,26 @@ the default answer and a log is the exception. (Cost was never the reason; see "
 
 ### 3. While ingest keys are OK to commit to git and publish in the browser, Collectors are better.
 
-Prod: same-origin `/v1/traces`, ALB-routed to a dedicated
-`mtg-tabletop-collector` (`apps/tabletop/k8s/collector.yaml`, `BROWSER_OTLP_TRACES_URL` in
-`apps/tabletop/k8s/configmap.yaml`) — no key in the page, no CORS. Local: `otel-collector-local.yaml`,
-or the local-only `ALLOW_BROWSER_DIRECT_HONEYCOMB=true` key fallback in
-`apps/tabletop/src/server/server.ts:33-45`.
+Prod: same-origin `/v1/traces` and `/v1/logs`, ALB-routed to a dedicated
+`mtg-tabletop-collector` (`apps/tabletop/k8s/collector.yaml`, `BROWSER_OTLP_TRACES_URL` /
+`BROWSER_OTLP_LOGS_URL` in `apps/tabletop/k8s/configmap.yaml`) — no key in the page, no CORS.
+Local: `otel-collector-local.yaml`, or the local-only `ALLOW_BROWSER_DIRECT_HONEYCOMB=true` key
+fallback in `apps/tabletop/src/server/server.ts:33-45`.
+
+**Since `tabletop-http` (2026-08-09) the destination is `http://`, not `https://`, on purpose.**
+The Tabletop left the shared `only-one-alb-please` IngressGroup for its own group `tabletop-http`
+(`apps/tabletop/k8s/ingress.yaml`): a dedicated ALB with a single HTTP:80 listener and **no 443
+listener at all** — tldraw's license gate blanks an unlicensed canvas on HTTPS non-loopback
+origins, and `ssl-redirect` is exclusive across an IngressGroup, so there was no per-host http
+carve-out in the shared group. Consequence for this invariant: an `https://` browser OTLP URL is
+**connection-refused**, silently killing all browser telemetry including the uncaught-error
+pipeline. **Four config spots are scheme-coupled and must agree**: `BROWSER_OTLP_TRACES_URL` and
+`BROWSER_OTLP_LOGS_URL` in `apps/tabletop/k8s/configmap.yaml`, the CORS `allowed_origins` in
+`apps/tabletop/k8s/collector.yaml`, and the Shuffler's `TABLETOP_PUBLIC_URL`
+(`apps/shuffler/k8s/configmap.yaml`, fallback in `apps/shuffler/src/view/play-game/active-game-page.ts`).
+The collector→Honeycomb leg stays `https://api.honeycomb.io`. Access logs: both ALBs write to the
+same bucket/prefix (`orion-alb-access-logs` / `orion-alb`); object keys embed the ALB name, so
+they stay distinguishable.
 
 ### 4. Head-sample heath checks; keep all user activity.
 
@@ -168,6 +183,16 @@ same class can have a different constructor: `new BatchLogRecordProcessor(export
 the wrong shape leaves the exporter `undefined`, the export throws inside a promise into the global
 error handler, and **nothing reaches Honeycomb while the code looks right**. Duplicated telemetry
 files therefore get a test in *each* ship — that is the only reason this was caught.
+
+**The same skew also produces PHANTOM type errors — a build failure against correct code.**
+(2026-08-09.) A fresh worktree has no `node_modules`, and because worktrees live *inside* the repo
+(`.claude/worktrees/…`), tsc walks up and resolves the main checkout's hoisted sdk-logs **0.219**
+types — so the Tabletop's correct 0.221 options-object line at
+`apps/tabletop/src/server/tracing.ts:64` "fails" with `'exporter' does not exist in type
+'LogRecordExporter'`. **The fix is `npm install` from the worktree root, never a code change** —
+"fixing" the line to the positional shape would compile clean and silently export nothing (the
+exact bug the comment at that line warns about). Documented in `notes/AGENT-NOTES.md` → "Harness
+gotchas"; a STOP verdict from this owner prevented exactly that miscorrection.
 
 **`service.name` from a resource vs. from the environment: the two providers behave OPPOSITELY.**
 Checked in `node_modules` at OTel JS 2.8 (2026-08-07), not reasoned:
@@ -728,6 +753,43 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
   the review surfaced a latent fails-open-invisibly (the `"undefined"`-apiKey gap, buoyed as
   `browser-tracing-key-guard`) precisely because unifying forced someone to read both copies side
   by side. Full wiring now documented in "The Shuffler's browser bootstrap" above.
+
+- **2026-08-09 (`11b6230`): the 0.219/0.221 skew gained a second failure mode, and this time the
+  danger ran the other way.** An agent in a fresh worktree hit TS2561 on the Tabletop's correct
+  `BatchLogRecordProcessor({ exporter })` line and came asking how to "fix" it. The build error was
+  the *environment*: no `node_modules` in the worktree, so tsc resolved the main checkout's hoisted
+  sdk-logs 0.219 types. The tempting fix — rewriting to 0.219's positional shape — would have
+  compiled and **silently exported nothing**, the original skew bug reintroduced by its own
+  compiler-shaped disguise. This owner's context consult said STOP, no code change; `npm install`
+  from the worktree root resolved it and all tests (including the constructor-shape assertion in
+  `apps/tabletop/test/log.test.ts`) pass. Lesson: **when duplicated-on-purpose telemetry code
+  suddenly fails to typecheck, suspect the resolver before the code** — the constructor-shape test
+  exists precisely so the code's correctness is a checkable fact, not a judgment call under a red
+  build. Gotcha recorded in `notes/AGENT-NOTES.md`.
+
+- **2026-08-09, `tabletop-http` (branch worktree-tabletop-http): prod Tabletop went plain http,
+  and the browser telemetry destination moved with it.** tldraw ≥ 4 blanks an unlicensed canvas 5s
+  after load on HTTPS non-loopback origins; plain http is exempt, so
+  `table.jessitron.honeydemo.io` now rides its own ALB (IngressGroup `tabletop-http`, HTTP:80
+  only, no TLS). What this owner learned and caught:
+  - **The review caught a would-be silent outage before it shipped**: the first draft left
+    `BROWSER_OTLP_TRACES_URL`/`BROWSER_OTLP_LOGS_URL` as `https://` absolute URLs. With no 443
+    listener that's connection-refused — every browser span *and* the uncaught-error log pipeline
+    gone, with a page that otherwise works perfectly. Fails-open-invisibly, browser-transport
+    edition. Fixed in the same change; the configmap now carries a comment saying why http.
+  - **Scheme is now coupled config across ships**: the four spots listed under Invariant 3 must
+    agree (tabletop configmap ×2, collector CORS `allowed_origins`, Shuffler
+    `TABLETOP_PUBLIC_URL`). "Add TLS back" is a four-file change plus reading the Tabletop
+    README → Licensing, not an ingress tweak.
+  - Also landed: `apps/tabletop/deploy.sh` dropped its `TLDRAW_LICENSE_KEY` hard-fail and checks
+    the deployed canvas over http; a new runtime guard
+    (`apps/tabletop/src/client/chooseLicenseKey.ts`) withholds any baked tldraw key on non-https
+    origins — withholding means **empty string, not `undefined`** (undefined lets tldraw read the
+    vite-baked env key itself). Healthcheck annotations (path `/health`, 30s interval — the probe
+    sampling story) carried over to the new ALB unchanged; `KubeProbeAwareSampler` untouched;
+    marker call and `.be`/`.env` sourcing in `deploy.sh` untouched.
+  - **Post-deploy verification still owed at time of writing**: open the deployed table over http
+    and confirm browser spans land in `mtg-tabletop-web` (env `mtg-deck-shuffler`).
 
 ## Related reading
 

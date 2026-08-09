@@ -131,6 +131,24 @@ describe("sendSeatJoinedBestEffort", () => {
     expect(event.playmatImageUrl).toMatch(/^https:\/\//);
   });
 
+  it("a picked playmat travels as an absolute URL (ticket 16)", async () => {
+    const fake = new FakeTabletopGateway();
+
+    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", undefined, "/images/aeoe-6-seam-rip.png");
+
+    const { event } = fake.sentSeatJoinedEvents[0];
+    expect(event.playmatImageUrl).toMatch(/^https:\/\/.*\/images\/aeoe-6-seam-rip\.png$/);
+  });
+
+  it("no playmat picked → the default mat travels", async () => {
+    const fake = new FakeTabletopGateway();
+
+    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck");
+
+    const { event } = fake.sentSeatJoinedEvents[0];
+    expect(event.playmatImageUrl).toMatch(/aeoe-43-cascading-cataracts\.png$/);
+  });
+
   it("no sleeve picked → no sleeveColor, standard card back (today's look)", async () => {
     const fake = new FakeTabletopGateway();
 

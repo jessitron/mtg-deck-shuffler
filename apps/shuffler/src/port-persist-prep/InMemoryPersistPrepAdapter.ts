@@ -14,6 +14,7 @@ interface StoredPrep {
   playerName?: string;
   seatId?: string;
   sleeveColor?: string;
+  playmatImagePath?: string;
 }
 
 export class InMemoryPersistPrepAdapter implements PersistPrepPort {
@@ -53,6 +54,7 @@ export class InMemoryPersistPrepAdapter implements PersistPrepPort {
       playerName: stored.playerName,
       seatId: stored.seatId,
       sleeveColor: stored.sleeveColor,
+      playmatImagePath: stored.playmatImagePath,
     };
   }
 

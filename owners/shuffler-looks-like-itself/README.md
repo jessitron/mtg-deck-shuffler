@@ -261,8 +261,41 @@ distinction the app actually draws, not drift (caught 2026-08-02, see
 not part of `shuffler-design-choices`).** `.hero-button.active` (Precon/Archidekt on `/choose-any-deck`)
 gets a `4px` dark-pink underline via `::after`, on top of the shared press physics.
 Elevation alone (the "already pressed" look from choice 1) read as too subtle to signal
-mutual exclusivity. This is a one-off pattern for exclusive-choice controls, not a new
-button color rule — don't reuse it for ordinary buttons.
+mutual exclusivity. This is a pattern for exclusive-choice controls, not a new
+button color rule — don't reuse it for ordinary buttons. **Second live instance
+(2026-08-09, ticket 16, `8995c1a`):** `.table-look-selected` on the prep-screen picker's
+swatches — locked lift plus the same 4px `--dark-pink` `::after` underline. Its shadows
+are black-rgba only; it deliberately did **not** copy `.hero-button`'s `#897b89` hex,
+which is recorded drift. One mechanical wrinkle worth reusing: an `<input>` can't carry
+`::after`, so the custom color input's selected state sits on its wrapper
+`<label class="table-look-custom">` instead.
+
+**The table-look panel is the prep screen's setup surface (decided 2026-08-09 —
+prototype variant A approved by Jess, `683ca1c`; shipped by ticket 16, `8995c1a`).**
+`.table-look-panel` in `prepare.css`: one opaque white panel on the prepare mat
+(grid-column 2/7, row 4), framed `var(--narrow-border) solid black` — the play pages'
+frame keyword, deliberately **not** the join-table panel's `#888` drift — square corners
+(flat surface), with only the pressable swatches carrying `--radius-soft`. Two rows:
+Playmat (five `aeoe-*` image swatch buttons, 96×54) and Sleeves (a None chip showing the
+standard Magic card back — `null` ⇔ unsleeved — five mana-pie chips 44×44, and a custom
+`<input type="color">`). Markup in `views/partials/table-look-panel.ejs`, behaviour in
+`public/prep-picker.js`. Three facts that outlive the ticket:
+
+- **The swatches' press physics are a THIRD press behaviour, and that's a recorded
+  judgement call, not a settled rule.** Rest at 0, hover `translateY(-2px)` + black-rgba
+  shadow — the prototype's exact physics, which Jess approved as part of variant A. Not
+  `.pushable-flat`'s numbers (rest −4px / hover −6px / press −2px) and not `.hero-button`'s.
+  Either it's sanctioned-for-swatches or a future sweep target; don't copy it to a fourth
+  site, and don't "fix" it to `.pushable-flat` without asking.
+- **Live previews are inline styles on purpose.** The sleeve pick tints
+  `.cool-command-zone-surround` and `.game-title` via JS inline `backgroundColor` (sleeve
+  hex is domain data — a page-sheet rule on shared components would leak onto `/design`);
+  the mat pick sets inline `background-image` **longhand** on `.playmat` — never the
+  shorthand, which would wipe the shared rule's `cover`/`center`. `/prepare` also
+  server-renders the picked mat the same way.
+- **`/game` still paints the default mat** (the bare `.playmat` rule) while `/prepare` and
+  the Tabletop show the pick — a known gap, buoyed as `game-page-picked-mat` in `TODO.md`,
+  not an oversight to silently fix.
 
 **The nav-link idiom is the fleet's only text-link treatment, and it now has two live
 instances (second: 2026-08-09, `6b6b927`).** White `--font-chrome` type on a dark surface.
@@ -359,11 +392,17 @@ inset by the shared `LIBRARY_PILE_INSET` (12, moved to
 `apps/tabletop/src/shared/mtgZoneShape.ts`, used by server image geometry and client sleeve
 geometry alike), radius 5% of the *inset* width; the zone shape's opacity is 1 when sleeved
 and the component fades just the box chrome to 0.5, so the pile stays as vivid as the cards
-while the furniture keeps its composite look. **Still undecided:** the picker's
-default/swatch palette (ticket 16's picker — no default sleeve color exists; `null` ⇔
-unsleeved, today's bare look), and there is no `/design` specimen yet (buoyed as
-`design-sleeve-specimen` in `TODO.md`). v1 is one color; distinct front/back colors or an
-image sleeve are someday-maybes, deferred.
+while the furniture keeps its composite look. **The picker palette is now DECIDED
+(2026-08-09, ticket 16, `8995c1a`):** the sleeve quick-picks are the **mana pie five**
+(hexes in `src/table-look.ts` mirror the `--mana-*` tokens — its comment says "change a
+token there, visit here"), plus a None chip showing the standard Magic card back (`null`
+⇔ unsleeved — still no default *color*) and a custom `<input type="color">`. The playmat
+set is the five `aeoe-*` images from the approved prototype — one **more** than the four
+`site.css` hero backgrounds issue 09 named (seam-rip is the fifth); the prototype verdict
+(`683ca1c`) ratified five. There is still no `/design` specimen of the rendered *sleeve
+on a card* (buoyed as `design-sleeve-specimen` in `TODO.md` — the picker panel itself
+does have a specimen, `#table-look`; they are different things). v1 is one color;
+distinct front/back colors or an image sleeve are someday-maybes, deferred.
 
 **The seat name label pairs player name and deck name as two lines, player first (decided
 2026-08-08, ticket 15 of the Table-layout map, `4263ef8`).** The Tabletop's seat label — the

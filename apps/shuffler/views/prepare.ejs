@@ -15,7 +15,9 @@
     }) %>
 
     <main class="prepare-container">
-        <div class="playmat playmat-prepare">
+        <%# background-image longhand only: the shared .playmat rule declares
+            cover/center as separate longhands, and the shorthand would wipe them %>
+        <div class="playmat playmat-prepare" style="background-image: url('<%= selectedPlaymatPath %>')">
           <%- renderDeckTitle() %>
           <div id="library-section" class="library-section" data-testid="library-section">
             <div class="library-stack-clickable"
@@ -33,6 +35,14 @@
             </div>
           </div>
           <%- renderCommandZone() %>
+
+          <%- include('partials/table-look-panel', {
+            playmats: playmats,
+            selectedPlaymatPath: selectedPlaymatPath,
+            sleeveQuickPicks: sleeveQuickPicks,
+            sleeveColor: prep.sleeveColor,
+            prepId: prep.prepId
+          }) %>
 
           <div class="shuffle-up-section">
             <form method="post" action="/start-game" class="inline-form">
@@ -65,6 +75,7 @@
 
   <script src="/htmx.js"></script>
   <script src="/modal-query-params.js"></script>
+  <script src="/prep-picker.js"></script>
   <script>
     // Configure HTMX with browser tab ID
     document.addEventListener("htmx:configRequest", function (event) {

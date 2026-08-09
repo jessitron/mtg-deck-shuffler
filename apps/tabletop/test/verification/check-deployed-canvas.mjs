@@ -10,9 +10,12 @@
  * observed is the deployed host, so this check takes a URL and is run by
  * deploy.sh after the rollout.
  *
+ * Prod dodges the gate by serving plain http:// (the gate needs HTTPS), so on
+ * the deployed host this check proves the http exemption actually holds.
+ *
  * Usage:
  *   node test/verification/check-deployed-canvas.mjs [baseUrl] [tableName]
- * Defaults to https://table.jessitron.honeydemo.io and a throwaway table name.
+ * Defaults to http://table.jessitron.honeydemo.io and a throwaway table name.
  *
  * Exits 0 if the canvas survives, 1 with a diagnosis if it does not.
  */
@@ -21,7 +24,7 @@ import { chromium } from "@playwright/test";
 const LICENSE_TIMEOUT_MS = 5000; // @tldraw/editor LICENSE_TIMEOUT
 const GRACE_MS = 4000; // comfortably past it
 
-const baseUrl = (process.argv[2] ?? "https://table.jessitron.honeydemo.io").replace(/\/$/, "");
+const baseUrl = (process.argv[2] ?? "http://table.jessitron.honeydemo.io").replace(/\/$/, "");
 const table = process.argv[3] ?? "canvas-check";
 const url = `${baseUrl}/t/${encodeURIComponent(table)}`;
 
@@ -53,9 +56,13 @@ try {
       "tldraw hid the editor — the table is BLANK.\n" +
       "  This is the license gate, not a sync or rendering problem.\n" +
       `  Complaints from tldraw: ${licenseComplaints.join(" / ") || "(none captured)"}\n` +
-      "  Fix: set TLDRAW_LICENSE_KEY in the repo-root .be and redeploy.\n" +
-      "  A key valid for a DIFFERENT domain fails the same way — it must cover\n" +
-      `  ${new URL(baseUrl).hostname}. Free hobby license: https://tldraw.dev/get-a-license/hobby`;
+      "  The gate should only fire on HTTPS non-loopback origins — prod serves\n" +
+      "  plain http:// precisely to stay exempt. If it fired on http, either\n" +
+      "  the page was reached over https after all (check the URL above and the\n" +
+      "  ALB listeners in k8s/ingress.yaml), or tldraw changed the gate's rules\n" +
+      "  in an upgrade. Fallback fix: a valid TLDRAW_LICENSE_KEY in the\n" +
+      `  repo-root .be covering ${new URL(baseUrl).hostname}, then redeploy.\n` +
+      "  Free hobby license: https://tldraw.dev/get-a-license/hobby";
   } else {
     console.log(`✓ canvas still present ${(LICENSE_TIMEOUT_MS + GRACE_MS) / 1000}s after load — license gate did not fire`);
   }

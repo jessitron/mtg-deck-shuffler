@@ -30,7 +30,8 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
  * in-cluster DNS in production).
  */
 function tabletopPublicUrl(): string {
-  return process.env.TABLETOP_PUBLIC_URL || "https://table.jessitron.honeydemo.io";
+  // http on purpose: the deployed Tabletop is http-only (tldraw license gate).
+  return process.env.TABLETOP_PUBLIC_URL || "http://table.jessitron.honeydemo.io";
 }
 
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {

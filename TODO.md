@@ -28,17 +28,19 @@ section is just a wall between Jess and the live work.
     box edge so the pile deepens in place instead of marching out.
   ← mountain: tabletop-replaces-mural
 
-- [ ] `tldraw-license-key-expired` Prod tabletop deploys are blocked until a new tldraw key arrives
-  - The evaluation key in `.be` expired 2026-08-09 (a day before its printed `2026-08-10` — tldraw
-    parses expiry as UTC midnight then rebuilds it from local date parts, so it trips early west
-    of UTC). Localhost is immune since `21ff05b` (TablePage passes empty-string `licenseKey` on
-    loopback), but the deployed host still needs a real key.
-  - ⚠️ **Don't deploy the Tabletop until then**: the expired key satisfies `deploy.sh`'s
-    presence check, so the deploy proceeds and ships a canvas that blanks 5s after load —
-    `check-deployed-canvas.mjs` only catches it after the rollout has already wiped the rooms.
-  - Key status (2026-08-09): hobby license application pending, past tldraw's stated 2-week
-    turnaround. Plan B: a 100-day enterprise trial key, to be requested when ready for real
-    testing. Whichever lands first goes in the repo-root `.be` as `TLDRAW_LICENSE_KEY`.
+- [ ] `claim-tickets-on-main` Claim a ticket where other agents can see it — the worktree hides the claim
+  - Surfaced 2026-08-09 while Jess took inventory of which wayfinder tickets were actively being
+    worked: `tabletop-table-layout` ticket 16 showed `Status: ready-for-agent` on main while an
+    agent was actively working it in `.claude/worktrees/ticket-16-prep-picker` — it had flipped
+    the `Status:` line to `claimed` *inside the worktree*, invisible from main until the merge.
+  - Why it matters: any other agent (or Jess) scanning main for `ready-for-agent` tickets can
+    double-claim work already in flight. With parallel background agents now routine, the window
+    is real, not theoretical.
+  - Wanted: a convention — commit the `Status: claimed` change on main *before* entering the
+    worktree (a one-line commit, cheap), or some other claim signal visible outside the worktree.
+    Likely home: `docs/agents/issue-tracker.md`, plus wherever the wayfinder skill tells agents
+    to claim.
+  ← mountain: overhead
 
 - [ ] `design-text-link-specimen` Stage the nav-link idiom (text links) on `/design`
   - Surfaced 2026-08-09 by the `shuffler-looks-like-itself` update after `6b6b927` (Tabletop
@@ -60,6 +62,20 @@ section is just a wall between Jess and the live work.
     the zone mocks (`a304c52`).
   - Related: `tabletop-landing-page-palette` below notes the gallery has no Tabletop stage at
     all; this specimen is another instance of that gap.
+  ← mountain: tabletop-replaces-mural
+
+- [ ] `game-page-picked-mat` /game still paints the default playmat, ignoring the prep-screen pick
+  - Surfaced 2026-08-09 by the `shuffler-looks-like-itself` review of table-layout ticket 16
+    (the prep-screen picker). The picked mat shows on /prepare (server-rendered inline
+    `background-image`) and travels to the Tabletop seat via `seat.joined` — but /game still
+    paints the hardcoded default from the bare `.playmat` rule in
+    `apps/shuffler/public/playmat.css`. User-visible inconsistency right after Shuffle Up:
+    you picked Seam Rip, the game screen shows Cascading Cataracts.
+  - The owner called it correctly out of ticket-16 scope; it needs its own small task. Note the
+    pick lives only on `PersistedGamePrep.playmatImagePath` — the game page would need to reach
+    the prep (it has `prepId`) or carry the path itself.
+  - Related: `design-playmat-specimen` — the mat art URL is also hand-copied in
+    `design-gallery.css`, same "the default mat's name proliferates" family.
   ← mountain: tabletop-replaces-mural
 
 - [ ] `life-counter-needs-own-name` table-layout ticket 12's life/commander-damage shape can't be called `mtg-counter` anymore

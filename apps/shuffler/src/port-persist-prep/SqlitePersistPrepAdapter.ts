@@ -15,6 +15,7 @@ interface StoredPrep {
   playerName?: string;
   seatId?: string;
   sleeveColor?: string;
+  playmatImagePath?: string;
 }
 
 export class SqlitePersistPrepAdapter implements PersistPrepPort {
@@ -101,6 +102,7 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
         playerName: storedPrep.playerName,
         seatId: storedPrep.seatId,
         sleeveColor: storedPrep.sleeveColor,
+        playmatImagePath: storedPrep.playmatImagePath,
       };
     }
     return null;

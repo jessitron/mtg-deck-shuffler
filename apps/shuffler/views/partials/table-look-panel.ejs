@@ -1,0 +1,43 @@
+<%
+// The table-look setup panel (ticket 16): playmat swatches + sleeve colors.
+// Expects: playmats, selectedPlaymatPath, sleeveQuickPicks, sleeveColor, prepId.
+// Selection travels immediately via POST /prep-table-look/:prepId (prep-picker.js).
+const customSleeveSelected = sleeveColor && !sleeveQuickPicks.some(function (p) { return p.hex === sleeveColor; });
+%>
+<section class="table-look-panel" data-testid="table-look-panel" data-prep-id="<%= prepId %>" aria-label="Playmat and sleeves">
+  <div class="table-look-row">
+    <span class="table-look-label">Playmat</span>
+    <div class="table-look-mats">
+      <% playmats.forEach(function(mat) { %>
+        <button type="button"
+                class="table-look-mat<%= mat.path === selectedPlaymatPath ? ' table-look-selected' : '' %>"
+                data-mat-path="<%= mat.path %>"
+                title="<%= mat.name %>"
+                aria-label="Playmat: <%= mat.name %>"
+                style="background-image: url('<%= mat.path %>')"></button>
+      <% }) %>
+    </div>
+  </div>
+  <div class="table-look-row">
+    <span class="table-look-label">Sleeves</span>
+    <div class="table-look-sleeves">
+      <button type="button"
+              class="table-look-sleeve table-look-none-chip<%= sleeveColor ? '' : ' table-look-selected' %>"
+              data-sleeve-color=""
+              title="No sleeves (standard Magic back)"
+              aria-label="No sleeves"></button>
+      <% sleeveQuickPicks.forEach(function(pick) { %>
+        <button type="button"
+                class="table-look-sleeve<%= sleeveColor === pick.hex ? ' table-look-selected' : '' %>"
+                data-sleeve-color="<%= pick.hex %>"
+                title="<%= pick.name %>"
+                aria-label="Sleeves: <%= pick.name %>"
+                style="background-color: <%= pick.hex %>"></button>
+      <% }) %>
+      <label class="table-look-custom<%= customSleeveSelected ? ' table-look-selected' : '' %>">
+        custom
+        <input type="color" class="table-look-color-input" value="<%= customSleeveSelected ? sleeveColor : '#bb5277' %>" />
+      </label>
+    </div>
+  </div>
+</section>

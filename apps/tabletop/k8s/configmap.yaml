@@ -13,7 +13,10 @@ data:
   OTEL_LOG_LEVEL: "info"
   # Browser spans go to the tabletop's collector, same-origin through the ALB
   # (path /v1/traces on the tabletop host) — no key in the page, no CORS drama.
-  BROWSER_OTLP_TRACES_URL: "https://table.jessitron.honeydemo.io/v1/traces"
+  # http, NOT https: the ALB has no 443 listener (see ingress.yaml — tldraw
+  # license gate). An https URL here would be connection-refused, silently
+  # killing all browser telemetry including the uncaught-error pipeline.
+  BROWSER_OTLP_TRACES_URL: "http://table.jessitron.honeydemo.io/v1/traces"
   # Browser logs, same collector, same reasoning. Uncaught errors and unhandled
   # rejections have no span to hang attributes on.
-  BROWSER_OTLP_LOGS_URL: "https://table.jessitron.honeydemo.io/v1/logs"
+  BROWSER_OTLP_LOGS_URL: "http://table.jessitron.honeydemo.io/v1/logs"

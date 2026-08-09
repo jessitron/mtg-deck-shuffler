@@ -29,6 +29,19 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      testIgnore: /verify-tabletop-integration/,
+    },
+    {
+      // The two-app spec spawns a real Tabletop on TABLETOP_URL — the very
+      // endpoint verify-table-mode's "unreachable" test needs dead. With 4
+      // workers the two files otherwise overlap (only when apps/tabletop is
+      // built; unbuilt, the two-app spec skips itself and the race hides).
+      // A dependent project runs strictly after the rest, so the endpoint is
+      // never alive and dead at once.
+      name: 'two-app',
+      use: { ...devices['Desktop Chrome'] },
+      testMatch: /verify-tabletop-integration/,
+      dependencies: ['chromium'],
     },
   ],
 });

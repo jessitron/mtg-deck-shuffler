@@ -4,8 +4,10 @@ The shared canvas where play happens — Mural's freedom with Magic's physics. A
 [tldraw](https://tldraw.dev) board (watermark worn happily) where cards arrive from the
 Shuffler instead of the clipboard. See `SEAMAP.md` for where this ship is headed.
 
-> **tldraw needs a license key in prod.** Not just for the watermark — without one the
-> canvas goes **blank 5 seconds after load**. See [Licensing](#licensing) before deploying.
+> **Prod serves plain http:// on purpose.** tldraw's license gate blanks an unlicensed
+> canvas **5 seconds after load** — but only on HTTPS non-loopback origins, so the
+> deployed table stays http-only and needs no key. See [Licensing](#licensing) before
+> touching the ingress or anything TLS-shaped.
 
 ## Modes (fleet vocabulary — how the Shuffler relates to a table)
 
@@ -88,13 +90,22 @@ when the license state is `unlicensed-production` — replacing the canvas with 
 5 more seconds. (This repo is on 5.2.5.)
 
 "Production" is decided **by URL alone**: any HTTPS request to a non-loopback hostname.
-Two consequences worth internalizing:
+**That's why the deployed table is http-only** (decided 2026-08-09, after the evaluation
+key expired with the hobby-license application stuck in tldraw's queue): plain http is
+exempt from the gate, and this app has no auth to protect anyway. The ALB serves a
+single HTTP:80 listener — no 443, so https:// refuses to connect rather than serving a
+canvas that blanks (`k8s/ingress.yaml` has the IngressGroup story). `chooseLicenseKey`
+(`src/client/chooseLicenseKey.ts`, unit-tested) withholds any baked key wherever the
+gate can't fire, so a stale key in `.be` can't blank anything.
+
+Two more consequences worth internalizing:
 
 - **localhost is exempt from the *no-key* gate, but NOT from the *expired-key* gate.**
   `getLicenseState`'s dev exemption only covers missing/unparseable keys; a
   parseable-but-expired evaluation key returns `expired` unconditionally and blanks
-  localhost too. So `TablePage.tsx` passes an **empty string** as `licenseKey` on
-  loopback hosts — empty, not `undefined`, because an undefined prop makes
+  localhost too. So `chooseLicenseKey` passes an **empty string** as `licenseKey` on
+  loopback hosts (and any other origin where the gate can't fire) — empty, not
+  `undefined`, because an undefined prop makes
   `LicenseProvider` fall back to reading the env itself, and vite's `define` rewrote
   `import.meta.env.VITE_TLDRAW_LICENSE_KEY` to the key literal *inside tldraw's own
   bundled code*. Verified by `test/verification/verify-license-localhost.spec.ts`.
@@ -106,17 +117,19 @@ Two consequences worth internalizing:
   UTC midnight, then rebuilds it from *local* date parts — west of UTC that lands on the
   previous local day, and evaluation licenses have no grace period.
 
-So the key must be present, and the only place to verify it is the deployed host:
+No key is needed while prod is http-only. If a key exists anyway (or the day comes to
+put the table back on https):
 
 - Put `export TLDRAW_LICENSE_KEY=...` in the **repo-root `.be`** — *not* in
   `apps/tabletop/.env`, which is committed to a public repo. (The key itself isn't a
   secret: it's domain-bound and shipped to browsers by design. It's still Jess's
   license, so it stays out of git.)
 - `vite.config.ts` bakes it into the client bundle via `define`; `Dockerfile` takes it
-  as a build ARG; `deploy.sh` passes `--build-arg` and **refuses to deploy without it**
-  (override with `TLDRAW_LICENSE_KEY=none ./deploy.sh` to knowingly ship a blank table).
+  as a build ARG; `deploy.sh` passes `--build-arg` if set. Harmless on http:
+  `chooseLicenseKey` withholds it at runtime.
 - `node test/verification/check-deployed-canvas.mjs [baseUrl]` loads a table, waits out
-  the 5s gate, and fails if the canvas vanished. `deploy.sh` runs it after rollout.
+  the 5s gate, and fails if the canvas vanished. `deploy.sh` runs it after rollout —
+  on http it proves the exemption actually holds on the deployed host.
 
 Free hobby license (non-commercial): <https://tldraw.dev/get-a-license/hobby>
 
