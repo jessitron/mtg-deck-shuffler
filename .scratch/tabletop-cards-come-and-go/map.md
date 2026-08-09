@@ -63,6 +63,7 @@ Founding decisions from the charting session (Jess, 2026-08-08):
 - **Tokens and duplicated cards are table-only.** Tokens appear from nowhere — people
   paste whatever they want and the table says "shape created, I guess." Duplicated cards
   are not cards. Both send events to the Spine eventually, **never** to the Shuffler.
+- [Round-trip identity and today's actual boundary behavior](issues/03-round-trip-identity.md) (2026-08-08) — instanceId is minted once per card per game and never re-minted, so a returned card re-played is silently swallowed by the Tabletop's shape-presence dedup unless its shape was deleted from the board; restart today clears nothing (only seat.joined is re-sent, deduped as already-seated, and no code path deletes shapes — old cards linger); and charting missed a live out-of-Table transition: the card modal's "Return" button moves Table→Revealed via the unguarded `moveByGameCardIndex`, pushing nothing to the Tabletop.
 - **Commanders start on the table, in the command zone, as part of sitting down.** The
   commander info rides in the initial seating message (leaning that way — it's setup, not
   card traffic; final payload shape confirmed by the vocabulary ticket). Once seated, a
