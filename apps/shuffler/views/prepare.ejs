@@ -3,7 +3,7 @@
 
 <%- include('partials/head', {
   pageTitle: 'Prepare - ' + prep.deck.name + ' - MTG Deck Shuffler',
-  additionalStyles: ['/playmat.css', '/prepare.css']
+  additionalStyles: ['/playmat.css', '/prepare.css', '/prototype-picker-16.css']
 }) %>
 
 <body>
@@ -54,6 +54,8 @@
               <button type="submit" class="button-base pushable-flat begin-button">Shuffle Up</button>
             </form>
           </div>
+
+          <%- include('partials/prototype-picker-16', { pickerVariant }) %>
         </div>
     </main>
 
@@ -65,6 +67,7 @@
 
   <script src="/htmx.js"></script>
   <script src="/modal-query-params.js"></script>
+  <script src="/prototype-picker-16.js"></script>
   <script>
     // Configure HTMX with browser tab ID
     document.addEventListener("htmx:configRequest", function (event) {

@@ -1,0 +1,156 @@
+<%
+// PROTOTYPE — ticket 16 (prep-screen picker v1). THROWAWAY CODE.
+// Three variants of the playmat/sleeve picker on the existing /prepare route,
+// switchable via ?variant=A|B|C and the floating bar at the bottom.
+// Nothing here persists or submits; selections are client-side only.
+
+const protoMats = [
+  { slug: "cascading-cataracts", name: "Cascading Cataracts", url: "/images/aeoe-43-cascading-cataracts.png" },
+  { slug: "exalted-sunborn",     name: "Exalted Sunborn",     url: "/images/aeoe-3-exalted-sunborn.png" },
+  { slug: "seam-rip",            name: "Seam Rip",            url: "/images/aeoe-6-seam-rip.png" },
+  { slug: "terrasymbiosis",      name: "Terrasymbiosis",      url: "/images/aeoe-41-terrasymbiosis.png" },
+  { slug: "bonders-enclave",     name: "Bonder's Enclave",    url: "/images/aeoe-49-bonders-enclave.png" },
+];
+// Sleeve colors are domain data (player's choice), not chrome — raw hexes are
+// legal here as values. Mana pie mirrors --mana-* in the fleet tokens.
+const manaPie = [
+  { name: "White", hex: "#f0e68c" },
+  { name: "Blue",  hex: "#3c99e5" },
+  { name: "Black", hex: "#530aae" },
+  { name: "Red",   hex: "#bd0a0a" },
+  { name: "Green", hex: "#2a8439" },
+];
+const brandSpread = [
+  { name: "Crimson",   hex: "#c62828" },
+  { name: "Tangerine", hex: "#ef6c00" },
+  { name: "Sunflower", hex: "#f9a825" },
+  { name: "Forest",    hex: "#2e7d32" },
+  { name: "Teal",      hex: "#00838f" },
+  { name: "Cobalt",    hex: "#1565c0" },
+  { name: "Violet",    hex: "#6a1b9a" },
+  { name: "Slate",     hex: "#37474f" },
+];
+%>
+
+<% if (pickerVariant === 'A') { %>
+  <!-- Variant A: "Setup panel" — one compact opaque panel, two labeled rows,
+       small mat thumbs + small sleeve chips. Dense and utilitarian. -->
+  <section class="proto16-panel-a" aria-label="Playmat and sleeves (prototype)">
+    <div class="proto16-a-row">
+      <span class="proto16-label">Playmat</span>
+      <div class="proto16-a-mats">
+        <% protoMats.forEach(function(mat) { %>
+          <button type="button"
+                  class="proto16-mat-swatch proto16-a-mat <%= mat.slug === 'cascading-cataracts' ? 'proto16-selected' : '' %>"
+                  data-mat-url="<%= mat.url %>" data-mat-name="<%= mat.name %>"
+                  title="<%= mat.name %>"
+                  style="background-image: url('<%= mat.url %>')"></button>
+        <% }) %>
+      </div>
+    </div>
+    <div class="proto16-a-row">
+      <span class="proto16-label">Sleeves</span>
+      <div class="proto16-a-sleeves">
+        <button type="button"
+                class="proto16-sleeve-swatch proto16-a-sleeve proto16-none-chip proto16-selected"
+                data-sleeve="" data-sleeve-name="none" title="No sleeves (standard Magic back)"></button>
+        <% manaPie.forEach(function(c) { %>
+          <button type="button" class="proto16-sleeve-swatch proto16-a-sleeve"
+                  data-sleeve="<%= c.hex %>" data-sleeve-name="<%= c.name %>"
+                  title="<%= c.name %>" style="background-color: <%= c.hex %>"></button>
+        <% }) %>
+        <label class="proto16-custom-color">
+          custom
+          <input type="color" class="proto16-color-input" value="#bb5277" />
+        </label>
+      </div>
+    </div>
+  </section>
+
+<% } else if (pickerVariant === 'B') { %>
+  <!-- Variant B: "Summary drawer" — progressive disclosure à la "Join a table".
+       Collapsed: a one-line summary of the current picks. Open: the pickers. -->
+  <details class="proto16-drawer" aria-label="Table look (prototype)">
+    <summary class="proto16-drawer-summary">
+      Table look:
+      <span class="proto16-summary-mat" style="background-image: url('/images/aeoe-43-cascading-cataracts.png')"></span>
+      <span class="proto16-summary-mat-name">Cascading Cataracts</span>
+      &middot;
+      <span class="proto16-summary-sleeve proto16-none-chip" title="no sleeves"></span>
+      <span class="proto16-summary-sleeve-name">no sleeves</span>
+    </summary>
+    <div class="proto16-drawer-body">
+      <div class="proto16-drawer-section">
+        <span class="proto16-label">Playmat</span>
+        <div class="proto16-b-mats">
+          <% protoMats.forEach(function(mat) { %>
+            <button type="button"
+                    class="proto16-mat-swatch proto16-b-mat <%= mat.slug === 'cascading-cataracts' ? 'proto16-selected' : '' %>"
+                    data-mat-url="<%= mat.url %>" data-mat-name="<%= mat.name %>">
+              <span class="proto16-b-mat-art" style="background-image: url('<%= mat.url %>')"></span>
+              <span class="proto16-b-mat-name"><%= mat.name %></span>
+            </button>
+          <% }) %>
+        </div>
+      </div>
+      <div class="proto16-drawer-section">
+        <span class="proto16-label">Sleeves</span>
+        <div class="proto16-b-sleeves">
+          <button type="button"
+                  class="proto16-sleeve-swatch proto16-b-sleeve proto16-none-chip proto16-selected"
+                  data-sleeve="" data-sleeve-name="none" title="No sleeves (standard Magic back)"></button>
+          <% manaPie.forEach(function(c) { %>
+            <button type="button" class="proto16-sleeve-swatch proto16-b-sleeve"
+                    data-sleeve="<%= c.hex %>" data-sleeve-name="<%= c.name %>"
+                    title="<%= c.name %>" style="background-color: <%= c.hex %>"></button>
+          <% }) %>
+          <label class="proto16-custom-color">
+            custom
+            <input type="color" class="proto16-color-input" value="#bb5277" />
+          </label>
+        </div>
+      </div>
+    </div>
+  </details>
+
+<% } else { %>
+  <!-- Variant C: "Gallery strip" — full-width browse band. Big named playmat
+       tiles (precon-tile chrome), then a wider sleeve-brand color spread. -->
+  <section class="proto16-strip" aria-label="Playmat and sleeves (prototype)">
+    <div class="proto16-strip-block">
+      <span class="proto16-label">Playmat</span>
+      <div class="proto16-c-mats">
+        <% protoMats.forEach(function(mat) { %>
+          <button type="button"
+                  class="proto16-mat-swatch proto16-c-mat <%= mat.slug === 'cascading-cataracts' ? 'proto16-selected' : '' %>"
+                  data-mat-url="<%= mat.url %>" data-mat-name="<%= mat.name %>">
+            <span class="proto16-c-mat-art" style="background-image: url('<%= mat.url %>')"></span>
+            <span class="proto16-c-mat-name"><%= mat.name %></span>
+          </button>
+        <% }) %>
+      </div>
+    </div>
+    <div class="proto16-strip-block">
+      <span class="proto16-label">Sleeves</span>
+      <div class="proto16-c-sleeves">
+        <button type="button"
+                class="proto16-sleeve-swatch proto16-c-sleeve proto16-selected"
+                data-sleeve="" data-sleeve-name="none">
+          <span class="proto16-c-sleeve-chip proto16-none-chip"></span>
+          <span class="proto16-c-sleeve-name">None</span>
+        </button>
+        <% brandSpread.forEach(function(c) { %>
+          <button type="button" class="proto16-sleeve-swatch proto16-c-sleeve"
+                  data-sleeve="<%= c.hex %>" data-sleeve-name="<%= c.name %>">
+            <span class="proto16-c-sleeve-chip" style="background-color: <%= c.hex %>"></span>
+            <span class="proto16-c-sleeve-name"><%= c.name %></span>
+          </button>
+        <% }) %>
+        <label class="proto16-custom-color proto16-c-custom">
+          custom
+          <input type="color" class="proto16-color-input" value="#bb5277" />
+        </label>
+      </div>
+    </div>
+  </section>
+<% } %>
