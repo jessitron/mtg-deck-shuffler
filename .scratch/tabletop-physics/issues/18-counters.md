@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: done
 
 **What to build:** A new custom shape type, `mtg-counter` — a genuine `ShapeUtil`, not a stock
 geo circle and not a prop on the card. Carries free editable text, blank by default (not a
@@ -30,10 +30,35 @@ scope.
 
 **Blocked by:** 12, 13 (needs the upgraded zone-entry detection for the battlefield-exit rule)
 
-- [ ] `mtg-counter` is a genuine shape type with free editable text, blank by default
-- [ ] Dragging a counter onto a card attaches it, with a live hover-highlight during the drag
-- [ ] Dragging a counter off a card detaches it (reparents to the page)
-- [ ] Multiple counters on one card can overlap with no forced spacing
-- [ ] The instant a host card leaves the battlefield, every counter on it detaches and lands at an
+- [x] `mtg-counter` is a genuine shape type with free editable text, blank by default
+- [x] Dragging a counter onto a card attaches it, with a live hover-highlight during the drag
+- [x] Dragging a counter off a card detaches it (reparents to the page)
+- [x] Multiple counters on one card can overlap with no forced spacing
+- [x] The instant a host card leaves the battlefield, every counter on it detaches and lands at an
       open spot near the zone's edge — driven from the host's zone-transition code, not the
       counter's own hook
+
+## Outcome (2026-08-08)
+
+Built as planned (`.scratch/tabletop-physics/plan-18.md` has the full plan + owner reviews).
+Verified by `test/verification/verify-counter.spec.ts` (4 Playwright tests, real mouse drags)
+and `test/openSpotNearZoneEdge.test.ts` (5 unit tests on the placement seam). Decisions made in
+implementation, for the record:
+
+- **The Stack does NOT evict counters.** The plan initially extrapolated "leaves the battlefield"
+  to include the stack; in practice cards *arrive* on the Stack, so their first settled move
+  fires a stack zone-entry and would strip counters the moment one attached there. Detach zones
+  are exactly the ticket's list: graveyard, exile, library (no hand zone exists yet).
+- **Creation affordance (assumption, needs Jess's eye):** one toolbar item (stock tldraw chrome,
+  stock ellipse icon) — pick the tool, click the table, get a blank counter. The spec never said
+  how a player obtains a counter; this was the smallest thing that made the feature usable.
+- **Appearance (staged on `/design`, § "Tabletop counter disc", pending sign-off):** the
+  `.hand-count` disc recipe — deep-space fill, narrow dark-pink ring, light-pink Orbitron text,
+  44px circle, proportional on resize.
+- **Name collision flagged:** table-layout ticket 12's life-total shape had `mtg-counter` as a
+  working name; this shape now owns the type string per this map's spec. Buoyed as
+  `life-counter-needs-own-name` in TODO.md.
+- **Counters are card-aligned:** local rotation zeroes (center-preserved) on attach, so they tilt
+  with a tap and sit upright on the card regardless of the card's tap state when dropped.
+- Detach fires only on zone *change* — a counter attached to a card already sitting in the
+  graveyard stays until the card moves somewhere and back.

@@ -1,18 +1,63 @@
 import React, { useEffect, useMemo } from "react";
-import { defaultShapeUtils, Tldraw, TLAssetStore } from "tldraw";
+import {
+  DefaultToolbar,
+  DefaultToolbarContent,
+  defaultShapeUtils,
+  Tldraw,
+  TLAssetStore,
+  TLComponents,
+  TldrawUiMenuItem,
+  TLUiOverrides,
+  useIsToolSelected,
+  useTools,
+} from "tldraw";
 import "tldraw/tldraw.css";
 import { useSync } from "@tldraw/sync";
 import { setGlobalAttrs, currentTraceparent, inSpan } from "./observability";
 import { useCardArrivalSpans } from "./useCardArrivalSpans";
 import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
+import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
+import { MtgCounterTool } from "./shapes/MtgCounterTool";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
 
 // useSync (unlike <Tldraw>) builds its store schema from exactly the
 // shapeUtils it's given — it does NOT fold in tldraw's own defaults the way
 // <Tldraw> does — so the stock shapes the name label still uses (text, ...)
-// have to be listed here explicitly alongside mtg-card/mtg-zone, or the
-// client store rejects them outright.
-const shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil];
+// have to be listed here explicitly alongside mtg-card/mtg-zone/mtg-counter,
+// or the client store rejects them outright.
+const shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil];
+
+const tools = [MtgCounterTool];
+
+// Ticket 18: one toolbar item to create a counter — stock tldraw chrome and a
+// stock icon on purpose (tldraw owns its toolbar; a bespoke styled button
+// would fight it, and map 4 owns toolbar curation).
+const uiOverrides: TLUiOverrides = {
+  tools(editor, toolItems) {
+    toolItems["mtg-counter"] = {
+      id: "mtg-counter",
+      label: "Counter",
+      icon: "geo-ellipse",
+      onSelect: () => editor.setCurrentTool("mtg-counter"),
+    };
+    return toolItems;
+  },
+};
+
+function ToolbarWithCounter(props: React.ComponentProps<typeof DefaultToolbar>) {
+  const toolItems = useTools();
+  const isCounterSelected = useIsToolSelected(toolItems["mtg-counter"]);
+  return (
+    <DefaultToolbar {...props}>
+      <TldrawUiMenuItem {...toolItems["mtg-counter"]} isSelected={isCounterSelected} />
+      <DefaultToolbarContent />
+    </DefaultToolbar>
+  );
+}
+
+const components: TLComponents = {
+  Toolbar: ToolbarWithCounter,
+};
 
 /**
  * The table: a synced tldraw canvas. Anyone with the URL joins — spectators
@@ -85,7 +130,15 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
       {store.status === "loading" ? (
         <div style={centered}>Joining table &ldquo;{tableSlug}&rdquo;…</div>
       ) : (
-        <Tldraw store={store.store} deepLinks licenseKey={licenseKey} shapeUtils={shapeUtils} />
+        <Tldraw
+          store={store.store}
+          deepLinks
+          licenseKey={licenseKey}
+          shapeUtils={shapeUtils}
+          tools={tools}
+          overrides={uiOverrides}
+          components={components}
+        />
       )}
     </div>
   );

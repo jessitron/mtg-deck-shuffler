@@ -171,3 +171,29 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+/* =========================================================================
+ * Tabletop counter disc — tabletop-physics ticket 18 (counters ride along
+ * on a card). The de-facto chip precedent is .hand-count in game.css (the
+ * game screen's one count disc): deep-space fill, --narrow-border dark-pink
+ * ring, light-pink text, real round corners (count discs are one of the
+ * sanctioned round categories). The real shape re-expresses this inline in
+ * MtgCounterShapeUtil.tsx at 44px, border and font-size proportional to the
+ * shape's own height so a resized counter keeps its proportions.
+ * ========================================================================= */
+.counter-mock {
+  width: 44px;
+  height: 44px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--deep-space);
+  border: var(--narrow-border) solid var(--dark-pink);
+  color: var(--light-pink);
+  font-family: var(--font-chrome);
+  font-size: 14px; /* 0.32 × height in the real shape */
+  font-weight: 700;
+  line-height: 1;
+}
