@@ -611,26 +611,30 @@ self-rendering custom shape.
   not ride along on the implementation ticket. All the canvas rules apply: self-rendering
   shape for any fleet typeface, geometry computed in TypeScript at render time, `.stage-white`
   for any `/design` mock.
-- **Coming to this owner: the sleeve's rendered appearance**
-  (`.scratch/tabletop-table-layout/issues/11-sleeve-color-to-card-back.md`, resolved
-  2026-08-08 — transport + rendering *model* only). Decided there: `sleeveColor` travels as an
-  optional raw hex on `seat.joined`'s player data — **and that field now exists** (ticket 15,
-  2026-08-08, `4263ef8`): `contracts/payloads/seat.joined.v1.json` carries optional
-  `sleeveColor` (`^#[0-9a-fA-F]{6}$`), winning over `cardBackImageUrl` when both arrive.
-  Transport is real; ticket 17 wires the rendering, where the reserved appearance choices
-  below come due. It is baked into `mtg-card` props at mint
-  (legal because sleeve color is a game constant, never changed mid-game); a sleeve renders as
-  a solid rectangle slightly larger than the card; face-down cards and the **library pile**
-  become the bare sleeve rectangle (the library furniture is a second consumer of the card
-  back — confirmed, now decision-relevant); a face-up sleeved card shows its image centered
-  inside the sleeve rectangle; unsleeved decks keep the standard Magic back. **Reserved for
-  this owner's `-context`/`-review` at implementation time**: exact margin (the "few px per
-  side"), corner radius (a sleeve is a physical object — the physical-rounding rule applies,
-  and it's canvas geometry, so compute it in TypeScript at render time, not a static CSS
-  value), any border/sheen/texture, and the picker's default/swatch palette (ticket 09's
-  quick-swatch list — which now carries identity weight: players must stay distinguishable at
-  a glance, per ticket 12). The raw hex itself is domain data like card art and is exempt from
-  the stylesheet hex ban; what an agent must not do is *pick* one.
+- **~~Coming to this owner: the sleeve's rendered appearance.~~ DECIDED and BUILT
+  2026-08-08 (ticket 17, `0a768e6` + `bfdc877`), decided with this owner's `-context`
+  mid-implementation — except the picker palette, see below.**
+  (`.scratch/tabletop-table-layout/issues/11-sleeve-color-to-card-back.md` had decided
+  transport + rendering *model*; ticket 15, `4263ef8`, gave `sleeveColor` its schema home in
+  `contracts/payloads/seat.joined.v1.json` — optional raw hex `^#[0-9a-fA-F]{6}$`, winning
+  over `cardBackImageUrl`; it's baked into `mtg-card` props at mint, legal because sleeve
+  color is a game constant.) The reserved treatment came due and landed as: corner radius
+  `w * 0.05`, margin `w * 0.03` per side, **both proportions of `shape.props.w`** computed
+  in TypeScript at render time (cards are aspect-locked resizable — never a fixed px, never
+  a CSS percent); flat solid player-picked hex, **no border/sheen/texture**; the face image
+  keeps its own rendering inside the ring, no second radius; face-down (sleeved) = bare
+  sleeve rectangle. The library pile is `MtgZoneShapeUtil`'s own render via a new
+  `sleeveColor` prop on `mtg-zone` — inner rect inset by the shared `LIBRARY_PILE_INSET=12`
+  (`src/shared/mtgZoneShape.ts`), radius 5% of the inset width, zone opacity 1 with the box
+  chrome self-faded to 0.5 so the pile stays vivid. `indicator()` untouched — the ride-along
+  warning held. Full decision text in [README.md](README.md)'s design language; the
+  `.tl-image` wrapper-escape limit it uncovered is in README → tldraw limits. **Still
+  reserved: the picker's default/swatch palette** (ticket 16 / ticket 09's quick-swatch
+  list — identity weight per ticket 12: players must stay distinguishable at a glance). No
+  default sleeve color exists — `null` ⇔ unsleeved, today's bare look. **No `/design`
+  specimen yet** — buoyed as `design-sleeve-specimen` in `TODO.md`; a mock would follow the
+  ticket-11 precedents (labelled a mock, `.stage-white`). The raw hex itself remains domain
+  data, exempt from the stylesheet hex ban; what an agent must not do is *pick* one.
 - **Also undecided, and it must not ride along: a card's `indicator()`.** Ticket 04 records
   explicitly that an `indicator()` looking like anything other than tldraw's default is a
   **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket

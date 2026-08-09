@@ -81,9 +81,11 @@
   per-card baking legal), and decided the rendering *model* — solid rectangle slightly larger
   than the card; face-down cards and the library pile render as the bare sleeve rectangle; a
   face-up sleeved card shows its image centered inside it; unsleeved keeps the standard back.
-  Appearance specifics (margin, radius, border/sheen, swatch palette) are explicitly reserved
-  for this owner at implementation time — see [open-choices.md](open-choices.md) → "Fleet
-  gaps — the Tabletop side".
+  `issues/17-*` (**built** 2026-08-08, `0a768e6` + `bfdc877`) wired that rendering and settled
+  the reserved treatment with this owner's `-context`: radius `w * 0.05`, margin `w * 0.03`,
+  both proportional to `shape.props.w`; flat solid hex, no border/sheen; library pile via a
+  new `sleeveColor` prop on `mtg-zone`. Only the picker's swatch palette remains reserved —
+  see [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side".
   `issues/15-*` (**built** 2026-08-08, `4263ef8`) put the deck name on the seat name label —
   the two-line player-first composition recorded in [README.md](README.md)'s design language,
   decided with this owner's `-context` mid-implementation. It also created
@@ -449,15 +451,16 @@ not by recomputing new numbers.**
 
 **Designing anything that lives inside the tldraw canvas** (added 2026-08-07)
 
-- **Read [README.md](README.md) → "tldraw limits" first.** Five rules behave differently on the
-  canvas, and four of them are hard limits rather than choices: no Orbitron in the `geo` `font`
-  enum (so on-brand canvas text requires a self-rendering shape), the global `:focus-visible`
-  rule can't reach a shape (tldraw owns selection indication), a locked shape can never be a
-  drop target (so "reacts to what's over it" must be a derived render, not a hook), an
-  opaque `image` shape layered over a box hides that box's interior, and (added 2026-08-08)
-  **tldraw cannot rotate the view per viewer on a shared board** — every player area is
-  upright for everyone, always, which is why the square/compass layout repositions player
-  areas without ever rotating them.
+- **Read [README.md](README.md) → "tldraw limits" first.** The list keeps growing; the hard
+  limits so far: no Orbitron in the `geo`/`text` `font` enum (so on-brand canvas text
+  requires a self-rendering shape), the global `:focus-visible` rule can't reach a shape
+  (tldraw owns selection indication), a locked shape can never be a drop target (so "reacts
+  to what's over it" must be a derived render, not a hook), an opaque `image` shape layered
+  over a box hides that box's interior, `.tl-image` is absolutely positioned and escapes any
+  padded wrapper (added 2026-08-08, ticket 17 — a frame must style its `<img>` directly),
+  and **tldraw cannot rotate the view per viewer on a shared board** (added 2026-08-08) —
+  every player area is upright for everyone, always, which is why the square/compass layout
+  repositions player areas without ever rotating them.
 - **A self-rendering shape needs its own `toSvg`, or it vanishes from canvas exports.** The cost
   scales with the treatment — gradients, shadows and a webfont all have to be hand-written into
   the SVG. **Budget it inside the option comparison**, not after Jess has picked.
@@ -511,15 +514,27 @@ not by recomputing new numbers.**
   hierarchy (size, face) becomes possible then and is a **new** appearance decision for this
   owner, not a port. Any future label pairing a player name with a deck name copies this
   composition rather than inventing another.
-- **The sleeve's rendered appearance has a decided MODEL and an undecided treatment** (ticket
-  11, 2026-08-08). The model — solid rectangle a few px larger than the card; face-down cards
-  and the library pile render as the bare sleeve rectangle; a face-up sleeved card centers
-  its image inside it; unsleeved keeps the standard Magic back — is settled. The treatment —
-  exact margin, corner radius (a sleeve is a physical object → real radius, computed in
-  TypeScript at render time like all canvas geometry), border/sheen/texture, and the picker's
-  swatch palette — is reserved for this owner's `-context`/`-review` at implementation time.
-  An `mtg-card` sleeve implementation arriving with those fully formed is the ride-along to
-  block. The `sleeveColor` hex itself is **domain data** (player-chosen, like card art) —
+- **The sleeve's rendered appearance is DECIDED and BUILT** (ticket 17, 2026-08-08,
+  `0a768e6` + `bfdc877`; model from ticket 11). Radius `w * 0.05`, margin `w * 0.03` per
+  side, both proportions of `shape.props.w` computed at render time; flat solid hex, no
+  border/sheen; face-down (sleeved) = bare sleeve rectangle; library pile = inner sleeve
+  rect in `MtgZoneShapeUtil`. Only the picker's swatch palette is still reserved. Concrete
+  watch points the build created:
+  - **`LIBRARY_PILE_INSET` (12) in `src/shared/mtgZoneShape.ts` is shared server/client** —
+    `tableFurniture.ts` uses it for the card-back image geometry, `MtgZoneShapeUtil` for the
+    sleeve pile. Change it there and both move together; hand-writing a `12` in either place
+    reintroduces the split it was created to close.
+  - **The sleeve treatment lives in two `.tsx` files** — the card's ring in
+    `MtgCardShapeUtil.tsx` (the `sleeve` object), the library pile in `MtgZoneShapeUtil.tsx`
+    (the `sleevePile` block). Changing the sleeve look means both.
+  - **A sleeved library zone self-fades its box chrome to 0.5** (shape opacity stays 1) so
+    the pile stays vivid; the unsleeved zone gets 0.5 from the shape's own `opacity` set in
+    `tableFurniture.ts`. Don't "tidy" the two mechanisms into one without checking both
+    looks.
+  - **Never put `className="tl-image"` on an img you intend to wrap in a frame** — see
+    README → tldraw limits (`.tl-image` is absolutely positioned to `.tl-image-container`
+    and escapes the wrapper's padding; this shipped broken and was fixed in `bfdc877`).
+  The `sleeveColor` hex itself is **domain data** (player-chosen, like card art) —
   exempt from the stylesheet raw-hex ban; the ban governs values agents pick, not values
   players pick.
 - **A canvas shape has a name for its font and its radius now** (`f79bc7d`, 2026-08-07).
