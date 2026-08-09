@@ -81,6 +81,15 @@
   ("the square", `5eeac70`), across all four compass seats AND the centered Stack — asserted
   pairwise in `test/cardLayout.test.ts` — see watch point 8. Pre-existing tables keep their old furniture
   (no Command Zone) because `ensurePlayerArea` never redraws; detection degrades gracefully.
+- **Zone heights changed 2026-08-09 (zone-label-band, `0d61890`) without touching detection.**
+  Every card-holding zone now reserves `ZONE_LABEL_BAND` (40, exported from
+  `shared/mtgZoneShape.ts`) of label headroom: library/command/exile are 278, graveyard 356. The
+  disjointness invariant passed unchanged, and no hook or hit-test code moved — the working
+  example that pure geometry edits to `cardLayout.ts` don't need this owner's machinery, only its
+  invariant test. One coupling worth knowing: `COMMAND_ZONE_H` is defined as `LIBRARY_H` because
+  the graveyard sits at `column.y + LIBRARY_H + GAP` spanning the full column width — a height
+  drift between the two top boxes would erode the command zone's gap (asserted in
+  `test/cardLayout.test.ts`).
 - `MtgZoneShapeUtil` defines **no** `onClick`/`onTranslateEnd`/`onDragShapesOver` — see
   `architecture.md`'s "Ticket 13" section for why that's provably safe rather than just
   convenient: zones are always `isLocked: true`, `SelectTool`'s `Idle` state gates on `isLocked`

@@ -13,6 +13,21 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- [ ] `graveyard-cascade-overflow` The graveyard card cascade walks out of its box at ~32 cards
+  - Surfaced 2026-08-09 by `tabletop-shape-mechanics-review` on the zone-label-band change
+    (zone titles readable with cards in the zones). `graveyardCardPosition` in
+    `apps/tabletop/src/server/cardLayout.ts` cascades each arriving card +6 units diagonally;
+    a card whose **center** leaves the graveyard's AABB stops detecting as "in the graveyard".
+    The label-band change lowered that threshold from ~53 cards to ~32 (box shrank 449→356 and
+    the pile now starts below the 40-unit label band).
+  - Why it matters: a card past the threshold, when nudged by a player, settles with its center
+    in the inter-zone gap (zone `undefined`) or in **exile** — logging a spurious exile entry
+    and evicting any counters it carries (exile is in `NON_BATTLEFIELD_ZONES`). Pre-existing
+    marginal behavior made ~40% more reachable; long Commander games do hit 32-card graveyards.
+  - Fix directions scoped in the review: wrap or tighten the cascade, or cap the offset at the
+    box edge so the pile deepens in place instead of marching out.
+  ← mountain: tabletop-replaces-mural
+
 - [ ] `claim-tickets-on-main` Claim a ticket where other agents can see it — the worktree hides the claim
   - Surfaced 2026-08-09 while Jess took inventory of which wayfinder tickets were actively being
     worked: `tabletop-table-layout` ticket 16 showed `Status: ready-for-agent` on main while an

@@ -1,5 +1,5 @@
 import { BaseBoxShapeUtil, HTMLContainer } from "tldraw";
-import { MtgZoneShape, mtgZoneShapeProps, LIBRARY_PILE_INSET } from "../../shared/mtgZoneShape";
+import { MtgZoneShape, mtgZoneShapeProps, LIBRARY_PILE_INSET, ZONE_LABEL_BAND } from "../../shared/mtgZoneShape";
 import { useIsZoneArmed } from "./zoneHitTest";
 import type { CSSProperties } from "react";
 
@@ -99,9 +99,9 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
         style={{
           position: "absolute",
           left: LIBRARY_PILE_INSET,
-          top: LIBRARY_PILE_INSET,
+          top: ZONE_LABEL_BAND, // below the label band, same as the card-back image (tableFurniture.ts)
           width: w - 2 * LIBRARY_PILE_INSET,
-          height: h - 2 * LIBRARY_PILE_INSET,
+          height: h - ZONE_LABEL_BAND - LIBRARY_PILE_INSET,
           background: sleeveColor,
           borderRadius: (w - 2 * LIBRARY_PILE_INSET) * 0.05,
         }}

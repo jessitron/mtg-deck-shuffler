@@ -21,7 +21,11 @@ import {
   stackCardPosition,
   landPosition,
   playerAreaOrigin,
+  LIBRARY_H,
+  COMMAND_ZONE_H,
+  graveyardCardPosition,
 } from "../src/server/cardLayout";
+import { ZONE_LABEL_BAND } from "../src/shared/mtgZoneShape";
 
 /** Smallest empty band between two AABBs on either axis; negative means overlap. */
 function separation(a: Bounds, b: Bounds): number {
@@ -57,9 +61,33 @@ describe("cardLayout — player area geometry", () => {
     expect(COLUMN_W).toBe(550);
   });
 
-  it("splits the space under the library two-thirds graveyard, one-third exile", () => {
-    expect(GRAVEYARD_H).toBe(449);
-    expect(EXILE_H).toBe(225);
+  it("gives exile a card plus label band; the graveyard fills the rest and stays the bigger box", () => {
+    expect(EXILE_H).toBe(278);
+    expect(GRAVEYARD_H).toBe(356);
+    expect(GRAVEYARD_H).toBeGreaterThan(EXILE_H);
+  });
+
+  // The label band (zone-label-band, 2026-08-09): every card-holding zone is
+  // tall enough for a card AND its label — the bug this fixed was zone titles
+  // covered by the card/pile (library, command zone) or a zone shorter than a
+  // card outright (exile, formerly 225 < 238).
+  it("makes every card-holding zone at least a card plus the label band tall", () => {
+    for (const h of [LIBRARY_H, COMMAND_ZONE_H, GRAVEYARD_H, EXILE_H]) {
+      expect(h).toBeGreaterThanOrEqual(CARD_H + ZONE_LABEL_BAND);
+    }
+  });
+
+  // graveyardBounds places the graveyard at column.y + LIBRARY_H + GAP under
+  // the column's FULL width, so its gap from the command zone exists only
+  // while the two top boxes match heights.
+  it("keeps the library and command zone the same height", () => {
+    expect(COMMAND_ZONE_H).toBe(LIBRARY_H);
+  });
+
+  it("starts the graveyard card pile below the label band", () => {
+    const box = graveyardBounds(0);
+    const first = graveyardCardPosition(0, 0);
+    expect(first.y).toBeGreaterThanOrEqual(box.y + ZONE_LABEL_BAND);
   });
 
   it("places the library at the top-left of the column, beside the playmat", () => {

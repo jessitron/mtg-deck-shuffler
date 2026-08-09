@@ -12,6 +12,8 @@
  * just coordinates.
  */
 
+import { ZONE_LABEL_BAND } from "../shared/mtgZoneShape.js";
+
 export const CARD_W = 170;
 export const CARD_H = 238;
 
@@ -31,12 +33,24 @@ const NAME_LABEL_HEIGHT = 40;
 export const PLAYMAT_W = Math.round(9.6 * CARD_W); // 1632
 export const PLAYMAT_H = 4 * CARD_H; // 952
 
+/**
+ * Card-holding zones are a card plus ZONE_LABEL_BAND of headroom, so the
+ * zone's label stays readable with a card in it. 238 + 40 = 278 — a
+ * coincidence with the Shuffler's CSS card height (200x278), not a reference
+ * to it; this ship's card unit is 170x238.
+ */
 export const LIBRARY_W = CARD_W;
-export const LIBRARY_H = CARD_H;
+export const LIBRARY_H = CARD_H + ZONE_LABEL_BAND;
 
 /** Sized for two cards side by side — some commanders have partner. */
 export const COMMAND_ZONE_W = 2 * CARD_W + GAP; // 360
-export const COMMAND_ZONE_H = CARD_H;
+/**
+ * Must stay equal to LIBRARY_H: the graveyard spans the column's full width
+ * at `column.y + LIBRARY_H + GAP`, so its GAP from the command zone's bottom
+ * edge exists only while the two top boxes match heights (the disjointness
+ * test catches a drift loudly).
+ */
+export const COMMAND_ZONE_H = LIBRARY_H;
 
 /** The library/command-zone/graveyard/exile column beside the playmat. */
 export const COLUMN_W = LIBRARY_W + GAP + COMMAND_ZONE_W; // 550
@@ -44,16 +58,18 @@ export const COLUMN_W = LIBRARY_W + GAP + COMMAND_ZONE_W; // 550
 export const PLAYER_AREA_W = PLAYMAT_W + GAP + COLUMN_W; // 2202
 
 /**
- * The space under the library row, down to the playmat's bottom edge (694),
- * split two-thirds graveyard / one-third exile with a gap between — gaps keep
- * every zone's bounding box strictly disjoint, since zone detection resolves
- * an overlap by draw order, which is meaningless as a semantic tiebreak.
+ * The space under the library row, down to the playmat's bottom edge (654):
+ * exile gets exactly a card plus its label band, and the graveyard fills the
+ * rest (still the biggest box — DESIGN.md's "exile is smaller" ordering
+ * holds). Gaps keep every zone's bounding box strictly disjoint, since zone
+ * detection resolves an overlap by draw order, which is meaningless as a
+ * semantic tiebreak.
  */
-const BELOW_LIBRARY_H = PLAYMAT_H - LIBRARY_H - GAP; // 694
-export const GRAVEYARD_W = COLUMN_W;
-export const GRAVEYARD_H = Math.round(((BELOW_LIBRARY_H - GAP) * 2) / 3); // 449
+const BELOW_LIBRARY_H = PLAYMAT_H - LIBRARY_H - GAP; // 654
 export const EXILE_W = COLUMN_W;
-export const EXILE_H = BELOW_LIBRARY_H - GAP - GRAVEYARD_H; // 225
+export const EXILE_H = CARD_H + ZONE_LABEL_BAND; // 278
+export const GRAVEYARD_W = COLUMN_W;
+export const GRAVEYARD_H = BELOW_LIBRARY_H - GAP - EXILE_H; // 356
 
 /**
  * The Stack: a fixed-size square centered on the origin, same footprint at
@@ -183,8 +199,8 @@ export function landPosition(seatIndex: number, landCount: number): { x: number;
   return { x: mat.x + col * (CARD_W + LAND_GAP), y: mat.y + mat.h / 2 + row * (CARD_H + LAND_GAP) };
 }
 
-/** Graveyard cards pile with a small offset so the count is visible. */
+/** Graveyard cards pile with a small offset so the count is visible — starting below the label band. */
 export function graveyardCardPosition(seatIndex: number, graveyardCount: number): { x: number; y: number } {
   const box = graveyardBounds(seatIndex);
-  return { x: box.x + 10 + graveyardCount * 6, y: box.y + 10 + graveyardCount * 6 };
+  return { x: box.x + 10 + graveyardCount * 6, y: box.y + ZONE_LABEL_BAND + 10 + graveyardCount * 6 };
 }
