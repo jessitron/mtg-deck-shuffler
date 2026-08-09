@@ -1429,6 +1429,10 @@ CSS specimen can't exhibit honestly. If the label becomes self-rendering, it sta
 
 ## 2026-08-08 — the sleeve got its look, and a padded wrapper lost to `.tl-image`
 
+**⚠️ Corner radius revised 2026-08-09 — see the "three picker tweaks" entry below.** The
+`w * 0.05` radius this entry decides was removed by Jess (`e53a27e`, "sleeves are
+rectangular"); the `w * 0.03` overhang and everything else stands.
+
 `0a768e6` **Ticket 17: sleeve color travels in seat.joined and renders on the cards**, then
 `bfdc877` **Ticket 17 fix: sleeve ring actually shows on a face-up card**.
 
@@ -1673,3 +1677,45 @@ the two CSS sites remain (`design-playmat-specimen` still tracks the gallery one
 **Verified:** `verify-prep-picker.spec.ts` (5 specs), a picked-mat assertion in the two-app
 integration spec, unit tests on the send and validators, and the gallery spec passing with
 the new `#table-look` section.
+
+## 2026-08-09 — three picker tweaks, decided by Jess directly, and sleeves went rectangular
+
+`99829d7` **Picker tweak: playmat swatches frame in black, like the mat itself**, `81abce5`
+**Picker tweak: dark sleeve colors flip the deck-title lettering to white**, `e53a27e`
+**Sleeves are rectangular: square corners on sleeved cards and the library pile** — all
+Jess's direct calls the day after ticket 16 shipped, landed on the `ticket-16-mat-border`
+worktree.
+
+**1. Mat swatches frame in black; sleeve chips keep the dark-pink.** The picker's shared
+`.table-look-mat, .table-look-sleeve` rule (`prepare.css`) still declares
+`var(--narrow-border) solid var(--dark-pink)`; `.table-look-mat` now overrides
+`border-color: black` — the mat swatch is a tiny picture of the mat, and the mat's frame is
+the play pages' black keyword. A deliberate split, not drift: the CSS comment says so, and
+editing the shared border rule now reaches only the sleeve chips. The `/design` `#table-look`
+specimen shows it automatically (real classes, no hand-copied border).
+
+**2. A dark sleeve flips the plaque lettering to white.** `applySleeveTint`
+(`prep-picker.js`) sets inline `color: white` on `.game-title` when the picked hex's
+perceived luminance (ITU-R BT.601, `isDark`) is below 128, clearing it otherwise — the same
+inline-style-for-domain-data posture as the tint itself, and it rides the same code path so
+the on-load restore gets it too. New spec in `verify-prep-picker.spec.ts` (now 6): dark
+`#530aae` → white lettering, light `#f0e68c` → default, persisting through reload.
+
+**3. Sleeves are rectangular — the `w * 0.05` corner radius is gone.** Removed from the
+sleeved card's rectangle (`MtgCardShapeUtil.tsx`, both the face-up frame and the face-down
+bare rect — one `sleeve` object serves both) and from the library sleeve pile
+(`MtgZoneShapeUtil.tsx`). Jess: *"sleeves are rectangular."* This is a **correction toward
+the language, not away from it**: ticket 17 had reasoned from "the card's own corner ratio
+(10/200)", but the object being drawn is the sleeve, not the card — and issue 09's own line
+was that a sleeve edge gives cards the square corners the fleet's style wants. The
+physical-objects rule still holds; a real sleeve's corner is simply square. What survives of
+ticket 17's geometry: the `w * 0.03` overhang, the flat solid hex, no border/sheen, the
+proportional-to-`props.w` discipline.
+
+**Also decided the same day, recorded so it isn't re-proposed: the custom color picker stays
+native.** Jess considered click-outside-to-close; the native `<input type="color">`'s OS
+panel can't be closed by JS, and she chose to keep the native control rather than build a
+custom in-page picker. Decided-against, not deferred — see
+[open-choices.md](open-choices.md).
+
+**Verified:** Tabletop build + 69 vitest pass; `verify-prep-picker` 6/6.

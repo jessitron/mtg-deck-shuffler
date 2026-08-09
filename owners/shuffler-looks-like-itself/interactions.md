@@ -90,7 +90,8 @@
   `issues/16-*` (**built** 2026-08-09, `8995c1a`; prototype variant A approved `683ca1c`)
   put the picker on `/prepare` as `.table-look-panel` — see the new watch-point block below
   and [README.md](README.md)'s design language. It also added
-  `test/verification/verify-prep-picker.spec.ts` (5 specs) and a picked-mat assertion in
+  `test/verification/verify-prep-picker.spec.ts` (6 specs since `81abce5` added the
+  dark-sleeve lettering spec) and a picked-mat assertion in
   `verify-tabletop-integration.spec.ts`.
   `issues/15-*` (**built** 2026-08-08, `4263ef8`) put the deck name on the seat name label —
   the two-line player-first composition recorded in [README.md](README.md)'s design language,
@@ -333,6 +334,17 @@ Concrete, in rough order of how often they bite.
 - **Sleeve tint is inline JS style on purpose** (`applySleeveTint` tints
   `.cool-command-zone-surround` and `.game-title`): the hex is domain data, and a page-sheet
   rule on those *shared* components would leak onto `/design`, which co-loads the sheets.
+  **Since `81abce5` (2026-08-09) it also flips `.game-title`'s lettering**: inline
+  `color: white` when the picked hex's BT.601 perceived luminance (`isDark` in
+  `prep-picker.js`) is below 128, cleared otherwise — same inline posture, and it covers the
+  on-load tint path too. If you touch the tint, keep the lettering flip with it; spec'd in
+  `verify-prep-picker.spec.ts` (dark `#530aae` → white, light `#f0e68c` → default).
+- **The mat swatches and sleeve chips frame DIFFERENTLY, on purpose (`99829d7`,
+  2026-08-09).** The shared `.table-look-mat, .table-look-sleeve` rule declares the
+  dark-pink border; `.table-look-mat` alone overrides `border-color: black` ("mat swatches
+  frame like the mat itself" — the play pages' black frame keyword). Editing the shared
+  border rule affects only the sleeve chips' color; don't "unify" the split, and don't read
+  the override as drift.
 - **The mana-pie hexes live twice by design**: `--mana-*` in
   `packages/design-tokens/tokens.css` and `SLEEVE_QUICK_PICKS` in
   `apps/shuffler/src/table-look.ts` (domain data — a CSS `var()` can't be a persisted value).
@@ -585,10 +597,13 @@ not by recomputing new numbers.**
   owner, not a port. Any future label pairing a player name with a deck name copies this
   composition rather than inventing another.
 - **The sleeve's rendered appearance is DECIDED and BUILT** (ticket 17, 2026-08-08,
-  `0a768e6` + `bfdc877`; model from ticket 11). Radius `w * 0.05`, margin `w * 0.03` per
-  side, both proportions of `shape.props.w` computed at render time; flat solid hex, no
+  `0a768e6` + `bfdc877`; model from ticket 11; corners revised SQUARE 2026-08-09,
+  `e53a27e` — Jess: "sleeves are rectangular"). Margin `w * 0.03` per side, a proportion of
+  `shape.props.w` computed at render time; **no corner radius** (ticket 17's `w * 0.05` was
+  removed from card and pile alike — a sleeve's edge is what gives cards square corners, so
+  don't restore it citing the physical-objects rule); flat solid hex, no
   border/sheen; face-down (sleeved) = bare sleeve rectangle; library pile = inner sleeve
-  rect in `MtgZoneShapeUtil`. Only the picker's swatch palette is still reserved. Concrete
+  rect in `MtgZoneShapeUtil`. Concrete
   watch points the build created:
   - **`LIBRARY_PILE_INSET` (12) in `src/shared/mtgZoneShape.ts` is shared server/client** —
     `tableFurniture.ts` uses it for the card-back image geometry, `MtgZoneShapeUtil` for the
