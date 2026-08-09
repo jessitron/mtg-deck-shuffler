@@ -69,22 +69,32 @@ of value that gets tokenized into a custom property.
 - `src/GameState.ts`
   - Lines 58-64: `WhatHappened` interface definition
 
-## Tabletop (decided 2026-08-07, NOT yet implemented)
+## Tabletop (tap animation BUILT 2026-08-09, `65276e6`)
 
-Full paths from the repo root. Nothing here animates today.
+Full paths from the repo root.
 
-- `apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx` — today's `onClick` toggles
-  `shape.rotation` between 0 and π/2 with centre-preserving `Vec.Add`/`Vec.Rot` math, and reads
-  tap back out of the angle via `UNTAPPED_EPSILON`. Ticket 04 kills that read: `props.tapped`
-  becomes the truth and rotation is written as a ±90 **delta**. The tap animation hooks off the
-  prop change here.
+- `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — the genuine custom `mtg-card`
+  shape (ticket 12 replaced the old `MtgCardImageShapeUtil` image-shape subclass; the
+  `UNTAPPED_EPSILON` angle-read is long gone). `onClick` toggles `props.tapped` and writes
+  `shape.rotation` as a ±90° delta with centre-preserving `Vec.Rot` math. **The tap
+  animation lives in `component()`**: a `useLayoutEffect` keyed on `props.tapped`
+  (`prevTappedRef` starts at first-seen value) runs WAAPI `element.animate()` on the
+  `.tl-image-container` div — `rotate(∓90deg)` → `0`, 500ms, `ease-out`, cancelling any
+  running animations first. The center-coupling comment (ticket-05 constraint 3) is at
+  the effect.
 - `apps/tabletop/src/client/TablePage.tsx` — registers the shape util.
-- **No CSS source file exists on the Tabletop yet** (`tabletop-css-tokens` in `TODO.md`). The
-  tap swing will be this ship's first owned styling, which is why duration/easing are ticket
-  05's call with the design owner rather than 04's.
-- Decisions: `.scratch/tabletop-physics/issues/04-tap-is-state.md` (resolved, `3f14d02`) and
-  `.scratch/tabletop-physics/issues/05-rotate-to-tap.md` (resolved 2026-08-07 — trigger stays
-  `onClick`, duration/easing is 0.5s ease-out).
+- **Still no CSS source file on the Tabletop** (`tabletop-css-tokens` in `TODO.md`) —
+  that's why the animation is WAAPI in the component rather than a CSS transition in a
+  stylesheet.
+- Decisions: `.scratch/tabletop-physics/issues/04-tap-is-state.md` (resolved, `3f14d02`),
+  `.scratch/tabletop-physics/issues/05-rotate-to-tap.md` (resolved 2026-08-07 — trigger
+  stays `onClick`, duration/easing is 0.5s ease-out), and the implementation ticket
+  `.scratch/tabletop-physics/issues/15-tap-animation.md` (landed `65276e6`; plan in
+  `.scratch/tabletop-physics/plan-15.md`).
+- `apps/tabletop/test/verification/verify-tap-animation.spec.ts` — Playwright: tap and
+  untap both show a running 500ms WAAPI animation on `.tl-image-container` (via
+  `getAnimations()`); an already-tapped card after reload does not animate; a remote peer
+  (second browser context) animates when the prop syncs in.
 
 ## Tests
 
@@ -102,5 +112,7 @@ Full paths from the repo root. Nothing here animates today.
   sleep sites explaining why no animation wait is needed, and at line ~120 marking the
   `Mulligan #2` assertion as **load-bearing synchronization** for the following Ctrl+Z.
   Don't "simplify" that assertion away.
-- **No spec asserts on animation state**, and none can — see architecture.md, "Animation
-  completion is NOT observable from the DOM."
+- **No Shuffler spec asserts on animation state**, and none can — see architecture.md,
+  "Animation completion is NOT observable from the DOM." The Tabletop's tap animation is
+  the exception: it's WAAPI, so `element.getAnimations()` observes it, and
+  `verify-tap-animation.spec.ts` (Tabletop section above) does exactly that.
