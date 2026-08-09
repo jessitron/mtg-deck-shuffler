@@ -117,7 +117,8 @@ function imageAsset(id: TLAssetId, name: string, src: string, w: number, h: numb
   });
 }
 
-export interface PlayerAreaImages {
+export interface PlayerAreaLook {
+  deckName?: string;
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
 }
@@ -135,7 +136,7 @@ export async function ensurePlayerArea(
   pageId: string,
   seatId: string,
   playerName: string,
-  images: PlayerAreaImages = {}
+  look: PlayerAreaLook = {}
 ): Promise<PlayerArea> {
   const existing = entry.seats.get(seatId);
   if (existing) return existing;
@@ -144,8 +145,8 @@ export async function ensurePlayerArea(
   const area: PlayerArea = {
     seatIndex,
     playerName,
-    playmatImageUrl: images.playmatImageUrl,
-    cardBackImageUrl: images.cardBackImageUrl,
+    playmatImageUrl: look.playmatImageUrl,
+    cardBackImageUrl: look.cardBackImageUrl,
     landCount: 0,
     graveyardCount: 0,
   };
@@ -172,13 +173,13 @@ export async function ensurePlayerArea(
     store.put(
       zoneShape({ id: matId, pageId, x: mat.x, y: mat.y, w: mat.w, h: mat.h, label: "", index: nextIndex(entry.tableName), zone: "playmat", seatId })
     );
-    if (images.playmatImageUrl) {
+    if (look.playmatImageUrl) {
       const assetId = AssetRecordType.createId(`playmat-${entry.tableName}-${seatId}`);
-      store.put(imageAsset(assetId, `${playerName}'s playmat`, images.playmatImageUrl, mat.w, mat.h));
+      store.put(imageAsset(assetId, `${playerName}'s playmat`, look.playmatImageUrl, mat.w, mat.h));
       store.put(imageShape(matImageId, pageId, mat.x, mat.y, mat.w, mat.h, assetId, `${playerName}'s playmat`, nextIndex(entry.tableName)));
     }
 
-    if (images.cardBackImageUrl) {
+    if (look.cardBackImageUrl) {
       // An opaque image shape hides whatever's underneath it (tldraw limit), so the
       // border and "Library" label have to read as an outward frame: draw the box at
       // full bounds first, then the image inset within it so the box's edge — and the
@@ -200,7 +201,7 @@ export async function ensurePlayerArea(
       const assetId = AssetRecordType.createId(`library-${entry.tableName}-${seatId}`);
       const insetW = library.w - 2 * LIBRARY_IMAGE_INSET;
       const insetH = library.h - 2 * LIBRARY_IMAGE_INSET;
-      store.put(imageAsset(assetId, "Library", images.cardBackImageUrl, insetW, insetH));
+      store.put(imageAsset(assetId, "Library", look.cardBackImageUrl, insetW, insetH));
       store.put(
         imageShape(
           libraryImageId,
@@ -285,7 +286,21 @@ export async function ensurePlayerArea(
       parentId: pageId,
       isLocked: true, // fixes a live bug: any player could drag/delete another player's name
       opacity: 1,
-      props: { richText: toRichText(playerName), color: "green", size: "m", font: "serif", textAlign: "start", autoSize: true, w: 200, scale: 1 },
+      // Two lines, player name first (design ruling 2026-08-08): line position is
+      // the only hierarchy a stock text shape offers, and two lines keep a long
+      // deck name from growing the autoSized label toward the neighboring seat.
+      // No deck name (e.g. the defensive redraw at card arrival) → today's
+      // one-line label, no dangling blank line.
+      props: {
+        richText: toRichText(look.deckName ? `${playerName}\n${look.deckName}` : playerName),
+        color: "green",
+        size: "m",
+        font: "serif",
+        textAlign: "start",
+        autoSize: true,
+        w: 200,
+        scale: 1,
+      },
       meta: {},
     } as any);
   });
@@ -298,8 +313,8 @@ export async function ensurePlayerArea(
     "seat.id": seatId,
     "player.name": playerName,
     "seat.index": seatIndex,
-    "playmat.image_present": Boolean(images.playmatImageUrl),
-    "card_back.image_present": Boolean(images.cardBackImageUrl),
+    "playmat.image_present": Boolean(look.playmatImageUrl),
+    "card_back.image_present": Boolean(look.cardBackImageUrl),
   });
 
   return area;

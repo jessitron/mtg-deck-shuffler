@@ -60,10 +60,11 @@ export async function sendSeatJoinedBestEffort(
   tabletopPort: TabletopPort | undefined,
   tableName: string,
   seatId: string,
-  playerName: string
+  playerName: string,
+  deckName: string
 ): Promise<void> {
   if (!tabletopPort) return;
-  const event = buildSeatJoinedEvent({ seatId, playerName }, defaultPlaymatImageUrl(), cardBackImageUrl());
+  const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, defaultPlaymatImageUrl(), cardBackImageUrl());
   try {
     await tabletopPort.sendSeatJoined(tableName, event);
   } catch (error) {

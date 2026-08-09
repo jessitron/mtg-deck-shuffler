@@ -31,6 +31,7 @@ function seatJoined(overrides: Record<string, unknown> = {}) {
     name: "seat.joined",
     occurredAt: new Date().toISOString(),
     initiator: { seatId: `seat-${eventCounter}`, playerName: "Jess" },
+    deckName: "Blame Game",
     playmatImageUrl: "https://example.com/playmat.png",
     cardBackImageUrl: "https://example.com/card-back.jpg",
     ...overrides,
@@ -75,6 +76,21 @@ describe("seat joined", () => {
     expect(shapes.some((s) => s.x === graveyard.x && s.y === graveyard.y && s.props?.w === graveyard.w && s.props?.h === graveyard.h)).toBe(true);
     expect(shapes.some((s) => s.x === exile.x && s.y === exile.y && s.props?.w === exile.w && s.props?.h === exile.h)).toBe(true);
     expect(shapes.some((s) => s.type === "text")).toBe(true);
+  });
+
+  it("labels the seat with the player's name and the deck's name, player first", async () => {
+    await post("seat-label", seatJoined({ initiator: { seatId: "seat-label-a", playerName: "Robin" } }));
+
+    const label = shapesOf("seat-label").find((s) => s.type === "text");
+    const text = JSON.stringify(label.props.richText);
+    expect(text).toContain("Robin");
+    expect(text).toContain("Blame Game");
+    expect(text.indexOf("Robin")).toBeLessThan(text.indexOf("Blame Game"));
+  });
+
+  it("rejects a seat.joined without a deckName — the contract requires it", async () => {
+    const response = await post("seat-no-deck", seatJoined({ deckName: undefined }));
+    expect(response.status).toBe(400);
   });
 
   it("dedups a retried request (same event id): physical no-op", async () => {

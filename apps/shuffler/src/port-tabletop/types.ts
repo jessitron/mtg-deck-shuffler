@@ -103,9 +103,13 @@ export function buildCardPlayedEvent(gameCard: GameCard, instanceId: string, ini
 //     name: "seat.joined",
 //     occurredAt: string,   // ISO 8601, the Shuffler's clock
 //     initiator: { seatId, playerName },
+//     deckName: string,           // the deck's display name, for the seat's name label
 //     playmatImageUrl?: string,   // absolute URL; opaque to the Tabletop
 //     cardBackImageUrl?: string,  // absolute URL to the standard card back
 //   }
+//
+// Contract proper: contracts/payloads/seat.joined.v1.json (which also homes the
+// optional sleeveColor — sleeve selection wires it up later).
 //
 // FORBIDDEN: `gameCardIndex` must NEVER cross the Shuffler's boundary (same
 // rule as card.played).
@@ -141,6 +145,7 @@ export interface SeatJoinedEvent {
   name: typeof SEAT_JOINED_EVENT_NAME;
   occurredAt: string;
   initiator: Initiator;
+  deckName: string;
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
 }
@@ -150,12 +155,13 @@ export interface SeatJoinedEvent {
  * (DESIGN.md — playmat selection is deferred prep work); the card back is the
  * standard Magic card back until sleeve selection exists.
  */
-export function buildSeatJoinedEvent(initiator: Initiator, playmatImageUrl?: string, cardBackImageUrl?: string): SeatJoinedEvent {
+export function buildSeatJoinedEvent(initiator: Initiator, deckName: string, playmatImageUrl?: string, cardBackImageUrl?: string): SeatJoinedEvent {
   return {
     id: randomUUID(),
     name: SEAT_JOINED_EVENT_NAME,
     occurredAt: new Date().toISOString(),
     initiator: { seatId: initiator.seatId, playerName: initiator.playerName },
+    deckName,
     playmatImageUrl,
     cardBackImageUrl,
   };

@@ -83,6 +83,43 @@ class IngestionTest < ActionDispatch::IntegrationTest
     assert_equal 2, Table.find(table_id).events.count
   end
 
+  test "ingesting a valid seat.joined (with sleeveColor, without cardBackImageUrl) is accepted" do
+    table_id = create_table!["tableId"]
+    envelope = seat_joined_envelope(Table.find(table_id),
+      "sleeveColor" => "#8b1e3f", "cardBackImageUrl" => nil)
+    post "/tables/#{table_id}/events", params: envelope.to_json,
+      headers: { "Content-Type" => "application/json" }
+    assert_response :created
+    assert_equal envelope["payload"], response.parsed_body["payload"]
+  end
+
+  test "a seat.joined without a deckName is a loud 422" do
+    table_id = create_table!["tableId"]
+    envelope = seat_joined_envelope(Table.find(table_id), "deckName" => nil)
+    post "/tables/#{table_id}/events", params: envelope.to_json,
+      headers: { "Content-Type" => "application/json" }
+    assert_response :unprocessable_content
+    assert_match(/seat\.joined\.v1/, response.parsed_body["error"])
+  end
+
+  test "a seat.joined with a malformed sleeveColor is a loud 422" do
+    table_id = create_table!["tableId"]
+    envelope = seat_joined_envelope(Table.find(table_id), "sleeveColor" => "dark red")
+    post "/tables/#{table_id}/events", params: envelope.to_json,
+      headers: { "Content-Type" => "application/json" }
+    assert_response :unprocessable_content
+  end
+
+  test "a seat.joined at an unknown schemaVersion is a loud 422" do
+    table_id = create_table!["tableId"]
+    envelope = seat_joined_envelope(Table.find(table_id))
+    envelope["schemaVersion"] = 2
+    post "/tables/#{table_id}/events", params: envelope.to_json,
+      headers: { "Content-Type" => "application/json" }
+    assert_response :unprocessable_content
+    assert_match(/no contract for event/, response.parsed_body["error"])
+  end
+
   test "an unknown event name is a loud 422" do
     table_id = create_table!["tableId"]
     envelope = card_played_envelope(Table.find(table_id), "name" => "card.yeeted")
