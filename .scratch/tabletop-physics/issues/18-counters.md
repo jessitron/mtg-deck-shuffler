@@ -62,3 +62,9 @@ implementation, for the record:
   with a tap and sit upright on the card regardless of the card's tap state when dropped.
 - Detach fires only on zone *change* — a counter attached to a card already sitting in the
   graveyard stays until the card moves somewhere and back.
+- **The hover-highlight (story 15) was verified by eye, not automation**: tldraw draws the hint
+  as a thicker outline on a canvas overlay (no DOM to assert), so a mid-drag screenshot was
+  captured and inspected — the card shows a clear hint outline while a counter is dragged over
+  it. The attach hooks use `onDragShapesIn`/`onDragShapesOut` (tldraw's frame pattern, live
+  reparent + free hinting) rather than the ticket's named `onDropShapesOver` — same mechanism
+  family, better feedback.

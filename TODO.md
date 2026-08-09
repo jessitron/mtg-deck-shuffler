@@ -29,6 +29,12 @@ section is just a wall between Jess and the live work.
     them. A three-shape gap, worth solving in one pass (the counter's needs the Orbitron webfont
     hand-carried into the SVG per the design KB's standing rule) rather than piecemeal.
 
+- [ ] `tabletop-verify-helpers` the Tabletop's Playwright specs triplicate their helpers
+  - Surfaced 2026-08-08 by the standards review on tabletop-physics ticket 18: `cardPlayed()`,
+    the mouse-drag helper, and the `Shift+1` + settle-wait zoom idiom now exist in at least
+    three specs (`verify-counter`, `verify-zone-entry`, `verify-drag-identity`). Third
+    occurrence — extract a shared test-helper module under `test/verification/`.
+
 - [ ] `browser-tracing-key-guard` the browser tracing init should skip (with a `console.warn`) when the apiKey is empty or the literal string `"undefined"`
   - Surfaced 2026-08-08 by `fleet-is-observable-context` during arch ticket 06 (unify page shell,
     `.scratch/shuffler-architecture-review/issues/06-unify-page-shell.md`). The shell's

@@ -12,7 +12,8 @@ const TAP_ANGLE = Math.PI / 2;
 // Stack, deliberately: cards ARRIVE on the Stack, so their first settled
 // move fires a zone-entry for it, and evicting counters for a nudge around
 // the Stack would strip every counter the moment one was attached there.
-// The ticket's list is exactly these four (hand doesn't exist here yet).
+// The detach set is exactly the ticket's list minus "hand", which doesn't
+// exist as a zone here yet.
 const NON_BATTLEFIELD_ZONES = new Set(["graveyard", "exile", "library"]);
 
 /**
@@ -204,7 +205,7 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       console.log(`zone-entry ${current.props.instanceId} ${zoneHit.zone}`);
 
       // Ticket 18: the card just left the battlefield — its counters don't
-      // follow it into the graveyard/exile/library/stack. They detach and
+      // follow it into the graveyard/exile/library. They detach and
       // scoot to an open spot near the zone's edge, staying on the table.
       // This has to be driven from here: a parented shape's own
       // onTranslateEnd never fires when only its parent moves.
