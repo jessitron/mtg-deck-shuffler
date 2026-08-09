@@ -130,6 +130,29 @@ describe("seat joined", () => {
         expect(positionsAfterEachJoin[join], `join ${join + 1} moved an existing playmat`).toContainEqual(earlier);
       }
     }
+
+    // Every zone actually drawn at the full table keeps a GAP-wide (20-unit)
+    // empty band from every other — zone detection is first-match by z-order,
+    // not closest-match, so disjointness is the guarantee (cardLayout.test.ts
+    // asserts the same over the pure geometry).
+    const zones = shapesOf(table)
+      .filter((s) => s.type === "mtg-zone")
+      .map((s) => ({ label: `${s.props.zone}@${s.x},${s.y}`, x: s.x, y: s.y, w: s.props.w, h: s.props.h }));
+    expect(zones.length).toBe(21); // five zones per seat + the Stack
+    for (let i = 0; i < zones.length; i++) {
+      for (let j = i + 1; j < zones.length; j++) {
+        const a = zones[i];
+        const b = zones[j];
+        const gap = Math.max(Math.max(b.x - (a.x + a.w), a.x - (b.x + b.w)), Math.max(b.y - (a.y + a.h), a.y - (b.y + b.h)));
+        expect(gap, `${a.label} is within a GAP of ${b.label}`).toBeGreaterThanOrEqual(20);
+      }
+    }
+
+    // The table has exactly four compass slots: a fifth seat is refused
+    // loudly rather than drawn on top of an existing area.
+    const fifth = await post(table, seatJoined({ initiator: { seatId: "seat-sq-E", playerName: "Evan" } }));
+    expect(fifth.status).toBe(409);
+    expect(shapesOf(table).filter((s) => s.type === "mtg-zone" && s.props?.zone === "playmat")).toHaveLength(4);
   });
 
   it("draws the Stack as a fixed centered square that does not change as seats join", async () => {

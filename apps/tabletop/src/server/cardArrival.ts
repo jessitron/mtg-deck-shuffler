@@ -3,7 +3,7 @@ import { trace } from "@opentelemetry/api";
 import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom, RoomEntry } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
-import { CARD_W, CARD_H, landPosition, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
+import { CARD_W, CARD_H, MAX_SEATS, landPosition, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
 import { ensurePlayerArea, pageIdOf, nextIndex } from "./tableFurniture.js";
 
 // ============================================================================
@@ -111,6 +111,15 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
     entry.seenEventIds.add(arrival.id);
     trace.getActiveSpan()?.setAttribute("arrival.deduped", "instance");
     res.status(200).json({ ok: true, deduped: true });
+    return;
+  }
+
+  // A card from an unseated player when every compass slot is taken: refuse.
+  // The defensive ensurePlayerArea below would otherwise need a fifth slot,
+  // which doesn't exist (cardLayout.ts MAX_SEATS).
+  if (!entry.seats.has(arrival.initiator.seatId) && entry.seats.size >= MAX_SEATS) {
+    trace.getActiveSpan()?.setAttribute("arrival.rejected", "table-full");
+    res.status(409).json({ error: `table is full: ${MAX_SEATS} seats` });
     return;
   }
 

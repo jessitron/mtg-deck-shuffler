@@ -3,6 +3,7 @@ import { trace } from "@opentelemetry/api";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
 import { ensurePlayerArea, pageIdOf } from "./tableFurniture.js";
+import { MAX_SEATS } from "./cardLayout.js";
 
 // ============================================================================
 // SCAFFOLDING — the seam the Spine absorbs (same posture as cardArrival.ts).
@@ -73,6 +74,14 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
     entry.seenEventIds.add(joined.id);
     trace.getActiveSpan()?.setAttribute("seat_joined.deduped", "seat-already-seated");
     res.status(200).json({ ok: true, deduped: true });
+    return;
+  }
+
+  // Every compass slot is taken: refuse loudly. A fifth area would land on
+  // an existing one, silently breaking zone-AABB disjointness (cardLayout.ts).
+  if (entry.seats.size >= MAX_SEATS) {
+    trace.getActiveSpan()?.setAttribute("seat_joined.rejected", "table-full");
+    res.status(409).json({ error: `table is full: ${MAX_SEATS} seats` });
     return;
   }
 

@@ -78,22 +78,29 @@ const SLOT_MARGIN = GAP + NAME_LABEL_HEIGHT + GAP; // 100
 /** Compass slots by join order: 1 player → S; 2 → S, N; 3 → S, N, E; 4 → S, N, E, W. */
 const SLOT_ORDER = ["S", "N", "E", "W"] as const;
 
+/** The table has exactly as many places as compass slots — four, Commander's max. */
+export const MAX_SEATS = SLOT_ORDER.length;
+
 /**
  * Top-left of a seat's player area (the playmat + column rectangle).
- * N/S center horizontally on the Stack; E/W center vertically. A fifth seat
- * wraps back onto S — the design covers four players (Commander's max).
+ * N/S center horizontally on the Stack; E/W center vertically. Throws past
+ * MAX_SEATS: a fifth area would land exactly on an existing one, silently
+ * breaking the zone-AABB disjointness that zone detection relies on —
+ * callers must refuse the seat instead (seatJoined.ts does).
  */
 export function playerAreaOrigin(seatIndex: number): { x: number; y: number } {
-  const near = STACK_SIZE / 2 + SLOT_MARGIN;
-  switch (SLOT_ORDER[seatIndex % SLOT_ORDER.length]) {
+  const slot = SLOT_ORDER[seatIndex];
+  if (!slot) throw new Error(`no compass slot for seat ${seatIndex}: the table seats ${MAX_SEATS}`);
+  const slotEdge = STACK_SIZE / 2 + SLOT_MARGIN; // distance from the origin to each slot's near edge
+  switch (slot) {
     case "S":
-      return { x: -PLAYER_AREA_W / 2, y: near };
+      return { x: -PLAYER_AREA_W / 2, y: slotEdge };
     case "N":
-      return { x: -PLAYER_AREA_W / 2, y: -(near + PLAYMAT_H) };
+      return { x: -PLAYER_AREA_W / 2, y: -(slotEdge + PLAYMAT_H) };
     case "E":
-      return { x: near, y: -PLAYMAT_H / 2 };
+      return { x: slotEdge, y: -PLAYMAT_H / 2 };
     case "W":
-      return { x: -(near + PLAYER_AREA_W), y: -PLAYMAT_H / 2 };
+      return { x: -(slotEdge + PLAYER_AREA_W), y: -PLAYMAT_H / 2 };
   }
 }
 

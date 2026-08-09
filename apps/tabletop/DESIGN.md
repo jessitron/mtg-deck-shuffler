@@ -115,11 +115,12 @@ a 20-unit gap between them, so all zone bounding boxes are strictly disjoint —
 zone detection resolves an overlapping point by z-order, which for furniture is
 draw order, meaningless as a semantic tiebreak (asserted in `test/cardLayout.test.ts`).
 
-**The ripple** (built with the redraw, 2026-08-08): `Right-hand column` growing
-from 425 to 550 grows `Player area` the same amount, and `playerAreaX(seatIndex)`
-in `cardLayout.ts` places every seat at a fixed offset by join order — so this
-widens every seat's column by 125 units **and shifts every player area to the
-right of a widened one over to match**.
+**The ripple** (built with the redraw, 2026-08-08, when seats still sat in a
+row): `Right-hand column` growing from 425 to 550 grew `Player area` the same
+amount, widening every seat's column by 125 units and shifting the areas over
+to match. Since the square, each seat's position is a pure function of its
+compass slot (`playerAreaOrigin(seatIndex)` in `cardLayout.ts`), and a change
+to `PLAYER_AREA_W` re-centers the N/S slots and pushes the W slot further out.
 
 ## The square (decided and built 2026-08-08, ticket 14)
 
@@ -158,8 +159,9 @@ the Stack's size and position don't.
 
 **Built geometry** (ticket 14; the margins were implementer's choice). Everything
 is centered on the board origin (0, 0) — tldraw's canvas is infinite, negative
-coordinates are fine, and the client zooms to fit the furniture on open
-(`TablePage.tsx`):
+coordinates are fine, and the client frames the table's full fixed extent on
+open (`TablePage.tsx` — deterministic, not a fit-to-content; a tldraw deep
+link wins):
 
 - The Stack is **1000 × 1000**, centered on the origin. 1000 was chosen to
   exceed `PLAYMAT_H` (952) so the E/W areas — vertically centered on the origin,

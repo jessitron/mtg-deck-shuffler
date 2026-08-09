@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { defaultShapeUtils, Editor, Tldraw, TLAssetStore } from "tldraw";
+import { Box, defaultShapeUtils, Editor, Tldraw, TLAssetStore } from "tldraw";
 import "tldraw/tldraw.css";
 import { useSync } from "@tldraw/sync";
 import { setGlobalAttrs, currentTraceparent, inSpan } from "./observability";
@@ -40,24 +40,16 @@ const licenseKey = import.meta.env.VITE_TLDRAW_LICENSE_KEY || undefined;
 // The table is laid out around the board origin (DESIGN.md "The square"), so
 // most furniture sits at negative page coordinates — but tldraw's default
 // camera opens with page (0,0) at the viewport's top-left, onto mostly empty
-// canvas. Zoom to the furniture on mount — or, on a still-empty table, once
-// the first shape arrives — unless a deep link (?d=) already says where to look.
+// canvas. Frame the table's full extent once at mount — a fixed region, not a
+// fit to current content, so the camera is deterministic on an empty table
+// and never moves on its own when furniture arrives later. A deep link (?d=)
+// already says where to look, so it wins. The extent mirrors cardLayout.ts's
+// four compass slots + Stack (provisional geometry — tweak alongside it).
+const TABLE_EXTENT = new Box(-2802, -1612, 5604, 3164);
+
 function aimCameraAtTheTable(editor: Editor) {
   if (new URLSearchParams(window.location.search).has("d")) return;
-  if (editor.getCurrentPageShapeIds().size > 0) {
-    editor.zoomToFit();
-    return;
-  }
-  // Remote-only: the first stroke a player draws themselves must not yank
-  // their own camera.
-  const stopListening = editor.store.listen(
-    () => {
-      if (editor.getCurrentPageShapeIds().size === 0) return;
-      stopListening();
-      editor.zoomToFit();
-    },
-    { scope: "document", source: "remote" }
-  );
+  editor.zoomToBounds(TABLE_EXTENT, { inset: 24 });
 }
 
 const inlineAssets: TLAssetStore = {
