@@ -1029,6 +1029,33 @@
       </section>
 
       <!-- ================================================================ -->
+      <section class="gallery-section" id="counter-disc">
+        <h2>Tabletop counter disc <span class="badge badge-candidate">candidate</span></h2>
+        <p class="section-note">
+          <strong>Mock rendering of a component that is built and awaiting sign-off.</strong>
+          Staged for the tabletop-physics map's <code>18-counters</code> ticket (built
+          2026-08-08): the <code>mtg-counter</code> shape a player drops onto a card — free
+          editable text, blank by default, riding the card via tldraw parenting. The treatment
+          ports <code>.hand-count</code> from <code>game.css</code> (the app's one existing
+          count disc, fully tokenized): <code>--deep-space</code> fill,
+          <code>--narrow-border</code> ring in <code>--dark-pink</code>,
+          <code>--light-pink</code> Orbitron text, and real round corners — count discs are a
+          sanctioned round category. The real shape re-expresses this inline in
+          <code>MtgCounterShapeUtil.tsx</code> (44px, border and text proportional to the
+          shape's height so resize keeps its proportions). If this look is wrong, say so —
+          it's one inline style object to change.
+        </p>
+        <div class="stage stage-white">
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <div class="counter-mock"></div>
+            <div class="counter-mock">+1/+1</div>
+            <div class="counter-mock">3</div>
+          </div>
+        </div>
+        <div class="option-where">design-candidates.css → .counter-mock; real shape: apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx</div>
+      </section>
+
+      <!-- ================================================================ -->
       <section class="gallery-section" id="rules">
         <h2>House rules</h2>
         <p class="section-note">
