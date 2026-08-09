@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   GAP,
   CARD_W,
+  CARD_H,
   PLAYMAT_W,
   PLAYMAT_H,
   COLUMN_W,
@@ -149,14 +150,51 @@ describe("cardLayout — the square (compass seats around a centered Stack)", ()
     }
   });
 
-  it("cascades stack cards inside the Stack square", () => {
-    const first = stackCardPosition(0);
-    const later = stackCardPosition(3);
-    expect(first.x).toBeGreaterThanOrEqual(stack.x);
-    expect(first.y).toBeGreaterThanOrEqual(stack.y);
-    expect(first.x + CARD_W).toBeLessThanOrEqual(stack.x + stack.w);
-    expect(later.x).toBeGreaterThan(first.x); // earlier arrivals stay visible
-    expect(later.y).toBeGreaterThan(first.y);
+  // A stack card lands on the Stack's side facing its player's mat, centered
+  // on that side, so everyone can see at a glance who played it.
+  it("puts the S seat's stack card centered on the Stack's bottom edge", () => {
+    const card = stackCardPosition(0, 0);
+    expect(card.x + CARD_W / 2).toBe(0); // horizontally centered
+    expect(card.y + CARD_H).toBe(stack.y + stack.h - GAP); // flush with the bottom edge, inside
+  });
+
+  it("puts the N seat's stack card centered on the Stack's top edge", () => {
+    const card = stackCardPosition(1, 0);
+    expect(card.x + CARD_W / 2).toBe(0);
+    expect(card.y).toBe(stack.y + GAP);
+  });
+
+  it("puts the E seat's stack card centered on the Stack's right edge", () => {
+    const card = stackCardPosition(2, 0);
+    expect(card.y + CARD_H / 2).toBe(0); // vertically centered
+    expect(card.x + CARD_W).toBe(stack.x + stack.w - GAP);
+  });
+
+  it("puts the W seat's stack card centered on the Stack's left edge", () => {
+    const card = stackCardPosition(3, 0);
+    expect(card.y + CARD_H / 2).toBe(0);
+    expect(card.x).toBe(stack.x + GAP);
+  });
+
+  it("cascades a seat's stack cards away from its edge, keeping earlier arrivals visible", () => {
+    // Per seat: which coordinate moves inward (off the seat's edge) as the cascade grows.
+    const inward: Array<(first: { x: number; y: number }, later: { x: number; y: number }) => boolean> = [
+      (first, later) => later.y < first.y, // S: up, off the bottom edge
+      (first, later) => later.y > first.y, // N: down, off the top edge
+      (first, later) => later.x < first.x, // E: left, off the right edge
+      (first, later) => later.x > first.x, // W: right, off the left edge
+    ];
+    for (let seat = 0; seat < 4; seat++) {
+      const first = stackCardPosition(seat, 0);
+      const later = stackCardPosition(seat, 3);
+      expect(first).not.toEqual(later); // earlier arrivals stay visible
+      expect(inward[seat](first, later), `seat ${seat} cascade hugs its edge`).toBe(true);
+      // And stays inside the square.
+      expect(later.x).toBeGreaterThanOrEqual(stack.x);
+      expect(later.y).toBeGreaterThanOrEqual(stack.y);
+      expect(later.x + CARD_W).toBeLessThanOrEqual(stack.x + stack.w);
+      expect(later.y + CARD_H).toBeLessThanOrEqual(stack.y + stack.h);
+    }
   });
 
   it("fills lands left to right on the playmat's bottom half, wrapping to a new row", () => {

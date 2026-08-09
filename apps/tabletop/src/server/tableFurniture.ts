@@ -148,6 +148,7 @@ export async function ensurePlayerArea(
     cardBackImageUrl: images.cardBackImageUrl,
     landCount: 0,
     graveyardCount: 0,
+    stackCount: 0,
   };
   entry.seats.set(seatId, area);
 

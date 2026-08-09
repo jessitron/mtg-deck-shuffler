@@ -59,9 +59,6 @@ function validationError(body: unknown): string | null {
   return null;
 }
 
-// Per-room count of cards placed on the stack (drives the cascade).
-const stackCountByRoom = new Map<string, number>();
-
 function instanceAlreadyOnTable(entry: RoomEntry, instanceId: string): boolean {
   return entry.room
     .getCurrentSnapshot()
@@ -137,12 +134,9 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
     case "graveyard":
       position = graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++);
       break;
-    case "stack": {
-      const count = stackCountByRoom.get(tableName) ?? 0;
-      stackCountByRoom.set(tableName, count + 1);
-      position = stackCardPosition(count);
+    case "stack":
+      position = stackCardPosition(playerArea.seatIndex, playerArea.stackCount++);
       break;
-    }
   }
 
   const shapeId = createShapeId(`card-${arrival.card.instanceId}`);
