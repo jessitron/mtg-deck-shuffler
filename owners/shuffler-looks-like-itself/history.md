@@ -1604,3 +1604,72 @@ card, on the page background — so the page's one Layer-1 violation (the green/
 stays exactly the same size, and the on-brand element doesn't ratify the off-brand one by
 nesting inside it. An agent grepping `LandingPage.tsx` for precedent now finds both; the
 open-choices bullet says which one to pull toward.
+
+## 2026-08-09 — the prep screen got its setup panel, and the sleeve palette got decided
+
+`8995c1a` **Ticket 16: prep-screen picker v1 — playmat swatches and sleeve color**, shipping
+the prototype variant A Jess approved at `683ca1c` (2026-08-09).
+
+The table-look picker landed on `/prepare`: one opaque white panel on the mat
+(`.table-look-panel`, `prepare.css`) with a Playmat row (five `aeoe-*` image swatches,
+96×54) and a Sleeves row (a None chip showing the standard Magic card back — `null` ⇔
+unsleeved — five mana-pie chips at 44×44, and a custom `<input type="color">`). Every pick
+live-previews (mat art swap; sleeve tint on the command-zone surround and deck-title plaque)
+and persists immediately; `seat.joined` carries the picked mat to the Tabletop.
+
+**The prototype-first path worked, and the approved physics came with it.** Variant A was
+built as a throwaway, Jess picked it by eye, and the shipped panel reproduces it — including
+its press physics: rest 0, hover `translateY(-2px)` + black-rgba shadow. That is a **third
+press behaviour** beside `.pushable-flat` (rest −4px/hover −6px/press −2px) and
+`.hero-button`, recorded as a judgement call rather than silently normalized either way:
+Jess approved these exact physics as part of the variant, so "fixing" them to
+`.pushable-flat` would undo an approval — but they are also not sanctioned as a pattern to
+copy to a fourth site. Either reading (sanctioned-for-swatches, or future sweep target) is
+open; the README's design language says so.
+
+**The selection signal reused the right precedent and skipped its drift.** The
+`.hero-button.active` pattern (2026-08-02's standalone decision for exclusive-choice
+controls) got its second live instance: `.table-look-selected` carries the locked lift plus
+the 4px `--dark-pink` `::after` underline. `.hero-button`'s `#897b89` shadow hex — recorded
+drift — was deliberately **not** copied; shadows here are black-rgba only. New mechanical
+fact: an `<input>` can't hold a `::after`, so the custom color input's selected state lives
+on its wrapper `<label class="table-look-custom">` — exactly the wrinkle the `-context`
+consult predicted.
+
+**The frame pulled toward the standard, not the neighbour.** The panel sits right next to
+the join-table panel, whose `#888` 1px borders are the recorded odd-one-out on `/prepare`
+(deferred by Jess, entangled with choice 6). The new panel took the join-table precedent for
+the *opaque-box idea only* and none of its literals: `var(--narrow-border) solid black` —
+the play pages' frame keyword — square corners on the flat panel, `--radius-soft` only on
+the pressable swatches (choice 4's test, applied). The comment above the CSS block says so.
+
+**Two decided-unshipped choices got cited instead of re-litigated.** The color input
+reproduces choice 6's `.candidate-input` values (2px solid `--deep-space` on white) with an
+in-file comment pointing the eventual sweep at it, deviating only on radius —
+`--radius-soft`, because a color input is pressed, not typed into (choice 4's "do you touch
+it"). Neither choice was reopened.
+
+**The sleeve palette — the last piece ticket 17 left reserved — is decided: the mana pie.**
+`SLEEVE_QUICK_PICKS` in `src/table-look.ts` mirrors the `--mana-*` tokens as raw hexes —
+domain data (a persisted player choice can't be a CSS `var()`), with a comment binding the
+two sites ("change a token there, visit here"). Ticket 12's identity requirement holds: the
+five mana colours read distinct at a glance. The playmat set is five, one more than issue
+09's four hero backgrounds (seam-rip is the fifth) — the prototype verdict ratified five.
+
+**Live previews are inline styles on purpose, with one syntax rule that matters.** The mat
+preview (and `/prepare`'s server render) sets `background-image` **longhand** — the
+shorthand would wipe the shared `.playmat` rule's `cover`/`center`. The sleeve tint is JS
+inline `backgroundColor` on `.cool-command-zone-surround` and `.game-title` because the hex
+is domain data and a page-sheet rule on shared components would leak onto `/design`.
+
+**What was left, deliberately:** `/game` still paints the default mat while `/prepare` and
+the Tabletop show the pick — buoyed as `game-page-picked-mat` per the `-review`, not
+silently fixed. The rendered sleeve-on-a-card still has no `/design` specimen
+(`design-sleeve-specimen` stands; the new `#table-look` specimen shows the *picker*, a
+different thing). And the default mat art now has a TS name — `DEFAULT_PLAYMAT_PATH` in
+`table-look.ts`, from which `defaultPlaymatImageUrl()` derives, giving TS one truth — while
+the two CSS sites remain (`design-playmat-specimen` still tracks the gallery one).
+
+**Verified:** `verify-prep-picker.spec.ts` (5 specs), a picked-mat assertion in the two-app
+integration spec, unit tests on the send and validators, and the gallery spec passing with
+the new `#table-look` section.

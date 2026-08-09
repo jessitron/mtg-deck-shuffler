@@ -20,6 +20,7 @@ import { log } from "./log.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState, IncompatibleStateVersionError } from "./port-persist-state/types.js";
 import { PersistPrepPort, PersistedGamePrep, PERSISTED_GAME_PREP_VERSION, IncompatiblePrepVersionError } from "./port-persist-prep/types.js";
+import { PLAYMATS, DEFAULT_PLAYMAT_PATH, SLEEVE_QUICK_PICKS, isKnownPlaymatPath, isValidSleeveColor } from "./table-look.js";
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { trace } from "@opentelemetry/api";
 import { getCardImageUrl, constructCardImageUrl } from "./types.js";
@@ -408,6 +409,9 @@ export function createApp(
       // Render EJS template
       res.render("prepare", {
         prep,
+        playmats: PLAYMATS,
+        selectedPlaymatPath: prep.playmatImagePath ?? DEFAULT_PLAYMAT_PATH,
+        sleeveQuickPicks: SLEEVE_QUICK_PICKS,
         ...helpers
       });
     } catch (error) {
@@ -433,6 +437,45 @@ export function createApp(
         })
       );
     }
+  });
+
+  // POST /prep-table-look/:prepId - persist a playmat and/or sleeve pick
+  // (ticket 16). Fire-and-forget from the picker JS: each pick lands in the
+  // prep immediately, so a reload — and the seat.joined send at Shuffle Up —
+  // sees it. An empty sleeve-color clears the sleeve (None = standard back).
+  app.post("/prep-table-look/:prepId", async (req, res) => {
+    const prepId = parseInt(req.params.prepId, 10);
+
+    const prep = await persistPrepPort.retrievePrep(prepId);
+    if (!prep || prep.version !== PERSISTED_GAME_PREP_VERSION) {
+      res.status(404).send("prep not found");
+      return;
+    }
+
+    const playmatPath = req.body["playmat-path"];
+    if (playmatPath !== undefined) {
+      if (!isKnownPlaymatPath(playmatPath)) {
+        res.status(400).send("unknown playmat");
+        return;
+      }
+      prep.playmatImagePath = playmatPath;
+    }
+
+    const sleeveColor = req.body["sleeve-color"];
+    if (sleeveColor !== undefined) {
+      if (sleeveColor === "") {
+        prep.sleeveColor = undefined;
+      } else if (isValidSleeveColor(sleeveColor)) {
+        prep.sleeveColor = sleeveColor;
+      } else {
+        res.status(400).send("sleeve color must be #rrggbb");
+        return;
+      }
+    }
+
+    prep.updatedAt = new Date();
+    await persistPrepPort.savePrep(prep);
+    res.status(204).end();
   });
 
   // Redirects to active game page - creates game from prep
@@ -516,7 +559,7 @@ export function createApp(
       // JES-140: announce the seat joining its table so the Tabletop draws
       // the player area before any card is played. Best-effort — see sendToTable.ts.
       if (tableInfo) {
-        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor);
+        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor, prep.playmatImagePath);
       }
 
       res.redirect(`/game/${gameId}`);
@@ -634,7 +677,7 @@ export function createApp(
       // JES-140: re-announce the seat (idempotent — a physical no-op if the
       // Tabletop process still has this seat's player area from before restart).
       if (tableInfo) {
-        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor);
+        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor, prep.playmatImagePath);
       }
 
       res.redirect(`/game/${newGameId}`);

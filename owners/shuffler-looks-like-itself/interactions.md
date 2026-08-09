@@ -84,8 +84,14 @@
   `issues/17-*` (**built** 2026-08-08, `0a768e6` + `bfdc877`) wired that rendering and settled
   the reserved treatment with this owner's `-context`: radius `w * 0.05`, margin `w * 0.03`,
   both proportional to `shape.props.w`; flat solid hex, no border/sheen; library pile via a
-  new `sleeveColor` prop on `mtg-zone`. Only the picker's swatch palette remains reserved —
-  see [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side".
+  new `sleeveColor` prop on `mtg-zone`. The picker's swatch palette — the last reserved
+  piece — was decided by ticket 16 (2026-08-09, `8995c1a`): mana pie five + None + custom
+  input; see [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side".
+  `issues/16-*` (**built** 2026-08-09, `8995c1a`; prototype variant A approved `683ca1c`)
+  put the picker on `/prepare` as `.table-look-panel` — see the new watch-point block below
+  and [README.md](README.md)'s design language. It also added
+  `test/verification/verify-prep-picker.spec.ts` (5 specs) and a picked-mat assertion in
+  `verify-tabletop-integration.spec.ts`.
   `issues/15-*` (**built** 2026-08-08, `4263ef8`) put the deck name on the seat name label —
   the two-line player-first composition recorded in [README.md](README.md)'s design language,
   decided with this owner's `-context` mid-implementation. It also created
@@ -232,13 +238,21 @@ Concrete, in rough order of how often they bite.
   `.playmat > .game-title`, `.playmat .cool-command-zone-surround`,
   `.playmat .commander-placeholder`. Don't "tidy" these to `.playmat-prepare` — the mat as a
   domain object is the grid parent, and that's what these are relative to.
-- **The mat art is one asset named in two places**, down from three: `playmat.css` → the
-  bare `.playmat` rule, and `design-gallery.css` → `.stage-playmat` (which hand-copies the
-  URL because the gallery renders a *lookalike*, not the real mat — see
-  `design-playmat-specimen` in `TODO.md`). `site.css` uses the same file for its own
-  purposes and is unrelated. Changing the art means editing both playmat sites, or fixing
-  the gallery first. **No hotlink to `cards.scryfall.io` remains for the mat** — the game
-  mat used one until `a4991f3`; don't reintroduce a third-party image host for chrome.
+- **The default mat art is one asset named in three places (was two; ticket 16 added a TS
+  site, 2026-08-09):** `playmat.css` → the bare `.playmat` rule, `design-gallery.css` →
+  `.stage-playmat` (which hand-copies the URL because the gallery renders a *lookalike*,
+  not the real mat — see `design-playmat-specimen` in `TODO.md`), and now
+  `apps/shuffler/src/table-look.ts` → `DEFAULT_PLAYMAT_PATH`. The TS side has **one**
+  truth: `defaultPlaymatImageUrl()` in `src/port-tabletop/types.ts` derives from
+  `DEFAULT_PLAYMAT_PATH`, so `seat.joined`'s default follows it automatically — but the two
+  CSS sites do not. Changing the default art means all three files (or fixing the gallery
+  first). `site.css` uses the same file for its own purposes and is unrelated. **The mat is
+  also no longer only the CSS default**: `/prepare` server-renders the picked mat as an
+  inline `background-image` longhand on the playmat div, and `prep-picker.js` swaps it live
+  — the bare `.playmat` rule's art is what `/game` (still — see the `game-page-picked-mat`
+  buoy) and an unpicked prep show. **No hotlink to `cards.scryfall.io` remains for the
+  mat** — the game mat used one until `a4991f3`; don't reintroduce a third-party image host
+  for chrome.
 - **The mat art at scale is fine and was checked.** The asset is 1040×745, drawn at up to
   1800px on `/game`; it's painterly and abstract, which upscales forgivingly, and it was
   *already* being upscaled ~2.4× through the old Scryfall card. Verified at a 1900px
@@ -298,6 +312,43 @@ Concrete, in rough order of how often they bite.
   and the two are safe to sit in different columns **only** because `commanders.length
   === 0` renders exactly one of them, never both. Don't "tidy" them back into alignment
   without re-checking that mutual exclusivity still holds.
+
+**Touching the table-look picker (`/prepare`) or its previews** (added 2026-08-09, ticket 16, `8995c1a`)
+
+- **The swatches' press physics are a THIRD press behaviour** — rest 0, hover
+  `translateY(-2px)` + black-rgba shadow (`prepare.css` → `.table-look-mat:hover,
+  .table-look-sleeve:hover`). Not `.pushable-flat`'s numbers, not `.hero-button`'s — the
+  prototype's exact physics, approved by Jess as part of variant A. Recorded judgement call:
+  either sanctioned-for-swatches or a future sweep target. **Don't copy it to a fourth site,
+  and don't "fix" it to `.pushable-flat` without asking.**
+- **Selected state is the `.hero-button.active` pattern's second live instance**
+  (`.table-look-selected` — locked lift + 4px `--dark-pink` `::after` underline). Shadows are
+  black-rgba only; `.hero-button`'s `#897b89` hex is recorded drift and was deliberately not
+  copied. Mechanical wrinkle worth reusing: an `<input>` can't carry `::after`, so the custom
+  color input's selected state sits on its wrapper `<label class="table-look-custom">`.
+- **Mat preview sets `background-image` LONGHAND, never the shorthand** — in
+  `prep-picker.js` (`applyMatPreview`) and server-side in `prepare.ejs`. The `background`
+  shorthand would wipe the shared `.playmat` rule's `cover`/`center` longhands. Comments at
+  both sites say so; keep them true.
+- **Sleeve tint is inline JS style on purpose** (`applySleeveTint` tints
+  `.cool-command-zone-surround` and `.game-title`): the hex is domain data, and a page-sheet
+  rule on those *shared* components would leak onto `/design`, which co-loads the sheets.
+- **The mana-pie hexes live twice by design**: `--mana-*` in
+  `packages/design-tokens/tokens.css` and `SLEEVE_QUICK_PICKS` in
+  `apps/shuffler/src/table-look.ts` (domain data — a CSS `var()` can't be a persisted value).
+  The table-look.ts comment says "change a token there, visit here"; honour it.
+- **Two smaller hand-copies to know about**: the color input's default `value="#bb5277"`
+  (in `table-look-panel.ejs` and the `/design` specimen) is `--dark-pink`'s hex as an
+  attribute default — an attribute can't `var()`, but if `--dark-pink` ever changes, these
+  drift silently. And the `#table-look` gallery specimen hand-copies markup and swatch hexes
+  from the partial (the static-specimen convention — the *rules* still come from
+  `prepare.css`, only inline values are copied).
+- **The swatches carry `transition: all 0.2s ease`** — the same animatable-`outline-width`
+  trap as `.group-by-type-toggle`: a focus-ring assertion against them must **poll**
+  (`expect(...).toPass`), never read once.
+- **`/game` still paints the default mat** while `/prepare` and the Tabletop show the pick.
+  Known gap, buoyed as `game-page-picked-mat` in `TODO.md` — not an oversight to silently
+  fix, and not a bug in the preview.
 
 **Testing that a token or a font actually arrived** (added 2026-08-07, `4396aea`)
 

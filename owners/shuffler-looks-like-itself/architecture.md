@@ -97,7 +97,7 @@ Per-view `additionalStyles` today:
 | `site.css` | Site pages: header, footer, hero, slogan, steps, `.button-base` family | every EJS page |
 | `playmat.css` | **Shared by game and prepare**: **the bare `.playmat` rule — the mat's whole shared appearance (art, `background-size`/`-position`, `border: 10px solid black`), filled in by `a4991f3`**, library stack, card/library buttons, command zone, **the deck-title plaque's *appearance* (`.game-title`)**, all modal styles, card-type icons, card modal | game (TS) + prepare (EJS) |
 | `game.css` | Game page only: `.playmat-game` (the mat *at game scale* — layout, 80px radius, `box-shadow`; was `.page-container` until `7487393`), `.game-header-row`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks, the `--playmat-one`/`--playmat-two` `:root` | game (TS) |
-| `prepare.css` | Prepare page only: `.playmat-prepare` (the mat *at prepare scale* — the grid, layout, 20px radius), the bare-`.playmat` placement rules, commander placeholder, join-table panel | prepare (EJS) |
+| `prepare.css` | Prepare page only: `.playmat-prepare` (the mat *at prepare scale* — the grid, layout, 20px radius), the bare-`.playmat` placement rules, commander placeholder, join-table panel, **the table-look picker (`.table-look-panel` block at the end of the file, ticket 16 — markup in `views/partials/table-look-panel.ejs`, behaviour in `public/prep-picker.js`)** | prepare (EJS) |
 | `deck-selection.css` | `/choose-any-deck`: precon tiles, search + Archidekt inputs | choose-any-deck |
 | `docs.css` | `/docs`, `/about`, `/history`: sidebar + prose layout | those three |
 | `design-candidates.css` | **Proposals only.** Nothing in the app loads it | `/design` only |
@@ -297,6 +297,17 @@ stage Tabletop specimens on `.stage-white`, not the Shuffler's own `.stage-dark`
 draft here copied `.stage-dark` and Jess caught it immediately (the Tabletop's canvas is
 white). The cross-app "real Tabletop stylesheet on `/design`" question remains open for
 whichever ticket needs to render actual Tabletop CSS, not a mock.
+
+**§ `#table-look` — the table-look picker's specimen (2026-08-09, ticket 16, `8995c1a`).**
+"Table look picker", badge **standard** (not a mock — the panel is a shipped Shuffler
+component and `/design` loads `prepare.css`), staged on `.stage-playmat` because the panel
+lives on the mat. Shows a selected mat swatch, the None chip, two mana chips, and the custom
+color input. It follows the static-specimen convention: the *rules* come from the real
+`prepare.css` classes, but the markup and the inline values (swatch `background-image` URLs,
+mana hexes, the `#bb5277` input default) are hand-copied from
+`views/partials/table-look-panel.ejs` — if the partial's structure or the palette in
+`src/table-look.ts` changes, visit the specimen. What a static specimen can't show: the live
+previews (`prep-picker.js` — mat art swap, sleeve tint on the surround and plaque).
 
 **Second Tabletop mock section: § `#counter-disc` (2026-08-08, tabletop-physics ticket 18).**
 "Tabletop counter disc", badge `candidate`, staged on `.stage-white` — three `.counter-mock`

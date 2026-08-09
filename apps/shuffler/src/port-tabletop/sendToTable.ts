@@ -1,6 +1,6 @@
 import { trace } from "@opentelemetry/api";
 import { GameState, GameCard, TableInfo } from "../GameState.js";
-import { TabletopPort, ZoneHint, buildCardPlayedEvent, buildSeatJoinedEvent, defaultPlaymatImageUrl, cardBackImageUrl } from "./types.js";
+import { TabletopPort, ZoneHint, buildCardPlayedEvent, buildSeatJoinedEvent, defaultPlaymatImageUrl, playmatImageUrlFromPath, cardBackImageUrl } from "./types.js";
 import { log } from "../log.js";
 
 /**
@@ -60,11 +60,13 @@ export async function sendSeatJoinedBestEffort(
   tabletopPort: TabletopPort | undefined,
   tableInfo: TableInfo,
   deckName: string,
-  sleeveColor?: string
+  sleeveColor?: string,
+  playmatImagePath?: string
 ): Promise<void> {
   if (!tabletopPort) return;
   const { tableName, seatId, playerName } = tableInfo;
-  const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, defaultPlaymatImageUrl(), cardBackImageUrl(), sleeveColor);
+  const playmatImageUrl = playmatImagePath ? playmatImageUrlFromPath(playmatImagePath) : defaultPlaymatImageUrl();
+  const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, playmatImageUrl, cardBackImageUrl(), sleeveColor);
   try {
     await tabletopPort.sendSeatJoined(tableName, event);
   } catch (error) {
