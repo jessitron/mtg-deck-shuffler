@@ -81,6 +81,14 @@
   Appearance specifics (margin, radius, border/sheen, swatch palette) are explicitly reserved
   for this owner at implementation time — see [open-choices.md](open-choices.md) → "Fleet
   gaps — the Tabletop side".
+  `issues/13-*` (**built** 2026-08-08, `1046b93` + `b18bd16`) is the map's first
+  implementation ticket to land, and the design language held with zero new CSS: the new
+  Command Zone furniture is a standard `mtg-zone` (dashed dark-pink at rest, armed glow,
+  `--font-chrome` label — "Command Zone", Title Case, the two-word glossary term, matching
+  its siblings). **No distinct "commander lives here" look was invented** — deliberately;
+  if one is ever wanted it's a future decision (tickets 08/18/19 territory), not something
+  to backfill as tidying. Everything else in the ticket is geometry (column 425→550, Exile
+  under Graveyard, 20-unit gaps), recorded in `apps/tabletop/DESIGN.md`'s table, not here.
 - **The two-faced-cards owner** — flip button styling and the `.flip-container-*` blocks.
 - **The library-search owner** — modal and list styling.
 - **`test/verification/verify-deck-title-placement.spec.ts`** (added 2026-08-07) — pins the
