@@ -1380,3 +1380,49 @@ belongs to this shape per the tabletop-physics spec; the life counter needs a ne
 (buoyed as `life-counter-needs-own-name`). README, open-choices and interactions all
 corrected in this `-update` pass — the life counter's appearance is still deliberately
 undecided and still owes this owner a `-context`/`-review`.
+
+## 2026-08-08 — the deck name joined the seat label: the fleet's first name/deck pairing
+
+`4263ef8` **Deck name travels to the table's name label (ticket 15)** (+ `a291020`,
+a parameter-clump refactor with no design content).
+
+The Tabletop's seat name label — the locked stock tldraw `text` shape `ensurePlayerArea`
+draws in `apps/tabletop/src/server/tableFurniture.ts` — now shows **two lines: player name
+first, deck name second**, via ``toRichText(`${playerName}\n${deckName}`)``. Decided *with*
+this owner's `-context` mid-implementation (the early-consult pattern again), and it is the
+fleet's first player-name + deck-name pairing, so the composition is now precedent, recorded
+in [README.md](README.md)'s design language.
+
+**Why each piece, kept because the next label will ask:** player first because **line
+position is the only hierarchy a stock text shape offers** — no per-line size or face exists
+on stock props; two lines rather than one so a long deck name grows the autoSized label
+*downward* instead of toward the neighboring seat; no prefix, no separator glyph; deck name
+**verbatim** (player-chosen content, card-art category, no truncation). A missing deck name —
+the defensive redraw at card arrival — degrades to exactly the old one-line label, never a
+dangling blank line. All of this is in a comment above the props in `tableFurniture.ts`, so
+the code carries its own reasoning.
+
+**Stock props otherwise untouched, and a limit got its second confirmation.** `font: "serif"`
+and `color: "green"` stay — the stock `text` shape's `font` prop is the same
+Orbitron-less enum as `geo`'s (README → tldraw limits, now saying so explicitly). So the
+label is off-brand by platform, not by choice. When it someday becomes a self-rendering
+shape, the two-line *structure* carries forward and per-line hierarchy becomes possible —
+that will be a **new** appearance decision for this owner, not a port.
+
+**The data side: `seat.joined` got its contract, and the sleeve field got its home.**
+`contracts/payloads/seat.joined.v1.json` is new — `seatId`, `playerName`, `deckName`
+**required**; `playmatImageUrl`, `cardBackImageUrl`, and `sleeveColor` (ticket 11's
+optional raw hex, `^#[0-9a-fA-F]{6}$`, winning over `cardBackImageUrl` when both arrive)
+optional. Ticket 11's transport decision is now schema, ahead of ticket 17's rendering —
+where the reserved sleeve-appearance choices (margin, radius, sheen, swatch palette) come
+due with this owner.
+
+**A KB gap the `-context` consult flagged got closed in this pass:** the README had never
+mentioned the seat name label at all — the Tabletop's oldest piece of player-visible text,
+invisible to this KB. Now recorded, so the next agent styling a label finds the composition
+instead of inventing one.
+
+**No `/design` specimen, deliberately** — same reasoning as the "yo!" link (2026-08-08,
+above): the gallery renders components with the app's own stylesheets, and this label has
+none; it's stock tldraw chrome whose only decided property is *text composition*, which a
+CSS specimen can't exhibit honestly. If the label becomes self-rendering, it stages then.

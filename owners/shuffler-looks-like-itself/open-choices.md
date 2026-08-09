@@ -614,7 +614,11 @@ self-rendering custom shape.
 - **Coming to this owner: the sleeve's rendered appearance**
   (`.scratch/tabletop-table-layout/issues/11-sleeve-color-to-card-back.md`, resolved
   2026-08-08 — transport + rendering *model* only). Decided there: `sleeveColor` travels as an
-  optional raw hex on `seat.joined`'s player data and is baked into `mtg-card` props at mint
+  optional raw hex on `seat.joined`'s player data — **and that field now exists** (ticket 15,
+  2026-08-08, `4263ef8`): `contracts/payloads/seat.joined.v1.json` carries optional
+  `sleeveColor` (`^#[0-9a-fA-F]{6}$`), winning over `cardBackImageUrl` when both arrive.
+  Transport is real; ticket 17 wires the rendering, where the reserved appearance choices
+  below come due. It is baked into `mtg-card` props at mint
   (legal because sleeve color is a game constant, never changed mid-game); a sleeve renders as
   a solid rectangle slightly larger than the card; face-down cards and the **library pile**
   become the bare sleeve rectangle (the library furniture is a second consumer of the card
