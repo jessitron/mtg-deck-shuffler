@@ -13,6 +13,20 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- [ ] `claim-tickets-on-main` Claim a ticket where other agents can see it — the worktree hides the claim
+  - Surfaced 2026-08-09 while Jess took inventory of which wayfinder tickets were actively being
+    worked: `tabletop-table-layout` ticket 16 showed `Status: ready-for-agent` on main while an
+    agent was actively working it in `.claude/worktrees/ticket-16-prep-picker` — it had flipped
+    the `Status:` line to `claimed` *inside the worktree*, invisible from main until the merge.
+  - Why it matters: any other agent (or Jess) scanning main for `ready-for-agent` tickets can
+    double-claim work already in flight. With parallel background agents now routine, the window
+    is real, not theoretical.
+  - Wanted: a convention — commit the `Status: claimed` change on main *before* entering the
+    worktree (a one-line commit, cheap), or some other claim signal visible outside the worktree.
+    Likely home: `docs/agents/issue-tracker.md`, plus wherever the wayfinder skill tells agents
+    to claim.
+  ← mountain: overhead
+
 - [ ] `tldraw-license-key-expired` Prod tabletop deploys are blocked until a new tldraw key arrives
   - The evaluation key in `.be` expired 2026-08-09 (a day before its printed `2026-08-10` — tldraw
     parses expiry as UTC midnight then rebuilds it from local date parts, so it trips early west
