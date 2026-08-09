@@ -13,6 +13,7 @@ interface StoredPrep {
   tableName?: string;
   playerName?: string;
   seatId?: string;
+  sleeveColor?: string;
 }
 
 export class InMemoryPersistPrepAdapter implements PersistPrepPort {
@@ -51,6 +52,7 @@ export class InMemoryPersistPrepAdapter implements PersistPrepPort {
       tableName: stored.tableName,
       playerName: stored.playerName,
       seatId: stored.seatId,
+      sleeveColor: stored.sleeveColor,
     };
   }
 

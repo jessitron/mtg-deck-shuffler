@@ -1,0 +1,119 @@
+import { test, expect, Browser, Page } from "@playwright/test";
+
+/**
+ * tabletop-physics ticket 15: tapping reads as a quick rotation, not a snap.
+ * The mechanism is a local counter-rotation catch-up (WAAPI, 0.5s ease-out)
+ * on the card's content, keyed off `props.tapped` changing — so it's
+ * observable via `element.getAnimations()` on the `.tl-image-container`.
+ *
+ * Free rotation not triggering the animation (ticket checkbox 3) is covered
+ * structurally, not here: the effect's only input is `props.tapped`, so it
+ * cannot see `shape.rotation` change.
+ */
+
+function cardPlayed(overrides: Record<string, unknown>) {
+  return {
+    id: `e2e-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    name: "card.played",
+    occurredAt: new Date().toISOString(),
+    initiator: { seatId: "e2e-seat", playerName: "Jess" },
+    face: "front",
+    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+    backImageUrl: null,
+    zoneHint: "stack",
+    ...overrides,
+  };
+}
+
+async function placeCard(page: Page, baseURL: string, tableSlug: string, instanceId: string) {
+  const event = cardPlayed({
+    cardName: "Llanowar Elves",
+    card: { scryfallId: "aaaaaaaa-0000-0000-0000-000000000015", instanceId },
+  });
+  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  expect(response.status()).toBe(201);
+  const card = page.locator(`#shape\\:card-${instanceId}`);
+  await expect(card).toBeAttached();
+  return card;
+}
+
+// Running WAAPI animations on the card's image container, [duration, ...].
+async function runningAnimationDurations(page: Page, instanceId: string): Promise<number[]> {
+  return page.evaluate((id) => {
+    const el = document.querySelector(`#shape\\:card-${id} .tl-image-container`);
+    if (!el) return [];
+    return el
+      .getAnimations()
+      .filter((a) => a.playState === "running")
+      .map((a) => Number((a.effect as KeyframeEffect | null)?.getTiming().duration ?? 0));
+  }, instanceId);
+}
+
+test("tapping a card plays a 0.5s rotation catch-up animation", async ({ page, baseURL }) => {
+  const tableSlug = `verify-tap-anim-${Date.now()}`;
+  await page.goto(`/t/${tableSlug}`);
+  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+
+  const instanceId = `tapanim-${Date.now()}`;
+  const card = await placeCard(page, baseURL!, tableSlug, instanceId);
+
+  await card.click();
+  const durations = await runningAnimationDurations(page, instanceId);
+  expect(durations).toContain(500);
+
+  // Untap animates too. Wait out the animation AND tldraw's double-click
+  // window (450ms) so the second click is an independent onClick.
+  await page.waitForTimeout(600);
+  await card.click();
+  const untapDurations = await runningAnimationDurations(page, instanceId);
+  expect(untapDurations).toContain(500);
+});
+
+test("a card arriving already-tapped does not animate on mount", async ({ page, baseURL }) => {
+  const tableSlug = `verify-tap-mount-${Date.now()}`;
+  await page.goto(`/t/${tableSlug}`);
+  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+
+  const instanceId = `tapmount-${Date.now()}`;
+  const card = await placeCard(page, baseURL!, tableSlug, instanceId);
+
+  // Tap it, let the animation finish, then reload: the card arrives from the
+  // store already-tapped and must not swing on mount.
+  await card.click();
+  await expect(async () => {
+    expect(await runningAnimationDurations(page, instanceId)).toHaveLength(0);
+  }).toPass({ timeout: 3000 });
+
+  await page.reload();
+  await expect(page.locator(`#shape\\:card-${instanceId}`)).toBeAttached({ timeout: 15000 });
+  expect(await runningAnimationDurations(page, instanceId)).toHaveLength(0);
+});
+
+test("a remote peer sees the tap animation when the prop syncs in", async ({ browser, baseURL }) => {
+  const tableSlug = `verify-tap-remote-${Date.now()}`;
+
+  async function openTable(b: Browser) {
+    const context = await b.newContext();
+    const page = await context.newPage();
+    await page.goto(`/t/${tableSlug}`);
+    await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+    return { context, page };
+  }
+
+  const alice = await openTable(browser);
+  const bob = await openTable(browser);
+
+  const instanceId = `tapremote-${Date.now()}`;
+  const card = await placeCard(alice.page, baseURL!, tableSlug, instanceId);
+  await expect(bob.page.locator(`#shape\\:card-${instanceId}`)).toBeAttached({ timeout: 10000 });
+
+  await card.click();
+
+  // The prop change syncs to Bob and triggers the same catch-up there.
+  await expect(async () => {
+    expect(await runningAnimationDurations(bob.page, instanceId)).toContain(500);
+  }).toPass({ timeout: 3000 });
+
+  await alice.context.close();
+  await bob.context.close();
+});

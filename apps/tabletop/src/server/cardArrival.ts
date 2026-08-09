@@ -167,6 +167,11 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
         face: arrival.face,
         faceDown: false,
         tapped: false,
+        // Ticket 17: the seat's sleeve, baked in at mint time. Legal because
+        // sleeve color is a game constant — never changed mid-game. Sleeve is
+        // seat data, not payload data: it comes from seat memory, never from
+        // the card.played payload.
+        sleeveColor: playerArea.sleeveColor ?? null,
       },
       // No traceparent in meta — cards persist; traces don't. Zone
       // membership lands here once a card is dragged (see

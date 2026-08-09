@@ -90,10 +90,21 @@ when the license state is `unlicensed-production` — replacing the canvas with 
 "Production" is decided **by URL alone**: any HTTPS request to a non-loopback hostname.
 Two consequences worth internalizing:
 
-- **localhost is always exempt.** `./run` and `./verify.sh` can never reproduce this,
-  no matter how thorough the Playwright spec. Local green tells you nothing about it.
+- **localhost is exempt from the *no-key* gate, but NOT from the *expired-key* gate.**
+  `getLicenseState`'s dev exemption only covers missing/unparseable keys; a
+  parseable-but-expired evaluation key returns `expired` unconditionally and blanks
+  localhost too. So `TablePage.tsx` passes an **empty string** as `licenseKey` on
+  loopback hosts — empty, not `undefined`, because an undefined prop makes
+  `LicenseProvider` fall back to reading the env itself, and vite's `define` rewrote
+  `import.meta.env.VITE_TLDRAW_LICENSE_KEY` to the key literal *inside tldraw's own
+  bundled code*. Verified by `test/verification/verify-license-localhost.spec.ts`.
+  Consequently `./run` and `./verify.sh` can never reproduce the *production* gate —
+  local green tells you nothing about the deployed host.
 - **A key is domain-bound.** A key that doesn't cover `table.jessitron.honeydemo.io`
   fails exactly like no key at all.
+- **Expiry trips up to a day early.** tldraw parses the key's expiry (`2026-08-10`) as
+  UTC midnight, then rebuilds it from *local* date parts — west of UTC that lands on the
+  previous local day, and evaluation licenses have no grace period.
 
 So the key must be present, and the only place to verify it is the deployed host:
 

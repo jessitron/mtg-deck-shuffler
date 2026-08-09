@@ -1427,6 +1427,49 @@ above): the gallery renders components with the app's own stylesheets, and this 
 none; it's stock tldraw chrome whose only decided property is *text composition*, which a
 CSS specimen can't exhibit honestly. If the label becomes self-rendering, it stages then.
 
+## 2026-08-08 — the sleeve got its look, and a padded wrapper lost to `.tl-image`
+
+`0a768e6` **Ticket 17: sleeve color travels in seat.joined and renders on the cards**, then
+`bfdc877` **Ticket 17 fix: sleeve ring actually shows on a face-up card**.
+
+The treatment this owner had reserved since ticket 11 ("exact margin, corner radius, any
+border/sheen") came due and was decided with the `-context` consult mid-implementation, not
+smuggled: **corner radius `w * 0.05`, margin `w * 0.03` per side, both proportions of
+`shape.props.w`** — cards are aspect-locked resizable, so a fixed px would drift out of
+proportion; this is the playmat-radius lesson (ticket 11) applied for the third time, now to
+`mtg-card` itself. `0.05` is the Shuffler card's own corner ratio (10/200); `0.03` mirrors a
+real sleeve's ~1–2mm overhang. The sleeve is the flat solid player-picked hex — **no border,
+sheen, or texture** — and the face image keeps its own rendering inside the ring, no second
+radius (Scryfall art carries its own printed corners). Face-down (sleeved) renders as the
+bare sleeve rectangle. `indicator()` untouched — the standing ride-along warning held.
+
+**The library pile became `MtgZoneShapeUtil`'s own render**, via a new `sleeveColor` prop on
+`mtg-zone`: an inner solid rect inset by `LIBRARY_PILE_INSET = 12` — a constant **moved to
+`src/shared/mtgZoneShape.ts`** so the server's card-back-image geometry and the client's
+sleeve geometry share one number — radius 5% of the inset width. A composition subtlety worth
+keeping: the sleeved zone's shape-level opacity is 1 (set in `tableFurniture.ts`) and the
+component fades **just the box chrome** to 0.5, so the pile stays as vivid as the cards while
+the furniture keeps the same composite look its plain siblings get. The pile div is a
+*sibling* of the box div, not a child, precisely so it doesn't inherit the fade.
+
+**The bug that earned a tldraw-limits entry.** The first commit wrapped the face image in the
+padded sleeve div and reused `className="tl-image"` on the img — deliberately, "rather than
+reinventing it." But tldraw's `.tl-image` rule is `position: absolute; inset: 0`, anchored to
+`.tl-image-container` — the img escaped the wrapper's padding entirely and the ring never
+rendered. **The DOM read fine and the build passed; only a live-browser screenshot caught it**
+(`.scratch/tabletop-table-layout/verify-17-sleeved-card.png`). `bfdc877` drops the class in
+the sleeved branch and styles the img directly (`display: block; width/height: 100%`).
+Recorded in [README.md](README.md) → tldraw limits: reuse `.tl-image-container` for its
+`pointer-events: all`; never reuse `.tl-image` on an img you intend to frame. The general
+lesson is the choice-5 one again — a treatment collides with structure you only find by
+rendering the thing — plus a new wrinkle: *pattern reuse walked the bug in*. A borrowed class
+carries its whole rule, not just the part you borrowed it for.
+
+**What's still open:** the picker's default/swatch palette (ticket 16 — no default sleeve
+color exists; `null` ⇔ unsleeved), and the `/design` specimen, buoyed as
+`design-sleeve-specimen` rather than skipped silently — a mock would follow the ticket-11
+precedents (labelled a mock, staged on `.stage-white`).
+
 ## 2026-08-08 — the counter's text learned the shape of its own disc
 
 **⚠️ REVERTED the same day — see the next entry.** The circle-aware fit this entry
@@ -1530,3 +1573,34 @@ larger), and a 4× eyeball — "3" full size, "+1/+1" one line, "lifelink" two r
 lines, "first strike" two words, all inside the disc. The `.counter-mock` comment in
 `design-candidates.css` ("long labels shrink to fit") never mentioned chords, so it's
 still accurate unchanged.
+
+## 2026-08-09 — the nav-link idiom crossed to the Tabletop, and got named on the way
+
+`6b6b927` (merged as `847661d`) **Tabletop landing page links back to the Shuffler**
+
+Fourteen lines: a plain `<a href="https://mtg.jessitron.honeydemo.io">` ("Manage your decks
+in the Shuffler", `data-testid="shuffler-link"`) below the landing page's cream card, and
+the page container going flex-row → flex-column with a `1.5rem` gap to seat it. Decided
+with this owner's `-context` before implementation, and the prescription held exactly:
+white `var(--font-chrome)` on the dark `#1a2a1f` page background, outside the cream card;
+no radius, no new tokens, no ship-local stylesheet started, no outline rules; the buoyed
+green/cream palette (`tabletop-landing-page-palette`) untouched.
+
+**What the consult surfaced, now recorded in [README.md](README.md)'s design language:
+the fleet had a text-link treatment in use but never written down.** The Shuffler's header
+(`site.css` → `.right-nav a` — white chrome type on dark, no underline at rest, opacity
+hover, underline on `.active`) was the only tokenized link styling anywhere; `docs.css`'s
+content links are its own docs-only tokens plus raw-hex drift. This change is the idiom's
+second live instance and the first on the Tabletop, which is what earned it a name.
+
+**The always-underline variant is the accepted degradation, not a divergence.** React
+inline styles can't express `:hover`, and a standalone link in body position (unlike a
+header, where position says "nav") needs the underline to read as a link at all. Recorded
+so the next inline-style link doesn't get "fixed" toward the header's `none`, and so a
+future stylesheet-context link knows hover behaviour reopens as a small decision.
+
+**One structural nuance worth keeping:** the link sits deliberately *outside* the cream
+card, on the page background — so the page's one Layer-1 violation (the green/cream card)
+stays exactly the same size, and the on-brand element doesn't ratify the off-brand one by
+nesting inside it. An agent grepping `LandingPage.tsx` for precedent now finds both; the
+open-choices bullet says which one to pull toward.

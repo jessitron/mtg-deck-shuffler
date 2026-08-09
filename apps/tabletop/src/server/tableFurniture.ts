@@ -2,7 +2,7 @@ import { trace } from "@opentelemetry/api";
 import { AssetRecordType, createShapeId, toRichText, TLAssetId, TLShapeId } from "@tldraw/tlschema";
 import { IndexKey, getIndexAbove, ZERO_INDEX_KEY } from "@tldraw/utils";
 import { RoomEntry, PlayerArea } from "./rooms.js";
-import { MtgZoneShapeProps } from "../shared/mtgZoneShape.js";
+import { MtgZoneShapeProps, LIBRARY_PILE_INSET } from "../shared/mtgZoneShape.js";
 import {
   playmatBounds,
   libraryBounds,
@@ -39,9 +39,6 @@ export function nextIndex(tableName: string): IndexKey {
  */
 export type Zone = MtgZoneShapeProps["zone"];
 
-/** How far the library's card-back image insets from its box, so the box's border and "Library" label peek out as a frame around the opaque image. */
-const LIBRARY_IMAGE_INSET = 12;
-
 export interface ZoneShapeArgs {
   id: TLShapeId;
   pageId: string;
@@ -53,6 +50,8 @@ export interface ZoneShapeArgs {
   index: IndexKey;
   zone: Zone;
   seatId: string | null;
+  /** Set only on a sleeved seat's library zone (ticket 17) — the pile renders as the bare sleeve rectangle. */
+  sleeveColor?: string;
 }
 
 /**
@@ -63,7 +62,7 @@ export interface ZoneShapeArgs {
  * `props.zone`. `opacity: 0.5` matches the pre-ticket-13 `regionShape`'s
  * look (furniture read as a faint outline, not a solid block).
  */
-export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId }: ZoneShapeArgs) {
+export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, sleeveColor }: ZoneShapeArgs) {
   return {
     id,
     typeName: "shape",
@@ -74,8 +73,11 @@ export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId }
     index,
     parentId: pageId,
     isLocked: true, // furniture: don't let a stray drag eat the graveyard
-    opacity: 0.5,
-    props: { w, h, zone, seatId, label } satisfies MtgZoneShapeProps,
+    // A sleeved library pile must be as vivid as the cards it represents, so
+    // the shape's own opacity is 1 and MtgZoneShapeUtil fades just the box
+    // chrome back to 0.5 — the same composite the plain furniture gets.
+    opacity: sleeveColor ? 1 : 0.5,
+    props: { w, h, zone, seatId, label, sleeveColor: sleeveColor ?? null } satisfies MtgZoneShapeProps,
     meta: {},
   } as any;
 }
@@ -121,6 +123,8 @@ export interface PlayerAreaLook {
   deckName?: string;
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
+  /** The seat's sleeve (ticket 17) — when present it wins; cardBackImageUrl is dropped. */
+  sleeveColor?: string;
 }
 
 /**
@@ -146,7 +150,10 @@ export async function ensurePlayerArea(
     seatIndex,
     playerName,
     playmatImageUrl: look.playmatImageUrl,
-    cardBackImageUrl: look.cardBackImageUrl,
+    // sleeveColor wins (contract: seat.joined.v1) — a sleeved seat drops the
+    // card back entirely rather than keeping a loser around to mix up later.
+    cardBackImageUrl: look.sleeveColor ? undefined : look.cardBackImageUrl,
+    sleeveColor: look.sleeveColor,
     landCount: 0,
     graveyardCount: 0,
     stackCount: 0,
@@ -180,56 +187,46 @@ export async function ensurePlayerArea(
       store.put(imageShape(matImageId, pageId, mat.x, mat.y, mat.w, mat.h, assetId, `${playerName}'s playmat`, nextIndex(entry.tableName)));
     }
 
-    if (look.cardBackImageUrl) {
+    // A sleeved seat's pile is drawn by the zone shape itself (ticket 17):
+    // MtgZoneShapeUtil renders props.sleeveColor as the bare sleeve rectangle,
+    // inset like the image so the box's border and label still frame it. No
+    // image shape, so nothing opaque covers the zone's interior.
+    store.put(
+      zoneShape({
+        id: libraryId,
+        pageId,
+        x: library.x,
+        y: library.y,
+        w: library.w,
+        h: library.h,
+        label: "Library",
+        index: nextIndex(entry.tableName),
+        zone: "library",
+        seatId,
+        sleeveColor: area.sleeveColor,
+      })
+    );
+    if (area.cardBackImageUrl) {
       // An opaque image shape hides whatever's underneath it (tldraw limit), so the
-      // border and "Library" label have to read as an outward frame: draw the box at
-      // full bounds first, then the image inset within it so the box's edge — and the
-      // label riding on it — stays visible as a ring around the picture.
-      store.put(
-        zoneShape({
-          id: libraryId,
-          pageId,
-          x: library.x,
-          y: library.y,
-          w: library.w,
-          h: library.h,
-          label: "Library",
-          index: nextIndex(entry.tableName),
-          zone: "library",
-          seatId,
-        })
-      );
+      // border and "Library" label have to read as an outward frame: the box is at
+      // full bounds above, and the image insets within it so the box's edge — and
+      // the label riding on it — stays visible as a ring around the picture.
       const assetId = AssetRecordType.createId(`library-${entry.tableName}-${seatId}`);
-      const insetW = library.w - 2 * LIBRARY_IMAGE_INSET;
-      const insetH = library.h - 2 * LIBRARY_IMAGE_INSET;
-      store.put(imageAsset(assetId, "Library", look.cardBackImageUrl, insetW, insetH));
+      const insetW = library.w - 2 * LIBRARY_PILE_INSET;
+      const insetH = library.h - 2 * LIBRARY_PILE_INSET;
+      store.put(imageAsset(assetId, "Library", area.cardBackImageUrl, insetW, insetH));
       store.put(
         imageShape(
           libraryImageId,
           pageId,
-          library.x + LIBRARY_IMAGE_INSET,
-          library.y + LIBRARY_IMAGE_INSET,
+          library.x + LIBRARY_PILE_INSET,
+          library.y + LIBRARY_PILE_INSET,
           insetW,
           insetH,
           assetId,
           "Library",
           nextIndex(entry.tableName)
         )
-      );
-    } else {
-      store.put(
-        zoneShape({
-          id: libraryId,
-          pageId,
-          x: library.x,
-          y: library.y,
-          w: library.w,
-          h: library.h,
-          label: "Library",
-          index: nextIndex(entry.tableName),
-          zone: "library",
-          seatId,
-        })
       );
     }
 
@@ -315,7 +312,8 @@ export async function ensurePlayerArea(
     "player.name": playerName,
     "seat.index": seatIndex,
     "playmat.image_present": Boolean(look.playmatImageUrl),
-    "card_back.image_present": Boolean(look.cardBackImageUrl),
+    "card_back.image_present": Boolean(area.cardBackImageUrl),
+    "sleeve.present": Boolean(area.sleeveColor),
   });
 
   return area;

@@ -39,13 +39,16 @@ that doesn't match.
   kept out of the contract can be reshaped at will; anything promoted into `contracts/`
   cannot.
 
-- **Sleeve color is seat data and stays out of card events** (table-layout ticket 11,
-  2026-08-08, decision only). When sleeves land, optional `sleeveColor` (hex) joins the
-  player data on `seat.joined`, and `cardBackImageUrl` there becomes optional (omitted when
-  a sleeve is defined; `sleeveColor` wins if both arrive). **`card.played` is NOT revved**:
-  it already carries `seat`, and its charter keeps derivable seat conveniences out of the
-  payload. `seat.joined` has no schema in `contracts/` yet; writing one converges with
-  table-layout ticket 06's deck-name field — one schema session covers both.
+- **Sleeve color is seat data and stays out of card events** (decided table-layout
+  ticket 11, built ticket 17, both 2026-08-08). Optional `sleeveColor` (hex,
+  `#rrggbb`) is on the `seat.joined` player data, and `cardBackImageUrl` is optional
+  there — omitted when a sleeve is defined; `sleeveColor` wins if both arrive.
+  **`card.played` was NOT revved** — held: the Tabletop bakes the sleeve into the
+  `mtg-card` shape from *seat memory* at mint time; the sleeve never rides a card event.
+  The schema exists now: `contracts/payloads/seat.joined.v1.json` carries both fields
+  (six-hex-digit pattern on `sleeveColor`, the wins-over rule in the descriptions) —
+  written in one session with the deck-name field, as predicted. The Tabletop's
+  `seatJoined.ts` mirrors the pattern check and 400s a malformed sleeve.
 
 ## The vocabulary grew — cards-come-and-go ticket 02 (2026-08-08, `7b7f868`, decisions only)
 

@@ -13,6 +13,40 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- [ ] `tldraw-license-key-expired` Prod tabletop deploys are blocked until a new tldraw key arrives
+  - The evaluation key in `.be` expired 2026-08-09 (a day before its printed `2026-08-10` — tldraw
+    parses expiry as UTC midnight then rebuilds it from local date parts, so it trips early west
+    of UTC). Localhost is immune since `21ff05b` (TablePage passes empty-string `licenseKey` on
+    loopback), but the deployed host still needs a real key.
+  - ⚠️ **Don't deploy the Tabletop until then**: the expired key satisfies `deploy.sh`'s
+    presence check, so the deploy proceeds and ships a canvas that blanks 5s after load —
+    `check-deployed-canvas.mjs` only catches it after the rollout has already wiped the rooms.
+  - Key status (2026-08-09): hobby license application pending, past tldraw's stated 2-week
+    turnaround. Plan B: a 100-day enterprise trial key, to be requested when ready for real
+    testing. Whichever lands first goes in the repo-root `.be` as `TLDRAW_LICENSE_KEY`.
+
+- [ ] `design-text-link-specimen` Stage the nav-link idiom (text links) on `/design`
+  - Surfaced 2026-08-09 by the `shuffler-looks-like-itself` update after `6b6b927` (Tabletop
+    landing page's Shuffler link) named the idiom: white `--font-chrome` on dark, two live
+    instances (`site.css` → `.right-nav a`, `LandingPage.tsx` → `styles.shufflerLink`), two
+    underline variants (none-at-rest with hover vs. always-underlined for inline-style
+    contexts). The gallery has a typography row for nav links but no component specimen; a
+    Tabletop-side mock follows the ticket-11 precedents (labelled a mock, `.stage-white` —
+    though this link sits on a dark page, so the stage choice needs a thought).
+
+- [ ] `design-sleeve-specimen` Stage a sleeved-card mock specimen on `/design`
+  - Surfaced 2026-08-08 by the `shuffler-looks-like-itself` review of table-layout ticket 17,
+    which shipped sleeve rendering on the Tabletop canvas (card image centered in a
+    sleeve-colored frame — radius `w * 0.05`, margin `w * 0.03`, flat, no border; face-down
+    and the library pile as the bare sleeve rectangle). The gallery has no specimen, so the
+    treatment exists only on the canvas; the owner said don't skip the specimen silently.
+  - Shape: a mock in `apps/shuffler/public/design-candidates.css`, labelled a mock, staged on
+    `.stage-white` (ticket 11's first draft wrongly used `.stage-dark`) — same convention as
+    the zone mocks (`a304c52`).
+  - Related: `tabletop-landing-page-palette` below notes the gallery has no Tabletop stage at
+    all; this specimen is another instance of that gap.
+  ← mountain: tabletop-replaces-mural
+
 - [ ] `life-counter-needs-own-name` table-layout ticket 12's life/commander-damage shape can't be called `mtg-counter` anymore
   - Surfaced 2026-08-08 by both owner reviews on tabletop-physics ticket 18: that ticket (and the
     tabletop-physics spec) explicitly assign the type string `mtg-counter` to the drag-onto-a-card
@@ -34,6 +68,10 @@ section is just a wall between Jess and the live work.
     the mouse-drag helper, and the `Shift+1` + settle-wait zoom idiom now exist in at least
     three specs (`verify-counter`, `verify-zone-entry`, `verify-drag-identity`). Third
     occurrence — extract a shared test-helper module under `test/verification/`.
+  - Re-surfaced 2026-08-09 by the code review on tabletop-physics ticket 15:
+    `verify-tap-animation.spec.ts` added a fourth copy of `cardPlayed()` (plus a `placeCard()`
+    wrapper it shares with `verify-card-rotate`). The count keeps climbing; the helper module
+    would now pay for itself four times over.
 
 - [ ] `browser-tracing-key-guard` the browser tracing init should skip (with a `console.warn`) when the apiKey is empty or the literal string `"undefined"`
   - Surfaced 2026-08-08 by `fleet-is-observable-context` during arch ticket 06 (unify page shell,

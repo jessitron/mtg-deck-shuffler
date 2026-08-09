@@ -44,12 +44,15 @@ Same as the app: people Jessitron invites for remote MTG games. Animations serve
 | Card flip | `.card-flipped` on `.flip-container-outer` | Working | 0.8s | CSS transition on class toggle |
 | Button shimmer | `.start-game-button:hover::before` | Working | 0.8s | CSS hover pseudo-element |
 
-Everything above is **Shuffler-side** (`apps/shuffler/`). The one Tabletop animation is
-decided but unbuilt:
+Everything above is **Shuffler-side** (`apps/shuffler/`). The one Tabletop animation:
 
 | Animation | Where | Status | Duration | Trigger |
 |-----------|-------|--------|----------|---------|
-| Tap / untap swing (90°) | Tabletop, `MtgCardImageShapeUtil` | **Decided, NOT implemented** — `.scratch/tabletop-physics/issues/05-rotate-to-tap.md` (resolved) | 0.5s ease-out (Jess overrode this owner's 0.8s lean) | `onClick` toggling `props.tapped` on a synced tldraw shape (tldraw's own rotate handle stays reserved for free rotation, never repurposed for tap) |
+| Tap / untap swing (90°) | Tabletop, `MtgCardShapeUtil` `component()` | **Working** (`65276e6`, physics ticket 15) | 0.5s ease-out (Jess overrode this owner's 0.8s lean) | `props.tapped` changing on the synced `mtg-card` shape (toggled by `onClick`; tldraw's rotate handle stays reserved for free rotation, never repurposed for tap) |
 
-This will be the Tabletop's **first owned styling**, and the ship has no CSS source file
-yet (`tabletop-css-tokens` in `TODO.md`) — that blocks implementing 05, not deciding it.
+It uses **WAAPI `element.animate()`** rather than a CSS transition, because the Tabletop
+still has no ship-local stylesheet (`tabletop-css-tokens` in `TODO.md`). This owner's
+`-review` approved that as within the spirit of "CSS-driven, no animation library" — it's
+the platform's declarative animation API with constant keyframes, not a JS animation
+library. Decisions: `.scratch/tabletop-physics/issues/05-rotate-to-tap.md`,
+implementation ticket `.scratch/tabletop-physics/issues/15-tap-animation.md`.

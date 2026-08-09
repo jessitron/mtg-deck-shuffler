@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { slugifyTableName } from "../shared/slugify";
 
 /**
- * The landing page takes a table name only — player name is a Shuffler-prep
- * concern (you name yourself when you join a table from the Shuffler).
- * Square corners; tablet-friendly targets.
+ * The landing page takes a table name only
  */
 export function LandingPage() {
   const [tableName, setTableName] = useState("");
@@ -40,6 +38,9 @@ export function LandingPage() {
           </button>
         </form>
       </main>
+      <a href="https://mtg.jessitron.honeydemo.io" style={styles.shufflerLink} data-testid="shuffler-link">
+        Manage your decks in the Shuffler
+      </a>
     </div>
   );
 }
@@ -49,8 +50,10 @@ const styles: Record<string, React.CSSProperties> = {
   page: {
     minHeight: "100vh",
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    gap: "1.5rem",
     background: "#1a2a1f",
     fontFamily: "Georgia, serif",
   },
@@ -81,5 +84,14 @@ const styles: Record<string, React.CSSProperties> = {
     borderRadius: 0,
     cursor: "pointer",
     minHeight: "48px",
+  },
+  // Fleet nav-link idiom: white chrome type on a dark surface, always underlined
+  // (inline styles can't express :hover). Kept outside the cream card, which has
+  // its own buoyed palette problem (tabletop-landing-page-palette).
+  shufflerLink: {
+    fontFamily: "var(--font-chrome)",
+    fontSize: "0.95rem",
+    color: "white",
+    textDecoration: "underline",
   },
 };

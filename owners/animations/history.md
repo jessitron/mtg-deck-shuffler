@@ -261,6 +261,40 @@ viewport constraint. It was unverifiable folk memory carried into the original `
 capture, not a real constraint, which is why removing `force: true` was safe. Recorded in
 interactions.md so nobody re-adds it on the strength of that phrase alone.
 
+### 2026-08-09: Tap animation BUILT — tabletop-physics ticket 15 (`65276e6`)
+
+The third mechanism (prop-derived local catch-up) is now code, exactly as this KB specified
+plus one addition from this owner's `-review`. In
+`apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` `component()`: a `useLayoutEffect`
+keyed on `props.tapped` (with `prevTappedRef` initialized to the first-seen value) runs
+**WAAPI `element.animate()`** on `.tl-image-container` — `rotate(∓90deg)` → `0`, 500ms,
+`ease-out`.
+
+- **WAAPI, not CSS transition** — the Tabletop still has no ship-local stylesheet
+  (`tabletop-css-tokens` still open); this owner's `-review` approved WAAPI as within
+  "CSS-driven, no animation library".
+- **Owner-review addition**: `el.getAnimations().forEach(a => a.cancel())` before starting,
+  so a mid-swing re-tap gets one clean jump instead of stacked transforms. Smooth reversal
+  on a fast double-tap is an accepted gap, noted in a code comment.
+- All four ticket-05 constraints verified in the code: effect input is `tapped` only (free
+  rotation can't fire it); no swing on mount/reconnect; the center-coupling comment
+  (constraint 3) is in the code; overflow re-verified against installed tldraw 5.2.5
+  (`.tl-shape` is `overflow: visible`, no clipping on `.tl-html-container` /
+  `.tl-image-container`).
+- **Accepted risk**: the animated element is `.tl-image-container` itself — if tldraw's
+  stylesheet ever puts a transform on that class, the animation would override it.
+- New Playwright spec `apps/tabletop/test/verification/verify-tap-animation.spec.ts`:
+  tap and untap both show a running 500ms WAAPI animation (observable via
+  `getAnimations()`); an already-tapped card after reload does not animate; a remote peer
+  (second browser context) animates when the prop syncs in. Full suite (23 specs) green.
+- Note: unlike every Shuffler animation, this one's *running state* IS observable from the
+  DOM — `element.getAnimations()` — which is what the spec uses. The "not observable"
+  section above remains true of the Shuffler's class-based animations.
+- KB corrections folded in: the implementation ticket is
+  `.scratch/tabletop-physics/issues/15-tap-animation.md` (05 landed the state model), and
+  the file is `MtgCardShapeUtil.tsx` — ticket 12 replaced the `MtgCardImageShapeUtil`
+  image-shape subclass with a genuine custom shape.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.

@@ -1,5 +1,5 @@
 import { BaseBoxShapeUtil, HTMLContainer } from "tldraw";
-import { MtgZoneShape, mtgZoneShapeProps } from "../../shared/mtgZoneShape";
+import { MtgZoneShape, mtgZoneShapeProps, LIBRARY_PILE_INSET } from "../../shared/mtgZoneShape";
 import { useIsZoneArmed } from "./zoneHitTest";
 import type { CSSProperties } from "react";
 
@@ -43,7 +43,7 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
   static override props = mtgZoneShapeProps;
 
   override getDefaultProps(): MtgZoneShape["props"] {
-    return { w: 100, h: 100, zone: "playmat", seatId: null, label: "" };
+    return { w: 100, h: 100, zone: "playmat", seatId: null, label: "", sleeveColor: null };
   }
 
   override isAspectRatioLocked(): boolean {
@@ -51,7 +51,7 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
   }
 
   component(shape: MtgZoneShape) {
-    const { w, h, zone, label } = shape.props;
+    const { w, h, zone, label, sleeveColor } = shape.props;
     const playmat = zone === "playmat";
     // Reactive-only: never written to the store, so it produces no synced
     // document write and no undo entry, and is never visible on another
@@ -86,12 +86,38 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
       style.boxShadow = "0 0 0 3px var(--armed-glow), 0 0 16px 5px rgba(230, 163, 61, 0.65)"; /* --armed-glow, #e6a33d */
     }
 
+    // Ticket 17: a sleeved seat's library pile — the bare sleeve rectangle,
+    // inset like the card-back image so the box's border and label frame it.
+    // The shape's own opacity is 1 when sleeved (tableFurniture.ts), so the
+    // pile is as vivid as the cards; the box chrome fades itself back to 0.5
+    // here, keeping the same composite the plain furniture gets. Radius is a
+    // proportion of the pile's own width (the pile is a stack of sleeved
+    // cards, a physical object) — same 5%-of-w rule as the cards themselves.
+    const sleevePile = sleeveColor ? (
+      <div
+        data-testid="library-sleeve-pile"
+        style={{
+          position: "absolute",
+          left: LIBRARY_PILE_INSET,
+          top: LIBRARY_PILE_INSET,
+          width: w - 2 * LIBRARY_PILE_INSET,
+          height: h - 2 * LIBRARY_PILE_INSET,
+          background: sleeveColor,
+          borderRadius: (w - 2 * LIBRARY_PILE_INSET) * 0.05,
+        }}
+      />
+    ) : null;
+
     return (
-      <HTMLContainer id={shape.id}>
+      // position: relative anchors the sleeve pile's absolute inset — the pile
+      // is a SIBLING of the box div, not a child, so it doesn't inherit the
+      // chrome's 0.5 fade.
+      <HTMLContainer id={shape.id} style={{ position: "relative" }}>
         <div
           data-testid="zone-box"
           style={{
             ...style,
+            ...(sleeveColor ? { opacity: 0.5 } : {}),
             // @fleet/design-tokens' --font-chrome (Orbitron): a zone label
             // names a canvas region, the same job as a UI label/heading, not
             // prose or a card name (--font-content). This is the first
@@ -108,6 +134,7 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
         >
           {label}
         </div>
+        {sleevePile}
       </HTMLContainer>
     );
   }

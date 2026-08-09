@@ -56,10 +56,15 @@ export async function sendCardToTableFirst(
  * the first time one of this seat's cards arrives (see the Tabletop's
  * ensurePlayerArea).
  */
-export async function sendSeatJoinedBestEffort(tabletopPort: TabletopPort | undefined, tableInfo: TableInfo, deckName: string): Promise<void> {
+export async function sendSeatJoinedBestEffort(
+  tabletopPort: TabletopPort | undefined,
+  tableInfo: TableInfo,
+  deckName: string,
+  sleeveColor?: string
+): Promise<void> {
   if (!tabletopPort) return;
   const { tableName, seatId, playerName } = tableInfo;
-  const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, defaultPlaymatImageUrl(), cardBackImageUrl());
+  const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, defaultPlaymatImageUrl(), cardBackImageUrl(), sleeveColor);
   try {
     await tabletopPort.sendSeatJoined(tableName, event);
   } catch (error) {

@@ -75,6 +75,10 @@ If a future animation ever *does* need a completion signal, it has to be added d
 (an `animationend` listener setting a class on a non-swapped ancestor — see the settle-phase
 gotcha above); there is nothing to observe today.
 
+(This is a **Shuffler** property — class-based CSS animations. The Tabletop's tap animation
+is WAAPI, so its running state *is* observable via `element.getAnimations()`, which is what
+`verify-tap-animation.spec.ts` asserts on. See "Third mechanism" below.)
+
 ## CSS Keyframes
 
 All animation keyframes live in `public/game.css` except:
@@ -99,16 +103,36 @@ already is. What *can* break an animation is a change to the element's **own box
 This is what made the deck-title plaque move (`2d33c2f`) a no-interaction review even
 though it raised `.game-top-row` by roughly the plaque's height.
 
-## Third mechanism (DECIDED, NOT BUILT): prop-derived local catch-up on a synced tldraw shape
+## Third mechanism (BUILT): prop-derived local catch-up on a synced tldraw shape
 
 The two mechanisms above are both Shuffler-side: **server-driven** (WhatHappened → class on
-render) and **client-driven class toggle** (the card flip). A third was decided on 2026-08-07
-for the Tabletop and is **not implemented yet** — full reasoning in
-`.scratch/tabletop-physics/issues/04-tap-is-state.md`, implementation in
-`.scratch/tabletop-physics/issues/05-rotate-to-tap.md` (resolved 2026-08-07).
+render) and **client-driven class toggle** (the card flip). The third is the Tabletop's tap
+animation, decided 2026-08-07 and **built 2026-08-09** (`65276e6`) — reasoning in
+`.scratch/tabletop-physics/issues/04-tap-is-state.md` and
+`.scratch/tabletop-physics/issues/05-rotate-to-tap.md`, implementation ticket
+`.scratch/tabletop-physics/issues/15-tap-animation.md`, code in
+`apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` `component()`.
+
+**As built.** A `useLayoutEffect` keyed on `props.tapped` (with a `prevTappedRef`
+initialized to the *first-seen* value, so no swing on mount or store reconnect) runs
+**WAAPI `element.animate()`** on the `.tl-image-container` div: keyframes
+`rotate(∓90deg)` → `rotate(0deg)`, 500ms, `ease-out`. WAAPI rather than a CSS transition
+because the Tabletop still has no ship-local stylesheet; this owner's `-review` approved
+that as within "CSS-driven, no animation library" (platform API, constant keyframes).
+Before starting, `el.getAnimations().forEach(a => a.cancel())` — a mid-swing re-tap gets
+one clean jump instead of stacked transforms. **Smooth reversal on a fast double-tap is an
+accepted gap** (WAAPI starts from the fixed keyframe, not the current rendered angle),
+noted in a code comment. Because the effect's only input is `tapped`, free rotation cannot
+fire it; because the trigger is the synced prop, remote peers animate for free.
+
+**One accepted risk**: the animated element is `.tl-image-container` itself (tldraw's own
+class, reused for its `pointer-events: all`). If tldraw's stylesheet ever puts a
+`transform` on that class, the WAAPI animation would override it. Overflow was re-verified
+against installed `tldraw@5.2.5`: `.tl-shape` is explicitly `overflow: visible`;
+`.tl-html-container` and `.tl-image-container` have no clipping — constraint 4 holds.
 
 **Trigger gesture: settled as plain `onClick`, no new gesture.** The click that already
-toggles `props.tapped` on `MtgCardImageShapeUtil` keeps doing so. tldraw's own
+toggles `props.tapped` on `MtgCardShapeUtil` keeps doing so. tldraw's own
 `onRotateStart`/`onRotate`/`onRotateEnd` hooks (confirmed real in `tldraw@5.2.5`) are **not
 used for tap at all** — they stay reserved for free rotation ("attacking" per ticket 04). This
 was an open question in `-context`; it's now closed. Keeping tap on `onClick` and free-rotation
@@ -127,9 +151,9 @@ value now matches `game.css`'s `slideFromLeft`/`slideFromRight`/`growFromLeft`/`
 again** — it was considered and specifically turned down for this animation.
 
 **The state model.** `props.tapped: boolean` on the `mtg-card` shape is the stored truth, and
-it is **never read back out of an angle** (the current `UNTAPPED_EPSILON` check in
-`apps/tabletop/src/client/shapes/MtgCardImageShapeUtil.tsx` is the bug it causes, and dies with
-it). The *visual* stays tldraw's real `shape.rotation`, written as a **delta**: +90° clockwise
+it is **never read back out of an angle** (the old `UNTAPPED_EPSILON` check died with ticket
+04/05; ticket 12 also replaced the image-shape subclass with the genuine custom shape
+`MtgCardShapeUtil.tsx`). The *visual* stays tldraw's real `shape.rotation`, written as a **delta**: +90° clockwise
 on tap, −90° on untap, relative to the card's own current angle, keeping the existing
 centre-preserving `Vec.Add`/`Vec.Rot` math. Free rotation composes on top; resize stays,
 aspect-ratio locked.
@@ -156,7 +180,9 @@ again**; it was considered and killed on that specific ground. Also rejected in 
 overriding `getGeometry()` to swap the box (resize then operates in a swapped frame), and
 `editor.animateShapes()` (per-frame synced writes plus an undo trail).
 
-Four constraints handed to ticket 05, inherited verbatim:
+Four constraints handed to ticket 05, inherited verbatim — **all four verified implemented
+in `65276e6`** (1: effect keyed on `tapped` only; 2: `prevTappedRef` starts at first-seen;
+3: the center-coupling comment is in the code; 4: overflow re-checked against tldraw 5.2.5):
 
 1. **Key the catch-up off `props.tapped` changing, not off a ±90 rotation delta.** A delta
    sniffer is reading tap back out of the angle again, relocated into the view layer; it

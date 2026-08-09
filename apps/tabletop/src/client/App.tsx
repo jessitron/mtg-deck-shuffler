@@ -4,7 +4,7 @@ import { TablePage } from "./TablePage";
 
 /**
  * Route-lite: "/" is the landing page (enter a table name); "/t/:tableName" is
- * the table itself. No router library — two pages don't need one.
+ * the table itself.
  */
 export function App() {
   const path = window.location.pathname;
