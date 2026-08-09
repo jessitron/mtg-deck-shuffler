@@ -473,6 +473,21 @@ alongside the cards-come-and-go ticket 02 entry below; the resolution itself lan
   `mulligan()`'s existing reset. The reset is performed table-locally (mechanism is an
   implementation detail); composes with the wire decision below.
 
+## Sleeves Are Rectangular: Square Corners on Sleeve Renderings (2026-08-09, `e53a27e`)
+
+Small appearance change, Jess-directed, landed on branch `worktree-ticket-16-mat-border`.
+The ticket-17 sleeve geometry gave the sleeve rectangle a proportional corner radius
+(`w * 0.05`, mirroring the Shuffler card's own 10/200 corner). Jess: "sleeves are
+rectangular" — matching issue 09's line that *a sleeve edge gives cards the square
+corners the fleet's style wants*. The `borderRadius` was removed from both sites:
+
+- `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — the `sleeve` CSSProperties
+  used by both the face-up sleeve frame and the sleeved-faceDown bare sleeve rect
+- `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — the library sleeve pile
+
+The `w * 0.03` padding/overhang stays; only the radius went. **No behavior, face, or
+faceDown semantics changed** — purely corner geometry. 69/69 vitest pass.
+
 ## Cards-Come-and-Go Ticket 02: the Event Vocabulary — Face Decisions (design decision, 2026-08-08, `7b7f868`)
 
 **No code changed** — decisions only; schemas and handlers come at build time. Full text:

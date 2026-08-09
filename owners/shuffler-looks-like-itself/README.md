@@ -279,7 +279,12 @@ frame keyword, deliberately **not** the join-table panel's `#888` drift — squa
 Playmat (five `aeoe-*` image swatch buttons, 96×54) and Sleeves (a None chip showing the
 standard Magic card back — `null` ⇔ unsleeved — five mana-pie chips 44×44, and a custom
 `<input type="color">`). Markup in `views/partials/table-look-panel.ejs`, behaviour in
-`public/prep-picker.js`. Three facts that outlive the ticket:
+`public/prep-picker.js`. **The two swatch rows frame differently, on purpose (Jess,
+2026-08-09, `99829d7`):** the shared `.table-look-mat, .table-look-sleeve` rule says
+`var(--narrow-border) solid var(--dark-pink)`, and `.table-look-mat` alone overrides
+`border-color: black` — mat swatches frame like the mat itself (the play pages' black
+frame keyword), sleeve chips keep the dark-pink border. Don't "unify" that split.
+Facts that outlive the ticket:
 
 - **The swatches' press physics are a THIRD press behaviour, and that's a recorded
   judgement call, not a settled rule.** Rest at 0, hover `translateY(-2px)` + black-rgba
@@ -292,7 +297,15 @@ standard Magic card back — `null` ⇔ unsleeved — five mana-pie chips 44×44
   hex is domain data — a page-sheet rule on shared components would leak onto `/design`);
   the mat pick sets inline `background-image` **longhand** on `.playmat` — never the
   shorthand, which would wipe the shared rule's `cover`/`center`. `/prepare` also
-  server-renders the picked mat the same way.
+  server-renders the picked mat the same way. **A dark sleeve flips the plaque lettering
+  to white (Jess, 2026-08-09, `81abce5`):** `applySleeveTint` sets inline `color: white`
+  on `.game-title` when the picked hex's BT.601 perceived luminance is below 128, and
+  clears it otherwise — same inline-style-for-domain-data posture as the tint, covering
+  the on-load path too. Spec'd in `verify-prep-picker.spec.ts`.
+- **The custom color picker stays the native `<input type="color">` — decided, not an
+  oversight (Jess, 2026-08-09).** Jess considered click-outside-to-close for the picker;
+  the native control's OS panel can't be closed by JS, and she chose to keep the native
+  control rather than build a custom in-page picker. Don't re-propose one unprompted.
 - **`/game` still paints the default mat** (the bare `.playmat` rule) while `/prepare` and
   the Tabletop show the pick — a known gap, buoyed as `game-page-picked-mat` in `TODO.md`,
   not an oversight to silently fix.
@@ -379,18 +392,24 @@ gets a sleeve-color border. Unsleeved decks keep the standard Magic card-back im
 library furniture now has **two** looks keyed on whether the seat has a sleeve.
 
 **The sleeve treatment is DECIDED and shipped (2026-08-08, ticket 17, `0a768e6` +
-`bfdc877`), decided with this owner's `-context` mid-implementation.** Corner radius
-`w * 0.05` and margin (the ring of color around a face-up image) `w * 0.03` per side — both
-**proportions of the shape's own `shape.props.w`**, never fixed px, because cards are
-aspect-locked resizable (the playmat-radius lesson, applied again). `0.05` is the Shuffler
-card's own corner ratio (10/200); `0.03` mirrors a real sleeve's ~1–2mm overhang. The sleeve
-is the flat solid player-picked hex — **no border, sheen, or texture** — and the face image
-keeps its own rendering inside it, no second radius (Scryfall art carries its own printed
-corners). Face-down (sleeved) = the bare sleeve rectangle. The **library pile** is rendered
+`bfdc877`), decided with this owner's `-context` mid-implementation — and its corners went
+SQUARE on 2026-08-09 (`e53a27e`, Jess: "sleeves are rectangular").** The margin (the ring of
+color around a face-up image) is `w * 0.03` per side — a **proportion of the shape's own
+`shape.props.w`**, never fixed px, because cards are aspect-locked resizable (the
+playmat-radius lesson, applied again); `0.03` mirrors a real sleeve's ~1–2mm overhang.
+Ticket 17 originally gave the sleeve rectangle a `w * 0.05` corner radius (the Shuffler
+card's own corner ratio); Jess removed it — a sleeve is a rectangular physical object, and
+its edge is exactly what gives cards the square corners the fleet's style wants (issue 09's
+own line). **Don't "restore" the radius citing the physical-objects rule — the sleeve's real
+shape IS square-cornered.** The sleeve is the flat solid player-picked hex — **no border,
+sheen, or texture** — and the face image keeps its own rendering inside it, no second radius
+(Scryfall art carries its own printed corners). Face-down (sleeved) = the bare sleeve
+rectangle. The **library pile** is rendered
 by `MtgZoneShapeUtil` itself via a new `sleeveColor` prop on `mtg-zone`: an inner solid rect
 inset by the shared `LIBRARY_PILE_INSET` (12, moved to
 `apps/tabletop/src/shared/mtgZoneShape.ts`, used by server image geometry and client sleeve
-geometry alike), radius 5% of the *inset* width; the zone shape's opacity is 1 when sleeved
+geometry alike), square-cornered like the sleeved cards (its 5%-of-inset-width radius went
+in the same `e53a27e`); the zone shape's opacity is 1 when sleeved
 and the component fades just the box chrome to 0.5, so the pile stays as vivid as the cards
 while the furniture keeps its composite look. **The picker palette is now DECIDED
 (2026-08-09, ticket 16, `8995c1a`):** the sleeve quick-picks are the **mana pie five**

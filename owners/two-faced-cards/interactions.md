@@ -214,7 +214,9 @@ These are specific things that could break two-faced cards if changed elsewhere:
     untouched; `sleeveColor` is its own nullable prop, mirroring `backImageUrl`.
     Rendering as decided (three branches in `MtgCardShapeUtil.component()`): sleeved
     face-down / library pile = solid sleeve rectangle; face-up sleeved card = image
-    centered inside the sleeve frame (proportional: radius `w*0.05`, padding `w*0.03`);
+    centered inside the sleeve frame (proportional padding `w*0.03`; **square corners**
+    since `e53a27e`, 2026-08-09 — Jess: "sleeves are rectangular", the ticket-17
+    `w*0.05` radius was removed);
     unsleeved cards keep today's look (unsleeved face-down deferred to ticket 06 —
     watch point 14). The "until sleeve selection exists" comment on `cardBackImageUrl()`
     in `apps/shuffler/src/port-tabletop/types.ts` was updated as this watch point asked.

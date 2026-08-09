@@ -390,6 +390,11 @@ unbidden either.
   surround end the app's last 3D-border site" — is moot; whether the surround should be
   removed *as an element* (frame and all, commanders sitting bare on the mat) is still open
   and still Jess's call.
+- **The table-look custom color picker stays the native `<input type="color">`** (raised and
+  decided 2026-08-09). Jess considered click-outside-to-close for the picker; the native
+  control's OS color panel can't be closed by JS, and she chose to keep the native control
+  rather than build a custom in-page picker. This one isn't deferred — it's decided-against.
+  Don't re-propose a custom picker unprompted.
 
 ---
 
@@ -642,14 +647,18 @@ self-rendering custom shape.
   transport + rendering *model*; ticket 15, `4263ef8`, gave `sleeveColor` its schema home in
   `contracts/payloads/seat.joined.v1.json` — optional raw hex `^#[0-9a-fA-F]{6}$`, winning
   over `cardBackImageUrl`; it's baked into `mtg-card` props at mint, legal because sleeve
-  color is a game constant.) The reserved treatment came due and landed as: corner radius
-  `w * 0.05`, margin `w * 0.03` per side, **both proportions of `shape.props.w`** computed
+  color is a game constant.) The reserved treatment came due and landed as: margin
+  `w * 0.03` per side, **a proportion of `shape.props.w`** computed
   in TypeScript at render time (cards are aspect-locked resizable — never a fixed px, never
   a CSS percent); flat solid player-picked hex, **no border/sheen/texture**; the face image
   keeps its own rendering inside the ring, no second radius; face-down (sleeved) = bare
-  sleeve rectangle. The library pile is `MtgZoneShapeUtil`'s own render via a new
+  sleeve rectangle. **The corners are SQUARE — revised 2026-08-09 (`e53a27e`, Jess: "sleeves
+  are rectangular"):** ticket 17's original `w * 0.05` radius came off the sleeved card and
+  the library pile alike; only the `w * 0.03` overhang survives. A sleeve's edge is exactly
+  what gives cards the square corners the fleet's style wants (issue 09's own line) — don't
+  "restore" the radius citing the physical-objects rule. The library pile is `MtgZoneShapeUtil`'s own render via a new
   `sleeveColor` prop on `mtg-zone` — inner rect inset by the shared `LIBRARY_PILE_INSET=12`
-  (`src/shared/mtgZoneShape.ts`), radius 5% of the inset width, zone opacity 1 with the box
+  (`src/shared/mtgZoneShape.ts`), square-cornered, zone opacity 1 with the box
   chrome self-faded to 0.5 so the pile stays vivid. `indicator()` untouched — the ride-along
   warning held. Full decision text in [README.md](README.md)'s design language; the
   `.tl-image` wrapper-escape limit it uncovered is in README → tldraw limits. **The picker's

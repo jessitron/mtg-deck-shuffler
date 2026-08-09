@@ -85,6 +85,22 @@ test.describe('Prepare screen — table-look panel', () => {
     await expect(page.locator('.table-look-panel [data-sleeve-color=""]')).toHaveClass(/table-look-selected/);
   });
 
+  test('a dark sleeve color flips the deck-title lettering to white; a light one does not', async ({ page }) => {
+    const prepId = await gotoPrep(page);
+
+    // Swamp purple (#530aae) is dark → white lettering
+    await sleeveSwatch(page, '#530aae').click();
+    await expect(page.locator('.game-title')).toHaveCSS('color', 'rgb(255, 255, 255)');
+
+    // Persists through the on-load tint path too
+    await page.goto(`${BASE_URL}/prepare/${prepId}`);
+    await expect(page.locator('.game-title')).toHaveCSS('color', 'rgb(255, 255, 255)');
+
+    // Plains gold (#f0e68c) is light → lettering back to the default
+    await sleeveSwatch(page, '#f0e68c').click();
+    await expect(page.locator('.game-title')).not.toHaveCSS('color', 'rgb(255, 255, 255)');
+  });
+
   test('the custom color input captures an arbitrary sleeve color', async ({ page }) => {
     const prepId = await gotoPrep(page);
 
