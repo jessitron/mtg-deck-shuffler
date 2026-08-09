@@ -14,11 +14,15 @@ import { MAX_SEATS } from "./cardLayout.js";
 // exists. See apps/tabletop/DESIGN.md for the full trigger/geometry spec.
 // ============================================================================
 
+// Contract proper: contracts/payloads/seat.joined.v1.json (deckName required;
+// playmatImageUrl, cardBackImageUrl, sleeveColor optional — the sleeve side is
+// wired up later).
 interface SeatJoined {
   id: string;
   name: "seat.joined";
   occurredAt: string;
   initiator: { seatId: string; playerName: string };
+  deckName: string;
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
 }
@@ -30,6 +34,7 @@ function validationError(body: unknown): string | null {
   if (b.name !== "seat.joined") return 'name must be "seat.joined"';
   if (typeof b.initiator?.seatId !== "string" || !b.initiator.seatId) return "initiator.seatId (string) is required";
   if (typeof b.initiator?.playerName !== "string" || !b.initiator.playerName) return "initiator.playerName (string) is required";
+  if (typeof b.deckName !== "string" || !b.deckName) return "deckName (string) is required";
   if (b.playmatImageUrl !== undefined && typeof b.playmatImageUrl !== "string") return "playmatImageUrl, if present, must be a string";
   if (b.cardBackImageUrl !== undefined && typeof b.cardBackImageUrl !== "string") return "cardBackImageUrl, if present, must be a string";
   // Same defense in depth as card.played: no decodable secret crosses this boundary.
@@ -87,6 +92,7 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
 
   const pageId = pageIdOf(entry);
   await ensurePlayerArea(entry, pageId, joined.initiator.seatId, joined.initiator.playerName, {
+    deckName: joined.deckName,
     playmatImageUrl: joined.playmatImageUrl,
     cardBackImageUrl: joined.cardBackImageUrl,
   });

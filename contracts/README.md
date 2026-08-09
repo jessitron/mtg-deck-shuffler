@@ -12,7 +12,7 @@ Language-neutral JSON Schema; the decisions behind it live in
   Each `name` versions its payload independently; the envelope's `schemaVersion`
   field says which payload schema applies.
 
-v0 catalog: `table.created`, `seat.taken`, `card.played`.
+v0 catalog: `table.created`, `seat.taken`, `seat.joined`, `card.played`.
 
 ## The rules
 

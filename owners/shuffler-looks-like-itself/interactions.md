@@ -84,6 +84,12 @@
   Appearance specifics (margin, radius, border/sheen, swatch palette) are explicitly reserved
   for this owner at implementation time — see [open-choices.md](open-choices.md) → "Fleet
   gaps — the Tabletop side".
+  `issues/15-*` (**built** 2026-08-08, `4263ef8`) put the deck name on the seat name label —
+  the two-line player-first composition recorded in [README.md](README.md)'s design language,
+  decided with this owner's `-context` mid-implementation. It also created
+  `contracts/payloads/seat.joined.v1.json` (`deckName` **required**; `sleeveColor` optional —
+  ticket 11's field now has its schema home, transport real, rendering appearance still
+  reserved for this owner via ticket 17).
   `issues/13-*` (**built** 2026-08-08, `1046b93` + `b18bd16`) is the map's first
   implementation ticket to land, and the design language held with zero new CSS: the new
   Command Zone furniture is a standard `mtg-zone` (dashed dark-pink at rest, armed glow,
@@ -495,6 +501,16 @@ not by recomputing new numbers.**
   typography decision. The sleeve-color swatch on each commander-damage counter is
   **identity**, not decoration — it must be the opponent's actual sleeve color (ticket 11's
   plumbing), never a palette value this owner picks.
+- **The seat name label is a stock `text` shape with a decided two-line composition**
+  (ticket 15, 2026-08-08, `4263ef8`). Player name line one, deck name verbatim line two, no
+  separator; missing deck name degrades to the one-line label. It lives in
+  `apps/tabletop/src/server/tableFurniture.ts` → `ensurePlayerArea` (grep `toRichText`) —
+  a **server-side** draw, not a ShapeUtil. Its `serif`/`green` are the stock `text` enum
+  (see README → tldraw limits), so don't read them as chosen or try to token-sweep them.
+  If the label ever becomes a self-rendering shape: keep the two-line structure; per-line
+  hierarchy (size, face) becomes possible then and is a **new** appearance decision for this
+  owner, not a port. Any future label pairing a player name with a deck name copies this
+  composition rather than inventing another.
 - **The sleeve's rendered appearance has a decided MODEL and an undecided treatment** (ticket
   11, 2026-08-08). The model — solid rectangle a few px larger than the card; face-down cards
   and the library pile render as the bare sleeve rectangle; a face-up sleeved card centers

@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: fleet
 Type: task
-Status: ready-for-agent
+Status: done
 Blocked by: None — can start immediately
 
 **What to build:** The name label above a playmat shows the player's name *and* their
@@ -28,7 +28,7 @@ the deck name), the contract seam (valid/invalid payloads against the new schema
 the established pattern), and the Tabletop server event-handler seam (label shape
 carries player name + deck name).
 
-- [ ] New `seat.joined` contract schema exists with deck name, optional `sleeveColor`, optional `cardBackImageUrl`; both sides validate against it
-- [ ] Shuffler sends the deck name on seat-joined from both call sites
-- [ ] Tabletop name label shows player name and deck name above the playmat
-- [ ] Contract tests cover valid and invalid payloads; unknown name/version fails loudly
+- [x] New `seat.joined` contract schema exists with deck name, optional `sleeveColor`, optional `cardBackImageUrl`; both sides validate against it
+- [x] Shuffler sends the deck name on seat-joined from both call sites
+- [x] Tabletop name label shows player name and deck name above the playmat
+- [x] Contract tests cover valid and invalid payloads; unknown name/version fails loudly

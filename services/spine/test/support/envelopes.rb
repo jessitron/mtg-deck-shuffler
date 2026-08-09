@@ -28,6 +28,26 @@ module Envelopes
     }.merge(overrides)
   end
 
+  def seat_joined_envelope(table, payload_overrides = {})
+    {
+      "id" => SecureRandom.uuid,
+      "tableId" => table.id,
+      "name" => "seat.joined",
+      "initiator" => "Jess",
+      "occurredIn" => "shuffler",
+      "visibility" => "public",
+      "traceparent" => valid_traceparent,
+      "schemaVersion" => 1,
+      "payload" => {
+        "seatId" => SecureRandom.uuid,
+        "playerName" => "Jess",
+        "deckName" => "Blame Game",
+        "playmatImageUrl" => "https://example.com/playmat.png",
+        "cardBackImageUrl" => "https://example.com/card-back.jpg"
+      }.merge(payload_overrides).compact
+    }
+  end
+
   def seat_taken_envelope(table, overrides = {})
     {
       "id" => SecureRandom.uuid,

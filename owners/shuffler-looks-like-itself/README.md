@@ -76,7 +76,9 @@ furniture becomes a custom `mtg-zone` shape.
 
 - **tldraw's `geo` `font` prop is an enum with no Orbitron in it.** So a stock `geo` label
   can *never* be on-brand — today's `serif` zone labels aren't a design choice, they're the
-  enum. This is the strongest design argument for a custom shape, and it generalizes: **any
+  enum. **The stock `text` shape has the same enum** (confirmed 2026-08-08, ticket 15: the
+  seat name label's `font: "serif"` and `color: "green"` are enum values, not choices). This
+  is the strongest design argument for a custom shape, and it generalizes: **any
   text the fleet wants on a canvas in a fleet typeface has to come from a self-rendering
   shape.** **Confirmed working, not just argued, 2026-08-08** (tabletop-physics ticket 13):
   `MtgZoneShapeUtil`'s `component()` sets `fontFamily: "var(--font-chrome)"` on a plain `div`
@@ -319,6 +321,23 @@ for this owner at implementation time**: exact sleeve margin, corner radius (a s
 physical object, so the physical-rounding rule applies), any border/sheen/texture, and the
 picker's default/swatch palette. v1 is one color; distinct front/back colors or an image
 sleeve are someday-maybes, deferred.
+
+**The seat name label pairs player name and deck name as two lines, player first (decided
+2026-08-08, ticket 15 of the Table-layout map, `4263ef8`).** The Tabletop's seat label — the
+locked stock tldraw `text` shape `ensurePlayerArea` draws in
+`apps/tabletop/src/server/tableFurniture.ts` — reads player name on line one, deck name
+verbatim on line two, via ``toRichText(`${playerName}\n${deckName}`)``. This is the fleet's
+first player-name + deck-name pairing; the next label that shows both copies this
+composition. The choices, each deliberate: **player first**, because line position is the
+only hierarchy a stock text shape offers; **two lines rather than one**, so a long deck name
+grows the autoSized label downward instead of toward the neighboring seat; **no prefix, no
+separator glyph**; **deck name verbatim**, no truncation (it's player-chosen content, same
+category as card art). A missing deck name (the defensive redraw at card arrival) degrades to
+exactly the old one-line label — never a blank line. The stock props stay untouched: `serif`
+and `green` are the `text` shape's enum (the tldraw limit above), not choices. If the label
+ever becomes a self-rendering shape, the two-line structure carries forward and per-line
+hierarchy (size, face) becomes possible for the first time — that would be a new appearance
+decision, not a port.
 
 **Two style worlds.** Site pages (`/`, `/choose-any-deck`, `/docs`, `/about`) use the
 purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages
