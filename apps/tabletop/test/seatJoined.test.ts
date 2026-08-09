@@ -71,8 +71,8 @@ describe("seat joined", () => {
     expect(
       shapes.some((s) => s.type === "mtg-zone" && s.props?.zone === "command" && s.x === command.x && s.y === command.y && s.props?.w === command.w)
     ).toBe(true);
-    expect(shapes.some((s) => s.x === graveyard.x && s.y === graveyard.y)).toBe(true);
-    expect(shapes.some((s) => s.x === exile.x && s.y === exile.y)).toBe(true);
+    expect(shapes.some((s) => s.x === graveyard.x && s.y === graveyard.y && s.props?.w === graveyard.w && s.props?.h === graveyard.h)).toBe(true);
+    expect(shapes.some((s) => s.x === exile.x && s.y === exile.y && s.props?.w === exile.w && s.props?.h === exile.h)).toBe(true);
     expect(shapes.some((s) => s.type === "text")).toBe(true);
   });
 

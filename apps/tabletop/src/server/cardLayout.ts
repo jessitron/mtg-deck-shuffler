@@ -13,8 +13,15 @@
 export const CARD_W = 170;
 export const CARD_H = 238;
 
-/** Reused for: playmat↔column gap, library↔graveyard gap, inter-area gap. */
-const GAP = 20;
+/** Reused for: playmat↔column gap, every gap between zone boxes, inter-area gap. */
+export const GAP = 20;
+
+export interface Bounds {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
 
 const MARGIN_X = 80;
 const STACK_Y = 80;
@@ -59,7 +66,7 @@ export function nameLabelPosition(seatIndex: number): { x: number; y: number } {
   return { x: playerAreaX(seatIndex), y: PLAYMAT_Y - GAP - NAME_LABEL_HEIGHT };
 }
 
-export function playmatBounds(seatIndex: number): { x: number; y: number; w: number; h: number } {
+export function playmatBounds(seatIndex: number): Bounds {
   return { x: playerAreaX(seatIndex), y: PLAYMAT_Y, w: PLAYMAT_W, h: PLAYMAT_H };
 }
 
@@ -68,28 +75,28 @@ function columnX(seatIndex: number): number {
 }
 
 /** Top-left of the column, beside the playmat. */
-export function libraryBounds(seatIndex: number): { x: number; y: number; w: number; h: number } {
+export function libraryBounds(seatIndex: number): Bounds {
   return { x: columnX(seatIndex), y: PLAYMAT_Y, w: LIBRARY_W, h: LIBRARY_H };
 }
 
 /** Top-right of the column, beside the library; room for two commanders. */
-export function commandZoneBounds(seatIndex: number): { x: number; y: number; w: number; h: number } {
+export function commandZoneBounds(seatIndex: number): Bounds {
   return { x: columnX(seatIndex) + LIBRARY_W + GAP, y: PLAYMAT_Y, w: COMMAND_ZONE_W, h: COMMAND_ZONE_H };
 }
 
 /** Below the library, the top two-thirds of the space above the playmat's bottom edge. */
-export function graveyardBounds(seatIndex: number): { x: number; y: number; w: number; h: number } {
+export function graveyardBounds(seatIndex: number): Bounds {
   return { x: columnX(seatIndex), y: PLAYMAT_Y + LIBRARY_H + GAP, w: GRAVEYARD_W, h: GRAVEYARD_H };
 }
 
 /** The bottom third of that same space, below the graveyard, flush with the playmat's bottom edge. */
-export function exileBounds(seatIndex: number): { x: number; y: number; w: number; h: number } {
+export function exileBounds(seatIndex: number): Bounds {
   const graveyard = graveyardBounds(seatIndex);
   return { x: graveyard.x, y: graveyard.y + graveyard.h + GAP, w: EXILE_W, h: EXILE_H };
 }
 
 /** The shared Stack strip, spanning every player area joined so far. */
-export function stackStripBounds(seatCount: number): { x: number; y: number; w: number; h: number } {
+export function stackStripBounds(seatCount: number): Bounds {
   const w = seatCount > 0 ? seatCount * PLAYER_AREA_W + (seatCount - 1) * GAP : PLAYER_AREA_W;
   return { x: MARGIN_X, y: STACK_Y, w, h: STACK_HEIGHT };
 }

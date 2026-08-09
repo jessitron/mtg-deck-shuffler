@@ -24,7 +24,7 @@ cards from the Shuffler onto it.
 
 See `README.md` (in this directory) for Modes and SCAFFOLDING callouts.
 
-The player area (playmat, library, graveyard, exile, Stack) is specified in
+The player area (playmat, library, command zone, graveyard, exile, Stack) is specified in
 `DESIGN.md` (in this directory) — read it before touching
 `src/server/cardLayout.ts`, `tableFurniture.ts`, `cardArrival.ts`, or
 `seatJoined.ts`. One piece is deliberately deferred: the playmat never grows

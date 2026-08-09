@@ -1,11 +1,14 @@
 import { describe, it, expect } from "vitest";
 import {
+  GAP,
   PLAYMAT_W,
   PLAYMAT_H,
   COLUMN_W,
   COMMAND_ZONE_W,
   GRAVEYARD_H,
   EXILE_H,
+  PLAYER_AREA_W,
+  type Bounds,
   playmatBounds,
   libraryBounds,
   commandZoneBounds,
@@ -15,8 +18,6 @@ import {
   landPosition,
   playerAreaX,
 } from "../src/server/cardLayout";
-
-type Bounds = { x: number; y: number; w: number; h: number };
 
 function overlaps(a: Bounds, b: Bounds): boolean {
   return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
@@ -56,14 +57,14 @@ describe("cardLayout — player area geometry", () => {
   it("places the library at the top-left of the column, beside the playmat", () => {
     const mat = playmatBounds(0);
     const library = libraryBounds(0);
-    expect(library.x).toBe(mat.x + mat.w + 20);
+    expect(library.x).toBe(mat.x + mat.w + GAP);
     expect(library.y).toBe(mat.y);
   });
 
   it("places the command zone beside the library, sized for two cards", () => {
     const library = libraryBounds(0);
     const command = commandZoneBounds(0);
-    expect(command.x).toBe(library.x + library.w + 20);
+    expect(command.x).toBe(library.x + library.w + GAP);
     expect(command.y).toBe(library.y);
     expect(command.w).toBe(360);
     expect(command.h).toBe(library.h);
@@ -72,7 +73,7 @@ describe("cardLayout — player area geometry", () => {
   it("places the graveyard below the library, spanning the column's full width", () => {
     const library = libraryBounds(0);
     const graveyard = graveyardBounds(0);
-    expect(graveyard.y).toBe(library.y + library.h + 20);
+    expect(graveyard.y).toBe(library.y + library.h + GAP);
     expect(graveyard.w).toBe(COLUMN_W);
   });
 
@@ -81,7 +82,7 @@ describe("cardLayout — player area geometry", () => {
     const graveyard = graveyardBounds(0);
     const exile = exileBounds(0);
     expect(exile.x).toBe(graveyard.x);
-    expect(exile.y).toBe(graveyard.y + graveyard.h + 20);
+    expect(exile.y).toBe(graveyard.y + graveyard.h + GAP);
     expect(exile.w).toBe(COLUMN_W);
     expect(exile.y + exile.h).toBe(mat.y + mat.h);
   });
@@ -102,10 +103,10 @@ describe("cardLayout — player area geometry", () => {
     }
   });
 
-  it("places player areas in a row, left to right, in join order", () => {
-    const first = playerAreaX(0);
-    const second = playerAreaX(1);
-    expect(second).toBeGreaterThan(first + PLAYMAT_W + COLUMN_W);
+  it("places each seat exactly one widened player area (plus gap) over from the last", () => {
+    expect(PLAYER_AREA_W).toBe(PLAYMAT_W + GAP + COLUMN_W); // 2202 — the widened column ripples into every seat's offset
+    expect(playerAreaX(1)).toBe(playerAreaX(0) + PLAYER_AREA_W + GAP);
+    expect(playerAreaX(2)).toBe(playerAreaX(1) + PLAYER_AREA_W + GAP);
   });
 
   it("widens the Stack strip to span every player area joined so far", () => {
