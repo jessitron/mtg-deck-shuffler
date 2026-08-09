@@ -273,6 +273,38 @@ with "locked shapes are never clicked") to "the component's content is interacti
 implementer: full four-step registration cost including the pointer-events step `mtg-zone` never
 exercised, and keystroke shielding for the typeable field.
 
+## Table-layout ticket 13: command-zone redraw — `zone: "command"` becomes placed furniture, zone AABBs strictly disjoint by tested invariant (2026-08-08)
+
+**Ticket-number collision warning**: this is `.scratch/tabletop-table-layout/issues/13-*.md`
+(commits `1046b93` + `b18bd16`), NOT the `tabletop-physics` ticket 13 above that created
+`mtg-zone`. Same two-maps-two-numbers trap as the two "ticket 12"s. This one is mostly
+*placement* territory (`cardLayout.ts` geometry — normally this owner's "Not Related To" list),
+but two of its consequences land squarely in this KB's charge:
+
+- **`zone: "command"` went from enum-only to placed furniture.** The enum value existed since
+  the `mtg-zone` rewrite but nothing ever drew one; `ensurePlayerArea` (`tableFurniture.ts`)
+  now puts a locked `mtg-zone` per seat (id `region-command-<table>-<seatId>`, label
+  "Command Zone", `seatId` set, `nextIndex()` at creation — same recipe as the other zones).
+  **No interaction hooks added** — consistent with watch point 7; a new zone instance costs
+  nothing mechanically. The stale "command isn't placed yet" comments in `tableFurniture.ts`
+  and `mtgZoneShape.ts` were deleted. Geometry: the right-hand column widened 425→550
+  (Library + 20 gap + a 360-wide two-card Command Zone beside it, for partner commanders);
+  Exile moved below Graveyard (Graveyard 550×449 top two-thirds, Exile 550×225 bottom third).
+- **Zone AABBs are now strictly disjoint by *asserted invariant*, not by accident of layout.**
+  Every pair of zone bounding boxes — within a seat's column and between neighboring player
+  areas — has a 20-unit gap (`GAP`, newly exported from `cardLayout.ts` along with a `Bounds`
+  interface), asserted pairwise in `apps/tabletop/test/cardLayout.test.ts` with a comment
+  naming the reason: an overlapping point would resolve via `topmostZoneAt()`'s draw-order
+  tiebreak — deterministic but semantically meaningless. This upgrades watch point 8's premise
+  from "bounds essentially never overlapped, by construction of the layout, not the code" to a
+  tested guarantee — *for the row layout*. The "square" risk in watch point 8 is unchanged:
+  whoever builds it inherits both the risk and now a test that will fail loudly if their
+  geometry breaks disjointness.
+- **Known gap, degrades gracefully** (flagged by this owner's `-review`): `ensurePlayerArea`
+  never redraws — it's idempotent on seatId — so pre-existing tables keep old-geometry
+  furniture and get no Command Zone. Zone detection just never reports `command` there;
+  nothing breaks.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,

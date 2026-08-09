@@ -206,6 +206,14 @@ easy to reopen:**
   as the zones around it. Also not `mtg-zone`-specific (the label stayed a stock `text` shape,
   not converted to a zone), but fixed in the same pass.
 
+**Addendum (2026-08-08, *table-layout* ticket 13 — a different ticket 13, see `history.md`):**
+`zone: "command"` is no longer enum-only — `ensurePlayerArea` now draws a locked Command Zone
+per seat (id `region-command-<table>-<seatId>`, two cards wide for partner commanders), with no
+interaction hooks, per watch point 7. The same change made every pair of zone AABBs strictly
+disjoint (20-unit `GAP`, exported from `cardLayout.ts`), pairwise-asserted in
+`test/cardLayout.test.ts`, because an overlap would resolve via `topmostZoneAt()`'s draw-order
+tiebreak — deterministic but semantically meaningless. See watch point 8.
+
 ## Ticket 14: zone appearance (dashed at rest, glow when armed) — `topmostZoneAt` extracted, shared
 
 `.scratch/tabletop-physics/issues/14-*.md` (landed 2026-08-08) gave zones a visual "armed" state —
