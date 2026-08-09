@@ -42,6 +42,18 @@
     document.querySelectorAll(".cool-command-zone-surround, .game-title").forEach(function (el) {
       el.style.backgroundColor = hex || "";
     });
+    // A dark sleeve needs light lettering on the plaque (the .game-name span
+    // inherits its color from .game-title).
+    var title = document.querySelector(".game-title");
+    if (title) title.style.color = hex && isDark(hex) ? "white" : "";
+  }
+
+  // Perceived luminance (ITU-R BT.601) below the midpoint reads as dark.
+  function isDark(hex) {
+    var r = parseInt(hex.slice(1, 3), 16);
+    var g = parseInt(hex.slice(3, 5), 16);
+    var b = parseInt(hex.slice(5, 7), 16);
+    return 0.299 * r + 0.587 * g + 0.114 * b < 128;
   }
 
   panel.querySelectorAll(".table-look-mat").forEach(function (btn) {
