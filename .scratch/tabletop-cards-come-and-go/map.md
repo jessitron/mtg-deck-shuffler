@@ -78,6 +78,13 @@ Founding decisions from the charting session (Jess, 2026-08-08):
   commander is an ordinary card: it can return to hand or even the library through the
   same exits as anything else.
 
+- [The return channel — how the Tabletop addresses the Shuffler](issues/01-return-channel.md)
+  (2026-08-08) — `seat.joined` grows two Shuffler-minted URLs: `gameUrl` (public, the
+  player-clickable library link) and `eventsUrl` (a generic contracts-enveloped event
+  inbox the Tabletop server POSTs to — later re-pointed at the Spine without the Tabletop
+  changing). No `gameId` crosses the boundary; the table name is the key. Send-then-commit:
+  no 2xx, no poof. No guard on the inbox — nothing in this app has logins.
+
 ## Not yet specified
 
 - **Edge gestures at the portal** — multi-select drags, dragging a card out of a

@@ -121,7 +121,32 @@ Solo Mode (Shuffler): the default — no table name. Play/Discard copy the card 
 
 Table Mode / At a Table (Shuffler): a game whose Prep supplied a table name + player name. Play and Discard send the card to the Tabletop instead of the clipboard, **send-then-commit**: the tabletop gets the card first; a failed send blocks the action and the card stays in hand. The game page's "at table _name_" link is the spectator-share URL.
 
+Send-then-commit: the rule for any card crossing the table boundary, in **both**
+directions — the receiving side must accept the event before the sending side changes its
+own state. Shuffler→Tabletop: play/discard sends first, card stays in hand on failure.
+Tabletop→Shuffler: a card dropped on the library portal is not deleted from the table
+until the Shuffler confirms (2xx) — no confirmation, no poof; the card visibly stays. A
+card is never in limbo. (Direction two decided 2026-08-08, cards-come-and-go ticket 01.)
+
 Discard (Shuffler): identical to Play except the verb — the card lands in the Table location (the graveyard is table geography, not Shuffler state); at a table it is sent with zone hint "graveyard".
+
+Game URL (Shuffler → contract): the public, player-clickable address of a Shuffler game
+(`gameUrl` on `seat.joined`). Minted by the Shuffler; the Tabletop uses it as the library
+furniture's link target and never composes or parses it. The Shuffler's integer game id
+never crosses the table boundary — the id is the Shuffler's private business; the URL is
+the address. (Decided 2026-08-08, cards-come-and-go ticket 01.)
+
+Events URL (Shuffler → contract): where the Tabletop *server* POSTs events back
+(`eventsUrl` on `seat.joined`) — the address of that seat's Event Inbox. Minted by the
+Shuffler from whatever base suits the environment (localhost in dev, cluster-internal
+service name in prod). Re-pointing it at the Spine later changes nothing on the Tabletop.
+(Decided 2026-08-08, cards-come-and-go ticket 01.)
+
+Event Inbox: a generic endpoint that receives `contracts/`-enveloped events, dispatches
+on `name`, and rejects unknown name/version loudly. The Tabletop has one per table; the
+Shuffler grows one per game (its first inbound machine-to-machine surface, hearing only
+the events it cares about). No guard — nothing in this app has logins. (Decided
+2026-08-08, cards-come-and-go ticket 01.)
 
 Spectator: someone at a Table without a Seat. Sees the public projection of the event log: what's happening, the commentary, hand counts but never hands. In some modes, may comment in chat.
 
