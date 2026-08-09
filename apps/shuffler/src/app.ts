@@ -1637,6 +1637,10 @@ export function createApp(
         cards: [...deck.cards].sort((a, b) => a.name.localeCompare(b.name)),
       };
       const tableInfo: TableInfo = { tableName: "Yo", playerName: "Jess", seatId: randomUUID().slice(0, 8) };
+      // A random table look every visit: any curated mat, any sleeve color at
+      // all — /yo is the fastest way to see the look plumbing exercised.
+      const playmat = PLAYMATS[Math.floor(Math.random() * PLAYMATS.length)];
+      const sleeveColor = "#" + Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, "0");
       const prepId = persistPrepPort.newPrepId();
       const prep: PersistedGamePrep = {
         version: PERSISTED_GAME_PREP_VERSION,
@@ -1645,6 +1649,8 @@ export function createApp(
         tableName: tableInfo.tableName,
         playerName: tableInfo.playerName,
         seatId: tableInfo.seatId,
+        sleeveColor,
+        playmatImagePath: playmat.path,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
@@ -1655,7 +1661,7 @@ export function createApp(
       game.startGame(res.locals.browserTabId as string | undefined);
       await persistStatePort.save(game.toPersistedGameState());
 
-      await sendSeatJoinedBestEffort(tabletopPort, tableInfo, sortedDeck.name);
+      await sendSeatJoinedBestEffort(tabletopPort, tableInfo, sortedDeck.name, prep.sleeveColor, prep.playmatImagePath);
 
       res.redirect(`/game/${gameId}`);
     } catch (error) {
