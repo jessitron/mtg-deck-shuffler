@@ -85,6 +85,19 @@ Founding decisions from the charting session (Jess, 2026-08-08):
   changing). No `gameId` crosses the boundary; the table name is the key. Send-then-commit:
   no 2xx, no poof. No guard on the inbox — nothing in this app has logins.
 
+- [The event vocabulary for cards that come and go](issues/02-event-vocabulary.md)
+  (2026-08-08) — envelope.v1 amended in place (table name IS the tableId, 1-1;
+  `initiator` becomes `{ seatId?, playerName }`); one `card.returned.v1` for both table
+  exits (portal drag and Shuffler Return), distinguished by `occurredIn`, payload
+  card+seat+optional `fromZone`, **no face** (a card out of play has no face up — the
+  table is not authoritative for face); `card.discarded.v1` splits out of `card.played`
+  (whose `zoneHint` narrows to stack|battlefield); undo kinds are
+  `undo.card.played.v1`/`undo.card.discarded.v1` ("adding undo shouldn't remove
+  information"); commanders ride `seat.joined` as optional 0–2 `{card}` entries, no
+  face (always seated face-up); contract validation gets real on every receiver this
+  map touches; `seat.taken` vs `seat.joined` are two facts from two flows, documented,
+  not unified.
+
 ## Not yet specified
 
 - **Edge gestures at the portal** — multi-select drags, dragging a card out of a

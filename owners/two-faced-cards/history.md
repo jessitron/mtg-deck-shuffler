@@ -444,3 +444,64 @@ KB files updated: README quick-reference face-down row; interactions watch point
 "generic card back" consequence; contract.md seat.joined note. Follow-up for
 implementation: update the "until sleeve selection exists" comment on `cardBackImageUrl()`
 in `apps/shuffler/src/port-tabletop/types.ts` (~124) to point at the ticket.
+
+## Physics Ticket 06 Resolved: Flip Gesture and Face Authority (design decision, 2026-08-08, `575416b`)
+
+**No code changed** — this closes the two questions this KB had been carrying as "still open,
+narrowed to ticket 06" since ticket 02. (KB backfill note: this entry was written a day late,
+alongside the cards-come-and-go ticket 02 entry below; the resolution itself landed at
+`575416b`.) Full text: `.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` § Answer.
+
+- **Trigger: two separate context-menu items**, "Flip" and "Turn face down," in tldraw's
+  right-click/long-press context menu (same surface as furniture Lock/Unlock) — not a hover
+  affordance, not a modifier-click, not one combined "turn over." Each item shown/enabled from
+  the card's own state: no "Flip" entry when `backImageUrl` is null.
+- **`currentFace` authority: divergence accepted, flip-on-table is table-local.** This owner's
+  must-decide (a table-flipped card discarded to the graveyard shows the pre-flip face on the
+  Shuffler) is now decided *knowingly*: the Shuffler keeps trusting its own `currentFace`.
+  Deciding factor this owner supplied: there is **no inbound event path into `GameState`
+  today** — "table becomes authoritative" would have meant building the Shuffler's first-ever
+  inbound listener plus a `card.flipped`-shaped event with an axis discriminator. Known
+  divergence, not a bug to fix.
+- **`faceDown` visual is a plain image swap** — confirmed with `shuffler-looks-like-itself`:
+  the fleet has no border/dimming/badge idiom for concealment (the Shuffler's library furniture
+  is just `<img src=CARD_BACK>`), so `faceDown` swaps to the card-back/sleeve rendering and
+  nothing else.
+- **Leaving the table resets both axes**: a card returning to hand or library goes back to
+  `face:'front'`, `faceDown:false`, regardless of how it sat on the table. Jess: "if a card
+  goes back to the hand or library, it goes to its regular face-up again." Matches
+  `mulligan()`'s existing reset. The reset is performed table-locally (mechanism is an
+  implementation detail); composes with the wire decision below.
+
+## Cards-Come-and-Go Ticket 02: the Event Vocabulary — Face Decisions (design decision, 2026-08-08, `7b7f868`)
+
+**No code changed** — decisions only; schemas and handlers come at build time. Full text:
+`.scratch/tabletop-cards-come-and-go/issues/02-event-vocabulary.md` § Answer. This owner was
+consulted before payload shaping. What it settles in this territory:
+
+- **`card.returned.v1` carries NO face and no faceDown** — one kind for both table exits
+  (portal drag `occurredIn: "tabletop"`, Shuffler Return button `occurredIn: "shuffler"`),
+  payload `card` + `seat` + optional `fromZone`. Jess: "cards removed from play no longer
+  have a face up." This is the **wire half of the ticket-06 authority decision**: the table
+  is not authoritative for a card's face, the Shuffler keeps its own `currentFace`, and the
+  wire says nothing — the table resets its axes locally on exit (ticket 06's rule), the
+  Shuffler applies its own face rules on arrival.
+- **`card.discarded.v1` splits out of `card.played` and KEEPS `face`** — a discard shows the
+  card publicly. Payload: `card`, `face`, `seat` (no `zoneHint`; graveyard *is* its meaning).
+  Consequence: `card.played.v1`'s `zoneHint` enum narrows to `stack | battlefield`.
+- **Undo kinds carry no face**: `undo.card.played.v1` / `undo.card.discarded.v1`, payload
+  `card` + `seat` — deletion neither reveals nor chooses a face. Tabletop effect: poof;
+  attachments stay, detached. Removal handlers read `props.instanceId` per this owner.
+- **Commanders ride `seat.joined` faceless**: optional `commanders` array (0–2 entries,
+  `{ card: { scryfallId, instanceId } }`). Jess: a commander always arrives in the command
+  zone face up; flipping it there afterward is table-local ("it isn't in play, people can do
+  what they want"). Scaffolding (`cardName`/`frontImageUrl`/`backImageUrl`) rides off-schema
+  with this owner's sharp edge honored — `backImageUrl` derived from `card.twoFaced`, never
+  from stored-URI presence, same test treatment as `cardPlayedEvent.test.ts`. **This makes
+  `seat.joined` the second sender site bound by the twoFaced-derivation watch point.**
+- **Contract validation gets real** on every receiver this map touches (ajv-style, loading
+  `contracts/`) — retiring the hand-rolled "JES-128" `if`-chains including
+  `cardArrival.ts`'s `validationError`.
+- Also: `envelope.v1` amended in place (free — zero conforming producers exist yet):
+  `tableId` drops `format: uuid` (the table name IS the id pre-Spine), `initiator` becomes
+  `{ seatId?, playerName }`.

@@ -168,7 +168,7 @@ Concrete, in rough order of how often they bite.
   now-deleted rules did (`deck-selection.css` ×2 plus `.json-summary` in
   `src/view/debug/state-copy.ts`; it was **three**, not two as this file used to say).
   One sanctioned exception exists, and it's on the canvas, not in any stylesheet:
-  `MtgCounterShapeUtil.tsx`'s editing input (2026-08-08) — see README → tldraw limits.
+  `MtgCounterShapeUtil.tsx`'s editing textarea (2026-08-08) — see README → tldraw limits.
   It is not precedent for DOM pages.
   Two things that do need care:
   - If your new element is focusable but **not** one of those tags (a `div` with a click
@@ -483,12 +483,31 @@ not by recomputing new numbers.**
   (2026-08-08).** `MtgCounterShapeUtil.tsx` re-expresses `game.css` → `.hand-count`'s recipe
   inline with fleet tokens (deep-space fill, `var(--narrow-border)` dark-pink ring,
   light-pink `--font-chrome` text, 50% radius — count discs are a sanctioned round category),
-  border and font-size proportional to `props.h`. Staged on `/design` § `#counter-disc`
+  border proportional to `props.h`, font-size **up to** `h * 0.32`, shrinking to fit
+  (`counterTextFit.ts`, same day's follow-up). Staged on `/design` § `#counter-disc`
   awaiting Jess's sign-off — see [open-choices.md](open-choices.md). Concrete watch point:
   **the chip recipe now lives in three places** — `game.css` → `.hand-count` (the original),
   `design-candidates.css` → `.counter-mock` (the specimen), and the inline `disc` object in
   `MtgCounterShapeUtil.tsx`. Changing the chip look means all three, and if Jess rejects the
-  staged look, the mock and the shape change together. Its editing input carries the fleet's
+  staged look, the mock and the shape change together. **The text layout is a fourth file,
+  and it is deliberately MINIMAL (reverted to this same-day, 2026-08-08 — see
+  [history.md](history.md)):** `counterTextFit.ts` (~40 lines) exposes
+  `fitCounterFont(text, w, h)`, which shrinks the font from the `0.32 × h` base until an
+  ESTIMATED wrapped block (0.8em/char, 0.85 wrap slack) fits the SQUARE content box. The
+  browser does the actual wrapping (`overflowWrap: anywhere` on the disc); the display div
+  renders plain `{text}`. Two facts to keep straight: **(1)** a `border-radius` clip does
+  not change where CSS lays out text — the browser wraps to the square content box and the
+  round clip eats the corners of top/bottom lines (a general fact about any round-clipped
+  element, not a tldraw quirk) — but the app's posture is now **accept the corner nibble**,
+  not fix it. A circle-aware chord-wrapping fit was built and Jess reverted it ("too much
+  code and not core to this app... I'd put it in a library"). Don't rebuild it. **(2)**
+  Width is estimated, not canvas-measured, on purpose: canvas `measureText` **lies when the
+  webfont hasn't loaded** — an empty table renders no Orbitron, so the browser never even
+  fetches the font, and measurements come back in fallback-sans metrics (verified:
+  "lifelink" at 14px measured 44.6px vs real Orbitron ~90px). Any future canvas measurement
+  of `--font-chrome` must handle font loading first. The editing textarea keeps the same
+  shrinking font plus a `paddingTop` from the fit's estimated `lineCount` (no side padding
+  anymore); it (was an input pre-fit) carries the fleet's
   one sanctioned `outline: none` (see README → tldraw limits); its indicator is tldraw's
   default box (a plain rect via `getIndicatorPath` — not a custom treatment, per the
   indicator rule above).

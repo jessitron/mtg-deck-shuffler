@@ -1,5 +1,6 @@
 import { BaseBoxShapeUtil, HTMLContainer, TLShapePartial, useValue } from "tldraw";
 import { MtgCounterShape, mtgCounterShapeProps } from "../../shared/mtgCounterShape";
+import { fitCounterFont } from "./counterTextFit";
 import { useEffect, useRef, type CSSProperties } from "react";
 
 export const COUNTER_SIZE = 44;
@@ -53,7 +54,7 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
     // otherwise reclaim focus right after a synchronous focus() here
     // (verified empirically: autoFocus, ref-callback focus, and a bare
     // effect focus all end with document.activeElement === body).
-    const rInput = useRef<HTMLInputElement>(null);
+    const rInput = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
       if (!isEditing) return;
       const timer = setTimeout(() => {
@@ -68,7 +69,11 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
     // the shape's own height rather than fixed px so a resized counter keeps
     // its proportions (the playmat-radius lesson: fixed px drifts as the
     // shape scales). Border width is --narrow-border (3px) at the default
-    // 44px size, scaled with the disc.
+    // 44px size, scaled with the disc. Font size shrinks to fit long labels
+    // like "lifelink" (Jess, 2026-08-08); the browser wraps within the
+    // square content box, and the round clip nibbling the corners of long
+    // labels is accepted — close enough. See counterTextFit.ts.
+    const { fontSize, lineCount } = fitCounterFont(text, w, h);
     const disc: CSSProperties = {
       width: w,
       height: h,
@@ -81,10 +86,11 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
       border: `${h * (3 / COUNTER_SIZE)}px solid var(--dark-pink)` /* --narrow-border, proportional */,
       color: "var(--light-pink)",
       fontFamily: "var(--font-chrome)",
-      fontSize: h * 0.32,
+      fontSize,
       fontWeight: 700,
-      lineHeight: 1,
+      lineHeight: 1.1,
       textAlign: "center",
+      overflowWrap: "anywhere", // a long single word ("lifelink") wraps rather than overflowing
       overflow: "hidden",
     };
 
@@ -96,7 +102,11 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
             card. */}
         <div className="tl-image-container" style={{ pointerEvents: "all" }}>
           {isEditing ? (
-            <input
+            // A textarea (not an input) so long labels wrap while editing,
+            // roughly as they will display. It can't flex-center its own
+            // text, so vertical centering is estimated padding from the
+            // fit's line count.
+            <textarea
               data-testid="mtg-counter-input"
               ref={rInput}
               defaultValue={text}
@@ -111,6 +121,7 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
               onPointerDown={(e) => this.editor.markEventAsHandled(e)}
               // The focused input swallows keys before tldraw's document-level
               // handlers see them, so Enter/Escape must end editing here.
+              // Enter commits (no newlines in a counter label).
               onKeyDown={(e) => {
                 if (e.key === "Escape" || e.key === "Enter") {
                   e.preventDefault();
@@ -120,6 +131,12 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
               }}
               style={{
                 ...disc,
+                display: "block",
+                paddingTop: Math.max(
+                  0,
+                  (h - 2 * (h * (3 / COUNTER_SIZE)) - Math.max(1, lineCount) * 1.1 * fontSize) / 2,
+                ),
+                resize: "none",
                 // Invisible chrome: editing changes nothing visually except
                 // the caret. Suppressing the native focus outline is the
                 // sanctioned canvas exemption — selection/focus indication on

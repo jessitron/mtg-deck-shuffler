@@ -107,7 +107,12 @@ Excluded Card (Archidekt): a card that is associated with a deck, but not curren
 
 Commander: a card (or two) in a deck that has the "Commander" category. There may be zero, one, or two commanders in a deck, and in this app, they're always in the Command Zone.
 
-Command Zone: This is a location on the screen. It is not a Location (MTG Deck Shuffler, game scope), because commanders are stored separately from game cards; they are not moved.
+Command Zone: a Location (MTG Deck Shuffler, game scope) — commanders are ordinary game
+cards at `CommandZone(position)`, with card instance IDs like everything else. (An older
+version of this entry claimed commanders were stored separately from game cards; that was
+stale — see `GameState.ts` `CommandZoneLocation`.) Commanders always arrive at a table
+face up; a two-faced commander can be flipped in the command zone afterward, which is
+table-local play, not seating data. (Confirmed 2026-08-08, cards-come-and-go ticket 02.)
 
 ## Spine terms (planned — see DESIGN-the-table-vision.md)
 
@@ -128,7 +133,27 @@ Tabletop→Shuffler: a card dropped on the library portal is not deleted from th
 until the Shuffler confirms (2xx) — no confirmation, no poof; the card visibly stays. A
 card is never in limbo. (Direction two decided 2026-08-08, cards-come-and-go ticket 01.)
 
-Discard (Shuffler): identical to Play except the verb — the card lands in the Table location (the graveyard is table geography, not Shuffler state); at a table it is sent with zone hint "graveyard".
+Discard (Shuffler): identical to Play except the verb — the card lands in the Table location (the graveyard is table geography, not Shuffler state). At a table it is its own event kind, `card.discarded` — split from `card.played` because the Tabletop routes on the difference and the Interpreter will someday find the two very different, even though the Shuffler barely feels it. (`card.played`'s zoneHint narrows to stack|battlefield accordingly. Decided 2026-08-08, cards-come-and-go ticket 02; the wire previously sent `card.played` with zone hint "graveyard".)
+
+Undo event (contract): the undo of a logged event is named by prefixing `undo.` to the
+full name of the event being undone — `undo.card.played`, `undo.card.discarded` — so
+adding undo never removes information. Informational, distinct from the opposite action:
+the Tabletop poofs the card wherever people moved it; attachments stay, detached.
+(Decided 2026-08-08, cards-come-and-go ticket 02.)
+
+Card Returned (contract): `card.returned` — a card left the table for its player's
+Reveal zone. One event kind for both exits, distinguished by the envelope's `occurredIn`:
+the library portal swallowed it (tabletop) or the Shuffler's Return button recalled it
+(shuffler). Carries no face — a card removed from play no longer has a face up, so the
+table is never authoritative for a card's face. Optionally carries `fromZone` (table
+geography) when the table knows it. (Decided 2026-08-08, cards-come-and-go ticket 02.)
+
+seat.joined vs seat.taken: two facts from two flows, not two names for one fact.
+`seat.joined` (Shuffler→Tabletop) — a seat's game connected, carrying how the player's
+stuff looks (deck name, playmat, sleeve, commanders). `seat.taken` (Spine only, never on
+the Shuffler↔Tabletop boundary) — someone sat down via the Spine's join endpoint, which
+mints the seatId and appends to the log. (Documented 2026-08-08, cards-come-and-go
+ticket 02.)
 
 Game URL (Shuffler → contract): the public, player-clickable address of a Shuffler game
 (`gameUrl` on `seat.joined`). Minted by the Shuffler; the Tabletop uses it as the library
