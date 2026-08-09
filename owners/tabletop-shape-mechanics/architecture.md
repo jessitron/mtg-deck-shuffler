@@ -34,15 +34,24 @@ and stray drops can no longer masquerade as one the way they could when everythi
   the card swung around its corner instead of spinning in place) — that math carried forward
   unchanged in substance.
 - **`onTranslateEnd(_initial, current)`** — fires once, on the moved shape, when a drag settles.
-  Two responsibilities live here:
-  1. **Zone-entry detection** (`600cac1`): compares the shape's center against every other
-     shape's `meta.zone` (via `zoneAt()`), and if the card entered a new zone, logs it and
-     stamps `meta.zone` for next time. Debounced on `meta.zone` so staying in a zone, or a tiny
-     in-zone nudge, doesn't refire. `meta` is now used for *only* this — zone dedup — nothing
-     else (ticket 13 will move even this to reading `mtg-zone` shapes' own props instead).
+  Three responsibilities live here:
+  1. **Zone-entry detection** (`600cac1`): resolves the zone under the card's center via
+     `zoneAt()` (since ticket 18 returning the full `ZoneHit` — `{id, zone}` — not just the zone
+     string, because eviction needs the zone shape's bounds), and if the card entered a new
+     zone, logs it and stamps `meta.zone` for next time. Debounced on `meta.zone` so staying in
+     a zone, or a tiny in-zone nudge, doesn't refire.
   2. **Selection-state cleanup** (`959831c`, see the tldraw quirk below) — must run *before* the
      zone-equality early return, since some drags (e.g. two lands on the same playmat) hit that
      early return and would otherwise skip the cleanup.
+  3. **Counter eviction** (ticket 18, inside the zone-change branch, after the debounce): when
+     the new zone is in `NON_BATTLEFIELD_ZONES` (`graveyard`/`exile`/`library`), `evictCounters`
+     detaches the card's counter children to the page and animates them to open spots near the
+     zone's edge. See "Ticket 18" below — including why the Stack is deliberately NOT in that
+     set.
+- **`canReceiveNewChildrenOfType` / `canRemoveChildrenOfType` / `onDragShapesIn` /
+  `onDragShapesOut`** (ticket 18) — the card is a drop target and host for `mtg-counter` shapes,
+  via tldraw's native drag-and-drop parenting. See "Ticket 18" below for the gates' narrowing
+  (load-bearing) and the rotation-zeroing math in `onDragShapesIn`.
 - **`component(shape)` / `getIndicatorPath(shape)`** — new, required by `BaseBoxShapeUtil`. The
   card renders its own `<img>` (front or back URL chosen from `props.face`) instead of delegating
   to tldraw's image machinery.
@@ -307,12 +316,19 @@ image/video shapes avoid it by wrapping content in `<div className="tl-image-con
 inventing inline pointer-events styles. Any future custom shape that renders interactive content
 in `<HTMLContainer>` needs the same treatment.
 
-## `mtg-counter`: decided, not built (table-layout ticket 12, 2026-08-08)
+## The life counter: decided, not built — and it can no longer be called `mtg-counter` (table-layout ticket 12, 2026-08-08)
+
+**Naming collision, resolved 2026-08-08 by ticket 18 claiming the type string.** The
+tabletop-physics spec assigns `mtg-counter` to the drag-onto-a-card counter, which ticket 18
+built (see "Ticket 18" below) — an **unlocked, draggable, text-editable** shape, nearly the
+opposite of the shape this section describes. The life counter needs its own name when built
+(`mtg-life-counter`?) — buoyed in `TODO.md` as `life-counter-needs-own-name`. Everything below
+is about the *life counter*, not the shape currently registered as `mtg-counter`.
 
 `.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md` (resolved
 2026-08-08 — note this is a *different* "ticket 12" from the `tabletop-physics` ticket 12 that
-landed the `mtg-card` rewrite) decided that a life counter is a **third custom shape type**,
-working name `mtg-counter`: **locked furniture** whose `component()` renders a number with +/-
+landed the `mtg-card` rewrite) decided that a life counter is a custom shape type:
+**locked furniture** whose `component()` renders a number with +/-
 buttons and a directly-typeable number field. Everyone can press anyone's buttons; state syncs
 as ordinary shape props. **No code exists yet.** Three mechanics facts were established from
 tldraw source during this owner's `-context` consult for that grilling session, and belong here
@@ -339,15 +355,116 @@ so the implementer doesn't re-derive them:
 Implementation cautions, recorded now so they're not discovered mid-build:
 
 - **The full four-step registration cost applies (watch point 6), *including* step 4** — the
-  pointer-events item. `mtg-counter` will be the first *locked* shape to exercise it: `mtg-zone`
-  skipped step 4 because nothing clicks it, but the condition was always "is the component's
-  content interactive," never "is the shape unlocked."
-- **The typeable number field must shield keystrokes from tldraw's tool hotkeys** — a focused
-  input inside the canvas otherwise triggers tool switches (e.g. a digit or letter keypress) as
-  the player types a life total.
+  pointer-events item. The life counter will be the first *locked* shape to exercise it:
+  `mtg-zone` skipped step 4 because nothing clicks it, but the condition was always "is the
+  component's content interactive," never "is the shape unlocked."
+- **The typeable number field must shield keystrokes from tldraw's tool hotkeys.** Ticket 18
+  found the mechanism that handles this for free when editing goes through tldraw's own
+  editing state: `areShortcutsDisabled` is true whenever `getEditingShapeId() !== null`
+  (`useKeyboardShortcuts.ts`). The life counter's always-live input (no editing state — you just
+  click and type) will NOT get that for free and still needs its own shield; the old caution
+  stands for it specifically.
 - Watch point 1 (the `onClick` selection-deferral quirk) does **not** apply: locked shapes never
   reach `PointingShape`, and the counter's interactivity lives in DOM handlers, not a ShapeUtil
   `onClick`.
+
+## Ticket 18: `mtg-counter` — counters ride on cards (landed 2026-08-08, `4c64ef2`)
+
+`.scratch/tabletop-physics/issues/18-counters.md`. A third custom shape type, `mtg-counter`
+(`apps/tabletop/src/shared/mtgCounterShape.ts`, props `{w, h, text}`;
+`apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx`, `BaseBoxShapeUtil<MtgCounterShape>`):
+an **unlocked, draggable disc** with free editable text, blank by default. Attachment to a card
+is tldraw **parenting** (the counter's `parentId`), never a prop on either shape — the card's
+util *mediates* the drop, but the parent relationship carries the state.
+
+### The counter's own util is deliberately minimal
+
+- **No `onClick`** — text editing is tldraw's stock double-click-to-edit (`canEdit(): true`),
+  specifically so this util never triggers the `PointingShape` selection-deferral quirk.
+- **But it still has `onTranslateEnd` calling `setSelectedShapes([])`, unconditionally, with no
+  early return above it.** This is watch point 1's cleanup obligation *generalizing beyond
+  `onClick`-bearing utils*: tldraw leaves any just-dragged shape selected, and the *card's*
+  `startTranslating` safety net only reselects the pointed-at shape when nothing is selected —
+  so a stale *counter* selection would make the next *card* drag silently translate the counter.
+  Any unlocked draggable shape sharing a canvas with an `onClick`-bearing shape needs this
+  cleanup. Regression test: `verify-counter.spec.ts`'s "after dragging a counter, dragging a
+  card moves the card (stale-selection regression)".
+- **Editing keystrokes are shielded from tool hotkeys for free**: tldraw's
+  `areShortcutsDisabled` is true whenever `getEditingShapeId() !== null`
+  (`useKeyboardShortcuts.ts`). This supersedes the always-live-input caution recorded for the
+  life counter *for shapes that use tldraw's editing state*; an always-live input still needs
+  its own shield. Enter/Escape must be handled in the input's own `onKeyDown`
+  (`editor.complete()`) because the focused input swallows keys before tldraw's document-level
+  handlers see them. Cursor-positioning clicks use `editor.markEventAsHandled(e)` in
+  `onPointerDown` (the `HyperlinkButton` pattern, as predicted).
+- **Focus on edit-start needs `setTimeout(0)`.** tldraw's own end-of-gesture focus management
+  beats `autoFocus`, ref-callback focus, AND a bare `useEffect` focus — all three end with
+  `document.activeElement === body` (verified empirically). The working fix: a `setTimeout(0)`
+  inside the `isEditing` effect (`MtgCounterShapeUtil.tsx` has the comment; tldraw's own
+  `useEditablePlainText` does a bare effect, but stock shapes apparently ride a different path).
+- `isAspectRatioLocked(): true` keeps the box square, which is what makes `border-radius: 50%`
+  draw a circle rather than an ellipse.
+- Step 4 of the registration recipe (pointer-events) applies: the component wraps content in
+  `.tl-image-container` with `pointerEvents: "all"`, or double-click-to-edit never reaches it.
+
+### The card is the counter HOST — drag hooks on `mtg-card`
+
+Defining *any* of the drag hooks makes every card a drag target for every unlocked dragged shape
+(`getDraggingOverShape` checks only that hooks exist), so both `can*` gates are type-narrowed —
+this narrowing is load-bearing, not tidiness:
+
+- `canReceiveNewChildrenOfType(shape, type)` → `!shape.isLocked && type === "mtg-counter"`.
+- `canRemoveChildrenOfType(_shape, type)` → `type === "mtg-counter"`. The default is `true` for
+  ALL types — without this gate, dragging card A across card B fires
+  `B.onDragShapesOut(B, [cardA])`.
+- `onDragShapesIn(card, shapes)` — live reparent during the drag (the frame pattern), guarded by
+  `hasAncestor`. **Then it zeroes each dropped counter's local rotation**: `reparentShapes`
+  preserves *page* rotation, so a counter dropped on an already-tapped card would keep a
+  compensating local rotation forever — visibly tilted after the card untaps. Zeroing uses the
+  same center-preserving `halfExtent`/`center`/`topLeft` math as `onClick`'s tap pivot (watch
+  point 4), because rotation pivots around the top-left corner.
+- `onDragShapesOut(card, shapes, info)` — reparents to the page only the dragged shapes that are
+  currently THIS card's children (`shapes.filter(s => s.parentId === card.id)` — the frame-style
+  filter; a multi-shape drag containing someone else's counter must not be touched), and only
+  when `!info.nextDraggingOverShapeId` (dragging card-to-card is a hand-off, not a detach).
+
+### Battlefield-exit eviction
+
+`NON_BATTLEFIELD_ZONES = {graveyard, exile, library}` — **NOT the stack, deliberately**: cards
+ARRIVE on the Stack (`zoneHint`), so their first settled move fires a *stack* zone-entry, and
+including it would strip counters attached there. Found empirically — the plan's first draft
+included stack, and the Playwright test caught it.
+
+Eviction is driven from the *card's* `onTranslateEnd` (zone-change branch, after the debounce)
+because **a parented shape's own `onTranslateEnd` never fires when only its parent moves**.
+`evictCounters` reparents the counters to the page and `editor.animateShapes` them to spots from
+`findOpenSpotsNearZoneEdge` — a new pure-geometry seam
+(`apps/tabletop/src/client/shapes/openSpotNearZoneEdge.ts`, no `Editor`, unit-tested in
+`test/openSpotNearZoneEdge.test.ts`): nearest zone edge to where the card entered, slots
+alternating outward (+1, −1, +2, −2…), "occupied" considering only `mtg-card`/`mtg-counter`
+bounds — furniture is fair ground to sit on. Overlap beats failure: a hopelessly crowded table
+stacks counters on the anchor slot rather than dropping them inside the zone.
+
+`zoneAt()` was refactored to return the full `ZoneHit` (`{id, zone}`) instead of just the zone
+string, because eviction needs the zone shape's page bounds.
+
+### Creation: `MtgCounterTool` — the first custom tool
+
+`apps/tabletop/src/client/shapes/MtgCounterTool.ts`, a `StateNode` with `id "mtg-counter"`:
+click-to-place one counter, then back to the select tool. Registered in `TablePage.tsx` via
+**three UI pieces**: `<Tldraw tools={[MtgCounterTool]}>`, `uiOverrides.tools` (adds the toolbar
+item), and a custom `Toolbar` component (`ToolbarWithCounter`, prepending a `TldrawUiMenuItem`
+to `DefaultToolbarContent`) passed through `components`. Sync registration is the usual three
+places: the `useSync` `shapeUtils` const, `<Tldraw shapeUtils>`, and `rooms.ts`'s
+`createTLSchema` shapes map.
+
+### Playwright facts discovered (belong to anyone testing shapes)
+
+- **A creation click followed within tldraw's double-click window by a grab at the same point
+  classifies as a double-click and opens editing.** Tests need a ~500ms cooldown after creating
+  a shape before dragging it (`verify-counter.spec.ts`'s `createCounter` helper).
+- **`.nth()` on shape testids is paint order, and paint order changes when a shape reparents** —
+  drag from known creation points instead of trusting locator index stability across a reparent.
 
 ## Ticket 02/12: the rewrite, landed
 
