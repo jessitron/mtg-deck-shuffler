@@ -58,10 +58,11 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     const src = (face === "back" ? backImageUrl : frontImageUrl) ?? frontImageUrl;
     // Sleeve geometry is a proportion of the shape's own width — cards are
     // aspect-locked resizable, so a fixed px would drift out of proportion.
-    // w * 0.05 is the Shuffler card's own corner (10/200); w * 0.03 mirrors a
-    // real sleeve's ~1-2mm overhang. Flat solid color, no border or sheen.
+    // Square corners: sleeves are rectangular (Jess, 2026-08-09). w * 0.03
+    // mirrors a real sleeve's ~1-2mm overhang. Flat solid color, no border
+    // or sheen.
     const sleeve: CSSProperties | undefined = sleeveColor
-      ? { width: "100%", height: "100%", background: sleeveColor, borderRadius: w * 0.05, boxSizing: "border-box" }
+      ? { width: "100%", height: "100%", background: sleeveColor, boxSizing: "border-box" }
       : undefined;
 
     // Ticket 15: tap reads as a quick rotation, not a snap. onClick writes

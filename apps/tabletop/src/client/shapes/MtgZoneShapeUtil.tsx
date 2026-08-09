@@ -90,9 +90,9 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
     // inset like the card-back image so the box's border and label frame it.
     // The shape's own opacity is 1 when sleeved (tableFurniture.ts), so the
     // pile is as vivid as the cards; the box chrome fades itself back to 0.5
-    // here, keeping the same composite the plain furniture gets. Radius is a
-    // proportion of the pile's own width (the pile is a stack of sleeved
-    // cards, a physical object) — same 5%-of-w rule as the cards themselves.
+    // here, keeping the same composite the plain furniture gets. Square
+    // corners: sleeves are rectangular (Jess, 2026-08-09), same as the
+    // sleeved cards themselves.
     const sleevePile = sleeveColor ? (
       <div
         data-testid="library-sleeve-pile"
@@ -103,7 +103,6 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
           width: w - 2 * LIBRARY_PILE_INSET,
           height: h - 2 * LIBRARY_PILE_INSET,
           background: sleeveColor,
-          borderRadius: (w - 2 * LIBRARY_PILE_INSET) * 0.05,
         }}
       />
     ) : null;
