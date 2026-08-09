@@ -296,6 +296,15 @@ this ticket is a human tabbing through `/`, `/choose-any-deck`, `/prepare`, `/ga
 `.archidekt-input-section input`, `#deck-number`; in `prepare.css` —
 `.join-table-fields input`.
 
+**A fifth, adjacent site to visit when the sweep lands (2026-08-09, ticket 16):**
+`prepare.css` → `.table-look-color-input` already *reproduces* C's values (2px solid
+`--deep-space` on white) rather than waiting — `design-candidates.css` is gallery-only, so
+the values couldn't be shared; an in-file comment cites this choice. It deliberately deviates
+on radius: `--radius-soft`, not the text input's 0, because a color input is **pressed, not
+typed into** (choice 4's "do you touch it" test). When the sweep converges the four text
+inputs onto a real `.candidate-input`-descended rule, converge this one's border values too —
+but keep its radius.
+
 **Note for `issues/02`:** the candidate no longer carries a focus rule of its own —
 `.candidate-input:focus-visible` was **already deleted** by choice 5 (it was that choice's
 rejected dark-pink flush treatment, and spec.md §6 decided the adopted input takes the global
@@ -643,13 +652,19 @@ self-rendering custom shape.
   (`src/shared/mtgZoneShape.ts`), radius 5% of the inset width, zone opacity 1 with the box
   chrome self-faded to 0.5 so the pile stays vivid. `indicator()` untouched — the ride-along
   warning held. Full decision text in [README.md](README.md)'s design language; the
-  `.tl-image` wrapper-escape limit it uncovered is in README → tldraw limits. **Still
-  reserved: the picker's default/swatch palette** (ticket 16 / ticket 09's quick-swatch
-  list — identity weight per ticket 12: players must stay distinguishable at a glance). No
-  default sleeve color exists — `null` ⇔ unsleeved, today's bare look. **No `/design`
-  specimen yet** — buoyed as `design-sleeve-specimen` in `TODO.md`; a mock would follow the
-  ticket-11 precedents (labelled a mock, `.stage-white`). The raw hex itself remains domain
-  data, exempt from the stylesheet hex ban; what an agent must not do is *pick* one.
+  `.tl-image` wrapper-escape limit it uncovered is in README → tldraw limits. **The picker's
+  swatch palette — the last reserved piece — is DECIDED 2026-08-09 (ticket 16, `8995c1a`;
+  prototype variant A approved by Jess, `683ca1c`):** the sleeve quick-picks are the **mana
+  pie five** (hexes in `apps/shuffler/src/table-look.ts` mirror the `--mana-*` tokens — its
+  comment says "change a token there, visit here"; identity weight per ticket 12 holds, the
+  five mana colours are distinguishable at a glance), plus a None chip showing the standard
+  Magic card back (`null` ⇔ unsleeved — still no default *color*) and a custom
+  `<input type="color">`. The playmat set is the five `aeoe-*` images — one more than issue
+  09's four hero backgrounds (seam-rip is the fifth); the prototype verdict ratified five.
+  **Still no `/design` specimen of the rendered sleeve-on-a-card** — `design-sleeve-specimen`
+  in `TODO.md` stands; the picker *panel* has its own specimen (`#table-look`), a different
+  thing. The raw hex itself remains domain data, exempt from the stylesheet hex ban; what an
+  agent must not do is *pick* one.
 - **Also undecided, and it must not ride along: a card's `indicator()`.** Ticket 04 records
   explicitly that an `indicator()` looking like anything other than tldraw's default is a
   **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket
