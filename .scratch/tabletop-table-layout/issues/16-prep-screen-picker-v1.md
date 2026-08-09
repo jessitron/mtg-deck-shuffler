@@ -19,6 +19,13 @@ sleeves) are out of scope.
 
 Design source of truth: [09 — sleeve and playmat picker](09-sleeve-and-playmat-picker.md).
 
+**Prototype verdict (2026-08-09):** Jess picked variant A ("setup panel" — one compact
+opaque panel on the mat: mat-thumb row + sleeve-chip row with None/mana-pie/custom) from
+the three-variant prototype on branch `worktree-proto-ticket-16-picker` (`?variant=A|B|C`
+on /prepare). Two live previews are part of the design: picking a playmat swaps the mat
+art on the page; picking a sleeve color tints the command-zone surround and the deck-title
+plaque. Sleeves dressing the library is later, a separate task.
+
 User-visible Shuffler work → Playwright verification (pick a playmat, see it on the
 table; pick a sleeve color, see it captured).
 
