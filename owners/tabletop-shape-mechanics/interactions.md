@@ -256,6 +256,14 @@
    *more* granularity (one armed zone per shape) needs to be checked against what a multi-select
    drag is actually supposed to do in this app, not assumed correct because it covers more cases
    — "handles more inputs" isn't the same as "matches the domain."
+   **Known gap (2026-08-09): the signal arms for ANY shape in `select.translating`, counters
+   included** — it never asks what's being dragged. The portal prototype (wayfinder
+   cards-come-and-go ticket 04) gated its own parallel signal on the selection containing an
+   `mtg-card`, because a dragged counter must not threaten a swallow. When the real portal
+   build lands, consider folding a what-is-being-dragged gate into this shared signal rather
+   than keeping parallel signals — the same shape as table-layout ticket 19's
+   decided-but-unbuilt commander gate (arm only for the owner/commander), which is blocked on
+   table-layout ticket 18's `owner`/`isCommander` props.
 10. **Locked-but-interactive shapes: the life-counter pattern (decided 2026-08-08, not yet
     built — and no longer nameable `mtg-counter`, which ticket 18 claimed for the
     drag-onto-a-card counter; buoyed as `life-counter-needs-own-name` in `TODO.md`).** A life
@@ -305,6 +313,35 @@
     `setTimeout(0)` inside the `isEditing` effect — `autoFocus`, ref-callback focus, and a bare
     effect all lose to tldraw's end-of-gesture focus handling (`document.activeElement` ends on
     `body`).
+
+14. **STANDING POLICY (Jess, 2026-08-09): destination is pointer-keyed, always — and
+    `zoneAt()` doesn't comply yet.** The multi-select rationale in watch point 9 ("the pointer
+    picks the ONE destination") now explicitly holds for a single card too: any future
+    zone-targeting mechanic — arming, drop/swallow detection, portal gestures — keys on
+    `editor.inputs.currentPagePoint`, not on the dragged shape's own bounds center. The known
+    non-compliance: `MtgCardShapeUtil.onTranslateEnd`'s `zoneAt()` is still CENTER-keyed (card
+    page-bounds center → `topmostZoneAt`); it predates the policy and must be reconciled the
+    next time zone-entry mechanics are touched. Until then, arming (pointer) and zone-entry
+    (center) can disagree on a corner-grabbed card. The portal prototype's swallow already
+    switched to pointer-keyed. See `architecture.md`'s "Standing policy" section.
+
+15. **`onTranslateEnd` fires once PER MOVING SHAPE in a multi-select drag — never
+    synchronously delete a sibling moving shape from inside it.** tldraw's
+    `Translating.handleEnd` loops `movingShapes` with a non-null-asserted
+    `this.editor.getShape(shape.id)!` (`Translating.ts:291-292`) before calling each hook and
+    finally `updateShapes`: deleting a SIBLING moving shape inside the hook crashes the loop,
+    and even self-deletion should be deferred past the settle (`setTimeout(0)`, re-check
+    `getShape` before deleting) so the settle `updateShapes` still finds the shape. Established
+    by the portal prototype (2026-08-09); any future "the drop consumes the shape" mechanic
+    inherits this.
+
+16. **`editor.animateShapes` interpolates only x/y/rotation/opacity — numeric props need
+    `getInterpolatedProps` on the ShapeUtil.** Without it, a props change (e.g. a `w`/`h`
+    shrink) snaps at animation start while position still tweens. `MtgCardShapeUtil` currently
+    carries a prototype-marked `getInterpolatedProps` lerping `w`/`h` (portal prototype,
+    2026-08-09) — if the portal build is abandoned, that override should go with it; if any
+    production animation shrinks/grows a shape, it becomes production code and loses the
+    prototype marker.
 
 ## Not Related To
 

@@ -468,6 +468,57 @@ Full detail in `architecture.md`'s "Ticket 18" section; watch points 1, 6, 10 up
 11-13 added in `interactions.md`; `files.md` gained the four new files and the two new tests.
 (Ticket 18 landed on main in parallel with table-layout ticket 14 above; both are 2026-08-08.)
 
+## Portal-gesture prototype — standing policy decided: destination is pointer-keyed, always (2026-08-09)
+
+Wayfinder cards-come-and-go ticket 04 (worktree `wayfinder-04-portal-gesture`, branch
+`prototype/portal-gesture-ticket-04`) prototyped the library-portal gesture: drag a card onto
+the library, the portal arms, the card is swallowed (deleted, with variant animations). All
+throwaway code — `apps/tabletop/src/client/shapes/portalGesturePrototype.tsx` plus two marked
+hook-ins (`MtgCardShapeUtil.onTranslateEnd` calls `swallowIntoLibraryPortal` in its
+`zone === "library"` branch; `MtgCardShapeUtil.getInterpolatedProps` lerps `w`/`h`;
+`TablePage.tsx` mounts the overlay via `TLComponents.InFrontOfTheCanvas` and the variant
+switcher). No production decision on which variant yet — but the prototype review produced a
+**standing policy** and four durable mechanics facts.
+
+- **STANDING POLICY (Jess, 2026-08-09): destination is pointer-keyed, always.** The
+  multi-select rationale already in this KB ("select six cards, drag one to the graveyard — the
+  pointer picks the ONE destination", the `05235aa` correction) now explicitly holds for a
+  single card too. Any future zone-targeting mechanic — arming, drop/swallow detection, portal
+  gestures — keys on `editor.inputs.currentPagePoint`, not on the dragged shape's own bounds
+  center. **Known tension with today's code**: `MtgCardShapeUtil.onTranslateEnd`'s `zoneAt()`
+  is still CENTER-keyed (card page-bounds center) — it predates the policy and needs
+  reconciling the next time zone-entry mechanics are touched. The portal prototype's swallow
+  already switched to pointer-keyed. Recorded as watch point 14.
+- **`onTranslateEnd` fires once PER MOVING SHAPE in a multi-select drag** — tldraw's
+  `Translating.handleEnd` loops `movingShapes` with a non-null-asserted
+  `this.editor.getShape(shape.id)!` (`Translating.ts:291-292`, confirmed against source)
+  before calling each hook and finally `updateShapes`. A hook must never synchronously delete
+  a SIBLING moving shape (crashes the loop), and even self-deletion should be deferred past
+  the settle — the prototype uses `setTimeout(0)` and re-checks `getShape` before deleting.
+  Watch point 15.
+- **`editor.animateShapes` interpolates only x/y/rotation/opacity**; numeric props (e.g. a
+  `w`/`h` shrink) animate only if the ShapeUtil defines `getInterpolatedProps`.
+  `MtgCardShapeUtil` now has a prototype-marked one lerping `w`/`h`. Watch point 16.
+- **The shared `armedZoneIdSignal` (`zoneHitTest.ts`) arms for ANY shape in
+  `select.translating`, including counters.** The portal prototype gates its own signal on the
+  selection containing an `mtg-card` (a dragged counter must not threaten a swallow). When the
+  real portal build lands, consider folding a what-is-being-dragged gate into the shared
+  signal — the same shape as table-layout ticket 19's decided-but-unbuilt commander gate
+  (blocked on table-layout ticket 18's `owner`/`isCommander` props). Watch point 9 amended.
+- **Arming visuals for a zone hidden under an opaque image shape (the library) can be drawn in
+  viewport space via `TLComponents.InFrontOfTheCanvas`** — outside the camera transform,
+  positioned via `editor.pageToViewport` inside a `useValue` (camera reads make it track
+  pan/zoom). Confirmed working in the prototype; an alternative to the box-shadow-only
+  constraint in the design owner's "tldraw limits" list.
+- **Citation corrections while we're here** (this owner's 2026-08-09 `-context` fork had
+  flagged stale references): the *built* arming pattern is tabletop-physics ticket 14
+  (`zoneHitTest.ts`, above), NOT table-layout ticket 08 (design-only); table-layout ticket 19
+  is the decided-but-unbuilt owner-gating precedent, blocked on table-layout ticket 18's
+  `owner`/`isCommander` props.
+
+Full detail in `architecture.md`'s "Portal-gesture prototype" section; watch points 14-16 new,
+watch point 9 amended, in `interactions.md`; `files.md` gained `portalGesturePrototype.tsx`.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,

@@ -42,7 +42,9 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   `canRemoveChildrenOfType`, both type-narrowed to `mtg-counter`; `onDragShapesIn` with the
   rotation-zeroing math; `onDragShapesOut` with the `parentId` filter), `evictCounters()`
   (private — calls `findOpenSpotsNearZoneEdge`, below), and `component()`/`getIndicatorPath()`
-  (renders its own `<img>`).
+  (renders its own `<img>`). **Two prototype-marked additions** (portal gesture, 2026-08-09):
+  `onTranslateEnd`'s library branch calls `swallowIntoLibraryPortal`, and
+  `getInterpolatedProps` lerps `w`/`h` for `animateShapes` (watch point 16).
 - `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — extends `BaseBoxShapeUtil<MtgZoneShape>`
   (ticket 13); still defines no interaction hooks at all (`onClick`/`onTranslateEnd`/
   `onDragShapesOver` are all absent — see `architecture.md`/`interactions.md` watch point 7 for why
@@ -71,6 +73,21 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 - `apps/tabletop/src/client/shapes/MtgCounterTool.ts` — **new, ticket 18**: `StateNode` with id
   `"mtg-counter"`; click-to-place one counter at the pointer, then back to the select tool. The
   minimal creation affordance (flagged as an assumption in the ticket outcome).
+- `apps/tabletop/src/client/shapes/portalGesturePrototype.tsx` — **PROTOTYPE, THROWAWAY**
+  (wayfinder cards-come-and-go ticket 04, 2026-08-09, branch
+  `prototype/portal-gesture-ticket-04`): the library-portal gesture, three feel-variants
+  (`?variant=` + dev-only floating switcher). Exports `swallowIntoLibraryPortal` (called from
+  `MtgCardShapeUtil.onTranslateEnd`'s library branch — deferred self-deletion only, see watch
+  point 15), `PortalArmingOverlay` (mounted as `TLComponents.InFrontOfTheCanvas` in
+  `TablePage.tsx` — viewport-space arming visuals over the library's opaque image), and
+  `PortalVariantSwitcher`. Its armed signal is a portal-gated sibling of `zoneHitTest.ts`'s
+  (mtg-card-in-selection + zone === "library"), pointer-keyed per the 2026-08-09 standing
+  policy. Expect this file (and the prototype-marked hook-ins in `MtgCardShapeUtil.tsx` and
+  `TablePage.tsx`) to be deleted or productionized when the ticket resolves.
+- `apps/tabletop/src/client/shapes/counterTextFit.ts` — `fitCounterFont`: pure shrink-to-fit
+  for the counter disc's label (estimate-not-measure, because canvas `measureText` lies before
+  the webfont loads). Rendering-support for `MtgCounterShapeUtil.component()`, not interaction
+  mechanics — listed here only because it lives in `shapes/`.
 - `apps/tabletop/src/client/shapes/openSpotNearZoneEdge.ts` — **new, ticket 18**:
   `findOpenSpotsNearZoneEdge(request)`, pure geometry over plain `Rect`s (no `Editor`, unit-
   tested) — picks the zone edge nearest the card's entry point and alternates slots outward,

@@ -524,6 +524,64 @@ cards, locked furniture, *and* stray dropped JPEGs, none of which shared meaning
   asset mutation, no re-fetch; both faces' URLs travel with the card from arrival). This affects
   card-rendering territory (`two-faced-cards`), not this owner's selection mechanics.
 
+## Standing policy: destination is pointer-keyed, always (Jess, 2026-08-09)
+
+Decided during prototype review of the library-portal gesture (wayfinder cards-come-and-go
+ticket 04). The multi-select rationale from the `05235aa` correction above — "select six cards,
+drag one to the graveyard, the pointer picks the ONE destination" — now explicitly holds **for a
+single card too**. Any future zone-targeting mechanic (arming, drop/swallow detection, portal
+gestures) keys on `editor.inputs.currentPagePoint`, never on the dragged shape's own bounds
+center.
+
+**Tension with today's code, on record**: `MtgCardShapeUtil.onTranslateEnd`'s `zoneAt()` is
+still CENTER-keyed — it computes the card's page-bounds center and hands that to
+`topmostZoneAt`. That predates the policy and needs reconciling the next time zone-entry
+mechanics are touched (the debounce, `NON_BATTLEFIELD_ZONES`, or the portal build itself). The
+portal prototype's swallow already switched to pointer-keyed. Until reconciled, a card dragged
+by its far corner can settle "in" a different zone than the one that was armed under the
+pointer — arming (pointer) and zone-entry (center) can disagree.
+
+## Portal-gesture prototype (wayfinder cards-come-and-go ticket 04, 2026-08-09) — throwaway code, durable facts
+
+`apps/tabletop/src/client/shapes/portalGesturePrototype.tsx` (branch
+`prototype/portal-gesture-ticket-04`): three feel-variants of the library swallowing a dropped
+card, switchable via `?variant=` and a dev-only floating bar. Hook-ins are two prototype-marked
+spots in `MtgCardShapeUtil` (the `swallowIntoLibraryPortal` call in `onTranslateEnd`'s
+`zone === "library"` branch, and `getInterpolatedProps`) plus `TablePage.tsx` mounting
+`PortalArmingOverlay` (as `TLComponents.InFrontOfTheCanvas`) and `PortalVariantSwitcher`.
+Nothing here is production: no send-to-Shuffler, no owner gating, no tests. The mechanics facts
+it established outlive it:
+
+- **`onTranslateEnd` fires once PER MOVING SHAPE in a multi-select drag.** tldraw's
+  `Translating.handleEnd` loops `movingShapes` with a non-null-asserted
+  `this.editor.getShape(shape.id)!` (`Translating.ts:291-292`, confirmed against source) before
+  calling each shape's hook and finally `updateShapes`. So a hook must never synchronously
+  delete a SIBLING moving shape — the loop crashes on the assertion — and even *self*-deletion
+  should be deferred past the settle (`swallowIntoLibraryPortal` uses `setTimeout(0)` and
+  re-checks `getShape` before deleting), so tldraw's settle `updateShapes` runs against a shape
+  that still exists.
+- **`editor.animateShapes` interpolates only x/y/rotation/opacity by itself.** Numeric props
+  (the swallow's `w`/`h` shrink) animate only if the ShapeUtil defines `getInterpolatedProps` —
+  `MtgCardShapeUtil` now has a prototype-marked one lerping `w`/`h`. Without it, prop changes
+  snap at animation start.
+- **The portal's own armed signal is gated on WHAT is being dragged** — it checks the selection
+  contains an `mtg-card` before arming, because the shared `armedZoneIdSignal` arms for *any*
+  shape in `select.translating`, counters included, and a dragged counter must not threaten a
+  swallow. See `interactions.md` watch point 9 for the folding-into-the-shared-signal
+  consideration.
+- **`TLComponents.InFrontOfTheCanvas` can draw arming visuals for a zone hidden under an opaque
+  image shape** (the library's picture overlay). The overlay renders in viewport space, outside
+  the camera transform, positioning via `editor.pageToViewport` inside a `useValue` — the camera
+  read makes it re-derive on pan/zoom. Confirmed working; an alternative to the
+  box-shadow-only constraint recorded in the design owner's "tldraw limits" (an opaque image
+  hides a box's interior — but not an over-drawn viewport layer).
+
+Citation guide (this owner's `-context` fork had stale references on 2026-08-09): the *built*
+arming pattern is **tabletop-physics ticket 14** (`zoneHitTest.ts`, above) — not table-layout
+ticket 08, which is design-only. Table-layout ticket 19 is the decided-but-unbuilt
+owner-gating precedent (arm only for the shape's owner / commander), blocked on table-layout
+ticket 18's `owner`/`isCommander` props.
+
 ## How to tell this owner's territory from `two-faced-cards`'s
 
 If the question is "why does clicking/dragging/tapping do the wrong thing, or hit the wrong
