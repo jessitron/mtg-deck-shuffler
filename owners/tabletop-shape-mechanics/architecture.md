@@ -32,7 +32,11 @@ and stray drops can no longer masquerade as one the way they could when everythi
   recomputes `x`/`y` so the rotation pivots around the card's *center* rather than its top-left
   corner (tldraw rotates shapes around `x,y`, which is the top-left; `98f8bea` fixed a bug where
   the card swung around its corner instead of spinning in place) — that math carried forward
-  unchanged in substance.
+  unchanged in substance. Since ticket 16 (multi-untap, 2026-08-09, `626ab6f`) the
+  center-fixed pivot math lives in a private `tapPartial(shape, tapped)` helper, and `onClick`
+  also pushes the clicked card's NEW state to the rest of a marquee selection via a
+  `queueMicrotask`-deferred batch — see "Ticket 16" below for the undo-coalescing mechanism
+  this depends on.
 - **`onTranslateEnd(_initial, current)`** — fires once, on the moved shape, when a drag settles.
   Three responsibilities live here:
   1. **Zone-entry detection** (`600cac1`): resolves the zone under the card's center via
@@ -499,6 +503,64 @@ places: the `useSync` `shapeUtils` const, `<Tldraw shapeUtils>`, and `rooms.ts`'
   a shape before dragging it (`verify-counter.spec.ts`'s `createCounter` helper).
 - **`.nth()` on shape testids is paint order, and paint order changes when a shape reparents** —
   drag from known creation points instead of trusting locator index stability across a reparent.
+
+## Ticket 16: multi-untap — clicking one selected card taps the whole selection (landed 2026-08-09, `626ab6f`)
+
+`.scratch/tabletop-physics/issues/16-multi-untap.md` (plan in `plan-16.md`). With several cards
+marquee-selected, clicking one propagates that card's **new** tapped state to every other
+selected `mtg-card` — a **state push, not a per-card toggle**, so a mixed selection converges
+(untapped B clicked → tapped B *and* tapped C, even though C was already tapped). All in
+`MtgCardShapeUtil.onClick`; no new hooks, no new files beyond the test.
+
+### The two ordering facts the implementation stands on
+
+1. **The clicked card's own partial must still be RETURNED synchronously.** When `onClick`
+   returns a change, `PointingShape.onPointerUp` early-returns — which is what lets the marquee
+   selection *survive* the click. Returning `undefined` falls through to tldraw's selection
+   logic, which collapses the selection to the clicked card. So the propagation cannot simply
+   be "batch everything in one deferred write": the clicked card's change rides the synchronous
+   return, the others ride the microtask.
+
+2. **A `queueMicrotask` write from inside `onClick` coalesces into the SAME undo entry as the
+   clicked card's change — the KB's first documented microtask-vs-undo case, confirmed
+   empirically.** `PointingShape.onPointerUp` calls `markHistoryStoppingPoint('shape on click')`
+   and *then* `updateShapes([change])`, both AFTER `onClick` returns. A *synchronous* write
+   inside `onClick` would land BEFORE that mark and fuse into the *previous* undo entry; the
+   microtask runs after the whole pointer-up handler — after the mark — so the propagated
+   writes join the clicked card's change in one new entry. Result: **one Ctrl+Z reverts the
+   whole multi-tap gesture** and leaves an earlier unrelated tap untouched. The code comment
+   warns never to "upgrade" `queueMicrotask` to `setTimeout` — a macrotask can interleave with
+   other input events. `verify-multi-untap.spec.ts` is the standing tripwire for a tldraw
+   upgrade reordering any of this (see watch point 14).
+
+### The propagation batch is defensive per card
+
+Inside the microtask, each other selected id is **re-fetched fresh** via `editor.getShape(id)`
+(the clicked card's update — and possibly remote changes — applied between `onClick` and the
+microtask), skipped if deleted or not an `mtg-card` (a marquee can catch counters and other
+shapes), and **skipped entirely if already at the target tapped state** — rotation is a delta
+(watch point 4), so applying ±90° to an already-correct card would corrupt its free rotation.
+Survivors get `tapPartial(card, tapped)` and land in one `updateShapes` batch.
+
+`tapPartial(shape, tapped)` is the extracted center-fixed pivot solve formerly inline in
+`onClick`, now used by both the synchronous return and the microtask batch. Note
+`onDragShapesIn` still has its own inline copy of the same pivot math (for counter rotation
+zeroing) — three conceptual call sites of that math exist, two via `tapPartial`.
+
+### Boundaries and non-findings
+
+- **Multi-untap only works marquee-then-click, by design of watch point 1's cleanup.**
+  `onTranslateEnd`'s unconditional `setSelectedShapes([])` means a *drag* clears the selection
+  — so there is no "drag a group somewhere then click to tap them all" flow. Untouched by this
+  ticket, and the two features coexist fine; just know the gesture order matters.
+- **Two-client undo independence verified** (`verify-multi-untap.spec.ts`'s third test): a
+  remote peer's Ctrl+Z after another player's multi-untap is a no-op — remote sync changes
+  never enter the local `HistoryManager` — while the acting player's own Ctrl+Z still reverts
+  and syncs out.
+- **Shift-click was NOT investigated** (out of scope for the ticket). The observation from the
+  `-context` consult stands unconfirmed-but-likely: shift-clicking an `onClick`-bearing card
+  probably taps it instead of extending the selection, per `PointingShape.ts` line ~93
+  ordering. If someone wants shift-click-extend on cards, that's its own investigation.
 
 ## Ticket 02/12: the rewrite, landed
 
