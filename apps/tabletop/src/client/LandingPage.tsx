@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { slugifyTableName } from "../shared/slugify";
 
 /**
- * The landing page takes a table name only — player name is a Shuffler-prep
- * concern (you name yourself when you join a table from the Shuffler).
- * Square corners; tablet-friendly targets.
+ * The landing page takes a table name only
  */
 export function LandingPage() {
   const [tableName, setTableName] = useState("");
