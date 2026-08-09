@@ -94,8 +94,10 @@
   dark-sleeve lettering spec) and a picked-mat assertion in
   `verify-tabletop-integration.spec.ts`.
   `issues/15-*` (**built** 2026-08-08, `4263ef8`) put the deck name on the seat name label —
-  the two-line player-first composition recorded in [README.md](README.md)'s design language,
-  decided with this owner's `-context` mid-implementation. It also created
+  originally a two-line player-first composition, decided with this owner's `-context`
+  mid-implementation; **superseded 2026-08-09 (`75bae71`, Jess's direct request)** by the
+  one-line double-size `name 〜 deck` composition recorded in [README.md](README.md)'s
+  design language. It also created
   `contracts/payloads/seat.joined.v1.json` (`deckName` **required**; `sleeveColor` optional —
   ticket 11's field now has its schema home, transport real, rendering appearance still
   reserved for this owner via ticket 17).
@@ -586,16 +588,20 @@ not by recomputing new numbers.**
   typography decision. The sleeve-color swatch on each commander-damage counter is
   **identity**, not decoration — it must be the opponent's actual sleeve color (ticket 11's
   plumbing), never a palette value this owner picks.
-- **The seat name label is a stock `text` shape with a decided two-line composition**
-  (ticket 15, 2026-08-08, `4263ef8`). Player name line one, deck name verbatim line two, no
-  separator; missing deck name degrades to the one-line label. It lives in
-  `apps/tabletop/src/server/tableFurniture.ts` → `ensurePlayerArea` (grep `toRichText`) —
-  a **server-side** draw, not a ShapeUtil. Its `serif`/`green` are the stock `text` enum
-  (see README → tldraw limits), so don't read them as chosen or try to token-sweep them.
-  If the label ever becomes a self-rendering shape: keep the two-line structure; per-line
-  hierarchy (size, face) becomes possible then and is a **new** appearance decision for this
-  owner, not a port. Any future label pairing a player name with a deck name copies this
-  composition rather than inventing another.
+- **The seat name label is a stock `text` shape with a decided ONE-line composition at
+  double size** (decided 2026-08-09, `75bae71`, Jess's direct request — superseding ticket
+  15's 2026-08-08 two-line ruling). `${playerName} 〜 ${deckName}` — wave-dash separator —
+  size `"m"` with `scale: 2`; missing deck name degrades to the bare player name. Accepted
+  trade-off, in the code comment: a long deck name can grow the autoSized label toward the
+  neighboring seat. It lives in `apps/tabletop/src/server/tableFurniture.ts` →
+  `ensurePlayerArea` (grep `toRichText`) — a **server-side** draw, not a ShapeUtil. Its
+  `serif`/`green` are the stock `text` enum (see README → tldraw limits), so don't read
+  them as chosen or try to token-sweep them; the size is `scale: 2` rather than an enum
+  step. If the label ever becomes a self-rendering shape: keep the one-line name-〜-deck
+  composition; typographic hierarchy becomes possible then and is a **new** appearance
+  decision for this owner, not a port. Any future label pairing a player name with a deck
+  name copies this composition rather than inventing another — and don't "fix" the
+  toward-the-neighbor growth back to two lines; that trade was made knowingly.
 - **The sleeve's rendered appearance is DECIDED and BUILT** (ticket 17, 2026-08-08,
   `0a768e6` + `bfdc877`; model from ticket 11; corners revised SQUARE 2026-08-09,
   `e53a27e` — Jess: "sleeves are rectangular"). Margin `w * 0.03` per side, a proportion of
