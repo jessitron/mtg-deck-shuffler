@@ -84,10 +84,18 @@ Cards and furniture become real custom shapes, so they can recognise what happen
 
 ### 3 — Cards come and go
 
+Rescoped at charting (2026-08-08, `.scratch/tabletop-cards-come-and-go/map.md`): the table
+shows no hand/library counts on this mountain (Mural doesn't), so the **eleven hidden-zone
+Shuffler actions** (draw, shuffle, mulligan, put-on-top/bottom, …) left this map — they're
+Spine-vocabulary work for a Spine-side design effort (map 5 / Mountain 2). What stays is
+every card crossing the table boundary:
+
 - drag a card over the library → the library changes appearance to show it's about to take the
-  card → the card reappears in the Shuffler
-- the same for returning a card to hand
-- the eleven Shuffler actions that currently push nothing to the table
+  card → the card lands in the Shuffler's **Reveal zone** (the player chooses hand, top, or
+  bottom there — no separate hand target on the table)
+- Shuffler-side **undo of a play or discard** poofs the card off the table (its own event kind;
+  attachments stay behind, detached)
+- **commanders start on the table in the command zone**, placed as part of the seating message
 
 ### 4 — Only Magic moves
 
@@ -138,7 +146,7 @@ Charted with `/wayfinder`, one at a time. Each map's own `map.md` links back to 
 | --- | --------------------------------------------- | --------------------------------- | --------------------------------------------- |
 | 1   | Physics — cards and furniture are real shapes | `.scratch/tabletop-physics/`      | charted 2026-08-06                            |
 | 2   | Table layout                                  | `.scratch/tabletop-table-layout/` | charted (was `tabletop-card-physics-starter`) |
-| 3   | Cards come and go                             | —                                 | not charted                                   |
+| 3   | Cards come and go                             | `.scratch/tabletop-cards-come-and-go/` | charted 2026-08-08                       |
 | 4   | Only Magic moves                              | —                                 | not charted                                   |
 | 5   | The table reports                             | —                                 | not charted                                   |
 | 6   | The table remembers                           | —                                 | not charted                                   |
