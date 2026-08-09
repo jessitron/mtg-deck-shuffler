@@ -516,7 +516,7 @@ export function createApp(
       // JES-140: announce the seat joining its table so the Tabletop draws
       // the player area before any card is played. Best-effort — see sendToTable.ts.
       if (tableInfo) {
-        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name);
+        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor);
       }
 
       res.redirect(`/game/${gameId}`);
@@ -634,7 +634,7 @@ export function createApp(
       // JES-140: re-announce the seat (idempotent — a physical no-op if the
       // Tabletop process still has this seat's player area from before restart).
       if (tableInfo) {
-        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name);
+        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor);
       }
 
       res.redirect(`/game/${newGameId}`);

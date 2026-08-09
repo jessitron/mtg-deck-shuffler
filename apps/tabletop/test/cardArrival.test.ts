@@ -131,6 +131,32 @@ describe("card arrival", () => {
     expect(card.x).toBeGreaterThanOrEqual(graveyard.x);
   });
 
+  it("bakes the seat's sleeve color into the minted card's props (ticket 17)", async () => {
+    // Seat joins with a sleeve first — sleeve color is seat data, not payload data.
+    await fetch(`http://localhost:${port}/api/tables/arrival-sleeved/events`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        id: "sleeve-seat-event",
+        name: "seat.joined",
+        occurredAt: new Date().toISOString(),
+        initiator: { seatId: "seat-sleeved", playerName: "Jess" },
+        deckName: "Blame Game",
+        sleeveColor: "#8b2f5c",
+      }),
+    });
+
+    await post("arrival-sleeved", cardPlayed({ initiator: { seatId: "seat-sleeved", playerName: "Jess" } }));
+    const [card] = shapesOf("arrival-sleeved");
+    expect(card.props.sleeveColor).toBe("#8b2f5c");
+  });
+
+  it("an unsleeved seat's cards mint with sleeveColor null (today's look)", async () => {
+    await post("arrival-unsleeved", cardPlayed());
+    const [card] = shapesOf("arrival-unsleeved");
+    expect(card.props.sleeveColor).toBeNull();
+  });
+
   it("rejects a payload missing required fields (JES-128 validation point)", async () => {
     const response = await post("arrival-invalid", { name: "card.played" });
     expect(response.status).toBe(400);

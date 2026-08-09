@@ -105,11 +105,11 @@ export function buildCardPlayedEvent(gameCard: GameCard, instanceId: string, ini
 //     initiator: { seatId, playerName },
 //     deckName: string,           // the deck's display name, for the seat's name label
 //     playmatImageUrl?: string,   // absolute URL; opaque to the Tabletop
-//     cardBackImageUrl?: string,  // absolute URL to the standard card back
+//     cardBackImageUrl?: string,  // absolute URL to the standard card back; omitted when a sleeve is defined
+//     sleeveColor?: string,       // #rrggbb — the seat's sleeve (ticket 17); wins over cardBackImageUrl
 //   }
 //
-// Contract proper: contracts/payloads/seat.joined.v1.json (which also homes the
-// optional sleeveColor — sleeve selection wires it up later).
+// Contract proper: contracts/payloads/seat.joined.v1.json.
 //
 // FORBIDDEN: `gameCardIndex` must NEVER cross the Shuffler's boundary (same
 // rule as card.played).
@@ -124,7 +124,7 @@ export function shufflerPublicUrl(): string {
   return process.env.SHUFFLER_PUBLIC_URL || "https://mtg.jessitron.honeydemo.io";
 }
 
-/** The standard Magic card back (until sleeve selection exists), as an absolute URL. */
+/** The standard Magic card back (an unsleeved seat's look), as an absolute URL. Omitted from seat.joined when the seat has a sleeve. */
 export function cardBackImageUrl(): string {
   return `${shufflerPublicUrl()}${CARD_BACK}`;
 }
@@ -148,14 +148,22 @@ export interface SeatJoinedEvent {
   deckName: string;
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
+  sleeveColor?: string;
 }
 
 /**
  * Build the seat.joined payload. There's only one hard-coded playmat today
  * (DESIGN.md — playmat selection is deferred prep work); the card back is the
- * standard Magic card back until sleeve selection exists.
+ * standard Magic card back for an unsleeved seat, and omitted for a sleeved
+ * one — sleeveColor wins if both ever arrive (contract: seat.joined.v1).
  */
-export function buildSeatJoinedEvent(initiator: Initiator, deckName: string, playmatImageUrl?: string, cardBackImageUrl?: string): SeatJoinedEvent {
+export function buildSeatJoinedEvent(
+  initiator: Initiator,
+  deckName: string,
+  playmatImageUrl?: string,
+  cardBackImageUrl?: string,
+  sleeveColor?: string
+): SeatJoinedEvent {
   return {
     id: randomUUID(),
     name: SEAT_JOINED_EVENT_NAME,
@@ -163,7 +171,8 @@ export function buildSeatJoinedEvent(initiator: Initiator, deckName: string, pla
     initiator: { seatId: initiator.seatId, playerName: initiator.playerName },
     deckName,
     playmatImageUrl,
-    cardBackImageUrl,
+    cardBackImageUrl: sleeveColor ? undefined : cardBackImageUrl,
+    sleeveColor,
   };
 }
 

@@ -15,8 +15,8 @@ import { MAX_SEATS } from "./cardLayout.js";
 // ============================================================================
 
 // Contract proper: contracts/payloads/seat.joined.v1.json (deckName required;
-// playmatImageUrl, cardBackImageUrl, sleeveColor optional — the sleeve side is
-// wired up later).
+// playmatImageUrl, cardBackImageUrl, sleeveColor optional; sleeveColor wins
+// when both it and cardBackImageUrl arrive).
 interface SeatJoined {
   id: string;
   name: "seat.joined";
@@ -25,7 +25,11 @@ interface SeatJoined {
   deckName: string;
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
+  sleeveColor?: string;
 }
+
+// Same pattern as the contract schema — a sleeve is exactly six hex digits.
+const SLEEVE_COLOR_PATTERN = /^#[0-9a-fA-F]{6}$/;
 
 function validationError(body: unknown): string | null {
   const b = body as Record<string, any>;
@@ -37,6 +41,8 @@ function validationError(body: unknown): string | null {
   if (typeof b.deckName !== "string" || !b.deckName) return "deckName (string) is required";
   if (b.playmatImageUrl !== undefined && typeof b.playmatImageUrl !== "string") return "playmatImageUrl, if present, must be a string";
   if (b.cardBackImageUrl !== undefined && typeof b.cardBackImageUrl !== "string") return "cardBackImageUrl, if present, must be a string";
+  if (b.sleeveColor !== undefined && !(typeof b.sleeveColor === "string" && SLEEVE_COLOR_PATTERN.test(b.sleeveColor)))
+    return "sleeveColor, if present, must be a #rrggbb hex color";
   // Same defense in depth as card.played: no decodable secret crosses this boundary.
   if ("gameCardIndex" in b) return "gameCardIndex is forbidden beyond the Shuffler's boundary";
   return null;
@@ -95,6 +101,7 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
     deckName: joined.deckName,
     playmatImageUrl: joined.playmatImageUrl,
     cardBackImageUrl: joined.cardBackImageUrl,
+    sleeveColor: joined.sleeveColor,
   });
 
   entry.seenEventIds.add(joined.id);

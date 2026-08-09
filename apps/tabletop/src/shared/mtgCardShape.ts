@@ -21,6 +21,12 @@ export interface MtgCardShapeProps {
   face: "front" | "back";
   faceDown: boolean;
   tapped: boolean;
+  /**
+   * The owning seat's sleeve, baked in at mint time (table-layout ticket 17).
+   * Legal to bake because sleeve color is a game constant — chosen before the
+   * game, never changed mid-game. null ⇔ unsleeved (today's bare look).
+   */
+  sleeveColor: string | null;
 }
 
 // tldraw's documented mechanism for adding a custom shape to its `TLShape`
@@ -47,4 +53,5 @@ export const mtgCardShapeProps: RecordProps<MtgCardShape> = {
   face: T.literalEnum("front", "back"),
   faceDown: T.boolean,
   tapped: T.boolean,
+  sleeveColor: T.string.nullable(),
 };
