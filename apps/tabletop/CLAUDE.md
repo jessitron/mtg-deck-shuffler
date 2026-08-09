@@ -120,6 +120,10 @@ Browser side (`src/client/observability/index.ts`, the fleet's only real OTel wr
 
 **Deploying needs `TLDRAW_LICENSE_KEY` in the repo-root `.be`** — tldraw ≥ 4 blanks
 the canvas 5s after load on any HTTPS non-loopback host, and localhost can't
-reproduce it. See README → Licensing and `notes/AGENT-NOTES.md`.
+reproduce it. Localhost itself never needs (or uses) a key: `TablePage.tsx` passes an
+empty-string `licenseKey` on loopback hosts, so an expired key in `.be` can't blank
+local dev (it used to — tldraw's dev exemption doesn't cover parseable-but-expired
+keys, and an undefined prop falls back to the env). See README → Licensing and
+`notes/AGENT-NOTES.md`.
 
 Update this file when anything in it changes.
