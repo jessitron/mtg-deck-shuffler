@@ -1429,6 +1429,13 @@ CSS specimen can't exhibit honestly. If the label becomes self-rendering, it sta
 
 ## 2026-08-08 — the counter's text learned the shape of its own disc
 
+**⚠️ REVERTED the same day — see the next entry.** The circle-aware fit this entry
+describes (chord widths, explicit line divs, canvas `measureText`) shipped in `2f5bfb4`
+and Jess pulled it back out hours later (worktree `counter-fit-simplify`). What survives
+is the *shrink-to-fit* behaviour itself, in a deliberately minimal form. This entry keeps
+its reasoning — some of its facts remain true and worth having (marked in the next entry)
+— but nothing below describes what the app does now.
+
 No commit sha yet (worktree `counter-text-fit`, merging to main). A small follow-up Jess
 asked for directly: typing "lifelink" into the counter disc produced *invisible* text — the
 fixed `h * 0.32` font overflowed the 44px circle and `overflow: hidden` clipped it all. The
@@ -1473,3 +1480,53 @@ newlines in a counter label.
 (`test/counterTextFit.test.ts`), and a Playwright assertion that the rendered content is no
 bigger than the visible box (`scrollWidth/Height ≤ clientWidth/Height` in
 `verify-counter.spec.ts`).
+
+## 2026-08-08 — the circle-aware fit was reverted: shrink to the square, tolerate the nibble
+
+No commit sha yet (worktree `counter-fit-simplify`, merging to main). Jess reverted the
+chord-wrapping approach the entry above describes, hours after it merged (`2f5bfb4`):
+*"too much code and not core to this app. If that was a thing I was gonna do, I'd put it
+in a library... Not something I wanna spend time testing properly. The square behind it
+is close enough."* This is a **scope ruling, not an appearance reversal** — the visible
+behaviour Jess asked for (long labels shrink instead of vanishing) stays; the
+infrastructure built to perfect it goes. It's now a fleet-level working-with-Jess gotcha
+in `notes/AGENT-NOTES.md`: don't build library-grade infrastructure inside the app;
+simplest close-enough behaviour wins; and **needing real testing rigor is the signal the
+mechanism belongs in a library**, not this repo.
+
+**What's true now.** `counterTextFit.ts` is ~40 lines: `fitCounterFont(text, w, h)`
+shrinks the font from the `0.32 × h` base until an **estimated** wrapped block
+(0.8em/char, 0.85 wrap slack) fits the **square** content box. The browser does the
+actual wrapping (`overflowWrap: anywhere` on the disc); the display div renders plain
+`{text}` again — no custom line-breaking, no per-line chord widths, no explicit line
+divs. The round clip nibbling the corners of long labels is **accepted** as close enough.
+The editing textarea keeps the same shrinking font and a `paddingTop` from the fit's
+estimated `lineCount`; the side padding it used to carry (narrowing the wrap toward the
+chords) went with the chords.
+
+**The previous entry's first fact survives the revert and is still worth keeping:** a
+`border-radius` clip doesn't change where CSS lays out text — true, general, and now the
+*accepted cost* rather than the problem statement. If a future request wants the corners
+back, the chord-wrapping code is in git at `2f5bfb4`; the answer per Jess is a library,
+not a rebuild in place.
+
+**The previous entry's second fact ("measure with the real font") inverted, and the
+inversion is the keeper.** Canvas `measureText` **lies when the webfont hasn't loaded** —
+and an **empty table renders no Orbitron at all**, so the browser (which fetches webfonts
+lazily) never even fetches the font; the measurer silently returns fallback-sans metrics.
+Verified concretely: "lifelink" at 14px measured 44.6px vs real Orbitron's ~90px — off by
+2× in the direction that under-shrinks. So the "more accurate" measurement was the *less*
+accurate one exactly when a fresh table's first counter needed it. This is the same
+lazy-fetch mechanism the fleet-tokens spec hit (`4396aea`'s `document.fonts.load` finding)
+biting a **runtime** consumer instead of a test. **Any future canvas-measurement of
+`--font-chrome` must handle font loading** (`document.fonts.load` + re-render, or accept
+an estimate). The estimate that survived is conservative for wide bold Orbitron, which is
+the safe direction: over-shrinking slightly beats overflowing.
+
+**Verified**: 5 unit tests on the fit (`test/counterTextFit.test.ts` — down from 8; the
+chord/word-packing assertions died with the code they tested), the Playwright lifelink
+test (shrinks below base, nothing overflows the visible box, a short label renders
+larger), and a 4× eyeball — "3" full size, "+1/+1" one line, "lifelink" two readable
+lines, "first strike" two words, all inside the disc. The `.counter-mock` comment in
+`design-candidates.css` ("long labels shrink to fit") never mentioned chords, so it's
+still accurate unchanged.
