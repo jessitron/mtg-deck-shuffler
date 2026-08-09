@@ -98,6 +98,7 @@ describe *that* shape, not this one — see `architecture.md`.
 | Shape identity is minted | `apps/tabletop/src/server/cardArrival.ts` (`props.instanceId`, `createShapeId`) |
 | tldraw's selection state machine (read, don't modify) | `node_modules/tldraw/src/lib/tools/SelectTool/childStates/PointingShape.ts`, `Translating.ts` |
 | Regression test for the drag-identity bug | `apps/tabletop/test/verification/verify-drag-identity.spec.ts` |
+| Regression test for multi-untap's undo coalescing (tldraw-upgrade tripwire) | `apps/tabletop/test/verification/verify-multi-untap.spec.ts` |
 | Counter attach/detach/evict/edit tests | `apps/tabletop/test/verification/verify-counter.spec.ts`, `apps/tabletop/test/openSpotNearZoneEdge.test.ts` |
 
 See `architecture.md` for how the pieces fit together, `interactions.md` for what depends on
