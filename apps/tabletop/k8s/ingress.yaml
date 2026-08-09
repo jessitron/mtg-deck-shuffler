@@ -7,23 +7,30 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: table.jessitron.honeydemo.io
     kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/group.name: only-one-alb-please
+    # The Tabletop rides its OWN ALB, plain http only — deliberately. tldraw's
+    # license gate blanks an unlicensed canvas on HTTPS non-loopback origins;
+    # plain http is exempt (README → Licensing). It can't stay in the fleet's
+    # shared only-one-alb-please group: ssl-redirect is EXCLUSIVE across an
+    # IngressGroup ("once defined on a single Ingress, it impacts every Ingress
+    # within IngressGroup"), so there is no per-host http carve-out there.
+    # No 443 listener at all: https:// refuses to connect, which beats serving
+    # a canvas that blanks 5 seconds after load.
+    alb.ingress.kubernetes.io/group.name: tabletop-http
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/healthcheck-path: /health
     # 30s rather than the 15s default: probe traffic was a large share of this
-    # ship's traces too. Per-target-group, so it doesn't touch the shared group.
+    # ship's traces too.
     alb.ingress.kubernetes.io/healthcheck-interval-seconds: "30"
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
-    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    # Same access-log bucket and prefix as the shared ALB: the S3 permission is
+    # bucket/prefix-scoped, and object keys embed the ALB name, so logs stay
+    # distinguishable.
     alb.ingress.kubernetes.io/load-balancer-attributes: access_logs.s3.enabled=true,access_logs.s3.bucket=orion-alb-access-logs,access_logs.s3.prefix=orion-alb
-    # Websockets ride the shared ALB's default 60s idle timeout; the tldraw
-    # sync client pings well inside that, so no group-wide attribute change.
+    # Websockets ride the ALB's default 60s idle timeout; the tldraw
+    # sync client pings well inside that.
 spec:
   ingressClassName: alb
-  tls:
-    - hosts:
-        - "table.jessitron.honeydemo.io"
   rules:
     - host: "table.jessitron.honeydemo.io"
       http:

@@ -18,27 +18,11 @@ if [ -z "$ECR_REPO" ]; then
     exit 1
 fi
 
-# Fail loudly on a missing tldraw license key. tldraw >= 4 blanks the canvas 5s
-# after load on any HTTPS non-loopback host, so deploying without a key ships a
-# silently-broken table that looks fine locally. Don't let that happen quietly.
-if [ -z "$TLDRAW_LICENSE_KEY" ]; then
-    echo "❌ TLDRAW_LICENSE_KEY not set."
-    echo "   tldraw >= 4 hides the editor 5s after load on any HTTPS non-loopback"
-    echo "   host, so this deploy would serve a BLANK table. (localhost is exempt,"
-    echo "   which is why verify.sh can never catch this.)"
-    echo ""
-    echo "   Add 'export TLDRAW_LICENSE_KEY=...' to the repo-root .be — not to"
-    echo "   apps/tabletop/.env, which is committed to a public repo."
-    echo "   Free hobby license: https://tldraw.dev/get-a-license/hobby"
-    echo ""
-    echo "   To deploy anyway, knowing the table will be blank:"
-    echo "     TLDRAW_LICENSE_KEY=none ./deploy.sh"
-    exit 1
-fi
-if [ "$TLDRAW_LICENSE_KEY" = "none" ]; then
-    echo "⚠️  TLDRAW_LICENSE_KEY=none — deploying a table that will go BLANK 5s after load."
-    TLDRAW_LICENSE_KEY=""
-fi
+# No tldraw license key needed: prod serves plain http://, and tldraw's license
+# gate only fires on HTTPS non-loopback origins (see README → Licensing and
+# k8s/ingress.yaml — the ALB deliberately has no 443 listener). A key in .be is
+# still baked into the bundle if present, and chooseLicenseKey withholds it at
+# runtime wherever the gate can't fire, so its state can't blank the table.
 
 IMAGE_TAG="$(git rev-parse --short HEAD)"
 FULL_IMAGE_NAME="${ECR_REPO}:${IMAGE_TAG}"
@@ -94,14 +78,15 @@ echo "🎉 Deployment complete!"
 kubectl get pods -l app=mtg-tabletop
 kubectl get pods -l app=mtg-tabletop-collector
 echo ""
-echo "🌐 App: https://table.jessitron.honeydemo.io (DNS/ALB may take a few minutes)"
+echo "🌐 App: http://table.jessitron.honeydemo.io (http on purpose — tldraw license gate; DNS/ALB may take a few minutes)"
 
-# The one check that can catch the tldraw license gate: it only fires on an
-# HTTPS non-loopback host, so no local test can see it. Non-fatal — the deploy
-# already happened — but loud, because the symptom is a silent blank page.
+# Proves the http exemption from the tldraw license gate actually holds on the
+# deployed host — no local test can see the gate (it never fires on loopback).
+# Non-fatal — the deploy already happened — but loud, because the symptom is a
+# silent blank page.
 echo ""
 echo "🎨 Checking the deployed canvas survives the tldraw license gate..."
-if ! node test/verification/check-deployed-canvas.mjs https://table.jessitron.honeydemo.io; then
+if ! node test/verification/check-deployed-canvas.mjs http://table.jessitron.honeydemo.io; then
     echo "⚠️  Deploy succeeded but the table renders BLANK. See above."
 fi
 
