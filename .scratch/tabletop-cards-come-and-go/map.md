@@ -58,12 +58,20 @@ Founding decisions from the charting session (Jess, 2026-08-08):
   they're not parity). Therefore the hidden-zone Shuffler actions (draw, shuffle,
   mulligan, put-on-top/bottom, …) leave this map entirely — they're Spine-vocabulary
   work for a Spine-side design effort (Mountain 2 / map 5 territory).
-- **Restart/new game clears the table entirely** and starts a new game under the same
-  table name.
+- **Restart/new game: the Tabletop does not clear itself.** Something *outside* the
+  Tabletop is responsible for deleting that table and starting a new one under the same
+  name. (Amended 2026-08-08, after ticket 03's research showed no shape-deletion path
+  exists — Jess: that's correct, and it stays that way; the cleanup responsibility lives
+  elsewhere.)
 - **Tokens and duplicated cards are table-only.** Tokens appear from nowhere — people
   paste whatever they want and the table says "shape created, I guess." Duplicated cards
   are not cards. Both send events to the Spine eventually, **never** to the Shuffler.
 - [Round-trip identity and today's actual boundary behavior](issues/03-round-trip-identity.md) (2026-08-08) — instanceId is minted once per card per game and never re-minted, so a returned card re-played is silently swallowed by the Tabletop's shape-presence dedup unless its shape was deleted from the board; restart today clears nothing (only seat.joined is re-sent, deduped as already-seated, and no code path deletes shapes — old cards linger); and charting missed a live out-of-Table transition: the card modal's "Return" button moves Table→Revealed via the unguarded `moveByGameCardIndex`, pushing nothing to the Tabletop.
+- **The Shuffler's Return button is a table exit** (2026-08-08, from ticket 03's finding
+  3): it must have the same effect as dragging the card onto the library portal — the
+  card poofs from the table, the stuff falls off. Any Shuffler-side transition out of the
+  `Table` location tells the table; the message shape belongs to
+  [the vocabulary ticket](issues/02-event-vocabulary.md).
 - **Commanders start on the table, in the command zone, as part of sitting down.** The
   commander info rides in the initial seating message (leaning that way — it's setup, not
   card traffic; final payload shape confirmed by the vocabulary ticket). Once seated, a
@@ -78,6 +86,9 @@ Founding decisions from the charting session (Jess, 2026-08-08):
 - **What the poof looks like** — the appearance of a card being un-played or swallowed.
   A design/feel question that the prototype and the `/design` gallery flow can carry;
   not sharp enough to ticket until the mechanics are decided.
+- **Who deletes the table on restart** — decided to be something outside the Tabletop,
+  but *which* component, triggered how, isn't specifiable yet; it touches map 6 (what
+  survives a restart) and possibly the Spine. Revisit when those sharpen.
 
 ## Out of scope
 

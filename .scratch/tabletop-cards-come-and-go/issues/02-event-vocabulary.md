@@ -21,6 +21,13 @@ The messages:
 - **Undo: play / undo: discard** (Shuffler→Tabletop): decided at charting to be their own
   event kinds — informational, distinct from the opposite action. The table poofs the
   card; attachments stay, detached. Name them.
+- **Shuffler-initiated table exits** (Shuffler→Tabletop, added 2026-08-08 from ticket
+  03's finding): the card modal's **Return** button already moves Table→Revealed today,
+  pushing nothing to the table. Decided: it has the same table effect as the portal drag
+  — poof, stuff falls off. Decide whether this and the undo events are one generic
+  "card left the table" removal message or distinct kinds (undo was decided to be
+  informational, so the distinction may be real). The sibling put-in-hand/top/bottom
+  routes can also move Table cards via crafted requests — cover or close that hole.
 - **Commanders at seating** (Shuffler→Tabletop): commanders start in the command zone as
   part of sitting down. Charting leaned toward the commander info riding **inside** the
   initial seating message (setup, not card traffic) rather than a separate "place in
