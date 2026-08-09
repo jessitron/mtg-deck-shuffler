@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: prototype
-Status: claimed
+Status: resolved
 
 ## Question
 
@@ -85,3 +85,31 @@ prototype is preserved on branch `prototype/portal-gesture-ticket-04` (same comm
 worktree branch, which may get cleaned up). To resume: check out that branch (or
 `git worktree add` it somewhere), `./run` from its root, and react to the variants per the
 comment above.
+
+## Answer
+
+Jess reacted to the live prototype (2026-08-09). The gesture, fully decided:
+
+1. **Arming: Variant C — Vortex.** While a card drags over the library (pointer-keyed),
+   a rotating two-color swirl (pink/amber conic gradient) spins over the library with a
+   faint dark veil. ("I love option C SO MUCH.")
+2. **Swallow: Inhale.** On drop, the card spins twice while shrinking and fading into
+   the library's center over ~500ms, then leaves the table. Everyone at the table sees
+   the swallow (it's a store write); the arming swirl stays local to the dragger.
+3. **Keying: pointer.** Standing policy, recorded with the `tabletop-shape-mechanics`
+   owner: the pointer picks the one destination — for multi-select AND for a single
+   card. Consequence, smoke-tested: a multi-select dropped on the library swallows the
+   whole group.
+4. **Whose library: only your own** — owner-gated, same shape as the command-zone gate
+   (table-layout ticket 19), sharing ticket 18's `owner`-prop dependency. Rationale:
+   the Shuffler doesn't know how to handle someone else's card — the return channel
+   lands the card in the *owner's* Reveal zone, so a foreign card has nowhere to go.
+5. The card lands in the Shuffler's **Reveal zone** (from the map's founding decision);
+   the message is `card.returned.v1` per [the vocabulary ticket](02-event-vocabulary.md),
+   send-then-commit per [the return channel](01-return-channel.md): no 2xx, no poof.
+
+**Asset:** the prototype, branch `prototype/portal-gesture-ticket-04` — all portal code
+in `apps/tabletop/src/client/shapes/portalGesturePrototype.tsx` plus marked hook-ins;
+per-variant + multi-select Playwright smokes. Implementation notes for the spec are in
+the "Mechanics facts learned" comment above; the winning variant gets rebuilt properly
+at implementation time, not merged from the prototype branch.
