@@ -1435,7 +1435,9 @@ CSS specimen can't exhibit honestly. If the label becomes self-rendering, it sta
 
 **⚠️ Corner radius revised 2026-08-09 — see the "three picker tweaks" entry below.** The
 `w * 0.05` radius this entry decides was removed by Jess (`e53a27e`, "sleeves are
-rectangular"); the `w * 0.03` overhang and everything else stands.
+rectangular") from the sleeve rectangle — and the face image inside the sleeve got its own
+`w * 0.05` back the same day (`c1592c4`; the printed card is still rounded). The `w * 0.03`
+overhang and everything else stands.
 
 `0a768e6` **Ticket 17: sleeve color travels in seat.joined and renders on the cards**, then
 `bfdc877` **Ticket 17 fix: sleeve ring actually shows on a face-up card**.
@@ -1773,6 +1775,19 @@ was that a sleeve edge gives cards the square corners the fleet's style wants. T
 physical-objects rule still holds; a real sleeve's corner is simply square. What survives of
 ticket 17's geometry: the `w * 0.03` overhang, the flat solid hex, no border/sheen, the
 proportional-to-`props.w` discipline.
+
+**Refined the same day (`c1592c4`): the face image inside the sleeve got its rounding
+back.** Removing the shared radius had also stripped the rounding from the card *face
+image* inside the sleeve — the `sleeve` style object was spread into the image's wrapper
+div, doing double duty, so `e53a27e` squared more than Jess had asked for. The full rule,
+per Jess, is **three-part**: an unsleeved card is rounded (the printed card); a sleeve
+rectangle is square; and the face image inside a sleeve is rounded again — an explicit
+`borderRadius: w * 0.05` on the img itself (the Shuffler card's 10/200 corner ratio) —
+because the printed card inside the sleeve is still a rounded card. A face-down sleeved
+card stays the bare square rectangle, and the library pile stays square (no image in it).
+Worth keeping as a pattern: **a style object spread into a wrapper makes the wrapper's
+decisions the child's decisions** — when a rule splits between two nested objects (square
+sleeve, round card), each element needs its own explicit declaration.
 
 **Also decided the same day, recorded so it isn't re-proposed: the custom color picker stays
 native.** Jess considered click-outside-to-close; the native `<input type="color">`'s OS

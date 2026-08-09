@@ -604,12 +604,17 @@ not by recomputing new numbers.**
   toward-the-neighbor growth back to two lines; that trade was made knowingly.
 - **The sleeve's rendered appearance is DECIDED and BUILT** (ticket 17, 2026-08-08,
   `0a768e6` + `bfdc877`; model from ticket 11; corners revised SQUARE 2026-08-09,
-  `e53a27e` — Jess: "sleeves are rectangular"). Margin `w * 0.03` per side, a proportion of
-  `shape.props.w` computed at render time; **no corner radius** (ticket 17's `w * 0.05` was
-  removed from card and pile alike — a sleeve's edge is what gives cards square corners, so
-  don't restore it citing the physical-objects rule); flat solid hex, no
-  border/sheen; face-down (sleeved) = bare sleeve rectangle; library pile = inner sleeve
-  rect in `MtgZoneShapeUtil`. Concrete
+  `e53a27e` — Jess: "sleeves are rectangular" — then refined the same day, `c1592c4`).
+  Margin `w * 0.03` per side, a proportion of `shape.props.w` computed at render time;
+  **the corner rule is three-part**: the sleeve rectangle has **no radius** (ticket 17's
+  `w * 0.05` came off card and pile alike in `e53a27e` — a sleeve's edge is what gives cards
+  square corners, so don't restore it citing the physical-objects rule), but the face IMAGE
+  inside the sleeve carries `borderRadius: w * 0.05` **on the img itself** (`c1592c4` —
+  `e53a27e` had accidentally stripped the inner rounding too, because the `sleeve` style
+  object was spread into the image's wrapper div; the printed card inside a sleeve is still
+  a rounded card), and an unsleeved card keeps its own rounded rendering. Flat solid hex, no
+  border/sheen; face-down (sleeved) = bare square sleeve rectangle, no image; library pile =
+  inner sleeve rect in `MtgZoneShapeUtil`, square (no image, so no inner radius). Concrete
   watch points the build created:
   - **`LIBRARY_PILE_INSET` (12) in `src/shared/mtgZoneShape.ts` is shared server/client** —
     `tableFurniture.ts` uses it for the card-back image geometry, `MtgZoneShapeUtil` for the

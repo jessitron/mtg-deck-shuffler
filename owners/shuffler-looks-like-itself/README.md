@@ -402,9 +402,16 @@ card's own corner ratio); Jess removed it — a sleeve is a rectangular physical
 its edge is exactly what gives cards the square corners the fleet's style wants (issue 09's
 own line). **Don't "restore" the radius citing the physical-objects rule — the sleeve's real
 shape IS square-cornered.** The sleeve is the flat solid player-picked hex — **no border,
-sheen, or texture** — and the face image keeps its own rendering inside it, no second radius
-(Scryfall art carries its own printed corners). Face-down (sleeved) = the bare sleeve
-rectangle. The **library pile** is rendered
+sheen, or texture**. **The face IMAGE inside the sleeve keeps rounded corners of its own —
+refined 2026-08-09, same day (`c1592c4`), making the corner rule three-part:** an unsleeved
+card is rounded (the printed card); a sleeve rectangle is square (`e53a27e`); the face image
+inside a sleeve is rounded again — an explicit `borderRadius: w * 0.05` on the img itself
+(the Shuffler card's own corner ratio, 10/200) — because the printed card inside the sleeve
+is still a rounded card. Ticket 17 had relied on the Scryfall art's own printed corners with
+no explicit radius; `e53a27e`'s square-corner edit accidentally stripped the inner rounding
+too, because the `sleeve` style object was spread into the image's wrapper div, doing double
+duty. Face-down (sleeved) = the bare sleeve
+rectangle, square, no image. The **library pile** is rendered
 by `MtgZoneShapeUtil` itself via a new `sleeveColor` prop on `mtg-zone`: an inner solid rect
 inset by the shared `LIBRARY_PILE_INSET` (12, moved to
 `apps/tabletop/src/shared/mtgZoneShape.ts`, used by server image geometry and client sleeve

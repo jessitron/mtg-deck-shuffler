@@ -656,7 +656,14 @@ self-rendering custom shape.
   are rectangular"):** ticket 17's original `w * 0.05` radius came off the sleeved card and
   the library pile alike; only the `w * 0.03` overhang survives. A sleeve's edge is exactly
   what gives cards the square corners the fleet's style wants (issue 09's own line) — don't
-  "restore" the radius citing the physical-objects rule. The library pile is `MtgZoneShapeUtil`'s own render via a new
+  "restore" the radius citing the physical-objects rule. **Refined the same day
+  (`c1592c4`): the face IMAGE inside the sleeve keeps rounded corners** — `e53a27e` had
+  accidentally stripped the inner img's rounding too (the `sleeve` style object was spread
+  into the image's wrapper div), and the printed card inside a sleeve is still a rounded
+  card, so the img now carries its own explicit `borderRadius: w * 0.05` (the Shuffler
+  card's 10/200 ratio). The full three-part rule: unsleeved card rounded, sleeve rectangle
+  square, face image inside a sleeve rounded; a face-down sleeved card is the bare square
+  rectangle with no image. The library pile is `MtgZoneShapeUtil`'s own render via a new
   `sleeveColor` prop on `mtg-zone` — inner rect inset by the shared `LIBRARY_PILE_INSET=12`
   (`src/shared/mtgZoneShape.ts`), square-cornered, zone opacity 1 with the box
   chrome self-faded to 0.5 so the pile stays vivid. `indicator()` untouched — the ride-along
