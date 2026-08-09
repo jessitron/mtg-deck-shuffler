@@ -22,6 +22,13 @@
   restructures this state transition would silently break `useIsZoneArmed` (it would just always
   return `false`, the drag would still work) — no test currently guards this beyond
   `verify-zone-armed.spec.ts`'s happy-path check.
+- **`PointingShape.onPointerUp`'s internal ordering** — `markHistoryStoppingPoint('shape on
+  click')` then `updateShapes([onClick's returned change])`, both after `onClick` returns — is
+  load-bearing for ticket 16's multi-untap (2026-08-09, `626ab6f`): the propagated writes are
+  `queueMicrotask`-deferred specifically to land *after* that mark and coalesce into the same
+  undo entry. Confirmed empirically, not just from source. Unlike the `useIsZoneArmed` gap
+  above, this one HAS a regression tripwire: `verify-multi-untap.spec.ts`'s one-Ctrl+Z
+  assertions fail if a tldraw upgrade reorders it. See watch point 14.
 
 ### Shape identity (`props.instanceId`)
 - Minted once in `apps/tabletop/src/server/cardArrival.ts` at shape creation, never elsewhere, now
@@ -139,12 +146,16 @@
    `98f8bea`'s fix and the `halfExtent`/`center`/`topLeft` math in `onClick`) — a naive
    `rotation` write alone swings the card around its corner.
 
-5. **This ShapeUtil currently has no tests for the tldraw-quirk class of bug beyond
-   `verify-drag-identity.spec.ts`.** That test covers exactly the reported symptom (drag A, then
-   drag B, B should move). It would NOT catch a regression in, say, shift-click multi-select
-   interacting with `onClick`-bearing shapes, or a tldraw upgrade changing the guard conditions
-   themselves. Treat new drag/select/tap behavior as needing its own explicit test, not coverage
-   by association.
+5. **Each tldraw-quirk class of bug gets its own explicit test — coverage by association
+   doesn't exist here.** `verify-drag-identity.spec.ts` covers exactly the drag-identity
+   symptom (drag A, then drag B, B should move); since ticket 16 (2026-08-09),
+   `verify-multi-untap.spec.ts` covers the once-named gap of multi-select interacting with
+   `onClick`-bearing shapes (marquee + click propagation, one-undo coalescing, two-client undo
+   independence). Still uncovered: shift-click on an `onClick`-bearing card (see the
+   "unconfirmed-but-likely taps instead of extends selection" note in `architecture.md`'s
+   ticket 16 section), and a tldraw upgrade changing `PointingShape`'s guard conditions
+   themselves (the tests catch symptoms, not cause changes). Treat new drag/select/tap
+   behavior as needing its own explicit test.
 
 6. **Registering a new custom shape type needs FOUR separate steps, and missing any one fails
    differently.** (1) The `declare module "@tldraw/tlschema" { interface TLGlobalShapePropsMap`
@@ -313,7 +324,30 @@
     trusting locator indices across a reparent; (c) focusing a custom editing input needs
     `setTimeout(0)` inside the `isEditing` effect — `autoFocus`, ref-callback focus, and a bare
     effect all lose to tldraw's end-of-gesture focus handling (`document.activeElement` ends on
-    `body`).
+    `body`). Ticket 16 (`verify-multi-untap.spec.ts`) added three more: (d) **marquee
+    selection works by brushing from a point over locked furniture** — `SelectTool`'s `Idle`
+    gates `isLocked` before `PointingShape`, so pointer-down on the playmat starts a brush,
+    same as bare canvas; compute the brush rect from the cards' actual bounding boxes plus a
+    margin. (e) The ~500ms double-click cooldown from (a) also applies **after a marquee
+    mouse-up**, before a follow-up tap click. (f) **Assert tapped state as bounding-box
+    orientation** (portrait cards: width > height means tapped) — camera-scale-proof, no
+    rotation-matrix reading needed.
+
+14. **Ticket 16's multi-untap rides on undocumented `PointingShape.onPointerUp` ordering —
+    two facts, both load-bearing, one tripwire.** (2026-08-09, `626ab6f`.) (a) `onClick`
+    returning a change makes `onPointerUp` early-return, which is the ONLY thing keeping the
+    marquee selection alive through the click — the clicked card's own partial must stay a
+    synchronous return, never folded into the deferred batch. (b) `onPointerUp` calls
+    `markHistoryStoppingPoint` then `updateShapes` AFTER `onClick` returns, so the propagated
+    writes are deferred via `queueMicrotask` to land after the mark and coalesce into the same
+    new undo entry — one Ctrl+Z reverts the whole gesture. Never change `queueMicrotask` to
+    `setTimeout` (a macrotask can interleave with input events). The propagation batch must
+    stay defensive per card: fresh `getShape` re-fetch, `type === "mtg-card"` filter, and
+    skip-if-already-at-target (rotation is a delta — watch point 4 — so a redundant ±90° write
+    corrupts free rotation). `verify-multi-untap.spec.ts` is the standing tripwire for a
+    tldraw upgrade reordering any of this. Also note the gesture-order constraint: watch
+    point 1's drag-settle `setSelectedShapes([])` means multi-untap only works
+    marquee-then-click; a drag in between clears the selection.
 
 ## Not Related To
 

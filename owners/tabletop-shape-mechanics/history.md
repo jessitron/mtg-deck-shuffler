@@ -508,6 +508,54 @@ leaves the titles exactly as covered.
 - Old tables keep old furniture (`ensurePlayerArea` never redraws) — same graceful degradation
   already recorded for the command-zone redraw.
 
+## Ticket 16: multi-untap — clicking one selected card taps the whole selection, one undo entry (2026-08-09, `626ab6f`)
+
+`.scratch/tabletop-physics/issues/16-multi-untap.md` (plan in `plan-16.md`, worktree
+`ticket-16-multi-untap`). With a marquee selection, clicking one card propagates its NEW tapped
+state to every other selected `mtg-card` — a **state push, not a per-card toggle**, so a mixed
+selection converges. All inside `MtgCardShapeUtil.onClick`; no new hooks.
+
+- **The KB's first documented microtask-vs-undo case, confirmed empirically**:
+  `PointingShape.onPointerUp` calls `markHistoryStoppingPoint('shape on click')` then
+  `updateShapes([change])` AFTER `onClick` returns, so a `queueMicrotask` write from inside
+  `onClick` lands *after* the mark and coalesces into the *same new* undo entry as the clicked
+  card's own change. One Ctrl+Z (`ControlOrMeta+z`) reverts the whole multi-tap gesture and
+  leaves an earlier unrelated tap untouched. The code comment warns never to change
+  `queueMicrotask` to `setTimeout` (macrotasks can interleave with input events).
+  `verify-multi-untap.spec.ts` is the standing tripwire for a tldraw upgrade reordering this.
+- **The clicked card's own partial is still RETURNED synchronously** — that early-returns
+  `PointingShape.onPointerUp` and is what lets the marquee selection survive the click at all
+  (returning `undefined` collapses the selection to the clicked card).
+- **The microtask batch is defensive per card**: fresh `getShape` re-fetch (the clicked card's
+  update, and possibly remote changes, applied in between), skip non-`mtg-card` shapes and
+  deleted shapes, and skip cards already at the target state — rotation is a delta (watch
+  point 4), so a redundant ±90° would corrupt free rotation.
+- **`tapPartial(shape, tapped)` extracted** — the center-fixed pivot math formerly inline in
+  `onClick`, now used by both the synchronous return and the microtask batch.
+  `onDragShapesIn` keeps its own inline copy (counter rotation-zeroing); three conceptual call
+  sites of the pivot solve, two via `tapPartial`.
+- **Two-client undo independence verified** (third test in the spec): a remote peer's Ctrl+Z
+  after another player's multi-untap is a no-op (remote sync changes never enter the local
+  `HistoryManager`); the acting player's own Ctrl+Z still reverts and syncs out.
+- **Watch point 5's named gap closed**: "multi-select interacting with `onClick`" is now
+  covered by `verify-multi-untap.spec.ts` (3 Playwright tests; full suite 27 Playwright + 64
+  vitest green at landing). The shift-click observation from the `-context` consult was NOT
+  investigated (out of scope) — still unconfirmed-but-likely that shift-click taps instead of
+  extending the selection, per `PointingShape.ts` ~line 93 ordering.
+- **Gesture-order consequence, by design**: watch point 1's drag-settle
+  `setSelectedShapes([])` is untouched, so multi-untap only works marquee-then-click — a drag
+  clears the selection first.
+- **New Playwright facts** (added to watch point 13): marquee-select by brushing from a point
+  over locked furniture (`Idle` gates `isLocked` before `PointingShape`, so pointer-down on
+  the playmat starts a brush); the ~500ms double-click cooldown also applies after a marquee
+  mouse-up; assert tapped state as bounding-box orientation (portrait card: width > height
+  means tapped), which is camera-scale-proof. The unrelated-tap control card is placed with
+  `zoneHint: "stack"` so the battlefield marquee can't catch it.
+
+Full detail in `architecture.md`'s "Ticket 16" section; `interactions.md` watch point 5
+rewritten, watch point 13 extended, watch point 14 new, and a new `Depends On` note on
+`PointingShape.onPointerUp`'s ordering.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,

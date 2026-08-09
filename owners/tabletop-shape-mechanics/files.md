@@ -36,8 +36,12 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 ## Client (the ShapeUtils themselves)
 
 - `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — the whole card territory: extends
-  `BaseBoxShapeUtil<MtgCardShape>`; `onClick` (tap/untap, now toggling `props.tapped` with
-  rotation as a pure visual delta), `onTranslateEnd` (selection cleanup + zone-entry detection +
+  `BaseBoxShapeUtil<MtgCardShape>`; `onClick` (tap/untap toggling `props.tapped` with rotation
+  as a pure visual delta; since ticket 16, 2026-08-09, also pushes the clicked card's new state
+  to the rest of a marquee selection via a `queueMicrotask`-deferred batch — the clicked card's
+  own partial stays a synchronous return; see `architecture.md`'s "Ticket 16"), `tapPartial()`
+  (private — the extracted center-fixed pivot solve, shared by the return and the batch),
+  `onTranslateEnd` (selection cleanup + zone-entry detection +
   counter eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`, deliberately
   excluding the Stack), `zoneAt()` (private helper — since ticket 14, a thin wrapper around
   `zoneHitTest.ts`'s `topmostZoneAt()`, below; since ticket 18 returning the full `ZoneHit`,
@@ -160,6 +164,14 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 - `apps/tabletop/test/verification/verify-drag-identity.spec.ts` — regression test for the
   `959831c` drag-identity bug. Plays two lands, drags first, drags second, asserts only the
   second moved.
+- `apps/tabletop/test/verification/verify-multi-untap.spec.ts` — **new, ticket 16
+  (2026-08-09, `626ab6f`)**: the tripwire on the undocumented `PointingShape.onPointerUp`
+  ordering multi-untap depends on (watch point 14). Three tests: marquee + click propagates
+  tapped state and ONE Ctrl+Z reverts the whole gesture leaving an earlier tap alone; the
+  propagation is a state push, not a per-card toggle (mixed selection converges); a remote
+  peer's undo is a no-op while the acting player's undo still reverts and syncs. Carries the
+  marquee-over-locked-furniture brushing helper, the post-marquee ~500ms cooldown, and the
+  bounding-box-orientation tapped assertion (watch point 13 d-f).
 - `apps/tabletop/test/seatJoined.test.ts` — since `96159be`, the event-handler-seam twin of
   `cardLayout.test.ts`'s pure-geometry invariant: asserts the ≥ `GAP` zone-AABB disjointness
   over the 21 actually-drawn `mtg-zone` shapes at a full 4-seat table (five per seat + the

@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: done
 
 **What to build:** With several `mtg-card`s selected (marquee), clicking one propagates that
 card's *new* tapped state to every other selected card — not a per-card toggle. The clicked
@@ -22,7 +22,7 @@ others' multi-untap.
 
 **Blocked by:** 12
 
-- [ ] Clicking one selected card propagates its new tapped state to the rest of the selection
-- [ ] Required Playwright test: one Ctrl+Z reverts the whole multi-untap and leaves an earlier
+- [x] Clicking one selected card propagates its new tapped state to the rest of the selection
+- [x] Required Playwright test: one Ctrl+Z reverts the whole multi-untap and leaves an earlier
       unrelated tap alone
-- [ ] Two-client test: each client's undo stack stays independent of another player's multi-untap
+- [x] Two-client test: each client's undo stack stays independent of another player's multi-untap

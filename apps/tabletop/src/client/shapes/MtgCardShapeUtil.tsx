@@ -139,16 +139,63 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   // the source of truth; rotation is purely visual and additive on top of it,
   // applied as a delta so it composes with whatever free rotation left the
   // card at, instead of snapping to an absolute angle.
+  //
+  // Ticket 16 (multi-untap): if the clicked card is part of the current
+  // selection (marquee), its NEW tapped state propagates to every other
+  // selected mtg-card — a state push, not a per-card toggle, so a mixed
+  // selection converges. The clicked card's own change must still be
+  // RETURNED synchronously: when onClick returns a change,
+  // PointingShape.onPointerUp early-returns and the multi-selection
+  // survives the click (returning undefined falls through to selection
+  // logic that collapses it to the clicked card).
   override onClick(shape: MtgCardShape): TLShapePartial<MtgCardShape> | undefined {
     const tapped = !shape.props.tapped;
+
+    const selectedIds = this.editor.getSelectedShapeIds();
+    const otherIds = selectedIds.includes(shape.id) ? selectedIds.filter((id) => id !== shape.id) : [];
+    if (otherIds.length > 0) {
+      // Deferred via queueMicrotask — undocumented-tldraw-ordering alert:
+      // PointingShape.onPointerUp calls markHistoryStoppingPoint() and then
+      // updateShapes([change]) AFTER onClick returns, so a synchronous write
+      // here would land BEFORE the mark, fusing into the previous undo entry.
+      // The microtask runs after the whole pointer-up handler — after the
+      // mark — so the propagated writes coalesce into the same new undo
+      // entry as the clicked card's own change, and one Ctrl+Z reverts the
+      // whole gesture. Guarded by verify-multi-untap.spec.ts, which is the
+      // tripwire for a tldraw upgrade reordering this. Never "upgrade" this
+      // to setTimeout: a macrotask could interleave with other input events.
+      queueMicrotask(() => {
+        const partials: TLShapePartial<MtgCardShape>[] = [];
+        for (const id of otherIds) {
+          // Re-fetch fresh: the clicked card's update (and possibly remote
+          // changes) applied between onClick and this microtask. A marquee
+          // can also catch counters and other shapes — cards only. Cards
+          // already at the target state are skipped entirely: rotation is a
+          // delta, and applying ±90° to an already-correct card would
+          // corrupt its free rotation.
+          const fresh = this.editor.getShape(id);
+          if (!fresh || fresh.type !== "mtg-card") continue;
+          const card = fresh as MtgCardShape;
+          if (card.props.tapped === tapped) continue;
+          partials.push(this.tapPartial(card, tapped));
+        }
+        if (partials.length > 0) this.editor.updateShapes(partials);
+      });
+    }
+
+    return this.tapPartial(shape, tapped);
+  }
+
+  // The tap write for one card: toggle `props.tapped` and apply the ±90°
+  // rotation delta. shape.x/y is the card's top-left corner, and rotation
+  // pivots around that point, not the card's center — so applying the delta
+  // to rotation alone would swing the card around its corner. Hold the
+  // center fixed instead: find it under the current rotation, then solve
+  // for the top-left that puts the same center under the new rotation.
+  private tapPartial(shape: MtgCardShape, tapped: boolean): TLShapePartial<MtgCardShape> {
     const delta = tapped ? TAP_ANGLE : -TAP_ANGLE;
     const rotation = shape.rotation + delta;
 
-    // shape.x/y is the card's top-left corner, and rotation pivots around
-    // that point, not the card's center — so applying the delta to rotation
-    // alone would swing the card around its corner. Hold the center fixed
-    // instead: find it under the current rotation, then solve for the
-    // top-left that puts the same center under the new rotation.
     const { w, h } = shape.props;
     const halfExtent = { x: w / 2, y: h / 2 };
     const center = Vec.Add(shape, Vec.Rot(halfExtent, shape.rotation));
