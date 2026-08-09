@@ -120,6 +120,27 @@ describe("sendSeatJoinedBestEffort", () => {
     expect(event.cardBackImageUrl).toMatch(/^https:\/\//);
   });
 
+  it("a picked sleeve travels as sleeveColor, and the card back is omitted — sleeveColor wins", async () => {
+    const fake = new FakeTabletopGateway();
+
+    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", "#8b2f5c");
+
+    const { event } = fake.sentSeatJoinedEvents[0];
+    expect(event.sleeveColor).toBe("#8b2f5c");
+    expect(event.cardBackImageUrl).toBeUndefined();
+    expect(event.playmatImageUrl).toMatch(/^https:\/\//);
+  });
+
+  it("no sleeve picked → no sleeveColor, standard card back (today's look)", async () => {
+    const fake = new FakeTabletopGateway();
+
+    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", undefined);
+
+    const { event } = fake.sentSeatJoinedEvents[0];
+    expect(event.sleeveColor).toBeUndefined();
+    expect(event.cardBackImageUrl).toMatch(/^https:\/\//);
+  });
+
   it("is a no-op when no tabletop is configured — Shuffle Up must not fail", async () => {
     await expect(sendSeatJoinedBestEffort(undefined, tableInfo, "Test Deck")).resolves.toBeUndefined();
   });

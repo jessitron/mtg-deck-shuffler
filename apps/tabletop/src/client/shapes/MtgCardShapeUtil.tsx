@@ -1,4 +1,5 @@
 import { BaseBoxShapeUtil, HTMLContainer, TLDragShapesOutInfo, TLShape, TLShapePartial, Vec } from "tldraw";
+import type { CSSProperties } from "react";
 import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
 import { MtgCounterShape } from "../../shared/mtgCounterShape";
 import { findOpenSpotsNearZoneEdge, Rect } from "./openSpotNearZoneEdge";
@@ -40,6 +41,7 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       face: "front",
       faceDown: false,
       tapped: false,
+      sleeveColor: null,
     };
   }
 
@@ -48,8 +50,18 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   }
 
   component(shape: MtgCardShape) {
-    const { frontImageUrl, backImageUrl, face, cardName } = shape.props;
+    const { frontImageUrl, backImageUrl, face, cardName, faceDown, sleeveColor, w } = shape.props;
+    // `face` and `faceDown` are independent axes (two-faced-cards owner):
+    // face picks which PRINTED side shows — a DFC's back is a normal face
+    // image — while faceDown is concealment. Only faceDown hides the image.
     const src = (face === "back" ? backImageUrl : frontImageUrl) ?? frontImageUrl;
+    // Sleeve geometry is a proportion of the shape's own width — cards are
+    // aspect-locked resizable, so a fixed px would drift out of proportion.
+    // w * 0.05 is the Shuffler card's own corner (10/200); w * 0.03 mirrors a
+    // real sleeve's ~1-2mm overhang. Flat solid color, no border or sheen.
+    const sleeve: CSSProperties | undefined = sleeveColor
+      ? { width: "100%", height: "100%", background: sleeveColor, borderRadius: w * 0.05, boxSizing: "border-box" }
+      : undefined;
     return (
       <HTMLContainer id={shape.id}>
         {/* tl-html-container is `pointer-events: none` by default (tldraw.css)
@@ -57,7 +69,24 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
             shapes re-enable hit-testing via .tl-image-container's `pointer-
             events: all` — reusing that class here rather than reinventing it. */}
         <div className="tl-image-container">
-          <img className="tl-image" src={src} alt={cardName} draggable={false} />
+          {sleeve && faceDown ? (
+            // Concealed in a sleeve: the bare sleeve rectangle. Identity and
+            // both URLs stay in props — concealment is depicted, not enforced.
+            <div style={sleeve} />
+          ) : sleeve ? (
+            // Face image centered in the sleeve, a ring of color on every
+            // side — the IRL sleeve-border look. Not `className="tl-image"`:
+            // that rule is `position: absolute; inset: 0`, which anchors to
+            // .tl-image-container and escapes this div's padding entirely.
+            <div style={{ ...sleeve, padding: w * 0.03 }}>
+              <img style={{ display: "block", width: "100%", height: "100%" }} src={src} alt={cardName} draggable={false} />
+            </div>
+          ) : (
+            // Unsleeved: today's bare look. An unsleeved faceDown card should
+            // show the standard Magic back — wired up with the flip/turn-over
+            // gesture (tabletop-physics ticket 06); nothing sets faceDown yet.
+            <img className="tl-image" src={src} alt={cardName} draggable={false} />
+          )}
         </div>
       </HTMLContainer>
     );

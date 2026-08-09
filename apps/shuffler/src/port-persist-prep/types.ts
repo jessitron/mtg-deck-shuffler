@@ -32,6 +32,13 @@ export interface PersistedGamePrep {
   playerName?: string;
   /** The seat's short GUID — player names are not unique; this is the seat's identity. */
   seatId?: string;
+  /**
+   * The seat's sleeve, as #rrggbb (table-layout ticket 17) — a game constant,
+   * chosen in prep (the picker is ticket 16) and sent in seat.joined. Optional
+   * with graceful fallback (unsleeved), same NO-version-bump exception as the
+   * table info above.
+   */
+  sleeveColor?: string;
 }
 
 export interface PersistPrepPort {

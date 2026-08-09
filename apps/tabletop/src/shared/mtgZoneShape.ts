@@ -13,7 +13,21 @@ export interface MtgZoneShapeProps {
   zone: "playmat" | "library" | "graveyard" | "exile" | "stack" | "command";
   seatId: string | null;
   label: string;
+  /**
+   * The seat's sleeve color (table-layout ticket 17), set only on a sleeved
+   * seat's library zone: the pile renders as the bare sleeve rectangle
+   * instead of a card-back image. null everywhere else.
+   */
+  sleeveColor: string | null;
 }
+
+/**
+ * How far the library pile (card-back image, or the sleeve rectangle) insets
+ * from its zone box, so the box's border and "Library" label peek out as a
+ * frame around it. Shared between the server (image geometry,
+ * tableFurniture.ts) and the client (sleeve geometry, MtgZoneShapeUtil).
+ */
+export const LIBRARY_PILE_INSET = 12;
 
 declare module "@tldraw/tlschema" {
   interface TLGlobalShapePropsMap {
@@ -29,4 +43,5 @@ export const mtgZoneShapeProps: RecordProps<MtgZoneShape> = {
   zone: T.literalEnum("playmat", "library", "graveyard", "exile", "stack", "command"),
   seatId: T.string.nullable(),
   label: T.string,
+  sleeveColor: T.string.nullable(),
 };

@@ -38,6 +38,8 @@ export interface PlayerArea {
   playerName: string;
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
+  /** The seat's sleeve (table-layout ticket 17) — wins over cardBackImageUrl; baked into each card at mint time. */
+  sleeveColor?: string;
   landCount: number;
   graveyardCount: number;
   stackCount: number;

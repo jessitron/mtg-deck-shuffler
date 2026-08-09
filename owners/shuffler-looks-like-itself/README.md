@@ -70,9 +70,10 @@ than by choice. Whoever writes that rule decides where Tabletop CSS lives. See
 
 ## tldraw limits — recorded, not fought (2026-08-07)
 
-Layer 2 says to write these down rather than silently dropping a rule. All four were found
-while `.scratch/tabletop-physics/issues/03-what-furniture-is.md` decided that Tabletop
-furniture becomes a custom `mtg-zone` shape.
+Layer 2 says to write these down rather than silently dropping a rule. The first four were
+found while `.scratch/tabletop-physics/issues/03-what-furniture-is.md` decided that Tabletop
+furniture becomes a custom `mtg-zone` shape; later work keeps adding to the list (dates on
+each).
 
 - **tldraw's `geo` `font` prop is an enum with no Orbitron in it.** So a stock `geo` label
   can *never* be on-brand — today's `serif` zone labels aren't a design choice, they're the
@@ -122,6 +123,17 @@ furniture becomes a custom `mtg-zone` shape.
   outward from the border edge rather than being drawn inside it — so it rides on top of the
   playmat's opaque black border and (per this rule) would survive an image overlay the same
   way. Screenshot-verified the ring shows.
+- **tldraw's `.tl-image` class escapes any intermediate wrapper — a frame around an image
+  must style its `<img>` directly.** `.tl-image` is `position: absolute; inset: 0`
+  (tldraw.css), anchored to `.tl-image-container` — so an `<img className="tl-image">`
+  placed inside a padded frame div ignores the padding entirely and fills the container,
+  making the frame invisible. Found by ticket 17's sleeve ring (2026-08-08): the sleeved
+  branch of `MtgCardShapeUtil` shipped with the class reused "rather than reinventing it,"
+  the ring didn't render, and the fix (`bfdc877`) drops the class and sets
+  `display: block; width/height: 100%` on the img itself. Caught only by a live-browser
+  screenshot (`.scratch/tabletop-table-layout/verify-17-sleeved-card.png`) — the DOM and
+  the build both looked fine. Reuse `.tl-image-container` for its `pointer-events: all`;
+  do **not** reuse `.tl-image` on an img you intend to wrap.
 - **tldraw cannot rotate the view per viewer on a shared board.** Reconfirmed 2026-08-08
   (`.scratch/tabletop-table-layout/issues/10-the-square.md`), same posture as Mural — "Mural
   doesn't rotate either." This is a hard platform limit, not a deferred nicety: every player
@@ -317,11 +329,27 @@ solid-color rectangle slightly larger than the card (a few px per side, like rea
 a face-down card and the library pile render as the bare sleeve rectangle; a face-up sleeved
 card renders as its image centered inside the sleeve rectangle — every face-up sleeved card
 gets a sleeve-color border. Unsleeved decks keep the standard Magic card-back image, so the
-library furniture now has **two** looks keyed on whether the seat has a sleeve. **Reserved
-for this owner at implementation time**: exact sleeve margin, corner radius (a sleeve is a
-physical object, so the physical-rounding rule applies), any border/sheen/texture, and the
-picker's default/swatch palette. v1 is one color; distinct front/back colors or an image
-sleeve are someday-maybes, deferred.
+library furniture now has **two** looks keyed on whether the seat has a sleeve.
+
+**The sleeve treatment is DECIDED and shipped (2026-08-08, ticket 17, `0a768e6` +
+`bfdc877`), decided with this owner's `-context` mid-implementation.** Corner radius
+`w * 0.05` and margin (the ring of color around a face-up image) `w * 0.03` per side — both
+**proportions of the shape's own `shape.props.w`**, never fixed px, because cards are
+aspect-locked resizable (the playmat-radius lesson, applied again). `0.05` is the Shuffler
+card's own corner ratio (10/200); `0.03` mirrors a real sleeve's ~1–2mm overhang. The sleeve
+is the flat solid player-picked hex — **no border, sheen, or texture** — and the face image
+keeps its own rendering inside it, no second radius (Scryfall art carries its own printed
+corners). Face-down (sleeved) = the bare sleeve rectangle. The **library pile** is rendered
+by `MtgZoneShapeUtil` itself via a new `sleeveColor` prop on `mtg-zone`: an inner solid rect
+inset by the shared `LIBRARY_PILE_INSET` (12, moved to
+`apps/tabletop/src/shared/mtgZoneShape.ts`, used by server image geometry and client sleeve
+geometry alike), radius 5% of the *inset* width; the zone shape's opacity is 1 when sleeved
+and the component fades just the box chrome to 0.5, so the pile stays as vivid as the cards
+while the furniture keeps its composite look. **Still undecided:** the picker's
+default/swatch palette (ticket 16's picker — no default sleeve color exists; `null` ⇔
+unsleeved, today's bare look), and there is no `/design` specimen yet (buoyed as
+`design-sleeve-specimen` in `TODO.md`). v1 is one color; distinct front/back colors or an
+image sleeve are someday-maybes, deferred.
 
 **The seat name label pairs player name and deck name as two lines, player first (decided
 2026-08-08, ticket 15 of the Table-layout map, `4263ef8`).** The Tabletop's seat label — the

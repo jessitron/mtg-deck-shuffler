@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: fleet
 Type: task
-Status: ready-for-agent
+Status: done
 Blocked by: 15 — deck name to the table (the `seat.joined` schema, which already carries the optional `sleeveColor` field); 16 — prep-screen picker v1 (a chosen color to send)
 
 **What to build:** A player's picked sleeve color makes their cards recognizably theirs
@@ -32,9 +32,12 @@ seam (sleeve baked into minted card props; library/face-down/face-up shapes carr
 Consult owners: `shuffler-looks-like-itself` (sleeve appearance), `two-faced-cards`
 (card props and rendering paths).
 
-- [ ] `seat.joined` from the Shuffler carries `sleeveColor` when picked and omits `cardBackImageUrl` then
-- [ ] Tabletop bakes the seat's sleeve color into `mtg-card` props at mint time
-- [ ] Face-down cards and the library pile render as the solid sleeve color, slightly larger than the card
-- [ ] Face-up sleeved cards show the image centered in a sleeve-colored frame
-- [ ] A seat with no sleeve keeps the standard Magic card back and bare face-up image
-- [ ] If both `sleeveColor` and `cardBackImageUrl` arrive, `sleeveColor` wins
+- [x] `seat.joined` from the Shuffler carries `sleeveColor` when picked and omits `cardBackImageUrl` then
+- [x] Tabletop bakes the seat's sleeve color into `mtg-card` props at mint time
+- [x] Face-down cards and the library pile render as the solid sleeve color — implemented as image-inset-within-card-footprint rather than a larger shape (owner-blessed inversion; shape growth would break layout/hit-testing)
+- [x] Face-up sleeved cards show the image centered in a sleeve-colored frame
+- [x] A seat with no sleeve keeps the standard Magic card back (library pile) and bare face-up image — unsleeved *faceDown* card back deferred to tabletop-physics ticket 06 with the gesture; nothing sets faceDown yet
+- [x] If both `sleeveColor` and `cardBackImageUrl` arrive, `sleeveColor` wins (enforced on both ships)
+
+Done 2026-08-08 (commits 0a768e6, bfdc877; plan-17.md; screenshots verify-17-*.png).
+The Shuffler sends `prep.sleeveColor` — ticket 16's picker writes that field.

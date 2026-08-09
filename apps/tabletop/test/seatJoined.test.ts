@@ -192,6 +192,42 @@ describe("seat joined", () => {
     expect(afterTwo.index).toBe(afterOne.index);
   });
 
+  it("a sleeved seat's library pile is the solid sleeve color, not a card-back image", async () => {
+    const response = await post("seat-sleeve", seatJoined({ sleeveColor: "#8b2f5c" }));
+    expect(response.status).toBe(201);
+
+    const shapes = shapesOf("seat-sleeve");
+    const libraryZone = shapes.find((s) => s.type === "mtg-zone" && s.props?.zone === "library");
+    expect(libraryZone.props.sleeveColor).toBe("#8b2f5c");
+    // sleeveColor wins over the card-back image the fixture also sent: no
+    // library image shape is drawn (the playmat image is still an image shape).
+    const library = libraryBounds(0);
+    expect(shapes.some((s) => s.type === "image" && s.x > library.x && s.x < library.x + library.w)).toBe(false);
+  });
+
+  it("remembers the seat's sleeve color for cards that arrive later, dropping the card back", async () => {
+    const event = seatJoined({ sleeveColor: "#8b2f5c" });
+    await post("seat-sleeve-memory", event);
+
+    const area = getRoomRegistry().get("seat-sleeve-memory")!.seats.get(event.initiator.seatId as string)!;
+    expect(area.sleeveColor).toBe("#8b2f5c");
+    expect(area.cardBackImageUrl).toBeUndefined();
+  });
+
+  it("an unsleeved seat keeps the card-back image pile (today's look)", async () => {
+    await post("seat-unsleeved", seatJoined());
+    const shapes = shapesOf("seat-unsleeved");
+    const libraryZone = shapes.find((s) => s.type === "mtg-zone" && s.props?.zone === "library");
+    expect(libraryZone.props.sleeveColor).toBeNull();
+    const library = libraryBounds(0);
+    expect(shapes.some((s) => s.type === "image" && s.x > library.x && s.x < library.x + library.w)).toBe(true);
+  });
+
+  it("rejects a sleeveColor that is not a six-digit hex color — fail loudly, not quietly unsleeved", async () => {
+    expect((await post("seat-bad-sleeve", seatJoined({ sleeveColor: "purple" }))).status).toBe(400);
+    expect((await post("seat-bad-sleeve", seatJoined({ sleeveColor: "#8b2f5" }))).status).toBe(400);
+  });
+
   it("rejects a payload missing required fields", async () => {
     const response = await post("seat-invalid", { name: "seat.joined" });
     expect(response.status).toBe(400);
