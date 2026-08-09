@@ -11,6 +11,7 @@ function seatJoined(overrides: Record<string, unknown>) {
     id: `e2e-seat-${Date.now()}-${Math.random().toString(36).slice(2)}`,
     name: "seat.joined",
     occurredAt: new Date().toISOString(),
+    deckName: "E2E Deck",
     playmatImageUrl: "https://example.com/e2e-playmat.png",
     cardBackImageUrl: "https://example.com/e2e-card-back.jpg",
     ...overrides,
