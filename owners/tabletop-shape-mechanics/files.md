@@ -22,7 +22,10 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   "exile" | "stack" | "command"` — `seatId`, `label`), the `TLGlobalShapePropsMap` augmentation
   registering `mtg-zone`, and `mtgZoneShapeProps` validators, imported by client
   `MtgZoneShapeUtil.tsx`, server `rooms.ts`, and server `tableFurniture.ts` (for the `Zone` type
-  alias it re-exports).
+  alias it re-exports). Also home to two shared layout constants both sides must agree on:
+  `LIBRARY_PILE_INSET` (12) and, since zone-label-band (2026-08-09, `0d61890`),
+  `ZONE_LABEL_BAND` (40) — the headroom every card-holding zone reserves at the top so its label
+  stays readable; imported by `cardLayout.ts`, `tableFurniture.ts`, and `MtgZoneShapeUtil.tsx`.
 - `apps/tabletop/src/shared/mtgCounterShape.ts` — the same pattern for counters (ticket 18):
   `MtgCounterShapeProps` (`w`, `h`, `text` — free string, blank by default; no domain identity
   beyond its text), the `TLGlobalShapePropsMap` augmentation registering `mtg-counter`, and
@@ -50,6 +53,8 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   `--dark-pink` for everything else — and, since ticket 14 (2026-08-08), reads
   `useIsZoneArmed(this.editor, shape.id)` from `zoneHitTest.ts` to add a glow (`box-shadow` +
   tinted background/border color) while a dragged card is hovering over it. `getIndicatorPath()`.
+  Since zone-label-band (2026-08-09, `0d61890`), the sleeve pile it renders for a sleeved library
+  starts `ZONE_LABEL_BAND` below the box's top (rendering only — still no hooks).
 - `apps/tabletop/src/client/shapes/zoneHitTest.ts` — **new, ticket 14; corrected same day
   (`05235aa`)**: `topmostZoneAt(editor, center)`, the topmost-zone-wins hit test extracted out of
   `MtgCardShapeUtil.zoneAt()` so a second caller (`MtgZoneShapeUtil`, above) can share it; and
@@ -123,7 +128,9 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   previously drag/delete another player's name label). Since *table-layout* ticket 13
   (2026-08-08, a different ticket 13 — see `history.md`), `ensurePlayerArea` also draws a
   Command Zone per seat (`zone: "command"`, id `region-command-<table>-<seatId>`, locked, no
-  interaction hooks). Consulted by `zoneAt()` but not itself a custom ShapeUtil.
+  interaction hooks). Since zone-label-band (2026-08-09, `0d61890`), the library card-back image
+  insets `ZONE_LABEL_BAND` from the box's top (12 from the other three sides) so the label sits
+  above the pile. Consulted by `zoneAt()` but not itself a custom ShapeUtil.
 - `apps/tabletop/src/server/cardLayout.ts` — placement geometry, mostly *not* this owner's
   territory, except for one invariant zone detection leans on (since table-layout ticket 13,
   extended by table-layout ticket 14, "the square", `5eeac70`): every pair of zone bounding
@@ -138,7 +145,11 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   `MAX_SEATS` (= 4, the compass slot count) is exported, and `playerAreaOrigin(seatIndex)`
   **throws** past it instead of wrapping a fifth seat onto the S slot (which would have silently
   broken the disjointness invariant); `seatJoined.ts` and `cardArrival.ts` refuse with 409
-  ("table is full: 4 seats") before ever reaching the throw.
+  ("table is full: 4 seats") before ever reaching the throw. Since zone-label-band (2026-08-09,
+  `0d61890`), every card-holding zone is at least `CARD_H + ZONE_LABEL_BAND` (278) tall — library
+  278, command zone `=== LIBRARY_H` by definition (the graveyard's gap from the command zone
+  depends on the two top boxes matching heights), exile 278, graveyard the 356 remainder — all
+  asserted in `test/cardLayout.test.ts`; the disjointness invariant passed unchanged.
 
 ## Tests
 

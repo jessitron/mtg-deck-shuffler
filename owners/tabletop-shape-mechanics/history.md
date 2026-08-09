@@ -468,6 +468,46 @@ Full detail in `architecture.md`'s "Ticket 18" section; watch points 1, 6, 10 up
 11-13 added in `interactions.md`; `files.md` gained the four new files and the two new tests.
 (Ticket 18 landed on main in parallel with table-layout ticket 14 above; both are 2026-08-08.)
 
+## Zone label band: card-holding zones grow headroom for their titles (2026-08-09, `0d61890`)
+
+Worktree `worktree-zone-label-band`, plan at `.scratch/zone-label-band/plan.md`. **Pure
+placement/geometry — no ShapeUtil hooks, no zone detection, no `zoneHitTest.ts` changes.** This
+owner reviewed the plan beforehand; recorded here because the geometry it changes is what watch
+point 8's disjointness invariant is asserted over, and because two files in this owner's file
+list were touched.
+
+The bug: zone titles (fontSize 24, drawn inside the box's top-left) were unreadable — Library and
+Command Zone were exactly one card tall (238) so a card covered the title, and Exile was 225,
+shorter than a card outright. Jess floated "smaller cards" as an alternative; rejected because
+card size anchors the table's physical scale and every zone derives from it, so shrinking cards
+leaves the titles exactly as covered.
+
+- **New shared constant** `ZONE_LABEL_BAND = 40` in `src/shared/mtgZoneShape.ts` (next to
+  `LIBRARY_PILE_INSET`, shared for the same reason: server geometry and client sleeve-pile
+  rendering must agree on where content starts). Pure headroom — nothing draws the band. This
+  also makes `cardLayout.ts` import from `shared/mtgZoneShape.ts` for the first time.
+- **`cardLayout.ts`**: `LIBRARY_H` and `EXILE_H` are now `CARD_H + ZONE_LABEL_BAND` (278);
+  `COMMAND_ZONE_H` is defined as `LIBRARY_H` with a comment making the coupling explicit — the
+  graveyard spans the column's full width at `column.y + LIBRARY_H + GAP`, so its GAP from the
+  command zone's bottom edge exists only while the two top boxes match heights. `GRAVEYARD_H` is
+  the remainder (356; the old two-thirds/one-third split is gone — exile gets card+band, graveyard
+  fills the rest, still the biggest box). `graveyardCardPosition` starts the cascade at
+  `box.y + ZONE_LABEL_BAND + 10`.
+- **Content insets below the band**: `tableFurniture.ts` insets the library card-back image
+  `ZONE_LABEL_BAND` from the top (12 from the other three sides), and
+  `MtgZoneShapeUtil.component()`'s sleeve pile does the same — the one client-side file touched,
+  and only its rendering; still no interaction hooks (watch point 7 intact).
+- **Tests** (`test/cardLayout.test.ts`): the hardcoded 449/225 assertions became 278/356, plus new
+  invariants — every card-holding zone ≥ `CARD_H + ZONE_LABEL_BAND`, `COMMAND_ZONE_H ===
+  LIBRARY_H` (guards the graveyard-gap coupling above), graveyard pile starts below the band. The
+  pairwise ≥ `GAP` disjointness assertion (watch point 8) passes unchanged across all four seats
+  and the Stack — the column still exactly matches the playmat's height, so no other zone moved.
+- **Known consequence, buoyed**: the shorter graveyard means its +6/card cascade walks out of the
+  box at ~32 cards (was ~53) — `TODO.md` buoy `graveyard-cascade-overflow` (`1c26469`). Cosmetic:
+  cards are *placed* there, not zone-detected by the box they overflow.
+- Old tables keep old furniture (`ensurePlayerArea` never redraws) — same graceful degradation
+  already recorded for the command-zone redraw.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,
