@@ -115,8 +115,12 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
             // side — the IRL sleeve-border look. Not `className="tl-image"`:
             // that rule is `position: absolute; inset: 0`, which anchors to
             // .tl-image-container and escapes this div's padding entirely.
+            // The IMAGE keeps rounded corners — the printed card inside the
+            // sleeve is still a rounded card (Jess, 2026-08-09); only the
+            // sleeve itself is square. w * 0.05 is the Shuffler card's own
+            // corner ratio (10/200).
             <div style={{ ...sleeve, padding: w * 0.03 }}>
-              <img style={{ display: "block", width: "100%", height: "100%" }} src={src} alt={cardName} draggable={false} />
+              <img style={{ display: "block", width: "100%", height: "100%", borderRadius: w * 0.05 }} src={src} alt={cardName} draggable={false} />
             </div>
           ) : (
             // Unsleeved: today's bare look. An unsleeved faceDown card should
