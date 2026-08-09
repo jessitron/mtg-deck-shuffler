@@ -200,7 +200,11 @@ easy to reopen:**
   the existing shape via `store.get(stackId)` inside `updateStore` and reusing its `.index` when
   present; `nextIndex()` is now called only on first creation. Not a `mtg-zone`-specific bug — it
   would have bitten the old `geo`-shape Stack too — but it surfaced while touching this code for
-  the rewrite.
+  the rewrite. **Superseded by table-layout ticket 14** (`5eeac70`, 2026-08-08):
+  `ensureStackStripWidth` is now `ensureStackDrawn` — the Stack is a fixed 1000×1000 square drawn
+  once (guard: `store.get(stackId)` existence, not seat count); later seat joins are a no-op, so
+  the z-order-promotion bug can't recur *by construction* — there is no "widen the existing
+  Stack" code path anymore.
 - The seat name label (`tableFurniture.ts`, the `type: "text"` shape) was `isLocked: false`,
   meaning any player could drag or delete another player's name label. Now `isLocked: true`, same
   as the zones around it. Also not `mtg-zone`-specific (the label stayed a stock `text` shape,
@@ -213,6 +217,21 @@ interaction hooks, per watch point 7. The same change made every pair of zone AA
 disjoint (20-unit `GAP`, exported from `cardLayout.ts`), pairwise-asserted in
 `test/cardLayout.test.ts`, because an overlap would resolve via `topmostZoneAt()`'s draw-order
 tiebreak — deterministic but semantically meaningless. See watch point 8.
+
+**Addendum (2026-08-08, *table-layout* ticket 14, `5eeac70` — "the square", yet another
+ticket-number collision with the zone-appearance ticket 14 below):** the row layout is gone.
+Seats take compass slots (S, N, E, W by join order) around a fixed 1000×1000 Stack square
+centered on the board origin (`STACK_SIZE`/`stackBounds()`/`playerAreaOrigin()` in
+`cardLayout.ts`). The disjointness invariant above now holds **across all four seats and the
+Stack**, strengthened to a ≥ `GAP` empty band between every pair of AABBs (`separation()` helper
+in `test/cardLayout.test.ts`) — `STACK_SIZE` deliberately exceeds `PLAYMAT_H` so E/W areas never
+overlap N/S. Most furniture now sits at **negative** page coordinates; `topmostZoneAt()` was
+verified sign-agnostic during this owner's `-review`. The client compensates for the
+centered-on-origin layout with `aimCameraAtTheTable()` in `TablePage.tsx` (mount-time
+`zoomToFit`, or a one-shot `{ scope: "document", source: "remote" }` store listener on an empty
+table — `source: "remote"` so a player's own first stroke doesn't yank their camera; `?d=` deep
+links suppress it) — this is what keeps Playwright actionability working. Watch point 8's
+"square" risk is resolved: the tiebreak question never had to be answered.
 
 ## Ticket 14: zone appearance (dashed at rest, glow when armed) — `topmostZoneAt` extracted, shared
 

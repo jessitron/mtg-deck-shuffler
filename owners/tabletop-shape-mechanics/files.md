@@ -51,7 +51,13 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
   `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil]`, passed to both
   `useSync` and the `<Tldraw shapeUtils={...}>` prop (this app uses the sync hook directly, which
   is why `defaultShapeUtils` must be spread in explicitly; see `architecture.md`). Add new custom
-  ShapeUtils here.
+  ShapeUtils here. Also home to `aimCameraAtTheTable()` (table-layout ticket 14, `5eeac70`):
+  since the square's furniture centers on the origin (mostly negative page coordinates, off
+  tldraw's default viewport), the mount hook `zoomToFit`s — or, on an empty table, listens with
+  `{ scope: "document", source: "remote" }` and zooms once on the first *remote* shape arrival
+  (a player's own first stroke must not yank their camera; `?d=` deep links suppress the
+  auto-zoom). Not selection mechanics per se, but Playwright actionability for every drag/click
+  spec in this KB depends on it putting the furniture on screen.
 
 ## Server (identity is minted here, mechanics is not)
 
@@ -69,20 +75,28 @@ zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShap
   `RegionStyle`/`DEFAULT_REGION_STYLE`/`PLAYMAT_REGION_STYLE` styling machinery was deleted
   (visual treatment now lives in `MtgZoneShapeUtil.component()`). `imageShape()` (the playmat/
   library background *pictures*, still stock `image` shapes, unchanged) stays separate and never
-  participates in zone detection. `ensureStackStripWidth()` was also fixed here (see
+  participates in zone detection. `ensureStackStripWidth()` was fixed here (see
   `architecture.md`'s "Ticket 13" section) to reuse an existing Stack shape's `.index` instead of
-  minting a fresh top-of-z-order one on every seat join. The seat name label (`type: "text"`,
+  minting a fresh top-of-z-order one on every seat join — and then replaced by
+  **`ensureStackDrawn()`** (table-layout ticket 14, `5eeac70`): the Stack is a fixed square drawn
+  once, guarded on `store.get(stackId)` existence, so the z-order-promotion bug can't recur by
+  construction. The seat name label (`type: "text"`,
   built inline in `ensurePlayerArea`) is now `isLocked: true` (was `false` — any player could
   previously drag/delete another player's name label). Since *table-layout* ticket 13
   (2026-08-08, a different ticket 13 — see `history.md`), `ensurePlayerArea` also draws a
   Command Zone per seat (`zone: "command"`, id `region-command-<table>-<seatId>`, locked, no
   interaction hooks). Consulted by `zoneAt()` but not itself a custom ShapeUtil.
 - `apps/tabletop/src/server/cardLayout.ts` — placement geometry, mostly *not* this owner's
-  territory, except for one invariant zone detection leans on (since table-layout ticket 13):
-  every pair of zone bounding boxes is strictly disjoint, with a 20-unit gap (`GAP`, exported,
-  along with a `Bounds` interface), asserted pairwise in `apps/tabletop/test/cardLayout.test.ts`
-  — because overlapping AABBs would make `topmostZoneAt()`'s draw-order tiebreak decide zone
-  membership, which is deterministic but meaningless (watch point 8).
+  territory, except for one invariant zone detection leans on (since table-layout ticket 13,
+  extended by table-layout ticket 14, "the square", `5eeac70`): every pair of zone bounding
+  boxes keeps at least a `GAP`-wide (20-unit) empty band from every other — across all four
+  compass seats (S/N/E/W by join order, `playerAreaOrigin(seatIndex)`) AND the fixed 1000×1000
+  Stack square centered on the origin (`STACK_SIZE`, `stackBounds()`; `STACK_SIZE` deliberately
+  exceeds `PLAYMAT_H` so E/W areas never overlap N/S) — asserted pairwise via a `separation()`
+  helper in `apps/tabletop/test/cardLayout.test.ts`, because overlapping AABBs would make
+  `topmostZoneAt()`'s draw-order tiebreak decide zone membership, which is deterministic but
+  meaningless (watch point 8). Most furniture now sits at negative page coordinates;
+  `topmostZoneAt()` is sign-agnostic (verified at ticket 14's `-review`).
 
 ## Tests
 

@@ -70,8 +70,9 @@
   invariant** (*table-layout* ticket 13, 2026-08-08 — a different ticket 13 from the
   `tabletop-physics` one; see `history.md`). `ensurePlayerArea` (`tableFurniture.ts`) draws a
   locked `mtg-zone` with `zone: "command"` per seat, no interaction hooks; `cardLayout.ts`
-  guarantees a 20-unit gap between every pair of zone boxes, asserted pairwise in
-  `test/cardLayout.test.ts` — see watch point 8. Pre-existing tables keep their old furniture
+  guarantees a 20-unit gap between every pair of zone boxes — since table-layout ticket 14
+  ("the square", `5eeac70`), across all four compass seats AND the centered Stack — asserted
+  pairwise in `test/cardLayout.test.ts` — see watch point 8. Pre-existing tables keep their old furniture
   (no Command Zone) because `ensurePlayerArea` never redraws; detection degrades gracefully.
 - `MtgZoneShapeUtil` defines **no** `onClick`/`onTranslateEnd`/`onDragShapesOver` — see
   `architecture.md`'s "Ticket 13" section for why that's provably safe rather than just
@@ -174,21 +175,24 @@
    `apps/tabletop/test/cardLayout.test.ts` with a comment naming exactly this watch point's
    reason — an overlap would resolve by draw order, deterministic but semantically meaningless.
    So today "first match" and "correct match" are the same thing by asserted construction.
-   **"The square"** (`.scratch/tabletop-table-layout/issues/10-the-square.md`, decided
-   2026-08-08, not yet built — see `apps/tabletop/DESIGN.md`'s "The square" section) moves player
-   areas from the row into compass slots (N/E/S/W) packed around a fixed-size centered Stack. If
-   that packing puts E/W zones close to the Stack's corners, overlapping or abutting zone AABBs
-   become possible for the first time, and `topmostZoneAt()`'s z-order tie-break (greatest
-   `index`, not proximity, not which zone visually contains more of the card) — now shared by
-   *both* callers (`MtgCardShapeUtil.zoneAt()` and `MtgZoneShapeUtil`'s armed-state check) — would
-   decide the winner for both at once. Flagged during the grilling session for "the
-   square" as a risk worth recording before implementation starts, not yet a bug (the square
-   itself hasn't touched any code). Whoever builds
-   "the square" should re-check `topmostZoneAt()` against the actual N/E/S/W geometry once it's
-   drawn, and consider closest-match-by-distance or smallest-containing-zone as a tiebreak if AABBs do
-   end up overlapping — the pairwise-disjointness test in `cardLayout.test.ts` will fail loudly
-   if the square's geometry breaks the gap invariant, which is a feature: it forces the tiebreak
-   question to be answered explicitly rather than silently inherited.
+   **"The square" is built now** (table-layout ticket 14, `5eeac70`, 2026-08-08 — designed in
+   `.scratch/tabletop-table-layout/issues/10-the-square.md`, built by `issues/14-*.md`; see
+   `apps/tabletop/DESIGN.md`): player areas sit in compass slots (S/N/E/W by join order) around a
+   fixed 1000×1000 Stack square centered on the board origin (`playerAreaOrigin(seatIndex)` /
+   `stackBounds()` in `cardLayout.ts`). **The tiebreak question this watch point raised never had
+   to be answered** — the square's geometry keeps every zone AABB at least a `GAP`-wide (20-unit)
+   empty band from every other, across ALL FOUR seats and the Stack. The load-bearing choice:
+   `STACK_SIZE = 1000` deliberately exceeds `PLAYMAT_H` (952), so E/W areas (vertically centered,
+   y in [-476, 476]) stay inside the Stack's vertical band and never overlap N/S areas (beyond
+   ±600). Asserted pairwise in `apps/tabletop/test/cardLayout.test.ts` ("keeps every zone AABB at
+   least a GAP apart, across all four seats and the Stack") via a `separation()` helper requiring
+   `>= GAP` — strengthened from the old bare no-overlap check at this owner's `-review` ask. Two
+   residual cautions: (a) most furniture now lives at **negative** page coordinates —
+   `topmostZoneAt()` was verified sign-agnostic during that review (pure page-bounds comparison),
+   but any future hit-test change must not assume positive coords; (b) if anyone shrinks
+   `STACK_SIZE` below `PLAYMAT_H` or repacks the compass slots, the pairwise test fails loudly,
+   which is the feature: it forces the tiebreak question (closest-match / smallest-containing-zone
+   vs. z-order) to be answered explicitly rather than silently inherited.
 
 9. **A new reactive-read pattern exists now — a `computed()` shared per-`Editor`, read via a
    `use*` hook, that writes nothing to the store.** `zoneHitTest.ts`'s `armedZoneIdSignal`/

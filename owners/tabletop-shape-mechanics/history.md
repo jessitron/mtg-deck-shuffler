@@ -305,6 +305,49 @@ but two of its consequences land squarely in this KB's charge:
   furniture and get no Command Zone. Zone detection just never reports `command` there;
   nothing breaks.
 
+## Table-layout ticket 14: "the square" built — watch point 8's risk resolved by geometry, not a new tiebreak (2026-08-08, `5eeac70`)
+
+Implements the design recorded above ("The Square — design decided"). `.scratch/tabletop-table-layout/issues/14-build-the-square.md`, worktree `ticket-14-the-square`. Placement territory (`cardLayout.ts`/`tableFurniture.ts` geometry), but it discharges this KB's biggest open question and changes two things zone detection leans on:
+
+- **Watch point 8's "square" risk is closed — the tiebreak question never had to be answered.**
+  The row layout is gone: seats take compass slots (S, N, E, W by join order) around a fixed
+  1000×1000 Stack square centered on the board origin (`STACK_SIZE`, `stackBounds()`,
+  `playerAreaOrigin(seatIndex)` in `cardLayout.ts`; `playerAreaX`/`stackStripBounds` deleted).
+  `STACK_SIZE = 1000` was chosen specifically to exceed `PLAYMAT_H` (952), so the E/W areas —
+  vertically centered on the origin, y in [-476, 476] — stay inside the Stack's vertical band and
+  can never overlap the N/S areas (which sit beyond ±600). The disjointness invariant is now
+  asserted **across all four seats AND the Stack**, and strengthened from "no overlap" to "at
+  least a `GAP`-wide (20-unit) empty band between every pair of zone AABBs" — a `separation()`
+  helper in `apps/tabletop/test/cardLayout.test.ts` ("keeps every zone AABB at least a GAP apart,
+  across all four seats and the Stack"), per this owner's `-review` ask. `topmostZoneAt()`'s
+  first-match-by-z-order semantics are unchanged and still fine, because geometry keeps first
+  match and correct match identical.
+- **Most furniture now sits at negative page coordinates.** `topmostZoneAt` was verified
+  sign-agnostic during this owner's `-review` (it compares page bounds, no assumption of positive
+  coords). The camera risk the review flagged — tldraw opens with page (0,0) at the viewport's
+  top-left, so a centered-on-origin layout is mostly off-screen, breaking Playwright's
+  actionability checks — is handled in `TablePage.tsx`: `aimCameraAtTheTable()` on mount calls
+  `editor.zoomToFit()`, or, if the table is empty at mount, listens on the store with
+  `{ scope: "document", source: "remote" }` and zooms once on the first **remote** shape arrival.
+  `source: "remote"` is load-bearing: a player's own first stroke on an empty table must not yank
+  their camera; server-injected furniture/cards arrive as remote. A tldraw deep link (`?d=` in
+  the URL) suppresses the auto-zoom entirely.
+- **`ensureStackStripWidth` is now `ensureStackDrawn`** (`tableFurniture.ts`): draws the fixed
+  Stack square once, guarded by `store.get(stackId)` existence rather than seat count; later seat
+  joins are a no-op. This makes the z-order-promotion bug tabletop-physics ticket 13 fixed
+  (Stack silently jumping to top of z-order on every seat join) unreproducible **by construction**
+  — there is no longer a "widen the existing Stack" code path at all.
+- `stackCardPosition(stackCount)` lost its `seatIndex` parameter — stack cards cascade from the
+  square's top-left. The cascade walks out of the square around the ~23rd simultaneous stack
+  card; cosmetic only (cards are *placed* there, not zone-detected there).
+- All 15 Playwright verification specs pass with the new layout, including
+  `verify-drag-identity` and `verify-zone-armed`; `verify-seat-joined.spec.ts` was rewritten
+  (Stack fixed instead of widening; zone counts now include the Command Zone: 6 after one seat,
+  11 after two).
+
+Full detail: watch point 8 rewritten in `interactions.md`; `files.md`'s `cardLayout.ts`/
+`tableFurniture.ts`/`TablePage.tsx` entries updated.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,
