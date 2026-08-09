@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: prototype
-Status: needs-triage
+Status: claimed
 
 ## Question
 
