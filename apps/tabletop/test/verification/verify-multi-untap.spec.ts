@@ -80,7 +80,7 @@ async function marqueeSelect(page: Page, instanceIds: string[]) {
   await page.waitForTimeout(500);
 }
 
-const ts = () => `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+const uniqueSuffix = () => `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
 
 test("clicking one selected card taps the whole selection, and one Ctrl+Z reverts it together, leaving an earlier tap alone", async ({
   page,
@@ -92,9 +92,9 @@ test("clicking one selected card taps the whole selection, and one Ctrl+Z revert
 
   // A goes on the Stack — far from the battlefield, so the marquee over B+C
   // can't catch it. B and C land at distinct battlefield grid positions.
-  const idA = `multi-a-${ts()}`;
-  const idB = `multi-b-${ts()}`;
-  const idC = `multi-c-${ts()}`;
+  const idA = `multi-a-${uniqueSuffix()}`;
+  const idB = `multi-b-${uniqueSuffix()}`;
+  const idC = `multi-c-${uniqueSuffix()}`;
   await placeCard(page, baseURL, tableSlug, idA, { zoneHint: "stack" });
   await placeCard(page, baseURL, tableSlug, idB);
   await placeCard(page, baseURL, tableSlug, idC);
@@ -123,8 +123,8 @@ test("propagation pushes the clicked card's new state, not a per-card toggle", a
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const idB = `mixed-b-${ts()}`;
-  const idC = `mixed-c-${ts()}`;
+  const idB = `mixed-b-${uniqueSuffix()}`;
+  const idC = `mixed-c-${uniqueSuffix()}`;
   await placeCard(page, baseURL, tableSlug, idB);
   await placeCard(page, baseURL, tableSlug, idC);
   await zoomToFit(page);
@@ -140,7 +140,7 @@ test("propagation pushes the clicked card's new state, not a per-card toggle", a
   await expectTapped(page, idB, true);
   await expectTapped(page, idC, true);
 
-  // And the other direction: click B again (tapped -> untapped) unteps both.
+  // And the other direction: click B again (tapped -> untapped) untaps both.
   await page.waitForTimeout(500);
   await page.locator(`#shape\\:card-${idB}`).click();
   await expectTapped(page, idB, false);
@@ -160,8 +160,8 @@ test("another player's undo stack stays independent of a multi-untap", async ({ 
       expect(bob.locator(".tl-canvas")).toBeVisible({ timeout: 15000 }),
     ]);
 
-    const idB = `2client-b-${ts()}`;
-    const idC = `2client-c-${ts()}`;
+    const idB = `2client-b-${uniqueSuffix()}`;
+    const idC = `2client-c-${uniqueSuffix()}`;
     await placeCard(alice, baseURL, tableSlug, idB);
     await placeCard(alice, baseURL, tableSlug, idC);
     await expect(bob.locator(`#shape\\:card-${idB}`)).toBeAttached();
