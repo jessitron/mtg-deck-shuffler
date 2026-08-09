@@ -92,9 +92,12 @@ when the license state is `unlicensed-production` — replacing the canvas with 
 "Production" is decided **by URL alone**: any HTTPS request to a non-loopback hostname.
 **That's why the deployed table is http-only** (decided 2026-08-09, after the evaluation
 key expired with the hobby-license application stuck in tldraw's queue): plain http is
-exempt from the gate, and this app has no auth to protect anyway. The ALB serves a
-single HTTP:80 listener — no 443, so https:// refuses to connect rather than serving a
-canvas that blanks (`k8s/ingress.yaml` has the IngressGroup story). `chooseLicenseKey`
+exempt from the gate, and this app has no auth to protect anyway. The main ingress
+serves a single HTTP:80 listener; a companion ingress (`k8s/ingress-https-downgrade.yaml`)
+owns the 443 listener and 301s https-first browsers down to http — Firefox and Chrome
+try https:// for typed URLs, and with no 443 listener at all they showed "can't
+connect" instead of falling back (`k8s/ingress.yaml` has the IngressGroup story).
+`chooseLicenseKey`
 (`src/client/chooseLicenseKey.ts`, unit-tested) withholds any baked key wherever the
 gate can't fire, so a stale key in `.be` can't blank anything.
 

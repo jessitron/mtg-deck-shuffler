@@ -67,6 +67,7 @@ kubectl apply -f k8s/collector.yaml
 sed "s|<your-ecr-repo>/mtg-tabletop:latest|${FULL_IMAGE_NAME}|g" k8s/deployment.yaml | kubectl apply -f -
 kubectl apply -f k8s/service.yaml
 kubectl apply -f k8s/ingress.yaml
+kubectl apply -f k8s/ingress-https-downgrade.yaml
 
 echo ""
 echo "⏳ Waiting for deployment to complete..."

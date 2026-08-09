@@ -13,8 +13,9 @@ metadata:
     # shared only-one-alb-please group: ssl-redirect is EXCLUSIVE across an
     # IngressGroup ("once defined on a single Ingress, it impacts every Ingress
     # within IngressGroup"), so there is no per-host http carve-out there.
-    # No 443 listener at all: https:// refuses to connect, which beats serving
-    # a canvas that blanks 5 seconds after load.
+    # This ingress carries no 443 listener; https-first browsers are caught by
+    # ingress-https-downgrade.yaml (same group, 443 only), which 301s them
+    # down to http — never a canvas that blanks 5 seconds after load.
     alb.ingress.kubernetes.io/group.name: tabletop-http
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
