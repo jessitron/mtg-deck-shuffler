@@ -75,10 +75,11 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
             <div style={sleeve} />
           ) : sleeve ? (
             // Face image centered in the sleeve, a ring of color on every
-            // side — the IRL sleeve-border look. The image keeps its own
-            // rendering (Scryfall art carries its own printed corners).
+            // side — the IRL sleeve-border look. Not `className="tl-image"`:
+            // that rule is `position: absolute; inset: 0`, which anchors to
+            // .tl-image-container and escapes this div's padding entirely.
             <div style={{ ...sleeve, padding: w * 0.03 }}>
-              <img className="tl-image" style={{ width: "100%", height: "100%" }} src={src} alt={cardName} draggable={false} />
+              <img style={{ display: "block", width: "100%", height: "100%" }} src={src} alt={cardName} draggable={false} />
             </div>
           ) : (
             // Unsleeved: today's bare look. An unsleeved faceDown card should
