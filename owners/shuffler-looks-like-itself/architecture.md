@@ -304,5 +304,9 @@ specimens (`design-candidates.css`) mirroring the inline treatment in
 `MtgCounterShapeUtil.tsx` (the `.hand-count` recipe, 44px). Both mock precedents were
 followed: labelled a mock in its own `section-note`, staged white. It follows the same
 inline-`CSSProperties` reality as `mtg-zone` — the real look lives in the shape's `.tsx`, so
-the mock hand-mirrors it and can drift; the section-note names the real file. Awaiting
-Jess's sign-off — see [open-choices.md](open-choices.md).
+the mock hand-mirrors it and can drift; the section-note names the real file. **Known,
+accepted drift since the 2026-08-08 shrink-to-fit follow-up:** the mock's `font-size: 14px`
+is the *base* size only — the real shape shrinks long labels and breaks lines against the
+circle's chords (`counterTextFit.ts`); the `.counter-mock` comment says so. A static
+specimen can't show the shrink. Awaiting Jess's sign-off — see
+[open-choices.md](open-choices.md).
