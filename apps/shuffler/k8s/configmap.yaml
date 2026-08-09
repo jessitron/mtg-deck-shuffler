@@ -12,5 +12,8 @@ data:
   OTEL_METRICS_EXPORTER: "none"
   OTEL_LOG_LEVEL: "info"
   TABLETOP_URL: "http://mtg-tabletop-service"
-  TABLETOP_PUBLIC_URL: "https://table.jessitron.honeydemo.io"
+  # http on purpose: the Tabletop's ALB has no 443 listener (tldraw license
+  # gate — see apps/tabletop/k8s/ingress.yaml). Plain navigation from this
+  # https app to an http link is fine; it's only used in <a href>.
+  TABLETOP_PUBLIC_URL: "http://table.jessitron.honeydemo.io"
   SHUFFLER_PUBLIC_URL: "https://mtg.jessitron.honeydemo.io"

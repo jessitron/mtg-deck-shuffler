@@ -27,18 +27,6 @@ section is just a wall between Jess and the live work.
     to claim.
   ← mountain: overhead
 
-- [ ] `tldraw-license-key-expired` Prod tabletop deploys are blocked until a new tldraw key arrives
-  - The evaluation key in `.be` expired 2026-08-09 (a day before its printed `2026-08-10` — tldraw
-    parses expiry as UTC midnight then rebuilds it from local date parts, so it trips early west
-    of UTC). Localhost is immune since `21ff05b` (TablePage passes empty-string `licenseKey` on
-    loopback), but the deployed host still needs a real key.
-  - ⚠️ **Don't deploy the Tabletop until then**: the expired key satisfies `deploy.sh`'s
-    presence check, so the deploy proceeds and ships a canvas that blanks 5s after load —
-    `check-deployed-canvas.mjs` only catches it after the rollout has already wiped the rooms.
-  - Key status (2026-08-09): hobby license application pending, past tldraw's stated 2-week
-    turnaround. Plan B: a 100-day enterprise trial key, to be requested when ready for real
-    testing. Whichever lands first goes in the repo-root `.be` as `TLDRAW_LICENSE_KEY`.
-
 - [ ] `design-text-link-specimen` Stage the nav-link idiom (text links) on `/design`
   - Surfaced 2026-08-09 by the `shuffler-looks-like-itself` update after `6b6b927` (Tabletop
     landing page's Shuffler link) named the idiom: white `--font-chrome` on dark, two live

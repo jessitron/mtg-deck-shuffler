@@ -5,9 +5,10 @@
 # (mtg-deck-shuffler-secret) so browser spans land in the same Honeycomb
 # environment as everything else (mtg-deck-shuffler).
 #
-# Reached same-origin at https://table.jessitron.honeydemo.io/v1/traces via a
-# path rule on the shared ALB (see ingress.yaml) — so prod needs no CORS at
-# all; localhost origins are allowed for local dev against the prod collector.
+# Reached same-origin at http://table.jessitron.honeydemo.io/v1/traces via a
+# path rule on the Tabletop's own ALB (see ingress.yaml) — so prod needs no
+# CORS at all; localhost origins are allowed for local dev against the prod
+# collector.
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -47,7 +48,10 @@ data:
             endpoint: 0.0.0.0:4318
             cors:
               allowed_origins:
-                - https://table.jessitron.honeydemo.io
+                # http on purpose — the deployed table is http-only (tldraw
+                # license gate, see ingress.yaml). Wrong scheme here means the
+                # browser's OTLP preflight fails and telemetry silently dies.
+                - http://table.jessitron.honeydemo.io
                 - http://localhost:*
     service:
       extensions:
