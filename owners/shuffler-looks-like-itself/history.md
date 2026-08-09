@@ -1297,3 +1297,57 @@ adding-a-stylesheet watch points name the real doors (`additionalStyles` for EJS
 `additionalStylesheets` on `formatPageWrapper`, `stylesheets` only on the shell itself);
 the README's Fonts row and the font-token notes say **two** `<head>` sources, not three.
 `apps/shuffler/CLAUDE.md`'s Templating and fonts bullets were updated in the commit itself.
+
+## 2026-08-08 — the counter disc: first canvas component to arrive pre-staged, and the `.hand-count` recipe went fleet
+
+`4c64ef2` **Counters ride along on a card (tabletop-physics ticket 18)**
+
+A new player-visible canvas component: `mtg-counter`, the disc a player drops onto a card —
+free editable text, blank by default, 44px, riding the card via tldraw parenting
+(`MtgCounterShapeUtil.tsx`; the attach/detach mechanics belong to the tabletop-shape-mechanics
+owner and are recorded there).
+
+**The treatment is the `.hand-count` recipe, and staging rode in the same commit.** This owner's
+`-context` recommended porting `game.css` → `.hand-count` — the app's one existing count disc,
+fully tokenized — rather than inventing a chip: `--deep-space` fill, `var(--narrow-border)`
+solid `--dark-pink` ring, `--light-pink` text in `--font-chrome`, `border-radius: 50%` (count
+discs are a sanctioned round category). The implementation staged it on `/design`
+(§ `#counter-disc`, badge `candidate`, `.counter-mock` in `design-candidates.css`, on
+`.stage-white` per the ticket-11 precedent) **in the same commit that built the shape** — so
+the component shipped visible and marked pending rather than fully-formed and smuggled.
+**Appearance is staged-not-decided**; Jess's sign-off converts the badge and names the chip
+pattern in the README. If she signs off, "small count disc: deep-space fill / narrow dark-pink
+ring / light-pink text" becomes the de-facto chip pattern with two consumers.
+
+**Proportional geometry, third exercise of the playmat-radius rule.** Border width is
+`h * (3/44)` px (commented `--narrow-border, proportional`) and font-size `h * 0.32`, computed
+from `props.h` at render time — resize stays enabled (aspect-ratio locked, which is also what
+makes `border-radius: 50%` safe; on a non-square box a percentage radius draws an ellipse) and
+the disc keeps its proportions. A fixed `3px`/`14px` would have drifted as the disc scales.
+
+**The fleet's one sanctioned `outline: none` shipped.** The in-place editing input is
+invisible chrome — transparent, inherits the disc, native focus outline suppressed with a
+comment naming the canvas exemption (tldraw owns focus/selection indication; the Shuffler's
+global ring doesn't exist on the Tabletop, and the "never write `outline: none`" ban governs
+DOM stylesheets). Recorded in README → tldraw limits so a lint sweep doesn't "fix" it and
+nobody cites it as DOM precedent.
+
+**An empirical canvas fact worth keeping:** tldraw's own end-of-gesture focus handling beats
+`autoFocus`, ref-callback focus, and a bare-effect focus on a custom editing input — all three
+end with `document.activeElement === body`. The working pattern is `setTimeout(0)` inside a
+`useEffect` keyed on `isEditing`. Mechanics detail, but it's the kind that gets re-debugged.
+
+**What stayed stock, per "record the limit, don't fight it":** the toolbar got one
+`TldrawUiMenuItem` with the stock `geo-ellipse` icon before `DefaultToolbarContent`
+(`TablePage.tsx`) — tldraw chrome, unstyled. The tool's *existence* is an assumption flagged
+for Jess (the spec never said how a player obtains a counter). The indicator is tldraw's
+default box. `toSvg` was skipped, consistent with `mtg-card`/`mtg-zone` — buoyed as
+`custom-shapes-lack-toSvg`, a three-shape gap for one pass, with Orbitron hand-carried into
+the SVG per this KB's standing rule.
+
+**A name collision resolved in ticket 18's favor.** This KB's "coming to this owner" entry
+had been calling the *life counter* (table-layout ticket 12) `mtg-counter`. The type string
+belongs to this shape per the tabletop-physics spec; the life counter needs a new name
+(buoyed as `life-counter-needs-own-name`). README, open-choices and interactions all
+corrected in this `-update` pass — the life counter's appearance is still deliberately
+undecided and still owes this owner a `-context`/`-review`.

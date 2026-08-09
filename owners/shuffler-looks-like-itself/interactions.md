@@ -65,9 +65,12 @@
   `issues/10-the-square.md` (resolved 2026-08-08) added the fifth tldraw limit (no per-viewer
   rotation). `issues/12-life-totals-and-commander-damage.md` (resolved 2026-08-08) decided a
   **new player-visible surface**: life totals and commander damage as a locked custom
-  `mtg-counter` shape in the name row, placement dictated verbatim by Jess, **appearance
-  deliberately undecided** — the implementation ticket owes this owner a `-context` and
-  `-review` before any font/size/color lands (see the canvas watch points below). It also made
+  shape in the name row (ticket 12 called it `mtg-counter`, but that type string went to
+  tabletop-physics ticket 18's counter disc on 2026-08-08 — the life counter needs its own
+  name, buoyed as `life-counter-needs-own-name`), placement dictated verbatim by Jess,
+  **appearance deliberately undecided** — the implementation ticket owes this owner a
+  `-context` and `-review` before any font/size/color lands (see the canvas watch points
+  below). It also made
   **sleeve color a player-identity signal fleet-wide** (opponent name + sleeve color identifies
   each commander-damage counter; no separate player-color concept; playmats rejected as the
   identity carrier) — so ticket 09's sleeve palette and ticket 11's color plumbing now carry
@@ -148,6 +151,9 @@ Concrete, in rough order of how often they bite.
   per-component focus rule**, and **never write `outline: none`** — that's what three
   now-deleted rules did (`deck-selection.css` ×2 plus `.json-summary` in
   `src/view/debug/state-copy.ts`; it was **three**, not two as this file used to say).
+  One sanctioned exception exists, and it's on the canvas, not in any stylesheet:
+  `MtgCounterShapeUtil.tsx`'s editing input (2026-08-08) — see README → tldraw limits.
+  It is not precedent for DOM pages.
   Two things that do need care:
   - If your new element is focusable but **not** one of those tags (a `div` with a click
     handler, say), give it a real tag or a `tabindex` so the global rule reaches it.
@@ -456,8 +462,23 @@ not by recomputing new numbers.**
   is its own design decision needing its own sign-off — the classic ride-along. If an
   implementation ticket for `mtg-card` reaches you with a custom indicator in it, that's the
   thing to block.
-- **The `mtg-counter` shape (life totals / commander damage) has decided placement and
-  UNDECIDED appearance** (ticket 12, 2026-08-08). The name-row layout is Jess's verbatim
+- **`mtg-counter` is the counter DISC (ticket 18), and its treatment is staged, not decided
+  (2026-08-08).** `MtgCounterShapeUtil.tsx` re-expresses `game.css` → `.hand-count`'s recipe
+  inline with fleet tokens (deep-space fill, `var(--narrow-border)` dark-pink ring,
+  light-pink `--font-chrome` text, 50% radius — count discs are a sanctioned round category),
+  border and font-size proportional to `props.h`. Staged on `/design` § `#counter-disc`
+  awaiting Jess's sign-off — see [open-choices.md](open-choices.md). Concrete watch point:
+  **the chip recipe now lives in three places** — `game.css` → `.hand-count` (the original),
+  `design-candidates.css` → `.counter-mock` (the specimen), and the inline `disc` object in
+  `MtgCounterShapeUtil.tsx`. Changing the chip look means all three, and if Jess rejects the
+  staged look, the mock and the shape change together. Its editing input carries the fleet's
+  one sanctioned `outline: none` (see README → tldraw limits); its indicator is tldraw's
+  default box (a plain rect via `getIndicatorPath` — not a custom treatment, per the
+  indicator rule above).
+- **The LIFE-COUNTER shape (life totals / commander damage) has decided placement and
+  UNDECIDED appearance** (ticket 12, 2026-08-08 — ticket 12 called it `mtg-counter`, a name
+  now taken by the counter disc above; buoyed as `life-counter-needs-own-name`). The
+  name-row layout is Jess's verbatim
   dictation — player name large and left-justified, commander-damage counters then a bigger
   life counter right-justified — but font, exact sizes, and colors beyond the sleeve-color
   swatch were **not** decided. Its implementation ticket must consult this owner's `-context`

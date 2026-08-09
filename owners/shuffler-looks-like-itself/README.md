@@ -91,7 +91,12 @@ furniture becomes a custom `mtg-zone` shape.
   DOM-only, and tldraw owns selection indication for shapes. This is a genuine exemption from
   the "every interactive element gets a visible focus state" rule, not an oversight — say so
   out loud when designing canvas UI instead of inventing a shape-level ring that would fight
-  tldraw's.
+  tldraw's. **First shipped instance of the exemption (2026-08-08, ticket 18):**
+  `MtgCounterShapeUtil.tsx`'s in-place editing `<input>` carries a literal `outline: none`,
+  with a comment naming this exemption. That is the one sanctioned `outline: none` in the
+  fleet — it's a canvas shape, the Shuffler's ban ("never write `outline: none`", choice 5)
+  governs DOM pages, and tldraw owns focus/selection indication here. A design-lint sweep
+  must not "fix" it, and it is not precedent for writing one in any stylesheet.
 - **A locked shape can never be a drop target.** `Editor.getDraggingOverShape`
   (`Editor.ts`, currently around `:6571-6585`) filters `!s.isLocked` **before** it checks
   whether a util defines `onDragShapesOver`/`onDropShapesOver`, and there is no
@@ -288,7 +293,10 @@ decided, not an oversight (2026-08-07, `.scratch/tabletop-physics/issues/04-tap-
 **Sleeve color is a player-identity signal (decided 2026-08-08, ticket 12 of the
 Table-layout map).** On the Tabletop, each player's sleeve color — a solid color, ticket
 09's v1 decision — identifies that player beyond their own card backs: commander-damage
-counters on the coming `mtg-counter` shape are labelled by opponent name + sleeve color.
+counters on the coming life-counter shape are labelled by opponent name + sleeve color.
+(That shape was called `mtg-counter` when ticket 12 wrote it, but the type string went to
+tabletop-physics ticket 18's drag-onto-a-card counter disc on 2026-08-08 — the life counter
+needs its own name, buoyed as `life-counter-needs-own-name` in `TODO.md`.)
 **There is no separate player-color concept**, deliberately, and playmats (images) were
 explicitly rejected as the identity carrier. Two consequences: whatever palette the sleeve
 picker offers must keep players distinguishable at a glance (two near-identical sleeves now

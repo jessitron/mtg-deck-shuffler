@@ -500,7 +500,9 @@ self-rendering custom shape.
   the first *Tabletop-only* rule does not. Inline styles are the status quo by inertia, not by
   choice. Ticket 05 (tap motion) still wants one; ticket 11 (what a zone looks like) no longer
   does — it landed as inline `CSSProperties` objects in `MtgZoneShapeUtil.tsx` (ticket 14,
-  2026-08-08, see below), not CSS, so it didn't end up needing a stylesheet after all. Whoever
+  2026-08-08, see below), not CSS, so it didn't end up needing a stylesheet after all. Ticket
+  18's counter disc (2026-08-08) made the same call — inline `CSSProperties` with `var()`
+  tokens in `MtgCounterShapeUtil.tsx`, deliberately not starting a stylesheet. Whoever
   writes the Tabletop's first CSS rule still decides where it lives — and it must not be
   answered by starting a `:root` there.
 - **~~Still open: font tokens.~~ DECIDED and shipped 2026-08-07 (`f79bc7d`).** Jess: *"yeah, go
@@ -569,9 +571,33 @@ self-rendering custom shape.
   needs a Tabletop stylesheet (`tabletop-css-tokens`, above) to land in. This is not a
   `/design` `.choice` yet; staging it would mean animating a specimen, and the gallery has no
   Tabletop stage.
-- **Coming to this owner: the `mtg-counter` shape's appearance**
+- **Staged, awaiting Jess's sign-off: the counter disc (`mtg-counter`, tabletop-physics
+  ticket 18, built 2026-08-08).** The drag-onto-a-card counter — free editable text, blank by
+  default — shipped with a treatment ported from `.hand-count` in `game.css` (the app's one
+  existing count disc, fully tokenized): `--deep-space` fill, `var(--narrow-border)` solid
+  `--dark-pink` ring, `--light-pink` text in `--font-chrome`, `border-radius: 50%` (count
+  discs are a sanctioned round category), 44px default. Border width and font-size are
+  **proportional to `props.h`** (`h * 3/44` px, `h * 0.32`) so resize keeps proportions — the
+  playmat-radius lesson applied. Implemented as inline `CSSProperties` in
+  `MtgCounterShapeUtil.tsx` (still no Tabletop ship-local stylesheet — ticket 18 deliberately
+  didn't start one). **Staged on `/design` § `#counter-disc` (`.counter-mock` in
+  `design-candidates.css`, badge `candidate`) in the same commit — this is
+  staged-not-decided.** If Jess signs off: retag the specimen `badge-standard`, and the
+  "small count disc: deep-space fill / narrow dark-pink ring / light-pink text" recipe
+  becomes a named chip pattern in the README's design language (the winning CSS stays inline
+  in the shape — there's no stylesheet to move it to). Two riders flagged for her, not
+  decided by this owner: the **toolbar tool** (a `TldrawUiMenuItem` with the stock
+  `geo-ellipse` icon before `DefaultToolbarContent` in `TablePage.tsx` — stock tldraw chrome,
+  no restyling, per "record the limit, don't fight it"; the tool's *existence* is an
+  assumption, the spec never said how a player obtains a counter), and `toSvg` skipped
+  (consistent with `mtg-card`/`mtg-zone`; buoyed as `custom-shapes-lack-toSvg` — a
+  three-shape gap for one pass, Orbitron hand-carried into the SVG per this KB's rule).
+- **Coming to this owner: the life-counter shape's appearance**
   (`.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md`, resolved
-  2026-08-08 — placement + content only). Life totals and commander damage become a locked
+  2026-08-08 — placement + content only). **Naming note: ticket 12 called this shape
+  `mtg-counter`, but that type string now belongs to ticket 18's counter disc (above) per the
+  tabletop-physics spec — the life counter needs its own name, buoyed as
+  `life-counter-needs-own-name`.** Life totals and commander damage become a locked
   custom shape rendering a number with +/- buttons (also directly typeable), in the name row
   above the command zone/library. **Decided**: the row's layout (Jess verbatim — player name
   large, left-justified; commander-damage counters then a bigger life counter,
