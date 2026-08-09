@@ -405,15 +405,9 @@ export function createApp(
       // Create view helpers for EJS template
       const helpers = createPrepViewHelpers(prep);
 
-      // PROTOTYPE (ticket 16): ?variant=A|B|C switches picker mockups on this page.
-      const pickerVariant = ["A", "B", "C"].includes(req.query.variant as string)
-        ? (req.query.variant as string)
-        : "A";
-
       // Render EJS template
       res.render("prepare", {
         prep,
-        pickerVariant,
         ...helpers
       });
     } catch (error) {
