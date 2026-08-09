@@ -4,18 +4,19 @@ What the Tabletop canvas should look like and how it comes into being. This is
 the target for Mountain 2 ("the physics of Magic") at the geography level: zones,
 sizes, and who creates what when. It deliberately says nothing about rules.
 
-Status: **the row layout below is built (2026-08-01), including the Command Zone
-redraw (decided in `.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`,
-built 2026-08-08, ticket 13); the square/compass layout (2026-08-08, decided in
-`.scratch/tabletop-table-layout/issues/10-the-square.md`, see "The square" below)
-is decided but not yet built.** The "playmat grows taller" edge case is still
-separately deferred — see Deferred, below. `src/server/cardLayout.ts`
-and `cardArrival.ts` implement the row-layout geometry as it stood before this
-redraw; the seat-joined trigger lives in `src/server/seatJoined.ts`, and the
-shared shape-drawing helpers in `src/server/tableFurniture.ts`. Building this
-redraw touches those three files, `DESIGN.md`-first. The delta table at the
-bottom describes what the row layout replaced. The original spoken ramble this
-was distilled from is preserved at the end.
+Status: **built through the square/compass layout (decided in
+`.scratch/tabletop-table-layout/issues/10-the-square.md`, built 2026-08-08,
+ticket 14, see "The square" below), which replaced the original row layout
+(2026-08-01) outright. The Command Zone redraw (decided in
+`.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`,
+built 2026-08-08, ticket 13) is in every player area.** The "playmat grows
+taller" edge case is still separately deferred — see Deferred, below.
+`src/server/cardLayout.ts` and `cardArrival.ts` implement this geometry; the
+seat-joined trigger lives in `src/server/seatJoined.ts`, and the shared
+shape-drawing helpers in `src/server/tableFurniture.ts`. Changing the layout
+touches those three files, `DESIGN.md`-first. The delta table at the bottom
+describes what the row layout replaced. The original spoken ramble this was
+distilled from is preserved at the end.
 
 ## The goal
 
@@ -37,34 +38,31 @@ and the stack — before a single card is played.**
 | **Command Zone**| a labeled box beside the library, sized for **two** cards side by side (partner commanders). Home for the commander(s) when not on the battlefield. |
 | **Graveyard**   | a labeled grey box you can drag cards into.                                                                          |
 | **Exile**       | a labeled black box. Physically a sideways pile; here just a smaller box.                                            |
-| **The Stack**   | a shared blue strip above all the player areas. Non-land plays arrive here.                                          |
+| **The Stack**   | a shared square at the center of the table, the player areas around it. Non-land plays arrive here.                  |
 
 "Player area" and "playmat" are _not_ synonyms — the playmat is one part of the
 player area. This distinction is the point of the vocabulary table.
 
 ## The picture
 
-Everything is right side up for everyone. Player areas sit in a **row**, left to
-right, in join order.
+Everything is right side up for everyone. Player areas take **compass slots**
+(S, N, E, W by join order) around a fixed-size Stack square at the center of
+the table — see "The square" below for the slot table and the built geometry.
+Every player area is the same rectangle:
 
 ```
- ┌───────────────────────────────────────────────────────────────────────────────┐
- │  The Stack                                                                    │
- │  (shared; spans all player areas; widens as each seat joins)                  │
- └───────────────────────────────────────────────────────────────────────────────┘
-
-   Jess                                        Sam
- ┌──────────────────────┬────────┬──────────┐ ┌──────────────────────┬────────┬──────────┐
- │                      │ Library│ Command  │ │                      │ Library│ Command  │
- │  playmat             │ (card  │  Zone    │ │  playmat             │ (card  │  Zone    │
- │  = battlefield       │  back) │(2 cards) │ │  = battlefield       │  back) │(2 cards) │
- │                      ├────────┴──────────┤ │                      ├────────┴──────────┤
- │  (image background)  │                   │ │  (image background)  │                   │
- │                      │    Graveyard      │ │                      │    Graveyard      │
- │                      │      (box)        │ │                      │      (box)        │
- │                      ├───────────────────┤ │                      ├───────────────────┤
- │                      │   Exile (box)     │ │                      │   Exile (box)     │
- └──────────────────────┴───────────────────┘ └──────────────────────┴───────────────────┘
+   Jess
+ ┌──────────────────────┬────────┬──────────┐
+ │                      │ Library│ Command  │
+ │  playmat             │ (card  │  Zone    │
+ │  = battlefield       │  back) │(2 cards) │
+ │                      ├────────┴──────────┤
+ │  (image background)  │                   │
+ │                      │    Graveyard      │
+ │                      │      (box)        │
+ │                      ├───────────────────┤
+ │                      │   Exile (box)     │
+ └──────────────────────┴───────────────────┘
  └───────────── one player area ────────────┘
 ```
 
@@ -103,9 +101,11 @@ Today's canvas card is `CARD_W = 170`, `CARD_H = 238`, which fixes the scale at
 | Graveyard box      | 550 × 449                             | the top two-thirds of the space under Library/Command Zone          |
 | Exile box         | 550 × 225                             | the bottom third of that same space, below Graveyard (20 gap between) |
 | Player area       | 2202 × 952                            | playmat + 20 gap + column                                           |
-| Stack strip       | full width of all player areas × ~350 | "taller than a card"                                                |
+| The Stack         | 1000 × 1000, centered on the origin   | a fixed square; must exceed the playmat's height (see "The square") |
 
-Vertical order, top to bottom: **stack strip → player name label → player area**.
+Within each compass slot: the **player name label sits just above the player
+area** (between the Stack and the S seat's playmat — the slot margin is sized
+for it).
 
 Graveyard+Exile width comes from the column's own width (Library + gap + Command
 Zone); their combined height is unchanged from before the redraw — "it fits under
@@ -121,11 +121,11 @@ in `cardLayout.ts` places every seat at a fixed offset by join order — so this
 widens every seat's column by 125 units **and shifts every player area to the
 right of a widened one over to match**.
 
-## The square (decided 2026-08-08, not yet built)
+## The square (decided and built 2026-08-08, ticket 14)
 
-Player areas move from a row into compass slots (N/E/S/W) around a central Stack.
-Decided in `.scratch/tabletop-table-layout/issues/10-the-square.md`; replaces the
-row entirely (no row fallback mode) once built.
+Player areas moved from a row into compass slots (N/E/S/W) around a central Stack.
+Decided in `.scratch/tabletop-table-layout/issues/10-the-square.md`, built in
+ticket 14; replaced the row entirely (no row fallback mode).
 
 **No per-viewer rotation** — confirmed still a hard tldraw limit, and out of scope
 for this fleet (same posture as Mural: it doesn't rotate either). Every player area
@@ -152,9 +152,31 @@ accepted cosmetic quirk, not a defect: it goes away once per-viewer rotation exi
 that would be a second player-area layout to build and maintain for a purely
 cosmetic payoff.
 
-The Stack becomes a **fixed-size square, centered**, same footprint regardless of
+The Stack is a **fixed-size square, centered**, same footprint regardless of
 player count — the board's occupied compass slots change as seats join or leave;
 the Stack's size and position don't.
+
+**Built geometry** (ticket 14; the margins were implementer's choice). Everything
+is centered on the board origin (0, 0) — tldraw's canvas is infinite, negative
+coordinates are fine, and the client zooms to fit the furniture on open
+(`TablePage.tsx`):
+
+- The Stack is **1000 × 1000**, centered on the origin. 1000 was chosen to
+  exceed `PLAYMAT_H` (952) so the E/W areas — vertically centered on the origin,
+  spanning y ∈ [-476, 476] — stay inside the Stack's vertical band and never
+  overlap the N/S areas, which start beyond ±600. Zone detection is first-match
+  by z-order, not closest-match, so **every zone AABB keeps at least a GAP-wide
+  empty band from every other** — asserted across all four seats and the Stack
+  in `test/cardLayout.test.ts`.
+- The **slot margin is 100** (gap + name label + gap) between the Stack's edge
+  and each player area, sized so the S seat's name label fits between the Stack
+  and its playmat; used on all four sides for symmetry.
+- Player-area origins (top-left of the 2202 × 952 rectangle): S (-1101, 600),
+  N (-1101, -1552), E (600, -476), W (-2802, -476) — `playerAreaOrigin()` in
+  `cardLayout.ts`.
+- Cards played to the Stack cascade from the square's top-left
+  (`stackCardPosition`), no longer anchored over the owning seat's playmat —
+  there is no "over the owning seat" in a square.
 
 **Explicitly provisional.** Jess: "this is all gonna be tweaked after play
 experience" — treat this geometry as a first build to react to, not a final layout
@@ -168,14 +190,16 @@ doesn't create anything; shuffling up does.
 **First player shuffles up:**
 
 1. The table (room) is created.
-2. Their player area is drawn: playmat with its background image, library as a card
-   back with a shadow, empty graveyard box, empty exile box, name label above.
-3. The Stack strip is created above, spanning that one player area's width.
+2. Their player area is drawn in the **S compass slot**: playmat with its
+   background image, library as a card back with a shadow, empty graveyard box,
+   empty exile box, name label above.
+3. The Stack square is created at the center of the board.
 
 **Second (third, fourth…) player shuffles up at the same table name:**
 
-1. Their player area is drawn to the **right** of the last one.
-2. The Stack strip widens to span all player areas.
+1. Their player area is drawn in the **next compass slot** (N, then E, then W);
+   the seats already at the table never move.
+2. The Stack doesn't change — same size, same place, at every player count.
 
 **Consequence for the wiring:** the Tabletop needs a message it doesn't have today.
 Player areas are currently allocated lazily, on a seat's _first card_. That's too
@@ -225,7 +249,7 @@ to distinguish:
 - **Lands** skip the stack and go straight to the playmat, filling the **bottom
   half**, left to right; a full row wraps to a new row below it. If there's no room,
   the playmat **grows taller** — impossible in real life, fine here.
-- **Everything else** arrives on the **Stack**, above the playing seat's area so
+- **Everything else** arrives on the **Stack**, at the center of the table where
   everyone can see it.
 
 From the stack, a human drags it where it goes: creature/artifact/enchantment onto
@@ -266,7 +290,7 @@ Nobody is restricted from moving anybody else's cards. That's not an oversight.
 | A "battlefield row" per seat: bare canvas, cards in one horizontal line | A player area with an actual playmat image; lands fill the bottom half and wrap         |
 | Graveyard + exile spots at the end of the row, card-sized               | A right-hand column sized to the playmat: Library + two-card Command Zone on top, Graveyard (top two-thirds) over Exile (bottom third) below |
 | Rows allocated lazily on a seat's first card                            | Player area drawn at shuffle-up, before any card                                        |
-| Stack: a fixed box at top-left                                          | A strip spanning all player areas, widening per seat                                    |
+| Stack: a fixed box at top-left                                          | A fixed square at the center of the table, compass seats (S, N, E, W) around it (ticket 14; was a widening strip above a row until then) |
 | No library on the canvas                                                | Library as a card back with a shadow                                                    |
 | Card arrival is the only Shuffler → Tabletop message                    | Plus a seat-joined message carrying the playmat image                                   |
 | `zoneHint: battlefield` auto-places in a row                            | Lands auto-place; nothing else is auto-arranged                                         |

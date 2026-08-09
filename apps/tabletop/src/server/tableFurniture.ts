@@ -10,7 +10,7 @@ import {
   exileBounds,
   graveyardBounds,
   nameLabelPosition,
-  stackStripBounds,
+  stackBounds,
 } from "./cardLayout.js";
 
 // ============================================================================
@@ -290,7 +290,7 @@ export async function ensurePlayerArea(
     } as any);
   });
 
-  await ensureStackStripWidth(entry, pageId);
+  await ensureStackDrawn(entry, pageId);
 
   // Attributes on the request span, not an event: this always runs inside the
   // request that caused it (handleSeatJoined, or defensively handleCardArrival).
@@ -306,23 +306,32 @@ export async function ensurePlayerArea(
 }
 
 /**
- * Create or widen the shared Stack strip to span every player area joined so
- * far. The shape id is deterministic (one Stack per table), so widening an
- * existing strip must reuse its current `index` rather than minting a fresh
- * one — a new seat joining (and the Stack widening) must not silently
- * promote the Stack to the top of z-order over whatever else was placed
- * above it since (tabletop-physics ticket 13).
+ * Draw the shared Stack — a fixed-size square centered on the origin, the
+ * same footprint at every player count — the first time a seat joins. The
+ * shape id is deterministic (one Stack per table); once it exists, later
+ * joins are a no-op, which also means its z-order `index` can never be
+ * silently promoted over whatever was placed above it since (the widening
+ * bug tabletop-physics ticket 13 fixed).
  */
-export async function ensureStackStripWidth(entry: RoomEntry, pageId: string): Promise<void> {
-  const seatCount = entry.seats.size;
-  if (seatCount === 0) return;
-  const bounds = stackStripBounds(seatCount);
+export async function ensureStackDrawn(entry: RoomEntry, pageId: string): Promise<void> {
+  if (entry.seats.size === 0) return;
+  const bounds = stackBounds();
   const stackId = createShapeId(`region-stack-${entry.tableName}`);
   await entry.room.updateStore((store) => {
-    const existing = store.get(stackId);
-    const index = existing?.typeName === "shape" ? existing.index : nextIndex(entry.tableName);
+    if (store.get(stackId)) return;
     store.put(
-      zoneShape({ id: stackId, pageId, x: bounds.x, y: bounds.y, w: bounds.w, h: bounds.h, label: "The Stack", index, zone: "stack", seatId: null })
+      zoneShape({
+        id: stackId,
+        pageId,
+        x: bounds.x,
+        y: bounds.y,
+        w: bounds.w,
+        h: bounds.h,
+        label: "The Stack",
+        index: nextIndex(entry.tableName),
+        zone: "stack",
+        seatId: null,
+      })
     );
   });
 }

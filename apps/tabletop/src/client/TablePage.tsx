@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { defaultShapeUtils, Tldraw, TLAssetStore } from "tldraw";
+import { defaultShapeUtils, Editor, Tldraw, TLAssetStore } from "tldraw";
 import "tldraw/tldraw.css";
 import { useSync } from "@tldraw/sync";
 import { setGlobalAttrs, currentTraceparent, inSpan } from "./observability";
@@ -37,6 +37,29 @@ const licenseKey = import.meta.env.VITE_TLDRAW_LICENSE_KEY || undefined;
 // v0 asset store: no upload service, so pasted/dropped images are inlined as
 // data URLs (they sync as part of the document). Server-injected card shapes
 // carry their own Scryfall URLs and never touch this path.
+// The table is laid out around the board origin (DESIGN.md "The square"), so
+// most furniture sits at negative page coordinates — but tldraw's default
+// camera opens with page (0,0) at the viewport's top-left, onto mostly empty
+// canvas. Zoom to the furniture on mount — or, on a still-empty table, once
+// the first shape arrives — unless a deep link (?d=) already says where to look.
+function aimCameraAtTheTable(editor: Editor) {
+  if (new URLSearchParams(window.location.search).has("d")) return;
+  if (editor.getCurrentPageShapeIds().size > 0) {
+    editor.zoomToFit();
+    return;
+  }
+  // Remote-only: the first stroke a player draws themselves must not yank
+  // their own camera.
+  const stopListening = editor.store.listen(
+    () => {
+      if (editor.getCurrentPageShapeIds().size === 0) return;
+      stopListening();
+      editor.zoomToFit();
+    },
+    { scope: "document", source: "remote" }
+  );
+}
+
 const inlineAssets: TLAssetStore = {
   upload: async (_asset, file) => {
     const src = await new Promise<string>((resolve, reject) => {
@@ -85,7 +108,7 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
       {store.status === "loading" ? (
         <div style={centered}>Joining table &ldquo;{tableSlug}&rdquo;…</div>
       ) : (
-        <Tldraw store={store.store} deepLinks licenseKey={licenseKey} shapeUtils={shapeUtils} />
+        <Tldraw store={store.store} deepLinks licenseKey={licenseKey} shapeUtils={shapeUtils} onMount={aimCameraAtTheTable} />
       )}
     </div>
   );

@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import type { Server } from "node:http";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
-import { playmatBounds, graveyardBounds, stackStripBounds } from "../src/server/cardLayout";
+import { playmatBounds, graveyardBounds, stackBounds } from "../src/server/cardLayout";
 
 /**
  * A5/JES-140: POST /api/tables/:tableName/cards — the seam the Spine absorbs.
@@ -78,9 +78,9 @@ describe("card arrival", () => {
       face: "front",
       tapped: false,
     });
-    const stackBounds = stackStripBounds(1);
-    expect(shapes[0].x).toBeGreaterThanOrEqual(stackBounds.x);
-    expect(shapes[0].y).toBeGreaterThanOrEqual(stackBounds.y);
+    const stack = stackBounds();
+    expect(shapes[0].x).toBeGreaterThanOrEqual(stack.x);
+    expect(shapes[0].y).toBeGreaterThanOrEqual(stack.y);
     // no index anywhere in what the tabletop stores
     expect(JSON.stringify(shapes[0].meta)).not.toContain("Index");
   });
@@ -111,7 +111,7 @@ describe("card arrival", () => {
 
     await post("arrival-zones", cardPlayed({ zoneHint: "stack", cardName: "Llanowar Elves" }));
     const stackCard = shapesOf("arrival-zones").find((s) => s.props.cardName === "Llanowar Elves")!;
-    expect(stackCard.y).toBeLessThan(land.y); // the Stack sits above the player areas
+    expect(stackCard.y).toBeLessThan(land.y); // the centered Stack sits above the S seat's playmat
   });
 
   it("allocates player areas per seatId in join order, keyed by seat not name", async () => {
@@ -119,7 +119,9 @@ describe("card arrival", () => {
     await post("arrival-rows", cardPlayed({ zoneHint: "battlefield", initiator: { seatId: "seat-B", playerName: "Sam" } }));
     const shapes = shapesOf("arrival-rows");
     expect(shapes).toHaveLength(2);
-    expect(shapes[0].x).not.toBe(shapes[1].x); // same display name, different seats, different player areas
+    // Same display name, different seats, different player areas. S and N
+    // share an x (both centered on the Stack), so compare full positions.
+    expect({ x: shapes[0].x, y: shapes[0].y }).not.toEqual({ x: shapes[1].x, y: shapes[1].y });
   });
 
   it("puts a graveyard-hinted card in the player's graveyard box", async () => {

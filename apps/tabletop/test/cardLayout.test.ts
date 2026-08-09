@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   GAP,
+  CARD_W,
   PLAYMAT_W,
   PLAYMAT_H,
   COLUMN_W,
@@ -8,19 +9,24 @@ import {
   GRAVEYARD_H,
   EXILE_H,
   PLAYER_AREA_W,
+  STACK_SIZE,
   type Bounds,
   playmatBounds,
   libraryBounds,
   commandZoneBounds,
   exileBounds,
   graveyardBounds,
-  stackStripBounds,
+  stackBounds,
+  stackCardPosition,
   landPosition,
-  playerAreaX,
+  playerAreaOrigin,
 } from "../src/server/cardLayout";
 
-function overlaps(a: Bounds, b: Bounds): boolean {
-  return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+/** Smallest empty band between two AABBs on either axis; negative means overlap. */
+function separation(a: Bounds, b: Bounds): number {
+  const dx = Math.max(b.x - (a.x + a.w), a.x - (b.x + b.w));
+  const dy = Math.max(b.y - (a.y + a.h), a.y - (b.y + b.h));
+  return Math.max(dx, dy);
 }
 
 function seatZones(seatIndex: number): Record<string, Bounds> {
@@ -37,6 +43,7 @@ function seatZones(seatIndex: number): Record<string, Bounds> {
  * JES-140 geometry — apps/tabletop/DESIGN.md's numbers, checked exactly so a
  * future tweak to CARD_W/CARD_H can't silently drift the playmat proportions.
  * Command Zone redraw: .scratch/tabletop-table-layout/issues/13.
+ * The square (compass seats): .scratch/tabletop-table-layout/issues/14.
  */
 describe("cardLayout — player area geometry", () => {
   it("derives the playmat at 9.6 x 4 cards (1632 x 952)", () => {
@@ -86,35 +93,70 @@ describe("cardLayout — player area geometry", () => {
     expect(exile.w).toBe(COLUMN_W);
     expect(exile.y + exile.h).toBe(mat.y + mat.h);
   });
+});
 
-  // Zone detection resolves an overlapping point to the topmost zone by
-  // z-order, and furniture z-order is chronological (draw order), not
-  // semantic — so overlapping zones would resolve deterministically but
-  // meaninglessly. Strict disjointness is the guarantee.
-  it("keeps every zone bounding box disjoint, within and between player areas", () => {
-    const zones = [
-      ...Object.entries(seatZones(0)).map(([name, b]) => [`seat0.${name}`, b] as const),
-      ...Object.entries(seatZones(1)).map(([name, b]) => [`seat1.${name}`, b] as const),
-    ];
+describe("cardLayout — the square (compass seats around a centered Stack)", () => {
+  const stack = stackBounds();
+
+  it("fixes the Stack as a square centered on the origin, independent of seat count", () => {
+    expect(stack.w).toBe(STACK_SIZE);
+    expect(stack.h).toBe(STACK_SIZE);
+    expect(stack.x + stack.w / 2).toBe(0);
+    expect(stack.y + stack.h / 2).toBe(0);
+  });
+
+  it("seats seat 0 South: horizontally centered, below the Stack", () => {
+    const origin = playerAreaOrigin(0);
+    expect(origin.x + PLAYER_AREA_W / 2).toBe(0);
+    expect(origin.y).toBeGreaterThan(stack.y + stack.h);
+  });
+
+  it("seats seat 1 North: horizontally centered, above the Stack", () => {
+    const origin = playerAreaOrigin(1);
+    expect(origin.x + PLAYER_AREA_W / 2).toBe(0);
+    expect(origin.y + PLAYMAT_H).toBeLessThan(stack.y);
+  });
+
+  it("seats seat 2 East: vertically centered, right of the Stack", () => {
+    const origin = playerAreaOrigin(2);
+    expect(origin.y + PLAYMAT_H / 2).toBe(0);
+    expect(origin.x).toBeGreaterThan(stack.x + stack.w);
+  });
+
+  it("seats seat 3 West: vertically centered, left of the Stack", () => {
+    const origin = playerAreaOrigin(3);
+    expect(origin.y + PLAYMAT_H / 2).toBe(0);
+    expect(origin.x + PLAYER_AREA_W).toBeLessThan(stack.x);
+  });
+
+  // Zone detection (topmostZoneAt) is first-match-by-z-order, not
+  // closest-match, and furniture z-order is chronological draw order —
+  // meaningless as a semantic tiebreak. So every zone AABB keeps at least a
+  // GAP-wide empty band from every other, across all four seats AND the
+  // Stack (owners/tabletop-shape-mechanics, watch point 8).
+  it("keeps every zone AABB at least a GAP apart, across all four seats and the Stack", () => {
+    const zones: Array<readonly [string, Bounds]> = [["stack", stack]];
+    for (let seat = 0; seat < 4; seat++) {
+      zones.push(...Object.entries(seatZones(seat)).map(([name, b]) => [`seat${seat}.${name}`, b] as const));
+    }
     for (let i = 0; i < zones.length; i++) {
       for (let j = i + 1; j < zones.length; j++) {
-        expect(overlaps(zones[i][1], zones[j][1]), `${zones[i][0]} overlaps ${zones[j][0]}`).toBe(false);
+        expect(
+          separation(zones[i][1], zones[j][1]),
+          `${zones[i][0]} is within a GAP of ${zones[j][0]}`
+        ).toBeGreaterThanOrEqual(GAP);
       }
     }
   });
 
-  it("places each seat exactly one widened player area (plus gap) over from the last", () => {
-    expect(PLAYER_AREA_W).toBe(PLAYMAT_W + GAP + COLUMN_W); // 2202 — the widened column ripples into every seat's offset
-    expect(playerAreaX(1)).toBe(playerAreaX(0) + PLAYER_AREA_W + GAP);
-    expect(playerAreaX(2)).toBe(playerAreaX(1) + PLAYER_AREA_W + GAP);
-  });
-
-  it("widens the Stack strip to span every player area joined so far", () => {
-    const oneSeat = stackStripBounds(1);
-    const twoSeats = stackStripBounds(2);
-    const threeSeats = stackStripBounds(3);
-    expect(twoSeats.w).toBeGreaterThan(oneSeat.w);
-    expect(threeSeats.w).toBeGreaterThan(twoSeats.w);
+  it("cascades stack cards inside the Stack square", () => {
+    const first = stackCardPosition(0);
+    const later = stackCardPosition(3);
+    expect(first.x).toBeGreaterThanOrEqual(stack.x);
+    expect(first.y).toBeGreaterThanOrEqual(stack.y);
+    expect(first.x + CARD_W).toBeLessThanOrEqual(stack.x + stack.w);
+    expect(later.x).toBeGreaterThan(first.x); // earlier arrivals stay visible
+    expect(later.y).toBeGreaterThan(first.y);
   });
 
   it("fills lands left to right on the playmat's bottom half, wrapping to a new row", () => {

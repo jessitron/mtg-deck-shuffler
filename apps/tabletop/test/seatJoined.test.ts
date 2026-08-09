@@ -2,12 +2,13 @@ import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import type { Server } from "node:http";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
-import { playmatBounds, libraryBounds, commandZoneBounds, graveyardBounds, exileBounds, stackStripBounds } from "../src/server/cardLayout";
+import { playmatBounds, libraryBounds, commandZoneBounds, graveyardBounds, exileBounds, stackBounds } from "../src/server/cardLayout";
 
 /**
  * JES-140: POST /api/tables/:tableName/events (seat.joined) — the player area
  * (playmat, library, graveyard, exile, name label) is drawn at Shuffle Up,
- * before any card arrives, and the Stack strip widens as each seat joins.
+ * before any card arrives. Seats take compass slots (S, N, E, W by join
+ * order) around a fixed centered Stack square (ticket 14, the square).
  */
 let server: Server;
 let port: number;
@@ -104,31 +105,45 @@ describe("seat joined", () => {
     expect(shapes.some((s) => s.type === "image")).toBe(false);
   });
 
-  it("places the second seat's player area to the right of the first", async () => {
-    await post("seat-row", seatJoined({ initiator: { seatId: "seat-row-A", playerName: "Sam" } }));
-    await post("seat-row", seatJoined({ initiator: { seatId: "seat-row-B", playerName: "Alex" } }));
+  it("seats 1-4 take compass slots S, N, E, W by join order, and existing seats never move", async () => {
+    const table = "seat-square";
+    const positionsAfterEachJoin: Array<Array<{ x: number; y: number }>> = [];
+    for (const seat of ["A", "B", "C", "D"]) {
+      await post(table, seatJoined({ initiator: { seatId: `seat-sq-${seat}`, playerName: seat } }));
+      positionsAfterEachJoin.push(
+        shapesOf(table)
+          .filter((s) => s.type === "mtg-zone" && s.props?.zone === "playmat")
+          .map((s) => ({ x: s.x, y: s.y }))
+      );
+    }
 
-    const first = playmatBounds(0);
-    const second = playmatBounds(1);
-    const shapes = shapesOf("seat-row");
-    expect(shapes.some((s) => s.x === first.x)).toBe(true);
-    expect(shapes.some((s) => s.x === second.x)).toBe(true);
+    // Each seat's playmat lands at its compass slot's coordinates.
+    const mats = positionsAfterEachJoin[3];
+    for (let seat = 0; seat < 4; seat++) {
+      const expected = playmatBounds(seat);
+      expect(mats, `seat ${seat} playmat at its compass slot`).toContainEqual({ x: expected.x, y: expected.y });
+    }
+
+    // A new seat joining never moves the seats already at the table.
+    for (let join = 1; join < 4; join++) {
+      for (const earlier of positionsAfterEachJoin[join - 1]) {
+        expect(positionsAfterEachJoin[join], `join ${join + 1} moved an existing playmat`).toContainEqual(earlier);
+      }
+    }
   });
 
-  it("widens the Stack strip as each seat joins", async () => {
-    await post("seat-stack-widen", seatJoined({ initiator: { seatId: "seat-widen-A", playerName: "Sam" } }));
-    const afterOne = shapesOf("seat-stack-widen").find((s) => s.props?.label === "The Stack");
-    const oneSeatBounds = stackStripBounds(1);
-    expect(afterOne.props.w).toBe(oneSeatBounds.w);
+  it("draws the Stack as a fixed centered square that does not change as seats join", async () => {
+    const expected = stackBounds();
+    await post("seat-stack-fixed", seatJoined({ initiator: { seatId: "seat-fixed-A", playerName: "Sam" } }));
+    const afterOne = shapesOf("seat-stack-fixed").find((s) => s.props?.label === "The Stack");
+    expect({ x: afterOne.x, y: afterOne.y, w: afterOne.props.w, h: afterOne.props.h }).toEqual(expected);
 
-    await post("seat-stack-widen", seatJoined({ initiator: { seatId: "seat-widen-B", playerName: "Alex" } }));
-    const afterTwo = shapesOf("seat-stack-widen").find((s) => s.props?.label === "The Stack");
-    const twoSeatBounds = stackStripBounds(2);
-    expect(afterTwo.props.w).toBe(twoSeatBounds.w);
-    expect(afterTwo.props.w).toBeGreaterThan(afterOne.props.w);
+    await post("seat-stack-fixed", seatJoined({ initiator: { seatId: "seat-fixed-B", playerName: "Alex" } }));
+    const afterTwo = shapesOf("seat-stack-fixed").find((s) => s.props?.label === "The Stack");
+    expect({ x: afterTwo.x, y: afterTwo.y, w: afterTwo.props.w, h: afterTwo.props.h }).toEqual(expected);
   });
 
-  it("preserves the Stack shape's z-order index as it widens, instead of minting a fresh one", async () => {
+  it("keeps the Stack shape's z-order index stable across seat joins, instead of minting a fresh one", async () => {
     await post("seat-stack-index", seatJoined({ initiator: { seatId: "seat-index-A", playerName: "Sam" } }));
     const afterOne = shapesOf("seat-stack-index").find((s) => s.props?.label === "The Stack");
 
