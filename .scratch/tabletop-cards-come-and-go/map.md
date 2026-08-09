@@ -16,6 +16,9 @@ Shuffler-side undo of a play or discard), and what each crossing does to the car
 baggage and to the other side's state. Done when the decisions are made and written —
 not built.
 
+**Destination reached (2026-08-09):** [spec.md](spec.md), synthesized from the four
+resolved tickets, `Status: ready-for-agent`. Next: `/to-tickets` on it.
+
 ## Notes
 
 - Skills every session should consult: `/grilling`, `/domain-modeling`. Read
