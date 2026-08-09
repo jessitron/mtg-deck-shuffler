@@ -95,3 +95,10 @@ again. This is desired."* Matches the Shuffler's own `mulligan()`, which already
 [Tabletop cards report zone entry as named events](../tabletop-card-shape/issues/01-zone-entry-events.md),
 now keyed on `type === 'mtg-zone'` per ticket 03) is an implementation detail for whoever builds
 this, not a further decision — the target state is unambiguous.
+
+**The wire question is settled: `card.returned` carries no face** (2026-08-08,
+[cards-come-and-go ticket 02](../../tabletop-cards-come-and-go/issues/02-event-vocabulary.md)).
+Jess: "cards removed from play no longer have a face up." The table is **not** authoritative
+for a card's face; the Shuffler keeps its own `currentFace`, and no `face`/`faceDown` field
+rides the return event. This composes with the reset rule above: the table resets its axes
+locally on exit, the Shuffler applies its own face rules on arrival, and the wire says nothing.
