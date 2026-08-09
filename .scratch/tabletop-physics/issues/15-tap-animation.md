@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: done
 
 **What to build:** Toggling `props.tapped` (ticket 12) should read as a quick rotation rather
 than an instant snap. A 0.5s ease-out local counter-rotation catch-up, matching the Shuffler's
@@ -18,7 +18,7 @@ already specified there during the spec's grilling and just needs applying here.
 
 **Blocked by:** 12
 
-- [ ] Tapping/untapping a card plays a 0.5s ease-out rotation catch-up
-- [ ] A card that arrives already-tapped does not animate on mount or reconnect
-- [ ] Free-rotating a card through 90° does not trigger a tap animation
-- [ ] A remote peer sees the same animation when the tapped prop syncs in
+- [x] Tapping/untapping a card plays a 0.5s ease-out rotation catch-up
+- [x] A card that arrives already-tapped does not animate on mount or reconnect
+- [x] Free-rotating a card through 90° does not trigger a tap animation
+- [x] A remote peer sees the same animation when the tapped prop syncs in

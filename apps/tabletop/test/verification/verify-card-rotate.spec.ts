@@ -2,9 +2,8 @@ import { test, expect } from "@playwright/test";
 
 /**
  * Clicking a card on the table taps/untaps it — a toggle between 0° and 90°,
- * not a 4-way rotation cycle. Essential slice — rotate only, no menu cleanup or
- * flip yet. The rest is live work: `animate-tap` and `no-doubleclick-crop` in
- * the repo-root `TODO.md`.
+ * not a 4-way rotation cycle. The tap's rotation ANIMATION is covered
+ * separately in verify-tap-animation.spec.ts (tabletop-physics ticket 15).
  */
 function cardPlayed(overrides: Record<string, unknown>) {
   return {

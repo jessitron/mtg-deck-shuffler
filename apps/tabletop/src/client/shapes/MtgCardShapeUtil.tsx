@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from "react";
 import { BaseBoxShapeUtil, HTMLContainer, TLDragShapesOutInfo, TLShape, TLShapePartial, Vec } from "tldraw";
 import type { CSSProperties } from "react";
 import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
@@ -62,13 +63,48 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     const sleeve: CSSProperties | undefined = sleeveColor
       ? { width: "100%", height: "100%", background: sleeveColor, borderRadius: w * 0.05, boxSizing: "border-box" }
       : undefined;
+
+    // Ticket 15: tap reads as a quick rotation, not a snap. onClick writes
+    // the new rotation in one synced record update, which tldraw renders
+    // instantly; the motion is a local catch-up — counter-rotate the content
+    // by the just-applied delta and ease it back to 0. Keyed off
+    // `props.tapped` changing, never off a rotation delta, so free-rotating
+    // through 90° can't fire it — and remote peers animate identically for
+    // free when the prop syncs in. The ref starts at the first-seen value so
+    // a card arriving already-tapped doesn't swing on mount or reconnect.
+    //
+    // 0.5s ease-out matches the Shuffler's card-motion timing (game.css
+    // slides), deliberately snappier than its 0.8s flip.
+    const containerRef = useRef<HTMLDivElement>(null);
+    const prevTappedRef = useRef(shape.props.tapped);
+    const tapped = shape.props.tapped;
+    useLayoutEffect(() => {
+      if (prevTappedRef.current === tapped) return;
+      prevTappedRef.current = tapped;
+      const el = containerRef.current;
+      if (!el) return;
+      // A re-tap mid-swing would stack a second catch-up on the first;
+      // cancel so the worst case is one clean jump. (Smooth reversal on a
+      // fast double-tap is an accepted gap — WAAPI starts from the fixed
+      // keyframe, not the current rendered angle.)
+      el.getAnimations().forEach((a) => a.cancel());
+      // The default transform-origin (this div's center) is load-bearing:
+      // onClick holds the card's CENTER fixed across the rotation write, so
+      // frame 0 here is pixel-identical to the pre-tap render only if the
+      // counter-rotation pivots on that same center.
+      el.animate([{ transform: `rotate(${tapped ? -90 : 90}deg)` }, { transform: "rotate(0deg)" }], {
+        duration: 500,
+        easing: "ease-out",
+      });
+    }, [tapped]);
+
     return (
       <HTMLContainer id={shape.id}>
         {/* tl-html-container is `pointer-events: none` by default (tldraw.css)
             so hover/click reach whatever's behind it; tldraw's own image/video
             shapes re-enable hit-testing via .tl-image-container's `pointer-
             events: all` — reusing that class here rather than reinventing it. */}
-        <div className="tl-image-container">
+        <div className="tl-image-container" ref={containerRef}>
           {sleeve && faceDown ? (
             // Concealed in a sleeve: the bare sleeve rectangle. Identity and
             // both URLs stay in props — concealment is depicted, not enforced.
