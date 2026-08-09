@@ -166,7 +166,7 @@ Concrete, in rough order of how often they bite.
   now-deleted rules did (`deck-selection.css` ×2 plus `.json-summary` in
   `src/view/debug/state-copy.ts`; it was **three**, not two as this file used to say).
   One sanctioned exception exists, and it's on the canvas, not in any stylesheet:
-  `MtgCounterShapeUtil.tsx`'s editing input (2026-08-08) — see README → tldraw limits.
+  `MtgCounterShapeUtil.tsx`'s editing textarea (2026-08-08) — see README → tldraw limits.
   It is not precedent for DOM pages.
   Two things that do need care:
   - If your new element is focusable but **not** one of those tags (a `div` with a click
@@ -480,12 +480,20 @@ not by recomputing new numbers.**
   (2026-08-08).** `MtgCounterShapeUtil.tsx` re-expresses `game.css` → `.hand-count`'s recipe
   inline with fleet tokens (deep-space fill, `var(--narrow-border)` dark-pink ring,
   light-pink `--font-chrome` text, 50% radius — count discs are a sanctioned round category),
-  border and font-size proportional to `props.h`. Staged on `/design` § `#counter-disc`
+  border proportional to `props.h`, font-size **up to** `h * 0.32`, shrinking to fit
+  (`counterTextFit.ts`, same day's follow-up). Staged on `/design` § `#counter-disc`
   awaiting Jess's sign-off — see [open-choices.md](open-choices.md). Concrete watch point:
   **the chip recipe now lives in three places** — `game.css` → `.hand-count` (the original),
   `design-candidates.css` → `.counter-mock` (the specimen), and the inline `disc` object in
   `MtgCounterShapeUtil.tsx`. Changing the chip look means all three, and if Jess rejects the
-  staged look, the mock and the shape change together. Its editing input carries the fleet's
+  staged look, the mock and the shape change together. **The text layout is a fourth file:**
+  `counterTextFit.ts` computes font-size AND line breaks against the circle's chord widths,
+  because text inside a round-clipped element is laid out by CSS to the *square* content box
+  and the `border-radius` clip eats the corners of top/bottom lines — a general fact about
+  any round-clipped element, not a tldraw quirk. It measures with a real canvas
+  `measureText` on the resolved `--font-chrome`: Orbitron's glyph widths run far narrower
+  than a per-character estimate, so an estimate would break "lifelink" onto two lines that
+  genuinely fits on one. Its editing textarea (was an input pre-fit) carries the fleet's
   one sanctioned `outline: none` (see README → tldraw limits); its indicator is tldraw's
   default box (a plain rect via `getIndicatorPath` — not a custom treatment, per the
   indicator rule above).

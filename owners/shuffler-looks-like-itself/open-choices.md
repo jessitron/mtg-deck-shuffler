@@ -577,9 +577,12 @@ self-rendering custom shape.
   default — shipped with a treatment ported from `.hand-count` in `game.css` (the app's one
   existing count disc, fully tokenized): `--deep-space` fill, `var(--narrow-border)` solid
   `--dark-pink` ring, `--light-pink` text in `--font-chrome`, `border-radius: 50%` (count
-  discs are a sanctioned round category), 44px default. Border width and font-size are
-  **proportional to `props.h`** (`h * 3/44` px, `h * 0.32`) so resize keeps proportions — the
-  playmat-radius lesson applied. Implemented as inline `CSSProperties` in
+  discs are a sanctioned round category), 44px default. Border width is **proportional to
+  `props.h`** (`h * 3/44` px); font-size starts at `h * 0.32` and **shrinks to fit long
+  labels** (`counterTextFit.ts`, 2026-08-08 follow-up — Jess: "lifelink" was invisible at the
+  fixed size). The rest of the recipe is unchanged; the fit also computes the LINE BREAKS
+  against the circle's chord widths, because CSS wraps to the square content box and the round
+  clip eats the corners of top/bottom lines. Implemented as inline `CSSProperties` in
   `MtgCounterShapeUtil.tsx` (still no Tabletop ship-local stylesheet — ticket 18 deliberately
   didn't start one). **Staged on `/design` § `#counter-disc` (`.counter-mock` in
   `design-candidates.css`, badge `candidate`) in the same commit — this is

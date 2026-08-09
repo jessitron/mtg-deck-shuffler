@@ -193,7 +193,7 @@
   border: var(--narrow-border) solid var(--dark-pink);
   color: var(--light-pink);
   font-family: var(--font-chrome);
-  font-size: 14px; /* 0.32 × height in the real shape */
+  font-size: 14px; /* up to 0.32 × height in the real shape; long labels shrink to fit (counterTextFit.ts) */
   font-weight: 700;
   line-height: 1;
 }

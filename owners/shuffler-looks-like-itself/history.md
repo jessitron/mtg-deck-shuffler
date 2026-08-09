@@ -1426,3 +1426,50 @@ instead of inventing one.
 above): the gallery renders components with the app's own stylesheets, and this label has
 none; it's stock tldraw chrome whose only decided property is *text composition*, which a
 CSS specimen can't exhibit honestly. If the label becomes self-rendering, it stages then.
+
+## 2026-08-08 — the counter's text learned the shape of its own disc
+
+No commit sha yet (worktree `counter-text-fit`, merging to main). A small follow-up Jess
+asked for directly: typing "lifelink" into the counter disc produced *invisible* text — the
+fixed `h * 0.32` font overflowed the 44px circle and `overflow: hidden` clipped it all. The
+fix, `apps/tabletop/src/client/shapes/counterTextFit.ts`: font starts at the 0.32 × height
+base and shrinks until the text fits, wrapping onto more lines where that helps. The recipe
+detail "font-size 0.32 × height" is now "**up to** 0.32 × height, shrinking to fit"; the rest
+of the recipe (deep-space fill, narrow dark-pink ring, light-pink `--font-chrome` text,
+proportional border) is unchanged. The disc's `line-height` went 1 → 1.1 to give the wrapped
+lines breathing room — a real if tiny appearance change, riding with the feature it exists
+for.
+
+**The reusable fact — a round clip does not change where CSS puts the text.** The browser
+lays text out against the **square** content box; `border-radius` only clips the paint. So
+CSS-wrapped text in any round-clipped element loses the corners of its top and bottom lines
+(observed live with "first strike"). The fix that keeps the common short-label case big:
+compute the line breaks yourself against each line's actual circle **chord** width and render
+them as explicit line divs (`whiteSpace: pre` so the browser doesn't re-wrap). This is a
+general fact about round-clipped elements — the Shuffler's own `.hand-count` never hits it
+only because its content is always a short number.
+
+**Second reusable fact — measure with the real font, not an estimate.** The fit is only as
+good as its measurements, and it measures with a canvas `measureText` on the resolved
+`--font-chrome` (one shared measurer, resolved once). Orbitron's glyph widths run far
+narrower than a generic ~0.8em/char estimate: "lifelink" fits UNBROKEN on one line at ~8px
+where the estimate says two lines. An estimate-driven fit would look correct and still break
+words it didn't need to. The estimate survives only as the injectable test fallback.
+
+**Layout preferences encoded, not emergent:** whole-words layouts beat character-split ones
+unless keeping words whole costs >30% of font size — so "first strike" wraps as two whole
+words a touch smaller, while the single long word "lifelink" still splits rather than going
+tiny. At the 4px floor, overflow beats disappearing: pack what fits and let the disc clip
+the cram — the failure mode this whole fix exists for is text that vanishes.
+
+**Editing approximates display.** The in-place editor became a `<textarea>` (was `<input>`)
+so long labels wrap while editing: side padding narrows the wrap toward the chords, estimated
+top padding centers the block. Still invisible chrome, still the one sanctioned
+`outline: none` (README → tldraw limits updated to say textarea). Enter commits — no
+newlines in a counter label.
+
+**Verified** by eye at 4× zoom ("3" full size, "+1/+1" one line, "lifelink" one whole line,
+"first strike" two whole words, all inside the circle), 8 pure-geometry unit tests
+(`test/counterTextFit.test.ts`), and a Playwright assertion that the rendered content is no
+bigger than the visible box (`scrollWidth/Height ≤ clientWidth/Height` in
+`verify-counter.spec.ts`).

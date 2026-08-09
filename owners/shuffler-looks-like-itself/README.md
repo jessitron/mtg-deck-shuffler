@@ -94,8 +94,9 @@ furniture becomes a custom `mtg-zone` shape.
   the "every interactive element gets a visible focus state" rule, not an oversight — say so
   out loud when designing canvas UI instead of inventing a shape-level ring that would fight
   tldraw's. **First shipped instance of the exemption (2026-08-08, ticket 18):**
-  `MtgCounterShapeUtil.tsx`'s in-place editing `<input>` carries a literal `outline: none`,
-  with a comment naming this exemption. That is the one sanctioned `outline: none` in the
+  `MtgCounterShapeUtil.tsx`'s in-place editing `<textarea>` (an `<input>` until the
+  2026-08-08 shrink-to-fit follow-up made long labels wrap while editing) carries a literal
+  `outline: none`, with a comment naming this exemption. That is the one sanctioned `outline: none` in the
   fleet — it's a canvas shape, the Shuffler's ban ("never write `outline: none`", choice 5)
   governs DOM pages, and tldraw owns focus/selection indication here. A design-lint sweep
   must not "fix" it, and it is not precedent for writing one in any stylesheet.
