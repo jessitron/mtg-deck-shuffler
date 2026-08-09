@@ -47,6 +47,20 @@ section is just a wall between Jess and the live work.
     all; this specimen is another instance of that gap.
   ← mountain: tabletop-replaces-mural
 
+- [ ] `game-page-picked-mat` /game still paints the default playmat, ignoring the prep-screen pick
+  - Surfaced 2026-08-09 by the `shuffler-looks-like-itself` review of table-layout ticket 16
+    (the prep-screen picker). The picked mat shows on /prepare (server-rendered inline
+    `background-image`) and travels to the Tabletop seat via `seat.joined` — but /game still
+    paints the hardcoded default from the bare `.playmat` rule in
+    `apps/shuffler/public/playmat.css`. User-visible inconsistency right after Shuffle Up:
+    you picked Seam Rip, the game screen shows Cascading Cataracts.
+  - The owner called it correctly out of ticket-16 scope; it needs its own small task. Note the
+    pick lives only on `PersistedGamePrep.playmatImagePath` — the game page would need to reach
+    the prep (it has `prepId`) or carry the path itself.
+  - Related: `design-playmat-specimen` — the mat art URL is also hand-copied in
+    `design-gallery.css`, same "the default mat's name proliferates" family.
+  ← mountain: tabletop-replaces-mural
+
 - [ ] `life-counter-needs-own-name` table-layout ticket 12's life/commander-damage shape can't be called `mtg-counter` anymore
   - Surfaced 2026-08-08 by both owner reviews on tabletop-physics ticket 18: that ticket (and the
     tabletop-physics spec) explicitly assign the type string `mtg-counter` to the drag-onto-a-card
