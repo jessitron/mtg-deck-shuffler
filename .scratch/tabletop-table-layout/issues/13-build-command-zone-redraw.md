@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: done
 Blocked by: None — can start immediately
 
 **What to build:** A player's area on the Tabletop gains a Command Zone: it takes the
@@ -32,9 +32,9 @@ zone positions and sizes, widened column, seat shift, and disjoint zone bounding
 Consult owners: `tabletop-shape-mechanics` (zone AABBs), `shuffler-looks-like-itself`
 (zone look on new furniture).
 
-- [ ] Command Zone renders beside the Library, two cards wide, in every player area
-- [ ] Graveyard occupies the top two-thirds and Exile the bottom third of the old Graveyard footprint
-- [ ] Player-area width re-derives everywhere; adjacent seats shift over, no overlap
-- [ ] All zone bounding boxes within and between player areas are disjoint (asserted in tests)
-- [ ] New furniture uses the decided `mtg-zone` look, not the stock-geo approximation
-- [ ] `apps/tabletop/DESIGN.md`'s "Delta from what's built today" table updated for what landed
+- [x] Command Zone renders beside the Library, two cards wide, in every player area
+- [x] Graveyard occupies the top two-thirds and Exile the bottom third of the old Graveyard footprint
+- [x] Player-area width re-derives everywhere; adjacent seats shift over, no overlap
+- [x] All zone bounding boxes within and between player areas are disjoint (asserted in tests)
+- [x] New furniture uses the decided `mtg-zone` look, not the stock-geo approximation
+- [x] `apps/tabletop/DESIGN.md`'s "Delta from what's built today" table updated for what landed
