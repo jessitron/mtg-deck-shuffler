@@ -39,6 +39,15 @@ export interface PersistedGamePrep {
    * table info above.
    */
   sleeveColor?: string;
+  /**
+   * The seat's playmat, as a path relative to the Shuffler's public root
+   * (table-layout ticket 16) — one of src/table-look.ts's curated PLAYMATS.
+   * Stored relative (not absolute) so SHUFFLER_PUBLIC_URL differences between
+   * environments can't bake a wrong host into a prep; made absolute at
+   * seat.joined send time. Optional with graceful fallback (the default mat),
+   * same NO-version-bump exception as sleeveColor above.
+   */
+  playmatImagePath?: string;
 }
 
 export interface PersistPrepPort {
