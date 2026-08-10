@@ -11,7 +11,7 @@ module Envelopes
       "id" => SecureRandom.uuid,
       "tableId" => table.id,
       "name" => "card.played",
-      "initiator" => "seat 2",
+      "initiator" => { "playerName" => "seat 2" },
       "occurredIn" => "shuffler",
       "visibility" => "public",
       "traceparent" => valid_traceparent,
@@ -22,8 +22,10 @@ module Envelopes
           "instanceId" => SecureRandom.uuid
         },
         "face" => "front",
-        "seat" => 2,
         "zoneHint" => "stack",
+        "frontImageUrl" => "https://example.com/front.jpg",
+        "backImageUrl" => nil,
+        "cardName" => "Forest",
         "owner" => SecureRandom.uuid,
         "isCommander" => false
       }
@@ -35,14 +37,12 @@ module Envelopes
       "id" => SecureRandom.uuid,
       "tableId" => table.id,
       "name" => "seat.joined",
-      "initiator" => "Jess",
+      "initiator" => { "seatId" => SecureRandom.uuid, "playerName" => "Jess" },
       "occurredIn" => "shuffler",
       "visibility" => "public",
       "traceparent" => valid_traceparent,
       "schemaVersion" => 1,
       "payload" => {
-        "seatId" => SecureRandom.uuid,
-        "playerName" => "Jess",
         "deckName" => "Blame Game",
         "playmatImageUrl" => "https://example.com/playmat.png",
         "cardBackImageUrl" => "https://example.com/card-back.jpg"
@@ -55,7 +55,7 @@ module Envelopes
       "id" => SecureRandom.uuid,
       "tableId" => table.id,
       "name" => "seat.taken",
-      "initiator" => "Jess",
+      "initiator" => { "playerName" => "Jess" },
       "occurredIn" => "shuffler",
       "visibility" => "public",
       "traceparent" => valid_traceparent,

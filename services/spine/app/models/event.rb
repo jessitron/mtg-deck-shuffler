@@ -19,7 +19,7 @@ class Event < ApplicationRecord
       "name" => name,
       "acceptedAt" => accepted_at.utc.iso8601(3),
       "occurredAt" => occurred_at&.utc&.iso8601(3),
-      "initiator" => initiator,
+      "initiator" => { "playerName" => initiator },
       "occurredIn" => occurred_in,
       "visibility" => visibility,
       "traceparent" => traceparent,
