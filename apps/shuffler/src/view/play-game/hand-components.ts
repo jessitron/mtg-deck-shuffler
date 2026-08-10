@@ -6,8 +6,9 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
   const handCardsWithDropZones = handCardsList
     .map((gameCard: GameCard, index: number) => {
       const cardHtml = formatCardContainer({ gameCard, actions: "", gameId: game.gameId, expectedVersion: game.getStateVersion(), whatHappened, draggable: true, handPosition: index });
-      // Add a drop zone before the first card
-      const dropZoneBefore = index === 0 ? `<div class="hand-drop-zone" data-hand-position="${index}"></div>` : "";
+      // Add a drop zone before the first card. It's taken out of flex flow (see .hand-drop-zone-leading
+      // in game.css) so it doesn't shift row 1's cards relative to the rows below it.
+      const dropZoneBefore = index === 0 ? `<div class="hand-drop-zone hand-drop-zone-leading" data-hand-position="${index}"></div>` : "";
       // Add a drop zone after each card
       const dropZoneAfter = `<div class="hand-drop-zone" data-hand-position="${index + 1}"></div>`;
       return `${dropZoneBefore}${cardHtml}${dropZoneAfter}`;
