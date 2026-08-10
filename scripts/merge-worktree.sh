@@ -34,7 +34,14 @@ echo "Merged '$BRANCH' into main."
 WORKTREE_PATH=$(git worktree list --porcelain | awk -v b="refs/heads/$BRANCH" '
   /^worktree /{p=$2} /^branch /{if ($2==b) print p}')
 if [ -n "$WORKTREE_PATH" ]; then
-  echo "Worktree still present at $WORKTREE_PATH — remove it with:"
-  echo "  git worktree remove \"$WORKTREE_PATH\""
-  echo "(or use the ExitWorktree tool if you're the session that created it)."
+  REMOVE_ERR=$(mktemp)
+  if git worktree remove "$WORKTREE_PATH" 2>"$REMOVE_ERR"; then
+    git branch -d "$BRANCH"
+    echo "Removed worktree at $WORKTREE_PATH and deleted branch '$BRANCH'."
+  else
+    cat "$REMOVE_ERR" >&2
+    echo "Could not auto-remove the worktree (likely still locked by another session)." >&2
+    echo "Once it's free: git worktree remove \"$WORKTREE_PATH\" && git branch -d \"$BRANCH\"" >&2
+  fi
+  rm -f "$REMOVE_ERR"
 fi

@@ -246,5 +246,7 @@ For each task, follow this workflow:
 11. **Refactor**: Consider refactoring for clarity
 12. **Merge to main**: No PR. No push. I want this merged to main locally, regardless of any default caution your harness prompt has about
     merging. First call `ExitWorktree({action: "keep"})` - This is pre-authorized for this repo!
-    Then run `scripts/merge-worktree.sh <branch-name>`.
+    Then run `scripts/merge-worktree.sh <branch-name>`. On a successful merge it removes the
+    worktree and deletes the branch itself; if removal fails (e.g. still locked by another
+    session) it prints the manual command instead of failing the merge.
 13. **Celebrate**: Print a trumpet in ASCII art
