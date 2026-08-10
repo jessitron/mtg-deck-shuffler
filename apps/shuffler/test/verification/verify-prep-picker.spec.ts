@@ -118,4 +118,29 @@ test.describe('Prepare screen — table-look panel', () => {
     await expect(colorInput).toHaveValue('#8b2f5c');
     await expect(page.locator('.game-title')).toHaveCSS('background-color', 'rgb(139, 47, 92)');
   });
+
+  test('picking a mat or sleeve keeps keyboard focus on the equivalent swatch after the swap', async ({ page }) => {
+    await gotoPrep(page);
+
+    await matSwatch(page, OTHER_MAT).click();
+    await expect(matSwatch(page, OTHER_MAT)).toBeFocused();
+
+    await sleeveSwatch(page, FOREST_GREEN).click();
+    await expect(sleeveSwatch(page, FOREST_GREEN)).toBeFocused();
+  });
+
+  test('typed table/player name survives a mat pick (unsaved text is not wiped by the swap)', async ({ page }) => {
+    await gotoPrep(page);
+
+    await page.locator('.join-table-summary').click();
+    await page.locator('input[name="table-name"]').fill('Friday Night');
+    await page.locator('input[name="player-name"]').fill('Jess');
+
+    await matSwatch(page, OTHER_MAT).click();
+    await expect(page.locator('.playmat')).toHaveCSS('background-image', new RegExp('aeoe-6-seam-rip'));
+
+    await expect(page.locator('input[name="table-name"]')).toHaveValue('Friday Night');
+    await expect(page.locator('input[name="player-name"]')).toHaveValue('Jess');
+    await expect(page.locator('.join-table-details')).toHaveJSProperty('open', true);
+  });
 });

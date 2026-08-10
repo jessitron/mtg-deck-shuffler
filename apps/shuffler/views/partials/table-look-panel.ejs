@@ -1,7 +1,8 @@
 <%
-// The table-look setup panel (ticket 16): playmat swatches + sleeve colors.
 // Expects: playmats, selectedPlaymatPath, sleeveQuickPicks, sleeveColor, prepId.
-// Selection travels immediately via POST /prep-table-look/:prepId (prep-picker.js).
+// Every swatch hx-posts to /prep-table-look/:prepId, swapping in the
+// re-rendered #playmat-prepare fragment (partials/playmat-prepare.ejs).
+// table-look-focus.js restores keyboard focus after that swap.
 const customSleeveSelected = sleeveColor && !sleeveQuickPicks.some(function (p) { return p.hex === sleeveColor; });
 %>
 <section class="table-look-panel" data-testid="table-look-panel" data-prep-id="<%= prepId %>" aria-label="Playmat and sleeves">
@@ -14,7 +15,11 @@ const customSleeveSelected = sleeveColor && !sleeveQuickPicks.some(function (p) 
                 data-mat-path="<%= mat.path %>"
                 title="<%= mat.name %>"
                 aria-label="Playmat: <%= mat.name %>"
-                style="background-image: url('<%= mat.path %>')"></button>
+                style="background-image: url('<%= mat.path %>')"
+                hx-post="/prep-table-look/<%= prepId %>"
+                hx-vals='{"playmat-path": "<%= mat.path %>"}'
+                hx-target="#playmat-prepare"
+                hx-swap="outerHTML"></button>
       <% }) %>
     </div>
   </div>
@@ -25,18 +30,31 @@ const customSleeveSelected = sleeveColor && !sleeveQuickPicks.some(function (p) 
               class="table-look-sleeve table-look-none-chip<%= sleeveColor ? '' : ' table-look-selected' %>"
               data-sleeve-color=""
               title="No sleeves (standard Magic back)"
-              aria-label="No sleeves"></button>
+              aria-label="No sleeves"
+              hx-post="/prep-table-look/<%= prepId %>"
+              hx-vals='{"sleeve-color": ""}'
+              hx-target="#playmat-prepare"
+              hx-swap="outerHTML"></button>
       <% sleeveQuickPicks.forEach(function(pick) { %>
         <button type="button"
                 class="table-look-sleeve<%= sleeveColor === pick.hex ? ' table-look-selected' : '' %>"
                 data-sleeve-color="<%= pick.hex %>"
                 title="<%= pick.name %>"
                 aria-label="Sleeves: <%= pick.name %>"
-                style="background-color: <%= pick.hex %>"></button>
+                style="background-color: <%= pick.hex %>"
+                hx-post="/prep-table-look/<%= prepId %>"
+                hx-vals='{"sleeve-color": "<%= pick.hex %>"}'
+                hx-target="#playmat-prepare"
+                hx-swap="outerHTML"></button>
       <% }) %>
       <label class="table-look-custom<%= customSleeveSelected ? ' table-look-selected' : '' %>">
         custom
-        <input type="color" class="table-look-color-input" value="<%= customSleeveSelected ? sleeveColor : '#bb5277' %>" />
+        <input type="color" class="table-look-color-input" name="sleeve-color"
+               value="<%= customSleeveSelected ? sleeveColor : '#bb5277' %>"
+               hx-post="/prep-table-look/<%= prepId %>"
+               hx-trigger="change"
+               hx-target="#playmat-prepare"
+               hx-swap="outerHTML" />
       </label>
     </div>
   </div>

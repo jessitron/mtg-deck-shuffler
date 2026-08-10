@@ -15,56 +15,15 @@
     }) %>
 
     <main class="prepare-container">
-        <%# background-image longhand only: the shared .playmat rule declares
-            cover/center as separate longhands, and the shorthand would wipe them %>
-        <div class="playmat playmat-prepare" style="background-image: url('<%= selectedPlaymatPath %>')">
-          <%- renderDeckTitle() %>
-          <div id="library-section" class="library-section" data-testid="library-section">
-            <div class="library-stack-clickable"
-                 hx-get="/prep-library-modal/<%= prep.prepId %>"
-                 hx-target="#modal-container"
-                 hx-swap="innerHTML"
-                 title="Search library">
-              <%- renderLibraryStack() %>
-            </div>
-            <div class="library-buttons">
-              <button class="search-button"
-                      hx-get="/prep-library-modal/<%= prep.prepId %>"
-                      hx-target="#modal-container"
-                      hx-swap="innerHTML">Search</button>
-            </div>
-          </div>
-          <%- renderCommandZone() %>
-
-          <%- include('partials/table-look-panel', {
-            playmats: playmats,
-            selectedPlaymatPath: selectedPlaymatPath,
-            sleeveQuickPicks: sleeveQuickPicks,
-            sleeveColor: prep.sleeveColor,
-            prepId: prep.prepId
-          }) %>
-
-          <div class="shuffle-up-section">
-            <form method="post" action="/start-game" class="inline-form">
-              <input type="hidden" name="prep-id" value="<%= prep.prepId %>" />
-              <input type="hidden" name="expected-version" value="<%= prep.version %>" />
-              <details class="join-table-details" <%= (prep.tableName || prep.playerName) ? 'open' : '' %>>
-                <summary class="join-table-summary">Join a table</summary>
-                <div class="join-table-fields">
-                  <label class="join-table-label">table name
-                    <input type="text" name="table-name" value="<%= prep.tableName || '' %>"
-                           placeholder="(optional) play at a table" autocomplete="off" />
-                  </label>
-                  <label class="join-table-label">player name
-                    <input type="text" name="player-name" value="<%= prep.playerName || '' %>"
-                           placeholder="your name at the table" autocomplete="off" />
-                  </label>
-                </div>
-              </details>
-              <button type="submit" class="button-base pushable-flat begin-button">Shuffle Up</button>
-            </form>
-          </div>
-        </div>
+      <%- include('partials/playmat-prepare', {
+        prep: prep,
+        playmats: playmats,
+        selectedPlaymatPath: selectedPlaymatPath,
+        sleeveQuickPicks: sleeveQuickPicks,
+        renderDeckTitle: renderDeckTitle,
+        renderLibraryStack: renderLibraryStack,
+        renderCommandZone: renderCommandZone
+      }) %>
     </main>
 
     <div id="modal-container"></div>
@@ -75,7 +34,7 @@
 
   <script src="/htmx.js"></script>
   <script src="/modal-query-params.js"></script>
-  <script src="/prep-picker.js"></script>
+  <script src="/table-look-focus.js"></script>
   <script>
     // Configure HTMX with browser tab ID
     document.addEventListener("htmx:configRequest", function (event) {

@@ -1,0 +1,57 @@
+<%# Rendered by both GET /prepare/:prepId and POST /prep-table-look/:prepId,
+    which swaps this whole element in via hx-target="#playmat-prepare"
+    hx-swap="outerHTML" — keep class/id in sync with that target by hand.
+
+    hx-preserve="true" goes on <details>, not the inputs inside it: putting
+    it on both loses the inputs' typed values (htmx preserves an element by
+    detaching it from the live DOM before its descendants' own hx-preserve
+    entries get resolved, so their document.getElementById lookup finds
+    nothing). One hx-preserve at the outermost element that needs it. %>
+<div class="playmat playmat-prepare" id="playmat-prepare" style="background-image: url('<%= selectedPlaymatPath %>')">
+  <%- renderDeckTitle() %>
+  <div id="library-section" class="library-section" data-testid="library-section">
+    <div class="library-stack-clickable"
+         hx-get="/prep-library-modal/<%= prep.prepId %>"
+         hx-target="#modal-container"
+         hx-swap="innerHTML"
+         title="Search library">
+      <%- renderLibraryStack() %>
+    </div>
+    <div class="library-buttons">
+      <button class="search-button"
+              hx-get="/prep-library-modal/<%= prep.prepId %>"
+              hx-target="#modal-container"
+              hx-swap="innerHTML">Search</button>
+    </div>
+  </div>
+  <%- renderCommandZone() %>
+
+  <%- include('table-look-panel', {
+    playmats: playmats,
+    selectedPlaymatPath: selectedPlaymatPath,
+    sleeveQuickPicks: sleeveQuickPicks,
+    sleeveColor: prep.sleeveColor,
+    prepId: prep.prepId
+  }) %>
+
+  <div class="shuffle-up-section">
+    <form method="post" action="/start-game" class="inline-form">
+      <input type="hidden" name="prep-id" value="<%= prep.prepId %>" />
+      <input type="hidden" name="expected-version" value="<%= prep.version %>" />
+      <details id="join-table-details" hx-preserve="true" class="join-table-details" <%= (prep.tableName || prep.playerName) ? 'open' : '' %>>
+        <summary class="join-table-summary">Join a table</summary>
+        <div class="join-table-fields">
+          <label class="join-table-label">table name
+            <input type="text" name="table-name" value="<%= prep.tableName || '' %>"
+                   placeholder="(optional) play at a table" autocomplete="off" />
+          </label>
+          <label class="join-table-label">player name
+            <input type="text" name="player-name" value="<%= prep.playerName || '' %>"
+                   placeholder="your name at the table" autocomplete="off" />
+          </label>
+        </div>
+      </details>
+      <button type="submit" class="button-base pushable-flat begin-button">Shuffle Up</button>
+    </form>
+  </div>
+</div>
