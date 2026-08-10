@@ -54,8 +54,11 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
 - **Synthesizing spans from timestamps captured outside the process**: OTel reads a bare number as **millis** and errors on none of the ways you can get it wrong (seconds → 1970, nanos → year 55000, `undefined` → `NaN`). Validate against a plausibility window and skip the span rather than emit garbage. Recipe in README → Dev-tooling telemetry.
 - **Touching the Tabletop's ingress, its URL scheme, or "just adding TLS back"**: prod
   `table.jessitron.honeydemo.io` is **plain http on purpose** (tldraw license gate — see
-  `apps/tabletop/README.md` → Licensing), on its own ALB (IngressGroup `tabletop-http`,
-  HTTP:80 only, no 443 listener). Four config spots are scheme-coupled and must agree, and
+  `apps/tabletop/README.md` → Licensing), on its own ALB, IngressGroup `tabletop-http`. The
+  app itself is served only from `mtg-tabletop-ingress` (HTTP:80). A second ingress in the same
+  group, `mtg-tabletop-https-downgrade`, owns a 443 listener meant to catch https-first browsers
+  — **its redirect action is currently broken** (see the `group.name` incident below); don't
+  assume it works or copy its shape. Four config spots are scheme-coupled and must agree, and
   three of them are telemetry: `BROWSER_OTLP_TRACES_URL` + `BROWSER_OTLP_LOGS_URL`
   (`apps/tabletop/k8s/configmap.yaml`), CORS `allowed_origins`
   (`apps/tabletop/k8s/collector.yaml`), plus the Shuffler's `TABLETOP_PUBLIC_URL`. An
@@ -64,6 +67,20 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
   annotations (`/health`, 30s) if the ingress moves again — they're part of the probe-noise
   story. Both ALBs share the access-log bucket/prefix; ALB name in the object key tells them
   apart.
+- **Adding, editing, or re-deploying any ingress in the `tabletop-http` (or any) IngressGroup**:
+  ingresses sharing `alb.ingress.kubernetes.io/group.name` reconcile as **one ALB** — a single
+  malformed ingress (invalid action, conflicting listener config, etc.) produces
+  `FailedDeployModel` on **every** ingress in the group, not just the broken one, blocking routing
+  changes fleet-wide for as long as it stays applied. This actually happened 2026-08-10:
+  `mtg-tabletop-https-downgrade`'s HTTPS→HTTP redirect action (`redirectConfig.protocol: "HTTP"`)
+  is invalid per AWS (`InvalidLoadBalancerAction`), and it blocked `mtg-tabletop-ingress` — the
+  ingress carrying `/v1/traces`/`/v1/logs` — for ~27 hours before someone `kubectl delete`d it live.
+  **The git file and `apps/tabletop/deploy.sh`'s `kubectl apply` of it were never fixed** — the next
+  Tabletop deploy re-applies the broken ingress and can reopen this. Before touching either ingress
+  in this group, check whether `k8s/ingress-https-downgrade.yaml` still contains the broken action;
+  if so, fix or remove it before deploying, don't just work around it. README → Invariant 3 has the
+  full incident writeup and what a real HTTPS-downgrade fix would require (a real ACM cert + HTTPS
+  target, not a same-group redirect ingress).
 - **Upgrading `@opentelemetry/*`**: bare `GET` spans with no `http.route` afterward = ESM patching broke. Check the loader wiring (`node --import`, `register(...)`).
 - **Touching `apps/shuffler/src/telemetry-sampler.ts`**: keep `test/telemetry-sampler.test.ts` passing and meaningful — the previous inline sampler was silently broken for months (see README → History).
 - **Touching `services/spine/lib/telemetry_sampler.rb`**: keep `test/lib/telemetry_sampler_test.rb` passing — same shape and same reasoning as the Shuffler's sampler (both semconv spellings, 1% not 0%). The Spine has a sampler now (since `spine-sampler`, 2026-08-10) via `OpenTelemetry.tracer_provider.sampler =` set right after `SDK.configure` — there is **no** in-block `sampler=` option on `Configurator#configure`; don't go looking for one. README → "The Spine's sampler: the first Ruby precedent."
