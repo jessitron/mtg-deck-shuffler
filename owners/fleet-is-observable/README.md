@@ -84,10 +84,11 @@ The four sites split by whether a *live* span was available, which is the genera
 | `rooms.ts` `room.emptied` | **log** | Same callback. |
 
 **How to honor this today:** the Node ships have a paved road — `log.info/warn/error(message,
-attributes, error?)` from `apps/shuffler/src/log.ts` or `apps/tabletop/src/server/log.ts`. The
-Spine does **not** yet (`spine-logs-in-traces` in `TODO.md`), and this file's claim that the
-browser doesn't is stale (`logs-docs-catch-up` will fix it); there, put the information on a span you
-created and therefore own. Never treat a missing logger as license to reach for `addEvent`.
+attributes, error?)` from `apps/shuffler/src/log.ts` or `apps/tabletop/src/server/log.ts` — and
+the Tabletop's browser has one too: `logError(message, attributes, error?)` in
+`apps/tabletop/src/client/observability/index.ts`. The Spine does **not** yet
+(`spine-logs-in-traces` in `TODO.md`); there, put the information on a span you created and
+therefore own. Never treat a missing logger as license to reach for `addEvent`.
 
 **Why this loses nothing:** Honeycomb renders a log that carries trace and span ids with
 `meta.annotation_type = span_event` — it lands on the trace looking exactly like a span event
@@ -165,9 +166,11 @@ currently invisible, and is arguably the more valuable half.
 
 _(This is the negotiable part — update this section whenever telemetry wiring changes.)_
 
-Have, as of `ca6553f`: logging libraries that participate in traces — **in the two Node ships only**.
-The Spine still has none (`spine-logs-in-traces` in `TODO.md`); the browser claim here is stale
-(`logs-docs-catch-up`).
+Have, as of `ca6553f`: logging libraries that participate in traces — **in the two Node ships**,
+plus the Tabletop's **browser**: `logError()` in `apps/tabletop/src/client/observability/index.ts`,
+its own `LoggerProvider`, and a collector route at `/v1/logs` (`apps/tabletop/k8s/collector.yaml`,
+`apps/tabletop/k8s/ingress.yaml`) carrying the ingress path through to Honeycomb. The Spine still
+has none (`spine-logs-in-traces` in `TODO.md`).
 We want but don't yet have: a wrapper module around OpenTelemetry libraries, especially in JavaScript.
 
 **There is no shared OTel library, and that is now a decision rather than drift.** Root
@@ -598,7 +601,9 @@ Worked examples from the log-pipeline work (team `modernity`, env `local`) — t
 | The in-span / no-span log pair, both ships | [Shuffler](https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-deck-shuffler/result/m8jpkmTgaBd) · [Tabletop](https://ui.honeycomb.io/modernity/environments/local/datasets/mtg-tabletop/result/pnCKeMhpkDR) |
 
 Note the last row is a **synthetic** emitter, not real app code — worth distinguishing when you
-claim something is verified. The Tabletop's `log.ts` still has no real callers.
+claim something is verified. (The Tabletop's browser `logError()` does have real callers now —
+its own `window.onerror`/`unhandledrejection` handlers at
+`apps/tabletop/src/client/observability/index.ts:130,135` — this row just predates that wiring.)
 
 - `19e1bdf` (2026-08-10) "Flush OTel telemetry on shutdown in the Tabletop server" — closed the
   gap this file's Watch points had flagged since the Shuffler's own fix (`08-no-shutdown-flush-hook`,
@@ -881,6 +886,18 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
   fallback is expected only in tests (every real send happens inside an Express request
   span), so if it ever fires in production, the span says so instead of quietly minting
   a trace-shaped string that links to nothing.
+
+- **2026-08-10, `logs-docs-catch-up`: this file's own stale claims about the browser logger,
+  fixed.** Three spots (README Invariant 2, README "How it works now", README "Evidence") and one
+  in `interactions.md` still said the Tabletop's browser had no logger and `log.ts` had "no real
+  callers" — false since `ca6553f`'s log pipeline landed `logError()`, its own `LoggerProvider`,
+  and the `/v1/logs` collector route (verified against source: `apps/tabletop/src/client/
+  observability/index.ts`, `apps/tabletop/k8s/collector.yaml`, `apps/tabletop/k8s/ingress.yaml`).
+  `logError` in fact has two real callers already — the file's own `window.onerror` and
+  `unhandledrejection` handlers (lines 130, 135) — so "no real callers" was wrong even at face
+  value, not just stale. `notes/add-opentelemetry.md` was also extended to cover onboarding a
+  fourth ship's **logs** pipeline, not just tracing, so the next new ship doesn't repeat the gap
+  this owner's README used to describe (Spine still has it: `spine-logs-in-traces` in `TODO.md`).
 
 ## Related reading
 
