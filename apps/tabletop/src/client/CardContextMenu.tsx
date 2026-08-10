@@ -10,7 +10,7 @@ import {
   useValue,
 } from "tldraw";
 import { MtgCardShape } from "../shared/mtgCardShape";
-import { tapPartial } from "./shapes/cardTap";
+import { tapPartialsForCards } from "./shapes/cardTap";
 
 /**
  * The Tabletop's first custom context menu (ticket 17: flip and face-down).
@@ -97,12 +97,7 @@ function CardMenuItems() {
       <TldrawUiMenuItem
         id="mtg-card-tap"
         label={anyUntapped ? "Tap" : "Untap"}
-        onSelect={() =>
-          commit(
-            cards.filter((c) => c.props.tapped !== anyUntapped).map((c) => tapPartial(c, anyUntapped)),
-            "tap",
-          )
-        }
+        onSelect={() => commit(tapPartialsForCards(editor, cards, anyUntapped), "tap")}
       />
     </TldrawUiMenuGroup>
   );
