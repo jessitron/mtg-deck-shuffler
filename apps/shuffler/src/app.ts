@@ -244,7 +244,9 @@ export function createApp(
       const gamesWithActions = allGames.filter(game => game.actionCount >= 10);
       res.render("history", { games: gamesWithActions });
     } catch (error) {
-      console.error("Error loading game history:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error });
+      log.error("game history load failed", {}, error);
       res.status(500).send(
         formatErrorPageHtmlPage({
           icon: "📜",
@@ -284,7 +286,9 @@ export function createApp(
     try {
       res.render("choose-any-deck");
     } catch (error) {
-      console.error("Error loading deck selection page:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error });
+      log.error("deck selection page load failed", {}, error);
       res.status(500).send(`<div>
         <p>Error: Could not load the deck selection page</p>
         <p>Please try refreshing the page</p>
@@ -298,7 +302,9 @@ export function createApp(
       const availableDecks = deckRetriever.listAvailableDecks();
       res.render("partials/deck-selection-precon", { availableDecks });
     } catch (error) {
-      console.error("Error loading precon deck tab:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error });
+      log.error("precon deck tab load failed", {}, error);
       res.status(500).send(`<div>Error: Could not load precon deck selection</div>`);
     }
   });
@@ -309,7 +315,9 @@ export function createApp(
       const availableDecks = deckRetriever.listAvailableDecks();
       res.render("partials/deck-selection-archidekt", { availableDecks });
     } catch (error) {
-      console.error("Error loading Archidekt tab:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error });
+      log.error("Archidekt deck tab load failed", {}, error);
       res.status(500).send(`<div>Error: Could not load Archidekt deck selection</div>`);
     }
   });
@@ -415,7 +423,9 @@ export function createApp(
       });
     } catch (error) {
       if (error instanceof IncompatiblePrepVersionError) {
-        console.warn(`Prep ${prepId} has incompatible version:`, error.message);
+        const attrs = { "prep.id": prepId, "prep.version.error": error.message };
+        trace.getActiveSpan()?.setAttributes(attrs);
+        log.warn("Prep has incompatible version", attrs);
         res.status(410).send(
           formatErrorPageHtmlPage({
             icon: "🕰️",
@@ -426,7 +436,9 @@ export function createApp(
         );
         return;
       }
-      console.error("Error loading prep:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "prep.id": prepId });
+      log.error("prep load failed", { "prep.id": prepId }, error);
       res.status(500).send(
         formatErrorPageHtmlPage({
           icon: "🚫",
@@ -506,7 +518,9 @@ export function createApp(
 
       // Reject preps saved in an incompatible format before doing anything with them
       if (prep.version !== PERSISTED_GAME_PREP_VERSION) {
-        console.warn(`Prep ${prepId} has incompatible version:`, prep.version);
+        const attrs = { "prep.id": prepId, "prep.version": prep.version };
+        trace.getActiveSpan()?.setAttributes(attrs);
+        log.warn("Prep has incompatible version", attrs);
         res.status(410).send(
           formatErrorPageHtmlPage({
             icon: "🕰️",
@@ -570,7 +584,9 @@ export function createApp(
 
       res.redirect(`/game/${gameId}`);
     } catch (error) {
-      console.error("Error starting game:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "prep.id": prepId });
+      log.error("game start failed", { "prep.id": prepId }, error);
       res.status(500).send(
         formatErrorPageHtmlPage({
           icon: "🎲",
@@ -618,7 +634,9 @@ export function createApp(
       const html = formatGamePageHtmlPage(game, {}, res.locals.devMode);
       res.send(html);
     } catch (error) {
-      console.error("Error loading game:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "game.game_id": gameId });
+      log.error("game load failed", { "game.game_id": gameId }, error);
       res.status(500).send(
         formatErrorPageHtmlPage({
           icon: "⚠️",
@@ -688,7 +706,9 @@ export function createApp(
 
       res.redirect(`/game/${newGameId}`);
     } catch (error) {
-      console.error("Error restarting game:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "game.game_id": gameId });
+      log.error("game restart failed", { "game.game_id": gameId }, error);
       res.status(500).send(
         formatErrorPageHtmlPage({
           icon: "🔄",
@@ -740,7 +760,9 @@ export function createApp(
         expectedVersion
       });
     } catch (error) {
-      console.error("Error loading library modal:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "game.game_id": gameId });
+      log.error("library modal load failed", { "game.game_id": gameId }, error);
       res.status(500).send(`<div>Error loading library</div>`);
     }
   });
@@ -761,7 +783,9 @@ export function createApp(
       const modalHtml = formatTableModalHtmlFragment(game);
       res.send(modalHtml);
     } catch (error) {
-      console.error("Error loading table modal:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "game.game_id": gameId });
+      log.error("table modal load failed", { "game.game_id": gameId }, error);
       res.status(500).send(`<div>Error loading table contents</div>`);
     }
   });
@@ -896,7 +920,14 @@ export function createApp(
         locationActionsHtml,
       });
     } catch (error) {
-      console.error("Error loading card modal:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.card_index": cardIndex,
+      });
+      log.error("card modal load failed", { "game.game_id": gameId, "game.card_index": cardIndex }, error);
       res.status(500).send(`<div>Error loading card details</div>`);
     }
   });
@@ -1004,7 +1035,14 @@ export function createApp(
         locationActionsHtml: "", // No location actions for prep page
       });
     } catch (error) {
-      console.error("Error loading prep card modal:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "prep.id": prepId,
+        "prep.card_index": cardIndex,
+      });
+      log.error("prep card modal load failed", { "prep.id": prepId, "prep.card_index": cardIndex }, error);
       res.status(500).send(`<div>Error loading card details</div>`);
     }
   });
@@ -1039,7 +1077,14 @@ export function createApp(
       const face: "front" | "back" = req.query.face === "back" ? "back" : "front";
       res.send(renderCommanderCard({ ...gameCard, currentFace: face }));
     } catch (error) {
-      console.error("Error flipping prep card:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "prep.id": prepId,
+        "prep.card_index": cardIndex,
+      });
+      log.error("prep card flip failed", { "prep.id": prepId, "prep.card_index": cardIndex }, error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);
     }
   });
@@ -1081,7 +1126,9 @@ export function createApp(
         expectedVersion: undefined
       });
     } catch (error) {
-      console.error("Error loading prep library modal:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "prep.id": prepId });
+      log.error("prep library modal load failed", { "prep.id": prepId }, error);
       res.status(500).send(`<div>Error loading library</div>`);
     }
   });
@@ -1136,7 +1183,11 @@ export function createApp(
         <script>window.location.href = '/game/${newGameId}';</script>
       </div>`);
     } catch (error) {
-      console.error("Error creating game from state:", error);
+      markCurrentSpanAsError(error instanceof Error ? error.message : String(error), {
+        "error.message": error instanceof Error ? error.message : String(error),
+        "error.type": error instanceof Error ? error.name : typeof error,
+      });
+      log.error("create game from state failed", {}, error);
       let errorMessage = "Failed to parse JSON or create game";
       if (error instanceof SyntaxError) {
         errorMessage = "Invalid JSON format";
@@ -1162,7 +1213,9 @@ export function createApp(
       const modalHtml = formatHistoryModalHtmlFragment(game);
       res.send(modalHtml);
     } catch (error) {
-      console.error("Error loading history modal:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "game.game_id": gameId });
+      log.error("history modal load failed", { "game.game_id": gameId }, error);
       res.status(500).send(`<div>Error loading history</div>`);
     }
   });
@@ -1178,7 +1231,9 @@ export function createApp(
       const modalHtml = formatDebugStateModalHtmlFragment(persistedGame);
       res.send(modalHtml);
     } catch (error) {
-      console.error("Error loading debug state:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "game.game_id": gameId });
+      log.error("debug state load failed", { "game.game_id": gameId }, error);
       res.status(500).send(`<div>Error loading debug state</div>`);
     }
   });
@@ -1196,7 +1251,9 @@ export function createApp(
       const html = formatActiveGameHtmlSection(game);
       res.send(html);
     } catch (error) {
-      console.error("Error loading game section:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "game.game_id": gameId });
+      log.error("game section load failed", { "game.game_id": gameId }, error);
       res.status(500).send(`<div>Error loading game section</div>`);
     }
   });
@@ -1216,7 +1273,14 @@ export function createApp(
 
       renderCommandOutcome(res, gameId, outcome, "Cannot reveal card: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
-      console.error("Error revealing card:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.game_card_index": gameCardIndex,
+      });
+      log.error("reveal card failed", { "game.game_id": gameId, "game.game_card_index": gameCardIndex }, error);
       res.status(500).send(`<div>Error revealing card</div>`);
     }
   });
@@ -1235,7 +1299,14 @@ export function createApp(
 
       renderCommandOutcome(res, gameId, outcome, "Cannot put card in hand: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
-      console.error("Error putting card in hand:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.game_card_index": gameCardIndex,
+      });
+      log.error("put card in hand failed", { "game.game_id": gameId, "game.game_card_index": gameCardIndex }, error);
       res.status(500).send(`<div>Error putting card in hand</div>`);
     }
   });
@@ -1254,7 +1325,14 @@ export function createApp(
 
       renderCommandOutcome(res, gameId, outcome, "Cannot put card on top: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
-      console.error("Error putting card on top:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.game_card_index": gameCardIndex,
+      });
+      log.error("put card on top failed", { "game.game_id": gameId, "game.game_card_index": gameCardIndex }, error);
       res.status(500).send(`<div>Error putting card on top</div>`);
     }
   });
@@ -1273,7 +1351,14 @@ export function createApp(
 
       renderCommandOutcome(res, gameId, outcome, "Cannot put card on bottom: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
-      console.error("Error putting card on bottom:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.game_card_index": gameCardIndex,
+      });
+      log.error("put card on bottom failed", { "game.game_id": gameId, "game.game_card_index": gameCardIndex }, error);
       res.status(500).send(`<div>Error putting card on bottom</div>`);
     }
   });
@@ -1303,7 +1388,9 @@ export function createApp(
         res.setHeader("HX-Reswap", "innerHTML");
         res.send(lossModal);
       } else {
-        console.error("Error drawing card:", error);
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "game.game_id": gameId });
+        log.error("draw card failed", { "game.game_id": gameId }, error);
         res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not draw card"}</div>`);
       }
     }
@@ -1347,7 +1434,14 @@ export function createApp(
 
       renderCommandOutcome(res, gameId, outcome, "Cannot play card: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
     } catch (error) {
-      console.error("Error playing card:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.game_card_index": gameCardIndex,
+      });
+      log.error("play card failed", { "game.game_id": gameId, "game.game_card_index": gameCardIndex }, error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not play card"}</div>`);
     }
   });
@@ -1378,7 +1472,14 @@ export function createApp(
 
       renderCommandOutcome(res, gameId, outcome, "Cannot discard card: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
     } catch (error) {
-      console.error("Error discarding card:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.game_card_index": gameCardIndex,
+      });
+      log.error("discard card failed", { "game.game_id": gameId, "game.game_card_index": gameCardIndex }, error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not discard card"}</div>`);
     }
   });
@@ -1396,7 +1497,9 @@ export function createApp(
 
       renderCommandOutcome(res, gameId, outcome, "Cannot shuffle: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
     } catch (error) {
-      console.error("Error shuffling library:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "game.game_id": gameId });
+      log.error("shuffle library failed", { "game.game_id": gameId }, error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not shuffle library"}</div>`);
     }
   });
@@ -1414,7 +1517,9 @@ export function createApp(
 
       renderCommandOutcome(res, gameId, outcome, "Cannot mulligan: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
     } catch (error) {
-      console.error("Error taking mulligan:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error, "game.game_id": gameId });
+      log.error("mulligan failed", { "game.game_id": gameId }, error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not mulligan"}</div>`);
     }
   });
@@ -1433,7 +1538,15 @@ export function createApp(
 
       renderCommandOutcome(res, gameId, outcome, "Cannot move card: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
     } catch (error) {
-      console.error("Error moving hand card:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.move.from": from,
+        "game.move.to": to,
+      });
+      log.error("move hand card failed", { "game.game_id": gameId, "game.move.from": from, "game.move.to": to }, error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not move hand card"}</div>`);
     }
   });
@@ -1451,7 +1564,14 @@ export function createApp(
 
       renderCommandOutcome(res, gameId, outcome, "Cannot undo: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
-      console.error("Error undoing event:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.event_index": gameEventIndex,
+      });
+      log.error("undo event failed", { "game.game_id": gameId, "game.event_index": gameEventIndex }, error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not undo event"}</div>`);
     }
   });
@@ -1473,7 +1593,14 @@ export function createApp(
         return formatFlippingContainer(flippedCard, { page: "game", gameId });
       });
     } catch (error) {
-      console.error("Error flipping card:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.game_card_index": gameCardIndex,
+      });
+      log.error("flip card failed", { "game.game_id": gameId, "game.game_card_index": gameCardIndex }, error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);
     }
   });
@@ -1583,7 +1710,14 @@ export function createApp(
         });
       });
     } catch (error) {
-      console.error("Error flipping card in modal:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+        "game.game_card_index": gameCardIndex,
+      });
+      log.error("flip card in modal failed", { "game.game_id": gameId, "game.game_card_index": gameCardIndex }, error);
       res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not flip card"}</div>`);
     }
   });
@@ -1619,7 +1753,14 @@ export function createApp(
       const buffer = await response.arrayBuffer();
       res.send(Buffer.from(buffer));
     } catch (error) {
-      console.error("Error proxying image:", error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "card.id": cardId,
+        "card.face": cardFace,
+      });
+      log.error("image proxy failed", { "card.id": cardId, "card.face": cardFace }, error);
       res.status(500).send("Internal server error");
     }
   });

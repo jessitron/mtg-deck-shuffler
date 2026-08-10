@@ -1,7 +1,9 @@
 import Database from "better-sqlite3";
+import { trace } from "@opentelemetry/api";
 import { PersistStatePort, PersistedGameState, GameHistorySummary } from "./types.js";
 import { GameId } from "../domain-types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
+import { log } from "../log.js";
 
 export class SqlitePersistStateAdapter implements PersistStatePort {
   private db: Database.Database;
@@ -98,7 +100,11 @@ export class SqlitePersistStateAdapter implements PersistStatePort {
           updatedAt: new Date(row.updated_at),
         };
       } catch (parseErr) {
-        console.error(`Failed to parse game state for game ${row.id}: ${parseErr}`);
+        // Recoverable: the row is skipped in favor of a placeholder, and the
+        // /history request still succeeds — a warning, not a request failure.
+        const attrs = { "game.id": row.id };
+        trace.getActiveSpan()?.setAttributes(attrs);
+        log.warn("Failed to parse game state row; showing placeholder", attrs, parseErr);
         return {
           gameId: row.id,
           deckName: "Unknown",

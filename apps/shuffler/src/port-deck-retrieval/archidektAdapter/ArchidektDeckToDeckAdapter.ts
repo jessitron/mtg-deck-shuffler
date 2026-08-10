@@ -1,3 +1,4 @@
+import { trace } from "@opentelemetry/api";
 import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest } from "../types.js";
 import { ArchidektGatewayInterface } from "./ArchidektGatewayInterface.js";
 import { Deck, CardDefinition, PERSISTED_DECK_VERSION } from "../../types.js";
@@ -5,6 +6,7 @@ import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
 import { isDoubleSidedLayout } from "../twoFacedLayouts.js";
 import { CardImagesPort } from "../../port-card-images/types.js";
 import { enrichDeckWithImages } from "../../port-card-images/enrichDeckWithImages.js";
+import { log } from "../../log.js";
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   constructor(private gateway: ArchidektGatewayInterface, private retrievedDate?: Date, private imagesPort?: CardImagesPort) {}
@@ -41,7 +43,9 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
       try {
         await enrichDeckWithImages(deck, this.imagesPort);
       } catch (error) {
-        console.error("Failed to enrich Archidekt deck with Scryfall images; falling back to constructed URLs:", error);
+        const attrs = { "deck.archidektId": request.archidektDeckId };
+        trace.getActiveSpan()?.setAttributes(attrs);
+        log.warn("Failed to enrich Archidekt deck with Scryfall images; falling back to constructed URLs", attrs, error);
       }
     }
     return deck;
