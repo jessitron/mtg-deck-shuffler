@@ -7,6 +7,8 @@ import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentation
 import { TraceIdRatioBasedSampler, ParentBasedSampler } from "@opentelemetry/sdk-trace-node";
 import { Sampler, SamplingResult } from "@opentelemetry/sdk-trace-base";
 import { SpanKind, Attributes, Context, Link } from "@opentelemetry/api";
+import { installShutdownHandlers } from "./shutdownHooks.js";
+import { log } from "./log.js";
 
 // Modeled on the Shuffler's tracing.ts. This app is ESM ("type": "module");
 // OTel's instrumentations patch modules via require-in-the-middle, which only
@@ -75,3 +77,13 @@ const sdk: NodeSDK = new NodeSDK({
 });
 
 sdk.start();
+
+// Without this, SIGTERM (verify.sh's cleanup(), and k8s on every pod
+// termination) kills the process immediately, dropping whatever span/log
+// batch hasn't flushed yet. installShutdownHandlers() drains bounded by a
+// timeout, then exits itself — Node no longer exits on its own once a
+// SIGTERM handler exists. See shutdownHooks.ts.
+installShutdownHandlers(() => sdk.shutdown(), {
+  onTimeout: () => log.warn("OTel shutdown timed out on the way out; some telemetry may have been dropped"),
+  onDrainError: (error) => log.warn("OTel shutdown failed on the way out; some telemetry may have been dropped", {}, error),
+});
