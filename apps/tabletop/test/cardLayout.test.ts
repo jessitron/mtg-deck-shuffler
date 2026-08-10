@@ -91,6 +91,32 @@ describe("cardLayout — player area geometry", () => {
     expect(first.y).toBeGreaterThanOrEqual(box.y + ZONE_LABEL_BAND);
   });
 
+  // Zone detection is center-based (owners/tabletop-shape-mechanics): once a
+  // cascading card's center leaves the graveyard's AABB, topmostZoneAt sees
+  // "undefined zone" or a neighboring zone (e.g. exile) instead. The +6/card
+  // diagonal cascade used to march a card's center out of the box past
+  // graveyardCount ~31 (JES bug, 2026-08-10) — this pins that it can't
+  // recur for arbitrarily large piles by wrapping the cascade back to the
+  // start (stacking back over earlier cards) once it would exit the box.
+  it("keeps every card's center inside the graveyard AABB, no matter how large the pile", () => {
+    const box = graveyardBounds(0);
+    for (const count of [0, 1, 30, 31, 32, 33, 50, 100, 500]) {
+      const pos = graveyardCardPosition(0, count);
+      const centerX = pos.x + CARD_W / 2;
+      const centerY = pos.y + CARD_H / 2;
+      expect(centerX, `count ${count} center.x`).toBeGreaterThanOrEqual(box.x);
+      expect(centerX, `count ${count} center.x`).toBeLessThan(box.x + box.w);
+      expect(centerY, `count ${count} center.y`).toBeGreaterThanOrEqual(box.y);
+      expect(centerY, `count ${count} center.y`).toBeLessThan(box.y + box.h);
+    }
+  });
+
+  it("wraps the graveyard cascade back to the start, restacking over earlier cards", () => {
+    const first = graveyardCardPosition(0, 0);
+    const wrapped = graveyardCardPosition(0, 32); // one past the ~31-card threshold
+    expect(wrapped).toEqual(first);
+  });
+
   it("places the library at the top-left of the column, beside the playmat", () => {
     const mat = playmatBounds(0);
     const library = libraryBounds(0);

@@ -503,8 +503,10 @@ leaves the titles exactly as covered.
   pairwise ≥ `GAP` disjointness assertion (watch point 8) passes unchanged across all four seats
   and the Stack — the column still exactly matches the playmat's height, so no other zone moved.
 - **Known consequence, buoyed**: the shorter graveyard means its +6/card cascade walks out of the
-  box at ~32 cards (was ~53) — `TODO.md` buoy `graveyard-cascade-overflow` (`1c26469`). Cosmetic:
-  cards are *placed* there, not zone-detected by the box they overflow.
+  box at ~32 cards (was ~53) — `TODO.md` buoy `graveyard-cascade-overflow` (`1c26469`). Turned out
+  not purely cosmetic — zone detection is center-based, so a card whose cascade step pushed its
+  center outside the box misread as a different zone. **Resolved 2026-08-10, `7823a39`** — see the
+  "Graveyard cascade wrap-bound" entry below.
 - Old tables keep old furniture (`ensurePlayerArea` never redraws) — same graceful degradation
   already recorded for the command-zone redraw.
 
@@ -676,6 +678,42 @@ this KB doesn't own the source of.
 Full detail in `architecture.md`'s new "Ticket 19" section; `interactions.md` watch points 1 and 6
 extended, new watch point 18; `files.md` gained `SelectionClearingNoteShapeUtil.ts` and
 `verify-note.spec.ts`.
+## Graveyard cascade wrap-bound: `graveyard-cascade-overflow` buoy resolved (2026-08-10, `7823a39`)
+
+**Pure placement/geometry — no ShapeUtil hooks, no `zoneHitTest.ts`, no zone-detection code
+touched.** Resolves the buoy the zone-label-band entry above left in `TODO.md`
+(`graveyard-cascade-overflow`, `1c26469`): the shorter graveyard (356 tall since that change) made
+`graveyardCardPosition`'s unbounded +6-unit diagonal cascade march a card's center outside
+`graveyardBounds` past ~32 cards. Zone detection is center-based (`topmostZoneAt`,
+`MtgCardShapeUtil.zoneAt()`), so a card past that threshold read as zone `undefined` or `exile` —
+logging a spurious exile-entry event and evicting any counters it carried, exactly the failure
+mode watch point 8's disjointness reasoning warns about for cards that leave their own zone's box.
+
+- **Fix stays entirely inside `cardLayout.ts`**: `graveyardCardPosition` now computes the last
+  cascade step whose card-center still lands inside the box — bounded independently by width and
+  height (`maxStepsX`/`maxStepsY`, using the existing `CARD_W`/`CARD_H`/`ZONE_LABEL_BAND`
+  constants) — takes the smaller of the two, then wraps `graveyardCount % (maxSteps + 1)`. Past the
+  threshold, a large pile restacks visually over the earliest cards instead of continuing to walk
+  toward the inter-zone gap. New constants `GRAVEYARD_PILE_INSET` (10) and `GRAVEYARD_PILE_STEP`
+  (6) factor the previously-inline magic numbers out, specifically so the wrap-bound math and the
+  position math read off the same two numbers and can't drift apart.
+- **Confirms, rather than extends, this KB's boundary**: cards are *placed* by `cardLayout.ts`, not
+  *zone-detected* there (zone membership still comes from `mtg-zone` shapes via `topmostZoneAt()`)
+  — but this fix is the concrete case where a placement-only bug caused a zone-detection-visible
+  symptom, because zone detection reads a card's *actual* center, and an unbounded cascade can push
+  that center anywhere. **Pattern worth carrying to any future unbounded cascade** (e.g. if
+  `stackCardPosition`'s per-seat along/inward cascade, or any new pile function, turns out to have
+  the same class of bug): a cascade over a fixed-size box must compute its own wrap bound from that
+  box's dimensions, not just place cards indefinitely and hope the box is big enough.
+- **Tests**: `apps/tabletop/test/cardLayout.test.ts` gained assertions that graveyard-card centers
+  stay inside `graveyardBounds` for counts up to 500, and that the cascade wraps back to step 0 at
+  count 32 — the old failure threshold, now a regression pin rather than a live bug.
+- Resolves `TODO.md`'s `graveyard-cascade-overflow` buoy — deleted, not left as a tombstone.
+
+No `architecture.md`/`interactions.md`/`files.md` change: no hook, shape type, or file was added,
+renamed, or removed, and this doesn't introduce a new watch point (it's the same "cascade must
+self-bound against center-based zone detection" lesson the zone-label-band entry already flagged
+as a risk — this just confirms it firing and being fixed, not a new class of bug).
 
 ## What Was Tried and Abandoned
 
