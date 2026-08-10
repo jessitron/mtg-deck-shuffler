@@ -164,7 +164,6 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
         cardName: arrival.cardName,
         frontImageUrl: arrival.frontImageUrl,
         backImageUrl: arrival.backImageUrl,
-        cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
         face: arrival.face,
         faceDown: false,
         tapped: false,

@@ -75,7 +75,6 @@ describe("card arrival", () => {
       cardName: "Lightning Bolt",
       frontImageUrl: event.frontImageUrl,
       backImageUrl: null,
-      cardBackImageUrl: null,
       face: "front",
       tapped: false,
     });
@@ -150,32 +149,12 @@ describe("card arrival", () => {
     await post("arrival-sleeved", cardPlayed({ initiator: { seatId: "seat-sleeved", playerName: "Jess" } }));
     const [card] = shapesOf("arrival-sleeved");
     expect(card.props.sleeveColor).toBe("#8b2f5c");
-    expect(card.props.cardBackImageUrl).toBeNull();
   });
 
   it("an unsleeved seat's cards mint with sleeveColor null (today's look)", async () => {
     await post("arrival-unsleeved", cardPlayed());
     const [card] = shapesOf("arrival-unsleeved");
     expect(card.props.sleeveColor).toBeNull();
-  });
-
-  it("bakes an unsleeved seat's card back image into minted cards for face-down rendering", async () => {
-    await fetch(`http://localhost:${port}/api/tables/arrival-card-back/events`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        id: "card-back-seat-event",
-        name: "seat.joined",
-        occurredAt: new Date().toISOString(),
-        initiator: { seatId: "seat-unsleeved", playerName: "Jess" },
-        deckName: "Blame Game",
-        cardBackImageUrl: "https://example.com/card-back.jpg",
-      }),
-    });
-
-    await post("arrival-card-back", cardPlayed({ initiator: { seatId: "seat-unsleeved", playerName: "Jess" } }));
-    const [card] = shapesOf("arrival-card-back");
-    expect(card.props.cardBackImageUrl).toBe("https://example.com/card-back.jpg");
   });
 
   it("rejects a payload missing required fields (JES-128 validation point)", async () => {
