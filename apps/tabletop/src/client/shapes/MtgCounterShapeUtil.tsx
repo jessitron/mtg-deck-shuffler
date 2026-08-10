@@ -1,7 +1,7 @@
 import { BaseBoxShapeUtil, HTMLContainer, TLShapePartial, useValue } from "tldraw";
 import { MtgCounterShape, mtgCounterShapeProps } from "../../shared/mtgCounterShape";
 import { fitCounterFont } from "./counterTextFit";
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 
 export const COUNTER_SIZE = 44;
 
@@ -65,6 +65,35 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
       return () => clearTimeout(timer);
     }, [isEditing]);
 
+    // Vertical centering for the editing textarea, MEASURED rather than
+    // estimated. fitCounterFont's lineCount is a conservative guess (it has
+    // to be — real width measurement is unreliable before the webfont
+    // loads), so near a wrap boundary it sometimes predicts one more line
+    // than the browser actually renders (e.g. "why", "+1/+1" at the default
+    // 44px disc). Padding sized for the guessed (taller) block then leaves
+    // the actually-shorter text sitting high with empty space below it —
+    // exactly the bug Jess reported. Fix: after layout, zero the padding,
+    // read the textarea's real scrollHeight (which reports full content
+    // height regardless of the fixed visible height), and center against
+    // that. Stored in state (not written straight to the DOM node) so it
+    // survives re-renders this effect doesn't rerun for — a drag or
+    // unrelated shape-record churn re-runs component() and would otherwise
+    // stamp the JSX's own paddingTop back over a direct DOM write.
+    const { fontSize } = fitCounterFont(text, w, h);
+    const [measuredPadTop, setMeasuredPadTop] = useState(0);
+    useLayoutEffect(() => {
+      if (!isEditing) return;
+      const ta = rInput.current;
+      if (!ta) return;
+      const border = h * (3 / COUNTER_SIZE);
+      const usableHeight = h - 2 * border;
+      const previousPadding = ta.style.paddingTop;
+      ta.style.paddingTop = "0px";
+      const contentHeight = ta.scrollHeight;
+      ta.style.paddingTop = previousPadding;
+      setMeasuredPadTop(Math.max(0, (usableHeight - contentHeight) / 2));
+    }, [isEditing, text, fontSize, h]);
+
     // The .hand-count recipe (apps/shuffler/public/game.css), proportional to
     // the shape's own height rather than fixed px so a resized counter keeps
     // its proportions (the playmat-radius lesson: fixed px drifts as the
@@ -73,7 +102,6 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
     // like "lifelink" (Jess, 2026-08-08); the browser wraps within the
     // square content box, and the round clip nibbling the corners of long
     // labels is accepted — close enough. See counterTextFit.ts.
-    const { fontSize, lineCount } = fitCounterFont(text, w, h);
     const disc: CSSProperties = {
       width: w,
       height: h,
@@ -104,8 +132,8 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
           {isEditing ? (
             // A textarea (not an input) so long labels wrap while editing,
             // roughly as they will display. It can't flex-center its own
-            // text, so vertical centering is estimated padding from the
-            // fit's line count.
+            // text, so vertical centering is measured padding — see the
+            // useLayoutEffect above.
             <textarea
               data-testid="mtg-counter-input"
               ref={rInput}
@@ -132,10 +160,7 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
               style={{
                 ...disc,
                 display: "block",
-                paddingTop: Math.max(
-                  0,
-                  (h - 2 * (h * (3 / COUNTER_SIZE)) - Math.max(1, lineCount) * 1.1 * fontSize) / 2,
-                ),
+                paddingTop: measuredPadTop,
                 resize: "none",
                 // Invisible chrome: editing changes nothing visually except
                 // the caret. Suppressing the native focus outline is the
