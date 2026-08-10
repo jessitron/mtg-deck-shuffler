@@ -32,6 +32,10 @@ export interface PersistedGamePrep {
   playerName?: string;
   /** The seat's short GUID — player names are not unique; this is the seat's identity. */
   seatId?: string;
+  // The Spine's own table/seat ids (src/port-spine/), present only when the
+  // Spine join succeeded (best-effort). Same optional/no-version-bump exception.
+  spineTableId?: string;
+  spineSeatId?: string;
   /**
    * The seat's sleeve, as #rrggbb (table-layout ticket 17) — a game constant,
    * chosen in prep (the picker is ticket 16) and sent in seat.joined. Optional

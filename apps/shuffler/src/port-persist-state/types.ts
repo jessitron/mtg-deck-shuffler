@@ -49,6 +49,10 @@ export interface PersistedGameState {
   playerName?: string;
   /** The seat's short GUID — player names are not unique; this is the seat's identity. */
   seatId?: string;
+  // The Spine's own table/seat ids (src/port-spine/), present only when the
+  // Spine join succeeded (best-effort). Same optional/no-version-bump exception.
+  spineTableId?: string;
+  spineSeatId?: string;
   // Table look: the /prepare picker's sleeve/playmat choice, snapshotted at
   // /start-game. Optional, no version bump — same exception as tableName above.
   sleeveColor?: string;
