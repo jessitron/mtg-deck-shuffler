@@ -126,7 +126,11 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   the in-progress drag. Arms exactly one zone regardless of selection size, matching "drag one of
   several selected cards moves them all to one destination." Read-only: writes nothing to the
   store. Imported by both `MtgCardShapeUtil.tsx` (`zoneAt()`, drag-settle) and
-  `MtgZoneShapeUtil.tsx` (`component()`, live armed-glow rendering).
+  `MtgZoneShapeUtil.tsx` (`component()`, live armed-glow rendering). Since 2026-08-10, `ZoneHit`
+  also carries `seatId` (was just `{id, zone}`), and `armedZoneIdSignal` gates command zones on
+  ownership via a new private `allDraggedCardsAreOwnersCommander(editor, seatId)` — see
+  `architecture.md`'s "Command zones only arm for their owner's commander" section and
+  `interactions.md` watch point 21. Every non-command zone type is unaffected.
 - `apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx` — **new, ticket 18**: extends
   `BaseBoxShapeUtil<MtgCounterShape>`. Deliberately no `onClick` (text editing is stock
   double-click-to-edit via `canEdit()`, avoiding the selection-deferral quirk), but

@@ -322,6 +322,44 @@ a shared `computed()` behind a `use*` hook, read in `component()`, never written
 feature lives entirely inside `component()`, consistent with watch point 7 (a locked shape needs no
 interaction hooks; this ticket didn't need to add any to get a dynamic, drag-reactive appearance).
 
+### Command zones only arm for their owner's commander (2026-08-10)
+
+TODO.md item: "Only your own commanders can land in your command zone. Any other card dragged
+over it, it shouldn't light up." Landed entirely inside `zoneHitTest.ts`, reusing props that
+already existed: `owner`/`isCommander` on `mtg-card` (table-layout ticket 18) and `seatId` on
+`mtg-zone` (present since ticket 13). No new state.
+
+`ZoneHit` widened from `{id, zone}` to `{id, zone, seatId}` — `topmostZoneAt` now reads the
+winning candidate's `props.seatId` too, since the new check needs it. `armedZoneIdSignal`'s
+computed body gets one new branch, placed after `topmostZoneAt` resolves a hit and before
+returning it:
+
+```
+if (hit.zone === "command" && !allDraggedCardsAreOwnersCommander(editor, hit.seatId)) {
+  return undefined;
+}
+return hit.id;
+```
+
+`allDraggedCardsAreOwnersCommander(editor, seatId)` filters `editor.getSelectedShapes()` to
+`shape.type === "mtg-card"`, returns `false` if the filtered list is empty, and otherwise requires
+every one of them to satisfy `props.owner === seatId && props.isCommander`. Every non-`command`
+zone type is untouched by this branch and keeps arming card-agnostically, exactly as ticket 14
+left it.
+
+This is a refinement of, not an exception to, the "one destination for the whole rigid group, or
+none" principle the "Corrected, 2026-08-08" subsection above already established for multi-card
+drags: a partial match (some selected cards qualify, some don't) still doesn't arm, the same
+posture a multi-select drag toward any other zone already has. Confirmed during this owner's
+`-review` that there's no selection-timing race: `editor.getSelectedShapes()` is read only once
+`editor.isIn("select.translating")` is already true, i.e. after tldraw's own
+`PointingShape`/`startTranslating` transition has settled which shapes are actually being
+dragged — the same trust the surrounding code already places in reading
+`editor.inputs.currentPagePoint` mid-drag.
+
+See `interactions.md` watch point 21 for the "arming is no longer universally card-agnostic"
+consequence, and `history.md` for the full changelog entry.
+
 ## Registering a shape into tldraw's own `TLShape` union
 
 A hand-rolled `TLBaseShape<'my-type', Props>` is never a member of tldraw's closed `TLShape`

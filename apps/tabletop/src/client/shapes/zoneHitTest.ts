@@ -1,9 +1,11 @@
 import { Computed, computed, Editor, TLShapeId, useValue, VecLike } from "tldraw";
 import { MtgZoneShapeProps } from "../../shared/mtgZoneShape";
+import { MtgCardShape } from "../../shared/mtgCardShape";
 
 export interface ZoneHit {
   id: TLShapeId;
   zone: MtgZoneShapeProps["zone"];
+  seatId: MtgZoneShapeProps["seatId"];
 }
 
 /**
@@ -24,7 +26,8 @@ export function topmostZoneAt(editor: Editor, center: VecLike): ZoneHit | undefi
     const bounds = editor.getShapePageBounds(candidate);
     if (!bounds?.containsPoint(center)) continue;
     if (!winner || candidate.index > winner.index) {
-      winner = { id: candidate.id, zone: (candidate.props as MtgZoneShapeProps).zone, index: candidate.index };
+      const props = candidate.props as MtgZoneShapeProps;
+      winner = { id: candidate.id, zone: props.zone, seatId: props.seatId, index: candidate.index };
     }
   }
   return winner;
@@ -49,11 +52,31 @@ function armedZoneIdSignal(editor: Editor) {
   if (!signal) {
     signal = computed("armedZoneId", () => {
       if (!editor.isIn("select.translating")) return undefined;
-      return topmostZoneAt(editor, editor.inputs.currentPagePoint)?.id;
+      const hit = topmostZoneAt(editor, editor.inputs.currentPagePoint);
+      if (!hit) return undefined;
+      // A command zone is only for its owner's commanders — any other card,
+      // or another seat's commander, passing over it shouldn't light it up.
+      // Every other zone type stays card-agnostic, as before. "Every
+      // selected card must qualify" mirrors the existing rigid-group rule
+      // just below (a whole selection arms one destination, or none) rather
+      // than arming on a partial match that wouldn't hold for the rest of
+      // the drag.
+      if (hit.zone === "command" && !allDraggedCardsAreOwnersCommander(editor, hit.seatId)) {
+        return undefined;
+      }
+      return hit.id;
     });
     armedZoneIdByEditor.set(editor, signal);
   }
   return signal;
+}
+
+function allDraggedCardsAreOwnersCommander(editor: Editor, seatId: string | null): boolean {
+  const draggedCards = editor
+    .getSelectedShapes()
+    .filter((shape): shape is MtgCardShape => shape.type === "mtg-card");
+  if (draggedCards.length === 0) return false;
+  return draggedCards.every((card) => card.props.owner === seatId && card.props.isCommander);
 }
 
 /**
