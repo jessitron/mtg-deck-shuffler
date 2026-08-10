@@ -282,8 +282,7 @@ export function createApp(
   // Returns whole page - deck selection page
   app.get("/choose-any-deck", async (req, res) => {
     try {
-      const availableDecks = deckRetriever.listAvailableDecks();
-      res.render("choose-any-deck", { availableDecks });
+      res.render("choose-any-deck");
     } catch (error) {
       console.error("Error loading deck selection page:", error);
       res.status(500).send(`<div>
