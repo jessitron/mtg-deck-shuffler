@@ -900,6 +900,36 @@ prop `mtg-zone` already carries — no new state.
   commander does not arm this seat's command zone — plus the existing 4 zone-armed cases and the
   full suite (47 Playwright + 97 vitest) green.
 
+## Ticket 21: physics gestures announced to Honeycomb (2026-08-10)
+
+`.scratch/tabletop-physics/issues/21-gesture-vocabulary.md`, landed 2026-08-10. New file
+`apps/tabletop/src/client/usePhysicsAnnouncements.ts` (owned by `fleet-is-observable`, not this
+owner) adds a `store.listen()` that translates this owner's existing gesture detection into named
+Honeycomb spans — `card.tapped`/`card.untapped` (from `props.tapped` changing), `card.flipped`
+(from `props.face`), `card.turnedFaceDown` (from `props.faceDown`), `card.zoneMoved` (from
+`meta.zone`, all four written by `MtgCardShapeUtil`'s `onClick`/`onTranslateEnd`), plus
+`counter.attached`/`noteAttached` (from `parentId` changes via `onDragShapesIn`), with a generic
+`shape.moved`/`shape.changed` fallback for anything else.
+
+**This owner's territory changed by exactly one line**: `MtgCardShapeUtil.onTranslateEnd`'s old
+`console.log('zone-entry ...')` (the "Descoped 2026-08-06" placeholder from the original
+zone-entry-events ticket) was deleted — `card.zoneMoved`, emitted by the new listener, now covers
+that notification. **No ShapeUtil hook's detection logic changed** — `onClick`, `onTranslateEnd`,
+and `onDragShapesIn` still fire exactly as before; the listener only reads their resulting store
+mutations, it never drives them.
+
+This owner's `-context` consult for the ticket surfaced a real gap in this KB: `architecture.md`
+and `interactions.md` documented `onTranslateEnd` (settle) but not `Translating.ts`'s per-move
+write behavior, which matters to any *new* consumer reading the store directly rather than
+through a ShapeUtil hook. Confirmed by reading `onPointerMove`/`moveShapesToPoint` in
+`node_modules/tldraw/src/lib/tools/SelectTool/childStates/Translating.ts`: it calls
+`editor.updateShapes()` on every raw pointer-move during a drag, a genuine store transaction each
+time, not batched to settle. `usePhysicsAnnouncements.ts` worked around this with a 300ms
+per-shape-id debounce on its generic fallback branch only — the named gestures are unaffected,
+since they come from this owner's existing single-shot hook writes. Recorded as `interactions.md`
+watch point 20 and a new "Depends On" bullet; `architecture.md` was left otherwise unchanged since
+no ShapeUtil hook or registration mechanic actually moved.
+
 ## What Was Tried and Abandoned
 
 **Ticket 20, card-tucking (2026-08-10, abandoned same day as `ac27a99`).** Two implementations

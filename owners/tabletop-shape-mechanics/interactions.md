@@ -29,6 +29,15 @@
   undo entry. Confirmed empirically, not just from source. Unlike the `useIsZoneArmed` gap
   above, this one HAS a regression tripwire: `verify-multi-untap.spec.ts`'s one-Ctrl+Z
   assertions fail if a tldraw upgrade reorders it. See watch point 14.
+- **`Translating.ts` writes to the document store on every raw pointer-move during a drag, not
+  once at settle.** (Confirmed 2026-08-10, ticket 21's `-context` consult, reading
+  `onPointerMove`/`moveShapesToPoint` in `node_modules/tldraw/src/lib/tools/SelectTool/
+  childStates/Translating.ts`.) Each move calls `editor.updateShapes(...)` — a genuine store
+  transaction, not batched to settle — so **any consumer outside this owner's own hooks that
+  watches raw shape mutations (e.g. a `store.listen()`) sees per-frame noise for a plain drag**,
+  not one event per completed motion. This owner's own hooks never see that noise because they're
+  ShapeUtil callbacks (`onTranslateEnd` fires once, at settle, by tldraw's own contract) — the
+  hazard is specifically for code reading the *store*, not the ShapeUtil. See watch point 20.
 
 ### Shape identity (`props.instanceId`)
 - Minted at `apps/tabletop/src/server/cardArrival.ts` on arrival, or `seatJoined.ts` at seating for
@@ -108,6 +117,28 @@
   before checking drag-over hooks (so a target-side hook on the zone could never fire regardless).
   This is now the KB's concrete working example of "a locked shape needs no interaction hooks at
   all" — previously only asserted in the abstract (see watch point 7, new, below).
+
+### Physics announcements (`usePhysicsAnnouncements.ts`, ticket 21, 2026-08-10)
+- **First store-level `store.listen()` consumer of this owner's gesture detection.**
+  `apps/tabletop/src/client/usePhysicsAnnouncements.ts` (owned by `fleet-is-observable`, not this
+  owner) watches the shape mutations this owner's ShapeUtil hooks already produce — `mtg-card`'s
+  `props.tapped`/`face`/`faceDown`/`meta.zone` changes from `onClick`/`onTranslateEnd`, and
+  `parentId` changes from `onDragShapesIn` — and translates each into a named Honeycomb span
+  (`card.tapped`/`card.untapped`, `card.flipped`, `card.turnedFaceDown`, `card.zoneMoved`,
+  `counter.attached`, `noteAttached`). It reads this owner's mutations; it does not call into any
+  ShapeUtil or change detection logic here. **Detection logic in `MtgCardShapeUtil.tsx` is
+  unchanged** — the only change on this owner's side of the line was deleting the old
+  `console.log('zone-entry ...')` line inside `onTranslateEnd`'s zone-hit branch, now that
+  `card.zoneMoved` covers that notification via the listener instead.
+- **The generic `shape.moved`/`shape.changed` fallback (for shapes/props this owner hasn't named
+  a gesture for) has to defend against watch point 20's per-move-write noise with its own 300ms
+  per-shape-id debounce** — a workaround the listener owns, not a change to any ShapeUtil hook.
+  The named-gesture branches above are unaffected by that noise, because they come from this
+  owner's existing single-shot hook writes (`onClick`, `onTranslateEnd`, `onDragShapesIn`), not
+  from watching raw `x`/`y`.
+- Full detail (span names, debounce rationale, the `store.listen({source: "user"})` scoping) is
+  `fleet-is-observable`'s territory — consult that owner for changes to what gets announced or
+  how; this owner only cares that the listener reads gesture results, never drives them.
 
 ### Counter attachment (`mtg-counter`, ticket 18, 2026-08-08)
 - A counter's attachment to a card IS tldraw parenting (`parentId`) — there is no attachment
@@ -508,6 +539,21 @@
       generalize, not duplicate ad hoc.
     - Regression tests: `verify-zone-armed.spec.ts` — own commander arms the command zone; a
       non-commander card does not; another seat's commander does not arm this seat's command zone.
+
+20. **A `store.listen()` consumer watching raw shape mutations sees every pointer-move during a
+    drag, not one event per completed motion — unlike this owner's own ShapeUtil hooks.** (Ticket
+    21, 2026-08-10, confirmed by reading `Translating.ts`'s `onPointerMove`/`moveShapesToPoint` in
+    `node_modules/tldraw/src/lib/tools/SelectTool/childStates/Translating.ts` — see the "Depends
+    On" section above.) This owner's own hooks (`onTranslateEnd`, `onClick`, `onDragShapesIn`)
+    never see this noise because tldraw itself guarantees they fire once, at the right moment, by
+    contract — the ShapeUtil hook layer is *already* the debounced/settled view. The hazard is
+    specific to code that bypasses that layer and reads the document store directly (e.g.
+    `apps/tabletop/src/client/usePhysicsAnnouncements.ts`, `fleet-is-observable`'s territory,
+    ticket 21): such a listener must debounce or otherwise settle raw `x`/`y` diffs itself, the
+    way `usePhysicsAnnouncements.ts` does with a 300ms per-shape-id timer on its generic fallback
+    branch. **Any future store-level listener this KB's mechanics feed into inherits this same
+    obligation** — it is not something this owner's hooks can or should absorb, since the noise
+    only exists at the store layer, not the hook layer.
 
 ## Not Related To
 
