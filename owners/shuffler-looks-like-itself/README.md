@@ -344,19 +344,20 @@ Facts that outlive the ticket:
   bullet above; it was the same shape of gap (JS-only, so `/prepare`-only) and closed the
   same way (a shared server-side helper, `sleeveTintStyle` in `shared-components.ts`).
 
-**The nav-link idiom is the fleet's only text-link treatment, and it now has two live
-instances (second: 2026-08-09, `6b6b927`).** White `--font-chrome` type on a dark surface.
-The original: the Shuffler's header (`site.css` → `.right-nav a` — `text-decoration: none`,
-opacity fade on `:hover`, underline marks `.active`). The second, and the Tabletop's first:
-the landing page's "Manage your decks in the Shuffler" link (`LandingPage.tsx` →
-`styles.shufflerLink`), below the cream card on the dark page background — **always
-underlined**, which is the accepted degradation for inline-style contexts: React inline
-styles can't express `:hover`, and a standalone link in body position needs the underline
-to read as a link at all. No other tokenized link styling exists — `docs.css`'s content
-links (`--link-color`/`--link-hover`) are that page family's own docs-only tokens, not
-this idiom, and its raw-hex sites remain drift. The next text link copies this
-composition; if one ever lands in a stylesheet context, hover behaviour becomes
-expressible again and choosing it is a small new decision, not a port.
+**The nav-link idiom is the fleet's only text-link treatment.** White `--font-chrome` type
+on a dark surface: the Shuffler's header (`site.css` → `.right-nav a` — `text-decoration:
+none`, opacity fade on `:hover`, underline marks `.active`). No other tokenized link
+styling exists — `docs.css`'s content links (`--link-color`/`--link-hover`) are that page
+family's own docs-only tokens, not this idiom, and its raw-hex sites remain drift. **A
+second instance briefly existed on the Tabletop (2026-08-09 to 2026-08-10):** the landing
+page's "Manage your decks in the Shuffler" link (`LandingPage.tsx` → `styles.shufflerLink`)
+— always underlined, the accepted degradation where React inline styles can't express
+`:hover`. It went with the whole landing page (2026-08-10: `/` on the Tabletop became a
+server-side redirect to the Shuffler, and `LandingPage.tsx` was deleted entirely), so the
+idiom is back to its one live site. See [history.md](history.md) for both the instance and
+its retirement. The next text link that lands anywhere copies this composition; if one
+ever lands in a stylesheet context, hover behaviour becomes expressible again and choosing
+it is a small new decision, not a port.
 
 **Square corners on chrome.** Round corners belong only to physical objects: cards, the
 playmat, count discs. (That used to say "the playmat, the `.page-container`" — two names

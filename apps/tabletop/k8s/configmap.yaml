@@ -20,3 +20,8 @@ data:
   # Browser logs, same collector, same reasoning. Uncaught errors and unhandled
   # rejections have no span to hang attributes on.
   BROWSER_OTLP_LOGS_URL: "http://table.jessitron.honeydemo.io/v1/logs"
+  # The Tabletop has no landing page of its own — "/" redirects here. Same
+  # value and name the Shuffler's own configmap uses for itself
+  # (apps/shuffler/k8s/configmap.yaml); mirrors TABLETOP_PUBLIC_URL for the
+  # reverse direction.
+  SHUFFLER_PUBLIC_URL: "https://mtg.jessitron.honeydemo.io"

@@ -556,7 +556,9 @@ with nothing to apply it *with*, and both halves fail silently), and `LandingPag
 green/cream inline palette (`#1a2a1f`, `#f5f1e8`, `#3d5a45`) is a live Layer-1 violation. The
 second had been recorded only inside a Tabletop ticket as "not a precedent to match" — the wrong
 home, because it outlives the ticket. Also stated up front: **the tokens gap must not be solved by
-copying `styles.css`'s `:root`.**
+copying `styles.css`'s `:root`.** (**Moot as of 2026-08-10** — `LandingPage.tsx` was deleted
+outright rather than fixed; see the entry below. The violation didn't get resolved, the surface
+carrying it stopped existing.)
 
 ## 2026-08-07 — a card keeps all its handles, and this owner lost the argument
 
@@ -1612,8 +1614,10 @@ future stylesheet-context link knows hover behaviour reopens as a small decision
 **One structural nuance worth keeping:** the link sits deliberately *outside* the cream
 card, on the page background — so the page's one Layer-1 violation (the green/cream card)
 stays exactly the same size, and the on-brand element doesn't ratify the off-brand one by
-nesting inside it. An agent grepping `LandingPage.tsx` for precedent now finds both; the
-open-choices bullet says which one to pull toward.
+nesting inside it. An agent grepping `LandingPage.tsx` for precedent found both; the
+open-choices bullet said which one to pull toward. (**`LandingPage.tsx` no longer
+exists** — deleted 2026-08-10, see the entry below — so this paragraph is a record of
+what the file used to contain, not a live pointer.)
 
 ## 2026-08-09 — the zone label band: every card-holding zone fits a card AND its title
 
@@ -2062,3 +2066,37 @@ Shuffler-side half of ticket 17) already had a specimen next to the unsleeved li
 this was the last unrepresented half. `./verify.sh verify-design-gallery` covers the new
 specimen with a Playwright spec asserting the frame's `border-radius` is `0px` and the inner
 image's is not.
+## 2026-08-10 — the Tabletop's landing page was deleted, not fixed
+
+`apps/tabletop/src/client/LandingPage.tsx` is gone. `/` on the Tabletop is now a
+server-side 302 (`apps/tabletop/src/server/server.ts`) to the Shuffler's public URL
+(`SHUFFLER_PUBLIC_URL`, default `https://mtg.jessitron.honeydemo.io` — mirroring the
+Shuffler's own `TABLETOP_PUBLIC_URL` convention for the reverse direction). Only
+`/t/:tableSlug` renders anything client-side now; `App.tsx` returns `null` for any other
+path, since the server never lets a request for `/` reach it.
+
+**This closes the `tabletop-landing-page-palette` buoy and the matching `TODO.md` line by
+deletion, not by resolution.** The off-brand green/cream inline palette
+(`#1a2a1f`/`#f5f1e8`/`#3d5a45`) this owner had flagged as a live, un-fixed Layer-1
+violation (see the 2026-08-07 "hit four tldraw walls" entry above) never got restyled —
+the page it lived on stopped existing. Nothing here is a design decision or a precedent;
+there was no "pull toward the standard" moment, because there's no page left to pull.
+
+**The nav-link idiom lost its second instance the same way.** The landing page's "Manage
+your decks in the Shuffler" link (`styles.shufflerLink`, added 2026-08-09, `6b6b927` —
+see the entry above) went with the rest of the file. The idiom is back to its original
+one live site, the Shuffler's header nav (`site.css` → `.right-nav a`). If a future
+Tabletop surface wants a text link, it copies that composition fresh — this isn't a
+regression to note, just the instance count reverting.
+
+**The Tabletop's earliest surviving fleet-token consumer is now `MtgZoneShapeUtil`'s zone
+labels** (ticket 13, 2026-08-08, `f66b0a5`, ~08:00 — `fontFamily: "var(--font-chrome)"` on
+an `HTMLContainer` div), a few hours ahead of `MtgCounterShapeUtil`'s counter disc (ticket
+18, same day, ~20:00). Both predate the landing page's deletion and are canvas shapes, not
+stylesheet-context DOM — the "first DOM (non-canvas) consumer" framing this KB used for the
+landing page's link no longer has a subject and was retired from [interactions.md](interactions.md)
+and [README.md](README.md).
+
+**Nothing about the fleet's shared tokens or fonts changed.** `packages/design-tokens/tokens.css`
+and `apps/tabletop/index.html`'s Google Fonts `<link>` are untouched — `MtgZoneShapeUtil` and
+`MtgCounterShapeUtil` still depend on both, same as before this change.
