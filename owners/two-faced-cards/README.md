@@ -24,7 +24,8 @@ one-faced card; a one-faced card turned over is **face-down**, not `face: back`.
 *inspection of a two-faced card* — a one-faced card cannot be flipped and shows no flip
 affordance. On the Tabletop, *any* card can be turned over, because a card on a table is a
 physical object with two sides; turning over a one-faced card puts it **face down**, which
-is a real domain event. Full table in [tabletop.md](tabletop.md).
+is a real domain event. Full table in `CONTEXT-MAP.md`'s "Flip / Face-down" translation (root
+of the repo); this owner's own copy of it lives in [tabletop.md](tabletop.md).
 
 Every component of the fleet that touches cards must hold this:
 

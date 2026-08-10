@@ -628,6 +628,29 @@ left `mtg-card` with no owner field at all.
   rule) are `tabletop-shape-mechanics` territory — this owner's stake is only the shared
   card props and the two contract fields.
 
+## CONTEXT-MAP.md Lands, GLOSSARY Gets an Authoritative Face-Down Entry (2026-08-10)
+
+**No code changed** — domain/glossary documentation for the `face-down-is-a-real-thing` TODO
+item. Full details in interactions.md watch point 20a.
+
+- `CONTEXT-MAP.md` created at the repo root (per `docs/agents/domain.md`'s spec — didn't exist
+  before). Its "Flip / Face-down" translation entry reproduces the ship-comparison table that
+  had lived only in tabletop.md's "The two ships mean different things by 'flip'" section
+  (added `0337e00`), plus a new "Face-down modeled at all?" row.
+- `notes/GLOSSARY.md` gained a "Face-down" entry — the two-axis model (face vs. concealment) as
+  the authoritative source other docs can cite instead of re-explaining it inline.
+- **Correction during review**: the first draft of the GLOSSARY entry claimed a two-faced card
+  "cannot be turned face down." Verified false against `apps/tabletop/src/client/CardContextMenu.tsx`
+  — "Turn face down"/"Turn face up" is ungated (applies to any card); only "Flip" is gated on
+  `backImageUrl !== null`. Fixed: Flip and Turn-face-down/up are two separate gestures; a
+  two-faced card cannot turn face down as its Flip action, but can via the generic gesture.
+- Three backreferences in `owners/two-faced-cards/{README.md,interactions.md,tabletop.md}` that
+  previously said "there is no CONTEXT-MAP.md in the repo yet" now point at it, while tabletop.md
+  keeps its own detailed copy as this owner's source-of-record (deliberately not deduplicated).
+- `apps/shuffler/src/port-tabletop/types.ts` gained a documentation-only comment after the
+  `CardPlayedPayload` doc block: no field there models face-down, pointing at
+  GLOSSARY.md/CONTEXT-MAP.md, explicitly Tabletop-side physics-map work, not a Shuffler TODO.
+
 ## Cards-Come-and-Go Ticket 05: Contract Validation Gets Real (2026-08-09)
 
 Implements the "contract validation gets real" line ticket 02 (above) predicted, plus two

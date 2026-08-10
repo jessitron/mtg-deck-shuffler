@@ -132,8 +132,8 @@ These are specific things that could break two-faced cards if changed elsewhere:
     throws). On the Tabletop **any** card can be turned over, because it's a physical
     object. Do not "fix" the Shuffler to allow flipping one-faced cards for consistency,
     and do not port the Shuffler's `twoFaced` gate onto a Tabletop turn-over gesture. Full
-    translation table in [tabletop.md](tabletop.md); this is the kind of divergence a
-    `CONTEXT-MAP.md` would carry if the repo had one.
+    translation table now lives in `CONTEXT-MAP.md`'s "Flip / Face-down" section (root of the
+    repo, added 2026-08-10); this owner's own copy is in [tabletop.md](tabletop.md).
 
 14. **Face-down is modeled only on the Tabletop — and both the gesture and both
     renderings are now built.** Ticket 02 (2026-08-07, `c956949`) gave it a home:
@@ -258,6 +258,28 @@ These are specific things that could break two-faced cards if changed elsewhere:
     `ff5d58a` — honestly says "library" only. If a `hand` zone is ever added, this reset
     needs to cover it too; don't assume it already does because the ticket's prose once
     said "hand or library."
+20a. **`CONTEXT-MAP.md` now exists at the repo root (2026-08-10) and carries the
+    fleet-wide "Flip / Face-down" translation, sourced from tabletop.md.** `notes/GLOSSARY.md`
+    gained an authoritative "Face-down" entry (the two-axis model, corrected during review —
+    see below) that other docs, including this KB's own README/interactions/tabletop.md
+    backreferences, now point to instead of re-explaining the model inline. tabletop.md's copy
+    of the ship-comparison table stays as this owner's own source-of-record detail (deliberately
+    not deduplicated). **No code changed** — this is domain/glossary work for the
+    `face-down-is-a-real-thing` TODO item, not the wire-level `faceDown` field or a Shuffler
+    "Play Face-Down" button (both remain out of scope, tracked separately).
+    - **Correction caught in review**: the GLOSSARY entry's first draft claimed a two-faced
+      card "cannot be turned face down" — wrong. Verified in
+      `apps/tabletop/src/client/CardContextMenu.tsx`: "Turn face down"/"Turn face up" applies
+      uniformly to any selected card regardless of `backImageUrl`/twoFaced; only "Flip" is
+      gated on `backImageUrl !== null`. Fixed wording (now in both GLOSSARY.md and
+      CONTEXT-MAP.md): Flip and Turn-face-down/up are two separate gestures — a two-faced card
+      cannot turn face down *as its Flip action*, but it absolutely can via the generic
+      Turn-face-down/up gesture, same as a one-faced card.
+    - `apps/shuffler/src/port-tabletop/types.ts` gained a documentation-only comment after the
+      `CardPlayedPayload` doc block, noting no field there models face-down, pointing readers at
+      `notes/GLOSSARY.md`/`CONTEXT-MAP.md`, and stating this is Tabletop-side physics-map work,
+      not a Shuffler TODO. No field, type, or schema changed.
+
 20. **`mtg-card` gained `owner` and `isCommander` — table-layout ticket 18 (2026-08-09).**
     `mtg-card.props` gained `owner: string` (seatId) and `isCommander: boolean`
     (`apps/tabletop/src/shared/mtgCardShape.ts`) — first-class, schema'd, synced, granting

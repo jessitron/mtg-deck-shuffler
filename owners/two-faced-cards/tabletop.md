@@ -131,8 +131,10 @@ Two independent pieces of state, never collapsed into one:
 
 Jess: *"in Deck Shuffler, a one-faced card cannot be flipped. On Tabletop, it can. We
 need to be very clear on that."* This is a `CONTEXT-MAP.md`-shaped divergence — the word
-does not translate between the ships (there is no `CONTEXT-MAP.md` in the repo yet; when
-one is written, "flip" belongs in it, sourced from here).
+does not translate between the ships. **The table now lives in `CONTEXT-MAP.md`'s "Flip /
+Face-down" translation** (root of the repo, added 2026-08-10); the copy below is kept as this
+owner's own source-of-record detail, but the fleet-wide translation is the one to cite from
+outside this KB.
 
 | | Shuffler | Tabletop |
 |---|---|---|
