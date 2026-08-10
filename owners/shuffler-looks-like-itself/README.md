@@ -276,7 +276,7 @@ prototype variant A approved by Jess, `683ca1c`; shipped by ticket 16, `8995c1a`
 (grid-column 2/7, row 4), framed `var(--narrow-border) solid black` — the play pages'
 frame keyword, deliberately **not** the join-table panel's `#888` drift — square corners
 (flat surface), with only the pressable swatches carrying `--radius-soft`. Two rows:
-Playmat (five `aeoe-*` image swatch buttons, 96×54) and Sleeves (a None chip showing the
+Playmat (a growable array of image swatch buttons, 96×54, currently 11) and Sleeves (a None chip showing the
 standard Magic card back — `null` ⇔ unsleeved — five mana-pie chips 44×44, and a custom
 `<input type="color">`). Markup in `views/partials/table-look-panel.ejs`, behaviour in
 `public/prep-picker.js`. **The two swatch rows frame differently, on purpose (Jess,
@@ -447,9 +447,15 @@ while the furniture keeps its composite look. **The picker palette is now DECIDE
 (hexes in `src/table-look.ts` mirror the `--mana-*` tokens — its comment says "change a
 token there, visit here"), plus a None chip showing the standard Magic card back (`null`
 ⇔ unsleeved — still no default *color*) and a custom `<input type="color">`. The playmat
-set is the five `aeoe-*` images from the approved prototype — one **more** than the four
-`site.css` hero backgrounds issue 09 named (seam-rip is the fifth); the prototype verdict
-(`683ca1c`) ratified five. There is still no `/design` specimen of the rendered *sleeve
+set started as the five `aeoe-*` images from the approved prototype — one **more** than the
+four `site.css` hero backgrounds issue 09 named (seam-rip is the fifth); the prototype
+verdict (`683ca1c`) ratified five. **The count is deliberately open-ended, not settled at
+five (2026-08-09):** it grew to 11 the same week when a player found the original five too
+high-contrast against cards/text, adding six lower-contrast art crops to `PLAYMATS` in
+`src/table-look.ts` — no CSS or markup change was needed, since `table-look-panel.ejs`
+iterates the array generically and `.table-look-mats` already wraps. See
+[history.md](history.md) for the follow-up and a portrait-crop aspect-ratio note worth
+reading before adding more. There is still no `/design` specimen of the rendered *sleeve
 on a card* (buoyed as `design-sleeve-specimen` in `TODO.md` — the picker panel itself
 does have a specimen, `#table-look`; they are different things — that gap is about the
 Tabletop's canvas card sleeve, not the Shuffler's library-back rendering below, which does

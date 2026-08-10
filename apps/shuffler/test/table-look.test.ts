@@ -11,10 +11,10 @@ describe("PLAYMATS", () => {
     expect(DEFAULT_PLAYMAT_PATH).toBe("/images/aeoe-43-cascading-cataracts.png");
   });
 
-  it("offers the five aeoe art cards", () => {
-    expect(PLAYMATS).toHaveLength(5);
+  it("offers the curated art-card playmats", () => {
+    expect(PLAYMATS).toHaveLength(11);
     for (const mat of PLAYMATS) {
-      expect(mat.path).toMatch(/^\/images\/aeoe-.*\.png$/);
+      expect(mat.path).toMatch(/^\/images\/.*\.png$/);
       expect(mat.name.length).toBeGreaterThan(0);
     }
   });
