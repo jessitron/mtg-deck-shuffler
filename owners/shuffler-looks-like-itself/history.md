@@ -1923,3 +1923,66 @@ No `/design` change: no new class, no new token, no new component — the galler
 `#table-look` specimen already described the live-preview behaviour in prose, and that
 prose is still accurate (the specimen is static and can't show either the live preview or
 the now-added first-paint tint, same limitation already noted for the mat).
+
+## 2026-08-09 — the table-look picker went from live-preview JS to pure HTMX, closing the watch point the entry above opened
+
+`cabf85b` **Convert `/prepare` table-look picker from client JS to pure HTMX**
+
+The entry above left a watch point standing on purpose: the BT.601 luminance formula lived
+in two places (`prep-picker.js`'s `isDark`, `shared-components.ts`'s `isDarkHex`) because a
+pick wasn't persisted at the moment it was made, so the live-preview path had nothing
+server-rendered to retire in favor of. This commit removed that whole path instead of
+living with it: every swatch now `hx-post`s straight to `/prep-table-look/:prepId`, which
+persists the pick and returns the real, freshly-rendered `#playmat-prepare` fragment —
+"preview" and "persisted" became the same round-trip. `prep-picker.js` — the file that had
+been accreting this owner's JS-only gaps for two days (the mat picture, the sleeve tint,
+now the whole picker) — is deleted outright, and with it the two-implementation luminance
+hazard: `isDarkHex` is now the only copy of that formula anywhere.
+
+**The markup got a real single source of truth, not just a shared function.** The old
+`prepare.ejs` inlined the whole mat — library, command zone, table-look panel, join-table
+form — directly in the page template. That block moved verbatim into a new partial,
+`views/partials/playmat-prepare.ejs`, and **both** `GET /prepare/:prepId` (via `prepare.ejs`
+including it) and `POST /prep-table-look/:prepId` (via `res.render` on the same partial)
+now render it. Before, "what does the prepare mat look like" had one answer in the EJS and
+an implicit second answer in whatever `prep-picker.js`'s DOM surgery produced — those could
+only be checked against each other by eye. Now there is one template, so they can't drift.
+
+**Three mechanical gotchas surfaced by making the swap real, each worth the KB entry
+because the next htmx route will hit them too (all in [interactions.md](interactions.md) →
+"Touching the table-look picker"):**
+
+- **htmx's default `responseHandling` treats a 204 response as "don't swap."** The route
+  used to answer fire-and-forget picks with `res.status(204).end()`. Converting it to
+  actually swap the mat back in meant it had to become a real 200 with a rendered body —
+  an easy trap for the next "just persist this, no content" route to fall into if it
+  reaches for htmx afterward.
+- **`hx-preserve` doesn't compose the way you'd guess.** The join-table `<details>` needed
+  to survive the swap with its typed-but-unsaved text and open/closed state intact, so it
+  got `hx-preserve="true"`. The obvious next step — put it on the two `<input>`s inside too,
+  for extra safety — silently discarded their values instead: htmx detaches a preserved
+  element from the live DOM *before* resolving any preserved descendants' own entries, so
+  their `document.getElementById` lookup finds nothing and they fall back to the swapped-in
+  (server-rendered, un-typed) value. Found by writing the "unsaved text survives a mat pick"
+  spec and watching it fail. Fixed by preserving only the outermost element that needs it.
+- **A full-container `outerHTML` swap destroys the exact element the player clicked or
+  tabbed to, and no browser carries focus to whatever replaces it** — focus silently falls
+  back to `<body>`, a real regression for keyboard users clicking through swatches. HTMX has
+  no built-in answer to this. The fix is the smallest thing that isn't HTMX: a ~20-line
+  `public/table-look-focus.js` listens for `htmx:afterSettle` and re-finds the equivalent
+  swatch in the new DOM by its stable `data-mat-path`/`data-sleeve-color` attribute, then
+  focuses it. Consulted `animations-context` on this — confirmed it was a real gap with no
+  existing pattern elsewhere in the app to copy, and that hand-writing the minimum JS was
+  the right call rather than reaching for a library or a bigger client-side framework.
+
+**What was deliberately lost, and both are confirmed fine by Jess, not oversights:** the
+custom color input's live-drag preview before a pick commits (there's no client-side
+preview loop left to drive it), and the CSS lift/shadow crossfade at the exact instant a
+swatch is clicked (hover still lifts it, and it stays lifted after the click completes —
+only the transition *through* that moment is gone, because the element is destroyed and
+replaced rather than animated in place).
+
+**Verified:** the full `verify-prep-picker.spec.ts` (8 specs — the 2 new ones assert focus
+restoration and unsaved-text survival across the swap), the full `./verify.sh` suite (58
+passed), and all 331 unit tests. Already got this owner's `-review` pass before merging, no
+blockers raised.

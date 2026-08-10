@@ -90,8 +90,9 @@
   `issues/16-*` (**built** 2026-08-09, `8995c1a`; prototype variant A approved `683ca1c`)
   put the picker on `/prepare` as `.table-look-panel` — see the new watch-point block below
   and [README.md](README.md)'s design language. It also added
-  `test/verification/verify-prep-picker.spec.ts` (6 specs since `81abce5` added the
-  dark-sleeve lettering spec) and a picked-mat assertion in
+  `test/verification/verify-prep-picker.spec.ts` (grew to 8 specs: `81abce5` added the
+  dark-sleeve lettering spec, and `cabf85b`'s HTMX conversion added focus-restoration and
+  unsaved-text-survival specs) and a picked-mat assertion in
   `verify-tabletop-integration.spec.ts`.
   `issues/15-*` (**built** 2026-08-08, `4263ef8`) put the deck name on the seat name label —
   originally a two-line player-first composition, decided with this owner's `-context`
@@ -316,7 +317,7 @@ Concrete, in rough order of how often they bite.
   === 0` renders exactly one of them, never both. Don't "tidy" them back into alignment
   without re-checking that mutual exclusivity still holds.
 
-**Touching the table-look picker (`/prepare`) or its previews** (added 2026-08-09, ticket 16, `8995c1a`)
+**Touching the table-look picker (`/prepare`) or its previews** (added 2026-08-09, ticket 16, `8995c1a`; converted from client JS to pure HTMX the same day, `cabf85b`)
 
 - **The swatches' press physics are a THIRD press behaviour** — rest 0, hover
   `translateY(-2px)` + black-rgba shadow (`prepare.css` → `.table-look-mat:hover,
@@ -330,30 +331,58 @@ Concrete, in rough order of how often they bite.
   copied. Mechanical wrinkle worth reusing: an `<input>` can't carry `::after`, so the custom
   color input's selected state sits on its wrapper `<label class="table-look-custom">`.
 - **Mat preview sets `background-image` LONGHAND, never the shorthand** — in
-  `prep-picker.js` (`applyMatPreview`) and server-side in `prepare.ejs`. The `background`
-  shorthand would wipe the shared `.playmat` rule's `cover`/`center` longhands. Comments at
-  both sites say so; keep them true.
+  `views/partials/playmat-prepare.ejs` (the `.playmat` div's inline style, re-rendered on
+  every pick) and in `views/partials/table-look-panel.ejs`'s swatch `style` attributes. The
+  `background` shorthand would wipe the shared `.playmat` rule's `cover`/`center` longhands.
+  Comments at both sites say so; keep them true. (Before `cabf85b`, 2026-08-09, this rule
+  also governed a client-side `applyMatPreview` in `prep-picker.js` — that file is gone; see
+  the HTMX-conversion bullet below.)
 - **Sleeve tint is inline style on purpose** (tints `.cool-command-zone-surround` and
   `.game-title`): the hex is domain data, and a page-sheet rule on those *shared*
   components would leak onto `/design`, which co-loads the sheets. **Since `81abce5`
   (2026-08-09) it also flips `.game-title`'s lettering**: `color: white` when the picked
   hex's BT.601 perceived luminance is below 128, cleared otherwise — same inline posture.
-  **Since `5c9f04e` (2026-08-09) the tint (and the lettering flip) is SERVER-RENDERED on
-  both `/prepare` and `/game`**, not just live-previewed in the browser: `sleeveTintStyle(sleeveColor, withTextColor)`
-  in `shared-components.ts` is the one place the inline style string is built —
-  `formatDeckTitleHtmlFragment` (`withTextColor: true`) and `formatCommandZoneHtmlFragment`
-  (`withTextColor: false`, reading `game.sleeveColor`) both call it, as does
-  `prep-view-helpers.ts` for `/prepare` (`prep.sleeveColor`). **`prep-picker.js`'s
-  `applySleeveTint` still exists but now does less**: it's the *live-preview* reapplication
-  while a player is clicking/dragging the picker, before the pick persists; its old
-  "tint on load" block is gone, since the server now renders that state directly. **The
-  BT.601 luminance formula now has two independent implementations that must be kept in
-  sync by hand**: `isDark` in `prep-picker.js` (client) and `isDarkHex` in
-  `shared-components.ts` (server) — same math, same threshold (128), no shared source.
-  If the threshold or formula ever changes, grep both. If you touch the tint, keep the
-  lettering flip with it in both places; spec'd in `test/view/sleeve-tint.test.ts` (the
-  server helper, both call sites) and `verify-prep-picker.spec.ts` (the live-preview path,
-  dark `#530aae` → white, light `#f0e68c` → default, unchanged).
+  **The tint (and the lettering flip) is SERVER-RENDERED on both `/prepare` and `/game`,
+  and, since `cabf85b` (2026-08-09), it is the *only* place either is computed** —
+  `sleeveTintStyle(sleeveColor, withTextColor)` in `shared-components.ts` is the one place
+  the inline style string is built: `formatDeckTitleHtmlFragment` (`withTextColor: true`)
+  and `formatCommandZoneHtmlFragment` (`withTextColor: false`, reading `game.sleeveColor`)
+  both call it, as does `prep-view-helpers.ts` for `/prepare` (`prep.sleeveColor`). **The
+  two-implementation BT.601 hazard this bullet used to warn about is CLOSED, by deletion,
+  not by syncing:** `prep-picker.js`'s client-side `isDark` (and its whole live-preview
+  reapplication path) no longer exists — `isDarkHex` in `shared-components.ts` is now the
+  only implementation of the formula in the codebase, because every pick is a real
+  `hx-post` that re-renders the server's own markup rather than a client guess at what the
+  server would render. If you touch the tint, there is now exactly one place to touch.
+  Spec'd in `test/view/sleeve-tint.test.ts` (the server helper, both call sites) and
+  `verify-prep-picker.spec.ts` (browser, dark `#530aae` → white, light `#f0e68c` → default).
+- **The picker is pure HTMX now, not client-JS-driven (`cabf85b`, 2026-08-09) — `prep-picker.js`
+  is deleted.** Every swatch in `table-look-panel.ejs` (`hx-post="/prep-table-look/:prepId"`,
+  `hx-target="#playmat-prepare"`, `hx-swap="outerHTML"`) posts its pick straight to the
+  server; the route persists it and re-renders the whole mat, returning the same
+  `views/partials/playmat-prepare.ejs` fragment that `GET /prepare/:prepId` renders — **one
+  source for that markup, not two.** Three mechanics worth knowing before touching this:
+  - **The route must return 200, not 204.** htmx's default `responseHandling` treats 204 as
+    "don't swap" — the route used to `res.status(204).end()` when the pick was
+    fire-and-forget, and swapping it for a rendered 200 response is what makes the swap
+    happen at all. If a future htmx route in this app looks like it should be "just persist,
+    no content," check whether it needs a swap before reaching for 204.
+  - **`hx-preserve` goes on the outermost element that needs it, never on its descendants
+    too.** The join-table `<details>` (unsaved typed text, an opened accordion) carries
+    `hx-preserve="true"`; the two `<input>`s inside it deliberately do **not** — marking both
+    broke it, because htmx detaches a preserved element from the live DOM *before* resolving
+    any of its descendants' own separate `hx-preserve` entries, so their
+    `document.getElementById` lookup returns `null` and they're lost. One `hx-preserve` per
+    subtree, at the top.
+  - **A full-container `outerHTML` swap destroys the clicked/tabbed-to element, and browsers
+    don't carry focus to the replacement.** `public/table-look-focus.js` (~20 lines) listens
+    for `htmx:afterSettle` and refocuses the equivalent new swatch by its stable
+    `data-mat-path`/`data-sleeve-color` attribute — the one thing HTMX doesn't do for you.
+    Spec'd in `verify-prep-picker.spec.ts`.
+  **What was deliberately lost, both confirmed fine by Jess:** the custom color input's
+  live-drag preview before commit, and the CSS lift/shadow crossfade on the exact click of a
+  swatch (hover still lifts it and it stays lifted after click — only the mid-transition
+  crossfade is gone).
 - **The mat swatches and sleeve chips frame DIFFERENTLY, on purpose (`99829d7`,
   2026-08-09).** The shared `.table-look-mat, .table-look-sleeve` rule declares the
   dark-pink border; `.table-look-mat` alone overrides `border-color: black` ("mat swatches

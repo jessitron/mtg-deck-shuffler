@@ -278,8 +278,11 @@ frame keyword, deliberately **not** the join-table panel's `#888` drift — squa
 (flat surface), with only the pressable swatches carrying `--radius-soft`. Two rows:
 Playmat (five `aeoe-*` image swatch buttons, 96×54) and Sleeves (a None chip showing the
 standard Magic card back — `null` ⇔ unsleeved — five mana-pie chips 44×44, and a custom
-`<input type="color">`). Markup in `views/partials/table-look-panel.ejs`, behaviour in
-`public/prep-picker.js`. **The two swatch rows frame differently, on purpose (Jess,
+`<input type="color">`). Markup in `views/partials/table-look-panel.ejs`, included by
+`views/partials/playmat-prepare.ejs` — the single source for the whole prepare-mat fragment,
+shared by `GET /prepare/:prepId` and `POST /prep-table-look/:prepId` (converted to pure HTMX
+2026-08-09, `cabf85b` — see below; `public/prep-picker.js` no longer exists). **The two swatch
+rows frame differently, on purpose (Jess,
 2026-08-09, `99829d7`):** the shared `.table-look-mat, .table-look-sleeve` rule says
 `var(--narrow-border) solid var(--dark-pink)`, and `.table-look-mat` alone overrides
 `border-color: black` — mat swatches frame like the mat itself (the play pages' black
@@ -296,29 +299,36 @@ Facts that outlive the ticket:
   `.cool-command-zone-surround` and `.game-title` via inline `background-color` (sleeve
   hex is domain data — a page-sheet rule on shared components would leak onto `/design`);
   the mat pick sets inline `background-image` **longhand** on `.playmat` — never the
-  shorthand, which would wipe the shared rule's `cover`/`center`. `/prepare` also
-  server-renders the picked mat the same way. **A dark sleeve flips the plaque lettering
-  to white (Jess, 2026-08-09, `81abce5`):** inline `color: white` is set on `.game-title`
-  when the picked hex's BT.601 perceived luminance is below 128, and cleared otherwise —
-  same inline-style-for-domain-data posture as the tint, covering the on-load path too.
-  Spec'd in `verify-prep-picker.spec.ts`.
-- **The tint is server-rendered on BOTH play pages now, not just live-previewed on
-  `/prepare` (2026-08-09, `5c9f04e`).** It used to be JS-only (`prep-picker.js`'s
-  `applySleeveTint`), so it only ever appeared on `/prepare` and never on `/game` (which
-  has no picker JS) — the same shape of gap the mat picture had, closed the same way.
-  `sleeveTintStyle(sleeveColor, withTextColor)`, exported from `shared-components.ts`,
-  computes the identical inline `background-color` (and, when `withTextColor` is true and
-  the hex reads dark by the same BT.601 formula, `color: white`) that `applySleeveTint`
-  used to compute only in the browser. `formatDeckTitleHtmlFragment` takes an optional
-  `sleeveColor` param and calls it with `withTextColor: true` (the plaque's lettering can
-  flip); `formatCommandZoneHtmlFragment` reads `game.sleeveColor` and calls it with
-  `withTextColor: false` (the surround has no text to flip). `prep-view-helpers.ts`'s
-  `renderPrepCommandZone`/`renderDeckTitle` do the same for `/prepare` via
-  `prep.sleeveColor`. **`prep-picker.js`'s "tint on load" block is gone** — redundant now
-  that the server pre-renders the same values — but its tint-on-click/drag live preview
-  stays, since a pick isn't persisted at the moment it's made. Spec'd in
-  `test/view/sleeve-tint.test.ts` (unit) and `verify-prep-picker.spec.ts` (browser,
-  unchanged 6/6).
+  shorthand, which would wipe the shared rule's `cover`/`center`. **A dark sleeve flips the
+  plaque lettering to white (Jess, 2026-08-09, `81abce5`):** inline `color: white` is set on
+  `.game-title` when the picked hex's BT.601 perceived luminance is below 128, and cleared
+  otherwise — same inline-style-for-domain-data posture as the tint. Spec'd in
+  `verify-prep-picker.spec.ts`.
+- **The tint (and every other pick) is server-rendered on BOTH play pages, and on
+  `/prepare` there is no client-side preview left at all (2026-08-09, `5c9f04e` then
+  `cabf85b`).** It used to be JS-only (`prep-picker.js`'s `applySleeveTint`), so it only
+  ever appeared on `/prepare` and never on `/game` — closed first by giving the server its
+  own copy of the same computation (`sleeveTintStyle`, below), then, the same day, by
+  **deleting `prep-picker.js` entirely** and converting the whole picker to HTMX
+  (`cabf85b` — see the table-look-panel entry in [history.md](history.md)). Every swatch
+  now `hx-post`s to `/prep-table-look/:prepId`, which persists the pick and re-renders the
+  real `#playmat-prepare` fragment (`views/partials/playmat-prepare.ejs`) — so "preview" and
+  "persisted" are now the same round-trip, not two separate code paths. `sleeveTintStyle(sleeveColor, withTextColor)`,
+  exported from `shared-components.ts`, computes the inline `background-color` (and, when
+  `withTextColor` is true and the hex reads dark by the same BT.601 formula, `color: white`)
+  that `applySleeveTint` used to compute only in the browser — **it is now the only
+  implementation of that formula in the codebase**, where before `prep-picker.js`'s `isDark`
+  and this `isDarkHex` had to be kept in sync by hand. `formatDeckTitleHtmlFragment` takes an
+  optional `sleeveColor` param and calls it with `withTextColor: true` (the plaque's
+  lettering can flip); `formatCommandZoneHtmlFragment` reads `game.sleeveColor` and calls it
+  with `withTextColor: false` (the surround has no text to flip). `prep-view-helpers.ts`'s
+  `renderPrepCommandZone`/`renderDeckTitle` do the same for `/prepare` via `prep.sleeveColor`.
+  **What was deliberately lost, both confirmed fine by Jess:** the custom color input's
+  live-drag preview before commit, and the CSS lift/shadow crossfade on the exact moment of
+  clicking a swatch (hover still lifts it, and it stays lifted after click — only the
+  crossfade is gone). Spec'd in `test/view/sleeve-tint.test.ts` (unit) and
+  `verify-prep-picker.spec.ts` (browser, 8 specs — 2 new, for focus-restoration and
+  unsaved-text-survival across the swap).
 - **The custom color picker stays the native `<input type="color">` — decided, not an
   oversight (Jess, 2026-08-09).** Jess considered click-outside-to-close for the picker;
   the native control's OS panel can't be closed by JS, and she chose to keep the native
