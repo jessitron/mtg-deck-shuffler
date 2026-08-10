@@ -12,8 +12,20 @@ require "opentelemetry/sdk"
 require "opentelemetry/exporter/otlp"
 require "opentelemetry/instrumentation/rails"
 require "opentelemetry/instrumentation/rack"
+require_relative "../../lib/telemetry_sampler"
 
 OpenTelemetry::SDK.configure do |c|
   c.service_name = ENV.fetch("OTEL_SERVICE_NAME", "spine")
   c.use_all # rails, rack, active_record, etc.
 end
+
+# Head-sample health check chatter (GET /up) so BubbleUp and queries aren't dominated
+# by k8s liveness/readiness probes; see lib/telemetry_sampler.rb. There's no in-block
+# sampler= option on the Configurator for a custom Sampler object (confirmed by reading
+# the installed opentelemetry-sdk gem: Configurator#configure has no sampler setter,
+# but TracerProvider#sampler is a plain attr_accessor read fresh on every start_span),
+# so the supported way to install a custom root sampler is to set it right after
+# `configure` runs, once OpenTelemetry.tracer_provider exists.
+OpenTelemetry.tracer_provider.sampler = OpenTelemetry::SDK::Trace::Samplers.parent_based(
+  root: TelemetrySampler::BackgroundChatterSampler.new
+)

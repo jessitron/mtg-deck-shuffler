@@ -33,4 +33,18 @@ All from `services/spine/`:
 To run the whole fleet (Spine + Tabletop + Shuffler together), use `./run` from the
 repo root — see the root `CLAUDE.md`.
 
+## Observability
+
+Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
+
+- **Sampling**: `lib/telemetry_sampler.rb` (`TelemetrySampler::BackgroundChatterSampler`)
+  keeps 1% of `/up` health-check traffic (k8s liveness/readiness — see `k8s/deployment.yaml`)
+  and 100% of everything else — ported from the Shuffler's
+  `apps/shuffler/src/telemetry-sampler.ts`. Wired in
+  `config/initializers/opentelemetry.rb` via `OpenTelemetry.tracer_provider.sampler =`
+  right after `OpenTelemetry::SDK.configure` runs — the SDK's Configurator has no
+  in-block sampler option for a custom `Sampler` object; `TracerProvider#sampler` is a
+  plain `attr_accessor`, so setting it once `OpenTelemetry.tracer_provider` exists is the
+  supported way in. Unit tested in `test/lib/telemetry_sampler_test.rb`.
+
 Update this file when anything in it changes.
