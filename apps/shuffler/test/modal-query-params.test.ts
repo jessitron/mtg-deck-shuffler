@@ -46,6 +46,12 @@ describe("modal-query-params.js: planAutoOpenActions", () => {
       ]);
     });
 
+    test("?openCard=N works with a fun word-combo game id, not just the old numeric form", () => {
+      expect(planAutoOpenActions("?openCard=5", "/game/brave-falcon-42")).toEqual([
+        { type: "ajax", method: "GET", path: "/card-modal/brave-falcon-42/5", target: "#card-modal-container", delay: 0, withExpectedVersion: true },
+      ]);
+    });
+
     test("?openLibrary=true clicks the search button", () => {
       expect(planAutoOpenActions("?openLibrary=true", "/game/12")).toEqual([
         { type: "click", selector: ".search-button" },

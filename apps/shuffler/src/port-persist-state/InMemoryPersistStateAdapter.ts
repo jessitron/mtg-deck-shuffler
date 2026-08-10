@@ -1,11 +1,11 @@
 import { PersistStatePort, PersistedGameState, GameHistorySummary } from "./types.js";
 import { GameId } from "../domain-types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
+import { generateUniqueGameId } from "../gameIdGenerator.js";
 
 export class InMemoryPersistStateAdapter implements PersistStatePort {
   private storage = new Map<GameId, PersistedGameState>();
   private timestamps = new Map<GameId, { createdAt: Date; updatedAt: Date }>();
-  private nextGameId = 1;
   private cardRepository: CardRepositoryPort;
 
   constructor(cardRepository: CardRepositoryPort) {
@@ -33,7 +33,7 @@ export class InMemoryPersistStateAdapter implements PersistStatePort {
   }
 
   newGameId(): GameId {
-    return this.nextGameId++;
+    return generateUniqueGameId((candidate) => this.storage.has(candidate));
   }
 
   async getAllGames(): Promise<GameHistorySummary[]> {

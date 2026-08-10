@@ -36,6 +36,25 @@ commands, layout) go there instead — this file is for the "oh, _that's_ why" f
   nibbling corners). If a mechanism deserves real testing rigor, that's the signal it
   doesn't belong in this repo.
 
+## Shuffler gotchas (apps/shuffler)
+
+- **`id INTEGER PRIMARY KEY` in SQLite is a rowid alias, and it rejects non-integer
+  values outright** ("datatype mismatch") — not just on lookup, on `INSERT`. Discovered
+  2026-08-10 turning game ids into fun word-combos (`brave-falcon-42`): the existing
+  `game_states` table had `id INTEGER PRIMARY KEY`, so inserting a word-combo id threw
+  immediately. Comparisons are more forgiving than storage — a *lookup* like
+  `WHERE id = ?` bound to the string `'47'` against an `INTEGER` column still matches
+  the integer row `47` (affinity coercion applies to comparisons), so old numeric ids
+  keep working with either JS type. But you can't get a new non-numeric value *into*
+  that column type at all. Fix: migrate the column to bare `id PRIMARY KEY` (no declared
+  type ⇒ BLOB affinity ⇒ stores whatever it's given, no coercion in either direction) —
+  `SqlitePersistStateAdapter.initializeDatabase` detects the old `INTEGER` column type
+  via `pragma_table_info` and rewrites the table (rename → recreate → copy → drop) the
+  first time it opens an old `data.db`. After that migration, a lookup must pass the
+  *same JS type* that was stored (number for pre-migration games, string for new
+  word-combo ones) since BLOB affinity does no coercion — see `parseGameId` in
+  `domain-types.ts`.
+
 ## Tabletop gotchas (apps/tabletop)
 
 - **tldraw is pinned exactly** (5.2.5 line, no caret): `room.updateStore` (server-side

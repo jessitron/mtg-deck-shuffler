@@ -3,11 +3,11 @@ import { trace } from "@opentelemetry/api";
 import { PersistStatePort, PersistedGameState, GameHistorySummary } from "./types.js";
 import { GameId } from "../domain-types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
+import { generateUniqueGameId } from "../gameIdGenerator.js";
 import { log } from "../log.js";
 
 export class SqlitePersistStateAdapter implements PersistStatePort {
   private db: Database.Database;
-  private nextGameId = 1;
   private isClosed = false;
   private cardRepository: CardRepositoryPort;
 
@@ -18,9 +18,43 @@ export class SqlitePersistStateAdapter implements PersistStatePort {
   }
 
   private initializeDatabase(): void {
+    // New games get a fun word-combo id (e.g. "brave-falcon-42"), which is not
+    // a valid rowid — `id INTEGER PRIMARY KEY` (a rowid alias) rejects any
+    // non-integer value outright ("datatype mismatch"). A database created
+    // before this change still has that old column type, so migrate it in
+    // place: `id PRIMARY KEY` with no declared type has BLOB affinity, which
+    // stores (and compares) whatever it's given without conversion — old
+    // numeric ids keep their integer storage class exactly as before, and a
+    // lookup must pass the same JS type that was stored (number for old
+    // games, string for new ones). domain-types.ts's parseGameId does
+    // exactly that: an all-digits param becomes a JS number, anything else
+    // stays a string.
+    const idColumnType = this.db
+      .prepare("SELECT type FROM pragma_table_info('game_states') WHERE name = 'id'")
+      .get() as { type: string } | undefined;
+
+    if (idColumnType && idColumnType.type.toUpperCase() === "INTEGER") {
+      log.info("Migrating game_states.id off INTEGER PRIMARY KEY to allow word-combo ids", {});
+      this.db.exec(`
+        BEGIN;
+        ALTER TABLE game_states RENAME TO game_states_pre_word_ids;
+        CREATE TABLE game_states (
+          id PRIMARY KEY,
+          state TEXT NOT NULL,
+          version INTEGER NOT NULL,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+        INSERT INTO game_states SELECT * FROM game_states_pre_word_ids;
+        DROP TABLE game_states_pre_word_ids;
+        COMMIT;
+      `);
+      return;
+    }
+
     const createTableSQL = `
       CREATE TABLE IF NOT EXISTS game_states (
-        id INTEGER PRIMARY KEY,
+        id PRIMARY KEY,
         state TEXT NOT NULL,
         version INTEGER NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -29,13 +63,6 @@ export class SqlitePersistStateAdapter implements PersistStatePort {
     `;
 
     this.db.exec(createTableSQL);
-
-    const row = this.db.prepare("SELECT MAX(id) as maxId FROM game_states").get() as
-      | { maxId: number | null }
-      | undefined;
-    if (row?.maxId !== null && row?.maxId !== undefined) {
-      this.nextGameId = row.maxId + 1;
-    }
   }
 
   async save(psg: PersistedGameState): Promise<GameId> {
@@ -65,13 +92,17 @@ export class SqlitePersistStateAdapter implements PersistStatePort {
   }
 
   newGameId(): GameId {
-    return this.nextGameId++;
+    const exists = (candidate: string): boolean => {
+      const row = this.db.prepare("SELECT 1 FROM game_states WHERE id = ?").get(candidate);
+      return row !== undefined;
+    };
+    return generateUniqueGameId(exists);
   }
 
   async getAllGames(): Promise<GameHistorySummary[]> {
     const selectSQL = "SELECT id, state, created_at, updated_at FROM game_states ORDER BY created_at DESC";
     const rows = this.db.prepare(selectSQL).all() as Array<{
-      id: number;
+      id: GameId;
       state: string;
       created_at: string;
       updated_at: string;

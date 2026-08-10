@@ -2,6 +2,7 @@ import { GameState, GameCard } from "../../GameState.js";
 import { formatCardNameAsModalLink, CardAction } from "../common/shared-components.js";
 import { GameEvent } from "../../GameEvents.js";
 import { formatGameEventHtmlFragment } from "./history-components.js";
+import { GameId } from "../../domain-types.js";
 
 export function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"
@@ -61,7 +62,7 @@ export function formatTableModalHtmlFragment(game: GameState): string {
 function formatModalActionButton(
   action: string,
   endpoint: string,
-  gameId: number,
+  gameId: GameId,
   cardIndex: number,
   expectedVersion: number,
   title: string,
@@ -103,7 +104,7 @@ function formatModalActionButton(
 // Solo: Play/Discard copy the card image to the clipboard (the `play-button`
 // class is game.js's clipboard hook). At a table: they send the card to the
 // tabletop instead (`table-play-button` — game.js shows "Sent to table").
-function formatModalCardActionsForHand(gameId: number, gameCard: GameCard, expectedVersion: number, inTableMode: boolean): string {
+function formatModalCardActionsForHand(gameId: GameId, gameCard: GameCard, expectedVersion: number, inTableMode: boolean): string {
   const playishClass = inTableMode ? "table-play-button" : "play-button";
   const playTitle = inTableMode ? "Send to the table and remove from hand" : "Copy image and remove from hand";
   const discardTitle = inTableMode ? "Send to the graveyard on the table" : "Copy image and discard from hand";
@@ -133,7 +134,7 @@ function formatModalCardActionsForHand(gameId: number, gameCard: GameCard, expec
 }
 
 // Generate action buttons for revealed cards
-function formatModalCardActionsForRevealed(gameId: number, gameCard: GameCard, expectedVersion: number, inTableMode: boolean): string {
+function formatModalCardActionsForRevealed(gameId: GameId, gameCard: GameCard, expectedVersion: number, inTableMode: boolean): string {
   const playishClass = inTableMode ? "table-play-button" : "play-button";
   const playTitle = inTableMode ? "Send to the table and remove from revealed" : "Copy image and remove from revealed";
   const actions: CardAction[] = [
@@ -162,7 +163,7 @@ function formatModalCardActionsForRevealed(gameId: number, gameCard: GameCard, e
 }
 
 // Generate action buttons for cards in library
-function formatModalCardActionsForLibrary(gameId: number, gameCard: GameCard, expectedVersion: number): string {
+function formatModalCardActionsForLibrary(gameId: GameId, gameCard: GameCard, expectedVersion: number): string {
   const actions: CardAction[] = [
     { action: "Reveal", endpoint: "/reveal-card", title: "Reveal", cssClass: "modal-action-button" },
     { action: "Put in Hand", endpoint: "/put-in-hand", title: "Put in Hand", cssClass: "modal-action-button secondary" },
@@ -186,7 +187,7 @@ function formatModalCardActionsForLibrary(gameId: number, gameCard: GameCard, ex
 }
 
 // Generate action buttons for cards on table
-function formatModalCardActionsForTable(gameId: number, gameCard: GameCard, expectedVersion: number): string {
+function formatModalCardActionsForTable(gameId: GameId, gameCard: GameCard, expectedVersion: number): string {
   return formatModalActionButton(
     "Return",
     "/reveal-card",
@@ -201,7 +202,7 @@ function formatModalCardActionsForTable(gameId: number, gameCard: GameCard, expe
 }
 
 // Get location-specific actions based on card location
-export function getModalCardActionsByLocation(gameCard: GameCard, gameId: number, expectedVersion: number, inTableMode = false): string {
+export function getModalCardActionsByLocation(gameCard: GameCard, gameId: GameId, expectedVersion: number, inTableMode = false): string {
   switch (gameCard.location.type) {
     case "Hand":
       return formatModalCardActionsForHand(gameId, gameCard, expectedVersion, inTableMode);

@@ -6,7 +6,24 @@ import { CardDefinition } from "./types.js";
 // around. The persisted (on-disk) shapes live in
 // port-persist-state/persisted-types.ts.
 
-export type GameId = number;
+// Old games kept their sequential integer ids (never migrated); new games get
+// a fun word-combo string (see gameIdGenerator.ts) — not derivable the way a
+// sequential id is. Both forms coexist forever; nothing rejects the old shape.
+export type GameId = number | string;
+
+/**
+ * Parses a route/body param into a GameId, preserving whichever form it is:
+ * an all-digits string becomes the old numeric GameId (so lookups match
+ * legacy numeric-keyed storage), anything else is kept as the opaque
+ * word-combo string. Never throws; an empty/missing param comes back as "".
+ */
+export function parseGameId(raw: string | undefined): GameId {
+  const trimmed = (raw ?? "").trim();
+  if (trimmed !== "" && /^\d+$/.test(trimmed)) {
+    return Number(trimmed);
+  }
+  return trimmed;
+}
 
 export enum GameStatus {
   Active = "Active",

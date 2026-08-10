@@ -28,6 +28,7 @@ import { fetchScryfall } from "./scryfall-http.js";
 import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 import { applyGameCommand, CommandOutcome, TableSendFailedError } from "./apply-game-command.js";
 import { WhatHappened } from "./GameState.js";
+import { GameId, parseGameId } from "./domain-types.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -100,13 +101,14 @@ export function createApp(
   });
   
   // Parses and validates the :gameId route param, 400ing (and stamping the
-  // span) on failure. Shared by every route built on applyGameCommand, since
-  // that function takes an already-valid numeric gameId.
-  function parseGameIdParam(req: express.Request, res: express.Response): number | null {
+  // span) on failure. Shared by every route built on applyGameCommand.
+  // Accepts either the old numeric id or the new word-combo id (parseGameId
+  // keeps whichever form it is); only "missing" is invalid.
+  function parseGameIdParam(req: express.Request, res: express.Response): GameId | null {
     const gameIdParam = req.params.gameId;
-    const gameId = Number(gameIdParam);
+    const gameId = parseGameId(gameIdParam);
 
-    if (!gameIdParam || !Number.isInteger(gameId)) {
+    if (!gameIdParam || gameId === "") {
       const errorMessage = "Missing or invalid game ID";
       markCurrentSpanAsError(errorMessage, {
         "error.message": errorMessage,
@@ -114,7 +116,6 @@ export function createApp(
         "game.game_id.param": gameIdParam ?? "",
         "game.game_id.valid": false,
         "game.game_id.missing": !gameIdParam,
-        "game.game_id.integer": Number.isInteger(gameId),
       });
       res.status(400).send(`<div>${errorMessage}</div>`);
       return null;
@@ -158,7 +159,7 @@ export function createApp(
   // narrower fragment; some pass whatHappened through for animation, some don't).
   function renderCommandOutcome(
     res: express.Response,
-    gameId: number,
+    gameId: GameId,
     outcome: CommandOutcome,
     notActiveMessage: string,
     // Returns the fragment to send, or sends the response itself (e.g. via
@@ -599,7 +600,7 @@ export function createApp(
 
   // Returns active game page only
   app.get("/game/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+    const gameId = parseGameId(req.params.gameId);
 
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
@@ -649,7 +650,7 @@ export function createApp(
 
   // Redirects to new game page - creates new game from prep
   app.post("/restart-game", async (req, res) => {
-    const gameId: number = parseInt(req.body["game-id"]);
+    const gameId: GameId = parseGameId(req.body["game-id"]);
     const browserTabId = res.locals.browserTabId as string | undefined;
 
     try {
@@ -723,7 +724,7 @@ export function createApp(
   // Modal endpoints
   // Returns modal fragment - library contents modal
   app.get("/library-modal/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+    const gameId = parseGameId(req.params.gameId);
 
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
@@ -772,7 +773,7 @@ export function createApp(
 
   // Returns modal fragment - table contents modal
   app.get("/table-modal/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+    const gameId = parseGameId(req.params.gameId);
 
     try {
       // TODO: can this be middleware?
@@ -795,7 +796,7 @@ export function createApp(
 
   // Returns modal fragment - individual card modal
   app.get("/card-modal/:gameId/:cardIndex", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+    const gameId = parseGameId(req.params.gameId);
     const cardIndex = parseInt(req.params.cardIndex);
 
     try {
@@ -1209,7 +1210,7 @@ export function createApp(
   });
 
   app.get("/history-modal/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+    const gameId = parseGameId(req.params.gameId);
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {
@@ -1228,7 +1229,7 @@ export function createApp(
   });
 
   app.get("/debug-state/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+    const gameId = parseGameId(req.params.gameId);
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {
@@ -1247,7 +1248,7 @@ export function createApp(
 
   // Returns game section fragment - for HTMX updates
   app.get("/game-section/:gameId", async (req, res) => {
-    const gameId = parseInt(req.params.gameId);
+    const gameId = parseGameId(req.params.gameId);
     try {
       const persistedGame = await persistStatePort.retrieve(gameId);
       if (!persistedGame) {

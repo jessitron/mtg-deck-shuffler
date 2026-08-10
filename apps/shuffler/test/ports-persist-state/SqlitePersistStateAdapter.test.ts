@@ -8,6 +8,8 @@ import { deckWithOneCommander, createTestPersistedGameState } from "../generator
 import { ShuffleEvent } from "../../src/GameEvents.js";
 import { SqliteCardRepositoryAdapter } from "../../src/port-card-repository/SqliteCardRepositoryAdapter.js";
 import { CardRepositoryPort } from "../../src/port-card-repository/types.js";
+import { GAME_ID_WORD_FORMAT } from "../../src/gameIdGenerator.js";
+import Database from "better-sqlite3";
 
 describe("SqlitePersistStateAdapter", () => {
   let adapter: SqlitePersistStateAdapter;
@@ -39,14 +41,72 @@ describe("SqlitePersistStateAdapter", () => {
     }
   });
 
-  it("should generate new game IDs incrementally", () => {
+  it("should generate fun word-combo game IDs, not sequential numbers", () => {
     const id1 = adapter.newGameId();
     const id2 = adapter.newGameId();
     const id3 = adapter.newGameId();
 
-    expect(id1).toBe(1);
-    expect(id2).toBe(2);
-    expect(id3).toBe(3);
+    // Not derivable from one another the way sequential integers are.
+    expect(id1).not.toBe(id2);
+    expect(id2).not.toBe(id3);
+    for (const id of [id1, id2, id3]) {
+      expect(typeof id).toBe("string");
+      expect(id as string).toMatch(GAME_ID_WORD_FORMAT);
+    }
+  });
+
+  it("should save and retrieve a game with a word-combo id (new format)", async () => {
+    const wordIdGameState: PersistedGameState = {
+      ...testGameState,
+      gameId: "brave-falcon-42",
+    };
+
+    const gameId = await adapter.save(wordIdGameState);
+    expect(gameId).toBe("brave-falcon-42");
+
+    const retrieved = await adapter.retrieve("brave-falcon-42");
+    expect(retrieved).toEqual(wordIdGameState);
+  });
+
+  it("should load a game saved by old code with a plain numeric id, from a database created with the old INTEGER PRIMARY KEY schema", async () => {
+    // Simulate a pre-existing data.db: build the table the way the OLD code did
+    // (id INTEGER PRIMARY KEY), insert a numeric-id game directly, close it, then
+    // open it with the current adapter and confirm the migration it runs on
+    // startup doesn't break loading that old game.
+    await adapter.close();
+    if (fs.existsSync(testDbPath)) {
+      fs.unlinkSync(testDbPath);
+    }
+
+    const oldGameState: PersistedGameState = { ...testGameState, gameId: 47 };
+    const legacyDb = new Database(testDbPath);
+    legacyDb.exec(`
+      CREATE TABLE game_states (
+        id INTEGER PRIMARY KEY,
+        state TEXT NOT NULL,
+        version INTEGER NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    legacyDb.prepare("INSERT INTO game_states (id, state, version) VALUES (?, ?, ?)").run(47, JSON.stringify(oldGameState), oldGameState.version);
+    legacyDb.close();
+
+    const migratedAdapter = new SqlitePersistStateAdapter(testDbPath, cardRepository);
+    await migratedAdapter.waitForInitialization();
+
+    try {
+      const retrieved = await migratedAdapter.retrieve(47);
+      expect(retrieved).toEqual(oldGameState);
+
+      // And the migrated database accepts new word-combo ids too.
+      const newId = migratedAdapter.newGameId();
+      expect(newId as string).toMatch(GAME_ID_WORD_FORMAT);
+      await migratedAdapter.save({ ...testGameState, gameId: newId });
+      expect(await migratedAdapter.retrieve(newId)).toEqual({ ...testGameState, gameId: newId });
+    } finally {
+      await migratedAdapter.close();
+    }
   });
 
   it("should save and retrieve game state", async () => {

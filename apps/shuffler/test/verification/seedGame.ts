@@ -16,7 +16,9 @@ const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 export const DEFAULT_PRECON_DECK = 'precon-mtgjson-20WaystoWin_SLD.json';
 
 function extractId(url: string, segment: 'prepare' | 'game'): string {
-  const match = url.match(new RegExp(`/${segment}/(\\d+)`));
+  // prepId is still numeric; gameId may be the old numeric form or the new
+  // fun word-combo form (e.g. "brave-falcon-42") — match either.
+  const match = url.match(new RegExp(`/${segment}/([^/?]+)`));
   if (!match) throw new Error(`Expected to land on /${segment}/<id>, got "${url}"`);
   return match[1];
 }

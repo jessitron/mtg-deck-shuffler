@@ -1,5 +1,6 @@
 import { getCardImageUrl } from "../../types.js";
 import { GameCard, GameState, WhatHappened } from "../../GameState.js";
+import { GameId } from "../../domain-types.js";
 
 export const CARD_BACK = "/images/mtg-card-back.jpg";
 
@@ -43,7 +44,7 @@ export function formatDeckTitleHtmlFragment(deckName: string, sleeveColor?: stri
   return `<div class="game-title"${sleeveTintStyle(sleeveColor, true)}><span class="game-name">${escapeHtml(deckName)}</span></div>`;
 }
 
-export function formatCardNameAsModalLink(cardName: string, gameId: number, cardIndex: number, expectedVersion?: number): string {
+export function formatCardNameAsModalLink(cardName: string, gameId: GameId, cardIndex: number, expectedVersion?: number): string {
   const versionParam = expectedVersion !== undefined ? `?expected-version=${expectedVersion}` : '';
   return `<span class="card-name-link clickable-card-name"
                hx-get="/card-modal/${gameId}/${cardIndex}${versionParam}"
@@ -61,12 +62,12 @@ export function formatCardNameAsModalLink(cardName: string, gameId: number, card
  * the requested face, the same `?face=` idiom the prep card modal uses.
  */
 export type FlipRequest =
-  | { page: "game"; gameId: number; expectedVersion?: number }
+  | { page: "game"; gameId: GameId; expectedVersion?: number }
   | { page: "prep"; prepId: number };
 
 type CardRenderOptions = {
   gameCard: GameCard;
-  gameId: number;
+  gameId: GameId;
   expectedVersion?: number;
   actions?: string;
   whatHappened?: WhatHappened;
