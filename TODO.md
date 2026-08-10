@@ -13,25 +13,25 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- Easy win: Bunny got confused on the /choose screen. If Precon is selected and you click Precon anyway, it should scroll you down to the list of precons.
+- Easy win: Bunny got confused on the /choose screen. If Precon is selected and you click Precon anyway, it should scroll you down to the list of precons. (Shuffler) 
 
-- put some less-busy playmats in the options
+- put some less-busy playmats in the options (Shuffler)
 
-- Aesthetics: Rach wants cards to be in a grid in the hand. So move the card count hand.
+- Aesthetics: Rach wants cards to be in a grid in the hand. So move the card count hand (the picture of a hand with a number over it) to the end of the cards-in-hand, instead of the beggining. This is on /game in Shuffler.
 
-- Feature: Let a player exit the table so they can rejoin with a different deck!
+- Feature: Let a player exit the table so they can rejoin with a different deck! (fleet)
 
-- Minor bug: my sleeveless cards need a border radius. They are rectangles now
+- Minor bug: my sleeveless cards need a border radius. They are rectangles now (Tabletop)
 
 - Minor bug: on a counter, when I type "+1/+1" it has a certain length that isn't vertically centered, like there's a line below it. If I type "wh" it's centered, but "why" is at the top. Type another character, and it appears on the second line and then it looks right.
 
-- When the first land arrives on the playmat, it should arrive a few pixels away from the edge, not right up against it
+- When the first land arrives on the playmat, it should arrive a few pixels away from the edge, not right up against it (Tabletop)
 
-- Minor bug: the counter didn't participate in the tap animation, when the counter was on the card.
+- Minor bug: the counter didn't participate in the tap animation, when the counter was on the card. (Tabletop)
 
-- BUG: paste an image in. Pick the image, move it around. Click a card, try to move it, oh no, the image moves instead. Like, clicking the card doesn't clear the image selection.
+- BUG: paste an image in. Pick the image, move it around. Click a card, try to move it, oh no, the image moves instead. Like, clicking the card doesn't clear the image selection. (Tabletop)
 
-- bug: counters can't be copied... actually neither can images, cards, etc. They can be duplicated, so there's a workaround.
+- bug: counters can't be copied... actually neither can images, cards, etc. They can be duplicated, so there's a workaround. (Tabletop)
 
 - [ ] `graveyard-cascade-overflow` The graveyard card cascade walks out of its box at ~32 cards
   - Surfaced 2026-08-09 by `tabletop-shape-mechanics-review` on the zone-label-band change
