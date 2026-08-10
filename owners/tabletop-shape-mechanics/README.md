@@ -82,22 +82,6 @@ accept-list reopened the drag-identity hazard (watch point 1) for it, because st
 a missing hook" as a reusable pattern for future stock-shape integrations. See `architecture.md`'s
 "Ticket 19" section and watch point 18.
 
-**Ticket 20** (`.scratch/tabletop-physics/issues/20-cards-behind-cards.md`, landed 2026-08-10,
-**corrected the same day**) lets a card host another card, tucked underneath. The first cut
-widened `PASSENGER_TYPES` to include `mtg-card` itself, via the same real-parenting mechanism
-tickets 18/19 built, plus matrix-composition math to compensate a passenger card's rotation
-across its host's tap. Jess's first real use found it broken: a card parented under another card
-can **never** be reordered behind its own parent — confirmed against tldraw source
-(`Editor.getUnorderedRenderingShapes`, `getReorderingShapesChanges`) — so "send to back" on a
-tucked card could never work while real parenting was the mechanism. **Replaced the same day**
-with a `meta.tuckedWith` link between two ordinary sibling cards — no `parentId` involved, so
-tldraw's stock reorder actions genuinely work between them, and "host" is now computed live from
-current z-order rather than fixed at attach time. A welcome side effect: since there's no real
-parenting, tapping one card can no longer rotate the other at all, so the matrix-compensation
-machinery the first cut needed is gone outright. See `architecture.md`'s "Ticket 20" section
-(the broken design is kept, marked superseded, for the record) and watch point 19; a related
-tldraw selection quirk found while testing the fix is watch point 20.
-
 ## Design philosophy
 
 - **Extend tldraw's built-in shape utils rather than reimplementing them, where that's still
@@ -141,8 +125,6 @@ tldraw selection quirk found while testing the fix is watch point 20.
 | Counter attach/detach/evict/edit tests | `apps/tabletop/test/verification/verify-counter.spec.ts`, `apps/tabletop/test/openSpotNearZoneEdge.test.ts` |
 | Stock `note` ShapeUtil, subclassed to add the drag-settle selection-clear stock tldraw lacks | `apps/tabletop/src/client/shapes/SelectionClearingNoteShapeUtil.ts` |
 | Note-as-passenger attach/detach/evict + stale-selection regression tests | `apps/tabletop/test/verification/verify-note.spec.ts` |
-| Cards tuck via `meta.tuckedWith`, not parenting (live host-from-z-order, hand-rolled carry) | `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` (`tuckCard`/`untuck`/`carryTuckedPartner`) |
-| Card-tuck attach/carry/nudge-vs-detach/reorder-swap/tap-independence/battlefield-detach tests | `apps/tabletop/test/verification/verify-cards-behind-cards.spec.ts` |
 
 See `architecture.md` for how the pieces fit together, `interactions.md` for what depends on
 this and the watch points, `history.md` for how we got here, `files.md` for the full file list.

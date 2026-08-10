@@ -58,55 +58,26 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 - `apps/tabletop/src/client/shapes/cardTap.ts` — **new, ticket 17**: `tapPartial(shape, tapped)`,
   the center-fixed pivot solve (watch point 4) extracted out of `MtgCardShapeUtil` as a standalone
   pure function so the context menu's Tap/Untap item can share it — a menu item has no
-  `this.editor`/ShapeUtil instance to call a private method on. **Ticket 20's first cut
-  (2026-08-10) briefly added a `Mat`-based `passengerTapCompensation`/`passengerCompensationPartials`
-  and a `directIds`-deduped `tapPartialsForCards(editor, cards, tapped)` — all deleted the same
-  day** when the real-parenting design they served turned out structurally broken (see
-  `architecture.md`'s "Ticket 20" section). What survives from ticket 20: `rotateHoldingCenter`
-  (the pivot solve generalized to a standalone `HostPose`-based helper, shared by `tapPartial` and
-  `MtgCardShapeUtil.zeroRotationHoldingCenter`, still used for a card *detaching* from a tuck —
-  see below). `tapPartialsForCards` is back to a plain `(cards: MtgCardShape[], tapped: boolean)`
-  signature with no `Editor` parameter and no passenger awareness. Imported by
-  `MtgCardShapeUtil.tsx`'s `onClick` and `onDragShapesOut`/`zeroRotationHoldingCenter`, and by
-  `CardContextMenu.tsx`.
+  `this.editor`/ShapeUtil instance to call a private method on. `tapPartialsForCards(cards,
+  tapped)` is a plain `(cards: MtgCardShape[], tapped: boolean)` helper with no `Editor`
+  parameter. Imported by `MtgCardShapeUtil.tsx`'s `onClick` and by `CardContextMenu.tsx`.
 - `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — the whole card territory: extends
   `BaseBoxShapeUtil<MtgCardShape>`; `onClick` (tap/untap toggling `props.tapped` with rotation
   as a pure visual delta; since ticket 16, 2026-08-09, also pushes the clicked card's new state
   to the rest of a marquee selection via a `queueMicrotask`-deferred batch, run only when other
   cards are selected — the clicked card's own partial stays a synchronous return; see
   `architecture.md`'s "Ticket 16"; since ticket 17, calls the standalone `tapPartial` from
-  `cardTap.ts` instead of a private method; **ticket 20's first cut briefly ran the microtask
-  block unconditionally and computed a `directIds` dedup set for passenger compensation — both
-  reverted the same day**, since a tucked card can no longer be rotated by a tap on its partner at
-  all), `onTranslateEnd` (selection cleanup, captured `selectedBeforeClear` before the clear — new,
-  ticket 20 — + `carryTuckedPartner` (new, ticket 20, below) + zone-entry detection + passenger
-  eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`, deliberately excluding
-  the Stack), `zoneAt()` (private helper — since ticket 14, a thin wrapper around
-  `zoneHitTest.ts`'s `topmostZoneAt()`, below; since ticket 18 returning the full `ZoneHit`,
-  id+zone), the passenger-hosting drag hooks (`canReceiveNewChildrenOfType`/
+  `cardTap.ts` instead of a private method), `onTranslateEnd` (selection cleanup + zone-entry
+  detection + passenger eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`,
+  deliberately excluding the Stack), `zoneAt()` (private helper — since ticket 14, a thin wrapper
+  around `zoneHitTest.ts`'s `topmostZoneAt()`, below; since ticket 18 returning the full
+  `ZoneHit`, id+zone), the passenger-hosting drag hooks (`canReceiveNewChildrenOfType`/
   `canRemoveChildrenOfType`, type-narrowed via `PASSENGER_TYPES` — since ticket 19, `{
-  "mtg-counter", "note" }`, was `mtg-counter`-only; **ticket 20's first cut widened it to include
-  `mtg-card`, then reverted that the same day** — `mtg-card` never rejoins `PASSENGER_TYPES` in
-  the shipped design; `canReceiveNewChildrenOfType` still returns `true` for `type === "mtg-card"`
-  too, purely so the card hints as a drop target during the drag, but `onDragShapesIn` never
-  reparents one), `onDragShapesIn` (real reparent + rotation-zeroing for actual passengers
-  (counters/notes) unchanged from ticket 19, using `getShapeGeometry(...).bounds`; **plus new
-  ticket-20 logic**: for a dropped `mtg-card`, calls private `tuckCard`/`bringToFront` instead of
-  reparenting — see the `TUCK_KEY` constant and `tuckCard`/`untuck` methods, below), `onDragShapesOut`
-  (the `parentId` filter for real passengers, unchanged; no longer fires for cards at all, since
-  they're never reparented), `carryTuckedPartner()` (private, **new, ticket 20**: called
-  unconditionally from `onTranslateEnd` every settle; computes host-ness live from
-  `current.index > partner.index`, carries the partner by delta when the current card is host,
-  checks `Box.collides` to decide nudge-vs-detach when it's the passenger, untucks on battlefield
-  exit — see `architecture.md`'s "Ticket 20" section), `tuckCard()`/`untuck()` (private, **new,
-  ticket 20**: write/clear the `meta.tuckedWith` link on both sides of a tuck pair — `TUCK_KEY =
-  "tuckedWith"` module constant), `zeroRotationHoldingCenter()` (private, **new, ticket 20** — the
-  center-preserving zero-rotation write used when a card passenger detaches, via `cardTap.ts`'s
-  `rotateHoldingCenter`; this is the one piece of ticket 20's original math that survived the
-  redesign), `evictPassengers()` (private, renamed from `evictCounters` by ticket 19 — calls
-  `findOpenSpotsNearZoneEdge`, below; scoped to real passengers, `PASSENGER_TYPES` — a tucked card
-  is never a real child, so its own zone-exit detach lives in `carryTuckedPartner`, not here), and
-  `component()`/`getIndicatorPath()` (renders its own `<img>`).
+  "mtg-counter", "note" }`), `onDragShapesIn` (real reparent + rotation-zeroing for passengers,
+  using `getShapeGeometry(...).bounds`), `onDragShapesOut` (the `parentId` filter for
+  passengers), `evictPassengers()` (private, renamed from `evictCounters` by ticket 19 — calls
+  `findOpenSpotsNearZoneEdge`, below), and `component()`/`getIndicatorPath()` (renders its own
+  `<img>`).
 - `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — extends `BaseBoxShapeUtil<MtgZoneShape>`
   (ticket 13); still defines no interaction hooks at all (`onClick`/`onTranslateEnd`/
   `onDragShapesOver` are all absent — see `architecture.md`/`interactions.md` watch point 7 for why
@@ -130,7 +101,7 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   also carries `seatId` (was just `{id, zone}`), and `armedZoneIdSignal` gates command zones on
   ownership via a new private `allDraggedCardsAreOwnersCommander(editor, seatId)` — see
   `architecture.md`'s "Command zones only arm for their owner's commander" section and
-  `interactions.md` watch point 21. Every non-command zone type is unaffected.
+  `interactions.md` watch point 19. Every non-command zone type is unaffected.
 - `apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx` — **new, ticket 18**: extends
   `BaseBoxShapeUtil<MtgCounterShape>`. Deliberately no `onClick` (text editing is stock
   double-click-to-edit via `canEdit()`, avoiding the selection-deferral quirk), but
@@ -310,20 +281,6 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   "after dragging a note, dragging a card moves the card (stale-selection regression)" — mirroring
   `verify-counter.spec.ts`'s Hazard-A test, deliberately without test-side selection cleanup so the
   assertion proves the product clears selection, not the test (watch point 18).
-
-- `apps/tabletop/test/passengerTapCompensation.test.ts` — **created ticket 20's first cut
-  (2026-08-10), deleted the same day** when the real-parenting design it tested (`cardTap.ts`'s
-  `passengerTapCompensation`) was replaced — the function it unit-tested no longer exists.
-- `apps/tabletop/test/verification/verify-cards-behind-cards.spec.ts` — **new, ticket 20; fully
-  rewritten the same day (2026-08-10) for the corrected `meta.tuckedWith` design**: 5 Playwright
-  tests — tuck + carry (dropping a card onto another tucks it, on top by default, and carries the
-  other when dragged); a small nudge of the passenger doesn't detach it, dragging it far enough
-  does; Send to back/Bring to front swaps which card is host; a tucked card is independently
-  tappable and draggable, and tapping never rotates the other; a host leaving the battlefield
-  detaches its passenger, which stays exactly where it was. Uses `zoneHint: "battlefield"`, not
-  `"stack"` — see watch point 19's test-positioning gotcha. The reorder-swap test also has to
-  click empty canvas to deselect before its second right-click, or tldraw's own stale-selection-
-  preserving `Idle.onRightClick` resolves the menu to the wrong card — see watch point 20.
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 
