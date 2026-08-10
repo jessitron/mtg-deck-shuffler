@@ -150,6 +150,23 @@ section is just a wall between Jess and the live work.
   - Related: `.scratch/shuffler-architecture-review/issues/02-tabletop-send-veto-hook.md`,
     `services/spine/interpreter/docs/journeys/README.md`.
 
+- `tabletop-server-build-broken` The Tabletop server currently fails to build/typecheck at all
+  - Surfaced 2026-08-10 while implementing tabletop-physics ticket 21 (announce physics gestures):
+    `npm run build` in `apps/tabletop` — and therefore `./verify.sh` and `npm start` — fails with
+    `src/server/tracing.ts(66,55): error TS2561: Object literal may only specify known properties,
+    but 'exporter' does not exist in type 'LogRecordExporter'.` on
+    `new BatchLogRecordProcessor({ exporter: new OTLPLogExporter() })`.
+  - Confirmed pre-existing via `git stash` (fails identically on HEAD, before any ticket-21 change).
+    Not caused by ticket 21's work, but it blocked running `./verify.sh` and doing a live Honeycomb
+    check for that ticket's new telemetry.
+  - Smells like the OTel-version-mismatch trap `apps/tabletop/CLAUDE.md` already warns about: root
+    `node_modules` hoists `@opentelemetry/sdk-logs@0.219.0` for the Shuffler, while
+    `apps/tabletop/node_modules` has its own `0.221.0` whose types disagree at this call site.
+    Root cause not fully diagnosed — needs someone to actually trace which install TS is resolving
+    and why the options-object constructor shape (documented as correct in the code's own comment)
+    no longer typechecks.
+    ← mountain: tabletop-replaces-mural
+
 ## Backlog
 
 - GRILLING: `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there ← was: JES-85
