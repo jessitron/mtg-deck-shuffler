@@ -13,7 +13,6 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- put some less-busy playmats in the options (Shuffler)
 
 - Aesthetics: Rach wants cards to be in a grid in the hand. So move the card count hand (the picture of a hand with a number over it) to the end of the cards-in-hand, instead of the beggining. This is on /game in Shuffler.
 
