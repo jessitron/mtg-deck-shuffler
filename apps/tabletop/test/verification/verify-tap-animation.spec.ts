@@ -1,5 +1,6 @@
 import { test, expect, Browser, Page } from "@playwright/test";
 import { randomUUID } from "node:crypto";
+import { openTable, placeCard } from "./helpers";
 
 /**
  * tabletop-physics ticket 15: tapping reads as a quick rotation, not a snap.
@@ -11,45 +12,6 @@ import { randomUUID } from "node:crypto";
  * structurally, not here: the effect's only input is `props.tapped`, so it
  * cannot see `shape.rotation` change.
  */
-
-function fakeTraceparent(): string {
-  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
-}
-
-function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
-  return {
-    id: randomUUID(),
-    tableId,
-    name: "card.played",
-    occurredAt: new Date().toISOString(),
-    initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    occurredIn: "shuffler",
-    visibility: "public",
-    traceparent: fakeTraceparent(),
-    schemaVersion: 1,
-    payload: {
-      face: "front",
-      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-      backImageUrl: null,
-      zoneHint: "stack",
-      owner: "e2e-seat",
-      isCommander: false,
-      ...payloadOverrides,
-    },
-  };
-}
-
-async function placeCard(page: Page, baseURL: string, tableSlug: string, instanceId: string) {
-  const event = cardPlayed(tableSlug, {
-    cardName: "Llanowar Elves",
-    card: { scryfallId: randomUUID(), instanceId },
-  });
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
-  expect(response.status()).toBe(201);
-  const card = page.locator(`#shape\\:card-${instanceId}`);
-  await expect(card).toBeAttached();
-  return card;
-}
 
 // Running WAAPI animations on the card's image container, [duration, ...].
 async function runningAnimationDurations(page: Page, instanceId: string): Promise<number[]> {
@@ -65,11 +27,10 @@ async function runningAnimationDurations(page: Page, instanceId: string): Promis
 
 test("tapping a card plays a 0.5s rotation catch-up animation", async ({ page, baseURL }) => {
   const tableSlug = `verify-tap-anim-${Date.now()}`;
-  await page.goto(`/t/${tableSlug}`);
-  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+  await openTable(page, tableSlug);
 
   const instanceId = randomUUID();
-  const card = await placeCard(page, baseURL!, tableSlug, instanceId);
+  const card = await placeCard(page, baseURL, tableSlug, instanceId);
 
   await card.click();
   const durations = await runningAnimationDurations(page, instanceId);
@@ -85,11 +46,10 @@ test("tapping a card plays a 0.5s rotation catch-up animation", async ({ page, b
 
 test("a card arriving already-tapped does not animate on mount", async ({ page, baseURL }) => {
   const tableSlug = `verify-tap-mount-${Date.now()}`;
-  await page.goto(`/t/${tableSlug}`);
-  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+  await openTable(page, tableSlug);
 
   const instanceId = randomUUID();
-  const card = await placeCard(page, baseURL!, tableSlug, instanceId);
+  const card = await placeCard(page, baseURL, tableSlug, instanceId);
 
   // Tap it, let the animation finish, then reload: the card arrives from the
   // store already-tapped and must not swing on mount.
@@ -106,19 +66,18 @@ test("a card arriving already-tapped does not animate on mount", async ({ page, 
 test("a remote peer sees the tap animation when the prop syncs in", async ({ browser, baseURL }) => {
   const tableSlug = `verify-tap-remote-${Date.now()}`;
 
-  async function openTable(b: Browser) {
+  async function openTableInNewContext(b: Browser) {
     const context = await b.newContext();
     const page = await context.newPage();
-    await page.goto(`/t/${tableSlug}`);
-    await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+    await openTable(page, tableSlug);
     return { context, page };
   }
 
-  const alice = await openTable(browser);
-  const bob = await openTable(browser);
+  const alice = await openTableInNewContext(browser);
+  const bob = await openTableInNewContext(browser);
 
   const instanceId = randomUUID();
-  const card = await placeCard(alice.page, baseURL!, tableSlug, instanceId);
+  const card = await placeCard(alice.page, baseURL, tableSlug, instanceId);
   await expect(bob.page.locator(`#shape\\:card-${instanceId}`)).toBeAttached({ timeout: 10000 });
 
   await card.click();

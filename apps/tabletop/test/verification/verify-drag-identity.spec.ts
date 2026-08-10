@@ -1,5 +1,6 @@
-import { test, expect, Page } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { randomUUID } from "node:crypto";
+import { openTable, placeCard, zoomToFit, dragBy } from "./helpers";
 
 /**
  * Bug repro (found 2026-08-07): play two cards, drag one, then drag the
@@ -17,75 +18,25 @@ import { randomUUID } from "node:crypto";
  * card instead of the one under the pointer. Fixed by clearing selection in
  * onTranslateEnd.
  */
-function fakeTraceparent(): string {
-  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
-}
-
-function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
-  return {
-    id: randomUUID(),
-    tableId,
-    name: "card.played",
-    occurredAt: new Date().toISOString(),
-    initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    occurredIn: "shuffler",
-    visibility: "public",
-    traceparent: fakeTraceparent(),
-    schemaVersion: 1,
-    payload: {
-      face: "front",
-      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-      backImageUrl: null,
-      zoneHint: "stack",
-      owner: "e2e-seat",
-      isCommander: false,
-      ...payloadOverrides,
-    },
-  };
-}
-
-async function dragBy(page: Page, card: ReturnType<Page["locator"]>, dx: number, dy: number) {
-  const box = await card.boundingBox();
-  if (!box) throw new Error("missing bounding box");
-  const startX = box.x + box.width / 2;
-  const startY = box.y + box.height / 2;
-  await page.mouse.move(startX, startY);
-  await page.mouse.down();
-  await page.mouse.move(startX + dx, startY + dy, { steps: 10 });
-  await page.mouse.up();
-}
-
 test("dragging the second card moves the second card, not the first", async ({ page, baseURL }) => {
   const tableSlug = `verify-drag-identity-${Date.now()}`;
 
+  await openTable(page, tableSlug);
+
   // Two lands, far enough apart on the playmat that they never overlap —
   // isolating the selection-state bug from any z-order/overlap concern.
-  const first = cardPlayed(tableSlug, {
+  // zoneHint "battlefield" matters here: "stack" would stack both cards at
+  // the same position, making click-selecting the second card ambiguous.
+  const firstCard = await placeCard(page, baseURL, tableSlug, randomUUID(), {
     cardName: "Forest",
     zoneHint: "battlefield",
-    card: { scryfallId: randomUUID(), instanceId: randomUUID() },
   });
-  const second = cardPlayed(tableSlug, {
+  const secondCard = await placeCard(page, baseURL, tableSlug, randomUUID(), {
     cardName: "Island",
     zoneHint: "battlefield",
-    card: { scryfallId: randomUUID(), instanceId: randomUUID() },
   });
 
-  await page.goto(`/t/${tableSlug}`);
-  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
-
-  for (const event of [first, second]) {
-    const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
-    expect(response.status()).toBe(201);
-  }
-
-  const firstCard = page.locator(`#shape\\:card-${first.payload.card.instanceId}`);
-  const secondCard = page.locator(`#shape\\:card-${second.payload.card.instanceId}`);
-  await expect(firstCard).toBeAttached();
-  await expect(secondCard).toBeAttached();
-
-  await page.keyboard.press("Shift+1");
-  await page.waitForTimeout(300);
+  await zoomToFit(page);
 
   const secondBefore = await secondCard.boundingBox();
   if (!secondBefore) throw new Error("missing bounding box");
