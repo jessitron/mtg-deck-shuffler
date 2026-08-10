@@ -57,8 +57,16 @@ export function createApp() {
   // Static app (Vite build output)
   app.use(express.static(CLIENT_DIR));
 
+  // The Tabletop has no landing page of its own — the Shuffler is the front
+  // door for the whole fleet. SHUFFLER_PUBLIC_URL mirrors the Shuffler's own
+  // TABLETOP_PUBLIC_URL (apps/shuffler/src/view/play-game/active-game-page.ts)
+  // for the reverse direction; same default host either way.
+  app.get("/", (_req, res) => {
+    res.redirect(302, process.env.SHUFFLER_PUBLIC_URL || "https://mtg.jessitron.honeydemo.io");
+  });
+
   // SPA fallback: /t/* renders the same app
-  app.get(["/", "/t/:tableSlug"], (_req, res) => {
+  app.get("/t/:tableSlug", (_req, res) => {
     res.sendFile(path.join(CLIENT_DIR, "index.html"));
   });
 

@@ -21,7 +21,8 @@ Shuffler instead of the clipboard. See `SEAMAP.md` for where this ship is headed
 
 ## Routes
 
-- `/` — landing page: type a table name, go to its board.
+- `/` — no page of its own; redirects to the Shuffler (`SHUFFLER_PUBLIC_URL`), the
+  fleet's front door.
 - `/t/:tableName` — the table. Anyone with the URL joins; the same URL is the
   spectator-share link.
 - `/connect/:roomSlug` — the tldraw sync websocket (accepts `traceparent` on the

@@ -16,6 +16,10 @@
  * custom shape can use the typeface on canvas. These tests assert the font is
  * AVAILABLE, which is what the DOM chrome and the future mtg-zone shape need.
  *
+ * These all navigate to a /t/:tableSlug page, not "/" — the Tabletop has no
+ * landing page (deleted), and "/" now redirects to the Shuffler instead of
+ * rendering anything Tabletop-side.
+ *
  * RUN: ./verify.sh
  */
 
@@ -33,7 +37,7 @@ const SHARED_TOKENS = [
 
 test.describe("the fleet palette reaches the Tabletop", () => {
   test("every shared token resolves in the browser", async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto(`${BASE_URL}/t/token-resolve-check`);
 
     const resolved = await page.evaluate((tokens) => {
       const style = getComputedStyle(document.documentElement);
@@ -48,7 +52,7 @@ test.describe("the fleet palette reaches the Tabletop", () => {
   });
 
   test("the palette matches the Shuffler's, because it is literally the same file", async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto(`${BASE_URL}/t/token-palette-check`);
     const deepSpace = await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--deep-space").trim());
     // The one value asserted concretely anywhere, and only to prove the two
     // ships share a dictionary rather than each having their own.
@@ -56,19 +60,20 @@ test.describe("the fleet palette reaches the Tabletop", () => {
   });
 
   test("Orbitron can actually be fetched and used", async ({ page }) => {
-    await page.goto(BASE_URL);
+    await page.goto(`${BASE_URL}/t/token-orbitron-check`);
 
     // NOTE the explicit load(), which the Shuffler's equivalent test doesn't need.
     // Browsers fetch a webfont lazily — only when something on the page actually
     // uses the family — so a bare document.fonts.check() returns FALSE here even
-    // though the <link> is correct. Nothing on the Tabletop uses Orbitron yet:
-    // its only styled surface is LandingPage.tsx, which carries an off-brand
-    // green/cream palette we are deliberately not touching in this change.
+    // though the <link> is correct. MtgZoneShapeUtil/MtgCounterShapeUtil set
+    // `font-family: var(--font-chrome)` on live DOM inside the canvas, but only
+    // once a shape of that kind is actually rendered — a bare page load doesn't
+    // trigger that.
     //
     // So this asserts what actually matters and is actually true today — the
     // face is declared and its file can be fetched. Swap this for a plain
-    // check() the day a Tabletop surface sets font-family: Orbitron; that would
-    // be the stronger assertion.
+    // check() the day a page load alone renders something in Orbitron; that
+    // would be the stronger assertion.
     const hasOrbitron = await page.evaluate(async () => {
       await document.fonts.load("16px Orbitron");
       return document.fonts.check("16px Orbitron");
@@ -77,7 +82,7 @@ test.describe("the fleet palette reaches the Tabletop", () => {
     expect(hasOrbitron, "Orbitron should be fetchable — a miss falls back to a system serif, silently").toBe(true);
   });
 
-  test("the tokens reach a table page too, not just the landing page", async ({ page }) => {
+  test("the tokens reach a table page", async ({ page }) => {
     await page.goto(`${BASE_URL}/t/token-check`);
     const deepSpace = await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--deep-space").trim());
     expect(deepSpace, "the table page should carry the tokens — this is the page mtg-zone will render on").not.toBe("");

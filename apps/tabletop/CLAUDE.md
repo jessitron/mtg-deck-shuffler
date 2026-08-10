@@ -57,10 +57,6 @@ Two things to know before you write any styling here:
     to Orbitron, confirmed in a live browser. `HTMLContainer` is an unshadowed div, so `:root`
     tokens reach it by ordinary CSS inheritance — loading the font was necessary and, for a
     self-rendering shape, sufficient. See the owner's README → "tldraw limits" for the detail.
-  - The green/cream inline palette in `src/client/LandingPage.tsx` (`#1a2a1f`, `#f5f1e8`,
-    `#3d5a45`) is still a known violation, not a house style — don't match it. Fixing it is a
-    real appearance decision needing Jess's sign-off, not a mechanical `var()` swap; buoyed as
-    `tabletop-landing-page-palette`.
 - **tldraw limits four rules**, recorded in the owner's README under "tldraw limits": no Orbitron
   in the `geo` `font` enum (on-brand canvas text needs a self-rendering shape); the global
   `:focus-visible` ring can't reach a canvas shape; a **locked** shape can never be a drop target

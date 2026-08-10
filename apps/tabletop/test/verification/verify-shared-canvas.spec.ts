@@ -11,14 +11,6 @@ async function openTable(browser: Browser, tableSlug: string) {
   return { context, page };
 }
 
-test("landing page routes to a table", async ({ page }) => {
-  await page.goto("/");
-  await page.getByTestId("table-name-input").fill("Friday Night Magic!");
-  await page.getByTestId("go-to-table").click();
-  await expect(page).toHaveURL(/\/t\/friday-night-magic$/);
-  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
-});
-
 test("two contexts share a room: draw in one, see it in the other", async ({ browser }) => {
   const tableSlug = `verify-shared-${Date.now()}`;
   const alice = await openTable(browser, tableSlug);
