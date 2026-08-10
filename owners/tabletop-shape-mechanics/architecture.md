@@ -589,6 +589,118 @@ the `SelectionClearingNoteShapeUtil` swap (the card didn't move — the note abs
 instead), green with it. Three other tests in the same file cover attach/ride/detach and
 battlefield-exit eviction, exercising the same passenger mechanics ticket 18's counter tests do.
 
+## Ticket 20: cards can tuck behind cards — a third passenger type that is NOT cosmetic (landed 2026-08-10)
+
+`.scratch/tabletop-physics/issues/20-cards-behind-cards.md`. `PASSENGER_TYPES` widens a third time
+— `new Set(["mtg-counter", "note", "mtg-card"])` — so a card can host another `mtg-card` the same
+way it hosts counters and notes: pure tldraw parenting, mediated by the same drag hooks, no new
+mechanism. Z-order control ("send backward"/"send to back" for the tucked card) is free from the
+pre-existing `ReorderMenuSubmenu` (sibling z-order under a shared parent).
+
+The one thing that isn't free: a counter or note tilting along with its tapped host is the
+*intended* look (ticket 18); a tucked card visibly spinning every time its host taps is not — a
+card's rotation is `props.tapped`'s visual encoding, not decoration, and its printed face is
+something a player is tracking. Every new mechanism below exists to keep a tucked card's page
+position and rotation fixed across the host's tap.
+
+### Why a bare counter-rotation isn't enough: `(x, y)` is the rotation pivot, and it belongs to the parent's frame
+
+Derived from `node_modules/@tldraw/editor`'s `Editor.ts` before writing any code, not guessed:
+`getShapePageTransform` composes as `Mat.Compose(parentPageTransform,
+getShapeLocalTransform(shape))`, and `getShapeLocalTransform` = `Mat.Identity().translate(x,y)
+.rotate(rotation)` — rotation is applied first, around the *local* origin, then the shape is
+translated. So a shape's own stored `(x, y)` is literally the fixed point its own rotation pivots
+around (this is the source-level derivation of watch point 4's "rotation pivots around x,y, not
+center," previously known only empirically). The consequence for a **child**: its local `(x, y)`
+lives in its **parent's own local frame** — so when the parent's rotation changes (a tap), a
+child that isn't centered on the parent's own pivot point doesn't just spin along, it *orbits*,
+because `tapPartial`'s center-preserving pivot math already moves the host's `(x, y)` as part of
+the tap write, and the child inherits that translation through the parent transform. A passenger
+is rarely centered on its host — this is the common case, not an edge case — so a bare
+counter-rotation on the passenger would leave it visibly swinging around the host's pivot.
+
+### The fix: solve the passenger's new local pose from matrix composition, not a rotation delta
+
+`apps/tabletop/src/client/shapes/cardTap.ts`'s new `passengerTapCompensation(passenger, oldHost,
+newHost)`: the passenger's *page* transform must stay fixed across the host's tap, i.e.
+`newHostLocalMat · newPassengerLocalMat == oldHostLocalMat · oldPassengerLocalMat`, so
+`newPassengerLocalMat = newHostLocalMat⁻¹ · oldHostLocalMat · oldPassengerLocalMat`. Implemented
+with tldraw's own `Mat` class (`localMat(pose) = Mat.Identity().translate(pose.x, pose.y)
+.rotate(pose.rotation)`, matching `getShapeLocalTransform` exactly) — `.invert().multiply(...)
+.multiply(...).decompose()` gives back the passenger's new local `x`/`y`/`rotation` directly. Pure
+— no `Editor` argument — unit-tested in `apps/tabletop/test/passengerTapCompensation.test.ts`
+without a store. `passengerCompensationPartials(editor, oldHost, newHost)` walks
+`editor.getSortedChildIdsForParent(oldHost.id)`, filters to `type === "mtg-card"` children only
+(counters/notes are untouched — their tilt-along is still ticket 18's intended visual), and maps
+each through the solve. `tapPartialsForCards` (the function shared by `MtgCardShapeUtil.onClick`'s
+multi-select propagation and the context menu's Tap/Untap item, since ticket 17) now calls this
+for every card it taps, in the same batch as the tap writes themselves.
+
+`MtgCardShapeUtil.onClick` was also loosened to always run its `queueMicrotask` propagation block
+(previously gated on "other cards are selected") — ticket 20 needs it to fire even for a solo
+click, so the clicked card's own passenger compensation lands in the same undo entry via the same
+mechanism ticket 16 established (see that section above; the ordering facts are unchanged).
+
+### Two existing hooks needed a `mtg-card` exemption, both for the same reason: rotation is not decoration on a card
+
+- **`onDragShapesIn`'s zero-rotation-on-attach loop** (ticket 18, watch point 12) holds a
+  counter/note's center fixed while zeroing its local rotation, for the "card-aligned on drop"
+  look. That's wrong for a card passenger: `reparentShapes` preserves *page* rotation across the
+  reparent, and for a card that page rotation *is* its tapped-state visual. Zeroing it would untap
+  a tapped card's look while `props.tapped` stayed `true` — a silent disagreement between what the
+  card shows and what it is. Fixed: the loop now skips `dropped.type === "mtg-card"` entirely,
+  leaving `reparentShapes`' rotation-preservation as the whole story for a tucked card's initial
+  look.
+- **`evictPassengers`' `animateShapes` call** hardcoded `rotation: 0` for every evicted passenger
+  — right for counters/notes (no host to be "relative to" anymore, upright is the natural rest
+  state), wrong for a card for the identical reason. Fixed: a card passenger's `animateShapes`
+  partial now reads its *current* (post-reparent, tapped-state-correct) rotation from a fresh
+  `getShape` lookup instead of a hardcoded `0`; counters/notes are unaffected.
+
+### The dedup problem: a passenger multi-selected alongside its own host must not get a stale ride-along on top of its own direct tap
+
+Ticket 16's multi-select propagation and ticket 20's passenger compensation both write into the
+same `updateShapes` batch, and they can target the same shape two different ways: a card that is
+simultaneously (a) a passenger of some host being tapped in this gesture, and (b) directly
+selected and tapped in the same gesture. Without a guard, it would get both its own direct
+`tapPartial` (correct) and a stale ride-along `passengerTapCompensation` computed against the old
+host pose (wrong, and which one "wins" depends on batch array order — silent and
+non-deterministic). Fixed by computing a `directIds` set — every card directly in the tap batch —
+and filtering compensation partials against it before appending them, in two places that both
+need it independently: `cardTap.ts`'s `tapPartialsForCards` (its own internal `cards` argument)
+and `MtgCardShapeUtil.onClick` (the clicked card plus its `queueMicrotask`-propagated selection).
+
+### New tldraw facts, beyond the transform-composition one above
+
+- **`onDragShapesIn`/`onDragShapesOut` fire only for `DragAndDropManager`'s top-level
+  `shapesToActuallyMove`** — a passenger whose *host* is what's being dragged never itself enters
+  that set; its move is 100% free page-transform composition through the parent, no hook call
+  involved. And `animateShapes` never triggers `onTranslateEnd` (confirmed via
+  `getChangesToTranslateShape`'s call sites — only nudge/align/distribute/stack/pack use it, the
+  animation manager doesn't) — so `evictPassengers`' animated relocation of a passenger that
+  itself hosts grandchildren (a passenger card with its own tucked passenger) can't cascade a
+  spurious zone-entry/eviction chain through a chained `onTranslateEnd`.
+- **`hasAncestor(card, id)` recurses the full ancestor chain, not one level** — the existing
+  cycle guard at the top of `onDragShapesIn` (`shapes.some((s) => this.editor.hasAncestor(card,
+  s.id))`) was dead code before this ticket (counters/notes can never have children), and is now
+  genuinely load-bearing: without it, a card could be dragged onto its own descendant (a card
+  tucked under a card tucked under it), forming a parenting cycle.
+
+### Playwright fact worth generalizing beyond this one spec
+
+Dropping two cards via `zoneHint: "stack"` puts same-seat cards only ~36px apart in page units —
+at zoom-to-fit they render almost fully overlapping on screen, reliably triggering the tldraw
+`PointingShape` stale-selection hazard (watch point 1) for the *test's own drags*, not a product
+bug. `verify-cards-behind-cards.spec.ts` uses `zoneHint: "battlefield"` instead (spaced slots) and
+pulls the grab/click point well clear of any overlap — a few px of gap isn't reliably enough
+headroom against tldraw's hit-testing tolerance.
+
+### Registration
+
+No new registration step: `mtg-card` was already registered (ticket 12), and `PASSENGER_TYPES` is
+a plain client-side `Set`, not part of the tldraw schema — widening it needed no client/server
+schema change, unlike adding a genuinely new shape type (watch point 6).
+
 ## Ticket 16: multi-untap — clicking one selected card taps the whole selection (landed 2026-08-09, `626ab6f`)
 
 `.scratch/tabletop-physics/issues/16-multi-untap.md` (plan in `plan-16.md`). With several cards

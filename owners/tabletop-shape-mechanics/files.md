@@ -55,27 +55,52 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   (`markHistoryStoppingPoint` → `updateShapes` → unconditional trailing
   `editor.setSelectedShapes([])`) — the fix for the stale-selection-after-menu-close hazard, watch
   point 15. See `architecture.md`'s "Ticket 17" section.
-- `apps/tabletop/src/client/shapes/cardTap.ts` — **new, ticket 17**: `tapPartial(shape, tapped)`,
-  the center-fixed pivot solve (watch point 4) extracted out of `MtgCardShapeUtil` as a
-  standalone pure function so the context menu's Tap/Untap item can share it — a menu item has
-  no `this.editor`/ShapeUtil instance to call a private method on. Imported by both
-  `MtgCardShapeUtil.tsx`'s `onClick` and `CardContextMenu.tsx`.
+- `apps/tabletop/src/client/shapes/cardTap.ts` — **new, ticket 17; substantially extended,
+  ticket 20 (2026-08-10)**: `tapPartial(shape, tapped)`, the center-fixed pivot solve (watch
+  point 4) extracted out of `MtgCardShapeUtil` as a standalone pure function so the context
+  menu's Tap/Untap item can share it — a menu item has no `this.editor`/ShapeUtil instance to
+  call a private method on. Ticket 20 added: `rotateHoldingCenter` (the pivot solve generalized
+  to a standalone `HostPose`-based helper, now shared by `tapPartial` and
+  `MtgCardShapeUtil.zeroRotationHoldingCenter`); `passengerTapCompensation(passenger, oldHost,
+  newHost)` (the `Mat`-based local-pose solve that keeps a tucked *card* passenger's page
+  position/rotation fixed across its host's tap — see `architecture.md`'s "Ticket 20" section);
+  `poseOf` (narrows `tapPartial`'s optional `x`/`y`/`rotation` back to a `HostPose`);
+  `passengerCompensationPartials(editor, oldHost, newHost)` (every direct `mtg-card` child of
+  `oldHost`, compensated); and `tapPartialsForCards(editor, cards, tapped)` (taps a batch of
+  cards, each with its own passenger compensation, deduped against a `directIds` set so a
+  passenger that's ALSO directly in the batch doesn't get a stale ride-along on top of its own
+  tap — watch point 19). Imported by `MtgCardShapeUtil.tsx`'s `onClick` and
+  `onDragShapesIn`/`zeroRotationHoldingCenter`, and by `CardContextMenu.tsx`.
 - `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — the whole card territory: extends
   `BaseBoxShapeUtil<MtgCardShape>`; `onClick` (tap/untap toggling `props.tapped` with rotation
   as a pure visual delta; since ticket 16, 2026-08-09, also pushes the clicked card's new state
   to the rest of a marquee selection via a `queueMicrotask`-deferred batch — the clicked card's
   own partial stays a synchronous return; see `architecture.md`'s "Ticket 16"; since ticket 17,
-  calls the standalone `tapPartial` from `cardTap.ts` instead of a private method),
+  calls the standalone `tapPartial` from `cardTap.ts` instead of a private method; since ticket
+  20, always runs the microtask block — not only when other cards are selected — so a solo
+  click's own passenger compensation lands too, and computes a `directIds` set across the
+  clicked card plus propagated cards to dedupe against ride-along compensation, watch point 19),
   `onTranslateEnd` (selection cleanup + zone-entry detection +
   passenger eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`, deliberately
   excluding the Stack), `zoneAt()` (private helper — since ticket 14, a thin wrapper around
   `zoneHitTest.ts`'s `topmostZoneAt()`, below; since ticket 18 returning the full `ZoneHit`,
   id+zone), the passenger-hosting drag hooks (`canReceiveNewChildrenOfType`/
   `canRemoveChildrenOfType`, both type-narrowed via `PASSENGER_TYPES` — since ticket 19, `{
-  "mtg-counter", "note" }`, was `mtg-counter`-only; `onDragShapesIn` with the rotation-zeroing math,
-  since ticket 19 using `getShapeGeometry(...).bounds` instead of `props.w/h` so it covers a stock
-  note's `growY`-derived size too; `onDragShapesOut` with the `parentId` filter), `evictPassengers()`
-  (private, renamed from `evictCounters` by ticket 19 — calls `findOpenSpotsNearZoneEdge`, below),
+  "mtg-counter", "note" }`, was `mtg-counter`-only; since ticket 20, `{ "mtg-counter", "note",
+  "mtg-card" }` — a card can now host another card, tucked underneath; `onDragShapesIn` with the
+  rotation-zeroing math, since ticket 19 using `getShapeGeometry(...).bounds` instead of
+  `props.w/h` so it covers a stock note's `growY`-derived size too, and since ticket 20 SKIPPING
+  the zeroing entirely for a dropped `mtg-card` — its rotation encodes `props.tapped`, not
+  cosmetic tilt, so `reparentShapes`' page-rotation preservation is left alone (watch point 12,
+  watch point 19); `onDragShapesOut` with the `parentId` filter, and since ticket 20 zeroing a
+  detached CARD passenger's rotation back to upright via `zeroRotationHoldingCenter` — a card's
+  compensated-while-attached rotation has no meaning once detached, unlike counters/notes whose
+  tilt is fine to just keep), `zeroRotationHoldingCenter()` (private, **new, ticket 20** — the
+  center-preserving zero-rotation write shared by `onDragShapesOut`'s card-detach reconciliation;
+  built on `cardTap.ts`'s `rotateHoldingCenter`), `evictPassengers()`
+  (private, renamed from `evictCounters` by ticket 19 — calls `findOpenSpotsNearZoneEdge`, below;
+  since ticket 20, a card passenger's `animateShapes` eviction partial reads its current rotation
+  from a fresh `getShape` lookup instead of the hardcoded `rotation: 0` counters/notes still get),
   and `component()`/`getIndicatorPath()` (renders its own `<img>`).
 - `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — extends `BaseBoxShapeUtil<MtgZoneShape>`
   (ticket 13); still defines no interaction hooks at all (`onClick`/`onTranslateEnd`/
@@ -248,6 +273,15 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   "after dragging a note, dragging a card moves the card (stale-selection regression)" — mirroring
   `verify-counter.spec.ts`'s Hazard-A test, deliberately without test-side selection cleanup so the
   assertion proves the product clears selection, not the test (watch point 18).
+
+- `apps/tabletop/test/passengerTapCompensation.test.ts` — **new, ticket 20 (2026-08-10)**: unit
+  tests for `cardTap.ts`'s `passengerTapCompensation`, pure `Mat`-based math, no `Editor`/store.
+- `apps/tabletop/test/verification/verify-cards-behind-cards.spec.ts` — **new, ticket 20**: 6
+  Playwright tests — attach + carry + independent-tap + no-rotate-on-host-tap; z-order via the
+  context menu's existing `ReorderMenuSubmenu` (send backward/to back); detach + reconcile-to-
+  upright; graveyard eviction; tapped-state preserved across attach; tapped-state preserved
+  across eviction. Uses `zoneHint: "battlefield"`, not `"stack"` — see watch point 19's
+  test-positioning gotcha.
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 
