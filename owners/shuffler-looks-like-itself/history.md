@@ -1923,3 +1923,40 @@ No `/design` change: no new class, no new token, no new component — the galler
 `#table-look` specimen already described the live-preview behaviour in prose, and that
 prose is still accurate (the specimen is static and can't show either the live preview or
 the now-added first-paint tint, same limitation already noted for the mat).
+
+## 2026-08-09 — the playmat set grew past five, and the count was never load-bearing
+
+`table-look.ts`'s `PLAYMATS` array went from 5 to 11: a player (Jess's sister) found the
+original five `aeoe-*` mats too high-contrast against cards/text, so six lower-contrast
+art-crop images joined it (`akhm-45-glittering-frost`, `amh1-1-chillerpillar`,
+`amh1-31-winds-of-abandon`, `amh1-35-face-of-divinity`, `amh2-9-timeless-dragon`,
+`aznr-49-sea-gate-restoration`).
+
+**"Five" was a fact about the prototype, not a decision about the count.** Ticket 16's
+prototype offered five and Jess approved that prototype, but nobody had ever ruled the
+count itself fixed. [open-choices.md](open-choices.md) and [README.md](README.md) both
+said "ratified five" in a way that read as settled — corrected in this pass to say the
+count is open-ended and growable, citing this entry.
+
+**No CSS or markup changed, because nothing about the picker assumed five.**
+`table-look-panel.ejs` already iterates the `PLAYMATS` array generically, and
+`.table-look-mats` (`prepare.css`) already had `flex-wrap: wrap` — so the swatch row just
+grows a line taller with more entries. Verified in the dev server against `/prepare`: all
+11 render, the panel grows smoothly, no scroll, no clipping. `test/table-look.test.ts`'s
+length assertion moved from 5 to 11 and its path regex loosened from `/images/aeoe-.*\.png$/`
+to `/images/.*\.png$/`, since the new images aren't `aeoe-*`.
+
+**A new aspect-ratio class of playmat image, worth flagging for future additions.** The
+original five are 1040×745 landscape (they double as `site.css` hero backgrounds); the six
+new ones are 745×1040 **portrait** card-art crops. Both the swatch (`.table-look-mat`,
+`background-size: cover` + `center`) and the full playmat crop these to a landscape band,
+discarding most of the portrait image's vertical extent. Spot-checked
+`amh2-9-timeless-dragon`: reads fine as an abstract/textural crop. A more literal or
+figurative portrait image could crop worse (a face centered vertically, say, ending up
+cut off) — eyeball any future portrait addition at both swatch and full-mat scale before
+shipping it, rather than assuming the cover-crop is always forgiving the way it was for
+the original landscape five.
+
+`./verify.sh verify-design-gallery` — 5/5, unaffected (the `#table-look` specimen is a
+static hand-copy of 3 swatches, per its own documented convention, and doesn't enumerate
+the full array).

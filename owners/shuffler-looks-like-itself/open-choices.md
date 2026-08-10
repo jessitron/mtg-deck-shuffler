@@ -675,8 +675,11 @@ self-rendering custom shape.
   comment says "change a token there, visit here"; identity weight per ticket 12 holds, the
   five mana colours are distinguishable at a glance), plus a None chip showing the standard
   Magic card back (`null` ⇔ unsleeved — still no default *color*) and a custom
-  `<input type="color">`. The playmat set is the five `aeoe-*` images — one more than issue
-  09's four hero backgrounds (seam-rip is the fifth); the prototype verdict ratified five.
+  `<input type="color">`. The playmat set started as the five `aeoe-*` images — one more than
+  issue 09's four hero backgrounds (seam-rip is the fifth); the prototype verdict ratified
+  five. **That count is not settled — it's grown to 11 (2026-08-09)**, when six lower-contrast
+  art crops joined `PLAYMATS` in `table-look.ts` for a player who found the original five too
+  high-contrast against cards/text; see [README.md](README.md) and [history.md](history.md).
   **Still no `/design` specimen of the rendered sleeve-on-a-card** — `design-sleeve-specimen`
   in `TODO.md` stands; the picker *panel* has its own specimen (`#table-look`), a different
   thing. The raw hex itself remains domain data, exempt from the stylesheet hex ban; what an
