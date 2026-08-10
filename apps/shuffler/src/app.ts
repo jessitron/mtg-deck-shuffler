@@ -306,8 +306,7 @@ export function createApp(
   // Returns HTML fragment - Archidekt deck selection tab
   app.get("/deck-selection-tabs/archidekt", async (req, res) => {
     try {
-      const availableDecks = deckRetriever.listAvailableDecks();
-      res.render("partials/deck-selection-archidekt", { availableDecks });
+      res.render("partials/deck-selection-archidekt");
     } catch (error) {
       console.error("Error loading Archidekt tab:", error);
       res.status(500).send(`<div>Error: Could not load Archidekt deck selection</div>`);
