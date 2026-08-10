@@ -124,31 +124,27 @@ section is just a wall between Jess and the live work.
     zone looks like, armed and at rest. Overlapping territory; that ticket decides zones, this
     decides whether the mat under them is fleet-owned. Link, don't merge.
 
-- GRILLING: `tabletop-view-rotation` Let a seated player flip their view of the table 180°, and stop hosting `<Tldraw>` full-window
-  - Surfaced 2026-08-10 in conversation: the game-experience win is being able to rotate your own
-    view of the shared table, like turning around a real card table, so your own side reads
-    right-side-up to you regardless of where you're sitting.
-  - tldraw has no camera-rotation API — confirmed in conversation, not yet re-verified against
-    the SDK docs. **The workaround is CSS**: wrap `<Tldraw>` in a "canvas pane" box (`TablePage.tsx`
-    currently hosts it directly inside a bare `position:fixed;inset:0` div) and toggle
-    `transform: rotate(180deg)` on that box. This is local/per-browser only — it never touches the
-    synced document or camera state, so it doesn't need to coordinate with anyone else at the table.
-  - Two things the rotate toggle button needs, both outside `<Tldraw>` itself: (1) it lives in the
-    surrounding page chrome, not tldraw's own toolbar; (2) tldraw's own UI chrome — the toolbar
-    override (`ToolbarWithCounter`) and `TableContextMenu` — will visually rotate along with its
-    rotated DOM ancestor unless counter-rotated, so menu text/icons need a compensating rotation to
-    stay upright. Watch for the corner-anchoring side effect: rotating the parent flips which corner
-    an absolutely-positioned child visually lands in, even after its content is counter-rotated back
-    upright.
-  - This is also the first step toward a separate, bigger idea (not this item — deliberately not
-    captured here, too large for a buoy): giving the Tabletop room for a sidebar (game-event log,
-    debug event log, card-zoom modal) alongside the canvas instead of only on top of it. Wrapping
-    `<Tldraw>` in a canvas pane is the shared prerequisite for both, but scope this item to the
-    rotation feature alone.
-  - Consult `tabletop-shape-mechanics` before implementing — need to confirm CSS-rotating the
-    canvas's DOM ancestor doesn't disturb pointer hit-testing or zone detection
-    (`onTranslateEnd`/`zoneHitTest.ts`). Consult `shuffler-looks-like-itself` for where the button
-    and any new Tabletop-only CSS should live (Tabletop has no ship-local stylesheet yet).
+- SPEC'D `tabletop-view-rotation` — full spec at `.scratch/tabletop-view-rotation/spec.md`,
+  `Status: ready-for-agent`. Say "do ticket 01" (once `/to-tickets` has split it) or
+  "do `/to-tickets` on `tabletop-view-rotation`" to break it into tickets.
+
+- GRILLING `tabletop-card-orientation` Cards and zones rotate in the shared document to face
+  their owner's seat
+  - Follow-on from `tabletop-view-rotation` (spec at `.scratch/tabletop-view-rotation/spec.md`)
+    — **blocked on that ticket landing first**. Surfaced 2026-08-10 while grilling it: rotating
+    the *view* is local/CSS-only, but making a player's own cards actually read right-side-up to
+    them (the "whole point" of view rotation, per Jess) needs cards/zones to have real rotation
+    in the *shared, synced* document — a different layer entirely from the view-rotation ticket.
+  - `cardLayout.ts` currently keeps every zone deliberately upright/unrotated ("E/W look sideways
+    and that's accepted", DESIGN.md) — this item reopens that acceptance for seats' own zones,
+    at minimum.
+  - Needs new plumbing that doesn't exist anywhere yet: the client has no concept of "which
+    seat is this browser" (seats are tracked server-side only, `seatJoined.ts`/`cardLayout.ts`,
+    with compass slots N/S/E/W). Once this lands, `tabletop-view-rotation`'s Home control also
+    stops being literal 0° and becomes genuinely seat-relative.
+  - Not yet grilled to a spec — needs its own session. Likely touches shape rotation/bounds in
+    ways plain CSS-wrapper rotation doesn't, so `tabletop-shape-mechanics` context is probably
+    load-bearing here, more than it was for the view-rotation ticket.
 
 - [ ] DEFERRED `applygamecommand-as-journey` `applyGameCommand`'s protocol looks like a Journey — worth a future look
   - Surfaced 2026-08-08 while grilling `.scratch/shuffler-architecture-review/issues/02-tabletop-send-veto-hook.md`
