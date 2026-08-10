@@ -13,6 +13,24 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- Bunny got confused on the /choose screen. If Precon is selected and you click Precon anyway, it should scroll you down to the list of precons.
+
+- put some less-busy playmats in the options
+
+- Rach wants cards to be in a grid in the hand. So move the card count hand.
+
+- Let a player exit the table so they can rejoin with a different deck!
+
+- counters, the text needs vertical centering
+
+- my sleeveless cards need transparent corners
+
+- the counter didn't participate in the tap animation, when the counter was on the card.
+
+- BUG: paste an image in. Pick the image, move it around. Click a card, try to move it, oh no
+
+- BUG: counters can't be copied... actually neither can images, cards, etc. They can however be duplicated
+
 - [ ] `graveyard-cascade-overflow` The graveyard card cascade walks out of its box at ~32 cards
   - Surfaced 2026-08-09 by `tabletop-shape-mechanics-review` on the zone-label-band change
     (zone titles readable with cards in the zones). `graveyardCardPosition` in
@@ -26,21 +44,21 @@ section is just a wall between Jess and the live work.
     marginal behavior made ~40% more reachable; long Commander games do hit 32-card graveyards.
   - Fix directions scoped in the review: wrap or tighten the cascade, or cap the offset at the
     box edge so the pile deepens in place instead of marching out.
-  ← mountain: tabletop-replaces-mural
+    ← mountain: tabletop-replaces-mural
 
 - [ ] `claim-tickets-on-main` Claim a ticket where other agents can see it — the worktree hides the claim
   - Surfaced 2026-08-09 while Jess took inventory of which wayfinder tickets were actively being
     worked: `tabletop-table-layout` ticket 16 showed `Status: ready-for-agent` on main while an
     agent was actively working it in `.claude/worktrees/ticket-16-prep-picker` — it had flipped
-    the `Status:` line to `claimed` *inside the worktree*, invisible from main until the merge.
+    the `Status:` line to `claimed` _inside the worktree_, invisible from main until the merge.
   - Why it matters: any other agent (or Jess) scanning main for `ready-for-agent` tickets can
     double-claim work already in flight. With parallel background agents now routine, the window
     is real, not theoretical.
-  - Wanted: a convention — commit the `Status: claimed` change on main *before* entering the
+  - Wanted: a convention — commit the `Status: claimed` change on main _before_ entering the
     worktree (a one-line commit, cheap), or some other claim signal visible outside the worktree.
     Likely home: `docs/agents/issue-tracker.md`, plus wherever the wayfinder skill tells agents
     to claim.
-  ← mountain: overhead
+    ← mountain: overhead
 
 - [ ] `design-text-link-specimen` Stage the nav-link idiom (text links) on `/design`
   - Surfaced 2026-08-09 by the `shuffler-looks-like-itself` update after `6b6b927` (Tabletop
@@ -62,17 +80,17 @@ section is just a wall between Jess and the live work.
     the zone mocks (`a304c52`).
   - Related: `tabletop-landing-page-palette` below notes the gallery has no Tabletop stage at
     all; this specimen is another instance of that gap.
-  ← mountain: tabletop-replaces-mural
+    ← mountain: tabletop-replaces-mural
 
 - [ ] `life-counter-needs-own-name` table-layout ticket 12's life/commander-damage shape can't be called `mtg-counter` anymore
   - Surfaced 2026-08-08 by both owner reviews on tabletop-physics ticket 18: that ticket (and the
     tabletop-physics spec) explicitly assign the type string `mtg-counter` to the drag-onto-a-card
     counter, and it's now registered in the sync schema with `{w, h, text}` props. Table-layout
     ticket 12 (`.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md`,
-    resolved) used `mtg-counter` as the *working name* for a different shape — locked furniture
+    resolved) used `mtg-counter` as the _working name_ for a different shape — locked furniture
     with a number and +/- buttons. When that gets built it needs its own name
     (`mtg-life-counter`?), and the tabletop-shape-mechanics KB's old `mtg-counter` cautions
-    (locked, HyperlinkButton, LWW increments) describe *that* shape, not this one.
+    (locked, HyperlinkButton, LWW increments) describe _that_ shape, not this one.
 
 - [ ] `custom-shapes-lack-toSvg` none of the three custom shapes render in tldraw's SVG/image export
   - Surfaced 2026-08-08 by the design owner's review on tabletop-physics ticket 18. `mtg-card`,
@@ -109,7 +127,7 @@ section is just a wall between Jess and the live work.
     (resolved 2026-08-07, staged and confirmed on `/design`) decided and confirmed a different
     look: `2px dashed var(--dark-pink)` at rest, `--armed-glow` amber ring+tint when a card is
     dragged over, Orbitron (`--font-chrome`) label — plus the playmat's own exception (`10px solid
-    black`, radius computed as 5% of the shape's height).
+black`, radius computed as 5% of the shape's height).
   - Matters now because ticket 01 is about to draw a new command-zone box through this same stale
     code path — worth fixing `regionShape()` before or alongside that, so the new zone doesn't
     inherit the wrong look.
@@ -121,7 +139,7 @@ section is just a wall between Jess and the live work.
     `mtg-zone` custom shape to do `5%` of the shape's height at render time, per
     `.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md`). Other zones (library,
     graveyard, exile, stack) are untouched — still the old dashed grey.
-  ← mountain: tabletop-replaces-mural
+    ← mountain: tabletop-replaces-mural
 
 - [ ] `tabletop-no-shutdown-flush` The Tabletop's server has the same dropped-telemetry-on-shutdown gap the Shuffler just fixed
   - Surfaced 2026-08-07 while resolving `.scratch/verify-suite-speed/issues/08-no-shutdown-flush-hook.md`
@@ -134,13 +152,13 @@ section is just a wall between Jess and the live work.
     helper to `log.ts`. Copy the pattern into the Tabletop rather than sharing the module — its
     `tracing.ts` and `log.ts` are already deliberately duplicated (different OTel version lines; see
     fleet `CLAUDE.md` and `notes/AGENT-NOTES.md`).
-  ← mountain: overhead
+    ← mountain: overhead
 
 - [ ] `playmat-drop-shadow` Does the playmat cast a shadow — on both pages, or neither?
   - **Mostly resolved already.** Jess ruled 2026-08-07 that the two mats are one object and their
     differences were historical accidents, not design. Landed in `a4991f3`: shared art and
     `border: 10px solid black` moved into a bare `.playmat` rule in `playmat.css`; radius stays
-    per-page (80px/20px) because *radius is a matter of scale* — /prepare draws the mat smaller.
+    per-page (80px/20px) because _radius is a matter of scale_ — /prepare draws the mat smaller.
   - **What's left is one declaration.** `.playmat-game` still has `box-shadow: 5px 5px black`;
     `.playmat-prepare` has none. Not converged because Jess named three changes and this wasn't
     one — converging it would have been an appearance change riding along on an approved one.
@@ -154,7 +172,7 @@ section is just a wall between Jess and the live work.
     Jess can't look at defeats the point.
 
 - [ ] `design-playmat-specimen` `/design` renders a fake playmat, not the real one
-  - `.stage-playmat` in `design-gallery.css` is gallery *chrome* that hand-copies the mat's art
+  - `.stage-playmat` in `design-gallery.css` is gallery _chrome_ that hand-copies the mat's art
     URL, `background-size: cover`, `background-position: center` and its own `3px solid black`
     border. It's a lookalike. So the gallery has been describing the playmat in its tables while
     rendering an imitation — exactly the drift `/design` exists to prevent ("if a component
@@ -177,14 +195,14 @@ section is just a wall between Jess and the live work.
 
 - [ ] `face-down-is-a-real-thing` Make Face-Down Card a real fleet concept, and decide if the Shuffler gets a "Play Face-Down" button
   - Surfaced 2026-08-07 grilling `.scratch/tabletop-physics/issues/02-what-a-card-is.md`. Jess:
-    *"In our domain model, 'Face Down Card' will be a real thing, and it looks like a card back
-    (in the future: a card sleeve) **even if the card itself is two-faced**."*
-  - **The model, as decided:** two independent axes, not one. `face` = which *printed* side is up,
+    _"In our domain model, 'Face Down Card' will be a real thing, and it looks like a card back
+    (in the future: a card sleeve) **even if the card itself is two-faced**."_
+  - **The model, as decided:** two independent axes, not one. `face` = which _printed_ side is up,
     and only ranges over sides that exist (so it's unreachable on a one-faced card). Face-down =
     concealment, showing the shared card back. They compose: a two-faced card **cannot be turned**
     face down, but it **can be played** face down, and then it shows the card back regardless.
   - **The two ships differ on purpose:** in the Deck Shuffler a one-faced card cannot be flipped;
-    on the Tabletop *any* card can be turned over, and a turned-over one-faced card **is** face-down
+    on the Tabletop _any_ card can be turned over, and a turned-over one-faced card **is** face-down
     — a real domain event, not just a picture. Already recorded in the `two-faced-cards` owner KB
     (commit `0337e00`) with a "flip" translation table; it wants to move to `CONTEXT-MAP.md`, which
     doesn't exist yet even though the root `CLAUDE.md` references it.
@@ -192,28 +210,28 @@ section is just a wall between Jess and the live work.
     at all** — no field on `CardDefinition`/`GameCard`, nothing in `contracts/`.
   - ✅ **Scope settled 2026-08-07: Play Face-Down stays OUT of scope.** Jess briefly said it was
     needed for Mural parity, then confirmed sticking with `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md:127`
-    — *"Mural doesn't do it either, so it isn't parity. Real Magic wants it; a later mountain can
-    have it."* (Technically it *is* reachable in Mural by pasting a card back, and low priority
+    — _"Mural doesn't do it either, so it isn't parity. Real Magic wants it; a later mountain can
+    have it."_ (Technically it _is_ reachable in Mural by pasting a card back, and low priority
     besides; workable around in test games.) **So there is no Shuffler button in this item** — what
     remains is the domain/glossary work below, which is real regardless, because the Tabletop side
     of face-down is being built by the physics map either way.
   - Related: `.scratch/tabletop-table-layout/issues/09-sleeve-and-playmat-picker.md` already notes
     "a sleeve image is what a face-down card needs anyway" — the sleeve picker and this share an asset.
   - **Not** the Tabletop shape design for face-down; that's inside the physics map (tickets 02/06).
-  ← mountain: tabletop-replaces-mural
+    ← mountain: tabletop-replaces-mural
 
 - [ ] `let-gamecardindex-out` Reverse the decision that `gameCardIndex` never leaves the Shuffler
-  - **Jess is reversing her own earlier call** (2026-08-07): *"gameCardIndex never passes out of
+  - **Jess is reversing her own earlier call** (2026-08-07): _"gameCardIndex never passes out of
     Shuffler because I made the wrong call on that and I wish it did. I don't want you to have to
-    reason about what is hidden and what isn't."* The cost being paid isn't secrecy — it's that
+    reason about what is hidden and what isn't."_ The cost being paid isn't secrecy — it's that
     every agent and every future payload has to carry a model of what may cross which boundary.
     Simplicity of reasoning beats a guard nobody's threat model needs, on a trust-based table.
     Follows from the principle in `notes/DESIGN-the-table-vision.md` § Principles: the players own
     the game experience; the app doesn't enforce.
   - **What it actually is** (verified, since the docs describe it only as "a decodable secret"):
-    `gameCardIndex` is the card's index in the *initial deck-list array* (`GameState.ts:120`).
+    `gameCardIndex` is the card's index in the _initial deck-list array_ (`GameState.ts:120`).
     It is **not** library order — that's `location.position`, shuffled by Fisher-Yates
-    (`shuffleCollectingMoves`). So what it decodes to is *which card in the decklist this is*,
+    (`shuffleCollectingMoves`). So what it decodes to is _which card in the decklist this is_,
     and decklists are public on Archidekt.
   - **The sites to undo** — the guard is small, which is part of why keeping it looked free:
     - `apps/tabletop/src/server/cardArrival.ts:56` and `apps/tabletop/src/server/seatJoined.ts:35`
@@ -224,32 +242,32 @@ section is just a wall between Jess and the live work.
       claims in `apps/shuffler/CLAUDE.md:186`, `apps/tabletop/README.md:40`, `apps/tabletop/DESIGN.md:133`.
     - There is also a unit test under `apps/shuffler/test/port-tabletop/` guarding the same thing.
   - **On `SEAMAP.md`'s "hand counts but never hands":** that promise is about what the app
-    *volunteers*, and it survives fine — a shadow event simply shouldn't carry a card identity
+    _volunteers_, and it survives fine — a shadow event simply shouldn't carry a card identity
     whether or not a boundary check exists. So this is payload design, not a guard: put the
     restriction on the events that could leak a hand, and stop making every door enforce it.
     Add a sentence to `SEAMAP.md` saying so rather than leaving the promise looking unowned.
-  - The genuinely hard part is **not** here — it's *deliberate* sharing, which is its own item:
+  - The genuinely hard part is **not** here — it's _deliberate_ sharing, which is its own item:
     see `sharing-hidden-zones` below.
-  - Separately: does anything *want* `gameCardIndex` on the far side, or is this purely removing a
+  - Separately: does anything _want_ `gameCardIndex` on the far side, or is this purely removing a
     constraint? If nothing needs it, the win is only conceptual — still worth it, but it means the
     Tabletop keeps using `instanceId` as its identity and nothing downstream changes.
-  ← mountain: overhead
+    ← mountain: overhead
 
-- [ ] `sharing-hidden-zones` Decide how library/hand information gets shared when it *should* be
-  - Jess, 2026-08-07, working out where "never hands" really lives: *"there's actually an
+- [ ] `sharing-hidden-zones` Decide how library/hand information gets shared when it _should_ be
+  - Jess, 2026-08-07, working out where "never hands" really lives: _"there's actually an
     outstanding decision: how do we share library/hand information when it **should** be shared?
     …Sometimes there's 'look at target player's hand' and we need a way to share that — it might
-    wind up in Shuffler, probably not Tabletop."*
+    wind up in Shuffler, probably not Tabletop."_
   - The fleet keeps hidden zones (that's the Shuffler's whole job) but Magic constantly demands
     **deliberate** revealing: reveal the top card, reveal until you hit a land, Thoughtseize
     someone's hand, play with the top card revealed. None of it has a home today.
   - **Half the mechanism already exists**, which makes this smaller than it looks: `GameState`
     has a real **`Revealed` zone** — `reveal(position)`, `revealByGameCardIndex()`,
     `listRevealed()`, `RevealedLocation` — and `playCard` already accepts a card that's in hand
-    *or* revealed. What's missing is that a `Revealed` card is only visible in **that player's own
+    _or_ revealed. What's missing is that a `Revealed` card is only visible in **that player's own
     browser**; no other player can see it. Sharing today is "turn your screen" / Discord.
   - **The split that probably decides it — symmetric vs asymmetric reveals:**
-    - **Symmetric** ("reveal the top card of your library to everyone") is *physical*. At a real
+    - **Symmetric** ("reveal the top card of your library to everyone") is _physical_. At a real
       table you reveal by **putting the cards where everyone can see them** — which is what the
       Tabletop is. That argues the Tabletop, not a Shuffler view: revealed cards become real card
       shapes on the shared canvas, and it composes with everything already decided there.
@@ -258,12 +276,12 @@ section is just a wall between Jess and the live work.
       (`notes/DESIGN-the-table-vision.md` § Principles). So Jess's instinct is right for this half —
       it's a Shuffler affordance, or, per the players-own-the-game principle, possibly not a feature
       at all: hold your hand up to the camera.
-    Worth checking whether that split is real before designing either half; if it holds, this is two
-    small items rather than one hard one.
+      Worth checking whether that split is real before designing either half; if it holds, this is two
+      small items rather than one hard one.
   - Interacts with `let-gamecardindex-out` above (that one removes an accidental-leak guard; this one
     is about intentional revealing — don't conflate them) and with spectator mode, which `SEAMAP.md`
     makes a constraint on every mountain: "public events, commentary, hand counts but never hands."
-  ← mountain: tabletop-replaces-mural
+    ← mountain: tabletop-replaces-mural
 
 - [ ] `card-images-through-backend` Route every rendered card image through our backend instead of straight to Scryfall — ruled out of scope for the verify-suite-speed effort (commit `50ca157`); real product work whenever it's picked up
 
@@ -292,14 +310,14 @@ section is just a wall between Jess and the live work.
   - One-sitting check: load a table, pan, and see whether the URL updates.
 
 - [ ] `card-zoom-modal` Give a Tabletop card a modal overlay that shows its text really big, and offers flip
-  - Jess, verbatim, 2026-08-07: *"Something cards do need to offer: a modal overlay that displays
+  - Jess, verbatim, 2026-08-07: _"Something cards do need to offer: a modal overlay that displays
     the card text really big, and offers flip, similar to Deck Shuffler. This is not needed to
-    replace Mural though, it's later."*
+    replace Mural though, it's later."_
   - **This is the Tabletop** (`apps/tabletop`), not the Shuffler. A card there is becoming a custom
     tldraw shape type `mtg-card` — decided in `.scratch/tabletop-physics/issues/02-what-a-card-is.md`,
     which gives it `frontImageUrl` / `backImageUrl` / `face` / `faceDown` props and makes the shape
     render its own image. A zoom modal renders off those same props; nothing new needs fetching.
-  - *"similar to Deck Shuffler"* points at the Shuffler's existing card modals. The `library-search`
+  - _"similar to Deck Shuffler"_ points at the Shuffler's existing card modals. The `library-search`
     and `two-faced-cards` owners both know that surface — consult them before designing a
     parallel one.
   - **Explicitly not Mural parity.** Jess scoped it as later work, after the
@@ -308,7 +326,7 @@ section is just a wall between Jess and the live work.
     trigger**, and `onClick` on a card is already taken by tap (ticket 04, being resolved now). A
     zoom modal is a plausible home for the flip affordance — so 06 may want to know this exists,
     even though 06 lands first and this doesn't block it.
-  ← priority: later
+    ← priority: later
 
 - [ ] `tabletop-landing-page-palette` Bring the Tabletop's landing page onto the fleet's identity
   - `apps/tabletop/src/client/LandingPage.tsx` styles itself with an off-brand green/cream palette
@@ -320,8 +338,8 @@ section is just a wall between Jess and the live work.
     the mana colours, served by the Shuffler at `/fleet/tokens.css` and imported by the Tabletop
     through Vite — and loaded Orbitron/Ovo on the Tabletop via a Google Fonts `<link>` in
     `apps/tabletop/index.html`. The landing page was left **byte-for-byte unchanged** on purpose.
-    Landing the tokens makes fixing this *possible*; it is **not permission** to fix it.
-  - **Not a mechanical `var(--…)` swap.** This is the Tabletop's *only* styled surface, so
+    Landing the tokens makes fixing this _possible_; it is **not permission** to fix it.
+  - **Not a mechanical `var(--…)` swap.** This is the Tabletop's _only_ styled surface, so
     restyling it is the Tabletop's design pass in miniature: what the Tabletop looks like when it
     isn't tldraw. It's an **appearance decision and needs Jess's explicit sign-off** — the design
     owner (`owners/shuffler-looks-like-itself/`) flagged it as the largest possible ride-along on
@@ -330,7 +348,7 @@ section is just a wall between Jess and the live work.
     and no Tabletop stage, so there's nowhere to show Jess the options side by side. Same shape of
     blocker as `design-playmat-specimen` above.
   - **There is still no ship-local stylesheet on the Tabletop.** Shared tokens have a home now, but
-    the first Tabletop-*only* CSS rule has nowhere to live — inline styles are the status quo by
+    the first Tabletop-_only_ CSS rule has nowhere to live — inline styles are the status quo by
     default, not by choice. Whoever does this work decides that too.
 
 - [ ] `playmat-colours-fleet-or-shuffler` Do the playmat colours belong to the fleet, or to the Shuffler?
@@ -338,8 +356,8 @@ section is just a wall between Jess and the live work.
     `apps/shuffler/public/game.css` when everything else moved into `packages/design-tokens`
     (`tabletop-css-tokens`, `4396aea`). Recording why, because the omission looks like an oversight
     and isn't.
-  - The design owner's recorded position — *"the playmat is one object, one appearance, two
-    scales"* — was decided about the Shuffler's two **pages** (/prepare and /game). Extending "one
+  - The design owner's recorded position — _"the playmat is one object, one appearance, two
+    scales"_ — was decided about the Shuffler's two **pages** (/prepare and /game). Extending "one
     object" **across the ship boundary**, to a tldraw-rendered seat mat, is a different and
     unratified identity claim. Moving the tokens into the shared package would silently assert an
     answer to it.
@@ -368,7 +386,7 @@ section is just a wall between Jess and the live work.
 
 ## Backlog
 
-- [ ] `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there  ← was: JES-85
+- [ ] `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there ← was: JES-85
   - > For cards on the table, track how they got there. Give players 'discard' and 'exile' buttons
     > that move a card to the table, and display how it got there in the list of cards on the table.
   - Half of this already shipped: Discard exists end to end (`POST /discard-card`,
@@ -382,7 +400,7 @@ section is just a wall between Jess and the live work.
     off the whiteboard to mean "discard" instead of moving them to a graveyard. Dedicated actions beat
     ad-hoc deletion. The Tabletop side of that same confusion belongs to `tabletop-card-shape`, not here.
 
-- [ ] `finish-undo` Say what was undone, and decide whether we want redo  ← was: JES-83, JES-99
+- [ ] `finish-undo` Say what was undone, and decide whether we want redo ← was: JES-83, JES-99
   - > When the player undoes with ctrl-Z, surface what was undone somehow — a toast, maybe.
   - cmd-Z/ctrl-Z is already wired (`public/game.js`, clicks the live undo button), but there is **no
     toast mechanism anywhere in the Shuffler** — so undo currently happens silently. The event log
@@ -391,7 +409,7 @@ section is just a wall between Jess and the live work.
     "Cannot undo an undo, use redo instead", so the code anticipates it. Decide before building — a
     reflex key with no counterpart is where people get hurt.
 
-- [ ] `animate-card-to-table` Animate a card moving to where it's going, using its current position  ← was: JES-84
+- [ ] `animate-card-to-table` Animate a card moving to where it's going, using its current position ← was: JES-84
   - > HTMX requests can include the card's current position; the server calculates the destination
     > position (e.g. where the table is) and styles the card with a CSS transition that moves it from
     > current to destination.
@@ -402,7 +420,7 @@ section is just a wall between Jess and the live work.
     working model instead of racing the swap.
   - Consult the `animations` owner before touching this.
 
-- [ ] `shuffler-logs-not-console` Convert the Shuffler's remaining `console.*` to trace-participating logs  ← was: JES-135
+- [ ] `shuffler-logs-not-console` Convert the Shuffler's remaining `console.*` to trace-participating logs ← was: JES-135
   - **53 sites left** outside `src/scripts/` (verified 2026-08-06): `app.ts` 40, `server.ts` 8,
     `GameState.ts` 2, and one each in `view/debug/state-copy.ts`, `SqlitePersistStateAdapter.ts`,
     `ArchidektDeckToDeckAdapter.ts`. None reach Honeycomb, and the Shuffler creates zero manual
@@ -413,7 +431,7 @@ section is just a wall between Jess and the live work.
   - `src/scripts/*` keeps `console.*` on purpose, already written down in `apps/shuffler/CLAUDE.md`.
     Don't "finish the job" there.
 
-- [ ] `spine-logs-in-traces` Give the Spine Ruby logs that participate in traces  ← was: JES-137
+- [ ] `spine-logs-in-traces` Give the Spine Ruby logs that participate in traces ← was: JES-137
   - The last ship without a log pipeline. Rails `TaggedLogging` → STDOUT
     (`config/environments/production.rb`), no OTel logs gem, zero explicit app-level logging in
     `app/`, `lib/`, or `interpreter/` — so Spine request logs never land on the trace, even though
@@ -424,7 +442,7 @@ section is just a wall between Jess and the live work.
     `OpenTelemetry::Trace.current_span.context`. The lean is (b). Record the reasoning.
   - Done when a Shuffler → Spine request shows the Spine's log lines on the same Honeycomb trace.
 
-- [ ] `logs-docs-catch-up` Fix the owner docs' stale "no logs" claims and put logs in the new-ship runbook  ← was: JES-138
+- [ ] `logs-docs-catch-up` Fix the owner docs' stale "no logs" claims and put logs in the new-ship runbook ← was: JES-138
   - `owners/fleet-is-observable/README.md` still says the browser has no logger (twice, plus
     "`log.ts` still has no real callers") and `interactions.md` repeats it — all false since the
     browser pipeline landed: `logError()`, its own `LoggerProvider`, the collector's `/v1/logs`
@@ -434,27 +452,27 @@ section is just a wall between Jess and the live work.
   - Everything else the closeout wanted has landed — violation inventory gone, sampling trap
     recorded, wiring table updated, per-ship duplication written down.
 
-- [ ] `build-sha-on-every-span` Every span says which build it came from  ← was: JES-139
+- [ ] `build-sha-on-every-span` Every span says which build it came from ← was: JES-139
   - Nothing in the fleet carries a build identity — no `service.version`, no `deployment.sha`,
-    anywhere (verified 2026-08-06). Deploy markers mark a *moment*, so "is this error only on the
+    anywhere (verified 2026-08-06). Deploy markers mark a _moment_, so "is this error only on the
     new build?" is answered by eyeballing which side of a marker line events fall on, which breaks
     down with overlapping pods or two close deploys.
   - Shape: `deploy.sh` already computes the short sha for the image tag → Docker build arg → env
-    var → OTel **resource attribute** at SDK init, so it lands on every span *and* every log for
+    var → OTel **resource attribute** at SDK init, so it lands on every span _and_ every log for
     free. The Tabletop's `ARG TLDRAW_LICENSE_KEY` is the precedent; do the browser bundle too — a
     user holding a stale bundle after a deploy is currently invisible.
   - `owners/fleet-is-observable/README.md` already holds this as Invariant 5, marked FUTURE.
     Landing it means dropping that marker and making it a standing check on any new init path.
 
-- [ ] `spine-probe-sampling` Downsample health-probe traces in the Spine  ← was: JES-130
+- [ ] `spine-probe-sampling` Downsample health-probe traces in the Spine ← was: JES-130
   - `services/spine/config/initializers/opentelemetry.rb` sets **no sampler at all** — `GET /up` is
     roughly half of all spine spans, so queries and BubbleUp skew toward probes instead of real
     table/seat activity, and it burns event quota for no insight.
   - Copy the Shuffler's pattern (`src/telemetry-sampler.ts`): keep a trickle rather than dropping
-    probes entirely, so a *failing* probe is still visible. Give it a test — the Shuffler's inline
+    probes entirely, so a _failing_ probe is still visible. Give it a test — the Shuffler's inline
     sampler was silently broken for months because it didn't have one.
 
-- [ ] `set-up-ci` Run the three test suites on every push  ← was: JES-119
+- [ ] `set-up-ci` Run the three test suites on every push ← was: JES-119
   - > github actions, so tests run on every PR.
   - There is **no `.github/` directory at all** (verified 2026-08-06), yet all three ships have
     suites: `jest` in the Shuffler, `vitest` in the Tabletop, Rails `test/` in the Spine. Nothing
@@ -462,7 +480,7 @@ section is just a wall between Jess and the live work.
   - The old argument against starting — one permanently-red Playwright test — is gone; that test is
     fixed. Decide this on its own merits.
 
-- [ ] `fun-game-ids` Game IDs as fun word combos instead of numbers  ← was: JES-97
+- [ ] `fun-game-ids` Game IDs as fun word combos instead of numbers ← was: JES-97
   - > Make game IDs fun word combinations instead of numbers. That makes them not derivable
     > (a small privacy win) and still looks pretty.
   - The **privacy** argument is the stronger one: `SEAMAP.md` makes "no login/auth yet" an
@@ -470,7 +488,7 @@ section is just a wall between Jess and the live work.
   - Touches persistence, not CSS: `nextGameId++` in both `InMemoryPersistStateAdapter.ts:35` and
     `SqlitePersistStateAdapter.ts:65` (the latter seeded from `MAX(id)`), plus the game URLs.
 
-- [ ] `game-page-to-ejs` Migrate the active game page to EJS templates  ← was: JES-78
+- [ ] `game-page-to-ejs` Migrate the active game page to EJS templates ← was: JES-78
   - > The active game page renders via TypeScript view functions, a historical accident rather
     > than an intention. Migrate it to EJS like the rest of the pages.
   - Seven files under `src/view/play-game/` build the page as template strings; nothing in `views/`
@@ -480,14 +498,14 @@ section is just a wall between Jess and the live work.
     `formatHtmlHead()` in `src/view/common/html-layout.ts` load different stylesheets and set
     conflicting `body` fonts (Ovo vs Orbitron). Consult the `shuffler-looks-like-itself` owner.
 
-- [ ] `game-screen-table-layout` Arrange the game screen the way a real table is arranged  ← was: JES-89, JES-87
+- [ ] `game-screen-table-layout` Arrange the game screen the way a real table is arranged ← was: JES-89, JES-87
   - > Move the library to the right side of the game screen — that's where it sits in a real game.
   - Library renders first in `.game-top-row` (`src/view/play-game/active-game-page.ts:84`), so it's
     currently on the left, ahead of revealed cards and the command zone.
   - Same argument, second half: sort the auto-drawn opening hand by card type then mana value —
     lands first, then creatures, then everything else. `GameState.listHand()` sorts by position only.
 
-- [ ] `library-sort-toggle` Let the game's library search sort alphabetically or by library position  ← was: JES-152, JES-142
+- [ ] `library-sort-toggle` Let the game's library search sort alphabetically or by library position ← was: JES-152, JES-142
   - > Seeing the library in true top-to-bottom order is how you confirm a shuffle happened, check
     > what Put on Top / Put on Bottom did, and verify draw order.
   - **Half of this is on an unmerged branch.** `library-alphabet` (commit `9a3c1b5`, checked out in
@@ -501,16 +519,16 @@ section is just a wall between Jess and the live work.
   - Library search is the one part of the app outside users have complained about — Jess's college
     kid and their friends, 2026-08-01.
 
-- [ ] `english-card-faces` Show English names and images for other-language printings  ← was: JES-96
+- [ ] `english-card-faces` Show English names and images for other-language printings ← was: JES-96
   - > Some cards come in other-language editions. Offer English. Example: Adventurous Impulse in
     > the Squirrel Girl deck (Archidekt 23735063).
   - Two halves, one cause, both in `ArchidektDeckToDeckAdapter.ts`: the name comes from
-    `card.displayName || oracleCard.name` (line 101) and `displayName` is the *printed* name, and
+    `card.displayName || oracleCard.name` (line 101) and `displayName` is the _printed_ name, and
     `scryfallId: card.uid` (line 118) is that same localized printing, so the image is foreign too.
   - `oracleCardName` is already on `CardDefinition`, so the name half is nearly free; the image half
     needs resolving the English printing of the same oracle card.
 
-- [ ] `commander-tax-counter` Count how many times the commander has been cast, in the command zone  ← was: JES-81
+- [ ] `commander-tax-counter` Count how many times the commander has been cast, in the command zone ← was: JES-81
   - > Track how many times the commander has been cast (commander tax). Display a play counter in the
     > command zone.
   - Nothing exists yet — no cast count in `src/` at all — but the command zone is a real rendered
@@ -553,8 +571,8 @@ section is just a wall between Jess and the live work.
     rather than "delete the attribute".
 
 - [ ] `modals-are-not-modal` The modals do not manage focus at all (Jess found this 2026-08-06)
-  - Jess, tabbing the app: *"the Library Content box doesn't even work for focus flow. It's a
-    modal and the things behind it get focus. It's a mess."* Confirmed by reading every
+  - Jess, tabbing the app: _"the Library Content box doesn't even work for focus flow. It's a
+    modal and the things behind it get focus. It's a mess."_ Confirmed by reading every
     non-vendor JS file and all three modal templates. There is no focus management **anywhere**:
     - nothing calls `.focus()`, so opening a modal never moves focus into it — focus stays on
       the button now hidden behind the overlay;
@@ -562,7 +580,7 @@ section is just a wall between Jess and the live work.
     - no `role="dialog"`, no `aria-modal="true"` (the only `aria` in the templates is `role="img"`
       on card-type icons), so a screen reader is never told a dialog opened;
     - nothing restores focus to the opener when the modal closes.
-  - `game.js:311` *looks* like it participates but doesn't: it tests whether `.modal-overlay`
+  - `game.js:311` _looks_ like it participates but doesn't: it tests whether `.modal-overlay`
     exists in the DOM before letting Ctrl-Z through. Its comment says "while a modal is focused",
     which is not what it checks. Fix that comment whenever this is touched.
   - Not caused by choice 5 — but choice 5 is why it's visible. With no focus rings, focus
@@ -574,4 +592,3 @@ section is just a wall between Jess and the live work.
     `src/view/play-game/game-modals.ts`, `src/view/play-game/history-components.ts`. All four are
     HTMX-swapped fragments, so whatever moves focus has to run on swap (`htmx:afterSwap`), not on
     page load — and closing is also an HTMX swap, so focus restore hooks the same place.
-
