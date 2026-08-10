@@ -1,5 +1,6 @@
+import { GameId } from "../../domain-types.js";
 
-export function formatDebugSectionHtmlFragment(gameId: number, stateVersion: number): string {
+export function formatDebugSectionHtmlFragment(gameId: GameId, stateVersion: number): string {
   return `<p class="game-id">Game: ${gameId} | <button class="debug-button"
                   hx-get="/debug-state/${gameId}"
                   hx-target="#modal-container"

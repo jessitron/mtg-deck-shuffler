@@ -5,6 +5,7 @@ import * as fc from "fast-check";
 import { deckWithOneCommander, createTestPersistedGameState } from "../generators.js";
 import { InMemoryCardRepositoryAdapter } from "../../src/port-card-repository/InMemoryCardRepositoryAdapter.js";
 import { CardRepositoryPort } from "../../src/port-card-repository/types.js";
+import { GAME_ID_WORD_FORMAT } from "../../src/gameIdGenerator.js";
 
 describe("InMemoryPersistStateAdapter", () => {
   let adapter: InMemoryPersistStateAdapter;
@@ -24,14 +25,18 @@ describe("InMemoryPersistStateAdapter", () => {
     testGameState = createTestPersistedGameState(1, testDeck, GameStatus.Active);
   });
 
-  it("should generate new game IDs incrementally", () => {
+  it("should generate fun word-combo game IDs, not sequential numbers", () => {
     const id1 = adapter.newGameId();
     const id2 = adapter.newGameId();
     const id3 = adapter.newGameId();
 
-    expect(id1).toBe(1);
-    expect(id2).toBe(2);
-    expect(id3).toBe(3);
+    // Not derivable from one another the way sequential integers are.
+    expect(id1).not.toBe(id2);
+    expect(id2).not.toBe(id3);
+    for (const id of [id1, id2, id3]) {
+      expect(typeof id).toBe("string");
+      expect(id as string).toMatch(GAME_ID_WORD_FORMAT);
+    }
   });
 
   it("should save and retrieve game state", async () => {
@@ -44,6 +49,31 @@ describe("InMemoryPersistStateAdapter", () => {
     expect(retrieved).not.toBe(null);
     expect(retrieved).toEqual(testGameState);
     expect(retrieved).not.toBe(testGameState); // Should be a copy
+  });
+
+  it("should save and retrieve a game with a word-combo id (new format)", async () => {
+    const wordIdGameState: PersistedGameState = {
+      ...testGameState,
+      gameId: "brave-falcon-42",
+    };
+
+    const gameId = await adapter.save(wordIdGameState);
+    expect(gameId).toBe("brave-falcon-42");
+
+    const retrieved = await adapter.retrieve("brave-falcon-42");
+    expect(retrieved).toEqual(wordIdGameState);
+  });
+
+  it("should still load an old game saved with a plain numeric id", async () => {
+    const oldNumericGameState: PersistedGameState = {
+      ...testGameState,
+      gameId: 47,
+    };
+
+    await adapter.save(oldNumericGameState);
+
+    const retrieved = await adapter.retrieve(47);
+    expect(retrieved).toEqual(oldNumericGameState);
   });
 
   it("should return null for non-existent game ID", async () => {

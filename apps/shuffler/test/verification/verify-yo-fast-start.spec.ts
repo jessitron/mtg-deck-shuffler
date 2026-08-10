@@ -34,8 +34,9 @@ test.describe('yo! fast-start', () => {
     await expect(yoLink).toBeVisible();
     await yoLink.click();
 
-    // Straight onto the game screen.
-    await expect(page).toHaveURL(/\/game\/\d+/);
+    // Straight onto the game screen. New games get a fun word-combo id
+    // (e.g. "brave-falcon-42") rather than a sequential number.
+    await expect(page).toHaveURL(/\/game\/[a-z]+-[a-z]+-\d+/);
     await expect(page.locator('.game-name')).toHaveText('Timey-Wimey');
 
     // Both commanders in the command zone.

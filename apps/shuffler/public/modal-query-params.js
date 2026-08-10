@@ -30,7 +30,9 @@
 function planAutoOpenActions(search, pathname) {
   const urlParams = new URLSearchParams(search);
 
-  const gameMatch = pathname.match(/\/game\/(\d+)/);
+  // Game ids are either the old plain number or a new fun word-combo
+  // (e.g. "brave-falcon-42"); prep ids are still always numeric.
+  const gameMatch = pathname.match(/\/game\/([^/?]+)/);
   const prepMatch = pathname.match(/\/prepare\/(\d+)/);
 
   if (!gameMatch && !prepMatch) {

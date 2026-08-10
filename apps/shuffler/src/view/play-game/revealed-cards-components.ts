@@ -1,5 +1,6 @@
 import { GameState, GameCard, WhatHappened } from "../../GameState.js";
 import { CardAction, formatCardContainer } from "../common/shared-components.js";
+import { GameId } from "../../domain-types.js";
 
 function formatRevealedCardActionsHtmlFragment(game: GameState, gameCard: GameCard): string {
   const actions: CardAction[] = [
@@ -43,7 +44,7 @@ export function formatRevealedCardsHtmlFragment(game: GameState, whatHappened: W
 function formatCardActionButtonHtmlFragment(
   action: string,
   endpoint: string,
-  gameId: number,
+  gameId: GameId,
   cardIndex: number,
   expectedVersion: number,
   title: string,
@@ -67,7 +68,7 @@ function formatCardActionButtonHtmlFragment(
           </button>`;
 }
 
-function formatCardActionsGroupHtmlFragment(actions: CardAction[], gameId: number, cardIndex: number, expectedVersion: number, cardId?: string, currentFace?: "front" | "back"): string {
+function formatCardActionsGroupHtmlFragment(actions: CardAction[], gameId: GameId, cardIndex: number, expectedVersion: number, cardId?: string, currentFace?: "front" | "back"): string {
   return actions
     .map((action) => formatCardActionButtonHtmlFragment(action.action, action.endpoint, gameId, cardIndex, expectedVersion, action.title, action.cssClass, cardId, currentFace))
     .join("");
