@@ -15,12 +15,15 @@ Route handler (src/app.ts)
   - For preps: uses createPrepViewHelpers(prep).libraryCards
   - Maps GameCards to simple objects: { name, gameCardIndex, cardTypes, colorIdentity }
   - cardTypes comes straight from gc.card.cardTypes (already unioned across all faces at ingestion)
+  - Sorts the mapped cards alphabetically by name for display, always — display-only,
+    does not touch listLibrary()'s position order. Both routes (game and prep) sort;
+    neither offers a toggle back to position order
   - Passes groupBy query param through
   |
   v
 EJS template renders (views/partials/library-modal.ejs)
   - If groupBy=type: groups cards into Map by type, sorts groups, renders with headers
-  - If ungrouped: renders flat list in library order
+  - If ungrouped: renders flat list, sorted alphabetically by canonical card name
   - Each card name is clickable (HTMX GET to card modal)
   - Type icons rendered as CSS-masked SVG sprites
   |
@@ -123,3 +126,7 @@ When the library is displayed grouped by type, each type section builds a `navLi
 - Filters cards where `location.type === "Library"`
 - Sorts by `location.position` (0 = top of library)
 - Returns read-only array of `GameCard & { location: LibraryLocation }`
+- **Not sorted by name.** This return value is load-bearing for draw / Put on Top /
+  Put on Bottom, which all depend on `location.position`. Both library-modal routes
+  (game and prep) sort their own copy of the mapped cards by name for display;
+  never change `listLibrary()` itself to sort by name.

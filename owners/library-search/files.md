@@ -58,6 +58,8 @@ All files involved in the library search feature, grouped by role.
 |------|---------------|
 | `test/verification/verify-library-grouping.spec.ts` | E2E: toggle button, grouped headers, group-scoped nav, flip preserves navList (game + prep) |
 | `test/verification/verify-prep-library-click.spec.ts` | E2E: clicking the library stack on the prep page opens the search modal |
+| `test/verification/verify-library-alphabetical-order.spec.ts` | E2E: library modal is alphabetical by name — ungrouped and within each type group — on both game and prep routes, including after a shuffle |
+| `test/game-modals.test.ts` | Unit — not library search itself, but pins `formatTableCardListHtmlFragment()`'s alphabetical order (Cards on Table); see "Related, Not Library Search" below |
 
 ## Documentation
 
@@ -66,3 +68,9 @@ All files involved in the library search feature, grouped by role.
 | `notes/FEATURE-card-type-grouping.md` | Task notes for implementing grouping |
 | `notes/DESIGN-card-type-symbols.md` | Available SVG icons and which types have them |
 | `apps/shuffler/notes/pages-and-modals.md` | Query parameter states including library modal |
+
+## Related, Not Library Search
+
+| File | Role |
+|------|------|
+| `src/view/play-game/game-modals.ts` `formatTableCardListHtmlFragment()` | Cards-on-Table list — a different zone/feature. Landed in the same commit as the library alphabetical-sort change (both made "sorted, always" explicit) but is not part of library search. Listed here for cross-reference only. |

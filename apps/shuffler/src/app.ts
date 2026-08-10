@@ -743,12 +743,16 @@ export function createApp(
 
       // Map to simple card objects for the template. cardTypes already holds the
       // union of every face's types, so two-faced cards appear in all their groups.
-      const cards = libraryCards.map(gc => ({
-        name: gc.card.name,
-        gameCardIndex: gc.gameCardIndex,
-        cardTypes: gc.card.cardTypes,
-        colorIdentity: gc.card.colorIdentity
-      }));
+      // Sorted alphabetically for display, always — listLibrary() itself stays
+      // position-ordered since draw/Put on Top/Put on Bottom depend on it.
+      const cards = libraryCards
+        .map(gc => ({
+          name: gc.card.name,
+          gameCardIndex: gc.gameCardIndex,
+          cardTypes: gc.card.cardTypes,
+          colorIdentity: gc.card.colorIdentity
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name));
 
       res.render("partials/library-modal", {
         cards,
@@ -1109,12 +1113,16 @@ export function createApp(
 
       // Map to simple card objects for the template. cardTypes already holds the
       // union of every face's types, so two-faced cards appear in all their groups.
-      const cards = libraryCards.map(gc => ({
-        name: gc.card.name,
-        gameCardIndex: gc.gameCardIndex,
-        cardTypes: gc.card.cardTypes,
-        colorIdentity: gc.card.colorIdentity
-      }));
+      // Sorted alphabetically for display, always — matches the game route's
+      // library modal (deck-storage order is not guaranteed alphabetical).
+      const cards = libraryCards
+        .map(gc => ({
+          name: gc.card.name,
+          gameCardIndex: gc.gameCardIndex,
+          cardTypes: gc.card.cardTypes,
+          colorIdentity: gc.card.colorIdentity
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name));
 
       res.render("partials/library-modal", {
         cards,
