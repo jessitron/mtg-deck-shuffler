@@ -241,6 +241,56 @@ These are specific things that could break two-faced cards if changed elsewhere:
 
 ## Not Related To
 
+### Sleeve carries to the game screen (`sleeve-carries-to-game`, 2026-08-09)
+
+The `/prepare` picker's sleeve color and playmat image path now ride onto the game itself:
+`GameState.newGame()` gained two trailing optional params (`sleeveColor`, `playmatImagePath`),
+snapshotted from `prep.sleeveColor`/`prep.playmatImagePath` at both `/start-game` and
+`/restart-game` call sites in `src/app.ts`, stored as new optional fields directly on
+`GameState`/`PersistedGameState`, and rendered: `formatLibraryStack()` takes an optional
+third `sleeveColor` param and (via new helper `formatLibraryCardBack()`) renders a sleeved
+back as a flat `background-color` rectangle instead of the `CARD_BACK` `<img>`;
+`formatGamePageHtmlPage()` writes the picked playmat as an inline
+`style="background-image: url(...)"` on `.playmat.playmat-game`.
+
+**This is orthogonal to two-faced cards, confirmed rather than assumed**: no changes to
+`CardDefinition`/`CardFace`, `getCardImageUrl`, or any event-contract face field. The
+sleeve/playmat fields live on `GameState`/`PersistedGameState` (game-wide table look), not on
+`GameCard`/`PersistedGameCard` (per-card face state) — a two-faced card's `currentFace` and
+flip button are untouched, and `formatCardContainer`/`formatFlippingContainer` (the
+two-faced-card rendering path) were not touched by this change. `formatLibraryStack()` renders
+the library **pile** (three generic card backs), which was already "Not Related To" two-faced
+cards' back **face** before this change (see the Card Back section below) — sleeving the pile
+doesn't change that.
+
+**No naming collision, confirmed by grep before implementing**: the Tabletop already has an
+unrelated `sleeveColor?: string` on `apps/tabletop/src/server/rooms.ts`'s seat-joined player
+data (table-layout ticket 17, see [tabletop.md](tabletop.md) watch point 17) — a *different
+type*, arriving over the wire from a *different* Shuffler send site
+(`buildSeatJoinedEvent`/`SeatJoinedEvent`, not touched by this change). This change's
+`sleeveColor` is Shuffler-only, read straight off `prep`/`game` for local rendering; it has no
+wire representation and isn't sent anywhere. Same field name, same eventual source (the prep's
+sleeve pick), two independent call sites — worth knowing if a future ticket wants to unify
+"the Shuffler's own library rendering" with "what the Tabletop was told at seat.joined."
+
+**No persistence version bump** — `PERSISTED_GAME_STATE_VERSION` stayed at **11**. Both new
+fields are optional with a graceful fallback (undefined ⇒ render exactly as before), the same
+"optional fields" exception already used for `tableName`/`playerName`/`seatId`/`cardInstanceId`
+and (in this owner's own history) `imageUris`/`backImageUris`. Confirmed the actual constant
+value in code (`src/port-persist-state/types.ts`) before relying on it in tests, rather than
+assuming from the last KB entry that mentioned a version number.
+
+**Sleeve-corner CSS rule extended to the Shuffler's library stack**, matching the Tabletop's
+square-corner precedent (table-layout ticket 17, `e53a27e`, 2026-08-09 — "sleeves are
+rectangular"): `.library-card-back.sleeved` in `public/playmat.css` zeroes `border-radius` and
+suppresses the `::before` pseudo-element, so a sleeved library pile reads as flat rectangles
+like the Tabletop's sleeve rendering, not like the rounded `CARD_BACK` image it replaces.
+
+Tests: `apps/shuffler/test/GameState-tableLook.test.ts` (round-trip through persist/reload,
+and the no-pick case leaves both fields undefined), `apps/shuffler/test/view/active-game-page.test.ts`
+(playmat background-image present/absent), and cases added to
+`apps/shuffler/test/view/library-components.test.ts` (sleeved vs unsleeved library stack HTML).
+
 ### Card Back (library face-down rendering)
 The MTG card back image (`/images/mtg-card-back.jpg`, `CARD_BACK` constant) is the generic card back shown for library cards. It is unrelated to two-faced cards' **back face**: don't confuse "card back" (the picture) with "back face" (the second printed side of a two-faced card).
 
