@@ -496,41 +496,6 @@ to `DefaultToolbarContent`) passed through `components`. Sync registration is th
 places: the `useSync` `shapeUtils` const, `<Tldraw shapeUtils>`, and `rooms.ts`'s
 `createTLSchema` shapes map.
 
-### Ride-along tap catch-up: a passenger animating its host's tap needs to read the store, not the `shape` argument (added 2026-08-10)
-
-Ticket 15's tap catch-up (`65276e6`) is a purely local WAAPI illusion on the CARD's own
-`.tl-image-container`, keyed off `props.tapped` changing — it has no equivalent for a hosted
-`mtg-counter`, which has no `props.tapped` of its own. tldraw already composes the host's
-rotation into the counter's page transform for free (the "tilt along" visual above), so the
-counter's *position* was never wrong; what was missing was replaying the *card's own* 500ms
-ease-out illusion on the counter's *own* DOM node, or it just snapped to the new angle a frame
-before the card's div started easing back.
-
-`MtgCounterShapeUtil.component()` now has a second `useValue`, `hostCardTapped`, whose selector
-does two chained store reads: `this.editor.getShape(shape.id)` for this counter's own current
-record (to get a fresh `parentId`), then `this.editor.getShape(parentId)` for the host's
-`props.tapped`. A `useLayoutEffect` keyed on that value plays the identical
-counter-rotate-then-ease-to-0 animation (500ms, ease-out) on the same `rideAlongRef`
-`.tl-image-container` div the pointer-events fix already wraps content in — seeded with the
-mount-time value via a `prevHostTappedRef`, exactly like the card's own `prevTappedRef`, so
-arriving already attached to a tapped card, or being dragged onto/off a card (a
-defined↔undefined transition), doesn't spuriously animate; only an actual tapped-value flip on
-an already-attached host does.
-
-**New general fact about `component()`'s reactivity, not specific to counters**: a ShapeUtil's
-`component(shape)` is only re-invoked with a *fresh* `shape` object when that shape's own
-`props` change. A bare `parentId`/`x`/`y`/`rotation` write — which is exactly what a drag-attach
-or a host's tap produces — is applied to the wrapping page-transform outside React and never
-triggers a re-render. So closing over `shape.parentId` (or any field on the outer `shape`
-argument other than `props`) inside a `useValue` selector captures a value frozen at whatever
-the shape's last props-triggered render saw — it will not update on reparent or on watching an
-ancestor's props change. The fix, demonstrated here: read the shape fresh from the editor
-*inside* the selector (`this.editor.getShape(shape.id)`), not from the closed-over argument —
-that's a genuine reactive signal read through the store, so `useValue` correctly re-runs whenever
-the underlying record (or, chained, its parent's record) changes. Any future passenger-side hook
-that needs to react to its *own* current parentId, or to an ancestor's props, needs this same
-"read the editor inside the selector" shape. New watch point 20 in `interactions.md`.
-
 ### Playwright facts discovered (belong to anyone testing shapes)
 
 - **A creation click followed within tldraw's double-click window by a grab at the same point
@@ -538,18 +503,6 @@ that needs to react to its *own* current parentId, or to an ancestor's props, ne
   a shape before dragging it (`verify-counter.spec.ts`'s `createCounter` helper).
 - **`.nth()` on shape testids is paint order, and paint order changes when a shape reparents** —
   drag from known creation points instead of trusting locator index stability across a reparent.
-- **At low zoom, a nearby passenger's hit-test margin can steal a click aimed at the card's
-  exact center — even though `document.elementFromPoint` says "card."** (Found 2026-08-10,
-  fixing the ride-along tap-catch-up bug above.) tldraw's own hit-test
-  (`editor.getShapeAtPoint`/`getHoveredShapeId`) grows a shape's `hitTestMargin` in page-space as
-  zoom decreases (`hitTestMargin / zoomLevel`); after a whole-table `zoomToFit`, a counter
-  attached near a card's center can have a hit-test region reaching the card's own center pixel,
-  so a `page.mouse.click()` there resolves to the counter, not the card, inside tldraw's own
-  click handling — a pure test-construction hazard, not a product bug. `verify-counter.spec.ts`'s
-  `topGrip()` helper (grab the card's top ~12% instead of center) already exists for exactly this
-  reason; `verify-tap-animation.spec.ts` reuses the same pattern for its counter test. Any test
-  that taps/clicks a card that has (or might have) a counter/note/passenger-card attached should
-  grab near the top edge, not the center, especially at non-1:1 zoom.
 
 ## Ticket 19: notes ride along like counters — a stock ShapeUtil gains this owner's cleanup hook via subclass (landed 2026-08-10)
 
@@ -636,67 +589,160 @@ the `SelectionClearingNoteShapeUtil` swap (the card didn't move — the note abs
 instead), green with it. Three other tests in the same file cover attach/ride/detach and
 battlefield-exit eviction, exercising the same passenger mechanics ticket 18's counter tests do.
 
-## A pasted/dropped image reopens watch point 1 too — fixed like notes (landed 2026-08-10)
+## Ticket 20: cards can tuck behind cards — the first design shipped broken, replaced same day (landed 2026-08-10)
 
-TODO.md bug: "paste an image in, pick it, move it around, click a card, try to move it — the
-image moves instead." Same class as ticket 19's note fix. Confirmed by reading
-`node_modules/tldraw/src/lib/shapes/image/ImageShapeUtil.tsx` (tldraw 5.2.5): stock
-`ImageShapeUtil` has no `onTranslateEnd` of its own — the same gap stock `NoteShapeUtil` had
-before ticket 19 — so a dragged image stays selected, and the next card drag silently moves it
-instead of the card actually under the pointer.
+`.scratch/tabletop-physics/issues/20-cards-behind-cards.md`. **This section describes the design
+that landed after a same-day correction — the original design (real tldraw parenting plus
+matrix-based tap compensation) shipped, was found broken by Jess on first real use, and was thrown
+out. The broken design and why it was impossible are recorded in `history.md`'s ticket 20 entry
+in full, because the failure mode — not checking "can a child ever render behind its own parent"
+against tldraw source before building on it — is the reusable lesson.**
 
-**Fix**: `apps/tabletop/src/client/shapes/SelectionClearingImageShapeUtil.ts`, structurally
-identical to `SelectionClearingNoteShapeUtil` — subclasses tldraw's own `ImageShapeUtil`
-(imported from `"tldraw"`), overriding only `onTranslateEnd` to call
-`this.editor.setSelectedShapes([])`:
+### Why real parenting was the wrong mechanism, confirmed against tldraw source
+
+Jess's bug report: "reorder → send to back doesn't work on the cards. I moved one on top of the
+other, and the other card became the parent. But I can't put the child behind the parent." Two
+tldraw facts, both read from source rather than assumed, make this a structural impossibility, not
+a bug to patch:
+
+- **`Editor.getUnorderedRenderingShapes` does one global depth-first pre-order traversal**,
+  pushing each shape's own render-index entry *before* recursing into its children — so a parent
+  is unconditionally assigned a lower render index (paints further back) than every one of its own
+  children. No per-shape field overrides this.
+- **`getReorderingShapesChanges` (the mechanism behind Send to back/Bring to front/etc.) only
+  reorders a shape against its siblings** — same `parentId`. `reorderToBack` explicitly no-ops
+  when `moving.size === len` ("all of the children are moving"), which is exactly the case for a
+  lone child of a card.
+
+A card parented under another card can never be reordered behind its own parent, by either
+mechanism. Real parenting and "send to back works between the two cards" are mutually exclusive —
+there was no code fix available within that design.
+
+### The fix: `meta.tuckedWith`, not `parentId` — both cards stay ordinary siblings
+
+`PASSENGER_TYPES` in `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` is back to exactly
+`new Set(["mtg-counter", "note"])` — `mtg-card` never rejoins it. A new module constant
+`TUCK_KEY = "tuckedWith"` and two private methods carry the tuck relationship instead:
 
 ```
-export class SelectionClearingImageShapeUtil extends ImageShapeUtil {
-  override onTranslateEnd(): TLShapePartial<TLImageShape> | undefined {
-    this.editor.setSelectedShapes([]);
-    return undefined;
-  }
+private tuckCard(passenger: MtgCardShape, host: MtgCardShape): void {
+  this.untuck(passenger);
+  this.untuck(host);
+  this.editor.updateShapes([
+    { id: passenger.id, type: "mtg-card", meta: { ...passenger.meta, [TUCK_KEY]: host.id } },
+    { id: host.id, type: "mtg-card", meta: { ...host.meta, [TUCK_KEY]: passenger.id } },
+  ]);
 }
 ```
 
-**Registration** (`TablePage.tsx`): the `shapeUtils` array now filters both `"note"` and
-`"image"` out of the `defaultShapeUtils` spread before appending the two `SelectionClearing*`
-replacements — the same `useSync`-throws-on-duplicate-type-vs.-`<Tldraw>`-tolerates-it asymmetry
-ticket 19 documented (watch point 6/18), now exercised for a second stock shape type:
+`onDragShapesIn` still receives a drop notification for a dropped `mtg-card` (`canReceiveNewChildrenOfType`
+returns `true` for `type === "mtg-card"` too, purely so the card still hints as a drop target
+during the drag) but never reparents it — it calls `tuckCard` and `bringToFront([dropped.id])`
+instead, then returns. Because there's no `parentId` change, both cards remain ordinary top-level
+page shapes, siblings of each other — which is exactly what makes tldraw's stock
+`ReorderMenuSubmenu` ("Send to back"/"Bring to front") work between them for real: it's now
+reordering actual siblings, not a parent against its own child.
 
-```
-const shapeUtils = [
-  ...defaultShapeUtils.filter((Util) => Util.type !== "note" && Util.type !== "image"),
-  MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil,
-  SelectionClearingNoteShapeUtil, SelectionClearingImageShapeUtil,
-];
-```
+### "Host" is computed live from z-order, not fixed at attach time
 
-**Images do not join `PASSENGER_TYPES`.** Unlike notes and counters, a pasted image never
-attaches to a card — this fix addresses only the stale-selection hazard on the image shape
-itself, independent of the passenger-hosting mechanism.
+Jess's own correction, direct quote: "whichever card is on top should be the parent." The new
+private `carryTuckedPartner(initial, current, zoneHit, selectedBeforeClear)`, called
+**unconditionally from `onTranslateEnd` on every settle** (not gated on a zone change — sliding a
+card within the same zone must still carry its tucked partner), decides host-ness fresh every
+time: `current.index > partner.index`. `index` (an `IndexKey`) only changes via an explicit
+reorder action or at shape creation — never from a plain translate — so it reliably reflects
+whichever card the player last sent to the back or brought to the front.
 
-**Test gotcha worth carrying forward: a 1×1 test image breaks a "drag from center" click.**
-A 1×1 image's four resize handles all coincide at the single pixel, so a click at the shape's
-center lands on a resize handle instead of the body — the gesture becomes a RESIZE
-(`onResizeEnd`) instead of a TRANSLATE (`onTranslateEnd`), and the fix looks like it's not
-working even though it is. Confirmed via an isolated debug script driving the editor directly
-(`getSelectedShapeIds()` and `props.w/h`/`flipX`/`flipY` before/after drag): a 1×1 image's drag
-silently resizes (`w`/`h` jumped to ~908, flip flags flipped); a 100×100 image's drag fires
-`onTranslateEnd` correctly and clears selection. **Any test dragging an image shape needs a
-reasonably sized test image (100×100+), never a 1×1 placeholder.**
+- **If I'm on top (`iAmOnTop`)**: I'm the host. Compute my own drag delta (`current.x - initial.x`,
+  `current.y - initial.y`) and write that same delta onto the partner's `x`/`y` directly via
+  `editor.updateShape` — free page-transform composition is gone (that composition is exactly
+  the mechanism that trapped a passenger in front of its host forever in the broken design), so
+  the carry is now hand-rolled. Leaving the battlefield (`NON_BATTLEFIELD_ZONES`) untucks the
+  passenger instead of carrying it — it stays exactly where it was, since it was never carried
+  there.
+- **If I'm not on top**: I'm the passenger, dragged on my own (not carried by the host's drag).
+  A small in-place nudge that still overlaps the host (`Box.collides`) keeps the tuck link; moving
+  far enough to stop overlapping untucks — the same "small nudge doesn't detach, a big drag away
+  does" feel as before, now driven by geometry instead of tldraw's `onDragShapesOut` (which no
+  longer fires for cards at all, since they're not really parented).
+- **Both cards dragged together in one multi-select gesture**: `selectedBeforeClear` (captured
+  *before* `onTranslateEnd`'s `setSelectedShapes([])` clear — see below) includes the partner, so
+  `carryTuckedPartner` returns immediately — tldraw's own per-shape translation already moved both
+  correctly; propagating the delta again would double it.
 
-Regression test: `apps/tabletop/test/verification/verify-image-selection.spec.ts` — places a
-card via the `card.played` scaffolding endpoint, drops a 100×100 canvas-rendered PNG via a
-simulated `drop` DOM event carrying a `DataTransfer`/`File` (mirroring how `TablePage.tsx`'s
-`inlineAssets.upload` handles a real paste/drop — no server involved), drags the image to a
-neutral spot (no test-side `deselectAll`, so the assertion proves the product's behavior, not
-the test's), then drags the card and asserts the card — not the image — moved. All 43
-Playwright specs and 100 vitest unit tests pass.
+`onTranslateEnd` now captures `selectedBeforeClear = this.editor.getSelectedShapeIds()` *before*
+the unconditional `setSelectedShapes([])` clear (watch point 1's cleanup), specifically so
+`carryTuckedPartner` can see whether the tuck partner was part of the same drag gesture.
 
-## Ticket 20: cards can tuck behind cards — a third passenger type that is NOT cosmetic (landed 2026-08-10)
+### The welcome simplification: tapping a card can no longer rotate another card at all
 
-`.scratch/tabletop-physics/issues/20-cards-behind-cards.md`. `PASSENGER_TYPES` widens a third time
+Since there's no real parenting between two cards, a host's tap has zero effect on its tucked
+passenger's transform — tldraw never composes a rotation into a shape that isn't its child. This
+deletes an entire subsystem outright:
+
+- `apps/tabletop/src/client/shapes/cardTap.ts` loses `passengerTapCompensation`,
+  `passengerCompensationPartials`, and the `directIds`-based dedup logic in `onClick` and
+  `tapPartialsForCards` that existed only to keep ride-along compensation from colliding with a
+  passenger's own direct tap. `tapPartialsForCards` is back to a plain
+  `(cards: MtgCardShape[], tapped: boolean) => TLShapePartial<MtgCardShape>[]` with no `Editor`
+  parameter.
+- `apps/tabletop/test/passengerTapCompensation.test.ts` is deleted — it tested the now-deleted
+  function's `Mat`-based math.
+- `CardContextMenu.tsx`'s Tap/Untap item call site drops the now-unused `editor` argument:
+  `tapPartialsForCards(cards, anyUntapped)`.
+- `onClick`'s `queueMicrotask` propagation block is back to running only when other cards are
+  selected (`otherIds.length > 0`), not unconditionally — the "always run it, even solo, so a
+  solo tap's own passenger compensation still lands" reason from the broken design no longer
+  applies, because there is no passenger compensation.
+
+The two rotation-writing-hook exemptions the broken design needed (`onDragShapesIn`'s
+zero-rotation-on-attach loop skipping `mtg-card`, `evictPassengers`' hardcoded `rotation: 0`
+skipping card passengers) are **moot, not reverted** — they were needed only because a tucked card
+used to be a real child whose rotation carried tapped-state meaning through `reparentShapes`'
+page-rotation preservation. With no `parentId` between two cards, neither hook's rotation-writing
+logic is ever reached for a tucked card in the first place; `onDragShapesIn`'s reparenting loop and
+`evictPassengers`' child-scan simply never see one.
+
+### A real tldraw bug found while testing the fix: right-click preserves a stale selection
+
+`node_modules/tldraw/src/lib/tools/SelectTool/childStates/Idle.ts`'s `onRightClick` preserves the
+**current** selection when the right-click's page point falls inside that selection's bounds —
+deliberately, per its own comment, "so that right-clicking inside the selection preserves it, even
+when a filled shape sits behind it." With two overlapping tucked cards, right-clicking card A's
+pixel while card B is still selected from an earlier drag resolves the context menu to B, not A —
+even though the click point is visually on A and `document.elementFromPoint` would say so too.
+Found writing the reorder-swap Playwright test (right-clicking A immediately after tucking B onto
+it kept operating on B). Fixed test-side (click empty canvas to deselect before right-clicking the
+intended target) rather than product-side — this is tldraw's own selection semantics, not a bug in
+this app's code — but it's a real, reusable trap for any future test or feature that right-clicks
+a shape while a *different*, bounds-overlapping shape might still be selected. New watch point in
+`interactions.md`.
+
+### Playwright fact carried forward from the broken design's own testing
+
+Dropping two cards via `zoneHint: "stack"` puts same-seat cards only ~36px apart in page units —
+at zoom-to-fit they render almost fully overlapping on screen, reliably triggering the tldraw
+`PointingShape` stale-selection hazard (watch point 1) for the *test's own drags*, not a product
+bug. `verify-cards-behind-cards.spec.ts` uses `zoneHint: "battlefield"` instead and pulls the
+grab/click point well clear of any overlap — a few px of gap isn't reliably enough headroom
+against tldraw's hit-testing tolerance. Unchanged by the redesign; still true of the rewritten
+test file.
+
+### Registration
+
+Still no new registration step: `mtg-card` was already registered (ticket 12), and `PASSENGER_TYPES`
+and `TUCK_KEY` are both plain client-side constructs, not part of the tldraw schema.
+
+### Superseded content, kept for the record
+
+The rest of this section, below, described the broken real-parenting design's matrix-based tap
+compensation. Left in place (rather than deleted) because `history.md`'s ticket 20 entry
+references it as the concrete "here's what didn't work and why" — read it as history, not as
+current behavior. Everything above is what's actually live.
+
+---
+
+**[SUPERSEDED — do not treat as current]** `PASSENGER_TYPES` widens a third time
 — `new Set(["mtg-counter", "note", "mtg-card"])` — so a card can host another `mtg-card` the same
 way it hosts counters and notes: pure tldraw parenting, mediated by the same drag hooks, no new
 mechanism. Z-order control ("send backward"/"send to back" for the tucked card) is free from the

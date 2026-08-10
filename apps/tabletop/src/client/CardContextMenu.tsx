@@ -97,7 +97,7 @@ function CardMenuItems() {
       <TldrawUiMenuItem
         id="mtg-card-tap"
         label={anyUntapped ? "Tap" : "Untap"}
-        onSelect={() => commit(tapPartialsForCards(editor, cards, anyUntapped), "tap")}
+        onSelect={() => commit(tapPartialsForCards(cards, anyUntapped), "tap")}
       />
     </TldrawUiMenuGroup>
   );
