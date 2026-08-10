@@ -247,13 +247,57 @@ Consequences worth holding:
 Many of the Shuffler's remaining catch blocks already do step 1 well (the game-loading middleware
 is a good example); for those the conversion is only step 2. Re-stamping is noise.
 
-**Manual span creation is almost nonexistent.** Across all three ships there are ~5 call sites:
-`apps/tabletop/src/server/server.ts:89` (`tracer.startActiveSpan("ws connect", {kind: SpanKind.SERVER}, …)`,
-hand-rolled), `apps/tabletop/src/client/TablePage.tsx:47`, `apps/tabletop/src/client/useCardArrivalSpans.ts:21`,
-plus `inSpan` itself. **The Shuffler creates zero manual spans** — it lives entirely off
-auto-instrumentation plus stamping attributes onto whatever span already exists. That is why
-`markCurrentSpanAsError` / `setCommonSpanAttributes` matter so much, and why anything that removes
-the ambient span (see Watch points) is dangerous here.
+**Manual span creation is almost nonexistent.** Across all three ships there are a handful of call
+sites: `apps/tabletop/src/server/server.ts:89` (`tracer.startActiveSpan("ws connect", {kind:
+SpanKind.SERVER}, …)`, hand-rolled), `apps/tabletop/src/client/TablePage.tsx:47`,
+`apps/tabletop/src/client/useCardArrivalSpans.ts:21`, plus `inSpan` itself. **The Shuffler creates
+zero manual spans** — it lives entirely off auto-instrumentation plus stamping attributes onto
+whatever span already exists. That is why `markCurrentSpanAsError` / `setCommonSpanAttributes`
+matter so much, and why anything that removes the ambient span (see Watch points) is dangerous
+here.
+
+**`usePhysicsAnnouncements.ts` (tabletop-physics ticket 21, 2026-08-10) generalized this pattern
+from one span to a whole vocabulary.** `useCardArrivalSpans.ts` was `store.listen()` → `inSpan()`
+for exactly one named event ("card arrived on canvas"); the new hook is the same shape fanned out
+across many kinds of tldraw store mutations — `card.tapped`/`card.untapped`, `card.flipped`,
+`card.turnedFaceDown`, `card.zoneMoved`, `counter.attached`, `noteAttached`, plus a generic
+`shape.created`/`shape.moved`/`shape.changed` fallback for anything physics has no name for yet.
+Both hooks are wired side by side in `TablePage.tsx`. Worth carrying forward if a third such hook
+is added:
+
+- **Filter by `source`, not by re-deriving "was this me."** `useCardArrivalSpans` listens with
+  `{ source: "remote" }` (server-authored arrivals); `usePhysicsAnnouncements` listens with
+  `{ source: "user" }` — a remote peer runs the same hook locally and announces its own gestures
+  under its own actor, so no cross-client attribution logic is needed here at all.
+- **Every span carries `actor: TAB_ID`** (tldraw's own per-session sync id, re-exported from the
+  `"tldraw"` package), the same per-tab correlation idea as the Shuffler's browser bootstrap
+  (`game.browser_tab_id`) — different mechanism, same purpose: which browser tab did this.
+- **Not every store diff can announce immediately.** Named gestures (tap, flip, zone move) come
+  from single-shot writes (`onClick`, `onTranslateEnd`, `onDragShapesIn`) and fire straight off the
+  diff. The generic `shape.moved`/`shape.changed` fallback cannot: tldraw's `Translating.ts`
+  writes fresh x/y to the document store on **every pointer-move** during a drag, with no
+  batching to settle (confirmed via the `tabletop-shape-mechanics` owner) — so only that fallback
+  path debounces 300ms per shape id (`GENERIC_SETTLE_MS`); the named paths stay immediate.
+  Detection itself still lives where each gesture's own hook already computes it (in
+  `MtgCardShapeUtil`); this listener only watches the resulting mutations and translates them —
+  it never re-implements gesture detection, so it can't drift out of sync with what physics
+  actually does.
+- The same change deleted a `console.log("zone-entry ...")` from `MtgCardShapeUtil.onTranslateEnd`
+  — a ticket-01 descoped stand-in, no longer needed now that `card.zoneMoved` covers zone entry
+  through this pattern. One more instance of "never `console.log` for this, use `inSpan`."
+
+**Verification gap, recorded rather than silently skipped.** This change could not be confirmed
+against a live Honeycomb trace, because `npx tsc --noEmit` in `apps/tabletop` currently fails —
+confirmed directly while reviewing this change, in `src/client/observability/index.ts:93`
+(`processors: [new BatchLogRecordProcessor({ exporter: ... })]`), not `tracing.ts:64` as first
+suspected. Same root cause either way: this worktree has no root `node_modules` (`apps/tabletop`'s
+own `node_modules` exists, the repo root's doesn't), so `tsc` walks up and resolves the main
+checkout's hoisted 0.219 sdk-logs types against this ship's correct 0.221 options-object shape —
+the exact phantom-error mechanism already on record below ("History", 2026-08-09) and in
+`notes/AGENT-NOTES.md`. **The fix is `npm install` from the worktree root, never a code change to
+either line.** Until that's run, nothing in this ship can be typechecked or built from this
+worktree, so `usePhysicsAnnouncements.ts`'s spans remain unverified in Honeycomb — check them once
+the install has happened.
 
 ### The Spine's sampler: the first Ruby precedent (`spine-sampler`, 2026-08-10)
 
@@ -636,6 +680,16 @@ claim something is verified. (The Tabletop's browser `logError()` does have real
 its own `window.onerror`/`unhandledrejection` handlers at
 `apps/tabletop/src/client/observability/index.ts:130,135` — this row just predates that wiring.)
 
+- tabletop-physics ticket 21 (2026-08-10), "announce physics gestures to Honeycomb" —
+  `usePhysicsAnnouncements.ts` generalized `useCardArrivalSpans.ts`'s `store.listen()` → `inSpan()`
+  pattern from one named span to a whole gesture vocabulary, filtered to `source: "user"` and
+  actor-stamped with `TAB_ID`; a generic settled-motion fallback debounces 300ms because
+  `Translating.ts` writes on every pointer-move. Deleted the last `console.log`-as-telemetry
+  stand-in in `MtgCardShapeUtil.onTranslateEnd`. Could not be verified live in Honeycomb this pass
+  — see the new "Verification gap" note above, in the wiring-table entry for this hook — because
+  the worktree's missing root `node_modules` produces the phantom-TS-types failure this file
+  already documents (2026-08-09), now confirmed a second time at a second call site
+  (`src/client/observability/index.ts:93` rather than `tracing.ts:64`).
 - `19e1bdf` (2026-08-10) "Flush OTel telemetry on shutdown in the Tabletop server" — closed the
   gap this file's Watch points had flagged since the Shuffler's own fix (`08-no-shutdown-flush-hook`,
   2026-08-07): the Tabletop's `tracing.ts` had no SIGTERM/SIGINT handler, so `verify.sh`'s

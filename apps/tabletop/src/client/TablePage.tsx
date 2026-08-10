@@ -18,6 +18,7 @@ import { useSync } from "@tldraw/sync";
 import { setGlobalAttrs, currentTraceparent, inSpan } from "./observability";
 import { chooseLicenseKey } from "./chooseLicenseKey";
 import { useCardArrivalSpans } from "./useCardArrivalSpans";
+import { usePhysicsAnnouncements } from "./usePhysicsAnnouncements";
 import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
 import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
 import { MtgCounterTool } from "./shapes/MtgCounterTool";
@@ -157,6 +158,7 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
   const store = useSync({ uri, assets: inlineAssets, shapeUtils });
 
   useCardArrivalSpans(store);
+  usePhysicsAnnouncements(store);
 
   if (store.status === "error") {
     return (
