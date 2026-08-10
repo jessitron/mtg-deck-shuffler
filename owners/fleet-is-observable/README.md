@@ -231,7 +231,8 @@ Consequences worth holding:
 | `apps/tabletop/src/server/shutdownHooks.ts`           | **A verbatim port of the Shuffler's `shutdownHooks.ts`** (2026-08-10, `19e1bdf`) — same `installShutdownHandlers(drain, options)` signature and logic (bounded drain via `Promise.race` against an `unref()`'d timer, exactly-once exit, injectable `signalSource`/`exit` for tests, log-agnostic `onTimeout`/`onDrainError`). Wired into `tracing.ts` using the Tabletop's own `log.ts` for the callbacks. Ported rather than shared, per the fleet's `tracing.ts`/`log.ts` duplication convention — the logic itself is version/framework-agnostic (just `EventEmitter`, `Promise.race`, `setTimeout().unref()`), so it needed no adaptation beyond the header comment. Tested in `apps/tabletop/test/shutdownHooks.test.ts` (adapted copy of the Shuffler's test, same 5 cases: drain-then-exit, bounded timeout, drain rejection, exactly-once on double signal, SIGINT). This closes the last open half of Invariant-adjacent shutdown coverage — both Node ships now flush their last OTel batch on SIGTERM/SIGINT instead of losing it. |
 | `apps/shuffler/src/view/common/html-layout.ts`        | **The Shuffler's browser telemetry bootstrap — single-sourced since arch ticket 06 (`b268414`, 2026-08-08).** `formatHtmlHead(options)` is the one page shell: every Shuffler page's `<head>` — EJS pages via `views/partials/head.ejs` (a thin adapter reached through `app.locals`) and TS pages (`/game`, error pages) via `formatPageWrapper` — comes from here, so the bootstrap appears exactly once and cannot diverge again. Since `33b54d3` (2026-08-10) the guard+init is `initHoneycombTracing(apiKey)`, shipped as the exported literal string `HONEYCOMB_TRACING_INIT_SCRIPT`, tested by evaling that exact string in `apps/shuffler/test/html-layout-tracing-guard.test.ts`. See "The Shuffler's browser bootstrap" below for the script order, the ordering constraint, the guard (now key-aware), and the apiKey fallback.                                                                                                                                                              |
 | `apps/tabletop/src/client/observability/index.ts`     | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific". Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
-| `services/spine/config/initializers/opentelemetry.rb` | Ruby, ~4 effective lines: `SDK.configure` + `use_all`. No wrapper. Rack instrumentation extracts inbound W3C context, so a Shuffler-initiated trace continues through event ingestion. In test nothing is configured and the SDK exports nowhere — fine by design.                                                                                                                                                                                    |
+| `services/spine/config/initializers/opentelemetry.rb` | Ruby: `SDK.configure` + `use_all`, then (since `spine-sampler`, 2026-08-10) `OpenTelemetry.tracer_provider.sampler = OpenTelemetry::SDK::Trace::Samplers.parent_based(root: TelemetrySampler::BackgroundChatterSampler.new)`. No wrapper. Rack instrumentation extracts inbound W3C context, so a Shuffler-initiated trace continues through event ingestion. In test nothing is configured and the SDK exports nowhere — fine by design.                                                                                                                                                                                    |
+| `services/spine/lib/telemetry_sampler.rb`             | **First Ruby sampler in the fleet**, ported from the Shuffler's `telemetry-sampler.ts` — same `CHATTER_SAMPLE_RATIO = 0.01`, same "trickle, not zero" reasoning (a failing probe should stay visible). `TelemetrySampler.background_chatter?(attributes)` matches `kube-probe`/`elb-healthchecker` in the user-agent, or path exactly `/up`/`/rails/health` (query string stripped). Reads **both** semconv spellings per Invariant 4: `http.user_agent`/`user_agent.original`, `http.target`/`url.path`. `TelemetrySampler::BackgroundChatterSampler` duck-types `OpenTelemetry::SDK::Trace::Samplers`' interface (`description`, `should_sample?(trace_id:, parent_context:, links:, name:, kind:, attributes:)`) and delegates to `Samplers.trace_id_ratio_based(1.0)` or `.trace_id_ratio_based(CHATTER_SAMPLE_RATIO)`. Unit tested in `test/lib/telemetry_sampler_test.rb` (Minitest): both semconv spellings, non-matching cases, and a 2000-trace-id spread test on the sampler class. |
 | `apps/shuffler/test/harness-telemetry/`               | **The fourth init path, and the first that isn't a ship** — the verify suite tracing itself. `harnessTracing.ts` (provider), `spanPlan.ts` (pure + tested), `otelReporter.ts` (Playwright reporter). Service `mtg-fleet-verify`. See "Dev-tooling telemetry" below.                                                                                                                                                                                    |
 
 **The house pattern for a failure path**, established at `apps/shuffler/src/app.ts` `POST /deck`
@@ -253,6 +254,36 @@ plus `inSpan` itself. **The Shuffler creates zero manual spans** — it lives en
 auto-instrumentation plus stamping attributes onto whatever span already exists. That is why
 `markCurrentSpanAsError` / `setCommonSpanAttributes` matter so much, and why anything that removes
 the ambient span (see Watch points) is dangerous here.
+
+### The Spine's sampler: the first Ruby precedent (`spine-sampler`, 2026-08-10)
+
+Until this change the Spine had **no sampler at all** — `use_all` traced every request at
+100%, including the k8s liveness/readiness probe hitting `GET /up` on a 30-60s cycle
+(`k8s/deployment.yaml`), roughly half of all Spine spans. `lib/telemetry_sampler.rb` +
+`config/initializers/opentelemetry.rb` close that gap, and establish how a custom Ruby
+sampler gets installed on this stack — worth copying verbatim the next time a Ruby service
+needs one.
+
+**There is no in-block `sampler=` option on `SDK.configure`.** Confirmed by reading the
+installed gem source (opentelemetry-sdk 1.13.0): `Configurator#configure` has no
+`sampler=`/`trace_config=` setter. The supported extension point is
+`OpenTelemetry.tracer_provider.sampler =`, set **after** `configure` runs — `TracerProvider#sampler`
+(`trace/tracer_provider.rb`) is a plain `attr_accessor` read fresh on every
+`internal_start_span` call, so assigning it once `OpenTelemetry.tracer_provider` exists takes
+effect immediately, no restart or re-`configure` needed. This is the Ruby analogue of the two
+Node ships passing a `sampler:` option into `NodeSDK`'s constructor — different mechanism
+(post-hoc assignment vs. constructor option), same place in the pipeline (root sampler on the
+tracer provider), same reason to wrap in `parent_based(root: ...)` so a request that already
+carries a sampled remote parent isn't re-sampled down.
+
+**Confirmed Rack instrumentation attribute names** (`opentelemetry-instrumentation-rack`
+0.31.1, read from `middlewares/old/event_handler.rb#request_span_attributes`): `http.method`,
+`http.host`, `http.scheme`, `http.target` (path **+** query string), `http.user_agent` (only
+set if the header is present) — the old-style semconv names. This is why
+`TelemetrySampler.background_chatter?` checks `http.user_agent`/`http.target` first and falls
+back to `user_agent.original`/`url.path` (Invariant 4): today's gem only emits the old names,
+but the fallback means a future instrumentation-gem bump to stable semconv can't silently stop
+this sampler from matching.
 
 ### The Shuffler's browser bootstrap (one shell, `html-layout.ts`)
 
@@ -617,6 +648,17 @@ its own `window.onerror`/`unhandledrejection` handlers at
 
 ## History (why these rules exist)
 
+- `spine-sampler` (2026-08-10) — the Spine got its first sampler, closing the gap this file's
+  wiring table had flagged ("No wrapper", implicitly 100%-sample-everything). Ported the
+  Shuffler's `BackgroundChatterSampler` shape into `lib/telemetry_sampler.rb`; wired via
+  `OpenTelemetry.tracer_provider.sampler =` set right after `SDK.configure` runs, since
+  `Configurator#configure` has no in-block sampler setter (confirmed against the installed gem
+  source, opentelemetry-sdk 1.13.0). Also confirmed the Rack instrumentation's actual
+  span-start attribute names (`http.method`/`http.host`/`http.scheme`/`http.target`/`http.user_agent`,
+  opentelemetry-instrumentation-rack 0.31.1) rather than assuming semconv parity with the Node
+  ships. 13 new Minitest cases, all passing; the pre-existing `bin/rails test` failure count
+  (14 failures / 17 errors, an unrelated envelope-contract issue, confirmed via `git stash`)
+  was unchanged by this work. See README → "The Spine's sampler: the first Ruby precedent."
 - `469a1ba` "A2: OTel from the first commit" — the Tabletop got server tracing + the browser
   wrapper + collector-or-local-fallback config in its **first** commit. `312f335` likewise for the
   Spine. This is the value in practice, not just in SEAMAP.
