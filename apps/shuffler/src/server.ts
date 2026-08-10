@@ -12,6 +12,8 @@ import { SqliteCardRepositoryAdapter } from "./port-card-repository/SqliteCardRe
 import { ScryfallCardImagesGateway } from "./port-card-images/ScryfallCardImagesGateway.js";
 import { TabletopPort } from "./port-tabletop/types.js";
 import { HttpTabletopGateway } from "./port-tabletop/HttpTabletopGateway.js";
+import { SpinePort } from "./port-spine/types.js";
+import { HttpSpineGateway } from "./port-spine/HttpSpineGateway.js";
 import { createApp } from "./app.js";
 import { log } from "./log.js";
 
@@ -70,7 +72,13 @@ const tabletopUrl = process.env.TABLETOP_URL || "http://localhost:5180";
 log.info("Sending played cards to tabletop (for games at a table)", { "tabletop.url": tabletopUrl });
 const tabletopPort: TabletopPort = new HttpTabletopGateway(tabletopUrl);
 
-const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository, tabletopPort);
+// Best-effort: card.played also goes to the Spine's event log (services/spine),
+// alongside (never instead of) the Tabletop send. See src/port-spine/sendToSpine.ts.
+const spineUrl = process.env.SPINE_URL || "http://localhost:4600";
+log.info("Sending card.played to the Spine's event log (for games at a table)", { "spine.url": spineUrl });
+const spinePort: SpinePort = new HttpSpineGateway(spineUrl);
+
+const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository, tabletopPort, spinePort);
 const PORT = process.env.PORT || 3333;
 
 

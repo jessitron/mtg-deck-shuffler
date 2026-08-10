@@ -243,6 +243,19 @@ version bumps). `/restart-game` carries them forward.
   default `https://table.jessitron.honeydemo.io`), `SHUFFLER_PUBLIC_URL` (JES-140 — lets
   the Tabletop hotlink the standard card-back image as an absolute URL; default
   `https://mtg.jessitron.honeydemo.io`).
+- **Spine (`src/port-spine/`)**: alongside the Tabletop send, `/play-card` and
+  `/discard-card` also send `card.played` to the Spine's event log
+  (`services/spine`), **best-effort** — a Spine that's down must not block a
+  play; failure is a span attribute + `log.warn`, same shape as `seat.joined`'s
+  best-effort send. `HttpSpineGateway` (real) / `FakeSpineGateway` (tests)
+  implement `SpinePort`; `sendCardPlayedToSpineBestEffort`
+  (`src/port-spine/sendToSpine.ts`) looks up or creates the table by name on
+  every call (`GET /tables/lookup`, `POST /tables` on 404) rather than caching
+  the Spine-minted `tableId` on persisted state. **Env**: `SPINE_URL`, default
+  `http://localhost:4600`. **Known gap**: no Spine seat is registered
+  (`POST /tables/:id/seats`) — the Shuffler has no numbered-seat (1-4) concept
+  yet, and Spine's `seat.taken` requires one; `initiator` just carries the
+  Shuffler's own `seatId`/`playerName`, unregistered on the Spine side.
 - **Identity**: each GameCard gets a `cardInstanceId` GUID (minted in `newGame`,
   mint-on-load for old saves). `gameCardIndex` crosses the Shuffler's boundary freely
   now — `card.played` sends it (`buildCardPlayedEvent`, `src/port-tabletop/types.ts`).

@@ -14,6 +14,8 @@ import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
 import { TabletopPort, ZoneHint } from "./port-tabletop/types.js";
 import { sendCardToTableFirst, sendSeatJoinedBestEffort, zoneHintForPlay } from "./port-tabletop/sendToTable.js";
+import { SpinePort } from "./port-spine/types.js";
+import { sendCardPlayedToSpineBestEffort } from "./port-spine/sendToSpine.js";
 import { formatTabletopSendErrorModal } from "./view/play-game/game-modals.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { log } from "./log.js";
@@ -38,7 +40,8 @@ export function createApp(
   persistStatePort: PersistStatePort,
   persistPrepPort: PersistPrepPort,
   cardRepository: CardRepositoryPort,
-  tabletopPort?: TabletopPort
+  tabletopPort?: TabletopPort,
+  spinePort?: SpinePort
 ): express.Application {
   const app = express();
 
@@ -151,6 +154,7 @@ export function createApp(
       log.error(`Tabletop did not accept the card; blocking the ${action}`, attributes, error as Error);
       throw new TableSendFailedError(formatTabletopSendErrorModal(action, card.card.name, game.tableName!));
     }
+    await sendCardPlayedToSpineBestEffort(spinePort, game, card, zoneHint);
   }
 
   // Renders a CommandOutcome from applyGameCommand. Shared by every route
