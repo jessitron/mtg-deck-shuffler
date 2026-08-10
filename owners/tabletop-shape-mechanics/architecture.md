@@ -496,6 +496,41 @@ to `DefaultToolbarContent`) passed through `components`. Sync registration is th
 places: the `useSync` `shapeUtils` const, `<Tldraw shapeUtils>`, and `rooms.ts`'s
 `createTLSchema` shapes map.
 
+### Ride-along tap catch-up: a passenger animating its host's tap needs to read the store, not the `shape` argument (added 2026-08-10)
+
+Ticket 15's tap catch-up (`65276e6`) is a purely local WAAPI illusion on the CARD's own
+`.tl-image-container`, keyed off `props.tapped` changing — it has no equivalent for a hosted
+`mtg-counter`, which has no `props.tapped` of its own. tldraw already composes the host's
+rotation into the counter's page transform for free (the "tilt along" visual above), so the
+counter's *position* was never wrong; what was missing was replaying the *card's own* 500ms
+ease-out illusion on the counter's *own* DOM node, or it just snapped to the new angle a frame
+before the card's div started easing back.
+
+`MtgCounterShapeUtil.component()` now has a second `useValue`, `hostCardTapped`, whose selector
+does two chained store reads: `this.editor.getShape(shape.id)` for this counter's own current
+record (to get a fresh `parentId`), then `this.editor.getShape(parentId)` for the host's
+`props.tapped`. A `useLayoutEffect` keyed on that value plays the identical
+counter-rotate-then-ease-to-0 animation (500ms, ease-out) on the same `rideAlongRef`
+`.tl-image-container` div the pointer-events fix already wraps content in — seeded with the
+mount-time value via a `prevHostTappedRef`, exactly like the card's own `prevTappedRef`, so
+arriving already attached to a tapped card, or being dragged onto/off a card (a
+defined↔undefined transition), doesn't spuriously animate; only an actual tapped-value flip on
+an already-attached host does.
+
+**New general fact about `component()`'s reactivity, not specific to counters**: a ShapeUtil's
+`component(shape)` is only re-invoked with a *fresh* `shape` object when that shape's own
+`props` change. A bare `parentId`/`x`/`y`/`rotation` write — which is exactly what a drag-attach
+or a host's tap produces — is applied to the wrapping page-transform outside React and never
+triggers a re-render. So closing over `shape.parentId` (or any field on the outer `shape`
+argument other than `props`) inside a `useValue` selector captures a value frozen at whatever
+the shape's last props-triggered render saw — it will not update on reparent or on watching an
+ancestor's props change. The fix, demonstrated here: read the shape fresh from the editor
+*inside* the selector (`this.editor.getShape(shape.id)`), not from the closed-over argument —
+that's a genuine reactive signal read through the store, so `useValue` correctly re-runs whenever
+the underlying record (or, chained, its parent's record) changes. Any future passenger-side hook
+that needs to react to its *own* current parentId, or to an ancestor's props, needs this same
+"read the editor inside the selector" shape. New watch point 20 in `interactions.md`.
+
 ### Playwright facts discovered (belong to anyone testing shapes)
 
 - **A creation click followed within tldraw's double-click window by a grab at the same point
@@ -503,6 +538,18 @@ places: the `useSync` `shapeUtils` const, `<Tldraw shapeUtils>`, and `rooms.ts`'
   a shape before dragging it (`verify-counter.spec.ts`'s `createCounter` helper).
 - **`.nth()` on shape testids is paint order, and paint order changes when a shape reparents** —
   drag from known creation points instead of trusting locator index stability across a reparent.
+- **At low zoom, a nearby passenger's hit-test margin can steal a click aimed at the card's
+  exact center — even though `document.elementFromPoint` says "card."** (Found 2026-08-10,
+  fixing the ride-along tap-catch-up bug above.) tldraw's own hit-test
+  (`editor.getShapeAtPoint`/`getHoveredShapeId`) grows a shape's `hitTestMargin` in page-space as
+  zoom decreases (`hitTestMargin / zoomLevel`); after a whole-table `zoomToFit`, a counter
+  attached near a card's center can have a hit-test region reaching the card's own center pixel,
+  so a `page.mouse.click()` there resolves to the counter, not the card, inside tldraw's own
+  click handling — a pure test-construction hazard, not a product bug. `verify-counter.spec.ts`'s
+  `topGrip()` helper (grab the card's top ~12% instead of center) already exists for exactly this
+  reason; `verify-tap-animation.spec.ts` reuses the same pattern for its counter test. Any test
+  that taps/clicks a card that has (or might have) a counter/note/passenger-card attached should
+  grab near the top edge, not the center, especially at non-1:1 zoom.
 
 ## Ticket 19: notes ride along like counters — a stock ShapeUtil gains this owner's cleanup hook via subclass (landed 2026-08-10)
 

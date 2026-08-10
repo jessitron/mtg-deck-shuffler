@@ -122,13 +122,21 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   several selected cards moves them all to one destination." Read-only: writes nothing to the
   store. Imported by both `MtgCardShapeUtil.tsx` (`zoneAt()`, drag-settle) and
   `MtgZoneShapeUtil.tsx` (`component()`, live armed-glow rendering).
-- `apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx` — **new, ticket 18**: extends
-  `BaseBoxShapeUtil<MtgCounterShape>`. Deliberately no `onClick` (text editing is stock
-  double-click-to-edit via `canEdit()`, avoiding the selection-deferral quirk), but
-  `onTranslateEnd` still clears selection unconditionally (watch point 1's generalized cleanup).
-  `component()` renders the disc (or, while editing, an `<input>` with the `setTimeout(0)` focus
-  workaround, `markEventAsHandled` on pointer-down, and Enter/Escape → `editor.complete()`);
-  `isAspectRatioLocked()` keeps it square. Exports `COUNTER_SIZE` (44).
+- `apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx` — **new, ticket 18**; **gained a
+  ride-along tap-catch-up animation, 2026-08-10**: extends `BaseBoxShapeUtil<MtgCounterShape>`.
+  Deliberately no `onClick` (text editing is stock double-click-to-edit via `canEdit()`,
+  avoiding the selection-deferral quirk), but `onTranslateEnd` still clears selection
+  unconditionally (watch point 1's generalized cleanup). `component()` renders the disc (or,
+  while editing, a `<textarea>` with the `setTimeout(0)` focus workaround, `markEventAsHandled`
+  on pointer-down, and Enter/Escape → `editor.complete()`); `isAspectRatioLocked()` keeps it
+  square. Exports `COUNTER_SIZE` (44). Since 2026-08-10, `component()` also has a second
+  `useValue` (`hostCardTapped`) that reads this counter's own record and its host's
+  `props.tapped` back out of the editor *inside the selector* (not off the outer `shape`
+  argument — see watch point 20), and a `useLayoutEffect` that replays the card's own ticket-15
+  WAAPI catch-up (500ms ease-out counter-rotate-then-settle) on this shape's own
+  `.tl-image-container` whenever the host's tapped state flips — fixes "the counter didn't
+  participate in the tap animation, when the counter was on the card." See `architecture.md`'s
+  "Ride-along tap catch-up" subsection and `history.md`'s matching entry.
 - `apps/tabletop/src/client/shapes/MtgCounterTool.ts` — **new, ticket 18**: `StateNode` with id
   `"mtg-counter"`; click-to-place one counter at the pointer, then back to the select tool. The
   minimal creation affordance (flagged as an assumption in the ticket outcome).
@@ -302,6 +310,12 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   `verify-counter.spec.ts`'s Hazard-A test, deliberately without test-side selection cleanup so the
   assertion proves the product clears selection, not the test (watch point 18).
 
+- `apps/tabletop/test/verification/verify-tap-animation.spec.ts` — ticket 15's tap-animation
+  coverage; gained "a counter riding a tapped card animates along with it" (2026-08-10): attaches
+  a counter, taps/untaps the host via a `topGrip()` helper (this owner's low-zoom
+  hit-test-margin-vs-passenger caution, watch point 13g), and asserts the counter's own
+  `.tl-image-container` plays the 500ms WAAPI animation on each tap/untap, and does not on
+  attach alone.
 - `apps/tabletop/test/passengerTapCompensation.test.ts` — **new, ticket 20 (2026-08-10)**: unit
   tests for `cardTap.ts`'s `passengerTapCompensation`, pure `Mat`-based math, no `Editor`/store.
 - `apps/tabletop/test/verification/verify-cards-behind-cards.spec.ts` — **new, ticket 20**: 6
