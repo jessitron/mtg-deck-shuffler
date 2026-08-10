@@ -146,30 +146,30 @@ describe("buildSeatJoinedEvent commanders", () => {
   }
 
   it("omits commanders when none are given", () => {
-    const event = buildSeatJoinedEvent(initiator, "Test Deck");
-    expect(event.commanders).toBeUndefined();
+    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night");
+    expect(event.payload.commanders).toBeUndefined();
   });
 
   it("carries 0-2 commanders as {card:{scryfallId,instanceId}} plus scaffolding cardName/frontImageUrl/backImageUrl, no face", () => {
-    const event = buildSeatJoinedEvent(initiator, "Test Deck", undefined, undefined, undefined, [commanderCard(lightningBolt, "i-1")]);
-    expect(event.commanders).toHaveLength(1);
-    expect(event.commanders![0].card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: "i-1" });
-    expect(event.commanders![0].cardName).toBe(lightningBolt.name);
-    expect(event.commanders![0].frontImageUrl).toBeTruthy();
-    expect(event.commanders![0].backImageUrl).toBeNull(); // not twoFaced
-    expect(event.commanders![0]).not.toHaveProperty("face");
+    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night", undefined, undefined, undefined, [commanderCard(lightningBolt, "i-1")]);
+    expect(event.payload.commanders).toHaveLength(1);
+    expect(event.payload.commanders![0].card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: "i-1" });
+    expect(event.payload.commanders![0].cardName).toBe(lightningBolt.name);
+    expect(event.payload.commanders![0].frontImageUrl).toBeTruthy();
+    expect(event.payload.commanders![0].backImageUrl).toBeNull(); // not twoFaced
+    expect(event.payload.commanders![0]).not.toHaveProperty("face");
   });
 
   it("derives a commander's backImageUrl from twoFaced, same rule as card.played", () => {
-    const event = buildSeatJoinedEvent(initiator, "Test Deck", undefined, undefined, undefined, [commanderCard(nicolBolas, "i-2")]);
-    expect(event.commanders![0].backImageUrl).toContain("/back/");
+    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night", undefined, undefined, undefined, [commanderCard(nicolBolas, "i-2")]);
+    expect(event.payload.commanders![0].backImageUrl).toContain("/back/");
   });
 
   it("carries two commanders (partners)", () => {
-    const event = buildSeatJoinedEvent(initiator, "Test Deck", undefined, undefined, undefined, [
+    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night", undefined, undefined, undefined, [
       commanderCard(lightningBolt, "i-1"),
       commanderCard(nicolBolas, "i-2"),
     ]);
-    expect(event.commanders).toHaveLength(2);
+    expect(event.payload.commanders).toHaveLength(2);
   });
 });

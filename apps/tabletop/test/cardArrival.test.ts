@@ -38,12 +38,16 @@ function fakeTraceparent(): string {
 let eventCounter = 0;
 function cardPlayed(tableName: string, envelopeOverrides: Record<string, unknown> = {}, payloadOverrides: Record<string, unknown> = {}) {
   eventCounter++;
+  const initiator = (envelopeOverrides.initiator as { seatId: string; playerName: string } | undefined) ?? {
+    seatId: "seat-0000001",
+    playerName: "Jess",
+  };
   return {
     id: randomUUID(),
     tableId: tableName,
     name: "card.played",
     occurredAt: new Date().toISOString(),
-    initiator: { seatId: "seat-1", playerName: "Jess" },
+    initiator,
     occurredIn: "shuffler",
     visibility: "public",
     traceparent: fakeTraceparent(),
@@ -55,7 +59,7 @@ function cardPlayed(tableName: string, envelopeOverrides: Record<string, unknown
       frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
       backImageUrl: null,
       cardName: "Lightning Bolt",
-      owner: "seat-1",
+      owner: initiator.seatId, // owner (payload) has minLength 8 — mirrors the seatId sending it
       isCommander: false,
       ...payloadOverrides,
     },
@@ -96,7 +100,7 @@ describe("card arrival", () => {
       backImageUrl: null,
       face: "front",
       tapped: false,
-      owner: event.owner,
+      owner: event.payload.owner,
       isCommander: false,
     });
     const stack = stackBounds();
@@ -139,11 +143,11 @@ describe("card arrival", () => {
   it("allocates player areas per seatId in join order, keyed by seat not name", async () => {
     await post(
       "arrival-rows",
-      cardPlayed("arrival-rows", { initiator: { seatId: "seat-A", playerName: "Sam" } }, { zoneHint: "battlefield" })
+      cardPlayed("arrival-rows", { initiator: { seatId: "seat-AAAAAAA", playerName: "Sam" } }, { zoneHint: "battlefield" })
     );
     await post(
       "arrival-rows",
-      cardPlayed("arrival-rows", { initiator: { seatId: "seat-B", playerName: "Sam" } }, { zoneHint: "battlefield" })
+      cardPlayed("arrival-rows", { initiator: { seatId: "seat-BBBBBBB", playerName: "Sam" } }, { zoneHint: "battlefield" })
     );
     const shapes = shapesOf("arrival-rows");
     expect(shapes).toHaveLength(2);
