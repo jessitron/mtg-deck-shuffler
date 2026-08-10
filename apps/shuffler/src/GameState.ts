@@ -16,6 +16,7 @@ import { PersistedGameState, PERSISTED_GAME_STATE_VERSION, IncompatibleStateVers
 import { PrepId } from "./port-persist-prep/types.js";
 import { CardMove, GameEvent, GameEventLog, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
 import { trace } from "@opentelemetry/api";
+import { log } from "./log.js";
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { hydrateGameCards, dehydrateGameCards } from "./port-card-repository/hydration.js";
 
@@ -113,7 +114,9 @@ export class GameState {
   ) {
     if (deck.commanders.length > 2) {
       // TODO: make a warning function, somehow get it into WhatHappened?
-      console.log("Warning: Deck has more than two commanders. Behavior undefined");
+      const attrs = { "deck.commanders.count": deck.commanders.length };
+      trace.getActiveSpan()?.setAttributes(attrs);
+      log.warn("Deck has more than two commanders; behavior undefined", attrs);
     }
 
     // Combine all cards and sort alphabetically (maintaining existing invariant)
@@ -454,9 +457,15 @@ export class GameState {
       const identical = expected.type == actual.type && (expected as any).position == (expected as any).position;
       if (!identical) {
         warn(
-          `Warning! I'm supposed to move card ${move.gameCardIndex} (${gameCard.card.name}) from ${printLocation(
+          `I'm supposed to move card ${move.gameCardIndex} (${gameCard.card.name}) from ${printLocation(
             move.toLocation
-          )} but I found it in ${printLocation(gameCard.location)} `
+          )} but I found it in ${printLocation(gameCard.location)} `,
+          {
+            "game.move.game_card_index": move.gameCardIndex,
+            "card.name": gameCard.card.name,
+            "game.move.expected_location": printLocation(move.toLocation),
+            "game.move.actual_location": printLocation(gameCard.location),
+          }
         );
       }
     }
@@ -733,7 +742,7 @@ export class GameState {
 
     const newFace = gameCard.currentFace === "front" ? "back" : "front";
     if (gameCard.currentFace === newFace) {
-      warn(`Card ${gameCard.card.name} is already on face ${newFace}`);
+      warn(`Card ${gameCard.card.name} is already on face ${newFace}`, { "card.name": gameCard.card.name, "card.face": newFace });
     }
 
     // Update the current face without recording an event
@@ -873,6 +882,7 @@ export class GameState {
     };
   }
 }
-function warn(message: string) {
-  console.log(message);
+function warn(message: string, attributes: Record<string, string | number> = {}) {
+  trace.getActiveSpan()?.setAttributes(attributes);
+  log.warn(message, attributes);
 }

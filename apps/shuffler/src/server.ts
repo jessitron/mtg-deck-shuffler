@@ -13,16 +13,17 @@ import { ScryfallCardImagesGateway } from "./port-card-images/ScryfallCardImages
 import { TabletopPort } from "./port-tabletop/types.js";
 import { HttpTabletopGateway } from "./port-tabletop/HttpTabletopGateway.js";
 import { createApp } from "./app.js";
+import { log } from "./log.js";
 
 function createPersistStateAdapter(cardRepository: CardRepositoryPort): PersistStatePort {
   const adapterType = process.env.PORT_PERSIST_STATE;
 
   if (adapterType === "in-memory") {
-    console.log("Using in-memory persistence adapter");
+    log.info("Using in-memory persistence adapter");
     return new InMemoryPersistStateAdapter(cardRepository);
   } else {
     const dbPath = process.env.SQLITE_DB_PATH || "./data.db";
-    console.log(`Using SQLite persistence adapter (${dbPath})`);
+    log.info("Using SQLite persistence adapter", { "db.path": dbPath });
     return new SqlitePersistStateAdapter(dbPath, cardRepository);
   }
 }
@@ -31,11 +32,11 @@ function createPersistPrepAdapter(cardRepository: CardRepositoryPort): PersistPr
   const adapterType = process.env.PORT_PERSIST_PREP || process.env.PORT_PERSIST_STATE;
 
   if (adapterType === "in-memory") {
-    console.log("Using in-memory prep persistence adapter");
+    log.info("Using in-memory prep persistence adapter");
     return new InMemoryPersistPrepAdapter(cardRepository);
   } else {
     const dbPath = process.env.SQLITE_DB_PATH || "./data.db";
-    console.log(`Using SQLite prep persistence adapter (${dbPath})`);
+    log.info("Using SQLite prep persistence adapter", { "db.path": dbPath });
     return new SqlitePersistPrepAdapter(dbPath, cardRepository);
   }
 }
@@ -44,11 +45,11 @@ function createCardRepositoryAdapter(): CardRepositoryPort {
   const adapterType = process.env.PORT_CARD_REPOSITORY || process.env.PORT_PERSIST_STATE;
 
   if (adapterType === "in-memory") {
-    console.log("Using in-memory card repository adapter");
+    log.info("Using in-memory card repository adapter");
     return new InMemoryCardRepositoryAdapter();
   } else {
     const dbPath = process.env.SQLITE_DB_PATH || "./data.db";
-    console.log(`Using SQLite card repository adapter (${dbPath})`);
+    log.info("Using SQLite card repository adapter", { "db.path": dbPath });
     return new SqliteCardRepositoryAdapter(dbPath);
   }
 }
@@ -66,7 +67,7 @@ const persistPrepPort: PersistPrepPort = createPersistPrepAdapter(cardRepository
 // In production TABLETOP_URL is in-cluster DNS (http://mtg-tabletop-service);
 // locally the tabletop dev server listens on 5180.
 const tabletopUrl = process.env.TABLETOP_URL || "http://localhost:5180";
-console.log(`Sending played cards to tabletop at ${tabletopUrl} (for games at a table)`);
+log.info("Sending played cards to tabletop (for games at a table)", { "tabletop.url": tabletopUrl });
 const tabletopPort: TabletopPort = new HttpTabletopGateway(tabletopUrl);
 
 const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository, tabletopPort);
@@ -74,5 +75,5 @@ const PORT = process.env.PORT || 3333;
 
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  log.info("Server running", { "server.url": `http://localhost:${PORT}` });
 });
