@@ -520,3 +520,35 @@ consulted before payload shaping. What it settles in this territory:
 - Also: `envelope.v1` amended in place (free — zero conforming producers exist yet):
   `tableId` drops `format: uuid` (the table name IS the id pre-Spine), `initiator` becomes
   `{ seatId?, playerName }`.
+
+## Cards-Come-and-Go Ticket 05: Contract Validation Gets Real (2026-08-09)
+
+Implements the "contract validation gets real" line ticket 02 (above) predicted, plus two
+in-place schema amendments. `.scratch/tabletop-cards-come-and-go/issues/05-contract-validation-gets-real.md`.
+
+- **`contracts/payloads/card.played.v1.json` amended in place**: removed the unused `seat:
+  integer` field (dead weight since JES-128 — `seat` lives on `envelope.initiator.seatId`).
+  Promoted `frontImageUrl`/`backImageUrl`/`cardName` from off-schema scaffolding into real,
+  validated payload fields, per this owner's earlier review. `backImageUrl` is typed
+  `["string","null"]` and is now **required, never omitted** — `null` means no printed back
+  exists, per watch point 17.
+- **`contracts/payloads/seat.joined.v1.json` amended in place**: removed `seatId`/`playerName`
+  from the payload (now redundant with `envelope.initiator`).
+- **Both in-place edits used the same "zero conforming producers/consumers yet" exception
+  `envelope.v1` used at JES-128** — recorded explicitly in the ticket file as an exception,
+  not left to read as new default policy. The exception evaporates the moment a real
+  producer or consumer exists (most likely the Spine's ingestion).
+- **`apps/tabletop/src/server/cardArrival.ts` and `seatJoined.ts` now validate the whole
+  request body for real**, via new `apps/tabletop/src/server/contractValidation.ts` (ajv
+  `Ajv2020` + `ajv-formats`, loading schemas from `contracts/` at module load). This
+  retires the hand-rolled JES-128 `if`-chain `validationError` both files used to carry.
+  `additionalProperties: false` on every schema means a stray field (e.g. `gameCardIndex`)
+  can never arrive undetected.
+- **Flagged but NOT fixed**: `seat.joined`'s future `commanders` array (cards-come-and-go
+  ticket 02, not yet built) is documented to carry the same `cardName`/`frontImageUrl`/
+  `backImageUrl` trio off-schema, mirroring what `card.played` did before this ticket. This
+  ticket deliberately left that asymmetry as an explicit call for ticket 10 to make, rather
+  than silently inheriting either default (contractize it too, or state a reason it stays
+  scaffolding).
+- No `CardDefinition`, `GameCard`, or Shuffler-side change — this ticket is entirely in
+  `contracts/` and the Tabletop's two receivers.

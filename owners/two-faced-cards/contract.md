@@ -31,13 +31,21 @@ that doesn't match.
   contract's card reference. (The pre-Spine Shuffler→Tabletop scaffolding payload
   carries `imageUrl`/`cardName` for rendering without a Scryfall lookup — that is
   the scaffolding's business, explicitly not contract.)
-- **That scaffolding freedom is what makes unbaking the face free.** `imageUrl` is being
-  replaced by `frontImageUrl` + `backImageUrl: string | null` in the arrival payload
-  (ticket 02, 2026-08-07) so the Tabletop can flip client-side — and because those fields
-  are *scaffolding, not contract*, it is **zero contract churn**: two hand-edits, no
-  `card.played.v2.json`. Worth remembering as the general lesson: rendering conveniences
-  kept out of the contract can be reshaped at will; anything promoted into `contracts/`
-  cannot.
+- **That scaffolding freedom is what made unbaking the face free — until ticket 05
+  promoted it into the schema.** `imageUrl` was replaced by `frontImageUrl` +
+  `backImageUrl: string | null` in the arrival payload (ticket 02, 2026-08-07) so the
+  Tabletop can flip client-side, and at the time it was zero contract churn because those
+  fields were scaffolding, not contract. **cards-come-and-go ticket 05 (2026-08-09)
+  changed that**: `frontImageUrl`, `backImageUrl`, and `cardName` are now real,
+  validated properties in `contracts/payloads/card.played.v1.json` — `required`, not
+  optional (`backImageUrl` is typed `["string","null"]` and is **required, never
+  omitted**; `null` means no printed back exists, per watch point 17). They were
+  promoted **in place** on v1, not via a `card.played.v2.json` — see the new exception
+  below. Worth remembering as the general lesson, now with its boundary case attached:
+  rendering conveniences kept off-schema can be reshaped at will; the moment ajv is
+  asked to validate the whole body, "off-schema" stops being available, and promoting
+  them into the schema is itself a contract change — just one this repo chose to make
+  as an in-place edit rather than a version bump, for a stated, narrow reason (below).
 
 - **Sleeve color is seat data and stays out of card events** (decided table-layout
   ticket 11, built ticket 17, both 2026-08-08). Optional `sleeveColor` (hex,
@@ -49,6 +57,38 @@ that doesn't match.
   (six-hex-digit pattern on `sleeveColor`, the wins-over rule in the descriptions) —
   written in one session with the deck-name field, as predicted. The Tabletop's
   `seatJoined.ts` mirrors the pattern check and 400s a malformed sleeve.
+
+## Contract validation gets real — cards-come-and-go ticket 05 (2026-08-09)
+
+`.scratch/tabletop-cards-come-and-go/issues/05-contract-validation-gets-real.md`, landed. The
+Tabletop's `cardArrival.ts`/`seatJoined.ts` now validate the **whole request body** for real,
+via `apps/tabletop/src/server/contractValidation.ts` (ajv `Ajv2020`, loading schemas straight
+out of `contracts/` at module load) — replacing the hand-rolled `if`-chain `validationError`
+this KB had been citing since JES-128. That retirement, predicted in the ticket-02 entry below,
+has now happened.
+
+Two in-place schema edits landed as part of making that validation real, both using the
+**same exception `envelope.v1` used** (recorded explicitly in the ticket file, not left to
+read as a new default policy — "zero conforming producers/consumers exist yet" only holds
+pre-Spine, while these two endpoints are the only senders/receivers in the world):
+
+- **`card.played.v1.json`**: removed the `seat: integer` field (unused since `seat` lives on
+  the envelope's `initiator.seatId` — it had been dead weight since JES-128's first cut).
+  Promoted `frontImageUrl`/`backImageUrl`/`cardName` from off-schema scaffolding into real,
+  `required` payload properties (see above). `zoneHint`'s enum is unchanged in this ticket
+  (still `stack | battlefield | graveyard`; the `stack | battlefield` narrowing cards-come-and-go
+  ticket 02 predicted is a `card.discarded` build-time change, not part of ticket 05).
+- **`seat.joined.v1.json`**: removed `seatId`/`playerName` from the payload — both are now
+  redundant with `envelope.initiator`, same rationale as `card.played`'s `seat` removal.
+  `deckName`/`playmatImageUrl`/`cardBackImageUrl`/`sleeveColor` are unchanged.
+
+**Flagged, not fixed — a note for ticket 10.** `seat.joined`'s future `commanders` array
+(cards-come-and-go ticket 02's vocabulary decision, not yet implemented) is documented to carry
+the same `cardName`/`frontImageUrl`/`backImageUrl` trio *off-schema*, mirroring what
+`card.played` used to do before this ticket promoted its copy on-schema. Ticket 05 explicitly
+did **not** resolve that asymmetry — it flagged it. Whoever builds ticket 10 (`commanders`)
+needs to make an explicit call — contractize that trio the same way, or state a reason it stays
+scaffolding on `seat.joined` specifically — rather than silently inheriting either default.
 
 ## The vocabulary grew — cards-come-and-go ticket 02 (2026-08-08, `7b7f868`, decisions only)
 
@@ -69,11 +109,12 @@ Also decided there, adjacent to this owner's territory:
 - **`envelope.v1` is amended in place** (free exactly now — zero conforming producers or
   consumers exist): `tableId` drops `format: uuid` (pre-Spine, the table name IS the id),
   and `initiator` becomes the object `{ seatId?, playerName }`.
-- **Contract validation gets real in this map, not map 5**: every receiver the map touches
-  loads `contracts/` and validates on receipt (ajv-style), rejecting unknown name/version
-  loudly. This retires the hand-rolled "JES-128" `if`-chains, including
-  `apps/tabletop/src/server/cardArrival.ts`'s `validationError` — when that lands, the
-  "two edit sites" for payload changes become one schema file plus real validators.
+- **Contract validation gets real in this map** — decided here, **landed at ticket 05
+  (2026-08-09)**: both Tabletop receivers load `contracts/` and validate on receipt via ajv,
+  rejecting unknown name/version loudly. This retired the hand-rolled "JES-128" `if`-chains,
+  including `apps/tabletop/src/server/cardArrival.ts`'s `validationError` — the "two edit
+  sites" for payload changes are now one schema file plus one shared validator
+  (`apps/tabletop/src/server/contractValidation.ts`). See the ticket-05 section above.
 - **`seat.taken` vs `seat.joined` are two facts, not two names for one** — `seat.joined`
   (Shuffler→Tabletop: a seat's game connected, carrying how the player's stuff looks) vs
   `seat.taken` (Spine's own join flow). Documented, deliberately not unified; convergence
@@ -84,7 +125,14 @@ Also decided there, adjacent to this owner's territory:
 - Changing `face`'s shape (or the card reference) in `contracts/payloads/card.played.v1.json`
   is a payload schemaVersion bump: add a new `card.played.v2.json` file, never edit v1
   in place — the Spine resolves schemas by `<name>.v<schemaVersion>.json` filename and
-  old senders keep validating against v1.
+  old senders keep validating against v1. **The one standing exception**, used twice now
+  (`envelope.v1`'s JES-128 amendment, and ticket 05's edits to `card.played.v1.json` +
+  `seat.joined.v1.json`): while a schema has **zero conforming producers or consumers in
+  the world**, editing it in place is free — there's nothing to break. The instant a real
+  sender or receiver exists (the Spine's ingestion, most likely), this exception is gone
+  and every future change is a version bump. Don't generalize from these two edits to "in-
+  place edits are fine here" — they were fine *because* nothing depended on the old shape
+  yet, a fact that stops being true the moment the Spine starts consuming these payloads.
 
 - Adding a new card-referencing event kind? Ask "does this event reveal or choose a
   face?" If yes, `face` goes beside `card`, same shape as `card.played`. This rule now

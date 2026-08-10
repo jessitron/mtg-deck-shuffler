@@ -221,9 +221,19 @@ parent, not the reverse); there is **no seat/controller/owner field**; and `zone
 
 ## The arrival payload unbakes the face — implemented, ticket 12 (2026-08-08)
 
-Exactly as this owner recommended in ticket 02, with **zero contract churn**
-(`frontImageUrl`/`backImageUrl`/`cardName` are blessed scaffolding, not contract —
-`card.played.v1.json` carries only `card`, `face`, `initiator`, `occurredAt`):
+Exactly as this owner recommended in ticket 02, and at the time **zero contract churn**
+(`frontImageUrl`/`backImageUrl`/`cardName` were blessed scaffolding, not contract —
+`card.played.v1.json` carried only `card`, `face`, `zoneHint`). **Superseded 2026-08-09,
+cards-come-and-go ticket 05**: those three fields are now real, `required` properties
+on `card.played.v1.json` (promoted in place, using the same "zero conforming
+producers/consumers yet" exception `envelope.v1` used — see
+[contract.md](contract.md)'s ticket-05 section). The Tabletop's `cardArrival.ts` now
+validates the whole body against that schema via ajv
+(`apps/tabletop/src/server/contractValidation.ts`), replacing its own hand-rolled
+`validationError` if-chain. Nothing about *what* arrives changed — `frontImageUrl`,
+`backImageUrl: string | null`, `cardName` are the same fields with the same meanings;
+only the sender's freedom to reshape them without touching `contracts/` is gone now
+that they're on-schema.
 
 - **`imageUrl` → `frontImageUrl` + `backImageUrl: string | null`** — *replaced* it, not
   coexisting alongside it. A baked-face field left lying around would have been the bug
