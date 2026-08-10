@@ -124,9 +124,9 @@ section is just a wall between Jess and the live work.
     zone looks like, armed and at rest. Overlapping territory; that ticket decides zones, this
     decides whether the mat under them is fleet-owned. Link, don't merge.
 
-- SPEC'D `tabletop-view-rotation` — full spec at `.scratch/tabletop-view-rotation/spec.md`,
-  `Status: ready-for-agent`. Say "do ticket 01" (once `/to-tickets` has split it) or
-  "do `/to-tickets` on `tabletop-view-rotation`" to break it into tickets.
+- TICKETED `tabletop-view-rotation` — two tickets under `.scratch/tabletop-view-rotation/issues/`,
+  both `Status: ready-for-agent`: `01-local-view-rotation-controls.md` (no blockers) and
+  `02-counter-rotate-tldraw-chrome.md` (blocked by 01). Say "do ticket 01" to start.
 
 - GRILLING `tabletop-card-orientation` Cards and zones rotate in the shared document to face
   their owner's seat
