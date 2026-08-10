@@ -36,8 +36,17 @@
     "zoneHint": {
       "type": "string",
       "description": "Where the card is headed on the table (e.g. stack, battlefield, graveyard). A hint — geography, not rules."
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 8,
+      "description": "The seatId of the player this card belongs to. Grants no capability — any player can still move any card; it makes 'whose card is this' a fact the shape carries."
+    },
+    "isCommander": {
+      "type": "boolean",
+      "description": "Whether this card is one of its owner's commanders."
     }
   },
-  "required": ["card", "face", "seat", "zoneHint"],
+  "required": ["card", "face", "seat", "zoneHint", "owner", "isCommander"],
   "additionalProperties": false
 }

@@ -27,6 +27,15 @@ export interface MtgCardShapeProps {
    * game, never changed mid-game. null ⇔ unsleeved (today's bare look).
    */
   sleeveColor: string | null;
+  /**
+   * The seatId of the player this card belongs to (table-layout ticket 18).
+   * First-class, real domain state — but grants no capability: any player
+   * can still move any card. It just makes "whose card is this" a fact the
+   * shape carries, the same way face/faceDown are facts rather than gates.
+   */
+  owner: string;
+  /** Whether this card is one of its owner's commanders (table-layout ticket 18). */
+  isCommander: boolean;
 }
 
 // tldraw's documented mechanism for adding a custom shape to its `TLShape`
@@ -54,4 +63,6 @@ export const mtgCardShapeProps: RecordProps<MtgCardShape> = {
   faceDown: T.boolean,
   tapped: T.boolean,
   sleeveColor: T.string.nullable(),
+  owner: T.string,
+  isCommander: T.boolean,
 };

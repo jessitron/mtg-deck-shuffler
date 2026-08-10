@@ -40,6 +40,8 @@ function cardPlayed(overrides: Record<string, unknown> = {}) {
     frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
     backImageUrl: null,
     cardName: "Lightning Bolt",
+    owner: "seat-1",
+    isCommander: false,
     ...overrides,
   };
 }
@@ -77,6 +79,8 @@ describe("card arrival", () => {
       backImageUrl: null,
       face: "front",
       tapped: false,
+      owner: event.owner,
+      isCommander: false,
     });
     const stack = stackBounds();
     expect(shapes[0].x).toBeGreaterThanOrEqual(stack.x);
@@ -165,5 +169,19 @@ describe("card arrival", () => {
   it("rejects a payload carrying a gameCardIndex — the secret must not cross", async () => {
     const response = await post("arrival-secret", { ...cardPlayed(), gameCardIndex: 7 });
     expect(response.status).toBe(400);
+  });
+
+  it("rejects a payload missing owner or isCommander (ticket 18)", async () => {
+    const noOwner = await post("arrival-no-owner", { ...cardPlayed(), owner: undefined });
+    expect(noOwner.status).toBe(400);
+    const noIsCommander = await post("arrival-no-is-commander", { ...cardPlayed(), isCommander: undefined });
+    expect(noIsCommander.status).toBe(400);
+  });
+
+  it("carries isCommander:true through to the minted shape — owner grants no capability, it's a fact the shape carries", async () => {
+    await post("arrival-commander-flag", cardPlayed({ isCommander: true, zoneHint: "battlefield" }));
+    const [card] = shapesOf("arrival-commander-flag");
+    expect(card.props.isCommander).toBe(true);
+    expect(card.isLocked).toBe(false); // owner/isCommander gate nothing; the card is still draggable
   });
 });
