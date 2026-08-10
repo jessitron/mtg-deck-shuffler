@@ -68,6 +68,11 @@
         "required": ["card", "cardName", "frontImageUrl", "backImageUrl"],
         "additionalProperties": false
       }
+    },
+    "gameCardIndex": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Same field as card.played's gameCardIndex, allowed here for symmetry now that the guard is gone (let-gamecardindex-out, 2026-08-10) — unused today since seat.joined describes a seat, not a single card, but no longer specially forbidden either."
     }
   },
   "required": ["deckName"],

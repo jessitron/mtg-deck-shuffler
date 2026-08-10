@@ -57,8 +57,12 @@ How a card is serialized in any event payload, ever:
   biography shows exactly where. (The Shuffler's internal `gameCardIndex` is the
   embryo of this — it _is_ static for the life of a game, but it's assigned after
   sorting the deck alphabetically (`GameState.newGame`), so an index is the card's
-  alphabetical rank in a known decklist: **a decodable secret**. It must never cross
-  the Shuffler's boundary; the contract gets an opaque GUID instead.)
+  alphabetical rank in a known decklist. It used to be barred from crossing the
+  Shuffler's boundary as "a decodable secret" — reversed at `let-gamecardindex-out`
+  (2026-08-10): decklists are public on Archidekt anyway, so decoding the index
+  reveals nothing a trust-based table couldn't already look up, and the guard was
+  only making every future payload reason about what may cross. `card.played` now
+  sends it alongside the opaque instance GUID, not instead of it.)
 - Minting scope — **DECIDED: per game**, at game start (Jess confirmed "this
   game"). "Same physical card across game nights" (persisting instance ids into
   deck files) is a noted future upgrade, fragile today because deck files are

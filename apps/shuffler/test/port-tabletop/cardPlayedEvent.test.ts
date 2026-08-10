@@ -36,6 +36,7 @@ describe("buildCardPlayedEvent (the card.played envelope, JES-128)", () => {
     expect(event.payload.backImageUrl).toBeNull(); // not twoFaced
     expect(event.payload.owner).toBe("abc123");
     expect(event.payload.isCommander).toBe(false);
+    expect(event.payload.gameCardIndex).toBe(42);
   });
 
   it("carries owner (the initiator's seatId) and isCommander (from the GameCard) — owner grants no capability, it's a fact the shape carries", () => {
@@ -68,13 +69,8 @@ describe("buildCardPlayedEvent (the card.played envelope, JES-128)", () => {
     expect(event.payload.backImageUrl).not.toBeNull(); // falls back to constructCardImageUrl, still populated
   });
 
-  it("NEVER leaks gameCardIndex — an index is a decodable secret (alphabetical rank in a known decklist)", () => {
+  it("carries gameCardIndex now (let-gamecardindex-out, 2026-08-10): decklists are public on Archidekt anyway, so the index decodes to no real secret", () => {
     const event = buildCardPlayedEvent(handCard(lightningBolt, 7), "i-3", initiator, "graveyard", tableName);
-    const serialized = JSON.stringify(event);
-    expect(serialized).not.toContain("gameCardIndex");
-    expect(serialized).not.toContain("Index");
-    // and no bare numeric leak of the index either, anywhere in the envelope
-    expect(Object.values(event)).not.toContain(7);
-    expect(Object.values(event.payload)).not.toContain(7);
+    expect(event.payload.gameCardIndex).toBe(7);
   });
 });

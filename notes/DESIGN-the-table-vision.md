@@ -177,10 +177,10 @@ Visibility cuts across all kinds orthogonally.
   zones *are* the product, not because a boundary is being policed. Where the two ships
   meet, prefer the simple thing: **don't make anyone reason about what may cross.** Jess,
   reversing her own earlier call the same day: _"I don't want you to have to reason about
-  what is hidden and what isn't."_ The `gameCardIndex`-may-not-cross guard in
-  `cardArrival.ts` / `seatJoined.ts` is the last of that kind and is slated for removal
-  (`let-gamecardindex-out` in `TODO.md`); the constraint it was standing in for —
-  `SEAMAP.md`'s "hand counts but never hands" — is about what the app *volunteers*, so it
+  what is hidden and what isn't."_ The `gameCardIndex`-may-not-cross guard that lived in
+  the `card.played`/`seat.joined` contract schemas was the last of that kind, and was
+  removed at `let-gamecardindex-out` (2026-08-10); the constraint it was standing in for
+  — `SEAMAP.md`'s "hand counts but never hands" — is about what the app *volunteers*, so it
   belongs on the payloads that could actually leak a hand, not on every door in the fleet.
   The harder and still-open question is the opposite one: **how hidden information gets
   shared when it _should_ be** (reveal the top card; look at target player's hand). The
