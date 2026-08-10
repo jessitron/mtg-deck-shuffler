@@ -94,6 +94,144 @@ test("dragging a card over a zone arms it (box-shadow ring), and disarms it once
   }).toPass({ timeout: 5000 });
 });
 
+test("dragging your own commander over your command zone arms it", async ({ page, baseURL }) => {
+  const tableSlug = `verify-armed-cmdr-${Date.now()}`;
+  await page.goto(`/t/${tableSlug}`);
+  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+
+  const instanceId = randomUUID();
+  const event = cardPlayed(tableSlug, {
+    cardName: "Atraxa, Praetors' Voice",
+    card: { scryfallId: randomUUID(), instanceId },
+    zoneHint: "stack",
+    isCommander: true,
+  });
+  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  expect(response.status()).toBe(201);
+
+  const card = page.locator(`#shape\\:card-${instanceId}`);
+  await expect(card).toBeAttached();
+
+  const commandZone = `[data-shape-id="shape:region-command-${tableSlug}-e2e-seat"]`;
+  await expect(page.locator(commandZone)).toBeAttached();
+  await zoomToFit(page);
+
+  const cardBox = await card.boundingBox();
+  const commandZoneBox = await page.locator(commandZone).boundingBox();
+  if (!cardBox || !commandZoneBox) throw new Error("missing bounding box");
+
+  await page.mouse.move(cardBox.x + cardBox.width / 2, cardBox.y + cardBox.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(commandZoneBox.x + commandZoneBox.width / 2, commandZoneBox.y + commandZoneBox.height / 2, {
+    steps: 10,
+  });
+
+  await expect(async () => {
+    expect(await boxShadowOf(page, commandZone)).toContain("230, 163, 61"); // --armed-glow, #e6a33d
+  }).toPass({ timeout: 5000 });
+
+  await page.mouse.up();
+});
+
+test("dragging a non-commander card over your command zone does not arm it", async ({ page, baseURL }) => {
+  const tableSlug = `verify-armed-noncmdr-${Date.now()}`;
+  await page.goto(`/t/${tableSlug}`);
+  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+
+  const instanceId = randomUUID();
+  const event = cardPlayed(tableSlug, {
+    cardName: "Llanowar Elves",
+    card: { scryfallId: randomUUID(), instanceId },
+    zoneHint: "stack",
+    isCommander: false,
+  });
+  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  expect(response.status()).toBe(201);
+
+  const card = page.locator(`#shape\\:card-${instanceId}`);
+  await expect(card).toBeAttached();
+
+  const commandZone = `[data-shape-id="shape:region-command-${tableSlug}-e2e-seat"]`;
+  await expect(page.locator(commandZone)).toBeAttached();
+  await zoomToFit(page);
+
+  const cardBox = await card.boundingBox();
+  const commandZoneBox = await page.locator(commandZone).boundingBox();
+  if (!cardBox || !commandZoneBox) throw new Error("missing bounding box");
+
+  await page.mouse.move(cardBox.x + cardBox.width / 2, cardBox.y + cardBox.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(commandZoneBox.x + commandZoneBox.width / 2, commandZoneBox.y + commandZoneBox.height / 2, {
+    steps: 10,
+  });
+
+  // Give the drag a moment to settle mid-flight, then confirm the zone never armed.
+  await page.mouse.move(
+    commandZoneBox.x + commandZoneBox.width / 2 + 5,
+    commandZoneBox.y + commandZoneBox.height / 2,
+    { steps: 5 }
+  );
+  expect(await boxShadowOf(page, commandZone)).toBe("none");
+
+  await page.mouse.up();
+});
+
+test("dragging another player's commander over your command zone does not arm it", async ({ page, baseURL }) => {
+  const tableSlug = `verify-armed-othercmdr-${Date.now()}`;
+  const otherSeatId = `other-seat-${Date.now()}`;
+  await page.goto(`/t/${tableSlug}`);
+  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+
+  const instanceId = randomUUID();
+  const event = cardPlayed(tableSlug, {
+    cardName: "Atraxa, Praetors' Voice",
+    card: { scryfallId: randomUUID(), instanceId },
+    zoneHint: "stack",
+    isCommander: true,
+    owner: otherSeatId,
+  });
+  event.initiator = { seatId: otherSeatId, playerName: "Other" };
+  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  expect(response.status()).toBe(201);
+
+  const card = page.locator(`#shape\\:card-${instanceId}`);
+  await expect(card).toBeAttached();
+
+  // "e2e-seat"'s command zone is drawn by cardArrival's own defensive
+  // ensurePlayerArea, keyed on the initiator's seatId — arrive a card owned
+  // by e2e-seat too, so its command zone exists to test against.
+  const ownEvent = cardPlayed(tableSlug, {
+    cardName: "Llanowar Elves",
+    card: { scryfallId: randomUUID(), instanceId: randomUUID() },
+    zoneHint: "stack",
+  });
+  const ownResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: ownEvent });
+  expect(ownResponse.status()).toBe(201);
+
+  const commandZone = `[data-shape-id="shape:region-command-${tableSlug}-e2e-seat"]`;
+  await expect(page.locator(commandZone)).toBeAttached();
+  await zoomToFit(page);
+
+  const cardBox = await card.boundingBox();
+  const commandZoneBox = await page.locator(commandZone).boundingBox();
+  if (!cardBox || !commandZoneBox) throw new Error("missing bounding box");
+
+  await page.mouse.move(cardBox.x + cardBox.width / 2, cardBox.y + cardBox.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(commandZoneBox.x + commandZoneBox.width / 2, commandZoneBox.y + commandZoneBox.height / 2, {
+    steps: 10,
+  });
+
+  await page.mouse.move(
+    commandZoneBox.x + commandZoneBox.width / 2 + 5,
+    commandZoneBox.y + commandZoneBox.height / 2,
+    { steps: 5 }
+  );
+  expect(await boxShadowOf(page, commandZone)).toBe("none");
+
+  await page.mouse.up();
+});
+
 test("dragging a multi-card selection arms only the one zone under the pointer, not one per card", async ({
   page,
   baseURL,
