@@ -2,14 +2,14 @@
 
 Reference: apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md
 
-| #   | Map                                           | Tracker                           | Status                                        |
-| --- | --------------------------------------------- | --------------------------------- | --------------------------------------------- |
-| 1   | Physics — cards and furniture are real shapes | `.scratch/tabletop-physics/`      | charted 2026-08-06                            |
-| 2   | Table layout                                  | `.scratch/tabletop-table-layout/` | charted (was `tabletop-card-physics-starter`) |
-| 3   | Cards come and go                             | `.scratch/tabletop-cards-come-and-go/` | charted 2026-08-08                       |
-| 4   | Only Magic moves                              | —                                 | not charted                                   |
-| 5   | The table reports                             | —                                 | not charted                                   |
-| 6   | The table remembers                           | —                                 | not charted                                   |
+| #   | Map                                           | Tracker                                | Status                                        |
+| --- | --------------------------------------------- | -------------------------------------- | --------------------------------------------- |
+| 1   | Physics — cards and furniture are real shapes | `.scratch/tabletop-physics/`           | charted 2026-08-06                            |
+| 2   | Table layout                                  | `.scratch/tabletop-table-layout/`      | charted (was `tabletop-card-physics-starter`) |
+| 3   | Cards come and go                             | `.scratch/tabletop-cards-come-and-go/` | charted 2026-08-08                            |
+| 4   | Only Magic moves                              | —                                      | not charted                                   |
+| 5   | The table reports                             | —                                      | not charted                                   |
+| 6   | The table remembers                           | —                                      | not charted                                   |
 
 Written work belonging to a map that doesn't exist yet.
 
