@@ -2023,3 +2023,42 @@ the original landscape five.
 `./verify.sh verify-design-gallery` — 5/5, unaffected (the `#table-look` specimen is a
 static hand-copy of 3 swatches, per its own documented convention, and doesn't enumerate
 the full array).
+
+## 2026-08-10 — the sleeved-card gallery gap closed
+
+`9e23201` **design-sleeve-specimen: stage Tabletop face-up sleeve rendering on `/design`**
+
+Ticket 17 shipped the Tabletop's face-up sleeve treatment (`0a768e6` + `bfdc877`, then the
+square-corner revision `e53a27e` + `c1592c4`) straight onto the live canvas with no gallery
+specimen — the `shuffler-looks-like-itself` review of that ticket flagged the gap and it sat
+as `design-sleeve-specimen` in `TODO.md` until now.
+
+**Followed the counter-disc mock's pattern exactly, which is the point.** New § `#sleeved-card`
+("Tabletop sleeved card", badge `candidate`) in `design.ejs`, a `.card-mock-sleeved-face` class
+in `design-candidates.css`, staged on `.stage-white` (not `.stage-dark` — the ticket-11
+correction that keeps getting relearned), sized to the Tabletop's own 170×238 card unit rather
+than the Shuffler's 200×278. The frame is square (`border-radius: 0`) per `e53a27e`'s "sleeves
+are rectangular" ruling; only the `<img>` inside carries the corner radius (`8.5px` = `170 *
+0.05`, the Shuffler card's own 10/200 ratio), matching the shape's real three-part corner rule.
+Margin is `5px` = `170 * 0.03`, baked in as a literal px for this fixed-size mock — the same
+trick `.playmat-mock--radius-a/-b` use for a value the real shape computes from `props.w` at
+render time.
+
+**`sleeveColor` stayed an inline style, not a CSS custom property, on purpose.** It's
+player-chosen domain data, the same posture as `.library-card-back.sleeved`'s existing inline
+hex on the Shuffler side — baking a specific color into the shared class would misrepresent it
+as a design decision rather than data.
+
+**Caught by `-review` before implementation, not after:** which badge (`candidate`, since the
+shape is built but unreviewed by Jess — not `standard`), which stage (`.stage-white`), and that
+the sleeve color belongs inline rather than in the shared class. All three are exactly the
+mistakes ticket 11's zone mocks made and fixed the first time; the review is what makes sure
+each new mock doesn't re-make them.
+
+**What this closes and what's still separate.** `#sleeved-card` mocks the *rendered sleeve on a
+card*; `#table-look` (ticket 16) already mocked the *picker panel* — different things, and they
+stay different specimens. The playmat's own sleeve-aware library-back rendering (the
+Shuffler-side half of ticket 17) already had a specimen next to the unsleeved library stack, so
+this was the last unrepresented half. `./verify.sh verify-design-gallery` covers the new
+specimen with a Playwright spec asserting the frame's `border-radius` is `0px` and the inner
+image's is not.

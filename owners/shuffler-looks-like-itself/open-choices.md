@@ -680,10 +680,11 @@ self-rendering custom shape.
   five. **That count is not settled — it's grown to 11 (2026-08-09)**, when six lower-contrast
   art crops joined `PLAYMATS` in `table-look.ts` for a player who found the original five too
   high-contrast against cards/text; see [README.md](README.md) and [history.md](history.md).
-  **Still no `/design` specimen of the rendered sleeve-on-a-card** — `design-sleeve-specimen`
-  in `TODO.md` stands; the picker *panel* has its own specimen (`#table-look`), a different
-  thing. The raw hex itself remains domain data, exempt from the stylesheet hex ban; what an
-  agent must not do is *pick* one.
+  **The `/design` specimen of the rendered sleeve-on-a-card is DONE (2026-08-10,
+  `design-sleeve-specimen`, `9e23201`)** — `/design` § `#sleeved-card`, badge `candidate`,
+  mocks the face-up sleeve ring via `.card-mock-sleeved-face` in `design-candidates.css`; the
+  picker *panel* keeps its own separate specimen (`#table-look`). The raw hex itself remains
+  domain data, exempt from the stylesheet hex ban; what an agent must not do is *pick* one.
 - **Also undecided, and it must not ride along: a card's `indicator()`.** Ticket 04 records
   explicitly that an `indicator()` looking like anything other than tldraw's default is a
   **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket

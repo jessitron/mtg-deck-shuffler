@@ -465,12 +465,14 @@ high-contrast against cards/text, adding six lower-contrast art crops to `PLAYMA
 `src/table-look.ts` — no CSS or markup change was needed, since `table-look-panel.ejs`
 iterates the array generically and `.table-look-mats` already wraps. See
 [history.md](history.md) for the follow-up and a portrait-crop aspect-ratio note worth
-reading before adding more. There is still no `/design` specimen of the rendered *sleeve
-on a card* (buoyed as `design-sleeve-specimen` in `TODO.md` — the picker panel itself
-does have a specimen, `#table-look`; they are different things — that gap is about the
-Tabletop's canvas card sleeve, not the Shuffler's library-back rendering below, which does
-now have one). v1 is one color; distinct front/back colors or an image sleeve are
-someday-maybes, deferred.
+reading before adding more. **The gallery gap is closed (2026-08-10, `design-sleeve-specimen`,
+`9e23201`):** `/design` § `#sleeved-card` ("Tabletop sleeved card", badge `candidate`) mocks
+the face-up `sleeve && !faceDown` branch of `MtgCardShapeUtil.tsx` — the card's image
+centered in a sleeve-colored square frame — via `.card-mock-sleeved-face` in
+`design-candidates.css`, staged on `.stage-white` at the Tabletop's own 170×238 card unit
+(not the Shuffler's 200×278). It's a different thing from `#table-look`, which shows the
+*picker*, not the rendered sleeve. v1 is one color; distinct front/back colors or an image
+sleeve are someday-maybes, deferred.
 
 **The Shuffler side of the same sleeve rule shipped too (2026-08-09), on both `/prepare`
 and `/game`.** `formatLibraryStack`/`formatLibraryCardBack` (`shared-components.ts`) render

@@ -49,6 +49,7 @@
           <a href="#surfaces">Surfaces</a>
           <a href="#cards">Cards &amp; playmat</a>
           <a href="#zones">Tabletop zones</a>
+          <a href="#sleeved-card">Tabletop sleeved card</a>
           <a href="#rules">House rules</a>
         </nav>
       </div>
@@ -1117,6 +1118,34 @@
           </div>
         </div>
         <div class="option-where">design-candidates.css → .counter-mock; real shape: apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx</div>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="gallery-section" id="sleeved-card">
+        <h2>Tabletop sleeved card <span class="badge badge-candidate">candidate</span></h2>
+        <p class="section-note">
+          <strong>Mock rendering of a component that is built and awaiting sign-off.</strong>
+          Staged for the table-layout map's <code>17-sleeve-rendering</code> ticket: when a
+          seat has a sleeve color, the Tabletop's <code>mtg-card</code> shape draws the card's
+          own image centered in a sleeve-colored frame instead of showing the bare image alone —
+          a ring of color on every side, the IRL sleeve-border look. Square outer frame (no
+          border-radius, no border) since sleeves are rectangular (Jess, 2026-08-09); only the
+          image inside keeps rounded corners, at the card's own corner ratio. This is the
+          face-up case only — face-down and the library pile render as the bare sleeve
+          rectangle instead (see the Shuffler's own equivalent at
+          <a href="#cards">Cards &amp; playmat</a>). Uses the Tabletop's own card unit
+          (170×238, 68 units/inch), not the Shuffler's 200×278 — this mocks a Tabletop shape,
+          not a Shuffler one. The real shape re-expresses this inline in
+          <code>MtgCardShapeUtil.tsx</code>: margin <code>w * 0.03</code> (a real sleeve's
+          ~1-2mm overhang), image radius <code>w * 0.05</code> (the Shuffler card's own corner
+          ratio, 10/200) — both proportions of the shape's own width, computed at render time.
+        </p>
+        <div class="stage stage-white">
+          <div class="card-mock-sleeved-face" style="background-color: #3c99e5">
+            <img src="/images/mtg-card-back.jpg" alt="" />
+          </div>
+        </div>
+        <div class="option-where">design-candidates.css → .card-mock-sleeved-face; real shape: apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx</div>
       </section>
 
       <!-- ================================================================ -->
