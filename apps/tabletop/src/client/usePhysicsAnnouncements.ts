@@ -86,7 +86,7 @@ export function usePhysicsAnnouncements(store: RemoteTLStoreWithStatus): void {
 
         for (const [from, to] of Object.values(change.changes.updated)) {
           const before = from as ShapeRecordLike & { id: string };
-          const after = to as ShapeRecordLike & { id: string };
+          const after = to as ShapeRecordLike & { id: string }; 
           if (after.typeName !== "shape") continue;
 
           if (after.type === "mtg-card") {
