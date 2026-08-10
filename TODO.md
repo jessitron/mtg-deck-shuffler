@@ -23,26 +23,9 @@ section is just a wall between Jess and the live work.
     Tabletop (removed? left as an orphaned zone?). That's a game-design call, not plumbing.
     Promote via `/to-spec` when ready to decide it.
 
-- Minor bug: the counter didn't participate in the tap animation, when the counter was on the card. (Tabletop)
-
-- BUG: paste an image in. Pick the image, move it around. Click a card, try to move it, oh no, the image moves instead. Like, clicking the card doesn't clear the image selection. (Tabletop)
-
 - bug: counters can't be copied... actually neither can images, cards, etc. They can be duplicated, so there's a workaround. (Tabletop)
 
 - Minor feature: Only your own commanders can land in your command zone. Any other card dragged over it, it shouldn't light up.
-
-- [ ] `design-playmat-specimen` `/design` renders a fake playmat, not the real one
-  - `.stage-playmat` in `design-gallery.css` is gallery _chrome_ that hand-copies the mat's art
-    URL, `background-size: cover`, `background-position: center` and its own `3px solid black`
-    border. It's a lookalike. So the gallery has been describing the playmat in its tables while
-    rendering an imitation — exactly the drift `/design` exists to prevent ("if a component
-    changes in the app, it changes here").
-  - **Newly possible.** Before `a4991f3` there was no shared playmat rule to reuse; now there is a
-    bare `.playmat` in `playmat.css`, so `.stage-playmat` could honestly become
-    `class="stage playmat"` and inherit the real appearance.
-  - Not a one-line swap: it's gallery surgery, and the stage needs a thinner border at specimen
-    scale (3px, not the real 10px).
-  - Doing this unblocks `playmat-drop-shadow` above.
 
 - **The Tabletop-replaces-Mural mountain is charted.** The parity list, the six maps it
   splits into, and their order: `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md`. Two maps exist
