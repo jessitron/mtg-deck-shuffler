@@ -13,7 +13,7 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- Easy win: Bunny got confused on the /choose screen. If Precon is selected and you click Precon anyway, it should scroll you down to the list of precons. (Shuffler) 
+- Easy win: Bunny got confused on the /choose screen. If Precon is selected and you click Precon anyway, it should scroll you down to the list of precons. (Shuffler)
 
 - put some less-busy playmats in the options (Shuffler)
 
@@ -32,6 +32,8 @@ section is just a wall between Jess and the live work.
 - BUG: paste an image in. Pick the image, move it around. Click a card, try to move it, oh no, the image moves instead. Like, clicking the card doesn't clear the image selection. (Tabletop)
 
 - bug: counters can't be copied... actually neither can images, cards, etc. They can be duplicated, so there's a workaround. (Tabletop)
+
+- Minor feature: Only your own commanders can land in your command zone. Any other card dragged over it, it shouldn't light up.
 
 - [ ] `graveyard-cascade-overflow` The graveyard card cascade walks out of its box at ~32 cards
   - Surfaced 2026-08-09 by `tabletop-shape-mechanics-review` on the zone-label-band change
