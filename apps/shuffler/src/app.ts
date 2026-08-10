@@ -312,8 +312,7 @@ export function createApp(
   // Returns HTML fragment - Archidekt deck selection tab
   app.get("/deck-selection-tabs/archidekt", async (req, res) => {
     try {
-      const availableDecks = deckRetriever.listAvailableDecks();
-      res.render("partials/deck-selection-archidekt", { availableDecks });
+      res.render("partials/deck-selection-archidekt");
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
       markCurrentSpanAsError(errorMessage, { "error.message": errorMessage, "error.type": error instanceof Error ? error.name : typeof error });
