@@ -22,14 +22,31 @@ if [ "$CURRENT_BRANCH" != "main" ]; then
   exit 1
 fi
 
+STASHED=0
 if [ -n "$(git status --porcelain)" ]; then
-  echo "Error: main checkout has uncommitted changes. Commit or stash before merging." >&2
+  echo "main checkout has uncommitted changes — stashing them before merging."
+  git stash push -u -m "merge-worktree.sh: auto-stash before merging $BRANCH"
+  STASHED=1
+fi
+
+if ! git merge --no-ff "$BRANCH" -m "$MSG"; then
+  echo "Error: merge of '$BRANCH' failed." >&2
+  if [ "$STASHED" -eq 1 ]; then
+    echo "Your uncommitted changes are untouched, safe in the stash — see 'git stash list' / 'git stash pop'." >&2
+  fi
   exit 1
 fi
 
-git merge --no-ff "$BRANCH" -m "$MSG"
-
 echo "Merged '$BRANCH' into main."
+
+if [ "$STASHED" -eq 1 ]; then
+  if ! git stash pop; then
+    echo "Error: 'git stash pop' failed — the merge brought in changes that conflict with your stashed changes." >&2
+    echo "Your stashed changes are safe in the stash list; resolve manually with 'git stash list' / 'git stash pop'." >&2
+    echo "Skipping worktree removal until that's sorted out." >&2
+    exit 1
+  fi
+fi
 
 WORKTREE_PATH=$(git worktree list --porcelain | awk -v b="refs/heads/$BRANCH" '
   /^worktree /{p=$2} /^branch /{if ($2==b) print p}')
