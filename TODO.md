@@ -283,7 +283,8 @@ section is just a wall between Jess and the live work.
   - Library search is the one part of the app outside users have complained about — Jess's college
     kid and their friends, 2026-08-01.
 
-- [ ] `english-card-faces` Show English names and images for other-language printings ← was: JES-96
+- [ ] DEFERRED `english-card-faces` Show English names and images for other-language printings ← was: JES-96
+  - Blocked on `card-zoom-modal` (Jess, 2026-08-10).
   - > Some cards come in other-language editions. Offer English. Example: Adventurous Impulse in
     > the Squirrel Girl deck (Archidekt 23735063).
   - Two halves, one cause, both in `ArchidektDeckToDeckAdapter.ts`: the name comes from
