@@ -119,7 +119,7 @@ tables and the square's compass-slot model.
   inherits card rendering for free. How and when it's minted, and how it's distinguished
   from the real commander for hit-testing (likely a meta/props flag), are implementer's
   choices.
-- **Life counters (ticket 12).** A new locked custom shape (working name `mtg-counter`)
+- **Life counters (ticket 12).** A new locked custom shape (working name `mtg-life-counter`)
   whose component renders a number with +/- buttons and accepts direct typing, synced
   through the tldraw room. Name row layout: player name large and left-justified; then
   right-justified, commander-damage counters, then a bigger life counter on the far

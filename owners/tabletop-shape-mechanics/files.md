@@ -34,7 +34,7 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   beyond its text), the `TLGlobalShapePropsMap` augmentation registering `mtg-counter`, and
   `mtgCounterShapeProps` validators, imported by client `MtgCounterShapeUtil.tsx` and server
   `rooms.ts`. Its doc comment carries the naming-collision note (table-layout ticket 12's life
-  counter used `mtg-counter` as a working name; that shape needs its own name — see `TODO.md`).
+  counter used `mtg-counter` as a working name; that shape is now named `mtg-life-counter`).
 
 ## Client (the ShapeUtils themselves)
 

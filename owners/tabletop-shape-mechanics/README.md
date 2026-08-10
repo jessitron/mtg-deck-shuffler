@@ -68,9 +68,8 @@ hooks on `mtg-card` (`canReceiveNewChildrenOfType`/`onDragShapesIn`/`onDragShape
 entering graveyard/exile/library evicts its counters to open spots near the zone's edge.
 **Naming caution**: table-layout ticket 12's decided-but-unbuilt life counter also used the
 working name `mtg-counter` — ticket 18 claimed the type string per the tabletop-physics spec,
-so the life counter needs a new name when built (buoyed in `TODO.md` as
-`life-counter-needs-own-name`). The old locked-furniture `mtg-counter` cautions in this KB
-describe *that* shape, not this one — see `architecture.md`.
+so the life counter is named `mtg-life-counter` instead. The old locked-furniture `mtg-counter`
+cautions in this KB describe *that* shape, not this one — see `architecture.md`.
 
 **Ticket 19** (`.scratch/tabletop-physics/issues/19-notes.md`, landed 2026-08-10) generalized
 ticket 18's counter-hosting into a "passenger" concept (`PASSENGER_TYPES`) and added tldraw's

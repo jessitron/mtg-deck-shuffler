@@ -10,7 +10,7 @@ Blocked by: 13 — build command-zone redraw (the name row sits above the redraw
 starting at 40, that anyone at the table can change — quick pings via +/- buttons,
 big corrections by typing directly — with every change syncing live to all browsers.
 
-The counter is a new locked custom shape (working name `mtg-counter`) whose component
+The counter is a new locked custom shape (working name `mtg-life-counter`) whose component
 renders the number with +/- buttons and accepts direct typing, synced through the
 tldraw room like every other shape. Name row layout: player name large and
 left-justified; the life counter bigger, far right (commander-damage counters slot in
