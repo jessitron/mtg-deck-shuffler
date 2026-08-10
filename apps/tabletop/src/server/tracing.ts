@@ -58,11 +58,12 @@ const sdk: NodeSDK = new NodeSDK({
   // branch entirely, so don't add that env var here expecting it to do
   // something — it would be dead config.
   //
-  // NOTE the options-object argument. This ship is on the 0.221 OTel line and
-  // the Shuffler is on 0.219, where the same constructor takes the exporter
-  // positionally: `new BatchLogRecordProcessor(exporter)`. Passing 0.219's
-  // shape here leaves options.exporter undefined and the pipeline silently
-  // exports nothing. Don't copy this line between ships without looking.
+  // NOTE the options-object argument, required by this OTel version line
+  // (0.221) — the older 0.219 line took the exporter positionally instead.
+  // Both ships are on 0.221 now, but check this if either bumps versions
+  // again: the same constructor takes different shapes across that boundary,
+  // and passing the wrong one leaves options.exporter undefined with the
+  // pipeline silently exporting nothing.
   logRecordProcessors: [new BatchLogRecordProcessor({ exporter: new OTLPLogExporter() })],
   sampler: new ParentBasedSampler({
     root: new KubeProbeAwareSampler(),

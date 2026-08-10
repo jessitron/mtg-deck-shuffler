@@ -16,7 +16,7 @@ let exported: InMemoryLogRecordExporter;
 beforeEach(() => {
   exported = new InMemoryLogRecordExporter();
   const provider = new LoggerProvider({
-    processors: [new SimpleLogRecordProcessor(exported)],
+    processors: [new SimpleLogRecordProcessor({ exporter: exported })],
   });
   logs.setGlobalLoggerProvider(provider);
 

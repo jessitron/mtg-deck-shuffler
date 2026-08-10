@@ -36,7 +36,12 @@ const sdk: NodeSDK = new NodeSDK({
   // branch entirely, so don't add that env var here expecting it to do
   // something — it would be dead config. (The Spine sets it to "none"; that one
   // is real, because the Spine has no logs pipeline yet.)
-  logRecordProcessors: [new BatchLogRecordProcessor(new OTLPLogExporter())],
+  //
+  // NOTE the options-object argument — this ship is now on the same 0.221 OTel
+  // line as the Tabletop, where BatchLogRecordProcessor takes { exporter }
+  // rather than the exporter positionally. Passing the old positional shape
+  // leaves options.exporter undefined and the pipeline silently exports nothing.
+  logRecordProcessors: [new BatchLogRecordProcessor({ exporter: new OTLPLogExporter() })],
   // Health checks and static assets are sampled down hard; everything else is
   // traced in full. See telemetry-sampler.ts for what counts and why.
   sampler: new ParentBasedSampler({
