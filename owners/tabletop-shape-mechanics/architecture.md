@@ -354,14 +354,14 @@ image/video shapes avoid it by wrapping content in `<div className="tl-image-con
 inventing inline pointer-events styles. Any future custom shape that renders interactive content
 in `<HTMLContainer>` needs the same treatment.
 
-## The life counter: decided, not built — and it can no longer be called `mtg-counter` (table-layout ticket 12, 2026-08-08)
+## The life counter: decided, not built — named `mtg-life-counter` (table-layout ticket 12, 2026-08-08)
 
 **Naming collision, resolved 2026-08-08 by ticket 18 claiming the type string.** The
 tabletop-physics spec assigns `mtg-counter` to the drag-onto-a-card counter, which ticket 18
 built (see "Ticket 18" below) — an **unlocked, draggable, text-editable** shape, nearly the
-opposite of the shape this section describes. The life counter needs its own name when built
-(`mtg-life-counter`?) — buoyed in `TODO.md` as `life-counter-needs-own-name`. Everything below
-is about the *life counter*, not the shape currently registered as `mtg-counter`.
+opposite of the shape this section describes. The life counter is named `mtg-life-counter`
+instead. Everything below is about the *life counter*, not the shape currently registered as
+`mtg-counter`.
 
 `.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md` (resolved
 2026-08-08 — note this is a *different* "ticket 12" from the `tabletop-physics` ticket 12 that

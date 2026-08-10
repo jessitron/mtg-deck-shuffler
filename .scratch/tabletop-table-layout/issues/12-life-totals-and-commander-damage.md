@@ -31,7 +31,7 @@ resolved.
 ## Answer
 
 Grilled with Jess 2026-08-08. A **life counter is a new custom shape** (working name
-`mtg-counter`), **locked furniture**, whose `component()` renders a number with +/-
+`mtg-life-counter`), **locked furniture**, whose `component()` renders a number with +/-
 buttons; the number is **also directly editable by typing**. It syncs through the tldraw
 room like every other shape.
 

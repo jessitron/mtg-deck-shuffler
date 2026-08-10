@@ -4,7 +4,7 @@ Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
 Status: ready-for-agent
-Blocked by: 20 — life counter (the `mtg-counter` shape and name-row layout); 18 — commander arrives with owner (which commanders exist, and whose); 17 — sleeve color travels (counter identity is opponent name + sleeve color)
+Blocked by: 20 — life counter (the `mtg-life-counter` shape and name-row layout); 18 — commander arrives with owner (which commanders exist, and whose); 17 — sleeve color travels (counter identity is opponent name + sleeve color)
 
 **What to build:** Each player's name row shows a commander-damage counter per opposing
 commander — a partner-deck opponent gets two — starting at 0, always visible, appearing
@@ -15,7 +15,7 @@ change any counter; changes sync live to everyone; last-writer-wins is accepted.
 extra labeling distinguishes a partner pair — players adjudicate, per the
 no-rules-engine principle.
 
-Reuses the `mtg-counter` shape from ticket 20.
+Reuses the `mtg-life-counter` shape from ticket 20.
 
 Design source of truth: [12 — life totals and commander damage](12-life-totals-and-commander-damage.md).
 

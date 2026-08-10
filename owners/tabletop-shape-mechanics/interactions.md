@@ -184,8 +184,9 @@
    ticket 13's `mtg-zone` generalized steps 1-3 cleanly (see `architecture.md`) but didn't need
    step 4 at all, because nothing ever clicks a zone — `MtgZoneShapeUtil.component()` renders a
    plain `<div>` with no `.tl-image-container` treatment and that's correct, not an oversight.
-   The decided-but-unbuilt life counter (see `architecture.md`; formerly working-named
-   `mtg-counter`, a string ticket 18 has since claimed for a different shape) is the
+   The decided-but-unbuilt life counter (see `architecture.md`; now named `mtg-life-counter`,
+   having formerly working-named itself `mtg-counter`, a string ticket 18 has since claimed
+   for a different shape) is the
    counterexample that forced this precision: it will be *locked* yet its `component()` hosts
    buttons and an input, so it pays step 4 in full — locking gates tldraw's gesture state
    machine, not DOM events. Ticket 18's `mtg-counter` (unlocked, editable) exercised step 4 too:
@@ -295,8 +296,8 @@
    drag is actually supposed to do in this app, not assumed correct because it covers more cases
    — "handles more inputs" isn't the same as "matches the domain."
 10. **Locked-but-interactive shapes: the life-counter pattern (decided 2026-08-08, not yet
-    built — and no longer nameable `mtg-counter`, which ticket 18 claimed for the
-    drag-onto-a-card counter; buoyed as `life-counter-needs-own-name` in `TODO.md`).** A life
+    built — named `mtg-life-counter`, since `mtg-counter` was claimed by ticket 18 for the
+    drag-onto-a-card counter).** A life
     counter will be a new locked custom shape whose `component()` renders +/-
     buttons and a typeable number field (see `architecture.md`'s life-counter section). Whoever
     builds it — or any future locked shape with live controls — has three
