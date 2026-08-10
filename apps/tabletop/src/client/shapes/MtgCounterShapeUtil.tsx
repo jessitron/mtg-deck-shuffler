@@ -48,6 +48,64 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
       shape.id,
     ]);
 
+    // Ride-along tap catch-up (fixes: "the counter didn't participate in the
+    // tap animation, when the counter was on the card" — TODO.md). A counter
+    // has no `props.tapped` of its own; tldraw already composes the host
+    // card's rotation into this shape's page transform for free (ticket 18's
+    // "tilt along" visual), so the *position* is never wrong. What was
+    // missing is the card's ticket-15 catch-up illusion: MtgCardShapeUtil
+    // eases its OWN content back from a counter-rotation on every tap, but a
+    // hosted counter is a separate DOM node with no equivalent, so it just
+    // snapped to the new angle a frame before the card's div started easing
+    // — visually disconnected mid-swing.
+    //
+    // Fix: watch the host's `props.tapped` (not our own props, which never
+    // change here) and replay the identical WAAPI catch-up on this shape's
+    // own container. Since this counter's LOCAL rotation is 0 while
+    // attached, its page-rotation delta from one tap equals the host's own
+    // delta — so the same counter-rotate-then-ease-to-0 recipe lines up
+    // exactly with the card's.
+    //
+    // Read this shape's OWN record back out of the editor inside the
+    // selector — rather than trusting the `shape` argument's `parentId` —
+    // and the host's `props.tapped` off of that. Both are genuine signal
+    // reads on the reactive store, so `useValue` re-runs this whenever
+    // EITHER changes. Reading `shape.parentId` directly would NOT do that:
+    // tldraw only re-invokes `component()` with a fresh `shape` when this
+    // shape's OWN `props` change, not on a bare `parentId`/x/y/rotation
+    // write (those are applied to the wrapping transform without
+    // re-rendering the React content) — so a captured `shape.parentId`
+    // would stay frozen at whatever it was on the last props-triggered
+    // render, silently missing every later attach/detach/tap.
+    const hostTapped = useValue(
+      "hostCardTapped",
+      () => {
+        const self = this.editor.getShape(shape.id);
+        const parent = self?.parentId ? this.editor.getShape(self.parentId) : undefined;
+        return parent?.type === "mtg-card" ? parent.props.tapped : undefined;
+      },
+      [this.editor, shape.id],
+    );
+    const rideAlongRef = useRef<HTMLDivElement>(null);
+    // Seed with the mount-time value (like the card's own prevTappedRef) so
+    // neither arriving already attached to a tapped card, nor being dragged
+    // onto/off a card (a defined <-> undefined transition, not a tap), swings
+    // this counter — only an actual tapped-value flip on an already-attached
+    // host should.
+    const prevHostTappedRef = useRef(hostTapped);
+    useLayoutEffect(() => {
+      const previous = prevHostTappedRef.current;
+      prevHostTappedRef.current = hostTapped;
+      if (previous === undefined || hostTapped === undefined || previous === hostTapped) return;
+      const el = rideAlongRef.current;
+      if (!el) return;
+      el.getAnimations().forEach((a) => a.cancel());
+      el.animate([{ transform: `rotate(${hostTapped ? -90 : 90}deg)` }, { transform: "rotate(0deg)" }], {
+        duration: 500,
+        easing: "ease-out",
+      });
+    }, [hostTapped]);
+
     // Focus the input once editing starts — but a tick late (setTimeout 0):
     // the double-click that starts editing hasn't finished when React's
     // effects run, and tldraw's own end-of-gesture focus handling would
@@ -128,7 +186,7 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
             inherits — without re-enabling hit-testing, double-click-to-edit
             never reaches this shape. Same .tl-image-container reuse as the
             card. */}
-        <div className="tl-image-container" style={{ pointerEvents: "all" }}>
+        <div className="tl-image-container" style={{ pointerEvents: "all" }} ref={rideAlongRef}>
           {isEditing ? (
             // A textarea (not an input) so long labels wrap while editing,
             // roughly as they will display. It can't flex-center its own
