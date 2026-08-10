@@ -230,14 +230,6 @@ section is just a wall between Jess and the live work.
   - `owners/fleet-is-observable/README.md` already holds this as Invariant 5, marked FUTURE.
     Landing it means dropping that marker and making it a standing check on any new init path.
 
-- [ ] `spine-probe-sampling` Downsample health-probe traces in the Spine ← was: JES-130
-  - `services/spine/config/initializers/opentelemetry.rb` sets **no sampler at all** — `GET /up` is
-    roughly half of all spine spans, so queries and BubbleUp skew toward probes instead of real
-    table/seat activity, and it burns event quota for no insight.
-  - Copy the Shuffler's pattern (`src/telemetry-sampler.ts`): keep a trickle rather than dropping
-    probes entirely, so a _failing_ probe is still visible. Give it a test — the Shuffler's inline
-    sampler was silently broken for months because it didn't have one.
-
 - [ ] DEFERRED `set-up-ci` Run the three test suites on every push ← was: JES-119
   - > github actions, so tests run on every PR.
   - There is **no `.github/` directory at all** (verified 2026-08-06), yet all three ships have
