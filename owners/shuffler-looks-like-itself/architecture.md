@@ -325,3 +325,14 @@ is the *base* size only — the real shape shrinks long labels to fit
 one was reverted the same day, see [history.md](history.md)); the `.counter-mock` comment
 says so. A static specimen can't show the shrink. Awaiting Jess's sign-off — see
 [open-choices.md](open-choices.md).
+
+**Third Tabletop mock section: § `#sleeved-card` (2026-08-10, `design-sleeve-specimen`,
+`9e23201`).** "Tabletop sleeved card", badge `candidate`, staged on `.stage-white` —
+`.card-mock-sleeved-face` (`design-candidates.css`) mirrors the face-up `sleeve && !faceDown`
+branch of `MtgCardShapeUtil.tsx`: a card image centered in a sleeve-colored square frame, sized
+to the Tabletop's own 170×238 card unit. Same two mock precedents followed as the zone and
+counter-disc sections: labelled a mock in its own `section-note`, staged white. `sleeveColor`
+is an inline `style="background-color: …"` on the specimen markup, same posture as the
+Shuffler's own `.library-card-back.sleeved` mock — it's player-chosen data, not a value to bake
+into the shared class. Closes the gap `design-sleeve-specimen` in the repo-root `TODO.md`
+tracked; that entry is now gone.

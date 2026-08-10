@@ -58,19 +58,6 @@ section is just a wall between Jess and the live work.
   `site.css`'s `.right-nav a` instance remains, so the specimen may still be worth staging
   later, but not as urgent as a two-instance idiom.)
 
-- [ ] `design-sleeve-specimen` Stage a sleeved-card mock specimen on `/design`
-  - Surfaced 2026-08-08 by the `shuffler-looks-like-itself` review of table-layout ticket 17,
-    which shipped sleeve rendering on the Tabletop canvas (card image centered in a
-    sleeve-colored frame — radius `w * 0.05`, margin `w * 0.03`, flat, no border; face-down
-    and the library pile as the bare sleeve rectangle). The gallery has no specimen, so the
-    treatment exists only on the canvas; the owner said don't skip the specimen silently.
-  - Shape: a mock in `apps/shuffler/public/design-candidates.css`, labelled a mock, staged on
-    `.stage-white` (ticket 11's first draft wrongly used `.stage-dark`) — same convention as
-    the zone mocks (`a304c52`).
-  - Related: `tabletop-landing-page-palette` below notes the gallery has no Tabletop stage at
-    all; this specimen is another instance of that gap.
-    ← mountain: tabletop-replaces-mural
-
 - [ ] `life-counter-needs-own-name` table-layout ticket 12's life/commander-damage shape can't be called `mtg-counter` anymore
   - Surfaced 2026-08-08 by both owner reviews on tabletop-physics ticket 18: that ticket (and the
     tabletop-physics spec) explicitly assign the type string `mtg-counter` to the drag-onto-a-card

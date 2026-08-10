@@ -695,6 +695,12 @@ not by recomputing new numbers.**
   The `sleeveColor` hex itself is **domain data** (player-chosen, like card art) —
   exempt from the stylesheet raw-hex ban; the ban governs values agents pick, not values
   players pick.
+  - **The rendering now has a `/design` mock too (2026-08-10, `design-sleeve-specimen`,
+    `9e23201`): § `#sleeved-card`, `.card-mock-sleeved-face` in `design-candidates.css`.**
+    Same drift risk as the counter-disc mock — the recipe now lives in **two** places
+    (`MtgCardShapeUtil.tsx`'s `sleeve` object, computed proportionally at render time; the
+    mock, with the same `w * 0.03`/`w * 0.05` proportions baked in as literal px for a
+    fixed-size specimen). Changing the sleeve margin, radius, or corner rule means both.
 - **A canvas shape has a name for its font and its radius now** (`f79bc7d`, 2026-08-07).
   `--font-chrome`/`--font-content`/`--font-display` and `--radius-soft` are in the shared package
   specifically for this case. **Correction: a `.tsx` shape *can* `var()`** — this was written
