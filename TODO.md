@@ -70,7 +70,7 @@ section is just a wall between Jess and the live work.
 
 - [ ] DEFERRED `card-images-through-backend` Route every rendered card image through our backend instead of straight to Scryfall — ruled out of scope for the verify-suite-speed effort (commit `50ca157`); real product work whenever it's picked up
 
-- [ ] `card-zoom-modal` Give a Tabletop card a modal overlay that shows its text really big, and offers flip
+- GRILLING: `card-zoom-modal` Give a Tabletop card a modal overlay that shows its text really big, and offers flip
   - Jess, verbatim, 2026-08-07: _"Something cards do need to offer: a modal overlay that displays
     the card text really big, and offers flip, similar to Deck Shuffler. This is not needed to
     replace Mural though, it's later."_
@@ -89,7 +89,9 @@ section is just a wall between Jess and the live work.
     even though 06 lands first and this doesn't block it.
     ← priority: later
 
-- [ ] `playmat-colours-fleet-or-shuffler` Do the playmat colours belong to the fleet, or to the Shuffler?
+- GRILLING: `playmat-colours-fleet-or-shuffler` Do the playmat colours belong to the fleet, or to the Shuffler?
+  - Jess, 2026-08-10: "I think I intended these to be dynamic based on your playmat choice, but
+    let's replace them with constants named by use instead."
   - `--playmat-one` (`#f5dc8b`) and `--playmat-two` (`#4b7bba`) were **deliberately left** in
     `apps/shuffler/public/game.css` when everything else moved into `packages/design-tokens`
     (`tabletop-css-tokens`, `4396aea`). Recording why, because the omission looks like an oversight
@@ -106,7 +108,7 @@ section is just a wall between Jess and the live work.
     zone looks like, armed and at rest. Overlapping territory; that ticket decides zones, this
     decides whether the mat under them is fleet-owned. Link, don't merge.
 
-- [ ] `tabletop-view-rotation` Let a seated player flip their view of the table 180°, and stop hosting `<Tldraw>` full-window
+- GRILLING: `tabletop-view-rotation` Let a seated player flip their view of the table 180°, and stop hosting `<Tldraw>` full-window
   - Surfaced 2026-08-10 in conversation: the game-experience win is being able to rotate your own
     view of the shared table, like turning around a real card table, so your own side reads
     right-side-up to you regardless of where you're sitting.
@@ -132,7 +134,7 @@ section is just a wall between Jess and the live work.
     (`onTranslateEnd`/`zoneHitTest.ts`). Consult `shuffler-looks-like-itself` for where the button
     and any new Tabletop-only CSS should live (Tabletop has no ship-local stylesheet yet).
 
-- [ ] `applygamecommand-as-journey` `applyGameCommand`'s protocol looks like a Journey — worth a future look
+- [ ] DEFERRED `applygamecommand-as-journey` `applyGameCommand`'s protocol looks like a Journey — worth a future look
   - Surfaced 2026-08-08 while grilling `.scratch/shuffler-architecture-review/issues/02-tabletop-send-veto-hook.md`
     (designing a pre-mutate hook for `/play-card`/`/discard-card`'s send-then-commit protocol).
     `apps/shuffler/src/apply-game-command.ts`'s shared retrieve/reconstruct/version-check/status-check/
@@ -150,7 +152,7 @@ section is just a wall between Jess and the live work.
 
 ## Backlog
 
-- [ ] `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there ← was: JES-85
+- GRILLING: `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there ← was: JES-85
   - > For cards on the table, track how they got there. Give players 'discard' and 'exile' buttons
     > that move a card to the table, and display how it got there in the list of cards on the table.
   - Half of this already shipped: Discard exists end to end (`POST /discard-card`,
@@ -164,7 +166,7 @@ section is just a wall between Jess and the live work.
     off the whiteboard to mean "discard" instead of moving them to a graveyard. Dedicated actions beat
     ad-hoc deletion. The Tabletop side of that same confusion belongs to `tabletop-card-shape`, not here.
 
-- [ ] `finish-undo` Say what was undone, and decide whether we want redo ← was: JES-83, JES-99
+- GRILLING: `finish-undo` Say what was undone, and decide whether we want redo ← was: JES-83, JES-99
   - > When the player undoes with ctrl-Z, surface what was undone somehow — a toast, maybe.
   - cmd-Z/ctrl-Z is already wired (`public/game.js`, clicks the live undo button), but there is **no
     toast mechanism anywhere in the Shuffler** — so undo currently happens silently. The event log
@@ -195,7 +197,7 @@ section is just a wall between Jess and the live work.
   - `src/scripts/*` keeps `console.*` on purpose, already written down in `apps/shuffler/CLAUDE.md`.
     Don't "finish the job" there.
 
-- [ ] `spine-logs-in-traces` Give the Spine Ruby logs that participate in traces ← was: JES-137
+- [ ] DEFERRED `spine-logs-in-traces` Give the Spine Ruby logs that participate in traces ← was: JES-137
   - The last ship without a log pipeline. Rails `TaggedLogging` → STDOUT
     (`config/environments/production.rb`), no OTel logs gem, zero explicit app-level logging in
     `app/`, `lib/`, or `interpreter/` — so Spine request logs never land on the trace, even though
@@ -216,7 +218,7 @@ section is just a wall between Jess and the live work.
   - Everything else the closeout wanted has landed — violation inventory gone, sampling trap
     recorded, wiring table updated, per-ship duplication written down.
 
-- [ ] `build-sha-on-every-span` Every span says which build it came from ← was: JES-139
+- GRILLING: `build-sha-on-every-span` Every span says which build it came from ← was: JES-139
   - Nothing in the fleet carries a build identity — no `service.version`, no `deployment.sha`,
     anywhere (verified 2026-08-06). Deploy markers mark a _moment_, so "is this error only on the
     new build?" is answered by eyeballing which side of a marker line events fall on, which breaks
@@ -236,7 +238,7 @@ section is just a wall between Jess and the live work.
     probes entirely, so a _failing_ probe is still visible. Give it a test — the Shuffler's inline
     sampler was silently broken for months because it didn't have one.
 
-- [ ] `set-up-ci` Run the three test suites on every push ← was: JES-119
+- [ ] DEFERRED `set-up-ci` Run the three test suites on every push ← was: JES-119
   - > github actions, so tests run on every PR.
   - There is **no `.github/` directory at all** (verified 2026-08-06), yet all three ships have
     suites: `jest` in the Shuffler, `vitest` in the Tabletop, Rails `test/` in the Spine. Nothing
@@ -252,7 +254,7 @@ section is just a wall between Jess and the live work.
   - Touches persistence, not CSS: `nextGameId++` in both `InMemoryPersistStateAdapter.ts:35` and
     `SqlitePersistStateAdapter.ts:65` (the latter seeded from `MAX(id)`), plus the game URLs.
 
-- [ ] `game-page-to-ejs` Migrate the active game page to EJS templates ← was: JES-78
+- GRILLING: `game-page-to-ejs` Migrate the active game page to EJS templates ← was: JES-78
   - > The active game page renders via TypeScript view functions, a historical accident rather
     > than an intention. Migrate it to EJS like the rest of the pages.
   - Seven files under `src/view/play-game/` build the page as template strings; nothing in `views/`
@@ -262,12 +264,10 @@ section is just a wall between Jess and the live work.
     `formatHtmlHead()` in `src/view/common/html-layout.ts` load different stylesheets and set
     conflicting `body` fonts (Ovo vs Orbitron). Consult the `shuffler-looks-like-itself` owner.
 
-- [ ] `game-screen-table-layout` Arrange the game screen the way a real table is arranged ← was: JES-89, JES-87
-  - > Move the library to the right side of the game screen — that's where it sits in a real game.
-  - Library renders first in `.game-top-row` (`src/view/play-game/active-game-page.ts:84`), so it's
-    currently on the left, ahead of revealed cards and the command zone.
-  - Same argument, second half: sort the auto-drawn opening hand by card type then mana value —
-    lands first, then creatures, then everything else. `GameState.listHand()` sorts by position only.
+- [ ] DEFERRED `game-screen-table-layout` Sort the auto-drawn opening hand by card type then mana value ← was: JES-89, JES-87
+  - The library-placement half of this is done (library now renders after command zone and
+    revealed cards in `.game-top-row`). Sorting the opening hand is deferred: Jess's users said
+    they don't want it (2026-08-10). `GameState.listHand()` still sorts by position only.
 
 - [ ] `library-sort-toggle` Let the game's library search sort alphabetically or by library position ← was: JES-152, JES-142
   - > Seeing the library in true top-to-bottom order is how you confirm a shuffle happened, check
