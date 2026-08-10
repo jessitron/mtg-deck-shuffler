@@ -510,6 +510,59 @@ sleeve rendering picked up the Tabletop's square-corner rule (table-layout ticke
 `e53a27e`) for consistency: `.library-card-back.sleeved` in `public/playmat.css` zeroes
 `border-radius`. Full account in [interactions.md](interactions.md#not-related-to).
 
+## Physics Ticket 17 Implemented: Flip and Turn Face-Down (2026-08-09, `eb24a4f` + `ff5d58a`)
+
+Builds what ticket 06 (2026-08-08, `575416b`, recorded above) only decided. First code that
+writes `props.face` or `props.faceDown` anywhere in the Tabletop.
+
+- **`MtgCardShapeProps` gained `cardBackImageUrl: string | null`**
+  (`apps/tabletop/src/shared/mtgCardShape.ts`) — baked at mint time in `cardArrival.ts` from
+  `playerArea.cardBackImageUrl ?? null`, the same "sleeve color is a game constant, legal to
+  bake" argument this KB already carried for `sleeveColor`. Default `null` in
+  `getDefaultProps()`.
+- **`MtgCardShapeUtil.component()`'s unsleeved branch is now `faceDown`-aware.** Previously
+  it always rendered `src` regardless of `faceDown` — the KB's "nothing sets `faceDown` yet"
+  note is now false. New behavior: unsleeved + `faceDown` renders `cardBackImageUrl` as an
+  `<img>` if present, else a flat `#3a3a3a` rectangle (reachable when a seat never got a card
+  back, e.g. redeploy-wiped seat memory). Unsleeved face-up and both sleeved branches
+  (already `faceDown`-aware since table-layout ticket 17) are unchanged.
+- **First gesture ever to write `props.face` / `props.faceDown`**: a new custom tldraw
+  `ContextMenu`, `apps/tabletop/src/client/CardContextMenu.tsx` (`TableContextMenu`, wired via
+  `TLComponents.ContextMenu` in `TablePage.tsx`). Two menu items in this owner's territory:
+  - **"Flip"** — per-card swap of `face` (`front`↔`back`), shown only when at least one
+    selected card has `backImageUrl !== null` (exactly ticket 06 decision 1: no "Flip" entry
+    when there's nothing to flip to).
+  - **"Turn face down"/"Turn face up"** — a convergent toggle of `faceDown` across the whole
+    selection (ticket-16-style state push, like the Tap/Untap item beside it): the clicked
+    action's target state applies to every selected card, skipping cards already there.
+  - A third item, Tap/Untap, is card-mechanics territory, not face territory — it reuses the
+    existing tap rotation math, pulled out into a shared `apps/tabletop/src/client/shapes/cardTap.ts`
+    (`tapPartial`) so `onClick` and the menu item share one implementation.
+  - Every menu action's `commit()` helper ends with `editor.setSelectedShapes([])` —
+    right-clicking selects the card, and (unlike a locked shape) an unlocked card's selection
+    survives the menu closing, which would otherwise hijack the next drag of a different card
+    (the same hazard `MtgCardShapeUtil.onTranslateEnd`'s unconditional `setSelectedShapes([])`
+    already guards against for drags).
+- **`MtgCardShapeUtil.onTranslateEnd`**: a card entering the **library** zone now resets
+  `face: 'front'`, `faceDown: false`, folded into the same returned partial as the existing
+  `meta.zone` write (one undo entry, matching ticket 06 decision 4 and the Shuffler's
+  `mulligan()` reset). **No `hand` zone exists anywhere in this codebase**
+  (`NON_BATTLEFIELD_ZONES` in `MtgCardShapeUtil.tsx` doesn't have one), so the ticket's "hand
+  or library" reset is honestly only "library" today — the ticket file itself was corrected
+  to say so. **No `card.flipped` event was added** — the Shuffler-sync divergence (ticket 06
+  decision 2) is accepted as designed, not a gap.
+- Tests: `apps/tabletop/test/cardArrival.test.ts` covers `cardBackImageUrl` baking (sleeved
+  seat → `null`; unsleeved seat with a URL → baked in; no seat data → `null` default).
+  `apps/tabletop/test/verification/verify-flip-face-down.spec.ts` (new, Playwright): two-client
+  sync of BOTH flip and face-down toggle in one test (extended in `ff5d58a` after a
+  code-review pass on the ticket's spec found the two-client checkbox only covered flip);
+  the "Flip" item's gating on `backImageUrl`; face-down render shows the table's card back and
+  toggling back to face-up restores the front image; library-entry resets both axes; a
+  regression test that flipping card A via the menu doesn't leave a stale selection that
+  hijacks a later drag of card B.
+- Reviewed by this owner and `tabletop-shape-mechanics` before landing (per plan
+  `.scratch/tabletop-physics/plan-17.md`).
+
 ## Cards-Come-and-Go Ticket 02: the Event Vocabulary — Face Decisions (design decision, 2026-08-08, `7b7f868`)
 
 **No code changed** — decisions only; schemas and handlers come at build time. Full text:

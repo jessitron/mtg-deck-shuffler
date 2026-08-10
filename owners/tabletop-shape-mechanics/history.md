@@ -556,6 +556,42 @@ Full detail in `architecture.md`'s "Ticket 16" section; `interactions.md` watch 
 rewritten, watch point 13 extended, watch point 14 new, and a new `Depends On` note on
 `PointingShape.onPointerUp`'s ordering.
 
+## Ticket 17: flip and turn face-down — first custom `ContextMenu`, third stale-selection entry point (2026-08-09, `eb24a4f`/`ff5d58a`)
+
+`.scratch/tabletop-physics/issues/17-flip-and-face-down.md` (plan in `plan-17.md`). Mostly
+`two-faced-cards` territory (what `face`/`faceDown` mean, the seat's `cardBackImageUrl`, the
+library-entry reset mirroring the Shuffler's `mulligan()`) — but it landed the app's **first
+custom tldraw `ContextMenu`**, `apps/tabletop/src/client/CardContextMenu.tsx`, wired via
+`TLComponents.ContextMenu` in `TablePage.tsx`, and that's squarely this owner's mechanics.
+
+- **New UI surface, new selection hazard.** `DefaultContextMenu`'s `children` replace its default
+  content rather than append to it, so `TableContextMenu` re-declares a trimmed stock menu
+  (`ReorderMenuSubmenu` + `ClipboardMenuGroup`) alongside the new `mtg-card-actions` group
+  (Flip/Turn face down-up/Tap-Untap) — Jess's explicit call to drop `EditMenuSubmenu`
+  (Lock/Unlock — the *only* unlock affordance this KB has on record for `mtg-zone`'s
+  locked-and-stays-locked furniture), `ArrangeMenuSubmenu`, `MoveToPageMenu`,
+  `ConversionsMenuGroup`, `SelectAllMenuItem`, and `CursorChatItem`.
+- **Right-clicking selects a card, and — unlike a locked shape — an unlocked card's selection
+  survives the menu closing.** That reopens watch point 1's stale-selection hazard through a
+  third gesture (after drag-settle and the multi-untap click-batch): a lingering selection would
+  let the next drag of a *different* card silently move this one. Fixed the same way as watch
+  point 1's original fix, but at the menu's exit instead of the drag's: every menu action funnels
+  through a `commit(partials, label)` helper (`markHistoryStoppingPoint` → `updateShapes` →
+  `editor.setSelectedShapes([])`, the clear unconditional and always last). New watch point 15
+  records this as the general pattern for any future menu/toolbar/UI surface that mutates a card.
+  Regression test: `verify-flip-face-down.spec.ts`'s "flipping card A does not leave a stale
+  selection that hijacks a later drag of card B."
+- **`tapPartial` extracted from `MtgCardShapeUtil` into a standalone pure function**,
+  `apps/tabletop/src/client/shapes/cardTap.ts`, because the new Tap/Untap menu item needs the
+  same center-fixed pivot math (watch point 4) but has no `this.editor`/ShapeUtil instance to
+  call a private method on. Verified pure during review (only reads `shape.rotation`/
+  `shape.props.{w,h}`, module-level `TAP_ANGLE`, imported `Vec`) — no behavior change; both
+  `onClick`'s synchronous return and its ticket-16 `queueMicrotask` batch now call the imported
+  function.
+
+Full detail in `architecture.md`'s new "Ticket 17" section; `interactions.md` gained watch point
+15; `files.md` gained `CardContextMenu.tsx` and `cardTap.ts`.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,

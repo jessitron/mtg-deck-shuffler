@@ -172,6 +172,10 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
         // seat data, not payload data: it comes from seat memory, never from
         // the card.played payload.
         sleeveColor: playerArea.sleeveColor ?? null,
+        // Ticket 17 (flip-and-face-down): same argument, same seat-data-not-
+        // payload-data status. Null for sleeved seats (seat.joined omits it
+        // when sleeved — the sleeve always wins) and for seats with none.
+        cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
       },
       // No traceparent in meta — cards persist; traces don't. Zone
       // membership lands here once a card is dragged (see

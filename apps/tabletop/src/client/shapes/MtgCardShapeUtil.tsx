@@ -5,8 +5,7 @@ import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
 import { MtgCounterShape } from "../../shared/mtgCounterShape";
 import { findOpenSpotsNearZoneEdge, Rect } from "./openSpotNearZoneEdge";
 import { topmostZoneAt, ZoneHit } from "./zoneHitTest";
-
-const TAP_ANGLE = Math.PI / 2;
+import { tapPartial } from "./cardTap";
 
 // Ticket 18: counters detach the instant their host card leaves the
 // battlefield — one rule, no per-zone special-casing. Battlefield = the
@@ -43,6 +42,7 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       faceDown: false,
       tapped: false,
       sleeveColor: null,
+      cardBackImageUrl: null,
     };
   }
 
@@ -51,7 +51,7 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   }
 
   component(shape: MtgCardShape) {
-    const { frontImageUrl, backImageUrl, face, cardName, faceDown, sleeveColor, w } = shape.props;
+    const { frontImageUrl, backImageUrl, face, cardName, faceDown, sleeveColor, cardBackImageUrl, w } = shape.props;
     // `face` and `faceDown` are independent axes (two-faced-cards owner):
     // face picks which PRINTED side shows — a DFC's back is a normal face
     // image — while faceDown is concealment. Only faceDown hides the image.
@@ -122,10 +122,19 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
             <div style={{ ...sleeve, padding: w * 0.03 }}>
               <img style={{ display: "block", width: "100%", height: "100%", borderRadius: w * 0.05 }} src={src} alt={cardName} draggable={false} />
             </div>
+          ) : faceDown ? (
+            // Unsleeved and concealed: the table's generic Magic card back, a
+            // plain image swap (ticket 06 decision 3 — no border/dim/badge).
+            // cardBackImageUrl is null only for shapes minted before this
+            // prop existed; fall back to a flat rectangle rather than leaking
+            // the face underneath.
+            cardBackImageUrl ? (
+              <img className="tl-image" src={cardBackImageUrl} alt="face-down card" draggable={false} />
+            ) : (
+              <div style={{ width: "100%", height: "100%", background: "#3a3a3a" }} />
+            )
           ) : (
-            // Unsleeved: today's bare look. An unsleeved faceDown card should
-            // show the standard Magic back — wired up with the flip/turn-over
-            // gesture (tabletop-physics ticket 06); nothing sets faceDown yet.
+            // Unsleeved, face-up: today's bare look.
             <img className="tl-image" src={src} alt={cardName} draggable={false} />
           )}
         </div>
@@ -182,38 +191,13 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
           if (!fresh || fresh.type !== "mtg-card") continue;
           const card = fresh as MtgCardShape;
           if (card.props.tapped === tapped) continue;
-          partials.push(this.tapPartial(card, tapped));
+          partials.push(tapPartial(card, tapped));
         }
         if (partials.length > 0) this.editor.updateShapes(partials);
       });
     }
 
-    return this.tapPartial(shape, tapped);
-  }
-
-  // The tap write for one card: toggle `props.tapped` and apply the ±90°
-  // rotation delta. shape.x/y is the card's top-left corner, and rotation
-  // pivots around that point, not the card's center — so applying the delta
-  // to rotation alone would swing the card around its corner. Hold the
-  // center fixed instead: find it under the current rotation, then solve
-  // for the top-left that puts the same center under the new rotation.
-  private tapPartial(shape: MtgCardShape, tapped: boolean): TLShapePartial<MtgCardShape> {
-    const delta = tapped ? TAP_ANGLE : -TAP_ANGLE;
-    const rotation = shape.rotation + delta;
-
-    const { w, h } = shape.props;
-    const halfExtent = { x: w / 2, y: h / 2 };
-    const center = Vec.Add(shape, Vec.Rot(halfExtent, shape.rotation));
-    const topLeft = Vec.Sub(center, Vec.Rot(halfExtent, rotation));
-
-    return {
-      id: shape.id,
-      type: shape.type,
-      x: topLeft.x,
-      y: topLeft.y,
-      rotation,
-      props: { ...shape.props, tapped },
-    };
+    return tapPartial(shape, tapped);
   }
 
   // Ticket 18 (counters): the card hosts counters via tldraw's native
@@ -331,9 +315,17 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       }
     }
 
+    // Ticket 17: a card entering the library resets both face axes — mirrors
+    // the Shuffler's own mulligan() reset. Folded into this same returned
+    // partial (one write, one undo entry) rather than a second updateShapes
+    // call. There's no "hand" zone yet (see NON_BATTLEFIELD_ZONES above), so
+    // this only fires for library today.
+    const resetFace = zoneHit?.zone === "library" && (current.props.face !== "front" || current.props.faceDown);
+
     return {
       id: current.id,
       type: current.type,
+      ...(resetFace ? { props: { ...current.props, face: "front" as const, faceDown: false } } : {}),
       meta: { ...current.meta, zone: zone ?? null },
     };
   }

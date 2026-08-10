@@ -349,6 +349,28 @@
     point 1's drag-settle `setSelectedShapes([])` means multi-untap only works
     marquee-then-click; a drag in between clears the selection.
 
+15. **A context menu is a third entry point into watch point 1's stale-selection family — right-
+    click selects, and an unlocked shape's selection outlives the menu closing.** (Ticket 17,
+    2026-08-09, `eb24a4f`.) `apps/tabletop/src/client/CardContextMenu.tsx` is the app's first
+    custom `TLComponents.ContextMenu`. Right-clicking a card runs it through the same selection
+    machinery a left-click does, so the card becomes selected — and tldraw's `DefaultContextMenu`
+    clears selection on close **only for a locked shape**, not an unlocked one. Without an
+    explicit clear, right-click-then-act (or right-click-then-dismiss) leaves the card selected,
+    and the *next* drag of a *different* card silently hijacks this one instead (the same
+    `startTranslating` safety-net gap watch point 1 describes: it only force-reselects when
+    nothing is currently selected). **Mitigation pattern for any future menu item that mutates a
+    shape**: route every write through a `commit(partials, label)` helper that ends with
+    `editor.setSelectedShapes([])`, unconditionally, after `markHistoryStoppingPoint` +
+    `updateShapes` — see `CardContextMenu.tsx`'s `commit()`. Regression test:
+    `verify-flip-face-down.spec.ts`'s "flipping card A does not leave a stale selection that
+    hijacks a later drag of card B." This is now the third documented entry point into the
+    family: drag-settle (watch point 1, `onTranslateEnd`), the multi-untap click-batch (watch
+    point 14, inside `onClick`), and now context-menu actions (here, at the menu's exit rather
+    than a ShapeUtil hook). **The pattern generalizes**: any future custom menu, toolbar button,
+    or other UI surface that mutates a card via `editor.updateShapes` while it might be selected
+    needs the same trailing clear — the hazard isn't specific to drag or to `onClick`, it's
+    "does this gesture leave an unlocked shape selected when it's done."
+
 ## Not Related To
 
 ### Card face/image rendering

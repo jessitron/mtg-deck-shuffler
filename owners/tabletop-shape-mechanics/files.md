@@ -35,12 +35,27 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 
 ## Client (the ShapeUtils themselves)
 
+- `apps/tabletop/src/client/CardContextMenu.tsx` — **new, ticket 17 (2026-08-09, `eb24a4f`)**:
+  the app's first custom `TLComponents.ContextMenu`, wired in `TablePage.tsx`. `TableContextMenu`
+  wraps `DefaultContextMenu`, replacing its default content (children replace, not add) with the
+  new `mtg-card-actions` group (Flip/Turn face down-up/Tap-Untap, via `CardMenuItems`) plus a
+  trimmed stock menu (`ReorderMenuSubmenu` + `ClipboardMenuGroup`). `CardMenuItems` reads the
+  selection reactively (`useEditor()` + `useValue(getSelectedShapes().filter(mtg-card))`) and
+  routes every action through a `commit(partials, label)` helper
+  (`markHistoryStoppingPoint` → `updateShapes` → unconditional trailing
+  `editor.setSelectedShapes([])`) — the fix for the stale-selection-after-menu-close hazard, watch
+  point 15. See `architecture.md`'s "Ticket 17" section.
+- `apps/tabletop/src/client/shapes/cardTap.ts` — **new, ticket 17**: `tapPartial(shape, tapped)`,
+  the center-fixed pivot solve (watch point 4) extracted out of `MtgCardShapeUtil` as a
+  standalone pure function so the context menu's Tap/Untap item can share it — a menu item has
+  no `this.editor`/ShapeUtil instance to call a private method on. Imported by both
+  `MtgCardShapeUtil.tsx`'s `onClick` and `CardContextMenu.tsx`.
 - `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — the whole card territory: extends
   `BaseBoxShapeUtil<MtgCardShape>`; `onClick` (tap/untap toggling `props.tapped` with rotation
   as a pure visual delta; since ticket 16, 2026-08-09, also pushes the clicked card's new state
   to the rest of a marquee selection via a `queueMicrotask`-deferred batch — the clicked card's
-  own partial stays a synchronous return; see `architecture.md`'s "Ticket 16"), `tapPartial()`
-  (private — the extracted center-fixed pivot solve, shared by the return and the batch),
+  own partial stays a synchronous return; see `architecture.md`'s "Ticket 16"; since ticket 17,
+  calls the standalone `tapPartial` from `cardTap.ts` instead of a private method),
   `onTranslateEnd` (selection cleanup + zone-entry detection +
   counter eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`, deliberately
   excluding the Stack), `zoneAt()` (private helper — since ticket 14, a thin wrapper around
@@ -91,7 +106,9 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   is why `defaultShapeUtils` must be spread in explicitly; see `architecture.md`). Add new custom
   ShapeUtils here. Since ticket 18 it also wires the counter tool: `tools={[MtgCounterTool]}`,
   `overrides` (`uiOverrides.tools` adds the toolbar item), and `components`
-  (`ToolbarWithCounter`, a `DefaultToolbar` with the counter item prepended).
+  (`ToolbarWithCounter`, a `DefaultToolbar` with the counter item prepended). Since ticket 17
+  (2026-08-09) also passes `ContextMenu: TableContextMenu` in the same `components` object —
+  see `CardContextMenu.tsx`, above.
   Also home to `aimCameraAtTheTable()` (table-layout ticket 14, `5eeac70`;
   corrected same day, `96159be`): since the square's furniture centers on the origin (mostly
   negative page coordinates, off tldraw's default viewport), the mount hook does one
@@ -185,6 +202,11 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   post-creation cooldown (tldraw's double-click window; see watch point 13).
 - `apps/tabletop/test/openSpotNearZoneEdge.test.ts` — **new, ticket 18**: unit tests for the
   pure eviction geometry.
+- `apps/tabletop/test/verification/verify-flip-face-down.spec.ts` — **new, ticket 17
+  (2026-08-09, `eb24a4f`/`ff5d58a`)**: mostly `two-faced-cards` coverage (flip/face-down
+  behavior, two-client sync convergence for both), but includes this owner's regression test —
+  "flipping card A does not leave a stale selection that hijacks a later drag of card B" (watch
+  point 15).
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 
