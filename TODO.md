@@ -274,6 +274,32 @@ black`, radius computed as 5% of the shape's height).
     zone looks like, armed and at rest. Overlapping territory; that ticket decides zones, this
     decides whether the mat under them is fleet-owned. Link, don't merge.
 
+- [ ] `tabletop-view-rotation` Let a seated player flip their view of the table 180°, and stop hosting `<Tldraw>` full-window
+  - Surfaced 2026-08-10 in conversation: the game-experience win is being able to rotate your own
+    view of the shared table, like turning around a real card table, so your own side reads
+    right-side-up to you regardless of where you're sitting.
+  - tldraw has no camera-rotation API — confirmed in conversation, not yet re-verified against
+    the SDK docs. **The workaround is CSS**: wrap `<Tldraw>` in a "canvas pane" box (`TablePage.tsx`
+    currently hosts it directly inside a bare `position:fixed;inset:0` div) and toggle
+    `transform: rotate(180deg)` on that box. This is local/per-browser only — it never touches the
+    synced document or camera state, so it doesn't need to coordinate with anyone else at the table.
+  - Two things the rotate toggle button needs, both outside `<Tldraw>` itself: (1) it lives in the
+    surrounding page chrome, not tldraw's own toolbar; (2) tldraw's own UI chrome — the toolbar
+    override (`ToolbarWithCounter`) and `TableContextMenu` — will visually rotate along with its
+    rotated DOM ancestor unless counter-rotated, so menu text/icons need a compensating rotation to
+    stay upright. Watch for the corner-anchoring side effect: rotating the parent flips which corner
+    an absolutely-positioned child visually lands in, even after its content is counter-rotated back
+    upright.
+  - This is also the first step toward a separate, bigger idea (not this item — deliberately not
+    captured here, too large for a buoy): giving the Tabletop room for a sidebar (game-event log,
+    debug event log, card-zoom modal) alongside the canvas instead of only on top of it. Wrapping
+    `<Tldraw>` in a canvas pane is the shared prerequisite for both, but scope this item to the
+    rotation feature alone.
+  - Consult `tabletop-shape-mechanics` before implementing — need to confirm CSS-rotating the
+    canvas's DOM ancestor doesn't disturb pointer hit-testing or zone detection
+    (`onTranslateEnd`/`zoneHitTest.ts`). Consult `shuffler-looks-like-itself` for where the button
+    and any new Tabletop-only CSS should live (Tabletop has no ship-local stylesheet yet).
+
 - [ ] `applygamecommand-as-journey` `applyGameCommand`'s protocol looks like a Journey — worth a future look
   - Surfaced 2026-08-08 while grilling `.scratch/shuffler-architecture-review/issues/02-tabletop-send-veto-hook.md`
     (designing a pre-mutate hook for `/play-card`/`/discard-card`'s send-then-commit protocol).
