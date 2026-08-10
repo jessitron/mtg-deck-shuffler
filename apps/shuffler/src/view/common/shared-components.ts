@@ -7,6 +7,28 @@ export function escapeHtml(text: string): string {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
+/** Perceived luminance (ITU-R BT.601) below the midpoint reads as dark — mirrors prep-picker.js's isDark(). */
+function isDarkHex(hex: string): boolean {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return 0.299 * r + 0.587 * g + 0.114 * b < 128;
+}
+
+/**
+ * The sleeve color is the player-identity signal (see notes/GLOSSARY.md): it
+ * tints the command-zone surround and the deck-title plaque. Inline style on
+ * purpose — sleeve hex is domain data, and a page-sheet rule on these shared
+ * components would leak onto /design. Server-rendered here so /game (no
+ * picker JS) gets the same tint /prepare gets; prep-picker.js's live preview
+ * re-applies it while picking, before the value persists.
+ */
+export function sleeveTintStyle(sleeveColor: string | undefined, withTextColor: boolean): string {
+  if (!sleeveColor) return "";
+  const textColor = withTextColor && isDarkHex(sleeveColor) ? " color: white;" : "";
+  return ` style="background-color: ${sleeveColor};${textColor}"`;
+}
+
 /**
  * The deck-title plaque. It used to live inside `.cool-command-zone-surround`;
  * it now rests on the playmat itself — centered in the mat's top row on /prepare,
@@ -17,8 +39,8 @@ export function escapeHtml(text: string): string {
  * the menu on `!evt.target.closest("#game-menu")`, so a title nested inside would
  * swallow the dismiss click.
  */
-export function formatDeckTitleHtmlFragment(deckName: string): string {
-  return `<div class="game-title"><span class="game-name">${escapeHtml(deckName)}</span></div>`;
+export function formatDeckTitleHtmlFragment(deckName: string, sleeveColor?: string): string {
+  return `<div class="game-title"${sleeveTintStyle(sleeveColor, true)}><span class="game-name">${escapeHtml(deckName)}</span></div>`;
 }
 
 export function formatCardNameAsModalLink(cardName: string, gameId: number, cardIndex: number, expectedVersion?: number): string {
@@ -138,7 +160,7 @@ export function formatCommandZoneHtmlFragment(game: GameState): string {
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
-    <div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}">
+    <div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}"${sleeveTintStyle(game.sleeveColor, false)}>
       <div class="multiple-cards">
         ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId, expectedVersion })).join("")}
       </div>

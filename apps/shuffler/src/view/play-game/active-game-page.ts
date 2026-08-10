@@ -74,7 +74,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
            hx-swap="outerHTML">
 
            <div class="game-header-row">
-             ${formatDeckTitleHtmlFragment(game.deckName)}
+             ${formatDeckTitleHtmlFragment(game.deckName, game.sleeveColor)}
              ${menuHtml}
            </div>
            ${tableSectionHtml}

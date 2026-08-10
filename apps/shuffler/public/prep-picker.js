@@ -34,10 +34,12 @@
   }
 
   // Live preview: the sleeve color is the player-identity signal — it tints
-  // the command-zone surround and the deck-title plaque. (Dressing the
-  // library is a later, separate task.) Inline style on purpose: sleeve hex
-  // is domain data, and a page-sheet rule on these shared components would
-  // leak onto /design.
+  // the command-zone surround and the deck-title plaque. A saved pick is
+  // already server-rendered with this same tint (formatDeckTitleHtmlFragment/
+  // formatCommandZoneHtmlFragment, shared-components.ts) — this only reapplies
+  // it live while picking, before the value persists. Inline style on
+  // purpose: sleeve hex is domain data, and a page-sheet rule on these shared
+  // components would leak onto /design.
   function applySleeveTint(hex) {
     document.querySelectorAll(".cool-command-zone-surround, .game-title").forEach(function (el) {
       el.style.backgroundColor = hex || "";
@@ -83,14 +85,5 @@
     colorInput.addEventListener("change", function () {
       persist({ "sleeve-color": colorInput.value });
     });
-  }
-
-  // A saved sleeve pick tints on load too (the mat arrives server-rendered).
-  const selectedSleeve = panel.querySelector(".table-look-sleeves .table-look-selected");
-  if (selectedSleeve) {
-    const hex = selectedSleeve.classList.contains("table-look-custom")
-      ? colorInput.value
-      : selectedSleeve.dataset.sleeveColor;
-    if (hex) applySleeveTint(hex);
   }
 })();
