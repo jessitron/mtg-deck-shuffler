@@ -204,6 +204,23 @@ resolve by load order. The gallery insulates itself: everything is scoped under
 `.design-page`, and `.design-page .stage` resets `color: black` so specimens inherit what
 they'd inherit in the app rather than the gallery's light-on-dark text.
 
+## Modal focus trap (2026-08-10, `modal-focus-trap`) — JS, not CSS, but touches all four modal templates
+
+`apps/shuffler/public/modal-focus.js` is one generic mechanism shared by every
+`#modal-container`/`#card-modal-container` consumer — `views/partials/card-modal.ejs`,
+`views/partials/library-modal.ejs`, `src/view/play-game/game-modals.ts`,
+`src/view/play-game/history-components.ts`. It moves focus into a dialog on open (landing
+on the overlay's own `tabindex="0"`), sets native `inert` on whichever region isn't the
+topmost open dialog, wraps Tab/Shift+Tab inside the topmost dialog, and restores focus to
+the opener on close. Loaded on both `/game` (`GAME_HEAD_SCRIPTS_HTML` in
+`src/view/common/html-layout.ts`) and `/prepare` (`views/prepare.ejs`, alongside
+`table-look-focus.js`, which it doesn't replace — that file handles the table-look picker's
+own htmx-swap focus restoration, a different problem). **No stylesheet changed** — `inert`
+needed no CSS, confirmed safe by this owner's `-review` (nothing in `playmat.css`/
+`prepare.css`/`game.css` keys off `[inert]`, `:focus-within`, or `:has()`). See
+[README.md](README.md) for the full mechanism and [interactions.md](interactions.md) for
+the shape convention a fifth modal-overlay consumer must follow.
+
 ## The z-index ladder
 
 Documented in a comment in `game.css` and worth keeping:

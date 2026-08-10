@@ -31,6 +31,7 @@ All files involved in the library search feature, grouped by role.
 | File | Role |
 |------|------|
 | `public/modal-query-params.js` | Auto-open library modal from URL params |
+| `public/modal-focus.js` | Generic focus trap/inert/restore for all `#modal-container`/`#card-modal-container` consumers (library modal included) — not library-search-specific, owned jointly with every other modal co-tenant. See interactions.md. |
 
 ## Styling
 
@@ -60,6 +61,7 @@ All files involved in the library search feature, grouped by role.
 | `test/verification/verify-prep-library-click.spec.ts` | E2E: clicking the library stack on the prep page opens the search modal |
 | `test/verification/verify-library-alphabetical-order.spec.ts` | E2E: library modal is alphabetical by name — ungrouped and within each type group — on both game and prep routes, including after a shuffle |
 | `test/game-modals.test.ts` | Unit — not library search itself, but pins `formatTableCardListHtmlFragment()`'s alphabetical order (Cards on Table); see "Related, Not Library Search" below |
+| `test/verification/verify-modal-focus.spec.ts` | E2E (generic focus mechanism, exercised via the library modal): open → Tab-trap → close → focus-restore |
 
 ## Documentation
 

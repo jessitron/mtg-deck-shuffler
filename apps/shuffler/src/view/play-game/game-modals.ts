@@ -9,6 +9,8 @@ export function formatModalHtmlFragment(title: string, bodyContent: string): str
                hx-target="#modal-container"
                hx-swap="innerHTML"
                hx-trigger="click[target==this], keyup[key=='Escape'] from:body"
+               role="dialog"
+               aria-modal="true"
                tabindex="0">
     <div class="modal-dialog">
       <div class="modal-header">

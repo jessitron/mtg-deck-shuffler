@@ -91,7 +91,8 @@ const GAME_HEAD_SCRIPTS_HTML = `    <script src="/htmx.js"></script>
       ];
     </script>
     <script src="/game.js"></script>
-    <script src="/modal-query-params.js"></script>`;
+    <script src="/modal-query-params.js"></script>
+    <script src="/modal-focus.js"></script>`;
 
 interface PageWrapperOptions {
   title: string;

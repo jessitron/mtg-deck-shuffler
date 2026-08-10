@@ -137,6 +137,31 @@ full stop — no toggle back to position order was wanted or built.**
   regardless of shuffle/position).
 - Position order isn't gone — it's the one true order internally
   (`GameState.listLibrary()`), just never surfaced in the UI.
+## 2026-08-10: Generic modal focus trap (`public/modal-focus.js`)
+
+A new, generic focus-trap/focus-management mechanism landed for every
+`#modal-container`/`#card-modal-container` consumer — not library-modal-specific, but
+the library modal is one of its consumers and its main verification target.
+
+- `views/partials/library-modal.ejs`: the outer `.modal-overlay` gained static
+  `role="dialog" aria-modal="true"` next to the existing `tabindex="0"`.
+- `public/modal-focus.js` (new file): on `htmx:afterSettle`, when a modal transitions
+  from absent to present, captures the previously-focused element, moves focus onto
+  the overlay, and sets native `inert` on the main page content region
+  (`#game-container` or `main.prepare-container`) plus whichever modal container isn't
+  currently topmost — so a modal's own content is never made inert while it's open.
+  Handles the stacked case (card modal opened from inside the library modal): the
+  library modal becomes inert while the card modal is topmost, and closing the card
+  modal returns focus into the library modal (per-container prior-focus stack), not
+  all the way back to the page opener.
+- Verified by new `test/verification/verify-modal-focus.spec.ts` (open → Tab-trap →
+  close → focus-restore on the library modal, opened via the real `.search-button`).
+  Existing `verify-library-grouping.spec.ts` and `verify-prep-library-click.spec.ts`
+  pass unchanged — clicking card-name-links, the group-by-type toggle, and the close
+  button all still work.
+- Owned primarily by `shuffler-looks-like-itself` (see its docs, commit `e2a97f1`) since
+  it's a fleet-wide UI mechanism; recorded here so future library-modal changes know
+  focus/inert lifecycle is already covered and shouldn't be reimplemented locally.
 
 ## Design Decision: EJS vs TypeScript Template
 

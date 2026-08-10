@@ -24,6 +24,27 @@ How library search connects to other parts of the app.
 - Close via `/close-modal` route or Escape key / overlay click
 - Modal CSS classes: `.modal-overlay`, `.modal-dialog`, `.modal-header`, `.modal-body`
 
+### Focus Management (`public/modal-focus.js`)
+- **Generic, not library-modal-specific.** A single script applies focus-in-on-open,
+  Tab-trapping, background-`inert`, and focus-restore-on-close to every consumer of
+  `#modal-container`/`#card-modal-container` — library modal included, alongside the
+  table/history/debug modals. Keyed off `htmx:afterSettle`. Do not write
+  library-modal-local focus code; this is already covered.
+- The library modal's `.modal-overlay` (`views/partials/library-modal.ejs`) carries
+  static `role="dialog"`, `aria-modal="true"`, and the pre-existing `tabindex="0"`
+  (the landing spot for initial focus). On open, `modal-focus.js` captures the
+  previously-focused element, focuses the overlay, and sets `inert` on the main page
+  content region (`#game-container` or `main.prepare-container`) plus whichever of
+  `#modal-container`/`#card-modal-container` is not currently topmost.
+- **Stacked case** (card modal opened from inside the library modal): the library
+  modal's container becomes inert while the card modal is topmost; closing the card
+  modal restores focus *into* the library modal (per-container prior-focus stack), not
+  back to the original page opener.
+- Verified by `test/verification/verify-modal-focus.spec.ts` (open → Tab-trap → close →
+  focus-restore via the real `.search-button`); existing
+  `verify-library-grouping.spec.ts` and `verify-prep-library-click.spec.ts` pass
+  unchanged.
+
 ### Card Type Icons
 - SVG files in `public/icons/card-types/`
 - CSS mask technique in `public/playmat.css`

@@ -32,6 +32,11 @@
   pages whose call passes it — the shell unifies the skeleton, not the per-page lists.
 - **The `/design` gallery** — the only place the language is visible all at once.
 - **`apps/shuffler/CLAUDE.md` → "UI Style"** — the short public statement of the rules.
+- **`apps/shuffler/public/modal-focus.js`** (2026-08-10, `modal-focus-trap`) — no CSS, but it
+  depends on the shape of the four modal-overlay templates: `.modal-overlay`/
+  `.card-modal-overlay` class, `tabindex="0"`, `role="dialog" aria-modal="true"`. It finds
+  dialogs by container id (`#modal-container`, `#card-modal-container`) and overlay class,
+  so a template that reuses the shape gets the focus trap for free; one that doesn't, doesn't.
 
 ## Depended on by
 
@@ -180,6 +185,11 @@ Concrete, in rough order of how often they bite.
   One sanctioned exception exists, and it's on the canvas, not in any stylesheet:
   `MtgCounterShapeUtil.tsx`'s editing textarea (2026-08-08) — see README → tldraw limits.
   It is not precedent for DOM pages.
+  **The four modal overlays' `[tabindex]` now does more than take the global ring — it's
+  the focus-trap landing spot too (2026-08-10, `modal-focus-trap`)**: `modal-focus.js`
+  calls `.focus()` on the overlay itself when its container gains a dialog. See
+  [README.md](README.md) for the mechanism and the shape a fifth modal-shaped consumer must
+  copy (`role="dialog" aria-modal="true"` alongside the existing class + `tabindex="0"`).
   Two things that do need care:
   - If your new element is focusable but **not** one of those tags (a `div` with a click
     handler, say), give it a real tag or a `tabindex` so the global rule reaches it.
