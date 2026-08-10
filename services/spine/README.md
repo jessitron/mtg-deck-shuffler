@@ -20,8 +20,10 @@ PORT=4600 ./run     # sources repo-root .be then .env (order matters for telemet
 - `POST /tables` `{ "name": "...", "creator": "..." }` — Spine mints the tableId,
   appends `table.created`. 409 if an active table already has that name.
 - `GET /tables/lookup?name=...` — join by name: returns `{ tableId, name, seats }`.
-- `POST /tables/:table_id/seats` `{ "seat": 1..4, "playerName": "..." }` — take a
-  seat; Spine mints the seatId, appends `seat.taken`.
+- `POST /tables/:table_id/seats` `{ "playerName": "...", "seat"?: 1..4 }` — take a
+  seat; Spine mints the seatId and, unless the caller names one, the seat
+  number too (the next open one, 1-4), appends `seat.taken`. 409 if the table
+  already has 4 seats taken, or if an explicit `seat` is already occupied.
 - `POST /tables/:table_id/events` — ingest a contract event (envelope v1).
   Validated against `contracts/` on receipt; unknown name/version fails loudly
   (422). Duplicate sender `id` is elided (returns the already-accepted event).

@@ -52,6 +52,24 @@ class IngestionTest < ActionDispatch::IntegrationTest
     assert_response :conflict
   end
 
+  test "no seat number given: the Spine assigns one and returns it" do
+    table = create_table!
+    post "/tables/#{table['tableId']}/seats", params: { playerName: "Jess" }, as: :json
+    assert_response :created
+    assert_equal 1, response.parsed_body["seat"]
+
+    post "/tables/#{table['tableId']}/seats", params: { playerName: "Robin" }, as: :json
+    assert_response :created
+    assert_equal 2, response.parsed_body["seat"]
+  end
+
+  test "a fifth seat, with none given, is a 409" do
+    table = create_table!
+    4.times { |i| post "/tables/#{table['tableId']}/seats", params: { playerName: "Player #{i}" }, as: :json }
+    post "/tables/#{table['tableId']}/seats", params: { playerName: "Fifth Wheel" }, as: :json
+    assert_response :conflict
+  end
+
   test "ingesting card.played assigns seq and acceptedAt" do
     table_id = create_table!["tableId"]
     table = Table.find(table_id)

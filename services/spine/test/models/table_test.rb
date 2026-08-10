@@ -54,6 +54,29 @@ class TableTest < ActiveSupport::TestCase
     end
   end
 
+  test "no seat number given: the Spine assigns the lowest open one" do
+    table = create_table
+    first = table.take_seat!(player_name: "Jess", traceparent: valid_traceparent)
+    second = table.take_seat!(player_name: "Robin", traceparent: valid_traceparent)
+    assert_equal 1, first.number
+    assert_equal 2, second.number
+  end
+
+  test "auto-assignment fills a gap left by an explicit number" do
+    table = create_table
+    table.take_seat!(number: 2, player_name: "Jess", traceparent: valid_traceparent)
+    assigned = table.take_seat!(player_name: "Robin", traceparent: valid_traceparent)
+    assert_equal 1, assigned.number
+  end
+
+  test "a fifth seat, with none given, is a TableFull conflict" do
+    table = create_table
+    4.times { |i| table.take_seat!(player_name: "Player #{i}", traceparent: valid_traceparent) }
+    assert_raises(Table::TableFull) do
+      table.take_seat!(player_name: "Fifth Wheel", traceparent: valid_traceparent)
+    end
+  end
+
   test "seq is monotonic per table, independently across tables" do
     table_a = create_table(name: "table-a")
     table_b = create_table(name: "table-b")
