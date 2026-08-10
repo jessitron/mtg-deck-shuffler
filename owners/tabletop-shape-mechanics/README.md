@@ -82,6 +82,16 @@ accept-list reopened the drag-identity hazard (watch point 1) for it, because st
 a missing hook" as a reusable pattern for future stock-shape integrations. See `architecture.md`'s
 "Ticket 19" section and watch point 18.
 
+**Ticket 20** (`.scratch/tabletop-physics/issues/20-cards-behind-cards.md`, landed 2026-08-10)
+widens `PASSENGER_TYPES` a third time to include `mtg-card` itself — a card can now host another
+card, tucked underneath, via the exact same drag-attach mechanism tickets 18/19 built. Unlike
+counters and notes, a passenger card isn't cosmetic cargo: its rotation encodes `props.tapped`,
+so this ticket added real matrix-composition math (`cardTap.ts`'s `passengerTapCompensation`,
+built on tldraw's own `Mat` class) to keep a tucked card's page position and rotation fixed across
+its host's tap, plus exemptions in two existing rotation-writing hooks that would otherwise make
+a tapped card's *look* disagree with its `props.tapped`. See `architecture.md`'s "Ticket 20"
+section and watch point 19.
+
 ## Design philosophy
 
 - **Extend tldraw's built-in shape utils rather than reimplementing them, where that's still
@@ -125,6 +135,8 @@ a missing hook" as a reusable pattern for future stock-shape integrations. See `
 | Counter attach/detach/evict/edit tests | `apps/tabletop/test/verification/verify-counter.spec.ts`, `apps/tabletop/test/openSpotNearZoneEdge.test.ts` |
 | Stock `note` ShapeUtil, subclassed to add the drag-settle selection-clear stock tldraw lacks | `apps/tabletop/src/client/shapes/SelectionClearingNoteShapeUtil.ts` |
 | Note-as-passenger attach/detach/evict + stale-selection regression tests | `apps/tabletop/test/verification/verify-note.spec.ts` |
+| Passenger CARD tap compensation (matrix math for a tucked card's fixed page pose across a host tap) | `apps/tabletop/src/client/shapes/cardTap.ts` (`passengerTapCompensation`) |
+| Card-as-passenger attach/carry/tap-independence/z-order/detach/evict tests | `apps/tabletop/test/verification/verify-cards-behind-cards.spec.ts`, `apps/tabletop/test/passengerTapCompensation.test.ts` |
 
 See `architecture.md` for how the pieces fit together, `interactions.md` for what depends on
 this and the watch points, `history.md` for how we got here, `files.md` for the full file list.

@@ -1,10 +1,10 @@
 import { useLayoutEffect, useRef } from "react";
-import { BaseBoxShapeUtil, HTMLContainer, TLDragShapesOutInfo, TLShape, TLShapePartial, Vec } from "tldraw";
+import { BaseBoxShapeUtil, HTMLContainer, TLDragShapesOutInfo, TLShape, TLShapePartial } from "tldraw";
 import type { CSSProperties } from "react";
 import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
 import { findOpenSpotsNearZoneEdge, Rect } from "./openSpotNearZoneEdge";
 import { topmostZoneAt, ZoneHit } from "./zoneHitTest";
-import { tapPartial } from "./cardTap";
+import { passengerCompensationPartials, poseOf, rotateHoldingCenter, tapPartial, tapPartialsForCards } from "./cardTap";
 
 // Ticket 18: counters detach the instant their host card leaves the
 // battlefield — one rule, no per-zone special-casing. Battlefield = the
@@ -20,7 +20,14 @@ const NON_BATTLEFIELD_ZONES = new Set(["graveyard", "exile", "library"]);
 // battlefield-exit eviction. "Passenger" is anything a card hosts by
 // parenting; not the card's own props, per ticket 02's "the card carries
 // nothing about its passengers."
-const PASSENGER_TYPES = new Set(["mtg-counter", "note"]);
+//
+// Ticket 20: a card can be a passenger too — tucked under another card via
+// the same drag-attach mechanism. Unlike counters/notes, a passenger CARD
+// gets explicit rotation+position compensation on the host's tap (see
+// cardTap.ts's passengerCompensationPartials) so its printed face doesn't
+// appear to spin/orbit; counters and notes are still meant to tilt along
+// (ticket 18's ride-along visual) and are untouched by that compensation.
+const PASSENGER_TYPES = new Set(["mtg-counter", "note", "mtg-card"]);
 
 /**
  * JES-144, tabletop-physics ticket 12: `mtg-card`, a genuine custom shape
@@ -172,40 +179,44 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   // logic that collapses it to the clicked card).
   override onClick(shape: MtgCardShape): TLShapePartial<MtgCardShape> | undefined {
     const tapped = !shape.props.tapped;
+    const hostPartial = tapPartial(shape, tapped);
 
     const selectedIds = this.editor.getSelectedShapeIds();
     const otherIds = selectedIds.includes(shape.id) ? selectedIds.filter((id) => id !== shape.id) : [];
-    if (otherIds.length > 0) {
-      // Deferred via queueMicrotask — undocumented-tldraw-ordering alert:
-      // PointingShape.onPointerUp calls markHistoryStoppingPoint() and then
-      // updateShapes([change]) AFTER onClick returns, so a synchronous write
-      // here would land BEFORE the mark, fusing into the previous undo entry.
-      // The microtask runs after the whole pointer-up handler — after the
-      // mark — so the propagated writes coalesce into the same new undo
-      // entry as the clicked card's own change, and one Ctrl+Z reverts the
-      // whole gesture. Guarded by verify-multi-untap.spec.ts, which is the
-      // tripwire for a tldraw upgrade reordering this. Never "upgrade" this
-      // to setTimeout: a macrotask could interleave with other input events.
-      queueMicrotask(() => {
-        const partials: TLShapePartial<MtgCardShape>[] = [];
-        for (const id of otherIds) {
-          // Re-fetch fresh: the clicked card's update (and possibly remote
-          // changes) applied between onClick and this microtask. A marquee
-          // can also catch counters and other shapes — cards only. Cards
-          // already at the target state are skipped entirely: rotation is a
-          // delta, and applying ±90° to an already-correct card would
-          // corrupt its free rotation.
-          const fresh = this.editor.getShape(id);
-          if (!fresh || fresh.type !== "mtg-card") continue;
-          const card = fresh as MtgCardShape;
-          if (card.props.tapped === tapped) continue;
-          partials.push(tapPartial(card, tapped));
-        }
-        if (partials.length > 0) this.editor.updateShapes(partials);
-      });
-    }
 
-    return tapPartial(shape, tapped);
+    // Deferred via queueMicrotask — undocumented-tldraw-ordering alert:
+    // PointingShape.onPointerUp calls markHistoryStoppingPoint() and then
+    // updateShapes([change]) AFTER onClick returns, so a synchronous write
+    // here would land BEFORE the mark, fusing into the previous undo entry.
+    // The microtask runs after the whole pointer-up handler — after the
+    // mark — so the propagated writes coalesce into the same new undo
+    // entry as the clicked card's own change, and one Ctrl+Z reverts the
+    // whole gesture. Guarded by verify-multi-untap.spec.ts, which is the
+    // tripwire for a tldraw upgrade reordering this. Never "upgrade" this
+    // to setTimeout: a macrotask could interleave with other input events.
+    //
+    // Ticket 20: this always runs now (not only when other cards are
+    // selected) so the clicked card's own mtg-card passengers, if any, get
+    // their rotation+position compensation in the same undo entry.
+    queueMicrotask(() => {
+      // Re-fetch fresh: the clicked card's update (and possibly remote
+      // changes) applied between onClick and this microtask. A marquee can
+      // also catch counters and other shapes — cards only.
+      const otherCards = otherIds
+        .map((id) => this.editor.getShape(id))
+        .filter((s): s is MtgCardShape => !!s && s.type === "mtg-card");
+      // A multi-selected passenger of the clicked card is ALSO tapped
+      // directly here (via otherCards) — its own tap write must win over a
+      // stale ride-along compensation computed as though only the host were
+      // changing. Same dedup tapPartialsForCards does internally for its own
+      // `cards` batch, applied here across the clicked card + otherCards.
+      const directIds = new Set([shape.id, ...otherCards.map((c) => c.id)]);
+      const hostCompensation = passengerCompensationPartials(this.editor, shape, poseOf(hostPartial)).filter((p) => !directIds.has(p.id));
+      const partials = [...hostCompensation, ...tapPartialsForCards(this.editor, otherCards, tapped)];
+      if (partials.length > 0) this.editor.updateShapes(partials);
+    });
+
+    return hostPartial;
   }
 
   // Ticket 18 (counters): the card hosts counters via tldraw's native
@@ -235,26 +246,19 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
 
     // reparentShapes preserves page rotation, so a passenger dropped on an
     // already-tapped card would keep a compensating local rotation forever —
-    // visibly tilted after the card untaps. Passengers are card-aligned: zero
-    // the local rotation, holding the passenger's center fixed (rotation
-    // pivots around the top-left corner; zeroing it alone would swing it
-    // sideways — same math as onClick's tap pivot). Geometry bounds, not
-    // `props.w/h`: a note has no w/h prop (its size comes from a style enum
-    // plus `growY`), but every shape's geometry does.
+    // visibly tilted after the card untaps. Counters/notes are card-aligned:
+    // zero the local rotation, holding the passenger's center fixed (same
+    // math as onClick's tap pivot).
+    //
+    // Ticket 20: a CARD passenger is exempt. Unlike a counter/note, a card's
+    // rotation isn't purely cosmetic — it's the visual encoding of
+    // `props.tapped` (tapPartial's ±90° delta). Zeroing it here would untap
+    // a tapped card's LOOK while `props.tapped` stayed true underneath.
+    // reparentShapes already preserved its absolute page rotation (hence its
+    // tapped-state visual) across the reparent — leave that alone.
     for (const dropped of shapes) {
-      const fresh = this.editor.getShape(dropped.id);
-      if (!fresh || fresh.rotation === 0) continue;
-      const { w, h } = this.editor.getShapeGeometry(fresh).bounds;
-      const halfExtent = { x: w / 2, y: h / 2 };
-      const center = Vec.Add(fresh, Vec.Rot(halfExtent, fresh.rotation));
-      const topLeft = Vec.Sub(center, halfExtent);
-      this.editor.updateShape({
-        id: fresh.id,
-        type: fresh.type,
-        x: topLeft.x,
-        y: topLeft.y,
-        rotation: 0,
-      });
+      if (dropped.type === "mtg-card") continue;
+      this.zeroRotationHoldingCenter(dropped.id);
     }
   }
 
@@ -267,6 +271,30 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     const mine = shapes.filter((s) => s.parentId === card.id);
     if (mine.length === 0) return;
     this.editor.reparentShapes(mine, this.editor.getCurrentPageId());
+
+    // Ticket 20: a detached CARD passenger reconciles to upright. Its local
+    // rotation, while attached, was held wherever onClick's tap-compensation
+    // last put it (canceling the host's own tap spin) — that number has no
+    // meaning once it's not riding anything, so snap it to 0 rather than
+    // leaving it at whatever the compensation happened to be. Counters/notes
+    // are untouched: their tilt-along-with-the-host is the intended visual
+    // (ticket 18), and detaching mid-tilt is fine to just keep.
+    for (const detached of mine) {
+      if (detached.type === "mtg-card") this.zeroRotationHoldingCenter(detached.id);
+    }
+  }
+
+  // Zero a shape's local rotation, holding its own center fixed on the page
+  // (rotation pivots around a shape's top-left, not its center — zeroing it
+  // alone would swing the shape sideways). Geometry bounds, not `props.w/h`:
+  // a note has no w/h prop (its size comes from a style enum plus `growY`),
+  // but every shape's geometry does.
+  private zeroRotationHoldingCenter(id: TLShape["id"]): void {
+    const fresh = this.editor.getShape(id);
+    if (!fresh || fresh.rotation === 0) return;
+    const { w, h } = this.editor.getShapeGeometry(fresh).bounds;
+    const pose = rotateHoldingCenter(fresh, { x: w / 2, y: h / 2 }, 0);
+    this.editor.updateShape({ id: fresh.id, type: fresh.type, x: pose.x, y: pose.y, rotation: 0 });
   }
 
   // Ticket 01-zone-entry-events: name "this card instance entered this
@@ -398,8 +426,19 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       passengers.map((p) => p.id),
       this.editor.getCurrentPageId(),
     );
+    // Counters/notes land upright (rotation 0) — there's no host left for
+    // "relative to" to mean anything, so upright on the table is the natural
+    // rest state (ticket 18). A CARD passenger is exempt, same reasoning as
+    // onDragShapesIn: rotation encodes `props.tapped`, and reparentShapes
+    // just preserved its absolute page rotation (and thus its tapped-state
+    // visual) across the detach — forcing 0 here would untap its look while
+    // `props.tapped` stayed whatever it was.
     this.editor.animateShapes(
-      passengers.map((p, i) => ({ id: p.id, type: p.type, x: spots[i].x, y: spots[i].y, rotation: 0 })),
+      passengers.map((p, i) => {
+        const fresh = this.editor.getShape(p.id);
+        const rotation = fresh?.type === "mtg-card" ? fresh.rotation : 0;
+        return { id: p.id, type: p.type, x: spots[i].x, y: spots[i].y, rotation };
+      }),
       { animation: { duration: 200 } },
     );
   }
