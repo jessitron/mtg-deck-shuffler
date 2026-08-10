@@ -715,6 +715,32 @@ renamed, or removed, and this doesn't introduce a new watch point (it's the same
 self-bound against center-based zone detection" lesson the zone-label-band entry already flagged
 as a risk — this just confirms it firing and being fixed, not a new class of bug).
 
+## Test-helper extraction: `tabletop-verify-helpers` (2026-08-10, `c025293`)
+
+Pure test refactor — no app code touched, no behavior change. Extracted a shared
+`apps/tabletop/test/verification/helpers.ts` module out of five specs (`verify-counter`,
+`verify-zone-entry`, `verify-drag-identity`, `verify-tap-animation`, `verify-card-rotate`)
+that had each grown their own near-identical copies of `fakeTraceparent()`/`cardPlayed()`,
+the goto-and-wait-for-`.tl-canvas` idiom, the Shift+1-zoom-plus-settle idiom, a `placeCard()`
+wrapper, and the mouse-drag primitive under different names.
+
+This owner was consulted (`-context`) during the extraction and confirmed two facts worth
+recording because they're easy to get wrong when consolidating near-duplicate test code:
+
+- **`verify-drag-identity`'s `zoneHint: "battlefield"` override is load-bearing, not
+  incidental** — it must NOT be folded into the shared default (`"stack"`), because `"stack"`
+  places both of that spec's cards at the same position, which makes click-selecting the
+  second card ambiguous — exactly the setup precondition the `959831c` drag-identity
+  regression test depends on. Preserved with a comment at the call site.
+- **`steps: 10` is genuinely uniform** across all four drag-using specs' call sites — no
+  hidden per-spec calibration was found. The one `steps: 5` in `verify-zone-entry.spec.ts` is
+  a small in-zone repositioning nudge, correctly left inline rather than generalized into the
+  shared `dragPointTo` primitive.
+
+Full detail in `files.md`'s new `helpers.ts` entry. No `architecture.md`/`interactions.md`
+change — no ShapeUtil, hook, or shape type moved; this only reshuffled how existing test
+behavior is expressed.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,

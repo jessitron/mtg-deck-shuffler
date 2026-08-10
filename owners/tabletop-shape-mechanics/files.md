@@ -204,6 +204,34 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 
 ## Tests
 
+- `apps/tabletop/test/verification/helpers.ts` — **new, `tabletop-verify-helpers`
+  (2026-08-10, `c025293`)**: shared Playwright helpers for `test/verification/*.spec.ts`,
+  extracted out of five specs that had each drifted their own near-identical copies.
+  Exports `fakeTraceparent()`, `cardPlayed(tableId, overrides)`, `openTable(page, tableSlug)`
+  (goto + wait for `.tl-canvas`), `zoomToFit(page)` (Shift+1 + a 300ms settle wait — the
+  same camera-animation-settle hazard class as `aimCameraAtTheTable`'s determinism fix
+  above, confirmed during this owner's `-context` consult, not a per-spec calibration),
+  `placeCard(page, baseURL, tableSlug, instanceId, payloadOverrides?)` (POSTs `card.played`,
+  waits for `#shape\:card-<id>` to attach, returns the `Locator`; defaults `cardName` to
+  "Llanowar Elves" with `payloadOverrides` spread last so a caller's `zoneHint` always wins
+  over the default `"stack"`), `center(locator)`, and the drag primitives `dragPointTo`/
+  `dragCenterTo` (the canonical `move → down → move(steps: 10) → up` sequence), with
+  `dragBy`/`dragCardTo` now thin wrappers over `dragPointTo`/`center` instead of each
+  re-implementing the mouse sequence. **New specs should reach for this module instead of
+  re-deriving `cardPlayed`/`placeCard`/drag helpers.**
+  - `verify-drag-identity.spec.ts`'s two-card setup goes through the shared `placeCard` but
+    keeps its own `zoneHint: "battlefield"` override (not the shared default `"stack"`),
+    called out in a comment at the call site: `"stack"` places both cards at the same
+    position, making click-selection of the second card ambiguous — exactly the
+    drag-identity regression's own setup precondition (see `959831c` above).
+  - `steps: 10` was confirmed uniform across all four drag-using specs' call sites (no
+    hidden per-spec drift found during the extraction). The one `steps: 5` in
+    `verify-zone-entry.spec.ts` is a small in-zone repositioning nudge, not part of a shared
+    drag primitive, and was deliberately left inline rather than folded into `dragPointTo`.
+  - `verify-counter.spec.ts` keeps its own local `topGrip()` helper (grips a card near its
+    top edge, to avoid grabbing an attached counter riding lower on the card) — specific to
+    counter-vs-card grip disambiguation, not shared by the other four specs.
+  - Pure extraction: full Playwright verification suite (36 tests) passes unchanged.
 - `apps/tabletop/test/verification/verify-zone-armed.spec.ts` — **new, ticket 14**: verifies the
   armed-glow appearance during a live drag, and (via a two-browser-context setup) that the armed
   state is genuinely local/unsynced — dragging on client A never shows armed styling on client B's
