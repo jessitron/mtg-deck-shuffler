@@ -37,50 +37,6 @@ section is just a wall between Jess and the live work.
 
 - Minor feature: Only your own commanders can land in your command zone. Any other card dragged over it, it shouldn't light up.
 
-- [ ] `graveyard-cascade-overflow` The graveyard card cascade walks out of its box at ~32 cards
-  - Surfaced 2026-08-09 by `tabletop-shape-mechanics-review` on the zone-label-band change
-    (zone titles readable with cards in the zones). `graveyardCardPosition` in
-    `apps/tabletop/src/server/cardLayout.ts` cascades each arriving card +6 units diagonally;
-    a card whose **center** leaves the graveyard's AABB stops detecting as "in the graveyard".
-    The label-band change lowered that threshold from ~53 cards to ~32 (box shrank 449→356 and
-    the pile now starts below the 40-unit label band).
-  - Why it matters: a card past the threshold, when nudged by a player, settles with its center
-    in the inter-zone gap (zone `undefined`) or in **exile** — logging a spurious exile entry
-    and evicting any counters it carries (exile is in `NON_BATTLEFIELD_ZONES`). Pre-existing
-    marginal behavior made ~40% more reachable; long Commander games do hit 32-card graveyards.
-  - Fix directions scoped in the review: wrap or tighten the cascade, or cap the offset at the
-    box edge so the pile deepens in place instead of marching out.
-    ← mountain: tabletop-replaces-mural
-
-- Remove the Tabletop's landing page; redirect straight to the Shuffler instead. (Supersedes
-  `design-text-link-specimen` — the nav-link idiom's Tabletop instance was
-  `LandingPage.tsx`'s `styles.shufflerLink`; removing the page removes that instance.
-  `site.css`'s `.right-nav a` instance remains, so the specimen may still be worth staging
-  later, but not as urgent as a two-instance idiom.)
-
-- [ ] `design-sleeve-specimen` Stage a sleeved-card mock specimen on `/design`
-  - Surfaced 2026-08-08 by the `shuffler-looks-like-itself` review of table-layout ticket 17,
-    which shipped sleeve rendering on the Tabletop canvas (card image centered in a
-    sleeve-colored frame — radius `w * 0.05`, margin `w * 0.03`, flat, no border; face-down
-    and the library pile as the bare sleeve rectangle). The gallery has no specimen, so the
-    treatment exists only on the canvas; the owner said don't skip the specimen silently.
-  - Shape: a mock in `apps/shuffler/public/design-candidates.css`, labelled a mock, staged on
-    `.stage-white` (ticket 11's first draft wrongly used `.stage-dark`) — same convention as
-    the zone mocks (`a304c52`).
-  - Related: `tabletop-landing-page-palette` below notes the gallery has no Tabletop stage at
-    all; this specimen is another instance of that gap.
-    ← mountain: tabletop-replaces-mural
-
-- [ ] `tabletop-verify-helpers` the Tabletop's Playwright specs triplicate their helpers
-  - Surfaced 2026-08-08 by the standards review on tabletop-physics ticket 18: `cardPlayed()`,
-    the mouse-drag helper, and the `Shift+1` + settle-wait zoom idiom now exist in at least
-    three specs (`verify-counter`, `verify-zone-entry`, `verify-drag-identity`). Third
-    occurrence — extract a shared test-helper module under `test/verification/`.
-  - Re-surfaced 2026-08-09 by the code review on tabletop-physics ticket 15:
-    `verify-tap-animation.spec.ts` added a fourth copy of `cardPlayed()` (plus a `placeCard()`
-    wrapper it shares with `verify-card-rotate`). The count keeps climbing; the helper module
-    would now pay for itself four times over.
-
 - [ ] `browser-tracing-key-guard` the browser tracing init should skip (with a `console.warn`) when the apiKey is empty or the literal string `"undefined"`
   - Surfaced 2026-08-08 by `fleet-is-observable-context` during arch ticket 06 (unify page shell,
     `.scratch/shuffler-architecture-review/issues/06-unify-page-shell.md`). The shell's
@@ -300,29 +256,6 @@ black`, radius computed as 5% of the shape's height).
     zoom modal is a plausible home for the flip affordance — so 06 may want to know this exists,
     even though 06 lands first and this doesn't block it.
     ← priority: later
-
-- [ ] `tabletop-landing-page-palette` Bring the Tabletop's landing page onto the fleet's identity
-  - `apps/tabletop/src/client/LandingPage.tsx` styles itself with an off-brand green/cream palette
-    in **inline styles** — `#1a2a1f` (dark green field), `#f5f1e8` (cream text), `#3d5a45` (mid
-    green) — while the fleet's identity is purple-and-pink. A live Layer-1 violation ("use
-    `var(--…)`, not a literal") sitting on the Tabletop's front door.
-  - **Surfaced by** the `tabletop-css-tokens` work (`4396aea` + two follow-ups), which created
-    `packages/design-tokens` (`@fleet/design-tokens`) — the fleet palette, `--narrow-border`, and
-    the mana colours, served by the Shuffler at `/fleet/tokens.css` and imported by the Tabletop
-    through Vite — and loaded Orbitron/Ovo on the Tabletop via a Google Fonts `<link>` in
-    `apps/tabletop/index.html`. The landing page was left **byte-for-byte unchanged** on purpose.
-    Landing the tokens makes fixing this _possible_; it is **not permission** to fix it.
-  - **Not a mechanical `var(--…)` swap.** This is the Tabletop's _only_ styled surface, so
-    restyling it is the Tabletop's design pass in miniature: what the Tabletop looks like when it
-    isn't tldraw. It's an **appearance decision and needs Jess's explicit sign-off** — the design
-    owner (`owners/shuffler-looks-like-itself/`) flagged it as the largest possible ride-along on
-    the token change, which is exactly why it didn't ride along.
-  - **Staging it on `/design` is blocked today**: the Shuffler's gallery has no Tabletop specimens
-    and no Tabletop stage, so there's nowhere to show Jess the options side by side. Same shape of
-    blocker as `design-playmat-specimen` above.
-  - **There is still no ship-local stylesheet on the Tabletop.** Shared tokens have a home now, but
-    the first Tabletop-_only_ CSS rule has nowhere to live — inline styles are the status quo by
-    default, not by choice. Whoever does this work decides that too.
 
 - [ ] `playmat-colours-fleet-or-shuffler` Do the playmat colours belong to the fleet, or to the Shuffler?
   - `--playmat-one` (`#f5dc8b`) and `--playmat-two` (`#4b7bba`) were **deliberately left** in
