@@ -23,6 +23,7 @@ import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
 import { MtgCounterTool } from "./shapes/MtgCounterTool";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
 import { SelectionClearingNoteShapeUtil } from "./shapes/SelectionClearingNoteShapeUtil";
+import { SelectionClearingImageShapeUtil } from "./shapes/SelectionClearingImageShapeUtil";
 import { TableContextMenu } from "./CardContextMenu";
 
 // useSync (unlike <Tldraw>) builds its store schema from exactly the
@@ -31,17 +32,21 @@ import { TableContextMenu } from "./CardContextMenu";
 // it throws ("Shape type X is defined more than once") on a duplicate `type`
 // in the array — so the stock shapes the name label still uses (text, ...)
 // have to be listed here explicitly alongside mtg-card/mtg-zone/mtg-counter,
-// or the client store rejects them outright, and the stock NoteShapeUtil has
-// to be filtered OUT before SelectionClearingNoteShapeUtil goes in, rather
-// than just appended after it. Ticket 19: mtg-card hosts notes as passengers
-// exactly like counters, and a stock note has no hook of its own to clear a
-// stale selection after a drag — see that util's own comment.
+// or the client store rejects them outright, and the stock NoteShapeUtil and
+// ImageShapeUtil have to be filtered OUT before their SelectionClearing*
+// replacements go in, rather than just appended after them. Ticket 19:
+// mtg-card hosts notes as passengers exactly like counters, and a stock note
+// has no hook of its own to clear a stale selection after a drag — see that
+// util's own comment. A pasted/dropped image hits the identical gap (stock
+// ImageShapeUtil also has no onTranslateEnd), so SelectionClearingImageShapeUtil
+// gets the same treatment.
 const shapeUtils = [
-  ...defaultShapeUtils.filter((Util) => Util.type !== "note"),
+  ...defaultShapeUtils.filter((Util) => Util.type !== "note" && Util.type !== "image"),
   MtgCardShapeUtil,
   MtgZoneShapeUtil,
   MtgCounterShapeUtil,
   SelectionClearingNoteShapeUtil,
+  SelectionClearingImageShapeUtil,
 ];
 
 const tools = [MtgCounterTool];
