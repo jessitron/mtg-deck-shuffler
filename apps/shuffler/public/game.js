@@ -305,7 +305,11 @@ document.addEventListener('keydown', (event) => {
   const isUndo = (event.ctrlKey || event.metaKey) && !event.shiftKey && !event.altKey && event.key.toLowerCase() === 'z';
   if (!isUndo) return;
 
-  // Don't hijack undo inside text inputs or while a modal is focused.
+  // Don't hijack undo inside text inputs, or while any modal is open. This
+  // checks existence, not literal focus — but modal-focus.js makes the
+  // background `inert` whenever a modal is open, and inert content can't
+  // hold focus, so "a modal exists" and "a modal has focus" are equivalent
+  // in practice.
   const target = event.target;
   if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
   if (document.querySelector('.modal-overlay, .card-modal-overlay')) return;
