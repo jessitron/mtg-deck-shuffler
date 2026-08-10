@@ -95,9 +95,22 @@ export class GameState {
   public readonly tableName?: string;
   public readonly playerName?: string;
   public readonly seatId?: string;
+  // Table look: the /prepare picker's sleeve/playmat choice, snapshotted at
+  // newGame time. Optional, no version bump — same pattern as table info.
+  public readonly sleeveColor?: string;
+  public readonly playmatImagePath?: string;
 
   /** Table info: set when this game joined a table on the Tabletop (JES-127). */
-  static newGame(gameId: GameId, prepId: PrepId, prepVersion: number, deck: Deck, randomSeed?: number, tableInfo?: TableInfo) {
+  static newGame(
+    gameId: GameId,
+    prepId: PrepId,
+    prepVersion: number,
+    deck: Deck,
+    randomSeed?: number,
+    tableInfo?: TableInfo,
+    sleeveColor?: string,
+    playmatImagePath?: string
+  ) {
     if (deck.commanders.length > 2) {
       // TODO: make a warning function, somehow get it into WhatHappened?
       console.log("Warning: Deck has more than two commanders. Behavior undefined");
@@ -138,6 +151,8 @@ export class GameState {
       tableName: tableInfo?.tableName,
       playerName: tableInfo?.playerName,
       seatId: tableInfo?.seatId,
+      sleeveColor,
+      playmatImagePath,
     });
   }
 
@@ -155,6 +170,8 @@ export class GameState {
     tableName?: string;
     playerName?: string;
     seatId?: string;
+    sleeveColor?: string;
+    playmatImagePath?: string;
   }) {
     this.gameId = params.gameId;
     this.status = params.gameStatus;
@@ -170,6 +187,8 @@ export class GameState {
     this.tableName = params.tableName;
     this.playerName = params.playerName;
     this.seatId = params.seatId;
+    this.sleeveColor = params.sleeveColor;
+    this.playmatImagePath = params.playmatImagePath;
   }
 
   static async fromPersistedGameState(
@@ -849,6 +868,8 @@ export class GameState {
       tableName: this.tableName,
       playerName: this.playerName,
       seatId: this.seatId,
+      sleeveColor: this.sleeveColor,
+      playmatImagePath: this.playmatImagePath,
     };
   }
 }

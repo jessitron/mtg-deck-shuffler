@@ -488,6 +488,81 @@ corners the fleet's style wants*. The `borderRadius` was removed from both sites
 The `w * 0.03` padding/overhang stays; only the radius went. **No behavior, face, or
 faceDown semantics changed** — purely corner geometry. 69/69 vitest pass.
 
+## Sleeve/Playmat Carries to the Game Screen — Confirmed Orthogonal (2026-08-09)
+
+**No two-faced-cards code changed.** `sleeve-carries-to-game` made the `/prepare` picker's
+sleeve color and playmat image path persist onto the game and render there:
+`GameState.newGame()`/`PersistedGameState`/`GameState` gained optional `sleeveColor` and
+`playmatImagePath`, snapshotted from the prep at both `/start-game` and `/restart-game`;
+`formatLibraryStack()` grew an optional `sleeveColor` param (new helper
+`formatLibraryCardBack()` renders a sleeved back as a flat-hex rectangle instead of the
+`CARD_BACK` image); `formatGamePageHtmlPage()` writes the playmat as an inline
+`background-image`. This owner was consulted (per the "orthogonal to two-faced cards" ticket
+description) and confirmed before implementation: no `CardDefinition`/`CardFace`/
+`getCardImageUrl`/contract face-field touched, and the new fields live on
+`GameState`/`PersistedGameState` (game-wide), not `GameCard`/`PersistedGameCard` (per-card
+face state) — verified by grep, not assumed. Also confirmed no collision with the Tabletop's
+unrelated `sleeveColor` on `seat.joined` player data (different type, different sender site).
+**No `PERSISTED_GAME_STATE_VERSION` bump** — stayed at 11, the same "optional field with
+graceful fallback" exception this owner's own `imageUris`/`backImageUris` change used;
+confirmed the actual constant value in code before writing that into tests. The Shuffler's
+sleeve rendering picked up the Tabletop's square-corner rule (table-layout ticket 17,
+`e53a27e`) for consistency: `.library-card-back.sleeved` in `public/playmat.css` zeroes
+`border-radius`. Full account in [interactions.md](interactions.md#not-related-to).
+
+## Physics Ticket 17 Implemented: Flip and Turn Face-Down (2026-08-09, `eb24a4f` + `ff5d58a`)
+
+Builds what ticket 06 (2026-08-08, `575416b`, recorded above) only decided. First code that
+writes `props.face` or `props.faceDown` anywhere in the Tabletop.
+
+- **`MtgCardShapeProps` gained `cardBackImageUrl: string | null`**
+  (`apps/tabletop/src/shared/mtgCardShape.ts`) — baked at mint time in `cardArrival.ts` from
+  `playerArea.cardBackImageUrl ?? null`, the same "sleeve color is a game constant, legal to
+  bake" argument this KB already carried for `sleeveColor`. Default `null` in
+  `getDefaultProps()`.
+- **`MtgCardShapeUtil.component()`'s unsleeved branch is now `faceDown`-aware.** Previously
+  it always rendered `src` regardless of `faceDown` — the KB's "nothing sets `faceDown` yet"
+  note is now false. New behavior: unsleeved + `faceDown` renders `cardBackImageUrl` as an
+  `<img>` if present, else a flat `#3a3a3a` rectangle (reachable when a seat never got a card
+  back, e.g. redeploy-wiped seat memory). Unsleeved face-up and both sleeved branches
+  (already `faceDown`-aware since table-layout ticket 17) are unchanged.
+- **First gesture ever to write `props.face` / `props.faceDown`**: a new custom tldraw
+  `ContextMenu`, `apps/tabletop/src/client/CardContextMenu.tsx` (`TableContextMenu`, wired via
+  `TLComponents.ContextMenu` in `TablePage.tsx`). Two menu items in this owner's territory:
+  - **"Flip"** — per-card swap of `face` (`front`↔`back`), shown only when at least one
+    selected card has `backImageUrl !== null` (exactly ticket 06 decision 1: no "Flip" entry
+    when there's nothing to flip to).
+  - **"Turn face down"/"Turn face up"** — a convergent toggle of `faceDown` across the whole
+    selection (ticket-16-style state push, like the Tap/Untap item beside it): the clicked
+    action's target state applies to every selected card, skipping cards already there.
+  - A third item, Tap/Untap, is card-mechanics territory, not face territory — it reuses the
+    existing tap rotation math, pulled out into a shared `apps/tabletop/src/client/shapes/cardTap.ts`
+    (`tapPartial`) so `onClick` and the menu item share one implementation.
+  - Every menu action's `commit()` helper ends with `editor.setSelectedShapes([])` —
+    right-clicking selects the card, and (unlike a locked shape) an unlocked card's selection
+    survives the menu closing, which would otherwise hijack the next drag of a different card
+    (the same hazard `MtgCardShapeUtil.onTranslateEnd`'s unconditional `setSelectedShapes([])`
+    already guards against for drags).
+- **`MtgCardShapeUtil.onTranslateEnd`**: a card entering the **library** zone now resets
+  `face: 'front'`, `faceDown: false`, folded into the same returned partial as the existing
+  `meta.zone` write (one undo entry, matching ticket 06 decision 4 and the Shuffler's
+  `mulligan()` reset). **No `hand` zone exists anywhere in this codebase**
+  (`NON_BATTLEFIELD_ZONES` in `MtgCardShapeUtil.tsx` doesn't have one), so the ticket's "hand
+  or library" reset is honestly only "library" today — the ticket file itself was corrected
+  to say so. **No `card.flipped` event was added** — the Shuffler-sync divergence (ticket 06
+  decision 2) is accepted as designed, not a gap.
+- Tests: `apps/tabletop/test/cardArrival.test.ts` covers `cardBackImageUrl` baking (sleeved
+  seat → `null`; unsleeved seat with a URL → baked in; no seat data → `null` default).
+  `apps/tabletop/test/verification/verify-flip-face-down.spec.ts` (new, Playwright): two-client
+  sync of BOTH flip and face-down toggle in one test (extended in `ff5d58a` after a
+  code-review pass on the ticket's spec found the two-client checkbox only covered flip);
+  the "Flip" item's gating on `backImageUrl`; face-down render shows the table's card back and
+  toggling back to face-up restores the front image; library-entry resets both axes; a
+  regression test that flipping card A via the menu doesn't leave a stale selection that
+  hijacks a later drag of card B.
+- Reviewed by this owner and `tabletop-shape-mechanics` before landing (per plan
+  `.scratch/tabletop-physics/plan-17.md`).
+
 ## Cards-Come-and-Go Ticket 02: the Event Vocabulary — Face Decisions (design decision, 2026-08-08, `7b7f868`)
 
 **No code changed** — decisions only; schemas and handlers come at build time. Full text:
@@ -521,6 +596,38 @@ consulted before payload shaping. What it settles in this territory:
   `tableId` drops `format: uuid` (the table name IS the id pre-Spine), `initiator` becomes
   `{ seatId?, playerName }`.
 
+## Table-Layout Ticket 18 Implemented: `owner`/`isCommander` on the Card, Commanders Ride `seat.joined` (2026-08-09)
+
+Built `.scratch/tabletop-table-layout/issues/18-commander-arrives-with-owner-and-ghost.md`,
+whose design source of truth is issue 08's § Answer (2026-08-08 grilling) — the amendment
+this owner and `tabletop-shape-mechanics` were consulted on when ticket 02 (tabletop-physics)
+left `mtg-card` with no owner field at all.
+
+- **`mtg-card.props` gains `owner: string` (seatId) and `isCommander: boolean`**
+  (`apps/tabletop/src/shared/mtgCardShape.ts`) — first-class, schema'd, synced, granting
+  **no capability** (Jess: "Owner is a property of the card... It doesn't limit who can
+  move it"). `MtgCardShapeUtil.getDefaultProps()` defaults them to `""`/`false`.
+- **`card.played.v1.json` gains both fields as `required`, edited in place — no v2.**
+  `buildCardPlayedEvent` (`apps/shuffler/src/port-tabletop/types.ts`) sets
+  `owner: initiator.seatId`, `isCommander: gameCard.isCommander`. The hand-rolled
+  `validationError` in `apps/tabletop/src/server/cardArrival.ts` requires both.
+- **`seat.joined.v1.json` gains an optional `commanders` array (0-2)** — in-schema
+  `{card:{scryfallId,instanceId}}`, off-schema scaffolding `cardName`/`frontImageUrl`/
+  `backImageUrl` (no `face` — commanders always arrive face up, per the vocabulary
+  ticket). `buildSeatJoinedEvent` (Shuffler) gained an optional `commanders?: readonly
+  GameCard[]` param, mapped through the new `buildSeatJoinedCommander()`. Tested in
+  `apps/shuffler/test/port-tabletop/gateways.test.ts`'s new `"buildSeatJoinedEvent
+  commanders"` describe block, mirroring `cardPlayedEvent.test.ts`'s convention.
+- **Tabletop-side**: `apps/tabletop/src/server/seatJoined.ts` mints each commander as an
+  ordinary `mtg-card` in the Command Zone (via a new shared `mtgCardShape()` builder in
+  `tableFurniture.ts`, also adopted by `cardArrival.ts` so every mint site stays in sync)
+  plus a locked, `opacity: 0.3` ghost with instance id `` `ghost:${instanceId}` `` so it
+  never collides with the real card's dedup key. `cardLayout.ts` gained
+  `commandZoneCardPosition()` (centered for 1, side-by-side for 2). The ghost's rendering
+  and hit-testing (locked, non-interactive, and the Command Zone's owner-aware arming
+  rule) are `tabletop-shape-mechanics` territory — this owner's stake is only the shared
+  card props and the two contract fields.
+
 ## Cards-Come-and-Go Ticket 05: Contract Validation Gets Real (2026-08-09)
 
 Implements the "contract validation gets real" line ticket 02 (above) predicted, plus two
@@ -544,11 +651,13 @@ in-place schema amendments. `.scratch/tabletop-cards-come-and-go/issues/05-contr
   retires the hand-rolled JES-128 `if`-chain `validationError` both files used to carry.
   `additionalProperties: false` on every schema means a stray field (e.g. `gameCardIndex`)
   can never arrive undetected.
-- **Flagged but NOT fixed**: `seat.joined`'s future `commanders` array (cards-come-and-go
-  ticket 02, not yet built) is documented to carry the same `cardName`/`frontImageUrl`/
-  `backImageUrl` trio off-schema, mirroring what `card.played` did before this ticket. This
-  ticket deliberately left that asymmetry as an explicit call for ticket 10 to make, rather
-  than silently inheriting either default (contractize it too, or state a reason it stays
-  scaffolding).
-- No `CardDefinition`, `GameCard`, or Shuffler-side change — this ticket is entirely in
-  `contracts/` and the Tabletop's two receivers.
+- **Flagged, then resolved during the ticket-05/ticket-18 merge (2026-08-09, same day)**:
+  ticket 18 (above) had already shipped `seat.joined`'s `commanders` array carrying
+  `cardName`/`frontImageUrl`/`backImageUrl` — but its JSON schema entry only declared
+  `card`, a real gap (`additionalProperties: false` would have rejected the other three
+  fields the instant ajv validation went live, breaking commanders in production). Merging
+  the two branches surfaced this and it was fixed then: `seat.joined.v1.json`'s commander
+  item schema now requires `card`, `cardName`, `frontImageUrl`, `backImageUrl` — the same
+  fields `buildSeatJoinedCommander` always sends. No asymmetry with `card.played` remains.
+- No `CardDefinition` or `GameCard` shape change — this ticket is entirely in `contracts/`
+  and the Tabletop's two receivers (plus the merge-time schema fix above).

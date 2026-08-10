@@ -81,14 +81,14 @@ pre-Spine, while these two endpoints are the only senders/receivers in the world
 - **`seat.joined.v1.json`**: removed `seatId`/`playerName` from the payload — both are now
   redundant with `envelope.initiator`, same rationale as `card.played`'s `seat` removal.
   `deckName`/`playmatImageUrl`/`cardBackImageUrl`/`sleeveColor` are unchanged.
-
-**Flagged, not fixed — a note for ticket 10.** `seat.joined`'s future `commanders` array
-(cards-come-and-go ticket 02's vocabulary decision, not yet implemented) is documented to carry
-the same `cardName`/`frontImageUrl`/`backImageUrl` trio *off-schema*, mirroring what
-`card.played` used to do before this ticket promoted its copy on-schema. Ticket 05 explicitly
-did **not** resolve that asymmetry — it flagged it. Whoever builds ticket 10 (`commanders`)
-needs to make an explicit call — contractize that trio the same way, or state a reason it stays
-scaffolding on `seat.joined` specifically — rather than silently inheriting either default.
+- **`card.played.v1.json`** also gained `owner: string` (seatId) and `isCommander: boolean`,
+  both `required` — table-layout ticket 18, which landed the same day. `seat.joined.v1.json`'s
+  `commanders` array (table-layout ticket 18, not cards-come-and-go ticket 10 — it shipped
+  before this ticket merged) had its item schema fixed here too: it only declared `card`,
+  missing `cardName`/`frontImageUrl`/`backImageUrl` that `buildSeatJoinedCommander` always
+  sends. Left as shipped, `additionalProperties: false` would have rejected every real
+  commander the instant ajv validation went live — this is now a required part of the item
+  schema, matching `card.played`. No asymmetry between the two kinds remains.
 
 ## The vocabulary grew — cards-come-and-go ticket 02 (2026-08-08, `7b7f868`, decisions only)
 
@@ -138,6 +138,26 @@ Also decided there, adjacent to this owner's territory:
   face?" If yes, `face` goes beside `card`, same shape as `card.played`. This rule now
   has worked precedent (ticket 02, see the vocabulary table above): `card.discarded`
   yes; `card.returned`, both `undo.*` kinds, and `seat.joined`'s `commanders` no.
+
+- **The "never edit v1 in place, bump to v2" rule above is about `face`'s own shape,
+  not about every field.** Table-layout ticket 18 (2026-08-09) added `owner` and
+  `isCommander` to `card.played.v1.json` **as required fields, in place, no v2** —
+  following the precedent ticket 12 set when it added `frontImageUrl`/`backImageUrl`
+  (though those weren't `required`). So in practice this repo edits v1 in place for new
+  fields (even required ones) and reserves the v2 bump for changing what an existing
+  field means or removing one. If that distinction ever bites (a producer built against
+  an older v1 that lacks a newly-required field), that's the sharp edge to fix, not a
+  surprise to relitigate.
+- **`seat.joined` is a second sender site for the `backImageUrl`-from-`twoFaced` rule.**
+  Ticket 18 gave `seat.joined.v1.json` an optional `commanders` array (0-2); as shipped its
+  item schema only declared `card:{scryfallId,instanceId}`, leaving `cardName`/
+  `frontImageUrl`/`backImageUrl` off-schema — fixed at the ticket-05 merge (2026-08-09) to
+  require all four, matching what `buildSeatJoinedCommander` actually sends. No `face` field —
+  commanders always arrive face up (see the vocabulary table's `commanders` row above);
+  the Tabletop hardcodes `face:"front"`, `faceDown:false` when minting. Any future
+  scaffolding field added to `card.played`'s payload should get the matching case in
+  `apps/shuffler/test/port-tabletop/gateways.test.ts`'s `"buildSeatJoinedEvent
+  commanders"` block, mirroring `cardPlayedEvent.test.ts`.
 - **Design the payload so it doesn't need to carry what it doesn't mean.** A shadow event
   ("seat 2 drew a card") shouldn't carry a face any more than it carries the card — not
   because a leak is dangerous, but because an event should say what happened and no more.

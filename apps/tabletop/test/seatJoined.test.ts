@@ -3,7 +3,7 @@ import type { Server } from "node:http";
 import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
-import { playmatBounds, libraryBounds, commandZoneBounds, graveyardBounds, exileBounds, stackBounds } from "../src/server/cardLayout";
+import { playmatBounds, libraryBounds, commandZoneBounds, graveyardBounds, exileBounds, stackBounds, commandZoneCardPosition } from "../src/server/cardLayout";
 
 /**
  * JES-140: POST /api/tables/:tableName/events (seat.joined) — the player area
@@ -268,5 +268,104 @@ describe("seat joined", () => {
     const response = await post("seat-unknown-version", seatJoined("seat-unknown-version", { schemaVersion: 99 }));
     expect(response.status).toBe(400);
     expect((await response.json()).error).toContain("99");
+  });
+});
+
+// Ticket 18: commanders ride seat.joined and land in the Command Zone as
+// ordinary, draggable mtg-card shapes, each backed by a locked, faded ghost
+// that marks its home and stays put when the real card moves out.
+describe("seat joined — commanders", () => {
+  function commanderEntry(cardName: string, frontImageUrl: string) {
+    return { card: { scryfallId: randomUUID(), instanceId: randomUUID() }, cardName, frontImageUrl, backImageUrl: null };
+  }
+
+  function seatJoinedWithCommanders(tableName: string, commanders: unknown[], payloadOverrides: Record<string, unknown> = {}) {
+    return seatJoined(tableName, {}, { commanders, ...payloadOverrides });
+  }
+
+  it("mints no commander shapes when none are given", async () => {
+    await post("seat-no-commanders", seatJoined("seat-no-commanders"));
+    const cards = shapesOf("seat-no-commanders").filter((s) => s.type === "mtg-card");
+    expect(cards).toHaveLength(0);
+  });
+
+  it("mints one commander as a draggable mtg-card, centered in the Command Zone, plus a locked faded ghost in the same spot", async () => {
+    const atraxa = commanderEntry("Atraxa", "https://example.com/atraxa.jpg");
+    const event = seatJoinedWithCommanders("seat-one-commander", [atraxa]);
+    const response = await post("seat-one-commander", event);
+    expect(response.status).toBe(201);
+
+    const cards = shapesOf("seat-one-commander").filter((s) => s.type === "mtg-card");
+    expect(cards).toHaveLength(2); // the real commander + its ghost
+
+    const pos = commandZoneCardPosition(0, 0, 1);
+    const instanceId = atraxa.card.instanceId;
+    const real = cards.find((c) => c.props.instanceId === instanceId)!;
+    expect(real.x).toBe(pos.x);
+    expect(real.y).toBe(pos.y);
+    expect(real.isLocked).toBe(false);
+    expect(real.opacity).toBe(1);
+    expect(real.props.owner).toBe(event.initiator.seatId);
+    expect(real.props.isCommander).toBe(true);
+    expect(real.props.face).toBe("front");
+    expect(real.props.faceDown).toBe(false);
+    expect(real.props.cardName).toBe("Atraxa");
+
+    const ghost = cards.find((c) => c.props.instanceId !== instanceId)!;
+    expect(ghost.x).toBe(pos.x);
+    expect(ghost.y).toBe(pos.y);
+    expect(ghost.isLocked).toBe(true);
+    expect(ghost.opacity).toBeLessThan(1);
+    expect(ghost.opacity).toBeGreaterThan(0);
+    expect(ghost.props.owner).toBe(event.initiator.seatId);
+    expect(ghost.props.isCommander).toBe(true);
+    expect(ghost.props.frontImageUrl).toBe("https://example.com/atraxa.jpg");
+    // Distinct identity so a later card.played for the real instance is never
+    // deduped against the ghost (instanceAlreadyOnTable matches on props.instanceId).
+    expect(ghost.props.instanceId).not.toBe(instanceId);
+
+    // The real card paints above its ghost.
+    expect(real.index > ghost.index).toBe(true);
+  });
+
+  it("mints two commanders side by side, each with its own ghost", async () => {
+    const breya = commanderEntry("Breya", "https://example.com/breya.jpg");
+    const silas = commanderEntry("Silas", "https://example.com/silas.jpg");
+    const event = seatJoinedWithCommanders("seat-two-commanders", [breya, silas]);
+    const response = await post("seat-two-commanders", event);
+    expect(response.status).toBe(201);
+
+    const cards = shapesOf("seat-two-commanders").filter((s) => s.type === "mtg-card");
+    expect(cards).toHaveLength(4); // two commanders + two ghosts
+
+    const firstPos = commandZoneCardPosition(0, 0, 2);
+    const secondPos = commandZoneCardPosition(0, 1, 2);
+    const realA = cards.find((c) => c.props.instanceId === breya.card.instanceId)!;
+    const realB = cards.find((c) => c.props.instanceId === silas.card.instanceId)!;
+    expect({ x: realA.x, y: realA.y }).toEqual(firstPos);
+    expect({ x: realB.x, y: realB.y }).toEqual(secondPos);
+    expect(cards.filter((c) => c.isLocked)).toHaveLength(2); // exactly the two ghosts
+  });
+
+  it("bakes the seat's sleeve into both the real commander and its ghost", async () => {
+    const zur = commanderEntry("Zur", "https://example.com/zur.jpg");
+    const event = seatJoinedWithCommanders("seat-commander-sleeve", [zur], { sleeveColor: "#8b2f5c" });
+    await post("seat-commander-sleeve", event);
+
+    const cards = shapesOf("seat-commander-sleeve").filter((s) => s.type === "mtg-card");
+    expect(cards).toHaveLength(2);
+    for (const card of cards) {
+      expect(card.props.sleeveColor).toBe("#8b2f5c");
+    }
+  });
+
+  it("a second seat.joined for an already-seated seat is a no-op — commanders are minted once", async () => {
+    const kaalia = commanderEntry("Kaalia", "https://example.com/kaalia.jpg");
+    const event = seatJoinedWithCommanders("seat-commander-dedup", [kaalia]);
+    await post("seat-commander-dedup", event);
+    await post("seat-commander-dedup", { ...event, id: randomUUID() });
+
+    const cards = shapesOf("seat-commander-dedup").filter((s) => s.type === "mtg-card");
+    expect(cards).toHaveLength(2); // still just the one commander + its ghost, not minted twice
   });
 });

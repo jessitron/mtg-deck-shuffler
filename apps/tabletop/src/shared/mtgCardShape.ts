@@ -27,6 +27,25 @@ export interface MtgCardShapeProps {
    * game, never changed mid-game. null ⇔ unsleeved (today's bare look).
    */
   sleeveColor: string | null;
+  /**
+   * The table's generic Magic card back, baked in at mint time from the
+   * owning seat (tabletop-physics ticket 17) — same "game constant, never
+   * changes mid-game" argument that made `sleeveColor` legal to bake here.
+   * Used only when unsleeved and `faceDown`; a sleeved card conceals with its
+   * sleeve rectangle instead, and `seat.joined` never carries both. null when
+   * the seat had none (or predates this prop) — the render falls back to a
+   * flat rectangle rather than leaking the face.
+   */
+  cardBackImageUrl: string | null;
+  /**
+   * The seatId of the player this card belongs to (table-layout ticket 18).
+   * First-class, real domain state — but grants no capability: any player
+   * can still move any card. It just makes "whose card is this" a fact the
+   * shape carries, the same way face/faceDown are facts rather than gates.
+   */
+  owner: string;
+  /** Whether this card is one of its owner's commanders (table-layout ticket 18). */
+  isCommander: boolean;
 }
 
 // tldraw's documented mechanism for adding a custom shape to its `TLShape`
@@ -54,4 +73,7 @@ export const mtgCardShapeProps: RecordProps<MtgCardShape> = {
   faceDown: T.boolean,
   tapped: T.boolean,
   sleeveColor: T.string.nullable(),
+  cardBackImageUrl: T.string.nullable(),
+  owner: T.string,
+  isCommander: T.boolean,
 };

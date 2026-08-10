@@ -84,6 +84,8 @@ export interface CardPlayedPayload {
   frontImageUrl: string;
   backImageUrl: string | null;
   cardName: string;
+  owner: string;
+  isCommander: boolean;
 }
 
 export type CardPlayedEvent = EventEnvelope<CardPlayedPayload>;
@@ -125,6 +127,8 @@ export function buildCardPlayedEvent(
       frontImageUrl: getCardImageUrl(gameCard.card, "normal", "front"),
       backImageUrl: gameCard.card.twoFaced ? getCardImageUrl(gameCard.card, "normal", "back") : null,
       cardName: gameCard.card.name,
+      owner: initiator.seatId,
+      isCommander: gameCard.isCommander,
     },
   };
 }
@@ -192,11 +196,44 @@ export function playmatImageUrlFromPath(path: string): string {
 
 export const SEAT_JOINED_EVENT_NAME = "seat.joined" as const;
 
+/**
+ * A commander riding seat.joined: an ordinary GameCard in the CommandZone
+ * location, always face up (no `face` field — flipping it there afterward is
+ * table-local, per cards-come-and-go ticket 02).
+ */
+export interface SeatJoinedCommander {
+  card: {
+    scryfallId: string;
+    instanceId: string;
+  };
+  cardName: string;
+  frontImageUrl: string;
+  backImageUrl: string | null;
+}
+
 export interface SeatJoinedPayload {
   deckName: string;
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
   sleeveColor?: string;
+  commanders?: SeatJoinedCommander[];
+}
+
+/**
+ * Build one commander's seat.joined entry from its GameCard. `instanceId`
+ * must already be minted (GameState.newGame mints cardInstanceId for every
+ * commander) — same non-negotiable as buildCardPlayedEvent.
+ */
+function buildSeatJoinedCommander(gameCard: GameCard): SeatJoinedCommander {
+  if (!gameCard.cardInstanceId) {
+    throw new Error(`Commander ${gameCard.card.name} has no cardInstanceId; cannot send it with seat.joined`);
+  }
+  return {
+    card: { scryfallId: gameCard.card.scryfallId, instanceId: gameCard.cardInstanceId },
+    cardName: gameCard.card.name,
+    frontImageUrl: getCardImageUrl(gameCard.card, "normal", "front"),
+    backImageUrl: gameCard.card.twoFaced ? getCardImageUrl(gameCard.card, "normal", "back") : null,
+  };
 }
 
 export type SeatJoinedEvent = EventEnvelope<SeatJoinedPayload>;
@@ -206,7 +243,9 @@ export type SeatJoinedEvent = EventEnvelope<SeatJoinedPayload>;
  * 16) or the default; the card back is the standard Magic card back for an
  * unsleeved seat, and omitted for a sleeved one — sleeveColor wins if both
  * ever arrive (contract: seat.joined.v1). `tableName` becomes the envelope's
- * `tableId` (pre-Spine, the table name IS the id).
+ * `tableId` (pre-Spine, the table name IS the id). `commanders` (0-2) rides
+ * along in the payload so the Tabletop can place them in the Command Zone
+ * before any card is played (ticket 18).
  */
 export function buildSeatJoinedEvent(
   initiator: Initiator,
@@ -214,7 +253,8 @@ export function buildSeatJoinedEvent(
   tableName: string,
   playmatImageUrl?: string,
   cardBackImageUrl?: string,
-  sleeveColor?: string
+  sleeveColor?: string,
+  commanders?: readonly GameCard[]
 ): SeatJoinedEvent {
   return {
     id: randomUUID(),
@@ -231,6 +271,7 @@ export function buildSeatJoinedEvent(
       playmatImageUrl,
       cardBackImageUrl: sleeveColor ? undefined : cardBackImageUrl,
       sleeveColor,
+      commanders: commanders?.length ? commanders.map(buildSeatJoinedCommander) : undefined,
     },
   };
 }

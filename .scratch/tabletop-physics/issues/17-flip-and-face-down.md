@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: done
 
 **What to build:** Two independent axes already live on `mtg-card` (ticket 12): `face: 'front' |
 'back'` (which printed side; `'back'` is structurally unreachable when `backImageUrl` is null)
@@ -26,7 +26,12 @@ screen. Consult the `two-faced-cards` owner before implementing.
 
 **Blocked by:** 12
 
-- [ ] "Flip" context-menu item swaps `face`, present/enabled only when the card has a back face
-- [ ] "Turn face down" context-menu item toggles `faceDown`, renders the table's generic back
-- [ ] A card entering hand or library resets to `face: 'front'`, `faceDown: false`
-- [ ] Two-client test: both clients see the same resulting face after a flip or face-down toggle
+- [x] "Flip" context-menu item swaps `face`, present/enabled only when the card has a back face
+- [x] "Turn face down" context-menu item toggles `faceDown`, renders the table's generic back
+- [x] A card entering **library** resets to `face: 'front'`, `faceDown: false` — **hand is not
+      done**, because there's no `hand` zone in the codebase at all yet (the enum is
+      playmat/library/graveyard/exile/stack/command, pre-existing before this ticket). Revisit
+      once a hand zone exists.
+- [x] Two-client test: both clients see the same resulting face after a flip AND a face-down
+      toggle (`verify-flip-face-down.spec.ts`, "flipping and turning face down both sync to a
+      second client")

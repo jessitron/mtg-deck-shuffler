@@ -51,6 +51,16 @@ type, `mtg-zone`, defined in `apps/tabletop/src/shared/mtgZoneShape.ts` and rend
 the KB's working example of "a locked shape needs none." See `architecture.md` for the mechanics
 and the tldraw registration gotchas both rewrites surfaced.
 
+**Ticket 17** (`.scratch/tabletop-physics/issues/17-flip-and-face-down.md`, landed 2026-08-09,
+`eb24a4f`/`ff5d58a`) added the app's **first custom tldraw `ContextMenu`** —
+`apps/tabletop/src/client/CardContextMenu.tsx`, wired via `TLComponents.ContextMenu` in
+`TablePage.tsx` — carrying Flip/Turn face-down/Tap-Untap menu items for `mtg-card`. Mechanics
+territory here is narrow but real: right-clicking a card selects it exactly like `PointingShape`
+does, and unlike a locked shape's selection (which tldraw clears when the context menu closes),
+an **unlocked card's selection survives menu close** — reopening watch point 1's stale-selection
+hazard through a second gesture besides drag. See `architecture.md`'s "Ticket 17" section and
+watch point 15.
+
 **Ticket 18** (`.scratch/tabletop-physics/issues/18-counters.md`, landed 2026-08-08, `4c64ef2`)
 added a third custom shape type: `mtg-counter`, an **unlocked, draggable, text-editable disc**
 a player drops onto a card. Attachment is tldraw drag-and-drop *parenting*, mediated by drag
@@ -86,6 +96,9 @@ describe *that* shape, not this one — see `architecture.md`.
 | What | Where |
 |---|---|
 | Card ShapeUtil (tap/untap, drag settle, zone detection, counter hosting) | `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` |
+| Tap pivot math (pure, shared by `onClick` and the context menu) | `apps/tabletop/src/client/shapes/cardTap.ts` (`tapPartial`) |
+| First custom `ContextMenu` (Flip/Turn face down-up/Tap-Untap, right-click selection hazard) | `apps/tabletop/src/client/CardContextMenu.tsx`, wired via `TLComponents.ContextMenu` in `TablePage.tsx` |
+| Regression test for context-menu stale-selection hazard | `apps/tabletop/test/verification/verify-flip-face-down.spec.ts` |
 | Card shape's props/type definition | `apps/tabletop/src/shared/mtgCardShape.ts` (`MtgCardShapeProps`, `TLGlobalShapePropsMap` augmentation) |
 | Zone ShapeUtil (furniture — no interaction hooks) | `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` |
 | Zone shape's props/type definition | `apps/tabletop/src/shared/mtgZoneShape.ts` (`MtgZoneShapeProps`, `TLGlobalShapePropsMap` augmentation) |
@@ -95,7 +108,7 @@ describe *that* shape, not this one — see `architecture.md`.
 | Counter eviction geometry (pure, unit-tested) | `apps/tabletop/src/client/shapes/openSpotNearZoneEdge.ts` |
 | ShapeUtil registration (client) | `apps/tabletop/src/client/TablePage.tsx` (`shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil]` passed to both `useSync` and `<Tldraw>`) |
 | Shape schema registration (server) | `apps/tabletop/src/server/rooms.ts` (`createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-counter": {...}, "mtg-zone": {...} } })`) |
-| Shape identity is minted | `apps/tabletop/src/server/cardArrival.ts` (`props.instanceId`, `createShapeId`) |
+| Shape identity is minted | `apps/tabletop/src/server/cardArrival.ts` (arrival) or `apps/tabletop/src/server/seatJoined.ts` (commanders + ghosts, table-layout ticket 18) — both via `mtgCardShape()` in `tableFurniture.ts`; `props.instanceId`, `createShapeId` |
 | tldraw's selection state machine (read, don't modify) | `node_modules/tldraw/src/lib/tools/SelectTool/childStates/PointingShape.ts`, `Translating.ts` |
 | Regression test for the drag-identity bug | `apps/tabletop/test/verification/verify-drag-identity.spec.ts` |
 | Regression test for multi-untap's undo coalescing (tldraw-upgrade tripwire) | `apps/tabletop/test/verification/verify-multi-untap.spec.ts` |

@@ -1828,3 +1828,50 @@ make the supersession *visible* (old entry annotated, README rewritten, watch po
 rather than to defend the earlier text. No `/design` specimen, same reasoning as ticket 15:
 stock tldraw chrome whose decided property is text composition, which a CSS specimen can't
 exhibit honestly.
+
+## 2026-08-09 — the sleeve rule crossed to the Shuffler, and the game screen caught up to the pick
+
+No commit sha yet (working-tree change, ticket carries "cards-come-and-go" in its
+commit trailer but predates that spec). Two changes landed together because they share a
+root cause: the table-look pick (sleeve color, playmat image) lived on `PersistedGamePrep`
+and reached `/prepare`'s renderer, but neither one traveled onto `GameState` — so the game
+screen showed the sleeve-agnostic library back and the hardcoded default mat, no matter what
+was picked at Shuffle Up.
+
+**The sleeve treatment is the Tabletop's card-sleeve rule, ported to the Shuffler's
+library stack, unmodified.** `formatLibraryStack` grew a `sleeveColor` parameter and a new
+`formatLibraryCardBack` helper: sleeved renders a bare `<div class="... sleeved"
+style="background-color: <hex>">`, unsleeved keeps the original `<img>` byte-for-byte. The
+CSS (`playmat.css`) is two rules — `border-radius: 0` and `::before { content: none }` — and
+both were sized to win regardless of load order: `.library-card-back.sleeved::before`
+(0,2,0) beats both the base inset-border rule and `game.css`'s diagonal-gradient override on
+specificity alone, so which sheet loads last doesn't matter. The box-shadow was
+**deliberately not touched** — it's the pile's depth cue (a stack of cards casting a
+shadow), not decoration on a card face, and the design language draws that line explicitly
+for the Tabletop's version of this rule. **Sheen was considered and explicitly deferred** —
+Jess looked at it and chose to hold off, recorded as a separate future appearance decision
+rather than silently bundled in.
+
+**The game-page-picked-mat gap (recorded in this KB's own text, `README.md` and
+`interactions.md` both) is now closed.** `GameState.newGame` took two new optional trailing
+params (`sleeveColor`, `playmatImagePath`), both `app.ts` call sites (`/start-game` and
+`/restart-game`) now pass `prep.sleeveColor`/`prep.playmatImagePath`, and
+`PersistedGameState` carries the same two optional fields — no version bump, the same
+established exception as `tableName`/`playerName`/`seatId`. `formatGamePageHtmlPage` sets
+the picked mat as an inline `style="background-image: url(...)"` on `.playmat.playmat-game`,
+**longhand only** — the same convention `prepare.ejs` already used, for the same reason: the
+shorthand would wipe `playmat.css`'s shared `background-size`/`background-position`.
+
+**Why this belongs to the design owner and not just "a bug fix."** Both changes are
+appearance decisions with an existing precedent to match, not free-standing choices: the
+sleeve rule already existed and decided (Tabletop, ticket 17), so porting it to a second
+surface is convergence, not a new choice; the picked-mat fix makes `/game` match a decision
+`/prepare` already renders, not a new look. Neither needed staging on `/design` — but a
+specimen went on `/design` § Cards & playmat anyway (a sleeved library-stack next to the
+unsleeved one), since the component's appearance genuinely changed and the gallery's whole
+job is not to lag that.
+
+**Verified:** `test/GameState-tableLook.test.ts` (new), `test/view/library-components.test.ts`
+(new sleeve cases), `test/view/active-game-page.test.ts` (new file) — plus manual curl +
+Playwright screenshot on `/prepare` and `/game`, and end-to-end via `/yo` (the dev fast-start
+that already deals a random sleeve + playmat, `d1caf65`).

@@ -2,12 +2,12 @@ import { buildCardPlayedEvent, CARD_PLAYED_EVENT_NAME } from "../../src/port-tab
 import { GameCard } from "../../src/GameState";
 import { lightningBolt, nicolBolas } from "../generators";
 
-function handCard(card = lightningBolt, gameCardIndex = 42): GameCard {
+function handCard(card = lightningBolt, gameCardIndex = 42, isCommander = false): GameCard {
   return {
     card,
     location: { type: "Hand", position: 3 },
     gameCardIndex,
-    isCommander: false,
+    isCommander,
     currentFace: "front",
   };
 }
@@ -34,6 +34,14 @@ describe("buildCardPlayedEvent (the card.played envelope, JES-128)", () => {
     expect(event.payload.cardName).toBe(lightningBolt.name);
     expect(event.payload.frontImageUrl).toContain(lightningBolt.scryfallId.substring(0, 1));
     expect(event.payload.backImageUrl).toBeNull(); // not twoFaced
+    expect(event.payload.owner).toBe("abc123");
+    expect(event.payload.isCommander).toBe(false);
+  });
+
+  it("carries owner (the initiator's seatId) and isCommander (from the GameCard) — owner grants no capability, it's a fact the shape carries", () => {
+    const event = buildCardPlayedEvent(handCard(lightningBolt, 1, true), "instance-guid-2", initiator, "battlefield", tableName);
+    expect(event.payload.owner).toBe(initiator.seatId);
+    expect(event.payload.isCommander).toBe(true);
   });
 
   it("mints a fresh event id per attempt (retries are distinguishable)", () => {

@@ -552,14 +552,14 @@ export function createApp(
 
       // Create new game from prep
       const gameId = persistStatePort.newGameId();
-      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo);
+      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo, prep.sleeveColor, prep.playmatImagePath);
       game.startGame(browserTabId);
       await persistStatePort.save(game.toPersistedGameState());
 
       // JES-140: announce the seat joining its table so the Tabletop draws
       // the player area before any card is played. Best-effort — see sendToTable.ts.
       if (tableInfo) {
-        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor, prep.playmatImagePath);
+        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor, prep.playmatImagePath, game.listCommanders());
       }
 
       res.redirect(`/game/${gameId}`);
@@ -677,7 +677,7 @@ export function createApp(
       // JES-140: re-announce the seat (idempotent — a physical no-op if the
       // Tabletop process still has this seat's player area from before restart).
       if (tableInfo) {
-        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor, prep.playmatImagePath);
+        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor, prep.playmatImagePath, newGame.listCommanders());
       }
 
       res.redirect(`/game/${newGameId}`);
@@ -1657,11 +1657,11 @@ export function createApp(
       await persistPrepPort.savePrep(prep);
 
       const gameId = persistStatePort.newGameId();
-      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo);
+      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo, prep.sleeveColor, prep.playmatImagePath);
       game.startGame(res.locals.browserTabId as string | undefined);
       await persistStatePort.save(game.toPersistedGameState());
 
-      await sendSeatJoinedBestEffort(tabletopPort, tableInfo, sortedDeck.name, prep.sleeveColor, prep.playmatImagePath);
+      await sendSeatJoinedBestEffort(tabletopPort, tableInfo, sortedDeck.name, prep.sleeveColor, prep.playmatImagePath, game.listCommanders());
 
       res.redirect(`/game/${gameId}`);
     } catch (error) {

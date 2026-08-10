@@ -55,6 +55,8 @@ function cardPlayed(tableName: string, envelopeOverrides: Record<string, unknown
       frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
       backImageUrl: null,
       cardName: "Lightning Bolt",
+      owner: "seat-1",
+      isCommander: false,
       ...payloadOverrides,
     },
     ...envelopeOverrides,
@@ -94,6 +96,8 @@ describe("card arrival", () => {
       backImageUrl: null,
       face: "front",
       tapped: false,
+      owner: event.owner,
+      isCommander: false,
     });
     const stack = stackBounds();
     expect(shapes[0].x).toBeGreaterThanOrEqual(stack.x);
@@ -185,6 +189,35 @@ describe("card arrival", () => {
     expect(card.props.sleeveColor).toBeNull();
   });
 
+  it("bakes the seat's card back URL into the minted card's props (ticket 17)", async () => {
+    await fetch(`http://localhost:${port}/api/tables/arrival-cardback/events`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        id: randomUUID(),
+        tableId: "arrival-cardback",
+        name: "seat.joined",
+        occurredAt: new Date().toISOString(),
+        initiator: { seatId: "seat-cardback", playerName: "Jess" },
+        occurredIn: "shuffler",
+        visibility: "public",
+        traceparent: fakeTraceparent(),
+        schemaVersion: 1,
+        payload: { deckName: "Blame Game", cardBackImageUrl: "https://example.com/card-back.jpg" },
+      }),
+    });
+
+    await post("arrival-cardback", cardPlayed("arrival-cardback", { initiator: { seatId: "seat-cardback", playerName: "Jess" } }));
+    const [card] = shapesOf("arrival-cardback");
+    expect(card.props.cardBackImageUrl).toBe("https://example.com/card-back.jpg");
+  });
+
+  it("a seat with no card back URL mints cards with cardBackImageUrl null", async () => {
+    await post("arrival-no-cardback", cardPlayed("arrival-no-cardback"));
+    const [card] = shapesOf("arrival-no-cardback");
+    expect(card.props.cardBackImageUrl).toBeNull();
+  });
+
   it("rejects a payload missing required fields (JES-128 validation point)", async () => {
     const response = await post("arrival-invalid", { name: "card.played" });
     expect(response.status).toBe(400);
@@ -208,5 +241,19 @@ describe("card arrival", () => {
     const response = await post("arrival-unknown-version", event);
     expect(response.status).toBe(400);
     expect((await response.json()).error).toContain("99");
+  });
+
+  it("rejects a payload missing owner or isCommander (ticket 18)", async () => {
+    const noOwner = await post("arrival-no-owner", cardPlayed("arrival-no-owner", {}, { owner: undefined }));
+    expect(noOwner.status).toBe(400);
+    const noIsCommander = await post("arrival-no-is-commander", cardPlayed("arrival-no-is-commander", {}, { isCommander: undefined }));
+    expect(noIsCommander.status).toBe(400);
+  });
+
+  it("carries isCommander:true through to the minted shape — owner grants no capability, it's a fact the shape carries", async () => {
+    await post("arrival-commander-flag", cardPlayed("arrival-commander-flag", {}, { isCommander: true, zoneHint: "battlefield" }));
+    const [card] = shapesOf("arrival-commander-flag");
+    expect(card.props.isCommander).toBe(true);
+    expect(card.isLocked).toBe(false); // owner/isCommander gate nothing; the card is still draggable
   });
 });

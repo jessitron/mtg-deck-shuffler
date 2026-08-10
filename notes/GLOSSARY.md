@@ -33,7 +33,11 @@ sleeve rectangle. The sleeve color is that player's visual identity on the table
 damage is tracked by opponent name + sleeve color). It is a game constant — chosen before the
 game, never changed mid-game. Real sleeves have distinct front and back colors; v1 models one
 color. Sleeves are optional; an unsleeved deck shows the standard Magic card back. (Decided
-2026-08-08, table-layout tickets 09/11/12.)
+2026-08-08, table-layout tickets 09/11/12.) The same rectangle rule now holds in the Shuffler
+too: the library stack on both `/prepare` and `/game` renders each back as a bare flat-hex
+square-cornered rectangle when a sleeve is chosen (its box-shadow — a pile-depth cue, not a
+card-face decoration — stays either way). Deliberately no sheen; that stays flat like the
+Tabletop's rendering. (2026-08-09.)
 
 Card - this is ambiguous. Are we talking about a card conceptually, or a particular card in a deck? A card by name, or a particular edition of it? This word by itself does not have a specific meaning.
 
@@ -67,9 +71,9 @@ Deck Provenance: information about where a deck came from. This includes the Dec
 
 Library (MTG Deck Shuffler UI): an ordered collection of cards, a subset of those in the Deck. During a game, cards can be removed from the library, added back, reordered.
 
-Game Prep (MTG Deck Shuffler): the preparation phase before a game starts. This is where deck review happens. A GamePrep stores the deck and configuration settings (future: playmat, card backs, etc.). GamePrep has its own URL space (/prepare/:prepId) and persistence layer separate from Game. Immutable once created.
+Game Prep (MTG Deck Shuffler): the preparation phase before a game starts. This is where deck review happens. A GamePrep stores the deck and configuration settings, including the chosen playmat and sleeve color. GamePrep has its own URL space (/prepare/:prepId) and persistence layer separate from Game. Immutable once created.
 
-Playmat: the surface a player's stuff sits on. In real Magic it's the mat on the table; in the Shuffler it's the big art-backed panel that holds the library stack, command zone and hand. **Both play screens have one** — `/prepare` and `/game` — and it is the same domain object on each, even though the two are dressed differently (the prepare mat is a grid of Cascading Cataracts art with a 20px radius; the game mat is a giant Magic card with an 80px radius). In the markup both carry the bare class `playmat`, plus a page modifier: `playmat-prepare` / `playmat-game`. **The game one used to be called `.page-container`**, which led at least one reader to conclude the game screen had no playmat; if you see that name anywhere, it's stale. In the Tabletop, each seat's player area has its own playmat, sent as `playmatImageUrl` on `seat.joined`.
+Playmat: the surface a player's stuff sits on. In real Magic it's the mat on the table; in the Shuffler it's the big art-backed panel that holds the library stack, command zone and hand. **Both play screens have one** — `/prepare` and `/game` — and it is the same domain object on each, even though the two are dressed differently (the prepare mat is a grid of Cascading Cataracts art with a 20px radius; the game mat is a giant Magic card with an 80px radius). In the markup both carry the bare class `playmat`, plus a page modifier: `playmat-prepare` / `playmat-game`. **The game one used to be called `.page-container`**, which led at least one reader to conclude the game screen had no playmat; if you see that name anywhere, it's stale. As of 2026-08-09, the `/prepare` pick is snapshotted onto the game at start and actually renders on `/game` too — before that date this entry described the intent, not the code. In the Tabletop, each seat's player area has its own playmat, sent as `playmatImageUrl` on `seat.joined`.
 
 Prep ID: a unique identifier for a GamePrep. Used in URLs and to link Games back to their originating prep.
 

@@ -4,7 +4,7 @@ import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom, RoomEntry } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
 import { CARD_W, CARD_H, MAX_SEATS, landPosition, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
-import { ensurePlayerArea, pageIdOf, nextIndex } from "./tableFurniture.js";
+import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
 import { validateIncomingEvent } from "./contractValidation.js";
 
 // ============================================================================
@@ -30,6 +30,8 @@ interface CardPlayedPayload {
   frontImageUrl: string;
   backImageUrl: string | null;
   cardName: string;
+  owner: string;
+  isCommander: boolean;
 }
 
 function instanceAlreadyOnTable(entry: RoomEntry, instanceId: string): boolean {
@@ -66,7 +68,7 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
     return;
   }
   const { playerName } = envelope.initiator;
-  const { card, face, zoneHint, frontImageUrl, backImageUrl, cardName } = envelope.payload;
+  const { card, face, zoneHint, frontImageUrl, backImageUrl, cardName, owner, isCommander } = envelope.payload;
 
   trace.getActiveSpan()?.setAttributes({
     "card.instance_id": card.instanceId,
@@ -129,20 +131,15 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
     // No per-instance tldraw asset: the card renders its own <img> straight
     // from frontImageUrl/backImageUrl (mtg-card, tabletop-physics ticket 12),
     // so flip is a pure props.face write later, not an asset swap.
-    store.put({
-      id: shapeId,
-      typeName: "shape",
-      type: "mtg-card",
-      x: position.x,
-      y: position.y,
-      rotation: 0,
-      index: nextIndex(tableName),
-      parentId: pageId,
-      isLocked: false,
-      opacity: 1,
-      props: {
+    store.put(
+      mtgCardShape({
+        id: shapeId,
+        pageId,
+        x: position.x,
+        y: position.y,
         w: CARD_W,
         h: CARD_H,
+        index: nextIndex(tableName),
         instanceId: card.instanceId,
         scryfallId: card.scryfallId,
         cardName: cardName,
@@ -150,18 +147,19 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
         backImageUrl: backImageUrl,
         face: face,
         faceDown: false,
-        tapped: false,
         // Ticket 17: the seat's sleeve, baked in at mint time. Legal because
         // sleeve color is a game constant — never changed mid-game. Sleeve is
         // seat data, not payload data: it comes from seat memory, never from
         // the card.played payload.
         sleeveColor: playerArea.sleeveColor ?? null,
-      },
-      // No traceparent in meta — cards persist; traces don't. Zone
-      // membership lands here once a card is dragged (see
-      // MtgCardShapeUtil.onTranslateEnd) — empty at arrival.
-      meta: {},
-    } as any);
+        // Ticket 17 (flip-and-face-down): same argument, same seat-data-not-
+        // payload-data status. Null for sleeved seats (seat.joined omits it
+        // when sleeved — the sleeve always wins) and for seats with none.
+        cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
+        owner,
+        isCommander,
+      })
+    );
   });
 
   entry.seenEventIds.add(envelope.id);

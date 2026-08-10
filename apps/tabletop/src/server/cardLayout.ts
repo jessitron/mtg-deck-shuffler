@@ -199,6 +199,20 @@ export function landPosition(seatIndex: number, landCount: number): { x: number;
   return { x: mat.x + col * (CARD_W + LAND_GAP), y: mat.y + mat.h / 2 + row * (CARD_H + LAND_GAP) };
 }
 
+/**
+ * Where a commander sits in its owner's Command Zone (ticket 18): below the
+ * zone's label band, centered if it's the only commander, side by side (with
+ * a GAP between) if there are two.
+ */
+export function commandZoneCardPosition(seatIndex: number, slot: number, count: 1 | 2): { x: number; y: number } {
+  const box = commandZoneBounds(seatIndex);
+  const y = box.y + ZONE_LABEL_BAND;
+  if (count === 1) {
+    return { x: box.x + (COMMAND_ZONE_W - CARD_W) / 2, y };
+  }
+  return { x: box.x + slot * (CARD_W + GAP), y };
+}
+
 /** Graveyard cards pile with a small offset so the count is visible — starting below the label band. */
 export function graveyardCardPosition(seatIndex: number, graveyardCount: number): { x: number; y: number } {
   const box = graveyardBounds(seatIndex);

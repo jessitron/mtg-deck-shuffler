@@ -1,10 +1,22 @@
 import { Request, Response } from "express";
 import { trace } from "@opentelemetry/api";
+import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
-import { ensurePlayerArea, pageIdOf } from "./tableFurniture.js";
-import { MAX_SEATS } from "./cardLayout.js";
+import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
+import { MAX_SEATS, CARD_W, CARD_H, commandZoneCardPosition } from "./cardLayout.js";
 import { validateIncomingEvent } from "./contractValidation.js";
+
+/** A commander riding seat.joined (ticket 18) — always face up, no `face` field on the wire. */
+interface SeatJoinedCommander {
+  card: { scryfallId: string; instanceId: string };
+  cardName: string;
+  frontImageUrl: string;
+  backImageUrl: string | null;
+}
+
+/** A ghost's identity never collides with a real instanceId — instanceAlreadyOnTable (cardArrival.ts) matches exact strings. */
+const ghostInstanceId = (instanceId: string): string => `ghost:${instanceId}`;
 
 // ============================================================================
 // SCAFFOLDING — the seam the Spine absorbs (same posture as cardArrival.ts).
@@ -28,6 +40,7 @@ interface SeatJoinedPayload {
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
   sleeveColor?: string;
+  commanders?: SeatJoinedCommander[];
 }
 
 /**
@@ -58,7 +71,7 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
     return;
   }
   const { playerName } = envelope.initiator;
-  const { deckName, playmatImageUrl, cardBackImageUrl, sleeveColor } = envelope.payload;
+  const { deckName, playmatImageUrl, cardBackImageUrl, sleeveColor, commanders } = envelope.payload;
 
   trace.getActiveSpan()?.setAttributes({
     "event.id": envelope.id,
@@ -90,12 +103,60 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
   }
 
   const pageId = pageIdOf(entry);
-  await ensurePlayerArea(entry, pageId, seatId, playerName, {
+  const playerArea = await ensurePlayerArea(entry, pageId, seatId, playerName, {
     deckName,
     playmatImageUrl,
     cardBackImageUrl,
     sleeveColor,
   });
+
+  const seatCommanders = commanders ?? [];
+  if (seatCommanders.length > 0) {
+    await entry.room.updateStore((store) => {
+      seatCommanders.forEach((commander, slot) => {
+        const { instanceId } = commander.card;
+        const position = commandZoneCardPosition(playerArea.seatIndex, slot, seatCommanders.length as 1 | 2);
+        const sharedFields = {
+          pageId,
+          x: position.x,
+          y: position.y,
+          w: CARD_W,
+          h: CARD_H,
+          scryfallId: commander.card.scryfallId,
+          cardName: commander.cardName,
+          frontImageUrl: commander.frontImageUrl,
+          backImageUrl: commander.backImageUrl,
+          face: "front" as const,
+          faceDown: false,
+          sleeveColor: playerArea.sleeveColor ?? null,
+          cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
+          owner: seatId,
+          isCommander: true,
+        };
+
+        // Ghost minted first, so its z-index is strictly lower and the real
+        // card paints on top (both share the same table spot).
+        store.put(
+          mtgCardShape({
+            id: createShapeId(`ghost-${instanceId}`),
+            index: nextIndex(tableName),
+            instanceId: ghostInstanceId(instanceId),
+            isLocked: true,
+            opacity: 0.3,
+            ...sharedFields,
+          })
+        );
+        store.put(
+          mtgCardShape({
+            id: createShapeId(`card-${instanceId}`),
+            index: nextIndex(tableName),
+            instanceId,
+            ...sharedFields,
+          })
+        );
+      });
+    });
+  }
 
   entry.seenEventIds.add(envelope.id);
   res.status(201).json({ ok: true });

@@ -562,6 +562,96 @@ zeroing) — three conceptual call sites of that math exist, two via `tapPartial
   probably taps it instead of extending the selection, per `PointingShape.ts` line ~93
   ordering. If someone wants shift-click-extend on cards, that's its own investigation.
 
+## Ticket 17: first custom `ContextMenu` — right-click selection outlives the menu (landed 2026-08-09, `eb24a4f`/`ff5d58a`)
+
+`.scratch/tabletop-physics/issues/17-flip-and-face-down.md` (plan in `plan-17.md`) added Flip,
+Turn face down/up, and Tap/Untap as right-click menu items on `mtg-card`. Face/flip semantics
+(what `faceDown`/`face` mean, the library-entry reset) are `two-faced-cards` territory; this
+owner's stake is the **new interaction surface** — a context menu — and one hazard it reopens.
+
+### Wiring: `TLComponents.ContextMenu`, children replace rather than add
+
+`apps/tabletop/src/client/TablePage.tsx` passes `ContextMenu: TableContextMenu` in the
+`components: TLComponents` object already used for `Toolbar`. `TableContextMenu`
+(`apps/tabletop/src/client/CardContextMenu.tsx`) wraps tldraw's `DefaultContextMenu`:
+
+```
+<DefaultContextMenu {...props}>
+  <CardMenuItems />                                    {/* new: mtg-card-actions group */}
+  <TldrawUiMenuGroup id="modify"><ReorderMenuSubmenu /></TldrawUiMenuGroup>
+  <ClipboardMenuGroup />
+</DefaultContextMenu>
+```
+
+**The load-bearing fact for anyone touching this next**: `DefaultContextMenu`'s `children` prop
+*replaces* `<DefaultContextMenuContent />` entirely — there is no additive slot, no way to render
+the stock content plus extra items. Whatever isn't explicitly re-added is gone. Ticket 17
+(Jess's explicit curation, recorded in the file's own doc comment) kept only `ReorderMenuSubmenu`
+and `ClipboardMenuGroup` (Cut/Copy/Paste/Duplicate/Delete) and dropped `EditMenuSubmenu`
+(Lock/Unlock), `ArrangeMenuSubmenu`, `MoveToPageMenu`, `ConversionsMenuGroup`, `SelectAllMenuItem`,
+and `CursorChatItem`. **Losing Lock/Unlock here is a real capability loss worth naming**: per this
+owner's own KB (watch point 7, `mtg-zone`'s "locked and stays that way" design), furniture is the
+only thing that's ever locked, and zones mint locked and never expose an unlock affordance of
+their own — tldraw's stock context-menu Lock/Unlock was the *only* unlock path documented
+anywhere in this KB. Dropping it doesn't break anything today (nothing needs to unlock a zone),
+but the next feature that wants to unlock furniture will find there is no menu item for it
+anymore and will need to either restore `EditMenuSubmenu` or build a bespoke affordance.
+
+### `CardMenuItems`: reads selection reactively, writes through one `commit()` helper
+
+`CardMenuItems` calls `useEditor()` + `useValue(() => editor.getSelectedShapes().filter(type ===
+"mtg-card"), [editor])` and renders `null` when the selection has no card — the menu's card
+actions simply don't appear on a right-click over a zone or counter. Each action funnels through:
+
+```
+function commit(partials: TLShapePartial<MtgCardShape>[], label: string) {
+  if (partials.length === 0) return;
+  editor.markHistoryStoppingPoint(label);
+  editor.updateShapes(partials);
+  editor.setSelectedShapes([]);
+}
+```
+
+### The hazard: right-click selects, and an unlocked card's selection survives menu close
+
+Right-clicking a card runs it through the same `PointingShape`/selection machinery a left-click
+does — the card becomes selected. `DefaultContextMenu`'s close callback clears selection for a
+**locked** shape (tldraw's own behavior, presumably because a locked shape's context menu is the
+only way it ever gets selected at all) but does **not** clear an **unlocked** shape's selection
+when the menu closes without an action, or after most actions either. Without `commit()`'s
+trailing `editor.setSelectedShapes([])`, a right-click-then-flip (or right-click-then-dismiss)
+would leave the card selected exactly the way `onTranslateEnd`'s pre-existing
+`setSelectedShapes([])` workaround exists to prevent after a drag (watch point 1) — the *next*
+drag of a *different* card would silently hijack this one instead, because
+`startTranslating`'s safety net only force-reselects when nothing is currently selected. `commit`
+clears selection unconditionally after every menu action for exactly this reason — the same fix
+as watch point 1, applied at a second gesture's exit point instead of the drag's.
+
+**New watch point 15** records this as a second entry point into watch point 1's family of
+hazards, alongside drag-settle (watch point 1) and multi-untap's click-batch (watch point 14):
+context menu actions.
+
+### `tapPartial` extracted to a standalone function
+
+The Tap/Untap menu item needs the same center-fixed pivot math `MtgCardShapeUtil.onClick` already
+used, but a menu item has no `this.editor` or ShapeUtil instance to call a private method on.
+`tapPartial` (the pivot solve, previously a private method on `MtgCardShapeUtil`) moved to
+`apps/tabletop/src/client/shapes/cardTap.ts` as a standalone pure function — verified pure during
+review (reads only `shape.rotation`/`shape.props.{w,h}`, the module-level `TAP_ANGLE`, and the
+imported `Vec` helper) — no behavior change. Both `onClick`'s synchronous return and its
+`queueMicrotask` multi-select-propagation loop (ticket 16) now call the imported `tapPartial`
+instead of `this.tapPartial`. This is now the third call site referencing the pivot math
+(`onClick`, the context menu, `onDragShapesIn`'s inline copy for counter rotation-zeroing) — two
+of the three share the extracted function.
+
+### Regression test
+
+`apps/tabletop/test/verification/verify-flip-face-down.spec.ts` — "flipping card A does not leave
+a stale selection that hijacks a later drag of card B." Right-clicks card A, flips it via the
+context menu, then drags card B, and asserts B (not A) moved. Failed before `commit`'s trailing
+`setSelectedShapes([])` was added, passes after — the same shape of proof `verify-drag-identity`
+established for the drag-only version of this bug.
+
 ## Ticket 02/12: the rewrite, landed
 
 `.scratch/tabletop-physics/issues/02-what-a-card-is.md` (resolved 2026-08-07, `c956949`) decided
@@ -585,6 +675,48 @@ cards, locked furniture, *and* stray dropped JPEGs, none of which shared meaning
 - The per-instance tldraw image *asset* is gone — flip is now a pure `props.face` write (no
   asset mutation, no re-fetch; both faces' URLs travel with the card from arrival). This affects
   card-rendering territory (`two-faced-cards`), not this owner's selection mechanics.
+
+## Table-layout ticket 18: commander arrives with owner and ghost — second mint seam, shared builder, decoy pattern
+
+`.scratch/tabletop-physics/issues/18-commander-arrives-with-owner-and-ghost.md` (landed
+2026-08-09). Three changes, only the second and third of which are this owner's territory (the
+first — `owner`/`isCommander` becoming validated `MtgCardShapeProps` fields — is a fact the shape
+carries, not a mechanic; it grants no capability and adds no hook):
+
+- **A second mint seam.** `apps/tabletop/src/server/seatJoined.ts` now mints `mtg-card` shapes
+  directly, via `entry.room.updateStore`, the same inline-`store.put` style `cardArrival.ts` uses
+  — one seat.joined event carrying 0-2 commanders mints each commander plus its ghost (below).
+  Identity minting was previously a one-seam fact this KB stated flatly ("minted once ... never
+  elsewhere"); it's now two known seams, never a third. See "The `mtgCardShape()` builder" and
+  watch point 15.
+- **The `mtgCardShape()` builder** (`apps/tabletop/src/server/tableFurniture.ts`, next to the
+  existing `zoneShape()` helper): both mint seams now call this instead of writing their own
+  `store.put({...} as any)` literal. It's the single place every required `mtg-card` prop is
+  listed — `MtgCardShapeArgs` mirrors `MtgCardShapeProps` — so a future required prop is added
+  once, here, rather than drifting across two hand-written literals. See watch point 15.
+- **The ghost mechanism** — a decoy shape sharing a type with the real thing, this KB's first
+  example of that pattern. `seatJoined.ts` mints each commander as *two* `mtg-card` shapes at the
+  identical Command Zone position: the real, draggable card (`isLocked: false`, default opacity),
+  and a locked, faded ghost (`instanceId: `ghost:${instanceId}`\`, `isLocked: true`, `opacity:
+  0.3`) that stays behind when the real card is dragged away, marking the spot as "this is where
+  your commander lives." The ghost is minted via `nextIndex()` *before* the real card in the same
+  `updateStore` call, so its `IndexKey` sorts lower and the real card paints on top — same
+  topmost-wins z-order mechanism `topmostZoneAt()` uses for overlapping zones (watch point 8),
+  applied here to two cards instead of two zones. The `ghost:` prefix keeps its `instanceId` a
+  distinct string from the real card's, confirmed safe against `cardArrival.ts`'s
+  `instanceAlreadyOnTable` dedup (exact-string match on `props.instanceId`). `isLocked: true` alone
+  is sufficient to make the ghost fully inert to clicks, drags, selection, and counter-hosting —
+  no new guard needed — because watch point 7's already-established chain (`SelectTool`'s `Idle`
+  gates `isLocked` before `PointingShape`; `Editor.getDraggingOverShape` filters `!isLocked`)
+  applies to *any* locked `mtg-card` exactly as it does to `mtg-zone`. `apps/tabletop/
+  test/seatJoined.test.ts`'s "seat joined — commanders" describe block asserts the ghost's
+  `isLocked`/`opacity`/index-ordering/distinct-instanceId facts at the data level; it does not
+  drive a live pointer at the ghost, so the click-transparency claim rests on watch point 7's
+  tldraw-source reading, not a fresh Playwright probe. See watch point 16 for the pattern written
+  up generally.
+
+Full detail in `interactions.md` (Shape identity section rewritten, new watch points 15-16) and
+`history.md`.
 
 ## How to tell this owner's territory from `two-faced-cards`'s
 

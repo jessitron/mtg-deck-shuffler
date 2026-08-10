@@ -62,12 +62,13 @@ export async function sendSeatJoinedBestEffort(
   tableInfo: TableInfo,
   deckName: string,
   sleeveColor?: string,
-  playmatImagePath?: string
+  playmatImagePath?: string,
+  commanders?: readonly GameCard[]
 ): Promise<void> {
   if (!tabletopPort) return;
   const { tableName, seatId, playerName } = tableInfo;
   const playmatImageUrl = playmatImagePath ? playmatImageUrlFromPath(playmatImagePath) : defaultPlaymatImageUrl();
-  const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, tableName, playmatImageUrl, cardBackImageUrl(), sleeveColor);
+  const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, tableName, playmatImageUrl, cardBackImageUrl(), sleeveColor, commanders);
   try {
     await tabletopPort.sendSeatJoined(tableName, event);
   } catch (error) {

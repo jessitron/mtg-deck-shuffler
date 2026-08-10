@@ -556,6 +556,76 @@ Full detail in `architecture.md`'s "Ticket 16" section; `interactions.md` watch 
 rewritten, watch point 13 extended, watch point 14 new, and a new `Depends On` note on
 `PointingShape.onPointerUp`'s ordering.
 
+## Ticket 17: flip and turn face-down — first custom `ContextMenu`, third stale-selection entry point (2026-08-09, `eb24a4f`/`ff5d58a`)
+
+`.scratch/tabletop-physics/issues/17-flip-and-face-down.md` (plan in `plan-17.md`). Mostly
+`two-faced-cards` territory (what `face`/`faceDown` mean, the seat's `cardBackImageUrl`, the
+library-entry reset mirroring the Shuffler's `mulligan()`) — but it landed the app's **first
+custom tldraw `ContextMenu`**, `apps/tabletop/src/client/CardContextMenu.tsx`, wired via
+`TLComponents.ContextMenu` in `TablePage.tsx`, and that's squarely this owner's mechanics.
+
+- **New UI surface, new selection hazard.** `DefaultContextMenu`'s `children` replace its default
+  content rather than append to it, so `TableContextMenu` re-declares a trimmed stock menu
+  (`ReorderMenuSubmenu` + `ClipboardMenuGroup`) alongside the new `mtg-card-actions` group
+  (Flip/Turn face down-up/Tap-Untap) — Jess's explicit call to drop `EditMenuSubmenu`
+  (Lock/Unlock — the *only* unlock affordance this KB has on record for `mtg-zone`'s
+  locked-and-stays-locked furniture), `ArrangeMenuSubmenu`, `MoveToPageMenu`,
+  `ConversionsMenuGroup`, `SelectAllMenuItem`, and `CursorChatItem`.
+- **Right-clicking selects a card, and — unlike a locked shape — an unlocked card's selection
+  survives the menu closing.** That reopens watch point 1's stale-selection hazard through a
+  third gesture (after drag-settle and the multi-untap click-batch): a lingering selection would
+  let the next drag of a *different* card silently move this one. Fixed the same way as watch
+  point 1's original fix, but at the menu's exit instead of the drag's: every menu action funnels
+  through a `commit(partials, label)` helper (`markHistoryStoppingPoint` → `updateShapes` →
+  `editor.setSelectedShapes([])`, the clear unconditional and always last). New watch point 15
+  records this as the general pattern for any future menu/toolbar/UI surface that mutates a card.
+  Regression test: `verify-flip-face-down.spec.ts`'s "flipping card A does not leave a stale
+  selection that hijacks a later drag of card B."
+- **`tapPartial` extracted from `MtgCardShapeUtil` into a standalone pure function**,
+  `apps/tabletop/src/client/shapes/cardTap.ts`, because the new Tap/Untap menu item needs the
+  same center-fixed pivot math (watch point 4) but has no `this.editor`/ShapeUtil instance to
+  call a private method on. Verified pure during review (only reads `shape.rotation`/
+  `shape.props.{w,h}`, module-level `TAP_ANGLE`, imported `Vec`) — no behavior change; both
+  `onClick`'s synchronous return and its ticket-16 `queueMicrotask` batch now call the imported
+  function.
+
+Full detail in `architecture.md`'s new "Ticket 17" section; `interactions.md` gained watch point
+15; `files.md` gained `CardContextMenu.tsx` and `cardTap.ts`.## Table-layout ticket 18: commander arrives with owner and ghost (2026-08-09)
+
+`.scratch/tabletop-physics/issues/18-commander-arrives-with-owner-and-ghost.md`, worktree
+`ticket-18-commander-arrives`. `mtg-card` gained two new required, validated `props`: `owner`
+(seatId, `T.string`) and `isCommander` (`T.boolean`) — a fact the shape carries, granting no
+capability (any player can still move any card). Three consequences land in this KB:
+
+- **A second mint seam, correcting an inaccurate KB claim.** `interactions.md`'s "Shape identity"
+  section used to say `props.instanceId` is "minted once ... never elsewhere." False as of this
+  ticket: `apps/tabletop/src/server/seatJoined.ts` now mints `mtg-card` shapes directly (commanders
+  and their ghosts, on `seat.joined`), inline via `room.updateStore`, same style as
+  `cardArrival.ts`. Rewritten to "minted at `cardArrival.ts` on arrival, or `seatJoined.ts` at
+  seating for commanders — never a third site."
+- **New canonical pattern: `mtgCardShape()` in `tableFurniture.ts`.** Two independent mint seams
+  writing their own `store.put({...} as any)` literal is exactly the three-way-drift risk that
+  made adding `owner`/`isCommander` painful — both literals plus the props interface would need
+  updating, with no compiler check tying them together. Fixed by extracting a shared builder
+  (`MtgCardShapeArgs` mirroring `MtgCardShapeProps`) that both `cardArrival.ts` and `seatJoined.ts`
+  call. **Future required `mtg-card` props go in `mtgCardShape()`'s signature, not a call site** —
+  new watch point 15.
+- **The ghost mechanism — this KB's first decoy/shadow-shape example.** A commander mints as two
+  `mtg-card` shapes at the identical spot: the real, draggable card, and a `ghost:`-prefixed-
+  instanceId, `isLocked: true`, `opacity: 0.3` copy minted *first* (so its `IndexKey` sorts lower
+  and the real card paints on top — same topmost-wins mechanism as overlapping-zone resolution,
+  watch point 8, applied to two cards). Confirmed safe against `cardArrival.ts`'s
+  `instanceAlreadyOnTable` exact-string dedup. `isLocked: true` alone makes the ghost fully inert
+  to click/drag/selection/counter-hosting — no new guard needed, per watch point 7's already-
+  established `isLocked` gating chain, now confirmed to generalize from `mtg-zone` to a second
+  locked `mtg-card` instance. `apps/tabletop/test/seatJoined.test.ts`'s "seat joined —
+  commanders" describe block asserts the ghost's data-level facts (isLocked, opacity, index
+  ordering, distinct instanceId); it doesn't drive a live pointer at the ghost, so the click-
+  transparency claim rests on watch point 7's tldraw-source reading rather than a fresh probe.
+
+Full detail in `architecture.md`'s new "Table-layout ticket 18" section; `interactions.md`'s Shape
+identity section rewritten and watch points 15-16 added; `README.md`'s quick-reference table
+updated; `files.md`'s `tableFurniture.ts`/`seatJoined.ts`/`mtgCardShape.ts` entries updated.
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,
