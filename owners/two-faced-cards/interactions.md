@@ -80,7 +80,7 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 ### The Tabletop port (card.played sender, JES-127)
 - `src/port-tabletop/types.ts` `buildCardPlayedEvent` is the ONE door where a GameCard is serialized for the table. Any new face semantics (a third face? partner backs?) must go through here and the contract (`contracts/payloads/card.played.v1.json` — schemaVersion bump, new file).
 - **Landed (2026-08-08, ticket 12)**: `imageUrl` is gone, **replaced** by `frontImageUrl: string` (always `getCardImageUrl(card, "normal", "front")`) and `backImageUrl: string | null` (`getCardImageUrl(card, "normal", "back")` when `card.twoFaced`, else `null` — computed from `twoFaced`, never from whether `card.backImageUris` happens to be populated, per the watch point in [tabletop.md](tabletop.md#watch-points)). `face: gameCard.currentFace` is unchanged but now documented as "which face is up on arrival," not "which face I baked in." Zero contract churn — those fields are scaffolding, not contract. The field-by-field comment block above `CardPlayedEvent` and the interface itself were updated together. The matching edit is the hand-rolled `validationError` in `apps/tabletop/src/server/cardArrival.ts` (now requires `frontImageUrl: string` + `backImageUrl: string | null`). `test/port-tabletop/cardPlayedEvent.test.ts` asserts the new shape, including a case with `backImageUris` unset on a `twoFaced` card to prove the derivation is from `twoFaced`, not from stored-URI presence.
-- **On the Tabletop side, the payload now lands directly in shape `props`** — no baking, no unbaking. `cardArrival.ts`'s `CardArrival` interface mirrors the sender's shape 1:1, and `handleCardArrival` writes `frontImageUrl`/`backImageUrl`/`face` straight into the new `mtg-card` shape's `props` (see [tabletop.md](tabletop.md)). Flip is now structurally a pure `props.face` write; no gesture writes it yet.
+- **On the Tabletop side, the payload now lands directly in shape `props`** — no baking, no unbaking. `cardArrival.ts`'s `CardArrival` interface mirrors the sender's shape 1:1, and `handleCardArrival` writes `frontImageUrl`/`backImageUrl`/`face` straight into the new `mtg-card` shape's `props` (see [tabletop.md](tabletop.md)). **Flip and turn-face-down are now built** (physics ticket 17, 2026-08-09, `eb24a4f`): `apps/tabletop/src/client/CardContextMenu.tsx` writes `props.face` and `props.faceDown` from a right-click context menu — the first Tabletop code to write either field.
 - Discard keeps `currentFace` (a flipped card is discarded as the face it was); mulligan resets it. If you add zone-moving operations, decide face-reset explicitly.
 - **SETTLED (2026-08-08): the Shuffler is authoritative for `currentFace`; flip-on-table is table-local.** Decided in two halves. Physics ticket 06 (`575416b`): Jess accepted the divergence knowingly — a table-flipped card later discarded shows the pre-flip face on the Shuffler's screen and in copy-to-clipboard; "table becomes authoritative" would have required the Shuffler's first-ever inbound event listener. Cards-come-and-go ticket 02 (`7b7f868`) confirmed it on the wire: **`card.returned.v1` carries no `face` and no `faceDown`** (Jess: "cards removed from play no longer have a face up") — the table resets both axes locally on exit (ticket 06's rule), the Shuffler applies its own face rules on arrival, and the wire says nothing. Don't add a face field to return/removal events, and don't build a table→Shuffler face-sync channel.
 
@@ -134,20 +134,26 @@ These are specific things that could break two-faced cards if changed elsewhere:
     translation table in [tabletop.md](tabletop.md); this is the kind of divergence a
     `CONTEXT-MAP.md` would carry if the repo had one.
 
-14. **Face-down is modeled only on the Tabletop — and its *sleeved* rendering is now
-    built, though nothing sets it yet.** Ticket 02 (2026-08-07, `c956949`) gave it a home:
+14. **Face-down is modeled only on the Tabletop — and both the gesture and both
+    renderings are now built.** Ticket 02 (2026-08-07, `c956949`) gave it a home:
     `faceDown: boolean` in the `mtg-card` shape's `props`. Table-layout ticket 17
     (2026-08-08, `0a768e6` + `bfdc877`) built the sleeved half:
     `MtgCardShapeUtil.component()` renders a **sleeved + faceDown** card as the bare solid
     `sleeveColor` rectangle, with the color **baked into the shape's props at mint time**
     by `cardArrival.ts` (legal because sleeve color is a game constant — see watch point
-    17). The **unsleeved** faceDown rendering (standard Magic card back,
-    `cardBackImageUrl`) is **deliberately deferred to tabletop-physics ticket 06** along
-    with the flip/turn-over gesture — a code comment on the unsleeved branch marks the
-    obligation. `faceDown` is still hardcoded `false` at arrival; nothing writes it.
-    Still nothing on `CardDefinition`, `GameCard`, `PersistedGameCard`, or in
-    `contracts/` (concealment-wise); a Shuffler "Play Face-Down" button remains dropped
-    to the Mural-parity buoy list.
+    17). **Physics ticket 17 (2026-08-09, `eb24a4f`) built the rest**: the shape gained
+    `cardBackImageUrl: string | null`, baked at mint from `playerArea.cardBackImageUrl`
+    (same game-constant argument), and the **unsleeved** faceDown branch now renders it
+    as an `<img>` — falling back to a flat `#3a3a3a` rectangle when no card back was
+    baked in (a seat that predates the prop, or redeploy-wiped seat memory). A new
+    tldraw `ContextMenu` (`CardContextMenu.tsx`) provides "Flip" (`props.face` swap,
+    gated on `backImageUrl !== null`) and "Turn face down"/"Turn face up" (convergent
+    `props.faceDown` toggle across the selection) — the first code anywhere in the
+    Tabletop to write either field. `faceDown` is no longer hardcoded `false` after
+    arrival; it's still `false` at mint (unchanged). Still nothing on `CardDefinition`,
+    `GameCard`, `PersistedGameCard`, or in `contracts/` (concealment-wise) — the gesture
+    is entirely table-local; a Shuffler "Play Face-Down" button remains dropped to the
+    Mural-parity buoy list.
 
 15. **Concealment is depicted, never enforced — and no gesture may be gated on control.**
     The leak question this owner raised (a face-down card's identity is readable by every
@@ -238,6 +244,15 @@ These are specific things that could break two-faced cards if changed elsewhere:
     site** bound by the `backImageUrl`-derived-from-`twoFaced` rule (see
     [tabletop.md](tabletop.md#watch-points)), with the same test treatment as
     `cardPlayedEvent.test.ts`.
+
+19. **The library-entry face/faceDown reset only covers "library" — there is no "hand"
+    zone to also cover** (physics ticket 17, 2026-08-09). Ticket 06 phrased the reset
+    as "a card returning to hand or library" resets both axes; `MtgCardShapeUtil`'s
+    `NON_BATTLEFIELD_ZONES` set (and the wider zone model) has no `hand` zone anywhere
+    in this codebase, so the implementation — and the ticket file itself, corrected in
+    `ff5d58a` — honestly says "library" only. If a `hand` zone is ever added, this reset
+    needs to cover it too; don't assume it already does because the ticket's prose once
+    said "hand or library."
 
 ## Not Related To
 

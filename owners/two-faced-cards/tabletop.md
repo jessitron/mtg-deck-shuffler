@@ -40,8 +40,9 @@ old `type: "image"` shape with identity in `meta` and a minted per-card asset �
   dropping. **Consequence: flip is now structurally a pure `props.face` write** — the
   shape already holds both URLs, so a future flip gesture needs only to change one enum
   field. (This file previously said the Tabletop "does NOT store `face`" and "cannot
-  change a card's face today." That was true through ticket 02; ticket 12 changed it. No
-  gesture writes `props.face` yet, though — see "Still open" below.)
+  change a card's face today." That was true through ticket 02; ticket 12 changed it.
+  **Physics ticket 17 (2026-08-09, `eb24a4f`) built the gesture** — see "Ticket 17
+  built the gesture" below; this is no longer a "still open" item.)
 - The shape's `meta` is now `{}` at arrival — genuinely empty, not `{ instanceId,
   scryfallId, cardName }` as before. Identity moved into validated `props` (`instanceId`,
   `scryfallId`, `cardName`, alongside the image URLs and face state); `meta` is reserved
@@ -64,7 +65,11 @@ rotation already applied, not read back out of `rotation` itself. Still verified
 **Watch point, updated:** `onClick` is spoken for — by tap. Ticket 06 (resolved
 2026-08-08) chose the flip trigger accordingly: **two separate context-menu items**
 ("Flip" / "Turn face down"), not any pointer gesture on the card — see "Resolved:
-ticket 06" below. Menu placement remains map 4's business (`no-doubleclick-crop` in
+ticket 06" below. **Ticket 17 (2026-08-09) built it**: `apps/tabletop/src/client/CardContextMenu.tsx`
+is the Tabletop's first custom tldraw `ContextMenu`, wired via `TLComponents.ContextMenu`
+in `TablePage.tsx`. `tapPartial` (the rotation math `onClick` uses) was pulled out into
+`apps/tabletop/src/client/shapes/cardTap.ts` so the menu's Tap/Untap item and `onClick`
+share one implementation. Menu placement remains map 4's business (`no-doubleclick-crop` in
 the repo-root `TODO.md`). The prediction in this section (when it described
 `MtgCardImageShapeUtil`) that the `BaseBoxShapeUtil` rewrite would "keep `onClick` as
 a base hook" held — it did.
@@ -181,6 +186,7 @@ and the ticket's "Blast radius" — and it landed clean; no disconnects reported
   faceDown: boolean,
   tapped: boolean,               // ticket 04 owns how this relates to rotation
   sleeveColor: string | null,    // the seat's sleeve, baked at mint (table-layout ticket 17); null = unsleeved
+  cardBackImageUrl: string | null, // the seat's generic card back, baked at mint (physics ticket 17); used only when unsleeved + faceDown
 }
 ```
 
@@ -283,10 +289,13 @@ decisions, all held in the implementation:
      are rectangular"; the original ticket-17 `w * 0.05` radius was removed from both the
      card sleeve and the library pile, matching issue 09's "a sleeve edge gives cards
      the square corners the fleet's style wants").
-   - **unsleeved** → today's bare `<img className="tl-image">`. An unsleeved `faceDown`
-     card *should* show the standard Magic back — **deferred to tabletop-physics ticket
-     06** (the flip/turn-over gesture; nothing sets `faceDown` yet), marked by a code
-     comment on that branch. That branch is ticket 06's obligation.
+   - **unsleeved, face-up** → today's bare `<img className="tl-image">`.
+   - **unsleeved, `faceDown`** → **built** (physics ticket 17, 2026-08-09): renders the
+     seat's `cardBackImageUrl` (baked into `mtg-card` props at mint, same game-constant
+     argument as `sleeveColor`) as a plain `<img>`, falling back to a flat `#3a3a3a`
+     rectangle when no card back was baked in (a seat that predates the prop, or
+     redeploy-wiped seat memory). This was the branch previously marked as deferred to
+     tabletop-physics ticket 06 — that ticket only decided the rule; ticket 17 built it.
 5. **The library pile followed** (the second consumer of the card back): `mtg-zone` props
    gained `sleeveColor: string | null`, set only on a sleeved seat's library zone
    (`tableFurniture.ts` `zoneShape`, opacity 1 when sleeved vs the usual 0.5).
@@ -336,18 +345,22 @@ is hidden and what isn't."* Buoy `let-gamecardindex-out` in the repo-root `TODO.
 belongs on **payload design**, not as a boundary check on every door. See
 [contract.md](contract.md).
 
-## Resolved: ticket 06 — flip gesture and face authority (2026-08-08, `575416b`)
+## Resolved: ticket 06 — flip gesture and face authority (2026-08-08, `575416b`); built: physics ticket 17 (2026-08-09, `eb24a4f` + `ff5d58a`)
 
 Ticket 12 built the structural foundation — both image URLs and `face` live on the shape —
-and ticket 06 (`.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` § Answer)
-then decided the two questions this section used to carry as open. **Decisions only —
-nothing writes `props.face` or `props.faceDown` yet**, and ticket 13 (zone ownership
-boundary) is still open. Table-layout ticket 17 (2026-08-08) built the *sleeved* face-down
-**rendering** (the bare sleeve rectangle branch in `MtgCardShapeUtil.component()`, sleeve
-baked into props at mint) — so whoever builds the gesture inherits one extra obligation
-beyond the decisions below: the **unsleeved** face-down rendering (standard Magic card
-back), deliberately not built yet; a code comment on the unsleeved branch marks it. The
-four decisions, all binding on whoever builds flip:
+ticket 06 (`.scratch/tabletop-physics/issues/06-two-faces-and-face-down.md` § Answer)
+decided the two questions this section used to carry as open, and **physics ticket 17
+built the gesture itself**: `apps/tabletop/src/client/CardContextMenu.tsx` writes both
+`props.face` (via "Flip") and `props.faceDown` (via "Turn face down"/"Turn face up") — the
+first Tabletop code ever to write either field. Ticket 13 (zone ownership boundary) is
+still open, unrelated to this. Table-layout ticket 17 (2026-08-08, a *different* ticket
+sharing the number 17 in a different map) built the *sleeved* face-down **rendering** (the
+bare sleeve rectangle branch in `MtgCardShapeUtil.component()`, sleeve baked into props at
+mint); physics ticket 17 closed the remaining gap by adding `cardBackImageUrl: string | null`
+to `mtg-card` props (baked at mint from `playerArea.cardBackImageUrl`, same game-constant
+argument) so the **unsleeved** face-down branch now renders the table's standard Magic
+card back too, falling back to a flat `#3a3a3a` rectangle when no card back was baked in.
+The four decisions, all now built exactly as specified:
 
 1. **Trigger: two separate context-menu items** — "Flip" and "Turn face down" in tldraw's
    right-click/long-press context menu (the surface furniture Lock/Unlock already uses).
@@ -369,7 +382,12 @@ four decisions, all binding on whoever builds flip:
    to `face:'front'`, `faceDown:false`, however it sat on the table. Matches the
    Shuffler's `mulligan()` reset. The reset is performed **table-locally** (mechanism =
    implementation detail); the return event says nothing about faces, and the Shuffler
-   applies its own face rules on arrival.
+   applies its own face rules on arrival. **Built honestly as "library" only** (ticket
+   17, 2026-08-09): `MtgCardShapeUtil.onTranslateEnd` resets both axes when a card enters
+   the library zone, folded into the same partial as the existing `meta.zone` write. No
+   `hand` zone exists anywhere in this codebase's zone model yet, so there's no second
+   place to wire the reset — the ticket file itself was corrected to say so instead of
+   claiming a "hand or library" reset that doesn't fully exist.
 
 Consequence of decision 2 for the old closing note here: there is **no** `card.flipped`
 event toward the Shuffler — that design was considered and declined with the authority
@@ -381,6 +399,15 @@ NOT bake "front-ness" into shape identity.
 
 - Any new Tabletop rendering path for cards must honor the payload's `face` — never
   assume front.
+- **`CardContextMenu.tsx` is the one place that writes `props.face`/`props.faceDown`
+  today** (physics ticket 17, 2026-08-09). Any new gesture that changes either field
+  (a keyboard shortcut, a second menu, a drag-based turn-over) should go through the
+  same `commit()` pattern — `markHistoryStoppingPoint` + `updateShapes` + unconditional
+  `setSelectedShapes([])` — or risk the stale-selection-hijacks-next-drag hazard
+  `MtgCardShapeUtil.onTranslateEnd`'s own comment already documents. The menu itself
+  (Reorder/clipboard curation, Tap/Untap) is `tabletop-shape-mechanics` territory —
+  consult that owner for anything about the menu's *mechanics*, this owner only for its
+  *face*-related items.
 - Dedup is on `instanceId` (the card exists once on the table), NOT on
   scryfallId+face — two Forests are two instances; one MDFC flipped is still one
   instance. **Since ticket 12, `instanceAlreadyOnTable` reads `props.instanceId`**
