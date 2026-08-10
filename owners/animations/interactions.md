@@ -89,6 +89,15 @@
   and `verify-tap-animation.spec.ts` observes the animation via `getAnimations()` — a
   switch from WAAPI to a CSS transition would need `getAnimations()`-compatible assertions
   rechecked (CSS transitions do appear in `getAnimations()`, but keyframe shape differs).
+- **Hand grid alignment vs. drop-zone flex participation (fixed 2026-08-09)**: `.hand-cards` is a
+  wrapped flex row, so any element that exists **once per hand rather than once per row/card**
+  (like the leading `.hand-drop-zone` before card 0) adds its box width to whichever row it lands
+  in, throwing off column alignment on every row below it. Fixed by taking that one element out
+  of flex flow (`.hand-drop-zone-leading`, `position: absolute` on now-`position: relative`
+  `.hand-cards`). **Watch point for future hand-grid changes**: before adding any new per-hand
+  (not per-card) element inside `.hand-cards`, check whether it's in flex flow — if so it will
+  skew row width the same way. `data-hand-position` (the drag-and-drop key `game.js` reads) is
+  independent of flex participation, so this fix didn't touch drag-and-drop.
 - **State that must survive swaps**: Anything toggled by JS that needs to outlive a `game-state-updated` swap must NOT be re-applied to swapped-in content in `afterSwap` — the settle phase reverts it (see architecture.md). Anchor such state on `document.body` or another non-swapped ancestor. The hamburger menu (`body.game-menu-open`) is the reference example; developer mode (`body.dev-mode`, set server-side from a cookie, gating `.menu-debug` visibility) is a second, JS-free example.
 
 ## Not Related To

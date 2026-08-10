@@ -295,6 +295,26 @@ keyed on `props.tapped` (with `prevTappedRef` initialized to the first-seen valu
   the file is `MtgCardShapeUtil.tsx` — ticket 12 replaced the `MtgCardImageShapeUtil`
   image-shape subclass with a genuine custom shape.
 
+### 2026-08-09: Hand grid-alignment bug fixed — leading drop zone taken out of flex flow
+
+**Not an animation bug, but it lives in the same flex-wrap hand grid.** The "before card 0"
+`.hand-drop-zone` exists once per hand (not once per row), so as an in-flow flex item its net
++10px width (80px wide, -35px margins each side) was added to row 1's width only — row 1's cards
+sat 10px right of every row below it. Fix: new class `.hand-drop-zone-leading` on that one
+element, `.hand-cards` made `position: relative`, and the leading zone made
+`position: absolute; left: -45px; top: 0; margin: 0` — out of flex flow entirely, so it can't
+affect wrapping/alignment, while `-45px` keeps the same visual overlap onto card 0.
+`data-hand-position` (drag-and-drop's targeting key) untouched.
+
+New Playwright spec `test/verification/verify-hand-grid-alignment.spec.ts` asserts every wrapped
+row's leftmost card shares the same x-coordinate; verified red without the fix (bug reproduced by
+stashing it), green with it. Full unit suite (331 tests) and `verify-mulligan.spec.ts` green.
+
+Recorded as a new mechanism in architecture.md ("New mechanism: taking a one-time drop zone out
+of flex flow") since it's previously-undocumented territory: a one-time/edge-case element inside
+a per-row collection distorting flex-wrap alignment, fixed by removing it from flow rather than by
+the body-anchoring pattern used for swap-surviving state.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.

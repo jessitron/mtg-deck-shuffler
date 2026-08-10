@@ -15,6 +15,11 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
   - `.dragging`, `.drag-over` — drag-and-drop styling
   - `.game-header-row` — the game's top strip (deck-title plaque + hamburger as
     **siblings**); carries the comment explaining why nothing may nest inside `#game-menu`
+  - `.hand-cards` — now `position: relative` (2026-08-09), so `.hand-drop-zone-leading` can
+    anchor to it
+  - `.hand-drop-zone-leading` (new, 2026-08-09) — the "before card 0" drop zone, taken out of
+    flex flow (`position: absolute; left: -45px; top: 0; margin: 0`) to fix a row-alignment
+    bug in the wrapped hand grid; see architecture.md "New mechanism"
 - `public/prepare.css` — Duplicate flip animation CSS (lines 221-256)
 - `public/deck-selection.css` — `fadeInTile` keyframe (lines 136-164)
 - `public/playmat.css` — Shared transition properties for buttons and hover states.
@@ -41,6 +46,9 @@ of value that gets tokenized into a custom property.
 
 ## TypeScript (animation class application)
 
+- `src/view/play-game/hand-components.ts` — renders the leading `.hand-drop-zone` (before card
+  0) with the added `.hand-drop-zone-leading` class (2026-08-09); `data-hand-position` unchanged,
+  so drag-and-drop targeting in `game.js` is untouched.
 - `src/view/common/shared-components.ts`
   - Lines 115-127: `getAnimationClassHelper()` — maps WhatHappened to CSS classes
   - Line 34: calls `getAnimationClassHelper()` in `formatCardContainer()`
@@ -108,6 +116,9 @@ Full paths from the repo root.
   `verify-library-grouping.spec.ts` (×8, including both flip loops),
   `verify-query-parameter-modals.spec.ts`, `verify-tabletop-integration.spec.ts`,
   `verify-history-card-links.spec.ts`, `verify-design-gallery.spec.ts`.
+- `test/verification/verify-hand-grid-alignment.spec.ts` (new, 2026-08-09) — Playwright. Asserts
+  every wrapped row's leftmost card shares the same x-coordinate, guarding against the leading
+  drop zone's flex-flow width bug recurring.
 - `test/verification/verify-mulligan.spec.ts` — carries comments at the two former 1800ms
   sleep sites explaining why no animation wait is needed, and at line ~120 marking the
   `Mulligan #2` assertion as **load-bearing synchronization** for the following Ctrl+Z.
