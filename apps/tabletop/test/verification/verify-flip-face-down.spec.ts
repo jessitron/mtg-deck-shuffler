@@ -51,10 +51,26 @@ async function cardSrc(page: Page, instanceId: string): Promise<string | null> {
   return page.locator(`#shape\\:card-${instanceId} img`).getAttribute("src");
 }
 
-test("flipping a two-faced card swaps its face on both clients", async ({ browser, baseURL }) => {
+test("flipping and turning face down both sync to a second client", async ({ browser, baseURL }) => {
   const tableSlug = `verify-flip-2client-${Date.now()}`;
   const contexts: BrowserContext[] = [];
   try {
+    // A seat.joined with a card back, so the unsleeved face-down render has
+    // an <img> to check (no seat data => the flat-rectangle fallback, which
+    // has none).
+    await fetch(`${baseURL}/api/tables/${tableSlug}/events`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        id: `seat-${uniqueSuffix()}`,
+        name: "seat.joined",
+        occurredAt: new Date().toISOString(),
+        initiator: { seatId: "e2e-seat", playerName: "Jess" },
+        deckName: "Blame Game",
+        cardBackImageUrl: "https://example.com/e2e-card-back-2client.jpg",
+      }),
+    });
+
     const [ctxAlice, ctxBob] = await Promise.all([browser.newContext(), browser.newContext()]);
     contexts.push(ctxAlice, ctxBob);
     const [alice, bob] = await Promise.all([ctxAlice.newPage(), ctxBob.newPage()]);
@@ -78,6 +94,18 @@ test("flipping a two-faced card swaps its face on both clients", async ({ browse
     }).toPass({ timeout: 5000 });
     await expect(async () => {
       expect(await cardSrc(bob, instanceId)).toBe(backImageUrl);
+    }).toPass({ timeout: 5000 });
+
+    // Ticket checkbox 4 covers both gestures: face-down must sync too, not
+    // just flip.
+    await openCardMenu(alice, instanceId);
+    await chooseMenuItem(alice, "Turn face down");
+
+    await expect(async () => {
+      expect(await cardSrc(alice, instanceId)).toBe("https://example.com/e2e-card-back-2client.jpg");
+    }).toPass({ timeout: 5000 });
+    await expect(async () => {
+      expect(await cardSrc(bob, instanceId)).toBe("https://example.com/e2e-card-back-2client.jpg");
     }).toPass({ timeout: 5000 });
   } finally {
     await Promise.all(contexts.map((c) => c.close()));
