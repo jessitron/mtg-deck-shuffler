@@ -122,12 +122,19 @@ export function usePhysicsAnnouncements(store: RemoteTLStoreWithStatus): void {
             continue;
           }
 
-          if (after.type === "mtg-counter" && before.parentId !== after.parentId && after.parentId) {
+          // A shape's parentId is never empty — it's the page when
+          // unattached, a shape when attached — so "attached" means the new
+          // parent is a SHAPE, not merely that parentId changed. Missing
+          // this turned every detach (onDragShapesOut/evictPassengers
+          // reparenting onto the page) into a false "attached" announcement.
+          const attachedToShape = before.parentId !== after.parentId && typeof after.parentId === "string" && after.parentId.startsWith("shape:");
+
+          if (after.type === "mtg-counter" && attachedToShape) {
             announce("counter.attached", { "counter.text": (after.props?.text as string) ?? "" });
             continue;
           }
 
-          if (after.type === "note" && before.parentId !== after.parentId && after.parentId) {
+          if (after.type === "note" && attachedToShape) {
             announce("noteAttached", { "note.text": plainTextFrom(after.props?.richText) });
             continue;
           }
