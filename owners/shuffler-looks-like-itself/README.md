@@ -293,15 +293,32 @@ Facts that outlive the ticket:
   Either it's sanctioned-for-swatches or a future sweep target; don't copy it to a fourth
   site, and don't "fix" it to `.pushable-flat` without asking.
 - **Live previews are inline styles on purpose.** The sleeve pick tints
-  `.cool-command-zone-surround` and `.game-title` via JS inline `backgroundColor` (sleeve
+  `.cool-command-zone-surround` and `.game-title` via inline `background-color` (sleeve
   hex is domain data — a page-sheet rule on shared components would leak onto `/design`);
   the mat pick sets inline `background-image` **longhand** on `.playmat` — never the
   shorthand, which would wipe the shared rule's `cover`/`center`. `/prepare` also
   server-renders the picked mat the same way. **A dark sleeve flips the plaque lettering
-  to white (Jess, 2026-08-09, `81abce5`):** `applySleeveTint` sets inline `color: white`
-  on `.game-title` when the picked hex's BT.601 perceived luminance is below 128, and
-  clears it otherwise — same inline-style-for-domain-data posture as the tint, covering
-  the on-load path too. Spec'd in `verify-prep-picker.spec.ts`.
+  to white (Jess, 2026-08-09, `81abce5`):** inline `color: white` is set on `.game-title`
+  when the picked hex's BT.601 perceived luminance is below 128, and cleared otherwise —
+  same inline-style-for-domain-data posture as the tint, covering the on-load path too.
+  Spec'd in `verify-prep-picker.spec.ts`.
+- **The tint is server-rendered on BOTH play pages now, not just live-previewed on
+  `/prepare` (2026-08-09, `5c9f04e`).** It used to be JS-only (`prep-picker.js`'s
+  `applySleeveTint`), so it only ever appeared on `/prepare` and never on `/game` (which
+  has no picker JS) — the same shape of gap the mat picture had, closed the same way.
+  `sleeveTintStyle(sleeveColor, withTextColor)`, exported from `shared-components.ts`,
+  computes the identical inline `background-color` (and, when `withTextColor` is true and
+  the hex reads dark by the same BT.601 formula, `color: white`) that `applySleeveTint`
+  used to compute only in the browser. `formatDeckTitleHtmlFragment` takes an optional
+  `sleeveColor` param and calls it with `withTextColor: true` (the plaque's lettering can
+  flip); `formatCommandZoneHtmlFragment` reads `game.sleeveColor` and calls it with
+  `withTextColor: false` (the surround has no text to flip). `prep-view-helpers.ts`'s
+  `renderPrepCommandZone`/`renderDeckTitle` do the same for `/prepare` via
+  `prep.sleeveColor`. **`prep-picker.js`'s "tint on load" block is gone** — redundant now
+  that the server pre-renders the same values — but its tint-on-click/drag live preview
+  stays, since a pick isn't persisted at the moment it's made. Spec'd in
+  `test/view/sleeve-tint.test.ts` (unit) and `verify-prep-picker.spec.ts` (browser,
+  unchanged 6/6).
 - **The custom color picker stays the native `<input type="color">` — decided, not an
   oversight (Jess, 2026-08-09).** Jess considered click-outside-to-close for the picker;
   the native control's OS panel can't be closed by JS, and she chose to keep the native
@@ -312,7 +329,10 @@ Facts that outlive the ticket:
   same exception as `tableName`), and `formatGamePageHtmlPage` sets the same inline
   **longhand** `background-image` on `.playmat.playmat-game` that `/prepare` already uses —
   never the shorthand, which would wipe `playmat.css`'s shared `cover`/`center`. Closes the
-  `game-page-picked-mat` gap this section used to name.
+  `game-page-picked-mat` gap this section used to name. **The sleeve tint on the
+  command-zone surround and deck-title plaque followed the same day (`5c9f04e`)** — see the
+  bullet above; it was the same shape of gap (JS-only, so `/prepare`-only) and closed the
+  same way (a shared server-side helper, `sleeveTintStyle` in `shared-components.ts`).
 
 **The nav-link idiom is the fleet's only text-link treatment, and it now has two live
 instances (second: 2026-08-09, `6b6b927`).** White `--font-chrome` type on a dark surface.

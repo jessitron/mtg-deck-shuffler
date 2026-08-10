@@ -1,6 +1,6 @@
 import { PersistedGamePrep } from "../../port-persist-prep/types.js";
 import { GameCard } from "../../GameState.js";
-import { formatCardContainer, formatDeckTitleHtmlFragment, formatLibraryStack } from "./shared-components.js";
+import { formatCardContainer, formatDeckTitleHtmlFragment, formatLibraryStack, sleeveTintStyle } from "./shared-components.js";
 
 
 export function createPrepViewHelpers(prep: PersistedGamePrep) {
@@ -40,7 +40,7 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
   function renderPrepCommandZone(): string {
     return commanders.length === 0
       ? `<div class="commander-placeholder">No Commander</div>`
-      : `<div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}">
+      : `<div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}"${sleeveTintStyle(prep.sleeveColor, false)}>
           <div class="multiple-cards">
             ${commanders.map((commander) => renderPrepCommanderCard(commander)).join("")}
           </div>
@@ -52,7 +52,7 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
     libraryCards,
     renderCommanderCard: renderPrepCommanderCard,
     renderCommandZone: renderPrepCommandZone,
-    renderDeckTitle: () => formatDeckTitleHtmlFragment(prep.deck.name),
+    renderDeckTitle: () => formatDeckTitleHtmlFragment(prep.deck.name, prep.sleeveColor),
     renderLibraryStack: () =>
       formatLibraryStack({}, libraryCards.length, prep.sleeveColor),
   };
