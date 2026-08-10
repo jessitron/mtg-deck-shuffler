@@ -13,6 +13,22 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- `verify-cant-see-browser-otel` Playwright specs can't currently observe anything the browser exports through OTel's `BatchSpanProcessor`
+  - Surfaced 2026-08-10 verifying tabletop-physics ticket 21's `usePhysicsAnnouncements.ts` live in
+    Honeycomb: running the full `./verify.sh` suite (dozens of taps/drags/attaches across specs)
+    left only one stray `card arrived on canvas` span in Honeycomb, while a dedicated manual spec
+    that held its page open 8s after the last gesture got every span through reliably.
+  - Not a bug in any gesture/telemetry feature — a testing-harness gap: each spec's page/browser
+    context closes well inside the exporter's default 5s `scheduledDelayMillis`, so anything
+    batched and not yet flushed is simply lost on teardown.
+  - No fix attempted. Two shapes it could take: pad specs that need this with an 8s+ wait (slow,
+    fragile, and easy to forget), or give the page a way to force a flush before close (e.g. a
+    test-only hook calling the `TracerProvider`'s `forceFlush()`, or a shorter/zero batch delay in
+    test builds). Consult the `fleet-is-observable` owner before picking one.
+  - Matters whenever someone wants Playwright-level regression coverage of browser telemetry
+    itself, rather than relying on one-off manual Honeycomb checks (which is what ticket 21 fell
+    back to).
+    ← mountain: tabletop-replaces-mural
 
 - GRILLING: Feature: Let a player exit the table so they can rejoin with a different deck! (fleet)
   - Triage research (2026-08-10): nothing about "leaving a table" exists today — seats are
@@ -149,23 +165,6 @@ section is just a wall between Jess and the live work.
     the Spine as an actual Journey (cross-ship, and the framework's Ruby home already).
   - Related: `.scratch/shuffler-architecture-review/issues/02-tabletop-send-veto-hook.md`,
     `services/spine/interpreter/docs/journeys/README.md`.
-
-- `tabletop-server-build-broken` The Tabletop server currently fails to build/typecheck at all
-  - Surfaced 2026-08-10 while implementing tabletop-physics ticket 21 (announce physics gestures):
-    `npm run build` in `apps/tabletop` — and therefore `./verify.sh` and `npm start` — fails with
-    `src/server/tracing.ts(66,55): error TS2561: Object literal may only specify known properties,
-    but 'exporter' does not exist in type 'LogRecordExporter'.` on
-    `new BatchLogRecordProcessor({ exporter: new OTLPLogExporter() })`.
-  - Confirmed pre-existing via `git stash` (fails identically on HEAD, before any ticket-21 change).
-    Not caused by ticket 21's work, but it blocked running `./verify.sh` and doing a live Honeycomb
-    check for that ticket's new telemetry.
-  - Smells like the OTel-version-mismatch trap `apps/tabletop/CLAUDE.md` already warns about: root
-    `node_modules` hoists `@opentelemetry/sdk-logs@0.219.0` for the Shuffler, while
-    `apps/tabletop/node_modules` has its own `0.221.0` whose types disagree at this call site.
-    Root cause not fully diagnosed — needs someone to actually trace which install TS is resolving
-    and why the options-object constructor shape (documented as correct in the code's own comment)
-    no longer typechecks.
-    ← mountain: tabletop-replaces-mural
 
 ## Backlog
 

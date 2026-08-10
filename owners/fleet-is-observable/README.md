@@ -286,18 +286,22 @@ is added:
   — a ticket-01 descoped stand-in, no longer needed now that `card.zoneMoved` covers zone entry
   through this pattern. One more instance of "never `console.log` for this, use `inSpan`."
 
-**Verification gap, recorded rather than silently skipped.** This change could not be confirmed
-against a live Honeycomb trace, because `npx tsc --noEmit` in `apps/tabletop` currently fails —
-confirmed directly while reviewing this change, in `src/client/observability/index.ts:93`
-(`processors: [new BatchLogRecordProcessor({ exporter: ... })]`), not `tracing.ts:64` as first
-suspected. Same root cause either way: this worktree has no root `node_modules` (`apps/tabletop`'s
-own `node_modules` exists, the repo root's doesn't), so `tsc` walks up and resolves the main
-checkout's hoisted 0.219 sdk-logs types against this ship's correct 0.221 options-object shape —
-the exact phantom-error mechanism already on record below ("History", 2026-08-09) and in
-`notes/AGENT-NOTES.md`. **The fix is `npm install` from the worktree root, never a code change to
-either line.** Until that's run, nothing in this ship can be typechecked or built from this
-worktree, so `usePhysicsAnnouncements.ts`'s spans remain unverified in Honeycomb — check them once
-the install has happened.
+**Verification gap, closed.** This change first looked unverifiable against a live Honeycomb
+trace, because `npx tsc --noEmit` in `apps/tabletop` failed inside the worktree it was built in —
+seen at `src/client/observability/index.ts:93` (`processors: [new BatchLogRecordProcessor({
+exporter: ... })]`) and separately at `tracing.ts:64`. Both were the same, already-diagnosed,
+non-bug: a fresh worktree has no root `node_modules` of its own, so `tsc` walks up and resolves the
+main checkout's hoisted 0.219 sdk-logs types against this ship's correct 0.221 options-object
+shape — the phantom-error mechanism on record below ("History", 2026-08-09) and in
+`notes/AGENT-NOTES.md`. `npm install` from the worktree root fixed it (confirmed: both `tsc` and
+`vite build` then ran clean, matching the real checkout). With that done, a manual Playwright drive
+(tap, untap, drag — page held open past `BatchSpanProcessor`'s default 5s export delay) confirmed
+`card.tapped`/`card.untapped`/`shape.moved` all landed in Honeycomb (`local`, dataset
+`mtg-tabletop-web`), each carrying `actor: TLDRAW_INSTANCE_STATE_V1_...` and the right
+`card.instance_id`. One separate, genuine finding fell out of that exercise: `./verify.sh`'s own
+Playwright specs close each page well inside that 5s batch delay, so they can't currently observe
+anything the browser exports through OTel at all — tracked as its own buoy
+(`verify-cant-see-browser-otel` in `TODO.md`), not a defect in this change.
 
 ### The Spine's sampler: the first Ruby precedent (`spine-sampler`, 2026-08-10)
 
@@ -685,11 +689,13 @@ its own `window.onerror`/`unhandledrejection` handlers at
   pattern from one named span to a whole gesture vocabulary, filtered to `source: "user"` and
   actor-stamped with `TAB_ID`; a generic settled-motion fallback debounces 300ms because
   `Translating.ts` writes on every pointer-move. Deleted the last `console.log`-as-telemetry
-  stand-in in `MtgCardShapeUtil.onTranslateEnd`. Could not be verified live in Honeycomb this pass
-  — see the new "Verification gap" note above, in the wiring-table entry for this hook — because
-  the worktree's missing root `node_modules` produces the phantom-TS-types failure this file
-  already documents (2026-08-09), now confirmed a second time at a second call site
-  (`src/client/observability/index.ts:93` rather than `tracing.ts:64`).
+  stand-in in `MtgCardShapeUtil.onTranslateEnd`. First looked unverifiable — the worktree's
+  missing root `node_modules` reproduced the phantom-TS-types failure this file already
+  documents (2026-08-09), this time at `src/client/observability/index.ts:93` rather than
+  `tracing.ts:64` — but `npm install` from the worktree root fixed it (third data point for that
+  entry), and a manual Playwright drive then confirmed `card.tapped`/`card.untapped`/
+  `shape.moved` all landing in Honeycomb with the right `actor`/`card.instance_id`. See the
+  "Verification gap, closed" note above.
 - `19e1bdf` (2026-08-10) "Flush OTel telemetry on shutdown in the Tabletop server" — closed the
   gap this file's Watch points had flagged since the Shuffler's own fix (`08-no-shutdown-flush-hook`,
   2026-08-07): the Tabletop's `tracing.ts` had no SIGTERM/SIGINT handler, so `verify.sh`'s
