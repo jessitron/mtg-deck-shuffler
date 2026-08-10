@@ -3,7 +3,14 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: wontfix
+
+**Abandoned 2026-08-10**, after two built-and-reverted implementations (real parenting, then a
+meta-link) both broke in production — the second badly enough (cards flying to/away from each
+other) that it blocked deploys of unrelated features. Full postmortem and the group-based
+redesign that was explored but not built: `apps/tabletop/notes/DESIGN-card-tucking-abandoned.md`.
+Manual reorder/grouping via tldraw's stock UI covers the need for now; revisit with more user
+input before a third attempt.
 
 **What to build:** Extend the card-hosted drag-attach mechanism (ticket 18) so a card can be a
 passenger too. A tucked card stays independently selectable, tappable, and draggable — plain
