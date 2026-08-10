@@ -322,19 +322,6 @@ section is just a wall between Jess and the live work.
     re-declaring the bevel inside `:focus-visible` for `.pushable-flat` and `.pushable-flat.pushable-dark`.
     See `owners/shuffler-looks-like-itself/open-choices.md` choice 5.
 
-- [ ] `vestigial-modal-tabindex` Is `tabindex="0"` on the modal overlays doing anything?
-  - It appears in exactly four places, all the modal overlay: `views/partials/card-modal.ejs:21`,
-    `views/partials/library-modal.ejs:59`, `src/view/play-game/game-modals.ts:12`,
-    `src/view/play-game/history-components.ts:11`.
-  - Looks vestigial: the Escape trigger is `keyup … from:body` and the click-outside trigger is
-    `click[target==this]` — neither needs the overlay to be focusable. If it goes, so does the
-    `playmat.css:173-176` inward-offset companion rule that exists only to serve it, and the app
-    stops having a keyboard stop on a whole-viewport div.
-  - Not done during choice 5 because it's four files of modal behaviour, not a CSS change.
-  - **Read `modals-are-not-modal` below first — it probably answers this.** That attribute looks
-    like the fossil of a focus trap nobody finished, so the answer is likely "build the trap"
-    rather than "delete the attribute".
-
 - [ ] `modals-are-not-modal` The modals do not manage focus at all (Jess found this 2026-08-06)
   - Jess, tabbing the app: _"the Library Content box doesn't even work for focus flow. It's a
     modal and the things behind it get focus. It's a mess."_ Confirmed by reading every
