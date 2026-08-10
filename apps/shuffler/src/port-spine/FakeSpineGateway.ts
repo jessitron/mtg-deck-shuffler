@@ -8,7 +8,9 @@ import { SpinePort } from "./types.js";
  */
 export class FakeSpineGateway implements SpinePort {
   public readonly sentEvents: { tableId: string; event: EventEnvelope<unknown> }[] = [];
+  public readonly takenSeats: { tableId: string; playerName: string; seatId: string; seat: number }[] = [];
   private readonly tableIdsByName = new Map<string, string>();
+  private readonly seatCountByTableId = new Map<string, number>();
   private failure: Error | null = null;
   private nextTableId = 1;
 
@@ -30,6 +32,20 @@ export class FakeSpineGateway implements SpinePort {
       this.tableIdsByName.set(name, tableId);
     }
     return tableId;
+  }
+
+  async takeSeat(tableId: string, playerName: string): Promise<{ seatId: string; seat: number }> {
+    if (this.failure) {
+      throw this.failure;
+    }
+    const seat = (this.seatCountByTableId.get(tableId) ?? 0) + 1;
+    if (seat > 4) {
+      throw new Error(`table ${tableId} already has 4 seats taken`);
+    }
+    this.seatCountByTableId.set(tableId, seat);
+    const seatId = `fake-spine-seat-${tableId}-${seat}`;
+    this.takenSeats.push({ tableId, playerName, seatId, seat });
+    return { seatId, seat };
   }
 
   async sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void> {

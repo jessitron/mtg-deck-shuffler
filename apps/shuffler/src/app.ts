@@ -15,7 +15,7 @@ import { randomUUID } from "node:crypto";
 import { TabletopPort, ZoneHint } from "./port-tabletop/types.js";
 import { sendCardToTableFirst, sendSeatJoinedBestEffort, zoneHintForPlay } from "./port-tabletop/sendToTable.js";
 import { SpinePort } from "./port-spine/types.js";
-import { sendCardPlayedToSpineBestEffort } from "./port-spine/sendToSpine.js";
+import { sendCardPlayedToSpineBestEffort, joinSpineTableBestEffort } from "./port-spine/sendToSpine.js";
 import { formatTabletopSendErrorModal } from "./view/play-game/game-modals.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { log } from "./log.js";
@@ -566,10 +566,15 @@ export function createApp(
           playerName: playerNameInput || "player",
           seatId: prep.seatId ?? randomUUID().slice(0, 8),
         };
+        const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
+        tableInfo.spineTableId = spineJoin.spineTableId;
+        tableInfo.spineSeatId = spineJoin.spineSeatId;
         // The Prep records all table info — that's what enables rejoining later.
         prep.tableName = tableInfo.tableName;
         prep.playerName = tableInfo.playerName;
         prep.seatId = tableInfo.seatId;
+        prep.spineTableId = tableInfo.spineTableId;
+        prep.spineSeatId = tableInfo.spineSeatId;
         prep.updatedAt = new Date();
         await persistPrepPort.savePrep(prep);
       }
@@ -693,8 +698,19 @@ export function createApp(
             tableName: carriedTableName,
             playerName: persistedGame.playerName ?? prep.playerName ?? "player",
             seatId: persistedGame.seatId ?? prep.seatId ?? randomUUID().slice(0, 8),
+            spineTableId: persistedGame.spineTableId ?? prep.spineTableId,
+            spineSeatId: persistedGame.spineSeatId ?? prep.spineSeatId,
           }
         : undefined;
+
+      // A prior successful Spine join carries forward (taking a seat isn't
+      // idempotent, unlike the Tabletop's seat.joined) — only join fresh if
+      // there's no carried seat yet (first time, or the earlier join failed).
+      if (tableInfo && !tableInfo.spineSeatId) {
+        const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
+        tableInfo.spineTableId = spineJoin.spineTableId;
+        tableInfo.spineSeatId = spineJoin.spineSeatId;
+      }
 
       // Create new game from the same prep
       const newGameId = persistStatePort.newGameId();
@@ -1796,6 +1812,9 @@ export function createApp(
         cards: [...deck.cards].sort((a, b) => a.name.localeCompare(b.name)),
       };
       const tableInfo: TableInfo = { tableName: "Yo", playerName: "Jess", seatId: randomUUID().slice(0, 8) };
+      const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
+      tableInfo.spineTableId = spineJoin.spineTableId;
+      tableInfo.spineSeatId = spineJoin.spineSeatId;
       // A random table look every visit: any curated mat, any sleeve color at
       // all — /yo is the fastest way to see the look plumbing exercised.
       const playmat = PLAYMATS[Math.floor(Math.random() * PLAYMATS.length)];
@@ -1808,6 +1827,8 @@ export function createApp(
         tableName: tableInfo.tableName,
         playerName: tableInfo.playerName,
         seatId: tableInfo.seatId,
+        spineTableId: tableInfo.spineTableId,
+        spineSeatId: tableInfo.spineSeatId,
         sleeveColor,
         playmatImagePath: playmat.path,
         createdAt: new Date(),

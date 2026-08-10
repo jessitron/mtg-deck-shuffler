@@ -37,6 +37,20 @@ export class HttpSpineGateway implements SpinePort {
     return body.tableId;
   }
 
+  async takeSeat(tableId: string, playerName: string): Promise<{ seatId: string; seat: number }> {
+    const response = await fetch(`${this.baseUrl}/tables/${encodeURIComponent(tableId)}/seats`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ playerName }),
+    });
+    if (!response.ok) {
+      const bodyText = await response.text().catch(() => "");
+      throw new Error(`Spine rejected the seat: ${response.status} ${response.statusText} ${bodyText}`.trim());
+    }
+    const body = (await response.json()) as { seatId: string; seat: number };
+    return { seatId: body.seatId, seat: body.seat };
+  }
+
   async sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void> {
     const url = `${this.baseUrl}/tables/${encodeURIComponent(tableId)}/events`;
     const response = await fetch(url, {

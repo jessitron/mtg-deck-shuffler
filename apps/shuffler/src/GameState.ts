@@ -70,6 +70,11 @@ export interface TableInfo {
   tableName: string;
   playerName: string;
   seatId: string;
+  // Set when the Spine join succeeded (src/port-spine/sendToSpine.ts,
+  // joinSpineTableBestEffort). Best-effort: absent when the Spine was
+  // unreachable at join time, in which case this game sends nothing to it.
+  spineTableId?: string;
+  spineSeatId?: string;
 }
 
 export interface WhatHappened {
@@ -96,6 +101,8 @@ export class GameState {
   public readonly tableName?: string;
   public readonly playerName?: string;
   public readonly seatId?: string;
+  public readonly spineTableId?: string;
+  public readonly spineSeatId?: string;
   // Table look: the /prepare picker's sleeve/playmat choice, snapshotted at
   // newGame time. Optional, no version bump — same pattern as table info.
   public readonly sleeveColor?: string;
@@ -154,6 +161,8 @@ export class GameState {
       tableName: tableInfo?.tableName,
       playerName: tableInfo?.playerName,
       seatId: tableInfo?.seatId,
+      spineTableId: tableInfo?.spineTableId,
+      spineSeatId: tableInfo?.spineSeatId,
       sleeveColor,
       playmatImagePath,
     });
@@ -173,6 +182,8 @@ export class GameState {
     tableName?: string;
     playerName?: string;
     seatId?: string;
+    spineTableId?: string;
+    spineSeatId?: string;
     sleeveColor?: string;
     playmatImagePath?: string;
   }) {
@@ -190,6 +201,8 @@ export class GameState {
     this.tableName = params.tableName;
     this.playerName = params.playerName;
     this.seatId = params.seatId;
+    this.spineTableId = params.spineTableId;
+    this.spineSeatId = params.spineSeatId;
     this.sleeveColor = params.sleeveColor;
     this.playmatImagePath = params.playmatImagePath;
   }
@@ -877,6 +890,8 @@ export class GameState {
       tableName: this.tableName,
       playerName: this.playerName,
       seatId: this.seatId,
+      spineTableId: this.spineTableId,
+      spineSeatId: this.spineSeatId,
       sleeveColor: this.sleeveColor,
       playmatImagePath: this.playmatImagePath,
     };
