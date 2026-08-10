@@ -19,11 +19,11 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
   return `<div id="hand-section" data-testid="hand-section">
         ${mulliganButtonHtml}
         <div id="hand-cards" class="hand-cards">
+          ${handCardsWithDropZones}
           <div class="hand-symbol">
             <div class="hand-count">${handCardsList.length}</div>
             <img src="/images/hand.png" alt="Hand" />
           </div>
-          ${handCardsWithDropZones}
         </div>
       </div>`;
 }
