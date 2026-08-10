@@ -45,6 +45,12 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   them as passengers alongside counters. Registered in `TablePage.tsx` **in place of** the stock
   `NoteShapeUtil`, not alongside it (watch point 18). Everything else about how a note renders,
   edits, and syncs is untouched tldraw behavior.
+- `apps/tabletop/src/client/shapes/SelectionClearingImageShapeUtil.ts` — **new, 2026-08-10 (TODO.md
+  bug fix)**: structurally identical to `SelectionClearingNoteShapeUtil` — a thin subclass of
+  tldraw's own `ImageShapeUtil` overriding only `onTranslateEnd` to clear selection, since a
+  pasted/dropped image (stock `type: "image"`) has the same missing-hook gap stock notes had.
+  Not a passenger type — this is purely the stale-selection fix, unrelated to card-hosting.
+  Registered in `TablePage.tsx` in place of the stock `ImageShapeUtil`. See watch point 20.
 - `apps/tabletop/src/client/CardContextMenu.tsx` — **new, ticket 17 (2026-08-09, `eb24a4f`)**:
   the app's first custom `TLComponents.ContextMenu`, wired in `TablePage.tsx`. `TableContextMenu`
   wraps `DefaultContextMenu`, replacing its default content (children replace, not add) with the
@@ -137,14 +143,17 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   tested) — picks the zone edge nearest the card's entry point and alternates slots outward,
   skipping occupied rects; overlap beats failure. Used only by `evictCounters`.
 - `apps/tabletop/src/client/TablePage.tsx` — registers
-  `shapeUtils = [...defaultShapeUtils.filter((Util) => Util.type !== "note"), MtgCardShapeUtil,
-  MtgZoneShapeUtil, MtgCounterShapeUtil, SelectionClearingNoteShapeUtil]`,
+  `shapeUtils = [...defaultShapeUtils.filter((Util) => Util.type !== "note" && Util.type !==
+  "image"), MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil,
+  SelectionClearingNoteShapeUtil, SelectionClearingImageShapeUtil]`,
   passed to both
   `useSync` and the `<Tldraw shapeUtils={...}>` prop (this app uses the sync hook directly, which
   is why `defaultShapeUtils` must be spread in explicitly; see `architecture.md`). Since ticket 19
   (2026-08-10) the stock `NoteShapeUtil` is filtered out of that spread before
   `SelectionClearingNoteShapeUtil` goes in — `useSync`'s schema builder throws on a duplicate
-  `type` where `<Tldraw>`'s own merge wouldn't (watch point 18). Add new custom ShapeUtils here.
+  `type` where `<Tldraw>`'s own merge wouldn't (watch point 18). Since the pasted-image
+  stale-selection fix (2026-08-10) the stock `ImageShapeUtil` is filtered the same way before
+  `SelectionClearingImageShapeUtil` goes in (watch point 20). Add new custom ShapeUtils here.
   Since ticket 18 it also wires the counter tool: `tools={[MtgCounterTool]}`,
   `overrides` (`uiOverrides.tools` adds the toolbar item), and `components`
   (`ToolbarWithCounter`, a `DefaultToolbar` with the counter item prepended). Since ticket 17
@@ -301,6 +310,10 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   "after dragging a note, dragging a card moves the card (stale-selection regression)" — mirroring
   `verify-counter.spec.ts`'s Hazard-A test, deliberately without test-side selection cleanup so the
   assertion proves the product clears selection, not the test (watch point 18).
+- `apps/tabletop/test/verification/verify-image-selection.spec.ts` — **new, 2026-08-10 (TODO.md bug
+  fix)**: mirrors `verify-note.spec.ts`'s stale-selection test for a pasted/dropped image — drops a
+  100×100 canvas-rendered PNG via a simulated `drop` DOM event, drags it (no test-side
+  `deselectAll`), then drags a card and asserts the card moved, not the image (watch point 20).
 
 - `apps/tabletop/test/passengerTapCompensation.test.ts` — **new, ticket 20 (2026-08-10)**: unit
   tests for `cardTap.ts`'s `passengerTapCompensation`, pure `Mat`-based math, no `Editor`/store.

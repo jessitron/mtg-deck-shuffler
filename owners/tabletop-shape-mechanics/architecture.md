@@ -589,6 +589,64 @@ the `SelectionClearingNoteShapeUtil` swap (the card didn't move — the note abs
 instead), green with it. Three other tests in the same file cover attach/ride/detach and
 battlefield-exit eviction, exercising the same passenger mechanics ticket 18's counter tests do.
 
+## A pasted/dropped image reopens watch point 1 too — fixed like notes (landed 2026-08-10)
+
+TODO.md bug: "paste an image in, pick it, move it around, click a card, try to move it — the
+image moves instead." Same class as ticket 19's note fix. Confirmed by reading
+`node_modules/tldraw/src/lib/shapes/image/ImageShapeUtil.tsx` (tldraw 5.2.5): stock
+`ImageShapeUtil` has no `onTranslateEnd` of its own — the same gap stock `NoteShapeUtil` had
+before ticket 19 — so a dragged image stays selected, and the next card drag silently moves it
+instead of the card actually under the pointer.
+
+**Fix**: `apps/tabletop/src/client/shapes/SelectionClearingImageShapeUtil.ts`, structurally
+identical to `SelectionClearingNoteShapeUtil` — subclasses tldraw's own `ImageShapeUtil`
+(imported from `"tldraw"`), overriding only `onTranslateEnd` to call
+`this.editor.setSelectedShapes([])`:
+
+```
+export class SelectionClearingImageShapeUtil extends ImageShapeUtil {
+  override onTranslateEnd(): TLShapePartial<TLImageShape> | undefined {
+    this.editor.setSelectedShapes([]);
+    return undefined;
+  }
+}
+```
+
+**Registration** (`TablePage.tsx`): the `shapeUtils` array now filters both `"note"` and
+`"image"` out of the `defaultShapeUtils` spread before appending the two `SelectionClearing*`
+replacements — the same `useSync`-throws-on-duplicate-type-vs.-`<Tldraw>`-tolerates-it asymmetry
+ticket 19 documented (watch point 6/18), now exercised for a second stock shape type:
+
+```
+const shapeUtils = [
+  ...defaultShapeUtils.filter((Util) => Util.type !== "note" && Util.type !== "image"),
+  MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil,
+  SelectionClearingNoteShapeUtil, SelectionClearingImageShapeUtil,
+];
+```
+
+**Images do not join `PASSENGER_TYPES`.** Unlike notes and counters, a pasted image never
+attaches to a card — this fix addresses only the stale-selection hazard on the image shape
+itself, independent of the passenger-hosting mechanism.
+
+**Test gotcha worth carrying forward: a 1×1 test image breaks a "drag from center" click.**
+A 1×1 image's four resize handles all coincide at the single pixel, so a click at the shape's
+center lands on a resize handle instead of the body — the gesture becomes a RESIZE
+(`onResizeEnd`) instead of a TRANSLATE (`onTranslateEnd`), and the fix looks like it's not
+working even though it is. Confirmed via an isolated debug script driving the editor directly
+(`getSelectedShapeIds()` and `props.w/h`/`flipX`/`flipY` before/after drag): a 1×1 image's drag
+silently resizes (`w`/`h` jumped to ~908, flip flags flipped); a 100×100 image's drag fires
+`onTranslateEnd` correctly and clears selection. **Any test dragging an image shape needs a
+reasonably sized test image (100×100+), never a 1×1 placeholder.**
+
+Regression test: `apps/tabletop/test/verification/verify-image-selection.spec.ts` — places a
+card via the `card.played` scaffolding endpoint, drops a 100×100 canvas-rendered PNG via a
+simulated `drop` DOM event carrying a `DataTransfer`/`File` (mirroring how `TablePage.tsx`'s
+`inlineAssets.upload` handles a real paste/drop — no server involved), drags the image to a
+neutral spot (no test-side `deselectAll`, so the assertion proves the product's behavior, not
+the test's), then drags the card and asserts the card — not the image — moved. All 43
+Playwright specs and 100 vitest unit tests pass.
+
 ## Ticket 20: cards can tuck behind cards — a third passenger type that is NOT cosmetic (landed 2026-08-10)
 
 `.scratch/tabletop-physics/issues/20-cards-behind-cards.md`. `PASSENGER_TYPES` widens a third time
