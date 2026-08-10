@@ -4,6 +4,7 @@
 class Table < ApplicationRecord
   class NameTaken < StandardError; end
   class SeatOccupied < StandardError; end
+  class TableFull < StandardError; end
 
   has_many :seats, dependent: false
   has_many :events, dependent: false
@@ -34,9 +35,12 @@ class Table < ApplicationRecord
     raise NameTaken, "an active table is already named #{name.inspect}"
   end
 
-  # Take a seat (1-4). The Spine mints the seatId; sitting down IS an event.
-  # Spectators never call this — they need nothing.
-  def take_seat!(number:, player_name:, traceparent:)
+  # Take a seat (1-4). The Spine mints the seatId AND, when the caller doesn't
+  # name one, the seat number itself — the caller only supplies who's sitting
+  # down. Sitting down IS an event. Spectators never call this — they need
+  # nothing.
+  def take_seat!(player_name:, traceparent:, number: nil)
+    number ||= next_available_seat_number
     seat_id = SecureRandom.uuid
     append_event!({
       "id" => SecureRandom.uuid,
@@ -87,6 +91,16 @@ class Table < ApplicationRecord
   end
 
   private
+
+  # Lowest unoccupied seat number, 1-4. Computed just before the transactional
+  # insert in append_event! (which re-checks occupancy), so a race loses to
+  # SeatOccupied rather than double-booking a number.
+  def next_available_seat_number
+    taken = seats.pluck(:number)
+    available = (1..4).find { |n| !taken.include?(n) }
+    raise TableFull, "table #{name.inspect} already has 4 seats taken" if available.nil?
+    available
+  end
 
   def check_domain_invariants!(envelope)
     if envelope["name"] == "seat.taken"

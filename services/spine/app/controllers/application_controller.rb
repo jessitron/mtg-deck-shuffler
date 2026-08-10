@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     render json: { error: error.message }, status: :unprocessable_content
   end
 
-  rescue_from Table::NameTaken, Table::SeatOccupied do |error|
+  rescue_from Table::NameTaken, Table::SeatOccupied, Table::TableFull do |error|
     render json: { error: error.message }, status: :conflict
   end
 

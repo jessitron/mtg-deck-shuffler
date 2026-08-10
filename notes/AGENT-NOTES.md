@@ -64,3 +64,18 @@ commands, layout) go there instead — this file is for the "oh, _that's_ why" f
   tests use 3344/3001, the Spine 4600 — keep them distinct.
 - **Rooms are in-memory**: restarting the server (or redeploying — `Recreate`, one
   replica) wipes every board. Not a bug in v0; durable reconstruction is a tracked buoy.
+
+## Spine gotchas (services/spine)
+
+- **Rails' `ParamsWrapper` clobbers a param named after its own model — but only when
+  that param is *absent*.** `SeatsController` originally required `seat` in the JSON
+  body; making it optional (so the Spine can auto-assign a seat number) broke with
+  `NoMethodError: undefined method 'to_i' for an instance of ActionController::Parameters`
+  on `params[:seat]`. Cause: since a `Seat` model exists, Rails wraps the JSON body under
+  `params[:seat]` (the singular model name) whenever a top-level `seat` key isn't already
+  present in the request — so omitting `seat` to trigger auto-assignment makes
+  `params[:seat]` resolve to the *whole wrapped body* (a `Parameters` object), not nil.
+  Sending an explicit `seat` value never tripped this, which is why the original
+  required-param code looked fine. Fix: `wrap_parameters false` on the controller. Watch
+  for this on any future Spine controller whose JSON body field shares a name with its
+  own model (2026-08-10, seat-number auto-assignment).
