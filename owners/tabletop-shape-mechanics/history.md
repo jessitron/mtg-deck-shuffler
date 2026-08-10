@@ -973,6 +973,43 @@ stays selected and the next card drag silently moves it instead.
 Full detail in `architecture.md`'s section on it; `interactions.md` watch point 1 gained a fifth
 entry point and new watch point 20; `files.md` and `README.md`'s quick-reference table updated.
 
+## Command zones only arm for their owner's commander (2026-08-10)
+
+TODO.md item: "Only your own commanders can land in your command zone. Any other card dragged
+over it, it shouldn't light up." Implemented entirely inside `zoneHitTest.ts`, reusing the
+`owner`/`isCommander` props table-layout ticket 18 already put on `mtg-card` and the `seatId`
+prop `mtg-zone` already carries — no new state.
+
+- **`ZoneHit` widened** from `{id, zone}` to `{id, zone, seatId}` — `topmostZoneAt` now threads
+  the candidate `mtg-zone`'s `seatId` through, since the armed-check needs it and `topmostZoneAt`
+  is the single scan both `zoneAt()` (drag-settle) and `armedZoneIdSignal` (live-drag) share.
+- **New gate inside `armedZoneIdSignal`'s computed body** (ticket 14's shared per-`Editor`
+  `computed()`, described in the "Ticket 14" entry above): after `topmostZoneAt` finds a hit, if
+  `hit.zone === "command"`, a new private helper `allDraggedCardsAreOwnersCommander(editor,
+  hit.seatId)` must return `true` or the signal returns `undefined` (not armed) instead of
+  `hit.id`. Every other zone type (playmat, library, graveyard, exile, stack) is untouched — still
+  arms card-agnostically, exactly as ticket 14 built it.
+- **`allDraggedCardsAreOwnersCommander(editor, seatId)`**: filters `editor.getSelectedShapes()` to
+  `shape.type === "mtg-card"`, returns `false` if none are selected, otherwise requires **every**
+  selected card to have `props.owner === seatId && props.isCommander`. This deliberately mirrors —
+  not overrides — the existing "one destination for the whole rigid group, or none" rule watch
+  point 9 already established for multi-card drags: a partial match (some qualifying cards, some
+  not) doesn't arm, same as it wouldn't for any other multi-select drag.
+- **This owner's `-review` confirmed no selection race**: `editor.getSelectedShapes()` is read
+  after tldraw's `PointingShape`/`startTranslating` selection-settling transition has already run,
+  so by the time `editor.isIn("select.translating")` is true (the gate `armedZoneIdSignal` already
+  checks first), the selection is already the correct dragged set — no different from how the
+  existing pointer-keyed hit test already trusted `editor.inputs.currentPagePoint` mid-drag.
+- **Consequence for watch point 9's "card-agnostic arming" claim**: no longer universally true.
+  Command zones are the first (and so far only) card-aware exception to "every zone arms
+  regardless of what's being dragged" — gated on `owner`+`isCommander`, all-selected-cards-must-
+  qualify for a multi-drag. See `interactions.md`'s new watch point 21 and the "Depended On By"
+  zone-detection section, both updated.
+- **Tests**: 3 new Playwright cases in `test/verification/verify-zone-armed.spec.ts` — own
+  commander arms the owner's command zone; a non-commander card does not arm it; another seat's
+  commander does not arm this seat's command zone — plus the existing 4 zone-armed cases and the
+  full suite (47 Playwright + 97 vitest) green.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,

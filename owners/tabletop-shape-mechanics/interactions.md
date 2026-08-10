@@ -76,6 +76,13 @@
   already reflects z-order for tldraw's fractional-indexing scheme), i.e. the topmost-drawn zone
   wins. That same function is now also the basis of `MtgZoneShapeUtil`'s armed-state check (below)
   — the second consumer watch point 8 anticipated. See `architecture.md`'s "Ticket 14" section.
+- **Arming is no longer universally card-agnostic — command zones are the first exception
+  (2026-08-10).** `ZoneHit` (`topmostZoneAt`'s return type) widened to carry `seatId` alongside
+  `id`/`zone`, and `armedZoneIdSignal` now gates specifically on `hit.zone === "command"`: the
+  zone only arms if `allDraggedCardsAreOwnersCommander(editor, hit.seatId)` — every currently
+  selected `mtg-card` has `props.owner === seatId && props.isCommander`. Every other zone type
+  (playmat, library, graveyard, exile, stack) still arms regardless of what's being dragged,
+  exactly as ticket 14 built it. See watch point 21.
 - **The command zone is placed furniture now, and zone AABBs are strictly disjoint by tested
   invariant** (*table-layout* ticket 13, 2026-08-08 — a different ticket 13 from the
   `tabletop-physics` one; see `history.md`). `ensurePlayerArea` (`tableFurniture.ts`) draws a
@@ -302,7 +309,11 @@
    **Lesson for future code-review findings against this signal**: a finding that argues for
    *more* granularity (one armed zone per shape) needs to be checked against what a multi-select
    drag is actually supposed to do in this app, not assumed correct because it covers more cases
-   — "handles more inputs" isn't the same as "matches the domain."
+   — "handles more inputs" isn't the same as "matches the domain." **The "one zone, one
+   destination for the whole group" rule this point describes is unchanged by watch point 21's
+   command-zone gating** — a multi-card drag still arms at most one zone; watch point 21 only adds
+   a further condition (all selected cards must be the owner's commander) that a command zone
+   specifically checks before honoring that one zone.
 10. **Locked-but-interactive shapes: the life-counter pattern (decided 2026-08-08, not yet
     built — named `mtg-life-counter`, since `mtg-counter` was claimed by ticket 18 for the
     drag-onto-a-card counter).** A life
@@ -556,6 +567,38 @@
     future test (or player action) that right-clicks a shape while a different,
     selection-bounds-overlapping shape might still be selected** — check what's selected before
     trusting a right-click's target, or deselect first.
+
+21. **Zone arming is no longer universally card-agnostic — command zones are the first (and so
+    far only) card-aware exception, and the rule is "all selected cards qualify, or none arm."**
+    (2026-08-10.) Every zone type since ticket 14 armed regardless of what was being dragged —
+    watch point 9 established that deliberately, keyed purely on the pointer's page point. That's
+    still true for playmat/library/graveyard/exile/stack. Command zones now add a further check:
+    `armedZoneIdSignal` (`zoneHitTest.ts`) only returns the hit id for `hit.zone === "command"`
+    when a new private helper, `allDraggedCardsAreOwnersCommander(editor, hit.seatId)`, returns
+    `true` — which filters `editor.getSelectedShapes()` to `mtg-card`s and requires **every** one
+    of them to have `props.owner === hit.seatId && props.isCommander`. No cards selected, or any
+    one card failing the check, means the zone does not arm at all.
+    - **`ZoneHit` grew a field to make this possible**: `topmostZoneAt`'s return type is now
+      `{id, zone, seatId}`, not `{id, zone}` — `seatId` comes straight off the winning `mtg-zone`
+      candidate's `props.seatId` and is threaded through to both callers (`zoneAt()`'s drag-settle
+      check ignores the new field; `armedZoneIdSignal`'s live-drag check is what actually reads
+      it).
+    - **This is an instance of watch point 9's existing "one destination, or none" rule, not a
+      departure from it.** A multi-card drag toward a command zone still arms at most one zone;
+      the new check just adds a further condition (ownership + commander-hood, checked against
+      *every* dragged card) before that one zone is allowed to arm — the same "partial match
+      doesn't count" posture watch point 9 already established for the group-destination question.
+    - **No selection-timing race**: `editor.getSelectedShapes()` inside the gate is read while
+      `editor.isIn("select.translating")` is already true (the signal's own first check), i.e.
+      after tldraw's `PointingShape`/`startTranslating` transition has already settled the
+      dragged-shape selection — same trust the existing pointer-keyed hit test already placed in
+      reading `editor.inputs.currentPagePoint` mid-drag. Confirmed during this owner's `-review`.
+    - **First command-zone-specific behavior in `zoneHitTest.ts`.** Every other zone-type check in
+      this file has been type-agnostic; if a *second* zone type ever needs card-aware arming, the
+      `if (hit.zone === "command") { ... }` branch shape here is the precedent to extend or
+      generalize, not duplicate ad hoc.
+    - Regression tests: `verify-zone-armed.spec.ts` — own commander arms the command zone; a
+      non-commander card does not; another seat's commander does not arm this seat's command zone.
 
 ## Not Related To
 
