@@ -788,117 +788,6 @@ recording because they're easy to get wrong when consolidating near-duplicate te
 Full detail in `files.md`'s new `helpers.ts` entry. No `architecture.md`/`interactions.md`
 change — no ShapeUtil, hook, or shape type moved; this only reshuffled how existing test
 behavior is expressed.
-## Ticket 20: cards can tuck behind cards — shipped broken on real parenting, replaced same day with a `meta` link (2026-08-10)
-
-`.scratch/tabletop-physics/issues/20-cards-behind-cards.md`, worktree
-`tabletop-physics-20-cards-behind-cards`, later corrected in worktree
-`tabletop-physics-20-fix-reorder`. **This entry originally described a design that shipped, was
-found broken by Jess on first real use, and was replaced the same day.** The lesson: a structural
-constraint ("can a child ever render behind its own parent?") needs to be checked against tldraw
-source *before* building a whole mechanism on it, not discovered after — this owner's own
-`-review` didn't check it either. Recorded here in full because the failure mode is worth
-knowing, not because the design it describes still exists.
-
-### What shipped first, and why it was wrong
-
-The first cut widened `PASSENGER_TYPES` a third time, to `{"mtg-counter", "note", "mtg-card"}` —
-a card hosting another card via the exact same real tldraw **parenting** counters/notes use, plus
-a `Mat`-based `passengerTapCompensation` (in `cardTap.ts`) to keep the passenger's page pose fixed
-across the host's tap. "Send to back" for the tucked card was assumed free from the pre-existing
-`ReorderMenuSubmenu`.
-
-Jess's bug report, first real use: "reorder → send to back doesn't work on the cards. I moved one
-on top of the other, and the other card became the parent. But I can't put the child behind the
-parent." Root cause, confirmed by reading tldraw source directly, not assumed:
-
-- **`Editor.getUnorderedRenderingShapes` does one global depth-first pre-order traversal that
-  assigns every shape's rendering index by traversal order, pushing a shape's OWN entry before
-  recursing into its children** — so a parent is *always* assigned a lower render index (paints
-  further back) than every one of its own children, unconditionally, with no per-shape field that
-  can override it.
-- **`getReorderingShapesChanges` (send-to-back/bring-to-front/etc.) only reorders a shape against
-  its SIBLINGS (same `parentId`)** — `reorderToBack` explicitly no-ops when "all of the children
-  are moving" (`moving.size === len`), which is exactly true for a lone child of a card.
-
-So a card parented under another card can **never** be reordered behind its own parent, by either
-mechanism — not the render traversal, not the reorder action. The "Send backward/Send to back...
-makes it read as tucked underneath" half of the original ticket was impossible to implement with
-real parenting, full stop. The hour spent on `passengerTapCompensation`'s matrix math was spent on
-a design that couldn't ship the one thing the ticket actually asked for.
-
-### The fix: no real parenting between two cards — a `meta.tuckedWith` link instead
-
-`PASSENGER_TYPES` is back to exactly `{"mtg-counter", "note"}` — real parenting for those two,
-unchanged, tickets 18/19 as originally built. `mtg-card` never rejoins that set. Instead,
-`MtgCardShapeUtil.tsx` (`apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx`) gained a
-`TUCK_KEY = "tuckedWith"` constant and two private methods, `tuckCard`/`untuck`: dropping card A
-onto card B writes `meta.tuckedWith` on **both** shapes (A→B and B→A), pointer-style — no
-`parentId` change at all. Both cards stay ordinary top-level page siblings, which means tldraw's
-stock "Send to back"/"Bring to front" (`ReorderMenuSubmenu`) genuinely works between them now,
-because they really are siblings.
-
-**"Host" is no longer a role fixed at attach time — it's computed LIVE, every settle, from
-current z-order.** This directly implements Jess's own correction: "whichever card is on top
-should be the parent." The new private `carryTuckedPartner` (called unconditionally from
-`onTranslateEnd` on every settle, not gated on a zone change) compares `current.index >
-partner.index` to decide, each drag, which of the pair is on top right now — `index` only moves
-on an explicit reorder action or at creation, so it reliably reflects whatever "Send to
-back"/"Bring to front" the player last chose.
-
-Since there's no real parenting, drag-carry is no longer free page-transform composition:
-`carryTuckedPartner` computes the dragged card's own delta (`current.x - initial.x`, `current.y -
-initial.y`) and writes that same delta directly onto the partner's `x`/`y` via `editor.updateShape`
-— but only when the dragged card is currently the topmost of the pair. The bottom card, dragged
-alone, is instead checked for whether it stopped overlapping its partner (`Box.collides`) and
-untucks if so — same "small nudge doesn't detach, a big drag away does" behavior as before, now
-driven by geometry instead of tldraw's `onDragShapesOut` (which never fires for cards anymore,
-since they're not really parented). A host leaving the battlefield (`NON_BATTLEFIELD_ZONES`)
-untucks its passenger, which stays behind exactly where it was — it was never carried there.
-
-### A welcome simplification fell out of this
-
-Since there's no real parenting between two cards, **tapping one cannot rotate the other at all
-anymore** — the entire `Mat`-based `passengerTapCompensation`/`passengerCompensationPartials`
-machinery in `cardTap.ts`, and the `onClick` dedup logic (`directIds`) built around it, are
-deleted outright. `apps/tabletop/test/passengerTapCompensation.test.ts` is deleted with it — it
-tested the now-gone function. `cardTap.ts` is back to just `tapPartial` plus a plain
-`tapPartialsForCards(cards, tapped)` with no `Editor` parameter and no passenger awareness — the
-context menu's call site (`CardContextMenu.tsx`) updated to match the simpler signature.
-
-### A real tldraw bug this surfaced: right-click preserves a stale selection when the click lands inside its bounds
-
-tldraw's `Idle.onRightClick` (`SelectTool/childStates/Idle.ts`) **preserves the CURRENT selection
-when the right-click's page point falls inside that selection's bounds** ("so that right-clicking
-inside the selection preserves it, even when a filled shape sits behind it"). With two overlapping
-tucked cards, right-clicking on card A's pixel while card B is still selected from an earlier drag
-opens the context menu for the **stale** selection (B), not A — even though the click point is
-visually on A. Discovered while writing the reorder-swap Playwright test (right-clicking A right
-after tucking B onto it kept operating on B). Fixed test-side by clicking empty canvas to deselect
-before right-clicking the intended target, but this is a real, reusable trap for any future test
-(or player action) that right-clicks a shape while a *different*, selection-bounds-overlapping
-shape might still be selected. New watch point recorded in `interactions.md`.
-
-### Tests
-
-`apps/tabletop/test/verification/verify-cards-behind-cards.spec.ts` — fully rewritten, 5 tests:
-tuck + carry (dropping a card onto another tucks it, on top by default, and carries the other when
-dragged); nudge-vs-detach; reorder swaps host (Send to back/Bring to front); independent-tap never
-rotates the other; battlefield-exit detach (host leaving detaches its passenger, which stays
-exactly where it was).
-
-Files touched: `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` (`PASSENGER_TYPES` reverted,
-new `TUCK_KEY` constant + `tuckCard`/`untuck`/`carryTuckedPartner` private methods,
-`onDragShapesIn`/`onDragShapesOut`/`onTranslateEnd`/`evictPassengers` all updated, `onClick`
-reverted to its pre-ticket-20 ticket-16 form), `apps/tabletop/src/client/shapes/cardTap.ts`
-(passenger compensation deleted, `tapPartialsForCards` simplified),
-`apps/tabletop/src/client/CardContextMenu.tsx` (updated call site),
-`apps/tabletop/test/verification/verify-cards-behind-cards.spec.ts` (rewritten),
-`apps/tabletop/test/passengerTapCompensation.test.ts` (deleted).
-
-Full detail in `architecture.md`'s rewritten "Ticket 20" section; `interactions.md` watch point 19
-rewritten and a new watch point added for the right-click-preserves-stale-selection trap;
-`files.md`'s `MtgCardShapeUtil.tsx`/`cardTap.ts`/`CardContextMenu.tsx` entries updated, one test
-file removed.
 
 ## Counter editing textarea: measured centering, not estimated (2026-08-10)
 
@@ -1003,7 +892,8 @@ prop `mtg-zone` already carries — no new state.
 - **Consequence for watch point 9's "card-agnostic arming" claim**: no longer universally true.
   Command zones are the first (and so far only) card-aware exception to "every zone arms
   regardless of what's being dragged" — gated on `owner`+`isCommander`, all-selected-cards-must-
-  qualify for a multi-drag. See `interactions.md`'s new watch point 21 and the "Depended On By"
+  qualify for a multi-drag. See `interactions.md`'s watch point 19 (renumbered from 21 after
+  ticket 20's card-tucking watch points were removed on abandonment) and the "Depended On By"
   zone-detection section, both updated.
 - **Tests**: 3 new Playwright cases in `test/verification/verify-zone-armed.spec.ts` — own
   commander arms the owner's command zone; a non-commander card does not arm it; another seat's
@@ -1012,5 +902,17 @@ prop `mtg-zone` already carries — no new state.
 
 ## What Was Tried and Abandoned
 
-Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,
-record it here so the next person doesn't repeat it.
+**Ticket 20, card-tucking (2026-08-10, abandoned same day as `ac27a99`).** Two implementations
+were built and reverted: real tldraw parenting (a tucked card could never render or reorder
+behind its own parent — confirmed against `Editor.getUnorderedRenderingShapes`/
+`getReorderingShapesChanges`), then a `meta.tuckedWith` link between sibling cards, which broke
+worse in production (cards flying to/away from each other via an unguarded `onDragShapesIn`
+hover side effect, with no matching un-tuck). Both were backed out entirely — no tuck link, no
+`mtg-card`-as-passenger, nothing remains in the codebase. Full postmortem, plus a group-based
+redesign that was discussed but never built, is at
+`apps/tabletop/notes/DESIGN-card-tucking-abandoned.md` — read it first if this is ever
+revisited; it has real prior art on where a group-based approach would hit tldraw's
+click-resolution and selection quirks.
+
+If a future fix attempt for a similar quirk is tried and reverted, record it here so the next
+person doesn't repeat it.
