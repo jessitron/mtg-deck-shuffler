@@ -157,6 +157,31 @@ describe("card arrival", () => {
     expect(card.props.sleeveColor).toBeNull();
   });
 
+  it("bakes the seat's card back URL into the minted card's props (ticket 17)", async () => {
+    await fetch(`http://localhost:${port}/api/tables/arrival-cardback/events`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        id: "cardback-seat-event",
+        name: "seat.joined",
+        occurredAt: new Date().toISOString(),
+        initiator: { seatId: "seat-cardback", playerName: "Jess" },
+        deckName: "Blame Game",
+        cardBackImageUrl: "https://example.com/card-back.jpg",
+      }),
+    });
+
+    await post("arrival-cardback", cardPlayed({ initiator: { seatId: "seat-cardback", playerName: "Jess" } }));
+    const [card] = shapesOf("arrival-cardback");
+    expect(card.props.cardBackImageUrl).toBe("https://example.com/card-back.jpg");
+  });
+
+  it("a seat with no card back URL mints cards with cardBackImageUrl null", async () => {
+    await post("arrival-no-cardback", cardPlayed());
+    const [card] = shapesOf("arrival-no-cardback");
+    expect(card.props.cardBackImageUrl).toBeNull();
+  });
+
   it("rejects a payload missing required fields (JES-128 validation point)", async () => {
     const response = await post("arrival-invalid", { name: "card.played" });
     expect(response.status).toBe(400);

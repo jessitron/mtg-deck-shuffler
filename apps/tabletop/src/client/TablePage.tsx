@@ -22,6 +22,7 @@ import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
 import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
 import { MtgCounterTool } from "./shapes/MtgCounterTool";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
+import { TableContextMenu } from "./CardContextMenu";
 
 // useSync (unlike <Tldraw>) builds its store schema from exactly the
 // shapeUtils it's given — it does NOT fold in tldraw's own defaults the way
@@ -60,6 +61,7 @@ function ToolbarWithCounter(props: React.ComponentProps<typeof DefaultToolbar>) 
 
 const components: TLComponents = {
   Toolbar: ToolbarWithCounter,
+  ContextMenu: TableContextMenu,
 };
 
 /**
