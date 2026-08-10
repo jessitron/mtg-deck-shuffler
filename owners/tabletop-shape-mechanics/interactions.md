@@ -128,7 +128,14 @@
    ().length` is false) and the next card drag would silently move the counter. The rule as now
    understood: any shape a player can drag must clear selection on drag-settle, as long as any
    `onClick`-bearing shape shares the canvas. Regression test: `verify-counter.spec.ts`'s
-   drag-counter-then-drag-card sequence.
+   drag-counter-then-drag-card sequence. **Ticket 19 (2026-08-10) proved the obligation reaches
+   stock tldraw shapes too, not just this app's own custom ones.** Adding tldraw's stock `note`
+   type to `mtg-card`'s passenger accept-list reopened this exact hazard, because stock
+   `NoteShapeUtil` has no `onTranslateEnd` of its own to clear selection. Fixed by subclassing it
+   (`SelectionClearingNoteShapeUtil`, overriding only `onTranslateEnd`) rather than reimplementing
+   the shape — see watch point 18 and `architecture.md`'s "Ticket 19" section. Regression test:
+   `verify-note.spec.ts`'s drag-note-then-drag-card sequence, deliberately without test-side
+   selection cleanup so the assertion proves the product's behavior, not the test's.
 
 2. **The selection-clear must run before any early return in the drag-settle hook.** In
    `onTranslateEnd`, the zone-equality check (`if (zone === previousZone) return undefined`) is
@@ -183,6 +190,14 @@
    buttons and an input, so it pays step 4 in full — locking gates tldraw's gesture state
    machine, not DOM events. Ticket 18's `mtg-counter` (unlocked, editable) exercised step 4 too:
    without `pointerEvents: "all"` on its container, double-click-to-edit never reaches it.
+   **Ticket 19 (2026-08-10) added a fifth failure mode to this same recipe, specific to
+   *replacing* a stock shape's util rather than adding a brand-new type**: `useSync`'s schema
+   builder throws `"Shape type 'X' is defined more than once"` at runtime if `defaultShapeUtils`
+   is spread in (bringing the stock util along) and a subclass meant to replace it is added
+   without first filtering the stock one out of that spread. `<Tldraw shapeUtils={...}>`'s own
+   merge (`mergeArraysAndReplaceDefaults`) is lenient about the same duplicate (last-wins), so
+   this failure is invisible on that half of the registration and only surfaces via `useSync`.
+   See watch point 18.
 
 7. **A locked shape needs no interaction hooks — now demonstrated, not just asserted.**
    `MtgZoneShapeUtil` (ticket 13, `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx`) defines
@@ -415,6 +430,40 @@
       facts directly (it does not drive a live pointer at the ghost — the click-transparency claim
       rests on watch point 7's already-confirmed tldraw source reading, not a fresh Playwright
       probe for this ticket).
+
+18. **Adding a stock tldraw shape to `mtg-card`'s passenger accept-list reopens watch point 1 for
+    that shape, unless it gets this owner's cleanup hook too — and the fix is to subclass the
+    stock `ShapeUtil`, not reimplement it.** (Ticket 19, 2026-08-10.) `PASSENGER_TYPES` widened
+    from `{"mtg-counter"}` to `{"mtg-counter", "note"}`, but stock tldraw's `NoteShapeUtil` has no
+    `onTranslateEnd` — nothing clears a note's selection after it's dragged, so a stale note
+    selection would defeat the card's `startTranslating` safety net exactly like watch point 1
+    describes for counters. This owner's `-review` caught the gap before it shipped. Fix:
+    `apps/tabletop/src/client/shapes/SelectionClearingNoteShapeUtil.ts` extends tldraw's own
+    `NoteShapeUtil` (imported from `"tldraw"`) and overrides only `onTranslateEnd` to call
+    `this.editor.setSelectedShapes([])` — everything else (rendering, editing, `growY` sizing,
+    tldraw's migrations) is untouched. **New reusable precedent: when a stock shape needs one of
+    this KB's cleanup obligations and tldraw offers no other extension point, subclass the stock
+    `ShapeUtil` rather than forking or reimplementing it.**
+    - **Registering the subclass surfaced a new tldraw fact: `useSync` throws on a duplicate
+      shape `type`; `<Tldraw shapeUtils={...}>` doesn't.** `<Tldraw>`'s own prop merges via
+      `mergeArraysAndReplaceDefaults` (last-wins, tolerant of a duplicate `type`), but `useSync`'s
+      schema builder throws `"Shape type 'note' is defined more than once"` if `defaultShapeUtils`
+      is spread in *and* `SelectionClearingNoteShapeUtil` is added without first filtering the
+      stock `NoteShapeUtil` out. `TablePage.tsx`'s `shapeUtils` array is now built as
+      `[...defaultShapeUtils.filter((Util) => Util.type !== "note"), MtgCardShapeUtil,
+      MtgZoneShapeUtil, MtgCounterShapeUtil, SelectionClearingNoteShapeUtil]` — a *replace*, not an
+      *add*. This is a new twist on watch point 6's registration recipe, specific to replacing a
+      stock shape's util rather than registering a brand-new type.
+    - **The rotation-zeroing math in `onDragShapesIn` and the renamed `evictPassengers` (was
+      `evictCounters`) now use `this.editor.getShapeGeometry(shape).bounds` instead of
+      `props.w/h`** — a stock note has no `w`/`h` prop (size comes from a style enum plus
+      `growY`), but every shape's geometry bounds work regardless of base class.
+    - Regression test: `apps/tabletop/test/verification/verify-note.spec.ts`'s "after dragging a
+      note, dragging a card moves the card (stale-selection regression)" — mirrors
+      `verify-counter.spec.ts`'s Hazard-A test, deliberately with no test-side `deselectAll`
+      cleanup after the note drag, so the assertion proves the product clears selection, not the
+      test. Confirmed red without the subclass swap, green with it.
+
 ## Not Related To
 
 ### Card face/image rendering

@@ -504,6 +504,91 @@ places: the `useSync` `shapeUtils` const, `<Tldraw shapeUtils>`, and `rooms.ts`'
 - **`.nth()` on shape testids is paint order, and paint order changes when a shape reparents** —
   drag from known creation points instead of trusting locator index stability across a reparent.
 
+## Ticket 19: notes ride along like counters — a stock ShapeUtil gains this owner's cleanup hook via subclass (landed 2026-08-10)
+
+`.scratch/tabletop-physics/issues/19-notes.md`. Generalizes ticket 18's counter-hosting into a
+"passenger" concept: `MtgCardShapeUtil`'s `canReceiveNewChildrenOfType`/`canRemoveChildrenOfType`
+are now keyed on `PASSENGER_TYPES = new Set(["mtg-counter", "note"])` instead of a bare
+`type === "mtg-counter"` check, and `evictCounters` is renamed `evictPassengers`. Notes attach to
+cards, ride along, detach on battlefield exit — the exact mechanics ticket 18 built for counters,
+now shared with tldraw's own stock `note` shape.
+
+### The gap this owner's `-review` caught: a stock shape has no hook to clear its own selection
+
+Adding `"note"` to the accept-list alone would have reopened watch point 1's drag-identity bug for
+notes: stock tldraw's `NoteShapeUtil` defines no `onTranslateEnd`, so nothing clears a note's
+selection after it's dragged. The next card drag would then hit exactly the stale-selection hazard
+this KB has now documented three times over (drag-settle, the multi-untap click-batch, context-menu
+close) — a fourth entry point, this time via a shape this owner doesn't control the source of.
+
+### The fix: subclass the stock `ShapeUtil`, override only the missing hook
+
+`apps/tabletop/src/client/shapes/SelectionClearingNoteShapeUtil.ts`:
+
+```
+import { NoteShapeUtil, TLNoteShape, TLShapePartial } from "tldraw";
+
+export class SelectionClearingNoteShapeUtil extends NoteShapeUtil {
+  override onTranslateEnd(): TLShapePartial<TLNoteShape> | undefined {
+    this.editor.setSelectedShapes([]);
+    return undefined;
+  }
+}
+```
+
+Everything else — rendering, double-click editing, `growY` auto-sizing, tldraw's own migrations —
+stays exactly as tldraw ships it; only the one missing hook is added. **New reusable precedent for
+this KB**: when a *stock* tldraw shape needs one of this owner's cleanup obligations and tldraw
+gives no other extension point for it, subclass the stock `ShapeUtil` rather than reimplementing
+the shape from scratch. This is a materially cheaper move than ticket 12/13's "own custom shape
+type from the ground up" rewrite — appropriate here because notes need none of `mtg-card`'s or
+`mtg-zone`'s domain-specific behavior, only this one piece of selection hygiene.
+
+### The registration gotcha this surfaced: `useSync` throws on a duplicate `type`, `<Tldraw>` doesn't
+
+Registering the subclass needs it to **replace** the stock `NoteShapeUtil` in the `shapeUtils`
+array passed to `useSync` — not merely join it alongside. The two consumers of that array disagree
+on how strict they are about a duplicate `type` string:
+
+- `<Tldraw shapeUtils={...}>` merges via `mergeArraysAndReplaceDefaults` against
+  `defaultShapeUtils` — last-wins, tolerant of a duplicate.
+- `useSync`'s schema builder (`createTLSchemaFromUtils`) does **not** tolerate one: it throws
+  `"Shape type 'note' is defined more than once"` at runtime if `defaultShapeUtils` is spread in
+  (bringing the stock `NoteShapeUtil`) *and* `SelectionClearingNoteShapeUtil` is added separately
+  without filtering the stock one out first.
+
+Fixed in `apps/tabletop/src/client/TablePage.tsx`:
+```
+const shapeUtils = [
+  ...defaultShapeUtils.filter((Util) => Util.type !== "note"),
+  MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil,
+  SelectionClearingNoteShapeUtil,
+];
+```
+This is a new twist on watch point 6's registration recipe: replacing (not just adding to) a stock
+shape's util needs the stock one filtered out of the `defaultShapeUtils` spread *before* the
+replacement goes in — and the two array consumers' differing strictness about duplicates means this
+bug surfaces at runtime (a thrown schema error), not at compile time.
+
+### Generalizing to geometry instead of `props.w/h`
+
+A stock `note`'s size comes from a style enum plus `growY`, not `w`/`h` props — so the counter-only
+code that read `shape.props.w`/`shape.props.h` (in `onDragShapesIn`'s rotation-zeroing and in the
+old `evictCounters`) doesn't generalize to it. Both now use
+`this.editor.getShapeGeometry(shape).bounds`, which works for any `ShapeUtil` regardless of base
+class or how it derives its own size.
+
+### Regression test
+
+`apps/tabletop/test/verification/verify-note.spec.ts` mirrors `verify-counter.spec.ts`'s
+Hazard-A/stale-selection test: "after dragging a note, dragging a card moves the card
+(stale-selection regression)" — drags a note (deliberately leaving it selected, with **no**
+test-side `deselectAll` cleanup — the point is to prove the *product* clears selection, not the
+test), then drags the card, and asserts the card moved rather than the note. Confirmed red without
+the `SelectionClearingNoteShapeUtil` swap (the card didn't move — the note absorbed the drag
+instead), green with it. Three other tests in the same file cover attach/ride/detach and
+battlefield-exit eviction, exercising the same passenger mechanics ticket 18's counter tests do.
+
 ## Ticket 16: multi-untap — clicking one selected card taps the whole selection (landed 2026-08-09, `626ab6f`)
 
 `.scratch/tabletop-physics/issues/16-multi-untap.md` (plan in `plan-16.md`). With several cards
