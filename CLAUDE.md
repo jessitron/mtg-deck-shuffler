@@ -252,6 +252,8 @@ For each task, follow this workflow:
     authorization that tool's own guidance ("don't call proactively") is waiting for;
     calling it now, unprompted, as part of this workflow is correct, not proactive.
     Then run `scripts/merge-worktree.sh <branch-name>` from the main checkout; it
-    checks you're on `main` with a clean tree, does the `--no-ff` merge, and tells
-    you how to remove the now-finished worktree (`git worktree remove`).
+    checks you're on `main` with a clean tree, does the `--no-ff` merge, and — since
+    a successful merge means that worktree is done — removes the worktree and
+    deletes the branch itself. If removal fails (e.g. another session still has it
+    locked) it prints the manual command instead of failing the merge.
 13. **Celebrate**: Print a trumpet in ASCII art
