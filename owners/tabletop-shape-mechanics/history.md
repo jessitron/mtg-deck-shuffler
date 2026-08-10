@@ -741,6 +741,44 @@ Full detail in `files.md`'s new `helpers.ts` entry. No `architecture.md`/`intera
 change — no ShapeUtil, hook, or shape type moved; this only reshuffled how existing test
 behavior is expressed.
 
+## Counter editing textarea: measured centering, not estimated (2026-08-10)
+
+**Not a selection/drag/click-mechanics fix — filed here only because it touches a file this
+owner tracks (`MtgCounterShapeUtil.tsx`), and because the lesson generalizes to any future
+geometry-dependent render inside a ShapeUtil `component()`.** TODO.md item, bug reported by
+Jess: the counter's editing textarea centered its text using `paddingTop` computed from
+`fitCounterFont`'s **estimated** `lineCount` (a conservative character-width heuristic in
+`counterTextFit.ts`, necessarily conservative because real width measurement is unreliable
+before the webfont loads). Near a wrap boundary the estimate sometimes predicted one more line
+than the browser actually rendered — "+1/+1" at the default 44px disc: estimator said
+`lineCount: 2`, Orbitron bold renders it on one line — so padding sized to center the taller
+*assumed* block left the shorter *actual* block sitting high with visible empty space below.
+
+- **Fix: measure, don't estimate.** A new `useLayoutEffect` (deps `[isEditing, text, fontSize,
+  h]`) temporarily zeroes the textarea's `paddingTop`, reads its actual `scrollHeight`, restores
+  the padding, and computes real centering padding from that measurement — stored in
+  `useState` (`measuredPadTop`), **not written straight to the DOM node**. `fitCounterFont`
+  itself and `counterTextFit.test.ts` are unchanged (`lineCount` is still returned and tested
+  there); the component just no longer uses `lineCount` for centering.
+- **Why state, not a direct DOM write** — this is the reusable lesson: a direct
+  `ta.style.paddingTop = ...` write from the effect would get stamped back over by the JSX's own
+  (stale) style object on any re-render the effect's deps don't fire for — e.g. a drag or
+  unrelated shape-record churn re-running `component()`. Routing the measured value through
+  React state instead of the DOM survives exactly those re-renders. **Generalizable to any
+  future geometry-dependent value computed imperatively inside a ShapeUtil `component()`: land
+  it in state, not the DOM, or a re-render silently reverts it.**
+- **Declaration-order bug caught in review**: `fontSize` (from `fitCounterFont()`) was originally
+  destructured *after* the new effect that references it in its deps array — a TDZ ordering bug
+  that failed `tsc --noEmit`. Fixed by moving the `fitCounterFont` call above the effect.
+- **Test**: `apps/tabletop/test/verification/verify-counter.spec.ts` gained "text near the wrap
+  boundary (e.g. '+1/+1') stays vertically centered while editing" — types "+1/+1", then measures
+  (independently, via the same zero-padding/read-`scrollHeight` technique) whether the applied
+  padding centers the actual content within 1px. Confirmed red pre-fix (3.512px off-center),
+  green post-fix; all 6 tests in the file pass together.
+
+No new watch point: nothing about click/drag/selection changed, `onTranslateEnd`'s Hazard-A
+cleanup is untouched, and no new hook was added.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,
