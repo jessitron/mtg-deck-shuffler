@@ -213,8 +213,30 @@ export function commandZoneCardPosition(seatIndex: number, slot: number, count: 
   return { x: box.x + slot * (CARD_W + GAP), y };
 }
 
-/** Graveyard cards pile with a small offset so the count is visible — starting below the label band. */
+/** Fixed inset and per-card step of the graveyard cascade — shared by the position and its wrap bound below. */
+const GRAVEYARD_PILE_INSET = 10;
+const GRAVEYARD_PILE_STEP = 6;
+
+/**
+ * Graveyard cards pile with a small diagonal offset so the count is visible,
+ * starting below the label band. Zone detection is center-based (a card
+ * "is in the graveyard" only while its center sits inside `graveyardBounds`
+ * — owners/tabletop-shape-mechanics), so the cascade can't just march on
+ * forever: past the last step that still keeps the center inside the box,
+ * it wraps back to step 0, restacking visually over the earliest cards
+ * instead of walking out into the inter-zone gap or exile (JES bug,
+ * 2026-08-10 — the un-wrapped cascade broke past ~32 cards).
+ */
 export function graveyardCardPosition(seatIndex: number, graveyardCount: number): { x: number; y: number } {
   const box = graveyardBounds(seatIndex);
-  return { x: box.x + 10 + graveyardCount * 6, y: box.y + ZONE_LABEL_BAND + 10 + graveyardCount * 6 };
+  const maxStepsX = Math.floor((box.w - GRAVEYARD_PILE_INSET - CARD_W / 2) / GRAVEYARD_PILE_STEP);
+  const maxStepsY = Math.floor(
+    (box.h - ZONE_LABEL_BAND - GRAVEYARD_PILE_INSET - CARD_H / 2) / GRAVEYARD_PILE_STEP
+  );
+  const maxSteps = Math.min(maxStepsX, maxStepsY);
+  const step = graveyardCount % (maxSteps + 1);
+  return {
+    x: box.x + GRAVEYARD_PILE_INSET + step * GRAVEYARD_PILE_STEP,
+    y: box.y + ZONE_LABEL_BAND + GRAVEYARD_PILE_INSET + step * GRAVEYARD_PILE_STEP,
+  };
 }
