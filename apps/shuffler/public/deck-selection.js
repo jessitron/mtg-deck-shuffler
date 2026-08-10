@@ -22,6 +22,7 @@ function setActiveTab(clickedButton) {
     const buttonText = clickedButton.textContent.trim();
     if (buttonText === 'Precon') {
       container.classList.add('full-width');
+      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
       container.classList.remove('full-width');
     }
