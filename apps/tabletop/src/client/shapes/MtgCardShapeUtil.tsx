@@ -131,13 +131,14 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
             // prop existed; fall back to a flat rectangle rather than leaking
             // the face underneath.
             cardBackImageUrl ? (
-              <img className="tl-image" src={cardBackImageUrl} alt="face-down card" draggable={false} />
+              <img className="tl-image" style={{ borderRadius: w * 0.05 }} src={cardBackImageUrl} alt="face-down card" draggable={false} />
             ) : (
-              <div style={{ width: "100%", height: "100%", background: "#3a3a3a" }} />
+              <div style={{ width: "100%", height: "100%", background: "#3a3a3a", borderRadius: w * 0.05 }} />
             )
           ) : (
-            // Unsleeved, face-up: today's bare look.
-            <img className="tl-image" src={src} alt={cardName} draggable={false} />
+            // Unsleeved, face-up: a real card keeps its rounded corners —
+            // only a sleeve (above) is square (Jess, 2026-08-09).
+            <img className="tl-image" style={{ borderRadius: w * 0.05 }} src={src} alt={cardName} draggable={false} />
           )}
         </div>
       </HTMLContainer>
