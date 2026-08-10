@@ -99,6 +99,64 @@ test.describe('design gallery', () => {
     }
   });
 
+  test('the playmat specimen stages use the real .playmat class, not a lookalike', async ({ page }) => {
+    await page.goto(`${BASE_URL}/design`);
+
+    // design-playmat-specimen: `.stage-playmat` used to hand-copy the mat's art URL,
+    // background-size/position and its own 3px border instead of inheriting the real
+    // `.playmat` rule in playmat.css. These stages now carry `class="stage playmat"`
+    // directly, so the art/border/no-shadow all have to come from the app's own rule.
+    const stage = page.locator('.design-page .stage.playmat').first();
+    await expect(stage).toBeVisible();
+
+    const styles = await stage.evaluate((el) => {
+      const s = getComputedStyle(el);
+      return {
+        backgroundImage: s.backgroundImage,
+        backgroundSize: s.backgroundSize,
+        borderTopStyle: s.borderTopStyle,
+        borderTopColor: s.borderTopColor,
+        borderTopWidth: s.borderTopWidth,
+        boxShadow: s.boxShadow,
+      };
+    });
+
+    // Art, cover sizing and border style/color come straight from the bare `.playmat`
+    // rule in playmat.css — nothing here is redeclared by the gallery.
+    expect(styles.backgroundImage).toContain('aeoe-43-cascading-cataracts.png');
+    expect(styles.backgroundSize).toBe('cover');
+    expect(styles.borderTopStyle).toBe('solid');
+    expect(styles.borderTopColor).toBe('rgb(0, 0, 0)');
+    // Only the width is thinned for the specimen's smaller scale — the real mat is
+    // framed at 10px, this gallery box at 3px (design-gallery.css's own override).
+    expect(styles.borderTopWidth).toBe('3px');
+    // 2026-08-10: the game mat's drop shadow was removed on both play pages and never
+    // came back. The shared `.playmat` rule carries none, and the gallery must not
+    // reintroduce one locally.
+    expect(styles.boxShadow).toBe('none');
+
+    // prepare.css keys some placement rules on the bare `.playmat` class (the mat is
+    // the domain object those things sit relative to) — `.playmat > .game-title`,
+    // `.playmat .cool-command-zone-surround`, `.playmat .commander-placeholder`,
+    // `.playmat .table-look-panel`. Those rules now reach /design too, since
+    // prepare.css is loaded here and the real `.playmat` class is on the stage. The
+    // gallery resets their align-self/margin so specimens keep the gallery's own
+    // centered layout rather than picking up /prepare's page placement.
+    const plaque = page.locator('#surfaces .stage.playmat .game-title');
+    await expect(plaque).toBeVisible();
+    const plaqueMargin = await plaque.evaluate((el) => getComputedStyle(el).marginBottom);
+    expect(plaqueMargin).toBe('0px');
+
+    const panel = page.locator('#table-look .stage.playmat .table-look-panel');
+    await expect(panel).toBeVisible();
+    const panelStyles = await panel.evaluate((el) => {
+      const s = getComputedStyle(el);
+      return { marginTop: s.marginTop, alignSelf: s.alignSelf };
+    });
+    expect(panelStyles.marginTop).toBe('0px');
+    expect(panelStyles.alignSelf).toBe('auto');
+  });
+
   test('the Tabletop sleeved-card mock renders a card centered in a sleeve frame', async ({ page }) => {
     await page.goto(`${BASE_URL}/design`);
 
