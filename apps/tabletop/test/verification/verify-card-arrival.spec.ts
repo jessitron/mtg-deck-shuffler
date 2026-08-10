@@ -28,6 +28,8 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
       backImageUrl: null,
+      owner: "e2e-seat",
+      isCommander: false,
       ...payloadOverrides,
     },
   };
