@@ -269,20 +269,6 @@ section is just a wall between Jess and the live work.
     revealed cards in `.game-top-row`). Sorting the opening hand is deferred: Jess's users said
     they don't want it (2026-08-10). `GameState.listHand()` still sorts by position only.
 
-- [ ] `library-sort-toggle` Let the game's library search sort alphabetically or by library position ← was: JES-152, JES-142
-  - > Seeing the library in true top-to-bottom order is how you confirm a shuffle happened, check
-    > what Put on Top / Put on Bottom did, and verify draw order.
-  - **Half of this is on an unmerged branch.** `library-alphabet` (commit `9a3c1b5`, checked out in
-    `../mtg-deck-shuffler-worktree1`, 19 behind `main`) makes the game library alphabetical and
-    updates the `library-search` owner docs to say so. On `main` it is still position order. Land
-    that branch or drop it before building the toggle.
-  - Shape: a sort control beside the existing "Group by Type" toggle — `?sortBy=position` as a peer
-    of `?groupBy=type`, in `views/partials/library-modal.ejs` and the `/library-modal/:gameId` route.
-  - ⚠️ Sort for **display only**. `GameState.listLibrary()` returns position order and draw, Put on
-    Top and Put on Bottom all depend on `location.position`.
-  - Library search is the one part of the app outside users have complained about — Jess's college
-    kid and their friends, 2026-08-01.
-
 - [ ] DEFERRED `english-card-faces` Show English names and images for other-language printings ← was: JES-96
   - Blocked on `card-zoom-modal` (Jess, 2026-08-10).
   - > Some cards come in other-language editions. Offer English. Example: Adventurous Impulse in
