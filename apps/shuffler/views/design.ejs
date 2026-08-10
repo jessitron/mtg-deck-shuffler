@@ -889,11 +889,28 @@
           </div>
         </div>
 
+        <p class="section-note">
+          When the table has a sleeve color (the prep-screen picker, <a href="#table-look">below</a>),
+          the library back is a bare flat-hex rectangle instead — square corners, no
+          inset-border/gradient chrome, same box-shadow (the pile's depth cue, not card-face
+          decoration). Matches the Tabletop's card-sleeve rule.
+        </p>
+        <div class="stage stage-playmat">
+          <div>
+            <div class="library-stack">
+              <div class="mtg-card-image library-card-back library-card-1 sleeved" style="background-color: #3c99e5"></div>
+              <div class="mtg-card-image library-card-back library-card-2 sleeved" style="background-color: #3c99e5"></div>
+              <div class="mtg-card-image library-card-back library-card-3 sleeved" style="background-color: #3c99e5"></div>
+            </div>
+          </div>
+        </div>
+
         <table class="gallery-table">
           <thead><tr><th>Element</th><th>Size</th><th>Radius</th></tr></thead>
           <tbody>
             <tr><td><code>.mtg-card-image</code></td><td>200 × 278</td><td>10px</td></tr>
             <tr><td><code>.library-stack</code></td><td>200 × 280</td><td>—</td></tr>
+            <tr><td><code>.library-card-back.sleeved</code></td><td>200 × 278</td><td>0 (square — sleeve is a physical rectangle)</td></tr>
             <tr><td><code>.commander-placeholder</code></td><td>200 × 280</td><td>10px</td></tr>
             <tr><td><code>.flip-container-outer</code></td><td>200 × 278</td><td>—</td></tr>
             <tr><td><code>.card-buttons</code> grid</td><td>200 wide, 2 × 2</td><td>—</td></tr>

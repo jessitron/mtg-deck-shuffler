@@ -306,9 +306,13 @@ Facts that outlive the ticket:
   oversight (Jess, 2026-08-09).** Jess considered click-outside-to-close for the picker;
   the native control's OS panel can't be closed by JS, and she chose to keep the native
   control rather than build a custom in-page picker. Don't re-propose one unprompted.
-- **`/game` still paints the default mat** (the bare `.playmat` rule) while `/prepare` and
-  the Tabletop show the pick — a known gap, buoyed as `game-page-picked-mat` in `TODO.md`,
-  not an oversight to silently fix.
+- **`/game` now paints the picked mat too — CLOSED (2026-08-09).** `GameState`/
+  `PersistedGameState` gained `sleeveColor`/`playmatImagePath` (snapshotted from
+  `PersistedGamePrep` at `/start-game` and `/restart-game`, optional fields, no version bump —
+  same exception as `tableName`), and `formatGamePageHtmlPage` sets the same inline
+  **longhand** `background-image` on `.playmat.playmat-game` that `/prepare` already uses —
+  never the shorthand, which would wipe `playmat.css`'s shared `cover`/`center`. Closes the
+  `game-page-picked-mat` gap this section used to name.
 
 **The nav-link idiom is the fleet's only text-link treatment, and it now has two live
 instances (second: 2026-08-09, `6b6b927`).** White `--font-chrome` type on a dark surface.
@@ -427,8 +431,26 @@ set is the five `aeoe-*` images from the approved prototype — one **more** tha
 `site.css` hero backgrounds issue 09 named (seam-rip is the fifth); the prototype verdict
 (`683ca1c`) ratified five. There is still no `/design` specimen of the rendered *sleeve
 on a card* (buoyed as `design-sleeve-specimen` in `TODO.md` — the picker panel itself
-does have a specimen, `#table-look`; they are different things). v1 is one color;
-distinct front/back colors or an image sleeve are someday-maybes, deferred.
+does have a specimen, `#table-look`; they are different things — that gap is about the
+Tabletop's canvas card sleeve, not the Shuffler's library-back rendering below, which does
+now have one). v1 is one color; distinct front/back colors or an image sleeve are
+someday-maybes, deferred.
+
+**The Shuffler side of the same sleeve rule shipped too (2026-08-09), on both `/prepare`
+and `/game`.** `formatLibraryStack`/`formatLibraryCardBack` (`shared-components.ts`) render
+each of the three library-card-back elements as a `<div class="mtg-card-image
+library-card-back library-card-N sleeved" style="background-color: <hex>">` — a bare
+flat-hex rectangle, square corners (`.library-card-back.sleeved { border-radius: 0 }` in
+`playmat.css`) — instead of the standard-back `<img>`, whenever the table's `sleeveColor`
+is set. The box-shadow is kept (it's the pile's own depth cue, not card-face decoration);
+the inset-border/gradient chrome is dropped via `.library-card-back.sleeved::before {
+content: none }`, which wins by specificity over both `playmat.css`'s base inset-border
+rule and `game.css`'s diagonal-gradient override, regardless of load order. Unsleeved
+backs render pixel-identical to before. Same square-corner/flat-hex/no-sheen posture as
+the Tabletop's card sleeve above — one rule, both ships. **No sheen was added** — Jess
+considered it and held off, on purpose; that stays a separate, future appearance decision,
+not bundled with this one. A specimen for both states lives on `/design` § Cards &
+playmat, next to the unsleeved library stack.
 
 **The seat name label pairs player name and deck name on ONE line at double size, player
 first, joined by a wave-dash (decided 2026-08-09 at Jess's direct request, `75bae71` —
