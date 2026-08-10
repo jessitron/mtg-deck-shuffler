@@ -14,7 +14,7 @@
     <% availableDecks.forEach(function(deck, index) { %>
       <button type="submit" name="precon-deck" value="<%= deck.localFile %>" class="precon-tile" style="--animation-order: <%= index %>;">
         <div class="tile-commander-art">
-          <img src="<%= deck.metadata.commanders[0].imageUrl %>" alt="<%= deck.metadata.commanders[0].name %>" />
+          <img src="<%= deck.metadata.commanders[0].imageUrl %>" alt="<%= deck.metadata.commanders[0].name %>" loading="lazy" />
         </div>
         <div class="tile-content">
           <div class="tile-deck-name"><%= deck.description %></div>
