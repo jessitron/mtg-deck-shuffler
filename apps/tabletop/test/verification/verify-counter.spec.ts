@@ -224,6 +224,51 @@ test("a counter's text is editable in place", async ({ page }) => {
   await expect(counter).toHaveText("+1/+1");
 });
 
+test("text near the wrap boundary (e.g. '+1/+1') stays vertically centered while editing", async ({ page }) => {
+  // Jess (2026-08-10): "+1/+1" (and "why") looked top-heavy while editing —
+  // a line of empty space visible below the text — while shorter text like
+  // "wh" centered fine, and typing one more character (crossing an actual
+  // wrap) also looked right. Root cause: fitCounterFont's width estimate
+  // (counterTextFit.ts) sometimes predicts one more wrapped line than the
+  // browser actually renders near the wrap boundary, and the old padding
+  // math centered for that taller *estimated* block instead of the real
+  // rendered one. Fixed by measuring the textarea's actual scrollHeight
+  // instead of trusting the estimate (MtgCounterShapeUtil.tsx).
+  const tableSlug = `verify-counter-center-${Date.now()}`;
+  await openTable(page, tableSlug);
+
+  await createCounter(page, { x: 400, y: 300 });
+  const counter = page.getByTestId("mtg-counter");
+  await expect(counter).toHaveCount(1);
+
+  await counter.dblclick();
+  const input = page.getByTestId("mtg-counter-input");
+  await expect(input).toBeFocused();
+  await page.keyboard.type("+1/+1");
+
+  // Measure the same way the fix does: zero the padding, read the real
+  // content height (scrollHeight ignores the fixed visible height), and
+  // check the padding actually applied centers that real content — not
+  // some estimated block that may be taller than what's really rendered.
+  const centering = await input.evaluate((el: HTMLTextAreaElement) => {
+    const style = getComputedStyle(el);
+    const borderTop = parseFloat(style.borderTopWidth);
+    const borderBottom = parseFloat(style.borderBottomWidth);
+    const usableHeight = el.offsetHeight - borderTop - borderBottom;
+    const appliedPaddingTop = parseFloat(style.paddingTop);
+    const previousPadding = el.style.paddingTop;
+    el.style.paddingTop = "0px";
+    const contentHeight = el.scrollHeight;
+    el.style.paddingTop = previousPadding;
+    const expectedPaddingTop = Math.max(0, (usableHeight - contentHeight) / 2);
+    return { appliedPaddingTop, expectedPaddingTop };
+  });
+  expect(Math.abs(centering.appliedPaddingTop - centering.expectedPaddingTop)).toBeLessThanOrEqual(1);
+
+  await page.keyboard.press("Escape");
+  await expect(counter).toHaveText("+1/+1");
+});
+
 test("a long label like 'lifelink' shrinks to fit inside the disc", async ({ page }) => {
   const tableSlug = `verify-counter-fit-${Date.now()}`;
   await openTable(page, tableSlug);
