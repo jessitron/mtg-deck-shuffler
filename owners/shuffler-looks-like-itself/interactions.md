@@ -244,15 +244,16 @@ Concrete, in rough order of how often they bite.
   `.playmat > .game-title`, `.playmat .cool-command-zone-surround`,
   `.playmat .commander-placeholder`. Don't "tidy" these to `.playmat-prepare` — the mat as a
   domain object is the grid parent, and that's what these are relative to.
-- **The default mat art is one asset named in three places (was two; ticket 16 added a TS
-  site, 2026-08-09):** `playmat.css` → the bare `.playmat` rule, `design-gallery.css` →
-  `.stage-playmat` (which hand-copies the URL because the gallery renders a *lookalike*,
-  not the real mat — see `design-playmat-specimen` in `TODO.md`), and now
-  `apps/shuffler/src/table-look.ts` → `DEFAULT_PLAYMAT_PATH`. The TS side has **one**
-  truth: `defaultPlaymatImageUrl()` in `src/port-tabletop/types.ts` derives from
-  `DEFAULT_PLAYMAT_PATH`, so `seat.joined`'s default follows it automatically — but the two
-  CSS sites do not. Changing the default art means all three files (or fixing the gallery
-  first). `site.css` uses the same file for its own purposes and is unrelated. **The mat is
+- **The default mat art is down to TWO hand-written sites (was three; closed 2026-08-10,
+  `2217381`, `design-playmat-specimen`).** `playmat.css` → the bare `.playmat` rule, and
+  `apps/shuffler/src/table-look.ts` → `DEFAULT_PLAYMAT_PATH`. `design-gallery.css`'s
+  `.stage-playmat` hand-copy is **gone** — `/design`'s playmat specimens now carry the real
+  `.playmat` class and inherit the art from `playmat.css` directly, so the gallery genuinely
+  can't drift from the app's own art choice anymore. The TS side has **one** truth:
+  `defaultPlaymatImageUrl()` in `src/port-tabletop/types.ts` derives from
+  `DEFAULT_PLAYMAT_PATH`, so `seat.joined`'s default follows it automatically — but the CSS
+  site does not. Changing the default art now means two files, not three. `site.css` uses
+  the same file for its own purposes and is unrelated. **The mat is
   also no longer only the CSS default**: `/prepare` server-renders the picked mat as an
   inline `background-image` longhand on the playmat div, and `prep-picker.js` swaps it live
   — the bare `.playmat` rule's art is what `/game` (still — see the `game-page-picked-mat`

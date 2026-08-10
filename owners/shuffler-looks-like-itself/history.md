@@ -2132,3 +2132,50 @@ shadow-absence, with only `border-radius` (scale) and layout staying page-specif
 blocks anything — it was only ever blocking this shadow choice from being staged, and the
 choice got decided a different way. It remains open purely as a general gallery-fidelity
 gap.
+
+## 2026-08-10 — the gallery's playmat stages stopped being a lookalike
+
+`2217381` **`design-playmat-specimen`: `/design`'s playmat stages use the real `.playmat`
+class**
+
+Closed the general gallery-fidelity gap the entry above left open. `design-gallery.css`'s
+`.stage-playmat` had hand-copied the mat's art URL, `background-size: cover`,
+`background-position: center`, and its own `3px solid black` border since the gallery was
+built — a lookalike, not the real mat, meaning the gallery was *describing* the playmat in
+its own tables while *rendering* an imitation of it. It only became fixable once `a4991f3`
+(2026-08-07) gave the mat a bare `.playmat` rule worth inheriting from.
+
+**The fix:** all 13 specimens carrying `class="stage stage-playmat"` in `design.ejs` now
+carry `class="stage playmat"` instead — the real class, genuinely inheriting art,
+`background-size`/`-position`, and border color/style from `playmat.css`'s bare `.playmat`
+rule. `design-gallery.css`'s old hand-copied block is deleted; all that's left is
+`.design-page .stage.playmat { border-width: 3px }`, overriding only the frame's *width*
+(the real mat is 10px; these specimens are drawn much smaller) — no `-game`/`-prepare`
+radius modifier, since none of these specimens exist to demonstrate the mat's own shape.
+
+**A side effect worth recording as its own fact, not just a fix-up:** putting the real
+class on the stage wrapper also let `prepare.css`'s bare-`.playmat`-keyed placement rules
+reach `/design` for the first time — `.playmat > .game-title`, `.playmat
+.cool-command-zone-surround`, `.playmat .commander-placeholder`, and (since ticket 16)
+`.playmat .table-look-panel`. `prepare.css` was already loaded on `/design`; it simply had
+no bare `.playmat` element to match before. `grid-column`/`grid-row` are no-ops outside a
+grid container so those were harmless, but `align-self` and `margin` are not — left alone,
+3-4 specimens would have picked up `/prepare`'s page placement instead of the gallery's own
+centered layout. `design-gallery.css` now carries a narrow reset neutralizing just those two
+properties on the four leaking selectors. **This is the generalizable lesson:** giving a
+gallery stage a real app class doesn't just import that class's own rule — it imports
+*every* rule in every loaded sheet that happens to match the stage's new shape, including
+rules an agent wasn't thinking about when picking the class. Check what else keys off the
+class you're adding, not just the rule you're adding it for.
+
+`verify-design-gallery.spec.ts` grew a spec asserting the playmat stage's computed
+background-image, background-size, border-top-style/-color/-width, and `box-shadow: none`
+(matching the 2026-08-10 shadow removal above — the two changes landed the same day, so the
+new assertion had to match the *already*-converged mat, not the pre-shadow-removal one), plus
+that the leak-reset actually neutralizes margin/align-self on the four leaking selectors.
+
+**Closes `design-playmat-specimen` in the repo-root `TODO.md`.** It also retires the
+architecture.md "known exception to the gallery's one architectural rule" — the rule (every
+specimen is rendered by the app's own stylesheets, never gallery CSS) now holds without
+qualification for the playmat stages. The swatch-chip hex exception (`.swatch-chip`
+hard-codes its colours) is unaffected and still open.

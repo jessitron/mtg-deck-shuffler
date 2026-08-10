@@ -227,17 +227,38 @@ makes it impossible for the gallery to lie about the app.
 swatches, and `.stage-*` classes that reproduce each component's native background
 (playmat art, purple gradient, white modal interior, `#1e1e1e` menu panel).
 
-**Known exception to that rule — `.stage-playmat` is a lookalike, not the mat.** It
-hand-copies the art URL, `background-size: cover`, `background-position: center` and its own
-`3px solid black` border, so the gallery has been *describing* the playmat in its tables
-while *rendering* an imitation. This is the one place the gallery can currently lie about the
-app. It only became fixable with `a4991f3`, which created a bare `.playmat` rule worth
-inheriting; tracked as `design-playmat-specimen` in the repo-root `TODO.md`. It is gallery
-surgery, not a one-line swap — the stage needs a thinner frame at specimen scale.
-**No longer blocking anything real (2026-08-10):** it used to gate `playmat-drop-shadow`
-(the gallery couldn't stage a shadow choice on a fake mat); that question is now closed by
-Jess removing the shadow outright, so this item stays open purely for general
-gallery-fidelity reasons, not because something else depends on it.
+**CLOSED 2026-08-10 (`2217381`, `design-playmat-specimen`) — the mat-stage exception is
+gone.** All 13 specimens that used to carry the lookalike `class="stage stage-playmat"` now
+carry the real `class="stage playmat"` — the bare `.playmat` rule from `playmat.css` is on
+the stage wrapper itself, so art, `background-size`/`-position`, and border color/style are
+genuinely inherited, not hand-copied. `design-gallery.css`'s `.stage-playmat` block is gone;
+`.design-page .stage.playmat` now overrides only `border-width: 3px` (vs the real mat's 10px)
+for the specimen's smaller scale — no `-game`/`-prepare` radius modifier, since these
+specimens aren't demonstrating the mat's own *shape*.
+
+**Putting the real class on the stage had a side effect worth knowing about: it opened a
+door for `prepare.css`'s placement rules to reach `/design`.** `prepare.css` deliberately
+keys some placement rules on the bare `.playmat` (see "Placement keys off the bare
+`.playmat`" below) — `.playmat > .game-title`, `.playmat .cool-command-zone-surround`,
+`.playmat .commander-placeholder`, and (since ticket 16) `.playmat .table-look-panel`.
+`prepare.css` is already loaded on `/design`, so once the stages carry the real class those
+rules apply there too. `grid-column`/`grid-row` are no-ops outside a grid container, but
+`align-self` and `margin` are not — left unhandled, 3-4 specimens would have picked up
+`/prepare`'s page placement instead of sitting in the gallery's own centered layout.
+`design-gallery.css` now carries a narrow reset: `.design-page .stage.playmat
+.game-title, .cool-command-zone-surround, .commander-placeholder, .table-look-panel { align-self: auto; margin: 0; }`.
+**If prepare.css ever adds a fifth bare-`.playmat`-keyed placement rule, it will leak onto
+`/design` the same way — add it to this reset or move it off the bare class.**
+
+`verify-design-gallery.spec.ts` grew a spec asserting the playmat stage's computed
+background-image/-size, border-top-style/-color/-width, and `box-shadow: none` (matching the
+2026-08-10 shadow removal), plus that the leak-reset actually neutralizes margin/align-self
+on the four leaking selectors.
+
+This was gallery surgery, not a one-line swap, and it also **closed `playmat-drop-shadow`'s
+last dependency** — that buoy used to be blocked on this fix (the gallery couldn't stage a
+shadow choice on a fake mat); Jess removed the shadow outright before this landed, so the
+question was already moot by the time the fix arrived.
 
 **Second, smaller exception — the *colour* swatches still hard-code their hexes.** Each
 `.swatch-chip` in the "Named tokens" grid carries `style="background: #221534"` rather than
@@ -304,8 +325,9 @@ whichever ticket needs to render actual Tabletop CSS, not a mock.
 
 **§ `#table-look` — the table-look picker's specimen (2026-08-09, ticket 16, `8995c1a`).**
 "Table look picker", badge **standard** (not a mock — the panel is a shipped Shuffler
-component and `/design` loads `prepare.css`), staged on `.stage-playmat` because the panel
-lives on the mat. Shows a selected mat swatch, the None chip, two mana chips, and the custom
+component and `/design` loads `prepare.css`), staged on the real `.playmat` stage (since
+`2217381`, 2026-08-10 — was `.stage-playmat`, the lookalike) because the panel lives on the
+mat. Shows a selected mat swatch, the None chip, two mana chips, and the custom
 color input. It follows the static-specimen convention: the *rules* come from the real
 `prepare.css` classes, but the markup and the inline values (swatch `background-image` URLs,
 mana hexes, the `#bb5277` input default) are hand-copied from
