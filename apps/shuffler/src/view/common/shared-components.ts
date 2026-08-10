@@ -7,7 +7,7 @@ export function escapeHtml(text: string): string {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-/** Perceived luminance (ITU-R BT.601) below the midpoint reads as dark — mirrors prep-picker.js's isDark(). */
+/** Perceived luminance (ITU-R BT.601) below the midpoint reads as dark. */
 function isDarkHex(hex: string): boolean {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
@@ -19,9 +19,9 @@ function isDarkHex(hex: string): boolean {
  * The sleeve color is the player-identity signal (see notes/GLOSSARY.md): it
  * tints the command-zone surround and the deck-title plaque. Inline style on
  * purpose — sleeve hex is domain data, and a page-sheet rule on these shared
- * components would leak onto /design. Server-rendered here so /game (no
- * picker JS) gets the same tint /prepare gets; prep-picker.js's live preview
- * re-applies it while picking, before the value persists.
+ * components would leak onto /design. Server-rendered so every page that
+ * shows a game/prep (including a full re-render after a table-look pick,
+ * see /prep-table-look/:prepId) gets the same tint.
  */
 export function sleeveTintStyle(sleeveColor: string | undefined, withTextColor: boolean): string {
   if (!sleeveColor) return "";

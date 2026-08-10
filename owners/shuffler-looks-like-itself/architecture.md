@@ -97,7 +97,7 @@ Per-view `additionalStyles` today:
 | `site.css` | Site pages: header, footer, hero, slogan, steps, `.button-base` family | every EJS page |
 | `playmat.css` | **Shared by game and prepare**: **the bare `.playmat` rule — the mat's whole shared appearance (art, `background-size`/`-position`, `border: 10px solid black`), filled in by `a4991f3`**, library stack, card/library buttons, command zone, **the deck-title plaque's *appearance* (`.game-title`)**, all modal styles, card-type icons, card modal | game (TS) + prepare (EJS) |
 | `game.css` | Game page only: `.playmat-game` (the mat *at game scale* — layout, 80px radius, `box-shadow`; was `.page-container` until `7487393`), `.game-header-row`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks, the `--playmat-one`/`--playmat-two` `:root` | game (TS) |
-| `prepare.css` | Prepare page only: `.playmat-prepare` (the mat *at prepare scale* — the grid, layout, 20px radius), the bare-`.playmat` placement rules, commander placeholder, join-table panel, **the table-look picker (`.table-look-panel` block at the end of the file, ticket 16 — markup in `views/partials/table-look-panel.ejs`, behaviour in `public/prep-picker.js`)** | prepare (EJS) |
+| `prepare.css` | Prepare page only: `.playmat-prepare` (the mat *at prepare scale* — the grid, layout, 20px radius), the bare-`.playmat` placement rules, commander placeholder, join-table panel, **the table-look picker (`.table-look-panel` block at the end of the file, ticket 16 — markup in `views/partials/table-look-panel.ejs`, included by `views/partials/playmat-prepare.ejs`; behaviour is pure HTMX plus `public/table-look-focus.js` for keyboard-focus restoration, since `cabf85b` 2026-08-09 — `prep-picker.js` no longer exists)** | prepare (EJS) |
 | `deck-selection.css` | `/choose-any-deck`: precon tiles, search + Archidekt inputs | choose-any-deck |
 | `docs.css` | `/docs`, `/about`, `/history`: sidebar + prose layout | those three |
 | `design-candidates.css` | **Proposals only.** Nothing in the app loads it | `/design` only |
@@ -306,8 +306,11 @@ color input. It follows the static-specimen convention: the *rules* come from th
 `prepare.css` classes, but the markup and the inline values (swatch `background-image` URLs,
 mana hexes, the `#bb5277` input default) are hand-copied from
 `views/partials/table-look-panel.ejs` — if the partial's structure or the palette in
-`src/table-look.ts` changes, visit the specimen. What a static specimen can't show: the live
-previews (`prep-picker.js` — mat art swap, sleeve tint on the surround and plaque).
+`src/table-look.ts` changes, visit the specimen. What a static specimen can't show: the actual
+pick (`cabf85b`, 2026-08-09, converted this from a live JS preview to a full HTMX round-trip —
+a real `hx-post`, a persisted pick, and a re-rendered `#playmat-prepare` fragment — mat art swap,
+sleeve tint on the surround and plaque, and the focus restoration `table-look-focus.js` does
+after the swap).
 
 **Second Tabletop mock section: § `#counter-disc` (2026-08-08, tabletop-physics ticket 18).**
 "Tabletop counter disc", badge `candidate`, staged on `.stage-white` — three `.counter-mock`

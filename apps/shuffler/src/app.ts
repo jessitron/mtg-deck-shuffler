@@ -439,10 +439,9 @@ export function createApp(
     }
   });
 
-  // POST /prep-table-look/:prepId - persist a playmat and/or sleeve pick
-  // (ticket 16). Fire-and-forget from the picker JS: each pick lands in the
-  // prep immediately, so a reload — and the seat.joined send at Shuffle Up —
-  // sees it. An empty sleeve-color clears the sleeve (None = standard back).
+  // Persists a playmat and/or sleeve pick, then re-renders and returns the
+  // #playmat-prepare fragment htmx swaps in. Must respond 200, not 204: htmx
+  // treats 204 as "don't swap." An empty sleeve-color clears the sleeve.
   app.post("/prep-table-look/:prepId", async (req, res) => {
     const prepId = parseInt(req.params.prepId, 10);
 
@@ -475,7 +474,15 @@ export function createApp(
 
     prep.updatedAt = new Date();
     await persistPrepPort.savePrep(prep);
-    res.status(204).end();
+
+    const helpers = createPrepViewHelpers(prep);
+    res.render("partials/playmat-prepare", {
+      prep,
+      playmats: PLAYMATS,
+      selectedPlaymatPath: prep.playmatImagePath ?? DEFAULT_PLAYMAT_PATH,
+      sleeveQuickPicks: SLEEVE_QUICK_PICKS,
+      ...helpers,
+    });
   });
 
   // Redirects to active game page - creates game from prep

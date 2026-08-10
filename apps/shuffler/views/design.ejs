@@ -551,7 +551,9 @@
           null ⇔ unsleeved), the mana pie, and a custom color input. Selection signal is the
           <code>.hero-button.active</code> pattern: locked lift + 4px dark-pink underline.
           The picked sleeve color tints the command-zone surround and the deck-title plaque
-          as a live preview (inline style — sleeve hex is domain data, a player's choice).
+          (inline style — sleeve hex is domain data, a player's choice). Every swatch is a
+          real HTMX pick, not a JS preview: it posts to the server, which persists it and
+          re-renders the mat.
         </p>
 
         <div class="options">
