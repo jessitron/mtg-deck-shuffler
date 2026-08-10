@@ -286,7 +286,7 @@ section is just a wall between Jess and the live work.
     surface (`formatCommandZoneHtmlFragment`, `src/view/common/shared-components.ts`), so this is an
     addition to something that's already there. Small, and genuinely useful mid-game.
 
-- [ ] `focus-ring-manual-tabthrough` Actually tab through the app and look at the new focus ring
+- [ ] DEFERRED `focus-ring-manual-tabthrough` Actually tab through the app and look at the new focus ring
   - Choice 5 (global `:focus-visible` ring) shipped 2026-08-06 with build, 224 unit tests and the
     5-test gallery spec all green — but **no human has tabbed the pages**, which is the real test.
   - Cover `/`, `/choose-any-deck`, `/prepare`, `/game`, `/docs` (link-dense, and it has its own
