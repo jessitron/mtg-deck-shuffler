@@ -13,9 +13,6 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- Easy win: Bunny got confused on the /choose screen. If Precon is selected and you click Precon anyway, it should scroll you down to the list of precons. (Shuffler)
-
-- put some less-busy playmats in the options (Shuffler)
 
 - Feature: Let a player exit the table so they can rejoin with a different deck! (fleet)
 
