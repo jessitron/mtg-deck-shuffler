@@ -299,7 +299,7 @@ section is just a wall between Jess and the live work.
     10px light-pink border. The argument that it holds (the gap shows the page, not the button) is
     only an argument; on `/prepare` that gap shows card art rather than the dark gradient.
 
-- [ ] `focus-ring-on-white-decision` Decide what to do about --light-pink's 1.35:1 on white
+- [ ] DEFERRED `focus-ring-on-white-decision` Decide what to do about --light-pink's 1.35:1 on white
   - Depends on the tab-through above. Real flat-white surfaces exist: `.modal-dialog`
     (`playmat.css:180` + the `prepare.css` duplicate), `docs.css:130`, `.button-base:disabled`.
   - **This is Jess's call, not a local patch.** The sanctioned fallback (a hairline `--deep-space`
