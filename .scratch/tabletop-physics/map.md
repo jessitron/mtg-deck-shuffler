@@ -253,9 +253,17 @@ expensive way round.
   `card.attachedBelow` names a gesture with no code path — only `counter.attached` and
   `noteAttached` fire. `copiedFrom` for a duplicated card is **not** implemented (still "not yet
   specified" below); duplication announces a bare `shape.created`.
-  **Not verified against live Honeycomb** — `apps/tabletop`'s server build is currently broken
-  for an unrelated, pre-existing reason (`tabletop-server-build-broken` in `TODO.md`), which
-  blocked `./verify.sh`. Re-run that check once the build is fixed.
+  **Verified live in Honeycomb** (`local` environment, dataset `mtg-tabletop-web`) — a manual
+  Playwright drive (tap, untap, drag) held the page open past `BatchSpanProcessor`'s default
+  5s export delay, and `card.tapped`/`card.untapped`/`shape.moved` each landed exactly once,
+  every one carrying `actor: TLDRAW_INSTANCE_STATE_V1_...` and the right `card.instance_id`.
+  (First attempt showed nothing, which briefly looked like a build problem — see the retracted
+  entry `tabletop-server-build-broken`, no longer in `TODO.md`. It was a git-worktree artifact,
+  no `node_modules` of its own, already documented in `owners/fleet-is-observable/README.md`
+  2026-08-09; `npm install` from the worktree root fixed it. Once that build issue was
+  eliminated, the *actual* miss was that `./verify.sh`'s own spec run closes each page too fast
+  for the batch exporter to flush before teardown — a genuine, still-open observation about
+  testing browser telemetry with Playwright, not about this ticket's code.)
 
 - **A zone at rest ports `.commander-placeholder`'s dashed pattern; armed is a glow ring plus a
   background tint, uniform across every zone type** — [Decide what a zone looks like, armed and

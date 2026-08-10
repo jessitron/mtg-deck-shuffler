@@ -70,7 +70,12 @@ with no `copiedFrom` attribute, same as any other newly-added shape.
       attribute only
 - [x] An undo-caused change surfaces as an ordinary vocabulary event (no distinct "this was an
       undo" marker)
-- [ ] **Not verified** — `apps/tabletop`'s server currently fails to build at all
-      (`tabletop-server-build-broken`, dropped in `TODO.md`, pre-existing and unrelated to this
-      ticket), which blocked `./verify.sh` and a live Honeycomb query. Re-run this check once
-      that build is fixed.
+- [x] Verified in Honeycomb (`local` environment, dataset `mtg-tabletop-web`): a manual
+      Playwright drive (tap, untap, drag), page held open past `BatchSpanProcessor`'s 5s export
+      delay, produced exactly one `card.tapped`, one `card.untapped`, and one `shape.moved`,
+      each carrying `actor: TLDRAW_INSTANCE_STATE_V1_...` and the right `card.instance_id`. (The
+      first attempt at this looked like a build failure and briefly got misdiagnosed as one — a
+      git-worktree-without-`node_modules` artifact, not a code bug; see map.md. `./verify.sh`'s
+      own spec run still shows nothing in Honeycomb, because it closes each page faster than the
+      batch exporter's flush interval — a real gap in that harness for asserting on browser
+      telemetry, tracked separately, not a defect in this ticket's code.)
