@@ -45,12 +45,6 @@ section is just a wall between Jess and the live work.
     box edge so the pile deepens in place instead of marching out.
     ← mountain: tabletop-replaces-mural
 
-- Remove the Tabletop's landing page; redirect straight to the Shuffler instead. (Supersedes
-  `design-text-link-specimen` — the nav-link idiom's Tabletop instance was
-  `LandingPage.tsx`'s `styles.shufflerLink`; removing the page removes that instance.
-  `site.css`'s `.right-nav a` instance remains, so the specimen may still be worth staging
-  later, but not as urgent as a two-instance idiom.)
-
 - [ ] `design-sleeve-specimen` Stage a sleeved-card mock specimen on `/design`
   - Surfaced 2026-08-08 by the `shuffler-looks-like-itself` review of table-layout ticket 17,
     which shipped sleeve rendering on the Tabletop canvas (card image centered in a
@@ -60,8 +54,8 @@ section is just a wall between Jess and the live work.
   - Shape: a mock in `apps/shuffler/public/design-candidates.css`, labelled a mock, staged on
     `.stage-white` (ticket 11's first draft wrongly used `.stage-dark`) — same convention as
     the zone mocks (`a304c52`).
-  - Related: `tabletop-landing-page-palette` below notes the gallery has no Tabletop stage at
-    all; this specimen is another instance of that gap.
+  - Related: the gallery still has no Tabletop stage at all; this specimen is one instance
+    of that gap.
     ← mountain: tabletop-replaces-mural
 
 - [ ] `life-counter-needs-own-name` table-layout ticket 12's life/commander-damage shape can't be called `mtg-counter` anymore
@@ -309,29 +303,6 @@ black`, radius computed as 5% of the shape's height).
     zoom modal is a plausible home for the flip affordance — so 06 may want to know this exists,
     even though 06 lands first and this doesn't block it.
     ← priority: later
-
-- [ ] `tabletop-landing-page-palette` Bring the Tabletop's landing page onto the fleet's identity
-  - `apps/tabletop/src/client/LandingPage.tsx` styles itself with an off-brand green/cream palette
-    in **inline styles** — `#1a2a1f` (dark green field), `#f5f1e8` (cream text), `#3d5a45` (mid
-    green) — while the fleet's identity is purple-and-pink. A live Layer-1 violation ("use
-    `var(--…)`, not a literal") sitting on the Tabletop's front door.
-  - **Surfaced by** the `tabletop-css-tokens` work (`4396aea` + two follow-ups), which created
-    `packages/design-tokens` (`@fleet/design-tokens`) — the fleet palette, `--narrow-border`, and
-    the mana colours, served by the Shuffler at `/fleet/tokens.css` and imported by the Tabletop
-    through Vite — and loaded Orbitron/Ovo on the Tabletop via a Google Fonts `<link>` in
-    `apps/tabletop/index.html`. The landing page was left **byte-for-byte unchanged** on purpose.
-    Landing the tokens makes fixing this _possible_; it is **not permission** to fix it.
-  - **Not a mechanical `var(--…)` swap.** This is the Tabletop's _only_ styled surface, so
-    restyling it is the Tabletop's design pass in miniature: what the Tabletop looks like when it
-    isn't tldraw. It's an **appearance decision and needs Jess's explicit sign-off** — the design
-    owner (`owners/shuffler-looks-like-itself/`) flagged it as the largest possible ride-along on
-    the token change, which is exactly why it didn't ride along.
-  - **Staging it on `/design` is blocked today**: the Shuffler's gallery has no Tabletop specimens
-    and no Tabletop stage, so there's nowhere to show Jess the options side by side. Same shape of
-    blocker as `design-playmat-specimen` above.
-  - **There is still no ship-local stylesheet on the Tabletop.** Shared tokens have a home now, but
-    the first Tabletop-_only_ CSS rule has nowhere to live — inline styles are the status quo by
-    default, not by choice. Whoever does this work decides that too.
 
 - [ ] `playmat-colours-fleet-or-shuffler` Do the playmat colours belong to the fleet, or to the Shuffler?
   - `--playmat-one` (`#f5dc8b`) and `--playmat-two` (`#4b7bba`) were **deliberately left** in

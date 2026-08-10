@@ -731,12 +731,19 @@ not by recomputing new numbers.**
   first Tabletop-only rule has nowhere to live, and inline styles are the status quo by inertia.
   See [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side" before writing any
   Tabletop CSS, and don't answer the question by starting a `:root` there. **The Tabletop's
-  first DOM (non-canvas) fleet-token consumer is the landing page's Shuffler link**
-  (`LandingPage.tsx` → `styles.shufflerLink`, 2026-08-09, `6b6b927`) — the nav-link idiom,
-  always-underlined because inline styles can't express `:hover` (the accepted degradation,
-  see [README.md](README.md)). It also means the landing page's Orbitron is no longer
-  lazily unfetched — a `document.fonts.check` there may now pass without an explicit
-  `load()`, the lazy-fetch trap in reverse.
+  first fleet-token consumer is `MtgZoneShapeUtil`'s zone labels** (ticket 13, 2026-08-08,
+  `f66b0a5`, ~08:00) — `fontFamily: "var(--font-chrome)"` on a plain div inside
+  `HTMLContainer`, resolving to Orbitron. `MtgCounterShapeUtil`'s counter disc (ticket 18,
+  the same day, ~20:00) followed a few hours later with the same pattern. Both are canvas
+  shapes, not stylesheet-context DOM — see [README.md](README.md) → "tldraw limits" for how
+  `HTMLContainer` lets `:root` custom properties reach them. **The Tabletop briefly also had
+  a non-canvas DOM consumer** — the landing page's Shuffler link (`LandingPage.tsx` →
+  `styles.shufflerLink`, 2026-08-09, `6b6b927`), the nav-link idiom, always-underlined
+  because inline styles can't express `:hover` (the accepted degradation, see
+  [README.md](README.md)) — but the landing page was deleted 2026-08-10 (`/` on the
+  Tabletop now redirects server-side to the Shuffler), so that instance no longer exists;
+  `MtgZoneShapeUtil` is the earliest surviving one. See [history.md](history.md) for both
+  events.
 - **Deciding a canvas treatment is not blocked by that plumbing; implementing it is.** Staging
   happens on `/design` in the Shuffler, which already has the tokens and the fonts. Stage first.
 
