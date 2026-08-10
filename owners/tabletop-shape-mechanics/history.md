@@ -741,6 +741,27 @@ Full detail in `files.md`'s new `helpers.ts` entry. No `architecture.md`/`intera
 change — no ShapeUtil, hook, or shape type moved; this only reshuffled how existing test
 behavior is expressed.
 
+## Land placement gets an inset too: `LAND_INSET` (2026-08-10)
+
+**Pure placement/geometry — no ShapeUtil hooks, no zone detection, no `zoneHitTest.ts` change.**
+`cardLayout.ts`'s `landPosition()` now adds `LAND_INSET = 10` to both `x` and `y`, so the first
+land on a playmat's bottom half arrives 10 units in from the mat's left edge and the bottom-half
+boundary instead of flush against them — same convention as `GRAVEYARD_PILE_INSET` (10), added
+earlier for the graveyard cascade (see the "Graveyard cascade wrap-bound" entry above). New unit
+test in `test/cardLayout.test.ts` asserts `first.x > mat.x` and `first.y > mat.y + mat.h/2`.
+Confirmed via this owner's `-context` beforehand: doesn't affect zone detection (center-based,
+reads current rendered bounds, not mint-time coordinates) or any ShapeUtil hook (mint-time
+placement is out of this owner's territory — see "Not Related To" below).
+
+Worth carrying forward if a third zone ever gets its own placement inset: this KB now has two
+independent precedents (`GRAVEYARD_PILE_INSET`, `LAND_INSET`) for the same "don't place the first
+card flush against a zone's edge" convention, both living in `cardLayout.ts`, both purely
+cosmetic/placement, neither touching this owner's mechanics.
+
+No `architecture.md`/`interactions.md`/`files.md` change — no hook, shape type, or file was added,
+renamed, or removed, and no new watch point: this is placement territory confirming an existing
+convention, not a mechanics change.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,
