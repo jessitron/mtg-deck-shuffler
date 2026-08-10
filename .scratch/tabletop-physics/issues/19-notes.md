@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: done
 
 **What to build:** Notes stay tldraw's stock `note` shape type — never folded into
 `mtg-counter` — but the card's drag-attach accept-list (ticket 18's
@@ -18,8 +18,8 @@ beyond the accept-list and stays in the toolbar.
 
 **Blocked by:** 18
 
-- [ ] Dragging a stock note onto a card attaches it (same hover-highlight behavior as a counter)
-- [ ] Dragging a note off a card detaches it
-- [ ] A host card leaving the battlefield detaches every attached note the same way it detaches
+- [x] Dragging a stock note onto a card attaches it (same hover-highlight behavior as a counter)
+- [x] Dragging a note off a card detaches it
+- [x] A host card leaving the battlefield detaches every attached note the same way it detaches
       counters
-- [ ] An unattached note is unaffected when a nearby card moves or changes zone
+- [x] An unattached note is unaffected when a nearby card moves or changes zone

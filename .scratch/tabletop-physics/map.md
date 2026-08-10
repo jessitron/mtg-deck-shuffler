@@ -198,6 +198,29 @@ expensive way round.
   case on the attached path. Free-floating and attached are the same shape, not two variants —
   "attached" is purely "currently has a parent"; the stock note tool needs no change beyond that
   and stays in the toolbar (map 4's call, not touched here).
+- **Built** — [ticket 19](issues/19-notes.md), implemented 2026-08-10. `MtgCardShapeUtil`'s
+  passenger accept-list generalized from a bare `"mtg-counter"` check to a
+  `PASSENGER_TYPES = new Set(["mtg-counter", "note"])`, covering
+  `canReceiveNewChildrenOfType`/`canRemoveChildrenOfType` and the ticket-18 battlefield-exit
+  eviction (renamed `evictCounters` → `evictPassengers`). The attach-time rotation-zeroing math
+  and the eviction's open-spot `spotSize` switched from reading `props.w/h` (a counter-only prop)
+  to `editor.getShapeGeometry(shape).bounds`, which works for any shape regardless of its
+  `ShapeUtil` base class — load-bearing, since a stock note has no `w`/`h` prop at all (its size
+  comes from a style enum plus `growY`).
+  **The `tabletop-shape-mechanics` owner caught a real hazard in review**: extending the
+  accept-list to a STOCK shape reopens the ticket 16/18 drag-identity bug, because `mtg-counter`
+  dodges it with its own `onTranslateEnd` clearing selection on drag-settle, and a stock note has
+  no hook of its own to do the same. Fixed by subclassing — `SelectionClearingNoteShapeUtil`
+  (`apps/tabletop/src/client/shapes/SelectionClearingNoteShapeUtil.ts`) extends tldraw's
+  `NoteShapeUtil`, overriding only `onTranslateEnd` to clear selection, registered **in place of**
+  (not alongside) the stock util in `TablePage.tsx`'s `shapeUtils` array — `useSync`'s schema
+  builder throws on a duplicate shape `type` where `<Tldraw>`'s own merge is lenient, so
+  `defaultShapeUtils` has to be filtered before the subclass goes in. A dedicated Playwright
+  regression test (`verify-note.spec.ts`, "stale-selection regression") proves the product clears
+  selection on its own — deliberately no test-side cleanup — confirmed red without the subclass,
+  green with it. This is now the owner's recorded precedent for integrating any future stock
+  tldraw shape into a hook this app depends on: subclass and swap, don't reach for
+  `node_modules`.
 
 - **A shape's vocabulary is generous by default, announcement is centralized, and identity stays
   narrow** — [Decide what a shape knows and announces, without wiring it anywhere](issues/10-what-a-shape-knows.md),

@@ -2,7 +2,6 @@ import { useLayoutEffect, useRef } from "react";
 import { BaseBoxShapeUtil, HTMLContainer, TLDragShapesOutInfo, TLShape, TLShapePartial, Vec } from "tldraw";
 import type { CSSProperties } from "react";
 import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
-import { MtgCounterShape } from "../../shared/mtgCounterShape";
 import { findOpenSpotsNearZoneEdge, Rect } from "./openSpotNearZoneEdge";
 import { topmostZoneAt, ZoneHit } from "./zoneHitTest";
 import { tapPartial } from "./cardTap";
@@ -16,6 +15,12 @@ import { tapPartial } from "./cardTap";
 // The detach set is exactly the ticket's list minus "hand", which doesn't
 // exist as a zone here yet.
 const NON_BATTLEFIELD_ZONES = new Set(["graveyard", "exile", "library"]);
+
+// Ticket 19: notes ride along exactly like counters — same accept-list, same
+// battlefield-exit eviction. "Passenger" is anything a card hosts by
+// parenting; not the card's own props, per ticket 02's "the card carries
+// nothing about its passengers."
+const PASSENGER_TYPES = new Set(["mtg-counter", "note"]);
 
 /**
  * JES-144, tabletop-physics ticket 12: `mtg-card`, a genuine custom shape
@@ -214,11 +219,11 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   // gate (default: true for ALL types), dragging card A across card B would
   // fire B.onDragShapesOut(B, [cardA]).
   override canReceiveNewChildrenOfType(shape: MtgCardShape, type: TLShape["type"]): boolean {
-    return !shape.isLocked && type === "mtg-counter";
+    return !shape.isLocked && PASSENGER_TYPES.has(type);
   }
 
   override canRemoveChildrenOfType(_shape: MtgCardShape, type: TLShape["type"]): boolean {
-    return type === "mtg-counter";
+    return PASSENGER_TYPES.has(type);
   }
 
   // Live reparent during the drag (the frame pattern) — DragAndDropManager
@@ -228,19 +233,22 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     if (shapes.some((s) => this.editor.hasAncestor(card, s.id))) return;
     this.editor.reparentShapes(shapes, card.id);
 
-    // reparentShapes preserves page rotation, so a counter dropped on an
+    // reparentShapes preserves page rotation, so a passenger dropped on an
     // already-tapped card would keep a compensating local rotation forever —
-    // visibly tilted after the card untaps. Counters are card-aligned: zero
-    // the local rotation, holding the counter's center fixed (rotation pivots
-    // around the top-left corner; zeroing it alone would swing a disc ~40%
-    // of its size sideways — same math as onClick's tap pivot).
+    // visibly tilted after the card untaps. Passengers are card-aligned: zero
+    // the local rotation, holding the passenger's center fixed (rotation
+    // pivots around the top-left corner; zeroing it alone would swing it
+    // sideways — same math as onClick's tap pivot). Geometry bounds, not
+    // `props.w/h`: a note has no w/h prop (its size comes from a style enum
+    // plus `growY`), but every shape's geometry does.
     for (const dropped of shapes) {
-      const fresh = this.editor.getShape<MtgCounterShape>(dropped.id);
+      const fresh = this.editor.getShape(dropped.id);
       if (!fresh || fresh.rotation === 0) continue;
-      const halfExtent = { x: fresh.props.w / 2, y: fresh.props.h / 2 };
+      const { w, h } = this.editor.getShapeGeometry(fresh).bounds;
+      const halfExtent = { x: w / 2, y: h / 2 };
       const center = Vec.Add(fresh, Vec.Rot(halfExtent, fresh.rotation));
       const topLeft = Vec.Sub(center, halfExtent);
-      this.editor.updateShape<MtgCounterShape>({
+      this.editor.updateShape({
         id: fresh.id,
         type: fresh.type,
         x: topLeft.x,
@@ -308,13 +316,14 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       // a real consumer is later tickets' job (tabletop-survives-restart).
       console.log(`zone-entry ${current.props.instanceId} ${zoneHit.zone}`);
 
-      // Ticket 18: the card just left the battlefield — its counters don't
-      // follow it into the graveyard/exile/library. They detach and
-      // scoot to an open spot near the zone's edge, staying on the table.
-      // This has to be driven from here: a parented shape's own
-      // onTranslateEnd never fires when only its parent moves.
+      // Ticket 18 (counters), extended by ticket 19 (notes): the card just
+      // left the battlefield — its passengers don't follow it into the
+      // graveyard/exile/library. They detach and scoot to an open spot near
+      // the zone's edge, staying on the table. This has to be driven from
+      // here: a parented shape's own onTranslateEnd never fires when only
+      // its parent moves.
       if (NON_BATTLEFIELD_ZONES.has(zoneHit.zone)) {
-        this.evictCounters(current, zoneHit);
+        this.evictPassengers(current, zoneHit);
       }
     }
 
@@ -348,44 +357,49 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     return bounds ? topmostZoneAt(this.editor, bounds.center) : undefined;
   }
 
-  // Ticket 18: detach every counter riding this card and land each at an
-  // open spot near the destination zone's edge — outside the zone, on the
-  // table. "Occupied" considers only the small movable stuff (cards and
-  // counters); furniture is fair ground to sit on, same as real cardboard.
-  private evictCounters(card: MtgCardShape, zoneHit: ZoneHit): void {
-    const counters = this.editor
+  // Ticket 18 (counters), extended by ticket 19 (notes): detach every
+  // passenger riding this card and land each at an open spot near the
+  // destination zone's edge — outside the zone, on the table. "Occupied"
+  // considers only the small movable stuff (cards and passengers); furniture
+  // is fair ground to sit on, same as real cardboard.
+  private evictPassengers(card: MtgCardShape, zoneHit: ZoneHit): void {
+    const passengers = this.editor
       .getSortedChildIdsForParent(card.id)
-      .map((id) => this.editor.getShape<MtgCounterShape>(id))
-      .filter((s): s is MtgCounterShape => s?.type === "mtg-counter");
-    if (counters.length === 0) return;
+      .map((id) => this.editor.getShape(id))
+      .filter((s): s is TLShape => !!s && PASSENGER_TYPES.has(s.type));
+    if (passengers.length === 0) return;
 
     const zoneBounds = this.editor.getShapePageBounds(zoneHit.id);
     const cardBounds = this.editor.getShapePageBounds(card);
     if (!zoneBounds || !cardBounds) return;
 
-    const counterIds = new Set(counters.map((c) => c.id));
+    const passengerIds = new Set(passengers.map((p) => p.id));
     const occupied: Rect[] = [];
     for (const shape of this.editor.getCurrentPageShapes()) {
-      if (shape.type !== "mtg-card" && shape.type !== "mtg-counter") continue;
-      if (counterIds.has(shape.id as MtgCounterShape["id"])) continue;
+      if (shape.type !== "mtg-card" && !PASSENGER_TYPES.has(shape.type)) continue;
+      if (passengerIds.has(shape.id)) continue;
       const bounds = this.editor.getShapePageBounds(shape);
       if (bounds) occupied.push({ x: bounds.x, y: bounds.y, w: bounds.w, h: bounds.h });
     }
 
+    // A note's own geometry (its size style + growY) stands in for a
+    // counter's fixed props.w — spotSize just needs a plausible passenger
+    // footprint to avoid collisions, not a per-passenger exact fit.
+    const spotSize = this.editor.getShapeGeometry(passengers[0]).bounds.w;
     const spots = findOpenSpotsNearZoneEdge({
       zone: { x: zoneBounds.x, y: zoneBounds.y, w: zoneBounds.w, h: zoneBounds.h },
       entry: { x: cardBounds.center.x, y: cardBounds.center.y },
-      spotSize: counters[0].props.w,
+      spotSize,
       occupied,
-      count: counters.length,
+      count: passengers.length,
     });
 
     this.editor.reparentShapes(
-      counters.map((c) => c.id),
+      passengers.map((p) => p.id),
       this.editor.getCurrentPageId(),
     );
     this.editor.animateShapes(
-      counters.map((c, i) => ({ id: c.id, type: c.type, x: spots[i].x, y: spots[i].y, rotation: 0 })),
+      passengers.map((p, i) => ({ id: p.id, type: p.type, x: spots[i].x, y: spots[i].y, rotation: 0 })),
       { animation: { duration: 200 } },
     );
   }
