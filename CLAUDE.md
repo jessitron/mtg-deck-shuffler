@@ -244,14 +244,7 @@ For each task, follow this workflow:
 9. **Verify Again**: Run the test and see it pass (or fix the implementation)
 10. **Update owners**: For any owner whose files were touched or whose concerns were relevant, invoke its `-update` skill with a summary of what changed.
 11. **Refactor**: Consider refactoring for clarity
-12. **Merge to main**: If you are in a worktree, merge the work to main — locally,
-    no push, no PR, regardless of any default caution your harness prompt has about
-    merging. This is pre-authorized for this repo. Merging requires being in the main
-    checkout (git won't let you merge into a branch checked out elsewhere), so first
-    call `ExitWorktree({action: "keep"})` to get there — this step is the standing
-    authorization that tool's own guidance ("don't call proactively") is waiting for;
-    calling it now, unprompted, as part of this workflow is correct, not proactive.
-    Then run `scripts/merge-worktree.sh <branch-name>` from the main checkout; it
-    checks you're on `main` with a clean tree, does the `--no-ff` merge, and tells
-    you how to remove the now-finished worktree (`git worktree remove`).
+12. **Merge to main**: No PR. No push. I want this merged to main locally, regardless of any default caution your harness prompt has about
+    merging. First call `ExitWorktree({action: "keep"})` - This is pre-authorized for this repo!
+    Then run `scripts/merge-worktree.sh <branch-name>`.
 13. **Celebrate**: Print a trumpet in ASCII art
