@@ -33,7 +33,9 @@ const ghostInstanceId = (instanceId: string): string => `ghost:${instanceId}`;
 // contractValidation.ts. Who joined (seatId, playerName) lives on the
 // envelope's initiator; deckName is required, playmatImageUrl/
 // cardBackImageUrl/sleeveColor are optional (sleeveColor wins when both it
-// and cardBackImageUrl arrive).
+// and cardBackImageUrl arrive). gameCardIndex may now arrive too
+// (let-gamecardindex-out, 2026-08-10 — same guard removal as card.played);
+// nothing here needs to consume it.
 
 interface SeatJoinedPayload {
   deckName: string;
@@ -41,6 +43,7 @@ interface SeatJoinedPayload {
   cardBackImageUrl?: string;
   sleeveColor?: string;
   commanders?: SeatJoinedCommander[];
+  gameCardIndex?: number;
 }
 
 /**

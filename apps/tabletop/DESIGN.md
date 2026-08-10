@@ -240,8 +240,9 @@ POST /api/tables/:tableName/events
 ```
 
 Dedup on `seatId` already seated, the same way card arrival dedups on `instanceId`:
-a second `seat.joined` for a seat is a physical no-op. `gameCardIndex` stays
-forbidden here as everywhere past the Shuffler's boundary.
+a second `seat.joined` for a seat is a physical no-op. `gameCardIndex` is no longer
+forbidden past the Shuffler's boundary (`let-gamecardindex-out`, 2026-08-10) — same
+guard removal as card.played.
 
 The playmat image is the Shuffler's to choose (eventually in prep; there's one
 hard-coded playmat today) and must ride along on that message. Same channel later

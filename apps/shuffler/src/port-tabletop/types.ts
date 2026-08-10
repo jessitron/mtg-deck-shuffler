@@ -43,13 +43,19 @@ import { currentTraceparent } from "./traceparent.js";
 //       frontImageUrl: string,  // blessed scaffolding convenience (render without a Scryfall lookup)
 //       backImageUrl: string | null,  // present whenever card.twoFaced — NOT derived from backImageUris presence
 //       cardName: string,     // blessed scaffolding convenience
+//       gameCardIndex: number, // the card's rank in the initial decklist array — see below
 //     },
 //   }
 //
-// FORBIDDEN: `gameCardIndex` must NEVER cross the Shuffler's boundary. It is
-// the card's alphabetical rank in a known decklist — a decodable secret.
-// The contract gets the opaque `card.instanceId` instead.
-// A unit test (test/port-tabletop/) asserts no payload ever carries an index.
+// `gameCardIndex` crosses the Shuffler's boundary freely now
+// (let-gamecardindex-out, 2026-08-10, reversing the earlier "FORBIDDEN" call
+// recorded at JES-128). It's the card's alphabetical rank in the initial
+// decklist array — NOT library order, which is shuffled — so decoding it only
+// tells you which card in the decklist this is, and decklists are public on
+// Archidekt anyway. The old guard traded no real secrecy for making every
+// agent and every future payload reason about what may cross which boundary;
+// on a trust-based table that reasoning cost wasn't worth paying. Nothing on
+// the Tabletop side is required to consume this field.
 // ============================================================================
 
 export const CARD_PLAYED_EVENT_NAME = "card.played" as const;
@@ -86,6 +92,7 @@ export interface CardPlayedPayload {
   cardName: string;
   owner: string;
   isCommander: boolean;
+  gameCardIndex: number;
 }
 
 export type CardPlayedEvent = EventEnvelope<CardPlayedPayload>;
@@ -129,6 +136,7 @@ export function buildCardPlayedEvent(
       cardName: gameCard.card.name,
       owner: initiator.seatId,
       isCommander: gameCard.isCommander,
+      gameCardIndex: gameCard.gameCardIndex,
     },
   };
 }
@@ -159,8 +167,11 @@ export function buildCardPlayedEvent(
 //
 // Contract proper: contracts/payloads/seat.joined.v1.json.
 //
-// FORBIDDEN: `gameCardIndex` must NEVER cross the Shuffler's boundary (same
-// rule as card.played).
+// `gameCardIndex` is no longer specially forbidden here either
+// (let-gamecardindex-out, 2026-08-10 — same reversal as card.played). This
+// payload doesn't build one today, since seat.joined describes a seat, not
+// a single card, but the contract's `additionalProperties: false` no longer
+// singles the field out for rejection if a future caller adds one.
 // ============================================================================
 
 /**

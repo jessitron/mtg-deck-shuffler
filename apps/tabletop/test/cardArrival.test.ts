@@ -227,10 +227,12 @@ describe("card arrival", () => {
     expect(response.status).toBe(400);
   });
 
-  it("rejects a payload carrying a gameCardIndex — the secret must not cross", async () => {
-    const event = cardPlayed("arrival-secret");
-    const response = await post("arrival-secret", { ...event, payload: { ...event.payload, gameCardIndex: 7 } });
-    expect(response.status).toBe(400);
+  it("accepts a payload carrying a gameCardIndex — no longer a guarded secret (let-gamecardindex-out, 2026-08-10)", async () => {
+    const event = cardPlayed("arrival-index");
+    const response = await post("arrival-index", { ...event, payload: { ...event.payload, gameCardIndex: 7 } });
+    expect(response.status).toBe(201);
+    const [card] = shapesOf("arrival-index");
+    expect(card).toBeDefined();
   });
 
   it("rejects an unknown event name — fail loudly, never silently drop", async () => {

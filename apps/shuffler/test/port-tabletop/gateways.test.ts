@@ -50,17 +50,12 @@ describe("FakeTabletopGateway", () => {
     expect(fake.sentEvents).toHaveLength(0);
   });
 
-  it("NEVER receives a gameCardIndex (F0, JES-128): an index is a decodable secret", async () => {
+  it("now receives gameCardIndex (let-gamecardindex-out, 2026-08-10): the old F0/JES-128 guard traded no real secrecy for a reasoning cost nobody's threat model needed", async () => {
     const fake = new FakeTabletopGateway();
     await fake.sendCardToTable("Friday Night", anEvent());
 
-    const serialized = JSON.stringify(fake.sentEvents);
-    expect(serialized).not.toContain("gameCardIndex");
-    expect(serialized).not.toContain("Index");
-    // Check the actual index value (42), not a substring match on the serialized JSON:
-    // the event also carries a random UUID and timestamp, either of which occasionally
-    // contains "42" by coincidence and would fail this test for the wrong reason.
-    expect(containsValue(fake.sentEvents, 42)).toBe(false);
+    expect(fake.sentEvents[0].event.payload.gameCardIndex).toBe(42);
+    expect(containsValue(fake.sentEvents, 42)).toBe(true);
   });
 });
 

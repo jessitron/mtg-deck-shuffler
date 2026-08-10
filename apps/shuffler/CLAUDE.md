@@ -244,8 +244,12 @@ version bumps). `/restart-game` carries them forward.
   the Tabletop hotlink the standard card-back image as an absolute URL; default
   `https://mtg.jessitron.honeydemo.io`).
 - **Identity**: each GameCard gets a `cardInstanceId` GUID (minted in `newGame`,
-  mint-on-load for old saves). `gameCardIndex` NEVER crosses the Shuffler's boundary
-  (decodable secret — see `src/port-tabletop/types.ts`, JES-128).
+  mint-on-load for old saves). `gameCardIndex` crosses the Shuffler's boundary freely
+  now — `card.played` sends it (`buildCardPlayedEvent`, `src/port-tabletop/types.ts`).
+  The old "never crosses" guard (JES-128) was reversed at `let-gamecardindex-out`
+  (2026-08-10): the index only decodes to a card's rank in the public decklist, so
+  the guard traded no real secrecy for a reasoning cost — every agent and payload
+  having to know what may cross which boundary — that a trust-based table doesn't need.
 - **Two-app verification**: `test/verification/verify-tabletop-integration.spec.ts`
   spawns the tabletop from `apps/tabletop/dist` (build it first) on port 5180.
 

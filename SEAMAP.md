@@ -32,7 +32,12 @@ Mural, not a rewrite.
 4. **Someday: it asks to play.**
 
 Spectator mode is a constraint on every mountain, not a mountain: anyone can join a
-table to look — public events, commentary, hand counts but never hands.
+table to look — public events, commentary, hand counts but never hands. That promise is
+about what the app *volunteers* on public/shadow events — a shadow event simply
+shouldn't carry a card identity in its payload design — not about policing every
+boundary a payload crosses. Removing a boundary check (e.g. `let-gamecardindex-out`)
+doesn't touch it; the promise's owner is whoever designs the public/shadow payload
+shapes, not a guard standing at the door.
 
 ## Safe Harbor
 
