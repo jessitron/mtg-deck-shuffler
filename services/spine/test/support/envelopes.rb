@@ -23,7 +23,9 @@ module Envelopes
         },
         "face" => "front",
         "seat" => 2,
-        "zoneHint" => "stack"
+        "zoneHint" => "stack",
+        "owner" => SecureRandom.uuid,
+        "isCommander" => false
       }
     }.merge(overrides)
   end

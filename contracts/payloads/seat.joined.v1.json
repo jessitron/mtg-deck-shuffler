@@ -34,6 +34,36 @@
       "type": "string",
       "pattern": "^#[0-9a-fA-F]{6}$",
       "description": "The seat's sleeve as a solid color (hex). Player identity data — commander-damage counters need the raw hex. A game constant: chosen before the game, never changed mid-game."
+    },
+    "commanders": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 2,
+      "description": "0-2 commanders, ordinary GameCards in the CommandZone location. No face — a commander always arrives in the command zone face up; flipping it there afterward is table-local.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "card": {
+            "type": "object",
+            "properties": {
+              "scryfallId": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Definition: the exact printing — oracle identity, all faces, all names, all images derivable."
+              },
+              "instanceId": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Instance: this particular physical-ish card, minted per game at game start."
+              }
+            },
+            "required": ["scryfallId", "instanceId"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["card"],
+        "additionalProperties": false
+      }
     }
   },
   "required": ["seatId", "playerName", "deckName"],

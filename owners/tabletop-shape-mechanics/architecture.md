@@ -676,6 +676,48 @@ cards, locked furniture, *and* stray dropped JPEGs, none of which shared meaning
   asset mutation, no re-fetch; both faces' URLs travel with the card from arrival). This affects
   card-rendering territory (`two-faced-cards`), not this owner's selection mechanics.
 
+## Table-layout ticket 18: commander arrives with owner and ghost — second mint seam, shared builder, decoy pattern
+
+`.scratch/tabletop-physics/issues/18-commander-arrives-with-owner-and-ghost.md` (landed
+2026-08-09). Three changes, only the second and third of which are this owner's territory (the
+first — `owner`/`isCommander` becoming validated `MtgCardShapeProps` fields — is a fact the shape
+carries, not a mechanic; it grants no capability and adds no hook):
+
+- **A second mint seam.** `apps/tabletop/src/server/seatJoined.ts` now mints `mtg-card` shapes
+  directly, via `entry.room.updateStore`, the same inline-`store.put` style `cardArrival.ts` uses
+  — one seat.joined event carrying 0-2 commanders mints each commander plus its ghost (below).
+  Identity minting was previously a one-seam fact this KB stated flatly ("minted once ... never
+  elsewhere"); it's now two known seams, never a third. See "The `mtgCardShape()` builder" and
+  watch point 15.
+- **The `mtgCardShape()` builder** (`apps/tabletop/src/server/tableFurniture.ts`, next to the
+  existing `zoneShape()` helper): both mint seams now call this instead of writing their own
+  `store.put({...} as any)` literal. It's the single place every required `mtg-card` prop is
+  listed — `MtgCardShapeArgs` mirrors `MtgCardShapeProps` — so a future required prop is added
+  once, here, rather than drifting across two hand-written literals. See watch point 15.
+- **The ghost mechanism** — a decoy shape sharing a type with the real thing, this KB's first
+  example of that pattern. `seatJoined.ts` mints each commander as *two* `mtg-card` shapes at the
+  identical Command Zone position: the real, draggable card (`isLocked: false`, default opacity),
+  and a locked, faded ghost (`instanceId: `ghost:${instanceId}`\`, `isLocked: true`, `opacity:
+  0.3`) that stays behind when the real card is dragged away, marking the spot as "this is where
+  your commander lives." The ghost is minted via `nextIndex()` *before* the real card in the same
+  `updateStore` call, so its `IndexKey` sorts lower and the real card paints on top — same
+  topmost-wins z-order mechanism `topmostZoneAt()` uses for overlapping zones (watch point 8),
+  applied here to two cards instead of two zones. The `ghost:` prefix keeps its `instanceId` a
+  distinct string from the real card's, confirmed safe against `cardArrival.ts`'s
+  `instanceAlreadyOnTable` dedup (exact-string match on `props.instanceId`). `isLocked: true` alone
+  is sufficient to make the ghost fully inert to clicks, drags, selection, and counter-hosting —
+  no new guard needed — because watch point 7's already-established chain (`SelectTool`'s `Idle`
+  gates `isLocked` before `PointingShape`; `Editor.getDraggingOverShape` filters `!isLocked`)
+  applies to *any* locked `mtg-card` exactly as it does to `mtg-zone`. `apps/tabletop/
+  test/seatJoined.test.ts`'s "seat joined — commanders" describe block asserts the ghost's
+  `isLocked`/`opacity`/index-ordering/distinct-instanceId facts at the data level; it does not
+  drive a live pointer at the ghost, so the click-transparency claim rests on watch point 7's
+  tldraw-source reading, not a fresh Playwright probe. See watch point 16 for the pattern written
+  up generally.
+
+Full detail in `interactions.md` (Shape identity section rewritten, new watch points 15-16) and
+`history.md`.
+
 ## How to tell this owner's territory from `two-faced-cards`'s
 
 If the question is "why does clicking/dragging/tapping do the wrong thing, or hit the wrong

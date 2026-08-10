@@ -82,6 +82,94 @@ export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, 
   } as any;
 }
 
+export interface MtgCardShapeArgs {
+  id: TLShapeId;
+  pageId: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  index: IndexKey;
+  instanceId: string;
+  scryfallId: string;
+  cardName: string;
+  frontImageUrl: string;
+  backImageUrl: string | null;
+  face: "front" | "back";
+  faceDown: boolean;
+  sleeveColor: string | null;
+  /** The table's generic Magic card back (tabletop-physics ticket 17) — used only when unsleeved and faceDown. */
+  cardBackImageUrl: string | null;
+  owner: string;
+  isCommander: boolean;
+  /** Furniture-style lock (ghost copies); ordinary cards are draggable. */
+  isLocked?: boolean;
+  opacity?: number;
+}
+
+/**
+ * An `mtg-card` shape record — the one place every required `mtg-card` prop
+ * is listed, shared by every seam that mints a card server-side
+ * (cardArrival.ts's ordinary arrivals, seatJoined.ts's commanders and their
+ * ghosts — table-layout ticket 18). A required prop added here can't drift
+ * out of sync between mint sites.
+ */
+export function mtgCardShape({
+  id,
+  pageId,
+  x,
+  y,
+  w,
+  h,
+  index,
+  instanceId,
+  scryfallId,
+  cardName,
+  frontImageUrl,
+  backImageUrl,
+  face,
+  faceDown,
+  sleeveColor,
+  cardBackImageUrl,
+  owner,
+  isCommander,
+  isLocked = false,
+  opacity = 1,
+}: MtgCardShapeArgs) {
+  return {
+    id,
+    typeName: "shape",
+    type: "mtg-card",
+    x,
+    y,
+    rotation: 0,
+    index,
+    parentId: pageId,
+    isLocked,
+    opacity,
+    props: {
+      w,
+      h,
+      instanceId,
+      scryfallId,
+      cardName,
+      frontImageUrl,
+      backImageUrl,
+      face,
+      faceDown,
+      tapped: false,
+      sleeveColor,
+      cardBackImageUrl,
+      owner,
+      isCommander,
+    },
+    // No traceparent in meta — cards persist; traces don't. Zone membership
+    // lands here once a card is dragged (MtgCardShapeUtil.onTranslateEnd) —
+    // empty at mint time.
+    meta: {},
+  } as any;
+}
+
 function imageShape(
   id: TLShapeId,
   pageId: string,

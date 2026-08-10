@@ -1,9 +1,21 @@
 import { Request, Response } from "express";
 import { trace } from "@opentelemetry/api";
+import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
-import { ensurePlayerArea, pageIdOf } from "./tableFurniture.js";
-import { MAX_SEATS } from "./cardLayout.js";
+import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
+import { MAX_SEATS, CARD_W, CARD_H, commandZoneCardPosition } from "./cardLayout.js";
+
+/** A commander riding seat.joined (ticket 18) — always face up, no `face` field on the wire. */
+interface SeatJoinedCommander {
+  card: { scryfallId: string; instanceId: string };
+  cardName: string;
+  frontImageUrl: string;
+  backImageUrl: string | null;
+}
+
+/** A ghost's identity never collides with a real instanceId — instanceAlreadyOnTable (cardArrival.ts) matches exact strings. */
+const ghostInstanceId = (instanceId: string): string => `ghost:${instanceId}`;
 
 // ============================================================================
 // SCAFFOLDING — the seam the Spine absorbs (same posture as cardArrival.ts).
@@ -26,6 +38,7 @@ interface SeatJoined {
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
   sleeveColor?: string;
+  commanders?: SeatJoinedCommander[];
 }
 
 // Same pattern as the contract schema — a sleeve is exactly six hex digits.
@@ -43,6 +56,16 @@ function validationError(body: unknown): string | null {
   if (b.cardBackImageUrl !== undefined && typeof b.cardBackImageUrl !== "string") return "cardBackImageUrl, if present, must be a string";
   if (b.sleeveColor !== undefined && !(typeof b.sleeveColor === "string" && SLEEVE_COLOR_PATTERN.test(b.sleeveColor)))
     return "sleeveColor, if present, must be a #rrggbb hex color";
+  if (b.commanders !== undefined) {
+    if (!Array.isArray(b.commanders) || b.commanders.length > 2) return "commanders, if present, must be an array of 0-2 entries";
+    for (const commander of b.commanders) {
+      if (typeof commander?.card?.scryfallId !== "string" || !commander.card.scryfallId) return "commanders[].card.scryfallId (string) is required";
+      if (typeof commander?.card?.instanceId !== "string" || !commander.card.instanceId) return "commanders[].card.instanceId (string) is required";
+      if (typeof commander?.cardName !== "string" || !commander.cardName) return "commanders[].cardName (string) is required";
+      if (typeof commander?.frontImageUrl !== "string" || !commander.frontImageUrl) return "commanders[].frontImageUrl (string) is required";
+      if (commander?.backImageUrl !== null && typeof commander?.backImageUrl !== "string") return "commanders[].backImageUrl (string or null) is required";
+    }
+  }
   // Same defense in depth as card.played: no decodable secret crosses this boundary.
   if ("gameCardIndex" in b) return "gameCardIndex is forbidden beyond the Shuffler's boundary";
   return null;
@@ -97,12 +120,60 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
   }
 
   const pageId = pageIdOf(entry);
-  await ensurePlayerArea(entry, pageId, joined.initiator.seatId, joined.initiator.playerName, {
+  const playerArea = await ensurePlayerArea(entry, pageId, joined.initiator.seatId, joined.initiator.playerName, {
     deckName: joined.deckName,
     playmatImageUrl: joined.playmatImageUrl,
     cardBackImageUrl: joined.cardBackImageUrl,
     sleeveColor: joined.sleeveColor,
   });
+
+  const commanders = joined.commanders ?? [];
+  if (commanders.length > 0) {
+    await entry.room.updateStore((store) => {
+      commanders.forEach((commander, slot) => {
+        const { instanceId } = commander.card;
+        const position = commandZoneCardPosition(playerArea.seatIndex, slot, commanders.length as 1 | 2);
+        const sharedFields = {
+          pageId,
+          x: position.x,
+          y: position.y,
+          w: CARD_W,
+          h: CARD_H,
+          scryfallId: commander.card.scryfallId,
+          cardName: commander.cardName,
+          frontImageUrl: commander.frontImageUrl,
+          backImageUrl: commander.backImageUrl,
+          face: "front" as const,
+          faceDown: false,
+          sleeveColor: playerArea.sleeveColor ?? null,
+          cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
+          owner: joined.initiator.seatId,
+          isCommander: true,
+        };
+
+        // Ghost minted first, so its z-index is strictly lower and the real
+        // card paints on top (both share the same table spot).
+        store.put(
+          mtgCardShape({
+            id: createShapeId(`ghost-${instanceId}`),
+            index: nextIndex(tableName),
+            instanceId: ghostInstanceId(instanceId),
+            isLocked: true,
+            opacity: 0.3,
+            ...sharedFields,
+          })
+        );
+        store.put(
+          mtgCardShape({
+            id: createShapeId(`card-${instanceId}`),
+            index: nextIndex(tableName),
+            instanceId,
+            ...sharedFields,
+          })
+        );
+      });
+    });
+  }
 
   entry.seenEventIds.add(joined.id);
   res.status(201).json({ ok: true });

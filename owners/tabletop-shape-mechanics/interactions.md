@@ -31,8 +31,11 @@
   assertions fail if a tldraw upgrade reorders it. See watch point 14.
 
 ### Shape identity (`props.instanceId`)
-- Minted once in `apps/tabletop/src/server/cardArrival.ts` at shape creation, never elsewhere, now
-  directly in the shape's validated `props` (moved out of `meta` by ticket 12, 2026-08-08).
+- Minted at `apps/tabletop/src/server/cardArrival.ts` on arrival, or `seatJoined.ts` at seating for
+  commanders — never a third site (table-layout ticket 18, "commander arrives with owner and
+  ghost," 2026-08-09, added the second seam; both mint directly into the shape's validated `props`,
+  moved out of `meta` by ticket 12, 2026-08-08). Both seams call the same `mtgCardShape()` builder
+  in `tableFurniture.ts` rather than writing their own `store.put` literal — see watch point 15.
 - No hook needs a defensive identity guard anymore: `mtg-card` is its own exclusive tldraw shape
   type (registered via the `TLGlobalShapePropsMap` augmentation in
   `apps/tabletop/src/shared/mtgCardShape.ts` — see `architecture.md`), so every instance of it is
@@ -370,7 +373,48 @@
     or other UI surface that mutates a card via `editor.updateShapes` while it might be selected
     needs the same trailing clear — the hazard isn't specific to drag or to `onClick`, it's
     "does this gesture leave an unlocked shape selected when it's done."
+16. **The canonical pattern for adding a required `mtg-card` prop is now: edit `mtgCardShape()`
+    in `tableFurniture.ts`, not each call site.** (Table-layout ticket 18, "commander arrives with
+    owner and ghost," 2026-08-09.) Two server seams mint `mtg-card` records — `cardArrival.ts` for
+    ordinary arrivals, `seatJoined.ts` for commanders and their ghosts — and until this ticket both
+    wrote their own inline `store.put({...})` literal, listing every required prop by hand. Adding
+    `owner`/`isCommander` to `MtgCardShapeProps` would have meant updating both literals plus the
+    props interface — a three-way drift risk with no compiler check tying the literals to the type
+    (the old code cast `as any`). Fixed by extracting `mtgCardShape(args: MtgCardShapeArgs)` in
+    `tableFurniture.ts` (next to the existing `zoneShape()` helper): the one place that lists every
+    required `mtg-card` prop, called by both `cardArrival.ts` and `seatJoined.ts` instead of each
+    writing its own literal. **Future required props go in `mtgCardShape()`'s signature, not into a
+    call site.** This is a narrower, `mtg-card`-specific instance of the general "registering a
+    shape needs the props enumerated in one place" pressure watch point 6 already tracks for the
+    `TLGlobalShapePropsMap`/schema layer — this is the mint-time layer, not the registration layer.
 
+17. **A decoy/shadow shape can share a type with the real thing, distinguished by a prefixed
+    `instanceId` and locked-vs-not — the KB's first example of this pattern.** (Table-layout
+    ticket 18, 2026-08-09.) `seatJoined.ts` mints a commander as two `mtg-card` shapes at the same
+    table position: the real, draggable card, and a `ghost:`-prefixed-`instanceId`, `isLocked:
+    true`, `opacity: 0.3` copy underneath it (marking the Command Zone spot as occupied even after
+    the real card is dragged away). Two facts worth carrying to any future "two shapes, same type,
+    one spot" design:
+    - **The ghost's `instanceId` (`` `ghost:${instanceId}` ``) is a distinct string from the real
+      card's, confirmed safe against `cardArrival.ts`'s `instanceAlreadyOnTable` dedup check, which
+      matches on exact `props.instanceId` string equality** — a prefix, not a shared or derived id,
+      is what keeps the ghost from colliding with (or being mistaken for) the real card's identity.
+    - **Paint order, not a z-index prop, decides which one is visible.** The ghost is minted via
+      `nextIndex()` *before* the real card's mint call in the same `store.updateStore` — so the
+      real card's `IndexKey` sorts strictly higher and paints on top, both shapes occupying the
+      identical `x`/`y`. Same topmost-wins ordering `topmostZoneAt()` already relies on for
+      overlapping zones (watch point 8) — this is the same mechanism applied to two cards instead
+      of two zones.
+    - **`isLocked: true` alone is sufficient to make the ghost fully inert to the player** — no new
+      guard needed on the ghost side. This is watch point 7's claim ("a locked shape needs no
+      interaction hooks") confirmed for a *second* locked shape type doing double duty as a decoy:
+      `SelectTool`'s `Idle` state gates `isLocked` before `PointingShape`, so the ghost never enters
+      click/drag/selection at all, and `Editor.getDraggingOverShape` filters it out as a drop
+      target the same way it filters `mtg-zone`. `apps/tabletop/test/seatJoined.test.ts`'s "seat
+      joined — commanders" describe block asserts the ghost's `isLocked`/`opacity`/index-ordering
+      facts directly (it does not drive a live pointer at the ghost — the click-transparency claim
+      rests on watch point 7's already-confirmed tldraw source reading, not a fresh Playwright
+      probe for this ticket).
 ## Not Related To
 
 ### Card face/image rendering

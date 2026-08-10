@@ -187,8 +187,22 @@ and the ticket's "Blast radius" — and it landed clean; no disconnects reported
   tapped: boolean,               // ticket 04 owns how this relates to rotation
   sleeveColor: string | null,    // the seat's sleeve, baked at mint (table-layout ticket 17); null = unsleeved
   cardBackImageUrl: string | null, // the seat's generic card back, baked at mint (physics ticket 17); used only when unsleeved + faceDown
+  owner: string,                 // seatId this card belongs to (table-layout ticket 18); grants no capability
+  isCommander: boolean,          // whether this is one of owner's commanders (table-layout ticket 18)
 }
 ```
+
+**`owner`/`isCommander` added — table-layout ticket 18 (2026-08-09).** First-class,
+schema'd, synced props, set via the ordinary card-arrival path (`buildCardPlayedEvent` on
+the Shuffler) and also via `seat.joined`'s new `commanders` array for cards that start in
+the Command Zone before anything is played. **Grants no capability** — this owner's
+standing "no ownership or permission model" rule (below) is unchanged; `owner` is a fact
+the shape carries, not a gate on who may drag it. This amends ticket 02's original
+decision that `mtg-card` would have "no seat/controller/owner field" — the amendment is
+recorded on `tabletop-physics` ticket 02 as an addendum, not a re-opening of the whole
+ticket. Commanders' ghost copies (locked, `opacity: 0.3`, `` instanceId: `ghost:${id}` ``)
+and the Command Zone's owner-aware arming rule are `tabletop-shape-mechanics` territory —
+see that owner's KB for the click/drag/hit-testing side.
 
 Three consequences this owner cares about:
 

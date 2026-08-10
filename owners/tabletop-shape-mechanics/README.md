@@ -108,7 +108,7 @@ describe *that* shape, not this one — see `architecture.md`.
 | Counter eviction geometry (pure, unit-tested) | `apps/tabletop/src/client/shapes/openSpotNearZoneEdge.ts` |
 | ShapeUtil registration (client) | `apps/tabletop/src/client/TablePage.tsx` (`shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil]` passed to both `useSync` and `<Tldraw>`) |
 | Shape schema registration (server) | `apps/tabletop/src/server/rooms.ts` (`createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-counter": {...}, "mtg-zone": {...} } })`) |
-| Shape identity is minted | `apps/tabletop/src/server/cardArrival.ts` (`props.instanceId`, `createShapeId`) |
+| Shape identity is minted | `apps/tabletop/src/server/cardArrival.ts` (arrival) or `apps/tabletop/src/server/seatJoined.ts` (commanders + ghosts, table-layout ticket 18) — both via `mtgCardShape()` in `tableFurniture.ts`; `props.instanceId`, `createShapeId` |
 | tldraw's selection state machine (read, don't modify) | `node_modules/tldraw/src/lib/tools/SelectTool/childStates/PointingShape.ts`, `Translating.ts` |
 | Regression test for the drag-identity bug | `apps/tabletop/test/verification/verify-drag-identity.spec.ts` |
 | Regression test for multi-untap's undo coalescing (tldraw-upgrade tripwire) | `apps/tabletop/test/verification/verify-multi-untap.spec.ts` |

@@ -14,9 +14,12 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 
 - `apps/tabletop/src/shared/mtgCardShape.ts` — `MtgCardShapeProps` (the validated prop shape:
   `w`, `h`, `instanceId`, `scryfallId`, `cardName`, `frontImageUrl`, `backImageUrl`, `face`,
-  `faceDown`, `tapped`), the `TLGlobalShapePropsMap` module augmentation that registers `mtg-card`
-  into tldraw's `TLShape` union, and `mtgCardShapeProps` (the `RecordProps` validators, imported
-  by both client `MtgCardShapeUtil.tsx` and server `rooms.ts`).
+  `faceDown`, `tapped`, `sleeveColor`, and, since table-layout ticket 18 (2026-08-09), `owner`
+  (seatId) and `isCommander` — facts the shape carries, granting no capability), the
+  `TLGlobalShapePropsMap` module augmentation that registers `mtg-card` into tldraw's `TLShape`
+  union, and `mtgCardShapeProps` (the `RecordProps` validators, imported by client
+  `MtgCardShapeUtil.tsx`, server `rooms.ts`, and server `tableFurniture.ts`'s `mtgCardShape()`
+  builder, below).
 - `apps/tabletop/src/shared/mtgZoneShape.ts` — the same pattern for furniture (ticket 13):
   `MtgZoneShapeProps` (`w`, `h`, `zone` — a closed enum `"playmat" | "library" | "graveyard" |
   "exile" | "stack" | "command"` — `seatId`, `label`), the `TLGlobalShapePropsMap` augmentation
@@ -126,8 +129,18 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 
 - `apps/tabletop/src/server/cardArrival.ts` — mints `props.instanceId` (moved out of `meta` by
   ticket 12) at shape creation (`createShapeId`; no longer mints a tldraw asset record — flip is
-  a pure `props.face` write now). Not this owner's mechanics territory per se, but the identity
-  contract every hook in `MtgCardShapeUtil` depends on.
+  a pure `props.face` write now). Since table-layout ticket 18 (2026-08-09), builds the record via
+  `tableFurniture.ts`'s `mtgCardShape()` instead of its own `store.put` literal. Not this owner's
+  mechanics territory per se, but the identity contract every hook in `MtgCardShapeUtil` depends
+  on.
+- `apps/tabletop/src/server/seatJoined.ts` — **the second `mtg-card` mint seam** (table-layout
+  ticket 18, 2026-08-09): on a `seat.joined` event carrying 0-2 commanders, mints each commander
+  as a real, draggable `mtg-card` plus a locked, `opacity: 0.3` ghost at the identical Command
+  Zone spot (`ghostInstanceId()` prefixes the ghost's `instanceId` with `ghost:`, keeping it a
+  distinct string from `instanceAlreadyOnTable`'s exact-match dedup in `cardArrival.ts`). The
+  ghost is minted via `nextIndex()` *before* the real card in the same `updateStore` call, so it
+  paints underneath. Both shapes built via `mtgCardShape()`, below — see `architecture.md`'s
+  "Table-layout ticket 18" section and watch point 16.
 - `apps/tabletop/src/server/rooms.ts` — builds the server-side `TLSocketRoom` schema via
   `createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-counter": {...},
   "mtg-zone": {...} } })`.
@@ -151,7 +164,11 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   Command Zone per seat (`zone: "command"`, id `region-command-<table>-<seatId>`, locked, no
   interaction hooks). Since zone-label-band (2026-08-09, `0d61890`), the library card-back image
   insets `ZONE_LABEL_BAND` from the box's top (12 from the other three sides) so the label sits
-  above the pile. Consulted by `zoneAt()` but not itself a custom ShapeUtil.
+  above the pile. Consulted by `zoneAt()` but not itself a custom ShapeUtil. Since table-layout
+  ticket 18 (2026-08-09), also home to **`mtgCardShape(args: MtgCardShapeArgs)`** (next to
+  `zoneShape()`) — the single place every required `mtg-card` prop is listed when building a
+  shape record; called by both `cardArrival.ts` and `seatJoined.ts` instead of each writing its
+  own `store.put` literal. See watch point 15.
 - `apps/tabletop/src/server/cardLayout.ts` — placement geometry, mostly *not* this owner's
   territory, except for one invariant zone detection leans on (since table-layout ticket 13,
   extended by table-layout ticket 14, "the square", `5eeac70`): every pair of zone bounding
@@ -194,7 +211,12 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   over the 21 actually-drawn `mtg-zone` shapes at a full 4-seat table (five per seat + the
   Stack), and that a fifth `seat.joined` gets 409 instead of a player area drawn on top of the
   S seat's. Catches `tableFurniture.ts` drifting from `cardLayout.ts` where the geometry test
-  can't.
+  can't. Since table-layout ticket 18 (2026-08-09), its "seat joined — commanders" describe
+  block asserts the ghost mechanism's data-level facts: one real (`isLocked: false`) `mtg-card`
+  per commander plus one locked, `0 < opacity < 1` ghost at the same position, distinct
+  `instanceId`s, the real card's `index` sorting above the ghost's, two commanders each getting
+  their own ghost, and the seat's sleeve baked into both. It does not drive a pointer at the
+  ghost — see watch point 16.
 - `apps/tabletop/test/verification/verify-counter.spec.ts` — **new, ticket 18**: counter
   attach/ride/detach, the stale-counter-selection regression (drag counter, then drag card —
   the card must move), two counters evicting to the graveyard's edge when the host card dies,

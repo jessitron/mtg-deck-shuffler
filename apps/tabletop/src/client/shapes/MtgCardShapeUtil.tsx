@@ -43,6 +43,8 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       tapped: false,
       sleeveColor: null,
       cardBackImageUrl: null,
+      owner: "",
+      isCommander: false,
     };
   }
 

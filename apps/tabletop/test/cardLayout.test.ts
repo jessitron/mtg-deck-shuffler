@@ -24,6 +24,7 @@ import {
   LIBRARY_H,
   COMMAND_ZONE_H,
   graveyardCardPosition,
+  commandZoneCardPosition,
 } from "../src/server/cardLayout";
 import { ZONE_LABEL_BAND } from "../src/shared/mtgZoneShape";
 
@@ -121,6 +122,31 @@ describe("cardLayout — player area geometry", () => {
     expect(exile.y).toBe(graveyard.y + graveyard.h + GAP);
     expect(exile.w).toBe(COLUMN_W);
     expect(exile.y + exile.h).toBe(mat.y + mat.h);
+  });
+
+  // Ticket 18: commanders land below the zone's label band, side by side if
+  // two, horizontally centered if one.
+  it("centers a single commander in the command zone, below the label band", () => {
+    const box = commandZoneBounds(0);
+    const pos = commandZoneCardPosition(0, 0, 1);
+    expect(pos.x).toBe(box.x + (COMMAND_ZONE_W - CARD_W) / 2);
+    expect(pos.y).toBe(box.y + ZONE_LABEL_BAND);
+  });
+
+  it("places two commanders side by side, below the label band", () => {
+    const box = commandZoneBounds(0);
+    const first = commandZoneCardPosition(0, 0, 2);
+    const second = commandZoneCardPosition(0, 1, 2);
+    expect(first.x).toBe(box.x);
+    expect(first.y).toBe(box.y + ZONE_LABEL_BAND);
+    expect(second.x).toBe(box.x + CARD_W + GAP);
+    expect(second.y).toBe(first.y);
+  });
+
+  it("keeps both commander slots within the command zone's width", () => {
+    const box = commandZoneBounds(0);
+    const second = commandZoneCardPosition(0, 1, 2);
+    expect(second.x + CARD_W).toBeLessThanOrEqual(box.x + box.w);
   });
 });
 

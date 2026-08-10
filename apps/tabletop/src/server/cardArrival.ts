@@ -4,7 +4,7 @@ import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom, RoomEntry } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
 import { CARD_W, CARD_H, MAX_SEATS, landPosition, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
-import { ensurePlayerArea, pageIdOf, nextIndex } from "./tableFurniture.js";
+import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
 
 // ============================================================================
 // SCAFFOLDING — the seam the Spine absorbs.
@@ -36,6 +36,8 @@ interface CardArrival {
   frontImageUrl: string;
   backImageUrl: string | null;
   cardName: string;
+  owner: string;
+  isCommander: boolean;
 }
 
 function validationError(body: unknown): string | null {
@@ -53,6 +55,8 @@ function validationError(body: unknown): string | null {
   if (typeof b.frontImageUrl !== "string" || !b.frontImageUrl) return "frontImageUrl (string) is required";
   if (b.backImageUrl !== null && typeof b.backImageUrl !== "string") return "backImageUrl (string or null) is required";
   if (typeof b.cardName !== "string" || !b.cardName) return "cardName (string) is required";
+  if (typeof b.owner !== "string" || !b.owner) return "owner (string, seatId) is required";
+  if (typeof b.isCommander !== "boolean") return "isCommander (boolean) is required";
   // The decodable secret must not cross the boundary — reject loudly if a
   // sender ever tries (defense in depth; the Shuffler also never sends it).
   if ("gameCardIndex" in b) return "gameCardIndex is forbidden beyond the Shuffler's boundary";
@@ -145,20 +149,15 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
     // No per-instance tldraw asset: the card renders its own <img> straight
     // from frontImageUrl/backImageUrl (mtg-card, tabletop-physics ticket 12),
     // so flip is a pure props.face write later, not an asset swap.
-    store.put({
-      id: shapeId,
-      typeName: "shape",
-      type: "mtg-card",
-      x: position.x,
-      y: position.y,
-      rotation: 0,
-      index: nextIndex(tableName),
-      parentId: pageId,
-      isLocked: false,
-      opacity: 1,
-      props: {
+    store.put(
+      mtgCardShape({
+        id: shapeId,
+        pageId,
+        x: position.x,
+        y: position.y,
         w: CARD_W,
         h: CARD_H,
+        index: nextIndex(tableName),
         instanceId: arrival.card.instanceId,
         scryfallId: arrival.card.scryfallId,
         cardName: arrival.cardName,
@@ -166,7 +165,6 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
         backImageUrl: arrival.backImageUrl,
         face: arrival.face,
         faceDown: false,
-        tapped: false,
         // Ticket 17: the seat's sleeve, baked in at mint time. Legal because
         // sleeve color is a game constant — never changed mid-game. Sleeve is
         // seat data, not payload data: it comes from seat memory, never from
@@ -176,12 +174,10 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
         // payload-data status. Null for sleeved seats (seat.joined omits it
         // when sleeved — the sleeve always wins) and for seats with none.
         cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
-      },
-      // No traceparent in meta — cards persist; traces don't. Zone
-      // membership lands here once a card is dragged (see
-      // MtgCardShapeUtil.onTranslateEnd) — empty at arrival.
-      meta: {},
-    } as any);
+        owner: arrival.owner,
+        isCommander: arrival.isCommander,
+      })
+    );
   });
 
   entry.seenEventIds.add(arrival.id);
