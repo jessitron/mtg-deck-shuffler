@@ -111,13 +111,12 @@ const licenseKey = chooseLicenseKey(
 // camera opens with page (0,0) at the viewport's top-left, onto mostly empty
 // canvas. Frame the table's full extent once at mount — a fixed region, not a
 // fit to current content, so the camera is deterministic on an empty table
-// and never moves on its own when furniture arrives later. A deep link (?d=)
-// already says where to look, so it wins. The extent mirrors cardLayout.ts's
-// four compass slots + Stack (provisional geometry — tweak alongside it).
+// and never moves on its own when furniture arrives later. The extent
+// mirrors cardLayout.ts's four compass slots + Stack (provisional geometry —
+// tweak alongside it).
 const TABLE_EXTENT = new Box(-2802, -1612, 5604, 3164);
 
 function aimCameraAtTheTable(editor: Editor) {
-  if (new URLSearchParams(window.location.search).has("d")) return;
   editor.zoomToBounds(TABLE_EXTENT, { inset: 24 });
 }
 
@@ -174,7 +173,6 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
       ) : (
         <Tldraw
           store={store.store}
-          deepLinks
           licenseKey={licenseKey}
           shapeUtils={shapeUtils}
           tools={tools}
