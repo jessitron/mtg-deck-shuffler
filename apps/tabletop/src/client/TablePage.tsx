@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import {
   Box,
+  DefaultContextMenu,
+  DefaultContextMenuContent,
   DefaultToolbar,
   DefaultToolbarContent,
   defaultShapeUtils,
@@ -8,10 +10,15 @@ import {
   Tldraw,
   TLAssetStore,
   TLComponents,
+  TLUiContextMenuProps,
   TldrawUiMenuItem,
+  TldrawUiMenuActionItem,
+  TldrawUiMenuGroup,
   TLUiOverrides,
+  useEditor,
   useIsToolSelected,
   useTools,
+  useValue,
 } from "tldraw";
 import "tldraw/tldraw.css";
 import { useSync } from "@tldraw/sync";
@@ -22,6 +29,7 @@ import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
 import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
 import { MtgCounterTool } from "./shapes/MtgCounterTool";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
+import { MtgCardShape } from "../shared/mtgCardShape";
 
 // useSync (unlike <Tldraw>) builds its store schema from exactly the
 // shapeUtils it's given — it does NOT fold in tldraw's own defaults the way
@@ -36,6 +44,51 @@ const tools = [MtgCounterTool];
 // stock icon on purpose (tldraw owns its toolbar; a bespoke styled button
 // would fight it, and map 4 owns toolbar curation).
 const uiOverrides: TLUiOverrides = {
+  actions(editor, actions) {
+    actions["mtg-card-flip"] = {
+      id: "mtg-card-flip",
+      label: "action.mtg-card-flip",
+      onSelect() {
+        const card = onlySelectedMtgCard(editor);
+        if (!card || !card.props.backImageUrl) return;
+        editor.markHistoryStoppingPoint("flip mtg card");
+        editor.updateShape<MtgCardShape>({
+          id: card.id,
+          type: card.type,
+          props: { ...card.props, face: card.props.face === "front" ? "back" : "front" },
+        });
+      },
+    };
+    actions["mtg-card-turn-face-down"] = {
+      id: "mtg-card-turn-face-down",
+      label: "action.mtg-card-turn-face-down",
+      onSelect() {
+        const card = onlySelectedMtgCard(editor);
+        if (!card || card.props.faceDown) return;
+        editor.markHistoryStoppingPoint("turn mtg card face down");
+        editor.updateShape<MtgCardShape>({
+          id: card.id,
+          type: card.type,
+          props: { ...card.props, faceDown: true },
+        });
+      },
+    };
+    actions["mtg-card-turn-face-up"] = {
+      id: "mtg-card-turn-face-up",
+      label: "action.mtg-card-turn-face-up",
+      onSelect() {
+        const card = onlySelectedMtgCard(editor);
+        if (!card || !card.props.faceDown) return;
+        editor.markHistoryStoppingPoint("turn mtg card face up");
+        editor.updateShape<MtgCardShape>({
+          id: card.id,
+          type: card.type,
+          props: { ...card.props, faceDown: false },
+        });
+      },
+    };
+    return actions;
+  },
   tools(editor, toolItems) {
     toolItems["mtg-counter"] = {
       id: "mtg-counter",
@@ -45,7 +98,46 @@ const uiOverrides: TLUiOverrides = {
     };
     return toolItems;
   },
+  translations: {
+    en: {
+      "action.mtg-card-flip": "Flip",
+      "action.mtg-card-turn-face-down": "Turn face down",
+      "action.mtg-card-turn-face-up": "Turn face up",
+    },
+  },
 };
+
+function onlySelectedMtgCard(editor: Editor): MtgCardShape | undefined {
+  const shape = editor.getOnlySelectedShape();
+  return shape?.type === "mtg-card" ? (shape as MtgCardShape) : undefined;
+}
+
+function MtgCardContextMenuItems() {
+  const editor = useEditor();
+  const card = useValue("only selected mtg-card for context menu", () => onlySelectedMtgCard(editor), [editor]);
+
+  if (!card) return null;
+
+  return (
+    <TldrawUiMenuGroup id="mtg-card-physics">
+      {card.props.backImageUrl && <TldrawUiMenuActionItem actionId="mtg-card-flip" />}
+      {card.props.faceDown ? (
+        <TldrawUiMenuActionItem actionId="mtg-card-turn-face-up" />
+      ) : (
+        <TldrawUiMenuActionItem actionId="mtg-card-turn-face-down" />
+      )}
+    </TldrawUiMenuGroup>
+  );
+}
+
+function ContextMenuWithMtgCardItems(props: TLUiContextMenuProps) {
+  return (
+    <DefaultContextMenu {...props}>
+      <MtgCardContextMenuItems />
+      <DefaultContextMenuContent />
+    </DefaultContextMenu>
+  );
+}
 
 function ToolbarWithCounter(props: React.ComponentProps<typeof DefaultToolbar>) {
   const toolItems = useTools();
@@ -60,6 +152,7 @@ function ToolbarWithCounter(props: React.ComponentProps<typeof DefaultToolbar>) 
 
 const components: TLComponents = {
   Toolbar: ToolbarWithCounter,
+  ContextMenu: ContextMenuWithMtgCardItems,
 };
 
 /**

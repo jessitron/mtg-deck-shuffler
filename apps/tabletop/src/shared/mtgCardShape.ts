@@ -18,6 +18,7 @@ export interface MtgCardShapeProps {
   cardName: string;
   frontImageUrl: string;
   backImageUrl: string | null;
+  cardBackImageUrl: string | null;
   face: "front" | "back";
   faceDown: boolean;
   tapped: boolean;
@@ -50,6 +51,7 @@ export const mtgCardShapeProps: RecordProps<MtgCardShape> = {
   cardName: T.string,
   frontImageUrl: T.string,
   backImageUrl: T.string.nullable(),
+  cardBackImageUrl: T.string.nullable(),
   face: T.literalEnum("front", "back"),
   faceDown: T.boolean,
   tapped: T.boolean,

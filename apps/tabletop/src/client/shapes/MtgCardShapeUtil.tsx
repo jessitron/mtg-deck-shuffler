@@ -39,6 +39,7 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       cardName: "",
       frontImageUrl: "",
       backImageUrl: null,
+      cardBackImageUrl: null,
       face: "front",
       faceDown: false,
       tapped: false,
@@ -51,11 +52,12 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   }
 
   component(shape: MtgCardShape) {
-    const { frontImageUrl, backImageUrl, face, cardName, faceDown, sleeveColor, w } = shape.props;
+    const { frontImageUrl, backImageUrl, cardBackImageUrl, face, cardName, faceDown, sleeveColor, w } = shape.props;
     // `face` and `faceDown` are independent axes (two-faced-cards owner):
     // face picks which PRINTED side shows — a DFC's back is a normal face
     // image — while faceDown is concealment. Only faceDown hides the image.
-    const src = (face === "back" ? backImageUrl : frontImageUrl) ?? frontImageUrl;
+    const faceSrc = (face === "back" ? backImageUrl : frontImageUrl) ?? frontImageUrl;
+    const src = faceDown && cardBackImageUrl ? cardBackImageUrl : faceSrc;
     // Sleeve geometry is a proportion of the shape's own width — cards are
     // aspect-locked resizable, so a fixed px would drift out of proportion.
     // Square corners: sleeves are rectangular (Jess, 2026-08-09). w * 0.03
@@ -123,9 +125,9 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
               <img style={{ display: "block", width: "100%", height: "100%", borderRadius: w * 0.05 }} src={src} alt={cardName} draggable={false} />
             </div>
           ) : (
-            // Unsleeved: today's bare look. An unsleeved faceDown card should
-            // show the standard Magic back — wired up with the flip/turn-over
-            // gesture (tabletop-physics ticket 06); nothing sets faceDown yet.
+            // Unsleeved faceDown cards show the seat's standard Magic card
+            // back. If the card was minted before cardBackImageUrl existed,
+            // degrade to the printed face rather than a broken image.
             <img className="tl-image" src={src} alt={cardName} draggable={false} />
           )}
         </div>
@@ -314,6 +316,8 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     const previousZone = (current.meta?.zone as string | undefined) ?? undefined;
     if (zone === previousZone) return undefined;
 
+    const resetFace = zone === "library";
+
     if (zoneHit) {
       // Descoped 2026-08-06 (Jess): no callback/emitter/queue yet — nothing
       // downstream consumes this. A plain console.log is the whole
@@ -334,6 +338,7 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     return {
       id: current.id,
       type: current.type,
+      props: resetFace ? { ...current.props, face: "front", faceDown: false } : current.props,
       meta: { ...current.meta, zone: zone ?? null },
     };
   }
