@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Architecture review — the Tabletop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose" });
+    </script>
+    <style>
+      .seam { stroke-dasharray: 4 4; }
+      .leak { stroke: #dc2626; }
+      .deep { background: linear-gradient(135deg, #0f172a, #1e293b); }
+      .mass-bar { transition: none; }
+      body { font-family: ui-sans-serif, system-ui, sans-serif; }
+      .font-serif-head { font-family: Georgia, "Times New Roman", serif; }
+    </style>
+  </head>
+  <body class="bg-stone-50 text-slate-900">
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-14">
+      <header class="space-y-4 border-b border-slate-300 pb-6">
+        <h1 class="text-3xl font-serif-head">Architecture review — the Tabletop</h1>
+        <p class="text-sm text-slate-500">apps/tabletop/ · 2026-08-10 · scoped by commit-history hot spots</p>
+        <div class="flex flex-wrap gap-6 text-xs uppercase tracking-wider text-slate-500 pt-2">
+          <div class="flex items-center gap-2"><span class="inline-block w-6 h-3 border border-slate-400"></span> module</div>
+          <div class="flex items-center gap-2"><span class="inline-block w-6 h-0 border-t-2 border-dashed border-slate-400"></span> seam</div>
+          <div class="flex items-center gap-2"><span class="inline-block w-6 h-0 border-t-2 border-red-600"></span> leakage</div>
+          <div class="flex items-center gap-2"><span class="inline-block w-6 h-3 deep"></span> deep module</div>
+        </div>
+      </header>
+
+      <section id="candidates" class="space-y-14">
+
+        <!-- Candidate 1 -->
+        <article id="c1" class="space-y-4">
+          <div class="flex items-center gap-3 flex-wrap">
+            <h2 class="text-xl font-serif-head">1. Split MtgCardShapeUtil's tldraw-interop from its card physics</h2>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">Strong</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">in-process</span>
+          </div>
+          <p class="font-mono text-sm text-slate-600">src/client/shapes/MtgCardShapeUtil.tsx (405 lines, 21 commits) · cardTap.ts · zoneHitTest.ts · openSpotNearZoneEdge.ts</p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-500 mb-2">Before</p>
+              <div class="mermaid">
+                flowchart TD
+                  SU["MtgCardShapeUtil<br/>(one ShapeUtil)"]
+                  SU --> R["render + sleeve/face-down"]
+                  SU --> A["tap catch-up animation<br/>(WAAPI)"]
+                  SU --> D["onDragShapesIn/Out<br/>counter+note parenting"]
+                  SU --> Z["onClick/onTranslateEnd<br/>zone-entry + queueMicrotask<br/>workaround"]
+                  SU --> P["evictPassengers<br/>physics"]
+                  classDef leak stroke:#dc2626,stroke-width:2px;
+                  class SU leak
+              </div>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-500 mb-2">After</p>
+              <div class="mermaid">
+                flowchart TD
+                  SU2["MtgCardShapeUtil<br/>(thin tldraw adapter)"]
+                  CP["CardPhysics<br/>(deep module)"]
+                  SU2 -. seam .-> CP
+                  CP --> T["onTap"]
+                  CP --> S["onSettleInZone"]
+                  CP --> PD["onPassengerDrag"]
+                  classDef deep fill:#0f172a,color:#fff,stroke:#0f172a;
+                  class CP deep
+              </div>
+            </div>
+          </div>
+
+          <p><span class="font-semibold">Problem:</span> five unrelated concerns share one ShapeUtil interface, each with its own tldraw-internals workaround, so no single function tells you how a card behaves.</p>
+          <p><span class="font-semibold">Solution:</span> pull tap/zone/passenger rules into a plain <code class="font-mono text-sm">CardPhysics</code> module the ShapeUtil calls into; the ShapeUtil becomes a mechanical translator of tldraw hook signatures.</p>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>locality: tap/zone/passenger rules testable without a live editor</li>
+            <li>leverage: one physics interface, hooks stay mechanical</li>
+            <li>interface shrinks; implementation absorbs the tldraw workarounds</li>
+          </ul>
+        </article>
+
+        <!-- Candidate 2 -->
+        <article id="c2" class="space-y-4">
+          <div class="flex items-center gap-3 flex-wrap">
+            <h2 class="text-xl font-serif-head">2. Give the furniture builders a domain-level interface, not a tldraw-record one</h2>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300">Worth exploring</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">in-process</span>
+          </div>
+          <p class="font-mono text-sm text-slate-600">src/server/cardArrival.ts · tableFurniture.ts · cardLayout.ts · rooms.ts</p>
+
+          <div class="rounded-lg border border-slate-200 bg-white p-4">
+            <div class="mermaid">
+              flowchart LR
+                CA["cardArrival.ts"] --> CL["cardLayout.ts<br/>landPosition"]
+                CA --> TF["tableFurniture.ts<br/>mtgCardShape(...)"]
+                CA -.leak: mutates in place.-> RM["rooms.ts<br/>PlayerArea.landCount++"]
+                TF -.as any.-> REC["tldraw record<br/>typeName/parentId/meta"]
+                SJ["seatJoined.ts"] -.also knows fields.-> REC
+                classDef leak stroke:#dc2626,stroke-width:2px;
+                class CA,TF,SJ leak
+            </div>
+          </div>
+
+          <p><span class="font-semibold">Problem:</span> "a card arrives" bounces across four files, and the builder module's interface still exposes tldraw's record shape (<code class="font-mono text-sm">typeName</code>, <code class="font-mono text-sm">parentId</code>, <code class="font-mono text-sm">meta</code>, three <code class="font-mono text-sm">as any</code> casts) instead of hiding it.</p>
+          <p><span class="font-semibold">Solution:</span> a shape-record constructor that takes only domain values (position, image, owner, sleeve) and never leaks the tldraw fields to callers.</p>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>leverage: one place lists every required prop</li>
+            <li>seam: callers stop needing to know tldraw's record shape</li>
+            <li>deletion test: inlining today would visibly duplicate six fields at ~4 call sites — the module already has real depth, just a leaky interface</li>
+          </ul>
+        </article>
+
+        <!-- Candidate 3 -->
+        <article id="c3" class="space-y-4">
+          <div class="flex items-center gap-3 flex-wrap">
+            <h2 class="text-xl font-serif-head">3. Move cardLayout's disjointness invariant into the interface, not just the test</h2>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300">Worth exploring</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">local-substitutable</span>
+          </div>
+          <p class="font-mono text-sm text-slate-600">src/server/cardLayout.ts (242 lines, 9 commits) · test/cardLayout.test.ts</p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4 flex flex-col justify-center gap-2">
+              <p class="text-xs uppercase tracking-wider text-slate-500 mb-1">Before</p>
+              <div class="h-12 border-l-4 border-slate-300 pl-2 flex items-center text-xs">playmatBounds / libraryBounds / graveyardBounds</div>
+              <div class="h-12 border-l-4 border-dashed border-red-400 pl-2 flex items-center text-xs text-red-700">invariant lives only in test/cardLayout.test.ts</div>
+              <div class="h-12 border-l-4 border-slate-300 pl-2 flex items-center text-xs">graveyard cascade — silently walked out of box until test caught it</div>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4 flex items-center">
+              <div class="w-full deep text-white rounded p-4 text-xs">
+                <p class="uppercase tracking-wider text-slate-300 mb-2">After — one deep module</p>
+                bounds functions assert their own disjointness / stay-inside-box invariant at the point of change, not only in an external test
+              </div>
+            </div>
+          </div>
+
+          <p><span class="font-semibold">Problem:</span> "COMMAND_ZONE_H must equal LIBRARY_H" and "zones stay disjoint" are load-bearing invariants documented only in comments and enforced only by a test — nothing in the interface signals them.</p>
+          <p><span class="font-semibold">Solution:</span> encode the invariant as a runtime assertion inside the layout functions themselves.</p>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>locality: the failure surfaces where the constant changes, not three files away in a test run</li>
+            <li>deletion test: removing the check wouldn't move complexity, it would make it invisible until the next overflow — the check earns its place, just in the wrong layer</li>
+          </ul>
+        </article>
+
+        <!-- Candidate 4 -->
+        <article id="c4" class="space-y-4">
+          <div class="flex items-center gap-3 flex-wrap">
+            <h2 class="text-xl font-serif-head">4. Let each gesture announce itself, instead of reverse-engineering it from a store diff</h2>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300">Worth exploring</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">in-process</span>
+          </div>
+          <p class="font-mono text-sm text-slate-600">src/client/usePhysicsAnnouncements.ts (159 lines) · src/client/shapes/MtgCardShapeUtil.tsx</p>
+
+          <div class="rounded-lg border border-slate-200 bg-white p-4">
+            <div class="mermaid">
+              sequenceDiagram
+                participant Hook as MtgCardShapeUtil hook
+                participant Store as tldraw store
+                participant Ann as usePhysicsAnnouncements
+                Hook->>Store: mutate tapped/face/faceDown
+                Note over Ann: diffs beforeProps vs afterProps<br/>infers "counter attached" from<br/>parentId string prefix
+                Store->>Ann: updated record
+                Ann->>Ann: reconstruct the gesture the hook<br/>already knew
+          </div>
+          </div>
+
+          <p><span class="font-semibold">Problem:</span> the hook that causes a gesture already knows its name; a separate listener re-derives the same fact from a raw prop diff, so every new gesture needs a matching branch in two places.</p>
+          <p><span class="font-semibold">Solution:</span> have onClick/onTranslateEnd/onDragShapesIn emit their own named events; keep the store-diff listener only for the generic fallback.</p>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>locality: gesture knowledge lives once, where it's computed</li>
+            <li>a detach-reported-as-attach bug already came from this duplication</li>
+            <li>deletion test: collapsing the two doesn't move complexity anywhere — it removes a duplicate</li>
+          </ul>
+        </article>
+
+        <!-- Candidate 5 -->
+        <article id="c5" class="space-y-4">
+          <div class="flex items-center gap-3 flex-wrap">
+            <h2 class="text-xl font-serif-head">5. Name the stale-selection workaround once</h2>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 border border-slate-400">Speculative</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">in-process</span>
+          </div>
+          <p class="font-mono text-sm text-slate-600">MtgCardShapeUtil.tsx · MtgCounterShapeUtil.tsx · CardContextMenu.tsx · SelectionClearingNoteShapeUtil.ts · SelectionClearingImageShapeUtil.ts</p>
+
+          <div class="rounded-lg border border-slate-200 bg-white p-4">
+            <div class="mermaid">
+              flowchart TB
+                A["MtgCardShapeUtil<br/>setSelectedShapes([])"]
+                B["MtgCounterShapeUtil<br/>setSelectedShapes([])"]
+                C["CardContextMenu<br/>setSelectedShapes([])"]
+                D["SelectionClearingNoteShapeUtil<br/>(whole file for this)"]
+                E["SelectionClearingImageShapeUtil<br/>(whole file for this)"]
+                F(["one named helper:<br/>clearStaleSelection(editor)"])
+                A -.-> F
+                B -.-> F
+                C -.-> F
+                D -.-> F
+                E -.-> F
+                classDef leak stroke:#dc2626,stroke-width:2px;
+                class A,B,C,D,E leak
+            </div>
+          </div>
+
+          <p><span class="font-semibold">Problem:</span> the same tldraw stale-selection defect is patched in five places, each restating the mechanism in its own comment.</p>
+          <p><span class="font-semibold">Solution:</span> one named helper; a future tldraw upgrade has one call site to fix, not five plus two shim files.</p>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>leverage: one helper, five fewer restatements of the same tldraw quirk</li>
+            <li>low blast-radius — a consolidation, not a design flaw</li>
+          </ul>
+        </article>
+
+        <!-- Candidate 6 -->
+        <article id="c6" class="space-y-4">
+          <div class="flex items-center gap-3 flex-wrap">
+            <h2 class="text-xl font-serif-head">6. Give rooms.ts a typed "does this instance exist" question</h2>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 border border-slate-400">Speculative</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">in-process</span>
+          </div>
+          <p class="font-mono text-sm text-slate-600">src/server/cardArrival.ts (instanceAlreadyOnTable, lines 40–44) · src/server/rooms.ts</p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-500 mb-2">Before</p>
+              <div class="mermaid">
+                flowchart LR
+                  CA["cardArrival.ts"] -.as any cast.-> SNAP["room.getCurrentSnapshot()<br/>.documents"]
+                  classDef leak stroke:#dc2626,stroke-width:2px;
+                  class SNAP leak
+              </div>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-500 mb-2">After</p>
+              <div class="mermaid">
+                flowchart LR
+                  CA2["cardArrival.ts"] --> RE["RoomEntry.hasInstance(id)"]
+                  RE --> SNAP2["snapshot + cast<br/>owned by rooms.ts"]
+              </div>
+            </div>
+          </div>
+
+          <p><span class="font-semibold">Problem:</span> the one place that reaches into tldraw's raw snapshot with an unchecked cast sits beside the HTTP handler, not beside the module that owns room state.</p>
+          <p><span class="font-semibold">Solution:</span> a typed method on <code class="font-mono text-sm">RoomEntry</code> that owns the cast and the scan.</p>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>seam: cardArrival.ts asks a domain question instead of querying a raw snapshot</li>
+            <li>already shallow — the fix is pushing it one level deeper, not splitting it further</li>
+          </ul>
+        </article>
+
+      </section>
+
+      <section id="top-recommendation">
+        <div class="rounded-xl border-2 border-emerald-300 bg-emerald-50 p-6">
+          <p class="text-xs uppercase tracking-wider text-emerald-700 mb-2">Top recommendation</p>
+          <h2 class="text-xl font-serif-head mb-2"><a href="#c1" class="underline decoration-emerald-400">Split MtgCardShapeUtil's tldraw-interop from its card physics</a></h2>
+          <p class="text-sm">Hottest file in the ship (21 commits) and the only candidate with genuine depth trapped behind a fused interface — every other candidate here (2, 4, 6) is a satellite of the same file or the same "physics leaks into an adapter" pattern. Deepening this one first gives the others a place to land.</p>
+        </div>
+      </section>
+
+    </main>
+  </body>
+</html>

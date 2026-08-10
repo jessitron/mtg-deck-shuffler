@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Ship: fleet
-Status: ready-for-agent
+Status: done
 
 **What to build:** Amend `envelope.v1` in place — `tableId` drops `format: uuid` (pre-Spine,
 the table name is the id), and `initiator` becomes the object `{ seatId?, playerName }`.
