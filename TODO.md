@@ -23,80 +23,22 @@ section is just a wall between Jess and the live work.
     Tabletop (removed? left as an orphaned zone?). That's a game-design call, not plumbing.
     Promote via `/to-spec` when ready to decide it.
 
-- bug: counters can't be copied... actually neither can images, cards, etc. They can be duplicated, so there's a workaround. (Tabletop)
+- GRILLING: bug: counters can't be copied... actually neither can images, cards, etc. They can be duplicated, so there's a workaround. (Tabletop)
+  - Triage research (2026-08-10): not a shape-specific bug — it's a side effect of the
+    2026-08-09 decision to serve the deployed Tabletop over plain `http://` to dodge tldraw's
+    unlicensed-HTTPS canvas-blanking. `navigator.clipboard` only exists in secure contexts
+    (HTTPS or localhost), so on the deployed table it's `undefined` and tldraw's clipboard code
+    silently no-ops for every shape type — matching the bug report exactly. Duplicate (`Ctrl+D`)
+    works because it bypasses the clipboard via `editor.duplicateShapes()`.
+  - Fixing it "for real" reopens the http/https tradeoff settled a day ago (serve HTTPS + pay
+    for/acquire a tldraw license, or leave it). A narrower option: build an in-app, non-OS
+    clipboard for same-canvas copy/paste — new interaction design, not a bug fix, and would
+    want `tabletop-shape-mechanics` owner input.
+  - Jess's call needed: is OS-level (cross-app/cross-tab) copy/paste actually required, or is
+    same-canvas copy/paste enough to justify a custom in-app clipboard — or is `Ctrl+D` an
+    acceptable permanent answer given the deliberate http-only tradeoff?
 
-- Minor feature: Only your own commanders can land in your command zone. Any other card dragged over it, it shouldn't light up.
-
-- **The Tabletop-replaces-Mural mountain is charted.** The parity list, the six maps it
-  splits into, and their order: `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md`. Two maps exist
-  so far — work them with `/wayfinder`, one ticket at a time, rather than picking lines
-  from here:
-  - `.scratch/tabletop-physics/map.md` — cards and furniture become real shapes. **Start
-    here**; it blocks the other one.
-  - `.scratch/tabletop-table-layout/map.md` — the square, the command zone, life totals.
-    (Formerly `tabletop-card-physics-starter`.)
-
-- [ ] `face-down-is-a-real-thing` Make Face-Down Card a real fleet concept, and decide if the Shuffler gets a "Play Face-Down" button
-  - Surfaced 2026-08-07 grilling `.scratch/tabletop-physics/issues/02-what-a-card-is.md`. Jess:
-    _"In our domain model, 'Face Down Card' will be a real thing, and it looks like a card back
-    (in the future: a card sleeve) **even if the card itself is two-faced**."_
-  - **The model, as decided:** two independent axes, not one. `face` = which _printed_ side is up,
-    and only ranges over sides that exist (so it's unreachable on a one-faced card). Face-down =
-    concealment, showing the shared card back. They compose: a two-faced card **cannot be turned**
-    face down, but it **can be played** face down, and then it shows the card back regardless.
-  - **The two ships differ on purpose:** in the Deck Shuffler a one-faced card cannot be flipped;
-    on the Tabletop _any_ card can be turned over, and a turned-over one-faced card **is** face-down
-    — a real domain event, not just a picture. Already recorded in the `two-faced-cards` owner KB
-    (commit `0337e00`) with a "flip" translation table; it wants to move to `CONTEXT-MAP.md`, which
-    doesn't exist yet even though the root `CLAUDE.md` references it.
-  - Glossary work: `notes/GLOSSARY.md` has no face-down entry, and **nothing in the fleet models it
-    at all** — no field on `CardDefinition`/`GameCard`, nothing in `contracts/`.
-  - ✅ **Scope settled 2026-08-07: Play Face-Down stays OUT of scope.** Jess briefly said it was
-    needed for Mural parity, then confirmed sticking with `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md:127`
-    — _"Mural doesn't do it either, so it isn't parity. Real Magic wants it; a later mountain can
-    have it."_ (Technically it _is_ reachable in Mural by pasting a card back, and low priority
-    besides; workable around in test games.) **So there is no Shuffler button in this item** — what
-    remains is the domain/glossary work below, which is real regardless, because the Tabletop side
-    of face-down is being built by the physics map either way.
-  - Related: `.scratch/tabletop-table-layout/issues/09-sleeve-and-playmat-picker.md` already notes
-    "a sleeve image is what a face-down card needs anyway" — the sleeve picker and this share an asset.
-  - **Not** the Tabletop shape design for face-down; that's inside the physics map (tickets 02/06).
-    ← mountain: tabletop-replaces-mural
-
-- [ ] `let-gamecardindex-out` Reverse the decision that `gameCardIndex` never leaves the Shuffler
-  - **Jess is reversing her own earlier call** (2026-08-07): _"gameCardIndex never passes out of
-    Shuffler because I made the wrong call on that and I wish it did. I don't want you to have to
-    reason about what is hidden and what isn't."_ The cost being paid isn't secrecy — it's that
-    every agent and every future payload has to carry a model of what may cross which boundary.
-    Simplicity of reasoning beats a guard nobody's threat model needs, on a trust-based table.
-    Follows from the principle in `notes/DESIGN-the-table-vision.md` § Principles: the players own
-    the game experience; the app doesn't enforce.
-  - **What it actually is** (verified, since the docs describe it only as "a decodable secret"):
-    `gameCardIndex` is the card's index in the _initial deck-list array_ (`GameState.ts:120`).
-    It is **not** library order — that's `location.position`, shuffled by Fisher-Yates
-    (`shuffleCollectingMoves`). So what it decodes to is _which card in the decklist this is_,
-    and decklists are public on Archidekt.
-  - **The sites to undo** — the guard is small, which is part of why keeping it looked free:
-    - `apps/tabletop/src/server/cardArrival.ts:56` and `apps/tabletop/src/server/seatJoined.ts:35`
-      — the two rejection checks (the `// JES-128` markers).
-    - `apps/tabletop/test/cardArrival.test.ts:132` and `apps/tabletop/test/seatJoined.test.ts:132`
-      — the two tests asserting rejection. They invert rather than delete.
-    - The field-by-field comment block in `apps/shuffler/src/port-tabletop/types.ts`, plus the
-      claims in `apps/shuffler/CLAUDE.md:186`, `apps/tabletop/README.md:40`, `apps/tabletop/DESIGN.md:133`.
-    - There is also a unit test under `apps/shuffler/test/port-tabletop/` guarding the same thing.
-  - **On `SEAMAP.md`'s "hand counts but never hands":** that promise is about what the app
-    _volunteers_, and it survives fine — a shadow event simply shouldn't carry a card identity
-    whether or not a boundary check exists. So this is payload design, not a guard: put the
-    restriction on the events that could leak a hand, and stop making every door enforce it.
-    Add a sentence to `SEAMAP.md` saying so rather than leaving the promise looking unowned.
-  - The genuinely hard part is **not** here — it's _deliberate_ sharing, which is its own item:
-    see `sharing-hidden-zones` below.
-  - Separately: does anything _want_ `gameCardIndex` on the far side, or is this purely removing a
-    constraint? If nothing needs it, the win is only conceptual — still worth it, but it means the
-    Tabletop keeps using `instanceId` as its identity and nothing downstream changes.
-    ← mountain: overhead
-
-- [ ] `sharing-hidden-zones` Decide how library/hand information gets shared when it _should_ be
+- GRILLING: `sharing-hidden-zones` Decide how library/hand information gets shared when it _should_ be
   - Jess, 2026-08-07, working out where "never hands" really lives: _"there's actually an
     outstanding decision: how do we share library/hand information when it **should** be shared?
     …Sometimes there's 'look at target player's hand' and we need a way to share that — it might
@@ -126,31 +68,7 @@ section is just a wall between Jess and the live work.
     makes a constraint on every mountain: "public events, commentary, hand counts but never hands."
     ← mountain: tabletop-replaces-mural
 
-- [ ] `card-images-through-backend` Route every rendered card image through our backend instead of straight to Scryfall — ruled out of scope for the verify-suite-speed effort (commit `50ca157`); real product work whenever it's picked up
-
-- [ ] `deck-chooser-lazy-images` `/choose-any-deck` ships 191 remote Scryfall images on every visit, un-lazy-loaded
-  - Surfaced 2026-08-07 grilling `.scratch/verify-suite-speed/issues/03-setup-cost-and-isolation.md`
-    (ticket 05, closed out of that map once seeding removed the suite's reason to care).
-    `views/partials/deck-selection-precon.ejs:17` renders a remote `<img>` per precon deck — 191
-    of them, plus per-colour SVGs — nothing lazy-loaded, paginated, or virtualised. Real cost to a
-    real player: server renders in 26.6 ms, browser then waits ~1,280 ms for `load`.
-  - Options already scoped: `loading="lazy"` (one attribute), pagination/virtualisation, or serving
-    the art through the Shuffler's own (cached) route rather than 191 cross-origin connections —
-    the last option converges with `card-images-through-backend`-style work if that lands first.
-  - Consult `shuffler-looks-like-itself` — lazy-loading or pagination changes what a player sees,
-    not just how fast it loads.
-  - **Free and unrelated to the decision above:** `GET /choose-any-deck` (`src/app.ts:303`) calls
-    `deckRetriever.listAvailableDecks()` and passes it to a template that never reads
-    `availableDecks` — `LocalFileAdapter.listAvailableDecks()` synchronously parses all 191 deck
-    files (~15 MB) for nothing, twice per navigation. OS page cache is absorbing it today (hence
-    26.6 ms), but it's a dead parse either way — delete it whenever someone's in the file.
-
-- [ ] `deeplinks-prop-moved` Check whether `<Tldraw deepLinks>` still does anything
-  - tldraw **v5.0.0 moved `deepLinks` from a top-level `<Tldraw>` prop into `options`**, and
-    `apps/tabletop/src/client/TablePage.tsx:82` still passes it top-level. Found incidentally by
-    the tldraw custom-shape research (2026-08-06); **not verified either way** — it may still
-    work, or viewport-in-the-URL may have been silently dead since the v5 upgrade.
-  - One-sitting check: load a table, pan, and see whether the URL updates.
+- [ ] DEFERRED `card-images-through-backend` Route every rendered card image through our backend instead of straight to Scryfall — ruled out of scope for the verify-suite-speed effort (commit `50ca157`); real product work whenever it's picked up
 
 - [ ] `card-zoom-modal` Give a Tabletop card a modal overlay that shows its text really big, and offers flip
   - Jess, verbatim, 2026-08-07: _"Something cards do need to offer: a modal overlay that displays
