@@ -293,7 +293,7 @@ section is just a wall between Jess and the live work.
   - `oracleCardName` is already on `CardDefinition`, so the name half is nearly free; the image half
     needs resolving the English printing of the same oracle card.
 
-- [ ] `commander-tax-counter` Count how many times the commander has been cast, in the command zone ← was: JES-81
+- GRILLING: `commander-tax-counter` Count how many times the commander has been cast, in the command zone ← was: JES-81
   - > Track how many times the commander has been cast (commander tax). Display a play counter in the
     > command zone.
   - Nothing exists yet — no cast count in `src/` at all — but the command zone is a real rendered
