@@ -82,6 +82,13 @@ accept-list reopened the drag-identity hazard (watch point 1) for it, because st
 a missing hook" as a reusable pattern for future stock-shape integrations. See `architecture.md`'s
 "Ticket 19" section and watch point 18.
 
+**A pasted/dropped image** (landed 2026-08-10, a TODO.md bug fix rather than a ticket) hit the
+identical gap ticket 19 found in stock `note`: stock `ImageShapeUtil` also has no
+`onTranslateEnd`, so a dragged image left itself selected and hijacked the next card drag.
+Fixed the same way — `SelectionClearingImageShapeUtil` subclasses `ImageShapeUtil`, registered
+in place of the stock one. Not a passenger type; purely the stale-selection fix. See
+`architecture.md`'s section on it and watch point 20.
+
 **Ticket 20** (`.scratch/tabletop-physics/issues/20-cards-behind-cards.md`, landed 2026-08-10)
 widens `PASSENGER_TYPES` a third time to include `mtg-card` itself — a card can now host another
 card, tucked underneath, via the exact same drag-attach mechanism tickets 18/19 built. Unlike
@@ -135,6 +142,8 @@ section and watch point 19.
 | Counter attach/detach/evict/edit tests | `apps/tabletop/test/verification/verify-counter.spec.ts`, `apps/tabletop/test/openSpotNearZoneEdge.test.ts` |
 | Stock `note` ShapeUtil, subclassed to add the drag-settle selection-clear stock tldraw lacks | `apps/tabletop/src/client/shapes/SelectionClearingNoteShapeUtil.ts` |
 | Note-as-passenger attach/detach/evict + stale-selection regression tests | `apps/tabletop/test/verification/verify-note.spec.ts` |
+| Stock `image` ShapeUtil, subclassed for the same drag-settle selection-clear gap (not a passenger type) | `apps/tabletop/src/client/shapes/SelectionClearingImageShapeUtil.ts` |
+| Pasted-image stale-selection regression test | `apps/tabletop/test/verification/verify-image-selection.spec.ts` |
 | Passenger CARD tap compensation (matrix math for a tucked card's fixed page pose across a host tap) | `apps/tabletop/src/client/shapes/cardTap.ts` (`passengerTapCompensation`) |
 | Card-as-passenger attach/carry/tap-independence/z-order/detach/evict tests | `apps/tabletop/test/verification/verify-cards-behind-cards.spec.ts`, `apps/tabletop/test/passengerTapCompensation.test.ts` |
 

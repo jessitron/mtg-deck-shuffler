@@ -894,6 +894,41 @@ than the browser actually rendered — "+1/+1" at the default 44px disc: estimat
 No new watch point: nothing about click/drag/selection changed, `onTranslateEnd`'s Hazard-A
 cleanup is untouched, and no new hook was added.
 
+## Pasted/dropped images reopen watch point 1 — fixed like ticket 19's note, with a 1×1-test-image gotcha (2026-08-10)
+
+TODO.md bug: "paste an image in, pick it, move it around, click a card, try to move it — the
+image moves instead." Same class as ticket 19's note fix, and the same root cause: stock
+tldraw's `ImageShapeUtil` has no `onTranslateEnd` (confirmed by reading
+`node_modules/tldraw/src/lib/shapes/image/ImageShapeUtil.tsx`, tldraw 5.2.5), so a dragged image
+stays selected and the next card drag silently moves it instead.
+
+- **Fix**: new `apps/tabletop/src/client/shapes/SelectionClearingImageShapeUtil.ts`, structurally
+  identical to `SelectionClearingNoteShapeUtil` — subclasses stock `ImageShapeUtil`, overrides
+  only `onTranslateEnd` to call `this.editor.setSelectedShapes([])`.
+- **Registration**: `TablePage.tsx`'s `shapeUtils` array now filters `"image"` out of the
+  `defaultShapeUtils` spread alongside `"note"`, before appending both `SelectionClearing*`
+  replacements — the same `useSync`-throws-on-duplicate-type gotcha ticket 19 found (watch point
+  6/18), now hit by a second stock type.
+- **Not a passenger**: images never join `PASSENGER_TYPES` — this fix is scoped entirely to the
+  stale-selection hazard, with no card-hosting behavior added.
+- **Test-fixture gotcha, worth remembering**: a 1×1 pixel test image made all four resize handles
+  coincide at one point, so a "drag from center" click landed on a resize handle instead of the
+  body — the gesture became a RESIZE (`onResizeEnd`), not a TRANSLATE (`onTranslateEnd`), making
+  the fix look broken. Confirmed via an isolated debug script driving the editor directly
+  (`getSelectedShapeIds()` and `props.w/h`/flip flags before/after): a 1×1 image resizes on drag
+  (`w`/`h` jumped to ~908, flip flags flipped); a 100×100 image translates correctly and clears
+  selection. Cost real debugging time before being traced to the fixture, not the product.
+  **Lesson for future image-shape tests: use a reasonably sized test image (100×100+), never
+  1×1.**
+- **Test**: `apps/tabletop/test/verification/verify-image-selection.spec.ts` — places a card,
+  drops a 100×100 canvas-rendered PNG via a simulated `drop` DOM event (mirroring
+  `TablePage.tsx`'s real `inlineAssets.upload` path), drags the image (no test-side
+  `deselectAll`), then drags the card and asserts the card — not the image — moved. All 43
+  Playwright specs and 100 vitest tests pass.
+
+Full detail in `architecture.md`'s section on it; `interactions.md` watch point 1 gained a fifth
+entry point and new watch point 20; `files.md` and `README.md`'s quick-reference table updated.
+
 ## What Was Tried and Abandoned
 
 Nothing yet beyond the above. If a future fix attempt for a similar quirk is tried and reverted,

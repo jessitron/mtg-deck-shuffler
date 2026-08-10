@@ -141,7 +141,12 @@
    No new selection-cleanup gap here, because `MtgCardShapeUtil` already carries the
    `setSelectedShapes([])` cleanup in its own `onTranslateEnd` (it's the ShapeUtil watch point 1
    was written about in the first place) — the gap this ticket actually surfaced was different in
-   kind, not this one: see watch point 19.
+   kind, not this one: see watch point 19. **A fifth entry point (2026-08-10): a pasted/dropped
+   image.** Stock tldraw's `ImageShapeUtil` has the identical gap `NoteShapeUtil` had — no
+   `onTranslateEnd` of its own — so dragging a pasted image left it selected, and the next card
+   drag silently moved the image instead. Fixed the same way as watch point 18: subclass
+   (`SelectionClearingImageShapeUtil`), override only `onTranslateEnd`, register in place of the
+   stock util. See watch point 20.
 
 2. **The selection-clear must run before any early return in the drag-settle hook.** In
    `onTranslateEnd`, the zone-equality check (`if (zone === previousZone) return undefined`) is
@@ -528,6 +533,42 @@
       tests covering attach/carry/independent-tap/no-rotate-on-host-tap, z-order via the context
       menu, detach + reconcile-to-upright, graveyard eviction, and tapped-state preservation
       across both attach and eviction.
+
+20. **A second stock shape hits watch point 1's gap: pasted/dropped images have no drag-settle
+    cleanup either — fixed identically to notes.** (2026-08-10, TODO.md bug fix.) Bug report:
+    "paste an image in, pick it, move it around, click a card, try to move it — the image moves
+    instead." Root cause confirmed by reading `node_modules/tldraw/src/lib/shapes/image/
+    ImageShapeUtil.tsx` (tldraw 5.2.5): stock `ImageShapeUtil` defines no `onTranslateEnd`, the
+    same gap stock `NoteShapeUtil` had before ticket 19 (watch point 18) — so a dragged-then-left-
+    selected image defeats the card's `startTranslating` safety net exactly like a stale note or
+    counter selection would.
+    - **Fix, same precedent as watch point 18**: `apps/tabletop/src/client/shapes/
+      SelectionClearingImageShapeUtil.ts` subclasses tldraw's stock `ImageShapeUtil` (imported from
+      `"tldraw"`), overriding only `onTranslateEnd` to call `this.editor.setSelectedShapes([])`.
+      Structurally identical to `SelectionClearingNoteShapeUtil`.
+    - **Registration**: `TablePage.tsx`'s `shapeUtils` array now filters BOTH `"note"` and
+      `"image"` out of the `defaultShapeUtils` spread before appending
+      `SelectionClearingNoteShapeUtil` and `SelectionClearingImageShapeUtil` — the same
+      `useSync`-throws-on-duplicate-type vs. `<Tldraw>`-tolerates-it asymmetry watch point 6/18
+      already documented, now confirmed for a second stock type.
+    - **Note: images aren't `mtg-card` passengers.** Unlike notes and counters, a pasted image
+      never joins `PASSENGER_TYPES` — this fix is purely about the stale-selection hazard on the
+      image shape itself, not about hosting it on a card.
+    - **Test-fixture gotcha worth generalizing**: a 1×1 pixel test image makes all four resize
+      handles coincide at that single point, so a Playwright "drag from the shape's center" click
+      lands on a resize handle instead of the body — the drag becomes a RESIZE (`onResizeEnd`), not
+      a TRANSLATE (`onTranslateEnd`), and the fix looks broken even though it works. Confirmed via
+      an isolated debug script driving the editor directly (checking `getSelectedShapeIds()` and
+      `props.w/h`/`flipX`/`flipY` before/after): with a 1×1 image, drag silently resizes (`w`/`h`
+      jumped to ~908, flip flags flipped); with a 100×100 image, `onTranslateEnd` fires and
+      selection clears as expected. **Any future test involving a dragged image shape needs a
+      reasonably sized test image (100×100+), not a 1×1 placeholder.**
+    - Regression test: `apps/tabletop/test/verification/verify-image-selection.spec.ts` — places a
+      card via the `card.played` scaffolding endpoint, drops a 100×100 canvas-rendered PNG onto the
+      canvas via a simulated `drop` DOM event with a `DataTransfer`/`File` (mirroring how
+      `TablePage.tsx`'s `inlineAssets.upload` handles a real paste/drop, no server involved), drags
+      the image to a neutral spot (no test-side `deselectAll` — proving the product clears
+      selection, not the test), then drags the card and asserts the card (not the image) moved.
 
 ## Not Related To
 
