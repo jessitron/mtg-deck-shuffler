@@ -1875,3 +1875,51 @@ job is not to lag that.
 (new sleeve cases), `test/view/active-game-page.test.ts` (new file) — plus manual curl +
 Playwright screenshot on `/prepare` and `/game`, and end-to-end via `/yo` (the dev fast-start
 that already deals a random sleeve + playmat, `d1caf65`).
+
+## 2026-08-09 — the sleeve tint on the command zone and deck title followed the mat and the library to `/game`
+
+`5c9f04e` **Sleeve tint on command zone and deck title now server-rendered on `/game` too**
+
+Same day, same shape of gap as the entry above, one component later: the sleeve-color tint
+on `.cool-command-zone-surround` and `.game-title` was JS-only (`prep-picker.js`'s
+`applySleeveTint`), so — exactly like the picked mat before it — it only ever showed up on
+`/prepare`, never on `/game`, which has no picker JS at all.
+
+**The fix is a shared function, not a second implementation.** `sleeveTintStyle(sleeveColor,
+withTextColor)`, exported from `shared-components.ts`, computes the inline
+`style="background-color: ...; color: white;"` string `applySleeveTint` used to compute only
+in the browser — including the `81abce5` lettering-flip logic (BT.601 perceived luminance
+below 128 ⇒ white text), reproduced as `isDarkHex`. `formatDeckTitleHtmlFragment` gained an
+optional `sleeveColor` parameter and calls it with `withTextColor: true`;
+`formatCommandZoneHtmlFragment` reads `game.sleeveColor` (already on `GameState` since the
+entry above) and calls it with `withTextColor: false`, since the surround has no lettering
+to flip. `prep-view-helpers.ts`'s `renderPrepCommandZone`/`renderDeckTitle` call the same
+helper for `/prepare`, via `prep.sleeveColor` — so `/prepare` now gets its *own* tint from
+the server on first paint too, not only from the JS that used to run after load.
+
+**What that made redundant, and what didn't get touched.** `prep-picker.js`'s "tint on
+load" block — the one that read the already-selected swatch out of the DOM and called
+`applySleeveTint` once at startup — is deleted outright: the server now renders that exact
+state directly, so re-deriving it from the DOM on load was doing the same job a second time,
+slower and later. `applySleeveTint` itself **survives**, doing less: it's still what makes
+the tint follow the player's cursor while picking, before the pick is saved. A pick isn't
+persisted at the moment it's made, so that live-preview path has no server-rendered
+equivalent to retire it in favor of.
+
+**The luminance formula now lives twice, by necessity, and that's a watch point, not an
+oversight.** `isDark` in `prep-picker.js` runs in the browser during live preview;
+`isDarkHex` in `shared-components.ts` runs on the server for first paint. Same BT.601
+weights, same 128 threshold, no shared source — a `.js`/`.ts` split across a request
+boundary, the same category of unavoidable duplication as `log.ts`'s OTel version split,
+just smaller. Recorded in [interactions.md](interactions.md) so a future change to the
+threshold or formula doesn't quietly fix only one side.
+
+**Verified:** `test/view/sleeve-tint.test.ts` (new) unit-tests `sleeveTintStyle` through
+both call sites — no sleeve ⇒ no `style` attribute, light sleeve ⇒ tint only, dark sleeve ⇒
+tint plus `color: white`, unsleeved command zone ⇒ no inline style on the surround at all.
+`verify-prep-picker.spec.ts` re-run unchanged, 6/6 — including the dark-lettering-flip and
+reload-persistence cases — confirming the JS deletion didn't regress the live-preview path.
+No `/design` change: no new class, no new token, no new component — the gallery's
+`#table-look` specimen already described the live-preview behaviour in prose, and that
+prose is still accurate (the specimen is static and can't show either the live preview or
+the now-added first-paint tint, same limitation already noted for the mat).

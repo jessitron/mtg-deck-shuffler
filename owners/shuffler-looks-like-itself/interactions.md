@@ -333,14 +333,27 @@ Concrete, in rough order of how often they bite.
   `prep-picker.js` (`applyMatPreview`) and server-side in `prepare.ejs`. The `background`
   shorthand would wipe the shared `.playmat` rule's `cover`/`center` longhands. Comments at
   both sites say so; keep them true.
-- **Sleeve tint is inline JS style on purpose** (`applySleeveTint` tints
-  `.cool-command-zone-surround` and `.game-title`): the hex is domain data, and a page-sheet
-  rule on those *shared* components would leak onto `/design`, which co-loads the sheets.
-  **Since `81abce5` (2026-08-09) it also flips `.game-title`'s lettering**: inline
-  `color: white` when the picked hex's BT.601 perceived luminance (`isDark` in
-  `prep-picker.js`) is below 128, cleared otherwise — same inline posture, and it covers the
-  on-load tint path too. If you touch the tint, keep the lettering flip with it; spec'd in
-  `verify-prep-picker.spec.ts` (dark `#530aae` → white, light `#f0e68c` → default).
+- **Sleeve tint is inline style on purpose** (tints `.cool-command-zone-surround` and
+  `.game-title`): the hex is domain data, and a page-sheet rule on those *shared*
+  components would leak onto `/design`, which co-loads the sheets. **Since `81abce5`
+  (2026-08-09) it also flips `.game-title`'s lettering**: `color: white` when the picked
+  hex's BT.601 perceived luminance is below 128, cleared otherwise — same inline posture.
+  **Since `5c9f04e` (2026-08-09) the tint (and the lettering flip) is SERVER-RENDERED on
+  both `/prepare` and `/game`**, not just live-previewed in the browser: `sleeveTintStyle(sleeveColor, withTextColor)`
+  in `shared-components.ts` is the one place the inline style string is built —
+  `formatDeckTitleHtmlFragment` (`withTextColor: true`) and `formatCommandZoneHtmlFragment`
+  (`withTextColor: false`, reading `game.sleeveColor`) both call it, as does
+  `prep-view-helpers.ts` for `/prepare` (`prep.sleeveColor`). **`prep-picker.js`'s
+  `applySleeveTint` still exists but now does less**: it's the *live-preview* reapplication
+  while a player is clicking/dragging the picker, before the pick persists; its old
+  "tint on load" block is gone, since the server now renders that state directly. **The
+  BT.601 luminance formula now has two independent implementations that must be kept in
+  sync by hand**: `isDark` in `prep-picker.js` (client) and `isDarkHex` in
+  `shared-components.ts` (server) — same math, same threshold (128), no shared source.
+  If the threshold or formula ever changes, grep both. If you touch the tint, keep the
+  lettering flip with it in both places; spec'd in `test/view/sleeve-tint.test.ts` (the
+  server helper, both call sites) and `verify-prep-picker.spec.ts` (the live-preview path,
+  dark `#530aae` → white, light `#f0e68c` → default, unchanged).
 - **The mat swatches and sleeve chips frame DIFFERENTLY, on purpose (`99829d7`,
   2026-08-09).** The shared `.table-look-mat, .table-look-sleeve` rule declares the
   dark-pink border; `.table-look-mat` alone overrides `border-color: black` ("mat swatches
@@ -372,7 +385,10 @@ Concrete, in rough order of how often they bite.
   (square corners, no inset-border/gradient chrome) instead of the standard-back `<img>`
   when `sleeveColor` is set — `prep-view-helpers.ts` passes `prep.sleeveColor`,
   `library-components.ts` passes `game.sleeveColor`. New CSS: `.library-card-back.sleeved`
-  and `.library-card-back.sleeved::before` in `playmat.css`.
+  and `.library-card-back.sleeved::before` in `playmat.css`. **The command-zone/deck-title
+  tint joined the sleeve-aware set the same day (`5c9f04e`)** — see the bullet above; same
+  gap shape (JS-only meant `/prepare`-only), closed the same way (a shared server-side
+  helper reading the same field both pages already snapshot).
 
 **Testing that a token or a font actually arrived** (added 2026-08-07, `4396aea`)
 
