@@ -1,4 +1,5 @@
 import { test, expect, Page } from "@playwright/test";
+import { randomUUID } from "node:crypto";
 
 /**
  * Ticket 01-zone-entry-events: dragging a card into a zone (graveyard,
@@ -12,17 +13,30 @@ import { test, expect, Page } from "@playwright/test";
  * asserts on captured console output, so it needs no human watching the
  * canvas or reading logs by eye.
  */
-function cardPlayed(overrides: Record<string, unknown>) {
+function fakeTraceparent(): string {
+  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
+}
+
+function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
   return {
-    id: `e2e-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    id: randomUUID(),
+    tableId,
     name: "card.played",
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    face: "front",
-    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-    backImageUrl: null,
-    zoneHint: "stack",
-    ...overrides,
+    occurredIn: "shuffler",
+    visibility: "public",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      face: "front",
+      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+      backImageUrl: null,
+      zoneHint: "stack",
+      owner: "e2e-seat",
+      isCommander: false,
+      ...payloadOverrides,
+    },
   };
 }
 
@@ -53,10 +67,10 @@ test("dragging a card into a zone logs zone entry exactly once", async ({ page, 
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const instanceId = `zone-${Date.now()}`;
-  const event = cardPlayed({
+  const instanceId = randomUUID();
+  const event = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: "aaaaaaaa-0000-0000-0000-000000000004", instanceId },
+    card: { scryfallId: randomUUID(), instanceId },
     zoneHint: "stack",
   });
   const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
@@ -122,10 +136,10 @@ test("tapping a card still rotates it after zone-entry hooks are added", async (
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const instanceId = `zone-tap-${Date.now()}`;
-  const event = cardPlayed({
+  const instanceId = randomUUID();
+  const event = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: "aaaaaaaa-0000-0000-0000-000000000005", instanceId },
+    card: { scryfallId: randomUUID(), instanceId },
   });
   const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);

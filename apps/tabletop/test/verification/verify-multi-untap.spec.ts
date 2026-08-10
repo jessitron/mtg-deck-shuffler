@@ -1,4 +1,5 @@
 import { test, expect, Page, BrowserContext } from "@playwright/test";
+import { randomUUID } from "node:crypto";
 
 /**
  * Ticket 16 (multi-untap): with several cards marquee-selected, clicking one
@@ -12,17 +13,30 @@ import { test, expect, Page, BrowserContext } from "@playwright/test";
  * undo entry as the clicked card's own change. If a tldraw upgrade reorders
  * that, the one-Ctrl+Z assertions here are the tripwire.
  */
-function cardPlayed(overrides: Record<string, unknown>) {
+function fakeTraceparent(): string {
+  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
+}
+
+function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
   return {
-    id: `e2e-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    id: randomUUID(),
+    tableId,
     name: "card.played",
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    face: "front",
-    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-    backImageUrl: null,
-    zoneHint: "battlefield",
-    ...overrides,
+    occurredIn: "shuffler",
+    visibility: "public",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      face: "front",
+      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+      backImageUrl: null,
+      zoneHint: "battlefield",
+      owner: "e2e-seat",
+      isCommander: false,
+      ...payloadOverrides,
+    },
   };
 }
 
@@ -47,9 +61,9 @@ async function expectTapped(page: Page, instanceId: string, tapped: boolean) {
 
 async function placeCard(page: Page, baseURL: string | undefined, tableSlug: string, instanceId: string, overrides: Record<string, unknown> = {}) {
   const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, {
-    data: cardPlayed({
+    data: cardPlayed(tableSlug, {
       cardName: "Llanowar Elves",
-      card: { scryfallId: `aaaaaaaa-0000-0000-0000-${instanceId.slice(-12).padStart(12, "0")}`, instanceId },
+      card: { scryfallId: randomUUID(), instanceId },
       ...overrides,
     }),
   });
@@ -92,9 +106,9 @@ test("clicking one selected card taps the whole selection, and one Ctrl+Z revert
 
   // A goes on the Stack — far from the battlefield, so the marquee over B+C
   // can't catch it. B and C land at distinct battlefield grid positions.
-  const idA = `multi-a-${uniqueSuffix()}`;
-  const idB = `multi-b-${uniqueSuffix()}`;
-  const idC = `multi-c-${uniqueSuffix()}`;
+  const idA = randomUUID();
+  const idB = randomUUID();
+  const idC = randomUUID();
   await placeCard(page, baseURL, tableSlug, idA, { zoneHint: "stack" });
   await placeCard(page, baseURL, tableSlug, idB);
   await placeCard(page, baseURL, tableSlug, idC);
@@ -123,8 +137,8 @@ test("propagation pushes the clicked card's new state, not a per-card toggle", a
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const idB = `mixed-b-${uniqueSuffix()}`;
-  const idC = `mixed-c-${uniqueSuffix()}`;
+  const idB = randomUUID();
+  const idC = randomUUID();
   await placeCard(page, baseURL, tableSlug, idB);
   await placeCard(page, baseURL, tableSlug, idC);
   await zoomToFit(page);
@@ -160,8 +174,8 @@ test("another player's undo stack stays independent of a multi-untap", async ({ 
       expect(bob.locator(".tl-canvas")).toBeVisible({ timeout: 15000 }),
     ]);
 
-    const idB = `2client-b-${uniqueSuffix()}`;
-    const idC = `2client-c-${uniqueSuffix()}`;
+    const idB = randomUUID();
+    const idC = randomUUID();
     await placeCard(alice, baseURL, tableSlug, idB);
     await placeCard(alice, baseURL, tableSlug, idC);
     await expect(bob.locator(`#shape\\:card-${idB}`)).toBeAttached();

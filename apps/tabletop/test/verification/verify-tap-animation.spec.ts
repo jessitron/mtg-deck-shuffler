@@ -1,4 +1,5 @@
 import { test, expect, Browser, Page } from "@playwright/test";
+import { randomUUID } from "node:crypto";
 
 /**
  * tabletop-physics ticket 15: tapping reads as a quick rotation, not a snap.
@@ -11,24 +12,37 @@ import { test, expect, Browser, Page } from "@playwright/test";
  * cannot see `shape.rotation` change.
  */
 
-function cardPlayed(overrides: Record<string, unknown>) {
+function fakeTraceparent(): string {
+  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
+}
+
+function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
   return {
-    id: `e2e-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    id: randomUUID(),
+    tableId,
     name: "card.played",
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    face: "front",
-    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-    backImageUrl: null,
-    zoneHint: "stack",
-    ...overrides,
+    occurredIn: "shuffler",
+    visibility: "public",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      face: "front",
+      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+      backImageUrl: null,
+      zoneHint: "stack",
+      owner: "e2e-seat",
+      isCommander: false,
+      ...payloadOverrides,
+    },
   };
 }
 
 async function placeCard(page: Page, baseURL: string, tableSlug: string, instanceId: string) {
-  const event = cardPlayed({
+  const event = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: "aaaaaaaa-0000-0000-0000-000000000015", instanceId },
+    card: { scryfallId: randomUUID(), instanceId },
   });
   const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);
@@ -54,7 +68,7 @@ test("tapping a card plays a 0.5s rotation catch-up animation", async ({ page, b
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const instanceId = `tapanim-${Date.now()}`;
+  const instanceId = randomUUID();
   const card = await placeCard(page, baseURL!, tableSlug, instanceId);
 
   await card.click();
@@ -74,7 +88,7 @@ test("a card arriving already-tapped does not animate on mount", async ({ page, 
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const instanceId = `tapmount-${Date.now()}`;
+  const instanceId = randomUUID();
   const card = await placeCard(page, baseURL!, tableSlug, instanceId);
 
   // Tap it, let the animation finish, then reload: the card arrives from the
@@ -103,7 +117,7 @@ test("a remote peer sees the tap animation when the prop syncs in", async ({ bro
   const alice = await openTable(browser);
   const bob = await openTable(browser);
 
-  const instanceId = `tapremote-${Date.now()}`;
+  const instanceId = randomUUID();
   const card = await placeCard(alice.page, baseURL!, tableSlug, instanceId);
   await expect(bob.page.locator(`#shape\\:card-${instanceId}`)).toBeAttached({ timeout: 10000 });
 
