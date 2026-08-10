@@ -105,6 +105,14 @@ Button in `views/prepare.ejs` line 22-25:
 
 `public/modal-query-params.js` handles `?openLibrary=true` and `?openLibrary=true&groupBy=type` on page load, either clicking the search button or making a direct HTMX ajax call (for grouped view).
 
+## Focus Management
+
+The library modal's `.modal-overlay` carries static `role="dialog" aria-modal="true"`
+alongside its existing `tabindex="0"`. Focus-in-on-open, Tab-trapping,
+background-`inert`, and focus-restore-on-close are all handled by the generic
+`public/modal-focus.js` (see interactions.md) — the template itself has no focus
+logic beyond those static attributes.
+
 ## Card Modal Navigation (navList)
 
 When the library is displayed grouped by type, each type section builds a `navList` query parameter — a comma-separated list of card indices in that section. This is appended to card modal URLs so that prev/next navigation stays within the type group.
