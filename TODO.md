@@ -45,14 +45,11 @@ section is just a wall between Jess and the live work.
     box edge so the pile deepens in place instead of marching out.
     ← mountain: tabletop-replaces-mural
 
-- [ ] `design-text-link-specimen` Stage the nav-link idiom (text links) on `/design`
-  - Surfaced 2026-08-09 by the `shuffler-looks-like-itself` update after `6b6b927` (Tabletop
-    landing page's Shuffler link) named the idiom: white `--font-chrome` on dark, two live
-    instances (`site.css` → `.right-nav a`, `LandingPage.tsx` → `styles.shufflerLink`), two
-    underline variants (none-at-rest with hover vs. always-underlined for inline-style
-    contexts). The gallery has a typography row for nav links but no component specimen; a
-    Tabletop-side mock follows the ticket-11 precedents (labelled a mock, `.stage-white` —
-    though this link sits on a dark page, so the stage choice needs a thought).
+- Remove the Tabletop's landing page; redirect straight to the Shuffler instead. (Supersedes
+  `design-text-link-specimen` — the nav-link idiom's Tabletop instance was
+  `LandingPage.tsx`'s `styles.shufflerLink`; removing the page removes that instance.
+  `site.css`'s `.right-nav a` instance remains, so the specimen may still be worth staging
+  later, but not as urgent as a two-instance idiom.)
 
 - [ ] `design-sleeve-specimen` Stage a sleeved-card mock specimen on `/design`
   - Surfaced 2026-08-08 by the `shuffler-looks-like-itself` review of table-layout ticket 17,
