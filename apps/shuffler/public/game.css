@@ -395,6 +395,7 @@ body {
 }
 
 .hand-cards {
+  position: relative;
   display: flex;
   gap: 0px;
   row-gap: 5px;
@@ -454,6 +455,19 @@ body {
   flex-shrink: 0;
   z-index: 10;
   overflow: visible;
+}
+
+/*
+ * The leading drop zone (before card 0) exists once per hand, not once per row, so leaving
+ * it in flex flow adds width to row 1 only, shifting it right of the rows below it. Taking
+ * it out of flow keeps every row's cards aligned into a grid; -45px reproduces the same
+ * 35px overlap onto card 0 that the in-flow negative margins gave the other drop zones.
+ */
+.hand-drop-zone-leading {
+  position: absolute;
+  left: -45px;
+  top: 0;
+  margin: 0;
 }
 
 .hand-drop-zone.drag-over {

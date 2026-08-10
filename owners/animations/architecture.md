@@ -208,3 +208,40 @@ nothing landed):
 ## Drag-and-Drop Interaction
 
 `game.js` (lines 183-186) removes animation classes when a drag starts, preventing animation flicker when a card is dropped in a new position. After drop, HTMX swaps in the new hand state, which may include new animation classes from `WhatHappened`.
+
+## New mechanism: taking a one-time drop zone out of flex flow (2026-08-09)
+
+`.hand-drop-zone` elements are the drag-and-drop targets between hand cards (`data-hand-position`
+keys the drop, in `game.js`); they're rendered once per hand row by `hand-components.ts`, with
+negative margins (-35px each side) creating a 10px net-width overlap onto the neighboring card so
+the drop target reads as "between two cards" rather than "beside one."
+
+The **leading** drop zone (before card 0) is different: it exists **once per hand, not once per
+row** (there's only one "before the first card" position). Left as an ordinary in-flow flex item,
+its +10px net width was added to row 1's width only — row 1 has one more drop zone than every
+row below it, so row 1's cards sat 10px further right than row 2's, breaking the wrapped grid's
+column alignment.
+
+**Fix**: `.hand-drop-zone-leading` (new class, added alongside the existing `.hand-drop-zone` on
+that one element) takes it **out of flex flow entirely** — `position: absolute; left: -45px; top:
+0; margin: 0` — positioned relative to `.hand-cards`, which is now `position: relative`. `-45px`
+reproduces the same 35px visual overlap onto card 0 that the in-flow negative margin gave the
+other drop zones (35px margin + 10px own width contribution, now folded into the offset since the
+element no longer contributes width to the flex line at all). Because it's absolutely positioned,
+it no longer participates in wrapping/alignment math for any row — it only visually overlaps
+whichever row card 0 is in.
+
+**This is a new, third case in the "state that must survive swaps" family of body-anchoring
+patterns** (see above) — except here the fix isn't anchoring to a swap-surviving ancestor, it's
+**removing a flex participant from flow so its box no longer affects sibling layout**, while
+keeping it in the same swapped subtree and keeping `data-hand-position` untouched for
+`game.js`'s drag-and-drop targeting. Generalize this if a future one-time/edge-case element
+(exists once per collection, not once per row/item) is found to be distorting a wrapped flex
+grid: take it out of flow with `position: absolute` on a `position: relative` container, and
+compute the offset to preserve the original visual overlap.
+
+No CSS keyframes/transitions, no `WhatHappened` field, and no `game.js` change — this is a pure
+layout fix, not an animation. It's recorded here because the affected element (`.hand-drop-zone`)
+lives inside the same flex-wrap hand grid that hosts the card-move/card-drop animations, and the
+principle (one-time elements in a per-row collection break flex-wrap alignment; take them out of
+flow) is a general layout gotcha worth keeping alongside the other hand-layout knowledge.
