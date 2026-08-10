@@ -14,7 +14,14 @@ section is just a wall between Jess and the live work.
 ## Next
 
 
-- Feature: Let a player exit the table so they can rejoin with a different deck! (fleet)
+- GRILLING: Feature: Let a player exit the table so they can rejoin with a different deck! (fleet)
+  - Triage research (2026-08-10): nothing about "leaving a table" exists today — seats are
+    permanent once taken (`Table#take_seat!`), no `seat.left` contract event, and a deck binds
+    to a seat only implicitly via whatever `seat.joined` carried at join time. Needs a spec:
+    a new cross-ship contract event, Spine seat-release logic, and — the real open
+    question — what happens to the leaving player's library/hand/battlefield cards on the
+    Tabletop (removed? left as an orphaned zone?). That's a game-design call, not plumbing.
+    Promote via `/to-spec` when ready to decide it.
 
 - Minor bug: my sleeveless cards need a border radius. They are rectangles now (Tabletop)
 
