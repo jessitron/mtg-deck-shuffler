@@ -110,6 +110,13 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 | `apps/tabletop/test/cardArrival.test.ts` | Gained ticket-17 cases: `cardBackImageUrl` baked from a sleeved seat → `null`, from an unsleeved seat with a URL → populated, from a seat with no data → `null` default |
 | `apps/tabletop/test/verification/verify-flip-face-down.spec.ts` | New (ticket 17): two-client sync of flip AND face-down toggle; "Flip" menu-item gating on `backImageUrl`; unsleeved face-down render shows the table's card back and restores the front image on toggle-back; library-entry resets both axes; a stale-selection regression guard (flipping card A via the menu must not hijack a later drag of card B) |
 
+## Fleet-Wide Domain Docs (repo root, not `apps/shuffler/`)
+
+| File | Role |
+|---|---|
+| `CONTEXT-MAP.md` | New (2026-08-10). Fleet-wide bounded-context index + translations table. Its "Flip / Face-down" entry is the authoritative fleet-wide copy of the ship-comparison table (sourced from this owner's `tabletop.md`) |
+| `notes/GLOSSARY.md` | Gained a "Face-down" entry (2026-08-10) — the two-axis model (face vs. concealment), authoritative source other docs point to instead of re-explaining inline |
+
 ## Test Data
 
 | File | Role |

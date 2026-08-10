@@ -47,6 +47,30 @@ Card Name: this is ambiguous in the Archidekt and Scryfall domains. Usually the 
 
 Card vs Face: cards have names, and faces have names. A two-faced card's canonical (Display) Name contains both face names, joined by `//` — e.g. "Eiganjo Dynastorian // Replenish". Deck Shuffler zones contain cards, not faces: the library, the hand, and the table hold cards. So anything that identifies or orders cards — sorting a list, matching a name — uses the canonical card name.
 
+Face-down: concealment — showing the shared card back (or sleeve) instead of either printed
+face. This is a second axis, independent of Face. Face is which *printed* side of a card is
+up, and it only ranges over sides that exist on that card — unreachable/meaningless on a
+one-faced card, since there's no second printed side to choose. Face-down and Face compose
+rather than collapse into one bit: a two-faced card **can** be face down — a two-faced card can
+be *played* face down, or turned face down later on the table via the same generic gesture a
+one-faced card uses — and once it is, its `face` is irrelevant to what's shown, the card back
+appears regardless of which face the card "is." What a two-faced card *cannot* do is turn face
+down *as its Flip action*: Flip and Turn-face-down/up are two separate gestures/operations —
+Flip swaps which printed side is up (meaningless without a second printed side, so it's gated
+on having one), while Turn-face-down/up toggles concealment uniformly, with no such gate,
+because face-down is meant to apply the same way regardless of face count. A one-bit "which
+side is up" model was considered and rejected: it can't express "two-faced card, face down"
+(neither printed side is visible), and it makes concealment indistinguishable from a
+printed-face transform.
+
+The two ships model this differently, **on purpose**, not as a bug to reconcile: in the
+Shuffler, a one-faced card cannot be flipped at all — flip only means anything for two-faced
+cards there, and face-down has no home anywhere in the Shuffler's domain model (`CardDefinition`,
+`GameCard`, and the event contract carry nothing for it today). On the Tabletop, *any* card
+can be turned over, because a card on the table is a physical object with two sides — and a
+turned-over one-faced card *is* face-down there, a real domain event, not just a picture. See
+`CONTEXT-MAP.md`'s flip/face-down translation table for the full ship-by-ship comparison.
+
 Scryfall ID: Scryfall's card ID. This is a UUID. From this, we can derive a card image URL on Scryfall. Archidekt calls it `uid`.
 
 Multiverse ID: Gatherer's card ID. This is an integer. From this, we can derive a link to the card's page on Gatherer.

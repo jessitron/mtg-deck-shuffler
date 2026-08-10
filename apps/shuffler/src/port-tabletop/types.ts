@@ -46,6 +46,13 @@ import { currentTraceparent } from "./traceparent.js";
 //     },
 //   }
 //
+// NOTE: no field here models face-down (concealment). This payload's `face` is the
+// printed side, not a concealment bit — see notes/GLOSSARY.md "Face-down" and
+// CONTEXT-MAP.md's "Flip / Face-down" translation. That's a decided gap, not an
+// oversight: face-down is Tabletop-only domain model today (owners/two-faced-cards/
+// contract.md tracks it as "a second, orthogonal axis, not in the contract yet").
+// Adding it here is Tabletop-side physics-map work, not a Shuffler change.
+//
 // FORBIDDEN: `gameCardIndex` must NEVER cross the Shuffler's boundary. It is
 // the card's alphabetical rank in a known decklist — a decodable secret.
 // The contract gets the opaque `card.instanceId` instead.
