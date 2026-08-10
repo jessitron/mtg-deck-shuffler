@@ -126,6 +126,35 @@ The collector→Honeycomb leg stays `https://api.honeycomb.io`. Access logs: bot
 same bucket/prefix (`orion-alb-access-logs` / `orion-alb`); object keys embed the ALB name, so
 they stay distinguishable.
 
+**Incident, 2026-08-10: a bad sibling ingress in this group blocked routing changes to
+`mtg-tabletop-ingress` for ~27 hours.** `mtg-tabletop-https-downgrade`
+(`apps/tabletop/k8s/ingress-https-downgrade.yaml`, added 2026-08-09 by `90e61bd` to catch
+https-first browsers) carries `alb.ingress.kubernetes.io/actions.downgrade-to-http: {"type":
+"redirect","redirectConfig":{"protocol":"HTTP","port":"80",...}}` — a redirect action whose
+target protocol is `HTTP`. **AWS ALB rejects that outright**: `InvalidLoadBalancerAction: You
+cannot redirect HTTPS to HTTP.` Because every ingress sharing a `group.name` reconciles as
+**one ALB**, this single malformed ingress produced `FailedDeployModel` events on **both**
+ingresses in `tabletop-http` every ~15–20 minutes for about 27 hours — blocking any new routing
+change to `mtg-tabletop-ingress`, which is the ingress carrying the `/v1/traces` and `/v1/logs`
+OTLP routes to `mtg-tabletop-collector-service`. The ALB's last-good cached rules kept serving
+throughout, so telemetry didn't stop mid-incident, but any deploy needing a routing change to
+either ingress in the group would have silently failed to apply. Resolved by `kubectl delete`-ing
+`mtg-tabletop-https-downgrade` from the live cluster; `mtg-tabletop-ingress` then reconciled
+cleanly.
+
+**This is not fully closed.** `apps/tabletop/k8s/ingress-https-downgrade.yaml` still exists in
+git with the same broken `"protocol":"HTTP"` redirect action, and `apps/tabletop/deploy.sh:70`
+still runs `kubectl apply -f k8s/ingress-https-downgrade.yaml` on every deploy. **The next
+Tabletop deploy will recreate this incident** unless the file is fixed (or removed from
+`deploy.sh`) before that happens. A same-group redirect ingress cannot legally take a browser
+from HTTPS to HTTP-serving-the-app at all — AWS's ALB redirect action only supports
+protocol-preserving redirects (HTTP→HTTP, HTTPS→HTTPS) or HTTP→HTTPS upgrades, never the
+downgrade direction. Any future fix for "catch https-first browsers" needs either a real ACM
+cert + an HTTPS target that actually serves the app over TLS (defeating the tldraw license-gate
+workaround this whole group exists for), or a different mechanism than an ALB redirect action —
+and should be reviewed against this owner first, since a bad ingress in this group risks
+silently breaking OTLP routing for **both** ingresses, not just itself.
+
 ### 4. Head-sample heath checks; keep all user activity.
 
 A sampler that stops matching keeps 100% of the chatter and says nothing about it. So sampling logic
@@ -721,6 +750,21 @@ its own `window.onerror`/`unhandledrejection` handlers at
 
 ## History (why these rules exist)
 
+- **Incident, 2026-08-10 — a malformed sibling ingress blocked `mtg-tabletop-ingress` reconciliation
+  for ~27 hours.** `mtg-tabletop-https-downgrade` tried an ALB redirect action with
+  `redirectConfig.protocol: "HTTP"` (HTTPS→HTTP), which AWS rejects outright
+  (`InvalidLoadBalancerAction: You cannot redirect HTTPS to HTTP`). Because ingresses sharing
+  `alb.ingress.kubernetes.io/group.name` reconcile as one ALB, the one bad ingress produced
+  `FailedDeployModel` on **both** ingresses in `tabletop-http` — including the one carrying the
+  `/v1/traces`/`/v1/logs` OTLP routes — every ~15–20 minutes for the whole window. Existing cached
+  ALB rules kept serving, so telemetry didn't fully stop, but any new routing change to either
+  ingress would have silently failed to apply for as long as the bad ingress stayed in the group.
+  Fixed live by deleting `mtg-tabletop-https-downgrade` from the cluster; **the git-committed file
+  and `deploy.sh`'s `kubectl apply` of it were not fixed**, so this is a live landmine, not a closed
+  incident — see "While ingest keys are OK to commit..." above (Invariant 3) for the full writeup
+  and what a real fix needs. Lesson for this owner: **a shared `group.name` means a bad ingress
+  anywhere in the group can silently block routing changes everywhere in the group** — the failure
+  mode isn't confined to the ingress that's actually broken.
 - `align-otel-versions` (2026-08-10) — the Shuffler's OTel deps were bumped from the 0.219 line to
   0.221, matching the Tabletop (`api-logs`, `auto-instrumentations-node` 0.77.0→0.79.0,
   `exporter-logs-otlp-http`, `exporter-trace-otlp-http`, `sdk-logs`, `sdk-node`; `core`/`resources`/
