@@ -661,3 +661,32 @@ in-place schema amendments. `.scratch/tabletop-cards-come-and-go/issues/05-contr
   fields `buildSeatJoinedCommander` always sends. No asymmetry with `card.played` remains.
 - No `CardDefinition` or `GameCard` shape change — this ticket is entirely in `contracts/`
   and the Tabletop's two receivers (plus the merge-time schema fix above).
+
+## `let-gamecardindex-out` Built: `gameCardIndex` Now Rides `card.played`, For Real (2026-08-10)
+
+The buoy tracked since the 2026-08-07 design decision (recorded above) is no longer just a
+reversed rule — it's a populated field.
+
+- **`contracts/payloads/card.played.v1.json`**: added optional integer `gameCardIndex` as a
+  top-level sibling of `card`/`face`/`zoneHint`/etc — not required, not nested inside `card`.
+  Edited v1 in place per the existing "optional sibling field" precedent (`owner`,
+  `isCommander`, `frontImageUrl` et al) — no v2 bump.
+- **`contracts/payloads/seat.joined.v1.json`**: same optional top-level `gameCardIndex`
+  property added for schema symmetry, but nothing populates it — `seat.joined` has no single
+  "the card" concept (asymmetric with `card.played`, consistent with the existing face-field
+  asymmetry this KB already tracks for commander entries).
+- **`apps/shuffler/src/port-tabletop/types.ts`**: `CardPlayedPayload.gameCardIndex: number` is
+  now a **required** TS field, and `buildCardPlayedEvent` populates it from
+  `gameCard.gameCardIndex` — so every `card.played` event now actually carries it, not just
+  permits it structurally. `SeatJoinedPayload` gained an optional `gameCardIndex?: number`
+  field but no builder populates it.
+- **`apps/tabletop/src/server/cardArrival.ts` and `seatJoined.ts`**: local payload interfaces
+  updated to accept the optional field; the Tabletop does not consume it anywhere — no new
+  prop on the `mtg-card` shape, no rendering change.
+- Tests inverted (not deleted) on both sides:
+  `apps/shuffler/test/port-tabletop/{cardPlayedEvent,gateways}.test.ts` and
+  `apps/tabletop/test/{cardArrival,seatJoined}.test.ts` now assert `gameCardIndex` is
+  accepted/passed through rather than rejected/absent.
+- **Net effect**: the "old ban is reversed" buoy note is no longer just planned —
+  `card.played` has a live, populated `gameCardIndex` field with no consumer yet on the
+  Tabletop side.

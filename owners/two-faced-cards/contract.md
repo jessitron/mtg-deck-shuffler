@@ -171,12 +171,21 @@ Also decided there, adjacent to this owner's territory:
     `notes/DESIGN-the-table-vision.md` § Principles: *"everything that can be done by one
     player is doable by any player"*; the Tabletop has no ownership or permission model.
     See [tabletop.md](tabletop.md).
-  - **`gameCardIndex`: Jess reversed her own call.** It was forbidden in any payload as a
-    decodable secret (alphabetical rank in a known decklist). She now wants it *out* —
-    *"I don't want you to have to reason about what is hidden and what isn't."* Buoy
-    `let-gamecardindex-out` in the repo-root `TODO.md`; the no-index unit test in
-    `apps/shuffler/test/port-tabletop/` still exists and will go with it. **Don't cite the
-    old rule as binding, and don't re-erect it.**
+  - **`gameCardIndex`: Jess reversed her own call, and it's now built (2026-08-10,
+    `let-gamecardindex-out`).** It was forbidden in any payload as a decodable secret
+    (alphabetical rank in a known decklist). She wanted it *out* — *"I don't want you to
+    have to reason about what is hidden and what isn't."* Landed: `card.played.v1.json`
+    gained optional `gameCardIndex: integer` as a top-level sibling of `card` (not nested
+    inside it), and `buildCardPlayedEvent` now always populates it from
+    `gameCard.gameCardIndex` — it's a **required** TS field on `CardPlayedPayload`, so
+    every `card.played` event carries it, not just permits it. `seat.joined.v1.json` got
+    the same optional field for schema symmetry, but nothing populates it — `seat.joined`
+    has no single "the card" to index. Neither Tabletop receiver (`cardArrival.ts`,
+    `seatJoined.ts`) does anything with the value yet beyond accepting it; no new `mtg-card`
+    prop, no rendering change. The old no-index unit tests were **inverted, not deleted** —
+    `apps/shuffler/test/port-tabletop/{cardPlayedEvent,gateways}.test.ts` and
+    `apps/tabletop/test/{cardArrival,seatJoined}.test.ts` now assert the field is
+    accepted/passed through. **Don't cite the old ban as binding, and don't re-erect it.**
 
   What the guard was protecting still has a home, just one level up: SEAMAP's *"hand counts
   but never hands"* is about **what an event means** — the Spine's log says a card was

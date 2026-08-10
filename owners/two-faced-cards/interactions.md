@@ -164,11 +164,11 @@ These are specific things that could break two-faced cards if changed elsewhere:
     permission model**. Two standing consequences: identity stays in `props` on a face-down
     card, and **never gate a flip / turn-over / peek on who controls the card** — that
     design space is closed, not unexplored. Related: the old "`gameCardIndex` never leaves
-    the Shuffler" rule is **being reversed** (buoy `let-gamecardindex-out` in `TODO.md`) —
-    don't cite it as binding. What survives is that payloads should say what happened and no
-    more (SEAMAP's "hand counts but never hands"), which is a constraint on payload *design*,
-    not a check on every boundary. Full reasoning in [contract.md](contract.md) and
-    [tabletop.md](tabletop.md).
+    the Shuffler" rule **was reversed and is now built** (buoy `let-gamecardindex-out`,
+    landed 2026-08-10 — see watch point 21) — don't cite the old rule as binding. What
+    survives is that payloads should say what happened and no more (SEAMAP's "hand counts
+    but never hands"), which is a constraint on payload *design*, not a check on every
+    boundary. Full reasoning in [contract.md](contract.md) and [tabletop.md](tabletop.md).
 
 16. **Face state in the card modal is now strongly observable — resolved 2026-08-07.**
     Previously there was no `data-face`, no class, and no face-dependent text in the modal (a
@@ -291,6 +291,24 @@ These are specific things that could break two-faced cards if changed elsewhere:
       `` `ghost:${instanceId}` `` instance id so it never collides with the real card's dedup
       key (watch point above: dedup is on `props.instanceId`). Noted here only because it
       shares the card shape and the `owner`/`isCommander` props.
+
+21. **`gameCardIndex` now rides `card.played`, for real — `let-gamecardindex-out`, built
+    2026-08-10.** The old ban (watch point 15's history) is not just lifted in principle
+    anymore; it's a live, populated field. `card.played.v1.json` gained optional
+    `gameCardIndex: integer` as a **top-level sibling** of `card`/`face`/`zoneHint`/etc —
+    not nested inside `card`, not required. `CardPlayedPayload` in
+    `apps/shuffler/src/port-tabletop/types.ts` made it a **required TS field**, and
+    `buildCardPlayedEvent` populates it from `gameCard.gameCardIndex` on every send — so
+    every `card.played` event now actually carries the card's alphabetical rank in the
+    initial decklist array (not library order, which is shuffled). `seat.joined.v1.json`
+    gained the identical optional top-level field for schema symmetry, but **nothing
+    populates it** — `seat.joined` has no single "the card" concept to hang an index on
+    (asymmetric with `card.played`, the same shape of asymmetry this KB already tracks for
+    `face` on commander entries). `apps/tabletop/src/server/cardArrival.ts` and
+    `seatJoined.ts` accept the optional field in their local payload interfaces but the
+    Tabletop **does not consume it anywhere** — no new prop on `mtg-card`, no rendering
+    change. If a future ticket wants the Tabletop to *use* `gameCardIndex` (e.g. showing a
+    decklist position), that's new work, not something this change already wired up.
 ## Not Related To
 
 ### Sleeve carries to the game screen (`sleeve-carries-to-game`, 2026-08-09)
