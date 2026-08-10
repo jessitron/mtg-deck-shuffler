@@ -15,9 +15,6 @@ body {
   width: 100%;
   max-width: 1800px;
   margin: 0 auto;
-  box-shadow: 5px 5px black;
-  margin-bottom: 5px;
-  /* have to account for the shadow */
   /* Bigger mat, bigger corner — radius is scale, not drift (Jess, 2026-08-07).
    * /prepare draws the same object smaller at 20px. */
   border-radius: 80px;

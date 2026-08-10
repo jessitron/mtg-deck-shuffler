@@ -234,10 +234,12 @@ Concrete, in rough order of how often they bite.
   order staying aligned, and if a future change makes the two pages diverge again, the trap
   is back.
 - **What legitimately stays per-page:** `border-radius` (80px game / 20px prepare — scale,
-  Jess 2026-08-07), each page's layout, and `.playmat-game`'s `box-shadow: 5px 5px black`.
-  That shadow is the only difference with no stated reason; it's buoyed as
-  `playmat-drop-shadow`, blocked on `design-playmat-specimen`. **Don't converge it as
-  tidying** — it's a survivor of the "giant Magic card" reading and Jess hasn't ruled.
+  Jess 2026-08-07) and each page's layout. **`.playmat-game`'s `box-shadow: 5px 5px black`
+  is gone (2026-08-10, Jess's explicit call)** — the mats are now fully converged, no
+  shadow on either. The dependent `margin-bottom: 5px` and its `/* have to account for the
+  shadow */` comment went with it. `playmat-drop-shadow` in `TODO.md` is resolved; don't
+  reintroduce a shadow on one mat citing "the giant Magic card" reading — that question is
+  closed.
 - **Placement keys off the bare `.playmat`, deliberately.** `prepare.css` →
   `.playmat > .game-title`, `.playmat .cool-command-zone-surround`,
   `.playmat .commander-placeholder`. Don't "tidy" these to `.playmat-prepare` — the mat as a
