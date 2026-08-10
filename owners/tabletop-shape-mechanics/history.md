@@ -507,6 +507,54 @@ leaves the titles exactly as covered.
   not purely cosmetic — zone detection is center-based, so a card whose cascade step pushed its
   center outside the box misread as a different zone. **Resolved 2026-08-10, `7823a39`** — see the
   "Graveyard cascade wrap-bound" entry below.
+
+## A ridden counter didn't animate along with its host's tap (2026-08-10)
+
+TODO.md bug: "the counter didn't participate in the tap animation, when the counter was on
+the card." `MtgCardShapeUtil`'s tap catch-up (ticket 15's WAAPI counter-rotate-then-ease-to-0,
+`65276e6`) is a purely local DOM illusion scoped to the card's own `.tl-image-container`, keyed
+off `props.tapped` changing. A hosted `mtg-counter` passenger has no `props.tapped` of its own —
+tldraw composes the host's rotation into the counter's page transform for free (ticket 18's
+ride-along visual, so the *position* was never wrong), but the counter's own DOM node just
+snapped to the new angle a frame before the card's div started easing back — visually
+disconnected mid-swing.
+
+- **Fix**, in `apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx`: a `useValue` computed
+  reads the counter's own current shape record and its host's `props.tapped` back out of the
+  editor *inside the selector*, then a `useLayoutEffect` keyed on that value replays the
+  identical WAAPI catch-up (500ms, ease-out, counter-rotate then ease to 0) on the counter's own
+  `.tl-image-container`.
+- **New reactivity gotcha for this KB, worth its own watch point**: reading `shape.parentId`
+  directly off the `shape` argument passed into `component()` is NOT reactive to reparenting.
+  tldraw only re-invokes a shape's `component()` with a fresh `shape` object when that shape's
+  OWN `props` change — a bare `parentId`/x/y/rotation write (drag-attach, or nothing at all for
+  a plain tap of the host) is applied to the wrapping transform outside React and never
+  re-renders. A `useValue` selector that closes over `shape.parentId` from the outer scope would
+  therefore freeze at whatever value the last props-triggered render saw, missing every later
+  attach/detach/tap. The fix is to call `this.editor.getShape(shape.id)` **inside** the
+  `useValue` selector for a fresh, reactively-tracked `parentId` on every store change, then
+  chain a second `this.editor.getShape(parentId)` read for the host's `props.tapped` — both are
+  genuine signal reads through the store, so `useValue` correctly re-runs on reparent OR host
+  tap. Found by adding a temporary `window.__editor` debug hook and confirming via
+  `editor.getShapeAtPoint`/direct prop reads that the naive closure-based version's effect only
+  ever fired once, at mount. New watch point 20 in `interactions.md`.
+- **Red herring, recorded for the testing-conventions section**: clicking a card's exact
+  geometric center to tap it, when a counter is attached nearby and the camera is zoomed way out
+  (e.g. after Shift+1 `zoomToFit` on the whole table), can resolve to the COUNTER instead of the
+  card in tldraw's own hit-test (`editor.getShapeAtPoint`/`getHoveredShapeId`) — even though
+  `document.elementFromPoint` and a standalone `getShapeAtPoint` call both correctly say "card."
+  The counter's hit-test margin (`hitTestMargin / zoomLevel`) grows in page-space at low zoom and
+  can reach the card's center. `verify-counter.spec.ts` already has a `topGrip()` helper for
+  exactly this reason (grab the card's top 12% instead of center); the same pattern was added to
+  the new test. Folded into watch point 13's Playwright-facts list.
+- **Test**: `apps/tabletop/test/verification/verify-tap-animation.spec.ts`'s "a counter riding a
+  tapped card animates along with it" — attaches a counter, taps and untaps the host via
+  `topGrip`, asserts the counter's own `.tl-image-container` plays the 500ms WAAPI animation each
+  time, and that attaching alone (no tap) does not animate it.
+
+Full detail in `architecture.md`'s `MtgCounterShapeUtil` section (new "Ride-along tap catch-up"
+subsection) and `interactions.md` watch point 20 (reactivity gotcha) plus watch point 13's
+Playwright-facts extension (hit-test-margin-vs-passenger).
 - Old tables keep old furniture (`ensurePlayerArea` never redraws) — same graceful degradation
   already recorded for the command-zone redraw.
 

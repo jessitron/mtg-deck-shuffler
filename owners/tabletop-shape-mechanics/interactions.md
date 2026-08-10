@@ -359,7 +359,17 @@
     trusting locator indices across a reparent; (c) focusing a custom editing input needs
     `setTimeout(0)` inside the `isEditing` effect — `autoFocus`, ref-callback focus, and a bare
     effect all lose to tldraw's end-of-gesture focus handling (`document.activeElement` ends on
-    `body`). Ticket 16 (`verify-multi-untap.spec.ts`) added three more: (d) **marquee
+    `body`). The ride-along tap-catch-up fix (2026-08-10) added a fourth, found chasing a red
+    herring while debugging it: (g) **at low zoom, a nearby passenger's hit-test margin can
+    steal a click aimed at a card's exact center**, inside tldraw's own hit-test
+    (`getShapeAtPoint`/`getHoveredShapeId`), even though `document.elementFromPoint` correctly
+    says "card" — `hitTestMargin / zoomLevel` grows in page-space as zoom decreases, so after a
+    whole-table `zoomToFit` a counter's margin can reach the card's center pixel.
+    `verify-counter.spec.ts`'s `topGrip()` helper (grab the card's top ~12%, not its center)
+    already existed for this; `verify-tap-animation.spec.ts`'s new counter test reuses it. Any
+    test tapping/clicking a card that has or might have a passenger attached should grab near the
+    top edge, not the center, especially at non-1:1 zoom. Ticket 16 (`verify-multi-untap.spec.ts`)
+    added three more: (d) **marquee
     selection works by brushing from a point over locked furniture** — `SelectTool`'s `Idle`
     gates `isLocked` before `PointingShape`, so pointer-down on the playmat starts a brush,
     same as bare canvas; compute the brush rect from the cards' actual bounding boxes plus a
@@ -569,6 +579,24 @@
       `TablePage.tsx`'s `inlineAssets.upload` handles a real paste/drop, no server involved), drags
       the image to a neutral spot (no test-side `deselectAll` — proving the product clears
       selection, not the test), then drags the card and asserts the card (not the image) moved.
+21. **A ShapeUtil's `component(shape)` only gets a fresh `shape` object when that shape's OWN
+    `props` change — closing over `shape.parentId` (or any non-`props` field) in a reactive
+    selector freezes it at the last props-triggered render.** (Found 2026-08-10, fixing "the
+    counter didn't participate in the tap animation, when the counter was on the card" —
+    `MtgCounterShapeUtil.tsx`.) A bare `parentId`/`x`/`y`/`rotation` write — exactly what a
+    drag-attach or a host's tap produces — is applied to the wrapping page-transform outside
+    React and never re-renders `component()`. A `useValue` selector that reads `shape.parentId`
+    from the outer closure therefore never sees a reparent or an ancestor's prop change; it just
+    replays whatever was true at mount or the last unrelated props-triggered render. Confirmed by
+    adding a temporary `window.__editor` debug hook: the naive closure version's effect fired
+    exactly once, at mount, never again. **The fix: call `this.editor.getShape(shape.id)` INSIDE
+    the `useValue` selector** to get a fresh, reactively-tracked record on every store change,
+    then chain a second `this.editor.getShape(parentId)` read for an ancestor's props — both are
+    genuine signal reads through the store, so `useValue` correctly re-runs on every relevant
+    change (reparent OR ancestor prop write). Any future passenger-side hook that needs to react
+    to its own current `parentId`, or to a host's/ancestor's props, needs this "read the editor
+    inside the selector" shape, not a closure over the `shape` argument. See
+    `architecture.md`'s "Ride-along tap catch-up" subsection.
 
 ## Not Related To
 
