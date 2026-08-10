@@ -882,6 +882,34 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
   span), so if it ever fires in production, the span says so instead of quietly minting
   a trace-shaped string that links to nothing.
 
+- **2026-08-10 (`.scratch/console-log-sweep/`): the Shuffler's remaining `console.*` calls were
+  swept onto `log.ts`/span attributes, closing the app out as a worked example of Invariant 1 +
+  Invariant 2 together, not just in `app.ts`.** Confirmed by reading the diff, not just the
+  agent's report: `apps/shuffler/src/GameState.ts` (2 sites — the deck-has->2-commanders warning
+  and the misnamed `warn()` helper, which called `console.log` despite its name), `server.ts`
+  (5 module-load `log.info` calls, including the `tabletopUrl`/`dbPath` values that used to be
+  string-interpolated into the message — now structured attributes), `SqlitePersistStateAdapter.ts`
+  (1, a per-row parse failure recoverable by falling back to a placeholder — request still
+  succeeds, so `log.warn`, not `log.error`), and `ArchidektDeckToDeckAdapter.ts` (1, the documented
+  best-effort Scryfall-enrichment fallback, same reasoning). All four recoverable/no-request-failure
+  sites follow the house pattern's spirit even though they're warnings, not errors: attributes on
+  the active span (`trace.getActiveSpan()?.setAttributes(attrs)`) *and* `log.warn(message, attrs)`,
+  not attributes-only — because unlike an in-request error, there's no guarantee anyone is looking
+  at that specific span, so the fact needs to be findable as a log too.
+  **The `GameState.ts` `warn()` helper is worth remembering as its own small fails-open-invisibly
+  instance**: it was named `warn` but called `console.log`, so every warning it emitted (2 call
+  sites, "card already on this face", "found card in unexpected location") looked like a routine
+  log line with no severity, in no logging pipeline at all until this sweep — a warning that reads
+  as fine is the same shape as a guard that "passes" without checking what it claims to check.
+  `app.ts`'s existing 36 `markCurrentSpanAsError`+`log.error` sites (real request failures) and 8
+  `server.ts`-style `log.info` startup lines were already the pattern; this pass extended it to the
+  three files that had been missed. Confirmed clean:
+  `grep -rn "console\." apps/shuffler/src | grep -v src/scripts` now returns only `log.ts`'s own
+  three `console.*` calls (its intentional stdout mirror) — everything else in `src/` is `log.*`.
+  `src/scripts/*` (documented CLI-script exception) and the two inline browser `<script>` strings
+  in `state-copy.ts`/`html-layout.ts` are literal browser JS, not server code this owner's rule
+  reaches. Verified with `npm test` (334/334, 40 suites) and `./verify.sh verify-yo-fast-start`.
+
 ## Related reading
 
 `SEAMAP.md` + the three ship SEAMAPs (the "Observability is mandatory" line),
