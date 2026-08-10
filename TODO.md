@@ -238,14 +238,6 @@ section is just a wall between Jess and the live work.
   - The old argument against starting — one permanently-red Playwright test — is gone; that test is
     fixed. Decide this on its own merits.
 
-- [ ] `fun-game-ids` Game IDs as fun word combos instead of numbers ← was: JES-97
-  - > Make game IDs fun word combinations instead of numbers. That makes them not derivable
-    > (a small privacy win) and still looks pretty.
-  - The **privacy** argument is the stronger one: `SEAMAP.md` makes "no login/auth yet" an
-    explicit non-goal, so today a sequential game URL is guessable by anyone.
-  - Touches persistence, not CSS: `nextGameId++` in both `InMemoryPersistStateAdapter.ts:35` and
-    `SqlitePersistStateAdapter.ts:65` (the latter seeded from `MAX(id)`), plus the game URLs.
-
 - GRILLING: `game-page-to-ejs` Migrate the active game page to EJS templates ← was: JES-78
   - > The active game page renders via TypeScript view functions, a historical accident rather
     > than an intention. Migrate it to EJS like the rest of the pages.
