@@ -1,5 +1,6 @@
-import { test, expect, Page } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { randomUUID } from "node:crypto";
+import { openTable, placeCard, zoomToFit, dragCardTo } from "./helpers";
 
 /**
  * Ticket 01-zone-entry-events: dragging a card into a zone (graveyard,
@@ -13,33 +14,6 @@ import { randomUUID } from "node:crypto";
  * asserts on captured console output, so it needs no human watching the
  * canvas or reading logs by eye.
  */
-function fakeTraceparent(): string {
-  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
-}
-
-function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
-  return {
-    id: randomUUID(),
-    tableId,
-    name: "card.played",
-    occurredAt: new Date().toISOString(),
-    initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    occurredIn: "shuffler",
-    visibility: "public",
-    traceparent: fakeTraceparent(),
-    schemaVersion: 1,
-    payload: {
-      face: "front",
-      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-      backImageUrl: null,
-      zoneHint: "stack",
-      owner: "e2e-seat",
-      isCommander: false,
-      ...payloadOverrides,
-    },
-  };
-}
-
 function zoneEntryLogs(messages: string[]): Array<{ instanceId: string; zone: string }> {
   return messages
     .map((m) => /^zone-entry (\S+) (\S+)$/.exec(m))
@@ -47,37 +21,15 @@ function zoneEntryLogs(messages: string[]): Array<{ instanceId: string; zone: st
     .map((m) => ({ instanceId: m[1], zone: m[2] }));
 }
 
-async function dragCardTo(page: Page, card: ReturnType<Page["locator"]>, targetSelector: string) {
-  const target = page.locator(targetSelector);
-  const cardBox = await card.boundingBox();
-  const targetBox = await target.boundingBox();
-  if (!cardBox || !targetBox) throw new Error("missing bounding box");
-
-  await page.mouse.move(cardBox.x + cardBox.width / 2, cardBox.y + cardBox.height / 2);
-  await page.mouse.down();
-  await page.mouse.move(targetBox.x + targetBox.width / 2, targetBox.y + targetBox.height / 2, { steps: 10 });
-  await page.mouse.up();
-}
-
 test("dragging a card into a zone logs zone entry exactly once", async ({ page, baseURL }) => {
   const tableSlug = `verify-zone-${Date.now()}`;
   const consoleMessages: string[] = [];
   page.on("console", (msg) => consoleMessages.push(msg.text()));
 
-  await page.goto(`/t/${tableSlug}`);
-  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+  await openTable(page, tableSlug);
 
   const instanceId = randomUUID();
-  const event = cardPlayed(tableSlug, {
-    cardName: "Llanowar Elves",
-    card: { scryfallId: randomUUID(), instanceId },
-    zoneHint: "stack",
-  });
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
-  expect(response.status()).toBe(201);
-
-  const card = page.locator(`#shape\\:card-${instanceId}`);
-  await expect(card).toBeAttached();
+  const card = await placeCard(page, baseURL, tableSlug, instanceId);
 
   // The seat's player area (including the graveyard and exile zones) is
   // drawn as a defensive fallback on card arrival — locate it by its
@@ -93,8 +45,7 @@ test("dragging a card into a zone logs zone entry exactly once", async ({ page, 
   // right-hand column — tldraw culls (display:none) shapes outside the
   // initial camera viewport. Zoom to fit everything before computing any
   // bounding boxes, so drag targets are actually rendered.
-  await page.keyboard.press("Shift+1");
-  await page.waitForTimeout(300);
+  await zoomToFit(page);
 
   consoleMessages.length = 0;
   await dragCardTo(page, card, graveyard);
@@ -133,19 +84,10 @@ test("dragging a card into a zone logs zone entry exactly once", async ({ page, 
 
 test("tapping a card still rotates it after zone-entry hooks are added", async ({ page, baseURL }) => {
   const tableSlug = `verify-zone-tap-${Date.now()}`;
-  await page.goto(`/t/${tableSlug}`);
-  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+  await openTable(page, tableSlug);
 
   const instanceId = randomUUID();
-  const event = cardPlayed(tableSlug, {
-    cardName: "Llanowar Elves",
-    card: { scryfallId: randomUUID(), instanceId },
-  });
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
-  expect(response.status()).toBe(201);
-
-  const card = page.locator(`#shape\\:card-${instanceId}`);
-  await expect(card).toBeAttached();
+  const card = await placeCard(page, baseURL, tableSlug, instanceId);
   const before = await card.boundingBox();
   expect(before).not.toBeNull();
 

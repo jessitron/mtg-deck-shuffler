@@ -1,5 +1,6 @@
 import { test, expect, Page, Locator } from "@playwright/test";
 import { randomUUID } from "node:crypto";
+import { cardPlayed, openTable, placeCard, zoomToFit, center, dragPointTo, dragCenterTo } from "./helpers";
 
 /**
  * Ticket 18 (tabletop-physics): counters ride along on a card.
@@ -15,50 +16,6 @@ import { randomUUID } from "node:crypto";
  * - Hazard A regression (tabletop-shape-mechanics owner): after dragging a
  *   counter, dragging a card must move the CARD, not the stale-selected counter.
  */
-
-function fakeTraceparent(): string {
-  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
-}
-
-function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
-  return {
-    id: randomUUID(),
-    tableId,
-    name: "card.played",
-    occurredAt: new Date().toISOString(),
-    initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    occurredIn: "shuffler",
-    visibility: "public",
-    traceparent: fakeTraceparent(),
-    schemaVersion: 1,
-    payload: {
-      face: "front",
-      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-      backImageUrl: null,
-      zoneHint: "stack",
-      owner: "e2e-seat",
-      isCommander: false,
-      ...payloadOverrides,
-    },
-  };
-}
-
-async function dragPointTo(page: Page, from: { x: number; y: number }, to: { x: number; y: number }) {
-  await page.mouse.move(from.x, from.y);
-  await page.mouse.down();
-  await page.mouse.move(to.x, to.y, { steps: 10 });
-  await page.mouse.up();
-}
-
-async function dragCenterTo(page: Page, from: Locator, to: { x: number; y: number }) {
-  await dragPointTo(page, await center(from), to);
-}
-
-async function center(locator: Locator): Promise<{ x: number; y: number }> {
-  const box = await locator.boundingBox();
-  if (!box) throw new Error("missing bounding box");
-  return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
-}
 
 /** A grip near the card's top edge — counters in these tests sit lower on the
  * card, so grabbing here reliably hits the CARD, not a counter riding it. */
@@ -77,24 +34,6 @@ async function createCounter(page: Page, at: { x: number; y: number }) {
   await page.waitForTimeout(500);
 }
 
-async function placeCard(page: Page, baseURL: string | undefined, tableSlug: string, instanceId: string) {
-  const event = cardPlayed(tableSlug, {
-    cardName: "Llanowar Elves",
-    card: { scryfallId: randomUUID(), instanceId },
-    zoneHint: "stack",
-  });
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
-  expect(response.status()).toBe(201);
-  const card = page.locator(`#shape\\:card-${instanceId}`);
-  await expect(card).toBeAttached();
-  return card;
-}
-
-async function openTable(page: Page, tableSlug: string) {
-  await page.goto(`/t/${tableSlug}`);
-  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
-}
-
 test("a counter attaches to a card, rides along, and detaches when dragged off", async ({ page, baseURL }) => {
   const tableSlug = `verify-counter-${Date.now()}`;
   await openTable(page, tableSlug);
@@ -103,8 +42,7 @@ test("a counter attaches to a card, rides along, and detaches when dragged off",
   const card = await placeCard(page, baseURL, tableSlug, instanceId);
 
   // Zoom to fit so the card (and future drop targets) are actually rendered.
-  await page.keyboard.press("Shift+1");
-  await page.waitForTimeout(300);
+  await zoomToFit(page);
 
   // 1. The toolbar tool creates a blank counter on the table.
   const cardCenter = await center(card);
@@ -150,8 +88,7 @@ test("after dragging a counter, dragging a card moves the card (stale-selection 
 
   const instanceId = randomUUID();
   const card = await placeCard(page, baseURL, tableSlug, instanceId);
-  await page.keyboard.press("Shift+1");
-  await page.waitForTimeout(300);
+  await zoomToFit(page);
 
   const cardCenter = await center(card);
   await createCounter(page, { x: cardCenter.x + 300, y: cardCenter.y + 120 });
@@ -190,8 +127,7 @@ test("two counters can share a card and overlap; both detach near the graveyard'
   const graveyard = page.locator(`[data-shape-id="shape:region-graveyard-${tableSlug}-e2e-seat"]`);
   await expect(graveyard).toBeAttached();
 
-  await page.keyboard.press("Shift+1");
-  await page.waitForTimeout(300);
+  await zoomToFit(page);
 
   const cardCenter = await center(card);
   const counters = page.getByTestId("mtg-counter");

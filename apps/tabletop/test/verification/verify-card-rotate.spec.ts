@@ -1,53 +1,18 @@
 import { test, expect } from "@playwright/test";
 import { randomUUID } from "node:crypto";
+import { openTable, placeCard } from "./helpers";
 
 /**
  * Clicking a card on the table taps/untaps it — a toggle between 0° and 90°,
  * not a 4-way rotation cycle. The tap's rotation ANIMATION is covered
  * separately in verify-tap-animation.spec.ts (tabletop-physics ticket 15).
  */
-function fakeTraceparent(): string {
-  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
-}
-
-function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
-  return {
-    id: randomUUID(),
-    tableId,
-    name: "card.played",
-    occurredAt: new Date().toISOString(),
-    initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    occurredIn: "shuffler",
-    visibility: "public",
-    traceparent: fakeTraceparent(),
-    schemaVersion: 1,
-    payload: {
-      face: "front",
-      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-      backImageUrl: null,
-      zoneHint: "stack",
-      owner: "e2e-seat",
-      isCommander: false,
-      ...payloadOverrides,
-    },
-  };
-}
-
 test("clicking a card rotates it 90 degrees", async ({ page, baseURL }) => {
   const tableSlug = `verify-rotate-${Date.now()}`;
-  await page.goto(`/t/${tableSlug}`);
-  await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
+  await openTable(page, tableSlug);
 
   const instanceId = randomUUID();
-  const event = cardPlayed(tableSlug, {
-    cardName: "Llanowar Elves",
-    card: { scryfallId: randomUUID(), instanceId },
-  });
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
-  expect(response.status()).toBe(201);
-
-  const card = page.locator(`#shape\\:card-${instanceId}`);
-  await expect(card).toBeAttached();
+  const card = await placeCard(page, baseURL, tableSlug, instanceId);
 
   const before = await card.boundingBox();
   expect(before).not.toBeNull();
