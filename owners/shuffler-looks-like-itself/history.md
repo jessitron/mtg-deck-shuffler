@@ -2100,3 +2100,35 @@ and [README.md](README.md).
 **Nothing about the fleet's shared tokens or fonts changed.** `packages/design-tokens/tokens.css`
 and `apps/tabletop/index.html`'s Google Fonts `<link>` are untouched — `MtgZoneShapeUtil` and
 `MtgCounterShapeUtil` still depend on both, same as before this change.
+
+## 2026-08-10 — the last playmat difference: no shadow on either mat
+
+Jess's explicit call, resolving the `playmat-drop-shadow` buoy this KB had been carrying
+since `a4991f3` (2026-08-07): remove `.playmat-game`'s `box-shadow: 5px 5px black` in
+`apps/shuffler/public/game.css`, and unify the two playmats fully. No staged `/design`
+`.choice` this time — that item had been explicitly blocked on `design-playmat-specimen`
+(the gallery couldn't render a real shadow choice against a fake mat), and rather than wait
+on that gallery-surgery item, Jess just decided by eye which way to converge: neither mat
+casts a shadow, since `.playmat-prepare` never had one.
+
+**What went with it, and why.** `margin-bottom: 5px` and the comment `/* have to account
+for the shadow */` were deleted alongside the `box-shadow` declaration — both existed
+solely to give the shadow's `5px` offset room, so once the shadow is gone they have nothing
+left to account for. `border-radius: 80px` and `padding-bottom: 20px` were left alone:
+radius is the one sanctioned per-scale difference (settled 2026-08-07, `a4991f3`), and the
+padding is genuine per-page layout, unrelated to the shadow.
+
+**Verification.** `npm run build` clean; the existing
+`test/verification/verify-query-parameter-modals.spec.ts` still passes (it doesn't assert
+anything about the shadow); a manual screenshot of a real seeded `/game` page confirmed the
+black playmat frame now renders with no drop shadow.
+
+**This closes two things at once.** The `playmat-drop-shadow` line in the repo-root
+`TODO.md` is resolved and removed. And it closes the "one remaining unexplained
+difference" this KB's playmat section had been naming since `a4991f3` — the two mats are
+now fully converged: same art, same `border: 10px solid black`, and now the same
+shadow-absence, with only `border-radius` (scale) and layout staying page-specific.
+`design-playmat-specimen` (the gallery's fake-playmat gap) stays open, but it no longer
+blocks anything — it was only ever blocking this shadow choice from being staged, and the
+choice got decided a different way. It remains open purely as a general gallery-fidelity
+gap.

@@ -519,28 +519,35 @@ purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages
 (`/prepare`, `/game`) put a **playmat** on screen — a big art-backed surface everything
 else sits on. Don't mix them.
 
-**The playmat is one object, one appearance, two scales (named 2026-08-07 `7487393`,
-converged 2026-08-07 `a4991f3`).** Both play pages carry the bare class `playmat` plus a
-page modifier: `/prepare` is `class="playmat playmat-prepare"` (`prepare.css` →
-`.playmat-prepare`), `/game` is `class="playmat playmat-game"` (`game.css` →
-`.playmat-game`). The game one was called `.page-container` until this KB's own text was
-leading readers to conclude the game screen had no playmat — if you meet that name
-anywhere, it's stale. Three things follow:
+**The playmat is one object, one appearance, two scales — and now fully converged
+(named 2026-08-07 `7487393`, converged 2026-08-07 `a4991f3`, the last difference
+(the shadow) removed 2026-08-10, Jess's explicit call).** Both play pages carry the bare
+class `playmat` plus a page modifier: `/prepare` is `class="playmat playmat-prepare"`
+(`prepare.css` → `.playmat-prepare`), `/game` is `class="playmat playmat-game"`
+(`game.css` → `.playmat-game`). The game one was called `.page-container` until this KB's
+own text was leading readers to conclude the game screen had no playmat — if you meet that
+name anywhere, it's stale. Three things follow:
 
 - **The shared appearance lives in the bare `.playmat` rule in `playmat.css`** — art
   (`/images/aeoe-43-cascading-cataracts.png`), `background-size: cover`,
   `background-position: center`, `border: 10px solid black`. The reserved empty slot the
   rename left is now filled. New shared playmat looks go *there*, never in a page sheet.
-- **Only genuinely per-page things stay under the modifier.** `border-radius` is the
-  sanctioned one: 80px on `/game`, 20px on `/prepare`, because **radius is a matter of
-  scale** and `/prepare` draws the mat smaller (Jess, 2026-08-07). `.playmat-game` also
-  keeps its layout (`width`, `max-width: 1800px`, centering, `padding-bottom`) and its
-  `box-shadow: 5px 5px black`; `.playmat-prepare` keeps the grid, `margin`, `min-height`,
-  `padding`, `max-width`. The shadow is the **one remaining unexplained difference** —
-  buoyed as `playmat-drop-shadow` in the repo-root `TODO.md`, blocked on
-  `design-playmat-specimen`. It is a survivor of the "giant Magic card" reading: `/game`'s
+- **Only genuinely per-page things stay under the modifier, and that's down to layout and
+  radius alone.** `border-radius` is the sanctioned one: 80px on `/game`, 20px on
+  `/prepare`, because **radius is a matter of scale** and `/prepare` draws the mat smaller
+  (Jess, 2026-08-07). `.playmat-game` also keeps its layout (`width`, `max-width: 1800px`,
+  centering, `padding-bottom`); `.playmat-prepare` keeps the grid, `margin`,
+  `min-height`, `padding`, `max-width`. **`.playmat-game`'s `box-shadow: 5px 5px black`
+  is GONE (2026-08-10)** — Jess's explicit decision to unify the two playmats fully: no
+  shadow on either page, since `.playmat-prepare` never had one. The dependent
+  `margin-bottom: 5px` and its `/* have to account for the shadow */` comment went with it
+  — both existed solely to give the shadow's offset room. This resolves the
+  `playmat-drop-shadow` TODO item and closes the "one remaining unexplained difference"
+  this section used to name. It was a survivor of the "giant Magic card" reading: `/game`'s
   art used to be a literal Magic card face (portrait, cover-cropped), so 80px + shadow +
-  card art read as one big card. The landscape art half-retired that.
+  card art read as one big card; the landscape art had already half-retired that reading,
+  and now the shadow is gone too. **The two mats are now fully converged** — art, border,
+  and shadow-absence all shared; only radius and layout stay page-specific, per scale.
 - **Placement rules stay keyed on the bare `.playmat`.** `prepare.css`'s three descendant
   rules (`.playmat > .game-title`, `.playmat .cool-command-zone-surround`,
   `.playmat .commander-placeholder`) place things relative to the mat *as a domain object*

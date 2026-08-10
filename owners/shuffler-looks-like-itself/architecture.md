@@ -96,7 +96,7 @@ Per-view `additionalStyles` today:
 | `styles.css` | Global reset, body font, `.mtg-card-image`, error/debug helpers, `.hidden`, `.pushable-flat`, **the global `:focus-visible` ring**, and a `:root` holding only `--background-color` | every page |
 | `site.css` | Site pages: header, footer, hero, slogan, steps, `.button-base` family | every EJS page |
 | `playmat.css` | **Shared by game and prepare**: **the bare `.playmat` rule — the mat's whole shared appearance (art, `background-size`/`-position`, `border: 10px solid black`), filled in by `a4991f3`**, library stack, card/library buttons, command zone, **the deck-title plaque's *appearance* (`.game-title`)**, all modal styles, card-type icons, card modal | game (TS) + prepare (EJS) |
-| `game.css` | Game page only: `.playmat-game` (the mat *at game scale* — layout, 80px radius, `box-shadow`; was `.page-container` until `7487393`), `.game-header-row`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks, the `--playmat-one`/`--playmat-two` `:root` | game (TS) |
+| `game.css` | Game page only: `.playmat-game` (the mat *at game scale* — layout, 80px radius; **no `box-shadow`**, removed 2026-08-10, the mats are fully converged; was `.page-container` until `7487393`), `.game-header-row`, card-move animations, hand, drag-and-drop, hamburger menu, debug blocks, the `--playmat-one`/`--playmat-two` `:root` | game (TS) |
 | `prepare.css` | Prepare page only: `.playmat-prepare` (the mat *at prepare scale* — the grid, layout, 20px radius), the bare-`.playmat` placement rules, commander placeholder, join-table panel, **the table-look picker (`.table-look-panel` block at the end of the file, ticket 16 — markup in `views/partials/table-look-panel.ejs`, included by `views/partials/playmat-prepare.ejs`; behaviour is pure HTMX plus `public/table-look-focus.js` for keyboard-focus restoration, since `cabf85b` 2026-08-09 — `prep-picker.js` no longer exists)** | prepare (EJS) |
 | `deck-selection.css` | `/choose-any-deck`: precon tiles, search + Archidekt inputs | choose-any-deck |
 | `docs.css` | `/docs`, `/about`, `/history`: sidebar + prose layout | those three |
@@ -234,6 +234,10 @@ while *rendering* an imitation. This is the one place the gallery can currently 
 app. It only became fixable with `a4991f3`, which created a bare `.playmat` rule worth
 inheriting; tracked as `design-playmat-specimen` in the repo-root `TODO.md`. It is gallery
 surgery, not a one-line swap — the stage needs a thinner frame at specimen scale.
+**No longer blocking anything real (2026-08-10):** it used to gate `playmat-drop-shadow`
+(the gallery couldn't stage a shadow choice on a fake mat); that question is now closed by
+Jess removing the shadow outright, so this item stays open purely for general
+gallery-fidelity reasons, not because something else depends on it.
 
 **Second, smaller exception — the *colour* swatches still hard-code their hexes.** Each
 `.swatch-chip` in the "Named tokens" grid carries `style="background: #221534"` rather than
