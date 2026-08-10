@@ -72,6 +72,17 @@ so the life counter needs a new name when built (buoyed in `TODO.md` as
 `life-counter-needs-own-name`). The old locked-furniture `mtg-counter` cautions in this KB
 describe *that* shape, not this one — see `architecture.md`.
 
+**Ticket 19** (`.scratch/tabletop-physics/issues/19-notes.md`, landed 2026-08-10) generalized
+ticket 18's counter-hosting into a "passenger" concept (`PASSENGER_TYPES`) and added tldraw's
+**stock `note` shape** as a second passenger type — the first time this KB's mechanics reach past
+this app's own custom shape types into a stock one tldraw ships. Notes attach to cards via the
+same parenting mechanism counters use, and ride/detach/evict identically. Adding `note` to the
+accept-list reopened the drag-identity hazard (watch point 1) for it, because stock
+`NoteShapeUtil` has no drag-settle cleanup of its own — fixed by subclassing it
+(`SelectionClearingNoteShapeUtil`), the KB's first instance of "subclass a stock ShapeUtil to add
+a missing hook" as a reusable pattern for future stock-shape integrations. See `architecture.md`'s
+"Ticket 19" section and watch point 18.
+
 ## Design philosophy
 
 - **Extend tldraw's built-in shape utils rather than reimplementing them, where that's still
@@ -106,13 +117,15 @@ describe *that* shape, not this one — see `architecture.md`.
 | Counter shape's props/type definition | `apps/tabletop/src/shared/mtgCounterShape.ts` (`MtgCounterShapeProps`, `TLGlobalShapePropsMap` augmentation) |
 | Counter creation tool (click-to-place `StateNode`) | `apps/tabletop/src/client/shapes/MtgCounterTool.ts`, wired via `tools`/`uiOverrides`/`Toolbar` in `TablePage.tsx` |
 | Counter eviction geometry (pure, unit-tested) | `apps/tabletop/src/client/shapes/openSpotNearZoneEdge.ts` |
-| ShapeUtil registration (client) | `apps/tabletop/src/client/TablePage.tsx` (`shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil]` passed to both `useSync` and `<Tldraw>`) |
+| ShapeUtil registration (client) | `apps/tabletop/src/client/TablePage.tsx` (`shapeUtils = [...defaultShapeUtils.filter(Util => Util.type !== "note"), MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil, SelectionClearingNoteShapeUtil]` passed to both `useSync` and `<Tldraw>`) |
 | Shape schema registration (server) | `apps/tabletop/src/server/rooms.ts` (`createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-counter": {...}, "mtg-zone": {...} } })`) |
 | Shape identity is minted | `apps/tabletop/src/server/cardArrival.ts` (arrival) or `apps/tabletop/src/server/seatJoined.ts` (commanders + ghosts, table-layout ticket 18) — both via `mtgCardShape()` in `tableFurniture.ts`; `props.instanceId`, `createShapeId` |
 | tldraw's selection state machine (read, don't modify) | `node_modules/tldraw/src/lib/tools/SelectTool/childStates/PointingShape.ts`, `Translating.ts` |
 | Regression test for the drag-identity bug | `apps/tabletop/test/verification/verify-drag-identity.spec.ts` |
 | Regression test for multi-untap's undo coalescing (tldraw-upgrade tripwire) | `apps/tabletop/test/verification/verify-multi-untap.spec.ts` |
 | Counter attach/detach/evict/edit tests | `apps/tabletop/test/verification/verify-counter.spec.ts`, `apps/tabletop/test/openSpotNearZoneEdge.test.ts` |
+| Stock `note` ShapeUtil, subclassed to add the drag-settle selection-clear stock tldraw lacks | `apps/tabletop/src/client/shapes/SelectionClearingNoteShapeUtil.ts` |
+| Note-as-passenger attach/detach/evict + stale-selection regression tests | `apps/tabletop/test/verification/verify-note.spec.ts` |
 
 See `architecture.md` for how the pieces fit together, `interactions.md` for what depends on
 this and the watch points, `history.md` for how we got here, `files.md` for the full file list.

@@ -22,14 +22,27 @@ import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
 import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
 import { MtgCounterTool } from "./shapes/MtgCounterTool";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
+import { SelectionClearingNoteShapeUtil } from "./shapes/SelectionClearingNoteShapeUtil";
 import { TableContextMenu } from "./CardContextMenu";
 
 // useSync (unlike <Tldraw>) builds its store schema from exactly the
 // shapeUtils it's given — it does NOT fold in tldraw's own defaults the way
-// <Tldraw> does — so the stock shapes the name label still uses (text, ...)
+// <Tldraw> does, and (unlike <Tldraw>'s lenient mergeArraysAndReplaceDefaults)
+// it throws ("Shape type X is defined more than once") on a duplicate `type`
+// in the array — so the stock shapes the name label still uses (text, ...)
 // have to be listed here explicitly alongside mtg-card/mtg-zone/mtg-counter,
-// or the client store rejects them outright.
-const shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil];
+// or the client store rejects them outright, and the stock NoteShapeUtil has
+// to be filtered OUT before SelectionClearingNoteShapeUtil goes in, rather
+// than just appended after it. Ticket 19: mtg-card hosts notes as passengers
+// exactly like counters, and a stock note has no hook of its own to clear a
+// stale selection after a drag — see that util's own comment.
+const shapeUtils = [
+  ...defaultShapeUtils.filter((Util) => Util.type !== "note"),
+  MtgCardShapeUtil,
+  MtgZoneShapeUtil,
+  MtgCounterShapeUtil,
+  SelectionClearingNoteShapeUtil,
+];
 
 const tools = [MtgCounterTool];
 

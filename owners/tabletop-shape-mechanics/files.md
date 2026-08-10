@@ -38,6 +38,13 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 
 ## Client (the ShapeUtils themselves)
 
+- `apps/tabletop/src/client/shapes/SelectionClearingNoteShapeUtil.ts` — **new, ticket 19
+  (2026-08-10)**: a thin subclass of tldraw's own `NoteShapeUtil` (imported from `"tldraw"`)
+  overriding only `onTranslateEnd` to call `this.editor.setSelectedShapes([])` — supplies the
+  drag-settle selection cleanup (watch point 1) that stock notes lack, now that `mtg-card` hosts
+  them as passengers alongside counters. Registered in `TablePage.tsx` **in place of** the stock
+  `NoteShapeUtil`, not alongside it (watch point 18). Everything else about how a note renders,
+  edits, and syncs is untouched tldraw behavior.
 - `apps/tabletop/src/client/CardContextMenu.tsx` — **new, ticket 17 (2026-08-09, `eb24a4f`)**:
   the app's first custom `TLComponents.ContextMenu`, wired in `TablePage.tsx`. `TableContextMenu`
   wraps `DefaultContextMenu`, replacing its default content (children replace, not add) with the
@@ -60,14 +67,16 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   own partial stays a synchronous return; see `architecture.md`'s "Ticket 16"; since ticket 17,
   calls the standalone `tapPartial` from `cardTap.ts` instead of a private method),
   `onTranslateEnd` (selection cleanup + zone-entry detection +
-  counter eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`, deliberately
+  passenger eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`, deliberately
   excluding the Stack), `zoneAt()` (private helper — since ticket 14, a thin wrapper around
   `zoneHitTest.ts`'s `topmostZoneAt()`, below; since ticket 18 returning the full `ZoneHit`,
-  id+zone), the counter-hosting drag hooks (`canReceiveNewChildrenOfType`/
-  `canRemoveChildrenOfType`, both type-narrowed to `mtg-counter`; `onDragShapesIn` with the
-  rotation-zeroing math; `onDragShapesOut` with the `parentId` filter), `evictCounters()`
-  (private — calls `findOpenSpotsNearZoneEdge`, below), and `component()`/`getIndicatorPath()`
-  (renders its own `<img>`).
+  id+zone), the passenger-hosting drag hooks (`canReceiveNewChildrenOfType`/
+  `canRemoveChildrenOfType`, both type-narrowed via `PASSENGER_TYPES` — since ticket 19, `{
+  "mtg-counter", "note" }`, was `mtg-counter`-only; `onDragShapesIn` with the rotation-zeroing math,
+  since ticket 19 using `getShapeGeometry(...).bounds` instead of `props.w/h` so it covers a stock
+  note's `growY`-derived size too; `onDragShapesOut` with the `parentId` filter), `evictPassengers()`
+  (private, renamed from `evictCounters` by ticket 19 — calls `findOpenSpotsNearZoneEdge`, below),
+  and `component()`/`getIndicatorPath()` (renders its own `<img>`).
 - `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — extends `BaseBoxShapeUtil<MtgZoneShape>`
   (ticket 13); still defines no interaction hooks at all (`onClick`/`onTranslateEnd`/
   `onDragShapesOver` are all absent — see `architecture.md`/`interactions.md` watch point 7 for why
@@ -103,11 +112,15 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   tested) — picks the zone edge nearest the card's entry point and alternates slots outward,
   skipping occupied rects; overlap beats failure. Used only by `evictCounters`.
 - `apps/tabletop/src/client/TablePage.tsx` — registers
-  `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil]`,
+  `shapeUtils = [...defaultShapeUtils.filter((Util) => Util.type !== "note"), MtgCardShapeUtil,
+  MtgZoneShapeUtil, MtgCounterShapeUtil, SelectionClearingNoteShapeUtil]`,
   passed to both
   `useSync` and the `<Tldraw shapeUtils={...}>` prop (this app uses the sync hook directly, which
-  is why `defaultShapeUtils` must be spread in explicitly; see `architecture.md`). Add new custom
-  ShapeUtils here. Since ticket 18 it also wires the counter tool: `tools={[MtgCounterTool]}`,
+  is why `defaultShapeUtils` must be spread in explicitly; see `architecture.md`). Since ticket 19
+  (2026-08-10) the stock `NoteShapeUtil` is filtered out of that spread before
+  `SelectionClearingNoteShapeUtil` goes in — `useSync`'s schema builder throws on a duplicate
+  `type` where `<Tldraw>`'s own merge wouldn't (watch point 18). Add new custom ShapeUtils here.
+  Since ticket 18 it also wires the counter tool: `tools={[MtgCounterTool]}`,
   `overrides` (`uiOverrides.tools` adds the toolbar item), and `components`
   (`ToolbarWithCounter`, a `DefaultToolbar` with the counter item prepended). Since ticket 17
   (2026-08-09) also passes `ContextMenu: TableContextMenu` in the same `components` object —
@@ -229,6 +242,12 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   behavior, two-client sync convergence for both), but includes this owner's regression test —
   "flipping card A does not leave a stale selection that hijacks a later drag of card B" (watch
   point 15).
+- `apps/tabletop/test/verification/verify-note.spec.ts` — **new, ticket 19 (2026-08-10)**: notes
+  as passengers — attach/ride/detach, battlefield-exit eviction to the graveyard's edge, an
+  unattached note left alone by a nearby card's move, and this owner's regression test —
+  "after dragging a note, dragging a card moves the card (stale-selection regression)" — mirroring
+  `verify-counter.spec.ts`'s Hazard-A test, deliberately without test-side selection cleanup so the
+  assertion proves the product clears selection, not the test (watch point 18).
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 
