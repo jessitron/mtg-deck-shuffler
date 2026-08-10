@@ -239,6 +239,40 @@ These are specific things that could break two-faced cards if changed elsewhere:
     [tabletop.md](tabletop.md#watch-points)), with the same test treatment as
     `cardPlayedEvent.test.ts`.
 
+19. **`mtg-card` gained `owner` and `isCommander` — table-layout ticket 18 (2026-08-09).**
+    `mtg-card.props` gained `owner: string` (seatId) and `isCommander: boolean`
+    (`apps/tabletop/src/shared/mtgCardShape.ts`) — first-class, schema'd, synced, granting
+    **no capability** (any player can still move any card; the arming/hit-testing side of
+    this belongs to `owners/tabletop-shape-mechanics/`, not this owner). This resolves the
+    tension `tabletop-physics` ticket 02 left open (no owner/seat field at all) — the design
+    ticket (`.scratch/tabletop-table-layout/issues/08-commander-in-command-zone.md`)
+    explicitly amended that closed decision: owner is real domain state on the card, not a
+    derived/local-only rendering value. `card.played.v1.json` gained both as **required**
+    fields, edited in place (no v2) — the same posture as `face`/`frontImageUrl`/
+    `backImageUrl` in ticket 12, though those weren't `required`; this is the precedent that
+    a required-field addition to v1 was accepted without a schemaVersion bump (see
+    [contract.md](contract.md)). `buildCardPlayedEvent`
+    (`apps/shuffler/src/port-tabletop/types.ts`) sets `owner: initiator.seatId`,
+    `isCommander: gameCard.isCommander`.
+    - **`seat.joined` is now a second sender site bound by watch point 18's
+      `backImageUrl`-derived-from-`twoFaced` rule, not just `card.played`.**
+      `seat.joined.v1.json` gained an optional `commanders` array (0-2 entries, in-schema
+      `{card:{scryfallId,instanceId}}`); `cardName`/`frontImageUrl`/`backImageUrl` ride
+      off-schema as scaffolding, same treatment as `card.played`. **No `face` field on a
+      commander entry** — commanders always arrive face up; the Tabletop hardcodes
+      `face: "front"`, `faceDown: false` when minting (`seatJoined.ts`), matching the
+      vocabulary-ticket table above (`commanders` is faceless).
+    - **Test treatment**: `apps/shuffler/test/port-tabletop/gateways.test.ts` gained a
+      `"buildSeatJoinedEvent commanders"` describe block (0/1/2 commanders, backImageUrl
+      derivation, no `face` on the entry) — the same convention `cardPlayedEvent.test.ts`
+      established for `card.played`. Any future field added to one sender site's scaffolding
+      should get the equivalent case on both.
+    - **Ghost copies are `tabletop-shape-mechanics`' concern, not this owner's** — a locked,
+      faded (`opacity: 0.3`) second `mtg-card` minted per commander, with a
+      `` `ghost:${instanceId}` `` instance id so it never collides with the real card's dedup
+      key (watch point above: dedup is on `props.instanceId`). Noted here only because it
+      shares the card shape and the `owner`/`isCommander` props.
+
 ## Not Related To
 
 ### Card Back (library face-down rendering)

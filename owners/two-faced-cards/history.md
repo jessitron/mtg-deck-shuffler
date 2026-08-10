@@ -520,3 +520,35 @@ consulted before payload shaping. What it settles in this territory:
 - Also: `envelope.v1` amended in place (free — zero conforming producers exist yet):
   `tableId` drops `format: uuid` (the table name IS the id pre-Spine), `initiator` becomes
   `{ seatId?, playerName }`.
+
+## Table-Layout Ticket 18 Implemented: `owner`/`isCommander` on the Card, Commanders Ride `seat.joined` (2026-08-09)
+
+Built `.scratch/tabletop-table-layout/issues/18-commander-arrives-with-owner-and-ghost.md`,
+whose design source of truth is issue 08's § Answer (2026-08-08 grilling) — the amendment
+this owner and `tabletop-shape-mechanics` were consulted on when ticket 02 (tabletop-physics)
+left `mtg-card` with no owner field at all.
+
+- **`mtg-card.props` gains `owner: string` (seatId) and `isCommander: boolean`**
+  (`apps/tabletop/src/shared/mtgCardShape.ts`) — first-class, schema'd, synced, granting
+  **no capability** (Jess: "Owner is a property of the card... It doesn't limit who can
+  move it"). `MtgCardShapeUtil.getDefaultProps()` defaults them to `""`/`false`.
+- **`card.played.v1.json` gains both fields as `required`, edited in place — no v2.**
+  `buildCardPlayedEvent` (`apps/shuffler/src/port-tabletop/types.ts`) sets
+  `owner: initiator.seatId`, `isCommander: gameCard.isCommander`. The hand-rolled
+  `validationError` in `apps/tabletop/src/server/cardArrival.ts` requires both.
+- **`seat.joined.v1.json` gains an optional `commanders` array (0-2)** — in-schema
+  `{card:{scryfallId,instanceId}}`, off-schema scaffolding `cardName`/`frontImageUrl`/
+  `backImageUrl` (no `face` — commanders always arrive face up, per the vocabulary
+  ticket). `buildSeatJoinedEvent` (Shuffler) gained an optional `commanders?: readonly
+  GameCard[]` param, mapped through the new `buildSeatJoinedCommander()`. Tested in
+  `apps/shuffler/test/port-tabletop/gateways.test.ts`'s new `"buildSeatJoinedEvent
+  commanders"` describe block, mirroring `cardPlayedEvent.test.ts`'s convention.
+- **Tabletop-side**: `apps/tabletop/src/server/seatJoined.ts` mints each commander as an
+  ordinary `mtg-card` in the Command Zone (via a new shared `mtgCardShape()` builder in
+  `tableFurniture.ts`, also adopted by `cardArrival.ts` so every mint site stays in sync)
+  plus a locked, `opacity: 0.3` ghost with instance id `` `ghost:${instanceId}` `` so it
+  never collides with the real card's dedup key. `cardLayout.ts` gained
+  `commandZoneCardPosition()` (centered for 1, side-by-side for 2). The ghost's rendering
+  and hit-testing (locked, non-interactive, and the Command Zone's owner-aware arming
+  rule) are `tabletop-shape-mechanics` territory — this owner's stake is only the shared
+  card props and the two contract fields.

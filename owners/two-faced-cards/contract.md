@@ -90,6 +90,25 @@ Also decided there, adjacent to this owner's territory:
   face?" If yes, `face` goes beside `card`, same shape as `card.played`. This rule now
   has worked precedent (ticket 02, see the vocabulary table above): `card.discarded`
   yes; `card.returned`, both `undo.*` kinds, and `seat.joined`'s `commanders` no.
+
+- **The "never edit v1 in place, bump to v2" rule above is about `face`'s own shape,
+  not about every field.** Table-layout ticket 18 (2026-08-09) added `owner` and
+  `isCommander` to `card.played.v1.json` **as required fields, in place, no v2** —
+  following the precedent ticket 12 set when it added `frontImageUrl`/`backImageUrl`
+  (though those weren't `required`). So in practice this repo edits v1 in place for new
+  fields (even required ones) and reserves the v2 bump for changing what an existing
+  field means or removing one. If that distinction ever bites (a producer built against
+  an older v1 that lacks a newly-required field), that's the sharp edge to fix, not a
+  surprise to relitigate.
+- **`seat.joined` is a second sender site for the `backImageUrl`-from-`twoFaced` rule.**
+  Ticket 18 gave `seat.joined.v1.json` an optional `commanders` array (0-2,
+  `{card:{scryfallId,instanceId}}` in-schema; `cardName`/`frontImageUrl`/`backImageUrl`
+  off-schema scaffolding, same posture as `card.played`'s scaffolding). No `face` field —
+  commanders always arrive face up (see the vocabulary table's `commanders` row above);
+  the Tabletop hardcodes `face:"front"`, `faceDown:false` when minting. Any future
+  scaffolding field added to `card.played`'s payload should get the matching case in
+  `apps/shuffler/test/port-tabletop/gateways.test.ts`'s `"buildSeatJoinedEvent
+  commanders"` block, mirroring `cardPlayedEvent.test.ts`.
 - **Design the payload so it doesn't need to carry what it doesn't mean.** A shadow event
   ("seat 2 drew a card") shouldn't carry a face any more than it carries the card — not
   because a leak is dangerous, but because an event should say what happened and no more.
