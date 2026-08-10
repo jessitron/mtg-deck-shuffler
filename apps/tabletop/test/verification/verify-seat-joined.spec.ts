@@ -1,20 +1,36 @@
 import { test, expect } from "@playwright/test";
+import { randomUUID } from "node:crypto";
 
 /**
  * JES-140: seat.joined draws a full player area (playmat, library, command
  * zone, graveyard, exile, name label) before any card is played. The shared
  * Stack is a fixed-size square centered on the board (ticket 14, the square)
  * — it does not move or resize as a second seat joins.
+ *
+ * Since tabletop-cards-come-and-go ticket 05, the body posted is a real
+ * envelope (contracts/envelope.v1.json) carrying a seat.joined payload
+ * (contracts/payloads/seat.joined.v1.json).
  */
-function seatJoined(overrides: Record<string, unknown>) {
+function fakeTraceparent(): string {
+  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
+}
+
+function seatJoined(tableId: string, initiator: { seatId: string; playerName: string }) {
   return {
-    id: `e2e-seat-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    id: randomUUID(),
+    tableId,
     name: "seat.joined",
     occurredAt: new Date().toISOString(),
-    deckName: "E2E Deck",
-    playmatImageUrl: "https://example.com/e2e-playmat.png",
-    cardBackImageUrl: "https://example.com/e2e-card-back.jpg",
-    ...overrides,
+    initiator,
+    occurredIn: "shuffler",
+    visibility: "public",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      deckName: "E2E Deck",
+      playmatImageUrl: "https://example.com/e2e-playmat.png",
+      cardBackImageUrl: "https://example.com/e2e-card-back.jpg",
+    },
   };
 }
 
@@ -23,7 +39,7 @@ test("a player area appears before any card, and the Stack stays fixed as a seco
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const first = seatJoined({ initiator: { seatId: `e2e-seat-a-${Date.now()}`, playerName: "Jess" } });
+  const first = seatJoined(tableSlug, { seatId: `e2e-seat-a-${Date.now()}`, playerName: "Jess" });
   const firstResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, { data: first });
   expect(firstResponse.status()).toBe(201);
 
@@ -42,7 +58,7 @@ test("a player area appears before any card, and the Stack stays fixed as a seco
   const stackBefore = await stackShape.boundingBox();
   expect(stackBefore).not.toBeNull();
 
-  const second = seatJoined({ initiator: { seatId: `e2e-seat-b-${Date.now()}`, playerName: "Sam" } });
+  const second = seatJoined(tableSlug, { seatId: `e2e-seat-b-${Date.now()}`, playerName: "Sam" });
   const secondResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, { data: second });
   expect(secondResponse.status()).toBe(201);
 

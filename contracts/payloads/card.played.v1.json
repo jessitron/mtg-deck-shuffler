@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/card.played.v1.json",
   "title": "card.played payload, schemaVersion 1",
-  "description": "A game event from the Shuffler: it deterministically knows a card was played, so it says so. Card identity is the Scryfall ID (definition) plus a Shuffler-minted instance GUID (this particular Forest, for this game). Names and image URLs are derivable conveniences and do not belong here.",
+  "description": "A game event from the Shuffler: it deterministically knows a card was played, so it says so. Card identity is the Scryfall ID (definition) plus a Shuffler-minted instance GUID (this particular Forest, for this game). Which seat played it lives on the envelope's initiator, not repeated here. Pre-Spine exception (tabletop-cards-come-and-go, ticket 05): frontImageUrl/backImageUrl/cardName are scaffolding render conveniences, promoted into this schema so ajv can validate the whole body now that zero real senders/receivers exist yet — the same in-place-edit exception envelope.v1 uses, not a new policy. Once a real consumer exists, reshaping this needs a v2.",
   "type": "object",
   "properties": {
     "card": {
@@ -27,17 +27,26 @@
       "enum": ["front", "back"],
       "description": "Face is card state, not identity — but MDFCs are played as a chosen face, so it rides along."
     },
-    "seat": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 4,
-      "description": "Which seat played it."
-    },
     "zoneHint": {
       "type": "string",
-      "description": "Where the card is headed on the table (e.g. stack, battlefield, graveyard). A hint — geography, not rules."
+      "enum": ["stack", "battlefield", "graveyard"],
+      "description": "Where the card is headed on the table. A hint — geography, not rules."
+    },
+    "frontImageUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Blessed scaffolding convenience: render without a Scryfall lookup."
+    },
+    "backImageUrl": {
+      "type": ["string", "null"],
+      "description": "Present (non-null) exactly when the card has a printed back face — null, never omitted, when it doesn't (two-faced-cards watch point 17)."
+    },
+    "cardName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Blessed scaffolding convenience: display without a Scryfall lookup."
     }
   },
-  "required": ["card", "face", "seat", "zoneHint"],
+  "required": ["card", "face", "zoneHint", "frontImageUrl", "backImageUrl", "cardName"],
   "additionalProperties": false
 }

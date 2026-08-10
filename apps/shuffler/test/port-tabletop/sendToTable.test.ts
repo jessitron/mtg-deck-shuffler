@@ -60,10 +60,11 @@ describe("sendCardToTableFirst", () => {
     expect(fake.sentEvents).toHaveLength(1);
     const { tableName, event } = fake.sentEvents[0];
     expect(tableName).toBe("Friday Night");
+    expect(event.tableId).toBe("Friday Night");
     expect(event.initiator).toEqual({ seatId: "abc12345", playerName: "Jess" });
-    expect(event.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: bolt.cardInstanceId });
-    expect(event.zoneHint).toBe("stack");
-    expect(event.cardName).toBe("Lightning Bolt");
+    expect(event.payload.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: bolt.cardInstanceId });
+    expect(event.payload.zoneHint).toBe("stack");
+    expect(event.payload.cardName).toBe("Lightning Bolt");
   });
 
   it("mints a fresh event id per attempt (a retry is not a duplicate)", async () => {
@@ -75,7 +76,7 @@ describe("sendCardToTableFirst", () => {
     await sendCardToTableFirst(fake, game, bolt, "stack");
 
     expect(fake.sentEvents[0].event.id).not.toBe(fake.sentEvents[1].event.id);
-    expect(fake.sentEvents[0].event.card.instanceId).toBe(fake.sentEvents[1].event.card.instanceId);
+    expect(fake.sentEvents[0].event.payload.card.instanceId).toBe(fake.sentEvents[1].event.payload.card.instanceId);
   });
 
   it("propagates the gateway's failure so the caller can block the play", async () => {
@@ -113,11 +114,12 @@ describe("sendSeatJoinedBestEffort", () => {
     expect(fake.sentSeatJoinedEvents).toHaveLength(1);
     const { tableName, event } = fake.sentSeatJoinedEvents[0];
     expect(tableName).toBe("Friday Night");
+    expect(event.tableId).toBe("Friday Night");
     expect(event.name).toBe("seat.joined");
     expect(event.initiator).toEqual({ seatId: "abc12345", playerName: "Jess" });
-    expect(event.deckName).toBe("Test Deck");
-    expect(event.playmatImageUrl).toMatch(/^https:\/\//);
-    expect(event.cardBackImageUrl).toMatch(/^https:\/\//);
+    expect(event.payload.deckName).toBe("Test Deck");
+    expect(event.payload.playmatImageUrl).toMatch(/^https:\/\//);
+    expect(event.payload.cardBackImageUrl).toMatch(/^https:\/\//);
   });
 
   it("a picked sleeve travels as sleeveColor, and the card back is omitted — sleeveColor wins", async () => {
@@ -126,9 +128,9 @@ describe("sendSeatJoinedBestEffort", () => {
     await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", "#8b2f5c");
 
     const { event } = fake.sentSeatJoinedEvents[0];
-    expect(event.sleeveColor).toBe("#8b2f5c");
-    expect(event.cardBackImageUrl).toBeUndefined();
-    expect(event.playmatImageUrl).toMatch(/^https:\/\//);
+    expect(event.payload.sleeveColor).toBe("#8b2f5c");
+    expect(event.payload.cardBackImageUrl).toBeUndefined();
+    expect(event.payload.playmatImageUrl).toMatch(/^https:\/\//);
   });
 
   it("a picked playmat travels as an absolute URL (ticket 16)", async () => {
@@ -137,7 +139,7 @@ describe("sendSeatJoinedBestEffort", () => {
     await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", undefined, "/images/aeoe-6-seam-rip.png");
 
     const { event } = fake.sentSeatJoinedEvents[0];
-    expect(event.playmatImageUrl).toMatch(/^https:\/\/.*\/images\/aeoe-6-seam-rip\.png$/);
+    expect(event.payload.playmatImageUrl).toMatch(/^https:\/\/.*\/images\/aeoe-6-seam-rip\.png$/);
   });
 
   it("no playmat picked → the default mat travels", async () => {
@@ -146,7 +148,7 @@ describe("sendSeatJoinedBestEffort", () => {
     await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck");
 
     const { event } = fake.sentSeatJoinedEvents[0];
-    expect(event.playmatImageUrl).toMatch(/aeoe-43-cascading-cataracts\.png$/);
+    expect(event.payload.playmatImageUrl).toMatch(/aeoe-43-cascading-cataracts\.png$/);
   });
 
   it("no sleeve picked → no sleeveColor, standard card back (today's look)", async () => {
@@ -155,8 +157,8 @@ describe("sendSeatJoinedBestEffort", () => {
     await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", undefined);
 
     const { event } = fake.sentSeatJoinedEvents[0];
-    expect(event.sleeveColor).toBeUndefined();
-    expect(event.cardBackImageUrl).toMatch(/^https:\/\//);
+    expect(event.payload.sleeveColor).toBeUndefined();
+    expect(event.payload.cardBackImageUrl).toMatch(/^https:\/\//);
   });
 
   it("is a no-op when no tabletop is configured — Shuffle Up must not fail", async () => {

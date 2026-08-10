@@ -52,6 +52,13 @@ COPY --from=builder /repo/packages /repo/packages
 COPY --from=builder /repo/apps/tabletop/node_modules ./node_modules
 COPY --from=builder /repo/apps/tabletop/dist ./dist
 COPY --from=builder /repo/apps/tabletop/package.json ./
+# contractValidation.ts reads these at runtime, relative to its own compiled
+# location (../../../../contracts from dist/server/) — copied straight from
+# the build context (never used at build time, so the builder stage never
+# needed it). Not a workspace symlink, so no dangling-link failure mode, but
+# a missed copy fails the same way: build succeeds, boot succeeds, only the
+# first real request 500s.
+COPY contracts /repo/contracts
 
 EXPOSE 5180
 CMD ["node", "--import", "./dist/server/tracing.js", "dist/server/server.js"]

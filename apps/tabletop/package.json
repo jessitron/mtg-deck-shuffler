@@ -27,6 +27,8 @@
     "@opentelemetry/semantic-conventions": "^1.43.0",
     "@tldraw/sync": "5.2.5",
     "@tldraw/sync-core": "5.2.5",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "express": "^4.22.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",

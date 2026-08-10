@@ -28,7 +28,7 @@ function containsValue(obj: unknown, value: unknown): boolean {
 
 function anEvent(): CardPlayedEvent {
   const gameCard = handCard();
-  return buildCardPlayedEvent(gameCard, gameCard.cardInstanceId!, initiator, "stack");
+  return buildCardPlayedEvent(gameCard, gameCard.cardInstanceId!, initiator, "stack", "Friday Night");
 }
 
 describe("FakeTabletopGateway", () => {
@@ -117,7 +117,7 @@ describe("HttpTabletopGateway", () => {
 
   it("POSTs a seat.joined event to /api/tables/:tableName/events", async () => {
     const gateway = new HttpTabletopGateway(baseUrl);
-    const event = buildSeatJoinedEvent(initiator, "Test Deck", "https://mtg.example/playmat.png", "https://mtg.example/card-back.jpg");
+    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night", "https://mtg.example/playmat.png", "https://mtg.example/card-back.jpg");
     await gateway.sendSeatJoined("Friday Night", event);
 
     expect(received).toHaveLength(1);
@@ -128,7 +128,7 @@ describe("HttpTabletopGateway", () => {
   it("throws on a non-2xx response for seat.joined", async () => {
     respondWithStatus = 503;
     const gateway = new HttpTabletopGateway(baseUrl);
-    const event = buildSeatJoinedEvent(initiator, "Test Deck");
+    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night");
     await expect(gateway.sendSeatJoined("Friday Night", event)).rejects.toThrow(/503/);
   });
 });

@@ -172,10 +172,15 @@ implementation made where this doc was silent:
 
 Deferred decisions the implementation surfaced (fine as-is for v0):
 
-- **`initiator` is a plain string** (`"seat 1"`, a player name). It likely wants a
-  structured `{kind, id}` before the Interpreter starts initiating events.
 - **`seatId` is a full UUID** (schema requires only minLength 8 — "short" undefined).
-- **`zoneHint` is a free string** (`stack`, `battlefield`, `graveyard`, …), not an enum.
+
+Resolved since (tabletop-cards-come-and-go ticket 05, 2026-08-09):
+
+- **`initiator` is `{ seatId?, playerName }`**, not a plain string — a seated player
+  vs. a named spectator is now structurally distinguishable, ahead of the Interpreter
+  starting to initiate events.
+- **`zoneHint` is an enum** (`stack` | `battlefield` | `graveyard`) in
+  `card.played.v1.json`, not a free string.
 
 ## Not decided here (future docs)
 

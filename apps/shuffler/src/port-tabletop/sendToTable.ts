@@ -44,7 +44,8 @@ export async function sendCardToTableFirst(
     gameCard,
     gameCard.cardInstanceId,
     { seatId: game.seatId ?? "unknown-seat", playerName: game.playerName ?? "player" },
-    zoneHint
+    zoneHint,
+    game.tableName
   );
   await tabletopPort.sendCardToTable(game.tableName, event);
 }
@@ -66,7 +67,7 @@ export async function sendSeatJoinedBestEffort(
   if (!tabletopPort) return;
   const { tableName, seatId, playerName } = tableInfo;
   const playmatImageUrl = playmatImagePath ? playmatImageUrlFromPath(playmatImagePath) : defaultPlaymatImageUrl();
-  const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, playmatImageUrl, cardBackImageUrl(), sleeveColor);
+  const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, tableName, playmatImageUrl, cardBackImageUrl(), sleeveColor);
   try {
     await tabletopPort.sendSeatJoined(tableName, event);
   } catch (error) {

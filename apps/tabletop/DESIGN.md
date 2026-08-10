@@ -216,18 +216,26 @@ doesn't create anything; shuffling up does.
 Player areas are currently allocated lazily, on a seat's _first card_. That's too
 late: the whole point is that the table looks like a table before anyone plays.
 
-**Decided:** an event-shaped `seat.joined`, in the same envelope-lite style as
-`card.played` (SCAFFOLDING, same seam the Spine absorbs) — so the eventual swap to
-the Spine's event feed changes the gateway, not the callers.
+**Decided:** an event-shaped `seat.joined`, posted as a real envelope
+(SCAFFOLDING, same seam the Spine absorbs) — so the eventual swap to the Spine's
+event feed changes the gateway, not the callers.
 
 ```
 POST /api/tables/:tableName/events
 {
   id: "<guid, fresh per attempt — idempotency key>",
+  tableId: "<the table name, pre-Spine>",
   name: "seat.joined",
   occurredAt: "<ISO 8601, the Shuffler's clock>",
   initiator: { seatId, playerName },
-  playmatImageUrl: "https://…/aeoe-43-cascading-cataracts.png"
+  occurredIn: "shuffler",
+  visibility: "public",
+  traceparent: "<W3C trace context>",
+  schemaVersion: 1,
+  payload: {
+    deckName: "…",
+    playmatImageUrl: "https://…/aeoe-43-cascading-cataracts.png"
+  }
 }
 ```
 

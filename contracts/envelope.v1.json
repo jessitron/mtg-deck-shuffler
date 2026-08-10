@@ -12,8 +12,7 @@
     },
     "tableId": {
       "type": "string",
-      "format": "uuid",
-      "description": "Which table's log. A GUID the Spine mints at table creation; the table *name* is only a lookup alias and lives in the table.created payload."
+      "description": "Which table's log. Pre-Spine, the table name IS the id (unique among active tables) — no format constraint. Once the Spine mints a GUID at table creation, this field becomes that GUID and the name reverts to a lookup alias in the table.created payload."
     },
     "seq": {
       "type": "integer",
@@ -36,8 +35,20 @@
       "description": "Optional. The initiator app's clock, when physics preceded ingestion."
     },
     "initiator": {
-      "type": "string",
-      "description": "Who made this happen: a seat, a named spectator, later the interpreter."
+      "type": "object",
+      "description": "Who made this happen: a seated player, a named spectator, later the interpreter.",
+      "properties": {
+        "seatId": {
+          "type": "string",
+          "description": "Present when a seated player made this happen. Absent for a named spectator or other non-seated initiator."
+        },
+        "playerName": {
+          "type": "string",
+          "description": "Display only. Not unique, not an identity."
+        }
+      },
+      "required": ["playerName"],
+      "additionalProperties": false
     },
     "occurredIn": {
       "type": "string",

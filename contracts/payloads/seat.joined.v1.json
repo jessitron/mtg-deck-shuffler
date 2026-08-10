@@ -2,19 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/seat.joined.v1.json",
   "title": "seat.joined payload, schemaVersion 1",
-  "description": "A seat joins its table at Shuffle Up, carrying how this player's stuff should look: their deck's name for the name label, their playmat, and their sleeve. Sent before any card so the table can draw the whole player area first. Sleeves are optional; when sleeveColor is present it wins over cardBackImageUrl, and an unsleeved seat keeps the standard Magic card back.",
+  "description": "A seat joins its table at Shuffle Up, carrying how this player's stuff should look: their deck's name for the name label, their playmat, and their sleeve. Sent before any card so the table can draw the whole player area first. Sleeves are optional; when sleeveColor is present it wins over cardBackImageUrl, and an unsleeved seat keeps the standard Magic card back. Who joined (seatId, playerName) lives on the envelope's initiator, not repeated here.",
   "type": "object",
   "properties": {
-    "seatId": {
-      "type": "string",
-      "minLength": 8,
-      "description": "A short GUID identifying this seat. Seat identity is distinct from the player's display name."
-    },
-    "playerName": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Display only. Not unique, not an identity."
-    },
     "deckName": {
       "type": "string",
       "minLength": 1,
@@ -36,6 +26,6 @@
       "description": "The seat's sleeve as a solid color (hex). Player identity data — commander-damage counters need the raw hex. A game constant: chosen before the game, never changed mid-game."
     }
   },
-  "required": ["seatId", "playerName", "deckName"],
+  "required": ["deckName"],
   "additionalProperties": false
 }

@@ -35,12 +35,14 @@ Two things here are deliberate stand-ins, marked in the source and easy to delet
 
 1. **The card-arrival endpoint** (`src/server/cardArrival.ts`). Future: the Shuffler
    emits `card.played` to the Spine's event log and the Tabletop subscribes to the
-   table's public feed; JSON-Schema contract validation (`contracts/`) lands on that
-   subscription. Until then the Shuffler POSTs here directly, with hand-rolled checks
-   at the `// JES-128` markers. The payload is F0's frozen envelope-lite subset of the
-   contract — field-by-field comment block in
-   `apps/shuffler/src/port-tabletop/types.ts`. `gameCardIndex` never crosses the
-   boundary (decodable secret); this endpoint rejects it loudly.
+   table's public feed instead of this direct POST. Until then the Shuffler POSTs
+   here directly, but the body it sends is already the real thing: a full envelope
+   (`contracts/envelope.v1.json`) carrying a card.played payload
+   (`contracts/payloads/card.played.v1.json`), validated for real via ajv
+   (`src/server/contractValidation.ts`, ticket 05 of tabletop-cards-come-and-go) —
+   field-by-field comment block in `apps/shuffler/src/port-tabletop/types.ts`.
+   `gameCardIndex` never crosses the boundary (decodable secret); both schemas'
+   `additionalProperties: false` rejects it loudly.
 2. **The in-memory room registry** (`src/server/rooms.ts`). Name-only (no table ids;
    the Spine absorbs table identity later). Rooms are **in-memory only** — a redeploy
    wipes the board. Accepted for v0; durable reconstruction is a filed buoy.

@@ -4,48 +4,30 @@ import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
 import { ensurePlayerArea, pageIdOf } from "./tableFurniture.js";
 import { MAX_SEATS } from "./cardLayout.js";
+import { validateIncomingEvent } from "./contractValidation.js";
 
 // ============================================================================
 // SCAFFOLDING — the seam the Spine absorbs (same posture as cardArrival.ts).
 //
 // Future: the Shuffler emits `seat.joined` to the Spine's event log; the
-// Tabletop subscribes to the table's public feed. Until then the Shuffler
-// POSTs here directly, on Shuffle Up. Delete this endpoint when the feed
-// exists. See apps/tabletop/DESIGN.md for the full trigger/geometry spec.
+// Tabletop subscribes to the table's public feed instead of receiving this
+// direct POST. Delete this endpoint when the feed exists. See
+// apps/tabletop/DESIGN.md for the full trigger/geometry spec.
 // ============================================================================
+//
+// tabletop-cards-come-and-go ticket 05: the body posted here is the real
+// envelope (contracts/envelope.v1.json) carrying a seat.joined payload
+// (contracts/payloads/seat.joined.v1.json), validated for real via ajv — see
+// contractValidation.ts. Who joined (seatId, playerName) lives on the
+// envelope's initiator; deckName is required, playmatImageUrl/
+// cardBackImageUrl/sleeveColor are optional (sleeveColor wins when both it
+// and cardBackImageUrl arrive).
 
-// Contract proper: contracts/payloads/seat.joined.v1.json (deckName required;
-// playmatImageUrl, cardBackImageUrl, sleeveColor optional; sleeveColor wins
-// when both it and cardBackImageUrl arrive).
-interface SeatJoined {
-  id: string;
-  name: "seat.joined";
-  occurredAt: string;
-  initiator: { seatId: string; playerName: string };
+interface SeatJoinedPayload {
   deckName: string;
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
   sleeveColor?: string;
-}
-
-// Same pattern as the contract schema — a sleeve is exactly six hex digits.
-const SLEEVE_COLOR_PATTERN = /^#[0-9a-fA-F]{6}$/;
-
-function validationError(body: unknown): string | null {
-  const b = body as Record<string, any>;
-  if (!b || typeof b !== "object") return "body must be a JSON object";
-  if (typeof b.id !== "string" || !b.id) return "id (string) is required";
-  if (b.name !== "seat.joined") return 'name must be "seat.joined"';
-  if (typeof b.initiator?.seatId !== "string" || !b.initiator.seatId) return "initiator.seatId (string) is required";
-  if (typeof b.initiator?.playerName !== "string" || !b.initiator.playerName) return "initiator.playerName (string) is required";
-  if (typeof b.deckName !== "string" || !b.deckName) return "deckName (string) is required";
-  if (b.playmatImageUrl !== undefined && typeof b.playmatImageUrl !== "string") return "playmatImageUrl, if present, must be a string";
-  if (b.cardBackImageUrl !== undefined && typeof b.cardBackImageUrl !== "string") return "cardBackImageUrl, if present, must be a string";
-  if (b.sleeveColor !== undefined && !(typeof b.sleeveColor === "string" && SLEEVE_COLOR_PATTERN.test(b.sleeveColor)))
-    return "sleeveColor, if present, must be a #rrggbb hex color";
-  // Same defense in depth as card.played: no decodable secret crosses this boundary.
-  if ("gameCardIndex" in b) return "gameCardIndex is forbidden beyond the Shuffler's boundary";
-  return null;
 }
 
 /**
@@ -60,29 +42,40 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
     return;
   }
 
-  const problem = validationError(req.body);
-  if (problem) {
-    res.status(400).json({ error: problem });
+  const result = validateIncomingEvent<SeatJoinedPayload>(req.body, "seat.joined");
+  if (!result.ok) {
+    res.status(400).json({ error: result.error });
     return;
   }
-  const joined = req.body as SeatJoined;
+  const { envelope } = result;
+  if (slugifyTableName(envelope.tableId) !== tableName) {
+    res.status(400).json({ error: "envelope tableId does not match the table being posted to" });
+    return;
+  }
+  const seatId = envelope.initiator.seatId;
+  if (!seatId) {
+    res.status(400).json({ error: "initiator.seatId is required for seat.joined" });
+    return;
+  }
+  const { playerName } = envelope.initiator;
+  const { deckName, playmatImageUrl, cardBackImageUrl, sleeveColor } = envelope.payload;
 
   trace.getActiveSpan()?.setAttributes({
-    "event.id": joined.id,
+    "event.id": envelope.id,
     "table.name": tableName,
-    "seat.id": joined.initiator.seatId,
-    "player.name": joined.initiator.playerName,
+    "seat.id": seatId,
+    "player.name": playerName,
   });
 
   const entry = getOrCreateRoom(tableName);
 
-  if (entry.seenEventIds.has(joined.id)) {
+  if (entry.seenEventIds.has(envelope.id)) {
     trace.getActiveSpan()?.setAttribute("seat_joined.deduped", "event-id");
     res.status(200).json({ ok: true, deduped: true });
     return;
   }
-  if (entry.seats.has(joined.initiator.seatId)) {
-    entry.seenEventIds.add(joined.id);
+  if (entry.seats.has(seatId)) {
+    entry.seenEventIds.add(envelope.id);
     trace.getActiveSpan()?.setAttribute("seat_joined.deduped", "seat-already-seated");
     res.status(200).json({ ok: true, deduped: true });
     return;
@@ -97,13 +90,13 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
   }
 
   const pageId = pageIdOf(entry);
-  await ensurePlayerArea(entry, pageId, joined.initiator.seatId, joined.initiator.playerName, {
-    deckName: joined.deckName,
-    playmatImageUrl: joined.playmatImageUrl,
-    cardBackImageUrl: joined.cardBackImageUrl,
-    sleeveColor: joined.sleeveColor,
+  await ensurePlayerArea(entry, pageId, seatId, playerName, {
+    deckName,
+    playmatImageUrl,
+    cardBackImageUrl,
+    sleeveColor,
   });
 
-  entry.seenEventIds.add(joined.id);
+  entry.seenEventIds.add(envelope.id);
   res.status(201).json({ ok: true });
 }

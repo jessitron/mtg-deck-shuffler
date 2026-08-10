@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import type { Server } from "node:http";
+import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
 import { playmatBounds, libraryBounds, commandZoneBounds, graveyardBounds, exileBounds, stackBounds } from "../src/server/cardLayout";
@@ -9,6 +10,10 @@ import { playmatBounds, libraryBounds, commandZoneBounds, graveyardBounds, exile
  * (playmat, library, graveyard, exile, name label) is drawn at Shuffle Up,
  * before any card arrives. Seats take compass slots (S, N, E, W by join
  * order) around a fixed centered Stack square (ticket 14, the square).
+ *
+ * Since tabletop-cards-come-and-go ticket 05, the body posted is a real
+ * envelope (contracts/envelope.v1.json) carrying a seat.joined payload
+ * (contracts/payloads/seat.joined.v1.json), validated for real via ajv.
  */
 let server: Server;
 let port: number;
@@ -23,18 +28,30 @@ afterAll(() => {
   server.close();
 });
 
+function fakeTraceparent(): string {
+  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
+}
+
 let eventCounter = 0;
-function seatJoined(overrides: Record<string, unknown> = {}) {
+function seatJoined(tableName: string, envelopeOverrides: Record<string, unknown> = {}, payloadOverrides: Record<string, unknown> = {}) {
   eventCounter++;
   return {
-    id: `seat-event-${eventCounter}-${Math.random().toString(36).slice(2)}`,
+    id: randomUUID(),
+    tableId: tableName,
     name: "seat.joined",
     occurredAt: new Date().toISOString(),
     initiator: { seatId: `seat-${eventCounter}`, playerName: "Jess" },
-    deckName: "Blame Game",
-    playmatImageUrl: "https://example.com/playmat.png",
-    cardBackImageUrl: "https://example.com/card-back.jpg",
-    ...overrides,
+    occurredIn: "shuffler",
+    visibility: "public",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      deckName: "Blame Game",
+      playmatImageUrl: "https://example.com/playmat.png",
+      cardBackImageUrl: "https://example.com/card-back.jpg",
+      ...payloadOverrides,
+    },
+    ...envelopeOverrides,
   };
 }
 
@@ -57,7 +74,7 @@ function shapesOf(tableName: string) {
 
 describe("seat joined", () => {
   it("draws a full player area — playmat, library, command zone, graveyard, exile, name label — before any card", async () => {
-    const event = seatJoined();
+    const event = seatJoined("seat-basic");
     const response = await post("seat-basic", event);
     expect(response.status).toBe(201);
 
@@ -79,7 +96,7 @@ describe("seat joined", () => {
   });
 
   it("labels the seat with the player's name and the deck's name, player first", async () => {
-    await post("seat-label", seatJoined({ initiator: { seatId: "seat-label-a", playerName: "Robin" } }));
+    await post("seat-label", seatJoined("seat-label", { initiator: { seatId: "seat-label-a", playerName: "Robin" } }));
 
     const label = shapesOf("seat-label").find((s) => s.type === "text");
     const text = JSON.stringify(label.props.richText);
@@ -89,12 +106,14 @@ describe("seat joined", () => {
   });
 
   it("rejects a seat.joined without a deckName — the contract requires it", async () => {
-    const response = await post("seat-no-deck", seatJoined({ deckName: undefined }));
+    const event = seatJoined("seat-no-deck");
+    delete (event.payload as Record<string, unknown>).deckName;
+    const response = await post("seat-no-deck", event);
     expect(response.status).toBe(400);
   });
 
   it("dedups a retried request (same event id): physical no-op", async () => {
-    const event = seatJoined();
+    const event = seatJoined("seat-dedup-id");
     await post("seat-dedup-id", event);
     const retry = await post("seat-dedup-id", event);
     expect(retry.status).toBe(200);
@@ -102,15 +121,15 @@ describe("seat joined", () => {
   });
 
   it("dedups a seat that already joined (fresh event id): a second seat.joined is a no-op", async () => {
-    const event = seatJoined();
+    const event = seatJoined("seat-dedup-seat");
     await post("seat-dedup-seat", event);
-    const secondAttempt = await post("seat-dedup-seat", { ...seatJoined(), initiator: event.initiator });
+    const secondAttempt = await post("seat-dedup-seat", seatJoined("seat-dedup-seat", { initiator: event.initiator }));
     expect(secondAttempt.status).toBe(200);
     expect((await secondAttempt.json()).deduped).toBe(true);
   });
 
   it("missing playmatImageUrl degrades to a plain mat, not a broken player area", async () => {
-    const event = seatJoined({ playmatImageUrl: undefined, cardBackImageUrl: undefined });
+    const event = seatJoined("seat-no-image", {}, { playmatImageUrl: undefined, cardBackImageUrl: undefined });
     const response = await post("seat-no-image", event);
     expect(response.status).toBe(201);
 
@@ -125,7 +144,7 @@ describe("seat joined", () => {
     const table = "seat-square";
     const positionsAfterEachJoin: Array<Array<{ x: number; y: number }>> = [];
     for (const seat of ["A", "B", "C", "D"]) {
-      await post(table, seatJoined({ initiator: { seatId: `seat-sq-${seat}`, playerName: seat } }));
+      await post(table, seatJoined(table, { initiator: { seatId: `seat-sq-${seat}`, playerName: seat } }));
       positionsAfterEachJoin.push(
         shapesOf(table)
           .filter((s) => s.type === "mtg-zone" && s.props?.zone === "playmat")
@@ -166,34 +185,34 @@ describe("seat joined", () => {
 
     // The table has exactly four compass slots: a fifth seat is refused
     // loudly rather than drawn on top of an existing area.
-    const fifth = await post(table, seatJoined({ initiator: { seatId: "seat-sq-E", playerName: "Evan" } }));
+    const fifth = await post(table, seatJoined(table, { initiator: { seatId: "seat-sq-E", playerName: "Evan" } }));
     expect(fifth.status).toBe(409);
     expect(shapesOf(table).filter((s) => s.type === "mtg-zone" && s.props?.zone === "playmat")).toHaveLength(4);
   });
 
   it("draws the Stack as a fixed centered square that does not change as seats join", async () => {
     const expected = stackBounds();
-    await post("seat-stack-fixed", seatJoined({ initiator: { seatId: "seat-fixed-A", playerName: "Sam" } }));
+    await post("seat-stack-fixed", seatJoined("seat-stack-fixed", { initiator: { seatId: "seat-fixed-A", playerName: "Sam" } }));
     const afterOne = shapesOf("seat-stack-fixed").find((s) => s.props?.label === "The Stack");
     expect({ x: afterOne.x, y: afterOne.y, w: afterOne.props.w, h: afterOne.props.h }).toEqual(expected);
 
-    await post("seat-stack-fixed", seatJoined({ initiator: { seatId: "seat-fixed-B", playerName: "Alex" } }));
+    await post("seat-stack-fixed", seatJoined("seat-stack-fixed", { initiator: { seatId: "seat-fixed-B", playerName: "Alex" } }));
     const afterTwo = shapesOf("seat-stack-fixed").find((s) => s.props?.label === "The Stack");
     expect({ x: afterTwo.x, y: afterTwo.y, w: afterTwo.props.w, h: afterTwo.props.h }).toEqual(expected);
   });
 
   it("keeps the Stack shape's z-order index stable across seat joins, instead of minting a fresh one", async () => {
-    await post("seat-stack-index", seatJoined({ initiator: { seatId: "seat-index-A", playerName: "Sam" } }));
+    await post("seat-stack-index", seatJoined("seat-stack-index", { initiator: { seatId: "seat-index-A", playerName: "Sam" } }));
     const afterOne = shapesOf("seat-stack-index").find((s) => s.props?.label === "The Stack");
 
-    await post("seat-stack-index", seatJoined({ initiator: { seatId: "seat-index-B", playerName: "Alex" } }));
+    await post("seat-stack-index", seatJoined("seat-stack-index", { initiator: { seatId: "seat-index-B", playerName: "Alex" } }));
     const afterTwo = shapesOf("seat-stack-index").find((s) => s.props?.label === "The Stack");
 
     expect(afterTwo.index).toBe(afterOne.index);
   });
 
   it("a sleeved seat's library pile is the solid sleeve color, not a card-back image", async () => {
-    const response = await post("seat-sleeve", seatJoined({ sleeveColor: "#8b2f5c" }));
+    const response = await post("seat-sleeve", seatJoined("seat-sleeve", {}, { sleeveColor: "#8b2f5c" }));
     expect(response.status).toBe(201);
 
     const shapes = shapesOf("seat-sleeve");
@@ -206,7 +225,7 @@ describe("seat joined", () => {
   });
 
   it("remembers the seat's sleeve color for cards that arrive later, dropping the card back", async () => {
-    const event = seatJoined({ sleeveColor: "#8b2f5c" });
+    const event = seatJoined("seat-sleeve-memory", {}, { sleeveColor: "#8b2f5c" });
     await post("seat-sleeve-memory", event);
 
     const area = getRoomRegistry().get("seat-sleeve-memory")!.seats.get(event.initiator.seatId as string)!;
@@ -215,7 +234,7 @@ describe("seat joined", () => {
   });
 
   it("an unsleeved seat keeps the card-back image pile (today's look)", async () => {
-    await post("seat-unsleeved", seatJoined());
+    await post("seat-unsleeved", seatJoined("seat-unsleeved"));
     const shapes = shapesOf("seat-unsleeved");
     const libraryZone = shapes.find((s) => s.type === "mtg-zone" && s.props?.zone === "library");
     expect(libraryZone.props.sleeveColor).toBeNull();
@@ -224,8 +243,8 @@ describe("seat joined", () => {
   });
 
   it("rejects a sleeveColor that is not a six-digit hex color — fail loudly, not quietly unsleeved", async () => {
-    expect((await post("seat-bad-sleeve", seatJoined({ sleeveColor: "purple" }))).status).toBe(400);
-    expect((await post("seat-bad-sleeve", seatJoined({ sleeveColor: "#8b2f5" }))).status).toBe(400);
+    expect((await post("seat-bad-sleeve", seatJoined("seat-bad-sleeve", {}, { sleeveColor: "purple" }))).status).toBe(400);
+    expect((await post("seat-bad-sleeve", seatJoined("seat-bad-sleeve", {}, { sleeveColor: "#8b2f5" }))).status).toBe(400);
   });
 
   it("rejects a payload missing required fields", async () => {
@@ -234,7 +253,20 @@ describe("seat joined", () => {
   });
 
   it("rejects a payload carrying a gameCardIndex — the secret must not cross", async () => {
-    const response = await post("seat-secret", { ...seatJoined(), gameCardIndex: 7 });
+    const event = seatJoined("seat-secret");
+    const response = await post("seat-secret", { ...event, payload: { ...event.payload, gameCardIndex: 7 } });
     expect(response.status).toBe(400);
+  });
+
+  it("rejects an unknown event name — fail loudly, never silently drop", async () => {
+    const response = await post("seat-unknown-name", seatJoined("seat-unknown-name", { name: "seat.taken" }));
+    expect(response.status).toBe(400);
+    expect((await response.json()).error).toContain("seat.taken");
+  });
+
+  it("rejects an unknown schemaVersion — fail loudly, never silently drop", async () => {
+    const response = await post("seat-unknown-version", seatJoined("seat-unknown-version", { schemaVersion: 99 }));
+    expect(response.status).toBe(400);
+    expect((await response.json()).error).toContain("99");
   });
 });
