@@ -480,14 +480,12 @@ body {
   cursor: not-allowed;
 }
 
-/* Hamburger menu (square corners; physical round elements are the exception) */
 .game-menu {
   display: flex;
   justify-content: flex-end;
   position: relative;
 }
 
-/* Press physics unified with the rest of the app (JES-155 choice 1). */
 .menu-toggle {
   position: relative;
   font-size: 1.6rem;
