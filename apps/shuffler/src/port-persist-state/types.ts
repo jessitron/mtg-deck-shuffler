@@ -49,6 +49,10 @@ export interface PersistedGameState {
   playerName?: string;
   /** The seat's short GUID — player names are not unique; this is the seat's identity. */
   seatId?: string;
+  // Table look: the /prepare picker's sleeve/playmat choice, snapshotted at
+  // /start-game. Optional, no version bump — same exception as tableName above.
+  sleeveColor?: string;
+  playmatImagePath?: string;
 }
 
 export interface GameHistorySummary {

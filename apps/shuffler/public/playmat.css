@@ -39,6 +39,18 @@
   opacity: 0.3;
 }
 
+/* Sleeve-corner rule (owners/shuffler-looks-like-itself): a sleeved back is a
+ * bare flat-hex rectangle — square corners, no inset-border/gradient chrome.
+ * The box-shadow (above) stays; it's the pile casting a shadow, not a
+ * decoration on the card face. */
+.library-card-back.sleeved {
+  border-radius: 0;
+}
+
+.library-card-back.sleeved::before {
+  content: none;
+}
+
 /* Position the three cards in a stack */
 .library-card-back:nth-child(1) {
   transform: translateZ(0px) translateY(0px);

@@ -11,8 +11,11 @@ import { formatGameMenuHtmlFragment } from "./game-menu.js";
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}, devMode: boolean = false): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
+  // Longhand background-image only (see prepare.ejs) — the shorthand would wipe
+  // the shared rule's background-size/position from playmat.css.
+  const playmatStyle = game.playmatImagePath ? ` style="background-image: url('${game.playmatImagePath}')"` : "";
   const contentWithModal = `
-    <div class="playmat playmat-game">
+    <div class="playmat playmat-game"${playmatStyle}>
       ${gameContent}
       <div id="modal-container"></div>
       <div id="card-modal-container"></div>

@@ -4,7 +4,7 @@ import { formatLibraryStack } from "../common/shared-components.js";
 export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const expectedVersion = game.getStateVersion();
   return `<div id="library-section" data-testid="library-section">
-        ${formatLibraryStack(whatHappened, game.listLibrary().length)}
+        ${formatLibraryStack(whatHappened, game.listLibrary().length, game.sleeveColor)}
         <div class="library-buttons">
 
           <button class="draw-button"

@@ -160,14 +160,27 @@ export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardInde
   return "";
 }
 
-export function formatLibraryStack(whatHappened: WhatHappened = {}, cardCount: number): string {
+/**
+ * One card back in the library stack. Sleeved: a bare flat-hex rectangle
+ * (square corners, no inset-border/gradient chrome — the sleeve-corner rule,
+ * see owners/shuffler-looks-like-itself). Unsleeved: the standard card-back
+ * image, rounded corners, unchanged.
+ */
+function formatLibraryCardBack(positionClass: string, title: string, sleeveColor?: string): string {
+  if (sleeveColor) {
+    return `<div class="mtg-card-image library-card-back ${positionClass} sleeved" style="background-color: ${sleeveColor}" data-testid="card-back" title="${title}"></div>`;
+  }
+  return `<img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back ${positionClass}" data-testid="card-back" title="${title}"/>`;
+}
+
+export function formatLibraryStack(whatHappened: WhatHappened = {}, cardCount: number, sleeveColor?: string): string {
   const shufflingClass = whatHappened.shuffling ? " shuffling" : "";
   const emptyClass = cardCount === 0 ? " library-stack-empty" : "";
 
   return `<div class="library-stack${shufflingClass}${emptyClass}" data-testid="library-stack">
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-1" data-testid="card-back" title="${cardCount} cards"/>
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-2" data-testid="card-back" />
-          <img src="${CARD_BACK}" alt="Library" class="mtg-card-image library-card-back library-card-3" data-testid="card-back"/>
+          ${formatLibraryCardBack("library-card-1", `${cardCount} cards`, sleeveColor)}
+          ${formatLibraryCardBack("library-card-2", `${cardCount} cards`, sleeveColor)}
+          ${formatLibraryCardBack("library-card-3", `${cardCount} cards`, sleeveColor)}
         </div>`;
 }
 

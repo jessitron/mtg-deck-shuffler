@@ -54,6 +54,6 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
     renderCommandZone: renderPrepCommandZone,
     renderDeckTitle: () => formatDeckTitleHtmlFragment(prep.deck.name),
     renderLibraryStack: () =>
-      formatLibraryStack({}, libraryCards.length),
+      formatLibraryStack({}, libraryCards.length, prep.sleeveColor),
   };
 }

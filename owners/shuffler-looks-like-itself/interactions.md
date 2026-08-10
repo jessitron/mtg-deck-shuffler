@@ -360,9 +360,19 @@ Concrete, in rough order of how often they bite.
 - **The swatches carry `transition: all 0.2s ease`** — the same animatable-`outline-width`
   trap as `.group-by-type-toggle`: a focus-ring assertion against them must **poll**
   (`expect(...).toPass`), never read once.
-- **`/game` still paints the default mat** while `/prepare` and the Tabletop show the pick.
-  Known gap, buoyed as `game-page-picked-mat` in `TODO.md` — not an oversight to silently
-  fix, and not a bug in the preview.
+- **`/game` now paints the picked mat too — CLOSED (2026-08-09).** `GameState`/
+  `PersistedGameState` snapshot `sleeveColor`/`playmatImagePath` off `PersistedGamePrep` at
+  `/start-game` **and** `/restart-game` (`GameState.newGame` gained two trailing optional
+  params; both call sites in `app.ts` pass `prep.sleeveColor, prep.playmatImagePath`).
+  `formatGamePageHtmlPage` (`active-game-page.ts`) sets the same inline **longhand**
+  `background-image` on `.playmat.playmat-game` that `/prepare` already uses — never the
+  shorthand, same reasoning as the mat-preview rule above. **The library stack is also now
+  sleeve-aware on both pages**: `formatLibraryStack`/`formatLibraryCardBack`
+  (`shared-components.ts`) render each card back as a flat-hex `<div class="... sleeved">`
+  (square corners, no inset-border/gradient chrome) instead of the standard-back `<img>`
+  when `sleeveColor` is set — `prep-view-helpers.ts` passes `prep.sleeveColor`,
+  `library-components.ts` passes `game.sleeveColor`. New CSS: `.library-card-back.sleeved`
+  and `.library-card-back.sleeved::before` in `playmat.css`.
 
 **Testing that a token or a font actually arrived** (added 2026-08-07, `4396aea`)
 

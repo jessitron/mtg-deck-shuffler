@@ -552,7 +552,7 @@ export function createApp(
 
       // Create new game from prep
       const gameId = persistStatePort.newGameId();
-      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo);
+      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo, prep.sleeveColor, prep.playmatImagePath);
       game.startGame(browserTabId);
       await persistStatePort.save(game.toPersistedGameState());
 
@@ -1657,7 +1657,7 @@ export function createApp(
       await persistPrepPort.savePrep(prep);
 
       const gameId = persistStatePort.newGameId();
-      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo);
+      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo, prep.sleeveColor, prep.playmatImagePath);
       game.startGame(res.locals.browserTabId as string | undefined);
       await persistStatePort.save(game.toPersistedGameState());
 

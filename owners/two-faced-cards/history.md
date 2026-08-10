@@ -488,6 +488,28 @@ corners the fleet's style wants*. The `borderRadius` was removed from both sites
 The `w * 0.03` padding/overhang stays; only the radius went. **No behavior, face, or
 faceDown semantics changed** — purely corner geometry. 69/69 vitest pass.
 
+## Sleeve/Playmat Carries to the Game Screen — Confirmed Orthogonal (2026-08-09)
+
+**No two-faced-cards code changed.** `sleeve-carries-to-game` made the `/prepare` picker's
+sleeve color and playmat image path persist onto the game and render there:
+`GameState.newGame()`/`PersistedGameState`/`GameState` gained optional `sleeveColor` and
+`playmatImagePath`, snapshotted from the prep at both `/start-game` and `/restart-game`;
+`formatLibraryStack()` grew an optional `sleeveColor` param (new helper
+`formatLibraryCardBack()` renders a sleeved back as a flat-hex rectangle instead of the
+`CARD_BACK` image); `formatGamePageHtmlPage()` writes the playmat as an inline
+`background-image`. This owner was consulted (per the "orthogonal to two-faced cards" ticket
+description) and confirmed before implementation: no `CardDefinition`/`CardFace`/
+`getCardImageUrl`/contract face-field touched, and the new fields live on
+`GameState`/`PersistedGameState` (game-wide), not `GameCard`/`PersistedGameCard` (per-card
+face state) — verified by grep, not assumed. Also confirmed no collision with the Tabletop's
+unrelated `sleeveColor` on `seat.joined` player data (different type, different sender site).
+**No `PERSISTED_GAME_STATE_VERSION` bump** — stayed at 11, the same "optional field with
+graceful fallback" exception this owner's own `imageUris`/`backImageUris` change used;
+confirmed the actual constant value in code before writing that into tests. The Shuffler's
+sleeve rendering picked up the Tabletop's square-corner rule (table-layout ticket 17,
+`e53a27e`) for consistency: `.library-card-back.sleeved` in `public/playmat.css` zeroes
+`border-radius`. Full account in [interactions.md](interactions.md#not-related-to).
+
 ## Cards-Come-and-Go Ticket 02: the Event Vocabulary — Face Decisions (design decision, 2026-08-08, `7b7f868`)
 
 **No code changed** — decisions only; schemas and handlers come at build time. Full text:
