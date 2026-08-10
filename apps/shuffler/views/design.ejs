@@ -449,7 +449,7 @@
           </div>
           <div class="option">
             <div class="option-label">Playmat button — .library-buttons button</div>
-            <div class="stage stage-playmat">
+            <div class="stage playmat">
               <div class="library-buttons" style="grid-template-areas: 'draw draw' 'shuffle shuffle' 'search reveal';">
                 <button class="draw-button">Draw</button>
                 <button class="shuffle-button">Shuffle</button>
@@ -483,7 +483,7 @@
           </div>
           <div class="option">
             <div class="option-label">Table section — .table-section</div>
-            <div class="stage stage-playmat">
+            <div class="stage playmat">
               <div class="table-section" style="width: 220px;">
                 <a href="#buttons" class="pushable-flat go-to-table-button">Go to Table: verify-table</a>
                 <button class="pushable-flat pushable-dark pushable-small table-cards-button">3 Cards on table</button>
@@ -493,21 +493,21 @@
           </div>
           <div class="option">
             <div class="option-label">Mulligan — .mulligan-button</div>
-            <div class="stage stage-playmat">
+            <div class="stage playmat">
               <button class="mulligan-button pushable-flat pushable-dark pushable-small">Mulligan</button>
             </div>
             <div class="option-where">game.css/hand-components.ts — secondary action (not a CTA), same shape as "3 Cards on table"</div>
           </div>
           <div class="option">
             <div class="option-label">Hamburger — .menu-toggle</div>
-            <div class="stage stage-playmat">
+            <div class="stage playmat">
               <button class="menu-toggle">☰</button>
             </div>
             <div class="option-where">game.css — same shape, playmat-one fill</div>
           </div>
           <div class="option">
             <div class="option-label">Disabled</div>
-            <div class="stage stage-playmat">
+            <div class="stage playmat">
               <button class="pushable-flat pushable-small" disabled>Draw</button>
             </div>
             <div class="option-where">styles.css — sits flat on the ground, no travel left</div>
@@ -560,7 +560,7 @@
         <div class="options">
           <div class="option">
             <div class="option-label">Setup panel — .table-look-panel</div>
-            <div class="stage stage-playmat">
+            <div class="stage playmat">
               <section class="table-look-panel" aria-label="Playmat and sleeves (specimen)">
                 <div class="table-look-row">
                   <span class="table-look-label">Playmat</span>
@@ -611,7 +611,7 @@
         <div class="options">
           <div class="option">
             <div class="option-label">On the playmat — the strong ground</div>
-            <div class="stage stage-playmat">
+            <div class="stage playmat">
               <button class="pushable-flat pushable-small">Tab to me</button>
             </div>
             <div class="option-where">styles.css — global <code>:focus-visible</code></div>
@@ -692,7 +692,7 @@
             </div>
             <div class="option">
               <div class="option-label">B — join-table field (current, prepare)</div>
-              <div class="stage stage-playmat">
+              <div class="stage playmat">
                 <div class="join-table-fields">
                   <label class="join-table-label">Table name
                     <input type="text" placeholder="kitchen" />
@@ -707,7 +707,7 @@
               <div class="stage stage-site">
                 <input class="candidate-input" placeholder="Search precon decks" />
               </div>
-              <div class="stage stage-playmat" style="margin-top: 0.5rem;">
+              <div class="stage playmat" style="margin-top: 0.5rem;">
                 <input class="candidate-input" style="font-size: 0.9rem; padding: 6px 8px;" placeholder="kitchen" />
               </div>
               <div class="option-where">design-candidates.css — 2px deep-space, Orbitron, no focus rule of its own (the global ring applies)</div>
@@ -769,7 +769,7 @@
           (<code>.cool-command-zone-surround .mtg-card-image { box-shadow: none; }</code>) so it
           doesn't fight the frame's own edge.
         </p>
-        <div class="stage stage-playmat">
+        <div class="stage playmat">
           <div class="cool-command-zone-surround">
             <div class="multiple-cards">
               <img class="mtg-card-image" src="/images/mtg-card-back.jpg" alt="commander" />
@@ -797,7 +797,7 @@
           <code>outset</code>/<code>inset</code>/<code>groove</code> vocabulary is retired
           entirely, not down to one last site.
         </p>
-        <div class="stage stage-playmat">
+        <div class="stage playmat">
           <div class="game-title"><span class="game-name">Corrupting Influence</span></div>
         </div>
 
@@ -877,7 +877,7 @@
           place round corners belong — they're physical objects.
         </p>
 
-        <div class="stage stage-playmat">
+        <div class="stage playmat">
           <div>
             <div class="library-stack">
               <img class="mtg-card-image library-card-back" src="/images/mtg-card-back.jpg" alt="" />
@@ -898,7 +898,7 @@
           inset-border/gradient chrome, same box-shadow (the pile's depth cue, not card-face
           decoration). Matches the Tabletop's card-sleeve rule.
         </p>
-        <div class="stage stage-playmat">
+        <div class="stage playmat">
           <div>
             <div class="library-stack">
               <div class="mtg-card-image library-card-back library-card-1 sleeved" style="background-color: #3c99e5"></div>
