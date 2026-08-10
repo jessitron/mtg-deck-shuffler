@@ -36,6 +36,17 @@ Install the latest version of the required OpenTelemetry packages:
 - `@opentelemetry/sdk-node` - core SDK
 - `@opentelemetry/exporter-trace-otlp-http` - HTTP trace exporter
 - `@opentelemetry/api` - for custom instrumentation
+- `@opentelemetry/exporter-logs-otlp-http` - HTTP log exporter (needed for the Logs section below)
+- `@opentelemetry/sdk-logs` - for `BatchLogRecordProcessor`
+- `@opentelemetry/api-logs` - for `logs.getLogger(...).emit(...)`
+
+**Pin exact versions, and pin them together.** This fleet has two Node ships on different
+OTel version lines (0.219 and 0.221), and the same class — `BatchLogRecordProcessor` — takes
+its exporter **positionally** on 0.219 and as an **options object** on 0.221. Passing the
+wrong shape leaves the exporter `undefined` and the pipeline silently exports nothing, with
+no error anywhere. Check `node_modules/@opentelemetry/sdk-logs/package.json` for the
+installed version before writing the constructor call, don't copy the line from another
+ship's `tracing.ts` without checking it still matches.
 
 ## Environment Variables
 
@@ -129,6 +140,104 @@ Verify by confirming `middleware - …` / `request handler - …` spans and `htt
 
 [] In the main entry point, add the following code before anything else, import the tracing module.
 
+## Logs
+
+Tracing alone leaves two gaps: things that happen with no active span (startup, shutdown,
+callbacks and timers that outlive the request that scheduled them), and anything a server
+process wants to say to Honeycomb that isn't shaped as a span attribute. Set logs up in the
+same pass as tracing rather than leaving them for later — a service that ships with traces
+only is exactly the gap this fleet is trying not to repeat (the Spine, at time of writing,
+has no logs pipeline: `spine-logs-in-traces` in this repo's `TODO.md`).
+
+**Never use `span.addEvent` for this.** A callback can outlive the span that scheduled it —
+AsyncLocalStorage still hands the callback a *context*, so `trace.getActiveSpan()` returns
+the span, but it's the one that already **ended**, and `addEvent` throws on it rather than
+quietly doing nothing. A log written the same moment still carries that context's trace/span
+id, so it lands on the trace looking exactly like a span event would
+(`meta.annotation_type = span_event` in Honeycomb) — strictly better, and it also works when
+there's no span at all. Full incident write-up: `owners/fleet-is-observable/README.md`,
+Invariant 2.
+
+### Server-side: wire logs through the same `NodeSDK`
+
+[] Add a `logRecordProcessors` entry to the `NodeSDK` config already built for tracing —
+don't stand up a separate `LoggerProvider` on the server. Sharing the SDK means the log
+records get the same `service.name` resource attribute (so they land in the same dataset)
+and the same shutdown path as the trace exporter:
+
+```
+import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http';
+import { BatchLogRecordProcessor } from '@opentelemetry/sdk-logs';
+
+const sdk: NodeSDK = new NodeSDK({
+  traceExporter: new OTLPTraceExporter(),
+  logRecordProcessors: [new BatchLogRecordProcessor({ exporter: new OTLPLogExporter() })],
+  // ...instrumentations, sampler, etc.
+});
+```
+
+Check the installed `@opentelemetry/sdk-logs` version before writing this constructor call —
+see the version-pinning note under Dependencies above. The exporter reads the same
+`OTEL_EXPORTER_OTLP_ENDPOINT`/`OTEL_EXPORTER_OTLP_HEADERS` env vars the trace exporter does
+and appends `/v1/logs` itself; no separate log-specific env var is needed. **Passing
+`logRecordProcessors` makes `NodeSDK` skip its `OTEL_LOGS_EXPORTER` env-var branch
+entirely** — don't set that variable expecting it to do anything once this is wired.
+
+[] Write a small logging module the rest of the service calls instead of `console.log`
+directly — `apps/shuffler/src/log.ts` and `apps/tabletop/src/server/log.ts` are the fleet's
+two (deliberately duplicated, not shared — see `owners/fleet-is-observable/README.md` → "How
+it works now" for why there's no shared telemetry package). Shape to copy:
+
+- `log.info/warn/error(message, attributes = {}, error?)`.
+- Every call does two things: `logs.getLogger(name).emit({ severityNumber, severityText,
+  body: message, attributes })` (from `@opentelemetry/api-logs`) **and** a stdout `console.*`
+  line, so local dev logs stay readable without a Honeycomb round trip.
+- An `Error` passed as the third argument becomes `exception.type` / `exception.message` /
+  `exception.stacktrace` attributes (mirrors `span.recordException`'s shape).
+- When nothing registered a global logger provider (unit tests, one-off scripts run without
+  `tracing.ts` loaded), `logs.getLogger(...)` no-ops cleanly — the stdout half still happens.
+
+[] **Don't sample logs.** A `LogRecord` doesn't inherit its span's sampling decision, and
+this fleet deliberately leaves that alone: if a health check starts failing, every log
+explaining why should arrive, not the 1% the trace sampler kept. What keeps log volume
+sane is not logging on the hot path — reach for a span attribute first, and treat a log as
+the exception, not the default.
+
+[] Give logs the same shutdown handling as traces. If this service installs a
+SIGTERM/SIGINT flush hook for `sdk.shutdown()` (see the fleet's
+`apps/*/src*/shutdownHooks.ts` for the pattern — bounded drain, exactly-once exit), one
+`sdk.shutdown()` call flushes both the trace and log processors, since they share the SDK.
+
+### Browser-side (only if this service serves pages to a browser)
+
+A server-only service can stop above. If it renders pages a user's browser executes code in,
+add a browser-side logger too — this is the gap the fleet's Tabletop closed and the Shuffler
+had not yet (as of this writing the Shuffler has no browser logs pipeline; only its tracing
+bootstrap is shipped).
+
+[] Add a small browser module, modeled on `apps/tabletop/src/client/observability/index.ts`:
+a `logError(message, attributes = {}, error?)` function that emits through the same
+`@opentelemetry/sdk-logs` `LoggerProvider` the browser's tracing wrapper already owns (its own
+provider, not the server's — the browser can't share a Node process's SDK), pointed at a
+`/v1/logs` destination.
+
+[] **Register `window.addEventListener("error", ...)` and `("unhandledrejection", ...)`
+handlers that call `logError`.** Before this exists, an uncaught browser exception is
+invisible: the page breaks for a real user and Honeycomb shows a clean session with no
+error anywhere. This is the single highest-value thing the browser logger buys.
+
+[] The browser exporter needs a destination. Reuse whatever mechanism the tracing wrapper
+already uses to learn its collector URL (e.g. a same-origin `/otel-config.json` the server
+serves, carrying both a traces URL and a logs URL) — don't hardcode a second, divergent
+config path. If there's a collector in front of Honeycomb for traces (recommended over
+shipping an ingest key to the browser — see Invariant 3 in
+`owners/fleet-is-observable/README.md`), give it a `logs:` pipeline alongside its
+`traces:` pipeline and route `/v1/logs` to it the same way `/v1/traces` is routed.
+
+[] No destination configured (local dev with no collector, or tracing disabled) should mean
+browser logging quietly turns itself off — same posture as the tracing wrapper — not an error
+in the console.
+
 ## Verify
 
 Here is a task, with this todo list as an input and either a trace link or a failure description as the output.
@@ -143,6 +252,23 @@ Do the following things:
 - [] If there is any data, then look for a trace from the last few minutes. If you don't find one, report that data was found but no trace, and provide a link to the query for all data in the dataset.
 - [] If a trace was found, report success. Provide the user with a link to the recent trace. The link format is `https://ui.honeycomb.io/<team slug>/environments/<environment slug>/trace?trace_id=39ae994d9ea02cda9a4dfe279bfae59b`
 
+If you set up logs in the section above, verify that separately — a trace can arrive fine
+while the log pipeline is silently misconfigured (wrong `BatchLogRecordProcessor` constructor
+shape is the classic way, per the version-pinning note under Dependencies):
+
+- [] Trigger a code path that calls `log.error`/`log.warn`/`logError` (a real error path, or a
+  temporary call you remove afterward).
+- [] Query the same dataset for `severity_text` (or `name = "log"` depending on how Honeycomb
+  renders it) over the last 10 minutes. If nothing shows up, the log processor isn't wired —
+  re-check the `logRecordProcessors` constructor shape against the installed package version.
+- [] If a log record is found and it fired from inside an active span, confirm it carries
+  `trace.trace_id`/`trace.parent_id` and renders in Honeycomb as `meta.annotation_type =
+  span_event` on that trace — that's the proof it's trace-correlated, not a bare log line.
+- [] If you added the browser logger, throw an uncaught error on the page (e.g. a temporary
+  `throw new Error("telemetry test")` in a click handler) and confirm it shows up in the
+  browser's dataset via `logError`'s automatic `window.onerror` handler, without any
+  application code calling `logError` directly.
+
 After the task is complete, if there was an error, proceed to Troubleshooting.
 
 ## Report your experience
@@ -153,7 +279,7 @@ Send feedback to Honeycomb using the tool. Do not include any code or sensitive 
 
 [] Wherever this project keeps its documentation, update it to reflect the changes you made.
 
-Include how OpenTelemetry is initialized, where the environment variables are set, and where to find the data in Honeycomb.
+Include how OpenTelemetry is initialized, where the environment variables are set, and where to find the data in Honeycomb. If you added logs, say so explicitly and separately from tracing — "OTel is set up" reads as ambiguous once a service can have tracing without logs (the Spine, at time of writing) or logs riding on the same SDK as tracing (both Node ships). Note whether the browser side got a logger too, or only the server did.
 
 Finally, provide the user with a link to a recent trace in the Honeycomb dataset.
 
