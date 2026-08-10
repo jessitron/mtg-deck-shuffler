@@ -1,4 +1,5 @@
 import { test, expect, Page } from "@playwright/test";
+import { randomUUID } from "node:crypto";
 
 /**
  * Bug repro (found 2026-08-07): play two cards, drag one, then drag the
@@ -16,17 +17,30 @@ import { test, expect, Page } from "@playwright/test";
  * card instead of the one under the pointer. Fixed by clearing selection in
  * onTranslateEnd.
  */
-function cardPlayed(overrides: Record<string, unknown>) {
+function fakeTraceparent(): string {
+  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
+}
+
+function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
   return {
-    id: `e2e-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    id: randomUUID(),
+    tableId,
     name: "card.played",
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    face: "front",
-    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-    backImageUrl: null,
-    zoneHint: "stack",
-    ...overrides,
+    occurredIn: "shuffler",
+    visibility: "public",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      face: "front",
+      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+      backImageUrl: null,
+      zoneHint: "stack",
+      owner: "e2e-seat",
+      isCommander: false,
+      ...payloadOverrides,
+    },
   };
 }
 
@@ -46,15 +60,15 @@ test("dragging the second card moves the second card, not the first", async ({ p
 
   // Two lands, far enough apart on the playmat that they never overlap —
   // isolating the selection-state bug from any z-order/overlap concern.
-  const first = cardPlayed({
+  const first = cardPlayed(tableSlug, {
     cardName: "Forest",
     zoneHint: "battlefield",
-    card: { scryfallId: "aaaaaaaa-0000-0000-0000-000000000006", instanceId: `first-${Date.now()}` },
+    card: { scryfallId: randomUUID(), instanceId: randomUUID() },
   });
-  const second = cardPlayed({
+  const second = cardPlayed(tableSlug, {
     cardName: "Island",
     zoneHint: "battlefield",
-    card: { scryfallId: "aaaaaaaa-0000-0000-0000-000000000007", instanceId: `second-${Date.now()}` },
+    card: { scryfallId: randomUUID(), instanceId: randomUUID() },
   });
 
   await page.goto(`/t/${tableSlug}`);
@@ -65,8 +79,8 @@ test("dragging the second card moves the second card, not the first", async ({ p
     expect(response.status()).toBe(201);
   }
 
-  const firstCard = page.locator(`#shape\\:card-${first.card.instanceId}`);
-  const secondCard = page.locator(`#shape\\:card-${second.card.instanceId}`);
+  const firstCard = page.locator(`#shape\\:card-${first.payload.card.instanceId}`);
+  const secondCard = page.locator(`#shape\\:card-${second.payload.card.instanceId}`);
   await expect(firstCard).toBeAttached();
   await expect(secondCard).toBeAttached();
 

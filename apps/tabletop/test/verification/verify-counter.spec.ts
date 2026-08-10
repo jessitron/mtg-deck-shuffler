@@ -1,4 +1,5 @@
 import { test, expect, Page, Locator } from "@playwright/test";
+import { randomUUID } from "node:crypto";
 
 /**
  * Ticket 18 (tabletop-physics): counters ride along on a card.
@@ -15,17 +16,30 @@ import { test, expect, Page, Locator } from "@playwright/test";
  *   counter, dragging a card must move the CARD, not the stale-selected counter.
  */
 
-function cardPlayed(overrides: Record<string, unknown>) {
+function fakeTraceparent(): string {
+  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
+}
+
+function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
   return {
-    id: `e2e-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    id: randomUUID(),
+    tableId,
     name: "card.played",
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    face: "front",
-    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-    backImageUrl: null,
-    zoneHint: "stack",
-    ...overrides,
+    occurredIn: "shuffler",
+    visibility: "public",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      face: "front",
+      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+      backImageUrl: null,
+      zoneHint: "stack",
+      owner: "e2e-seat",
+      isCommander: false,
+      ...payloadOverrides,
+    },
   };
 }
 
@@ -64,9 +78,9 @@ async function createCounter(page: Page, at: { x: number; y: number }) {
 }
 
 async function placeCard(page: Page, baseURL: string | undefined, tableSlug: string, instanceId: string) {
-  const event = cardPlayed({
+  const event = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: "aaaaaaaa-0000-0000-0000-000000000018", instanceId },
+    card: { scryfallId: randomUUID(), instanceId },
     zoneHint: "stack",
   });
   const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
@@ -85,7 +99,7 @@ test("a counter attaches to a card, rides along, and detaches when dragged off",
   const tableSlug = `verify-counter-${Date.now()}`;
   await openTable(page, tableSlug);
 
-  const instanceId = `counter-host-${Date.now()}`;
+  const instanceId = randomUUID();
   const card = await placeCard(page, baseURL, tableSlug, instanceId);
 
   // Zoom to fit so the card (and future drop targets) are actually rendered.
@@ -134,7 +148,7 @@ test("after dragging a counter, dragging a card moves the card (stale-selection 
   const tableSlug = `verify-counter-sel-${Date.now()}`;
   await openTable(page, tableSlug);
 
-  const instanceId = `counter-sel-${Date.now()}`;
+  const instanceId = randomUUID();
   const card = await placeCard(page, baseURL, tableSlug, instanceId);
   await page.keyboard.press("Shift+1");
   await page.waitForTimeout(300);
@@ -170,7 +184,7 @@ test("two counters can share a card and overlap; both detach near the graveyard'
   const tableSlug = `verify-counter-gy-${Date.now()}`;
   await openTable(page, tableSlug);
 
-  const instanceId = `counter-gy-${Date.now()}`;
+  const instanceId = randomUUID();
   const card = await placeCard(page, baseURL, tableSlug, instanceId);
 
   const graveyard = page.locator(`[data-shape-id="shape:region-graveyard-${tableSlug}-e2e-seat"]`);

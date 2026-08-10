@@ -1,4 +1,5 @@
 import { test, expect, Page, BrowserContext } from "@playwright/test";
+import { randomUUID } from "node:crypto";
 
 /**
  * Ticket 17 (flip and turn face-down): two independent context-menu items on
@@ -6,22 +7,51 @@ import { test, expect, Page, BrowserContext } from "@playwright/test";
  * and "Turn face down"/"Turn face up" (toggles `props.faceDown`) — plus a
  * reset of both axes on entering the library.
  */
-function cardPlayed(overrides: Record<string, unknown>) {
+function fakeTraceparent(): string {
+  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
+}
+
+function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
   return {
-    id: `e2e-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    id: randomUUID(),
+    tableId,
     name: "card.played",
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    face: "front",
-    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-    backImageUrl: null,
-    zoneHint: "stack",
-    cardName: "Llanowar Elves",
-    ...overrides,
+    occurredIn: "shuffler",
+    visibility: "public",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      face: "front",
+      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+      backImageUrl: null,
+      zoneHint: "stack",
+      cardName: "Llanowar Elves",
+      owner: "e2e-seat",
+      isCommander: false,
+      ...payloadOverrides,
+    },
   };
 }
 
-const uniqueSuffix = () => `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+function seatJoined(tableId: string, payloadOverrides: Record<string, unknown>) {
+  return {
+    id: randomUUID(),
+    tableId,
+    name: "seat.joined",
+    occurredAt: new Date().toISOString(),
+    initiator: { seatId: "e2e-seat", playerName: "Jess" },
+    occurredIn: "shuffler",
+    visibility: "public",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      deckName: "Blame Game",
+      ...payloadOverrides,
+    },
+  };
+}
 
 async function zoomToFit(page: Page) {
   await page.keyboard.press("Shift+1");
@@ -30,8 +60,8 @@ async function zoomToFit(page: Page) {
 
 async function placeCard(page: Page, baseURL: string | undefined, tableSlug: string, instanceId: string, overrides: Record<string, unknown> = {}) {
   const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, {
-    data: cardPlayed({
-      card: { scryfallId: `bbbbbbbb-0000-0000-0000-${instanceId.slice(-12).padStart(12, "0")}`, instanceId },
+    data: cardPlayed(tableSlug, {
+      card: { scryfallId: randomUUID(), instanceId },
       ...overrides,
     }),
   });
@@ -58,18 +88,12 @@ test("flipping and turning face down both sync to a second client", async ({ bro
     // A seat.joined with a card back, so the unsleeved face-down render has
     // an <img> to check (no seat data => the flat-rectangle fallback, which
     // has none).
-    await fetch(`${baseURL}/api/tables/${tableSlug}/events`, {
+    const seatResponse = await fetch(`${baseURL}/api/tables/${tableSlug}/events`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        id: `seat-${uniqueSuffix()}`,
-        name: "seat.joined",
-        occurredAt: new Date().toISOString(),
-        initiator: { seatId: "e2e-seat", playerName: "Jess" },
-        deckName: "Blame Game",
-        cardBackImageUrl: "https://example.com/e2e-card-back-2client.jpg",
-      }),
+      body: JSON.stringify(seatJoined(tableSlug, { cardBackImageUrl: "https://example.com/e2e-card-back-2client.jpg" })),
     });
+    expect(seatResponse.status).toBe(201);
 
     const [ctxAlice, ctxBob] = await Promise.all([browser.newContext(), browser.newContext()]);
     contexts.push(ctxAlice, ctxBob);
@@ -80,7 +104,7 @@ test("flipping and turning face down both sync to a second client", async ({ bro
       expect(bob.locator(".tl-canvas")).toBeVisible({ timeout: 15000 }),
     ]);
 
-    const instanceId = `flip-${uniqueSuffix()}`;
+    const instanceId = randomUUID();
     const backImageUrl = "https://cards.scryfall.io/normal/back/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg";
     await placeCard(alice, baseURL, tableSlug, instanceId, { backImageUrl });
     await expect(bob.locator(`#shape\\:card-${instanceId}`)).toBeAttached();
@@ -117,7 +141,7 @@ test("a one-faced card has no Flip item, only Turn face down", async ({ page, ba
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const instanceId = `oneface-${uniqueSuffix()}`;
+  const instanceId = randomUUID();
   await placeCard(page, baseURL, tableSlug, instanceId, { backImageUrl: null });
   await zoomToFit(page);
 
@@ -130,22 +154,16 @@ test("turning a card face down shows the table's card back, unsleeved", async ({
   const tableSlug = `verify-facedown-${Date.now()}`;
   const cardBackImageUrl = "https://example.com/e2e-card-back.jpg";
 
-  await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, {
-    data: {
-      id: `seat-${uniqueSuffix()}`,
-      name: "seat.joined",
-      occurredAt: new Date().toISOString(),
-      initiator: { seatId: "e2e-seat", playerName: "Jess" },
-      deckName: "Blame Game",
-      cardBackImageUrl,
-    },
+  const seatResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, {
+    data: seatJoined(tableSlug, { cardBackImageUrl }),
   });
+  expect(seatResponse.status()).toBe(201);
 
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const instanceId = `facedown-${uniqueSuffix()}`;
-  const frontImageUrl = cardPlayed({}).frontImageUrl as string;
+  const instanceId = randomUUID();
+  const frontImageUrl = cardPlayed(tableSlug, {}).payload.frontImageUrl as string;
   await placeCard(page, baseURL, tableSlug, instanceId);
   await zoomToFit(page);
 
@@ -166,21 +184,15 @@ test("a card entering the library resets face and face-down", async ({ page, bas
   const tableSlug = `verify-libreset-${Date.now()}`;
   const cardBackImageUrl = "https://example.com/e2e-card-back-libreset.jpg";
 
-  await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, {
-    data: {
-      id: `seat-${uniqueSuffix()}`,
-      name: "seat.joined",
-      occurredAt: new Date().toISOString(),
-      initiator: { seatId: "e2e-seat", playerName: "Jess" },
-      deckName: "Blame Game",
-      cardBackImageUrl,
-    },
+  const seatResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, {
+    data: seatJoined(tableSlug, { cardBackImageUrl }),
   });
+  expect(seatResponse.status()).toBe(201);
 
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const instanceId = `libreset-${uniqueSuffix()}`;
+  const instanceId = randomUUID();
   const backImageUrl = "https://cards.scryfall.io/normal/back/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg";
   await placeCard(page, baseURL, tableSlug, instanceId, { backImageUrl });
   await zoomToFit(page);
@@ -203,7 +215,7 @@ test("a card entering the library resets face and face-down", async ({ page, bas
   await page.mouse.move(libBox.x + libBox.width / 2, libBox.y + libBox.height / 2, { steps: 10 });
   await page.mouse.up();
 
-  const frontImageUrl = cardPlayed({}).frontImageUrl as string;
+  const frontImageUrl = cardPlayed(tableSlug, {}).payload.frontImageUrl as string;
   await expect(async () => {
     expect(await cardSrc(page, instanceId)).toBe(frontImageUrl);
   }).toPass({ timeout: 5000 });
@@ -214,8 +226,8 @@ test("flipping card A does not leave a stale selection that hijacks a later drag
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const idA = `sel-a-${uniqueSuffix()}`;
-  const idB = `sel-b-${uniqueSuffix()}`;
+  const idA = randomUUID();
+  const idB = randomUUID();
   await placeCard(page, baseURL, tableSlug, idA, { backImageUrl: "https://example.com/back-a.jpg", zoneHint: "battlefield" });
   await placeCard(page, baseURL, tableSlug, idB, { zoneHint: "battlefield" });
   await zoomToFit(page);

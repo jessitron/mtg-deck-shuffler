@@ -1,4 +1,5 @@
 import { test, expect, Page, BrowserContext } from "@playwright/test";
+import { randomUUID } from "node:crypto";
 
 /**
  * Ticket 14 (zone appearance): a zone shows a glow ring while a card is
@@ -6,17 +7,30 @@ import { test, expect, Page, BrowserContext } from "@playwright/test";
  * store) — so it must be visible only on the dragging player's own client,
  * never synced to anyone else watching the same table.
  */
-function cardPlayed(overrides: Record<string, unknown>) {
+function fakeTraceparent(): string {
+  return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
+}
+
+function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
   return {
-    id: `e2e-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    id: randomUUID(),
+    tableId,
     name: "card.played",
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
-    face: "front",
-    frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
-    backImageUrl: null,
-    zoneHint: "stack",
-    ...overrides,
+    occurredIn: "shuffler",
+    visibility: "public",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      face: "front",
+      frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
+      backImageUrl: null,
+      zoneHint: "stack",
+      owner: "e2e-seat",
+      isCommander: false,
+      ...payloadOverrides,
+    },
   };
 }
 
@@ -37,10 +51,10 @@ test("dragging a card over a zone arms it (box-shadow ring), and disarms it once
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const instanceId = `armed-${Date.now()}`;
-  const event = cardPlayed({
+  const instanceId = randomUUID();
+  const event = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: "aaaaaaaa-0000-0000-0000-000000000006", instanceId },
+    card: { scryfallId: randomUUID(), instanceId },
     zoneHint: "stack",
   });
   const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
@@ -88,17 +102,17 @@ test("dragging a multi-card selection arms only the one zone under the pointer, 
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  const instanceIdA = `armed-multi-a-${Date.now()}`;
-  const instanceIdB = `armed-multi-b-${Date.now()}`;
+  const instanceIdA = randomUUID();
+  const instanceIdB = randomUUID();
   for (const [instanceId, scryfallId] of [
-    [instanceIdA, "aaaaaaaa-0000-0000-0000-000000000009"],
-    [instanceIdB, "aaaaaaaa-0000-0000-0000-00000000000a"],
+    [instanceIdA, randomUUID()],
+    [instanceIdB, randomUUID()],
   ]) {
     // "battlefield" (not "stack") so the two cards land at distinct grid
     // positions instead of stacked exactly on top of each other — otherwise
     // clicking one always hits whichever landed on top.
     const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, {
-      data: cardPlayed({ cardName: "Llanowar Elves", card: { scryfallId, instanceId }, zoneHint: "battlefield" }),
+      data: cardPlayed(tableSlug, { cardName: "Llanowar Elves", card: { scryfallId, instanceId }, zoneHint: "battlefield" }),
     });
     expect(response.status()).toBe(201);
   }
@@ -156,10 +170,10 @@ test("the armed glow is local to the dragging player, never synced to another cl
       expect(pageB.locator(".tl-canvas")).toBeVisible({ timeout: 15000 }),
     ]);
 
-    const instanceId = `armed-local-${Date.now()}`;
-    const event = cardPlayed({
+    const instanceId = randomUUID();
+    const event = cardPlayed(tableSlug, {
       cardName: "Llanowar Elves",
-      card: { scryfallId: "aaaaaaaa-0000-0000-0000-000000000007", instanceId },
+      card: { scryfallId: randomUUID(), instanceId },
       zoneHint: "stack",
     });
     const response = await pageA.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
