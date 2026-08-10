@@ -11,6 +11,36 @@ interface HtmlHeadOptions {
   scriptsHtml?: string;
 }
 
+// The browser-side Honeycomb tracing guard + init, as a literal script
+// source string rather than a plain TS function: it has to ship as-is inside
+// the page's inline <script> tag (browser JS, no build step reaches it), and
+// keeping it as one exported constant means the exact source the browser
+// runs is also what test/html-layout-tracing-guard.test.ts evals and
+// exercises — no separate reimplementation to drift out of sync.
+//
+// Guards on window.Hny && window.browserTabId (hny.js loaded, tab id minted)
+// same as before. Extends that guard to also skip — with a console.warn,
+// instead of silently calling initializeTracing with a useless key — when
+// apiKey is empty or the literal string "undefined" (what string
+// interpolation produces when neither HONEYCOMB_INGEST_API_KEY nor
+// HONEYCOMB_API_KEY is set server-side): browser-tracing-key-guard.
+const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKey) {
+        if (!(window.Hny && window.browserTabId)) return;
+        if (!apiKey || apiKey === "undefined") {
+          console.warn("Honeycomb browser tracing disabled: no valid API key configured (set HONEYCOMB_INGEST_API_KEY or HONEYCOMB_API_KEY)");
+          return;
+        }
+        Hny.initializeTracing({
+          apiKey: apiKey,
+          serviceName: "mtg-deck-shuffler-web",
+          debug: false,
+          provideOneLinkToHoneycomb: true,
+          resourceAttributes: {
+            "game.browser_tab_id": window.browserTabId
+          }
+        });
+      }`;
+
 // The one page shell. Every page's <head> — EJS-rendered (via
 // views/partials/head.ejs, which reaches this through app.locals) and
 // TS-rendered (/game, error pages) — comes from here, so the skeleton
@@ -37,17 +67,8 @@ ${stylesheetsHtml}
     <script>
       // Initialize Honeycomb tracing for the browser. browserTabId must exist
       // before this runs: it's baked into the resource, immutable after init.
-      if (window.Hny && window.browserTabId) {
-        Hny.initializeTracing({
-          apiKey: "${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}",
-          serviceName: "mtg-deck-shuffler-web",
-          debug: false,
-          provideOneLinkToHoneycomb: true,
-          resourceAttributes: {
-            "game.browser_tab_id": window.browserTabId
-          }
-        });
-      }
+${HONEYCOMB_TRACING_INIT_SCRIPT}
+      initHoneycombTracing("${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}");
     </script>
 ${scriptsHtml}
   </head>`;
@@ -143,4 +164,4 @@ export function formatErrorPageHtmlPage(options: ErrorPageOptions): string {
   });
 }
 
-export { formatHtmlHead, formatPageWrapper };
+export { formatHtmlHead, formatPageWrapper, HONEYCOMB_TRACING_INIT_SCRIPT };
