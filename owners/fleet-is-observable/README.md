@@ -298,6 +298,43 @@ tail as `GAME_HEAD_SCRIPTS_HTML`. One side effect of unification: `/game` now fe
 `/browser-tab-id.js` as a static asset instead of inlining it — covered by the existing
 by-extension asset sampling, not a new noise source.
 
+### Trace context embedded in event bodies (`traceparent`-in-body)
+
+**Two separate, complementary mechanisms carry trace context on this fleet, and this file
+had no section on the second one until `tabletop-cards-come-and-go` ticket 05
+(2026-08-09) even though two ships were already doing it.**
+
+1. **HTTP-header propagation** — automatic, via undici auto-instrumentation on outbound
+   `fetch`/HTTP calls. This is how a Shuffler-initiated trace continues into the Spine
+   (Rack instrumentation extracts the inbound W3C header) with zero application code.
+   Ephemeral: it only exists on the wire for that one request.
+2. **Body-embedded `traceparent`** — a W3C `00-{traceId}-{spanId}-{flags}` string minted
+   into the JSON payload itself, alongside durable fields like `id` and `occurredAt`.
+   This is for data that outlives the request: the Spine's persisted event log and its
+   `/admin/tables` trace-link rendering need a `traceparent` *value*, not a header, because
+   by the time an admin views the table the original request's span is long gone.
+   `contracts/envelope.v1.json`'s `traceparent` field (pattern
+   `^00-[0-9a-f]{32}-[0-9a-f]{16}-[0-9a-f]{2}$`, required) is explicit that this is
+   **observability only, never durable causality** — that's the envelope's `id`.
+
+Header propagation and body-embedded `traceparent` answer different questions ("what
+trace is this HTTP call part of" vs. "what trace should this stored record link back
+to") and neither substitutes for the other.
+
+**The mint/format pattern now exists in three places, one per ship, each reading its own
+tracing API's ambient span:**
+
+| Where | Signature | Behavior with no active span |
+| --- | --- | --- |
+| `services/spine/app/controllers/application_controller.rb` `current_traceparent` | `-> String` | Synthesizes a well-formed random traceparent (`SecureRandom.hex`) — the Spine's own events (`table.created`, `seat.taken`) always need a value to persist. |
+| `apps/tabletop/src/client/observability/index.ts` `currentTraceparent` | `-> string \| undefined` | Returns `undefined` — used only for propagation on a websocket connection URL, never for a durable field, so "no span, no value" is correct there. |
+| `apps/shuffler/src/port-tabletop/traceparent.ts` `currentTraceparent` (new, ticket 05) | `-> string` | Synthesizes a well-formed random traceparent, same as the Spine — the envelope's `traceparent` field is **required**, so this helper can never return `undefined`. Additionally sets `traceparent.synthesized: true` on the active span (if one exists but lacks a valid `SpanContext`) when the fallback fires, so a real occurrence in production (vs. the expected test-only case, since every `card.played`/`seat.joined` send happens inside an Express request span) is visible on the trace rather than silently masquerading as a real trace link. |
+
+All three format identically: `00-{32 hex traceId}-{16 hex spanId}-{2 hex flags}`. The
+Shuffler's is the newest and the only one with the synthesized-fallback attribute — worth
+copying to the Spine's `current_traceparent` if its silent fallback is ever suspected of
+firing outside tests.
+
 ### Dev-tooling telemetry (the pattern for instrumenting our own tools)
 
 `277bdfd` (2026-08-07) added the fleet's **first instrumentation of a tool rather than a ship**: the
@@ -790,6 +827,23 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
     marker call and `.be`/`.env` sourcing in `deploy.sh` untouched.
   - **Post-deploy verification still owed at time of writing**: open the deployed table over http
     and confirm browser spans land in `mtg-tabletop-web` (env `mtg-deck-shuffler`).
+
+- **2026-08-09, `tabletop-cards-come-and-go` ticket 05 ("contract validation gets
+  real"): the Shuffler gained a third `traceparent`-minting helper.**
+  `apps/shuffler/src/port-tabletop/traceparent.ts` mints the `traceparent` string
+  `contracts/envelope.v1.json` now requires on every `card.played`/`seat.joined` send,
+  in the same `00-{traceId}-{spanId}-{flags}` format already used by the Spine's
+  `current_traceparent` and the Tabletop's `currentTraceparent`. This was the point at
+  which the KB noticed it had **no section at all** on the body-embedded-`traceparent`
+  pattern despite two ships already doing it — added above as "Trace context embedded
+  in event bodies". The new helper's one deliberate difference from its two precedents:
+  because the envelope field is required (unlike the Tabletop's `string | undefined`,
+  used only for websocket-URL propagation), it always returns a well-formed string, and
+  it stamps `traceparent.synthesized: true` on the active span when the no-span fallback
+  fires — a fails-open-invisibly guard in the same family as this file's other ones: the
+  fallback is expected only in tests (every real send happens inside an Express request
+  span), so if it ever fires in production, the span says so instead of quietly minting
+  a trace-shaped string that links to nothing.
 
 ## Related reading
 
