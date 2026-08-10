@@ -28,6 +28,7 @@
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transform-style: preserve-3d;
+  border-radius: 8px;
 }
 
 .library-card-back::before {
