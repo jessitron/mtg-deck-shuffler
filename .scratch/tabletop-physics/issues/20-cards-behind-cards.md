@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: done
+Status: ready-for-agent
 
 **What to build:** Extend the card-hosted drag-attach mechanism (ticket 18) so a card can be a
 passenger too. A tucked card stays independently selectable, tappable, and draggable — plain
@@ -31,10 +31,10 @@ stays behind, unattached, exactly where it was — never auto-routed to a "corre
 
 **Blocked by:** 12, 13, 18
 
-- [x] Dropping a card onto another parents it, landing on top by default
-- [x] "Send backward"/"Send to back" context-menu command makes a passenger card read as
+- [ ] Dropping a card onto another parents it, landing on top by default
+- [ ] "Send backward"/"Send to back" context-menu command makes a passenger card read as
       underneath its host
-- [x] A tucked card is still independently selectable, tappable, and draggable
-- [x] Dragging the host moves every passenger with it; dragging a passenger alone does not detach it
-- [x] Tapping the host does not visually rotate a tucked passenger card
-- [x] A host leaving the battlefield detaches every passenger (card/counter/note) in place
+- [ ] A tucked card is still independently selectable, tappable, and draggable
+- [ ] Dragging the host moves every passenger with it; dragging a passenger alone does not detach it
+- [ ] Tapping the host does not visually rotate a tucked passenger card
+- [ ] A host leaving the battlefield detaches every passenger (card/counter/note) in place

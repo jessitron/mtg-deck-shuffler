@@ -1,10 +1,10 @@
 import { useLayoutEffect, useRef } from "react";
-import { BaseBoxShapeUtil, HTMLContainer, TLDragShapesOutInfo, TLShape, TLShapeId, TLShapePartial } from "tldraw";
+import { BaseBoxShapeUtil, HTMLContainer, TLDragShapesOutInfo, TLShape, TLShapePartial, Vec } from "tldraw";
 import type { CSSProperties } from "react";
 import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
 import { findOpenSpotsNearZoneEdge, Rect } from "./openSpotNearZoneEdge";
 import { topmostZoneAt, ZoneHit } from "./zoneHitTest";
-import { rotateHoldingCenter, tapPartial, tapPartialsForCards } from "./cardTap";
+import { tapPartial } from "./cardTap";
 
 // Ticket 18: counters detach the instant their host card leaves the
 // battlefield — one rule, no per-zone special-casing. Battlefield = the
@@ -19,38 +19,8 @@ const NON_BATTLEFIELD_ZONES = new Set(["graveyard", "exile", "library"]);
 // Ticket 19: notes ride along exactly like counters — same accept-list, same
 // battlefield-exit eviction. "Passenger" is anything a card hosts by
 // parenting; not the card's own props, per ticket 02's "the card carries
-// nothing about its passengers." Cards are deliberately NOT in this set —
-// see the "cards tuck via a meta link, not parenting" comment below for why.
+// nothing about its passengers."
 const PASSENGER_TYPES = new Set(["mtg-counter", "note"]);
-
-// Ticket 20 (corrected 2026-08-10 after Jess's live bug report): a card
-// cannot be a real tldraw child of another card, full stop. tldraw's
-// renderer does one global depth-first traversal
-// (Editor.getUnorderedRenderingShapes) that assigns every descendant a
-// higher z-index than its own ancestor, unconditionally (verified against
-// tldraw source) — a child can NEVER paint behind its own parent, no matter
-// what "send to back" does. And tldraw's reorder actions
-// (getReorderingShapesChanges) only reorder shapes against their SIBLINGS
-// (same parentId) — reordering a lone child against its own parent is a
-// silent no-op, which is exactly the bug Jess hit: "send to back" on a
-// tucked card had no chance of working while it was a real child.
-//
-// So a tucked card stays an ordinary top-level page shape, linked to its
-// tuck partner by a plain `meta.tuckedWith: ShapeId | null` pointer (written
-// on both sides) instead of `parentId`. That makes tldraw's stock "Send to
-// back"/"Bring to front" (ReorderMenuSubmenu) genuinely reorder the two
-// cards against each other, because they really are ordinary siblings now.
-//
-// "Host" (which of the two carries the other when dragged, and whose
-// zone-exit detaches the other) is no longer a fixed role assigned at
-// attach time — it's computed LIVE from current z-order, matching Jess's
-// correction: "whichever card is on top should be the parent." Drag-carry
-// therefore can't be free page-transform composition anymore (that
-// composition is exactly the mechanism that trapped the passenger in front
-// forever) — it's implemented by hand in onTranslateEnd. Tapping a card
-// never needs to compensate anything now: with no real parenting, a tap on
-// one card cannot affect the other's rotation at all.
-const TUCK_KEY = "tuckedWith";
 
 /**
  * JES-144, tabletop-physics ticket 12: `mtg-card`, a genuine custom shape
@@ -186,26 +156,6 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     return path;
   }
 
-  // Ticket 20 (corrected 2026-08-10): carryTuckedPartner needs to know
-  // whether a tucked card's own partner is ALSO being dragged in the same
-  // multi-select gesture, to avoid double-moving it. tldraw calls
-  // onTranslateEnd once per moving shape in one synchronous loop
-  // (Translating.ts), and each call's own `setSelectedShapes([])` mutates
-  // the SHARED live selection — so a naive `getSelectedShapeIds()` read
-  // inside onTranslateEnd sees an already-emptied selection for whichever
-  // shape in the batch is processed second. onTranslateStart fires for
-  // every moving shape too, but BEFORE any of them has cleared anything, so
-  // capturing it there (once per gesture, on this shared ShapeUtil
-  // instance — safe, since tldraw doesn't run two translate gestures at
-  // once) gives every shape's onTranslateEnd the same, correct, still-full
-  // selection to check against.
-  private gestureSelection: TLShapeId[] = [];
-
-  override onTranslateStart(_shape: MtgCardShape): TLShapePartial<MtgCardShape> | undefined {
-    this.gestureSelection = this.editor.getSelectedShapeIds();
-    return undefined;
-  }
-
   // JES-144: tap/untap a card by clicking it — a toggle, not a 4-way
   // rotation cycle, so a second click always taps it back. `props.tapped` is
   // the source of truth; rotation is purely visual and additive on top of it,
@@ -237,13 +187,20 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       // tripwire for a tldraw upgrade reordering this. Never "upgrade" this
       // to setTimeout: a macrotask could interleave with other input events.
       queueMicrotask(() => {
-        // Re-fetch fresh: the clicked card's update (and possibly remote
-        // changes) applied between onClick and this microtask. A marquee can
-        // also catch counters and other shapes — cards only.
-        const otherCards = otherIds
-          .map((id) => this.editor.getShape(id))
-          .filter((s): s is MtgCardShape => !!s && s.type === "mtg-card");
-        const partials = tapPartialsForCards(otherCards, tapped);
+        const partials: TLShapePartial<MtgCardShape>[] = [];
+        for (const id of otherIds) {
+          // Re-fetch fresh: the clicked card's update (and possibly remote
+          // changes) applied between onClick and this microtask. A marquee
+          // can also catch counters and other shapes — cards only. Cards
+          // already at the target state are skipped entirely: rotation is a
+          // delta, and applying ±90° to an already-correct card would
+          // corrupt its free rotation.
+          const fresh = this.editor.getShape(id);
+          if (!fresh || fresh.type !== "mtg-card") continue;
+          const card = fresh as MtgCardShape;
+          if (card.props.tapped === tapped) continue;
+          partials.push(tapPartial(card, tapped));
+        }
         if (partials.length > 0) this.editor.updateShapes(partials);
       });
     }
@@ -258,15 +215,11 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   // list on the card's props) is what carries the state. Defining any of
   // these hooks makes every card a drag target for every unlocked dragged
   // shape (getDraggingOverShape checks only that hooks exist), so both `can*`
-  // gates are type-narrowed — without the canRemoveChildrenOfType gate
-  // (default: true for ALL types), dragging card A across card B would fire
-  // B.onDragShapesOut(B, [cardA]).
-  //
-  // "mtg-card" is receivable too (ticket 20) — but ONLY for the free hover
-  // hinting during a drag; onDragShapesIn below never reparents a card, only
-  // counters/notes. See the TUCK_KEY comment above for why.
+  // gates are type-narrowed to counters — without the canRemoveChildrenOfType
+  // gate (default: true for ALL types), dragging card A across card B would
+  // fire B.onDragShapesOut(B, [cardA]).
   override canReceiveNewChildrenOfType(shape: MtgCardShape, type: TLShape["type"]): boolean {
-    return !shape.isLocked && (PASSENGER_TYPES.has(type) || type === "mtg-card");
+    return !shape.isLocked && PASSENGER_TYPES.has(type);
   }
 
   override canRemoveChildrenOfType(_shape: MtgCardShape, type: TLShape["type"]): boolean {
@@ -277,94 +230,43 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   // has already filtered `shapes` through canReceiveNewChildrenOfType, and it
   // hints this card (the hover-highlight) whenever any shape is receivable.
   override onDragShapesIn(card: MtgCardShape, shapes: TLShape[]): void {
-    const realChildren = shapes.filter((s) => PASSENGER_TYPES.has(s.type));
-    if (realChildren.length > 0 && !realChildren.some((s) => this.editor.hasAncestor(card, s.id))) {
-      this.editor.reparentShapes(realChildren, card.id);
+    if (shapes.some((s) => this.editor.hasAncestor(card, s.id))) return;
+    this.editor.reparentShapes(shapes, card.id);
 
-      // reparentShapes preserves page rotation, so a passenger dropped on an
-      // already-tapped card would keep a compensating local rotation forever —
-      // visibly tilted after the card untaps. Counters/notes are card-aligned:
-      // zero the local rotation, holding the passenger's center fixed (same
-      // math as onClick's tap pivot).
-      for (const dropped of realChildren) {
-        this.zeroRotationHoldingCenter(dropped.id);
-      }
-    }
-
-    // Ticket 20: a card dropped onto another card tucks via a meta link, not
-    // real parenting (TUCK_KEY comment above). Lands wherever dropped, on
-    // top by default — there's no "tuck under by default" rule (no
-    // card-type prop to decide a default with); getting it to read as
-    // tucked-under is the explicit reorder command.
+    // reparentShapes preserves page rotation, so a passenger dropped on an
+    // already-tapped card would keep a compensating local rotation forever —
+    // visibly tilted after the card untaps. Passengers are card-aligned: zero
+    // the local rotation, holding the passenger's center fixed (rotation
+    // pivots around the top-left corner; zeroing it alone would swing it
+    // sideways — same math as onClick's tap pivot). Geometry bounds, not
+    // `props.w/h`: a note has no w/h prop (its size comes from a style enum
+    // plus `growY`), but every shape's geometry does.
     for (const dropped of shapes) {
-      if (dropped.type !== "mtg-card" || dropped.id === card.id) continue;
-      this.tuckCard(dropped as MtgCardShape, card);
-      this.editor.bringToFront([dropped.id]);
+      const fresh = this.editor.getShape(dropped.id);
+      if (!fresh || fresh.rotation === 0) continue;
+      const { w, h } = this.editor.getShapeGeometry(fresh).bounds;
+      const halfExtent = { x: w / 2, y: h / 2 };
+      const center = Vec.Add(fresh, Vec.Rot(halfExtent, fresh.rotation));
+      const topLeft = Vec.Sub(center, halfExtent);
+      this.editor.updateShape({
+        id: fresh.id,
+        type: fresh.type,
+        x: topLeft.x,
+        y: topLeft.y,
+        rotation: 0,
+      });
     }
-  }
-
-  // Link two cards as tuck partners, breaking whichever prior link either
-  // side had — pairwise only, one partner at a time. onDragShapesIn is the
-  // "frame pattern": it can fire every hover frame while a card lingers over
-  // a potential host, not just on drop — one batched updateShapes rather
-  // than up to three separate ones keeps repeated hovers over an
-  // already-tucked pair cheap (and a no-op once linked).
-  private tuckCard(passenger: MtgCardShape, host: MtgCardShape): void {
-    if ((passenger.meta?.[TUCK_KEY] as TLShapeId | undefined) === host.id) return;
-
-    const partials: TLShapePartial<MtgCardShape>[] = [
-      ...this.untuckPartials(passenger),
-      ...this.untuckPartials(host),
-      { id: passenger.id, type: "mtg-card", meta: { ...passenger.meta, [TUCK_KEY]: host.id } },
-      { id: host.id, type: "mtg-card", meta: { ...host.meta, [TUCK_KEY]: passenger.id } },
-    ];
-    this.editor.updateShapes(partials);
-  }
-
-  // Clear a card's tuck link on both sides, if it has one, in one write.
-  private untuck(card: MtgCardShape): void {
-    const partials = this.untuckPartials(card);
-    if (partials.length > 0) this.editor.updateShapes(partials);
-  }
-
-  // Partials that clear `card`'s tuck link and its partner's reverse link —
-  // pure data, no write, so tuckCard can fold this into its own single
-  // updateShapes call instead of issuing a separate transaction per side.
-  private untuckPartials(card: MtgCardShape): TLShapePartial<MtgCardShape>[] {
-    const partnerId = card.meta?.[TUCK_KEY] as TLShapeId | undefined;
-    if (!partnerId) return [];
-    const partner = this.editor.getShape(partnerId);
-    const partials: TLShapePartial<MtgCardShape>[] = [{ id: card.id, type: "mtg-card", meta: { ...card.meta, [TUCK_KEY]: null } }];
-    if (partner && partner.type === "mtg-card") {
-      partials.push({ id: partner.id, type: "mtg-card", meta: { ...partner.meta, [TUCK_KEY]: null } });
-    }
-    return partials;
   }
 
   // Dragged off the card and not into another receiver: detached, staying
   // wherever it's dropped. Only the dragged shapes that are currently THIS
-  // card's real children (counters/notes) — a multi-shape drag containing
-  // someone else's counter must not touch it, and this card's other
-  // counters stay put. A tucked CARD is never a real child, so it's never
-  // in `mine` here — its own detach-by-distance lives in onTranslateEnd.
+  // card's children — a multi-shape drag containing someone else's counter
+  // must not touch it, and this card's other counters stay put.
   override onDragShapesOut(card: MtgCardShape, shapes: TLShape[], info: TLDragShapesOutInfo): void {
     if (info.nextDraggingOverShapeId) return;
     const mine = shapes.filter((s) => s.parentId === card.id);
     if (mine.length === 0) return;
     this.editor.reparentShapes(mine, this.editor.getCurrentPageId());
-  }
-
-  // Zero a shape's local rotation, holding its own center fixed on the page
-  // (rotation pivots around a shape's top-left, not its center — zeroing it
-  // alone would swing the shape sideways). Geometry bounds, not `props.w/h`:
-  // a note has no w/h prop (its size comes from a style enum plus `growY`),
-  // but every shape's geometry does.
-  private zeroRotationHoldingCenter(id: TLShape["id"]): void {
-    const fresh = this.editor.getShape(id);
-    if (!fresh || fresh.rotation === 0) return;
-    const { w, h } = this.editor.getShapeGeometry(fresh).bounds;
-    const pose = rotateHoldingCenter(fresh, { x: w / 2, y: h / 2 }, 0);
-    this.editor.updateShape({ id: fresh.id, type: fresh.type, x: pose.x, y: pose.y, rotation: 0 });
   }
 
   // Ticket 01-zone-entry-events: name "this card instance entered this
@@ -384,7 +286,7 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   // was known to be in — so re-entering a zone it already left still counts
   // as a fresh entry, but staying put (or a tiny in-zone nudge) doesn't. Zone
   // membership deliberately stays out of `props`: see MtgCardShapeProps.
-  override onTranslateEnd(initial: MtgCardShape, current: MtgCardShape): TLShapePartial<MtgCardShape> | undefined {
+  override onTranslateEnd(_initial: MtgCardShape, current: MtgCardShape): TLShapePartial<MtgCardShape> | undefined {
     // tldraw bug workaround: because this ShapeUtil defines `onClick`,
     // tldraw's SelectTool defers selecting the pointed-at shape until
     // pointer-up (PointingShape.onEnter in node_modules/tldraw/src/lib/tools/
@@ -403,17 +305,6 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     this.editor.setSelectedShapes([]);
 
     const zoneHit = this.zoneAt(current);
-
-    // Ticket 20: drag-carry for a tucked card is no longer free page-
-    // transform composition (that's the mechanism that trapped a passenger
-    // in front of its host forever — see TUCK_KEY comment). Runs on every
-    // settle, not gated on a zone change, since sliding a card around
-    // WITHIN the same zone must still carry its tucked partner. Uses
-    // `gestureSelection` (captured in onTranslateStart, before any card's
-    // own clear-on-settle could mutate it), not a live read here — see that
-    // field's comment.
-    this.carryTuckedPartner(initial, current, zoneHit);
-
     const zone = zoneHit?.zone;
     const previousZone = (current.meta?.zone as string | undefined) ?? undefined;
     if (zone === previousZone) return undefined;
@@ -466,53 +357,6 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     return bounds ? topmostZoneAt(this.editor, bounds.center) : undefined;
   }
 
-  // Ticket 20 (corrected 2026-08-10): "host" (whoever's drag carries the
-  // other) is whichever of a tucked pair is CURRENTLY on top — Jess's
-  // correction, "whichever card is on top should be the parent" — not a
-  // fixed role assigned at attach time. Index doesn't change from a plain
-  // translate, only from an explicit reorder action or at creation, so
-  // `current.index` here reliably reflects whatever the player last chose
-  // via "Send to back"/"Bring to front".
-  private carryTuckedPartner(initial: MtgCardShape, current: MtgCardShape, zoneHit: ZoneHit | undefined): void {
-    const partnerId = current.meta?.[TUCK_KEY] as TLShapeId | undefined;
-    if (!partnerId) return;
-    const partner = this.editor.getShape(partnerId);
-    if (!partner || partner.type !== "mtg-card") return;
-
-    // Both cards of the pair were dragged together in one multi-select
-    // gesture — tldraw's own per-shape translation already moved the
-    // partner correctly; propagating this delta too would double it.
-    if (this.gestureSelection.includes(partner.id)) return;
-
-    const iAmOnTop = current.index > partner.index;
-    if (!iAmOnTop) {
-      // I'm the passenger, dragged on my own (not carried) — a small
-      // in-place nudge that still overlaps my host keeps the link; moving
-      // far enough to stop overlapping detaches (ticket 20: "dragging a
-      // passenger directly does not auto-detach it" — only true up to
-      // this point).
-      const myBounds = this.editor.getShapePageBounds(current);
-      const hostBounds = this.editor.getShapePageBounds(partner);
-      if (myBounds && hostBounds && !myBounds.collides(hostBounds)) {
-        this.untuck(current);
-      }
-      return;
-    }
-
-    // I'm the host. Leaving the battlefield detaches my passenger, which
-    // stays behind, unattached, exactly where it was — it was never carried
-    // there in the first place, since carry only happens below this check.
-    if (zoneHit && NON_BATTLEFIELD_ZONES.has(zoneHit.zone)) {
-      this.untuck(current);
-      return;
-    }
-
-    const dx = current.x - initial.x;
-    const dy = current.y - initial.y;
-    if (dx === 0 && dy === 0) return;
-    this.editor.updateShape({ id: partner.id, type: "mtg-card", x: partner.x + dx, y: partner.y + dy });
-  }
-
   // Ticket 18 (counters), extended by ticket 19 (notes): detach every
   // passenger riding this card and land each at an open spot near the
   // destination zone's edge — outside the zone, on the table. "Occupied"
@@ -554,12 +398,6 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       passengers.map((p) => p.id),
       this.editor.getCurrentPageId(),
     );
-    // Counters/notes land upright (rotation 0) — there's no host left for
-    // "relative to" to mean anything, so upright on the table is the
-    // natural rest state (ticket 18). `passengers` is always counters/notes
-    // here — a tucked CARD is never a real child (ticket 20 correction, see
-    // TUCK_KEY comment), so its own zone-exit detach lives in
-    // carryTuckedPartner, not here.
     this.editor.animateShapes(
       passengers.map((p, i) => ({ id: p.id, type: p.type, x: spots[i].x, y: spots[i].y, rotation: 0 })),
       { animation: { duration: 200 } },
