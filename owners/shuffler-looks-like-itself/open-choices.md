@@ -279,6 +279,14 @@ this ticket is a human tabbing through `/`, `/choose-any-deck`, `/prepare`, `/ga
 (link-dense, own second `:root`), `/design`, the debug state view (the `<summary>` case), and
 **inside an open library modal and card modal** (the white-surface and overlay cases).
 
+**The modal-interior part is now automated, not just manually checked (2026-08-10,
+`modal-focus-trap`).** `apps/shuffler/test/verification/verify-modal-focus.spec.ts` tabs and
+shift-tabs repeatedly inside an open library modal and an open card modal, asserting focus
+never escapes to `#game-container` (which the same change makes `inert` while a modal is
+open) — see [README.md](README.md)'s "the `tabindex=0` on all four modal overlays now has
+its consumer" entry for the mechanism (`apps/shuffler/public/modal-focus.js`). What's still
+manual: the non-modal pages in the list above.
+
 ---
 
 ## 6. Text input treatment

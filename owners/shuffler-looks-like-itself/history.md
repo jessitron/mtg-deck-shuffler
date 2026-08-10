@@ -2179,3 +2179,61 @@ architecture.md "known exception to the gallery's one architectural rule" — th
 specimen is rendered by the app's own stylesheets, never gallery CSS) now holds without
 qualification for the playmat stages. The swatch-chip hex exception (`.swatch-chip`
 hard-codes its colours) is unaffected and still open.
+
+## 2026-08-10 — the modal `tabindex="0"` got its consumer: a real focus trap
+
+`modal-focus-trap`. Since choice 5 (2026-08-06), all four modal overlays carried
+`tabindex="0"` and a companion `:focus-visible` rule (`playmat.css`, inward offset for the
+two full-viewport overlays) — but nothing ever moved focus onto that `tabindex`, nothing
+stopped Tab from reaching the page behind an open modal, and closing a modal never restored
+focus to whatever opened it. The app's modals were plain HTMX-swapped divs, not a native
+`<dialog>`, so the browser gave none of that for free.
+
+`apps/shuffler/public/modal-focus.js` is the fix, and it's one generic mechanism for both
+modal families (`#modal-container` — library/history/table/error — and
+`#card-modal-container` — the card modal), keyed off `htmx:afterSettle` the same way
+`table-look-focus.js` already handles htmx-swap-safe focus work. On a container's
+empty→occupied transition it captures `document.activeElement`, then focuses the overlay
+itself (the `tabindex="0"` landing spot). Background escape is prevented by native `inert`
+on whichever region isn't the topmost open dialog — main content plus the other modal
+container, since the two can stack (opening a card from inside the library modal layers the
+card modal on top) — with an explicit Tab/Shift+Tab wrap-around inside the topmost dialog on
+top of that, purely so Tab cycles instead of dead-ending against `inert`'s own block. On
+occupied→empty, focus restores to whatever that container's dialog had displaced, so closing
+the card modal while the library modal is still open returns focus into the library modal,
+not the original opener two levels back.
+
+**Two structural facts decided the shape, discovered rather than designed — the same pattern
+as choice 5 and the deck-title plaque move.** First: `inert` already does the hard part
+(removing descendants from tab order and the accessibility tree), so the keydown handler's
+job shrank to wrap-around only — it is not what stops Tab from escaping, `inert` is. Second:
+the two dialogs can stack, so "prior focus" and "is this the topmost dialog" both had to be
+tracked per-container, not globally, or closing the inner one would have yanked focus all
+the way back past the outer one still open.
+
+**All four templates gained `role="dialog" aria-modal="true"`, statically, next to the
+existing `tabindex="0"`** — `views/partials/card-modal.ejs`, `views/partials/library-modal.ejs`,
+`src/view/play-game/game-modals.ts`, `src/view/play-game/history-components.ts`. No CSS
+changed at all; consulted this owner's `-review` before writing any, specifically to check
+whether `inert` collides with anything in `playmat.css`/`prepare.css`/`game.css` — nothing
+there keys off `[inert]`, `:focus-within`, or `:has()`, so the mechanism needed none.
+
+**This closes a fact this KB had been carrying since choice 5 without saying so out loud:**
+the `tabindex="0"` on the four overlays was documented as the *reason* the offset-focus-ring
+companion rule exists, but nothing in the KB ever named what the `tabindex` itself was
+*for* beyond "so the global rule reaches it." It was always the intended landing spot for a
+focus trap that hadn't been built yet — this change is that trap.
+
+**Partially closes choice 5's outstanding "manual keyboard tab-through" item.** The modal-
+interior half (library modal, card modal) is now automated by
+`apps/shuffler/test/verification/verify-modal-focus.spec.ts`, which tabs and shift-tabs
+repeatedly asserting focus never escapes `#game-container` while it's `inert`. The non-modal
+pages (`/`, `/choose-any-deck`, `/prepare`, `/game`, `/docs`, `/design`, the debug state
+view) are still a human's job.
+
+**Shape convention recorded for the next modal-shaped consumer**, in
+[README.md](README.md) and [interactions.md](interactions.md): `modal-focus.js` finds
+dialogs by container id and overlay class (`.modal-overlay`/`.card-modal-overlay`), so a
+fifth consumer that reuses that shape — plus `tabindex="0"` and the new
+`role="dialog" aria-modal="true"` pair — gets the trap for free. One that reinvents the
+markup does not, silently.

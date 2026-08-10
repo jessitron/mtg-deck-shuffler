@@ -638,6 +638,24 @@ two full-viewport modal overlays, where `+3px` would draw off-screen. **Known op
 indicators), and the flat-white `.modal-dialog` interior is the likeliest failure. The fix is
 Jess's call, not a local patch — see [open-choices.md](open-choices.md) choice 5.
 
+**The `tabindex="0"` on all four modal overlays now has its consumer, and a shape convention
+for the next one (2026-08-10, `modal-focus-trap`).** `apps/shuffler/public/modal-focus.js`
+is the generic focus-trap mechanism for `#modal-container` (library/history/table/error
+modals) and `#card-modal-container` (the card modal): on `htmx:afterSettle`, it moves focus
+into whichever container just gained an overlay (landing on the overlay's own
+`tabindex="0"` — the reason that attribute existed, not a fossil of some earlier design),
+sets native `inert` on whichever region is *not* the topmost open dialog (main content plus
+the other modal container, if any — the two dialogs can stack), wraps Tab/Shift+Tab at the
+topmost dialog's first/last focusable element, and restores focus to whatever had it when
+the dialog opened. No CSS changed — `inert`'s own default (no visual change, removed from
+tab order and the accessibility tree) needed no styling, and this owner's `-review` confirmed
+nothing in `playmat.css`/`prepare.css`/`game.css` keys off `[inert]`. **The shape a fifth
+modal-overlay-shaped consumer must follow**: a `.modal-overlay`/`.card-modal-overlay` class
+on the outer div, `tabindex="0"`, and (new) `role="dialog" aria-modal="true"` declared
+statically next to it — `modal-focus.js` finds dialogs by container id and overlay class, so
+a new consumer that reuses the shape gets the trap for free; one that reinvents the markup
+does not. Spec'd in `apps/shuffler/test/verification/verify-modal-focus.spec.ts`.
+
 **Secondary-button gray (decided 2026-08-02, `shuffler-design-choices` choice 2):** `var(--deep-space)`
 fill + `var(--light-pink)` text. Replaces the three grays (`#6c757d` Bootstrap, `#607d8b`
 Material, and the `#5a6268` hover-darken riding along with them) across
