@@ -382,14 +382,16 @@
   height: 54px;
   background-size: cover;
   background-position: center;
-  /* Mat swatches frame like the mat itself: black (Jess, 2026-08-09).
-   * Sleeve chips keep the dark-pink border above. */
+  /* Mat swatches frame like the mat itself: black (Jess, 2026-08-09). */
   border-color: black;
 }
 
 .table-look-sleeve {
   width: 44px;
   height: 44px;
+  /* Sleeve chips have no border, square corners (Jess, 2026-08-09). */
+  border: none;
+  border-radius: 0;
 }
 
 .table-look-mat:hover,
