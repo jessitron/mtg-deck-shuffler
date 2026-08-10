@@ -99,6 +99,45 @@ Discard + table-mode variants via a new optional 4th param on
 502 entry. Modal co-tenancy (containers, `/close-modal`, z-index) unchanged; the new
 tabletop-failure error modal is another `#modal-container` co-tenant.
 
+## Game Library Search and Cards on Table → Alphabetical, Always
+
+Real-game feedback: the game screen's library modal wasn't alphabetical and Jess
+expected it to be. Investigation found position order was always the intended,
+documented behavior on the game page — the alphabetical impression came from the
+**prep** page, which sorts its deck by name at prep-creation time (`src/app.ts`,
+the `sortedDeck` built when a prep is created). Decision: for "search your library
+for a Forest," alphabetical is more useful than position — you're finding a card,
+not reading positions, and you shuffle afterward anyway. **This is alphabetical,
+full stop — no toggle back to position order was wanted or built.**
+
+- `src/app.ts` `/library-modal/:gameId` (game): after mapping `GameCard`s to the
+  template's simple card objects, added `.sort((a, b) => a.name.localeCompare(b.name))`.
+  **`GameState.listLibrary()` itself was deliberately left untouched** — draw, Put on
+  Top, and Put on Bottom all depend on its `location.position` ordering. Sort is
+  display-only, applied to the mapped copy.
+- `src/app.ts` `/prep-library-modal/:prepId` (prep): got the same sort. Before this,
+  prep's alphabetical order was an accident of `sortedDeck` being pre-sorted at
+  prep-creation time, not something the render route guaranteed itself — sorting
+  here too makes both routes alphabetical on their own terms, independent of
+  deck-storage order.
+- `library-modal.ejs` needed no changes: the grouped view pushes cards into groups in
+  the order it receives them, so a pre-sorted flat array yields alphabetical order
+  within each type group too, for free.
+- `src/view/play-game/game-modals.ts` `formatTableCardListHtmlFragment()`: Cards on
+  Table was *already* alphabetical, but only as a side effect of `GameState`'s global
+  `gameCards` name-sort invariant (`validateInvariants()`) plus `listTable()` doing no
+  further sort. Made this explicit: sorts `tableCards` by `card.name` directly, so it
+  no longer depends on that unrelated invariant holding.
+- Sort key is `card.name` everywhere — already the canonical identity name (contains
+  both faces for a two-faced card, e.g. `"Front // Back"`), never a face-specific
+  name. A flipped card doesn't move in the list. See `notes/GLOSSARY.md` "Card vs Face".
+- Tests: `test/game-modals.test.ts` (unit — pins Cards on Table order independent of
+  play order) and `test/verification/verify-library-alphabetical-order.spec.ts`
+  (Playwright — asserts alphabetical order ungrouped and within each type group,
+  regardless of shuffle/position).
+- Position order isn't gone — it's the one true order internally
+  (`GameState.listLibrary()`), just never surfaced in the UI.
+
 ## Design Decision: EJS vs TypeScript Template
 
 The library search modal is an EJS template (`views/partials/library-modal.ejs`) rather than a TypeScript view function (like `src/view/play-game/`). This follows the project's convention: EJS for informational/pre-game pages and modals, TypeScript for active gameplay page structure.

@@ -1,0 +1,44 @@
+import { describe, test, expect } from "@jest/globals";
+import { GameState } from "../src/GameState.js";
+import { PERSISTED_DECK_VERSION } from "../src/types.js";
+import { formatTableModalHtmlFragment } from "../src/view/play-game/game-modals.js";
+import { lightningBolt, ancestralRecall, blackLotus, testProvenance } from "./generators.js";
+
+// JES-153: Cards on Table must be alphabetical by canonical card name. GameState
+// already keeps `gameCards` globally name-sorted (an invariant unrelated to table
+// display), so listTable() is alphabetical only as a side effect. This test pins
+// the ordering explicitly at the view layer, independent of play order.
+describe("game-modals: Cards on Table ordering", () => {
+  test("renders table cards alphabetically regardless of play order", () => {
+    const deck = {
+      version: PERSISTED_DECK_VERSION,
+      id: 1,
+      name: "Test Deck",
+      totalCards: 3,
+      commanders: [],
+      cards: [lightningBolt, ancestralRecall, blackLotus],
+      provenance: testProvenance,
+    };
+
+    const game = GameState.newGame(1, 1, 1, deck);
+
+    // Draw all three to hand, then play them out of alphabetical order:
+    // Lightning Bolt, then Black Lotus, then Ancestral Recall.
+    game.draw();
+    game.draw();
+    game.draw();
+
+    const hand = game.getCards().filter((gc) => gc.location.type === "Hand");
+    const byName = (name: string) => hand.find((gc) => gc.card.name === name)!;
+
+    game.playCard(byName("Lightning Bolt").gameCardIndex);
+    game.playCard(byName("Black Lotus").gameCardIndex);
+    game.playCard(byName("Ancestral Recall").gameCardIndex);
+
+    const modal = formatTableModalHtmlFragment(game);
+    const namesInOrder = [...modal.matchAll(/card-name-link[^>]*>([^<]+)</g)].map((m) => m[1]);
+
+    expect(namesInOrder).toEqual(["Ancestral Recall", "Black Lotus", "Lightning Bolt"]);
+    expect(modal).toContain("3 cards on table");
+  });
+});

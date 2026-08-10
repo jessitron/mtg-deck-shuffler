@@ -26,7 +26,9 @@ export function formatModalHtmlFragment(title: string, bodyContent: string): str
 }
 
 function formatTableCardListHtmlFragment(game: GameState): string {
-  const tableCards = game.listTable();
+  // Alphabetical, always. listTable() doesn't sort, so without this the order
+  // is only alphabetical as a side effect of GameState's global name-sort invariant.
+  const tableCards = [...game.listTable()].sort((a, b) => a.card.name.localeCompare(b.card.name));
   const expectedVersion = game.getStateVersion();
 
   return tableCards
