@@ -99,6 +99,23 @@ test.describe('design gallery', () => {
     }
   });
 
+  test('the Tabletop sleeved-card mock renders a card centered in a sleeve frame', async ({ page }) => {
+    await page.goto(`${BASE_URL}/design`);
+
+    // table-layout ticket 17: face-up sleeve rendering is a card image inset
+    // inside a square, sleeve-colored frame — no border-radius on the frame,
+    // rounded corners only on the image inside.
+    const frame = page.locator('#sleeved-card .card-mock-sleeved-face');
+    await expect(frame).toBeVisible();
+    const frameRadius = await frame.evaluate((el) => getComputedStyle(el).borderRadius);
+    expect(frameRadius).toBe('0px');
+
+    const img = frame.locator('img');
+    await expect(img).toBeVisible();
+    const imgRadius = await img.evaluate((el) => getComputedStyle(el).borderRadius);
+    expect(imgRadius).not.toBe('0px');
+  });
+
   test('the canonical button travels when pressed', async ({ page }) => {
     await page.goto(`${BASE_URL}/design`);
 
