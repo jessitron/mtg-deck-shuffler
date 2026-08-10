@@ -83,6 +83,23 @@ black`, radius computed as 5% of the shape's height).
     fleet `CLAUDE.md` and `notes/AGENT-NOTES.md`).
     ← mountain: overhead
 
+- [ ] `playmat-drop-shadow` Does the playmat cast a shadow — on both pages, or neither?
+  - **Mostly resolved already.** Jess ruled 2026-08-07 that the two mats are one object and their
+    differences were historical accidents, not design. Landed in `a4991f3`: shared art and
+    `border: 10px solid black` moved into a bare `.playmat` rule in `playmat.css`; radius stays
+    per-page (80px/20px) because _radius is a matter of scale_ — /prepare draws the mat smaller.
+  - **What's left is one declaration.** `.playmat-game` still has `box-shadow: 5px 5px black`;
+    `.playmat-prepare` has none. Not converged because Jess named three changes and this wasn't
+    one — converging it would have been an appearance change riding along on an approved one.
+    It is now the only difference between the mats with no stated reason.
+  - The argument both ways: the shadow is a survivor of the "giant Magic card" reading — /game's
+    art used to be a literal Magic card face (Scryfall `/png/front/…`, portrait, cover-cropped),
+    and 80px radius + shadow + card art read as one big card. Landscape art half-retired that.
+    So the shadow is either the last thread of a reading worth keeping, or a leftover of a dead one.
+  - ← blocked-by: `design-playmat-specimen` — the design owner declined to stage this as a
+    `/design` `.choice` because the gallery can't render a real playmat yet, and staging a choice
+    Jess can't look at defeats the point.
+
 - [ ] `design-playmat-specimen` `/design` renders a fake playmat, not the real one
   - `.stage-playmat` in `design-gallery.css` is gallery _chrome_ that hand-copies the mat's art
     URL, `background-size: cover`, `background-position: center` and its own `3px solid black`
@@ -94,9 +111,7 @@ black`, radius computed as 5% of the shape's height).
     `class="stage playmat"` and inherit the real appearance.
   - Not a one-line swap: it's gallery surgery, and the stage needs a thinner border at specimen
     scale (3px, not the real 10px).
-  - No longer blocking anything (2026-08-10): it used to gate `playmat-drop-shadow`, but Jess
-    resolved that by removing the shadow outright rather than staging it. This item now stands
-    on its own general gallery-fidelity merits.
+  - Doing this unblocks `playmat-drop-shadow` above.
 
 - **The Tabletop-replaces-Mural mountain is charted.** The parity list, the six maps it
   splits into, and their order: `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md`. Two maps exist
