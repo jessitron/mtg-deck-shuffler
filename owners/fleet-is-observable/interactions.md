@@ -72,14 +72,18 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
 - **Adding HTTP middleware or changing routes**: confirm spans still get `http.route` and the route-param stamping (`stampRouteParamsOnSpan`) still fires.
 - **Editing `apps/shuffler/src/view/common/html-layout.ts` or `views/partials/head.ejs`**: the
   browser bootstrap's script order is load-bearing — `browser-tab-id.js` must run before the
-  inline `Hny.initializeTracing`, because the tab id goes into the OTel **resource**, immutable
-  after init. Keep the `window.Hny && window.browserTabId` guard; know its gap — an unset key
-  interpolates as the truthy string `"undefined"` and 401s silently (`browser-tracing-key-guard`
-  in `TODO.md`). Keep the two-var apiKey fallback (`HONEYCOMB_INGEST_API_KEY ||
-  HONEYCOMB_API_KEY`): the first is set nowhere in-repo but is the deliberate override slot —
-  check prod before "simplifying" it. Key-in-page is sanctioned (Invariant 3; the Shuffler has no
-  collector). And never add a **second** bootstrap anywhere — one shell is the whole point
-  (README → The Shuffler's browser bootstrap).
+  inline `initHoneycombTracing(apiKey)` call, because the tab id goes into the OTel **resource**,
+  immutable after init. The guard (inside `HONEYCOMB_TRACING_INIT_SCRIPT`, fixed `33b54d3`,
+  2026-08-10) now checks both `window.Hny && window.browserTabId` **and** the apiKey — it skips
+  init with a `console.warn` when the key is empty or the literal string `"undefined"`. That
+  string constant is exported and is exactly what
+  `apps/shuffler/test/html-layout-tracing-guard.test.ts` evals via `new Function` — if you touch
+  the guard, keep the source-of-truth exported and run that test, don't reimplement it. Keep the
+  two-var apiKey fallback (`HONEYCOMB_INGEST_API_KEY || HONEYCOMB_API_KEY`): the first is set
+  nowhere in-repo but is the deliberate override slot — check prod before "simplifying" it.
+  Key-in-page is sanctioned (Invariant 3; the Shuffler has no collector). And never add a
+  **second** bootstrap anywhere — one shell is the whole point (README → The Shuffler's browser
+  bootstrap).
 - **Adding a game-mutation route in `apps/shuffler/src/app.ts`**: **all 13** game-mutation routes
   (`reveal-card`, `put-in-hand`, `put-on-top`, `put-on-bottom`, `shuffle`, `mulligan`,
   `move-hand-card`, `undo`, `draw`, `flip-card`, `flip-card-modal`, `play-card`, `discard-card`)

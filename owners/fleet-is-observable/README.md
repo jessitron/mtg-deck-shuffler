@@ -226,7 +226,7 @@ Consequences worth holding:
 | `apps/shuffler/src/apply-game-command.ts`             | **First route-protocol module with `markCurrentSpanAsError` calls living outside `app.ts`**, and the first route-level protocol logic in this app with unit-test coverage that needs neither Express nor Playwright (`test/apply-game-command.test.ts`, against the in-memory fakes). `applyGameCommand(deps, gameId, expectedVersion, mutate, beforeMutate?)` is Express-free — no `req`/`res` — and owns the "not-found" / "incompatible-version" `markCurrentSpanAsError` calls (moved verbatim from the old `loadGameFromParams` middleware) plus the persist-then-return protocol shared by **all 13** of `app.ts`'s game-mutation routes (`reveal-card`, `put-in-hand`, `put-on-top`, `put-on-bottom`, `shuffle`, `mulligan`, `move-hand-card`, `undo`, `draw`, `flip-card`, `flip-card-modal`, and — as of the tabletop-send veto hook (2026-08-08) — `play-card`/`discard-card`). This works because `markCurrentSpanAsError` itself has no Express dependency — just `trace.getActiveSpan()` — so centralizing it here continues the house pattern rather than breaking it, and guarantees the two error outcomes get identical telemetry across every route regardless of each route's rendering. Two request-parsing facts (`game.game_id.param`, `game.game_id.valid`) stayed in `app.ts`'s new `parseGameIdParam()` helper, since that's where the `:gameId` route param is actually parsed. `renderCommandOutcome`'s `renderApplied` callback widened from `(game, whatHappened) => string` to `(game, whatHappened) => string | void`, so a route that must send the response itself — `flip-card-modal` calls `res.render("partials/card-modal", …)` rather than returning a fragment string — can do so; `renderCommandOutcome` sends nothing further when the callback returns `undefined`. **The optional 5th parameter, `beforeMutate?: (game: GameState) => Promise<void>`, runs after the status/version checks and before `mutate`** — added so `play-card`/`discard-card` could keep their send-then-commit shape (tabletop gets the card first; only on success does `mutate` run) without forking back onto a hand-rolled protocol. A new `TableSendFailedError` class (message + `errorHtml`) is the only error `beforeMutate` may throw to abort the command before `mutate`/persist run; `applyGameCommand` catches specifically that class into a new `CommandOutcome` kind, `{ kind: "send-failed"; errorHtml: string }` — any other error `beforeMutate` throws propagates uncaught, same contract as `mutate`. `app.ts`'s `renderCommandOutcome` grew a matching `"send-failed"` case: 502 + `HX-Retarget`/`HX-Reswap` to `#modal-container` + the pre-rendered `errorHtml`, the same header shape as `"version-conflict"`. Both routes' `beforeMutate` closures call a shared local helper, `sendCardBeforeMutate(game, card, zoneHint, action)` in `app.ts`: it builds one attributes object (`table.name`, `card.instance_id`, `zone.hint`), stamps it on the active span via `trace.getActiveSpan()?.setAttributes`, and on `sendCardToTableFirst`'s failure calls `markCurrentSpanAsError(message, attributes)` then `log.error(message, attributes, error)` — attributes first, then the log for the stack, the house failure-path pattern — before throwing `TableSendFailedError`. `loadGameFromParams`/`requireValidVersion` themselves were already **deleted from `app.ts`** once `flip-card`/`flip-card-modal` (2026-08-08) left them with no remaining callers; with `play-card`/`discard-card` migrated too, **no route in `app.ts` still runs the old inline retrieve/reconstruct/status-check/version-check/mutate/persist protocol.** **Open, not done**: stamping `CommandOutcome.kind` on the span for every outcome (not just the error paths) was recommended in review but not implemented this pass — would make the "put the condition in an attribute" invariant apply to `not-active`/`version-conflict`/`applied` too. |
 | `apps/tabletop/src/server/tracing.ts`                 | A **separate** Node SDK init, "modeled on the Shuffler's". Own inline `KubeProbeAwareSampler` (0.001 kube-probe / 0.01 ELB). **No middleware suppression, no static-asset or `/health` handling, reads only `http.user_agent`, and no test.** See Watch points. Same `logRecordProcessors` wiring as the Shuffler but with the 0.221 options-object constructor. **Since `19e1bdf` (2026-08-10, `tabletop-no-shutdown-flush`)** also calls `installShutdownHandlers(() => sdk.shutdown(), { onTimeout, onDrainError })` right after `sdk.start()`, same as the Shuffler — see the `shutdownHooks.ts` row below.                                                                                                                                                                                       |
 | `apps/tabletop/src/server/shutdownHooks.ts`           | **A verbatim port of the Shuffler's `shutdownHooks.ts`** (2026-08-10, `19e1bdf`) — same `installShutdownHandlers(drain, options)` signature and logic (bounded drain via `Promise.race` against an `unref()`'d timer, exactly-once exit, injectable `signalSource`/`exit` for tests, log-agnostic `onTimeout`/`onDrainError`). Wired into `tracing.ts` using the Tabletop's own `log.ts` for the callbacks. Ported rather than shared, per the fleet's `tracing.ts`/`log.ts` duplication convention — the logic itself is version/framework-agnostic (just `EventEmitter`, `Promise.race`, `setTimeout().unref()`), so it needed no adaptation beyond the header comment. Tested in `apps/tabletop/test/shutdownHooks.test.ts` (adapted copy of the Shuffler's test, same 5 cases: drain-then-exit, bounded timeout, drain rejection, exactly-once on double signal, SIGINT). This closes the last open half of Invariant-adjacent shutdown coverage — both Node ships now flush their last OTel batch on SIGTERM/SIGINT instead of losing it. |
-| `apps/shuffler/src/view/common/html-layout.ts`        | **The Shuffler's browser telemetry bootstrap — single-sourced since arch ticket 06 (`b268414`, 2026-08-08).** `formatHtmlHead(options)` is the one page shell: every Shuffler page's `<head>` — EJS pages via `views/partials/head.ejs` (a thin adapter reached through `app.locals`) and TS pages (`/game`, error pages) via `formatPageWrapper` — comes from here, so the bootstrap appears exactly once and cannot diverge again. See "The Shuffler's browser bootstrap" below for the script order, the ordering constraint, the guard, and the apiKey fallback.                                                                                                                                                              |
+| `apps/shuffler/src/view/common/html-layout.ts`        | **The Shuffler's browser telemetry bootstrap — single-sourced since arch ticket 06 (`b268414`, 2026-08-08).** `formatHtmlHead(options)` is the one page shell: every Shuffler page's `<head>` — EJS pages via `views/partials/head.ejs` (a thin adapter reached through `app.locals`) and TS pages (`/game`, error pages) via `formatPageWrapper` — comes from here, so the bootstrap appears exactly once and cannot diverge again. Since `33b54d3` (2026-08-10) the guard+init is `initHoneycombTracing(apiKey)`, shipped as the exported literal string `HONEYCOMB_TRACING_INIT_SCRIPT`, tested by evaling that exact string in `apps/shuffler/test/html-layout-tracing-guard.test.ts`. See "The Shuffler's browser bootstrap" below for the script order, the ordering constraint, the guard (now key-aware), and the apiKey fallback.                                                                                                                                                              |
 | `apps/tabletop/src/client/observability/index.ts`     | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific". Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
 | `services/spine/config/initializers/opentelemetry.rb` | Ruby, ~4 effective lines: `SDK.configure` + `use_all`. No wrapper. Rack instrumentation extracts inbound W3C context, so a Shuffler-initiated trace continues through event ingestion. In test nothing is configured and the SDK exports nowhere — fine by design.                                                                                                                                                                                    |
 | `apps/shuffler/test/harness-telemetry/`               | **The fourth init path, and the first that isn't a ship** — the verify suite tracing itself. `harnessTracing.ts` (provider), `spanPlan.ts` (pure + tested), `otelReporter.ts` (Playwright reporter). Service `mtg-fleet-verify`. See "Dev-tooling telemetry" below.                                                                                                                                                                                    |
@@ -266,9 +266,12 @@ guarded one was kept).
    survives reload). Also registers the document-level `htmx:configRequest` listener that adds
    `X-Browser-Tab-Id` to every htmx request — one registration, every page.
 2. `<script src="/hny.js">` — the vendored Honeycomb web SDK.
-3. Inline init, guarded by `if (window.Hny && window.browserTabId)`, calling
-   `Hny.initializeTracing({ apiKey, serviceName: "mtg-deck-shuffler-web", debug: false,
-   provideOneLinkToHoneycomb: true, resourceAttributes: { "game.browser_tab_id": window.browserTabId } })`.
+3. Inline init: `initHoneycombTracing(apiKey)` — a **named function**, not a bare guarded block
+   (since `33b54d3`, 2026-08-10). It still guards on `window.Hny && window.browserTabId` first,
+   then calls `Hny.initializeTracing({ apiKey, serviceName: "mtg-deck-shuffler-web", debug:
+   false, provideOneLinkToHoneycomb: true, resourceAttributes: { "game.browser_tab_id":
+   window.browserTabId } })`. See "The guard now covers the key" below — the function body is
+   also the fix for the gap this section used to describe as open.
 
 The order is a real constraint, stated in a code comment at the site: **the tab id is baked into
 the OTel resource, which is immutable after init** — so `browser-tab-id.js` must have run before
@@ -286,12 +289,27 @@ simplify away the first choice without checking prod** — it's the deliberate o
 Key-in-page is **sanctioned here** (Invariant 3: ingest keys are OK to publish in the browser;
 Collectors are better, but the Shuffler has no collector — only the Tabletop does).
 
-**The guard's known gap (open buoy: `browser-tracing-key-guard` in `TODO.md`):** the guard checks
-`window.Hny && window.browserTabId` but **not the key**. When neither env var is set, the template
-interpolation emits the truthy literal string `"undefined"` and export silently 401s — the browser
-cousin of the `x-honeycomb-team=` keyless-header entry below, fails-open-invisibly again. The
-agreed fix (recorded in the buoy): skip init with a `console.warn` when the key is empty or
-`"undefined"`, so tracing-off is visible instead of silent.
+**The guard now covers the key too (fixed `33b54d3`, 2026-08-10; was the open buoy
+`browser-tracing-key-guard`).** The guard used to check only `window.Hny && window.browserTabId`
+— not the key — so when neither env var was set, the template interpolation baked in the truthy
+literal string `"undefined"` and export silently 401'd: the browser cousin of the
+`x-honeycomb-team=` keyless-header entry below, fails-open-invisibly again. Fixed by pulling the
+guard body and the `Hny.initializeTracing` call into a named function,
+`initHoneycombTracing(apiKey)`, shipped as one exported literal script-source string constant,
+`HONEYCOMB_TRACING_INIT_SCRIPT` (`apps/shuffler/src/view/common/html-layout.ts`) — the inline
+`<script>` tag both declares that function and immediately calls
+`initHoneycombTracing("${apiKey}")`. The guard inside it now also skips init (with a
+`console.warn`) when `apiKey` is empty or the literal string `"undefined"`, in addition to the
+original `window.Hny && window.browserTabId` check. **Why a literal string constant, not a plain
+TS function:** the script has to ship as-is inside the page's inline `<script>` tag (browser JS,
+no build step reaches it) — shipping it as one exported constant means the exact source the
+browser runs is also what `apps/shuffler/test/html-layout-tracing-guard.test.ts` evals (via
+`new Function`) and exercises, so there is no separate reimplementation of the guard to drift out
+of sync. That test covers all three cases: empty key, literal `"undefined"`, and a real key.
+Untouched by this fix, as the buoy and the `-review` verdict both required: the
+`HONEYCOMB_INGEST_API_KEY || HONEYCOMB_API_KEY` fallback, the script load order (tab-id before
+tracing), and the single-bootstrap shape (one function, one shell, still reached by every page
+through `formatHtmlHead`).
 
 `/game`'s page-specific scripts (`htmx.js`, then the 409/502 `responseHandling` block — which must
 stay after `htmx.js` — then `game.js`, `modal-query-params.js`) ride in the shell's `scriptsHtml`
@@ -646,6 +664,14 @@ claim something is verified. The Tabletop's `log.ts` still has no real callers.
   callers can imitate: attributes first, then the log for the stack, exactly
   the house pattern above. No new telemetry init path, ship, or OTel dependency
   change.
+
+- `33b54d3` (2026-08-10) "Warn instead of silently 401'ing on browser tracing with no API key" —
+  closed the `browser-tracing-key-guard` buoy this owner had surfaced 2026-08-08 during arch
+  ticket 06. Confirms the fails-open-invisibly pattern one more time: a guard that checks
+  `window.Hny && window.browserTabId` but not the key looks complete and isn't — an unset
+  `HONEYCOMB_INGEST_API_KEY`/`HONEYCOMB_API_KEY` interpolated as the truthy string `"undefined"`,
+  the guard passed, and export 401'd with nothing visible in the browser console. Fix and
+  worked-example both in "The Shuffler's browser bootstrap" above.
 
 - `4dbebbd` "Deploy markers in Honeycomb, post-rollout, for all three ships" — deploys had left no
   trace in Honeycomb at all, so correlating a change with a release meant matching wall-clock against
