@@ -236,6 +236,26 @@ expensive way round.
   `inSpan()` calls — Honeycomb only, for now; the Spine wire is map 5's. Every announcement carries
   `actor` = tldraw's ephemeral per-session sync id, a stand-in until the Tabletop gets real
   seat/player identity (not decided here, not blocking).
+- **Built** — [ticket 21](issues/21-gesture-vocabulary.md), implemented 2026-08-10.
+  `apps/tabletop/src/client/usePhysicsAnnouncements.ts`, wired into `TablePage.tsx` beside
+  `useCardArrivalSpans.ts`. One `store.store.listen({source: "user", scope: "document"})`
+  translates the diffs each gesture's existing hook already produces into the named vocabulary
+  via `inSpan()`, `actor: TAB_ID`. `source: "user"` only, deliberately: a remote peer runs this
+  same hook locally and announces its own gestures with its own `TAB_ID`, so no cross-client
+  attribution logic was needed. The generic `shape.moved`/`shape.changed` fallback is debounced
+  300ms per shape id — the `tabletop-shape-mechanics` owner confirmed `Translating.ts` writes
+  fresh x/y to the store on every pointer-move with no batching to settle, which named gestures
+  don't hit (their writes are already single-shot from `onClick`/`onTranslateEnd`/
+  `onDragShapesIn`) but a literal per-diff fallback would have spammed one span per frame.
+  Ticket 01's descoped `console.log('zone-entry ...')` in `MtgCardShapeUtil.onTranslateEnd` is
+  gone, replaced by `card.zoneMoved`; `verify-zone-entry.spec.ts` now asserts the card's visual
+  zone placement instead of that console output. Since ticket 20 (card-behind-card) is wontfix,
+  `card.attachedBelow` names a gesture with no code path — only `counter.attached` and
+  `noteAttached` fire. `copiedFrom` for a duplicated card is **not** implemented (still "not yet
+  specified" below); duplication announces a bare `shape.created`.
+  **Not verified against live Honeycomb** — `apps/tabletop`'s server build is currently broken
+  for an unrelated, pre-existing reason (`tabletop-server-build-broken` in `TODO.md`), which
+  blocked `./verify.sh`. Re-run that check once the build is fixed.
 
 - **A zone at rest ports `.commander-placeholder`'s dashed pattern; armed is a glow ring plus a
   background tint, uniform across every zone type** — [Decide what a zone looks like, armed and

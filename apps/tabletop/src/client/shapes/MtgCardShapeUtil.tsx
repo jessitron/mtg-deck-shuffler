@@ -310,11 +310,10 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
     if (zone === previousZone) return undefined;
 
     if (zoneHit) {
-      // Descoped 2026-08-06 (Jess): no callback/emitter/queue yet — nothing
-      // downstream consumes this. A plain console.log is the whole
-      // notification surface for now, proving the detection logic; wiring
-      // a real consumer is later tickets' job (tabletop-survives-restart).
-      console.log(`zone-entry ${current.props.instanceId} ${zoneHit.zone}`);
+      // Descoped 2026-08-06 (Jess), superseded by ticket 21: this hook only
+      // computes the zone change and returns it in `meta.zone` below;
+      // usePhysicsAnnouncements.ts's centralized store.listen() is what
+      // announces it (`card.zoneMoved`, via Honeycomb, never console.log).
 
       // Ticket 18 (counters), extended by ticket 19 (notes): the card just
       // left the battlefield — its passengers don't follow it into the

@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: done
 
 **What to build:** A fixed vocabulary names gestures physics has semantics for:
 `card.tapped`/`card.untapped`, `counter.attached`, `card.attachedBelow`/`noteAttached`,
@@ -33,15 +33,44 @@ Destination is Honeycomb telemetry only (`local` environment). The `card.moved` 
 payload, a Tabletop→Spine sender, and `contracts/` validation are explicitly out of scope — a
 later Mountain's job.
 
-**Blocked by:** 12, 13, 15, 16, 17, 18, 19, 20 (translates gestures those tickets create)
+**Blocked by:** 12, 13, 15, 16, 17, 18, 19, 20 (translates gestures those tickets create) — 20 is
+wontfix, so `card.attachedBelow` names a gesture that has no code path (no card-as-passenger
+mechanism exists); only `counter.attached` and `noteAttached` fire in practice.
 
-- [ ] A single `store.listen()` translates settled mutations into the named vocabulary above,
+**Resolved** 2026-08-10: `apps/tabletop/src/client/usePhysicsAnnouncements.ts`, a sibling to
+`useCardArrivalSpans.ts`, wired into `TablePage.tsx` alongside it. One `store.store.listen({
+source: "user", scope: "document" })` reads the diffs each existing gesture hook already
+produces (`mtg-card`'s prop/meta.zone changes from `onClick`/`onTranslateEnd`, `parentId`
+changes from `onDragShapesIn`) and calls `inSpan()` with `actor: TAB_ID` (tldraw's own
+per-session sync id). `source: "user"` only — a remote peer announces its own gestures locally
+with its own `TAB_ID`, so no cross-client attribution logic was needed.
+
+The generic fallback (`shape.moved`/`shape.changed`) is debounced 300ms per shape id, not
+announced straight off the diff stream: the `tabletop-shape-mechanics` owner confirmed
+`Translating.ts` writes fresh x/y to the document store on every pointer-move during a drag (no
+batching to settle), which named gestures don't hit (their writes are already single-shot) but
+a literal per-diff fallback would have spammed one span per frame.
+
+The old `console.log('zone-entry ...')` in `MtgCardShapeUtil.onTranslateEnd` (ticket 01's
+descoped stand-in) is gone — `card.zoneMoved` (via this same `meta.zone` write) replaces it.
+`verify-zone-entry.spec.ts` no longer asserts on that console output; it now asserts the
+behavior (the card visually lands in the target zone) since the notification-exactly-once claim
+moved to a mechanism a Playwright spec can't cheaply decode (real OTLP protobuf, batched).
+
+`copiedFrom`/duplicated-card semantics are **not** implemented — the map's own "Not yet
+specified" section says that's undecided, so a duplicated card announces bare `shape.created`
+with no `copiedFrom` attribute, same as any other newly-added shape.
+
+- [x] A single `store.listen()` translates settled mutations into the named vocabulary above,
       plus a generic `shape.moved`/`created`/`changed` fallback for everything else
-- [ ] Each named occurrence and each fallback occurrence is recorded as a Honeycomb span via
+- [x] Each named occurrence and each fallback occurrence is recorded as a Honeycomb span via
       `inSpan()`, never a bare `console.log`
-- [ ] Each announcement carries `actor` = tldraw's ephemeral per-session sync id
-- [ ] Only cards and zones carry identity in an announcement; counters/notes carry text as an
+- [x] Each announcement carries `actor` = tldraw's ephemeral per-session sync id
+- [x] Only cards and zones carry identity in an announcement; counters/notes carry text as an
       attribute only
-- [ ] An undo-caused change surfaces as an ordinary vocabulary event (no distinct "this was an
+- [x] An undo-caused change surfaces as an ordinary vocabulary event (no distinct "this was an
       undo" marker)
-- [ ] Verified in Honeycomb (`local` environment), not just by reading the code
+- [ ] **Not verified** — `apps/tabletop`'s server currently fails to build at all
+      (`tabletop-server-build-broken`, dropped in `TODO.md`, pre-existing and unrelated to this
+      ticket), which blocked `./verify.sh` and a live Honeycomb query. Re-run this check once
+      that build is fixed.
