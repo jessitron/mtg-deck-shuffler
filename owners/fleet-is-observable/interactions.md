@@ -138,3 +138,4 @@ _Distilled edges; the full story (violation inventory, history, per-ship wiring 
 
 - **The Honeycomb MCP server config** (`honeycomb-modernity`) — that's the query side; this owner guards the emit side.
 - **The Shuffler's clipboard/tabletop send flow** — its failure handling is Table Mode's business; only its spans are mine.
+- **The envelope schema's shape** (`contracts/envelope.v1.json`/`v2.json` — which fields exist, like `origin`/`significance`, and their types/enums) — that's contract-owned. This owner's stake starts only where an envelope field also becomes a span attribute; each such field gets a one-line row in the README wiring table (e.g. `Table#record_span_attributes`) so contract and telemetry don't drift apart silently.
