@@ -11,6 +11,7 @@
 
 import { test, expect, Page } from '@playwright/test';
 import { seedPrep } from './seedGame.js';
+import { sleeveQuickPicksForPlaymat, DEFAULT_PLAYMAT_PATH } from '../../src/table-look.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
@@ -18,7 +19,44 @@ test.setTimeout(90000);
 
 const DEFAULT_MAT = '/images/playmats/aeoe-43-cascading-cataracts.png';
 const OTHER_MAT = '/images/playmats/aeoe-6-seam-rip.png';
-const FOREST_GREEN = '#2a8439'; // --mana-G quick pick
+
+// Sleeve quick-picks are derived per playmat (table-look.ts,
+// sleeveQuickPicksForPlaymat) — they're the default mat's tailored colors
+// from playmat-colors.json when it has an entry, else the mana pie. Reading
+// them here (rather than hardcoding mana-pie hexes) keeps this spec honest
+// as that data changes.
+const DEFAULT_QUICK_PICKS = sleeveQuickPicksForPlaymat(DEFAULT_PLAYMAT_PATH);
+const QUICK_PICK = DEFAULT_QUICK_PICKS[0].hex;
+// The focus test switches to OTHER_MAT first, which re-renders the sleeve
+// row with *that* mat's own quick-picks — a color that's a valid swatch on
+// the default mat isn't necessarily one after that switch.
+const OTHER_MAT_QUICK_PICK = sleeveQuickPicksForPlaymat(OTHER_MAT)[0].hex;
+
+// Mirrors the private isDarkHex in src/view/common/shared-components.ts —
+// duplicated rather than exported, since only this test needs to tell dark
+// from light among the default mat's actual quick-picks.
+function isDarkHex(hex: string): boolean {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return 0.299 * r + 0.587 * g + 0.114 * b < 128;
+}
+
+function hexToRgb(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+const darkPick = DEFAULT_QUICK_PICKS.find((p) => isDarkHex(p.hex));
+const lightPick = DEFAULT_QUICK_PICKS.find((p) => !isDarkHex(p.hex));
+if (!darkPick || !lightPick) {
+  throw new Error(
+    `Default playmat's quick-picks (${DEFAULT_QUICK_PICKS.map((p) => p.hex).join(', ')}) need at least one dark ` +
+      'and one light color for the dark/light lettering test to mean anything.'
+  );
+}
 
 async function gotoPrep(page: Page): Promise<string> {
   const prepId = await seedPrep(page);
@@ -60,26 +98,26 @@ test.describe('Prepare screen — table-look panel', () => {
   test('picking a sleeve color tints the page and is captured in prep state', async ({ page }) => {
     const prepId = await gotoPrep(page);
 
-    await sleeveSwatch(page, FOREST_GREEN).click();
+    await sleeveSwatch(page, QUICK_PICK).click();
 
     // Live preview: command-zone surround and deck-title plaque take the tint
-    await expect(page.locator('.cool-command-zone-surround')).toHaveCSS('background-color', 'rgb(42, 132, 57)');
-    await expect(page.locator('.game-title')).toHaveCSS('background-color', 'rgb(42, 132, 57)');
+    await expect(page.locator('.cool-command-zone-surround')).toHaveCSS('background-color', hexToRgb(QUICK_PICK));
+    await expect(page.locator('.game-title')).toHaveCSS('background-color', hexToRgb(QUICK_PICK));
 
     // Captured: reload shows the chip selected and the tint re-applied
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
-    await expect(sleeveSwatch(page, FOREST_GREEN)).toHaveClass(/table-look-selected/);
-    await expect(page.locator('.game-title')).toHaveCSS('background-color', 'rgb(42, 132, 57)');
+    await expect(sleeveSwatch(page, QUICK_PICK)).toHaveClass(/table-look-selected/);
+    await expect(page.locator('.game-title')).toHaveCSS('background-color', hexToRgb(QUICK_PICK));
   });
 
   test('None is a valid choice: picking a color then None clears the sleeve', async ({ page }) => {
     const prepId = await gotoPrep(page);
 
-    await sleeveSwatch(page, FOREST_GREEN).click();
-    await expect(page.locator('.game-title')).toHaveCSS('background-color', 'rgb(42, 132, 57)');
+    await sleeveSwatch(page, QUICK_PICK).click();
+    await expect(page.locator('.game-title')).toHaveCSS('background-color', hexToRgb(QUICK_PICK));
 
     await page.locator('.table-look-panel [data-sleeve-color=""]').click();
-    await expect(page.locator('.game-title')).not.toHaveCSS('background-color', 'rgb(42, 132, 57)');
+    await expect(page.locator('.game-title')).not.toHaveCSS('background-color', hexToRgb(QUICK_PICK));
 
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
     await expect(page.locator('.table-look-panel [data-sleeve-color=""]')).toHaveClass(/table-look-selected/);
@@ -88,16 +126,16 @@ test.describe('Prepare screen — table-look panel', () => {
   test('a dark sleeve color flips the deck-title lettering to white; a light one does not', async ({ page }) => {
     const prepId = await gotoPrep(page);
 
-    // Swamp purple (#530aae) is dark → white lettering
-    await sleeveSwatch(page, '#530aae').click();
+    // A dark quick-pick → white lettering
+    await sleeveSwatch(page, darkPick.hex).click();
     await expect(page.locator('.game-title')).toHaveCSS('color', 'rgb(255, 255, 255)');
 
     // Persists through the on-load tint path too
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
     await expect(page.locator('.game-title')).toHaveCSS('color', 'rgb(255, 255, 255)');
 
-    // Plains gold (#f0e68c) is light → lettering back to the default
-    await sleeveSwatch(page, '#f0e68c').click();
+    // A light quick-pick → lettering back to the default
+    await sleeveSwatch(page, lightPick.hex).click();
     await expect(page.locator('.game-title')).not.toHaveCSS('color', 'rgb(255, 255, 255)');
   });
 
@@ -125,8 +163,8 @@ test.describe('Prepare screen — table-look panel', () => {
     await matSwatch(page, OTHER_MAT).click();
     await expect(matSwatch(page, OTHER_MAT)).toBeFocused();
 
-    await sleeveSwatch(page, FOREST_GREEN).click();
-    await expect(sleeveSwatch(page, FOREST_GREEN)).toBeFocused();
+    await sleeveSwatch(page, OTHER_MAT_QUICK_PICK).click();
+    await expect(sleeveSwatch(page, OTHER_MAT_QUICK_PICK)).toBeFocused();
   });
 
   test('typed table/player name survives a mat pick (unsaved text is not wiped by the swap)', async ({ page }) => {
