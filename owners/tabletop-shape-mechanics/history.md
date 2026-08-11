@@ -640,7 +640,64 @@ custom tldraw `ContextMenu`**, `apps/tabletop/src/client/CardContextMenu.tsx`, w
   function.
 
 Full detail in `architecture.md`'s new "Ticket 17" section; `interactions.md` gained watch point
-15; `files.md` gained `CardContextMenu.tsx` and `cardTap.ts`.## Table-layout ticket 18: commander arrives with owner and ghost (2026-08-09)
+15; `files.md` gained `CardContextMenu.tsx` and `cardTap.ts`.## The playmat's picture folds into `mtg-zone`'s own props/render, not a second shape (2026-08-11)
+
+**A new pattern for this KB, not just a feature tweak.** Every prior custom shape addition
+(`mtg-card`, `mtg-zone`, `mtg-counter`, `mtg-life-counter`) was a brand-new *registered type*. This
+change is the first time a stock-image concern gets folded into an *existing* locked shape's own
+`props`/`component()` instead of layering a second shape on top of it.
+
+The playmat's background picture used to be a separate stock `image` shape (`matImageId`, plus an
+`AssetRecordType` record) drawn on top of the `mtg-zone` playmat outline — the same pattern the
+library's card-back picture still uses today. That meant the picture was a plain square photo sitting
+underneath the zone's own rounded-corner border (`border-radius: h * 0.05` on the bordered `<div>`),
+never clipped to it. Fixed by giving `mtg-zone` a new `imageUrl: string | null` prop (same pattern as
+the existing `sleeveColor` prop: set once at mint time in `tableFurniture.ts`'s `ensurePlayerArea`,
+never mutated by a player action) and rendering it inside `MtgZoneShapeUtil.component()`'s own
+bordered `<div>`, with `overflow: hidden` on that div doing the clipping.
+
+- **`MtgZoneShapeUtil.tsx`**: the bordered div gets `position: relative; overflow: hidden` (playmat
+  branch only), and when `playmat && imageUrl`, an `<img>` renders inside it with
+  `position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover`. **Deliberately not
+  tldraw's `.tl-image` class** — that class is `position: absolute; inset: 0` relative to
+  `.tl-image-container` (a *different* wrapper than this div), so using it here would make the image
+  escape this div's own `overflow`/border clip entirely — the exact same "escapes the wrapper" bug
+  the sleeve-pile ring hit once (see the comment inline). The fix reaches for a plain inline-styled
+  `<img>`, not a reused tldraw class.
+- **`mtgZoneShape.ts`**: `MtgZoneShapeProps` gains `imageUrl: string | null` (validated `T.string
+  .nullable()`), documented as "set only on the `playmat` zone, null everywhere else" — same shape as
+  `sleeveColor`'s doc comment.
+- **`tableFurniture.ts`**: `ZoneShapeArgs`/`zoneShape()` gain the same `imageUrl` field, threaded
+  through from `ensurePlayerArea`'s `look.playmatImageUrl`. The old `matImageId`/`AssetRecordType`/
+  `imageAsset()`/`imageShape()` call sequence for the playmat is **deleted outright** — it no longer
+  mints a second shape at all for the playmat's picture. The library's card-back picture is
+  **untouched** — still a separate stock `image` shape, still minted via `libraryImageId`/
+  `imageAsset`/`imageShape` exactly as before. This ticket did not touch the library.
+- No new ShapeUtil hooks, no new interaction behavior, `isLocked: true` unchanged, no new registered
+  shape type. `mtg-zone` still defines none of `onClick`/`onTranslateEnd`/`onDragShapesOver` — watch
+  point 7 is untouched.
+- **Test-visible consequence**: every Playwright spec that counted furniture `image` shapes at seat-
+  join time drops by one per seat (`verify-seat-joined.spec.ts`: 2→1 at one seat, 4→2 at two seats;
+  `verify-life-counter.spec.ts`'s stale-selection-immunity assertion's comment updated to match) —
+  the playmat picture no longer registers as a `[data-shape-type="image"]` element at all, since it's
+  not a shape of its own anymore. `seatJoined.test.ts`'s sleeve-vs-card-back-image assertion comment
+  was updated to note the playmat is now irrelevant to that check (it was never testing the playmat,
+  but the old comment implied it still existed as an image shape).
+
+**New reusable precedent for this KB, worth remembering alongside "subclass a stock ShapeUtil"
+(ticket 19) and "own custom shape type from scratch" (tickets 12/13/18/20):** when a stock-shape
+concern (a picture, in this case) belongs entirely to one existing locked shape and needs to be
+visually *composited with* that shape's own border/clipping rather than sit as an independent layer,
+extend the existing shape's own `props`/`component()` instead of minting a second shape on top. This
+is materially cheaper than either of the other two precedents — no new type, no new registration,
+no asset record — and it's the right call specifically when the two "layers" were always meant to be
+one visual unit (an image clipped to a border-radius) rather than two shapes that happen to overlap.
+The library's card-back picture was deliberately left as a separate `image` shape in this same
+change — a case where the picture legitimately still functions as free-floating content rather than
+inseparable from the box's own chrome — so this precedent is a judgment call, not a rule that every
+stock-image-behind-a-zone should be folded in.
+
+## Table-layout ticket 18: commander arrives with owner and ghost (2026-08-09)
 
 `.scratch/tabletop-physics/issues/18-commander-arrives-with-owner-and-ghost.md`, worktree
 `ticket-18-commander-arrives`. `mtg-card` gained two new required, validated `props`: `owner`

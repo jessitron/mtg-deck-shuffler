@@ -213,6 +213,22 @@ not a tag on the card.
 `rooms.ts`. No new registration mechanic turned up this time — the pattern generalized cleanly to
 a second shape type, which is itself worth recording as confirmation it's the right pattern.
 
+**The playmat's own picture is a prop on this shape, not a second shape (2026-08-11).**
+`MtgZoneShapeProps` gained `imageUrl: string | null`, set only on `zone: "playmat"`, same lifecycle
+as `sleeveColor` — written once at mint time in `tableFurniture.ts`'s `ensurePlayerArea`, never
+mutated by a player action. `MtgZoneShapeUtil.component()` renders it inside its own bordered `<div>`
+(`overflow: hidden` on that div does the clipping, so the picture respects the same `h * 0.05`
+border-radius as the border around it) instead of a separate stock `image` shape layered on top —
+the old `matImageId`/`AssetRecordType`/`imageAsset()`/`imageShape()` sequence for the playmat is
+gone entirely. **This is a new pattern for this KB**: every prior custom-shape addition
+(`mtg-card`, `mtg-zone` itself, `mtg-counter`, `mtg-life-counter`) was a brand-new registered type;
+this is the first time a stock-image concern folds into an *existing* locked shape's own
+props/render instead. See `history.md`'s "The playmat's picture folds into `mtg-zone`'s own
+props/render" entry for the full writeup, including why the `<img>` deliberately does NOT use
+tldraw's `.tl-image` class (it's positioned relative to the wrong wrapper and would escape this
+div's clip). The library's card-back picture is untouched — still a separate stock `image` shape.
+No new ShapeUtil hooks; watch point 7 (a locked shape needs none) is unaffected.
+
 **Visual treatment moved off a separate style-parameter machinery and into
 `MtgZoneShapeUtil.component()`.** `tableFurniture.ts` used to carry a `RegionStyle`/
 `DEFAULT_REGION_STYLE`/`PLAYMAT_REGION_STYLE` set of constants that got threaded through to style
