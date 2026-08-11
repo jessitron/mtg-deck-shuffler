@@ -1,7 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import sharp from "sharp";
-import { extractCandidates, pickBestPair, pickBestTriple, pickBestQuintet } from "./extract-colors.mjs";
+import { listImages } from "./image-list.mjs";
 import { createApp } from "./server.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -9,52 +8,35 @@ const IMAGES_DIR = path.resolve(__dirname, "../../public/images/playmats");
 const DATA_FILE = path.join(IMAGES_DIR, "playmat-colors.json");
 const DEFAULT_PORT = 4523;
 
-async function main() {
-  const imageName = process.argv[2];
-  if (!imageName) {
-    console.error("Usage: npm start -- <image-filename>");
-    console.error(`Looks for the file under ${IMAGES_DIR}`);
+function main() {
+  const filenames = listImages(IMAGES_DIR);
+  if (filenames.length === 0) {
+    console.error(`No images found in ${IMAGES_DIR}`);
     process.exit(1);
   }
 
-  const imagePath = path.join(IMAGES_DIR, imageName);
-
-  const { data, info } = await sharp(imagePath)
-    .resize({ width: 300, height: 300, fit: "inside" })
-    .removeAlpha()
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-
-  if (info.channels !== 3) {
-    throw new Error(`expected 3-channel RGB buffer after removeAlpha, got ${info.channels}`);
+  const requestedImage = process.argv[2];
+  let startIndex = 0;
+  if (requestedImage) {
+    startIndex = filenames.indexOf(requestedImage);
+    if (startIndex === -1) {
+      console.error(`${requestedImage} not found in ${IMAGES_DIR}`);
+      console.error(`Available: ${filenames.join(", ")}`);
+      process.exit(1);
+    }
   }
 
-  const candidates = extractCandidates(data);
-  if (candidates.length === 0) {
-    console.error("No saturated colors found in this image — try loosening minSaturation in extract-colors.mjs.");
-    process.exit(1);
-  }
+  console.log(`Found ${filenames.length} image(s) in ${IMAGES_DIR}`);
 
-  const suggestedTwo = pickBestPair(candidates);
-  const suggestedThree = pickBestTriple(candidates);
-  const suggestedFive = pickBestQuintet(candidates);
-
-  console.log(`Suggested 2-color pick: ${suggestedTwo.join(", ")}`);
-  console.log(`Suggested 3-color pick: ${suggestedThree.join(", ")}`);
-  console.log(`Suggested 5-color pick: ${suggestedFive.join(", ")}`);
-
-  const app = createApp({
-    imagePath,
-    imageName,
-    candidates,
-    suggestedTwo,
-    suggestedThree,
-    suggestedFive,
-    dataFilePath: DATA_FILE,
-  });
+  const app = createApp({ imagesDir: IMAGES_DIR, filenames, startIndex, dataFilePath: DATA_FILE });
 
   const server = app.listen(DEFAULT_PORT, () => {
-    console.log(`\nOpen http://localhost:${DEFAULT_PORT} to pick colors for ${imageName}`);
+    console.log(
+      `\nOpen http://localhost:${DEFAULT_PORT} to pick colors — starting at ${filenames[startIndex]} (${
+        startIndex + 1
+      }/${filenames.length})`
+    );
+    console.log("Use Prev/Next on the page to move through every image in the directory.");
     console.log(`Saves into ${DATA_FILE}`);
     console.log("Ctrl-C when done.\n");
   });
@@ -68,7 +50,9 @@ async function main() {
   });
 }
 
-main().catch((err) => {
+try {
+  main();
+} catch (err) {
   console.error(err);
   process.exit(1);
-});
+}

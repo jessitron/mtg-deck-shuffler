@@ -41,6 +41,8 @@ export function renderPage({
   chosenTwo,
   chosenThree,
   chosenFive,
+  position,
+  total,
 }) {
   const twoHexes = chosenTwo && chosenTwo.length === 2 ? chosenTwo : suggestedTwo;
   const threeHexes = chosenThree && chosenThree.length === 3 ? chosenThree : suggestedThree;
@@ -75,6 +77,10 @@ export function renderPage({
   .unsaved-indicator { margin-left: 0.75rem; font-size: 0.85rem; color: #e0a030; display: none; }
   .unsaved-indicator.visible { display: inline; }
   .hint { color: #999; font-size: 0.85rem; }
+  .nav-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+  .nav-button { background: #333; color: #eee; border: 1px solid #555; border-radius: 6px; padding: 0.4rem 0.9rem; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
+  .nav-button:hover { background: #444; }
+  .nav-position { color: #999; font-size: 0.85rem; }
 </style>
 </head>
 <body>
@@ -82,6 +88,11 @@ export function renderPage({
     <img src="/image" alt="${imageName}" />
   </div>
   <div class="controls-pane">
+    <div class="nav-bar">
+      <a href="/prev" id="prev-link" class="nav-button">◀ Prev</a>
+      <span class="nav-position">${position} / ${total}</span>
+      <a href="/next" id="next-link" class="nav-button">Next ▶</a>
+    </div>
     <h1>${imageName}</h1>
     <p class="hint">Click a slot below to select it (highlighted), then click a candidate swatch to fill it — or click 🎨 for a custom color.</p>
     <h2>Extracted candidates</h2>
@@ -142,6 +153,18 @@ export function renderPage({
         nativeInput.click();
       });
       nativeInput.addEventListener("input", () => setSlotColor(slotButton, nativeInput.value));
+    });
+
+    function hasUnsavedChanges() {
+      return document.querySelectorAll(".unsaved-indicator.visible").length > 0;
+    }
+
+    ["prev-link", "next-link"].forEach((id) => {
+      document.getElementById(id).addEventListener("click", (e) => {
+        if (hasUnsavedChanges() && !confirm("You have unsaved changes on this image. Leave anyway?")) {
+          e.preventDefault();
+        }
+      });
     });
 
     document.querySelectorAll(".save-button").forEach((btn) => {
