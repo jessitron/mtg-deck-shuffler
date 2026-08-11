@@ -3,8 +3,9 @@
 One ship in [the fleet](../../SEAMAP.md). The Spine is the event hub and the central
 domain language: Tables, Seats, the log, and — for now — the Interpreter. _(Rewritten
 from the JES-129 Rails walking skeleton to plain Ruby — Roda + Sequel + SQLite +
-Minitest, see `.scratch/spine-roda-rewrite/` at repo root. Boot-only so far: OTel to
-Honeycomb, empty DB connected; tables/seats/log/admin-screen are being rebuilt.)_
+Minitest, see `.scratch/spine-roda-rewrite/` at repo root. Through ticket 04: OTel to
+Honeycomb, join-by-name, and contract-validated generic event ingestion. Admin screen
+and SSE outbound delivery still ahead.)_
 
 ## North Star
 
@@ -21,9 +22,11 @@ believe it.
 2. **The event log** — append-only, one per table; visibility on every event; private
    events cast public shadows; projections (current reading, public view for
    spectators, narration feed).
-   _Being rebuilt on Roda/Sequel: append-only log, dedup on sender id, loud contract
-   validation, admin screen, all as before — plus SSE outbound delivery (new). Still
-   ahead: public-only is the whole visibility story so far; richer projections._
+   _Rebuilt on Roda/Sequel through ticket 04: append-only log, dedup on sender id, loud
+   contract validation (`POST /tables/:table_id/events`, envelope v3 — `traceparent`
+   moved out of the body entirely, header-only inbound). Still ahead: admin screen, SSE
+   outbound delivery. Still ahead overall: public-only is the whole visibility story so
+   far; richer projections._
 3. **The Interpreter** — physical events in, game events out, with provenance,
    causality, confidence, and commentary. Guesses; asks in chat; is corrected;
    supersedes itself. Later: ears (transcript events join the evidence), then

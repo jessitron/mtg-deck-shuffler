@@ -2,7 +2,7 @@
 
 Mountain: spine-tells-the-story
 Ship: spine
-Status: ready-for-agent
+Status: done
 
 **What to build:** `POST /tables/:table_id/events` stays a plain synchronous
 request/response endpoint — the only way to write to a table's append-only log. It
@@ -21,18 +21,18 @@ Spine redefines alone.
 
 **Blocked by:** 03
 
-- [ ] `POST /tables/:table_id/events` with a valid envelope appends to the log and
+- [x] `POST /tables/:table_id/events` with a valid envelope appends to the log and
       returns the assigned `seq`
-- [ ] Sending the same event id twice is recognized as a duplicate, not double-appended
-- [ ] A bad envelope or unknown name/version is rejected with a clear error, not
+- [x] Sending the same event id twice is recognized as a duplicate, not double-appended
+- [x] A bad envelope or unknown name/version is rejected with a clear error, not
       silently ignored
-- [ ] `traceparent` is read from the request header; the endpoint does not require or
+- [x] `traceparent` is read from the request header; the endpoint does not require or
       expect it in the JSON body
-- [ ] The persisted `Event` row has no trace-context column
-- [ ] `contracts/envelope.v2.json` (or its successor version) no longer requires
+- [x] The persisted `Event` row has no trace-context column
+- [x] `contracts/envelope.v2.json` (or its successor version) no longer requires
       `traceparent` as a body field, following `contracts/README.md`'s versioning
       conventions
-- [ ] Domain unit tests cover dedup and contract-violation rejection without going
+- [x] Domain unit tests cover dedup and contract-violation rejection without going
       through HTTP
-- [ ] HTTP integration tests hit the endpoint end-to-end and assert on status codes and
+- [x] HTTP integration tests hit the endpoint end-to-end and assert on status codes and
       response bodies

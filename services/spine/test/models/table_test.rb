@@ -72,4 +72,51 @@ class TableTest < Minitest::Test
       table.take_seat!(player_name: "One too many")
     end
   end
+
+  def envelope_for(table, overrides = {})
+    valid_envelope({ "tableId" => table.id }.merge(overrides))
+  end
+
+  def test_append_event_assigns_seq_and_accepted_at
+    table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
+
+    outcome = table.append_event!(envelope_for(table))
+
+    assert_equal false, outcome[:duplicate]
+    assert_equal 2, outcome[:event].seq # table.created is seq 1
+    refute_nil outcome[:event].accepted_at
+  end
+
+  def test_append_event_dedups_on_sender_supplied_id
+    table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
+    envelope = envelope_for(table)
+
+    first = table.append_event!(envelope)
+    second = table.append_event!(envelope)
+
+    assert_equal false, first[:duplicate]
+    assert_equal true, second[:duplicate]
+    assert_equal first[:event].seq, second[:event].seq
+    assert_equal 1, table.events_dataset.where(event_id: envelope["id"]).count
+  end
+
+  def test_append_event_rejects_a_contract_violation
+    table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
+
+    assert_raises(Spine::EventContract::UnknownEvent) do
+      table.append_event!(envelope_for(table, "name" => "no.such.event"))
+    end
+  end
+
+  def test_the_persisted_event_row_has_no_trace_context_column
+    refute_includes Spine::Event.columns, :traceparent
+  end
+
+  def test_append_event_rejects_a_mismatched_table_id
+    table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
+
+    assert_raises(Spine::EventContract::Violation) do
+      table.append_event!(envelope_for(table, "tableId" => "some-other-table"))
+    end
+  end
 end

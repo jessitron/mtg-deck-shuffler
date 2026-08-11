@@ -34,6 +34,7 @@ DB.create_table? :events do
   Integer :schema_version, null: false
   String :payload, null: false, text: true
   Time :accepted_at, null: false
+  Time :occurred_at
   index %i[table_id event_id], unique: true
   index %i[table_id seq], unique: true
 end

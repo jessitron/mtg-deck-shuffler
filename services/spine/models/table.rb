@@ -1,5 +1,8 @@
 require "json"
 require "securerandom"
+require "time"
+
+require_relative "../lib/event_contract"
 
 module Spine
   # A Table: somewhere to play. The Spine mints its id (a GUID) at creation;
@@ -66,11 +69,53 @@ module Spine
       end
     end
 
+    # The only way in for a sender-supplied envelope (POST /tables/:table_id/events).
+    # Validates against the published contract, dedups on the sender's event id, and
+    # assigns seq/acceptedAt server-side. Append-only: a duplicate is returned as-is,
+    # never re-inserted. A concurrent append racing us on either the event id or the
+    # seq loses the unique-index race, not the log's integrity — we re-check for a
+    # duplicate rather than raise, since a genuine duplicate is exactly what that
+    # collision usually means.
+    def append_event!(envelope)
+      EventContract.validate!(envelope)
+      if envelope["tableId"] != id
+        raise EventContract::Violation,
+          "envelope tableId #{envelope["tableId"].inspect} does not match this table (#{id})"
+      end
+
+      DB.transaction do
+        duplicate = events_dataset.first(event_id: envelope["id"])
+        next { event: duplicate, duplicate: true } if duplicate
+
+        event = Event.create(
+          event_id: envelope["id"],
+          table_id: id,
+          seq: next_seq,
+          name: envelope["name"],
+          initiator: envelope["initiator"]["playerName"],
+          occurred_in: envelope["occurredIn"],
+          origin: envelope["origin"],
+          significance: envelope["significance"],
+          visibility: envelope["visibility"],
+          schema_version: envelope["schemaVersion"],
+          payload: JSON.generate(envelope["payload"]),
+          occurred_at: envelope["occurredAt"] && Time.parse(envelope["occurredAt"]),
+          accepted_at: Time.now.utc
+        )
+        { event: event, duplicate: false }
+      end
+    rescue Sequel::UniqueConstraintViolation
+      duplicate = events_dataset.first(event_id: envelope["id"])
+      raise unless duplicate
+
+      { event: duplicate, duplicate: true }
+    end
+
     def mint_event!(name:, initiator:, origin:, significance:, payload:)
       Event.create(
         event_id: SecureRandom.uuid,
         table_id: id,
-        seq: (events_dataset.max(:seq) || 0) + 1,
+        seq: next_seq,
         name: name,
         initiator: initiator,
         occurred_in: "spine",
@@ -84,6 +129,10 @@ module Spine
     end
 
     private
+
+    def next_seq
+      (events_dataset.max(:seq) || 0) + 1
+    end
 
     def next_available_seat_number
       taken = seats_dataset.select_map(:number)

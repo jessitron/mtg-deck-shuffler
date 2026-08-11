@@ -32,6 +32,12 @@ GEM
       rake (~> 13.3)
     googleapis-common-protos-types (1.23.0)
       google-protobuf (~> 4.26)
+    hana (1.3.7)
+    json_schemer (2.5.0)
+      bigdecimal
+      hana (~> 1.3)
+      regexp_parser (~> 2.0)
+      simpleidn (~> 0.2)
     logger (1.7.0)
     minitest (6.0.6)
       drb (~> 2.0)
@@ -71,10 +77,12 @@ GEM
     rack-test (2.2.0)
       rack (>= 1.3)
     rake (13.4.2)
+    regexp_parser (2.12.0)
     roda (3.106.0)
       rack
     sequel (5.107.0)
       bigdecimal
+    simpleidn (0.2.3)
     sqlite3 (2.9.5-aarch64-linux-gnu)
     sqlite3 (2.9.5-aarch64-linux-musl)
     sqlite3 (2.9.5-arm-linux-gnu)
@@ -99,6 +107,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  json_schemer
   minitest
   opentelemetry-exporter-otlp
   opentelemetry-instrumentation-rack
@@ -124,6 +133,8 @@ CHECKSUMS
   google-protobuf (4.35.1-x86_64-linux-gnu) sha256=c786439087512a3fbd199e9897d265b855f951d4027e218ea55e858d45969edd
   google-protobuf (4.35.1-x86_64-linux-musl) sha256=91890eb0002934a339fdb7d77a147c46b7474b6799db27872b747b905837f744
   googleapis-common-protos-types (1.23.0) sha256=992e740a523794d9fc5f29a504465d8fc737aaa16c930fe7228e3346860faf0a
+  hana (1.3.7) sha256=5425db42d651fea08859811c29d20446f16af196308162894db208cac5ce9b0d
+  json_schemer (2.5.0) sha256=2f01fb4cce721a4e08dd068fc2030cffd0702a7f333f1ea2be6e8991f00ae396
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
   minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
   nio4r (2.7.5) sha256=6c90168e48fb5f8e768419c93abb94ba2b892a1d0602cb06eef16d8b7df1dca1
@@ -140,8 +151,10 @@ CHECKSUMS
   rack (3.2.6) sha256=5ed78e1f73b2e25679bec7d45ee2d4483cc4146eb1be0264fc4d94cb5ef212c2
   rack-test (2.2.0) sha256=005a36692c306ac0b4a9350355ee080fd09ddef1148a5f8b2ac636c720f5c463
   rake (13.4.2) sha256=cb825b2bd5f1f8e91ca37bddb4b9aaf345551b4731da62949be002fa89283701
+  regexp_parser (2.12.0) sha256=35a916a1d63190ab5c9009457136ae5f3c0c7512d60291d0d1378ba18ce08ebb
   roda (3.106.0) sha256=1a1cfb13c6690db158a3929e9c9ece88e697fb23b05baae63f07b0773e3bbade
   sequel (5.107.0) sha256=019629313205295b007f6df2c5eab19ddc40710d549fd445ac300f2853a370db
+  simpleidn (0.2.3) sha256=08ce96f03fa1605286be22651ba0fc9c0b2d6272c9b27a260bc88be05b0d2c29
   sqlite3 (2.9.5-aarch64-linux-gnu) sha256=78075b6337d3d182c6d2b4691049ed45cd220826160c9ea18946bf6a1de200dc
   sqlite3 (2.9.5-aarch64-linux-musl) sha256=18c801185deb4adc01ddb281e8f672a39e3d1729979ca91e39439cd3eac0402d
   sqlite3 (2.9.5-arm-linux-gnu) sha256=1bdfca0c7d63998c60b0f4a8e3c8df2d33800ccc4abd2d612eddbbbc92a4c48b
