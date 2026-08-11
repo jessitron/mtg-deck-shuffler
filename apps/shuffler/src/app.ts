@@ -22,7 +22,7 @@ import { log } from "./log.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
 import { PersistStatePort, PERSISTED_GAME_STATE_VERSION, PersistedGameState, IncompatibleStateVersionError } from "./port-persist-state/types.js";
 import { PersistPrepPort, PersistedGamePrep, PERSISTED_GAME_PREP_VERSION, IncompatiblePrepVersionError } from "./port-persist-prep/types.js";
-import { PLAYMATS, DEFAULT_PLAYMAT_PATH, SLEEVE_QUICK_PICKS, isKnownPlaymatPath, isValidSleeveColor } from "./table-look.js";
+import { PLAYMATS, DEFAULT_PLAYMAT_PATH, sleeveQuickPicksForPlaymat, isKnownPlaymatPath, isValidSleeveColor } from "./table-look.js";
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { trace } from "@opentelemetry/api";
 import { getCardImageUrl, constructCardImageUrl } from "./types.js";
@@ -418,11 +418,12 @@ export function createApp(
       const helpers = createPrepViewHelpers(prep);
 
       // Render EJS template
+      const selectedPlaymatPath = prep.playmatImagePath ?? DEFAULT_PLAYMAT_PATH;
       res.render("prepare", {
         prep,
         playmats: PLAYMATS,
-        selectedPlaymatPath: prep.playmatImagePath ?? DEFAULT_PLAYMAT_PATH,
-        sleeveQuickPicks: SLEEVE_QUICK_PICKS,
+        selectedPlaymatPath,
+        sleeveQuickPicks: sleeveQuickPicksForPlaymat(selectedPlaymatPath),
         ...helpers
       });
     } catch (error) {
@@ -491,11 +492,12 @@ export function createApp(
     await persistPrepPort.savePrep(prep);
 
     const helpers = createPrepViewHelpers(prep);
+    const selectedPlaymatPath = prep.playmatImagePath ?? DEFAULT_PLAYMAT_PATH;
     res.render("partials/playmat-prepare", {
       prep,
       playmats: PLAYMATS,
-      selectedPlaymatPath: prep.playmatImagePath ?? DEFAULT_PLAYMAT_PATH,
-      sleeveQuickPicks: SLEEVE_QUICK_PICKS,
+      selectedPlaymatPath,
+      sleeveQuickPicks: sleeveQuickPicksForPlaymat(selectedPlaymatPath),
       ...helpers,
     });
   });

@@ -1,4 +1,11 @@
-import { PLAYMATS, DEFAULT_PLAYMAT_PATH, SLEEVE_QUICK_PICKS, isKnownPlaymatPath, isValidSleeveColor } from "../src/table-look.js";
+import {
+  PLAYMATS,
+  DEFAULT_PLAYMAT_PATH,
+  SLEEVE_QUICK_PICKS,
+  sleeveQuickPicksForPlaymat,
+  isKnownPlaymatPath,
+  isValidSleeveColor,
+} from "../src/table-look.js";
 
 /**
  * Ticket 16: the curated table-look data is the server-side truth the
@@ -33,6 +40,29 @@ describe("isKnownPlaymatPath", () => {
     expect(isKnownPlaymatPath("/images/other.png")).toBe(false);
     expect(isKnownPlaymatPath("https://evil.example/mat.png")).toBe(false);
     expect(isKnownPlaymatPath("")).toBe(false);
+  });
+});
+
+describe("sleeveQuickPicksForPlaymat", () => {
+  it("uses the playmat's own chosenFive from playmat-colors.json when it has one", () => {
+    const picks = sleeveQuickPicksForPlaymat("/images/playmats/playmat-map.png");
+    expect(picks.map((p) => p.hex)).toEqual(["#a09070", "#304040", "#d090b0", "#303040", "#605040"]);
+  });
+
+  it("falls back to the mana pie for a playmat with no playmat-colors.json entry", () => {
+    expect(sleeveQuickPicksForPlaymat("/images/playmats/aeoe-41-terrasymbiosis.png")).toEqual(SLEEVE_QUICK_PICKS);
+  });
+
+  it("falls back to the mana pie for an unknown path", () => {
+    expect(sleeveQuickPicksForPlaymat("/images/playmats/does-not-exist.png")).toEqual(SLEEVE_QUICK_PICKS);
+  });
+
+  it("returns picks that are all valid sleeve colors", () => {
+    for (const mat of PLAYMATS) {
+      for (const pick of sleeveQuickPicksForPlaymat(mat.path)) {
+        expect(isValidSleeveColor(pick.hex)).toBe(true);
+      }
+    }
   });
 });
 
