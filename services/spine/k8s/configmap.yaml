@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spine-config
+  labels:
+    app: spine
+data:
+  PORT: "4600"
+  # mtg.jessitron.honeydemo.io/spine, behind the same ALB as the Shuffler —
+  # see k8s/ingress.yaml. The app answers under this prefix everywhere,
+  # including in-cluster calls (the Shuffler's SPINE_URL is also .../spine).
+  SPINE_BASE_PATH: "/spine"
+  OTEL_SERVICE_NAME: "mtg-spine"
+  OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io:443"
+  OTEL_METRICS_EXPORTER: "none"
+  OTEL_LOGS_EXPORTER: "none"
+  # 100% sampling — no down-sampling (see CLAUDE.md Observability).
+  OTEL_TRACES_SAMPLER: "always_on"
+  # Where the admin screen's trace links point: prod telemetry lands in the
+  # mtg-deck-shuffler environment (team modernity). Resolves the TODO at
+  # app.rb's env_slug fallback — this is the first real prod deploy.
+  HONEYCOMB_TEAM_SLUG: "modernity"
+  HONEYCOMB_ENV_SLUG: "mtg-deck-shuffler"
