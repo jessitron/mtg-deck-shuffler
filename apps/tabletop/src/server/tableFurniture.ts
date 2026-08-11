@@ -1,6 +1,6 @@
 import { trace } from "@opentelemetry/api";
 import { AssetRecordType, createShapeId, toRichText, TLAssetId, TLShapeId } from "@tldraw/tlschema";
-import { IndexKey, getIndexAbove, ZERO_INDEX_KEY } from "@tldraw/utils";
+import { IndexKey, getIndexAbove, getIndexBelow, ZERO_INDEX_KEY } from "@tldraw/utils";
 import { RoomEntry, PlayerArea } from "./rooms.js";
 import { MtgZoneShapeProps, LIBRARY_PILE_INSET, ZONE_LABEL_BAND } from "../shared/mtgZoneShape.js";
 import {
@@ -30,6 +30,19 @@ const lastIndexByRoom = new Map<string, IndexKey>();
 export function nextIndex(tableName: string): IndexKey {
   const next = getIndexAbove(lastIndexByRoom.get(tableName) ?? ZERO_INDEX_KEY);
   lastIndexByRoom.set(tableName, next);
+  return next;
+}
+
+// Furniture (playmat, library, command zone, graveyard, exile, name label, the
+// Stack) draws from a separate band, always below the ZERO_INDEX_KEY that
+// `nextIndex` counts up from — so any playmat, however late a seat joins, is
+// guaranteed beneath every card that exists, has ever existed, or ever will,
+// regardless of mint order. This is what makes "furniture is always behind
+// everything" structurally true instead of an accident of join order.
+const lowestFurnitureIndexByRoom = new Map<string, IndexKey>();
+function nextFurnitureIndex(tableName: string): IndexKey {
+  const next = getIndexBelow(lowestFurnitureIndexByRoom.get(tableName) ?? null);
+  lowestFurnitureIndexByRoom.set(tableName, next);
   return next;
 }
 
@@ -267,12 +280,12 @@ export async function ensurePlayerArea(
   await entry.room.updateStore((store) => {
     // The mat outline is always drawn — the fallback if the image is missing/broken.
     store.put(
-      zoneShape({ id: matId, pageId, x: mat.x, y: mat.y, w: mat.w, h: mat.h, label: "", index: nextIndex(entry.tableName), zone: "playmat", seatId })
+      zoneShape({ id: matId, pageId, x: mat.x, y: mat.y, w: mat.w, h: mat.h, label: "", index: nextFurnitureIndex(entry.tableName), zone: "playmat", seatId })
     );
     if (look.playmatImageUrl) {
       const assetId = AssetRecordType.createId(`playmat-${entry.tableName}-${seatId}`);
       store.put(imageAsset(assetId, `${playerName}'s playmat`, look.playmatImageUrl, mat.w, mat.h));
-      store.put(imageShape(matImageId, pageId, mat.x, mat.y, mat.w, mat.h, assetId, `${playerName}'s playmat`, nextIndex(entry.tableName)));
+      store.put(imageShape(matImageId, pageId, mat.x, mat.y, mat.w, mat.h, assetId, `${playerName}'s playmat`, nextFurnitureIndex(entry.tableName)));
     }
 
     // A sleeved seat's pile is drawn by the zone shape itself (ticket 17):
@@ -288,7 +301,7 @@ export async function ensurePlayerArea(
         w: library.w,
         h: library.h,
         label: "Library",
-        index: nextIndex(entry.tableName),
+        index: nextFurnitureIndex(entry.tableName),
         zone: "library",
         seatId,
         sleeveColor: area.sleeveColor,
@@ -314,7 +327,7 @@ export async function ensurePlayerArea(
           insetH,
           assetId,
           "Library",
-          nextIndex(entry.tableName)
+          nextFurnitureIndex(entry.tableName)
         )
       );
     }
@@ -328,7 +341,7 @@ export async function ensurePlayerArea(
         w: commandZone.w,
         h: commandZone.h,
         label: "Command Zone",
-        index: nextIndex(entry.tableName),
+        index: nextFurnitureIndex(entry.tableName),
         zone: "command",
         seatId,
       })
@@ -342,7 +355,7 @@ export async function ensurePlayerArea(
         w: graveyard.w,
         h: graveyard.h,
         label: "Graveyard",
-        index: nextIndex(entry.tableName),
+        index: nextFurnitureIndex(entry.tableName),
         zone: "graveyard",
         seatId,
       })
@@ -356,7 +369,7 @@ export async function ensurePlayerArea(
         w: exile.w,
         h: exile.h,
         label: "Exile",
-        index: nextIndex(entry.tableName),
+        index: nextFurnitureIndex(entry.tableName),
         zone: "exile",
         seatId,
       })
@@ -369,7 +382,7 @@ export async function ensurePlayerArea(
       x: namePos.x,
       y: namePos.y,
       rotation: 0,
-      index: nextIndex(entry.tableName),
+      index: nextFurnitureIndex(entry.tableName),
       parentId: pageId,
       isLocked: true, // fixes a live bug: any player could drag/delete another player's name
       opacity: 1,
@@ -430,7 +443,7 @@ export async function ensureStackDrawn(entry: RoomEntry, pageId: string): Promis
         w: bounds.w,
         h: bounds.h,
         label: "The Stack",
-        index: nextIndex(entry.tableName),
+        index: nextFurnitureIndex(entry.tableName),
         zone: "stack",
         seatId: null,
       })
