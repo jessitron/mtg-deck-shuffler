@@ -89,8 +89,8 @@ export interface ZoneShapeArgs {
  * shape (tabletop-physics ticket 13) — always locked; tldraw's own
  * context-menu Lock/Unlock is the sole unlock affordance. `MtgZoneShapeUtil`
  * decides the visual treatment (dashed vs. playmat's solid border) from
- * `props.zone`. `opacity: 0.5` matches the pre-ticket-13 `regionShape`'s
- * look (furniture read as a faint outline, not a solid block).
+ * `props.zone`. Full opacity (Jess, 2026-08-11) — furniture reads at full
+ * strength rather than the earlier faint-outline treatment.
  */
 export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, sleeveColor, imageUrl }: ZoneShapeArgs): MtgZoneShape {
   return {
@@ -103,10 +103,7 @@ export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, 
     index,
     parentId: pageId as TLPageId,
     isLocked: true, // furniture: don't let a stray drag eat the graveyard
-    // A sleeved library pile must be as vivid as the cards it represents, so
-    // the shape's own opacity is 1 and MtgZoneShapeUtil fades just the box
-    // chrome back to 0.5 — the same composite the plain furniture gets.
-    opacity: sleeveColor ? 1 : 0.5,
+    opacity: 1,
     props: { w, h, zone, seatId, label, sleeveColor: sleeveColor ?? null, imageUrl: imageUrl ?? null } satisfies MtgZoneShapeProps,
     meta: {},
   };

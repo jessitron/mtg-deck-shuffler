@@ -64,9 +64,7 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
           height: h,
           boxSizing: "border-box",
           border: "10px solid black", // untokenized on purpose — matches the Shuffler's mats exactly
-          borderRadius: h * 0.05, // a proportion of the shape's own height, not a CSS % (draws an
-          // ellipse on a non-square box) and not a fixed px (drifts out of proportion as the
-          // canvas zooms) — computed fresh from props.h every render instead.
+          borderRadius: h * 0.05,
           color: "black",
           position: "relative", // anchors the picture below, absolutely positioned to fill the box
           overflow: "hidden", // clips the picture to this same borderRadius, so border and picture
@@ -91,10 +89,7 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
 
     // Ticket 17: a sleeved seat's library pile — the bare sleeve rectangle,
     // inset like the card-back image so the box's border and label frame it.
-    // The shape's own opacity is 1 when sleeved (tableFurniture.ts), so the
-    // pile is as vivid as the cards; the box chrome fades itself back to 0.5
-    // here, keeping the same composite the plain furniture gets. Square
-    // corners: sleeves are rectangular (Jess, 2026-08-09), same as the
+    // Square corners: sleeves are rectangular (Jess, 2026-08-09), same as the
     // sleeved cards themselves.
     const sleevePile = sleeveColor ? (
       <div
@@ -112,23 +107,13 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
 
     return (
       // position: relative anchors the sleeve pile's absolute inset — the pile
-      // is a SIBLING of the box div, not a child, so it doesn't inherit the
-      // chrome's 0.5 fade.
+      // is a SIBLING of the box div, not a child, so it doesn't inherit any
+      // opacity set on the box itself.
       <HTMLContainer id={shape.id} style={{ position: "relative" }}>
         <div
           data-testid="zone-box"
           style={{
             ...style,
-            ...(sleeveColor ? { opacity: 0.5 } : {}),
-            // @fleet/design-tokens' --font-chrome (Orbitron): a zone label
-            // names a canvas region, the same job as a UI label/heading, not
-            // prose or a card name (--font-content). This is the first
-            // fleet-token consumer inside an actual canvas shape — tokens.css
-            // anticipated it ("blocked on the Tabletop having somewhere to
-            // put tokens/fonts"); mtg-zone is that somewhere. Resolves via
-            // ordinary DOM inheritance: HTMLContainer is a plain unshadowed
-            // div, and main.tsx imports tokens.css onto :root before <App/>
-            // renders, same as any other DOM element on the page.
             fontFamily: "var(--font-chrome)",
             fontSize: 24,
             padding: 4,
