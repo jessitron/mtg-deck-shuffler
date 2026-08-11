@@ -39,6 +39,26 @@ fi
 
 echo "Merged '$BRANCH' into main."
 
+REPO_ROOT=$(git rev-parse --show-toplevel)
+echo "Running fleet tests before cleanup..."
+TESTS_FAILED=0
+(cd "$REPO_ROOT" && npm test) || TESTS_FAILED=1
+(cd "$REPO_ROOT" && npm run tabletop:test) || TESTS_FAILED=1
+if [ -x "$REPO_ROOT/services/spine/bin/test" ]; then
+  (cd "$REPO_ROOT/services/spine" && bin/test) || TESTS_FAILED=1
+fi
+
+if [ "$TESTS_FAILED" -eq 1 ]; then
+  echo "Error: tests failed after merging '$BRANCH' into main." >&2
+  echo "The merge commit is in place, but the worktree and branch were left alone so you can investigate." >&2
+  if [ "$STASHED" -eq 1 ]; then
+    echo "Your uncommitted changes are still stashed — see 'git stash list' / 'git stash pop'." >&2
+  fi
+  exit 1
+fi
+
+echo "All fleet tests passed."
+
 if [ "$STASHED" -eq 1 ]; then
   if ! git stash pop; then
     echo "Error: 'git stash pop' failed — the merge brought in changes that conflict with your stashed changes." >&2
