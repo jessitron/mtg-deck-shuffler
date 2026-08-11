@@ -18,4 +18,5 @@ You might be freaked out that something references these tickets. OK, let's fix 
 Look for references to the map or its tickets.
 
 - if it's in a code comment, delete it!! Win! (it's still in git history for research)
+- if it's a historical record, just a note saying "we did this on this day," delete it!
 - if it's in a doc, make sure the doc contains the information; usually the reference is a citation only. If the real info is in the ticket, move that info inline. Delete the citation.

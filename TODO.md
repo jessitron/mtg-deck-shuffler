@@ -13,35 +13,24 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- `verify-life-counter-image-triples` `verify-life-counter.spec.ts`'s second test (pressing
-  +/- doesn't disturb an existing selection) now fails a different way: pasting one image via
-  drag-and-drop yields **3** `.tl-shape[data-shape-type="image"]` elements, not 1.
-  - Surfaced 2026-08-11 fixing `seat-joined-400` (the spec's hand-built envelope fixture was
-    missing `origin`/`significance`, added by the v2 envelope bump `bd5349b` — every other
-    fixture in the repo already had them). Once the fixture was fixed and the POST returned
-    201 again, this test ran far enough to hit the image-paste assertion and failed there.
-  - Confirmed pre-existing and unmasked, not introduced: with the fixture un-fixed (400
-    everywhere), both tests failed at the POST and never reached this assertion.
-  - Not investigated — could be the drag/drop simulation firing multiple times, or a real
-    duplication bug in image-shape creation. `apps/tabletop`.
+- The Shuffler needs to display in-hand and revealed cards as sleeved, when the player has chosen sleevers. They need to be on a sleeve-colored rectangle, like in Tabletop.
 
-- `verify-cant-see-browser-otel` Playwright specs can't currently observe anything the browser exports through OTel's `BatchSpanProcessor`
-  - Surfaced 2026-08-10 verifying tabletop-physics ticket 21's `usePhysicsAnnouncements.ts` live in
-    Honeycomb: running the full `./verify.sh` suite (dozens of taps/drags/attaches across specs)
-    left only one stray `card arrived on canvas` span in Honeycomb, while a dedicated manual spec
-    that held its page open 8s after the last gesture got every span through reliably.
-  - Not a bug in any gesture/telemetry feature — a testing-harness gap: each spec's page/browser
-    context closes well inside the exporter's default 5s `scheduledDelayMillis`, so anything
-    batched and not yet flushed is simply lost on teardown.
-  - No fix attempted, and Jess ruled out padding specs with an 8s+ wait — slow, fragile, easy to
-    forget, and it tests the exporter's timing, not the gesture. 2026-08-10: once event emission
-    (map 5, the table reports) is directly testable, Playwright should assert on emitted events
-    instead of trying to observe spans land in Honeycomb at all — this OTel-visibility gap may
-    turn out not to need its own fix.
-  - Matters whenever someone wants Playwright-level regression coverage of what a gesture
-    announces, rather than relying on one-off manual Honeycomb checks (which is what ticket 21
-    fell back to).
-    ← mountain: tabletop-replaces-mural
+- `drop-cards-linebreak` The Shuffler's hand re-ordering: there's a problem that when the cards are on two lines, like
+
+```
+A B C
+D 👋🏾
+```
+
+and I want to drop a card in between C and D, then the drop zone between them is either after C or before D, it isn't both, and it isn't predictable. I want it to be both. What if instead of `[dropzone, card, dropzone, card, dropzone]` the flexbox contained `[[dropzone, card, dropzone],  [dropzone, card, dropzone]] such that two adjacent dropzones overlap completely and function the same as one? Then both C and D would have dropzones on either side.
+
+- `colors-from-playmat-to-life-counter` The thing where the Shuffler chooses colors to represent each player, based on their sleeve and playmat choice.
+  - Here's what I want: when they hit Shuffle Up, determine two colors to represent the player. Grab the two colors from the .json that lives with the playmats, according to the playmat they choose, the 2-color set.
+    - If they chose a sleeve: primary color is their sleeve. Secondary color is whichever of the 2 colors contrasts most with the sleeve.
+    - If they didn't choose a sleeve: primary color is the darker of the 2-color set. Secondary color is the other one.
+  - Add these two colors to the seat.join message that goes to the Spine and thence to the the Tabletop.
+  - The tabletop uses these two colors for the player's life counter, and for the Commander damage life-counters on the other players' trackers.
+    - Also, use the darker color for the player area title. (darker is usually the primary but not always, they may have picked a light-colored sleeve)
 
 - GRILLING: bug: counters can't be copied... actually neither can images, cards, etc. They can be duplicated, so there's a workaround. (Tabletop)
   - Triage research (2026-08-10): not a shape-specific bug — it's a side effect of the
@@ -136,9 +125,9 @@ section is just a wall between Jess and the live work.
   their owner's seat
   - Follow-on from `tabletop-view-rotation` (spec at `.scratch/tabletop-view-rotation/spec.md`)
     — **blocked on that ticket landing first**. Surfaced 2026-08-10 while grilling it: rotating
-    the *view* is local/CSS-only, but making a player's own cards actually read right-side-up to
+    the _view_ is local/CSS-only, but making a player's own cards actually read right-side-up to
     them (the "whole point" of view rotation, per Jess) needs cards/zones to have real rotation
-    in the *shared, synced* document — a different layer entirely from the view-rotation ticket.
+    in the _shared, synced_ document — a different layer entirely from the view-rotation ticket.
   - `cardLayout.ts` currently keeps every zone deliberately upright/unrotated ("E/W look sideways
     and that's accepted", DESIGN.md) — this item reopens that acceptance for seats' own zones,
     at minimum.
@@ -205,8 +194,8 @@ section is just a wall between Jess and the live work.
 - [ ] `shuffler-logs-not-console` Convert the Shuffler's last two stray `console.*` call sites to trace-participating logs ← was: JES-135
   - Re-verified 2026-08-11: the 53-site sweep this item originally named (`app.ts` 40, `server.ts` 8,
     `GameState.ts` 2, `SqlitePersistStateAdapter.ts`, `ArchidektDeckToDeckAdapter.ts`) is **done** —
-    commit `a89277c` ("Sweep remaining Shuffler console.* call sites onto src/log.ts"). All five
-    files are now at zero `console.*` calls.
+    commit `a89277c` ("Sweep remaining Shuffler console._ call sites onto src/log.ts"). All five
+    files are now at zero `console._` calls.
   - What's actually left, outside `src/scripts/`: one `console.warn` in
     `src/view/common/html-layout.ts` (startup guard when no Honeycomb API key is configured) and one
     `console.error` in `src/view/debug/state-copy.ts` (browser-side copy-to-clipboard failure on the
@@ -301,4 +290,3 @@ section is just a wall between Jess and the live work.
     would erase `.pushable-flat`'s two-layer press bevel on every focused button. Taking it means
     re-declaring the bevel inside `:focus-visible` for `.pushable-flat` and `.pushable-flat.pushable-dark`.
     See `owners/shuffler-looks-like-itself/open-choices.md` choice 5.
-
