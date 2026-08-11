@@ -2,7 +2,7 @@
 
 Mountain: spine-tells-the-story
 Ship: spine
-Status: ready-for-agent
+Status: done
 
 **What to build:** `POST /join` (or an equivalent path — the naming is an implementation
 detail) takes `{name, playerName}` and returns `{tableId, seatNumber}`. If no active

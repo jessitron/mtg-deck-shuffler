@@ -2,7 +2,7 @@
 
 Mountain: spine-tells-the-story
 Ship: spine
-Status: ready-for-agent
+Status: done
 
 **What to build:** A new `services/spine` app exists — Roda for routing (routing only,
 no Rails-style MVC), Sequel for persistence, SQLite (unchanged), Minitest for tests. It
