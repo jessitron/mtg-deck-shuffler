@@ -8,6 +8,12 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: mtg.jessitron.honeydemo.io # give your domain name here
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/group.name: only-one-alb-please
+    # This is the catch-all "/" — evaluated last so more specific rules from
+    # other Ingresses in this group (e.g. services/spine/k8s/ingress.yaml's
+    # /spine, order "1") get a chance first. Rules across Ingresses in one
+    # group aren't auto-sorted by path specificity; without an explicit
+    # order, "/" could win the tie and swallow /spine. Range 1-1000.
+    alb.ingress.kubernetes.io/group.order: "1000"
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     # The ALB was health-checking / (which renders a template) every 15s — the
