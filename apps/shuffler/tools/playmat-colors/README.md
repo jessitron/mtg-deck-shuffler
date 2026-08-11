@@ -28,7 +28,8 @@ extracted candidate colors, and three editable slot groups prefilled with the
 suggestion — or with whatever was saved for that image last time. Click a
 slot to select it (highlighted border), then click a candidate swatch to
 fill it — or click the 🎨 button next to a slot for the OS color picker.
-Each slot group saves independently.
+Each slot group saves independently, and shows "● unsaved changes" whenever
+its slots differ from what was last saved for that group.
 
 Results are written to `apps/shuffler/public/images/playmat-colors.json`,
 keyed by image filename, alongside `suggestedTwo`/`suggestedThree`/`suggestedFive`

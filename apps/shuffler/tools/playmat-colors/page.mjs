@@ -27,6 +27,7 @@ function slotGroup({ id, label, hexes, saveLabel }) {
       <h2>${label}</h2>
       <div class="slots">${slots}</div>
       <button type="button" class="save-button" data-group="${id}">${saveLabel}</button>
+      <span class="unsaved-indicator" id="${id}-unsaved">● unsaved changes</span>
       <span class="status" id="${id}-status"></span>
     </section>`;
 }
@@ -71,6 +72,8 @@ export function renderPage({
   .save-button { background: #4a7c59; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
   .save-button:hover { background: #5a9c69; }
   .status { margin-left: 0.75rem; font-size: 0.85rem; color: #8f8; }
+  .unsaved-indicator { margin-left: 0.75rem; font-size: 0.85rem; color: #e0a030; display: none; }
+  .unsaved-indicator.visible { display: inline; }
   .hint { color: #999; font-size: 0.85rem; }
 </style>
 </head>
@@ -94,11 +97,26 @@ export function renderPage({
     let selected = document.getElementById("two-0");
     selected.classList.add("selected");
 
+    function groupHexes(group) {
+      return [...document.querySelectorAll(\`.slot-color[id^="\${group}-"]\`)].map((b) => b.dataset.hex);
+    }
+
+    const savedHexes = {};
+    ["two", "three", "five"].forEach((group) => {
+      savedHexes[group] = groupHexes(group);
+    });
+
+    function refreshUnsavedIndicator(group) {
+      const dirty = JSON.stringify(groupHexes(group)) !== JSON.stringify(savedHexes[group]);
+      document.getElementById(group + "-unsaved").classList.toggle("visible", dirty);
+    }
+
     function setSlotColor(slotButton, hex) {
       slotButton.dataset.hex = hex;
       slotButton.style.background = hex;
       document.getElementById(slotButton.id + "-readout").textContent = hex;
       document.getElementById(slotButton.id + "-native").value = hex;
+      refreshUnsavedIndicator(slotButton.id.split("-")[0]);
     }
 
     function selectSlot(slotButton) {
@@ -129,8 +147,7 @@ export function renderPage({
     document.querySelectorAll(".save-button").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const group = btn.dataset.group;
-        const slotButtons = [...document.querySelectorAll(\`.slot-color[id^="\${group}-"]\`)];
-        const hexes = slotButtons.map((b) => b.dataset.hex);
+        const hexes = groupHexes(group);
         const status = document.getElementById(group + "-status");
         status.textContent = "saving…";
         try {
@@ -140,6 +157,8 @@ export function renderPage({
             body: JSON.stringify({ which: group, hexes }),
           });
           if (!res.ok) throw new Error(await res.text());
+          savedHexes[group] = hexes;
+          refreshUnsavedIndicator(group);
           status.textContent = "saved!";
           setTimeout(() => (status.textContent = ""), 2000);
         } catch (err) {
