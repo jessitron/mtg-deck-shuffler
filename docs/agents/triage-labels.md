@@ -18,4 +18,14 @@ tracker vocabulary to match, so the canonical names are used unchanged.
 When a skill mentions a role (e.g. "apply the AFK-ready triage label"), write the corresponding
 string from this table into the issue's `Status:` line.
 
+### Terminal status: `resolved`
+
+The five roles above are all pre-implementation — they describe a ticket on its way to being
+worked, not what happens after. Neither `/to-tickets` nor `/implement` sets a `Status:` value on
+completion; `/wayfinder`'s map/child tickets are the only place a terminal status is documented
+(`claimed` → `resolved`, see `issue-tracker.md`'s "Wayfinding operations"). This repo extends that
+same `resolved` label to every ticket, not just wayfinder's: when an issue's work has landed, set
+`Status: resolved`. `wontfix` remains the separate terminal state for tickets closed without being
+done.
+
 Edit the right-hand column to match whatever vocabulary you actually use.
