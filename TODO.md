@@ -21,13 +21,14 @@ section is just a wall between Jess and the live work.
   - Not a bug in any gesture/telemetry feature — a testing-harness gap: each spec's page/browser
     context closes well inside the exporter's default 5s `scheduledDelayMillis`, so anything
     batched and not yet flushed is simply lost on teardown.
-  - No fix attempted. Two shapes it could take: pad specs that need this with an 8s+ wait (slow,
-    fragile, and easy to forget), or give the page a way to force a flush before close (e.g. a
-    test-only hook calling the `TracerProvider`'s `forceFlush()`, or a shorter/zero batch delay in
-    test builds). Consult the `fleet-is-observable` owner before picking one.
-  - Matters whenever someone wants Playwright-level regression coverage of browser telemetry
-    itself, rather than relying on one-off manual Honeycomb checks (which is what ticket 21 fell
-    back to).
+  - No fix attempted, and Jess ruled out padding specs with an 8s+ wait — slow, fragile, easy to
+    forget, and it tests the exporter's timing, not the gesture. 2026-08-10: once event emission
+    (map 5, the table reports) is directly testable, Playwright should assert on emitted events
+    instead of trying to observe spans land in Honeycomb at all — this OTel-visibility gap may
+    turn out not to need its own fix.
+  - Matters whenever someone wants Playwright-level regression coverage of what a gesture
+    announces, rather than relying on one-off manual Honeycomb checks (which is what ticket 21
+    fell back to).
     ← mountain: tabletop-replaces-mural
 
 - GRILLING: Feature: Let a player exit the table so they can rejoin with a different deck! (fleet)
