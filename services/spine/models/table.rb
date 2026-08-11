@@ -3,6 +3,7 @@ require "securerandom"
 require "time"
 
 require_relative "../lib/event_contract"
+require_relative "../lib/table_broadcaster"
 
 module Spine
   # A Table: somewhere to play. The Spine mints its id (a GUID) at creation;
@@ -102,6 +103,7 @@ module Spine
           occurred_at: envelope["occurredAt"] && Time.parse(envelope["occurredAt"]),
           accepted_at: Time.now.utc
         )
+        broadcast(event)
         { event: event, duplicate: false }
       end
     rescue Sequel::UniqueConstraintViolation
@@ -112,7 +114,7 @@ module Spine
     end
 
     def mint_event!(name:, initiator:, origin:, significance:, payload:)
-      Event.create(
+      event = Event.create(
         event_id: SecureRandom.uuid,
         table_id: id,
         seq: next_seq,
@@ -126,9 +128,22 @@ module Spine
         payload: JSON.generate(payload),
         accepted_at: Time.now.utc
       )
+      broadcast(event)
+      event
     end
 
     private
+
+    # Deferred to run only once the enclosing transaction commits — every
+    # call site is inside a DB.transaction block, and a subscriber must
+    # never see an event that a later failure in that same transaction
+    # rolled back.
+    def broadcast(event)
+      carrier = {}
+      OpenTelemetry.propagation.inject(carrier)
+      message = { event: event.as_envelope, meta: { traceparent: carrier["traceparent"] } }
+      DB.after_commit { Spine.broadcaster.publish(id, message) }
+    end
 
     def next_seq
       (events_dataset.max(:seq) || 0) + 1

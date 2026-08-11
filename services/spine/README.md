@@ -6,9 +6,10 @@ Plain Ruby — Roda (routing only) + Sequel + SQLite + Minitest, no Rails. See
 rewrite from Rails, and `../../notes/DESIGN-event-contract-v0.md` for the contract this
 service enforces (schemas in `../../contracts/`).
 
-**Current status: boot only.** `GET /up`, OTel wired at 100% sampling, an empty SQLite
-DB connected. No tables/seats/events domain logic yet — see
-`../../.scratch/spine-roda-rewrite/issues/` for what's next.
+**Current status:** `GET /up`, OTel wired at 100% sampling, join-by-name
+(`POST /join`), contract-validated event ingestion (`POST /tables/:table_id/events`),
+and live outbound delivery over SSE (`GET /tables/:table_id/events/stream`). No admin
+screen yet — see `../../.scratch/spine-roda-rewrite/issues/` for what's next.
 
 ## Run locally
 
@@ -17,6 +18,8 @@ PORT=4600 ./run     # sources repo-root .be then .env (order matters for telemet
 ```
 
 - Health: `GET /up`
+- Live event feed: `GET /tables/:table_id/events/stream` (Server-Sent Events, one
+  stream per table)
 
 ## Tests
 

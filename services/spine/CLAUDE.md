@@ -26,8 +26,11 @@ domain logic lives in `models/table.rb` (`Table`, `Seat`, `Event`, all `Sequel::
 schema in `config/db.rb`. `POST /tables/:table_id/events` is the generic ingestion
 endpoint: contract-validated against `contracts/` via `lib/event_contract.rb`
 (json_schemer, envelope v3), dedups on the sender's event id, assigns `seq`/`acceptedAt`
-server-side. SSE outbound delivery and the admin screen land in later tickets — see
-`.scratch/spine-roda-rewrite/issues/`.
+server-side. `GET /tables/:table_id/events/stream` is the outbound side: one SSE stream
+per table, fed by `lib/table_broadcaster.rb` (a plain-Ruby pub/sub object every
+`Table#append_event!`/`#mint_event!` publishes to after its transaction commits) and
+formatted into `data:` frames by `lib/sse_stream.rb`. The admin screen lands in a later
+ticket — see `.scratch/spine-roda-rewrite/issues/`.
 
 See `README.md` (in this directory) for more.
 
@@ -71,5 +74,12 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
   someone's watching its table's SSE stream (ticket 05) has no way to link back to the
   trace that created it — accepted tradeoff, not a bug (see
   `.scratch/spine-roda-rewrite/spec.md`, "Trace context — envelope contract change").
+- **Outbound, trace context rides alongside the event, not merged into it.**
+  `GET /tables/:table_id/events/stream` delivers `{event: {...}, meta: {traceparent}}`.
+  `Table#broadcast` (private, `models/table.rb`) captures the *appending* request's
+  trace context via `OpenTelemetry.propagation.inject` at the moment the event is
+  created, deferred via `DB.after_commit` — so a subscriber's own spans can link back
+  to whichever trace actually produced the event, and a rolled-back append never
+  reaches a subscriber at all.
 
 Update this file when anything in it changes.
