@@ -8,12 +8,14 @@ Blocked by: 20 — life counter (the `mtg-life-counter` shape and name-row layou
 
 **What to build:** Each player's name row shows a commander-damage counter per opposing
 commander — a partner-deck opponent gets two — starting at 0, always visible, appearing
-as opponents' commanders arrive. Each counter is identified by the opponent's name and
-sleeve color, so you can tell whose commander dealt the damage. They sit right-justified
-on the name row, between the player name and the (bigger) life counter. Anyone can
-change any counter; changes sync live to everyone; last-writer-wins is accepted. No
-extra labeling distinguishes a partner pair — players adjudicate, per the
-no-rules-engine principle.
+as opponents' commanders arrive. Each counter is identified by the commander's own name
+and the opponent's sleeve color, so you can tell whose commander dealt the damage — a
+partner pair gets two distinctly-labeled counters (superseded 2026-08-11: the original
+"players adjudicate, no extra labeling" call was revisited once the counters existed —
+naming the commander was cheap and strictly more useful than a same-named pair). They
+sit right-justified on the name row, between the player name and the (bigger) life
+counter. Anyone can change any counter; changes sync live to everyone; last-writer-wins
+is accepted.
 
 Reuses the `mtg-life-counter` shape from ticket 20.
 
@@ -30,7 +32,7 @@ counter visually).
 
 - [x] Each seat shows one damage counter per opposing commander, starting at 0, always visible
 - [x] A partner-deck opponent produces two counters
-- [x] Counters are identified by opponent name + sleeve color
+- [x] Counters are identified by the commander's own name + the opponent's sleeve color
 - [x] No counter for your own commander; counters appear as opposing commanders arrive
 - [x] Any player can change any counter; changes sync to all browsers
 
@@ -55,3 +57,10 @@ counters and corrupting `damageCounterCount`'s position bookkeeping. Fixed by ma
 `addCommanderDamageCounters` idempotent per pair — the existence check and the mint run
 inside the same synchronous `updateStore` callback, so whichever request's callback runs
 first wins outright. Covered by a concurrent-join test.
+
+**Follow-up 2026-08-11:** Jess asked for the counter to name the commander, with a
+partner pair producing two distinctly-labeled counters instead of two identical ones.
+`PlayerArea.commanderCount` became `commanderNames: string[]`; `addCommanderDamageCounters`
+now takes that list instead of a bare count and labels each minted counter with its own
+commander's name (sleeve color still identifies the opponent via the band/border). Same
+idempotency guard, same tests, relabeled to assert on commander names.

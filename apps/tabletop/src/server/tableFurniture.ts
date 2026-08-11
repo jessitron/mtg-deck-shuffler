@@ -273,7 +273,7 @@ export async function ensurePlayerArea(
     landCount: 0,
     graveyardCount: 0,
     stackCount: 0,
-    commanderCount: 0,
+    commanderNames: [],
     damageCounterCount: 0,
   };
   entry.seats.set(seatId, area);
@@ -489,11 +489,14 @@ export async function ensureStackDrawn(entry: RoomEntry, pageId: string): Promis
 }
 
 /**
- * Add `count` commander-damage counters (ticket 21) to `targetSeatId`'s name
- * row, one per commander belonging to `opponentSeatId`, starting at 0. Reuses
- * `mtg-life-counter` (ticket 20) with the opponent's name + sleeve baked in
- * as the counter's identity — the same shape, an extra label/sleeveColor.
- * A no-op for count <= 0 (an opponent with no commanders yet).
+ * Add one commander-damage counter (ticket 21) to `targetSeatId`'s name row
+ * per entry in `commanderNames` — each labeled with that commander's own
+ * name (a partner pair gets two distinctly-labeled counters), starting at 0.
+ * `opponentSleeveColor` still identifies whose commanders these are (the
+ * band/border color). Reuses `mtg-life-counter` (ticket 20) with the
+ * commander's name + the opponent's sleeve baked in as the counter's
+ * identity — the same shape, an extra label/sleeveColor. A no-op when
+ * `commanderNames` is empty (an opponent with no commanders yet).
  *
  * Idempotent per (targetSeatId, opponentSeatId) pair: two seat.joined
  * requests can each see the other's seat already in `entry.seats` (set
@@ -510,11 +513,10 @@ export async function addCommanderDamageCounters(
   pageId: string,
   targetSeatId: string,
   opponentSeatId: string,
-  opponentName: string,
-  opponentSleeveColor: string | undefined,
-  count: number
+  commanderNames: string[],
+  opponentSleeveColor: string | undefined
 ): Promise<void> {
-  if (count <= 0) return;
+  if (commanderNames.length === 0) return;
   const target = entry.seats.get(targetSeatId);
   if (!target) return;
 
@@ -522,7 +524,7 @@ export async function addCommanderDamageCounters(
     const firstId = createShapeId(`damage-counter-${entry.tableName}-${targetSeatId}-${opponentSeatId}-0`);
     if (store.get(firstId)) return;
 
-    for (let i = 0; i < count; i++) {
+    commanderNames.forEach((commanderName, i) => {
       const counterIndex = target.damageCounterCount++;
       const pos = commanderDamageCounterPosition(target.seatIndex, counterIndex);
       store.put({
@@ -540,11 +542,11 @@ export async function addCommanderDamageCounters(
           w: COMMANDER_DAMAGE_COUNTER_W,
           h: COMMANDER_DAMAGE_COUNTER_H,
           value: 0,
-          label: opponentName,
+          label: commanderName,
           sleeveColor: opponentSleeveColor ?? null,
         },
         meta: {},
       } as any);
-    }
+    });
   });
 }

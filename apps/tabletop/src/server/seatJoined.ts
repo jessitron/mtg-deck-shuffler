@@ -161,18 +161,20 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
     });
   }
 
-  if (seatCommanders.length > 0) {
-    playerArea.commanderCount = seatCommanders.length;
+  const commanderNames = seatCommanders.map((commander) => commander.cardName);
+  if (commanderNames.length > 0) {
+    playerArea.commanderNames = commanderNames;
   }
 
-  // Commander-damage counters (ticket 21) — one per opposing commander, in
-  // both directions: the new seat needs a counter for every commander
-  // already-seated opponents brought, and every already-seated opponent
-  // needs a counter for this seat's brand-new commanders.
+  // Commander-damage counters (ticket 21) — one per opposing commander,
+  // labeled with that commander's own name, in both directions: the new
+  // seat needs a counter for every commander already-seated opponents
+  // brought, and every already-seated opponent needs a counter for this
+  // seat's brand-new commanders.
   for (const [otherSeatId, otherArea] of entry.seats) {
     if (otherSeatId === seatId) continue;
-    await addCommanderDamageCounters(entry, pageId, seatId, otherSeatId, otherArea.playerName, otherArea.sleeveColor, otherArea.commanderCount);
-    await addCommanderDamageCounters(entry, pageId, otherSeatId, seatId, playerName, sleeveColor, seatCommanders.length);
+    await addCommanderDamageCounters(entry, pageId, seatId, otherSeatId, otherArea.commanderNames, otherArea.sleeveColor);
+    await addCommanderDamageCounters(entry, pageId, otherSeatId, seatId, commanderNames, sleeveColor);
   }
 
   entry.seenEventIds.add(envelope.id);
