@@ -13,23 +13,28 @@ npm install
 ## Use
 
 ```
-npm start -- <image-filename>
+npm start
 ```
 
-`<image-filename>` is looked up in `apps/shuffler/public/images/playmats/`, e.g.:
+With no argument, it runs on **every image** in `apps/shuffler/public/images/playmats/`
+(sorted by filename), starting at the first one. Use Prev/Next on the page to step
+through the rest — no need to restart the tool between images.
+
+To start at a particular image instead (still with Prev/Next over the whole directory):
 
 ```
 npm start -- playmat-map.png
 ```
 
-This prints suggested 2-color, 3-color, and 5-color (for sleeves) picks, then
-starts a page at `http://localhost:4523`. It shows the image, a strip of
-extracted candidate colors, and three editable slot groups prefilled with the
-suggestion — or with whatever was saved for that image last time. Click a
-slot to select it (highlighted border), then click a candidate swatch to
-fill it — or click the 🎨 button next to a slot for the OS color picker.
-Each slot group saves independently, and shows "● unsaved changes" whenever
-its slots differ from what was last saved for that group.
+The page prints suggested 2-color, 3-color, and 5-color (for sleeves) picks for
+whichever image is current, at `http://localhost:4523`. It shows the image, a strip
+of extracted candidate colors, three editable slot groups prefilled with the
+suggestion — or with whatever was saved for that image last time — and a Prev/Next
+bar showing position (e.g. "3 / 12"). Click a slot to select it (highlighted
+border), then click a candidate swatch to fill it — or click the 🎨 button next to
+a slot for the OS color picker. Each slot group saves independently, and shows
+"● unsaved changes" whenever its slots differ from what was last saved for that
+group; navigating away with unsaved changes asks for confirmation first.
 
 Results are written to `apps/shuffler/public/images/playmats/playmat-colors.json`,
 keyed by image filename, alongside `suggestedTwo`/`suggestedThree`/`suggestedFive`
