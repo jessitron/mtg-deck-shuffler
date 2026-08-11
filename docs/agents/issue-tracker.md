@@ -27,8 +27,8 @@ a ticket that can't say where it belongs is a ticket worth questioning. Valid va
 
 | Value                        | Meaning                                                        |
 | ---------------------------- | -------------------------------------------------------------- |
-| `tabletop-replaces-mural`    | Mountain 1 — the synced tldraw canvas ← _active_               |
-| `spine-tells-the-story`      | Mountain 2 — one event log per table, narration               |
+| `tabletop-replaces-mural`    | Mountain 1 — the synced tldraw canvas ← _achieved_             |
+| `spine-gathers-data`         | Mountain 2 — the Spine records every physical event ← _active_ |
 | `interpreter-learns-to-read` | Mountain 3 — guesses, ears, proactive help                    |
 | `someday-asks-to-play`       | Mountain 4                                                     |
 | `overhead`                   | **Not a Mountain.** Keeps an existing thing working or true — the upkeep that holds `SEAMAP.md` § Safe Harbor. |

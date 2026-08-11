@@ -1,5 +1,11 @@
 # The Tabletop replaces Mural
 
+**Achieved (2026-08-11).** Jess's call: the Tabletop is better than Mural now — more
+fragile, but worth it. `SEAMAP.md`'s Mountain 1 is climbed; the fleet has moved on to
+Mountain 2, Spine Gathers Data. This document stays as the record of how it was climbed.
+A few of the five maps below still carry open tickets (table layout, for one) — they're
+fun follow-ons, not blockers, and don't reopen the achievement.
+
 The high-level path for `SEAMAP.md`'s **Mountain 1**. This document is the chart _above_
 the wayfinder maps: it holds the whole parity list in one place, splits it into five maps,
 and says what order they go in. Each map points back here; this points at each map.
@@ -145,7 +151,7 @@ Charted with `/wayfinder`, one at a time. Each map's own `map.md` links back to 
 | 2   | Table layout                                  | `.scratch/tabletop-table-layout/` | charted (was `tabletop-card-physics-starter`) |
 | 3   | Cards come and go                             | `.scratch/tabletop-cards-come-and-go/` | charted 2026-08-08                       |
 | 4   | Only Magic moves                              | —                                 | not charted                                   |
-| 5   | The table reports                             | `.scratch/tabletop-table-reports/` | charted 2026-08-10                       |
+| 5   | The table reports                             | `.scratch/tabletop-table-reports/` | superseded — absorbed into [The Spine sits in the middle](../../../.scratch/spine-in-the-middle/map.md), now Mountain 2 |
 
 **Order.** Map 1 blocks map 2: the square layout, the command zone, and life counters all want
 furniture that behaves, and rebuilding the shape layer underneath finished geometry is the

@@ -20,15 +20,27 @@ and the table; you adjudicate the game; an agent gradually learns to interpret t
 The ladder — playable at all times, increasingly useful and fun. A strangler fig over
 Mural, not a rewrite.
 
-1. **The Tabletop replaces Mural** ← _active_ — a synced tldraw canvas where cards
-   arrive from the Shuffler instead of the clipboard; then card shapes and gestures
-   (tap, counters, zone areas) make common movements easy. The full parity list and the
-   five maps that climb it: `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md`.
-2. **The Spine tells the story** — one event log per table; a narration panel showing
-   what happened, before any AI fills it.
+1. **The Tabletop replaces Mural** ← _achieved (2026-08-11)_ — a synced tldraw canvas
+   where cards arrive from the Shuffler instead of the clipboard, with card shapes and
+   gestures (tap, counters, zone areas) that make common movements easy. Better than
+   Mural — more fragile, and worth it. The full parity list and the five maps that
+   climbed it: `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md`. Some of its maps
+   (e.g. table layout) still carry open tickets; they're fun follow-ons, not blockers,
+   and don't unwind the achievement.
+2. **Spine Gathers Data** ← _active_ — when people play Magic in this app, the game gets
+   recorded: every physical event a real game produces, from both the Shuffler and the
+   Tabletop, crosses the Spine's one append-only log per table. That record is what
+   feeds development of the Interpreter, once this mountain is reached. Includes: the
+   Spine-vocabulary work `tabletop-replaces-mural`'s cards-come-and-go map left behind
+   (the eleven hidden-zone Shuffler actions — draw, shuffle, mulligan, put-on-top/bottom,
+   …); [The Spine sits in the middle](.scratch/spine-in-the-middle/map.md) — no direct
+   HTTP between the Shuffler and the Tabletop survives, everything routes through the
+   Spine; and map 5 of `tabletop-replaces-mural` (the Tabletop→Spine sender), which
+   overlaps substantially with that map and was absorbed into it.
 3. **The Interpreter learns to read the play** — guesses at unexplained physical
    events, asks in chat, is corrected; then ears (per-player transcription); then
-   proactive help ("that triggers your rabbit").
+   proactive help ("that triggers your rabbit"). Reads the record Mountain 2 built; a
+   narration panel showing what happened is part of how it shows its work.
 4. **Someday: it asks to play.**
 
 Spectator mode is a constraint on every mountain, not a mountain: anyone can join a

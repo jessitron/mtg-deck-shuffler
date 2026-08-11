@@ -1,6 +1,6 @@
 # The join flow: one administered, idempotent Spine call, async from the player's screen
 
-Mountain: spine-tells-the-story
+Mountain: spine-gathers-data
 Ship: fleet
 Type: grilling
 Status: resolved
