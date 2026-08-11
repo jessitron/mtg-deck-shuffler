@@ -67,6 +67,12 @@ See `docs/agents/issue-tracker.md`.
 The five canonical roles, unrenamed, recorded as a `Status:` line in each issue file.
 See `docs/agents/triage-labels.md`.
 
+### Coding standards
+
+Repo-wide conventions for how code and tests get written — e.g. no duplicating a shared
+literal (id prefix, marker string) across multiple spec files; export a named constant
+instead. See `docs/agents/coding-standards.md`.
+
 ### Domain docs
 
 Multi-context: shared vocabulary in `notes/GLOSSARY.md`, per-ship `CONTEXT.md`, and a
