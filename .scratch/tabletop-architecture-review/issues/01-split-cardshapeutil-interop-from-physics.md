@@ -1,6 +1,13 @@
 # 01 — Split MtgCardShapeUtil's tldraw-interop from its card physics
 
-**Status:** needs-triage
+**Status:** resolved — Jess's call (2026-08-11): (B), organizational split, with the added
+principle "domain code shouldn't import display libraries" wherever a piece of logic
+genuinely can be tldraw-free. `tabletop-shape-mechanics-review` cleared the plan
+(`.scratch/tabletop-architecture-review/plan-ticket-01.md`) with no blocking findings.
+Implemented: `MtgCardShapeUtil.tsx` split by hook into `cardRender.tsx`, `cardTapClick.ts`,
+`cardPassengers.ts`, `cardZoneEntry.ts`, leaving the class a thin shell. Zero behavior
+change — 110/110 vitest and 43/44 Playwright specs pass (the one failure reproduces
+identically on unmodified main). `tabletop-shape-mechanics-update` run afterward.
 
 **What the review proposed:** `src/client/shapes/MtgCardShapeUtil.tsx` (405 lines, 21 commits —
 the hottest file in the ship) fuses five concerns behind one `ShapeUtil`: render + sleeve/face-down,
