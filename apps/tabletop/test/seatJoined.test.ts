@@ -413,7 +413,7 @@ describe("seat joined — commander damage counters", () => {
     expect(damageCountersOf("dmg-lone")).toHaveLength(0);
   });
 
-  it("gives an already-seated opponent one damage counter, labeled with the new seat's name and sleeve, when a commander arrives", async () => {
+  it("gives an already-seated opponent one damage counter, labeled with the commander's own name and the opponent's sleeve, when a commander arrives", async () => {
     await post("dmg-two-seats", seatJoined("dmg-two-seats", { initiator: { seatId: "dmg-a", playerName: "Alice" } }));
     const kenrith = commanderEntry("Kenrith", "https://example.com/kenrith.jpg");
     await post(
@@ -433,11 +433,11 @@ describe("seat joined — commander damage counters", () => {
     expect(counters[0].y).toBe(pos.y);
     expect(counters[0].isLocked).toBe(true);
     expect(counters[0].props.value).toBe(0);
-    expect(counters[0].props.label).toBe("Bob");
+    expect(counters[0].props.label).toBe("Kenrith");
     expect(counters[0].props.sleeveColor).toBe("#123456");
   });
 
-  it("gives a partner-deck opponent two damage counters, one per commander", async () => {
+  it("gives a partner-deck opponent two damage counters, each labeled with its own commander's name", async () => {
     await post("dmg-partners", seatJoined("dmg-partners", { initiator: { seatId: "dmg-p-a", playerName: "Alice" } }));
     const breya = commanderEntry("Breya", "https://example.com/breya.jpg");
     const silas = commanderEntry("Silas", "https://example.com/silas.jpg");
@@ -448,10 +448,10 @@ describe("seat joined — commander damage counters", () => {
 
     const counters = damageCountersOf("dmg-partners");
     expect(counters).toHaveLength(2);
-    expect(counters.every((c) => c.props.label === "Bob")).toBe(true);
+    expect(counters.map((c) => c.props.label).sort()).toEqual(["Breya", "Silas"]);
   });
 
-  it("gives a newly-joined seat a damage counter for an opponent's commander that arrived before it joined", async () => {
+  it("gives a newly-joined seat a damage counter labeled with an opponent's commander that arrived before it joined", async () => {
     const kaalia = commanderEntry("Kaalia", "https://example.com/kaalia.jpg");
     await post(
       "dmg-retroactive",
@@ -465,7 +465,7 @@ describe("seat joined — commander damage counters", () => {
     const pos = commanderDamageCounterPosition(1, 0); // Bob is seat index 1
     expect(counters[0].x).toBe(pos.x);
     expect(counters[0].y).toBe(pos.y);
-    expect(counters[0].props.label).toBe("Alice");
+    expect(counters[0].props.label).toBe("Kaalia");
   });
 
   it("two seats joining concurrently, each with a commander, don't double-mint each other's counter", async () => {
@@ -481,8 +481,8 @@ describe("seat joined — commander damage counters", () => {
 
     const counters = damageCountersOf("dmg-concurrent");
     expect(counters).toHaveLength(2); // exactly one counter per seat, not doubled
-    expect(counters.filter((c) => c.props.label === "Alice")).toHaveLength(1);
-    expect(counters.filter((c) => c.props.label === "Bob")).toHaveLength(1);
+    expect(counters.filter((c) => c.props.label === "Kenrith")).toHaveLength(1);
+    expect(counters.filter((c) => c.props.label === "Kaalia")).toHaveLength(1);
   });
 
   it("a second seat.joined for an already-seated seat is a no-op — damage counters are minted once", async () => {
