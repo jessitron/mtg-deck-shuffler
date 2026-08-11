@@ -1132,3 +1132,29 @@ click-resolution and selection quirks.
 
 If a future fix attempt for a similar quirk is tried and reverted, record it here so the next
 person doesn't repeat it.
+
+## Tabletop-architecture ticket 03: disjointness invariant now enforced at module load, not only in the test suite (2026-08-11)
+
+`.scratch/tabletop-architecture-review/issues/03-cardlayout-invariant-in-interface.md`. Entirely
+within `apps/tabletop/src/server/cardLayout.ts` and `test/cardLayout.test.ts` — no ShapeUtil,
+gesture, or selection code touched, confirming this owner's `-review` call that a pure-geometry
+edit to `cardLayout.ts` doesn't need this owner's machinery.
+
+- The pairwise `separation()`-based check watch point 8 already relied on (asserted only in
+  `test/cardLayout.test.ts`) is now an exported pure function, `checkZonesDisjoint(zones,
+  minGap)`, taking a `Record<string, Bounds>` and throwing (naming the two offending zone keys
+  and the actual gap) if any pair is separated by less than `minGap`.
+- A new module-level `assertLayoutInvariants()` builds the same 21-zone set watch point 8's
+  event-handler-seam test already covers (all four seats' playmat/library/command/graveyard/exile
+  plus the Stack) and calls `checkZonesDisjoint(zones, GAP)` — and runs **unconditionally at
+  import time**, at the bottom of `cardLayout.ts`. A constant edit that breaks the invariant
+  (including watch point 8's own `STACK_SIZE`-vs-`PLAYMAT_H` case) now throws at server boot or
+  any module load, not only when someone happens to run `test/cardLayout.test.ts`.
+  `test/cardLayout.test.ts`'s pre-existing "keeps every zone AABB apart" test now calls this same
+  exported function instead of duplicating the separation logic locally.
+- No behavior change for the current valid constants — this raises the invariant's guard count
+  from three layers to four (pure-geometry test, event-handler-seam test, the `MAX_SEATS` throw,
+  and now module load) without altering what's actually being checked.
+
+Full detail in `interactions.md` watch point 8 (new paragraph) and its "Depended On By → Zone
+detection" section (new confirming note).

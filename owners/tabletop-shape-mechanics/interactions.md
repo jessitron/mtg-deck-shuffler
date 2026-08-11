@@ -115,7 +115,12 @@
   invariant test. One coupling worth knowing: `COMMAND_ZONE_H` is defined as `LIBRARY_H` because
   the graveyard sits at `column.y + LIBRARY_H + GAP` spanning the full column width — a height
   drift between the two top boxes would erode the command zone's gap (asserted in
-  `test/cardLayout.test.ts`).
+  `test/cardLayout.test.ts`). **Confirmed a second time, tabletop-architecture ticket 03
+  (2026-08-11)**: extracting the pairwise-separation check into an exported `checkZonesDisjoint`
+  and calling it at module load (see watch point 8's new paragraph below) touched only
+  `cardLayout.ts` and its own test file — no ShapeUtil, gesture, or selection code, confirming
+  again that this invariant's *territory* is pure geometry, even though its *consequence*
+  (topmost-zone-wins staying meaningless-but-safe) is squarely this owner's concern.
 - `MtgZoneShapeUtil` defines **no** `onClick`/`onTranslateEnd`/`onDragShapesOver` — see
   `architecture.md`'s "Ticket 13" section for why that's provably safe rather than just
   convenient: zones are always `isLocked: true`, `SelectTool`'s `Idle` state gates on `isLocked`
@@ -320,7 +325,18 @@
    full 4-seat table (`test/seatJoined.test.ts`, 21 zones — catches `tableFurniture.ts` drifting
    from `cardLayout.ts`), and a runtime backstop — `playerAreaOrigin` **throws** past the new
    `MAX_SEATS` export (4) instead of wrapping a fifth seat onto the S slot's exact AABBs, with
-   `seatJoined.ts`/`cardArrival.ts` refusing with 409 before the throw can ever fire. And (c),
+   `seatJoined.ts`/`cardArrival.ts` refusing with 409 before the throw can ever fire.
+   **A fourth guard layer since tabletop-architecture ticket 03 (2026-08-11): the pairwise-`GAP`
+   check itself is now exported (`checkZonesDisjoint(zones, minGap)`, `cardLayout.ts`) and run
+   against all four seats' zones plus the Stack at module load** (`assertLayoutInvariants()`,
+   called unconditionally at the bottom of `cardLayout.ts`), not only from
+   `test/cardLayout.test.ts`. A constant edit that breaks the invariant — including this watch
+   point's own `STACK_SIZE`-vs-`PLAYMAT_H` case — now throws at import/server-boot time, before
+   any test run or any card is ever placed, naming the two conflicting zones and the actual gap.
+   `test/cardLayout.test.ts`'s existing "keeps every zone AABB apart" test now calls this same
+   exported function instead of duplicating the separation logic locally — one disjointness
+   check, two call sites (module load, test). No behavior change for the current valid
+   constants; this is a stricter backstop, not a new invariant. And (c),
    a testing caution that outlived ticket 14 itself: **reactive camera moves triggered by remote
    arrivals flake any spec that measures screen coordinates** — the first cut of
    `aimCameraAtTheTable()` zoomed on the first remote shape arrival and raced Playwright's
