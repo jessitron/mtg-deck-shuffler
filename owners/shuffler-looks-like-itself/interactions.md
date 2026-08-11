@@ -367,6 +367,13 @@ Concrete, in rough order of how often they bite.
   only implementation of the formula in the codebase, because every pick is a real
   `hx-post` that re-renders the server's own markup rather than a client guess at what the
   server would render. If you touch the tint, there is now exactly one place to touch.
+  **That's true only within the Shuffler.** Table-layout ticket 21 (2026-08-11,
+  commander-damage counters) reopened the hazard **across ships**: `MtgLifeCounterShapeUtil.tsx`
+  (Tabletop) needs the same dark/light call for its identity-band text and has no route to
+  `shared-components.ts`, so it carries a second, hand-ported `isDarkHex`, commented as a
+  manual-sync copy. **Two implementations again, now one per ship** — if the threshold or
+  coefficients ever change, both copies need the edit; nothing will flag the other one going
+  stale.
   Spec'd in `test/view/sleeve-tint.test.ts` (the server helper, both call sites) and
   `verify-prep-picker.spec.ts` (browser, dark `#530aae` → white, light `#f0e68c` → default).
 - **The picker is pure HTMX now, not client-JS-driven (`cabf85b`, 2026-08-09) — `prep-picker.js`

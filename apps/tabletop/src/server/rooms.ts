@@ -45,6 +45,10 @@ export interface PlayerArea {
   landCount: number;
   graveyardCount: number;
   stackCount: number;
+  /** How many commanders this seat has (partners = 2) — table-layout ticket 21, drives opponents' damage counters. */
+  commanderCount: number;
+  /** How many commander-damage counters already sit on this seat's own name row — next one's position. */
+  damageCounterCount: number;
 }
 
 export interface RoomEntry {

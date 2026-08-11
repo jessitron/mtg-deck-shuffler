@@ -3,7 +3,7 @@ import { trace } from "@opentelemetry/api";
 import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
-import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
+import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape, addCommanderDamageCounters } from "./tableFurniture.js";
 import { MAX_SEATS, CARD_W, CARD_H, commandZoneCardPosition } from "./cardLayout.js";
 import { validateIncomingEvent } from "./contractValidation.js";
 
@@ -159,6 +159,20 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
         );
       });
     });
+  }
+
+  if (seatCommanders.length > 0) {
+    playerArea.commanderCount = seatCommanders.length;
+  }
+
+  // Commander-damage counters (ticket 21) — one per opposing commander, in
+  // both directions: the new seat needs a counter for every commander
+  // already-seated opponents brought, and every already-seated opponent
+  // needs a counter for this seat's brand-new commanders.
+  for (const [otherSeatId, otherArea] of entry.seats) {
+    if (otherSeatId === seatId) continue;
+    await addCommanderDamageCounters(entry, pageId, seatId, otherSeatId, otherArea.playerName, otherArea.sleeveColor, otherArea.commanderCount);
+    await addCommanderDamageCounters(entry, pageId, otherSeatId, seatId, playerName, sleeveColor, seatCommanders.length);
   }
 
   entry.seenEventIds.add(envelope.id);

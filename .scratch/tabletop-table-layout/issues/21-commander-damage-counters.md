@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: done
 Blocked by: 20 — life counter (the `mtg-life-counter` shape and name-row layout); 18 — commander arrives with owner (which commanders exist, and whose); 17 — sleeve color travels (counter identity is opponent name + sleeve color)
 
 **What to build:** Each player's name row shows a commander-damage counter per opposing
@@ -28,8 +28,30 @@ two. Playwright only if the interaction differs from ticket 20's already-covered
 Consult owners: `shuffler-looks-like-itself` (how name + sleeve color identify a
 counter visually).
 
-- [ ] Each seat shows one damage counter per opposing commander, starting at 0, always visible
-- [ ] A partner-deck opponent produces two counters
-- [ ] Counters are identified by opponent name + sleeve color
-- [ ] No counter for your own commander; counters appear as opposing commanders arrive
-- [ ] Any player can change any counter; changes sync to all browsers
+- [x] Each seat shows one damage counter per opposing commander, starting at 0, always visible
+- [x] A partner-deck opponent produces two counters
+- [x] Counters are identified by opponent name + sleeve color
+- [x] No counter for your own commander; counters appear as opposing commanders arrive
+- [x] Any player can change any counter; changes sync to all browsers
+
+**Landed 2026-08-11.** `MtgLifeCounterShapeProps` gained optional `label`/`sleeveColor`
+(both null for an ordinary life counter); `MtgLifeCounterShapeUtil` renders them as an
+identity band (sleeve-colored strip + name, text color flipped via the same BT.601
+luminance formula as the Shuffler's `isDarkHex`, ported rather than shared — no package
+between ships) plus a sleeve-colored border on the counter row below, everything else
+reused verbatim from ticket 20's chrome. New layout function
+`commanderDamageCounterPosition` (cardLayout.ts) right-justifies counters leftward from
+the life counter. `PlayerArea` gained `commanderCount` and `damageCounterCount`;
+`handleSeatJoined` mints counters in both directions on every join — the new seat gets
+one per already-seated opponent's existing commanders, and every already-seated seat
+gets one per the new seat's brand-new commanders — since commanders only ever arrive
+once, at seat-join (never later via `card.played`, confirmed while researching the
+cardArrival.ts seam). Server event-handler seam tests only (test/seatJoined.test.ts);
+no Playwright, since the DOM interaction is unchanged from ticket 20. Code review caught a
+real race: two seat.joined requests seat each seat synchronously (in ensurePlayerArea)
+before either's first await, so both requests' continuations can see both seats already
+present and each attempt to mint the same (target, opponent) counter pair, doubling
+counters and corrupting `damageCounterCount`'s position bookkeeping. Fixed by making
+`addCommanderDamageCounters` idempotent per pair — the existence check and the mint run
+inside the same synchronous `updateStore` callback, so whichever request's callback runs
+first wins outright. Covered by a concurrent-join test.

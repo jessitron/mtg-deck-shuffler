@@ -645,6 +645,21 @@ self-rendering custom shape.
   matching the counter disc's own "one inline style object to change" posture. If Jess
   signs off on an option: retag the specimen `badge-standard`, update the real shape's
   `borderRadius` line, and fold the winning value into this section per the usual checklist.
+
+  **Ticket 21 (commander-damage counters, built 2026-08-11) extended the same shape rather
+  than inventing a second one**, and the open radius question now has a second render path
+  to update when it resolves. `MtgLifeCounterShapeUtil.tsx` grew optional `label`/
+  `sleeveColor` props (both null for an ordinary life counter — unchanged appearance,
+  unchanged placeholder radius). When set, the shape gains an identity band above the
+  counter row (opponent name on their sleeve color) and the counter row's own radius
+  changes shape: only the **bottom** two corners get the `h * 0.15` placeholder
+  (`0 0 Xpx Xpx`), square on top where the band sits flush against it. **Whichever option
+  Jess picks for the plain counter must be re-applied to this split-radius branch too** —
+  the gallery's three mocks currently show only the label-less counter, so this second
+  variant isn't staged and won't be exercised by an eyeball check of `/design#life-counter`.
+  The counter row's border also switches from the fixed `--dark-pink` to the opponent's
+  `sleeveColor` when a label is present — an identity choice, not part of the radius
+  question, but touching the same style object.
 - **~~Coming to this owner: the sleeve's rendered appearance.~~ DECIDED and BUILT
   2026-08-08 (ticket 17, `0a768e6` + `bfdc877`), decided with this owner's `-context`
   mid-implementation — except the picker palette, see below.**
