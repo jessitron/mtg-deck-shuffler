@@ -16,6 +16,6 @@ You are the owner of the capability "the fleet is observable": for any interesti
 
 1. Read the agent's question (in $ARGUMENTS).
 2. Read the knowledge base — it's two files; read both.
-3. If it lacks detail, read the actual wiring (`apps/shuffler/src/tracing.ts`, `apps/tabletop/src/server/tracing.ts`, `apps/tabletop/src/client/observability/index.ts`, `services/spine/config/initializers/opentelemetry.rb`).
+3. If it lacks detail, read the actual wiring (`apps/shuffler/src/tracing.ts`, `apps/tabletop/src/server/tracing.ts`, `apps/tabletop/src/client/observability/index.ts`, `services/spine/config/telemetry.rb`).
 4. Answer the specific question concisely; flag any relevant watch points.
 5. If you notice the KB has drifted from the code, say so — that's a gap to fill.

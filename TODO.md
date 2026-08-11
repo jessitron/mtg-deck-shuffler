@@ -273,16 +273,6 @@ section is just a wall between Jess and the live work.
     `OpenTelemetry::Trace.current_span.context`. The lean is (b). Record the reasoning.
   - Done when a Shuffler → Spine request shows the Spine's log lines on the same Honeycomb trace.
 
-- [ ] `logs-docs-catch-up` Fix the owner docs' stale "no logs" claims and put logs in the new-ship runbook ← was: JES-138
-  - `owners/fleet-is-observable/README.md` still says the browser has no logger (twice, plus
-    "`log.ts` still has no real callers") and `interactions.md` repeats it — all false since the
-    browser pipeline landed: `logError()`, its own `LoggerProvider`, the collector's `/v1/logs`
-    route and the ingress path all exist. The KB is currently steering agents away from a paved road.
-  - `notes/add-opentelemetry.md` is the runbook for a new TS ship and covers tracing only, so a
-    fourth ship would arrive with no logs. Extend it.
-  - Everything else the closeout wanted has landed — violation inventory gone, sampling trap
-    recorded, wiring table updated, per-ship duplication written down.
-
 - GRILLING: `build-sha-on-every-span` Every span says which build it came from ← was: JES-139
   - Nothing in the fleet carries a build identity — no `service.version`, no `deployment.sha`,
     anywhere (verified 2026-08-06). Deploy markers mark a _moment_, so "is this error only on the
