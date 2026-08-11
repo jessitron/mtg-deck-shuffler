@@ -376,6 +376,37 @@ Concrete, in rough order of how often they bite.
   stale.
   Spec'd in `test/view/sleeve-tint.test.ts` (the server helper, both call sites) and
   `verify-prep-picker.spec.ts` (browser, dark `#530aae` → white, light `#f0e68c` → default).
+- **The command-zone/deck-title BACKGROUND tint no longer feeds on the raw sleeve hex
+  directly — it feeds on a resolved secondary color (2026-08-11, ticket 01 of
+  `colors-from-playmat-to-life-counter`).** `colorsForPlaymat(playmatPath, sleeveColor)`,
+  new in `table-look.ts`, reads the playmat's curated `chosenTwo` pair (`playmat-colors.json`)
+  and returns `{ primaryColor, secondaryColor }`: with a sleeve chosen, primary is the sleeve
+  and secondary is whichever `chosenTwo` color contrasts more with it (by `luminance`
+  distance); with no sleeve, primary is the darker of the two `chosenTwo` colors and
+  secondary is the other; with no `chosenTwo` entry for that playmat, both fall back to a
+  fixed pair (`#ddc7dd`/`#bb5277`, commented as mirroring `--light-pink`/`--dark-pink` —
+  same "hex in `table-look.ts` mirrors a token, comment says so" posture as
+  `SLEEVE_QUICK_PICKS`). All four background-tint call sites — command-zone surround and
+  deck-title on both `/prepare` (`prep-view-helpers.ts`) and `/game`
+  (`shared-components.ts`'s `formatCommandZoneHtmlFragment`, `active-game-page.ts`) — now
+  call `sleeveTintStyle(secondaryColor, …)` instead of `sleeveTintStyle(sleeveColor, …)`.
+  **Consequence: these two backgrounds now always render a color**, even when the seat
+  picked no sleeve — before, no sleeve meant no inline style at all and the CSS default
+  (`--light-pink`) showed through; `sleeve-tint.test.ts`'s old "unsleeved: no inline style"
+  assertion is gone, replaced with "unsleeved: still gets a color, resolved from the
+  playmat's curated pair." **The sleeve's own rendering is untouched** — this only changed
+  what feeds the two background tints, not the library stack's sleeve-color rendering or
+  the sleeve-tint lettering-flip logic itself.
+  **The formula moved, and `isDarkHex` now delegates rather than duplicates.** `luminance(hex)`
+  (BT.601) is now exported from `table-look.ts` — the single implementation — and
+  `shared-components.ts`'s `isDarkHex` calls it (`luminance(hex) < 128`) instead of carrying
+  its own copy of the arithmetic. Import direction is one-way (`shared-components.ts` →
+  `table-look.ts`; `table-look.ts` does not import back), so there's no circular-import
+  hazard to watch for. **Not yet touched: the parameter name.**
+  `formatDeckTitleHtmlFragment(deckName, sleeveColor?)` still names its second parameter
+  `sleeveColor`, but every call site now passes the resolved `secondaryColor` — the name is
+  stale, not wrong (the function still just tints whatever hex it's given), but grepping for
+  "sleeveColor" in that function's signature will mislead about what actually flows in.
 - **The picker is pure HTMX now, not client-JS-driven (`cabf85b`, 2026-08-09) — `prep-picker.js`
   is deleted.** Every swatch in `table-look-panel.ejs` (`hx-post="/prep-table-look/:prepId"`,
   `hx-target="#playmat-prepare"`, `hx-swap="outerHTML"`) posts its pick straight to the

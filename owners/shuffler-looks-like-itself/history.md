@@ -2427,3 +2427,67 @@ since this change landed; if the glow looks too hot, that's this gap, not a new 
 No `/design` gallery specimen depended on the removed opacity (it's a Tabletop canvas-shape
 property, not represented in any gallery mock), so the gallery test needed no update and
 none was made.
+
+## 2026-08-11 — the command-zone and deck-title backgrounds stopped reading the raw sleeve hex
+
+Ticket 01 of `colors-from-playmat-to-life-counter` (the fleet spec giving every seat a
+per-player color identity on the Tabletop, `.scratch/colors-from-playmat-to-life-counter/`).
+This ticket is Shuffler-only and fully visible/verifiable without the Tabletop: it resolves
+the *colors*; later tickets in the same spec wire them to the Tabletop's life counter,
+commander-damage counters, and player-area title.
+
+**New pure function, `colorsForPlaymat(playmatPath, sleeveColor)` in `table-look.ts`.** It
+reads the playmat's curated two-color set (`chosenTwo`, in `playmat-colors.json` —
+sitting unused there since the file also carries `chosenFive`/`chosenThree` for the sleeve
+quick-picks) and returns `{ primaryColor, secondaryColor }`: with a sleeve chosen, primary is
+the sleeve hex and secondary is whichever `chosenTwo` color is farther from it by perceived
+luminance (more contrast); with no sleeve, primary is the darker of the two `chosenTwo`
+colors and secondary is the lighter; with no `chosenTwo` entry for that playmat (one of 11
+lacks it as of this writing), both fall back to a fixed pair, `#ddc7dd`/`#bb5277` — commented
+in the code as mirroring `--light-pink`/`--dark-pink` — so no caller ever receives an
+undefined color. Unit-tested in `table-look.test.ts` alongside the existing
+`sleeveQuickPicksForPlaymat` tests: the contrast-pick case (both directions), the no-sleeve
+darker-of-two case, and the missing-`chosenTwo` fallback (including an unknown-path case,
+which resolves the same way as the known-but-uncurated one since both hit the same
+`chosenTwo`-is-undefined branch).
+
+**Wired into the two background-tint call sites, on both play pages**, replacing the raw
+sleeve hex `sleeveTintStyle` used to receive: the command-zone surround and the deck-name
+title, via `prep-view-helpers.ts` on `/prepare` and `shared-components.ts`'s
+`formatCommandZoneHtmlFragment` + `active-game-page.ts` on `/game`. Each site now computes
+`colorsForPlaymat(prep.playmatImagePath ?? DEFAULT_PLAYMAT_PATH, prep.sleeveColor)` (or the
+`game.` equivalent) and threads `secondaryColor` into `sleeveTintStyle` in place of the raw
+sleeve color. **Net visible effect: these two backgrounds are never colorless again** — an
+unsleeved seat used to leave them at the CSS default (`--light-pink`, no inline style at
+all); now every seat gets a resolved color from its playmat regardless of sleeve choice.
+`sleeve-tint.test.ts`'s old "unsleeved: no inline style" assertion was rewritten to "unsleeved:
+still gets a color, resolved from the playmat's curated pair" rather than deleted, since the
+no-color case it used to check no longer exists. The sleeve's own rendering — the
+library-card-back sleeve treatment, and the sleeve-lettering-flip decision itself — is
+untouched; only what feeds these two backgrounds changed.
+
+**The BT.601 luminance formula moved, closing a near-duplication before it started.** The
+review pass flagged that `colorsForPlaymat`'s contrast comparison needed the same
+darkness/brightness measure `shared-components.ts`'s `isDarkHex` already computed, and the
+first draft would have hand-ported a second copy into `table-look.ts` — the exact "two
+implementations, one per file, nothing flags the other going stale" pattern this KB has
+called out before (see the commander-damage-counter cross-ship `isDarkHex` entry in
+[interactions.md](interactions.md)). Fixed by moving the formula rather than copying it:
+`luminance(hex)` now lives in `table-look.ts`, exported, and `shared-components.ts`'s
+`isDarkHex` calls it (`luminance(hex) < 128`) instead of carrying its own arithmetic. A
+circular import was briefly a risk (`shared-components.ts` importing from `table-look.ts`
+while something in `table-look.ts` imported back) and was avoided by keeping the dependency
+one-directional — `table-look.ts` has no import of `shared-components.ts`.
+
+**Left as a known, minor gap: the parameter name.** `formatDeckTitleHtmlFragment(deckName,
+sleeveColor?)` still calls its second parameter `sleeveColor`, but every call site now passes
+the resolved `secondaryColor`. Not wrong — the function only tints whatever hex it's handed —
+but a future reader grepping the signature for "sleeveColor" will get a misleading picture of
+what flows through it. Not renamed in this ticket; worth a small follow-up if it's ever
+touched again.
+
+No CSS changed and no new hex literal entered a stylesheet — `colorsForPlaymat`'s fallback
+pair is a TS literal mirroring existing tokens, same posture as `SLEEVE_QUICK_PICKS`'s mana
+hexes, not a stylesheet raw-hex violation. `npm run build`, the unit suite, and
+`npx playwright test verify-design-gallery` (7/7) all pass; the gallery test needed no update
+since none of its specimens exercise `colorsForPlaymat`.

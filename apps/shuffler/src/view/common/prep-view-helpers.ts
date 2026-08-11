@@ -1,11 +1,14 @@
 import { PersistedGamePrep } from "../../port-persist-prep/types.js";
 import { GameCard } from "../../GameState.js";
 import { formatCardContainer, formatDeckTitleHtmlFragment, formatLibraryStack, sleeveTintStyle } from "./shared-components.js";
+import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../../table-look.js";
 
 
 export function createPrepViewHelpers(prep: PersistedGamePrep) {
   // Convert CardDefinitions to GameCards for rendering
   let gameCardIndex = 0;
+
+  const { secondaryColor } = colorsForPlaymat(prep.playmatImagePath ?? DEFAULT_PLAYMAT_PATH, prep.sleeveColor);
 
   const commanders: GameCard[] = prep.deck.commanders.map((card, position) => ({
     card,
@@ -37,7 +40,7 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
   function renderPrepCommandZone(): string {
     return commanders.length === 0
       ? `<div class="commander-placeholder">No Commander</div>`
-      : `<div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}"${sleeveTintStyle(prep.sleeveColor, false)}>
+      : `<div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}"${sleeveTintStyle(secondaryColor, false)}>
           <div class="multiple-cards">
             ${commanders.map((commander) => renderPrepCommanderCard(commander)).join("")}
           </div>
@@ -49,7 +52,7 @@ export function createPrepViewHelpers(prep: PersistedGamePrep) {
     libraryCards,
     renderCommanderCard: renderPrepCommanderCard,
     renderCommandZone: renderPrepCommandZone,
-    renderDeckTitle: () => formatDeckTitleHtmlFragment(prep.deck.name, prep.sleeveColor),
+    renderDeckTitle: () => formatDeckTitleHtmlFragment(prep.deck.name, secondaryColor),
     renderLibraryStack: () =>
       formatLibraryStack({}, libraryCards.length, prep.sleeveColor),
   };

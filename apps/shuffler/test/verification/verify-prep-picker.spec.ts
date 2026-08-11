@@ -1,7 +1,7 @@
 
 import { test, expect, Page } from '@playwright/test';
 import { seedPrep } from './seedGame.js';
-import { sleeveQuickPicksForPlaymat, DEFAULT_PLAYMAT_PATH } from '../../src/table-look.js';
+import { sleeveQuickPicksForPlaymat, colorsForPlaymat, luminance, DEFAULT_PLAYMAT_PATH } from '../../src/table-look.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
@@ -14,11 +14,15 @@ const DEFAULT_QUICK_PICKS = sleeveQuickPicksForPlaymat(DEFAULT_PLAYMAT_PATH);
 const QUICK_PICK = DEFAULT_QUICK_PICKS[0].hex;
 const OTHER_MAT_QUICK_PICK = sleeveQuickPicksForPlaymat(OTHER_MAT)[0].hex;
 
+// The command-zone/deck-title backgrounds are tinted by colorsForPlaymat's resolved
+// secondaryColor, not the raw sleeve hex — resolve what a given sleeve pick against the
+// default mat actually renders as.
+function resolvedSecondaryFor(sleeveHex: string | undefined): string {
+  return colorsForPlaymat(DEFAULT_PLAYMAT_PATH, sleeveHex).secondaryColor;
+}
+
 function isDarkHex(hex: string): boolean {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return 0.299 * r + 0.587 * g + 0.114 * b < 128;
+  return luminance(hex) < 128;
 }
 
 function hexToRgb(hex: string): string {
@@ -28,12 +32,23 @@ function hexToRgb(hex: string): string {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-const darkPick = DEFAULT_QUICK_PICKS.find((p) => isDarkHex(p.hex));
-const lightPick = DEFAULT_QUICK_PICKS.find((p) => !isDarkHex(p.hex));
+const darkPick = DEFAULT_QUICK_PICKS.find((p) => isDarkHex(resolvedSecondaryFor(p.hex)));
+const lightPick = DEFAULT_QUICK_PICKS.find((p) => !isDarkHex(resolvedSecondaryFor(p.hex)));
 if (!darkPick || !lightPick) {
   throw new Error(
-    `Default playmat's quick-picks (${DEFAULT_QUICK_PICKS.map((p) => p.hex).join(', ')}) need at least one dark ` +
-      'and one light color for the dark/light lettering test to mean anything.'
+    `Default playmat's quick-picks (${DEFAULT_QUICK_PICKS.map((p) => p.hex).join(', ')}), resolved against the ` +
+      "default mat's chosenTwo, need at least one dark and one light secondaryColor for the dark/light lettering test to mean anything."
+  );
+}
+
+// For the "None clears the sleeve" test to mean anything, the sleeved tint must actually
+// differ from the no-sleeve default — not every quick pick's resolved secondaryColor does.
+const noSleeveSecondary = resolvedSecondaryFor(undefined);
+const pickThatChangesTint = DEFAULT_QUICK_PICKS.find((p) => resolvedSecondaryFor(p.hex) !== noSleeveSecondary);
+if (!pickThatChangesTint) {
+  throw new Error(
+    `None of the default playmat's quick-picks (${DEFAULT_QUICK_PICKS.map((p) => p.hex).join(', ')}) resolve to a ` +
+      "secondaryColor different from the no-sleeve default — the clear-sleeve test needs one that does."
   );
 }
 
@@ -76,27 +91,30 @@ test.describe('Prepare screen — table-look panel', () => {
 
   test('picking a sleeve color tints the page and is captured in prep state', async ({ page }) => {
     const prepId = await gotoPrep(page);
+    const tint = hexToRgb(resolvedSecondaryFor(QUICK_PICK));
 
     await sleeveSwatch(page, QUICK_PICK).click();
 
-    // Live preview: command-zone surround and deck-title plaque take the tint
-    await expect(page.locator('.cool-command-zone-surround')).toHaveCSS('background-color', hexToRgb(QUICK_PICK));
-    await expect(page.locator('.game-title')).toHaveCSS('background-color', hexToRgb(QUICK_PICK));
+    // Live preview: command-zone surround and deck-title plaque take the resolved tint
+    await expect(page.locator('.cool-command-zone-surround')).toHaveCSS('background-color', tint);
+    await expect(page.locator('.game-title')).toHaveCSS('background-color', tint);
 
     // Captured: reload shows the chip selected and the tint re-applied
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
     await expect(sleeveSwatch(page, QUICK_PICK)).toHaveClass(/table-look-selected/);
-    await expect(page.locator('.game-title')).toHaveCSS('background-color', hexToRgb(QUICK_PICK));
+    await expect(page.locator('.game-title')).toHaveCSS('background-color', tint);
   });
 
   test('None is a valid choice: picking a color then None clears the sleeve', async ({ page }) => {
     const prepId = await gotoPrep(page);
+    const sleeveTint = hexToRgb(resolvedSecondaryFor(pickThatChangesTint.hex));
+    const noSleeveTint = hexToRgb(noSleeveSecondary);
 
-    await sleeveSwatch(page, QUICK_PICK).click();
-    await expect(page.locator('.game-title')).toHaveCSS('background-color', hexToRgb(QUICK_PICK));
+    await sleeveSwatch(page, pickThatChangesTint.hex).click();
+    await expect(page.locator('.game-title')).toHaveCSS('background-color', sleeveTint);
 
     await page.locator('.table-look-panel [data-sleeve-color=""]').click();
-    await expect(page.locator('.game-title')).not.toHaveCSS('background-color', hexToRgb(QUICK_PICK));
+    await expect(page.locator('.game-title')).toHaveCSS('background-color', noSleeveTint);
 
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
     await expect(page.locator('.table-look-panel [data-sleeve-color=""]')).toHaveClass(/table-look-selected/);
@@ -128,12 +146,13 @@ test.describe('Prepare screen — table-look panel', () => {
       el.dispatchEvent(new Event('change', { bubbles: true }));
     });
 
-    await expect(page.locator('.game-title')).toHaveCSS('background-color', 'rgb(139, 47, 92)');
+    const customTint = hexToRgb(resolvedSecondaryFor('#8b2f5c'));
+    await expect(page.locator('.game-title')).toHaveCSS('background-color', customTint);
 
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
     await expect(page.locator('.table-look-panel .table-look-custom')).toHaveClass(/table-look-selected/);
     await expect(colorInput).toHaveValue('#8b2f5c');
-    await expect(page.locator('.game-title')).toHaveCSS('background-color', 'rgb(139, 47, 92)');
+    await expect(page.locator('.game-title')).toHaveCSS('background-color', customTint);
   });
 
   test('picking a mat or sleeve keeps keyboard focus on the equivalent swatch after the swap', async ({ page }) => {

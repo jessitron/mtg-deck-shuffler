@@ -366,6 +366,22 @@ Facts that outlive the ticket:
   crossfade is gone). Spec'd in `test/view/sleeve-tint.test.ts` (unit) and
   `verify-prep-picker.spec.ts` (browser, 8 specs — 2 new, for focus-restoration and
   unsaved-text-survival across the swap).
+- **What feeds these two background tints changed (2026-08-11, ticket 01 of
+  `colors-from-playmat-to-life-counter`): a resolved `secondaryColor`, not the raw sleeve
+  hex.** `colorsForPlaymat(playmatPath, sleeveColor)`, new in `table-look.ts`, derives
+  `{ primaryColor, secondaryColor }` from the playmat's curated `chosenTwo` pair
+  (`playmat-colors.json`) plus the sleeve choice — contrast-matched against the sleeve when
+  one is picked, the darker/lighter of the pair when none is, and a fixed fallback pair
+  (mirroring `--light-pink`/`--dark-pink`) when the playmat has no `chosenTwo` entry. All
+  four call sites above now pass `secondaryColor` into `sleeveTintStyle`, so **the
+  command-zone surround and deck-title plaque are never colorless** — an unsleeved seat used
+  to leave these two backgrounds at the CSS default; now every seat gets a resolved color
+  from its playmat even with no sleeve chosen. The sleeve's own rendering elsewhere (the
+  library-card-back sleeve treatment, the sleeve-lettering logic itself) is untouched — only
+  what feeds these two backgrounds moved. `luminance(hex)` (the BT.601 formula) moved to
+  `table-look.ts` and is exported from there now; `isDarkHex` in `shared-components.ts`
+  delegates to it rather than carrying a second copy, keeping "one implementation of the
+  formula" true through the move.
 - **The custom color picker stays the native `<input type="color">` — decided, not an
   oversight (Jess, 2026-08-09).** Jess considered click-outside-to-close for the picker;
   the native control's OS panel can't be closed by JS, and she chose to keep the native
