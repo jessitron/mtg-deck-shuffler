@@ -102,25 +102,6 @@ and I want to drop a card in between C and D, then the drop zone between them is
     even though 06 lands first and this doesn't block it.
     ← priority: later
 
-- GRILLING: `playmat-colours-fleet-or-shuffler` Do the playmat colours belong to the fleet, or to the Shuffler?
-  - Jess, 2026-08-10: "I think I intended these to be dynamic based on your playmat choice, but
-    let's replace them with constants named by use instead."
-  - `--playmat-one` (`#f5dc8b`) and `--playmat-two` (`#4b7bba`) were **deliberately left** in
-    `apps/shuffler/public/game.css` when everything else moved into `packages/design-tokens`
-    (`tabletop-css-tokens`, `4396aea`). Recording why, because the omission looks like an oversight
-    and isn't.
-  - The design owner's recorded position — _"the playmat is one object, one appearance, two
-    scales"_ — was decided about the Shuffler's two **pages** (/prepare and /game). Extending "one
-    object" **across the ship boundary**, to a tldraw-rendered seat mat, is a different and
-    unratified identity claim. Moving the tokens into the shared package would silently assert an
-    answer to it.
-  - The question is real, not hypothetical: the Tabletop does draw playmats. If the answer is
-    "yes, one object fleet-wide", the tokens move and the Tabletop's mats inherit them. If "no,
-    a seat mat is its own thing", they stay put and the Tabletop picks its own.
-  - Related: `.scratch/tabletop-physics/issues/11-what-a-zone-looks-like.md` — deciding what a
-    zone looks like, armed and at rest. Overlapping territory; that ticket decides zones, this
-    decides whether the mat under them is fleet-owned. Link, don't merge.
-
 - TICKETED `tabletop-view-rotation` — two tickets under `.scratch/tabletop-view-rotation/issues/`,
   both `Status: ready-for-agent`: `01-local-view-rotation-controls.md` (no blockers) and
   `02-counter-rotate-tldraw-chrome.md` (blocked by 01). Say "do ticket 01" to start.
