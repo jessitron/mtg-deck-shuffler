@@ -2,7 +2,7 @@
 
 Mountain: overhead
 Ship: tabletop
-Status: needs-triage
+Status: resolved
 
 ## Overview
 
@@ -21,12 +21,12 @@ is `Mountain: overhead` rather than a feature Mountain.
 
 | # | Ticket | Review verdict | Status | Notes |
 |---|--------|-----------------|--------|-------|
-| 1 | [01-split-cardshapeutil-interop-from-physics](issues/01-split-cardshapeutil-interop-from-physics.md) | Strong | `needs-triage` | Grilled 2026-08-10; the review's proposed seam doesn't hold cleanly — see ticket for the corrected framing and the still-open question for Jess |
+| 1 | [01-split-cardshapeutil-interop-from-physics](issues/01-split-cardshapeutil-interop-from-physics.md) | Strong | `resolved` | Jess's call (2026-08-11): organizational split by hook, no `CardPhysics` abstraction. Landed, zero behavior change. |
 | 2 | [02-furniture-builder-domain-interface](issues/02-furniture-builder-domain-interface.md) | Worth exploring | `done` | Domain-values interface already existed (ticket 18); this closed the remaining three `as any` casts |
 | 3 | [03-cardlayout-invariant-in-interface](issues/03-cardlayout-invariant-in-interface.md) | Worth exploring | `done` | `checkZonesDisjoint` now asserted at module load, not just in the test |
-| 4 | [04-gestures-announce-themselves](issues/04-gestures-announce-themselves.md) | Worth exploring | `needs-triage` | Tension with an already-shipped decision (tabletop-physics ticket 21) — flagged for Jess, not blindly actioned |
+| 4 | [04-gestures-announce-themselves](issues/04-gestures-announce-themselves.md) | Worth exploring | `wontfix` | Jess's call (2026-08-11): belongs with the domain/physical events design work, not as a standalone cleanup |
 | 5 | [05-stale-selection-fix](issues/05-stale-selection-fix.md) | Speculative in the review, but Jess reports it's a live, unfixed bug | `done` | Centralized fix landed: `clearStaleSelectionOnPointerDown.ts`, replacing all five old workaround sites. Supersedes the `tabletop-stale-selection-fix` line in the repo-root `TODO.md` (removed) |
-| 6 | [06-rooms-typed-instance-exists](issues/06-rooms-typed-instance-exists.md) | Speculative | `ready-for-agent` | |
+| 6 | [06-rooms-typed-instance-exists](issues/06-rooms-typed-instance-exists.md) | Speculative | `done` | `RoomEntry.hasInstance` added, owning the snapshot read and cast |
 
 ## Cross-candidate notes
 
@@ -52,7 +52,8 @@ is `Mountain: overhead` rather than a feature Mountain.
 - Every ticket here consults `tabletop-shape-mechanics-review` before implementation, per the
   fleet `CLAUDE.md`'s owner-consultation process — all six touch `ShapeUtil` hooks, custom shape
   types, or zone/selection detection.
-- `Status: needs-triage` at the spec level (above) reflects tickets 1 and 4, which need a human
-  decision before an agent should run with them; 2, 3, 5, and 6 are ready as written.
+- All six candidates settled 2026-08-11: four landed (`done`/`resolved`), one `wontfix`
+  (folded into the separate domain/physical events design work instead). No more agent
+  work outstanding under this spec.
 
 ## Comments
