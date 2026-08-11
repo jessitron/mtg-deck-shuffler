@@ -12,8 +12,10 @@ something interesting that happened.
 ## The point
 
 "Observability is mandatory, from the first commit" is a stated value of this fleet
-(`SEAMAP.md` "Observability is mandatory", the comment atop `services/spine/config/initializers/opentelemetry.rb`,
-each ship's SEAMAP). The North Star includes **"When something breaks, Honeycomb shows you why."**
+(`SEAMAP.md` "Observability is mandatory", each ship's SEAMAP — the comment that used to live atop
+`services/spine/config/initializers/opentelemetry.rb` is gone along with the rest of the Rails
+Spine; see the ticket-01 deletion note in "How it works now" below). The North Star includes
+**"When something breaks, Honeycomb shows you why."**
 
 What must keep working: **for any interesting thing a user does, there is a trace in Honeycomb that
 explains it, and the data stays queryable.** The trace follows HTTP calls within this app.
@@ -46,7 +48,10 @@ Logs cost the same in Honeycomb, and when they have the trace and Span ID, they 
 
 **Violations: none.** All four (all in the Tabletop server) were fixed in `6f319a2`.
 `grep -rn "addEvent" apps/*/src services/spine` should return only comments and DOM
-`addEventListener`. Keep it that way.
+`addEventListener`. Keep it that way. (`services/spine` currently has no `src`/app code at all
+— the Rails Spine was deleted in ticket 01 of `spine-roda-rewrite`, 2026-08-10 — so today this
+grep only has the Node ships to check; re-add `services/spine` coverage once the Roda rewrite
+lands actual Ruby files.)
 
 **Worked example, kept because it is the best argument for the rule.**
 `apps/tabletop/src/server/rooms.ts` used to call
@@ -272,9 +277,10 @@ Consequences worth holding:
 | `apps/tabletop/src/server/shutdownHooks.ts`           | **A verbatim port of the Shuffler's `shutdownHooks.ts`** (2026-08-10, `19e1bdf`) — same `installShutdownHandlers(drain, options)` signature and logic (bounded drain via `Promise.race` against an `unref()`'d timer, exactly-once exit, injectable `signalSource`/`exit` for tests, log-agnostic `onTimeout`/`onDrainError`). Wired into `tracing.ts` using the Tabletop's own `log.ts` for the callbacks. Ported rather than shared, per the fleet's `tracing.ts`/`log.ts` duplication convention — the logic itself is version/framework-agnostic (just `EventEmitter`, `Promise.race`, `setTimeout().unref()`), so it needed no adaptation beyond the header comment. Tested in `apps/tabletop/test/shutdownHooks.test.ts` (adapted copy of the Shuffler's test, same 5 cases: drain-then-exit, bounded timeout, drain rejection, exactly-once on double signal, SIGINT). This closes the last open half of Invariant-adjacent shutdown coverage — both Node ships now flush their last OTel batch on SIGTERM/SIGINT instead of losing it. |
 | `apps/shuffler/src/view/common/html-layout.ts`        | **The Shuffler's browser telemetry bootstrap — single-sourced since arch ticket 06 (`b268414`, 2026-08-08).** `formatHtmlHead(options)` is the one page shell: every Shuffler page's `<head>` — EJS pages via `views/partials/head.ejs` (a thin adapter reached through `app.locals`) and TS pages (`/game`, error pages) via `formatPageWrapper` — comes from here, so the bootstrap appears exactly once and cannot diverge again. Since `33b54d3` (2026-08-10) the guard+init is `initHoneycombTracing(apiKey)`, shipped as the exported literal string `HONEYCOMB_TRACING_INIT_SCRIPT`, tested by evaling that exact string in `apps/shuffler/test/html-layout-tracing-guard.test.ts`. See "The Shuffler's browser bootstrap" below for the script order, the ordering constraint, the guard (now key-aware), and the apiKey fallback.                                                                                                                                                              |
 | `apps/tabletop/src/client/observability/index.ts`     | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific". Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
-| `services/spine/config/initializers/opentelemetry.rb` | Ruby: `SDK.configure` + `use_all`, then (since `spine-sampler`, 2026-08-10) `OpenTelemetry.tracer_provider.sampler = OpenTelemetry::SDK::Trace::Samplers.parent_based(root: TelemetrySampler::BackgroundChatterSampler.new)`. No wrapper. Rack instrumentation extracts inbound W3C context, so a Shuffler-initiated trace continues through event ingestion. In test nothing is configured and the SDK exports nowhere — fine by design.                                                                                                                                                                                    |
-| `services/spine/lib/telemetry_sampler.rb`             | **First Ruby sampler in the fleet**, ported from the Shuffler's `telemetry-sampler.ts` — same `CHATTER_SAMPLE_RATIO = 0.01`, same "trickle, not zero" reasoning (a failing probe should stay visible). `TelemetrySampler.background_chatter?(attributes)` matches `kube-probe`/`elb-healthchecker` in the user-agent, or path exactly `/up`/`/rails/health` (query string stripped). Reads **both** semconv spellings per Invariant 4: `http.user_agent`/`user_agent.original`, `http.target`/`url.path`. `TelemetrySampler::BackgroundChatterSampler` duck-types `OpenTelemetry::SDK::Trace::Samplers`' interface (`description`, `should_sample?(trace_id:, parent_context:, links:, name:, kind:, attributes:)`) and delegates to `Samplers.trace_id_ratio_based(1.0)` or `.trace_id_ratio_based(CHATTER_SAMPLE_RATIO)`. Unit tested in `test/lib/telemetry_sampler_test.rb` (Minitest): both semconv spellings, non-matching cases, and a 2000-trace-id spread test on the sampler class. |
-| `services/spine/app/models/table.rb` `record_span_attributes` | Stamps every accepted event onto the current (request) span: `event.name`/`.seq`/`.initiator`/`.occurred_in`, plus, since `envelope.v2.json` added the fields (2026-08-10), `event.origin` and `event.significance` — straight passthroughs of the new `Event` columns, no derivation. Envelope schema *shape* is contract-owned, not telemetry-owned, but any envelope field that also becomes a span attribute earns a row here so the two can't drift apart silently. |
+| `services/spine/` — **deleted, ticket 01 of `spine-roda-rewrite`, 2026-08-10** | The Rails Spine (Rails 8 app, `config/initializers/opentelemetry.rb`, `lib/telemetry_sampler.rb`, `app/models/table.rb#record_span_attributes`, `app/controllers/application_controller.rb#current_traceparent`) was deleted whole — it was broken/looping and nothing in production depended on it. Everything below this row describes wiring that **no longer exists**; kept as history so the next Ruby service doesn't have to rediscover these facts from scratch. `services/spine/interpreter/docs/journeys/` plus the ship's `CLAUDE.md`/`README.md`/`SEAMAP.md` survived the delete for the incoming Roda rewrite (tickets 02-06) to build on. **The rewrite must wire OTel from its first commit** (`notes/add-opentelemetry.md`, and the "new service/ship" watch point in `interactions.md`) — and per the rewrite spec, explicitly **without** porting `BackgroundChatterSampler` back: it was flagged broken, and the rewrite starts at 100% sampling instead. Root `./run`'s Spine step is now conditional on `services/spine/run` existing; see "How it works now" below. |
+| ~~`services/spine/config/initializers/opentelemetry.rb`~~ (historical) | Was: Ruby `SDK.configure` + `use_all`, then (since `spine-sampler`, 2026-08-10) `OpenTelemetry.tracer_provider.sampler = OpenTelemetry::SDK::Trace::Samplers.parent_based(root: TelemetrySampler::BackgroundChatterSampler.new)`. Rack instrumentation extracted inbound W3C context so a Shuffler-initiated trace continued through event ingestion. **Deleted along with the rest of the Rails Spine, ticket 01, 2026-08-10** — not live wiring; a new Roda-based init will need to be written from scratch (don't assume this shape is still on disk). |
+| ~~`services/spine/lib/telemetry_sampler.rb`~~ (historical) | Was the **first Ruby sampler in the fleet**, ported from the Shuffler's `telemetry-sampler.ts` — same `CHATTER_SAMPLE_RATIO = 0.01`, same "trickle, not zero" reasoning (a failing probe should stay visible). `TelemetrySampler.background_chatter?(attributes)` matched `kube-probe`/`elb-healthchecker` in the user-agent, or path exactly `/up`/`/rails/health` (query string stripped), reading **both** semconv spellings per Invariant 4. **Deleted, ticket 01, 2026-08-10.** The Roda rewrite spec explicitly says not to port `BackgroundChatterSampler` back — it was flagged broken — and to start the new service at 100% sampling instead. If a sampler is wanted again later, treat it as new work, not a restore. |
+| ~~`services/spine/app/models/table.rb` `record_span_attributes`~~ (historical) | Stamped every accepted event onto the current (request) span: `event.name`/`.seq`/`.initiator`/`.occurred_in`, plus (since `envelope.v2.json`, 2026-08-10) `event.origin`/`event.significance` — straight passthroughs of the `Event` columns. **Deleted, ticket 01, 2026-08-10**, along with the rest of `app/models/`. The Roda rewrite will need an equivalent stamp-on-accept site once it has an event model again; the field list above is worth copying. |
 | `apps/shuffler/test/harness-telemetry/`               | **The fourth init path, and the first that isn't a ship** — the verify suite tracing itself. `harnessTracing.ts` (provider), `spanPlan.ts` (pure + tested), `otelReporter.ts` (Playwright reporter). Service `mtg-fleet-verify`. See "Dev-tooling telemetry" below.                                                                                                                                                                                    |
 | `apps/shuffler/src/port-spine/` (`shuffler-posts-to-spine`, 2026-08-10) | `HttpSpineGateway`/`FakeSpineGateway` implement `SpinePort` (`ensureTable`, `sendEvent`). Wired into `server.ts` as `spinePort` alongside the existing `tabletopPort`, from `SPINE_URL` (default `http://localhost:4600`). **Adds zero new telemetry wiring** — deliberately: `sendCardPlayedToSpineBestEffort` (`sendToSpine.ts`) reuses `buildCardPlayedEvent`/`currentTraceparent()` from `port-tabletop/types.ts` as-is (no new minting site — still 3 sites total, not 4; see "Depends on" in `interactions.md`), the outbound `fetch` to the Spine rides the same undici auto-instrumentation as every other outbound call (zero manual spans, matching "the Shuffler creates zero manual spans" above), and failure handling copies `sendSeatJoinedBestEffort`'s shape exactly: `spine_send.send_failed` span attribute + `log.warn`, never throws — the Spine isn't load-bearing for gameplay yet. **One real fact worth flagging**: `sendCardToTableFirst` and `sendCardPlayedToSpineBestEffort` each call `buildCardPlayedEvent` independently (not one shared envelope sent twice) — two distinct event `id`s reach the Tabletop and the Spine for the same play, but the same `currentTraceparent()` value, since both calls read the same still-active request span. Verified live (not just against the fake): built the Shuffler's dist and ran the real `HttpSpineGateway` against an actually-running local Spine — `ensureTable` created then idempotently looked up a table, `sendEvent` posted a real `card.played` envelope that passed the Spine's contract validation and showed up on `/admin/tables`, confirming the "Depended on by" claim below actually holds end-to-end. |
 
@@ -470,7 +476,7 @@ tracing API's ambient span:**
 
 | Where | Signature | Behavior with no active span |
 | --- | --- | --- |
-| `services/spine/app/controllers/application_controller.rb` `current_traceparent` | `-> String` | Synthesizes a well-formed random traceparent (`SecureRandom.hex`) — the Spine's own events (`table.created`, `seat.taken`) always need a value to persist. |
+| ~~`services/spine/app/controllers/application_controller.rb` `current_traceparent`~~ (historical — file deleted, ticket 01, 2026-08-10) | Was `-> String` | Synthesized a well-formed random traceparent (`SecureRandom.hex`) — the Spine's own events (`table.created`, `seat.taken`) always needed a value to persist. The Roda rewrite will need an equivalent minting site once it has controllers again; copy this shape (never-`nil`, since the envelope's `traceparent` field is required) rather than the Tabletop's optional-`undefined` shape. |
 | `apps/tabletop/src/client/observability/index.ts` `currentTraceparent` | `-> string \| undefined` | Returns `undefined` — used only for propagation on a websocket connection URL, never for a durable field, so "no span, no value" is correct there. |
 | `apps/shuffler/src/port-tabletop/traceparent.ts` `currentTraceparent` (new, ticket 05) | `-> string` | Synthesizes a well-formed random traceparent, same as the Spine — the envelope's `traceparent` field is **required**, so this helper can never return `undefined`. Additionally sets `traceparent.synthesized: true` on the active span (if one exists but lacks a valid `SpanContext`) when the fallback fires, so a real occurrence in production (vs. the expected test-only case, since every `card.played`/`seat.joined` send happens inside an Express request span) is visible on the trace rather than silently masquerading as a real trace link. |
 
@@ -643,11 +649,19 @@ path only exists for the one `node` invocation it's set on.
 `HONEYCOMB_API_KEY` lives in `.be` **at the repo root**. So `.be` must be sourced **before** `.env`,
 or export silently 401s ("unknown API key"). Who does what:
 
-- repo-root `run` — sources `.be`, warns if absent, then delegates. ✅
-- `apps/tabletop/run`, `services/spine/run`, `apps/shuffler/verify.sh`, `apps/tabletop/verify.sh` —
+- repo-root `run` — sources `.be`, warns if absent, then delegates. ✅ Since ticket 01 of
+  `spine-roda-rewrite` (2026-08-10) the Spine step is conditional on `services/spine/run`
+  existing — it doesn't right now (the Rails Spine was deleted whole; see the wiring-table row
+  above). When absent, `./run` logs a skip line and starts only Tabletop and Shuffler; the
+  readiness-banner subshell drops its `curl` of Spine's `/up` and checks only Tabletop/Shuffler.
+  This `.be`-before-`.env` order at the top of `./run` was untouched by that change. Once ticket
+  02 lands a Roda `run` script, `./run` resumes starting Spine automatically — no further edit
+  needed here.
+- `apps/tabletop/run`, `apps/shuffler/verify.sh`, `apps/tabletop/verify.sh` —
   each walk `.be` then `"$REPO_ROOT/.be"`, then `.env`. ✅ `apps/shuffler/verify.sh` also **warns
   when neither candidate is found** (2026-08-07) instead of falling through in silence, matching the
-  repo-root `run`.
+  repo-root `run`. (`services/spine/run` doesn't exist yet — see above; when the Roda rewrite adds
+  one, it should follow this same walk.)
 
 **"Configured" is not "present": `.env` alone produces a keyless header.** Without `.be`, `.env` still
 sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team="` — present, non-empty, and useless. A presence
@@ -1120,6 +1134,18 @@ its own `window.onerror`/`unhandledrejection` handlers at
   and `event.significance` alongside the existing `event.name`/`.occurred_in`/`.initiator` —
   straight passthroughs of the new `Event` columns. The schema *shape* is contract-owned, this
   owner only cares that the passthrough got a row in the wiring table.
+- **2026-08-10, ticket 01 of `spine-roda-rewrite`: the Rails Spine was deleted whole.** `app/`,
+  `config/`, `db/`, `Gemfile`, `Dockerfile`, `k8s/` and every telemetry file described above
+  (`config/initializers/opentelemetry.rb`, `lib/telemetry_sampler.rb`, `table.rb`'s
+  `record_span_attributes`, `application_controller.rb`'s `current_traceparent`) are gone — it was
+  broken/looping and nothing in production depended on it. `services/spine/interpreter/docs/journeys/`
+  and the ship's `CLAUDE.md`/`README.md`/`SEAMAP.md` survived for the incoming Roda rewrite
+  (tickets 02-06) to build on. Root `./run`'s Spine step is now conditional on `services/spine/run`
+  existing (it doesn't yet); when absent it skips Spine and the readiness banner checks only
+  Tabletop/Shuffler, with no other change to `./run`'s telemetry wiring or its `.be`-before-`.env`
+  order. **Open for the rewrite**: OTel must be wired from the Roda service's first commit
+  (`notes/add-opentelemetry.md`), and the rewrite spec is explicit that `BackgroundChatterSampler`
+  is *not* to be ported back — start the new service at 100% sampling instead.
 
 ## Related reading
 
