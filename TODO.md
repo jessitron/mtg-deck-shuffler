@@ -13,17 +13,17 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- `seat-joined-400` `POST /api/tables/:tableName/events` (seat.joined, `handleSeatJoined` in
-  `apps/tabletop/src/server/seatJoined.ts`) now returns 400 instead of 201
-  - Surfaced 2026-08-11 running ticket 05 (tabletop-architecture-review, stale-selection-fix)'s
-    full `./verify.sh` — both tests in `verify-life-counter.spec.ts` fail on this POST.
-    Confirmed pre-existing and unrelated to ticket 05's actual change (`git stash` on the
-    ticket-05 diff, rerun `./verify.sh verify-life-counter` against unmodified code: same 400).
-  - Not investigated further — out of scope for ticket 05. Worth checking what payload/schema
-    validation the endpoint now rejects that `seatJoined`'s own test payload (in the spec file)
-    sends; every other endpoint (`/cards`) still returns 201 fine in the same suite run.
-  - Blocks `verify-life-counter.spec.ts` from passing at all, including the new
-    button-press-doesn't-disturb-selection test ticket 05 added there.
+- `verify-life-counter-image-triples` `verify-life-counter.spec.ts`'s second test (pressing
+  +/- doesn't disturb an existing selection) now fails a different way: pasting one image via
+  drag-and-drop yields **3** `.tl-shape[data-shape-type="image"]` elements, not 1.
+  - Surfaced 2026-08-11 fixing `seat-joined-400` (the spec's hand-built envelope fixture was
+    missing `origin`/`significance`, added by the v2 envelope bump `bd5349b` — every other
+    fixture in the repo already had them). Once the fixture was fixed and the POST returned
+    201 again, this test ran far enough to hit the image-paste assertion and failed there.
+  - Confirmed pre-existing and unmasked, not introduced: with the fixture un-fixed (400
+    everywhere), both tests failed at the POST and never reached this assertion.
+  - Not investigated — could be the drag/drop simulation firing multiple times, or a real
+    duplication bug in image-shape creation. `apps/tabletop`.
 
 - `verify-cant-see-browser-otel` Playwright specs can't currently observe anything the browser exports through OTel's `BatchSpanProcessor`
   - Surfaced 2026-08-10 verifying tabletop-physics ticket 21's `usePhysicsAnnouncements.ts` live in

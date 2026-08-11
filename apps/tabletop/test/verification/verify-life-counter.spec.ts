@@ -19,6 +19,8 @@ function seatJoined(tableId: string, initiator: { seatId: string; playerName: st
     occurredAt: new Date().toISOString(),
     initiator,
     occurredIn: "shuffler",
+    origin: "shuffler.shuffleUp",
+    significance: "administrative",
     visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
