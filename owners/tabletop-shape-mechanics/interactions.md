@@ -555,6 +555,33 @@
     obligation** — it is not something this owner's hooks can or should absorb, since the noise
     only exists at the store layer, not the hook layer.
 
+21. **Furniture must always be beneath everything — now structurally enforced via a separate
+    index band, not just an accident of draw order or a per-move patch.** (2026-08-10.) Cards and
+    furniture used to share one monotonically-increasing per-room `nextIndex(tableName)` counter
+    (the `getIndexAbove`/`ZERO_INDEX_KEY` chain in `tableFurniture.ts`), so a furniture mint that
+    happened after a card already existed — an ordinary late seat join — could land a higher
+    `IndexKey` than that card, and watch point 8's greatest-index-wins tie-break would then paint
+    the late playmat *over* the earlier card. Fixed with a second per-room counter,
+    `lowestFurnitureIndexByRoom`, feeding `nextFurnitureIndex(tableName)`, which calls
+    `getIndexBelow(...)` (from `@tldraw/utils`) chained off `null` instead of `ZERO_INDEX_KEY`.
+    Because tldraw's fractional indexing is lexicographic, every key that chain produces sorts
+    strictly below `ZERO_INDEX_KEY` ("a0") and everything `nextIndex`'s `getIndexAbove` chain ever
+    builds from it — furniture is guaranteed beneath every card **by construction**, regardless of
+    mint order across seats, not reasserted on every move. `nextIndex` is now used **only** by the
+    two card-minting seams (`cardArrival.ts`, `seatJoined.ts`'s commander/ghost mints — both
+    already only called it for `mtg-card` shapes); every furniture-minting call inside
+    `ensurePlayerArea`/`ensureStackDrawn` calls `nextFurnitureIndex` instead. **This is the first
+    time this KB has reasoned about two disjoint index bands rather than one shared sequence** —
+    watch point 8's tie-break and watch point 17's paint-order decoy both assumed a single
+    `nextIndex` counter; that assumption still holds *within* each band, it just no longer spans
+    both. **If a future furniture-minting call site is ever added outside
+    `ensurePlayerArea`/`ensureStackDrawn`, it must call `nextFurnitureIndex`, not `nextIndex`, or
+    this invariant silently breaks for that shape** — nothing at runtime ties a shape's `type` to
+    which band its `index` came from; the guarantee lives entirely in every call site's discipline.
+    Regression test: `apps/tabletop/test/furnitureZOrder.test.ts` — seats an early player, plays a
+    card for them, seats a late player, and asserts every `mtg-zone` shape's index sorts below the
+    card's.
+
 ## Not Related To
 
 ### Card face/image rendering

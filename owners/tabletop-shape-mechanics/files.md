@@ -164,7 +164,17 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   "mtg-zone": {...} } })`.
   The server-side twin of `TablePage.tsx`'s client registration; same "must spread the defaults
   explicitly" gotcha applies here, on the schema-validation side (see `architecture.md`).
-- `apps/tabletop/src/server/tableFurniture.ts` — **ticket 13**: `zoneShape()` now builds real
+- `apps/tabletop/src/server/tableFurniture.ts` — **two per-room `IndexKey` counters since
+  2026-08-10 (watch point 21)**: `nextIndex(tableName)` (the original `getIndexAbove`/
+  `ZERO_INDEX_KEY` chain) mints **only cards** now — `cardArrival.ts` and `seatJoined.ts`'s
+  commander/ghost mints, both already card-only callers, needed no change — while a new
+  `nextFurnitureIndex(tableName)`, chained via `getIndexBelow(...)` off `null`, mints every
+  furniture shape inside `ensurePlayerArea`/`ensureStackDrawn`. The two bands are disjoint by
+  construction (fractional indexing is lexicographic; a `getIndexBelow(null)` chain always sorts
+  below `ZERO_INDEX_KEY` and anything built above it), which is what makes "furniture always
+  renders behind every card" structurally true instead of an artifact of mint order. Any future
+  furniture-minting call site must use `nextFurnitureIndex`, not `nextIndex`.
+  **ticket 13**: `zoneShape()` now builds real
   `mtg-zone` shape records (`type: "mtg-zone"`, `props: { w, h, zone, seatId, label }`, always
   `isLocked: true`) instead of stock `geo`/`image` shapes tagged with `meta.zone`; the old
   `RegionStyle`/`DEFAULT_REGION_STYLE`/`PLAYMAT_REGION_STYLE` styling machinery was deleted
@@ -209,6 +219,10 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 
 ## Tests
 
+- `apps/tabletop/test/furnitureZOrder.test.ts` — **new, 2026-08-10 (watch point 21)**: posts a
+  `seat.joined` + `card.played` for an early seat, then a second `seat.joined` for a late seat, and
+  asserts the late seat's playmat (and every other `mtg-zone` shape) sorts below the card's
+  `IndexKey` — the regression test for furniture ever outranking a card in z-order.
 - `apps/tabletop/test/verification/helpers.ts` — **new, `tabletop-verify-helpers`
   (2026-08-10, `c025293`)**: shared Playwright helpers for `test/verification/*.spec.ts`,
   extracted out of five specs that had each drifted their own near-identical copies.

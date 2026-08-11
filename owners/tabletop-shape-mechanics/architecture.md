@@ -542,6 +542,53 @@ places: the `useSync` `shapeUtils` const, `<Tldraw shapeUtils>`, and `rooms.ts`'
 - **`.nth()` on shape testids is paint order, and paint order changes when a shape reparents** —
   drag from known creation points instead of trusting locator index stability across a reparent.
 
+## Furniture gets its own index band, below every card, by construction (2026-08-10)
+
+`tableFurniture.ts` used to mint every shape — cards and furniture alike — through one per-room
+counter, `nextIndex(tableName)`, an `IndexKey` chain built with `getIndexAbove(...)` off
+`ZERO_INDEX_KEY`. Watch point 8 already established that overlapping shapes resolve their z-order
+by comparing `IndexKey`s as plain strings, greatest wins. That tie-break is exactly what made a
+late furniture mint dangerous: a seat joining after a card was already in play could mint a
+playmat whose `IndexKey` sorted *above* that card's, so the card painted underneath its own
+opponent's playmat — a bug, not a feature, discovered via a dragged card visually vanishing.
+
+The fix adds a second per-room counter, `lowestFurnitureIndexByRoom`, and a
+`nextFurnitureIndex(tableName)` function that calls `getIndexBelow(...)` (also from
+`@tldraw/utils`) chained off `null` instead of `ZERO_INDEX_KEY`:
+
+```
+const lowestFurnitureIndexByRoom = new Map<string, IndexKey>();
+function nextFurnitureIndex(tableName: string): IndexKey {
+  const next = getIndexBelow(lowestFurnitureIndexByRoom.get(tableName) ?? null);
+  lowestFurnitureIndexByRoom.set(tableName, next);
+  return next;
+}
+```
+
+**Why this is a structural guarantee, not a reassertion per move**: tldraw's fractional indexing
+is lexicographic — `getIndexBelow(null)` and every key chained beneath it sort strictly below
+`ZERO_INDEX_KEY` ("a0"), and every key `nextIndex`'s `getIndexAbove` chain ever produces starts at
+or above `ZERO_INDEX_KEY`. The two sequences occupy disjoint, non-overlapping ranges of the same
+ordering space, so no comparison between a furniture `index` and a card `index` can ever come out
+the wrong way, regardless of which was minted first, second, or a hundredth. This is the first
+time this KB's z-order reasoning has needed two bands instead of one shared sequence — watch
+points 8 (topmost-zone tie-break) and 17 (ghost-under-real-card paint order) both still reason
+correctly within a single band; they just never had to consider a second one before.
+
+Every furniture-minting call site inside `ensurePlayerArea` and `ensureStackDrawn` — the playmat
+outline, the playmat image, the library zone and its image, the command zone, the graveyard, the
+exile zone, the seat name label, and the Stack — was switched from `nextIndex` to
+`nextFurnitureIndex`. `nextIndex` itself needed no change and is now exclusively a card-minting
+counter: `cardArrival.ts`'s ordinary arrivals and `seatJoined.ts`'s commander/ghost mints
+(table-layout ticket 18) already only ever called it for `mtg-card` shapes.
+
+**Nothing enforces the discipline at runtime.** There's no assertion tying a shape's `type` to
+which counter minted its `index` — the invariant holds only because every current call site
+respects the convention. A future furniture-minting call site added outside `ensurePlayerArea`/
+`ensureStackDrawn` that calls `nextIndex` by habit would silently reopen this bug for that one
+shape, with no compiler or test to catch it except a broad regression test noticing the symptom.
+See `interactions.md` watch point 21.
+
 ## Ticket 19: notes ride along like counters — a stock ShapeUtil gains this owner's cleanup hook via subclass (landed 2026-08-10)
 
 `.scratch/tabletop-physics/issues/19-notes.md`. Generalizes ticket 18's counter-hosting into a
