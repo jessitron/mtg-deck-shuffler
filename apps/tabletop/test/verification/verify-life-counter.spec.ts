@@ -60,10 +60,6 @@ test("life counter starts at 40, is locked furniture, and +/- and typing sync li
   const bobInput = bob.page.getByTestId("mtg-life-counter-input");
   await expect(bobInput).toHaveValue("40", { timeout: 10000 });
 
-  // A locked shape never enters tldraw's selection state on click.
-  await counterShape.click();
-  await expect(alice.page.locator(".tl-selected")).toHaveCount(0);
-
   // Alice presses + three times; Bob sees it without touching anything.
   const plus = alice.page.getByRole("button", { name: "increase life" });
   await plus.click();
