@@ -2279,3 +2279,33 @@ existing in a shared package for exactly the reason a stylesheet convention can'
 alongside the counter disc's `outline: none` exemption, so a future reader sees both shapes
 of the same underlying fact ("the global rule is DOM-only") rather than only the exemption
 and concluding canvas controls can never have a visible focus ring at all.
+
+## 2026-08-11 — playmat images moved into their own directory, and `PLAYMATS` stopped being a literal
+
+Pure asset relocation, zero visual change: the playmat art moved from
+`apps/shuffler/public/images/` to `apps/shuffler/public/images/playmats/`. Every literal path
+string that pointed at one of these files picked up the new segment — `playmat.css`'s bare
+`.playmat` rule, `site.css`'s `.hero`/`.step-1`/`.step-2`/`.step-3` backgrounds, and the three
+hardcoded gallery swatch buttons in `design.ejs` — plus `table-look.ts`'s
+`DEFAULT_PLAYMAT_PATH`. No color, token, layout, or bevel changed; this is the kind of
+mechanical follow-through the "default mat art is down to TWO hand-written sites" watch point
+in [interactions.md](interactions.md) already named.
+
+**What's actually new for this KB: `PLAYMATS` is no longer a hand-curated array.** The array
+that grew from 5 to 11 entries by hand (2026-08-09, see above) is now built by
+`loadPlaymats()` scanning `public/images/playmats/` at startup — slug and display name
+derived from the filename, sorted alphabetically. Dropping a new image file into that
+directory makes it selectable with no code change; `DEFAULT_PLAYMAT_PATH` stays a literal
+(now pointing into the new directory), and a startup check throws if it's ever missing from
+the scanned set, so a broken default fails loudly instead of silently serving no playmat.
+`SLEEVE_QUICK_PICKS` was deliberately **not** converted — there's no directory of sleeve art
+to scan, since image-based sleeves are still a later phase (issue 09's original framing).
+
+**Left as a gap, not a regression from this change:** `/design`'s `#table-look` specimen
+still hardcodes 3 of the (now 12) real playmats as static swatch buttons — it was already a
+hand-copy of `table-look-panel.ejs`'s markup before this change (see
+[architecture.md](architecture.md) → "§ `#table-look`"), and it stayed a hand-copy after. The
+gallery's static-specimen convention means it was never going to enumerate the live list
+automatically; a future pass that wants the gallery to reflect the real (now
+filesystem-derived) count would need to either template the specimen from `PLAYMATS` or
+accept that it shows a representative subset, not the whole array. Not decided here.

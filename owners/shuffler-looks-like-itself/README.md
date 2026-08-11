@@ -480,9 +480,18 @@ verdict (`683ca1c`) ratified five. **The count is deliberately open-ended, not s
 five (2026-08-09):** it grew to 11 the same week when a player found the original five too
 high-contrast against cards/text, adding six lower-contrast art crops to `PLAYMATS` in
 `src/table-look.ts` — no CSS or markup change was needed, since `table-look-panel.ejs`
-iterates the array generically and `.table-look-mats` already wraps. See
-[history.md](history.md) for the follow-up and a portrait-crop aspect-ratio note worth
-reading before adding more. **The gallery gap is closed (2026-08-10, `design-sleeve-specimen`,
+iterates the array generically and `.table-look-mats` already wraps. **`PLAYMATS` stopped
+being a hand-curated literal array entirely (2026-08-11).** The images moved to their own
+directory, `apps/shuffler/public/images/playmats/`, and `table-look.ts` now builds `PLAYMATS`
+by scanning that directory at startup (`loadPlaymats()`) instead of listing paths by hand —
+slug and display name are derived from the filename. Dropping a new image into that directory
+makes it selectable with no code change; the "count is deliberately open-ended" framing above
+is now literally true, enforced by the filesystem rather than by convention. `DEFAULT_PLAYMAT_PATH`
+is still a literal (now `/images/playmats/aeoe-43-cascading-cataracts.png`), and a startup check
+throws if it isn't among the scanned files — so a renamed/missing default fails loudly, not
+silently. `SLEEVE_QUICK_PICKS` stayed a curated array; there's no directory of sleeve art to
+scan (image-based sleeves are still a later phase). See [history.md](history.md) for the follow-up
+and a portrait-crop aspect-ratio note worth reading before adding more. **The gallery gap is closed (2026-08-10, `design-sleeve-specimen`,
 `9e23201`):** `/design` § `#sleeved-card` ("Tabletop sleeved card", badge `candidate`) mocks
 the face-up `sleeve && !faceDown` branch of `MtgCardShapeUtil.tsx` — the card's image
 centered in a sleeve-colored square frame — via `.card-mock-sleeved-face` in
@@ -545,7 +554,7 @@ own text was leading readers to conclude the game screen had no playmat — if y
 name anywhere, it's stale. Three things follow:
 
 - **The shared appearance lives in the bare `.playmat` rule in `playmat.css`** — art
-  (`/images/aeoe-43-cascading-cataracts.png`), `background-size: cover`,
+  (`/images/playmats/aeoe-43-cascading-cataracts.png`), `background-size: cover`,
   `background-position: center`, `border: 10px solid black`. The reserved empty slot the
   rename left is now filled. New shared playmat looks go *there*, never in a page sheet.
 - **Only genuinely per-page things stay under the modifier, and that's down to layout and
