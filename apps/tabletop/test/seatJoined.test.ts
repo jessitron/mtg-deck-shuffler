@@ -15,16 +15,6 @@ import {
   commanderDamageCounterPosition,
 } from "../src/server/cardLayout";
 
-/**
- * JES-140: POST /api/tables/:tableName/events (seat.joined) — the player area
- * (playmat, library, graveyard, exile, name label) is drawn at Shuffle Up,
- * before any card arrives. Seats take compass slots (S, N, E, W by join
- * order) around a fixed centered Stack square (ticket 14, the square).
- *
- * Since tabletop-cards-come-and-go ticket 05, the body posted is a real
- * envelope (contracts/envelope.v2.json) carrying a seat.joined payload
- * (contracts/payloads/seat.joined.v1.json), validated for real via ajv.
- */
 let server: Server;
 let port: number;
 
@@ -190,10 +180,6 @@ describe("seat joined", () => {
       }
     }
 
-    // Every zone actually drawn at the full table keeps a GAP-wide (20-unit)
-    // empty band from every other — zone detection is first-match by z-order,
-    // not closest-match, so disjointness is the guarantee (cardLayout.test.ts
-    // asserts the same over the pure geometry).
     const zones = shapesOf(table)
       .filter((s) => s.type === "mtg-zone")
       .map((s) => ({ label: `${s.props.zone}@${s.x},${s.y}`, x: s.x, y: s.y, w: s.props.w, h: s.props.h }));
@@ -207,8 +193,6 @@ describe("seat joined", () => {
       }
     }
 
-    // The table has exactly four compass slots: a fifth seat is refused
-    // loudly rather than drawn on top of an existing area.
     const fifth = await post(table, seatJoined(table, { initiator: { seatId: "seat-sq-E", playerName: "Evan" } }));
     expect(fifth.status).toBe(409);
     expect(shapesOf(table).filter((s) => s.type === "mtg-zone" && s.props?.zone === "playmat")).toHaveLength(4);
@@ -242,9 +226,6 @@ describe("seat joined", () => {
     const shapes = shapesOf("seat-sleeve");
     const libraryZone = shapes.find((s) => s.type === "mtg-zone" && s.props?.zone === "library");
     expect(libraryZone.props.sleeveColor).toBe("#8b2f5c");
-    // sleeveColor wins over the card-back image the fixture also sent: no
-    // library image shape is drawn (the playmat's own picture is a prop on its
-    // mtg-zone shape now, not a stock image shape, so it's irrelevant here).
     const library = libraryBounds(0);
     expect(shapes.some((s) => s.type === "image" && s.x > library.x && s.x < library.x + library.w)).toBe(false);
   });
@@ -296,9 +277,6 @@ describe("seat joined", () => {
   });
 });
 
-// Ticket 18: commanders ride seat.joined and land in the Command Zone as
-// ordinary, draggable mtg-card shapes, each backed by a locked, faded ghost
-// that marks its home and stays put when the real card moves out.
 describe("seat joined — commanders", () => {
   function commanderEntry(cardName: string, frontImageUrl: string) {
     return { card: { scryfallId: randomUUID(), instanceId: randomUUID() }, cardName, frontImageUrl, backImageUrl: null };
@@ -345,8 +323,6 @@ describe("seat joined — commanders", () => {
     expect(ghost.props.owner).toBe(event.initiator.seatId);
     expect(ghost.props.isCommander).toBe(true);
     expect(ghost.props.frontImageUrl).toBe("https://example.com/atraxa.jpg");
-    // Distinct identity so a later card.played for the real instance is never
-    // deduped against the ghost (instanceAlreadyOnTable matches on props.instanceId).
     expect(ghost.props.instanceId).not.toBe(instanceId);
 
     // The real card paints above its ghost.
@@ -395,11 +371,6 @@ describe("seat joined — commanders", () => {
   });
 });
 
-/**
- * Ticket 21: a commander-damage counter per opposing commander, on each
- * seat's own name row, labeled with the opponent's name + sleeve color.
- * Reuses `mtg-life-counter` (ticket 20) with `label`/`sleeveColor` set.
- */
 describe("seat joined — commander damage counters", () => {
   function commanderEntry(cardName: string, frontImageUrl: string) {
     return { card: { scryfallId: randomUUID(), instanceId: randomUUID() }, cardName, frontImageUrl, backImageUrl: null };
@@ -472,9 +443,6 @@ describe("seat joined — commander damage counters", () => {
   it("two seats joining concurrently, each with a commander, don't double-mint each other's counter", async () => {
     const kenrith = commanderEntry("Kenrith", "https://example.com/kenrith.jpg");
     const kaalia = commanderEntry("Kaalia", "https://example.com/kaalia.jpg");
-    // Both requests start before either resolves — the race the fix guards against:
-    // ensurePlayerArea seats each synchronously before its own first await, so each
-    // request's damage-counter loop can see the other seat already present.
     await Promise.all([
       post("dmg-concurrent", seatJoined("dmg-concurrent", { initiator: { seatId: "dmg-c-a", playerName: "Alice" } }, { commanders: [kenrith] })),
       post("dmg-concurrent", seatJoined("dmg-concurrent", { initiator: { seatId: "dmg-c-b", playerName: "Bob" } }, { commanders: [kaalia] })),

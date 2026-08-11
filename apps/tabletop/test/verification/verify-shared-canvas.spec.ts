@@ -1,8 +1,5 @@
 import { test, expect, Browser } from "@playwright/test";
 
-/**
- * A4: two browser contexts share a table — draw in one, see it in the other.
- */
 async function openTable(browser: Browser, tableSlug: string) {
   const context = await browser.newContext();
   const page = await context.newPage();

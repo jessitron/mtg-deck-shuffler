@@ -4,20 +4,6 @@ import { PrepId } from "../port-persist-prep/types.js";
 import { GameId, GameStatus } from "../domain-types.js";
 import { PersistedGameCard } from "./persisted-types.js";
 
-// Bumped 7 -> 8 when CardDefinition dropped manaCost/cmc/oracleText/backFace and
-// renamed types -> cardTypes (commit f76b49c). The game-state envelope itself is
-// unchanged, but the card data its scryfallIds resolve to is now incompatible, so
-// games saved before this are not loadable. fromPersistedGameState rejects them.
-// Bumped 8 -> 9 when the envelope gained mulliganStage/mulliganCount (the
-// opening-hand acceptance stage).
-// Bumped 9 -> 10 when those two fields were removed again: the mulligan stage
-// and count are now DERIVED from the event log ("deal opening hand"/"mulligan"
-// marker events) instead of stored, so undo restores them for free. Old games
-// lack the markers, so they'd derive the wrong stage — rejected, not migrated.
-// Bumped 10 -> 11 when the deal/mulligan events became atomic and carry their
-// `moves` (so a mulligan is one undoable event). v10 events lack `moves`, so an
-// old mulligan couldn't be undone — rejected, not migrated.
-// When/how to bump: apps/shuffler/notes/DESIGN-persistence-versioning.md
 export const PERSISTED_GAME_STATE_VERSION: 11 = 11;
 
 /** Thrown when a persisted game was saved in a format this build can't load. */
@@ -42,19 +28,12 @@ export interface PersistedGameState {
   totalCards: number;
   gameCards: PersistedGameCard[]; // Changed from GameCard[] to PersistedGameCard[]
   events: GameEvent[];
-  // Table info (JES-127): present only when this game joined a table on the
-  // Tabletop. Optional with graceful fallbacks (solo play) — NO version bump;
-  // see the "optional fields" exception in apps/shuffler/notes/DESIGN-persistence-versioning.md.
   tableName?: string;
   playerName?: string;
   /** The seat's short GUID — player names are not unique; this is the seat's identity. */
   seatId?: string;
-  // The Spine's own table/seat ids (src/port-spine/), present only when the
-  // Spine join succeeded (best-effort). Same optional/no-version-bump exception.
   spineTableId?: string;
   spineSeatNumber?: number;
-  // Table look: the /prepare picker's sleeve/playmat choice, snapshotted at
-  // /start-game. Optional, no version bump — same exception as tableName above.
   sleeveColor?: string;
   playmatImagePath?: string;
 }

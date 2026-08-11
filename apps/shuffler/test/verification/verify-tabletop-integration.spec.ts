@@ -1,18 +1,3 @@
-/**
- * End-to-End Verification: the two-app flow (JES-127, B3/B4)
- *
- * Shuffler + Tabletop, both real. A game joins a table on the prep screen;
- * Play sends the card to the tabletop FIRST (send-then-commit) and the card
- * appears on the table's canvas; Discard does the same with zoneHint
- * "graveyard".
- *
- * This spec starts its own tabletop server at TABLETOP_URL (verify.sh gives
- * each run its own random port; 5180 otherwise) from apps/tabletop/dist. If the
- * tabletop isn't built yet, the spec is skipped with a note — build it with
- * `cd apps/tabletop && npm run build`.
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect, Page } from '@playwright/test';
 import { spawn, ChildProcess } from 'node:child_process';
@@ -21,9 +6,6 @@ import * as fs from 'node:fs';
 import { seedPrep, startGame } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
-// verify.sh gives each run its own tabletop port and exports TABLETOP_URL to
-// both the Shuffler server and this process, so we spawn the tabletop exactly
-// where the Shuffler will look for it.
 const TABLETOP_URL = process.env.TABLETOP_URL ?? 'http://localhost:5180';
 const TABLETOP_PORT = new URL(TABLETOP_URL).port || '5180';
 const TABLETOP_DIR = path.resolve(process.cwd(), '..', 'tabletop');
@@ -69,11 +51,6 @@ async function startGameAtTable(page: Page, tableName: string): Promise<void> {
   await page.goto(`${BASE_URL}/game/${gameId}`);
 }
 
-/**
- * Click an action button in the first hand card's modal until the hand count
- * drops to `expectedHandCount`. (Retry pattern: a Playwright-speed click can
- * straddle htmx's modal swap/settle and be swallowed — see verify-discard.)
- */
 async function actOnFirstHandCard(page: Page, buttonText: string, expectedHandCount: string): Promise<void> {
   const handCount = page.locator('.hand-count');
   await expect(async () => {
@@ -105,8 +82,6 @@ test.describe('Two-app flow: Shuffler plays to the Tabletop', () => {
     await spectator.goto(`${TABLETOP_URL}/t/${tableName}`);
     await expect(spectator.locator('.tl-canvas')).toBeVisible({ timeout: 15000 });
 
-    // The playmat picked on /prepare (ticket 16) dresses this seat's player
-    // area — the mat image asset carries the picked URL, not the default.
     await expect(
       spectator.locator('[style*="aeoe-6-seam-rip"], img[src*="aeoe-6-seam-rip"]').first()
     ).toBeVisible({ timeout: 15000 });
@@ -115,9 +90,6 @@ test.describe('Two-app flow: Shuffler plays to the Tabletop', () => {
     await actOnFirstHandCard(page, 'Play', '6');
     await expect(page.locator('.table-cards-button')).toContainText('1 Cards on table');
 
-    // The card arrives on the canvas over the websocket sync. Match on the shape
-    // id, not just the type: the seat's furniture (playmat, library) are image
-    // shapes too, and only cards get the `shape:card-<instanceId>` id.
     await expect(cardShapes(spectator)).toHaveCount(1, { timeout: 15000 });
 
     // Discard the next card: zoneHint graveyard, also lands on the canvas

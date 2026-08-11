@@ -1,13 +1,3 @@
-/**
- * Fetches the set-code → full-set-name map from Scryfall's /sets endpoint.
- *
- * MTGJSON deck data only carries set CODES (e.g. "SLD", "PLST"), but we want to
- * display the full set TEXT (e.g. "Secret Lair Drop", "The List") on deck tiles,
- * matching what the Archidekt adapter already stores (edition names). Scryfall is
- * the same source we use for images, and /sets returns every set's code + name.
- *
- * Keys are upper-cased so they line up with MTGJSON's upper-case setCodes.
- */
 
 import { fetchScryfall } from "../../scryfall-http.js";
 

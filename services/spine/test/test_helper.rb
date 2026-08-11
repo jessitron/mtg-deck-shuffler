@@ -15,8 +15,6 @@ module ClearsTablesBetweenTests
   end
 end
 
-# A minimal envelope.v3-valid table.created event, for tests that need any
-# valid envelope rather than a specific one.
 module ValidEnvelope
   def valid_envelope(overrides = {})
     {

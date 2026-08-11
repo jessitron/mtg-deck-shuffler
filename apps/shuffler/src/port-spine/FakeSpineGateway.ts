@@ -1,13 +1,6 @@
 import { EventEnvelope } from "../port-tabletop/types.js";
 import { SpinePort } from "./types.js";
 
-/**
- * Fake (not mock) Spine for tests: mints a stable tableId per name (repeated
- * joins for the same name return the same id, like the real
- * lookup-or-create), assigns the next open seat number (1-4, matching the
- * real Spine's auto-assignment), records every sent event, and can be told
- * to fail.
- */
 export class FakeSpineGateway implements SpinePort {
   public readonly sentEvents: { tableId: string; event: EventEnvelope<unknown> }[] = [];
   public readonly takenSeats: { tableId: string; playerName: string; seatNumber: number }[] = [];

@@ -1,18 +1,3 @@
-/**
- * The Shuffler has ONE page shell: formatHtmlHead in
- * src/view/common/html-layout.ts. The EJS pages reach it through
- * views/partials/head.ejs (via app.locals); /game and the error pages call it
- * through formatPageWrapper. Everything here guards the shell's skeleton:
- *
- * It must link the fleet's shared palette (@fleet/design-tokens), because the
- * identity tokens no longer live in this ship's own :root — they MOVED, and are
- * deliberately not mirrored. If the link vanished, CSS would just drop the
- * unresolved var() silently.
- *
- * head.ejs is covered in the browser by verify-fleet-tokens.spec.ts. This is
- * the cheap gate for the /game path, which would otherwise need a whole game
- * set up to reach a page that uses it.
- */
 
 import { formatHtmlHead } from "../src/view/common/html-layout.js";
 

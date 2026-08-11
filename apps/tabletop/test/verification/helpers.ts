@@ -1,13 +1,6 @@
 import { type Page, type Locator, expect } from "@playwright/test";
 import { randomUUID } from "node:crypto";
 
-/**
- * Shared helpers for the Tabletop's Playwright verification specs (test/verification/*.spec.ts).
- * Extracted from verify-counter.spec.ts, verify-zone-entry.spec.ts,
- * verify-drag-identity.spec.ts, verify-tap-animation.spec.ts, and
- * verify-card-rotate.spec.ts, which had all drifted their own near-identical
- * copies of these (tabletop-verify-helpers).
- */
 
 export function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
@@ -45,23 +38,11 @@ export async function openTable(page: Page, tableSlug: string): Promise<void> {
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 }
 
-/**
- * tldraw's own zoom-to-fit shortcut animates the camera transition; the
- * settle wait is empirical headroom (no exact documented duration), needed
- * before measuring any bounding box.
- */
 export async function zoomToFit(page: Page): Promise<void> {
   await page.keyboard.press("Shift+1");
   await page.waitForTimeout(300);
 }
 
-/**
- * POST a card.played event and wait for the resulting card shape to attach.
- * `payloadOverrides.zoneHint` matters beyond cosmetics: "stack" stacks
- * multiple cards at the same position, so specs that place more than one
- * card and need them at distinct spots (e.g. verify-drag-identity) must
- * override it to "battlefield".
- */
 export async function placeCard(
   page: Page,
   baseURL: string | undefined,
@@ -87,8 +68,6 @@ export async function center(locator: Locator): Promise<{ x: number; y: number }
   return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
 }
 
-/** Canonical mouse-drag primitive: move to `from`, press, move to `to` in 10
- * steps (crossing tldraw's drag-distance threshold), release. */
 export async function dragPointTo(page: Page, from: { x: number; y: number }, to: { x: number; y: number }) {
   await page.mouse.move(from.x, from.y);
   await page.mouse.down();

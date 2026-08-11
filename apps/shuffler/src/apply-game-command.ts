@@ -17,13 +17,6 @@ export type CommandOutcome =
   | { kind: "send-failed"; errorHtml: string }
   | { kind: "applied"; game: GameState; whatHappened?: WhatHappened };
 
-/**
- * Thrown by a `beforeMutate` hook to abort a command before it mutates or
- * persists anything. Carries pre-rendered HTML for the caller's error
- * modal. Any other error `beforeMutate` throws propagates uncaught, same
- * as `mutate`'s contract.
- * Full protocol, all stations: notes/DESIGN-send-then-commit.md.
- */
 export class TableSendFailedError extends Error {
   constructor(public readonly errorHtml: string) {
     super("Tabletop did not accept the card; blocking the command");
@@ -31,22 +24,6 @@ export class TableSendFailedError extends Error {
   }
 }
 
-/**
- * The protocol shared by every game-mutating route: retrieve the persisted
- * game, reconstruct it, check it's still Active and that the caller's
- * expected version is current, run the command, then persist. Express-free
- * on purpose — the route decides how each outcome renders.
- *
- * `beforeMutate`, if given, runs after those checks and before `mutate`. It
- * is for required side effects a command can't safely proceed without (e.g.
- * sending a card to the Tabletop first) — not a permission check. Throwing
- * `TableSendFailedError` aborts the command (no mutate, no persist) and
- * yields a `"send-failed"` outcome; any other error propagates uncaught.
- *
- * Errors thrown by `mutate` propagate uncaught and are not persisted; each
- * route's own catch block still owns command-specific error handling (e.g.
- * draw's empty-library case).
- */
 export async function applyGameCommand(
   deps: ApplyGameCommandDeps,
   gameId: GameId,

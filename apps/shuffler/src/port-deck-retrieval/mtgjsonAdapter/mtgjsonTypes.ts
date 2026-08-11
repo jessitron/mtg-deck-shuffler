@@ -1,5 +1,3 @@
-// MTGJSON preconstructed deck format types
-// Based on https://mtgjson.com/data-models/deck/
 
 export interface MtgjsonCard {
   name: string;

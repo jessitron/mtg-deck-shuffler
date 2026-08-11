@@ -6,24 +6,9 @@ interface HtmlHeadOptions {
   stylesheets?: string[];
   // Google font families fetched in addition to Orbitron (e.g. ["Ovo"]).
   additionalFonts?: string[];
-  // Trusted HTML only — appended verbatim at the end of the head.
-  // Never interpolate user-supplied data into this.
   scriptsHtml?: string;
 }
 
-// The browser-side Honeycomb tracing guard + init, as a literal script
-// source string rather than a plain TS function: it has to ship as-is inside
-// the page's inline <script> tag (browser JS, no build step reaches it), and
-// keeping it as one exported constant means the exact source the browser
-// runs is also what test/html-layout-tracing-guard.test.ts evals and
-// exercises — no separate reimplementation to drift out of sync.
-//
-// Guards on window.Hny && window.browserTabId (hny.js loaded, tab id minted)
-// same as before. Extends that guard to also skip — with a console.warn,
-// instead of silently calling initializeTracing with a useless key — when
-// apiKey is empty or the literal string "undefined" (what string
-// interpolation produces when neither HONEYCOMB_INGEST_API_KEY nor
-// HONEYCOMB_API_KEY is set server-side): browser-tracing-key-guard.
 const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKey) {
         if (!(window.Hny && window.browserTabId)) return;
         if (!apiKey || apiKey === "undefined") {
@@ -41,10 +26,6 @@ const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKe
         });
       }`;
 
-// The one page shell. Every page's <head> — EJS-rendered (via
-// views/partials/head.ejs, which reaches this through app.locals) and
-// TS-rendered (/game, error pages) — comes from here, so the skeleton
-// (tokens first, fonts, tab-id + tracing bootstrap) cannot diverge again.
 function formatHtmlHead(options: HtmlHeadOptions): string {
   const { title, stylesheets = [], additionalFonts = [], scriptsHtml = "" } = options;
 
@@ -65,8 +46,6 @@ ${stylesheetsHtml}
     <script src="/browser-tab-id.js"></script>
     <script src="/hny.js"></script>
     <script>
-      // Initialize Honeycomb tracing for the browser. browserTabId must exist
-      // before this runs: it's baked into the resource, immutable after init.
 ${HONEYCOMB_TRACING_INIT_SCRIPT}
       initHoneycombTracing("${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}");
     </script>
@@ -74,8 +53,6 @@ ${scriptsHtml}
   </head>`;
 }
 
-// The /game head's page-specific scripts. responseHandling references the
-// htmx global, so this block must stay after htmx.js loads.
 const GAME_HEAD_SCRIPTS_HTML = `    <script src="/htmx.js"></script>
     <script>
       // Configure HTMX to swap on 409 Conflict responses
@@ -83,10 +60,6 @@ const GAME_HEAD_SCRIPTS_HTML = `    <script src="/htmx.js"></script>
         {code: "204", swap: false},  // No Content
         {code: "2..", swap: true},   // All other 2xx
         {code: "409", swap: true},   // Conflict (stale state)
-        // Bad Gateway: tabletop rejected/unreachable. swap:true renders the
-        // error modal; error:true keeps event.detail.successful false so the
-        // table-play-button's conditional close-modal leaves the modal visible.
-        // Full protocol, all stations: notes/DESIGN-send-then-commit.md.
         {code: "502", swap: true, error: true},
       ];
     </script>
@@ -115,8 +88,6 @@ function formatPageWrapper(options: PageWrapperOptions): string {
 
   const headHtml = formatHtmlHead({
     title,
-    // playmat before game: the bare .playmat rule and the page modifiers are
-    // equal specificity, so the tie is resolved by load order — deliberate.
     stylesheets: ["/playmat.css", "/game.css", ...additionalStylesheets],
     additionalFonts: ["Ovo"],
     scriptsHtml: GAME_HEAD_SCRIPTS_HTML,

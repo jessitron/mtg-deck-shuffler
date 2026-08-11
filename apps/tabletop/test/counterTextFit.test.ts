@@ -1,10 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { fitCounterFont } from "../src/client/shapes/counterTextFit";
 
-// Jess (2026-08-08): "if I type something like 'lifelink' on the counter,
-// then I can't see the word... make the font shrink to fit." Deliberately
-// minimal: shrink until the estimated wrapped block fits the square content
-// box; the browser wraps, the round clip's corner-nibbling is accepted.
 
 const W = 44;
 const H = 44;

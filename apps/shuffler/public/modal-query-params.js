@@ -1,37 +1,7 @@
-/**
- * Query parameter support for auto-opening modals
- *
- * This module handles automatically opening modals based on URL query parameters
- * for both game pages (/game/:gameId) and prep pages (/prepare/:prepId).
- *
- * Supported query parameters:
- *
- * Game page:
- * - ?openCard=N - Opens card modal for card index N
- * - ?openLibrary=true - Opens library search modal
- * - ?openTable=true - Opens table contents modal
- * - ?openHistory=true - Opens action history modal
- * - ?openDebug=true - Opens debug state JSON modal
- * - Combinations: ?openLibrary=true&openCard=N, ?openTable=true&openCard=N
- *
- * Prep page:
- * - ?openCard=N - Opens card modal for card index N
- * - ?openLibrary=true - Opens library contents modal
- * - ?openLibrary=true&openCard=N - Opens library modal with card N overlaid
- */
 
-/**
- * Pure: decides which modal(s) should auto-open from the URL alone, as a list
- * of actions for autoOpenModalsFromQueryParams to execute. No DOM access, so
- * this is what test/modal-query-params.test.ts exercises directly across all
- * the parameter combinations — the DOM-touching executor below stays a thin,
- * untested-by-necessity wrapper.
- */
 function planAutoOpenActions(search, pathname) {
   const urlParams = new URLSearchParams(search);
 
-  // Game ids are either the old plain number or a new fun word-combo
-  // (e.g. "brave-falcon-42"); prep ids are still always numeric.
   const gameMatch = pathname.match(/\/game\/([^/?]+)/);
   const prepMatch = pathname.match(/\/prepare\/(\d+)/);
 

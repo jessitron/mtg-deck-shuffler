@@ -38,8 +38,6 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
     const archidektDeck = await this.gateway.fetchDeck(request.archidektDeckId);
     const deck = this.convertArchidektToDeck(archidektDeck, request.archidektDeckId);
     if (this.imagesPort) {
-      // Best-effort: if Scryfall is unreachable, ship the deck anyway and let
-      // image URLs fall back to construction at render time.
       try {
         await enrichDeckWithImages(deck, this.imagesPort);
       } catch (error) {
@@ -99,20 +97,12 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   }
 
   private convertArchidektToCard(archidektCard: ArchidektCard): CardDefinition | undefined {
-    /* A few cards, such as "Miku, the Renowned" have a display name that's different from the oracle name.
-     * The Oracle Card is the canonical card, like you can't have two of the same in a Commander deck,
-     * while certain fancy cards get a vanity name. On the printed card, the Oracle Name shows up as a subtitle */
     const cardName = archidektCard.card.displayName || archidektCard.card.oracleCard.name;
     const oracleCardName = archidektCard.card.oracleCard.name;
     const faces = archidektCard.card.oracleCard.faces || [];
-    // A card has multiple faces in the data (split/adventure/prepare/transform/...),
-    // but only genuinely double-sided layouts have a back image and get a flip button.
     const multiFace = faces.length === 2;
     const twoFaced = multiFace && isDoubleSidedLayout(archidektCard.card.oracleCard.layout);
 
-    // cardTypes is the union of every face's/part's types. For multi-face cards
-    // the per-face types live on faces[]; the top-level types are unreliable
-    // (sometimes only one part). Fall back to top-level for single-face cards.
     const cardTypes = multiFace
       ? [...new Set(faces.flatMap(face => face.types || []))]
       : archidektCard.card.oracleCard.types || [];

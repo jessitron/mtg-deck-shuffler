@@ -6,23 +6,13 @@ import { BasicTracerProvider } from "@opentelemetry/sdk-trace-base";
 import { AsyncLocalStorageContextManager } from "@opentelemetry/context-async-hooks";
 import { log } from "../src/server/log";
 
-// The contract we depend on: a log carries the trace context when there is an
-// active span, and still gets emitted when there isn't. The second half is the
-// whole reason this file exists on THIS ship — rooms.ts records room lifecycle
-// from a throttled timer callback with no ambient span, where addEvent throws.
 
 let exported: InMemoryLogRecordExporter;
 
 beforeEach(() => {
   exported = new InMemoryLogRecordExporter();
-  // Options object, not a positional exporter — the 0.221 line changed this;
-  // the Shuffler's copy of this test is on 0.219 and passes it positionally.
   logs.setGlobalLoggerProvider(new LoggerProvider({ processors: [new SimpleLogRecordProcessor({ exporter: exported })] }));
 
-  // Without a context manager, context.with() is a no-op and context.active()
-  // always returns ROOT_CONTEXT — so no log could ever pick up trace context,
-  // and these tests would pass or fail for reasons unrelated to log.ts. In the
-  // running app the NodeSDK registers this for us.
   context.setGlobalContextManager(new AsyncLocalStorageContextManager().enable());
 });
 

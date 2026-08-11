@@ -1,13 +1,3 @@
-/**
- * Our own wrapper around the standard OpenTelemetry web SDK — nothing
- * Honeycomb-specific in here. The page asks the server where to send spans
- * (GET /otel-config.json): in production that's an OpenTelemetry Collector
- * (with CORS for this origin); locally it may fall back to a direct endpoint.
- * No API key ever ships in the page except the documented local-only fallback.
- *
- * Surface: initTracing(), inSpan(), setGlobalAttrs(), currentTraceparent(),
- * logError().
- */
 import { trace, SpanStatusCode, Span, Attributes, context } from "@opentelemetry/api";
 import { WebTracerProvider, BatchSpanProcessor, SpanProcessor, ReadableSpan } from "@opentelemetry/sdk-trace-web";
 import { Span as SdkSpan } from "@opentelemetry/sdk-trace-base";
@@ -49,10 +39,6 @@ interface OtelBrowserConfig {
 
 let initialized = false;
 
-/**
- * Initialize browser tracing before mounting the app. Quietly does nothing if
- * the server offers no destination (tracing off is a valid local mode).
- */
 export async function initTracing(): Promise<void> {
   if (initialized) return;
   initialized = true;
@@ -98,13 +84,6 @@ export async function initTracing(): Promise<void> {
   }
 }
 
-/**
- * Record an error that happened outside any span.
- *
- * As everywhere in this fleet: if you're inside `inSpan`, put the information
- * on the span instead — `inSpan` already records exceptions for you. This is
- * for the browser's genuinely span-less moments.
- */
 export function logError(message: string, attributes: LogAttributes = {}, error?: unknown): void {
   const withException =
     error instanceof Error
@@ -119,12 +98,6 @@ export function logError(message: string, attributes: LogAttributes = {}, error?
   });
 }
 
-/**
- * Uncaught errors and unhandled rejections are the browser's version of the
- * server's timer callback: something went wrong with no span in scope, so
- * before this they went nowhere at all — the user saw a broken table and
- * Honeycomb showed a clean session.
- */
 function reportUncaughtErrors(): void {
   window.addEventListener("error", (event) => {
     logError("uncaught error", { "browser.url": window.location.pathname }, event.error ?? new Error(event.message));
@@ -152,11 +125,6 @@ export async function inSpan<T>(name: string, fn: (span: Span) => Promise<T> | T
   });
 }
 
-/**
- * W3C traceparent for the CURRENT active span, for propagation on a websocket
- * connection URL. Propagation belongs to the connection request only — nothing
- * durable carries trace context.
- */
 export function currentTraceparent(): string | undefined {
   const spanContext = trace.getActiveSpan()?.spanContext();
   if (!spanContext) return undefined;

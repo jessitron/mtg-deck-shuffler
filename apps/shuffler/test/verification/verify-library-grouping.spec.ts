@@ -1,17 +1,3 @@
-/**
- * End-to-End Verification: Library Modal Card Type Grouping
- *
- * This test verifies the "Group by Type" toggle in the library search modal:
- * - ?openLibrary=true shows ungrouped library
- * - ?openLibrary=true&groupBy=type shows cards grouped by type with headers
- * - Toggle button switches between grouped and ungrouped views
- * - Grouped card modal navigation stays within the type group
- * - Flipping a two-faced card preserves group-scoped navigation
- *
- * Uses the "From Cute to Brute" precon which has many two-faced cards.
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect, Page } from '@playwright/test';
 import { seedPrep, seedGame } from './seedGame.js';
@@ -81,8 +67,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
     const groupCount = groupCountMatch ? parseInt(groupCountMatch[1]) : 0;
     expect(groupCount).toBeGreaterThan(1);
 
-    // Click the first card name in the first group. Retried: the click is an
-    // htmx swap and can be swallowed if it straddles the settle.
     const firstCardInGroup = firstGroup.locator('.clickable-card-name').first();
     const cardModal = page.locator('.card-modal-overlay');
     await expect(async () => {
@@ -141,16 +125,11 @@ test.describe('Library Modal - Card Type Grouping', () => {
 
     expect(targetGroup).not.toBeNull();
 
-    // Find a two-faced card in this group (it'll have a flip button when opened)
-    // Try each card until we find one with a flip button
     const cardNames = targetGroup!.locator('.clickable-card-name');
     const cardCount = await cardNames.count();
     let foundFlipCard = false;
 
     for (let i = 0; i < cardCount; i++) {
-      // Opening a card is an htmx swap into #card-modal-container. A click at
-      // Playwright speed can land its mousedown on a node htmx then replaces, so
-      // no click event fires; retry until the modal actually opens.
       const cardModal = page.locator('.card-modal-overlay');
       await expect(async () => {
         await cardNames.nth(i).click();
@@ -169,9 +148,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
         const totalInGroup = positionMatch ? parseInt(positionMatch[2]) : 0;
         expect(totalInGroup).toBe(targetGroupSize);
 
-        // Flip the card and confirm the face actually changed — retried like
-        // the clicks above, since this one is also an htmx swap that can
-        // straddle the settle.
         await expect(async () => {
           await flipButton.click();
           await expect(cardModal).toHaveAttribute('data-current-face', 'back', { timeout: 3000 });
@@ -184,8 +160,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
         if (currentPosition < totalInGroup) {
           const nextButton = page.locator('.card-modal-nav-next');
           await expect(nextButton).toBeVisible();
-          // Same swap/settle straddle as opening the modal. Retry until the
-          // position indicator advances within the group.
           await expect(async () => {
             await nextButton.click();
             await expect(positionIndicator).toHaveText(
@@ -198,9 +172,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
         break;
       }
 
-      // Close the modal and try the next card. Retried for the same reason:
-      // a swallowed close leaves the modal up and the next iteration clicks
-      // into the wrong thing.
       const closeButton = page.locator('.card-modal-close');
       await expect(async () => {
         await closeButton.click();
@@ -246,9 +217,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
     let foundFlipCard = false;
 
     for (let i = 0; i < cardCount; i++) {
-      // Opening a card is an htmx swap into #card-modal-container. A click at
-      // Playwright speed can land its mousedown on a node htmx then replaces, so
-      // no click event fires; retry until the modal actually opens.
       const cardModal = page.locator('.card-modal-overlay');
       await expect(async () => {
         await cardNames.nth(i).click();
@@ -267,9 +235,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
         const totalInGroup = positionMatch ? parseInt(positionMatch[2]) : 0;
         expect(totalInGroup).toBe(targetGroupSize);
 
-        // Flip the card and confirm the face actually changed — retried like
-        // the clicks above, since this one is also an htmx swap that can
-        // straddle the settle.
         await expect(async () => {
           await flipButton.click();
           await expect(cardModal).toHaveAttribute('data-current-face', 'back', { timeout: 3000 });
@@ -282,8 +247,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
         if (currentPosition < totalInGroup) {
           const nextButton = page.locator('.card-modal-nav-next');
           await expect(nextButton).toBeVisible();
-          // Same swap/settle straddle as opening the modal. Retry until the
-          // position indicator advances within the group.
           await expect(async () => {
             await nextButton.click();
             await expect(positionIndicator).toHaveText(
@@ -296,9 +259,6 @@ test.describe('Library Modal - Card Type Grouping', () => {
         break;
       }
 
-      // Close the modal and try the next card. Retried for the same reason:
-      // a swallowed close leaves the modal up and the next iteration clicks
-      // into the wrong thing.
       const closeButton = page.locator('.card-modal-close');
       await expect(async () => {
         await closeButton.click();

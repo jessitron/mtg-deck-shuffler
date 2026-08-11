@@ -18,24 +18,6 @@ interface SeatJoinedCommander {
 /** A ghost's identity never collides with a real instanceId — instanceAlreadyOnTable (cardArrival.ts) matches exact strings. */
 const ghostInstanceId = (instanceId: string): string => `ghost:${instanceId}`;
 
-// ============================================================================
-// SCAFFOLDING — the seam the Spine absorbs (same posture as cardArrival.ts).
-//
-// Future: the Shuffler emits `seat.joined` to the Spine's event log; the
-// Tabletop subscribes to the table's public feed instead of receiving this
-// direct POST. Delete this endpoint when the feed exists. See
-// apps/tabletop/DESIGN.md for the full trigger/geometry spec.
-// ============================================================================
-//
-// tabletop-cards-come-and-go ticket 05: the body posted here is the real
-// envelope (contracts/envelope.v2.json) carrying a seat.joined payload
-// (contracts/payloads/seat.joined.v1.json), validated for real via ajv — see
-// contractValidation.ts. Who joined (seatId, playerName) lives on the
-// envelope's initiator; deckName is required, playmatImageUrl/
-// cardBackImageUrl/sleeveColor are optional (sleeveColor wins when both it
-// and cardBackImageUrl arrive). gameCardIndex may now arrive too
-// (let-gamecardindex-out, 2026-08-10 — same guard removal as card.played);
-// nothing here needs to consume it.
 
 interface SeatJoinedPayload {
   deckName: string;
@@ -46,11 +28,6 @@ interface SeatJoinedPayload {
   gameCardIndex?: number;
 }
 
-/**
- * POST /api/tables/:tableName/events — a seat joins the table (Shuffle Up).
- * 201: player area drawn. 200 {deduped:true}: already seated — a second
- * seat.joined for a seat is a physical no-op (DESIGN.md).
- */
 export async function handleSeatJoined(req: Request, res: Response): Promise<void> {
   const tableName = slugifyTableName(req.params.tableName ?? "");
   if (!tableName) {
@@ -97,8 +74,6 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
     return;
   }
 
-  // Every compass slot is taken: refuse loudly. A fifth area would land on
-  // an existing one, silently breaking zone-AABB disjointness (cardLayout.ts).
   if (entry.seats.size >= MAX_SEATS) {
     trace.getActiveSpan()?.setAttribute("seat_joined.rejected", "table-full");
     res.status(409).json({ error: `table is full: ${MAX_SEATS} seats` });
@@ -137,8 +112,6 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
           isCommander: true,
         };
 
-        // Ghost minted first, so its z-index is strictly lower and the real
-        // card paints on top (both share the same table spot).
         store.put(
           mtgCardShape({
             id: createShapeId(`ghost-${instanceId}`),
@@ -166,11 +139,6 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
     playerArea.commanderNames = commanderNames;
   }
 
-  // Commander-damage counters (ticket 21) — one per opposing commander,
-  // labeled with that commander's own name, in both directions: the new
-  // seat needs a counter for every commander already-seated opponents
-  // brought, and every already-seated opponent needs a counter for this
-  // seat's brand-new commanders.
   for (const [otherSeatId, otherArea] of entry.seats) {
     if (otherSeatId === seatId) continue;
     await addCommanderDamageCounters(entry, pageId, seatId, otherSeatId, otherArea.commanderNames, otherArea.sleeveColor);

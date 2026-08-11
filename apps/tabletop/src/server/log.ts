@@ -1,29 +1,3 @@
-/**
- * Logging that participates in traces.
- *
- * **Reach for a span attribute first.** Attributes are free in Honeycomb and
- * they correlate with everything else on the span, so anything you know during
- * a request belongs on the request's span. A log is for the case where there is
- * no span to hang it on: startup, shutdown, and callbacks or timers that fire
- * long after the request that created them has ended.
- *
- * (Never `span.addEvent`. This ship is where that lesson came from: rooms.ts
- * used to call addEvent from tldraw's throttled pruneSessions callback, which
- * fires long after the span that opened the room has ended. Production logs
- * filled with "Operation attempted on ended Span" and the room-lifecycle
- * records were dropped. Fixed in JES-136 by using this file instead.)
- *
- * Each record goes two places: stdout, so `./run`'s prefixed local logs stay
- * readable, and OTLP, so it lands in Honeycomb carrying the trace_id/span_id of
- * whatever span was active. Logs are deliberately NOT filtered by the trace
- * sampler: if the health check starts failing, we want every log explaining
- * why, not the fraction the sampler kept.
- *
- * The exporter is wired up in tracing.ts. When nothing registered a provider —
- * tests, scripts — the OTel global no-ops and only the stdout half happens.
- *
- * This file is duplicated from the Shuffler on purpose; see CLAUDE.md.
- */
 import { logs, SeverityNumber, LogAttributes } from "@opentelemetry/api-logs";
 
 const LOGGER_NAME = "mtg-tabletop";

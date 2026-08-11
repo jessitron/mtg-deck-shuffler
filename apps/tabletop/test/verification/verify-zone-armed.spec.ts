@@ -1,12 +1,6 @@
 import { test, expect, Page, BrowserContext } from "@playwright/test";
 import { randomUUID } from "node:crypto";
 
-/**
- * Ticket 14 (zone appearance): a zone shows a glow ring while a card is
- * being dragged over it, computed purely reactively (never written to the
- * store) — so it must be visible only on the dragging player's own client,
- * never synced to anyone else watching the same table.
- */
 function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
 }
@@ -199,9 +193,6 @@ test("dragging another player's commander over your command zone does not arm it
   const card = page.locator(`#shape\\:card-${instanceId}`);
   await expect(card).toBeAttached();
 
-  // "e2e-seat"'s command zone is drawn by cardArrival's own defensive
-  // ensurePlayerArea, keyed on the initiator's seatId — arrive a card owned
-  // by e2e-seat too, so its command zone exists to test against.
   const ownEvent = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
     card: { scryfallId: randomUUID(), instanceId: randomUUID() },
@@ -248,9 +239,6 @@ test("dragging a multi-card selection arms only the one zone under the pointer, 
     [instanceIdA, randomUUID()],
     [instanceIdB, randomUUID()],
   ]) {
-    // "battlefield" (not "stack") so the two cards land at distinct grid
-    // positions instead of stacked exactly on top of each other — otherwise
-    // clicking one always hits whichever landed on top.
     const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, {
       data: cardPlayed(tableSlug, { cardName: "Llanowar Elves", card: { scryfallId, instanceId }, zoneHint: "battlefield" }),
     });
@@ -268,8 +256,6 @@ test("dragging a multi-card selection arms only the one zone under the pointer, 
   await expect(page.locator(exile)).toBeAttached();
   await zoomToFit(page);
 
-  // Select both cards as a group (click A, shift-click B), then drag from A
-  // — tldraw moves the whole selection together, to one destination.
   await cardA.click();
   await cardB.click({ modifiers: ["Shift"] });
 
@@ -287,10 +273,6 @@ test("dragging a multi-card selection arms only the one zone under the pointer, 
     expect(await boxShadowOf(page, graveyard)).toContain("230, 163, 61");
   }).toPass({ timeout: 5000 });
 
-  // The whole selection is moving as one rigid group toward the pointer —
-  // only the zone the pointer is actually over arms, not a second zone one
-  // of the other selected cards' own (unmoved-relative-to-the-group) bounds
-  // might otherwise have overlapped.
   expect(await boxShadowOf(page, exile)).toBe("none");
 
   await page.mouse.up();
@@ -340,8 +322,6 @@ test("the armed glow is local to the dragging player, never synced to another cl
       expect(await boxShadowOf(pageA, graveyard)).toContain("230, 163, 61");
     }).toPass({ timeout: 5000 });
 
-    // While A's drag is still in progress, B's copy of the same zone shape
-    // must show no armed styling at all — this is derived, unsynced state.
     expect(await boxShadowOf(pageB, graveyard)).toBe("none");
 
     await pageA.mouse.up();

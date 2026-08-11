@@ -7,10 +7,6 @@ import {
   isValidSleeveColor,
 } from "../src/table-look.js";
 
-/**
- * Ticket 16: the curated table-look data is the server-side truth the
- * POST /prep-table-look route validates against.
- */
 
 describe("PLAYMATS", () => {
   it("includes the default mat (today's hardcoded one)", () => {

@@ -1,9 +1,3 @@
-/**
- * End-to-End Verification: Clicking the library stack on the prepare screen
- * opens the library search modal.
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect, Page } from '@playwright/test';
 import { seedPrep } from './seedGame.js';

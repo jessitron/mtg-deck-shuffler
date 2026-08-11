@@ -1,22 +1,9 @@
-/**
- * End-to-End Verification: Flipping a two-faced commander on the prepare screen.
- *
- * The prepare screen has no game yet, so flipping there must not touch game state.
- * Regression guard for JES-90: the inline flip button used to POST to the *game*
- * route /flip-card/<prepId>/0, which replaced the commander with
- * "Game <prepId> not found" (or, on an id collision, silently mutated an
- * unrelated game).
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect, Page } from '@playwright/test';
 import { seedPrep } from './seedGame.js';
 
 const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
-// "From Cute to Brute" — its commander, Esika, God of the Tree // The Prismatic
-// Bridge, is a genuine two-faced (modal DFC) card, so it gets a flip button.
 const TWO_FACED_COMMANDER_DECK = 'precon-mtgjson-FromCutetoBrute_SLD.json';
 
 test.setTimeout(90000);
@@ -87,9 +74,6 @@ test.describe('Prepare screen - flipping a two-faced commander', () => {
     await page.locator('.modal-action-button.flip-button').click();
     await expect(page.locator('.modal-card-image')).toHaveAttribute('src', /\/back\//, { timeout: 5000 });
 
-    // Retry the close: a click landing during the flip's htmx swap/settle gets
-    // swallowed, which made this flaky in a full-suite run (same pattern as
-    // verify-discard).
     const modal = page.locator('.card-modal-overlay');
     await expect(async () => {
       if ((await modal.count()) === 0) return;

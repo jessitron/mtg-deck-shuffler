@@ -1,11 +1,5 @@
 require_relative "../test_helper"
 
-# Production serves the Spine at mtg.jessitron.honeydemo.io/spine, behind the
-# same ALB as the Shuffler (no path-stripping available on ALB ingress — see
-# SEAMAP.md deploy notes). SPINE_BASE_PATH makes the app answer under that
-# prefix everywhere: externally via the ALB, and internally, since the
-# Shuffler's SPINE_URL in prod is also http://spine-service/spine. Local dev
-# leaves SPINE_BASE_PATH unset, so behavior there is unchanged.
 class BasePathTest < Minitest::Test
   include Rack::Test::Methods
 

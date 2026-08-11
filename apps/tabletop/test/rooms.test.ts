@@ -8,11 +8,6 @@ import { startServer } from "../src/server/server";
 import { getRoomRegistry, getOrCreateRoom } from "../src/server/rooms";
 import { mtgCardShape } from "../src/server/tableFurniture";
 
-/**
- * A3: the sync server + in-memory room registry (SCAFFOLDING — the Spine
- * absorbs table identity later). Real server on an ephemeral port; two ws
- * clients share a room.
- */
 let server: Server;
 let port: number;
 let exportedLogs: InMemoryLogRecordExporter;
@@ -41,10 +36,6 @@ async function waitUntil(predicate: () => boolean, timeoutMs = 10_000): Promise<
   throw new Error("timed out waiting for condition");
 }
 
-/**
- * Rooms from earlier tests get pruned on the same throttled timer, so their
- * lifecycle logs land in this exporter too. Always scope by table name.
- */
 function logsFor(body: string, tableName: string) {
   return exportedLogs.getFinishedLogRecords().filter((r) => r.body === body && r.attributes["table.name"] === tableName);
 }
@@ -132,15 +123,6 @@ describe("RoomEntry.hasInstance", () => {
 });
 
 describe("room lifecycle is recorded from a callback that outlives its span", () => {
-  // This is why the fleet bans span.addEvent. tldraw calls onSessionRemoved from
-  // its throttled pruneSessions timer, long after the span that created the room
-  // has ENDED — measured in production at ~13s after a 2.4ms "ws connect" span.
-  //
-  // Note the context is still there: AsyncLocalStorage carries it into the
-  // timer, so trace.getActiveSpan() returns the ended span rather than
-  // undefined. That's precisely why addEvent threw "Operation attempted on ended
-  // Span" instead of quietly doing nothing. A log doesn't care — it gets emitted
-  // and, in the running app, even correlates back to that span.
   it("emits room lifecycle records from the throttled callback", async () => {
     const only = await connect("closing-time", "session-last");
     await waitUntil(() => getRoomRegistry().get("closing-time")?.room.getNumActiveSessions() === 1);
@@ -155,12 +137,6 @@ describe("room lifecycle is recorded from a callback that outlives its span", ()
     const [emptied] = logsFor("room emptied", "closing-time");
     expect(emptied.attributes).toMatchObject({ "table.name": "closing-time" });
 
-    // Deliberately NOT asserting anything about spanContext. Here there is no
-    // tracing SDK, so it's undefined; in the running app it's the ended "ws
-    // connect" span. Both are fine — the durable guarantee is that the record
-    // gets emitted at all, which addEvent could not manage.
 
-    // Generous timeout: tldraw's pruneSessions is throttled, so the callback
-    // lands whenever it lands. That lateness is the entire problem being fixed.
   }, 20_000);
 });

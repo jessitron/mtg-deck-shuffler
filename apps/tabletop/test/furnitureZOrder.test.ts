@@ -4,14 +4,6 @@ import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
 
-/**
- * Playmats (and the rest of a seat's furniture) must always render behind
- * every card, no matter when the furniture was drawn relative to the cards
- * already on the table. Before this test existed, furniture and cards shared
- * one monotonically-increasing z-order counter, so a seat joining late got a
- * playmat with a *higher* index than cards already in play — dragging one of
- * those cards onto the late seat's playmat made the card disappear behind it.
- */
 let server: Server;
 let port: number;
 
@@ -105,8 +97,6 @@ describe("furniture z-order", () => {
     const cardResponse = await postCard(tableName, cardPlayed(tableName, "seat-early01", "Early"));
     expect(cardResponse.status).toBe(201);
 
-    // Seat B joins after the card already exists — its playmat must still
-    // land below that card, not above it.
     await postEvent(tableName, seatJoined(tableName, "seat-late0001", "Late"));
 
     const shapes = allShapes(tableName);

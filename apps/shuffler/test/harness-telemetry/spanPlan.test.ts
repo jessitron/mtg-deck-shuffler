@@ -1,12 +1,3 @@
-/**
- * The verify harness's span shape, tested without a browser.
- *
- * `spanPlan.ts` is pure on purpose: everything interesting about this
- * instrumentation (how a run is grouped, which steps earn a span, how shell
- * timestamps become synthetic spans) is a data transformation, so it can be
- * pinned down here instead of discovered by staring at Honeycomb after a
- * 4-minute suite run.
- */
 import { planRun, countSpans, normalizeStepName, RunInput, StepEntry, SpanNode } from "./spanPlan.js";
 
 // A fixed "now" so the timestamp plausibility window is deterministic.
@@ -59,8 +50,6 @@ describe("planRun — run shape", () => {
     );
 
     expect(root.name).toBe("verify run");
-    // The root starts when the SCRIPT started, not when Playwright did — the
-    // build and the server boot are inside it.
     expect(root.startTimeMs).toBe(NOW - 60_000);
     expect(root.endTimeMs).toBe(NOW + 5_000);
   });
@@ -312,17 +301,10 @@ describe("countSpans", () => {
 });
 
 describe("normalizeStepName", () => {
-  // These are titles observed from Playwright 1.57 in a real run — they are
-  // already prose, with no parenthesized arguments to strip. Recorded here so
-  // the next person doesn't have to run the suite to find out what the step
-  // span names actually look like. Note `Wait for timeout` carries no duration,
-  // which is what makes "how much of a run is fixed sleeps" a clean aggregate.
   it("leaves Playwright's own prose titles alone", () => {
     expect(normalizeStepName("Wait for timeout")).toBe("Wait for timeout");
     expect(normalizeStepName('Expect "toHaveCSS" locator')).toBe('Expect "toHaveCSS" locator');
     expect(normalizeStepName("Launch browser")).toBe("Launch browser");
-    // The URL stays in the name on purpose: which page is slow to load is the
-    // interesting part, and there are only a handful of them.
     expect(normalizeStepName('Navigate to "/choose-any-deck"')).toBe('Navigate to "/choose-any-deck"');
   });
 

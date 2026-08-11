@@ -1,14 +1,5 @@
 import { CardPlayedEvent, SeatJoinedEvent, TabletopPort } from "./types.js";
 
-/**
- * SCAFFOLDING — the seam the Spine absorbs (see types.ts). POSTs card.played
- * directly to the Tabletop's card-arrival API. In the Spine-shaped future this
- * gateway is replaced by one that emits to the Spine's event log; the
- * TabletopPort interface (and its callers) stay put.
- *
- * Uses global fetch (undici), which the OTel auto-instrumentation wraps, so
- * trace context propagates to the Tabletop for free.
- */
 export class HttpTabletopGateway implements TabletopPort {
   constructor(private readonly baseUrl: string) {}
 

@@ -81,10 +81,6 @@ class SseStreamTest < Minitest::Test
     post "/tables/#{table_id}/events", JSON.generate(envelope), "CONTENT_TYPE" => "application/json"
   end
 
-  # Bypasses Rack::Test's own request wrapper, which eagerly reads the
-  # whole response body — fatal for a body that streams forever. Calling
-  # the app directly returns the [status, headers, body] triple without
-  # touching #each, so the body can be drained on a background thread.
   def raw_get(path)
     env = Rack::MockRequest.env_for(path, method: "GET")
     app.call(env)

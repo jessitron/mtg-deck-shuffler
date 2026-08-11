@@ -2,10 +2,6 @@ require "json_schemer"
 require "pathname"
 
 module Spine
-  # Validates events against the fleet's published language: the JSON Schemas in
-  # contracts/ at the repo root. Fail loudly — an unknown name, unknown version, or
-  # invalid envelope/payload is a hard error, never a best-effort parse.
-  # (contracts/README.md; notes/DESIGN-event-contract-v0.md)
   module EventContract
     ENVELOPE_VERSION = 3
 
@@ -23,8 +19,6 @@ module Spine
         Pathname.new(ENV.fetch("CONTRACTS_DIR", File.expand_path("../../../contracts", __dir__)))
       end
 
-      # Validates a sender-submitted envelope (a Hash with string keys).
-      # Raises a Violation subclass, or returns the envelope.
       def validate!(envelope)
         raise Violation, "event must be a JSON object" unless envelope.is_a?(Hash)
 

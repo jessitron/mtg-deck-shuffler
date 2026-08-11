@@ -2,12 +2,6 @@ import { describe, it, expect } from "vitest";
 import { TLSocketRoom } from "@tldraw/sync-core";
 import { AssetRecordType, createShapeId } from "@tldraw/tlschema";
 
-/**
- * A1's first task: verify server-side shape injection (room.updateStore) works
- * against the PINNED tldraw version (5.2.5). This is the young API the whole
- * card-arrival design leans on (plan Risk 1) — if this test breaks on a version
- * bump, the fallback is a connected "server client".
- */
 describe("TLSocketRoom.updateStore (server-side shape injection)", () => {
   it("injects an image asset + image shape into the room store", async () => {
     const room = new TLSocketRoom({});

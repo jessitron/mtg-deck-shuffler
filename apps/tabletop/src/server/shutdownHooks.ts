@@ -1,24 +1,3 @@
-/**
- * Flush-and-exit on SIGTERM/SIGINT.
- *
- * With no signal handler installed, Node terminates immediately on SIGTERM —
- * which is what `verify.sh`'s `cleanup()` sends, and what k8s sends on every
- * pod termination. That drops whatever OTel batch hasn't flushed yet (up to
- * `BatchSpanProcessor`'s `scheduledDelayMillis`, 5s by default), on every
- * verify run and every prod shutdown.
- *
- * Installing a handler changes that default: once one exists, Node no longer
- * exits on its own, so this must call `exit()` itself once the drain settles
- * — a bounded-wait shape (a `Promise.race` against an `unref()`'d timer), so a
- * hung exporter can't outlast a k8s termination grace period. `shuttingDown`
- * guards against firing twice if both signals arrive.
- *
- * This file is duplicated from the Shuffler's `shutdownHooks.ts` on purpose —
- * see the fleet CLAUDE.md and `notes/AGENT-NOTES.md` for why `tracing.ts` and
- * `log.ts` are deliberately duplicated across ships. The logic here is
- * version/framework-agnostic (just `EventEmitter`, `Promise.race`,
- * `setTimeout().unref()`), so it ports without changes.
- */
 export interface InstallShutdownHandlersOptions {
   /** How long to wait for `drain()` before exiting anyway. Default 5000ms. */
   timeoutMs?: number;
@@ -28,16 +7,7 @@ export interface InstallShutdownHandlersOptions {
   signalSource?: NodeJS.EventEmitter;
   /** Default `["SIGTERM", "SIGINT"]`. */
   signals?: NodeJS.Signals[];
-  /**
-   * Called if `timeoutMs` elapses before `drain()` settles, so the caller can
-   * record it (there's no live span to hang it on by then — this file stays
-   * log-agnostic on purpose, see tracing.ts for the actual `log.warn`).
-   */
   onTimeout?: () => void;
-  /**
-   * Called with the rejection if `drain()` rejects, for the same reason as
-   * `onTimeout` — the caller logs it, this file stays log-agnostic.
-   */
   onDrainError?: (error: unknown) => void;
 }
 
@@ -57,9 +27,6 @@ export function installShutdownHandlers(drain: () => Promise<void>, options: Ins
 
     const drained = drain()
       .catch((error: unknown) => {
-        // A telemetry problem on the way out must not become an unhandled
-        // rejection or block the exit that follows — but the caller still
-        // gets to know about it.
         onDrainError(error);
       })
       .then(() => "drained" as const);

@@ -1,10 +1,3 @@
-/**
- * End-to-End Verification: Game History Feature
- *
- * RUN: npm run test:verify
- *
- * The test script automatically starts and stops the server on port 3001.
- */
 
 import { test, expect } from '@playwright/test';
 

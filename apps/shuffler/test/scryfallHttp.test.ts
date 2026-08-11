@@ -1,10 +1,5 @@
 import { SCRYFALL_USER_AGENT, fetchScryfall } from "../src/scryfall-http.js";
 
-/**
- * Scryfall's CDN sits behind Cloudflare, which answers 400 BAD REQUEST to
- * Node's default `User-Agent: node`. Every outbound Scryfall request has to
- * identify itself, image downloads included — that's what these tests pin.
- */
 describe("fetchScryfall", () => {
   const okResponse = () => new Response("", { status: 200 });
 

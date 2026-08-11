@@ -1,15 +1,3 @@
-/**
- * End-to-End Verification: Deck Title Placement
- *
- * The deck title plaque used to live INSIDE the metal command-zone surround on
- * both /prepare and /game. It now sits on the playmat itself:
- *   - /prepare: a direct child of .playmat, in the grid's top row
- *   - /game:    inside .game-header-row, a SIBLING of #game-menu (not a child —
- *               game.js closes the menu on !closest("#game-menu"), so a title
- *               nested inside it would swallow the dismiss click)
- *
- * RUN: ./verify.sh verify-deck-title-placement
- */
 
 import { test, expect } from '@playwright/test';
 import { seedPrep, startGame, DEFAULT_PRECON_DECK, getPreconDisplayName } from './seedGame.js';
@@ -64,9 +52,6 @@ test.describe('Deck title placement', () => {
     const toggleBox = await page.locator('#menu-toggle').boundingBox();
     expect(titleBox!.x).toBeLessThan(toggleBox!.x);
 
-    // Clicking the title closes an open menu (the reason it must be a sibling:
-    // game.js's outside-click test is !evt.target.closest("#game-menu")).
-    // Open state lives on <body>, so it survives HTMX swaps of #game-container.
     await page.locator('#menu-toggle').click();
     await expect(page.locator('body')).toHaveClass(/game-menu-open/);
     await gameTitle.click();

@@ -12,19 +12,6 @@ import {
 import { MtgCardShape } from "../shared/mtgCardShape";
 import { tapPartial } from "./shapes/cardTap";
 
-/**
- * The Tabletop's first custom context menu (ticket 17: flip and face-down).
- * `DefaultContextMenu`'s `children` REPLACE its default content entirely —
- * there is no additive slot — so this renders the card actions plus a
- * trimmed stock menu, not the untouched `DefaultContextMenuContent`.
- *
- * Curation (Jess, ticket 17): keep only Reorder and the clipboard group
- * (Cut/Copy/Paste/Duplicate/Delete); drop Lock/Unlock (`EditMenuSubmenu`),
- * Arrange, Move to page, Conversions, and Select all. Losing Lock/Unlock here
- * is deliberate — furniture is the only thing that's ever locked, and zones
- * mint locked and stay that way (tabletop-shape-mechanics owner, ticket 17
- * review).
- */
 export function TableContextMenu(props: TLUiContextMenuProps) {
   return (
     <DefaultContextMenu {...props}>
@@ -47,11 +34,6 @@ function CardMenuItems() {
 
   if (cards.length === 0) return null;
 
-  // Right-clicking selects the card, and — unlike locked shapes — an
-  // unlocked card's selection survives the menu closing (tldraw's own
-  // behavior). Ticket 05: that lingering selection is no longer this
-  // function's problem — clearStaleSelectionOnPointerDown catches it the
-  // moment the next pointer-down lands on a different shape.
   function commit(partials: TLShapePartial<MtgCardShape>[], label: string) {
     if (partials.length === 0) return;
     editor.markHistoryStoppingPoint(label);

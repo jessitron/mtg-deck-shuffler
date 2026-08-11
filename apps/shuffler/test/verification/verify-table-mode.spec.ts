@@ -1,14 +1,3 @@
-/**
- * End-to-End Verification: Table mode (JES-127, Part B1)
- *
- * The prepare screen offers optional "table name" and "player name" inputs.
- * Leaving them blank keeps today's solo behavior. Filling them in joins the
- * game to a table on the Tabletop: the game page shows "at table <name>"
- * linking to the table page in a new tab (that link is also the
- * spectator-share mechanism).
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect } from '@playwright/test';
 import { seedPrep, startGame } from './seedGame.js';
@@ -23,12 +12,6 @@ async function goToPrepare(page: any): Promise<string> {
   return prepId;
 }
 
-/**
- * The table/player name inputs live inside a `<details class="join-table-details">`
- * disclosure that is only rendered `open` when the prep already has a table or
- * player name — so on a freshly-prepared deck they are display:none. Click the
- * "Join a table" summary to reveal them.
- */
 async function openJoinTable(page: any): Promise<void> {
   const details = page.locator('details.join-table-details');
   if (!(await details.evaluate((el: HTMLDetailsElement) => el.open))) {
@@ -71,10 +54,6 @@ test.describe('Table mode', () => {
   });
 
   test('send-then-commit: when the tabletop is unreachable, the play is blocked and the card stays in hand', async ({ page }) => {
-    // This test relies on no tabletop running at TABLETOP_URL. verify.sh points
-    // TABLETOP_URL at a random per-run port that nothing is listening on (so the
-    // dev fleet's tabletop on 5180 can't accidentally satisfy the send); the
-    // two-app spec spawns its own tabletop there, after this spec has run.
     const prepId = await seedPrep(page);
     const gameId = await startGame(page, prepId, { tableName: 'unreachable-table', playerName: 'Blocked Jess' });
     await page.goto(`${BASE_URL}/game/${gameId}`);

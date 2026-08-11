@@ -6,13 +6,6 @@ import { InMemoryCardRepositoryAdapter } from "../src/port-card-repository/InMem
 import { InMemoryPersistPrepAdapter } from "../src/port-persist-prep/InMemoryPersistPrepAdapter.js";
 import { PERSISTED_GAME_PREP_VERSION } from "../src/port-persist-prep/types.js";
 
-/**
- * Table info (JES-127, B1): a game optionally belongs to a table on the
- * Tabletop — tableName, playerName, and the seat's short GUID seatId. All
- * optional fields, no version bumps: solo games (no table) are the default and
- * old saves load unchanged. The Prep records the same info so a player can
- * rejoin the table on restart.
- */
 
 describe("table info on GameState", () => {
   const tableInfo = { tableName: "Friday Night", playerName: "Jess", seatId: "abc12345" };

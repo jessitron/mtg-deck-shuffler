@@ -119,8 +119,6 @@ export const deckName = fc.oneof(
     .map(([strategy, color]) => `${strategy} ${color}`)
 );
 
-// Generator for DeckProvenance
-// TODO: these fields are coupled; generate either an archidekt or local or test one, and make it internally consistent.
 export const deckProvenance: fc.Arbitrary<DeckProvenance> = fc.record({
   retrievedDate: fc.date({ min: new Date("2020-01-01"), max: new Date("2024-12-31") }),
   sourceUrl: fc.oneof(

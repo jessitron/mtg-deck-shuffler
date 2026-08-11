@@ -1,15 +1,3 @@
-/**
- * End-to-End Verification: the "yo!" fast-start link (dev mode only)
- *
- * In developer mode (the devMode cookie, entered via /dontdie), the home page's
- * top menu grows a "yo!" link. Clicking it skips the whole deck-selection and
- * prep flow: it loads the Timey-Wimey precon (two commanders: The Tenth Doctor
- * and Rose Tyler), starts a game at table "Yo" as player "Jess", and lands
- * straight on the game screen. Without the cookie the link is absent from the
- * HTML entirely.
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect } from '@playwright/test';
 
@@ -34,8 +22,6 @@ test.describe('yo! fast-start', () => {
     await expect(yoLink).toBeVisible();
     await yoLink.click();
 
-    // Straight onto the game screen. New games get a fun word-combo id
-    // (e.g. "brave-falcon-42") rather than a sequential number.
     await expect(page).toHaveURL(/\/game\/[a-z]+-[a-z]+-\d+/);
     await expect(page.locator('.game-name')).toHaveText('Timey-Wimey');
 

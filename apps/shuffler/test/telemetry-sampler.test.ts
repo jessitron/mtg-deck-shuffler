@@ -6,9 +6,6 @@ import { isBackgroundChatter, BackgroundChatterSampler } from "../src/telemetry-
 describe("isBackgroundChatter", () => {
   describe("health checks", () => {
     test("ELB health checker, whose user agent is mixed case", () => {
-      // Regression: the old sampler lowercased the user agent and then looked
-      // for "ELB-HealthChecker" in it, so this never matched and every ALB
-      // probe was traced at 100%.
       expect(isBackgroundChatter({ "http.user_agent": "ELB-HealthChecker/2.0", "http.target": "/health" })).toBe(true);
     });
 
@@ -58,10 +55,6 @@ describe("isBackgroundChatter", () => {
   });
 
   describe("newer OTel semantic conventions", () => {
-    // The HTTP instrumentation emits http.user_agent/http.target today, but
-    // stable semconv renamed them. Read both so a dependency bump doesn't
-    // silently turn the sampling back off — which is exactly how the
-    // ELB-HealthChecker case bug stayed invisible.
     test("user_agent.original", () => {
       expect(isBackgroundChatter({ "user_agent.original": "ELB-HealthChecker/2.0" })).toBe(true);
     });
@@ -79,12 +72,6 @@ describe("BackgroundChatterSampler", () => {
     return sampler.shouldSample(ROOT_CONTEXT, traceId, "GET", SpanKind.SERVER, attributes, []).decision;
   }
 
-  // A spread of valid trace ids. TraceIdRatioBasedSampler compares the trace
-  // id's own bits against the ratio, so the ids have to be spread across the
-  // whole 32-bit range — a run of small sequential numbers all land under the
-  // threshold and would look like nothing is ever dropped. Multiplying by
-  // Knuth's constant scatters them deterministically (no Math.random, which
-  // would make this test flaky).
   const traceIds = Array.from({ length: 2000 }, (_, i) => (((i + 1) * 2654435761) % 2 ** 32).toString(16).padStart(32, "0"));
 
   function keptCount(attributes: Record<string, string>) {

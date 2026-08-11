@@ -1,9 +1,6 @@
 
 export type ImageFormat = "small" | "normal" | "large" | "png" | "art_crop" | "border_crop";
 
-/** Scryfall image URLs for a single face, copied verbatim from Scryfall's API
- * (so they include the `?<version>` query tag). Partial because we only store
- * the formats the app actually uses, and because Scryfall may omit some. */
 export type CardImageUris = Partial<Record<ImageFormat, string>>;
 
 export interface CardDefinition {
@@ -14,13 +11,7 @@ export interface CardDefinition {
   oracleCardName: string;
   colorIdentity: string[];
   set: string;
-  /** The union of card types across every face/part (e.g. ["Creature", "Sorcery"]
-   * for an adventure or "prepare" card, ["Creature", "Planeswalker"] for a
-   * transforming planeswalker). Drives library-search type grouping. */
   cardTypes: string[];
-  /** Scryfall image URLs for the front (or only) face, fetched at deck ingestion.
-   * Optional: legacy decks/games lack it, and `getCardImageUrl` falls back to
-   * constructing the URL from scryfallId when it's absent. */
   imageUris?: CardImageUris;
   /** Scryfall image URLs for the back face; present only for two-faced cards. */
   backImageUris?: CardImageUris;
@@ -33,8 +24,6 @@ export interface DeckProvenance {
   createdAt?: Date;
 }
 
-// Bump when the deck-file / Deck shape changes; regenerate decks/*.json.
-// Runbook: apps/shuffler/notes/DESIGN-persistence-versioning.md
 export const PERSISTED_DECK_VERSION: 3 = 3;
 
 export interface Deck {
@@ -63,9 +52,6 @@ export function constructCardImageUrl(scryfallId: string, format: ImageFormat = 
   return `https://cards.scryfall.io/${format}/${face}/${firstTwo}/${nextTwo}/${scryfallId}.${extension}`;
 }
 
-/** The image URL for a card face. Prefers the stored Scryfall URL (which carries
- * the `?<version>` tag Scryfall requires for fresh cards); falls back to
- * constructing the URL from scryfallId for legacy data or missing formats. */
 export function getCardImageUrl(card: CardDefinition, format: ImageFormat = "png", face: "front" | "back" = "front"): string {
   const stored = face === "back" ? card.backImageUris : card.imageUris;
   return stored?.[format] ?? constructCardImageUrl(card.scryfallId, format, face);

@@ -1,7 +1,3 @@
-/**
- * Parallax scrolling effect for home-v3.html
- * Makes background images appear far away by moving them slower than scroll speed
- */
 
 (function () {
   'use strict';
@@ -15,18 +11,12 @@
 
   let ticking = false;
 
-  /**
-   * Apply parallax effect to an element based on scroll position
-   */
   function applyParallax(element) {
     const rect = element.getBoundingClientRect();
     const elementTop = rect.top;
     const elementHeight = rect.height;
     const windowHeight = window.innerHeight;
 
-    // Calculate how much of the element is visible in the viewport
-    // When element is centered in viewport, offset should be 0
-    // As we scroll, offset increases/decreases
     const scrollOffset = (windowHeight / 2) - (elementTop + elementHeight / 2);
     const parallaxOffset = scrollOffset * PARALLAX_FACTOR;
 
@@ -34,9 +24,6 @@
     element.style.backgroundPosition = `center calc(50% + ${parallaxOffset}px)`;
   }
 
-  /**
-   * Update parallax for all elements
-   */
   function updateParallax() {
     if (hero) {
       applyParallax(hero);
@@ -49,9 +36,6 @@
     ticking = false;
   }
 
-  /**
-   * Request animation frame for smooth performance
-   */
   function requestTick() {
     if (!ticking) {
       requestAnimationFrame(updateParallax);

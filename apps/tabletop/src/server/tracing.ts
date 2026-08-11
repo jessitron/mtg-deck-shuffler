@@ -10,16 +10,8 @@ import { SpanKind, Attributes, Context, Link } from "@opentelemetry/api";
 import { installShutdownHandlers } from "./shutdownHooks.js";
 import { log } from "./log.js";
 
-// Modeled on the Shuffler's tracing.ts. This app is ESM ("type": "module");
-// OTel's instrumentations patch modules via require-in-the-middle, which only
-// sees CommonJS require() calls — the ESM loader hook below makes `import`ed
-// modules (express, ws, ...) get instrumented too. That's why the launch
-// command is `node --import ./dist/server/tracing.js`: register() must run
-// before the app's imports.
 register("@opentelemetry/instrumentation/hook.mjs", import.meta.url);
 
-// Heavily sample down health-check probes (kube-probe, ELB) so the interesting
-// traffic isn't drowned.
 class KubeProbeAwareSampler implements Sampler {
   private defaultSampler = new TraceIdRatioBasedSampler(1.0);
   private kubeProbeRootSampler = new TraceIdRatioBasedSampler(0.001);
@@ -44,26 +36,6 @@ class KubeProbeAwareSampler implements Sampler {
 
 const sdk: NodeSDK = new NodeSDK({
   traceExporter: new OTLPTraceExporter(),
-  // Logs go through the NodeSDK rather than a LoggerProvider of their own, so
-  // they share the resource (service.name and friends) and the shutdown path
-  // with traces. The destination comes from the same generic
-  // OTEL_EXPORTER_OTLP_ENDPOINT the traces use; the exporter appends /v1/logs.
-  //
-  // Deliberately unfiltered by the sampler below: a LogRecord does not inherit
-  // its span's sampling decision, and we don't want it to. If the health check
-  // starts failing we want every log explaining why. What keeps log volume
-  // affordable is not logging on the hot path — see log.ts.
-  //
-  // Passing logRecordProcessors makes the SDK skip its OTEL_LOGS_EXPORTER
-  // branch entirely, so don't add that env var here expecting it to do
-  // something — it would be dead config.
-  //
-  // NOTE the options-object argument, required by this OTel version line
-  // (0.221) — the older 0.219 line took the exporter positionally instead.
-  // Both ships are on 0.221 now, but check this if either bumps versions
-  // again: the same constructor takes different shapes across that boundary,
-  // and passing the wrong one leaves options.exporter undefined with the
-  // pipeline silently exporting nothing.
   logRecordProcessors: [new BatchLogRecordProcessor({ exporter: new OTLPLogExporter() })],
   sampler: new ParentBasedSampler({
     root: new KubeProbeAwareSampler(),
@@ -79,11 +51,6 @@ const sdk: NodeSDK = new NodeSDK({
 
 sdk.start();
 
-// Without this, SIGTERM (verify.sh's cleanup(), and k8s on every pod
-// termination) kills the process immediately, dropping whatever span/log
-// batch hasn't flushed yet. installShutdownHandlers() drains bounded by a
-// timeout, then exits itself — Node no longer exits on its own once a
-// SIGTERM handler exists. See shutdownHooks.ts.
 installShutdownHandlers(() => sdk.shutdown(), {
   onTimeout: () => log.warn("OTel shutdown timed out on the way out; some telemetry may have been dropped"),
   onDrainError: (error) => log.warn("OTel shutdown failed on the way out; some telemetry may have been dropped", {}, error),

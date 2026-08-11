@@ -29,8 +29,6 @@ export function formatModalHtmlFragment(title: string, bodyContent: string): str
 }
 
 function formatTableCardListHtmlFragment(game: GameState): string {
-  // Alphabetical, always. listTable() doesn't sort, so without this the order
-  // is only alphabetical as a side effect of GameState's global name-sort invariant.
   const tableCards = [...game.listTable()].sort((a, b) => a.card.name.localeCompare(b.card.name));
   const expectedVersion = game.getStateVersion();
 
@@ -73,18 +71,12 @@ function formatModalActionButton(
   currentFace?: "front" | "back",
   inTableMode = false
 ): string {
-  // Play and Discard share the "card leaves your hand" behaviors: in solo mode
-  // game.js copies the card image to the clipboard (keyed on data attributes);
-  // at a table there is no clipboard — the card goes to the tabletop instead.
   const leavesHand = action === "Play" || action === "Discard";
   const cardIdAttr = leavesHand && !inTableMode && cardId ? `data-card-id="${cardId}"` : "";
   const faceAttr = leavesHand && !inTableMode && currentFace ? `data-current-face="${currentFace}"` : "";
   const extraAttrs = [cardIdAttr, faceAttr].filter(Boolean).join(" ");
   const swapAttr = `hx-swap="outerHTML"`;
 
-  // At a table, a failed send returns an error modal retargeted into
-  // #modal-container — close it only on success, or the explanation vanishes.
-  // The card modal always closes.
   const afterRequest =
     leavesHand && inTableMode
       ? `htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); if (event.detail.successful) htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})`
@@ -102,10 +94,6 @@ function formatModalActionButton(
                </button>`;
 }
 
-// Generate action buttons for cards in hand.
-// Solo: Play/Discard copy the card image to the clipboard (the `play-button`
-// class is game.js's clipboard hook). At a table: they send the card to the
-// tabletop instead (`table-play-button` — game.js shows "Sent to table").
 function formatModalCardActionsForHand(gameId: GameId, gameCard: GameCard, expectedVersion: number, inTableMode: boolean): string {
   const playishClass = inTableMode ? "table-play-button" : "play-button";
   const playTitle = inTableMode ? "Send to the table and remove from hand" : "Copy image and remove from hand";
@@ -223,11 +211,6 @@ export function getModalCardActionsByLocation(gameCard: GameCard, gameId: GameId
 
 
 
-/**
- * Send-then-commit's failure face (JES-127): the tabletop didn't take the
- * card, so the action was blocked and the card stays where it was.
- * Full protocol, all stations: notes/DESIGN-send-then-commit.md.
- */
 export function formatTabletopSendErrorModal(action: string, cardName: string, tableName: string): string {
   return formatModalHtmlFragment(
     "⚠️ The table didn't get the card",

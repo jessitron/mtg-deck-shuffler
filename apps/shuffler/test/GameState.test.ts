@@ -202,8 +202,6 @@ describe("GameState", () => {
     );
   });
 
-  // Note: startGame() no longer throws on multiple calls - it just shuffles again
-  // Games are created in Active status from GamePrep, so startGame is just for shuffling
 
   test("draw moves top card from Library to Hand", () => {
     fc.assert(
@@ -664,8 +662,6 @@ describe("GameState", () => {
         expect(handAfter[1].card.name).toBe(handBefore[0].card.name);
         expect(handAfter[2].card.name).toBe(handBefore[1].card.name);
 
-        // Check WhatHappened - others shifted right
-        // Only cards that were between positions 0 and 2 shift right (positions 0 and 1, not position 2)
         expect(whatHappened.movedRight?.length).toBe(2);
         // this card is coming in from the left of its new spot
         expect(whatHappened.dropppedFromLeft?.card.name).toBe(cardToMove.card.name);
@@ -697,8 +693,6 @@ describe("GameState", () => {
         expect(handAfter[1].card.name).toBe(handBefore[2].card.name);
         expect(handAfter[2].card.name).toBe(handBefore[0].card.name);
 
-        // Check WhatHappened - others shifted left, this one was dropped from the right
-        // Only cards that were between positions 0 and 2 shift left (positions 1 and 2, not position 0)
         expect(whatHappened.movedLeft?.length).toBe(2);
         expect(whatHappened.dropppedFromRight?.card.name).toBe(handBefore[0].card.name);
       })
@@ -964,8 +958,6 @@ describe("GameState", () => {
   });
 
   describe("opening hand & mulligan", () => {
-    // A fixed deck with comfortably more than seven cards so the opening hand
-    // is always a full seven.
     function tenCardDeck(): Deck {
       const cards: CardDefinition[] = Array.from({ length: 10 }, (_, i) => ({
         name: `Card ${String.fromCharCode(65 + i)}`,

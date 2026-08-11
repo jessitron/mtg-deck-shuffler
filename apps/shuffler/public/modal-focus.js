@@ -1,30 +1,3 @@
-/**
- * Focus management for the HTMX-swapped modals: card modal (#card-modal-container)
- * and library/history/table/error modals (#modal-container). These are plain divs
- * swapped by HTMX, not a native <dialog>, so the browser gives us none of
- * focus-in-on-open, Tab-trapping, background-inert, or focus-restore-on-close for
- * free — this file adds all four. Keyed off htmx:afterSettle, same as
- * table-look-focus.js's existing pattern for htmx-swap-safe focus work.
- *
- * `tabindex="0"` on each `.modal-overlay`/`.card-modal-overlay` (in the four
- * templates) is the sanctioned landing spot for initial focus — see
- * playmat.css's `:focus-visible` rule for those two selectors (inward
- * outline-offset, since they're full-viewport fixed elements). It is NOT a
- * fossil; this file is what it was waiting for.
- *
- * Background-escape is actually prevented by native `inert` (removes
- * descendants from tab order and the accessibility tree) — the Tab/Shift+Tab
- * handler below only adds first<->last wrap-around inside the open dialog so
- * Tab cycles instead of dead-ending; it is not what stops Tab from escaping.
- *
- * The two dialogs can stack (opening a card from inside the library modal
- * layers the card modal on top). "Topmost" is the card modal if it's open,
- * else the library/history/table modal, else none. Whichever container is
- * NOT topmost — including the main page content — gets `inert`. Each
- * container's own prior-focus is tracked separately, so closing the card
- * modal while the library modal is still open returns focus into the library
- * modal, not all the way back to the original page opener.
- */
 (function () {
   const FOCUSABLE_SELECTOR =
     'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -41,9 +14,6 @@
   }
 
   function restoreFocus(el) {
-    // If the element is gone (e.g. an unrelated #game-container re-render
-    // happened while the modal was open), the browser already reverted
-    // focus to <body> when it was removed — nothing more to do.
     if (el && typeof el.focus === 'function' && document.body.contains(el)) {
       el.focus();
     }

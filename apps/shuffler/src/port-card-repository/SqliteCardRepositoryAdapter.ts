@@ -25,9 +25,6 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
   }
 
   private initializeDatabase(): void {
-    // The cards table is a local cache. If an older schema is present (it had
-    // mana_cost/cmc/oracle_text/back_face columns and a `types` column), drop it
-    // and rebuild with the current shape -- cards are re-saved when decks load.
     const columns = this.db.prepare(`PRAGMA table_info(cards)`).all() as Array<{ name: string }>;
     const isStaleSchema = columns.length > 0 && !columns.some(c => c.name === "card_types");
     if (isStaleSchema) {
@@ -53,8 +50,6 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
 
     this.db.exec(createTableSQL);
 
-    // Non-destructively add the image columns to a pre-existing table (rows keep
-    // their data; missing image_uris just falls back to constructed URLs).
     const cols = this.db.prepare(`PRAGMA table_info(cards)`).all() as Array<{ name: string }>;
     if (!cols.some(c => c.name === "image_uris")) {
       this.db.exec(`ALTER TABLE cards ADD COLUMN image_uris TEXT`);

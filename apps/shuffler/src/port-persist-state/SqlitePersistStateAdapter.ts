@@ -18,17 +18,6 @@ export class SqlitePersistStateAdapter implements PersistStatePort {
   }
 
   private initializeDatabase(): void {
-    // New games get a fun word-combo id (e.g. "brave-falcon-42"), which is not
-    // a valid rowid — `id INTEGER PRIMARY KEY` (a rowid alias) rejects any
-    // non-integer value outright ("datatype mismatch"). A database created
-    // before this change still has that old column type, so migrate it in
-    // place: `id PRIMARY KEY` with no declared type has BLOB affinity, which
-    // stores (and compares) whatever it's given without conversion — old
-    // numeric ids keep their integer storage class exactly as before, and a
-    // lookup must pass the same JS type that was stored (number for old
-    // games, string for new ones). domain-types.ts's parseGameId does
-    // exactly that: an all-digits param becomes a JS number, anything else
-    // stays a string.
     const idColumnType = this.db
       .prepare("SELECT type FROM pragma_table_info('game_states') WHERE name = 'id'")
       .get() as { type: string } | undefined;
@@ -131,8 +120,6 @@ export class SqlitePersistStateAdapter implements PersistStatePort {
           updatedAt: new Date(row.updated_at),
         };
       } catch (parseErr) {
-        // Recoverable: the row is skipped in favor of a placeholder, and the
-        // /history request still succeeds — a warning, not a request failure.
         const attrs = { "game.id": row.id };
         trace.getActiveSpan()?.setAttributes(attrs);
         log.warn("Failed to parse game state row; showing placeholder", attrs, parseErr);
