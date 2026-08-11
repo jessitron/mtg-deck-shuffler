@@ -242,6 +242,7 @@ For each task, follow this workflow:
    - **User-visible changes**: Playwright test (browser verification)
    - **Internal logic**: Unit test
    - Run the test and confirm it fails
+   - If you ever find a test that fails for unrelated changes, spawn a subagent and FIX IT
 8. **Implement**: Build the functionality
 9. **Verify Again**: Run the test and see it pass (or fix the implementation)
 10. **Update owners**: For any owner whose files were touched or whose concerns were relevant, invoke its `-update` skill with a summary of what changed.
