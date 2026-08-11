@@ -12,7 +12,7 @@ import {
 describe("PLAYMATS", () => {
   it("includes the default mat (today's hardcoded one)", () => {
     expect(PLAYMATS.map((m) => m.path)).toContain(DEFAULT_PLAYMAT_PATH);
-    expect(DEFAULT_PLAYMAT_PATH).toBe("/images/playmats/aeoe-43-cascading-cataracts.png");
+    expect(DEFAULT_PLAYMAT_PATH).toBe("/images/playmats/aeoe-41-terrasymbiosis.png");
   });
 
   it("offers every playmat image in public/images/playmats/", () => {
@@ -44,10 +44,6 @@ describe("sleeveQuickPicksForPlaymat", () => {
   it("uses the playmat's own chosenFive from playmat-colors.json when it has one", () => {
     const picks = sleeveQuickPicksForPlaymat("/images/playmats/playmat-map.png");
     expect(picks.map((p) => p.hex)).toEqual(["#a09070", "#304040", "#d090b0", "#303040", "#605040"]);
-  });
-
-  it("falls back to the mana pie for a playmat with no playmat-colors.json entry", () => {
-    expect(sleeveQuickPicksForPlaymat("/images/playmats/aeoe-41-terrasymbiosis.png")).toEqual(SLEEVE_QUICK_PICKS);
   });
 
   it("falls back to the mana pie for an unknown path", () => {
@@ -88,17 +84,13 @@ describe("colorsForPlaymat", () => {
     });
   });
 
-  it("falls back to the fixed default pair for a playmat with no chosenTwo entry", () => {
-    const fallback = colorsForPlaymat("/images/playmats/aeoe-41-terrasymbiosis.png", "#530aae");
+  it("falls back to the fixed default pair for an unknown path, regardless of sleeve", () => {
+    const fallback = colorsForPlaymat("/images/playmats/does-not-exist.png", "#530aae");
     expect(fallback.primaryColor).toMatch(/^#[0-9a-f]{6}$/i);
     expect(fallback.secondaryColor).toMatch(/^#[0-9a-f]{6}$/i);
-    expect(colorsForPlaymat("/images/playmats/aeoe-41-terrasymbiosis.png", undefined)).toEqual(fallback);
-  });
-
-  it("falls back to the fixed default pair for an unknown path", () => {
-    expect(colorsForPlaymat("/images/playmats/does-not-exist.png", "#530aae")).toEqual(
-      colorsForPlaymat("/images/playmats/aeoe-41-terrasymbiosis.png", "#530aae")
-    );
+    // No sleeve, or a different unknown path — same fallback pair either way.
+    expect(colorsForPlaymat("/images/playmats/does-not-exist.png", undefined)).toEqual(fallback);
+    expect(colorsForPlaymat("/images/playmats/another-unknown.png", "#530aae")).toEqual(fallback);
   });
 });
 

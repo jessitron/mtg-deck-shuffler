@@ -50,8 +50,8 @@ function loadPlaymats(): PlaymatChoice[] {
 
 export const PLAYMATS: readonly PlaymatChoice[] = loadPlaymats();
 
-/** Today's mat — what every seat got before the picker existed. */
-export const DEFAULT_PLAYMAT_PATH = "/images/playmats/aeoe-43-cascading-cataracts.png";
+/** The mat a seat gets until it picks one for itself. */
+export const DEFAULT_PLAYMAT_PATH = "/images/playmats/aeoe-41-terrasymbiosis.png";
 
 if (!PLAYMATS.some((mat) => mat.path === DEFAULT_PLAYMAT_PATH)) {
   throw new Error(`DEFAULT_PLAYMAT_PATH ${DEFAULT_PLAYMAT_PATH} is not among the images in ${PLAYMATS_DIR}`);
