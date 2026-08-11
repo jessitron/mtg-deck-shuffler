@@ -2359,3 +2359,39 @@ claims about the app today.
 
 Verified visually with a Playwright screenshot — the picture clips flush to the rounded
 border, no square corner peeking out.
+
+## 2026-08-11 — the fleet-wide 0.5 furniture dimming came out, and with it the "gray border" illusion
+
+`tableFurniture.ts`'s `zoneShape()` set `opacity: sleeveColor ? 1 : 0.5` on every zone shape
+since ticket 13 — unsleeved playmat/library/graveyard/exile/command-zone/Stack furniture read
+as a faint outline, not a solid block, matching the pre-ticket-13 `regionShape`'s look.
+`MtgZoneShapeUtil.tsx` carried a matching mechanism for the *sleeved* case: shape opacity
+stayed 1 (so the sleeve pile read as vivid as a card), and the component instead faded just
+the box-chrome div to 0.5, so a sleeved zone landed at the same visual weight as an unsleeved
+one by a different path.
+
+Jess, direct: *"the border isn't black, it's gray. Let's take out that opacity change
+entirely and let the furniture shine."* The "gray border" she was looking at was never a
+color decision — `playmat.css`'s Shuffler mat and the canvas playmat both draw `border: 10px
+solid black`, untokenized, on purpose (see README → "black as a keyword"). It looked gray on
+the Tabletop because the *shape*, border included, was rendered at 0.5 opacity, blending
+toward whatever sat behind it.
+
+**Both mechanisms are gone, not unified into one.** `zoneShape()` now sets `opacity: 1`
+unconditionally; `MtgZoneShapeUtil` no longer sets an `opacity` on the box div at all. They
+were never the same code path — one lived server-side on the shape record, the other
+client-side on a style object — so there was nothing to consolidate, only two things to
+delete. Stale comments citing the old rationale (both files) were updated in the same change:
+`tableFurniture.ts`'s doc comment on `zoneShape()` used to justify 0.5 as matching the
+pre-ticket-13 look; `MtgZoneShapeUtil.tsx` had two comments describing the sleeved-pile fade
+mechanism and the reason the pile div is a sibling rather than a child (still true — the
+sibling structure survives, only the fade it used to dodge is gone).
+
+**What this leaves open, not fixed.** The armed-glow ring (`--armed-glow`, ticket 14,
+2026-08-08) — `rgba(230, 163, 61, 0.1)` background tint, `0.65` box-shadow alpha — was
+screenshot-verified against the *old*, dimmed baseline. Nothing dims it now, so it reads
+more intense than what was checked. Nobody has re-looked at `/design` or the live canvas
+since this change landed; if the glow looks too hot, that's this gap, not a new bug.
+No `/design` gallery specimen depended on the removed opacity (it's a Tabletop canvas-shape
+property, not represented in any gallery mock), so the gallery test needed no update and
+none was made.

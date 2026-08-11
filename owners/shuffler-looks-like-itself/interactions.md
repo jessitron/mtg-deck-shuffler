@@ -710,10 +710,16 @@ not by recomputing new numbers.**
   - **The sleeve treatment lives in two `.tsx` files** — the card's ring in
     `MtgCardShapeUtil.tsx` (the `sleeve` object), the library pile in `MtgZoneShapeUtil.tsx`
     (the `sleevePile` block). Changing the sleeve look means both.
-  - **A sleeved library zone self-fades its box chrome to 0.5** (shape opacity stays 1) so
-    the pile stays vivid; the unsleeved zone gets 0.5 from the shape's own `opacity` set in
-    `tableFurniture.ts`. Don't "tidy" the two mechanisms into one without checking both
-    looks.
+  - **Retired 2026-08-11: there is no more 0.5 anywhere in this picture.** A sleeved library
+    zone used to self-fade its box chrome to 0.5 in `MtgZoneShapeUtil.tsx` (shape opacity
+    stayed 1); an unsleeved zone got 0.5 from the shape's own `opacity` in `tableFurniture.ts`.
+    Jess removed both, directly: *"the border isn't black, it's gray. Let's take out that
+    opacity change entirely and let the furniture shine."* Every zone shape is now `opacity: 1`
+    unconditionally, and `MtgZoneShapeUtil` no longer sets an opacity on the box div at all —
+    don't reintroduce either mechanism citing "furniture should read as background." **Watch
+    point this leaves behind:** the armed-glow ring's alpha values (README → tldraw limits,
+    ticket 14) were screenshot-verified against the old 0.5-dimmed baseline and now read more
+    intense with nothing dimming them; nobody has re-checked `/design` against this change.
   - **Never put `className="tl-image"` on an img you intend to wrap in a frame** — see
     README → tldraw limits (`.tl-image` is absolutely positioned to `.tl-image-container`
     and escapes the wrapper's padding; this shipped broken and was fixed in `bfdc877`).

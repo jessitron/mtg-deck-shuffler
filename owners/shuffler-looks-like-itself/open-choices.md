@@ -688,8 +688,9 @@ self-rendering custom shape.
   square, face image inside a sleeve rounded; a face-down sleeved card is the bare square
   rectangle with no image. The library pile is `MtgZoneShapeUtil`'s own render via a new
   `sleeveColor` prop on `mtg-zone` — inner rect inset by the shared `LIBRARY_PILE_INSET=12`
-  (`src/shared/mtgZoneShape.ts`), square-cornered, zone opacity 1 with the box
-  chrome self-faded to 0.5 so the pile stays vivid. `indicator()` untouched — the ride-along
+  (`src/shared/mtgZoneShape.ts`), square-cornered. **The box-chrome self-fade to 0.5 is gone
+  (2026-08-11, along with the fleet-wide furniture dimming — see "Fleet gaps" below); the
+  pile and the box now both render at opacity 1, unconditionally.** `indicator()` untouched — the ride-along
   warning held. Full decision text in [README.md](README.md)'s design language; the
   `.tl-image` wrapper-escape limit it uncovered is in README → tldraw limits. **The picker's
   swatch palette — the last reserved piece — is DECIDED 2026-08-09 (ticket 16, `8995c1a`;
@@ -712,6 +713,17 @@ self-rendering custom shape.
   mocks the face-up sleeve ring via `.card-mock-sleeved-face` in `design-candidates.css`; the
   picker *panel* keeps its own separate specimen (`#table-look`). The raw hex itself remains
   domain data, exempt from the stylesheet hex ban; what an agent must not do is *pick* one.
+- **The fleet-wide 0.5-opacity furniture dimming is RETIRED (2026-08-11, Jess's direct
+  edit).** `tableFurniture.ts`'s `zoneShape()` set `opacity: sleeveColor ? 1 : 0.5` on every
+  zone shape — unsleeved playmat/library/graveyard/exile/command-zone/Stack furniture read as
+  a faint outline, not a solid block. Jess: *"the border isn't black, it's gray. Let's take out
+  that opacity change entirely and let the furniture shine."* Now always `opacity: 1`, and the
+  matching library-pile fade in `MtgZoneShapeUtil.tsx` (`opacity: 0.5` on the box chrome when
+  sleeved) went with it — the two 0.5s were never the same mechanism, and neither survives.
+  **Open, not re-verified:** the armed-glow ring's alpha values (ticket 14's `rgba(230, 163,
+  61, 0.1)` tint and `0.65` box-shadow) were screenshot-checked against the old dimmed
+  baseline; un-dimmed, they read hotter. Nobody has looked at `/design` (or the live canvas)
+  since. If the glow reads too intense, that's this note, not a fresh bug.
 - **Also undecided, and it must not ride along: a card's `indicator()`.** Ticket 04 records
   explicitly that an `indicator()` looking like anything other than tldraw's default is a
   **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket

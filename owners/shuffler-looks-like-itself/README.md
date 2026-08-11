@@ -479,9 +479,20 @@ by `MtgZoneShapeUtil` itself via a new `sleeveColor` prop on `mtg-zone`: an inne
 inset by the shared `LIBRARY_PILE_INSET` (12, moved to
 `apps/tabletop/src/shared/mtgZoneShape.ts`, used by server image geometry and client sleeve
 geometry alike), square-cornered like the sleeved cards (its 5%-of-inset-width radius went
-in the same `e53a27e`); the zone shape's opacity is 1 when sleeved
-and the component fades just the box chrome to 0.5, so the pile stays as vivid as the cards
-while the furniture keeps its composite look. **The picker palette is now DECIDED
+in the same `e53a27e`). **The fleet-wide 0.5-opacity dimming is GONE (2026-08-11, Jess:
+"the border isn't black, it's gray. Let's take out that opacity change entirely and let the
+furniture shine.").** Every zone shape's `opacity` is now `1` regardless of sleeve state
+(`zoneShape()` in `tableFurniture.ts`), and `MtgZoneShapeUtil` no longer fades the sleeved
+library's box chrome to 0.5 either — the two mechanisms that used to both land at "0.5, by
+different paths" are simply gone, not unified. Unsleeved furniture renders at full strength
+instead of the earlier faint-outline treatment; a sleeved pile was already full strength and
+stays that way. This is also what the earlier "the black playmat border looks gray"
+observation turned out to be — the 0.5 shape opacity blending the border toward white.
+**Open, not yet re-verified:** the armed-glow ring's alpha values (`rgba(230, 163, 61, 0.1)`
+tint, `0.65` box-shadow alpha — see "tldraw limits" above, ticket 14) were screenshot-checked
+against the old 0.5-dimmed baseline; with nothing dimming them anymore they read more
+intense. Nobody has re-checked that against `/design` — if the glow looks too hot, that's
+this note, not a new regression. **The picker palette is now DECIDED
 (2026-08-09, ticket 16, `8995c1a`):** the sleeve quick-picks are the **mana pie five**
 (hexes in `src/table-look.ts` mirror the `--mana-*` tokens — its comment says "change a
 token there, visit here"), plus a None chip showing the standard Magic card back (`null`
