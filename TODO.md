@@ -15,6 +15,10 @@ section is just a wall between Jess and the live work.
 
 - The Shuffler needs to display in-hand and revealed cards as sleeved, when the player has chosen sleevers. They need to be on a sleeve-colored rectangle, like in Tabletop.
 
+- `commander-tax-tracker` Above the Command Zone, above each commander, add a Play Count tracker. It is a number that starts at 0. It can be incremented or decremented (down to 0) or typed in. When the commander leaves the command zone, it increments!
+
+- `commander-snap` When I put my commander back in my command zone, it snaps to its starting position, covering its shadow.
+
 - `drop-cards-linebreak` The Shuffler's hand re-ordering: there's a problem that when the cards are on two lines, like
 
 ```
