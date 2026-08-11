@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Copy the Spine's live SQLite file down from production for local inspection.
+#
+#   bin/pull-prod-db [destination]     # default: ./spine-prod-<timestamp>.db
+#
+# This is a snapshot via `kubectl cp` out of the running pod's PVC-backed
+# /data/spine.db, not a live connection — the prod pod keeps writing after
+# this runs, and a copy mid-write could in principle land mid-transaction.
+# SQLite's rollback journal (config/db.rb sets no WAL pragma, so this is the
+# default mode) makes that safe to open read-only afterward: a reader never
+# sees a half-committed transaction, worst case you're a few writes behind.
+set -e
+cd "$(dirname "$0")/.."
+
+DEST="${1:-spine-prod-$(date +%Y%m%d-%H%M%S).db}"
+
+command -v kubectl >/dev/null 2>&1 || { echo "❌ kubectl not installed"; exit 1; }
+kubectl cluster-info >/dev/null 2>&1 || { echo "❌ kubectl not connected to a cluster"; exit 1; }
+
+POD="$(kubectl get pods -l app=spine -o jsonpath='{.items[0].metadata.name}' 2>/dev/null)"
+if [ -z "$POD" ]; then
+    echo "❌ No running spine pod found (kubectl get pods -l app=spine)"
+    exit 1
+fi
+
+echo "📥 Copying /data/spine.db from pod ${POD} to ${DEST}..."
+kubectl cp "${POD}:/data/spine.db" "${DEST}" -c spine
+
+echo "✅ Pulled $(du -h "${DEST}" | cut -f1) to ${DEST}"
+echo "   Inspect with: sqlite3 ${DEST}"

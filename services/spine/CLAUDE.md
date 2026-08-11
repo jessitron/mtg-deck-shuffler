@@ -54,6 +54,10 @@ All from `services/spine/`:
   as `SPINE_DB_PATH` — `service.yaml`, `ingress.yaml`), waits for rollout, posts a
   Honeycomb deploy marker. See "Base path" below for why `/spine` needed an app change,
   not just an ingress rule.
+- `bin/pull-prod-db [destination]` — copy the live `/data/spine.db` down from the
+  running prod pod via `kubectl cp` (a snapshot, not a live connection — see the
+  script's comment on why a mid-write copy is still safe to read). Default
+  destination is `spine-prod-<timestamp>.db` in the current directory.
 
 ## Base path (`SPINE_BASE_PATH`)
 
