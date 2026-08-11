@@ -315,6 +315,30 @@ of flex flow") since it's previously-undocumented territory: a one-time/edge-cas
 a per-row collection distorting flex-wrap alignment, fixed by removing it from flow rather than by
 the body-anchoring pattern used for swap-surviving state.
 
+### 2026-08-11: `htmx:afterSettle` focus-restore bug fixed (`table-look-focus.js`)
+
+The /prepare table-look picker's focus-restore script read `evt.detail.elt` inside its
+`htmx:afterSettle` listener to figure out which swatch to refocus after an HTMX swap
+(picker was converted to pure HTMX in `cabf85b`). That's unreliable: htmx's internal
+`triggerEvent(elt, name, detail)` overwrites `detail.elt` to be the element the event is
+being dispatched *on*, and `afterSettle` fires once per element in the swapped fragment
+that carries a class/style/width/height attribute during its settle pass — so `detail.elt`
+was whichever of those elements was being settled at that moment, not the button the user
+actually clicked.
+
+**Fix**: capture the triggering element's selector on `htmx:configRequest` instead (fires
+exactly once per request, directly on the real triggering element, before any swap/settle
+happens), stash it in a closure variable, consume it later on `afterSettle` to do the
+refocus. Written up as a general pattern in architecture.md — any `afterSettle` handler
+reading `evt.detail.elt` in this codebase has the same bug.
+
+Also updated `test/verification/verify-prep-picker.spec.ts` to derive its sleeve-color test
+fixtures from `sleeveQuickPicksForPlaymat(...)` instead of hardcoded hex values — an earlier
+commit ("derive sleeve quick-picks from playmat colors") had already changed which swatches
+exist per playmat, so the old hardcoded colors weren't present for the default mat, causing
+4 Playwright failures/timeouts. Not this owner's territory (that's `shuffler-looks-like-itself`
+/ prep-picker test fixtures), noted here only because it landed in the same change.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.

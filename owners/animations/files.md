@@ -20,6 +20,12 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
   - `.hand-drop-zone-leading` (new, 2026-08-09) — the "before card 0" drop zone, taken out of
     flex flow (`position: absolute; left: -45px; top: 0; margin: 0`) to fix a row-alignment
     bug in the wrapped hand grid; see architecture.md "New mechanism"
+- `public/table-look-focus.js` — /prepare table-look picker's focus-restore script (not
+  an animation, but shares the `htmx:afterSettle` mechanism). Captures the triggering
+  element's selector on `htmx:configRequest` (fires once, on the real element, before
+  swap/settle) and consumes it later on `afterSettle` — fixed 2026-08-11 after a bug where
+  it read `evt.detail.elt` directly inside `afterSettle` and got whichever swatch happened
+  to be settling at that moment, not the clicked one. See architecture.md.
 - `public/prepare.css` — Duplicate flip animation CSS (lines 221-256)
 - `public/deck-selection.css` — `fadeInTile` keyframe (lines 136-164)
 - `public/playmat.css` — Shared transition properties for buttons and hover states.

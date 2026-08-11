@@ -79,6 +79,48 @@ gotcha above); there is nothing to observe today.
 is WAAPI, so its running state *is* observable via `element.getAnimations()`, which is what
 `verify-tap-animation.spec.ts` asserts on. See "Third mechanism" below.)
 
+## Gotcha: `evt.detail.elt` is not the triggering element inside `htmx:afterSettle`
+
+Found and fixed 2026-08-11 in `public/table-look-focus.js` (the /prepare table-look
+picker's focus-restore script — not an animation, but the same `htmx:afterSettle`
+machinery this owner tracks, so recorded here as a general pattern for anyone using
+`evt.detail.elt` in an `afterSettle` handler).
+
+htmx's internal `triggerEvent(elt, name, detail)` **always overwrites `detail.elt = elt`**
+— the element the event is being dispatched *on* — before dispatching, for every event it
+fires. `htmx:afterSettle` fires **once per element in the swapped fragment that carries a
+class/style/width/height attribute**, as htmx settles each one in turn. So a handler reading
+`evt.detail.elt` on `afterSettle` gets whichever of those elements is being settled *at that
+moment* — not the button the user actually clicked to trigger the request.
+
+This differs from the settle-phase gotcha above (which is about *classes* the settle phase
+reverts): this one is about *which element* `detail.elt` even points to, and it's wrong on
+every single `afterSettle` firing, not just a race.
+
+**Fix**: capture the triggering element on `htmx:configRequest` instead — it fires exactly
+once per request, directly on the real triggering element, before any swap/settle happens.
+Stash a stable identifier (a CSS selector built from a `data-*` attribute, not the element
+itself — it's about to be destroyed and replaced) in a closure variable, then consume it in
+the later `afterSettle` handler to do the refocus:
+
+```js
+document.body.addEventListener("htmx:configRequest", function (evt) {
+  const elt = evt.detail.elt;
+  pendingSelector = elt && typeof elt.matches === "function" ? selectorFor(elt) : null;
+});
+
+document.body.addEventListener("htmx:afterSettle", function () {
+  if (!pendingSelector) return;
+  const replacement = document.querySelector(pendingSelector);
+  if (replacement) replacement.focus();
+});
+```
+
+**General rule for this codebase**: never read `evt.detail.elt` inside an `htmx:afterSettle`
+listener expecting it to be the triggering element. If you need "the element whose click/change
+caused this swap," capture it on `htmx:configRequest` (or `htmx:beforeRequest`) and carry it
+forward in a closure variable, keyed by a stable selector rather than the element reference.
+
 ## CSS Keyframes
 
 All animation keyframes live in `public/game.css` except:

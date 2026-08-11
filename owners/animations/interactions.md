@@ -99,6 +99,14 @@
   skew row width the same way. `data-hand-position` (the drag-and-drop key `game.js` reads) is
   independent of flex participation, so this fix didn't touch drag-and-drop.
 - **State that must survive swaps**: Anything toggled by JS that needs to outlive a `game-state-updated` swap must NOT be re-applied to swapped-in content in `afterSwap` — the settle phase reverts it (see architecture.md). Anchor such state on `document.body` or another non-swapped ancestor. The hamburger menu (`body.game-menu-open`) is the reference example; developer mode (`body.dev-mode`, set server-side from a cookie, gating `.menu-debug` visibility) is a second, JS-free example.
+- **`evt.detail.elt` is not the triggering element inside `htmx:afterSettle` (fixed 2026-08-11,
+  `public/table-look-focus.js`)**: htmx's `triggerEvent` always overwrites `detail.elt` to be
+  the element the event is dispatched *on*; `afterSettle` fires once per settling element in
+  the swapped fragment, so `detail.elt` there is whichever of those is being settled, not the
+  clicked control. Any `afterSettle` handler needing "what did the user click" must capture it
+  earlier, on `htmx:configRequest` (fires once, on the real triggering element, pre-swap), and
+  carry a stable selector forward in a closure variable. See architecture.md for the full
+  writeup and code.
 
 ## Not Related To
 
