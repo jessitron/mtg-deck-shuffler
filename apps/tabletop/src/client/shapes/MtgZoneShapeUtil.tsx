@@ -59,17 +59,31 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
     const armed = useIsZoneArmed(this.editor, shape.id);
 
     const style: CSSProperties = playmat
-      ? {
-          width: w,
-          height: h,
-          boxSizing: "border-box",
-          border: "10px solid black", // untokenized on purpose — matches the Shuffler's mats exactly
-          borderRadius: h * 0.05,
-          color: "black",
-          position: "relative", // anchors the picture below, absolutely positioned to fill the box
-          overflow: "hidden", // clips the picture to this same borderRadius, so border and picture
-          // read as one continuous rounded rectangle instead of a square photo behind a round frame
-        }
+      ? imageUrl
+        ? {
+            // The border lives on the <img> itself below (it hugs the actual
+            // artwork edge exactly, rather than being a same-size box drawn
+            // separately around it — the mismatch Jess flagged, 2026-08-11).
+            // So this box carries no border/radius/clip of its own; it's
+            // just the positioning frame the image fills.
+            width: w,
+            height: h,
+            boxSizing: "border-box",
+            color: "black",
+            position: "relative", // anchors the picture below, absolutely positioned to fill the box
+          }
+        : {
+            // No image yet: fall back to a plain bordered box so the zone
+            // still reads as a placeholder rectangle.
+            width: w,
+            height: h,
+            boxSizing: "border-box",
+            border: "10px solid black", // untokenized on purpose — matches the Shuffler's mats exactly
+            borderRadius: h * 0.05,
+            color: "black",
+            position: "relative",
+            overflow: "hidden",
+          }
       : {
           width: w,
           height: h,
@@ -127,7 +141,17 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
             <img
               src={imageUrl}
               alt=""
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+                boxSizing: "border-box",
+                border: "10px solid black", // untokenized on purpose — matches the Shuffler's mats exactly
+                borderRadius: h * 0.05,
+              }}
             />
           ) : null}
           {label}

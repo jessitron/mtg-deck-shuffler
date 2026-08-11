@@ -132,11 +132,21 @@ each).
   cover both: the playmat's and library's *pictures* were separate stock `image` shapes on
   top of the `mtg-zone` box, so border, interior tint and inset shadow were invisible for
   both. **The playmat's picture is no longer a separate shape at all** — `MtgZoneShapeUtil`'s
-  own `component()` now renders it as an absolutely-positioned `<img>` *inside* the same
-  bordered div (`position: relative; overflow: hidden` added to that div), clipped to the same
-  `borderRadius: h * 0.05` as the border around it, so image and border read as one continuous
-  rounded rectangle. That means the playmat box's interior is no longer hidden by an overlay —
-  there is no overlay, the picture is a child of the box. **The library's card-back picture is
+  own `component()` renders it as an absolutely-positioned `<img>` *inside* the same div, so
+  the playmat box's interior is no longer hidden by an overlay — there is no overlay, the
+  picture is a child of the box. **The border moved from the box onto the `<img>` itself
+  (2026-08-11, same day, Jess's follow-up)** — it was first drawn on the container div with the
+  image clipped to match, which worked but left border and image as two separately-sized/
+  positioned boxes that could drift apart; Jess noticed the mismatch, so `border: "10px solid
+  black"` and `borderRadius: h * 0.05` (same untokenized-on-purpose values as before) now live
+  directly on the `<img>` (`boxSizing: "border-box"`), so the border hugs the actual rendered
+  artwork edge exactly. **When there's no `imageUrl` yet** (a playmat with no image assigned —
+  `playmatImageUrl` is optional, `seatJoined.ts`), the container div falls back to the old
+  plain bordered empty box — Jess's explicit call, "keep a placeholder border" over "truly
+  empty," so the zone still reads as a placeholder rectangle. The armed-glow `box-shadow` (see
+  ticket 14 below) is unaffected by either branch: it's still set on the container div, which
+  is the same size in both cases, so the ring traces the same rectangle regardless of whether
+  an image is present. **The library's card-back picture is
   unchanged** — still a separate stock `image` shape layered on top of the `mtg-zone` box, so
   this limit (and the "any armed treatment must read as outward" consequence below) still
   governs it alone. Any "armed" or "about to receive" treatment for the library must still read

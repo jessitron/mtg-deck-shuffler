@@ -2360,6 +2360,38 @@ claims about the app today.
 Verified visually with a Playwright screenshot — the picture clips flush to the rounded
 border, no square corner peeking out.
 
+## 2026-08-11 — the playmat's border moved off the box and onto the picture itself
+
+Same day, same buoy (`playmat-image-radius`), one more turn of the screw. The fix above put
+the border on the container div and clipped the `<img>` to match its `borderRadius` — two
+separately-sized/positioned boxes sharing the same radius value, which worked but could
+drift: Jess noticed the border didn't quite fit the image.
+
+**The fix: draw the border on the `<img>` itself, not the container.** `MtgZoneShapeUtil`'s
+`component()` now branches on `imageUrl` for the playmat case. When an image is present, the
+container div carries no border/radius/clip of its own — it's just the positioning frame — and
+`border: "10px solid black"` + `borderRadius: h * 0.05` + `boxSizing: "border-box"` (the exact
+same values as before, just relocated) go directly on the `<img>`. Since the border now lives
+on the element whose edge it's supposed to trace, it hugs the actual rendered artwork exactly,
+with no separately-computed box that could drift out of sync with it.
+
+**When there's no `imageUrl` yet — a playmat with no image assigned (`playmatImageUrl` is
+optional, `seatJoined.ts`) — the container falls back to the old plain bordered empty box.**
+Jess was asked and chose "keep a placeholder border" over "truly empty": the zone should still
+read as a placeholder rectangle, not disappear.
+
+**Only the playmat zone is affected.** Library/graveyard/exile/command-zone's dashed-pink
+treatment is untouched, and so is the armed-glow `box-shadow` logic — it's still set once on
+the container div (`style.boxShadow = ...`), which is the same size in both playmat branches
+(image or no-image), so the glow ring still traces the same rectangle either way. README.md's
+tldraw-limits bullet (playmat-image-radius) was updated to describe the border's new home;
+interactions.md's summary bullet ("a child of its own box, not a layered shape") still holds
+at that level of detail and needed no change.
+
+Verified with the existing unit suite (116 tests) plus the Playwright verification suite (44
+tests), all passing — no new specs were added since this is a refinement of already-verified
+geometry, not new behavior.
+
 ## 2026-08-11 — the fleet-wide 0.5 furniture dimming came out, and with it the "gray border" illusion
 
 `tableFurniture.ts`'s `zoneShape()` set `opacity: sleeveColor ? 1 : 0.5` on every zone shape
