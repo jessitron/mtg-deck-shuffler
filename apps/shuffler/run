@@ -7,6 +7,11 @@ source .env
 # port_override if defined, otherwise $PORT as defined in .env
 APP_PORT=${port_override:-${PORT}}
 
+# Locally, the Tabletop must hotlink playmat/card-back images from THIS server,
+# not the prod default baked into port-tabletop/types.ts::shufflerPublicUrl().
+# Only set it if the caller hasn't already (e.g. testing against prod).
+export SHUFFLER_PUBLIC_URL=${SHUFFLER_PUBLIC_URL:-"http://localhost:$APP_PORT"}
+
 # Announce readiness once the app answers, so you (or a script) don't have to poll
 # by hand. Runs alongside npm start, which stays in the foreground as usual.
 (
