@@ -232,6 +232,39 @@ export function commandZoneCardPosition(seatIndex: number, slot: number, count: 
   return { x: box.x + slot * (CARD_W + GAP), y };
 }
 
+/** Smallest empty band between two AABBs on either axis; negative means overlap. */
+function separation(a: Bounds, b: Bounds): number {
+  const dx = Math.max(b.x - (a.x + a.w), a.x - (b.x + b.w));
+  const dy = Math.max(b.y - (a.y + a.h), a.y - (b.y + b.h));
+  return Math.max(dx, dy);
+}
+
+/**
+ * The disjointness invariant, runnable outside the test suite: zone detection
+ * (topmostZoneAt, owners/tabletop-shape-mechanics) resolves an AABB overlap by
+ * z-order, which is meaningless as a semantic tiebreak, so every zone must
+ * keep at least `minGap` of empty space from every other. Throws naming the
+ * two conflicting zones and the actual gap, so a constant edit that breaks
+ * this fails at the point the layout is computed, not three files away in a
+ * test run.
+ */
+export function checkZonesDisjoint(zones: Record<string, Bounds>, minGap: number): void {
+  const entries = Object.entries(zones);
+  for (let i = 0; i < entries.length; i++) {
+    for (let j = i + 1; j < entries.length; j++) {
+      const [nameA, boundsA] = entries[i];
+      const [nameB, boundsB] = entries[j];
+      const gap = separation(boundsA, boundsB);
+      if (gap < minGap) {
+        throw new Error(
+          `cardLayout disjointness invariant violated: "${nameA}" and "${nameB}" are only ${gap} apart ` +
+            `(need >= ${minGap}). Zone AABBs must stay disjoint or zone detection (first-match by z-order) breaks.`
+        );
+      }
+    }
+  }
+}
+
 /** Fixed inset and per-card step of the graveyard cascade — shared by the position and its wrap bound below. */
 const GRAVEYARD_PILE_INSET = 10;
 const GRAVEYARD_PILE_STEP = 6;
@@ -259,3 +292,24 @@ export function graveyardCardPosition(seatIndex: number, graveyardCount: number)
     y: box.y + ZONE_LABEL_BAND + GRAVEYARD_PILE_INSET + step * GRAVEYARD_PILE_STEP,
   };
 }
+
+/**
+ * Runs at import time (server boot, every test run) rather than waiting for
+ * someone to run test/cardLayout.test.ts: if a constant edit ever breaks the
+ * disjointness invariant — including the STACK_SIZE-vs-PLAYMAT_H "stay inside
+ * the square" case noted on STACK_SIZE above — this throws immediately, at
+ * the point the layout module is loaded, naming the two zones that collide.
+ */
+function assertLayoutInvariants(): void {
+  const zones: Record<string, Bounds> = { stack: stackBounds() };
+  for (let seat = 0; seat < MAX_SEATS; seat++) {
+    zones[`seat${seat}.playmat`] = playmatBounds(seat);
+    zones[`seat${seat}.library`] = libraryBounds(seat);
+    zones[`seat${seat}.command`] = commandZoneBounds(seat);
+    zones[`seat${seat}.graveyard`] = graveyardBounds(seat);
+    zones[`seat${seat}.exile`] = exileBounds(seat);
+  }
+  checkZonesDisjoint(zones, GAP);
+}
+
+assertLayoutInvariants();

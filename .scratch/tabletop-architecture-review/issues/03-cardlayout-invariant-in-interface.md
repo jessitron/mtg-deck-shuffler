@@ -1,6 +1,15 @@
 # 03 — Move cardLayout's disjointness invariant into the interface, not just the test
 
-**Status:** ready-for-agent
+**Status:** done — added an exported `checkZonesDisjoint(zones, minGap)` pure function to
+`cardLayout.ts`, called once at module load (`assertLayoutInvariants()`) against all 4 seats'
+zones plus the Stack. A constant edit that breaks disjointness (including the
+`STACK_SIZE`-vs-`PLAYMAT_H` "stay inside the square" case already noted in a comment) now throws
+at import/server-boot time, naming the two conflicting zones and the actual gap — not just when
+`test/cardLayout.test.ts` happens to run. The pre-existing "keeps every zone AABB apart" test now
+calls this same function instead of duplicating the separation logic locally (a code-review
+finding), so there's one algorithm, not two. No behavior change for the current valid constants.
+`tabletop-shape-mechanics-review`: outside its territory (pure geometry, no ShapeUtil/gesture
+code touched) — safe to land.
 
 **Files:** `src/server/cardLayout.ts` (242 lines, 9 commits), `test/cardLayout.test.ts`
 
