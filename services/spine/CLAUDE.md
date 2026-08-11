@@ -20,9 +20,12 @@ ActiveRecord), SQLite, Minitest. Rewritten from a Rails 8 app for the reasons in
 `.scratch/spine-roda-rewrite/spec.md` (repo root) — Jess wants to learn plain Ruby, and
 Rails' magic was in the way of seeing where things actually happen.
 
-Currently boot-only: `GET /up` for health, OTel wired at 100% sampling, an empty SQLite
-DB connected via Sequel. Tables/seats/events (the actual domain) land in a later ticket
-— see `.scratch/spine-roda-rewrite/issues/`.
+`GET /up` for health, OTel wired at 100% sampling. `POST /join` (`{name, playerName}` →
+`{tableId, seatNumber}`) creates a table on an unseen name and always takes a seat —
+domain logic lives in `models/table.rb` (`Table`, `Seat`, `Event`, all `Sequel::Model`),
+schema in `config/db.rb`. Generic event ingestion (`POST /tables/:table_id/events`,
+contract-validated against `contracts/`), SSE outbound delivery, and the admin screen
+land in later tickets — see `.scratch/spine-roda-rewrite/issues/`.
 
 See `README.md` (in this directory) for more.
 
