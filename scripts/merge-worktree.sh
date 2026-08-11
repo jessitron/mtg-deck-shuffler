@@ -15,6 +15,32 @@ fi
 BRANCH="$1"
 MSG="${2:-Merge worktree branch '$BRANCH' - claude}"
 
+REPO_ROOT=$(git rev-parse --show-toplevel)
+LOCK_DIR="$REPO_ROOT/.git/merge-worktree.lock"
+
+# Only one merge-worktree.sh run at a time: the merge, test run, and
+# stash pop all mutate the single shared main checkout, so two runs
+# overlapping would interleave their git state and their test results.
+# mkdir is atomic even across processes, so it's a portable lock.
+WAITED=0
+while ! mkdir "$LOCK_DIR" 2>/dev/null; do
+  if [ "$WAITED" -eq 0 ]; then
+    echo "Another merge-worktree.sh run is in progress — waiting for it to finish." >&2
+    if [ -f "$LOCK_DIR/owner" ]; then
+      echo "  (held by: $(cat "$LOCK_DIR/owner" 2>/dev/null))" >&2
+    fi
+  fi
+  WAITED=$((WAITED + 1))
+  if [ "$WAITED" -gt 180 ]; then
+    echo "Error: gave up waiting for the lock at $LOCK_DIR after 15 minutes." >&2
+    echo "If the process that holds it is gone, remove the directory manually and retry: rmdir \"$LOCK_DIR\"" >&2
+    exit 1
+  fi
+  sleep 5
+done
+echo "branch=$BRANCH pid=$$ started=$(date)" > "$LOCK_DIR/owner"
+trap 'rm -rf "$LOCK_DIR"' EXIT
+
 CURRENT_BRANCH=$(git branch --show-current)
 if [ "$CURRENT_BRANCH" != "main" ]; then
   echo "Error: run this from the main checkout, on branch 'main' (currently on '$CURRENT_BRANCH')." >&2
@@ -39,7 +65,6 @@ fi
 
 echo "Merged '$BRANCH' into main."
 
-REPO_ROOT=$(git rev-parse --show-toplevel)
 echo "Running fleet tests before cleanup..."
 TESTS_FAILED=0
 (cd "$REPO_ROOT" && npm test) || TESTS_FAILED=1
