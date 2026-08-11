@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
-Status: ready-for-agent
+Status: done
 Blocked by: 18 — commander arrives with owner and ghost (arming reads `owner` and `isCommander` off the dragged card)
 
 **What to build:** Dragging your own commander over your Command Zone lights the zone
