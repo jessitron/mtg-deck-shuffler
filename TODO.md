@@ -199,14 +199,16 @@ section is just a wall between Jess and the live work.
     working model instead of racing the swap.
   - Consult the `animations` owner before touching this.
 
-- [ ] `shuffler-logs-not-console` Convert the Shuffler's remaining `console.*` to trace-participating logs ← was: JES-135
-  - **53 sites left** outside `src/scripts/` (verified 2026-08-06): `app.ts` 40, `server.ts` 8,
-    `GameState.ts` 2, and one each in `view/debug/state-copy.ts`, `SqlitePersistStateAdapter.ts`,
-    `ArchidektDeckToDeckAdapter.ts`. None reach Honeycomb, and the Shuffler creates zero manual
-    spans, so these catch blocks are the only record of most failures.
-  - The pattern is established at `POST /deck` (`dc2df7e`): `markCurrentSpanAsError` with the
-    failure kind and inputs **first**, then `log.error(msg, attrs, error)` only for the stack.
-    Many `app.ts` catch blocks already do step 1 — don't re-stamp them.
+- [ ] `shuffler-logs-not-console` Convert the Shuffler's last two stray `console.*` call sites to trace-participating logs ← was: JES-135
+  - Re-verified 2026-08-11: the 53-site sweep this item originally named (`app.ts` 40, `server.ts` 8,
+    `GameState.ts` 2, `SqlitePersistStateAdapter.ts`, `ArchidektDeckToDeckAdapter.ts`) is **done** —
+    commit `a89277c` ("Sweep remaining Shuffler console.* call sites onto src/log.ts"). All five
+    files are now at zero `console.*` calls.
+  - What's actually left, outside `src/scripts/`: one `console.warn` in
+    `src/view/common/html-layout.ts` (startup guard when no Honeycomb API key is configured) and one
+    `console.error` in `src/view/debug/state-copy.ts` (browser-side copy-to-clipboard failure on the
+    debug page). `src/log.ts` itself also calls `console.*` but that's the logger's own sink, not a
+    stray call site.
   - `src/scripts/*` keeps `console.*` on purpose, already written down in `apps/shuffler/CLAUDE.md`.
     Don't "finish the job" there.
 
@@ -276,12 +278,13 @@ section is just a wall between Jess and the live work.
   - `oracleCardName` is already on `CardDefinition`, so the name half is nearly free; the image half
     needs resolving the English printing of the same oracle card.
 
-- GRILLING: `commander-tax-counter` Count how many times the commander has been cast, in the command zone ← was: JES-81
+- GRILLING: `commander-tax-counter` Count how many times the commander has been cast, in the command zone (Tabletop) ← was: JES-81
   - > Track how many times the commander has been cast (commander tax). Display a play counter in the
     > command zone.
-  - Nothing exists yet — no cast count in `src/` at all — but the command zone is a real rendered
-    surface (`formatCommandZoneHtmlFragment`, `src/view/common/shared-components.ts`), so this is an
-    addition to something that's already there. Small, and genuinely useful mid-game.
+  - Jess's call (2026-08-11): this belongs on the Tabletop, not the Shuffler. Nothing exists yet — no
+    cast count anywhere. The Shuffler's command zone (`formatCommandZoneHtmlFragment`,
+    `src/view/common/shared-components.ts`) is not the target surface; needs its own home on the
+    Tabletop's command-zone rendering.
 
 - [ ] `focus-ring-manual-tabthrough` Actually tab through the app and look at the new focus ring
   - Unblocked: `modals-are-not-modal` landed (focus trap + dialog semantics on all four modals).
