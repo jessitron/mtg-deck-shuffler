@@ -2,6 +2,7 @@ import { describe, test, expect } from "@jest/globals";
 import { formatDeckTitleHtmlFragment, formatCommandZoneHtmlFragment } from "../../src/view/common/shared-components.js";
 import { GameState } from "../../src/GameState.js";
 import { deckWithOneCommander } from "../generators.js";
+import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../../src/table-look.js";
 import * as fc from "fast-check";
 
 
@@ -25,20 +26,21 @@ describe("formatDeckTitleHtmlFragment sleeve tint", () => {
 });
 
 describe("formatCommandZoneHtmlFragment sleeve tint", () => {
-  test("sleeved game: command-zone surround gets the tint", () => {
+  test("sleeved game: command-zone surround is tinted with the playmat's resolved secondary color", () => {
     const deck = fc.sample(deckWithOneCommander, 1)[0];
     const game = GameState.newGame(1, 1, 1, deck, undefined, undefined, "#bd0a0a");
     game.startGame();
     const html = formatCommandZoneHtmlFragment(game);
-    expect(html).toContain("background-color: #bd0a0a");
+    const { secondaryColor } = colorsForPlaymat(DEFAULT_PLAYMAT_PATH, "#bd0a0a");
+    expect(html).toContain(`background-color: ${secondaryColor}`);
   });
 
-  test("unsleeved game: no inline style on the surround itself", () => {
+  test("unsleeved game: surround still gets a color, resolved from the playmat's curated pair", () => {
     const deck = fc.sample(deckWithOneCommander, 1)[0];
     const game = GameState.newGame(1, 1, 1, deck);
     game.startGame();
     const html = formatCommandZoneHtmlFragment(game);
-    const surroundTag = html.match(/<div class="cool-command-zone-surround[^>]*>/)?.[0];
-    expect(surroundTag).not.toContain("style=");
+    const { secondaryColor } = colorsForPlaymat(DEFAULT_PLAYMAT_PATH, undefined);
+    expect(html).toContain(`background-color: ${secondaryColor}`);
   });
 });

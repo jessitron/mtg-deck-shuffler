@@ -5,6 +5,7 @@ import { formatLibrarySectionHtmlFragment } from "./library-components.js";
 import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js";
 import { escapeHtml, formatCommandZoneHtmlFragment, formatDeckTitleHtmlFragment } from "../common/shared-components.js";
 import { formatGameMenuHtmlFragment } from "./game-menu.js";
+import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../../table-look.js";
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}, devMode: boolean = false): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
@@ -35,6 +36,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const revealedCardsHtml = formatRevealedCardsHtmlFragment(game, whatHappened);
   const handSectionHtml = formatHandSectionHtmlFragment(game, whatHappened);
   const menuHtml = formatGameMenuHtmlFragment(game);
+  const { secondaryColor } = colorsForPlaymat(game.playmatImagePath ?? DEFAULT_PLAYMAT_PATH, game.sleeveColor);
 
   const goToTableButtonHtml = game.tableName
     ? `<a class="pushable-flat go-to-table-button" href="${tabletopPublicUrl()}/t/${encodeURIComponent(game.tableName)}" target="_blank" rel="noopener">Go to Table: ${escapeHtml(game.tableName)}</a>`
@@ -60,7 +62,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
            hx-swap="outerHTML">
 
            <div class="game-header-row">
-             ${formatDeckTitleHtmlFragment(game.deckName, game.sleeveColor)}
+             ${formatDeckTitleHtmlFragment(game.deckName, secondaryColor)}
              ${menuHtml}
            </div>
            ${tableSectionHtml}

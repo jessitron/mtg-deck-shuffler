@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Ship: shuffler
-Status: ready-for-agent
+Status: resolved
 
 **What to build:** Today, the command-zone surround and the deck-name title on both
 `/prepare` and `/game` tint their backgrounds with the player's raw sleeve color (falling
@@ -30,11 +30,11 @@ Shuffler alone (`/prepare` and `/game` in the browser, plus the unit test below)
 
 **Blocked by:** None — can start immediately.
 
-- [ ] `colorsForPlaymat(playmatImagePath, sleeveColor)` added to `table-look.ts`, unit tested
+- [x] `colorsForPlaymat(playmatImagePath, sleeveColor)` added to `table-look.ts`, unit tested
   in `table-look.test.ts` (sleeve-chosen contrast case, no-sleeve darker-of-two case, missing
   `chosenTwo` fallback case)
-- [ ] Command-zone surround background on `/prepare` uses the resolved secondary color
-- [ ] Command-zone surround background on `/game` uses the resolved secondary color
-- [ ] Deck-name title background on `/prepare` uses the resolved secondary color
-- [ ] Deck-name title background on `/game` uses the resolved secondary color
-- [ ] No playmat with no `chosenTwo` entry breaks rendering (falls back cleanly)
+- [x] Command-zone surround background on `/prepare` uses the resolved secondary color
+- [x] Command-zone surround background on `/game` uses the resolved secondary color
+- [x] Deck-name title background on `/prepare` uses the resolved secondary color
+- [x] Deck-name title background on `/game` uses the resolved secondary color
+- [x] No playmat with no `chosenTwo` entry breaks rendering (falls back cleanly)

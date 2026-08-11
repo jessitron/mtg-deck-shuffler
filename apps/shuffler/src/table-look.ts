@@ -2,6 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { log } from "./log.js";
 
+/** Perceived luminance (ITU-R BT.601). */
+export function luminance(hex: string): number {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return 0.299 * r + 0.587 * g + 0.114 * b;
+}
+
 
 export interface PlaymatChoice {
   slug: string;
@@ -65,6 +73,7 @@ export const SLEEVE_QUICK_PICKS: readonly SleeveQuickPick[] = [
 interface PlaymatColorEntry {
   chosenFive?: string[];
   chosenThree?: string[];
+  chosenTwo?: string[];
 }
 
 const PLAYMAT_COLORS_PATH = path.join(PLAYMATS_DIR, "playmat-colors.json");
@@ -95,6 +104,31 @@ export function sleeveQuickPicksForPlaymat(playmatPath: string): readonly Sleeve
   const hexes = entry?.chosenFive?.length ? entry.chosenFive : entry?.chosenThree;
   if (!hexes?.length) return SLEEVE_QUICK_PICKS;
   return hexes.map((hex, i) => ({ name: `Playmat color ${i + 1}`, hex }));
+}
+
+export interface PlaymatColors {
+  primaryColor: string;
+  secondaryColor: string;
+}
+
+/** Mirrors --light-pink/--dark-pink in packages/design-tokens/tokens.css, the generic fallback identity pair. */
+const FALLBACK_COLORS: PlaymatColors = { primaryColor: "#ddc7dd", secondaryColor: "#bb5277" };
+
+export function colorsForPlaymat(playmatPath: string, sleeveColor: string | undefined): PlaymatColors {
+  const filename = path.basename(playmatPath);
+  const chosenTwo = PLAYMAT_COLORS[filename]?.chosenTwo;
+  if (!chosenTwo || chosenTwo.length < 2) return FALLBACK_COLORS;
+  const [first, second] = chosenTwo;
+
+  if (sleeveColor) {
+    const distanceToFirst = Math.abs(luminance(first) - luminance(sleeveColor));
+    const distanceToSecond = Math.abs(luminance(second) - luminance(sleeveColor));
+    const secondaryColor = distanceToSecond > distanceToFirst ? second : first;
+    return { primaryColor: sleeveColor, secondaryColor };
+  }
+
+  const [darker, lighter] = luminance(first) <= luminance(second) ? [first, second] : [second, first];
+  return { primaryColor: darker, secondaryColor: lighter };
 }
 
 export function isKnownPlaymatPath(path: string): boolean {

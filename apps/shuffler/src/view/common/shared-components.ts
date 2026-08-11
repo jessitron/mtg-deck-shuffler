@@ -1,6 +1,7 @@
 import { getCardImageUrl } from "../../types.js";
 import { GameCard, GameState, WhatHappened } from "../../GameState.js";
 import { GameId } from "../../domain-types.js";
+import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH, luminance } from "../../table-look.js";
 
 export const CARD_BACK = "/images/mtg-card-back.jpg";
 
@@ -8,12 +9,9 @@ export function escapeHtml(text: string): string {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-/** Perceived luminance (ITU-R BT.601) below the midpoint reads as dark. */
+/** Below the midpoint reads as dark. */
 function isDarkHex(hex: string): boolean {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return 0.299 * r + 0.587 * g + 0.114 * b < 128;
+  return luminance(hex) < 128;
 }
 
 export function sleeveTintStyle(sleeveColor: string | undefined, withTextColor: boolean): string {
@@ -127,10 +125,11 @@ export function formatCommandZoneHtmlFragment(game: GameState): string {
   const commanders = game.listCommanders();
   const gameId = game.gameId;
   const expectedVersion = game.getStateVersion();
+  const { secondaryColor } = colorsForPlaymat(game.playmatImagePath ?? DEFAULT_PLAYMAT_PATH, game.sleeveColor);
   return commanders.length == 0
     ? `<div class="commander-placeholder">No Commander</div>`
     : `<div id="command-zone">
-    <div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}"${sleeveTintStyle(game.sleeveColor, false)}>
+    <div class="cool-command-zone-surround ${commanders.length > 1 ? "two-commanders" : ""}"${sleeveTintStyle(secondaryColor, false)}>
       <div class="multiple-cards">
         ${commanders.map((gameCard) => formatCardContainer({ gameCard, gameId, expectedVersion })).join("")}
       </div>

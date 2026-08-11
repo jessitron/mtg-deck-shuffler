@@ -5,6 +5,7 @@ import {
   sleeveQuickPicksForPlaymat,
   isKnownPlaymatPath,
   isValidSleeveColor,
+  colorsForPlaymat,
 } from "../src/table-look.js";
 
 
@@ -59,6 +60,45 @@ describe("sleeveQuickPicksForPlaymat", () => {
         expect(isValidSleeveColor(pick.hex)).toBe(true);
       }
     }
+  });
+});
+
+describe("colorsForPlaymat", () => {
+  // playmat-map.png's chosenTwo (playmat-colors.json): #d090b0 (lighter), #30546c (darker).
+  const MAP_PLAYMAT = "/images/playmats/playmat-map.png";
+
+  it("with a sleeve chosen, uses the sleeve as primary and the more-contrasting chosenTwo color as secondary", () => {
+    // Black quick-pick (#530aae) is dark — it contrasts more with the lighter chosenTwo color (#d090b0).
+    expect(colorsForPlaymat(MAP_PLAYMAT, "#530aae")).toEqual({
+      primaryColor: "#530aae",
+      secondaryColor: "#d090b0",
+    });
+
+    // White quick-pick (#f0e68c) is light — it contrasts more with the darker chosenTwo color (#30546c).
+    expect(colorsForPlaymat(MAP_PLAYMAT, "#f0e68c")).toEqual({
+      primaryColor: "#f0e68c",
+      secondaryColor: "#30546c",
+    });
+  });
+
+  it("with no sleeve chosen, uses the darker chosenTwo color as primary and the other as secondary", () => {
+    expect(colorsForPlaymat(MAP_PLAYMAT, undefined)).toEqual({
+      primaryColor: "#30546c",
+      secondaryColor: "#d090b0",
+    });
+  });
+
+  it("falls back to the fixed default pair for a playmat with no chosenTwo entry", () => {
+    const fallback = colorsForPlaymat("/images/playmats/aeoe-41-terrasymbiosis.png", "#530aae");
+    expect(fallback.primaryColor).toMatch(/^#[0-9a-f]{6}$/i);
+    expect(fallback.secondaryColor).toMatch(/^#[0-9a-f]{6}$/i);
+    expect(colorsForPlaymat("/images/playmats/aeoe-41-terrasymbiosis.png", undefined)).toEqual(fallback);
+  });
+
+  it("falls back to the fixed default pair for an unknown path", () => {
+    expect(colorsForPlaymat("/images/playmats/does-not-exist.png", "#530aae")).toEqual(
+      colorsForPlaymat("/images/playmats/aeoe-41-terrasymbiosis.png", "#530aae")
+    );
   });
 });
 
