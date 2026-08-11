@@ -1158,3 +1158,53 @@ edit to `cardLayout.ts` doesn't need this owner's machinery.
 
 Full detail in `interactions.md` watch point 8 (new paragraph) and its "Depended On By → Zone
 detection" section (new confirming note).
+
+## Tabletop-architecture ticket 01: `MtgCardShapeUtil.tsx` split by hook, organizational only (2026-08-11)
+
+`.scratch/tabletop-architecture-review/issues/01-split-cardshapeutil-interop-from-physics.md`,
+worktree `ticket-01-split-cardshapeutil`, branch `worktree-ticket-01-split-cardshapeutil`.
+`MtgCardShapeUtil.tsx` (388 lines, 21 commits, holding every hook's full body inline) split into
+a thin shell plus four new sibling files, one per hook:
+
+- `apps/tabletop/src/client/shapes/cardRender.tsx` — `component()`'s JSX body (`CardFace({shape})`),
+  `getIndicatorPath`'s body (`cardIndicatorPath(shape)`), and the tap catch-up `useLayoutEffect`.
+- `apps/tabletop/src/client/shapes/cardTapClick.ts` — `onClick`'s full body
+  (`handleCardClick(editor, shape)`), including ticket 16's `queueMicrotask` undo-coalescing trick,
+  preserved verbatim with its ordering-hazard comment.
+- `apps/tabletop/src/client/shapes/cardPassengers.ts` — `PASSENGER_TYPES`, the two `can*` gates,
+  and `onDragShapesIn`/`onDragShapesOut`'s bodies, including the rotation-zeroing math for
+  `reparentShapes`' page-rotation-preservation quirk.
+- `apps/tabletop/src/client/shapes/cardZoneEntry.ts` — `NON_BATTLEFIELD_ZONES`, `onTranslateEnd`'s
+  body, and its two former-private helpers `zoneAt`/`evictPassengers`, now module-level functions.
+
+Every extracted function takes `editor: Editor` and the relevant shape(s) as explicit parameters
+instead of reading `this.editor` — the same pattern `cardTap.ts`'s `tapPartial` (ticket 17) already
+used. `MtgCardShapeUtil.tsx` itself shrank to 83 lines: still extends `BaseBoxShapeUtil`, still
+declares every override (load-bearing regardless of body — see the `onClick`-defers-selection
+quirk), each body now a one-line delegation.
+
+- **Not the review's originally-proposed CardPhysics/interop architectural split.** Grilling on the
+  ticket found no clean seam of that kind exists in this file — every hook mixes a tldraw quirk
+  with a domain rule inseparably (`onClick` = tap/untap + the `queueMicrotask` undo-coalescing
+  trick; `onTranslateEnd` = zone-entry + tldraw's settle-once debounce; `onDragShapesIn` =
+  counter-attachment + `reparentShapes`' rotation-preservation quirk). Jess's call was explicitly
+  organizational: split by hook for navigability, pull out anything genuinely tldraw-free where it
+  already existed (`tapPartial`, `topmostZoneAt`, `findOpenSpotsNearZoneEdge` — untouched by this
+  ticket), but don't invent a false purity boundary elsewhere.
+- **Zero behavior change, confirmed**: 110/110 vitest tests pass before and after; 43/44 Playwright
+  `verify.sh` specs pass before and after — the one failure, `verify-life-counter.spec.ts:102`,
+  reproduces identically on unmodified `main` (pre-existing flakiness, unrelated).
+- **Consequence for the `two-faced-cards` boundary**: before this ticket, one file
+  (`MtgCardShapeUtil.tsx`) served both this owner's territory and `two-faced-cards`'s. After the
+  split, `two-faced-cards`'s concern (what image/face renders) lives mostly in `cardRender.tsx`'s
+  `CardFace`, while this owner's spans the shell plus `cardTapClick.ts`/`cardPassengers.ts`/
+  `cardZoneEntry.ts` — except the tap catch-up animation, which stayed in `cardRender.tsx` (it's
+  rendering code, even though the gesture it reacts to is this owner's). File location tracks
+  concern more closely than before, but still not exactly — don't use it as the sole signal for
+  which owner a question belongs to.
+
+Full detail in `architecture.md`'s new "Ticket 01" section (and its rewritten "The ShapeUtil today"
+intro and "How to tell this owner's territory from `two-faced-cards`'s" section);
+`interactions.md`'s "Depends On" → `two-faced-cards` note rewritten; `files.md` gained the four new
+file entries and `MtgCardShapeUtil.tsx`'s entry rewritten; `README.md`'s quick-reference table
+gained rows for the four new files.

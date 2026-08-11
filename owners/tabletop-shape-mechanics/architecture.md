@@ -22,10 +22,16 @@ and stray drops can no longer masquerade as one the way they could when everythi
 
 ## The ShapeUtil today: `MtgCardShapeUtil`
 
-`apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` extends tldraw's `BaseBoxShapeUtil<MtgCardShape>`
-(not `ImageShapeUtil` — see "Ticket 12 landed" below) and overrides:
+**Ticket 01 (2026-08-11, organizational split — see "Ticket 01" section below for the full
+writeup).** `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` is now a thin shell: it still
+extends tldraw's `BaseBoxShapeUtil<MtgCardShape>` (not `ImageShapeUtil` — see "Ticket 12 landed"
+below) and still declares every override below — the override's mere *presence* is load-bearing
+regardless of its body, see the `onClick`-defers-selection quirk further down — but each override's
+body now lives in a sibling file and is called with `this.editor` passed through explicitly. The
+mechanics described in the rest of this section are unchanged in substance; only the file each
+body lives in moved:
 
-- **`onClick(shape)`** — tap/untap toggle (JES-144). Tap state lives in `props.tapped` (a real,
+- **`onClick(shape)`** (body: `handleCardClick`, `cardTapClick.ts`) — tap/untap toggle (JES-144). Tap state lives in `props.tapped` (a real,
   validated boolean — no more reading it back out of `rotation` with a float-tolerance epsilon).
   Rotation is applied as a pure visual delta (`shape.rotation ± 90°`), so free rotation and tap
   compose independently instead of one clobbering the other's read of "is this tapped." Still
@@ -37,7 +43,7 @@ and stray drops can no longer masquerade as one the way they could when everythi
   also pushes the clicked card's NEW state to the rest of a marquee selection via a
   `queueMicrotask`-deferred batch — see "Ticket 16" below for the undo-coalescing mechanism
   this depends on.
-- **`onTranslateEnd(_initial, current)`** — fires once, on the moved shape, when a drag settles.
+- **`onTranslateEnd(_initial, current)`** (body: `handleTranslateEnd`, `cardZoneEntry.ts`) — fires once, on the moved shape, when a drag settles.
   Three responsibilities live here:
   1. **Zone-entry detection** (`600cac1`): resolves the zone under the card's center via
      `zoneAt()` (since ticket 18 returning the full `ZoneHit` — `{id, zone}` — not just the zone
@@ -53,12 +59,13 @@ and stray drops can no longer masquerade as one the way they could when everythi
      zone's edge. See "Ticket 18" below — including why the Stack is deliberately NOT in that
      set.
 - **`canReceiveNewChildrenOfType` / `canRemoveChildrenOfType` / `onDragShapesIn` /
-  `onDragShapesOut`** (ticket 18) — the card is a drop target and host for `mtg-counter` shapes,
-  via tldraw's native drag-and-drop parenting. See "Ticket 18" below for the gates' narrowing
-  (load-bearing) and the rotation-zeroing math in `onDragShapesIn`.
-- **`component(shape)` / `getIndicatorPath(shape)`** — new, required by `BaseBoxShapeUtil`. The
-  card renders its own `<img>` (front or back URL chosen from `props.face`) instead of delegating
-  to tldraw's image machinery.
+  `onDragShapesOut`** (ticket 18; bodies: `canReceivePassenger`/`canRemovePassenger`/
+  `handleDragShapesIn`/`handleDragShapesOut`, `cardPassengers.ts`) — the card is a drop target and
+  host for `mtg-counter` shapes, via tldraw's native drag-and-drop parenting. See "Ticket 18" below
+  for the gates' narrowing (load-bearing) and the rotation-zeroing math in `onDragShapesIn`.
+- **`component(shape)` / `getIndicatorPath(shape)`** (bodies: `CardFace`/`cardIndicatorPath`,
+  `cardRender.tsx`) — new, required by `BaseBoxShapeUtil`. The card renders its own `<img>` (front
+  or back URL chosen from `props.face`) instead of delegating to tldraw's image machinery.
 
 `onClick` is declared *at all* — regardless of what it does — because its mere presence changes
 how tldraw's own `SelectTool` behaves. See below.
@@ -1036,11 +1043,71 @@ and `npx vitest run`. A targeted regression assertion was also added to
 `verify-life-counter.spec.ts` (pressing +/- doesn't clear an unrelated existing selection),
 confirming the `markEventAsHandled` immunity above empirically, not just by source-reading.
 
+## Ticket 01: `MtgCardShapeUtil.tsx` split by hook, organizational only (2026-08-11)
+
+`.scratch/tabletop-architecture-review/issues/01-split-cardshapeutil-interop-from-physics.md`,
+worktree `ticket-01-split-cardshapeutil`. `MtgCardShapeUtil.tsx` had grown to 388 lines across 21
+commits, holding every `ShapeUtil` hook's full body inline. The review that spawned this ticket
+originally proposed a **CardPhysics/interop architectural split** — pull tldraw plumbing away from
+domain rules into two layers.
+
+**Grilling on the ticket found no clean seam of that kind exists in this file.** Every hook mixes
+a tldraw quirk with a card-domain rule inseparably — `onClick` is tap/untap (domain) *and* the
+`queueMicrotask` undo-coalescing trick that only exists because of `PointingShape.onPointerUp`'s
+internal ordering (pure tldraw); `onTranslateEnd` is zone-entry (domain) *and* the debounce shape
+tldraw's settle-once contract demands; `onDragShapesIn` is counter-attachment (domain) *and*
+`reparentShapes`' page-rotation-preservation quirk (pure tldraw). Attempting the physics/interop
+split would have meant inventing a boundary this file's actual logic doesn't have — exactly the
+kind of false purity watch point 7's "no interaction hooks ≠ no interactivity" distinction already
+warns against manufacturing.
+
+**Jess's call was explicitly organizational instead**: split by hook, for navigability of a big,
+long-lived file — not a domain/tldraw-purity boundary. Four sibling files, each taking `editor:
+Editor` and the relevant shape(s) as explicit parameters instead of reading `this.editor` (the same
+pattern `cardTap.ts`'s `tapPartial` already used, ticket 17):
+
+- **`cardRender.tsx`** — `component()`'s JSX body (`CardFace({shape})`), `getIndicatorPath`'s body
+  (`cardIndicatorPath(shape)`), and the tap catch-up `useLayoutEffect`.
+- **`cardTapClick.ts`** — `onClick`'s full body (`handleCardClick(editor, shape)`), including
+  ticket 16's `queueMicrotask` undo-coalescing trick for multi-untap propagation, preserved
+  verbatim with its ordering-hazard comment.
+- **`cardPassengers.ts`** — `PASSENGER_TYPES`, the two `can*` gates
+  (`canReceivePassenger`/`canRemovePassenger`), and `onDragShapesIn`/`onDragShapesOut`'s bodies
+  (`handleDragShapesIn`/`handleDragShapesOut(editor, ...)`), including the rotation-zeroing math
+  for `reparentShapes`' page-rotation-preservation quirk.
+- **`cardZoneEntry.ts`** — `NON_BATTLEFIELD_ZONES`, `onTranslateEnd`'s body
+  (`handleTranslateEnd(editor, current)`), and its two former-private helpers `zoneAt`/
+  `evictPassengers`, now module-level functions taking `editor` explicitly.
+
+`MtgCardShapeUtil.tsx` itself shrank to 83 lines: still `extends BaseBoxShapeUtil<MtgCardShape>`,
+still declares every override, each body now a one-line delegation. **The override's presence is
+still what matters to tldraw**, regardless of how thin its body is — see "The tldraw quirk" section
+above; nothing about that mechanism changed.
+
+**Confirmed zero behavior change**: 110/110 vitest tests pass before and after; 43/44 Playwright
+`verify.sh` specs pass before and after — the one failure, `verify-life-counter.spec.ts:102`,
+reproduces identically on unmodified `main` (pre-existing flakiness, unrelated to this change).
+
+**What this means for future work in this file**: the four-way split is now the map — a hook's
+mechanics live in its own sibling file, not in `MtgCardShapeUtil.tsx` itself. Every watch point and
+mechanism this KB documents for `onClick`/`onTranslateEnd`/`onDragShapesIn`/`onDragShapesOut`
+(the selection-deferral quirk, the undo-coalescing microtask, the rotation-zeroing math, the
+zone-entry debounce) is unchanged in substance — only which file to open changed. Don't read this
+split as an invitation to look for a physics/interop boundary elsewhere in this owner's territory;
+the grilling finding above is specific to this file's actual coupling, not a general principle that
+one doesn't exist.
+
 ## How to tell this owner's territory from `two-faced-cards`'s
 
 If the question is "why does clicking/dragging/tapping do the wrong thing, or hit the wrong
 shape" — this owner. If the question is "why does the card show the wrong image/face" — that's
-`two-faced-cards`. A single file (`MtgCardShapeUtil.tsx`) serves both concerns; don't let that
-fool you into consulting both owners for every change to it. See
+`two-faced-cards`. Before ticket 01 (2026-08-11), a single file (`MtgCardShapeUtil.tsx`) served
+both concerns; after the split, `two-faced-cards`'s territory (what image/face renders) lives
+mostly in `cardRender.tsx`'s `CardFace` component, while this owner's territory (what responds to
+the pointer) is spread across `MtgCardShapeUtil.tsx` (the shell) and `cardTapClick.ts`/
+`cardPassengers.ts`/`cardZoneEntry.ts`. The file boundary now tracks the concern boundary more
+closely than it used to, but it's still not exact — `cardRender.tsx`'s tap catch-up animation is
+this owner's territory (it's about the *tap* gesture, not the *face*), living in the same file as
+`CardFace`. Don't let file location alone decide which owner a question belongs to. See
 `owners/two-faced-cards/interactions.md` watch point 16 for the cross-reference the other
 direction.
