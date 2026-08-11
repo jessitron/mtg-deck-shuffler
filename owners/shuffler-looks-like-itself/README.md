@@ -419,7 +419,8 @@ decided, not an oversight (2026-08-07, `.scratch/tabletop-physics/issues/04-tap-
 **Sleeve color is a player-identity signal (decided 2026-08-08, ticket 12 of the
 Table-layout map).** On the Tabletop, each player's sleeve color — a solid color, ticket
 09's v1 decision — identifies that player beyond their own card backs: commander-damage
-counters on the coming life-counter shape are labelled by opponent name + sleeve color.
+counters on the life-counter shape (ticket 21, built 2026-08-11) are labelled by opponent
+name + sleeve color.
 (That shape was called `mtg-counter` when ticket 12 wrote it, but the type string went to
 tabletop-physics ticket 18's drag-onto-a-card counter disc on 2026-08-08 — the life counter
 needs its own name, buoyed as `life-counter-needs-own-name` in `TODO.md`.)
