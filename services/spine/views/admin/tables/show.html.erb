@@ -2,7 +2,7 @@
 <html>
 <head><title>Spine — <%= h @table.name %></title></head>
 <body>
-  <h1><a href="/admin/tables">Spine</a> / <%= h @table.name %></h1>
+  <h1><a href="<%= @base_path %>/admin/tables">Spine</a> / <%= h @table.name %></h1>
   <p>tableId <%= h @table.id %></p>
 
   <h2>The log (<span id="event-count"><%= @events.size %></span> events)</h2>
@@ -24,12 +24,12 @@
     </tbody>
   </table>
 
-  <script src="/hny.js"></script>
+  <script src="<%= @base_path %>/hny.js"></script>
   <script>
     (function () {
       var teamSlug = <%= JSON.generate(@team_slug) %>;
       var envSlug = <%= JSON.generate(@env_slug) %>;
-      var streamUrl = <%= JSON.generate("/tables/#{@table.id}/events/stream") %>;
+      var streamUrl = <%= JSON.generate("#{@base_path}/tables/#{@table.id}/events/stream") %>;
       var tbody = document.querySelector("#event-log tbody");
       var countEl = document.querySelector("#event-count");
 

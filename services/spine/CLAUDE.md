@@ -47,8 +47,32 @@ All from `services/spine/`:
 - `PORT=4600 ./run` — start locally (sources repo-root `.be` before `.env`,
   same telemetry rule as the Shuffler — see the root `CLAUDE.md` → Observability)
 - `bin/test` — tests (Minitest, via `rake test`)
-- `./deploy.sh` — deploy to spine.jessitron.honeydemo.io (not yet rebuilt for this
-  stack — see the rewrite spec's Out of Scope)
+- `./deploy.sh` — deploy to `mtg.jessitron.honeydemo.io/spine`, behind the same ALB
+  as the Shuffler (`apps/shuffler/k8s/ingress.yaml`), not its own subdomain. Builds
+  `Dockerfile` (context is the repo root — needs `contracts/`), applies `k8s/`
+  (`deployment.yaml`, `pvc.yaml` — 2Gi gp3, `ReadWriteOnce`, mounted at `/data`
+  as `SPINE_DB_PATH` — `service.yaml`, `ingress.yaml`), waits for rollout, posts a
+  Honeycomb deploy marker. See "Base path" below for why `/spine` needed an app change,
+  not just an ingress rule.
+
+## Base path (`SPINE_BASE_PATH`)
+
+AWS ALB ingress can't strip a path prefix (no rewrite-target support the way
+nginx-ingress has), so serving the Spine at `mtg.jessitron.honeydemo.io/spine`
+meant the app itself has to answer under that prefix — both the external ALB
+request and the Shuffler's in-cluster `SPINE_URL` call, since a request to
+`spine-service` never goes through the ALB at all. `app.rb` reads
+`SPINE_BASE_PATH` (unset locally, `/spine` in prod — `k8s/configmap.yaml`) and
+wraps the whole route table in `r.on(prefix)` when it's set; `dispatch(r)`
+holds the actual routes so both cases (`base_path.empty?` vs not) reach the
+same route definitions. The admin views (`views/admin/tables/*.html.erb`) take
+`@base_path` as a local and prefix every hardcoded link, the SSE `streamUrl`,
+and the `<script src="...hny.js">` tag — anything rendered as an absolute
+path breaks once real traffic arrives with a prefix the browser doesn't know
+to add back. `services/spine/k8s/ingress.yaml`'s `group.order: "1"` (paired
+with `apps/shuffler/k8s/ingress.yaml`'s `group.order: "1000"`) makes sure
+`/spine` is evaluated before the Shuffler's catch-all `/` — ALB doesn't
+auto-sort merged-group rules by path specificity, so this must be explicit.
 
 To run the whole fleet (Spine + Tabletop + Shuffler together), use `./run` from the
 repo root — see the root `CLAUDE.md`.
