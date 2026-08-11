@@ -1,0 +1,15 @@
+{
+  "name": "playmat-colors-tool",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Standalone dev tool: extracts contrasting saturated colors from a playmat image via a local web picker. Not part of the Shuffler app or its npm workspace.",
+  "scripts": {
+    "start": "node index.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.22.1",
+    "sharp": "^0.35.3"
+  }
+}
