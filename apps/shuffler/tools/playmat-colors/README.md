@@ -26,8 +26,9 @@ This prints suggested 2-color and 3-color picks, then starts a page at
 `http://localhost:4523`. It shows the image, a strip of extracted candidate
 colors, and two editable slot groups (2-color, 3-color) prefilled with the
 suggestion — or with whatever was saved for that image last time. Click a
-candidate swatch to fill the last-focused slot, or use the native color
-picker on any slot directly. Each slot group saves independently.
+slot to select it (highlighted border), then click a candidate swatch to
+fill it — or click the 🎨 button next to a slot for the OS color picker.
+Each slot group saves independently.
 
 Results are written to `apps/shuffler/public/images/playmat-colors.json`,
 keyed by image filename, alongside `suggestedTwo`/`suggestedThree` (what the
