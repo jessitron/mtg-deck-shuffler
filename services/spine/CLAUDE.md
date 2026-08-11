@@ -15,9 +15,14 @@ needs a change in the Shuffler or the Tabletop, stop and say so instead of reach
 
 ## What this is
 
-Ruby on Rails 8 + SQLite. Tables, seats, one append-only event log per table;
-ingestion validates against `contracts/` (repo root) and fails loudly.
-Admin screen (a table's log, with Honeycomb trace links) at `/admin/tables`.
+Plain Ruby: Roda for routing (no Rails-style MVC), Sequel for persistence (not
+ActiveRecord), SQLite, Minitest. Rewritten from a Rails 8 app for the reasons in
+`.scratch/spine-roda-rewrite/spec.md` (repo root) — Jess wants to learn plain Ruby, and
+Rails' magic was in the way of seeing where things actually happen.
+
+Currently boot-only: `GET /up` for health, OTel wired at 100% sampling, an empty SQLite
+DB connected via Sequel. Tables/seats/events (the actual domain) land in a later ticket
+— see `.scratch/spine-roda-rewrite/issues/`.
 
 See `README.md` (in this directory) for more.
 
@@ -27,8 +32,9 @@ All from `services/spine/`:
 
 - `PORT=4600 ./run` — start locally (sources repo-root `.be` before `.env`,
   same telemetry rule as the Shuffler — see the root `CLAUDE.md` → Observability)
-- `bin/rails test` — tests
-- `./deploy.sh` — deploy to spine.jessitron.honeydemo.io
+- `bin/test` — tests (Minitest, via `rake test`)
+- `./deploy.sh` — deploy to spine.jessitron.honeydemo.io (not yet rebuilt for this
+  stack — see the rewrite spec's Out of Scope)
 
 To run the whole fleet (Spine + Tabletop + Shuffler together), use `./run` from the
 repo root — see the root `CLAUDE.md`.
@@ -37,14 +43,20 @@ repo root — see the root `CLAUDE.md`.
 
 Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
 
-- **Sampling**: `lib/telemetry_sampler.rb` (`TelemetrySampler::BackgroundChatterSampler`)
-  keeps 1% of `/up` health-check traffic (k8s liveness/readiness — see `k8s/deployment.yaml`)
-  and 100% of everything else — ported from the Shuffler's
-  `apps/shuffler/src/telemetry-sampler.ts`. Wired in
-  `config/initializers/opentelemetry.rb` via `OpenTelemetry.tracer_provider.sampler =`
-  right after `OpenTelemetry::SDK.configure` runs — the SDK's Configurator has no
-  in-block sampler option for a custom `Sampler` object; `TracerProvider#sampler` is a
-  plain `attr_accessor`, so setting it once `OpenTelemetry.tracer_provider` exists is the
-  supported way in. Unit tested in `test/lib/telemetry_sampler_test.rb`.
+- **Sampling**: 100%, no down-sampling. The old `BackgroundChatterSampler`
+  (`TelemetrySampler::BackgroundChatterSampler`, 1% of `/up` health-check traffic) was
+  deliberately not ported — it's documented as broken, and the rewrite spec explicitly
+  says start at 100% and revisit once start/stop behavior is confirmed clean.
+- **Wiring**: `config/telemetry.rb`, required first thing in `app.rb`. Uses
+  `OpenTelemetry::SDK.configure` with `opentelemetry-exporter-otlp` (env-var driven,
+  same `OTEL_EXPORTER_OTLP_*` vars as the other ships) and
+  `opentelemetry-instrumentation-rack`.
+- **Rack instrumentation needs an explicit `use`.** Unlike Rails (which has a railtie
+  hook), Roda/Rack has no auto-injection point — the instrumentation gem only
+  *registers* itself; the app still has to mount its middleware. `app.rb` does this via
+  `use(*OpenTelemetry::Instrumentation::Rack::Instrumentation.instance.middleware_args)`.
+  Skip this and requests boot fine but produce zero spans — no error, just silence. If a
+  future OTel-instrumented gem shows the same "installed successfully, no spans"
+  symptom, check whether it's Rack-style (needs manual `use`) vs Rails-style (auto).
 
 Update this file when anything in it changes.

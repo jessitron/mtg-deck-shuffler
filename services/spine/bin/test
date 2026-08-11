@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Minitest-equivalent of `bin/rails test`. Run all test files under test/.
+set -e
+cd "$(dirname "$0")/.."
+bundle exec rake test
