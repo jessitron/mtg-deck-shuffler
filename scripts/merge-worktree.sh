@@ -54,6 +54,7 @@ if [ "$TESTS_FAILED" -eq 1 ]; then
   if [ "$STASHED" -eq 1 ]; then
     echo "Your uncommitted changes are still stashed — see 'git stash list' / 'git stash pop'." >&2
   fi
+  echo "Remember, if this isn't _your_ test failure, the user wants you to spin up a subagent to find the problem and fix the failure." >&2
   exit 1
 fi
 
