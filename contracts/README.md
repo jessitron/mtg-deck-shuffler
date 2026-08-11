@@ -6,8 +6,14 @@ Language-neutral JSON Schema; the decisions behind it live in
 
 ## Files
 
-- `envelope.v1.json` — the envelope every event wears. The file name carries the
+- `envelope.v2.json` — the envelope every event wears. The file name carries the
   **envelope version**, bumped rarely (adding a `visibility` value, adding `scope`).
+  `envelope.v1.json` is kept as history, not deleted — never edit a shipped version
+  file in place, bump instead. v2 added `origin` (which mechanism, within
+  `occurredIn`, minted the event — see
+  `.scratch/tabletop-table-reports/issues/01-every-event-carries-its-origin.md`) and
+  `significance` (`physical` | `domain` | `administrative` — what kind of fact the
+  event states).
 - `payloads/<name>.v<schemaVersion>.json` — one schema per event kind per version.
   Each `name` versions its payload independently; the envelope's `schemaVersion`
   field says which payload schema applies.
@@ -34,3 +40,10 @@ v0 catalog: `table.created`, `seat.taken`, `seat.joined`, `card.played`.
 - **Visibility on every event.** In v0 the only legal value is `public` — the
   Shuffler sends only the public shadow of what it privately knows. New values are
   an envelope version bump that old readers reject loudly.
+- **`origin` names the mechanism, `significance` names the kind of fact.** `origin`
+  is an open, dot-namespaced string (same shape as `name`) identifying which code
+  path minted the event, one level more specific than `occurredIn`. `significance`
+  is a closed three-value enum (`physical` / `domain` / `administrative`) —
+  orthogonal to `origin`: a `physical` event and a `domain` event can both come
+  from the same app and the same gesture (e.g. a drag fires both
+  `card.repositioned`, physical, and `card.moved`, domain).

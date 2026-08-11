@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_27_000003) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_10_000001) do
   create_table "events", force: :cascade do |t|
     t.datetime "accepted_at", null: false
     t.datetime "created_at", null: false
@@ -19,9 +19,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_27_000003) do
     t.string "name", null: false
     t.datetime "occurred_at"
     t.string "occurred_in", null: false
+    t.string "origin", null: false
     t.json "payload", null: false
     t.integer "schema_version", null: false
     t.integer "seq", null: false
+    t.string "significance", null: false
     t.string "table_id", null: false
     t.string "traceparent", null: false
     t.datetime "updated_at", null: false

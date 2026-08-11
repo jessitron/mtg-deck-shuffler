@@ -8,7 +8,7 @@ import { randomUUID } from "node:crypto";
  * — it does not move or resize as a second seat joins.
  *
  * Since tabletop-cards-come-and-go ticket 05, the body posted is a real
- * envelope (contracts/envelope.v1.json) carrying a seat.joined payload
+ * envelope (contracts/envelope.v2.json) carrying a seat.joined payload
  * (contracts/payloads/seat.joined.v1.json).
  */
 function fakeTraceparent(): string {
@@ -23,6 +23,8 @@ function seatJoined(tableId: string, initiator: { seatId: string; playerName: st
     occurredAt: new Date().toISOString(),
     initiator,
     occurredIn: "shuffler",
+    origin: "shuffler.shuffleUp",
+    significance: "administrative",
     visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,

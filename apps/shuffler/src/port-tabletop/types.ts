@@ -16,7 +16,7 @@ import { currentTraceparent } from "./traceparent.js";
 // ============================================================================
 //
 // JES-128 / tabletop-cards-come-and-go ticket 05: the body sent is the real
-// envelope (contracts/envelope.v1.json) carrying a card.played payload
+// envelope (contracts/envelope.v2.json) carrying a card.played payload
 // (contracts/payloads/card.played.v1.json), validated for real by the
 // Tabletop on receipt. Field-for-field, an EventEnvelope<CardPlayedPayload>:
 //
@@ -30,6 +30,8 @@ import { currentTraceparent } from "./traceparent.js";
 //       playerName: string,  //   the name is display-only.
 //     },
 //     occurredIn: "shuffler",
+//     origin: "shuffler.playCardSubmit",  // which mechanism minted this (map 5 ticket 01)
+//     significance: "domain",             // a real game fact, not physical/administrative
 //     visibility: "public",
 //     traceparent: string,   // W3C trace context — observability only
 //     schemaVersion: 1,
@@ -74,6 +76,8 @@ export interface Initiator {
   playerName: string;
 }
 
+export type Significance = "physical" | "domain" | "administrative";
+
 export interface EventEnvelope<Payload> {
   id: string;
   tableId: string;
@@ -81,6 +85,8 @@ export interface EventEnvelope<Payload> {
   occurredAt: string;
   initiator: Initiator;
   occurredIn: "shuffler";
+  origin: string;
+  significance: Significance;
   visibility: "public";
   traceparent: string;
   schemaVersion: number;
@@ -128,6 +134,8 @@ export function buildCardPlayedEvent(
     occurredAt: new Date().toISOString(),
     initiator: { seatId: initiator.seatId, playerName: initiator.playerName },
     occurredIn: "shuffler",
+    origin: "shuffler.playCardSubmit",
+    significance: "domain",
     visibility: "public",
     traceparent: currentTraceparent(),
     schemaVersion: 1,
@@ -161,6 +169,8 @@ export function buildCardPlayedEvent(
 //     occurredAt: string,    // ISO 8601, the Shuffler's clock
 //     initiator: { seatId, playerName },
 //     occurredIn: "shuffler",
+//     origin: "shuffler.shuffleUp",       // which mechanism minted this (map 5 ticket 01)
+//     significance: "administrative",     // seat bookkeeping, not gameplay itself
 //     visibility: "public",
 //     traceparent: string,   // W3C trace context — observability only
 //     schemaVersion: 1,
@@ -281,6 +291,8 @@ export function buildSeatJoinedEvent(
     occurredAt: new Date().toISOString(),
     initiator: { seatId: initiator.seatId, playerName: initiator.playerName },
     occurredIn: "shuffler",
+    origin: "shuffler.shuffleUp",
+    significance: "administrative",
     visibility: "public",
     traceparent: currentTraceparent(),
     schemaVersion: 1,

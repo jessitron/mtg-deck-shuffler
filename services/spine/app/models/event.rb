@@ -21,6 +21,8 @@ class Event < ApplicationRecord
       "occurredAt" => occurred_at&.utc&.iso8601(3),
       "initiator" => { "playerName" => initiator },
       "occurredIn" => occurred_in,
+      "origin" => origin,
+      "significance" => significance,
       "visibility" => visibility,
       "traceparent" => traceparent,
       "schemaVersion" => schema_version,

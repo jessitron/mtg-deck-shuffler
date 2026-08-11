@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   # POST /tables/:table_id/events — the ingestion endpoint.
   #
-  # Body: a contract envelope (contracts/envelope.v1.json). Validated on
+  # Body: a contract envelope (contracts/envelope.v2.json). Validated on
   # receipt; unknown name/schemaVersion fails loudly (422). Dedup on the
   # sender-minted id: a retried duplicate gets the already-accepted event back.
   # The Spine assigns seq and acceptedAt; a sender claiming either is rejected.

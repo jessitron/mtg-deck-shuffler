@@ -25,6 +25,8 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
     occurredIn: "shuffler",
+    origin: "shuffler.playCardSubmit",
+    significance: "domain",
     visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,

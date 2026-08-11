@@ -14,7 +14,7 @@ const addFormats: (ajv: Ajv2020) => void = createRequire(import.meta.url)("ajv-f
 // ============================================================================
 // JES-128 / tabletop-cards-come-and-go ticket 05: real contract validation,
 // replacing the hand-rolled if-chains. Both endpoints POST the full envelope
-// (contracts/envelope.v1.json) as their body, with the kind-specific payload
+// (contracts/envelope.v2.json) as their body, with the kind-specific payload
 // nested at `.payload` per the envelope's own `payload` field — see
 // contracts/README.md.
 //
@@ -35,7 +35,7 @@ function loadSchema(relativePath: string): object {
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 addFormats(ajv);
 
-const validateEnvelopeSchema = ajv.compile(loadSchema("envelope.v1.json"));
+const validateEnvelopeSchema = ajv.compile(loadSchema("envelope.v2.json"));
 
 // Every payload schema this ship knows how to validate against, keyed by
 // `${name}:${schemaVersion}`. An envelope naming any other key is rejected
@@ -56,6 +56,8 @@ export interface Envelope<Payload> {
   name: string;
   initiator: Initiator;
   occurredIn: string;
+  origin: string;
+  significance: "physical" | "domain" | "administrative";
   occurredAt?: string;
   visibility: string;
   traceparent: string;
