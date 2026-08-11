@@ -244,21 +244,35 @@ version bumps). `/restart-game` carries them forward.
   the Tabletop hotlink the standard card-back image as an absolute URL; default
   `https://mtg.jessitron.honeydemo.io`).
 - **Spine (`src/port-spine/`)**: at join time (`/start-game`, `/restart-game`,
-  `/yo`), `joinSpineTableBestEffort` looks up or creates the Spine table by
-  name and takes a real seat there (`POST /tables/:id/seats` — the Spine
-  auto-assigns the seat number, `services/spine` commit `ef6e740`). The
-  returned `spineTableId`/`spineSeatId` ride on `TableInfo`, `GameState`, and
-  the persisted game/prep (optional, no version bump). Alongside the Tabletop
-  send, `/play-card`/`/discard-card` also send `card.played` to the Spine's
-  event log, addressed to that real tableId/seatId
-  (`sendCardPlayedToSpineBestEffort`). Both are **best-effort** — a Spine
-  that's down must not block starting a game or playing a card; failure is a
-  span attribute + `log.warn`. **Taking a seat is NOT idempotent** (unlike
-  `seat.joined`): `/restart-game` carries the persisted ids forward rather
-  than re-joining, and a join that fails at start-time is never retried — that
-  game just sends nothing to the Spine for its lifetime.
+  `/yo`), `joinSpineTableBestEffort` calls the new Spine's single `POST /join
+  {name, playerName}` (`services/spine`'s roda rewrite, `.scratch/spine-roda-rewrite/`
+  ticket 03) — one call creates the table if none is active and takes the next
+  open seat, returning `{tableId, seatNumber}`. The old `ensureTable`/`takeSeat`
+  two-call shape (`GET /tables/lookup`, `POST /tables`, `POST /tables/:id/seats`)
+  is gone; those routes no longer exist. The returned `spineTableId`/`spineSeatNumber`
+  ride on `TableInfo`, `GameState`, and the persisted game/prep (optional, no
+  version bump) — `spineSeatNumber` is a plain 1-4 seat number now, not a GUID,
+  since that's all the new Spine hands back. Alongside the Tabletop send,
+  `/play-card`/`/discard-card` also send `card.played` to the Spine's event log,
+  addressed to that real tableId, with `initiator.seatId` set to
+  `String(spineSeatNumber)` (`sendCardPlayedToSpineBestEffort`). Both are
+  **best-effort** — a Spine that's down must not block starting a game or
+  playing a card; failure is a span attribute + `log.warn`. **Joining is NOT
+  idempotent**: `/restart-game` carries the persisted ids forward rather than
+  re-joining, and a join that fails at start-time is never retried — that game
+  just sends nothing to the Spine for its lifetime.
   `HttpSpineGateway` (real) / `FakeSpineGateway` (tests) implement
   `SpinePort`. **Env**: `SPINE_URL`, default `http://localhost:4600`.
+  **Envelope version**: `sendEvent` posts against `contracts/envelope.v3.json`,
+  which dropped `traceparent` as a body field — `HttpSpineGateway.sendEvent`
+  strips it from the JSON body before serializing and sends nothing else in
+  its place: undici's OTel auto-instrumentation already injects a live
+  `traceparent` header on every outbound `fetch()` (it appends its own after
+  any explicit headers, unconditionally), so setting one by hand here would
+  only risk a duplicate or stale header. This is Spine-only: the Tabletop
+  (`TabletopPort`) still validates against `envelope.v2.json` and still
+  expects `traceparent` in the body, so the shared `EventEnvelope` type keeps
+  the field — only the Spine gateway omits it on the wire.
   **Known parallel gap, not this ship's to fix**: the Tabletop still just
   trusts whatever `seatId` the Shuffler makes up for *it* (JES-127) — that
   side isn't gated by the Spine yet either.

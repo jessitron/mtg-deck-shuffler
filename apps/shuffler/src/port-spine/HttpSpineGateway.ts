@@ -2,61 +2,41 @@ import { EventEnvelope } from "../port-tabletop/types.js";
 import { SpinePort } from "./types.js";
 
 /**
- * Real Spine client (services/spine): looks up a table by name, creating it
- * if none is active yet, then appends events to its log. Uses global fetch
- * (undici), which OTel auto-instrumentation wraps, so trace context
- * propagates to the Spine for free.
+ * Real Spine client (services/spine): joins a table by name (creating it if
+ * none is active yet) via a single `POST /join`, then appends events to its
+ * log. Uses global fetch (undici), which OTel auto-instrumentation wraps, so
+ * trace context propagates to the Spine for free on the way in as a
+ * `traceparent` header — the envelope body carries no `traceparent` field
+ * (contracts/envelope.v3.json), so `sendEvent` strips it before serializing.
+ * Don't set a `traceparent` header by hand here: undici's instrumentation
+ * appends its own after any explicit headers, unconditionally, so a
+ * hand-set value would just duplicate (or, worse, diverge from) the one it
+ * injects from the live active span.
  */
 export class HttpSpineGateway implements SpinePort {
   constructor(private readonly baseUrl: string) {}
 
-  async ensureTable(name: string, creator: string): Promise<string> {
-    const lookup = await fetch(`${this.baseUrl}/tables/lookup?name=${encodeURIComponent(name)}`);
-    if (lookup.ok) {
-      const body = (await lookup.json()) as { tableId: string };
-      return body.tableId;
-    }
-    if (lookup.status !== 404) {
-      throw new Error(`Spine table lookup failed: ${lookup.status} ${lookup.statusText}`);
-    }
-
-    const created = await fetch(`${this.baseUrl}/tables`, {
+  async join(name: string, playerName: string): Promise<{ tableId: string; seatNumber: number }> {
+    const response = await fetch(`${this.baseUrl}/join`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ name, creator }),
-    });
-    if (created.status === 409) {
-      // Lost a race to create this name — someone else's table is active now.
-      return this.ensureTable(name, creator);
-    }
-    if (!created.ok) {
-      const bodyText = await created.text().catch(() => "");
-      throw new Error(`Spine rejected the table: ${created.status} ${created.statusText} ${bodyText}`.trim());
-    }
-    const body = (await created.json()) as { tableId: string };
-    return body.tableId;
-  }
-
-  async takeSeat(tableId: string, playerName: string): Promise<{ seatId: string; seat: number }> {
-    const response = await fetch(`${this.baseUrl}/tables/${encodeURIComponent(tableId)}/seats`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ playerName }),
+      body: JSON.stringify({ name, playerName }),
     });
     if (!response.ok) {
       const bodyText = await response.text().catch(() => "");
-      throw new Error(`Spine rejected the seat: ${response.status} ${response.statusText} ${bodyText}`.trim());
+      throw new Error(`Spine rejected the join: ${response.status} ${response.statusText} ${bodyText}`.trim());
     }
-    const body = (await response.json()) as { seatId: string; seat: number };
-    return { seatId: body.seatId, seat: body.seat };
+    const body = (await response.json()) as { tableId: string; seatNumber: number };
+    return { tableId: body.tableId, seatNumber: body.seatNumber };
   }
 
   async sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void> {
     const url = `${this.baseUrl}/tables/${encodeURIComponent(tableId)}/events`;
+    const { traceparent: _traceparent, ...envelopeWithoutTraceparent } = event;
     const response = await fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(event),
+      body: JSON.stringify(envelopeWithoutTraceparent),
     });
     if (!response.ok) {
       const bodyText = await response.text().catch(() => "");

@@ -31,14 +31,14 @@ function cardNamed(game: GameState, name: string) {
 }
 
 describe("joinSpineTableBestEffort", () => {
-  it("ensures the table and takes a seat, returning both ids", async () => {
+  it("joins the table, returning both the tableId and the assigned seat number", async () => {
     const fake = new FakeSpineGateway();
 
     const result = await joinSpineTableBestEffort(fake, "Friday Night", "Jess");
 
     expect(result.spineTableId).toBeDefined();
-    expect(result.spineSeatId).toBeDefined();
-    expect(fake.takenSeats).toEqual([{ tableId: result.spineTableId, playerName: "Jess", seatId: result.spineSeatId, seat: 1 }]);
+    expect(result.spineSeatNumber).toBe(1);
+    expect(fake.takenSeats).toEqual([{ tableId: result.spineTableId, playerName: "Jess", seatNumber: 1 }]);
   });
 
   it("each join takes a fresh seat — not idempotent, unlike seat.joined", async () => {
@@ -48,7 +48,7 @@ describe("joinSpineTableBestEffort", () => {
     const second = await joinSpineTableBestEffort(fake, "Friday Night", "Robin");
 
     expect(first.spineTableId).toBe(second.spineTableId);
-    expect(first.spineSeatId).not.toBe(second.spineSeatId);
+    expect(first.spineSeatNumber).not.toBe(second.spineSeatNumber);
   });
 
   it("is a no-op (empty result) when no Spine is configured", async () => {
@@ -65,8 +65,8 @@ describe("joinSpineTableBestEffort", () => {
 
 describe("sendCardPlayedToSpineBestEffort", () => {
   async function joinedTableInfo(fake: FakeSpineGateway): Promise<TableInfo> {
-    const { spineTableId, spineSeatId } = await joinSpineTableBestEffort(fake, "Friday Night", "Jess");
-    return { tableName: "Friday Night", playerName: "Jess", seatId: "abc12345", spineTableId, spineSeatId };
+    const { spineTableId, spineSeatNumber } = await joinSpineTableBestEffort(fake, "Friday Night", "Jess");
+    return { tableName: "Friday Night", playerName: "Jess", seatId: "abc12345", spineTableId, spineSeatNumber };
   }
 
   it("sends card.played addressed to the Spine tableId, from the joined Spine seat", async () => {
@@ -82,7 +82,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     expect(event.tableId).toBe(tableId);
     expect(tableId).toBe(tableInfo.spineTableId);
     expect(event.name).toBe("card.played");
-    expect(event.initiator).toEqual({ seatId: tableInfo.spineSeatId, playerName: "Jess" });
+    expect(event.initiator).toEqual({ seatId: String(tableInfo.spineSeatNumber), playerName: "Jess" });
     expect(event.payload.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: bolt.cardInstanceId });
     expect(event.payload.zoneHint).toBe("stack");
   });

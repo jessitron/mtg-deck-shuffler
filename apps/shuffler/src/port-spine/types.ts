@@ -1,14 +1,21 @@
 import { EventEnvelope } from "../port-tabletop/types.js";
 
 /**
- * The Spine port: look up or create a table by name, and append events to
- * its log. Real client: HttpSpineGateway. Fake: FakeSpineGateway (tests).
+ * The Spine port: join a table by name (creating it if none is active yet),
+ * and append events to its log. Real client: HttpSpineGateway. Fake:
+ * FakeSpineGateway (tests).
  */
 export interface SpinePort {
-  /** Look up a table by name; create it (as this creator) if none is active yet. Returns the Spine-minted tableId. */
-  ensureTable(name: string, creator: string): Promise<string>;
-  /** Take a seat at this table. Not idempotent — the Spine assigns the next open seat number each call. */
-  takeSeat(tableId: string, playerName: string): Promise<{ seatId: string; seat: number }>;
-  /** Append an event to this table's log (contracts/envelope.v2.json). */
+  /**
+   * Join a table by name — creates it (as this player) if none is active
+   * yet, then takes the next open seat. Not idempotent: a repeat call mints
+   * another seat, same as before this rewrote onto POST /join.
+   */
+  join(name: string, playerName: string): Promise<{ tableId: string; seatNumber: number }>;
+  /**
+   * Append an event to this table's log (contracts/envelope.v3.json). Trace
+   * context travels in the HTTP `traceparent` header, never the envelope
+   * body — the gateway strips `event.traceparent` before serializing.
+   */
   sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void>;
 }
