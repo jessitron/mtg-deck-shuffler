@@ -74,7 +74,7 @@ export interface TableInfo {
   // joinSpineTableBestEffort). Best-effort: absent when the Spine was
   // unreachable at join time, in which case this game sends nothing to it.
   spineTableId?: string;
-  spineSeatId?: string;
+  spineSeatNumber?: number;
 }
 
 export interface WhatHappened {
@@ -102,7 +102,7 @@ export class GameState {
   public readonly playerName?: string;
   public readonly seatId?: string;
   public readonly spineTableId?: string;
-  public readonly spineSeatId?: string;
+  public readonly spineSeatNumber?: number;
   // Table look: the /prepare picker's sleeve/playmat choice, snapshotted at
   // newGame time. Optional, no version bump — same pattern as table info.
   public readonly sleeveColor?: string;
@@ -162,7 +162,7 @@ export class GameState {
       playerName: tableInfo?.playerName,
       seatId: tableInfo?.seatId,
       spineTableId: tableInfo?.spineTableId,
-      spineSeatId: tableInfo?.spineSeatId,
+      spineSeatNumber: tableInfo?.spineSeatNumber,
       sleeveColor,
       playmatImagePath,
     });
@@ -183,7 +183,7 @@ export class GameState {
     playerName?: string;
     seatId?: string;
     spineTableId?: string;
-    spineSeatId?: string;
+    spineSeatNumber?: number;
     sleeveColor?: string;
     playmatImagePath?: string;
   }) {
@@ -202,7 +202,7 @@ export class GameState {
     this.playerName = params.playerName;
     this.seatId = params.seatId;
     this.spineTableId = params.spineTableId;
-    this.spineSeatId = params.spineSeatId;
+    this.spineSeatNumber = params.spineSeatNumber;
     this.sleeveColor = params.sleeveColor;
     this.playmatImagePath = params.playmatImagePath;
   }
@@ -891,7 +891,7 @@ export class GameState {
       playerName: this.playerName,
       seatId: this.seatId,
       spineTableId: this.spineTableId,
-      spineSeatId: this.spineSeatId,
+      spineSeatNumber: this.spineSeatNumber,
       sleeveColor: this.sleeveColor,
       playmatImagePath: this.playmatImagePath,
     };

@@ -52,7 +52,7 @@ export interface PersistedGameState {
   // The Spine's own table/seat ids (src/port-spine/), present only when the
   // Spine join succeeded (best-effort). Same optional/no-version-bump exception.
   spineTableId?: string;
-  spineSeatId?: string;
+  spineSeatNumber?: number;
   // Table look: the /prepare picker's sleeve/playmat choice, snapshotted at
   // /start-game. Optional, no version bump — same exception as tableName above.
   sleeveColor?: string;

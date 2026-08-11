@@ -3,12 +3,14 @@ import { SpinePort } from "./types.js";
 
 /**
  * Fake (not mock) Spine for tests: mints a stable tableId per name (repeated
- * ensureTable calls for the same name return the same id, like the real
- * lookup-or-create), records every sent event, and can be told to fail.
+ * joins for the same name return the same id, like the real
+ * lookup-or-create), assigns the next open seat number (1-4, matching the
+ * real Spine's auto-assignment), records every sent event, and can be told
+ * to fail.
  */
 export class FakeSpineGateway implements SpinePort {
   public readonly sentEvents: { tableId: string; event: EventEnvelope<unknown> }[] = [];
-  public readonly takenSeats: { tableId: string; playerName: string; seatId: string; seat: number }[] = [];
+  public readonly takenSeats: { tableId: string; playerName: string; seatNumber: number }[] = [];
   private readonly tableIdsByName = new Map<string, string>();
   private readonly seatCountByTableId = new Map<string, number>();
   private failure: Error | null = null;
@@ -22,7 +24,7 @@ export class FakeSpineGateway implements SpinePort {
     this.failure = null;
   }
 
-  async ensureTable(name: string): Promise<string> {
+  async join(name: string, playerName: string): Promise<{ tableId: string; seatNumber: number }> {
     if (this.failure) {
       throw this.failure;
     }
@@ -31,21 +33,13 @@ export class FakeSpineGateway implements SpinePort {
       tableId = `fake-spine-table-${this.nextTableId++}`;
       this.tableIdsByName.set(name, tableId);
     }
-    return tableId;
-  }
-
-  async takeSeat(tableId: string, playerName: string): Promise<{ seatId: string; seat: number }> {
-    if (this.failure) {
-      throw this.failure;
-    }
-    const seat = (this.seatCountByTableId.get(tableId) ?? 0) + 1;
-    if (seat > 4) {
+    const seatNumber = (this.seatCountByTableId.get(tableId) ?? 0) + 1;
+    if (seatNumber > 4) {
       throw new Error(`table ${tableId} already has 4 seats taken`);
     }
-    this.seatCountByTableId.set(tableId, seat);
-    const seatId = `fake-spine-seat-${tableId}-${seat}`;
-    this.takenSeats.push({ tableId, playerName, seatId, seat });
-    return { seatId, seat };
+    this.seatCountByTableId.set(tableId, seatNumber);
+    this.takenSeats.push({ tableId, playerName, seatNumber });
+    return { tableId, seatNumber };
   }
 
   async sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void> {

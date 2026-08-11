@@ -570,13 +570,13 @@ export function createApp(
         };
         const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
         tableInfo.spineTableId = spineJoin.spineTableId;
-        tableInfo.spineSeatId = spineJoin.spineSeatId;
+        tableInfo.spineSeatNumber = spineJoin.spineSeatNumber;
         // The Prep records all table info — that's what enables rejoining later.
         prep.tableName = tableInfo.tableName;
         prep.playerName = tableInfo.playerName;
         prep.seatId = tableInfo.seatId;
         prep.spineTableId = tableInfo.spineTableId;
-        prep.spineSeatId = tableInfo.spineSeatId;
+        prep.spineSeatNumber = tableInfo.spineSeatNumber;
         prep.updatedAt = new Date();
         await persistPrepPort.savePrep(prep);
       }
@@ -701,17 +701,17 @@ export function createApp(
             playerName: persistedGame.playerName ?? prep.playerName ?? "player",
             seatId: persistedGame.seatId ?? prep.seatId ?? randomUUID().slice(0, 8),
             spineTableId: persistedGame.spineTableId ?? prep.spineTableId,
-            spineSeatId: persistedGame.spineSeatId ?? prep.spineSeatId,
+            spineSeatNumber: persistedGame.spineSeatNumber ?? prep.spineSeatNumber,
           }
         : undefined;
 
       // A prior successful Spine join carries forward (taking a seat isn't
       // idempotent, unlike the Tabletop's seat.joined) — only join fresh if
       // there's no carried seat yet (first time, or the earlier join failed).
-      if (tableInfo && !tableInfo.spineSeatId) {
+      if (tableInfo && !tableInfo.spineSeatNumber) {
         const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
         tableInfo.spineTableId = spineJoin.spineTableId;
-        tableInfo.spineSeatId = spineJoin.spineSeatId;
+        tableInfo.spineSeatNumber = spineJoin.spineSeatNumber;
       }
 
       // Create new game from the same prep
@@ -1816,7 +1816,7 @@ export function createApp(
       const tableInfo: TableInfo = { tableName: "Yo", playerName: "Jess", seatId: randomUUID().slice(0, 8) };
       const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
       tableInfo.spineTableId = spineJoin.spineTableId;
-      tableInfo.spineSeatId = spineJoin.spineSeatId;
+      tableInfo.spineSeatNumber = spineJoin.spineSeatNumber;
       // A random table look every visit: any curated mat, any sleeve color at
       // all — /yo is the fastest way to see the look plumbing exercised.
       const playmat = PLAYMATS[Math.floor(Math.random() * PLAYMATS.length)];
@@ -1830,7 +1830,7 @@ export function createApp(
         playerName: tableInfo.playerName,
         seatId: tableInfo.seatId,
         spineTableId: tableInfo.spineTableId,
-        spineSeatId: tableInfo.spineSeatId,
+        spineSeatNumber: tableInfo.spineSeatNumber,
         sleeveColor,
         playmatImagePath: playmat.path,
         createdAt: new Date(),
