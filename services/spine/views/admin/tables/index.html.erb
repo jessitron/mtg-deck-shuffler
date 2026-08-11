@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head><title>Spine — Tables</title></head>
+<body>
+  <h1>Spine</h1>
+  <p>Every table's story, told in events.</p>
+
+  <h2>Tables</h2>
+  <% if @tables.empty? -%>
+    <p>No tables yet. <code>POST /join</code> starts one.</p>
+  <% else -%>
+    <table>
+      <thead><tr><th>name</th><th>tableId</th></tr></thead>
+      <tbody>
+        <% @tables.each do |table| -%>
+          <tr>
+            <td><a href="/admin/tables/<%= h table.id %>"><%= h table.name %></a></td>
+            <td><%= h table.id %></td>
+          </tr>
+        <% end -%>
+      </tbody>
+    </table>
+  <% end -%>
+</body>
+</html>

@@ -29,8 +29,14 @@ endpoint: contract-validated against `contracts/` via `lib/event_contract.rb`
 server-side. `GET /tables/:table_id/events/stream` is the outbound side: one SSE stream
 per table, fed by `lib/table_broadcaster.rb` (a plain-Ruby pub/sub object every
 `Table#append_event!`/`#mint_event!` publishes to after its transaction commits) and
-formatted into `data:` frames by `lib/sse_stream.rb`. The admin screen lands in a later
-ticket — see `.scratch/spine-roda-rewrite/issues/`.
+formatted into `data:` frames by `lib/sse_stream.rb`. `GET /admin/tables` and
+`GET /admin/tables/:id` are the developer's window into the log: plain ERB views
+(`views/admin/tables/*.html.erb`, rendered by `lib/admin_view.rb` — no Tilt/Rails
+render plugin, just `ERB.new(...).result(binding)`), no framework helpers. The show
+page's page load renders the log as it stands, then a plain `<script>` block opens an
+`EventSource` on that table's SSE stream (dogfooding ticket 05's delivery mechanism)
+and appends new rows as they arrive, building each row's Honeycomb trace link
+client-side from that message's `meta.traceparent` — see Observability below.
 
 See `README.md` (in this directory) for more.
 
@@ -81,5 +87,14 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
   created, deferred via `DB.after_commit` — so a subscriber's own spans can link back
   to whichever trace actually produced the event, and a rolled-back append never
   reaches a subscriber at all.
+- **The admin show page builds trace links client-side, not server-side.** The `Event`
+  row has no trace column (see above), so a page-load render of existing rows has
+  nothing to link from — only rows arriving live over the SSE stream carry
+  `meta.traceparent`, and only those get a "trace" link, built in the browser by
+  `views/admin/tables/show.html.erb`'s inline script (`traceparent.split("-")[1]` is
+  the trace id; team/env slugs come from `HONEYCOMB_TEAM_SLUG`/`HONEYCOMB_ENV_SLUG`,
+  defaulting to `modernity`/`local`, injected into the page at render time). Rows
+  already in the log when the page opened render with an empty trace cell — expected,
+  not a bug, per the rewrite spec's "Trace context — envelope contract change".
 
 Update this file when anything in it changes.

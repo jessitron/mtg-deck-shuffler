@@ -7,6 +7,7 @@ require_relative "models/table"
 require_relative "models/seat"
 require_relative "models/event"
 require_relative "lib/sse_stream"
+require_relative "lib/admin_view"
 
 module Spine
   class App < Roda
@@ -58,6 +59,33 @@ module Spine
         ]
       end
 
+      r.get "admin", "tables" do
+        response["Content-Type"] = "text/html"
+        tables = Table.order(:name).all
+        current_span.add_attributes("admin.table_count" => tables.size)
+        render_admin("admin/tables/index", tables: tables)
+      end
+
+      r.get "admin", "tables", String do |table_id|
+        response["Content-Type"] = "text/html"
+        table = Table[table_id]
+        if table.nil?
+          mark_span_failed("admin.result", "not_found", StandardError.new("no table #{table_id.inspect}"))
+          next not_found_html("no table #{table_id.inspect}")
+        end
+
+        current_span.add_attributes("table.id" => table.id, "admin.result" => "found")
+        render_admin("admin/tables/show",
+          table: table,
+          events: table.events_dataset.order(:seq).all,
+          team_slug: ENV.fetch("HONEYCOMB_TEAM_SLUG", "modernity"),
+          # "local" is correct today because there is no prod deploy yet (see
+          # SEAMAP.md's Out of Scope). Whoever rebuilds the Spine's prod deploy
+          # must set HONEYCOMB_ENV_SLUG=mtg-deck-shuffler there — otherwise
+          # these trace links silently point at the wrong environment.
+          env_slug: ENV.fetch("HONEYCOMB_ENV_SLUG", "local"))
+      end
+
       r.post "join" do
         response["Content-Type"] = "application/json"
         body = JSON.parse(r.body.read)
@@ -104,6 +132,16 @@ module Spine
     def not_found(message)
       response.status = 404
       JSON.generate(error: message)
+    end
+
+    def not_found_html(message)
+      response["Content-Type"] = "text/html"
+      response.status = 404
+      message
+    end
+
+    def render_admin(template, locals)
+      AdminView.new(locals).render(template)
     end
 
     def required_string(hash, key)

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head><title>Spine — <%= h @table.name %></title></head>
+<body>
+  <h1><a href="/admin/tables">Spine</a> / <%= h @table.name %></h1>
+  <p>tableId <%= h @table.id %></p>
+
+  <h2>The log (<span id="event-count"><%= @events.size %></span> events)</h2>
+  <table id="event-log">
+    <thead>
+      <tr><th>seq</th><th>accepted at</th><th>name</th><th>initiator</th><th>payload</th><th>trace</th></tr>
+    </thead>
+    <tbody>
+      <% @events.each do |event| -%>
+        <tr data-seq="<%= event.seq %>">
+          <td><%= event.seq %></td>
+          <td><%= h event.accepted_at.utc.iso8601(3) %></td>
+          <td><%= h event.name %></td>
+          <td><%= h event.initiator %></td>
+          <td><pre><%= h JSON.pretty_generate(JSON.parse(event.payload)) %></pre></td>
+          <td></td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+
+  <script>
+    (function () {
+      var teamSlug = <%= JSON.generate(@team_slug) %>;
+      var envSlug = <%= JSON.generate(@env_slug) %>;
+      var streamUrl = <%= JSON.generate("/tables/#{@table.id}/events/stream") %>;
+      var tbody = document.querySelector("#event-log tbody");
+      var countEl = document.querySelector("#event-count");
+
+      function escapeHtml(value) {
+        var div = document.createElement("div");
+        div.textContent = value == null ? "" : String(value);
+        return div.innerHTML;
+      }
+
+      function honeycombTraceUrl(traceparent) {
+        if (!traceparent) return null;
+        var traceId = traceparent.split("-")[1];
+        return "https://ui.honeycomb.io/" + teamSlug + "/environments/" + envSlug + "/trace?trace_id=" + traceId;
+      }
+
+      function appendRow(event, traceparent) {
+        var traceUrl = honeycombTraceUrl(traceparent);
+        var tr = document.createElement("tr");
+        tr.setAttribute("data-seq", event.seq);
+        tr.innerHTML =
+          "<td>" + event.seq + "</td>" +
+          "<td>" + escapeHtml(event.acceptedAt) + "</td>" +
+          "<td>" + escapeHtml(event.name) + "</td>" +
+          "<td>" + escapeHtml(event.initiator && event.initiator.playerName) + "</td>" +
+          "<td><pre>" + escapeHtml(JSON.stringify(event.payload, null, 2)) + "</pre></td>" +
+          "<td>" + (traceUrl ? '<a href="' + traceUrl + '" target="_blank" rel="noopener">trace</a>' : "") + "</td>";
+        tbody.appendChild(tr);
+        countEl.textContent = tbody.children.length;
+      }
+
+      var stream = new EventSource(streamUrl);
+      stream.onmessage = function (e) {
+        var message = JSON.parse(e.data);
+        appendRow(message.event, message.meta && message.meta.traceparent);
+      };
+    })();
+  </script>
+</body>
+</html>
