@@ -119,13 +119,22 @@ tldraw ≥ 4 blanks the canvas 5s after load on unlicensed **HTTPS** non-loopbac
 hosts, and plain http is exempt (decided 2026-08-09; the app has no auth to protect
 anyway). The ALB rides its own IngressGroup (`tabletop-http`) — it can't share
 `only-one-alb-please`, because `ssl-redirect` is exclusive across a group. The main
-ingress is HTTP:80-only; `k8s/ingress-https-downgrade.yaml` (same group, 443 only)
-301s https-first browsers down to http. **Don't serve the app itself over 443
+ingress is HTTP:80-only. **Don't serve the app itself over 443
 without reading README → Licensing.** All four
 absolute-URL config spots must agree on the scheme: `k8s/configmap.yaml` (browser
 OTLP ×2), `k8s/collector.yaml` (CORS origin), and the Shuffler's
 `TABLETOP_PUBLIC_URL`. `chooseLicenseKey` (`src/client/chooseLicenseKey.ts`)
 withholds any baked key wherever the gate can't fire, so a stale key in `.be` can't
 blank local dev or http prod. See README → Licensing and `notes/AGENT-NOTES.md`.
+
+**`k8s/ingress-https-downgrade.yaml` existed briefly (2026-08-09 to 2026-08-10) to 301
+https-first browsers down to http, sharing the `tabletop-http` group on 443 only. Removed:
+AWS ALB rejects a redirect action that changes protocol from HTTPS to HTTP
+(`InvalidLoadBalancerAction: You cannot redirect HTTPS to HTTP`), so it never actually
+deployed — it just sat there failing `FailedDeployModel` every ~15-20 min and, because
+ingresses sharing a `group.name` reconcile as one ALB, blocked routing updates for the
+main ingress too (see `owners/fleet-is-observable/README.md`).** The problem it was
+meant to solve — modern Firefox/Chrome trying `https://` first for typed URLs and
+showing "can't connect" instead of falling back — is still open (no ticket yet).
 
 Update this file when anything in it changes.
