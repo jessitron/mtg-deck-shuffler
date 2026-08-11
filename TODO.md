@@ -43,15 +43,6 @@ section is just a wall between Jess and the live work.
     fell back to).
     ← mountain: tabletop-replaces-mural
 
-- GRILLING: Feature: Let a player exit the table so they can rejoin with a different deck! (fleet)
-  - Triage research (2026-08-10): nothing about "leaving a table" exists today — seats are
-    permanent once taken (`Table#take_seat!`), no `seat.left` contract event, and a deck binds
-    to a seat only implicitly via whatever `seat.joined` carried at join time. Needs a spec:
-    a new cross-ship contract event, Spine seat-release logic, and — the real open
-    question — what happens to the leaving player's library/hand/battlefield cards on the
-    Tabletop (removed? left as an orphaned zone?). That's a game-design call, not plumbing.
-    Promote via `/to-spec` when ready to decide it.
-
 - GRILLING: bug: counters can't be copied... actually neither can images, cards, etc. They can be duplicated, so there's a workaround. (Tabletop)
   - Triage research (2026-08-10): not a shape-specific bug — it's a side effect of the
     2026-08-09 decision to serve the deployed Tabletop over plain `http://` to dodge tldraw's
