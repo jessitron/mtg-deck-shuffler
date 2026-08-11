@@ -1,6 +1,18 @@
 import { EventEnvelope } from "../port-tabletop/types.js";
 import { SpinePort } from "./types.js";
 
+/**
+ * Real Spine client (services/spine): joins a table by name (creating it if
+ * none is active yet) via a single `POST /join`, then appends events to its
+ * log. Uses global fetch (undici), which OTel auto-instrumentation wraps, so
+ * trace context propagates to the Spine for free on the way in as a
+ * `traceparent` header — the envelope body carries no `traceparent` field
+ * (contracts/envelope.v3.json), so `sendEvent` strips it before serializing.
+ * Don't set a `traceparent` header by hand here: undici's instrumentation
+ * appends its own after any explicit headers, unconditionally, so a
+ * hand-set value would just duplicate (or, worse, diverge from) the one it
+ * injects from the live active span.
+ */
 export class HttpSpineGateway implements SpinePort {
   constructor(private readonly baseUrl: string) {}
 

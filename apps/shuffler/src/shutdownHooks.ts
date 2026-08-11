@@ -1,3 +1,19 @@
+/**
+ * Flush-and-exit on SIGTERM/SIGINT.
+ *
+ * With no signal handler installed, Node terminates immediately on SIGTERM —
+ * which is what `verify.sh`'s `cleanup()` sends, and what k8s sends on every
+ * pod termination. That drops whatever OTel batch hasn't flushed yet (up to
+ * `BatchSpanProcessor`'s `scheduledDelayMillis`, 5s by default), on every
+ * verify run and every prod shutdown.
+ *
+ * Installing a handler changes that default: once one exists, Node no longer
+ * exits on its own, so this must call `exit()` itself once the drain settles
+ * — same bounded-wait shape as `test/harness-telemetry/harnessTracing.ts`'s
+ * `bounded()` helper (a `Promise.race` against an `unref()`'d timer), so a
+ * hung exporter can't outlast a k8s termination grace period. `shuttingDown`
+ * guards against firing twice if both signals arrive.
+ */
 export interface InstallShutdownHandlersOptions {
   /** How long to wait for `drain()` before exiting anyway. Default 5000ms. */
   timeoutMs?: number;

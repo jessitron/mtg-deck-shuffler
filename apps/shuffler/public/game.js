@@ -163,6 +163,9 @@ window.copyCardImageToClipboard = async function (event, imageUrl, cardName) {
 let draggedCard = null;
 let draggedFromPosition = null;
 
+// Easter egg: the hand-symbol (image + count) can be dragged into any hand-drop-zone
+// like a card. Its position is purely cosmetic — not GameState, not persisted past the
+// tab — so it's tracked in sessionStorage and re-applied after every htmx re-render.
 const HAND_SYMBOL_SENTINEL = "hand-symbol";
 
 function handSymbolPositionKey(gameId) {
