@@ -7,7 +7,7 @@ const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
-const DEFAULT_MAT = '/images/playmats/aeoe-43-cascading-cataracts.png';
+const DEFAULT_MAT = '/images/playmats/aeoe-41-terrasymbiosis.png';
 const OTHER_MAT = '/images/playmats/aeoe-6-seam-rip.png';
 
 const DEFAULT_QUICK_PICKS = sleeveQuickPicksForPlaymat(DEFAULT_PLAYMAT_PATH);
@@ -32,12 +32,19 @@ function hexToRgb(hex: string): string {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-const darkPick = DEFAULT_QUICK_PICKS.find((p) => isDarkHex(resolvedSecondaryFor(p.hex)));
-const lightPick = DEFAULT_QUICK_PICKS.find((p) => !isDarkHex(resolvedSecondaryFor(p.hex)));
+// The default mat's own chosenTwo pair happens to be two dark colors, so no sleeve pick
+// against it ever resolves to a light secondaryColor — the dark/light lettering test needs
+// a mat whose curated pair actually spans both, so it targets OTHER_MAT instead.
+const OTHER_MAT_QUICK_PICKS = sleeveQuickPicksForPlaymat(OTHER_MAT);
+function resolvedSecondaryForOtherMat(sleeveHex: string | undefined): string {
+  return colorsForPlaymat(OTHER_MAT, sleeveHex).secondaryColor;
+}
+const darkPick = OTHER_MAT_QUICK_PICKS.find((p) => isDarkHex(resolvedSecondaryForOtherMat(p.hex)));
+const lightPick = OTHER_MAT_QUICK_PICKS.find((p) => !isDarkHex(resolvedSecondaryForOtherMat(p.hex)));
 if (!darkPick || !lightPick) {
   throw new Error(
-    `Default playmat's quick-picks (${DEFAULT_QUICK_PICKS.map((p) => p.hex).join(', ')}), resolved against the ` +
-      "default mat's chosenTwo, need at least one dark and one light secondaryColor for the dark/light lettering test to mean anything."
+    `OTHER_MAT's quick-picks (${OTHER_MAT_QUICK_PICKS.map((p) => p.hex).join(', ')}), resolved against its ` +
+      "chosenTwo, need at least one dark and one light secondaryColor for the dark/light lettering test to mean anything."
   );
 }
 
@@ -64,6 +71,16 @@ function matSwatch(page: Page, path: string) {
 
 function sleeveSwatch(page: Page, hex: string) {
   return page.locator(`.table-look-panel [data-sleeve-color="${hex}"]`);
+}
+
+// Each swatch fires an independent htmx POST to /prep-table-look/:prepId, outerHTML-swapping
+// the panel. Clicking a second swatch immediately after the first can race the swap — the
+// second click's target may not have its listener attached yet, silently dropping the click.
+// Waiting for the network to go idle (not just for the "selected" class to appear) is what
+// reliably clears that race.
+async function clickSwatchAndSettle(page: Page, locator: ReturnType<typeof matSwatch>): Promise<void> {
+  await locator.click();
+  await page.waitForLoadState('networkidle');
 }
 
 test.describe('Prepare screen — table-look panel', () => {
@@ -110,10 +127,11 @@ test.describe('Prepare screen — table-look panel', () => {
     const sleeveTint = hexToRgb(resolvedSecondaryFor(pickThatChangesTint.hex));
     const noSleeveTint = hexToRgb(noSleeveSecondary);
 
-    await sleeveSwatch(page, pickThatChangesTint.hex).click();
+    await clickSwatchAndSettle(page, sleeveSwatch(page, pickThatChangesTint.hex));
     await expect(page.locator('.game-title')).toHaveCSS('background-color', sleeveTint);
 
-    await page.locator('.table-look-panel [data-sleeve-color=""]').click();
+    const noneLocator = page.locator('.table-look-panel [data-sleeve-color=""]');
+    await clickSwatchAndSettle(page, noneLocator);
     await expect(page.locator('.game-title')).toHaveCSS('background-color', noSleeveTint);
 
     await page.goto(`${BASE_URL}/prepare/${prepId}`);
@@ -123,8 +141,12 @@ test.describe('Prepare screen — table-look panel', () => {
   test('a dark sleeve color flips the deck-title lettering to white; a light one does not', async ({ page }) => {
     const prepId = await gotoPrep(page);
 
+    // OTHER_MAT's curated pair spans dark and light; the default mat's does not.
+    // Wait for each swap to land before the next click — otherwise the POSTs race.
+    await clickSwatchAndSettle(page, matSwatch(page, OTHER_MAT));
+
     // A dark quick-pick → white lettering
-    await sleeveSwatch(page, darkPick.hex).click();
+    await clickSwatchAndSettle(page, sleeveSwatch(page, darkPick.hex));
     await expect(page.locator('.game-title')).toHaveCSS('color', 'rgb(255, 255, 255)');
 
     // Persists through the on-load tint path too
@@ -132,7 +154,7 @@ test.describe('Prepare screen — table-look panel', () => {
     await expect(page.locator('.game-title')).toHaveCSS('color', 'rgb(255, 255, 255)');
 
     // A light quick-pick → lettering back to the default
-    await sleeveSwatch(page, lightPick.hex).click();
+    await clickSwatchAndSettle(page, sleeveSwatch(page, lightPick.hex));
     await expect(page.locator('.game-title')).not.toHaveCSS('color', 'rgb(255, 255, 255)');
   });
 

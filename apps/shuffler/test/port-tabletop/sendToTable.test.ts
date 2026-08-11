@@ -143,7 +143,7 @@ describe("sendSeatJoinedBestEffort", () => {
     await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck");
 
     const { event } = fake.sentSeatJoinedEvents[0];
-    expect(event.payload.playmatImageUrl).toMatch(/aeoe-43-cascading-cataracts\.png$/);
+    expect(event.payload.playmatImageUrl).toMatch(/aeoe-41-terrasymbiosis\.png$/);
   });
 
   it("no sleeve picked → no sleeveColor, standard card back (today's look)", async () => {
