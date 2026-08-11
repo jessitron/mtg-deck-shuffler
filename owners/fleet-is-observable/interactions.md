@@ -134,6 +134,21 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `HONEYCOMB_ENV_SLUG=mtg-deck-shuffler` in its env, or every trace link a Spine operator clicks in
   prod silently points at `local` instead — there's a comment at the `ENV.fetch` call site in
   `app.rb` flagging this, don't lose it if the surrounding code moves.
+- **The Spine's admin show page now mints a real child span from `meta.traceparent`, not just a
+  link** (`views/admin/tables/show.html.erb`, `Hny.inChildSpan("spine-admin",
+  "table.event.displayed", spanContext, fn)`): keep it a **child of the same `trace_id`**, never a
+  link to a new trace — the point is one trace covering "player joined" through "operator saw it on
+  screen." This deliberately stretches that trace's reported duration (child starts after the
+  parent server span has already ended) — don't read that as a performance regression, and don't
+  "fix" it by reverting to a link. `honeycomb_api_key: ENV["HONEYCOMB_API_KEY"]` now also flows into
+  the show-page locals (same direct-key-in-page shape as the Shuffler, Invariant 3) alongside
+  `team_slug`/`env_slug`. Browser-side service name is `"mtg-spine-admin"`, separate from the
+  server-side `"mtg-spine"` — don't collapse them.
+- **The Spine's first browser JS/telemetry, and its no-bundler shape**: `services/spine/public/hny.js`
+  is the Shuffler's `hny.js` vendored byte-for-byte, served via Roda's `plugin :public` + `r.public`
+  (`app.rb`) — the Spine had zero static-asset serving before this. The next Spine page that needs
+  browser telemetry should mirror this shape (vendor `hny.js`, serve via `plugin :public`, guard init
+  like the Shuffler's `initHoneycombTracing`) rather than inventing a new one.
 - **Mounting a Rack-based OTel instrumentation gem** (any Ruby service, not just the Spine): Rack
   has no railtie-style auto-injection, so the app must explicitly mount the middleware via
   `middleware_args` — already done in `services/spine/app.rb`. A new Rack-based service needs the

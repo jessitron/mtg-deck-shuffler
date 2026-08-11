@@ -24,6 +24,7 @@
     </tbody>
   </table>
 
+  <script src="/hny.js"></script>
   <script>
     (function () {
       var teamSlug = <%= JSON.generate(@team_slug) %>;
@@ -31,6 +32,23 @@
       var streamUrl = <%= JSON.generate("/tables/#{@table.id}/events/stream") %>;
       var tbody = document.querySelector("#event-log tbody");
       var countEl = document.querySelector("#event-count");
+
+      // Guard mirrors the Shuffler's initHoneycombTracing
+      // (src/view/common/html-layout.ts): skip, with a console.warn instead of a
+      // useless call, when no valid key is configured.
+      function initHoneycombTracing(apiKey) {
+        if (!window.Hny) return;
+        if (!apiKey || apiKey === "undefined") {
+          console.warn("Honeycomb browser tracing disabled: no valid API key configured (set HONEYCOMB_API_KEY)");
+          return;
+        }
+        Hny.initializeTracing({
+          apiKey: apiKey,
+          serviceName: "mtg-spine-admin",
+          debug: false
+        });
+      }
+      initHoneycombTracing(<%= JSON.generate(@honeycomb_api_key) %>);
 
       function escapeHtml(value) {
         var div = document.createElement("div");
@@ -42,6 +60,20 @@
         if (!traceparent) return null;
         var traceId = traceparent.split("-")[1];
         return "https://ui.honeycomb.io/" + teamSlug + "/environments/" + envSlug + "/trace?trace_id=" + traceId;
+      }
+
+      // traceparent shape (W3C Trace Context): "version-traceId-spanId-flags".
+      // Returns an OTel SpanContext, or null if traceparent is missing/malformed.
+      function parseSpanContext(traceparent) {
+        if (!traceparent) return null;
+        var parts = traceparent.split("-");
+        if (parts.length !== 4) return null;
+        return {
+          traceId: parts[1],
+          spanId: parts[2],
+          traceFlags: parseInt(parts[3], 16),
+          isRemote: true
+        };
       }
 
       function appendRow(event, traceparent) {
@@ -62,7 +94,27 @@
       var stream = new EventSource(streamUrl);
       stream.onmessage = function (e) {
         var message = JSON.parse(e.data);
-        appendRow(message.event, message.meta && message.meta.traceparent);
+        var traceparent = message.meta && message.meta.traceparent;
+        var spanContext = parseSpanContext(traceparent);
+
+        if (window.Hny && spanContext) {
+          // Deliberately a CHILD of the event's own trace (same trace_id), not a
+          // link to a new one — the point is to see, in ONE Honeycomb trace, the
+          // full path from "player joined" to "operator saw it on screen". The
+          // parent span (the server request that created this event) has
+          // already ended by the time a human is looking at this page, so this
+          // child's start time can land well after its parent's end — that
+          // stretches the trace's reported duration to cover real
+          // delivery-to-screen latency. That's the intended signal here, not a
+          // bug: "trace duration" on this trace means "time to observed by a
+          // human", not "time to server response".
+          Hny.inChildSpan("spine-admin", "table.event.displayed", spanContext, function (span) {
+            span.setAttributes({ "event.name": message.event.name, "event.seq": message.event.seq });
+            appendRow(message.event, traceparent);
+          });
+        } else {
+          appendRow(message.event, traceparent);
+        }
       };
     })();
   </script>

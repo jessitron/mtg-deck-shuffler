@@ -67,4 +67,23 @@ class AdminScreenTest < Minitest::Test
 
     assert_equal 404, last_response.status
   end
+
+  def test_the_show_page_loads_the_browser_tracer_and_continues_the_trace_on_display
+    table_id = join(name: "kitchen table #{SecureRandom.uuid}")["tableId"]
+
+    get "/admin/tables/#{table_id}"
+
+    body = last_response.body
+    assert_includes body, '<script src="/hny.js"></script>'
+    assert_includes body, "initHoneycombTracing("
+    assert_includes body, "Hny.inChildSpan("
+    assert_includes body, "table.event.displayed"
+  end
+
+  def test_hny_js_is_served_as_a_static_asset
+    get "/hny.js"
+
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "initializeTracing"
+  end
 end

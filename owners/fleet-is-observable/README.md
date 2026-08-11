@@ -184,7 +184,7 @@ instead. If you ever want `telemetry.sdk.*` back on a `BasicTracerProvider`, the
 | `apps/tabletop/src/client/observability/index.ts` | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific." Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
 | `services/spine/` | Roda + Sequel + SQLite + Minitest. `config/telemetry.rb`: `OpenTelemetry::SDK.configure` with `opentelemetry-exporter-otlp` + `opentelemetry-instrumentation-rack`, `service_name` `"mtg-spine"`. `app.rb` mounts the Rack instrumentation explicitly (`use(*OpenTelemetry::Instrumentation::Rack::Instrumentation.instance.middleware_args)`), which is required for Roda (no Rails-style auto-injection) and already in place. **100% sampling, deliberately** — no sampler module; a prior Ruby sampler existed and was flagged broken, and the rewrite starts clean rather than porting it back. `services/spine/run` follows the same `.be`-then-`.env` pattern as `apps/tabletop/run`, polling `GET /up`. Query this fleet's data via the **`honeycomb-modernity`** MCP server (team `modernity`) — not the default `honeycomb` server, which points at an unrelated demo team and has no fleet data; picking the wrong one looks like "no spans" and can be mistaken for a wiring bug. **Still open**: no sampler (100% is the deliberate starting point until start/stop behavior is confirmed clean), no logs pipeline (`spine-logs-in-traces` in `TODO.md`). |
 | `services/spine/app.rb` `POST /join` and `POST /tables/:table_id/events` | Both routes add application-level span attributes, Invariant-1 style: `current_span.add_attributes(...)` for inputs as soon as parsed, then a result attribute on success (`join.result`, `event.result`) — `event.result`'s dedup path gets its own value (`"duplicate"`, distinct from `"accepted"`) so a query can tell "receiving events" apart from "senders retrying." Failure paths share one helper, `mark_span_failed(attribute, result, error)`, taking the attribute key as a parameter so both routes use the same shape instead of each carrying a near-identical copy. `current_span` is a one-line helper (`OpenTelemetry::Trace.current_span`) — no manual span creation, purely stamping the ambient Rack-instrumentation span. **`join.result` does not currently distinguish** a brand-new table from joining an existing one — both set `"joined"`. Contract validation itself (`EventContract.validate!`) emits no telemetry of its own; the route's `rescue` turns a violation into the `contract_violation` span outcome. |
-| `services/spine/app.rb` `GET /admin/tables` and `GET /admin/tables/:id` | The Spine's new admin screen (ticket 06) follows the same house pattern: `current_span.add_attributes("admin.table_count" => ...)` on the index, `"table.id"`/`"admin.result" => "found"` on the show route, and the shared `mark_span_failed("admin.result", "not_found", error)` on a missing table — no new telemetry shape introduced, just the existing one applied to a third route pair. The show page's `<script>` block builds a Honeycomb trace-URL client-side from each live SSE message's `meta.traceparent` (`trace_id = traceparent.split("-")[1]`), using `HONEYCOMB_TEAM_SLUG`/`HONEYCOMB_ENV_SLUG` env vars (defaults `"modernity"`/`"local"`) injected into the page at render time — a fourth trace-context-in-body consumer, alongside the two minting sites below, but read-only: it never mints a `traceparent`, only turns one already on the wire into a link. **`HONEYCOMB_ENV_SLUG` is not yet set anywhere for the Spine** — there is no prod deploy for it yet, so the `"local"` default is correct today; the code carries a comment at the `ENV.fetch` call site flagging that Spine's future prod deploy wiring must set `HONEYCOMB_ENV_SLUG=mtg-deck-shuffler`, so this isn't silently missed the way an undocumented default would be. Rows already in the log when the page loads render with no trace link at all — the `Event` row has no trace column (see the trace-context-in-event-bodies section below), so only rows arriving live over SSE have a `traceparent` to link from. |
+| `services/spine/app.rb` `GET /admin/tables` and `GET /admin/tables/:id` | The Spine's admin screen (ticket 06) follows the same house pattern: `current_span.add_attributes("admin.table_count" => ...)` on the index, `"table.id"`/`"admin.result" => "found"` on the show route, and the shared `mark_span_failed("admin.result", "not_found", error)` on a missing table — no new telemetry shape introduced, just the existing one applied to a third route pair. `HONEYCOMB_ENV_SLUG` is not yet set anywhere for the Spine (no prod deploy exists yet), so the `"local"` default is correct today; the code carries a comment at the `ENV.fetch` call site flagging that Spine's future prod deploy wiring must set `HONEYCOMB_ENV_SLUG=mtg-deck-shuffler`. Rows already in the log when the page loads render with no trace link at all — the `Event` row has no trace column (see the trace-context-in-event-bodies section below), so only rows arriving live over SSE have a `traceparent` to work with. The show page now ships its own browser telemetry too — see "The Spine's browser bootstrap and trace continuation" below. |
 | `apps/shuffler/test/harness-telemetry/` | The verify suite's own tracing — not a ship. `harnessTracing.ts` (provider), `spanPlan.ts` (pure + tested), `otelReporter.ts` (Playwright reporter). Service `mtg-fleet-verify`. See "Dev-tooling telemetry" below. |
 | `apps/shuffler/src/port-spine/` | `HttpSpineGateway`/`FakeSpineGateway` implement `SpinePort` (`join`, `sendEvent`), wired into `server.ts` alongside the existing `tabletopPort`. Rewritten onto the new Spine's single `POST /join` and `contracts/envelope.v3.json` (`shuffler-spine-gateway-stale` closed). `sendEvent` still builds its envelope via `buildCardPlayedEvent`/`currentTraceparent()` (those helpers are shared with the Tabletop-facing send and still mint a `traceparent` value onto the envelope object), but now **strips `traceparent` out of the body before serializing** — `envelope.v3.json` has `additionalProperties: false` and no `traceparent` property, so sending it would be rejected outright. No header is hand-set to compensate: undici's OTel auto-instrumentation already injects a live `traceparent` header on every outbound `fetch()`, appending its own after any explicit headers unconditionally, so a hand-set header here would only risk a duplicate or a stale value. Net: mint-for-the-object/strip-from-body/say-nothing-about-the-header is the correct shape, not a partial fix. Otherwise adds no new telemetry wiring on purpose — rides the same undici auto-instrumentation as every other outbound call, and copies the best-effort failure shape (span attribute + `log.warn`, never throws). |
 
@@ -239,6 +239,16 @@ stream has no way to link back to the trace that created it, an accepted tradeof
 (`services/spine/CLAUDE.md`). Outbound SSE (not yet implemented) is specified to carry
 `meta.traceparent` as a **sibling** field alongside the envelope, not merged into it.
 
+**Outbound SSE now has a real consumer, not just a link-builder.** The Spine's admin
+show page (`views/admin/tables/show.html.erb`) parses each live SSE message's
+`meta.traceparent` into an OTel `SpanContext` (`{traceId, spanId, traceFlags,
+isRemote: true}`) and opens a genuine **child span** in that same trace —
+`Hny.inChildSpan("spine-admin", "table.event.displayed", spanContext, fn)` — rather than
+only building a clickable trace URL from it. This is the fleet's first browser-side
+"mint a real span from a body-embedded traceparent" consumer; previously `meta.traceparent`
+was read only to construct a URL. See "The Spine's browser bootstrap and trace
+continuation" below for the full shape and its consequence for trace duration.
+
 **Two live body-embedded mint sites remain**, both format identically
 (`00-{traceId}-{spanId}-{flags}`):
 
@@ -285,6 +295,46 @@ body ships as one exported literal script-source string constant, `HONEYCOMB_TRA
 what `apps/shuffler/test/html-layout-tracing-guard.test.ts` evals (via `new Function`) — no
 separate reimplementation to drift out of sync. Never add a **second** bootstrap anywhere — one
 shell is the whole point.
+
+### The Spine's browser bootstrap and trace continuation
+
+The Spine's admin show page (`views/admin/tables/show.html.erb`) is the **first Spine
+page to ship any browser JS or telemetry at all** — before this, the Spine had zero
+static-asset serving. It also establishes the no-bundler pattern for the next Spine page
+that needs one: vendor `hny.js` verbatim (the Shuffler's `apps/shuffler/public/hny.js`,
+byte-identical here at `services/spine/public/hny.js`), serve it via Roda's `plugin
+:public` + `r.public` (`app.rb`), and guard init exactly like the Shuffler's
+`initHoneycombTracing` — skip with `console.warn` on a missing/invalid key, never throw.
+
+**Wiring**: `GET /admin/tables/:id` now passes `honeycomb_api_key: ENV["HONEYCOMB_API_KEY"]`
+into the show-page locals alongside the existing `team_slug`/`env_slug`. Same
+direct-key-in-page shape as the Shuffler (Invariant 3) — sanctioned for the Spine too
+since there's no collector and standing one up for one admin page is disproportionate.
+The page calls `Hny.initializeTracing({apiKey, serviceName: "mtg-spine-admin"})` — a new,
+separate service name from the server-side `"mtg-spine"`.
+
+**The child-span shape, and why it's a child and not a link.** On `stream.onmessage`, the
+page parses `message.meta.traceparent` into an OTel `SpanContext` and calls
+`Hny.inChildSpan("spine-admin", "table.event.displayed", spanContext, fn)`, stamping
+`event.name`/`event.seq` on the resulting span. This was a deliberate, reviewed choice:
+the goal is **one Honeycomb trace** covering "player joined" all the way to "operator saw
+it on screen." A link would have put the display in a disconnected second trace instead.
+
+**Consequence, not a bug: this stretches reported trace duration.** The parent (server)
+span that created the event is typically already ended by the time a human is looking at
+the admin page, so the child's start time can land well after its parent's end. Honeycomb
+computes trace duration from min-start to max-end across the whole `trace_id`, so the
+trace's reported duration now covers real delivery-to-screen latency. On this specific
+trace shape (event-creation → admin-display) that's the intended signal — don't read a
+long duration here as a performance regression, and don't "fix" it by switching back to a
+link.
+
+Verified live end-to-end, not just via the Minitest HTML-assertion test
+(`test/integration/admin_screen_test.rb`): ran the app with real telemetry env, drove a
+real headless Chromium browser via Playwright, posted an event, and confirmed in
+Honeycomb that a `table.event.displayed` span (`service.name mtg-spine-admin`) landed as a
+genuine child of the server's `POST /tables/:table_id/events` span — same `trace_id`,
+carrying `event.name`/`event.seq`.
 
 ### Dev-tooling telemetry (the pattern for instrumenting our own tools)
 
