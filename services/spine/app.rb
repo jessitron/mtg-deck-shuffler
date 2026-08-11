@@ -11,9 +11,13 @@ require_relative "lib/admin_view"
 
 module Spine
   class App < Roda
+    plugin :public, root: File.join(__dir__, "public")
+
     use(*OpenTelemetry::Instrumentation::Rack::Instrumentation.instance.middleware_args)
 
     route do |r|
+      r.public
+
       r.get "up" do
         response["Content-Type"] = "text/plain"
         "ok"
@@ -83,7 +87,12 @@ module Spine
           # SEAMAP.md's Out of Scope). Whoever rebuilds the Spine's prod deploy
           # must set HONEYCOMB_ENV_SLUG=mtg-deck-shuffler there — otherwise
           # these trace links silently point at the wrong environment.
-          env_slug: ENV.fetch("HONEYCOMB_ENV_SLUG", "local"))
+          env_slug: ENV.fetch("HONEYCOMB_ENV_SLUG", "local"),
+          # Browser-side tracing key, same ingest key the server uses (Invariant 3:
+          # OK to publish in the browser). Baked directly into the page like the
+          # Shuffler's HONEYCOMB_TRACING_INIT_SCRIPT — no collector, since the Spine
+          # has none yet and standing one up for one admin page is disproportionate.
+          honeycomb_api_key: ENV["HONEYCOMB_API_KEY"])
       end
 
       r.post "join" do
