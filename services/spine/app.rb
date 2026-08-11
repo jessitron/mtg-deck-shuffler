@@ -61,18 +61,28 @@ module Spine
 
       r.get "admin", "tables" do
         response["Content-Type"] = "text/html"
-        render_admin("admin/tables/index", tables: Table.order(:name).all)
+        tables = Table.order(:name).all
+        current_span.add_attributes("admin.table_count" => tables.size)
+        render_admin("admin/tables/index", tables: tables)
       end
 
       r.get "admin", "tables", String do |table_id|
         response["Content-Type"] = "text/html"
         table = Table[table_id]
-        next not_found_html("no table #{table_id.inspect}") if table.nil?
+        if table.nil?
+          mark_span_failed("admin.result", "not_found", StandardError.new("no table #{table_id.inspect}"))
+          next not_found_html("no table #{table_id.inspect}")
+        end
 
+        current_span.add_attributes("table.id" => table.id, "admin.result" => "found")
         render_admin("admin/tables/show",
           table: table,
           events: table.events_dataset.order(:seq).all,
           team_slug: ENV.fetch("HONEYCOMB_TEAM_SLUG", "modernity"),
+          # "local" is correct today because there is no prod deploy yet (see
+          # SEAMAP.md's Out of Scope). Whoever rebuilds the Spine's prod deploy
+          # must set HONEYCOMB_ENV_SLUG=mtg-deck-shuffler there — otherwise
+          # these trace links silently point at the wrong environment.
           env_slug: ENV.fetch("HONEYCOMB_ENV_SLUG", "local"))
       end
 
