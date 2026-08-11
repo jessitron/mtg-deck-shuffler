@@ -1,9 +1,14 @@
 # Spine
 
 The fleet's event hub: Tables, Seats, and one append-only event log per table.
-Ruby on Rails + SQLite. See `SEAMAP.md` for the map and
-`../../notes/DESIGN-event-contract-v0.md` for the contract this service enforces
-(schemas in `../../contracts/`).
+Plain Ruby — Roda (routing only) + Sequel + SQLite + Minitest, no Rails. See
+`SEAMAP.md` for the map, `../../.scratch/spine-roda-rewrite/spec.md` for why this is a
+rewrite from Rails, and `../../notes/DESIGN-event-contract-v0.md` for the contract this
+service enforces (schemas in `../../contracts/`).
+
+**Current status: boot only.** `GET /up`, OTel wired at 100% sampling, an empty SQLite
+DB connected. No tables/seats/events domain logic yet — see
+`../../.scratch/spine-roda-rewrite/issues/` for what's next.
 
 ## Run locally
 
@@ -11,35 +16,19 @@ Ruby on Rails + SQLite. See `SEAMAP.md` for the map and
 PORT=4600 ./run     # sources repo-root .be then .env (order matters for telemetry)
 ```
 
-- Admin screen: http://localhost:4600/admin/tables — a table's log, human-readably,
-  each event linking to its Honeycomb trace.
 - Health: `GET /up`
-
-## API (v0)
-
-- `POST /tables` `{ "name": "...", "creator": "..." }` — Spine mints the tableId,
-  appends `table.created`. 409 if an active table already has that name.
-- `GET /tables/lookup?name=...` — join by name: returns `{ tableId, name, seats }`.
-- `POST /tables/:table_id/seats` `{ "playerName": "...", "seat"?: 1..4 }` — take a
-  seat; Spine mints the seatId and, unless the caller names one, the seat
-  number too (the next open one, 1-4), appends `seat.taken`. 409 if the table
-  already has 4 seats taken, or if an explicit `seat` is already occupied.
-- `POST /tables/:table_id/events` — ingest a contract event (envelope v1).
-  Validated against `contracts/` on receipt; unknown name/version fails loudly
-  (422). Duplicate sender `id` is elided (returns the already-accepted event).
-  Spine assigns `seq` and `acceptedAt`; senders must not.
 
 ## Tests
 
 ```sh
-bin/rails test
+bin/test     # Minitest, via `rake test`
 ```
 
-No mocks — fakes only (repo rule). Domain tests cover the log invariants
-(append-only, per-table monotonic seq, dedup, loud schema failure); integration
-tests cover ingestion and the admin screen.
+No mocks — fakes only (repo rule).
 
 ## Deploy
 
-`./deploy.sh` — mirrors the Shuffler's: ECR + EKS, manifests in `k8s/`,
-hostname spine.jessitron.honeydemo.io, SQLite on a PVC at /data.
+`./deploy.sh` doesn't exist yet for this stack — the Rails app's Docker/k8s setup was
+deleted along with the rest of it. Nothing in production depends on the Spine yet, so
+this is deliberately deferred until the app is functionally ready to wire in (see the
+rewrite spec's Out of Scope).

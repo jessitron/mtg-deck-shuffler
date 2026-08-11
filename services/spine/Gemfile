@@ -1,0 +1,21 @@
+source "https://rubygems.org"
+
+ruby ">= 3.4"
+
+# Routing only — no Rails-style MVC.
+gem "roda"
+# Query-building persistence layer, not a magic ORM.
+gem "sequel"
+gem "sqlite3", ">= 2.1"
+gem "puma", ">= 5.0"
+
+# Observability is mandatory, from the first commit: OTel to Honeycomb.
+gem "opentelemetry-sdk"
+gem "opentelemetry-exporter-otlp"
+gem "opentelemetry-instrumentation-rack"
+
+group :test do
+  gem "minitest"
+  gem "rack-test"
+  gem "rake"
+end
