@@ -58,16 +58,26 @@ cleanup() {
 }
 trap cleanup INT TERM EXIT
 
-echo "⛵ launching the fleet: spine :$SPINE_PORT · tabletop :$TABLETOP_PORT · shuffler :$SHUFFLER_PORT"
-start "[spine   ]" services/spine "$SPINE_PORT"
+SPINE_UP=1
+if [ -x services/spine/run ]; then
+  echo "⛵ launching the fleet: spine :$SPINE_PORT · tabletop :$TABLETOP_PORT · shuffler :$SHUFFLER_PORT"
+  start "[spine   ]" services/spine "$SPINE_PORT"
+else
+  SPINE_UP=0
+  echo "⛵ launching the fleet: tabletop :$TABLETOP_PORT · shuffler :$SHUFFLER_PORT"
+  echo "   ⚠️  skipping spine — services/spine has no ./run yet (mid-rewrite)"
+fi
 start "[tabletop]" apps/tabletop  "$TABLETOP_PORT"
 start "[shuffler]" apps/shuffler  "$SHUFFLER_PORT"
 
-# One combined readiness banner once all three answer.
+# One combined readiness banner once the running ships answer.
 (
   ok=0
   for _ in $(seq 1 240); do
-    s=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:$SPINE_PORT/up" 2>/dev/null || true)
+    s=200
+    if [ "$SPINE_UP" = "1" ]; then
+      s=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:$SPINE_PORT/up" 2>/dev/null || true)
+    fi
     t=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:$TABLETOP_PORT/health" 2>/dev/null || true)
     h=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:$SHUFFLER_PORT/health" 2>/dev/null || true)
     if [ "$s" = "200" ] && [ "$t" = "200" ] && [ "$h" = "200" ]; then
@@ -75,7 +85,9 @@ start "[shuffler]" apps/shuffler  "$SHUFFLER_PORT"
       echo "⛵ the fleet is afloat"
       echo "   shuffler   http://localhost:$SHUFFLER_PORT/"
       echo "   tabletop   http://localhost:$TABLETOP_PORT/         (tables at /t/<name>)"
-      echo "   spine      http://localhost:$SPINE_PORT/admin/tables"
+      if [ "$SPINE_UP" = "1" ]; then
+        echo "   spine      http://localhost:$SPINE_PORT/admin/tables"
+      fi
       echo "══════════════════════════════════════════════════"
       ok=1
       break

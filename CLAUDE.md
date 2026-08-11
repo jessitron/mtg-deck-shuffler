@@ -114,11 +114,13 @@ only the route is broken. Curl the running image.
 
 ## Run the whole fleet locally
 
-- `./run` **from the repo root** — starts all three services with prefixed logs:
-  Spine (:4600, admin at `/admin/tables`), Tabletop (:5180, tables at `/t/<name>`),
-  Shuffler (:3344, wired to the local Tabletop via `TABLETOP_URL`). Sources `.be`
-  once for telemetry (Honeycomb env `local`). Ctrl-C stops everything. Override
-  ports with `SHUFFLER_PORT`/`TABLETOP_PORT`/`SPINE_PORT`.
+- `./run` **from the repo root** — starts the fleet with prefixed logs: Tabletop
+  (:5180, tables at `/t/<name>`), Shuffler (:3344, wired to the local Tabletop via
+  `TABLETOP_URL`), and Spine (:4600, admin at `/admin/tables`) once it exists again —
+  the Spine is mid-rewrite (`.scratch/spine-roda-rewrite/`) and `./run` skips it with a
+  log line until `services/spine/run` reappears. Sources `.be` once for telemetry
+  (Honeycomb env `local`). Ctrl-C stops everything. Override ports with
+  `SHUFFLER_PORT`/`TABLETOP_PORT`/`SPINE_PORT`.
 
 Single-ship commands (build, test, run, deploy) are in each ship's `CLAUDE.md`.
 `npm install` runs **from the root**; the lockfile lives here.
