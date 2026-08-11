@@ -2,7 +2,7 @@
 
 Mountain: spine-tells-the-story
 Ship: spine
-Status: ready-for-agent
+Status: resolved
 
 **What to build:** `/admin/tables` shows every table (index) and, per table, its full
 event log in order (show). The show page subscribes to that table's SSE stream (ticket
@@ -14,12 +14,12 @@ auth, no pagination/filtering/search — same as today.
 
 **Blocked by:** 05
 
-- [ ] `/admin/tables` lists every table that currently exists
-- [ ] A table's admin show page lists its full event log in order
-- [ ] Appending a new event to a table (via ticket 04) makes it appear on that table's
+- [x] `/admin/tables` lists every table that currently exists
+- [x] A table's admin show page lists its full event log in order
+- [x] Appending a new event to a table (via ticket 04) makes it appear on that table's
       open admin show page live, with no reload
-- [ ] Each event shown while the page is live-subscribed carries a working Honeycomb
+- [x] Each event shown while the page is live-subscribed carries a working Honeycomb
       trace link, built from that event's `meta.traceparent`
-- [ ] Rows that existed in the log before the admin page was opened render without a
+- [x] Rows that existed in the log before the admin page was opened render without a
       trace link (no stored trace column to fall back on)
-- [ ] HTTP integration tests cover the index and show routes end-to-end
+- [x] HTTP integration tests cover the index and show routes end-to-end

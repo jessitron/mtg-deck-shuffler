@@ -3,9 +3,9 @@
 One ship in [the fleet](../../SEAMAP.md). The Spine is the event hub and the central
 domain language: Tables, Seats, the log, and — for now — the Interpreter. _(Rewritten
 from the JES-129 Rails walking skeleton to plain Ruby — Roda + Sequel + SQLite +
-Minitest, see `.scratch/spine-roda-rewrite/` at repo root. Through ticket 04: OTel to
-Honeycomb, join-by-name, and contract-validated generic event ingestion. Admin screen
-and SSE outbound delivery still ahead.)_
+Minitest, see `.scratch/spine-roda-rewrite/` at repo root. Through ticket 06: OTel to
+Honeycomb, join-by-name, contract-validated generic event ingestion, SSE outbound
+delivery, and an `/admin/tables` screen that live-appends via that same SSE stream.)_
 
 ## North Star
 
@@ -26,8 +26,9 @@ believe it.
    contract validation (`POST /tables/:table_id/events`, envelope v3 — `traceparent`
    moved out of the body entirely, header-only inbound), and live outbound delivery
    over SSE (`GET /tables/:table_id/events/stream`, one stream per table, fed by a
-   plain-Ruby broadcaster). Still ahead: admin screen. Still ahead overall: public-only
-   is the whole visibility story so far; richer projections._
+   plain-Ruby broadcaster), and an `/admin/tables` screen (ticket 06) that dogfoods
+   that same stream to append new rows live, no reload. Still ahead overall:
+   public-only is the whole visibility story so far; richer projections._
 3. **The Interpreter** — physical events in, game events out, with provenance,
    causality, confidence, and commentary. Guesses; asks in chat; is corrected;
    supersedes itself. Later: ears (transcript events join the evidence), then
@@ -65,4 +66,6 @@ believe it.
 - Not a rules engine. The Interpreter reads players, not rules — "we don't know why"
   is a legitimate, first-class interpretation.
 - No auth yet; table names shared over Discord are the trust model.
-- Doesn't render anything. Pixels belong to TypeScript.
+- Doesn't render game pixels. Those belong to TypeScript — the Shuffler and Tabletop
+  are the only ships players look at. `/admin/tables` is the one exception: a plain-ERB
+  developer tool for reading the log, not a player-facing surface.

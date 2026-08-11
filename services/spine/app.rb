@@ -7,6 +7,7 @@ require_relative "models/table"
 require_relative "models/seat"
 require_relative "models/event"
 require_relative "lib/sse_stream"
+require_relative "lib/admin_view"
 
 module Spine
   class App < Roda
@@ -58,6 +59,23 @@ module Spine
         ]
       end
 
+      r.get "admin", "tables" do
+        response["Content-Type"] = "text/html"
+        render_admin("admin/tables/index", tables: Table.order(:name).all)
+      end
+
+      r.get "admin", "tables", String do |table_id|
+        response["Content-Type"] = "text/html"
+        table = Table[table_id]
+        next not_found_html("no table #{table_id.inspect}") if table.nil?
+
+        render_admin("admin/tables/show",
+          table: table,
+          events: table.events_dataset.order(:seq).all,
+          team_slug: ENV.fetch("HONEYCOMB_TEAM_SLUG", "modernity"),
+          env_slug: ENV.fetch("HONEYCOMB_ENV_SLUG", "local"))
+      end
+
       r.post "join" do
         response["Content-Type"] = "application/json"
         body = JSON.parse(r.body.read)
@@ -104,6 +122,15 @@ module Spine
     def not_found(message)
       response.status = 404
       JSON.generate(error: message)
+    end
+
+    def not_found_html(message)
+      response.status = 404
+      message
+    end
+
+    def render_admin(template, locals)
+      AdminView.new(locals).render(template)
     end
 
     def required_string(hash, key)
