@@ -25,7 +25,7 @@ APP_PORT=${port_override:-${PORT}}
   for _ in $(seq 1 120); do
     if curl -s "http://localhost:$APP_PORT/up" >/dev/null 2>&1; then
       echo "──────────────────────────────────────────────"
-      echo "✅ spine ready        http://localhost:$APP_PORT/up"
+      echo "✅ spine ready        http://localhost:$APP_PORT/admin/tables"
       echo "──────────────────────────────────────────────"
       break
     fi
