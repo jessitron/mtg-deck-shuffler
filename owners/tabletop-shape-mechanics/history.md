@@ -676,6 +676,52 @@ capability (any player can still move any card). Three consequences land in this
 Full detail in `architecture.md`'s new "Table-layout ticket 18" section; `interactions.md`'s Shape
 identity section rewritten and watch points 15-16 added; `README.md`'s quick-reference table
 updated; `files.md`'s `tableFurniture.ts`/`seatJoined.ts`/`mtgCardShape.ts` entries updated.
+## Playmat rendered behind another player's dragged card — a second, structurally-enforced index band for furniture (2026-08-10)
+
+TODO.md bug (`playmat-behind-cards`, worktree `playmat-behind-cards`): drag a card onto a
+late-joining seat's playmat and the card could disappear *behind* the playmat instead of resting
+on top of it. Root cause confirmed exactly as diagnosed beforehand: `nextIndex(tableName)`
+(`apps/tabletop/src/server/tableFurniture.ts`) was one monotonically-increasing per-room counter
+shared by **both** cards and furniture, chained off `ZERO_INDEX_KEY` via `getIndexAbove`. A
+furniture mint that happened *after* a card already existed — the ordinary case of a seat joining
+mid-game — could therefore land a higher `IndexKey` than that card, and since `topmostZoneAt()`/
+paint order both resolve ties by "greatest index wins" (watch point 8), the late playmat painted
+on top of the earlier card.
+
+- **Fix is structural, not a per-move patch.** Chose option 2 over "bump the card to front on
+  every move": a second per-room counter, `lowestFurnitureIndexByRoom`, feeding a new
+  `nextFurnitureIndex(tableName)` that calls `getIndexBelow(...)` (from `@tldraw/utils`) instead
+  of `getIndexAbove`, chained off `null` rather than `ZERO_INDEX_KEY`. Because tldraw's fractional
+  indexing is lexicographic, every `getIndexBelow(null)`-chain key sorts strictly below
+  `ZERO_INDEX_KEY` ("a0") and everything `nextIndex`'s `getIndexAbove` chain ever builds from it —
+  so furniture is guaranteed beneath every card **by construction**, regardless of mint order
+  across seats, not reasserted move-by-move.
+  - **Two index bands did not exist in this KB before.** Prior tickets (13, 14, table-layout 13/14,
+    the ghost mechanism in table-layout 18) all reasoned about z-order within a *single* shared
+    `nextIndex` sequence — greatest-index-wins tie-breaks (watch point 8) and paint-order decoys
+    (watch point 17) both assumed one counter. This fix splits that into two disjoint bands that
+    never need to compare against each other for correctness, because one band is defined to
+    always sort below the other.
+- **Every furniture-minting call site in `ensurePlayerArea` and `ensureStackDrawn`** — playmat
+  outline, playmat image, library zone/image, command zone, graveyard, exile, the seat name label,
+  and the Stack — was switched from `nextIndex` to `nextFurnitureIndex`. `nextIndex` itself is
+  untouched and is now used **only** for cards: `cardArrival.ts`'s ordinary arrivals and
+  `seatJoined.ts`'s commander/ghost mints already only called it for `mtg-card` shapes, so those
+  two seams needed no code change — only the furniture side did.
+- **New watch point 21** recorded in `interactions.md`: any future furniture-minting call site
+  added outside `ensurePlayerArea`/`ensureStackDrawn` must call `nextFurnitureIndex`, not
+  `nextIndex`, or the "furniture is always beneath everything" invariant silently breaks for that
+  shape — nothing else enforces it, since there's no runtime assertion tying a shape's `type` to
+  which band its `index` came from.
+- **Test**: `apps/tabletop/test/furnitureZOrder.test.ts` — seats an early player, plays a card for
+  them, then seats a second (late) player, and asserts the late seat's playmat index is below the
+  card's, plus a blanket check that no `mtg-zone` shape's index ever exceeds the card's. Confirmed
+  red without the fix (temporarily reverting the furniture call sites back to `nextIndex`) and
+  green with it.
+
+Full detail: new watch point 21 in `interactions.md`; `files.md`'s `tableFurniture.ts` entry
+updated to describe the two-band index scheme.
+
 ## Ticket 19: notes ride along like counters — subclassing a stock ShapeUtil to add a missing hook (2026-08-10)
 
 `.scratch/tabletop-physics/issues/19-notes.md`. Generalized `MtgCardShapeUtil`'s counter-hosting
