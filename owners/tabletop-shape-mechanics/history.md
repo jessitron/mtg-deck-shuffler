@@ -1085,6 +1085,37 @@ superseded (with the new mechanism recorded as the KB's forward-looking default 
 `files.md` and `README.md`'s quick-reference table updated; both `SelectionClearing*` files and
 their `files.md` entries removed as dead weight.
 
+## Tabletop-architecture ticket 02: `tableFurniture.ts`'s builders lose their `as any` (2026-08-11)
+
+`.scratch/tabletop-architecture-review/issues/02-furniture-builder-domain-interface.md`.
+**Type-only change, confirmed out of scope for this owner's mechanics** — no runtime field
+values, `isLocked`/`opacity` defaults, index bands, or mint-time call ordering changed, and
+no ShapeUtil hook, gesture code, or selection logic was touched. Recorded here only because
+`zoneShape()` and `mtgCardShape()` are this owner's own quick-reference entries (`README.md`'s
+table, `files.md`) and because the KB had two lingering `as any` mentions (watch point 16,
+`architecture.md`'s "Table-layout ticket 18" section) that described the *call sites'* old
+inline literals, not these builders' own return type — worth a precise update so a future
+reader doesn't conflate the two.
+
+`zoneShape()`, `mtgCardShape()`, and the private `imageShape()` in
+`apps/tabletop/src/server/tableFurniture.ts` now declare real return types —
+`MtgZoneShape`, `MtgCardShape`, and tldraw's own `TLImageShape` respectively — instead of
+casting their object literal to `any`. Each function's `parentId: pageId` picked up an
+`as TLPageId` cast (the string-vs-branded-type gap that the old blanket `as any` had been
+papering over for the whole object, not just that one field). Both existing mint call sites
+— `cardArrival.ts` (ordinary arrivals) and `seatJoined.ts` (commanders and their ghosts,
+table-layout ticket 18) — already routed through `mtgCardShape()` before this ticket and are
+untouched by it; they were never holding their own `as any` literal, only `tableFurniture.ts`'s
+builder functions were. New `apps/tabletop/test/tableFurniture.test.ts` adds direct unit
+tests on the three constructors (mint-time record shape: `parentId`/`isLocked`/`opacity`
+defaults and the ghost overrides, `zoneShape`'s sleeve-opacity branch) — previously these
+builders were exercised only indirectly through `cardArrival.ts`/`seatJoined.ts`'s own
+integration tests.
+
+**No KB section needed rewriting** — the strict typing doesn't change any fact this owner
+tracks (watch point 15's "one place every required `mtg-card` prop is listed" still holds,
+now with a compiler check on the return shape as well as the constructor's own field list).
+
 ## What Was Tried and Abandoned
 
 **Ticket 20, card-tucking (2026-08-10, abandoned same day as `ac27a99`).** Two implementations

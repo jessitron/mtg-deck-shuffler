@@ -235,7 +235,11 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   ticket 18 (2026-08-09), also home to **`mtgCardShape(args: MtgCardShapeArgs)`** (next to
   `zoneShape()`) — the single place every required `mtg-card` prop is listed when building a
   shape record; called by both `cardArrival.ts` and `seatJoined.ts` instead of each writing its
-  own `store.put` literal. See watch point 15.
+  own `store.put` literal. See watch point 15. **Since tabletop-architecture ticket 02
+  (2026-08-11), `zoneShape()`/`mtgCardShape()` (and the private `imageShape()`) return real
+  types — `MtgZoneShape`/`MtgCardShape`/tldraw's own `TLImageShape` — instead of casting their
+  literal to `any`; type-only, no mechanics changed.** See `history.md`'s ticket 02 entry;
+  `test/tableFurniture.test.ts` (new) unit-tests the three constructors directly.
 - `apps/tabletop/src/server/cardLayout.ts` — placement geometry, mostly *not* this owner's
   territory, except for one invariant zone detection leans on (since table-layout ticket 13,
   extended by table-layout ticket 14, "the square", `5eeac70`): every pair of zone bounding
@@ -258,6 +262,12 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 
 ## Tests
 
+- `apps/tabletop/test/tableFurniture.test.ts` — **new, tabletop-architecture ticket 02
+  (2026-08-11)**: direct unit tests on `zoneShape()`/`mtgCardShape()` — the mint-time record
+  shape (`parentId`/`isLocked`/`opacity` defaults, the ghost overrides, the sleeved-library
+  opacity branch) — now pinned at the constructor level rather than only exercised indirectly
+  through `cardArrival.ts`/`seatJoined.ts`'s own integration tests. Companion to the same
+  ticket's type-only change (`as any` → real return types); see `history.md`.
 - `apps/tabletop/test/furnitureZOrder.test.ts` — **new, 2026-08-10 (watch point 21)**: posts a
   `seat.joined` + `card.played` for an early seat, then a second `seat.joined` for a late seat, and
   asserts the late seat's playmat (and every other `mtg-zone` shape) sorts below the card's
