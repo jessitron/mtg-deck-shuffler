@@ -13,6 +13,18 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- `seat-joined-400` `POST /api/tables/:tableName/events` (seat.joined, `handleSeatJoined` in
+  `apps/tabletop/src/server/seatJoined.ts`) now returns 400 instead of 201
+  - Surfaced 2026-08-11 running ticket 05 (tabletop-architecture-review, stale-selection-fix)'s
+    full `./verify.sh` — both tests in `verify-life-counter.spec.ts` fail on this POST.
+    Confirmed pre-existing and unrelated to ticket 05's actual change (`git stash` on the
+    ticket-05 diff, rerun `./verify.sh verify-life-counter` against unmodified code: same 400).
+  - Not investigated further — out of scope for ticket 05. Worth checking what payload/schema
+    validation the endpoint now rejects that `seatJoined`'s own test payload (in the spec file)
+    sends; every other endpoint (`/cards`) still returns 201 fine in the same suite run.
+  - Blocks `verify-life-counter.spec.ts` from passing at all, including the new
+    button-press-doesn't-disturb-selection test ticket 05 added there.
+
 - `verify-cant-see-browser-otel` Playwright specs can't currently observe anything the browser exports through OTel's `BatchSpanProcessor`
   - Surfaced 2026-08-10 verifying tabletop-physics ticket 21's `usePhysicsAnnouncements.ts` live in
     Honeycomb: running the full `./verify.sh` suite (dozens of taps/drags/attaches across specs)
