@@ -13,6 +13,21 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- `shuffler-spine-gateway-stale` Rewrite `HttpSpineGateway` around the new Spine's `/join` and traceparent-header contract
+  - Surfaced 2026-08-11 doing ticket 04 of `.scratch/spine-roda-rewrite/` (contract-validated
+    event ingestion). `apps/shuffler/src/port-spine/HttpSpineGateway.ts`'s `ensureTable`/
+    `takeSeat` still call `GET /tables/lookup`, `POST /tables`, and `POST /tables/:id/seats` —
+    all three deleted by ticket 03 in favor of a single `POST /join {name, playerName}`. So this
+    gateway is already fully incompatible with the running Spine, independent of ticket 04.
+  - Ticket 04 compounds it: `sendEvent`'s envelope (`apps/shuffler/src/port-tabletop/types.ts`
+    `EventEnvelope`) always includes a `traceparent` field, but `contracts/envelope.v3.json` now
+    sets `additionalProperties: false` with no `traceparent` property — the Spine expects
+    trace context only in the HTTP header now, never the body.
+  - Whoever picks up the "wire the Shuffler to the new Spine" integration work (explicitly out
+    of scope for the spine-roda-rewrite spec, since nothing in production calls this gateway
+    successfully today — `services/spine/SEAMAP.md`) needs both fixes: rebuild around `/join`,
+    and stop sending `traceparent` in the envelope body.
+
 - `verify-life-counter-image-triples` `verify-life-counter.spec.ts`'s second test (pressing
   +/- doesn't disturb an existing selection) now fails a different way: pasting one image via
   drag-and-drop yields **3** `.tl-shape[data-shape-type="image"]` elements, not 1.
