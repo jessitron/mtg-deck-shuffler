@@ -1121,6 +1121,64 @@
       </section>
 
       <!-- ================================================================ -->
+      <section class="gallery-section" id="life-counter">
+        <h2>Tabletop life counter <span class="badge badge-candidate">candidate</span></h2>
+        <p class="section-note">
+          <strong>Mock rendering of a component that is built and awaiting sign-off.</strong>
+          Staged for the table-layout map's <code>20-life-counter-on-the-name-row</code>
+          ticket (built 2026-08-10): <code>mtg-life-counter</code>, locked furniture on each
+          seat's name row showing life total, with +/- buttons and a directly-typeable field.
+          The fill/border/text recipe reuses the counter disc's tokens
+          (<code>--deep-space</code> / <code>--dark-pink</code> / <code>--light-pink</code> /
+          <code>--font-chrome</code>), but this is a container, not a disc — round corners are
+          a sanctioned category for cards, the playmat, and count discs, and this shape is
+          none of those. The real shape currently ships option B below as a placeholder; say
+          which one (or none) is right.
+        </p>
+        <div class="choice">
+          <div class="options">
+            <div class="option">
+              <div class="option-label">A — Square</div>
+              <div class="stage stage-dark">
+                <div class="life-counter-mock life-counter-mock--square">
+                  <div class="life-counter-mock__btn">−</div>
+                  <div class="life-counter-mock__value">40</div>
+                  <div class="life-counter-mock__btn">+</div>
+                </div>
+              </div>
+              <div class="option-where">life-counter-mock--square: border-radius: 0</div>
+              <div class="option-note">Matches the fleet's "square corners except on physical round elements" rule literally.</div>
+            </div>
+            <div class="option">
+              <div class="option-label">B — Soft rectangle (shipped placeholder)</div>
+              <div class="stage stage-dark">
+                <div class="life-counter-mock life-counter-mock--soft">
+                  <div class="life-counter-mock__btn">−</div>
+                  <div class="life-counter-mock__value">40</div>
+                  <div class="life-counter-mock__btn">+</div>
+                </div>
+              </div>
+              <div class="option-where">life-counter-mock--soft: border-radius: 7px (h * 0.15)</div>
+              <div class="option-note">What's live today. Not derived from any decided token — invented for this ticket, pending this review.</div>
+            </div>
+            <div class="option">
+              <div class="option-label">C — Pill</div>
+              <div class="stage stage-dark">
+                <div class="life-counter-mock life-counter-mock--pill">
+                  <div class="life-counter-mock__btn">−</div>
+                  <div class="life-counter-mock__value">40</div>
+                  <div class="life-counter-mock__btn">+</div>
+                </div>
+              </div>
+              <div class="option-where">life-counter-mock--pill: border-radius: 24px (h / 2)</div>
+              <div class="option-note">Echoes the circular +/- buttons' own roundness, capsule-style.</div>
+            </div>
+          </div>
+        </div>
+        <div class="option-where">design-candidates.css → .life-counter-mock; real shape: apps/tabletop/src/client/shapes/MtgLifeCounterShapeUtil.tsx</div>
+      </section>
+
+      <!-- ================================================================ -->
       <section class="gallery-section" id="sleeved-card">
         <h2>Tabletop sleeved card <span class="badge badge-candidate">candidate</span></h2>
         <p class="section-note">

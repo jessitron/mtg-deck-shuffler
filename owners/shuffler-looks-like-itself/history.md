@@ -2237,3 +2237,45 @@ dialogs by container id and overlay class (`.modal-overlay`/`.card-modal-overlay
 fifth consumer that reuses that shape — plus `tabindex="0"` and the new
 `role="dialog" aria-modal="true"` pair — gets the trap for free. One that reinvents the
 markup does not, silently.
+
+## 2026-08-10 — the life counter staged on `/design`, and a focus-visible gap closed
+
+Table-layout ticket 20 built `mtg-life-counter` (see
+`owners/tabletop-shape-mechanics/architecture.md`'s life-counter section for the mechanics).
+This owner's `-review` pass on the plan caught two things before they shipped: an appearance
+decision riding along unstaged, and a real accessibility gap.
+
+**The ride-along: corner radius.** The shape's container isn't a card, the playmat, or a
+count disc, so "round corners are for physical objects, everything else is square" doesn't
+settle it by rule the way it did for the counter disc's 50%. The implementer had picked
+`h * 0.15` (a soft rectangle) to ship *something*, which is exactly the pattern choice 7's
+history entry warns about — an appearance choice arriving fully-formed inside an
+implementation ticket. Staged instead, the same way the counter disc was: `/design` §
+`#life-counter`, three options (A square, B the shipped soft-rectangle placeholder, C pill
+echoing the circular +/- buttons), `.life-counter-mock` + three modifier classes in
+`design-candidates.css`, badge `candidate`. The shape's own `borderRadius: h * 0.15` line
+carries a comment pointing at the gallery section, matching the counter disc's "one inline
+style object to change" posture. **Not yet decided** — this section records the staging,
+not an answer.
+
+**The real gap: focus-visible on persistent controls with nowhere to inherit it from.** The
+counter disc's editing textarea earned the fleet's one sanctioned `outline: none` because its
+"focus" is tldraw's own ephemeral editing state — genuinely exempt from the global rule. The
+life counter's +/- buttons and typeable input are different in kind: they're always live,
+never entered/exited the way editing state is, so nothing about them is exempt from "every
+interactive element gets a visible focus state." The Tabletop still has no ship-local
+stylesheet and doesn't load `styles.css`, so the global `:focus-visible` rule that would
+cover an equivalent DOM button on the Shuffler simply never reaches this canvas surface — not
+a design gap, a delivery gap. Fixed by reproducing choice 5's exact decided values (`3px
+solid var(--light-pink)`, `outline-offset: 3px`) verbatim in a scoped inline `<style>` tag
+inside the shape's own `HTMLContainer`. **This is not a new focus treatment** — no new value
+was chosen — and it's not a second `outline: none` exemption; it's the same rule, duplicated
+because the mechanism that would normally deliver it (a global stylesheet everyone loads)
+can't reach a canvas shape. Same shape of duplication as the fleet's font and radius tokens
+existing in a shared package for exactly the reason a stylesheet convention can't reach a
+`.tsx` shape.
+
+**Recorded in README.md's tldraw-limits section as a second focus-visible instance**,
+alongside the counter disc's `outline: none` exemption, so a future reader sees both shapes
+of the same underlying fact ("the global rule is DOM-only") rather than only the exemption
+and concluding canvas controls can never have a visible focus ring at all.

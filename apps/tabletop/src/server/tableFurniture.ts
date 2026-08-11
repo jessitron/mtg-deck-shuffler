@@ -10,6 +10,9 @@ import {
   exileBounds,
   graveyardBounds,
   nameLabelPosition,
+  lifeCounterPosition,
+  LIFE_COUNTER_W,
+  LIFE_COUNTER_H,
   stackBounds,
 } from "./cardLayout.js";
 
@@ -267,6 +270,7 @@ export async function ensurePlayerArea(
   const exile = exileBounds(seatIndex);
   const graveyard = graveyardBounds(seatIndex);
   const namePos = nameLabelPosition(seatIndex);
+  const lifeCounterPos = lifeCounterPosition(seatIndex);
 
   const matId = createShapeId(`playmat-${entry.tableName}-${seatId}`);
   const matImageId = createShapeId(`playmat-image-${entry.tableName}-${seatId}`);
@@ -276,6 +280,7 @@ export async function ensurePlayerArea(
   const graveyardId = createShapeId(`region-graveyard-${entry.tableName}-${seatId}`);
   const exileId = createShapeId(`region-exile-${entry.tableName}-${seatId}`);
   const labelId = createShapeId(`name-label-${entry.tableName}-${seatId}`);
+  const lifeCounterId = createShapeId(`life-counter-${entry.tableName}-${seatId}`);
 
   await entry.room.updateStore((store) => {
     // The mat outline is always drawn — the fallback if the image is missing/broken.
@@ -400,6 +405,24 @@ export async function ensurePlayerArea(
         w: 200,
         scale: 2,
       },
+      meta: {},
+    } as any);
+
+    // Life counter (ticket 20): locked furniture, starts at 40, far right of
+    // the name row. +/- and typing work through DOM events inside its own
+    // component() — locking only gates tldraw's gesture state machine.
+    store.put({
+      id: lifeCounterId,
+      typeName: "shape",
+      type: "mtg-life-counter",
+      x: lifeCounterPos.x,
+      y: lifeCounterPos.y,
+      rotation: 0,
+      index: nextFurnitureIndex(entry.tableName),
+      parentId: pageId,
+      isLocked: true,
+      opacity: 1,
+      props: { w: LIFE_COUNTER_W, h: LIFE_COUNTER_H, value: 40 },
       meta: {},
     } as any);
   });

@@ -22,6 +22,7 @@ import { usePhysicsAnnouncements } from "./usePhysicsAnnouncements";
 import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
 import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
 import { MtgCounterTool } from "./shapes/MtgCounterTool";
+import { MtgLifeCounterShapeUtil } from "./shapes/MtgLifeCounterShapeUtil";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
 import { SelectionClearingNoteShapeUtil } from "./shapes/SelectionClearingNoteShapeUtil";
 import { SelectionClearingImageShapeUtil } from "./shapes/SelectionClearingImageShapeUtil";
@@ -46,6 +47,7 @@ const shapeUtils = [
   MtgCardShapeUtil,
   MtgZoneShapeUtil,
   MtgCounterShapeUtil,
+  MtgLifeCounterShapeUtil,
   SelectionClearingNoteShapeUtil,
   SelectionClearingImageShapeUtil,
 ];

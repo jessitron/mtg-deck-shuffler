@@ -29,6 +29,14 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   `LIBRARY_PILE_INSET` (12) and, since zone-label-band (2026-08-09, `0d61890`),
   `ZONE_LABEL_BAND` (40) — the headroom every card-holding zone reserves at the top so its label
   stays readable; imported by `cardLayout.ts`, `tableFurniture.ts`, and `MtgZoneShapeUtil.tsx`.
+- `apps/tabletop/src/shared/mtgLifeCounterShape.ts` — **new, table-layout ticket 20
+  (2026-08-10)**: the same pattern for the life counter — `MtgLifeCounterShapeProps` (`w`, `h`,
+  `value`, no ownership enforcement — any player can change any counter), the
+  `TLGlobalShapePropsMap` augmentation registering `mtg-life-counter`, and
+  `mtgLifeCounterShapeProps` validators, imported by client `MtgLifeCounterShapeUtil.tsx` and
+  server `rooms.ts`. Not to be confused with `mtgCounterShape.ts` below, a different shape
+  (`mtg-counter`, the drag-onto-a-card disc) — the naming-collision note in that file's doc
+  comment applies here too.
 - `apps/tabletop/src/shared/mtgCounterShape.ts` — the same pattern for counters (ticket 18):
   `MtgCounterShapeProps` (`w`, `h`, `text` — free string, blank by default; no domain identity
   beyond its text), the `TLGlobalShapePropsMap` augmentation registering `mtg-counter`, and
@@ -38,6 +46,16 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
 
 ## Client (the ShapeUtils themselves)
 
+- `apps/tabletop/src/client/shapes/MtgLifeCounterShapeUtil.tsx` — **new, table-layout ticket 20
+  (2026-08-10)**: extends `BaseBoxShapeUtil<MtgLifeCounterShape>`, no interaction hooks (same
+  shape as `MtgZoneShapeUtil` — locked, never clicked/dragged as a shape). `component()` renders
+  +/- buttons and an always-live typeable number field via the `HyperlinkButton` pattern
+  (`pointer-events: all` inline, `editor.markEventAsHandled(e)` on pointer handlers) — deliberately
+  does NOT reuse tldraw's `.tl-image-container` class the way `MtgCounterShapeUtil` does (watch
+  point 23). Its `setValue` wraps every prop write in `this.editor.run(fn, { ignoreShapeLock:
+  true })` — the new lock-gate finding, watch point 22 — since a locked shape's props are
+  otherwise silently unwritable through the ordinary `editor.updateShape` call, even from a DOM
+  handler inside `component()`. See `architecture.md`'s life-counter section.
 - `apps/tabletop/src/client/shapes/SelectionClearingNoteShapeUtil.ts` — **new, ticket 19
   (2026-08-10)**: a thin subclass of tldraw's own `NoteShapeUtil` (imported from `"tldraw"`)
   overriding only `onTranslateEnd` to call `this.editor.setSelectedShapes([])` — supplies the

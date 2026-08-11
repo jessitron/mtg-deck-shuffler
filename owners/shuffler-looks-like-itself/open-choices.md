@@ -614,24 +614,37 @@ self-rendering custom shape.
   assumption, the spec never said how a player obtains a counter), and `toSvg` skipped
   (consistent with `mtg-card`/`mtg-zone`; buoyed as `custom-shapes-lack-toSvg` — a
   three-shape gap for one pass, Orbitron hand-carried into the SVG per this KB's rule).
-- **Coming to this owner: the life-counter shape's appearance**
+- **The life-counter shape is BUILT (table-layout ticket 20, 2026-08-10) and its appearance is
+  STAGED, not decided — one open question, corner radius, awaits Jess's sign-off.**
   (`.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md`, resolved
-  2026-08-08 — placement + content only). **Naming note: ticket 12 called this shape
-  `mtg-counter`, but that type string now belongs to ticket 18's counter disc (above) per the
-  tabletop-physics spec — the life counter needs its own name, buoyed as
-  `life-counter-needs-own-name`.** Life totals and commander damage become a locked
-  custom shape rendering a number with +/- buttons (also directly typeable), in the name row
-  above the command zone/library. **Decided**: the row's layout (Jess verbatim — player name
-  large, left-justified; commander-damage counters then a bigger life counter,
-  right-justified), life starts at 40, commander damage starts at 0 and is always visible,
-  one counter **per commander**, each identified by opponent name + **sleeve color** (ticket
-  09's solid-color sleeves, traveling via ticket 11 — no separate player-color concept;
-  playmats rejected as the identity carrier). **Undecided, reserved for this owner's
-  `-context`/`-review` at implementation time**: font, exact sizes, colors beyond the sleeve
-  swatch. Same posture as the tap tempo and the `mtg-card` indicator — the appearance must
-  not ride along on the implementation ticket. All the canvas rules apply: self-rendering
-  shape for any fleet typeface, geometry computed in TypeScript at render time, `.stage-white`
-  for any `/design` mock.
+  2026-08-08, decided placement + content; ticket 20 built it.) **The naming question is
+  closed**: ticket 20 named the shape `mtg-life-counter` from the start — `mtg-counter` was
+  already ticket 18's counter disc — so the `life-counter-needs-own-name` buoy never had to
+  fire and is gone from `TODO.md`. The shape is locked furniture in the name row rendering a
+  number with +/- buttons and a directly-typeable field, per the decided layout (player name
+  large and left-justified; life counter bigger, right-justified — commander damage joins in
+  ticket 21).
+
+  **What ticket 20 reused rather than deciding fresh:** font (`--font-chrome`), fill/border
+  colors (`--deep-space` fill, `--dark-pink` border, `--light-pink` text — the counter disc's
+  own recipe, reused for a container this time rather than a disc) and the focus-visible
+  treatment (choice 5's exact `3px solid var(--light-pink)` / `3px` offset, reproduced locally
+  via a scoped `<style>` tag since the Tabletop has no stylesheet to inherit it from — see
+  [README.md](README.md) → tldraw limits, focus-visible bullet). None of that needed this
+  owner's sign-off — it's applying already-decided tokens, not inventing a look.
+
+  **What's still open: corner radius.** A rounded-rectangle container is none of the fleet's
+  three sanctioned round categories (cards, the playmat, count discs), so square-except-round
+  doesn't settle it by rule. Staged on `/design` § `#life-counter`
+  (`.life-counter-mock` + three modifier classes in `design-candidates.css`, badge
+  `candidate`, same "built and awaiting sign-off" framing as the counter-disc section):
+  **A** square (`border-radius: 0`), **B** soft rectangle (`h * 0.15` — what the real shape
+  currently ships as a placeholder), **C** pill (`h / 2`, echoing the circular +/- buttons).
+  The shipped placeholder (`MtgLifeCounterShapeUtil.tsx`'s inline `borderRadius: h * 0.15`)
+  carries a comment pointing at the gallery section and naming itself staged-not-decided,
+  matching the counter disc's own "one inline style object to change" posture. If Jess
+  signs off on an option: retag the specimen `badge-standard`, update the real shape's
+  `borderRadius` line, and fold the winning value into this section per the usual checklist.
 - **~~Coming to this owner: the sleeve's rendered appearance.~~ DECIDED and BUILT
   2026-08-08 (ticket 17, `0a768e6` + `bfdc877`), decided with this owner's `-context`
   mid-implementation — except the picker palette, see below.**

@@ -337,13 +337,14 @@
    command-zone gating** — a multi-card drag still arms at most one zone; watch point 19 only adds
    a further condition (all selected cards must be the owner's commander) that a command zone
    specifically checks before honoring that one zone.
-10. **Locked-but-interactive shapes: the life-counter pattern (decided 2026-08-08, not yet
-    built — named `mtg-life-counter`, since `mtg-counter` was claimed by ticket 18 for the
-    drag-onto-a-card counter).** A life
-    counter will be a new locked custom shape whose `component()` renders +/-
-    buttons and a typeable number field (see `architecture.md`'s life-counter section). Whoever
-    builds it — or any future locked shape with live controls — has three
-    specific hazards on record: (a) each control needs `pointer-events: all` plus
+10. **Locked-but-interactive shapes: the life-counter pattern (built 2026-08-10, table-layout
+    ticket 20 — named `mtg-life-counter`, since `mtg-counter` was claimed by ticket 18 for the
+    drag-onto-a-card counter).** The life
+    counter is a locked custom shape whose `component()` renders +/-
+    buttons and a typeable number field (see `architecture.md`'s life-counter section,
+    `apps/tabletop/src/client/shapes/MtgLifeCounterShapeUtil.tsx`). Four hazards are now on
+    record, the fourth found only during the build and not anticipated by the earlier grilling
+    session: (a) each control needs `pointer-events: all` plus
     `editor.markEventAsHandled(e)` in its pointer handlers (tldraw's own `HyperlinkButton`
     pattern; preferred over the older `stopEventPropagation` util) or the canvas swallows the
     press; (b) the typeable field must shield keystrokes from tldraw's tool hotkeys, or typing a
@@ -353,8 +354,17 @@
     last-writer-wins, so simultaneous presses on
     the same counter can lose one increment — accepted for counters, and the reason
     story-quality life-change records need an explicit event per press (parked at
-    `.scratch/tabletop-replaces-mural/parked/life-change-events.md`). Watch point 1 does NOT
-    apply to it (locked shapes never reach `PointingShape`), but watch point 6's step 4 does.
+    `.scratch/tabletop-replaces-mural/parked/life-change-events.md`); (d) **NEW — a locked
+    shape's props are silently unwritable via the ordinary `editor.updateShape`/`updateShapes`
+    call, even from a DOM handler inside that shape's own `component()`, unless the call is
+    wrapped in `editor.run(fn, { ignoreShapeLock: true })` (or the partial itself unlocks the
+    shape, which defeats the point).** This is a *separate* gate from (a)/watch point 7's
+    gesture-state-machine gating — it lives in the public `Editor.updateShapes` method, not
+    `SelectTool`. See watch point 22 and `architecture.md`'s life-counter section fact 4 for the
+    full writeup; the symptom is a silent no-op (no exception, no console warning), which makes
+    it easy to miss in testing if the assertion only checks "did it throw." Watch point 1 does
+    NOT apply to the life counter (locked shapes never reach `PointingShape`), but watch point
+    6's step 4 does — see watch point 23 for a caution about *how* it's satisfied.
 
 11. **Defining ANY drag hook on a ShapeUtil makes every instance of that shape a drag target
     for every unlocked dragged shape — narrow both `can*` gates.** (Ticket 18, 2026-08-08.)
@@ -581,6 +591,48 @@
     Regression test: `apps/tabletop/test/furnitureZOrder.test.ts` — seats an early player, plays a
     card for them, seats a late player, and asserts every `mtg-zone` shape's index sorts below the
     card's.
+
+22. **`editor.updateShape`/`updateShapes` silently drops a partial targeting a locked shape —
+    a second, separate lock-gate from the gesture-state-machine one, and it bites even DOM-driven
+    writes from inside `component()`.** (Table-layout ticket 20, 2026-08-10.) Watch point 7
+    established that locking gates `SelectTool`'s state machine (`Idle` before `PointingShape`,
+    `getDraggingOverShape`'s `!isLocked` filter) but NOT DOM event dispatch inside a shape's own
+    rendered HTML — that fact is what makes "locked furniture with live buttons" possible at all,
+    and it's still correct. What it does NOT mean, and what this watch point adds: a locked
+    shape's `props` are *also* unreachable through the ordinary public `Editor.updateShape`/
+    `updateShapes` call, regardless of which code path triggers the write. That call silently
+    filters out any partial whose target shape is locked, unless either the partial itself
+    carries `isLocked: false` (unlocking it — wrong for furniture that must stay locked) or the
+    call is wrapped in `editor.run(fn, { ignoreShapeLock: true })`. Found building the life
+    counter (see `architecture.md`'s life-counter section, fact 4): `setValue`'s first draft
+    called `this.editor.updateShape(...)` directly from a button's `onClick`, following the
+    `HyperlinkButton`/`mtg-counter` pattern faithfully — it compiled and ran with no error, but
+    the value never changed, because nothing in that pattern's documented facts (watch point 7,
+    watch point 10's (a)) said anything about this second gate. **Any future locked shape whose
+    own controls write to its own props needs `editor.run(fn, { ignoreShapeLock: true })`
+    wrapping every such write** — reading/rendering (like `mtg-zone`'s armed-glow `computed()`,
+    watch point 9) is unaffected, since it never calls `updateShapes` at all. The failure mode
+    (silent no-op, no exception) makes this easy to miss without a Playwright assertion that
+    actually reads the rendered value back, not just that the button click didn't throw.
+
+23. **Don't reuse tldraw's own `.tl-image-container` class purely for its `pointer-events: all`
+    side effect — a second shape carrying it can break a test that assumes the class means
+    "this is a pasted image."** (Table-layout ticket 20, 2026-08-10.) `MtgCounterShapeUtil`
+    wraps its content in `<div className="tl-image-container">` to inherit `pointer-events: all`
+    from `tldraw.css` "for free," satisfying watch point 6's step 4. Doing the same for the life
+    counter broke `apps/tabletop/test/verification/verify-image-selection.spec.ts`, whose locator
+    (`` '[id^="shape\\:"]:not([id^="shape\\:card-"]) .tl-image-container' ``) assumes every
+    non-card shape carrying that class IS a pasted image, for its stale-selection regression test
+    — it found 2 matches instead of 1 once a second shape type carried the class, even though the
+    life counter itself worked correctly. Fixed by setting `pointerEvents: "all"` inline on a
+    plain `<div>` instead — the class was never load-bearing for that behavior (inline style
+    wins), so dropping it costs nothing. **Any future custom shape satisfying watch point 6's
+    step 4 should set `pointerEvents: "all"` inline, not reuse `.tl-image-container`**, unless it
+    genuinely wants to be treated as a pasted image by tests or future code that keys off that
+    class name. `MtgCardShapeUtil`'s own use of `.tl-image-container`/`.tl-image` (watch point 6,
+    step 4's origin) is unaffected — that one predates and is unrelated to this caution; it's
+    called out here only as the second example of the same class being reused, this time safely
+    (cards are excluded from the regression test's locator by name).
 
 ## Not Related To
 

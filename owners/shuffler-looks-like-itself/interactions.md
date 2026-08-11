@@ -644,18 +644,22 @@ not by recomputing new numbers.**
   one sanctioned `outline: none` (see README → tldraw limits); its indicator is tldraw's
   default box (a plain rect via `getIndicatorPath` — not a custom treatment, per the
   indicator rule above).
-- **The LIFE-COUNTER shape (life totals / commander damage) has decided placement and
-  UNDECIDED appearance** (ticket 12, 2026-08-08 — ticket 12 called it `mtg-counter`, a name
-  now taken by the counter disc above; buoyed as `life-counter-needs-own-name`). The
-  name-row layout is Jess's verbatim
-  dictation — player name large and left-justified, commander-damage counters then a bigger
-  life counter right-justified — but font, exact sizes, and colors beyond the sleeve-color
-  swatch were **not** decided. Its implementation ticket must consult this owner's `-context`
-  before design forms and `-review` on the plan; an appearance arriving fully-formed in that
-  ticket is the ride-along to block. "Large" and "bigger" are relative scale facts, not a
-  typography decision. The sleeve-color swatch on each commander-damage counter is
-  **identity**, not decoration — it must be the opponent's actual sleeve color (ticket 11's
-  plumbing), never a palette value this owner picks.
+- **The LIFE-COUNTER shape (life totals / commander damage) is BUILT (table-layout ticket 20,
+  2026-08-10), named `mtg-life-counter` — the naming question this bullet used to flag is
+  closed, no buoy needed.** Placement is Jess's verbatim dictation — player name large and
+  left-justified, life counter bigger and right-justified (commander damage joins in ticket 21)
+  — and font/fill/border/focus were **reused, not decided fresh**: `--font-chrome`, the counter
+  disc's deep-space/dark-pink/light-pink recipe applied to a container instead of a disc, and
+  choice 5's exact focus-visible values reproduced locally (see README → tldraw limits). **One
+  thing is still genuinely undecided: corner radius.** A rounded-rectangle container isn't one
+  of the fleet's three sanctioned round categories (cards, playmat, count discs), so it didn't
+  fall out of an existing rule — staged on `/design` § `#life-counter` with three options (A
+  square, B soft rectangle — the shipped placeholder, C pill); see
+  [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side." Once Jess picks, follow
+  the usual resolve checklist against `MtgLifeCounterShapeUtil.tsx`'s inline `borderRadius: h *
+  0.15` line. The sleeve-color swatch on each future commander-damage counter (ticket 21) is
+  still **identity**, not decoration — it must be the opponent's actual sleeve color (ticket
+  11's plumbing), never a palette value this owner picks.
 - **The seat name label is a stock `text` shape with a decided ONE-line composition at
   double size** (decided 2026-08-09, `75bae71`, Jess's direct request — superseding ticket
   15's 2026-08-08 two-line ruling). `${playerName} 〜 ${deckName}` — wave-dash separator —

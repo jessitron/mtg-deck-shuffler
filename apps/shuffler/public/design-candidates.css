@@ -227,3 +227,61 @@
   font-weight: 700;
   line-height: 1;
 }
+
+/* =========================================================================
+ * Tabletop life counter — table-layout ticket 20 (locked furniture on the
+ * name row, +/- and typing). Reuses the counter-mock recipe (deep-space
+ * fill, dark-pink border, light-pink chrome text) but as a container, not a
+ * disc — the corner radius is an open question, not yet a sanctioned round
+ * category like cards/playmat/discs. Three options below; the real shape
+ * (MtgLifeCounterShapeUtil.tsx) currently ships option B (soft rectangle)
+ * as a placeholder pending sign-off.
+ * ========================================================================= */
+.life-counter-mock {
+  width: 130px;
+  height: 48px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: var(--deep-space);
+  border: var(--narrow-border) solid var(--dark-pink);
+  color: var(--light-pink);
+  font-family: var(--font-chrome);
+}
+
+.life-counter-mock--square {
+  border-radius: 0;
+}
+
+.life-counter-mock--soft {
+  border-radius: 7px; /* h * 0.15, matching the shipped placeholder */
+}
+
+.life-counter-mock--pill {
+  border-radius: 24px; /* h / 2 — a capsule, matching the circular +/- buttons' own roundness */
+}
+
+.life-counter-mock__btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: var(--dark-pink);
+  color: var(--light-pink);
+  font-family: var(--font-chrome);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.life-counter-mock__value {
+  font-weight: 700;
+  font-size: 22px;
+  min-width: 30px;
+  text-align: center;
+}

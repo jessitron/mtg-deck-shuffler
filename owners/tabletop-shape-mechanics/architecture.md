@@ -392,23 +392,32 @@ image/video shapes avoid it by wrapping content in `<div className="tl-image-con
 inventing inline pointer-events styles. Any future custom shape that renders interactive content
 in `<HTMLContainer>` needs the same treatment.
 
-## The life counter: decided, not built — named `mtg-life-counter` (table-layout ticket 12, 2026-08-08)
+## The life counter: built (table-layout ticket 20, 2026-08-10) — named `mtg-life-counter`
 
 **Naming collision, resolved 2026-08-08 by ticket 18 claiming the type string.** The
 tabletop-physics spec assigns `mtg-counter` to the drag-onto-a-card counter, which ticket 18
 built (see "Ticket 18" below) — an **unlocked, draggable, text-editable** shape, nearly the
 opposite of the shape this section describes. The life counter is named `mtg-life-counter`
-instead. Everything below is about the *life counter*, not the shape currently registered as
-`mtg-counter`.
+instead.
 
-`.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md` (resolved
-2026-08-08 — note this is a *different* "ticket 12" from the `tabletop-physics` ticket 12 that
-landed the `mtg-card` rewrite) decided that a life counter is a custom shape type:
-**locked furniture** whose `component()` renders a number with +/-
-buttons and a directly-typeable number field. Everyone can press anyone's buttons; state syncs
-as ordinary shape props. **No code exists yet.** Three mechanics facts were established from
-tldraw source during this owner's `-context` consult for that grilling session, and belong here
-so the implementer doesn't re-derive them:
+`.scratch/tabletop-table-layout/issues/12-life-totals-and-commander-damage.md` decided (2026-08-08)
+that a life counter is a custom shape type: **locked furniture** whose `component()` renders a
+number with +/- buttons and a directly-typeable number field. Everyone can press anyone's
+buttons; state syncs as ordinary shape props. Ticket 20 (2026-08-10) built it:
+`apps/tabletop/src/shared/mtgLifeCounterShape.ts` (`MtgLifeCounterShapeProps = {w, h, value}`,
+the standard `TLGlobalShapePropsMap` augmentation) and
+`apps/tabletop/src/client/shapes/MtgLifeCounterShapeUtil.tsx` (`BaseBoxShapeUtil`, no interaction
+hooks — same as `mtg-zone`). Minted at seat-join time in `tableFurniture.ts`'s
+`ensurePlayerArea`, on the name row, far right, via `lifeCounterPosition()`/`LIFE_COUNTER_W`/
+`LIFE_COUNTER_H` in `cardLayout.ts`, starting at `value: 40`. Registered via the standard
+four-step pattern (props file, `TablePage.tsx`'s `shapeUtils` array, `rooms.ts`'s
+`createTLSchema`).
+
+Three mechanics facts were established from tldraw source during the earlier `-context` consult
+and confirmed correct by the build. **A fourth, load-bearing fact was found only during
+implementation** and did not exist in this KB before — it belongs here as the "life counter"
+section's headline fact from now on, since it's *specific to a locked shape whose own controls
+write to its own props*, not just to "locked shapes can be interactive":
 
 1. **Locking gates tldraw's gesture state machine, NOT DOM events inside `component()`.**
    `SelectTool`'s `Idle` state filters `isLocked` before a shape ever reaches `PointingShape`,
@@ -420,29 +429,59 @@ so the implementer doesn't re-derive them:
    `HyperlinkButton`** (the bookmark shape): `pointer-events: all` on the control, plus
    `editor.markEventAsHandled(e)` in `onPointerDown`/`onPointerUp` (`Editor.ts:10876`;
    `useCanvasEvents` checks `wasEventAlreadyHandled` and skips its own canvas handling).
-   Preferred over the older `stopEventPropagation` util.
+   Preferred over the older `stopEventPropagation` util. `MtgLifeCounterShapeUtil.tsx` follows
+   this exactly for its +/- buttons and the input's `onPointerDown`.
 3. **tldraw sync is last-writer-wins state replication, not a CRDT.** Simultaneous prop writes
    to the same shape can lose one increment. Accepted for counters — rare, and self-evident on
    screen. This is also why story-quality life-change records need an explicit event per press
    rather than diffing synced state; that work is parked at
    `.scratch/tabletop-replaces-mural/parked/life-change-events.md` for Map 5 ("The table
    reports").
+4. **NEW — a locked shape's props are NOT freely writable via `editor.updateShape`/
+   `updateShapes`, even from inside that shape's own `component()`.** This is a *separate* gate
+   from fact 1 above. Fact 1 is about the gesture state machine — `SelectTool`/`PointingShape`/
+   `getDraggingOverShape` never being reached for a locked shape. This new fact is about the
+   **public `Editor.updateShapes` method itself** (not the internal `_updateShapes`), which
+   silently filters out any partial that targets a locked shape, unless either (a) the partial
+   itself sets `isLocked: false` (which unlocks it — not what a shape that must *stay* locked
+   wants), or (b) the call is wrapped in `editor.run(fn, { ignoreShapeLock: true })`. Found the
+   hard way: an early version of `setValue` called `this.editor.updateShape(...)` directly,
+   following the `HyperlinkButton`/`mtg-counter` DOM-event pattern faithfully — it compiled, ran,
+   and threw nothing, but the value silently never changed on screen. The fix, in
+   `MtgLifeCounterShapeUtil.tsx`'s `setValue`:
+   ```
+   this.editor.run(
+     () => this.editor.updateShape<MtgLifeCounterShape>({ id: shape.id, type: shape.type, props: { ...shape.props, value: next } }),
+     { ignoreShapeLock: true },
+   );
+   ```
+   **This is now THE load-bearing fact for "locked furniture with live controls that mutate
+   their own props"** — any future locked shape whose buttons/inputs write to its own shape
+   record (not just read/render, the way `mtg-zone`'s armed-glow computed does) needs this
+   wrapper, or the write is a silent no-op with no exception and no console warning.
 
-Implementation cautions, recorded now so they're not discovered mid-build:
+Watch point 1 (the `onClick` selection-deferral quirk) does **not** apply to the life counter:
+locked shapes never reach `PointingShape`, and its interactivity lives entirely in DOM handlers,
+not a ShapeUtil `onClick`. Watch point 6's step 4 (the pointer-events registration cost) applies
+in full, as anticipated — but the life counter does NOT reuse tldraw's `.tl-image-container`
+class the way `MtgCounterShapeUtil` does; see the new caution below.
 
-- **The full four-step registration cost applies (watch point 6), *including* step 4** — the
-  pointer-events item. The life counter will be the first *locked* shape to exercise it:
-  `mtg-zone` skipped step 4 because nothing clicks it, but the condition was always "is the
-  component's content interactive," never "is the shape unlocked."
-- **The typeable number field must shield keystrokes from tldraw's tool hotkeys.** Ticket 18
-  found the mechanism that handles this for free when editing goes through tldraw's own
-  editing state: `areShortcutsDisabled` is true whenever `getEditingShapeId() !== null`
-  (`useKeyboardShortcuts.ts`). The life counter's always-live input (no editing state — you just
-  click and type) will NOT get that for free and still needs its own shield; the old caution
-  stands for it specifically.
-- Watch point 1 (the `onClick` selection-deferral quirk) does **not** apply: locked shapes never
-  reach `PointingShape`, and the counter's interactivity lives in DOM handlers, not a ShapeUtil
-  `onClick`.
+### A second, smaller finding: don't reuse tldraw's own `.tl-image-container` class name just for its `pointer-events: all` side effect
+
+`MtgCounterShapeUtil` wraps its content in a `<div className="tl-image-container">` to get
+`pointer-events: all` "for free" from `tldraw.css`. `MtgLifeCounterShapeUtil` deliberately does
+**not** do this — it sets `pointerEvents: "all"` inline instead, on a plain unstyled `<div>`.
+Reusing the class would have broken
+`apps/tabletop/test/verification/verify-image-selection.spec.ts`'s locator
+(`` '[id^="shape\\:"]:not([id^="shape\\:card-"]) .tl-image-container' ``), which assumes every
+non-card shape carrying that class IS a pasted image, for its stale-selection regression test —
+confirmed by trying it first (2 matches instead of 1, even though the life counter itself worked
+correctly). The class was never load-bearing for the `pointer-events: all` behavior — inline
+style wins regardless — so setting it directly is sufficient and doesn't collide with tests (or
+any future code) that key off tldraw's own class names for shape-type inference. **Any future
+custom shape doing "wrap in `.tl-image-container` for the free pointer-events" should set the
+style inline instead**, unless it actually IS meant to look like a pasted image to that
+regression test.
 
 ## Ticket 18: `mtg-counter` — counters ride on cards (landed 2026-08-08, `4c64ef2`)
 

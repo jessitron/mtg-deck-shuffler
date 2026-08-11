@@ -90,17 +90,33 @@ each).
   plumbing required. This is the first fleet-token consumer inside a genuine self-rendering
   canvas shape — the mechanism was designed for exactly this case (`f79bc7d`) but had never
   been exercised until now. See [history.md](history.md) for the verification detail.
-- **Layer 1's focus rule cannot reach a canvas shape.** The global `:focus-visible` rule is
-  DOM-only, and tldraw owns selection indication for shapes. This is a genuine exemption from
-  the "every interactive element gets a visible focus state" rule, not an oversight — say so
-  out loud when designing canvas UI instead of inventing a shape-level ring that would fight
-  tldraw's. **First shipped instance of the exemption (2026-08-08, ticket 18):**
-  `MtgCounterShapeUtil.tsx`'s in-place editing `<textarea>` (an `<input>` until the
-  2026-08-08 shrink-to-fit follow-up made long labels wrap while editing) carries a literal
-  `outline: none`, with a comment naming this exemption. That is the one sanctioned `outline: none` in the
-  fleet — it's a canvas shape, the Shuffler's ban ("never write `outline: none`", choice 5)
-  governs DOM pages, and tldraw owns focus/selection indication here. A design-lint sweep
-  must not "fix" it, and it is not precedent for writing one in any stylesheet.
+- **Layer 1's focus rule cannot reach a canvas shape — literally true of the global CSS rule,
+  but not the end of the story.** The global `:focus-visible` rule is DOM-only, and tldraw owns
+  selection indication for shapes. Where the shape's own "focus" is tldraw's ephemeral editing
+  state (double-click to edit, gone when you click away), that's a genuine exemption from
+  "every interactive element gets a visible focus state," not an oversight — say so out loud
+  instead of inventing a shape-level ring that would fight tldraw's. **First shipped instance
+  of the exemption (2026-08-08, ticket 18):** `MtgCounterShapeUtil.tsx`'s in-place editing
+  `<textarea>` (an `<input>` until the 2026-08-08 shrink-to-fit follow-up made long labels wrap
+  while editing) carries a literal `outline: none`, with a comment naming this exemption. That
+  is the one sanctioned `outline: none` in the fleet — it's a canvas shape, the Shuffler's ban
+  ("never write `outline: none`", choice 5) governs DOM pages, and tldraw owns focus/selection
+  indication here. A design-lint sweep must not "fix" it, and it is not precedent for writing
+  one in any stylesheet.
+  - **Second instance, and it goes the other way (2026-08-10, table-layout ticket 20):**
+    `MtgLifeCounterShapeUtil.tsx`'s +/- buttons and typeable input are **persistent, always-live
+    DOM controls**, not tldraw's ephemeral editing state — nothing about them is exempt from
+    "every interactive element gets a visible focus state." Since the Tabletop still has no
+    ship-local stylesheet and never loads `styles.css`, the global rule can't reach them by
+    inheritance the way it does on the Shuffler. The shape reproduces choice 5's exact decided
+    values (`3px solid var(--light-pink)`, `outline-offset: 3px`) verbatim via a scoped inline
+    `<style>` tag inside its own `HTMLContainer`, targeting `.mtg-life-counter-btn`/
+    `.mtg-life-counter-input`. **This is not a new focus treatment and not a second
+    `outline: none` exemption** — it's the same decided rule, duplicated because the delivery
+    mechanism (a global stylesheet rule) can't reach this canvas surface, the same "duplicated
+    because the mechanism can't reach it" shape as the fonts and `--radius-soft` tokens. If the
+    Tabletop ever gets a ship-local stylesheet, this is a candidate to fold into it rather than
+    leave as a one-off inline `<style>` per shape.
 - **A locked shape can never be a drop target.** `Editor.getDraggingOverShape`
   (`Editor.ts`, currently around `:6571-6585`) filters `!s.isLocked` **before** it checks
   whether a util defines `onDragShapesOver`/`onDropShapesOver`, and there is no

@@ -3,7 +3,16 @@ import type { Server } from "node:http";
 import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
-import { playmatBounds, libraryBounds, commandZoneBounds, graveyardBounds, exileBounds, stackBounds, commandZoneCardPosition } from "../src/server/cardLayout";
+import {
+  playmatBounds,
+  libraryBounds,
+  commandZoneBounds,
+  graveyardBounds,
+  exileBounds,
+  stackBounds,
+  commandZoneCardPosition,
+  lifeCounterPosition,
+} from "../src/server/cardLayout";
 
 /**
  * JES-140: POST /api/tables/:tableName/events (seat.joined) — the player area
@@ -105,6 +114,18 @@ describe("seat joined", () => {
     expect(text).toContain("Robin");
     expect(text).toContain("Blame Game");
     expect(text.indexOf("Robin")).toBeLessThan(text.indexOf("Blame Game"));
+  });
+
+  it("draws a life counter on the name row, starting at 40, locked, far right (ticket 20)", async () => {
+    await post("seat-life-counter", seatJoined("seat-life-counter", { initiator: { seatId: "seat-life-counter-a", playerName: "Robin" } }));
+
+    const pos = lifeCounterPosition(0);
+    const counter = shapesOf("seat-life-counter").find((s) => s.type === "mtg-life-counter");
+    expect(counter).toBeDefined();
+    expect(counter.x).toBe(pos.x);
+    expect(counter.y).toBe(pos.y);
+    expect(counter.isLocked).toBe(true);
+    expect(counter.props.value).toBe(40);
   });
 
   it("rejects a seat.joined without a deckName — the contract requires it", async () => {

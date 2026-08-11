@@ -3,7 +3,7 @@
 Mountain: tabletop-replaces-mural
 Ship: fleet
 Type: task
-Status: ready-for-agent
+Status: done
 Blocked by: 13 — build command-zone redraw (there must be a Command Zone to arrive in)
 
 note: Jess updated this on 8/9/26 to jive with decisions made since this ticket was defined. See /Users/jessitron/code/jessitron/mtg-deck-shuffler/.scratch/tabletop-cards-come-and-go/map.md line 75
