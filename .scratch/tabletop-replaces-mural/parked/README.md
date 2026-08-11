@@ -8,7 +8,7 @@ Reference: apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md
 | 2   | Table layout                                  | `.scratch/tabletop-table-layout/`      | charted (was `tabletop-card-physics-starter`) |
 | 3   | Cards come and go                             | `.scratch/tabletop-cards-come-and-go/` | charted 2026-08-08                            |
 | 4   | Only Magic moves                              | —                                      | not charted                                   |
-| 5   | The table reports                             | —                                      | not charted                                   |
+| 5   | The table reports                             | `.scratch/tabletop-table-reports/`     | charted 2026-08-10                            |
 | 6   | The table remembers                           | —                                      | not charted                                   |
 
 Written work belonging to a map that doesn't exist yet.
@@ -23,7 +23,6 @@ looks inside `issues/`, so nothing here can be picked up and worked out of order
 | File                                | Belongs to                |
 | ----------------------------------- | ------------------------- |
 | `curate-card-menu.md`               | Map 4 — Only Magic moves  |
-| `card-moved-contract-and-sender.md` | Map 5 — The table reports |
 
 When one of those maps gets charted, move its file into that map's `issues/`, renumber it, and
 delete the row above. When this table is empty, delete the directory.
