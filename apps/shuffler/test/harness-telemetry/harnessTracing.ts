@@ -1,3 +1,27 @@
+/**
+ * A tracer provider for the verify harness itself — the fleet's first
+ * instrumentation of dev tooling rather than of a ship.
+ *
+ * Deliberately NOT `src/tracing.ts`, and deliberately not `NodeSDK`:
+ *
+ * - `src/tracing.ts` is import-for-side-effect with no flush handle, and it
+ *   loads full auto-instrumentation. In the Playwright runner that would trace
+ *   the test runner's own fs/http/child_process — noise on top of the very
+ *   signal we're trying to measure.
+ * - **Do not swap this for `NodeSDK`.** NodeSDK does
+ *   `this._resource = this._resource.merge(detectResources(...))` — *detected
+ *   wins* — so `.env`'s `OTEL_SERVICE_NAME=mtg-deck-shuffler` would silently
+ *   reclaim these spans into the app's dataset and quietly corrupt the
+ *   app-vs-harness measurement this instrumentation exists to make.
+ *   `BasicTracerProvider` does `resource ?? defaultResource()` — a plain `??`,
+ *   no merge — and `defaultResource()` never runs `envDetector`, so an explicit
+ *   resource here is structurally safe from the environment.
+ *   (If you ever want `telemetry.sdk.*` back, the order matters:
+ *   `defaultResource().merge(yours)`, never the reverse.)
+ *
+ * No sampler (default AlwaysOn), no context manager, no propagators — nothing
+ * here propagates. See the note on parenting in `emit()`.
+ */
 import { trace, ROOT_CONTEXT, Context, SpanStatusCode, Attributes } from "@opentelemetry/api";
 import {
   BasicTracerProvider,

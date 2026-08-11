@@ -1,5 +1,31 @@
 import { logs, SeverityNumber, LogAttributes } from "@opentelemetry/api-logs";
 
+/**
+ * Logging that participates in traces.
+ *
+ * **Reach for a span attribute first.** Attributes are free in Honeycomb and
+ * they correlate with everything else on the span, so anything you know during
+ * a request belongs on the request's span — see `setCommonSpanAttributes` and
+ * `markCurrentSpanAsError` in tracing_util.ts. A log is for the case where
+ * there is no span to hang it on: startup, shutdown, and callbacks or timers
+ * that fire long after the request that created them has ended.
+ *
+ * (Never `span.addEvent`. Events need an ambient span that outlives the caller,
+ * and the places you most want to record something — callbacks — don't have
+ * one. The Tabletop has a live example of this failing in production.)
+ *
+ * Each record goes two places: stdout, so `./run`'s prefixed local logs stay
+ * readable, and OTLP, so it lands in Honeycomb carrying the trace_id/span_id of
+ * whatever span was active. Logs are deliberately NOT filtered by the trace
+ * sampler: if the health check starts failing, we want every log explaining
+ * why, not the 1% the sampler kept.
+ *
+ * The exporter is wired up in telemetry-logs.ts, from tracing.ts. When nothing
+ * registered a provider — tests, scripts — the OTel global no-ops and only the
+ * stdout half happens.
+ *
+ * This file is duplicated in the Tabletop on purpose; see CLAUDE.md.
+ */
 const LOGGER_NAME = "mtg-deck-shuffler";
 
 function emit(severityNumber: SeverityNumber, severityText: string, message: string, attributes: LogAttributes, error?: unknown): void {

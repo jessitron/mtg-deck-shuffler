@@ -67,6 +67,16 @@ export function getOrCreateRoom(tableName: string): RoomEntry {
     tableName,
     room: new TLSocketRoom({
       schema: tableSchema,
+      // Logs, not span events. tldraw calls this from its throttled
+      // pruneSessions timer, long after the span that opened the room has ENDED
+      // — measured at ~13s after a 2.4ms "ws connect" span.
+      //
+      // The context is still present (AsyncLocalStorage carries it into the
+      // timer), so trace.getActiveSpan() returns that *ended* span rather than
+      // undefined. Which is why addEvent threw "Operation attempted on ended
+      // Span" in production rather than quietly no-op'ing, and the record was
+      // lost. A log has no such constraint: it's emitted immediately, and it
+      // still carries the trace id, so it lands on the trace anyway.
       onSessionRemoved(room, args) {
         log.info("room session removed", {
           "table.name": tableName,
