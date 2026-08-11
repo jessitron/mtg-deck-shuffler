@@ -118,8 +118,7 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
     `cardZoneEntry.ts`, below.
   **This was grilled, not assumed**: the ticket's original proposal was a CardPhysics/interop
   architectural seam (separate tldraw-plumbing from domain rules); grilling found no clean seam of
-  that kind exists — every hook mixes a tldraw quirk with a card rule inseparably (documented in
-  `.scratch/tabletop-architecture-review/issues/01-split-cardshapeutil-interop-from-physics.md`).
+  that kind exists — every hook mixes a tldraw quirk with a card rule inseparably.
   Jess's call was explicitly organizational: split by hook for navigability, keep pulling out
   anything genuinely tldraw-free (already done previously — `tapPartial`, `topmostZoneAt`,
   `findOpenSpotsNearZoneEdge` — none of that changed here), but don't invent a false purity

@@ -947,7 +947,7 @@ Full detail in `interactions.md` (Shape identity section rewritten, new watch po
 
 ## Ticket 05: one centralized listener replaces five distributed workaround sites (2026-08-11)
 
-`.scratch/tabletop-architecture-review/` ticket 05. Every prior fix for watch point 1's
+Every prior fix for watch point 1's
 stale-selection quirk lived on the shape being dragged: `MtgCardShapeUtil.onTranslateEnd`,
 `MtgCounterShapeUtil.onTranslateEnd`, `CardContextMenu.tsx`'s `commit()`, plus two ShapeUtil
 subclasses that existed *solely* to carry the hook for stock shapes that had none of their own —
@@ -1045,8 +1045,7 @@ confirming the `markEventAsHandled` immunity above empirically, not just by sour
 
 ## Ticket 01: `MtgCardShapeUtil.tsx` split by hook, organizational only (2026-08-11)
 
-`.scratch/tabletop-architecture-review/issues/01-split-cardshapeutil-interop-from-physics.md`,
-worktree `ticket-01-split-cardshapeutil`. `MtgCardShapeUtil.tsx` had grown to 388 lines across 21
+Worktree `ticket-01-split-cardshapeutil`. `MtgCardShapeUtil.tsx` had grown to 388 lines across 21
 commits, holding every `ShapeUtil` hook's full body inline. The review that spawned this ticket
 originally proposed a **CardPhysics/interop architectural split** — pull tldraw plumbing away from
 domain rules into two layers.

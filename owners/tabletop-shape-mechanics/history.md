@@ -1025,9 +1025,8 @@ built") and `interactions.md`'s rewritten watch point 10 plus new watch points 2
 
 ## Ticket 05: five distributed workaround sites replaced by one centralized listener (2026-08-11)
 
-`.scratch/tabletop-architecture-review/` ticket 05 (research doc:
-`notes/RESEARCH-stale-selection-bug.md`, referencing tldraw's own upstream issue
-tldraw/tldraw#5613). Every prior fix for watch point 1's stale-selection quirk had lived on the
+Research doc: `notes/RESEARCH-stale-selection-bug.md`, referencing tldraw's own upstream issue
+tldraw/tldraw#5613. Every prior fix for watch point 1's stale-selection quirk had lived on the
 shape being dragged — `MtgCardShapeUtil.onTranslateEnd`, `MtgCounterShapeUtil.onTranslateEnd`,
 `CardContextMenu.tsx`'s `commit()`, plus two ShapeUtil subclasses that existed solely to carry the
 hook for stock shapes with none of their own (`SelectionClearingNoteShapeUtil`, ticket 19;
@@ -1087,7 +1086,6 @@ their `files.md` entries removed as dead weight.
 
 ## Tabletop-architecture ticket 02: `tableFurniture.ts`'s builders lose their `as any` (2026-08-11)
 
-`.scratch/tabletop-architecture-review/issues/02-furniture-builder-domain-interface.md`.
 **Type-only change, confirmed out of scope for this owner's mechanics** — no runtime field
 values, `isLocked`/`opacity` defaults, index bands, or mint-time call ordering changed, and
 no ShapeUtil hook, gesture code, or selection logic was touched. Recorded here only because
@@ -1135,7 +1133,7 @@ person doesn't repeat it.
 
 ## Tabletop-architecture ticket 03: disjointness invariant now enforced at module load, not only in the test suite (2026-08-11)
 
-`.scratch/tabletop-architecture-review/issues/03-cardlayout-invariant-in-interface.md`. Entirely
+Entirely
 within `apps/tabletop/src/server/cardLayout.ts` and `test/cardLayout.test.ts` — no ShapeUtil,
 gesture, or selection code touched, confirming this owner's `-review` call that a pure-geometry
 edit to `cardLayout.ts` doesn't need this owner's machinery.
@@ -1161,8 +1159,7 @@ detection" section (new confirming note).
 
 ## Tabletop-architecture ticket 01: `MtgCardShapeUtil.tsx` split by hook, organizational only (2026-08-11)
 
-`.scratch/tabletop-architecture-review/issues/01-split-cardshapeutil-interop-from-physics.md`,
-worktree `ticket-01-split-cardshapeutil`, branch `worktree-ticket-01-split-cardshapeutil`.
+Worktree `ticket-01-split-cardshapeutil`, branch `worktree-ticket-01-split-cardshapeutil`.
 `MtgCardShapeUtil.tsx` (388 lines, 21 commits, holding every hook's full body inline) split into
 a thin shell plus four new sibling files, one per hook:
 
