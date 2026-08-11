@@ -107,6 +107,12 @@ what survives a restart. The decided-but-unbuilt work now lives in the tickets' 
   ticket 11). Everyone can change everything. Life-change *events* parked for Map 5 at
   `../tabletop-replaces-mural/parked/life-change-events.md`.
 
+- [The Stack appears when a card is played, disappears when it's
+  empty](issues/24-stack-appears-and-disappears.md) (2026-08-11) — clears the middle of the
+  table for attack/defend activity during combat; reappears if a spell is cast mid-combat
+  (accepted flicker, not a bug). Needs-triage: whether appear/disappear is a real shape
+  create/delete or a visibility toggle is still open.
+
 ## Not yet specified
 
 - **Seat position across a restart.** Seat index is `entry.seats.size` at join time, so after a
