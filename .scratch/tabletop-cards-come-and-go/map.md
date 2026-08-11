@@ -110,15 +110,10 @@ Founding decisions from the charting session (Jess, 2026-08-08):
   the `owner` card prop from table-layout ticket 18). Prototype preserved on branch
   `prototype/portal-gesture-ticket-04`.
 
-## Not yet specified
-
-- **Who deletes the table on restart** — decided to be something outside the Tabletop,
-  but *which* component, triggered how, isn't specifiable yet; it touches persistence
-  (descoped from this mountain 2026-08-11 — what survives a restart, now a different
-  map's work) and possibly the Spine. Revisit when those sharpen.
-
 ## Out of scope
 
+- **Who deletes the table on restart** — the Spine's: it administers tables. Not the
+  Tabletop's job (Jess, 2026-08-11).
 - **The eleven hidden-zone Shuffler actions** (draw, shuffle, mulligan, flip-in-hand,
   put-on-top/bottom, …) — ruled out at charting (2026-08-08): no counts on the table
   this mountain, so these are Spine vocabulary for a Spine design effort, not table

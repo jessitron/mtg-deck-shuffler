@@ -305,11 +305,9 @@ sits at seam 1, which both ships already use.
 
 ## Out of Scope
 
-- **Who deletes the table on restart** — decided to be something *outside* the Tabletop,
-  but which component and triggered how is not yet specifiable (touches persistence,
-  descoped from this mountain 2026-08-11, and possibly the Spine). Restart's
-  lingering-cards behavior, documented in ticket 03,
-  stays as-is for now.
+- **Who deletes the table on restart** — the Spine's: it administers tables. Not the
+  Tabletop's job (Jess, 2026-08-11). Restart's lingering-cards behavior, documented in
+  ticket 03, stays as-is for now.
 - **The eleven hidden-zone Shuffler actions** (draw, shuffle, mulligan, put-on-top/bottom
   as *hidden-zone* facts, …) — no counts on the table this mountain; Spine vocabulary for
   a Spine design effort (map 5 territory).
