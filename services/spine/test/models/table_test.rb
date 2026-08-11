@@ -119,4 +119,20 @@ class TableTest < Minitest::Test
       table.append_event!(envelope_for(table, "tableId" => "some-other-table"))
     end
   end
+
+  def test_a_rolled_back_append_never_reaches_a_subscriber
+    table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
+    queue = Spine.broadcaster.subscribe(table.id)
+    envelope = envelope_for(table)
+
+    assert_raises(RuntimeError) do
+      DB.transaction do
+        table.append_event!(envelope)
+        raise "force rollback of the outer, still-open transaction"
+      end
+    end
+
+    assert queue.empty?
+    assert_nil table.events_dataset.first(event_id: envelope["id"])
+  end
 end

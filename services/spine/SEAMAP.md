@@ -22,11 +22,12 @@ believe it.
 2. **The event log** — append-only, one per table; visibility on every event; private
    events cast public shadows; projections (current reading, public view for
    spectators, narration feed).
-   _Rebuilt on Roda/Sequel through ticket 04: append-only log, dedup on sender id, loud
+   _Rebuilt on Roda/Sequel through ticket 05: append-only log, dedup on sender id, loud
    contract validation (`POST /tables/:table_id/events`, envelope v3 — `traceparent`
-   moved out of the body entirely, header-only inbound). Still ahead: admin screen, SSE
-   outbound delivery. Still ahead overall: public-only is the whole visibility story so
-   far; richer projections._
+   moved out of the body entirely, header-only inbound), and live outbound delivery
+   over SSE (`GET /tables/:table_id/events/stream`, one stream per table, fed by a
+   plain-Ruby broadcaster). Still ahead: admin screen. Still ahead overall: public-only
+   is the whole visibility story so far; richer projections._
 3. **The Interpreter** — physical events in, game events out, with provenance,
    causality, confidence, and commentary. Guesses; asks in chat; is corrected;
    supersedes itself. Later: ears (transcript events join the evidence), then

@@ -6,6 +6,7 @@ require_relative "config/db"
 require_relative "models/table"
 require_relative "models/seat"
 require_relative "models/event"
+require_relative "lib/sse_stream"
 
 module Spine
   class App < Roda
@@ -40,6 +41,21 @@ module Spine
         mark_span_failed("event.result", "contract_violation", e)
         response.status = 422
         JSON.generate(error: e.message)
+      end
+
+      r.get "tables", String, "events", "stream" do |table_id|
+        table = Table[table_id]
+        if table.nil?
+          response["Content-Type"] = "application/json"
+          next not_found("no table #{table_id.inspect}")
+        end
+
+        current_span.add_attributes("table.id" => table.id)
+        request.halt [
+          200,
+          { "Content-Type" => "text/event-stream", "Cache-Control" => "no-cache" },
+          SseStream.new(table_id)
+        ]
       end
 
       r.post "join" do
