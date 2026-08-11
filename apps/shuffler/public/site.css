@@ -92,7 +92,7 @@ body {
   margin: 0 auto;
   margin-top: 0;
   overflow: hidden;
-  background-image: url("/images/aeoe-43-cascading-cataracts.png");
+  background-image: url("/images/playmats/aeoe-43-cascading-cataracts.png");
   background-size: cover;
   background-position: center;
   padding: 1rem;
@@ -174,7 +174,7 @@ body {
 }
 
 .step-1 {
-  background-image: url("/images/aeoe-3-exalted-sunborn.png");
+  background-image: url("/images/playmats/aeoe-3-exalted-sunborn.png");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -190,7 +190,7 @@ body {
 }
 
 .step-2 {
-  background-image: url("/images/aeoe-41-terrasymbiosis.png");
+  background-image: url("/images/playmats/aeoe-41-terrasymbiosis.png");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -206,7 +206,7 @@ body {
 }
 
 .step-3 {
-  background-image: url("/images/aeoe-49-bonders-enclave.png");
+  background-image: url("/images/playmats/aeoe-49-bonders-enclave.png");
   background-size: cover;
   background-position: center;
   position: relative;

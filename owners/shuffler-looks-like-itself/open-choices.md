@@ -682,9 +682,13 @@ self-rendering custom shape.
   Magic card back (`null` ⇔ unsleeved — still no default *color*) and a custom
   `<input type="color">`. The playmat set started as the five `aeoe-*` images — one more than
   issue 09's four hero backgrounds (seam-rip is the fifth); the prototype verdict ratified
-  five. **That count is not settled — it's grown to 11 (2026-08-09)**, when six lower-contrast
-  art crops joined `PLAYMATS` in `table-look.ts` for a player who found the original five too
-  high-contrast against cards/text; see [README.md](README.md) and [history.md](history.md).
+  five. **That count is not settled — it's grown to 11 (2026-08-09), and as of 2026-08-11 it's
+  no longer a count anyone maintains by hand.** Six lower-contrast art crops joined `PLAYMATS`
+  in `table-look.ts` for a player who found the original five too high-contrast against
+  cards/text; then the images moved to their own directory
+  (`apps/shuffler/public/images/playmats/`) and `PLAYMATS` became a directory scan
+  (`loadPlaymats()`) rather than a literal array — dropping an image file in makes it
+  selectable, no code change. See [README.md](README.md) and [history.md](history.md).
   **The `/design` specimen of the rendered sleeve-on-a-card is DONE (2026-08-10,
   `design-sleeve-specimen`, `9e23201`)** — `/design` § `#sleeved-card`, badge `candidate`,
   mocks the face-up sleeve ring via `.card-mock-sleeved-face` in `design-candidates.css`; the
