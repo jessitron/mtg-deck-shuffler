@@ -125,6 +125,7 @@ module Spine
     end
 
     def not_found_html(message)
+      response["Content-Type"] = "text/html"
       response.status = 404
       message
     end
