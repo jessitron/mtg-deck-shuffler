@@ -12,6 +12,7 @@ import {
   stackBounds,
   commandZoneCardPosition,
   lifeCounterPosition,
+  commanderDamageCounterPosition,
 } from "../src/server/cardLayout";
 
 /**
@@ -390,5 +391,107 @@ describe("seat joined — commanders", () => {
 
     const cards = shapesOf("seat-commander-dedup").filter((s) => s.type === "mtg-card");
     expect(cards).toHaveLength(2); // still just the one commander + its ghost, not minted twice
+  });
+});
+
+/**
+ * Ticket 21: a commander-damage counter per opposing commander, on each
+ * seat's own name row, labeled with the opponent's name + sleeve color.
+ * Reuses `mtg-life-counter` (ticket 20) with `label`/`sleeveColor` set.
+ */
+describe("seat joined — commander damage counters", () => {
+  function commanderEntry(cardName: string, frontImageUrl: string) {
+    return { card: { scryfallId: randomUUID(), instanceId: randomUUID() }, cardName, frontImageUrl, backImageUrl: null };
+  }
+
+  function damageCountersOf(tableName: string) {
+    return shapesOf(tableName).filter((s) => s.type === "mtg-life-counter" && s.props?.label !== null);
+  }
+
+  it("mints no damage counters for a lone seat with no commanders", async () => {
+    await post("dmg-lone", seatJoined("dmg-lone"));
+    expect(damageCountersOf("dmg-lone")).toHaveLength(0);
+  });
+
+  it("gives an already-seated opponent one damage counter, labeled with the new seat's name and sleeve, when a commander arrives", async () => {
+    await post("dmg-two-seats", seatJoined("dmg-two-seats", { initiator: { seatId: "dmg-a", playerName: "Alice" } }));
+    const kenrith = commanderEntry("Kenrith", "https://example.com/kenrith.jpg");
+    await post(
+      "dmg-two-seats",
+      seatJoined(
+        "dmg-two-seats",
+        { initiator: { seatId: "dmg-b", playerName: "Bob" } },
+        { commanders: [kenrith], sleeveColor: "#123456" }
+      )
+    );
+
+    const counters = damageCountersOf("dmg-two-seats");
+    expect(counters).toHaveLength(1); // only Alice gets a counter — none for Bob's own commander
+
+    const pos = commanderDamageCounterPosition(0, 0); // Alice is seat index 0
+    expect(counters[0].x).toBe(pos.x);
+    expect(counters[0].y).toBe(pos.y);
+    expect(counters[0].isLocked).toBe(true);
+    expect(counters[0].props.value).toBe(0);
+    expect(counters[0].props.label).toBe("Bob");
+    expect(counters[0].props.sleeveColor).toBe("#123456");
+  });
+
+  it("gives a partner-deck opponent two damage counters, one per commander", async () => {
+    await post("dmg-partners", seatJoined("dmg-partners", { initiator: { seatId: "dmg-p-a", playerName: "Alice" } }));
+    const breya = commanderEntry("Breya", "https://example.com/breya.jpg");
+    const silas = commanderEntry("Silas", "https://example.com/silas.jpg");
+    await post(
+      "dmg-partners",
+      seatJoined("dmg-partners", { initiator: { seatId: "dmg-p-b", playerName: "Bob" } }, { commanders: [breya, silas] })
+    );
+
+    const counters = damageCountersOf("dmg-partners");
+    expect(counters).toHaveLength(2);
+    expect(counters.every((c) => c.props.label === "Bob")).toBe(true);
+  });
+
+  it("gives a newly-joined seat a damage counter for an opponent's commander that arrived before it joined", async () => {
+    const kaalia = commanderEntry("Kaalia", "https://example.com/kaalia.jpg");
+    await post(
+      "dmg-retroactive",
+      seatJoined("dmg-retroactive", { initiator: { seatId: "dmg-r-a", playerName: "Alice" } }, { commanders: [kaalia] })
+    );
+    await post("dmg-retroactive", seatJoined("dmg-retroactive", { initiator: { seatId: "dmg-r-b", playerName: "Bob" } }));
+
+    const counters = damageCountersOf("dmg-retroactive");
+    expect(counters).toHaveLength(1); // Bob gets one for Alice's commander; Alice gets none for Bob (no commanders)
+
+    const pos = commanderDamageCounterPosition(1, 0); // Bob is seat index 1
+    expect(counters[0].x).toBe(pos.x);
+    expect(counters[0].y).toBe(pos.y);
+    expect(counters[0].props.label).toBe("Alice");
+  });
+
+  it("two seats joining concurrently, each with a commander, don't double-mint each other's counter", async () => {
+    const kenrith = commanderEntry("Kenrith", "https://example.com/kenrith.jpg");
+    const kaalia = commanderEntry("Kaalia", "https://example.com/kaalia.jpg");
+    // Both requests start before either resolves — the race the fix guards against:
+    // ensurePlayerArea seats each synchronously before its own first await, so each
+    // request's damage-counter loop can see the other seat already present.
+    await Promise.all([
+      post("dmg-concurrent", seatJoined("dmg-concurrent", { initiator: { seatId: "dmg-c-a", playerName: "Alice" } }, { commanders: [kenrith] })),
+      post("dmg-concurrent", seatJoined("dmg-concurrent", { initiator: { seatId: "dmg-c-b", playerName: "Bob" } }, { commanders: [kaalia] })),
+    ]);
+
+    const counters = damageCountersOf("dmg-concurrent");
+    expect(counters).toHaveLength(2); // exactly one counter per seat, not doubled
+    expect(counters.filter((c) => c.props.label === "Alice")).toHaveLength(1);
+    expect(counters.filter((c) => c.props.label === "Bob")).toHaveLength(1);
+  });
+
+  it("a second seat.joined for an already-seated seat is a no-op — damage counters are minted once", async () => {
+    const kaalia = commanderEntry("Kaalia", "https://example.com/kaalia.jpg");
+    await post("dmg-dedup-a", seatJoined("dmg-dedup-a", { initiator: { seatId: "dmg-d-a", playerName: "Alice" } }));
+    const event = seatJoined("dmg-dedup-a", { initiator: { seatId: "dmg-d-b", playerName: "Bob" } }, { commanders: [kaalia] });
+    await post("dmg-dedup-a", event);
+    await post("dmg-dedup-a", { ...event, id: randomUUID() });
+
+    expect(damageCountersOf("dmg-dedup-a")).toHaveLength(1);
   });
 });

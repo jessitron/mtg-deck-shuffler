@@ -144,6 +144,25 @@ export function lifeCounterPosition(seatIndex: number): { x: number; y: number }
   };
 }
 
+/** Commander-damage counter (ticket 21): smaller than the life counter, one per opposing commander. */
+export const COMMANDER_DAMAGE_COUNTER_W = 90;
+export const COMMANDER_DAMAGE_COUNTER_H = 40;
+
+/**
+ * Right-justified in the gap between the name and the life counter, growing
+ * leftward as more opposing commanders arrive. `indexFromRight` 0 sits
+ * nearest the life counter.
+ */
+export function commanderDamageCounterPosition(seatIndex: number, indexFromRight: number): { x: number; y: number } {
+  const life = lifeCounterPosition(seatIndex);
+  const namePos = nameLabelPosition(seatIndex);
+  const x = life.x - GAP - (indexFromRight + 1) * COMMANDER_DAMAGE_COUNTER_W - indexFromRight * GAP;
+  return {
+    x,
+    y: namePos.y - (COMMANDER_DAMAGE_COUNTER_H - NAME_LABEL_HEIGHT) / 2,
+  };
+}
+
 export function playmatBounds(seatIndex: number): Bounds {
   const origin = playerAreaOrigin(seatIndex);
   return { x: origin.x, y: origin.y, w: PLAYMAT_W, h: PLAYMAT_H };

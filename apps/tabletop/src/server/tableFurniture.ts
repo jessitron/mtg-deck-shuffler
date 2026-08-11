@@ -14,6 +14,9 @@ import {
   lifeCounterPosition,
   LIFE_COUNTER_W,
   LIFE_COUNTER_H,
+  commanderDamageCounterPosition,
+  COMMANDER_DAMAGE_COUNTER_W,
+  COMMANDER_DAMAGE_COUNTER_H,
   stackBounds,
 } from "./cardLayout.js";
 
@@ -270,6 +273,8 @@ export async function ensurePlayerArea(
     landCount: 0,
     graveyardCount: 0,
     stackCount: 0,
+    commanderCount: 0,
+    damageCounterCount: 0,
   };
   entry.seats.set(seatId, area);
 
@@ -431,7 +436,7 @@ export async function ensurePlayerArea(
       parentId: pageId,
       isLocked: true,
       opacity: 1,
-      props: { w: LIFE_COUNTER_W, h: LIFE_COUNTER_H, value: 40 },
+      props: { w: LIFE_COUNTER_W, h: LIFE_COUNTER_H, value: 40, label: null, sleeveColor: null },
       meta: {},
     } as any);
   });
@@ -480,5 +485,66 @@ export async function ensureStackDrawn(entry: RoomEntry, pageId: string): Promis
         seatId: null,
       })
     );
+  });
+}
+
+/**
+ * Add `count` commander-damage counters (ticket 21) to `targetSeatId`'s name
+ * row, one per commander belonging to `opponentSeatId`, starting at 0. Reuses
+ * `mtg-life-counter` (ticket 20) with the opponent's name + sleeve baked in
+ * as the counter's identity — the same shape, an extra label/sleeveColor.
+ * A no-op for count <= 0 (an opponent with no commanders yet).
+ *
+ * Idempotent per (targetSeatId, opponentSeatId) pair: two seat.joined
+ * requests can each see the other's seat already in `entry.seats` (set
+ * synchronously in ensurePlayerArea, before either request's first await)
+ * and both reach this call for the same pair. The existence check runs
+ * inside the same synchronous `updateStore` callback as the mint, so
+ * whichever call's callback runs first — JS callbacks run to completion
+ * without interleaving — wins outright; the second sees its counter(s)
+ * already there and skips, instead of double-minting and corrupting
+ * `damageCounterCount`'s position bookkeeping.
+ */
+export async function addCommanderDamageCounters(
+  entry: RoomEntry,
+  pageId: string,
+  targetSeatId: string,
+  opponentSeatId: string,
+  opponentName: string,
+  opponentSleeveColor: string | undefined,
+  count: number
+): Promise<void> {
+  if (count <= 0) return;
+  const target = entry.seats.get(targetSeatId);
+  if (!target) return;
+
+  await entry.room.updateStore((store) => {
+    const firstId = createShapeId(`damage-counter-${entry.tableName}-${targetSeatId}-${opponentSeatId}-0`);
+    if (store.get(firstId)) return;
+
+    for (let i = 0; i < count; i++) {
+      const counterIndex = target.damageCounterCount++;
+      const pos = commanderDamageCounterPosition(target.seatIndex, counterIndex);
+      store.put({
+        id: i === 0 ? firstId : createShapeId(`damage-counter-${entry.tableName}-${targetSeatId}-${opponentSeatId}-${i}`),
+        typeName: "shape",
+        type: "mtg-life-counter",
+        x: pos.x,
+        y: pos.y,
+        rotation: 0,
+        index: nextFurnitureIndex(entry.tableName),
+        parentId: pageId,
+        isLocked: true,
+        opacity: 1,
+        props: {
+          w: COMMANDER_DAMAGE_COUNTER_W,
+          h: COMMANDER_DAMAGE_COUNTER_H,
+          value: 0,
+          label: opponentName,
+          sleeveColor: opponentSleeveColor ?? null,
+        },
+        meta: {},
+      } as any);
+    }
   });
 }
