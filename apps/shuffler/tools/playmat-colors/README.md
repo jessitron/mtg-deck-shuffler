@@ -16,7 +16,7 @@ npm install
 npm start -- <image-filename>
 ```
 
-`<image-filename>` is looked up in `apps/shuffler/public/images/`, e.g.:
+`<image-filename>` is looked up in `apps/shuffler/public/images/playmats/`, e.g.:
 
 ```
 npm start -- playmat-map.png
@@ -31,10 +31,17 @@ fill it — or click the 🎨 button next to a slot for the OS color picker.
 Each slot group saves independently, and shows "● unsaved changes" whenever
 its slots differ from what was last saved for that group.
 
-Results are written to `apps/shuffler/public/images/playmat-colors.json`,
+Results are written to `apps/shuffler/public/images/playmats/playmat-colors.json`,
 keyed by image filename, alongside `suggestedTwo`/`suggestedThree`/`suggestedFive`
 (what the algorithm proposed) and `chosenTwo`/`chosenThree`/`chosenFive` (what
 got saved). Re-running the tool on the same image preserves and re-offers the
 prior choice.
 
 Ctrl-C to stop.
+
+## A note on `public/images/playmats/`
+
+That directory currently holds **copies** of the playmat images — the originals stay at
+`public/images/` because `table-look.ts`'s `PLAYMATS` list and `site.css` still reference
+them there directly. Once the app is updated to serve playmats from `playmats/` instead,
+the top-level copies can be deleted.

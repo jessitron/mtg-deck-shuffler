@@ -5,7 +5,7 @@ import { extractCandidates, pickBestPair, pickBestTriple, pickBestQuintet } from
 import { createApp } from "./server.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const IMAGES_DIR = path.resolve(__dirname, "../../public/images");
+const IMAGES_DIR = path.resolve(__dirname, "../../public/images/playmats");
 const DATA_FILE = path.join(IMAGES_DIR, "playmat-colors.json");
 const DEFAULT_PORT = 4523;
 
