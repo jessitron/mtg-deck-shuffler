@@ -84,3 +84,59 @@ test("life counter starts at 40, is locked furniture, and +/- and typing sync li
   await alice.context.close();
   await bob.context.close();
 });
+
+test("pressing the life counter's +/- button doesn't disturb an existing selection elsewhere", async ({
+  browser,
+  baseURL,
+}) => {
+  // Ticket 05 (tabletop-shape-mechanics-review flagged this as untested):
+  // clearStaleSelectionOnPointerDown clears selection on any pointer_down
+  // landing on an unselected shape — but the life counter's +/- buttons call
+  // editor.markEventAsHandled(e), which useCanvasEvents.ts checks BEFORE
+  // calling editor.dispatch at all, so editor.emit('event', ...) (what the
+  // new listener subscribes to) never fires for a button press. This test is
+  // the tripwire if that upstream gate ever changes.
+  const tableSlug = `verify-life-counter-selection-${Date.now()}`;
+  const { context, page } = await openTable(browser, tableSlug);
+
+  const event = seatJoined(tableSlug, { seatId: `e2e-seat-life-sel-${Date.now()}`, playerName: "Jess" });
+  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, { data: event });
+  expect(response.status()).toBe(201);
+  await expect(page.locator(`.tl-shape[data-shape-type="mtg-life-counter"]`)).toHaveCount(1, { timeout: 10000 });
+
+  // A pasted image is a plain, selectable stock shape — select it by clicking.
+  const dataTransfer = await page.evaluateHandle(async () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 100;
+    canvas.height = 100;
+    const ctx = canvas.getContext("2d")!;
+    ctx.fillStyle = "green";
+    ctx.fillRect(0, 0, 100, 100);
+    const blob: Blob = await new Promise((resolve) => canvas.toBlob((b) => resolve(b!), "image/png"));
+    const file = new File([blob], "square.png", { type: "image/png" });
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    return dt;
+  });
+  const canvas = page.locator(".tl-canvas");
+  const canvasBox = await canvas.boundingBox();
+  if (!canvasBox) throw new Error("missing canvas box");
+  const dropAt = { x: canvasBox.x + canvasBox.width / 2, y: canvasBox.y + canvasBox.height / 2 };
+  await canvas.dispatchEvent("dragenter", { dataTransfer });
+  await canvas.dispatchEvent("dragover", { dataTransfer, clientX: dropAt.x, clientY: dropAt.y });
+  await canvas.dispatchEvent("drop", { dataTransfer, clientX: dropAt.x, clientY: dropAt.y });
+
+  const image = page.locator('.tl-shape[data-shape-type="image"]');
+  await expect(image).toHaveCount(1, { timeout: 10000 });
+  await image.click();
+  await expect(page.locator(".tl-selected")).toHaveCount(1);
+
+  const plus = page.getByRole("button", { name: "increase life" });
+  await plus.click();
+  await expect(page.getByTestId("mtg-life-counter-input")).toHaveValue("41");
+
+  // The image is still selected — the button press didn't clear it.
+  await expect(page.locator(".tl-selected")).toHaveCount(1);
+
+  await context.close();
+});
