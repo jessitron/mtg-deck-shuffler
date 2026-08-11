@@ -195,7 +195,9 @@ Test external behavior at existing seams; no mocks, fakes only (fleet rule).
 - **Card-shape mechanics** — flip, counters-on-cards, notes: map 1 (Physics). (Pile
   arrangement *inside* the graveyard and exile was pulled into this spec 2026-08-08 —
   tickets 22–23; general card stacking anywhere else on the board remains map 1's.)
-- **Seat position across a restart** — the map's one fog line; waits on map 6.
+- **Seat position across a restart** — the map's one fog line; waits on persistence,
+  descoped from this mountain (`apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md`
+  § Out of scope).
 - **Play Face-Down, narration/chat, spectator mode, rules enforcement** — ruled out at
   the map/fleet level.
 
