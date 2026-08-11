@@ -56,13 +56,25 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   true })` — the new lock-gate finding, watch point 22 — since a locked shape's props are
   otherwise silently unwritable through the ordinary `editor.updateShape` call, even from a DOM
   handler inside `component()`. See `architecture.md`'s life-counter section.
-- `apps/tabletop/src/client/shapes/SelectionClearingNoteShapeUtil.ts` — **new, ticket 19
-  (2026-08-10)**: a thin subclass of tldraw's own `NoteShapeUtil` (imported from `"tldraw"`)
-  overriding only `onTranslateEnd` to call `this.editor.setSelectedShapes([])` — supplies the
-  drag-settle selection cleanup (watch point 1) that stock notes lack, now that `mtg-card` hosts
-  them as passengers alongside counters. Registered in `TablePage.tsx` **in place of** the stock
-  `NoteShapeUtil`, not alongside it (watch point 18). Everything else about how a note renders,
-  edits, and syncs is untouched tldraw behavior.
+- `apps/tabletop/src/client/clearStaleSelectionOnPointerDown.ts` — **new, ticket 05
+  (2026-08-11)**: `clearStaleSelectionOnPointerDown(editor)`, registered once at Tldraw mount
+  (`TablePage.tsx`'s `onTldrawMount`). On every `pointer_down` with `target: 'canvas'`, calls
+  tldraw's own `getHitShapeOnCanvasPointerDown(editor)` and, if the hit shape isn't already in
+  `editor.getSelectedShapeIds()`, clears the selection. **Supersedes every per-shape
+  `onTranslateEnd`/`commit()` clear this KB previously documented** — `MtgCardShapeUtil`'s,
+  `MtgCounterShapeUtil`'s, and `CardContextMenu.tsx`'s `commit()`'s selection-clearing lines were
+  all deleted, and `SelectionClearingNoteShapeUtil`/`SelectionClearingImageShapeUtil` (below,
+  removed) are gone entirely, since their sole purpose was carrying a hook this file now makes
+  unnecessary for any shape. Also closes a gap the distributed sites structurally could not: a
+  shape selected by a plain click with no drag, which never fires `onTranslateEnd` at all. See
+  watch point 1 and watch point 24 (the `target: 'canvas'`-not-`'shape'` gotcha this file's
+  comment documents in full) and `architecture.md`'s "Ticket 05" section.
+  `SelectionClearingNoteShapeUtil.ts` and `SelectionClearingImageShapeUtil.ts` — **deleted, ticket
+  05**: thin subclasses of tldraw's stock `NoteShapeUtil`/`ImageShapeUtil` that existed solely to
+  add the `onTranslateEnd` selection-clear those stock utils lacked (ticket 19 and the
+  2026-08-10 pasted-image fix, respectively). No longer needed now that
+  `clearStaleSelectionOnPointerDown` covers every shape type centrally; both stock utils are back
+  in the plain `defaultShapeUtils` spread with no filtering or replacement.
 - `apps/tabletop/src/client/CardContextMenu.tsx` — **new, ticket 17 (2026-08-09, `eb24a4f`)**:
   the app's first custom `TLComponents.ContextMenu`, wired in `TablePage.tsx`. `TableContextMenu`
   wraps `DefaultContextMenu`, replacing its default content (children replace, not add) with the
@@ -70,9 +82,11 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   trimmed stock menu (`ReorderMenuSubmenu` + `ClipboardMenuGroup`). `CardMenuItems` reads the
   selection reactively (`useEditor()` + `useValue(getSelectedShapes().filter(mtg-card))`) and
   routes every action through a `commit(partials, label)` helper
-  (`markHistoryStoppingPoint` → `updateShapes` → unconditional trailing
-  `editor.setSelectedShapes([])`) — the fix for the stale-selection-after-menu-close hazard, watch
-  point 15. See `architecture.md`'s "Ticket 17" section.
+  (`markHistoryStoppingPoint` → `updateShapes`) — historically also ended with an unconditional
+  trailing `editor.setSelectedShapes([])`, the fix for the stale-selection-after-menu-close hazard,
+  watch point 15; **that trailing clear was deleted by ticket 05 (2026-08-11)** — see
+  `architecture.md`'s "Ticket 17" (historical mechanism) and "Ticket 05" (the superseding fix)
+  sections.
 - `apps/tabletop/src/client/shapes/cardTap.ts` — **new, ticket 17**: `tapPartial(shape, tapped)`,
   the center-fixed pivot solve (watch point 4) extracted out of `MtgCardShapeUtil` as a standalone
   pure function so the context menu's Tap/Untap item can share it — a menu item has no
@@ -85,9 +99,10 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   to the rest of a marquee selection via a `queueMicrotask`-deferred batch, run only when other
   cards are selected — the clicked card's own partial stays a synchronous return; see
   `architecture.md`'s "Ticket 16"; since ticket 17, calls the standalone `tapPartial` from
-  `cardTap.ts` instead of a private method), `onTranslateEnd` (selection cleanup + zone-entry
-  detection + passenger eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`,
-  deliberately excluding the Stack), `zoneAt()` (private helper — since ticket 14, a thin wrapper
+  `cardTap.ts` instead of a private method), `onTranslateEnd` (zone-entry detection + passenger
+  eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`, deliberately excluding
+  the Stack; **its selection-clear was deleted by ticket 05, 2026-08-11** — see
+  `clearStaleSelectionOnPointerDown.ts`, above), `zoneAt()` (private helper — since ticket 14, a thin wrapper
   around `zoneHitTest.ts`'s `topmostZoneAt()`, below; since ticket 18 returning the full
   `ZoneHit`, id+zone), the passenger-hosting drag hooks (`canReceiveNewChildrenOfType`/
   `canRemoveChildrenOfType`, type-narrowed via `PASSENGER_TYPES` — since ticket 19, `{
@@ -122,10 +137,12 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   `interactions.md` watch point 19. Every non-command zone type is unaffected.
 - `apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx` — **new, ticket 18**: extends
   `BaseBoxShapeUtil<MtgCounterShape>`. Deliberately no `onClick` (text editing is stock
-  double-click-to-edit via `canEdit()`, avoiding the selection-deferral quirk), but
-  `onTranslateEnd` still clears selection unconditionally (watch point 1's generalized cleanup).
-  `component()` renders the disc (or, while editing, an `<input>` with the `setTimeout(0)` focus
-  workaround, `markEventAsHandled` on pointer-down, and Enter/Escape → `editor.complete()`);
+  double-click-to-edit via `canEdit()`, avoiding the selection-deferral quirk); previously also
+  defined `onTranslateEnd` purely to clear selection (watch point 1's generalized cleanup) — that
+  override was deleted entirely by ticket 05 (2026-08-11), since it had no other purpose and the
+  centralized `clearStaleSelectionOnPointerDown.ts` covers this shape too. `component()` renders
+  the disc (or, while editing, an `<input>` with the `setTimeout(0)` focus workaround,
+  `markEventAsHandled` on pointer-down, and Enter/Escape → `editor.complete()`);
   `isAspectRatioLocked()` keeps it square. Exports `COUNTER_SIZE` (44).
 - `apps/tabletop/src/client/shapes/MtgCounterTool.ts` — **new, ticket 18**: `StateNode` with id
   `"mtg-counter"`; click-to-place one counter at the pointer, then back to the select tool. The
@@ -135,19 +152,23 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   tested) — picks the zone edge nearest the card's entry point and alternates slots outward,
   skipping occupied rects; overlap beats failure. Used only by `evictCounters`.
 - `apps/tabletop/src/client/TablePage.tsx` — registers
-  `shapeUtils = [...defaultShapeUtils.filter((Util) => Util.type !== "note"), MtgCardShapeUtil,
-  MtgZoneShapeUtil, MtgCounterShapeUtil, SelectionClearingNoteShapeUtil]`,
-  passed to both
-  `useSync` and the `<Tldraw shapeUtils={...}>` prop (this app uses the sync hook directly, which
-  is why `defaultShapeUtils` must be spread in explicitly; see `architecture.md`). Since ticket 19
-  (2026-08-10) the stock `NoteShapeUtil` is filtered out of that spread before
-  `SelectionClearingNoteShapeUtil` goes in — `useSync`'s schema builder throws on a duplicate
-  `type` where `<Tldraw>`'s own merge wouldn't (watch point 18). Add new custom ShapeUtils here.
-  Since ticket 18 it also wires the counter tool: `tools={[MtgCounterTool]}`,
+  `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil,
+  MtgLifeCounterShapeUtil]`, passed to both `useSync` and the `<Tldraw shapeUtils={...}>` prop
+  (this app uses the sync hook directly, which is why `defaultShapeUtils` must be spread in
+  explicitly; see `architecture.md`). **Since ticket 05 (2026-08-11), `defaultShapeUtils` is
+  spread in whole again — no filtering, no `SelectionClearing*` replacements** — ticket 19's
+  (2026-08-10) `"note"` filter and the later `"image"` filter both existed only to make room for
+  the now-deleted subclasses; with `clearStaleSelectionOnPointerDown` covering every shape type
+  centrally, the stock `NoteShapeUtil`/`ImageShapeUtil` need no replacement at all. Add new custom
+  ShapeUtils here. Since ticket 18 it also wires the counter tool: `tools={[MtgCounterTool]}`,
   `overrides` (`uiOverrides.tools` adds the toolbar item), and `components`
   (`ToolbarWithCounter`, a `DefaultToolbar` with the counter item prepended). Since ticket 17
   (2026-08-09) also passes `ContextMenu: TableContextMenu` in the same `components` object —
-  see `CardContextMenu.tsx`, above.
+  see `CardContextMenu.tsx`, above. **Since ticket 05**, the mount callback
+  (`aimCameraAtTheTable`, passed to `<Tldraw onMount={...}>`) is renamed `onTldrawMount` and does
+  two things, not one: the existing deterministic `editor.zoomToBounds(TABLE_EXTENT, ...)` camera
+  framing, plus registering `clearStaleSelectionOnPointerDown(editor)` — see
+  `clearStaleSelectionOnPointerDown.ts`, above, and `architecture.md`'s "Ticket 05" section.
   Also home to `aimCameraAtTheTable()` (table-layout ticket 14, `5eeac70`;
   corrected same day, `96159be`): since the square's furniture centers on the origin (mostly
   negative page coordinates, off tldraw's default viewport), the mount hook does one
@@ -313,9 +334,22 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   "after dragging a note, dragging a card moves the card (stale-selection regression)" — mirroring
   `verify-counter.spec.ts`'s Hazard-A test, deliberately without test-side selection cleanup so the
   assertion proves the product clears selection, not the test (watch point 18).
+- `apps/tabletop/test/verification/verify-click-then-drag-selection.spec.ts` — **new, ticket 05
+  (2026-08-11)**: the regression test for the gap none of the five old `onTranslateEnd`/`commit()`
+  sites could close — drops a pasted image, clicks it once with **no** drag (stock `image` has no
+  `onClick`, so tldraw selects it immediately on pointer-down), then drags a card, and asserts the
+  card — not the image — moves. Confirmed red before `clearStaleSelectionOnPointerDown` existed.
+  `verify-life-counter.spec.ts` also gained a targeted assertion (ticket 05) that pressing the
+  life counter's +/- buttons doesn't clear an unrelated existing selection — the `markEventAsHandled`
+  immunity from watch point 24, confirmed empirically rather than only by source-reading.
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 
+- `node_modules/tldraw/src/lib/tools/SelectTool/childStates/Idle.ts` — **new dependency, ticket 05
+  (2026-08-11)**: `onPointerDown`'s own hit-test (the source of the public
+  `getHitShapeOnCanvasPointerDown` helper `clearStaleSelectionOnPointerDown.ts` calls) and the
+  recursive `{ ...info, target: 'shape' }` internal retargeting that's the reason a real
+  pointer-down never reaches `editor.on('event', ...)` with `target: 'shape'` — see watch point 24.
 - `node_modules/tldraw/src/lib/tools/SelectTool/childStates/PointingShape.ts` — selection-on-enter
   deferral logic (`onClick` truthiness check), `startTranslating`'s force-reselect safety net.
 - `node_modules/tldraw/src/lib/tools/SelectTool/childStates/Translating.ts` — what happens once a
