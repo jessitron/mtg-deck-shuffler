@@ -1,10 +1,9 @@
 import { Editor, getHitShapeOnCanvasPointerDown, TLEventInfo } from "tldraw";
 
 /**
- * Ticket 05 (tabletop-architecture-review): closes the residual gap in
- * tldraw's own stale-selection bug (tldraw/tldraw#5613) that no number of
- * per-shape `onTranslateEnd` clears can reach — see
- * `notes/RESEARCH-stale-selection-bug.md`.
+ * Closes the residual gap in tldraw's own stale-selection bug
+ * (tldraw/tldraw#5613) that no number of per-shape `onTranslateEnd` clears
+ * can reach — see `notes/RESEARCH-stale-selection-bug.md`.
  *
  * The mechanism (verified against installed tldraw 5.2.5's
  * `SelectTool/childStates/PointingShape.ts`): a shape whose `ShapeUtil`
