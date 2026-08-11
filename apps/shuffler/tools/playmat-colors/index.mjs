@@ -1,7 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { extractCandidates, pickBestPair, pickBestTriple } from "./extract-colors.mjs";
+import { extractCandidates, pickBestPair, pickBestTriple, pickBestQuintet } from "./extract-colors.mjs";
 import { createApp } from "./server.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -37,9 +37,11 @@ async function main() {
 
   const suggestedTwo = pickBestPair(candidates);
   const suggestedThree = pickBestTriple(candidates);
+  const suggestedFive = pickBestQuintet(candidates);
 
   console.log(`Suggested 2-color pick: ${suggestedTwo.join(", ")}`);
   console.log(`Suggested 3-color pick: ${suggestedThree.join(", ")}`);
+  console.log(`Suggested 5-color pick: ${suggestedFive.join(", ")}`);
 
   const app = createApp({
     imagePath,
@@ -47,6 +49,7 @@ async function main() {
     candidates,
     suggestedTwo,
     suggestedThree,
+    suggestedFive,
     dataFilePath: DATA_FILE,
   });
 
