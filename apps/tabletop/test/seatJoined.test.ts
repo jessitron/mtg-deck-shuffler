@@ -12,7 +12,7 @@ import { playmatBounds, libraryBounds, commandZoneBounds, graveyardBounds, exile
  * order) around a fixed centered Stack square (ticket 14, the square).
  *
  * Since tabletop-cards-come-and-go ticket 05, the body posted is a real
- * envelope (contracts/envelope.v1.json) carrying a seat.joined payload
+ * envelope (contracts/envelope.v2.json) carrying a seat.joined payload
  * (contracts/payloads/seat.joined.v1.json), validated for real via ajv.
  */
 let server: Server;
@@ -42,6 +42,8 @@ function seatJoined(tableName: string, envelopeOverrides: Record<string, unknown
     occurredAt: new Date().toISOString(),
     initiator: { seatId: `seat-${eventCounter}`, playerName: "Jess" },
     occurredIn: "shuffler",
+    origin: "shuffler.shuffleUp",
+    significance: "administrative",
     visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,

@@ -3,7 +3,7 @@ import { randomBytes } from "node:crypto";
 
 /**
  * W3C traceparent for the envelope's `traceparent` field (contracts/
- * envelope.v1.json) — observability only, never durable causality (that's
+ * envelope.v2.json) — observability only, never durable causality (that's
  * the envelope's `id`). Same `00-{traceId}-{spanId}-{flags}` format as the
  * Spine's `current_traceparent` (application_controller.rb) and the
  * Tabletop's `currentTraceparent` (src/client/observability/index.ts).

@@ -16,7 +16,7 @@ import { validateIncomingEvent } from "./contractValidation.js";
 // ============================================================================
 //
 // tabletop-cards-come-and-go ticket 05 (JES-128): the body posted here is the
-// real envelope (contracts/envelope.v1.json) carrying a card.played payload
+// real envelope (contracts/envelope.v2.json) carrying a card.played payload
 // (contracts/payloads/card.played.v1.json), validated for real via ajv —
 // see contractValidation.ts. gameCardIndex may now arrive (let-gamecardindex-out,
 // 2026-08-10 — the guard that used to reject it on both schemas is gone): it's

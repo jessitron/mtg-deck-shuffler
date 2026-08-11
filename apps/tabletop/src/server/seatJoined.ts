@@ -28,7 +28,7 @@ const ghostInstanceId = (instanceId: string): string => `ghost:${instanceId}`;
 // ============================================================================
 //
 // tabletop-cards-come-and-go ticket 05: the body posted here is the real
-// envelope (contracts/envelope.v1.json) carrying a seat.joined payload
+// envelope (contracts/envelope.v2.json) carrying a seat.joined payload
 // (contracts/payloads/seat.joined.v1.json), validated for real via ajv — see
 // contractValidation.ts. Who joined (seatId, playerName) lives on the
 // envelope's initiator; deckName is required, playmatImageUrl/

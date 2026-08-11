@@ -186,6 +186,21 @@ Resolved since (tabletop-cards-come-and-go ticket 05, 2026-08-09):
 - **`zoneHint` is an enum** (`stack` | `battlefield` | `graveyard`) in
   `card.played.v1.json`, not a free string.
 
+Resolved since (envelope v2, map 5 tickets 01 and 02, 2026-08-10):
+
+- **`origin`**: an open, dot-namespaced string (same pattern as `name`, but its
+  mechanism-naming segments may be camelCase — `spine.tableLookupMiss`,
+  `shuffler.playCardSubmit`) naming which code path within `occurredIn`'s app minted the
+  event. See
+  `.scratch/tabletop-table-reports/issues/01-every-event-carries-its-origin.md`.
+- **`significance`**: a closed three-value enum — `physical` (a card moved, hand sorting,
+  a note/annotation), `domain` (a real game fact: drawn, played, moved to a zone), or
+  `administrative` (table/seat bookkeeping) — orthogonal to `origin` and to the
+  domain/physical vocabulary split in
+  `.scratch/tabletop-table-reports/issues/02-event-vocabulary-domain-and-physical.md`
+  (that split only classifies domain vs. physical *events*; `significance` gives every
+  envelope, including administrative ones, a place to say which of the three it is).
+
 ## Not decided here (future docs)
 
 - Supersession/correction event shapes (Interpreter era) — durable causality via

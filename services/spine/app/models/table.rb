@@ -24,6 +24,8 @@ class Table < ApplicationRecord
         "name" => "table.created",
         "initiator" => { "playerName" => creator },
         "occurredIn" => "spine",
+        "origin" => "spine.tableLookupMiss",
+        "significance" => "administrative",
         "visibility" => "public",
         "traceparent" => traceparent,
         "schemaVersion" => 1,
@@ -48,6 +50,8 @@ class Table < ApplicationRecord
       "name" => "seat.taken",
       "initiator" => { "playerName" => player_name },
       "occurredIn" => "spine",
+      "origin" => "spine.seatTaken",
+      "significance" => "administrative",
       "visibility" => "public",
       "traceparent" => traceparent,
       "schemaVersion" => 1,
@@ -79,6 +83,8 @@ class Table < ApplicationRecord
         occurred_at: envelope["occurredAt"],
         initiator: envelope["initiator"]["playerName"],
         occurred_in: envelope["occurredIn"],
+        origin: envelope["origin"],
+        significance: envelope["significance"],
         visibility: envelope["visibility"],
         traceparent: envelope["traceparent"],
         schema_version: envelope["schemaVersion"],
@@ -133,7 +139,9 @@ class Table < ApplicationRecord
       "event.name" => event.name,
       "event.seq" => event.seq,
       "event.initiator" => event.initiator,
-      "event.occurred_in" => event.occurred_in
+      "event.occurred_in" => event.occurred_in,
+      "event.origin" => event.origin,
+      "event.significance" => event.significance
     }
     if (instance_id = event.payload.dig("card", "instanceId"))
       attributes["card.instance_id"] = instance_id

@@ -15,7 +15,7 @@ import { playmatBounds, graveyardBounds, stackBounds } from "../src/server/cardL
  * seat.joined normally runs first — see seatJoined.test.ts for that path).
  *
  * Since tabletop-cards-come-and-go ticket 05, the body posted is a real
- * envelope (contracts/envelope.v1.json) carrying a card.played payload
+ * envelope (contracts/envelope.v2.json) carrying a card.played payload
  * (contracts/payloads/card.played.v1.json), validated for real via ajv.
  */
 let server: Server;
@@ -49,6 +49,8 @@ function cardPlayed(tableName: string, envelopeOverrides: Record<string, unknown
     occurredAt: new Date().toISOString(),
     initiator,
     occurredIn: "shuffler",
+    origin: "shuffler.playCardSubmit",
+    significance: "domain",
     visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
@@ -175,6 +177,8 @@ describe("card arrival", () => {
         occurredAt: new Date().toISOString(),
         initiator: { seatId: "seat-sleeved", playerName: "Jess" },
         occurredIn: "shuffler",
+        origin: "shuffler.shuffleUp",
+        significance: "administrative",
         visibility: "public",
         traceparent: fakeTraceparent(),
         schemaVersion: 1,
@@ -204,6 +208,8 @@ describe("card arrival", () => {
         occurredAt: new Date().toISOString(),
         initiator: { seatId: "seat-cardback", playerName: "Jess" },
         occurredIn: "shuffler",
+        origin: "shuffler.shuffleUp",
+        significance: "administrative",
         visibility: "public",
         traceparent: fakeTraceparent(),
         schemaVersion: 1,

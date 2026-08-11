@@ -9,6 +9,6 @@ export interface SpinePort {
   ensureTable(name: string, creator: string): Promise<string>;
   /** Take a seat at this table. Not idempotent — the Spine assigns the next open seat number each call. */
   takeSeat(tableId: string, playerName: string): Promise<{ seatId: string; seat: number }>;
-  /** Append an event to this table's log (contracts/envelope.v1.json). */
+  /** Append an event to this table's log (contracts/envelope.v2.json). */
   sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void>;
 }

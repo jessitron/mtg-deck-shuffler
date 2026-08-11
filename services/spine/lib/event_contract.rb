@@ -3,7 +3,7 @@
 # invalid envelope/payload is a hard error, never a best-effort parse.
 # (contracts/README.md; notes/DESIGN-event-contract-v0.md)
 module EventContract
-  ENVELOPE_VERSION = 1
+  ENVELOPE_VERSION = 2
 
   # Any way an event can violate the published language.
   class Violation < StandardError; end

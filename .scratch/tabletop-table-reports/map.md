@@ -61,6 +61,14 @@ Not yet specified).
   zone, might mean "I'm attacking") — see the ticket for why zone-only domain events can't carry
   that signal at all.
 
+- **`envelope.v2.json` shipped, with `origin` and a new envelope-wide `significance` field**
+  (2026-08-10). `origin` is exactly ticket 01's design, given real values at all four shipped
+  mint sites. `significance` (`physical` | `domain` | `administrative`) is a new field Jess
+  asked for directly, ahead of this map's own tickets reaching it — added to the same v2 bump
+  since both needed one. Every existing kind now carries both: `table.created` and
+  `seat.taken`/`seat.joined` are `administrative`; `card.played` is `domain`. See
+  `notes/DESIGN-event-contract-v0.md`'s "Resolved since" section for the field shapes.
+
 - **card.discard becomes its own event kind, not a variant of card.played** — already scoped and
   unblocked as [ticket 08 in
   tabletop-cards-come-and-go](../tabletop-cards-come-and-go/issues/08-discard-becomes-its-own-word.md)

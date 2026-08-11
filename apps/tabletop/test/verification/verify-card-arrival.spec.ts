@@ -6,7 +6,7 @@ import { randomUUID } from "node:crypto";
  * (zoneHint battlefield) and a nonland (zoneHint stack) in different areas.
  *
  * Since tabletop-cards-come-and-go ticket 05, the body posted is a real
- * envelope (contracts/envelope.v1.json) carrying a card.played payload
+ * envelope (contracts/envelope.v2.json) carrying a card.played payload
  * (contracts/payloads/card.played.v1.json).
  */
 function fakeTraceparent(): string {
@@ -21,6 +21,8 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
     occurredAt: new Date().toISOString(),
     initiator: { seatId: "e2e-seat", playerName: "Jess" },
     occurredIn: "shuffler",
+    origin: "shuffler.playCardSubmit",
+    significance: "domain",
     visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
