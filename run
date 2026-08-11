@@ -35,11 +35,17 @@ prefix() {
 }
 
 PIDS=()
+WATCH=()  # "label:pid" for each ship, so the watchdog can notice an early exit
+READY_PID=
+WATCHDOG_PID=
+FAILED=0
 
 start() {
   local label="$1" dir="$2" port="$3"
   (cd "$dir" && PORT="$port" ./run 2>&1 | prefix "$label") &
-  PIDS+=($!)
+  local pid=$!
+  PIDS+=("$pid")
+  WATCH+=("$label:$pid")
 }
 
 kill_tree() {
@@ -48,13 +54,35 @@ kill_tree() {
   kill "$pid" 2>/dev/null || true
 }
 
+# Notices a ship dying early (e.g. a build failure) instead of leaving the
+# readiness loop to poll a dead port for up to 120s before saying anything.
+watchdog() {
+  local entry label pid
+  while sleep 1; do
+    for entry in "${WATCH[@]}"; do
+      label="${entry%%:*}"
+      pid="${entry#*:}"
+      if ! kill -0 "$pid" 2>/dev/null; then
+        echo ""
+        echo "💥 $label exited unexpectedly — see its output above"
+        FAILED=1
+        kill -TERM "$$"
+        return
+      fi
+    done
+  done
+}
+
 cleanup() {
   trap - INT TERM EXIT
   echo ""
   echo "⚓ furling sails — stopping the fleet..."
   local pid
+  [ -n "$WATCHDOG_PID" ] && kill_tree "$WATCHDOG_PID"
+  [ -n "$READY_PID" ] && kill_tree "$READY_PID"
   for pid in "${PIDS[@]}"; do kill_tree "$pid"; done
   wait 2>/dev/null
+  exit "$FAILED"
 }
 trap cleanup INT TERM EXIT
 
@@ -69,6 +97,9 @@ else
 fi
 start "[tabletop]" apps/tabletop  "$TABLETOP_PORT"
 start "[shuffler]" apps/shuffler  "$SHUFFLER_PORT"
+
+watchdog &
+WATCHDOG_PID=$!
 
 # One combined readiness banner once the running ships answer.
 (
@@ -96,5 +127,6 @@ start "[shuffler]" apps/shuffler  "$SHUFFLER_PORT"
   done
   [ "$ok" = "1" ] || echo "⚠️  fleet not fully up after 120s — check the logs above"
 ) &
+READY_PID=$!
 
 wait
