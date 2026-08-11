@@ -287,3 +287,65 @@ layout fix, not an animation. It's recorded here because the affected element (`
 lives inside the same flex-wrap hand grid that hosts the card-move/card-drop animations, and the
 principle (one-time elements in a per-row collection break flex-wrap alignment; take them out of
 flow) is a general layout gotcha worth keeping alongside the other hand-layout knowledge.
+
+## New shape: a draggable non-card element sharing the hand's drag-and-drop wiring (2026-08-11)
+
+The `.hand-symbol` (hand image + card count, rendered by `hand-components.ts`, always
+**last** in `#hand-cards`) is now draggable into any `.hand-drop-zone`, alongside real
+`.card-container` cards. This is the first element in the hand row that participates in
+drag-and-drop **without being a `GameCard`** — a new shape worth naming, since every
+prior drag-and-drop mechanism in this file assumed the dragged thing has a
+`data-hand-position` and a server-side `WhatHappened`-driven repositioning story.
+
+**Why it's purely cosmetic, not GameState.** Reordering the hand-symbol has no server
+counterpart — no route, no `GameState` mutation, no `WhatHappened`. It's a client-only
+"easter egg." That decision shapes everything below: since the server always re-renders
+`.hand-symbol` last (`hand-components.ts` never changed), any client-side move must be
+**reapplied after every full `#game-container` swap**, and the position has to live
+somewhere client-side that survives navigation within the tab: `sessionStorage`, keyed
+per-game (`hand-symbol-position:<gameId>`, `handSymbolPositionKey()` in `game.js`).
+
+**How it hooks into the existing drag machinery (`game.js`):**
+- `setupHandCardDragAndDrop()` now also wires `dragstart`/`dragend` on `.hand-symbol`
+  (same listeners as real cards), and calls a new `restoreHandSymbolPosition()` at its
+  top — so the reposition is reapplied on every `htmx:afterSwap` and on
+  `DOMContentLoaded`, exactly the two triggers that already call this function.
+- `handleDragStart` detects the symbol via `draggedCard.classList.contains("hand-symbol")`
+  and short-circuits to a sentinel, `draggedFromPosition = HAND_SYMBOL_SENTINEL`
+  (`= "hand-symbol"`), **before** the existing `parseInt(dataset.handPosition)` and
+  animation-class cleanup — the symbol has no `data-hand-position` and never carries
+  `card-moved-*`/`dropped-from-*` classes, so running that cleanup on it would be a no-op
+  at best and a `NaN` position at worst.
+- `handleDrop` checks the sentinel **first**. Instead of the real-card path's
+  `htmx.ajax(... /move-hand-card ...)`, it does a plain DOM `insertBefore` next to the
+  dropped-on zone and writes the zone's `data-hand-position` to `sessionStorage`. No
+  network request, no server round-trip, no swap.
+- `restoreHandSymbolPosition()` reads the stored position, clamps it to
+  `dropZones.length - 1` (hand can shrink/grow between saves — draw, discard, mulligan),
+  and re-inserts the symbol next to that zone. Silently no-ops if there's no stored value,
+  no `gameId`, no symbol in the DOM, or no drop zones — all soft-fail, matching this
+  codebase's general best-effort-client-state style.
+
+**Consequence for future non-card draggables**: this is now the template. A future
+draggable, non-`GameCard` element in `#hand-cards` should follow the same three-part
+shape — (1) a sentinel value for `draggedFromPosition` distinguishing it from a real
+`data-hand-position` integer, checked first in both `handleDragStart` and `handleDrop`;
+(2) a plain DOM move instead of the `/move-hand-card` POST, since there's nothing in
+`GameState` to mutate; (3) a restore-after-swap function reapplying the client-only
+position, called from the same `setupHandCardDragAndDrop()` entry point that already
+fires on `afterSwap`/`DOMContentLoaded`. Don't invent a second `WhatHappened`-shaped
+mechanism for a UI element that has no server state.
+
+**CSS**: `.hand-symbol.dragging` added as a sibling selector to `.card-container.dragging`
+(same declarations: opacity 0.5, `scale(0.95)`, `cursor: grabbing`) — not nested, so it's
+one shared drag-feedback rule for two different draggable element types. `.hand-symbol`
+also gained `cursor: grab` at rest, matching the affordance real cards already had via
+`[draggable="true"]` (cards don't need an explicit `cursor: grab` rule — check why before
+copying one over reflexively; here it was added because `.hand-symbol` had no prior cursor
+rule at all).
+
+**Test**: `test/verification/verify-hand-symbol-reposition.spec.ts` drags the symbol,
+asserts DOM order changed and that real cards' `data-hand-position` values are untouched
+(the sentinel path never touches them), then draws a card via `.draw-button` and confirms
+the symbol re-inserts at its stored slot while the newly drawn card still appends after
+the last real card — i.e. the restore and the server's real-card rendering don't collide.

@@ -339,6 +339,32 @@ exist per playmat, so the old hardcoded colors weren't present for the default m
 4 Playwright failures/timeouts. Not this owner's territory (that's `shuffler-looks-like-itself`
 / prep-picker test fixtures), noted here only because it landed in the same change.
 
+### 2026-08-11: Hand-symbol becomes a draggable easter egg
+
+The `.hand-symbol` (hand image + card count, `hand-components.ts`) can now be dragged
+into any `.hand-drop-zone` in `#hand-cards`, alongside real cards — purely client-side
+and cosmetic, not `GameState`, not `WhatHappened`. `game.js` gained a sentinel
+(`HAND_SYMBOL_SENTINEL`) that `handleDragStart`/`handleDrop` check first, before the
+existing real-card logic; instead of the `/move-hand-card` POST, the drop does a plain
+DOM `insertBefore` and saves the chosen position in `sessionStorage`
+(`hand-symbol-position:<gameId>`). A new `restoreHandSymbolPosition()` (called at the top
+of `setupHandCardDragAndDrop()`, already invoked on `htmx:afterSwap` and
+`DOMContentLoaded`) re-applies the saved position after every full re-render, since the
+server always renders `.hand-symbol` last. CSS: `.hand-symbol.dragging` added as a
+sibling selector to `.card-container.dragging` (same opacity/scale/cursor rule), plus
+`cursor: grab` at rest.
+
+New spec `test/verification/verify-hand-symbol-reposition.spec.ts`: drags the symbol,
+confirms real cards' `data-hand-position` is untouched, draws a card, and confirms the
+symbol re-inserts at its saved slot while the new card still appends last.
+
+**New shape recorded in architecture.md**: this is the first drag-and-drop participant
+in `#hand-cards` that isn't a `GameCard` — no `data-hand-position`, no server mutation.
+The three-part template (sentinel in `draggedFromPosition`, plain-DOM move instead of
+the `/move-hand-card` POST, restore-after-swap hooked into the existing
+`setupHandCardDragAndDrop()` entry point) is the pattern for any future non-card
+draggable in the hand row.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.
