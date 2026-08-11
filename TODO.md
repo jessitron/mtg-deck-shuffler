@@ -163,42 +163,6 @@ section is just a wall between Jess and the live work.
   - Related: `.scratch/shuffler-architecture-review/issues/02-tabletop-send-veto-hook.md`,
     `services/spine/interpreter/docs/journeys/README.md`.
 
-- GRILLING: `tabletop-stale-selection-fix` Fix the tldraw stale-selection bug properly, not just consolidate its workaround
-  - Surfaced 2026-08-10 while grilling Candidate 5 of `apps/tabletop/notes/ARCHITECTURE-REVIEW-2026-08-10.html`
-    ("Name the stale-selection workaround once"), which proposed consolidating five duplicated
-    `setSelectedShapes([])` call sites (`MtgCardShapeUtil.tsx`, `MtgCounterShapeUtil.tsx`,
-    `CardContextMenu.tsx`, `SelectionClearingNoteShapeUtil.ts`, `SelectionClearingImageShapeUtil.ts`)
-    into one named helper `clearStaleSelection(editor)` — framed as a pure, low-risk consolidation.
-  - Jess reported the bug still happens in circumstances the five patches don't cover — e.g.
-    "selecting an image then a card." Research (background agent, 2026-08-10, written up at
-    `apps/tabletop/notes/RESEARCH-stale-selection-bug.md`, committed) found why:
-    - Real tldraw bug, maintainer-acknowledged: `github.com/tldraw/tldraw#5613`. A partial fix
-      (`github.com/tldraw/tldraw#7936`, merged 2026-03-10) is already in the installed tldraw
-      5.2.5 — it only covers "nothing was selected," not "something else is selected" (this
-      app's case). Confirmed still unfixed in tldraw v5.3.0 (2026-08-05, latest). No config flag
-      or documented hook covers it; upgrading tldraw would not help.
-    - **Candidate 5 as scoped would not fix the bug** — it only DRYs up the existing
-      `onTranslateEnd`-based clears. The actual gap is structural: all five patches clear
-      selection only after a completed *drag*; a plain *click* (no drag) also leaves a shape
-      selected and nothing clears that. Click an image, then drag a card — still broken, and no
-      sixth `onTranslateEnd` site anywhere closes it.
-    - One real fix candidate found: `editor.getStateDescendant('select.pointing_shape')`,
-      monkey-patching the private `startTranslating` method at editor-mount time (the same
-      `getStateDescendant` technique tldraw's own docs use for a sibling case, `select.idle`'s
-      double-click override), applied eagerly rather than only inside a translate. Would close
-      the click-then-drag gap and consolidate all five sites into one — at the cost of patching a
-      private, unexported tldraw method (not semver-protected), vs. today's approach which only
-      touches documented `ShapeUtil` hooks.
-  - Open question, not yet decided: try an eager-clear via a fully public API (`editor.on`
-    pointer-event listening, maybe via `/prototype`) before committing to the private-method
-    patch — Jess hasn't weighed in yet.
-  - Next step when picked back up: resolve that open question, then implement test-first
-    (reproduce "click image → drag card moves the image" as a failing Playwright spec), consult
-    `tabletop-shape-mechanics-review` on the plan before implementing, implement, verify,
-    `tabletop-shape-mechanics-update` after.
-  - The review's other five candidates (1–4, 6) are also completely untracked — nothing links
-    them into `TODO.md` or `.scratch/` yet either.
-
 ## Backlog
 
 - GRILLING: `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there ← was: JES-85
