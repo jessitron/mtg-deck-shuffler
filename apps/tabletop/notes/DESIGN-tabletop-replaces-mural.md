@@ -148,7 +148,7 @@ Charted with `/wayfinder`, one at a time. Each map's own `map.md` links back to 
 | 2   | Table layout                                  | `.scratch/tabletop-table-layout/` | charted (was `tabletop-card-physics-starter`) |
 | 3   | Cards come and go                             | `.scratch/tabletop-cards-come-and-go/` | charted 2026-08-08                       |
 | 4   | Only Magic moves                              | —                                 | not charted                                   |
-| 5   | The table reports                             | —                                 | not charted                                   |
+| 5   | The table reports                             | `.scratch/tabletop-table-reports/` | charted 2026-08-10                       |
 | 6   | The table remembers                           | —                                 | not charted                                   |
 
 **Order.** Map 1 blocks map 2: the square layout, the command zone, and life counters all want
