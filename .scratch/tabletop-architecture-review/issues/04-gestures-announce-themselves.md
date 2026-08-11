@@ -1,6 +1,11 @@
 # 04 — Let each gesture announce itself, instead of reverse-engineering it from a store diff
 
-**Status:** needs-triage
+**Status:** wontfix — Jess's call (2026-08-11): this belongs with the domain/physical events
+design work (`.scratch/tabletop-table-reports/issues/02-event-vocabulary-domain-and-physical.md`),
+not as a standalone cleanup here. That work already distinguishes domain events (`card.moved.v1`)
+from physical events (`card.repositioned.v1`) at the contract level; when it reaches
+`usePhysicsAnnouncements.ts`/`MtgCardShapeUtil.tsx`, self-announcement vs. centralized diffing
+should be decided there, in that context, not in isolation.
 
 **Files:** `src/client/usePhysicsAnnouncements.ts` (159 lines), `src/client/shapes/MtgCardShapeUtil.tsx`
 
