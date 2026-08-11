@@ -29,15 +29,9 @@ import {
   nameLabelPosition,
   LIFE_COUNTER_W,
   LIFE_COUNTER_H,
+  checkZonesDisjoint,
 } from "../src/server/cardLayout";
 import { ZONE_LABEL_BAND } from "../src/shared/mtgZoneShape";
-
-/** Smallest empty band between two AABBs on either axis; negative means overlap. */
-function separation(a: Bounds, b: Bounds): number {
-  const dx = Math.max(b.x - (a.x + a.w), a.x - (b.x + b.w));
-  const dy = Math.max(b.y - (a.y + a.h), a.y - (b.y + b.h));
-  return Math.max(dx, dy);
-}
 
 function seatZones(seatIndex: number): Record<string, Bounds> {
   return {
@@ -236,20 +230,18 @@ describe("cardLayout — the square (compass seats around a centered Stack)", ()
   // closest-match, and furniture z-order is chronological draw order —
   // meaningless as a semantic tiebreak. So every zone AABB keeps at least a
   // GAP-wide empty band from every other, across all four seats AND the
-  // Stack (owners/tabletop-shape-mechanics, watch point 8).
+  // Stack (owners/tabletop-shape-mechanics, watch point 8). checkZonesDisjoint
+  // is the same check cardLayout.ts runs on itself at module load — this test
+  // catches a break in CI/local runs, the module-load assertion catches it at
+  // the point a constant changes.
   it("keeps every zone AABB at least a GAP apart, across all four seats and the Stack", () => {
-    const zones: Array<readonly [string, Bounds]> = [["stack", stack]];
+    const zones: Record<string, Bounds> = { stack };
     for (let seat = 0; seat < 4; seat++) {
-      zones.push(...Object.entries(seatZones(seat)).map(([name, b]) => [`seat${seat}.${name}`, b] as const));
-    }
-    for (let i = 0; i < zones.length; i++) {
-      for (let j = i + 1; j < zones.length; j++) {
-        expect(
-          separation(zones[i][1], zones[j][1]),
-          `${zones[i][0]} is within a GAP of ${zones[j][0]}`
-        ).toBeGreaterThanOrEqual(GAP);
+      for (const [name, b] of Object.entries(seatZones(seat))) {
+        zones[`seat${seat}.${name}`] = b;
       }
     }
+    expect(() => checkZonesDisjoint(zones, GAP)).not.toThrow();
   });
 
   // A stack card lands on the Stack's side facing its player's mat, centered
@@ -310,5 +302,46 @@ describe("cardLayout — the square (compass seats around a centered Stack)", ()
     const wrapped = landPosition(0, 9); // past 9 columns
     expect(wrapped.x).toBe(first.x);
     expect(wrapped.y).toBeGreaterThan(first.y); // wrapped to the next row
+  });
+});
+
+// checkZonesDisjoint promotes the "keeps every zone AABB apart" invariant above
+// into cardLayout.ts itself, so a constant edit that breaks it throws the
+// moment the module loads (server boot), not just here.
+describe("cardLayout — checkZonesDisjoint (the runtime form of the disjointness invariant)", () => {
+  it("does not throw when every zone is at least minGap apart", () => {
+    expect(() =>
+      checkZonesDisjoint(
+        {
+          a: { x: 0, y: 0, w: 10, h: 10 },
+          b: { x: 20, y: 0, w: 10, h: 10 },
+        },
+        10
+      )
+    ).not.toThrow();
+  });
+
+  it("throws naming both zones and the actual gap when two zones are closer than minGap", () => {
+    expect(() =>
+      checkZonesDisjoint(
+        {
+          library: { x: 0, y: 0, w: 10, h: 10 },
+          graveyard: { x: 15, y: 0, w: 10, h: 10 },
+        },
+        10
+      )
+    ).toThrow(/library.*graveyard.*5/);
+  });
+
+  it("throws when two zones overlap outright (negative separation)", () => {
+    expect(() =>
+      checkZonesDisjoint(
+        {
+          playmat: { x: 0, y: 0, w: 10, h: 10 },
+          stack: { x: 5, y: 5, w: 10, h: 10 },
+        },
+        0
+      )
+    ).toThrow(/playmat.*stack/);
   });
 });
