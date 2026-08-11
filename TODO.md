@@ -13,29 +13,6 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
-- `sleeve-picks-from-playmat-colors` Derive sleeve-color quick-picks from the selected playmat's
-  entry in `playmat-colors.json`, instead of the current hardcoded mana-pie array
-  - Surfaced 2026-08-11 building `apps/shuffler/tools/playmat-colors/` — a standalone dev tool
-    that extracts contrasting, saturated accent colors from a playmat image via a local web
-    picker, and saves 2/3/5-color picks per image to
-    `apps/shuffler/public/images/playmats/playmat-colors.json`.
-  - Today, `SLEEVE_QUICK_PICKS` in `apps/shuffler/src/table-look.ts` is a hardcoded 5-entry
-    mana-pie array (White/Blue/Black/Red/Green), unrelated to whichever playmat is selected.
-    The idea: when a player picks a playmat on the prep screen, read that image's `chosenFive`
-    (or `chosenThree`) entry from `playmat-colors.json` and offer those as the sleeve
-    quick-picks instead — so sleeve suggestions actually match the mat.
-  - This is explicitly a **first step**: later work (not part of this item) would send the
-    playmat's chosen accent colors to the Tabletop too, for things like life counters.
-  - Open questions this would need to work through: how `table-look.ts` reads a JSON file at
-    request time (or caches it) without breaking its "server-side truth" role; what happens for
-    a playmat with no `playmat-colors.json` entry yet (fall back to the mana pie?); whether
-    3-color or 5-color entries are the right fit for exactly 5 sleeve quick-pick slots.
-  - Related: `playmat-colours-fleet-or-shuffler` above — that item asks whether *playmat*
-    accent colors (`--playmat-one`/`--playmat-two`) belong to the fleet or the Shuffler; this
-    one is about *sleeve* colors and a different data source (the new JSON tool, not CSS
-    tokens), but both are "where do curated-per-mat colors live" questions and may want the
-    same answer.
-
 - `shuffler-spine-gateway-stale` Rewrite `HttpSpineGateway` around the new Spine's `/join` and traceparent-header contract
   - Surfaced 2026-08-11 doing ticket 04 of `.scratch/spine-roda-rewrite/` (contract-validated
     event ingestion). `apps/shuffler/src/port-spine/HttpSpineGateway.ts`'s `ensureTable`/
