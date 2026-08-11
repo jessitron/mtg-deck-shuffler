@@ -279,7 +279,8 @@ Consequences worth holding:
 | `apps/shuffler/src/view/common/html-layout.ts`        | **The Shuffler's browser telemetry bootstrap — single-sourced since arch ticket 06 (`b268414`, 2026-08-08).** `formatHtmlHead(options)` is the one page shell: every Shuffler page's `<head>` — EJS pages via `views/partials/head.ejs` (a thin adapter reached through `app.locals`) and TS pages (`/game`, error pages) via `formatPageWrapper` — comes from here, so the bootstrap appears exactly once and cannot diverge again. Since `33b54d3` (2026-08-10) the guard+init is `initHoneycombTracing(apiKey)`, shipped as the exported literal string `HONEYCOMB_TRACING_INIT_SCRIPT`, tested by evaling that exact string in `apps/shuffler/test/html-layout-tracing-guard.test.ts`. See "The Shuffler's browser bootstrap" below for the script order, the ordering constraint, the guard (now key-aware), and the apiKey fallback.                                                                                                                                                              |
 | `apps/tabletop/src/client/observability/index.ts`     | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific". Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
 | `services/spine/` — **rebooted, ticket 02 of `spine-roda-rewrite`, 2026-08-11** | New Roda + Sequel + SQLite + Minitest app, boot-only so far (`GET /up`). `config/telemetry.rb`: `OpenTelemetry::SDK.configure` with `opentelemetry-exporter-otlp` + `opentelemetry-instrumentation-rack`, `service_name` `"mtg-spine"` (renamed from `"spine"` in a same-day follow-up, to match the fleet's naming convention alongside `mtg-tabletop`/`mtg-deck-shuffler` — `services/spine/.env`'s `OTEL_SERVICE_NAME` and `config/telemetry.rb`'s `ENV.fetch` fallback default both updated), **100% sampling** — no `BackgroundChatterSampler`-style down-sampling, per the rewrite spec (the old sampler was flagged broken and deliberately not ported). **Rack/Roda has no auto-injection point for instrumentation gems** — unlike Rails' railtie hook, `opentelemetry-instrumentation-rack` only *registers* itself via `SDK.configure`'s `use`; it emits zero spans until the app itself mounts its middleware. `app.rb` does this explicitly: `use(*OpenTelemetry::Instrumentation::Rack::Instrumentation.instance.middleware_args)`. Skipping this fails **silently** — the app boots, logs "Rack was successfully installed", requests return 200, but no spans ever reach Honeycomb. Confirmed by reading `opentelemetry-instrumentation-rack` 0.31.1's `instrumentation.rb`: `middleware_args` is the documented way to get the right `TracerMiddleware` class (it varies — Stable/Old/Dup — by `OTEL_SEMCONV_STABILITY_OPT_IN`). **Any future Rack-based instrumentation gem could hit this same trap** — check for an explicit `use(...)` requirement, don't assume Rails-style auto-injection. `services/spine/run` mirrors `apps/tabletop/run`'s `.be`-then-`.env` pattern (not the Shuffler's, which deliberately skips `.be`), polling `GET /up` — matching what root `./run`'s readiness loop already expected. `services/spine/.env` follows the same `OTEL_EXPORTER_OTLP_*` pattern as the other ships, plus an explicit `OTEL_TRACES_SAMPLER="always_on"` (belt-and-suspenders — the SDK default is already 100%/`parentbased_always_on`). Root `./run`'s `[ -x services/spine/run ]` conditional (from ticket 01) picked this up automatically, no change needed there. Verified live: booted with `PORT=4600 ./run`, curled `/up` repeatedly, confirmed a `GET` root span landed in Honeycomb env `local`, dataset `mtg-spine` (originally verified under dataset `spine`; renamed same day), via the **`honeycomb-modernity`** MCP server (team `modernity`) — not the default `honeycomb` MCP server, which points at an unrelated demo team and has no fleet data; picking the wrong one looks like "no spans" and can be mistaken for a wiring bug. `services/spine/interpreter/docs/journeys/` plus the ship's `CLAUDE.md`/`README.md`/`SEAMAP.md`, all of which survived ticket 01's delete, now have this wiring reflected in `CLAUDE.md`. **Still open**: no sampler (100% is the deliberate starting point, to revisit once start/stop behavior is confirmed clean), no logs pipeline (`spine-logs-in-traces` in `TODO.md`), no `traceparent`-in-body minting site (there are no events yet — tables/seats/events land in a later ticket). |
-| `services/spine/app.rb` `POST /join` — **the Spine's first hand-rolled span-attribute code, ticket 03 of `spine-roda-rewrite`, 2026-08-11** | `config/telemetry.rb` is untouched by this ticket — still just the Rack auto-instrumentation from ticket 02. `app.rb` now adds application-level span attributes on top of it, Invariant-1 style: `current_span.add_attributes("table.name" => name, "player.name" => player_name)` as soon as both are parsed, then `"join.result" => "joined", "seat.number" => outcome[:seat_number]` on success. `current_span` is a one-line helper, `OpenTelemetry::Trace.current_span` — no tracer/span creation, purely stamping the ambient Rack-instrumentation span, matching "the Shuffler creates zero manual spans" further down this table. **Failure paths funnel through one helper, `mark_span_failed(result, error)`**: sets `join.result` to the specific outcome (`invalid_input` for `JSON::ParserError`/`KeyError`, `seat_occupied` for `Table::SeatOccupied`, `table_full` for `Table::TableFull`) and calls `current_span.status = OpenTelemetry::Trace::Status.error(error.message)` — the Ruby OTel API's span-error-marking call, the Ruby analogue of the Shuffler's `markCurrentSpanAsError`. Every one of the `join.result` values distinguishable today (`joined`, `invalid_input`, `seat_occupied`, `table_full` — `created` vs `joined` is not yet split out; see Watch points) reveals a code path per Invariant 1's "put the condition in an attribute" rule. **No `tracing_util.rb`/helpers file yet** — `current_span` and `mark_span_failed` live directly in `app.rb` next to the one route that uses them; with a single route so far there was nothing to extract to. Whoever adds the next route should watch whether these helpers are still local-only or need to move to a shared file once a second route wants them. **The `traceparent`-in-body gap is unchanged by this ticket**: `mark_span_failed`/`current_span` stamp the *live request span*, never the persisted event — `models/table.rb`'s `mint_event!` (called from `Table.join!` → `create_with_event!`/`take_seat!`) still has no `traceparent` field in its `Event.create` call, confirmed by reading the file. The Roda Spine has no `current_traceparent`-equivalent helper yet, deferred to ticket 04/05 per the "Depends on" note above — this ticket's span attributes are pure telemetry-on-the-request, not durable event data. |
+| `services/spine/app.rb` `POST /join` — **the Spine's first hand-rolled span-attribute code, ticket 03 of `spine-roda-rewrite`, 2026-08-11** | `config/telemetry.rb` is untouched by this ticket — still just the Rack auto-instrumentation from ticket 02. `app.rb` now adds application-level span attributes on top of it, Invariant-1 style: `current_span.add_attributes("table.name" => name, "player.name" => player_name)` as soon as both are parsed, then `"join.result" => "joined", "seat.number" => outcome[:seat_number]` on success. `current_span` is a one-line helper, `OpenTelemetry::Trace.current_span` — no tracer/span creation, purely stamping the ambient Rack-instrumentation span, matching "the Shuffler creates zero manual spans" further down this table. Every one of the `join.result` values distinguishable today (`joined`, `invalid_input`, `seat_occupied`, `table_full` — `created` vs `joined` is not yet split out; see Watch points) reveals a code path per Invariant 1's "put the condition in an attribute" rule. **`mark_span_failed` was generalized in ticket 04** (see the next row) into `mark_span_failed(attribute, result, error)`, taking the attribute key as a parameter so `/join` and `/tables/:table_id/events` can share one helper instead of each carrying its own near-identical version — `/join`'s call sites became `mark_span_failed("join.result", "invalid_input", e)` etc., same values as before, just the attribute name is now explicit at the call site rather than baked into the helper. **The `traceparent`-in-body gap this row used to describe no longer exists as originally framed**: ticket 04 resolved it not by adding a `current_traceparent`-equivalent minting site but by dropping `traceparent` from the envelope contract entirely (`envelope.v3.json`) — see the "Trace context embedded in event bodies" section below, rewritten for v3. `models/table.rb`'s `mint_event!` still has no trace field in its `Event.create` call, and now never will; that absence is the contract's design, not a gap. |
+| `services/spine/app.rb` `POST /tables/:table_id/events` — **generic contract-validated event ingestion, ticket 04 of `spine-roda-rewrite`, 2026-08-11** | The Spine's first route that accepts an arbitrary sender-minted envelope rather than a fixed shape. Same Invariant-1 telemetry pattern as `/join`: on success, `current_span.add_attributes("table.id" => table.id, "event.id" => ..., "event.name" => ..., "event.result" => (outcome[:duplicate] ? "duplicate" : "accepted"))` — the dedup path gets its own distinguishing value (`"duplicate"`), not folded into `"accepted"`, so a query can tell "this table is receiving events" apart from "senders are retrying". Failure paths call the now-shared `mark_span_failed("event.result", "invalid_input", e)` for `JSON::ParserError` and `mark_span_failed("event.result", "contract_violation", e)` for `EventContract::Violation` (the new contract-validation layer, `lib/event_contract.rb`) — same helper `/join` uses, just with `/join`'s hardcoded `"join.result"` now passed explicitly. **`app.rb`'s two near-identical span-failure helpers were collapsed into one** by this refactor: `mark_span_failed(attribute, result, error)`, used by both routes — the general shape any third route should reach for; there is no separate `mark_event_failed`. **Contract validation itself (`EventContract.validate!` in `models/table.rb`'s `append_event!`) emits no telemetry of its own** — it either passes or raises `EventContract::Violation`, and the route's `rescue` is what turns that into the `contract_violation` span outcome; there's no separate "which schema rule failed" attribute yet, only the exception message via `current_span.status`. |
 | ~~`services/spine/config/initializers/opentelemetry.rb`~~ (historical) | Was: Ruby `SDK.configure` + `use_all`, then (since `spine-sampler`, 2026-08-10) `OpenTelemetry.tracer_provider.sampler = OpenTelemetry::SDK::Trace::Samplers.parent_based(root: TelemetrySampler::BackgroundChatterSampler.new)`. Rack instrumentation extracted inbound W3C context so a Shuffler-initiated trace continued through event ingestion. **Deleted along with the rest of the Rails Spine, ticket 01, 2026-08-10** — not live wiring; a new Roda-based init will need to be written from scratch (don't assume this shape is still on disk). |
 | ~~`services/spine/lib/telemetry_sampler.rb`~~ (historical) | Was the **first Ruby sampler in the fleet**, ported from the Shuffler's `telemetry-sampler.ts` — same `CHATTER_SAMPLE_RATIO = 0.01`, same "trickle, not zero" reasoning (a failing probe should stay visible). `TelemetrySampler.background_chatter?(attributes)` matched `kube-probe`/`elb-healthchecker` in the user-agent, or path exactly `/up`/`/rails/health` (query string stripped), reading **both** semconv spellings per Invariant 4. **Deleted, ticket 01, 2026-08-10.** The Roda rewrite spec explicitly says not to port `BackgroundChatterSampler` back — it was flagged broken — and to start the new service at 100% sampling instead. If a sampler is wanted again later, treat it as new work, not a restore. |
 | ~~`services/spine/app/models/table.rb` `record_span_attributes`~~ (historical) | Stamped every accepted event onto the current (request) span: `event.name`/`.seq`/`.initiator`/`.occurred_in`, plus (since `envelope.v2.json`, 2026-08-10) `event.origin`/`event.significance` — straight passthroughs of the `Event` columns. **Deleted, ticket 01, 2026-08-10**, along with the rest of `app/models/`. The Roda rewrite will need an equivalent stamp-on-accept site once it has an event model again; the field list above is worth copying. |
@@ -450,11 +451,12 @@ tail as `GAME_HEAD_SCRIPTS_HTML`. One side effect of unification: `/game` now fe
 `/browser-tab-id.js` as a static asset instead of inlining it — covered by the existing
 by-extension asset sampling, not a new noise source.
 
-### Trace context embedded in event bodies (`traceparent`-in-body)
+### Trace context embedded in event bodies (`traceparent`-in-body) — **superseded for the Spine by `envelope.v3.json`, ticket 04, 2026-08-11**
 
 **Two separate, complementary mechanisms carry trace context on this fleet, and this file
 had no section on the second one until `tabletop-cards-come-and-go` ticket 05
-(2026-08-09) even though two ships were already doing it.**
+(2026-08-09) even though two ships were already doing it.** As of ticket 04, the two
+mechanisms no longer both apply to the Spine's envelope — see the rewrite below the table.
 
 1. **HTTP-header propagation** — automatic, via undici auto-instrumentation on outbound
    `fetch`/HTTP calls. This is how a Shuffler-initiated trace continues into the Spine
@@ -462,30 +464,55 @@ had no section on the second one until `tabletop-cards-come-and-go` ticket 05
    Ephemeral: it only exists on the wire for that one request.
 2. **Body-embedded `traceparent`** — a W3C `00-{traceId}-{spanId}-{flags}` string minted
    into the JSON payload itself, alongside durable fields like `id` and `occurredAt`.
-   This is for data that outlives the request: the Spine's persisted event log and its
-   `/admin/tables` trace-link rendering need a `traceparent` *value*, not a header, because
-   by the time an admin views the table the original request's span is long gone.
-   `contracts/envelope.v1.json`'s `traceparent` field (pattern
-   `^00-[0-9a-f]{32}-[0-9a-f]{16}-[0-9a-f]{2}$`, required) is explicit that this is
+   This was for data that outlives the request: the Spine's persisted event log and its
+   `/admin/tables` trace-link rendering needed a `traceparent` *value*, not a header,
+   because by the time an admin views the table the original request's span is long gone.
+   `contracts/envelope.v1.json`/`v2.json`'s `traceparent` field (pattern
+   `^00-[0-9a-f]{32}-[0-9a-f]{16}-[0-9a-f]{2}$`, required) was explicit that this was
    **observability only, never durable causality** — that's the envelope's `id`.
 
-Header propagation and body-embedded `traceparent` answer different questions ("what
-trace is this HTTP call part of" vs. "what trace should this stored record link back
-to") and neither substitutes for the other.
+**`envelope.v3.json` (ticket 04) drops mechanism 2 for inbound events entirely** — the
+Spine decided the persisted event log doesn't carry a trace field at all, in either
+direction. Inbound (`POST /tables/:table_id/events`), trace context travels **only** in
+the HTTP `traceparent` header, extracted automatically by Rack instrumentation — no
+code needed, and no `current_traceparent`-equivalent minting site was written for the
+Spine. Outbound, ticket 05's SSE stream will carry `meta.traceparent` **alongside** the
+envelope (a sibling field in the wire message, not merged into it) rather than inside
+it — not yet implemented, but already named in the contract's description field so the
+shape is decided ahead of the code. The accepted tradeoff, stated in
+`services/spine/CLAUDE.md`: an event minted before someone is watching its table's SSE
+stream has no way to link back to the trace that created it. That's a deliberate design
+choice per the rewrite spec, not a bug to fix later.
 
-**The mint/format pattern now exists in three places, one per ship, each reading its own
-tracing API's ambient span:**
+**This makes the Shuffler's outbound side stale, not fixed by this ticket.**
+`apps/shuffler/src/port-spine/HttpSpineGateway.ts`'s `sendEvent` still builds its
+envelope via `apps/shuffler/src/port-tabletop/types.ts`'s `EventEnvelope`, which always
+includes a `traceparent` field (via `currentTraceparent()`, see the table below) — but
+`envelope.v3.json` now has `additionalProperties: false` with no `traceparent` property,
+so a real POST from the Shuffler to the Spine's new `/tables/:table_id/events` would
+fail contract validation on that field alone, independent of the gateway's other
+staleness (still calling the deleted `/tables/lookup`/`/tables`/`/tables/:id/seats`
+routes rather than the new `/join`). Filed as a buoy, `shuffler-spine-gateway-stale` in
+`TODO.md`, at ticket-04 time rather than fixed here — nothing in production calls this
+gateway successfully today (`services/spine/SEAMAP.md`), and rewiring it is explicitly
+out of scope for `spine-roda-rewrite`. Whoever picks that up must also stop sending
+`traceparent` in the body, not just rebuild around `/join`.
+
+Header propagation and body-embedded `traceparent` still answer different questions
+("what trace is this HTTP call part of" vs. "what trace should this stored record link
+back to") for the ships still doing both — this is now a Spine-specific narrowing, not a
+fleet-wide retirement of mechanism 2.
+
+**The mint/format pattern still exists in two live places** (down from three, now that
+the Spine's inbound path needs no minting site at all):
 
 | Where | Signature | Behavior with no active span |
 | --- | --- | --- |
-| ~~`services/spine/app/controllers/application_controller.rb` `current_traceparent`~~ (historical — file deleted, ticket 01, 2026-08-10) | Was `-> String` | Synthesized a well-formed random traceparent (`SecureRandom.hex`) — the Spine's own events (`table.created`, `seat.taken`) always needed a value to persist. **The Roda rewrite's boot-only ticket (02, 2026-08-11) does not yet need this** — no tables/seats/events exist yet, so there's nothing to stamp a `traceparent` onto. Copy this shape (never-`nil`, since the envelope's `traceparent` field is required) rather than the Tabletop's optional-`undefined` shape, once a later ticket adds events. |
+| ~~`services/spine/app/controllers/application_controller.rb` `current_traceparent`~~ (historical — file deleted, ticket 01, 2026-08-10) | Was `-> String` | Synthesized a well-formed random traceparent (`SecureRandom.hex`) — the old Rails Spine's own events always needed a value to persist. **Superseded, not merely stale**: ticket 04's `envelope.v3.json` means the Roda Spine will never need an equivalent helper for inbound events — there is no field to stamp. Ticket 05's outbound `meta.traceparent` may still want something like this on the *send* side; check that ticket before assuming this shape applies. |
 | `apps/tabletop/src/client/observability/index.ts` `currentTraceparent` | `-> string \| undefined` | Returns `undefined` — used only for propagation on a websocket connection URL, never for a durable field, so "no span, no value" is correct there. |
-| `apps/shuffler/src/port-tabletop/traceparent.ts` `currentTraceparent` (new, ticket 05) | `-> string` | Synthesizes a well-formed random traceparent, same as the Spine — the envelope's `traceparent` field is **required**, so this helper can never return `undefined`. Additionally sets `traceparent.synthesized: true` on the active span (if one exists but lacks a valid `SpanContext`) when the fallback fires, so a real occurrence in production (vs. the expected test-only case, since every `card.played`/`seat.joined` send happens inside an Express request span) is visible on the trace rather than silently masquerading as a real trace link. |
+| `apps/shuffler/src/port-tabletop/traceparent.ts` `currentTraceparent` (ticket 05 of `tabletop-cards-come-and-go`) | `-> string` | Synthesizes a well-formed random traceparent when no active span exists. **Still correct for its original purpose** (the Tabletop's `card.played`/`seat.joined` envelope, a separate contract from the Spine's) but, per the buoy above, **wrong when reused for the Spine's `envelope.v3.json`** via `HttpSpineGateway.sendEvent` — that call site needs to stop calling this helper for the Spine leg, or the Spine leg needs a header-only rewrite, before it's fixed. Also sets `traceparent.synthesized: true` on the active span when the fallback fires, so a real occurrence in production is visible on the trace. |
 
-All three format identically: `00-{32 hex traceId}-{16 hex spanId}-{2 hex flags}`. The
-Shuffler's is the newest and the only one with the synthesized-fallback attribute — worth
-copying to the Spine's `current_traceparent` if its silent fallback is ever suspected of
-firing outside tests.
+Both format identically: `00-{32 hex traceId}-{16 hex spanId}-{2 hex flags}`.
 
 ### Dev-tooling telemetry (the pattern for instrumenting our own tools)
 
@@ -767,6 +794,27 @@ its own `window.onerror`/`unhandledrejection` handlers at
 
 ## History (why these rules exist)
 
+- **Ticket 04 of `spine-roda-rewrite` (2026-08-11) — generic contract-validated event ingestion,
+  and `traceparent` leaves the envelope for good.** `POST /tables/:table_id/events` extends
+  ticket 03's Invariant-1 pattern to a second route: `table.id`/`event.id`/`event.name` plus
+  `event.result` (`accepted`/`duplicate` on success — the dedup path gets its own value, confirmed
+  distinguishable, not folded into `accepted` — `invalid_input`/`contract_violation` on failure).
+  **`app.rb`'s two near-identical span-failure helpers were collapsed into one**:
+  `mark_span_failed(attribute, result, error)` now takes the attribute key as a parameter, used by
+  both `/join` and the new route, instead of `/join` hardcoding `join.result` inside the helper and
+  a hypothetical twin hardcoding `event.result`. **The bigger change is to the contract, not the
+  telemetry**: `contracts/envelope.v3.json` drops `traceparent` as an envelope field entirely.
+  Inbound trace context travels only via the HTTP `traceparent` header (automatic Rack extraction,
+  no new code); outbound (ticket 05's SSE) will carry it as a sibling `meta.traceparent`, not
+  merged into the envelope. The persisted `Event` row gets no trace column, unchanged — this was
+  already true, and now it's also permanent by contract rather than an open gap. Rewrote the
+  "Trace context embedded in event bodies" section above for v3 rather than leaving it describing
+  a mechanism the Spine's inbound path no longer uses. **One real consequence surfaced, not
+  fixed, by this ticket**: the Shuffler's `HttpSpineGateway.sendEvent` still sends `traceparent` in
+  the body (via `port-tabletop/traceparent.ts`'s `currentTraceparent()`, reused from the Tabletop
+  send path) and still calls routes ticket 03 deleted — filed as the `shuffler-spine-gateway-stale`
+  buoy in `TODO.md` rather than fixed here, since nothing in production calls this gateway
+  successfully yet and rewiring it is out of scope for this spec.
 - **Ticket 03 of `spine-roda-rewrite` (2026-08-11) — the Spine's first hand-rolled span attributes,
   `POST /join`.** Everything since ticket 02 had been auto-instrumentation only. This lands
   Invariant 1 in Ruby for real: `current_span.add_attributes(...)` for inputs (`table.name`,
