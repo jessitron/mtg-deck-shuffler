@@ -117,12 +117,21 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   passing and meaningful — a prior inline sampler was silently broken for months (a case-mismatch
   in a string match), and every ALB probe was traced at 100% as a result.
 - **`services/spine/app.rb`'s `current_span`/`mark_span_failed` helpers**: the Spine's hand-rolled
-  span-attribute code — `current_span.add_attributes(...)` for inputs/outcome on both `POST /join`
-  and `POST /tables/:table_id/events`, and one shared `mark_span_failed(attribute, result, error)`.
-  Both still live directly in `app.rb`; extract to a shared file if a third route needs them.
-  `join.result` does not currently distinguish `created` from `joined` — both set `"joined"`.
-  `event.result`'s dedup path does get its own value (`"duplicate"`, distinct from `"accepted"`) —
-  don't collapse it back if this code is touched again.
+  span-attribute code — `current_span.add_attributes(...)` for inputs/outcome on `POST /join`,
+  `POST /tables/:table_id/events`, and now `GET /admin/tables`/`GET /admin/tables/:id`
+  (`admin.table_count`, `table.id`, `admin.result`) — and one shared
+  `mark_span_failed(attribute, result, error)` used by all of them. Still lives directly in
+  `app.rb`; extract to a shared file if it keeps growing. `join.result` does not currently
+  distinguish `created` from `joined` — both set `"joined"`. `event.result`'s dedup path does get
+  its own value (`"duplicate"`, distinct from `"accepted"`) — don't collapse it back if this code
+  is touched again.
+- **The Spine's `GET /admin/tables/:id` show page and its `HONEYCOMB_ENV_SLUG` default**: the
+  page's inline `<script>` builds Honeycomb trace links client-side from live SSE messages'
+  `meta.traceparent`, using `ENV.fetch("HONEYCOMB_ENV_SLUG", "local")` — correct today only because
+  the Spine has no prod deploy yet. Rebuilding that deploy must set
+  `HONEYCOMB_ENV_SLUG=mtg-deck-shuffler` in its env, or every trace link a Spine operator clicks in
+  prod silently points at `local` instead — there's a comment at the `ENV.fetch` call site in
+  `app.rb` flagging this, don't lose it if the surrounding code moves.
 - **Mounting a Rack-based OTel instrumentation gem** (any Ruby service, not just the Spine):
   Rack/Roda has no railtie-style auto-injection point. The gem only *registers* itself via
   `SDK.configure`'s `use` — it emits zero spans until the app explicitly mounts its middleware via
