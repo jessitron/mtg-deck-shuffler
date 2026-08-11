@@ -43,7 +43,7 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
   static override props = mtgZoneShapeProps;
 
   override getDefaultProps(): MtgZoneShape["props"] {
-    return { w: 100, h: 100, zone: "playmat", seatId: null, label: "", sleeveColor: null };
+    return { w: 100, h: 100, zone: "playmat", seatId: null, label: "", sleeveColor: null, imageUrl: null };
   }
 
   override isAspectRatioLocked(): boolean {
@@ -51,7 +51,7 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
   }
 
   component(shape: MtgZoneShape) {
-    const { w, h, zone, label, sleeveColor } = shape.props;
+    const { w, h, zone, label, sleeveColor, imageUrl } = shape.props;
     const playmat = zone === "playmat";
     // Reactive-only: never written to the store, so it produces no synced
     // document write and no undo entry, and is never visible on another
@@ -68,6 +68,9 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
           // ellipse on a non-square box) and not a fixed px (drifts out of proportion as the
           // canvas zooms) — computed fresh from props.h every render instead.
           color: "black",
+          position: "relative", // anchors the picture below, absolutely positioned to fill the box
+          overflow: "hidden", // clips the picture to this same borderRadius, so border and picture
+          // read as one continuous rounded rectangle instead of a square photo behind a round frame
         }
       : {
           width: w,
@@ -131,6 +134,17 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
             padding: 4,
           }}
         >
+          {playmat && imageUrl ? (
+            // Deliberately not tldraw's `.tl-image` class — that class is
+            // `position: absolute; inset: 0` relative to `.tl-image-container`
+            // and would ignore this div's own overflow/border clip entirely
+            // (the same escape-the-wrapper bug the sleeve ring hit once).
+            <img
+              src={imageUrl}
+              alt=""
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
+          ) : null}
           {label}
         </div>
         {sleevePile}
