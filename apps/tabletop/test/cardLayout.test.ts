@@ -174,13 +174,13 @@ describe("cardLayout — player area geometry", () => {
   });
 });
 
-/** Ticket 20: the life counter sits far right on the name row, bigger than that row. */
+/** Ticket 20: the life counter sits above the playmat, right-aligned to it, bigger than the name row. */
 describe("cardLayout — life counter position", () => {
-  it("right-aligns to the player area's right edge, for every seat", () => {
+  it("right-aligns to the playmat's right edge, for every seat", () => {
     for (const seatIndex of [0, 1, 2, 3]) {
       const origin = playerAreaOrigin(seatIndex);
       const pos = lifeCounterPosition(seatIndex);
-      expect(pos.x).toBe(origin.x + PLAYER_AREA_W - LIFE_COUNTER_W);
+      expect(pos.x).toBe(origin.x + PLAYMAT_W - LIFE_COUNTER_W);
     }
   });
 
