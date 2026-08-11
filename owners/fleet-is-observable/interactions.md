@@ -39,9 +39,11 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   (Tabletop, optional/websocket) and `apps/shuffler/src/port-tabletop/traceparent.ts` (Shuffler,
   required for the Tabletop-facing envelope). The Spine's inbound event contract
   (`contracts/envelope.v3.json`) has no `traceparent` field at all — trace context there travels
-  only via the HTTP header. `HttpSpineGateway.sendEvent` still reuses the Shuffler's
-  Tabletop-facing helper for the Spine leg, which is wrong now that the contract rejects that
-  field — tracked as `shuffler-spine-gateway-stale` in `TODO.md`.
+  only via the HTTP header. `HttpSpineGateway.sendEvent` reuses the Shuffler's Tabletop-facing
+  helper to build the envelope (shared `buildCardPlayedEvent`), then **strips `traceparent` back
+  out of the body before serializing** — the mint-then-strip is correct, not a leftover, because
+  undici's OTel auto-instrumentation already puts a live `traceparent` header on the outbound
+  `fetch()` regardless (`shuffler-spine-gateway-stale` closed).
 
 ## Depended on by
 
@@ -204,10 +206,16 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   the active span (`traceparent.synthesized: true`) so a real occurrence in production is visible.
   If the field is optional and only used for point-to-point propagation, `undefined`-on-no-span is
   correct and no flag is needed. **Do not add a Roda-Spine equivalent for inbound events** —
-  `envelope.v3.json` deliberately has no `traceparent` property to receive. Check
-  `apps/shuffler/src/port-tabletop/traceparent.ts`'s existing call sites before assuming they're
-  all still valid — `HttpSpineGateway.sendEvent` calls it to build an envelope the Spine's contract
-  now rejects.
+  `envelope.v3.json` deliberately has no `traceparent` property to receive. `HttpSpineGateway.sendEvent`
+  calls the Tabletop-facing helper to build the envelope, then strips `traceparent` from the body
+  before POSTing — keep that split (mint the field because the helper is shared plumbing; strip it
+  because the contract rejects it) rather than "fixing" it by skipping the mint or adding the field
+  back. **Never hand-set a `traceparent` header on a Spine (or any) outbound `fetch()` to
+  compensate for stripping it from the body** — undici's OTel auto-instrumentation already injects
+  a live one on every outbound call, appending its own after any explicit headers unconditionally,
+  so a hand-set value would only produce a duplicate or a stale header. If a future send path needs
+  trace context on the wire to the Spine, the header is already there for free; don't add body
+  plumbing for it.
 
 ## Not related to
 
