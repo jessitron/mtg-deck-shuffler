@@ -1,7 +1,7 @@
 # The Tabletop replaces Mural
 
 The high-level path for `SEAMAP.md`'s **Mountain 1**. This document is the chart _above_
-the wayfinder maps: it holds the whole parity list in one place, splits it into six maps,
+the wayfinder maps: it holds the whole parity list in one place, splits it into five maps,
 and says what order they go in. Each map points back here; this points at each map.
 
 Source: `notes/ramble-tabletop-replaces-mural.md` (Jess, 2026-08-06) — a dictated pass over
@@ -115,16 +115,6 @@ Subtraction, plus the one gesture that has to work.
 - the Tabletop→Spine sender, a data-flow direction that doesn't exist yet
 - make `contracts/` actually load and validate on both sides, or stop claiming it does
 
-### 6 — The table remembers
-
-- survive a crash or redeploy without losing the game
-- the position of every card
-- the freeform things people drew
-- **the open question:** is this the same mechanism as what goes to the Spine, or a second one?
-  Jess's ramble reopens this. A prior decision exists (2026-08-01, recorded in the parked
-  `card.moved` ticket): persistence is **event-sourced, not snapshotted** — replay the Spine's
-  log on room startup. Map 6 must either honour that or knowingly overturn it.
-
 ## Out of scope
 
 Recorded so it's ruled out rather than forgotten:
@@ -137,8 +127,15 @@ Recorded so it's ruled out rather than forgotten:
 - **Everything else needed to play Magic _correctly_.** This chart is bounded by what Mural
   solves today, not by the game's full surface.
 - **Rules enforcement** — a standing fleet non-goal.
+- **Tabletop-state persistence** — surviving a crash or redeploy without losing card
+  positions and freeform drawings. Descoped from this mountain entirely (Jess, 2026-08-11):
+  it used to be map 6, "The table remembers," but persistence is going to happen a
+  different way, as part of a different map, not as parity work here. Until that map
+  exists, a redeploy still wipes every board — same honest floor as today. The open
+  question map 6 carried (same mechanism as the Spine feed, or a second one?) travels
+  with it, unresolved, to wherever persistence actually gets designed.
 
-## The six maps
+## The five maps
 
 Charted with `/wayfinder`, one at a time. Each map's own `map.md` links back to this document.
 
@@ -149,14 +146,13 @@ Charted with `/wayfinder`, one at a time. Each map's own `map.md` links back to 
 | 3   | Cards come and go                             | `.scratch/tabletop-cards-come-and-go/` | charted 2026-08-08                       |
 | 4   | Only Magic moves                              | —                                 | not charted                                   |
 | 5   | The table reports                             | `.scratch/tabletop-table-reports/` | charted 2026-08-10                       |
-| 6   | The table remembers                           | —                                 | not charted                                   |
 
 **Order.** Map 1 blocks map 2: the square layout, the command zone, and life counters all want
 furniture that behaves, and rebuilding the shape layer underneath finished geometry is the
 expensive way round. Several of map 2's tickets (deck name on the seat label, sleeve and playmat
 picker) genuinely don't touch the shape architecture and can be worked in parallel if you want
-motion. Maps 3–6 are independent of each other; chart one when you're ready to work it, not
-before — six shallow maps are worth less than one deep one.
+motion. Maps 3–5 are independent of each other; chart one when you're ready to work it, not
+before — five shallow maps are worth less than one deep one.
 
 **Parked tickets** live at `.scratch/tabletop-replaces-mural/parked/`: written work that belongs
 to a map that doesn't exist yet. It sits outside any `issues/` directory so no frontier scan

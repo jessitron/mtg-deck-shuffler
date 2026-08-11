@@ -20,8 +20,9 @@ tickets closed): furniture is `mtg-zone`, cards are `mtg-card`, both real custom
 This map builds the geography on top of that settled shape layer.
 
 **All tickets resolved 2026-08-08.** The destination's decisions are made; what remains here
-is one fog line (seat position across a restart) that can't be specified until map 6 decides
-what survives a restart. The decided-but-unbuilt work now lives in the tickets' resolutions,
+is one fog line (seat position across a restart) that can't be specified until persistence
+(descoped from this mountain 2026-08-11, no longer map 6) decides what survives a restart.
+The decided-but-unbuilt work now lives in the tickets' resolutions,
 `apps/tabletop/DESIGN.md`, and `TODO.md` — implementation is the next voyage, not this map's.
 
 ## Notes
@@ -117,7 +118,9 @@ what survives a restart. The decided-but-unbuilt work now lives in the tickets' 
 
 - **Seat position across a restart.** Seat index is `entry.seats.size` at join time, so after a
   server restart players re-joining in a different order land in different places. Belongs
-  here (it's geography) but can't be decided until map 6 says what survives a restart.
+  here (it's geography) but can't be decided until persistence (descoped from this
+  mountain, see `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md` § Out of scope)
+  says what survives a restart.
 
 ## Out of scope
 

@@ -9,13 +9,14 @@ Reference: apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md
 | 3   | Cards come and go                             | `.scratch/tabletop-cards-come-and-go/` | charted 2026-08-08                            |
 | 4   | Only Magic moves                              | —                                      | not charted                                   |
 | 5   | The table reports                             | `.scratch/tabletop-table-reports/`     | charted 2026-08-10                            |
-| 6   | The table remembers                           | —                                      | not charted                                   |
 
 Written work belonging to a map that doesn't exist yet.
 
 These came out of the former `tabletop-card-physics-starter` map when the
 [Tabletop-replaces-Mural chart](../../../apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md) split that
-mountain into six maps (2026-08-06). Each one is good material aimed at a map nobody has charted.
+mountain into maps (2026-08-06; originally six, now five — map 6, "The table remembers,"
+was descoped 2026-08-11: persistence isn't parity work for this mountain and will happen
+as part of a different map). Each one is good material aimed at a map nobody has charted.
 
 They sit here rather than in any `issues/` directory **on purpose**: a wayfinder frontier scan
 looks inside `issues/`, so nothing here can be picked up and worked out of order.

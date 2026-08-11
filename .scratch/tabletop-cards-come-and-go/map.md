@@ -113,8 +113,9 @@ Founding decisions from the charting session (Jess, 2026-08-08):
 ## Not yet specified
 
 - **Who deletes the table on restart** — decided to be something outside the Tabletop,
-  but *which* component, triggered how, isn't specifiable yet; it touches map 6 (what
-  survives a restart) and possibly the Spine. Revisit when those sharpen.
+  but *which* component, triggered how, isn't specifiable yet; it touches persistence
+  (descoped from this mountain 2026-08-11 — what survives a restart, now a different
+  map's work) and possibly the Spine. Revisit when those sharpen.
 
 ## Out of scope
 
