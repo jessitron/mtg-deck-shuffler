@@ -127,18 +127,29 @@ each).
   translated), never a hook writing a prop. That's also better hygiene: the hooks fire every
   frame, so a prop-writing version means per-frame writes to a synced document plus an undo
   trail.
-- **An opaque picture layered over a zone box hides that box's interior.** The playmat's and
-  library's *pictures* stay separate stock `image` shapes on top of the `mtg-zone` box, so
-  border, interior tint and inset shadow are all invisible for those two. Any "armed" or
-  "about to receive" treatment for them must read as an **outward** effect — which rules out
-  the app's one existing armed pattern (`.hand-drop-zone.drag-over`'s "restate the boundary +
-  tint the interior") for exactly the two zones that need it most. A pure-CSS `/design`
-  specimen will hide this; include a stand-in image layer or scope the specimen to the
-  unpictured zones and say so. **Confirmed in the built shape, not just argued (2026-08-08,
-  ticket 14).** `MtgZoneShapeUtil`'s armed treatment is a `box-shadow` ring, which spreads
-  outward from the border edge rather than being drawn inside it — so it rides on top of the
-  playmat's opaque black border and (per this rule) would survive an image overlay the same
-  way. Screenshot-verified the ring shows.
+- **An opaque picture layered over a zone box hides that box's interior — now true of only
+  the library, not the playmat (narrowed 2026-08-11, playmat-image-radius).** This used to
+  cover both: the playmat's and library's *pictures* were separate stock `image` shapes on
+  top of the `mtg-zone` box, so border, interior tint and inset shadow were invisible for
+  both. **The playmat's picture is no longer a separate shape at all** — `MtgZoneShapeUtil`'s
+  own `component()` now renders it as an absolutely-positioned `<img>` *inside* the same
+  bordered div (`position: relative; overflow: hidden` added to that div), clipped to the same
+  `borderRadius: h * 0.05` as the border around it, so image and border read as one continuous
+  rounded rectangle. That means the playmat box's interior is no longer hidden by an overlay —
+  there is no overlay, the picture is a child of the box. **The library's card-back picture is
+  unchanged** — still a separate stock `image` shape layered on top of the `mtg-zone` box, so
+  this limit (and the "any armed treatment must read as outward" consequence below) still
+  governs it alone. Any "armed" or "about to receive" treatment for the library must still read
+  as an **outward** effect — which rules out the app's one existing armed pattern
+  (`.hand-drop-zone.drag-over`'s "restate the boundary + tint the interior") for that zone. A
+  pure-CSS `/design` specimen of the library will still hide this; include a stand-in image
+  layer or scope the specimen to the unpictured zones and say so. **Confirmed in the built
+  shape, not just argued (2026-08-08, ticket 14).** `MtgZoneShapeUtil`'s armed treatment is a
+  `box-shadow` ring, which spreads outward from the border edge rather than being drawn inside
+  it — so it rides on top of the library's opaque black border and (per this rule) would
+  survive an image overlay the same way. Screenshot-verified the ring shows. (At the time this
+  was confirmed, the same reasoning was cited for the playmat too — that citation is now stale
+  for the playmat specifically, since there's no separate image shape left to ride on top of.)
 - **tldraw's `.tl-image` class escapes any intermediate wrapper — a frame around an image
   must style its `<img>` directly.** `.tl-image` is `position: absolute; inset: 0`
   (tldraw.css), anchored to `.tl-image-container` — so an `<img className="tl-image">`
