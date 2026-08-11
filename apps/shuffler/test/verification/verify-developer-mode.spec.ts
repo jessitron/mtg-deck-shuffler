@@ -1,17 +1,3 @@
-/**
- * End-to-End Verification: Developer Mode
- *
- * Developer mode is an undocumented toggle. Hitting the secret URL /dontdie
- * sets a cookie; from then on the game page renders <body class="dev-mode">
- * and the debug info inside the hamburger menu (the .menu-debug block:
- * game id, state version, tab id, State button) becomes visible. Without the
- * cookie that debug block is hidden via CSS. An "Exit dev mode" link inside
- * the menu clears the cookie and returns to normal.
- *
- * RUN: npm run test:verify
- *
- * The test script automatically starts and stops the server on port 3001.
- */
 
 import { test, expect } from '@playwright/test';
 import { seedGame } from './seedGame.js';

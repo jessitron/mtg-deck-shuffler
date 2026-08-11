@@ -2,13 +2,6 @@ import { GameState } from "../../GameState.js";
 import { formatGameEventHtmlFragment } from "./history-components.js";
 import { formatDebugSectionHtmlFragment } from "../debug/debug-section.js";
 
-/**
- * The game's hamburger menu. Rendered inline inside #game-container (so its
- * contents — notably the undo button's live event index/version — re-render
- * with every game-state-updated swap). It is hidden until game.js toggles the
- * `.open` class on #game-menu; that open/closed state is preserved across swaps
- * by game.js (see the menuOpen stash/restore around htmx swaps).
- */
 export function formatGameMenuHtmlFragment(game: GameState): string {
   return `<div id="game-menu" class="game-menu">
       <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Menu" aria-expanded="false">☰</button>

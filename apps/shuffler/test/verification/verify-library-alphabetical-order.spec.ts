@@ -1,18 +1,3 @@
-/**
- * End-to-End Verification: Library Search Is Alphabetical, Always
- *
- * The Library Search modal is sorted by canonical card name for display, on both
- * the game and prep pages, ungrouped and within each type group when grouped. This
- * is a display-only sort — GameState.listLibrary() itself stays position-ordered,
- * since draw / Put on Top / Put on Bottom depend on location.position. There is no
- * toggle back to position order; alphabetical is the only order the modal shows.
- *
- * To prove the order isn't just an accident of deck-storage order, one test
- * shuffles the library before opening the modal and confirms it's still
- * alphabetical.
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect, Page } from '@playwright/test';
 import { seedPrep, seedGame } from './seedGame.js';
@@ -65,10 +50,6 @@ test.describe('Library Search - Alphabetical Order', () => {
   test('shuffling the library does not change the modal order — still alphabetical', async ({ page }) => {
     const gameId = await seedGame(page);
 
-    // Shuffle changes location.position for every card in the library. If the
-    // modal were showing position order (or happened to rely on it), this
-    // would be visible as a reordering. It shouldn't be, because the sort
-    // applied for display always overrides whatever position order says.
     await shuffle(page, gameId);
 
     await page.goto(`${BASE_URL}/game/${gameId}?openLibrary=true`);

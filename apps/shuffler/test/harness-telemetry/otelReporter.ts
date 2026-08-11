@@ -1,19 +1,3 @@
-/**
- * A Playwright reporter that traces the verify suite itself.
- *
- * Why the reporter is the only emitter: with `workers: 1`, everything
- * interesting is already visible from here. Playwright hands the reporter each
- * test's start time, duration, and full step tree — which includes every
- * `page.goto`, every `waitForTimeout`, and every auto-retrying assertion. So
- * one process owns one tracer provider and one flush, no spec file changes, and
- * no per-worker provider lifecycle to get wrong.
- *
- * Spans are built at the very end from recorded timestamps rather than held
- * open across hooks, which is why `spanPlan.ts` can be pure and tested.
- *
- * Nothing in here may change the suite's exit code. A telemetry failure prints
- * one line and the test result stands.
- */
 import type { FullConfig, FullResult, Reporter, TestCase, TestResult, TestStep } from "@playwright/test/reporter";
 import { Attributes } from "@opentelemetry/api";
 import { startHarnessTracing, HarnessTracing, HARNESS_SERVICE_NAME } from "./harnessTracing.js";
@@ -64,8 +48,6 @@ export default class OtelReporter implements Reporter {
   private runAttributes: Attributes = {};
 
   constructor() {
-    // verify.sh mints the run id so it can echo it before the suite starts; a
-    // bare `npx playwright test` gets one from here.
     this.runId = process.env.VERIFY_RUN_ID?.trim() || `local-${Date.now()}`;
   }
 

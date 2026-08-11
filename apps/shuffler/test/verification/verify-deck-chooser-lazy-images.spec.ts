@@ -1,13 +1,3 @@
-/**
- * Verification: precon deck tile images are lazy-loaded
- *
- * /choose-any-deck ships one <img> per precon deck (191 remote Scryfall images).
- * Without loading="lazy", the browser fetches all of them eagerly even though
- * only a handful are ever in the viewport. This verifies the attribute is present
- * so off-screen commander art defers until it's needed.
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect } from '@playwright/test';
 

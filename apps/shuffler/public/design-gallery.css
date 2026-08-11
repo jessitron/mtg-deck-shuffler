@@ -1,13 +1,3 @@
-/* Chrome for the /design gallery itself — labels, grids, swatches, stages.
- *
- * This is NOT part of the app's design language. Nothing here should ever be
- * copied into a real page. The specimens on the gallery are styled entirely by
- * the app's own stylesheets (and design-candidates.css for proposals); this
- * file only builds the museum around them.
- *
- * Everything is scoped under .design-page so the app stylesheets loaded
- * alongside it stay untouched.
- */
 
 .design-page {
   background: #17101f;
@@ -186,28 +176,10 @@
   min-height: 90px;
 }
 
-/* These stages carry the real `.playmat` class (`class="stage playmat"`) so
- * they inherit the bare `.playmat` rule in playmat.css — same art,
- * background-size/position, and border color/style as the app. The only
- * override is the border *width*: the real mat is framed at page scale
- * (10px); these specimens are much smaller, so a thinner frame (3px) reads
- * right without redeclaring the look. No `-game`/`-prepare` radius modifier
- * is added on purpose — these specimens aren't demonstrating the mat's own
- * shape, just using it as a backdrop, so square corners here are fine. */
 .design-page .stage.playmat {
   border-width: 3px;
 }
 
-/* prepare.css deliberately keys some placement rules on the bare `.playmat`
- * class rather than `.playmat-prepare` (the mat is the domain object those
- * things sit on) — `.playmat > .game-title`, `.playmat
- * .cool-command-zone-surround`, `.playmat .commander-placeholder`, `.playmat
- * .table-look-panel`. prepare.css is loaded on /design too, so now that the
- * real `.playmat` class is on the stage wrapper those rules reach here as
- * well. Their grid-column/grid-row are no-ops outside a grid container, but
- * `align-self` and `margin` are not — reset just those two so the specimens
- * keep the gallery's own centered layout instead of picking up /prepare's
- * page placement. */
 .design-page .stage.playmat .game-title,
 .design-page .stage.playmat .cool-command-zone-surround,
 .design-page .stage.playmat .commander-placeholder,
@@ -236,11 +208,6 @@
   border: 1px solid #463d55;
 }
 
-/* Specimens must not inherit the gallery's light-on-dark text. In the real app
- * the body colour is the browser default, and any component needing white sets
- * it itself — so a stage resets to black and lets the app's CSS take over.
- * Without this, e.g. the command zone's title slab renders white-on-light-pink
- * here and black-on-light-pink in the app. */
 .design-page .stage {
   color: black;
 }

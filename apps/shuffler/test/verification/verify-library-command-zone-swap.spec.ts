@@ -1,14 +1,3 @@
-/**
- * End-to-End Verification: Library and Command Zone positions are swapped.
- *
- * Jess wanted the library on the right and the command zone on the left, on
- * both the prepare screen (/prepare) and the game screen (/game). Regression
- * guard: assert the actual rendered left edges, not the DOM/markup order,
- * since /game is a flex row (order = DOM order) and /prepare is a CSS grid
- * (order = grid-column), and either could silently regress independently.
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect, Page } from '@playwright/test';
 import { seedPrep, startGame } from './seedGame.js';

@@ -1,15 +1,3 @@
-/**
- * End-to-End Verification: Load a Precon Deck
- *
- * Verifies the flow from deck selection to /prepare:
- * 1. Navigate to deck selection page
- * 2. Click a precon deck tile
- * 3. Arrive at /prepare with deck content visible
- *
- * RUN: npm run test:verify
- *
- * The test script automatically starts and stops the server on port 3001.
- */
 
 import { test, expect } from '@playwright/test';
 

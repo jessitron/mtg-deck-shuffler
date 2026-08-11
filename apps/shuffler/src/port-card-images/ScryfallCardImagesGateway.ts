@@ -2,15 +2,11 @@ import { CardImageUris, ImageFormat } from "../types.js";
 import { CardImagesPort, FetchedCardImages } from "./types.js";
 import { fetchScryfall } from "../scryfall-http.js";
 
-/** The image formats the app actually requests. We store only these (rather than
- * Scryfall's full image_uris) to keep deck files lean. */
 const STORED_FORMATS: ImageFormat[] = ["normal", "large", "png", "art_crop"];
 
 const SCRYFALL_COLLECTION_URL = "https://api.scryfall.com/cards/collection";
 /** Scryfall allows up to 75 identifiers per /cards/collection request. */
 const BATCH_SIZE = 75;
-/** Scryfall asks for 50-100ms between requests (10 req/s). Stay comfortably
- * under that across the whole run, not just within one fetchImages call. */
 const MIN_REQUEST_GAP_MS = 150;
 /** Retry budget for 429 Too Many Requests responses. */
 const MAX_RETRIES = 5;
@@ -40,9 +36,6 @@ function pickStoredFormats(uris: ScryfallImageUris | undefined): CardImageUris |
   return Object.keys(picked).length > 0 ? picked : undefined;
 }
 
-/** Pure mapping from a Scryfall card to our front/back image URLs.
- * Single-faced cards carry top-level `image_uris`; genuine double-faced cards
- * carry per-face `card_faces[].image_uris` and no top-level `image_uris`. */
 export function mapScryfallCardToImages(card: ScryfallCard): FetchedCardImages | undefined {
   const frontFromFaces = pickStoredFormats(card.card_faces?.[0]?.image_uris);
   const front = pickStoredFormats(card.image_uris) ?? frontFromFaces;
@@ -61,13 +54,8 @@ function chunk<T>(items: T[], size: number): T[][] {
 
 const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
-/** Fetches card image URLs from Scryfall's /cards/collection endpoint, batching
- * by 75 and caching results across calls so repeated scryfallIds (common across
- * precon decks) are fetched once. */
 export class ScryfallCardImagesGateway implements CardImagesPort {
   private cache = new Map<string, FetchedCardImages>();
-  /** Epoch ms of the last request, to throttle across all fetchImages calls
-   * (the same instance is reused across many decks during backfill). */
   private lastRequestAt = 0;
 
   async fetchImages(scryfallIds: string[]): Promise<Map<string, FetchedCardImages>> {

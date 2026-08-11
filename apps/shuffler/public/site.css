@@ -309,9 +309,6 @@ body {
   text-align: right;
 }
 
-/* Button Base Styles - shared appearance. Press physics come from
- * .pushable-flat in styles.css (JES-155 choice 1); this rule keeps only the
- * CTA's own layout (size, font scale, flex centering). */
 .button-base {
   display: flex;
   align-items: center;
@@ -334,10 +331,6 @@ body {
   box-shadow: none;
 }
 
-/* Big Fat CTA — .begin-button is its own thing, not just a scaled-up primary
- * button: white fill behind the app's signature chunky light-pink border.
- * Press physics (travel/easing/shadow) are still the shared pushable-flat
- * shape; only the border and fill are unique to the CTA. */
 .begin-button {
   background: white;
   color: black;
@@ -353,8 +346,6 @@ body {
   box-shadow: 0 2px 0 #897b89, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
-/* Hero Button - the Precon/Archidekt tab toggle. Own color (light-pink, not
- * the CTA's dark-pink) but the same lift/press physics as everything else. */
 .hero-button {
   background: var(--light-pink);
   color: var(--deep-space);
@@ -377,10 +368,6 @@ body {
   transition: none;
 }
 
-/* This is a radio choice (Precon vs Archidekt), not two independent buttons —
- * "which one is selected" needs its own signal beyond the shared press
- * physics. A dark-pink underline on the active tab, standalone decision,
- * not part of JES-155. */
 .hero-button.active::after {
   content: "";
   position: absolute;

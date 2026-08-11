@@ -1,13 +1,3 @@
-/**
- * End-to-End Verification: the prep-screen table-look picker (ticket 16).
- *
- * One setup panel on /prepare: playmat swatches (curated aeoe-* art) and a
- * sleeve color row (None / mana pie / custom color input). Picks live-preview
- * on the page and persist into the prep immediately, so a reload — and later
- * the seat.joined send — sees them.
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect, Page } from '@playwright/test';
 import { seedPrep } from './seedGame.js';
@@ -20,21 +10,10 @@ test.setTimeout(90000);
 const DEFAULT_MAT = '/images/playmats/aeoe-43-cascading-cataracts.png';
 const OTHER_MAT = '/images/playmats/aeoe-6-seam-rip.png';
 
-// Sleeve quick-picks are derived per playmat (table-look.ts,
-// sleeveQuickPicksForPlaymat) — they're the default mat's tailored colors
-// from playmat-colors.json when it has an entry, else the mana pie. Reading
-// them here (rather than hardcoding mana-pie hexes) keeps this spec honest
-// as that data changes.
 const DEFAULT_QUICK_PICKS = sleeveQuickPicksForPlaymat(DEFAULT_PLAYMAT_PATH);
 const QUICK_PICK = DEFAULT_QUICK_PICKS[0].hex;
-// The focus test switches to OTHER_MAT first, which re-renders the sleeve
-// row with *that* mat's own quick-picks — a color that's a valid swatch on
-// the default mat isn't necessarily one after that switch.
 const OTHER_MAT_QUICK_PICK = sleeveQuickPicksForPlaymat(OTHER_MAT)[0].hex;
 
-// Mirrors the private isDarkHex in src/view/common/shared-components.ts —
-// duplicated rather than exported, since only this test needs to tell dark
-// from light among the default mat's actual quick-picks.
 function isDarkHex(hex: string): boolean {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);

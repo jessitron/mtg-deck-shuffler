@@ -2,9 +2,6 @@
 /* Used by both game.css and prepare.css */
 
 /* === The Playmat === */
-/* One domain object, one appearance, two scales. Both play pages mark theirs
- * `class="playmat playmat-<page>"`; this rule is everything they share. 
- */
 .playmat {
   background-image: url('/images/playmats/aeoe-43-cascading-cataracts.png');
   background-size: cover;
@@ -40,10 +37,6 @@
   opacity: 0.3;
 }
 
-/* Sleeve-corner rule (owners/shuffler-looks-like-itself): a sleeved back is a
- * bare flat-hex rectangle — square corners, no inset-border/gradient chrome.
- * The box-shadow (above) stays; it's the pile casting a shadow, not a
- * decoration on the card face. */
 .library-card-back.sleeved {
   border-radius: 0;
 }
@@ -74,9 +67,6 @@
 }
 
 
-/* card buttons are only on the game page, library buttons are on game and prepare.
- * Press physics unified with the rest of the app (JES-155 choice 1) — same
- * travel, easing and box-shadow bevel as .pushable-flat, own black fill. */
 .card-buttons button,
 .library-buttons button {
   position: relative;
@@ -171,16 +161,6 @@
   z-index: 1000;
 }
 
-/* Both overlays carry tabindex="0", so the global [tabindex]:focus-visible ring
- * in styles.css applies to them. (Why they carry it is unclear — the Escape
- * trigger is `keyup … from:body` and the click trigger is `click[target==this]`,
- * and neither needs a focusable element. See `vestigial-modal-tabindex` in
- * TODO.md; if the attributes go, this rule goes with them.) They're
- * full-viewport and fixed, so the standard +3px offset would draw the ring
- * *outside* the viewport, where it clips to nothing — a keyboard stop that
- * looks unfocused. Turn the offset inward so it reads as a frame instead.
- * Here rather than in prepare.css: prepare loads playmat.css, and the modal
- * block is already duplicated across the two files. Don't grow that. */
 .modal-overlay:focus-visible,
 .card-modal-overlay:focus-visible {
   outline-offset: -3px;
@@ -460,10 +440,6 @@
   align-items: center;
 }
 
-/* Press physics unified with the rest of the app (JES-155 choice 1) — same
- * travel, easing and box-shadow bevel as .pushable-flat. Corner radius and
- * the seven per-destination hues are separate open choices (4 and 3);
- * untouched here. Each hue below carries its own darker shadow color. */
 .modal-action-button {
   position: relative;
   padding: 12px 24px;

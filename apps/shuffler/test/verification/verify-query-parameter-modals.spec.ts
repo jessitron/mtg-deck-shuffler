@@ -1,16 +1,3 @@
-/**
- * End-to-End Verification: Query Parameter Modal Auto-Opening
- *
- * This spec proves the *mechanism* end-to-end on both pages: a query param
- * reaches modal-query-params.js and results in a real htmx request that
- * actually opens a modal in the browser. It does not enumerate every
- * parameter and combination — that table (?openLibrary, ?openTable,
- * ?openHistory, ?openDebug, and the combinations) is covered fast and
- * without a browser by test/modal-query-params.test.ts, which exercises the
- * same source file's decision logic directly.
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect } from '@playwright/test';
 import { seedGame, seedPrep } from './seedGame.js';
@@ -20,16 +7,10 @@ const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 // Increase timeout for these tests
 test.setTimeout(90000);
 
-/**
- * Setup helper: Creates a game and returns the gameId
- */
 async function setupGame(page: any): Promise<string> {
   return seedGame(page);
 }
 
-/**
- * Setup helper: Creates a prep and returns the prepId
- */
 async function setupPrep(page: any): Promise<string> {
   return seedPrep(page);
 }
@@ -64,13 +45,6 @@ test.describe('Query Parameter Modal Auto-Opening - Game Page', () => {
     // Navigate to game without query parameters
     await page.goto(`${BASE_URL}/game/${gameId}`);
 
-    // Proving a negative needs care: toBeEmpty() would pass instantly even if a
-    // modal were about to open. It's sound here without a sleep because
-    // modal-query-params.js decides SYNCHRONOUSLY in its DOMContentLoaded
-    // handler and returns early when there are no params — and page.goto()
-    // resolves on 'load', which is after DOMContentLoaded. So the decision has
-    // already been made and cannot change. Anchor on rendered content first, so
-    // this can't pass merely because the page never arrived.
     await expect(page.locator('.playmat-game')).toBeVisible();
 
     // Verify modal containers are empty
@@ -111,8 +85,6 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
 
     const prepId = await setupPrep(page);
 
-    // Open a library card (card index after commanders, e.g., index 10 should be in library)
-    // Commanders are typically indices 0-1, library starts after
     await page.goto(`${BASE_URL}/prepare/${prepId}?openCard=10`);
 
     // Verify card modal is open
@@ -145,10 +117,6 @@ test.describe('Query Parameter Modal Auto-Opening - Prep Page', () => {
     const cardTitle = page.locator('.card-modal-title');
     const initialTitle = (await cardTitle.textContent()) ?? '';
 
-    // The nav arrows are plain hx-get into #card-modal-container. A click at
-    // Playwright speed can put its mousedown on a node htmx is about to replace
-    // and its mouseup on the replacement, so no click event fires at all.
-    // Retry the click until the title actually changes.
     const nextButton = page.locator('.card-modal-nav-next');
     await expect(nextButton).toBeVisible({ timeout: 5000 });
     await expect(async () => {

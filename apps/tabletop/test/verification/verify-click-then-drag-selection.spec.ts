@@ -2,16 +2,6 @@ import { test, expect, Page, Locator } from "@playwright/test";
 import { randomUUID } from "node:crypto";
 import { openTable, placeCard, zoomToFit, dragPointTo, center } from "./helpers";
 
-/**
- * Ticket 05: the gap none of the five `onTranslateEnd`-based clears can
- * close (RESEARCH-stale-selection-bug.md § "A gap the current workaround
- * can't close"). A shape can become selected via a plain CLICK with no
- * drag — `onTranslateEnd` never fires for that — so the stale selection
- * survives into the next drag of a different `onClick`-defining shape
- * (e.g. an mtg-card), which then gets silently moved instead of the card.
- *
- * Reproduces Jess's report (2026-08-10): "selecting an image then a card."
- */
 
 function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
@@ -42,11 +32,6 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
   };
 }
 
-/** Drop a freshly-rendered 100x100 PNG onto the canvas at the given screen
- * point, same technique as verify-image-selection.spec.ts: scripting a
- * `drop` DOM event is far more reliable in Playwright than a real paste,
- * and follows the same internal tldraw path. 100x100 avoids the resize-handle
- * trap a 1x1 image would hit when clicked at its center. */
 async function dropImageOnCanvas(page: Page, at: { x: number; y: number }) {
   const dataTransfer = await page.evaluateHandle(async () => {
     const canvas = document.createElement("canvas");
@@ -101,19 +86,12 @@ test("clicking a pasted image with no drag, then dragging a card, moves the card
   const cardCenter = await center(card);
   await dropImageOnCanvas(page, { x: cardCenter.x + 300, y: cardCenter.y + 120 });
 
-  // Scoped like verify-image-selection.spec.ts: the dropped image's shape
-  // wrapper is not prefixed "shape:card-".
   const image = page.locator('[id^="shape\\:"]:not([id^="shape\\:card-"]) .tl-image-container');
   await expect(image).toHaveCount(1, { timeout: 10000 });
   const imageCenter = await center(image);
 
-  // Click the image — a plain click, no drag. tldraw selects it immediately
-  // on pointer-down (stock `image` shape has no `onClick` handler), and
-  // nothing about a click-with-no-drag ever fires `onTranslateEnd`.
   await page.mouse.click(imageCenter.x, imageCenter.y);
 
-  // Now drag the card. If the image's selection is still stale, tldraw's
-  // PointingShape guard translates the image instead of the card.
   const before = await center(card);
   const grip = await topGrip(card);
   await dragPointTo(page, grip, { x: grip.x + 120, y: grip.y });

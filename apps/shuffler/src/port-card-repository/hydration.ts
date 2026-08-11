@@ -3,14 +3,6 @@ import { GameCard } from "../domain-types.js";
 import { PersistedDeck, PersistedGameCard } from "../port-persist-state/persisted-types.js";
 import { CardRepositoryPort } from "./types.js";
 
-/**
- * Hydrate a PersistedDeck into a runtime Deck by loading card data from the repository.
- * 
- * @param persistedDeck - The persisted deck with only scryfallIds
- * @param cardRepo - Card repository to load card definitions from
- * @returns Promise resolving to a fully hydrated Deck with CardDefinition objects
- * @throws Error if any card is not found in the repository
- */
 export async function hydrateDeck(
   persistedDeck: PersistedDeck,
   cardRepo: CardRepositoryPort
@@ -51,12 +43,6 @@ export async function hydrateDeck(
   };
 }
 
-/**
- * Dehydrate a runtime Deck into a PersistedDeck by extracting only scryfallIds.
- * 
- * @param deck - The runtime deck with full CardDefinition objects
- * @returns PersistedDeck with only scryfallIds
- */
 export function dehydrateDeck(deck: Deck): PersistedDeck {
   return {
     version: 2,
@@ -69,14 +55,6 @@ export function dehydrateDeck(deck: Deck): PersistedDeck {
   };
 }
 
-/**
- * Hydrate PersistedGameCards into runtime GameCards by loading card data from the repository.
- * 
- * @param persistedGameCards - Array of persisted game cards with only scryfallIds
- * @param cardRepo - Card repository to load card definitions from
- * @returns Promise resolving to array of fully hydrated GameCards
- * @throws Error if any card is not found in the repository
- */
 export async function hydrateGameCards(
   persistedGameCards: PersistedGameCard[],
   cardRepo: CardRepositoryPort
@@ -107,12 +85,6 @@ export async function hydrateGameCards(
   });
 }
 
-/**
- * Dehydrate runtime GameCards into PersistedGameCards by extracting only scryfallIds.
- * 
- * @param gameCards - Array of runtime game cards with full CardDefinition objects
- * @returns Array of PersistedGameCards with only scryfallIds
- */
 export function dehydrateGameCards(gameCards: GameCard[]): PersistedGameCard[] {
   return gameCards.map((gc) => ({
     scryfallId: gc.card.scryfallId,

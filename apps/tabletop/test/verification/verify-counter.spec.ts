@@ -2,23 +2,7 @@ import { test, expect, Page, Locator } from "@playwright/test";
 import { randomUUID } from "node:crypto";
 import { cardPlayed, openTable, placeCard, zoomToFit, center, dragPointTo, dragCenterTo } from "./helpers";
 
-/**
- * Ticket 18 (tabletop-physics): counters ride along on a card.
- *
- * - The toolbar's counter tool creates a blank mtg-counter disc.
- * - Dragging a counter onto a card attaches it (tldraw parenting): moving the
- *   card afterward carries the counter along.
- * - Dragging a counter off the card detaches it.
- * - Multiple counters on one card may overlap — no forced spacing.
- * - The instant the host card enters a non-battlefield zone (graveyard),
- *   every counter detaches and lands near the zone's edge, outside it.
- * - A counter's text is freely editable in place (double-click), blank by default.
- * - Hazard A regression (tabletop-shape-mechanics owner): after dragging a
- *   counter, dragging a card must move the CARD, not the stale-selected counter.
- */
 
-/** A grip near the card's top edge — counters in these tests sit lower on the
- * card, so grabbing here reliably hits the CARD, not a counter riding it. */
 async function topGrip(card: Locator): Promise<{ x: number; y: number }> {
   const box = await card.boundingBox();
   if (!box) throw new Error("missing bounding box");
@@ -29,8 +13,6 @@ async function topGrip(card: Locator): Promise<{ x: number; y: number }> {
 async function createCounter(page: Page, at: { x: number; y: number }) {
   await page.getByTestId("tools.mtg-counter").click();
   await page.mouse.click(at.x, at.y);
-  // Outlive tldraw's double-click window: grabbing the new counter at the
-  // same point right away would classify as a double-click and open editing.
   await page.waitForTimeout(500);
 }
 
@@ -51,8 +33,6 @@ test("a counter attaches to a card, rides along, and detaches when dragged off",
   await expect(counter).toHaveCount(1);
   await expect(counter).toHaveText("");
 
-  // 2. Drag the counter onto the card's lower half: it attaches. (Lower half
-  // so the card's top edge stays free to grab.)
   const cardBox = await card.boundingBox();
   if (!cardBox) throw new Error("missing card box");
   await dragCenterTo(page, counter, { x: cardCenter.x, y: cardBox.y + cardBox.height * 0.7 });
@@ -95,12 +75,8 @@ test("after dragging a counter, dragging a card moves the card (stale-selection 
   const counter = page.getByTestId("mtg-counter");
   await expect(counter).toHaveCount(1);
 
-  // Drag the counter somewhere neutral (NOT onto the card) — tldraw leaves it
-  // selected after the drag settles unless the counter cleans up after itself.
   await dragCenterTo(page, counter, { x: cardCenter.x + 300, y: cardCenter.y + 220 });
 
-  // Now drag the card. With a stale counter selection, tldraw's PointingShape
-  // guard would translate the counter instead of the card.
   const counterCenter = await center(counter);
   const before = await center(card);
   const grip = await topGrip(card);
@@ -132,11 +108,6 @@ test("two counters can share a card and overlap; both detach near the graveyard'
   const cardCenter = await center(card);
   const counters = page.getByTestId("mtg-counter");
 
-  // Attach two counters at nearly the same spot on the card's lower half —
-  // overlap is allowed, and the lower half keeps the card's top edge free to
-  // grab. Create → attach, one at a time, dragging from the known creation
-  // point: locator .nth() order is paint order, which changes when a counter
-  // reparents onto the card, so it can't name "the second counter" reliably.
   const cardBox = await card.boundingBox();
   if (!cardBox) throw new Error("missing card box");
   const dropSpot = { x: cardCenter.x, y: cardBox.y + cardBox.height * 0.7 };
@@ -148,8 +119,6 @@ test("two counters can share a card and overlap; both detach near the graveyard'
   await expect(counters).toHaveCount(2);
   await dragPointTo(page, spawn, { x: dropSpot.x + 6, y: dropSpot.y - 6 });
 
-  // Both ride the card on a small in-battlefield move (proves both attached).
-  // Order-insensitive: compare position multisets, sorted.
   const sortedPositions = async () => {
     const boxes = [await center(counters.nth(0)), await center(counters.nth(1))];
     return boxes.sort((a, b) => a.x - b.x || a.y - b.y);
@@ -163,11 +132,7 @@ test("two counters can share a card and overlap; both detach near the graveyard'
     expect(moved[1].x - positionsBefore[1].x).toBeCloseTo(80, -1);
   }).toPass({ timeout: 5000 });
 
-  // Card to the graveyard: every counter detaches and lands outside the
-  // graveyard, near its edge, still on the table.
   const graveyardCenter = await center(graveyard);
-  // Zone entry is decided by the CARD CENTER; the grip is near the card's top
-  // edge, so aim the grip above the graveyard's center by that offset.
   const gripNow = await topGrip(card);
   const cardBoxNow = await card.boundingBox();
   if (!cardBoxNow) throw new Error("missing card box");
@@ -225,15 +190,6 @@ test("a counter's text is editable in place", async ({ page }) => {
 });
 
 test("text near the wrap boundary (e.g. '+1/+1') stays vertically centered while editing", async ({ page }) => {
-  // Jess (2026-08-10): "+1/+1" (and "why") looked top-heavy while editing —
-  // a line of empty space visible below the text — while shorter text like
-  // "wh" centered fine, and typing one more character (crossing an actual
-  // wrap) also looked right. Root cause: fitCounterFont's width estimate
-  // (counterTextFit.ts) sometimes predicts one more wrapped line than the
-  // browser actually renders near the wrap boundary, and the old padding
-  // math centered for that taller *estimated* block instead of the real
-  // rendered one. Fixed by measuring the textarea's actual scrollHeight
-  // instead of trusting the estimate (MtgCounterShapeUtil.tsx).
   const tableSlug = `verify-counter-center-${Date.now()}`;
   await openTable(page, tableSlug);
 
@@ -246,10 +202,6 @@ test("text near the wrap boundary (e.g. '+1/+1') stays vertically centered while
   await expect(input).toBeFocused();
   await page.keyboard.type("+1/+1");
 
-  // Measure the same way the fix does: zero the padding, read the real
-  // content height (scrollHeight ignores the fixed visible height), and
-  // check the padding actually applied centers that real content — not
-  // some estimated block that may be taller than what's really rendered.
   const centering = await input.evaluate((el: HTMLTextAreaElement) => {
     const style = getComputedStyle(el);
     const borderTop = parseFloat(style.borderTopWidth);
@@ -278,15 +230,11 @@ test("a long label like 'lifelink' shrinks to fit inside the disc", async ({ pag
   await expect(counter).toHaveCount(1);
 
   await counter.dblclick();
-  // Focus lands in the editor a tick after editing starts (see the shape's
-  // setTimeout(0) comment) — typing before that goes to the canvas.
   await expect(page.getByTestId("mtg-counter-input")).toBeFocused();
   await page.keyboard.type("lifelink");
   await page.keyboard.press("Escape");
 
   await expect(counter).toHaveText("lifelink");
-  // Fits = nothing is clipped by the disc's overflow:hidden: the rendered
-  // content is no bigger than the visible box.
   const fits = await counter.evaluate((el) => ({
     scrollWidth: el.scrollWidth,
     clientWidth: el.clientWidth,
@@ -297,8 +245,6 @@ test("a long label like 'lifelink' shrinks to fit inside the disc", async ({ pag
   expect(fits.scrollHeight).toBeLessThanOrEqual(fits.clientHeight);
   // And it genuinely shrank: a short label renders larger than "lifelink".
   const longSize = await counter.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
-  // Outlive the double-click window from the clicks that ended the previous
-  // edit, so this reads as a fresh double-click.
   await page.waitForTimeout(600);
   await counter.dblclick();
   await expect(page.getByTestId("mtg-counter-input")).toBeFocused();

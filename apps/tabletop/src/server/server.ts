@@ -24,13 +24,6 @@ export function createApp() {
     res.json({ ok: true });
   });
 
-  // Where the browser should send its spans (decision: an OTel Collector, not
-  // a proxy endpoint here and not a key baked into the page).
-  // - BROWSER_OTLP_TRACES_URL: the collector's OTLP-http traces endpoint
-  //   (must allow CORS for this origin).
-  // - Local-only fallback: with ALLOW_BROWSER_DIRECT_HONEYCOMB=true (set in
-  //   apps/tabletop/.env, never in k8s), the page exports straight to
-  //   Honeycomb using the server's key — acceptable exposure for env `local`.
   app.get("/otel-config.json", (_req, res) => {
     const collectorUrl = process.env.BROWSER_OTLP_TRACES_URL;
     if (collectorUrl) {
@@ -57,10 +50,6 @@ export function createApp() {
   // Static app (Vite build output)
   app.use(express.static(CLIENT_DIR));
 
-  // The Tabletop has no landing page of its own — the Shuffler is the front
-  // door for the whole fleet. SHUFFLER_PUBLIC_URL mirrors the Shuffler's own
-  // TABLETOP_PUBLIC_URL (apps/shuffler/src/view/play-game/active-game-page.ts)
-  // for the reverse direction; same default host either way.
   app.get("/", (_req, res) => {
     res.redirect(302, process.env.SHUFFLER_PUBLIC_URL || "https://mtg.jessitron.honeydemo.io");
   });

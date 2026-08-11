@@ -43,12 +43,6 @@ function seatZones(seatIndex: number): Record<string, Bounds> {
   };
 }
 
-/**
- * JES-140 geometry — apps/tabletop/DESIGN.md's numbers, checked exactly so a
- * future tweak to CARD_W/CARD_H can't silently drift the playmat proportions.
- * Command Zone redraw: .scratch/tabletop-table-layout/issues/13.
- * The square (compass seats): .scratch/tabletop-table-layout/issues/14.
- */
 describe("cardLayout — player area geometry", () => {
   it("derives the playmat at 9.6 x 4 cards (1632 x 952)", () => {
     expect(PLAYMAT_W).toBe(1632);
@@ -66,19 +60,12 @@ describe("cardLayout — player area geometry", () => {
     expect(GRAVEYARD_H).toBeGreaterThan(EXILE_H);
   });
 
-  // The label band (zone-label-band, 2026-08-09): every card-holding zone is
-  // tall enough for a card AND its label — the bug this fixed was zone titles
-  // covered by the card/pile (library, command zone) or a zone shorter than a
-  // card outright (exile, formerly 225 < 238).
   it("makes every card-holding zone at least a card plus the label band tall", () => {
     for (const h of [LIBRARY_H, COMMAND_ZONE_H, GRAVEYARD_H, EXILE_H]) {
       expect(h).toBeGreaterThanOrEqual(CARD_H + ZONE_LABEL_BAND);
     }
   });
 
-  // graveyardBounds places the graveyard at column.y + LIBRARY_H + GAP under
-  // the column's FULL width, so its gap from the command zone exists only
-  // while the two top boxes match heights.
   it("keeps the library and command zone the same height", () => {
     expect(COMMAND_ZONE_H).toBe(LIBRARY_H);
   });
@@ -89,13 +76,6 @@ describe("cardLayout — player area geometry", () => {
     expect(first.y).toBeGreaterThanOrEqual(box.y + ZONE_LABEL_BAND);
   });
 
-  // Zone detection is center-based (owners/tabletop-shape-mechanics): once a
-  // cascading card's center leaves the graveyard's AABB, topmostZoneAt sees
-  // "undefined zone" or a neighboring zone (e.g. exile) instead. The +6/card
-  // diagonal cascade used to march a card's center out of the box past
-  // graveyardCount ~31 (JES bug, 2026-08-10) — this pins that it can't
-  // recur for arbitrarily large piles by wrapping the cascade back to the
-  // start (stacking back over earlier cards) once it would exit the box.
   it("keeps every card's center inside the graveyard AABB, no matter how large the pile", () => {
     const box = graveyardBounds(0);
     for (const count of [0, 1, 30, 31, 32, 33, 50, 100, 500]) {
@@ -148,8 +128,6 @@ describe("cardLayout — player area geometry", () => {
     expect(exile.y + exile.h).toBe(mat.y + mat.h);
   });
 
-  // Ticket 18: commanders land below the zone's label band, side by side if
-  // two, horizontally centered if one.
   it("centers a single commander in the command zone, below the label band", () => {
     const box = commandZoneBounds(0);
     const pos = commandZoneCardPosition(0, 0, 1);
@@ -226,14 +204,6 @@ describe("cardLayout — the square (compass seats around a centered Stack)", ()
     expect(origin.x + PLAYER_AREA_W).toBeLessThan(stack.x);
   });
 
-  // Zone detection (topmostZoneAt) is first-match-by-z-order, not
-  // closest-match, and furniture z-order is chronological draw order —
-  // meaningless as a semantic tiebreak. So every zone AABB keeps at least a
-  // GAP-wide empty band from every other, across all four seats AND the
-  // Stack (owners/tabletop-shape-mechanics, watch point 8). checkZonesDisjoint
-  // is the same check cardLayout.ts runs on itself at module load — this test
-  // catches a break in CI/local runs, the module-load assertion catches it at
-  // the point a constant changes.
   it("keeps every zone AABB at least a GAP apart, across all four seats and the Stack", () => {
     const zones: Record<string, Bounds> = { stack };
     for (let seat = 0; seat < 4; seat++) {
@@ -244,8 +214,6 @@ describe("cardLayout — the square (compass seats around a centered Stack)", ()
     expect(() => checkZonesDisjoint(zones, GAP)).not.toThrow();
   });
 
-  // A stack card lands on the Stack's side facing its player's mat, centered
-  // on that side, so everyone can see at a glance who played it.
   it("puts the S seat's stack card centered on the Stack's bottom edge", () => {
     const card = stackCardPosition(0, 0);
     expect(card.x + CARD_W / 2).toBe(0); // horizontally centered
@@ -305,9 +273,6 @@ describe("cardLayout — the square (compass seats around a centered Stack)", ()
   });
 });
 
-// checkZonesDisjoint promotes the "keeps every zone AABB apart" invariant above
-// into cardLayout.ts itself, so a constant edit that breaks it throws the
-// moment the module loads (server boot), not just here.
 describe("cardLayout — checkZonesDisjoint (the runtime form of the disjointness invariant)", () => {
   it("does not throw when every zone is at least minGap apart", () => {
     expect(() =>

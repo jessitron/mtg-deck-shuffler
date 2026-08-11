@@ -1,12 +1,6 @@
 import { test, expect, Page, BrowserContext } from "@playwright/test";
 import { randomUUID } from "node:crypto";
 
-/**
- * Ticket 17 (flip and turn face-down): two independent context-menu items on
- * `mtg-card` — "Flip" (swaps `props.face`, gated on `backImageUrl !== null`)
- * and "Turn face down"/"Turn face up" (toggles `props.faceDown`) — plus a
- * reset of both axes on entering the library.
- */
 function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
 }
@@ -89,9 +83,6 @@ test("flipping and turning face down both sync to a second client", async ({ bro
   const tableSlug = `verify-flip-2client-${Date.now()}`;
   const contexts: BrowserContext[] = [];
   try {
-    // A seat.joined with a card back, so the unsleeved face-down render has
-    // an <img> to check (no seat data => the flat-rectangle fallback, which
-    // has none).
     const seatResponse = await fetch(`${baseURL}/api/tables/${tableSlug}/events`, {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -124,8 +115,6 @@ test("flipping and turning face down both sync to a second client", async ({ bro
       expect(await cardSrc(bob, instanceId)).toBe(backImageUrl);
     }).toPass({ timeout: 5000 });
 
-    // Ticket checkbox 4 covers both gestures: face-down must sync too, not
-    // just flip.
     await openCardMenu(alice, instanceId);
     await chooseMenuItem(alice, "Turn face down");
 
@@ -248,10 +237,6 @@ test("flipping card A does not leave a stale selection that hijacks a later drag
   const beforeB = await cardB.boundingBox();
   if (!beforeA || !beforeB) throw new Error("missing bounding box");
 
-  // Drag B far away; A must stay put. +150/-150 (not +300/+300): the whole
-  // table is zoomed to fit, so cards render tiny, and a large enough offset
-  // in the wrong direction can carry the target past the default 720px-tall
-  // viewport — Playwright can't complete a drag whose endpoint is offscreen.
   await page.mouse.move(beforeB.x + beforeB.width / 2, beforeB.y + beforeB.height / 2);
   await page.mouse.down();
   await page.mouse.move(beforeB.x + 150, beforeB.y - 150, { steps: 10 });

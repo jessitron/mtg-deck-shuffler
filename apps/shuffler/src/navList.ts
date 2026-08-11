@@ -1,12 +1,3 @@
-/**
- * NavList support for card modal navigation.
- *
- * When a card modal is opened from a grouped library search,
- * the navList param scopes prev/next navigation to that section's cards
- * instead of the full zone order.
- * 
- * TODO: why is this in the root of src? seems like it should be with the library modal
- */
 
 export interface NavListNavigation {
   prevCardIndex: number | null;
@@ -15,12 +6,6 @@ export interface NavListNavigation {
   totalCardsInZone: number;
 }
 
-/**
- * Parse a navList query param (comma-separated card indices) and resolve
- * prev/next navigation for the given card index within that list.
- *
- * Returns null if navList is not provided or the card isn't in the list.
- */
 export function resolveNavListNavigation(
   navListParam: string | undefined,
   cardIndex: number
@@ -51,10 +36,6 @@ export function resolveNavListNavigation(
   };
 }
 
-/**
- * Build a query string fragment for navList, preserving the list
- * across navigation clicks.
- */
 export function navListQueryParam(navListParam: string | undefined): string {
   if (!navListParam) return "";
   return `&navList=${navListParam}`;

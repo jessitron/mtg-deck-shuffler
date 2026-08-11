@@ -1,16 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { randomUUID } from "node:crypto";
 
-/**
- * JES-140: seat.joined draws a full player area (playmat, library, command
- * zone, graveyard, exile, name label) before any card is played. The shared
- * Stack is a fixed-size square centered on the board (ticket 14, the square)
- * — it does not move or resize as a second seat joins.
- *
- * Since tabletop-cards-come-and-go ticket 05, the body posted is a real
- * envelope (contracts/envelope.v2.json) carrying a seat.joined payload
- * (contracts/payloads/seat.joined.v1.json).
- */
 function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
 }
@@ -45,12 +35,6 @@ test("a player area appears before any card, and the Stack stays fixed as a seco
   const firstResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, { data: first });
   expect(firstResponse.status()).toBe(201);
 
-  // Player area furniture (playmat outline + library outline + command zone +
-  // graveyard + exile) plus the Stack square render as mtg-zone shapes; the
-  // playmat's own picture is a prop on its mtg-zone shape (clipped to the
-  // box's own border radius), while the library card-back stays a separate
-  // stock image shape; the name label renders too — all before any card is
-  // posted.
   const zoneShapes = page.locator(`.tl-shape[data-shape-type="mtg-zone"]`);
   await expect(zoneShapes).toHaveCount(6, { timeout: 10000 }); // mat, library, command zone, graveyard, exile, stack
   const imageShapes = page.locator(`.tl-shape[data-shape-type="image"]`);

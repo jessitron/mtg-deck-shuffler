@@ -2,13 +2,6 @@ import { useEffect } from "react";
 import type { RemoteTLStoreWithStatus } from "@tldraw/sync";
 import { inSpan } from "./observability";
 
-/**
- * Emit a standalone "card arrived on canvas" span whenever an `mtg-card`
- * shape appears from the server. NOT propagation — the play trace ends when
- * the ingestion request is fulfilled; cards persist beyond traces.
- * After-the-fact correlation is by the card.instance_id attribute, queryable
- * across every component in Honeycomb.
- */
 export function useCardArrivalSpans(store: RemoteTLStoreWithStatus): void {
   useEffect(() => {
     if (store.status !== "synced-remote") return;

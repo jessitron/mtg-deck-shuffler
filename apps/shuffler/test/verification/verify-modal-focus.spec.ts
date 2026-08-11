@@ -1,20 +1,3 @@
-/**
- * End-to-End Verification: Modal Focus Management
- *
- * The Shuffler's HTMX-swapped modals (card modal, library modal, history
- * modal, table modal) had NO focus management at all: opening one never
- * moved focus in, nothing stopped Tab from reaching the page behind, and
- * closing never restored focus to the opener. `modal-focus.js` is one
- * generic mechanism shared by every consumer of #modal-container /
- * #card-modal-container (all of them render the same `.modal-overlay` /
- * `.card-modal-overlay` shape with role="dialog"/aria-modal/tabindex — see
- * card-modal.ejs, library-modal.ejs, game-modals.ts, history-components.ts),
- * so proving it once against the library modal (opened from a real <button>,
- * closed via the × button) covers the mechanism for all of them. A second,
- * lighter test checks the card modal picks up the same dialog semantics.
- *
- * RUN: ./verify.sh verify-modal-focus
- */
 
 import { test, expect } from '@playwright/test';
 import { seedGame } from './seedGame.js';
@@ -46,8 +29,6 @@ test('opening the library modal traps focus and closing it restores focus to the
   // The background is inert while the modal is open.
   await expect(page.locator('#game-container')).toHaveAttribute('inert', '');
 
-  // Tab repeatedly — focus must never land outside the modal (the classic
-  // "tabs through to the page behind" bug this fixes).
   for (let i = 0; i < 10; i++) {
     await page.keyboard.press('Tab');
     const focusIsInsideModal = await page.evaluate(() => !!document.activeElement?.closest('.modal-overlay'));

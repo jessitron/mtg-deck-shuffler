@@ -16,30 +16,12 @@ function isDarkHex(hex: string): boolean {
   return 0.299 * r + 0.587 * g + 0.114 * b < 128;
 }
 
-/**
- * The sleeve color is the player-identity signal (see notes/GLOSSARY.md): it
- * tints the command-zone surround and the deck-title plaque. Inline style on
- * purpose — sleeve hex is domain data, and a page-sheet rule on these shared
- * components would leak onto /design. Server-rendered so every page that
- * shows a game/prep (including a full re-render after a table-look pick,
- * see /prep-table-look/:prepId) gets the same tint.
- */
 export function sleeveTintStyle(sleeveColor: string | undefined, withTextColor: boolean): string {
   if (!sleeveColor) return "";
   const textColor = withTextColor && isDarkHex(sleeveColor) ? " color: white;" : "";
   return ` style="background-color: ${sleeveColor};${textColor}"`;
 }
 
-/**
- * The deck-title plaque. It used to live inside `.cool-command-zone-surround`;
- * it now rests on the playmat itself — centered in the mat's top row on /prepare,
- * left of the hamburger in `.game-header-row` on /game. Appearance lives in
- * `playmat.css` (shared), placement in `prepare.css` / `game.css`.
- *
- * On /game it must stay a SIBLING of `#game-menu`, never a child: game.js closes
- * the menu on `!evt.target.closest("#game-menu")`, so a title nested inside would
- * swallow the dismiss click.
- */
 export function formatDeckTitleHtmlFragment(deckName: string, sleeveColor?: string): string {
   return `<div class="game-title"${sleeveTintStyle(sleeveColor, true)}><span class="game-name">${escapeHtml(deckName)}</span></div>`;
 }
@@ -53,14 +35,6 @@ export function formatCardNameAsModalLink(cardName: string, gameId: GameId, card
                style="cursor: pointer;">${cardName}</span>`;
 }
 
-/**
- * How the flip button asks the server for the other face of a two-faced card.
- *
- * In a game, flipping mutates persisted state, so it POSTs to the game and carries
- * the optimistic-lock version. On the prepare screen there is no game yet — the deck
- * is only being reviewed — so flipping is a stateless GET that re-renders the card on
- * the requested face, the same `?face=` idiom the prep card modal uses.
- */
 export type FlipRequest =
   | { page: "game"; gameId: GameId; expectedVersion?: number }
   | { page: "prep"; prepId: number };
@@ -93,8 +67,6 @@ export function formatCardContainer({ gameCard, gameId, expectedVersion, actions
       throw new Error("Game ID is required for two-faced cards");
     }
     const flip: FlipRequest = flipRequest ?? { page: "game", gameId, expectedVersion };
-    // On the prepare screen which face is showing is page state, so the click has to tell
-    // the modal. In a game the modal reads currentFace from the game itself.
     const modalQuery = flip.page === "prep" ? `?face=${gameCard.currentFace}` : versionParam;
     return `<div id="${cardId}-container" class="card-container clickable-card ${finalAnimationClass}"
                  ${draggableAttr}
@@ -136,9 +108,6 @@ export function formatFlippingContainer(gameCard: GameCard, flipRequest: FlipReq
           flipRequest.expectedVersion !== undefined ? `hx-vals='{"expected-version": ${flipRequest.expectedVersion}}'` : ""
         }`
       : `hx-get="/prep-flip-card/${flipRequest.prepId}/${gameCard.gameCardIndex}?face=${otherFace}"`;
-  // In a game the new face is in the game state, so only the flip container needs replacing.
-  // On the prepare screen the face lives in the page, and the card container is what carries
-  // it (in its modal URL) — so the whole container is replaced.
   const swapTarget = flipRequest.page === "prep" ? `#${cardId}-container` : `#${flipContainerId}-with-button`;
   const flipButton = `<button class="flip-button" id="${cardId}-flip-button" ${requestAttrs} hx-swap="outerHTML" hx-target="${swapTarget}" onclick="event.stopPropagation()">Flip</button>`;
 
@@ -183,12 +152,6 @@ export function getAnimationClassHelper(whatHappened: WhatHappened, gameCardInde
   return "";
 }
 
-/**
- * One card back in the library stack. Sleeved: a bare flat-hex rectangle
- * (square corners, no inset-border/gradient chrome — the sleeve-corner rule,
- * see owners/shuffler-looks-like-itself). Unsleeved: the standard card-back
- * image, rounded corners, unchanged.
- */
 function formatLibraryCardBack(positionClass: string, title: string, sleeveColor?: string): string {
   if (sleeveColor) {
     return `<div class="mtg-card-image library-card-back ${positionClass} sleeved" style="background-color: ${sleeveColor}" data-testid="card-back" title="${title}"></div>`;

@@ -3,41 +3,6 @@ import { MtgZoneShape, mtgZoneShapeProps, LIBRARY_PILE_INSET, ZONE_LABEL_BAND } 
 import { useIsZoneArmed } from "./zoneHitTest";
 import type { CSSProperties } from "react";
 
-/**
- * tabletop-physics ticket 13: `mtg-zone`, a genuine custom shape for
- * furniture (playmat, library, graveyard, exile, the Stack) rather than
- * stock locked `geo`/`image` shapes tagged with a freeform `meta.zone`
- * string. Zones are always `isLocked: true` (set where they're created,
- * tableFurniture.ts) and never enter tldraw's normal selection/pointing
- * flow at all — `SelectTool`'s `Idle` state gates on `isLocked` before a
- * locked shape ever reaches `PointingShape`, and `Editor.getDraggingOverShape`
- * filters out locked shapes before checking for drag-over hooks. So this
- * ShapeUtil deliberately defines no `onClick`/`onTranslateEnd`/
- * `onDragShapesOver` — there's nothing those hooks could ever be asked to do
- * for a locked shape, and giving it an `onClick` later (e.g. a custom
- * unlock affordance) wouldn't reopen mtg-card's onClick/PointingShape
- * selection-deferral quirk, since that quirk is gated on the SAME
- * `isLocked` check. Unlocking, if it ever happens, stays tldraw's own
- * context-menu Lock/Unlock — the sole unlock affordance per the ticket.
- *
- * Zone-entry detection stays card-side (MtgCardShapeUtil's `onTranslateEnd`)
- * for exactly this reason: a locked shape can't be a drag target.
- *
- * Visual treatment (tabletop-physics ticket 14) is the design already staged
- * and picked on `/design` (`.scratch/tabletop-physics/issues/
- * 11-what-a-zone-looks-like.md`'s "Answer", verified against the literal
- * candidate CSS in `apps/shuffler/public/design-candidates.css`'s
- * `.zone-mock--rest`/`.zone-mock--armed-glow` rather than just its prose
- * summary): dashed `--dark-pink` at rest with a faint tint, an amber
- * `--armed-glow` ring + tint when a dragged card is about to land here, and
- * the playmat keeping the Shuffler's own plain-black-border identity rather
- * than joining the dashed-pink family. The armed ring is additive on top of
- * whichever border a zone already has — `box-shadow` spreads *outward* from
- * the border edge (unlike `border-box`'s inward-drawn border), so it's the
- * one part of this treatment that survives being covered by the playmat's/
- * library's opaque `image` overlay (ticket 03): "the ring still shows" even
- * where the tint doesn't.
- */
 export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
   static override type = "mtg-zone" as const;
   static override props = mtgZoneShapeProps;
@@ -53,19 +18,11 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
   component(shape: MtgZoneShape) {
     const { w, h, zone, label, sleeveColor, imageUrl } = shape.props;
     const playmat = zone === "playmat";
-    // Reactive-only: never written to the store, so it produces no synced
-    // document write and no undo entry, and is never visible on another
-    // client's copy of this same zone shape — this player's drag is local.
     const armed = useIsZoneArmed(this.editor, shape.id);
 
     const style: CSSProperties = playmat
       ? imageUrl
         ? {
-            // The border lives on the <img> itself below (it hugs the actual
-            // artwork edge exactly, rather than being a same-size box drawn
-            // separately around it — the mismatch Jess flagged, 2026-08-11).
-            // So this box carries no border/radius/clip of its own; it's
-            // just the positioning frame the image fills.
             width: w,
             height: h,
             boxSizing: "border-box",
@@ -73,8 +30,6 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
             position: "relative", // anchors the picture below, absolutely positioned to fill the box
           }
         : {
-            // No image yet: fall back to a plain bordered box so the zone
-            // still reads as a placeholder rectangle.
             width: w,
             height: h,
             boxSizing: "border-box",
@@ -94,17 +49,9 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
         };
 
     if (armed) {
-      // A single box-shadow value assigned once — not two style objects each
-      // setting boxShadow — sidesteps "box-shadow doesn't accumulate across
-      // cascading CSS rules" (design choice 5); that gotcha is a stylesheet-
-      // cascade problem, not one a single JS style object can hit.
       style.boxShadow = "0 0 0 3px var(--armed-glow), 0 0 16px 5px rgba(230, 163, 61, 0.65)"; /* --armed-glow, #e6a33d */
     }
 
-    // Ticket 17: a sleeved seat's library pile — the bare sleeve rectangle,
-    // inset like the card-back image so the box's border and label frame it.
-    // Square corners: sleeves are rectangular (Jess, 2026-08-09), same as the
-    // sleeved cards themselves.
     const sleevePile = sleeveColor ? (
       <div
         data-testid="library-sleeve-pile"
@@ -120,9 +67,6 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
     ) : null;
 
     return (
-      // position: relative anchors the sleeve pile's absolute inset — the pile
-      // is a SIBLING of the box div, not a child, so it doesn't inherit any
-      // opacity set on the box itself.
       <HTMLContainer id={shape.id} style={{ position: "relative" }}>
         <div
           data-testid="zone-box"
@@ -134,10 +78,6 @@ export class MtgZoneShapeUtil extends BaseBoxShapeUtil<MtgZoneShape> {
           }}
         >
           {playmat && imageUrl ? (
-            // Deliberately not tldraw's `.tl-image` class — that class is
-            // `position: absolute; inset: 0` relative to `.tl-image-container`
-            // and would ignore this div's own overflow/border clip entirely
-            // (the same escape-the-wrapper bug the sleeve ring hit once).
             <img
               src={imageUrl}
               alt=""

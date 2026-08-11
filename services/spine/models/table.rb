@@ -6,10 +6,6 @@ require_relative "../lib/event_contract"
 require_relative "../lib/table_broadcaster"
 
 module Spine
-  # A Table: somewhere to play. The Spine mints its id (a GUID) at creation;
-  # the name is a lookup alias, unique among active tables — the thing you
-  # say over Discord. Owns the append-only event log via table.created and
-  # seat.taken (the only events this ticket mints).
   class Table < Sequel::Model(:tables)
     unrestrict_primary_key
 
@@ -22,9 +18,6 @@ module Spine
     one_to_many :seats, key: :table_id
     one_to_many :events, key: :table_id
 
-    # Join by name: find the active table or create it, then take a seat.
-    # This is the one thing the Shuffler calls — it never orchestrates
-    # create-then-join itself.
     def self.join!(name:, player_name:)
       table = first(name: name)
       created = table.nil?
@@ -49,8 +42,6 @@ module Spine
       raise NameTaken, "an active table is already named #{name.inspect}"
     end
 
-    # Take a seat (1-4). The Spine mints the seatId and, when the caller
-    # doesn't name one, the seat number itself.
     def take_seat!(player_name:, number: nil)
       DB.transaction do
         number ||= next_available_seat_number
@@ -70,13 +61,6 @@ module Spine
       end
     end
 
-    # The only way in for a sender-supplied envelope (POST /tables/:table_id/events).
-    # Validates against the published contract, dedups on the sender's event id, and
-    # assigns seq/acceptedAt server-side. Append-only: a duplicate is returned as-is,
-    # never re-inserted. A concurrent append racing us on either the event id or the
-    # seq loses the unique-index race, not the log's integrity — we re-check for a
-    # duplicate rather than raise, since a genuine duplicate is exactly what that
-    # collision usually means.
     def append_event!(envelope)
       EventContract.validate!(envelope)
       if envelope["tableId"] != id
@@ -134,10 +118,6 @@ module Spine
 
     private
 
-    # Deferred to run only once the enclosing transaction commits — every
-    # call site is inside a DB.transaction block, and a subscriber must
-    # never see an event that a later failure in that same transaction
-    # rolled back.
     def broadcast(event)
       carrier = {}
       OpenTelemetry.propagation.inject(carrier)

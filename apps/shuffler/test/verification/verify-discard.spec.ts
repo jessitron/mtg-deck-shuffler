@@ -1,12 +1,3 @@
-/**
- * End-to-End Verification: Discard (JES-127, B4)
- *
- * The hand card modal offers Discard — identical to Play except the verb: the
- * card leaves the hand for the table (graveyard is table geography, not
- * Shuffler state), and Action History says "Discard" rather than "Play".
- *
- * RUN: npm run test:verify
- */
 
 import { test, expect } from '@playwright/test';
 import { seedGame } from './seedGame.js';
@@ -25,10 +16,6 @@ test.describe('Discard from hand', () => {
     await setupGame(page);
     await expect(page.locator('.hand-count')).toHaveText('7');
 
-    // Open the first hand card's modal and discard it. Clicking at Playwright
-    // speed can straddle htmx's swap/settle of the freshly-opened modal (the
-    // mousedown lands on a node that is replaced before mouseup, so no click
-    // event fires — impossible at human speed). Retry until the discard lands.
     const handCount = page.locator('.hand-count');
     await expect(async () => {
       if ((await handCount.textContent()) === '6') {

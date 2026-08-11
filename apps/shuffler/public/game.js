@@ -2,9 +2,6 @@
 let handScrollPosition = 0;
 let revealedCardsScrollPosition = 0;
 
-/**
- * Retain scroll position of hand
- */
 document.addEventListener("htmx:beforeSwap", function (evt) {
   // Store the current scroll position of the hand section
   const handSection = document.querySelector("#hand-section .hand-cards");
@@ -36,20 +33,9 @@ document.addEventListener("htmx:afterSwap", function (evt) {
     revealedCardsSection.scrollLeft = Math.min(revealedCardsScrollPosition, Math.max(0, maxScrollLeft));
   }
 
-  // The new menu markup renders with aria-expanded="false"; re-sync it to the
-  // persistent body state (see setMenuOpen below).
   syncMenuToggleAria();
 });
 
-/**
- * Hamburger menu toggle.
- *
- * The open/closed state is a class on <body>, which HTMX never swaps. The menu
- * markup itself lives inside #game-container and is replaced on every
- * game-state-updated swap, so keeping the state on an element that survives
- * swaps avoids racing the swap/settle lifecycle. The toggle uses event
- * delegation on the document so it keeps working after the markup is replaced.
- */
 function setMenuOpen(open) {
   document.body.classList.toggle("game-menu-open", open);
   syncMenuToggleAria();
@@ -68,17 +54,11 @@ document.addEventListener("click", function (evt) {
     return;
   }
 
-  // Clicking anywhere outside the open menu closes it. Clicks land on an open
-  // modal overlay too (it sits above the panel, outside #game-menu), so opening
-  // a modal then interacting with it dismisses the menu underneath.
   if (document.body.classList.contains("game-menu-open") && !evt.target.closest("#game-menu")) {
     setMenuOpen(false);
   }
 });
 
-/**
- * Copy card image to clipboard
- */
 // Function to copy card image to clipboard using proxy URL
 async function copyCardToClipboard(cardId, face) {
   // make sure tracing exists
@@ -107,9 +87,6 @@ async function copyCardToClipboard(cardId, face) {
   });
 }
 
-// Table mode (JES-127): Play/Discard at a table send the card to the tabletop
-// instead of the clipboard. Optimistic button feedback, same spirit as
-// "Copied!" below; on failure the server returns an explanatory error modal.
 document.addEventListener("htmx:beforeRequest", function (evt) {
   if (evt.detail.elt.classList.contains("table-play-button")) {
     evt.detail.elt.textContent = "Sent to table";
@@ -144,8 +121,6 @@ document.addEventListener("htmx:beforeRequest", async function (evt) {
 // Function to copy card image to clipboard from modal
 window.copyCardImageToClipboard = async function (event, imageUrl, cardName) {
   try {
-    // Extract card ID and face from the image URL
-    // URL format: https://cards.scryfall.io/large/front/{first}/{second}/{cardId}.jpg
     const urlParts = imageUrl.split("/");
     const filename = urlParts[urlParts.length - 1];
     const cardId = filename.split(".")[0];
@@ -184,16 +159,10 @@ window.copyCardImageToClipboard = async function (event, imageUrl, cardName) {
   }
 };
 
-/**
- * Drag/drop for hand card rearranging
- */
 // Drag-and-drop state
 let draggedCard = null;
 let draggedFromPosition = null;
 
-// Easter egg: the hand-symbol (image + count) can be dragged into any hand-drop-zone
-// like a card. Its position is purely cosmetic — not GameState, not persisted past the
-// tab — so it's tracked in sessionStorage and re-applied after every htmx re-render.
 const HAND_SYMBOL_SENTINEL = "hand-symbol";
 
 function handSymbolPositionKey(gameId) {
@@ -326,8 +295,6 @@ function handleDrop(e) {
   }
 
   if (draggedCard && draggedFromPosition !== null) {
-    // Calculate the target position
-    // If dropping after the dragged card's current position, adjust by -1 (why?)
     let targetPosition = dropPosition;
     if (dropPosition > draggedFromPosition) {
       targetPosition = dropPosition - 1;
@@ -355,25 +322,10 @@ function handleDrop(e) {
   return false;
 }
 
-/**
- * Keyboard navigation for card modal
- */
-/**
- * Standard undo hotkey (Ctrl+Z / Cmd+Z).
- *
- * Clicks the live undo button rendered inside the (possibly hidden) hamburger
- * menu, so its current event index and expected-version come along for free.
- * Ignored while a modal is open or while typing in a field.
- */
 document.addEventListener('keydown', (event) => {
   const isUndo = (event.ctrlKey || event.metaKey) && !event.shiftKey && !event.altKey && event.key.toLowerCase() === 'z';
   if (!isUndo) return;
 
-  // Don't hijack undo inside text inputs, or while any modal is open. This
-  // checks existence, not literal focus — but modal-focus.js makes the
-  // background `inert` whenever a modal is open, and inert content can't
-  // hold focus, so "a modal exists" and "a modal has focus" are equivalent
-  // in practice.
   const target = event.target;
   if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
   if (document.querySelector('.modal-overlay, .card-modal-overlay')) return;

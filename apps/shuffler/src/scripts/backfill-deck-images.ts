@@ -1,17 +1,5 @@
 #!/usr/bin/env node
 
-/**
- * Backfill Scryfall image URLs (imageUris/backImageUris) into existing deck
- * files in decks/ without re-downloading them from MTGJSON/Archidekt.
- *
- * Unlike `precons:fetch-mtgjson -- --convert` (which rewrites every field,
- * including a fresh retrievedDate), this only ADDS the image URL fields — a
- * clean, additive diff. Idempotent: re-running refreshes the URLs.
- *
- * Usage:
- *   npm run decks:backfill-images                 # all decks/*.json
- *   npm run decks:backfill-images -- <file>...    # specific files (names or paths)
- */
 
 import { promises as fs } from "fs";
 import { join, basename } from "path";

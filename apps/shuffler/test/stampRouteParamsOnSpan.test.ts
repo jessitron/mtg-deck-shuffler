@@ -2,8 +2,6 @@ import { describe, test, expect } from "@jest/globals";
 import { Span } from "@opentelemetry/api";
 import { stampRouteParamsOnSpan } from "../src/tracing_util.js";
 
-// A minimal fake Span that records setAttribute calls. We only implement the
-// surface stampRouteParamsOnSpan touches.
 function fakeSpan(): { span: Span; attributes: Record<string, unknown> } {
   const attributes: Record<string, unknown> = {};
   const span = {

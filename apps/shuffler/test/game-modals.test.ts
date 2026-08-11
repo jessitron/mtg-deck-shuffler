@@ -4,10 +4,6 @@ import { PERSISTED_DECK_VERSION } from "../src/types.js";
 import { formatTableModalHtmlFragment } from "../src/view/play-game/game-modals.js";
 import { lightningBolt, ancestralRecall, blackLotus, testProvenance } from "./generators.js";
 
-// JES-153: Cards on Table must be alphabetical by canonical card name. GameState
-// already keeps `gameCards` globally name-sorted (an invariant unrelated to table
-// display), so listTable() is alphabetical only as a side effect. This test pins
-// the ordering explicitly at the view layer, independent of play order.
 describe("game-modals: Cards on Table ordering", () => {
   test("renders table cards alphabetically regardless of play order", () => {
     const deck = {
@@ -22,8 +18,6 @@ describe("game-modals: Cards on Table ordering", () => {
 
     const game = GameState.newGame(1, 1, 1, deck);
 
-    // Draw all three to hand, then play them out of alphabetical order:
-    // Lightning Bolt, then Black Lotus, then Ancestral Recall.
     game.draw();
     game.draw();
     game.draw();

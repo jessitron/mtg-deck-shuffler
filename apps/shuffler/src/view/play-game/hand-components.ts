@@ -6,8 +6,6 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
   const handCardsWithDropZones = handCardsList
     .map((gameCard: GameCard, index: number) => {
       const cardHtml = formatCardContainer({ gameCard, actions: "", gameId: game.gameId, expectedVersion: game.getStateVersion(), whatHappened, draggable: true, handPosition: index });
-      // Add a drop zone before the first card. It's taken out of flex flow (see .hand-drop-zone-leading
-      // in game.css) so it doesn't shift row 1's cards relative to the rows below it.
       const dropZoneBefore = index === 0 ? `<div class="hand-drop-zone hand-drop-zone-leading" data-hand-position="${index}"></div>` : "";
       // Add a drop zone after each card
       const dropZoneAfter = `<div class="hand-drop-zone" data-hand-position="${index + 1}"></div>`;
@@ -29,12 +27,6 @@ export function formatHandSectionHtmlFragment(game: GameState, whatHappened: Wha
       </div>`;
 }
 
-/**
- * The Mulligan button sits above the hand during the opening-hand acceptance
- * stage. It's gone once the player takes any action other than rearranging
- * their hand (the stage lives in game state — see GameState.isInMulliganStage).
- * Label is "Mulligan" for the first one, then "Mulligan #2", "#3", ...
- */
 function formatMulliganButtonHtmlFragment(game: GameState): string {
   if (!game.isInMulliganStage()) {
     return "";

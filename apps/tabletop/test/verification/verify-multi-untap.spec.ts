@@ -1,18 +1,6 @@
 import { test, expect, Page, BrowserContext } from "@playwright/test";
 import { randomUUID } from "node:crypto";
 
-/**
- * Ticket 16 (multi-untap): with several cards marquee-selected, clicking one
- * propagates that card's NEW tapped state to the whole selection — and the
- * whole gesture is ONE undo entry.
- *
- * This is the required regression test for a deliberate dependency on
- * undocumented tldraw internals: PointingShape.onPointerUp calls
- * markHistoryStoppingPoint() and updateShapes() AFTER onClick returns, so the
- * propagated writes are deferred via queueMicrotask to land in the same (new)
- * undo entry as the clicked card's own change. If a tldraw upgrade reorders
- * that, the one-Ctrl+Z assertions here are the tripwire.
- */
 function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
 }
@@ -47,8 +35,6 @@ async function zoomToFit(page: Page) {
   await page.waitForTimeout(300);
 }
 
-// Cards are portrait (170x238) and arrive unrotated, so on-screen orientation
-// is a scale-proof read of tapped state: tapped = landscape.
 async function isTapped(page: Page, instanceId: string): Promise<boolean> {
   const box = await page.locator(`#shape\\:card-${instanceId}`).boundingBox();
   if (!box) throw new Error(`no bounding box for card ${instanceId}`);
@@ -73,9 +59,6 @@ async function placeCard(page: Page, baseURL: string | undefined, tableSlug: str
   await expect(page.locator(`#shape\\:card-${instanceId}`)).toBeAttached();
 }
 
-// Marquee-select by brushing a rect that covers the given cards. Starting
-// over locked furniture (the playmat) is fine — tldraw treats pointer-down
-// on a locked shape as canvas, which starts a brush.
 async function marqueeSelect(page: Page, instanceIds: string[]) {
   const boxes = [];
   for (const id of instanceIds) {
@@ -91,8 +74,6 @@ async function marqueeSelect(page: Page, instanceIds: string[]) {
   await page.mouse.down();
   await page.mouse.move(right + 15, bottom + 15, { steps: 10 });
   await page.mouse.up();
-  // Double-click cooldown: a click too soon after this mouse-up could be
-  // classified by tldraw as part of a double-click gesture.
   await page.waitForTimeout(500);
 }
 
@@ -106,8 +87,6 @@ test("clicking one selected card taps the whole selection, and one Ctrl+Z revert
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
-  // A goes on the Stack — far from the battlefield, so the marquee over B+C
-  // can't catch it. B and C land at distinct battlefield grid positions.
   const idA = randomUUID();
   const idB = randomUUID();
   const idC = randomUUID();

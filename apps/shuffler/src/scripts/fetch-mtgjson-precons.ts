@@ -77,9 +77,6 @@ async function downloadAndDecompressGz(url: string, destPath: string): Promise<v
 
 async function loadCardDatabase(jsonPath: string): Promise<Map<string, MtgjsonCard>> {
   console.log(`Loading card database from ${jsonPath}...`);
-  // AllIdentifiers.json exceeds Node's max string length (~512MB), so we can't
-  // read it as a single string. Stream the top-level `data` object's entries
-  // instead, building the UUID→card map one card at a time.
   const cardDatabase = new Map<string, MtgjsonCard>();
   const cardStream = chain([
     createReadStream(jsonPath),
@@ -103,8 +100,6 @@ async function loadCardDatabase(jsonPath: string): Promise<Map<string, MtgjsonCa
 
 async function processDecks(shouldConvert: boolean, skipExisting: boolean, cardDatabase?: Map<string, MtgjsonCard>, setNames?: Map<string, string>): Promise<void> {
   const adapter = new MtgjsonDeckAdapter();
-  // One gateway across all decks so shared cards (Arcane Signet, Sol Ring, ...)
-  // are fetched from Scryfall once and reused.
   const imagesGateway = new ScryfallCardImagesGateway();
 
   // Read AllDeckFiles directory
@@ -164,8 +159,6 @@ async function processDecks(shouldConvert: boolean, skipExisting: boolean, cardD
         }
 
         try {
-          // Convert using adapter (pass card database for back-face lookups,
-          // set names so cards display the full set text instead of the code)
           const deck = adapter.convertMtgjsonToDeck(mtgjsonDeck, file, cardDatabase, setNames);
 
           // Enrich with Scryfall image URLs (the versioned URLs fresh cards need)

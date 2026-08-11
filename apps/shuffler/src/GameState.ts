@@ -61,18 +61,10 @@ export function isInCommandZone(gameCard: GameCard): gameCard is GameCard & { lo
 /** The number of cards drawn for an opening hand (and on each mulligan). */
 export const OPENING_HAND_SIZE = 7;
 
-/**
- * Everything the Shuffler knows about the table a game joined (JES-127).
- * Minted at prep/join time; the seatId is the seat's identity (player names
- * are not unique) — a short GUID until the Spine owns seats.
- */
 export interface TableInfo {
   tableName: string;
   playerName: string;
   seatId: string;
-  // Set when the Spine join succeeded (src/port-spine/sendToSpine.ts,
-  // joinSpineTableBestEffort). Best-effort: absent when the Spine was
-  // unreachable at join time, in which case this game sends nothing to it.
   spineTableId?: string;
   spineSeatNumber?: number;
 }
@@ -103,8 +95,6 @@ export class GameState {
   public readonly seatId?: string;
   public readonly spineTableId?: string;
   public readonly spineSeatNumber?: number;
-  // Table look: the /prepare picker's sleeve/playmat choice, snapshotted at
-  // newGame time. Optional, no version bump — same pattern as table info.
   public readonly sleeveColor?: string;
   public readonly playmatImagePath?: string;
 
@@ -142,8 +132,6 @@ export class GameState {
         : ({ type: "Library", position: libraryPositionCounter++ } as LibraryLocation),
       gameCardIndex: index,
       currentFace: "front" as const,
-      // Instance identity for the event contract (JES-128): an opaque GUID,
-      // minted per card per game. gameCardIndex stays Shuffler-internal.
       cardInstanceId: randomUUID(),
     }));
 
@@ -211,20 +199,12 @@ export class GameState {
     psg: PersistedGameState | any,
     cardRepo: CardRepositoryPort
   ): Promise<GameState> {
-    // Fail loudly on incompatible versions rather than crashing later with a
-    // cryptic "card not found"/JSON error during hydration. Every format before
-    // the current one stored card data (inline or in the repository) in a shape
-    // this build can no longer read, so there is no safe migration path.
     if (psg.version !== PERSISTED_GAME_STATE_VERSION) {
       throw new IncompatibleStateVersionError(psg.version, PERSISTED_GAME_STATE_VERSION);
     }
 
     const hydratedGameCards = await hydrateGameCards(psg.gameCards, cardRepo);
 
-    // Mint-on-load (JES-128): games saved before cardInstanceId existed get
-    // their instance ids the next time they're touched. The minted ids are
-    // durable — toPersistedGameState carries them — so an instance id is
-    // stable across requests once assigned (the Tabletop dedups on it).
     for (const gameCard of hydratedGameCards) {
       if (!gameCard.cardInstanceId) {
         gameCard.cardInstanceId = randomUUID();
@@ -251,10 +231,6 @@ export class GameState {
     return this.eventLog.getEvents()[gameEventIndex];
   }
 
-  /**
-   * Returns the current state version, which increments on every mutation.
-   * Used for optimistic concurrency control to detect stale state.
-   */
   public getStateVersion(): number {
     return this.eventLog.getEvents().length;
   }
@@ -325,12 +301,6 @@ export class GameState {
     return { shuffling: true };
   }
 
-  /**
-   * Fisher-Yates the library and apply the moves WITHOUT recording an event,
-   * returning the moves performed. Used both by the public shuffle() (which
-   * wraps it in a "shuffle library" event) and by mulligan() (which folds these
-   * moves into its single atomic "mulligan" event).
-   */
   private shuffleCollectingMoves(): CardMove[] {
     const libraryCards = this.gameCards.filter(isInLibrary);
 
@@ -358,8 +328,6 @@ export class GameState {
   }
 
   public startGame(browserTabId?: string): this {
-    // Record the start game event and shuffle the library
-    // Status is already set to Active when game is created
     this.eventLog.record({ ...StartGameEvent, browserTabId });
     this.shuffle(browserTabId); // We don't need the return value here, just the side effect
 
@@ -369,22 +337,11 @@ export class GameState {
     return this;
   }
 
-  /**
-   * Deal the opening hand as a single atomic "deal opening hand" event carrying
-   * its draw moves. Being one event (recorded after the draws) makes it the
-   * most-recent live event while the player decides whether to keep — that's how
-   * the hand-acceptance stage is derived (see isInHandAcceptanceStage).
-   */
   private dealOpeningHand(browserTabId?: string): void {
     const moves = this.drawCardsCollectingMoves(OPENING_HAND_SIZE);
     this.eventLog.record({ eventName: "deal opening hand", moves, browserTabId });
   }
 
-  /**
-   * Move up to `count` cards (fewer only for tiny test decks) from the top of
-   * the library into the hand WITHOUT recording per-card events, returning the
-   * moves. Callers fold these into a single atomic deal/mulligan event.
-   */
   private drawCardsCollectingMoves(count: number): CardMove[] {
     const cardsToDraw = Math.min(count, this.listLibrary().length);
     const moves: CardMove[] = [];
@@ -411,11 +368,6 @@ export class GameState {
     return libraryCards.length > 0 ? Math.max(...libraryCards.map((gc) => gc.location.position)) + 1 : 0;
   }
 
-  /**
-   * Whether the player is still in the opening-hand acceptance (mulligan) stage.
-   * Derived from the event log, so undoing the action that ended the stage
-   * brings it back automatically.
-   */
   public isInMulliganStage(): boolean {
     return this.eventLog.isInHandAcceptanceStage();
   }
@@ -425,19 +377,9 @@ export class GameState {
     return this.eventLog.mulliganCount();
   }
 
-  /**
-   * Mulligan: return the whole hand to the library, shuffle, and redraw a fresh
-   * opening hand — recorded as a SINGLE atomic "mulligan" event carrying every
-   * move it made. That keeps us in the hand-acceptance stage, bumps the derived
-   * mulligan count, and (because it's one event) lets undo reverse the whole
-   * mulligan in one step, restoring the previous hand and library exactly.
-   */
   public mulligan(browserTabId?: string): WhatHappened {
     const moves: CardMove[] = [];
 
-    // Return every hand card to the bottom of the library, resetting any flipped
-    // two-faced cards to their front face (library cards are shown face-down
-    // anyway, and a freshly redrawn card should start on its front).
     this.listHand().forEach((gameCard) => {
       gameCard.currentFace = "front";
       const move: CardMove = {
@@ -458,12 +400,6 @@ export class GameState {
     return { shuffling: true };
   }
 
-  /**
-   * Grouch if the card isn't where it's supposed to be, then move it. Record the event.
-   * @param move
-   * @param recording - Shuffling or un-shuffling sets it to false, since that's recorded in its own way.
-   * @param browserTabId - Optional browser tab identifier for event tracking
-   */
   private executeMove(move: CardMove, recording: boolean = true, browserTabId?: string, verb?: "discard") {
     function verifyLocationsAreIdentical(expected: CardLocation, actual: CardLocation) {
       // hmm, this only matters for UNDO, or any sort of move replay. When I have that, move it
@@ -580,12 +516,6 @@ export class GameState {
     };
   }
 
-  /**
-   * Discard (JES-127, B4): identical to play except the verb — the card lands
-   * in TableLocation (the graveyard is table geography, not Shuffler state; at
-   * a table the route sends zoneHint "graveyard"). The current face is kept:
-   * a flipped MDFC goes to the graveyard as the face it was.
-   */
   public discardCard(gameCardIndex: number, browserTabId?: string): WhatHappened {
     if (gameCardIndex < 0 || gameCardIndex >= this.gameCards.length) {
       throw new Error(`Invalid gameCardIndex: ${gameCardIndex}`);
@@ -684,9 +614,6 @@ export class GameState {
       // Moving to end
       newPosition = handCards[handCards.length - 1].location.position + 1;
     } else {
-      // Moving between cards
-      // When moving right, insert after toHandPosition
-      // When moving left, insert before toHandPosition
       if (fromHandPosition < toHandPosition) {
         // Moving right: insert after toHandPosition
         const leftCard = handCards[toHandPosition];
@@ -847,8 +774,6 @@ export class GameState {
   public undo(gameEventIndex: number, browserTabId?: string): GameState {
     const event = this.eventLog.getEvents()[gameEventIndex];
 
-    // A mulligan is atomic: reverse every move it made, in reverse order, to
-    // restore the previous hand and library exactly.
     if (event.eventName === "mulligan") {
       for (let i = event.moves.length - 1; i >= 0; i--) {
         const move = event.moves[i];

@@ -15,13 +15,6 @@ module Spine
 
     use(*OpenTelemetry::Instrumentation::Rack::Instrumentation.instance.middleware_args)
 
-    # Set in prod (SPINE_BASE_PATH=/spine): the Spine is reachable at
-    # mtg.jessitron.honeydemo.io/spine, behind the same ALB as the Shuffler.
-    # AWS ALB ingress can't strip a path prefix, so the app itself answers
-    # under it — both externally (via the ALB) and internally (the
-    # Shuffler's prod SPINE_URL is http://spine-service/spine too, so one
-    # set of routes serves both callers). Unset locally: no prefix, no
-    # behavior change. Read live (not memoized) so tests can toggle it.
     def self.base_path
       ENV.fetch("SPINE_BASE_PATH", "")
     end
@@ -107,14 +100,7 @@ module Spine
           base_path: self.class.base_path,
           events: table.events_dataset.order(:seq).all,
           team_slug: ENV.fetch("HONEYCOMB_TEAM_SLUG", "modernity"),
-          # "local" is the right default for dev; prod sets HONEYCOMB_ENV_SLUG=
-          # mtg-deck-shuffler in k8s/configmap.yaml, or these trace links would
-          # silently point at the wrong environment.
           env_slug: ENV.fetch("HONEYCOMB_ENV_SLUG", "local"),
-          # Browser-side tracing key, same ingest key the server uses (Invariant 3:
-          # OK to publish in the browser). Baked directly into the page like the
-          # Shuffler's HONEYCOMB_TRACING_INIT_SCRIPT — no collector, since the Spine
-          # has none yet and standing one up for one admin page is disproportionate.
           honeycomb_api_key: ENV["HONEYCOMB_API_KEY"])
       end
 
@@ -144,8 +130,6 @@ module Spine
       end
     end
 
-    # A second name-taken race means someone else's create won between our
-    # lookup and our create attempt — the table now exists, so join it.
     def join_table(name:, player_name:)
       Table.join!(name: name, player_name: player_name)
     rescue Table::NameTaken

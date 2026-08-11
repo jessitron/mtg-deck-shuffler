@@ -1,11 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { chooseLicenseKey } from "../src/client/chooseLicenseKey";
 
-// tldraw's license gate only fires on HTTPS non-loopback origins. Everywhere
-// else, handing tldraw a key is at best pointless and at worst blanks the
-// canvas (a parseable-but-expired key trips the gate regardless of origin).
-// So: pass the baked key ONLY where the gate can fire; withhold it — as empty
-// string, never undefined — everywhere else.
 describe("chooseLicenseKey", () => {
   const key = "tldraw-key-for-table.jessitron.honeydemo.io";
 
@@ -29,8 +24,6 @@ describe("chooseLicenseKey", () => {
   });
 
   it("withholds as empty string, not undefined, where the gate cannot fire", () => {
-    // undefined would let LicenseProvider read the baked key back out of the
-    // env that vite's `define` rewrote inside tldraw's own bundle.
     expect(chooseLicenseKey("http:", "localhost", undefined)).toBe("");
   });
 });

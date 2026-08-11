@@ -1,17 +1,3 @@
-/**
- * The one page shell (formatHtmlHead in src/view/common/html-layout.ts)
- * inlines a <script> that guards Hny.initializeTracing on
- * `window.Hny && window.browserTabId`. That guard didn't cover the apiKey
- * value: when neither HONEYCOMB_INGEST_API_KEY nor HONEYCOMB_API_KEY is set
- * server-side, string interpolation bakes the literal 4-character string
- * "undefined" into the key, the guard passes anyway, and OTLP export 401s
- * silently (browser-tracing-key-guard).
- *
- * HONEYCOMB_TRACING_INIT_SCRIPT is the exact literal source shipped inside
- * that <script> tag. This test evals that same string (not a
- * reimplementation of it) with a mocked window/Hny/console, so it exercises
- * real browser behavior.
- */
 
 import { HONEYCOMB_TRACING_INIT_SCRIPT } from "../src/view/common/html-layout.js";
 
@@ -23,9 +9,6 @@ function runGuard(apiKey: string) {
     console: { warn },
   };
 
-  // Evaluate the exact source string the browser receives, in a scope where
-  // `window`/`console` resolve to our mocks and `Hny` resolves via `window.Hny`
-  // (the inline script relies on `Hny` being a bare global set by hny.js).
   const fn = new Function(
     "window",
     "console",

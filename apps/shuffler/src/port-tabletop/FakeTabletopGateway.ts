@@ -1,9 +1,5 @@
 import { CardPlayedEvent, SeatJoinedEvent, TabletopPort } from "./types.js";
 
-/**
- * Fake (not mock) Tabletop for tests: records every event it accepts, and can
- * be told to fail — which is how send-then-commit's failure path is exercised.
- */
 export class FakeTabletopGateway implements TabletopPort {
   public readonly sentEvents: { tableName: string; event: CardPlayedEvent }[] = [];
   public readonly sentSeatJoinedEvents: { tableName: string; event: SeatJoinedEvent }[] = [];

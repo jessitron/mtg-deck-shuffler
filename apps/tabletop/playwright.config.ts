@@ -1,9 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
 
-/**
- * End-to-end verification for the Tabletop. The server is started by
- * verify.sh on port 5183 (distinct from dev's 5180 and the Shuffler's ports).
- */
 export default defineConfig({
   testDir: "./test/verification",
   fullyParallel: false,

@@ -2,17 +2,6 @@ import { describe, test, expect } from "@jest/globals";
 import { readFileSync } from "fs";
 import vm from "vm";
 
-/**
- * public/modal-query-params.js is a plain browser <script> (not an ES module,
- * loaded via a bare <script src>), so it can't be `import`ed here. It's
- * evaluated instead with `vm`, in a sandbox that stubs the DOM APIs it
- * touches, and `planAutoOpenActions` is pulled out via top-level `this`
- * (a non-strict script's top-level `this` is the sandbox's global object).
- * This exercises the exact source served to the browser, not a copy.
- *
- * The path is relative to the cwd `npm test` runs from (apps/shuffler/), same
- * as every other relative path in this repo's tooling.
- */
 function loadPlanAutoOpenActions(): (search: string, pathname: string) => any[] {
   const source = readFileSync("public/modal-query-params.js", "utf-8");
   const sandbox: any = {

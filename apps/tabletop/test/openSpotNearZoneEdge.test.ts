@@ -1,9 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { findOpenSpotsNearZoneEdge, Rect } from "../src/client/shapes/openSpotNearZoneEdge";
 
-// Ticket 18 (counters): when a host card leaves the battlefield, its counters
-// detach and land at an open spot near the destination zone's edge — outside
-// the zone, on the table, not overlapping whatever already sits there.
 
 const zone: Rect = { x: 100, y: 100, w: 200, h: 300 };
 const SPOT = 44;
@@ -23,8 +20,6 @@ describe("findOpenSpotsNearZoneEdge", () => {
     const [spot] = findOpenSpotsNearZoneEdge({ zone, entry, spotSize: SPOT, occupied: [], count: 1 });
 
     expect(overlaps(asRect(spot), zone)).toBe(false);
-    // Near the left edge: fully left of the zone, within a couple of
-    // spot-widths of it, and roughly level with the entry point.
     expect(spot.x + SPOT).toBeLessThanOrEqual(zone.x);
     expect(spot.x + SPOT).toBeGreaterThan(zone.x - 3 * SPOT);
     expect(Math.abs(spot.y + SPOT / 2 - entry.y)).toBeLessThanOrEqual(2 * SPOT);

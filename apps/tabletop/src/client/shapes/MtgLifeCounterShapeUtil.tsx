@@ -2,11 +2,6 @@ import { BaseBoxShapeUtil, HTMLContainer } from "tldraw";
 import { MtgLifeCounterShape, mtgLifeCounterShapeProps } from "../../shared/mtgLifeCounterShape";
 import { useState, type CSSProperties, type PointerEventHandler } from "react";
 
-/**
- * BT.601 luminance threshold for picking readable text over a sleeve color —
- * ported from `isDarkHex` in apps/shuffler/src/view/common/shared-components.ts
- * (no shared package between ships). Keep the two in sync by hand.
- */
 function isDarkHex(hex: string): boolean {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
@@ -14,25 +9,6 @@ function isDarkHex(hex: string): boolean {
   return 0.299 * r + 0.587 * g + 0.114 * b < 128;
 }
 
-/**
- * table-layout ticket 20: `mtg-life-counter`, locked furniture on the name
- * row. A number with +/- buttons plus a directly-typeable field — no
- * tldraw editing state involved (that's for double-click-to-edit shapes;
- * this one is always live, click and type).
- *
- * Locking gates tldraw's gesture state machine (SelectTool never lets a
- * locked shape reach PointingShape, so it never enters click/drag/selection)
- * but not DOM events inside component() — buttons and the input work via
- * the HyperlinkButton pattern: `pointer-events: all` plus
- * `editor.markEventAsHandled(e)` on pointer handlers, or the canvas
- * swallows the press before it reaches React. See
- * owners/tabletop-shape-mechanics/architecture.md's life-counter section.
- *
- * The typeable field is a plain, non-readOnly `<input>` — tldraw's own
- * `shouldSkipEvent` (useKeyboardShortcuts.ts) already exempts exactly that
- * from tool hotkeys by checking `e.target.tagName`, for free, with no
- * `stopPropagation` needed.
- */
 export class MtgLifeCounterShapeUtil extends BaseBoxShapeUtil<MtgLifeCounterShape> {
   static override type = "mtg-life-counter" as const;
   static override props = mtgLifeCounterShapeProps;
@@ -47,20 +23,10 @@ export class MtgLifeCounterShapeUtil extends BaseBoxShapeUtil<MtgLifeCounterShap
 
   component(shape: MtgLifeCounterShape) {
     const { w, h, value, label, sleeveColor } = shape.props;
-    // Commander-damage counters (ticket 21) carry an opponent identity; a
-    // plain life counter (label/sleeveColor both null) renders exactly as
-    // ticket 20 shipped it.
     const identityBandH = label ? h * 0.3 : 0;
     const counterH = h - identityBandH;
-    // Local buffer only while the field is focused — otherwise this shows
-    // the live synced value, including changes from other players' presses.
     const [draft, setDraft] = useState<string | null>(null);
 
-    // A locked shape's props are otherwise unreachable: `editor.updateShapes`
-    // silently drops any partial for a locked shape unless the partial itself
-    // unlocks it — `{ ignoreShapeLock: true }` is the documented escape
-    // hatch (Editor.ts, `run`'s options) for furniture that must stay locked
-    // (never draggable/selectable) while its own controls still work.
     const setValue = (next: number) =>
       this.editor.run(
         () =>
@@ -117,9 +83,6 @@ export class MtgLifeCounterShapeUtil extends BaseBoxShapeUtil<MtgLifeCounterShap
           style={{ pointerEvents: "all", width: w, height: h, display: "flex", flexDirection: "column" }}
         >
           {label ? (
-            // Identity band (ticket 21): opponent name over their sleeve
-            // color — one of two redundant identity signals, the other
-            // being the counter band's sleeve-colored border below.
             <div
               data-testid="mtg-life-counter-label"
               style={{
@@ -154,11 +117,6 @@ export class MtgLifeCounterShapeUtil extends BaseBoxShapeUtil<MtgLifeCounterShap
               gap: counterH * (4 / 48),
               background: "var(--deep-space)",
               border: `${counterH * (3 / 48)}px solid ${sleeveColor ?? "var(--dark-pink)"}`,
-              // Staged, not decided (shuffler-looks-like-itself owner review,
-              // ticket 20): a rounded rectangle is none of the fleet's three
-              // sanctioned round categories (cards, playmat, count discs).
-              // Options staged on /design#life-counter; this is option B
-              // (soft rectangle), the placeholder pending Jess's sign-off.
               borderRadius: label ? `0 0 ${counterH * 0.15}px ${counterH * 0.15}px` : counterH * 0.15,
               borderTop: label ? "none" : undefined,
             }}

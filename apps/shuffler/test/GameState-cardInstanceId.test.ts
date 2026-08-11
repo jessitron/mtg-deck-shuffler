@@ -5,12 +5,6 @@ import { minimalDeck, deckWithOneCommander } from "./generators.js";
 import { InMemoryCardRepositoryAdapter } from "../src/port-card-repository/InMemoryCardRepositoryAdapter.js";
 import { Deck } from "../src/types.js";
 
-/**
- * cardInstanceId (JES-128, B2a): an opaque GUID minted per card, per game.
- * It is the card's *instance* identity in the event contract — "this particular
- * Forest" — as opposed to scryfallId (the definition) and gameCardIndex (the
- * Shuffler-internal, FORBIDDEN-beyond-the-boundary alphabetical rank).
- */
 
 const GUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
@@ -63,8 +57,6 @@ describe("cardInstanceId minting", () => {
     }
     expect(new Set(mintedIds).size).toBe(mintedIds.length);
 
-    // Mint-on-load must be durable: the next save carries the minted ids, so
-    // the instance id is stable across requests (the Tabletop dedups on it).
     const resaved = reloaded.toPersistedGameState();
     expect(resaved.gameCards.map((pgc) => pgc.cardInstanceId)).toEqual(mintedIds);
   });

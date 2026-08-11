@@ -4,11 +4,6 @@ import { sendCardToTableFirst, sendSeatJoinedBestEffort, zoneHintForPlay } from 
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
 import { lightningBolt, testProvenance } from "../generators.js";
 
-/**
- * Send-then-commit (JES-127, B3): the sending half. The route sends FIRST and
- * commits the game state only on success; these tests pin down what is sent
- * (and that failure propagates, so the route can block the play).
- */
 
 const forest: CardDefinition = {
   name: "Forest",

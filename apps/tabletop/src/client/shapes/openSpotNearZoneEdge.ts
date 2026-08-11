@@ -1,13 +1,3 @@
-/**
- * Ticket 18 (counters): open-spot finding for counters evicted from a card
- * that just left the battlefield. They land on the table just OUTSIDE the
- * destination zone, along the edge nearest where the card entered — "scoot
- * themselves over to the edge of the furniture and hang around on the table."
- *
- * Pure geometry over plain rects — no Editor — so it's unit-testable. Page
- * coordinates throughout; returned points are top-left corners for a
- * spotSize × spotSize shape.
- */
 
 export interface Rect {
   x: number;
@@ -49,10 +39,6 @@ export function findOpenSpotsNearZoneEdge(request: OpenSpotRequest): Array<{ x: 
     distances[candidate] < distances[best] ? candidate : best,
   );
 
-  // The anchor slot sits just outside the chosen edge, centered on the entry
-  // point's projection onto it. Later slots step sideways along the edge,
-  // alternating (+1, -1, +2, -2, …) so counters cluster near where the card
-  // went in rather than marching off in one direction.
   const vertical = edge === "left" || edge === "right";
   const anchor =
     edge === "left"
@@ -80,8 +66,6 @@ export function findOpenSpotsNearZoneEdge(request: OpenSpotRequest): Array<{ x: 
       placed = candidate;
       break;
     }
-    // Overlap beats failure: a hopelessly crowded table still gets its
-    // counters, stacked on the anchor slot (never inside the zone).
     placed ??= slotAt(0);
     occupied.push({ ...placed, w: spotSize, h: spotSize });
     spots.push(placed);

@@ -1,9 +1,6 @@
 require "erb"
 
 module Spine
-  # Renders the admin screen's ERB templates (views/admin/**). Locals become
-  # instance variables, same convention Rails views use, but spelled out
-  # here in plain Ruby rather than supplied by a framework.
   class AdminView
     include ERB::Util
 

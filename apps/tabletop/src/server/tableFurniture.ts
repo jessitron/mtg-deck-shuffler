@@ -20,19 +20,7 @@ import {
   stackBounds,
 } from "./cardLayout.js";
 
-// ============================================================================
-// Shared shape-building helpers for the table's furniture — the playmat,
-// library, graveyard, exile, name label, and Stack strip drawn at seat-joined
-// time (seatJoined.ts), plus the per-room z-index used when placing cards
-// (cardArrival.ts).
-// ============================================================================
 
-// Every locked background picture (playmat, library card back) gets a shape
-// id starting with this prefix — the one marker a Playwright spec needs to
-// tell "this table's own decor" apart from "something a player actually put
-// on the table" (e.g. `.tl-shape[data-shape-type="image"]:not([data-shape-id*="${FURNITURE_IMAGE_ID_MARKER}"])`),
-// without hand-duplicating each furniture piece's naming scheme. See
-// verify-life-counter.spec.ts.
 export const FURNITURE_IMAGE_ID_MARKER = "furniture-image-";
 
 export function pageIdOf(entry: RoomEntry): string {
@@ -48,12 +36,6 @@ export function nextIndex(tableName: string): IndexKey {
   return next;
 }
 
-// Furniture (playmat, library, command zone, graveyard, exile, name label, the
-// Stack) draws from a separate band, always below the ZERO_INDEX_KEY that
-// `nextIndex` counts up from — so any playmat, however late a seat joins, is
-// guaranteed beneath every card that exists, has ever existed, or ever will,
-// regardless of mint order. This is what makes "furniture is always behind
-// everything" structurally true instead of an accident of join order.
 const lowestFurnitureIndexByRoom = new Map<string, IndexKey>();
 function nextFurnitureIndex(tableName: string): IndexKey {
   const next = getIndexBelow(lowestFurnitureIndexByRoom.get(tableName) ?? null);
@@ -61,10 +43,6 @@ function nextFurnitureIndex(tableName: string): IndexKey {
   return next;
 }
 
-/**
- * Zones a card can be detected entering (01-zone-entry-events, upgraded in
- * tabletop-physics ticket 13 to real `mtg-zone` shapes).
- */
 export type Zone = MtgZoneShapeProps["zone"];
 
 export interface ZoneShapeArgs {
@@ -84,14 +62,6 @@ export interface ZoneShapeArgs {
   imageUrl?: string | null;
 }
 
-/**
- * Furniture (playmat, library, graveyard, exile, the Stack) as an `mtg-zone`
- * shape (tabletop-physics ticket 13) — always locked; tldraw's own
- * context-menu Lock/Unlock is the sole unlock affordance. `MtgZoneShapeUtil`
- * decides the visual treatment (dashed vs. playmat's solid border) from
- * `props.zone`. Full opacity (Jess, 2026-08-11) — furniture reads at full
- * strength rather than the earlier faint-outline treatment.
- */
 export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, sleeveColor, imageUrl }: ZoneShapeArgs): MtgZoneShape {
   return {
     id,
@@ -134,13 +104,6 @@ export interface MtgCardShapeArgs {
   opacity?: number;
 }
 
-/**
- * An `mtg-card` shape record — the one place every required `mtg-card` prop
- * is listed, shared by every seam that mints a card server-side
- * (cardArrival.ts's ordinary arrivals, seatJoined.ts's commanders and their
- * ghosts — table-layout ticket 18). A required prop added here can't drift
- * out of sync between mint sites.
- */
 export function mtgCardShape({
   id,
   pageId,
@@ -190,9 +153,6 @@ export function mtgCardShape({
       owner,
       isCommander,
     },
-    // No traceparent in meta — cards persist; traces don't. Zone membership
-    // lands here once a card is dragged (MtgCardShapeUtil.onTranslateEnd) —
-    // empty at mint time.
     meta: {},
   };
 }
@@ -242,14 +202,6 @@ export interface PlayerAreaLook {
   sleeveColor?: string;
 }
 
-/**
- * Draw a seat's whole player area — playmat, library, graveyard, exile, name
- * label — up front, before any card arrives. Idempotent on seatId: a second
- * call for a seat already drawn is a no-op (DESIGN.md's "physical no-op").
- *
- * A missing or broken image URL degrades to a plain box, never a broken
- * player area: the outline is always drawn; the image (if any) layers on top.
- */
 export async function ensurePlayerArea(
   entry: RoomEntry,
   pageId: string,
@@ -265,8 +217,6 @@ export async function ensurePlayerArea(
     seatIndex,
     playerName,
     playmatImageUrl: look.playmatImageUrl,
-    // sleeveColor wins (contract: seat.joined.v1) — a sleeved seat drops the
-    // card back entirely rather than keeping a loser around to mix up later.
     cardBackImageUrl: look.sleeveColor ? undefined : look.cardBackImageUrl,
     sleeveColor: look.sleeveColor,
     landCount: 0,
@@ -295,9 +245,6 @@ export async function ensurePlayerArea(
   const lifeCounterId = createShapeId(`life-counter-${entry.tableName}-${seatId}`);
 
   await entry.room.updateStore((store) => {
-    // The mat outline is always drawn — the fallback if the image is missing/broken.
-    // The picture (if any) is a prop on this same shape (MtgZoneShapeUtil renders it
-    // clipped to the box's own border radius), not a separate stock `image` shape.
     store.put(
       zoneShape({
         id: matId,
@@ -314,10 +261,6 @@ export async function ensurePlayerArea(
       })
     );
 
-    // A sleeved seat's pile is drawn by the zone shape itself (ticket 17):
-    // MtgZoneShapeUtil renders props.sleeveColor as the bare sleeve rectangle,
-    // inset like the image so the box's border and label still frame it. No
-    // image shape, so nothing opaque covers the zone's interior.
     store.put(
       zoneShape({
         id: libraryId,
@@ -334,11 +277,6 @@ export async function ensurePlayerArea(
       })
     );
     if (area.cardBackImageUrl) {
-      // An opaque image shape hides whatever's underneath it (tldraw limit), so the
-      // border and "Library" label have to read as an outward frame: the box is at
-      // full bounds above, and the image insets within it so the box's edge — and
-      // the label riding on it — stays visible as a ring around the picture. The
-      // top inset is the label band, so the label sits fully above the pile.
       const assetId = AssetRecordType.createId(`library-${entry.tableName}-${seatId}`);
       const insetW = library.w - 2 * LIBRARY_PILE_INSET;
       const insetH = library.h - ZONE_LABEL_BAND - LIBRARY_PILE_INSET;
@@ -412,10 +350,6 @@ export async function ensurePlayerArea(
       parentId: pageId,
       isLocked: true, // fixes a live bug: any player could drag/delete another player's name
       opacity: 1,
-      // One line, player name first, at double size (design ruling 2026-08-09,
-      // superseding the 2026-08-08 two-line ruling): `Name 〜 Deck`, joined by a
-      // wave-dash swoosh. A very long deck name can grow the autoSized label
-      // toward the neighboring seat — accepted trade-off for the bigger label.
       props: {
         richText: toRichText(look.deckName ? `${playerName} 〜 ${look.deckName}` : playerName),
         color: "green",
@@ -429,9 +363,6 @@ export async function ensurePlayerArea(
       meta: {},
     } as any);
 
-    // Life counter (ticket 20): locked furniture, starts at 40, far right of
-    // the name row. +/- and typing work through DOM events inside its own
-    // component() — locking only gates tldraw's gesture state machine.
     store.put({
       id: lifeCounterId,
       typeName: "shape",
@@ -450,8 +381,6 @@ export async function ensurePlayerArea(
 
   await ensureStackDrawn(entry, pageId);
 
-  // Attributes on the request span, not an event: this always runs inside the
-  // request that caused it (handleSeatJoined, or defensively handleCardArrival).
   trace.getActiveSpan()?.setAttributes({
     "seat.id": seatId,
     "player.name": playerName,
@@ -464,14 +393,6 @@ export async function ensurePlayerArea(
   return area;
 }
 
-/**
- * Draw the shared Stack — a fixed-size square centered on the origin, the
- * same footprint at every player count — the first time a seat joins. The
- * shape id is deterministic (one Stack per table); once it exists, later
- * joins are a no-op, which also means its z-order `index` can never be
- * silently promoted over whatever was placed above it since (the widening
- * bug tabletop-physics ticket 13 fixed).
- */
 export async function ensureStackDrawn(entry: RoomEntry, pageId: string): Promise<void> {
   if (entry.seats.size === 0) return;
   const bounds = stackBounds();
@@ -495,26 +416,6 @@ export async function ensureStackDrawn(entry: RoomEntry, pageId: string): Promis
   });
 }
 
-/**
- * Add one commander-damage counter (ticket 21) to `targetSeatId`'s name row
- * per entry in `commanderNames` — each labeled with that commander's own
- * name (a partner pair gets two distinctly-labeled counters), starting at 0.
- * `opponentSleeveColor` still identifies whose commanders these are (the
- * band/border color). Reuses `mtg-life-counter` (ticket 20) with the
- * commander's name + the opponent's sleeve baked in as the counter's
- * identity — the same shape, an extra label/sleeveColor. A no-op when
- * `commanderNames` is empty (an opponent with no commanders yet).
- *
- * Idempotent per (targetSeatId, opponentSeatId) pair: two seat.joined
- * requests can each see the other's seat already in `entry.seats` (set
- * synchronously in ensurePlayerArea, before either request's first await)
- * and both reach this call for the same pair. The existence check runs
- * inside the same synchronous `updateStore` callback as the mint, so
- * whichever call's callback runs first — JS callbacks run to completion
- * without interleaving — wins outright; the second sees its counter(s)
- * already there and skips, instead of double-minting and corrupting
- * `damageCounterCount`'s position bookkeeping.
- */
 export async function addCommanderDamageCounters(
   entry: RoomEntry,
   pageId: string,

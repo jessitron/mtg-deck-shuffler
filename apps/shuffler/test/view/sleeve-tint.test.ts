@@ -4,12 +4,6 @@ import { GameState } from "../../src/GameState.js";
 import { deckWithOneCommander } from "../generators.js";
 import * as fc from "fast-check";
 
-/**
- * The sleeve color is the player-identity signal (see notes/GLOSSARY.md): it
- * tints the deck-title plaque and the command-zone surround. Previously this
- * only happened client-side on /prepare (prep-picker.js); now it's
- * server-rendered so /game (no picker JS) shows the same tint on first paint.
- */
 
 describe("formatDeckTitleHtmlFragment sleeve tint", () => {
   test("no sleeve: no inline style", () => {

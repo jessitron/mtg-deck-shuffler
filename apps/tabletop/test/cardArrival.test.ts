@@ -5,19 +5,6 @@ import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
 import { playmatBounds, graveyardBounds, stackBounds } from "../src/server/cardLayout";
 
-/**
- * A5/JES-140: POST /api/tables/:tableName/cards — the seam the Spine absorbs.
- * Dedup on event id AND on instanceId; lands go to the player's playmat,
- * everything else to the stack; discards to the graveyard box.
- *
- * These tests post cards WITHOUT a prior seat.joined, exercising
- * handleCardArrival's defensive fallback (ensurePlayerArea is idempotent and
- * seat.joined normally runs first — see seatJoined.test.ts for that path).
- *
- * Since tabletop-cards-come-and-go ticket 05, the body posted is a real
- * envelope (contracts/envelope.v2.json) carrying a card.played payload
- * (contracts/payloads/card.played.v1.json), validated for real via ajv.
- */
 let server: Server;
 let port: number;
 
@@ -153,8 +140,6 @@ describe("card arrival", () => {
     );
     const shapes = shapesOf("arrival-rows");
     expect(shapes).toHaveLength(2);
-    // Same display name, different seats, different player areas. S and N
-    // share an x (both centered on the Stack), so compare full positions.
     expect({ x: shapes[0].x, y: shapes[0].y }).not.toEqual({ x: shapes[1].x, y: shapes[1].y });
   });
 

@@ -1,13 +1,3 @@
-/**
- * End-to-End Verification: Card Name Links in Action History
- *
- * Card names in the Action History modal should be clickable links that
- * open the card modal for that card.
- *
- * RUN: npm run test:verify
- *
- * The test script automatically starts and stops the server on port 3001.
- */
 
 import { test, expect } from '@playwright/test';
 import { seedGame } from './seedGame.js';
@@ -42,9 +32,6 @@ test.describe('Card Name Links in Action History', () => {
     const cardNameLink = page.locator('.history-list .card-name-link').first();
     await expect(cardNameLink).toBeVisible({ timeout: 5000 });
 
-    // Clicking it opens the card modal. Retry the click: at Playwright speed it
-    // can straddle htmx's modal swap/settle and be swallowed, which made this
-    // spec flaky in a full-suite run (same retry pattern as verify-discard).
     const cardModal = page.locator('.card-modal-overlay');
     await expect(async () => {
       if (await cardModal.isVisible()) return;

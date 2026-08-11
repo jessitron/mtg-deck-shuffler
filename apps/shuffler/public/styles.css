@@ -16,13 +16,6 @@ button {
   font-family: inherit;
 }
 
-/* The identity palette, --narrow-border and the mana colours MOVED to
- * @fleet/design-tokens (packages/design-tokens/tokens.css), loaded ahead of
- * this sheet by head.ejs and html-layout.ts. They are deliberately NOT
- * mirrored here: a "fallback" copy is a second dictionary, and it would turn a
- * broken load — loud and obvious — into a silent near-miss.
- *
- * --background-color stays: it's generic site-page chrome, not fleet identity. */
 :root {
   --background-color: #f0f0f0;
 }
@@ -114,14 +107,6 @@ p {
   display: none;
 }
 
-/* ===========================================================================
- * Canonical button press behaviour (JES-155 choice 1: "C — Comeau's feel,
- * drop-in"). One travel distance, one spring easing, one press-down snap,
- * built from box-shadow instead of a browser-drawn outset/inset border so the
- * bevel color is exact. Global because every page loads styles.css; each
- * button site keeps its own background color (choices 2 and 3 are still
- * open) and reproduces this same shape with its own shadow color.
- * ========================================================================= */
 .pushable-flat {
   position: relative;
   border: none;
@@ -181,23 +166,6 @@ p {
   box-shadow: none;
 }
 
-/* ===========================================================================
- * The focus ring (shuffler-design-choices choice 5, decided 2026-08-06).
- * One treatment for the whole app: 3px light-pink, held 3px off the element.
- * Global because every page loads styles.css, and :focus-visible so it appears
- * for keyboard users and not on mouse clicks — which is what the plain :focus
- * it replaced got wrong.
- *
- * The offset gap shows the *page* behind the element, not the element's own
- * fill, which is what keeps the ring legible against .begin-button's 10px
- * light-pink border.
- *
- * If this ever needs help on a pale background, the sanctioned fix is a
- * hairline --deep-space companion — not a different color. Note before you
- * reach for it: a halo can only be drawn with box-shadow, and box-shadow does
- * not accumulate across rules, so it would erase .pushable-flat's press bevel
- * above on every focused button. That cost is real; take it back to Jess.
- * ========================================================================= */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,

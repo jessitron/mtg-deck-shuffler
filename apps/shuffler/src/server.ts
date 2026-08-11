@@ -64,16 +64,10 @@ const cardRepository: CardRepositoryPort = createCardRepositoryAdapter();
 const persistStatePort: PersistStatePort = createPersistStateAdapter(cardRepository);
 const persistPrepPort: PersistPrepPort = createPersistPrepAdapter(cardRepository);
 
-// SCAFFOLDING (JES-127): the Shuffler talks straight to the Tabletop today;
-// the Spine absorbs this seam later (see src/port-tabletop/types.ts).
-// In production TABLETOP_URL is in-cluster DNS (http://mtg-tabletop-service);
-// locally the tabletop dev server listens on 5180.
 const tabletopUrl = process.env.TABLETOP_URL || "http://localhost:5180";
 log.info("Sending played cards to tabletop (for games at a table)", { "tabletop.url": tabletopUrl });
 const tabletopPort: TabletopPort = new HttpTabletopGateway(tabletopUrl);
 
-// Best-effort: card.played also goes to the Spine's event log (services/spine),
-// alongside (never instead of) the Tabletop send. See src/port-spine/sendToSpine.ts.
 const spineUrl = process.env.SPINE_URL || "http://localhost:4600";
 log.info("Sending card.played to the Spine's event log (for games at a table)", { "spine.url": spineUrl });
 const spinePort: SpinePort = new HttpSpineGateway(spineUrl);

@@ -64,21 +64,6 @@ export function createApp(
     next();
   });
 
-  // Stamp each matched route param onto the root server span as its own
-  // attribute (http.route.param.gameId, etc.). The route template itself
-  // (http.route, e.g. /game/:gameId) is set automatically by the Express
-  // auto-instrumentation; this adds the high-cardinality param values alongside
-  // it, on the same span, so you can break down by route and drill into a
-  // specific id.
-  //
-  // Two timing subtleties:
-  //  - req.params is only populated once routing matches, so we defer the writes
-  //    to res.end (when params are known) rather than running them here.
-  //  - We capture the span HERE (not in res.end): Express instrumentation emits
-  //    no middleware spans (see tracing.ts), so the active span at this point is
-  //    the root server span — the one carrying http.route — and it stays open
-  //    through res.end. (At res.end the active span would instead be the
-  //    request-handler child span.)
   app.use(function stampRouteParams(req, res, next) {
     const span = trace.getActiveSpan();
     const originalEnd = res.end.bind(res);
@@ -89,11 +74,6 @@ export function createApp(
     next();
   });
 
-  // Developer mode: an undocumented per-browser toggle. Entered via the secret
-  // /dontdie URL (sets the cookie below); exited via the menu link to
-  // /dontdie/off. When set, full pages render <body class="dev-mode"> and CSS
-  // reveals otherwise-hidden debug affordances. No new dependency: we read the
-  // cookie straight off the header rather than pulling in cookie-parser.
   const DEV_MODE_COOKIE = "devMode";
   app.use((req, res, next) => {
     const cookieHeader = req.headers.cookie ?? "";
@@ -103,10 +83,6 @@ export function createApp(
     next();
   });
   
-  // Parses and validates the :gameId route param, 400ing (and stamping the
-  // span) on failure. Shared by every route built on applyGameCommand.
-  // Accepts either the old numeric id or the new word-combo id (parseGameId
-  // keeps whichever form it is); only "missing" is invalid.
   function parseGameIdParam(req: express.Request, res: express.Response): GameId | null {
     const gameIdParam = req.params.gameId;
     const gameId = parseGameId(gameIdParam);
@@ -133,17 +109,11 @@ export function createApp(
     return gameId;
   }
 
-  // Extracts the optimistic-concurrency version the client last saw, if any.
-  // Absent means "skip the check" (backward compatibility), same as before.
   function expectedVersionFromRequest(req: express.Request): number | undefined {
     const expectedVersionStr = req.body["expected-version"];
     return expectedVersionStr === undefined ? undefined : parseInt(expectedVersionStr);
   }
 
-  // Shared beforeMutate body for /play-card and /discard-card's send-then-commit
-  // (JES-127): send the card to the table first; on failure, throw
-  // TableSendFailedError to abort the command before mutate/persist run.
-  // Full protocol, all stations: notes/DESIGN-send-then-commit.md.
   async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint, action: "play" | "discard"): Promise<void> {
     const attributes = { "table.name": game.tableName!, "card.instance_id": card.cardInstanceId ?? "missing", "zone.hint": zoneHint };
     trace.getActiveSpan()?.setAttributes(attributes);
@@ -157,17 +127,11 @@ export function createApp(
     await sendCardPlayedToSpineBestEffort(spinePort, game, card, zoneHint);
   }
 
-  // Renders a CommandOutcome from applyGameCommand. Shared by every route
-  // built on that protocol; each route supplies its own "not active" message
-  // and its own success rendering (some send the whole game section, some a
-  // narrower fragment; some pass whatHappened through for animation, some don't).
   function renderCommandOutcome(
     res: express.Response,
     gameId: GameId,
     outcome: CommandOutcome,
     notActiveMessage: string,
-    // Returns the fragment to send, or sends the response itself (e.g. via
-    // res.render) and returns undefined.
     renderApplied: (game: GameState, whatHappened: WhatHappened | undefined) => string | void
   ): void {
     switch (outcome.kind) {
@@ -204,16 +168,7 @@ export function createApp(
     }
   }
 
-  // ============================================================================
-  // STATIC PAGES (about the game) - Use EJS templates from views/
-  // These are informational pages that describe what the app does and how to use it
-  // ============================================================================
 
-  // Liveness/readiness target for the ALB and for kubelet. Deliberately the
-  // cheapest route in the app — no template render, no persistence read — so
-  // the probes don't do real work every few seconds. The sampler (see
-  // telemetry-sampler.ts) keys on this path to keep 1% of the probe traces:
-  // enough to confirm in Honeycomb that we're up, without drowning the dataset.
   app.get("/health", (req, res) => {
     res.type("text/plain").send("ok");
   });
@@ -233,10 +188,6 @@ export function createApp(
     res.render("about");
   });
 
-  // Returns whole page - the design system gallery. Every specimen is rendered by
-  // the app's own stylesheets, so the gallery can't drift from the app. Unlisted
-  // in the nav on purpose: it's a working tool for design decisions, not a
-  // destination for players. See owners/shuffler-looks-like-itself/.
   app.get("/design", (req, res) => {
     res.render("design");
   });
@@ -266,25 +217,8 @@ export function createApp(
   app.use(express.static(path.join(__dirname, "..", "public")));
   app.use("/decks", express.static(path.join(__dirname, "..", "decks")));
 
-  // The fleet's shared palette (@fleet/design-tokens) is served at /fleet so both
-  // ships load the same bytes — see packages/design-tokens/tokens.css for why it's
-  // shared rather than duplicated. The Tabletop imports it through Vite instead.
-  //
-  // Resolved through node_modules rather than by walking up from __dirname,
-  // because the depth differs between the two layouts: dev runs from
-  // apps/shuffler/dist, the container from /app/dist with the workspace flattened.
-  // The workspace symlink is the one thing shaped the same in both — which is why
-  // the Dockerfile must copy packages/ into the RUNTIME stage too. If it doesn't,
-  // the symlink dangles, this 404s, and every page loses its colours in prod only.
-  // verify-container-boot.sh is what catches that.
   app.use("/fleet", express.static(path.dirname(fileURLToPath(import.meta.resolve("@fleet/design-tokens/tokens.css")))));
 
-  // ============================================================================
-  // DYNAMIC PAGES (in the game) - Use TypeScript functions from src/view/
-  // These pages display and manipulate game state: deck selection, deck review,
-  // active gameplay, modals, and card actions. They use TypeScript template
-  // literals for type safety and composition with game state.
-  // ============================================================================
 
   // Returns whole page - deck selection page
   app.get("/choose-any-deck", async (req, res) => {
@@ -378,8 +312,6 @@ export function createApp(
         "deck.archidektId": deckNumber ?? "",
         "deck.precon_file": preconFile ?? "",
       });
-      // The span now says what failed and for which deck; the log carries the
-      // stack, which the span has no room for.
       log.error("deck retrieval failed", { "deck.source": deckSource }, error);
       res.status(500).send(
         formatErrorPageHtmlPage({
@@ -455,9 +387,6 @@ export function createApp(
     }
   });
 
-  // Persists a playmat and/or sleeve pick, then re-renders and returns the
-  // #playmat-prepare fragment htmx swaps in. Must respond 200, not 204: htmx
-  // treats 204 as "don't swap." An empty sleeve-color clears the sleeve.
   app.post("/prep-table-look/:prepId", async (req, res) => {
     const prepId = parseInt(req.params.prepId, 10);
 
@@ -555,10 +484,6 @@ export function createApp(
         }
       }
 
-      // Table mode (JES-127): optional table + player name from the prep form.
-      // Player name is load-bearing at a table (it labels the battlefield row) —
-      // default to "player" rather than block. The seat's short-GUID seatId is
-      // minted here at join time (prep keeps it for rejoining).
       const tableNameInput = typeof req.body["table-name"] === "string" ? req.body["table-name"].trim() : "";
       const playerNameInput = typeof req.body["player-name"] === "string" ? req.body["player-name"].trim() : "";
       let tableInfo: TableInfo | undefined;
@@ -587,8 +512,6 @@ export function createApp(
       game.startGame(browserTabId);
       await persistStatePort.save(game.toPersistedGameState());
 
-      // JES-140: announce the seat joining its table so the Tabletop draws
-      // the player area before any card is played. Best-effort — see sendToTable.ts.
       if (tableInfo) {
         await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor, prep.playmatImagePath, game.listCommanders());
       }
@@ -692,8 +615,6 @@ export function createApp(
         return;
       }
 
-      // Restart carries the table info forward (JES-127): prefer what the game
-      // itself recorded, fall back to the prep's record.
       const carriedTableName = persistedGame.tableName ?? prep.tableName;
       const tableInfo: TableInfo | undefined = carriedTableName
         ? {
@@ -705,9 +626,6 @@ export function createApp(
           }
         : undefined;
 
-      // A prior successful Spine join carries forward (taking a seat isn't
-      // idempotent, unlike the Tabletop's seat.joined) — only join fresh if
-      // there's no carried seat yet (first time, or the earlier join failed).
       if (tableInfo && !tableInfo.spineSeatNumber) {
         const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
         tableInfo.spineTableId = spineJoin.spineTableId;
@@ -720,8 +638,6 @@ export function createApp(
       newGame.startGame(browserTabId);
       await persistStatePort.save(newGame.toPersistedGameState());
 
-      // JES-140: re-announce the seat (idempotent — a physical no-op if the
-      // Tabletop process still has this seat's player area from before restart).
       if (tableInfo) {
         await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor, prep.playmatImagePath, newGame.listCommanders());
       }
@@ -742,9 +658,6 @@ export function createApp(
     }
   });
 
-  // Redirects to Choose Deck
-  // Modal endpoints
-  // Returns modal fragment - library contents modal
   app.get("/library-modal/:gameId", async (req, res) => {
     const gameId = parseGameId(req.params.gameId);
 
@@ -764,10 +677,6 @@ export function createApp(
 
       const groupBy = req.query.groupBy as string | undefined;
 
-      // Map to simple card objects for the template. cardTypes already holds the
-      // union of every face's types, so two-faced cards appear in all their groups.
-      // Sorted alphabetically for display, always — listLibrary() itself stays
-      // position-ordered since draw/Put on Top/Put on Bottom depend on it.
       const cards = libraryCards
         .map(gc => ({
           name: gc.card.name,
@@ -830,8 +739,6 @@ export function createApp(
 
       const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
 
-      // Validate state version for optimistic concurrency control
-      // TODO: can this be middleware?
       const expectedVersionStr = req.query["expected-version"];
       if (expectedVersionStr) {
         const expectedVersion = parseInt(expectedVersionStr as string);
@@ -1073,10 +980,6 @@ export function createApp(
     }
   });
 
-  // Returns card fragment - flips a two-faced card on the prepare screen. There is no game
-  // yet, so this is stateless: the face to show comes from ?face= rather than from persisted
-  // state, and nothing is saved. Returns the whole card container, not just the flip
-  // container, because the container's modal URL is what carries the face to the card modal.
   app.get("/prep-flip-card/:prepId/:cardIndex", async (req, res) => {
     const prepId = parseInt(req.params.prepId);
     const cardIndex = parseInt(req.params.cardIndex);
@@ -1134,10 +1037,6 @@ export function createApp(
       // Build card modal URL template (no expected version for prep page)
       const cardModalUrlTemplate = `/prep-card-modal/${prepId}/{cardIndex}`;
 
-      // Map to simple card objects for the template. cardTypes already holds the
-      // union of every face's types, so two-faced cards appear in all their groups.
-      // Sorted alphabetically for display, always — matches the game route's
-      // library modal (deck-storage order is not guaranteed alphabetical).
       const cards = libraryCards
         .map(gc => ({
           name: gc.card.name,
@@ -1288,8 +1187,6 @@ export function createApp(
     }
   });
 
-  // Card action endpoints
-  // Returns active game fragment - updated game board
   app.post("/reveal-card/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseGameIdParam(req, res);
     if (gameId === null) return;
@@ -1426,12 +1323,6 @@ export function createApp(
     }
   });
 
-  // Returns active game fragment - updated game board. Send-then-commit
-  // (JES-127, B3): at a table, the tabletop gets the card FIRST, as
-  // applyGameCommand's beforeMutate hook; only on success does mutate run and
-  // the game state change. On failure the play is blocked and the card stays
-  // in hand — a play that silently missed the tabletop is worse than one
-  // that says it failed.
   app.post("/play-card/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseGameIdParam(req, res);
     if (gameId === null) return;
@@ -1476,9 +1367,6 @@ export function createApp(
     }
   });
 
-  // Returns active game fragment - discard: identical to play except the verb
-  // (JES-127, B4). The card lands in TableLocation; at a table it is sent
-  // FIRST with zoneHint "graveyard" (send-then-commit, same as /play-card).
   app.post("/discard-card/:gameId/:gameCardIndex", async (req, res) => {
     const gameId = parseGameIdParam(req, res);
     if (gameId === null) return;
@@ -1765,8 +1653,6 @@ export function createApp(
     const cardFace: "front" | "back" = face === "front" || face === "back" ? face : "front";
 
     try {
-      // Prefer the card's stored Scryfall URL (carries the version tag fresh
-      // cards need); fall back to constructing it if the card isn't cached.
       const card = await cardRepository.getCard(cardId);
       const imageUrl = card ? getCardImageUrl(card, "png", cardFace) : constructCardImageUrl(cardId, "png", cardFace);
 
@@ -1795,10 +1681,6 @@ export function createApp(
     }
   });
 
-  // Dev-mode fast start (undocumented, like /dontdie): one click from the home
-  // page's "yo!" link to the game screen. Loads the Timey-Wimey precon, preps
-  // it, and starts a game at table "Yo" as player "Jess" — the same steps as
-  // POST /deck followed by POST /start-game, minus the two pages in between.
   app.get("/yo", async (req, res) => {
     if (!res.locals.devMode) {
       res.status(404).sendFile(path.join(__dirname, "..", "public", "404.html"));
@@ -1817,8 +1699,6 @@ export function createApp(
       const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
       tableInfo.spineTableId = spineJoin.spineTableId;
       tableInfo.spineSeatNumber = spineJoin.spineSeatNumber;
-      // A random table look every visit: any curated mat, any sleeve color at
-      // all — /yo is the fastest way to see the look plumbing exercised.
       const playmat = PLAYMATS[Math.floor(Math.random() * PLAYMATS.length)];
       const sleeveColor = "#" + Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, "0");
       const prepId = persistPrepPort.newPrepId();
@@ -1859,8 +1739,6 @@ export function createApp(
     }
   });
 
-  // Developer mode entrance (undocumented). Sets a long-lived cookie and sends
-  // you back where you came from. The exit link in the game menu hits /off.
   app.get("/dontdie", (req, res) => {
     res.cookie(DEV_MODE_COOKIE, "1", { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: "lax" });
     res.redirect(req.get("referer") || "/");

@@ -1,16 +1,3 @@
-/**
- * End-to-End Verification: Hand cards line up in a grid across rows
- *
- * The hand wraps onto a second row once there are enough cards to fill the
- * first. Every row's leftmost card should start at the same x-coordinate as
- * every other row's leftmost card — the sister-reported bug was a one-time
- * "before card 0" drop zone that only existed on row 1, shifting row 1's
- * cards right of every row below it.
- *
- * RUN: npm run test:verify -- verify-hand-grid-alignment
- *
- * The test script automatically starts and stops the server on port 3001.
- */
 
 import { test, expect } from '@playwright/test';
 import { seedGame } from './seedGame.js';

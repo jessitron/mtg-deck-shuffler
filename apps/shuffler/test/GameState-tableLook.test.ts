@@ -4,11 +4,6 @@ import { GameState } from "../src/GameState.js";
 import { minimalDeck } from "./generators.js";
 import { InMemoryCardRepositoryAdapter } from "../src/port-card-repository/InMemoryCardRepositoryAdapter.js";
 
-/**
- * Table look (sleeve/playmat carry-through): the /prepare picker's choice is
- * snapshotted onto the game at newGame time, same as tableInfo — optional
- * fields, no version bump, solo/old games unaffected.
- */
 
 describe("table look on GameState", () => {
   test("newGame with a sleeve/playmat carries it into the persisted state and back", async () => {

@@ -4,9 +4,6 @@ Sequel.default_timezone = :utc
 
 DB = Sequel.sqlite(ENV.fetch("SPINE_DB_PATH", "spine.db"))
 
-# No production data exists yet (services/spine/SEAMAP.md), so schema lives
-# here as plain create-table statements rather than a migration runner —
-# there's nothing to migrate, only a fresh empty database to shape.
 DB.create_table? :tables do
   String :id, primary_key: true
   String :name, null: false, unique: true

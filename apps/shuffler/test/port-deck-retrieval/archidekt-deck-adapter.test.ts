@@ -731,9 +731,6 @@ describe("ArchidektDeckToDeckAdapter", () => {
   });
 
   it("does not treat a single-image multi-face card (Prepared) as two-faced", async () => {
-    // "Prepared" cards (Secrets of Strixhaven) print both halves on one physical
-    // front face -- layout "prepare", like adventure/split. Archidekt gives them
-    // two entries in `faces`, but there is no back image, so no flip button.
     const archidektDeck: ArchidektDeck = {
       id: 3000,
       name: "Prepared Card Test",

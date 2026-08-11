@@ -30,9 +30,6 @@ function cardIndexToDefinition(game: GameState, gci: number) {
   return game.getCards()[gci].card;
 }
 
-// `cardNamesAsLinks` makes move-card card names clickable links that open the
-// card modal. Off by default so the undo button (which embeds this fragment
-// inside a <button>) avoids nesting interactive elements.
 export function formatGameEventHtmlFragment(event: GameEvent, game: GameState, cardNamesAsLinks = false) {
   const isUndone = game.getEventLog().hasBeenUndone(event.gameEventIndex);
   const eventNameToCssClass = {

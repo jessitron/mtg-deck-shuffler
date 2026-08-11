@@ -1,11 +1,3 @@
-/**
- * The harness provider, driven through a real (in-memory) exporter.
- *
- * The service-name test here is the regression guard for the failure mode this
- * whole ticket was most at risk from: harness spans quietly landing in the
- * app's dataset, which would corrupt the app-vs-harness measurement while
- * looking like success.
- */
 import { InMemorySpanExporter } from "@opentelemetry/sdk-trace-base";
 import { SpanStatusCode } from "@opentelemetry/api";
 import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
@@ -22,8 +14,6 @@ async function emitAndCollect(root: SpanNode, runAttributes = { "verify.run.id":
   const exporter = new InMemorySpanExporter();
   const tracing = createHarnessTracing({ runAttributes, exporter, serviceVersion: "abc1234" });
   const count = tracing.emit(root);
-  // flush, not shutdown: InMemorySpanExporter.shutdown() clears its own buffer,
-  // so collecting after a shutdown always finds zero spans.
   await tracing.flush(2000);
   return { spans: exporter.getFinishedSpans(), count };
 }
@@ -35,8 +25,6 @@ describe("isTelemetryConfigured", () => {
   });
 
   it("is off when .be was never sourced, so the team key is empty", () => {
-    // This is exactly what `.env` produces on its own: the variable is present
-    // and non-empty, but the key inside it is missing.
     expect(
       isTelemetryConfigured({
         OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io:443",
@@ -61,10 +49,6 @@ describe("isTelemetryConfigured", () => {
 
 describe("createHarnessTracing", () => {
   it("sends spans to the harness service, NOT the app's, even when the app's name is in the environment", async () => {
-    // `.env` exports OTEL_SERVICE_NAME=mtg-deck-shuffler and the Playwright
-    // process inherits it. If a future change swaps BasicTracerProvider for
-    // NodeSDK, the env name would win and these spans would silently move into
-    // the app's dataset. That is the whole point of this assertion.
     const previous = process.env.OTEL_SERVICE_NAME;
     process.env.OTEL_SERVICE_NAME = "mtg-deck-shuffler";
     try {
@@ -128,8 +112,6 @@ describe("createHarnessTracing", () => {
   });
 
   it("gives up on a hung exporter instead of wedging the suite", async () => {
-    // A telemetry problem must never read as a test failure, and must never
-    // hold the suite open. This exporter never answers.
     const hung = {
       export: () => {},
       shutdown: () => new Promise<void>(() => {}),

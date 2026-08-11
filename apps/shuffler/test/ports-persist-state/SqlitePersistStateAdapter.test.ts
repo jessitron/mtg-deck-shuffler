@@ -69,10 +69,6 @@ describe("SqlitePersistStateAdapter", () => {
   });
 
   it("should load a game saved by old code with a plain numeric id, from a database created with the old INTEGER PRIMARY KEY schema", async () => {
-    // Simulate a pre-existing data.db: build the table the way the OLD code did
-    // (id INTEGER PRIMARY KEY), insert a numeric-id game directly, close it, then
-    // open it with the current adapter and confirm the migration it runs on
-    // startup doesn't break loading that old game.
     await adapter.close();
     if (fs.existsSync(testDbPath)) {
       fs.unlinkSync(testDbPath);

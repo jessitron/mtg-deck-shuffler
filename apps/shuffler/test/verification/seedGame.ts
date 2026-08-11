@@ -1,11 +1,3 @@
-/**
- * Seed a prep/game directly through the API instead of clicking through
- * /choose-any-deck. `verify-precon-to-prepare.spec.ts` is the one spec that
- * still exercises the real click-through.
- *
- * `page.request` is used (not a bare `request` fixture) so the seeded prep/game
- * cookies land in the same browser context the test goes on to interact with.
- */
 import { Page } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -16,8 +8,6 @@ const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 export const DEFAULT_PRECON_DECK = 'precon-mtgjson-20WaystoWin_SLD.json';
 
 function extractId(url: string, segment: 'prepare' | 'game'): string {
-  // prepId is still numeric; gameId may be the old numeric form or the new
-  // fun word-combo form (e.g. "brave-falcon-42") — match either.
   const match = url.match(new RegExp(`/${segment}/([^/?]+)`));
   if (!match) throw new Error(`Expected to land on /${segment}/<id>, got "${url}"`);
   return match[1];
@@ -53,12 +43,6 @@ export async function seedGame(page: Page, deckFilename?: string, table?: TableF
   return startGame(page, prepId, table);
 }
 
-/**
- * The deck title shown on /prepare and /game — same cleanup
- * `LocalFileAdapter.listAvailableDecks()` applies (strips the " - <set name>"
- * suffix from the deck's stored `name`). Lets specs assert on the title text
- * without clicking through the deck chooser to read it off a tile first.
- */
 export function getPreconDisplayName(deckFilename: string): string {
   const decksDir = path.resolve(fileURLToPath(import.meta.url), '..', '..', '..', 'decks');
   const deck = JSON.parse(fs.readFileSync(path.join(decksDir, deckFilename), 'utf8'));

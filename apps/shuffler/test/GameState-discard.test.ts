@@ -4,11 +4,6 @@ import { Deck, PERSISTED_DECK_VERSION } from "../src/types.js";
 import { lightningBolt, ancestralRecall, blackLotus, testProvenance } from "./generators.js";
 import { nameMoveCardEvent, MoveCardEvent } from "../src/GameEvents.js";
 
-/**
- * Discard (JES-127, B4): identical to Play except the verb — the card leaves
- * the hand for the TableLocation (the graveyard is table geography, not
- * Shuffler state), and history says "Discard" rather than "Play".
- */
 
 const testDeck: Deck = {
   version: PERSISTED_DECK_VERSION,

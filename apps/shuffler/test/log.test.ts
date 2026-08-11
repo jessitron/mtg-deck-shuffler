@@ -6,10 +6,6 @@ import { BasicTracerProvider } from "@opentelemetry/sdk-trace-base";
 import { AsyncLocalStorageContextManager } from "@opentelemetry/context-async-hooks";
 import { log } from "../src/log.js";
 
-// The contract we depend on: a log carries the trace context when there is an
-// active span, and still gets emitted when there isn't. The second half is the
-// whole reason logs exist here — see the tabletop's rooms.ts, where a throttled
-// timer callback has no ambient span and span.addEvent() therefore throws.
 
 let exported: InMemoryLogRecordExporter;
 
@@ -20,10 +16,6 @@ beforeEach(() => {
   });
   logs.setGlobalLoggerProvider(provider);
 
-  // Without a context manager, context.with() is a no-op and context.active()
-  // always returns ROOT_CONTEXT — so no log could ever pick up trace context,
-  // and these tests would pass or fail for reasons that have nothing to do with
-  // log.ts. In the running app the NodeSDK registers this for us.
   context.setGlobalContextManager(new AsyncLocalStorageContextManager().enable());
 });
 
@@ -59,9 +51,6 @@ describe("log", () => {
   });
 
   test("a log under an unsampled span is still emitted", () => {
-    // Deliberate: logs are independent of trace sampling. The sampler keeps 1%
-    // of health-check traces so we can see the probe passing; if the probe
-    // starts failing, we want every log explaining why, not 1% of them.
     const unsampled = trace.wrapSpanContext({
       traceId: "0af7651916cd43dd8448eb211c80319c",
       spanId: "b7ad6b7169203331",

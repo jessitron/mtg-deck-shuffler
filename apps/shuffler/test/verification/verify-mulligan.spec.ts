@@ -1,19 +1,3 @@
-/**
- * End-to-End Verification: Opening hand & Mulligan
- *
- * When a game starts, the player is automatically dealt an opening hand of
- * seven cards and offered a "Mulligan" button above the hand. Mulligan puts
- * the hand back into the library, shuffles, and redraws seven; the button
- * label increments ("Mulligan #2", "#3", ...).
- *
- * The mulligan offer is part of game state — it represents the "hand
- * acceptance" stage before play begins. It disappears after any action other
- * than rearranging the hand (draw, play, reveal, ...).
- *
- * RUN: npm run test:verify
- *
- * The test script automatically starts and stops the server on port 3001.
- */
 
 import { test, expect } from '@playwright/test';
 import { seedGame } from './seedGame.js';
@@ -55,10 +39,6 @@ test.describe('Opening hand & Mulligan', () => {
 
     const mulligan = page.locator('button.mulligan-button');
     await mulligan.click();
-    // No wait for the shuffle animation: `.library-stack.shuffling` runs a 1.5s
-    // transform on .library-card-back, which none of the locators below touch,
-    // and the class arrives in the same htmx swap as the state being asserted.
-    // The 'Mulligan #2' assertion retries and is what actually gates this test.
 
     // Still seven cards in hand after the mulligan.
     await expect(handCount).toHaveText('7');
@@ -93,12 +73,6 @@ test.describe('Opening hand & Mulligan', () => {
     await expect(mulligan).toHaveCount(0);
     await expect(page.locator('.hand-count')).toHaveText('8');
 
-    // Undo via the standard hotkey — the stage is derived from the event log,
-    // so undoing the draw restores it and the button reappears. game.js's
-    // keydown handler clicks the hamburger's live `.undo-button`, swapped in
-    // out-of-band after every action — a keypress landing mid-swap is the same
-    // click-straddles-settle race documented in owners/animations/interactions.md,
-    // just fired via keyboard. Retry until it lands.
     await expect(async () => {
       if ((await page.locator('.hand-count').textContent()) === '7') return;
       await page.keyboard.press('ControlOrMeta+z');
@@ -116,14 +90,8 @@ test.describe('Opening hand & Mulligan', () => {
 
     const mulligan = page.locator('button.mulligan-button');
     await mulligan.click();
-    // This assertion is the synchronization the Ctrl+Z below needs: it proves the
-    // swap landed, so .undo-button carries the post-mulligan event index. Don't
-    // move it after the keypress, and don't replace it with a sleep.
     await expect(mulligan).toHaveText('Mulligan #2');
 
-    // Undo the mulligan via the standard hotkey — it's one atomic event.
-    // Same click-straddles-settle race as above (owners/animations/interactions.md),
-    // via keyboard: retry until the undo-button click actually lands.
     await expect(async () => {
       if (/^Mulligan$/.test((await mulligan.textContent()) ?? '')) return;
       await page.keyboard.press('ControlOrMeta+z');

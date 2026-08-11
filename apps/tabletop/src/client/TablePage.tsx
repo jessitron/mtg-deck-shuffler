@@ -27,16 +27,6 @@ import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
 import { TableContextMenu } from "./CardContextMenu";
 import { clearStaleSelectionOnPointerDown } from "./clearStaleSelectionOnPointerDown";
 
-// useSync (unlike <Tldraw>) builds its store schema from exactly the
-// shapeUtils it's given — it does NOT fold in tldraw's own defaults the way
-// <Tldraw> does, and (unlike <Tldraw>'s lenient mergeArraysAndReplaceDefaults)
-// it throws ("Shape type X is defined more than once") on a duplicate `type`
-// in the array — so the stock shapes the name label still uses (text, ...)
-// have to be listed here explicitly alongside mtg-card/mtg-zone/mtg-counter.
-// Ticket 05: the stock NoteShapeUtil and ImageShapeUtil no longer need
-// SelectionClearing* subclasses layered over them — the centralized
-// clearStaleSelectionOnPointerDown fix below covers every shape type,
-// including these two, without a per-type hook.
 const shapeUtils = [
   ...defaultShapeUtils,
   MtgCardShapeUtil,
@@ -47,9 +37,6 @@ const shapeUtils = [
 
 const tools = [MtgCounterTool];
 
-// Ticket 18: one toolbar item to create a counter — stock tldraw chrome and a
-// stock icon on purpose (tldraw owns its toolbar; a bespoke styled button
-// would fight it, and map 4 owns toolbar curation).
 const uiOverrides: TLUiOverrides = {
   tools(editor, toolItems) {
     toolItems["mtg-counter"] = {
@@ -78,23 +65,7 @@ const components: TLComponents = {
   ContextMenu: TableContextMenu,
 };
 
-/**
- * The table: a synced tldraw canvas. Anyone with the URL joins — spectators
- * come free (v0 has no seat concept on the canvas; full access).
- * The "made with tldraw" watermark stays, worn happily.
- */
 
-// tldraw's license gate blanks the canvas on unlicensed HTTPS non-loopback
-// origins — prod serves http:// on purpose to stay exempt. The whole story,
-// including why the key must be WITHHELD wherever the gate can't fire, lives
-// with chooseLicenseKey.
-//
-// The key is baked into the bundle at build time from the shell's
-// TLDRAW_LICENSE_KEY (see vite.config.ts `define`). Empty string => undefined,
-// which is what tldraw wants when there is no key. The key is domain-bound and
-// ships to browsers by design, so it is not a secret — but it still lives in
-// the repo-root .be (untracked), NOT in apps/tabletop/.env, which is committed
-// to a public repo.
 const bakedLicenseKey = import.meta.env.VITE_TLDRAW_LICENSE_KEY || undefined;
 const licenseKey = chooseLicenseKey(
   window.location.protocol,
@@ -102,14 +73,6 @@ const licenseKey = chooseLicenseKey(
   bakedLicenseKey,
 );
 
-// The table is laid out around the board origin (DESIGN.md "The square"), so
-// most furniture sits at negative page coordinates — but tldraw's default
-// camera opens with page (0,0) at the viewport's top-left, onto mostly empty
-// canvas. Frame the table's full extent once at mount — a fixed region, not a
-// fit to current content, so the camera is deterministic on an empty table
-// and never moves on its own when furniture arrives later. The extent
-// mirrors cardLayout.ts's four compass slots + Stack (provisional geometry —
-// tweak alongside it).
 const TABLE_EXTENT = new Box(-2802, -1612, 5604, 3164);
 
 function onTldrawMount(editor: Editor) {
@@ -117,9 +80,6 @@ function onTldrawMount(editor: Editor) {
   clearStaleSelectionOnPointerDown(editor);
 }
 
-// v0 asset store: no upload service, so pasted/dropped images are inlined as
-// data URLs (they sync as part of the document). Server-injected card shapes
-// carry their own Scryfall URLs and never touch this path.
 const inlineAssets: TLAssetStore = {
   upload: async (_asset, file) => {
     const src = await new Promise<string>((resolve, reject) => {
@@ -142,8 +102,6 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
   const uri = useMemo(() => {
     const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
     let connectionUri = `${wsProtocol}://${window.location.host}/connect/${encodeURIComponent(tableSlug)}`;
-    // Propagation belongs to the connection REQUEST only: the traceparent rides
-    // the URL, parents the server's "ws connect" span, and that's the end of it.
     const traceparent = currentTraceparent();
     if (traceparent) {
       connectionUri += `?traceparent=${encodeURIComponent(traceparent)}`;

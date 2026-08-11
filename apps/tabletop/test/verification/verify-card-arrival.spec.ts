@@ -1,14 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { randomUUID } from "node:crypto";
 
-/**
- * A5: cards POSTed to the arrival API appear on the canvas — a land
- * (zoneHint battlefield) and a nonland (zoneHint stack) in different areas.
- *
- * Since tabletop-cards-come-and-go ticket 05, the body posted is a real
- * envelope (contracts/envelope.v2.json) carrying a card.played payload
- * (contracts/payloads/card.played.v1.json).
- */
 function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
 }
@@ -58,14 +50,6 @@ test("a land and a nonland arrive in different areas of the canvas", async ({ pa
     expect(response.status()).toBe(201);
   }
 
-  // Both cards render as mtg-card shapes on the live canvas (no reload
-  // needed — they arrive over the websocket sync), identified by their
-  // deterministic shape ids. Exact placement (land on the playmat vs.
-  // everything else on the Stack) is covered by cardArrival.test.ts against
-  // the room's tldraw snapshot directly — the player area (JES-140) is now
-  // big enough that a land far from the origin only gets its inner <img>
-  // lazily mounted by tldraw once in view, so this doesn't assert on that
-  // inner element.
   const cardShapes = page.locator(`.tl-shape[data-shape-type="mtg-card"]`);
   await expect(cardShapes).toHaveCount(2, { timeout: 10000 });
   await expect(page.locator(`#shape\\:card-${land.payload.card.instanceId}`)).toBeAttached();

@@ -34,12 +34,6 @@ export const StartGameEvent: StartEvent = {
 export type MoveCardEvent = {
   eventName: "move card";
   move: CardMove;
-  /**
-   * How the player meant the move (JES-127): "discard" distinguishes a discard
-   * from a play — both land in TableLocation (the graveyard is table geography,
-   * not Shuffler state). Absent for every other move; optional so old persisted
-   * events stay valid (nameMoveCardEvent falls back to location-based naming).
-   */
   verb?: "discard";
 };
 
@@ -49,33 +43,16 @@ export type UndoEvent = {
   originalEventIndex: number;
 };
 
-/**
- * An opening hand being dealt, as a single atomic event. `moves` is the draws
- * it performed (Library→Hand), so the deal is one line in history rather than
- * seven. It is the most-recent "live" event while the player decides whether to
- * keep their hand — that position is how the hand-acceptance (mulligan) stage is
- * derived from the log (see GameEventLog.isInHandAcceptanceStage()). Not
- * undoable (like "start game") — there's nothing to go back to.
- */
 export type DealOpeningHandEvent = {
   eventName: "deal opening hand";
   moves: CardMove[];
 };
 
-/**
- * A mulligan as a single atomic event: `moves` is everything it did, in order —
- * return the hand to the library, shuffle, redraw. Undoing this event reverses
- * all those moves at once, restoring the previous hand and library exactly. The
- * mulligan count is the number of live (not-undone) mulligan events.
- */
 export type MulliganEvent = {
   eventName: "mulligan";
   moves: CardMove[];
 };
 
-/**
- * Convert compact shuffle moves to full CardMove array
- */
 export function expandCompactShuffleMoves(compactMoves: [number, number, number][]): CardMove[] {
   return compactMoves.map(([gameCardIndex, fromPosition, toPosition]) => ({
     gameCardIndex,
@@ -84,11 +61,6 @@ export function expandCompactShuffleMoves(compactMoves: [number, number, number]
   }));
 }
 
-/**
- * Convert full CardMove array to compact shuffle moves (only for Library-to-Library moves)
- * Even if a card by luck didn't move, store that.
- * Otherwise it looks like we shuffled only some of the library.
- */
 export function compactShuffleMoves(moves: CardMove[]): [number, number, number][] {
   return moves.map((move) => [
     move.gameCardIndex,
@@ -97,10 +69,6 @@ export function compactShuffleMoves(moves: CardMove[]): [number, number, number]
   ]);
 }
 
-/**
- * Human name for a move-card event: an explicit verb ("Discard") wins;
- * otherwise the name is derived from the locations (nameMove).
- */
 export function nameMoveCardEvent(event: MoveCardEvent): string {
   if (event.verb === "discard") {
     return "Discard";
@@ -109,12 +77,6 @@ export function nameMoveCardEvent(event: MoveCardEvent): string {
 }
 
 export function nameMove(move: CardMove): string {
-  // from library to hand is "Draw"
-  // from anywhere to revealed is "Reveal"
-  // from anywhere to Table is "Play"
-  // from anywhere to Library(0) is "Put on Top"
-  // from anywhere to Library(nonzero) is "Put in library(position)"
-  // from one position to another in the same location is "Move around"
   if (move.fromLocation.type === "Library" && move.toLocation.type === "Hand") {
     return "Draw";
   }
@@ -156,9 +118,6 @@ export class GameEventLog {
   }
 
   public record(event: GameEventDefinition): GameEvent {
-    // this should be an atomic operation.
-    // However, I don't think it's currently possible for this object to be shared among threads, since each request is synchronous,
-    // and the server hydrates a new object for each request.
     const gameEvent: GameEvent = {
       ...event,
       gameEventIndex: this.events.length,
@@ -226,19 +185,6 @@ export class GameEventLog {
     }
   }
 
-  /**
-   * Is this event eligible for undo?
-   *
-   * It is eligible for undo if:
-   * - it is not an undo event
-   * - it is not Start Game
-   * - Either:
-   *   - it is the most recent event
-   *   - The events after are paired: each non-undo has a later undo of it.
-   *
-   * @param gameEventIndex
-   * @returns boolean
-   */
   public canBeUndone(gameEventIndex: number): boolean {
     const event = this.events[gameEventIndex];
     if (!event) return false;
@@ -264,26 +210,10 @@ export class GameEventLog {
     return !aMoreRecentUndoableEvent;
   }
 
-  /**
-   * Should this one be crossed out, and ineligible for undo?
-   * @param gameEventIndex
-   * @returns True if there's a later event that is an undo of this one.
-   */
   public hasBeenUndone(gameEventIndex: number): boolean {
     return this.events.slice(gameEventIndex + 1).some((event) => event.eventName === "undo" && event.originalEventIndex === gameEventIndex);
   }
 
-  /**
-   * Are we still in the opening-hand acceptance (mulligan) stage? Derived purely
-   * from the event log so that undo restores it automatically.
-   *
-   * Walk back through the "live" events (skipping undo events and events that
-   * have been undone). Hand rearrangement (a Hand→Hand move) is transparent — it
-   * doesn't end the stage — so we look past it. The first live, non-rearrange
-   * event we hit decides: if it's the dealing of a hand (initial deal or a
-   * mulligan), we're still accepting; anything else (a draw, play, reveal,
-   * manual shuffle, ...) means play has begun.
-   */
   public isInHandAcceptanceStage(): boolean {
     for (let i = this.events.length - 1; i >= 0; i--) {
       const event = this.events[i];

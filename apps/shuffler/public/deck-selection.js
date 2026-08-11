@@ -1,13 +1,4 @@
-/**
- * Deck Selection Page JavaScript
- * Handles validation for the deck input field and tab switching on the deck selection page
- */
 
-/**
- * Set the active tab button state
- * Removes 'active' class from all tab buttons and adds it to the clicked button
- * Also toggles full-width mode for the container based on which tab is selected
- */
 function setActiveTab(clickedButton) {
   // Remove active class from all hero buttons
   const allButtons = document.querySelectorAll('.hero-button');
@@ -29,10 +20,6 @@ function setActiveTab(clickedButton) {
   }
 }
 
-/**
- * Set up precon deck search functionality
- * Filters deck tiles based on search input
- */
 function setupPreconSearch() {
   const searchInput = document.getElementById("precon-search");
   if (!searchInput) return;
@@ -78,18 +65,12 @@ function setupPreconSearch() {
   });
 }
 
-/**
- * Deck number validation for Load Deck button
- * Accepts either a deck number (digits only) or an Archidekt URL
- */
 function setupDeckNumberValidation() {
   const deckNumberInput = document.getElementById("deck-number");
   const loadDeckButton = document.getElementById("load-deck-button");
   const errorElement = document.getElementById("deck-number-error");
 
   if (deckNumberInput && loadDeckButton) {
-    // Regex to match Archidekt URLs and extract deck ID
-    // Matches: https://archidekt.com/decks/18476272/endrek_sahr or https://archidekt.com/decks/18476272
     const archidektUrlPattern = /^https?:\/\/(?:www\.)?archidekt\.com\/decks\/(\d+)/i;
     // Regex to match just a deck number (digits only)
     const deckNumberPattern = /^\d+$/;

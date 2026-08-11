@@ -2,11 +2,6 @@ import { describe, it, expect } from "vitest";
 import { createShapeId, ZERO_INDEX_KEY } from "@tldraw/tlschema";
 import { mtgCardShape, zoneShape } from "../src/server/tableFurniture";
 
-/**
- * zoneShape/mtgCardShape are typed constructors (no `as any`), so their
- * record shape is worth pinning directly rather than only through
- * cardArrival.ts's integration tests.
- */
 describe("tableFurniture constructors", () => {
   it("mtgCardShape produces a record whose parentId is the given page, not a leaked tldraw field", () => {
     const shape = mtgCardShape({

@@ -3,27 +3,10 @@ import { GameState, GameCard, TableInfo } from "../GameState.js";
 import { TabletopPort, ZoneHint, buildCardPlayedEvent, buildSeatJoinedEvent, defaultPlaymatImageUrl, playmatImageUrlFromPath, cardBackImageUrl } from "./types.js";
 import { log } from "../log.js";
 
-/**
- * The Shuffler picks the zone hint — it knows land vs nonland from
- * CardDefinition.cardTypes; the tabletop stays meaning-free and honors it.
- * Playing: a land goes to the player's battlefield row, everything else to
- * the stack. Discarding: the graveyard spot (see discard's caller).
- */
 export function zoneHintForPlay(gameCard: GameCard): ZoneHint {
   return gameCard.card.cardTypes.includes("Land") ? "battlefield" : "stack";
 }
 
-/**
- * Send-then-commit (JES-127, B3): send the card to the table FIRST; the caller
- * commits the game-state change only after this resolves. Throws on any
- * failure — a play that silently missed the tabletop is worse than one that
- * says it failed. (A send that worked but wasn't acknowledged is covered by
- * the tabletop's dedup on instanceId: re-sending is a physical no-op.)
- * Full protocol, all stations: notes/DESIGN-send-then-commit.md.
- *
- * A fresh event id is minted per attempt (inside buildCardPlayedEvent), so
- * retries are distinguishable from duplicates.
- */
 export async function sendCardToTableFirst(
   tabletopPort: TabletopPort | undefined,
   game: GameState,
@@ -50,13 +33,6 @@ export async function sendCardToTableFirst(
   await tabletopPort.sendCardToTable(game.tableName, event);
 }
 
-/**
- * Announce a seat joining its table (JES-140), at Shuffle Up. Best-effort:
- * unlike sendCardToTableFirst, a Tabletop that's unreachable here must not
- * block starting the game — the player area is drawn lazily as a fallback
- * the first time one of this seat's cards arrives (see the Tabletop's
- * ensurePlayerArea).
- */
 export async function sendSeatJoinedBestEffort(
   tabletopPort: TabletopPort | undefined,
   tableInfo: TableInfo,

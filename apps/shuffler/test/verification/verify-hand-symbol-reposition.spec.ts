@@ -1,13 +1,3 @@
-/**
- * End-to-End Verification: hand-symbol easter egg
- *
- * The hand-image (count + hand.png) can be dragged into any hand-drop-zone,
- * like a card, purely client-side — no server call, no persisted GameState.
- * A card drawn afterward must still land after the last real card, unaffected
- * by wherever the hand-symbol has been dropped.
- *
- * RUN: npm run test:verify -- verify-hand-symbol-reposition
- */
 
 import { test, expect } from '@playwright/test';
 import { seedGame } from './seedGame.js';
@@ -30,8 +20,6 @@ test.describe('Hand-symbol reposition easter egg', () => {
     );
     expect(childrenBefore[childrenBefore.length - 1]).toContain('hand-symbol');
 
-    // Drag the hand-symbol onto the drop zone that sits right after the first card
-    // (data-hand-position="1"), so it should land between card 0 and card 1.
     await page.dragAndDrop('#hand-cards .hand-symbol', '#hand-cards .hand-drop-zone[data-hand-position="1"]');
 
     const childrenAfterDrag = await page.locator('#hand-cards').evaluate((el) =>
@@ -47,9 +35,6 @@ test.describe('Hand-symbol reposition easter egg', () => {
     );
     expect(cardNamesAfterDrag).toEqual(Array.from({ length: cardCount }, (_, i) => String(i)));
 
-    // Trigger a full #game-container re-render (drawing a card). The hand-symbol
-    // should re-insert at the same spot, and the new card should append after the
-    // last real card, not wherever the hand-symbol happens to sit.
     await page.locator('.draw-button').click();
     await expect(page.locator('#hand-cards .card-container')).toHaveCount(cardCount + 1);
 
