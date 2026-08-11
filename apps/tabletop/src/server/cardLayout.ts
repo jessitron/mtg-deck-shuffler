@@ -125,21 +125,21 @@ export function nameLabelPosition(seatIndex: number): { x: number; y: number } {
   return { x: origin.x, y: origin.y - GAP - NAME_LABEL_HEIGHT };
 }
 
-/** Life counter: bigger than the name-row band it sits on, far right-justified (ticket 20). */
+/** Life counter: bigger than the name-row band it sits on, right-aligned to the playmat (ticket 20). */
 export const LIFE_COUNTER_W = 130;
 export const LIFE_COUNTER_H = 48;
 
 /**
- * Far right of the name row, per the design ruling: name large and left,
- * commander-damage counters (ticket 21) right-justified in between, life
- * counter biggest and farthest right. Vertically centered on the name
- * label's band, since the counter is taller than that band.
+ * Right-aligned to the playmat's own right edge (not the wider player area,
+ * which also spans the library/command/graveyard/exile column) — the life
+ * counter sits directly above the mat it tracks. Vertically centered on the
+ * name label's band, since the counter is taller than that band.
  */
 export function lifeCounterPosition(seatIndex: number): { x: number; y: number } {
   const origin = playerAreaOrigin(seatIndex);
   const namePos = nameLabelPosition(seatIndex);
   return {
-    x: origin.x + PLAYER_AREA_W - LIFE_COUNTER_W,
+    x: origin.x + PLAYMAT_W - LIFE_COUNTER_W,
     y: namePos.y - (LIFE_COUNTER_H - NAME_LABEL_HEIGHT) / 2,
   };
 }
