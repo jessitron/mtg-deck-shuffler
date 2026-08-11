@@ -39,6 +39,13 @@
   ShapeUtil callbacks (`onTranslateEnd` fires once, at settle, by tldraw's own contract) — the
   hazard is specifically for code reading the *store*, not the ShapeUtil. See watch point 20.
 
+- **`Idle.onPointerDown` (`node_modules/tldraw/src/lib/tools/SelectTool/childStates/Idle.ts`) is
+  the source of truth for `getHitShapeOnCanvasPointerDown`** (ticket 05, 2026-08-11,
+  `clearStaleSelectionOnPointerDown.ts`) — it's the same hit-test helper `Idle` itself calls
+  before recursing into `{ ...info, target: 'shape' }` internally. See watch point 24 for why a
+  listener on `editor.on('event', ...)` must call this helper directly rather than trusting
+  `info.target === 'shape'` to ever appear for a real gesture.
+
 ### Shape identity (`props.instanceId`)
 - Minted at `apps/tabletop/src/server/cardArrival.ts` on arrival, or `seatJoined.ts` at seating for
   commanders — never a third site (table-layout ticket 18, "commander arrives with owner and
@@ -174,6 +181,23 @@
    the shape — see watch point 18 and `architecture.md`'s "Ticket 19" section. Regression test:
    `verify-note.spec.ts`'s drag-note-then-drag-card sequence, deliberately without test-side
    selection cleanup so the assertion proves the product's behavior, not the test's.
+
+   **Superseded, ticket 05 (2026-08-11) — this is now the KB's go-to answer for any future
+   `onClick`-bearing shape type, not "add another `onTranslateEnd` clear."** Every per-shape site
+   above (`MtgCardShapeUtil.onTranslateEnd`, `MtgCounterShapeUtil.onTranslateEnd`,
+   `CardContextMenu.tsx`'s `commit()`) and both stock-shape subclasses that existed solely to carry
+   this hook (`SelectionClearingNoteShapeUtil`, `SelectionClearingImageShapeUtil`) were deleted.
+   One centralized listener, `apps/tabletop/src/client/clearStaleSelectionOnPointerDown.ts`
+   (registered at Tldraw mount, `TablePage.tsx`'s `onTldrawMount`), now clears a stale selection on
+   every `pointer_down` whenever the hit shape isn't already selected — closing this watch point
+   for every shape type, present and future, without a per-type hook. It also closes a gap none of
+   the distributed sites could reach *at all*: a shape selected by a plain click with no drag (a
+   stock shape with no `onClick`, selected on pointer-down) staying selected into the next drag of
+   a different `onClick`-bearing shape — there's no `onTranslateEnd` to fire for a click with no
+   drag, so no number of drag-settle sites could ever close it. **A brand-new custom ShapeUtil
+   that defines `onClick` needs NO drag-settle cleanup of its own anymore** — the centralized fix
+   already covers it, the moment the next pointer-down lands on a different shape. See
+   `architecture.md`'s "Ticket 05" section and watch point 24 for the fix's own sharp edge.
 
 2. **The selection-clear must run before any early return in the drag-settle hook.** In
    `onTranslateEnd`, the zone-equality check (`if (zone === previousZone) return undefined`) is
@@ -441,7 +465,11 @@
     than a ShapeUtil hook). **The pattern generalizes**: any future custom menu, toolbar button,
     or other UI surface that mutates a card via `editor.updateShapes` while it might be selected
     needs the same trailing clear — the hazard isn't specific to drag or to `onClick`, it's
-    "does this gesture leave an unlocked shape selected when it's done."
+    "does this gesture leave an unlocked shape selected when it's done." **Superseded by ticket 05
+    (2026-08-11)**: `commit()`'s trailing `editor.setSelectedShapes([])` was deleted; the
+    centralized fix (watch point 1, below) catches this at the next pointer-down instead. The
+    pattern-generalization lesson still stands as exactly the reason ticket 05's fix had to be
+    shape-agnostic rather than another per-surface clear.
 16. **The canonical pattern for adding a required `mtg-card` prop is now: edit `mtgCardShape()`
     in `tableFurniture.ts`, not each call site.** (Table-layout ticket 18, "commander arrives with
     owner and ghost," 2026-08-09.) Two server seams mint `mtg-card` records — `cardArrival.ts` for
@@ -633,6 +661,31 @@
     step 4's origin) is unaffected — that one predates and is unrelated to this caution; it's
     called out here only as the second example of the same class being reused, this time safely
     (cards are excluded from the regression test's locator by name).
+
+24. **`editor.on('event', ...)` never observes `target: 'shape'` for a real pointer interaction —
+    filtering on `TLPointerEventTarget`'s most obvious-looking case is a silent trap.** (Ticket 05,
+    2026-08-11.) A real DOM pointer-down is always dispatched to `Editor.dispatch`/
+    `editor.emit('event', ...)` with `target: 'canvas'`. `SelectTool/childStates/Idle.onPointerDown`
+    does its own hit-test on that canvas-target event and, when it hits a shape, **recurses into
+    itself** with a locally-constructed `{ ...info, target: 'shape', shape }` — that retargeted
+    copy is internal to the state chart and never travels back through `Editor.dispatch`, so a
+    listener on `editor.on('event', ...)` can never see `target: 'shape'` for a genuine gesture,
+    only `target: 'canvas'`. The first implementation of `clearStaleSelectionOnPointerDown`
+    filtered on `info.target === 'shape'` — it typechecked, ran, and even passed the new spec
+    against that spec's own test shape, then broke `verify-drag-identity.spec.ts`'s
+    drag-then-drag case outright (confirmed via console-logging a live gesture, then reading
+    `Idle.ts`, not guessed). **The fix: do the same hit-test `Idle` itself does**, via the public,
+    `@public`-exported `getHitShapeOnCanvasPointerDown(editor)` — which also already honors
+    `editor.options.selectLockedShapes` (`false` by default), so a locked shape (all of this
+    table's furniture) is never "hit," matching `Idle`'s own gate for free, no separate
+    `isLocked` check needed. **Any future code reaching for `editor.on('event', ...)` to answer
+    "what shape did the pointer hit" must call `getHitShapeOnCanvasPointerDown` itself on the
+    `target: 'canvas'` event — never trust `info.target === 'shape'` to ever be true.** See
+    `architecture.md`'s "Ticket 05" section for the full writeup, including why the listener runs
+    strictly after `Editor.dispatch` (so it never fights `PointingShape.onEnter`'s own selection
+    decision for the current gesture) and why `markEventAsHandled` callers (the life counter's
+    buttons) are immune by construction — `useCanvasEvents.ts` checks `wasEventAlreadyHandled`
+    before `editor.dispatch` is ever called, so `editor.emit('event', ...)` never fires for them.
 
 ## Not Related To
 

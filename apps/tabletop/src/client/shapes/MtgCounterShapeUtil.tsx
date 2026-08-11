@@ -1,4 +1,4 @@
-import { BaseBoxShapeUtil, HTMLContainer, TLShapePartial, useValue } from "tldraw";
+import { BaseBoxShapeUtil, HTMLContainer, useValue } from "tldraw";
 import { MtgCounterShape, mtgCounterShapeProps } from "../../shared/mtgCounterShape";
 import { fitCounterFont } from "./counterTextFit";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
@@ -243,16 +243,5 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
     const path = new Path2D();
     path.rect(0, 0, shape.props.w, shape.props.h);
     return path;
-  }
-
-  // Hazard A (tabletop-shape-mechanics owner): tldraw leaves the just-dragged
-  // shape selected after every drag, and the CARD's PointingShape workaround
-  // (see MtgCardShapeUtil.onTranslateEnd) only reselects the pointed-at shape
-  // when nothing is selected. A stale counter selection would make the next
-  // card drag silently translate this counter instead of the card. Every
-  // drag-settle clears selection — unconditionally, no early return above it.
-  override onTranslateEnd(): TLShapePartial<MtgCounterShape> | undefined {
-    this.editor.setSelectedShapes([]);
-    return undefined;
   }
 }

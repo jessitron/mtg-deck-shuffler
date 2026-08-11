@@ -25,7 +25,7 @@ is `Mountain: overhead` rather than a feature Mountain.
 | 2 | [02-furniture-builder-domain-interface](issues/02-furniture-builder-domain-interface.md) | Worth exploring | `ready-for-agent` | |
 | 3 | [03-cardlayout-invariant-in-interface](issues/03-cardlayout-invariant-in-interface.md) | Worth exploring | `ready-for-agent` | |
 | 4 | [04-gestures-announce-themselves](issues/04-gestures-announce-themselves.md) | Worth exploring | `needs-triage` | Tension with an already-shipped decision (tabletop-physics ticket 21) — flagged for Jess, not blindly actioned |
-| 5 | [05-stale-selection-fix](issues/05-stale-selection-fix.md) | Speculative in the review, but Jess reports it's a live, unfixed bug | `ready-for-agent` | Most developed ticket here — research already done, findings embedded as acceptance criteria. Supersedes the `tabletop-stale-selection-fix` line in the repo-root `TODO.md` (removed) |
+| 5 | [05-stale-selection-fix](issues/05-stale-selection-fix.md) | Speculative in the review, but Jess reports it's a live, unfixed bug | `done` | Centralized fix landed: `clearStaleSelectionOnPointerDown.ts`, replacing all five old workaround sites. Supersedes the `tabletop-stale-selection-fix` line in the repo-root `TODO.md` (removed) |
 | 6 | [06-rooms-typed-instance-exists](issues/06-rooms-typed-instance-exists.md) | Speculative | `ready-for-agent` | |
 
 ## Cross-candidate notes

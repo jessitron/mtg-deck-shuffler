@@ -1023,6 +1023,68 @@ props file, `TablePage.tsx`'s `shapeUtils` array, `rooms.ts`'s `createTLSchema`)
 Full detail in `architecture.md`'s rewritten life-counter section (now "built," not "decided, not
 built") and `interactions.md`'s rewritten watch point 10 plus new watch points 22-23.
 
+## Ticket 05: five distributed workaround sites replaced by one centralized listener (2026-08-11)
+
+`.scratch/tabletop-architecture-review/` ticket 05 (research doc:
+`notes/RESEARCH-stale-selection-bug.md`, referencing tldraw's own upstream issue
+tldraw/tldraw#5613). Every prior fix for watch point 1's stale-selection quirk had lived on the
+shape being dragged — `MtgCardShapeUtil.onTranslateEnd`, `MtgCounterShapeUtil.onTranslateEnd`,
+`CardContextMenu.tsx`'s `commit()`, plus two ShapeUtil subclasses that existed solely to carry the
+hook for stock shapes with none of their own (`SelectionClearingNoteShapeUtil`, ticket 19;
+`SelectionClearingImageShapeUtil`, the 2026-08-10 pasted-image fix). Jess's report (2026-08-10,
+"selecting an image then a card") exposed a gap none of the five could structurally reach:
+`onTranslateEnd` only fires when a drag *settles*, so a shape selected by a plain **click with no
+drag** (a stock `image`/`note`, selected immediately on pointer-down since neither defines
+`onClick`) stays selected into the next drag of a different `onClick`-bearing shape — there's no
+drag to settle, so no number of drag-settle sites could ever close it.
+
+- **Fix: one function, registered once at Tldraw mount.**
+  `apps/tabletop/src/client/clearStaleSelectionOnPointerDown.ts` listens on `editor.on('event',
+  ...)` for every `pointer_down`, hit-tests the canvas, and clears the selection if the hit shape
+  (if any) isn't already selected. Registered in `TablePage.tsx`'s `onTldrawMount` (renamed from
+  `aimCameraAtTheTable`, which now does two things at mount instead of one). All five old sites
+  were deleted outright, along with both `SelectionClearing*` subclasses — nothing replaced them
+  in the `shapeUtils` array, which goes back to a plain, unfiltered `...defaultShapeUtils` spread.
+- **Key correction, worth recording as the ticket's real gotcha.** The first implementation
+  filtered on `info.target === 'shape'` — the `TLPointerEventTarget` union's most obvious-looking
+  case. It typechecked, ran, and even passed the new spec against that spec's own test shape, then
+  broke `verify-drag-identity.spec.ts`'s drag-then-drag case outright (the second card failed to
+  move at all). Root cause, confirmed by console-logging a live gesture and then reading tldraw
+  source, not guessed: a real DOM pointer-down is **always** dispatched with `target: 'canvas'`;
+  `SelectTool/childStates/Idle.onPointerDown` does its own hit-test on that canvas-target event
+  and, when it hits a shape, **recurses into itself** with a locally-constructed `{ ...info,
+  target: 'shape', shape }` that never travels back through `Editor.dispatch` — so
+  `editor.on('event', ...)` can never observe `target: 'shape'` for a genuine interaction, only
+  `'canvas'`. Fixed by doing the same hit-test `Idle` itself does, via the public,
+  `@public`-exported `getHitShapeOnCanvasPointerDown(editor)` — which also already honors
+  `editor.options.selectLockedShapes` (`false` by default), so locked furniture is never "hit"
+  here either, matching `Idle`'s own gate with no separate check needed.
+- **Ordering fact confirmed, not assumed**: `editor.on('event', ...)` fires only after
+  `Editor.dispatch` has run the event through the whole state chart for that tick
+  (`_flushEventForTick` in `@tldraw/editor`), so this listener never fights
+  `PointingShape.onEnter`'s own selection decision for the shape just hit on THIS pointer-down —
+  it only cleans up staleness left over from a previous gesture.
+- **`markEventAsHandled` callers (the life counter's +/- buttons) are immune by construction, no
+  special-casing needed**: `useCanvasEvents.ts` checks `wasEventAlreadyHandled` before
+  `editor.dispatch` is ever called, so `editor.emit('event', ...)` never fires for a press on one
+  of those buttons at all.
+- **New Playwright spec**: `apps/tabletop/test/verification/verify-click-then-drag-selection.spec.ts`
+  reproduces the click-with-no-drag gap directly — confirmed red before the fix. Existing
+  selection-adjacent specs (`verify-drag-identity`, `verify-multi-untap`, `verify-image-selection`,
+  `verify-note`'s drag-then-drag case) all pass unmodified; full `./verify.sh` (42/44 — the 2
+  failures are the pre-existing, unrelated `seat.joined` 400, confirmed via `git stash` to exist on
+  unmodified code too, tracked as the `seat-joined-400` `TODO.md` buoy) and full `npx vitest run`
+  (101/101) both green. `verify-life-counter.spec.ts` also gained a targeted regression assertion
+  (pressing +/- doesn't clear an unrelated existing selection) confirming the `markEventAsHandled`
+  immunity empirically — currently blocked from going green by the same pre-existing
+  `seat.joined` 400, not by anything this ticket touched.
+
+Full detail in `architecture.md`'s new "Ticket 05" section; `interactions.md` watch point 1 marked
+superseded (with the new mechanism recorded as the KB's forward-looking default for future
+`onClick`-bearing shapes) and new watch point 24 for the `target: 'canvas'`-not-`'shape'` gotcha;
+`files.md` and `README.md`'s quick-reference table updated; both `SelectionClearing*` files and
+their `files.md` entries removed as dead weight.
+
 ## What Was Tried and Abandoned
 
 **Ticket 20, card-tucking (2026-08-10, abandoned same day as `ac27a99`).** Two implementations

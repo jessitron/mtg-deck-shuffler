@@ -287,23 +287,6 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   // as a fresh entry, but staying put (or a tiny in-zone nudge) doesn't. Zone
   // membership deliberately stays out of `props`: see MtgCardShapeProps.
   override onTranslateEnd(_initial: MtgCardShape, current: MtgCardShape): TLShapePartial<MtgCardShape> | undefined {
-    // tldraw bug workaround: because this ShapeUtil defines `onClick`,
-    // tldraw's SelectTool defers selecting the pointed-at shape until
-    // pointer-up (PointingShape.onEnter in node_modules/tldraw/src/lib/tools/
-    // SelectTool/childStates/PointingShape.ts skips select-on-enter whenever
-    // `getShapeUtil(shape).onClick` is truthy). If the drag threshold is
-    // crossed before pointer-up, `startTranslating` only forces a reselect
-    // of the actually-hit shape when NOTHING is currently selected:
-    //   if (!this.didSelectOnEnter && !this.editor.getSelectedShapeIds().length)
-    // Since tldraw leaves the just-dragged card selected after a drag ends,
-    // that guard is false on the next drag — so dragging a second,
-    // still-selected-from-before card silently re-translates the FIRST
-    // (still-selected) card instead of the one under the pointer. Clearing
-    // selection here — on every drag settle, not just on a zone change —
-    // makes the next drag's guard see an empty selection and correctly pick
-    // up whichever card the pointer actually lands on.
-    this.editor.setSelectedShapes([]);
-
     const zoneHit = this.zoneAt(current);
     const zone = zoneHit?.zone;
     const previousZone = (current.meta?.zone as string | undefined) ?? undefined;

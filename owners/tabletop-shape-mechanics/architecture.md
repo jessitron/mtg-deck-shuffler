@@ -99,6 +99,17 @@ correctly fires and reselects whatever shape is actually under the pointer.
 **Anyone who defines `onClick` on a ShapeUtil inherits this quirk** and needs the equivalent
 `setSelectedShapes([])` cleanup in their drag-settle hook — not just this one shape.
 
+**Superseded, ticket 05 (2026-08-11).** The per-shape `onTranslateEnd`/`commit()` clear described
+above is no longer how this is fixed — `MtgCardShapeUtil.onTranslateEnd`'s
+`setSelectedShapes([])` call was deleted outright, along with the equivalent calls on
+`MtgCounterShapeUtil` and inside `CardContextMenu.tsx`'s `commit()`. A single centralized
+listener, `clearStaleSelectionOnPointerDown`, now does this for every shape type at once,
+including stock shapes that never had a hook to hang the old fix on. The mechanism above (why
+`onClick`'s presence defers selection, why `startTranslating`'s safety net only fires when nothing
+is selected) is unchanged and still the reason the bug exists — only *where* the fix lives moved.
+See "Ticket 05" below for the new mechanism and why the distributed approach couldn't reach every
+case.
+
 ## Registration
 
 Registering `mtg-card` needs **two** places to agree — client and server — and both have the same
@@ -926,6 +937,104 @@ carries, not a mechanic; it grants no capability and adds no hook):
 
 Full detail in `interactions.md` (Shape identity section rewritten, new watch points 15-16) and
 `history.md`.
+
+## Ticket 05: one centralized listener replaces five distributed workaround sites (2026-08-11)
+
+`.scratch/tabletop-architecture-review/` ticket 05. Every prior fix for watch point 1's
+stale-selection quirk lived on the shape being dragged: `MtgCardShapeUtil.onTranslateEnd`,
+`MtgCounterShapeUtil.onTranslateEnd`, `CardContextMenu.tsx`'s `commit()`, plus two ShapeUtil
+subclasses that existed *solely* to carry the hook for stock shapes that had none of their own —
+`SelectionClearingNoteShapeUtil` (ticket 19) and `SelectionClearingImageShapeUtil` (the
+pasted-image fix, 2026-08-10). Five sites, one obligation, and — the reason this ticket exists —
+a gap none of the five could structurally reach: `onTranslateEnd` fires only when a drag settles,
+so a shape selected by a **plain click with no drag** (a stock `image`/`note`, selected
+immediately on pointer-down since neither defines `onClick`) stays selected into the next drag of
+a different `onClick`-bearing shape (a card), and no number of `onTranslateEnd` sites can close
+that — there's no drag to settle.
+
+All five sites are now deleted. The fix is one function,
+`apps/tabletop/src/client/clearStaleSelectionOnPointerDown.ts`, registered once at Tldraw mount
+time (`TablePage.tsx`'s `onTldrawMount`, renamed from `aimCameraAtTheTable` since it now does two
+things at mount, not one):
+
+```
+export function clearStaleSelectionOnPointerDown(editor: Editor): void {
+  editor.on("event", (info: TLEventInfo) => {
+    if (info.type !== "pointer" || info.name !== "pointer_down" || info.target !== "canvas") return;
+    const hitShape = getHitShapeOnCanvasPointerDown(editor);
+    if (!hitShape) return;
+    if (editor.getSelectedShapeIds().includes(hitShape.id)) return;
+    editor.setSelectedShapes([]);
+  });
+}
+```
+
+On every `pointer_down`, it works out which shape (if any) the pointer actually landed on and, if
+that shape isn't already part of the current selection, clears the selection right there — before
+any later event in the same gesture (a drag-threshold `pointer_move`, or a plain click's
+`pointer_up`) can act on stale state. This reaches the click-with-no-drag gap the five old sites
+couldn't: the clear now happens at the START of the next gesture, keyed on what's actually under
+the pointer, not at the END of the previous one, keyed on "did anything just get dragged."
+
+### The gotcha that broke the first implementation attempt: `target: 'canvas'`, never `'shape'`
+
+The first cut filtered `editor.on('event', ...)` on `info.target === 'shape'` — the
+`TLPointerEventTarget` union's most obvious-looking case for "the pointer hit a shape." It
+**typechecked, ran, and even passed the new spec** against that spec's own test shape — and still
+broke `verify-drag-identity.spec.ts`'s drag-then-drag case outright (the second card failed to
+move at all). Root cause, confirmed by both console-logging a live gesture and reading tldraw
+source: a real DOM pointer-down is **always** dispatched to `Editor.dispatch`/`editor.emit('event',
+...)` with `target: 'canvas'` — never `'shape'`. `SelectTool/childStates/Idle.onPointerDown`
+(`node_modules/tldraw/src/lib/tools/SelectTool/childStates/Idle.ts`) does its own hit-test on that
+canvas-target event and, when it hits a shape, **recurses into itself** with a
+locally-constructed `{ ...info, target: 'shape', shape }` — that retargeted copy is internal to
+the state chart and never travels back through `Editor.dispatch`. `editor.on('event', ...)` only
+ever sees what was actually dispatched, so it can never observe `target: 'shape'` for a real
+interaction — only `target: 'canvas'`.
+
+**The fix had to do its own hit-test**, using the same public helper `Idle` itself calls:
+`getHitShapeOnCanvasPointerDown` (exported from tldraw's package root, `@public`). This also
+turned out to be the right helper for a second reason: it already honors
+`editor.options.selectLockedShapes` (`false` by default), so a locked shape — every piece of this
+table's furniture, `mtg-zone` included — never counts as "hit," matching `Idle`'s own gate for
+free. No separate `isLocked` check was needed.
+
+**Lesson for anyone else who reaches for `editor.on('event', ...)` in this app**: don't filter on
+`TLPointerEventTarget`'s `'shape'` case from how the type looks — for a real pointer-down it never
+fires. If you need "what shape did the pointer hit," call `getHitShapeOnCanvasPointerDown(editor)`
+yourself on the `target: 'canvas'` event, the way `Idle` does internally. See `interactions.md`
+watch point 24.
+
+### Ordering: runs after `Editor.dispatch`, so it never fights `onEnter`'s own decision
+
+`editor.on('event', ...)` fires once `Editor.dispatch` has already run the event through the
+whole state chart for this tick (`_flushEventForTick` in `@tldraw/editor`) — so by the time this
+listener runs, `PointingShape.onEnter` for this same pointer-down has already executed and already
+made its own selection decision for the shape just hit. The listener never overrides that: if
+`onEnter` already selected the hit shape (the common case — a stock shape with no `onClick`), this
+listener's own hit-test finds that shape already in `getSelectedShapeIds()` and no-ops. It only
+cleans up staleness left over from a **previous** gesture, never fighting the current one.
+
+### Why `markEventAsHandled` callers (e.g. the life counter) are immune by construction
+
+The life counter's +/- buttons call `editor.markEventAsHandled(e)` in their pointer handlers
+(watch point 10/22's `HyperlinkButton` pattern). `useCanvasEvents.ts` checks
+`wasEventAlreadyHandled` **before** ever calling `editor.dispatch` for that DOM event — so
+`editor.emit('event', ...)` never fires at all for a press on one of those buttons. This new
+centralized listener structurally cannot be disturbed by locked-shape UI that opts out of
+`Editor.dispatch` this way; no special-casing was needed to keep the two features apart.
+
+### Test coverage
+
+`apps/tabletop/test/verification/verify-click-then-drag-selection.spec.ts` (new) reproduces
+exactly the click-with-no-drag gap: drop a pasted image, click it once with **no** drag (tldraw
+selects it immediately on pointer-down since stock `image` has no `onClick`), then drag a card,
+and assert the card — not the image — moves. Confirmed red before the fix. Existing
+selection-adjacent specs (`verify-drag-identity`, `verify-multi-untap`, `verify-image-selection`,
+`verify-note`'s drag-then-drag case) all still pass unmodified, plus the full `./verify.sh` suite
+and `npx vitest run`. A targeted regression assertion was also added to
+`verify-life-counter.spec.ts` (pressing +/- doesn't clear an unrelated existing selection),
+confirming the `markEventAsHandled` immunity above empirically, not just by source-reading.
 
 ## How to tell this owner's territory from `two-faced-cards`'s
 

@@ -24,32 +24,25 @@ import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
 import { MtgCounterTool } from "./shapes/MtgCounterTool";
 import { MtgLifeCounterShapeUtil } from "./shapes/MtgLifeCounterShapeUtil";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
-import { SelectionClearingNoteShapeUtil } from "./shapes/SelectionClearingNoteShapeUtil";
-import { SelectionClearingImageShapeUtil } from "./shapes/SelectionClearingImageShapeUtil";
 import { TableContextMenu } from "./CardContextMenu";
+import { clearStaleSelectionOnPointerDown } from "./clearStaleSelectionOnPointerDown";
 
 // useSync (unlike <Tldraw>) builds its store schema from exactly the
 // shapeUtils it's given — it does NOT fold in tldraw's own defaults the way
 // <Tldraw> does, and (unlike <Tldraw>'s lenient mergeArraysAndReplaceDefaults)
 // it throws ("Shape type X is defined more than once") on a duplicate `type`
 // in the array — so the stock shapes the name label still uses (text, ...)
-// have to be listed here explicitly alongside mtg-card/mtg-zone/mtg-counter,
-// or the client store rejects them outright, and the stock NoteShapeUtil and
-// ImageShapeUtil have to be filtered OUT before their SelectionClearing*
-// replacements go in, rather than just appended after them. Ticket 19:
-// mtg-card hosts notes as passengers exactly like counters, and a stock note
-// has no hook of its own to clear a stale selection after a drag — see that
-// util's own comment. A pasted/dropped image hits the identical gap (stock
-// ImageShapeUtil also has no onTranslateEnd), so SelectionClearingImageShapeUtil
-// gets the same treatment.
+// have to be listed here explicitly alongside mtg-card/mtg-zone/mtg-counter.
+// Ticket 05: the stock NoteShapeUtil and ImageShapeUtil no longer need
+// SelectionClearing* subclasses layered over them — the centralized
+// clearStaleSelectionOnPointerDown fix below covers every shape type,
+// including these two, without a per-type hook.
 const shapeUtils = [
-  ...defaultShapeUtils.filter((Util) => Util.type !== "note" && Util.type !== "image"),
+  ...defaultShapeUtils,
   MtgCardShapeUtil,
   MtgZoneShapeUtil,
   MtgCounterShapeUtil,
   MtgLifeCounterShapeUtil,
-  SelectionClearingNoteShapeUtil,
-  SelectionClearingImageShapeUtil,
 ];
 
 const tools = [MtgCounterTool];
@@ -119,8 +112,9 @@ const licenseKey = chooseLicenseKey(
 // tweak alongside it).
 const TABLE_EXTENT = new Box(-2802, -1612, 5604, 3164);
 
-function aimCameraAtTheTable(editor: Editor) {
+function onTldrawMount(editor: Editor) {
   editor.zoomToBounds(TABLE_EXTENT, { inset: 24 });
+  clearStaleSelectionOnPointerDown(editor);
 }
 
 // v0 asset store: no upload service, so pasted/dropped images are inlined as
@@ -182,7 +176,7 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
           tools={tools}
           overrides={uiOverrides}
           components={components}
-          onMount={aimCameraAtTheTable}
+          onMount={onTldrawMount}
         />
       )}
     </div>

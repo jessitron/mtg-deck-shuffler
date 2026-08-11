@@ -49,15 +49,13 @@ function CardMenuItems() {
 
   // Right-clicking selects the card, and — unlike locked shapes — an
   // unlocked card's selection survives the menu closing (tldraw's own
-  // behavior). A lingering selection makes the NEXT drag of a different card
-  // silently move this one instead (MtgCardShapeUtil.onTranslateEnd's
-  // comment on the same hazard). Every action here clears selection when
-  // it's done, same fix, applied at the menu's exit instead of the drag's.
+  // behavior). Ticket 05: that lingering selection is no longer this
+  // function's problem — clearStaleSelectionOnPointerDown catches it the
+  // moment the next pointer-down lands on a different shape.
   function commit(partials: TLShapePartial<MtgCardShape>[], label: string) {
     if (partials.length === 0) return;
     editor.markHistoryStoppingPoint(label);
     editor.updateShapes(partials);
-    editor.setSelectedShapes([]);
   }
 
   const flippable = cards.filter((c) => c.props.backImageUrl !== null);

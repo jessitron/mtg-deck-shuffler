@@ -5,13 +5,14 @@ import { randomUUID } from "node:crypto";
  * TODO.md bug (2026-08-10): "paste an image in, pick it, move it around,
  * click a card, try to move it — the image moves instead."
  *
- * tabletop-shape-mechanics owner: mtg-card defines `onClick`, so tldraw
- * defers selecting a clicked card until pointer-up; if some OTHER shape is
- * still selected from its own prior drag when the card-drag threshold is
- * crossed, tldraw keeps translating that stale selection instead of the
- * card. A pasted/dropped image is tldraw's STOCK `image` shape, which (like
- * stock `note` before Ticket 19) has no hook of its own to clear selection
- * on drag-settle — SelectionClearingImageShapeUtil supplies one.
+ * tabletop-shape-mechanics owner (superseded by ticket 05): mtg-card defines
+ * `onClick`, so tldraw defers selecting a clicked card until pointer-up; if
+ * some OTHER shape is still selected from its own prior drag when the
+ * card-drag threshold is crossed, tldraw keeps translating that stale
+ * selection instead of the card. clearStaleSelectionOnPointerDown
+ * (TablePage.tsx) closes this centrally now, for every shape type — see
+ * verify-click-then-drag-selection.spec.ts for the click-with-no-drag gap
+ * this drag-then-drag case alone couldn't cover.
  */
 
 function fakeTraceparent(): string {

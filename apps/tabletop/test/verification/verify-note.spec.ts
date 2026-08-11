@@ -221,12 +221,12 @@ test("after dragging a note, dragging a card moves the card (stale-selection reg
   page,
   baseURL,
 }) => {
-  // tabletop-shape-mechanics owner (2026-08-10): mtg-card defines `onClick`,
-  // so tldraw defers selecting a clicked card until pointer-up; if some
-  // OTHER shape is still selected from its own prior drag when the card-drag
-  // threshold is crossed, tldraw keeps translating that stale selection
-  // instead of the card. A stock note has no hook of its own to clear
-  // selection on drag-settle — SelectionClearingNoteShapeUtil supplies one.
+  // tabletop-shape-mechanics owner (2026-08-10, superseded by ticket 05): mtg-card
+  // defines `onClick`, so tldraw defers selecting a clicked card until
+  // pointer-up; if some OTHER shape is still selected from its own prior drag
+  // when the card-drag threshold is crossed, tldraw keeps translating that
+  // stale selection instead of the card. clearStaleSelectionOnPointerDown
+  // (TablePage.tsx) closes this centrally now, for every shape type.
   // Deliberately no `deselectAll` here: proving the PRODUCT clears
   // selection, not the test.
   const tableSlug = `verify-note-sel-${Date.now()}`;

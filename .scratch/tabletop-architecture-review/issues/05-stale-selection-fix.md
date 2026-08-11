@@ -1,6 +1,6 @@
 # 05 — Fix the tldraw stale-selection bug properly, not just consolidate its workaround
 
-**Status:** ready-for-agent
+**Status:** done
 
 **Files:** `src/client/shapes/MtgCardShapeUtil.tsx`, `MtgCounterShapeUtil.tsx`,
 `CardContextMenu.tsx`, `SelectionClearingNoteShapeUtil.ts`, `SelectionClearingImageShapeUtil.ts`,
@@ -40,30 +40,44 @@ selection-forming interaction, not just after drags.
 
 **Plan (try the safer option first):**
 
-- [ ] Write a failing Playwright spec reproducing the bug: click a stock `image` shape (no drag),
+- [x] Write a failing Playwright spec reproducing the bug: click a stock `image` shape (no drag),
       then drag an `mtg-card` shape elsewhere — assert the image did *not* move and the card did.
       Follow the existing pattern in `test/verification/*.spec.ts`.
-- [ ] **Try the public-API route first:** register a pointer-event listener via `editor.on(...)`
+      → `test/verification/verify-click-then-drag-selection.spec.ts`, confirmed red pre-fix.
+- [x] **Try the public-API route first:** register a pointer-event listener via `editor.on(...)`
       (or `editor.store.listen()` on the selected-ids state) at mount time in `TablePage.tsx`
       that eagerly clears selection the moment a pointer-down lands on a shape different from
       what's currently selected — before tldraw's own `PointingShape` state acts. Run it against
       the failing spec.
-- [ ] **If the public-API route reliably closes the gap:** adopt it, and remove the five existing
+      → Worked, with one correction: a naive `info.target === 'shape'` filter never fires for
+      real interactions (tldraw internally re-targets `'canvas'` → `'shape'` inside
+      `Idle.onPointerDown`'s own recursion, which never round-trips through `Editor.dispatch`).
+      Fixed by doing the same hit-test `Idle` does, via the public
+      `getHitShapeOnCanvasPointerDown` helper. See `clearStaleSelectionOnPointerDown.ts` and the
+      `tabletop-shape-mechanics` owner KB (watch point 24) for the full trace.
+- [x] **If the public-API route reliably closes the gap:** adopt it, and remove the five existing
       `setSelectedShapes([])` call sites (`MtgCardShapeUtil.tsx`, `MtgCounterShapeUtil.tsx`,
       `CardContextMenu.tsx`'s `commit()`), and delete `SelectionClearingNoteShapeUtil.ts` /
       `SelectionClearingImageShapeUtil.ts` entirely if nothing else about them is load-bearing
       (check: were they created *solely* for this workaround, or do they carry other overrides?).
-- [ ] **If the public-API route can't reliably intercept in time:** fall back to the
-      `editor.getStateDescendant('select.pointing_shape')` monkey-patch described in the research
-      doc §4, applied eagerly. Record the private-API tradeoff explicitly in a code comment at the
-      patch site, naming the tldraw version it was verified against (5.2.5) so a future upgrade
-      knows to re-check it.
-- [ ] Consult `tabletop-shape-mechanics-review` with whichever approach is chosen, before landing.
-- [ ] The new Playwright spec passes; existing drag-identity and multi-untap specs
+      → Done — both files existed solely for this hook; nothing else load-bearing in either.
+- [ ] ~~**If the public-API route can't reliably intercept in time:** fall back to the
+      `editor.getStateDescendant('select.pointing_shape')` monkey-patch...~~ Not needed — the
+      public-API route (corrected as above) closes the gap reliably.
+- [x] Consult `tabletop-shape-mechanics-review` with whichever approach is chosen, before landing.
+      → Flagged a real gap in the trace (locked-shape buttons calling `markEventAsHandled`,
+      e.g. the life counter's +/-): confirmed via source that this suppresses `editor.dispatch`
+      entirely upstream (`useCanvasEvents.ts`'s `wasEventAlreadyHandled` gate), so it can't
+      disturb the new listener. Added a regression test anyway (`verify-life-counter.spec.ts`).
+- [x] The new Playwright spec passes; existing drag-identity and multi-untap specs
       (`verify-multi-untap.spec.ts` and any drag-identity coverage) still pass — both depend on
       selection state adjacent to what this changes.
-- [ ] `tabletop-shape-mechanics-update` afterward — this is the first time this app centralizes
+      → All pass. Full suite: 42/44 (`./verify.sh`) + 101/101 (`npx vitest run`); the 2 failures
+      are a pre-existing, unrelated `seat.joined` 400 (confirmed via `git stash` on unmodified
+      code) — captured as the `seat-joined-400` TODO.md buoy, out of scope here.
+- [x] `tabletop-shape-mechanics-update` afterward — this is the first time this app centralizes
       (or deliberately doesn't) a selection-hygiene fix that's currently entry-point-specific.
+      → Done, commit `dfa41ea` on this branch.
 
 **Further notes:**
 
