@@ -8,7 +8,10 @@ was never its own file (it lived inside `tableFurniture.ts`'s shape-builder func
 (`.scratch/tabletop-physics/issues/14-*.md`, same day) added `zoneHitTest.ts`, extracting the
 zone hit test into a function shared by both `MtgCardShapeUtil` and `MtgZoneShapeUtil`. Ticket 18
 (`.scratch/tabletop-physics/issues/18-counters.md`, 2026-08-08, `4c64ef2`) added the third shape
-type `mtg-counter` plus its creation tool and the eviction-geometry seam.
+type `mtg-counter` plus its creation tool and the eviction-geometry seam. **`MtgCardShapeUtil.tsx`
+split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`, `cardTapClick.ts`,
+`cardPassengers.ts`, `cardZoneEntry.ts` added; `MtgCardShapeUtil.tsx` itself shrank to a thin shell
+— see its own entry below for the full breakdown.
 
 ## Shared (each shape's type/props definition)
 
@@ -92,25 +95,58 @@ type `mtg-counter` plus its creation tool and the eviction-geometry seam.
   pure function so the context menu's Tap/Untap item can share it — a menu item has no
   `this.editor`/ShapeUtil instance to call a private method on. `tapPartialsForCards(cards,
   tapped)` is a plain `(cards: MtgCardShape[], tapped: boolean)` helper with no `Editor`
-  parameter. Imported by `MtgCardShapeUtil.tsx`'s `onClick` and by `CardContextMenu.tsx`.
-- `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — the whole card territory: extends
-  `BaseBoxShapeUtil<MtgCardShape>`; `onClick` (tap/untap toggling `props.tapped` with rotation
-  as a pure visual delta; since ticket 16, 2026-08-09, also pushes the clicked card's new state
-  to the rest of a marquee selection via a `queueMicrotask`-deferred batch, run only when other
-  cards are selected — the clicked card's own partial stays a synchronous return; see
-  `architecture.md`'s "Ticket 16"; since ticket 17, calls the standalone `tapPartial` from
-  `cardTap.ts` instead of a private method), `onTranslateEnd` (zone-entry detection + passenger
-  eviction on entering graveyard/exile/library — `NON_BATTLEFIELD_ZONES`, deliberately excluding
-  the Stack; **its selection-clear was deleted by ticket 05, 2026-08-11** — see
-  `clearStaleSelectionOnPointerDown.ts`, above), `zoneAt()` (private helper — since ticket 14, a thin wrapper
-  around `zoneHitTest.ts`'s `topmostZoneAt()`, below; since ticket 18 returning the full
-  `ZoneHit`, id+zone), the passenger-hosting drag hooks (`canReceiveNewChildrenOfType`/
-  `canRemoveChildrenOfType`, type-narrowed via `PASSENGER_TYPES` — since ticket 19, `{
-  "mtg-counter", "note" }`), `onDragShapesIn` (real reparent + rotation-zeroing for passengers,
-  using `getShapeGeometry(...).bounds`), `onDragShapesOut` (the `parentId` filter for
-  passengers), `evictPassengers()` (private, renamed from `evictCounters` by ticket 19 — calls
-  `findOpenSpotsNearZoneEdge`, below), and `component()`/`getIndicatorPath()` (renders its own
-  `<img>`).
+  parameter. Imported by `cardTapClick.ts`'s `handleCardClick` (below) and by
+  `CardContextMenu.tsx`.
+- `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — **reduced to a thin `ShapeUtil` shell,
+  tabletop-architecture ticket 01 (2026-08-11, organizational split, zero behavior change: 110/110
+  vitest + 43/44 Playwright pass before and after — the one failure,
+  `verify-life-counter.spec.ts:102`, reproduces identically on unmodified `main`).** Was 388 lines
+  holding every hook's full body; now 83 lines. Still extends `BaseBoxShapeUtil<MtgCardShape>`,
+  still declares every override tldraw needs to see (`onClick` etc. — see watch point 1, this is
+  load-bearing: it's the override's *presence*, not its body, that changes tldraw's selection
+  behavior) — but every override is now a one-line call into a sibling file, `this.editor` passed
+  through explicitly as `editor`:
+  - `component(shape)` → `CardFace({shape})`, `getIndicatorPath(shape)` → `cardIndicatorPath(shape)`
+    — both in `cardRender.tsx`, below.
+  - `onClick(shape)` → `handleCardClick(editor, shape)` — in `cardTapClick.ts`, below.
+  - `canReceiveNewChildrenOfType`/`canRemoveChildrenOfType` → `canReceivePassenger`/
+    `canRemovePassenger`; `onDragShapesIn`/`onDragShapesOut` → `handleDragShapesIn`/
+    `handleDragShapesOut(editor, ...)` — all in `cardPassengers.ts`, below.
+  - `onTranslateEnd(_initial, current)` → `handleTranslateEnd(editor, current)` — in
+    `cardZoneEntry.ts`, below.
+  **This was grilled, not assumed**: the ticket's original proposal was a CardPhysics/interop
+  architectural seam (separate tldraw-plumbing from domain rules); grilling found no clean seam of
+  that kind exists — every hook mixes a tldraw quirk with a card rule inseparably (documented in
+  `.scratch/tabletop-architecture-review/issues/01-split-cardshapeutil-interop-from-physics.md`).
+  Jess's call was explicitly organizational: split by hook for navigability, keep pulling out
+  anything genuinely tldraw-free (already done previously — `tapPartial`, `topmostZoneAt`,
+  `findOpenSpotsNearZoneEdge` — none of that changed here), but don't invent a false purity
+  boundary elsewhere. **Every mechanism this KB documents (the `onClick` selection-deferral quirk,
+  the `queueMicrotask` undo-coalescing, the rotation-zeroing math, the zone-entry debounce) is
+  unchanged — only which file its body lives in moved.** See `architecture.md`'s "Ticket 01"
+  section and `history.md`.
+- `apps/tabletop/src/client/shapes/cardRender.tsx` — **new, ticket 01**: `component()`'s JSX body
+  (exported as `CardFace({shape})`) and `getIndicatorPath`'s body (`cardIndicatorPath(shape)`),
+  plus the tap catch-up `useLayoutEffect` (ticket 15's WAAPI counter-rotate-then-ease-to-0, keyed
+  on `props.tapped`). Pulled out verbatim; still tldraw-dependent (`HTMLContainer`, React hooks) —
+  not a tldraw-free module, just a smaller file.
+- `apps/tabletop/src/client/shapes/cardTapClick.ts` — **new, ticket 01**: `onClick`'s full body
+  (`handleCardClick(editor, shape)`) — tap/untap toggling `props.tapped` with rotation as a pure
+  visual delta, plus ticket 16's multi-untap propagation (the `queueMicrotask` undo-coalescing
+  batch to the rest of a marquee selection, preserved verbatim with its ordering-hazard comment —
+  see watch point 14). Calls the standalone `tapPartial` from `cardTap.ts`, above.
+- `apps/tabletop/src/client/shapes/cardPassengers.ts` — **new, ticket 01**: `PASSENGER_TYPES`, the
+  two `can*` gates (`canReceivePassenger`/`canRemovePassenger`), and `onDragShapesIn`/
+  `onDragShapesOut`'s bodies (`handleDragShapesIn`/`handleDragShapesOut(editor, ...)`), including
+  the rotation-zeroing math for `reparentShapes`' page-rotation-preservation quirk (watch point 12)
+  and the `parentId` filter for `onDragShapesOut` (watch point 11).
+- `apps/tabletop/src/client/shapes/cardZoneEntry.ts` — **new, ticket 01**: `NON_BATTLEFIELD_ZONES`,
+  `onTranslateEnd`'s body (`handleTranslateEnd(editor, current)`), and its two former-private
+  helpers `zoneAt`/`evictPassengers`, now module-level functions taking `editor` explicitly instead
+  of reading `this.editor`. **`onTranslateEnd`'s own `setSelectedShapes([])` call was already gone
+  before this split** — ticket 05 (2026-08-11, the same day) centralized that into
+  `clearStaleSelectionOnPointerDown.ts`; this file's `handleTranslateEnd` never had that line to
+  carry over.
 - `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — extends `BaseBoxShapeUtil<MtgZoneShape>`
   (ticket 13); still defines no interaction hooks at all (`onClick`/`onTranslateEnd`/
   `onDragShapesOver` are all absent — see `architecture.md`/`interactions.md` watch point 7 for why

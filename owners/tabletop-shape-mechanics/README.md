@@ -109,7 +109,11 @@ superseding fix), and watch point 1.
 
 | What | Where |
 |---|---|
-| Card ShapeUtil (tap/untap, drag settle, zone detection, counter hosting) | `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` |
+| Card ShapeUtil (thin shell — declares every override, delegates each to a sibling file; ticket 01, 2026-08-11) | `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` |
+| `component()`/`getIndicatorPath()` bodies + tap catch-up animation | `apps/tabletop/src/client/shapes/cardRender.tsx` (`CardFace`, `cardIndicatorPath`) |
+| `onClick` body — tap/untap toggle + ticket 16's multi-untap propagation | `apps/tabletop/src/client/shapes/cardTapClick.ts` (`handleCardClick`) |
+| Passenger hosting — `PASSENGER_TYPES`, the two `can*` gates, `onDragShapesIn`/`onDragShapesOut` bodies | `apps/tabletop/src/client/shapes/cardPassengers.ts` |
+| `onTranslateEnd` body — zone-entry detection + passenger eviction | `apps/tabletop/src/client/shapes/cardZoneEntry.ts` (`handleTranslateEnd`, plus private `zoneAt`/`evictPassengers`) |
 | Tap pivot math (pure, shared by `onClick` and the context menu) | `apps/tabletop/src/client/shapes/cardTap.ts` (`tapPartial`) |
 | First custom `ContextMenu` (Flip/Turn face down-up/Tap-Untap, right-click selection hazard) | `apps/tabletop/src/client/CardContextMenu.tsx`, wired via `TLComponents.ContextMenu` in `TablePage.tsx` |
 | Regression test for context-menu stale-selection hazard | `apps/tabletop/test/verification/verify-flip-face-down.spec.ts` |

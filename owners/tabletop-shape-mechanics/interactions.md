@@ -66,8 +66,13 @@
 ## Depended On By
 
 ### `two-faced-cards` (card rendering, not mechanics)
-- Shares one file today (`MtgCardShapeUtil.tsx`) but a different concern: that owner cares what
-  image/face renders, this owner cares whether the right shape responds to the pointer. See
+- Different concern, not always the same file anymore: that owner cares what image/face renders,
+  this owner cares whether the right shape responds to the pointer. Before ticket 01 (2026-08-11,
+  organizational split), both concerns shared one file, `MtgCardShapeUtil.tsx`; now `two-faced-
+  cards`'s territory is mostly `cardRender.tsx`'s `CardFace` component, while this owner's spans
+  `MtgCardShapeUtil.tsx` (the thin shell) and `cardTapClick.ts`/`cardPassengers.ts`/
+  `cardZoneEntry.ts` — except the tap catch-up animation, which stayed in `cardRender.tsx` because
+  it's about rendering, even though the *gesture* it reacts to is this owner's. See
   `owners/two-faced-cards/interactions.md` watch point 16 and `architecture.md`'s "How to tell
   this owner's territory from `two-faced-cards`'s" section.
 - **Ticket 12's `mtg-card` rewrite landed as a joint change** (2026-08-08): the
