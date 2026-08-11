@@ -1,6 +1,6 @@
 # The Spine sits in the middle
 
-Mountain: spine-tells-the-story
+Mountain: spine-gathers-data
 Type: wayfinder:map
 
 ## Destination
