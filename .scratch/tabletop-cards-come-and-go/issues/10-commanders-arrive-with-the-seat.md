@@ -2,7 +2,9 @@
 
 Mountain: tabletop-replaces-mural
 Ship: fleet
-Status: ready-for-agent
+Status: resolved (landed as `tabletop-table-layout` ticket 18, commit `cea6c37`,
+  2026-08-09 — `seat.joined.v1` gained `commanders`, Tabletop mints them in the
+  Command Zone with an owner + isCommander-carrying ghost)
 
 **What to build:** `seat.joined.v1` gains optional `commanders`: an array of 0–2 entries,
 each `{ card: { scryfallId, instanceId } }`. Commanders are ordinary GameCards in the
