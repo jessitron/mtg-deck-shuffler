@@ -976,6 +976,53 @@ since they come from this owner's existing single-shot hook writes. Recorded as 
 watch point 20 and a new "Depends On" bullet; `architecture.md` was left otherwise unchanged since
 no ShapeUtil hook or registration mechanic actually moved.
 
+## Table-layout ticket 20: the life counter built, and a new `editor.updateShape` lock gate found (2026-08-10)
+
+**Ticket-number collision, same shape as the two "ticket 12"s and "ticket 13"s above**: this is
+`.scratch/tabletop-table-layout/issues/20-*.md` — NOT the `tabletop-physics` "Ticket 20"
+(card-tucking) recorded just below in "What Was Tried and Abandoned," which was abandoned the
+same day. Two different maps, same number, no relation.
+
+Built the life counter design decided back in the "Life counters" entry above (2026-08-08): a
+new locked custom shape type, `mtg-life-counter` — `apps/tabletop/src/shared/
+mtgLifeCounterShape.ts` (props `{w, h, value}`) and `apps/tabletop/src/client/shapes/
+MtgLifeCounterShapeUtil.tsx` (`BaseBoxShapeUtil`, no interaction hooks, same shape as
+`mtg-zone`). Minted at seat-join time (`tableFurniture.ts`'s `ensurePlayerArea`) on the name row,
+far right, starting at `value: 40`, via new `lifeCounterPosition()`/`LIFE_COUNTER_W`/
+`LIFE_COUNTER_H` in `cardLayout.ts`. Registered through the standard four-step pattern (shared
+props file, `TablePage.tsx`'s `shapeUtils` array, `rooms.ts`'s `createTLSchema`).
+
+- **New finding not on record before this ticket, correcting the "decided, not built" section's
+  scope**: `editor.updateShape`/`updateShapes` (the public method) silently drops any partial
+  targeting a **locked** shape unless the partial itself sets `isLocked: false` or the call is
+  wrapped in `editor.run(fn, { ignoreShapeLock: true })`. This is a *separate* gate from the
+  already-documented "locking gates the gesture state machine, not DOM events" fact (watch point
+  7) — that fact is still true and unchanged (it's about `SelectTool`/`PointingShape`/
+  `getDraggingOverShape` never being reached for a locked shape), but it does NOT mean a locked
+  shape's props are freely writable through the ordinary editor API once a DOM handler does reach
+  them. Found empirically: `setValue`'s first draft called `this.editor.updateShape(...)`
+  directly from a button's `onClick`, exactly per the `HyperlinkButton`/`mtg-counter` pattern —
+  compiled, ran, threw nothing, but the life total silently never changed. Fixed by wrapping the
+  call: `this.editor.run(() => this.editor.updateShape(...), { ignoreShapeLock: true })`. This is
+  now THE load-bearing fact for any future locked shape whose own controls mutate its own props
+  (not just render/read, the way `mtg-zone`'s armed-glow `computed()` does). New watch point 22;
+  `architecture.md`'s life-counter section gained this as fact 4.
+- **Second, smaller finding**: reusing tldraw's own `.tl-image-container` class purely to inherit
+  `pointer-events: all` (the way `MtgCounterShapeUtil` does) is a trap for a *second* shape doing
+  the same thing — `verify-image-selection.spec.ts` has a locator that assumes every non-card
+  shape carrying that class IS a pasted image, and adding the life counter with that class broke
+  it (2 matches, expected 1) even though the shape worked correctly. Fixed by setting
+  `pointerEvents: "all"` inline instead — the class was never load-bearing for the behavior, only
+  for this test's assumption about what carries it. New watch point 23.
+- Files touched: `mtgLifeCounterShape.ts` (new), `MtgLifeCounterShapeUtil.tsx` (new),
+  `TablePage.tsx` (registration), `rooms.ts` (registration), `cardLayout.ts`
+  (`lifeCounterPosition`/`LIFE_COUNTER_W`/`LIFE_COUNTER_H`), `tableFurniture.ts` (mint call in
+  `ensurePlayerArea`). Tests: `test/cardLayout.test.ts`, `test/seatJoined.test.ts`,
+  `test/verification/verify-life-counter.spec.ts` (new).
+
+Full detail in `architecture.md`'s rewritten life-counter section (now "built," not "decided, not
+built") and `interactions.md`'s rewritten watch point 10 plus new watch points 22-23.
+
 ## What Was Tried and Abandoned
 
 **Ticket 20, card-tucking (2026-08-10, abandoned same day as `ac27a99`).** Two implementations
