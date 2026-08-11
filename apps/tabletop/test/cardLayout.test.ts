@@ -25,6 +25,10 @@ import {
   COMMAND_ZONE_H,
   graveyardCardPosition,
   commandZoneCardPosition,
+  lifeCounterPosition,
+  nameLabelPosition,
+  LIFE_COUNTER_W,
+  LIFE_COUNTER_H,
 } from "../src/server/cardLayout";
 import { ZONE_LABEL_BAND } from "../src/shared/mtgZoneShape";
 
@@ -173,6 +177,24 @@ describe("cardLayout — player area geometry", () => {
     const box = commandZoneBounds(0);
     const second = commandZoneCardPosition(0, 1, 2);
     expect(second.x + CARD_W).toBeLessThanOrEqual(box.x + box.w);
+  });
+});
+
+/** Ticket 20: the life counter sits far right on the name row, bigger than that row. */
+describe("cardLayout — life counter position", () => {
+  it("right-aligns to the player area's right edge, for every seat", () => {
+    for (const seatIndex of [0, 1, 2, 3]) {
+      const origin = playerAreaOrigin(seatIndex);
+      const pos = lifeCounterPosition(seatIndex);
+      expect(pos.x).toBe(origin.x + PLAYER_AREA_W - LIFE_COUNTER_W);
+    }
+  });
+
+  it("vertically centers on the name label's band", () => {
+    const namePos = nameLabelPosition(0);
+    const pos = lifeCounterPosition(0);
+    const NAME_LABEL_HEIGHT = 40;
+    expect(pos.y).toBe(namePos.y - (LIFE_COUNTER_H - NAME_LABEL_HEIGHT) / 2);
   });
 });
 
