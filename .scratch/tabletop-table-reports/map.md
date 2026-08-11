@@ -2,6 +2,15 @@
 
 Mountain: tabletop-replaces-mural
 Type: wayfinder:map
+Status: superseded
+
+**Superseded 2026-08-11 by [The Spine sits in the middle](../spine-in-the-middle/map.md).**
+This map's destination — deciding what the Tabletop tells the Spine, and how — turned
+out to be one half of a bigger question once Jess asked for the Spine to sit in the
+middle of *all* Shuffler↔Tabletop traffic, not just the Tabletop's outbound half. Its
+resolved tickets (01, 02) stand as-is; its remaining fog (the Tabletop→Spine sender,
+the `gameId`/`playerName` gap, the rest of the physics payload schemas) moved into the
+new map's Not yet specified rather than living in two places. Read the new map first.
 
 **Map 5 of six.** The chart above this one is
 [The Tabletop replaces Mural](../../apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md) — read it first
