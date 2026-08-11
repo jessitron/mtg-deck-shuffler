@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Ship: tabletop
-Status: ready-for-agent
+Status: resolved
 
 ## Problem Statement
 
