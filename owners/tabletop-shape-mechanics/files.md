@@ -100,7 +100,9 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
 - `apps/tabletop/src/client/shapes/MtgCardShapeUtil.tsx` — **reduced to a thin `ShapeUtil` shell,
   tabletop-architecture ticket 01 (2026-08-11, organizational split, zero behavior change: 110/110
   vitest + 43/44 Playwright pass before and after — the one failure,
-  `verify-life-counter.spec.ts:102`, reproduces identically on unmodified `main`).** Was 388 lines
+  `verify-life-counter.spec.ts:102`, reproduces identically on unmodified `main` — **corrected
+  2026-08-11: this was a deterministic furniture-image-count bug, not flakiness; see
+  `history.md`'s "Correction" entry of that date**).** Was 388 lines
   holding every hook's full body; now 83 lines. Still extends `BaseBoxShapeUtil<MtgCardShape>`,
   still declares every override tldraw needs to see (`onClick` etc. — see watch point 1, this is
   load-bearing: it's the override's *presence*, not its body, that changes tldraw's selection
@@ -239,8 +241,15 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   "mtg-zone": {...} } })`.
   The server-side twin of `TablePage.tsx`'s client registration; same "must spread the defaults
   explicitly" gotcha applies here, on the schema-validation side (see `architecture.md`).
-- `apps/tabletop/src/server/tableFurniture.ts` — **two per-room `IndexKey` counters since
-  2026-08-10 (watch point 21)**: `nextIndex(tableName)` (the original `getIndexAbove`/
+- `apps/tabletop/src/server/tableFurniture.ts` — **new exported `FURNITURE_IMAGE_ID_MARKER =
+  "furniture-image-"` constant (2026-08-11)**: prefixed onto every locked background-picture
+  furniture shape's id (`matImageId`, `libraryImageId` in `ensurePlayerArea`) so a Playwright spec
+  can exclude "this table's own decor" from a generic `[data-shape-type="image"]` locator by
+  construction, rather than each spec inventing its own carve-out. Adopted by
+  `verify-life-counter.spec.ts` (see `history.md`'s "Correction" entry, 2026-08-11) — generalizes
+  the ad hoc idiom `verify-image-selection.spec.ts` already used for a card's own face image.
+  **Any future locked background-picture furniture should mint its id with this same prefix.**
+  **Two per-room `IndexKey` counters since 2026-08-10 (watch point 21)**: `nextIndex(tableName)` (the original `getIndexAbove`/
   `ZERO_INDEX_KEY` chain) mints **only cards** now — `cardArrival.ts` and `seatJoined.ts`'s
   commander/ghost mints, both already card-only callers, needed no change — while a new
   `nextFurnitureIndex(tableName)`, chained via `getIndexBelow(...)` off `null`, mints every
@@ -388,6 +397,14 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   `verify-life-counter.spec.ts` also gained a targeted assertion (ticket 05) that pressing the
   life counter's +/- buttons doesn't clear an unrelated existing selection — the `markEventAsHandled`
   immunity from watch point 24, confirmed empirically rather than only by source-reading.
+  **That assertion's own locator was fixed 2026-08-11**: `.tl-shape[data-shape-type="image"]`
+  matched seat.joined's two locked furniture images (playmat picture, library card back) in
+  addition to the one pasted image the test cares about — narrowed to
+  `:not([data-shape-id*="furniture-image-"])` using the new `FURNITURE_IMAGE_ID_MARKER` (see
+  `tableFurniture.ts`, below). The same pass also rewrote both `.tl-selected`-based
+  selection-persistence assertions in this spec as `ArrowRight`-nudge behavioral proxies (watch
+  point 13's new sub-point) — `.tl-selected` never matches in this tldraw version. Full writeup:
+  `history.md`'s "Correction" entry, 2026-08-11.
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 

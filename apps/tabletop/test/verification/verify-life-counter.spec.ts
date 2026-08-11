@@ -128,17 +128,47 @@ test("pressing the life counter's +/- button doesn't disturb an existing selecti
   await canvas.dispatchEvent("dragover", { dataTransfer, clientX: dropAt.x, clientY: dropAt.y });
   await canvas.dispatchEvent("drop", { dataTransfer, clientX: dropAt.x, clientY: dropAt.y });
 
-  const image = page.locator('.tl-shape[data-shape-type="image"]');
+  // seat.joined already drew two locked furniture images (playmat picture,
+  // library card back — exercised by verify-seat-joined.spec.ts's
+  // `imageShapes` count of 2). Both carry tableFurniture.ts's
+  // FURNITURE_IMAGE_ID_MARKER in their shape id precisely so a test can
+  // exclude "this table's own decor" from "content someone actually dropped
+  // on the table" — the same idiom verify-image-selection.spec.ts uses to
+  // skip a card's own face image.
+  const image = page.locator('.tl-shape[data-shape-type="image"]:not([data-shape-id*="furniture-image-"])');
   await expect(image).toHaveCount(1, { timeout: 10000 });
   await image.click();
-  await expect(page.locator(".tl-selected")).toHaveCount(1);
+
+  // tldraw's selection outline/handles paint on the `tl-canvas-overlays`
+  // <canvas> (confirmed against tldraw's own source), not as DOM/SVG — no
+  // CSS locator can ever see a "selected" class, so — matching the rest of
+  // this owner's suite (verify-click-then-drag-selection.spec.ts,
+  // verify-counter.spec.ts, etc.) — selection is asserted behaviorally.
+  // Arrow-key nudging only moves the current selection, so the image moving
+  // in response IS the proof it's selected.
+  const beforeSelect = await image.boundingBox();
+  if (!beforeSelect) throw new Error("missing image box");
+  await page.keyboard.press("ArrowRight");
+  const afterSelect = await image.boundingBox();
+  if (!afterSelect) throw new Error("missing image box");
+  expect(afterSelect.x).toBeGreaterThan(beforeSelect.x);
 
   const plus = page.getByRole("button", { name: "increase life" });
   await plus.click();
   await expect(page.getByTestId("mtg-life-counter-input")).toHaveValue("41");
 
-  // The image is still selected — the button press didn't clear it.
-  await expect(page.locator(".tl-selected")).toHaveCount(1);
+  // The image is still selected — the button press didn't clear it. Same
+  // nudge-and-check-it-moved proof as above. But clicking the +/- button
+  // left DOM focus on that button, and tldraw's arrow-key nudge handler is
+  // attached to its own container, not the button — so without moving focus
+  // back first, the keypress goes nowhere and the nudge silently no-ops.
+  await page.locator(".tl-container").evaluate((el) => (el as HTMLElement).focus());
+  const beforeNudge = await image.boundingBox();
+  if (!beforeNudge) throw new Error("missing image box");
+  await page.keyboard.press("ArrowRight");
+  const afterNudge = await image.boundingBox();
+  if (!afterNudge) throw new Error("missing image box");
+  expect(afterNudge.x).toBeGreaterThan(beforeNudge.x);
 
   await context.close();
 });

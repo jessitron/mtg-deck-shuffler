@@ -438,7 +438,23 @@
     point classifies as a double-click and opens editing — wait ~500ms after creating a shape
     before dragging it (see the `createCounter` helper); (b) `.nth()` on shape testids is paint
     order, which reorders when a shape reparents — drag from known creation points instead of
-    trusting locator indices across a reparent; (c) focusing a custom editing input needs
+    trusting locator indices across a reparent; (g) **`.tl-selected` never matches anything, in
+    this tldraw version** — selection paints on the `tl-canvas-overlays` canvas (confirmed against
+    tldraw's own `ShapeIndicatorOverlayUtil.ts`/`SelectionForegroundOverlayUtil.ts` source), never
+    as a DOM/SVG element carrying that class, so a locator-based assertion on it is silently
+    vacuous — always passes regardless of actual selection state. Use this owner's existing
+    behavioral-proxy convention instead (`verify-click-then-drag-selection.spec.ts` et al.): press
+    `ArrowRight` and assert the shape's bounding box moved, since an arrow-key nudge only acts on
+    the current selection. **Gotcha**: if the preceding action was a click on a DOM button/input
+    rendered inside a shape's own `component()` (not a canvas click), DOM focus is left on that
+    control, and tldraw's arrow-key handler listens on `.tl-container`, not the document — a bare
+    `page.keyboard.press("ArrowRight")` right after goes nowhere. Refocus first:
+    `page.locator(".tl-container").evaluate(el => el.focus())` (tldraw's own accessible "Move focus
+    to canvas" skip-link exists for this but is off-screen and fails Playwright's actionability
+    checks even with `{ force: true }`/`dispatchEvent`). Found 2026-08-11 fixing
+    `verify-life-counter.spec.ts` — see `history.md`'s "Correction" entry of that date, which also
+    corrects an earlier KB entry that had mistaken this same spec's deterministic furniture-image
+    count bug for a flake. (c) focusing a custom editing input needs
     `setTimeout(0)` inside the `isEditing` effect — `autoFocus`, ref-callback focus, and a bare
     effect all lose to tldraw's end-of-gesture focus handling (`document.activeElement` ends on
     `body`). Ticket 16 (`verify-multi-untap.spec.ts`) added three more: (d) **marquee

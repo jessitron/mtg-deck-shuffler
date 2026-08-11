@@ -1208,3 +1208,61 @@ intro and "How to tell this owner's territory from `two-faced-cards`'s" section)
 `interactions.md`'s "Depends On" → `two-faced-cards` note rewritten; `files.md` gained the four new
 file entries and `MtgCardShapeUtil.tsx`'s entry rewritten; `README.md`'s quick-reference table
 gained rows for the four new files.
+
+## Correction: `verify-life-counter.spec.ts:102` was never a flake — furniture images weren't excluded from the count (2026-08-11)
+
+Ticket 01's landing note above wrote off this spec's one failure as "pre-existing flakiness,
+unrelated." That was wrong, and the mistake is worth recording precisely because it's the kind of
+call this KB exists to get right: a symptom that *looks* like the flake class this KB already knows
+about (camera timing, `Editor.getShapeAtPoint` hit-test margins at low zoom — see `history.md`'s
+`96159be` entry and watch point 13's counter/passenger hit-test note) was instead a deterministic
+count bug, reproducing every run.
+
+- **Root cause**: `seat.joined` draws two locked furniture `image` shapes per seat — the playmat
+  picture and the library card back (`tableFurniture.ts`'s `ensurePlayerArea`) — and the spec's
+  locator, `.tl-shape[data-shape-type="image"]`, matched all of them plus the one pasted image the
+  test actually cares about. Expected 1, got 3. Nothing about this depends on timing or camera
+  state; it fails the same way every run.
+- **Fix**: `tableFurniture.ts` gained an exported `FURNITURE_IMAGE_ID_MARKER = "furniture-image-"`,
+  prefixed onto both furniture image shape ids (`matImageId`, `libraryImageId`); the spec's locator
+  narrowed to `.tl-shape[data-shape-type="image"]:not([data-shape-id*="furniture-image-"])`. **New
+  naming convention for future furniture images**: any new locked background picture furniture ever
+  grows should mint its shape id with this same prefix, so it's excluded from "content someone
+  actually dropped on the table" by construction rather than by each spec inventing its own carve-out.
+  This generalizes the ad hoc idiom `verify-image-selection.spec.ts` already used
+  (`:not([id^="shape\\:card-"])` to skip a card's own face image) into a real, exported marker other
+  furniture can adopt.
+- **Second, independent finding while verifying the fix — `.tl-selected` never matches, in this
+  tldraw version.** The same spec's two "selection still holds" assertions
+  (`expect(page.locator(".tl-selected")).toHaveCount(1)`) were *also* silently vacuous: tldraw's
+  selection outline/handles now paint on the `tl-canvas-overlays` `<canvas>` (confirmed against
+  tldraw's own `ShapeIndicatorOverlayUtil.ts`/`SelectionForegroundOverlayUtil.ts` source, not
+  guessed), never as a DOM/SVG element carrying that class — so no CSS locator can ever see it, and
+  the assertion always passed regardless of actual selection state. Rewritten using this owner's
+  existing behavioral-proxy convention (`verify-click-then-drag-selection.spec.ts` et al.): press
+  `ArrowRight` and assert the image's bounding box moved, since an arrow-key nudge only acts on the
+  current selection. **Gotcha found doing this**: clicking the life counter's +/- button leaves DOM
+  focus on that button, and tldraw's arrow-key nudge handler is attached to `.tl-container`, not the
+  document — a bare `page.keyboard.press("ArrowRight")` right after the button click goes nowhere.
+  tldraw ships an accessible "Move focus to canvas" skip-link for exactly this handoff, but it's
+  off-screen and fails Playwright's actionability checks even with `{ force: true }` or
+  `dispatchEvent("click")`. The reliable fix: `page.locator(".tl-container").evaluate(el =>
+  el.focus())` before the nudge. **Any future Playwright spec asserting selection persistence after
+  a DOM-button click (not a canvas click) needs this same refocus step first**, or the nudge probe
+  itself becomes a false negative.
+- **Left alone, flagged for a follow-up**: the OTHER `.tl-selected` assertion in this file (line
+  ~65, "life counter starts at 40…", checking a locked shape click doesn't select) is equally
+  vacuous and wasn't touched — out of scope for this fix. Converting it to the same
+  behavioral-proxy pattern is a small follow-up, not done here.
+
+**Lesson for this KB's own judgment, not just the test**: "reproduces identically" is evidence a
+failure is deterministic, not evidence it's a flake — the ticket 01 landing note conflated the two.
+A test failure earns the "pre-existing flakiness" label only after its root cause is actually
+identified as timing/race-dependent (per this KB's established flake taxonomy: reactive camera
+moves, off-viewport culling, hit-test margins at low zoom — see `history.md`'s `96159be` entry and
+watch point 13), not merely because it fails the same way on unmodified `main`.
+
+Full detail: `apps/tabletop/src/server/tableFurniture.ts` (`FURNITURE_IMAGE_ID_MARKER` export),
+`apps/tabletop/test/verification/verify-life-counter.spec.ts` (locator fix + both rewritten
+selection-persistence assertions). See `interactions.md` watch point 13's new sub-point and
+`files.md`'s `tableFurniture.ts`/`verify-life-counter.spec.ts` entries.

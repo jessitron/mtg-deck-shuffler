@@ -24,6 +24,14 @@ import {
 // (cardArrival.ts).
 // ============================================================================
 
+// Every locked background picture (playmat, library card back) gets a shape
+// id starting with this prefix — the one marker a Playwright spec needs to
+// tell "this table's own decor" apart from "something a player actually put
+// on the table" (e.g. `.tl-shape[data-shape-type="image"]:not([data-shape-id*="${FURNITURE_IMAGE_ID_MARKER}"])`),
+// without hand-duplicating each furniture piece's naming scheme. See
+// verify-life-counter.spec.ts.
+export const FURNITURE_IMAGE_ID_MARKER = "furniture-image-";
+
 export function pageIdOf(entry: RoomEntry): string {
   const page = entry.room.getCurrentSnapshot().documents.find((d) => (d.state as any).typeName === "page");
   return page ? (page.state as any).id : "page:page";
@@ -274,9 +282,9 @@ export async function ensurePlayerArea(
   const lifeCounterPos = lifeCounterPosition(seatIndex);
 
   const matId = createShapeId(`playmat-${entry.tableName}-${seatId}`);
-  const matImageId = createShapeId(`playmat-image-${entry.tableName}-${seatId}`);
+  const matImageId = createShapeId(`${FURNITURE_IMAGE_ID_MARKER}playmat-${entry.tableName}-${seatId}`);
   const libraryId = createShapeId(`library-${entry.tableName}-${seatId}`);
-  const libraryImageId = createShapeId(`library-image-${entry.tableName}-${seatId}`);
+  const libraryImageId = createShapeId(`${FURNITURE_IMAGE_ID_MARKER}library-${entry.tableName}-${seatId}`);
   const commandZoneId = createShapeId(`region-command-${entry.tableName}-${seatId}`);
   const graveyardId = createShapeId(`region-graveyard-${entry.tableName}-${seatId}`);
   const exileId = createShapeId(`region-exile-${entry.tableName}-${seatId}`);

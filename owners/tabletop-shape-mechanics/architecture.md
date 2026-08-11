@@ -1086,7 +1086,9 @@ above; nothing about that mechanism changed.
 
 **Confirmed zero behavior change**: 110/110 vitest tests pass before and after; 43/44 Playwright
 `verify.sh` specs pass before and after — the one failure, `verify-life-counter.spec.ts:102`,
-reproduces identically on unmodified `main` (pre-existing flakiness, unrelated to this change).
+reproduces identically on unmodified `main` (at the time, assumed pre-existing flakiness,
+unrelated to this change — **corrected 2026-08-11: it was a deterministic furniture-image-count
+bug, not a flake; see `history.md`'s "Correction" entry of that date**).
 
 **What this means for future work in this file**: the four-way split is now the map — a hook's
 mechanics live in its own sibling file, not in `MtgCardShapeUtil.tsx` itself. Every watch point and
