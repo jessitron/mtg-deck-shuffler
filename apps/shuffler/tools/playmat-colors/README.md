@@ -22,17 +22,18 @@ npm start -- <image-filename>
 npm start -- playmat-map.png
 ```
 
-This prints suggested 2-color and 3-color picks, then starts a page at
-`http://localhost:4523`. It shows the image, a strip of extracted candidate
-colors, and two editable slot groups (2-color, 3-color) prefilled with the
+This prints suggested 2-color, 3-color, and 5-color (for sleeves) picks, then
+starts a page at `http://localhost:4523`. It shows the image, a strip of
+extracted candidate colors, and three editable slot groups prefilled with the
 suggestion — or with whatever was saved for that image last time. Click a
 slot to select it (highlighted border), then click a candidate swatch to
 fill it — or click the 🎨 button next to a slot for the OS color picker.
 Each slot group saves independently.
 
 Results are written to `apps/shuffler/public/images/playmat-colors.json`,
-keyed by image filename, alongside `suggestedTwo`/`suggestedThree` (what the
-algorithm proposed) and `chosenTwo`/`chosenThree` (what got saved). Re-running
-the tool on the same image preserves and re-offers the prior choice.
+keyed by image filename, alongside `suggestedTwo`/`suggestedThree`/`suggestedFive`
+(what the algorithm proposed) and `chosenTwo`/`chosenThree`/`chosenFive` (what
+got saved). Re-running the tool on the same image preserves and re-offers the
+prior choice.
 
 Ctrl-C to stop.

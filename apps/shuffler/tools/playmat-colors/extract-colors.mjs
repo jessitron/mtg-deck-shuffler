@@ -82,43 +82,46 @@ export function extractCandidates(
     .map((c) => ({ hex: hexify(c.rgb), ...c }));
 }
 
-// Greedily picks the 2 candidates with the best hue-distance-weighted-by-saturation score.
-export function pickBestPair(candidates) {
-  if (candidates.length < 2) return candidates.map((c) => c.hex);
-
-  let best = null;
-  for (let i = 0; i < candidates.length; i++) {
-    for (let j = i + 1; j < candidates.length; j++) {
-      const a = candidates[i];
-      const b = candidates[j];
-      const dist = circularHueDistance(a.hue, b.hue);
-      const score = dist * ((a.sat + b.sat) / 2);
-      if (!best || score > best.score) best = { score, pair: [a, b] };
-    }
+function* combinations(items, size, start = 0, combo = []) {
+  if (combo.length === size) {
+    yield combo;
+    return;
   }
-  return best.pair.map((c) => c.hex);
+  for (let i = start; i < items.length; i++) {
+    yield* combinations(items, size, i + 1, [...combo, items[i]]);
+  }
 }
 
-// Picks the 3 candidates maximizing the smallest pairwise hue gap (so no two
-// of the three sit close together), weighted by average saturation.
-export function pickBestTriple(candidates) {
-  if (candidates.length < 3) return candidates.map((c) => c.hex);
+// Picks the `size` candidates maximizing the smallest pairwise hue gap (so no
+// two sit close together), weighted by average saturation. Brute-force over
+// combinations — fine at the candidate-list sizes this tool works with.
+export function pickBestSet(candidates, size) {
+  if (candidates.length <= size) return candidates.map((c) => c.hex);
 
   let best = null;
-  for (let i = 0; i < candidates.length; i++) {
-    for (let j = i + 1; j < candidates.length; j++) {
-      for (let k = j + 1; k < candidates.length; k++) {
-        const [a, b, c] = [candidates[i], candidates[j], candidates[k]];
-        const minGap = Math.min(
-          circularHueDistance(a.hue, b.hue),
-          circularHueDistance(b.hue, c.hue),
-          circularHueDistance(a.hue, c.hue)
-        );
-        const avgSat = (a.sat + b.sat + c.sat) / 3;
-        const score = minGap * avgSat;
-        if (!best || score > best.score) best = { score, triple: [a, b, c] };
+  for (const combo of combinations(candidates, size)) {
+    let minGap = Infinity;
+    let satSum = 0;
+    for (let i = 0; i < combo.length; i++) {
+      satSum += combo[i].sat;
+      for (let j = i + 1; j < combo.length; j++) {
+        minGap = Math.min(minGap, circularHueDistance(combo[i].hue, combo[j].hue));
       }
     }
+    const score = minGap * (satSum / combo.length);
+    if (!best || score > best.score) best = { score, combo };
   }
-  return best.triple.map((c) => c.hex);
+  return best.combo.map((c) => c.hex);
+}
+
+export function pickBestPair(candidates) {
+  return pickBestSet(candidates, 2);
+}
+
+export function pickBestTriple(candidates) {
+  return pickBestSet(candidates, 3);
+}
+
+export function pickBestQuintet(candidates) {
+  return pickBestSet(candidates, 5);
 }

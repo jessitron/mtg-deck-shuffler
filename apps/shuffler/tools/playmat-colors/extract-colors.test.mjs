@@ -6,6 +6,8 @@ import {
   extractCandidates,
   pickBestPair,
   pickBestTriple,
+  pickBestQuintet,
+  pickBestSet,
 } from "./extract-colors.mjs";
 
 test("hexify formats RGB as lowercase hex", () => {
@@ -97,4 +99,24 @@ test("pickBestPair and pickBestTriple degrade gracefully with too few candidates
   const candidates = extractCandidates(pixels);
   assert.equal(pickBestPair(candidates).length, candidates.length);
   assert.equal(pickBestTriple(candidates).length, candidates.length);
+});
+
+test("pickBestQuintet returns five distinct hexes when enough candidates exist", () => {
+  const pixels = concatPixels(
+    solidFill([200, 40, 40], 100), // red
+    solidFill([200, 140, 40], 100), // orange
+    solidFill([40, 180, 40], 100), // green
+    solidFill([40, 80, 200], 100), // blue
+    solidFill([160, 40, 200], 100) // purple
+  );
+  const candidates = extractCandidates(pixels, { hueSliceDegrees: 10 });
+  const quintet = pickBestQuintet(candidates);
+  assert.equal(quintet.length, 5);
+  assert.equal(new Set(quintet).size, 5);
+});
+
+test("pickBestSet degrades gracefully with fewer candidates than requested", () => {
+  const pixels = solidFill([200, 40, 40], 10);
+  const candidates = extractCandidates(pixels);
+  assert.equal(pickBestSet(candidates, 5).length, candidates.length);
 });

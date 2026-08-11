@@ -4,7 +4,13 @@ import { readColorsFile, writeColorsFile } from "./data-file.mjs";
 
 const HEX_COLOR = /^#[0-9a-f]{6}$/i;
 
-export function createApp({ imagePath, imageName, candidates, suggestedTwo, suggestedThree, dataFilePath }) {
+const GROUPS = {
+  two: { size: 2, suggestedKey: "suggestedTwo", chosenKey: "chosenTwo" },
+  three: { size: 3, suggestedKey: "suggestedThree", chosenKey: "chosenThree" },
+  five: { size: 5, suggestedKey: "suggestedFive", chosenKey: "chosenFive" },
+};
+
+export function createApp({ imagePath, imageName, candidates, suggestedTwo, suggestedThree, suggestedFive, dataFilePath }) {
   const app = express();
   app.use(express.json());
 
@@ -17,8 +23,10 @@ export function createApp({ imagePath, imageName, candidates, suggestedTwo, sugg
         candidates,
         suggestedTwo,
         suggestedThree,
+        suggestedFive,
         chosenTwo: existing.chosenTwo,
         chosenThree: existing.chosenThree,
+        chosenFive: existing.chosenFive,
       })
     );
   });
@@ -29,19 +37,20 @@ export function createApp({ imagePath, imageName, candidates, suggestedTwo, sugg
 
   app.post("/save", async (req, res) => {
     const { which, hexes } = req.body || {};
-    const expectedLength = which === "two" ? 2 : which === "three" ? 3 : null;
-    if (!expectedLength) {
-      return res.status(400).send('"which" must be "two" or "three"');
+    const group = GROUPS[which];
+    if (!group) {
+      return res.status(400).send(`"which" must be one of: ${Object.keys(GROUPS).join(", ")}`);
     }
-    if (!Array.isArray(hexes) || hexes.length !== expectedLength || !hexes.every((h) => HEX_COLOR.test(h))) {
-      return res.status(400).send(`expected ${expectedLength} hex colors`);
+    if (!Array.isArray(hexes) || hexes.length !== group.size || !hexes.every((h) => HEX_COLOR.test(h))) {
+      return res.status(400).send(`expected ${group.size} hex colors`);
     }
 
     const data = await readColorsFile(dataFilePath);
     const entry = data[imageName] || {};
     entry.suggestedTwo = suggestedTwo;
     entry.suggestedThree = suggestedThree;
-    entry[which === "two" ? "chosenTwo" : "chosenThree"] = hexes;
+    entry.suggestedFive = suggestedFive;
+    entry[group.chosenKey] = hexes;
     data[imageName] = entry;
     await writeColorsFile(dataFilePath, data);
 

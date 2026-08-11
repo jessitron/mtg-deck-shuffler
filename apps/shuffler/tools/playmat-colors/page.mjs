@@ -31,9 +31,19 @@ function slotGroup({ id, label, hexes, saveLabel }) {
     </section>`;
 }
 
-export function renderPage({ imageName, candidates, suggestedTwo, suggestedThree, chosenTwo, chosenThree }) {
+export function renderPage({
+  imageName,
+  candidates,
+  suggestedTwo,
+  suggestedThree,
+  suggestedFive,
+  chosenTwo,
+  chosenThree,
+  chosenFive,
+}) {
   const twoHexes = chosenTwo && chosenTwo.length === 2 ? chosenTwo : suggestedTwo;
   const threeHexes = chosenThree && chosenThree.length === 3 ? chosenThree : suggestedThree;
+  const fiveHexes = chosenFive && chosenFive.length === 5 ? chosenFive : suggestedFive;
 
   return `<!doctype html>
 <html>
@@ -77,6 +87,7 @@ export function renderPage({ imageName, candidates, suggestedTwo, suggestedThree
     </div>
     ${slotGroup({ id: "two", label: "2-color pick", hexes: twoHexes, saveLabel: "Save 2-color pick" })}
     ${slotGroup({ id: "three", label: "3-color pick", hexes: threeHexes, saveLabel: "Save 3-color pick" })}
+    ${slotGroup({ id: "five", label: "5-color pick (sleeves)", hexes: fiveHexes, saveLabel: "Save 5-color pick" })}
   </div>
 
   <script>
