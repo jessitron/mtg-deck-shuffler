@@ -123,25 +123,21 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `join.result` does not currently distinguish `created` from `joined` — both set `"joined"`.
   `event.result`'s dedup path does get its own value (`"duplicate"`, distinct from `"accepted"`) —
   don't collapse it back if this code is touched again.
-- **Mounting a Rack-based OTel instrumentation gem** (any Ruby service, not just the Spine):
-  Rack/Roda has no railtie-style auto-injection point. The gem only *registers* itself via
-  `SDK.configure`'s `use` — it emits zero spans until the app explicitly mounts its middleware via
-  `middleware_args` (not a hardcoded middleware class — the right variant depends on
-  `OTEL_SEMCONV_STABILITY_OPT_IN`). Skipping this fails silently: boots clean, 200s everywhere,
-  nothing reaches Honeycomb.
+- **Mounting a Rack-based OTel instrumentation gem** (any Ruby service, not just the Spine): Rack
+  has no railtie-style auto-injection, so the app must explicitly mount the middleware via
+  `middleware_args` — already done in `services/spine/app.rb`. A new Rack-based service needs the
+  same explicit mount or it boots clean with nothing reaching Honeycomb.
 - **Recording that something happened**: never `span.addEvent`. Attributes on the span you're in
   — always the first choice — or, when there's no span to hang it on, `log.info/warn/error` from
   that ship's `log.ts` (the two Node ships) or `logError()` in the Tabletop's browser. The Spine
   doesn't have one yet (`spine-logs-in-traces` in `TODO.md`).
-- **Touching either Node ship's `log.ts` or its `logRecordProcessors`**: both ships are on the
-  same OTel version line today, but nothing pins them to stay that way, and the two copies have
-  genuinely incompatible constructor signatures across version lines for the same classes
-  (`new BatchLogRecordProcessor(exporter)` pre-0.221 vs `new BatchLogRecordProcessor({ exporter
-  })` at 0.221+). Don't paste between ships without checking both `package.json`s still match; run
-  both ships' tests. **If the correct shape suddenly fails to typecheck, suspect the resolver, not
-  the code** — a fresh worktree with no `node_modules` resolves the main checkout's hoisted types
-  from whatever version line the main checkout is on; the fix is `npm install` in the worktree,
-  never a constructor-shape change (`notes/AGENT-NOTES.md` → worktree node_modules leak).
+- **Touching either Node ship's `log.ts` or its `logRecordProcessors`**: nothing pins the two
+  ships' OTel dependency versions to match, and OTel JS classes have changed constructor shape
+  across versions before. Don't paste between ships without checking both `package.json`s still
+  match; run both ships' tests. **If the correct shape suddenly fails to typecheck, suspect the
+  resolver, not the code** — a fresh worktree with no `node_modules` resolves the main checkout's
+  hoisted types from whatever version the main checkout is on; the fix is `npm install` in the
+  worktree, never a constructor-shape change (`notes/AGENT-NOTES.md` → worktree node_modules leak).
 - **Adding logging to a hot path**: logs are not sampled, on purpose. That's readable only because
   nothing logs per-request. If you're about to, put it on the span instead, or reopen the sampling
   question deliberately (README → Invariant 2).
