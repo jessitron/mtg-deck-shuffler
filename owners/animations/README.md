@@ -43,6 +43,7 @@ Same as the app: people Jessitron invites for remote MTG games. Animations serve
 | Deck tile fade-in | `.precon-tile` with `fadeInTile` | Working | 0.4s + stagger | CSS animation-delay on load |
 | Card flip | `.card-flipped` on `.flip-container-outer` | Working | 0.8s | CSS transition on class toggle |
 | Button shimmer | `.start-game-button:hover::before` | Working | 0.8s | CSS hover pseudo-element |
+| Hand-symbol drag reorder (easter egg) | `.hand-symbol.dragging` (opacity/scale, shared with `.card-container.dragging`) | Working | instant DOM move, no keyframe | drag/drop onto any `.hand-drop-zone`; position kept in `sessionStorage`, not `WhatHappened` |
 
 Everything above is **Shuffler-side** (`apps/shuffler/`). The one Tabletop animation:
 

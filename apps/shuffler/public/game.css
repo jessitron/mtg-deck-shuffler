@@ -408,6 +408,7 @@ body {
   height: auto;
   align-items: center;
   position: relative;
+  cursor: grab;
 }
 
 .hand-symbol img {
@@ -436,7 +437,8 @@ body {
 }
 
 /* Drag-and-drop styling */
-.card-container.dragging {
+.card-container.dragging,
+.hand-symbol.dragging {
   opacity: 0.5;
   transform: scale(0.95);
   cursor: grabbing;

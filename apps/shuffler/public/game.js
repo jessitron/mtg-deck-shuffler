@@ -191,6 +191,41 @@ window.copyCardImageToClipboard = async function (event, imageUrl, cardName) {
 let draggedCard = null;
 let draggedFromPosition = null;
 
+// Easter egg: the hand-symbol (image + count) can be dragged into any hand-drop-zone
+// like a card. Its position is purely cosmetic — not GameState, not persisted past the
+// tab — so it's tracked in sessionStorage and re-applied after every htmx re-render.
+const HAND_SYMBOL_SENTINEL = "hand-symbol";
+
+function handSymbolPositionKey(gameId) {
+  return `hand-symbol-position:${gameId}`;
+}
+
+function restoreHandSymbolPosition() {
+  const gameContainer = document.querySelector("#game-container");
+  const gameId = gameContainer?.dataset.gameId;
+  const handSymbol = document.querySelector("#hand-cards .hand-symbol");
+  if (!gameId || !handSymbol) {
+    return;
+  }
+
+  const stored = sessionStorage.getItem(handSymbolPositionKey(gameId));
+  if (stored === null) {
+    return;
+  }
+
+  const dropZones = document.querySelectorAll("#hand-cards .hand-drop-zone");
+  if (dropZones.length === 0) {
+    return;
+  }
+
+  const maxPosition = dropZones.length - 1; // one drop zone per hand position, 0..cardCount
+  const targetPosition = Math.min(parseInt(stored), maxPosition);
+  const targetZone = document.querySelector(`#hand-cards .hand-drop-zone[data-hand-position="${targetPosition}"]`);
+  if (targetZone) {
+    targetZone.parentNode.insertBefore(handSymbol, targetZone.nextSibling);
+  }
+}
+
 // Set up drag-and-drop handlers after HTMX swaps
 document.addEventListener("htmx:afterSwap", function (evt) {
   setupHandCardDragAndDrop();
@@ -203,6 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function setupHandCardDragAndDrop() {
   const handCards = document.querySelectorAll("#hand-cards .card-container[draggable='true']");
+  const handSymbol = document.querySelector("#hand-cards .hand-symbol");
   const dropZones = document.querySelectorAll("#hand-cards .hand-drop-zone");
 
   handCards.forEach((card) => {
@@ -210,15 +246,31 @@ function setupHandCardDragAndDrop() {
     card.addEventListener("dragend", handleDragEnd);
   });
 
+  if (handSymbol) {
+    handSymbol.addEventListener("dragstart", handleDragStart);
+    handSymbol.addEventListener("dragend", handleDragEnd);
+  }
+
   dropZones.forEach((zone) => {
     zone.addEventListener("dragover", handleDragOver);
     zone.addEventListener("dragleave", handleDragLeave);
     zone.addEventListener("drop", handleDrop);
   });
+
+  restoreHandSymbolPosition();
 }
 
 function handleDragStart(e) {
   draggedCard = e.currentTarget;
+
+  if (draggedCard.classList.contains("hand-symbol")) {
+    draggedFromPosition = HAND_SYMBOL_SENTINEL;
+    draggedCard.classList.add("dragging");
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/html", draggedCard.innerHTML);
+    return;
+  }
+
   draggedFromPosition = parseInt(draggedCard.dataset.handPosition);
   draggedCard.classList.add("dragging");
 
@@ -260,6 +312,18 @@ function handleDrop(e) {
   dropZone.classList.remove("drag-over");
 
   const dropPosition = parseInt(dropZone.dataset.handPosition);
+
+  if (draggedCard && draggedFromPosition === HAND_SYMBOL_SENTINEL) {
+    dropZone.parentNode.insertBefore(draggedCard, dropZone.nextSibling);
+
+    const gameContainer = document.querySelector("#game-container");
+    const gameId = gameContainer?.dataset.gameId;
+    if (gameId) {
+      sessionStorage.setItem(handSymbolPositionKey(gameId), String(dropPosition));
+    }
+
+    return false;
+  }
 
   if (draggedCard && draggedFromPosition !== null) {
     // Calculate the target position

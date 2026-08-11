@@ -99,6 +99,19 @@
   skew row width the same way. `data-hand-position` (the drag-and-drop key `game.js` reads) is
   independent of flex participation, so this fix didn't touch drag-and-drop.
 - **State that must survive swaps**: Anything toggled by JS that needs to outlive a `game-state-updated` swap must NOT be re-applied to swapped-in content in `afterSwap` — the settle phase reverts it (see architecture.md). Anchor such state on `document.body` or another non-swapped ancestor. The hamburger menu (`body.game-menu-open`) is the reference example; developer mode (`body.dev-mode`, set server-side from a cookie, gating `.menu-debug` visibility) is a second, JS-free example.
+- **The hand-symbol drag reorder (2026-08-11) is client-only state riding the same drag-and-drop
+  wiring as real cards, not a `WhatHappened`-driven animation.** `.hand-symbol` is now draggable
+  into any `.hand-drop-zone`; `game.js` distinguishes it from a real card via a sentinel
+  (`HAND_SYMBOL_SENTINEL`) checked first in both `handleDragStart` and `handleDrop`, and its
+  position lives in `sessionStorage` (`hand-symbol-position:<gameId>`), reapplied by
+  `restoreHandSymbolPosition()` on every `htmx:afterSwap`/`DOMContentLoaded` — because
+  `hand-components.ts` always renders `.hand-symbol` last, so nothing server-side remembers a
+  moved position. **Watch point**: any change to `setupHandCardDragAndDrop()`'s call sites, to
+  `hand-components.ts`'s render order, or to `handleDragStart`/`handleDrop`'s real-card branches
+  must keep the sentinel check first and keep `restoreHandSymbolPosition()` wired to the same
+  triggers, or the easter egg silently stops persisting across swaps. This is also the reference
+  shape for any future non-`GameCard` draggable in `#hand-cards` — see architecture.md "New
+  shape: a draggable non-card element."
 - **`evt.detail.elt` is not the triggering element inside `htmx:afterSettle` (fixed 2026-08-11,
   `public/table-look-focus.js`)**: htmx's `triggerEvent` always overwrites `detail.elt` to be
   the element the event is dispatched *on*; `afterSettle` fires once per settling element in

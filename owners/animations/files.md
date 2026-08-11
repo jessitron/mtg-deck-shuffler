@@ -20,6 +20,9 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
   - `.hand-drop-zone-leading` (new, 2026-08-09) — the "before card 0" drop zone, taken out of
     flex flow (`position: absolute; left: -45px; top: 0; margin: 0`) to fix a row-alignment
     bug in the wrapped hand grid; see architecture.md "New mechanism"
+  - `.hand-symbol` (2026-08-11) — gained `cursor: grab` at rest, now draggable
+  - `.hand-symbol.dragging` (2026-08-11, new) — sibling selector alongside
+    `.card-container.dragging`, same opacity/scale/cursor-grabbing declarations
 - `public/table-look-focus.js` — /prepare table-look picker's focus-restore script (not
   an animation, but shares the `htmx:afterSettle` mechanism). Captures the triggering
   element's selector on `htmx:configRequest` (fires once, on the real element, before
@@ -54,7 +57,10 @@ of value that gets tokenized into a custom property.
 
 - `src/view/play-game/hand-components.ts` — renders the leading `.hand-drop-zone` (before card
   0) with the added `.hand-drop-zone-leading` class (2026-08-09); `data-hand-position` unchanged,
-  so drag-and-drop targeting in `game.js` is untouched.
+  so drag-and-drop targeting in `game.js` is untouched. Renders `.hand-symbol` (image +
+  card count) as the **last** child of `#hand-cards` on every render — this is why the
+  client-side reposition (below) has to be reapplied after every swap rather than
+  persisted server-side.
 - `src/view/common/shared-components.ts`
   - Lines 115-127: `getAnimationClassHelper()` — maps WhatHappened to CSS classes
   - Line 34: calls `getAnimationClassHelper()` in `formatCardContainer()`
@@ -74,6 +80,11 @@ of value that gets tokenized into a custom property.
     `!evt.target.closest("#game-menu")`. This containment check is a **markup constraint on
     anything added to the top strip** — see interactions.md
   - Drag-and-drop setup — removes animation classes on drag start
+  - `HAND_SYMBOL_SENTINEL`, `handSymbolPositionKey()`, `restoreHandSymbolPosition()`
+    (2026-08-11) — the hand-symbol easter-egg reposition. `handleDragStart`/`handleDrop`
+    check the sentinel before falling into the real-card logic; the drop path does a
+    plain DOM `insertBefore` + `sessionStorage` write instead of the `/move-hand-card`
+    POST. See architecture.md "New shape: a draggable non-card element."
   - (Line numbers shifted down ~55 lines after the hamburger-menu code was added at the top.)
 - `public/deck-selection.js`
   - Lines 35-78: Manages `search-active` class to disable/enable tile fade-in
@@ -125,6 +136,10 @@ Full paths from the repo root.
 - `test/verification/verify-hand-grid-alignment.spec.ts` (new, 2026-08-09) — Playwright. Asserts
   every wrapped row's leftmost card shares the same x-coordinate, guarding against the leading
   drop zone's flex-flow width bug recurring.
+- `test/verification/verify-hand-symbol-reposition.spec.ts` (new, 2026-08-11) — Playwright.
+  Drags `.hand-symbol` into a `.hand-drop-zone`, asserts DOM order changed and real cards'
+  `data-hand-position` values are untouched, then draws a card and confirms the symbol
+  re-inserts at its stored slot while the new card still appends after the last real card.
 - `test/verification/verify-mulligan.spec.ts` — carries comments at the two former 1800ms
   sleep sites explaining why no animation wait is needed, and at line ~120 marking the
   `Mulligan #2` assertion as **load-bearing synchronization** for the following Ctrl+Z.
