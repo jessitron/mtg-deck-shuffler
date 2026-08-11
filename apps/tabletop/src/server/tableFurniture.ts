@@ -1,8 +1,9 @@
 import { trace } from "@opentelemetry/api";
-import { AssetRecordType, createShapeId, toRichText, TLAssetId, TLShapeId } from "@tldraw/tlschema";
+import { AssetRecordType, createShapeId, toRichText, TLAssetId, TLImageShape, TLPageId, TLShapeId } from "@tldraw/tlschema";
 import { IndexKey, getIndexAbove, getIndexBelow, ZERO_INDEX_KEY } from "@tldraw/utils";
 import { RoomEntry, PlayerArea } from "./rooms.js";
-import { MtgZoneShapeProps, LIBRARY_PILE_INSET, ZONE_LABEL_BAND } from "../shared/mtgZoneShape.js";
+import { MtgCardShape } from "../shared/mtgCardShape.js";
+import { MtgZoneShape, MtgZoneShapeProps, LIBRARY_PILE_INSET, ZONE_LABEL_BAND } from "../shared/mtgZoneShape.js";
 import {
   playmatBounds,
   libraryBounds,
@@ -78,7 +79,7 @@ export interface ZoneShapeArgs {
  * `props.zone`. `opacity: 0.5` matches the pre-ticket-13 `regionShape`'s
  * look (furniture read as a faint outline, not a solid block).
  */
-export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, sleeveColor }: ZoneShapeArgs) {
+export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, sleeveColor }: ZoneShapeArgs): MtgZoneShape {
   return {
     id,
     typeName: "shape",
@@ -87,7 +88,7 @@ export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, 
     y,
     rotation: 0,
     index,
-    parentId: pageId,
+    parentId: pageId as TLPageId,
     isLocked: true, // furniture: don't let a stray drag eat the graveyard
     // A sleeved library pile must be as vivid as the cards it represents, so
     // the shape's own opacity is 1 and MtgZoneShapeUtil fades just the box
@@ -95,7 +96,7 @@ export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, 
     opacity: sleeveColor ? 1 : 0.5,
     props: { w, h, zone, seatId, label, sleeveColor: sleeveColor ?? null } satisfies MtgZoneShapeProps,
     meta: {},
-  } as any;
+  };
 }
 
 export interface MtgCardShapeArgs {
@@ -151,7 +152,7 @@ export function mtgCardShape({
   isCommander,
   isLocked = false,
   opacity = 1,
-}: MtgCardShapeArgs) {
+}: MtgCardShapeArgs): MtgCardShape {
   return {
     id,
     typeName: "shape",
@@ -160,7 +161,7 @@ export function mtgCardShape({
     y,
     rotation: 0,
     index,
-    parentId: pageId,
+    parentId: pageId as TLPageId,
     isLocked,
     opacity,
     props: {
@@ -183,7 +184,7 @@ export function mtgCardShape({
     // lands here once a card is dragged (MtgCardShapeUtil.onTranslateEnd) —
     // empty at mint time.
     meta: {},
-  } as any;
+  };
 }
 
 function imageShape(
@@ -196,7 +197,7 @@ function imageShape(
   assetId: TLAssetId,
   altText: string,
   index: IndexKey
-) {
+): TLImageShape {
   return {
     id,
     typeName: "shape",
@@ -205,12 +206,12 @@ function imageShape(
     y,
     rotation: 0,
     index,
-    parentId: pageId,
+    parentId: pageId as TLPageId,
     isLocked: true, // furniture: an image background, not something to drag
     opacity: 1,
     props: { w, h, assetId, playing: true, url: "", crop: null, flipX: false, flipY: false, altText },
     meta: {},
-  } as any;
+  };
 }
 
 function imageAsset(id: TLAssetId, name: string, src: string, w: number, h: number) {

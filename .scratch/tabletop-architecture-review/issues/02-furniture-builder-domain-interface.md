@@ -1,6 +1,13 @@
 # 02 — Give the furniture builders a domain-level interface, not a tldraw-record one
 
-**Status:** ready-for-agent
+**Status:** done — table-layout ticket 18 already gave `mtgCardShape()`/`zoneShape()` a
+domain-values-only interface (no `typeName`/`parentId`/`meta` visible to callers); this pass
+closed the remaining gap, the three `as any` casts in `zoneShape()`, `mtgCardShape()`, and
+`imageShape()`, by giving each a real return type (`MtgZoneShape`/`MtgCardShape`/`TLImageShape`).
+Only new cast needed was `pageId as TLPageId` at the `parentId` assignment. No runtime behavior
+changed. Added `test/tableFurniture.test.ts` covering the constructors directly.
+`tabletop-shape-mechanics-review`: outside its territory (type-only change, no ShapeUtil/gesture
+code touched) — safe to land.
 
 **Files:** `src/server/cardArrival.ts`, `tableFurniture.ts`, `cardLayout.ts`, `rooms.ts`
 

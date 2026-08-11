@@ -22,7 +22,7 @@ is `Mountain: overhead` rather than a feature Mountain.
 | # | Ticket | Review verdict | Status | Notes |
 |---|--------|-----------------|--------|-------|
 | 1 | [01-split-cardshapeutil-interop-from-physics](issues/01-split-cardshapeutil-interop-from-physics.md) | Strong | `needs-triage` | Grilled 2026-08-10; the review's proposed seam doesn't hold cleanly — see ticket for the corrected framing and the still-open question for Jess |
-| 2 | [02-furniture-builder-domain-interface](issues/02-furniture-builder-domain-interface.md) | Worth exploring | `ready-for-agent` | |
+| 2 | [02-furniture-builder-domain-interface](issues/02-furniture-builder-domain-interface.md) | Worth exploring | `done` | Domain-values interface already existed (ticket 18); this closed the remaining three `as any` casts |
 | 3 | [03-cardlayout-invariant-in-interface](issues/03-cardlayout-invariant-in-interface.md) | Worth exploring | `ready-for-agent` | |
 | 4 | [04-gestures-announce-themselves](issues/04-gestures-announce-themselves.md) | Worth exploring | `needs-triage` | Tension with an already-shipped decision (tabletop-physics ticket 21) — flagged for Jess, not blindly actioned |
 | 5 | [05-stale-selection-fix](issues/05-stale-selection-fix.md) | Speculative in the review, but Jess reports it's a live, unfixed bug | `done` | Centralized fix landed: `clearStaleSelectionOnPointerDown.ts`, replacing all five old workaround sites. Supersedes the `tabletop-stale-selection-fix` line in the repo-root `TODO.md` (removed) |
