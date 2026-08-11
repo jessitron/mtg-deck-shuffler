@@ -23,9 +23,11 @@ Rails' magic was in the way of seeing where things actually happen.
 `GET /up` for health, OTel wired at 100% sampling. `POST /join` (`{name, playerName}` →
 `{tableId, seatNumber}`) creates a table on an unseen name and always takes a seat —
 domain logic lives in `models/table.rb` (`Table`, `Seat`, `Event`, all `Sequel::Model`),
-schema in `config/db.rb`. Generic event ingestion (`POST /tables/:table_id/events`,
-contract-validated against `contracts/`), SSE outbound delivery, and the admin screen
-land in later tickets — see `.scratch/spine-roda-rewrite/issues/`.
+schema in `config/db.rb`. `POST /tables/:table_id/events` is the generic ingestion
+endpoint: contract-validated against `contracts/` via `lib/event_contract.rb`
+(json_schemer, envelope v3), dedups on the sender's event id, assigns `seq`/`acceptedAt`
+server-side. SSE outbound delivery and the admin screen land in later tickets — see
+`.scratch/spine-roda-rewrite/issues/`.
 
 See `README.md` (in this directory) for more.
 
@@ -61,5 +63,13 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
   Skip this and requests boot fine but produce zero spans — no error, just silence. If a
   future OTel-instrumented gem shows the same "installed successfully, no spans"
   symptom, check whether it's Rack-style (needs manual `use`) vs Rails-style (auto).
+- **`traceparent` never rides in the envelope** (contract v3, ticket 04). Inbound, the
+  Rack instrumentation extracts it from the HTTP header automatically — no code needed
+  for `POST /tables/:table_id/events` to continue a sender's trace. The persisted
+  `Event` row has no trace column at all: trace context is observability-only and
+  expires (~60d), so it's deliberately not durable. This means an event minted before
+  someone's watching its table's SSE stream (ticket 05) has no way to link back to the
+  trace that created it — accepted tradeoff, not a bug (see
+  `.scratch/spine-roda-rewrite/spec.md`, "Trace context — envelope contract change").
 
 Update this file when anything in it changes.

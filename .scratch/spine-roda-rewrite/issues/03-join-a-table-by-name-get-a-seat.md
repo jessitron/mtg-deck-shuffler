@@ -15,14 +15,14 @@ app.
 
 **Blocked by:** 02
 
-- [ ] `POST /join {name, playerName}` on a never-seen name creates the table and seats
+- [x] `POST /join {name, playerName}` on a never-seen name creates the table and seats
       the player, returning `{tableId, seatNumber: 1}`
-- [ ] A second `POST /join` with the same name and a different player returns the same
+- [x] A second `POST /join` with the same name and a different player returns the same
       `tableId` and the next open seat number
-- [ ] Joining a table that already has 4 seated players is rejected
-- [ ] Table names are unique among active tables (domain invariant carried over
+- [x] Joining a table that already has 4 seated players is rejected
+- [x] Table names are unique among active tables (domain invariant carried over
       unchanged)
-- [ ] Domain unit tests cover table creation, seat assignment, seat-occupied, and
+- [x] Domain unit tests cover table creation, seat assignment, seat-occupied, and
       table-full branching without going through HTTP
-- [ ] HTTP integration tests hit `POST /join` end-to-end and assert on status codes and
+- [x] HTTP integration tests hit `POST /join` end-to-end and assert on status codes and
       response bodies

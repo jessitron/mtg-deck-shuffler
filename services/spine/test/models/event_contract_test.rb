@@ -1,0 +1,52 @@
+require_relative "../test_helper"
+
+class EventContractTest < Minitest::Test
+  def test_a_valid_envelope_passes
+    Spine::EventContract.validate!(valid_envelope)
+  end
+
+  def test_a_sender_claiming_seq_is_rejected
+    assert_raises(Spine::EventContract::SpineOwnedField) do
+      Spine::EventContract.validate!(valid_envelope("seq" => 1))
+    end
+  end
+
+  def test_a_sender_claiming_accepted_at_is_rejected
+    assert_raises(Spine::EventContract::SpineOwnedField) do
+      Spine::EventContract.validate!(valid_envelope("acceptedAt" => "2026-01-01T00:00:00Z"))
+    end
+  end
+
+  def test_an_envelope_missing_a_required_field_is_rejected
+    envelope = valid_envelope
+    envelope.delete("origin")
+
+    assert_raises(Spine::EventContract::Violation) do
+      Spine::EventContract.validate!(envelope)
+    end
+  end
+
+  def test_an_unknown_event_name_is_rejected
+    assert_raises(Spine::EventContract::UnknownEvent) do
+      Spine::EventContract.validate!(valid_envelope("name" => "no.such.event"))
+    end
+  end
+
+  def test_an_unknown_schema_version_is_rejected
+    assert_raises(Spine::EventContract::UnknownEvent) do
+      Spine::EventContract.validate!(valid_envelope("schemaVersion" => 99))
+    end
+  end
+
+  def test_a_payload_that_does_not_match_its_schema_is_rejected
+    assert_raises(Spine::EventContract::Violation) do
+      Spine::EventContract.validate!(valid_envelope("payload" => { "name" => "kitchen table" }))
+    end
+  end
+
+  def test_a_non_object_envelope_is_rejected
+    assert_raises(Spine::EventContract::Violation) do
+      Spine::EventContract.validate!("not a hash")
+    end
+  end
+end

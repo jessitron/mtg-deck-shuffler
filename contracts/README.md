@@ -6,14 +6,18 @@ Language-neutral JSON Schema; the decisions behind it live in
 
 ## Files
 
-- `envelope.v2.json` — the envelope every event wears. The file name carries the
+- `envelope.v3.json` — the envelope every event wears. The file name carries the
   **envelope version**, bumped rarely (adding a `visibility` value, adding `scope`).
-  `envelope.v1.json` is kept as history, not deleted — never edit a shipped version
-  file in place, bump instead. v2 added `origin` (which mechanism, within
-  `occurredIn`, minted the event — see
+  `envelope.v1.json` and `envelope.v2.json` are kept as history, not deleted — never
+  edit a shipped version file in place, bump instead. v2 added `origin` (which
+  mechanism, within `occurredIn`, minted the event — see
   `.scratch/tabletop-table-reports/issues/01-every-event-carries-its-origin.md`) and
   `significance` (`physical` | `domain` | `administrative` — what kind of fact the
-  event states).
+  event states). v3 dropped `traceparent` as an envelope field entirely: inbound, it
+  travels in the HTTP `traceparent` header (standard W3C propagation), never in the
+  body; outbound (SSE), it travels alongside the envelope as `meta.traceparent`, not
+  merged into it (`.scratch/spine-roda-rewrite/spec.md`). The persisted event carries
+  no trace field in either direction.
 - `payloads/<name>.v<schemaVersion>.json` — one schema per event kind per version.
   Each `name` versions its payload independently; the envelope's `schemaVersion`
   field says which payload schema applies.

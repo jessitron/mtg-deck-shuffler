@@ -15,4 +15,24 @@ module ClearsTablesBetweenTests
   end
 end
 
+# A minimal envelope.v3-valid table.created event, for tests that need any
+# valid envelope rather than a specific one.
+module ValidEnvelope
+  def valid_envelope(overrides = {})
+    {
+      "id" => SecureRandom.uuid,
+      "tableId" => "some-table-id",
+      "name" => "table.created",
+      "initiator" => { "playerName" => "Jess" },
+      "occurredIn" => "shuffler",
+      "origin" => "shuffler.test",
+      "significance" => "administrative",
+      "visibility" => "public",
+      "schemaVersion" => 1,
+      "payload" => { "name" => "kitchen table", "creator" => "Jess" }
+    }.merge(overrides)
+  end
+end
+
 Minitest::Test.include(ClearsTablesBetweenTests)
+Minitest::Test.include(ValidEnvelope)

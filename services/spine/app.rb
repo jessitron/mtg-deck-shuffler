@@ -17,6 +17,31 @@ module Spine
         "ok"
       end
 
+      r.post "tables", String, "events" do |table_id|
+        response["Content-Type"] = "application/json"
+        table = Table[table_id]
+        next not_found("no table #{table_id.inspect}") if table.nil?
+
+        envelope = JSON.parse(r.body.read)
+        outcome = table.append_event!(envelope)
+        current_span.add_attributes(
+          "table.id" => table.id,
+          "event.id" => outcome[:event].event_id,
+          "event.name" => outcome[:event].name,
+          "event.result" => (outcome[:duplicate] ? "duplicate" : "accepted")
+        )
+        response.status = outcome[:duplicate] ? 200 : 201
+        JSON.generate(outcome[:event].as_envelope)
+      rescue JSON::ParserError => e
+        mark_span_failed("event.result", "invalid_input", e)
+        response.status = 400
+        JSON.generate(error: "request body is not JSON: #{e.message}")
+      rescue EventContract::Violation => e
+        mark_span_failed("event.result", "contract_violation", e)
+        response.status = 422
+        JSON.generate(error: e.message)
+      end
+
       r.post "join" do
         response["Content-Type"] = "application/json"
         body = JSON.parse(r.body.read)
@@ -33,11 +58,11 @@ module Spine
         )
         JSON.generate(tableId: outcome[:table_id], seatNumber: outcome[:seat_number])
       rescue JSON::ParserError, KeyError => e
-        mark_span_failed("invalid_input", e)
+        mark_span_failed("join.result", "invalid_input", e)
         response.status = 400
         JSON.generate(error: "name and playerName are required")
       rescue Table::SeatOccupied, Table::TableFull => e
-        mark_span_failed(e.is_a?(Table::SeatOccupied) ? "seat_occupied" : "table_full", e)
+        mark_span_failed("join.result", e.is_a?(Table::SeatOccupied) ? "seat_occupied" : "table_full", e)
         response.status = 409
         JSON.generate(error: e.message)
       end
@@ -55,9 +80,14 @@ module Spine
       OpenTelemetry::Trace.current_span
     end
 
-    def mark_span_failed(result, error)
-      current_span.add_attributes("join.result" => result)
+    def mark_span_failed(attribute, result, error)
+      current_span.add_attributes(attribute => result)
       current_span.status = OpenTelemetry::Trace::Status.error(error.message)
+    end
+
+    def not_found(message)
+      response.status = 404
+      JSON.generate(error: message)
     end
 
     def required_string(hash, key)
