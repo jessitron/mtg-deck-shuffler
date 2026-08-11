@@ -1,10 +1,12 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { WebSocket } from "ws";
 import type { Server } from "node:http";
+import { createShapeId } from "@tldraw/tlschema";
 import { logs } from "@opentelemetry/api-logs";
 import { LoggerProvider, InMemoryLogRecordExporter, SimpleLogRecordProcessor } from "@opentelemetry/sdk-logs";
 import { startServer } from "../src/server/server";
-import { getRoomRegistry } from "../src/server/rooms";
+import { getRoomRegistry, getOrCreateRoom } from "../src/server/rooms";
+import { mtgCardShape } from "../src/server/tableFurniture";
 
 /**
  * A3: the sync server + in-memory room registry (SCAFFOLDING — the Spine
@@ -88,6 +90,44 @@ describe("room registry", () => {
 
   it("rejects a connection with no usable slug", async () => {
     await expect(connect("%20%20", "session-x")).rejects.toBeDefined();
+  });
+});
+
+describe("RoomEntry.hasInstance", () => {
+  it("is false when no shape with that instanceId is on the table", () => {
+    const entry = getOrCreateRoom("hasinstance-empty");
+    expect(entry.hasInstance("no-such-instance")).toBe(false);
+  });
+
+  it("is true once a card shape with that instanceId is in the room store", async () => {
+    const entry = getOrCreateRoom("hasinstance-present");
+    await entry.room.updateStore((store) => {
+      store.put(
+        mtgCardShape({
+          id: createShapeId("hasinstance-card"),
+          pageId: "page:page",
+          x: 0,
+          y: 0,
+          w: 170,
+          h: 238,
+          index: "a1" as any,
+          instanceId: "instance-present",
+          scryfallId: "xyz",
+          cardName: "Lightning Bolt",
+          frontImageUrl: "https://cards.scryfall.io/normal/front/x/y/xyz.jpg",
+          backImageUrl: null,
+          face: "front",
+          faceDown: false,
+          sleeveColor: null,
+          cardBackImageUrl: null,
+          owner: "seat-1",
+          isCommander: false,
+        })
+      );
+    });
+
+    expect(entry.hasInstance("instance-present")).toBe(true);
+    expect(entry.hasInstance("some-other-instance")).toBe(false);
   });
 });
 

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { trace } from "@opentelemetry/api";
 import { createShapeId } from "@tldraw/tlschema";
-import { getOrCreateRoom, RoomEntry } from "./rooms.js";
+import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
 import { CARD_W, CARD_H, MAX_SEATS, landPosition, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
 import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
@@ -35,12 +35,6 @@ interface CardPlayedPayload {
   owner: string;
   isCommander: boolean;
   gameCardIndex?: number;
-}
-
-function instanceAlreadyOnTable(entry: RoomEntry, instanceId: string): boolean {
-  return entry.room
-    .getCurrentSnapshot()
-    .documents.some((d) => (d.state as any).typeName === "shape" && (d.state as any).props?.instanceId === instanceId);
 }
 
 /**
@@ -93,7 +87,7 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
   }
   // Dedup 2: the instance is already on the table (a retried play with a fresh
   // event id). One instance exists once; a second arrival is a physical no-op.
-  if (instanceAlreadyOnTable(entry, card.instanceId)) {
+  if (entry.hasInstance(card.instanceId)) {
     entry.seenEventIds.add(envelope.id);
     trace.getActiveSpan()?.setAttribute("arrival.deduped", "instance");
     res.status(200).json({ ok: true, deduped: true });
