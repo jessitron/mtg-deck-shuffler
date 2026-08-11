@@ -55,6 +55,14 @@ export interface RoomEntry {
   /** seatId -> player area allocation, in join order (JES-140) */
   seats: Map<string, PlayerArea>;
   createdAt: Date;
+  /** Is a card shape with this instanceId already on the table? A second arrival of the same instance is a physical no-op. */
+  hasInstance(instanceId: string): boolean;
+}
+
+function hasInstance(this: RoomEntry, instanceId: string): boolean {
+  return this.room
+    .getCurrentSnapshot()
+    .documents.some((d) => (d.state as any).typeName === "shape" && (d.state as any).props?.instanceId === instanceId);
 }
 
 const registry = new Map<string, RoomEntry>();
@@ -97,6 +105,7 @@ export function getOrCreateRoom(tableName: string): RoomEntry {
     seenEventIds: new Set(),
     seats: new Map(),
     createdAt: new Date(),
+    hasInstance,
   };
   registry.set(tableName, entry);
   // An attribute, not a log: both callers of this function run inside a span
