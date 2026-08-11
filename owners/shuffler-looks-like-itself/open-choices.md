@@ -574,7 +574,10 @@ self-rendering custom shape.
   which drifts out of proportion as the canvas zooms) — and the armed glow rides on top of it
   via `box-shadow`, additive rather than replacing the border, which is exactly why it survives
   being covered by the playmat's/library's opaque `image` overlay (see README.md → tldraw
-  limits, "an opaque picture layered over a zone box"). The Stack got no distinct treatment —
+  limits, "an opaque picture layered over a zone box") — **true of both zones at the time this
+  was written; since 2026-08-11 the playmat's picture is no longer a separate `image` overlay
+  at all (it's a child of the same box), so only the library still fits this description.** The
+  Stack got no distinct treatment —
   same dashed-pink/armed-glow family as graveyard/exile, per the ticket. See
   [history.md](history.md) for the verification detail (Playwright, both single- and
   two-client).

@@ -124,10 +124,11 @@ test("pressing the life counter's +/- button doesn't disturb an existing selecti
   await canvas.dispatchEvent("dragover", { dataTransfer, clientX: dropAt.x, clientY: dropAt.y });
   await canvas.dispatchEvent("drop", { dataTransfer, clientX: dropAt.x, clientY: dropAt.y });
 
-  // seat.joined already drew two locked furniture images (playmat picture,
-  // library card back — exercised by verify-seat-joined.spec.ts's
-  // `imageShapes` count of 2). Both carry tableFurniture.ts's
-  // FURNITURE_IMAGE_ID_MARKER in their shape id precisely so a test can
+  // seat.joined already drew one locked furniture image (the library
+  // card-back — exercised by verify-seat-joined.spec.ts's `imageShapes`
+  // count of 1; the playmat's own picture is a prop on its mtg-zone shape
+  // now, not a stock image shape). It carries tableFurniture.ts's
+  // FURNITURE_IMAGE_ID_MARKER in its shape id precisely so a test can
   // exclude "this table's own decor" from "content someone actually dropped
   // on the table" — the same idiom verify-image-selection.spec.ts uses to
   // skip a card's own face image.

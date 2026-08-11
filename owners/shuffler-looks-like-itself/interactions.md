@@ -596,7 +596,8 @@ not by recomputing new numbers.**
   requires a self-rendering shape), the global `:focus-visible` rule can't reach a shape
   (tldraw owns selection indication), a locked shape can never be a drop target (so "reacts
   to what's over it" must be a derived render, not a hook), an opaque `image` shape layered
-  over a box hides that box's interior, `.tl-image` is absolutely positioned and escapes any
+  over a box hides that box's interior — **now the library's limit only, since 2026-08-11 the
+  playmat's picture is a child of its own box, not a layered shape** — `.tl-image` is absolutely positioned and escapes any
   padded wrapper (added 2026-08-08, ticket 17 — a frame must style its `<img>` directly),
   and **tldraw cannot rotate the view per viewer on a shared board** (added 2026-08-08) —
   every player area is upright for everyone, always, which is why the square/compass layout

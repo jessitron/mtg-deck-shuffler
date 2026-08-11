@@ -80,6 +80,8 @@ export interface ZoneShapeArgs {
   seatId: string | null;
   /** Set only on a sleeved seat's library zone (ticket 17) — the pile renders as the bare sleeve rectangle. */
   sleeveColor?: string;
+  /** The playmat's own picture — rendered inside the zone's own bordered box, clipped to its border radius, instead of a separate stock `image` shape. */
+  imageUrl?: string | null;
 }
 
 /**
@@ -90,7 +92,7 @@ export interface ZoneShapeArgs {
  * `props.zone`. `opacity: 0.5` matches the pre-ticket-13 `regionShape`'s
  * look (furniture read as a faint outline, not a solid block).
  */
-export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, sleeveColor }: ZoneShapeArgs): MtgZoneShape {
+export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, sleeveColor, imageUrl }: ZoneShapeArgs): MtgZoneShape {
   return {
     id,
     typeName: "shape",
@@ -105,7 +107,7 @@ export function zoneShape({ id, pageId, x, y, w, h, label, index, zone, seatId, 
     // the shape's own opacity is 1 and MtgZoneShapeUtil fades just the box
     // chrome back to 0.5 — the same composite the plain furniture gets.
     opacity: sleeveColor ? 1 : 0.5,
-    props: { w, h, zone, seatId, label, sleeveColor: sleeveColor ?? null } satisfies MtgZoneShapeProps,
+    props: { w, h, zone, seatId, label, sleeveColor: sleeveColor ?? null, imageUrl: imageUrl ?? null } satisfies MtgZoneShapeProps,
     meta: {},
   };
 }
@@ -287,7 +289,6 @@ export async function ensurePlayerArea(
   const lifeCounterPos = lifeCounterPosition(seatIndex);
 
   const matId = createShapeId(`playmat-${entry.tableName}-${seatId}`);
-  const matImageId = createShapeId(`${FURNITURE_IMAGE_ID_MARKER}playmat-${entry.tableName}-${seatId}`);
   const libraryId = createShapeId(`library-${entry.tableName}-${seatId}`);
   const libraryImageId = createShapeId(`${FURNITURE_IMAGE_ID_MARKER}library-${entry.tableName}-${seatId}`);
   const commandZoneId = createShapeId(`region-command-${entry.tableName}-${seatId}`);
@@ -298,14 +299,23 @@ export async function ensurePlayerArea(
 
   await entry.room.updateStore((store) => {
     // The mat outline is always drawn — the fallback if the image is missing/broken.
+    // The picture (if any) is a prop on this same shape (MtgZoneShapeUtil renders it
+    // clipped to the box's own border radius), not a separate stock `image` shape.
     store.put(
-      zoneShape({ id: matId, pageId, x: mat.x, y: mat.y, w: mat.w, h: mat.h, label: "", index: nextFurnitureIndex(entry.tableName), zone: "playmat", seatId })
+      zoneShape({
+        id: matId,
+        pageId,
+        x: mat.x,
+        y: mat.y,
+        w: mat.w,
+        h: mat.h,
+        label: "",
+        index: nextFurnitureIndex(entry.tableName),
+        zone: "playmat",
+        seatId,
+        imageUrl: look.playmatImageUrl,
+      })
     );
-    if (look.playmatImageUrl) {
-      const assetId = AssetRecordType.createId(`playmat-${entry.tableName}-${seatId}`);
-      store.put(imageAsset(assetId, `${playerName}'s playmat`, look.playmatImageUrl, mat.w, mat.h));
-      store.put(imageShape(matImageId, pageId, mat.x, mat.y, mat.w, mat.h, assetId, `${playerName}'s playmat`, nextFurnitureIndex(entry.tableName)));
-    }
 
     // A sleeved seat's pile is drawn by the zone shape itself (ticket 17):
     // MtgZoneShapeUtil renders props.sleeveColor as the bare sleeve rectangle,

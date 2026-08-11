@@ -25,7 +25,9 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   builder, below).
 - `apps/tabletop/src/shared/mtgZoneShape.ts` — the same pattern for furniture (ticket 13):
   `MtgZoneShapeProps` (`w`, `h`, `zone` — a closed enum `"playmat" | "library" | "graveyard" |
-  "exile" | "stack" | "command"` — `seatId`, `label`), the `TLGlobalShapePropsMap` augmentation
+  "exile" | "stack" | "command"` — `seatId`, `label`, `sleeveColor`, and, since 2026-08-11,
+  `imageUrl: string | null` — the playmat's own picture, set only on `zone: "playmat"`, same
+  mint-once/never-mutated lifecycle as `sleeveColor`), the `TLGlobalShapePropsMap` augmentation
   registering `mtg-zone`, and `mtgZoneShapeProps` validators, imported by client
   `MtgZoneShapeUtil.tsx`, server `rooms.ts`, and server `tableFurniture.ts` (for the `Zone` type
   alias it re-exports). Also home to two shared layout constants both sides must agree on:
@@ -156,7 +158,13 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   `useIsZoneArmed(this.editor, shape.id)` from `zoneHitTest.ts` to add a glow (`box-shadow` +
   tinted background/border color) while a dragged card is hovering over it. `getIndicatorPath()`.
   Since zone-label-band (2026-08-09, `0d61890`), the sleeve pile it renders for a sleeved library
-  starts `ZONE_LABEL_BAND` below the box's top (rendering only — still no hooks).
+  starts `ZONE_LABEL_BAND` below the box's top (rendering only — still no hooks). **Since
+  2026-08-11**, the playmat branch also sets `position: relative; overflow: hidden` on the bordered
+  div and, when `props.imageUrl` is set, renders the playmat's own picture as a plain inline-styled
+  `<img>` (`position: absolute; inset: 0; object-fit: cover`) clipped to that div's border-radius —
+  deliberately not tldraw's `.tl-image` class (positioned relative to a different wrapper,
+  `.tl-image-container`, and would escape this div's clip). Still no new hooks, still rendering-only
+  — see `architecture.md`'s "playmat's own picture" note and `history.md`'s 2026-08-11 entry.
 - `apps/tabletop/src/client/shapes/zoneHitTest.ts` — **new, ticket 14; corrected same day
   (`05235aa`)**: `topmostZoneAt(editor, center)`, the topmost-zone-wins hit test extracted out of
   `MtgCardShapeUtil.zoneAt()` so a second caller (`MtgZoneShapeUtil`, above) can share it; and
@@ -261,9 +269,15 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   `mtg-zone` shape records (`type: "mtg-zone"`, `props: { w, h, zone, seatId, label }`, always
   `isLocked: true`) instead of stock `geo`/`image` shapes tagged with `meta.zone`; the old
   `RegionStyle`/`DEFAULT_REGION_STYLE`/`PLAYMAT_REGION_STYLE` styling machinery was deleted
-  (visual treatment now lives in `MtgZoneShapeUtil.component()`). `imageShape()` (the playmat/
-  library background *pictures*, still stock `image` shapes, unchanged) stays separate and never
-  participates in zone detection. `ensureStackStripWidth()` was fixed here (see
+  (visual treatment now lives in `MtgZoneShapeUtil.component()`). `imageShape()` (background
+  *pictures* rendered as stock `image` shapes) stays separate and never participates in zone
+  detection — but **since 2026-08-11 it's used only for the library's card-back picture**; the
+  playmat's picture is no longer minted this way at all. `ZoneShapeArgs`/`zoneShape()` gained an
+  `imageUrl?: string | null` field threaded from `ensurePlayerArea`'s `look.playmatImageUrl` into
+  the `mtg-zone` record's own `props.imageUrl` — the old `matImageId`/`AssetRecordType`/
+  `imageAsset()`/`imageShape()` sequence for the playmat was deleted outright, not just refactored.
+  See `history.md`'s 2026-08-11 entry ("playmat's picture folds into `mtg-zone`'s own
+  props/render"). `ensureStackStripWidth()` was fixed here (see
   `architecture.md`'s "Ticket 13" section) to reuse an existing Stack shape's `.index` instead of
   minting a fresh top-of-z-order one on every seat join — and then replaced by
   **`ensureStackDrawn()`** (table-layout ticket 14, `5eeac70`): the Stack is a fixed square drawn
@@ -404,6 +418,14 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   selection-persistence assertions in this spec as `ArrowRight`-nudge behavioral proxies (watch
   point 13's new sub-point) — `.tl-selected` never matches in this tldraw version. Full writeup:
   `history.md`'s "Correction" entry, 2026-08-11.
+  **Image counts dropped by one per seat, same day, later commit**: once the playmat's picture
+  folded into its `mtg-zone` shape's own `imageUrl` prop instead of minting a separate `image`
+  shape (see `history.md`'s "playmat's picture folds into `mtg-zone`'s own props/render" entry),
+  `verify-seat-joined.spec.ts`'s furniture-image-count assertions went 2→1 (one seat) and 4→2 (two
+  seats) — only the library card-back remains a stock `image` shape now. This spec's own comment
+  and `verify-life-counter.spec.ts`'s stale-selection-immunity comment (just above) were both
+  updated to say "one" instead of "two" furniture images; `seatJoined.test.ts`'s sleeve-vs-card-back
+  test comment was also updated to note the playmat is no longer relevant to that particular check.
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 

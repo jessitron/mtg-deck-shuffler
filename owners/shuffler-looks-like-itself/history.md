@@ -2309,3 +2309,53 @@ gallery's static-specimen convention means it was never going to enumerate the l
 automatically; a future pass that wants the gallery to reflect the real (now
 filesystem-derived) count would need to either template the specimen from `PLAYMATS` or
 accept that it shows a representative subset, not the whole array. Not decided here.
+
+## 2026-08-11 — the playmat's picture stopped being a separate image shape, closing a stale tldraw-limits citation
+
+`playmat-image-radius`. The playmat's picture used to be exactly what the library's still is
+— a separate stock `image` shape (`AssetRecordType` + `TLImageShape`) layered on top of the
+`mtg-zone` box's own bordered div, minted by `ensurePlayerArea` in
+`apps/tabletop/src/server/tableFurniture.ts`. That meant the picture, being on top, was
+square-cornered underneath the box's own `borderRadius: h * 0.05` — a square photo peeking
+out past a rounded frame, since the border and the picture had never shared a corner radius.
+
+**The fix folded the picture into the zone shape's own render instead of rounding the
+overlay.** `MtgZoneShapeUtil`'s `component()` (`apps/tabletop/src/client/shapes/`) gained a
+new `imageUrl: string | null` prop (`apps/tabletop/src/shared/mtgZoneShape.ts`), and for
+`zone === "playmat"` the bordered div now carries `position: relative; overflow: hidden`
+alongside its existing `borderRadius: h * 0.05` computed fresh from `props.h`; when
+`imageUrl` is set, an absolutely-positioned `<img>` (`inset: 0`, `objectFit: cover`) sits
+inside that div and gets clipped to the same radius the border already draws. `ensurePlayerArea`
+no longer mints a separate `AssetRecordType`/`TLImageShape` pair for the playmat at all — it
+just passes `look.playmatImageUrl` into the zone shape's own `imageUrl` prop.
+
+**Deliberately not `.tl-image`.** The new `<img>` does not carry tldraw's `.tl-image` class —
+that class is `position: absolute; inset: 0` relative to `.tl-image-container`, which would
+ignore this div's own `overflow: hidden` clip entirely, the same wrapper-escape bug ticket 17's
+sleeve ring hit once (see README → tldraw limits, `.tl-image` bullet). The code comment at the
+new `<img>` cites that precedent so the next person doesn't reach for the stock class out of
+habit.
+
+**Radius reused verbatim, not re-decided.** The image gets the exact same `h * 0.05` value
+already computed for the border — the ratio ticket 11 (2026-08-07) decided for canvas-shape
+geometry that has to hold constant across zoom/resize (see interactions.md → "a geometry value
+meant to look consistent across zoom/resize"). No `/design` staging was needed: this is the
+same object's already-decided radius applied to a picture that's now part of the same box,
+not a new appearance ratio.
+
+**What this narrows: the "opaque picture hides a zone box's interior" tldraw limit no longer
+covers the playmat.** That limit (recorded 2026-08-07, confirmed built 2026-08-08 ticket 14)
+existed *because* the picture was a separate shape layered on top, so border/tint/shadow were
+all invisible underneath it. With the picture folded into the box's own render, there's no
+overlay left to hide anything — border, tint and shadow are all still there, the picture just
+sits inside them. **The library's card-back picture is unchanged and still a separate `image`
+shape** — this was out of scope for this change, and the limit (plus its "armed treatment must
+read outward" consequence) still governs the library alone. README.md's tldraw-limits bullet,
+interactions.md's canvas watch-point list, and one of open-choices.md's ticket-14 citations
+were all updated to say so rather than silently describing an app that no longer exists. The
+other two open-choices.md/architecture.md citations of this limit are left as-is: they're
+historically accurate descriptions of what ticket 11/14 built *at the time*, not standing
+claims about the app today.
+
+Verified visually with a Playwright screenshot — the picture clips flush to the rounded
+border, no square corner peeking out.

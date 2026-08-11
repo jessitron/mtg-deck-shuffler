@@ -47,12 +47,14 @@ test("a player area appears before any card, and the Stack stays fixed as a seco
 
   // Player area furniture (playmat outline + library outline + command zone +
   // graveyard + exile) plus the Stack square render as mtg-zone shapes; the
-  // playmat/library images and the name label render too — all before any
-  // card is posted.
+  // playmat's own picture is a prop on its mtg-zone shape (clipped to the
+  // box's own border radius), while the library card-back stays a separate
+  // stock image shape; the name label renders too — all before any card is
+  // posted.
   const zoneShapes = page.locator(`.tl-shape[data-shape-type="mtg-zone"]`);
   await expect(zoneShapes).toHaveCount(6, { timeout: 10000 }); // mat, library, command zone, graveyard, exile, stack
   const imageShapes = page.locator(`.tl-shape[data-shape-type="image"]`);
-  await expect(imageShapes).toHaveCount(2); // playmat picture, library card back
+  await expect(imageShapes).toHaveCount(1); // library card back only
   const textShapes = page.locator(`.tl-shape[data-shape-type="text"]`);
   await expect(textShapes).toHaveCount(1); // name label
 
@@ -66,7 +68,7 @@ test("a player area appears before any card, and the Stack stays fixed as a seco
 
   await expect(textShapes).toHaveCount(2, { timeout: 10000 });
   await expect(zoneShapes).toHaveCount(11); // two player areas' furniture (5 each) + one shared stack
-  await expect(imageShapes).toHaveCount(4);
+  await expect(imageShapes).toHaveCount(2); // one library card-back per seat
 
   // The Stack is fixed: same footprint and position at two seats as at one.
   const stackAfter = await stackShape.boundingBox();

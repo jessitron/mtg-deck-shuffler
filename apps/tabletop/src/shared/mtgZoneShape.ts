@@ -19,6 +19,14 @@ export interface MtgZoneShapeProps {
    * instead of a card-back image. null everywhere else.
    */
   sleeveColor: string | null;
+  /**
+   * The playmat's own picture, set only on the `playmat` zone. Rendered
+   * inside the zone's own bordered box (MtgZoneShapeUtil) rather than a
+   * separate stock `image` shape layered on top, so the image clips to the
+   * same `h * 0.05` corner radius as the border around it instead of
+   * staying square-cornered underneath a rounded frame. null everywhere else.
+   */
+  imageUrl: string | null;
 }
 
 /**
@@ -56,4 +64,5 @@ export const mtgZoneShapeProps: RecordProps<MtgZoneShape> = {
   seatId: T.string.nullable(),
   label: T.string,
   sleeveColor: T.string.nullable(),
+  imageUrl: T.string.nullable(),
 };

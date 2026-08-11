@@ -243,7 +243,8 @@ describe("seat joined", () => {
     const libraryZone = shapes.find((s) => s.type === "mtg-zone" && s.props?.zone === "library");
     expect(libraryZone.props.sleeveColor).toBe("#8b2f5c");
     // sleeveColor wins over the card-back image the fixture also sent: no
-    // library image shape is drawn (the playmat image is still an image shape).
+    // library image shape is drawn (the playmat's own picture is a prop on its
+    // mtg-zone shape now, not a stock image shape, so it's irrelevant here).
     const library = libraryBounds(0);
     expect(shapes.some((s) => s.type === "image" && s.x > library.x && s.x < library.x + library.w)).toBe(false);
   });
