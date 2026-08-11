@@ -8,15 +8,19 @@ import { PLAYMATS, DEFAULT_PLAYMAT_PATH, SLEEVE_QUICK_PICKS, isKnownPlaymatPath,
 describe("PLAYMATS", () => {
   it("includes the default mat (today's hardcoded one)", () => {
     expect(PLAYMATS.map((m) => m.path)).toContain(DEFAULT_PLAYMAT_PATH);
-    expect(DEFAULT_PLAYMAT_PATH).toBe("/images/aeoe-43-cascading-cataracts.png");
+    expect(DEFAULT_PLAYMAT_PATH).toBe("/images/playmats/aeoe-43-cascading-cataracts.png");
   });
 
-  it("offers the curated art-card playmats", () => {
-    expect(PLAYMATS).toHaveLength(11);
+  it("offers every playmat image in public/images/playmats/", () => {
+    expect(PLAYMATS).toHaveLength(12);
     for (const mat of PLAYMATS) {
-      expect(mat.path).toMatch(/^\/images\/.*\.png$/);
+      expect(mat.path).toMatch(/^\/images\/playmats\/.*\.png$/);
       expect(mat.name.length).toBeGreaterThan(0);
     }
+  });
+
+  it("includes playmat-map.png (Jess likes the map one)", () => {
+    expect(PLAYMATS.map((m) => m.path)).toContain("/images/playmats/playmat-map.png");
   });
 });
 

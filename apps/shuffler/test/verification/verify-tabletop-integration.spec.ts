@@ -60,7 +60,7 @@ test.afterAll(() => {
 });
 
 /** A non-default mat picked on /prepare — seat.joined must carry it (ticket 16). */
-const PICKED_MAT = '/images/aeoe-6-seam-rip.png';
+const PICKED_MAT = '/images/playmats/aeoe-6-seam-rip.png';
 
 async function startGameAtTable(page: Page, tableName: string): Promise<void> {
   const prepId = await seedPrep(page);

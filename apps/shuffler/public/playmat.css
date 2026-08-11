@@ -6,7 +6,7 @@
  * `class="playmat playmat-<page>"`; this rule is everything they share. 
  */
 .playmat {
-  background-image: url('/images/aeoe-43-cascading-cataracts.png');
+  background-image: url('/images/playmats/aeoe-43-cascading-cataracts.png');
   background-size: cover;
   background-position: center;
   border: 10px solid black;

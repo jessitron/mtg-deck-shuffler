@@ -16,8 +16,8 @@ const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3001';
 
 test.setTimeout(90000);
 
-const DEFAULT_MAT = '/images/aeoe-43-cascading-cataracts.png';
-const OTHER_MAT = '/images/aeoe-6-seam-rip.png';
+const DEFAULT_MAT = '/images/playmats/aeoe-43-cascading-cataracts.png';
+const OTHER_MAT = '/images/playmats/aeoe-6-seam-rip.png';
 const FOREST_GREEN = '#2a8439'; // --mana-G quick pick
 
 async function gotoPrep(page: Page): Promise<string> {

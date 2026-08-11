@@ -26,7 +26,7 @@ describe("isBackgroundChatter", () => {
   });
 
   describe("static assets", () => {
-    test.each(["/styles.css", "/hny.js", "/images/mtg-card-back.jpg", "/images/W.svg", "/images/aeoe-3-exalted-sunborn.png", "/favicon.ico"])(
+    test.each(["/styles.css", "/hny.js", "/images/mtg-card-back.jpg", "/images/W.svg", "/images/playmats/aeoe-3-exalted-sunborn.png", "/favicon.ico"])(
       "%s",
       target => {
         expect(isBackgroundChatter({ "http.target": target })).toBe(true);
