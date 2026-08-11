@@ -17,3 +17,7 @@ data:
   # https app to an http link is fine; it's only used in <a href>.
   TABLETOP_PUBLIC_URL: "http://table.jessitron.honeydemo.io"
   SHUFFLER_PUBLIC_URL: "https://mtg.jessitron.honeydemo.io"
+  # In-cluster call, bypasses the ALB entirely — but the Spine always expects
+  # its SPINE_BASE_PATH prefix (services/spine/k8s/configmap.yaml), so this
+  # internal URL carries it too, same as the public mtg.../spine one does.
+  SPINE_URL: "http://spine-service/spine"

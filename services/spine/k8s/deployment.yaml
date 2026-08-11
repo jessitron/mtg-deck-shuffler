@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spine
+  labels:
+    app: spine
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate # SQLite on a ReadWriteOnce PVC: only one pod may hold it
+  selector:
+    matchLabels:
+      app: spine
+  template:
+    metadata:
+      labels:
+        app: spine
+    spec:
+      containers:
+        - name: spine
+          image: <your-ecr-repo>/spine:latest
+          ports:
+            - containerPort: 4600
+          env:
+            - name: OTEL_EXPORTER_OTLP_HEADERS
+              value: "x-honeycomb-team=$(HONEYCOMB_API_KEY)"
+            - name: SPINE_DB_PATH
+              value: "/data/spine.db"
+          envFrom:
+            - configMapRef:
+                name: spine-config
+            - secretRef:
+                name: mtg-deck-shuffler-secret # shared: HONEYCOMB_API_KEY
+          volumeMounts:
+            - name: data-volume
+              mountPath: /data
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /spine/up
+              port: 4600
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /spine/up
+              port: 4600
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: spine-data

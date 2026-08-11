@@ -15,9 +15,32 @@ module Spine
 
     use(*OpenTelemetry::Instrumentation::Rack::Instrumentation.instance.middleware_args)
 
-    route do |r|
-      r.public
+    # Set in prod (SPINE_BASE_PATH=/spine): the Spine is reachable at
+    # mtg.jessitron.honeydemo.io/spine, behind the same ALB as the Shuffler.
+    # AWS ALB ingress can't strip a path prefix, so the app itself answers
+    # under it — both externally (via the ALB) and internally (the
+    # Shuffler's prod SPINE_URL is http://spine-service/spine too, so one
+    # set of routes serves both callers). Unset locally: no prefix, no
+    # behavior change. Read live (not memoized) so tests can toggle it.
+    def self.base_path
+      ENV.fetch("SPINE_BASE_PATH", "")
+    end
 
+    route do |r|
+      prefix = self.class.base_path.delete_prefix("/")
+
+      if prefix.empty?
+        r.public
+        dispatch(r)
+      else
+        r.on prefix do
+          r.public
+          dispatch(r)
+        end
+      end
+    end
+
+    def dispatch(r)
       r.get "up" do
         response["Content-Type"] = "text/plain"
         "ok"
@@ -67,7 +90,7 @@ module Spine
         response["Content-Type"] = "text/html"
         tables = Table.order(:name).all
         current_span.add_attributes("admin.table_count" => tables.size)
-        render_admin("admin/tables/index", tables: tables)
+        render_admin("admin/tables/index", tables: tables, base_path: self.class.base_path)
       end
 
       r.get "admin", "tables", String do |table_id|
@@ -81,12 +104,12 @@ module Spine
         current_span.add_attributes("table.id" => table.id, "admin.result" => "found")
         render_admin("admin/tables/show",
           table: table,
+          base_path: self.class.base_path,
           events: table.events_dataset.order(:seq).all,
           team_slug: ENV.fetch("HONEYCOMB_TEAM_SLUG", "modernity"),
-          # "local" is correct today because there is no prod deploy yet (see
-          # SEAMAP.md's Out of Scope). Whoever rebuilds the Spine's prod deploy
-          # must set HONEYCOMB_ENV_SLUG=mtg-deck-shuffler there — otherwise
-          # these trace links silently point at the wrong environment.
+          # "local" is the right default for dev; prod sets HONEYCOMB_ENV_SLUG=
+          # mtg-deck-shuffler in k8s/configmap.yaml, or these trace links would
+          # silently point at the wrong environment.
           env_slug: ENV.fetch("HONEYCOMB_ENV_SLUG", "local"),
           # Browser-side tracing key, same ingest key the server uses (Invariant 3:
           # OK to publish in the browser). Baked directly into the page like the

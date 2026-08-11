@@ -14,7 +14,7 @@
       <tbody>
         <% @tables.each do |table| -%>
           <tr>
-            <td><a href="/admin/tables/<%= h table.id %>"><%= h table.name %></a></td>
+            <td><a href="<%= @base_path %>/admin/tables/<%= h table.id %>"><%= h table.name %></a></td>
             <td><%= h table.id %></td>
           </tr>
         <% end -%>

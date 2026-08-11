@@ -65,7 +65,11 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
 - **Editing any `run`/`verify.sh`/`deploy.sh`**: preserve `.be`-then-`.env` sourcing. Exception:
   `apps/shuffler/run` deliberately skips `.be` (documented in `notes/AGENT-NOTES.md`) — don't "fix"
   it. All three `deploy.sh` source `.be` because the deploy marker's key lives there; that's not
-  the `run` exception and shouldn't be "made consistent" with it.
+  the `run` exception and shouldn't be "made consistent" with it. **`services/spine/deploy.sh` is
+  also an exception on the `.env` side**: it never sources a `.env` at all — `ECR_REPO` lives in
+  `.be` and the Spine's prod OTEL config is baked into `k8s/configmap.yaml` instead of read from a
+  deploy-time env file. Don't add a Spine `.env` sourcing line to "match" the other two ships;
+  that's a real difference in wiring, not a gap.
 - **Reaching for `HONEYCOMB_API_KEY`**: it is the **`local`** environment's ingest key,
   `createDatasets` access only. It cannot write markers and it targets the wrong environment.
   Markers use `HONEYCOMB_MARKER_KEY` (env `mtg-deck-shuffler`). Check any key with `GET
@@ -129,11 +133,30 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   is touched again.
 - **The Spine's `GET /admin/tables/:id` show page and its `HONEYCOMB_ENV_SLUG` default**: the
   page's inline `<script>` builds Honeycomb trace links client-side from live SSE messages'
-  `meta.traceparent`, using `ENV.fetch("HONEYCOMB_ENV_SLUG", "local")` — correct today only because
-  the Spine has no prod deploy yet. Rebuilding that deploy must set
-  `HONEYCOMB_ENV_SLUG=mtg-deck-shuffler` in its env, or every trace link a Spine operator clicks in
-  prod silently points at `local` instead — there's a comment at the `ENV.fetch` call site in
-  `app.rb` flagging this, don't lose it if the surrounding code moves.
+  `meta.traceparent`, using `ENV.fetch("HONEYCOMB_ENV_SLUG", "local")`. **Resolved**: the Spine's
+  first prod deploy (`services/spine/k8s/configmap.yaml`) now sets `HONEYCOMB_ENV_SLUG:
+  "mtg-deck-shuffler"` (and `HONEYCOMB_TEAM_SLUG: "modernity"`), so the `"local"` fallback fires
+  only in dev — the `app.rb` comment at the `ENV.fetch` call site was updated to say so. If a
+  future admin-page trace link points at `local` in prod, check this configmap key first.
+- **The Spine's `SPINE_BASE_PATH` route wrapping** (`app.rb`'s `route do |r| ... end` wraps the
+  whole table in `r.on(prefix) { dispatch(r) }` when `SPINE_BASE_PATH` is set — prod value
+  `"/spine"`, `services/spine/k8s/configmap.yaml`, needed because the Spine now shares the
+  Shuffler's ALB/host at `mtg.jessitron.honeydemo.io/spine` and AWS ALB ingress can't strip a path
+  prefix): this is the first place in the fleet a route table sits behind an extra routing layer
+  the Rack instrumentation didn't ask for. Only smoke-tested locally in Docker so far (spans still
+  emit, `/spine/up` and `/spine/admin/tables` both respond) — `http.route`/span-naming shape under
+  the wrapped prefix has **not** been confirmed against a real deployed ALB. If a route's
+  `http.route` attribute looks wrong (missing, doubled `/spine`, or the prefix swallowed) once this
+  is live, this wrapper is the first suspect.
+- **The `only-one-alb-please` IngressGroup** (`services/spine/k8s/ingress.yaml` +
+  `apps/shuffler/k8s/ingress.yaml`, both on host `mtg.jessitron.honeydemo.io`) is a **second,
+  separate** IngressGroup from `tabletop-http` — don't conflate the two watch points. Rules in one
+  group aren't auto-sorted by path specificity, so `/spine` (Spine's ingress,
+  `alb.ingress.kubernetes.io/group.order: "1"`) must be evaluated before the Shuffler's catch-all
+  `/` (`group.order: "1000"`) or the catch-all would swallow `/spine` first. The same
+  "malformed-ingress-in-a-group blocks the whole group's routing changes" hazard documented for
+  `tabletop-http` applies here too — a bad edit to either of these two ingresses can block routing
+  changes to both, not just the one that's broken.
 - **The Spine's admin show page now mints a real child span from `meta.traceparent`, not just a
   link** (`views/admin/tables/show.html.erb`, `Hny.inChildSpan("spine-admin",
   "table.event.displayed", spanContext, fn)`): keep it a **child of the same `trace_id`**, never a
