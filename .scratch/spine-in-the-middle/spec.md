@@ -6,6 +6,11 @@ Status: ready-for-agent
 
 ## Problem Statement
 
+The big dream of this whole application is for an agent to learn how to follow the game (and eventually play).
+For that, we need data. We need to record what happens in the game, so that later I can use that data to work on the Interpreter. That data will be recorded in the Spine.
+
+Right now, the Spine exists but it does not do its job.
+
 When a player shuffles up today, the Shuffler makes two independent, best-effort calls
 that happen to fire around the same moment: a thin `POST /join` to the Spine
 (`{name, playerName}` → `{tableId, seatNumber}`, used only for the Spine's own
@@ -16,7 +21,7 @@ the `/game` redirect fires; both swallow failure silently (`log.warn` only).
 The consequence Jess noticed directly: the Spine's own event log — the record meant to
 one day let a game be reconstructed from scratch — is anemic. It only ever contains what
 the Spine mints for itself (`table.created`, a bare `seat.taken` with just
-`seatId`/`seat`/`playerName`). The rich facts about *how* a seat looks (deck name,
+`seatId`/`seat`/`playerName`). The rich facts about _how_ a seat looks (deck name,
 playmat, sleeve, commanders) never reach the Spine at all — they go straight to the
 Tabletop and stop there. Separately, joining is not idempotent: a retry or a
 `/restart-game` that re-sent the join would mint a second seat, so today's code works
@@ -105,7 +110,7 @@ Scope.
 - **`Spine::Table.join!` grows an idempotency key.** The `seats` table gets a
   `game_id` column (string, nullable, unique when present). `POST /join`'s request body
   grows from `{name, playerName}` to `{gameId, name, playerName, deckName,
-  playmatImageUrl, cardBackImageUrl, sleeveColor, commanders, gameUrl}` — only `gameId`,
+playmatImageUrl, cardBackImageUrl, sleeveColor, commanders, gameUrl}` — only `gameId`,
   `name`, `playerName`, `deckName` are required (mirroring `seat.joined.v1.json`'s own
   required set plus the new join-specific fields). Lookup order: find an existing seat
   by `game_id` first (idempotent replay — return its table/seat/URL unchanged, no new
@@ -150,7 +155,7 @@ Scope.
   error, and doesn't roll back the join.
 
 - **`/join`'s response gains `tableUrl`.** `{tableId, seatNumber}` becomes `{tableId,
-  seatNumber, tableUrl}`, built from a new Spine env var `TABLETOP_PUBLIC_URL` (mirroring
+seatNumber, tableUrl}`, built from a new Spine env var `TABLETOP_PUBLIC_URL` (mirroring
   the Shuffler's own env var of the same name) as `${TABLETOP_PUBLIC_URL}/t/${name}`.
   The Shuffler stores this instead of constructing the Tabletop link itself, if it does
   so today.
@@ -208,7 +213,7 @@ Scope.
 - **Cross-ship verification**: `apps/shuffler/test/verification/verify-tabletop-integration.spec.ts`
   already spawns a real Tabletop; extend it (or add a sibling spec) to also spawn a real
   Spine (`services/spine`, ephemeral SQLite) and assert, end to end, that shuffling up
-  produces a `seat.joined` event on the Spine's admin page *and* draws the seat on the
+  produces a `seat.joined` event on the Spine's admin page _and_ draws the seat on the
   Tabletop's canvas — this is the one test that would have caught today's problem
   (nothing currently exercises the Spine and the Tabletop in the same run).
 - Run each ship's existing unit suite (`bin/test` for the Spine, `npm test` for the
