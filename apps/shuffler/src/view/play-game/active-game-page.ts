@@ -5,13 +5,28 @@ import { formatLibrarySectionHtmlFragment } from "./library-components.js";
 import { formatRevealedCardsHtmlFragment } from "./revealed-cards-components.js";
 import { escapeHtml, formatCommandZoneHtmlFragment, formatDeckTitleHtmlFragment } from "../common/shared-components.js";
 import { formatGameMenuHtmlFragment } from "./game-menu.js";
-import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../../table-look.js";
+import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH, luminance } from "../../table-look.js";
+
+/** White reads better than black against anything darker than the midpoint. */
+function textColorFor(hex: string): string {
+  return luminance(hex) < 128 ? "white" : "black";
+}
+
+/**
+ * --seat-primary/--seat-secondary (plus matching text colors) let every button on the
+ * page read the seat's resolved colors via CSS custom-property inheritance, without
+ * threading them through each component's own render function.
+ */
+function seatColorCustomProperties(game: GameState): string {
+  const { primaryColor, secondaryColor } = colorsForPlaymat(game.playmatImagePath ?? DEFAULT_PLAYMAT_PATH, game.sleeveColor);
+  return `--seat-primary: ${primaryColor}; --seat-secondary: ${secondaryColor}; --seat-text-on-primary: ${textColorFor(primaryColor)}; --seat-text-on-secondary: ${textColorFor(secondaryColor)};`;
+}
 
 export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappened = {}, devMode: boolean = false): string {
   const gameContent = formatActiveGameHtmlSection(game, whatHappened);
-  const playmatStyle = game.playmatImagePath ? ` style="background-image: url('${game.playmatImagePath}')"` : "";
+  const playmatImageStyle = game.playmatImagePath ? `background-image: url('${game.playmatImagePath}');` : "";
   const contentWithModal = `
-    <div class="playmat playmat-game"${playmatStyle}>
+    <div class="playmat playmat-game" style="${playmatImageStyle}${seatColorCustomProperties(game)}">
       ${gameContent}
       <div id="modal-container"></div>
       <div id="card-modal-container"></div>

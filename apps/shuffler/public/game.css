@@ -215,6 +215,49 @@ body {
   display: block;
 }
 
+/*
+ * .pushable-flat's default fill is the fixed --dark-pink identity color, shared with
+ * site pages and /prepare's Shuffle Up button — this scoped override only recolors the
+ * chrome buttons on /game itself (Go to Table, Cards on table, Mulligan) to the seat's
+ * resolved colors, leaving .pushable-flat itself untouched everywhere else.
+ */
+.playmat-game .pushable-flat {
+  background: var(--seat-primary, var(--dark-pink));
+  color: var(--seat-text-on-primary, white);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--seat-primary, var(--dark-pink)) 65%, black), 0 7px 7px hsl(0deg 0% 0% / 0.25);
+}
+
+.playmat-game .pushable-flat:hover {
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--seat-primary, var(--dark-pink)) 65%, black), 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.playmat-game .pushable-flat:active {
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--seat-primary, var(--dark-pink)) 65%, black), 0 3px 3px hsl(0deg 0% 0% / 0.25);
+}
+
+.playmat-game .pushable-flat.pushable-dark {
+  background: var(--seat-secondary, var(--deep-space));
+  color: var(--seat-text-on-secondary, var(--light-pink));
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--seat-secondary, var(--deep-space)) 65%, black), 0 7px 7px hsl(0deg 0% 0% / 0.35);
+}
+
+.playmat-game .pushable-flat.pushable-dark:hover {
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--seat-secondary, var(--deep-space)) 65%, black), 0 10px 10px hsl(0deg 0% 0% / 0.35);
+}
+
+.playmat-game .pushable-flat.pushable-dark:active {
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--seat-secondary, var(--deep-space)) 65%, black), 0 3px 3px hsl(0deg 0% 0% / 0.35);
+}
+
+/* Draw/Shuffle/Search/Reveal (library-buttons) and the revealed-card action buttons
+ * (card-buttons) share a bare black-fill rule with /prepare (playmat.css) — scope the
+ * seat-color override to /game only, leaving /prepare's plain black buttons alone. */
+.playmat-game .card-buttons button,
+.playmat-game .library-buttons button {
+  background-color: var(--seat-primary, black);
+  color: var(--seat-text-on-primary, white);
+}
+
 .event-undo {
   color: #6c757d;
 }
@@ -471,21 +514,21 @@ body {
   padding: 4px 14px;
   border: none;
   cursor: pointer;
-  background-color: var(--playmat-one);
-  color: black;
+  background-color: var(--seat-primary, var(--playmat-one));
+  color: var(--seat-text-on-primary, black);
   will-change: transform;
   transform: translateY(-4px);
-  box-shadow: 0 4px 0 #978856, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--seat-primary, var(--playmat-one)) 65%, black), 0 7px 7px hsl(0deg 0% 0% / 0.25);
   transition:
     transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
     box-shadow 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
 .menu-toggle:hover {
-  background-color: var(--playmat-two);
-  color: white;
+  background-color: var(--seat-secondary, var(--playmat-two));
+  color: var(--seat-text-on-secondary, white);
   transform: translateY(-6px);
-  box-shadow: 0 6px 0 #978856, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--seat-primary, var(--playmat-one)) 65%, black), 0 10px 10px hsl(0deg 0% 0% / 0.25);
   transition:
     transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5),
     box-shadow 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
@@ -493,7 +536,7 @@ body {
 
 .menu-toggle:active {
   transform: translateY(-2px);
-  box-shadow: 0 2px 0 #978856, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--seat-primary, var(--playmat-one)) 65%, black), 0 3px 3px hsl(0deg 0% 0% / 0.25);
   transition: transform 34ms, box-shadow 34ms;
 }
 
@@ -587,19 +630,19 @@ body.game-menu-open .game-menu-panel {
 }
 
 .history-actions button {
-  background-color: var(--playmat-two);
-  color: white;
-  box-shadow: 0 4px 0 #2e4c73, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+  background-color: var(--seat-secondary, var(--playmat-two));
+  color: var(--seat-text-on-secondary, white);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--seat-secondary, var(--playmat-two)) 65%, black), 0 7px 7px hsl(0deg 0% 0% / 0.25);
 }
 
 .history-actions button:hover {
-  background-color: var(--playmat-one);
-  color: black;
-  box-shadow: 0 6px 0 #2e4c73, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+  background-color: var(--seat-primary, var(--playmat-one));
+  color: var(--seat-text-on-primary, black);
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--seat-secondary, var(--playmat-two)) 65%, black), 0 10px 10px hsl(0deg 0% 0% / 0.25);
 }
 
 .history-actions button:active {
-  box-shadow: 0 2px 0 #2e4c73, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--seat-secondary, var(--playmat-two)) 65%, black), 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
 .end-game-actions button,

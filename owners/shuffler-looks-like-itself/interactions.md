@@ -620,6 +620,40 @@ not by recomputing new numbers.**
 
 - Consult the **animations** owner too. Its charge lives in the same file.
 
+**Touching `/game`'s chrome-button colors (added 2026-08-11, `game-buttons-seat-colors`)**
+
+- **`--seat-primary`/`--seat-secondary`/`--seat-text-on-primary`/`--seat-text-on-secondary`
+  are set as an inline style on `.playmat-game`** (`formatGamePageHtmlPage` in
+  `active-game-page.ts`, via `seatColorCustomProperties`), **not `#game-container`** —
+  `#game-container` gets `outerHTML`-swapped on every game-state update via HTMX, so
+  anything set on it is lost on the next swap. `.playmat-game` is the stable ancestor
+  (it also wraps `#modal-container`/`#card-modal-container`), and CSS custom properties
+  inherit down the DOM, so a descendant that gets swapped in fresh still inherits them —
+  no re-plumbing needed after an HTMX swap.
+- **The scope is chrome only — don't extend the override to
+  `.card-action-button`/`.modal-action-button`.** Those carry per-action-type semantic
+  color (this-moves-the-card vs this-is-a-tool, choice 3's still-unshipped split); seat
+  color would collide with that meaning. `.end-game-actions` is deliberately excluded too
+  (dark identity chrome, not per-seat).
+- **`.playmat-game .pushable-flat` is the fleet's first page-scoped override of a shared
+  button class.** `.pushable-flat` itself (in `styles.css`) is untouched and still resolves
+  to `--dark-pink` everywhere else — site pages, `/prepare`'s Shuffle Up. If you add a new
+  `.pushable-flat` button to `/game`, it inherits the seat-color override for free (no class
+  change needed); if you add one to `/prepare` or a site page, it does **not** and stays
+  `--dark-pink,` which is correct — don't "fix" that by extending the selector.
+  `.playmat-game .card-buttons button, .playmat-game .library-buttons button` is the same
+  shape for the bare-black rule in `playmat.css`, scoped so `/prepare`'s identical bare rule
+  is untouched.
+- **The `var(--seat-primary, <fallback>)` fallback is the pre-existing fixed value** at each
+  site (`--playmat-one`, `--dark-pink`, or `black`, depending which rule it's replacing) —
+  keep that pattern for any new seat-colored site, so a page that never sets the custom
+  property degrades to its old look rather than to nothing (`initial`/transparent).
+- **`color-mix(in srgb, <bg> 65%, black)` derives each button's box-shadow tone from its own
+  (now-variable) background** rather than a server-computed fourth color. If you add a
+  seat-colored button, reuse this rather than threading a shadow color through
+  `seatColorCustomProperties`.
+- Spec'd in `test/verification/verify-game-seat-colors.spec.ts`.
+
 **Designing anything that lives inside the tldraw canvas** (added 2026-08-07)
 
 - **Read [README.md](README.md) → "tldraw limits" first.** The list keeps growing; the hard

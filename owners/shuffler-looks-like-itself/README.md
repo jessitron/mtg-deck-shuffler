@@ -244,7 +244,59 @@ of those live in `packages/design-tokens/tokens.css`**
   **on purpose** — "the playmat is one object, one appearance" was decided about the
   Shuffler's two *pages*, and extending it across the ship boundary to a tldraw-rendered
   seat mat is an unratified Layer-2 claim. Buoyed as `playmat-colours-fleet-or-shuffler`;
-  the omission is a decision, not an oversight.
+  the omission is a decision, not an oversight. **`--playmat-one`/`--playmat-two` are now
+  shadowed, not removed (2026-08-11, `game-buttons-seat-colors`)** — see the new
+  "`/game`'s chrome buttons now read the seat's own colors" entry below; they remain the
+  `var()` fallback whenever a seat has no resolved color, which in practice is never (every
+  seat gets a resolved pair, sleeved or not — see the `colorsForPlaymat` entry above).
+
+**`/game`'s chrome buttons now read the seat's own colors, not the fixed playmat pair
+(decided 2026-08-11, Jess's explicit request — "this is a realization of the original
+intended purpose of `--playmat-one` etc" — reversing the SAME-DAY earlier "static chrome
+colors stay put" ruling, `aca3f2f`).** Two new CSS custom properties, `--seat-primary`/
+`--seat-secondary` (plus `--seat-text-on-primary`/`--seat-text-on-secondary` for contrast),
+are set as an inline style on `.playmat-game` itself — not `#game-container`, which gets
+`outerHTML`-swapped on every game-state update; `.playmat-game` is the stable ancestor that
+also wraps `#modal-container`/`#card-modal-container` — computed once per page render in
+`formatGamePageHtmlPage` (`active-game-page.ts`) via `colorsForPlaymat(game.playmatImagePath
+?? DEFAULT_PLAYMAT_PATH, game.sleeveColor)` and `luminance()` (both `table-look.ts`). Custom
+properties inherit down the DOM, so every descendant button reads
+`var(--seat-primary, <original-fallback>)` with zero extra plumbing per component — no
+component needed to change its render function to accept a color.
+
+- **Scope is chrome only, decided explicitly with Jess — not the semantic
+  action-colored buttons.** In scope: `.menu-toggle` (hamburger) and `.history-actions
+  button` (Undo/History) in `game.css` — edited in place, since they're `/game`-exclusive
+  classes; a new scoped `.playmat-game .pushable-flat`/`.pushable-flat.pushable-dark`
+  override in `game.css` that recolors Go to Table, Cards on table, and Mulligan (every
+  `.pushable-flat` used on `/game`) **without touching `.pushable-flat` itself**, which
+  stays `--dark-pink` everywhere else (site pages, `/prepare`'s Shuffle Up button); and a
+  new scoped `.playmat-game .card-buttons button, .playmat-game .library-buttons button`
+  override that recolors Draw/Shuffle/Search/Reveal and the revealed-card action buttons
+  (Play/Put in Hand/Put on Top/Put on Bottom on the main page, **not** the modal versions)
+  from the shared bare-black rule in `playmat.css`, scoped so `/prepare`'s identical bare
+  rule is untouched. Out of scope, left on fixed/semantic colors: `.end-game-actions`
+  (Restart/Choose Deck/Home — dark identity chrome), `.card-action-button`/
+  `.modal-action-button` (the color-coded card-detail-modal buttons — per-action-type
+  semantic colors, not identity chrome), and the dev-only debug-copy-button.
+- **This is a new pattern: a page-scoped override of a shared button class.** `.pushable-flat`
+  never had a per-page appearance override before this — every prior site (the BFC excepted,
+  which is its own button *kind*, not an override) either used it plain or didn't use it at
+  all. Confirmed via this KB before implementing; not precedent for casually overriding other
+  shared classes per-page, but the shape (`.playmat-game .pushable-flat`) is the one to copy
+  if a second page-scoped override is ever needed.
+- **`color-mix(in srgb, <color> 65%, black)` is a new CSS feature in this codebase** — used
+  to derive each button's box-shadow tone from its *own* background color (now variable)
+  instead of a third server-computed shadow hex. No browser-support concern: Jess's own app,
+  evergreen Chromium via Playwright.
+- **`--playmat-one`/`--playmat-two` remain as the `var()` fallback values only** — not
+  reverted, not renamed, just shadowed whenever a seat's resolved colors are present (which
+  is always, per `colorsForPlaymat`'s no-`chosenTwo` fallback pair).
+- Spec'd in `test/verification/verify-game-seat-colors.spec.ts`: hamburger toggle, library
+  buttons, the Cards-on-table button, and the menu's history button render with
+  `colorsForPlaymat`'s resolved colors for a sleeved seat; Restart/Choose/Home do **not**
+  pick up seat colors (the chrome-only boundary's regression guard); an unsleeved
+  default-mat game still gets a real (non-transparent) resolved color.
 - **Font tokens: RESOLVED 2026-08-07 (`f79bc7d`).** Jess: *"yeah, go for it! I'm all for more
   tokens."* `--font-chrome` / `--font-content` / `--font-display` are in the package and every
   Shuffler stylesheet uses them. **The typeface names still appear in the two `<head>`
