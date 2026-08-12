@@ -48,6 +48,15 @@ than living in two places.
 
 ## Decisions so far
 
+- [`spec.md`](spec.md) (2026-08-11) — the join-flow decision below, turned into a
+  buildable spec (`Status: ready-for-agent`), ready for `/to-tickets`. It covers only
+  the join-flow slice: it does **not** reach this map's other open fog (the Tabletop's
+  Spine SSE subscriber, the envelope v2/v3 reconciliation, the Shuffler's own
+  subscriber, or the Tabletop→Spine physics sender) — those stay open below. One
+  judgment call the spec makes beyond the grilling answer: the Spine notifies the
+  Tabletop with a direct HTTP call to its existing endpoint rather than building the
+  general SSE subscriber now, to avoid throwing that design away when the real
+  subscriber ticket lands.
 - [The join flow: one administered, idempotent Spine call, async from the player's screen](issues/01-the-join-flow.md)
   (2026-08-11) — `seat.taken` and `seat.joined` stop being two independently-sent
   facts. The Shuffler makes one `join` call to the Spine carrying everything the table
