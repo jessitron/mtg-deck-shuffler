@@ -39,6 +39,16 @@
   ShapeUtil callbacks (`onTranslateEnd` fires once, at settle, by tldraw's own contract) — the
   hazard is specifically for code reading the *store*, not the ShapeUtil. See watch point 20.
 
+- **`useKeyboardShortcuts`'s `SKIP_KBDS` list never wires `copy`/`cut`/`paste`/`asset` to keyboard
+  dispatch — `overrides.actions.copy` only ever catches the menu/context-menu source, never
+  ctrl+c/cmd+c.** (2026-08-12, `useCopyHint()` in `TablePage.tsx`.) The keyboard path is handled by
+  `<Tldraw>`'s own `useNativeClipboardEvents`, a bubble-phase `document.addEventListener("copy",
+  ...)` that reads `editor.getSelectedShapeIds()` directly — intercepting it needs a second,
+  capturing listener on `window` (capture-phase on an ancestor fires first). **Adjacent to this
+  owner's charge, not squarely in it** — it's clipboard event wiring, not a ShapeUtil hook or the
+  `SelectTool` state machine — recorded here as a sibling fact to watch point 24's `editor.on
+  ('event', ...)` targeting quirk, since both are "don't assume tldraw's usual extension point
+  reaches this gesture, go read how it actually dispatches." See `history.md`'s "Copy hint" entry.
 - **`Idle.onPointerDown` (`node_modules/tldraw/src/lib/tools/SelectTool/childStates/Idle.ts`) is
   the source of truth for `getHitShapeOnCanvasPointerDown`** (ticket 05, 2026-08-11,
   `clearStaleSelectionOnPointerDown.ts`) — it's the same hit-test helper `Idle` itself calls

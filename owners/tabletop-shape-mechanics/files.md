@@ -226,6 +226,13 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   in this KB depends on it putting the furniture on screen — and tldraw culls off-viewport
   shapes from the DOM, so even bare `.tl-shape` counts need the camera to have everything in
   view.
+  **Since 2026-08-12**, also home to `useCopyHint()` (mounted from `ToolbarWithCounter`) and
+  `uiOverrides.actions.copy` — a toast telling players ctrl+c doesn't work here. Not this owner's
+  core charge (clipboard event wiring, not a ShapeUtil hook or selection state), but recorded
+  because it landed in this file and rests on a real tldraw quirk (`useKeyboardShortcuts`'s
+  `SKIP_KBDS` list never wires `copy`/`cut`/`paste`/`asset` to keyboard dispatch, so the keyboard
+  path has to be caught by racing tldraw's own native clipboard listener with a capturing one on
+  `window`) — see `history.md`'s "Copy hint" entry for the full writeup.
 
 ## Server (identity is minted here, mechanics is not)
 
@@ -426,6 +433,12 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   and `verify-life-counter.spec.ts`'s stale-selection-immunity comment (just above) were both
   updated to say "one" instead of "two" furniture images; `seatJoined.test.ts`'s sleeve-vs-card-back
   test comment was also updated to note the playmat is no longer relevant to that particular check.
+- `apps/tabletop/test/verification/verify-copy-hint.spec.ts` — **new, 2026-08-12**: asserts the
+  toast appears on ctrl+c/cmd+c with a card selected and does not appear with nothing selected.
+  Selects via marquee-drag rather than a direct click, deliberately avoiding this owner's own
+  click-vs-select mechanics (a direct click on some shapes enters text-edit mode) rather than
+  exercising them — this spec is `TablePage.tsx`'s clipboard wiring, not a regression test for
+  anything in this KB's watch points.
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 
