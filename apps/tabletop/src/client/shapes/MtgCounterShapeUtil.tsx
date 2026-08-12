@@ -1,6 +1,7 @@
-import { BaseBoxShapeUtil, HTMLContainer, useValue } from "tldraw";
+import { BaseBoxShapeUtil, HTMLContainer, useValue, Vec } from "tldraw";
 import { MtgCounterShape, mtgCounterShapeProps } from "../../shared/mtgCounterShape";
 import { fitCounterFont } from "./counterTextFit";
+import { TAP_ANGLE } from "./cardTap";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 
 export const COUNTER_SIZE = 44;
@@ -45,11 +46,37 @@ export class MtgCounterShapeUtil extends BaseBoxShapeUtil<MtgCounterShape> {
       if (previous === undefined || hostTapped === undefined || previous === hostTapped) return;
       const el = rideAlongRef.current;
       if (!el) return;
+
+      // A hosted counter's local x/y/rotation don't change when the card taps — only
+      // the card's rotation does — so the counter orbits the card's (fixed) page
+      // center. Its local frame is always axis-aligned with the card's box (dropped
+      // counters get their rotation zeroed, see cardPassengers.ts), so the orbit is
+      // just offsetLocal rotated by the card's rotation before vs. after the tap.
+      const parentId = this.editor.getShape(shape.id)?.parentId;
+      const card = parentId ? this.editor.getShape(parentId) : undefined;
+      const delta = hostTapped ? TAP_ANGLE : -TAP_ANGLE;
+      let dxPx = 0;
+      let dyPx = 0;
+      if (card?.type === "mtg-card") {
+        const rotationAfter = card.rotation;
+        const rotationBefore = rotationAfter - delta;
+        const counterCenterLocal = Vec.Add({ x: shape.x, y: shape.y }, { x: w / 2, y: h / 2 });
+        const cardHalfExtent = { x: card.props.w / 2, y: card.props.h / 2 };
+        const offsetLocal = Vec.Sub(counterCenterLocal, cardHalfExtent);
+        const deltaPage = Vec.Sub(Vec.Rot(offsetLocal, rotationBefore), Vec.Rot(offsetLocal, rotationAfter));
+        const zoom = this.editor.getZoomLevel();
+        dxPx = deltaPage.x * zoom;
+        dyPx = deltaPage.y * zoom;
+      }
+
       el.getAnimations().forEach((a) => a.cancel());
-      el.animate([{ transform: `rotate(${hostTapped ? -90 : 90}deg)` }, { transform: "rotate(0deg)" }], {
-        duration: 500,
-        easing: "ease-out",
-      });
+      el.animate(
+        [
+          { transform: `translate(${dxPx}px, ${dyPx}px) rotate(${hostTapped ? -90 : 90}deg)` },
+          { transform: "translate(0px, 0px) rotate(0deg)" },
+        ],
+        { duration: 500, easing: "ease-out" },
+      );
     }, [hostTapped]);
 
     const rInput = useRef<HTMLTextAreaElement>(null);

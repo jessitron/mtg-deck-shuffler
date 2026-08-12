@@ -1,7 +1,7 @@
 import { TLShapePartial, Vec } from "tldraw";
 import { MtgCardShape } from "../../shared/mtgCardShape";
 
-const TAP_ANGLE = Math.PI / 2;
+export const TAP_ANGLE = Math.PI / 2;
 
 export function tapPartial(shape: MtgCardShape, tapped: boolean): TLShapePartial<MtgCardShape> {
   const delta = tapped ? TAP_ANGLE : -TAP_ANGLE;
