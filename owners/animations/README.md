@@ -50,6 +50,7 @@ Everything above is **Shuffler-side** (`apps/shuffler/`). The one Tabletop anima
 | Animation | Where | Status | Duration | Trigger |
 |-----------|-------|--------|----------|---------|
 | Tap / untap swing (90°) | Tabletop, `MtgCardShapeUtil` `component()` | **Working** (`65276e6`, physics ticket 15) | 0.5s ease-out (Jess overrode this owner's 0.8s lean) | `props.tapped` changing on the synced `mtg-card` shape (toggled by `onClick`; tldraw's rotate handle stays reserved for free rotation, never repurposed for tap) |
+| Hosted counter's tap catch-up (rotation + orbit) | Tabletop, `MtgCounterShapeUtil` `component()` | **Working** (`6713421` rotation-only, extended `2026-08-12` with orbit compensation) | 0.5s ease-out, matching the card's own swing | Host card's `props.tapped` changing, read via `useValue` inside the counter's shape util |
 
 It uses **WAAPI `element.animate()`** rather than a CSS transition, because the Tabletop
 still has no ship-local stylesheet (`tabletop-css-tokens` in `TODO.md`). This owner's
@@ -57,3 +58,4 @@ still has no ship-local stylesheet (`tabletop-css-tokens` in `TODO.md`). This ow
 the platform's declarative animation API with constant keyframes, not a JS animation
 library. Decisions: `.scratch/tabletop-physics/issues/05-rotate-to-tap.md`,
 implementation ticket `.scratch/tabletop-physics/issues/15-tap-animation.md`.
+Counter catch-up plan: `.scratch/counter-orbit-animation/plan.md`.

@@ -164,7 +164,9 @@ that as within "CSS-driven, no animation library" (platform API, constant keyfra
 Before starting, `el.getAnimations().forEach(a => a.cancel())` — a mid-swing re-tap gets
 one clean jump instead of stacked transforms. **Smooth reversal on a fast double-tap is an
 accepted gap** (WAAPI starts from the fixed keyframe, not the current rendered angle),
-noted in a code comment. Because the effect's only input is `tapped`, free rotation cannot
+noted in a code comment — and since the counter's catch-up (above) folded its orbit
+compensation into the same combined transform, the accepted gap now covers the translate
+component too, not just rotation. Because the effect's only input is `tapped`, free rotation cannot
 fire it; because the trigger is the synced prop, remote peers animate for free.
 
 **One accepted risk**: the animated element is `.tl-image-container` itself (tldraw's own
@@ -237,6 +239,85 @@ in `65276e6`** (1: effect keyed on `tapped` only; 2: `prevTappedRef` starts at f
    "because tldraw handles rotation now" makes the first frame jump.
 4. **Nothing on the path may clip.** Mid-swing the counter-rotated card extends outside its own
    `w × h` box; any `overflow: hidden` ancestor chops the animation.
+
+### Direct extension: a hosted counter's tap catch-up (rotation, then rotation + orbit)
+
+A counter riding a card (ticket 18's passenger mechanism, `4c64ef2`) has no `props.tapped`
+of its own, and tldraw's free-rotation composition already keeps its *position* correct
+after a tap — but its DOM node was snapping to the new angle instead of easing, visually
+disconnected from the card swinging underneath it. `MtgCounterShapeUtil.tsx` (`6713421`)
+fixed the rotation half of that by giving the counter's own `component()` the identical
+mechanism as the card: a `useLayoutEffect` that watches the **host card's** `props.tapped`
+(read fresh via `useValue` off the editor, keyed by parentId — not off the shape argument's
+`parentId` field, which isn't reactive to reparenting) and replays the same 500ms
+`ease-out` WAAPI catch-up on the counter's own `.tl-image-container`-hosted element.
+
+That first version only compensated **self-rotation** (`rotate(∓90deg)` → `0`), because a
+counter's local x/y/rotation don't literally change when the host taps — only the card's
+`rotation` does. But a counter sits at a fixed local offset from the card's center, so
+when the card rotates ±90° about that center, the counter **orbits** to a new page
+position; the rotation-only catch-up left that orbital jump uncompensated; the counter
+spun smoothly in place while popping sideways to its new spot.
+
+**Extended `2026-08-12`** (plan: `.scratch/counter-orbit-animation/plan.md`) to compensate
+the orbit too, computed **analytically** — this owner's explicit ask, per "NOT the banned
+FLIP pattern" below: no `getBoundingClientRect` before/after, no runtime measurement.
+Inside the same effect, alongside the rotation math:
+
+```
+counterCenterLocal = Vec.Add({x: shape.x, y: shape.y}, {x: w/2, y: h/2})
+cardHalfExtent      = {x: card.props.w/2, y: card.props.h/2}
+offsetLocal         = Vec.Sub(counterCenterLocal, cardHalfExtent)   // constant, card-local frame
+
+rotationAfter  = card.rotation                        // already-updated value
+delta          = hostTapped ? TAP_ANGLE : -TAP_ANGLE  // same sign convention as cardTap.ts
+rotationBefore = rotationAfter - delta
+
+deltaPage = Vec.Sub(Vec.Rot(offsetLocal, rotationBefore), Vec.Rot(offsetLocal, rotationAfter))
+dxPx = deltaPage.x * editor.getZoomLevel()
+dyPx = deltaPage.y * editor.getZoomLevel()
+```
+
+`offsetLocal` is fixed because `cardPassengers.ts`'s `handleDragShapesIn` always zeroes a
+hosted counter's local rotation on drop — its local frame stays axis-aligned with the
+card's own box, so there's no independent tilt to account for. `tapPartial` (`cardTap.ts`)
+holds the card's own page-center fixed across a tap, which is what makes the orbit reduce
+to a pure rotation of `offsetLocal`. `TAP_ANGLE` (`Math.PI / 2`) is now **exported from
+`cardTap.ts`** so this file doesn't duplicate the constant.
+
+Combined into the *same* `el.animate()` call, one transform string per keyframe:
+
+```ts
+el.animate(
+  [
+    { transform: `translate(${dxPx}px, ${dyPx}px) rotate(${hostTapped ? -90 : 90}deg)` },
+    { transform: "translate(0px, 0px) rotate(0deg)" },
+  ],
+  { duration: 500, easing: "ease-out" },
+);
+```
+
+Every existing guard carries over unchanged: keyed off `hostTapped` changing (never a
+measured delta — same free-rotation-through-90° misfire risk as the card's own
+catch-up); `prevHostTappedRef` still suppresses animating on mount/reconnect;
+`el.getAnimations().forEach(a => a.cancel())` still runs first — now more load-bearing,
+since a mid-swing re-tap must produce one clean jump in a *combined* transform, not
+stacked ones.
+
+**This is NOT the banned FLIP pattern**, same reasoning as the card's own catch-up below:
+the delta is analytically knowable from the ±90° state change (card rotation, counter's
+fixed local offset), never measured from the DOM at runtime.
+
+**Testing pattern for WAAPI catch-up transforms**: don't race real elapsed time against
+the 500ms ease-out curve by snapshotting `getBoundingClientRect()` at an arbitrary moment
+mid-animation — the curve moves fast early, so timing-based bounding-box assertions are
+flaky at small zoom scales. Instead, read the **WAAPI keyframe's `transform` string
+directly** off the running animation (`el.getAnimations().find(a => a.playState ===
+"running")`, then `(anim.effect as KeyframeEffect).getKeyframes()[0].transform`) and
+regex-extract the `translate(dx, dy)` component. This is deterministic — it reads what
+the animation *will* do, not a sampled snapshot of where it currently is — and is the
+pattern to reuse for any future WAAPI catch-up assertion. See
+`verify-tap-animation.spec.ts`'s "orbit around a tapped card" test.
 
 Empirical facts from the throwaway Playwright prototype (branch `proto/multi-tap`, deleted,
 nothing landed):

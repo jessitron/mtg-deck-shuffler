@@ -107,6 +107,17 @@ Full paths from the repo root.
   `.tl-image-container` div — `rotate(∓90deg)` → `0`, 500ms, `ease-out`, cancelling any
   running animations first. The center-coupling comment (ticket-05 constraint 3) is at
   the effect.
+- `apps/tabletop/src/client/shapes/cardTap.ts` — `tapPartial()`'s center-preserving
+  rotation-delta math. `TAP_ANGLE` (`Math.PI / 2`) is now **exported** (2026-08-12) so
+  `MtgCounterShapeUtil.tsx` reuses the same constant instead of duplicating it.
+- `apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx` — hosted counter's own tap
+  catch-up, in `component()`'s `useLayoutEffect` keyed on the **host card's**
+  `props.tapped` (read via `useValue` off the editor, not the shape's `parentId` field).
+  Rotation-only catch-up landed `6713421`; extended 2026-08-12 to also compensate the
+  counter's orbital translation around the card's fixed center (`offsetLocal` rotated by
+  the card's rotation before/after the tap, scaled by `editor.getZoomLevel()`), combined
+  into one `translate(dxPx, dyPx) rotate(...)` WAAPI transform. Plan:
+  `.scratch/counter-orbit-animation/plan.md`.
 - `apps/tabletop/src/client/TablePage.tsx` — registers the shape util.
 - **Still no CSS source file on the Tabletop** (`tabletop-css-tokens` in `TODO.md`) —
   that's why the animation is WAAPI in the component rather than a CSS transition in a
@@ -119,7 +130,12 @@ Full paths from the repo root.
 - `apps/tabletop/test/verification/verify-tap-animation.spec.ts` — Playwright: tap and
   untap both show a running 500ms WAAPI animation on `.tl-image-container` (via
   `getAnimations()`); an already-tapped card after reload does not animate; a remote peer
-  (second browser context) animates when the prop syncs in.
+  (second browser context) animates when the prop syncs in; a counter riding a tapped card
+  animates along with it (`6713421`); and (2026-08-12) a counter's orbit around a tapped
+  card starts from its pre-tap spot — asserted by reading the running WAAPI animation's
+  first keyframe `transform` string and regex-extracting `translate(dx, dy)`, rather than
+  racing bounding-box timing against the ease-out curve. This keyframe-reading pattern is
+  the recommended template for any future WAAPI catch-up transform assertion.
 
 ## Tests
 

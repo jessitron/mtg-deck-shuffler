@@ -112,6 +112,18 @@
   triggers, or the easter egg silently stops persisting across swaps. This is also the reference
   shape for any future non-`GameCard` draggable in `#hand-cards` — see architecture.md "New
   shape: a draggable non-card element."
+- **Hosted counter's tap catch-up is coupled to the host card's `rotation`/`props.w`/`props.h`
+  (rotation part `6713421`, orbit compensation added 2026-08-12)**: `MtgCounterShapeUtil.tsx`
+  reads the parent `mtg-card` shape's current `rotation` and box dimensions inside its own
+  `useLayoutEffect` to compute the orbital displacement analytically. If the card shape's
+  rotation-delta convention in `cardTap.ts` (`TAP_ANGLE`, now exported for exactly this reuse)
+  or its center-preserving pivot math ever changes, this counter math must change with it —
+  it re-derives the *same* before/after rotation the card's own catch-up assumes. Also
+  depends on `cardPassengers.ts`'s invariant that a hosted counter's local rotation is always
+  zeroed on drop (so the counter's local frame stays axis-aligned with the card's box); if a
+  future change lets a counter keep an independent tilt, `offsetLocal` is no longer constant
+  and this math breaks silently (wrong orbit direction/magnitude, not a crash). The combined
+  transform's double-tap gap (see architecture.md) now spans both rotation and translate.
 - **`evt.detail.elt` is not the triggering element inside `htmx:afterSettle` (fixed 2026-08-11,
   `public/table-look-focus.js`)**: htmx's `triggerEvent` always overwrites `detail.elt` to be
   the element the event is dispatched *on*; `afterSettle` fires once per settling element in

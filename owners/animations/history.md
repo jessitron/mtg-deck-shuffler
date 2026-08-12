@@ -365,6 +365,49 @@ the `/move-hand-card` POST, restore-after-swap hooked into the existing
 `setupHandCardDragAndDrop()` entry point) is the pattern for any future non-card
 draggable in the hand row.
 
+### 2026-08-10: Hosted counters animate along with a card's tap (`6713421`) — backfilled
+
+**KB gap, backfilled 2026-08-12**: this landed without a KB update at the time. A counter
+riding a card (ticket 18's passenger mechanism) had no `props.tapped` of its own; tldraw's
+free-rotation composition kept its *position* correct after a tap, but its DOM node
+snapped to the new angle instead of easing, visually disconnected from the card swinging
+underneath it. `MtgCounterShapeUtil.tsx` gained the identical WAAPI mechanism as the card
+itself — a `useLayoutEffect` watching the **host's** `props.tapped` (read fresh via
+`useValue` off the editor, not off the shape argument's `parentId`, which isn't reactive to
+reparenting) — replaying the same 500ms `ease-out` rotate-catch-up on the counter's own
+container. New Playwright regression: "a counter riding a tapped card animates along with
+it" in `verify-tap-animation.spec.ts`. Recorded as the "Third mechanism" section's first
+direct extension in architecture.md.
+
+### 2026-08-12: Counter's tap catch-up extended to compensate orbital translation
+
+The rotation-only catch-up above left one thing uncompensated: a counter sits at a fixed
+local offset from its host card's center, so when the card rotates ±90° about that center,
+the counter **orbits** to a new page position. The counter's own catch-up only fixed its
+self-rotation, so it spun smoothly in place while popping sideways to its new orbited spot.
+
+Fixed **analytically**, per this owner's standing "not the banned FLIP pattern" precedent
+— no `getBoundingClientRect`/before-after measurement. `MtgCounterShapeUtil.tsx` computes
+`offsetLocal` (counter-center minus card-center, in the card's local frame — constant,
+since `cardPassengers.ts` always zeroes a hosted counter's local rotation on drop), rotates
+it by the card's rotation before vs. after the tap, and scales by `editor.getZoomLevel()`
+to get pixels. Combined into the *same* `el.animate()` transform string as the existing
+rotation compensation: `translate(dxPx, dyPx) rotate(...)` easing to `translate(0,0)
+rotate(0)`. `TAP_ANGLE` was exported from `cardTap.ts` so this file stops duplicating the
+constant.
+
+New Playwright test, "a counter's orbit around a tapped card starts from its pre-tap spot,
+not a jump" (`verify-tap-animation.spec.ts`): reads the running WAAPI animation's first
+keyframe `transform` string directly and regex-extracts `translate(dx, dy)`, rather than
+racing bounding-box timing against the 500ms ease-out curve (flaky at small zoom scales).
+**This is now the recommended pattern for testing any future WAAPI catch-up transform** —
+written up in architecture.md.
+
+The already-accepted double-tap gap (WAAPI restarts from the fixed keyframe, not the
+current rendered angle, on a fast re-tap) now covers the translate component as well as
+rotation, since both live in the same combined transform. Plan:
+`.scratch/counter-orbit-animation/plan.md`.
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.
