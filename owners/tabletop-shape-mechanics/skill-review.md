@@ -39,10 +39,6 @@ Check the plan against each of these; only report on ones that actually apply.
    it's the single most load-bearing fact in this KB. Also flag that `meta` identity fields are
    moving to `props`, which changes every guard pattern in this file.
 
-6. **Does the plan touch tldraw's own state machine files** (anything under `node_modules/
-   tldraw` or `node_modules/@tldraw`)? Flag hard — this owner's position is to work *with*
-   tldraw's state machine via ShapeUtil hooks, never to patch tldraw itself.
-
 ## How to Respond
 
 - If nothing in the plan touches this territory, say so plainly and say what you checked against
