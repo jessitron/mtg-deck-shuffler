@@ -181,6 +181,15 @@ each).
   compass slots (N/E/S/W) around a centered Stack, but a wide-short player-area rectangle
   parked at an E/W slot reads "sideways" rather than rotating to face the Stack — an accepted
   cosmetic quirk, not a bug, until (if ever) this limit lifts.
+- **tldraw's toast system renders with its own default visual treatment, not the fleet's
+  identity — recorded, not fought (2026-08-12).** `useToasts().addToast()`
+  (`TablePage.tsx`'s `COPY_DISABLED_TOAST`, the "copy doesn't work here, use duplicate
+  instead" hint) is the fleet's first toast. It renders through tldraw's own
+  `.tlui-toast__container` chrome — generic sans font, tldraw's own color tokens — because
+  restyling it would be the Tabletop's *first* ship-local CSS rule, and where that CSS
+  should live is still the open question. See [open-choices.md](open-choices.md) → "Fleet
+  gaps — the Tabletop side". Accepted as a known visual gap, not silently normalized as the
+  standard; revisit once the ship-local-stylesheet question resolves.
 
 ## Why this owner exists
 

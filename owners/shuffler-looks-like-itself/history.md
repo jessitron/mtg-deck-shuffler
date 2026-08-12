@@ -2530,3 +2530,34 @@ pair is a TS literal mirroring existing tokens, same posture as `SLEEVE_QUICK_PI
 hexes, not a stylesheet raw-hex violation. `npm run build`, the unit suite, and
 `npx playwright test verify-design-gallery` (7/7) all pass; the gallery test needed no update
 since none of its specimens exercise `colorsForPlaymat`.
+
+## 2026-08-12 — the fleet's first toast ships in tldraw's own look, not the fleet's
+
+A copy-disabled hint landed on the Tabletop: pressing ctrl/cmd-c with a shape selected shows
+"Copy doesn't work here. Use duplicate (ctrl-d) instead." instead of copying (tldraw's copy
+still writes to the clipboard in a way the sync server can't reconcile across clients, which
+is why copy is disabled rather than fixed). `TablePage.tsx` gained a `COPY_DISABLED_TOAST`
+constant and two intercepts that both call `useToasts().addToast()`: `uiOverrides.actions`
+overrides the toolbar/menu `copy` action, and a new `useCopyHint()` hook adds a **capturing**
+`window` `"copy"` listener, because tldraw's own keyboard-shortcut dispatcher explicitly skips
+`copy`/`cut`/`paste` (`SKIP_KBDS`) and handles ctrl/cmd-c via the browser's native `copy`
+event instead — so the only way to intercept the keyboard shortcut is to out-race tldraw's own
+listener with a capturing one that fires first, `preventDefault`/`stopImmediatePropagation` it,
+and show the toast instead.
+
+**No custom component, no new stylesheet — `useToasts()` is tldraw's own UI system**, and the
+toast renders in tldraw's stock visual treatment: generic sans font, tldraw's own color
+tokens, nothing from `@fleet/design-tokens`. This is the fleet's **first** toast on either
+ship, and restyling `.tlui-toast__container` to look on-brand would be the Tabletop's *first*
+ship-local CSS rule — a question this owner has been calling "still open" since
+`tabletop-css-tokens` (2026-08-07) with nothing yet forcing an answer. Rather than answer it
+under this ticket's radar, the toast was left in tldraw's default look and the gap was flagged
+here and in [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop side", as a known,
+accepted visual gap rather than a silent drift. This is the same posture as the tldraw-limits
+list generally: record the limit, don't fight it, and don't let restyling ride along on an
+unrelated ticket as an unapproved appearance decision.
+
+**Nothing here is a new tldraw limit in the technical sense** — tldraw's toasts almost
+certainly *can* be restyled with plain CSS if the Tabletop ever gets a stylesheet to put such
+a rule in. What's actually blocked is the fleet's own open question about where that
+stylesheet lives, not anything tldraw itself forbids.
