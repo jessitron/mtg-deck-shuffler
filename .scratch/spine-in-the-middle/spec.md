@@ -52,32 +52,41 @@ Scope.
 1. As a player shuffling up, I want my deck name, playmat, sleeve color, and commanders
    recorded on the Spine's table log, so that the game I'm about to play has a complete
    record from its first moment, not just from whenever the first card is played.
-2. As a player shuffling up, I want the `/game` screen to appear immediately, so that a
+2. As Jess building toward the Interpreter, I want the full seat-setup facts (deck
+   name, sleeve, commanders) durably recorded on the Spine's own log — not just on the
+   Tabletop — so that the training data for "what happened at this table" exists from
+   the moment a game exists, instead of starting only once the first card is played.
+3. As Jess, I want this ticket to be the first place where Mountain 2's claim ("every
+   physical/administrative event crosses the Spine's log") is actually true rather than
+   aspirational, so that later work building the Interpreter has one real precedent to
+   extend instead of a claim in `SEAMAP.md` that the code doesn't back up.
+4. As a player shuffling up, I want the `/game` screen to appear immediately, so that a
    slow or unreachable Spine never makes me wait to see my hand.
-3. As a player shuffling up, I want to find out if joining the table failed, so that I'm
+5. As a player shuffling up, I want to find out if joining the table failed, so that I'm
    not left thinking I'm connected to a table I'm actually not on.
-4. As a player whose browser retries the join (network blip) or who hits
+6. As a player whose browser retries the join (network blip) or who hits
    `/restart-game`, I want to land back in the same seat, not a second one, so that the
    table never shows a phantom duplicate player.
-5. As Jess reading the Spine's admin log, I want to see one coherent story of a seat
+7. As Jess reading the Spine's admin log, I want to see one coherent story of a seat
    joining — who, with what deck, what look, what commanders — so that the log alone
    documents what happened without cross-referencing the Tabletop.
-6. As a developer building the Interpreter later, I want the seat-setup facts (deck
-   name, sleeve, commanders) durably attached to the table's own event log, so that
-   reconstructing a game's start doesn't depend on the Tabletop having been reachable at
-   the time.
-7. As a player, I want a Tabletop that's temporarily down at Shuffle Up to not block me
+8. As a player, I want a Tabletop that's temporarily down at Shuffle Up to not block me
    from starting my game, so that a flaky table doesn't cost me my hand.
-8. As Jess, I want the Shuffler's own domain log to show that a join to a table
+9. As Jess, I want the Shuffler's own domain log to show that a join to a table
    succeeded, so that the game's narration includes "joined table X" the same way it
    includes other things that happen during play.
-9. As a developer, I want the Spine's `/join` to be the only place seat-decoration data
-   is threaded through to the Tabletop, so that a future Tabletop SSE subscriber has one
-   clear precedent to extend rather than two different payload shapes to reconcile.
-10. As a developer reading `apps/shuffler/CLAUDE.md`'s Table Mode section after this
+10. As Jess relying on this log as training data later, I want it to be knowable — even
+    if only from the Shuffler's own telemetry, not the Spine itself — which games have a
+    complete Spine record and which have a gap from a failed join, so that a future me
+    building the Interpreter doesn't have to discover missing data by noticing a game
+    with no `seat.joined` and wondering whether that's a bug or a known gap.
+11. As a developer, I want the Spine's `/join` to be the only place seat-decoration data
+    is threaded through to the Tabletop, so that a future Tabletop SSE subscriber has one
+    clear precedent to extend rather than two different payload shapes to reconcile.
+12. As a developer reading `apps/shuffler/CLAUDE.md`'s Table Mode section after this
     change, I want it to describe one Spine call instead of two separate Tabletop/Spine
     sends, so that the documented behavior matches the code.
-11. As Jess, I want the Spine's `seat.joined` payload to carry a `gameUrl` back to the
+13. As Jess, I want the Spine's `seat.joined` payload to carry a `gameUrl` back to the
     Shuffler's own `/game` page for that seat, so that a later ticket can wire the
     Tabletop's library-furniture link through the Spine instead of a side channel.
 
@@ -223,7 +232,10 @@ Scope.
   no persistent connection; the Spine→Tabletop call is a single request per join),
   and was already ruled out generally by the map for the SSE-subscriber work.
 - **Logging a *failed* join as a Shuffler domain-log event** — left UI-only; noted above
-  as a scope decision, not a technical blocker, if Jess wants it revisited.
+  as a scope decision, not a technical blocker, if Jess wants it revisited. A failed join
+  already gets a span attribute + `log.warn` today (the existing best-effort precedent),
+  which is enough to answer "which games have a Spine-record gap" from Honeycomb without
+  new code — see Further Notes.
 - **Any change to `card.played`**, its payload, or its Shuffler→Spine send
   (`sendCardPlayedToSpineBestEffort`) — untouched, already reaches the Spine today.
 - **Replacing `POST /join`'s URL/verb** — it stays `POST /join`; only its request/response
@@ -249,3 +261,12 @@ Scope.
   through this new payload shape unchanged (it already does today; just confirm nothing
   about the Spine's JSON round-trip — string vs. `null` — breaks the "present exactly
   when there's a back face" rule the schema documents).
+- **Why this ticket matters beyond log hygiene**: the Spine's log exists to become
+  training data for the Interpreter (Mountain 3). A `seat.joined` that only reaches the
+  Tabletop is invisible to that future work no matter how well-formed it is — the Spine
+  is the only place the Interpreter will ever look. That reframes what "done" means here:
+  it's not "the admin page looks nicer," it's "this is the first event kind for which
+  Mountain 2's promise is actually kept." The still-open items in Out of Scope
+  (`card.played`'s direct POST, the Tabletop's SSE subscriber) are the rest of that
+  promise, tracked in `.scratch/spine-in-the-middle/map.md` — this ticket doesn't
+  complete Mountain 2, it proves the shape the rest of it will take.
