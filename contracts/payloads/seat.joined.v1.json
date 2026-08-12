@@ -58,7 +58,7 @@
               }
             },
             "required": ["scryfallId", "instanceId"],
-            "additionalProperties": false
+            "additionalProperties": true
           },
           "cardName": {
             "type": "string",
@@ -76,7 +76,7 @@
           }
         },
         "required": ["card", "cardName", "frontImageUrl", "backImageUrl"],
-        "additionalProperties": false
+        "additionalProperties": true
       }
     },
     "gameCardIndex": {
@@ -86,5 +86,5 @@
     }
   },
   "required": ["deckName"],
-  "additionalProperties": false
+  "additionalProperties": true
 }

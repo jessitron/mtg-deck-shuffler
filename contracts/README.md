@@ -34,6 +34,19 @@ v0 catalog: `table.created`, `seat.taken`, `seat.joined`, `card.played`.
   TS) — never a warning, never a best-effort parse. Consistent with
   `apps/shuffler/notes/DESIGN-persistence-versioning.md`: old data fails loudly; a deploy may
   invalidate a Table, and we accept that today.
+- **Payload schemas ignore properties they don't recognize** (`additionalProperties:
+  true`, every `payloads/*.json` file, decided 2026-08-11) — a newer sender's extra,
+  optional field reaches an older receiver as a no-op instead of a hard validation
+  failure. This is *narrower* than "fail loudly": known fields still type-check
+  (wrong type, bad pattern, missing `required` all still reject); only genuinely
+  unrecognized properties pass through unexamined. **The envelope schemas keep
+  `additionalProperties: false`** — deliberately stricter, since a new envelope
+  field is meant to force a version bump that old readers reject loudly (see the
+  `scope` decision in `notes/DESIGN-event-contract-v0.md`). Payload evolution and
+  envelope evolution are different risk profiles: a payload's own sender/receiver
+  pair is usually one version apart at most (e.g. Shuffler → Tabletop, same
+  monorepo, same deploy), while the envelope is the one shape every future
+  consumer — including ones that don't exist yet — must agree on.
 - **Uniqueness travels with the event; truth-of-order stays with the log.**
   Senders mint `id` (idempotency — the Spine elides retried duplicates). The Spine
   assigns `seq` and `acceptedAt` on append; senders must not send them, and the

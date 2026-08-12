@@ -20,7 +20,7 @@
         }
       },
       "required": ["scryfallId", "instanceId"],
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "face": {
       "type": "string",
@@ -62,5 +62,5 @@
     }
   },
   "required": ["card", "face", "zoneHint", "frontImageUrl", "backImageUrl", "cardName", "owner", "isCommander"],
-  "additionalProperties": false
+  "additionalProperties": true
 }

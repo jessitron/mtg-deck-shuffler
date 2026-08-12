@@ -286,6 +286,12 @@ describe("seat joined", () => {
     expect(response.status).toBe(201);
   });
 
+  it("accepts a payload carrying a field the schema doesn't know about — payload schemas ignore extras, they don't reject them", async () => {
+    const event = seatJoined("seat-unknown-field");
+    const response = await post("seat-unknown-field", { ...event, payload: { ...event.payload, futureFieldFromANewerShuffler: "whatever" } });
+    expect(response.status).toBe(201);
+  });
+
   it("rejects an unknown event name — fail loudly, never silently drop", async () => {
     const response = await post("seat-unknown-name", seatJoined("seat-unknown-name", { name: "seat.taken" }));
     expect(response.status).toBe(400);

@@ -44,9 +44,10 @@ Two things here are deliberate stand-ins, marked in the source and easy to delet
    field-by-field comment block in `apps/shuffler/src/port-tabletop/types.ts`.
    `gameCardIndex` crosses the boundary freely now (`let-gamecardindex-out`,
    2026-08-10) — it only decodes to a card's rank in the public decklist, so the
-   guard that used to reject it via both schemas' `additionalProperties: false`
-   (still `false` for genuinely unknown fields) traded no real secrecy for a
-   reasoning cost nobody's threat model needed.
+   guard that used to reject it traded no real secrecy for a reasoning cost
+   nobody's threat model needed. (Payload schemas now use `additionalProperties:
+   true` — contracts/README.md — so an unrecognized field is a no-op rather than
+   a rejection either way.)
 2. **The in-memory room registry** (`src/server/rooms.ts`). Name-only (no table ids;
    the Spine absorbs table identity later). Rooms are **in-memory only** — a redeploy
    wipes the board. Accepted for v0; durable reconstruction is a filed buoy.
