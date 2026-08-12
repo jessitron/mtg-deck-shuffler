@@ -30,13 +30,21 @@ async function seedSleevedGame(page: Page): Promise<string> {
 }
 
 test.describe('/game buttons use the seat\'s resolved colors', () => {
-  test('hamburger toggle and library buttons render with the seat\'s primary color', async ({ page }) => {
+  test('library buttons render with the seat\'s primary color', async ({ page }) => {
     const gameId = await seedSleevedGame(page);
     await page.goto(`${BASE_URL}/game/${gameId}`);
 
-    await expect(page.locator('#menu-toggle')).toHaveCSS('background-color', hexToRgb(primaryColor));
     await expect(page.locator('.draw-button')).toHaveCSS('background-color', hexToRgb(primaryColor));
     await expect(page.locator('.draw-button')).toHaveCSS('color', textOnPrimary === 'white' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)');
+  });
+
+  test('hamburger toggle matches the commander outline / title background (the seat\'s secondary color)', async ({ page }) => {
+    const gameId = await seedSleevedGame(page);
+    await page.goto(`${BASE_URL}/game/${gameId}`);
+
+    await expect(page.locator('#menu-toggle')).toHaveCSS('background-color', hexToRgb(secondaryColor));
+    await expect(page.locator('.cool-command-zone-surround')).toHaveCSS('background-color', hexToRgb(secondaryColor));
+    await expect(page.locator('.game-title')).toHaveCSS('background-color', hexToRgb(secondaryColor));
   });
 
   test('Cards on table button renders with the seat\'s primary color', async ({ page }) => {
