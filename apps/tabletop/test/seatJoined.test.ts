@@ -239,6 +239,28 @@ describe("seat joined", () => {
     expect(area.cardBackImageUrl).toBeUndefined();
   });
 
+  it("remembers the seat's primary/secondary colors alongside its sleeve color", async () => {
+    const event = seatJoined("seat-identity-colors", {}, { sleeveColor: "#8b2f5c", primaryColor: "#8b2f5c", secondaryColor: "#123456" });
+    const response = await post("seat-identity-colors", event);
+    expect(response.status).toBe(201);
+
+    const area = getRoomRegistry().get("seat-identity-colors")!.seats.get(event.initiator.seatId as string)!;
+    expect(area.sleeveColor).toBe("#8b2f5c");
+    expect(area.primaryColor).toBe("#8b2f5c");
+    expect(area.secondaryColor).toBe("#123456");
+  });
+
+  it("a seat.joined with sleeveColor only (an old Shuffler build) still validates, with no primary/secondary stored", async () => {
+    const event = seatJoined("seat-colors-old-build", {}, { sleeveColor: "#8b2f5c" });
+    const response = await post("seat-colors-old-build", event);
+    expect(response.status).toBe(201);
+
+    const area = getRoomRegistry().get("seat-colors-old-build")!.seats.get(event.initiator.seatId as string)!;
+    expect(area.sleeveColor).toBe("#8b2f5c");
+    expect(area.primaryColor).toBeUndefined();
+    expect(area.secondaryColor).toBeUndefined();
+  });
+
   it("an unsleeved seat keeps the card-back image pile (today's look)", async () => {
     await post("seat-unsleeved", seatJoined("seat-unsleeved"));
     const shapes = shapesOf("seat-unsleeved");

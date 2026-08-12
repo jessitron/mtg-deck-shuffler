@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Ship: fleet
-Status: ready-for-agent
+Status: resolved
 
 **What to build:** At Shuffle Up and at restart-game, the Shuffler computes
 `colorsForPlaymat(playmatImagePath, sleeveColor)` (built in ticket 01) and sends the
@@ -23,12 +23,12 @@ being stored correctly, verified by contract tests, not by looking at a shape on
 
 **Blocked by:** 01 — reuses `colorsForPlaymat`.
 
-- [ ] `seat.joined.v1` schema has optional `primaryColor`/`secondaryColor` (hex pattern,
+- [x] `seat.joined.v1` schema has optional `primaryColor`/`secondaryColor` (hex pattern,
   matching `sleeveColor`'s)
-- [ ] Tabletop's payload TS type includes the new optional fields
-- [ ] `/start-game` computes and sends primary/secondary colors
-- [ ] `/restart-game` computes and sends primary/secondary colors the same way
-- [ ] A `seat.joined` payload with primary/secondary colors validates and the values land on
+- [x] Tabletop's payload TS type includes the new optional fields
+- [x] `/start-game` computes and sends primary/secondary colors
+- [x] `/restart-game` computes and sends primary/secondary colors the same way
+- [x] A `seat.joined` payload with primary/secondary colors validates and the values land on
   that seat's stored `PlayerArea`
-- [ ] A `seat.joined` payload with sleeveColor only (no primary/secondary — an old Shuffler
+- [x] A `seat.joined` payload with sleeveColor only (no primary/secondary — an old Shuffler
   build) still validates without error, and no downstream code reads `undefined` as a color

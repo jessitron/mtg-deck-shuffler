@@ -25,6 +25,16 @@
       "pattern": "^#[0-9a-fA-F]{6}$",
       "description": "The seat's sleeve as a solid color (hex). Player identity data — commander-damage counters need the raw hex. A game constant: chosen before the game, never changed mid-game."
     },
+    "primaryColor": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "description": "The seat's resolved identity color (hex): the sleeve color when one is chosen, otherwise the darker of the playmat's curated pair. Optional and additive — an older Shuffler build may send sleeveColor alone."
+    },
+    "secondaryColor": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "description": "The seat's resolved secondary identity color (hex), contrasting with primaryColor. Optional and additive — an older Shuffler build may send sleeveColor alone."
+    },
     "commanders": {
       "type": "array",
       "minItems": 0,

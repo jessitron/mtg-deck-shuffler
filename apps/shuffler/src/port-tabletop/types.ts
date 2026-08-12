@@ -120,6 +120,8 @@ export interface SeatJoinedPayload {
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
   sleeveColor?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
   commanders?: SeatJoinedCommander[];
 }
 
@@ -144,7 +146,9 @@ export function buildSeatJoinedEvent(
   playmatImageUrl?: string,
   cardBackImageUrl?: string,
   sleeveColor?: string,
-  commanders?: readonly GameCard[]
+  commanders?: readonly GameCard[],
+  primaryColor?: string,
+  secondaryColor?: string
 ): SeatJoinedEvent {
   return {
     id: randomUUID(),
@@ -163,6 +167,8 @@ export function buildSeatJoinedEvent(
       playmatImageUrl,
       cardBackImageUrl: sleeveColor ? undefined : cardBackImageUrl,
       sleeveColor,
+      primaryColor,
+      secondaryColor,
       commanders: commanders?.length ? commanders.map(buildSeatJoinedCommander) : undefined,
     },
   };

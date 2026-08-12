@@ -26,6 +26,9 @@ export interface PlayerArea {
   cardBackImageUrl?: string;
   /** The seat's sleeve (table-layout ticket 17) — wins over cardBackImageUrl; baked into each card at mint time. */
   sleeveColor?: string;
+  /** The seat's resolved identity colors — sleeveColor when chosen, else derived from the playmat. */
+  primaryColor?: string;
+  secondaryColor?: string;
   landCount: number;
   graveyardCount: number;
   stackCount: number;
