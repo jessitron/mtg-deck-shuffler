@@ -13,6 +13,10 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- Consider removing the animations owner, since the animations don't do much now.
+
+- bug: In tabletop, often after selecting a card, I right-click and the menu comes up... once. After that, right-clicking does nothing, until I like do a bunch of other things, click outside it (doesn't work usually), click other things, wiggle stuff, refresh the page even... at some point the right-click menu becomes available again.
+
 - The Shuffler needs to display in-hand and revealed cards as sleeved, when the player has chosen sleevers. They need to be on a sleeve-colored rectangle, like in Tabletop.
 
 - `commander-tax-tracker` Above the Command Zone, above each commander, add a Play Count tracker. It is a number that starts at 0. It can be incremented or decremented (down to 0) or typed in. When the commander leaves the command zone, it increments!

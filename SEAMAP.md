@@ -52,7 +52,7 @@ doesn't touch it; the promise's owner is whoever designs the public/shadow paylo
 shapes, not a guard standing at the door.
 
 ## Sea Monster
-
+  
 Right now, we are blocked in much work by a sea monster named Schema Change Chaos.
 I want to make an owner and skills to do the schema enhancements, so that every agent in the world
 doesn't have to think so hard about it.
