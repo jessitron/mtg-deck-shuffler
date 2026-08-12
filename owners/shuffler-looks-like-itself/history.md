@@ -801,6 +801,45 @@ Both ships' `verify-fleet-tokens.spec.ts` assert the four new tokens resolve. Th
 matters most: nothing there sets a font yet, so a broken import would otherwise be invisible until
 ticket 11.
 
+## 2026-08-11 — `/game`'s chrome buttons started reading the seat's own colors, reversing the same-day "static chrome colors stay put" ruling
+
+`aca3f2f` ruled, earlier the same day, that `--playmat-one`/`--playmat-two` (the hamburger,
+history buttons, etc.) stay fixed rather than following a seat's resolved colors — a
+question this KB's `playmat-colours-fleet-or-shuffler` buoy had left open since `4396aea`
+(whether the playmat's colour identity is the fleet's or the Shuffler's). Jess reopened it
+the same day and reversed it: *"this is a realization of the original intended purpose of
+`--playmat-one` etc."* — the tokens were always meant to carry the seat's own look, not a
+fixed pair.
+
+**Mechanism: CSS custom-property inheritance, not per-component plumbing.**
+`--seat-primary`/`--seat-secondary` (+ `--seat-text-on-primary`/`-secondary` for contrast)
+land as an inline style on `.playmat-game` — deliberately not `#game-container`, which gets
+`outerHTML`-swapped on every game-state update and would lose the properties on the next
+render; `.playmat-game` is the stable ancestor. Every chrome button below it reads
+`var(--seat-primary, <old-fallback>)` for free — the fallback is the *old* fixed value
+(`--playmat-one`/`--dark-pink`/`black`, depending on the site), so a page that somehow never
+sets the custom property degrades to exactly today's look rather than to nothing.
+
+**Scope was drawn deliberately, chrome only:** the hamburger, history buttons, the three
+`.pushable-flat` sites on `/game` (Go to Table, Cards on table, Mulligan — via a new scoped
+`.playmat-game .pushable-flat` override, `.pushable-flat` itself untouched everywhere else),
+and the bare-black card/library buttons. **Not** in scope: `.end-game-actions` (dark
+identity chrome, not seat-colored), the card-modal's `.card-action-button`/
+`.modal-action-button` family (their colors carry per-action-type *meaning* — this-moves-
+the-card vs this-is-a-tool — not identity), and the debug-copy button.
+
+**`color-mix(in srgb, <bg> 65%, black)` replaced three server-hand-computed shadow hexes**
+(`#978856`, `#2e4c73`, and the box-shadow literals inside `.pushable-flat.pushable-dark`) —
+each button's shadow tone now derives from its own (now-variable) background at render
+time, in CSS, rather than needing a fourth color threaded in alongside primary/secondary/
+text-on-primary/text-on-secondary.
+
+**`--playmat-one`/`--playmat-two` are not removed** — they're exactly what the new
+`var(--seat-primary, --playmat-one)` fallback resolves to whenever a seat has no resolved
+color, which `colorsForPlaymat`'s fixed fallback pair means is never in practice. The
+`playmat-colours-fleet-or-shuffler` buoy is answered by this: the playmat's colour identity
+does travel per-seat now, at least on `/game`'s chrome.
+
 ## 2026-08-07 — Jess shipped two appearance commits directly, outside `/design`
 
 `f42a99a` **Jess does some CSS updates to get the prep screen looking like she wants it**, then
