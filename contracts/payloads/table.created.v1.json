@@ -17,5 +17,5 @@
     }
   },
   "required": ["name", "creator"],
-  "additionalProperties": false
+  "additionalProperties": true
 }

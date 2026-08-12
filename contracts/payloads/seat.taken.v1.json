@@ -23,5 +23,5 @@
     }
   },
   "required": ["seatId", "seat", "playerName"],
-  "additionalProperties": false
+  "additionalProperties": true
 }
