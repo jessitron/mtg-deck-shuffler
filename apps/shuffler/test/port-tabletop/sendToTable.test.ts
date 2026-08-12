@@ -3,6 +3,7 @@ import { FakeTabletopGateway } from "../../src/port-tabletop/FakeTabletopGateway
 import { sendCardToTableFirst, sendSeatJoinedBestEffort, zoneHintForPlay } from "../../src/port-tabletop/sendToTable.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
 import { lightningBolt, testProvenance } from "../generators.js";
+import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../../src/table-look.js";
 
 
 const forest: CardDefinition = {
@@ -154,6 +155,29 @@ describe("sendSeatJoinedBestEffort", () => {
     const { event } = fake.sentSeatJoinedEvents[0];
     expect(event.payload.sleeveColor).toBeUndefined();
     expect(event.payload.cardBackImageUrl).toMatch(/^https:\/\//);
+  });
+
+  it("a picked sleeve becomes primaryColor, and secondaryColor is the playmat's more-contrasting curated color", async () => {
+    const fake = new FakeTabletopGateway();
+
+    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", "#8b2f5c");
+
+    const { event } = fake.sentSeatJoinedEvents[0];
+    const expected = colorsForPlaymat(DEFAULT_PLAYMAT_PATH, "#8b2f5c");
+    expect(event.payload.primaryColor).toBe(expected.primaryColor);
+    expect(event.payload.secondaryColor).toBe(expected.secondaryColor);
+    expect(event.payload.primaryColor).toBe("#8b2f5c");
+  });
+
+  it("no sleeve picked → primary/secondary still resolve from the playmat's curated pair", async () => {
+    const fake = new FakeTabletopGateway();
+
+    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck");
+
+    const { event } = fake.sentSeatJoinedEvents[0];
+    const expected = colorsForPlaymat(DEFAULT_PLAYMAT_PATH, undefined);
+    expect(event.payload.primaryColor).toBe(expected.primaryColor);
+    expect(event.payload.secondaryColor).toBe(expected.secondaryColor);
   });
 
   it("is a no-op when no tabletop is configured — Shuffle Up must not fail", async () => {

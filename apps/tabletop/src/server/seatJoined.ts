@@ -24,6 +24,8 @@ interface SeatJoinedPayload {
   playmatImageUrl?: string;
   cardBackImageUrl?: string;
   sleeveColor?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
   commanders?: SeatJoinedCommander[];
   gameCardIndex?: number;
 }
@@ -51,7 +53,7 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
     return;
   }
   const { playerName } = envelope.initiator;
-  const { deckName, playmatImageUrl, cardBackImageUrl, sleeveColor, commanders } = envelope.payload;
+  const { deckName, playmatImageUrl, cardBackImageUrl, sleeveColor, primaryColor, secondaryColor, commanders } = envelope.payload;
 
   trace.getActiveSpan()?.setAttributes({
     "event.id": envelope.id,
@@ -86,6 +88,8 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
     playmatImageUrl,
     cardBackImageUrl,
     sleeveColor,
+    primaryColor,
+    secondaryColor,
   });
 
   const seatCommanders = commanders ?? [];

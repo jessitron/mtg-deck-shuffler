@@ -2,6 +2,7 @@ import { trace } from "@opentelemetry/api";
 import { GameState, GameCard, TableInfo } from "../GameState.js";
 import { TabletopPort, ZoneHint, buildCardPlayedEvent, buildSeatJoinedEvent, defaultPlaymatImageUrl, playmatImageUrlFromPath, cardBackImageUrl } from "./types.js";
 import { log } from "../log.js";
+import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../table-look.js";
 
 export function zoneHintForPlay(gameCard: GameCard): ZoneHint {
   return gameCard.card.cardTypes.includes("Land") ? "battlefield" : "stack";
@@ -44,7 +45,18 @@ export async function sendSeatJoinedBestEffort(
   if (!tabletopPort) return;
   const { tableName, seatId, playerName } = tableInfo;
   const playmatImageUrl = playmatImagePath ? playmatImageUrlFromPath(playmatImagePath) : defaultPlaymatImageUrl();
-  const event = buildSeatJoinedEvent({ seatId, playerName }, deckName, tableName, playmatImageUrl, cardBackImageUrl(), sleeveColor, commanders);
+  const { primaryColor, secondaryColor } = colorsForPlaymat(playmatImagePath ?? DEFAULT_PLAYMAT_PATH, sleeveColor);
+  const event = buildSeatJoinedEvent(
+    { seatId, playerName },
+    deckName,
+    tableName,
+    playmatImageUrl,
+    cardBackImageUrl(),
+    sleeveColor,
+    commanders,
+    primaryColor,
+    secondaryColor
+  );
   try {
     await tabletopPort.sendSeatJoined(tableName, event);
   } catch (error) {

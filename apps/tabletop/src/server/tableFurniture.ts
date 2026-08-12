@@ -200,6 +200,9 @@ export interface PlayerAreaLook {
   cardBackImageUrl?: string;
   /** The seat's sleeve (ticket 17) — when present it wins; cardBackImageUrl is dropped. */
   sleeveColor?: string;
+  /** The seat's resolved identity colors. */
+  primaryColor?: string;
+  secondaryColor?: string;
 }
 
 export async function ensurePlayerArea(
@@ -219,6 +222,8 @@ export async function ensurePlayerArea(
     playmatImageUrl: look.playmatImageUrl,
     cardBackImageUrl: look.sleeveColor ? undefined : look.cardBackImageUrl,
     sleeveColor: look.sleeveColor,
+    primaryColor: look.primaryColor,
+    secondaryColor: look.secondaryColor,
     landCount: 0,
     graveyardCount: 0,
     stackCount: 0,
