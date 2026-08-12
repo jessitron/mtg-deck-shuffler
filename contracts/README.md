@@ -2,7 +2,9 @@
 
 The event contract the Spine publishes and every app translates itself into.
 Language-neutral JSON Schema; the decisions behind it live in
-`notes/DESIGN-event-contract-v0.md` (all six settled for v0).
+`notes/DESIGN-event-contract-v0.md` (all six settled for v0) and
+`notes/DESIGN-schema-evolution-policy.md` (why the envelope and payloads are strict
+differently, decided after v0).
 
 ## Files
 
@@ -40,13 +42,12 @@ v0 catalog: `table.created`, `seat.taken`, `seat.joined`, `card.played`.
   failure. This is *narrower* than "fail loudly": known fields still type-check
   (wrong type, bad pattern, missing `required` all still reject); only genuinely
   unrecognized properties pass through unexamined. **The envelope schemas keep
-  `additionalProperties: false`** — deliberately stricter, since a new envelope
-  field is meant to force a version bump that old readers reject loudly (see the
-  `scope` decision in `notes/DESIGN-event-contract-v0.md`). Payload evolution and
-  envelope evolution are different risk profiles: a payload's own sender/receiver
-  pair is usually one version apart at most (e.g. Shuffler → Tabletop, same
-  monorepo, same deploy), while the envelope is the one shape every future
-  consumer — including ones that don't exist yet — must agree on.
+  `additionalProperties: false`**, permanently — full reasoning, including why the two
+  layers need different policies, in `notes/DESIGN-schema-evolution-policy.md`. Short
+  version: the Shuffler, Tabletop, and Spine deploy independently, not in lockstep, so
+  a payload only needs to tolerate a temporary rollout window; the envelope has no
+  per-field version dial to fall back on, so its strictness is what makes "a new field
+  needs a version bump" actually enforceable.
 - **Uniqueness travels with the event; truth-of-order stays with the log.**
   Senders mint `id` (idempotency — the Spine elides retried duplicates). The Spine
   assigns `seq` and `acceptedAt` on append; senders must not send them, and the

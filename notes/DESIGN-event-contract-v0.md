@@ -147,6 +147,13 @@ subscription is where TS-side contract validation lives. (In v0's scaffolding th
 Shuffler POSTs to the Tabletop directly; the code carries `// JES-128` markers where
 validation will land.)
 
+**Revisited (2026-08-12):** "fail loudly on unknown name or version" turned out to have
+been implemented as "fail loudly on *any* unrecognized field, anywhere, including the
+payload" — stricter than decided here, and it broke the first payload change that added
+an optional field (`colors-from-playmat-to-life-counter` ticket 02). The envelope keeps
+failing loudly on anything unrecognized; payloads now ignore fields they don't know
+about. Full reasoning in `notes/DESIGN-schema-evolution-policy.md`.
+
 ## Decision 6: `scope` — DECIDED: leave it off v0
 
 Round 1's insight stands: filtering wants a dimension that payload-schema naming
