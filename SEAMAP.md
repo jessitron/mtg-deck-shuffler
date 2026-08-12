@@ -45,11 +45,19 @@ Mural, not a rewrite.
 
 Spectator mode is a constraint on every mountain, not a mountain: anyone can join a
 table to look — public events, commentary, hand counts but never hands. That promise is
-about what the app *volunteers* on public/shadow events — a shadow event simply
+about what the app _volunteers_ on public/shadow events — a shadow event simply
 shouldn't carry a card identity in its payload design — not about policing every
 boundary a payload crosses. Removing a boundary check (e.g. `let-gamecardindex-out`)
 doesn't touch it; the promise's owner is whoever designs the public/shadow payload
 shapes, not a guard standing at the door.
+
+## Sea Monster
+
+Right now, we are blocked in much work by a sea monster named Schema Change Chaos.
+I want to make an owner and skills to do the schema enhancements, so that every agent in the world
+doesn't have to think so hard about it.
+
+Most of the open tickets want schema changes, and I want to establish this pricess first.
 
 ## Safe Harbor
 
