@@ -527,6 +527,13 @@ self-rendering custom shape.
   tokens in `MtgCounterShapeUtil.tsx`, deliberately not starting a stylesheet. Whoever
   writes the Tabletop's first CSS rule still decides where it lives — and it must not be
   answered by starting a `:root` there.
+  - **First concrete case waiting on that stylesheet: tldraw's own toast chrome
+    (2026-08-12).** The copy-disabled hint (`useCopyHint` in `TablePage.tsx`, via
+    `useToasts().addToast()`) is the fleet's first toast, and it ships in tldraw's stock
+    unstyled look — generic sans font, tldraw's own color tokens — rather than restyled to
+    the fleet's identity. Not a fresh decision to defer: restyling `.tlui-toast__container`
+    would *be* the first Tabletop-only CSS rule, so it's blocked on this same open question,
+    not a new one.
 - **~~Still open: font tokens.~~ DECIDED and shipped 2026-08-07 (`f79bc7d`).** Jess: *"yeah, go
   for it! I'm all for more tokens."* `--font-chrome` / `--font-content` / `--font-display` are in
   `packages/design-tokens/tokens.css`, **named by role rather than by typeface** because three

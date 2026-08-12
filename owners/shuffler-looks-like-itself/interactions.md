@@ -681,6 +681,11 @@ not by recomputing new numbers.**
   is `isLocked` and cards are not. This owner argued for suppressing resize and was overruled
   — see [README.md](README.md) → "On the canvas, a card keeps its full handle set" before
   reopening it.
+- **tldraw's toast chrome is stock, not fleet-styled (added 2026-08-12)** — see
+  [README.md](README.md) → tldraw limits. `TablePage.tsx`'s copy-disabled hint
+  (`useCopyHint`/`COPY_DISABLED_TOAST`) is the fleet's first `useToasts().addToast()` call,
+  and it renders in tldraw's own default toast look rather than the fleet's typefaces/tokens
+  — restyling it needs the still-missing Tabletop ship-local stylesheet.
 - **A card's `indicator()` has no decided appearance.** Styling it away from tldraw's default
   is its own design decision needing its own sign-off — the classic ride-along. If an
   implementation ticket for `mtg-card` reaches you with a custom indicator in it, that's the

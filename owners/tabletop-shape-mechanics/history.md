@@ -1320,3 +1320,43 @@ Full detail: `apps/tabletop/src/server/tableFurniture.ts` (`FURNITURE_IMAGE_ID_M
 `apps/tabletop/test/verification/verify-life-counter.spec.ts` (locator fix + both rewritten
 selection-persistence assertions). See `interactions.md` watch point 13's new sub-point and
 `files.md`'s `tableFurniture.ts`/`verify-life-counter.spec.ts` entries.
+
+## Copy hint — a toast explaining why ctrl+c does nothing (2026-08-12)
+
+`apps/tabletop/src/client/TablePage.tsx` gained a "Copy doesn't work here. Use duplicate (ctrl-d)
+instead." toast, shown whenever a player tries to copy a selected shape. **Not this owner's core
+charge** (it's clipboard/keyboard interception, not a ShapeUtil hook or the selection state
+machine) — recorded here only because the mechanics behind it are a genuine tldraw quirk in the
+same "read the source, don't guess" vein this KB already keeps, and because it landed in
+`TablePage.tsx`, a file this owner already tracks (shape/tool registration site).
+
+- **`overrides.actions.copy` never intercepts the ctrl+c/cmd+c keyboard shortcut.** tldraw's
+  `useKeyboardShortcuts` hook hardcodes `SKIP_KBDS = ["copy", "cut", "paste", "asset"]` — those
+  four action ids are deliberately never wired to keyboard dispatch at all. So
+  `uiOverrides.actions.copy` (added here to catch the Edit-menu/context-menu "Copy" item) is a
+  menu-only hook; the keyboard path bypasses `overrides.actions` entirely and is handled by
+  `<Tldraw>`'s own `useNativeClipboardEvents`, which attaches a bubble-phase
+  `document.addEventListener("copy", ...)` listener that reads
+  `editor.getSelectedShapeIds()` directly.
+- **The fix intercepts the keyboard path with a second, capturing listener**: a new
+  `useCopyHint()` hook (mounted from `ToolbarWithCounter`, already inside the tldraw UI context so
+  `useEditor()`/`useToasts()` are available) adds `window.addEventListener("copy", handler,
+  { capture: true })`. Capture-phase on `window` reliably fires before tldraw's own bubble-phase
+  listener on `document`, since `window` is an ancestor of `document` in the event's propagation
+  path — confirmed by reasoning about DOM event-phase ordering, not by trial and error. The handler
+  checks `editor.getSelectedShapeIds().length > 0 && editor.getEditingShapeId() === null` (mirroring
+  tldraw's own no-op guard for the native listener) before calling `preventDefault()` +
+  `stopImmediatePropagation()` and showing the toast, so copying real text while mid-edit on a
+  counter/note is untouched.
+- **Toast uses tldraw's built-in `useToasts().addToast`** — no custom toast component, same
+  `COPY_DISABLED_TOAST` object reused by both the menu-action override and the keyboard listener.
+- **Test**: `apps/tabletop/test/verification/verify-copy-hint.spec.ts` — selects a card via
+  marquee-drag (not a direct click), because a single click on a counter/card enters text-edit mode
+  for some shapes and a direct click on this app's `mtg-card` would otherwise conflate this test
+  with watch point 1's selection-deferral quirk; marquee-select sidesteps that entirely.
+
+**Not added as a new watch point** — this doesn't touch a ShapeUtil hook, the `SelectTool` state
+machine, or shape selection state as this KB defines it; it's tldraw's *clipboard* event wiring,
+a sibling gotcha worth having on record next to watch point 24's `editor.on('event', ...)`
+targeting quirk, but a different mechanism. If a future change needs to intercept `cut`/`paste`
+too, the same `SKIP_KBDS` fact and capture-on-`window` trick apply.
