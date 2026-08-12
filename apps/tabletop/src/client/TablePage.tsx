@@ -10,7 +10,9 @@ import {
   TLComponents,
   TldrawUiMenuItem,
   TLUiOverrides,
+  useEditor,
   useIsToolSelected,
+  useToasts,
   useTools,
 } from "tldraw";
 import "tldraw/tldraw.css";
@@ -37,6 +39,13 @@ const shapeUtils = [
 
 const tools = [MtgCounterTool];
 
+const COPY_DISABLED_TOAST: Parameters<ReturnType<typeof useToasts>["addToast"]>[0] = {
+  id: "copy-disabled-hint",
+  title: "Copy doesn't work here",
+  description: "Use duplicate (ctrl-d) instead.",
+  severity: "info",
+};
+
 const uiOverrides: TLUiOverrides = {
   tools(editor, toolItems) {
     toolItems["mtg-counter"] = {
@@ -47,9 +56,44 @@ const uiOverrides: TLUiOverrides = {
     };
     return toolItems;
   },
+  actions(_editor, actions, { addToast }) {
+    actions.copy = {
+      ...actions.copy,
+      onSelect: () => {
+        addToast(COPY_DISABLED_TOAST);
+      },
+    };
+    return actions;
+  },
 };
 
+/**
+ * tldraw handles ctrl+c/cmd+c itself, via the browser's native "copy" event
+ * rather than the `overrides.actions` map — `copy`/`cut`/`paste` are
+ * explicitly skipped from the action-keyboard dispatcher (see tldraw's
+ * `useKeyboardShortcuts` `SKIP_KBDS`). So the only way to intercept the
+ * keyboard shortcut is to out-race tldraw's own "copy" listener with a
+ * capturing one on `window`, which fires before it.
+ */
+function useCopyHint() {
+  const editor = useEditor();
+  const { addToast } = useToasts();
+  useEffect(() => {
+    const handleCopy = (event: ClipboardEvent) => {
+      if (editor.getSelectedShapeIds().length === 0 || editor.getEditingShapeId() !== null) {
+        return;
+      }
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      addToast(COPY_DISABLED_TOAST);
+    };
+    window.addEventListener("copy", handleCopy, { capture: true });
+    return () => window.removeEventListener("copy", handleCopy, { capture: true });
+  }, [editor, addToast]);
+}
+
 function ToolbarWithCounter(props: React.ComponentProps<typeof DefaultToolbar>) {
+  useCopyHint();
   const toolItems = useTools();
   const isCounterSelected = useIsToolSelected(toolItems["mtg-counter"]);
   return (
