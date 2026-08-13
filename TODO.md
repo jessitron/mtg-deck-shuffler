@@ -17,6 +17,13 @@ section is just a wall between Jess and the live work.
 
 - Consider removing the animations owner, since the animations don't do much now.
 
+- `/design` specimen owed for the on-brand `mtg-title` deck-title label (Orbitron via
+  `var(--font-chrome)`, colored by the deck's darker identity color). Cross-ship: the shape
+  lives in `apps/tabletop`, the gallery lives in `apps/shuffler/views/design.ejs` — stage it
+  as a `.stage-white` Tabletop mock, per precedent (counter-disc, sleeved-card). Buoyed from
+  the 2026-08-13 restyle rather than reached across from that Tabletop-scoped change. See
+  `owners/shuffler-looks-like-itself/open-choices.md` → the deck-title `mtg-title` entry.
+
 - `editable-deck-title` On the Tabletop, let the deck title be editable. It's currently a
   locked tldraw `text` shape reading `${playerName} 〜 ${deckName}`. It's locked on purpose —
   a live bug was that any player could drag/delete another player's name — and tldraw ties

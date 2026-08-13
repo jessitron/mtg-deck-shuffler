@@ -735,20 +735,38 @@ self-rendering custom shape.
   explicitly that an `indicator()` looking like anything other than tldraw's default is a
   **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket
   is where it will try to hitch a ride.
-- **Open: the deck-title label's on-brand typography (`mtg-title`, 2026-08-12, `96551ef`).**
-  `.scratch/editable-deck-title/` turned the seat/deck label into a self-rendering custom
-  `BaseBox` shape (so it can be edited in place), which for the first time makes on-brand
-  canvas typography *possible* for this label — see [README.md](README.md)'s seat-name-label
-  paragraph. The change deliberately shipped only a **faithful reproduction** of the old
-  off-brand stock look (green `#099268`, `Georgia` serif, raw literals in
-  `MtgTitleShapeUtil.tsx` — a knowingly-untokenized placeholder), and the design owner blocked
-  the on-brand restyle from riding along. **Being staged for Jess separately.** Two facts for
-  whoever stages it: (1) **no fitting green token exists — `--mana-G` (`#2a8439`, Forest) is a
-  false friend**, a colour-pie *identity* token and a different green from the label's
-  `#099268`, so the restyle needs a fresh chrome/text colour decision (likely the identity
-  palette, dropping green), not a reuse; (2) it needs a `/design` `.stage-white` mock staged
-  **with** the on-brand options, not a specimen of the current scaffolding. Same "stage both,
-  let Jess pick" shape as choice 7.
+- **The deck-title label's on-brand typography (`mtg-title`) — DECIDED and BUILT 2026-08-13
+  (`worktree-deck-title-orbitron`).** `96551ef` (2026-08-12) turned the seat/deck label into a
+  self-rendering custom `BaseBox` shape (editable in place), shipping only a faithful
+  reproduction of the old off-brand stock look (green `#099268`, `Georgia` serif) as a
+  placeholder, with the on-brand restyle blocked from riding along. The restyle then landed,
+  with this owner's `-review`:
+  - **Font: `var(--font-chrome)` (Orbitron)** — the role token, no typeface literal.
+  - **Color: the darker of the deck's two identity colors** — Jess's choice, neither of the
+    two the earlier prediction guessed ("identity palette or a new named token"). A new `color`
+    prop on the shape (`src/shared/mtgTitleShape.ts`), computed server-side by `darkerColor()`
+    in `tableFurniture.ts` (relative-luminance compare) from the raw `primaryColor`/
+    `secondaryColor` hexes on `seat.joined` — **domain data, same identity-data exemption as
+    `sleeveColor`**, precedent `/game`'s `--seat-primary`/`--seat-secondary`. Fallback
+    `var(--deep-space)` when a seat carries neither (also `getDefaultProps`' default).
+  - **`--mana-G` stayed out**, per the false-friend reasoning kept below.
+  - **Rest chrome unchanged:** transparent/borderless at rest (choice 6 untouched), choice 5's
+    focus ring untouched.
+
+  **The reasoning, kept because it's the valuable part:** no fitting green token exists —
+  `--mana-G` (`#2a8439`, Forest) is a false friend, a colour-pie *identity* token and a
+  different green from the placeholder's `#099268` (tldraw's own green) — so the restyle needed
+  a fresh chrome/text colour decision, not a reuse. It dropped the green entirely for
+  deck-identity color. Verified: 141 vitest pass (new `darkerColor` unit tests +
+  `mtg-title` color-prop assertions), `verify-deck-title.spec.ts` asserts computed
+  `fontFamily` contains Orbitron and `color === rgb(26, 10, 46)` for a near-black deck color.
+
+  **Still owed, and now the one open thread: a `/design` specimen** — a `.stage-white` Tabletop
+  mock. It's cross-ship (Shuffler-side gallery, Tabletop shape), so it was buoyed rather than
+  reached across for in this Tabletop-scoped change (the right call). **Open risk, flagged to
+  Jess, not resolved:** contrast of a near-black title against real dark playmat art was not
+  verified — the test playmat art 404s, so it was only checked on a blank background. No
+  minimum-contrast floor was invented; this is a watch item, not a rule.
 - **~~The gallery has zero Tabletop specimens~~ — it has its first five now (2026-08-07,
   `a304c52`, ticket 11), and the cross-app stylesheet question is still unresolved.** The
   gallery's credibility rests on rendering the *app's own* stylesheets. Ticket 11's § Tabletop
