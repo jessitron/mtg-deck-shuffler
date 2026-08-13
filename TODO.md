@@ -17,11 +17,11 @@ section is just a wall between Jess and the live work.
 
 - bug: In tabletop, often after selecting a card, I right-click and the menu comes up... once. After that, right-clicking does nothing, until I like do a bunch of other things, click outside it (doesn't work usually), click other things, wiggle stuff, refresh the page even... at some point the right-click menu becomes available again.
 
-- The Shuffler needs to display in-hand and revealed cards as sleeved, when the player has chosen sleevers. They need to be on a sleeve-colored rectangle, like in Tabletop.
+- GRILLING: Tokens support. Archidekt lets you add tokens to your deck. We could bring them in and make them available on the board. They can tap like cards, they hold counters etc. but if you drag them to the graveyard, they go back to their place under your playmat (or wherever we decide to line them up). Oh and if you drag a token from its spot where it was drawn to the board it immediately creates another one in the spot it left; each token is an infinite pile. Then: people need to add tokens as the game is going, because we rarely have them all prepped before hand. Paste any image, right-click and say "make token." A token (infinite pile) appears next to the others. Now they can be clicked to tap.
 
-- `commander-tax-tracker` Above the Command Zone, above each commander, add a Play Count tracker. It is a number that starts at 0. It can be incremented or decremented (down to 0) or typed in. When the commander leaves the command zone, it increments! (This is commander tax — how many times the commander has been cast.)
-  - Jess's call (2026-08-11): this belongs on the **Tabletop**, not the Shuffler. Nothing exists yet — no cast count anywhere. The Shuffler's command zone (`formatCommandZoneHtmlFragment`, `src/view/common/shared-components.ts`) is not the target surface; it needs its own home on the Tabletop's command-zone rendering.
-  - (merged the duplicate `commander-tax-counter` item into this one; was: JES-81)
+- The Shuffler's game page needs to display in-hand and revealed cards as sleeved, when the player has chosen sleevers. They need to be on a sleeve-colored rectangle, like in Tabletop.
+
+- `commander-tax-tracker` on the Tabletop, Above the Command Zone, above each commander, add a Play Count tracker. It is a number that starts at 0. It can be incremented or decremented (down to 0) or typed in. When the commander leaves the command zone, it increments! (This is commander tax — how many times the commander has been cast.)
 
 - `commander-snap` When I put my commander back in my command zone, it snaps to its starting position, covering its shadow.
 
@@ -33,53 +33,6 @@ D 👋🏾
 ```
 
 and I want to drop a card in between C and D, then the drop zone between them is either after C or before D, it isn't both, and it isn't predictable. I want it to be both. What if instead of `[dropzone, card, dropzone, card, dropzone]` the flexbox contained `[[dropzone, card, dropzone],  [dropzone, card, dropzone]] such that two adjacent dropzones overlap completely and function the same as one? Then both C and D would have dropzones on either side.
-
-- GRILLING: bug: counters can't be copied... actually neither can images, cards, etc. They can be duplicated, so there's a workaround. (Tabletop)
-  - Triage research (2026-08-10): not a shape-specific bug — it's a side effect of the
-    2026-08-09 decision to serve the deployed Tabletop over plain `http://` to dodge tldraw's
-    unlicensed-HTTPS canvas-blanking. `navigator.clipboard` only exists in secure contexts
-    (HTTPS or localhost), so on the deployed table it's `undefined` and tldraw's clipboard code
-    silently no-ops for every shape type — matching the bug report exactly. Duplicate (`Ctrl+D`)
-    works because it bypasses the clipboard via `editor.duplicateShapes()`.
-  - Fixing it "for real" reopens the http/https tradeoff settled a day ago (serve HTTPS + pay
-    for/acquire a tldraw license, or leave it). A narrower option: build an in-app, non-OS
-    clipboard for same-canvas copy/paste — new interaction design, not a bug fix, and would
-    want `tabletop-shape-mechanics` owner input.
-  - Jess's call needed: is OS-level (cross-app/cross-tab) copy/paste actually required, or is
-    same-canvas copy/paste enough to justify a custom in-app clipboard — or is `Ctrl+D` an
-    acceptable permanent answer given the deliberate http-only tradeoff?
-
-- GRILLING: `sharing-hidden-zones` Decide how library/hand information gets shared when it _should_ be
-  - Jess, 2026-08-07, working out where "never hands" really lives: _"there's actually an
-    outstanding decision: how do we share library/hand information when it **should** be shared?
-    …Sometimes there's 'look at target player's hand' and we need a way to share that — it might
-    wind up in Shuffler, probably not Tabletop."_
-  - The fleet keeps hidden zones (that's the Shuffler's whole job) but Magic constantly demands
-    **deliberate** revealing: reveal the top card, reveal until you hit a land, Thoughtseize
-    someone's hand, play with the top card revealed. None of it has a home today.
-  - **Half the mechanism already exists**, which makes this smaller than it looks: `GameState`
-    has a real **`Revealed` zone** — `reveal(position)`, `revealByGameCardIndex()`,
-    `listRevealed()`, `RevealedLocation` — and `playCard` already accepts a card that's in hand
-    _or_ revealed. What's missing is that a `Revealed` card is only visible in **that player's own
-    browser**; no other player can see it. Sharing today is "turn your screen" / Discord.
-  - **The split that probably decides it — symmetric vs asymmetric reveals:**
-    - **Symmetric** ("reveal the top card of your library to everyone") is _physical_. At a real
-      table you reveal by **putting the cards where everyone can see them** — which is what the
-      Tabletop is. That argues the Tabletop, not a Shuffler view: revealed cards become real card
-      shapes on the shared canvas, and it composes with everything already decided there.
-    - **Asymmetric** ("look at target player's hand" — one opponent sees it, nobody else) **cannot**
-      be the Tabletop: the canvas has no privileged actor and hides nothing
-      (`notes/DESIGN-the-table-vision.md` § Principles). So Jess's instinct is right for this half —
-      it's a Shuffler affordance, or, per the players-own-the-game principle, possibly not a feature
-      at all: hold your hand up to the camera.
-      Worth checking whether that split is real before designing either half; if it holds, this is two
-      small items rather than one hard one.
-  - Interacts with `let-gamecardindex-out` above (that one removes an accidental-leak guard; this one
-    is about intentional revealing — don't conflate them) and with spectator mode, which `SEAMAP.md`
-    makes a constraint on every mountain: "public events, commentary, hand counts but never hands."
-    ← mountain: tabletop-replaces-mural
-
-- [ ] DEFERRED `card-images-through-backend` Route every rendered card image through our backend instead of straight to Scryfall — ruled out of scope for the verify-suite-speed effort (commit `50ca157`); real product work whenever it's picked up
 
 - GRILLING: `card-zoom-modal` Give a Tabletop card a modal overlay that shows its text really big, and offers flip
   - Jess, verbatim, 2026-08-07: _"Something cards do need to offer: a modal overlay that displays
@@ -99,44 +52,7 @@ and I want to drop a card in between C and D, then the drop zone between them is
     zoom modal is a plausible home for the flip affordance — so 06 may want to know this exists,
     even though 06 lands first and this doesn't block it.
     ← priority: later
-
-- TICKETED `tabletop-view-rotation` — two tickets under `.scratch/tabletop-view-rotation/issues/`,
-  both `Status: ready-for-agent`: `01-local-view-rotation-controls.md` (no blockers) and
-  `02-counter-rotate-tldraw-chrome.md` (blocked by 01). Say "do ticket 01" to start.
-
-- GRILLING `tabletop-card-orientation` Cards and zones rotate in the shared document to face
-  their owner's seat
-  - Follow-on from `tabletop-view-rotation` (spec at `.scratch/tabletop-view-rotation/spec.md`)
-    — **blocked on that ticket landing first**. Surfaced 2026-08-10 while grilling it: rotating
-    the _view_ is local/CSS-only, but making a player's own cards actually read right-side-up to
-    them (the "whole point" of view rotation, per Jess) needs cards/zones to have real rotation
-    in the _shared, synced_ document — a different layer entirely from the view-rotation ticket.
-  - `cardLayout.ts` currently keeps every zone deliberately upright/unrotated ("E/W look sideways
-    and that's accepted", DESIGN.md) — this item reopens that acceptance for seats' own zones,
-    at minimum.
-  - Needs new plumbing that doesn't exist anywhere yet: the client has no concept of "which
-    seat is this browser" (seats are tracked server-side only, `seatJoined.ts`/`cardLayout.ts`,
-    with compass slots N/S/E/W). Once this lands, `tabletop-view-rotation`'s Home control also
-    stops being literal 0° and becomes genuinely seat-relative.
-  - Not yet grilled to a spec — needs its own session. Likely touches shape rotation/bounds in
-    ways plain CSS-wrapper rotation doesn't, so `tabletop-shape-mechanics` context is probably
-    load-bearing here, more than it was for the view-rotation ticket.
-
-- [ ] DEFERRED `applygamecommand-as-journey` `applyGameCommand`'s protocol looks like a Journey — worth a future look
-  - Surfaced 2026-08-08 while grilling `.scratch/shuffler-architecture-review/issues/02-tabletop-send-veto-hook.md`
-    (designing a pre-mutate hook for `/play-card`/`/discard-card`'s send-then-commit protocol).
-    `apps/shuffler/src/apply-game-command.ts`'s shared retrieve/reconstruct/version-check/status-check/
-    mutate/persist protocol is exactly the shape `services/spine/interpreter/docs/journeys/`
-    (`Briefasaurus::Journey` — stages, needs, enactments, explicit outcomes) exists to name.
-  - Specifically: the tabletop send in send-then-commit reads as an **Enactment** — a declared
-    effect handed to the world, with idempotency and an explicit outcome — not a permission-check
-    veto. That reframing is worth keeping even without adopting the framework.
-  - Jess's call in the moment: capture the resemblance, don't build it now — ticket 02 still gets a
-    small, non-Journey shape (a typed pre-mutate hook). Two ways this could go later: a TypeScript
-    port of the relevant Journey concepts for the Shuffler, or moving game-command orchestration to
-    the Spine as an actual Journey (cross-ship, and the framework's Ruby home already).
-  - Related: `.scratch/shuffler-architecture-review/issues/02-tabletop-send-veto-hook.md`,
-    `services/spine/interpreter/docs/journeys/README.md`.
+  - Let's do this after rotation, so that we have the option of the modal being outside of tldraw.
 
 ## Backlog
 
@@ -154,51 +70,21 @@ and I want to drop a card in between C and D, then the drop zone between them is
     off the whiteboard to mean "discard" instead of moving them to a graveyard. Dedicated actions beat
     ad-hoc deletion. The Tabletop side of that same confusion belongs to `tabletop-card-shape`, not here.
 
-- GRILLING: `finish-undo` Say what was undone, and decide whether we want redo ← was: JES-83, JES-99
+- GRILLING: `finish-undo` In the shuffler, Say what was undone, like in a toast.
   - > When the player undoes with ctrl-Z, surface what was undone somehow — a toast, maybe.
   - cmd-Z/ctrl-Z is already wired (`public/game.js`, clicks the live undo button), but there is **no
     toast mechanism anywhere in the Shuffler** — so undo currently happens silently. The event log
     already names every event (`nameMoveCardEvent`), so the text is free; the surface is the work.
-  - Sitting inside it is a decision, not a task: **do we want redo?** `GameEvents.ts:176` already throws
-    "Cannot undo an undo, use redo instead", so the code anticipates it. Decide before building — a
-    reflex key with no counterpart is where people get hurt.
 
-- [ ] `animate-card-to-table` Animate a card moving to where it's going, using its current position ← was: JES-84
+- [ ] `animate-card-to-table` Animate a card moving to where it's going, using its current position
   - > HTMX requests can include the card's current position; the server calculates the destination
     > position (e.g. where the table is) and styles the card with a CSS transition that moves it from
     > current to destination.
-  - Not a fresh idea — the **replacement** for a known failure. The card-play exit animation was broken
-    for months and fully removed in `943ece6`; the client-driven pattern (JS class + HTMX swap delay)
-    was abandoned, and every animation today is entrance-only via server-rendered `WhatHappened`
-    classes. Sending position up and letting the server render the transition keeps it inside that
-    working model instead of racing the swap.
-  - Consult the `animations` owner before touching this.
 
 - [ ] `shuffler-logs-not-console` Convert the Shuffler's last two stray `console.*` call sites to trace-participating logs ← was: JES-135
-  - Re-verified 2026-08-11: the 53-site sweep this item originally named (`app.ts` 40, `server.ts` 8,
-    `GameState.ts` 2, `SqlitePersistStateAdapter.ts`, `ArchidektDeckToDeckAdapter.ts`) is **done** —
-    commit `a89277c` ("Sweep remaining Shuffler console._ call sites onto src/log.ts"). All five
-    files are now at zero `console._` calls.
-  - What's actually left, outside `src/scripts/`: one `console.warn` in
-    `src/view/common/html-layout.ts` (startup guard when no Honeycomb API key is configured) and one
-    `console.error` in `src/view/debug/state-copy.ts` (browser-side copy-to-clipboard failure on the
-    debug page). `src/log.ts` itself also calls `console.*` but that's the logger's own sink, not a
-    stray call site.
-  - `src/scripts/*` keeps `console.*` on purpose, already written down in `apps/shuffler/CLAUDE.md`.
-    Don't "finish the job" there.
+  - `src/scripts/*` keeps `console.*` on purpose
 
-- [ ] DEFERRED `spine-logs-in-traces` Give the Spine Ruby logs that participate in traces ← was: JES-137
-  - The last ship without a log pipeline. Rails `TaggedLogging` → STDOUT
-    (`config/environments/production.rb`), no OTel logs gem, zero explicit app-level logging in
-    `app/`, `lib/`, or `interpreter/` — so Spine request logs never land on the trace, even though
-    Rack instrumentation already continues a Shuffler-initiated trace into the Spine.
-  - **Decide the fork first**: (a) the alpha `opentelemetry-logs-sdk` gem + OTLP appender, same
-    shape as the Node ships, trace correlation for free; or (b) lograge → JSON on STDOUT → a
-    collector `filelog` receiver — stable, but you inject `trace_id`/`span_id` yourself from
-    `OpenTelemetry::Trace.current_span.context`. The lean is (b). Record the reasoning.
-  - Done when a Shuffler → Spine request shows the Spine's log lines on the same Honeycomb trace.
-
-- GRILLING: `build-sha-on-every-span` Every span says which build it came from ← was: JES-139
+- GRILLING: `build-sha-on-every-span` Every span says which build it came from
   - Nothing in the fleet carries a build identity — no `service.version`, no `deployment.sha`,
     anywhere (verified 2026-08-06). Deploy markers mark a _moment_, so "is this error only on the
     new build?" is answered by eyeballing which side of a marker line events fall on, which breaks
@@ -210,14 +96,6 @@ and I want to drop a card in between C and D, then the drop zone between them is
   - `owners/fleet-is-observable/README.md` already holds this as Invariant 5, marked FUTURE.
     Landing it means dropping that marker and making it a standing check on any new init path.
 
-- [ ] DEFERRED `set-up-ci` Run the three test suites on every push ← was: JES-119
-  - > github actions, so tests run on every PR.
-  - There is **no `.github/` directory at all** (verified 2026-08-06), yet all three ships have
-    suites: `jest` in the Shuffler, `vitest` in the Tabletop, Rails `test/` in the Spine. Nothing
-    runs them but a human remembering to.
-  - The old argument against starting — one permanently-red Playwright test — is gone; that test is
-    fixed. Decide this on its own merits.
-
 - GRILLING: `game-page-to-ejs` Migrate the active game page to EJS templates ← was: JES-78
   - > The active game page renders via TypeScript view functions, a historical accident rather
     > than an intention. Migrate it to EJS like the rest of the pages.
@@ -228,7 +106,7 @@ and I want to drop a card in between C and D, then the drop zone between them is
     `formatHtmlHead()` in `src/view/common/html-layout.ts` load different stylesheets and set
     conflicting `body` fonts (Ovo vs Orbitron). Consult the `shuffler-looks-like-itself` owner.
 
-- [ ] DEFERRED `english-card-faces` Show English names and images for other-language printings ← was: JES-96
+- [ ] DEFERRED `english-card-faces` Show English names and images for other-language printings
   - Blocked on `card-zoom-modal` (Jess, 2026-08-10).
   - > Some cards come in other-language editions. Offer English. Example: Adventurous Impulse in
     > the Squirrel Girl deck (Archidekt 23735063).
