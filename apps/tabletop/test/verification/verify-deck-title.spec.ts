@@ -22,6 +22,10 @@ function seatJoined(tableId: string, initiator: { seatId: string; playerName: st
       deckName: "E2E Deck",
       playmatImageUrl: "https://example.com/e2e-playmat.png",
       cardBackImageUrl: "https://example.com/e2e-card-back.jpg",
+      // A near-black primary and a light gold secondary: the title text must take the
+      // darker of the two (#1a0a2e), rendered in Orbitron.
+      primaryColor: "#1a0a2e",
+      secondaryColor: "#f0e68c",
     },
   };
 }
@@ -46,6 +50,12 @@ test("the deck title is editable, locked furniture, and edits sync live and surv
   await expect(titleShape).toHaveCount(1, { timeout: 10000 });
   const input = alice.page.getByTestId("mtg-title-input");
   await expect(input).toHaveValue("Jess 〜 E2E Deck");
+
+  // On-brand: Orbitron, colored with the deck's darker identity color (#1a0a2e).
+  const font = await input.evaluate((el) => getComputedStyle(el).fontFamily);
+  expect(font.toLowerCase()).toContain("orbitron");
+  const color = await input.evaluate((el) => getComputedStyle(el).color);
+  expect(color).toBe("rgb(26, 10, 46)");
 
   // A second browser sees the starting title.
   const bob = await openTable(browser, tableSlug);

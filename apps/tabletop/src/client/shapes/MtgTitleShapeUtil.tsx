@@ -7,7 +7,7 @@ export class MtgTitleShapeUtil extends BaseBoxShapeUtil<MtgTitleShape> {
   static override props = mtgTitleShapeProps;
 
   override getDefaultProps(): MtgTitleShape["props"] {
-    return { w: 1482, h: 40, text: "" };
+    return { w: 1482, h: 40, text: "", color: "var(--deep-space)" };
   }
 
   override isAspectRatioLocked(): boolean {
@@ -15,7 +15,7 @@ export class MtgTitleShapeUtil extends BaseBoxShapeUtil<MtgTitleShape> {
   }
 
   component(shape: MtgTitleShape) {
-    const { w, h, text } = shape.props;
+    const { w, h, text, color } = shape.props;
     const [draft, setDraft] = useState<string | null>(null);
 
     // A locked shape's updateShape is a silent no-op unless wrapped in editor.run
@@ -39,8 +39,9 @@ export class MtgTitleShapeUtil extends BaseBoxShapeUtil<MtgTitleShape> {
 
     const markHandled: PointerEventHandler = (e) => this.editor.markEventAsHandled(e);
 
-    // Reproduces the stock text shape's look (tldraw green serif) so this change is
-    // purely mechanical — the on-brand treatment is a separate, unratified decision.
+    // On-brand chrome: Orbitron (var(--font-chrome)), colored with the deck's own darker
+    // identity color (passed as a prop). Transparent/borderless at rest — input chrome is
+    // still an open design choice, so nothing here paints a background or border.
     const inputStyle: CSSProperties = {
       pointerEvents: "all",
       width: w,
@@ -50,8 +51,8 @@ export class MtgTitleShapeUtil extends BaseBoxShapeUtil<MtgTitleShape> {
       background: "transparent",
       border: "none",
       padding: 0,
-      color: "#099268",
-      fontFamily: "Georgia, 'Times New Roman', serif",
+      color,
+      fontFamily: "var(--font-chrome)",
       fontWeight: 400,
       fontSize: 28,
       lineHeight: `${h}px`,
