@@ -40,12 +40,17 @@ describe("the one page shell links the fleet palette", () => {
 
   it("passes table/player names to the browser tracing init as escaped string args", () => {
     const head = formatHtmlHead({ title: "Any Title", tableName: "Kitchen Table", playerName: "Jess" });
-    expect(head).toMatch(/initHoneycombTracing\(".*", false, "Kitchen Table", "Jess"\)/);
+    expect(head).toMatch(/initHoneycombTracing\(".*", false, "Kitchen Table", "Jess", undefined\)/);
   });
 
-  it("passes undefined for table/player when the game is solo", () => {
+  it("passes the game id to the browser tracing init as an escaped string arg", () => {
+    const head = formatHtmlHead({ title: "Any Title", tableName: "Kitchen Table", playerName: "Jess", gameId: "42" });
+    expect(head).toMatch(/initHoneycombTracing\(".*", false, "Kitchen Table", "Jess", "42"\)/);
+  });
+
+  it("passes undefined for table/player/game when the game is solo and not yet started", () => {
     const head = formatHtmlHead({ title: "Any Title" });
-    expect(head).toMatch(/initHoneycombTracing\(".*", false, undefined, undefined\)/);
+    expect(head).toMatch(/initHoneycombTracing\(".*", false, undefined, undefined, undefined\)/);
   });
 
   it("neutralizes a </script> break-out in a table name", () => {
