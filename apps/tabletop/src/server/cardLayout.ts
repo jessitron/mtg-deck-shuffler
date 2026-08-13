@@ -73,7 +73,16 @@ export function nameLabelPosition(seatIndex: number): { x: number; y: number } {
   return { x: origin.x, y: origin.y - GAP - NAME_LABEL_HEIGHT };
 }
 
-/** Life counter: bigger than the name-row band it sits on, right-aligned to the playmat (ticket 20). */
+/**
+ * Baseline of the name+deck-title text, in page units below the text shape's top
+ * (= nameLabelPosition().y). Measured from the live tldraw render (serif, size "m",
+ * scale 2): glyph box 0→64, baseline at 50, descenders to 64. Counters rest their
+ * bottom edge on this baseline. tldraw owns the text metrics — canvas text can't use
+ * the fleet fonts — so this is library-dependent: a font/size/scale change remeasures it.
+ */
+export const NAME_TEXT_BASELINE = 50;
+
+/** Life counter: bigger than the name-row band, right-aligned to the playmat, bottom on the name baseline (ticket 20). */
 export const LIFE_COUNTER_W = 130;
 export const LIFE_COUNTER_H = 48;
 
@@ -82,7 +91,7 @@ export function lifeCounterPosition(seatIndex: number): { x: number; y: number }
   const namePos = nameLabelPosition(seatIndex);
   return {
     x: origin.x + PLAYMAT_W - LIFE_COUNTER_W,
-    y: namePos.y - (LIFE_COUNTER_H - NAME_LABEL_HEIGHT) / 2,
+    y: namePos.y + NAME_TEXT_BASELINE - LIFE_COUNTER_H,
   };
 }
 
@@ -96,7 +105,7 @@ export function commanderDamageCounterPosition(seatIndex: number, indexFromRight
   const x = life.x - GAP - (indexFromRight + 1) * COMMANDER_DAMAGE_COUNTER_W - indexFromRight * GAP;
   return {
     x,
-    y: namePos.y - (COMMANDER_DAMAGE_COUNTER_H - NAME_LABEL_HEIGHT) / 2,
+    y: namePos.y + NAME_TEXT_BASELINE - COMMANDER_DAMAGE_COUNTER_H,
   };
 }
 

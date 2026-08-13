@@ -29,6 +29,7 @@ import {
   nameLabelPosition,
   LIFE_COUNTER_W,
   LIFE_COUNTER_H,
+  NAME_TEXT_BASELINE,
   checkZonesDisjoint,
 } from "../src/server/cardLayout";
 import { ZONE_LABEL_BAND } from "../src/shared/mtgZoneShape";
@@ -162,11 +163,10 @@ describe("cardLayout — life counter position", () => {
     }
   });
 
-  it("vertically centers on the name label's band", () => {
+  it("rests its bottom edge on the name text's baseline", () => {
     const namePos = nameLabelPosition(0);
     const pos = lifeCounterPosition(0);
-    const NAME_LABEL_HEIGHT = 40;
-    expect(pos.y).toBe(namePos.y - (LIFE_COUNTER_H - NAME_LABEL_HEIGHT) / 2);
+    expect(pos.y + LIFE_COUNTER_H).toBe(namePos.y + NAME_TEXT_BASELINE);
   });
 });
 
