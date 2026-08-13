@@ -177,7 +177,7 @@ instead. If you ever want `telemetry.sdk.*` back on a `BasicTracerProvider`, the
 | `apps/shuffler/src/shutdownHooks.ts` (and the Tabletop's verbatim port, `apps/tabletop/src/server/shutdownHooks.ts`) | `installShutdownHandlers(drain, options)` — the SIGTERM/SIGINT flush-and-exit hook, called from `tracing.ts` right after `sdk.start()`. Races `drain()` against an `unref()`'d `setTimeout` (default 5000ms), calls an injectable `exit` **exactly once** regardless of how many signals fire or whether `drain()` resolves, rejects, or times out. **Installing this handler changes Node's default SIGTERM behavior**: with no handler, SIGTERM terminates the process immediately; once one exists, Node no longer exits on its own, so the file must call `exit()` itself once the race settles. Tested with a real `EventEmitter` as the fake signal source, no mocks. |
 | `apps/shuffler/src/telemetry-sampler.ts` | `BackgroundChatterSampler` — keeps `CHATTER_SAMPLE_RATIO = 0.01` of probes (`kube-probe`, `elb-healthchecker` by UA) + `/health` + static assets by extension; 100% of everything else. Reads both semconv spellings (Invariant 4). Unit tested. |
 | `apps/shuffler/src/log.ts` (and the Tabletop's copy, `apps/tabletop/src/server/log.ts`) | The log surface: `log.info/warn/error(message, attributes, error?)`. Writes to **stdout and OTLP**. Takes its logger from the `api-logs` global, so it no-ops cleanly where no provider was registered (tests, `src/scripts/*`). An `Error` becomes `exception.type`/`.message`/`.stacktrace` attributes. Duplicated in the Tabletop on purpose, each with its own test. |
-| `apps/shuffler/src/tracing_util.ts` | **Helpers, not a wrapper**: `setCommonSpanAttributes()`, `stampRouteParamsOnSpan()` (writes `http.route.param.<key>`), `markCurrentSpanAsError()`. Callers still `import { trace } from "@opentelemetry/api"` directly. |
+| `apps/shuffler/src/tracing_util.ts` | **Helpers, not a wrapper**: `setCommonSpanAttributes()`, `stampRouteParamsOnSpan()` (writes `http.route.param.<key>`), `markCurrentSpanAsError()`. Callers still `import { trace } from "@opentelemetry/api"` directly. `CommonAttributes` carries the fleet's small set of always-relevant span attributes: `archidektDeckId`→`deck.archidektId`, `deckSource`→`deck.source`, `browserTabId`→`game.browser_tab_id`, and `devMode`→`app.dev_mode` (`SPAN_ATTRIBUTE_DEV_MODE`). `undefined` values are dropped by `setAttributes`, but a real `false` for `devMode` **is** stamped, so `app.dev_mode=false` is filterable — see the dev-mode note below. |
 | `apps/shuffler/src/apply-game-command.ts` | All **13** of `app.ts`'s game-mutation routes (`reveal-card`, `put-in-hand`, `put-on-top`, `put-on-bottom`, `shuffle`, `mulligan`, `move-hand-card`, `undo`, `draw`, `flip-card`, `flip-card-modal`, `play-card`, `discard-card`) go through `applyGameCommand(deps, gameId, expectedVersion, mutate, beforeMutate?)`, which is Express-free and owns the "not-found" / "incompatible-version" `markCurrentSpanAsError` calls plus the persist-then-return protocol, guaranteeing identical telemetry across every route regardless of rendering. `renderApplied` may return `string | void` so a route that must send its own response (e.g. `flip-card-modal`'s `res.render(...)`) still fits. The optional `beforeMutate?: (game) => Promise<void>` runs after the status/version checks and before `mutate`, so `play-card`/`discard-card` can send-to-tabletop-first and only mutate on success — throwing `TableSendFailedError` aborts pre-mutate/persist into a `{ kind: "send-failed"; errorHtml }` outcome, rendered as a 502 + `HX-Retarget`/`HX-Reswap` to `#modal-container`. No route in `app.ts` runs a hand-rolled retrieve/reconstruct/status-check/version-check/mutate/persist protocol any more. **Open**: `CommandOutcome.kind` isn't stamped on the span for the non-error outcomes (`not-active`/`version-conflict`/`applied`) — only the two error paths get an attribute today. |
 | `apps/tabletop/src/server/tracing.ts` | A **separate** Node SDK init, modeled on the Shuffler's. Own inline `KubeProbeAwareSampler` (0.001 kube-probe / 0.01 ELB). No middleware suppression, no static-asset or `/health` handling, reads only `http.user_agent`, and has no test — a real gap versus the Shuffler's sampler. Same `logRecordProcessors` wiring and shutdown-hook install as the Shuffler. |
 | `apps/shuffler/src/view/common/html-layout.ts` | The Shuffler's **single-sourced** browser telemetry bootstrap. `formatHtmlHead(options)` is the one page shell every Shuffler page's `<head>` goes through — EJS pages via `views/partials/head.ejs`, TS pages via `formatPageWrapper` — so the bootstrap appears exactly once. The guard+init is `initHoneycombTracing(apiKey)`, shipped as the exported literal string `HONEYCOMB_TRACING_INIT_SCRIPT`, tested by evaling that exact string. See "The Shuffler's browser bootstrap" below for the script order and the apiKey fallback. |
@@ -270,10 +270,13 @@ Script order, load-bearing:
    document-level `htmx:configRequest` listener that adds `X-Browser-Tab-Id` to every htmx
    request.
 2. `<script src="/hny.js">` — the vendored Honeycomb web SDK.
-3. Inline init: `initHoneycombTracing(apiKey)` — a named function, guards on `window.Hny &&
+3. Inline init: `initHoneycombTracing(apiKey, devMode)` — a named function, guards on `window.Hny &&
    window.browserTabId` **and** on the apiKey being non-empty/non-`"undefined"`, then calls
    `Hny.initializeTracing({ apiKey, serviceName: "mtg-deck-shuffler-web", ...,
-   resourceAttributes: { "game.browser_tab_id": window.browserTabId } })`.
+   resourceAttributes: { "game.browser_tab_id": window.browserTabId, "app.dev_mode": devMode } })`.
+   The `devMode` argument is interpolated into the script source as an **unquoted boolean**
+   (`initHoneycombTracing("...", ${devMode})`), so the browser resource attribute is a real
+   boolean, not the string `"true"`. See the dev-mode note below.
 
 **The order is load-bearing**: the tab id is baked into the OTel resource, immutable after init,
 so `browser-tab-id.js` must run first. Don't reorder, and don't move the init into a deferred
@@ -296,6 +299,31 @@ body ships as one exported literal script-source string constant, `HONEYCOMB_TRA
 what `apps/shuffler/test/html-layout-tracing-guard.test.ts` evals (via `new Function`) — no
 separate reimplementation to drift out of sync. Never add a **second** bootstrap anywhere — one
 shell is the whole point.
+
+### Dev mode is on telemetry as `app.dev_mode` (both datasets, same spelling)
+
+The Shuffler's **dev mode** — an httpOnly `devMode` cookie toggled at `/dontdie` — now rides
+telemetry as the boolean attribute **`app.dev_mode`**, spelled identically on the server dataset
+(`mtg-deck-shuffler`) and the browser dataset (`mtg-deck-shuffler-web`), so one filter spans both.
+
+- **Server side (per-request span attribute).** The cookie middleware in `apps/shuffler/src/app.ts`
+  (`DEV_MODE_COOKIE = "devMode"`) computes `res.locals.devMode` and calls
+  `setCommonSpanAttributes({ devMode: res.locals.devMode })`, so every root server span carries
+  `app.dev_mode`. At that call site `devMode` is **always a real boolean** (the cookie either
+  parses to `1` or it doesn't), so `app.dev_mode=false` is stamped and filterable — this is the
+  one `CommonAttributes` field where a `false` deliberately survives (see the `tracing_util.ts`
+  row). It reflects dev-mode **per request**.
+- **Browser side (resource attribute).** `formatHtmlHead({ devMode })` threads the flag from
+  `formatPageWrapper` and from `views/partials/head.ejs` (`locals.devMode`) into
+  `initHoneycombTracing(apiKey, devMode)`, which adds `"app.dev_mode": devMode` to the OTel
+  **resource**. Because it's a resource attribute it's immutable after init, so it reflects
+  **dev-mode-at-page-load**, not per-request — but the `/dontdie` toggle is a full navigation, so
+  the next page load picks up the new value.
+- **Tests**: `apps/shuffler/test/html-layout-tracing-guard.test.ts` evals the exported script and
+  asserts `app.dev_mode` reaches `resourceAttributes` (true and false);
+  `apps/shuffler/test/html-layout-fleet-tokens.test.ts` asserts the **unquoted-boolean**
+  interpolation (`initHoneycombTracing(".*", true|false)`) so a future edit can't quietly turn it
+  into a string.
 
 ### The Spine's browser bootstrap and trace continuation
 

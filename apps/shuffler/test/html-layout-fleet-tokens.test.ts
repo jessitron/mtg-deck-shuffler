@@ -30,4 +30,11 @@ describe("the one page shell links the fleet palette", () => {
     expect(head).not.toContain("Sneaky </title>");
     expect(head).toContain("Sneaky &lt;/title&gt; &amp; &quot;Deck&quot;");
   });
+
+  it("passes dev mode to the browser tracing init as an unquoted boolean", () => {
+    expect(formatHtmlHead({ title: "Any Title", devMode: true })).toMatch(/initHoneycombTracing\(".*", true\)/);
+    expect(formatHtmlHead({ title: "Any Title", devMode: false })).toMatch(/initHoneycombTracing\(".*", false\)/);
+    // defaults to false when not supplied
+    expect(formatHtmlHead({ title: "Any Title" })).toMatch(/initHoneycombTracing\(".*", false\)/);
+  });
 });

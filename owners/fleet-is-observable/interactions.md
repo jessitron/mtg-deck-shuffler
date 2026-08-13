@@ -201,7 +201,12 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `apps/shuffler/test/html-layout-tracing-guard.test.ts` evals — if you touch the guard, keep the
   source-of-truth exported and run that test. Keep the two-var apiKey fallback
   (`HONEYCOMB_INGEST_API_KEY || HONEYCOMB_API_KEY`) — check prod before "simplifying" it. Never add
-  a **second** bootstrap anywhere — one shell is the whole point.
+  a **second** bootstrap anywhere — one shell is the whole point. `initHoneycombTracing(apiKey,
+  devMode)` takes a second arg, interpolated as an **unquoted boolean**
+  (`initHoneycombTracing("...", ${devMode})`), that becomes the `app.dev_mode` browser **resource**
+  attribute — keep it a real boolean, not a quoted string (`html-layout-fleet-tokens.test.ts`
+  guards this), and keep `formatHtmlHead`/`formatPageWrapper`/`head.ejs` threading `devMode`
+  through so the flag actually reaches init.
 - **Adding a game-mutation route in `apps/shuffler/src/app.ts`**: all 13 game-mutation routes go
   through `apply-game-command.ts`'s `applyGameCommand()`, which owns the
   "not-found"/"incompatible-version" `markCurrentSpanAsError` calls for all of them — don't re-add

@@ -3,19 +3,23 @@ import { Attributes, Span, SpanStatusCode, trace } from "@opentelemetry/api";
 const SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER = "deck.archidektId";
 const SPAN_ATTRIBUTE_DECK_SOURCE = "deck.source";
 const SPAN_ATTRIBUTE_BROWSER_TAB_ID = "game.browser_tab_id";
+const SPAN_ATTRIBUTE_DEV_MODE = "app.dev_mode";
 
 export type CommonAttributes = Partial<{
   archidektDeckId: string; // TODO: should be sourceUrl from DeckProvenance
   deckSource: string;
   browserTabId: string;
+  devMode: boolean;
 }>;
 
 function commonAttributesToSpanAttributes(attributes: CommonAttributes): Attributes {
-  // these won't all be populated, and that's fine
+  // these won't all be populated, and that's fine (undefined values are ignored;
+  // a real `false` for devMode still gets stamped, so dev_mode=false is filterable)
   return {
     [SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER]: attributes.archidektDeckId,
     [SPAN_ATTRIBUTE_DECK_SOURCE]: attributes.deckSource,
     [SPAN_ATTRIBUTE_BROWSER_TAB_ID]: attributes.browserTabId,
+    [SPAN_ATTRIBUTE_DEV_MODE]: attributes.devMode,
   };
 }
 

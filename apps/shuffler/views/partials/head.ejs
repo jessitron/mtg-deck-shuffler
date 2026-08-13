@@ -7,5 +7,6 @@
   title: pageTitle,
   stylesheets: ['/site.css'].concat(locals.additionalStyles || []),
   additionalFonts: locals.additionalFonts,
-  scriptsHtml: locals.script ? '<script src="' + script + '" defer></script>' : ''
+  scriptsHtml: locals.script ? '<script src="' + script + '" defer></script>' : '',
+  devMode: locals.devMode
 }) %>

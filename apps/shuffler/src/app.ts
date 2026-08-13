@@ -80,6 +80,7 @@ export function createApp(
     res.locals.devMode = cookieHeader
       .split(";")
       .some((c) => c.trim() === `${DEV_MODE_COOKIE}=1`);
+    setCommonSpanAttributes({ devMode: res.locals.devMode });
     next();
   });
   
