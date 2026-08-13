@@ -187,7 +187,7 @@ instead. If you ever want `telemetry.sdk.*` back on a `BasicTracerProvider`, the
 | `apps/shuffler/src/apply-game-command.ts` | All **13** of `app.ts`'s game-mutation routes (`reveal-card`, `put-in-hand`, `put-on-top`, `put-on-bottom`, `shuffle`, `mulligan`, `move-hand-card`, `undo`, `draw`, `flip-card`, `flip-card-modal`, `play-card`, `discard-card`) go through `applyGameCommand(deps, gameId, expectedVersion, mutate, beforeMutate?)`, which is Express-free and owns the "not-found" / "incompatible-version" `markCurrentSpanAsError` calls plus the persist-then-return protocol, guaranteeing identical telemetry across every route regardless of rendering. `renderApplied` may return `string | void` so a route that must send its own response (e.g. `flip-card-modal`'s `res.render(...)`) still fits. The optional `beforeMutate?: (game) => Promise<void>` runs after the status/version checks and before `mutate`, so `play-card`/`discard-card` can send-to-tabletop-first and only mutate on success — throwing `TableSendFailedError` aborts pre-mutate/persist into a `{ kind: "send-failed"; errorHtml }` outcome, rendered as a 502 + `HX-Retarget`/`HX-Reswap` to `#modal-container`. No route in `app.ts` runs a hand-rolled retrieve/reconstruct/status-check/version-check/mutate/persist protocol any more. **Open**: `CommandOutcome.kind` isn't stamped on the span for the non-error outcomes (`not-active`/`version-conflict`/`applied`) — only the two error paths get an attribute today. |
 | `apps/tabletop/src/server/tracing.ts` | A **separate** Node SDK init, modeled on the Shuffler's. `ParentBasedSampler({root: BackgroundChatterSampler})` — the sampler is now an imported module (`./telemetry-sampler.js`), no longer inline. No middleware suppression. Same `logRecordProcessors` wiring and shutdown-hook install as the Shuffler. |
 | `apps/tabletop/src/server/telemetry-sampler.ts` | The Tabletop's head-sampler, **extracted from `tracing.ts` and given tests on 2026-08-12**. Exports a pure `sampleRatioFor(attributes): number` and class `BackgroundChatterSampler` (unchanged `ParentBasedSampler` root wrapper). Keeps `0.001` of `kube-probe`, `0.01` of `elb-healthchecker` (by UA), and `0.01` of `/health` (by path); 100% of everything else. UA is checked **before** path, so a kube-probe on `/health` stays at its own lowest rate. Reads **both** semconv spellings — `http.user_agent`/`user_agent.original` and `http.target`/`url.path`, stripping the query string off the path first (Invariant 4). Unit tested (`apps/tabletop/test/telemetry-sampler.test.ts`, 12 cases incl. unmatched-UA falling through to 1.0). **Still narrower than the Shuffler's**: no static-asset-by-extension handling — deliberately not added (Jess asked only for `/health`). |
-| `apps/shuffler/src/view/common/html-layout.ts` | The Shuffler's **single-sourced** browser telemetry bootstrap. `formatHtmlHead(options)` is the one page shell every Shuffler page's `<head>` goes through — EJS pages via `views/partials/head.ejs`, TS pages via `formatPageWrapper` — so the bootstrap appears exactly once. The guard+init is now `initHoneycombTracing(apiKey, devMode, tableName, playerName)`, shipped as the exported literal string `HONEYCOMB_TRACING_INIT_SCRIPT`, tested by evaling that exact string. `HONEYCOMB_TRACING_INIT_SCRIPT` stays a **static** constant; the four values pass as **arguments** at the call site (per the guard test's constraint) — the two string args go through a new `jsStringArg()` = `JSON.stringify(value).replace(/</g, "\\u003c")` helper that both escapes the JS string literal and neutralizes `</script>` break-out / XSS (an absent value → the literal `undefined`). See "The Shuffler's browser bootstrap" below for the script order and the apiKey fallback. |
+| `apps/shuffler/src/view/common/html-layout.ts` | The Shuffler's **single-sourced** browser telemetry bootstrap. `formatHtmlHead(options)` is the one page shell every Shuffler page's `<head>` goes through — EJS pages via `views/partials/head.ejs`, TS pages via `formatPageWrapper` — so the bootstrap appears exactly once. The guard+init is now `initHoneycombTracing(apiKey, devMode, tableName, playerName, gameId)`, shipped as the exported literal string `HONEYCOMB_TRACING_INIT_SCRIPT`, tested by evaling that exact string. `HONEYCOMB_TRACING_INIT_SCRIPT` stays a **static** constant; the five values pass as **arguments** at the call site (per the guard test's constraint) — the three string args (`tableName`, `playerName`, `gameId`) go through a new `jsStringArg()` = `JSON.stringify(value).replace(/</g, "\\u003c")` helper that both escapes the JS string literal and neutralizes `</script>` break-out / XSS (an absent value → the literal `undefined`). See "The Shuffler's browser bootstrap" below for the script order and the apiKey fallback. |
 | `apps/tabletop/src/client/observability/index.ts` | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific." Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
 | `services/spine/` | Roda + Sequel + SQLite + Minitest. `config/telemetry.rb`: `OpenTelemetry::SDK.configure` with `opentelemetry-exporter-otlp` + `opentelemetry-instrumentation-rack`, `service_name` `"mtg-spine"`. `app.rb` mounts the Rack instrumentation explicitly (`use(*OpenTelemetry::Instrumentation::Rack::Instrumentation.instance.middleware_args)`), which is required for Roda (no Rails-style auto-injection) and already in place. **100% sampling, deliberately** — no sampler module; a prior Ruby sampler existed and was flagged broken, and the rewrite starts clean rather than porting it back. `services/spine/run` follows the same `.be`-then-`.env` pattern as `apps/tabletop/run`, polling `GET /up`. Query this fleet's data via the **`honeycomb-modernity`** MCP server (team `modernity`) — not the default `honeycomb` server, which points at an unrelated demo team and has no fleet data; picking the wrong one looks like "no spans" and can be mistaken for a wiring bug. **Still open**: no sampler (100% is the deliberate starting point until start/stop behavior is confirmed clean), no logs pipeline (`spine-logs-in-traces` in `TODO.md`). |
 | `services/spine/app.rb` `POST /join` and `POST /tables/:table_id/events` | Both routes add application-level span attributes, Invariant-1 style: `current_span.add_attributes(...)` for inputs as soon as parsed, then a result attribute on success (`join.result`, `event.result`) — `event.result`'s dedup path gets its own value (`"duplicate"`, distinct from `"accepted"`) so a query can tell "receiving events" apart from "senders retrying." Failure paths share one helper, `mark_span_failed(attribute, result, error)`, taking the attribute key as a parameter so both routes use the same shape instead of each carrying a near-identical copy. `current_span` is a one-line helper (`OpenTelemetry::Trace.current_span`) — no manual span creation, purely stamping the ambient Rack-instrumentation span. **`join.result` does not currently distinguish** a brand-new table from joining an existing one — both set `"joined"`. Contract validation itself (`EventContract.validate!`) emits no telemetry of its own; the route's `rescue` turns a violation into the `contract_violation` span outcome. |
@@ -277,19 +277,21 @@ Script order, load-bearing:
    document-level `htmx:configRequest` listener that adds `X-Browser-Tab-Id` to every htmx
    request.
 2. `<script src="/hny.js">` — the vendored Honeycomb web SDK.
-3. Inline init: `initHoneycombTracing(apiKey, devMode, tableName, playerName)` — a named function,
-   guards on `window.Hny && window.browserTabId` **and** on the apiKey being
+3. Inline init: `initHoneycombTracing(apiKey, devMode, tableName, playerName, gameId)` — a named
+   function, guards on `window.Hny && window.browserTabId` **and** on the apiKey being
    non-empty/non-`"undefined"`, then calls `Hny.initializeTracing({ apiKey, serviceName:
    "mtg-deck-shuffler-web", ..., resourceAttributes })` where `resourceAttributes` always carries
    `"game.browser_tab_id"` and `"app.dev_mode"`, and **conditionally** adds `"table.name"` /
-   `"player.name"` only when the corresponding arg is truthy (`if (tableName)` / `if
-   (playerName)`), so a solo game's browser resource omits them — matching the server side. The
+   `"player.name"` / `"game.id"` only when the corresponding arg is truthy (`if (tableName)` / `if
+   (playerName)` / `if (gameId)`). Table/player omit for solo games, matching the server side;
+   `game.id`, by contrast, is stamped on **every** `/game` page (solo and table alike — every game
+   has a `gameId`), so its presence is not a "table mode" signal the way table/player are. The
    `devMode` argument is interpolated as an **unquoted boolean** (`initHoneycombTracing("...",
-   ${devMode}, …)`), so that resource attribute is a real boolean; the two name args are
-   interpolated via `jsStringArg()` (`JSON.stringify` + `<`→`<`), which quotes them safely
-   and neutralizes any `</script>` in a table/player name — an absent name serializes to the
-   literal `undefined`, which the `if` guard then skips. See the dev-mode and table/player notes
-   below.
+   ${devMode}, …)`), so that resource attribute is a real boolean; the three string args
+   (`tableName`, `playerName`, `gameId`) are interpolated via `jsStringArg()` (`JSON.stringify` +
+   `<`→`<`), which quotes them safely and neutralizes any `</script>` in a value — an absent
+   value serializes to the literal `undefined`, which the `if` guard then skips. See the dev-mode,
+   table/player, and game.id notes below.
 
 **The order is load-bearing**: the tab id is baked into the OTel resource, immutable after init,
 so `browser-tab-id.js` must run first. Don't reorder, and don't move the init into a deferred
@@ -370,6 +372,32 @@ row's `undefined`-is-dropped note).
 - **Tests**: `html-layout-tracing-guard.test.ts` (table/player reach `resourceAttributes` when
   supplied, omitted when empty) and `html-layout-fleet-tokens.test.ts` (arg-order regex, the
   `undefined` case, and `</script>` neutralization).
+
+### The game's id is on the browser resource as `game.id` (browser only, so far)
+
+Every browser span on the `/game` page carries the Shuffler's own game id as the resource
+attribute **`game.id`** — added 2026-08-13. Unlike `table.name`/`player.name`, this is stamped on
+**every** game, solo and table-mode alike, because every game has a `gameId`; its presence is not a
+"table mode" signal.
+
+- **Browser side only (resource attribute).** `formatGamePageHtmlPage` (`active-game-page.ts`)
+  passes `gameId: String(game.gameId)` into `formatPageWrapper` → `formatHtmlHead` → the inline
+  `initHoneycombTracing(..., gameId)` call, which adds `"game.id"` to the browser OTel **resource**
+  next to `app.dev_mode`/`table.name`/`player.name`. Same conditional (`if (gameId)`) and same
+  `jsStringArg()` escaping as the two name args. Only `/game` inits tracing, so HTMX fragments
+  behind it inherit the resource attribute.
+- **Server side does NOT stamp `game.id`** — this change was scoped to the `mtg-deck-shuffler-web`
+  browser dataset. The server already carries the game id, but spelled differently: the
+  route-param stamping writes `http.route.param.gameId` (via `stampRouteParamsOnSpan`), not
+  `game.id`. So the browser↔server spelling is **asymmetric** (`game.id` on the web dataset vs.
+  `http.route.param.gameId` on the server dataset) — a fair follow-up to reconcile, deliberately
+  left out of this task. Don't assume one filter spans both datasets the way `table.name` does.
+- **The prep page was deliberately left untouched** — `views/prepare.ejs` does not stamp `game.id`
+  (a prep has a `prepId`, not a `gameId`; overloading `game.id` with a prep id would be a trap), and
+  no table/player either.
+- **Tests**: `html-layout-tracing-guard.test.ts` (stamps `game.id` when supplied, omits it when
+  absent) and `html-layout-fleet-tokens.test.ts` (arg-order regex updated for the trailing 5th arg,
+  plus a `game.id` case). Full suite: 372 pass.
 
 ### The Spine's browser bootstrap and trace continuation
 

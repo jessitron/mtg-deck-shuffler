@@ -207,18 +207,24 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   source-of-truth exported and run that test. Keep the two-var apiKey fallback
   (`HONEYCOMB_INGEST_API_KEY || HONEYCOMB_API_KEY`) — check prod before "simplifying" it. Never add
   a **second** bootstrap anywhere — one shell is the whole point. `initHoneycombTracing(apiKey,
-  devMode, tableName, playerName)` now takes four args. `devMode` is interpolated as an **unquoted
-  boolean** (`, ${devMode},`) and becomes the `app.dev_mode` browser **resource** attribute — keep
-  it a real boolean, not a quoted string. `tableName`/`playerName` are user-controlled strings
-  interpolated via the `jsStringArg()` helper (`JSON.stringify` + `<`→`<`) — **never
-  raw-interpolate them**, that helper is what neutralizes a `</script>` in a name (break-out/XSS);
-  they become the browser resource attributes `table.name`/`player.name`, added **conditionally**
-  (`if (tableName)`) so solo games omit them. The static `HONEYCOMB_TRACING_INIT_SCRIPT` constant
-  must stay static (values pass as args, per the guard test) — don't fold a value into the string.
-  `html-layout-fleet-tokens.test.ts` guards the unquoted-boolean interpolation, the arg order, the
-  `undefined` case, and the `</script>` neutralization; keep
+  devMode, tableName, playerName, gameId)` now takes **five** args. `devMode` is interpolated as an
+  **unquoted boolean** (`, ${devMode},`) and becomes the `app.dev_mode` browser **resource**
+  attribute — keep it a real boolean, not a quoted string. `tableName`/`playerName`/`gameId` are
+  strings interpolated via the `jsStringArg()` helper (`JSON.stringify` + `<`→`<`) — **never
+  raw-interpolate them**, that helper is what neutralizes a `</script>` (break-out/XSS); they become
+  the browser resource attributes `table.name`/`player.name`/`game.id`, each added **conditionally**
+  (`if (tableName)` / `if (gameId)`). Solo games omit table/player, but **`game.id` is stamped on
+  every `/game` page** (solo and table alike — every game has a `gameId`), so it's not a table-mode
+  signal. **`game.id` is browser-only** — the server carries the id as `http.route.param.gameId`,
+  not `game.id`, so the two datasets spell it differently (a fair follow-up, deliberately left
+  out). The static `HONEYCOMB_TRACING_INIT_SCRIPT` constant must stay static (values pass as args,
+  per the guard test) — don't fold a value into the string. `html-layout-fleet-tokens.test.ts`
+  guards the unquoted-boolean interpolation, the arg order, the `undefined` case, and the
+  `</script>` neutralization; keep
   `formatHtmlHead`/`formatPageWrapper`/`head.ejs`/`active-game-page.ts` threading `devMode`,
-  `tableName`, and `playerName` through so the flags actually reach init.
+  `tableName`, `playerName`, and `gameId` through so the flags actually reach init. **The prep page
+  (`views/prepare.ejs`) deliberately does not stamp `game.id`** — a prep has a `prepId`, not a
+  `gameId`; don't overload `game.id` with it.
 - **Adding a game-mutation route in `apps/shuffler/src/app.ts`**: all 13 game-mutation routes go
   through `apply-game-command.ts`'s `applyGameCommand()`, which owns the
   "not-found"/"incompatible-version" `markCurrentSpanAsError` calls for all of them — don't re-add
