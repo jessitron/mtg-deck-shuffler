@@ -155,12 +155,21 @@ export function stackCardPosition(seatIndex: number, stackCount: number): { x: n
 const LAND_COLS = Math.floor(PLAYMAT_W / CARD_W); // 9
 /** Small gap so adjacent land cards don't touch; smaller than GAP since lands pack densely. */
 const LAND_GAP = 6;
+/**
+ * Inset from the playmat's left edge and the bottom-half boundary, so the
+ * first land doesn't arrive flush against them. Matches GRAVEYARD_PILE_INSET's
+ * value for the same reason: a card touching a zone's edge reads as clipped.
+ */
+const LAND_INSET = 10;
 
 export function landPosition(seatIndex: number, landCount: number): { x: number; y: number } {
   const mat = playmatBounds(seatIndex);
   const col = landCount % LAND_COLS;
   const row = Math.floor(landCount / LAND_COLS);
-  return { x: mat.x + col * (CARD_W + LAND_GAP), y: mat.y + mat.h / 2 + row * (CARD_H + LAND_GAP) };
+  return {
+    x: mat.x + LAND_INSET + col * (CARD_W + LAND_GAP),
+    y: mat.y + mat.h / 2 + LAND_INSET + row * (CARD_H + LAND_GAP),
+  };
 }
 
 export function commandZoneCardPosition(seatIndex: number, slot: number, count: 1 | 2): { x: number; y: number } {

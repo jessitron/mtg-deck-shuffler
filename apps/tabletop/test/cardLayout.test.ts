@@ -271,6 +271,13 @@ describe("cardLayout — the square (compass seats around a centered Stack)", ()
     expect(wrapped.x).toBe(first.x);
     expect(wrapped.y).toBeGreaterThan(first.y); // wrapped to the next row
   });
+
+  it("insets the first land from the playmat's left edge and bottom-half boundary", () => {
+    const mat = playmatBounds(0);
+    const first = landPosition(0, 0);
+    expect(first.x).toBeGreaterThan(mat.x);
+    expect(first.y).toBeGreaterThan(mat.y + mat.h / 2);
+  });
 });
 
 describe("cardLayout — checkZonesDisjoint (the runtime form of the disjointness invariant)", () => {
