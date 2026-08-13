@@ -34,7 +34,9 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
   return formatPageWrapper({
     title: `MTG Game - ${game.deckName}`,
     content: contentWithModal,
-    devMode
+    devMode,
+    tableName: game.tableName,
+    playerName: game.playerName
   });
 }
 

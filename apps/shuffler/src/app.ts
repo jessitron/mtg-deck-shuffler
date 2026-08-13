@@ -563,6 +563,7 @@ export function createApp(
       }
 
       const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
+      setCommonSpanAttributes({ tableName: game.tableName, playerName: game.playerName });
 
       // Only show active games; prep/review happens at /prepare/:prepId
       if (game.gameStatus() !== "Active") {
@@ -681,6 +682,7 @@ export function createApp(
       }
 
       const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
+      setCommonSpanAttributes({ tableName: game.tableName, playerName: game.playerName });
       const expectedVersion = game.getStateVersion();
       const libraryCards = game.listLibrary();
 
@@ -727,6 +729,7 @@ export function createApp(
       }
 
       const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
+      setCommonSpanAttributes({ tableName: game.tableName, playerName: game.playerName });
       const modalHtml = formatTableModalHtmlFragment(game);
       res.send(modalHtml);
     } catch (error) {
@@ -750,6 +753,7 @@ export function createApp(
       }
 
       const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
+      setCommonSpanAttributes({ tableName: game.tableName, playerName: game.playerName });
 
       const expectedVersionStr = req.query["expected-version"];
       if (expectedVersionStr) {
@@ -1151,6 +1155,7 @@ export function createApp(
         return;
       }
       const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
+      setCommonSpanAttributes({ tableName: game.tableName, playerName: game.playerName });
       const modalHtml = formatHistoryModalHtmlFragment(game);
       res.send(modalHtml);
     } catch (error) {
@@ -1169,6 +1174,7 @@ export function createApp(
         res.status(404).send(`<div>Game ${gameId} not found</div>`);
         return;
       }
+      setCommonSpanAttributes({ tableName: persistedGame.tableName, playerName: persistedGame.playerName });
       const modalHtml = formatDebugStateModalHtmlFragment(persistedGame);
       res.send(modalHtml);
     } catch (error) {
@@ -1189,6 +1195,7 @@ export function createApp(
         return;
       }
       const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
+      setCommonSpanAttributes({ tableName: game.tableName, playerName: game.playerName });
       const html = formatActiveGameHtmlSection(game);
       res.send(html);
     } catch (error) {
