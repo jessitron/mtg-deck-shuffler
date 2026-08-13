@@ -735,6 +735,20 @@ self-rendering custom shape.
   explicitly that an `indicator()` looking like anything other than tldraw's default is a
   **separate design decision needing its own sign-off**. The `mtg-card` implementation ticket
   is where it will try to hitch a ride.
+- **Open: the deck-title label's on-brand typography (`mtg-title`, 2026-08-12, `96551ef`).**
+  `.scratch/editable-deck-title/` turned the seat/deck label into a self-rendering custom
+  `BaseBox` shape (so it can be edited in place), which for the first time makes on-brand
+  canvas typography *possible* for this label — see [README.md](README.md)'s seat-name-label
+  paragraph. The change deliberately shipped only a **faithful reproduction** of the old
+  off-brand stock look (green `#099268`, `Georgia` serif, raw literals in
+  `MtgTitleShapeUtil.tsx` — a knowingly-untokenized placeholder), and the design owner blocked
+  the on-brand restyle from riding along. **Being staged for Jess separately.** Two facts for
+  whoever stages it: (1) **no fitting green token exists — `--mana-G` (`#2a8439`, Forest) is a
+  false friend**, a colour-pie *identity* token and a different green from the label's
+  `#099268`, so the restyle needs a fresh chrome/text colour decision (likely the identity
+  palette, dropping green), not a reuse; (2) it needs a `/design` `.stage-white` mock staged
+  **with** the on-brand options, not a specimen of the current scaffolding. Same "stage both,
+  let Jess pick" shape as choice 7.
 - **~~The gallery has zero Tabletop specimens~~ — it has its first five now (2026-08-07,
   `a304c52`, ticket 11), and the cross-app stylesheet question is still unresolved.** The
   gallery's credibility rests on rendering the *app's own* stylesheets. Ticket 11's § Tabletop

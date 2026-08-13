@@ -656,6 +656,13 @@ not by recomputing new numbers.**
 
 **Designing anything that lives inside the tldraw canvas** (added 2026-08-07)
 
+- **If a canvas shape needs a green, there is no fleet token for it — `--mana-G` is a false
+  friend** (2026-08-12, the `mtg-title` deck-title label). `--mana-G` (`#2a8439`, Forest) is
+  Magic's colour-pie green for *mana identity*, not a chrome/text colour, and it is a different
+  green from tldraw's own `#099268` that the label currently reproduces. No green chrome token
+  exists at all. Colouring canvas text green is therefore a design decision, not a token
+  lookup — surface it (the deck-title on-brand restyle is exactly this, still open; see
+  [open-choices.md](open-choices.md) → Fleet gaps).
 - **Read [README.md](README.md) → "tldraw limits" first.** The list keeps growing; the hard
   limits so far: no Orbitron in the `geo`/`text` `font` enum (so on-brand canvas text
   requires a self-rendering shape), the global `:focus-visible` rule can't reach a shape

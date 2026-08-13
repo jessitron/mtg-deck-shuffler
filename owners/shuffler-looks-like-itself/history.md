@@ -2561,3 +2561,44 @@ unrelated ticket as an unapproved appearance decision.
 certainly *can* be restyled with plain CSS if the Tabletop ever gets a stylesheet to put such
 a rule in. What's actually blocked is the fleet's own open question about where that
 stylesheet lives, not anything tldraw itself forbids.
+
+## 2026-08-12 — the seat/deck label became a self-rendering shape, on-brand typography now possible, deferred
+
+`96551ef` **Tabletop: make the deck title editable via a locked `mtg-title` shape**
+
+`.scratch/editable-deck-title/`. The seat/deck label had been a locked stock tldraw `text`
+shape whose `serif`/`green`/`scale:2` props this KB had spent two entries explaining were
+*enum values, not choices* (the tldraw `font`-enum limit). It's now a locked custom `BaseBox`
+shape (`MtgTitleShapeUtil.tsx`) so the whole label is one editable `<input>`. The mechanics
+are the tabletop-shape-mechanics owner's territory (second locked-interactive shape after the
+life counter — `editor.run(ignoreShapeLock)`, keystroke shielding; that owner recorded it in
+`4d12098`). The **design** consequences are this owner's:
+
+**The change this KB's seat-name-label paragraph literally predicted, arrived — and the
+prediction held.** That paragraph had said: *"If the label ever becomes a self-rendering
+shape, the one-line name-〜-deck composition carries forward and typographic hierarchy (size,
+face per part) becomes possible for the first time — that would be a new appearance decision,
+not a port."* It did become one; the composition carried forward unchanged; on-brand
+typography is now possible for the first time. The paragraph is updated from prediction to
+fact.
+
+**Appearance was mechanics-only by design — the reproduction is faithful, and the on-brand
+restyle was blocked from riding along.** `component()` hard-codes the old stock look as raw
+literals: `color: "#099268"` (tldraw's green), `fontFamily: "Georgia, 'Times New Roman',
+serif"`, `fontSize: 28`, transparent/borderless, with choice 5's `3px solid var(--light-pink)`
+/ `3px` focus ring reproduced via a scoped `<style>` (the life counter's trick, because no
+ship-local stylesheet reaches the canvas). These are now **raw literals reproducing what the
+tldraw enum rendered**, not enum values — a knowingly-untokenized placeholder, same category
+as the zone scaffolding, exempt from the Layer-1 token ban pending the real decision. The
+on-brand version (`--font-chrome`/Orbitron + a token text colour) is unratified and staged for
+Jess separately.
+
+**The reusable design finding: there is no fleet green token, and `--mana-G` is a false
+friend.** An agent doing the on-brand restyle will grep the palette for a green and find
+`--mana-G` (`#2a8439`, Forest) — but that is Magic's colour-pie green for *mana identity*, not
+a chrome/text colour, and it's a different green from the label's `#099268` besides. There is
+no green chrome/text token at all. So the restyle needs a genuinely new colour decision (most
+likely the identity palette, dropping the green), not a token reuse — recorded in
+[interactions.md](interactions.md)'s canvas-text watch point and
+[open-choices.md](open-choices.md) → Fleet gaps so the next agent surfaces it to Jess instead
+of quietly miscolouring the label with an identity token.
