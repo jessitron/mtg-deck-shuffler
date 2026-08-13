@@ -13,15 +13,30 @@ section is just a wall between Jess and the live work.
 
 ## Next
 
+- before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game!
+
 - Consider removing the animations owner, since the animations don't do much now.
 
 - `editable-deck-title` On the Tabletop, let the deck title be editable. It's currently a
-  locked tldraw `text` shape (`apps/tabletop/src/server/tableFurniture.ts`, the `labelId`
-  block) reading `${playerName} 〜 ${deckName}`. It's locked on purpose — a live bug was that
-  any player could drag/delete another player's name — and tldraw ties editing to the same
-  unlocked state as drag/delete. So making it editable needs a design that unlocks *editing
-  the text only* (custom shape, or double-click-to-edit) while keeping drag/delete off, plus
-  a decision on whether the edit persists/syncs and who's allowed to edit whose title.
+  locked tldraw `text` shape reading `${playerName} 〜 ${deckName}`. It's locked on purpose —
+  a live bug was that any player could drag/delete another player's name — and tldraw ties
+  editing to the same unlocked state as drag/delete. So making it editable needs a design
+  that unlocks _editing the text only_ (custom shape, or double-click-to-edit) while keeping
+  drag/delete off, plus a decision on whether the edit persists/syncs and who's allowed to
+  edit whose title. Code pointers (all in `apps/tabletop/src/server/`):
+  - **The label shape** — `tableFurniture.ts`, `ensurePlayerArea`, the `labelId` block: id is
+    `name-label-${tableName}-${seatId}`, `isLocked: true`, text built by `toRichText(...)`.
+  - **Where the text comes from** — `deckName` flows in on the `seat.joined` payload
+    (`seatJoined.ts`) → `PlayerAreaLook.deckName` (`tableFurniture.ts`) → the richText line.
+    An edit that should survive a reload has to get back into that flow, not just the shape.
+  - **Position** — `nameLabelPosition` / `NAME_LABEL_HEIGHT` in `cardLayout.ts`.
+  - **Z-order coupling — don't break the fix we just landed.** The life counter and the
+    commander damage counters are deliberately drawn _above_ this label so a long title can't
+    cover them: the life counter is `put` just before the label, and
+    `addCommanderDamageCounters` (`tableFurniture.ts`) anchors each counter's index with
+    `getIndexAbove(label.index)`, looked up by the `name-label-...` id. If you replace the
+    text shape with a custom shape, **keep that id and its relative index** or the counters
+    fall behind the title again.
 
 - bug: In tabletop, often after selecting a card, I right-click and the menu comes up... once. After that, right-clicking does nothing, until I like do a bunch of other things, click outside it (doesn't work usually), click other things, wiggle stuff, refresh the page even... at some point the right-click menu becomes available again.
 
@@ -114,13 +129,15 @@ and I want to drop a card in between C and D, then the drop zone between them is
     `formatHtmlHead()` in `src/view/common/html-layout.ts` load different stylesheets and set
     conflicting `body` fonts (Ovo vs Orbitron). Consult the `shuffler-looks-like-itself` owner.
 
+- add the number of cards in the library and the hand to the tabletop. This is blocked by schema change monster and spine-in-the-middle.
+
 - [ ] DEFERRED `english-card-faces` Show English names and images for other-language printings
   - Blocked on `card-zoom-modal` (Jess, 2026-08-10).
   - > Some cards come in other-language editions. Offer English. Example: Adventurous Impulse in
     > the Squirrel Girl deck (Archidekt 23735063).
   - Two halves, one cause, both in `ArchidektDeckToDeckAdapter.ts`: the name comes from
     `card.displayName || oracleCard.name` (line 101) and `displayName` is the _printed_ name, and
-    `scryfallId: card.uid` (line 118) is that same localized printing, so the image is foreign too.
+    `scryfallId: card.uid` (line 118) is t hat same localized printing, so the image is foreign too.
   - `oracleCardName` is already on `CardDefinition`, so the name half is nearly free; the image half
     needs resolving the English printing of the same oracle card.
 
