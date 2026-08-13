@@ -25,6 +25,7 @@ import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
 import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
 import { MtgCounterTool } from "./shapes/MtgCounterTool";
 import { MtgLifeCounterShapeUtil } from "./shapes/MtgLifeCounterShapeUtil";
+import { MtgTitleShapeUtil } from "./shapes/MtgTitleShapeUtil";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
 import { TableContextMenu } from "./CardContextMenu";
 import { clearStaleSelectionOnPointerDown } from "./clearStaleSelectionOnPointerDown";
@@ -35,6 +36,7 @@ const shapeUtils = [
   MtgZoneShapeUtil,
   MtgCounterShapeUtil,
   MtgLifeCounterShapeUtil,
+  MtgTitleShapeUtil,
 ];
 
 const tools = [MtgCounterTool];

@@ -42,6 +42,12 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   server `rooms.ts`. Not to be confused with `mtgCounterShape.ts` below, a different shape
   (`mtg-counter`, the drag-onto-a-card disc) — the naming-collision note in that file's doc
   comment applies here too.
+- `apps/tabletop/src/shared/mtgTitleShape.ts` — **new, editable-deck-title (2026-08-12,
+  `96551ef`)**: the same pattern for the deck-title label — `MtgTitleShapeProps` (`w`, `h`,
+  `text` — free string), the `TLGlobalShapePropsMap` augmentation registering `mtg-title`, and
+  `mtgTitleShapeProps` validators, imported by client `MtgTitleShapeUtil.tsx` and server
+  `rooms.ts`. Replaces the stock `text` shape that used to hold the seat name label. See
+  `architecture.md`'s "editable deck title" section.
 - `apps/tabletop/src/shared/mtgCounterShape.ts` — the same pattern for counters (ticket 18):
   `MtgCounterShapeProps` (`w`, `h`, `text` — free string, blank by default; no domain identity
   beyond its text), the `TLGlobalShapePropsMap` augmentation registering `mtg-counter`, and
@@ -61,6 +67,18 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   true })` — the new lock-gate finding, watch point 22 — since a locked shape's props are
   otherwise silently unwritable through the ordinary `editor.updateShape` call, even from a DOM
   handler inside `component()`. See `architecture.md`'s life-counter section.
+- `apps/tabletop/src/client/shapes/MtgTitleShapeUtil.tsx` — **new, editable-deck-title
+  (2026-08-12, `96551ef`)**: extends `BaseBoxShapeUtil<MtgTitleShape>`, no interaction hooks (same
+  locked-shape posture as `MtgZoneShapeUtil`/`MtgLifeCounterShapeUtil`). `component()` renders an
+  always-live `<input>` bound to a local `useState` draft (`value={draft ?? text}`), committing to
+  the synced `text` prop only on blur/Enter (`setText` → `commitDraft`) and discarding on Escape.
+  Follows the life-counter pattern: `pointerEvents: "all"` inline (not `.tl-image-container`, watch
+  point 23), `markEventAsHandled` on `onPointerDown`, and `setText` wrapping its `updateShape` in
+  `this.editor.run(fn, { ignoreShapeLock: true })` (watch point 22, second consumer). `onKeyDown`
+  calls `e.stopPropagation()` for every key so tldraw's tool hotkeys don't fire mid-word (watch
+  point 10b, always-live-input case). Green-serif appearance is a faithful reproduction of the old
+  stock label; the on-brand Orbitron treatment is a separate, unratified decision. See
+  `architecture.md`'s "editable deck title" section.
 - `apps/tabletop/src/client/clearStaleSelectionOnPointerDown.ts` — **new, ticket 05
   (2026-08-11)**: `clearStaleSelectionOnPointerDown(editor)`, registered once at Tldraw mount
   (`TablePage.tsx`'s `onTldrawMount`). On every `pointer_down` with `target: 'canvas'`, calls
@@ -198,7 +216,8 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   skipping occupied rects; overlap beats failure. Used only by `evictCounters`.
 - `apps/tabletop/src/client/TablePage.tsx` — registers
   `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil,
-  MtgLifeCounterShapeUtil]`, passed to both `useSync` and the `<Tldraw shapeUtils={...}>` prop
+  MtgLifeCounterShapeUtil, MtgTitleShapeUtil]` (the last added editable-deck-title, 2026-08-12),
+  passed to both `useSync` and the `<Tldraw shapeUtils={...}>` prop
   (this app uses the sync hook directly, which is why `defaultShapeUtils` must be spread in
   explicitly; see `architecture.md`). **Since ticket 05 (2026-08-11), `defaultShapeUtils` is
   spread in whole again — no filtering, no `SelectionClearing*` replacements** — ticket 19's
@@ -252,7 +271,8 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   "Table-layout ticket 18" section and watch point 16.
 - `apps/tabletop/src/server/rooms.ts` — builds the server-side `TLSocketRoom` schema via
   `createTLSchema({ shapes: { ...defaultShapeSchemas, "mtg-card": {...}, "mtg-counter": {...},
-  "mtg-zone": {...} } })`.
+  "mtg-life-counter": {...}, "mtg-title": {...}, "mtg-zone": {...} } })` (`"mtg-title"` added
+  editable-deck-title, 2026-08-12).
   The server-side twin of `TablePage.tsx`'s client registration; same "must spread the defaults
   explicitly" gotcha applies here, on the schema-validation side (see `architecture.md`).
 - `apps/tabletop/src/server/tableFurniture.ts` — **new exported `FURNITURE_IMAGE_ID_MARKER =
@@ -289,9 +309,14 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   minting a fresh top-of-z-order one on every seat join — and then replaced by
   **`ensureStackDrawn()`** (table-layout ticket 14, `5eeac70`): the Stack is a fixed square drawn
   once, guarded on `store.get(stackId)` existence, so the z-order-promotion bug can't recur by
-  construction. The seat name label (`type: "text"`,
-  built inline in `ensurePlayerArea`) is now `isLocked: true` (was `false` — any player could
-  previously drag/delete another player's name label). Since *table-layout* ticket 13
+  construction. The seat name label (built inline in `ensurePlayerArea`) is `isLocked: true` (was
+  `false` — any player could previously drag/delete another player's name label) and, **since
+  editable-deck-title (2026-08-12, `96551ef`), is a `type: "mtg-title"` shape, not stock `type:
+  "text"`** — same `labelId`/lock/z-index slot, but now editable in place via its own `<input>`
+  (the old `richText`/`toRichText`/`color`/`font`/`autoSize`/`scale` props and the `toRichText`
+  import are gone; width is `PLAYMAT_W - LIFE_COUNTER_W - GAP`, height `NAME_LABEL_HEIGHT`, both now
+  imported/exported from `cardLayout.ts`). See `history.md`'s "editable deck title" entry. Since
+  *table-layout* ticket 13
   (2026-08-08, a different ticket 13 — see `history.md`), `ensurePlayerArea` also draws a
   Command Zone per seat (`zone: "command"`, id `region-command-<table>-<seatId>`, locked, no
   interaction hooks). Since zone-label-band (2026-08-09, `0d61890`), the library card-back image
@@ -439,6 +464,14 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   click-vs-select mechanics (a direct click on some shapes enters text-edit mode) rather than
   exercising them — this spec is `TablePage.tsx`'s clipboard wiring, not a regression test for
   anything in this KB's watch points.
+- `apps/tabletop/test/deckTitleShape.test.ts` — **new, editable-deck-title (2026-08-12,
+  `96551ef`)**: unit tests for the `mtg-title` shape — the mint-time record shape produced by
+  `ensurePlayerArea`'s label block (type/lock/props) and the shape's validators.
+- `apps/tabletop/test/verification/verify-deck-title.spec.ts` — **new, editable-deck-title
+  (2026-08-12, `96551ef`)**: edits the title in one browser and asserts it syncs to a second
+  browser context and survives a reload (proving the edit persists through the room store).
+  Typing "Reanimator deck" (contains r/t/d/s) also confirms the keystroke shield — tool hotkeys
+  don't fire and the letters reach the field.
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 

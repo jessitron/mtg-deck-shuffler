@@ -86,6 +86,17 @@ point 1 for every shape type at once, including ones with no hook to hang a fix 
 `architecture.md`'s "Ticket 19" section (historical mechanism) and "Ticket 05" section (the
 superseding fix), and watch point 1.
 
+**Editable deck title** (`.scratch/editable-deck-title/plan.md`, landed 2026-08-12, `96551ef`)
+added a fifth custom shape type, `mtg-title` (`apps/tabletop/src/shared/mtgTitleShape.ts`,
+`apps/tabletop/src/client/shapes/MtgTitleShapeUtil.tsx`), replacing the stock locked `text`
+seat-name label so the title can be edited in place. It is the **second locked-interactive shape**
+after `mtg-life-counter` — a `BaseBoxShapeUtil` with no interaction hooks whose `component()` hosts
+a live DOM `<input>` writing to its own `text` prop through `editor.run(..., { ignoreShapeLock:
+true })` (watch point 22), and shielding keystrokes from tldraw's tool hotkeys (watch point 10b,
+always-live-input case). Its mechanics territory is exactly the life-counter pattern; the on-brand
+appearance is a separate, unratified decision left to `shuffler-looks-like-itself`. See
+`architecture.md`'s "editable deck title" section and `history.md`.
+
 ## Design philosophy
 
 - **Extend tldraw's built-in shape utils rather than reimplementing them, where that's still

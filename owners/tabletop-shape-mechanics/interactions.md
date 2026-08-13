@@ -420,6 +420,18 @@
     it easy to miss in testing if the assertion only checks "did it throw." Watch point 1 does
     NOT apply to the life counter (locked shapes never reach `PointingShape`), but watch point
     6's step 4 does — see watch point 23 for a caution about *how* it's satisfied.
+    **This pattern now has a second instance: `mtg-title`, the editable deck title (2026-08-12,
+    `96551ef`; `apps/tabletop/src/client/shapes/MtgTitleShapeUtil.tsx`).** A locked shape whose
+    `component()` hosts a live `<input>` writing to its own `text` prop — it pays (a) inline
+    `pointerEvents: "all"` (per watch point 23, inline not `.tl-image-container`), (b) the always-live
+    keystroke shield in full (`onKeyDown` `stopPropagation()` for every key, so tldraw's tool hotkeys
+    don't fire mid-word — the *always-live* branch of (b), since it has no tldraw editing state to get
+    `areShortcutsDisabled` for free), and (d) the `editor.run(..., { ignoreShapeLock: true })` lock
+    gate. It skips (c) — a title has one editor at a time, so last-writer-wins isn't a concern — and
+    adds a draft buffer (local `useState`, commit on blur/Enter, discard on Escape) so the synced prop
+    updates once per commit, not per keystroke. Confirms hazards (a)/(b)/(d) generalize beyond the life
+    counter to any locked shape with a live DOM control that writes to its props. See
+    `architecture.md`'s "editable deck title" section.
 
 11. **Defining ANY drag hook on a ShapeUtil makes every instance of that shape a drag target
     for every unlocked dragged shape — narrow both `can*` gates.** (Ticket 18, 2026-08-08.)

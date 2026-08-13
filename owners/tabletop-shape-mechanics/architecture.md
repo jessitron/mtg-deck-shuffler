@@ -517,6 +517,50 @@ custom shape doing "wrap in `.tl-image-container` for the free pointer-events" s
 style inline instead**, unless it actually IS meant to look like a pasted image to that
 regression test.
 
+## The editable deck title: `mtg-title` (2026-08-12, `96551ef`)
+
+`.scratch/editable-deck-title/plan.md`. A fifth custom shape type, `mtg-title`
+(`apps/tabletop/src/shared/mtgTitleShape.ts`, props `{w, h, text}`;
+`apps/tabletop/src/client/shapes/MtgTitleShapeUtil.tsx`, `BaseBoxShapeUtil<MtgTitleShape>`), replaces
+the locked stock `text` seat-name label in `tableFurniture.ts`'s `ensurePlayerArea`. **It is the
+second instance of the life-counter pattern** — a locked shape whose `component()` hosts a live DOM
+control writing to its own props — and it validates, on a real second shape, the two findings the
+life counter section records as load-bearing:
+
+- **`isLocked: true`, no interaction hooks.** Same posture as `mtg-zone`/`mtg-life-counter`: locking
+  gates tldraw's gesture state machine (`SelectTool`/`PointingShape`/`getDraggingOverShape`), not DOM
+  events inside `component()`, so the `<input>` works while drag/delete stay off. Watch point 1's
+  `onClick` selection-deferral quirk cannot apply (no `onClick`, and a locked shape never reaches
+  `PointingShape` anyway). The label kept the exact `labelId`, lock, and relative z-index (minted via
+  `nextFurnitureIndex` right after the life counter), so the commander-damage counter's
+  `getIndexAbove(label.index)` anchoring survives unchanged.
+- **The `editor.run(..., { ignoreShapeLock: true })` lock gate (life-counter fact 4 / watch point 22)
+  now has a second consumer.** `setText` must wrap its `updateShape` this way or the write to the
+  locked shape's own `text` prop is a silent no-op — the same trap the life counter's `setValue` hit.
+  This is the first confirmation the finding generalizes beyond the life counter to any locked shape
+  whose own DOM controls mutate its props.
+- **Always-live-input keystroke shielding (watch point 10b) is confirmed on a real shape.** The
+  `<input>`'s `onKeyDown` calls `e.stopPropagation()` for every key, so tldraw's tool hotkeys
+  (r/t/v/d/s…) don't fire while typing a title; Enter commits + blurs, Escape discards the draft +
+  blurs. Unlike `mtg-counter` (which edits through tldraw's own editing state and gets
+  `areShortcutsDisabled` for free), this input has no editing state, so it pays the shield itself —
+  exactly the case watch point 10b predicted. `preventDefault` on Enter/Escape stops the input's
+  default submit/blur race with the commit.
+- **Draft-buffer edit model.** A local React `useState` draft (`value={draft ?? text}`) buffers
+  keystrokes; the synced `text` prop is written only on commit (blur/Enter), not per keystroke, so a
+  remote viewer sees the last committed title rather than every intermediate letter. This is a new
+  wrinkle vs. the life counter (which writes every increment straight through) — appropriate because a
+  title is typed continuously, whereas a life total changes one discrete step at a time.
+- **Registration** followed watch point 6's four-step recipe cleanly (fifth shape type to do so):
+  `TLGlobalShapePropsMap` augmentation in the props file, client `shapeUtils` in `TablePage.tsx`,
+  server `createTLSchema` in `rooms.ts`, and step 4 (pointer-events) via `pointerEvents: "all"` set
+  **inline** on the `<input>` rather than reusing `.tl-image-container` — following the life counter's
+  watch-point-23 caution about that class name.
+- **Appearance is a deliberate reproduction of the old stock label** (green `#099268` serif; the
+  fleet's one decided `:focus-visible` ring reproduced verbatim as the life counter does). The
+  on-brand Orbitron treatment is a separate, unratified appearance decision, not ridden along on this
+  placement/mechanics change.
+
 ## Ticket 18: `mtg-counter` — counters ride on cards (landed 2026-08-08, `4c64ef2`)
 
 `.scratch/tabletop-physics/issues/18-counters.md`. A third custom shape type, `mtg-counter`

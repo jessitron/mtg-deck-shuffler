@@ -77,11 +77,17 @@ each).
 
 - **tldraw's `geo` `font` prop is an enum with no Orbitron in it.** So a stock `geo` label
   can *never* be on-brand — today's `serif` zone labels aren't a design choice, they're the
-  enum. **The stock `text` shape has the same enum** (confirmed 2026-08-08, ticket 15: the
-  seat name label's `font: "serif"` and `color: "green"` are enum values, not choices). This
+  enum. **The stock `text` shape had the same enum** (confirmed 2026-08-08, ticket 15: the
+  seat name label's `font: "serif"` and `color: "green"` were enum values, not choices). This
   is the strongest design argument for a custom shape, and it generalizes: **any
   text the fleet wants on a canvas in a fleet typeface has to come from a self-rendering
-  shape.** **Confirmed working, not just argued, 2026-08-08** (tabletop-physics ticket 13):
+  shape.** **The seat/deck label stopped being that stock `text` example on 2026-08-12
+  (`96551ef`, `mtg-title`) — see the seat-name-label paragraph below.** It is now a
+  self-rendering `BaseBox` shape, so it *could* be on-brand, but the change deliberately
+  **reproduced the old off-brand stock look** (green `#099268`, `Georgia` serif) as raw
+  literals rather than going on-brand — the mechanism moved, the appearance decision did not.
+  So the enum values that used to be "not a choice" are now raw literals reproducing what the
+  enum rendered; the on-brand version is the unratified decision still owed to Jess. **Confirmed working, not just argued, 2026-08-08** (tabletop-physics ticket 13):
   `MtgZoneShapeUtil`'s `component()` sets `fontFamily: "var(--font-chrome)"` on a plain `div`
   inside `HTMLContainer`, and it resolves to Orbitron — checked both by reading the DOM's
   computed `font-family` in a live browser and by screenshot. `HTMLContainer` is an
@@ -641,35 +647,62 @@ considered it and held off, on purpose; that stays a separate, future appearance
 not bundled with this one. A specimen for both states lives on `/design` § Cards &
 playmat, next to the unsleeved library stack.
 
-**The seat name label pairs player name and deck name on ONE line at double size, player
-first, joined by a wave-dash (decided 2026-08-09 at Jess's direct request, `75bae71` —
-superseding the 2026-08-08 two-line ruling from ticket 15, `4263ef8`).** The Tabletop's seat
-label — the locked stock tldraw `text` shape `ensurePlayerArea` draws in
-`apps/tabletop/src/server/tableFurniture.ts` — reads
-``toRichText(`${playerName} 〜 ${deckName}`)``, size `"m"` with `scale: 2` for twice the
-rendered size. This is the fleet's one player-name + deck-name pairing; the next label that
-shows both copies this composition. The choices, each deliberate: **player first** (carried
-forward from the 2026-08-08 ruling); **one line at double size rather than two lines**,
-because Jess wanted the label bigger and single-line — with the **accepted trade-off**,
-named in the code comment, that a long deck name can grow the autoSized label toward the
-neighboring seat (exactly the hazard the two-line ruling existed to avoid — Jess took it
-knowingly); **the `〜` wave-dash swoosh as separator** (the old "no separator glyph" choice
-is gone — on one line, something has to mark the seam); **deck name verbatim**, no
-truncation (player-chosen content, same category as card art). A missing deck name (the
-defensive redraw at card arrival) degrades to the bare player name — same behaviour as
-before, now also at scale 2. The stock props stay untouched: `serif` and `green` are the
-`text` shape's enum (the tldraw limit above), not choices — and `scale: 2` rather than
-`size: "xl"` keeps the size continuous rather than enum-stepped. If the label ever becomes
-a self-rendering shape, the one-line name-〜-deck composition carries forward and typographic
-hierarchy (size, face per part) becomes possible for the first time — that would be a new
-appearance decision, not a port. **This label's text baseline is now a shared alignment
-datum (2026-08-12, `tabletop-name-baseline-align`):** the life counter and commander-damage
-counters in the same row rest their bottom edge on it (`NAME_TEXT_BASELINE = 50` in
-`cardLayout.ts`, measured off the live render — see the tldraw-limits bullet above), so the
-counter row shares one bottom line with the text instead of floating band-centered above it.
-That measured 50 is tied to this label's current face/size/scale — if this composition ever
-changes any of those (the self-rendering-shape case above being the obvious one), remeasure
-`NAME_TEXT_BASELINE` or the counters will drift off the new baseline silently.
+**The seat name label pairs player name and deck name on ONE line, player first, joined by a
+wave-dash (decided 2026-08-09 at Jess's direct request, `75bae71` — superseding the
+2026-08-08 two-line ruling from ticket 15, `4263ef8`).** It reads
+``${playerName} 〜 ${deckName}``. This is the fleet's one player-name + deck-name pairing; the
+next label that shows both copies this composition. The choices, each deliberate: **player
+first** (carried forward from the 2026-08-08 ruling); **one line rather than two**, because
+Jess wanted the label bigger and single-line — with the **accepted trade-off**, named in the
+code comment, that a long deck name can grow the label toward the neighboring seat (exactly
+the hazard the two-line ruling existed to avoid — Jess took it knowingly); **the `〜`
+wave-dash swoosh as separator** (the old "no separator glyph" choice is gone — on one line,
+something has to mark the seam); **deck name verbatim**, no truncation (player-chosen content,
+same category as card art). A missing deck name degrades to the bare player name.
+
+**This label's text baseline is a shared alignment datum (2026-08-12,
+`tabletop-name-baseline-align`):** the life counter and commander-damage counters in the same
+row rest their bottom edge on it (`NAME_TEXT_BASELINE = 50` in `cardLayout.ts`, measured off
+the live render — see the tldraw-limits bullet above), so the counter row shares one bottom
+line with the text instead of floating band-centered above it. That measured 50 is tied to
+this label's rendered face and size. The `mtg-title` reproduction below preserves both (Georgia
+serif at 28px ≈ the old stock `serif`/size-`m`/`scale:2` render), so **50 still holds** — but
+the on-brand restyle described below changes face/size and is exactly the moment to remeasure
+`NAME_TEXT_BASELINE`, or the counters will drift off the new baseline silently.
+
+**The label became a self-rendering shape on 2026-08-12 (`96551ef`, `mtg-title`) — the event
+the previous version of this paragraph predicted — and the prediction held exactly: the
+one-line name-〜-deck composition carried forward, and on-brand typographic hierarchy is now
+*possible* for the first time.** The label was a locked stock tldraw `text` shape (`serif`,
+`color: "green"`, `scale: 2` — enum values, not choices, per the tldraw limit above);
+`.scratch/editable-deck-title/` replaced it with a locked custom `BaseBox` shape
+(`MtgTitleShapeUtil.tsx`, drawn by `ensurePlayerArea` in
+`apps/tabletop/src/server/tableFurniture.ts`) so the whole label is one editable `<input>`.
+**That change was mechanics-only by design; the appearance was a faithful reproduction, and
+the on-brand restyle was deliberately NOT ridden along.** What the reproduction hard-codes as
+raw literals in the shape's `component()` (`MtgTitleShapeUtil.tsx`, `inputStyle`): `color:
+"#099268"`, `fontFamily: "Georgia, 'Times New Roman', serif"`, `fontSize: 28`, transparent/
+borderless at rest, with choice 5's exact focus ring (`outline: 3px solid var(--light-pink)`,
+`outline-offset: 3px`) reproduced via a scoped `<style>` the same way the life counter does.
+These used to be tldraw enum values the KB called "not a choice"; a self-rendering shape can't
+use that enum, so they are now raw literals reproducing what the enum *rendered* — a
+**knowingly-untokenized placeholder** in the same category as the zone scaffolding, exempt
+from the Layer-1 token ban, pending the real decision. **The on-brand version (`--font-chrome`/
+Orbitron + a token text color) is an unratified appearance decision, staged for Jess
+separately — do not let it land as tidying.** Two facts the restyle will need:
+
+- **There is no fitting green token in the fleet palette, and `--mana-G` is a false friend.**
+  `--mana-G` is `#2a8439` (Forest — *Magic's colour-pie green for mana identity*), not the
+  label's `#099268` (tldraw's own green), and it is a different green besides. Reaching for
+  `--mana-G` would both miscolour the label and misuse an identity token as chrome. The
+  on-brand restyle therefore needs a **new** chrome/text colour decision, not a reuse — most
+  likely dropping the green entirely for the identity palette (`--dark-pink`/`--deep-space`/
+  `--light-pink`) or a new named token, which is exactly the kind of thing to stage on
+  `/design` and put to Jess.
+- **A `/design` specimen is owed with that restyle, not now.** Staging the current stock-look
+  reproduction would be staging scaffolding; the specimen belongs with the on-brand options
+  when they go to Jess (same "stage both, let Jess pick" shape as choice 7 and the life
+  counter). A Tabletop canvas shape stages as a `.stage-white` mock, per precedent.
 
 **Two style worlds.** Site pages (`/`, `/choose-any-deck`, `/docs`, `/about`) use the
 purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages

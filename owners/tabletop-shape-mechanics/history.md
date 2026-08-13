@@ -1381,3 +1381,58 @@ machine, or shape selection state as this KB defines it; it's tldraw's *clipboar
 a sibling gotcha worth having on record next to watch point 24's `editor.on('event', ...)`
 targeting quirk, but a different mechanism. If a future change needs to intercept `cut`/`paste`
 too, the same `SKIP_KBDS` fact and capture-on-`window` trick apply.
+
+## Editable deck title — a second locked-interactive shape, `mtg-title` (2026-08-12, `96551ef`)
+
+`.scratch/editable-deck-title/plan.md`. The seat name label was a stock, locked `text` shape
+(green serif, `richText`), made `isLocked: true` back in ticket 13 to stop players dragging or
+deleting each other's labels. That lock left it un-editable too. This change makes the title
+editable **without unlocking** by giving it its own custom shape type, `mtg-title` — the
+life-counter pattern (watch point 10 / `mtg-life-counter`) applied to a second shape.
+
+- **New files**: `apps/tabletop/src/shared/mtgTitleShape.ts` (`MtgTitleShapeProps = {w, h, text}`,
+  the standard `TLGlobalShapePropsMap` augmentation, `mtgTitleShapeProps` validators) and
+  `apps/tabletop/src/client/shapes/MtgTitleShapeUtil.tsx` (`BaseBoxShapeUtil<MtgTitleShape>`, no
+  interaction hooks — same as `mtg-zone`/`mtg-life-counter`; interactivity lives entirely in
+  `component()`'s DOM `<input>`).
+- **Replaces the stock `text` label in `tableFurniture.ts`'s `ensurePlayerArea`.** Same `labelId`
+  (`name-label-<table>-<seat>`), same `isLocked: true`, same z-index slot (still minted right
+  after the life counter via `nextFurnitureIndex`), so the commander-damage counter's
+  `getIndexAbove(label.index)` anchoring (`c90d13a`'s z-order fix) is unchanged. The old
+  `richText`/`toRichText`/`color`/`font`/`autoSize`/`scale` props are gone; the `toRichText` import
+  dropped from `tableFurniture.ts`. Width is now `PLAYMAT_W - LIFE_COUNTER_W - GAP` (the band from
+  the playmat's left edge up to the life counter), so `NAME_LABEL_HEIGHT` was exported from
+  `cardLayout.ts` and `PLAYMAT_W`/`GAP` imported into `tableFurniture.ts`.
+- **The four-step registration recipe (watch point 6) generalized cleanly to a fifth shape type**:
+  props file's `TLGlobalShapePropsMap` augmentation; client `shapeUtils` array in `TablePage.tsx`;
+  server `createTLSchema` shapes map in `rooms.ts` (`"mtg-title": { props: mtgTitleShapeProps }`);
+  and step 4 (pointer-events) satisfied by `pointerEvents: "all"` inline on the `<input>` — set
+  inline, not via `.tl-image-container`, following the life counter's watch-point-23 caution.
+- **Second real consumer of the `editor.run(..., { ignoreShapeLock: true })` lock gate (watch
+  point 22).** `setText` wraps its `updateShape` in `editor.run` with `ignoreShapeLock: true`, or
+  the write to the locked shape's own prop is a silent no-op. First non-life-counter instance,
+  confirming that finding generalizes to any locked shape whose own DOM controls write to its props.
+- **The keystroke-shielding hazard (watch point 10b), flagged as a near-certain bug for an
+  always-live input, is now confirmed and fixed on a real second shape.** `onKeyDown` calls
+  `e.stopPropagation()` for every key so tldraw's tool hotkeys (r/t/v/d/s…) don't fire mid-word;
+  Enter commits + blurs, Escape cancels (discards the draft) + blurs. Verified live in Playwright
+  by typing "Reanimator deck" (contains r, t, d, s) and asserting the letters reached the field.
+  Unlike `mtg-counter`, which edits through tldraw's own editing state and gets
+  `areShortcutsDisabled` for free, this is an always-live input with no editing state — exactly the
+  case watch point 10b warned still pays the shield.
+- **Draft-buffer edit model**: the `<input>` holds a local React `useState` draft (`value={draft
+  ?? text}`), set on focus, updated on change, and flushed to the synced `text` prop only on
+  blur/Enter (`commitDraft`) — Escape discards the draft. So the shape prop (and sync traffic)
+  updates once per commit, not once per keystroke, and a mid-edit remote view sees the last
+  committed title, not every intermediate letter.
+- **Watch point 1 does NOT apply** — locked shape, no `onClick`, interactivity is DOM-only; it
+  never reaches `PointingShape`, so no drag-settle selection cleanup is needed (and the centralized
+  `clearStaleSelectionOnPointerDown` covers it regardless).
+- **Appearance is a faithful reproduction of the old green serif** (`#099268`, Georgia/serif, and
+  the fleet's one decided `:focus-visible` treatment reproduced verbatim as the life counter does)
+  — the on-brand Orbitron treatment is a **separate, unratified appearance decision**, deliberately
+  not ridden along on this mechanics/placement change, to be staged for Jess.
+- **Tests**: `apps/tabletop/test/deckTitleShape.test.ts` (unit) and
+  `apps/tabletop/test/verification/verify-deck-title.spec.ts` (edit syncs to a second browser
+  context + survives reload). `test/seatJoined.test.ts` updated for the label's new type/props.
+  All 121 vitest pass.

@@ -1,5 +1,5 @@
 import { trace } from "@opentelemetry/api";
-import { AssetRecordType, createShapeId, toRichText, TLAssetId, TLImageShape, TLPageId, TLShapeId } from "@tldraw/tlschema";
+import { AssetRecordType, createShapeId, TLAssetId, TLImageShape, TLPageId, TLShapeId } from "@tldraw/tlschema";
 import { IndexKey, getIndexAbove, getIndexBelow, ZERO_INDEX_KEY } from "@tldraw/utils";
 import { RoomEntry, PlayerArea } from "./rooms.js";
 import { MtgCardShape } from "../shared/mtgCardShape.js";
@@ -14,6 +14,9 @@ import {
   lifeCounterPosition,
   LIFE_COUNTER_W,
   LIFE_COUNTER_H,
+  NAME_LABEL_HEIGHT,
+  PLAYMAT_W,
+  GAP,
   commanderDamageCounterPosition,
   COMMANDER_DAMAGE_COUNTER_W,
   COMMANDER_DAMAGE_COUNTER_H,
@@ -364,23 +367,19 @@ export async function ensurePlayerArea(
     store.put({
       id: labelId,
       typeName: "shape",
-      type: "text",
+      type: "mtg-title",
       x: namePos.x,
       y: namePos.y,
       rotation: 0,
       index: nextFurnitureIndex(entry.tableName),
       parentId: pageId,
-      isLocked: true, // fixes a live bug: any player could drag/delete another player's name
+      isLocked: true, // editing happens inside the shape; the lock keeps drag/delete off
       opacity: 1,
       props: {
-        richText: toRichText(look.deckName ? `${playerName} 〜 ${look.deckName}` : playerName),
-        color: "green",
-        size: "m",
-        font: "serif",
-        textAlign: "start",
-        autoSize: true,
-        w: 200,
-        scale: 2,
+        // The band runs from the playmat's left edge up to the life counter.
+        w: PLAYMAT_W - LIFE_COUNTER_W - GAP,
+        h: NAME_LABEL_HEIGHT,
+        text: look.deckName ? `${playerName} 〜 ${look.deckName}` : playerName,
       },
       meta: {},
     } as any);

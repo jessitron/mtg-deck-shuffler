@@ -120,7 +120,7 @@ describe("furniture z-order", () => {
     await postEvent(tableName, seatJoined(tableName, "seat-title0001", "Titled"));
 
     const shapes = allShapes(tableName);
-    const label = shapes.find((s) => s.type === "text" && s.id.includes("name-label"));
+    const label = shapes.find((s) => s.type === "mtg-title" && s.id.includes("name-label"));
     const lifeCounter = shapes.find((s) => s.type === "mtg-life-counter" && s.id.includes("life-counter"));
 
     expect(label).toBeTruthy();
