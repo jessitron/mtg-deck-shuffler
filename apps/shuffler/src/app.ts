@@ -828,14 +828,14 @@ export function createApp(
       // Build utility buttons HTML
       let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
         <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
-        <button class="modal-action-button copy-button"
+        <button id="card-modal-copy-button" class="modal-action-button copy-button"
                 onclick="copyCardImageToClipboard(event, '${imageUrl}', '${gameCard.card.name}')">Copy</button>`;
 
       if (gameCard.card.twoFaced) {
         const flipVals: Record<string, string | number> = { "expected-version": expectedVersion };
         if (navListParam) flipVals["navList"] = navListParam;
         utilityButtonsHtml += `
-        <button class="modal-action-button flip-button"
+        <button id="card-modal-flip-button" class="modal-action-button flip-button"
                 hx-post="/flip-card-modal/${gameId}/${gameCard.gameCardIndex}"
                 hx-vals='${JSON.stringify(flipVals)}'
                 hx-target="#card-modal-container"
@@ -948,14 +948,14 @@ export function createApp(
       // Build utility buttons HTML (no expectedVersion for prep page)
       let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
         <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
-        <button class="modal-action-button copy-button"
+        <button id="card-modal-copy-button" class="modal-action-button copy-button"
                 onclick="copyCardImageToClipboard(event, '${imageUrl}', '${cardDef.name}')">Copy</button>`;
 
       if (cardDef.twoFaced) {
         const newFace = currentFace === "front" ? "back" : "front";
         const flipNavList = navListParam ? `&navList=${navListParam}` : "";
         utilityButtonsHtml += `
-        <button class="modal-action-button flip-button"
+        <button id="card-modal-flip-button" class="modal-action-button flip-button"
                 hx-get="/prep-card-modal/${prepId}/${cardIndex}?face=${newFace}${flipNavList}"
                 hx-target="#card-modal-container"
                 hx-swap="innerHTML"
@@ -1107,7 +1107,7 @@ export function createApp(
         res.status(400).send(`<div class="error-message">
           <h3>⚠️ Version Mismatch</h3>
           <p>${errorMessage}</p>
-          <button hx-get="/" hx-target="body" hx-swap="outerHTML">Back to Home</button>
+          <button id="version-mismatch-home-button" hx-get="/" hx-target="body" hx-swap="outerHTML">Back to Home</button>
         </div>`);
         return;
       }
@@ -1140,8 +1140,8 @@ export function createApp(
       res.status(400).send(`<div class="error-message">
         <h3>⚠️ Error</h3>
         <p>${errorMessage}</p>
-        <button hx-get="/load-state-modal" hx-target="#modal-container" hx-swap="innerHTML">Try Again</button>
-        <button hx-get="/close-modal" hx-target="#modal-container" hx-swap="innerHTML">Cancel</button>
+        <button id="load-state-retry-button" hx-get="/load-state-modal" hx-target="#modal-container" hx-swap="innerHTML">Try Again</button>
+        <button id="load-state-cancel-button" hx-get="/close-modal" hx-target="#modal-container" hx-swap="innerHTML">Cancel</button>
       </div>`);
     }
   });
@@ -1605,14 +1605,14 @@ export function createApp(
         // Build utility buttons HTML
         let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
         <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
-        <button class="modal-action-button copy-button"
+        <button id="card-modal-copy-button" class="modal-action-button copy-button"
                 onclick="copyCardImageToClipboard(event, '${imageUrl}', '${flippedCard.card.name}')">Copy</button>`;
 
         if (flippedCard.card.twoFaced) {
           const flipVals: Record<string, string | number> = { "expected-version": expectedVersion };
           if (navListParam) flipVals["navList"] = navListParam;
           utilityButtonsHtml += `
-        <button class="modal-action-button flip-button"
+        <button id="card-modal-flip-button" class="modal-action-button flip-button"
                 hx-post="/flip-card-modal/${gameId}/${flippedCard.gameCardIndex}"
                 hx-vals='${JSON.stringify(flipVals)}'
                 hx-target="#card-modal-container"

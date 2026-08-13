@@ -9,8 +9,9 @@ const customSleeveSelected = sleeveColor && !sleeveQuickPicks.some(function (p) 
   <div class="table-look-row">
     <span class="table-look-label">Playmat</span>
     <div class="table-look-mats">
-      <% playmats.forEach(function(mat) { %>
+      <% playmats.forEach(function(mat, index) { %>
         <button type="button"
+                id="table-look-mat-<%= index %>"
                 class="table-look-mat<%= mat.path === selectedPlaymatPath ? ' table-look-selected' : '' %>"
                 data-mat-path="<%= mat.path %>"
                 title="<%= mat.name %>"
@@ -27,6 +28,7 @@ const customSleeveSelected = sleeveColor && !sleeveQuickPicks.some(function (p) 
     <span class="table-look-label">Sleeves</span>
     <div class="table-look-sleeves">
       <button type="button"
+              id="table-look-sleeve-none"
               class="table-look-sleeve table-look-none-chip<%= sleeveColor ? '' : ' table-look-selected' %>"
               data-sleeve-color=""
               title="No sleeves (standard Magic back)"
@@ -35,8 +37,9 @@ const customSleeveSelected = sleeveColor && !sleeveQuickPicks.some(function (p) 
               hx-vals='{"sleeve-color": ""}'
               hx-target="#playmat-prepare"
               hx-swap="outerHTML"></button>
-      <% sleeveQuickPicks.forEach(function(pick) { %>
+      <% sleeveQuickPicks.forEach(function(pick, index) { %>
         <button type="button"
+                id="table-look-sleeve-<%= index %>"
                 class="table-look-sleeve<%= sleeveColor === pick.hex ? ' table-look-selected' : '' %>"
                 data-sleeve-color="<%= pick.hex %>"
                 title="<%= pick.name %>"

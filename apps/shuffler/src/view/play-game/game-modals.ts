@@ -16,7 +16,7 @@ export function formatModalHtmlFragment(title: string, bodyContent: string): str
     <div class="modal-dialog">
       <div class="modal-header">
         <h2 class="modal-title">${title}</h2>
-        <button class="modal-close"
+        <button id="modal-close" class="modal-close"
                 hx-get="/close-modal"
                 hx-target="#modal-container"
                 hx-swap="innerHTML">&times;</button>
@@ -76,13 +76,14 @@ function formatModalActionButton(
   const faceAttr = leavesHand && !inTableMode && currentFace ? `data-current-face="${currentFace}"` : "";
   const extraAttrs = [cardIdAttr, faceAttr].filter(Boolean).join(" ");
   const swapAttr = `hx-swap="outerHTML"`;
+  const actionId = `card-action-${action.toLowerCase().replace(/\s+/g, "-")}`;
 
   const afterRequest =
     leavesHand && inTableMode
       ? `htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); if (event.detail.successful) htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})`
       : `htmx.ajax('GET', '/close-card-modal', {target: '#card-modal-container', swap: 'innerHTML'}); htmx.ajax('GET', '/close-modal', {target: '#modal-container', swap: 'innerHTML'})`;
 
-  return `<button class="${cssClass}"
+  return `<button id="${actionId}" class="${cssClass}"
                     hx-post="${endpoint}/${gameId}/${cardIndex}"
                     hx-vals='{"expected-version": ${expectedVersion}}'
                     hx-target="#game-container"
@@ -249,7 +250,7 @@ export function formatStaleStateErrorModal(
     Expected version: ${expectedVersion}, Current version: ${currentVersion}
     </p>
     ${missedEventsHtml}
-      <button onclick="location.reload()"
+      <button id="refresh-page-button" onclick="location.reload()"
               class="modal-action-button recover-button">
         Refresh Page
       </button>

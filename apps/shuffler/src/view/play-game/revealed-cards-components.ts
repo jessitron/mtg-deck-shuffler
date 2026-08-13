@@ -56,7 +56,8 @@ function formatCardActionButtonHtmlFragment(
   const faceAttr = action === "Play" && currentFace ? `data-current-face="${currentFace}"` : "";
   const extraAttrs = [cardIdAttr, faceAttr].filter(Boolean).join(" ");
   const swapAttr = `hx-swap="outerHTML"`;
-  return `<button class="${cssClass}"
+  const actionId = `reveal-action-${action.toLowerCase().replace(/\s+/g, "-")}-${cardIndex}`;
+  return `<button id="${actionId}" class="${cssClass}"
                     hx-post="${endpoint}/${gameId}/${cardIndex}"
                     hx-vals='{"expected-version": ${expectedVersion}}'
                     hx-target="#game-container"

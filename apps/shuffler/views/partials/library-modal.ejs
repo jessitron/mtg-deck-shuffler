@@ -62,7 +62,7 @@
   <div class="modal-dialog">
     <div class="modal-header">
       <h2 class="modal-title">Library Contents</h2>
-      <button class="modal-close"
+      <button id="library-modal-close" class="modal-close"
               hx-get="/close-modal"
               hx-target="#modal-container"
               hx-swap="innerHTML">&times;</button>
@@ -70,7 +70,7 @@
     <div class="modal-body">
       <p class="modal-subtitle">
         <span><%= cards.length %> cards</span>
-        <button class="group-by-type-toggle<%= isGrouped ? ' active' : '' %>"
+        <button id="library-group-by-type-toggle" class="group-by-type-toggle<%= isGrouped ? ' active' : '' %>"
                 hx-get="<%= toggleUrl %>"
                 hx-target="#modal-container"
                 hx-swap="innerHTML"><%= isGrouped ? '✓ ' : '' %>Group by Type</button>

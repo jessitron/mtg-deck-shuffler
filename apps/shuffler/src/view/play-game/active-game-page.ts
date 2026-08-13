@@ -61,7 +61,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
     : "";
 
   const tableCardsSizeClass = game.tableName ? "pushable-dark pushable-small" : "";
-  const tableCardsButtonHtml = `<button class="pushable-flat ${tableCardsSizeClass} table-cards-button"
+  const tableCardsButtonHtml = `<button id="table-cards-button" class="pushable-flat ${tableCardsSizeClass} table-cards-button"
             hx-get="/table-modal/${game.gameId}"
             hx-target="#modal-container"
             hx-swap="innerHTML">${tableCardsCount} Cards on table</button>`;

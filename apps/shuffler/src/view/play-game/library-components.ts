@@ -7,21 +7,21 @@ export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: 
         ${formatLibraryStack(whatHappened, game.listLibrary().length, game.sleeveColor)}
         <div class="library-buttons">
 
-          <button class="draw-button"
+          <button id="draw-button" class="draw-button"
                   hx-post="/draw/${game.gameId}"
                   hx-vals='{"expected-version": ${expectedVersion}}'
                   hx-target="#game-container"
                   hx-swap="outerHTML">Draw</button>
-          <button class="shuffle-button"
+          <button id="shuffle-button" class="shuffle-button"
                   hx-post="/shuffle/${game.gameId}"
                   hx-vals='{"expected-version": ${expectedVersion}}'
                   hx-target="#game-container"
                   hx-swap="outerHTML">Shuffle</button>
-           <button class="search-button"
+           <button id="library-search-button" class="search-button"
                   hx-get="/library-modal/${game.gameId}"
                   hx-target="#modal-container"
                   hx-swap="innerHTML">Search</button>
-          <button class="reveal-button"
+          <button id="reveal-button" class="reveal-button"
                   ${
                     game.listLibrary().length > 0
                       ? `hx-post="/reveal-card/${game.gameId}/${game.listLibrary()[0].gameCardIndex}"

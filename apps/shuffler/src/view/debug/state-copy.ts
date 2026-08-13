@@ -6,7 +6,7 @@ export function formatDebugStateModalHtmlFragment(persistedGameState: PersistedG
   const collapsibleHtml = formatCollapsibleJson(persistedGameState);
 
   const bodyContent = `<div class="debug-container">
-          <button onclick="copyDebugJson(this)"
+          <button id="debug-copy-json-button" onclick="copyDebugJson(this)"
                   class="debug-copy-button">
             Copy JSON
           </button>

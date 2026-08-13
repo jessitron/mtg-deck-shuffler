@@ -14,7 +14,7 @@ function formatModalHtmlFragment(title: string, bodyContent: string): string {
     <div class="modal-dialog">
       <div class="modal-header">
         <h2 class="modal-title">${title}</h2>
-        <button class="modal-close"
+        <button id="history-modal-close" class="modal-close"
                 hx-get="/close-modal"
                 hx-target="#modal-container"
                 hx-swap="innerHTML">&times;</button>

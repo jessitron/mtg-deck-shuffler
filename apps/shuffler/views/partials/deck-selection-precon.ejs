@@ -12,7 +12,7 @@
   </div>
   <div class="precon-tiles-container">
     <% availableDecks.forEach(function(deck, index) { %>
-      <button type="submit" name="precon-deck" value="<%= deck.localFile %>" class="precon-tile" style="--animation-order: <%= index %>;">
+      <button type="submit" id="precon-tile-<%= index %>" name="precon-deck" value="<%= deck.localFile %>" class="precon-tile" style="--animation-order: <%= index %>;">
         <div class="tile-commander-art">
           <img src="<%= deck.metadata.commanders[0].imageUrl %>" alt="<%= deck.metadata.commanders[0].name %>" loading="lazy" />
         </div>

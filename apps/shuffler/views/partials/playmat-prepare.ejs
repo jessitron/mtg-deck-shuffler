@@ -18,7 +18,7 @@
       <%- renderLibraryStack() %>
     </div>
     <div class="library-buttons">
-      <button class="search-button"
+      <button id="prep-library-search-button" class="search-button"
               hx-get="/prep-library-modal/<%= prep.prepId %>"
               hx-target="#modal-container"
               hx-swap="innerHTML">Search</button>
@@ -51,7 +51,7 @@
           </label>
         </div>
       </details>
-      <button type="submit" class="button-base pushable-flat begin-button">Shuffle Up</button>
+      <button type="submit" id="shuffle-up-button" class="button-base pushable-flat begin-button">Shuffle Up</button>
     </form>
   </div>
 </div>

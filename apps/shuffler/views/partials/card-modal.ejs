@@ -23,7 +23,7 @@
      aria-modal="true"
      tabindex="0">
   <div class="card-modal-dialog">
-    <button class="card-modal-close"
+    <button id="card-modal-close" class="card-modal-close"
             hx-get="/close-card-modal"
             hx-target="#card-modal-container"
             hx-swap="innerHTML">&times;</button>
@@ -31,7 +31,7 @@
       <div class="card-modal-content">
         <div class="card-modal-nav-container">
           <% if (prevCardIndex !== null) { %>
-            <button class="card-modal-nav-button card-modal-nav-prev"
+            <button id="card-modal-nav-prev" class="card-modal-nav-button card-modal-nav-prev"
                     hx-get="<%= prevNavUrl %>"
                     hx-target="#card-modal-container"
                     hx-swap="innerHTML"
@@ -50,7 +50,7 @@
           </div>
           
           <% if (nextCardIndex !== null) { %>
-            <button class="card-modal-nav-button card-modal-nav-next"
+            <button id="card-modal-nav-next" class="card-modal-nav-button card-modal-nav-next"
                     hx-get="<%= nextNavUrl %>"
                     hx-target="#card-modal-container"
                     hx-swap="innerHTML"

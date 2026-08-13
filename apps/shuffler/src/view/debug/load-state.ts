@@ -13,7 +13,7 @@ export function formatLoadStateHtmlPage(): string {
                     rows="10"
                     required></textarea>
           <div class="form-actions">
-            <button type="submit" class="load-state-submit-button">Create Game</button>
+            <button type="submit" id="load-state-submit-button" class="load-state-submit-button">Create Game</button>
             <a href="/choose-any-deck" class="cancel-link">Cancel</a>
           </div>
         </form>

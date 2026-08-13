@@ -25,13 +25,13 @@ function formatUndoAndHistoryHtmlFragment(game: GameState): string {
     .reverse()
     .find((event) => eventLog.canBeUndone(event.gameEventIndex));
 
-  const historyButton = `<button class="history-button"
+  const historyButton = `<button id="history-button" class="history-button"
                   hx-get="/history-modal/${game.gameId}"
                   hx-target="#modal-container"
                   hx-swap="innerHTML">Action History (${eventLog.getEvents().length})</button>`;
 
   const undoButton = mostRecentUndoableEvent
-    ? `<button class="undo-button"
+    ? `<button id="undo-button" class="undo-button"
         hx-post="/undo/${game.gameId}/${mostRecentUndoableEvent.gameEventIndex}"
         hx-vals='{"expected-version": ${game.getStateVersion()}}'
         hx-target="#game-container"
@@ -48,7 +48,7 @@ function formatEndGameActionsHtmlFragment(game: GameState): string {
   return `<div class="menu-section end-game-actions">
       <form method="post" action="/restart-game" class="inline-form">
         <input type="hidden" name="game-id" value="${game.gameId}" />
-        <button type="submit">Restart Game</button>
+        <button type="submit" id="restart-game-button">Restart Game</button>
       </form>
       <a href="/choose-any-deck">Choose Another Deck</a>
       <a href="/">Home</a>
