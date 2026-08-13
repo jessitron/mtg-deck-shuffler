@@ -1,11 +1,12 @@
 {
-  "hooks": {},
-  "enabledPlugins": {
-    "seamapping@tronijess-skills": true
-  },
   "permissions": {
     "allow": [
       "Bash(scripts/snapshot-linear.sh *)"
     ]
+  },
+  "hooks": {},
+  "enabledPlugins": {
+    "seamapping@tronijess-skills": true,
+    "mattpocock-skills@claude-plugins-official": true
   }
 }
