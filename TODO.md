@@ -15,6 +15,14 @@ section is just a wall between Jess and the live work.
 
 - Consider removing the animations owner, since the animations don't do much now.
 
+- `editable-deck-title` On the Tabletop, let the deck title be editable. It's currently a
+  locked tldraw `text` shape (`apps/tabletop/src/server/tableFurniture.ts`, the `labelId`
+  block) reading `${playerName} 〜 ${deckName}`. It's locked on purpose — a live bug was that
+  any player could drag/delete another player's name — and tldraw ties editing to the same
+  unlocked state as drag/delete. So making it editable needs a design that unlocks *editing
+  the text only* (custom shape, or double-click-to-edit) while keeping drag/delete off, plus
+  a decision on whether the edit persists/syncs and who's allowed to edit whose title.
+
 - bug: In tabletop, often after selecting a card, I right-click and the menu comes up... once. After that, right-clicking does nothing, until I like do a bunch of other things, click outside it (doesn't work usually), click other things, wiggle stuff, refresh the page even... at some point the right-click menu becomes available again.
 
 - GRILLING: Tokens support. Archidekt lets you add tokens to your deck. We could bring them in and make them available on the board. They can tap like cards, they hold counters etc. but if you drag them to the graveyard, they go back to their place under your playmat (or wherever we decide to line them up). Oh and if you drag a token from its spot where it was drawn to the board it immediately creates another one in the spot it left; each token is an infinite pile. Then: people need to add tokens as the game is going, because we rarely have them all prepped before hand. Paste any image, right-click and say "make token." A token (infinite pile) appears next to the others. Now they can be clicked to tap.

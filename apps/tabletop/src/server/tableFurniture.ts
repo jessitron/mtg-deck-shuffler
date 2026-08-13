@@ -344,6 +344,23 @@ export async function ensurePlayerArea(
       })
     );
 
+    // Put the life counter first so it takes the higher furniture index: a long deck
+    // title runs rightward into the counter's band, and the label must sit behind it.
+    store.put({
+      id: lifeCounterId,
+      typeName: "shape",
+      type: "mtg-life-counter",
+      x: lifeCounterPos.x,
+      y: lifeCounterPos.y,
+      rotation: 0,
+      index: nextFurnitureIndex(entry.tableName),
+      parentId: pageId,
+      isLocked: true,
+      opacity: 1,
+      props: { w: LIFE_COUNTER_W, h: LIFE_COUNTER_H, value: 40, label: null, sleeveColor: null },
+      meta: {},
+    } as any);
+
     store.put({
       id: labelId,
       typeName: "shape",
@@ -365,21 +382,6 @@ export async function ensurePlayerArea(
         w: 200,
         scale: 2,
       },
-      meta: {},
-    } as any);
-
-    store.put({
-      id: lifeCounterId,
-      typeName: "shape",
-      type: "mtg-life-counter",
-      x: lifeCounterPos.x,
-      y: lifeCounterPos.y,
-      rotation: 0,
-      index: nextFurnitureIndex(entry.tableName),
-      parentId: pageId,
-      isLocked: true,
-      opacity: 1,
-      props: { w: LIFE_COUNTER_W, h: LIFE_COUNTER_H, value: 40, label: null, sleeveColor: null },
       meta: {},
     } as any);
   });

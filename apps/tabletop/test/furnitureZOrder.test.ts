@@ -113,4 +113,18 @@ describe("furniture z-order", () => {
       expect(index < card.index).toBe(true);
     }
   });
+
+  it("keeps the life counter above the deck-title label so the title can't cover it", async () => {
+    const tableName = `furniture-zorder-${randomUUID()}`;
+
+    await postEvent(tableName, seatJoined(tableName, "seat-title0001", "Titled"));
+
+    const shapes = allShapes(tableName);
+    const label = shapes.find((s) => s.type === "text" && s.id.includes("name-label"));
+    const lifeCounter = shapes.find((s) => s.type === "mtg-life-counter" && s.id.includes("life-counter"));
+
+    expect(label).toBeTruthy();
+    expect(lifeCounter).toBeTruthy();
+    expect(label.index < lifeCounter.index).toBe(true);
+  });
 });
