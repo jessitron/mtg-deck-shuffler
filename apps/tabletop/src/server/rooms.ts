@@ -5,6 +5,7 @@ import { log } from "./log.js";
 import { mtgCardShapeProps } from "../shared/mtgCardShape.js";
 import { mtgCounterShapeProps } from "../shared/mtgCounterShape.js";
 import { mtgLifeCounterShapeProps } from "../shared/mtgLifeCounterShape.js";
+import { mtgTitleShapeProps } from "../shared/mtgTitleShape.js";
 import { mtgZoneShapeProps } from "../shared/mtgZoneShape.js";
 
 const tableSchema = createTLSchema({
@@ -13,6 +14,7 @@ const tableSchema = createTLSchema({
     "mtg-card": { props: mtgCardShapeProps },
     "mtg-counter": { props: mtgCounterShapeProps },
     "mtg-life-counter": { props: mtgLifeCounterShapeProps },
+    "mtg-title": { props: mtgTitleShapeProps },
     "mtg-zone": { props: mtgZoneShapeProps },
   },
 });

@@ -94,14 +94,14 @@ describe("seat joined", () => {
     ).toBe(true);
     expect(shapes.some((s) => s.x === graveyard.x && s.y === graveyard.y && s.props?.w === graveyard.w && s.props?.h === graveyard.h)).toBe(true);
     expect(shapes.some((s) => s.x === exile.x && s.y === exile.y && s.props?.w === exile.w && s.props?.h === exile.h)).toBe(true);
-    expect(shapes.some((s) => s.type === "text")).toBe(true);
+    expect(shapes.some((s) => s.type === "mtg-title")).toBe(true);
   });
 
   it("labels the seat with the player's name and the deck's name, player first", async () => {
     await post("seat-label", seatJoined("seat-label", { initiator: { seatId: "seat-label-a", playerName: "Robin" } }));
 
-    const label = shapesOf("seat-label").find((s) => s.type === "text");
-    const text = JSON.stringify(label.props.richText);
+    const label = shapesOf("seat-label").find((s) => s.type === "mtg-title");
+    const text = label.props.text;
     expect(text).toContain("Robin");
     expect(text).toContain("Blame Game");
     expect(text.indexOf("Robin")).toBeLessThan(text.indexOf("Blame Game"));

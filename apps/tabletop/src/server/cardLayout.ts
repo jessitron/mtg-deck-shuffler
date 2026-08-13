@@ -14,7 +14,7 @@ export interface Bounds {
   h: number;
 }
 
-const NAME_LABEL_HEIGHT = 40;
+export const NAME_LABEL_HEIGHT = 40;
 
 /** Playmat: 9.6 cards wide x 4 cards tall. */
 export const PLAYMAT_W = Math.round(9.6 * CARD_W); // 1632
