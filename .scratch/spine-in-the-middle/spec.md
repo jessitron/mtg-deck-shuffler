@@ -27,7 +27,7 @@ Tabletop and stop there. Separately, joining is not idempotent: a retry or a
 `/restart-game` that re-sent the join would mint a second seat, so today's code works
 around that by never retrying.
 
-This is Mountain 2 ("Spine Gathers Data") of `SEAMAP.md`: every physical/administrative
+This is Mountain 2 ("Spine Tells the Story") of `SEAMAP.md`: every physical/administrative
 event from either app is supposed to cross the Spine's one append-only log. Right now,
 joining a table doesn't.
 

@@ -2,7 +2,7 @@
 
 **Achieved (2026-08-11).** Jess's call: the Tabletop is better than Mural now — more
 fragile, but worth it. `SEAMAP.md`'s Mountain 1 is climbed; the fleet has moved on to
-Mountain 2, Spine Gathers Data. This document stays as the record of how it was climbed.
+Mountain 2, Spine Tells the Story. This document stays as the record of how it was climbed.
 A few of the five maps below still carry open tickets (table layout, for one) — they're
 fun follow-ons, not blockers, and don't reopen the achievement.
 
