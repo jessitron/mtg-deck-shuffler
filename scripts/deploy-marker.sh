@@ -57,7 +57,7 @@ SHORT_SHA="$(git rev-parse --short HEAD)"
 REPO_URL="$(git remote get-url origin 2>/dev/null | sed 's/\.git$//' | sed 's|git@github.com:|https://github.com/|')"
 
 RESPONSE="$(curl -sS --max-time 10 -w '\n%{http_code}' \
-    -X POST "https://api.honeycomb.io/1/markers/__all__" \
+    -X POST "https://api.honeycomb.io/1/markers/${OTEL_SERVICE_NAME:-__all__}" \
     -H "X-Honeycomb-Team: $HONEYCOMB_MARKER_KEY" \
     -H "Content-Type: application/json" \
     -d "{\"message\": \"deploy ${SHIP} ${SHORT_SHA}\", \"type\": \"deploy\", \"url\": \"${REPO_URL}/commit/${SHA}\"}" 2>/dev/null)"
