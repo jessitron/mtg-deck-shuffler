@@ -659,10 +659,21 @@ not by recomputing new numbers.**
 - **If a canvas shape needs a green, there is no fleet token for it — `--mana-G` is a false
   friend** (2026-08-12, the `mtg-title` deck-title label). `--mana-G` (`#2a8439`, Forest) is
   Magic's colour-pie green for *mana identity*, not a chrome/text colour, and it is a different
-  green from tldraw's own `#099268` that the label currently reproduces. No green chrome token
-  exists at all. Colouring canvas text green is therefore a design decision, not a token
-  lookup — surface it (the deck-title on-brand restyle is exactly this, still open; see
-  [open-choices.md](open-choices.md) → Fleet gaps).
+  green from tldraw's own `#099268` that the label used to reproduce. No green chrome token
+  exists at all. This is settled precedent now, not an open question: when the deck-title label
+  went on-brand (2026-08-13, `worktree-deck-title-orbitron`) it **dropped the green entirely**
+  rather than reach for `--mana-G` — colouring it with the deck's darker identity color
+  (`darkerColor()` in `tableFurniture.ts`, domain data) instead. So: a canvas shape wanting
+  green surfaces the decision rather than looking up a token; `--mana-G` is never the answer for
+  chrome/text.
+- **Deck-identity color is available to canvas shapes as domain data, same exemption as
+  `sleeveColor`** (2026-08-13, `mtg-title`). The raw `primaryColor`/`secondaryColor` hexes on
+  `seat.joined` reach the Tabletop server (`seatJoined.ts` → `rooms.ts` → `tableFurniture.ts`);
+  `darkerColor(a?, b?)` in `tableFurniture.ts` picks the darker by relative luminance and bakes
+  it into the `mtg-title` shape's `color` prop, fallback `var(--deep-space)`. Using these raw
+  hexes is **not** a token-discipline violation — it's player-chosen identity data, the same
+  category the raw-hex-in-stylesheets ban explicitly doesn't govern. Precedent for reading seat
+  identity color as chrome is `/game`'s `--seat-primary`/`--seat-secondary`.
 - **Read [README.md](README.md) → "tldraw limits" first.** The list keeps growing; the hard
   limits so far: no Orbitron in the `geo`/`text` `font` enum (so on-brand canvas text
   requires a self-rendering shape), the global `:focus-visible` rule can't reach a shape

@@ -46,6 +46,27 @@ function nextFurnitureIndex(tableName: string): IndexKey {
   return next;
 }
 
+const DEFAULT_TITLE_COLOR = "var(--deep-space)";
+
+/** Relative luminance (0 dark … 1 light) of a #rrggbb hex, sRGB-weighted. */
+function luminance(hex: string): number {
+  const n = parseInt(hex.slice(1), 16);
+  const r = (n >> 16) & 0xff;
+  const g = (n >> 8) & 0xff;
+  const b = n & 0xff;
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+}
+
+/**
+ * The darker of the deck's two identity colors, for the deck-title text. Both are optional
+ * (an older Shuffler may send neither); with one or none present, fall back to the house
+ * dark chrome token so the title stays on-brand and legible.
+ */
+export function darkerColor(a?: string, b?: string): string {
+  if (a && b) return luminance(a) <= luminance(b) ? a : b;
+  return a ?? b ?? DEFAULT_TITLE_COLOR;
+}
+
 export type Zone = MtgZoneShapeProps["zone"];
 
 export interface ZoneShapeArgs {
@@ -380,6 +401,7 @@ export async function ensurePlayerArea(
         w: PLAYMAT_W - LIFE_COUNTER_W - GAP,
         h: NAME_LABEL_HEIGHT,
         text: look.deckName ? `${playerName} 〜 ${look.deckName}` : playerName,
+        color: darkerColor(look.primaryColor, look.secondaryColor),
       },
       meta: {},
     } as any);

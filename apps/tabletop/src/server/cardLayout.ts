@@ -74,13 +74,16 @@ export function nameLabelPosition(seatIndex: number): { x: number; y: number } {
 }
 
 /**
- * Baseline of the name+deck-title text, in page units below the text shape's top
- * (= nameLabelPosition().y). Measured from the live tldraw render (serif, size "m",
- * scale 2): glyph box 0→64, baseline at 50, descenders to 64. Counters rest their
- * bottom edge on this baseline. tldraw owns the text metrics — canvas text can't use
- * the fleet fonts — so this is library-dependent: a font/size/scale change remeasures it.
+ * Baseline of the name+deck-title text, in page units below the title shape's top
+ * (= nameLabelPosition().y). The title is now the mtg-title shape's <input> (Orbitron via
+ * var(--font-chrome), font-size 28, line-height 40 in a 40px box); an <input> height-caps
+ * and vertically-centers its single line, so its text baseline sits higher than the old
+ * unbounded stock-text render did (that was 50, glyph box 0→64). Measured off the live
+ * input render: baseline at 30 (canvas font metrics, a matching div, and the real input all
+ * agree). Counters rest their bottom edge on this baseline. Browser/tldraw own text metrics
+ * — measure, don't derive — so a font/size/height change remeasures it.
  */
-export const NAME_TEXT_BASELINE = 50;
+export const NAME_TEXT_BASELINE = 30;
 
 /** Life counter: bigger than the name-row band, right-aligned to the playmat, bottom on the name baseline (ticket 20). */
 export const LIFE_COUNTER_W = 130;

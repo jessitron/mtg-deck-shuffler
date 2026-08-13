@@ -83,11 +83,14 @@ each).
   text the fleet wants on a canvas in a fleet typeface has to come from a self-rendering
   shape.** **The seat/deck label stopped being that stock `text` example on 2026-08-12
   (`96551ef`, `mtg-title`) — see the seat-name-label paragraph below.** It is now a
-  self-rendering `BaseBox` shape, so it *could* be on-brand, but the change deliberately
-  **reproduced the old off-brand stock look** (green `#099268`, `Georgia` serif) as raw
-  literals rather than going on-brand — the mechanism moved, the appearance decision did not.
-  So the enum values that used to be "not a choice" are now raw literals reproducing what the
-  enum rendered; the on-brand version is the unratified decision still owed to Jess. **Confirmed working, not just argued, 2026-08-08** (tabletop-physics ticket 13):
+  self-rendering `BaseBox` shape, so it *could* be on-brand — and **it now is (2026-08-13,
+  `worktree-deck-title-orbitron`).** `96551ef` deliberately reproduced the old off-brand stock
+  look (green `#099268`, `Georgia` serif) for exactly one commit, mechanism-only; the on-brand
+  restyle this KB predicted has since landed. The `<input>` now renders in
+  `var(--font-chrome)` (Orbitron) colored with the deck's own darker identity color — so this
+  is the first fleet **typeface** to reach canvas text through a self-rendering shape's own
+  `<input>` element (the zone labels below got Orbitron onto the canvas first, via a `div`).
+  **Confirmed working, not just argued, 2026-08-08** (tabletop-physics ticket 13):
   `MtgZoneShapeUtil`'s `component()` sets `fontFamily: "var(--font-chrome)"` on a plain `div`
   inside `HTMLContainer`, and it resolves to Orbitron — checked both by reading the DOM's
   computed `font-family` in a live browser and by screenshot. `HTMLContainer` is an
@@ -203,14 +206,18 @@ each).
   deck-title label's baseline — needs the offset from the text shape's top down to its
   glyph baseline. tldraw owns that metric (its own stroke geometry, and canvas text can't
   use the fleet fonts anyway — same font-enum limit), so there's no token or CSS to read it
-  from: `NAME_TEXT_BASELINE = 50` in `apps/tabletop/src/server/cardLayout.ts` was measured
-  off the live render (the stock `serif` label at size `"m"`, `scale: 2` — glyph box 0→64,
-  baseline at 50, descenders to 64). **It is font/size/scale-dependent by construction**, so
-  it must be remeasured if the label's face, size, or scale ever changes — which is exactly
-  what happens the day the seat label becomes a self-rendering shape in a fleet font (see the
-  seat-name-label entry in the design language below). This is placement geometry, decided
-  by eye with Jess and living in `cardLayout.ts`, not a stylesheet or a `/design` specimen —
-  the gallery has no Tabletop canvas stage to stage it on.
+  from: `NAME_TEXT_BASELINE` in `apps/tabletop/src/server/cardLayout.ts` is measured off the
+  live render. **It was remeasured 50 → 30 when the label went on-brand (2026-08-13,
+  `worktree-deck-title-orbitron`)** — and Jess's insight was that the *element*, not the font,
+  moved the baseline: the old 50 came from the unbounded stock-`text` render (glyph box 0→64,
+  baseline 50), but the `mtg-title` shape's label is an `<input>` that height-caps and
+  vertically-centers its single line, seating the baseline at 30 (Orbitron, font-size 28,
+  line-height 40 in a 40px box; measured three ways — canvas `fontBoundingBox` metrics, a
+  matching `div`, and a real styled `<input>`, all agreeing at 30). **It is
+  font/size/height-dependent by construction**, so it must be remeasured if the label's face,
+  size, or box height ever changes again. This is placement geometry, decided by eye with Jess
+  and living in `cardLayout.ts`, not a stylesheet or a `/design` specimen — the gallery has no
+  Tabletop canvas stage to stage it on.
 
 ## Why this owner exists
 
@@ -662,47 +669,60 @@ same category as card art). A missing deck name degrades to the bare player name
 
 **This label's text baseline is a shared alignment datum (2026-08-12,
 `tabletop-name-baseline-align`):** the life counter and commander-damage counters in the same
-row rest their bottom edge on it (`NAME_TEXT_BASELINE = 50` in `cardLayout.ts`, measured off
-the live render — see the tldraw-limits bullet above), so the counter row shares one bottom
-line with the text instead of floating band-centered above it. That measured 50 is tied to
-this label's rendered face and size. The `mtg-title` reproduction below preserves both (Georgia
-serif at 28px ≈ the old stock `serif`/size-`m`/`scale:2` render), so **50 still holds** — but
-the on-brand restyle described below changes face/size and is exactly the moment to remeasure
-`NAME_TEXT_BASELINE`, or the counters will drift off the new baseline silently.
+row rest their bottom edge on it (`NAME_TEXT_BASELINE` in `cardLayout.ts`, measured off the
+live render — see the tldraw-limits bullet above), so the counter row shares one bottom line
+with the text instead of floating band-centered above it. **The datum was remeasured 50 → 30
+when the label went on-brand (2026-08-13, `worktree-deck-title-orbitron`)** — and the
+KB's own prediction that the restyle would be "exactly the moment to remeasure" held. The
+subtle finding (Jess's): it wasn't the face change that moved the baseline, it was the
+`<input>` — the old 50 came from the unbounded stock-`text` render, and a height-capped,
+vertically-centered single-line `<input>` seats the baseline at 30. The life and
+commander-damage counters realigned to it automatically, since they derive from
+`namePos.y + NAME_TEXT_BASELINE`.
 
-**The label became a self-rendering shape on 2026-08-12 (`96551ef`, `mtg-title`) — the event
-the previous version of this paragraph predicted — and the prediction held exactly: the
-one-line name-〜-deck composition carried forward, and on-brand typographic hierarchy is now
-*possible* for the first time.** The label was a locked stock tldraw `text` shape (`serif`,
-`color: "green"`, `scale: 2` — enum values, not choices, per the tldraw limit above);
-`.scratch/editable-deck-title/` replaced it with a locked custom `BaseBox` shape
-(`MtgTitleShapeUtil.tsx`, drawn by `ensurePlayerArea` in
-`apps/tabletop/src/server/tableFurniture.ts`) so the whole label is one editable `<input>`.
-**That change was mechanics-only by design; the appearance was a faithful reproduction, and
-the on-brand restyle was deliberately NOT ridden along.** What the reproduction hard-codes as
-raw literals in the shape's `component()` (`MtgTitleShapeUtil.tsx`, `inputStyle`): `color:
-"#099268"`, `fontFamily: "Georgia, 'Times New Roman', serif"`, `fontSize: 28`, transparent/
-borderless at rest, with choice 5's exact focus ring (`outline: 3px solid var(--light-pink)`,
-`outline-offset: 3px`) reproduced via a scoped `<style>` the same way the life counter does.
-These used to be tldraw enum values the KB called "not a choice"; a self-rendering shape can't
-use that enum, so they are now raw literals reproducing what the enum *rendered* — a
-**knowingly-untokenized placeholder** in the same category as the zone scaffolding, exempt
-from the Layer-1 token ban, pending the real decision. **The on-brand version (`--font-chrome`/
-Orbitron + a token text color) is an unratified appearance decision, staged for Jess
-separately — do not let it land as tidying.** Two facts the restyle will need:
+**The label became a self-rendering shape on 2026-08-12 (`96551ef`, `mtg-title`), and it went
+on-brand on 2026-08-13 (`worktree-deck-title-orbitron`) — both the events the earlier version
+of this paragraph predicted, in the order it predicted them.** `96551ef` replaced the locked
+stock tldraw `text` shape (`serif`, `color: "green"`, `scale: 2` — enum values, not choices)
+with a locked custom `BaseBox` shape (`MtgTitleShapeUtil.tsx`, drawn by `ensurePlayerArea` in
+`apps/tabletop/src/server/tableFurniture.ts`) so the whole label is one editable `<input>` —
+carrying the one-line name-〜-deck composition forward but deliberately reproducing the old
+off-brand stock look (green `#099268`, `Georgia` serif) as a mechanics-only placeholder. The
+restyle then converged it, with this owner's `-review`:
 
-- **There is no fitting green token in the fleet palette, and `--mana-G` is a false friend.**
-  `--mana-G` is `#2a8439` (Forest — *Magic's colour-pie green for mana identity*), not the
-  label's `#099268` (tldraw's own green), and it is a different green besides. Reaching for
-  `--mana-G` would both miscolour the label and misuse an identity token as chrome. The
-  on-brand restyle therefore needs a **new** chrome/text colour decision, not a reuse — most
-  likely dropping the green entirely for the identity palette (`--dark-pink`/`--deep-space`/
-  `--light-pink`) or a new named token, which is exactly the kind of thing to stage on
-  `/design` and put to Jess.
-- **A `/design` specimen is owed with that restyle, not now.** Staging the current stock-look
-  reproduction would be staging scaffolding; the specimen belongs with the on-brand options
-  when they go to Jess (same "stage both, let Jess pick" shape as choice 7 and the life
-  counter). A Tabletop canvas shape stages as a `.stage-white` mock, per precedent.
+- **Font: `var(--font-chrome)` (Orbitron)**, the role token, no typeface literal — Orbitron
+  reaches canvas text only through a self-rendering shape, and this is the first to carry it on
+  an `<input>` rather than a `div`.
+- **Color: the darker of the deck's two identity colors** — a **new `color` prop** on the
+  `mtg-title` shape (`src/shared/mtgTitleShape.ts`, single source, in both client and server
+  `createTLSchema`), computed server-side in `tableFurniture.ts` by the exported
+  `darkerColor(a?, b?)` (relative-luminance compare, pick darker). These are the raw
+  `primaryColor`/`secondaryColor` hexes already on the `seat.joined` payload — **domain data,
+  the same identity-data exemption as `sleeveColor`, not a token-discipline violation.** This
+  is deck-identity color, precedent being `/game`'s chrome reading `--seat-primary`/
+  `--seat-secondary`; it is a *third* path the earlier prediction hadn't listed (it guessed
+  "identity palette or a new named token"). **`--mana-G` stayed out entirely** — see the
+  false-friend note that made the case, still true and still worth reading. Fallback:
+  `var(--deep-space)` (the house dark chrome token, matching `MtgZoneShapeUtil`) when a seat
+  carries neither color, which is also `getDefaultProps`' default.
+- **Rest chrome unchanged:** transparent/borderless at rest (input-chrome is still open choice
+  6, untouched), and choice 5's exact focus ring (`outline: 3px solid var(--light-pink)`,
+  `outline-offset: 3px`) via a scoped `<style>`, the same way the life counter does.
+
+**The green false-friend note, kept because the reasoning is the valuable part:** `--mana-G`
+is `#2a8439` (Forest — *Magic's colour-pie green for mana identity*), not the placeholder's
+`#099268` (tldraw's own green), and a different green besides; reaching for it would both
+miscolour the label and misuse an identity token as chrome. The restyle correctly took none of
+it — it dropped the green entirely for deck-identity color.
+
+**Still owed: a `/design` specimen** — a `.stage-white` Tabletop mock, per precedent. It's
+cross-ship (Shuffler-side gallery, Tabletop shape), so it was buoyed rather than reached across
+for in this Tabletop-scoped change. That's the right call; the specimen is the one open thread.
+
+**One watch item flagged to Jess, not resolved: contrast against dark playmat art.** A
+near-black title (`darkerColor` of a dark deck) was verified legible on a blank background, but
+the test playmat art 404s, so contrast against *real* dark playmat art was not verified. No
+minimum-contrast floor was invented — recorded here as an open risk to watch, not a rule.
 
 **Two style worlds.** Site pages (`/`, `/choose-any-deck`, `/docs`, `/about`) use the
 purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { createShapeId, ZERO_INDEX_KEY } from "@tldraw/tlschema";
-import { mtgCardShape, zoneShape } from "../src/server/tableFurniture";
+import { mtgCardShape, zoneShape, darkerColor } from "../src/server/tableFurniture";
 
 describe("tableFurniture constructors", () => {
   it("mtgCardShape produces a record whose parentId is the given page, not a leaked tldraw field", () => {
@@ -101,5 +101,22 @@ describe("tableFurniture constructors", () => {
 
     expect(shape.opacity).toBe(1);
     expect(shape.props.sleeveColor).toBe("#ff0000");
+  });
+});
+
+describe("darkerColor — the deck-title text color", () => {
+  it("picks the darker of the two identity colors by luminance", () => {
+    // #530aae (dark purple) is darker than #f0e68c (warm gold).
+    expect(darkerColor("#530aae", "#f0e68c")).toBe("#530aae");
+    expect(darkerColor("#f0e68c", "#530aae")).toBe("#530aae");
+  });
+
+  it("uses whichever single color is present when only one is", () => {
+    expect(darkerColor("#bd0a0a", undefined)).toBe("#bd0a0a");
+    expect(darkerColor(undefined, "#3c99e5")).toBe("#3c99e5");
+  });
+
+  it("falls back to the house dark chrome token when a seat carries neither color", () => {
+    expect(darkerColor(undefined, undefined)).toBe("var(--deep-space)");
   });
 });

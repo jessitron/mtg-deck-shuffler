@@ -21,7 +21,13 @@ function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
 }
 
-function seatJoined(tableName: string, seatId: string, playerName: string, deckName: string) {
+function seatJoined(
+  tableName: string,
+  seatId: string,
+  playerName: string,
+  deckName: string,
+  colors: { primaryColor?: string; secondaryColor?: string } = {}
+) {
   return {
     id: randomUUID(),
     tableId: tableName,
@@ -34,7 +40,12 @@ function seatJoined(tableName: string, seatId: string, playerName: string, deckN
     visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
-    payload: { deckName, playmatImageUrl: "https://example.com/playmat.png", cardBackImageUrl: "https://example.com/card-back.jpg" },
+    payload: {
+      deckName,
+      playmatImageUrl: "https://example.com/playmat.png",
+      cardBackImageUrl: "https://example.com/card-back.jpg",
+      ...colors,
+    },
   };
 }
 
@@ -68,6 +79,32 @@ describe("editable deck title", () => {
     expect(title.id).toBe(`shape:name-label-${tableName}-${seatId}`);
     expect(title.isLocked).toBe(true);
     expect(title.props.text).toBe("Alice 〜 Mono-Red Aggro");
+  });
+
+  it("colors the title with the darker of the deck's identity colors", async () => {
+    const tableName = `title-color-${randomUUID()}`;
+    const seatId = "seat-title003";
+
+    await postEvent(
+      tableName,
+      seatJoined(tableName, seatId, "Cleo", "Golgari Midrange", {
+        primaryColor: "#530aae", // dark purple
+        secondaryColor: "#f0e68c", // warm gold
+      })
+    );
+
+    const title = allShapes(tableName).find((s) => s.type === "mtg-title");
+    expect(title.props.color).toBe("#530aae");
+  });
+
+  it("falls back to the house dark chrome token when a seat carries no identity colors", async () => {
+    const tableName = `title-nocolor-${randomUUID()}`;
+    const seatId = "seat-title004";
+
+    await postEvent(tableName, seatJoined(tableName, seatId, "Dana", "Colorless Eldrazi"));
+
+    const title = allShapes(tableName).find((s) => s.type === "mtg-title");
+    expect(title.props.color).toBe("var(--deep-space)");
   });
 
   it("keeps the title below the life counter so a long title can't cover it", async () => {

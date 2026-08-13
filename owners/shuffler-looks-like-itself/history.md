@@ -2640,3 +2640,54 @@ likely the identity palette, dropping the green), not a token reuse — recorded
 [interactions.md](interactions.md)'s canvas-text watch point and
 [open-choices.md](open-choices.md) → Fleet gaps so the next agent surfaces it to Jess instead
 of quietly miscolouring the label with an identity token.
+
+## 2026-08-13 — the deck-title label went on-brand (`mtg-title`)
+
+`worktree-deck-title-orbitron` (about to merge). The placeholder from the day before became
+the real thing, with this owner's `-review`. Three moves, each a settled precedent now:
+
+**Font: `var(--font-chrome)` (Orbitron), no typeface literal.** The `<input>` in
+`MtgTitleShapeUtil.tsx` swapped `Georgia`-serif for the role token. This is the first fleet
+**typeface** to reach canvas text through a self-rendering shape's own `<input>` — the zone
+labels (ticket 13) got Orbitron onto the canvas first, but via a `div`. Orbitron reaches
+canvas text only through a self-rendering shape at all (the `geo`/`text` `font` enum has no
+Orbitron), so this is the mechanism working exactly as designed.
+
+**Color: the darker of the deck's two identity colors — and it's a THIRD path the prediction
+missed.** The KB had guessed the restyle would land on "the identity palette or a new named
+token." Jess picked neither: **deck-identity color**, precedent `/game`'s chrome reading
+`--seat-primary`/`--seat-secondary`. A new `color` prop on the `mtg-title` shape
+(`src/shared/mtgTitleShape.ts`, single source picked up by both client and server
+`createTLSchema`), computed server-side by a new exported `darkerColor(a?, b?)` in
+`tableFurniture.ts` (relative-luminance compare, pick darker) from the raw `primaryColor`/
+`secondaryColor` hexes already on the `seat.joined` payload. **These raw hexes are domain data
+— the same identity-data exemption as `sleeveColor`, confirmed in the `-review` as the correct
+application, not a token-discipline violation.** Fallback `var(--deep-space)` (matching
+`MtgZoneShapeUtil`, and `getDefaultProps`' default) when a seat carries neither.
+
+**`--mana-G` stayed out entirely.** The false-friend note the KB had recorded did its job: the
+restyle dropped the green rather than reach for `--mana-G` (`#2a8439`, Forest — a colour-pie
+*identity* token, a different green). This is why the note is worth keeping even though the
+label is no longer green: it's the reasoning that steered the decision, not just a warning
+about a mistake nobody made.
+
+**Baseline remeasured 50 → 30 — and the finding was subtler than "the font changed."**
+`NAME_TEXT_BASELINE` in `cardLayout.ts` had to move, exactly as the KB predicted a face/size
+change would force. But Jess's insight was that it wasn't the *font* that moved the baseline,
+it was the *element*: the old 50 came from the unbounded stock-`text` render (glyph box 0→64),
+and a height-capped, vertically-centered single-line `<input>` seats the baseline at 30
+(measured three ways — canvas `fontBoundingBox`, a matching `div`, and a real styled `<input>`,
+all agreeing). The life and commander-damage counters, which rest on `namePos.y +
+NAME_TEXT_BASELINE`, realigned automatically.
+
+**What's still owed, and it's the one open thread.** A `/design` specimen (a `.stage-white`
+Tabletop mock) is owed but was **buoyed, not built** — it's cross-ship (Shuffler-side gallery,
+Tabletop shape) and this change was Tabletop-scoped, so reaching across would have violated the
+scope-to-a-ship discipline. Correct call. And an **open contrast risk** was flagged to Jess
+rather than papered over: a near-black title was verified legible on a blank background, but the
+test playmat art 404s, so contrast against real dark playmat art is unverified. No
+minimum-contrast floor was invented — recorded as a watch item.
+
+Verification: 141 vitest pass (new `darkerColor` unit tests + `mtg-title` color-prop
+assertions); `verify-deck-title.spec.ts` asserts computed `fontFamily` contains Orbitron and
+`color === rgb(26, 10, 46)` for a near-black deck color, plus the existing edit/sync/persist.
