@@ -119,9 +119,14 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   broken one, blocking routing changes fleet-wide for as long as it stays applied.
 - **Upgrading `@opentelemetry/*`**: bare `GET` spans with no `http.route` afterward = ESM patching
   broke. Check the loader wiring (`node --import`, `register(...)`).
-- **Touching `apps/shuffler/src/telemetry-sampler.ts`**: keep `test/telemetry-sampler.test.ts`
-  passing and meaningful — a prior inline sampler was silently broken for months (a case-mismatch
-  in a string match), and every ALB probe was traced at 100% as a result.
+- **Touching either ship's `telemetry-sampler.ts`** (`apps/shuffler/src/telemetry-sampler.ts` or
+  `apps/tabletop/src/server/telemetry-sampler.ts` — both Node ships now have an extracted, tested
+  sampler module as of 2026-08-12): keep the paired `test/telemetry-sampler.test.ts` passing and
+  meaningful — a prior inline sampler was silently broken for months (a case-mismatch in a string
+  match), and every ALB probe was traced at 100% as a result. Both read **both** semconv spellings
+  and check the probe UA before the path. They are **not** identical: the Shuffler also
+  head-samples static assets by extension; the Tabletop deliberately does not (probes + `/health`
+  only). Don't "unify" them into one behavior without asking — the difference is intentional.
 - **`services/spine/app.rb`'s `current_span`/`mark_span_failed` helpers**: the Spine's hand-rolled
   span-attribute code — `current_span.add_attributes(...)` for inputs/outcome on `POST /join`,
   `POST /tables/:table_id/events`, and now `GET /admin/tables`/`GET /admin/tables/:id`
