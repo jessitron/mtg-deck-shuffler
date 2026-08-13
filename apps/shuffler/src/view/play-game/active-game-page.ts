@@ -36,7 +36,8 @@ export function formatGamePageHtmlPage(game: GameState, whatHappened: WhatHappen
     content: contentWithModal,
     devMode,
     tableName: game.tableName,
-    playerName: game.playerName
+    playerName: game.playerName,
+    gameId: String(game.gameId)
   });
 }
 

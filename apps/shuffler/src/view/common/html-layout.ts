@@ -13,9 +13,12 @@ interface HtmlHeadOptions {
   // Present only for table-mode games (solo games leave them undefined).
   tableName?: string;
   playerName?: string;
+  // Stamped onto browser spans as the string resource attribute game.id.
+  // Present once a game exists (the /game page); undefined elsewhere.
+  gameId?: string;
 }
 
-const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKey, devMode, tableName, playerName) {
+const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKey, devMode, tableName, playerName, gameId) {
         if (!(window.Hny && window.browserTabId)) return;
         if (!apiKey || apiKey === "undefined") {
           console.warn("Honeycomb browser tracing disabled: no valid API key configured (set HONEYCOMB_INGEST_API_KEY or HONEYCOMB_API_KEY)");
@@ -27,6 +30,7 @@ const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKe
         };
         if (tableName) resourceAttributes["table.name"] = tableName;
         if (playerName) resourceAttributes["player.name"] = playerName;
+        if (gameId) resourceAttributes["game.id"] = gameId;
         Hny.initializeTracing({
           apiKey: apiKey,
           serviceName: "mtg-deck-shuffler-web",
@@ -45,7 +49,7 @@ function jsStringArg(value: string | undefined): string {
 }
 
 function formatHtmlHead(options: HtmlHeadOptions): string {
-  const { title, stylesheets = [], additionalFonts = [], scriptsHtml = "", devMode = false, tableName, playerName } = options;
+  const { title, stylesheets = [], additionalFonts = [], scriptsHtml = "", devMode = false, tableName, playerName, gameId } = options;
 
   const fontFamilies = ["Orbitron:wght@400;600;700;900", ...additionalFonts];
   const fontsParam = fontFamilies.map((f) => `family=${f}`).join("&");
@@ -65,7 +69,7 @@ ${stylesheetsHtml}
     <script src="/hny.js"></script>
     <script>
 ${HONEYCOMB_TRACING_INIT_SCRIPT}
-      initHoneycombTracing("${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}", ${devMode}, ${jsStringArg(tableName)}, ${jsStringArg(playerName)});
+      initHoneycombTracing("${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}", ${devMode}, ${jsStringArg(tableName)}, ${jsStringArg(playerName)}, ${jsStringArg(gameId)});
     </script>
 ${scriptsHtml}
   </head>`;
@@ -94,6 +98,7 @@ interface PageWrapperOptions {
   devMode?: boolean;
   tableName?: string;
   playerName?: string;
+  gameId?: string;
 }
 
 function formatPageWrapper(options: PageWrapperOptions): string {
@@ -105,7 +110,8 @@ function formatPageWrapper(options: PageWrapperOptions): string {
     includeFooter = true,
     devMode = false,
     tableName,
-    playerName
+    playerName,
+    gameId
   } = options;
 
   const headHtml = formatHtmlHead({
@@ -116,6 +122,7 @@ function formatPageWrapper(options: PageWrapperOptions): string {
     devMode,
     tableName,
     playerName,
+    gameId,
   });
   const bodyClasses = [devMode ? "dev-mode" : ""].filter(Boolean);
   const bodyClass = bodyClasses.length ? ` class="${bodyClasses.join(" ")}"` : ``;

@@ -1,7 +1,7 @@
 
 import { HONEYCOMB_TRACING_INIT_SCRIPT } from "../src/view/common/html-layout.js";
 
-function runGuard(apiKey: string, devMode = false, tableName?: string, playerName?: string) {
+function runGuard(apiKey: string, devMode = false, tableName?: string, playerName?: string, gameId?: string) {
   const initializeTracing = jest.fn();
   const warn = jest.fn();
   const sandbox = {
@@ -15,7 +15,7 @@ function runGuard(apiKey: string, devMode = false, tableName?: string, playerNam
     `${HONEYCOMB_TRACING_INIT_SCRIPT}\nconst Hny = window.Hny;\nreturn initHoneycombTracing;`
   );
   const initHoneycombTracing = fn(sandbox.window, sandbox.console);
-  initHoneycombTracing(apiKey, devMode, tableName, playerName);
+  initHoneycombTracing(apiKey, devMode, tableName, playerName, gameId);
 
   return { initializeTracing, warn };
 }
@@ -61,5 +61,17 @@ describe("browser Honeycomb tracing init guard", () => {
     const attrs = initializeTracing.mock.calls[0][0].resourceAttributes;
     expect("table.name" in attrs).toBe(false);
     expect("player.name" in attrs).toBe(false);
+  });
+
+  it("stamps game.id as a string resource attribute when supplied", () => {
+    const { initializeTracing } = runGuard("hcaik_real_key", false, undefined, undefined, "42");
+    const attrs = initializeTracing.mock.calls[0][0].resourceAttributes;
+    expect(attrs["game.id"]).toBe("42");
+  });
+
+  it("omits game.id when no game exists yet", () => {
+    const { initializeTracing } = runGuard("hcaik_real_key", false, undefined, undefined, undefined);
+    const attrs = initializeTracing.mock.calls[0][0].resourceAttributes;
+    expect("game.id" in attrs).toBe(false);
   });
 });
