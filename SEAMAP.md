@@ -27,7 +27,7 @@ Mural, not a rewrite.
    climbed it: `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md`. Some of its maps
    (e.g. table layout) still carry open tickets; they're fun follow-ons, not blockers,
    and don't unwind the achievement.
-2. **Spine Gathers Data** ← _active_ — when people play Magic in this app, the game gets
+2. **Spine Tells the Story** ← _active_ — when people play Magic in this app, the game gets
    recorded: every physical event a real game produces, from both the Shuffler and the
    Tabletop, crosses the Spine's one append-only log per table. That record is what
    feeds development of the Interpreter, once this mountain is reached. Includes: the
