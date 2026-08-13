@@ -20,3 +20,7 @@ Look for references to the map or its tickets.
 - if it's in a code comment, delete it!! Win! (it's still in git history for research)
 - if it's a historical record, just a note saying "we did this on this day," delete it!
 - if it's in a doc, make sure the doc contains the information; usually the reference is a citation only. If the real info is in the ticket, move that info inline. Delete the citation.
+
+## gather info for the next agent
+
+For the next agent, I want you to give it a head start of where to find stuff in the code. DO NO RESEARCH. speak only from what you know based on the work you just did. Give pointers to the code to look at, so it doesn't have to look so hard.
