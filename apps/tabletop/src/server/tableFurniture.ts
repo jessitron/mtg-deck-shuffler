@@ -439,6 +439,12 @@ export async function addCommanderDamageCounters(
     const firstId = createShapeId(`damage-counter-${entry.tableName}-${targetSeatId}-${opponentSeatId}-0`);
     if (store.get(firstId)) return;
 
+    // Draw above the deck-title label, not on the (ever-decreasing) furniture floor:
+    // the title can run rightward into these counters and must sit behind them.
+    const labelId = createShapeId(`name-label-${entry.tableName}-${targetSeatId}`);
+    const label = store.get(labelId) as { index: IndexKey } | undefined;
+    let counterZ = label ? getIndexAbove(label.index) : nextFurnitureIndex(entry.tableName);
+
     commanderNames.forEach((commanderName, i) => {
       const counterIndex = target.damageCounterCount++;
       const pos = commanderDamageCounterPosition(target.seatIndex, counterIndex);
@@ -449,7 +455,7 @@ export async function addCommanderDamageCounters(
         x: pos.x,
         y: pos.y,
         rotation: 0,
-        index: nextFurnitureIndex(entry.tableName),
+        index: counterZ,
         parentId: pageId,
         isLocked: true,
         opacity: 1,
@@ -462,6 +468,7 @@ export async function addCommanderDamageCounters(
         },
         meta: {},
       } as any);
+      counterZ = getIndexAbove(counterZ);
     });
   });
 }

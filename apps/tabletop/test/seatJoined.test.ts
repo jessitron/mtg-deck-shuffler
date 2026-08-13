@@ -482,6 +482,27 @@ describe("seat joined — commander damage counters", () => {
     expect(counters.filter((c) => c.props.label === "Kaalia")).toHaveLength(1);
   });
 
+  it("draws each damage counter above the target seat's deck-title label so a long title can't cover it", async () => {
+    await post("dmg-zorder", seatJoined("dmg-zorder", { initiator: { seatId: "dmg-z-a", playerName: "Alice" } }));
+    const breya = commanderEntry("Breya", "https://example.com/breya.jpg");
+    const silas = commanderEntry("Silas", "https://example.com/silas.jpg");
+    await post(
+      "dmg-zorder",
+      seatJoined("dmg-zorder", { initiator: { seatId: "dmg-z-b", playerName: "Bob" } }, { commanders: [breya, silas] })
+    );
+
+    const shapes = shapesOf("dmg-zorder");
+    // The counters target Alice (dmg-z-a) — her title label must sit behind them.
+    const aliceLabel = shapes.find((s) => s.type === "text" && s.id.includes("name-label") && s.id.includes("dmg-z-a"));
+    const counters = damageCountersOf("dmg-zorder");
+
+    expect(aliceLabel).toBeTruthy();
+    expect(counters).toHaveLength(2);
+    for (const counter of counters) {
+      expect(aliceLabel.index < counter.index).toBe(true);
+    }
+  });
+
   it("a second seat.joined for an already-seated seat is a no-op — damage counters are minted once", async () => {
     const kaalia = commanderEntry("Kaalia", "https://example.com/kaalia.jpg");
     await post("dmg-dedup-a", seatJoined("dmg-dedup-a", { initiator: { seatId: "dmg-d-a", playerName: "Alice" } }));
