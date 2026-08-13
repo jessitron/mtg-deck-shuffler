@@ -2561,3 +2561,42 @@ unrelated ticket as an unapproved appearance decision.
 certainly *can* be restyled with plain CSS if the Tabletop ever gets a stylesheet to put such
 a rule in. What's actually blocked is the fleet's own open question about where that
 stylesheet lives, not anything tldraw itself forbids.
+
+## 2026-08-12 — the counter row sits on the name text's baseline, and a canvas baseline became a measured constant
+
+`tabletop-name-baseline-align`. The per-seat life counter and commander-damage counters used
+to be **band-aligned**: the life counter was vertically centered on the 40px name-row band
+(`namePos.y - (LIFE_COUNTER_H - NAME_LABEL_HEIGHT) / 2`), and the commander-damage counters
+matched. Jess wanted the counter row to rest its **bottom edge on the seat name + deck-title
+text's baseline** instead, so the numbers share a bottom line with the label rather than
+floating above it. Pure vertical geometry — only `y` changed in
+`apps/tabletop/src/server/cardLayout.ts`; widths, heights, right-edge `x`, colors, fonts and
+tokens are all untouched, and there's no CSS or `/design` involvement (this is canvas
+placement, and the gallery has no Tabletop canvas stage).
+
+**Why it's an owner entry and not just a nudge: it forced a canvas text metric into the open
+as a measured, library-owned constant.** Aligning to text needs the offset from the text
+shape's top down to its glyph baseline, and tldraw owns that metric — its own stroke geometry,
+and canvas text can't use the fleet fonts anyway (the same `font`-enum limit that's been in
+README → tldraw limits since 2026-08-07). So there's no token, no CSS, nothing to derive it
+from: `NAME_TEXT_BASELINE = 50` was **measured off the live render** (the stock `serif` label
+at size `"m"`, `scale: 2` — glyph box 0→64, baseline at 50, descenders to 64) and hard-coded
+with a comment saying exactly that. It is font/size/scale-dependent by construction, which
+ties it to the seat-label composition: **the day that label becomes a self-rendering shape in
+a fleet font (the standing "typographic hierarchy becomes possible then" note in the design
+language), this 50 must be remeasured** or the counters drift off the new baseline silently.
+Recorded as a new tldraw-limits bullet (text metrics are library-owned, measure don't derive),
+in the seat-name-label design-language entry (the baseline is now a shared alignment datum),
+and as an interactions watch point on that same label.
+
+**One placement decision this owner didn't have to relitigate: unifying the two counter
+sizes onto one baseline.** The life counter (48 tall) and commander-damage counters (40 tall)
+were both band-centered before, which put their tops and bottoms on different lines; resting
+both bottoms on the single baseline (`namePos.y + NAME_TEXT_BASELINE - H`, per counter height)
+gives the row one shared bottom edge and avoids a 10px stairstep between the two sizes — Jess's
+call in review, an alignment cleanup that fell out of the baseline change rather than a
+separate appearance decision. The `cardLayout.test.ts` unit test flipped from asserting the
+band-center formula to asserting `pos.y + LIFE_COUNTER_H === namePos.y + NAME_TEXT_BASELINE`,
+and was screenshot-verified against a seat whose title has descenders ("Peggy 〜 Gyruda, Doom
+of Depths") with a commander-damage counter present — the counter bottoms rest on the
+baseline, the descenders drop below it.

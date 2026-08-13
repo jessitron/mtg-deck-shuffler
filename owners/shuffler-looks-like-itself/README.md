@@ -190,6 +190,21 @@ each).
   should live is still the open question. See [open-choices.md](open-choices.md) → "Fleet
   gaps — the Tabletop side". Accepted as a known visual gap, not silently normalized as the
   standard; revisit once the ship-local-stylesheet question resolves.
+- **A canvas text shape's baseline is a library-owned magic number you must MEASURE, not
+  derive — and it's a live consequence of the font-enum limit above (2026-08-12,
+  `tabletop-name-baseline-align`).** Anything on the canvas that aligns to text — here the
+  life counter and commander-damage counters resting their bottom edge on the seat name +
+  deck-title label's baseline — needs the offset from the text shape's top down to its
+  glyph baseline. tldraw owns that metric (its own stroke geometry, and canvas text can't
+  use the fleet fonts anyway — same font-enum limit), so there's no token or CSS to read it
+  from: `NAME_TEXT_BASELINE = 50` in `apps/tabletop/src/server/cardLayout.ts` was measured
+  off the live render (the stock `serif` label at size `"m"`, `scale: 2` — glyph box 0→64,
+  baseline at 50, descenders to 64). **It is font/size/scale-dependent by construction**, so
+  it must be remeasured if the label's face, size, or scale ever changes — which is exactly
+  what happens the day the seat label becomes a self-rendering shape in a fleet font (see the
+  seat-name-label entry in the design language below). This is placement geometry, decided
+  by eye with Jess and living in `cardLayout.ts`, not a stylesheet or a `/design` specimen —
+  the gallery has no Tabletop canvas stage to stage it on.
 
 ## Why this owner exists
 
@@ -647,7 +662,14 @@ before, now also at scale 2. The stock props stay untouched: `serif` and `green`
 `size: "xl"` keeps the size continuous rather than enum-stepped. If the label ever becomes
 a self-rendering shape, the one-line name-〜-deck composition carries forward and typographic
 hierarchy (size, face per part) becomes possible for the first time — that would be a new
-appearance decision, not a port.
+appearance decision, not a port. **This label's text baseline is now a shared alignment
+datum (2026-08-12, `tabletop-name-baseline-align`):** the life counter and commander-damage
+counters in the same row rest their bottom edge on it (`NAME_TEXT_BASELINE = 50` in
+`cardLayout.ts`, measured off the live render — see the tldraw-limits bullet above), so the
+counter row shares one bottom line with the text instead of floating band-centered above it.
+That measured 50 is tied to this label's current face/size/scale — if this composition ever
+changes any of those (the self-rendering-shape case above being the obvious one), remeasure
+`NAME_TEXT_BASELINE` or the counters will drift off the new baseline silently.
 
 **Two style worlds.** Site pages (`/`, `/choose-any-deck`, `/docs`, `/about`) use the
 purple gradient, AEOE card art backgrounds, and `--deep-space` bars. Play pages

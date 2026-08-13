@@ -752,6 +752,18 @@ not by recomputing new numbers.**
   decision for this owner, not a port. Any future label pairing a player name with a deck
   name copies this composition rather than inventing another — and don't "fix" the
   toward-the-neighbor growth back to two lines; that trade was made knowingly.
+  - **This label's text baseline is now a measured shared datum other shapes depend on
+    (2026-08-12, `tabletop-name-baseline-align`).** `NAME_TEXT_BASELINE = 50` in
+    `apps/tabletop/src/server/cardLayout.ts` is the glyph baseline's offset below the text
+    shape's top, measured off the live render (stock `serif`, size `"m"`, `scale: 2`) because
+    tldraw owns text metrics and there's no token to read it from — see [README.md](README.md)
+    → tldraw limits. `lifeCounterPosition`/`commanderDamageCounterPosition` add it so the
+    counter row bottoms sit on the baseline. **If you change the label's face, size, or scale
+    (the self-rendering-shape case above being the obvious one), remeasure `NAME_TEXT_BASELINE`
+    or the counters drift off the new baseline with no error.** It is placement geometry in
+    `cardLayout.ts` (server-side), decided by eye with Jess, so there's no `/design` specimen
+    and no gallery test guarding it — `apps/tabletop/DESIGN.md` is where the player-area
+    geometry lives.
 - **The sleeve's rendered appearance is DECIDED and BUILT** (ticket 17, 2026-08-08,
   `0a768e6` + `bfdc877`; model from ticket 11; corners revised SQUARE 2026-08-09,
   `e53a27e` — Jess: "sleeves are rectangular" — then refined the same day, `c1592c4`).
