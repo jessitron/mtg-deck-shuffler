@@ -399,6 +399,34 @@ attribute **`game.id`** — added 2026-08-13. Unlike `table.name`/`player.name`,
   absent) and `html-layout-fleet-tokens.test.ts` (arg-order regex updated for the trailing 5th arg,
   plus a `game.id` case). Full suite: 372 pass.
 
+### Button ids make click auto-instrumentation legible (`mtg-deck-shuffler-web`)
+
+`hny.js`'s `UserInteractionInstrumentation` auto-instruments browser clicks into a span whose
+sole click-identity attribute is **`target_xpath`** (plus `target_element` = the clicked
+`tagName` and `http.url`). When the clicked element carries an `id`, that xpath **collapses to
+`//*[@id="the-id"]`** — legible — instead of a long positional path. So every real `<button>` in
+the Shuffler now carries a semantic kebab-case `id` (`draw-button`, `shuffle-button`,
+`card-action-play`, `reveal-action-play-<index>`, `table-look-mat-<index>`, …) purely to make its
+click span queryable. `views/design.ejs` (the `/design` gallery) is deliberately excluded — it
+renders every component and would duplicate ids. **No telemetry wiring changed** — this rides the
+existing browser SDK; it's a naming discipline in the views, not new plumbing.
+
+Two `hny.js` mechanics worth not re-deriving (both confirmed by reading the vendored bundle):
+
+- **`hny.js` vendors TWO `UserInteractionInstrumentation` classes.** The one at ~line 6204 calls
+  `getElementXPath(element)` **without** the optimise flag and is **not** the one that runs. The
+  one at ~line 14084 calls `getElementXPath(element, true)` — that's the class
+  `getWebAutoInstrumentations`/`initializeTracing` actually registers, and **only the optimised
+  path yields `//*[@id]`** (the `optimised && targetValue.indexOf("@id") > 0` early-return at
+  ~line 5973). If a future SDK re-vendor changes which class registers or drops the flag, id-based
+  xpaths silently revert to positional — check there first.
+- **The click span is created on `event.target`, not on the button.** A click that lands on a
+  button's *child* markup (an icon, a nested `<span>`, an embedded event fragment — e.g. the
+  precon tiles and the undo button) resolves to the child node, which has no id, and falls back to
+  a positional xpath. Giving the button an id doesn't help those; the child would need one too.
+  **Disabled buttons emit no click span at all** — `_createSpan` early-returns on
+  `hasAttribute("disabled")` (~line 14078).
+
 ### The Spine's browser bootstrap and trace continuation
 
 The Spine's admin show page (`views/admin/tables/show.html.erb`) is the **first Spine

@@ -181,6 +181,17 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   has no railtie-style auto-injection, so the app must explicitly mount the middleware via
   `middleware_args` — already done in `services/spine/app.rb`. A new Rack-based service needs the
   same explicit mount or it boots clean with nothing reaching Honeycomb.
+- **Adding, removing, or restyling a Shuffler `<button>`** (or re-vendoring `apps/shuffler/public/hny.js`):
+  every real button carries a semantic kebab-case `id` so `hny.js`'s click auto-instrumentation
+  records a legible `target_xpath` (`//*[@id="..."]`) instead of a positional path on the
+  `mtg-deck-shuffler-web` dataset. Give a new button an id; leave `views/design.ejs` (the gallery)
+  idless to avoid duplicates. Two gotchas: `hny.js` vendors two `UserInteractionInstrumentation`
+  classes and only the registered one (~line 14084, `getElementXPath(element, true)`) uses the
+  optimise flag that yields the `@id` form — a re-vendor that changes which registers, or drops the
+  flag, silently reverts every click to a positional xpath. And the span is minted on
+  `event.target`, so a click on a button's child markup (icon/nested span) has no id and falls back
+  positional; disabled buttons emit no click span at all. See README → "Button ids make click
+  auto-instrumentation legible."
 - **Recording that something happened**: never `span.addEvent`. Attributes on the span you're in
   — always the first choice — or, when there's no span to hang it on, `log.info/warn/error` from
   that ship's `log.ts` (the two Node ships) or `logError()` in the Tabletop's browser. The Spine
