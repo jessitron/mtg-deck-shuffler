@@ -19,7 +19,9 @@ section is just a wall between Jess and the live work.
 
 - The Shuffler needs to display in-hand and revealed cards as sleeved, when the player has chosen sleevers. They need to be on a sleeve-colored rectangle, like in Tabletop.
 
-- `commander-tax-tracker` Above the Command Zone, above each commander, add a Play Count tracker. It is a number that starts at 0. It can be incremented or decremented (down to 0) or typed in. When the commander leaves the command zone, it increments!
+- `commander-tax-tracker` Above the Command Zone, above each commander, add a Play Count tracker. It is a number that starts at 0. It can be incremented or decremented (down to 0) or typed in. When the commander leaves the command zone, it increments! (This is commander tax — how many times the commander has been cast.)
+  - Jess's call (2026-08-11): this belongs on the **Tabletop**, not the Shuffler. Nothing exists yet — no cast count anywhere. The Shuffler's command zone (`formatCommandZoneHtmlFragment`, `src/view/common/shared-components.ts`) is not the target surface; it needs its own home on the Tabletop's command-zone rendering.
+  - (merged the duplicate `commander-tax-counter` item into this one; was: JES-81)
 
 - `commander-snap` When I put my commander back in my command zone, it snaps to its starting position, covering its shadow.
 
@@ -31,14 +33,6 @@ D 👋🏾
 ```
 
 and I want to drop a card in between C and D, then the drop zone between them is either after C or before D, it isn't both, and it isn't predictable. I want it to be both. What if instead of `[dropzone, card, dropzone, card, dropzone]` the flexbox contained `[[dropzone, card, dropzone],  [dropzone, card, dropzone]] such that two adjacent dropzones overlap completely and function the same as one? Then both C and D would have dropzones on either side.
-
-- `colors-from-playmat-to-life-counter` The thing where the Shuffler chooses colors to represent each player, based on their sleeve and playmat choice.
-  - Here's what I want: when they hit Shuffle Up, determine two colors to represent the player. Grab the two colors from the .json that lives with the playmats, according to the playmat they choose, the 2-color set.
-    - If they chose a sleeve: primary color is their sleeve. Secondary color is whichever of the 2 colors contrasts most with the sleeve.
-    - If they didn't choose a sleeve: primary color is the darker of the 2-color set. Secondary color is the other one.
-  - Add these two colors to the seat.join message that goes to the Spine and thence to the the Tabletop.
-  - The tabletop uses these two colors for the player's life counter, and for the Commander damage life-counters on the other players' trackers.
-    - Also, use the darker color for the player area title. (darker is usually the primary but not always, they may have picked a light-colored sleeve)
 
 - GRILLING: bug: counters can't be copied... actually neither can images, cards, etc. They can be duplicated, so there's a workaround. (Tabletop)
   - Triage research (2026-08-10): not a shape-specific bug — it's a side effect of the
@@ -234,11 +228,6 @@ and I want to drop a card in between C and D, then the drop zone between them is
     `formatHtmlHead()` in `src/view/common/html-layout.ts` load different stylesheets and set
     conflicting `body` fonts (Ovo vs Orbitron). Consult the `shuffler-looks-like-itself` owner.
 
-- [ ] DEFERRED `game-screen-table-layout` Sort the auto-drawn opening hand by card type then mana value ← was: JES-89, JES-87
-  - The library-placement half of this is done (library now renders after command zone and
-    revealed cards in `.game-top-row`). Sorting the opening hand is deferred: Jess's users said
-    they don't want it (2026-08-10). `GameState.listHand()` still sorts by position only.
-
 - [ ] DEFERRED `english-card-faces` Show English names and images for other-language printings ← was: JES-96
   - Blocked on `card-zoom-modal` (Jess, 2026-08-10).
   - > Some cards come in other-language editions. Offer English. Example: Adventurous Impulse in
@@ -248,14 +237,6 @@ and I want to drop a card in between C and D, then the drop zone between them is
     `scryfallId: card.uid` (line 118) is that same localized printing, so the image is foreign too.
   - `oracleCardName` is already on `CardDefinition`, so the name half is nearly free; the image half
     needs resolving the English printing of the same oracle card.
-
-- GRILLING: `commander-tax-counter` Count how many times the commander has been cast, in the command zone (Tabletop) ← was: JES-81
-  - > Track how many times the commander has been cast (commander tax). Display a play counter in the
-    > command zone.
-  - Jess's call (2026-08-11): this belongs on the Tabletop, not the Shuffler. Nothing exists yet — no
-    cast count anywhere. The Shuffler's command zone (`formatCommandZoneHtmlFragment`,
-    `src/view/common/shared-components.ts`) is not the target surface; needs its own home on the
-    Tabletop's command-zone rendering.
 
 - [ ] `focus-ring-manual-tabthrough` Actually tab through the app and look at the new focus ring
   - Unblocked: `modals-are-not-modal` landed (focus trap + dialog semantics on all four modals).
