@@ -202,11 +202,18 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   source-of-truth exported and run that test. Keep the two-var apiKey fallback
   (`HONEYCOMB_INGEST_API_KEY || HONEYCOMB_API_KEY`) — check prod before "simplifying" it. Never add
   a **second** bootstrap anywhere — one shell is the whole point. `initHoneycombTracing(apiKey,
-  devMode)` takes a second arg, interpolated as an **unquoted boolean**
-  (`initHoneycombTracing("...", ${devMode})`), that becomes the `app.dev_mode` browser **resource**
-  attribute — keep it a real boolean, not a quoted string (`html-layout-fleet-tokens.test.ts`
-  guards this), and keep `formatHtmlHead`/`formatPageWrapper`/`head.ejs` threading `devMode`
-  through so the flag actually reaches init.
+  devMode, tableName, playerName)` now takes four args. `devMode` is interpolated as an **unquoted
+  boolean** (`, ${devMode},`) and becomes the `app.dev_mode` browser **resource** attribute — keep
+  it a real boolean, not a quoted string. `tableName`/`playerName` are user-controlled strings
+  interpolated via the `jsStringArg()` helper (`JSON.stringify` + `<`→`<`) — **never
+  raw-interpolate them**, that helper is what neutralizes a `</script>` in a name (break-out/XSS);
+  they become the browser resource attributes `table.name`/`player.name`, added **conditionally**
+  (`if (tableName)`) so solo games omit them. The static `HONEYCOMB_TRACING_INIT_SCRIPT` constant
+  must stay static (values pass as args, per the guard test) — don't fold a value into the string.
+  `html-layout-fleet-tokens.test.ts` guards the unquoted-boolean interpolation, the arg order, the
+  `undefined` case, and the `</script>` neutralization; keep
+  `formatHtmlHead`/`formatPageWrapper`/`head.ejs`/`active-game-page.ts` threading `devMode`,
+  `tableName`, and `playerName` through so the flags actually reach init.
 - **Adding a game-mutation route in `apps/shuffler/src/app.ts`**: all 13 game-mutation routes go
   through `apply-game-command.ts`'s `applyGameCommand()`, which owns the
   "not-found"/"incompatible-version" `markCurrentSpanAsError` calls for all of them — don't re-add
@@ -214,7 +221,12 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   can still use `applyGameCommand`/`renderCommandOutcome` — `renderApplied` may return `string |
   void`. A route that needs a required side effect before mutating (not just permission-checking)
   can use `beforeMutate` and throw `TableSendFailedError` — don't hand-roll a second
-  send-then-commit protocol.
+  send-then-commit protocol. `applyGameCommand` also `setCommonSpanAttributes({ tableName,
+  playerName })` right after the game loads, so every mutation route gets `table.name`/`player.name`
+  for free — a new mutation route needs nothing extra. The **GET fragment routes** don't share that
+  choke point, so each one that reconstructs a `GameState` (`/game`, `/library-modal`,
+  `/table-modal`, `/card-modal`, `/history-modal`, `/game-section`; `/debug-state` from
+  `persistedGame`) stamps it by hand — add the same call to a new such route.
 - **Adding another best-effort outbound send from the Shuffler** (a third destination, or a new
   event kind to an existing one): copy the existing shape — span attribute (`<name>.send_failed:
   true`) + `log.warn`, never throw, ride ambient auto-instrumentation (no manual span). If the
