@@ -9,28 +9,43 @@ interface HtmlHeadOptions {
   scriptsHtml?: string;
   // Stamped onto browser spans as the boolean resource attribute app.dev_mode.
   devMode?: boolean;
+  // Stamped onto browser spans as the string resource attributes table.name / player.name.
+  // Present only for table-mode games (solo games leave them undefined).
+  tableName?: string;
+  playerName?: string;
 }
 
-const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKey, devMode) {
+const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKey, devMode, tableName, playerName) {
         if (!(window.Hny && window.browserTabId)) return;
         if (!apiKey || apiKey === "undefined") {
           console.warn("Honeycomb browser tracing disabled: no valid API key configured (set HONEYCOMB_INGEST_API_KEY or HONEYCOMB_API_KEY)");
           return;
         }
+        var resourceAttributes = {
+          "game.browser_tab_id": window.browserTabId,
+          "app.dev_mode": devMode
+        };
+        if (tableName) resourceAttributes["table.name"] = tableName;
+        if (playerName) resourceAttributes["player.name"] = playerName;
         Hny.initializeTracing({
           apiKey: apiKey,
           serviceName: "mtg-deck-shuffler-web",
           debug: false,
           provideOneLinkToHoneycomb: true,
-          resourceAttributes: {
-            "game.browser_tab_id": window.browserTabId,
-            "app.dev_mode": devMode
-          }
+          resourceAttributes: resourceAttributes
         });
       }`;
 
+// Serialize a value as a safe JS string-literal argument for the inline init script.
+// JSON.stringify escapes quotes/backslashes; neutralizing "<" stops a table/player name
+// containing "</script>" from breaking out of the <script> element (and blocks XSS).
+function jsStringArg(value: string | undefined): string {
+  if (!value) return "undefined";
+  return JSON.stringify(value).replace(/</g, "\\u003c");
+}
+
 function formatHtmlHead(options: HtmlHeadOptions): string {
-  const { title, stylesheets = [], additionalFonts = [], scriptsHtml = "", devMode = false } = options;
+  const { title, stylesheets = [], additionalFonts = [], scriptsHtml = "", devMode = false, tableName, playerName } = options;
 
   const fontFamilies = ["Orbitron:wght@400;600;700;900", ...additionalFonts];
   const fontsParam = fontFamilies.map((f) => `family=${f}`).join("&");
@@ -50,7 +65,7 @@ ${stylesheetsHtml}
     <script src="/hny.js"></script>
     <script>
 ${HONEYCOMB_TRACING_INIT_SCRIPT}
-      initHoneycombTracing("${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}", ${devMode});
+      initHoneycombTracing("${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}", ${devMode}, ${jsStringArg(tableName)}, ${jsStringArg(playerName)});
     </script>
 ${scriptsHtml}
   </head>`;
@@ -77,6 +92,8 @@ interface PageWrapperOptions {
   additionalStylesheets?: string[];
   includeFooter?: boolean;
   devMode?: boolean;
+  tableName?: string;
+  playerName?: string;
 }
 
 function formatPageWrapper(options: PageWrapperOptions): string {
@@ -86,7 +103,9 @@ function formatPageWrapper(options: PageWrapperOptions): string {
     footerContent = ``,
     additionalStylesheets = [],
     includeFooter = true,
-    devMode = false
+    devMode = false,
+    tableName,
+    playerName
   } = options;
 
   const headHtml = formatHtmlHead({
@@ -95,6 +114,8 @@ function formatPageWrapper(options: PageWrapperOptions): string {
     additionalFonts: ["Ovo"],
     scriptsHtml: GAME_HEAD_SCRIPTS_HTML,
     devMode,
+    tableName,
+    playerName,
   });
   const bodyClasses = [devMode ? "dev-mode" : ""].filter(Boolean);
   const bodyClass = bodyClasses.length ? ` class="${bodyClasses.join(" ")}"` : ``;

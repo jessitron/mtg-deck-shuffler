@@ -32,9 +32,25 @@ describe("the one page shell links the fleet palette", () => {
   });
 
   it("passes dev mode to the browser tracing init as an unquoted boolean", () => {
-    expect(formatHtmlHead({ title: "Any Title", devMode: true })).toMatch(/initHoneycombTracing\(".*", true\)/);
-    expect(formatHtmlHead({ title: "Any Title", devMode: false })).toMatch(/initHoneycombTracing\(".*", false\)/);
+    expect(formatHtmlHead({ title: "Any Title", devMode: true })).toMatch(/initHoneycombTracing\(".*", true,/);
+    expect(formatHtmlHead({ title: "Any Title", devMode: false })).toMatch(/initHoneycombTracing\(".*", false,/);
     // defaults to false when not supplied
-    expect(formatHtmlHead({ title: "Any Title" })).toMatch(/initHoneycombTracing\(".*", false\)/);
+    expect(formatHtmlHead({ title: "Any Title" })).toMatch(/initHoneycombTracing\(".*", false,/);
+  });
+
+  it("passes table/player names to the browser tracing init as escaped string args", () => {
+    const head = formatHtmlHead({ title: "Any Title", tableName: "Kitchen Table", playerName: "Jess" });
+    expect(head).toMatch(/initHoneycombTracing\(".*", false, "Kitchen Table", "Jess"\)/);
+  });
+
+  it("passes undefined for table/player when the game is solo", () => {
+    const head = formatHtmlHead({ title: "Any Title" });
+    expect(head).toMatch(/initHoneycombTracing\(".*", false, undefined, undefined\)/);
+  });
+
+  it("neutralizes a </script> break-out in a table name", () => {
+    const head = formatHtmlHead({ title: "Any Title", tableName: "</script><script>alert(1)</script>" });
+    expect(head).not.toContain("</script><script>alert(1)");
+    expect(head).toContain("\\u003c/script>");
   });
 });

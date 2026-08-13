@@ -2,7 +2,7 @@ import { GameState, WhatHappened, GameId } from "./GameState.js";
 import { PersistStatePort, IncompatibleStateVersionError } from "./port-persist-state/types.js";
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { GameEvent } from "./GameEvents.js";
-import { markCurrentSpanAsError } from "./tracing_util.js";
+import { markCurrentSpanAsError, setCommonSpanAttributes } from "./tracing_util.js";
 
 export interface ApplyGameCommandDeps {
   persistStatePort: PersistStatePort;
@@ -57,6 +57,9 @@ export async function applyGameCommand(
     }
     throw error;
   }
+
+  // Stamp table/player onto the request span for every mutation route (solo games omit them)
+  setCommonSpanAttributes({ tableName: game.tableName, playerName: game.playerName });
 
   if (expectedVersion !== undefined) {
     const currentVersion = game.getStateVersion();
