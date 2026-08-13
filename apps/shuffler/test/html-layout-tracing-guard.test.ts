@@ -1,7 +1,7 @@
 
 import { HONEYCOMB_TRACING_INIT_SCRIPT } from "../src/view/common/html-layout.js";
 
-function runGuard(apiKey: string) {
+function runGuard(apiKey: string, devMode = false) {
   const initializeTracing = jest.fn();
   const warn = jest.fn();
   const sandbox = {
@@ -15,7 +15,7 @@ function runGuard(apiKey: string) {
     `${HONEYCOMB_TRACING_INIT_SCRIPT}\nconst Hny = window.Hny;\nreturn initHoneycombTracing;`
   );
   const initHoneycombTracing = fn(sandbox.window, sandbox.console);
-  initHoneycombTracing(apiKey);
+  initHoneycombTracing(apiKey, devMode);
 
   return { initializeTracing, warn };
 }
@@ -39,5 +39,13 @@ describe("browser Honeycomb tracing init guard", () => {
     expect(initializeTracing).toHaveBeenCalledTimes(1);
     expect(initializeTracing.mock.calls[0][0]).toMatchObject({ apiKey: "hcaik_real_key" });
     expect(warn).not.toHaveBeenCalled();
+  });
+
+  it("forwards dev mode as the boolean resource attribute app.dev_mode", () => {
+    const { initializeTracing } = runGuard("hcaik_real_key", true);
+    expect(initializeTracing.mock.calls[0][0].resourceAttributes["app.dev_mode"]).toBe(true);
+
+    const off = runGuard("hcaik_real_key", false);
+    expect(off.initializeTracing.mock.calls[0][0].resourceAttributes["app.dev_mode"]).toBe(false);
   });
 });

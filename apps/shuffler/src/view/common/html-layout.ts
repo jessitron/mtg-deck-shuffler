@@ -7,9 +7,11 @@ interface HtmlHeadOptions {
   // Google font families fetched in addition to Orbitron (e.g. ["Ovo"]).
   additionalFonts?: string[];
   scriptsHtml?: string;
+  // Stamped onto browser spans as the boolean resource attribute app.dev_mode.
+  devMode?: boolean;
 }
 
-const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKey) {
+const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKey, devMode) {
         if (!(window.Hny && window.browserTabId)) return;
         if (!apiKey || apiKey === "undefined") {
           console.warn("Honeycomb browser tracing disabled: no valid API key configured (set HONEYCOMB_INGEST_API_KEY or HONEYCOMB_API_KEY)");
@@ -21,13 +23,14 @@ const HONEYCOMB_TRACING_INIT_SCRIPT = `      function initHoneycombTracing(apiKe
           debug: false,
           provideOneLinkToHoneycomb: true,
           resourceAttributes: {
-            "game.browser_tab_id": window.browserTabId
+            "game.browser_tab_id": window.browserTabId,
+            "app.dev_mode": devMode
           }
         });
       }`;
 
 function formatHtmlHead(options: HtmlHeadOptions): string {
-  const { title, stylesheets = [], additionalFonts = [], scriptsHtml = "" } = options;
+  const { title, stylesheets = [], additionalFonts = [], scriptsHtml = "", devMode = false } = options;
 
   const fontFamilies = ["Orbitron:wght@400;600;700;900", ...additionalFonts];
   const fontsParam = fontFamilies.map((f) => `family=${f}`).join("&");
@@ -47,7 +50,7 @@ ${stylesheetsHtml}
     <script src="/hny.js"></script>
     <script>
 ${HONEYCOMB_TRACING_INIT_SCRIPT}
-      initHoneycombTracing("${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}");
+      initHoneycombTracing("${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}", ${devMode});
     </script>
 ${scriptsHtml}
   </head>`;
@@ -91,6 +94,7 @@ function formatPageWrapper(options: PageWrapperOptions): string {
     stylesheets: ["/playmat.css", "/game.css", ...additionalStylesheets],
     additionalFonts: ["Ovo"],
     scriptsHtml: GAME_HEAD_SCRIPTS_HTML,
+    devMode,
   });
   const bodyClasses = [devMode ? "dev-mode" : ""].filter(Boolean);
   const bodyClass = bodyClasses.length ? ` class="${bodyClasses.join(" ")}"` : ``;
