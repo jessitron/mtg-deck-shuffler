@@ -11,6 +11,23 @@ section is just a wall between Jess and the live work.
 
 ## In progress
 
+Schema Schemes: mostly by Jess
+
+[] Make a new skill for updating schema versions
+
+[] Write up the whole new policy for updating schema versions
+
+[] delete the old docs:
+
+- notes/DESIGN-schema-evolution-policy.md
+- notes/DESIGN-event-contract-v0.md
+- contracts/README.md
+
+[] get the AI to make the new policy true. Reset all versions to 1
+
+- remove Spine-internal events from contracts/. table.created, seat.joined
+- reset envelope version to 1
+
 ## Next
 
 - before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game!

@@ -1,5 +1,38 @@
 # contracts/ — the fleet's published language
 
+This documents events flowing between the Spine and each other ship.
+
+Events are published to the Spine with a POST. Events are received from the Spine by SSE (server-sent events) subscription.
+
+Constraints:
+
+1. Components (ships) are deployed at different times. Events need to be backwards-compatible at a scale of hours.
+2. Games might be interrupted and finished later. Logs need to be readable on a scale of days.
+
+These are short time-frames, so we're not looking at infinite backwards-compatibility here. We can be nice.
+
+## Versioning
+
+The envelope is versioned, and expected to advance very rarely.
+
+Each event name is versioned, and expected to advance whenever useful.
+
+Add optional field: no version bump
+
+Add required field: version bump
+
+Change the type of a field (eg, one commander to an array of commanders): version bump
+
+Semantic change: at least a version bump, and consider a new event type.
+
+## Files
+
+envelope
+
+payloads/
+
+# PREVIOUS CONTENT
+
 The event contract the Spine publishes and every app translates itself into.
 Language-neutral JSON Schema; the decisions behind it live in
 `notes/DESIGN-event-contract-v0.md` (all six settled for v0) and
@@ -37,9 +70,9 @@ v0 catalog: `table.created`, `seat.taken`, `seat.joined`, `card.played`.
   `apps/shuffler/notes/DESIGN-persistence-versioning.md`: old data fails loudly; a deploy may
   invalidate a Table, and we accept that today.
 - **Payload schemas ignore properties they don't recognize** (`additionalProperties:
-  true`, every `payloads/*.json` file, decided 2026-08-11) — a newer sender's extra,
+true`, every `payloads/*.json` file, decided 2026-08-11) — a newer sender's extra,
   optional field reaches an older receiver as a no-op instead of a hard validation
-  failure. This is *narrower* than "fail loudly": known fields still type-check
+  failure. This is _narrower_ than "fail loudly": known fields still type-check
   (wrong type, bad pattern, missing `required` all still reject); only genuinely
   unrecognized properties pass through unexamined. **The envelope schemas keep
   `additionalProperties: false`**, permanently — full reasoning, including why the two
