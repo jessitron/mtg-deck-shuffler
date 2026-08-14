@@ -81,6 +81,27 @@ than living in two places.
   2026-08-11), which means the Shuffler needs the same kind of subscriber the Tabletop
   needs, feeding into whatever replaces today's `eventsUrl` inbox handler. Design not
   started.
+  - **Sketch (2026-08-14, not yet a spec):** the Shuffler is HTMX, so it has no live
+    connection of its own — a Spine subscription on the Node server doesn't reach an
+    already-open browser tab by itself. Today the only place staleness is discovered
+    is optimistic-concurrency-on-write: a tab's own POST comes back `409
+    version-conflict` (`src/app.ts`'s `renderCommandOutcome`) if the server's version
+    moved past what that tab expected. A card returned by the Tabletop isn't a write
+    from this tab, so that path never fires — the browser needs an actual push. Shape
+    discussed: Shuffler server subscribes to the Spine per-table SSE stream (or
+    receives a direct call from it — mechanism TBD, doesn't matter for this sketch);
+    on a relevant event it re-derives that game's state and pushes over a **per-game**
+    SSE stream to browser tabs watching that `gameId` (not one global stream filtered
+    client-side — keeps the server from fanning every event to every open tab). The
+    browser tab subscribes via the htmx SSE extension and can reuse plumbing that
+    already exists for the same-response case: applying a command today sets `HX-
+    Trigger: game-state-updated` on the response, and `active-game-page.ts` has an
+    element listening with `hx-trigger="game-state-updated from:body"` that re-fetches
+    itself. An SSE-delivered `game-state-updated` event would drive that same
+    listener, just triggered externally instead of by this tab's own response —
+    same event name, same re-fetch, new trigger source. Touches the `animations`
+    owner (changes when/how the game area re-renders) — consult `-context` before
+    this becomes a spec.
 - **What a failed async join looks like**, beyond "a message" — is failure itself worth
   a Shuffler-log event (symmetric with the success case), or purely a UI-only warning
   that isn't part of the game's narrated history? Not decided.
