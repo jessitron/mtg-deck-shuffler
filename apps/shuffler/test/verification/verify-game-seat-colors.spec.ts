@@ -81,4 +81,17 @@ test.describe('/game buttons use the seat\'s resolved colors', () => {
     expect(bg).not.toBe('rgba(0, 0, 0, 0)');
     expect(bg).not.toBe('');
   });
+
+  test('the chosen playmat and sleeve color survive Restart Game', async ({ page }) => {
+    const gameId = await seedSleevedGame(page);
+    await page.goto(`${BASE_URL}/game/${gameId}`);
+    await expect(page.locator('.draw-button')).toHaveCSS('background-color', hexToRgb(primaryColor));
+
+    await page.locator('#menu-toggle').click();
+    await page.locator('button:has-text("Restart Game")').click();
+    await page.waitForURL('**/game/*', { timeout: 30000 });
+
+    await expect(page.locator('.draw-button')).toHaveCSS('background-color', hexToRgb(primaryColor));
+    await expect(page.locator('#menu-toggle')).toHaveCSS('background-color', hexToRgb(secondaryColor));
+  });
 });
