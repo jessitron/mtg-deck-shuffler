@@ -40,35 +40,40 @@
       "properties": {
         "seatId": {
           "type": "string",
-          "description": "Present when a seated player made this happen. Absent for a named spectator or other non-seated initiator."
+          "description": "Present when a seated player made this happen."
         },
         "playerName": {
           "type": "string",
           "description": "Display only. Not unique, not an identity."
         }
       },
-      "required": ["playerName"],
+      "required": [
+        "playerName"
+      ],
       "additionalProperties": false
     },
     "occurredIn": {
       "type": "string",
-      "enum": ["shuffler", "tabletop", "spine"],
+      "enum": [
+        "shuffler",
+        "tabletop",
+        "spine"
+      ],
       "description": "Which application recorded/sent it. `interpreter` joins this enum later (an envelope version bump)."
     },
     "origin": {
       "type": "string",
       "pattern": "^[a-z]+(\\.[a-zA-Z_]+)+$",
-      "description": "One level more specific than `occurredIn`: which mechanism, within that app, minted this event (e.g. `shuffler.playCardSubmit`, `spine.seatTaken`, `tabletop.cardShapeHook`). An open, dot-namespaced string like `name` — not a closed enum, so a new call site anywhere in the fleet never needs an envelope-schema change first. Unlike `name` (fully lowercase), segments after the first app name may be camelCase, since a mechanism name (`tableLookupMiss`, `playCardSubmit`) reads naturally that way. Hard-coded literal, one per mint site."
+      "description": "One level more specific than `occurredIn`: which mechanism, within that app, minted this event (e.g. in tabletop: custom code like 'tap' vs the generic sync-store listener). An open, dot-namespaced string like `name`. Unlike `name` (fully lowercase), segments after the first app name may be camelCase, since a mechanism name (`tableLookupMiss`, `playCardSubmit`) reads naturally that way. Hard-coded literal, one per mint site."
     },
     "significance": {
       "type": "string",
-      "enum": ["physical", "domain", "administrative"],
-      "description": "What kind of fact this event states, independent of which app or mechanism produced it. `physical` — a card moved, hand sorting, a note/annotation on the table; raw motion/arrangement, meaning-free. `domain` — a real game-related fact (a card is drawn, played, or moved to a zone). `administrative` — table/seat bookkeeping (table.created, seat.taken, seat.joined), not gameplay itself."
-    },
-    "visibility": {
-      "type": "string",
-      "enum": ["public"],
-      "description": "public is the only legal value in v0. Adding an enum value is an envelope version bump; old readers reject it loudly."
+      "enum": [
+        "physical",
+        "domain",
+        "administrative"
+      ],
+      "description": "What kind of fact this event states, independent of which app or mechanism produced it. `physical` — a card moved, hand sorting, a note/annotation on the table; raw motion/arrangement, meaning-free. `domain` — a real game-related fact (a card is drawn, played, or moved to a zone). `administrative` — table/seat bookkeeping (seat.taken), not gameplay itself."
     },
     "schemaVersion": {
       "type": "integer",
@@ -83,14 +88,13 @@
   "required": [
     "id",
     "tableId",
-    "name",
     "initiator",
     "occurredIn",
     "origin",
     "significance",
-    "visibility",
+    "name",
     "schemaVersion",
     "payload"
   ],
-  "additionalProperties": false
+  "additionalProperties": true
 }

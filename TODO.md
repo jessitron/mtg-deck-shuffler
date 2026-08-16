@@ -25,8 +25,8 @@ Schema Schemes: mostly by Jess
 
 [] get the AI to make the new policy true. Reset all versions to 1
 
-- remove Spine-internal events from contracts/. table.created, seat.joined
-- reset envelope version to 1
+- remove Spine-internal event from contracts/. table.created
+- reset envelope version to 1 (at the current content), delete old versions
 
 ## Next
 

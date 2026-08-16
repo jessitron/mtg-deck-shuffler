@@ -29,7 +29,16 @@ Semantic change: at least a version bump, consider a new event type.
 
 envelope
 
+
+
 payloads/
+
+Related: validation code
+
+- apps/tabletop/src/server/contractValidation.ts
+- services/spine/lib/event_contract.rb
+
+## Examples of events
 
 # PREVIOUS CONTENT
 
