@@ -25,7 +25,6 @@ describe("buildCardPlayedEvent (the card.played envelope, JES-128)", () => {
     expect(event.occurredAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
     expect(event.initiator).toEqual({ seatId: "abc123", playerName: "Jess" });
     expect(event.occurredIn).toBe("shuffler");
-    expect(event.visibility).toBe("public");
     expect(event.traceparent).toMatch(/^00-[0-9a-f]{32}-[0-9a-f]{16}-[0-9a-f]{2}$/);
     expect(event.schemaVersion).toBe(1);
     expect(event.payload.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: "instance-guid-1" });

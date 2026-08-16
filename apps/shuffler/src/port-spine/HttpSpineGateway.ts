@@ -6,12 +6,14 @@ import { SpinePort } from "./types.js";
  * none is active yet) via a single `POST /join`, then appends events to its
  * log. Uses global fetch (undici), which OTel auto-instrumentation wraps, so
  * trace context propagates to the Spine for free on the way in as a
- * `traceparent` header — the envelope body carries no `traceparent` field
- * (contracts/envelope.v3.json), so `sendEvent` strips it before serializing.
- * Don't set a `traceparent` header by hand here: undici's instrumentation
- * appends its own after any explicit headers, unconditionally, so a
- * hand-set value would just duplicate (or, worse, diverge from) the one it
- * injects from the live active span.
+ * `traceparent` header. `traceparent` also rides on the envelope body itself
+ * (contracts/envelope.v1.json, optional field) — redundant for this single-event
+ * HTTP POST, but load-bearing once events travel over the Spine's outbound SSE
+ * stream (no header there) or a future batched `sendEvent` (one header can't
+ * carry per-event trace context). Don't set a `traceparent` header by hand here:
+ * undici's instrumentation appends its own after any explicit headers,
+ * unconditionally, so a hand-set value would just duplicate (or, worse, diverge
+ * from) the one it injects from the live active span.
  */
 export class HttpSpineGateway implements SpinePort {
   constructor(private readonly baseUrl: string) {}
@@ -32,11 +34,10 @@ export class HttpSpineGateway implements SpinePort {
 
   async sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void> {
     const url = `${this.baseUrl}/tables/${encodeURIComponent(tableId)}/events`;
-    const { traceparent: _traceparent, ...envelopeWithoutTraceparent } = event;
     const response = await fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(envelopeWithoutTraceparent),
+      body: JSON.stringify(event),
     });
     if (!response.ok) {
       const bodyText = await response.text().catch(() => "");

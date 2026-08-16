@@ -263,16 +263,17 @@ version bumps). `/restart-game` carries them forward.
   just sends nothing to the Spine for its lifetime.
   `HttpSpineGateway` (real) / `FakeSpineGateway` (tests) implement
   `SpinePort`. **Env**: `SPINE_URL`, default `http://localhost:4600`.
-  **Envelope version**: `sendEvent` posts against `contracts/envelope.v3.json`,
-  which dropped `traceparent` as a body field — `HttpSpineGateway.sendEvent`
-  strips it from the JSON body before serializing and sends nothing else in
-  its place: undici's OTel auto-instrumentation already injects a live
-  `traceparent` header on every outbound `fetch()` (it appends its own after
-  any explicit headers, unconditionally), so setting one by hand here would
-  only risk a duplicate or stale header. This is Spine-only: the Tabletop
-  (`TabletopPort`) still validates against `envelope.v2.json` and still
-  expects `traceparent` in the body, so the shared `EventEnvelope` type keeps
-  the field — only the Spine gateway omits it on the wire.
+  **Envelope version**: both the Spine and the Tabletop now validate against
+  the same `contracts/envelope.v1.json` — `sendEvent` posts the full
+  `EventEnvelope` unchanged, `traceparent` included. That field is optional
+  (tracing is best-effort, never a reason to reject an event) and redundant
+  for this single-event HTTP POST — undici's OTel auto-instrumentation
+  already injects a live `traceparent` header on every outbound `fetch()` —
+  but it's load-bearing once events travel over the Spine's outbound SSE
+  stream (no header there) or a future batched `sendEvent`. Don't set a
+  `traceparent` header by hand: undici appends its own after any explicit
+  headers, unconditionally, so a hand-set value would only risk a duplicate
+  or stale one.
   **Known parallel gap, not this ship's to fix**: the Tabletop still just
   trusts whatever `seatId` the Shuffler makes up for *it* (JES-127) — that
   side isn't gated by the Spine yet either.
