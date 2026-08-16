@@ -17,7 +17,6 @@ export function cardPlayed(tableId: string, payloadOverrides: Record<string, unk
     occurredIn: "shuffler",
     origin: "shuffler.playCardSubmit",
     significance: "domain",
-    visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
     payload: {

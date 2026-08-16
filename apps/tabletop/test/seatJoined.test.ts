@@ -44,7 +44,6 @@ function seatJoined(tableName: string, envelopeOverrides: Record<string, unknown
     occurredIn: "shuffler",
     origin: "shuffler.shuffleUp",
     significance: "administrative",
-    visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
     payload: {

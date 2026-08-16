@@ -17,7 +17,7 @@ function loadSchema(relativePath: string): object {
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 addFormats(ajv);
 
-const validateEnvelopeSchema = ajv.compile(loadSchema("envelope.v2.json"));
+const validateEnvelopeSchema = ajv.compile(loadSchema("envelope.v1.json"));
 
 const payloadValidators: Record<string, ValidateFunction> = {
   "card.played:1": ajv.compile(loadSchema("payloads/card.played.v1.json")),
@@ -38,8 +38,7 @@ export interface Envelope<Payload> {
   origin: string;
   significance: "physical" | "domain" | "administrative";
   occurredAt?: string;
-  visibility: string;
-  traceparent: string;
+  traceparent?: string;
   schemaVersion: number;
   payload: Payload;
 }

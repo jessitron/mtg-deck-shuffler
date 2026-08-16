@@ -37,7 +37,6 @@ function seatJoined(
     occurredIn: "shuffler",
     origin: "shuffler.shuffleUp",
     significance: "administrative",
-    visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
     payload: {

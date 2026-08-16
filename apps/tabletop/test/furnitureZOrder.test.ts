@@ -31,7 +31,6 @@ function seatJoined(tableName: string, seatId: string, playerName: string) {
     occurredIn: "shuffler",
     origin: "shuffler.shuffleUp",
     significance: "administrative",
-    visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
     payload: { deckName: "Deck", playmatImageUrl: "https://example.com/playmat.png", cardBackImageUrl: "https://example.com/card-back.jpg" },
@@ -48,7 +47,6 @@ function cardPlayed(tableName: string, seatId: string, playerName: string) {
     occurredIn: "shuffler",
     origin: "shuffler.playCardSubmit",
     significance: "domain",
-    visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
     payload: {

@@ -15,7 +15,6 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
     occurredIn: "shuffler",
     origin: "shuffler.playCardSubmit",
     significance: "domain",
-    visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
     payload: {
@@ -41,7 +40,6 @@ function seatJoined(tableId: string, payloadOverrides: Record<string, unknown>) 
     occurredIn: "shuffler",
     origin: "shuffler.shuffleUp",
     significance: "administrative",
-    visibility: "public",
     traceparent: fakeTraceparent(),
     schemaVersion: 1,
     payload: {

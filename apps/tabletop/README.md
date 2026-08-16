@@ -38,7 +38,7 @@ Two things here are deliberate stand-ins, marked in the source and easy to delet
    emits `card.played` to the Spine's event log and the Tabletop subscribes to the
    table's public feed instead of this direct POST. Until then the Shuffler POSTs
    here directly, but the body it sends is already the real thing: a full envelope
-   (`contracts/envelope.v2.json`) carrying a card.played payload
+   (`contracts/envelope.v1.json`) carrying a card.played payload
    (`contracts/payloads/card.played.v1.json`), validated for real via ajv
    (`src/server/contractValidation.ts`, ticket 05 of tabletop-cards-come-and-go) —
    field-by-field comment block in `apps/shuffler/src/port-tabletop/types.ts`.
