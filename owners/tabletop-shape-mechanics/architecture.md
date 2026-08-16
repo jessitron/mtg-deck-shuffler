@@ -58,6 +58,11 @@ body lives in moved:
      detaches the card's counter children to the page and animates them to open spots near the
      zone's edge. See "Ticket 18" below — including why the Stack is deliberately NOT in that
      set.
+  4. **Stack-landing collision avoidance** (2026-08-16, inside the same zone-change branch, gated
+     on the new zone being specifically `"stack"`): `nudgeOffAnotherCard` checks whether the
+     dropped card's page bounds hide ≥60% of another `mtg-card`'s area and, if so, steps its `x`
+     right in 40px increments (up to 10 attempts) until clear. See "Stack landing collision
+     avoidance" below.
 - **`canReceiveNewChildrenOfType` / `canRemoveChildrenOfType` / `onDragShapesIn` /
   `onDragShapesOut`** (ticket 18; bodies: `canReceivePassenger`/`canRemovePassenger`/
   `handleDragShapesIn`/`handleDragShapesOut`, `cardPassengers.ts`) — the card is a drop target and
@@ -69,6 +74,53 @@ body lives in moved:
 
 `onClick` is declared *at all* — regardless of what it does — because its mere presence changes
 how tldraw's own `SelectTool` behaves. See below.
+
+## Stack landing collision avoidance (2026-08-16)
+
+A human dragging any card onto the Stack had zero collision handling before this: the
+server-side arrival cascade (`stackCardPosition`, `apps/tabletop/src/server/cardLayout.ts`)
+keeps *consecutive same-seat arrivals* visibly offset, but that only covers a card's first
+landing on the Stack via `card.played` — a card **dragged** there by a player could land
+squarely on top of another card and fully hide it, with nothing to notice or correct it.
+
+`handleTranslateEnd` (`cardZoneEntry.ts`) now checks for this itself, reusing the same
+zone-transition guard already gating `evictPassengers`/`resetFace` a few lines above — it only
+fires on a *fresh* entry into `"stack"` (the `zone === previousZone` early return, above, has
+already filtered out same-zone re-drags, so resting cards being nudged around within the Stack
+don't retrigger it):
+
+```
+const landingX = zoneHit?.zone === "stack" ? nudgeOffAnotherCard(editor, current) : undefined;
+```
+
+`nudgeOffAnotherCard(editor, current)` scans `editor.getCurrentPageShapes()` for other
+`mtg-card` shapes whose page bounds overlap the dropped card's by `>= STACK_OVERLAP_THRESHOLD`
+(0.6 — i.e. the dropped card would read as ≥60% hidden behind another), and if so steps the
+dropped card's `x` right by `STACK_LANDING_NUDGE` (40px), retrying up to
+`MAX_LANDING_ATTEMPTS` (10) times until no candidate position still hides another card that
+much. `overlapFraction(a, b)` is a plain AABB-intersection-over-`a`'s-own-area helper.
+
+**Read-side corollary to watch point 4's rotation-pivots-at-top-left fact — caught by this
+owner's `-review` before it shipped.** The first draft built the dragged card's candidate rect
+straight from `shape.x`/`shape.y`/`shape.props.w`/`shape.props.h`. That's wrong for a rotated
+(tapped) card: watch point 4 already established that tldraw rotates a shape around `x,y` (its
+top-left corner), so for a tapped card, raw `x`/`y`/`w`/`h` describe only its *unrotated local
+frame*, not its actual on-page rectangle. The fix uses `editor.getShapePageBounds(current)` —
+the same call `zoneAt()` and `evictPassengers` in this same file already use for card/zone
+geometry — and translates that page-space AABB by the accumulated nudge delta on each retry,
+instead of reconstructing a rect from raw props. **Any future geometry check over a card's
+occupied area — collision, overlap, "is this spot free" — must read `getShapePageBounds()`,
+never assemble a rect from `x`/`y`/`props.w`/`h` directly, or it silently misreads a tapped
+card's footprint.** See `interactions.md` watch point 25.
+
+**Test**: `apps/tabletop/test/verification/verify-stack-landing-nudge.spec.ts` (new) — places two
+cards on the Stack, drags the second's center square directly onto the first's, and asserts the
+post-drop overlap fraction drops below 0.6 and the dragged card moved right. Confirmed red
+(99.98% overlap) against pre-fix code, green after. Full `./verify.sh` (48 specs) and
+`npx vitest run` (139 tests) both pass.
+
+No new file, no new hook, no new shape type — a pure addition to `handleTranslateEnd`'s existing
+zone-change branch.
 
 ## The `meta` guard is gone
 

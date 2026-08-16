@@ -7,6 +7,12 @@ import { PASSENGER_TYPES } from "./cardPassengers";
 
 const NON_BATTLEFIELD_ZONES = new Set(["graveyard", "exile", "library"]);
 
+/** A card landing on top of this much of another card's area reads as "hidden behind it". */
+const STACK_OVERLAP_THRESHOLD = 0.6;
+/** How far right to nudge a card that lands directly on another, so both stay visible. */
+const STACK_LANDING_NUDGE = 40;
+const MAX_LANDING_ATTEMPTS = 10;
+
 export function handleTranslateEnd(editor: Editor, current: MtgCardShape): TLShapePartial<MtgCardShape> | undefined {
   const zoneHit = zoneAt(editor, current);
   const zone = zoneHit?.zone;
@@ -21,13 +27,40 @@ export function handleTranslateEnd(editor: Editor, current: MtgCardShape): TLSha
   }
 
   const resetFace = zoneHit?.zone === "library" && (current.props.face !== "front" || current.props.faceDown);
+  const landingX = zoneHit?.zone === "stack" ? nudgeOffAnotherCard(editor, current) : undefined;
 
   return {
     id: current.id,
     type: current.type,
+    ...(landingX !== undefined ? { x: landingX } : {}),
     ...(resetFace ? { props: { ...current.props, face: "front" as const, faceDown: false } } : {}),
     meta: { ...current.meta, zone: zone ?? null },
   };
+}
+
+/** If the card just landed square on top of another one on the Stack, step it right until both show. */
+function nudgeOffAnotherCard(editor: Editor, current: MtgCardShape): number | undefined {
+  const bounds = editor.getShapePageBounds(current);
+  if (!bounds) return undefined;
+
+  let dx = 0;
+  for (let attempt = 0; attempt < MAX_LANDING_ATTEMPTS; attempt++) {
+    const candidate: Rect = { x: bounds.x + dx, y: bounds.y, w: bounds.w, h: bounds.h };
+    const hidesAnotherCard = editor.getCurrentPageShapes().some((shape) => {
+      if (shape.type !== "mtg-card" || shape.id === current.id) return false;
+      const other = editor.getShapePageBounds(shape);
+      return !!other && overlapFraction(candidate, other) >= STACK_OVERLAP_THRESHOLD;
+    });
+    if (!hidesAnotherCard) return attempt === 0 ? undefined : current.x + dx;
+    dx += STACK_LANDING_NUDGE;
+  }
+  return current.x + dx;
+}
+
+function overlapFraction(a: Rect, b: Rect): number {
+  const overlapW = Math.max(0, Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x));
+  const overlapH = Math.max(0, Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y));
+  return (overlapW * overlapH) / (a.w * a.h);
 }
 
 function zoneAt(editor: Editor, shape: MtgCardShape): ZoneHit | undefined {

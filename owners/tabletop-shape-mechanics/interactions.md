@@ -236,7 +236,9 @@
 4. **Rotation pivots around `x,y` (top-left), not the shape's center.** Any new hook that moves
    or rotates a card must recompute `x`/`y` to hold the center fixed under the new rotation (see
    `98f8bea`'s fix and the `halfExtent`/`center`/`topLeft` math in `onClick`) — a naive
-   `rotation` write alone swings the card around its corner.
+   `rotation` write alone swings the card around its corner. See also watch point 25 for the
+   read-side version of this same fact: a card's current occupied rectangle can't be read off
+   raw `x`/`y`/`props.w`/`h` for a tapped card either — use `getShapePageBounds()`.
 
 5. **Each tldraw-quirk class of bug gets its own explicit test — coverage by association
    doesn't exist here.** `verify-drag-identity.spec.ts` covers exactly the drag-identity
@@ -745,6 +747,25 @@
     decision for the current gesture) and why `markEventAsHandled` callers (the life counter's
     buttons) are immune by construction — `useCanvasEvents.ts` checks `wasEventAlreadyHandled`
     before `editor.dispatch` is ever called, so `editor.emit('event', ...)` never fires for them.
+
+25. **Reading a card's actual occupied rectangle for a geometry check must use
+    `editor.getShapePageBounds()`, never assemble one from raw `shape.x`/`shape.y`/
+    `props.w`/`props.h` — a read-side corollary to watch point 4, distinct from it.**
+    (2026-08-16, Stack-landing collision avoidance, `cardZoneEntry.ts`.) Watch point 4 is about
+    *writing* rotation — recomputing `x`/`y` so a hook's own rotation write holds a card's center
+    fixed. This is about *reading* a card's current footprint: because rotation pivots around
+    `x,y` (the top-left corner, not the center), a tapped card's raw `x`/`y`/`props.w`/`props.h`
+    describe only its *unrotated local frame*, not its actual on-page rectangle — a rect built
+    directly from those four numbers is systematically wrong for any tapped card. The Stack-
+    landing collision check's first draft (`nudgeOffAnotherCard`, added to detect a dragged card
+    landing squarely on another already on the Stack) hit this by building its candidate rect
+    from raw props; this owner's `-review` caught it before it shipped. Fixed by calling
+    `editor.getShapePageBounds(shape)` instead — the same call `zoneAt()` and `evictPassengers`
+    in the same file already use for card/zone geometry — and working in that page-space AABB.
+    **Any future collision/overlap/occupied-rect check over `mtg-card` (or any rotatable shape)
+    must go through `getShapePageBounds()`**, not just for convenience but for correctness once a
+    tapped card is in the mix. See `architecture.md`'s "Stack landing collision avoidance"
+    section.
 
 ## Not Related To
 

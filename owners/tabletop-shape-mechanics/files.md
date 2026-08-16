@@ -167,7 +167,11 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   of reading `this.editor`. **`onTranslateEnd`'s own `setSelectedShapes([])` call was already gone
   before this split** — ticket 05 (2026-08-11, the same day) centralized that into
   `clearStaleSelectionOnPointerDown.ts`; this file's `handleTranslateEnd` never had that line to
-  carry over.
+  carry over. **Since 2026-08-16**, also home to the Stack-landing collision check —
+  `nudgeOffAnotherCard`/`overlapFraction`, both module-local — fired only on a fresh drag-entry
+  into `"stack"`, nudging a dropped card right off another it would otherwise fully hide. See
+  `architecture.md`'s "Stack landing collision avoidance" section and `interactions.md` watch
+  point 25 (the rotation/page-bounds gotcha this caught during `-review`).
 - `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — extends `BaseBoxShapeUtil<MtgZoneShape>`
   (ticket 13); still defines no interaction hooks at all (`onClick`/`onTranslateEnd`/
   `onDragShapesOver` are all absent — see `architecture.md`/`interactions.md` watch point 7 for why
@@ -472,6 +476,11 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   browser context and survives a reload (proving the edit persists through the room store).
   Typing "Reanimator deck" (contains r/t/d/s) also confirms the keystroke shield — tool hotkeys
   don't fire and the letters reach the field.
+- `apps/tabletop/test/verification/verify-stack-landing-nudge.spec.ts` — **new, 2026-08-16**:
+  places two cards on the Stack, drags the second's center square directly onto the first's, and
+  asserts the post-drop overlap fraction drops below 0.6 and the dragged card moved right —
+  regression test for the Stack-landing collision check (`nudgeOffAnotherCard`,
+  `cardZoneEntry.ts`). Confirmed red (99.98% overlap) pre-fix, green after.
 
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 
