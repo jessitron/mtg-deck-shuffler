@@ -40,8 +40,7 @@ class BasePathTest < Minitest::Test
 
   def test_admin_links_stream_url_and_static_assets_all_carry_the_base_path
     with_base_path("/spine") do
-      post "/spine/join", JSON.generate(name: "kitchen table #{SecureRandom.uuid}", playerName: "Jess"),
-        "CONTENT_TYPE" => "application/json"
+      post_join({ "name" => "kitchen table #{SecureRandom.uuid}" }, path: "/spine/join")
       table_id = JSON.parse(last_response.body).fetch("tableId")
 
       get "/spine/admin/tables"

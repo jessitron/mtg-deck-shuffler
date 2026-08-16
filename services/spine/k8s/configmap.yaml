@@ -15,7 +15,11 @@ data:
   OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io:443"
   OTEL_METRICS_EXPORTER: "none"
   OTEL_LOGS_EXPORTER: "none"
-  # 100% sampling — no down-sampling (see CLAUDE.md Observability).
+  TABLETOP_URL: "http://mtg-tabletop-service"
+  # http on purpose: the Tabletop's ALB has no 443 listener (tldraw license
+  # gate — see apps/tabletop/k8s/ingress.yaml).
+  TABLETOP_PUBLIC_URL: "http://table.jessitron.honeydemo.io"
+  # The app's KeepItDownSampler overrides this base setting for /spine/up.
   OTEL_TRACES_SAMPLER: "always_on"
   # Where the admin screen's trace links point: prod telemetry lands in the
   # mtg-deck-shuffler environment (team modernity). Resolves the TODO at

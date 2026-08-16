@@ -2,7 +2,7 @@ require_relative "../test_helper"
 
 class TableTest < Minitest::Test
   def test_join_on_a_never_seen_name_creates_the_table_and_seats_the_player
-    outcome = Spine::Table.join!(name: "kitchen table", player_name: "Jess")
+    outcome = join_table(name: "kitchen table", player_name: "Jess")
 
     assert outcome[:table_id]
     assert_equal 1, outcome[:seat_number]
@@ -10,8 +10,8 @@ class TableTest < Minitest::Test
   end
 
   def test_a_second_join_with_the_same_name_returns_the_same_table_and_next_seat
-    first = Spine::Table.join!(name: "kitchen table", player_name: "Jess")
-    second = Spine::Table.join!(name: "kitchen table", player_name: "Alex")
+    first = join_table(name: "kitchen table", player_name: "Jess")
+    second = join_table(name: "kitchen table", player_name: "Alex")
 
     assert_equal first[:table_id], second[:table_id]
     assert_equal 2, second[:seat_number]
@@ -37,16 +37,16 @@ class TableTest < Minitest::Test
 
   def test_take_seat_assigns_the_next_open_seat_number
     table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
-    table.take_seat!(player_name: "Jess")
+    take_seat(table, player_name: "Jess")
 
-    seat = table.take_seat!(player_name: "Alex")
+    seat = take_seat(table, player_name: "Alex")
 
     assert_equal 2, seat.number
   end
 
   def test_take_seat_mints_a_seat_taken_event
     table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
-    seat = table.take_seat!(player_name: "Jess")
+    seat = take_seat(table, player_name: "Jess")
 
     event = table.events_dataset.where(name: "seat.taken").first
     payload = JSON.parse(event.payload)
@@ -57,19 +57,19 @@ class TableTest < Minitest::Test
 
   def test_taking_an_already_occupied_seat_is_rejected
     table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
-    table.take_seat!(player_name: "Jess", number: 2)
+    take_seat(table, player_name: "Jess", number: 2)
 
     assert_raises(Spine::Table::SeatOccupied) do
-      table.take_seat!(player_name: "Alex", number: 2)
+      take_seat(table, player_name: "Alex", number: 2)
     end
   end
 
   def test_joining_a_full_table_is_rejected
     table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
-    4.times { |n| table.take_seat!(player_name: "Player #{n}") }
+    4.times { |n| take_seat(table, player_name: "Player #{n}") }
 
     assert_raises(Spine::Table::TableFull) do
-      table.take_seat!(player_name: "One too many")
+      take_seat(table, player_name: "One too many")
     end
   end
 
@@ -98,6 +98,15 @@ class TableTest < Minitest::Test
     assert_equal true, second[:duplicate]
     assert_equal first[:event].seq, second[:event].seq
     assert_equal 1, table.events_dataset.where(event_id: envelope["id"]).count
+  end
+
+  def test_append_event_preserves_an_initiator_seat_id
+    table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
+    initiator = { "seatId" => SecureRandom.uuid, "playerName" => "Jess" }
+
+    outcome = table.append_event!(envelope_for(table, "initiator" => initiator))
+
+    assert_equal initiator, outcome[:event].as_envelope["initiator"]
   end
 
   def test_append_event_rejects_a_contract_violation
@@ -134,5 +143,17 @@ class TableTest < Minitest::Test
 
     assert queue.empty?
     assert_nil table.events_dataset.first(event_id: envelope["id"])
+  end
+
+  private
+
+  def join_table(name:, player_name:)
+    Spine::Table.join!(name: name, game_id: SecureRandom.uuid, player_name: player_name,
+      decoration: { "deckName" => "Test Deck" })
+  end
+
+  def take_seat(table, player_name:, number: nil)
+    table.take_seat!(game_id: SecureRandom.uuid, player_name: player_name,
+      decoration: { "deckName" => "Test Deck" }, number: number)
   end
 end

@@ -58,6 +58,8 @@ GEM
       opentelemetry-api (~> 1.7)
       opentelemetry-common (~> 0.21)
       opentelemetry-registry (~> 0.1)
+    opentelemetry-instrumentation-net_http (0.29.0)
+      opentelemetry-instrumentation-base (~> 0.25)
     opentelemetry-instrumentation-rack (0.31.1)
       opentelemetry-instrumentation-base (~> 0.25)
     opentelemetry-registry (0.6.3)
@@ -110,6 +112,7 @@ DEPENDENCIES
   json_schemer
   minitest
   opentelemetry-exporter-otlp
+  opentelemetry-instrumentation-net_http (~> 0.29.0)
   opentelemetry-instrumentation-rack
   opentelemetry-sdk
   puma (>= 5.0)
@@ -142,6 +145,7 @@ CHECKSUMS
   opentelemetry-common (0.25.1) sha256=38fe87c751e4e13fcd47a8290b4ad67bbedf76c4ed89aeced5ea5c620e66bfb1
   opentelemetry-exporter-otlp (0.34.1) sha256=4697d81e03aff80ea6fbcc741b1c3c700d3624eddea14b453602ee23275450ca
   opentelemetry-instrumentation-base (0.26.1) sha256=49e8d35d565e1a13b4a6b794a4cca4ed8c590d9b33bda5244249bd98c8673775
+  opentelemetry-instrumentation-net_http (0.29.0) sha256=fae5eb6a794bbf87fb15752343b74d5cfd2bb830353f42cab3483fd2f3f84fe7
   opentelemetry-instrumentation-rack (0.31.1) sha256=29a9c145ce6d3fa2938f30334209787c29b581a51fdb472e2098a1d69e15536a
   opentelemetry-registry (0.6.3) sha256=568fa8eaea94394f29f4fce3f0339ab10c3bf6d6c8beed6b3cfee6fd37fcc608
   opentelemetry-sdk (1.13.0) sha256=eea4ab625eb901ecfe1083049862d4853fd16d94029f3cdd16526c81332f0fff

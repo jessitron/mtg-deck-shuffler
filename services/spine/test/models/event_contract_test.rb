@@ -44,6 +44,14 @@ class EventContractTest < Minitest::Test
     end
   end
 
+  def test_seat_joined_rejects_an_invalid_game_url
+    envelope = valid_envelope("payload" => { "deckName" => "Test Deck", "gameUrl" => "not a URL" })
+
+    assert_raises(Spine::EventContract::Violation) do
+      Spine::EventContract.validate!(envelope)
+    end
+  end
+
   def test_a_non_object_envelope_is_rejected
     assert_raises(Spine::EventContract::Violation) do
       Spine::EventContract.validate!("not a hash")

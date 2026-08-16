@@ -18,17 +18,31 @@ module Spine
     one_to_many :seats, key: :table_id
     one_to_many :events, key: :table_id
 
-    def self.join!(name:, player_name:)
-      table = first(name: name)
-      created = table.nil?
-      table ||= create_with_event!(name: name, creator: player_name)
-      seat = table.take_seat!(player_name: player_name)
-      { table_id: table.id, seat_number: seat.number, created: created }
+    def self.join!(name:, game_id:, player_name:, decoration:)
+      DB.transaction do
+        existing = Seat.first(game_id: game_id)
+        next replay_outcome(existing) if existing
+
+        table = first(name: name)
+        created = table.nil?
+        candidate = table || new(id: SecureRandom.uuid, name: name)
+        preparation = candidate.send(:prepare_seat, game_id: game_id,
+          player_name: player_name, decoration: decoration)
+        table ||= create_with_event!(id: candidate.id, name: name, creator: player_name)
+        seat = table.take_seat!(game_id: game_id, player_name: player_name,
+          decoration: decoration, preparation: preparation)
+        join_outcome(table, seat, created: created, replayed: false)
+      end
+    rescue Sequel::UniqueConstraintViolation
+      existing = Seat.first(game_id: game_id)
+      raise unless existing
+
+      replay_outcome(existing)
     end
 
-    def self.create_with_event!(name:, creator:)
+    def self.create_with_event!(name:, creator:, id: SecureRandom.uuid)
       DB.transaction do
-        table = create(id: SecureRandom.uuid, name: name)
+        table = create(id: id, name: name)
         table.mint_event!(
           name: "table.created",
           initiator: creator,
@@ -42,22 +56,22 @@ module Spine
       raise NameTaken, "an active table is already named #{name.inspect}"
     end
 
-    def take_seat!(player_name:, number: nil)
+    def take_seat!(game_id:, player_name:, decoration:, number: nil, preparation: nil)
+      preparation ||= prepare_seat(game_id: game_id, player_name: player_name,
+        decoration: decoration, number: number)
+
       DB.transaction do
-        number ||= next_available_seat_number
-        if seats_dataset.where(number: number).any?
-          raise SeatOccupied, "seat #{number} at table #{name.inspect} is already taken"
+        if seats_dataset.where(number: preparation[:number]).any?
+          raise SeatOccupied, "seat #{preparation[:number]} at table #{name.inspect} is already taken"
         end
 
-        seat_id = SecureRandom.uuid
-        mint_event!(
-          name: "seat.taken",
-          initiator: player_name,
-          origin: "spine.seatTaken",
-          significance: "administrative",
-          payload: { "seatId" => seat_id, "seat" => number, "playerName" => player_name }
+        seat = Seat.create(
+          id: preparation[:seat_id], table_id: id, number: preparation[:number],
+          player_name: player_name, game_id: game_id
         )
-        Seat.create(id: seat_id, table_id: id, number: number, player_name: player_name)
+        persist_envelope!(preparation[:taken])
+        persist_envelope!(preparation[:joined])
+        seat
       end
     end
 
@@ -78,6 +92,7 @@ module Spine
           seq: next_seq,
           name: envelope["name"],
           initiator: envelope["initiator"]["playerName"],
+          initiator_seat_id: envelope["initiator"]["seatId"],
           occurred_in: envelope["occurredIn"],
           origin: envelope["origin"],
           significance: envelope["significance"],
@@ -97,12 +112,14 @@ module Spine
     end
 
     def mint_event!(name:, initiator:, origin:, significance:, payload:)
+      player_name, seat_id = initiator_values(initiator)
       event = Event.create(
         event_id: SecureRandom.uuid,
         table_id: id,
         seq: next_seq,
         name: name,
-        initiator: initiator,
+        initiator: player_name,
+        initiator_seat_id: seat_id,
         occurred_in: "spine",
         origin: origin,
         significance: significance,
@@ -115,6 +132,82 @@ module Spine
     end
 
     private
+
+    def self.join_outcome(table, seat, created:, replayed:)
+      joined_event = Event.where(table_id: table.id, name: "seat.joined",
+        initiator_seat_id: seat.id).order(:seq).first
+      {
+        table_id: table.id,
+        table_name: table.name,
+        seat_number: seat.number,
+        joined_event: joined_event,
+        created: created,
+        replayed: replayed
+      }
+    end
+
+    def self.replay_outcome(seat)
+      table = Table[seat.table_id]
+      join_outcome(table, seat, created: false, replayed: true)
+    end
+
+    def prepare_seat(game_id:, player_name:, decoration:, number: nil)
+      number ||= next_available_seat_number
+      if seats_dataset.where(number: number).any?
+        raise SeatOccupied, "seat #{number} at table #{name.inspect} is already taken"
+      end
+
+      seat_id = SecureRandom.uuid
+      initiator = { "seatId" => seat_id, "playerName" => player_name }
+      common = {
+        "tableId" => id,
+        "initiator" => initiator,
+        "occurredIn" => "spine",
+        "significance" => "administrative",
+        "schemaVersion" => 1
+      }
+      taken = common.merge(
+        "id" => SecureRandom.uuid,
+        "name" => "seat.taken",
+        "origin" => "spine.seatTaken",
+        "payload" => { "seatId" => seat_id, "seat" => number, "playerName" => player_name }
+      )
+      joined = common.merge(
+        "id" => SecureRandom.uuid,
+        "name" => "seat.joined",
+        "origin" => "spine.seatJoined",
+        "payload" => decoration
+      )
+      EventContract.validate!(taken)
+      EventContract.validate!(joined)
+      { seat_id: seat_id, number: number, taken: taken, joined: joined }
+    end
+
+    def persist_envelope!(envelope)
+      event = Event.create(
+        event_id: envelope["id"],
+        table_id: id,
+        seq: next_seq,
+        name: envelope["name"],
+        initiator: envelope["initiator"]["playerName"],
+        initiator_seat_id: envelope["initiator"]["seatId"],
+        occurred_in: envelope["occurredIn"],
+        origin: envelope["origin"],
+        significance: envelope["significance"],
+        schema_version: envelope["schemaVersion"],
+        payload: JSON.generate(envelope["payload"]),
+        occurred_at: envelope["occurredAt"] && Time.parse(envelope["occurredAt"]),
+        accepted_at: Time.now.utc
+      )
+      broadcast(event)
+      event
+    end
+
+    def initiator_values(initiator)
+      return [initiator["playerName"], initiator["seatId"]] if initiator.is_a?(Hash)
+
+      [initiator, nil]
+    end
 
     def broadcast(event)
       carrier = {}

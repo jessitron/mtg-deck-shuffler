@@ -4,9 +4,9 @@ How faces appear in the fleet's published language (`notes/DESIGN-event-contract
 JES-128). **Landed** (JES-129, `9e3ca60`): the JSON Schema lives at
 `contracts/payloads/card.played.v1.json` — `card: { scryfallId, instanceId }` (both
 uuid-format) with a required sibling `face: enum ["front","back"]`. The Spine
-(`services/spine/`, Ruby) validates every ingested event against these schemas via
-`lib/event_contract.rb` and fails loudly (422) on unknown name/version or a payload
-that doesn't match.
+(`services/spine/`, Ruby) validates generic ingested events and the `seat.joined` event
+minted by its administered `/join` against these schemas via `lib/event_contract.rb`.
+Invalid join decoration fails with 422 before persistence or delivery.
 
 ## The rule
 
@@ -102,12 +102,12 @@ yet — files to write/amend are listed in the ticket for build time. The face r
 | `card.discarded.v1` (new, split from `card.played`) | yes | a discard shows the card publicly; payload `card`+`face`+`seat`, no `zoneHint` (graveyard *is* its meaning) |
 | `card.returned.v1` (new, one kind for BOTH table exits) | **no** — and no `faceDown` | Jess: "cards removed from play no longer have a face up." The table is not authoritative for a card's face (physics ticket 06); the Shuffler keeps its own `currentFace`. `occurredIn: "tabletop"` (portal drag) vs `"shuffler"` (Return button et al.) distinguishes the exits; payload `card`+`seat`+optional `fromZone` (absent when `occurredIn:"shuffler"`) |
 | `undo.card.played.v1` / `undo.card.discarded.v1` (new) | **no** | deletion neither reveals nor chooses a face; payload `card`+`seat`; undo kinds are named `undo.<full name of the event undone>` |
-| `commanders` on `seat.joined.v1` (new optional array, 0–2 of `{ card: { scryfallId, instanceId } }`) | **no** | a commander always arrives in the command zone face up; flipping it there afterward is table-local. Scaffolding (`cardName`/`frontImageUrl`/`backImageUrl`) rides off-schema, with `backImageUrl` derived from `twoFaced` — never stored-URI presence — making this a second sender site bound by that watch point |
+| `commanders` on `seat.joined.v1` (optional array, 0–2 entries requiring `card`, `cardName`, `frontImageUrl`, and `backImageUrl`) | **no** | a commander always arrives in the command zone face up; flipping it there afterward is table-local. `backImageUrl` is required and may be a string or `null`; it remains derived from `twoFaced`, never stored-URI presence, making this a second sender site bound by that watch point |
 
 Also decided there, adjacent to this owner's territory:
 
-- **`envelope.v1` is amended in place** (free exactly now — zero conforming producers or
-  consumers exist): `tableId` drops `format: uuid` (pre-Spine, the table name IS the id),
+- **`envelope.v1` was amended in place** (free at that time because zero conforming producers
+  or consumers existed): `tableId` dropped `format: uuid` (pre-Spine, the table name was the id),
   and `initiator` becomes the object `{ seatId?, playerName }`.
 - **Contract validation gets real in this map** — decided here, **landed at ticket 05
   (2026-08-09)**: both Tabletop receivers load `contracts/` and validate on receipt via ajv,
@@ -116,38 +116,43 @@ Also decided there, adjacent to this owner's territory:
   sites" for payload changes are now one schema file plus one shared validator
   (`apps/tabletop/src/server/contractValidation.ts`). See the ticket-05 section above.
 - **`seat.taken` vs `seat.joined` are two facts, not two names for one** — `seat.joined`
-  (Shuffler→Tabletop: a seat's game connected, carrying how the player's stuff looks) vs
-  `seat.taken` (Spine's own join flow). Documented, deliberately not unified; convergence
-  is map-5 work.
+  carries how the player's stuff looks; `seat.taken` records the Spine's seat assignment.
+  The Spine's rich `/join` now mints both in one transaction and forwards the persisted
+  `seat.joined` event after commit; the facts remain distinct.
+
+## The Spine preserves rich `seat.joined` payloads — ticket 02 (2026-08-16)
+
+`POST /join` now accepts the seat decoration, validates a draft `seat.joined` envelope,
+persists its payload as JSON, exposes it in the admin event log, and forwards
+`Event#as_envelope` to the Tabletop after commit. The outbound compatibility copy changes
+only `tableId` from the Spine UUID to the stored table name and may add transient trace
+context; it does not alter the payload.
+
+For commander data, the preservation guarantee is semantic and nested: array order,
+unknown payload/commander/card extension fields, explicit string versus `null`
+`backImageUrl`, and omitted `commanders` versus `[]` survive. No `face` is synthesized.
+Missing required `backImageUrl` is a 422 before table, seat, event, broadcast, or HTTP side
+effects. A same-`gameId` replay returns and resends the original persisted event and payload,
+ignoring conflicting valid decoration. `gameUrl` is now an optional URI in
+`seat.joined.v1`; the commander display fields remain required.
 
 ## Watch points
 
-- Changing `face`'s shape (or the card reference) in `contracts/payloads/card.played.v1.json`
-  is a payload schemaVersion bump: add a new `card.played.v2.json` file, never edit v1
-  in place — the Spine resolves schemas by `<name>.v<schemaVersion>.json` filename and
-  old senders keep validating against v1. **The one standing exception**, used twice now
-  (`envelope.v1`'s JES-128 amendment, and ticket 05's edits to `card.played.v1.json` +
-  `seat.joined.v1.json`): while a schema has **zero conforming producers or consumers in
-  the world**, editing it in place is free — there's nothing to break. The instant a real
-  sender or receiver exists (the Spine's ingestion, most likely), this exception is gone
-  and every future change is a version bump. Don't generalize from these two edits to "in-
-  place edits are fine here" — they were fine *because* nothing depended on the old shape
-  yet, a fact that stops being true the moment the Spine starts consuming these payloads.
+- Changing `face`'s shape, the card reference, or a required `seat.joined` commander field
+  is a payload schemaVersion bump: add a new v2 schema file, never edit v1 in place. The
+  Spine resolves schemas by `<name>.v<schemaVersion>.json` and now validates, persists,
+  replays, and forwards v1 `seat.joined`, so the old zero-producer/consumer exception is
+  over. Earlier in-place edits remain historical exceptions, not precedent for another.
 
 - Adding a new card-referencing event kind? Ask "does this event reveal or choose a
   face?" If yes, `face` goes beside `card`, same shape as `card.played`. This rule now
   has worked precedent (ticket 02, see the vocabulary table above): `card.discarded`
   yes; `card.returned`, both `undo.*` kinds, and `seat.joined`'s `commanders` no.
 
-- **The "never edit v1 in place, bump to v2" rule above is about `face`'s own shape,
-  not about every field.** Table-layout ticket 18 (2026-08-09) added `owner` and
-  `isCommander` to `card.played.v1.json` **as required fields, in place, no v2** —
-  following the precedent ticket 12 set when it added `frontImageUrl`/`backImageUrl`
-  (though those weren't `required`). So in practice this repo edits v1 in place for new
-  fields (even required ones) and reserves the v2 bump for changing what an existing
-  field means or removing one. If that distinction ever bites (a producer built against
-  an older v1 that lacks a newly-required field), that's the sharp edge to fix, not a
-  surprise to relitigate.
+- **Past required-field additions to v1 were pre-Spine exceptions.** Table-layout ticket 18
+  added `owner` and `isCommander` to `card.played.v1.json` in place, following the earlier
+  image-field precedent. That history explains the current schema; it no longer authorizes
+  another in-place required-field change now that durable producers and consumers exist.
 - **`seat.joined` is a second sender site for the `backImageUrl`-from-`twoFaced` rule.**
   Ticket 18 gave `seat.joined.v1.json` an optional `commanders` array (0-2); as shipped its
   item schema only declared `card:{scryfallId,instanceId}`, leaving `cardName`/
@@ -155,7 +160,7 @@ Also decided there, adjacent to this owner's territory:
   require all four, matching what `buildSeatJoinedCommander` actually sends. No `face` field —
   commanders always arrive face up (see the vocabulary table's `commanders` row above);
   the Tabletop hardcodes `face:"front"`, `faceDown:false` when minting. Any future
-  scaffolding field added to `card.played`'s payload should get the matching case in
+  commander display field added to `card.played`'s payload should get the matching case in
   `apps/shuffler/test/port-tabletop/gateways.test.ts`'s `"buildSeatJoinedEvent
   commanders"` block, mirroring `cardPlayedEvent.test.ts`.
 - **Design the payload so it doesn't need to carry what it doesn't mean.** A shadow event

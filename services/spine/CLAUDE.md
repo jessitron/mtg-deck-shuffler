@@ -20,10 +20,14 @@ ActiveRecord), SQLite, Minitest. Rewritten from a Rails 8 app for the reasons in
 `.scratch/spine-roda-rewrite/spec.md` (repo root) — Jess wants to learn plain Ruby, and
 Rails' magic was in the way of seeing where things actually happen.
 
-`GET /up` for health, OTel wired at 100% sampling. `POST /join` (`{name, playerName}` →
-`{tableId, seatNumber}`) creates a table on an unseen name and always takes a seat —
-domain logic lives in `models/table.rb` (`Table`, `Seat`, `Event`, all `Sequel::Model`),
-schema in `config/db.rb`. `POST /tables/:table_id/events` is the generic ingestion
+`GET /up` is health. `POST /join` accepts a Shuffler game id, table/player/deck names,
+and optional seat decoration; it creates a table on an unseen name, idempotently assigns
+one seat per game id, and atomically records `seat.taken` + `seat.joined`. It returns
+`{tableId, seatNumber, tableUrl}` and then best-effort POSTs the persisted `seat.joined`
+event to the Tabletop via `lib/tabletop_notifier.rb`; delivery failure never rolls back
+the join. Domain logic lives in `models/table.rb` (`Table`, `Seat`, `Event`, all
+`Sequel::Model`), schema and additive startup migrations in `config/db.rb`.
+`POST /tables/:table_id/events` is the generic ingestion
 endpoint: contract-validated against `contracts/` via `lib/event_contract.rb`
 (json_schemer, envelope v1), dedups on the sender's event id, assigns `seq`/`acceptedAt`
 server-side. `GET /tables/:table_id/events/stream` is the outbound side: one SSE stream
@@ -81,18 +85,26 @@ auto-sort merged-group rules by path specificity, so this must be explicit.
 To run the whole fleet (Spine + Tabletop + Shuffler together), use `./run` from the
 repo root — see the root `CLAUDE.md`.
 
+## Tabletop notification
+
+- `TABLETOP_URL` is the server-to-server base URL used after `/join` commits. Missing,
+  invalid, unreachable, timed-out, and non-2xx destinations are all best-effort failures
+  recorded on the live join span; the response still succeeds.
+- `TABLETOP_PUBLIC_URL` builds `/join`'s returned `/t/<table-name>` link. Standalone local
+  runs default to `http://localhost:5180`; the root fleet runner and production set it.
+- Production values live in `k8s/configmap.yaml`; the public URL deliberately uses HTTP
+  because the Tabletop ALB has no 443 listener.
+
 ## Observability
 
 Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
 
-- **Sampling**: 100%, no down-sampling. The old `BackgroundChatterSampler`
-  (`TelemetrySampler::BackgroundChatterSampler`, 1% of `/up` health-check traffic) was
-  deliberately not ported — it's documented as broken, and the rewrite spec explicitly
-  says start at 100% and revisit once start/stop behavior is confirmed clean.
+- **Sampling**: `KeepItDownSampler` keeps 1% of production `/spine/up` probes and 100% of
+  everything else.
 - **Wiring**: `config/telemetry.rb`, required first thing in `app.rb`. Uses
   `OpenTelemetry::SDK.configure` with `opentelemetry-exporter-otlp` (env-var driven,
-  same `OTEL_EXPORTER_OTLP_*` vars as the other ships) and
-  `opentelemetry-instrumentation-rack`.
+  same `OTEL_EXPORTER_OTLP_*` vars as the other ships),
+  `opentelemetry-instrumentation-rack`, and `opentelemetry-instrumentation-net_http`.
 - **Rack instrumentation needs an explicit `use`.** Unlike Rails (which has a railtie
   hook), Roda/Rack has no auto-injection point — the instrumentation gem only
   *registers* itself; the app still has to mount its middleware. `app.rb` does this via
@@ -100,6 +112,13 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
   Skip this and requests boot fine but produce zero spans — no error, just silence. If a
   future OTel-instrumented gem shows the same "installed successfully, no spans"
   symptom, check whether it's Rack-style (needs manual `use`) vs Rails-style (auto).
+- **The `/join` Tabletop POST is auto-instrumented by Net::HTTP.** The instrumentation
+  creates the client span and injects the HTTP `traceparent` header; never set that header
+  manually. `TabletopNotifier` also puts the ambient context on the transient envelope
+  body immediately before serialization so it can later survive non-header transports.
+  The two values share a trace id but may correctly name different spans. No trace context
+  is persisted. Delivery outcome is bounded in `tabletop.send.result`; notifier failures
+  do not mark the successful `/join` span as failed.
 - **`traceparent` rides on the envelope itself, as an optional field** (`contracts/envelope.v1.json`
   — reset from v3 on `schema-schemes`, 2026-08-16). Inbound, the Rack instrumentation
   still extracts a header-carried `traceparent` automatically — no code needed for
