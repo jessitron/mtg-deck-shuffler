@@ -70,6 +70,15 @@ than living in two places.
   own** domain log (narration-visible), not just a silent state update. The call is
   idempotent, keyed by the Shuffler's own `gameId` + table name, so a retry or restart
   gets back the same table URL instead of a second seat.
+- `/to-tickets` (2026-08-16) broke `spec.md` into four tickets, each leaving the game
+  in a fully working state when merged: [02 — Spine: `/join` becomes idempotent and
+  administers the full seat](issues/02-spine-idempotent-join.md) (Spine-only, no
+  blockers), [03 — Shuffler: one join call replaces the two direct
+  calls](issues/03-shuffler-single-join-call.md) (blocked by 02 — the slice that fixes
+  the anemic log), [04 — Shuffler: `/game` stops waiting on the join; status UI +
+  domain-log entry](issues/04-shuffler-async-join-status.md) (blocked by 03), and
+  [05 — Cross-ship verification](issues/05-cross-ship-verification.md) (blocked by 03,
+  04, test-only).
 
 ## Not yet specified
 
