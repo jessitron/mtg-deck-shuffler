@@ -26,7 +26,6 @@ export interface EventEnvelope<Payload> {
   occurredIn: "shuffler";
   origin: string;
   significance: Significance;
-  visibility: "public";
   traceparent: string;
   schemaVersion: number;
   payload: Payload;
@@ -65,7 +64,6 @@ export function buildCardPlayedEvent(
     occurredIn: "shuffler",
     origin: "shuffler.playCardSubmit",
     significance: "domain",
-    visibility: "public",
     traceparent: currentTraceparent(),
     schemaVersion: 1,
     payload: {
@@ -159,7 +157,6 @@ export function buildSeatJoinedEvent(
     occurredIn: "shuffler",
     origin: "shuffler.shuffleUp",
     significance: "administrative",
-    visibility: "public",
     traceparent: currentTraceparent(),
     schemaVersion: 1,
     payload: {
