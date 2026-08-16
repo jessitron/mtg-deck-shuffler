@@ -15,13 +15,13 @@ Schema Schemes: mostly by Jess
 
 [] Make a new skill for updating schema versions
 
-[] Write up the whole new policy for updating schema versions
+[x] Write up the new policy for updating schema versions
 
-[] delete the old docs:
+[x] delete the old docs:
 
 - notes/DESIGN-schema-evolution-policy.md
 - notes/DESIGN-event-contract-v0.md
-- contracts/README.md
+- contracts/README.md (previous content)
 
 [] get the AI to make the new policy true. Reset all versions to 1
 
