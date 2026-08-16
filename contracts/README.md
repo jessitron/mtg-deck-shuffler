@@ -19,11 +19,11 @@ Each event name is versioned, and expected to advance whenever useful.
 
 Add optional field: no version bump
 
-Add required field: version bump
+Add or remove a required field: version bump
 
 Change the type of a field (eg, one commander to an array of commanders): version bump
 
-Semantic change: at least a version bump, and consider a new event type.
+Semantic change: at least a version bump, consider a new event type.
 
 ## Files
 
