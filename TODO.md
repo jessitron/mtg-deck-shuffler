@@ -23,15 +23,20 @@ early dev data, but still a real prod-data-wiping action.
 
 ## Next
 
-- bug: in Shuffler, if you hit Restart game, the playmat resets. It should remember everything from when you started the game.
-
-- Evelyn wants all the things you play to show up in the same spot. Make lands show up above the playmat (in what is currently the Stack) too. (When the Stack becomes dynamic and only appears when people play a spell -- then lands will not cause the stack to appear.)
-
 - before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game!
 
 - Consider removing the animations owner, since the animations don't do much now.
 
 - In shuffler, add a button under the Library for 'Mill' - it has the effect of discarding the top card.
+  The buttons under the library should change to:
+
+```
+[       Draw       ]
+[ Reveal ] [ Mill  ]
+[ Search ] [Shuffle]
+```
+
+- clean up old branches
 
 - `/design` specimen owed for the on-brand `mtg-title` deck-title label (Orbitron via
   `var(--font-chrome)`, colored by the deck's darker identity color). Cross-ship: the shape
