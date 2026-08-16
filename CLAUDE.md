@@ -94,16 +94,15 @@ The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and
   hidden zones (library, hand). The original app.
 - `apps/tabletop/` — the Tabletop: Vite + React + tldraw synced canvas
   (`/t/:tableName` is a shared board) where cards arrive from the Shuffler.
-- `services/spine/` — the Spine: Rails 8 + SQLite; tables, seats, one append-only
-  event log per table, validated against `contracts/`.
+- `services/spine/` — the Spine: Ruby; table administration, persistence and event bus, one append-only
+  event log per table.
 - `packages/design-tokens/` — the fleet's shared visual vocabulary (`@fleet/design-tokens`):
   the identity palette, `--narrow-border`, and Magic's colour pie. One dictionary, both ships
   — the Shuffler serves it at `/fleet/tokens.css`, the Tabletop imports it through Vite.
   Owned by `owners/shuffler-looks-like-itself/`; consult that owner before changing a value.
 - `contracts/` — the fleet's published language: JSON Schema for the event
   envelope and per-kind payloads. Both the Spine (Ruby) and the TS apps validate
-  on receipt and fail loudly on unknown name/version. See `contracts/README.md`
-  and `notes/DESIGN-event-contract-v0.md`.
+  on receipt. See `contracts/README.md`.
 
 **`notes/` at the fleet level holds only genuinely fleet-wide docs.** Ship-specific notes
 live under each ship's own `notes/` (e.g. `apps/shuffler/notes/`, `apps/tabletop/notes/`),
@@ -122,9 +121,7 @@ only the route is broken. Curl the running image.
 
 - `./run` **from the repo root** — starts the fleet with prefixed logs: Tabletop
   (:5180, tables at `/t/<name>`), Shuffler (:3344, wired to the local Tabletop via
-  `TABLETOP_URL`), and Spine (:4600, admin at `/admin/tables`) once it exists again —
-  the Spine is mid-rewrite (`.scratch/spine-roda-rewrite/`) and `./run` skips it with a
-  log line until `services/spine/run` reappears. Sources `.be` once for telemetry
+  `TABLETOP_URL`), and Spine (:4600, admin at `/admin/tables`) — Sources `.be` once for telemetry
   (Honeycomb env `local`). Ctrl-C stops everything. Override ports with
   `SHUFFLER_PORT`/`TABLETOP_PORT`/`SPINE_PORT`.
 
