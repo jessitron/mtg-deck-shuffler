@@ -25,7 +25,7 @@ Rails' magic was in the way of seeing where things actually happen.
 domain logic lives in `models/table.rb` (`Table`, `Seat`, `Event`, all `Sequel::Model`),
 schema in `config/db.rb`. `POST /tables/:table_id/events` is the generic ingestion
 endpoint: contract-validated against `contracts/` via `lib/event_contract.rb`
-(json_schemer, envelope v3), dedups on the sender's event id, assigns `seq`/`acceptedAt`
+(json_schemer, envelope v1), dedups on the sender's event id, assigns `seq`/`acceptedAt`
 server-side. `GET /tables/:table_id/events/stream` is the outbound side: one SSE stream
 per table, fed by `lib/table_broadcaster.rb` (a plain-Ruby pub/sub object every
 `Table#append_event!`/`#mint_event!` publishes to after its transaction commits) and
@@ -36,7 +36,7 @@ render plugin, just `ERB.new(...).result(binding)`), no framework helpers. The s
 page's page load renders the log as it stands, then a plain `<script>` block opens an
 `EventSource` on that table's SSE stream (dogfooding ticket 05's delivery mechanism)
 and appends new rows as they arrive, building each row's Honeycomb trace link
-client-side from that message's `meta.traceparent` — see Observability below.
+client-side from that message's `event.traceparent` — see Observability below.
 
 See `README.md` (in this directory) for more.
 
@@ -100,25 +100,31 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
   Skip this and requests boot fine but produce zero spans — no error, just silence. If a
   future OTel-instrumented gem shows the same "installed successfully, no spans"
   symptom, check whether it's Rack-style (needs manual `use`) vs Rails-style (auto).
-- **`traceparent` never rides in the envelope** (contract v3, ticket 04). Inbound, the
-  Rack instrumentation extracts it from the HTTP header automatically — no code needed
-  for `POST /tables/:table_id/events` to continue a sender's trace. The persisted
-  `Event` row has no trace column at all: trace context is observability-only and
-  expires (~60d), so it's deliberately not durable. This means an event minted before
-  someone's watching its table's SSE stream (ticket 05) has no way to link back to the
-  trace that created it — accepted tradeoff, not a bug (see
+- **`traceparent` rides on the envelope itself, as an optional field** (`contracts/envelope.v1.json`
+  — reset from v3 on `schema-schemes`, 2026-08-16). Inbound, the Rack instrumentation
+  still extracts a header-carried `traceparent` automatically — no code needed for
+  `POST /tables/:table_id/events` to continue a sender's trace — but a sender may also
+  put it in the body, which matters once events travel a path with no header at all
+  (the outbound SSE stream, or a future batched `sendEvent`). It's optional and never
+  validated for correctness: tracing is best-effort and must never be the reason an
+  event is rejected. The persisted `Event` row still has no trace column at all —
+  `Event#as_envelope` never includes `traceparent` — trace context is
+  observability-only and expires (~60d), so it's deliberately not durable. This means
+  an event minted before someone's watching its table's SSE stream (ticket 05) has no
+  way to link back to the trace that created it — accepted tradeoff, not a bug (see
   `.scratch/spine-roda-rewrite/spec.md`, "Trace context — envelope contract change").
-- **Outbound, trace context rides alongside the event, not merged into it.**
-  `GET /tables/:table_id/events/stream` delivers `{event: {...}, meta: {traceparent}}`.
-  `Table#broadcast` (private, `models/table.rb`) captures the *appending* request's
-  trace context via `OpenTelemetry.propagation.inject` at the moment the event is
-  created, deferred via `DB.after_commit` — so a subscriber's own spans can link back
-  to whichever trace actually produced the event, and a rolled-back append never
-  reaches a subscriber at all.
+- **Outbound, trace context is inlined onto the broadcast envelope, fresh each time.**
+  `GET /tables/:table_id/events/stream` delivers `{event: {...«envelope fields»,
+  traceparent}}` — no separate wrapper. `Table#broadcast` (private, `models/table.rb`)
+  captures the *appending* request's trace context via `OpenTelemetry.propagation.inject`
+  at the moment the event is created, deferred via `DB.after_commit`, and merges it onto
+  `event.as_envelope` — so a subscriber's own spans can link back to whichever trace
+  actually produced the event, and a rolled-back append never reaches a subscriber at
+  all.
 - **The admin show page builds trace links client-side, not server-side.** The `Event`
   row has no trace column (see above), so a page-load render of existing rows has
   nothing to link from — only rows arriving live over the SSE stream carry
-  `meta.traceparent`, and only those get a "trace" link, built in the browser by
+  `event.traceparent`, and only those get a "trace" link, built in the browser by
   `views/admin/tables/show.html.erb`'s inline script (`traceparent.split("-")[1]` is
   the trace id; team/env slugs come from `HONEYCOMB_TEAM_SLUG`/`HONEYCOMB_ENV_SLUG`,
   defaulting to `modernity`/`local`, injected into the page at render time). Rows
