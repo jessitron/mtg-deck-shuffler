@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/envelope.v1.json",
   "title": "Spine Event Envelope",
-  "description": "The fleet's published language: the envelope every event wears, envelope version 1. Senders mint `id`; the Spine assigns `seq` and `acceptedAt` on append (they are absent at submission, present in the log). See contracts/README.md and notes/DESIGN-event-contract-v0.md.",
+  "description": "The fleet's published language: the envelope every event wears. Senders mint `id`; the Spine assigns `seq` and `acceptedAt` on append (they are absent at submission, present in the log). See contracts/README.md for the versioning policy.",
   "type": "object",
   "properties": {
     "id": {
@@ -53,17 +53,22 @@
     "occurredIn": {
       "type": "string",
       "enum": ["shuffler", "tabletop", "spine"],
-      "description": "Which application recorded/sent it. `interpreter` joins this enum later (an envelope version bump)."
+      "description": "Which application recorded/sent it. `interpreter` joins this enum later."
     },
-    "visibility": {
+    "origin": {
       "type": "string",
-      "enum": ["public"],
-      "description": "public is the only legal value in v0. Adding an enum value is an envelope version bump; old readers reject it loudly."
+      "pattern": "^[a-z]+(\\.[a-zA-Z_]+)+$",
+      "description": "One level more specific than `occurredIn`: which mechanism, within that app, minted this event (e.g. `shuffler.playCardSubmit`, `spine.seatTaken`, `tabletop.cardShapeHook`). An open, dot-namespaced string like `name` — not a closed enum, so a new call site anywhere in the fleet never needs a schema change first. Unlike `name` (fully lowercase), segments after the first app name may be camelCase, since a mechanism name (`tableLookupMiss`, `playCardSubmit`) reads naturally that way. Hard-coded literal, one per mint site."
+    },
+    "significance": {
+      "type": "string",
+      "enum": ["physical", "domain", "administrative"],
+      "description": "What kind of fact this event states, independent of which app or mechanism produced it. `physical` — a card moved, hand sorting, a note/annotation on the table; raw motion/arrangement, meaning-free. `domain` — a real game-related fact (a card is drawn, played, or moved to a zone). `administrative` — table/seat bookkeeping (table.created, seat.taken, seat.joined), not gameplay itself."
     },
     "traceparent": {
       "type": "string",
       "pattern": "^00-[0-9a-f]{32}-[0-9a-f]{16}-[0-9a-f]{2}$",
-      "description": "W3C trace context. Observability ONLY — expires with the trace (~60d); durable causality uses event id references, never trace ids."
+      "description": "W3C trace context for this event, carried on the envelope itself rather than only a transport header — the outbound SSE stream has no header to ride, and a future batched `sendEvent` would otherwise lose per-event trace context. Optional: tracing is best-effort and must never be the reason an event is rejected. Observability only — traces expire (~60d); durable causality between events uses `id` references, never trace ids. The Spine's persisted log does not keep this field; it's attached fresh whenever an event is broadcast live."
     },
     "schemaVersion": {
       "type": "integer",
@@ -81,10 +86,10 @@
     "name",
     "initiator",
     "occurredIn",
-    "visibility",
-    "traceparent",
+    "origin",
+    "significance",
     "schemaVersion",
     "payload"
   ],
-  "additionalProperties": false
+  "additionalProperties": true
 }

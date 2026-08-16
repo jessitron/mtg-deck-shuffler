@@ -5,7 +5,9 @@ module Spine
   class Event < Sequel::Model(:events)
     many_to_one :table
 
-    # The envelope this row represents, contract-shaped (envelope.v3.json).
+    # The envelope this row represents, contract-shaped (envelope.v1.json).
+    # No `traceparent`: it's observability-only and never persisted — `Table#broadcast`
+    # attaches a live one when this envelope goes out over the SSE stream.
     def as_envelope
       {
         "id" => event_id,
@@ -18,7 +20,6 @@ module Spine
         "occurredIn" => occurred_in,
         "origin" => origin,
         "significance" => significance,
-        "visibility" => visibility,
         "schemaVersion" => schema_version,
         "payload" => JSON.parse(payload)
       }.compact

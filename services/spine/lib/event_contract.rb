@@ -3,7 +3,7 @@ require "pathname"
 
 module Spine
   module EventContract
-    ENVELOPE_VERSION = 3
+    ENVELOPE_VERSION = 1
 
     # Any way an event can violate the published language.
     class Violation < StandardError; end

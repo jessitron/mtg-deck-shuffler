@@ -16,18 +16,21 @@ module ClearsTablesBetweenTests
 end
 
 module ValidEnvelope
+  # "table.created" isn't used here on purpose: it's Spine-internal (minted by
+  # `mint_event!`, never sent over the wire), so it has no contracts/payloads/ schema
+  # for these externally-POSTed test envelopes to validate against. seat.joined is a
+  # real wire event with a minimal required payload (`deckName`).
   def valid_envelope(overrides = {})
     {
       "id" => SecureRandom.uuid,
       "tableId" => "some-table-id",
-      "name" => "table.created",
+      "name" => "seat.joined",
       "initiator" => { "playerName" => "Jess" },
       "occurredIn" => "shuffler",
       "origin" => "shuffler.test",
       "significance" => "administrative",
-      "visibility" => "public",
       "schemaVersion" => 1,
-      "payload" => { "name" => "kitchen table", "creator" => "Jess" }
+      "payload" => { "deckName" => "Test Deck" }
     }.merge(overrides)
   end
 end

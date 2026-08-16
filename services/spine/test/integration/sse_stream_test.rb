@@ -11,25 +11,24 @@ class SseStreamTest < Minitest::Test
     table_id = join_table
     body, chunks = open_stream(table_id)
 
-    post_event(table_id, envelope_for(table_id, "name" => "table.created"))
+    post_event(table_id, envelope_for(table_id))
 
     message = next_message(chunks)
-    assert_equal "table.created", message["event"]["name"]
+    assert_equal "seat.joined", message["event"]["name"]
   ensure
     body&.close
   end
 
-  def test_the_delivered_payload_separates_event_from_trace_meta
+  def test_the_delivered_event_carries_a_live_traceparent
     table_id = join_table
     body, chunks = open_stream(table_id)
 
     post_event(table_id, envelope_for(table_id))
 
     message = next_message(chunks)
-    assert_equal %w[event meta], message.keys
+    assert_equal ["event"], message.keys
     assert_equal table_id, message["event"]["tableId"]
-    assert message.key?("meta")
-    assert message["meta"].key?("traceparent")
+    assert_match(/\A00-[0-9a-f]{32}-[0-9a-f]{16}-[0-9a-f]{2}\z/, message["event"]["traceparent"])
   ensure
     body&.close
   end

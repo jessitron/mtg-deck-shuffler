@@ -94,7 +94,7 @@
       var stream = new EventSource(streamUrl);
       stream.onmessage = function (e) {
         var message = JSON.parse(e.data);
-        var traceparent = message.meta && message.meta.traceparent;
+        var traceparent = message.event && message.event.traceparent;
         var spanContext = parseSpanContext(traceparent);
 
         if (window.Hny && spanContext) {

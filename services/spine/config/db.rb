@@ -27,7 +27,6 @@ DB.create_table? :events do
   String :occurred_in, null: false
   String :origin, null: false
   String :significance, null: false
-  String :visibility, null: false
   Integer :schema_version, null: false
   String :payload, null: false, text: true
   Time :accepted_at, null: false

@@ -25,11 +25,29 @@ Change the type of a field (eg, one commander to an array of commanders): versio
 
 Semantic change: at least a version bump, consider a new event type.
 
+A version-bumped file replaces the old one — there is no kept history of superseded
+versions in this directory. The old shape is one `git log` away if anyone needs it.
+
+Both the envelope and every payload schema set `additionalProperties: true`: the
+Shuffler, Tabletop, and Spine deploy independently, not in lockstep, so a newer sender's
+optional field must reach an older receiver as a no-op, not a hard validation failure.
+This is narrower than "fail loudly" — known fields still type-check (wrong type, bad
+pattern, missing `required` all still reject); only genuinely unrecognized properties
+pass through unexamined.
+
 ## Files
 
-envelope: ...
-
-payloads: ...
+- `envelope.v1.json` — the envelope every event wears, whatever its `name`. Bumped only
+  for the rare envelope-level change (a new required field, a type change, dropping a
+  field). Current envelope-level fields beyond the ones payloads care about: `origin`
+  (which mechanism, within `occurredIn`, minted the event), `significance`
+  (`physical` / `domain` / `administrative` — what kind of fact the event states), and
+  `traceparent` (optional W3C trace context, carried on the envelope itself since the
+  outbound SSE stream has no header to ride — see the field's own description for why
+  it's never required and never persisted).
+- `payloads/<name>.v<schemaVersion>.json` — one schema per event kind per version. Each
+  `name` versions its payload independently of the envelope and of every other `name`;
+  the envelope's `schemaVersion` field says which payload schema applies to this event.
 
 Related validation code:
 

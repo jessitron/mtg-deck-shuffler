@@ -81,7 +81,6 @@ module Spine
           occurred_in: envelope["occurredIn"],
           origin: envelope["origin"],
           significance: envelope["significance"],
-          visibility: envelope["visibility"],
           schema_version: envelope["schemaVersion"],
           payload: JSON.generate(envelope["payload"]),
           occurred_at: envelope["occurredAt"] && Time.parse(envelope["occurredAt"]),
@@ -107,7 +106,6 @@ module Spine
         occurred_in: "spine",
         origin: origin,
         significance: significance,
-        visibility: "public",
         schema_version: 1,
         payload: JSON.generate(payload),
         accepted_at: Time.now.utc
@@ -121,7 +119,8 @@ module Spine
     def broadcast(event)
       carrier = {}
       OpenTelemetry.propagation.inject(carrier)
-      message = { event: event.as_envelope, meta: { traceparent: carrier["traceparent"] } }
+      envelope = event.as_envelope.merge("traceparent" => carrier["traceparent"]).compact
+      message = { event: envelope }
       DB.after_commit { Spine.broadcaster.publish(id, message) }
     end
 
