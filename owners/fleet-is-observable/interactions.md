@@ -37,13 +37,15 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   configured"; a silent-off guard must check the key is non-empty.
 - **The `traceparent`-in-body minting sites** — `apps/tabletop/src/client/observability/index.ts`
   (Tabletop, optional/websocket) and `apps/shuffler/src/port-tabletop/traceparent.ts` (Shuffler,
-  required for the Tabletop-facing envelope). The Spine's inbound event contract
-  (`contracts/envelope.v3.json`) has no `traceparent` field at all — trace context there travels
-  only via the HTTP header. `HttpSpineGateway.sendEvent` reuses the Shuffler's Tabletop-facing
-  helper to build the envelope (shared `buildCardPlayedEvent`), then **strips `traceparent` back
-  out of the body before serializing** — the mint-then-strip is correct, not a leftover, because
-  undici's OTel auto-instrumentation already puts a live `traceparent` header on the outbound
-  `fetch()` regardless (`shuffler-spine-gateway-stale` closed).
+  required for the Tabletop-facing envelope). The Spine's event contract
+  (`contracts/envelope.v1.json`) carries `traceparent` as a real, **optional** top-level field —
+  never required, so a missing or malformed value is never a reason to reject an event.
+  `HttpSpineGateway.sendEvent` reuses the Shuffler's Tabletop-facing helper to build the envelope
+  (shared `buildCardPlayedEvent`) and **posts the full envelope as-is**, `traceparent` included —
+  the HTTP header carries trace context too (undici's OTel auto-instrumentation, automatic and
+  unconditional), redundant with the body field for this single-event POST but load-bearing once
+  events travel over the Spine's outbound SSE stream or a future batched `sendEvent`
+  (`shuffler-spine-gateway-stale` closed).
 
 ## Depended on by
 
@@ -138,7 +140,7 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   is touched again.
 - **The Spine's `GET /admin/tables/:id` show page and its `HONEYCOMB_ENV_SLUG` default**: the
   page's inline `<script>` builds Honeycomb trace links client-side from live SSE messages'
-  `meta.traceparent`, using `ENV.fetch("HONEYCOMB_ENV_SLUG", "local")`. **Resolved**: the Spine's
+  `event.traceparent`, using `ENV.fetch("HONEYCOMB_ENV_SLUG", "local")`. **Resolved**: the Spine's
   first prod deploy (`services/spine/k8s/configmap.yaml`) now sets `HONEYCOMB_ENV_SLUG:
   "mtg-deck-shuffler"` (and `HONEYCOMB_TEAM_SLUG: "modernity"`), so the `"local"` fallback fires
   only in dev — the `app.rb` comment at the `ENV.fetch` call site was updated to say so. If a
@@ -162,7 +164,7 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   "malformed-ingress-in-a-group blocks the whole group's routing changes" hazard documented for
   `tabletop-http` applies here too — a bad edit to either of these two ingresses can block routing
   changes to both, not just the one that's broken.
-- **The Spine's admin show page now mints a real child span from `meta.traceparent`, not just a
+- **The Spine's admin show page now mints a real child span from `event.traceparent`, not just a
   link** (`views/admin/tables/show.html.erb`, `Hny.inChildSpan("spine-admin",
   "table.event.displayed", spanContext, fn)`): keep it a **child of the same `trace_id`**, never a
   link to a new trace — the point is one trace covering "player joined" through "operator saw it on
@@ -282,17 +284,17 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   never return `undefined`/`nil` — synthesize a well-formed random one, and flag the synthesis on
   the active span (`traceparent.synthesized: true`) so a real occurrence in production is visible.
   If the field is optional and only used for point-to-point propagation, `undefined`-on-no-span is
-  correct and no flag is needed. **Do not add a Roda-Spine equivalent for inbound events** —
-  `envelope.v3.json` deliberately has no `traceparent` property to receive. `HttpSpineGateway.sendEvent`
-  calls the Tabletop-facing helper to build the envelope, then strips `traceparent` from the body
-  before POSTing — keep that split (mint the field because the helper is shared plumbing; strip it
-  because the contract rejects it) rather than "fixing" it by skipping the mint or adding the field
-  back. **Never hand-set a `traceparent` header on a Spine (or any) outbound `fetch()` to
-  compensate for stripping it from the body** — undici's OTel auto-instrumentation already injects
-  a live one on every outbound call, appending its own after any explicit headers unconditionally,
-  so a hand-set value would only produce a duplicate or a stale header. If a future send path needs
-  trace context on the wire to the Spine, the header is already there for free; don't add body
-  plumbing for it.
+  correct and no flag is needed. **`envelope.v1.json` carries `traceparent` as a real, optional
+  envelope field** (never required — "it's rude to fail on tracing"), so `HttpSpineGateway.sendEvent`
+  no longer strips it: it builds the envelope via the Tabletop-facing helper (shared plumbing,
+  `buildCardPlayedEvent`) and posts it as-is. Don't reintroduce a strip-before-send step — the
+  contract accepts the field now. **The Spine itself never persists `traceparent`**
+  (`Event#as_envelope` in `services/spine/models/event.rb` omits it) — it's attached fresh, live,
+  only when `Table#broadcast` (`services/spine/models/table.rb`) sends an event out over SSE
+  (`event.as_envelope.merge("traceparent" => carrier["traceparent"]).compact`). **Never hand-set a
+  `traceparent` header on any outbound `fetch()` to "help"** — undici's OTel auto-instrumentation
+  already injects a live one on every outbound call, appending its own after any explicit headers
+  unconditionally, so a hand-set value would only produce a duplicate or a stale header.
 
 ## Not related to
 
@@ -300,7 +302,7 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   guards the emit side.
 - **The Shuffler's clipboard/tabletop send flow** — its failure handling is Table Mode's business;
   only its spans are mine.
-- **The envelope schema's shape** (`contracts/envelope.v3.json` — which fields exist and their
+- **The envelope schema's shape** (`contracts/envelope.v1.json` — which fields exist and their
   types/enums) — that's contract-owned. This owner's stake starts only where an envelope field also
   becomes a span attribute; each such field gets a one-line row in the README wiring table so
   contract and telemetry don't drift apart silently.

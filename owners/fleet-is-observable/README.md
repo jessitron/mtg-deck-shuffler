@@ -194,7 +194,7 @@ instead. If you ever want `telemetry.sdk.*` back on a `BasicTracerProvider`, the
 | `services/spine/app.rb` `GET /admin/tables` and `GET /admin/tables/:id` | The Spine's admin screen (ticket 06) follows the same house pattern: `current_span.add_attributes("admin.table_count" => ...)` on the index, `"table.id"`/`"admin.result" => "found"` on the show route, and the shared `mark_span_failed("admin.result", "not_found", error)` on a missing table — no new telemetry shape introduced, just the existing one applied to a third route pair. **`HONEYCOMB_ENV_SLUG` is now set in prod** (`services/spine/k8s/configmap.yaml`, `HONEYCOMB_ENV_SLUG: "mtg-deck-shuffler"`, alongside `HONEYCOMB_TEAM_SLUG: "modernity"`) — the Spine's first production deploy resolved the TODO this row used to flag; `ENV.fetch("HONEYCOMB_ENV_SLUG", "local")`'s fallback now only fires locally, and the comment at that call site in `app.rb` was updated to say so rather than "still pending." Rows already in the log when the page loads render with no trace link at all — the `Event` row has no trace column (see the trace-context-in-event-bodies section below), so only rows arriving live over SSE have a `traceparent` to work with. The show page now ships its own browser telemetry too — see "The Spine's browser bootstrap and trace continuation" below. |
 | `services/spine/app.rb` `SPINE_BASE_PATH` route wrapping | The Spine's first production deploy (`services/spine/deploy.sh`, `services/spine/k8s/`) put the Spine behind the **same ALB and host as the Shuffler** (`mtg.jessitron.honeydemo.io/spine`) instead of its own subdomain — AWS ALB ingress can't strip a path prefix, so `app.rb`'s `route do |r| ... end` wraps its entire route table in `r.on(prefix) { dispatch(r) }` when `SPINE_BASE_PATH` (`k8s/configmap.yaml`: empty locally, `"/spine"` in prod) is set, with `dispatch(r)` holding the actual routes so both branches reach identical definitions. This is genuinely new telemetry-adjacent surface — an `r.on` wrapper now sits in front of every route the Rack instrumentation sees. **Verified only shallowly so far**: a container smoke test confirmed spans are still emitted (Rack instrumentation logged its usual "successfully installed" line, and `/spine/up`/`/spine/admin/tables` both responded) but `http.route`/span-naming shape under the wrapped prefix has **not** been checked against a real deployed ALB, only locally in Docker. If a future span shows a missing, doubled, or malformed `http.route` (e.g. `/spine` appearing twice, or the prefix swallowed) once this is live in prod, start here — it's the first and only place in the fleet a route table is wrapped in an extra routing layer after the instrumentation is mounted. |
 | `apps/shuffler/test/harness-telemetry/` | The verify suite's own tracing — not a ship. `harnessTracing.ts` (provider), `spanPlan.ts` (pure + tested), `otelReporter.ts` (Playwright reporter). Service `mtg-fleet-verify`. See "Dev-tooling telemetry" below. |
-| `apps/shuffler/src/port-spine/` | `HttpSpineGateway`/`FakeSpineGateway` implement `SpinePort` (`join`, `sendEvent`), wired into `server.ts` alongside the existing `tabletopPort`. Rewritten onto the new Spine's single `POST /join` and `contracts/envelope.v3.json` (`shuffler-spine-gateway-stale` closed). `sendEvent` still builds its envelope via `buildCardPlayedEvent`/`currentTraceparent()` (those helpers are shared with the Tabletop-facing send and still mint a `traceparent` value onto the envelope object), but now **strips `traceparent` out of the body before serializing** — `envelope.v3.json` has `additionalProperties: false` and no `traceparent` property, so sending it would be rejected outright. No header is hand-set to compensate: undici's OTel auto-instrumentation already injects a live `traceparent` header on every outbound `fetch()`, appending its own after any explicit headers unconditionally, so a hand-set header here would only risk a duplicate or a stale value. Net: mint-for-the-object/strip-from-body/say-nothing-about-the-header is the correct shape, not a partial fix. Otherwise adds no new telemetry wiring on purpose — rides the same undici auto-instrumentation as every other outbound call, and copies the best-effort failure shape (span attribute + `log.warn`, never throws). |
+| `apps/shuffler/src/port-spine/` | `HttpSpineGateway`/`FakeSpineGateway` implement `SpinePort` (`join`, `sendEvent`), wired into `server.ts` alongside the existing `tabletopPort`. Onto the Spine's single `POST /join` and `contracts/envelope.v1.json` (`shuffler-spine-gateway-stale` closed). `sendEvent` builds its envelope via `buildCardPlayedEvent`/`currentTraceparent()` (those helpers are shared with the Tabletop-facing send and mint a `traceparent` value onto the envelope object) and **posts the full envelope as-is** — `envelope.v1.json` declares `traceparent` as an optional top-level property (never required; "it's rude to fail on tracing"), so there's nothing to strip. No header is hand-set to compensate: undici's OTel auto-instrumentation already injects a live `traceparent` header on every outbound `fetch()`, appending its own after any explicit headers unconditionally, so a hand-set header here would only risk a duplicate or a stale value. The body's `traceparent` is redundant for this single-event HTTP POST specifically (the header already carries it) but load-bearing once events travel over the Spine's outbound SSE stream (no header there) or a future batched `sendEvent` (one header can't carry per-event trace context). Otherwise adds no new telemetry wiring on purpose — rides the same undici auto-instrumentation as every other outbound call, and copies the best-effort failure shape (span attribute + `log.warn`, never throws). |
 
 **The house pattern for a failure path**: (1) **attributes first** —
 `markCurrentSpanAsError(message, {...})` with the failure kind, the inputs, and the reason; (2)
@@ -231,39 +231,56 @@ wired side by side in `TablePage.tsx`. Rules worth keeping for a third such hook
 
 ### Trace context embedded in event bodies
 
-Two mechanisms carry trace context on this fleet:
+Two mechanisms carry trace context on this fleet, and both are live now:
 
 1. **HTTP-header propagation** — automatic, via undici auto-instrumentation on outbound
    `fetch`/HTTP calls. This is how a Shuffler-initiated trace continues into the Spine (Rack
    instrumentation extracts the inbound W3C header) with zero application code.
-2. **Body-embedded `traceparent`** — a W3C `00-{traceId}-{spanId}-{flags}` string minted into a
-   JSON payload for data that outlives the request.
+2. **Body-embedded `traceparent`** — a W3C `00-{traceId}-{spanId}-{flags}` string carried as an
+   **optional** field directly on the envelope (`contracts/envelope.v1.json`), for data that
+   outlives the request or travels somewhere no header can reach.
 
-**The Spine's event contract (`contracts/envelope.v3.json`) drops mechanism 2 entirely** —
-`additionalProperties: false`, no `traceparent` property. Inbound (`POST
-/tables/:table_id/events`), trace context travels only via the HTTP header; the persisted `Event`
-row has no trace column, by design — an event minted before anyone is watching its table's SSE
-stream has no way to link back to the trace that created it, an accepted tradeoff
-(`services/spine/CLAUDE.md`). Outbound SSE (not yet implemented) is specified to carry
-`meta.traceparent` as a **sibling** field alongside the envelope, not merged into it.
+**`traceparent` is a real envelope field, sitting directly on the envelope, not under a sibling
+`meta` object.** The contract declares it as an optional top-level property — pattern-validated
+against the W3C format, but never `required`; tracing is best-effort and must never be the reason
+an event is rejected ("it's rude to fail on tracing" — Jess). Contracts describe the wire protocol
+between ships, and the reasoning for putting it on the envelope rather than leaving it
+header-only: the outbound SSE stream has no header mechanism at all, and a future batched
+`sendEvent` would lose per-event trace context if it lived in just one HTTP header for the whole
+batch — so trace context needs a way to travel with the event body itself.
+
+**The Spine never persists it.** `Event#as_envelope` (`services/spine/models/event.rb`) builds the
+envelope with no `traceparent` key — unchanged reasoning: traces expire (~60d), and durable
+causality between events uses `id` references, never trace ids. `Table#broadcast` (private, in
+`services/spine/models/table.rb`) attaches a **live** one only at the instant an event goes out
+over SSE: it captures the *appending* request's trace context via
+`OpenTelemetry.propagation.inject`, then does `event.as_envelope.merge("traceparent" =>
+carrier["traceparent"]).compact` and sends `{event: envelope}` — `traceparent` inlined directly
+onto the outbound envelope (no separate `meta` wrapper), `.compact` dropping the key entirely when
+there's no active span to capture. Inbound (`POST /tables/:table_id/events`), a sender may set
+`traceparent` on the body too, but nothing requires it — the HTTP header alone is already enough
+to continue the trace into the Spine (Rack instrumentation extracts it automatically), and the
+persisted `Event` row keeps neither copy: an event minted before anyone is watching its table's
+SSE stream still has no way to link back to the trace that created it (`services/spine/CLAUDE.md`),
+unchanged.
 
 **Outbound SSE now has a real consumer, not just a link-builder.** The Spine's admin
 show page (`views/admin/tables/show.html.erb`) parses each live SSE message's
-`meta.traceparent` into an OTel `SpanContext` (`{traceId, spanId, traceFlags,
+`event.traceparent` into an OTel `SpanContext` (`{traceId, spanId, traceFlags,
 isRemote: true}`) and opens a genuine **child span** in that same trace —
 `Hny.inChildSpan("spine-admin", "table.event.displayed", spanContext, fn)` — rather than
 only building a clickable trace URL from it. This is the fleet's first browser-side
-"mint a real span from a body-embedded traceparent" consumer; previously `meta.traceparent`
-was read only to construct a URL. See "The Spine's browser bootstrap and trace
+"mint a real span from a body-embedded traceparent" consumer; previously it was read only to
+construct a URL. See "The Spine's browser bootstrap and trace
 continuation" below for the full shape and its consequence for trace duration.
 
-**Two live body-embedded mint sites remain**, both format identically
+**Two live body-embedded mint sites**, both format identically
 (`00-{traceId}-{spanId}-{flags}`):
 
 | Where | Behavior with no active span |
 | --- | --- |
 | `apps/tabletop/src/client/observability/index.ts` `currentTraceparent` | Returns `undefined` — used only for websocket-URL propagation, never a durable field, so "no span, no value" is correct there. |
-| `apps/shuffler/src/port-tabletop/traceparent.ts` `currentTraceparent` | Synthesizes a well-formed random traceparent when no active span exists, and sets `traceparent.synthesized: true` on the active span when that fallback fires — so a real occurrence in production is visible rather than a silent trace-shaped string that links nowhere. Correct for the Tabletop-facing `card.played`/`seat.joined` envelope. `HttpSpineGateway.sendEvent` also builds its envelope via this helper (shared `buildCardPlayedEvent`) but now strips the resulting `traceparent` field out of the body before POSTing to the Spine — `envelope.v3.json` rejects the field outright, and trace context reaches the Spine via the HTTP header instead (undici auto-instrumentation, automatic). This is deliberate, not a leftover: the helper still needs to run (it's shared plumbing for the envelope object), only the wire format differs per destination. |
+| `apps/shuffler/src/port-tabletop/traceparent.ts` `currentTraceparent` | Synthesizes a well-formed random traceparent when no active span exists, and sets `traceparent.synthesized: true` on the active span when that fallback fires — so a real occurrence in production is visible rather than a silent trace-shaped string that links nowhere. Correct for the Tabletop-facing `card.played`/`seat.joined` envelope. `HttpSpineGateway.sendEvent` also builds its envelope via this helper (shared `buildCardPlayedEvent`), and now that `envelope.v1.json` accepts `traceparent` as an optional field, it **posts the full envelope as-is** — no more stripping it before serializing. The HTTP header still carries trace context too (undici, automatic) — redundant with the body field for this particular single-event POST, but the body copy is what lets trace context reach the outbound SSE stream, and any future batched send. |
 
 ### The Shuffler's browser bootstrap (one shell, `html-layout.ts`)
 
@@ -445,7 +462,7 @@ The page calls `Hny.initializeTracing({apiKey, serviceName: "mtg-spine-admin"})`
 separate service name from the server-side `"mtg-spine"`.
 
 **The child-span shape, and why it's a child and not a link.** On `stream.onmessage`, the
-page parses `message.meta.traceparent` into an OTel `SpanContext` and calls
+page parses `message.event.traceparent` into an OTel `SpanContext` and calls
 `Hny.inChildSpan("spine-admin", "table.event.displayed", spanContext, fn)`, stamping
 `event.name`/`event.seq` on the resulting span. This was a deliberate, reviewed choice:
 the goal is **one Honeycomb trace** covering "player joined" all the way to "operator saw
