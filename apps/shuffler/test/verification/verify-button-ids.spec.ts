@@ -21,7 +21,7 @@ test.describe('button ids for click telemetry', () => {
 
     // Library controls, table-cards, and the menu toggle carry stable ids.
     for (const id of ['draw-button', 'shuffle-button', 'library-search-button',
-                       'reveal-button', 'table-cards-button', 'menu-toggle']) {
+                       'reveal-button', 'mill-button', 'table-cards-button', 'menu-toggle']) {
       await expect(page.locator(`button#${id}`)).toHaveCount(1);
     }
 

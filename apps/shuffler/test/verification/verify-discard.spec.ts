@@ -38,3 +38,18 @@ test.describe('Discard from hand', () => {
     await expect(page.locator('.modal-overlay .history-list')).not.toContainText('Play:');
   });
 });
+
+test.describe('Mill from library', () => {
+  test('milling puts the top library card on the table and history says Discard', async ({ page }) => {
+    await setupGame(page);
+
+    await page.locator('#mill-button').click();
+    await expect(page.locator('.table-cards-button')).toContainText('1 Cards on table', { timeout: 3000 });
+
+    // History records the discard verb, same as a hand discard
+    await page.locator('#menu-toggle').click();
+    await page.locator('button.history-button').click();
+    await expect(page.locator('.modal-overlay .history-list')).toContainText('Discard:');
+    await expect(page.locator('.modal-overlay .history-list')).not.toContainText('Play:');
+  });
+});

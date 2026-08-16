@@ -31,6 +31,16 @@ export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: 
                       : "disabled"
                   }
                   >Reveal</button>
+          <button id="mill-button" class="mill-button"
+                  ${
+                    game.listLibrary().length > 0
+                      ? `hx-post="/mill/${game.gameId}"
+                       hx-vals='{"expected-version": ${expectedVersion}}'
+                       hx-target="#game-container"
+                       hx-swap="outerHTML"`
+                      : "disabled"
+                  }
+                  >Mill</button>
         </div>
       </div>`;
 }

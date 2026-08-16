@@ -540,6 +540,21 @@ export class GameState {
     };
   }
 
+  public mill(browserTabId?: string): WhatHappened {
+    const libraryCards = this.listLibrary();
+
+    if (libraryCards.length === 0) {
+      throw new Error("Cannot mill: Library is empty");
+    }
+
+    const topCard = libraryCards[0];
+    this.moveCard(topCard, { type: "Table" }, browserTabId, "discard");
+
+    this.validateInvariants();
+
+    return {};
+  }
+
   public reveal(position: number, browserTabId?: string): this {
     const libraryCards = this.listLibrary();
     const cardToReveal = libraryCards.find((gc) => (gc.location as LibraryLocation).position === position);

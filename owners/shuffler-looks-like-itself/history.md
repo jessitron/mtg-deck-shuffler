@@ -2691,3 +2691,36 @@ minimum-contrast floor was invented — recorded as a watch item.
 Verification: 141 vitest pass (new `darkerColor` unit tests + `mtg-title` color-prop
 assertions); `verify-deck-title.spec.ts` asserts computed `fontFamily` contains Orbitron and
 `color === rgb(26, 10, 46)` for a near-black deck color, plus the existing edit/sync/persist.
+
+## 2026-08-16 — a fifth library button (Mill), and the design language held with zero new CSS
+
+A **Mill** button (discard the top card of the library) landed under the Library on `/game`,
+next to Reveal — `library-components.ts` emits `<button id="mill-button" class="mill-button">`
+with the same disabled-when-empty pattern as Reveal, posting to `/mill/:gameId`. The
+`.library-buttons` grid was relaid from three rows (`"draw draw" "shuffle shuffle"
+"search reveal"`) to `"draw draw" "reveal mill" "search shuffle"`, and `game.css` gained one
+placement rule, `.library-buttons .mill-button { grid-area: mill; }`.
+
+**Why it needed no design decision and no new candidate.** The button reuses the uniform
+`.library-buttons button` style (`playmat.css`: black fill, white text, `border-radius: 4px`,
+`.pushable-flat` physics) with **no per-button color rule** — the same convergence move as the
+Mulligan button (2026-08-07) and the table-cards button before it. Applying a settled pattern
+to a new button is convergence, not a decision — nothing to stage, nothing to ask.
+
+**What the diff was checked against, and passed clean.** No raw hex, no rounded corner on
+chrome (the 4px is the pressable's `border-radius: 4px`, the decided `--radius-soft` value,
+not new drift), no per-component focus rule (the global `:focus-visible` reaches it as a bare
+`button`), no `outline: none`, no fourth typeface (no `font-family` at all — inherits chrome).
+And the seat-color override needed no touch: `game.css`'s `.playmat-game .library-buttons
+button` is a **bare `button` selector**, so the new Mill button inherits both the uniform
+black look and the `/game` seat-color override for free — the exact "add a new
+`.library-buttons` button to `/game` and it inherits the override" case
+[interactions.md](interactions.md) → "Touching `/game`'s chrome-button colors" already
+promises. No KB citation moved, because none names the individual buttons; they all cite the
+bare `button` selector.
+
+**The gallery was updated in the same change** (`design.ejs` → the `.library-buttons` playmat
+specimen now carries the new `grid-template-areas` and a `<button class="mill-button">Mill</button>`
+specimen), so `/design` stays honest about the five-button layout. `verify-design-gallery`
+passes unchanged — it asserts the black playmat-button look, which Mill shares, and nothing
+about the grid's row structure.

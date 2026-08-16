@@ -1424,6 +1424,40 @@ export function createApp(
     }
   });
 
+  // Returns active game fragment - discards the top card of the library to the graveyard
+  app.post("/mill/:gameId", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
+    const browserTabId = res.locals.browserTabId as string | undefined;
+
+    try {
+      const outcome = await applyGameCommand(
+        { persistStatePort, cardRepository },
+        gameId,
+        expectedVersionFromRequest(req),
+        (game) => game.mill(browserTabId),
+        async (game) => {
+          const topCard = game.listLibrary()[0];
+          if (!game.tableName || !topCard) {
+            return;
+          }
+          await sendCardBeforeMutate(game, topCard, "graveyard", "discard");
+        }
+      );
+
+      renderCommandOutcome(res, gameId, outcome, "Cannot mill: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+      });
+      log.error("mill failed", { "game.game_id": gameId }, error);
+      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not mill"}</div>`);
+    }
+  });
+
   // Returns active game fragment - updated game board
   app.post("/shuffle/:gameId", async (req, res) => {
     const gameId = parseGameIdParam(req, res);

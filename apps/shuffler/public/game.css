@@ -292,7 +292,7 @@ body {
 
 .library-buttons {
   display: grid;
-  grid-template-areas: "draw draw" "shuffle shuffle" "search reveal";
+  grid-template-areas: "draw draw" "reveal mill" "search shuffle";
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   max-width: 216px;
@@ -314,6 +314,10 @@ body {
 
 .library-buttons .reveal-button {
   grid-area: reveal;
+}
+
+.library-buttons .mill-button {
+  grid-area: mill;
 }
 
 .revealed-cards-section {
