@@ -1,4 +1,4 @@
-# The Spine: plain Ruby (Roda + Sequel + SQLite), no Rails.
+# The Spine: plain Ruby (Roda + Sequel + SQLite)
 #
 # BUILD CONTEXT IS THE REPO ROOT, not services/spine/ — the image needs
 # contracts/ (the published language) alongside the app. Build with:

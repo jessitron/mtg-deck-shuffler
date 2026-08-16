@@ -2,7 +2,6 @@ source "https://rubygems.org"
 
 ruby ">= 3.4"
 
-# Routing only — no Rails-style MVC.
 gem "roda"
 # Query-building persistence layer, not a magic ORM.
 gem "sequel"
