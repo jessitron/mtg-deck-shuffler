@@ -1436,3 +1436,48 @@ life-counter pattern (watch point 10 / `mtg-life-counter`) applied to a second s
   `apps/tabletop/test/verification/verify-deck-title.spec.ts` (edit syncs to a second browser
   context + survives reload). `test/seatJoined.test.ts` updated for the label's new type/props.
   All 121 vitest pass.
+
+## Stack landing collision — dragging a card squarely onto another already on the Stack nudges it clear (2026-08-16)
+
+Bug: dropping a card square onto another already-resting card on the Stack fully hid it. The
+server-side arrival cascade (`stackCardPosition`, `apps/tabletop/src/server/cardLayout.ts`)
+already keeps *consecutive same-seat arrivals* visibly offset, but that only covers a card's
+first landing on the Stack via `card.played` — nothing handled a human **dragging** a card onto
+the Stack, so two cards landing on the same spot rendered as one.
+
+Fixed entirely inside `handleTranslateEnd` (`apps/tabletop/src/client/shapes/cardZoneEntry.ts`),
+reusing the same zone-transition guard already gating `evictPassengers`/`resetFace` in that
+function — the collision check only fires on a *fresh* drag-entry into `"stack"`, not on every
+move within it (same-zone re-drags are already filtered by the `zone === previousZone` early
+return above it).
+
+- **New helpers, both module-local to `cardZoneEntry.ts`**: `nudgeOffAnotherCard(editor,
+  current)` scans `editor.getCurrentPageShapes()` for other `mtg-card` shapes whose page bounds
+  overlap the dropped card's by `>= STACK_OVERLAP_THRESHOLD` (0.6, i.e. ≥60% of the dropped
+  card's own area), and if so steps the dropped card's `x` right by `STACK_LANDING_NUDGE` (40px)
+  — up to `MAX_LANDING_ATTEMPTS` (10) times — until clear; `overlapFraction(a, b)` is the plain
+  AABB-intersection-over-area helper it uses. The nudge threads into `handleTranslateEnd`'s
+  returned `TLShapePartial` as an `x` override, using the same conditional-spread shape the
+  function already used for `resetFace`.
+- **Scope is deliberately narrow**: only a fresh landing into `"stack"` triggers the check;
+  moving a card that's already resting on the Stack, or landing in any other zone, is untouched.
+- **Rotation/page-bounds gotcha, caught by this owner's `-review` before it shipped.** The first
+  draft built the dragged card's candidate rect from raw `shape.x`/`shape.y`/`props.w`/
+  `props.h` — wrong for a rotated (tapped) card, since rotation pivots around `x,y` (the
+  top-left corner, watch point 4), not the shape's visual center or its unrotated footprint.
+  Fixed to use `editor.getShapePageBounds(current)` (translated by the accumulated nudge delta
+  on each attempt) instead — the same page-bounds-not-raw-props pattern `evictPassengers`, a few
+  lines below in the same file, already uses for card/zone geometry. New watch point 25 in
+  `interactions.md` records this as a read-side corollary to watch point 4, not a new rotation
+  mechanism.
+- **Test**: `apps/tabletop/test/verification/verify-stack-landing-nudge.spec.ts` (new) — places
+  two cards on the Stack, drags the second's center square directly onto the first's, and
+  asserts the post-drop overlap fraction drops below 0.6 and the dragged card moved right.
+  Confirmed red (99.98% overlap) against pre-fix code, green after. Full `./verify.sh` (48
+  specs) and `npx vitest run` (139 tests) both pass.
+
+No new file, no new hook, no new shape type — a pure addition to `handleTranslateEnd`'s existing
+zone-change branch. Full detail in `architecture.md`'s new "Stack landing collision avoidance"
+section; `interactions.md` gained watch point 25 and a cross-reference from watch point 4;
+`files.md`'s `cardZoneEntry.ts` entry and Tests list updated; `README.md`'s quick-reference row
+for `cardZoneEntry.ts` updated.
