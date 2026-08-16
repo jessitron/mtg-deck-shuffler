@@ -645,14 +645,17 @@ export function createApp(
         tableInfo.spineSeatNumber = spineJoin.spineSeatNumber;
       }
 
+      const sleeveColor = persistedGame.sleeveColor ?? prep.sleeveColor;
+      const playmatImagePath = persistedGame.playmatImagePath ?? prep.playmatImagePath;
+
       // Create new game from the same prep
       const newGameId = persistStatePort.newGameId();
-      const newGame = GameState.newGame(newGameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo);
+      const newGame = GameState.newGame(newGameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo, sleeveColor, playmatImagePath);
       newGame.startGame(browserTabId);
       await persistStatePort.save(newGame.toPersistedGameState());
 
       if (tableInfo) {
-        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor, prep.playmatImagePath, newGame.listCommanders());
+        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, sleeveColor, playmatImagePath, newGame.listCommanders());
       }
 
       res.redirect(`/game/${newGameId}`);
