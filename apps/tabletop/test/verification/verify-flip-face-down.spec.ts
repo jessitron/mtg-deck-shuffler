@@ -77,6 +77,22 @@ async function cardSrc(page: Page, instanceId: string): Promise<string | null> {
   return page.locator(`#shape\\:card-${instanceId} img`).getAttribute("src");
 }
 
+/**
+ * Drag a card away by its own instanceId. Same-seat cards all cascade onto the Stack
+ * now that lands no longer auto-place on the playmat, so they arrive overlapping —
+ * call this on the most-recently-created (topmost) card first so the drag target is
+ * unambiguous while the others still overlap it.
+ */
+async function spreadCardApart(page: Page, instanceId: string, dx: number, dy: number) {
+  const box = await page.locator(`#shape\\:card-${instanceId}`).boundingBox();
+  if (!box) throw new Error(`no bounding box for card ${instanceId}`);
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + dx, box.y + box.height / 2 + dy, { steps: 10 });
+  await page.mouse.up();
+  await page.waitForTimeout(200);
+}
+
 test("flipping and turning face down both sync to a second client", async ({ browser, baseURL }) => {
   const tableSlug = `verify-flip-2client-${Date.now()}`;
   const contexts: BrowserContext[] = [];
@@ -222,6 +238,9 @@ test("flipping card A does not leave a stale selection that hijacks a later drag
   await placeCard(page, baseURL, tableSlug, idA, { backImageUrl: "https://example.com/back-a.jpg", zoneHint: "battlefield" });
   await placeCard(page, baseURL, tableSlug, idB, { zoneHint: "battlefield" });
   await zoomToFit(page);
+  // Both cards cascade onto the Stack now that lands no longer auto-place on the
+  // playmat, so they arrive overlapping — separate them before targeting either one.
+  await spreadCardApart(page, idB, 150, 0);
 
   await openCardMenu(page, idA);
   await chooseMenuItem(page, "Flip");
