@@ -25,6 +25,8 @@ early dev data, but still a real prod-data-wiping action.
 
 - bug: in Shuffler, if you hit Restart game, the playmat resets. It should remember everything from when you started the game.
 
+- when a card lands on the stack, if there's another one directly under it, please move it to the right a bit so that they both show.
+
 - Evelyn wants all the things you play to show up in the same spot. Make lands show up above the playmat (in what is currently the Stack) too. (When the Stack becomes dynamic and only appears when people play a spell -- then lands will not cause the stack to appear.)
 
 - before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game!
