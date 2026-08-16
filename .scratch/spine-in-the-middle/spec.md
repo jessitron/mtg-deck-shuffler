@@ -125,13 +125,15 @@ playmatImageUrl, cardBackImageUrl, sleeveColor, commanders, gameUrl}` — only `
   contract's split between identity (`seat.taken`) and decoration (`seat.joined`).
 
 - **`seat.joined.v1.json` gains `gameUrl`.** New optional `gameUrl` (string, uri) field
-  on the payload. Since the schema has `additionalProperties: false`, this is a new
-  version: `contracts/payloads/seat.joined.v2.json` (v1 kept as history, per
-  `contracts/README.md`'s versioning rule). The Spine mints `schemaVersion: 2` for the
-  events it creates from now on; `apps/shuffler/src/port-tabletop/types.ts`'s
-  `SeatJoinedPayload`/`buildSeatJoinedEvent` move into `port-spine/` (they're no longer
-  building a Tabletop-bound event, they're building the payload the Spine consumes) and
-  gain the field.
+  on the payload, added by editing `contracts/payloads/seat.joined.v1.json` in place —
+  `contracts/README.md`'s versioning rule (current as of the `schema-schemes` contract
+  reset) is "add optional field: no version bump," and every payload schema already
+  sets `additionalProperties: true`, so an older receiver treats the new field as a
+  no-op rather than rejecting it. No `seat.joined.v2.json`, no kept-history file.
+  `apps/shuffler/src/port-tabletop/types.ts`'s `SeatJoinedPayload`/`buildSeatJoinedEvent`
+  move into `port-spine/` (they're no longer building a Tabletop-bound event, they're
+  building the payload the Spine consumes) and gain the field. The Spine keeps minting
+  `schemaVersion: 1`.
 
 - **The Spine notifies the Tabletop directly over HTTP, not via a new SSE subscriber.**
   As the last step of handling `/join` (still inside the request, after the DB
@@ -226,11 +228,10 @@ seatNumber, tableUrl}`, built from a new Spine env var `TABLETOP_PUBLIC_URL` (mi
   `.scratch/spine-in-the-middle/map.md`'s "Not yet specified" — this spec's
   Spine→Tabletop notification is a direct HTTP call specifically so it doesn't get in
   that design's way later.
-- **The envelope v2/v3 reconciliation** on the Tabletop's inbound validation generally.
-  This spec's one new Spine→Tabletop call uses envelope v3 (the Spine's own native
-  version) against the Tabletop's existing `seat.joined` endpoint; the endpoint's
-  existing v2 validation for whatever else still reaches it (nothing does, post this
-  spec, for `seat.joined` specifically) is untouched.
+- **The envelope v2/v3 reconciliation** — resolved ahead of this spec by the
+  `schema-schemes` contract reset: the Spine, the Tabletop, and the Shuffler now all
+  validate against one `contracts/envelope.v1.json`, so this spec's new Spine→Tabletop
+  call needs no version reasoning of its own.
 - **The Shuffler's own Spine SSE subscriber** and rerouting the card-return channel
   (library portal drag) through the Spine — separate, undesigned, tracked in the same map.
 - **Reconnect/catch-up on a dropped connection** — not applicable here (this spec adds

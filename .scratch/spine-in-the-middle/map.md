@@ -37,10 +37,12 @@ than living in two places.
   thin (`{name, playerName}` → `{tableId, seatNumber}`) and unrelated today to the
   richer direct `seat.joined` POST. **Nothing subscribes to the Spine's SSE stream**
   except its own admin screen.
-- **Envelope version mismatch to reconcile somewhere in this map's tickets**: the
-  Tabletop still validates against `envelope.v2.json` (expects `traceparent` in the
-  body); the Spine's own gateway code already assumes `v3` (header-only inbound,
-  `meta.traceparent` outbound over SSE).
+- **Envelope version mismatch — resolved** (`schema-schemes`, 2026-08-16): all three
+  ships now validate/build against one `contracts/envelope.v1.json`. `traceparent` is a
+  real, optional envelope field again (not header-only) — it rides on the envelope
+  itself specifically so it survives the outbound SSE stream this map's subscribers
+  will need, where there's no header to carry it. The Spine's `broadcast` attaches a
+  live one at send time; it's never persisted to the log.
 - Owners likely relevant: `fleet-is-observable` (trace-context propagation on any new
   outbound path — already consulted once by the absorbed map), `two-faced-cards`
   (card/face fields in any payload), `tabletop-shape-mechanics` (if the sender ends up
@@ -51,9 +53,9 @@ than living in two places.
 - [`spec.md`](spec.md) (2026-08-11) — the join-flow decision below, turned into a
   buildable spec (`Status: ready-for-agent`), ready for `/to-tickets`. It covers only
   the join-flow slice: it does **not** reach this map's other open fog (the Tabletop's
-  Spine SSE subscriber, the envelope v2/v3 reconciliation, the Shuffler's own
-  subscriber, or the Tabletop→Spine physics sender) — those stay open below. One
-  judgment call the spec makes beyond the grilling answer: the Spine notifies the
+  Spine SSE subscriber, the Shuffler's own subscriber, or the Tabletop→Spine physics
+  sender) — those stay open below. One judgment call the spec makes beyond the
+  grilling answer: the Spine notifies the
   Tabletop with a direct HTTP call to its existing endpoint rather than building the
   general SSE subscriber now, to avoid throwing that design away when the real
   subscriber ticket lands.
@@ -105,9 +107,6 @@ than living in two places.
 - **What a failed async join looks like**, beyond "a message" — is failure itself worth
   a Shuffler-log event (symmetric with the success case), or purely a UI-only warning
   that isn't part of the game's narrated history? Not decided.
-- **The envelope v2/v3 reconciliation** — which ticket owns bumping the Tabletop off
-  `v2`, and whether that's its own ticket or rides along with building its SSE
-  subscriber (which will need to read `meta.traceparent` off the wire either way).
 - **(Carried from tabletop-table-reports) The Tabletop→Spine sender for its own
   physics events** — `card.moved`, `card.repositioned`, taps, flips, counters. A
   data-flow direction that doesn't exist in code yet at all. The vocabulary/contract

@@ -15,24 +15,23 @@ Schema Schemes: mostly by Jess
 
 [] Make a new skill for updating schema versions
 
-[x] Write up the new policy for updating schema versions
-
-[x] delete the old docs:
-
-- notes/DESIGN-schema-evolution-policy.md
-- notes/DESIGN-event-contract-v0.md
-- contracts/README.md (previous content)
-
-[] get the AI to make the new policy true. Reset all versions to 1
-
-- remove Spine-internal event from contracts/. table.created
-- reset envelope version to 1 (at the current content), delete old versions
+[] Recreate the Spine's production PVC as part of deploying this — dropping the
+`visibility` column changed the `events` table shape, and there's no migration
+tooling yet, so the clean path is deleting `services/spine/k8s/pvc.yaml`'s claim and
+letting it recreate empty on next deploy. Confirm with Jess before running it; low-stakes
+early dev data, but still a real prod-data-wiping action.
 
 ## Next
+
+- bug: in Shuffler, if you hit Restart game, the playmat resets. It should remember everything from when you started the game.
+
+- Evelyn wants all the things you play to show up in the same spot. Make lands show up above the playmat (in what is currently the Stack) too. (When the Stack becomes dynamic and only appears when people play a spell -- then lands will not cause the stack to appear.)
 
 - before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game!
 
 - Consider removing the animations owner, since the animations don't do much now.
+
+- In shuffler, add a button under the Library for 'Mill' - it has the effect of discarding the top card.
 
 - `/design` specimen owed for the on-brand `mtg-title` deck-title label (Orbitron via
   `var(--font-chrome)`, colored by the deck's darker identity color). Cross-ship: the shape
