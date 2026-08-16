@@ -29,7 +29,7 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
   };
 }
 
-test("a land and a nonland arrive in different areas of the canvas", async ({ page, baseURL }) => {
+test("a land and a nonland both arrive on the Stack", async ({ page, baseURL }) => {
   const tableSlug = `verify-arrival-${Date.now()}`;
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
@@ -52,6 +52,18 @@ test("a land and a nonland arrive in different areas of the canvas", async ({ pa
 
   const cardShapes = page.locator(`.tl-shape[data-shape-type="mtg-card"]`);
   await expect(cardShapes).toHaveCount(2, { timeout: 10000 });
-  await expect(page.locator(`#shape\\:card-${land.payload.card.instanceId}`)).toBeAttached();
-  await expect(page.locator(`#shape\\:card-${nonland.payload.card.instanceId}`)).toBeAttached();
+  const landShape = page.locator(`#shape\\:card-${land.payload.card.instanceId}`);
+  const nonlandShape = page.locator(`#shape\\:card-${nonland.payload.card.instanceId}`);
+  await expect(landShape).toBeAttached();
+  await expect(nonlandShape).toBeAttached();
+
+  const stack = page.locator(`[data-shape-id="shape:region-stack-${tableSlug}"]`);
+  await expect(stack).toBeAttached();
+  const stackBox = await stack.boundingBox();
+  const landBox = await landShape.boundingBox();
+  if (!stackBox || !landBox) throw new Error("missing bounding box");
+  expect(landBox.x).toBeGreaterThanOrEqual(stackBox.x);
+  expect(landBox.y).toBeGreaterThanOrEqual(stackBox.y);
+  expect(landBox.x + landBox.width).toBeLessThanOrEqual(stackBox.x + stackBox.width);
+  expect(landBox.y + landBox.height).toBeLessThanOrEqual(stackBox.y + stackBox.height);
 });

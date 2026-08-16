@@ -59,6 +59,22 @@ async function placeCard(page: Page, baseURL: string | undefined, tableSlug: str
   await expect(page.locator(`#shape\\:card-${instanceId}`)).toBeAttached();
 }
 
+/**
+ * Drag a card away by its own instanceId. Same-seat cards all cascade onto the Stack
+ * now that lands no longer auto-place on the playmat, so they arrive overlapping —
+ * call this on the most-recently-created (topmost) card first so the drag target is
+ * unambiguous while the others still overlap it.
+ */
+async function spreadCardApart(page: Page, instanceId: string, dx: number, dy: number) {
+  const box = await page.locator(`#shape\\:card-${instanceId}`).boundingBox();
+  if (!box) throw new Error(`no bounding box for card ${instanceId}`);
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + dx, box.y + box.height / 2 + dy, { steps: 10 });
+  await page.mouse.up();
+  await page.waitForTimeout(200);
+}
+
 async function marqueeSelect(page: Page, instanceIds: string[]) {
   const boxes = [];
   for (const id of instanceIds) {
@@ -94,6 +110,8 @@ test("clicking one selected card taps the whole selection, and one Ctrl+Z revert
   await placeCard(page, baseURL, tableSlug, idB);
   await placeCard(page, baseURL, tableSlug, idC);
   await zoomToFit(page);
+  await spreadCardApart(page, idC, 150, 0);
+  await spreadCardApart(page, idB, 150, 150);
 
   // The earlier, unrelated tap: A alone.
   await page.locator(`#shape\\:card-${idA}`).click();
@@ -123,6 +141,7 @@ test("propagation pushes the clicked card's new state, not a per-card toggle", a
   await placeCard(page, baseURL, tableSlug, idB);
   await placeCard(page, baseURL, tableSlug, idC);
   await zoomToFit(page);
+  await spreadCardApart(page, idC, 150, 0);
 
   // Tap C alone so the selection starts mixed: B untapped, C tapped.
   await page.locator(`#shape\\:card-${idC}`).click();
@@ -162,6 +181,8 @@ test("another player's undo stack stays independent of a multi-untap", async ({ 
     await expect(bob.locator(`#shape\\:card-${idB}`)).toBeAttached();
     await expect(bob.locator(`#shape\\:card-${idC}`)).toBeAttached();
     await Promise.all([zoomToFit(alice), zoomToFit(bob)]);
+    await spreadCardApart(alice, idC, 150, 0);
+    await bob.waitForTimeout(300); // let the move sync to Bob before Alice's multi-tap gesture
 
     // Alice multi-taps B+C; both clients see it.
     await marqueeSelect(alice, [idB, idC]);

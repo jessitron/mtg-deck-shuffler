@@ -39,6 +39,22 @@ async function boxShadowOf(page: Page, selector: string): Promise<string> {
   return page.locator(`${selector} [data-testid="zone-box"]`).evaluate((el) => getComputedStyle(el).boxShadow);
 }
 
+/**
+ * Drag a card away by its own instanceId. Same-seat cards all cascade onto the Stack
+ * now that lands no longer auto-place on the playmat, so they arrive overlapping —
+ * call this on the most-recently-created (topmost) card first so the drag target is
+ * unambiguous while the others still overlap it.
+ */
+async function spreadCardApart(page: Page, instanceId: string, dx: number, dy: number) {
+  const box = await page.locator(`#shape\\:card-${instanceId}`).boundingBox();
+  if (!box) throw new Error(`no bounding box for card ${instanceId}`);
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + dx, box.y + box.height / 2 + dy, { steps: 10 });
+  await page.mouse.up();
+  await page.waitForTimeout(200);
+}
+
 test("dragging a card over a zone arms it (box-shadow ring), and disarms it once the drag settles", async ({
   page,
   baseURL,
@@ -255,6 +271,7 @@ test("dragging a multi-card selection arms only the one zone under the pointer, 
   await expect(page.locator(graveyard)).toBeAttached();
   await expect(page.locator(exile)).toBeAttached();
   await zoomToFit(page);
+  await spreadCardApart(page, instanceIdB, 150, 0);
 
   await cardA.click();
   await cardB.click({ modifiers: ["Shift"] });

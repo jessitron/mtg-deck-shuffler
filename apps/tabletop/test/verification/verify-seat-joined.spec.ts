@@ -39,7 +39,7 @@ test("a player area appears before any card, and the Stack stays fixed as a seco
   await expect(zoneShapes).toHaveCount(6, { timeout: 10000 }); // mat, library, command zone, graveyard, exile, stack
   const imageShapes = page.locator(`.tl-shape[data-shape-type="image"]`);
   await expect(imageShapes).toHaveCount(1); // library card back only
-  const textShapes = page.locator(`.tl-shape[data-shape-type="text"]`);
+  const textShapes = page.locator(`.tl-shape[data-shape-type="mtg-title"]`);
   await expect(textShapes).toHaveCount(1); // name label
 
   const stackShape = zoneShapes.filter({ hasText: "The Stack" });

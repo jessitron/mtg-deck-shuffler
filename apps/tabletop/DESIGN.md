@@ -9,8 +9,10 @@ Status: **built through the square/compass layout (decided in
 ticket 14, see "The square" below), which replaced the original row layout
 (2026-08-01) outright. The Command Zone redraw (decided in
 `.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`,
-built 2026-08-08, ticket 13) is in every player area.** The "playmat grows
-taller" edge case is still separately deferred — see Deferred, below.
+built 2026-08-08, ticket 13) is in every player area. All played cards, lands
+included, now arrive on the Stack (2026-08-16) — lands no longer auto-place
+on the playmat, so the "playmat grows taller when lands overflow" edge case
+is moot.**
 `src/server/cardLayout.ts` and `cardArrival.ts` implement this geometry; the
 seat-joined trigger lives in `src/server/seatJoined.ts`, and the shared
 shape-drawing helpers in `src/server/tableFurniture.ts`. Changing the layout
@@ -38,7 +40,7 @@ and the stack — before a single card is played.**
 | **Command Zone**| a labeled box beside the library, sized for **two** cards side by side (partner commanders). Home for the commander(s) when not on the battlefield. |
 | **Graveyard**   | a labeled grey box you can drag cards into.                                                                          |
 | **Exile**       | a labeled black box. Physically a sideways pile; here just a smaller box.                                            |
-| **The Stack**   | a shared square at the center of the table, the player areas around it. Non-land plays arrive here.                  |
+| **The Stack**   | a shared square at the center of the table, the player areas around it. Every played card arrives here.              |
 
 "Player area" and "playmat" are _not_ synonyms — the playmat is one part of the
 player area. This distinction is the point of the vocabulary table.
@@ -263,21 +265,19 @@ happens to have a picture; the picture is the optional part.
 
 ## Where cards arrive
 
-Only two arrival rules matter, and they're the two the Shuffler already knows how
-to distinguish:
+One arrival rule (2026-08-16 — was two; see the delta table, below): **every played
+card**, lands included, **arrives on the Stack**, at the center of the table where
+everyone can see it. The Shuffler still tells the Tabletop `zoneHint: "battlefield"`
+for a land (it knows land vs. non-land; the Tabletop doesn't need to) — the Tabletop
+just no longer treats that hint as "skip the Stack." A discard still carries its own
+distinct `zoneHint: "graveyard"` and lands in the graveyard box directly, unaffected.
 
-- **Lands** skip the stack and go straight to the playmat, filling the **bottom
-  half**, left to right; a full row wraps to a new row below it. If there's no room,
-  the playmat **grows taller** — impossible in real life, fine here.
-- **Everything else** arrives on the **Stack**, at the center of the table where
-  everyone can see it.
-
-From the stack, a human drags it where it goes: creature/artifact/enchantment onto
-the battlefield, instant/sorcery into the graveyard. **That's a person's job, not
-the Tabletop's** — which is why the rest of my physical habits (creatures in a front
-row, artifacts and enchantments bottom-right and right-justified) are recorded here
-as _description only_, not as placement rules to implement. Cards hold wherever
-they're dropped.
+From the stack, a human drags it where it goes: a land or creature/artifact/enchantment
+onto the battlefield, instant/sorcery into the graveyard. **That's a person's job, not
+the Tabletop's** — which is why the rest of my physical habits (lands lining up left to
+right on the bottom half, creatures in a front row, artifacts and enchantments
+bottom-right and right-justified) are recorded here as _description only_, not as
+placement rules to implement. Cards hold wherever they're dropped.
 
 Nobody is restricted from moving anybody else's cards. That's not an oversight.
 
@@ -291,13 +291,6 @@ Nobody is restricted from moving anybody else's cards. That's not an oversight.
   longer deferred — decided, see "The square" above — but every area stays
   upright rather than rotating to face its player, and the "E/W areas look
   sideways" quirk (see "The square") stays until per-viewer rotation exists.
-- **"Playmat grows taller" when lands overflow the bottom half.** Deliberately
-  kept deferred, separately from the 2026-08-08 Command Zone redraw
-  (`.scratch/tabletop-table-layout/issues/01-command-zone-and-player-area.md`):
-  it's a *runtime* resize that cascades to everything below the playmat (Library,
-  Command Zone, Graveyard, Exile all shift down when the mat grows), a different
-  shape of problem from that redraw's one-time *static* geometry change. Bundling
-  them would have made the redraw's ripple harder to review on its own.
 - **Playmat selection** in prep (a dropdown; see `notes/FEATURE-playmat.md`).
 - **Sleeve selection** in prep, which makes the card back vary per seat.
 

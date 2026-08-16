@@ -19,7 +19,6 @@ import {
   graveyardBounds,
   stackBounds,
   stackCardPosition,
-  landPosition,
   playerAreaOrigin,
   LIBRARY_H,
   COMMAND_ZONE_H,
@@ -257,26 +256,6 @@ describe("cardLayout — the square (compass seats around a centered Stack)", ()
       expect(later.x + CARD_W).toBeLessThanOrEqual(stack.x + stack.w);
       expect(later.y + CARD_H).toBeLessThanOrEqual(stack.y + stack.h);
     }
-  });
-
-  it("fills lands left to right on the playmat's bottom half, wrapping to a new row", () => {
-    const mat = playmatBounds(0);
-    const first = landPosition(0, 0);
-    const second = landPosition(0, 1);
-    expect(first.y).toBeGreaterThanOrEqual(mat.y + mat.h / 2); // bottom half
-    expect(second.x).toBeGreaterThan(first.x); // left to right
-    expect(second.y).toBe(first.y); // same row
-
-    const wrapped = landPosition(0, 9); // past 9 columns
-    expect(wrapped.x).toBe(first.x);
-    expect(wrapped.y).toBeGreaterThan(first.y); // wrapped to the next row
-  });
-
-  it("insets the first land from the playmat's left edge and bottom-half boundary", () => {
-    const mat = playmatBounds(0);
-    const first = landPosition(0, 0);
-    expect(first.x).toBeGreaterThan(mat.x);
-    expect(first.y).toBeGreaterThan(mat.y + mat.h / 2);
   });
 });
 

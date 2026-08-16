@@ -3,7 +3,7 @@ import type { Server } from "node:http";
 import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
-import { playmatBounds, graveyardBounds, stackBounds } from "../src/server/cardLayout";
+import { graveyardBounds, stackBounds } from "../src/server/cardLayout";
 
 let server: Server;
 let port: number;
@@ -118,15 +118,18 @@ describe("card arrival", () => {
     expect(shapesOf("arrival-dedup-instance")).toHaveLength(1);
   });
 
-  it("puts a battlefield-hinted card (a land) on the player's playmat", async () => {
+  it("puts a battlefield-hinted card (a land) on the Stack, same as everything else played", async () => {
     await post("arrival-zones", cardPlayed("arrival-zones", {}, { zoneHint: "battlefield", cardName: "Forest" }));
     const [land] = shapesOf("arrival-zones");
-    const mat = playmatBounds(0);
-    expect(land.y).toBeGreaterThanOrEqual(mat.y + mat.h / 2); // bottom half of the playmat
+    const stack = stackBounds();
+    expect(land.x).toBeGreaterThanOrEqual(stack.x);
+    expect(land.y).toBeGreaterThanOrEqual(stack.y);
 
     await post("arrival-zones", cardPlayed("arrival-zones", {}, { zoneHint: "stack", cardName: "Llanowar Elves" }));
     const stackCard = shapesOf("arrival-zones").find((s) => s.props.cardName === "Llanowar Elves")!;
-    expect(stackCard.y).toBeLessThan(land.y); // the centered Stack sits above the S seat's playmat
+    expect(stackCard.x).toBeGreaterThanOrEqual(stack.x);
+    expect(stackCard.y).toBeGreaterThanOrEqual(stack.y);
+    expect({ x: stackCard.x, y: stackCard.y }).not.toEqual({ x: land.x, y: land.y }); // both cascade into the stack, not on top of each other
   });
 
   it("allocates player areas per seatId in join order, keyed by seat not name", async () => {

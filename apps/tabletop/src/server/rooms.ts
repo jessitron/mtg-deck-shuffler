@@ -31,7 +31,6 @@ export interface PlayerArea {
   /** The seat's resolved identity colors — sleeveColor when chosen, else derived from the playmat. */
   primaryColor?: string;
   secondaryColor?: string;
-  landCount: number;
   graveyardCount: number;
   stackCount: number;
   /** This seat's commander names (partners = 2 entries) — table-layout ticket 21, one damage counter per name, labeled with it. */

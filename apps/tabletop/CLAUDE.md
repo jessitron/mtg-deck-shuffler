@@ -27,9 +27,8 @@ See `README.md` (in this directory) for Modes and SCAFFOLDING callouts.
 The player area (playmat, library, command zone, graveyard, exile, Stack) is specified in
 `DESIGN.md` (in this directory) — read it before touching
 `src/server/cardLayout.ts`, `tableFurniture.ts`, `cardArrival.ts`, or
-`seatJoined.ts`. One piece is deliberately deferred: the playmat never grows
-taller when lands overflow its bottom half — picked up by the `playmat-command-zone`
-line in the repo-root `TODO.md`.
+`seatJoined.ts`. Every played card, lands included, arrives on the Stack; a human
+drags it wherever it goes from there (2026-08-16).
 
 ## UI Style
 

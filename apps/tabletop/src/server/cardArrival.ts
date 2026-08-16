@@ -3,7 +3,7 @@ import { trace } from "@opentelemetry/api";
 import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
-import { CARD_W, CARD_H, MAX_SEATS, landPosition, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
+import { CARD_W, CARD_H, MAX_SEATS, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
 import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
 import { validateIncomingEvent } from "./contractValidation.js";
 
@@ -83,12 +83,10 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
 
   let position: { x: number; y: number };
   switch (zoneHint) {
-    case "battlefield": // a land, going straight to the playmat
-      position = landPosition(playerArea.seatIndex, playerArea.landCount++);
-      break;
     case "graveyard":
       position = graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++);
       break;
+    case "battlefield": // a land — arrives on the Stack with everything else; a human drags it to the playmat
     case "stack":
       position = stackCardPosition(playerArea.seatIndex, playerArea.stackCount++);
       break;
