@@ -45,6 +45,8 @@ export function createApp(
 ): express.Application {
   const app = express();
 
+  let yoClickCount = 0;
+
   // Configure EJS view engine
   app.set("view engine", "ejs");
   app.set("views", path.join(__dirname, "..", "views"));
@@ -1764,7 +1766,9 @@ export function createApp(
         ...deck,
         cards: [...deck.cards].sort((a, b) => a.name.localeCompare(b.name)),
       };
-      const tableInfo: TableInfo = { tableName: "Yo", playerName: "Jess", seatId: randomUUID().slice(0, 8) };
+      yoClickCount++;
+      const tableName = yoClickCount % 4 === 0 ? `YO-${randomUUID().slice(0, 4)}` : "Yo";
+      const tableInfo: TableInfo = { tableName, playerName: "Jess", seatId: randomUUID().slice(0, 8) };
       const playmat = PLAYMATS[Math.floor(Math.random() * PLAYMATS.length)];
       const sleeveColor = "#" + Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, "0");
       const prepId = persistPrepPort.newPrepId();
