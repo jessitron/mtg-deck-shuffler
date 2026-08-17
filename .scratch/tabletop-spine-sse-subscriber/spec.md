@@ -91,6 +91,22 @@ Spine is the one source of truth, and the Tabletop finds out by listening to the
 
 ## Implementation Decisions
 
+- **Landing order across the two tickets `/to-tickets` will split this into.** This spec
+  touches two ships (Tabletop gains the subscriber, Shuffler loses the direct POST), and
+  this repo merges each ticket to `main` as it lands rather than one combined cross-ship
+  PR — so the two tickets *will* merge at different times, and the order matters. The
+  Tabletop subscriber ticket must land first and be verified working end-to-end (it's
+  purely additive: the Shuffler's direct POST keeps running unmodified alongside it, and
+  the existing dedup on event id/`card.instanceId` already makes a card arriving twice
+  — once via POST, once via the new SSE path, during this window — harmless). Only once
+  that's confirmed working does the second ticket delete the Shuffler's direct POST. The
+  2026-08-11 "no side-by-side transition period" decision means this pairing shouldn't
+  become a *permanent* two-path arrangement — it doesn't forbid a short, deliberately
+  ordered, verified-before-proceeding rollout between the two tickets. Skipping this
+  order (removing the POST before the subscriber is proven live) would leave `main` in a
+  state where cards silently stop reaching the Tabletop until the other ticket lands —
+  exactly the regression this note exists to prevent. `/to-tickets` should encode this as
+  a `Blocked by:` relationship, not just an implied read-the-spec ordering.
 - **Subscription lifecycle: one per room, opened on first `seat.joined`.** The Tabletop's
   room registry (`apps/tabletop/src/server/rooms.ts`, `RoomEntry`) gains a slot for the
   room's live Spine SSE subscription (connection handle + the room's Spine `tableId`).
