@@ -14,6 +14,9 @@ interface StoredPrep {
   tableName?: string;
   playerName?: string;
   seatId?: string;
+  spineTableId?: string;
+  spineSeatNumber?: number;
+  tableUrl?: string;
   sleeveColor?: string;
   playmatImagePath?: string;
 }
@@ -101,6 +104,9 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
         tableName: storedPrep.tableName,
         playerName: storedPrep.playerName,
         seatId: storedPrep.seatId,
+        spineTableId: storedPrep.spineTableId,
+        spineSeatNumber: storedPrep.spineSeatNumber,
+        tableUrl: storedPrep.tableUrl,
         sleeveColor: storedPrep.sleeveColor,
         playmatImagePath: storedPrep.playmatImagePath,
       };

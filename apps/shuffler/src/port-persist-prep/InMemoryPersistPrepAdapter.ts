@@ -13,6 +13,9 @@ interface StoredPrep {
   tableName?: string;
   playerName?: string;
   seatId?: string;
+  spineTableId?: string;
+  spineSeatNumber?: number;
+  tableUrl?: string;
   sleeveColor?: string;
   playmatImagePath?: string;
 }
@@ -53,6 +56,9 @@ export class InMemoryPersistPrepAdapter implements PersistPrepPort {
       tableName: stored.tableName,
       playerName: stored.playerName,
       seatId: stored.seatId,
+      spineTableId: stored.spineTableId,
+      spineSeatNumber: stored.spineSeatNumber,
+      tableUrl: stored.tableUrl,
       sleeveColor: stored.sleeveColor,
       playmatImagePath: stored.playmatImagePath,
     };

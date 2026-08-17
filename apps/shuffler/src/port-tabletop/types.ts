@@ -1,8 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { getCardImageUrl } from "../types.js";
 import { GameCard } from "../domain-types.js";
-import { CARD_BACK } from "../view/common/shared-components.js";
-import { DEFAULT_PLAYMAT_PATH } from "../table-look.js";
 import { currentTraceparent } from "./traceparent.js";
 
 
@@ -84,94 +82,6 @@ export function buildCardPlayedEvent(
 }
 
 
-export function shufflerPublicUrl(): string {
-  return process.env.SHUFFLER_PUBLIC_URL || "https://mtg.jessitron.honeydemo.io";
-}
-
-/** The standard Magic card back (an unsleeved seat's look), as an absolute URL. Omitted from seat.joined when the seat has a sleeve. */
-export function cardBackImageUrl(): string {
-  return `${shufflerPublicUrl()}${CARD_BACK}`;
-}
-
-export function defaultPlaymatImageUrl(): string {
-  return playmatImageUrlFromPath(DEFAULT_PLAYMAT_PATH);
-}
-
-export function playmatImageUrlFromPath(path: string): string {
-  return `${shufflerPublicUrl()}${path}`;
-}
-
-export const SEAT_JOINED_EVENT_NAME = "seat.joined" as const;
-
-export interface SeatJoinedCommander {
-  card: {
-    scryfallId: string;
-    instanceId: string;
-  };
-  cardName: string;
-  frontImageUrl: string;
-  backImageUrl: string | null;
-}
-
-export interface SeatJoinedPayload {
-  deckName: string;
-  playmatImageUrl?: string;
-  cardBackImageUrl?: string;
-  sleeveColor?: string;
-  primaryColor?: string;
-  secondaryColor?: string;
-  commanders?: SeatJoinedCommander[];
-}
-
-function buildSeatJoinedCommander(gameCard: GameCard): SeatJoinedCommander {
-  if (!gameCard.cardInstanceId) {
-    throw new Error(`Commander ${gameCard.card.name} has no cardInstanceId; cannot send it with seat.joined`);
-  }
-  return {
-    card: { scryfallId: gameCard.card.scryfallId, instanceId: gameCard.cardInstanceId },
-    cardName: gameCard.card.name,
-    frontImageUrl: getCardImageUrl(gameCard.card, "normal", "front"),
-    backImageUrl: gameCard.card.twoFaced ? getCardImageUrl(gameCard.card, "normal", "back") : null,
-  };
-}
-
-export type SeatJoinedEvent = EventEnvelope<SeatJoinedPayload>;
-
-export function buildSeatJoinedEvent(
-  initiator: Initiator,
-  deckName: string,
-  tableName: string,
-  playmatImageUrl?: string,
-  cardBackImageUrl?: string,
-  sleeveColor?: string,
-  commanders?: readonly GameCard[],
-  primaryColor?: string,
-  secondaryColor?: string
-): SeatJoinedEvent {
-  return {
-    id: randomUUID(),
-    tableId: tableName,
-    name: SEAT_JOINED_EVENT_NAME,
-    occurredAt: new Date().toISOString(),
-    initiator: { seatId: initiator.seatId, playerName: initiator.playerName },
-    occurredIn: "shuffler",
-    origin: "shuffler.shuffleUp",
-    significance: "administrative",
-    traceparent: currentTraceparent(),
-    schemaVersion: 1,
-    payload: {
-      deckName,
-      playmatImageUrl,
-      cardBackImageUrl: sleeveColor ? undefined : cardBackImageUrl,
-      sleeveColor,
-      primaryColor,
-      secondaryColor,
-      commanders: commanders?.length ? commanders.map(buildSeatJoinedCommander) : undefined,
-    },
-  };
-}
-
 export interface TabletopPort {
   sendCardToTable(tableName: string, event: CardPlayedEvent): Promise<void>;
-  sendSeatJoined(tableName: string, event: SeatJoinedEvent): Promise<void>;
 }

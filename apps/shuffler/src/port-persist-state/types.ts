@@ -34,6 +34,7 @@ export interface PersistedGameState {
   seatId?: string;
   spineTableId?: string;
   spineSeatNumber?: number;
+  tableUrl?: string;
   sleeveColor?: string;
   playmatImagePath?: string;
 }

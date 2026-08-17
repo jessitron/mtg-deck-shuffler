@@ -56,8 +56,9 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const menuHtml = formatGameMenuHtmlFragment(game);
   const { secondaryColor } = colorsForPlaymat(game.playmatImagePath ?? DEFAULT_PLAYMAT_PATH, game.sleeveColor);
 
+  const tableHref = game.tableUrl ?? `${tabletopPublicUrl()}/t/${encodeURIComponent(game.tableName ?? "")}`;
   const goToTableButtonHtml = game.tableName
-    ? `<a class="pushable-flat go-to-table-button" href="${tabletopPublicUrl()}/t/${encodeURIComponent(game.tableName)}" target="_blank" rel="noopener">Go to Table: ${escapeHtml(game.tableName)}</a>`
+    ? `<a class="pushable-flat go-to-table-button" href="${tableHref}" target="_blank" rel="noopener">Go to Table: ${escapeHtml(game.tableName)}</a>`
     : "";
 
   const tableCardsSizeClass = game.tableName ? "pushable-dark pushable-small" : "";

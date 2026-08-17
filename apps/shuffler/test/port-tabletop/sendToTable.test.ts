@@ -1,9 +1,8 @@
 import { GameState, TableInfo } from "../../src/GameState.js";
 import { FakeTabletopGateway } from "../../src/port-tabletop/FakeTabletopGateway.js";
-import { sendCardToTableFirst, sendSeatJoinedBestEffort, zoneHintForPlay } from "../../src/port-tabletop/sendToTable.js";
+import { sendCardToTableFirst, zoneHintForPlay } from "../../src/port-tabletop/sendToTable.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
 import { lightningBolt, testProvenance } from "../generators.js";
-import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../../src/table-look.js";
 
 
 const forest: CardDefinition = {
@@ -98,97 +97,5 @@ describe("sendCardToTableFirst", () => {
     const bolt = cardNamed(game, "Lightning Bolt");
 
     await expect(sendCardToTableFirst(undefined, game, bolt, "stack")).rejects.toThrow("TABLETOP_URL");
-  });
-});
-
-describe("sendSeatJoinedBestEffort", () => {
-  it("sends a seat.joined event carrying the seat's identity, the deck's name, and both image URLs", async () => {
-    const fake = new FakeTabletopGateway();
-
-    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck");
-
-    expect(fake.sentSeatJoinedEvents).toHaveLength(1);
-    const { tableName, event } = fake.sentSeatJoinedEvents[0];
-    expect(tableName).toBe("Friday Night");
-    expect(event.tableId).toBe("Friday Night");
-    expect(event.name).toBe("seat.joined");
-    expect(event.initiator).toEqual({ seatId: "abc12345", playerName: "Jess" });
-    expect(event.payload.deckName).toBe("Test Deck");
-    expect(event.payload.playmatImageUrl).toMatch(/^https:\/\//);
-    expect(event.payload.cardBackImageUrl).toMatch(/^https:\/\//);
-  });
-
-  it("a picked sleeve travels as sleeveColor, and the card back is omitted — sleeveColor wins", async () => {
-    const fake = new FakeTabletopGateway();
-
-    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", "#8b2f5c");
-
-    const { event } = fake.sentSeatJoinedEvents[0];
-    expect(event.payload.sleeveColor).toBe("#8b2f5c");
-    expect(event.payload.cardBackImageUrl).toBeUndefined();
-    expect(event.payload.playmatImageUrl).toMatch(/^https:\/\//);
-  });
-
-  it("a picked playmat travels as an absolute URL (ticket 16)", async () => {
-    const fake = new FakeTabletopGateway();
-
-    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", undefined, "/images/playmats/aeoe-6-seam-rip.png");
-
-    const { event } = fake.sentSeatJoinedEvents[0];
-    expect(event.payload.playmatImageUrl).toMatch(/^https:\/\/.*\/images\/playmats\/aeoe-6-seam-rip\.png$/);
-  });
-
-  it("no playmat picked → the default mat travels", async () => {
-    const fake = new FakeTabletopGateway();
-
-    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck");
-
-    const { event } = fake.sentSeatJoinedEvents[0];
-    expect(event.payload.playmatImageUrl).toMatch(/aeoe-41-terrasymbiosis\.png$/);
-  });
-
-  it("no sleeve picked → no sleeveColor, standard card back (today's look)", async () => {
-    const fake = new FakeTabletopGateway();
-
-    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", undefined);
-
-    const { event } = fake.sentSeatJoinedEvents[0];
-    expect(event.payload.sleeveColor).toBeUndefined();
-    expect(event.payload.cardBackImageUrl).toMatch(/^https:\/\//);
-  });
-
-  it("a picked sleeve becomes primaryColor, and secondaryColor is the playmat's more-contrasting curated color", async () => {
-    const fake = new FakeTabletopGateway();
-
-    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck", "#8b2f5c");
-
-    const { event } = fake.sentSeatJoinedEvents[0];
-    const expected = colorsForPlaymat(DEFAULT_PLAYMAT_PATH, "#8b2f5c");
-    expect(event.payload.primaryColor).toBe(expected.primaryColor);
-    expect(event.payload.secondaryColor).toBe(expected.secondaryColor);
-    expect(event.payload.primaryColor).toBe("#8b2f5c");
-  });
-
-  it("no sleeve picked → primary/secondary still resolve from the playmat's curated pair", async () => {
-    const fake = new FakeTabletopGateway();
-
-    await sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck");
-
-    const { event } = fake.sentSeatJoinedEvents[0];
-    const expected = colorsForPlaymat(DEFAULT_PLAYMAT_PATH, undefined);
-    expect(event.payload.primaryColor).toBe(expected.primaryColor);
-    expect(event.payload.secondaryColor).toBe(expected.secondaryColor);
-  });
-
-  it("is a no-op when no tabletop is configured — Shuffle Up must not fail", async () => {
-    await expect(sendSeatJoinedBestEffort(undefined, tableInfo, "Test Deck")).resolves.toBeUndefined();
-  });
-
-  it("swallows a gateway failure — best-effort, unlike sendCardToTableFirst", async () => {
-    const fake = new FakeTabletopGateway();
-    fake.failWith(new Error("connection refused"));
-
-    await expect(sendSeatJoinedBestEffort(fake, tableInfo, "Test Deck")).resolves.toBeUndefined();
-    expect(fake.sentSeatJoinedEvents).toHaveLength(0);
   });
 });

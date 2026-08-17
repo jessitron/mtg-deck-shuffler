@@ -230,38 +230,51 @@ version bumps). `/restart-game` carries them forward.
   discard→graveyard. The full failure protocol, station by station (send → abort →
   `applyGameCommand` → 502 response → htmx config → modal choreography):
   `notes/DESIGN-send-then-commit.md`.
-- **`seat.joined` (JES-140)**: `/start-game` and `/restart-game` call
-  `sendSeatJoinedBestEffort()` (`src/port-tabletop/sendToTable.ts`) right after `tableInfo`
-  is built, so the Tabletop draws the seat's player area (playmat, library, graveyard,
-  exile) before any card is played. Unlike `sendCardToTableFirst`, this is **best-effort**:
-  a Tabletop that's unreachable at Shuffle Up must not block starting the game — failure is
-  a span attribute + `log.warn`, not a thrown error. The Tabletop's own `ensurePlayerArea`
-  is idempotent and re-runs defensively on first card arrival, so a missed `seat.joined`
-  self-heals.
-- **Env**: `TABLETOP_URL` (server-to-server sends; default `http://localhost:5180`,
-  prod `http://mtg-tabletop-service`), `TABLETOP_PUBLIC_URL` (browser "at table" link;
-  default `https://table.jessitron.honeydemo.io`), `SHUFFLER_PUBLIC_URL` (JES-140 — lets
-  the Tabletop hotlink the standard card-back image as an absolute URL; default
+- **Joining a table is one call to the Spine** (spine-in-the-middle ticket 03,
+  2026-08-16): `/start-game`, `/restart-game`, and `/yo` all call
+  `joinSpineBestEffort()` (`src/port-spine/sendToSpine.ts`) once, carrying identity
+  (`gameId`, table name, player name) *and* the full seat decoration (deck name,
+  playmat, card-back, sleeve, resolved primary/secondary colors, commanders,
+  and this game's own `gameUrl`). The Spine administers the whole act — creates
+  the table if needed, assigns a seat, mints `seat.taken` + `seat.joined` into its
+  own log, and notifies the Tabletop itself over HTTP — and hands back
+  `{tableId, seatNumber, tableUrl}`. **The Shuffler no longer talks to the
+  Tabletop directly to join a seat**: `TabletopPort` now carries only
+  `sendCardToTable`; `sendSeatJoined`, `HttpTabletopGateway.sendSeatJoined`,
+  `FakeTabletopGateway.sendSeatJoined`, and the old
+  `joinSpineTableBestEffort`/`sendSeatJoinedBestEffort` pair are gone. This is
+  still **best-effort** — a Spine that's down must not block starting the game,
+  failure is a span attribute + `log.warn` — and still **awaited** before the
+  `/game` redirect (decoupling that wait is a later ticket). The call happens
+  *after* `GameState.newGame()` so `game.listCommanders()` has minted
+  `cardInstanceId`s to send; `game.recordSpineJoin()` then stamps the returned
+  `spineTableId`/`spineSeatNumber`/`tableUrl` onto the already-built `GameState`
+  before it's persisted. `TableInfo`, `GameState`, and the persisted game/prep
+  all carry `tableUrl` alongside `spineTableId`/`spineSeatNumber` (optional, no
+  version bump) — the Shuffler stores the Spine's `tableUrl` and uses it for the
+  `/game` page's "Go to Table" link instead of constructing
+  `TABLETOP_PUBLIC_URL/t/<name>` itself (that construction is only a fallback
+  now, for a game that never got a `tableUrl`).
+- **Env**: `TABLETOP_URL` (server-to-server sends for `card.played`; default
+  `http://localhost:5180`, prod `http://mtg-tabletop-service`),
+  `TABLETOP_PUBLIC_URL` (fallback "at table" link when a game has no stored
+  `tableUrl`; default `https://table.jessitron.honeydemo.io`),
+  `SHUFFLER_PUBLIC_URL` (JES-140 — lets the Tabletop hotlink the standard
+  card-back image as an absolute URL, and builds each seat's `gameUrl`; default
   `https://mtg.jessitron.honeydemo.io`).
-- **Spine (`src/port-spine/`)**: at join time (`/start-game`, `/restart-game`,
-  `/yo`), `joinSpineTableBestEffort` calls the new Spine's single `POST /join
-  {name, playerName}` (`services/spine`'s roda rewrite, `.scratch/spine-roda-rewrite/`
-  ticket 03) — one call creates the table if none is active and takes the next
-  open seat, returning `{tableId, seatNumber}`. The old `ensureTable`/`takeSeat`
-  two-call shape (`GET /tables/lookup`, `POST /tables`, `POST /tables/:id/seats`)
-  is gone; those routes no longer exist. The returned `spineTableId`/`spineSeatNumber`
-  ride on `TableInfo`, `GameState`, and the persisted game/prep (optional, no
-  version bump) — `spineSeatNumber` is a plain 1-4 seat number now, not a GUID,
-  since that's all the new Spine hands back. Alongside the Tabletop send,
+- **Spine (`src/port-spine/`)**: the join request is idempotent, keyed by the
+  Shuffler's own `gameId` — a retry (network blip) or a resend of the same
+  `gameId` returns the same seat instead of minting a second one; the Spine does
+  the recognizing, not the Shuffler. `/start-game` and `/yo` always join (one
+  join per fresh game). `/restart-game` still guards on
+  `!tableInfo.spineSeatNumber` before calling `/join` — a restart normally
+  carries the previous game's `spineTableId`/`spineSeatNumber`/`tableUrl`
+  forward unchanged (same seat, no new Spine call) and only re-joins when the
+  original join never succeeded. Alongside the join,
   `/play-card`/`/discard-card` also send `card.played` to the Spine's event log,
   addressed to that real tableId, with `initiator.seatId` set to
-  `String(spineSeatNumber)` (`sendCardPlayedToSpineBestEffort`). Both are
-  **best-effort** — a Spine that's down must not block starting a game or
-  playing a card; failure is a span attribute + `log.warn`. **Joining is NOT
-  idempotent**: `/restart-game` carries the persisted ids forward rather than
-  re-joining, and a join that fails at start-time is never retried — that game
-  just sends nothing to the Spine for its lifetime.
-  `HttpSpineGateway` (real) / `FakeSpineGateway` (tests) implement
+  `String(spineSeatNumber)` (`sendCardPlayedToSpineBestEffort`) — also
+  best-effort. `HttpSpineGateway` (real) / `FakeSpineGateway` (tests) implement
   `SpinePort`. **Env**: `SPINE_URL`, default `http://localhost:4600`.
   **Envelope version**: both the Spine and the Tabletop now validate against
   the same `contracts/envelope.v1.json` — `sendEvent` posts the full

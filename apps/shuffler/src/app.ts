@@ -13,9 +13,9 @@ import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play
 import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
 import { TabletopPort, ZoneHint } from "./port-tabletop/types.js";
-import { sendCardToTableFirst, sendSeatJoinedBestEffort, zoneHintForPlay } from "./port-tabletop/sendToTable.js";
+import { sendCardToTableFirst, zoneHintForPlay } from "./port-tabletop/sendToTable.js";
 import { SpinePort } from "./port-spine/types.js";
-import { sendCardPlayedToSpineBestEffort, joinSpineTableBestEffort } from "./port-spine/sendToSpine.js";
+import { sendCardPlayedToSpineBestEffort, joinSpineBestEffort } from "./port-spine/sendToSpine.js";
 import { formatTabletopSendErrorModal } from "./view/play-game/game-modals.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { log } from "./log.js";
@@ -505,28 +505,36 @@ export function createApp(
           playerName: playerNameInput || "player",
           seatId: prep.seatId ?? randomUUID().slice(0, 8),
         };
-        const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
-        tableInfo.spineTableId = spineJoin.spineTableId;
-        tableInfo.spineSeatNumber = spineJoin.spineSeatNumber;
-        // The Prep records all table info — that's what enables rejoining later.
-        prep.tableName = tableInfo.tableName;
-        prep.playerName = tableInfo.playerName;
-        prep.seatId = tableInfo.seatId;
-        prep.spineTableId = tableInfo.spineTableId;
-        prep.spineSeatNumber = tableInfo.spineSeatNumber;
-        prep.updatedAt = new Date();
-        await persistPrepPort.savePrep(prep);
       }
 
       // Create new game from prep
       const gameId = persistStatePort.newGameId();
       const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo, prep.sleeveColor, prep.playmatImagePath);
       game.startGame(browserTabId);
-      await persistStatePort.save(game.toPersistedGameState());
 
       if (tableInfo) {
-        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, prep.sleeveColor, prep.playmatImagePath, game.listCommanders());
+        const spineJoin = await joinSpineBestEffort(spinePort, {
+          gameId,
+          tableName: tableInfo.tableName,
+          playerName: tableInfo.playerName,
+          deckName: prep.deck.name,
+          sleeveColor: prep.sleeveColor,
+          playmatImagePath: prep.playmatImagePath,
+          commanders: game.listCommanders(),
+        });
+        game.recordSpineJoin(spineJoin);
+        // The Prep records all table info — that's what enables rejoining later.
+        prep.tableName = tableInfo.tableName;
+        prep.playerName = tableInfo.playerName;
+        prep.seatId = tableInfo.seatId;
+        prep.spineTableId = spineJoin.spineTableId;
+        prep.spineSeatNumber = spineJoin.spineSeatNumber;
+        prep.tableUrl = spineJoin.tableUrl;
+        prep.updatedAt = new Date();
+        await persistPrepPort.savePrep(prep);
       }
+
+      await persistStatePort.save(game.toPersistedGameState());
 
       res.redirect(`/game/${gameId}`);
     } catch (error) {
@@ -636,14 +644,9 @@ export function createApp(
             seatId: persistedGame.seatId ?? prep.seatId ?? randomUUID().slice(0, 8),
             spineTableId: persistedGame.spineTableId ?? prep.spineTableId,
             spineSeatNumber: persistedGame.spineSeatNumber ?? prep.spineSeatNumber,
+            tableUrl: persistedGame.tableUrl ?? prep.tableUrl,
           }
         : undefined;
-
-      if (tableInfo && !tableInfo.spineSeatNumber) {
-        const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
-        tableInfo.spineTableId = spineJoin.spineTableId;
-        tableInfo.spineSeatNumber = spineJoin.spineSeatNumber;
-      }
 
       const sleeveColor = persistedGame.sleeveColor ?? prep.sleeveColor;
       const playmatImagePath = persistedGame.playmatImagePath ?? prep.playmatImagePath;
@@ -652,11 +655,21 @@ export function createApp(
       const newGameId = persistStatePort.newGameId();
       const newGame = GameState.newGame(newGameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo, sleeveColor, playmatImagePath);
       newGame.startGame(browserTabId);
-      await persistStatePort.save(newGame.toPersistedGameState());
 
-      if (tableInfo) {
-        await sendSeatJoinedBestEffort(tabletopPort, tableInfo, prep.deck.name, sleeveColor, playmatImagePath, newGame.listCommanders());
+      if (tableInfo && !tableInfo.spineSeatNumber) {
+        const spineJoin = await joinSpineBestEffort(spinePort, {
+          gameId: newGameId,
+          tableName: tableInfo.tableName,
+          playerName: tableInfo.playerName,
+          deckName: prep.deck.name,
+          sleeveColor,
+          playmatImagePath,
+          commanders: newGame.listCommanders(),
+        });
+        newGame.recordSpineJoin(spineJoin);
       }
+
+      await persistStatePort.save(newGame.toPersistedGameState());
 
       res.redirect(`/game/${newGameId}`);
     } catch (error) {
@@ -1752,12 +1765,25 @@ export function createApp(
         cards: [...deck.cards].sort((a, b) => a.name.localeCompare(b.name)),
       };
       const tableInfo: TableInfo = { tableName: "Yo", playerName: "Jess", seatId: randomUUID().slice(0, 8) };
-      const spineJoin = await joinSpineTableBestEffort(spinePort, tableInfo.tableName, tableInfo.playerName);
-      tableInfo.spineTableId = spineJoin.spineTableId;
-      tableInfo.spineSeatNumber = spineJoin.spineSeatNumber;
       const playmat = PLAYMATS[Math.floor(Math.random() * PLAYMATS.length)];
       const sleeveColor = "#" + Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, "0");
       const prepId = persistPrepPort.newPrepId();
+
+      const gameId = persistStatePort.newGameId();
+      const game = GameState.newGame(gameId, prepId, PERSISTED_GAME_PREP_VERSION, sortedDeck, undefined, tableInfo, sleeveColor, playmat.path);
+      game.startGame(res.locals.browserTabId as string | undefined);
+
+      const spineJoin = await joinSpineBestEffort(spinePort, {
+        gameId,
+        tableName: tableInfo.tableName,
+        playerName: tableInfo.playerName,
+        deckName: sortedDeck.name,
+        sleeveColor,
+        playmatImagePath: playmat.path,
+        commanders: game.listCommanders(),
+      });
+      game.recordSpineJoin(spineJoin);
+
       const prep: PersistedGamePrep = {
         version: PERSISTED_GAME_PREP_VERSION,
         prepId,
@@ -1765,21 +1791,16 @@ export function createApp(
         tableName: tableInfo.tableName,
         playerName: tableInfo.playerName,
         seatId: tableInfo.seatId,
-        spineTableId: tableInfo.spineTableId,
-        spineSeatNumber: tableInfo.spineSeatNumber,
+        spineTableId: spineJoin.spineTableId,
+        spineSeatNumber: spineJoin.spineSeatNumber,
+        tableUrl: spineJoin.tableUrl,
         sleeveColor,
         playmatImagePath: playmat.path,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
       await persistPrepPort.savePrep(prep);
-
-      const gameId = persistStatePort.newGameId();
-      const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo, prep.sleeveColor, prep.playmatImagePath);
-      game.startGame(res.locals.browserTabId as string | undefined);
       await persistStatePort.save(game.toPersistedGameState());
-
-      await sendSeatJoinedBestEffort(tabletopPort, tableInfo, sortedDeck.name, prep.sleeveColor, prep.playmatImagePath, game.listCommanders());
 
       res.redirect(`/game/${gameId}`);
     } catch (error) {

@@ -733,3 +733,34 @@ reversed rule — it's a populated field.
   stale KB passages that still called the display trio off-schema.
 - No Shuffler or Tabletop face behavior changed. Commanders still carry no `face` and arrive
   face up; table-local flipping remains unchanged.
+
+## Spine-in-the-Middle Ticket 03: `seat.joined` Sender Site Moves to `port-spine`, Logic Unchanged (2026-08-16)
+
+**No face logic changed** — a relocation and a builder rename, not a data-model change.
+`.scratch/spine-in-the-middle/issues/03-*.md` (see `apps/shuffler/CLAUDE.md`'s "Table Mode"
+section for the full join-flow rewrite this ticket landed).
+
+- `SeatJoinedCommander`/`buildSeatJoinedCommander()` moved `src/port-tabletop/types.ts` →
+  `src/port-spine/types.ts`, byte-identical logic: same `card.scryfallId`/`instanceId`,
+  `cardName`, `frontImageUrl`, and `backImageUrl` derived from `card.twoFaced` via
+  `getCardImageUrl` (the sharp edge this owner has tracked since table-layout ticket 18 —
+  gate on `twoFaced`, never on stored-URI presence — travels with the function, unaffected).
+  `SeatJoinedPayload` moved to the same file, gained an optional `gameUrl` field, and its
+  builder was **renamed** `buildSeatJoinedEvent` → `buildSeatJoinedPayload` — it no longer
+  builds an `EventEnvelope`. The Spine's `/join` now mints the `seat.joined` envelope
+  server-side from the flat decoration payload the Shuffler POSTs.
+- `TabletopPort.sendSeatJoined`, `HttpTabletopGateway.sendSeatJoined`,
+  `FakeTabletopGateway.sendSeatJoined`, `SeatJoinedEvent`, and `SEAT_JOINED_EVENT_NAME` were
+  all **deleted** — `TabletopPort` now carries only `sendCardToTable`. `card.played`'s sender
+  path (`buildCardPlayedEvent`, `HttpTabletopGateway.sendCardToTable`) is untouched.
+  `gateways.test.ts` gained a one-line regression guard instead of the deleted method's tests:
+  `HttpTabletopGateway.prototype.sendSeatJoined` is `undefined`.
+- Commander-building test coverage moved from `gateways.test.ts`'s `"buildSeatJoinedEvent
+  commanders"` describe block into `test/port-spine/sendToSpine.test.ts`, adapted to assert
+  on `fake.joinRequests[0].commanders` via `FakeSpineGateway` (the request now goes to the
+  Spine's `/join`, not straight to the Tabletop) — same 0/2-commander,
+  `backImageUrl`-derived-from-`twoFaced` assertions as before, just against a different
+  recorder.
+- KB updated: [files.md](files.md) and [interactions.md](interactions.md)'s "Tabletop port"
+  section now point at `src/port-spine/types.ts` for the commander-building code and record
+  the new test location.
