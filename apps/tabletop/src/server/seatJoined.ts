@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
-import { trace } from "@opentelemetry/api";
+import { trace, SpanKind } from "@opentelemetry/api";
 import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
 import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape, addCommanderDamageCounters } from "./tableFurniture.js";
 import { MAX_SEATS, CARD_W, CARD_H, commandZoneCardPosition } from "./cardLayout.js";
 import { validateIncomingEvent } from "./contractValidation.js";
+
+const tracer = trace.getTracer("mtg-tabletop");
 
 /** A commander riding seat.joined (ticket 18) — always face up, no `face` field on the wire. */
 interface SeatJoinedCommander {
@@ -83,71 +85,101 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
   }
 
   const pageId = pageIdOf(entry);
-  const playerArea = await ensurePlayerArea(entry, pageId, seatId, playerName, {
-    deckName,
-    playmatImageUrl,
-    cardBackImageUrl,
-    sleeveColor,
-    primaryColor,
-    secondaryColor,
-  });
-
   const seatCommanders = commanders ?? [];
-  if (seatCommanders.length > 0) {
-    await entry.room.updateStore((store) => {
-      seatCommanders.forEach((commander, slot) => {
-        const { instanceId } = commander.card;
-        const position = commandZoneCardPosition(playerArea.seatIndex, slot, seatCommanders.length as 1 | 2);
-        const sharedFields = {
-          pageId,
-          x: position.x,
-          y: position.y,
-          w: CARD_W,
-          h: CARD_H,
-          scryfallId: commander.card.scryfallId,
-          cardName: commander.cardName,
-          frontImageUrl: commander.frontImageUrl,
-          backImageUrl: commander.backImageUrl,
-          face: "front" as const,
-          faceDown: false,
-          sleeveColor: playerArea.sleeveColor ?? null,
-          cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
-          owner: seatId,
-          isCommander: true,
-        };
 
-        store.put(
-          mtgCardShape({
-            id: createShapeId(`ghost-${instanceId}`),
-            index: nextIndex(tableName),
-            instanceId: ghostInstanceId(instanceId),
-            isLocked: true,
-            opacity: 0.3,
-            ...sharedFields,
-          })
-        );
-        store.put(
-          mtgCardShape({
-            id: createShapeId(`card-${instanceId}`),
-            index: nextIndex(tableName),
-            instanceId,
-            ...sharedFields,
-          })
-        );
-      });
-    });
-  }
+  await tracer.startActiveSpan(
+    "add player furniture",
+    {
+      kind: SpanKind.INTERNAL,
+      attributes: {
+        "event.id": envelope.id,
+        "table.name": tableName,
+        "seat.id": seatId,
+        "player.name": playerName,
+        "player.deckName": deckName,
+        "player.playmatImageUrl": playmatImageUrl ?? "",
+        "player.cardBackImageUrl": cardBackImageUrl ?? "",
+        "player.sleeveColor": sleeveColor ?? "",
+        "player.primaryColor": primaryColor ?? "",
+        "player.secondaryColor": secondaryColor ?? "",
+        "commander.count": seatCommanders.length,
+        "commander.names": seatCommanders.map((commander) => commander.cardName),
+        "room.seats_before": entry.seats.size,
+      },
+    },
+    async (span) => {
+      try {
+        const playerArea = await ensurePlayerArea(entry, pageId, seatId, playerName, {
+          deckName,
+          playmatImageUrl,
+          cardBackImageUrl,
+          sleeveColor,
+          primaryColor,
+          secondaryColor,
+        });
 
-  const commanderNames = seatCommanders.map((commander) => commander.cardName);
-  if (commanderNames.length > 0) {
-    playerArea.commanderNames = commanderNames;
-  }
+        if (seatCommanders.length > 0) {
+          await entry.room.updateStore((store) => {
+            seatCommanders.forEach((commander, slot) => {
+              const { instanceId } = commander.card;
+              const position = commandZoneCardPosition(playerArea.seatIndex, slot, seatCommanders.length as 1 | 2);
+              const sharedFields = {
+                pageId,
+                x: position.x,
+                y: position.y,
+                w: CARD_W,
+                h: CARD_H,
+                scryfallId: commander.card.scryfallId,
+                cardName: commander.cardName,
+                frontImageUrl: commander.frontImageUrl,
+                backImageUrl: commander.backImageUrl,
+                face: "front" as const,
+                faceDown: false,
+                sleeveColor: playerArea.sleeveColor ?? null,
+                cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
+                owner: seatId,
+                isCommander: true,
+              };
 
-  for (const [otherSeatId, otherArea] of entry.seats) {
-    if (otherSeatId === seatId) continue;
-    await addCommanderDamageCounters(entry, pageId, seatId, otherSeatId, otherArea.commanderNames, otherArea.sleeveColor);
-    await addCommanderDamageCounters(entry, pageId, otherSeatId, seatId, commanderNames, sleeveColor);
-  }
+              store.put(
+                mtgCardShape({
+                  id: createShapeId(`ghost-${instanceId}`),
+                  index: nextIndex(tableName),
+                  instanceId: ghostInstanceId(instanceId),
+                  isLocked: true,
+                  opacity: 0.3,
+                  ...sharedFields,
+                })
+              );
+              store.put(
+                mtgCardShape({
+                  id: createShapeId(`card-${instanceId}`),
+                  index: nextIndex(tableName),
+                  instanceId,
+                  ...sharedFields,
+                })
+              );
+            });
+          });
+        }
+
+        const commanderNames = seatCommanders.map((commander) => commander.cardName);
+        if (commanderNames.length > 0) {
+          playerArea.commanderNames = commanderNames;
+        }
+
+        for (const [otherSeatId, otherArea] of entry.seats) {
+          if (otherSeatId === seatId) continue;
+          await addCommanderDamageCounters(entry, pageId, seatId, otherSeatId, otherArea.commanderNames, otherArea.sleeveColor);
+          await addCommanderDamageCounters(entry, pageId, otherSeatId, seatId, commanderNames, sleeveColor);
+        }
+
+        span.setAttribute("room.seats_after", entry.seats.size);
+      } finally {
+        span.end();
+      }
+    }
+  );
 
   entry.seenEventIds.add(envelope.id);
   res.status(201).json({ ok: true });
