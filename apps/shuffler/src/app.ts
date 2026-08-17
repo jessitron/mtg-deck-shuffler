@@ -46,6 +46,7 @@ export function createApp(
   const app = express();
 
   let yoClickCount = 0;
+  let previousYoTableName = "Yo";
 
   // Configure EJS view engine
   app.set("view engine", "ejs");
@@ -1766,8 +1767,9 @@ export function createApp(
         ...deck,
         cards: [...deck.cards].sort((a, b) => a.name.localeCompare(b.name)),
       };
-      yoClickCount++;
-      const tableName = yoClickCount % 4 === 1 ? `YO-${randomUUID().slice(0, 4)}` : "Yo";
+      // generate a random table name, let me use it four times, then generate a new one.
+      const tableName = ++yoClickCount % 4 === 1 ? `YO-${randomUUID().slice(0, 4)}` : previousYoTableName;
+      previousYoTableName = tableName;
       const tableInfo: TableInfo = { tableName, playerName: "Jess", seatId: randomUUID().slice(0, 8) };
       const playmat = PLAYMATS[Math.floor(Math.random() * PLAYMATS.length)];
       const sleeveColor = "#" + Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, "0");
