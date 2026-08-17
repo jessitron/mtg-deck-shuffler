@@ -48,8 +48,8 @@
     },
     "owner": {
       "type": "string",
-      "minLength": 8,
-      "description": "The seatId of the player this card belongs to. Grants no capability — any player can still move any card; it makes 'whose card is this' a fact the shape carries."
+      "minLength": 1,
+      "description": "The seatId of the player this card belongs to — under the Spine's join, that's the seat number (e.g. \"1\"-\"4\") as a string, not a GUID, so this stays a bare non-empty check. Grants no capability — any player can still move any card; it makes 'whose card is this' a fact the shape carries."
     },
     "isCommander": {
       "type": "boolean",
