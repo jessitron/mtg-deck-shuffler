@@ -1,4 +1,4 @@
-import { CardPlayedEvent, SeatJoinedEvent, TabletopPort } from "./types.js";
+import { CardPlayedEvent, TabletopPort } from "./types.js";
 
 export class HttpTabletopGateway implements TabletopPort {
   constructor(private readonly baseUrl: string) {}
@@ -13,19 +13,6 @@ export class HttpTabletopGateway implements TabletopPort {
     if (!response.ok) {
       const bodyText = await response.text().catch(() => "");
       throw new Error(`Tabletop rejected the card: ${response.status} ${response.statusText} ${bodyText}`.trim());
-    }
-  }
-
-  async sendSeatJoined(tableName: string, event: SeatJoinedEvent): Promise<void> {
-    const url = `${this.baseUrl}/api/tables/${encodeURIComponent(tableName)}/events`;
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(event),
-    });
-    if (!response.ok) {
-      const bodyText = await response.text().catch(() => "");
-      throw new Error(`Tabletop rejected the seat: ${response.status} ${response.statusText} ${bodyText}`.trim());
     }
   }
 }

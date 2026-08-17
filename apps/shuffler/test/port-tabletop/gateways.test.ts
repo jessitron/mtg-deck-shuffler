@@ -1,10 +1,10 @@
 import { createServer, IncomingMessage, Server, ServerResponse } from "node:http";
 import { AddressInfo } from "node:net";
-import { buildCardPlayedEvent, buildSeatJoinedEvent, CardPlayedEvent } from "../../src/port-tabletop/types.js";
+import { buildCardPlayedEvent, CardPlayedEvent } from "../../src/port-tabletop/types.js";
 import { FakeTabletopGateway } from "../../src/port-tabletop/FakeTabletopGateway.js";
 import { HttpTabletopGateway } from "../../src/port-tabletop/HttpTabletopGateway.js";
 import { GameCard } from "../../src/GameState.js";
-import { lightningBolt, nicolBolas } from "../generators.js";
+import { lightningBolt } from "../generators.js";
 
 function handCard(): GameCard {
   return {
@@ -110,61 +110,7 @@ describe("HttpTabletopGateway", () => {
     await expect(gateway.sendCardToTable("Friday Night", anEvent())).rejects.toThrow();
   });
 
-  it("POSTs a seat.joined event to /api/tables/:tableName/events", async () => {
-    const gateway = new HttpTabletopGateway(baseUrl);
-    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night", "https://mtg.example/playmat.png", "https://mtg.example/card-back.jpg");
-    await gateway.sendSeatJoined("Friday Night", event);
-
-    expect(received).toHaveLength(1);
-    expect(received[0].url).toBe("/api/tables/Friday%20Night/events");
-    expect(received[0].body).toEqual(JSON.parse(JSON.stringify(event)));
-  });
-
-  it("throws on a non-2xx response for seat.joined", async () => {
-    respondWithStatus = 503;
-    const gateway = new HttpTabletopGateway(baseUrl);
-    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night");
-    await expect(gateway.sendSeatJoined("Friday Night", event)).rejects.toThrow(/503/);
-  });
-});
-
-describe("buildSeatJoinedEvent commanders", () => {
-  function commanderCard(card = nicolBolas, cardInstanceId = "cmdr-instance-1"): GameCard {
-    return {
-      card,
-      location: { type: "CommandZone", position: 0 },
-      gameCardIndex: 0,
-      isCommander: true,
-      currentFace: "front",
-      cardInstanceId,
-    };
-  }
-
-  it("omits commanders when none are given", () => {
-    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night");
-    expect(event.payload.commanders).toBeUndefined();
-  });
-
-  it("carries 0-2 commanders as {card:{scryfallId,instanceId}} plus scaffolding cardName/frontImageUrl/backImageUrl, no face", () => {
-    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night", undefined, undefined, undefined, [commanderCard(lightningBolt, "i-1")]);
-    expect(event.payload.commanders).toHaveLength(1);
-    expect(event.payload.commanders![0].card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: "i-1" });
-    expect(event.payload.commanders![0].cardName).toBe(lightningBolt.name);
-    expect(event.payload.commanders![0].frontImageUrl).toBeTruthy();
-    expect(event.payload.commanders![0].backImageUrl).toBeNull(); // not twoFaced
-    expect(event.payload.commanders![0]).not.toHaveProperty("face");
-  });
-
-  it("derives a commander's backImageUrl from twoFaced, same rule as card.played", () => {
-    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night", undefined, undefined, undefined, [commanderCard(nicolBolas, "i-2")]);
-    expect(event.payload.commanders![0].backImageUrl).toContain("/back/");
-  });
-
-  it("carries two commanders (partners)", () => {
-    const event = buildSeatJoinedEvent(initiator, "Test Deck", "Friday Night", undefined, undefined, undefined, [
-      commanderCard(lightningBolt, "i-1"),
-      commanderCard(nicolBolas, "i-2"),
-    ]);
-    expect(event.payload.commanders).toHaveLength(2);
+  it("does not expose a sendSeatJoined method (seat.joined now travels via the Spine's /join, ticket 03)", () => {
+    expect((HttpTabletopGateway.prototype as any).sendSeatJoined).toBeUndefined();
   });
 });

@@ -67,6 +67,7 @@ export interface TableInfo {
   seatId: string;
   spineTableId?: string;
   spineSeatNumber?: number;
+  tableUrl?: string;
 }
 
 export interface WhatHappened {
@@ -93,8 +94,9 @@ export class GameState {
   public readonly tableName?: string;
   public readonly playerName?: string;
   public readonly seatId?: string;
-  public readonly spineTableId?: string;
-  public readonly spineSeatNumber?: number;
+  public spineTableId?: string;
+  public spineSeatNumber?: number;
+  public tableUrl?: string;
   public readonly sleeveColor?: string;
   public readonly playmatImagePath?: string;
 
@@ -151,6 +153,7 @@ export class GameState {
       seatId: tableInfo?.seatId,
       spineTableId: tableInfo?.spineTableId,
       spineSeatNumber: tableInfo?.spineSeatNumber,
+      tableUrl: tableInfo?.tableUrl,
       sleeveColor,
       playmatImagePath,
     });
@@ -172,6 +175,7 @@ export class GameState {
     seatId?: string;
     spineTableId?: string;
     spineSeatNumber?: number;
+    tableUrl?: string;
     sleeveColor?: string;
     playmatImagePath?: string;
   }) {
@@ -191,6 +195,7 @@ export class GameState {
     this.seatId = params.seatId;
     this.spineTableId = params.spineTableId;
     this.spineSeatNumber = params.spineSeatNumber;
+    this.tableUrl = params.tableUrl;
     this.sleeveColor = params.sleeveColor;
     this.playmatImagePath = params.playmatImagePath;
   }
@@ -325,6 +330,13 @@ export class GameState {
     this.validateInvariants();
 
     return moves;
+  }
+
+  /** Records the outcome of a (best-effort) Spine join, made after this GameState already exists so it can carry the seat's commanders. */
+  public recordSpineJoin(outcome: { spineTableId?: string; spineSeatNumber?: number; tableUrl?: string }): void {
+    this.spineTableId = outcome.spineTableId;
+    this.spineSeatNumber = outcome.spineSeatNumber;
+    this.tableUrl = outcome.tableUrl;
   }
 
   public startGame(browserTabId?: string): this {
@@ -832,6 +844,7 @@ export class GameState {
       seatId: this.seatId,
       spineTableId: this.spineTableId,
       spineSeatNumber: this.spineSeatNumber,
+      tableUrl: this.tableUrl,
       sleeveColor: this.sleeveColor,
       playmatImagePath: this.playmatImagePath,
     };

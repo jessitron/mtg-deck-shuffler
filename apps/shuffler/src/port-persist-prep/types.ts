@@ -26,6 +26,7 @@ export interface PersistedGamePrep {
   seatId?: string;
   spineTableId?: string;
   spineSeatNumber?: number;
+  tableUrl?: string;
   sleeveColor?: string;
   playmatImagePath?: string;
 }
