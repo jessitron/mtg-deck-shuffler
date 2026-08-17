@@ -355,6 +355,22 @@ These are specific things that could break two-faced cards if changed elsewhere:
     Tabletop **does not consume it anywhere** — no new prop on `mtg-card`, no rendering
     change. If a future ticket wants the Tabletop to *use* `gameCardIndex` (e.g. showing a
     decklist position), that's new work, not something this change already wired up.
+22. **A schema constraint can drift from what the real sender sends — the `owner.minLength`
+    bug (2026-08-16).** `card.played.v1.json`'s `owner` field had `minLength: 8`, sized for
+    the pre-Spine short-GUID `seatId`. Once `sendCardPlayedToSpineBestEffort`
+    (`apps/shuffler/src/port-spine/sendToSpine.ts`) started setting `owner:
+    String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.played` event
+    started failing Spine ingestion validation, silently (best-effort send, so it just logged
+    a warning). Fixed: `minLength` loosened to `1`. **The general lesson**: a field's schema
+    constraint must be checked against what the actual sender populates, not against the
+    history of what it used to populate — and the Shuffler now has a test for this
+    specifically (`apps/shuffler/test/port-spine/cardPlayedContract.test.ts`, using
+    `apps/shuffler/test/port-spine/contractValidation.ts`), the Shuffler's first
+    contract-conformance test on an event it *sends* (the Tabletop and Spine only ever
+    validated on *receipt* before). If you change what any `card.played` field's sender
+    populates, or the schema's constraint on it, run this test — it's the fast way to catch
+    a mismatch before a live Spine does.
+
 ## Not Related To
 
 ### Sleeve carries to the game screen (`sleeve-carries-to-game`, 2026-08-09)

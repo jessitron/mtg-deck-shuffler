@@ -120,6 +120,41 @@ Also decided there, adjacent to this owner's territory:
   The Spine's rich `/join` now mints both in one transaction and forwards the persisted
   `seat.joined` event after commit; the facts remain distinct.
 
+## `owner`'s `minLength` was a stale short-GUID assumption — fixed (2026-08-16)
+
+Production bug, found from a real schema-validation failure, not a report: the Shuffler's
+`card.played` events were failing the Spine's ingestion validation. `owner` (the seatId of
+the player the card belongs to) had `minLength: 8` on `contracts/payloads/card.played.v1.json`
+— a leftover from when `TableInfo.seatId` was a short-GUID (8 chars, pre-Spine). Under the
+Spine's join flow (`sendCardPlayedToSpineBestEffort` in
+`apps/shuffler/src/port-spine/sendToSpine.ts`), `owner` is actually
+`String(game.spineSeatNumber)` — a bare seat number, `"1"`–`"4"`, 1 character. Every real
+`card.played` event was therefore failing schema validation in production.
+
+- **Fix**: `owner`'s `minLength` loosened `8` → `1` (still requires non-empty) and its
+  description updated to say the value is the Spine's seat number as a string, not a GUID.
+  In-place edit on v1 — a loosening of an already-required field's constraint, not a shape
+  change, so it doesn't fall under the "no more in-place edits" rule the watch points below
+  established (that rule is about tightening/adding required fields or reshaping `card`/
+  `face`; this narrows nothing a real producer needed).
+- **New test coverage**: `apps/shuffler/test/port-spine/contractValidation.ts` — an ajv-based
+  validator (mirrors `apps/tabletop/src/server/contractValidation.ts`'s pattern) that loads
+  the committed `contracts/envelope.v1.json` + `contracts/payloads/card.played.v1.json` and
+  exposes `assertValidatesAsSpineEvent(event)`. `apps/shuffler/test/port-spine/cardPlayedContract.test.ts`
+  builds real `card.played` events two ways — directly via `buildCardPlayedEvent` with a
+  realistic short numeric `seatId`, and end-to-end via `sendCardPlayedToSpineBestEffort` +
+  `FakeSpineGateway` after a real `joinSpineBestEffort` — and validates both against the
+  schemas. This is the Shuffler's **first** contract-conformance test for an outbound event;
+  previously only the Tabletop and the Spine validated on receipt, so a Shuffler-side shape
+  drift (like this one) had no test catching it before a live Spine did. `apps/shuffler/package.json`
+  gained `ajv`/`ajv-formats` as devDependencies to support it.
+- **Why this matters for future `owner`/`isCommander`-adjacent changes**: this is the second
+  time a `card.played` field's constraint didn't match what the real sender actually sends
+  (the first being the image-URL derivation-from-`twoFaced` sharp edge). The new contract
+  test closes this specific gap going forward — any future drift between what
+  `buildCardPlayedEvent`/`sendCardPlayedToSpineBestEffort` actually populate and what the
+  schema requires will now fail `cardPlayedContract.test.ts` before it fails in production.
+
 ## The Spine preserves rich `seat.joined` payloads — ticket 02 (2026-08-16)
 
 `POST /join` now accepts the seat decoration, validates a draft `seat.joined` envelope,

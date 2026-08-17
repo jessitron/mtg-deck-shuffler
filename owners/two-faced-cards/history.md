@@ -764,3 +764,31 @@ section for the full join-flow rewrite this ticket landed).
 - KB updated: [files.md](files.md) and [interactions.md](interactions.md)'s "Tabletop port"
   section now point at `src/port-spine/types.ts` for the commander-building code and record
   the new test location.
+
+## `owner.minLength` Was a Stale Short-GUID Assumption — Production Bug Fixed (2026-08-16)
+
+Found from a real schema-validation failure, not a bug report: `card.played` events sent
+by the Shuffler to the Spine were failing schema validation. `card.played.v1.json`'s
+`owner` field had `minLength: 8` — sized when `TableInfo.seatId` was a short-GUID (8
+chars). But `sendCardPlayedToSpineBestEffort` (`apps/shuffler/src/port-spine/sendToSpine.ts`)
+sets `owner` to `String(game.spineSeatNumber)`, which under the current Spine join flow is
+a bare 1-4 seat number (e.g. `"1"`) — far shorter than 8 chars. Every real `card.played`
+event was failing validation, silently, because the send is best-effort (logs a warning,
+doesn't surface to the player).
+
+- **Fix**: `minLength` loosened `8` → `1` (still non-empty) on `contracts/payloads/card.played.v1.json`,
+  in place — a narrowing-to-widening change on an existing required field, not a shape
+  change. Description updated to say the value is the Spine's seat number as a string, not
+  a GUID.
+- **New**: `apps/shuffler/test/port-spine/contractValidation.ts` (ajv validator loading the
+  committed `envelope.v1.json` + `card.played.v1.json`, mirroring the Tabletop's
+  `contractValidation.ts`) and `apps/shuffler/test/port-spine/cardPlayedContract.test.ts`
+  (builds real events via `buildCardPlayedEvent` directly and via
+  `sendCardPlayedToSpineBestEffort` + `FakeSpineGateway` end-to-end, validates both) — the
+  Shuffler's first contract-conformance test on an event it *sends*, closing the class of
+  bug where the Shuffler's actual payload shape drifts from what the Spine will accept.
+  `apps/shuffler/package.json` gained `ajv`/`ajv-formats` as devDependencies.
+- Full Shuffler jest suite (368 tests) and Tabletop vitest suite (139 tests) green after
+  the schema loosening — confirms the looser `owner` constraint doesn't break Tabletop-side
+  consumption either.
+- See [contract.md](contract.md) and interactions.md watch point 22.
