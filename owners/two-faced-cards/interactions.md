@@ -79,6 +79,32 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 
 ### The Tabletop port (card.played sender, JES-127)
 - `src/port-tabletop/types.ts` `buildCardPlayedEvent` is the ONE door where a GameCard is serialized for the table. Any new face semantics (a third face? partner backs?) must go through here and the contract (`contracts/payloads/card.played.v1.json` — schemaVersion bump, new file, **unless** the schema still has zero conforming producers/consumers, the ticket-05 in-place-edit exception — see [contract.md](contract.md)).
+- **`seat.joined`'s sender site moved, unchanged in logic — spine-in-the-middle ticket 03
+  (2026-08-16).** `SeatJoinedCommander`/`buildSeatJoinedCommander()` and `SeatJoinedPayload`
+  moved from `src/port-tabletop/types.ts` to **`src/port-spine/types.ts`**: same
+  `card.scryfallId`/`instanceId`, `cardName`, `frontImageUrl`, and
+  `backImageUrl`-derived-via-`getCardImageUrl`-and-`twoFaced` mapping this owner has tracked
+  since table-layout ticket 18 — nothing about *what* a commander entry carries changed.
+  `SeatJoinedPayload` gained an optional `gameUrl` field (unrelated to face), and its builder
+  was **renamed** `buildSeatJoinedEvent` → `buildSeatJoinedPayload` — it no longer constructs
+  an `EventEnvelope`. Instead the Spine's `/join` endpoint now mints the `seat.joined`
+  envelope server-side from a flat decoration payload the Shuffler POSTs (identity +
+  `buildSeatJoinedPayload`'s output, as `SpineJoinRequest`). Reason: the Shuffler no longer
+  talks to the Tabletop directly to join a seat — the Spine administers the whole act (creates
+  the table, assigns a seat, mints `seat.taken`+`seat.joined`, notifies the Tabletop itself).
+  See `apps/shuffler/CLAUDE.md`'s "Table Mode" section for the full join-flow account.
+- **`TabletopPort` lost `sendSeatJoined` — same ticket.** `TabletopPort` (still in
+  `src/port-tabletop/types.ts`) now declares only `sendCardToTable`.
+  `HttpTabletopGateway.sendSeatJoined`, `FakeTabletopGateway.sendSeatJoined`,
+  `SeatJoinedEvent`, and `SEAT_JOINED_EVENT_NAME` were all deleted — `card.played`'s own
+  sender path (`buildCardPlayedEvent`, `HttpTabletopGateway.sendCardToTable`) is untouched.
+  Commander-building test coverage moved from `test/port-tabletop/gateways.test.ts`'s
+  `"buildSeatJoinedEvent commanders"` block into `test/port-spine/sendToSpine.test.ts`
+  (asserts on `fake.joinRequests[0].commanders` via `FakeSpineGateway`, since the request now
+  goes to the Spine's `/join` instead of straight to the Tabletop) — same assertions
+  (0/2 commanders, `backImageUrl` null vs populated by `twoFaced`), different destination.
+  If a future field is added to a commander entry's scaffolding, its test case belongs in
+  `sendToSpine.test.ts` now, not `gateways.test.ts`.
 - **Landed (2026-08-08, ticket 12)**: `imageUrl` is gone, **replaced** by `frontImageUrl: string` (always `getCardImageUrl(card, "normal", "front")`) and `backImageUrl: string | null` (`getCardImageUrl(card, "normal", "back")` when `card.twoFaced`, else `null` — computed from `twoFaced`, never from whether `card.backImageUris` happens to be populated, per the watch point in [tabletop.md](tabletop.md#watch-points)). `face: gameCard.currentFace` is unchanged but now documented as "which face is up on arrival," not "which face I baked in." At the time this was zero contract churn (those fields were scaffolding, not contract) — **superseded 2026-08-09, ticket 05**: `frontImageUrl`/`backImageUrl`/`cardName` are now real, `required` properties on `card.played.v1.json` (promoted in place; `card.played.v1.json` also lost an unused `seat: integer` field, redundant with `envelope.initiator.seatId`). The field-by-field comment block above `CardPlayedEvent` and the interface itself were updated together. **Also landed same day, table-layout ticket 18**: `owner: string` (seatId) and `isCommander: boolean` joined the same payload, `required`, edited in place — no v2. The matching edit is the hand-rolled `validationError` in `apps/tabletop/src/server/cardArrival.ts` (which briefly required `frontImageUrl`/`backImageUrl`/`owner`/`isCommander` all at once) — **ticket 05 then replaced that hand-rolled check entirely** with real ajv validation against the schema (`apps/tabletop/src/server/contractValidation.ts`). `test/port-tabletop/cardPlayedEvent.test.ts` asserts the new shape, including a case with `backImageUris` unset on a `twoFaced` card to prove the derivation is from `twoFaced`, not from stored-URI presence.
 - **On the Tabletop side, the payload now lands directly in shape `props`** — no baking, no unbaking. `handleCardArrival` (`cardArrival.ts`) destructures the validated envelope's payload and writes `frontImageUrl`/`backImageUrl`/`face`/`owner`/`isCommander` straight into the `mtg-card` shape's `props` via the shared `mtgCardShape()` builder (`tableFurniture.ts`, table-layout ticket 18 — also used by `seatJoined.ts` for commanders) (see [tabletop.md](tabletop.md)). **Flip and turn-face-down are built** (physics ticket 17, 2026-08-09, `eb24a4f`): `apps/tabletop/src/client/CardContextMenu.tsx` writes `props.face` and `props.faceDown` from a right-click context menu — the first Tabletop code to write either field.
 - **Contract validation is now real, not hand-rolled (ticket 05, 2026-08-09)**: both `cardArrival.ts` and `seatJoined.ts` validate the whole posted envelope+payload via ajv (`apps/tabletop/src/server/contractValidation.ts`), loading schemas straight from `contracts/`. `seat.joined.v1.json` also dropped `seatId`/`playerName` (redundant with `envelope.initiator`) in the same pass. **Ticket 18's `commanders` array had shipped the same day carrying `cardName`/`frontImageUrl`/`backImageUrl` off-schema** (its item schema only declared `card`) — merging the two branches surfaced that `additionalProperties: false` would reject those fields the moment ajv validation went live, so it was fixed as part of the merge: the commander item schema now requires `card`/`cardName`/`frontImageUrl`/`backImageUrl`, matching `buildSeatJoinedCommander` exactly. No asymmetry with `card.played` remains. See [contract.md](contract.md)'s ticket-05 section.
