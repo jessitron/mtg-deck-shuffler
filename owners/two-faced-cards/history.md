@@ -585,15 +585,17 @@ consulted before payload shaping. What it settles in this territory:
 - **Commanders ride `seat.joined` faceless**: optional `commanders` array (0–2 entries,
   `{ card: { scryfallId, instanceId } }`). Jess: a commander always arrives in the command
   zone face up; flipping it there afterward is table-local ("it isn't in play, people can do
-  what they want"). Scaffolding (`cardName`/`frontImageUrl`/`backImageUrl`) rides off-schema
-  with this owner's sharp edge honored — `backImageUrl` derived from `card.twoFaced`, never
-  from stored-URI presence, same test treatment as `cardPlayedEvent.test.ts`. **This makes
+  what they want"). At decision time the display fields (`cardName`/`frontImageUrl`/
+  `backImageUrl`) were planned as off-schema scaffolding; ticket 05 promoted all three to
+  required commander properties. This owner's sharp edge remains honored — `backImageUrl`
+  derived from `card.twoFaced`, never from stored-URI presence, same test treatment as
+  `cardPlayedEvent.test.ts`. **This makes
   `seat.joined` the second sender site bound by the twoFaced-derivation watch point.**
 - **Contract validation gets real** on every receiver this map touches (ajv-style, loading
   `contracts/`) — retiring the hand-rolled "JES-128" `if`-chains including
   `cardArrival.ts`'s `validationError`.
-- Also: `envelope.v1` amended in place (free — zero conforming producers exist yet):
-  `tableId` drops `format: uuid` (the table name IS the id pre-Spine), `initiator` becomes
+- Also: `envelope.v1` was amended in place (free then — zero conforming producers existed):
+  `tableId` dropped `format: uuid` (the table name was the id pre-Spine), `initiator` became
   `{ seatId?, playerName }`.
 
 ## Table-Layout Ticket 18 Implemented: `owner`/`isCommander` on the Card, Commanders Ride `seat.joined` (2026-08-09)
@@ -611,10 +613,10 @@ left `mtg-card` with no owner field at all.
   `buildCardPlayedEvent` (`apps/shuffler/src/port-tabletop/types.ts`) sets
   `owner: initiator.seatId`, `isCommander: gameCard.isCommander`. The hand-rolled
   `validationError` in `apps/tabletop/src/server/cardArrival.ts` requires both.
-- **`seat.joined.v1.json` gains an optional `commanders` array (0-2)** — in-schema
-  `{card:{scryfallId,instanceId}}`, off-schema scaffolding `cardName`/`frontImageUrl`/
-  `backImageUrl` (no `face` — commanders always arrive face up, per the vocabulary
-  ticket). `buildSeatJoinedEvent` (Shuffler) gained an optional `commanders?: readonly
+- **`seat.joined.v1.json` gains an optional `commanders` array (0-2)** — initially only
+  `card:{scryfallId,instanceId}` was in-schema; the same-day ticket-05 merge made
+  `cardName`/`frontImageUrl`/`backImageUrl` required too (no `face` — commanders always
+  arrive face up, per the vocabulary ticket). `buildSeatJoinedEvent` (Shuffler) gained an optional `commanders?: readonly
   GameCard[]` param, mapped through the new `buildSeatJoinedCommander()`. Tested in
   `apps/shuffler/test/port-tabletop/gateways.test.ts`'s new `"buildSeatJoinedEvent
   commanders"` describe block, mirroring `cardPlayedEvent.test.ts`'s convention.
@@ -713,3 +715,21 @@ reversed rule — it's a populated field.
 - **Net effect**: the "old ban is reversed" buoy note is no longer just planned —
   `card.played` has a live, populated `gameCardIndex` field with no consumer yet on the
   Tabletop side.
+
+## Spine Ticket 02: Rich, Idempotent `seat.joined` Through `/join` (2026-08-16)
+
+- The Spine's administered `POST /join` now accepts seat decoration, validates a draft
+  `seat.joined` before writes, persists it in the event log, displays it in admin, and
+  best-effort forwards the persisted event to the Tabletop after commit.
+- The payload is preserved semantically rather than reconstructed. Integration tests prove
+  commander array order, unknown payload/commander/card extension fields, explicit string
+  and null `backImageUrl`, omitted `commanders` versus `[]`, and absence of a synthesized
+  `face` across SQLite, `Event#as_envelope`, admin HTML, and outbound JSON.
+- Missing commander `backImageUrl` returns 422 before table, seat, event, broadcast, or HTTP
+  side effects. A same-`gameId` replay keeps and resends the original event/payload even when
+  the retry supplies conflicting valid decoration.
+- `seat.joined.v1.json` gained optional URI `gameUrl`. Its commander item already requires
+  `card`, `cardName`, `frontImageUrl`, and `backImageUrl`; this work exposed and corrected
+  stale KB passages that still called the display trio off-schema.
+- No Shuffler or Tabletop face behavior changed. Commanders still carry no `face` and arrive
+  face up; table-local flipping remains unchanged.

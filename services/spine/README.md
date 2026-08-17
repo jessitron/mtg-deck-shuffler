@@ -6,16 +6,22 @@ Plain Ruby — Roda (routing only) + Sequel + SQLite + Minitest, no Rails. See
 rewrite from Rails, and `../../notes/DESIGN-event-contract-v0.md` for the contract this
 service enforces (schemas in `../../contracts/`).
 
-**Current status:** `GET /up`, OTel wired at 100% sampling, join-by-name
-(`POST /join`), contract-validated event ingestion (`POST /tables/:table_id/events`),
-and live outbound delivery over SSE (`GET /tables/:table_id/events/stream`). No admin
-screen yet — see `../../.scratch/spine-roda-rewrite/issues/` for what's next.
+**Current status:** `GET /up`; idempotent, fully administered `POST /join`; contract-
+validated event ingestion (`POST /tables/:table_id/events`); live outbound delivery over
+SSE (`GET /tables/:table_id/events/stream`); and `/admin/tables` for reading the log.
+Joining records both seat identity and decoration in the Spine, then best-effort notifies
+the Tabletop without risking the committed join.
 
 ## Run locally
 
 ```sh
 PORT=4600 ./run     # sources repo-root .be then .env (order matters for telemetry)
 ```
+
+The root fleet runner supplies `TABLETOP_URL` (server-to-server notification) and
+`TABLETOP_PUBLIC_URL` (the returned table link). Standalone runs default the public link
+to `http://localhost:5180`; without `TABLETOP_URL`, joins still commit but notification is
+recorded as `missing_config` on the request span.
 
 - Health: `GET /up`
 - Live event feed: `GET /tables/:table_id/events/stream` (Server-Sent Events, one
@@ -31,7 +37,5 @@ No mocks — fakes only (repo rule).
 
 ## Deploy
 
-`./deploy.sh` doesn't exist yet for this stack — the Rails app's Docker/k8s setup was
-deleted along with the rest of it. Nothing in production depends on the Spine yet, so
-this is deliberately deferred until the app is functionally ready to wire in (see the
-rewrite spec's Out of Scope).
+Run `./deploy.sh` from this directory. It builds the Roda service, applies `k8s/`, waits
+for rollout, and records a deploy marker.

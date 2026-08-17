@@ -36,8 +36,9 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
 - **`.env` producing a keyless `x-honeycomb-team=`** — "header present" is not "telemetry
   configured"; a silent-off guard must check the key is non-empty.
 - **The `traceparent`-in-body minting sites** — `apps/tabletop/src/client/observability/index.ts`
-  (Tabletop, optional/websocket) and `apps/shuffler/src/port-tabletop/traceparent.ts` (Shuffler,
-  required for the Tabletop-facing envelope). The Spine's event contract
+  (Tabletop, optional/websocket), `apps/shuffler/src/port-tabletop/traceparent.ts` (Shuffler,
+  required for the Tabletop-facing envelope), and `services/spine/lib/tabletop_notifier.rb`
+  (optional, transient post-commit `seat.joined` copy). The Spine's event contract
   (`contracts/envelope.v1.json`) carries `traceparent` as a real, **optional** top-level field —
   never required, so a missing or malformed value is never a reason to reject an event.
   `HttpSpineGateway.sendEvent` reuses the Shuffler's Tabletop-facing helper to build the envelope
@@ -45,7 +46,8 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   the HTTP header carries trace context too (undici's OTel auto-instrumentation, automatic and
   unconditional), redundant with the body field for this single-event POST but load-bearing once
   events travel over the Spine's outbound SSE stream or a future batched `sendEvent`
-  (`shuffler-spine-gateway-stale` closed).
+  (`shuffler-spine-gateway-stale` closed). The Spine notifier separately relies on Net::HTTP
+  instrumentation for the header; body and header share a trace id but may have different span ids.
 
 ## Depended on by
 
@@ -110,11 +112,12 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   window and skip the span rather than emit garbage.
 - **Touching the Tabletop's ingress, its URL scheme, or "just adding TLS back"**: prod
   `table.jessitron.honeydemo.io` is plain http on purpose (tldraw license gate), on its own ALB,
-  IngressGroup `tabletop-http`. Four config spots are scheme-coupled and must agree:
+  IngressGroup `tabletop-http`. Five config spots are scheme-coupled and must agree:
   `BROWSER_OTLP_TRACES_URL` + `BROWSER_OTLP_LOGS_URL` (`apps/tabletop/k8s/configmap.yaml`), CORS
-  `allowed_origins` (`apps/tabletop/k8s/collector.yaml`), plus the Shuffler's
-  `TABLETOP_PUBLIC_URL`. An `https://` OTLP URL against this ALB is connection-refused — all
-  browser spans and the uncaught-error log pipeline vanish while the page works fine.
+  `allowed_origins` (`apps/tabletop/k8s/collector.yaml`), plus the Shuffler's and Spine's
+  `TABLETOP_PUBLIC_URL` values. An `https://` OTLP URL against this ALB is connection-refused — all
+  browser spans and the uncaught-error log pipeline vanish while the page works fine; the same
+  scheme also controls the player-facing links returned by both join flows.
 - **Adding, editing, or re-deploying any ingress in the `tabletop-http` (or any) IngressGroup**:
   ingresses sharing `alb.ingress.kubernetes.io/group.name` reconcile as **one ALB** — a single
   malformed ingress can produce `FailedDeployModel` on every ingress in the group, not just the
@@ -129,15 +132,27 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   and check the probe UA before the path. They are **not** identical: the Shuffler also
   head-samples static assets by extension; the Tabletop deliberately does not (probes + `/health`
   only). Don't "unify" them into one behavior without asking — the difference is intentional.
+- **Touching the Spine's inline `KeepItDownSampler`** (`services/spine/config/telemetry.rb`): it is
+  the effective sampler despite the base `OTEL_TRACES_SAMPLER: "always_on"` setting. It keeps 1%
+  only for exact `url.path ==
+  "/spine/up"`, keeps everything else, and stamps `sample_rate`. Unlike both Node samplers, it has
+  no focused tests and reads no legacy semconv spelling; don't mistake the owner KB's former
+  "100% sampling" statement for implementation truth.
 - **`services/spine/app.rb`'s `current_span`/`mark_span_failed` helpers**: the Spine's hand-rolled
   span-attribute code — `current_span.add_attributes(...)` for inputs/outcome on `POST /join`,
   `POST /tables/:table_id/events`, and now `GET /admin/tables`/`GET /admin/tables/:id`
   (`admin.table_count`, `table.id`, `admin.result`) — and one shared
   `mark_span_failed(attribute, result, error)` used by all of them. Still lives directly in
-  `app.rb`; extract to a shared file if it keeps growing. `join.result` does not currently
-  distinguish `created` from `joined` — both set `"joined"`. `event.result`'s dedup path does get
-  its own value (`"duplicate"`, distinct from `"accepted"`) — don't collapse it back if this code
-  is touched again.
+  `app.rb`; extract to a shared file if it keeps growing. `join.result` now distinguishes
+  `"created"`, `"joined"`, and idempotent `"replayed"`; `event.result`'s dedup path remains
+  `"duplicate"`, distinct from `"accepted"`. Don't collapse either vocabulary.
+- **The Spine's post-commit Tabletop notification** (`services/spine/lib/tabletop_notifier.rb`):
+  keep it outside the join transaction and best-effort. Net::HTTP instrumentation owns the header;
+  never hand-set `traceparent`. Inject body context only into the transient outbound copy, directly
+  before serialization, never into the persisted event. Preserve finite one-second open/read/write
+  timeouts and the bounded `tabletop.send.result` vocabulary (`sent`, `sent_replay`,
+  `missing_config`, `invalid_config`, `non_2xx`, `timeout`, `network_error`). A delivery failure may
+  add status/error detail but must not set the successful join span to error or change its 2xx.
 - **The Spine's `GET /admin/tables/:id` show page and its `HONEYCOMB_ENV_SLUG` default**: the
   page's inline `<script>` builds Honeycomb trace links client-side from live SSE messages'
   `event.traceparent`, using `ENV.fetch("HONEYCOMB_ENV_SLUG", "local")`. **Resolved**: the Spine's
@@ -279,8 +294,9 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   hands you the *context*, so `getActiveSpan()` returns an **ended** span — `addEvent` throws there
   rather than no-op'ing. Use a log; it still carries the trace id, so it lands on the trace anyway.
 - **Adding or editing a `traceparent`-in-body minting helper** (Tabletop `currentTraceparent`,
-  Shuffler `traceparent.ts`): keep the `00-{traceId}-{spanId}-{flags}` format identical across
-  both. If the field the caller writes into is required by a JSON Schema contract, the helper must
+  Shuffler `traceparent.ts`, Spine `TabletopNotifier`): keep the
+  `00-{traceId}-{spanId}-{flags}` format identical across all three. If the field the caller writes
+  into is required by a JSON Schema contract, the helper must
   never return `undefined`/`nil` — synthesize a well-formed random one, and flag the synthesis on
   the active span (`traceparent.synthesized: true`) so a real occurrence in production is visible.
   If the field is optional and only used for point-to-point propagation, `undefined`-on-no-span is
@@ -290,11 +306,10 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `buildCardPlayedEvent`) and posts it as-is. Don't reintroduce a strip-before-send step — the
   contract accepts the field now. **The Spine itself never persists `traceparent`**
   (`Event#as_envelope` in `services/spine/models/event.rb` omits it) — it's attached fresh, live,
-  only when `Table#broadcast` (`services/spine/models/table.rb`) sends an event out over SSE
-  (`event.as_envelope.merge("traceparent" => carrier["traceparent"]).compact`). **Never hand-set a
-  `traceparent` header on any outbound `fetch()` to "help"** — undici's OTel auto-instrumentation
-  already injects a live one on every outbound call, appending its own after any explicit headers
-  unconditionally, so a hand-set value would only produce a duplicate or a stale header.
+  only when `Table#broadcast` sends an event over SSE or `TabletopNotifier` serializes its transient
+  post-commit copy. **Never hand-set a `traceparent` header on outbound `fetch()` or Net::HTTP to
+  "help"** — the installed undici and Net::HTTP instrumentations own those headers; a hand-set value
+  risks duplication or staleness.
 
 ## Not related to
 

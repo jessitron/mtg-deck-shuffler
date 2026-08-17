@@ -68,7 +68,7 @@ class SseStreamTest < Minitest::Test
   private
 
   def join_table
-    post "/join", JSON.generate(name: "kitchen table #{SecureRandom.uuid}", playerName: "Jess"), "CONTENT_TYPE" => "application/json"
+    post_join
     JSON.parse(last_response.body)["tableId"]
   end
 

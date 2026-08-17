@@ -82,11 +82,12 @@ fallback in `apps/tabletop/src/server/server.ts`.
 IngressGroup `tabletop-http`, HTTP:80 only, no 443 listener at all) — tldraw's license gate blanks
 an unlicensed canvas on non-loopback HTTPS origins. Consequence: an `https://` browser OTLP URL
 against this ALB is **connection-refused**, silently killing all browser telemetry including the
-uncaught-error log pipeline. **Four config spots are scheme-coupled and must agree**:
+uncaught-error log pipeline. **Five config spots are scheme-coupled and must agree**:
 `BROWSER_OTLP_TRACES_URL` and `BROWSER_OTLP_LOGS_URL` in `apps/tabletop/k8s/configmap.yaml`, the
-CORS `allowed_origins` in `apps/tabletop/k8s/collector.yaml`, and the Shuffler's
-`TABLETOP_PUBLIC_URL` (`apps/shuffler/k8s/configmap.yaml`). "Add TLS back" touches all four, plus
-the Tabletop README's Licensing section — it isn't a one-file ingress tweak.
+CORS `allowed_origins` in `apps/tabletop/k8s/collector.yaml`, and both the Shuffler's and Spine's
+`TABLETOP_PUBLIC_URL` (`apps/shuffler/k8s/configmap.yaml`, `services/spine/k8s/configmap.yaml`).
+"Add TLS back" touches all five, plus the Tabletop README's Licensing section — it isn't a
+one-file ingress tweak.
 
 **Watch point for any ingress in the `tabletop-http` IngressGroup**: every ingress sharing
 `alb.ingress.kubernetes.io/group.name` reconciles as **one ALB** — one malformed ingress anywhere
@@ -189,8 +190,8 @@ instead. If you ever want `telemetry.sdk.*` back on a `BasicTracerProvider`, the
 | `apps/tabletop/src/server/telemetry-sampler.ts` | The Tabletop's head-sampler, **extracted from `tracing.ts` and given tests on 2026-08-12**. Exports a pure `sampleRatioFor(attributes): number` and class `BackgroundChatterSampler` (unchanged `ParentBasedSampler` root wrapper). Keeps `0.001` of `kube-probe`, `0.01` of `elb-healthchecker` (by UA), and `0.01` of `/health` (by path); 100% of everything else. UA is checked **before** path, so a kube-probe on `/health` stays at its own lowest rate. Reads **both** semconv spellings — `http.user_agent`/`user_agent.original` and `http.target`/`url.path`, stripping the query string off the path first (Invariant 4). Unit tested (`apps/tabletop/test/telemetry-sampler.test.ts`, 12 cases incl. unmatched-UA falling through to 1.0). **Still narrower than the Shuffler's**: no static-asset-by-extension handling — deliberately not added (Jess asked only for `/health`). |
 | `apps/shuffler/src/view/common/html-layout.ts` | The Shuffler's **single-sourced** browser telemetry bootstrap. `formatHtmlHead(options)` is the one page shell every Shuffler page's `<head>` goes through — EJS pages via `views/partials/head.ejs`, TS pages via `formatPageWrapper` — so the bootstrap appears exactly once. The guard+init is now `initHoneycombTracing(apiKey, devMode, tableName, playerName, gameId)`, shipped as the exported literal string `HONEYCOMB_TRACING_INIT_SCRIPT`, tested by evaling that exact string. `HONEYCOMB_TRACING_INIT_SCRIPT` stays a **static** constant; the five values pass as **arguments** at the call site (per the guard test's constraint) — the three string args (`tableName`, `playerName`, `gameId`) go through a new `jsStringArg()` = `JSON.stringify(value).replace(/</g, "\\u003c")` helper that both escapes the JS string literal and neutralizes `</script>` break-out / XSS (an absent value → the literal `undefined`). See "The Shuffler's browser bootstrap" below for the script order and the apiKey fallback. |
 | `apps/tabletop/src/client/observability/index.ts` | **The only real wrapper in the fleet.** Browser-only, self-described as "our own wrapper around the standard OpenTelemetry web SDK — nothing Honeycomb-specific." Surface: `initTracing()`, `inSpan()`, `setGlobalAttrs()` (via `GlobalAttributesSpanProcessor`, stamping e.g. `table.name` on every span), `currentTraceparent()`. Learns its destination by fetching `/otel-config.json`; tracing off is a valid local mode (logs a line, returns). |
-| `services/spine/` | Roda + Sequel + SQLite + Minitest. `config/telemetry.rb`: `OpenTelemetry::SDK.configure` with `opentelemetry-exporter-otlp` + `opentelemetry-instrumentation-rack`, `service_name` `"mtg-spine"`. `app.rb` mounts the Rack instrumentation explicitly (`use(*OpenTelemetry::Instrumentation::Rack::Instrumentation.instance.middleware_args)`), which is required for Roda (no Rails-style auto-injection) and already in place. **100% sampling, deliberately** — no sampler module; a prior Ruby sampler existed and was flagged broken, and the rewrite starts clean rather than porting it back. `services/spine/run` follows the same `.be`-then-`.env` pattern as `apps/tabletop/run`, polling `GET /up`. Query this fleet's data via the **`honeycomb-modernity`** MCP server (team `modernity`) — not the default `honeycomb` server, which points at an unrelated demo team and has no fleet data; picking the wrong one looks like "no spans" and can be mistaken for a wiring bug. **Still open**: no sampler (100% is the deliberate starting point until start/stop behavior is confirmed clean), no logs pipeline (`spine-logs-in-traces` in `TODO.md`). |
-| `services/spine/app.rb` `POST /join` and `POST /tables/:table_id/events` | Both routes add application-level span attributes, Invariant-1 style: `current_span.add_attributes(...)` for inputs as soon as parsed, then a result attribute on success (`join.result`, `event.result`) — `event.result`'s dedup path gets its own value (`"duplicate"`, distinct from `"accepted"`) so a query can tell "receiving events" apart from "senders retrying." Failure paths share one helper, `mark_span_failed(attribute, result, error)`, taking the attribute key as a parameter so both routes use the same shape instead of each carrying a near-identical copy. `current_span` is a one-line helper (`OpenTelemetry::Trace.current_span`) — no manual span creation, purely stamping the ambient Rack-instrumentation span. **`join.result` does not currently distinguish** a brand-new table from joining an existing one — both set `"joined"`. Contract validation itself (`EventContract.validate!`) emits no telemetry of its own; the route's `rescue` turns a violation into the `contract_violation` span outcome. |
+| `services/spine/` | Roda + Sequel + SQLite + Minitest. `config/telemetry.rb`: `OpenTelemetry::SDK.configure` with `opentelemetry-exporter-otlp`, `opentelemetry-instrumentation-rack`, and `opentelemetry-instrumentation-net_http`, `service_name` `"mtg-spine"`. `app.rb` mounts Rack explicitly (`use(*OpenTelemetry::Instrumentation::Rack::Instrumentation.instance.middleware_args)`), required for Roda; Net::HTTP instruments automatically once installed. The inline `KeepItDownSampler`, assigned after SDK configuration, keeps 1% only when `url.path == "/spine/up"`, keeps 100% of everything else, and stamps `sample_rate`; unlike the Node samplers it is not extracted or tested and reads only one semconv spelling. `services/spine/run` follows the same `.be`-then-`.env` pattern as `apps/tabletop/run`, polling `GET /up`. Query this fleet's data via the **`honeycomb-modernity`** MCP server (team `modernity`) — not the default `honeycomb` server, which points at an unrelated demo team and has no fleet data; picking the wrong one looks like "no spans" and can be mistaken for a wiring bug. **Still open**: no logs pipeline (`spine-logs-in-traces` in `TODO.md`). |
+| `services/spine/app.rb` `POST /join` and `POST /tables/:table_id/events` | Both routes add application-level span attributes, Invariant-1 style: `current_span.add_attributes(...)` for inputs as soon as parsed, then a result attribute on success (`join.result`, `event.result`). `join.result` is now `"created"`, `"joined"`, or `"replayed"`; `event.result`'s dedup path remains `"duplicate"`, distinct from `"accepted"`. Failure paths share `mark_span_failed(attribute, result, error)`. `current_span` is the ambient Rack span; the routes create no manual span. Contract violations become the `contract_violation` result. After an idempotent join commits, `TabletopNotifier` best-effort POSTs the persisted `seat.joined`; its bounded `tabletop.send.result` is one of `sent`, `sent_replay`, `missing_config`, `invalid_config`, `non_2xx`, `timeout`, or `network_error`, with status/error detail where applicable. Delivery failure never changes the successful join span's status or response. |
 | `services/spine/app.rb` `GET /admin/tables` and `GET /admin/tables/:id` | The Spine's admin screen (ticket 06) follows the same house pattern: `current_span.add_attributes("admin.table_count" => ...)` on the index, `"table.id"`/`"admin.result" => "found"` on the show route, and the shared `mark_span_failed("admin.result", "not_found", error)` on a missing table — no new telemetry shape introduced, just the existing one applied to a third route pair. **`HONEYCOMB_ENV_SLUG` is now set in prod** (`services/spine/k8s/configmap.yaml`, `HONEYCOMB_ENV_SLUG: "mtg-deck-shuffler"`, alongside `HONEYCOMB_TEAM_SLUG: "modernity"`) — the Spine's first production deploy resolved the TODO this row used to flag; `ENV.fetch("HONEYCOMB_ENV_SLUG", "local")`'s fallback now only fires locally, and the comment at that call site in `app.rb` was updated to say so rather than "still pending." Rows already in the log when the page loads render with no trace link at all — the `Event` row has no trace column (see the trace-context-in-event-bodies section below), so only rows arriving live over SSE have a `traceparent` to work with. The show page now ships its own browser telemetry too — see "The Spine's browser bootstrap and trace continuation" below. |
 | `services/spine/app.rb` `SPINE_BASE_PATH` route wrapping | The Spine's first production deploy (`services/spine/deploy.sh`, `services/spine/k8s/`) put the Spine behind the **same ALB and host as the Shuffler** (`mtg.jessitron.honeydemo.io/spine`) instead of its own subdomain — AWS ALB ingress can't strip a path prefix, so `app.rb`'s `route do |r| ... end` wraps its entire route table in `r.on(prefix) { dispatch(r) }` when `SPINE_BASE_PATH` (`k8s/configmap.yaml`: empty locally, `"/spine"` in prod) is set, with `dispatch(r)` holding the actual routes so both branches reach identical definitions. This is genuinely new telemetry-adjacent surface — an `r.on` wrapper now sits in front of every route the Rack instrumentation sees. **Verified only shallowly so far**: a container smoke test confirmed spans are still emitted (Rack instrumentation logged its usual "successfully installed" line, and `/spine/up`/`/spine/admin/tables` both responded) but `http.route`/span-naming shape under the wrapped prefix has **not** been checked against a real deployed ALB, only locally in Docker. If a future span shows a missing, doubled, or malformed `http.route` (e.g. `/spine` appearing twice, or the prefix swallowed) once this is live in prod, start here — it's the first and only place in the fleet a route table is wrapped in an extra routing layer after the instrumentation is mounted. |
 | `apps/shuffler/test/harness-telemetry/` | The verify suite's own tracing — not a ship. `harnessTracing.ts` (provider), `spanPlan.ts` (pure + tested), `otelReporter.ts` (Playwright reporter). Service `mtg-fleet-verify`. See "Dev-tooling telemetry" below. |
@@ -233,9 +234,9 @@ wired side by side in `TablePage.tsx`. Rules worth keeping for a third such hook
 
 Two mechanisms carry trace context on this fleet, and both are live now:
 
-1. **HTTP-header propagation** — automatic, via undici auto-instrumentation on outbound
-   `fetch`/HTTP calls. This is how a Shuffler-initiated trace continues into the Spine (Rack
-   instrumentation extracts the inbound W3C header) with zero application code.
+1. **HTTP-header propagation** — automatic: undici auto-instrumentation on the Node ships'
+   outbound `fetch`/HTTP calls, and Net::HTTP instrumentation on the Spine's Tabletop notification.
+   Rack extracts inbound W3C headers. Application code never hand-sets `traceparent` headers.
 2. **Body-embedded `traceparent`** — a W3C `00-{traceId}-{spanId}-{flags}` string carried as an
    **optional** field directly on the envelope (`contracts/envelope.v1.json`), for data that
    outlives the request or travels somewhere no header can reach.
@@ -250,19 +251,15 @@ header-only: the outbound SSE stream has no header mechanism at all, and a futur
 batch — so trace context needs a way to travel with the event body itself.
 
 **The Spine never persists it.** `Event#as_envelope` (`services/spine/models/event.rb`) builds the
-envelope with no `traceparent` key — unchanged reasoning: traces expire (~60d), and durable
-causality between events uses `id` references, never trace ids. `Table#broadcast` (private, in
-`services/spine/models/table.rb`) attaches a **live** one only at the instant an event goes out
-over SSE: it captures the *appending* request's trace context via
-`OpenTelemetry.propagation.inject`, then does `event.as_envelope.merge("traceparent" =>
-carrier["traceparent"]).compact` and sends `{event: envelope}` — `traceparent` inlined directly
-onto the outbound envelope (no separate `meta` wrapper), `.compact` dropping the key entirely when
-there's no active span to capture. Inbound (`POST /tables/:table_id/events`), a sender may set
-`traceparent` on the body too, but nothing requires it — the HTTP header alone is already enough
-to continue the trace into the Spine (Rack instrumentation extracts it automatically), and the
-persisted `Event` row keeps neither copy: an event minted before anyone is watching its table's
-SSE stream still has no way to link back to the trace that created it (`services/spine/CLAUDE.md`),
-unchanged.
+envelope with no `traceparent` key — traces expire (~60d), and durable causality uses event ids.
+Two outbound paths attach a transient live value. `Table#broadcast` captures the appending
+request's context via `OpenTelemetry.propagation.inject`, merges it onto the SSE envelope, and
+drops the key when unavailable. `TabletopNotifier` does the same immediately before serializing
+its post-commit `seat.joined` copy; Net::HTTP then creates its client span and automatically injects
+the request header. Body and header share a trace id but may correctly carry different span ids.
+Inbound (`POST /tables/:table_id/events`), a sender may set body `traceparent`, but nothing requires
+it; Rack's extracted header is already enough to continue the trace. The persisted row keeps
+neither copy, so an event minted before an SSE subscriber exists still cannot link back later.
 
 **Outbound SSE now has a real consumer, not just a link-builder.** The Spine's admin
 show page (`views/admin/tables/show.html.erb`) parses each live SSE message's
@@ -274,13 +271,14 @@ only building a clickable trace URL from it. This is the fleet's first browser-s
 construct a URL. See "The Spine's browser bootstrap and trace
 continuation" below for the full shape and its consequence for trace duration.
 
-**Two live body-embedded mint sites**, both format identically
+**Three live body-embedded mint sites**, all format identically
 (`00-{traceId}-{spanId}-{flags}`):
 
 | Where | Behavior with no active span |
 | --- | --- |
 | `apps/tabletop/src/client/observability/index.ts` `currentTraceparent` | Returns `undefined` — used only for websocket-URL propagation, never a durable field, so "no span, no value" is correct there. |
 | `apps/shuffler/src/port-tabletop/traceparent.ts` `currentTraceparent` | Synthesizes a well-formed random traceparent when no active span exists, and sets `traceparent.synthesized: true` on the active span when that fallback fires — so a real occurrence in production is visible rather than a silent trace-shaped string that links nowhere. Correct for the Tabletop-facing `card.played`/`seat.joined` envelope. `HttpSpineGateway.sendEvent` also builds its envelope via this helper (shared `buildCardPlayedEvent`), and now that `envelope.v1.json` accepts `traceparent` as an optional field, it **posts the full envelope as-is** — no more stripping it before serializing. The HTTP header still carries trace context too (undici, automatic) — redundant with the body field for this particular single-event POST, but the body copy is what lets trace context reach the outbound SSE stream, and any future batched send. |
+| `services/spine/lib/tabletop_notifier.rb` `send_joined` | Calls `OpenTelemetry.propagation.inject` immediately before JSON serialization and adds the value only when available; it never synthesizes or persists one. The approved Net::HTTP instrumentation independently injects the HTTP header automatically. The post-commit send has one-second open/read/write timeouts and is best-effort: all outcomes are recorded in bounded `tabletop.send.result`, and failures do not fail `/join`. |
 
 ### The Shuffler's browser bootstrap (one shell, `html-layout.ts`)
 

@@ -1,10 +1,13 @@
 ENV["RACK_ENV"] ||= "test"
 ENV["SPINE_DB_PATH"] ||= ":memory:"
+ENV.delete("TABLETOP_URL")
+ENV["TABLETOP_PUBLIC_URL"] = "http://table.example"
 
 require "minitest/autorun"
 require "rack/test"
 
 require_relative "../app"
+require_relative "support/fake_tabletop_server"
 
 module ClearsTablesBetweenTests
   def before_setup
@@ -35,5 +38,30 @@ module ValidEnvelope
   end
 end
 
+module JoinRequests
+  def valid_join(overrides = {})
+    {
+      "gameId" => SecureRandom.uuid,
+      "name" => "kitchen table #{SecureRandom.uuid}",
+      "playerName" => "Jess",
+      "deckName" => "Test Deck"
+    }.merge(overrides)
+  end
+
+  def post_join(overrides = {}, path: "/join", **keyword_overrides)
+    body = overrides.merge(keyword_overrides.transform_keys(&:to_s))
+    post path, JSON.generate(valid_join(body)), "CONTENT_TYPE" => "application/json"
+  end
+
+  def with_env(values)
+    previous = values.to_h { |key, _value| [key, ENV[key]] }
+    values.each { |key, value| value.nil? ? ENV.delete(key) : ENV[key] = value }
+    yield
+  ensure
+    previous.each { |key, value| value.nil? ? ENV.delete(key) : ENV[key] = value }
+  end
+end
+
 Minitest::Test.include(ClearsTablesBetweenTests)
 Minitest::Test.include(ValidEnvelope)
+Minitest::Test.include(JoinRequests)

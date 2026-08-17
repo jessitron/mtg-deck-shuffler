@@ -79,12 +79,22 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 | `src/port-card-repository/hydration.ts:80-123` | Hydrates/dehydrates `currentFace` (and `cardInstanceId`) between GameCard and PersistedGameCard |
 | `src/port-tabletop/types.ts` | `buildCardPlayedEvent` — the ONE place a GameCard becomes a card.played payload; sends `face: currentFace` (which face is up on arrival) + `frontImageUrl: string` + `backImageUrl: string \| null` (derived from `card.twoFaced`, landed ticket 12, 2026-08-08) + `owner: string` + `isCommander: boolean` (table-layout ticket 18, 2026-08-09) + `gameCardIndex: number` (required TS field, populated from `gameCard.gameCardIndex`, `let-gamecardindex-out`, 2026-08-10). Since cards-come-and-go ticket 05 (2026-08-09) all of these are real, validated properties on `contracts/payloads/card.played.v1.json`, not off-schema scaffolding |
 | `contracts/payloads/card.played.v1.json` | Payload schema, amended in place at ticket 05 (2026-08-09): dropped the unused `seat: integer` field; `frontImageUrl`/`backImageUrl`/`cardName` are now `required` schema properties (`backImageUrl` typed `["string","null"]`, required, never omitted), alongside `owner`/`isCommander` (ticket 18). **`let-gamecardindex-out` (2026-08-10)** added optional top-level `gameCardIndex: integer` (a sibling of `card`, not nested in it) |
-| `contracts/payloads/seat.joined.v1.json` | Payload schema, amended in place at ticket 05 (2026-08-09): dropped `seatId`/`playerName` (redundant with `envelope.initiator`); the ticket-18 `commanders` item schema gained `cardName`/`frontImageUrl`/`backImageUrl` (was `card`-only — a real gap, since `buildSeatJoinedCommander` always sends all four and `additionalProperties: false` would have rejected them once ajv validation went live). **`let-gamecardindex-out` (2026-08-10)** added the same optional top-level `gameCardIndex: integer` for schema symmetry with `card.played` — nothing populates it |
+| `contracts/payloads/seat.joined.v1.json` | Payload schema: each commander requires `card`/`cardName`/`frontImageUrl`/`backImageUrl`; `backImageUrl` is present as string or null and commanders remain faceless. Ticket 02's Spine join added optional URI `gameUrl`. **`let-gamecardindex-out` (2026-08-10)** added optional top-level `gameCardIndex: integer` for symmetry with `card.played` — nothing populates it |
 | `apps/tabletop/src/server/contractValidation.ts` | New at ticket 05 (2026-08-09): `validateIncomingEvent()` — loads `contracts/envelope.v1.json` and every known `payloads/*.v*.json` at module load, compiles them with `Ajv2020`+`ajv-formats`, and validates a whole posted request body (envelope + nested payload) in one call. Replaces the hand-rolled JES-128 `if`-chain `validationError` that used to live in `cardArrival.ts`/`seatJoined.ts` |
 | `src/port-tabletop/types.ts:~124` | `cardBackImageUrl()` — the standard Magic card back as an absolute URL, sent on `seat.joined`; also consumed by the Tabletop's library furniture image. Per table-layout ticket 11 (decided 2026-08-08, not built): becomes optional when a seat has a `sleeveColor`; its "until sleeve selection exists" comment should point at that ticket when implemented |
 | `src/port-tabletop/types.ts` | `SeatJoinedCommander` + `buildSeatJoinedCommander()` — maps a commander `GameCard` to the `seat.joined` commander entry (`card`+`cardName`+`frontImageUrl`+`backImageUrl`, no `face`); `buildSeatJoinedEvent` gained an optional `commanders?: readonly GameCard[]` param (table-layout ticket 18, 2026-08-09) |
 | `src/port-tabletop/sendToTable.ts` | `sendCardToTableFirst` (send-then-commit) + `zoneHintForPlay` (reads `cardTypes` for land vs nonland) |
 | `src/port-tabletop/HttpTabletopGateway.ts`, `FakeTabletopGateway.ts` | Real/fake gateways behind `TabletopPort` |
+
+## Spine Rich Join (repo-root paths)
+
+| File | Role |
+|---|---|
+| `services/spine/app.rb` | `POST /join` extracts the submitted decoration and maps contract violations to 422 before delivery |
+| `services/spine/models/table.rb` | Validates draft `seat.taken`/`seat.joined` envelopes before writes, persists decoration unchanged, and returns the original persisted join on `gameId` replay |
+| `services/spine/models/event.rb` | Reconstructs the persisted envelope, including canonical `{seatId, playerName}` initiator, without rebuilding payload fields |
+| `services/spine/lib/tabletop_notifier.rb` | Forwards the persisted `seat.joined` after commit; adapts only `tableId` and transient trace context |
+| `services/spine/views/admin/tables/show.html.erb` | Displays the persisted event payload in the admin log |
 
 ## Tests
 
@@ -109,6 +119,8 @@ _All paths below are relative to `apps/shuffler/` — e.g. `src/app.ts` is `apps
 | `apps/tabletop/src/client/shapes/cardTap.ts` | New (ticket 17): `tapPartial` pulled out of `MtgCardShapeUtil.onClick` so the context menu's Tap item can share the same rotation math. Not this owner's territory (card mechanics), but the extraction happened alongside the flip/faceDown work |
 | `apps/tabletop/test/cardArrival.test.ts` | Gained ticket-17 cases: `cardBackImageUrl` baked from a sleeved seat → `null`, from an unsleeved seat with a URL → populated, from a seat with no data → `null` default |
 | `apps/tabletop/test/verification/verify-flip-face-down.spec.ts` | New (ticket 17): two-client sync of flip AND face-down toggle; "Flip" menu-item gating on `backImageUrl`; unsleeved face-down render shows the table's card back and restores the front image on toggle-back; library-entry resets both axes; a stale-selection regression guard (flipping card A via the menu must not hijack a later drag of card B) |
+| `services/spine/test/integration/join_test.rb` | Rich join preservation: order and unknown nested extensions, string/null `backImageUrl`, no synthesized `face`, omitted vs empty commanders, 422 before side effects, and replay of the original payload |
+| `services/spine/test/integration/admin_screen_test.rb` | Parses the admin row and proves the full persisted `seat.joined` payload is displayed |
 
 ## Fleet-Wide Domain Docs (repo root, not `apps/shuffler/`)
 

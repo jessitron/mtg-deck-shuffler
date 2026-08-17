@@ -1,5 +1,6 @@
 require "roda"
 require "json"
+require "cgi"
 
 require_relative "config/telemetry"
 require_relative "config/db"
@@ -8,6 +9,7 @@ require_relative "models/seat"
 require_relative "models/event"
 require_relative "lib/sse_stream"
 require_relative "lib/admin_view"
+require_relative "lib/tabletop_notifier"
 
 module Spine
   class App < Roda
@@ -109,20 +111,37 @@ module Spine
         body = JSON.parse(r.body.read)
         raise KeyError, "body must be a JSON object" unless body.is_a?(Hash)
 
+        game_id = required_string(body, "gameId")
         name = required_string(body, "name")
         player_name = required_string(body, "playerName")
+        required_string(body, "deckName")
+        decoration = body.reject { |key, _value| %w[gameId name playerName].include?(key) }
         current_span.add_attributes("table.name" => name, "player.name" => player_name)
 
-        outcome = join_table(name: name, player_name: player_name)
+        outcome = join_table(name: name, game_id: game_id,
+          player_name: player_name, decoration: decoration)
+        TabletopNotifier.new(span: current_span).send_joined(
+          event: outcome[:joined_event],
+          table_name: outcome[:table_name],
+          replayed: outcome[:replayed]
+        )
         current_span.add_attributes(
-          "join.result" => (outcome[:created] ? "created" : "joined"),
+          "join.result" => join_result(outcome),
           "seat.number" => outcome[:seat_number]
         )
-        JSON.generate(tableId: outcome[:table_id], seatNumber: outcome[:seat_number])
+        JSON.generate(
+          tableId: outcome[:table_id],
+          seatNumber: outcome[:seat_number],
+          tableUrl: table_url(outcome[:table_name])
+        )
       rescue JSON::ParserError, KeyError => e
         mark_span_failed("join.result", "invalid_input", e)
         response.status = 400
-        JSON.generate(error: "name and playerName are required")
+        JSON.generate(error: "gameId, name, playerName, and deckName are required")
+      rescue EventContract::Violation => e
+        mark_span_failed("join.result", "contract_violation", e)
+        response.status = 422
+        JSON.generate(error: e.message)
       rescue Table::SeatOccupied, Table::TableFull => e
         mark_span_failed("join.result", e.is_a?(Table::SeatOccupied) ? "seat_occupied" : "table_full", e)
         response.status = 409
@@ -130,10 +149,12 @@ module Spine
       end
     end
 
-    def join_table(name:, player_name:)
-      Table.join!(name: name, player_name: player_name)
+    def join_table(name:, game_id:, player_name:, decoration:)
+      Table.join!(name: name, game_id: game_id,
+        player_name: player_name, decoration: decoration)
     rescue Table::NameTaken
-      Table.join!(name: name, player_name: player_name)
+      Table.join!(name: name, game_id: game_id,
+        player_name: player_name, decoration: decoration)
     end
 
     def current_span
@@ -162,9 +183,23 @@ module Spine
 
     def required_string(hash, key)
       value = hash.fetch(key)
-      raise KeyError, "#{key} must be a non-blank string" unless value.is_a?(String) && !value.empty?
+      unless value.is_a?(String) && !value.strip.empty?
+        raise KeyError, "#{key} must be a non-blank string"
+      end
 
       value
+    end
+
+    def join_result(outcome)
+      return "replayed" if outcome[:replayed]
+
+      outcome[:created] ? "created" : "joined"
+    end
+
+    def table_url(table_name)
+      base = ENV.fetch("TABLETOP_PUBLIC_URL", "http://localhost:5180").sub(%r{/+\z}, "")
+      encoded_name = CGI.escapeURIComponent(table_name)
+      "#{base}/t/#{encoded_name}"
     end
   end
 end

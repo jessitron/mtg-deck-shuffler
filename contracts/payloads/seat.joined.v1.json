@@ -35,6 +35,11 @@
       "pattern": "^#[0-9a-fA-F]{6}$",
       "description": "The seat's resolved secondary identity color (hex), contrasting with primaryColor. Optional and additive — an older Shuffler build may send sleeveColor alone."
     },
+    "gameUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Absolute URL back to the game that administered this seat."
+    },
     "commanders": {
       "type": "array",
       "minItems": 0,

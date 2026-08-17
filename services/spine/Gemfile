@@ -21,3 +21,5 @@ group :test do
   gem "rack-test"
   gem "rake"
 end
+
+gem "opentelemetry-instrumentation-net_http", "~> 0.29.0"

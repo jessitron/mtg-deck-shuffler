@@ -7,8 +7,8 @@ class EventsTest < Minitest::Test
     Spine::App
   end
 
-  def join(name:, player_name:)
-    post "/join", JSON.generate(name: name, playerName: player_name), "CONTENT_TYPE" => "application/json"
+  def join(name:, player_name:, game_id: SecureRandom.uuid, deck_name: "Test Deck")
+    post_join("gameId" => game_id, "name" => name, "playerName" => player_name, "deckName" => deck_name)
     JSON.parse(last_response.body)
   end
 
@@ -27,7 +27,7 @@ class EventsTest < Minitest::Test
 
     assert_equal 201, last_response.status
     body = JSON.parse(last_response.body)
-    assert_equal 3, body["seq"] # table.created (1), seat.taken (2), then this event
+    assert_equal 4, body["seq"] # table.created, seat.taken, seat.joined, then this event
     refute_nil body["acceptedAt"]
   end
 
