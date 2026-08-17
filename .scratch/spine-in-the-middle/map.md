@@ -82,11 +82,10 @@ than living in two places.
 
 ## Not yet specified
 
-- **The Tabletop's Spine SSE subscriber.** Killing the direct `card.played`
-  POST (one atomic swap, decided 2026-08-11 — no side-by-side transition period) needs
-  something on the Tabletop that doesn't exist yet: a live subscriber to the Spine's
-  per-table SSE stream, dispatching received events into the same handling
-  `cardArrival.ts` does today. Design not started.
+- ~~**The Tabletop's Spine SSE subscriber.**~~ Specced:
+  `.scratch/tabletop-spine-sse-subscriber/spec.md` (2026-08-16, `ready-for-agent`) — one
+  subscription per room, opened on the first `seat.joined`'s `tableId`, replacing the
+  direct `card.played` POST in the same atomic swap. Ready for `/to-tickets`.
 - **The Shuffler's own Spine SSE subscriber**, symmetric to the above — the card-return
   channel (library portal drag) is in scope for rerouting through the Spine (decided
   2026-08-11), which means the Shuffler needs the same kind of subscriber the Tabletop
