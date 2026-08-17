@@ -46,6 +46,8 @@ ticket, no ceremony. Only genuinely multi-session features (dependency-ordered w
 survives across computers) earn `/to-spec` + `/to-tickets`. When in doubt, skip the
 tracker; if the work turns out bigger than a sitting, promote it then.
 
+Watch out! /to-spec, /to-tickets, and /triage are disable-agent-invocation, so you MUST ask the user to invoke them.
+
 **There is no external tracker.** `SEAMAP.md`, `TODO.md` and `.scratch/` are the whole system —
 a file round-trip beats an API call, and git carries the state between Jess's computers. If a
 `JES-NNN` id turns up in an old comment, it's dated provenance for finished work, not a handle
