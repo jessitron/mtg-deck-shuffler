@@ -5,6 +5,7 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 ## Depends On
 
 ### Scryfall (image URLs + image API)
+
 - Image URLs are **stored** on the card (`imageUris`/`backImageUris`), fetched from Scryfall at ingestion via `src/port-card-images/` (`ScryfallCardImagesGateway` → `POST /cards/collection`). `getCardImageUrl(card, format, face)` prefers the stored URL; `constructCardImageUrl(scryfallId, format, face)` is the fallback.
 - Both faces still share the same `scryfallId`. At render the back is read from `card.backImageUris`; at ingestion it comes from `card_faces[1].image_uris`. When stored URLs are absent (legacy data, Scryfall miss), the back falls back to the constructed `face=back` path — so the old "same id, swap the path segment" behavior still exists as the fallback.
 - **Why stored:** bare constructed `normal` URLs 404 for freshly-released cards; Scryfall only serves them at the versioned URL (`...jpg?<timestamp>`).
@@ -12,111 +13,92 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - If Scryfall's path scheme changes, the stored URLs still work (verbatim from Scryfall); only the fallback `constructCardImageUrl()` in `src/types.ts` would need updating.
 
 ### Card Repository
+
 - `SqliteCardRepositoryAdapter` stores `card_types` as JSON text column (no `back_face`/`mana_cost`/`cmc`/`oracle_text`)
 - The cards table is a gitignored cache; on startup an old-schema table (lacking `card_types`) is DROPped and recreated
 - Hydration/dehydration in `src/port-card-repository/hydration.ts` preserves `currentFace`
 
 ### Deck Adapters
+
 - **Both adapters share `src/port-deck-retrieval/twoFacedLayouts.ts`** (`isDoubleSidedLayout()` / `DOUBLE_SIDED_LAYOUTS`) — the single source of truth for what's flippable
 - Archidekt adapter: `twoFaced = faces.length === 2 && isDoubleSidedLayout(layout)`. `cardTypes` = union of all faces' types. Single-image layouts (`prepare`, `adventure`, `split`, `aftermath`, `flip`) are NOT two-faced but still contribute all their parts' types to `cardTypes`.
 - MTGJSON adapter: `twoFaced = isDoubleSidedLayout(layout)`; `cardTypes` = union of the card's types + all `otherFaceIds` faces' types (any layout)
 - MTGJSON requires AllIdentifiers data to resolve other faces by UUID (for `cardTypes` and the double-sided guard)
 
 ### Modal System
+
 - Card modal (`views/partials/card-modal.ejs`) receives `currentFace` and renders the flip button conditionally
 - Game flip uses `POST /flip-card-modal/` replacing `#card-modal-container`
 - Prep flip uses `GET /prep-card-modal/` with `?face=` query parameter
 
 ### Prep vs Game Id Spaces
+
 - `prepId` (`game_preps`) and `gameId` (`game_states`) are **independent** auto-increment sequences — the same number can name both a prep and an unrelated game
 - `validateStateVersion` treats a missing `expected-version` as valid, so a stray game-route call is not caught by the optimistic lock
 - Therefore prep surfaces must call prep routes. `FlipRequest` (`{page:"game"|"prep"}`) makes the asking page explicit rather than letting a prepId masquerade as a gameId
 
 ### Optimistic Locking
+
 - Both flip routes use `requireValidVersion` middleware
 - Flip changes state version (via persist), so stale clients get version errors
 
 ## Depended On By
 
 ### Library Search (tight coupling)
+
 - Type grouping reads `gc.card.cardTypes` directly at `src/app.ts` (game library modal ~lines 523-528 and prep library modal ~lines 825-830) — no per-request merge, since `cardTypes` is pre-unioned at ingestion
 - If `cardTypes` stops being the full union (e.g. an adapter only stores the front type), grouping silently loses groups
 - Multi-face cards show in multiple type groups (e.g., Creature and Planeswalker)
 
 ### Card Display (every card rendering path)
+
 - `formatCardContainer()` branches on `card.twoFaced` to decide between simple `<img>` and `formatFlippingContainer()`
 - Any new card display context must handle the two-faced branch
 - The flip container has nested divs that affect CSS selectors — animations targeting `.mtg-card-image` need to reach inside `.flip-container-inner`
 
 ### Commander Display
+
 - `formatCommandZoneHtmlFragment()` calls `formatCardContainer()` which handles two-faced commanders
 - Commander cards can be two-faced (e.g., Nicol Bolas, the Ravager)
 
 ### Card Modal Navigation
+
 - Modal flip preserves `navList` for group-scoped navigation
 - Game: `navList` passed in POST body, threaded through to new flip button's `hx-vals`
 - Prep: `navList` passed as query parameter in flip button's `hx-get` URL
 - If navigation changes, both flip routes need updating
 
 ### Game State Persistence
+
 - `PersistedGameCard` includes `currentFace`
 - `GameState.flipCard()` mutates `currentFace` on the GameCard
 - State migration (v3→v4) defaults `currentFace` to `"front"` for legacy data
 
 ### Copy-to-Clipboard
+
 - Card copy uses the current face's image URL
 - The `copyCardImageToClipboard()` call in the modal receives the face-specific image URL
 - The `/proxy-image` route (CORS proxy for copy) now **looks up the card** from `cardRepository` to use its stored URL, falling back to `constructCardImageUrl(cardId, "png", face)` when the card isn't cached
 - `/proxy-image` fetches from Scryfall via `fetchScryfall()` — see the Scryfall section above. Covered end-to-end (both faces, live CDN) by `test/verification/verify-proxy-image.sh`
 
 ### Being-Played Animation
+
 - CSS animation for cards being played must target images inside the flip container's nested structure
-- Fix at `e904a8c` addressed this — regression risk if card container structure changes
 
 ### Test Infrastructure
+
 - Test generators (`test/generators.ts`) generate `cardTypes` and a `twoFaced` boolean (no `CardFace`/`backFace`)
 - `nicolBolas` fixture in generators is a ready-made two-faced card for tests
 
 ### The Tabletop port (card.played sender, JES-127)
-- `src/port-tabletop/types.ts` `buildCardPlayedEvent` is the ONE door where a GameCard is serialized for the table. Any new face semantics (a third face? partner backs?) must go through here and the contract (`contracts/payloads/card.played.v1.json` — schemaVersion bump, new file; the old zero-consumer in-place-edit exception has ended — see [contract.md](contract.md)).
-- **`seat.joined`'s sender site moved, unchanged in logic — spine-in-the-middle ticket 03
-  (2026-08-16).** `SeatJoinedCommander`/`buildSeatJoinedCommander()` and `SeatJoinedPayload`
-  moved from `src/port-tabletop/types.ts` to **`src/port-spine/types.ts`**: same
-  `card.scryfallId`/`instanceId`, `cardName`, `frontImageUrl`, and
-  `backImageUrl`-derived-via-`getCardImageUrl`-and-`twoFaced` mapping this owner has tracked
-  since table-layout ticket 18 — nothing about *what* a commander entry carries changed.
-  `SeatJoinedPayload` gained an optional `gameUrl` field (unrelated to face), and its builder
-  was **renamed** `buildSeatJoinedEvent` → `buildSeatJoinedPayload` — it no longer constructs
-  an `EventEnvelope`. Instead the Spine's `/join` endpoint now mints the `seat.joined`
-  envelope server-side from a flat decoration payload the Shuffler POSTs (identity +
-  `buildSeatJoinedPayload`'s output, as `SpineJoinRequest`). Reason: the Shuffler no longer
-  talks to the Tabletop directly to join a seat — the Spine administers the whole act (creates
-  the table, assigns a seat, mints `seat.taken`+`seat.joined`, notifies the Tabletop itself).
-  See `apps/shuffler/CLAUDE.md`'s "Table Mode" section for the full join-flow account.
-- **`TabletopPort` lost `sendSeatJoined` — same ticket.** `TabletopPort` (still in
-  `src/port-tabletop/types.ts`) now declares only `sendCardToTable`.
-  `HttpTabletopGateway.sendSeatJoined`, `FakeTabletopGateway.sendSeatJoined`,
-  `SeatJoinedEvent`, and `SEAT_JOINED_EVENT_NAME` were all deleted — `card.played`'s own
-  sender path (`buildCardPlayedEvent`, `HttpTabletopGateway.sendCardToTable`) is untouched.
-  Commander-building test coverage moved from `test/port-tabletop/gateways.test.ts`'s
-  `"buildSeatJoinedEvent commanders"` block into `test/port-spine/sendToSpine.test.ts`
-  (asserts on `fake.joinRequests[0].commanders` via `FakeSpineGateway`, since the request now
-  goes to the Spine's `/join` instead of straight to the Tabletop) — same assertions
-  (0/2 commanders, `backImageUrl` null vs populated by `twoFaced`), different destination.
-  If a future field is added to a commander entry's scaffolding, its test case belongs in
-  `sendToSpine.test.ts` now, not `gateways.test.ts`.
-- **Landed (2026-08-08, ticket 12)**: `imageUrl` is gone, **replaced** by `frontImageUrl: string` (always `getCardImageUrl(card, "normal", "front")`) and `backImageUrl: string | null` (`getCardImageUrl(card, "normal", "back")` when `card.twoFaced`, else `null` — computed from `twoFaced`, never from whether `card.backImageUris` happens to be populated, per the watch point in [tabletop.md](tabletop.md#watch-points)). `face: gameCard.currentFace` is unchanged but now documented as "which face is up on arrival," not "which face I baked in." At the time this was zero contract churn (those fields were scaffolding, not contract) — **superseded 2026-08-09, ticket 05**: `frontImageUrl`/`backImageUrl`/`cardName` are now real, `required` properties on `card.played.v1.json` (promoted in place; `card.played.v1.json` also lost an unused `seat: integer` field, redundant with `envelope.initiator.seatId`). The field-by-field comment block above `CardPlayedEvent` and the interface itself were updated together. **Also landed same day, table-layout ticket 18**: `owner: string` (seatId) and `isCommander: boolean` joined the same payload, `required`, edited in place — no v2. The matching edit is the hand-rolled `validationError` in `apps/tabletop/src/server/cardArrival.ts` (which briefly required `frontImageUrl`/`backImageUrl`/`owner`/`isCommander` all at once) — **ticket 05 then replaced that hand-rolled check entirely** with real ajv validation against the schema (`apps/tabletop/src/server/contractValidation.ts`). `test/port-tabletop/cardPlayedEvent.test.ts` asserts the new shape, including a case with `backImageUris` unset on a `twoFaced` card to prove the derivation is from `twoFaced`, not from stored-URI presence.
-- **On the Tabletop side, the payload now lands directly in shape `props`** — no baking, no unbaking. `handleCardArrival` (`cardArrival.ts`) destructures the validated envelope's payload and writes `frontImageUrl`/`backImageUrl`/`face`/`owner`/`isCommander` straight into the `mtg-card` shape's `props` via the shared `mtgCardShape()` builder (`tableFurniture.ts`, table-layout ticket 18 — also used by `seatJoined.ts` for commanders) (see [tabletop.md](tabletop.md)). **Flip and turn-face-down are built** (physics ticket 17, 2026-08-09, `eb24a4f`): `apps/tabletop/src/client/CardContextMenu.tsx` writes `props.face` and `props.faceDown` from a right-click context menu — the first Tabletop code to write either field.
-- **Contract validation is now real, not hand-rolled (ticket 05, 2026-08-09)**: both `cardArrival.ts` and `seatJoined.ts` validate the whole posted envelope+payload via ajv (`apps/tabletop/src/server/contractValidation.ts`), loading schemas straight from `contracts/`. `seat.joined.v1.json` also dropped `seatId`/`playerName` (redundant with `envelope.initiator`) in the same pass. **Ticket 18's `commanders` array had shipped the same day carrying `cardName`/`frontImageUrl`/`backImageUrl` off-schema** (its item schema only declared `card`) — merging the two branches surfaced that `additionalProperties: false` would reject those fields the moment ajv validation went live, so it was fixed as part of the merge: the commander item schema now requires `card`/`cardName`/`frontImageUrl`/`backImageUrl`, matching `buildSeatJoinedCommander` exactly. No asymmetry with `card.played` remains. See [contract.md](contract.md)'s ticket-05 section.
-- **The Spine's administered `/join` is now a durable `seat.joined` boundary (ticket 02, 2026-08-16).** It validates the submitted decoration against `seat.joined.v1` before any write, persists the same nested payload, displays it in the admin log, and forwards the persisted event to the Tabletop. It does not reconstruct commanders or synthesize `face`. Tests compare the payload across request, SQLite, `Event#as_envelope`, admin HTML, and outbound JSON, covering commander order, unknown extension fields, string/null `backImageUrl`, and omitted `commanders` versus `[]`. A replay by `gameId` resends the original persisted payload rather than accepting conflicting decoration.
-- Discard keeps `currentFace` (a flipped card is discarded as the face it was); mulligan resets it. If you add zone-moving operations, decide face-reset explicitly.
-- **SETTLED (2026-08-08): the Shuffler is authoritative for `currentFace`; flip-on-table is table-local.** Decided in two halves. Physics ticket 06 (`575416b`): Jess accepted the divergence knowingly — a table-flipped card later discarded shows the pre-flip face on the Shuffler's screen and in copy-to-clipboard; "table becomes authoritative" would have required the Shuffler's first-ever inbound event listener. Cards-come-and-go ticket 02 (`7b7f868`) confirmed it on the wire: **`card.returned.v1` carries no `face` and no `faceDown`** (Jess: "cards removed from play no longer have a face up") — the table resets both axes locally on exit (ticket 06's rule), the Shuffler applies its own face rules on arrival, and the wire says nothing. Don't add a face field to return/removal events, and don't build a table→Shuffler face-sync channel.
+
+- `src/port-tabletop/types.ts` `buildCardPlayedEvent` is the ONE door where a GameCard is serialized for the table.
 
 ## Watch Points
 
 These are specific things that could break two-faced cards if changed elsewhere:
 
-1. **CardDefinition changes**: `CardDefinition` is intentionally minimal — identity fields, `twoFaced`, `cardTypes`, plus the optional `imageUris`/`backImageUris` (Scryfall image URLs). Don't re-add per-face card *text* (`manaCost`/`oracleText`/`cmc`/`backFace`); the card image is the source of truth and a future "is this hand worth keeping?" feature should read canonical data from MTGJSON/Scryfall. Image URLs are the deliberate exception — they're read on every render and *are* the image. If you add a field, both adapters and the SQLite cache schema must populate it. **An optional field with a graceful fallback (like `imageUris`) does NOT require a version bump** — see watch point #9 and the "optional fields" exception in `DESIGN-persistence-versioning.md`.
+1. **CardDefinition changes**: `CardDefinition` is intentionally minimal — identity fields, `twoFaced`, `cardTypes`, plus the optional `imageUris`/`backImageUris` (Scryfall image URLs). Don't re-add per-face card _text_ (`manaCost`/`oracleText`/`cmc`/`backFace`); the card image is the source of truth and a future "is this hand worth keeping?" feature should read canonical data from MTGJSON/Scryfall. Image URLs are the deliberate exception — they're read on every render and _are_ the image. If you add a field, both adapters and the SQLite cache schema must populate it. **An optional field with a graceful fallback (like `imageUris`) does NOT require a version bump** — see watch point #9 and the "optional fields" exception in `DESIGN-persistence-versioning.md`.
 
 2. **New card display contexts**: Any new place that renders a card image must handle `twoFaced === true`. Use `formatCardContainer()` rather than building card HTML directly.
 
@@ -147,7 +129,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
 11. **Stale cached deck files**: `twoFaced`/`cardTypes` are baked into `decks/*.json` at download time. Changing adapter logic does NOT retroactively fix already-downloaded decks — they keep their old values until re-downloaded (`npm run deck:download -- <id>` for Archidekt, `npm run precons:fetch-mtgjson -- --convert` for MTGJSON). The deck-file format is version-gated (`PERSISTED_DECK_VERSION`, currently 3); `LocalFileAdapter` rejects mismatched files, so a format change means regenerating all decks.
 
 12. **Don't collapse `face` and face-down into one bit** (decided 2026-08-07). `face`
-    (`front`|`back`) is *which printed side*; face-down is *concealment*, and a two-faced
+    (`front`|`back`) is _which printed side_; face-down is _concealment_, and a two-faced
     card can be played face down — so both axes are reachable in normal play. A one-bit
     "which side is up" model was proposed and **rejected**; don't re-derive it. Corollary
     that catches people: `face: "back"` is **unreachable on a one-faced card** — a
@@ -186,15 +168,15 @@ These are specific things that could break two-faced cards if changed elsewhere:
 15. **Concealment is depicted, never enforced — and no gesture may be gated on control.**
     The leak question this owner raised (a face-down card's identity is readable by every
     client through synced tldraw props) was resolved by **not guarding it**, on Jess's
-    principle in `notes/DESIGN-the-table-vision.md` § Principles: *"everything that can be
-    done by one player is doable by any player."* The Tabletop has **no ownership or
+    principle in `notes/DESIGN-the-table-vision.md` § Principles: _"everything that can be
+    done by one player is doable by any player."_ The Tabletop has **no ownership or
     permission model**. Two standing consequences: identity stays in `props` on a face-down
     card, and **never gate a flip / turn-over / peek on who controls the card** — that
     design space is closed, not unexplored. Related: the old "`gameCardIndex` never leaves
     the Shuffler" rule **was reversed and is now built** (buoy `let-gamecardindex-out`,
     landed 2026-08-10 — see watch point 21) — don't cite the old rule as binding. What
     survives is that payloads should say what happened and no more (SEAMAP's "hand counts
-    but never hands"), which is a constraint on payload *design*, not a check on every
+    but never hands"), which is a constraint on payload _design_, not a check on every
     boundary. Full reasoning in [contract.md](contract.md) and [tabletop.md](tabletop.md).
 
 16. **Face state in the card modal is now strongly observable — resolved 2026-08-07.**
@@ -223,17 +205,17 @@ These are specific things that could break two-faced cards if changed elsewhere:
       `await expect(cardModal).toHaveAttribute('data-current-face', 'back', { timeout: 3000 })`
       after the click, in both the game and prep flow, so a swallowed click now fails the test
       instead of passing silently.
-16. **tldraw shape-selection/drag mechanics moved to its own owner** (2026-08-07). The
+17. **tldraw shape-selection/drag mechanics moved to its own owner** (2026-08-07). The
     `onClick`-defers-selection quirk found while fixing `959831c` (drag picking up the
     wrong card) is pure tldraw `SelectTool` mechanics, not a card-face concern — it and its
     watch points now live in `owners/tabletop-shape-mechanics/`. Consult that owner, not
     this one, for anything touching click/drag/selection behavior on `MtgCardImageShapeUtil`
     or its successors (including ticket 02's `mtg-card` rewrite).
 
-17. **Sleeve color is a separate prop, never smuggled into `backImageUrl` — decided
+18. **Sleeve color is a separate prop, never smuggled into `backImageUrl` — decided
     ticket 11, BUILT ticket 17 (table-layout, 2026-08-08, `0a768e6` + `bfdc877`).**
     `sleeveColor` (optional hex) travels as its own field on `seat.joined` player data
-    (not a data: URI, not a Shuffler-served image — it's *player identity* and counters
+    (not a data: URI, not a Shuffler-served image — it's _player identity_ and counters
     need the raw hex); the Shuffler's `SeatJoinedEvent`/`buildSeatJoinedEvent` carry it,
     sourced from the prep. `cardBackImageUrl` is **omitted when a sleeve is defined** —
     enforced on both ships (`buildSeatJoinedEvent` on the Shuffler, `tableFurniture.ts`
@@ -257,7 +239,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
     **No `card.played` rev** — held. Jess's stated future (not v1): a sleeve may someday
     carry an image URL and two colors (front border vs back).
 
-18. **`face` rides only events that show a card; removal events are faceless — decided,
+19. **`face` rides only events that show a card; removal events are faceless — decided,
     not built (cards-come-and-go ticket 02, 2026-08-08).** The event vocabulary sorts
     card events into face-carrying and faceless by one question: does this event reveal
     or choose a face? `card.played` and the new `card.discarded.v1` carry `face` (a
@@ -274,7 +256,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
     `cardPlayedEvent.test.ts`. They are on-schema and required for every commander;
     `backImageUrl` itself must be present and may be either a string or `null`.
 
-19. **The library-entry face/faceDown reset only covers "library" — there is no "hand"
+20. **The library-entry face/faceDown reset only covers "library" — there is no "hand"
     zone to also cover** (physics ticket 17, 2026-08-09). Ticket 06 phrased the reset
     as "a card returning to hand or library" resets both axes; `MtgCardShapeUtil`'s
     `NON_BATTLEFIELD_ZONES` set (and the wider zone model) has no `hand` zone anywhere
@@ -282,7 +264,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
     `ff5d58a` — honestly says "library" only. If a `hand` zone is ever added, this reset
     needs to cover it too; don't assume it already does because the ticket's prose once
     said "hand or library."
-20a. **`CONTEXT-MAP.md` now exists at the repo root (2026-08-10) and carries the
+    20a. **`CONTEXT-MAP.md` now exists at the repo root (2026-08-10) and carries the
     fleet-wide "Flip / Face-down" translation, sourced from tabletop.md.** `notes/GLOSSARY.md`
     gained an authoritative "Face-down" entry (the two-axis model, corrected during review —
     see below) that other docs, including this KB's own README/interactions/tabletop.md
@@ -290,21 +272,19 @@ These are specific things that could break two-faced cards if changed elsewhere:
     of the ship-comparison table stays as this owner's own source-of-record detail (deliberately
     not deduplicated). **No code changed** — this is domain/glossary work for the
     `face-down-is-a-real-thing` TODO item, not the wire-level `faceDown` field or a Shuffler
-    "Play Face-Down" button (both remain out of scope, tracked separately).
-    - **Correction caught in review**: the GLOSSARY entry's first draft claimed a two-faced
-      card "cannot be turned face down" — wrong. Verified in
-      `apps/tabletop/src/client/CardContextMenu.tsx`: "Turn face down"/"Turn face up" applies
-      uniformly to any selected card regardless of `backImageUrl`/twoFaced; only "Flip" is
-      gated on `backImageUrl !== null`. Fixed wording (now in both GLOSSARY.md and
-      CONTEXT-MAP.md): Flip and Turn-face-down/up are two separate gestures — a two-faced card
-      cannot turn face down *as its Flip action*, but it absolutely can via the generic
-      Turn-face-down/up gesture, same as a one-faced card.
-    - `apps/shuffler/src/port-tabletop/types.ts` gained a documentation-only comment after the
-      `CardPlayedPayload` doc block, noting no field there models face-down, pointing readers at
-      `notes/GLOSSARY.md`/`CONTEXT-MAP.md`, and stating this is Tabletop-side physics-map work,
-      not a Shuffler TODO. No field, type, or schema changed.
+    "Play Face-Down" button (both remain out of scope, tracked separately). - **Correction caught in review**: the GLOSSARY entry's first draft claimed a two-faced
+    card "cannot be turned face down" — wrong. Verified in
+    `apps/tabletop/src/client/CardContextMenu.tsx`: "Turn face down"/"Turn face up" applies
+    uniformly to any selected card regardless of `backImageUrl`/twoFaced; only "Flip" is
+    gated on `backImageUrl !== null`. Fixed wording (now in both GLOSSARY.md and
+    CONTEXT-MAP.md): Flip and Turn-face-down/up are two separate gestures — a two-faced card
+    cannot turn face down _as its Flip action_, but it absolutely can via the generic
+    Turn-face-down/up gesture, same as a one-faced card. - `apps/shuffler/src/port-tabletop/types.ts` gained a documentation-only comment after the
+    `CardPlayedPayload` doc block, noting no field there models face-down, pointing readers at
+    `notes/GLOSSARY.md`/`CONTEXT-MAP.md`, and stating this is Tabletop-side physics-map work,
+    not a Shuffler TODO. No field, type, or schema changed.
 
-20. **`mtg-card` gained `owner` and `isCommander` — table-layout ticket 18 (2026-08-09).**
+21. **`mtg-card` gained `owner` and `isCommander` — table-layout ticket 18 (2026-08-09).**
     `mtg-card.props` gained `owner: string` (seatId) and `isCommander: boolean`
     (`apps/tabletop/src/shared/mtgCardShape.ts`) — first-class, schema'd, synced, granting
     **no capability** (any player can still move any card; the arming/hit-testing side of
@@ -338,7 +318,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
       key (watch point above: dedup is on `props.instanceId`). Noted here only because it
       shares the card shape and the `owner`/`isCommander` props.
 
-21. **`gameCardIndex` now rides `card.played`, for real — `let-gamecardindex-out`, built
+22. **`gameCardIndex` now rides `card.played`, for real — `let-gamecardindex-out`, built
     2026-08-10.** The old ban (watch point 15's history) is not just lifted in principle
     anymore; it's a live, populated field. `card.played.v1.json` gained optional
     `gameCardIndex: integer` as a **top-level sibling** of `card`/`face`/`zoneHint`/etc —
@@ -353,21 +333,21 @@ These are specific things that could break two-faced cards if changed elsewhere:
     `face` on commander entries). `apps/tabletop/src/server/cardArrival.ts` and
     `seatJoined.ts` accept the optional field in their local payload interfaces but the
     Tabletop **does not consume it anywhere** — no new prop on `mtg-card`, no rendering
-    change. If a future ticket wants the Tabletop to *use* `gameCardIndex` (e.g. showing a
+    change. If a future ticket wants the Tabletop to _use_ `gameCardIndex` (e.g. showing a
     decklist position), that's new work, not something this change already wired up.
-22. **A schema constraint can drift from what the real sender sends — the `owner.minLength`
+23. **A schema constraint can drift from what the real sender sends — the `owner.minLength`
     bug (2026-08-16).** `card.played.v1.json`'s `owner` field had `minLength: 8`, sized for
     the pre-Spine short-GUID `seatId`. Once `sendCardPlayedToSpineBestEffort`
     (`apps/shuffler/src/port-spine/sendToSpine.ts`) started setting `owner:
-    String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.played` event
+String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.played` event
     started failing Spine ingestion validation, silently (best-effort send, so it just logged
     a warning). Fixed: `minLength` loosened to `1`. **The general lesson**: a field's schema
     constraint must be checked against what the actual sender populates, not against the
     history of what it used to populate — and the Shuffler now has a test for this
     specifically (`apps/shuffler/test/port-spine/cardPlayedContract.test.ts`, using
     `apps/shuffler/test/port-spine/contractValidation.ts`), the Shuffler's first
-    contract-conformance test on an event it *sends* (the Tabletop and Spine only ever
-    validated on *receipt* before). If you change what any `card.played` field's sender
+    contract-conformance test on an event it _sends_ (the Tabletop and Spine only ever
+    validated on _receipt_ before). If you change what any `card.played` field's sender
     populates, or the schema's constraint on it, run this test — it's the fast way to catch
     a mismatch before a live Spine does.
 
@@ -397,8 +377,8 @@ doesn't change that.
 
 **No naming collision, confirmed by grep before implementing**: the Tabletop already has an
 unrelated `sleeveColor?: string` on `apps/tabletop/src/server/rooms.ts`'s seat-joined player
-data (table-layout ticket 17, see [tabletop.md](tabletop.md) watch point 17) — a *different
-type*, arriving over the wire from a *different* Shuffler send site
+data (table-layout ticket 17, see [tabletop.md](tabletop.md) watch point 17) — a _different
+type_, arriving over the wire from a _different_ Shuffler send site
 (`buildSeatJoinedEvent`/`SeatJoinedEvent`, not touched by this change). This change's
 `sleeveColor` is Shuffler-only, read straight off `prep`/`game` for local rendering; it has no
 wire representation and isn't sent anywhere. Same field name, same eventual source (the prep's
@@ -424,13 +404,15 @@ and the no-pick case leaves both fields undefined), `apps/shuffler/test/view/act
 `apps/shuffler/test/view/library-components.test.ts` (sleeved vs unsleeved library stack HTML).
 
 ### Card Back (library face-down rendering)
+
 The MTG card back image (`/images/mtg-card-back.jpg`, `CARD_BACK` constant) is the generic card back shown for library cards. It is unrelated to two-faced cards' **back face**: don't confuse "card back" (the picture) with "back face" (the second printed side of a two-faced card).
 
-Note the 2026-08-07 nuance: the *concept* of a face-down card **is** this owner's territory (it's the second axis alongside `face` — see watch points 12–15), but `CARD_BACK` today is only library-stack decoration, not modeled state. When face-down becomes real, `CARD_BACK` (or a sleeve image) is what renders it — the picture stays a rendering detail, the concealment is the state.
+Note the 2026-08-07 nuance: the _concept_ of a face-down card **is** this owner's territory (it's the second axis alongside `face` — see watch points 12–15), but `CARD_BACK` today is only library-stack decoration, not modeled state. When face-down becomes real, `CARD_BACK` (or a sleeve image) is what renders it — the picture stays a rendering detail, the concealment is the state.
 
-Ticket 02 settled *where the picture lives* on the Tabletop as "not on the card" — `faceDown` resolving against the seat's `cardBackImageUrl` — because baking per-card would mean rewriting every shape when someone changes sleeves mid-game. **Table-layout ticket 11 (2026-08-08) amended this, and ticket 17 built it the same day**: sleeve color is a game constant (never changes mid-game), so per-card baking is legal — the Tabletop server bakes the seat's `sleeveColor` into the shape's props at mint time (`cardArrival.ts`), dodging the client-side seat-lookup gap. `cardBackImageUrl` remains the rendering for *unsleeved* seats only. See watch point 17.
+Ticket 02 settled _where the picture lives_ on the Tabletop as "not on the card" — `faceDown` resolving against the seat's `cardBackImageUrl` — because baking per-card would mean rewriting every shape when someone changes sleeves mid-game. **Table-layout ticket 11 (2026-08-08) amended this, and ticket 17 built it the same day**: sleeve color is a game constant (never changes mid-game), so per-card baking is legal — the Tabletop server bakes the seat's `sleeveColor` into the shape's props at mint time (`cardArrival.ts`), dodging the client-side seat-lookup gap. `cardBackImageUrl` remains the rendering for _unsleeved_ seats only. See watch point 17.
 
 Also note (KB gap closed 2026-08-08): the **library furniture image is a second consumer of the card back** — whatever renders a seat's face-down cards (sleeve rectangle or standard back) must render its library pile the same way. Ticket 17 honored this: `mtg-zone` props gained `sleeveColor: string | null` (set only on a sleeved seat's library zone), `MtgZoneShapeUtil` renders a sleeved pile as the bare sleeve rectangle, and both renderings share `LIBRARY_PILE_INSET = 12` from `apps/tabletop/src/shared/mtgZoneShape.ts`.
 
 ### Deck Selection Search
+
 The text filter on the deck selection page (`deck-selection.js`) is a UI filter for finding decks, not cards. Unrelated to two-faced card display or data.
