@@ -2,7 +2,9 @@
 
 Mountain: spine-gathers-data
 Ship: shuffler
-Status: ready-for-agent
+Status: canceled.
+
+Note from Jess: I don't think this is necessary. I want it to stay synchronous.
 
 **What to build:** `/game` renders immediately instead of waiting on the Spine join
 (a slow or unreachable Spine no longer delays seeing your hand). The join fires

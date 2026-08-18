@@ -6,8 +6,7 @@ Status: ready-for-agent
 
 **What to build:** The Tabletop's server opens one live SSE subscription per table room
 against the Spine's `GET /tables/:tableId/events/stream`, the first time a `seat.joined`
-notification tells that room its Spine `tableId` — a second seat joining the same room is
-a no-op. `card.played` events arriving on that subscription land on the canvas exactly the
+notification tells that room its Spine `tableId`. `card.played` events arriving on that subscription land on the canvas exactly the
 way the existing HTTP-driven path does today: same dedup (on event id and on
 `card.instanceId`), same `ensurePlayerArea` self-heal, same card placement. This is purely
 additive — the Shuffler's existing direct `card.played` POST to the Tabletop keeps running

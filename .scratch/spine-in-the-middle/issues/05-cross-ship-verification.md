@@ -2,12 +2,14 @@
 
 Mountain: spine-gathers-data
 Ship: fleet
-Status: ready-for-agent
+Status: canceled
+
+I don't think this is necessary.
 
 **What to build:** `apps/shuffler/test/verification/verify-tabletop-integration.spec.ts`
 already spawns a real Tabletop. Extend it (or add a sibling spec) to also spawn a real
 Spine (`services/spine`, ephemeral SQLite) and assert, end to end, that shuffling up
-produces a `seat.joined` event on the Spine's admin page *and* draws the seat on the
+produces a `seat.joined` event on the Spine's admin page _and_ draws the seat on the
 Tabletop's canvas. This is the test that would have caught today's original problem —
 nothing currently exercises the Spine and the Tabletop in the same run.
 

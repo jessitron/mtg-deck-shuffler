@@ -29,6 +29,8 @@ early dev data, but still a real prod-data-wiping action.
 
 - RETEST post-tldraw upgrade: weird bug: occasionally, for no discernable reason, a bunch of cards return to the stack where they were initially played 😭
 
+- tabletop has `ensurePlayerArea` to draw a player area in the case that a card-play arrives before seat.joined. No, no, no, that's an error (to the telemetry) and should not fuck up the board with an empty play area because you don't have enough information to create the furniture.
+
 - bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation
 
 - before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game!
