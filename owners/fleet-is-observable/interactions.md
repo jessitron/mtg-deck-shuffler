@@ -267,21 +267,40 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   "not-found"/"incompatible-version" `markCurrentSpanAsError` calls for all of them — don't re-add
   per-route copies of those two. A route whose response can't be expressed as a returned string
   can still use `applyGameCommand`/`renderCommandOutcome` — `renderApplied` may return `string |
-  void`. A route that needs a required side effect before mutating (not just permission-checking)
-  can use `beforeMutate` and throw `TableSendFailedError` — don't hand-roll a second
-  send-then-commit protocol. `applyGameCommand` also `setCommonSpanAttributes({ tableName,
+  void`. **`TableSendFailedError` and `beforeMutate`'s send-then-commit use are gone**
+  (tabletop-spine-sse-subscriber ticket 02) — `play-card`/`discard-card` mutate+persist
+  immediately now, same as every other route; there's no more synchronous failure outcome to
+  render as a 502. `beforeMutate?` is still a parameter but nothing in `app.ts` passes one — don't
+  treat its presence as license to resurrect a send-then-commit protocol; that shape is
+  deliberately gone. `applyGameCommand` also `setCommonSpanAttributes({ tableName,
   playerName })` right after the game loads, so every mutation route gets `table.name`/`player.name`
   for free — a new mutation route needs nothing extra. The **GET fragment routes** don't share that
   choke point, so each one that reconstructs a `GameState` (`/game`, `/library-modal`,
   `/table-modal`, `/card-modal`, `/history-modal`, `/game-section`; `/debug-state` from
   `persistedGame`) stamps it by hand — add the same call to a new such route.
-- **Adding another best-effort outbound send from the Shuffler** (a third destination, or a new
-  event kind to an existing one): copy the existing shape — span attribute (`<name>.send_failed:
-  true`) + `log.warn`, never throw, ride ambient auto-instrumentation (no manual span). If the
-  payload needs a durable `traceparent` field, reuse the existing minting call for that event kind
-  rather than adding a new site — and remember each call site mints its own event `id`, so sending
-  the "same" logical event to two destinations produces two different `id`s sharing one
-  `traceparent`.
+- **Adding another best-effort outbound send from the Shuffler** (a second destination, or a new
+  event kind to the Spine): copy the existing shape — span attribute (`<name>.send_failed: true`)
+  + `log.warn`, never throw, ride ambient auto-instrumentation (no manual span). If the payload
+  needs a durable `traceparent` field, reuse the existing minting call for that event kind rather
+  than adding a new site — and remember each call site mints its own event `id`, so sending the
+  "same" logical event to two destinations produces two different `id`s sharing one `traceparent`.
+- **The Shuffler has exactly one outbound gateway now: `port-spine/`.** `TabletopPort`,
+  `HttpTabletopGateway`, `FakeTabletopGateway`, `sendCardToTableFirst`, and `TABLETOP_URL`
+  (`server.ts`, `k8s/configmap.yaml`, README, CLAUDE.md) are all gone
+  (tabletop-spine-sse-subscriber ticket 02) — `card.played` travels Shuffler→Spine only, then
+  Spine→Tabletop over the Spine's own SSE broadcast. `apps/shuffler/src/port-tabletop/` still
+  exists but is envelope-shape helpers only (`buildCardPlayedEvent`, `zoneHintForPlay`, the
+  `CardPlayedEvent`/`EventEnvelope` types) — don't add an HTTP client back into it on the theory
+  the directory name implies one; that's exactly the shape that was just deleted. If a future
+  change needs the Shuffler to reach the Tabletop directly again, that's a new decision, not a
+  revert — ask before re-adding.
+- **Adding a Tabletop test that needs to seed a card without a live Spine**: use the existing
+  test-only seam, `apps/tabletop/src/server/testSeedRoute.ts`
+  (`POST /test/tables/:tableName/cards`, mounted only when `ENABLE_TEST_SEED_ROUTE=true`) — don't
+  resurrect the deleted production `POST /api/tables/:tableName/cards` route. The production path
+  for `card.played` is the Spine SSE subscriber (`spineEventDispatch.ts`) only; nothing should ever
+  gate this test route's mount on anything but that one env var, and it must never be true in
+  production.
 - **A new service/ship**: OTel from its first commit (`notes/add-opentelemetry.md` is the
   runbook). Rack-based Ruby services need the explicit `middleware_args` mount (see above); there's
   no traceparent-minting site to add for Spine-style inbound events, since the contract carries no
