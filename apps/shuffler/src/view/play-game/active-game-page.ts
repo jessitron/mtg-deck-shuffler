@@ -46,6 +46,20 @@ function tabletopPublicUrl(): string {
   return process.env.TABLETOP_PUBLIC_URL || "http://table.jessitron.honeydemo.io";
 }
 
+/**
+ * Only used when a game has no stored `tableUrl` (the Spine already builds the real
+ * one as `<name-slug>-<8-hex-id>` — see services/spine/lib/table_slug.rb). Mirrors that
+ * format so this fallback lands on the same Tabletop room instead of a bare-name one.
+ */
+function fallbackTableSlug(tableName: string, spineTableId?: string): string {
+  const nameSlug = tableName
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return spineTableId ? `${nameSlug}-${spineTableId.slice(0, 8)}` : nameSlug;
+}
+
 export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatHappened = {}): string {
 
   const commandZoneHtml = formatCommandZoneHtmlFragment(game);
@@ -56,7 +70,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   const menuHtml = formatGameMenuHtmlFragment(game);
   const { secondaryColor } = colorsForPlaymat(game.playmatImagePath ?? DEFAULT_PLAYMAT_PATH, game.sleeveColor);
 
-  const tableHref = game.tableUrl ?? `${tabletopPublicUrl()}/t/${encodeURIComponent(game.tableName ?? "")}`;
+  const tableHref = game.tableUrl ?? `${tabletopPublicUrl()}/t/${encodeURIComponent(fallbackTableSlug(game.tableName ?? "", game.spineTableId))}`;
   const goToTableButtonHtml = game.tableName
     ? `<a class="pushable-flat go-to-table-button" href="${tableHref}" target="_blank" rel="noopener">Go to Table: ${escapeHtml(game.tableName)}</a>`
     : "";

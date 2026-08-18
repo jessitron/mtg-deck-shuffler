@@ -4,6 +4,7 @@ require "time"
 
 require_relative "../lib/event_contract"
 require_relative "../lib/table_broadcaster"
+require_relative "../lib/table_slug"
 
 module Spine
   class Table < Sequel::Model(:tables)
@@ -25,7 +26,7 @@ module Spine
 
         table = first(name: name)
         created = table.nil?
-        candidate = table || new(id: SecureRandom.uuid, name: name)
+        candidate = table || new(id: TableSlug.mint(name), name: name)
         preparation = candidate.send(:prepare_seat, game_id: game_id,
           player_name: player_name, decoration: decoration)
         table ||= create_with_event!(id: candidate.id, name: name, creator: player_name)
@@ -40,7 +41,7 @@ module Spine
       replay_outcome(existing)
     end
 
-    def self.create_with_event!(name:, creator:, id: SecureRandom.uuid)
+    def self.create_with_event!(name:, creator:, id: TableSlug.mint(name))
       DB.transaction do
         table = create(id: id, name: name)
         table.mint_event!(

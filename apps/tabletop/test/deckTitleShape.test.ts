@@ -3,6 +3,7 @@ import type { Server } from "node:http";
 import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
+import { slugFor } from "./support/tableSlug";
 
 let server: Server;
 let port: number;
@@ -30,7 +31,7 @@ function seatJoined(
 ) {
   return {
     id: randomUUID(),
-    tableId: tableName,
+    tableId: slugFor(tableName),
     name: "seat.joined",
     occurredAt: new Date().toISOString(),
     initiator: { seatId, playerName },
@@ -49,7 +50,7 @@ function seatJoined(
 }
 
 async function postEvent(tableName: string, body: unknown): Promise<Response> {
-  return fetch(`http://localhost:${port}/api/tables/${tableName}/events`, {
+  return fetch(`http://localhost:${port}/api/tables/${slugFor(tableName)}/events`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
@@ -57,7 +58,7 @@ async function postEvent(tableName: string, body: unknown): Promise<Response> {
 }
 
 function allShapes(tableName: string) {
-  const entry = getRoomRegistry().get(tableName);
+  const entry = getRoomRegistry().get(slugFor(tableName));
   if (!entry) return [];
   return entry.room
     .getCurrentSnapshot()
@@ -75,7 +76,7 @@ describe("editable deck title", () => {
     const title = allShapes(tableName).find((s) => s.type === "mtg-title");
     expect(title).toBeTruthy();
     // The id the commander-damage counters anchor above must be unchanged.
-    expect(title.id).toBe(`shape:name-label-${tableName}-${seatId}`);
+    expect(title.id).toBe(`shape:name-label-${slugFor(tableName)}-${seatId}`);
     expect(title.isLocked).toBe(true);
     expect(title.props.text).toBe("Alice 〜 Mono-Red Aggro");
   });

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { trace, SpanKind } from "@opentelemetry/api";
 import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom } from "./rooms.js";
-import { slugifyTableName } from "../shared/slugify.js";
+import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { CARD_W, CARD_H, MAX_SEATS, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
 import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
 import { validateIncomingEvent } from "./contractValidation.js";
@@ -54,7 +54,8 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
     "card.scryfall_id": card.scryfallId,
     "card.name": cardName,
     "event.id": envelope.id,
-    "table.name": tableName,
+    "table.name": tableNameFromSlug(tableName),
+    "table.slug": tableName,
     "zone.hint": zoneHint,
     "seat.id": seatId,
   });
@@ -88,7 +89,8 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
       kind: SpanKind.INTERNAL,
       attributes: {
         "event.id": envelope.id,
-        "table.name": tableName,
+        "table.name": tableNameFromSlug(tableName),
+        "table.slug": tableName,
         "seat.id": seatId,
         "card.instance_id": card.instanceId,
         "card.scryfall_id": card.scryfallId,

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { trace, SpanKind } from "@opentelemetry/api";
 import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom } from "./rooms.js";
-import { slugifyTableName } from "../shared/slugify.js";
+import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape, addCommanderDamageCounters } from "./tableFurniture.js";
 import { MAX_SEATS, CARD_W, CARD_H, commandZoneCardPosition } from "./cardLayout.js";
 import { validateIncomingEvent } from "./contractValidation.js";
@@ -59,7 +59,8 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
 
   trace.getActiveSpan()?.setAttributes({
     "event.id": envelope.id,
-    "table.name": tableName,
+    "table.name": tableNameFromSlug(tableName),
+    "table.slug": tableName,
     "seat.id": seatId,
     "player.name": playerName,
   });
@@ -93,7 +94,8 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
       kind: SpanKind.INTERNAL,
       attributes: {
         "event.id": envelope.id,
-        "table.name": tableName,
+        "table.name": tableNameFromSlug(tableName),
+        "table.slug": tableName,
         "seat.id": seatId,
         "player.name": playerName,
         "player.deckName": deckName,

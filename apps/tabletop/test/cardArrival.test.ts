@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
 import { graveyardBounds, stackBounds } from "../src/server/cardLayout";
+import { slugFor } from "./support/tableSlug";
 
 let server: Server;
 let port: number;
@@ -31,7 +32,7 @@ function cardPlayed(tableName: string, envelopeOverrides: Record<string, unknown
   };
   return {
     id: randomUUID(),
-    tableId: tableName,
+    tableId: slugFor(tableName),
     name: "card.played",
     occurredAt: new Date().toISOString(),
     initiator,
@@ -56,7 +57,7 @@ function cardPlayed(tableName: string, envelopeOverrides: Record<string, unknown
 }
 
 async function post(tableName: string, body: unknown): Promise<Response> {
-  return fetch(`http://localhost:${port}/api/tables/${tableName}/cards`, {
+  return fetch(`http://localhost:${port}/api/tables/${slugFor(tableName)}/cards`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
@@ -64,7 +65,7 @@ async function post(tableName: string, body: unknown): Promise<Response> {
 }
 
 function shapesOf(tableName: string) {
-  const entry = getRoomRegistry().get(tableName);
+  const entry = getRoomRegistry().get(slugFor(tableName));
   if (!entry) return [];
   return entry.room
     .getCurrentSnapshot()
@@ -154,12 +155,12 @@ describe("card arrival", () => {
 
   it("bakes the seat's sleeve color into the minted card's props (ticket 17)", async () => {
     // Seat joins with a sleeve first — sleeve color is seat data, not payload data.
-    await fetch(`http://localhost:${port}/api/tables/arrival-sleeved/events`, {
+    await fetch(`http://localhost:${port}/api/tables/${slugFor("arrival-sleeved")}/events`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
         id: randomUUID(),
-        tableId: "arrival-sleeved",
+        tableId: slugFor("arrival-sleeved"),
         name: "seat.joined",
         occurredAt: new Date().toISOString(),
         initiator: { seatId: "seat-sleeved", playerName: "Jess" },
@@ -184,12 +185,12 @@ describe("card arrival", () => {
   });
 
   it("bakes the seat's card back URL into the minted card's props (ticket 17)", async () => {
-    await fetch(`http://localhost:${port}/api/tables/arrival-cardback/events`, {
+    await fetch(`http://localhost:${port}/api/tables/${slugFor("arrival-cardback")}/events`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
         id: randomUUID(),
-        tableId: "arrival-cardback",
+        tableId: slugFor("arrival-cardback"),
         name: "seat.joined",
         occurredAt: new Date().toISOString(),
         initiator: { seatId: "seat-cardback", playerName: "Jess" },

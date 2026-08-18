@@ -3,6 +3,7 @@ import type { Server } from "node:http";
 import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
+import { slugFor } from "./support/tableSlug";
 
 let server: Server;
 let port: number;
@@ -24,7 +25,7 @@ function fakeTraceparent(): string {
 function seatJoined(tableName: string, seatId: string, playerName: string) {
   return {
     id: randomUUID(),
-    tableId: tableName,
+    tableId: slugFor(tableName),
     name: "seat.joined",
     occurredAt: new Date().toISOString(),
     initiator: { seatId, playerName },
@@ -40,7 +41,7 @@ function seatJoined(tableName: string, seatId: string, playerName: string) {
 function cardPlayed(tableName: string, seatId: string, playerName: string) {
   return {
     id: randomUUID(),
-    tableId: tableName,
+    tableId: slugFor(tableName),
     name: "card.played",
     occurredAt: new Date().toISOString(),
     initiator: { seatId, playerName },
@@ -63,7 +64,7 @@ function cardPlayed(tableName: string, seatId: string, playerName: string) {
 }
 
 async function postEvent(tableName: string, body: unknown): Promise<Response> {
-  return fetch(`http://localhost:${port}/api/tables/${tableName}/events`, {
+  return fetch(`http://localhost:${port}/api/tables/${slugFor(tableName)}/events`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
@@ -71,7 +72,7 @@ async function postEvent(tableName: string, body: unknown): Promise<Response> {
 }
 
 async function postCard(tableName: string, body: unknown): Promise<Response> {
-  return fetch(`http://localhost:${port}/api/tables/${tableName}/cards`, {
+  return fetch(`http://localhost:${port}/api/tables/${slugFor(tableName)}/cards`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
@@ -79,7 +80,7 @@ async function postCard(tableName: string, body: unknown): Promise<Response> {
 }
 
 function allShapes(tableName: string) {
-  const entry = getRoomRegistry().get(tableName);
+  const entry = getRoomRegistry().get(slugFor(tableName));
   if (!entry) return [];
   return entry.room
     .getCurrentSnapshot()

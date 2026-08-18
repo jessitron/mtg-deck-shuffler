@@ -16,8 +16,9 @@ class JoinTest < Minitest::Test
     assert_equal 200, last_response.status
     response = JSON.parse(last_response.body)
     seat = DB[:seats].first
+    assert_match(/\Arich-table-[0-9a-f]{8}\z/, response["tableId"])
     assert_equal({ "tableId" => response["tableId"], "seatId" => seat[:id], "seatNumber" => 1,
-      "tableUrl" => "http://table.example/t/rich%20table" }, response)
+      "tableUrl" => "http://table.example/t/#{response["tableId"]}" }, response)
 
     assert_equal 1, DB[:tables].count
     assert_equal 1, DB[:seats].count
@@ -37,9 +38,9 @@ class JoinTest < Minitest::Test
 
     request = tabletop.wait_for_requests(1).fetch(0)
     assert_equal "POST", request[:method]
-    assert_equal "/api/tables/rich%20table/events", request[:path]
+    assert_equal "/api/tables/#{response["tableId"]}/events", request[:path]
     outbound = JSON.parse(request[:body])
-    expected = joined.merge("tableId" => submission["name"])
+    expected = joined.dup
     expected["traceparent"] = outbound["traceparent"] if outbound.key?("traceparent")
     assert_equal expected, outbound
     assert_trace_context(request[:headers]["traceparent"], outbound["traceparent"])
@@ -70,7 +71,7 @@ class JoinTest < Minitest::Test
     first = JSON.parse(sent[0][:body])
     replay = JSON.parse(sent[1][:body])
     assert_equal first.reject { |key, _| key == "traceparent" }, replay.reject { |key, _| key == "traceparent" }
-    assert_equal original["name"], replay["tableId"]
+    assert_equal original_response["tableId"], replay["tableId"]
     assert_equal original["deckName"], replay.dig("payload", "deckName")
   ensure
     tabletop&.stop

@@ -90,10 +90,23 @@ repo root — see the root `CLAUDE.md`.
 - `TABLETOP_URL` is the server-to-server base URL used after `/join` commits. Missing,
   invalid, unreachable, timed-out, and non-2xx destinations are all best-effort failures
   recorded on the live join span; the response still succeeds.
-- `TABLETOP_PUBLIC_URL` builds `/join`'s returned `/t/<table-name>` link. Standalone local
+- `TABLETOP_PUBLIC_URL` builds `/join`'s returned `/t/<table-slug>` link. Standalone local
   runs default to `http://localhost:5180`; the root fleet runner and production set it.
 - Production values live in `k8s/configmap.yaml`; the public URL deliberately uses HTTP
   because the Tabletop ALB has no 443 listener.
+- **A table's `id` *is* its slug — `<name-slug>-<8-hex-random>`** (`lib/table_slug.rb`,
+  `TableSlug.mint`, called from `Table.join!`/`Table.create_with_event!` — not a separate
+  id with a slug derived from it). The name makes the URL identifiable to a human; the
+  random suffix makes it unguessable — a bare table name is not enough to land on
+  someone else's table. Because the id itself is already the friendly slug, `table_url`
+  (`app.rb`) and `TabletopNotifier#event_uri` do nothing but escape `table.id` into a
+  path — no separate slug-construction step, and nothing to keep in sync, since on the
+  Tabletop side that same string is the literal room-registry key (see
+  `apps/tabletop/CLAUDE.md`). `name` keeps its own unique DB constraint (`config/db.rb`),
+  so the existing `NameTaken` retry in `join_table` already covers the (vanishing) risk
+  of an id collision — it can only happen alongside a name collision, which raises first.
+  `Event#as_envelope`'s `tableId` carries this same id verbatim, never rewritten on the
+  way out to the Tabletop (see `contracts/envelope.v1.json`'s `tableId` description).
 
 ## Observability
 

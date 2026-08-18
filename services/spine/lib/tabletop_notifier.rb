@@ -11,12 +11,12 @@ module Spine
       @span = span
     end
 
-    def send_joined(event:, table_name:, replayed:)
+    def send_joined(event:, table_id:, replayed:)
       base_url = ENV["TABLETOP_URL"]
       return record("missing_config") if base_url.nil? || base_url.strip.empty?
 
-      uri = event_uri(base_url, table_name)
-      envelope = event.as_envelope.merge("tableId" => table_name)
+      uri = event_uri(base_url, table_id)
+      envelope = event.as_envelope
       carrier = {}
       OpenTelemetry.propagation.inject(carrier)
       envelope["traceparent"] = carrier["traceparent"] if carrier["traceparent"]
@@ -46,14 +46,14 @@ module Spine
 
     private
 
-    def event_uri(base_url, table_name)
+    def event_uri(base_url, table_id)
       uri = URI.parse(base_url)
       unless uri.is_a?(URI::HTTP) && uri.host && uri.query.nil? && uri.fragment.nil?
         raise URI::InvalidURIError, "TABLETOP_URL must be an HTTP(S) base URL"
       end
 
       prefix = uri.path.to_s.sub(%r{/+\z}, "")
-      uri.path = "#{prefix}/api/tables/#{escape_path_component(table_name)}/events"
+      uri.path = "#{prefix}/api/tables/#{escape_path_component(table_id)}/events"
       uri
     end
 

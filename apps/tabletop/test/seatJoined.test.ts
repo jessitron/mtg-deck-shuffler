@@ -3,6 +3,7 @@ import type { Server } from "node:http";
 import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
+import { slugFor } from "./support/tableSlug";
 import {
   playmatBounds,
   libraryBounds,
@@ -37,7 +38,7 @@ function seatJoined(tableName: string, envelopeOverrides: Record<string, unknown
   eventCounter++;
   return {
     id: randomUUID(),
-    tableId: tableName,
+    tableId: slugFor(tableName),
     name: "seat.joined",
     occurredAt: new Date().toISOString(),
     initiator: { seatId: `seat-${eventCounter}`, playerName: "Jess" },
@@ -57,7 +58,7 @@ function seatJoined(tableName: string, envelopeOverrides: Record<string, unknown
 }
 
 async function post(tableName: string, body: unknown): Promise<Response> {
-  return fetch(`http://localhost:${port}/api/tables/${tableName}/events`, {
+  return fetch(`http://localhost:${port}/api/tables/${slugFor(tableName)}/events`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
@@ -65,7 +66,7 @@ async function post(tableName: string, body: unknown): Promise<Response> {
 }
 
 function shapesOf(tableName: string) {
-  const entry = getRoomRegistry().get(tableName);
+  const entry = getRoomRegistry().get(slugFor(tableName));
   if (!entry) return [];
   return entry.room
     .getCurrentSnapshot()
@@ -233,7 +234,7 @@ describe("seat joined", () => {
     const event = seatJoined("seat-sleeve-memory", {}, { sleeveColor: "#8b2f5c" });
     await post("seat-sleeve-memory", event);
 
-    const area = getRoomRegistry().get("seat-sleeve-memory")!.seats.get(event.initiator.seatId as string)!;
+    const area = getRoomRegistry().get(slugFor("seat-sleeve-memory"))!.seats.get(event.initiator.seatId as string)!;
     expect(area.sleeveColor).toBe("#8b2f5c");
     expect(area.cardBackImageUrl).toBeUndefined();
   });
@@ -243,7 +244,7 @@ describe("seat joined", () => {
     const response = await post("seat-identity-colors", event);
     expect(response.status).toBe(201);
 
-    const area = getRoomRegistry().get("seat-identity-colors")!.seats.get(event.initiator.seatId as string)!;
+    const area = getRoomRegistry().get(slugFor("seat-identity-colors"))!.seats.get(event.initiator.seatId as string)!;
     expect(area.sleeveColor).toBe("#8b2f5c");
     expect(area.primaryColor).toBe("#8b2f5c");
     expect(area.secondaryColor).toBe("#123456");
@@ -254,7 +255,7 @@ describe("seat joined", () => {
     const response = await post("seat-colors-old-build", event);
     expect(response.status).toBe(201);
 
-    const area = getRoomRegistry().get("seat-colors-old-build")!.seats.get(event.initiator.seatId as string)!;
+    const area = getRoomRegistry().get(slugFor("seat-colors-old-build"))!.seats.get(event.initiator.seatId as string)!;
     expect(area.sleeveColor).toBe("#8b2f5c");
     expect(area.primaryColor).toBeUndefined();
     expect(area.secondaryColor).toBeUndefined();

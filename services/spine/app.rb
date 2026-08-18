@@ -122,7 +122,7 @@ module Spine
           player_name: player_name, decoration: decoration)
         TabletopNotifier.new(span: current_span).send_joined(
           event: outcome[:joined_event],
-          table_name: outcome[:table_name],
+          table_id: outcome[:table_id],
           replayed: outcome[:replayed]
         )
         current_span.add_attributes(
@@ -134,7 +134,7 @@ module Spine
           tableId: outcome[:table_id],
           seatId: outcome[:seat_id],
           seatNumber: outcome[:seat_number],
-          tableUrl: table_url(outcome[:table_name])
+          tableUrl: table_url(outcome[:table_id])
         )
       rescue JSON::ParserError, KeyError => e
         mark_span_failed("join.result", "invalid_input", e)
@@ -198,10 +198,9 @@ module Spine
       outcome[:created] ? "created" : "joined"
     end
 
-    def table_url(table_name)
+    def table_url(table_id)
       base = ENV.fetch("TABLETOP_PUBLIC_URL", "http://localhost:5180").sub(%r{/+\z}, "")
-      encoded_name = CGI.escapeURIComponent(table_name)
-      "#{base}/t/#{encoded_name}"
+      "#{base}/t/#{CGI.escapeURIComponent(table_id)}"
     end
   end
 end
