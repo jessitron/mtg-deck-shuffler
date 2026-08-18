@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
-import { trace } from "@opentelemetry/api";
+import { trace, SpanKind } from "@opentelemetry/api";
 import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName } from "../shared/slugify.js";
 import { CARD_W, CARD_H, MAX_SEATS, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
 import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
 import { validateIncomingEvent } from "./contractValidation.js";
+
+const tracer = trace.getTracer("mtg-tabletop");
 
 
 type ZoneHint = "stack" | "battlefield" | "graveyard";
@@ -79,45 +81,72 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
   }
 
   const pageId = pageIdOf(entry);
-  const playerArea = await ensurePlayerArea(entry, pageId, seatId, playerName);
 
-  let position: { x: number; y: number };
-  switch (zoneHint) {
-    case "graveyard":
-      position = graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++);
-      break;
-    case "battlefield": // a land — arrives on the Stack with everything else; a human drags it to the playmat
-    case "stack":
-      position = stackCardPosition(playerArea.seatIndex, playerArea.stackCount++);
-      break;
-  }
+  await tracer.startActiveSpan(
+    "place arrived card",
+    {
+      kind: SpanKind.INTERNAL,
+      attributes: {
+        "event.id": envelope.id,
+        "table.name": tableName,
+        "seat.id": seatId,
+        "card.instance_id": card.instanceId,
+        "card.scryfall_id": card.scryfallId,
+        "card.name": cardName,
+        "zone.hint": zoneHint,
+      },
+    },
+    async (span) => {
+      try {
+        const playerArea = await ensurePlayerArea(entry, pageId, seatId, playerName);
 
-  const shapeId = createShapeId(`card-${card.instanceId}`);
+        let position: { x: number; y: number };
+        switch (zoneHint) {
+          case "graveyard":
+            position = graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++);
+            span.setAttribute("zone.graveyard_count", playerArea.graveyardCount);
+            break;
+          case "battlefield": // a land — arrives on the Stack with everything else; a human drags it to the playmat
+          case "stack":
+            position = stackCardPosition(playerArea.seatIndex, playerArea.stackCount++);
+            span.setAttribute("zone.stack_count", playerArea.stackCount);
+            break;
+        }
 
-  await entry.room.updateStore((store) => {
-    store.put(
-      mtgCardShape({
-        id: shapeId,
-        pageId,
-        x: position.x,
-        y: position.y,
-        w: CARD_W,
-        h: CARD_H,
-        index: nextIndex(tableName),
-        instanceId: card.instanceId,
-        scryfallId: card.scryfallId,
-        cardName: cardName,
-        frontImageUrl: frontImageUrl,
-        backImageUrl: backImageUrl,
-        face: face,
-        faceDown: false,
-        sleeveColor: playerArea.sleeveColor ?? null,
-        cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
-        owner,
-        isCommander,
-      })
-    );
-  });
+        const shapeId = createShapeId(`card-${card.instanceId}`);
+
+        await entry.room.updateStore((store) => {
+          store.put(
+            mtgCardShape({
+              id: shapeId,
+              pageId,
+              x: position.x,
+              y: position.y,
+              w: CARD_W,
+              h: CARD_H,
+              index: nextIndex(tableName),
+              instanceId: card.instanceId,
+              scryfallId: card.scryfallId,
+              cardName: cardName,
+              frontImageUrl: frontImageUrl,
+              backImageUrl: backImageUrl,
+              face: face,
+              faceDown: false,
+              sleeveColor: playerArea.sleeveColor ?? null,
+              cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
+              owner,
+              isCommander,
+            })
+          );
+        });
+
+        span.setAttribute("zone.position.x", position.x);
+        span.setAttribute("zone.position.y", position.y);
+      } finally {
+        span.end();
+      }
+    }
+  );
 
   entry.seenEventIds.add(envelope.id);
   res.status(201).json({ ok: true });
