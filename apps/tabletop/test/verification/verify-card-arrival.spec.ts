@@ -45,7 +45,7 @@ test("a land and a nonland both arrive on the Stack", async ({ page, baseURL }) 
   });
 
   for (const event of [land, nonland]) {
-    const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+    const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
     expect(response.status()).toBe(201);
   }
 

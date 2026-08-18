@@ -27,7 +27,9 @@ if [ -f .env ]; then
 fi
 
 echo -e "${YELLOW}Starting tabletop server on port 5183...${NC}"
-PORT=5183 node --import ./dist/server/tracing.js dist/server/server.js &
+# Verification specs seed cards via the test-only /test/tables/:tableSlug/cards route
+# (helpers.ts, and several specs directly) — never mounted without this.
+PORT=5183 ENABLE_TEST_SEED_ROUTE=true node --import ./dist/server/tracing.js dist/server/server.js &
 SERVER_PID=$!
 
 cleanup() {

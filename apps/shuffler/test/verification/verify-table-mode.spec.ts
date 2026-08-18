@@ -53,25 +53,27 @@ test.describe('Table mode', () => {
     await expect(page.locator('.go-to-table-button')).toContainText('verify-table');
   });
 
-  test('send-then-commit: when the tabletop is unreachable, the play is blocked and the card stays in hand', async ({ page }) => {
+  test('a card.played reaches the Tabletop only via the Spine now: the play still succeeds when the Spine is unreachable', async ({ page }) => {
+    // SPINE_URL (set by verify.sh) has nothing listening on it in this project
+    // (the "chromium" project runs before "two-app" spins up a real Spine) —
+    // sendCardPlayedToSpineBestEffort is the sole path now, and it never blocks
+    // the play.
     const prepId = await seedPrep(page);
-    const gameId = await startGame(page, prepId, { tableName: 'unreachable-table', playerName: 'Blocked Jess' });
+    const gameId = await startGame(page, prepId, { tableName: 'spine-unreachable-table', playerName: 'Undeterred Jess' });
     await page.goto(`${BASE_URL}/game/${gameId}`);
 
     await expect(page.locator('.hand-count')).toHaveText('7');
 
-    // Open the first hand card's modal and try to play it
+    // Open the first hand card's modal and play it
     await page.locator('#hand-cards .card-container img').first().click();
     const playButton = page.locator('.card-modal-overlay button:has-text("Play")');
     await expect(playButton).toBeVisible({ timeout: 5000 });
     await expect(playButton).toHaveClass(/table-play-button/);
     await playButton.click();
 
-    // The play is blocked: an explanatory modal appears, the hand is unchanged
-    await expect(page.locator('.modal-overlay')).toContainText("didn't get the card", { timeout: 10000 });
-    await expect(page.locator('.modal-overlay')).toContainText('unreachable-table');
-    await page.locator('.modal-overlay .modal-close').click();
-    await expect(page.locator('.hand-count')).toHaveText('7');
-    await expect(page.locator('.table-cards-button')).toContainText('0 Cards on table');
+    // The play succeeds locally regardless — no blocking modal, hand shrinks,
+    // the card lands on the (local, Shuffler-side) table count
+    await expect(page.locator('.hand-count')).toHaveText('6');
+    await expect(page.locator('.table-cards-button')).toContainText('1 Cards on table');
   });
 });

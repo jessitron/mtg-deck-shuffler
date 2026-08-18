@@ -2,7 +2,7 @@
 
 Mountain: spine-gathers-data
 Ship: tabletop
-Status: ready-for-agent
+Status: resolved
 
 **What to build:** The Tabletop's server opens one live SSE subscription per table room
 against the Spine's `GET /tables/:tableId/events/stream`, the first time a `seat.joined`

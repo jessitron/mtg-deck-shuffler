@@ -14,15 +14,7 @@ export type CommandOutcome =
   | { kind: "incompatible-version"; error: IncompatibleStateVersionError }
   | { kind: "not-active"; game: GameState }
   | { kind: "version-conflict"; game: GameState; expectedVersion: number; currentVersion: number; missedEvents: GameEvent[] }
-  | { kind: "send-failed"; errorHtml: string }
   | { kind: "applied"; game: GameState; whatHappened?: WhatHappened };
-
-export class TableSendFailedError extends Error {
-  constructor(public readonly errorHtml: string) {
-    super("Tabletop did not accept the card; blocking the command");
-    this.name = "TableSendFailedError";
-  }
-}
 
 export async function applyGameCommand(
   deps: ApplyGameCommandDeps,
@@ -74,14 +66,7 @@ export async function applyGameCommand(
   }
 
   if (beforeMutate) {
-    try {
-      await beforeMutate(game);
-    } catch (error) {
-      if (error instanceof TableSendFailedError) {
-        return { kind: "send-failed", errorHtml: error.errorHtml };
-      }
-      throw error;
-    }
+    await beforeMutate(game);
   }
 
   const whatHappened = mutate(game) ?? undefined;

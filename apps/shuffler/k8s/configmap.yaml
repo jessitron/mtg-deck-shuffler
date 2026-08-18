@@ -11,7 +11,6 @@ data:
   OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io:443"
   OTEL_METRICS_EXPORTER: "none"
   OTEL_LOG_LEVEL: "info"
-  TABLETOP_URL: "http://mtg-tabletop-service"
   # http on purpose: the Tabletop's ALB has no 443 listener (tldraw license
   # gate — see apps/tabletop/k8s/ingress.yaml). Plain navigation from this
   # https app to an http link is fine; it's only used in <a href>.

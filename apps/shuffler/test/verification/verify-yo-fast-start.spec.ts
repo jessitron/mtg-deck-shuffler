@@ -33,10 +33,14 @@ test.describe('yo! fast-start', () => {
     // First yo! click on a fresh server mints a random table name (YO-xxxx),
     // so it never collides with a "Yo" table left over from a previous run.
     // (player name travels to the Tabletop, not this page)
+    // The link text shows the table name as minted (mixed case); the href is a
+    // Tabletop room slug, which is always lowercased — by the Spine when the
+    // join succeeds (services/spine/lib/table_slug.rb) and, when it doesn't,
+    // by the fallback slug in active-game-page.ts that mirrors that format.
     const tableLink = page.locator('.go-to-table-button');
     await expect(tableLink).toBeVisible();
     await expect(tableLink).toContainText(/YO-[0-9a-f]{4}/);
-    expect(await tableLink.getAttribute('href')).toMatch(/\/t\/YO-[0-9a-f]{4}/);
+    expect(await tableLink.getAttribute('href')).toMatch(/\/t\/yo-[0-9a-f]{4}/);
 
     // Game is started: a full hand of 7.
     await expect(page.locator('.hand-count')).toHaveText('7');

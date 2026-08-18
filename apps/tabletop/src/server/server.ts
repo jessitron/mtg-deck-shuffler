@@ -6,8 +6,8 @@ import { WebSocketServer } from "ws";
 import { trace, context, propagation, SpanKind } from "@opentelemetry/api";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
-import { handleCardArrival } from "./cardArrival.js";
 import { handleSeatJoined } from "./seatJoined.js";
+import { handleTestCardSeed } from "./testSeedRoute.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -41,11 +41,14 @@ export function createApp() {
     res.json({ tracesUrl: null, logsUrl: null });
   });
 
-  // The card-arrival seam (A5) — SCAFFOLDING the Spine absorbs; see cardArrival.ts
-  app.post("/api/tables/:tableName/cards", handleCardArrival);
-
   // The seat-joined seam (JES-140) — SCAFFOLDING the Spine absorbs; see seatJoined.ts
   app.post("/api/tables/:tableName/events", handleSeatJoined);
+
+  // Test-only seam: lets Playwright/vitest seed a card without a live Spine. Never
+  // mounted in production — card.played only arrives via the Spine SSE subscription.
+  if (process.env.ENABLE_TEST_SEED_ROUTE === "true") {
+    app.post("/test/tables/:tableName/cards", handleTestCardSeed);
+  }
 
   // Static app (Vite build output)
   app.use(express.static(CLIENT_DIR));

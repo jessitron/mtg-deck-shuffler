@@ -10,6 +10,7 @@ let server: Server;
 let port: number;
 
 beforeAll(async () => {
+  process.env.ENABLE_TEST_SEED_ROUTE = "true";
   server = await startServer(0);
   const address = server.address();
   if (typeof address === "object" && address) port = address.port;
@@ -57,7 +58,7 @@ function cardPlayed(tableName: string, envelopeOverrides: Record<string, unknown
 }
 
 async function post(tableName: string, body: unknown): Promise<Response> {
-  return fetch(`http://localhost:${port}/api/tables/${slugFor(tableName)}/cards`, {
+  return fetch(`http://localhost:${port}/test/tables/${slugFor(tableName)}/cards`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),

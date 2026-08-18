@@ -11,4 +11,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 5180
-  type: ClusterIP # Internal service for ALB Ingress; the Shuffler also POSTs here in-cluster (TABLETOP_URL=http://mtg-tabletop-service)
+  type: ClusterIP # Internal service for ALB Ingress; the Spine POSTs seat.joined here in-cluster (TABLETOP_URL=http://mtg-tabletop-service) — the Shuffler no longer talks to this ship directly

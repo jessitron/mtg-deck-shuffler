@@ -47,7 +47,7 @@ async function expectTapped(page: Page, instanceId: string, tapped: boolean) {
 }
 
 async function placeCard(page: Page, baseURL: string | undefined, tableSlug: string, instanceId: string, overrides: Record<string, unknown> = {}) {
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, {
+  const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, {
     data: cardPlayed(tableSlug, {
       cardName: "Llanowar Elves",
       card: { scryfallId: randomUUID(), instanceId },

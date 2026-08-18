@@ -212,14 +212,6 @@ export function getModalCardActionsByLocation(gameCard: GameCard, gameId: GameId
 
 
 
-export function formatTabletopSendErrorModal(action: string, cardName: string, tableName: string): string {
-  return formatModalHtmlFragment(
-    "⚠️ The table didn't get the card",
-    `<p class="modal-message">Couldn't send <strong>${cardName}</strong> to table "<strong>${tableName}</strong>".</p>
-     <p class="modal-message">The ${action} was blocked — the card stays where it was. Check the tabletop and try again.</p>`
-  );
-}
-
 export function formatLossModalHtmlFragment(): string {
   return formatModalHtmlFragment("☠️ You Lose! ☠️", `<p class="modal-message">You tried to draw from an empty library!</p>`);
 }
