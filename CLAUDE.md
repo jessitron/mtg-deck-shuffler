@@ -133,6 +133,7 @@ Single-ship commands (build, test, run, deploy) are in each ship's `CLAUDE.md`.
 ## Development Guidelines
 
 - **Workflow**: Use subagents - research agent to understand codebase, then separate agents for each conceptual change.
+- **Worktrees**: Yes. It's already configured to branch from local main, NOT origin/main which is often far behind.
 - **Testing**: User hates mocks. Use only fakes.
 - **Cleanup**: Look for newly-unused code to delete after each change. Especially unused CSS.
 
