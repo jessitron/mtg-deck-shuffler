@@ -2,7 +2,7 @@
 
 Mountain: spine-gathers-data
 Ship: shuffler
-Status: ready-for-agent
+Status: resolved
 
 **What to build:** The Shuffler stops making two independent best-effort calls (a thin
 `joinSpineTableBestEffort` to the Spine, a separate rich `seat.joined` POST straight to
@@ -20,22 +20,22 @@ call is awaited before `/game` redirects, same as today) — decoupling that is 
 
 **Blocked by:** 02 — needs the Spine's new `/join` request/response shape to call against
 
-- [ ] New single function in `apps/shuffler/src/port-spine/` replaces
+- [x] New single function in `apps/shuffler/src/port-spine/` replaces
       `joinSpineTableBestEffort` (from `sendToSpine.ts`) and
       `sendSeatJoinedBestEffort` (from `port-tabletop/sendToTable.ts`), building one
       request with `gameId`, `name`, `playerName`, `deckName`, `playmatImageUrl`,
       `cardBackImageUrl`, `sleeveColor`, `commanders`, `gameUrl`
-- [ ] `SeatJoinedPayload`/`buildSeatJoinedEvent` move from
+- [x] `SeatJoinedPayload`/`buildSeatJoinedEvent` move from
       `apps/shuffler/src/port-tabletop/types.ts` into `port-spine/`, gaining `gameUrl`
-- [ ] All three call sites in `app.ts` (`/start-game`, `/restart-game`, `/yo`) switch to
+- [x] All three call sites in `app.ts` (`/start-game`, `/restart-game`, `/yo`) switch to
       the new single call
-- [ ] `TabletopPort.sendSeatJoined` and its implementations (`HttpTabletopGateway`,
+- [x] `TabletopPort.sendSeatJoined` and its implementations (`HttpTabletopGateway`,
       `FakeTabletopGateway`) are deleted; `TabletopPort` keeps only `sendCardToTable`
-- [ ] The Shuffler stores the Spine's returned `tableUrl` instead of constructing the
+- [x] The Shuffler stores the Spine's returned `tableUrl` instead of constructing the
       Tabletop link itself, if it does so today
-- [ ] Extend the existing `FakeSpineGateway` (`apps/shuffler/src/port-spine/` test
+- [x] Extend the existing `FakeSpineGateway` (`apps/shuffler/src/port-spine/` test
       doubles) to accept and record the richer request
-- [ ] Jest test on `/start-game` (or wherever the call site lives) asserting exactly one
+- [x] Jest test on `/start-game` (or wherever the call site lives) asserting exactly one
       Spine call carries all the decoration fields, and a grep-level check that nothing
       calls the deleted `HttpTabletopGateway.sendSeatJoined`
-- [ ] `npm test` passes
+- [x] `npm test` passes
