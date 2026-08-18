@@ -8,5 +8,8 @@
   "enabledPlugins": {
     "seamapping@tronijess-skills": true,
     "mattpocock-skills@claude-plugins-official": true
+  },
+  "worktree": {
+    "baseRef": "head"
   }
 }

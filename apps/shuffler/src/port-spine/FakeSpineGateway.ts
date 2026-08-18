@@ -40,7 +40,8 @@ export class FakeSpineGateway implements SpinePort {
       throw new Error(`table ${tableId} already has 4 seats taken`);
     }
     this.seatCountByTableId.set(tableId, seatNumber);
-    const result: SpineJoinResult = { tableId, seatNumber, tableUrl: `http://fake-tabletop.test/t/${encodeURIComponent(request.name)}` };
+    const seatId = `fake-seat-${tableId}-${seatNumber}`;
+    const result: SpineJoinResult = { tableId, seatId, seatNumber, tableUrl: `http://fake-tabletop.test/t/${encodeURIComponent(request.name)}` };
     this.resultsByGameId.set(request.gameId, result);
     return result;
   }

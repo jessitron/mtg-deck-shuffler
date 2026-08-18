@@ -127,10 +127,12 @@ module Spine
         )
         current_span.add_attributes(
           "join.result" => join_result(outcome),
+          "seat.id" => outcome[:seat_id],
           "seat.number" => outcome[:seat_number]
         )
         JSON.generate(
           tableId: outcome[:table_id],
+          seatId: outcome[:seat_id],
           seatNumber: outcome[:seat_number],
           tableUrl: table_url(outcome[:table_name])
         )

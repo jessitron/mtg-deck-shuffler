@@ -23,18 +23,21 @@ early dev data, but still a real prod-data-wiping action.
 
 ## Next
 
+- major bug: played cards should not keep appearing to the right of the previous location, after the other one has been moved! That's only for when the prior card is still on the stack right where it landed.
+
+- serious bug: right-click stops working. it works sometimes, and then it just doesn't do anything. Other times it does. It is not predictable.
+
+- weird bug: occasionally, for no discernable reason, a bunch of cards return to the stack where they were initially played 😭
+
+- bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation 
+
 - before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game!
 
+- Tabletop needs to ignore the same player joining again, make it idempotent by seat number (and report the skip to Honeycomb loudly.)
+
+- Cards in the graveyard or exile do not tap on click. Instead, they come to the front.
+
 - Consider removing the animations owner, since the animations don't do much now.
-
-- In shuffler, add a button under the Library for 'Mill' - it has the effect of discarding the top card.
-  The buttons under the library should change to:
-
-```
-[       Draw       ]
-[ Reveal ] [ Mill  ]
-[ Search ] [Shuffle]
-```
 
 - clean up old branches
 

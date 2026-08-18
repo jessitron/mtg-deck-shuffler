@@ -29,7 +29,7 @@ export class HttpSpineGateway implements SpinePort {
       throw new Error(`Spine rejected the join: ${response.status} ${response.statusText} ${bodyText}`.trim());
     }
     const body = (await response.json()) as SpineJoinResult;
-    return { tableId: body.tableId, seatNumber: body.seatNumber, tableUrl: body.tableUrl };
+    return { tableId: body.tableId, seatId: body.seatId, seatNumber: body.seatNumber, tableUrl: body.tableUrl };
   }
 
   async sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void> {

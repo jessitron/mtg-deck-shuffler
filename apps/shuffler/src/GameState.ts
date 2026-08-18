@@ -93,7 +93,7 @@ export class GameState {
   // Table info (JES-127): present only when this game joined a table.
   public readonly tableName?: string;
   public readonly playerName?: string;
-  public readonly seatId?: string;
+  public seatId?: string;
   public spineTableId?: string;
   public spineSeatNumber?: number;
   public tableUrl?: string;
@@ -332,8 +332,17 @@ export class GameState {
     return moves;
   }
 
-  /** Records the outcome of a (best-effort) Spine join, made after this GameState already exists so it can carry the seat's commanders. */
-  public recordSpineJoin(outcome: { spineTableId?: string; spineSeatNumber?: number; tableUrl?: string }): void {
+  /**
+   * Records the outcome of a (best-effort) Spine join, made after this GameState already
+   * exists so it can carry the seat's commanders. The Spine is the sole authority on seat
+   * identity: `outcome.seatId` is the seat it actually minted for `seat.joined`, and once
+   * we have it, it replaces our own placeholder so every later send to the Tabletop (e.g.
+   * card.played) lands on the same seat, instead of a separately-invented id.
+   */
+  public recordSpineJoin(outcome: { seatId?: string; spineTableId?: string; spineSeatNumber?: number; tableUrl?: string }): void {
+    if (outcome.seatId) {
+      this.seatId = outcome.seatId;
+    }
     this.spineTableId = outcome.spineTableId;
     this.spineSeatNumber = outcome.spineSeatNumber;
     this.tableUrl = outcome.tableUrl;

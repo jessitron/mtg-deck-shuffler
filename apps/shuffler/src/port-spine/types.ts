@@ -86,6 +86,7 @@ export interface SpineJoinRequest extends SeatJoinedPayload {
 
 export interface SpineJoinResult {
   tableId: string;
+  seatId: string;
   seatNumber: number;
   tableUrl: string;
 }

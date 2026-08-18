@@ -1,6 +1,8 @@
 import { GameState, TableInfo, GameCard } from "../../src/GameState.js";
 import { FakeSpineGateway } from "../../src/port-spine/FakeSpineGateway.js";
+import { FakeTabletopGateway } from "../../src/port-tabletop/FakeTabletopGateway.js";
 import { joinSpineBestEffort, sendCardPlayedToSpineBestEffort } from "../../src/port-spine/sendToSpine.js";
+import { sendCardToTableFirst } from "../../src/port-tabletop/sendToTable.js";
 import { CardPlayedEvent } from "../../src/port-tabletop/types.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
 import { lightningBolt, nicolBolas, testProvenance } from "../generators.js";
@@ -48,6 +50,7 @@ describe("joinSpineBestEffort", () => {
 
     const result = await joinSpineBestEffort(fake, { gameId: "game-1", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck" });
 
+    expect(result.seatId).toBeDefined();
     expect(result.spineTableId).toBeDefined();
     expect(result.spineSeatNumber).toBe(1);
     expect(result.tableUrl).toBeDefined();
@@ -137,6 +140,39 @@ describe("joinSpineBestEffort", () => {
     fake.failWith(new Error("connection refused"));
 
     await expect(joinSpineBestEffort(fake, { gameId: "game-6", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck" })).resolves.toEqual({});
+  });
+});
+
+describe("game.recordSpineJoin", () => {
+  it("adopts the Spine's assigned seatId, so a card sent directly to the Tabletop lands on the same seat as seat.joined", async () => {
+    const spine = new FakeSpineGateway();
+    const tabletop = new FakeTabletopGateway();
+    const tableInfo: TableInfo = { tableName: "Friday Night", playerName: "Jess", seatId: "shuffler-guessed-this" };
+    const game = GameState.newGame(201, 1, 1, testDeck, undefined, tableInfo);
+    game.startGame();
+
+    const spineJoin = await joinSpineBestEffort(spine, { gameId: "game-201", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck" });
+    game.recordSpineJoin(spineJoin);
+
+    expect(game.seatId).toBe(spineJoin.seatId);
+    expect(game.seatId).not.toBe("shuffler-guessed-this");
+
+    const bolt = cardNamed(game, "Lightning Bolt");
+    await sendCardToTableFirst(tabletop, game, bolt, "stack");
+
+    expect(tabletop.sentEvents[0].event.initiator.seatId).toBe(spineJoin.seatId);
+  });
+
+  it("keeps the placeholder seatId when the Spine join fails — best-effort must not erase it", async () => {
+    const spine = new FakeSpineGateway();
+    spine.failWith(new Error("connection refused"));
+    const tableInfo: TableInfo = { tableName: "Friday Night", playerName: "Jess", seatId: "shuffler-guessed-this" };
+    const game = GameState.newGame(202, 1, 1, testDeck, undefined, tableInfo);
+
+    const spineJoin = await joinSpineBestEffort(spine, { gameId: "game-202", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck" });
+    game.recordSpineJoin(spineJoin);
+
+    expect(game.seatId).toBe("shuffler-guessed-this");
   });
 });
 

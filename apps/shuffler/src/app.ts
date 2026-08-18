@@ -526,10 +526,13 @@ export function createApp(
           commanders: game.listCommanders(),
         });
         game.recordSpineJoin(spineJoin);
+        if (spineJoin.seatId) {
+          trace.getActiveSpan()?.setAttribute("seat.id", spineJoin.seatId);
+        }
         // The Prep records all table info — that's what enables rejoining later.
         prep.tableName = tableInfo.tableName;
         prep.playerName = tableInfo.playerName;
-        prep.seatId = tableInfo.seatId;
+        prep.seatId = game.seatId ?? tableInfo.seatId;
         prep.spineTableId = spineJoin.spineTableId;
         prep.spineSeatNumber = spineJoin.spineSeatNumber;
         prep.tableUrl = spineJoin.tableUrl;
@@ -670,6 +673,9 @@ export function createApp(
           commanders: newGame.listCommanders(),
         });
         newGame.recordSpineJoin(spineJoin);
+        if (spineJoin.seatId) {
+          trace.getActiveSpan()?.setAttribute("seat.id", spineJoin.seatId);
+        }
       }
 
       await persistStatePort.save(newGame.toPersistedGameState());
@@ -1789,6 +1795,9 @@ export function createApp(
         commanders: game.listCommanders(),
       });
       game.recordSpineJoin(spineJoin);
+      if (spineJoin.seatId) {
+        trace.getActiveSpan()?.setAttribute("seat.id", spineJoin.seatId);
+      }
 
       const prep: PersistedGamePrep = {
         version: PERSISTED_GAME_PREP_VERSION,
@@ -1796,7 +1805,7 @@ export function createApp(
         deck: sortedDeck,
         tableName: tableInfo.tableName,
         playerName: tableInfo.playerName,
-        seatId: tableInfo.seatId,
+        seatId: game.seatId ?? tableInfo.seatId,
         spineTableId: spineJoin.spineTableId,
         spineSeatNumber: spineJoin.spineSeatNumber,
         tableUrl: spineJoin.tableUrl,

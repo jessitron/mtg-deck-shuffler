@@ -139,6 +139,7 @@ module Spine
       {
         table_id: table.id,
         table_name: table.name,
+        seat_id: seat.id,
         seat_number: seat.number,
         joined_event: joined_event,
         created: created,

@@ -17,6 +17,7 @@ export interface JoinSpineParams {
 }
 
 export interface SpineJoinOutcome {
+  seatId?: string;
   spineTableId?: string;
   spineSeatNumber?: number;
   tableUrl?: string;
@@ -44,7 +45,7 @@ export async function joinSpineBestEffort(spinePort: SpinePort | undefined, para
   );
   try {
     const result = await spinePort.join({ gameId: String(gameId), name: tableName, playerName, ...decoration });
-    return { spineTableId: result.tableId, spineSeatNumber: result.seatNumber, tableUrl: result.tableUrl };
+    return { seatId: result.seatId, spineTableId: result.tableId, spineSeatNumber: result.seatNumber, tableUrl: result.tableUrl };
   } catch (error) {
     trace.getActiveSpan()?.setAttributes({ "spine_join.failed": true, "table.name": tableName });
     log.warn("Spine join (table + seat) failed (best-effort; this game won't send to the Spine)", { "table.name": tableName }, error as Error);

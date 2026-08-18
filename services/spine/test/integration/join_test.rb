@@ -15,10 +15,10 @@ class JoinTest < Minitest::Test
 
     assert_equal 200, last_response.status
     response = JSON.parse(last_response.body)
-    assert_equal({ "tableId" => response["tableId"], "seatNumber" => 1,
+    seat = DB[:seats].first
+    assert_equal({ "tableId" => response["tableId"], "seatId" => seat[:id], "seatNumber" => 1,
       "tableUrl" => "http://table.example/t/rich%20table" }, response)
 
-    seat = DB[:seats].first
     assert_equal 1, DB[:tables].count
     assert_equal 1, DB[:seats].count
     assert_equal response["tableId"], seat[:table_id]
