@@ -117,6 +117,9 @@ repo root — see the root `CLAUDE.md`.
 Fleet-level Honeycomb setup is in the root `CLAUDE.md`; the browser side is in
 `notes/AGENT-NOTES.md` (spans go to a collector, not the server). Server side:
 
+- **Express middleware spans are off** (`ignoreLayersType` in `src/server/tracing.ts`,
+  matching the Shuffler), so a normal trace is the root server span plus
+  `request handler - <route>`, not eight spans of parser middleware.
 - **Logging**: `src/server/log.ts` — `log.info/warn/error(message, attributes, error?)`.
   Each record goes to stdout and to Honeycomb, carrying the trace/span id of the active
   span. **Reach for a span attribute first**; a log is for when there's no span to hang it
