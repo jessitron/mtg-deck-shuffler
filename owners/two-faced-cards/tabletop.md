@@ -19,14 +19,32 @@ rewrite of that file's old row-based functions (`rowOrigin`, `battlefieldPositio
 `apps/tabletop/DESIGN.md` for the geometry they were replaced with). `seatJoined.ts`
 (`POST /api/tables/:tableName/events`, `seat.joined`) draws a seat's whole player area
 before any card arrives — unaffected by ticket 12's shape-type change. What ticket 12
-changed, still in `cardArrival.ts` (`handleCardArrival`): the shape it builds is now
+changed, still in `cardArrival.ts` (`applyCardArrival` — see the transport note just below
+for why it's no longer `handleCardArrival`): the shape it builds is now
 `type: "mtg-card"` with identity/face/image-URLs in `props` and an empty `meta`, not the
 old `type: "image"` shape with identity in `meta` and a minted per-card asset — see
 "Arrival renders the played face" below for the current shape.
 
+**Transport changed too, tabletop-sse ticket 02 (2026-08-18):** `cardArrival.ts`'s
+`handleCardArrival` (the HTTP `POST /api/tables/:tableName/cards` handler) was deleted.
+The shared logic below — dedup, `ensurePlayerArea` self-heal, placement, and the
+two-faced-card face/`frontImageUrl`/`backImageUrl` handling this file documents — is
+unchanged in behavior but now lives in `cardArrival.ts`'s `applyCardArrival`. Its one
+production entry point is the Spine SSE dispatcher
+(`apps/tabletop/src/server/spineEventDispatch.ts`, ticket 01): `card.played` arrives as
+an SSE frame pushed by the Spine, not an HTTP POST from the Shuffler — that route is
+gone. There's also a test-only HTTP seam, `src/server/testSeedRoute.ts`, mounted at
+`POST /test/tables/:tableName/cards` only when `ENABLE_TEST_SEED_ROUTE=true` (never in
+production); it calls `applyCardArrival` directly, for Playwright specs and vitest files
+that spawn the server as its own process with no live Spine to seed a card through. The
+payload shape itself — everything below in this section — is unchanged; only the
+transport that delivers it to `applyCardArrival` changed.
+
 ## Arrival renders the played face
 
-- The card-arrival payload (`POST /api/tables/:tableName/cards`, frozen in F0/JES-128)
+- The card-arrival payload (the `card.played` event, frozen in F0/JES-128; delivered via
+  the Spine SSE subscription since tabletop-sse ticket 02, 2026-08-18 — see the transport
+  note above; formerly `POST /api/tables/:tableName/cards`, now deleted)
   carries `face: "front" | "back"` beside `card: { scryfallId, instanceId }`, plus (since
   ticket 12, 2026-08-08) `frontImageUrl: string` and `backImageUrl: string | null`
   (replacing the old baked `imageUrl`).
@@ -35,7 +53,7 @@ old `type: "image"` shape with identity in `meta` and a minted per-card asset �
   `apps/shuffler/src/port-tabletop/types.ts`'s `buildCardPlayedEvent`. `face:
   currentFace` still says which face is up on arrival.
 - **The Tabletop now stores everything it's given, directly in shape `props`.**
-  `cardArrival.ts`'s `handleCardArrival` writes `frontImageUrl`, `backImageUrl`, and
+  `cardArrival.ts`'s `applyCardArrival` writes `frontImageUrl`, `backImageUrl`, and
   `face` straight onto the new `mtg-card` shape (`type: "mtg-card"`) — no baking, no
   dropping. **Consequence: flip is now structurally a pure `props.face` write** — the
   shape already holds both URLs, so a future flip gesture needs only to change one enum
