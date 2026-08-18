@@ -253,6 +253,15 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `tableName`, `playerName`, and `gameId` through so the flags actually reach init. **The prep page
   (`views/prepare.ejs`) deliberately does not stamp `game.id`** — a prep has a `prepId`, not a
   `gameId`; don't overload `game.id` with it.
+- **The Shuffler's three Spine-join call sites in `apps/shuffler/src/app.ts`** (`/start-game`,
+  `/restart-game`, `/yo`): each calls `trace.getActiveSpan()?.setAttribute("seat.id",
+  spineJoin.seatId)` by hand right after `game.recordSpineJoin(spineJoin)`, guarded by `if
+  (spineJoin.seatId)` — a manual per-route stamp, **not** routed through
+  `setCommonSpanAttributes`/`CommonAttributes`, because a seat id only exists at the moment of a
+  join, unlike `table.name`/`player.name` which apply to every mutation/GET-fragment route once a
+  game is in table mode. `seat.id` is also the spelling `apps/tabletop/src/server/cardArrival.ts`
+  and `seatJoined.ts` already use — keep it consistent across ships. `GameState.recordSpineJoin`
+  itself stamps nothing; telemetry stays in the HTTP layer.
 - **Adding a game-mutation route in `apps/shuffler/src/app.ts`**: all 13 game-mutation routes go
   through `apply-game-command.ts`'s `applyGameCommand()`, which owns the
   "not-found"/"incompatible-version" `markCurrentSpanAsError` calls for all of them — don't re-add
