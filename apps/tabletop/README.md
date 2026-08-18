@@ -34,10 +34,15 @@ Shuffler instead of the clipboard. See `SEAMAP.md` for where this ship is headed
 
 Two things here are deliberate stand-ins, marked in the source and easy to delete:
 
-1. **The card-arrival endpoint** (`src/server/cardArrival.ts`). Future: the Shuffler
-   emits `card.played` to the Spine's event log and the Tabletop subscribes to the
-   table's public feed instead of this direct POST. Until then the Shuffler POSTs
-   here directly, but the body it sends is already the real thing: a full envelope
+1. **The card-arrival endpoint** (`src/server/cardArrival.ts`). The Tabletop now also
+   subscribes directly to the Spine's per-table SSE feed (`src/server/spineSubscriber.ts`,
+   `spineEventDispatch.ts`) and routes `card.played` events arriving that way through the
+   same logic (tabletop-spine-sse-subscriber ticket 01) — but the Shuffler's direct POST
+   here still runs unmodified alongside it for now, purely additively; existing dedup makes
+   a card arriving twice (once via POST, once via SSE) harmless. A later ticket
+   (`.scratch/tabletop-spine-sse-subscriber/issues/02-shuffler-drops-direct-post.md`)
+   deletes this endpoint once the subscriber is confirmed working end-to-end. The body this
+   endpoint accepts is the real thing regardless: a full envelope
    (`contracts/envelope.v1.json`) carrying a card.played payload
    (`contracts/payloads/card.played.v1.json`), validated for real via ajv
    (`src/server/contractValidation.ts`, ticket 05 of tabletop-cards-come-and-go) —

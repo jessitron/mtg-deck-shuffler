@@ -28,6 +28,8 @@ SPINE_PORT=${SPINE_PORT:-4600}
 # The Shuffler talks to the local Tabletop, and its "at table" link points there too.
 export TABLETOP_URL="http://localhost:$TABLETOP_PORT"
 export TABLETOP_PUBLIC_URL="http://localhost:$TABLETOP_PORT"
+# The Tabletop's Spine SSE subscriber talks to the local Spine.
+export SPINE_URL="http://localhost:$SPINE_PORT"
 
 prefix() {
   local label="$1"

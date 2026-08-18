@@ -142,6 +142,20 @@ describe("seat joined", () => {
     expect((await secondAttempt.json()).deduped).toBe(true);
   });
 
+  it("opens one Spine SSE subscription per room, on the first seat.joined (tabletop-spine-sse-subscriber ticket 01)", async () => {
+    const tableName = "seat-spine-subscription";
+    await post(tableName, seatJoined(tableName, { initiator: { seatId: "seat-sub-a", playerName: "Sam" } }));
+    const entryAfterFirst = getRoomRegistry().get(slugFor(tableName));
+    expect(entryAfterFirst?.spineTableId).toBe(slugFor(tableName));
+    const firstSubscription = entryAfterFirst?.spineSubscription;
+    expect(firstSubscription).toBeDefined();
+
+    await post(tableName, seatJoined(tableName, { initiator: { seatId: "seat-sub-b", playerName: "Robin" } }));
+    expect(getRoomRegistry().get(slugFor(tableName))?.spineSubscription).toBe(firstSubscription);
+
+    firstSubscription?.close();
+  });
+
   it("missing playmatImageUrl degrades to a plain mat, not a broken player area", async () => {
     const event = seatJoined("seat-no-image", {}, { playmatImageUrl: undefined, cardBackImageUrl: undefined });
     const response = await post("seat-no-image", event);

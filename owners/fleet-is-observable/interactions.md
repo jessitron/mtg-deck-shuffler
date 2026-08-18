@@ -293,6 +293,16 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `apps/shuffler/src/shutdownHooks.ts` is the reference shape: bound the drain with a
   `Promise.race` against an `unref()`'d timer, and guard idempotency so a second signal doesn't
   fire twice. Both ships have their own copy — a verbatim port, not a shared module.
+- **Adding a Node-side streaming consumer that continues a trace from a body-embedded
+  `traceparent`**: `apps/tabletop/src/server/spineEventDispatch.ts`'s `dispatchSpineEvent` is now
+  the precedent — `propagation.extract(ROOT_CONTEXT, { traceparent })` then `context.with(parentContext,
+  () => tracer.startActiveSpan(name, { kind: SpanKind.CONSUMER, attributes: {...} }, ...))`, child
+  of the publisher's trace, never a link. Use `SpanKind.CONSUMER` for this shape specifically — every
+  other manual span in the fleet is `SpanKind.INTERNAL` because it's driven by an inbound HTTP
+  request, not a message off a stream. Fall back to `ROOT_CONTEXT` on a missing/malformed
+  `traceparent`, don't fail the dispatch. The stream-reading layer itself
+  (`apps/tabletop/src/server/spineSubscriber.ts`) has no ambient span — reconnect/parse-failure
+  conditions are `log.warn` only, per Invariant 2's "no span in a timer/background callback" rule.
 - **Adding a third Tabletop server event handler alongside `handleSeatJoined`
   (`seatJoined.ts`, span `"add player furniture"`) and `handleCardArrival`
   (`cardArrival.ts`, span `"place arrived card"`)**: both wrap only the

@@ -6,6 +6,8 @@ import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape, addCommanderDamageCounters } from "./tableFurniture.js";
 import { MAX_SEATS, CARD_W, CARD_H, commandZoneCardPosition } from "./cardLayout.js";
 import { validateIncomingEvent } from "./contractValidation.js";
+import { subscribeToSpine } from "./spineSubscriber.js";
+import { dispatchSpineEvent } from "./spineEventDispatch.js";
 
 const tracer = trace.getTracer("mtg-tabletop");
 
@@ -66,6 +68,13 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
   });
 
   const entry = getOrCreateRoom(tableName);
+
+  // One live Spine SSE subscription per room, opened the first time a seat.joined
+  // tells this room its Spine tableId — a second seat joining is a no-op here.
+  if (!entry.spineSubscription) {
+    entry.spineTableId = envelope.tableId;
+    entry.spineSubscription = subscribeToSpine(envelope.tableId, (spineEvent) => dispatchSpineEvent(tableName, spineEvent));
+  }
 
   if (entry.seenEventIds.has(envelope.id)) {
     trace.getActiveSpan()?.setAttribute("seat_joined.deduped", "event-id");

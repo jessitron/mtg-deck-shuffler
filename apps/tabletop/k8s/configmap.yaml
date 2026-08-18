@@ -25,3 +25,7 @@ data:
   # (apps/shuffler/k8s/configmap.yaml); mirrors TABLETOP_PUBLIC_URL for the
   # reverse direction.
   SHUFFLER_PUBLIC_URL: "https://mtg.jessitron.honeydemo.io"
+  # In-cluster call, bypasses the ALB entirely — but the Spine always expects its
+  # SPINE_BASE_PATH prefix (services/spine/k8s/configmap.yaml), same as the
+  # Shuffler's own SPINE_URL (apps/shuffler/k8s/configmap.yaml).
+  SPINE_URL: "http://spine-service/spine"
