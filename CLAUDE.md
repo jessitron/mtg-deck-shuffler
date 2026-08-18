@@ -136,40 +136,39 @@ Single-ship commands (build, test, run, deploy) are in each ship's `CLAUDE.md`.
 - **Testing**: User hates mocks. Use only fakes.
 - **Cleanup**: Look for newly-unused code to delete after each change. Especially unused CSS.
 
+## Verification
+
+How will you know it's working?
+
+- Unit tests, you know how to do this already
+- Playwright scripts for UI tests, the ships have their own when necessary
+- When a test is broken, unrelated to your work, fork a subagent off to fix it! Do not waste your time and every future agent's time with it. Tell the subagent to first check whether the test is still valid, and if not, delete it.
+- If you want to verify in a browser, you can use the chrome extension. If the extension is broken, please STOP AND ASK THE USER to fix it.
+- To make sure it's working as you expect, check traces and span attributes in Honeycomb. If the MCP is not found, then stop and ask the user to authorize it.
+
 ## Observability
 
 Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernity`):
 
 - **Local tests**: environment `local`.
-- **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).
-- **API key sourcing**: each ship's `.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` **at the repo root** (sourced on `cd` into the repo). So `.be` must be sourced **before** `.env`, or OTLP export silently 401s ("unknown API key"). The `verify.sh` scripts source both in that order; if you start a server by hand for telemetry, do the same.
-- **Two keys, two environments.** `HONEYCOMB_API_KEY` is the **`local`** ingest key (access: `createDatasets` only). `HONEYCOMB_MARKER_KEY`, also in `.be`, is a **`mtg-deck-shuffler`** (prod) key with Markers access — used only by `scripts/deploy-marker.sh`. Don't cross them: the ingest key cannot write markers, and marking the wrong environment succeeds silently, which is why the marker script checks the key's environment via `/1/auth` before posting.
-- **Deploys leave a marker.** All three `deploy.sh` call `scripts/deploy-marker.sh <ship>` _after_ a successful rollout (type `deploy`, message `deploy <ship> <short-sha>`, linking the GitHub commit), and each tags the commit `deploy-<ship>-<timestamp>` locally. The marker call is best-effort (`|| true`) — the deploy has already landed, so a marker problem must never read as a failed deploy.
+- **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).**before** `.env`, or OTLP export silently 401s ("unknown API key"). The `verify.sh` scripts source both in that order; if you start a server by hand for telemetry, do the same.
 
 - **Recording that something happened**: put it on the span as **attributes** — always the
   first choice, and free in Honeycomb. When there's no live span to hang it on (startup,
-  callbacks, timers, uncaught browser errors), use that ship's logger: `src/log.ts` in the
+  callbacks, timers, uncaught browser errors) or the event could happen more than once and you need to record both, use that ship's logger: `src/log.ts` in the
   Shuffler, `src/server/log.ts` in the Tabletop, `logError()` in the Tabletop's browser
   wrapper. The Spine has no logs pipeline yet (`spine-logs-in-traces` in `TODO.md`).
-  **Never `span.addEvent`** — a
-  callback outlives the span that scheduled it, and writing to an ended span throws.
+  **Never `span.addEvent`** — logs are the same except safer (they get delivered immediately and do not throw on an ended span).
 
 Ship-specific telemetry details (sampling, datasets, probe endpoints) are in each
-ship's `CLAUDE.md`. Before touching telemetry wiring, consult the fleet-is-observable
+ship's `CLAUDE.md`. You can add attributes freely. Before touching wiring, consult the fleet-is-observable
 owner (`owners/fleet-is-observable/`).
 
 ## Documentation
 
 Design directives, features, vocabulary, and code structure in `notes/`. Keep updated with changes.
 
-`notes/AGENT-NOTES.md` collects gotchas learned while working here — non-obvious "oh,
-_that's_ why" findings (why the Shuffler's `./run` doesn't source `.be`, why its Docker
-build context is the repo root, and so on). Read it when something surprises you; append
-to it when something surprises you and wasn't written down.
-
-Update this file when anything in it changes.
-
-Code comments should be very limited. Never reference tickets in code comments; that's what the commit message is for.
+Code comments should be very limited. Never reference tickets or dates in code comments; that's what the commit message is for.
 
 ## Owners
 

@@ -31,8 +31,7 @@ owners stamped with a different ship, never the fleet-scoped ones.
   identity across ships; new UI pulls toward the standard**
 - [the fleet is observable](fleet-is-observable/README.md) — _capability, fleet_ — consult me before
   changes to telemetry wiring, env/secret sourcing, run/deploy scripts, OTel dependency versions,
-  HTTP middleware, or trace-context propagation — and before recording that something happened
-  (**never `span.addEvent`; attributes or a log instead**).
+  HTTP middleware, or trace-context propagation. You're free to add span attributes and logs without asking.
 
 Keep each entry to one scannable line-or-two — every planning check reads this whole list. The
 knowledge belongs in the owner's own directory. Don't sprawl: the gate for a new owner is

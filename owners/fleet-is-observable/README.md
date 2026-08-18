@@ -128,7 +128,14 @@ as `service.version`, plus `verify.git.sha` on every span — a worked example t
 lands on the ships. The Tabletop's **browser** bundle counts too: a user holding a stale bundle
 after a deploy is currently invisible, and is arguably the more valuable half.
 
+
 ## How it works now
+
+- **Deploys leave a marker.** All three `deploy.sh` call `scripts/deploy-marker.sh <ship>` _after_ a successful rollout (type `deploy`, message `deploy <ship> <short-sha>`, linking the GitHub commit), and each tags the commit `deploy-<ship>-<timestamp>` locally. The marker call is best-effort (`|| true`) — the deploy has already landed, so a marker problem must never read as a failed deploy.
+
+- **API key sourcing**: each ship's `.env` sets `OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$HONEYCOMB_API_KEY"`, interpolated **at source time**. `HONEYCOMB_API_KEY` lives in `.be` **at the repo root** (sourced on `cd` into the repo). So `.be` must be sourced 
+
+- **Two keys, two environments.** `HONEYCOMB_API_KEY` is the **`local`** ingest key (access: `createDatasets` only). `HONEYCOMB_MARKER_KEY`, also in `.be`, is a **`mtg-deck-shuffler`** (prod) key with Markers access — used only by `scripts/deploy-marker.sh`. Don't cross them: the ingest key cannot write markers, and marking the wrong environment succeeds silently, which is why the marker script checks the key's environment via `/1/auth` before posting.
 
 _(This is the negotiable part — update this section whenever telemetry wiring changes.)_
 
