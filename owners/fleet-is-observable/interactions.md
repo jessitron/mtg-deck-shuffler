@@ -270,9 +270,9 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   void`. **`TableSendFailedError` and `beforeMutate`'s send-then-commit use are gone**
   (tabletop-spine-sse-subscriber ticket 02) — `play-card`/`discard-card` mutate+persist
   immediately now, same as every other route; there's no more synchronous failure outcome to
-  render as a 502. `beforeMutate?` is still a parameter but nothing in `app.ts` passes one — don't
-  treat its presence as license to resurrect a send-then-commit protocol; that shape is
-  deliberately gone. `applyGameCommand` also `setCommonSpanAttributes({ tableName,
+  render as a 502. `play-card`/`discard-card` still pass a `beforeMutate` — it now only calls
+  `sendCardPlayedToSpineBestEffort`, which never throws — don't treat that live usage as
+  license to resurrect a send-then-commit protocol; that shape is deliberately gone. `applyGameCommand` also `setCommonSpanAttributes({ tableName,
   playerName })` right after the game loads, so every mutation route gets `table.name`/`player.name`
   for free — a new mutation route needs nothing extra. The **GET fragment routes** don't share that
   choke point, so each one that reconstructs a `GameState` (`/game`, `/library-modal`,

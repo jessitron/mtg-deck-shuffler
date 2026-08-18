@@ -16,13 +16,13 @@ needs a change in the Shuffler or the Spine, stop and say so instead of reaching
 ## What this is
 
 Vite + React + tldraw synced canvas with an Express/ws sync server.
-`/t/:tableSlug` is a shared board; two SCAFFOLDING endpoints (for the Spine's
-future feed) place things on it: `POST /api/tables/:tableSlug/events`
+`/t/:tableSlug` is a shared board. One SCAFFOLDING endpoint (for the Spine's
+future feed) places things on it: `POST /api/tables/:tableSlug/events`
 (`seat.joined`, `src/server/seatJoined.ts`) draws a seat's player area at
-Shuffle Up, and `POST /api/tables/:tableSlug/cards` (`cardArrival.ts`) places
-cards from the Shuffler onto it.
+Shuffle Up. `card.played` has no HTTP entry point anymore — see the SSE
+subscription below.
 
-**The server also opens one live Spine SSE subscription per room** (tabletop-spine-sse-subscriber
+**The server opens one live Spine SSE subscription per room** (tabletop-spine-sse-subscriber
 ticket 01), against `GET /tables/:tableId/events/stream`. `handleSeatJoined` opens it the first
 time a room hears `seat.joined` — the room's Spine `tableId` and the subscription handle live on
 `RoomEntry` (`rooms.ts`); a second seat joining the same room is a no-op, since the room already
@@ -30,18 +30,20 @@ has one. `spineSubscriber.ts` is a small hand-rolled SSE client (streamed `fetch
 Spine's `data: <json>\n\n` frames — no `EventSource`, since one server process holds many
 concurrent per-table streams) that reconnects on its own after a drop, with no catch-up/replay of
 missed events. `spineEventDispatch.ts` inspects each received envelope's `name`; only
-`card.played` has a consumer today (routed to `cardArrival.ts`'s `applyCardArrival`, the same
-dedup/`ensurePlayerArea`/placement logic the HTTP route uses — `handleCardArrival` is now a thin
-wrapper that maps `applyCardArrival`'s outcome to an HTTP response) — every other kind on the
-stream (`seat.taken`, `table.created`, …) is ignored. Each dispatched event continues the trace
-from the broadcast envelope's `traceparent` (injected fresh at publish time by the Spine's
-`Table#broadcast`) as a CHILD span, not an unlinked one. **Env**: `SPINE_URL`, default
-`http://localhost:4600` (same variable and default as the Shuffler's — see its `CLAUDE.md`).
-This subscriber is purely additive for now: the Shuffler's direct `card.played` POST to this
-ship's `/api/tables/:tableSlug/cards` still runs unmodified alongside it (existing dedup already
-makes a card arriving twice — once via POST, once via SSE — harmless); a later ticket
-(`.scratch/tabletop-spine-sse-subscriber/issues/02-shuffler-drops-direct-post.md`) removes that
-direct POST once this subscriber is confirmed working end-to-end.
+`card.played` has a consumer today (routed to `cardArrival.ts`'s `applyCardArrival` — dedup,
+`ensurePlayerArea` self-heal, placement). Every other kind on the stream (`seat.taken`,
+`table.created`, …) is ignored. Each dispatched event continues the trace from the broadcast
+envelope's `traceparent` (injected fresh at publish time by the Spine's `Table#broadcast`) as a
+CHILD span, not an unlinked one. **Env**: `SPINE_URL`, default `http://localhost:4600` (same
+variable and default as the Shuffler's — see its `CLAUDE.md`). **This SSE subscription is the
+only way `card.played` reaches this ship** (`tabletop-spine-sse-subscriber` ticket 02,
+2026-08-18): the Shuffler's old direct POST to `/api/tables/:tableSlug/cards`, and this ship's
+`handleCardArrival` HTTP route that received it, are both gone. `applyCardArrival` is unchanged;
+`src/server/testSeedRoute.ts` is a **test-only** HTTP seam (only mounted when
+`ENABLE_TEST_SEED_ROUTE=true`, at `POST /test/tables/:tableSlug/cards` — a different path, on
+purpose, from the retired production route) that calls `applyCardArrival` directly, for specs
+and `cardArrival.test.ts` that drive a server spawned as its own process and have no live Spine
+to seed a card through. Never mounted without that env var, and never in production.
 
 **`tableSlug` is an opaque literal string, not a lookup key — it *is* the Spine's real
 table id**, not a display name derived from one (`<name-slug>-<8-hex-random>`, minted

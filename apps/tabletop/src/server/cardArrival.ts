@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { trace, SpanKind } from "@opentelemetry/api";
 import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom } from "./rooms.js";
@@ -32,9 +31,9 @@ export type CardArrivalOutcome =
 
 /**
  * The core of card arrival — validation, dedup, ensurePlayerArea self-heal, and
- * placement — shared by the HTTP route (`handleCardArrival`) and the Spine SSE
- * dispatcher (`spineEventDispatch.ts`), which each map the outcome to their own
- * transport (HTTP response vs. a log).
+ * placement. The only production entry point is the Spine SSE dispatcher
+ * (`spineEventDispatch.ts`); `testSeedRoute.ts` calls this directly too, as a
+ * test-only HTTP seam for specs that need to seed a card without a live Spine.
  */
 export async function applyCardArrival(tableName: string, body: unknown): Promise<CardArrivalOutcome> {
   const result = validateIncomingEvent<CardPlayedPayload>(body, "card.played");
@@ -152,28 +151,4 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
 
   entry.seenEventIds.add(envelope.id);
   return { status: "placed" };
-}
-
-export async function handleCardArrival(req: Request, res: Response): Promise<void> {
-  const tableName = slugifyTableName(req.params.tableName ?? "");
-  if (!tableName) {
-    res.status(400).json({ error: "table name required" });
-    return;
-  }
-
-  const outcome = await applyCardArrival(tableName, req.body);
-  switch (outcome.status) {
-    case "invalid":
-      res.status(400).json({ error: outcome.error });
-      return;
-    case "placed":
-      res.status(201).json({ ok: true });
-      return;
-    case "deduped":
-      res.status(200).json({ ok: true, deduped: true });
-      return;
-    case "rejected":
-      res.status(409).json({ error: `table is full: ${MAX_SEATS} seats` });
-      return;
-  }
 }

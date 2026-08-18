@@ -12,11 +12,9 @@ import { formatHtmlHead } from "./view/common/html-layout.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
-import { TabletopPort, ZoneHint } from "./port-tabletop/types.js";
-import { sendCardToTableFirst, zoneHintForPlay } from "./port-tabletop/sendToTable.js";
+import { ZoneHint, zoneHintForPlay } from "./port-tabletop/types.js";
 import { SpinePort } from "./port-spine/types.js";
 import { sendCardPlayedToSpineBestEffort, joinSpineBestEffort } from "./port-spine/sendToSpine.js";
-import { formatTabletopSendErrorModal } from "./view/play-game/game-modals.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { log } from "./log.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -28,7 +26,7 @@ import { trace } from "@opentelemetry/api";
 import { getCardImageUrl, constructCardImageUrl } from "./types.js";
 import { fetchScryfall } from "./scryfall-http.js";
 import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
-import { applyGameCommand, CommandOutcome, TableSendFailedError } from "./apply-game-command.js";
+import { applyGameCommand, CommandOutcome } from "./apply-game-command.js";
 import { WhatHappened } from "./GameState.js";
 import { GameId, parseGameId } from "./domain-types.js";
 
@@ -40,7 +38,6 @@ export function createApp(
   persistStatePort: PersistStatePort,
   persistPrepPort: PersistPrepPort,
   cardRepository: CardRepositoryPort,
-  tabletopPort?: TabletopPort,
   spinePort?: SpinePort
 ): express.Application {
   const app = express();
@@ -118,16 +115,9 @@ export function createApp(
     return expectedVersionStr === undefined ? undefined : parseInt(expectedVersionStr);
   }
 
-  async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint, action: "play" | "discard"): Promise<void> {
+  async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint): Promise<void> {
     const attributes = { "table.name": game.tableName!, "card.instance_id": card.cardInstanceId ?? "missing", "zone.hint": zoneHint };
     trace.getActiveSpan()?.setAttributes(attributes);
-    try {
-      await sendCardToTableFirst(tabletopPort, game, card, zoneHint);
-    } catch (error) {
-      markCurrentSpanAsError(`Tabletop send failed: ${error instanceof Error ? error.message : String(error)}`, attributes);
-      log.error(`Tabletop did not accept the card; blocking the ${action}`, attributes, error as Error);
-      throw new TableSendFailedError(formatTabletopSendErrorModal(action, card.card.name, game.tableName!));
-    }
     await sendCardPlayedToSpineBestEffort(spinePort, game, card, zoneHint);
   }
 
@@ -159,9 +149,6 @@ export function createApp(
       }
       case "not-active":
         res.status(400).send(`<div>${notActiveMessage}</div>`);
-        return;
-      case "send-failed":
-        res.status(502).setHeader("HX-Retarget", "#modal-container").setHeader("HX-Reswap", "innerHTML").send(outcome.errorHtml);
         return;
       case "applied": {
         res.setHeader("HX-Trigger", "game-state-updated");
@@ -1393,7 +1380,7 @@ export function createApp(
           if (!game.tableName || !cardToPlay || (cardToPlay.location.type !== "Hand" && cardToPlay.location.type !== "Revealed")) {
             return;
           }
-          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay), "play");
+          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay));
         }
       );
 
@@ -1428,7 +1415,7 @@ export function createApp(
           if (!game.tableName || !cardToDiscard || cardToDiscard.location.type !== "Hand") {
             return;
           }
-          await sendCardBeforeMutate(game, cardToDiscard, "graveyard", "discard");
+          await sendCardBeforeMutate(game, cardToDiscard, "graveyard");
         }
       );
 
@@ -1463,7 +1450,7 @@ export function createApp(
           if (!game.tableName || !topCard) {
             return;
           }
-          await sendCardBeforeMutate(game, topCard, "graveyard", "discard");
+          await sendCardBeforeMutate(game, topCard, "graveyard");
         }
       );
 

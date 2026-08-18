@@ -10,8 +10,6 @@ import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { InMemoryCardRepositoryAdapter } from "./port-card-repository/InMemoryCardRepositoryAdapter.js";
 import { SqliteCardRepositoryAdapter } from "./port-card-repository/SqliteCardRepositoryAdapter.js";
 import { ScryfallCardImagesGateway } from "./port-card-images/ScryfallCardImagesGateway.js";
-import { TabletopPort } from "./port-tabletop/types.js";
-import { HttpTabletopGateway } from "./port-tabletop/HttpTabletopGateway.js";
 import { SpinePort } from "./port-spine/types.js";
 import { HttpSpineGateway } from "./port-spine/HttpSpineGateway.js";
 import { createApp } from "./app.js";
@@ -64,15 +62,11 @@ const cardRepository: CardRepositoryPort = createCardRepositoryAdapter();
 const persistStatePort: PersistStatePort = createPersistStateAdapter(cardRepository);
 const persistPrepPort: PersistPrepPort = createPersistPrepAdapter(cardRepository);
 
-const tabletopUrl = process.env.TABLETOP_URL || "http://localhost:5180";
-log.info("Sending played cards to tabletop (for games at a table)", { "tabletop.url": tabletopUrl });
-const tabletopPort: TabletopPort = new HttpTabletopGateway(tabletopUrl);
-
 const spineUrl = process.env.SPINE_URL || "http://localhost:4600";
 log.info("Sending card.played to the Spine's event log (for games at a table)", { "spine.url": spineUrl });
 const spinePort: SpinePort = new HttpSpineGateway(spineUrl);
 
-const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository, tabletopPort, spinePort);
+const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository, spinePort);
 const PORT = process.env.PORT || 3333;
 
 

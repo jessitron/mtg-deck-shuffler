@@ -6,7 +6,7 @@ export function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
 }
 
-/** Build a `card.played` event envelope for POSTing to /api/tables/:tableSlug/cards. */
+/** Build a `card.played` event envelope for POSTing to the test-only seed route. */
 export function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown> = {}) {
   return {
     id: randomUUID(),
@@ -54,7 +54,7 @@ export async function placeCard(
     card: { scryfallId: randomUUID(), instanceId },
     ...payloadOverrides,
   });
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);
   const card = page.locator(`#shape\\:card-${instanceId}`);
   await expect(card).toBeAttached();

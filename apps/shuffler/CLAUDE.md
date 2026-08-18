@@ -223,13 +223,15 @@ all three on BOTH `PersistedGamePrep` and `PersistedGameState` (optional fields,
 version bumps). `/restart-game` carries them forward.
 
 - **Routes**: `POST /play-card/:gameId/:gameCardIndex` and `POST /discard-card/:gameId/:gameCardIndex`
-  are **send-then-commit** in table mode: send to the tabletop FIRST via
-  `src/port-tabletop/` (`HttpTabletopGateway`; `FakeTabletopGateway` for tests); only on
-  success mutate + persist. Failure → 502 error modal, card stays in hand. Solo mode
-  (no table): clipboard flow, untouched. Zone hints: land→battlefield, nonland→stack,
-  discard→graveyard. The full failure protocol, station by station (send → abort →
-  `applyGameCommand` → 502 response → htmx config → modal choreography):
-  `notes/DESIGN-send-then-commit.md`.
+  mutate + persist immediately in table mode, same as solo — there is no longer any
+  synchronous send to the Tabletop to block on (`tabletop-spine-sse-subscriber` ticket
+  02, 2026-08-18, removed the old **send-then-commit** direct HTTP path:
+  `sendCardToTableFirst`, `HttpTabletopGateway`, `FakeTabletopGateway`, and
+  `TabletopPort` are gone). `card.played` still reaches the Tabletop, but only via
+  `sendCardPlayedToSpineBestEffort` (below) — best-effort, never blocking, never a
+  reason to fail the play/discard. Solo mode (no table): clipboard flow, untouched.
+  Zone hints: land→battlefield, nonland→stack, discard→graveyard. `notes/DESIGN-send-then-commit.md`
+  documents the retired protocol for history; it no longer describes current behavior.
 - **Joining a table is one call to the Spine** (spine-in-the-middle ticket 03,
   2026-08-16): `/start-game`, `/restart-game`, and `/yo` all call
   `joinSpineBestEffort()` (`src/port-spine/sendToSpine.ts`) once, carrying identity
@@ -239,11 +241,12 @@ version bumps). `/restart-game` carries them forward.
   the table if needed, assigns a seat, mints `seat.taken` + `seat.joined` into its
   own log, and notifies the Tabletop itself over HTTP — and hands back
   `{tableId, seatNumber, tableUrl}`. **The Shuffler no longer talks to the
-  Tabletop directly to join a seat**: `TabletopPort` now carries only
-  `sendCardToTable`; `sendSeatJoined`, `HttpTabletopGateway.sendSeatJoined`,
-  `FakeTabletopGateway.sendSeatJoined`, and the old
-  `joinSpineTableBestEffort`/`sendSeatJoinedBestEffort` pair are gone. This is
-  still **best-effort** — a Spine that's down must not block starting the game,
+  Tabletop directly at all** — not to join a seat, and (ticket 02) not to send
+  `card.played` either. There is no `TabletopPort`, `HttpTabletopGateway`, or
+  `FakeTabletopGateway` left in this ship; `src/port-tabletop/` now holds only
+  the `card.played` envelope shape (`buildCardPlayedEvent`, `zoneHintForPlay`)
+  that both `sendCardPlayedToSpineBestEffort` and the Spine join's decoration
+  payload build against. This is still **best-effort** — a Spine that's down must not block starting the game,
   failure is a span attribute + `log.warn` — and still **awaited** before the
   `/game` redirect (decoupling that wait is a later ticket). The call happens
   *after* `GameState.newGame()` so `game.listCommanders()` has minted
@@ -255,13 +258,12 @@ version bumps). `/restart-game` carries them forward.
   `/game` page's "Go to Table" link instead of constructing
   `TABLETOP_PUBLIC_URL/t/<name>` itself (that construction is only a fallback
   now, for a game that never got a `tableUrl`).
-- **Env**: `TABLETOP_URL` (server-to-server sends for `card.played`; default
-  `http://localhost:5180`, prod `http://mtg-tabletop-service`),
-  `TABLETOP_PUBLIC_URL` (fallback "at table" link when a game has no stored
-  `tableUrl`; default `https://table.jessitron.honeydemo.io`),
+- **Env**: `TABLETOP_PUBLIC_URL` (fallback "at table" link when a game has no
+  stored `tableUrl`; default `https://table.jessitron.honeydemo.io`) and
   `SHUFFLER_PUBLIC_URL` (JES-140 — lets the Tabletop hotlink the standard
   card-back image as an absolute URL, and builds each seat's `gameUrl`; default
-  `https://mtg.jessitron.honeydemo.io`).
+  `https://mtg.jessitron.honeydemo.io`). `TABLETOP_URL` is gone — nothing on
+  this ship talks to the Tabletop directly anymore (see `SPINE_URL` below).
 - **Spine (`src/port-spine/`)**: the join request is idempotent, keyed by the
   Shuffler's own `gameId` — a retry (network blip) or a resend of the same
   `gameId` returns the same seat instead of minting a second one; the Spine does
@@ -297,8 +299,14 @@ version bumps). `/restart-game` carries them forward.
   (2026-08-10): the index only decodes to a card's rank in the public decklist, so
   the guard traded no real secrecy for a reasoning cost — every agent and payload
   having to know what may cross which boundary — that a trust-based table doesn't need.
-- **Two-app verification**: `test/verification/verify-tabletop-integration.spec.ts`
-  spawns the tabletop from `apps/tabletop/dist` (build it first) on port 5180.
+- **Three-ship verification**: `test/verification/verify-tabletop-integration.spec.ts`
+  spawns both a real Spine (`bundle exec puma`, `services/spine/`) and the real
+  Tabletop (`apps/tabletop/dist` — build it first), proving `card.played` reaches
+  the canvas with zero direct Shuffler→Tabletop HTTP call anywhere in the code.
+  `verify.sh` gives each its own random port (`SPINE_URL`/`TABLETOP_URL`) per run;
+  `playwright.config.ts`'s `two-app` project (depending on `chromium`) keeps this
+  spec from running alongside `verify-table-mode.spec.ts`'s Spine-unreachable case,
+  which needs that same `SPINE_URL` to have nothing listening on it.
 
 ## Data Sources & Adapters
 

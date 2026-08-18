@@ -1,5 +1,6 @@
-import { buildCardPlayedEvent, CARD_PLAYED_EVENT_NAME } from "../../src/port-tabletop/types";
+import { buildCardPlayedEvent, CARD_PLAYED_EVENT_NAME, zoneHintForPlay } from "../../src/port-tabletop/types";
 import { GameCard } from "../../src/GameState";
+import { CardDefinition } from "../../src/types";
 import { lightningBolt, nicolBolas } from "../generators";
 
 function handCard(card = lightningBolt, gameCardIndex = 42, isCommander = false): GameCard {
@@ -11,6 +12,27 @@ function handCard(card = lightningBolt, gameCardIndex = 42, isCommander = false)
     currentFace: "front",
   };
 }
+
+const forest: CardDefinition = {
+  name: "Forest",
+  scryfallId: "def456",
+  multiverseid: 54321,
+  twoFaced: false,
+  oracleCardName: "Forest",
+  colorIdentity: ["G"],
+  set: "LEA",
+  cardTypes: ["Land"],
+};
+
+describe("zoneHintForPlay", () => {
+  it("a land is played to the battlefield", () => {
+    expect(zoneHintForPlay(handCard(forest))).toBe("battlefield");
+  });
+
+  it("a nonland is played to the stack", () => {
+    expect(zoneHintForPlay(handCard(lightningBolt))).toBe("stack");
+  });
+});
 
 describe("buildCardPlayedEvent (the card.played envelope, JES-128)", () => {
   const initiator = { seatId: "abc123", playerName: "Jess" };

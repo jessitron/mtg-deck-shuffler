@@ -3,6 +3,10 @@ import { getCardImageUrl } from "../types.js";
 import { GameCard } from "../domain-types.js";
 import { currentTraceparent } from "./traceparent.js";
 
+export function zoneHintForPlay(gameCard: GameCard): ZoneHint {
+  return gameCard.card.cardTypes.includes("Land") ? "battlefield" : "stack";
+}
+
 
 export const CARD_PLAYED_EVENT_NAME = "card.played" as const;
 
@@ -79,9 +83,4 @@ export function buildCardPlayedEvent(
       gameCardIndex: gameCard.gameCardIndex,
     },
   };
-}
-
-
-export interface TabletopPort {
-  sendCardToTable(tableName: string, event: CardPlayedEvent): Promise<void>;
 }

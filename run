@@ -25,10 +25,12 @@ SHUFFLER_PORT=${SHUFFLER_PORT:-3344}
 TABLETOP_PORT=${TABLETOP_PORT:-5180}
 SPINE_PORT=${SPINE_PORT:-4600}
 
-# The Shuffler talks to the local Tabletop, and its "at table" link points there too.
-export TABLETOP_URL="http://localhost:$TABLETOP_PORT"
+# The Shuffler's "at table" link points at the local Tabletop (fallback only —
+# it prefers the tableUrl the Spine hands back at join time).
 export TABLETOP_PUBLIC_URL="http://localhost:$TABLETOP_PORT"
-# The Tabletop's Spine SSE subscriber talks to the local Spine.
+# Both the Shuffler (card.played sends, best-effort) and the Tabletop (its Spine
+# SSE subscriber) talk to the local Spine — there's no direct Shuffler→Tabletop
+# call anymore.
 export SPINE_URL="http://localhost:$SPINE_PORT"
 
 prefix() {

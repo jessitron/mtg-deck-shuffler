@@ -71,7 +71,7 @@ async function placeCard(page: Page, baseURL: string | undefined, tableSlug: str
     card: { scryfallId: "aaaaaaaa-1111-4111-8111-000000000019", instanceId },
     zoneHint: "stack",
   });
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);
   const card = page.locator(`#shape\\:card-${instanceId}`);
   await expect(card).toBeAttached();

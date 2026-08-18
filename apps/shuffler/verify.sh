@@ -31,6 +31,7 @@ VERIFY_GIT_SHA=$(git rev-parse --short HEAD 2>/dev/null || echo unknown)
 VERIFY_PORT=$(( (RANDOM % 20000) + 20000 ))
 BASE_URL="http://localhost:$VERIFY_PORT"
 VERIFY_TABLETOP_PORT=$(( (RANDOM % 20000) + 40000 ))
+VERIFY_SPINE_PORT=$(( (RANDOM % 5000) + 60000 ))
 
 # A fresh SQLite file per run, same mechanism as the port above: the server
 # already reads SQLITE_DB_PATH (src/server.ts), falling back to ./data.db,
@@ -78,11 +79,22 @@ fi
 
 # The tabletop this run talks to gets its own random port, so a verification run
 # never sees (or is seen by) the dev fleet's tabletop on the default 5180. Set
-# AFTER .env so it wins. Two specs depend on it: verify-tabletop-integration
-# spawns ITS OWN tabletop at this address, and verify-table-mode's
-# send-then-commit case needs the address to be unreachable while it runs.
+# AFTER .env so it wins. verify-tabletop-integration spawns ITS OWN tabletop
+# (and its own Spine, see SPINE_URL below) at this address; it is the only spec
+# that reads TABLETOP_URL — the Shuffler server itself no longer talks to the
+# Tabletop directly (card.played travels Shuffler → Spine → SSE → Tabletop).
 export TABLETOP_URL="http://localhost:$VERIFY_TABLETOP_PORT"
 echo -e "${YELLOW}Tabletop address for this run: $TABLETOP_URL${NC}"
+
+# Likewise for the Spine: its own random port, unreachable by default. Two specs
+# depend on that: verify-tabletop-integration spawns ITS OWN Spine at this
+# address, and verify-table-mode's "still succeeds when the Spine is unreachable"
+# case needs the address to have nothing listening while it runs. The
+# playwright.config.ts project split (the "two-app" project depends on
+# "chromium") keeps those two specs from running at the same time, so the port
+# is never double-booked.
+export SPINE_URL="http://localhost:$VERIFY_SPINE_PORT"
+echo -e "${YELLOW}Spine address for this run: $SPINE_URL${NC}"
 
 # Start server on the chosen port in the background, against its own fresh
 # data.db (see VERIFY_DB_PATH above). The cold-vs-warm question this used to

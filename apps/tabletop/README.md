@@ -14,7 +14,9 @@ Shuffler instead of the clipboard. See `SEAMAP.md` for where this ship is headed
 - **Solo (default)** — no table name. The Shuffler's Play/Discard copy the card image
   to the clipboard; play happens in Mural or wherever. The Tabletop is not involved.
 - **At a table** — table name + player name entered on the Shuffler's Prep screen.
-  Play/Discard send the card here (`POST /api/tables/:tableName/cards`); no clipboard.
+  Play/Discard reach here only via the Spine: `card.played` travels Shuffler → Spine
+  → this ship's SSE subscription (`spineSubscriber.ts`); no clipboard, no direct
+  Shuffler→Tabletop call.
 - **Spectating** — open `/t/:tableName` with no Shuffler game at all. Full canvas
   access in v0 (there is no seat concept on the canvas; seats live in the arriving
   events).
@@ -27,35 +29,36 @@ Shuffler instead of the clipboard. See `SEAMAP.md` for where this ship is headed
   spectator-share link.
 - `/connect/:roomSlug` — the tldraw sync websocket (accepts `traceparent` on the
   connection URL — propagation belongs to the connection request only).
-- `POST /api/tables/:tableName/cards` — card arrival (**SCAFFOLDING**, see below).
 - `/health` — liveness.
+
+`card.played` has no HTTP route — it only arrives over the Spine SSE subscription (see below).
 
 ## SCAFFOLDING callouts
 
-Two things here are deliberate stand-ins, marked in the source and easy to delete:
+One thing here is a deliberate stand-in, marked in the source and easy to delete:
 
-1. **The card-arrival endpoint** (`src/server/cardArrival.ts`). The Tabletop now also
-   subscribes directly to the Spine's per-table SSE feed (`src/server/spineSubscriber.ts`,
-   `spineEventDispatch.ts`) and routes `card.played` events arriving that way through the
-   same logic (tabletop-spine-sse-subscriber ticket 01) — but the Shuffler's direct POST
-   here still runs unmodified alongside it for now, purely additively; existing dedup makes
-   a card arriving twice (once via POST, once via SSE) harmless. A later ticket
-   (`.scratch/tabletop-spine-sse-subscriber/issues/02-shuffler-drops-direct-post.md`)
-   deletes this endpoint once the subscriber is confirmed working end-to-end. The body this
-   endpoint accepts is the real thing regardless: a full envelope
-   (`contracts/envelope.v1.json`) carrying a card.played payload
-   (`contracts/payloads/card.played.v1.json`), validated for real via ajv
-   (`src/server/contractValidation.ts`, ticket 05 of tabletop-cards-come-and-go) —
-   field-by-field comment block in `apps/shuffler/src/port-tabletop/types.ts`.
-   `gameCardIndex` crosses the boundary freely now (`let-gamecardindex-out`,
-   2026-08-10) — it only decodes to a card's rank in the public decklist, so the
-   guard that used to reject it traded no real secrecy for a reasoning cost
-   nobody's threat model needed. (Payload schemas now use `additionalProperties:
-   true` — contracts/README.md — so an unrecognized field is a no-op rather than
-   a rejection either way.)
-2. **The in-memory room registry** (`src/server/rooms.ts`). Name-only (no table ids;
+1. **The in-memory room registry** (`src/server/rooms.ts`). Name-only (no table ids;
    the Spine absorbs table identity later). Rooms are **in-memory only** — a redeploy
    wipes the board. Accepted for v0; durable reconstruction is a filed buoy.
+
+`card.played`'s old HTTP scaffolding (`POST /api/tables/:tableName/cards`,
+`handleCardArrival`) is gone (`tabletop-spine-sse-subscriber` ticket 02, 2026-08-18) — the
+only entry point now is the Spine SSE subscription (`src/server/spineSubscriber.ts`,
+`spineEventDispatch.ts`), which routes `card.played` through `cardArrival.ts`'s
+`applyCardArrival` — dedup, `ensurePlayerArea` self-heal, placement, unchanged. The event
+this arrives as is still the real thing: a full envelope (`contracts/envelope.v1.json`)
+carrying a card.played payload (`contracts/payloads/card.played.v1.json`), validated for
+real via ajv (`src/server/contractValidation.ts`, ticket 05 of tabletop-cards-come-and-go)
+— field-by-field comment block in `apps/shuffler/src/port-tabletop/types.ts`.
+`gameCardIndex` crosses the boundary freely now (`let-gamecardindex-out`, 2026-08-10) — it
+only decodes to a card's rank in the public decklist, so the guard that used to reject it
+traded no real secrecy for a reasoning cost nobody's threat model needed. (Payload schemas
+now use `additionalProperties: true` — contracts/README.md — so an unrecognized field is a
+no-op rather than a rejection either way.) `src/server/testSeedRoute.ts` is a **test-only**
+HTTP seam (`POST /test/tables/:tableName/cards`, only mounted with
+`ENABLE_TEST_SEED_ROUTE=true`) that calls `applyCardArrival` directly, for Playwright specs
+and `cardArrival.test.ts` that spawn this server as its own process and have no live Spine
+to seed a card through — never mounted without that env var, never in production.
 
 ## Arrival layout (v0-minimal geography)
 
@@ -89,7 +92,8 @@ you want the browser path to match prod.
 **https://table.jessitron.honeydemo.io** (shared ALB group `only-one-alb-please`).
 Browser spans go same-origin to `/v1/traces`, routed by the ALB to a minimal dedicated
 OTel Collector (`k8s/collector.yaml`) — no API key in the page, no CORS drama. The
-Shuffler POSTs in-cluster via `TABLETOP_URL=http://mtg-tabletop-service`.
+Shuffler never talks to this ship directly anymore; `card.played` arrives over this
+ship's own SSE subscription to the Spine (`SPINE_URL`).
 
 One replica, `Recreate` strategy: the rooms are in-memory, a redeploy wipes the board.
 

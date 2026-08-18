@@ -1,7 +1,14 @@
 # Send-then-commit: playing a card to the Tabletop (JES-127)
 
-This is the canonical statement of the protocol. The code comments at each station
-point here; if the protocol changes, change this file and the stations together.
+**Retired 2026-08-18 (`tabletop-spine-sse-subscriber` ticket 02).** The Shuffler no
+longer sends directly to the Tabletop at all — `card.played` travels Shuffler → Spine
+→ SSE → Tabletop, and delivery is best-effort (`sendCardPlayedToSpineBestEffort`,
+never blocking). Play/discard mutate and persist immediately, in table mode and solo
+alike. This file is kept as a historical record of the protocol it replaced; nothing
+in the current code implements it.
+
+This is the canonical statement of the retired protocol. It described send-then-commit
+while that was the design; it is not being kept in sync with current behavior.
 
 ## The invariant
 

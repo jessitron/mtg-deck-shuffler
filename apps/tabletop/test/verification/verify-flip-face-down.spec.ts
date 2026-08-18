@@ -55,7 +55,7 @@ async function zoomToFit(page: Page) {
 }
 
 async function placeCard(page: Page, baseURL: string | undefined, tableSlug: string, instanceId: string, overrides: Record<string, unknown> = {}) {
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, {
+  const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, {
     data: cardPlayed(tableSlug, {
       card: { scryfallId: randomUUID(), instanceId },
       ...overrides,

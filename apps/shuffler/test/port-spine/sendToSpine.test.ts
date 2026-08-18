@@ -1,8 +1,6 @@
 import { GameState, TableInfo, GameCard } from "../../src/GameState.js";
 import { FakeSpineGateway } from "../../src/port-spine/FakeSpineGateway.js";
-import { FakeTabletopGateway } from "../../src/port-tabletop/FakeTabletopGateway.js";
 import { joinSpineBestEffort, sendCardPlayedToSpineBestEffort } from "../../src/port-spine/sendToSpine.js";
-import { sendCardToTableFirst } from "../../src/port-tabletop/sendToTable.js";
 import { CardPlayedEvent } from "../../src/port-tabletop/types.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
 import { lightningBolt, nicolBolas, testProvenance } from "../generators.js";
@@ -144,9 +142,8 @@ describe("joinSpineBestEffort", () => {
 });
 
 describe("game.recordSpineJoin", () => {
-  it("adopts the Spine's assigned seatId, so a card sent directly to the Tabletop lands on the same seat as seat.joined", async () => {
+  it("adopts the Spine's assigned seatId, replacing the Shuffler's own guess", async () => {
     const spine = new FakeSpineGateway();
-    const tabletop = new FakeTabletopGateway();
     const tableInfo: TableInfo = { tableName: "Friday Night", playerName: "Jess", seatId: "shuffler-guessed-this" };
     const game = GameState.newGame(201, 1, 1, testDeck, undefined, tableInfo);
     game.startGame();
@@ -156,11 +153,6 @@ describe("game.recordSpineJoin", () => {
 
     expect(game.seatId).toBe(spineJoin.seatId);
     expect(game.seatId).not.toBe("shuffler-guessed-this");
-
-    const bolt = cardNamed(game, "Lightning Bolt");
-    await sendCardToTableFirst(tabletop, game, bolt, "stack");
-
-    expect(tabletop.sentEvents[0].event.initiator.seatId).toBe(spineJoin.seatId);
   });
 
   it("keeps the placeholder seatId when the Spine join fails — best-effort must not erase it", async () => {

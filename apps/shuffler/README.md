@@ -22,19 +22,18 @@ So, given a deck in archidekt.com, this web app will
 - **Solo (default)** — no table name. Play/Discard copy the card image to the
   clipboard; play in Mural or wherever. The original workflow, unchanged.
 - **At a table** — enter a table name + player name on the Prep screen. Play and
-  Discard send the card to the Tabletop (`apps/tabletop`, `/t/:tableName`) instead
-  of the clipboard — **send-then-commit**: the tabletop gets the card first, and a
-  failed send blocks the action (the card stays in hand). The game page shows an
-  "at table _name_" link — share that URL for spectators.
+  Discard mutate immediately and send `card.played` to the Spine's event log,
+  best-effort (`src/port-spine/`) — never blocking on the Tabletop. The Tabletop
+  picks the card up over its own live subscription to the Spine's per-table SSE
+  stream (`apps/tabletop`, `/t/:tableName`); there is no direct Shuffler→Tabletop
+  call anymore. The game page shows an "at table _name_" link — share that URL
+  for spectators.
 - **Spectating** — open the table URL with no Shuffler game at all.
 
-Env vars: `TABLETOP_URL` (server-to-server card sends; default `http://localhost:5180`,
-in-cluster `http://mtg-tabletop-service`) and `TABLETOP_PUBLIC_URL` (the browser-facing
-"at table" link; default `https://table.jessitron.honeydemo.io`).
-
-SCAFFOLDING: the Shuffler talks straight to the Tabletop today
-(`src/port-tabletop/`). In the Spine-shaped future it emits `card.played` to the
-Spine's event log and the Tabletop subscribes — the port stays, the gateway changes.
+Env vars: `SPINE_URL` (server-to-server `card.played` sends; default
+`http://localhost:4600`) and `TABLETOP_PUBLIC_URL` (the browser-facing
+"at table" link, used only as a fallback when a game has no Spine-minted
+`tableUrl`; default `https://table.jessitron.honeydemo.io`).
 
 ## Running
 

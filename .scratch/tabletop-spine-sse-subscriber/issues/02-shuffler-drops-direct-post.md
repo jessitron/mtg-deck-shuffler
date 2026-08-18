@@ -2,7 +2,7 @@
 
 Mountain: spine-gathers-data
 Ship: fleet
-Status: ready-for-agent
+Status: resolved
 
 **What to build:** Playing or discarding a card in the Shuffler no longer waits on, or can
 be blocked by, the Tabletop being slow or unreachable — the card's only path to the
@@ -37,24 +37,35 @@ end-to-end**: removing the direct POST before the SSE subscriber is proven live 
 leave `main` in a state where cards silently stop reaching the Tabletop until this ticket
 also lands.
 
-- [ ] `sendCardToTableFirst`'s call site in `app.ts` is removed; play/discard no longer
+- [x] `sendCardToTableFirst`'s call site in `app.ts` is removed; play/discard no longer
       blocks on or can fail due to the Tabletop
-- [ ] `HttpTabletopGateway.sendCardToTable`, `TabletopPort`, and
+- [x] `HttpTabletopGateway.sendCardToTable`, `TabletopPort`, and
       `FakeTabletopGateway`'s matching method are deleted
-- [ ] `sendCardPlayedToSpineBestEffort` remains the sole Shuffler→Spine send on this path,
+- [x] `sendCardPlayedToSpineBestEffort` remains the sole Shuffler→Spine send on this path,
       unchanged
-- [ ] Tabletop's `POST /api/tables/:tableName/cards` route and `handleCardArrival`'s
+- [x] Tabletop's `POST /api/tables/:tableName/cards` route and `handleCardArrival`'s
       HTTP entry point are removed; the SSE-driven path from ticket 01 is the only consumer
       of the shared card-arrival logic
-- [ ] No dead types, tests, or `card.played`-specific config remain on either ship
-- [ ] `verify-tabletop-integration.spec.ts` spawns a real Spine alongside the real
+- [x] No dead types, tests, or `card.played`-specific config remain on either ship
+- [x] `verify-tabletop-integration.spec.ts` spawns a real Spine alongside the real
       Tabletop, plays a card through the Shuffler, and asserts it reaches the canvas with
       zero direct Shuffler→Tabletop HTTP calls in the code
-- [ ] Shuffler play/discard tests updated to drop the deleted-POST assertions and add a
+- [x] Shuffler play/discard tests updated to drop the deleted-POST assertions and add a
       Spine-unreachable-is-still-successful case
-- [ ] `apps/tabletop/CLAUDE.md` and `apps/shuffler/CLAUDE.md` updated to describe the
+- [x] `apps/tabletop/CLAUDE.md` and `apps/shuffler/CLAUDE.md` updated to describe the
       single Shuffler → Spine → SSE → Tabletop path
-- [ ] Each ship's existing unit suite (`bin/test` for the Spine, `npm test` for the
+- [x] Each ship's existing unit suite (`bin/test` for the Spine, `npm test` for the
       Shuffler and the Tabletop) plus the extended verification spec all pass
 
 ## Comments
+
+- 2026-08-18: `applyCardArrival` ended up with a second consumer beyond the SSE dispatcher.
+  Deleting the production HTTP route (`POST /api/tables/:tableName/cards`) also broke six
+  unrelated Playwright specs and `cardArrival.test.ts`, which used it purely as a
+  test-seeding seam (they drive the Tabletop server as a separately-spawned process, so
+  they can't call `applyCardArrival` in-process). Asked Jess how to handle it; she picked
+  keeping a small **test-only** seam (`src/server/testSeedRoute.ts`, `POST
+  /test/tables/:tableName/cards`, only mounted when `ENABLE_TEST_SEED_ROUTE=true`) over
+  migrating those specs to a fake-SSE seam or leaving the production route in place. The
+  production route and `handleCardArrival` are still fully deleted; the SSE dispatcher is
+  the only *production* consumer.

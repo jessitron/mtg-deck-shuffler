@@ -68,7 +68,7 @@ test("dragging a card over a zone arms it (box-shadow ring), and disarms it once
     card: { scryfallId: randomUUID(), instanceId },
     zoneHint: "stack",
   });
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);
 
   const card = page.locator(`#shape\\:card-${instanceId}`);
@@ -117,7 +117,7 @@ test("dragging your own commander over your command zone arms it", async ({ page
     zoneHint: "stack",
     isCommander: true,
   });
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);
 
   const card = page.locator(`#shape\\:card-${instanceId}`);
@@ -156,7 +156,7 @@ test("dragging a non-commander card over your command zone does not arm it", asy
     zoneHint: "stack",
     isCommander: false,
   });
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);
 
   const card = page.locator(`#shape\\:card-${instanceId}`);
@@ -202,7 +202,7 @@ test("dragging another player's commander over your command zone does not arm it
     owner: otherSeatId,
   });
   event.initiator = { seatId: otherSeatId, playerName: "Other" };
-  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+  const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);
 
   const card = page.locator(`#shape\\:card-${instanceId}`);
@@ -213,7 +213,7 @@ test("dragging another player's commander over your command zone does not arm it
     card: { scryfallId: randomUUID(), instanceId: randomUUID() },
     zoneHint: "stack",
   });
-  const ownResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: ownEvent });
+  const ownResponse = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: ownEvent });
   expect(ownResponse.status()).toBe(201);
 
   const commandZone = `[data-shape-id="shape:region-command-${tableSlug}-e2e-seat"]`;
@@ -254,7 +254,7 @@ test("dragging a multi-card selection arms only the one zone under the pointer, 
     [instanceIdA, randomUUID()],
     [instanceIdB, randomUUID()],
   ]) {
-    const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, {
+    const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, {
       data: cardPlayed(tableSlug, { cardName: "Llanowar Elves", card: { scryfallId, instanceId }, zoneHint: "battlefield" }),
     });
     expect(response.status()).toBe(201);
@@ -314,7 +314,7 @@ test("the armed glow is local to the dragging player, never synced to another cl
       card: { scryfallId: randomUUID(), instanceId },
       zoneHint: "stack",
     });
-    const response = await pageA.request.post(`${baseURL}/api/tables/${tableSlug}/cards`, { data: event });
+    const response = await pageA.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
     expect(response.status()).toBe(201);
 
     const cardA = pageA.locator(`#shape\\:card-${instanceId}`);

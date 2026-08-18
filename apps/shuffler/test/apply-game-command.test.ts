@@ -1,6 +1,6 @@
 import { describe, test, expect } from "@jest/globals";
 import * as fc from "fast-check";
-import { applyGameCommand, TableSendFailedError } from "../src/apply-game-command.js";
+import { applyGameCommand } from "../src/apply-game-command.js";
 import { InMemoryPersistStateAdapter } from "../src/port-persist-state/InMemoryPersistStateAdapter.js";
 import { InMemoryCardRepositoryAdapter } from "../src/port-card-repository/InMemoryCardRepositoryAdapter.js";
 import { GameStatus } from "../src/domain-types.js";
@@ -133,33 +133,7 @@ describe("applyGameCommand", () => {
     expect(calls).toEqual(["beforeMutate", "mutate"]);
   });
 
-  test("returns send-failed and does not mutate or persist when beforeMutate throws TableSendFailedError", async () => {
-    const { persistStatePort, cardRepository, gameId } = await setUp();
-    let mutateCalled = false;
-
-    const outcome = await applyGameCommand(
-      { persistStatePort, cardRepository },
-      gameId,
-      undefined,
-      () => {
-        mutateCalled = true;
-      },
-      async () => {
-        throw new TableSendFailedError("<div>the table said no</div>");
-      }
-    );
-
-    expect(outcome.kind).toBe("send-failed");
-    if (outcome.kind === "send-failed") {
-      expect(outcome.errorHtml).toBe("<div>the table said no</div>");
-    }
-    expect(mutateCalled).toBe(false);
-
-    const reloaded = await persistStatePort.retrieve(gameId);
-    expect(reloaded?.events.length).toBe(0);
-  });
-
-  test("propagates a non-TableSendFailedError thrown by beforeMutate, without persisting", async () => {
+  test("propagates an error thrown by beforeMutate, without persisting", async () => {
     const { persistStatePort, cardRepository, gameId } = await setUp();
 
     await expect(
