@@ -259,12 +259,29 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
 
 ## Server (identity is minted here, mechanics is not)
 
-- `apps/tabletop/src/server/cardArrival.ts` — mints `props.instanceId` (moved out of `meta` by
-  ticket 12) at shape creation (`createShapeId`; no longer mints a tldraw asset record — flip is
-  a pure `props.face` write now). Since table-layout ticket 18 (2026-08-09), builds the record via
-  `tableFurniture.ts`'s `mtgCardShape()` instead of its own `store.put` literal. Not this owner's
-  mechanics territory per se, but the identity contract every hook in `MtgCardShapeUtil` depends
-  on.
+- `apps/tabletop/src/server/cardArrival.ts` — exports `applyCardArrival(tableName, body)`, the
+  shared validation/dedup/`ensurePlayerArea`/placement logic; mints `props.instanceId` (moved out
+  of `meta` by ticket 12) at shape creation (`createShapeId`; no longer mints a tldraw asset
+  record — flip is a pure `props.face` write now). Since table-layout ticket 18 (2026-08-09),
+  builds the record via `tableFurniture.ts`'s `mtgCardShape()` instead of its own `store.put`
+  literal. **Since tabletop-spine-sse-subscriber ticket 02 (2026-08-18), this file has no HTTP
+  entry point of its own** — the old production route (`POST /api/tables/:tableName/cards`,
+  `handleCardArrival`) was deleted; `applyCardArrival` is now called by
+  `spineEventDispatch.ts`'s `dispatchSpineEvent` in production, and by `testSeedRoute.ts`'s
+  `handleTestCardSeed` (a test-only HTTP seam, `ENABLE_TEST_SEED_ROUTE=true` only) in tests. Not
+  this owner's mechanics territory per se, but the identity contract every hook in
+  `MtgCardShapeUtil` depends on.
+- `apps/tabletop/src/server/spineEventDispatch.ts` — **new, tabletop-spine-sse-subscriber ticket
+  01**: `dispatchSpineEvent(tableName, event)`, the production entry point for `card.played` —
+  filters the Spine's per-table SSE stream for that event name, continues the trace from the
+  broadcast envelope's `traceparent`, and calls `applyCardArrival`. Not this owner's mechanics
+  territory (no ShapeUtil, no selection state) but recorded here since it replaced the old HTTP
+  route this file used to document.
+- `apps/tabletop/src/server/testSeedRoute.ts` — **new, tabletop-spine-sse-subscriber ticket 02**:
+  `handleTestCardSeed`, a test-only HTTP seam at `POST /test/tables/:tableName/cards`, mounted
+  only when `ENABLE_TEST_SEED_ROUTE=true` (set by `verify.sh` and `cardArrival.test.ts`) — calls
+  `applyCardArrival` directly, for Playwright specs and vitest files that spawn the server as its
+  own process with no live Spine to seed a card through. Never mounted in production.
 - `apps/tabletop/src/server/seatJoined.ts` — **the second `mtg-card` mint seam** (table-layout
   ticket 18, 2026-08-09): on a `seat.joined` event carrying 0-2 commanders, mints each commander
   as a real, draggable `mtg-card` plus a locked, `opacity: 0.3` ghost at the identical Command

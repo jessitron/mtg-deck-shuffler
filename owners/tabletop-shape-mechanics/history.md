@@ -1,5 +1,28 @@
 # History
 
+## `card.played`'s production entry point moves from HTTP to Spine SSE (2026-08-18)
+
+`tabletop-spine-sse-subscriber` ticket 02 (ticket 01 wired the subscription itself, a separate
+commit). `apps/tabletop/src/server/cardArrival.ts`'s old production route,
+`POST /api/tables/:tableName/cards` and its `handleCardArrival` HTTP handler, were deleted — the
+Shuffler no longer POSTs cards to the Tabletop directly. `applyCardArrival(tableName, body)` (the
+shared validation/dedup/`ensurePlayerArea`-self-heal/placement logic this KB already documented,
+unchanged in substance) is now called from two places only:
+
+- **Production**: `apps/tabletop/src/server/spineEventDispatch.ts`'s `dispatchSpineEvent`,
+  subscribed to the Spine's per-table SSE stream, filtering for `card.played` and continuing the
+  trace from the broadcast envelope's `traceparent`.
+- **Tests**: a new test-only HTTP seam, `apps/tabletop/src/server/testSeedRoute.ts`'s
+  `handleTestCardSeed`, mounted at `POST /test/tables/:tableName/cards` only when
+  `ENABLE_TEST_SEED_ROUTE=true` (set by `verify.sh` and `cardArrival.test.ts`) — for Playwright
+  specs and vitest files that spawn the server as its own process with no live Spine to seed a
+  card through. Never mounted in production.
+
+**No mechanics changed** — this is purely about how a `card.played` event reaches
+`applyCardArrival`, not what happens once it does. Flagged by a code-review of the just-merged
+ticket 02: `architecture.md`'s "Where a card shape comes from" section still named the deleted HTTP
+route as the entry point. Fixed there and in `files.md`'s server section.
+
 ## Origin: Tap/Untap (JES-144)
 
 - **`7bb13f8`** - Tabletop: rotate a card 90° by clicking it (essential slice) — first
