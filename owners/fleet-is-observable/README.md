@@ -205,10 +205,28 @@ duplicate onto the log what's already on the span.
 
 **Manual span creation is almost nonexistent.** Across all three ships there are a handful of call
 sites: `apps/tabletop/src/server/server.ts` (`tracer.startActiveSpan("ws connect", ...)`),
+`apps/tabletop/src/server/seatJoined.ts` (`"add player furniture"`),
+`apps/tabletop/src/server/cardArrival.ts` (`"place arrived card"`),
 `apps/tabletop/src/client/TablePage.tsx`, `apps/tabletop/src/client/useCardArrivalSpans.ts`, plus
 `inSpan` itself. **The Shuffler creates zero manual spans** — it lives entirely off
 auto-instrumentation plus stamping attributes onto whatever span already exists. That's why
 `markCurrentSpanAsError`/`setCommonSpanAttributes` matter so much.
+
+**The Tabletop's server has a repeated shape for its two SCAFFOLDING event handlers**
+(`handleSeatJoined` in `seatJoined.ts`, `handleCardArrival` in `cardArrival.ts`): parse and
+validate the envelope, stamp identifying attributes onto the **ambient** request span
+(`trace.getActiveSpan()?.setAttributes(...)`), run the dedup/rejection early-returns *outside*
+any manual span (each just sets one attribute on the ambient span and returns), then wrap only
+the actual placement/furniture-creation work — the part that touches `entry.room.updateStore` —
+in its own child span via `tracer.startActiveSpan(name, { kind: SpanKind.INTERNAL, attributes:
+{...} }, async (span) => { try { ... } finally { span.end(); } })`. Initial attributes on the
+child span re-stamp the same identifying fields already on the ambient span (`event.id`,
+`table.name`, `seat.id`, plus payload-specific fields); result attributes — `room.seats_after`
+for seat.joined, `zone.graveyard_count`/`zone.stack_count` + `zone.position.x`/`.y` for
+cardArrival — are set on the child span just before `span.end()`. `entry.seenEventIds.add(...)`
+and the final response always happen **after** the span ends, outside it, in both handlers. Two
+data points now (`seatJoined.ts` first, `cardArrival.ts` copied directly from it) — treat this as
+the pattern for a third such handler, not a coincidence to re-derive.
 
 **`usePhysicsAnnouncements.ts` generalizes the same pattern from one span to a whole vocabulary.**
 Where `useCardArrivalSpans.ts` is `store.listen()` → `inSpan()` for exactly one named event, the

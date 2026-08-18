@@ -284,6 +284,16 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `apps/shuffler/src/shutdownHooks.ts` is the reference shape: bound the drain with a
   `Promise.race` against an `unref()`'d timer, and guard idempotency so a second signal doesn't
   fire twice. Both ships have their own copy — a verbatim port, not a shared module.
+- **Adding a third Tabletop server event handler alongside `handleSeatJoined`
+  (`seatJoined.ts`, span `"add player furniture"`) and `handleCardArrival`
+  (`cardArrival.ts`, span `"place arrived card"`)**: both wrap only the
+  placement/furniture-creation work — the part touching `entry.room.updateStore` — in a manual
+  `tracer.startActiveSpan("...", { kind: SpanKind.INTERNAL, attributes: {...} }, async (span) =>
+  { try {...} finally { span.end(); } })`. The dedup/rejection early-returns and the final
+  `entry.seenEventIds.add(...)` stay **outside** that span, touching only the ambient request
+  span via `trace.getActiveSpan()?.setAttribute(...)`. A new handler should copy this shape:
+  identifying attributes re-stamped on the child span's initial `attributes`, result attributes
+  set just before `span.end()`, guards left off the manual span entirely.
 - **Adding a new named event to `usePhysicsAnnouncements.ts`** (or a third `store.listen()` →
   `inSpan()` hook alongside it and `useCardArrivalSpans.ts`): keep detection where the gesture's
   own hook already computes it — this listener only translates the resulting store diff into a
