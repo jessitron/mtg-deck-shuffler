@@ -98,4 +98,17 @@ describe("sendCardToTableFirst", () => {
 
     await expect(sendCardToTableFirst(undefined, game, bolt, "stack")).rejects.toThrow("TABLETOP_URL");
   });
+
+  it("sends to the Spine's real table id once the game has joined, not the bare pre-join table name", async () => {
+    const game = GameState.newGame(7, 1, 1, testDeck, undefined, tableInfo);
+    game.recordSpineJoin({ seatId: "abc12345", spineTableId: "friday-night-4d39ac18", spineSeatNumber: 1 });
+    const bolt = cardNamed(game, "Lightning Bolt");
+    const fake = new FakeTabletopGateway();
+
+    await sendCardToTableFirst(fake, game, bolt, zoneHintForPlay(bolt));
+
+    const { tableName, event } = fake.sentEvents[0];
+    expect(tableName).toBe("friday-night-4d39ac18");
+    expect(event.tableId).toBe("friday-night-4d39ac18");
+  });
 });
