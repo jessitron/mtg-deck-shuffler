@@ -105,7 +105,7 @@ class TabletopNotifierTest < Minitest::Test
 
     with_env("TABLETOP_URL" => url) do
       notifier.send_joined(event: FakeJoinedEvent.new,
-        table_name: "kitchen table", replayed: replayed)
+        table_id: "table-uuid", replayed: replayed)
     end
 
     assert_equal [expected_attributes], span.attribute_calls

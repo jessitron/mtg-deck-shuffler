@@ -413,6 +413,37 @@ row's `undefined`-is-dropped note).
   supplied, omitted when empty) and `html-layout-fleet-tokens.test.ts` (arg-order regex, the
   `undefined` case, and `</script>` neutralization).
 
+**The Tabletop's route param is now a slug carrying the Spine's real table id, and the
+Tabletop server strips it back off before stamping `table.name`.** Since `TableSlug.mint`
+(`services/spine/lib/table_slug.rb`) made a table's Spine-minted primary key itself
+`<name-slug>-<8-hex-random>` — the same string used for the `/t/<slug>` URL, the
+server-to-server event POST path, and (Tabletop-side) the room-registry key /
+`/connect/:roomSlug` websocket key — the Tabletop's route param went from a bare
+display name to an id-bearing slug. `apps/tabletop/src/shared/slugify.ts` adds
+`tableNameFromSlug()` (strips a trailing `-<8-hex>`) specifically so `table.name` keeps
+its old meaning (bare human name, matching the Shuffler) instead of silently becoming the
+full slug. Every Tabletop **server**-side stamping site now calls it before writing
+`table.name`, and stamps the untouched full slug alongside it under a **new** attribute,
+`table.slug`: `apps/tabletop/src/server/seatJoined.ts`, `cardArrival.ts` (both the ambient
+and the child-span attributes), `rooms.ts` (`room.created`, and the two `onSessionRemoved`
+logs), and `server.ts` (the `"ws connect"` span). `table.slug` is Tabletop-only — it isn't
+stamped by the Shuffler or the Spine, so don't expect it to correlate across ships the way
+`table.name` does; query it when you want one specific table unambiguously (bare names
+aren't unique over time, since a table can be re-created after its predecessor is gone).
+
+**Gap: the Tabletop's browser dataset (`mtg-tabletop-web`) was NOT part of this fix.**
+`TablePage.tsx`'s `setGlobalAttrs({ "table.name": tableSlug })` and its `inSpan("table page
+opened", ..., { "table.name": tableSlug })` call still stamp the raw, id-bearing
+`tableSlug` prop as `table.name` — only the **server**-side call sites above route through
+`tableNameFromSlug()`. So today, `table.name` on `mtg-tabletop-web` spans carries the full
+slug (name + id suffix) while `table.name` on the Tabletop's **server** dataset
+(`mtg-tabletop`), the Shuffler's datasets, and the Spine's spans carries the bare name —
+the "one filter follows a table across ships" guarantee holds for the server dataset but
+not yet the browser one. If you're touching `TablePage.tsx` or `setGlobalAttrs`, this is
+the next fix: import `tableNameFromSlug` client-side (it has no server-only dependencies)
+and apply it before the `setGlobalAttrs`/`inSpan` calls, stamping the untouched `tableSlug`
+separately as `table.slug` for symmetry with the server side.
+
 ### The Spine-minted seat id is on the Shuffler's join-route spans as `seat.id`
 
 The Spine, not the Shuffler, is the sole authority on seat identity — but until this change the

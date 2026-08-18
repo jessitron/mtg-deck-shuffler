@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { WebSocketServer } from "ws";
 import { trace, context, propagation, SpanKind } from "@opentelemetry/api";
 import { getOrCreateRoom } from "./rooms.js";
-import { slugifyTableName } from "../shared/slugify.js";
+import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { handleCardArrival } from "./cardArrival.js";
 import { handleSeatJoined } from "./seatJoined.js";
 
@@ -88,18 +88,22 @@ export function startServer(port: number): Promise<http.Server> {
     const parentContext = traceparent ? propagation.extract(context.active(), { traceparent }) : context.active();
 
     context.with(parentContext, () => {
-      tracer.startActiveSpan("ws connect", { kind: SpanKind.SERVER, attributes: { "table.name": slug } }, (span) => {
-        try {
-          const sessionId = url.searchParams.get("sessionId") ?? `anon-${Math.random().toString(36).slice(2)}`;
-          const entry = getOrCreateRoom(slug);
-          span.setAttribute("room.sessions_before", entry.room.getNumActiveSessions());
-          wss.handleUpgrade(request, socket, head, (ws) => {
-            entry.room.handleSocketConnect({ sessionId, socket: ws });
-          });
-        } finally {
-          span.end();
+      tracer.startActiveSpan(
+        "ws connect",
+        { kind: SpanKind.SERVER, attributes: { "table.name": tableNameFromSlug(slug), "table.slug": slug } },
+        (span) => {
+          try {
+            const sessionId = url.searchParams.get("sessionId") ?? `anon-${Math.random().toString(36).slice(2)}`;
+            const entry = getOrCreateRoom(slug);
+            span.setAttribute("room.sessions_before", entry.room.getNumActiveSessions());
+            wss.handleUpgrade(request, socket, head, (ws) => {
+              entry.room.handleSocketConnect({ sessionId, socket: ws });
+            });
+          } finally {
+            span.end();
+          }
         }
-      });
+      );
     });
   });
 

@@ -302,7 +302,19 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `entry.seenEventIds.add(...)` stay **outside** that span, touching only the ambient request
   span via `trace.getActiveSpan()?.setAttribute(...)`. A new handler should copy this shape:
   identifying attributes re-stamped on the child span's initial `attributes`, result attributes
-  set just before `span.end()`, guards left off the manual span entirely.
+  set just before `span.end()`, guards left off the manual span entirely. **Also stamp `table.name`
+  via `tableNameFromSlug(tableName)` (`apps/tabletop/src/shared/slugify.ts`), never the raw route
+  param** — since `TableSlug.mint` (`services/spine/lib/table_slug.rb`) the Tabletop's
+  `tableName`/`tableSlug` param is an id-bearing slug (`<name-slug>-<8-hex>`), not a bare display
+  name; stamping it raw as `table.name` breaks the cross-ship filter. Stamp the untouched param
+  too, separately, as `table.slug`.
+- **Any new Tabletop server-side span/log that touches a table's name**: run it through
+  `tableNameFromSlug()` before writing `table.name`, per the point above. **`TablePage.tsx` (the
+  browser side, `mtg-tabletop-web` dataset) does NOT yet do this** — its `setGlobalAttrs({
+  "table.name": tableSlug })` and `inSpan("table page opened", ...)` calls still stamp the raw,
+  id-bearing slug. That's a known gap, not a pattern to copy: don't write a fourth browser call
+  site that also stamps the raw slug on the theory that it matches existing code. If you're the one
+  fixing `TablePage.tsx`, add `table.slug` there too for symmetry with the server side.
 - **Adding a new named event to `usePhysicsAnnouncements.ts`** (or a third `store.listen()` →
   `inSpan()` hook alongside it and `useCardArrivalSpans.ts`): keep detection where the gesture's
   own hook already computes it — this listener only translates the resulting store diff into a

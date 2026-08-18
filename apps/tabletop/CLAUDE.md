@@ -16,11 +16,27 @@ needs a change in the Shuffler or the Spine, stop and say so instead of reaching
 ## What this is
 
 Vite + React + tldraw synced canvas with an Express/ws sync server.
-`/t/:tableName` is a shared board; two SCAFFOLDING endpoints (for the Spine's
-future feed) place things on it: `POST /api/tables/:tableName/events`
+`/t/:tableSlug` is a shared board; two SCAFFOLDING endpoints (for the Spine's
+future feed) place things on it: `POST /api/tables/:tableSlug/events`
 (`seat.joined`, `src/server/seatJoined.ts`) draws a seat's player area at
-Shuffle Up, and `POST /api/tables/:tableName/cards` (`cardArrival.ts`) places
+Shuffle Up, and `POST /api/tables/:tableSlug/cards` (`cardArrival.ts`) places
 cards from the Shuffler onto it.
+
+**`tableSlug` is an opaque literal string, not a lookup key — it *is* the Spine's real
+table id**, not a display name derived from one (`<name-slug>-<8-hex-random>`, minted
+once at table creation — see `services/spine/CLAUDE.md`), so a URL is human-identifiable
+but not guessable from the bare name alone. Nothing on this ship resolves an id to
+anything — `getOrCreateRoom(slug)` (`rooms.ts`) uses the whole string as the
+room-registry key, and the `/connect/:roomSlug` websocket upgrade does the same, so the
+browser, the Spine's event POSTs, and the room registry only ever need to agree on the
+same opaque string, letter for letter. `seatJoined.ts`/`cardArrival.ts` still validate
+that the envelope's `tableId` matches the URL's slug (`slugifyTableName(envelope.tableId)
+!== tableName` — unchanged from before the Spine minted real ids) — a straight equality
+check now that both sides carry the same real id, not a partial/prefix check.
+**`table.name` on any span/log here is the bare name with that suffix stripped back off**
+(`tableNameFromSlug`, `src/shared/slugify.ts`) — it must match what the Shuffler stamps
+under the same key so a filter can follow one table across ships (see
+`owners/fleet-is-observable`); the full slug goes out separately as `table.slug`.
 
 See `README.md` (in this directory) for Modes and SCAFFOLDING callouts.
 

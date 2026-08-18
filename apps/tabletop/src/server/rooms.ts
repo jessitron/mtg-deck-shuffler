@@ -2,6 +2,7 @@ import { TLSocketRoom } from "@tldraw/sync-core";
 import { createTLSchema, defaultShapeSchemas, TLRecord } from "@tldraw/tlschema";
 import { trace } from "@opentelemetry/api";
 import { log } from "./log.js";
+import { tableNameFromSlug } from "../shared/slugify.js";
 import { mtgCardShapeProps } from "../shared/mtgCardShape.js";
 import { mtgCounterShapeProps } from "../shared/mtgCounterShape.js";
 import { mtgLifeCounterShapeProps } from "../shared/mtgLifeCounterShape.js";
@@ -83,11 +84,12 @@ export function getOrCreateRoom(tableName: string): RoomEntry {
       // still carries the trace id, so it lands on the trace anyway.
       onSessionRemoved(room, args) {
         log.info("room session removed", {
-          "table.name": tableName,
+          "table.name": tableNameFromSlug(tableName),
+          "table.slug": tableName,
           "room.sessions_remaining": args.numSessionsRemaining,
         });
         if (args.numSessionsRemaining === 0) {
-          log.info("room emptied", { "table.name": tableName });
+          log.info("room emptied", { "table.name": tableNameFromSlug(tableName), "table.slug": tableName });
         }
       },
     }),
@@ -97,6 +99,6 @@ export function getOrCreateRoom(tableName: string): RoomEntry {
     hasInstance,
   };
   registry.set(tableName, entry);
-  trace.getActiveSpan()?.setAttributes({ "room.created": true, "table.name": tableName });
+  trace.getActiveSpan()?.setAttributes({ "room.created": true, "table.name": tableNameFromSlug(tableName), "table.slug": tableName });
   return entry;
 }

@@ -18,6 +18,7 @@ import {
 import "tldraw/tldraw.css";
 import { useSync } from "@tldraw/sync";
 import { setGlobalAttrs, currentTraceparent, inSpan } from "./observability";
+import { tableNameFromSlug } from "../shared/slugify";
 import { chooseLicenseKey } from "./chooseLicenseKey";
 import { useCardArrivalSpans } from "./useCardArrivalSpans";
 import { usePhysicsAnnouncements } from "./usePhysicsAnnouncements";
@@ -141,8 +142,9 @@ const inlineAssets: TLAssetStore = {
 
 export function TablePage({ tableSlug }: { tableSlug: string }) {
   useEffect(() => {
-    setGlobalAttrs({ "table.name": tableSlug });
-    void inSpan("table page opened", () => {}, { "table.name": tableSlug });
+    const tableName = tableNameFromSlug(tableSlug);
+    setGlobalAttrs({ "table.name": tableName, "table.slug": tableSlug });
+    void inSpan("table page opened", () => {}, { "table.name": tableName, "table.slug": tableSlug });
   }, [tableSlug]);
 
   const uri = useMemo(() => {
