@@ -5,6 +5,7 @@ import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
 import { BatchLogRecordProcessor } from "@opentelemetry/sdk-logs";
 import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
 import { ParentBasedSampler } from "@opentelemetry/sdk-trace-node";
+import { ExpressLayerType } from "@opentelemetry/instrumentation-express";
 import { installShutdownHandlers } from "./shutdownHooks.js";
 import { BackgroundChatterSampler } from "./telemetry-sampler.js";
 import { log } from "./log.js";
@@ -21,6 +22,9 @@ const sdk: NodeSDK = new NodeSDK({
     getNodeAutoInstrumentations({
       "@opentelemetry/instrumentation-fs": {
         enabled: false,
+      },
+      "@opentelemetry/instrumentation-express": {
+        ignoreLayersType: [ExpressLayerType.MIDDLEWARE],
       },
     }),
   ],
