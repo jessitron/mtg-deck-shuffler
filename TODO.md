@@ -25,11 +25,11 @@ early dev data, but still a real prod-data-wiping action.
 
 - major bug: played cards should not keep appearing to the right of the previous location, after the other one has been moved! That's only for when the prior card is still on the stack right where it landed.
 
-- serious bug: right-click stops working. it works sometimes, and then it just doesn't do anything. Other times it does. It is not predictable.
+- RETEST post-tldraw upgrade: serious bug: right-click stops working. it works sometimes, and then it just doesn't do anything. Other times it does. It is not predictable.
 
-- weird bug: occasionally, for no discernable reason, a bunch of cards return to the stack where they were initially played 😭
+- RETEST post-tldraw upgrade: weird bug: occasionally, for no discernable reason, a bunch of cards return to the stack where they were initially played 😭
 
-- bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation 
+- bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation
 
 - before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game!
 
