@@ -15,6 +15,14 @@
   regression test (`verify-drag-identity.spec.ts`) would notice the *symptom* resurfacing, not
   the cause changing. If a tldraw upgrade is ever done, re-read `PointingShape.ts`/
   `Translating.ts` for this class of change.
+  **First data point, 2026-08-18**: `tldraw`/`@tldraw/sync`/`@tldraw/sync-core` 5.2.5→5.3.2 (all
+  three bumped together, no app code changed) ran the full tripwire set —
+  `verify-multi-untap.spec.ts`, `verify-zone-armed.spec.ts` (including the `"select.translating"`
+  check below), the stale-selection regressions, `verify-counter`/`verify-life-counter`/
+  `verify-tap-animation` — and nothing regressed. That's the tripwires confirming this specific
+  range didn't touch these internals, not a source re-read standing in for them — the "re-read the
+  source" advice above still applies to the next bump. See `history.md`'s "tldraw 5.2.5 → 5.3.2"
+  entry.
 - **The string `"select.translating"`, used by `editor.isIn(...)`** (ticket 14's armed-zone
   check, `zoneHitTest.ts`) is the same state `PointingShape.ts`'s `startTranslating` transitions
   into (`this.parent.transition('translating', info)` on the `select` tool node) — confirmed

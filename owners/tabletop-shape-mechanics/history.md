@@ -1481,3 +1481,34 @@ zone-change branch. Full detail in `architecture.md`'s new "Stack landing collis
 section; `interactions.md` gained watch point 25 and a cross-reference from watch point 4;
 `files.md`'s `cardZoneEntry.ts` entry and Tests list updated; `README.md`'s quick-reference row
 for `cardZoneEntry.ts` updated.
+
+## tldraw 5.2.5 → 5.3.2, all three packages bumped together (2026-08-18)
+
+`apps/tabletop/package.json`: `tldraw`, `@tldraw/sync`, `@tldraw/sync-core` all moved from the
+pinned `5.2.5` (the original scaffold version, `0de48c86`) to `5.3.2`, kept in lockstep per the
+existing pinning convention. **No app code changed** — this is a pure dependency bump, but it's
+exactly the class of change `interactions.md`'s "Depends On" section had already flagged as a
+standing risk with no automated warning: "a tldraw version bump can change these internals
+without a major-version signal."
+
+- **Full verification run, not just the default suite**: `npx vitest run` (139/139), `npx vite
+  build` (clean), and `./verify.sh` (all 48 Playwright specs), deliberately including every spec
+  this KB's watch points name as a tripwire for exactly this scenario —
+  `verify-multi-untap.spec.ts` (all 3 cases; watch point 14's `PointingShape.onPointerUp`
+  ordering/undo-coalescing tripwire), `verify-zone-armed.spec.ts` (all 6 cases; the
+  `"select.translating"` string check the "Depends On" section calls out by name),
+  `verify-image-selection.spec.ts`/`verify-note.spec.ts`/`verify-flip-face-down.spec.ts` (the
+  stale-selection regressions watch point 1's centralized fix guards),
+  `verify-click-then-drag-selection.spec.ts`, `verify-counter.spec.ts`,
+  `verify-life-counter.spec.ts`, and `verify-tap-animation.spec.ts`. Everything passed unchanged.
+- **What this confirms, precisely**: the 5.2.5→5.3.2 range makes no observable change to
+  `PointingShape`/`Translating`'s selection-deferral and safety-net logic, to
+  `getDraggingOverShape`'s locked-shape filtering, or to the literal string `"select.translating"`
+  that `useIsZoneArmed` matches against. It does **not** confirm those internals are unchanged
+  source-for-source — only that this KB's existing tripwire coverage, built for entirely different
+  reasons over the past two weeks, didn't fire. That's the tripwires doing their job, not a fresh
+  audit of tldraw's source for this range.
+- **No KB mechanism changed.** No new watch point, no architecture change, no file added or
+  removed — recorded here (and as a precedent note on the "Depends On" tldraw-version-bump risk in
+  `interactions.md`) purely as evidence for the next person who has to decide whether a tldraw
+  bump is safe: this range was, and the existing regression suite is what proved it.
