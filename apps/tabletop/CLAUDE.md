@@ -22,6 +22,27 @@ future feed) place things on it: `POST /api/tables/:tableSlug/events`
 Shuffle Up, and `POST /api/tables/:tableSlug/cards` (`cardArrival.ts`) places
 cards from the Shuffler onto it.
 
+**The server also opens one live Spine SSE subscription per room** (tabletop-spine-sse-subscriber
+ticket 01), against `GET /tables/:tableId/events/stream`. `handleSeatJoined` opens it the first
+time a room hears `seat.joined` — the room's Spine `tableId` and the subscription handle live on
+`RoomEntry` (`rooms.ts`); a second seat joining the same room is a no-op, since the room already
+has one. `spineSubscriber.ts` is a small hand-rolled SSE client (streamed `fetch`, parsing the
+Spine's `data: <json>\n\n` frames — no `EventSource`, since one server process holds many
+concurrent per-table streams) that reconnects on its own after a drop, with no catch-up/replay of
+missed events. `spineEventDispatch.ts` inspects each received envelope's `name`; only
+`card.played` has a consumer today (routed to `cardArrival.ts`'s `applyCardArrival`, the same
+dedup/`ensurePlayerArea`/placement logic the HTTP route uses — `handleCardArrival` is now a thin
+wrapper that maps `applyCardArrival`'s outcome to an HTTP response) — every other kind on the
+stream (`seat.taken`, `table.created`, …) is ignored. Each dispatched event continues the trace
+from the broadcast envelope's `traceparent` (injected fresh at publish time by the Spine's
+`Table#broadcast`) as a CHILD span, not an unlinked one. **Env**: `SPINE_URL`, default
+`http://localhost:4600` (same variable and default as the Shuffler's — see its `CLAUDE.md`).
+This subscriber is purely additive for now: the Shuffler's direct `card.played` POST to this
+ship's `/api/tables/:tableSlug/cards` still runs unmodified alongside it (existing dedup already
+makes a card arriving twice — once via POST, once via SSE — harmless); a later ticket
+(`.scratch/tabletop-spine-sse-subscriber/issues/02-shuffler-drops-direct-post.md`) removes that
+direct POST once this subscriber is confirmed working end-to-end.
+
 **`tableSlug` is an opaque literal string, not a lookup key — it *is* the Spine's real
 table id**, not a display name derived from one (`<name-slug>-<8-hex-random>`, minted
 once at table creation — see `services/spine/CLAUDE.md`), so a URL is human-identifiable

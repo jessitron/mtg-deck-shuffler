@@ -24,27 +24,30 @@ interface CardPlayedPayload {
   gameCardIndex?: number;
 }
 
-export async function handleCardArrival(req: Request, res: Response): Promise<void> {
-  const tableName = slugifyTableName(req.params.tableName ?? "");
-  if (!tableName) {
-    res.status(400).json({ error: "table name required" });
-    return;
-  }
+export type CardArrivalOutcome =
+  | { status: "invalid"; error: string }
+  | { status: "placed" }
+  | { status: "deduped"; reason: "event-id" | "instance" }
+  | { status: "rejected"; reason: "table-full" };
 
-  const result = validateIncomingEvent<CardPlayedPayload>(req.body, "card.played");
+/**
+ * The core of card arrival — validation, dedup, ensurePlayerArea self-heal, and
+ * placement — shared by the HTTP route (`handleCardArrival`) and the Spine SSE
+ * dispatcher (`spineEventDispatch.ts`), which each map the outcome to their own
+ * transport (HTTP response vs. a log).
+ */
+export async function applyCardArrival(tableName: string, body: unknown): Promise<CardArrivalOutcome> {
+  const result = validateIncomingEvent<CardPlayedPayload>(body, "card.played");
   if (!result.ok) {
-    res.status(400).json({ error: result.error });
-    return;
+    return { status: "invalid", error: result.error };
   }
   const { envelope } = result;
   if (slugifyTableName(envelope.tableId) !== tableName) {
-    res.status(400).json({ error: "envelope tableId does not match the table being posted to" });
-    return;
+    return { status: "invalid", error: "envelope tableId does not match the table being posted to" };
   }
   const seatId = envelope.initiator.seatId;
   if (!seatId) {
-    res.status(400).json({ error: "initiator.seatId is required for card.played" });
-    return;
+    return { status: "invalid", error: "initiator.seatId is required for card.played" };
   }
   const { playerName } = envelope.initiator;
   const { card, face, zoneHint, frontImageUrl, backImageUrl, cardName, owner, isCommander } = envelope.payload;
@@ -65,20 +68,17 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
   // Dedup 1: a retried request (same event id — worked but failed to ack).
   if (entry.seenEventIds.has(envelope.id)) {
     trace.getActiveSpan()?.setAttribute("arrival.deduped", "event-id");
-    res.status(200).json({ ok: true, deduped: true });
-    return;
+    return { status: "deduped", reason: "event-id" };
   }
   if (entry.hasInstance(card.instanceId)) {
     entry.seenEventIds.add(envelope.id);
     trace.getActiveSpan()?.setAttribute("arrival.deduped", "instance");
-    res.status(200).json({ ok: true, deduped: true });
-    return;
+    return { status: "deduped", reason: "instance" };
   }
 
   if (!entry.seats.has(seatId) && entry.seats.size >= MAX_SEATS) {
     trace.getActiveSpan()?.setAttribute("arrival.rejected", "table-full");
-    res.status(409).json({ error: `table is full: ${MAX_SEATS} seats` });
-    return;
+    return { status: "rejected", reason: "table-full" };
   }
 
   const pageId = pageIdOf(entry);
@@ -151,5 +151,29 @@ export async function handleCardArrival(req: Request, res: Response): Promise<vo
   );
 
   entry.seenEventIds.add(envelope.id);
-  res.status(201).json({ ok: true });
+  return { status: "placed" };
+}
+
+export async function handleCardArrival(req: Request, res: Response): Promise<void> {
+  const tableName = slugifyTableName(req.params.tableName ?? "");
+  if (!tableName) {
+    res.status(400).json({ error: "table name required" });
+    return;
+  }
+
+  const outcome = await applyCardArrival(tableName, req.body);
+  switch (outcome.status) {
+    case "invalid":
+      res.status(400).json({ error: outcome.error });
+      return;
+    case "placed":
+      res.status(201).json({ ok: true });
+      return;
+    case "deduped":
+      res.status(200).json({ ok: true, deduped: true });
+      return;
+    case "rejected":
+      res.status(409).json({ error: `table is full: ${MAX_SEATS} seats` });
+      return;
+  }
 }

@@ -3,6 +3,7 @@ import { createTLSchema, defaultShapeSchemas, TLRecord } from "@tldraw/tlschema"
 import { trace } from "@opentelemetry/api";
 import { log } from "./log.js";
 import { tableNameFromSlug } from "../shared/slugify.js";
+import { SpineSubscription } from "./spineSubscriber.js";
 import { mtgCardShapeProps } from "../shared/mtgCardShape.js";
 import { mtgCounterShapeProps } from "../shared/mtgCounterShape.js";
 import { mtgLifeCounterShapeProps } from "../shared/mtgLifeCounterShape.js";
@@ -50,6 +51,16 @@ export interface RoomEntry {
   createdAt: Date;
   /** Is a card shape with this instanceId already on the table? A second arrival of the same instance is a physical no-op. */
   hasInstance(instanceId: string): boolean;
+  /** The Spine's own id for this table — learned from the first `seat.joined` envelope's `tableId` (tabletop-spine-sse-subscriber ticket 01). Same string as `tableName`. */
+  spineTableId?: string;
+  /**
+   * The room's live Spine SSE subscription — opened once, on the first `seat.joined` for
+   * this room, and never explicitly closed: it lives exactly as long as the registry entry
+   * itself does, same as `room`/`seats`/`seenEventIds` above — a room is never removed from
+   * `registry`, emptied or not (see `onSessionRemoved` below), so there's no earlier moment
+   * to close it at. All of it goes away together on process restart, same as today.
+   */
+  spineSubscription?: SpineSubscription;
 }
 
 function hasInstance(this: RoomEntry, instanceId: string): boolean {
