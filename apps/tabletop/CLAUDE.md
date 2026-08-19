@@ -8,9 +8,11 @@ This ship's seamap: `SEAMAP.md` (in this directory).
 **All paths in this file — and every path in `apps/tabletop/notes/` — are relative to
 `apps/tabletop/`.** So `src/server/seatJoined.ts` means `apps/tabletop/src/server/seatJoined.ts`.
 
-**Cross-ship work is fine.** If finishing the task needs a change in the Shuffler or the
-Spine, go read that ship's own `CLAUDE.md` and make the change there too — no need to stop
-and ask first.
+**Cross-ship work is fine, but say so and delegate it.** If finishing the task needs a
+change in the Shuffler or the Spine, tell Jess you're crossing into that ship, then fork a
+subagent to make the change there — it should read that ship's own `CLAUDE.md` before
+touching anything. No need to stop and ask first, but never make the other ship's edit
+inline yourself.
 
 ## What this is
 

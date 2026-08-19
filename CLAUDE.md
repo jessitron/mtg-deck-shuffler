@@ -232,8 +232,10 @@ For each task, follow this workflow:
 1. **Scope to a ship**: Decide which ship(s) — `apps/shuffler/`, `apps/tabletop/`,
    `services/spine/`, or `fleet` when the task genuinely spans more than one — the
    task belongs to, then read that ship's `CLAUDE.md`. If a task that looked
-   single-ship turns out to need a change elsewhere, read the other ship's own
-   `CLAUDE.md` and make that change too — cross-ship work doesn't need a stop.
+   single-ship turns out to need a change elsewhere, say so, then fork a subagent
+   to make that change — it reads the other ship's own `CLAUDE.md` first. Cross-ship
+   work doesn't need a stop, but it's always announced and always delegated, never
+   made inline.
 2. **Research**: Look at the task and do any research needed
 3. **Consult owners**: Read `owners/INDEX.md` (one line each). For every owner whose "consult me when…" trigger the task could plausibly touch, invoke its `-context` skill (via the Skill tool) with a brief summary of the task. Note any concerns or relevant context they raise.
 4. **Clarify**: Ask questions one at a time if needed

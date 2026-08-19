@@ -8,9 +8,11 @@ This ship's seamap: `SEAMAP.md` (in this directory).
 **All paths in this file are relative to `services/spine/`**, except `contracts/`, which
 is explicitly called out as repo-root below.
 
-**Cross-ship work is fine.** If finishing the task needs a change in the Shuffler or the
-Tabletop, go read that ship's own `CLAUDE.md` and make the change there too — no need to
-stop and ask first.
+**Cross-ship work is fine, but say so and delegate it.** If finishing the task needs a
+change in the Shuffler or the Tabletop, tell Jess you're crossing into that ship, then fork
+a subagent to make the change there — it should read that ship's own `CLAUDE.md` before
+touching anything. No need to stop and ask first, but never make the other ship's edit
+inline yourself.
 
 ## What this is
 
