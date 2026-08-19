@@ -39,7 +39,7 @@ describe("buildCardPlayedEvent (the card.played envelope, JES-128)", () => {
   const tableName = "Friday Night";
 
   it("builds the envelope carrying a card.played payload from a GameCard", () => {
-    const event = buildCardPlayedEvent(handCard(), "instance-guid-1", initiator, "stack", tableName);
+    const event = buildCardPlayedEvent(handCard(), "instance-guid-1", initiator, initiator.seatId, "stack", tableName);
 
     expect(event.name).toBe(CARD_PLAYED_EVENT_NAME);
     expect(event.id).toMatch(/[0-9a-f-]{36}/);
@@ -61,37 +61,37 @@ describe("buildCardPlayedEvent (the card.played envelope, JES-128)", () => {
   });
 
   it("carries owner (the initiator's seatId) and isCommander (from the GameCard) — owner grants no capability, it's a fact the shape carries", () => {
-    const event = buildCardPlayedEvent(handCard(lightningBolt, 1, true), "instance-guid-2", initiator, "battlefield", tableName);
+    const event = buildCardPlayedEvent(handCard(lightningBolt, 1, true), "instance-guid-2", initiator, initiator.seatId, "battlefield", tableName);
     expect(event.payload.owner).toBe(initiator.seatId);
     expect(event.payload.isCommander).toBe(true);
   });
 
   it("mints a fresh event id per attempt (retries are distinguishable)", () => {
-    const one = buildCardPlayedEvent(handCard(), "i-1", initiator, "battlefield", tableName);
-    const two = buildCardPlayedEvent(handCard(), "i-1", initiator, "battlefield", tableName);
+    const one = buildCardPlayedEvent(handCard(), "i-1", initiator, initiator.seatId, "battlefield", tableName);
+    const two = buildCardPlayedEvent(handCard(), "i-1", initiator, initiator.seatId, "battlefield", tableName);
     expect(one.id).not.toBe(two.id);
   });
 
   it("sends the CURRENT face flag, independent of which image URLs are attached", () => {
     const flipped: GameCard = { ...handCard(nicolBolas), currentFace: "back" };
-    const event = buildCardPlayedEvent(flipped, "i-2", initiator, "stack", tableName);
+    const event = buildCardPlayedEvent(flipped, "i-2", initiator, initiator.seatId, "stack", tableName);
     expect(event.payload.face).toBe("back");
   });
 
   it("sends both front and back image URLs for a two-faced card", () => {
-    const event = buildCardPlayedEvent(handCard(nicolBolas), "i-2b", initiator, "stack", tableName);
+    const event = buildCardPlayedEvent(handCard(nicolBolas), "i-2b", initiator, initiator.seatId, "stack", tableName);
     expect(event.payload.frontImageUrl).not.toContain("/back/");
     expect(event.payload.backImageUrl).toContain("/back/");
   });
 
   it("derives backImageUrl from twoFaced, never from backImageUris happening to be populated", () => {
     const missingBackUris: GameCard = handCard({ ...nicolBolas, backImageUris: undefined });
-    const event = buildCardPlayedEvent(missingBackUris, "i-2c", initiator, "stack", tableName);
+    const event = buildCardPlayedEvent(missingBackUris, "i-2c", initiator, initiator.seatId, "stack", tableName);
     expect(event.payload.backImageUrl).not.toBeNull(); // falls back to constructCardImageUrl, still populated
   });
 
   it("carries gameCardIndex now (let-gamecardindex-out, 2026-08-10): decklists are public on Archidekt anyway, so the index decodes to no real secret", () => {
-    const event = buildCardPlayedEvent(handCard(lightningBolt, 7), "i-3", initiator, "graveyard", tableName);
+    const event = buildCardPlayedEvent(handCard(lightningBolt, 7), "i-3", initiator, initiator.seatId, "graveyard", tableName);
     expect(event.payload.gameCardIndex).toBe(7);
   });
 });

@@ -27,13 +27,27 @@ pair.
 
 **Status:** ready-for-agent
 
-- [ ] `buildCardPlayedEvent` takes `owner` as an explicit parameter, not derived from
+- [x] `buildCardPlayedEvent` takes `owner` as an explicit parameter, not derived from
       `initiator.seatId`
-- [ ] `sendCardPlayedToSpineBestEffort` passes `owner === initiator.seatId`, preserving
+- [x] `sendCardPlayedToSpineBestEffort` passes `owner === initiator.seatId`, preserving
       today's observable value exactly
-- [ ] `apps/shuffler/test/port-spine/sendToSpine.test.ts` (the file `544c932b` added
+- [x] `apps/shuffler/test/port-spine/sendToSpine.test.ts` (the file `544c932b` added
       assertions to) gets a case passing a different `owner` than `initiator.seatId` into
       `buildCardPlayedEvent`, asserting the payload's `owner` reflects the explicit value —
       proving the decoupling actually decoupled, not just renamed a parameter
 
 ## Comments
+
+`buildCardPlayedEvent`'s signature is now `(gameCard, instanceId, initiator, owner, zoneHint,
+tableName)` — `owner` inserted as its own parameter right after `initiator`, no longer read off
+`initiator.seatId` inside the function body. `sendCardPlayedToSpineBestEffort` passes
+`game.seatId` for both, preserving today's exact observable value. Added a case to
+`sendToSpine.test.ts` calling `buildCardPlayedEvent` directly with a different `owner` than
+`initiator.seatId`, asserting `payload.owner` reflects the explicit value while
+`event.initiator.seatId` stays the initiator's — confirmed it failed to compile before the
+signature change (TS2554, expected 5 args got 6), then passed after. Updated the other two
+existing call sites (`cardPlayedEvent.test.ts`, `cardPlayedContract.test.ts`) to pass
+`initiator.seatId` explicitly as `owner`, unchanged behavior. Full shuffler suite green (364
+tests, including `cardPlayedContract.test.ts`). two-faced-cards owner consulted before
+(cleared — no face/image field touched) and updated after (its `interactions.md` watch point 21
+no longer describes the old coupled signature).

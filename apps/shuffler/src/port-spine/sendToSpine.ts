@@ -61,6 +61,7 @@ export async function sendCardPlayedToSpineBestEffort(spinePort: SpinePort | und
       gameCard,
       gameCard.cardInstanceId,
       { seatId: game.seatId, playerName: game.playerName ?? "player", sessionId },
+      game.seatId,
       zoneHint,
       tableId
     );

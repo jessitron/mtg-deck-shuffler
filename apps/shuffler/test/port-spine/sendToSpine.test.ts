@@ -1,7 +1,7 @@
 import { GameState, TableInfo, GameCard } from "../../src/GameState.js";
 import { FakeSpineGateway } from "../../src/port-spine/FakeSpineGateway.js";
 import { joinSpineBestEffort, sendCardPlayedToSpineBestEffort } from "../../src/port-spine/sendToSpine.js";
-import { CardPlayedEvent } from "../../src/port-tabletop/types.js";
+import { CardPlayedEvent, buildCardPlayedEvent } from "../../src/port-tabletop/types.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
 import { lightningBolt, nicolBolas, testProvenance } from "../generators.js";
 import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../../src/table-look.js";
@@ -243,6 +243,25 @@ describe("sendCardPlayedToSpineBestEffort", () => {
 
     await expect(sendCardPlayedToSpineBestEffort(fake, game, bolt, "stack")).resolves.toBeUndefined();
     expect(fake.sentEvents).toHaveLength(0);
+  });
+});
+
+describe("buildCardPlayedEvent", () => {
+  it("takes owner as an independent parameter, decoupled from initiator — who caused the event need not be whose PlayerArea it belongs in", async () => {
+    const soloGame = GameState.newGame(107, 1, 1, testDeck);
+    const bolt = cardNamed(soloGame, "Lightning Bolt");
+
+    const event = buildCardPlayedEvent(
+      bolt,
+      bolt.cardInstanceId!,
+      { seatId: "initiator-seat", playerName: "Jess" },
+      "someone-elses-seat",
+      "stack",
+      "table-1"
+    );
+
+    expect(event.initiator.seatId).toBe("initiator-seat");
+    expect(event.payload.owner).toBe("someone-elses-seat");
   });
 });
 
