@@ -3,6 +3,14 @@ import { slugifyTableName } from "../shared/slugify.js";
 import { applyCardArrival } from "./cardArrival.js";
 import { MAX_SEATS } from "./cardLayout.js";
 
+/** Express route pattern for the test-only seed seam — register this, don't hand-type it. */
+export const TEST_CARD_SEED_ROUTE = "/test/tables/:tableName/cards";
+
+/** Builds the concrete URL a test/spec posts a card.played envelope to. */
+export function testCardSeedUrl(tableSlug: string): string {
+  return `/test/tables/${tableSlug}/cards`;
+}
+
 /**
  * Test-only seam: verification specs and cardArrival.test.ts drive a server spawned as
  * its own process, so they need HTTP to seed a card onto a table without a live Spine.

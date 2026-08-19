@@ -29,10 +29,9 @@ test.beforeAll(async () => {
   if (!tabletopBuilt) return;
 
   // The real Spine first — the Tabletop's seat.joined-triggered SSE subscription
-  // (ticket 01) needs a live Spine to subscribe to, and card.played now only
-  // reaches the Tabletop by traveling through it (this ticket's whole point:
-  // Shuffler → Spine → SSE → Tabletop, zero direct Shuffler→Tabletop HTTP left
-  // in the code — see the deleted HttpTabletopGateway/TabletopPort).
+  // needs a live Spine to subscribe to, and card.played now only reaches the
+  // Tabletop by traveling through it: Shuffler → Spine → SSE → Tabletop, with
+  // zero direct Shuffler→Tabletop HTTP left in the code.
   spine = spawn('bundle', ['exec', 'puma', '-p', SPINE_PORT], {
     cwd: SPINE_DIR,
     env: { ...process.env, SPINE_DB_PATH, TABLETOP_URL, RACK_ENV: 'development' },
@@ -78,7 +77,7 @@ const PICKED_MAT = '/images/playmats/aeoe-6-seam-rip.png';
 
 /**
  * Starts a game at a table and returns the real Tabletop room slug — the Spine
- * mints `<name-slug>-<8-hex>` at join time (real Spine, ticket 02), which is NOT
+ * mints `<name-slug>-<8-hex>` at join time, which is NOT
  * the bare tableName the caller picked. A spectator must navigate to this slug,
  * not the bare name, or it watches an empty room while events land elsewhere.
  */
@@ -137,8 +136,8 @@ test.describe('Three-ship flow: Shuffler plays to the Tabletop via the Spine', (
 
     // Play the first hand card: the Shuffler mutates immediately (best-effort Spine
     // send, never blocking) and the card reaches this canvas only by traveling
-    // through the real Spine's SSE stream — there is no HttpTabletopGateway left
-    // to short-circuit that path, so this assertion is the whole point of ticket 02.
+    // through the real Spine's SSE stream — there is no direct Shuffler→Tabletop
+    // HTTP call left to short-circuit that path.
     await actOnFirstHandCard(page, 'Play', '6');
     await expect(page.locator('.table-cards-button')).toContainText('1 Cards on table');
 
