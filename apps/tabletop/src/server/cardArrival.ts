@@ -75,12 +75,12 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
     return { status: "deduped", reason: "instance" };
   }
 
-  if (!entry.seats.has(seatId) && entry.seats.size >= MAX_SEATS) {
+  if (!entry.seats.has(owner) && entry.seats.size >= MAX_SEATS) {
     trace.getActiveSpan()?.setAttribute("arrival.rejected", "table-full");
     return { status: "rejected", reason: "table-full" };
   }
 
-  const playerArea = entry.seats.get(seatId);
+  const playerArea = entry.seats.get(owner);
   if (!playerArea) {
     // A card.played for a seat with no player area means seat.joined hasn't landed yet —
     // an ordering bug upstream, not something to paper over by minting furniture from

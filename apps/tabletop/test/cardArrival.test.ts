@@ -3,7 +3,7 @@ import type { Server } from "node:http";
 import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
-import { graveyardBounds, stackBounds } from "../src/server/cardLayout";
+import { graveyardBounds, stackBounds, stackCardPosition } from "../src/server/cardLayout";
 import { slugFor } from "./support/tableSlug";
 
 let server: Server;
@@ -186,6 +186,26 @@ describe("card arrival", () => {
     const shapes = shapesOf("arrival-rows");
     expect(shapes).toHaveLength(2);
     expect({ x: shapes[0].x, y: shapes[0].y }).not.toEqual({ x: shapes[1].x, y: shapes[1].y });
+  });
+
+  it("places a card by payload.owner, not envelope.initiator.seatId, when they differ (not a real production shape today, just a fixture)", async () => {
+    await joinSeat("arrival-owner-vs-initiator", "seat-AAAAAAA", "Sam");
+    await joinSeat("arrival-owner-vs-initiator", "seat-BBBBBBB", "Sam");
+    // initiator is seat-AAAAAAA (index 0), but the card is owned by seat-BBBBBBB (index 1).
+    await post(
+      "arrival-owner-vs-initiator",
+      cardPlayed(
+        "arrival-owner-vs-initiator",
+        { initiator: { seatId: "seat-AAAAAAA", playerName: "Sam" } },
+        { owner: "seat-BBBBBBB", zoneHint: "stack" }
+      )
+    );
+    const [card] = shapesOf("arrival-owner-vs-initiator");
+    expect(card.props.owner).toBe("seat-BBBBBBB");
+    const ownerPosition = stackCardPosition(1, 0); // seat-BBBBBBB's area (index 1)
+    const initiatorPosition = stackCardPosition(0, 0); // seat-AAAAAAA's area (index 0)
+    expect({ x: card.x, y: card.y }).toEqual(ownerPosition);
+    expect({ x: card.x, y: card.y }).not.toEqual(initiatorPosition);
   });
 
   it("puts a graveyard-hinted card in the player's graveyard box", async () => {
