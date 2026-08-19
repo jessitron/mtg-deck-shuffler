@@ -10,11 +10,11 @@
       "minLength": 8,
       "description": "A short GUID identifying this seat-taking. Seat identity is distinct from the player's display name."
     },
-    "seat": {
+    "tablePosition": {
       "type": "integer",
       "minimum": 1,
       "maximum": 4,
-      "description": "Seat number at the table, 1-4."
+      "description": "Which of the table's 1-4 slots this seat occupies. Distinct from seatId, which is the seat's own identity."
     },
     "playerName": {
       "type": "string",
@@ -22,6 +22,6 @@
       "description": "Display only. Not unique, not an identity."
     }
   },
-  "required": ["seatId", "seat", "playerName"],
+  "required": ["seatId", "tablePosition", "playerName"],
   "additionalProperties": true
 }

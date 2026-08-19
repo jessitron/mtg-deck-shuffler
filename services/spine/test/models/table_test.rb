@@ -5,7 +5,7 @@ class TableTest < Minitest::Test
     outcome = join_table(name: "kitchen table", player_name: "Jess")
 
     assert outcome[:table_id]
-    assert_equal 1, outcome[:seat_number]
+    assert_equal 1, outcome[:table_position]
     assert_equal true, outcome[:created]
   end
 
@@ -14,7 +14,7 @@ class TableTest < Minitest::Test
     second = join_table(name: "kitchen table", player_name: "Alex")
 
     assert_equal first[:table_id], second[:table_id]
-    assert_equal 2, second[:seat_number]
+    assert_equal 2, second[:table_position]
     assert_equal false, second[:created]
   end
 
@@ -35,7 +35,7 @@ class TableTest < Minitest::Test
     assert_equal({ "name" => "kitchen table", "creator" => "Jess" }, JSON.parse(event.payload))
   end
 
-  def test_take_seat_assigns_the_next_open_seat_number
+  def test_take_seat_assigns_the_next_open_table_position
     table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
     take_seat(table, player_name: "Jess")
 
@@ -51,16 +51,16 @@ class TableTest < Minitest::Test
     event = table.events_dataset.where(name: "seat.taken").first
     payload = JSON.parse(event.payload)
     assert_equal seat.id, payload["seatId"]
-    assert_equal 1, payload["seat"]
+    assert_equal 1, payload["tablePosition"]
     assert_equal "Jess", payload["playerName"]
   end
 
   def test_taking_an_already_occupied_seat_is_rejected
     table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
-    take_seat(table, player_name: "Jess", number: 2)
+    take_seat(table, player_name: "Jess", table_position: 2)
 
     assert_raises(Spine::Table::SeatOccupied) do
-      take_seat(table, player_name: "Alex", number: 2)
+      take_seat(table, player_name: "Alex", table_position: 2)
     end
   end
 
@@ -152,8 +152,8 @@ class TableTest < Minitest::Test
       decoration: { "deckName" => "Test Deck" })
   end
 
-  def take_seat(table, player_name:, number: nil)
+  def take_seat(table, player_name:, table_position: nil)
     table.take_seat!(game_id: SecureRandom.uuid, player_name: player_name,
-      decoration: { "deckName" => "Test Deck" }, number: number)
+      decoration: { "deckName" => "Test Deck" }, table_position: table_position)
   end
 end

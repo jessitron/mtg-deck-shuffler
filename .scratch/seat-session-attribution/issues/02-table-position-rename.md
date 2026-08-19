@@ -2,7 +2,7 @@
 
 Mountain: spine-gathers-data
 Ship: fleet
-Status: ready-for-agent
+Status: done
 
 **What to build:** "Seat number" currently names both the seat's occupancy identity and
 its 1-4 table slot, which is exactly the confusion that let `card.played` send
@@ -31,16 +31,42 @@ still reused once a seat is freed (that reuse logic belongs to
 
 **Blocked by:** None — can start immediately.
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] `next_available_seat_number` (and callers) renamed to table-position vocabulary in
+- [x] `next_available_seat_number` (and callers) renamed to table-position vocabulary in
       `services/spine/models/table.rb`
-- [ ] `contracts/payloads/seat.taken.v1.json`'s `payload.seat` field/description renamed to
+- [x] `contracts/payloads/seat.taken.v1.json`'s `payload.seat` field/description renamed to
       table position
-- [ ] `services/spine/test/models/table_test.rb`'s seat.taken event-shape test updated to
+- [x] `services/spine/test/models/table_test.rb`'s seat.taken event-shape test updated to
       match whatever key/description change was made, still passing
-- [ ] Shuffler-side prose/comments/new-code vocabulary updated to "table position"; the
+- [x] Shuffler-side prose/comments/new-code vocabulary updated to "table position"; the
       persisted `spineSeatNumber` field name is left as-is (no persistence-version bump)
-- [ ] No behavioral change: table positions are still assigned sequentially, 1-4
+- [x] No behavioral change: table positions are still assigned sequentially, 1-4
 
 ## Comments
+
+Renamed the 1-4 table-slot concept end to end, leaving the seat's own identity (seatId)
+untouched:
+
+- **Spine** (`services/spine/models/table.rb`): `next_available_seat_number` →
+  `next_available_table_position`; `prepare_seat`'s and `take_seat!`'s `number:` param →
+  `table_position:`; `join_outcome`'s `:seat_number` key → `:table_position`; error message
+  text ("seat # ... already taken" → "table position # ... already taken"). The `Seat`
+  model's own DB column (`number`) is untouched — out of scope, same as the persisted
+  Shuffler field. `app.rb`'s internal references to `outcome[:seat_number]` were updated to
+  `outcome[:table_position]` to match; its *external* wire vocabulary (`/join`'s JSON
+  response key `seatNumber`, and the `seat.number`/now `table.position` span attribute
+  name) is a separate HTTP API surface not named by this ticket, so it was left alone
+  except fixing the one now-stale internal reference.
+- **Contract** (`contracts/payloads/seat.taken.v1.json`): the `payload.seat` field was
+  renamed to `payload.tablePosition` (JSON key changed, not just the description) — nothing
+  else in the fleet read the old `seat` key, so this was a clean rename.
+  `services/spine/test/models/table_test.rb`'s `test_take_seat_mints_a_seat_taken_event`
+  (and the other seat-number-named test) were updated to match and stay green.
+- **Shuffler**: `GameState.ts`, `app.ts`, `port-persist-state/types.ts`, and
+  `port-persist-prep/*` already had no seat-number *prose* to rename — only the persisted
+  `spineSeatNumber` field name itself, which stays as-is per the ticket. Cleaned up
+  matching vocabulary in `apps/shuffler/CLAUDE.md`'s prose ("bare 1-4 seat position" / "a
+  seat number never matches a seat GUID" → "table position").
+- Spine suite: 79 runs, 232 assertions, 0 failures. Shuffler: 43 suites, 361 tests, all
+  green (including `test/port-spine/cardPlayedContract.test.ts`).

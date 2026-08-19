@@ -128,12 +128,12 @@ module Spine
         current_span.add_attributes(
           "join.result" => join_result(outcome),
           "seat.id" => outcome[:seat_id],
-          "seat.number" => outcome[:seat_number]
+          "table.position" => outcome[:table_position]
         )
         JSON.generate(
           tableId: outcome[:table_id],
           seatId: outcome[:seat_id],
-          seatNumber: outcome[:seat_number],
+          seatNumber: outcome[:table_position],
           tableUrl: table_url(outcome[:table_id])
         )
       rescue JSON::ParserError, KeyError => e

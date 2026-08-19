@@ -57,17 +57,17 @@ module Spine
       raise NameTaken, "an active table is already named #{name.inspect}"
     end
 
-    def take_seat!(game_id:, player_name:, decoration:, number: nil, preparation: nil)
+    def take_seat!(game_id:, player_name:, decoration:, table_position: nil, preparation: nil)
       preparation ||= prepare_seat(game_id: game_id, player_name: player_name,
-        decoration: decoration, number: number)
+        decoration: decoration, table_position: table_position)
 
       DB.transaction do
-        if seats_dataset.where(number: preparation[:number]).any?
-          raise SeatOccupied, "seat #{preparation[:number]} at table #{name.inspect} is already taken"
+        if seats_dataset.where(number: preparation[:table_position]).any?
+          raise SeatOccupied, "table position #{preparation[:table_position]} at table #{name.inspect} is already taken"
         end
 
         seat = Seat.create(
-          id: preparation[:seat_id], table_id: id, number: preparation[:number],
+          id: preparation[:seat_id], table_id: id, number: preparation[:table_position],
           player_name: player_name, game_id: game_id
         )
         persist_envelope!(preparation[:taken])
@@ -141,7 +141,7 @@ module Spine
         table_id: table.id,
         table_name: table.name,
         seat_id: seat.id,
-        seat_number: seat.number,
+        table_position: seat.number,
         joined_event: joined_event,
         created: created,
         replayed: replayed
@@ -153,10 +153,10 @@ module Spine
       join_outcome(table, seat, created: false, replayed: true)
     end
 
-    def prepare_seat(game_id:, player_name:, decoration:, number: nil)
-      number ||= next_available_seat_number
-      if seats_dataset.where(number: number).any?
-        raise SeatOccupied, "seat #{number} at table #{name.inspect} is already taken"
+    def prepare_seat(game_id:, player_name:, decoration:, table_position: nil)
+      table_position ||= next_available_table_position
+      if seats_dataset.where(number: table_position).any?
+        raise SeatOccupied, "table position #{table_position} at table #{name.inspect} is already taken"
       end
 
       seat_id = SecureRandom.uuid
@@ -172,7 +172,7 @@ module Spine
         "id" => SecureRandom.uuid,
         "name" => "seat.taken",
         "origin" => "spine.seatTaken",
-        "payload" => { "seatId" => seat_id, "seat" => number, "playerName" => player_name }
+        "payload" => { "seatId" => seat_id, "tablePosition" => table_position, "playerName" => player_name }
       )
       joined = common.merge(
         "id" => SecureRandom.uuid,
@@ -182,7 +182,7 @@ module Spine
       )
       EventContract.validate!(taken)
       EventContract.validate!(joined)
-      { seat_id: seat_id, number: number, taken: taken, joined: joined }
+      { seat_id: seat_id, table_position: table_position, taken: taken, joined: joined }
     end
 
     def persist_envelope!(envelope)
@@ -223,7 +223,7 @@ module Spine
       (events_dataset.max(:seq) || 0) + 1
     end
 
-    def next_available_seat_number
+    def next_available_table_position
       taken = seats_dataset.select_map(:number)
       available = SEAT_NUMBERS.find { |n| !taken.include?(n) }
       raise TableFull, "table #{name.inspect} already has 4 seats taken" if available.nil?
