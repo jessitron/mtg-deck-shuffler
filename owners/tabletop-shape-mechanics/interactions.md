@@ -63,6 +63,13 @@
   before recursing into `{ ...info, target: 'shape' }` internally. See watch point 24 for why a
   listener on `editor.on('event', ...)` must call this helper directly rather than trusting
   `info.target === 'shape'` to ever appear for a real gesture.
+- **`MenuClickCapture` (`node_modules/@tldraw/editor/src/lib/components/MenuClickCapture.tsx`),
+  baked into `DefaultCanvas`, is NOT one of the pieces `TLComponents` lets an app override** —
+  unlike `ContextMenu` itself (watch point 15, `CardContextMenu.tsx`). Its outside-click close path
+  calls `editor.menus.clearOpenMenus()` directly, bypassing Radix `ContextMenu.Root`'s own
+  open/close handshake — see watch point 26 for the full desync mechanism and the fix
+  (`closeContextMenuBeforeOutsideClick.ts`), which has to intercept the click in the capture phase
+  since there's no component-override seam to replace this piece.
 
 ### Shape identity (`props.instanceId`)
 - Minted at `apps/tabletop/src/server/cardArrival.ts` on arrival, or `seatJoined.ts` at seating for
@@ -774,6 +781,35 @@
     must go through `getShapePageBounds()`**, not just for convenience but for correctness once a
     tapped card is in the mix. See `architecture.md`'s "Stack landing collision avoidance"
     section.
+
+26. **A third-party dialog library's own internal open-state can desync from tldraw's `tlmenus`
+    atom when tldraw closes a menu through a side channel instead of that library's own handshake
+    — a different hazard from watch points 1/15's stale-*selection* family, not a member of it.**
+    (2026-08-19.) `DefaultContextMenu` is built on Radix's `ContextMenu.Root`, which tracks its own
+    internal open boolean and only transitions it via its own `onOpenChange`/Escape/outside-click
+    handshake. `@tldraw/editor`'s `MenuClickCapture` (baked into `DefaultCanvas`, **not** swappable
+    via `TLComponents` — unlike `ContextMenu` itself) renders a full-canvas capture div whenever
+    `tlmenus.hasAnyOpenMenus()`, and for a plain left-button outside click closes the menu by
+    calling `editor.menus.clearOpenMenus()` **directly** — bypassing Radix's handshake. That clears
+    tldraw's own `tlmenus` atom (so the menu visually disappears — `DefaultContextMenu`'s `Portal`
+    is conditional on it), but Radix's *own* internal open state never gets told to close. On the
+    next right-click, Radix sees itself already open and no-ops — `onOpenChange` never fires again,
+    `tlmenus` never gets re-added, and the menu stays dead until something else (e.g. Escape, which
+    DOES go through Radix's own path) resets it. **Fix**: beat `MenuClickCapture` to the punch — a
+    document-level *capture-phase* `pointerdown` listener (`apps/tabletop/src/client/
+    closeContextMenuBeforeOutsideClick.ts`, registered from `onTldrawMount` in `TablePage.tsx`)
+    dispatches a synthetic Escape keydown first, whenever a menu is open and the click is a
+    left-button click landing outside the menu's own DOM — forcing Radix's own correct close to run
+    before `MenuClickCapture`'s handler ever executes, so its `clearOpenMenus()` call becomes a
+    no-op instead of a desync. Clicks on the menu itself are excluded, or the injected Escape would
+    cancel the click before its own `onSelect` fires. **Generalizable lesson**: when tldraw's own
+    chrome renders a stock React component wrapping a third-party stateful primitive (Radix, here),
+    and that chrome piece isn't swappable via `TLComponents`, a fix has to intercept the interaction
+    *before* tldraw's own handler runs (capture phase) rather than reaching for a component override
+    that doesn't exist. Regression test:
+    `apps/tabletop/test/verification/verify-rightclick-reopen.spec.ts`'s two open/dismiss/reopen ×5
+    loops (Escape-dismiss, which passed even pre-fix; outside-left-click-dismiss, which failed after
+    one cycle pre-fix). See `architecture.md`'s "The right-click context menu going dead" section.
 
 ## Not Related To
 
