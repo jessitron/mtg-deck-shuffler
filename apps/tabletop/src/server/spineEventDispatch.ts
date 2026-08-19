@@ -42,8 +42,10 @@ export function dispatchSpineEvent(tableName: string, event: unknown): void {
             });
           }
           if (outcome.status === "rejected" && outcome.reason === "seat-not-joined") {
+            span.setAttribute("error", true);
             log.error("spine sse: card.played arrived before seat.joined — dropping, not fabricating furniture", {
               "table.slug": tableName,
+              error: true,
             });
           }
         } catch (error) {
