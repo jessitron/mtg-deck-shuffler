@@ -69,32 +69,16 @@ SCAFFOLDING — the seam the Spine absorbs`); the Tabletop POSTs card-return eve
   `.scratch/tabletop-spine-sse-subscriber/spec.md` (2026-08-16, `ready-for-agent`) — one
   subscription per room, opened on the first `seat.joined`'s `tableId`, replacing the
   direct `card.played` POST in the same atomic swap. Ready for `/to-tickets`.
-- **The Shuffler's own Spine SSE subscriber**, symmetric to the above — the card-return
-  channel (library portal drag) is in scope for rerouting through the Spine (decided
-  2026-08-11), which means the Shuffler needs the same kind of subscriber the Tabletop
-  needs, feeding into whatever replaces today's `eventsUrl` inbox handler. Design not
-  started.
-  - **Sketch (2026-08-14, not yet a spec):** the Shuffler is HTMX, so it has no live
-    connection of its own — a Spine subscription on the Node server doesn't reach an
-    already-open browser tab by itself. Today the only place staleness is discovered
-    is optimistic-concurrency-on-write: a tab's own POST comes back `409
-version-conflict` (`src/app.ts`'s `renderCommandOutcome`) if the server's version
-    moved past what that tab expected. A card returned by the Tabletop isn't a write
-    from this tab, so that path never fires — the browser needs an actual push. Shape
-    discussed: Shuffler server subscribes to the Spine per-table SSE stream (or
-    receives a direct call from it — mechanism TBD, doesn't matter for this sketch);
-    on a relevant event it re-derives that game's state and pushes over a **per-game**
-    SSE stream to browser tabs watching that `gameId` (not one global stream filtered
-    client-side — keeps the server from fanning every event to every open tab). The
-    browser tab subscribes via the htmx SSE extension and can reuse plumbing that
-    already exists for the same-response case: applying a command today sets `HX-
-Trigger: game-state-updated` on the response, and `active-game-page.ts` has an
-    element listening with `hx-trigger="game-state-updated from:body"` that re-fetches
-    itself. An SSE-delivered `game-state-updated` event would drive that same
-    listener, just triggered externally instead of by this tab's own response —
-    same event name, same re-fetch, new trigger source. Touches the `animations`
-    owner (changes when/how the game area re-renders) — consult `-context` before
-    this becomes a spec.
+- ~~**The Shuffler's own Spine SSE subscriber.**~~ Grilled:
+  `.scratch/shuffler-spine-sse-subscriber/answer.md` (2026-08-18, `Status: resolved`) —
+  turned out the card-return channel is entirely unbuilt, not a reroute of a live one, so
+  the answer covers the whole wiring: the Tabletop's send to the Spine, the Shuffler's new
+  per-game subscriber, and a new browser-facing per-game SSE push reusing the existing
+  `HX-Trigger: game-state-updated` plumbing. Ready for `/to-spec`. Also settled in this
+  session, fleet-wide, fixed in place across every affected doc (not just here): the
+  `gameCardIndex`- and `gameId`-may-not-cross-the-boundary rules are both gone for good —
+  `gameCardIndex` is now this design's actual wire identity, which is also what resolves
+  the "no instanceId→GameCard lookup exists" gap the research pass turned up.
 
 ## Out of scope
 
