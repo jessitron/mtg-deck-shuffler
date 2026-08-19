@@ -23,7 +23,46 @@ early dev data, but still a real prod-data-wiping action.
 
 ## Right Effing Now
 
-After start game is working again, then we can address Card Played not matching the seat.
+Card Played not matching the seat is fixed (544c932b — it was sending the bare table
+position instead of the real seatId GUID). The domain conversation that fix prompted went
+further, though, and settled a fuller model that isn't built yet:
+
+- [ ] `seat-session-attribution` Real seatId format, sessionId, and owner-vs-initiator —
+  spec-shaped, ready for `/to-spec`
+  - Settled in conversation 2026-08-19 (not yet a formal `/grilling` session). Domain
+    writeup already landed: `notes/GLOSSARY.md` (Seat ID, Table Position, Session ID,
+    Anonymous Session, Owner vs Initiator, Player URL) and the new `CONTEXT-MAP.md`.
+  - Decisions, none yet built:
+    - Rename "seat number" → **table position** everywhere — it's a slot, not an identity.
+    - **seatId** becomes `<player-name-slug>-<8hex>`, mirroring the table slug's own format
+      (`TableSlug.mint`). Still minted by the Spine (`Table#prepare_seat`), never the
+      Shuffler.
+    - Add **sessionId**, distinct from seatId, so concurrent sessions under one seat (two
+      devices, a refresh) attribute separately. Shape differs per ship: Shuffler's
+      `initiator` is `{ gameId, seatId, sessionId }` (gameId is the durable anchor,
+      sessionId is free to reset on refresh); Tabletop's is `{ seatId?, sessionId }` (no
+      gameId-equivalent anchor, so sessionId — or its anonymous pseudonym — must survive a
+      refresh). Needs adding to `contracts/envelope.v1.json`'s `initiator` shape.
+    - **Anonymous sessions** (Tabletop spectators, no `?seat=` param): client-generates a
+      pseudonym like `anonymous-hippo-234134tr`, stable across refresh (not forever),
+      doubling as identity token and display label.
+    - **Decouple `owner` from `initiator`**: today `buildCardPlayedEvent`
+      (`apps/shuffler/src/port-tabletop/types.ts`) derives `payload.owner` straight from
+      `initiator.seatId`. They answer different questions — initiator is attribution ("who
+      caused this," never authority — this app doesn't police, anonymous sessions can do
+      anything), owner is placement ("whose PlayerArea does this card belong in"). Should
+      be independently specified.
+    - **`?seat=<seatId>` query param** on the Tabletop URL (today's `tableUrl` is bare
+      `/t/<slug>` — `services/spine/app.rb:201-204`), so the Tabletop knows which occupancy
+      is viewing. Directly unblocks `.scratch/tabletop-view-rotation/spec.md`'s deferred
+      "client-side which seat is this browser" scope (its Out of Scope section).
+    - Minor/diagnostic, separate from the attribution model above: Shuffler should send its
+      `gameId` to the Spine at join, purely so Spine can log the correlation for tracing.
+  - **Overlaps existing tracked work — check both before speccing**:
+    `.scratch/leave-and-join-table/spec.md` (ready-for-agent) already touches seatId
+    clearing and a new seat-release capability; `.scratch/tabletop-view-rotation/spec.md`
+    deferred exactly the seat-aware-URL piece above. This may extend one of those specs
+    rather than becoming a new one — that's a call for `/to-spec` to make, not this note.
 
 As part of these fixes, I would like to make a clearer chain of events in Honeycomb. I want a custom span in Spine for every event sent on the SSE streams. That way I can make a graph of the event sequence. There should also be one for table creation / seat join (when synchronous).
 

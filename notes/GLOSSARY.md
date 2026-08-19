@@ -148,7 +148,67 @@ Table (Spine): the shared thing itself — 1–4 hands plus a tabletop plus an e
 
 Seat: a player's place at a Table. A Shuffler Game connects to a Seat; a table has 1–4 of them. A seat shows its public shadow (card counts); only the player sees the cards.
 
-Seat ID (Shuffler → contract): a short GUID minted by the Shuffler at prep/join time — the seat's identity, because player names are not unique. Travels as `initiator.seatId` in `card.played`; recorded on the Prep and the Game (becomes a Spine-owned sequence later).
+Seat ID (Spine-minted): the identity of an **occupancy** — a Shuffler game's connection to a
+table position at a table — minted by the Spine (`SecureRandom.uuid` in `Table#prepare_seat`)
+when a seat is taken, never by the Shuffler (an earlier version of this entry said otherwise;
+that was wrong). Necessary because player names aren't unique and Table Position (below) gets
+reused across occupancies over time, so neither is a safe identity key on its own. Travels as
+`initiator.seatId` on every event a seated player causes, and — decided 2026-08-19, not yet
+built — as the `?seat=` query param on the Player URL (below). Format decided but not yet
+built: `<player-name-slug>-<8hex>`, mirroring the Table's own slug format (`TableSlug.mint`),
+so a seatId reads as a name in traces the same way a table id already does. Once "leave a
+table" ships (`.scratch/leave-and-join-table/`), a released seatId's occupancy ends and it
+stops resolving to a live seat — freeing its table position for reuse, but the seatId itself
+is retired, not reassigned.
+
+Table Position (Spine; was "seat number" — renamed 2026-08-19): the 1-4 slot a seat occupies
+at a table, assigned sequentially by `Table#next_available_seat_number`. Purely a
+placement/layout fact — what the Tabletop uses to place a PlayerArea, and what
+`TableFull`/`SeatOccupied` check against. Reused across occupancies over time (one occupant
+leaves position 3, a later one takes it), so it is not an identity — that's what Seat ID is
+for. Renamed from "seat number" so the word "seat" stops doing double duty for both the
+occupancy (Seat ID) and the slot (this).
+
+Session ID (per-context; decided 2026-08-19, not yet built): identifies one browser
+tab/connection's participation, distinct from Seat ID — a player can hold one seatId across
+several concurrent sessions (two devices, or a refresh), and interpretation needs to tell
+those apart, so `initiator` needs both. Each bounded context anchors it differently. In the
+**Shuffler**, `initiator` is `{ gameId, seatId, sessionId }` — `gameId` is already the durable
+anchor (survives a refresh), so `sessionId` is free to reset on every page load; its only job
+is distinguishing concurrent page loads under one `gameId`. In the **Tabletop**, `initiator` is
+`{ seatId?, sessionId }` — there is no `gameId`-equivalent anchor, so `sessionId` (or its
+anonymous form, below) must itself persist across a refresh, or an anonymous visitor loses
+continuity with their own prior actions mid-visit. Not yet built anywhere — `sessionId` doesn't
+exist in the fleet today, and needs adding to `contracts/envelope.v1.json`'s `initiator` shape
+before anything can carry it on the wire.
+
+Anonymous Session (Tabletop; decided 2026-08-19, not yet built): a session with no seatId — a
+spectator, or anyone who opened a Tabletop URL without a `?seat=` param. Client-generates a
+pseudonym like `anonymous-hippo-234134tr` (word-word-random — deliberately a different shape
+than a real seatId's name-slug-hex) that doubles as both the session's identity token and its
+display label, stable across a refresh (client-side storage) but not meant to be permanent. The
+`anonymous-` prefix lets interpretation tell a real occupant from a pseudonymous visitor without
+a separate flag.
+
+Owner vs Initiator (contract; decided 2026-08-19, not yet built): two different questions that
+today's code conflates. `initiator` (envelope-level, every event kind) answers "who caused
+this" — attribution for interpretation and traces, **never authority**: this app doesn't
+police, anyone (a seated player, or an anonymous session) is allowed to do anything, so
+`seatId`/`sessionId` convey provenance, not permission. `owner` (payload-level, `card.played`
+only) answers a different question — "whose PlayerArea does this card belong in," a placement
+fact about the card, independent of who moved it. Today `buildCardPlayedEvent`
+(`apps/shuffler/src/port-tabletop/types.ts`) derives `owner` directly from `initiator.seatId`,
+which forecloses any case where the two would diverge (a player moving a card into an
+opponent's zone; an anonymous facilitator arranging someone else's cards). The two should be
+independently specified, not one derived from the other.
+
+Player URL (Shuffler → Tabletop; decided 2026-08-19, not yet built): the `?seat=<seatId>` query
+param on the Tabletop link a player clicks from the Shuffler's "Go to Table" button — needed so
+the Tabletop knows which occupancy is viewing (for a future seat-relative view; see
+`.scratch/tabletop-view-rotation/spec.md`'s deferred "client-side which seat is this browser"
+scope). A query param, not a path segment: the table (`/t/<slug>`) is still the one resource
+being addressed, the seat only scopes this visitor's view of it. Today's `tableUrl`
+(`services/spine/app.rb:201-204`) carries only the table slug, no seat information at all.
 
 Solo Mode (Shuffler): the default — no table name. Play/Discard copy the card image to the clipboard for Mural-style play. Unchanged by table mode.
 
