@@ -1,5 +1,67 @@
 # History
 
+## Right-click context menu goes dead after one dismiss-by-outside-click cycle — `@tldraw/editor`'s `MenuClickCapture` desyncs Radix's own open state (2026-08-19)
+
+TODO.md bug: "In tabletop, often after selecting a card, I right-click and the menu comes up...
+once. After that, right-clicking does nothing... until doing a bunch of unrelated things."
+
+**Root cause, found by reading `node_modules/@tldraw/editor/src/lib/components/MenuClickCapture.tsx`
+(baked into `DefaultCanvas`, not overridable via `TLComponents` — a new fact for this KB, see
+below), not guessed.** Tldraw's `DefaultContextMenu` is built on Radix's `ContextMenu.Root`, which
+owns its own internal open/closed boolean and only transitions it through its own handshake
+(`onOpenChange`, or its own Escape/outside-pointerdown detection). Whenever `tlmenus.hasAnyOpenMenus()`
+is true, `MenuClickCapture` renders a full-canvas capture `div` so an outside click doesn't also
+hit the canvas underneath. For a plain **left-button** outside click, its `handlePointerDown`
+closes the menu by calling `editor.menus.clearOpenMenus()` **directly** — bypassing Radix's own
+close path entirely. That clears tldraw's `tlmenus` atom, so `DefaultContextMenu`'s conditionally-
+rendered `Portal` unmounts and the menu visually disappears — but Radix's own internal `open` state
+inside `ContextMenu.Root` is never told to close. On the *next* right-click, Radix sees its own
+state already `open: true` and no-ops (never calls `onOpenChange` again), so `tlmenus` never gets
+re-added and the menu silently fails to reopen — while shape selection on right-click, a completely
+separate code path (`SelectTool`'s `Idle.onRightClick` state-chart handling), is unaffected, which
+is exactly why the card visibly selects while the menu stays gone. Confirmed empirically: dismissing
+via **Escape** (which DOES go through Radix's own dismissable-layer handshake) never desyncs and can
+be repeated indefinitely; dismissing via an outside **left-click** desyncs it after exactly one
+cycle, every time.
+
+**`rightClickPanning` was tried first and ruled out as a red herring** — it governs whether a
+right-click *opens* panning vs. the context menu, unrelated to this bug, which lives entirely on
+the menu's *close-via-outside-click* path. The app stays on tldraw's default `rightClickPanning: true`,
+unchanged.
+
+**New KB fact: `MenuClickCapture` is baked into `DefaultCanvas` and is NOT swappable via
+`TLComponents`** — unlike `ContextMenu` itself (watch point 15/`CardContextMenu.tsx`, ticket 17),
+there is no component-override seam for this piece. Any future fix touching it has to work around
+it from outside, not replace it.
+
+**Fix**: `apps/tabletop/src/client/closeContextMenuBeforeOutsideClick.ts` (new) — a document-level
+**capture-phase** `pointerdown` listener, registered from `onTldrawMount` in `TablePage.tsx`
+alongside the existing `clearStaleSelectionOnPointerDown(editor)` call. Capture phase is load-bearing:
+it must run *before* `MenuClickCapture`'s own React (bubble-phase) handler. When a menu is open and
+the click is left-button and lands **outside** the menu's own DOM (`[data-testid="context-menu"]`),
+it dispatches a synthetic `Escape` keydown on `document` — Radix's own dismissable-layer listens for
+that and runs its correct close handshake. By the time `MenuClickCapture.handlePointerDown` runs its
+`clearOpenMenus()` afterward, the menu is already closed and in sync, so that call is a no-op instead
+of a desync. Clicks landing on the menu itself (choosing a menu item) are explicitly excluded, or the
+injected Escape would cancel the click before its own `onSelect` ever fires.
+
+`onTldrawMount` now returns a cleanup function (`closeContextMenuBeforeOutsideClick()`'s return
+value) — `<Tldraw onMount={...}>` supports a returned teardown, previously unused by this file since
+`clearStaleSelectionOnPointerDown` never needed one.
+
+**Test**: `apps/tabletop/test/verification/verify-rightclick-reopen.spec.ts` (new, stays as a
+regression guard) — two tests, both opening/dismissing/reopening the menu 5 times in a loop: one
+dismissing via Escape (passed even pre-fix, proving the Escape path was never broken), one via an
+outside left-click (failed after the first cycle pre-fix — the menu simply never reappeared — passes
+after). Full `./verify.sh` and `npx vitest run` both green.
+
+This is a **new entry point into stale-tldraw-internal-state territory, but NOT a member of watch
+point 1's stale-*selection* family** — watch point 1 is about tldraw's own selection atom outliving
+a gesture; this bug is about Radix's *own* internal open-state, a third-party library's state, going
+out of sync with tldraw's `tlmenus` atom. Recorded as a new, separate watch point (26) rather than
+folded into watch point 15, which is about a card's selection surviving menu close, not about the
+menu itself failing to reopen.
+
 ## `card.played`'s production entry point moves from HTTP to Spine SSE (2026-08-18)
 
 `tabletop-spine-sse-subscriber` ticket 02 (ticket 01 wired the subscription itself, a separate

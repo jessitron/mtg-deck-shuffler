@@ -98,6 +98,14 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   2026-08-10 pasted-image fix, respectively). No longer needed now that
   `clearStaleSelectionOnPointerDown` covers every shape type centrally; both stock utils are back
   in the plain `defaultShapeUtils` spread with no filtering or replacement.
+- `apps/tabletop/src/client/closeContextMenuBeforeOutsideClick.ts` — **new, 2026-08-19**: exports
+  `closeContextMenuBeforeOutsideClick(): () => void`, registered from `onTldrawMount` in
+  `TablePage.tsx` alongside `clearStaleSelectionOnPointerDown`. A document-level capture-phase
+  `pointerdown` listener that dispatches a synthetic Escape keydown, ahead of `@tldraw/editor`'s own
+  `MenuClickCapture`, whenever a left-button click lands outside an open menu's own DOM — forcing
+  Radix's own close handshake to run before `MenuClickCapture`'s direct `clearOpenMenus()` call would
+  otherwise desync it from Radix's internal open state. See `architecture.md`'s "The right-click
+  context menu going dead" section and `interactions.md` watch point 26.
 - `apps/tabletop/src/client/CardContextMenu.tsx` — **new, ticket 17 (2026-08-09, `eb24a4f`)**:
   the app's first custom `TLComponents.ContextMenu`, wired in `TablePage.tsx`. `TableContextMenu`
   wraps `DefaultContextMenu`, replacing its default content (children replace, not add) with the
@@ -237,6 +245,10 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   two things, not one: the existing deterministic `editor.zoomToBounds(TABLE_EXTENT, ...)` camera
   framing, plus registering `clearStaleSelectionOnPointerDown(editor)` — see
   `clearStaleSelectionOnPointerDown.ts`, above, and `architecture.md`'s "Ticket 05" section.
+  **Since 2026-08-19**, `onTldrawMount` also registers `closeContextMenuBeforeOutsideClick()` and
+  returns its cleanup function — the first time this callback has returned anything, since
+  `clearStaleSelectionOnPointerDown` never needed teardown. See `closeContextMenuBeforeOutsideClick.ts`,
+  above.
   Also home to `aimCameraAtTheTable()` (table-layout ticket 14, `5eeac70`;
   corrected same day, `96159be`): since the square's furniture centers on the origin (mostly
   negative page coordinates, off tldraw's default viewport), the mount hook does one
@@ -499,8 +511,19 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   regression test for the Stack-landing collision check (`nudgeOffAnotherCard`,
   `cardZoneEntry.ts`). Confirmed red (99.98% overlap) pre-fix, green after.
 
+- `apps/tabletop/test/verification/verify-rightclick-reopen.spec.ts` — **new, 2026-08-19**: two
+  loops of open/dismiss/reopen ×5 on the card context menu — one dismissing via Escape (passes even
+  pre-fix, proving that path was never broken), one via an outside left-click (failed after the
+  first cycle pre-fix, the regression this file guards). See `history.md`'s 2026-08-19 entry.
+
 ## Read-only dependency (not owned, but load-bearing — read when things surprise you)
 
+- `node_modules/@tldraw/editor/src/lib/components/MenuClickCapture.tsx` — **new dependency,
+  2026-08-19**: the full-canvas capture div rendered whenever `tlmenus.hasAnyOpenMenus()`, whose
+  `handlePointerDown` closes a menu on a left-button outside click by calling
+  `editor.menus.clearOpenMenus()` directly, bypassing Radix `ContextMenu.Root`'s own close handshake
+  — the root cause of watch point 26's desync. Baked into `DefaultCanvas`, not swappable via
+  `TLComponents`.
 - `node_modules/tldraw/src/lib/tools/SelectTool/childStates/Idle.ts` — **new dependency, ticket 05
   (2026-08-11)**: `onPointerDown`'s own hit-test (the source of the public
   `getHitShapeOnCanvasPointerDown` helper `clearStaleSelectionOnPointerDown.ts` calls) and the

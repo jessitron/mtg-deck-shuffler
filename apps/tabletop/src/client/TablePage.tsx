@@ -30,6 +30,7 @@ import { MtgTitleShapeUtil } from "./shapes/MtgTitleShapeUtil";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
 import { TableContextMenu } from "./CardContextMenu";
 import { clearStaleSelectionOnPointerDown } from "./clearStaleSelectionOnPointerDown";
+import { closeContextMenuBeforeOutsideClick } from "./closeContextMenuBeforeOutsideClick";
 
 const shapeUtils = [
   ...defaultShapeUtils,
@@ -125,6 +126,7 @@ const TABLE_EXTENT = new Box(-2802, -1612, 5604, 3164);
 function onTldrawMount(editor: Editor) {
   editor.zoomToBounds(TABLE_EXTENT, { inset: 24 });
   clearStaleSelectionOnPointerDown(editor);
+  return closeContextMenuBeforeOutsideClick();
 }
 
 const inlineAssets: TLAssetStore = {
