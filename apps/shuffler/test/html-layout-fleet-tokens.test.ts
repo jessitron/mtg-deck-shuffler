@@ -38,14 +38,19 @@ describe("the one page shell links the fleet palette", () => {
     expect(formatHtmlHead({ title: "Any Title" })).toMatch(/initHoneycombTracing\(".*", false,/);
   });
 
-  it("passes table/player names to the browser tracing init as escaped string args", () => {
+  it("passes table/player names to the browser tracing init as escaped string args, table name lowercased", () => {
     const head = formatHtmlHead({ title: "Any Title", tableName: "Kitchen Table", playerName: "Jess" });
-    expect(head).toMatch(/initHoneycombTracing\(".*", false, "Kitchen Table", "Jess", undefined\)/);
+    expect(head).toMatch(/initHoneycombTracing\(".*", false, "kitchen table", "Jess", undefined\)/);
+  });
+
+  it("lowercases the table name for telemetry so the same table doesn't fragment by casing", () => {
+    const head = formatHtmlHead({ title: "Any Title", tableName: "Muegge" });
+    expect(head).toMatch(/initHoneycombTracing\(".*", false, "muegge",/);
   });
 
   it("passes the game id to the browser tracing init as an escaped string arg", () => {
     const head = formatHtmlHead({ title: "Any Title", tableName: "Kitchen Table", playerName: "Jess", gameId: "42" });
-    expect(head).toMatch(/initHoneycombTracing\(".*", false, "Kitchen Table", "Jess", "42"\)/);
+    expect(head).toMatch(/initHoneycombTracing\(".*", false, "kitchen table", "Jess", "42"\)/);
   });
 
   it("passes undefined for table/player/game when the game is solo and not yet started", () => {

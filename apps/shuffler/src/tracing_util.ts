@@ -20,12 +20,15 @@ function commonAttributesToSpanAttributes(attributes: CommonAttributes): Attribu
   // these won't all be populated, and that's fine (undefined values are ignored;
   // a real `false` for devMode still gets stamped, so dev_mode=false is filterable.
   // tableName/playerName are absent for solo games, so they simply don't get stamped)
+  // tableName is lowercased here, at the point of stamping — the same table typed with
+  // different casing must produce one span-attribute value, not fragment in Honeycomb.
+  // The user-facing casing (GameState, persisted prep, page display) is untouched.
   return {
     [SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER]: attributes.archidektDeckId,
     [SPAN_ATTRIBUTE_DECK_SOURCE]: attributes.deckSource,
     [SPAN_ATTRIBUTE_BROWSER_TAB_ID]: attributes.browserTabId,
     [SPAN_ATTRIBUTE_DEV_MODE]: attributes.devMode,
-    [SPAN_ATTRIBUTE_TABLE_NAME]: attributes.tableName,
+    [SPAN_ATTRIBUTE_TABLE_NAME]: attributes.tableName?.toLowerCase(),
     [SPAN_ATTRIBUTE_PLAYER_NAME]: attributes.playerName,
   };
 }
