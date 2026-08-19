@@ -47,8 +47,9 @@ function cardNamed(game: GameState, name: string) {
 
 describe("card.played events validate against the Spine's own contracts (contracts/envelope.v1.json, contracts/payloads/card.played.v1.json)", () => {
   it("a directly-built event, with a realistic short numeric seatId, validates", () => {
-    // This is what sendCardPlayedToSpineBestEffort actually sets: initiator.seatId is
-    // String(game.spineSeatNumber), e.g. "1" — a bare seat number, not a GUID.
+    // The contract only requires a non-empty string; this checks that a short bare
+    // seat number still validates even though a real send now uses game.seatId (the
+    // GUID-shaped id seat.joined minted), not a bare seat number.
     const event = buildCardPlayedEvent(
       { card: lightningBolt, location: { type: "Hand", position: 0 }, gameCardIndex: 0, isCommander: false, currentFace: "front" },
       "11111111-1111-1111-1111-111111111111",

@@ -278,8 +278,12 @@ version bumps). `/restart-game` carries them forward.
   forward unchanged (same seat, no new Spine call) and only re-joins when the
   original join never succeeded. Alongside the join,
   `/play-card`/`/discard-card` also send `card.played` to the Spine's event log,
-  addressed to that real tableId, with `initiator.seatId` set to
-  `String(spineSeatNumber)` (`sendCardPlayedToSpineBestEffort`) — also
+  addressed to that real tableId, with `initiator.seatId` set to `game.seatId`
+  (`sendCardPlayedToSpineBestEffort`) — the real seat GUID `seat.joined` minted
+  (via `recordSpineJoin`), **not** `String(spineSeatNumber)` (the bare 1-4 seat
+  position — using that was a bug: the Tabletop compares `initiator.seatId`
+  against the seat it saw join, and a seat number never matches a seat GUID,
+  so every `card.played` was rejected as `seat-not-joined`). Also
   best-effort. `HttpSpineGateway` (real) / `FakeSpineGateway` (tests) implement
   `SpinePort`. **Env**: `SPINE_URL`, default `http://localhost:4600`.
   **Envelope version**: both the Spine and the Tabletop now validate against
