@@ -41,7 +41,9 @@ early dev data, but still a real prod-data-wiping action.
 
 - Consider removing the animations owner, since the animations don't do much now.
 
-- clean up old branches
+- Consider timeout and restart on the SSE streams, and tabletops in memory. 30m-1h with no events or clicks is reasonable. This needs to be easy to change. Also add a way in both apps (in debug mode or by special URL) to timeout the stream immediately, for testing.
+
+- the Tabletop's tests should be able to receive a stream of events and applying them. Right now it has a cardPlayed HTTP shim, do not like.
 
 - `/design` specimen owed for the on-brand `mtg-title` deck-title label (Orbitron via
   `var(--font-chrome)`, colored by the deck's darker identity color). Cross-ship: the shape
