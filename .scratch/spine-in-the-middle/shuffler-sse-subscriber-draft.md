@@ -19,11 +19,25 @@ subscriber for `card.played`, landed 2026-08-18, commit `6c6f52cc`).
 
 ## Decisions so far (grilled with Jess)
 
-1. **Vocabulary reused as-is**: `card.returned.v1`, `occurredIn: "tabletop"` (portal drag →
-   Shuffler moves card to Revealed) vs. `occurredIn: "shuffler"` (Return button etc. →
-   Tabletop poofs the shape). Payload: `card: {scryfallId, instanceId}`, `seat`, optional
-   `fromZone`. No `face` field (table is not authoritative for a table card's face). This
-   design writes the missing `contracts/payloads/card.returned.v1.json` schema.
+1. **Vocabulary reused, identity field updated to `gameCardIndex`**: `card.returned.v1`,
+   `occurredIn: "tabletop"` (portal drag → Shuffler moves card to Revealed) vs.
+   `occurredIn: "shuffler"` (Return button etc. → Tabletop poofs the shape). Payload:
+   `card: {scryfallId}`, `gameCardIndex` (top-level, like `card.played.v1`), `seat`,
+   optional `fromZone`. No `face` field (table is not authoritative for a table card's
+   face). **Identity crosses the boundary as `gameCardIndex`, not `instanceId`** — Jess
+   reversed the "`gameCardIndex` never crosses" rule on 2026-08-10
+   (`let-gamecardindex-out`) and reaffirmed it hard during this session: it's
+   deterministic per card in a game, already recorded throughout the log, and a real
+   identifier — not something to keep opaque. `gameCardIndex` already rides `card.played`
+   today (`buildCardPlayedEvent`, populated, required TS field) but isn't yet stored on
+   the Tabletop's shape/consumed anywhere; this design is what makes it a real round-trip
+   identity, not just a one-way passenger. **This also resolves the "no
+   instanceId→GameCard lookup exists" gap** the research pass found — the Shuffler
+   already looks cards up by `gameCardIndex` everywhere (`findCardByIndex`), so
+   `card.returned.v1` needs no new lookup machinery at all. `gameId` also crosses freely
+   (Jess, this session, reversing `01-return-channel.md`'s original "no gameId crosses"
+   line — fixed in place, see commit `ca78ac99`). This design writes the missing
+   `contracts/payloads/card.returned.v1.json` schema.
 2. **`eventsUrl` retired entirely.** `seat.joined` never grows an `eventsUrl` field. The
    address for card-return is just "the Spine" — same as `seat.joined` and `card.played`
    already use. The Tabletop POSTs `card.returned.v1` (`occurredIn: "tabletop"`) to the

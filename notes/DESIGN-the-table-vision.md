@@ -187,6 +187,14 @@ Visibility cuts across all kinds orthogonally.
   likely shape is that *symmetric* reveals are physical and belong on the Tabletop — you
   reveal by putting cards where everyone can see them — while *asymmetric* ones can't live
   on a canvas with no privileged actor. See `sharing-hidden-zones` in `TODO.md`.
+  **Extended past the Tabletop's canvas to the whole fleet, 2026-08-18** (same session
+  `gameId` was let cross the Shuffler↔Tabletop boundary): _"If people want to peek at each
+  others' hands, by digging around in the network tab and getting super clever about it,
+  well, that's the game they choose to play. This game is adjudicated by the players, not
+  by this app. This app supports play, it does not enforce."_ The Shuffler's hidden zones
+  stay hidden because that's the product, not because the wire is hardened against a
+  determined player reading it — so a design question here is never "could a clever player
+  extract this," it's "does this app volunteer it in the ordinary course of play."
 - **The humans teach the AI in public, during play.** The chat panel is the eval
   machine, and the teaching is part of the game record.
 - **Don't carry what you can listen to.** Discord keeps the voice call; we transcribe.
