@@ -18,6 +18,27 @@ module ClearsTablesBetweenTests
   end
 end
 
+# Captures finished spans in-memory so tests can assert on span attributes
+# (e.g. the game.id/seat.id correlation stamped on the /join span) without
+# talking to a real OTLP collector. Added alongside whatever exporter
+# config/telemetry.rb already configured; it only ever adds spans, never
+# blocks the app's own export.
+SPAN_EXPORTER = OpenTelemetry::SDK::Trace::Export::InMemorySpanExporter.new
+OpenTelemetry.tracer_provider.add_span_processor(
+  OpenTelemetry::SDK::Trace::Export::SimpleSpanProcessor.new(SPAN_EXPORTER)
+)
+
+module CapturesSpans
+  def before_setup
+    super
+    SPAN_EXPORTER.reset
+  end
+
+  def finished_spans
+    SPAN_EXPORTER.finished_spans
+  end
+end
+
 module ValidEnvelope
   # "table.created" isn't used here on purpose: it's Spine-internal (minted by
   # `mint_event!`, never sent over the wire), so it has no contracts/payloads/ schema
@@ -65,3 +86,4 @@ end
 Minitest::Test.include(ClearsTablesBetweenTests)
 Minitest::Test.include(ValidEnvelope)
 Minitest::Test.include(JoinRequests)
+Minitest::Test.include(CapturesSpans)

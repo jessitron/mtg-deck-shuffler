@@ -48,6 +48,21 @@ class JoinTest < Minitest::Test
     tabletop&.stop
   end
 
+  def test_join_span_correlates_the_incoming_game_id_with_the_minted_seat_id
+    tabletop = FakeTabletopServer.new
+    submission = rich_join
+
+    with_tabletop(tabletop) { post_join(submission) }
+
+    seat = DB[:seats].first
+    join_span = finished_spans.find { |span| span.attributes && span.attributes["seat.id"] }
+    refute_nil join_span, "expected a finished span carrying seat.id"
+    assert_equal seat[:id], join_span.attributes["seat.id"]
+    assert_equal submission["gameId"], join_span.attributes["game.id"]
+  ensure
+    tabletop&.stop
+  end
+
   def test_replay_with_conflicting_valid_data_returns_and_resends_the_original_join
     tabletop = FakeTabletopServer.new
     original = rich_join
