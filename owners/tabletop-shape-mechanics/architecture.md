@@ -2,10 +2,23 @@
 
 ## Where a card shape comes from
 
-`apps/tabletop/src/server/cardArrival.ts` handles `POST /api/tables/:tableName/cards` (the
-Shuffler → Tabletop card-arrival endpoint). It mints the shape's identity once, at creation, now
-directly in the shape's validated `props` (no separate tldraw asset record — see "Ticket 12
-landed" below):
+`apps/tabletop/src/server/cardArrival.ts` exports `applyCardArrival(tableName, body)` — the shared
+validation/dedup/`ensurePlayerArea`-self-heal/placement logic for a `card.played` event. It has no
+HTTP entry point of its own (the old production route, `POST /api/tables/:tableName/cards`, and its
+`handleCardArrival` handler, were deleted by the tabletop-spine-sse-subscriber ticket 02,
+2026-08-18 — see `history.md`). **In production, `applyCardArrival` is called exclusively by the
+Spine SSE dispatcher**, `apps/tabletop/src/server/spineEventDispatch.ts`'s `dispatchSpineEvent`
+(wired up by ticket 01 of the same feature) — it subscribes to the Spine's per-table SSE stream,
+filters for `card.played`, continues the trace from the broadcast envelope's `traceparent`, and
+calls `applyCardArrival` inside that span. A second, test-only HTTP seam exists —
+`apps/tabletop/src/server/testSeedRoute.ts`'s `handleTestCardSeed`, mounted at
+`POST /test/tables/:tableName/cards` only when `ENABLE_TEST_SEED_ROUTE=true` (set by `verify.sh`
+and `cardArrival.test.ts`, never in production) — for Playwright specs and vitest files that spawn
+the server as its own process with no live Spine to seed a card through; it calls
+`applyCardArrival` directly, the same function the SSE path calls.
+
+`applyCardArrival` mints the shape's identity once, at creation, directly in the shape's validated
+`props` (no separate tldraw asset record — see "Ticket 12 landed" below):
 
 ```
 const shapeId = createShapeId(`card-${arrival.card.instanceId}`);
