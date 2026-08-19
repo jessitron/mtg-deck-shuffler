@@ -6,6 +6,13 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
 
 - **`.be`-before-`.env` source order** — `HONEYCOMB_API_KEY` lives in repo-root `.be`; each ship's
   `.env` interpolates it at source time. Wrong order → silent 401 export.
+- **The `session.id` `CommonAttributes` field and `apps/shuffler/public/session-id.js`** — a
+  new per-request browser-minted id, added seat-session-attribution ticket 04, alongside
+  `browserTabId`/`game.browser_tab_id`. Same funnel (mint script → `htmx:configRequest` header →
+  server middleware → `setCommonSpanAttributes`), deliberately **no** client-side persistence
+  (unlike `browser-tab-id.js`'s `sessionStorage`) — a fresh id every page load is the point.
+  Anyone adding a similar per-request browser-minted id should follow this shape, not invent a
+  new stamping path. See README → "session.id: a fresh per-page-load id, not per-tab".
 - **OTel dependency versions and the ESM `--import` loader** (Shuffler, Tabletop) — the `-r`
   require hook silently fails to patch `import`ed modules.
 - **`undici`'s installed major matching `process.versions.undici`** — any ship that adds `undici`

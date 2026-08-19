@@ -3,6 +3,7 @@ import { Attributes, Span, SpanStatusCode, trace } from "@opentelemetry/api";
 const SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER = "deck.archidektId";
 const SPAN_ATTRIBUTE_DECK_SOURCE = "deck.source";
 const SPAN_ATTRIBUTE_BROWSER_TAB_ID = "game.browser_tab_id";
+const SPAN_ATTRIBUTE_SESSION_ID = "session.id";
 const SPAN_ATTRIBUTE_DEV_MODE = "app.dev_mode";
 const SPAN_ATTRIBUTE_TABLE_NAME = "table.name";
 const SPAN_ATTRIBUTE_PLAYER_NAME = "player.name";
@@ -11,6 +12,7 @@ export type CommonAttributes = Partial<{
   archidektDeckId: string; // TODO: should be sourceUrl from DeckProvenance
   deckSource: string;
   browserTabId: string;
+  sessionId: string;
   devMode: boolean;
   tableName: string;
   playerName: string;
@@ -27,6 +29,7 @@ function commonAttributesToSpanAttributes(attributes: CommonAttributes): Attribu
     [SPAN_ATTRIBUTE_ARCHIDEKT_DECK_NUMBER]: attributes.archidektDeckId,
     [SPAN_ATTRIBUTE_DECK_SOURCE]: attributes.deckSource,
     [SPAN_ATTRIBUTE_BROWSER_TAB_ID]: attributes.browserTabId,
+    [SPAN_ATTRIBUTE_SESSION_ID]: attributes.sessionId,
     [SPAN_ATTRIBUTE_DEV_MODE]: attributes.devMode,
     [SPAN_ATTRIBUTE_TABLE_NAME]: attributes.tableName?.toLowerCase(),
     [SPAN_ATTRIBUTE_PLAYER_NAME]: attributes.playerName,

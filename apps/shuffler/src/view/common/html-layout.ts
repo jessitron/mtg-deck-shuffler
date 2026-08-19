@@ -69,6 +69,7 @@ function formatHtmlHead(options: HtmlHeadOptions): string {
     <link rel="stylesheet" href="/styles.css" />
 ${stylesheetsHtml}
     <script src="/browser-tab-id.js"></script>
+    <script src="/session-id.js"></script>
     <script src="/hny.js"></script>
     <script>
 ${HONEYCOMB_TRACING_INIT_SCRIPT}
