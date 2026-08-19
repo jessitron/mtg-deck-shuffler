@@ -33,8 +33,6 @@ I would like to make a clearer chain of events in Honeycomb. I want a custom spa
 
 - major bug: played cards should not keep appearing to the right of the previous location, after the other one has been moved! That's only for when the prior card is still on the stack right where it landed.
 
-- RETEST post-tldraw upgrade: serious bug: right-click stops working. it works sometimes, and then it just doesn't do anything. Other times it does. It is not predictable.
-
 - RETEST post-tldraw upgrade: weird bug: occasionally, for no discernable reason, a bunch of cards return to the stack where they were initially played 😭
 
 - bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation
@@ -78,8 +76,6 @@ I would like to make a clearer chain of events in Honeycomb. I want a custom spa
     `getIndexAbove(label.index)`, looked up by the `name-label-...` id. If you replace the
     text shape with a custom shape, **keep that id and its relative index** or the counters
     fall behind the title again.
-
-- bug: In tabletop, often after selecting a card, I right-click and the menu comes up... once. After that, right-clicking does nothing, until I like do a bunch of other things, click outside it (doesn't work usually), click other things, wiggle stuff, refresh the page even... at some point the right-click menu becomes available again.
 
 - GRILLING: Tokens support. Archidekt lets you add tokens to your deck. We could bring them in and make them available on the board. They can tap like cards, they hold counters etc. but if you drag them to the graveyard, they go back to their place under your playmat (or wherever we decide to line them up). Oh and if you drag a token from its spot where it was drawn to the board it immediately creates another one in the spot it left; each token is an infinite pile. Then: people need to add tokens as the game is going, because we rarely have them all prepped before hand. Paste any image, right-click and say "make token." A token (infinite pile) appears next to the others. Now they can be clicked to tap.
 
