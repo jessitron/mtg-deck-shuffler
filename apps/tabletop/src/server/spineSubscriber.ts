@@ -1,3 +1,4 @@
+import { Agent, type Dispatcher } from "undici";
 import { log } from "./log.js";
 
 /**
@@ -19,8 +20,30 @@ export interface SpineSubscription {
   close(): void;
 }
 
+/**
+ * Node's global `fetch` (undici) kills a request after 5 minutes of silence by default —
+ * `headersTimeout` and `bodyTimeout` both default to 300000ms. That's the right guard for an
+ * ordinary request, but this stream is meant to sit open and idle for as long as nobody plays a
+ * card, with no heartbeats to keep it "active" (`sse_stream.rb` sends nothing between events).
+ * Left at the default, an idle table gets its "healthy" connection torn down and reconnected
+ * every 5 minutes — confirmed in Honeycomb (local env, `mtg-tabletop`, span "GET" on this exact
+ * URL): 95 `UND_ERR_HEADERS_TIMEOUT` plus 1 `UND_ERR_BODY_TIMEOUT` over 30 days, all on ordinary
+ * idle tables, not real outages. Since the Spine's stream has no catch-up/replay, a card played
+ * during that reconnect gap is lost for good. Disabling both timeouts here hands failure
+ * detection entirely to the AbortController (`close()`) and TCP-level errors, which is what the
+ * reconnect-with-backoff loop below is already built to handle.
+ */
+function createIdleTolerantDispatcher(): Dispatcher {
+  return new Agent({ headersTimeout: 0, bodyTimeout: 0 });
+}
+
 /** `baseUrl` defaults to the real Spine — overridable so tests can point this at a fake SSE server. */
-export function subscribeToSpine(tableId: string, onEvent: (event: unknown) => void, baseUrl: string = SPINE_URL): SpineSubscription {
+export function subscribeToSpine(
+  tableId: string,
+  onEvent: (event: unknown) => void,
+  baseUrl: string = SPINE_URL,
+  dispatcher: Dispatcher = createIdleTolerantDispatcher()
+): SpineSubscription {
   let closed = false;
   let currentAbort: AbortController | null = null;
   let reconnectDelayMs = RECONNECT_DELAY_MS;
@@ -28,11 +51,13 @@ export function subscribeToSpine(tableId: string, onEvent: (event: unknown) => v
   async function connectOnce(): Promise<void> {
     const abort = new AbortController();
     currentAbort = abort;
-    // JESS: wtf are we doing awaiting an event stream?  Here is a trace in Honeycomb showing that timing out after 5m: https://ui.honeycomb.io/modernity/environments/local/result/4bMrXHpP4Q9/trace/JbsMu6BuWD3?fields[]=s_name&fields[]=s_serviceName&span=0d1cee0b4aa8fbfc
+    // Resolves as soon as headers arrive, not when the stream ends — the reader loop below is
+    // what actually consumes the stream for as long as the connection stays open.
     const response = await fetch(`${baseUrl}/tables/${encodeURIComponent(tableId)}/events/stream`, {
       signal: abort.signal,
       headers: { accept: "text/event-stream" },
-    });
+      dispatcher,
+    } as unknown as RequestInit);
     if (!response.ok || !response.body) {
       throw new Error(`spine sse stream responded ${response.status}`);
     }

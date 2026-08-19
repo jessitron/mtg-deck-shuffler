@@ -8,6 +8,15 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `.env` interpolates it at source time. Wrong order → silent 401 export.
 - **OTel dependency versions and the ESM `--import` loader** (Shuffler, Tabletop) — the `-r`
   require hook silently fails to patch `import`ed modules.
+- **`undici`'s installed major matching `process.versions.undici`** — any ship that adds `undici`
+  as an explicit dependency (for its `Agent`/`Dispatcher` API on global `fetch`, e.g. to override
+  per-call timeouts) must pin the same major Node vendors internally, or every `fetch()` call
+  throws `UND_ERR_INVALID_ARG`. See README → "Adding `undici` as an explicit dependency…".
+- **`@opentelemetry/instrumentation-undici` tracing a custom per-call `dispatcher`** — it
+  subscribes to Node's global `node:diagnostics_channel`, not to a specific `Dispatcher`
+  instance, so passing `{ dispatcher: new Agent(...) }` to `fetch()` (e.g. to disable idle
+  timeouts on a long-lived stream) still gets traced. `apps/tabletop/src/server/spineSubscriber.ts`
+  is the live example.
 - **Express instrumentation config** — `ignoreLayersType: [MIDDLEWARE]` keeps traces at 2 spans,
   not 8.
 - **Samplers reading both semconv spellings** (`http.user_agent`/`user_agent.original`,
@@ -322,6 +331,22 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `traceparent`, don't fail the dispatch. The stream-reading layer itself
   (`apps/tabletop/src/server/spineSubscriber.ts`) has no ambient span — reconnect/parse-failure
   conditions are `log.warn` only, per Invariant 2's "no span in a timer/background callback" rule.
+- **A long-lived streamed `fetch()` (SSE, or anything else meant to sit open and idle)**: Node's
+  global `fetch` (undici) kills a request after 5 minutes of silence by default —
+  `headersTimeout`/`bodyTimeout` both default to 300000ms — which reads as a healthy connection
+  being torn down for no reason. `apps/tabletop/src/server/spineSubscriber.ts`'s
+  `createIdleTolerantDispatcher()` (`new (undici) Agent({ headersTimeout: 0, bodyTimeout: 0 })`,
+  passed as the `dispatcher` fetch option, scoped per-call not global) is the fix and the pattern
+  to copy. **Disable `headersTimeout` too, not just `bodyTimeout`**: neither Node's nor (almost
+  certainly) Ruby/Rack's HTTP server flushes response headers until the first body write, so a
+  fresh/quiet stream with nothing published yet never even gets headers — that's a headers
+  timeout, not a body timeout, and was the dominant real failure mode here (95
+  `UND_ERR_HEADERS_TIMEOUT` vs. 1 `UND_ERR_BODY_TIMEOUT` over 30 days in Honeycomb). Adding
+  `undici` as an explicit dependency to get `Agent`/`Dispatcher` carries its own gotcha — see
+  "Depends on" above. Disabling both timeouts hands failure detection entirely to
+  `AbortController`/TCP-level errors; a truly hung server that accepts but never responds would
+  then wait forever instead of erring out (tracked as a Spine-side follow-up in `TODO.md` — not
+  a telemetry gap, a reconnection-strategy one).
 - **Adding a third Tabletop server event handler alongside `handleSeatJoined`
   (`seatJoined.ts`, span `"add player furniture"`) and `handleCardArrival`
   (`cardArrival.ts`, span `"place arrived card"`)**: both wrap only the
