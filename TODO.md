@@ -23,14 +23,22 @@ early dev data, but still a real prod-data-wiping action.
 
 ## Right Effing Now
 
-in apps/tabletop/src/server/spineSubscriber.ts:
-// JESS: wtf are we doing awaiting an event stream? Here is a trace in Honeycomb showing that timing out after 5m: https://ui.honeycomb.io/modernity/environments/local/result/4bMrXHpP4Q9/trace/JbsMu6BuWD3?fields[]=s_name&fields[]=s_serviceName&span=0d1cee0b4aa8fbfc
-
 After start game is working again, then we can address Card Played not matching the seat.
 
 As part of these fixes, I would like to make a clearer chain of events in Honeycomb. I want a custom span in Spine for every event sent on the SSE streams. That way I can make a graph of the event sequence. There should also be one for table creation / seat join (when synchronous).
 
 ## Next
+
+- Spine's `sse_stream.rb` doesn't flush HTTP headers until the first event is queued
+  (`each` blocks on `@queue.pop` before yielding anything) — confirmed by reproducing the
+  same behavior in a plain Node http server. That's why a fresh table with no cards played
+  yet shows as `UND_ERR_HEADERS_TIMEOUT` rather than a body-idle timeout (see
+  `spineSubscriber.ts`'s idle-tolerant dispatcher, 2026-08-19). Disabling the tabletop's
+  client-side timeouts is a complete fix on its own, but it also means a truly hung Spine
+  (TCP accepts, never responds, ever) would wait forever instead of erring out. If we want
+  fast dead-connection detection later, that needs a Spine-side change — heartbeats on the
+  stream, or an explicit early header flush — which is a `services/spine/` task, not this
+  ship's.
 
 - major bug: played cards should not keep appearing to the right of the previous location, after the other one has been moved! That's only for when the prior card is still on the stack right where it landed.
 
