@@ -11,6 +11,9 @@ interface HtmlHeadOptions {
   devMode?: boolean;
   // Stamped onto browser spans as the string resource attributes table.name / player.name.
   // Present only for table-mode games (solo games leave them undefined).
+  // tableName is lowercased at the point it's passed to the tracing init script, so the
+  // same table doesn't fragment across span-attribute values by casing; the caller's
+  // display casing (e.g. the page title) is untouched.
   tableName?: string;
   playerName?: string;
   // Stamped onto browser spans as the string resource attribute game.id.
@@ -69,7 +72,7 @@ ${stylesheetsHtml}
     <script src="/hny.js"></script>
     <script>
 ${HONEYCOMB_TRACING_INIT_SCRIPT}
-      initHoneycombTracing("${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}", ${devMode}, ${jsStringArg(tableName)}, ${jsStringArg(playerName)}, ${jsStringArg(gameId)});
+      initHoneycombTracing("${process.env.HONEYCOMB_INGEST_API_KEY || process.env.HONEYCOMB_API_KEY}", ${devMode}, ${jsStringArg(tableName?.toLowerCase())}, ${jsStringArg(playerName)}, ${jsStringArg(gameId)});
     </script>
 ${scriptsHtml}
   </head>`;
