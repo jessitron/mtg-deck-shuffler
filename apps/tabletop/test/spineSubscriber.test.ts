@@ -3,8 +3,15 @@ import { randomUUID } from "node:crypto";
 import http from "node:http";
 import { subscribeToSpine, SpineSubscription } from "../src/server/spineSubscriber";
 import { dispatchSpineEvent } from "../src/server/spineEventDispatch";
-import { getRoomRegistry } from "../src/server/rooms";
+import { getOrCreateRoom, getRoomRegistry } from "../src/server/rooms";
+import { ensurePlayerArea, pageIdOf } from "../src/server/tableFurniture";
 import { slugFor } from "./support/tableSlug";
+
+/** card.played has no seat-creating self-heal — seat this seat first, the way seat.joined would. */
+async function seatUp(tableName: string, seatId: string, playerName: string): Promise<void> {
+  const entry = getOrCreateRoom(slugFor(tableName));
+  await ensurePlayerArea(entry, pageIdOf(entry), seatId, playerName);
+}
 
 function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
@@ -112,6 +119,7 @@ describe("Spine SSE subscriber", () => {
 
     subscription = subscribeToSpine(tableId, (event) => dispatchSpineEvent(tableId, event), `http://localhost:${port}`);
     await waitUntil(() => fakeServer!.connectionCount() === 1);
+    await seatUp(tableName, "seat-0000001", "Jess");
 
     const event = cardPlayedEvent(tableName);
     fakeServer.publish(event);
@@ -131,6 +139,7 @@ describe("Spine SSE subscriber", () => {
 
     subscription = subscribeToSpine(tableId, (event) => dispatchSpineEvent(tableId, event), `http://localhost:${port}`);
     await waitUntil(() => fakeServer!.connectionCount() === 1);
+    await seatUp(tableName, "seat-0000001", "Jess");
 
     fakeServer.publish({ id: randomUUID(), name: "seat.taken", tableId, payload: {} });
     fakeServer.publish(cardPlayedEvent(tableName));
@@ -147,6 +156,7 @@ describe("Spine SSE subscriber", () => {
 
     subscription = subscribeToSpine(tableId, (event) => dispatchSpineEvent(tableId, event), `http://localhost:${port}`);
     await waitUntil(() => fakeServer!.connectionCount() === 1);
+    await seatUp(tableName, "seat-0000001", "Jess");
 
     const event = cardPlayedEvent(tableName);
     fakeServer.publish(event);
@@ -165,6 +175,7 @@ describe("Spine SSE subscriber", () => {
 
     subscription = subscribeToSpine(tableId, (event) => dispatchSpineEvent(tableId, event), `http://localhost:${port}`);
     await waitUntil(() => fakeServer!.connectionCount() === 1);
+    await seatUp(tableName, "seat-0000001", "Jess");
 
     const first = cardPlayedEvent(tableName);
     fakeServer.publish(first);

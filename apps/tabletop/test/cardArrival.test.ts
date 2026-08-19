@@ -74,8 +74,44 @@ function shapesOf(tableName: string) {
     .filter((r) => r.typeName === "shape" && r.type === "mtg-card" && r.props?.instanceId);
 }
 
+function furnitureShapesOf(tableName: string) {
+  const entry = getRoomRegistry().get(slugFor(tableName));
+  if (!entry) return [];
+  return entry.room
+    .getCurrentSnapshot()
+    .documents.map((d) => d.state as any)
+    .filter((r) => r.typeName === "shape" && r.type === "mtg-zone");
+}
+
+/** seat.joined a seat, so a subsequent card.played has a player area to land in. */
+async function joinSeat(
+  tableName: string,
+  seatId: string,
+  playerName: string,
+  payloadOverrides: Record<string, unknown> = {}
+): Promise<void> {
+  await fetch(`http://localhost:${port}/api/tables/${slugFor(tableName)}/events`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      id: randomUUID(),
+      tableId: slugFor(tableName),
+      name: "seat.joined",
+      occurredAt: new Date().toISOString(),
+      initiator: { seatId, playerName },
+      occurredIn: "shuffler",
+      origin: "shuffler.shuffleUp",
+      significance: "administrative",
+      traceparent: fakeTraceparent(),
+      schemaVersion: 1,
+      payload: { deckName: "Blame Game", ...payloadOverrides },
+    }),
+  });
+}
+
 describe("card arrival", () => {
   it("puts a stack-hinted card in the stack strip with identity props", async () => {
+    await joinSeat("arrival-basic", "seat-0000001", "Jess");
     const event = cardPlayed("arrival-basic");
     const response = await post("arrival-basic", event);
     expect(response.status).toBe(201);
@@ -101,6 +137,7 @@ describe("card arrival", () => {
   });
 
   it("dedups a retried request (same event id): physical no-op", async () => {
+    await joinSeat("arrival-dedup-id", "seat-0000001", "Jess");
     const event = cardPlayed("arrival-dedup-id");
     await post("arrival-dedup-id", event);
     const retry = await post("arrival-dedup-id", event);
@@ -110,6 +147,7 @@ describe("card arrival", () => {
   });
 
   it("dedups a retried play (same instanceId, new event id): one instance exists once", async () => {
+    await joinSeat("arrival-dedup-instance", "seat-0000001", "Jess");
     const event = cardPlayed("arrival-dedup-instance");
     await post("arrival-dedup-instance", event);
     const replay = cardPlayed("arrival-dedup-instance", {}, { card: event.payload.card });
@@ -120,6 +158,7 @@ describe("card arrival", () => {
   });
 
   it("puts a battlefield-hinted card (a land) on the Stack, same as everything else played", async () => {
+    await joinSeat("arrival-zones", "seat-0000001", "Jess");
     await post("arrival-zones", cardPlayed("arrival-zones", {}, { zoneHint: "battlefield", cardName: "Forest" }));
     const [land] = shapesOf("arrival-zones");
     const stack = stackBounds();
@@ -134,6 +173,8 @@ describe("card arrival", () => {
   });
 
   it("allocates player areas per seatId in join order, keyed by seat not name", async () => {
+    await joinSeat("arrival-rows", "seat-AAAAAAA", "Sam");
+    await joinSeat("arrival-rows", "seat-BBBBBBB", "Sam");
     await post(
       "arrival-rows",
       cardPlayed("arrival-rows", { initiator: { seatId: "seat-AAAAAAA", playerName: "Sam" } }, { zoneHint: "battlefield" })
@@ -148,6 +189,7 @@ describe("card arrival", () => {
   });
 
   it("puts a graveyard-hinted card in the player's graveyard box", async () => {
+    await joinSeat("arrival-graveyard", "seat-0000001", "Jess");
     await post("arrival-graveyard", cardPlayed("arrival-graveyard", {}, { zoneHint: "graveyard", cardName: "Doomed Dissenter" }));
     const [card] = shapesOf("arrival-graveyard");
     const graveyard = graveyardBounds(0);
@@ -156,23 +198,7 @@ describe("card arrival", () => {
 
   it("bakes the seat's sleeve color into the minted card's props (ticket 17)", async () => {
     // Seat joins with a sleeve first — sleeve color is seat data, not payload data.
-    await fetch(`http://localhost:${port}/api/tables/${slugFor("arrival-sleeved")}/events`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        id: randomUUID(),
-        tableId: slugFor("arrival-sleeved"),
-        name: "seat.joined",
-        occurredAt: new Date().toISOString(),
-        initiator: { seatId: "seat-sleeved", playerName: "Jess" },
-        occurredIn: "shuffler",
-        origin: "shuffler.shuffleUp",
-        significance: "administrative",
-        traceparent: fakeTraceparent(),
-        schemaVersion: 1,
-        payload: { deckName: "Blame Game", sleeveColor: "#8b2f5c" },
-      }),
-    });
+    await joinSeat("arrival-sleeved", "seat-sleeved", "Jess", { sleeveColor: "#8b2f5c" });
 
     await post("arrival-sleeved", cardPlayed("arrival-sleeved", { initiator: { seatId: "seat-sleeved", playerName: "Jess" } }));
     const [card] = shapesOf("arrival-sleeved");
@@ -180,29 +206,14 @@ describe("card arrival", () => {
   });
 
   it("an unsleeved seat's cards mint with sleeveColor null (today's look)", async () => {
+    await joinSeat("arrival-unsleeved", "seat-0000001", "Jess");
     await post("arrival-unsleeved", cardPlayed("arrival-unsleeved"));
     const [card] = shapesOf("arrival-unsleeved");
     expect(card.props.sleeveColor).toBeNull();
   });
 
   it("bakes the seat's card back URL into the minted card's props (ticket 17)", async () => {
-    await fetch(`http://localhost:${port}/api/tables/${slugFor("arrival-cardback")}/events`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        id: randomUUID(),
-        tableId: slugFor("arrival-cardback"),
-        name: "seat.joined",
-        occurredAt: new Date().toISOString(),
-        initiator: { seatId: "seat-cardback", playerName: "Jess" },
-        occurredIn: "shuffler",
-        origin: "shuffler.shuffleUp",
-        significance: "administrative",
-        traceparent: fakeTraceparent(),
-        schemaVersion: 1,
-        payload: { deckName: "Blame Game", cardBackImageUrl: "https://example.com/card-back.jpg" },
-      }),
-    });
+    await joinSeat("arrival-cardback", "seat-cardback", "Jess", { cardBackImageUrl: "https://example.com/card-back.jpg" });
 
     await post("arrival-cardback", cardPlayed("arrival-cardback", { initiator: { seatId: "seat-cardback", playerName: "Jess" } }));
     const [card] = shapesOf("arrival-cardback");
@@ -210,6 +221,7 @@ describe("card arrival", () => {
   });
 
   it("a seat with no card back URL mints cards with cardBackImageUrl null", async () => {
+    await joinSeat("arrival-no-cardback", "seat-0000001", "Jess");
     await post("arrival-no-cardback", cardPlayed("arrival-no-cardback"));
     const [card] = shapesOf("arrival-no-cardback");
     expect(card.props.cardBackImageUrl).toBeNull();
@@ -221,6 +233,7 @@ describe("card arrival", () => {
   });
 
   it("accepts a payload carrying a gameCardIndex — no longer a guarded secret (let-gamecardindex-out, 2026-08-10)", async () => {
+    await joinSeat("arrival-index", "seat-0000001", "Jess");
     const event = cardPlayed("arrival-index");
     const response = await post("arrival-index", { ...event, payload: { ...event.payload, gameCardIndex: 7 } });
     expect(response.status).toBe(201);
@@ -250,9 +263,17 @@ describe("card arrival", () => {
   });
 
   it("carries isCommander:true through to the minted shape — owner grants no capability, it's a fact the shape carries", async () => {
+    await joinSeat("arrival-commander-flag", "seat-0000001", "Jess");
     await post("arrival-commander-flag", cardPlayed("arrival-commander-flag", {}, { isCommander: true, zoneHint: "battlefield" }));
     const [card] = shapesOf("arrival-commander-flag");
     expect(card.props.isCommander).toBe(true);
     expect(card.isLocked).toBe(false); // owner/isCommander gate nothing; the card is still draggable
+  });
+
+  it("rejects a card.played for a seat that hasn't joined — no furniture, no card, just a rejection", async () => {
+    const response = await post("arrival-no-seat", cardPlayed("arrival-no-seat", { initiator: { seatId: "seat-ghost", playerName: "Ghost" } }));
+    expect(response.status).toBe(409);
+    expect(shapesOf("arrival-no-seat")).toHaveLength(0);
+    expect(furnitureShapesOf("arrival-no-seat")).toHaveLength(0);
   });
 });

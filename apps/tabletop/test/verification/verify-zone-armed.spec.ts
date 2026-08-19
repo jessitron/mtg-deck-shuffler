@@ -29,6 +29,27 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
   };
 }
 
+function seatJoined(tableId: string, seatId: string, playerName: string) {
+  return {
+    id: randomUUID(),
+    tableId,
+    name: "seat.joined",
+    occurredAt: new Date().toISOString(),
+    initiator: { seatId, playerName },
+    occurredIn: "shuffler",
+    origin: "shuffler.shuffleUp",
+    significance: "administrative",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: { deckName: "Blame Game" },
+  };
+}
+
+async function joinSeat(page: Page, baseURL: string | undefined, tableSlug: string, seatId: string, playerName: string) {
+  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, { data: seatJoined(tableSlug, seatId, playerName) });
+  expect(response.status()).toBe(201);
+}
+
 async function zoomToFit(page: Page) {
   await page.keyboard.press("Shift+1");
   await page.waitForTimeout(300);
@@ -59,6 +80,7 @@ test("dragging a card over a zone arms it (box-shadow ring), and disarms it once
   baseURL,
 }) => {
   const tableSlug = `verify-armed-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug, "e2e-seat", "Jess");
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
@@ -107,6 +129,7 @@ test("dragging a card over a zone arms it (box-shadow ring), and disarms it once
 
 test("dragging your own commander over your command zone arms it", async ({ page, baseURL }) => {
   const tableSlug = `verify-armed-cmdr-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug, "e2e-seat", "Jess");
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
@@ -146,6 +169,7 @@ test("dragging your own commander over your command zone arms it", async ({ page
 
 test("dragging a non-commander card over your command zone does not arm it", async ({ page, baseURL }) => {
   const tableSlug = `verify-armed-noncmdr-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug, "e2e-seat", "Jess");
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
@@ -190,6 +214,8 @@ test("dragging a non-commander card over your command zone does not arm it", asy
 test("dragging another player's commander over your command zone does not arm it", async ({ page, baseURL }) => {
   const tableSlug = `verify-armed-othercmdr-${Date.now()}`;
   const otherSeatId = `other-seat-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug, "e2e-seat", "Jess");
+  await joinSeat(page, baseURL, tableSlug, otherSeatId, "Other");
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
@@ -245,6 +271,7 @@ test("dragging a multi-card selection arms only the one zone under the pointer, 
   baseURL,
 }) => {
   const tableSlug = `verify-armed-multi-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug, "e2e-seat", "Jess");
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
@@ -302,6 +329,7 @@ test("the armed glow is local to the dragging player, never synced to another cl
     contexts.push(ctxA, ctxB);
     const [pageA, pageB] = await Promise.all([ctxA.newPage(), ctxB.newPage()]);
 
+    await joinSeat(pageA, baseURL, tableSlug, "e2e-seat", "Jess");
     await Promise.all([pageA.goto(`/t/${tableSlug}`), pageB.goto(`/t/${tableSlug}`)]);
     await Promise.all([
       expect(pageA.locator(".tl-canvas")).toBeVisible({ timeout: 15000 }),

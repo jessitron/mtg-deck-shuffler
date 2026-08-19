@@ -31,14 +31,18 @@ Spine's `data: <json>\n\n` frames — no `EventSource`, since one server process
 concurrent per-table streams) that reconnects on its own after a drop, with no catch-up/replay of
 missed events. `spineEventDispatch.ts` inspects each received envelope's `name`; only
 `card.played` has a consumer today (routed to `cardArrival.ts`'s `applyCardArrival` — dedup,
-`ensurePlayerArea` self-heal, placement). Every other kind on the stream (`seat.taken`,
+placement). Every other kind on the stream (`seat.taken`,
 `table.created`, …) is ignored. Each dispatched event continues the trace from the broadcast
 envelope's `traceparent` (injected fresh at publish time by the Spine's `Table#broadcast`) as a
 CHILD span, not an unlinked one. **Env**: `SPINE_URL`, default `http://localhost:4600` (same
 variable and default as the Shuffler's — see its `CLAUDE.md`). **This SSE subscription is the
 only way `card.played` reaches this ship** (`tabletop-spine-sse-subscriber` ticket 02,
 2026-08-18): the Shuffler's old direct POST to `/api/tables/:tableSlug/cards`, and this ship's
-`handleCardArrival` HTTP route that received it, are both gone. `applyCardArrival` is unchanged;
+`handleCardArrival` HTTP route that received it, are both gone. **`applyCardArrival` no longer
+self-heals a missing player area** — a `card.played` for a seat that hasn't `seat.joined` yet is
+an ordering bug, not something to paper over by minting furniture (playmat, library, graveyard…)
+from whatever scraps the payload happens to carry. It's rejected (`{status: "rejected", reason:
+"seat-not-joined"}`) and logged as an error (`spineEventDispatch.ts`) instead of placed.
 `src/server/testSeedRoute.ts` is a **test-only** HTTP seam (only mounted when
 `ENABLE_TEST_SEED_ROUTE=true`, at `POST /test/tables/:tableSlug/cards` — a different path, on
 purpose, from the retired production route) that calls `applyCardArrival` directly, for specs

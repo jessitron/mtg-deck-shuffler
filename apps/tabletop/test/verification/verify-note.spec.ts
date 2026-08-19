@@ -1,5 +1,6 @@
 import { test, expect, Page, Locator } from "@playwright/test";
 import { randomUUID } from "node:crypto";
+import { joinSeat } from "./helpers";
 
 
 function fakeTraceparent(): string {
@@ -85,6 +86,7 @@ async function openTable(page: Page, tableSlug: string) {
 
 test("a note attaches to a card, rides along, and detaches when dragged off", async ({ page, baseURL }) => {
   const tableSlug = `verify-note-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug, "e2e-seat", "Jess");
   await openTable(page, tableSlug);
 
   const instanceId = randomUUID();
@@ -127,6 +129,7 @@ test("a note attaches to a card, rides along, and detaches when dragged off", as
 
 test("an attached note detaches near the graveyard's edge when its host card dies", async ({ page, baseURL }) => {
   const tableSlug = `verify-note-gy-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug, "e2e-seat", "Jess");
   await openTable(page, tableSlug);
 
   const instanceId = randomUUID();
@@ -186,6 +189,7 @@ test("after dragging a note, dragging a card moves the card (stale-selection reg
   baseURL,
 }) => {
   const tableSlug = `verify-note-sel-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug, "e2e-seat", "Jess");
   await openTable(page, tableSlug);
 
   const instanceId = randomUUID();
@@ -215,6 +219,7 @@ test("after dragging a note, dragging a card moves the card (stale-selection reg
 
 test("an unattached note is unaffected when a nearby card moves", async ({ page, baseURL }) => {
   const tableSlug = `verify-note-unattached-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug, "e2e-seat", "Jess");
   await openTable(page, tableSlug);
 
   const instanceId = randomUUID();

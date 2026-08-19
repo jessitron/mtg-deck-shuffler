@@ -29,6 +29,30 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
   };
 }
 
+function seatJoined(tableId: string, payloadOverrides: Record<string, unknown> = {}) {
+  return {
+    id: randomUUID(),
+    tableId,
+    name: "seat.joined",
+    occurredAt: new Date().toISOString(),
+    initiator: { seatId: "e2e-seat", playerName: "Jess" },
+    occurredIn: "shuffler",
+    origin: "shuffler.shuffleUp",
+    significance: "administrative",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      deckName: "Blame Game",
+      ...payloadOverrides,
+    },
+  };
+}
+
+async function joinSeat(page: Page, baseURL: string | undefined, tableSlug: string) {
+  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, { data: seatJoined(tableSlug) });
+  expect(response.status()).toBe(201);
+}
+
 async function zoomToFit(page: Page) {
   await page.keyboard.press("Shift+1");
   await page.waitForTimeout(300);
@@ -99,6 +123,7 @@ test("clicking one selected card taps the whole selection, and one Ctrl+Z revert
   baseURL,
 }) => {
   const tableSlug = `verify-multi-untap-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug);
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
@@ -132,6 +157,7 @@ test("clicking one selected card taps the whole selection, and one Ctrl+Z revert
 
 test("propagation pushes the clicked card's new state, not a per-card toggle", async ({ page, baseURL }) => {
   const tableSlug = `verify-multi-mixed-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug);
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
@@ -167,6 +193,7 @@ test("another player's undo stack stays independent of a multi-untap", async ({ 
     const [ctxAlice, ctxBob] = await Promise.all([browser.newContext(), browser.newContext()]);
     contexts.push(ctxAlice, ctxBob);
     const [alice, bob] = await Promise.all([ctxAlice.newPage(), ctxBob.newPage()]);
+    await joinSeat(alice, baseURL, tableSlug);
     await Promise.all([alice.goto(`/t/${tableSlug}`), bob.goto(`/t/${tableSlug}`)]);
     await Promise.all([
       expect(alice.locator(".tl-canvas")).toBeVisible({ timeout: 15000 }),

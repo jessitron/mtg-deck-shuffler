@@ -31,6 +31,44 @@ export function cardPlayed(tableId: string, payloadOverrides: Record<string, unk
   };
 }
 
+/** Build a `seat.joined` event envelope for POSTing to the Tabletop's events route. */
+export function seatJoined(tableId: string, seatId: string, playerName: string, payloadOverrides: Record<string, unknown> = {}) {
+  return {
+    id: randomUUID(),
+    tableId,
+    name: "seat.joined",
+    occurredAt: new Date().toISOString(),
+    initiator: { seatId, playerName },
+    occurredIn: "shuffler",
+    origin: "shuffler.shuffleUp",
+    significance: "administrative",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: { deckName: "Blame Game", ...payloadOverrides },
+  };
+}
+
+/**
+ * Join a seat so a subsequent card.played has a player area to land in — a card.played
+ * for a seat that hasn't joined is rejected, not self-healed into furniture. Safe to call
+ * more than once for the same seatId on the same table: seat.joined for an already-seated
+ * seat is a documented server-side no-op.
+ */
+export async function joinSeat(
+  page: Page,
+  baseURL: string | undefined,
+  tableSlug: string,
+  seatId: string,
+  playerName: string,
+  payloadOverrides: Record<string, unknown> = {}
+): Promise<void> {
+  const response = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, {
+    data: seatJoined(tableSlug, seatId, playerName, payloadOverrides),
+  });
+  // 201 the first time a seat joins, 200 (deduped) on a repeat join — both mean the seat is seated.
+  expect([200, 201]).toContain(response.status());
+}
+
 /** Navigate to a table and wait for the tldraw canvas to be visible. */
 export async function openTable(page: Page, tableSlug: string): Promise<void> {
   await page.goto(`/t/${tableSlug}`);
@@ -54,6 +92,7 @@ export async function placeCard(
     card: { scryfallId: randomUUID(), instanceId },
     ...payloadOverrides,
   });
+  await joinSeat(page, baseURL, tableSlug, event.initiator.seatId, event.initiator.playerName);
   const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);
   const card = page.locator(`#shape\\:card-${instanceId}`);

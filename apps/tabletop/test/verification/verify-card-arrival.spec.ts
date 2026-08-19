@@ -5,6 +5,25 @@ function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
 }
 
+function seatJoined(tableId: string, payloadOverrides: Record<string, unknown> = {}) {
+  return {
+    id: randomUUID(),
+    tableId,
+    name: "seat.joined",
+    occurredAt: new Date().toISOString(),
+    initiator: { seatId: "e2e-seat", playerName: "Jess" },
+    occurredIn: "shuffler",
+    origin: "shuffler.shuffleUp",
+    significance: "administrative",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      deckName: "Blame Game",
+      ...payloadOverrides,
+    },
+  };
+}
+
 function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) {
   return {
     id: randomUUID(),
@@ -30,6 +49,9 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
 
 test("a land and a nonland both arrive on the Stack", async ({ page, baseURL }) => {
   const tableSlug = `verify-arrival-${Date.now()}`;
+  const seatResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, { data: seatJoined(tableSlug) });
+  expect(seatResponse.status()).toBe(201);
+
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 

@@ -36,7 +36,9 @@ export async function handleTestCardSeed(req: Request, res: Response): Promise<v
       res.status(200).json({ ok: true, deduped: true });
       return;
     case "rejected":
-      res.status(409).json({ error: `table is full: ${MAX_SEATS} seats` });
+      res
+        .status(409)
+        .json({ error: outcome.reason === "table-full" ? `table is full: ${MAX_SEATS} seats` : "seat has not joined the table" });
       return;
   }
 }

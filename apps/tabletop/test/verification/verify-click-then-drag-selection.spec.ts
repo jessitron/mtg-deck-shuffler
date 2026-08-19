@@ -1,6 +1,6 @@
 import { test, expect, Page, Locator } from "@playwright/test";
 import { randomUUID } from "node:crypto";
-import { openTable, placeCard, zoomToFit, dragPointTo, center } from "./helpers";
+import { openTable, joinSeat, zoomToFit, dragPointTo, center } from "./helpers";
 
 
 function fakeTraceparent(): string {
@@ -76,6 +76,7 @@ test("clicking a pasted image with no drag, then dragging a card, moves the card
   baseURL,
 }) => {
   const tableSlug = `verify-click-drag-sel-${Date.now()}`;
+  await joinSeat(page, baseURL, tableSlug, "e2e-seat", "Jess");
   await openTable(page, tableSlug);
 
   const instanceId = randomUUID();
