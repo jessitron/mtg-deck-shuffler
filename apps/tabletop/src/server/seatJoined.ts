@@ -61,6 +61,7 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
 
   trace.getActiveSpan()?.setAttributes({
     "event.id": envelope.id,
+    "event.name": envelope.name,
     "table.name": tableNameFromSlug(tableName),
     "table.slug": tableName,
     "seat.id": seatId,
@@ -103,6 +104,7 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
       kind: SpanKind.INTERNAL,
       attributes: {
         "event.id": envelope.id,
+        "event.name": envelope.name,
         "table.name": tableNameFromSlug(tableName),
         "table.slug": tableName,
         "seat.id": seatId,

@@ -55,6 +55,7 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
     "card.scryfall_id": card.scryfallId,
     "card.name": cardName,
     "event.id": envelope.id,
+    "event.name": envelope.name,
     "table.name": tableNameFromSlug(tableName),
     "table.slug": tableName,
     "zone.hint": zoneHint,
@@ -96,6 +97,7 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
       kind: SpanKind.INTERNAL,
       attributes: {
         "event.id": envelope.id,
+        "event.name": envelope.name,
         "table.name": tableNameFromSlug(tableName),
         "table.slug": tableName,
         "seat.id": seatId,
