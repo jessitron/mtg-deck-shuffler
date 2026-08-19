@@ -21,6 +21,15 @@ tooling yet, so the clean path is deleting `services/spine/k8s/pvc.yaml`'s claim
 letting it recreate empty on next deploy. Confirm with Jess before running it; low-stakes
 early dev data, but still a real prod-data-wiping action.
 
+## Right Effing Now
+
+in apps/tabletop/src/server/spineSubscriber.ts:
+// JESS: wtf are we doing awaiting an event stream? Here is a trace in Honeycomb showing that timing out after 5m: https://ui.honeycomb.io/modernity/environments/local/result/4bMrXHpP4Q9/trace/JbsMu6BuWD3?fields[]=s_name&fields[]=s_serviceName&span=0d1cee0b4aa8fbfc
+
+After start game is working again, then we can address Card Played not matching the seat.
+
+As part of these fixes, I would like to make a clearer chain of events in Honeycomb. I want a custom span in Spine for every event sent on the SSE streams. That way I can make a graph of the event sequence. There should also be one for table creation / seat join (when synchronous).
+
 ## Next
 
 - major bug: played cards should not keep appearing to the right of the previous location, after the other one has been moved! That's only for when the prior card is still on the stack right where it landed.
@@ -28,7 +37,6 @@ early dev data, but still a real prod-data-wiping action.
 - RETEST post-tldraw upgrade: serious bug: right-click stops working. it works sometimes, and then it just doesn't do anything. Other times it does. It is not predictable.
 
 - RETEST post-tldraw upgrade: weird bug: occasionally, for no discernable reason, a bunch of cards return to the stack where they were initially played 😭
-
 
 - bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation
 

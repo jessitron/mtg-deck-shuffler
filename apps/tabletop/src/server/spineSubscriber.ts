@@ -28,6 +28,7 @@ export function subscribeToSpine(tableId: string, onEvent: (event: unknown) => v
   async function connectOnce(): Promise<void> {
     const abort = new AbortController();
     currentAbort = abort;
+    // JESS: wtf are we doing awaiting an event stream?  Here is a trace in Honeycomb showing that timing out after 5m: https://ui.honeycomb.io/modernity/environments/local/result/4bMrXHpP4Q9/trace/JbsMu6BuWD3?fields[]=s_name&fields[]=s_serviceName&span=0d1cee0b4aa8fbfc
     const response = await fetch(`${baseUrl}/tables/${encodeURIComponent(tableId)}/events/stream`, {
       signal: abort.signal,
       headers: { accept: "text/event-stream" },

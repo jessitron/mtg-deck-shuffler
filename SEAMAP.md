@@ -52,12 +52,21 @@ doesn't touch it; the promise's owner is whoever designs the public/shadow paylo
 shapes, not a guard standing at the door.
 
 ## Sea Monster
-  
-Right now, we are blocked in much work by a sea monster named Schema Change Chaos.
-I want to make an owner and skills to do the schema enhancements, so that every agent in the world
-doesn't have to think so hard about it.
 
-Most of the open tickets want schema changes, and I want to establish this pricess first.
+Right now (8/18/26), we are not in harbor! We are assailed by problems!
+The last thing implemented was the tabletop-sse-stream. These changes are super buggy.
+There are major bugs listed in TODO.md
+
+After the game is working for existing functionality again, we can deploy - currently prod is way behind. But we won't have our mountain yet.
+
+Then we can start on the shuffler SSE stream, there's a map for that.
+
+Then cards-come-and-go, which has been specced out, needs reworked considering the spine is in the middle now.
+
+That will get us to somewhere slightly better than today's production, because you'll be able to return cards from the shuffler. We can call that safe harbor.
+
+From there we can move forward on a few features (like "play face down"), but we'll need to get to tabletop persistence soon for stability.
+I am concerned that our event streams are not resilient yet.
 
 ## Safe Harbor
 
