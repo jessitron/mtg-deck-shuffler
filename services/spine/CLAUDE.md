@@ -8,10 +8,9 @@ This ship's seamap: `SEAMAP.md` (in this directory).
 **All paths in this file are relative to `services/spine/`**, except `contracts/`, which
 is explicitly called out as repo-root below.
 
-**Stay in this ship.** Don't edit files outside `services/spine/` (`contracts/` is fair
-game when a contract change is the explicit point of the task). If finishing the task
-needs a change in the Shuffler or the Tabletop, stop and say so instead of reaching across
-— that's a cross-ship task, and it deserves its own look at both ships' `CLAUDE.md`s.
+**Cross-ship work is fine.** If finishing the task needs a change in the Shuffler or the
+Tabletop, go read that ship's own `CLAUDE.md` and make the change there too — no need to
+stop and ask first.
 
 ## What this is
 

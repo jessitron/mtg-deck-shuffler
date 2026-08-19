@@ -8,10 +8,9 @@ This ship's seamap: `SEAMAP.md` (in this directory).
 **All paths in this file — and every path in `apps/tabletop/notes/` — are relative to
 `apps/tabletop/`.** So `src/server/seatJoined.ts` means `apps/tabletop/src/server/seatJoined.ts`.
 
-**Stay in this ship.** Don't edit files outside `apps/tabletop/` (`contracts/` is fair
-game when a contract change is the explicit point of the task). If finishing the task
-needs a change in the Shuffler or the Spine, stop and say so instead of reaching across
-— that's a cross-ship task, and it deserves its own look at both ships' `CLAUDE.md`s.
+**Cross-ship work is fine.** If finishing the task needs a change in the Shuffler or the
+Spine, go read that ship's own `CLAUDE.md` and make the change there too — no need to stop
+and ask first.
 
 ## What this is
 
