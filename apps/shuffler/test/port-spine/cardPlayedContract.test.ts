@@ -54,6 +54,7 @@ describe("card.played events validate against the Spine's own contracts (contrac
       { card: lightningBolt, location: { type: "Hand", position: 0 }, gameCardIndex: 0, isCommander: false, currentFace: "front" },
       "11111111-1111-1111-1111-111111111111",
       { seatId: "1", playerName: "Jess" },
+      "1",
       "stack",
       "some-table-id"
     );
@@ -85,6 +86,7 @@ describe("card.played events validate against the Spine's own contracts (contrac
       { card: lightningBolt, location: { type: "Hand", position: 0 }, gameCardIndex: 0, isCommander: false, currentFace: "front" },
       "22222222-2222-2222-2222-222222222222",
       { seatId: "1", playerName: "Jess", sessionId: "33333333-3333-3333-3333-333333333333" },
+      "1",
       "stack",
       "some-table-id"
     );

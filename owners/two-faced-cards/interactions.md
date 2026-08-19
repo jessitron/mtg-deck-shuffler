@@ -297,8 +297,18 @@ These are specific things that could break two-faced cards if changed elsewhere:
     `backImageUrl` in ticket 12, though those weren't `required`; this is the precedent that
     a required-field addition to v1 was accepted without a schemaVersion bump (see
     [contract.md](contract.md)). `buildCardPlayedEvent`
-    (`apps/shuffler/src/port-tabletop/types.ts`) sets `owner: initiator.seatId`,
-    `isCommander: gameCard.isCommander`.
+    (`apps/shuffler/src/port-tabletop/types.ts`) sets `isCommander:
+    gameCard.isCommander`. **`owner` is its own explicit parameter of
+    `buildCardPlayedEvent`, decoupled from `initiator.seatId`** (seat/session
+    attribution ticket 07, 2026-08-19) — the function signature is now
+    `(gameCard, instanceId, initiator, owner, zoneHint, tableName)`, not derived from
+    `initiator.seatId` internally. The one production call site,
+    `sendCardPlayedToSpineBestEffort` (`apps/shuffler/src/port-spine/sendToSpine.ts`),
+    still passes `game.seatId` for both `initiator.seatId` and `owner`, so the
+    observable payload value is unchanged today — this only decouples the shape,
+    paired with ticket 01 (already merged) which made the Tabletop read
+    `payload.owner` for placement instead of `initiator.seatId`. The two are free to
+    diverge once code passes cards into another seat's `PlayerArea`.
     - **`seat.joined` is now a second sender site bound by watch point 18's
       `backImageUrl`-derived-from-`twoFaced` rule, not just `card.played`.**
       `seat.joined.v1.json` gained an optional `commanders` array (0-2 entries); every

@@ -55,6 +55,7 @@ export function buildCardPlayedEvent(
   gameCard: GameCard,
   instanceId: string,
   initiator: Initiator,
+  owner: string,
   zoneHint: ZoneHint,
   tableName: string
 ): CardPlayedEvent {
@@ -79,7 +80,7 @@ export function buildCardPlayedEvent(
       frontImageUrl: getCardImageUrl(gameCard.card, "normal", "front"),
       backImageUrl: gameCard.card.twoFaced ? getCardImageUrl(gameCard.card, "normal", "back") : null,
       cardName: gameCard.card.name,
-      owner: initiator.seatId,
+      owner,
       isCommander: gameCard.isCommander,
       gameCardIndex: gameCard.gameCardIndex,
     },
