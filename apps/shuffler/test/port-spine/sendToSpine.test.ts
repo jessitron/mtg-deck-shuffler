@@ -170,16 +170,20 @@ describe("game.recordSpineJoin", () => {
 
 describe("sendCardPlayedToSpineBestEffort", () => {
   async function joinedTableInfo(fake: FakeSpineGateway): Promise<TableInfo> {
-    const { spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
+    const { seatId, spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
       gameId: "joined-game",
       tableName: "Friday Night",
       playerName: "Jess",
       deckName: "Test Deck",
     });
-    return { tableName: "Friday Night", playerName: "Jess", seatId: "abc12345", spineTableId, spineSeatNumber };
+    // A real game carries the Spine's own seatId (GUID-shaped) here, adopted via
+    // recordSpineJoin() before card.played is ever sent — see the "game.recordSpineJoin"
+    // tests above. Build tableInfo the same way, so this test reproduces what actually
+    // flows into card.played instead of a value no real game would carry.
+    return { tableName: "Friday Night", playerName: "Jess", seatId: seatId ?? "no-real-seat-id-was-returned", spineTableId, spineSeatNumber };
   }
 
-  it("sends card.played addressed to the Spine tableId, from the joined Spine seat", async () => {
+  it("sends card.played addressed to the Spine tableId, from the joined Spine seat — using the real seat.joined seatId, not the seat number", async () => {
     const fake = new FakeSpineGateway();
     const tableInfo = await joinedTableInfo(fake);
     const game = GameState.newGame(101, 1, 1, testDeck, undefined, tableInfo);
@@ -192,7 +196,11 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     expect(event.tableId).toBe(tableId);
     expect(tableId).toBe(tableInfo.spineTableId);
     expect(event.name).toBe("card.played");
-    expect(event.initiator).toEqual({ seatId: String(tableInfo.spineSeatNumber), playerName: "Jess" });
+    // This must be the seatId seat.joined actually minted (a GUID-shaped fake-seat-* id
+    // here), not String(spineSeatNumber) — that's just the seat's 1-4 table position, and
+    // the Tabletop rejects card.played when the two don't match (seat-not-joined).
+    expect(event.initiator).toEqual({ seatId: tableInfo.seatId, playerName: "Jess" });
+    expect(event.initiator.seatId).not.toBe(String(tableInfo.spineSeatNumber));
     expect(event.payload.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: bolt.cardInstanceId });
     expect(event.payload.zoneHint).toBe("stack");
   });

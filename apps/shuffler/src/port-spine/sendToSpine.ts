@@ -54,10 +54,10 @@ export async function joinSpineBestEffort(spinePort: SpinePort | undefined, para
 }
 
 export async function sendCardPlayedToSpineBestEffort(spinePort: SpinePort | undefined, game: GameState, gameCard: GameCard, zoneHint: ZoneHint): Promise<void> {
-  if (!spinePort || !game.spineTableId || !game.spineSeatNumber || !gameCard.cardInstanceId) return;
+  if (!spinePort || !game.spineTableId || !game.seatId || !gameCard.cardInstanceId) return;
   const tableId = game.spineTableId;
   try {
-    const event: CardPlayedEvent = buildCardPlayedEvent(gameCard, gameCard.cardInstanceId, { seatId: String(game.spineSeatNumber), playerName: game.playerName ?? "player" }, zoneHint, tableId);
+    const event: CardPlayedEvent = buildCardPlayedEvent(gameCard, gameCard.cardInstanceId, { seatId: game.seatId, playerName: game.playerName ?? "player" }, zoneHint, tableId);
     await spinePort.sendEvent(tableId, event);
   } catch (error) {
     trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });
