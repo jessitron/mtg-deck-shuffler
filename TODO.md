@@ -29,17 +29,6 @@ As part of these fixes, I would like to make a clearer chain of events in Honeyc
 
 ## Next
 
-- Spine's `sse_stream.rb` doesn't flush HTTP headers until the first event is queued
-  (`each` blocks on `@queue.pop` before yielding anything) — confirmed by reproducing the
-  same behavior in a plain Node http server. That's why a fresh table with no cards played
-  yet shows as `UND_ERR_HEADERS_TIMEOUT` rather than a body-idle timeout (see
-  `spineSubscriber.ts`'s idle-tolerant dispatcher, 2026-08-19). Disabling the tabletop's
-  client-side timeouts is a complete fix on its own, but it also means a truly hung Spine
-  (TCP accepts, never responds, ever) would wait forever instead of erring out. If we want
-  fast dead-connection detection later, that needs a Spine-side change — heartbeats on the
-  stream, or an explicit early header flush — which is a `services/spine/` task, not this
-  ship's.
-
 - major bug: played cards should not keep appearing to the right of the previous location, after the other one has been moved! That's only for when the prior card is still on the stack right where it landed.
 
 - RETEST post-tldraw upgrade: serious bug: right-click stops working. it works sometimes, and then it just doesn't do anything. Other times it does. It is not predictable.

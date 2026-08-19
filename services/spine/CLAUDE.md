@@ -33,7 +33,18 @@ endpoint: contract-validated against `contracts/` via `lib/event_contract.rb`
 server-side. `GET /tables/:table_id/events/stream` is the outbound side: one SSE stream
 per table, fed by `lib/table_broadcaster.rb` (a plain-Ruby pub/sub object every
 `Table#append_event!`/`#mint_event!` publishes to after its transaction commits) and
-formatted into `data:` frames by `lib/sse_stream.rb`. `GET /admin/tables` and
+formatted into `data:` frames by `lib/sse_stream.rb`. **The stream sends a `: heartbeat\n\n`
+comment frame immediately on connect, then again every `HEARTBEAT_INTERVAL_SECONDS` (15s)
+while nothing's been published** (`SseStream#each`, via `Queue#pop(timeout:)` — a real message
+short-circuits the wait, same as before). Two reasons this exists, both discovered chasing a
+"Tabletop doesn't load immediately" bug (2026-08-19): Puma doesn't flush a streamed response's
+headers until its body's `each` yields a first chunk, so without the immediate heartbeat a fresh
+table with nothing played yet never sent so much as headers; and with no periodic signal at all,
+a quiet-but-healthy table is indistinguishable from a hung connection to anyone downstream. Both
+`EventSource` (the admin page, below) and the Tabletop's hand-rolled parser
+(`apps/tabletop/src/server/spineSubscriber.ts`) already ignore comment lines, so this needed no
+client-side parsing change — only the Tabletop's fetch timeouts, which had been disabled outright
+before heartbeats existed, went back to being bounded. `GET /admin/tables` and
 `GET /admin/tables/:id` are the developer's window into the log: plain ERB views
 (`views/admin/tables/*.html.erb`, rendered by `lib/admin_view.rb` — no Tilt/Rails
 render plugin, just `ERB.new(...).result(binding)`), no framework helpers. The show

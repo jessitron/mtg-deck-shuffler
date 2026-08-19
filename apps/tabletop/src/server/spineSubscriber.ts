@@ -6,7 +6,8 @@ import { log } from "./log.js";
  * built-in EventSource, since a server process holds many concurrent per-table
  * streams at once and EventSource isn't built for that. The wire format
  * (`services/spine/lib/sse_stream.rb`) is exactly `data: <json>\n\n`, one line,
- * no `id:`/`retry:`/heartbeats.
+ * plus a `: heartbeat\n\n` comment frame sent immediately on connect and every
+ * `HEARTBEAT_INTERVAL_SECONDS` (`sse_stream.rb`) while nothing's been played — no `id:`/`retry:`.
  */
 
 const SPINE_URL = process.env.SPINE_URL || "http://localhost:4600";
@@ -21,20 +22,30 @@ export interface SpineSubscription {
 }
 
 /**
- * Node's global `fetch` (undici) kills a request after 5 minutes of silence by default —
- * `headersTimeout` and `bodyTimeout` both default to 300000ms. That's the right guard for an
- * ordinary request, but this stream is meant to sit open and idle for as long as nobody plays a
- * card, with no heartbeats to keep it "active" (`sse_stream.rb` sends nothing between events).
- * Left at the default, an idle table gets its "healthy" connection torn down and reconnected
- * every 5 minutes — confirmed in Honeycomb (local env, `mtg-tabletop`, span "GET" on this exact
- * URL): 95 `UND_ERR_HEADERS_TIMEOUT` plus 1 `UND_ERR_BODY_TIMEOUT` over 30 days, all on ordinary
- * idle tables, not real outages. Since the Spine's stream has no catch-up/replay, a card played
- * during that reconnect gap is lost for good. Disabling both timeouts here hands failure
- * detection entirely to the AbortController (`close()`) and TCP-level errors, which is what the
- * reconnect-with-backoff loop below is already built to handle.
+ * Node's global `fetch` (undici) defaults `headersTimeout`/`bodyTimeout` to 300000ms (5 min) —
+ * far too patient for a real hang, and (before the Spine sent heartbeats) also far too impatient
+ * for an honestly quiet table: Puma doesn't flush a streamed response's headers until its body's
+ * `each` yields a first chunk, so a fresh table with nothing played yet sent no bytes at all.
+ * Confirmed in Honeycomb (local env, `mtg-tabletop`, span "GET" on this stream's URL): 95
+ * `UND_ERR_HEADERS_TIMEOUT` plus 1 `UND_ERR_BODY_TIMEOUT` over 30 days, all on ordinary idle
+ * tables, not real outages — and since the Spine's stream has no catch-up/replay, a card played
+ * during the resulting reconnect gap was lost for good.
+ *
+ * Now that the Spine sends an immediate heartbeat plus one every
+ * `HEARTBEAT_INTERVAL_SECONDS` (`sse_stream.rb`) while quiet, both timeouts can go back to being
+ * bounded — a hung Spine is detected in seconds, not never, without misreading an honestly quiet
+ * table as dead:
+ * - `HEADERS_TIMEOUT_MS`: headers now arrive with that very first heartbeat, so a few seconds is
+ *   generous slack for real network/scheduling latency, not "however long until someone plays a
+ *   card".
+ * - `BODY_TIMEOUT_MS`: three heartbeat intervals' worth of total silence — one missed beat is
+ *   noise (a slow GC pause, a blip), three in a row means the connection is actually gone.
  */
-function createIdleTolerantDispatcher(): Dispatcher {
-  return new Agent({ headersTimeout: 0, bodyTimeout: 0 });
+const HEADERS_TIMEOUT_MS = 5_000;
+const BODY_TIMEOUT_MS = 45_000;
+
+function createHeartbeatAwareDispatcher(): Dispatcher {
+  return new Agent({ headersTimeout: HEADERS_TIMEOUT_MS, bodyTimeout: BODY_TIMEOUT_MS });
 }
 
 /** `baseUrl` defaults to the real Spine — overridable so tests can point this at a fake SSE server. */
@@ -42,7 +53,7 @@ export function subscribeToSpine(
   tableId: string,
   onEvent: (event: unknown) => void,
   baseUrl: string = SPINE_URL,
-  dispatcher: Dispatcher = createIdleTolerantDispatcher()
+  dispatcher: Dispatcher = createHeartbeatAwareDispatcher()
 ): SpineSubscription {
   let closed = false;
   let currentAbort: AbortController | null = null;

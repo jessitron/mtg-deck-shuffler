@@ -29,7 +29,18 @@ time a room hears `seat.joined` — the room's Spine `tableId` and the subscript
 has one. `spineSubscriber.ts` is a small hand-rolled SSE client (streamed `fetch`, parsing the
 Spine's `data: <json>\n\n` frames — no `EventSource`, since one server process holds many
 concurrent per-table streams) that reconnects on its own after a drop, with no catch-up/replay of
-missed events. `spineEventDispatch.ts` inspects each received envelope's `name`; only
+missed events. **The fetch's `dispatcher` is a per-subscription `undici.Agent` with bounded
+`headersTimeout`/`bodyTimeout`** (2026-08-19, `createHeartbeatAwareDispatcher`) — Node's global
+`fetch` defaults both to 300000ms, which is far too patient for a genuine hang, so a hung Spine
+went undetected; the fix isn't disabling the timeouts, it's shortening them, which only works
+because the Spine now sends a `: heartbeat\n\n` comment frame immediately on connect and every
+`HEARTBEAT_INTERVAL_SECONDS` while quiet (`services/spine/lib/sse_stream.rb`) — this parser
+already ignores any frame without a `data: ` line, so heartbeats needed no parsing change, only
+the timeout values. `undici` is pinned to major version 7 in `package.json`
+(`Agent`/`Dispatcher` aren't Node built-ins) — it **must** match `process.versions.undici` for
+whatever Node version is running; undici 8 redesigned the Dispatcher's internal handler interface
+and silently breaks every `fetch()` call through a custom dispatcher. `spineEventDispatch.ts`
+inspects each received envelope's `name`; only
 `card.played` has a consumer today (routed to `cardArrival.ts`'s `applyCardArrival` — dedup,
 placement). Every other kind on the stream (`seat.taken`,
 `table.created`, …) is ignored. Each dispatched event continues the trace from the broadcast

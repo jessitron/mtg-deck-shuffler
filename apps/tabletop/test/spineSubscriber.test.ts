@@ -63,13 +63,19 @@ async function waitUntil(predicate: () => boolean, timeoutMs = 5000): Promise<vo
   throw new Error("timed out waiting for condition");
 }
 
-/** A minimal fake SSE server standing in for the Spine's `GET /tables/:tableId/events/stream`. */
+/**
+ * A minimal fake SSE server standing in for the Spine's `GET /tables/:tableId/events/stream`,
+ * including its heartbeat behavior (`services/spine/lib/sse_stream.rb`): a `: heartbeat\n\n`
+ * comment frame flushed immediately on connect (so headers arrive without waiting for a card to
+ * be played), plus more on demand here via `sendHeartbeat()`.
+ */
 function createFakeSpineServer() {
   let clients: http.ServerResponse[] = [];
   let connectionsAccepted = 0;
   const server = http.createServer((req, res) => {
     connectionsAccepted++;
     res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache", connection: "keep-alive" });
+    res.write(": heartbeat\n\n");
     clients.push(res);
     req.on("close", () => {
       clients = clients.filter((c) => c !== res);
@@ -80,6 +86,9 @@ function createFakeSpineServer() {
     publish(event: unknown): void {
       const frame = `data: ${JSON.stringify({ event })}\n\n`;
       for (const res of clients) res.write(frame);
+    },
+    sendHeartbeat(): void {
+      for (const res of clients) res.write(": heartbeat\n\n");
     },
     connectionCount(): number {
       return clients.length;
@@ -200,42 +209,35 @@ describe("Spine SSE subscriber", () => {
     expect(instanceIds).toContain(second.payload.card.instanceId);
   });
 
-  it("survives a table with no cards played yet, instead of cycling on a headers timeout", async () => {
-    // The fake server (like the real Spine's sse_stream.rb, which blocks on a queue pop before
-    // yielding anything) never flushes response headers until the first publish() — a fresh
-    // table genuinely has no headers to receive until its first card is played. Confirmed via
-    // Honeycomb: this is the dominant real failure mode (95 UND_ERR_HEADERS_TIMEOUT vs. 1
-    // UND_ERR_BODY_TIMEOUT over 30 days) — a quiet table's "healthy" connection gets torn down
-    // by undici's default 5-minute headers timeout, not a body-idle timeout.
+  it("stays connected across heartbeats on a quiet table, but reconnects once they actually stop", async () => {
+    // The dispatcher's timeouts are bounded now that the Spine sends heartbeats
+    // (services/spine/lib/sse_stream.rb) — not disabled outright. This uses a short bodyTimeout,
+    // scaled down from production's 45s, so both halves of that claim run fast: heartbeats
+    // arriving faster than the timeout keep the same connection alive, and heartbeats actually
+    // stopping (a genuinely hung Spine) still gets caught and reconnected.
     fakeServer = createFakeSpineServer();
     const port = await fakeServer.listen();
-    const tableName = "sse-idle-survives";
+    const tableName = "sse-heartbeat";
     const tableId = slugFor(tableName);
 
-    // Sanity check that the harness can detect a timeout-driven reconnect at all: with a short
-    // headersTimeout explicitly wired in, waiting past it on a table with no cards played really
-    // does force a reconnect. This proves the absence of one below is because the production
-    // dispatcher disables the timeout, not because this test can't observe one.
-    const impatientDispatcher = new Agent({ headersTimeout: 150, bodyTimeout: 0 });
-    const impatientSubscription = subscribeToSpine(tableId, () => {}, `http://localhost:${port}`, impatientDispatcher);
+    const shortDispatcher = new Agent({ headersTimeout: 5_000, bodyTimeout: 150 });
+    subscription = subscribeToSpine(tableId, (event) => dispatchSpineEvent(tableId, event), `http://localhost:${port}`, shortDispatcher);
     await waitUntil(() => fakeServer!.connectionsAcceptedCount() === 1);
-    await waitUntil(() => fakeServer!.connectionsAcceptedCount() === 2, 2000); // headers timeout forced a reconnect
-    impatientSubscription.close();
-    await waitUntil(() => fakeServer!.connectionCount() === 0);
-    const connectionsBeforeRealSubscription = fakeServer.connectionsAcceptedCount();
-
-    // The real subject: subscribeToSpine's own default dispatcher, over the same quiet stretch —
-    // nobody has played a card on this table yet, so no headers have arrived either.
-    subscription = subscribeToSpine(tableId, (event) => dispatchSpineEvent(tableId, event), `http://localhost:${port}`);
-    await waitUntil(() => fakeServer!.connectionsAcceptedCount() === connectionsBeforeRealSubscription + 1);
-    const connectionsAtStart = fakeServer.connectionsAcceptedCount();
     await seatUp(tableName, "seat-0000001", "Jess");
 
-    await new Promise((r) => setTimeout(r, 400)); // comfortably longer than the 150ms that tripped the impatient dispatcher above
-    expect(fakeServer.connectionsAcceptedCount()).toBe(connectionsAtStart); // never dropped and reconnected
+    const heartbeatTimer = setInterval(() => fakeServer!.sendHeartbeat(), 50);
+    try {
+      await new Promise((r) => setTimeout(r, 400)); // several multiples of the 150ms bodyTimeout
+      expect(fakeServer.connectionsAcceptedCount()).toBe(1); // never dropped and reconnected
 
-    const event = cardPlayedEvent(tableName);
-    fakeServer.publish(event);
-    await waitUntil(() => shapesOf(tableName).length === 1);
+      const event = cardPlayedEvent(tableName);
+      fakeServer.publish(event);
+      await waitUntil(() => shapesOf(tableName).length === 1);
+    } finally {
+      clearInterval(heartbeatTimer);
+    }
+
+    // Now let heartbeats actually stop — the real failure mode a hung Spine would produce.
+    await waitUntil(() => fakeServer!.connectionsAcceptedCount() === 2, 2000);
   });
 });

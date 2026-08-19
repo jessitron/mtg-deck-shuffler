@@ -334,19 +334,30 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
 - **A long-lived streamed `fetch()` (SSE, or anything else meant to sit open and idle)**: Node's
   global `fetch` (undici) kills a request after 5 minutes of silence by default —
   `headersTimeout`/`bodyTimeout` both default to 300000ms — which reads as a healthy connection
-  being torn down for no reason. `apps/tabletop/src/server/spineSubscriber.ts`'s
-  `createIdleTolerantDispatcher()` (`new (undici) Agent({ headersTimeout: 0, bodyTimeout: 0 })`,
-  passed as the `dispatcher` fetch option, scoped per-call not global) is the fix and the pattern
-  to copy. **Disable `headersTimeout` too, not just `bodyTimeout`**: neither Node's nor (almost
-  certainly) Ruby/Rack's HTTP server flushes response headers until the first body write, so a
-  fresh/quiet stream with nothing published yet never even gets headers — that's a headers
-  timeout, not a body timeout, and was the dominant real failure mode here (95
-  `UND_ERR_HEADERS_TIMEOUT` vs. 1 `UND_ERR_BODY_TIMEOUT` over 30 days in Honeycomb). Adding
-  `undici` as an explicit dependency to get `Agent`/`Dispatcher` carries its own gotcha — see
-  "Depends on" above. Disabling both timeouts hands failure detection entirely to
-  `AbortController`/TCP-level errors; a truly hung server that accepts but never responds would
-  then wait forever instead of erring out (tracked as a Spine-side follow-up in `TODO.md` — not
-  a telemetry gap, a reconnection-strategy one).
+  being torn down for no reason. The dominant real failure mode was a **headers** timeout, not a
+  body timeout (95 `UND_ERR_HEADERS_TIMEOUT` vs. 1 `UND_ERR_BODY_TIMEOUT` over 30 days in
+  Honeycomb, `mtg-tabletop`): Puma (and, confirmed by reproduction, a plain Node http server too)
+  doesn't flush a streamed response's headers until the body's `each` yields a first chunk, so an
+  honestly-quiet fresh table never even sent headers. **The fix is a heartbeat, not disabled
+  timeouts.** A same-day earlier design (`createIdleTolerantDispatcher()`,
+  `{ headersTimeout: 0, bodyTimeout: 0 }`, both disabled outright) was superseded within the day
+  (2026-08-19) after Jess flagged that disabling detection entirely means a genuinely hung Spine
+  (accepts the connection, never responds) would never be caught. The actual fix, cross-ship:
+  `services/spine/lib/sse_stream.rb`'s `SseStream#each` yields a `: heartbeat\n\n` SSE comment
+  frame immediately on connect and every `HEARTBEAT_INTERVAL_SECONDS` (15s) while quiet (via
+  `Queue#pop(timeout:)`, which a real message still short-circuits), and
+  `apps/tabletop/src/server/spineSubscriber.ts`'s `createHeartbeatAwareDispatcher()` now uses
+  **bounded** values instead — `HEADERS_TIMEOUT_MS = 5_000` (headers arrive with the immediate
+  heartbeat now, so this only needs to cover real network/scheduling latency) and
+  `BODY_TIMEOUT_MS = 45_000` (three heartbeat intervals — one missed beat is noise, three means
+  the connection is actually dead). Comment-line frames are spec-legal SSE and were already
+  ignored by both `EventSource` and the Tabletop's hand-rolled parser (only acts on `data: `
+  lines), so no client-side parsing changed, only the timeout values. Adding `undici` as an
+  explicit dependency to get `Agent`/`Dispatcher` still carries its own gotcha — see "Depends on"
+  above. **If you're touching this again**: don't reach for disabled timeouts as "the simple fix"
+  — a bounded timeout paired with a heartbeat is the fleet's answer to "how do we detect a hang
+  without misreading an honestly-quiet connection as dead," and it generalizes to any future
+  long-lived stream, Ruby or Node, client or server.
 - **Adding a third Tabletop server event handler alongside `handleSeatJoined`
   (`seatJoined.ts`, span `"add player furniture"`) and `handleCardArrival`
   (`cardArrival.ts`, span `"place arrived card"`)**: both wrap only the
