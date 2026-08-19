@@ -57,4 +57,26 @@ class EventContractTest < Minitest::Test
       Spine::EventContract.validate!("not a hash")
     end
   end
+
+  def test_an_initiator_with_session_id_is_accepted
+    Spine::EventContract.validate!(valid_envelope("initiator" => { "playerName" => "Jess", "sessionId" => SecureRandom.uuid }))
+  end
+
+  def test_an_initiator_with_session_id_and_seat_id_is_accepted
+    Spine::EventContract.validate!(
+      valid_envelope("initiator" => { "playerName" => "Jess", "seatId" => "abc123", "sessionId" => SecureRandom.uuid })
+    )
+  end
+
+  def test_an_initiator_missing_session_id_is_still_accepted
+    # sessionId is optional (per CONTEXT-MAP.md's "Initiator" table): the Spine only
+    # passes it through, it never requires it.
+    Spine::EventContract.validate!(valid_envelope("initiator" => { "playerName" => "Jess" }))
+  end
+
+  def test_an_initiator_with_a_non_string_session_id_is_rejected
+    assert_raises(Spine::EventContract::Violation) do
+      Spine::EventContract.validate!(valid_envelope("initiator" => { "playerName" => "Jess", "sessionId" => 12345 }))
+    end
+  end
 end

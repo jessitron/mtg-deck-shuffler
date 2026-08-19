@@ -64,6 +64,17 @@ export function createApp(
     next();
   });
 
+  // Middleware to extract sessionId (minted fresh by the browser on every page load,
+  // no client-side persistence) from request headers and add to tracing and locals
+  app.use((req, res, next) => {
+    const sessionId = req.headers["x-session-id"];
+    if (sessionId && typeof sessionId === "string") {
+      setCommonSpanAttributes({ sessionId });
+      res.locals.sessionId = sessionId;
+    }
+    next();
+  });
+
   app.use(function stampRouteParams(req, res, next) {
     const span = trace.getActiveSpan();
     const originalEnd = res.end.bind(res);
@@ -115,10 +126,10 @@ export function createApp(
     return expectedVersionStr === undefined ? undefined : parseInt(expectedVersionStr);
   }
 
-  async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint): Promise<void> {
+  async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint, sessionId?: string): Promise<void> {
     setCommonSpanAttributes({ tableName: game.tableName });
     trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing", "zone.hint": zoneHint });
-    await sendCardPlayedToSpineBestEffort(spinePort, game, card, zoneHint);
+    await sendCardPlayedToSpineBestEffort(spinePort, game, card, zoneHint, sessionId);
   }
 
   function renderCommandOutcome(
@@ -1359,6 +1370,7 @@ export function createApp(
     if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
+    const sessionId = res.locals.sessionId as string | undefined;
 
     try {
       const outcome = await applyGameCommand(
@@ -1380,7 +1392,7 @@ export function createApp(
           if (!game.tableName || !cardToPlay || (cardToPlay.location.type !== "Hand" && cardToPlay.location.type !== "Revealed")) {
             return;
           }
-          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay));
+          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay), sessionId);
         }
       );
 
@@ -1403,6 +1415,7 @@ export function createApp(
     if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
+    const sessionId = res.locals.sessionId as string | undefined;
 
     try {
       const outcome = await applyGameCommand(
@@ -1415,7 +1428,7 @@ export function createApp(
           if (!game.tableName || !cardToDiscard || cardToDiscard.location.type !== "Hand") {
             return;
           }
-          await sendCardBeforeMutate(game, cardToDiscard, "graveyard");
+          await sendCardBeforeMutate(game, cardToDiscard, "graveyard", sessionId);
         }
       );
 
@@ -1438,6 +1451,7 @@ export function createApp(
     const gameId = parseGameIdParam(req, res);
     if (gameId === null) return;
     const browserTabId = res.locals.browserTabId as string | undefined;
+    const sessionId = res.locals.sessionId as string | undefined;
 
     try {
       const outcome = await applyGameCommand(
@@ -1450,7 +1464,7 @@ export function createApp(
           if (!game.tableName || !topCard) {
             return;
           }
-          await sendCardBeforeMutate(game, topCard, "graveyard");
+          await sendCardBeforeMutate(game, topCard, "graveyard", sessionId);
         }
       );
 

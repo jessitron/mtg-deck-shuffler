@@ -15,6 +15,7 @@ export type ZoneHint = "stack" | "battlefield" | "graveyard";
 export interface Initiator {
   seatId: string;
   playerName: string;
+  sessionId?: string;
 }
 
 export type Significance = "physical" | "domain" | "administrative";
@@ -62,7 +63,7 @@ export function buildCardPlayedEvent(
     tableId: tableName,
     name: CARD_PLAYED_EVENT_NAME,
     occurredAt: new Date().toISOString(),
-    initiator: { seatId: initiator.seatId, playerName: initiator.playerName },
+    initiator: { seatId: initiator.seatId, playerName: initiator.playerName, sessionId: initiator.sessionId },
     occurredIn: "shuffler",
     origin: "shuffler.playCardSubmit",
     significance: "domain",
