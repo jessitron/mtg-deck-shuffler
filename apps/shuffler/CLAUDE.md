@@ -11,10 +11,9 @@ to the workspace.
 
 This ship's seamap: `SEAMAP.md` (in this directory).
 
-**Stay in this ship.** Don't edit files outside `apps/shuffler/` (`contracts/` is fair
-game when a contract change is the explicit point of the task). If finishing the task
-needs a change in the Tabletop or the Spine, stop and say so instead of reaching across
-— that's a cross-ship task, and it deserves its own look at both ships' `CLAUDE.md`s.
+**Cross-ship work is fine.** If finishing the task needs a change in the Tabletop or the
+Spine, go read that ship's own `CLAUDE.md` and make the change there too — no need to stop
+and ask first.
 
 ## Project Overview
 
