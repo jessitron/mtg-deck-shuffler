@@ -3,7 +3,7 @@ import { createShapeId } from "@tldraw/tlschema";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { CARD_W, CARD_H, MAX_SEATS, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
-import { ensurePlayerArea, pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
+import { pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
 import { validateIncomingEvent } from "./contractValidation.js";
 
 const tracer = trace.getTracer("mtg-tabletop");
@@ -27,13 +27,13 @@ export type CardArrivalOutcome =
   | { status: "invalid"; error: string }
   | { status: "placed" }
   | { status: "deduped"; reason: "event-id" | "instance" }
-  | { status: "rejected"; reason: "table-full" };
+  | { status: "rejected"; reason: "table-full" | "seat-not-joined" };
 
 /**
- * The core of card arrival — validation, dedup, ensurePlayerArea self-heal, and
- * placement. The only production entry point is the Spine SSE dispatcher
- * (`spineEventDispatch.ts`); `testSeedRoute.ts` calls this directly too, as a
- * test-only HTTP seam for specs that need to seed a card without a live Spine.
+ * The core of card arrival — validation, dedup, and placement. The only production
+ * entry point is the Spine SSE dispatcher (`spineEventDispatch.ts`); `testSeedRoute.ts`
+ * calls this directly too, as a test-only HTTP seam for specs that need to seed a card
+ * without a live Spine.
  */
 export async function applyCardArrival(tableName: string, body: unknown): Promise<CardArrivalOutcome> {
   const result = validateIncomingEvent<CardPlayedPayload>(body, "card.played");
@@ -48,7 +48,6 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
   if (!seatId) {
     return { status: "invalid", error: "initiator.seatId is required for card.played" };
   }
-  const { playerName } = envelope.initiator;
   const { card, face, zoneHint, frontImageUrl, backImageUrl, cardName, owner, isCommander } = envelope.payload;
 
   trace.getActiveSpan()?.setAttributes({
@@ -80,6 +79,15 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
     return { status: "rejected", reason: "table-full" };
   }
 
+  const playerArea = entry.seats.get(seatId);
+  if (!playerArea) {
+    // A card.played for a seat with no player area means seat.joined hasn't landed yet —
+    // an ordering bug upstream, not something to paper over by minting furniture from
+    // whatever scraps this payload happens to carry (no deck name, no sleeve, no playmat).
+    trace.getActiveSpan()?.setAttribute("arrival.rejected", "seat-not-joined");
+    return { status: "rejected", reason: "seat-not-joined" };
+  }
+
   const pageId = pageIdOf(entry);
 
   await tracer.startActiveSpan(
@@ -99,8 +107,6 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
     },
     async (span) => {
       try {
-        const playerArea = await ensurePlayerArea(entry, pageId, seatId, playerName);
-
         let position: { x: number; y: number };
         switch (zoneHint) {
           case "graveyard":

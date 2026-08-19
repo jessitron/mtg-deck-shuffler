@@ -145,6 +145,11 @@ test("flipping and turning face down both sync to a second client", async ({ bro
 
 test("a one-faced card has no Flip item, only Turn face down", async ({ page, baseURL }) => {
   const tableSlug = `verify-flip-gate-${Date.now()}`;
+  const seatResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, {
+    data: seatJoined(tableSlug, {}),
+  });
+  expect(seatResponse.status()).toBe(201);
+
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
@@ -230,6 +235,11 @@ test("a card entering the library resets face and face-down", async ({ page, bas
 
 test("flipping card A does not leave a stale selection that hijacks a later drag of card B", async ({ page, baseURL }) => {
   const tableSlug = `verify-flip-selection-${Date.now()}`;
+  const seatResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, {
+    data: seatJoined(tableSlug, {}),
+  });
+  expect(seatResponse.status()).toBe(201);
+
   await page.goto(`/t/${tableSlug}`);
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
