@@ -324,13 +324,25 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
 - **Adding a Node-side streaming consumer that continues a trace from a body-embedded
   `traceparent`**: `apps/tabletop/src/server/spineEventDispatch.ts`'s `dispatchSpineEvent` is now
   the precedent — `propagation.extract(ROOT_CONTEXT, { traceparent })` then `context.with(parentContext,
-  () => tracer.startActiveSpan(name, { kind: SpanKind.CONSUMER, attributes: {...} }, ...))`, child
+  () => tracer.startActiveSpan(`sse subscription: ${event.name}`, { kind: SpanKind.CONSUMER, attributes: {...} }, ...))`, child
   of the publisher's trace, never a link. Use `SpanKind.CONSUMER` for this shape specifically — every
   other manual span in the fleet is `SpanKind.INTERNAL` because it's driven by an inbound HTTP
   request, not a message off a stream. Fall back to `ROOT_CONTEXT` on a missing/malformed
   `traceparent`, don't fail the dispatch. The stream-reading layer itself
   (`apps/tabletop/src/server/spineSubscriber.ts`) has no ambient span — reconnect/parse-failure
   conditions are `log.warn` only, per Invariant 2's "no span in a timer/background callback" rule.
+  **A span now exists for every event kind on the stream** (2026-08-19), not just `card.played` —
+  the routing to `applyCardArrival` inside the span is still `card.played`-only, so a future
+  consumer of another kind (`seat.taken`, `table.created`, …) adds its logic inside the existing
+  `if (event.name !== "...")` branch rather than adding a new span.
+- **Stamping `event.name` on a span or log**: this is a fleet-wide convention, not a Tabletop-only
+  spelling — the Spine's admin page minted it first (`table.event.displayed` span,
+  `event.name`/`event.seq`), and the Tabletop now stamps the same key from the envelope's `name`
+  field on `seatJoined.ts`'s ambient/child spans and every `sse subscription: ...` span in
+  `spineEventDispatch.ts`. Reuse this spelling for "graph by event kind" rather than inventing a
+  new attribute name. **`cardArrival.ts` does not yet stamp `event.name`** next to its existing
+  `event.id` — a known gap, matching the shape `seatJoined.ts` already has, not a reason to assume
+  cardArrival's spans are intentionally different.
 - **A long-lived streamed `fetch()` (SSE, or anything else meant to sit open and idle)**: Node's
   global `fetch` (undici) kills a request after 5 minutes of silence by default —
   `headersTimeout`/`bodyTimeout` both default to 300000ms — which reads as a healthy connection
