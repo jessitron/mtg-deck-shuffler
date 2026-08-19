@@ -93,8 +93,12 @@ class SseStreamTest < Minitest::Test
   end
 
   def next_message(chunks)
-    raw = chunks.pop(timeout: 2)
-    refute_nil raw, "no message arrived on the stream within the timeout"
-    JSON.parse(raw.delete_prefix("data: ").strip)
+    loop do
+      raw = chunks.pop(timeout: 2)
+      refute_nil raw, "no message arrived on the stream within the timeout"
+      next unless raw.start_with?("data: ") # skip heartbeat comment frames
+
+      return JSON.parse(raw.delete_prefix("data: ").strip)
+    end
   end
 end
