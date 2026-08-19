@@ -11,9 +11,14 @@ to the workspace.
 
 This ship's seamap: `SEAMAP.md` (in this directory).
 
-**Cross-ship work is fine.** If finishing the task needs a change in the Tabletop or the
-Spine, go read that ship's own `CLAUDE.md` and make the change there too — no need to stop
-and ask first.
+**Don't work around a problem that actually belongs in another ship.** If a bug's root
+cause lives in the Tabletop or the Spine, fix it there — don't paper over it locally (e.g.
+loosening a timeout in one ship instead of having another send a heartbeat, which is what
+actually happened once, between the Tabletop and the Spine). Cross-ship work doesn't need a
+stop-and-ask: say you're crossing into that ship, then fork a subagent to make the fix there
+— it should read that ship's own `CLAUDE.md` before touching anything. Never make another
+ship's edit inline yourself, and never settle for a symptomatic fix here when the real fix
+is elsewhere.
 
 ## Project Overview
 
