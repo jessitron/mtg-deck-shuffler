@@ -57,9 +57,9 @@ Grilled with Jess, 2026-08-11.
    seat — the Spine recognizes "I already know this game joined this table" and
    returns the same table URL. This replaces today's workaround (the Shuffler
    persisting `spineTableId`/`spineSeatNumber` itself and never re-joining) with the
-   Spine doing the recognizing. `gameId` crossing this particular boundary
-   (Shuffler→Spine) is fine — it's opaque to the Spine, used only as a dedup key,
-   unlike the Shuffler↔Tabletop boundary where `gameId` is explicitly banned.
+   Spine doing the recognizing. `gameId` crossing this boundary (Shuffler→Spine) is
+   fine — it's opaque to the Spine, used only as a dedup key; `gameId` may cross any
+   boundary in the fleet freely, same as `gameCardIndex`.
 
 ## Left for the implementing ticket (not decisions, just noted)
 
