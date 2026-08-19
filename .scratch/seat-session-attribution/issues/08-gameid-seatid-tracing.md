@@ -20,10 +20,28 @@ conventions.
 
 **Status:** ready-for-agent
 
-- [ ] `Table#prepare_seat`/`Table.join!` records a span attribute correlating the incoming
+- [x] `Table#prepare_seat`/`Table.join!` records a span attribute correlating the incoming
       `gameId` with the seatId just minted
-- [ ] No new persisted column; this is span-attribute-only
-- [ ] `fleet-is-observable` owner consulted on the attribute naming/placement before
+- [x] No new persisted column; this is span-attribute-only
+- [x] `fleet-is-observable` owner consulted on the attribute naming/placement before
       implementing
 
 ## Comments
+
+Implemented in `services/spine/app.rb`'s `POST /join` handler, not in
+`Table#prepare_seat`/`Table.join!` — per `fleet-is-observable`'s explicit house rule
+("stamping stays in the HTTP/command layer, never the domain model"), confirmed via
+`-context` and `-review`. `models/table.rb` has zero telemetry calls today; introducing
+one there would be new, undocumented surface. The route already has both `game_id` and
+the minted `seat_id` in scope on the same ambient Rack span (the Spine never creates a
+manual child span — see owner KB), so the fix is one line: `"game.id" => game_id` added
+to the existing `current_span.add_attributes(...)` call at the top of the handler,
+landing on the same span that later gets `seat.id`/`table.position` stamped. Attribute
+name matches the Shuffler's existing `game.id` browser-resource attribute.
+
+Added the Spine's first span-assertion test infra: `test/test_helper.rb`'s
+`CapturesSpans` module (an additive `InMemorySpanExporter` + `SimpleSpanProcessor`
+alongside the app's real OTel pipeline) backs a new test in
+`test/integration/join_test.rb` that posts a join and asserts the finished span carries
+both `game.id` and the matching minted `seat.id`. `fleet-is-observable` owner docs
+updated with both the wiring-table row and the reusable test pattern.

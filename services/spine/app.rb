@@ -116,7 +116,7 @@ module Spine
         player_name = required_string(body, "playerName")
         required_string(body, "deckName")
         decoration = body.reject { |key, _value| %w[gameId name playerName].include?(key) }
-        current_span.add_attributes("table.name" => name, "player.name" => player_name)
+        current_span.add_attributes("table.name" => name, "player.name" => player_name, "game.id" => game_id)
 
         outcome = join_table(name: name, game_id: game_id,
           player_name: player_name, decoration: decoration)
