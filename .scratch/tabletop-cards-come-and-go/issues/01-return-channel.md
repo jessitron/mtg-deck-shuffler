@@ -41,8 +41,8 @@ Grilled with Jess, 2026-08-08. Six decisions:
    - `eventsUrl` — where the Tabletop *server* POSTs events back. The Shuffler mints
      it from whatever base is right for the environment (localhost in dev, the
      cluster-internal service name in prod).
-   - **No `gameId` crosses the boundary.** The id is the Shuffler's private business;
-     the URL is the address. (Same principle that already bans `gameCardIndex`.)
+   - `gameId` may cross the boundary freely, same as `gameCardIndex` — there's no
+     boundary guard to reason about here.
 
 2. **The Tabletop stores both per seat** (on `PlayerArea` in
    `apps/tabletop/src/server/rooms.ts`), never composes URLs, and needs zero
@@ -77,8 +77,9 @@ Grilled with Jess, 2026-08-08. Six decisions:
 Facts the next tickets will want (from the research pass):
 - The Shuffler has **no inbound path addressed by `instanceId`** today; the only
   reveal endpoint (`POST /reveal-card/:gameId/:gameCardIndex`,
-  `apps/shuffler/src/app.ts:1157`) uses the banned `gameCardIndex`. The inbox
-  handler must map `card.instanceId → GameCard` itself.
+  `apps/shuffler/src/app.ts:1157`) is addressed by `gameCardIndex`. The inbox
+  handler can map straight to a `GameCard` via `gameCardIndex`, the same identity
+  `card.played` already carries (`let-gamecardindex-out`, 2026-08-10).
 - Live wire vocabulary has already diverged from `contracts/payloads/`
   (`seat.joined` vs `seat.taken`; initiator object vs string; envelope requires a
   Spine `tableId` nobody has). Ticket 02 should reconcile deliberately, not mint

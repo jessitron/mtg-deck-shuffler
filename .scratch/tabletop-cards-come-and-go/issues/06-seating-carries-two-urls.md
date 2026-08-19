@@ -13,11 +13,12 @@ needs zero Shuffler-related configuration. Replaying `seat.joined` on Tabletop s
 re-establishes the mapping. The library furniture on the table becomes a clickable link to
 `gameUrl`.
 
-No `gameId` crosses the boundary — the id stays the Shuffler's private business.
+`gameId` may cross the boundary freely, same as `gameCardIndex` — there's no boundary
+guard to reason about here.
 
 **Blocked by:** 05 — needs contract validation in place for the amended `seat.joined.v1`.
 
-- [ ] `seat.joined.v1.json` gains required `gameUrl` and `eventsUrl` fields (no `gameId`)
+- [ ] `seat.joined.v1.json` gains required `gameUrl` and `eventsUrl` fields
 - [ ] The Shuffler mints both URLs correctly in dev and prod
 - [ ] The Tabletop stores `gameUrl`/`eventsUrl` per seat in memory
 - [ ] Restarting the Tabletop and replaying `seat.joined` re-establishes the per-seat URLs

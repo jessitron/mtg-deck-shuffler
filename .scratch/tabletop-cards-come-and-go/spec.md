@@ -138,8 +138,8 @@ the other confirms delivery.
   - `eventsUrl` — where the Tabletop *server* POSTs events back; the Shuffler mints it
     from the environment-appropriate base (localhost in dev, cluster-internal name in
     prod).
-  - **No `gameId` crosses the boundary** — the id is the Shuffler's private business, the
-    URL is the address (same principle that already bans `gameCardIndex`).
+  - `gameId` may cross the boundary freely, same as `gameCardIndex` — there's no
+    boundary guard to reason about here.
 - **The Tabletop stores both URLs per seat**, in memory, never composes URLs, and needs
   zero Shuffler config. `seat.joined` replay on start/restart re-establishes the mapping
   after a Tabletop redeploy.

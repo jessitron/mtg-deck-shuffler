@@ -32,12 +32,9 @@ Mirror this into `apps/tabletop/README.md`, the fleet's `notes/GLOSSARY.md`, and
 
 - **F0. Freeze the card-arrival payload.** Envelope-lite subset of the contract:
   `{ id, name: "card.played", occurredAt, initiator, card: { scryfallId, instanceId }, face, zoneHint: "stack"|"battlefield"|"graveyard", imageUrl, cardName }`
-  (`imageUrl`/`cardName` are blessed scaffolding conveniences, not contract).
-  **`gameCardIndex` is forbidden beyond the Shuffler's boundary** — it's the card's
-  alphabetical rank in a known decklist, a decodable secret. Record the payload as a
-  comment block in `apps/shuffler/src/port-tabletop/types.ts` and in the tabletop
-  route, both with `// JES-128` markers; a unit test asserts the fake gateway never
-  receives an index.
+  (`imageUrl`/`cardName` are blessed scaffolding conveniences, not contract). Record the
+  payload as a comment block in `apps/shuffler/src/port-tabletop/types.ts` and in the
+  tabletop route, both with `// JES-128` markers.
 - **F1. Promote the two-faced-cards owner to fleet scope** (before A5, which renders
   a chosen face). Jess: the complication affects the Spine's events and the Tabletop,
   not just the Shuffler. Restructure `notes/features/two-faced-cards/`: a top-level
