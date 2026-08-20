@@ -94,13 +94,11 @@ this spec deliberately does not build any live reshaping for that case.
   invalid-number case to handle downstream. Stored on `PersistedGamePrep` the same way
   `tableName`/`playerName` already are, so it survives a page reload the same way.
 
-- **`TableInfo` gains `maxPlayers`.** Threaded through `/start-game`'s existing calls —
-  `joinSpineTableBestEffort` (the Spine bookkeeping call) and `sendSeatJoinedBestEffort`
-  (the direct Shuffler→Tabletop call) both gain the field on their request/payload.
-  No new call is introduced; this rides the two calls that already exist today, so it's
-  decoupled from whether `.scratch/spine-in-the-middle/spec.md`'s single-call rework has
-  landed yet — whichever join mechanism is current when this is implemented gains the
-  field on whatever request shape it already has.
+- **`TableInfo` gains `maxPlayers`.** Threaded through `/start-game`'s existing
+  `joinSpineBestEffort()` call (`src/port-spine/sendToSpine.ts`) — the field rides that
+  single call's request payload. The Spine administers the whole join (creates the
+  table if needed, assigns the seat, mints `seat.taken`/`seat.joined`, and notifies the
+  Tabletop itself over HTTP); no new call is introduced.
 
 - **The Spine stores `maxPlayers` only at table creation, never after.** `Table.join!`'s
   `create_with_event!` path gains a `max_players` parameter, written once when a table
@@ -185,21 +183,18 @@ this spec deliberately does not build any live reshaping for that case.
   they're never told the table already committed to a different number.
 - **A distinct shape for `maxPlayers = 3`** — 3 and 4 share today's square unchanged;
   only 2 gets a new shape.
-- **The Spine→Tabletop notification architecture** — untouched by this spec either
-  way; whether the current direct Shuffler→Tabletop `seat.joined` call or
-  `spine-in-the-middle`'s planned single-call rework is what's live when this is
-  implemented, `maxPlayers` rides whichever shape that call already has.
+- **The Spine→Tabletop notification architecture** — untouched by this spec; `maxPlayers`
+  rides the existing `joinSpineBestEffort()` call's payload shape.
 - **Per-viewer rotation** and the E/W "sideways" cosmetic quirk — untouched, tracked
   separately, unaffected by the Stack's shape.
 - **Solo Mode** — no table exists, so no max-players question ever arises.
 
 ## Further Notes
 
-- **Version-number collision risk.** `.scratch/spine-in-the-middle/spec.md` also plans
-  to add a field to `seat.joined` (`gameUrl`, landing as v2). Whichever of these two
-  tickets is implemented first claims v2; the other becomes v3. The implementing agent
-  needs to check `contracts/payloads/seat.joined.v*.json` at build time rather than
-  assuming a version number from either spec.
+- **Version number.** `seat.joined` is currently at v1 (`contracts/payloads/seat.joined.v1.json`,
+  which already carries `gameUrl`). The implementing agent should check
+  `contracts/payloads/seat.joined.v*.json` at build time rather than assuming a version
+  number here.
 - **Mountain choice.** This is filed under `spine-gathers-data` (Mountain 2) because
   its most forward-looking piece is the Spine recording a genuinely new administrative
   fact about a table — but the problem it solves ("the Stack is too big in a
