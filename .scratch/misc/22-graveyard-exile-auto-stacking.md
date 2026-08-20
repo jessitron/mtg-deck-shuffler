@@ -4,7 +4,6 @@ Mountain: tabletop-replaces-mural
 Ship: tabletop
 Type: task
 Status: ready-for-agent
-Blocked by: 13 — build command-zone redraw (the snap grid derives from the redrawn graveyard and exile bounds)
 
 **What to build:** Cards entering the graveyard — discarded from the hand, or dragged in
 from outside the zone — land where they land: at the drop point, with no automatic
