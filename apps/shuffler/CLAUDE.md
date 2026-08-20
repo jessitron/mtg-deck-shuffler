@@ -295,6 +295,36 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   — `card.played` sends it (`buildCardPlayedEvent`, `src/port-tabletop/types.ts`);
   the index only decodes to a card's rank in the public decklist, which a
   trust-based table doesn't need guarded.
+- **Inbound: the Shuffler's own Spine SSE subscriber** (`src/port-spine/`, mirroring the
+  Tabletop's `spineSubscriber.ts`/`spineEventDispatch.ts`) is the reverse leg — a card
+  dragged off the Tabletop's canvas onto the library portal reaches the Shuffler as a
+  `card.returned.v1` event. `gameSubscriptionRegistry.ts` holds one live subscription per
+  active game, in-memory, keyed by `gameId`; `GET /game-section/:gameId`
+  (`app.ts`) opens it idempotently whenever the persisted game has a `spineTableId` but no
+  live registry entry — the same single check covers first load, HTMX re-fetch, and "came
+  back after a while" (server restart, new tab). `spineSubscriber.ts` is the same
+  hand-rolled SSE client shape as the Tabletop's (streamed `fetch`, `data: <json>\n\n`
+  frames, the same heartbeat-aware bounded `headersTimeout`/`bodyTimeout` dispatcher — this
+  is the Shuffler's first `undici` dependency, pinned to major version 7 to match what Node
+  vendors internally, same reasoning as the Tabletop's pin). `cardReturnedDispatch.ts` is
+  this ship's **first manual span** — `"sse subscription: card.returned"`,
+  `SpanKind.CONSUMER`, parent context extracted from the envelope's `traceparent`, a
+  `card_return.outcome` attribute on every branch (`applied`/`duplicate`/`invalid`/the
+  `applyGameCommand` outcome kind/`error`), and a nested `SpanKind.INTERNAL` "move returned
+  card to Revealed" span only when the event is actually applied — the fleet's SSE event
+  standard (`apps/tabletop/CLAUDE.md`), now with a second consumer. Dedup is on the
+  envelope's event id, same as the Tabletop's; a redelivered event is a no-op. No
+  reconnect catch-up. `incomingEventValidation.ts` is this ship's first *inbound* contract
+  gate (validates what arrives, mirroring the Tabletop's `contractValidation.ts`) —
+  distinct from `test/port-spine/contractValidation.ts`, which only validates what this
+  ship *sends*. `face` is never read from the payload (the schema blacklists it) — the
+  card keeps whatever `currentFace` it already had. **Teardown (closing the subscription
+  when the last browser tab disconnects) and the browser-facing `GET /game-events/:gameId`
+  push are a later ticket** — this registry entry, once opened, stays open.
+  **Env**: `CONTRACTS_DIR` overrides `incomingEventValidation.ts`'s default
+  `contracts/`-relative path (works locally without it; the Docker image flattens the
+  workspace to `/app`, so the `Dockerfile` sets `CONTRACTS_DIR=/app/contracts` and copies
+  the directory in directly, mirroring the Spine's own `CONTRACTS_DIR`).
 - **Three-ship verification**: `test/verification/verify-tabletop-integration.spec.ts`
   spawns both a real Spine (`bundle exec puma`, `services/spine/`) and the real
   Tabletop (`apps/tabletop/dist` — build it first), proving `card.played` reaches
