@@ -61,7 +61,7 @@ class JoinDeliveryTest < Minitest::Test
   def assert_committed_join
     assert_equal 200, last_response.status
     response = JSON.parse(last_response.body)
-    assert_equal "http://table.example/t/#{response["tableId"]}", response["tableUrl"]
+    assert_equal "http://table.example/t/#{response["tableId"]}?seat=#{response["seatId"]}", response["tableUrl"]
     assert_equal 1, DB[:tables].count
     assert_equal 1, DB[:seats].count
     assert_equal %w[table.created seat.taken seat.joined], DB[:events].order(:seq).select_map(:name)

@@ -119,6 +119,8 @@ repo root — see the root `CLAUDE.md`.
   `apps/tabletop/CLAUDE.md`). `name` keeps its own unique DB constraint (`config/db.rb`),
   so the existing `NameTaken` retry in `join_table` already covers the (vanishing) risk
   of an id collision — it can only happen alongside a name collision, which raises first.
+  `table_url` also appends `?seat=<seatId>` (the seat just minted for this join) so the URL
+  handed to the Shuffler already identifies which seat the joining player holds.
   `Event#as_envelope`'s `tableId` carries this same id verbatim, never rewritten on the
   way out to the Tabletop (see `contracts/envelope.v1.json`'s `tableId` description).
 

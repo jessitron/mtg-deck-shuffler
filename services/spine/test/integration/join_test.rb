@@ -18,7 +18,7 @@ class JoinTest < Minitest::Test
     seat = DB[:seats].first
     assert_match(/\Arich-table-[0-9a-f]{8}\z/, response["tableId"])
     assert_equal({ "tableId" => response["tableId"], "seatId" => seat[:id], "seatNumber" => 1,
-      "tableUrl" => "http://table.example/t/#{response["tableId"]}" }, response)
+      "tableUrl" => "http://table.example/t/#{response["tableId"]}?seat=#{seat[:id]}" }, response)
 
     assert_equal 1, DB[:tables].count
     assert_equal 1, DB[:seats].count
@@ -44,6 +44,20 @@ class JoinTest < Minitest::Test
     expected["traceparent"] = outbound["traceparent"] if outbound.key?("traceparent")
     assert_equal expected, outbound
     assert_trace_context(request[:headers]["traceparent"], outbound["traceparent"])
+  ensure
+    tabletop&.stop
+  end
+
+  def test_table_url_carries_the_minted_seat_id_as_a_query_param
+    tabletop = FakeTabletopServer.new
+    submission = rich_join
+
+    with_tabletop(tabletop) { post_join(submission) }
+
+    response = JSON.parse(last_response.body)
+    seat = DB[:seats].first
+    assert_equal "http://table.example/t/#{response["tableId"]}?seat=#{seat[:id]}", response["tableUrl"]
+    assert_equal seat[:id], response["seatId"]
   ensure
     tabletop&.stop
   end
