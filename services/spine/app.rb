@@ -134,7 +134,7 @@ module Spine
           tableId: outcome[:table_id],
           seatId: outcome[:seat_id],
           seatNumber: outcome[:table_position],
-          tableUrl: table_url(outcome[:table_id])
+          tableUrl: table_url(outcome[:table_id], outcome[:seat_id])
         )
       rescue JSON::ParserError, KeyError => e
         mark_span_failed("join.result", "invalid_input", e)
@@ -198,9 +198,9 @@ module Spine
       outcome[:created] ? "created" : "joined"
     end
 
-    def table_url(table_id)
+    def table_url(table_id, seat_id)
       base = ENV.fetch("TABLETOP_PUBLIC_URL", "http://localhost:5180").sub(%r{/+\z}, "")
-      "#{base}/t/#{CGI.escapeURIComponent(table_id)}"
+      "#{base}/t/#{CGI.escapeURIComponent(table_id)}?seat=#{CGI.escapeURIComponent(seat_id)}"
     end
   end
 end
