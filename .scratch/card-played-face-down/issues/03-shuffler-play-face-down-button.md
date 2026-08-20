@@ -34,33 +34,44 @@ Either way, moves the card to `Table` in the Shuffler's own game state exactly l
   class client-side plus a body flag, whichever reads more clearly in
   `formatModalActionButton`'s signature. Don't introduce a second HTTP route — see next
   point.
-- **Route**: `src/app.ts`, `POST /play-card/:gameId/:gameCardIndex` (~line 1334). The
+- **Route**: `src/app.ts`, `POST /play-card/:gameId/:gameCardIndex` (~line 1373). The
   mutate callback (`game.playCard(...)`) is unaffected — concealment is not domain
-  state. The pre-mutate callback (~lines 1357-1364) currently always calls
-  `sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay), "play")`; when
-  face-down was requested, this needs to build and send a `card.played-face-down` event
-  instead. `sendCardBeforeMutate` (~line 117) and `sendCardToTableFirst`
-  (`src/port-tabletop/sendToTable.ts:11-35`) currently hard-code
-  `buildCardPlayedEvent`/the `card.played` shape — both need a way to pick the
-  face-down variant. Smallest change: give `sendCardBeforeMutate`/`sendCardToTableFirst`
-  a `faceDown: boolean` parameter that selects between `buildCardPlayedEvent` and a new
-  `buildCardPlayedFaceDownEvent` (see next point) before calling
-  `tabletopPort.sendCardToTable`.
-- **Event builder**: `src/port-tabletop/types.ts`. Add `CardPlayedFaceDownPayload`
-  (identical fields to `CardPlayedPayload`, lines 35-48) and
-  `buildCardPlayedFaceDownEvent(...)` (same signature and body as `buildCardPlayedEvent`,
-  lines 52-86, except `name: "card.played-face-down"` and `origin:
-  "shuffler.playCardFaceDownSubmit"` or similar — keep `origin` distinct so Honeycomb
-  traces can tell the two apart). Per spec.md's Implementation Decisions, this is a
-  deliberate duplicate, not a shared/parameterized function — the two kinds are meant to
-  be free to diverge later. `TabletopPort.sendCardToTable` (line 178) already takes any
-  `CardPlayedEvent`-shaped envelope, so no port interface change is needed as long as the
-  new payload type is folded into (or unioned with) whatever type that method accepts —
-  check whether `CardPlayedEvent`'s generic needs widening to
-  `EventEnvelope<CardPlayedPayload | CardPlayedFaceDownPayload>` or a shared alias.
-- **Spine send**: `sendCardPlayedToSpineBestEffort` (called from `sendCardBeforeMutate`)
-  — check whether it also hard-codes anything about `card.played`'s shape/name, or just
-  forwards whatever envelope it's given. If it's shape-agnostic, no change needed there.
+  state. The `beforeMutate` callback passed to `applyGameCommand` (~lines 1395-1401)
+  currently always calls `sendCardBeforeMutate(game, cardToPlay,
+  zoneHintForPlay(cardToPlay), sessionId)` (`sendCardBeforeMutate`, ~line 129, which
+  forwards to `sendCardPlayedToSpineBestEffort`); when face-down was requested, this
+  needs to send a `card.played-face-down` event to the Spine instead. Both
+  `sendCardBeforeMutate` and `sendCardPlayedToSpineBestEffort`
+  (`src/port-spine/sendToSpine.ts`) currently hard-code `buildCardPlayedEvent`/the
+  `card.played` shape — both need a way to pick the face-down variant. Smallest change:
+  give `sendCardBeforeMutate`/`sendCardPlayedToSpineBestEffort` a `faceDown: boolean`
+  parameter that selects between `buildCardPlayedEvent` and a new
+  `buildCardPlayedFaceDownEvent` (see next point) before calling `spinePort.sendEvent`.
+  Note this call runs best-effort and before the mutate/persist step but never blocks or
+  fails it — `sendCardPlayedToSpineBestEffort` swallows its own errors (span attribute +
+  `log.warn`), it never throws, so there's no failure path here to design around.
+- **Event builder**: `src/port-tabletop/types.ts` (this ship's shared event-envelope
+  types live here — nothing Tabletop-gateway-specific remains in this directory, just the
+  `card.played`-family payload shapes both the Spine send and the Spine-join decoration
+  build against). Add `CardPlayedFaceDownPayload` (identical fields to
+  `CardPlayedPayload`, lines 35-48) and `buildCardPlayedFaceDownEvent(...)` (same
+  signature and body as `buildCardPlayedEvent`, lines 52-86, except `name:
+  "card.played-face-down"` and `origin: "shuffler.playCardFaceDownSubmit"` or similar —
+  keep `origin` distinct so Honeycomb traces can tell the two apart). Per spec.md's
+  Implementation Decisions, this is a deliberate duplicate, not a shared/parameterized
+  function — the two kinds are meant to be free to diverge later. `SpinePort.sendEvent`
+  (`src/port-spine/types.ts`) already takes any `EventEnvelope`-shaped payload, so no
+  port interface change is needed as long as the new payload type is folded into (or
+  unioned with) whatever type `sendCardPlayedToSpineBestEffort` accepts — check whether
+  `CardPlayedEvent`'s generic needs widening to `EventEnvelope<CardPlayedPayload |
+  CardPlayedFaceDownPayload>` or a shared alias.
+- **Spine send**: `sendCardPlayedToSpineBestEffort` (`src/port-spine/sendToSpine.ts`,
+  called from `sendCardBeforeMutate`) builds the envelope via `buildCardPlayedEvent` and
+  posts it through `spinePort.sendEvent(tableId, event)` — it's the one spot that
+  currently hard-codes `card.played`'s builder; this is exactly the hard-code that needs
+  the `faceDown` branch described above. `HttpSpineGateway`/`FakeSpineGateway`
+  (`src/port-spine/`) implementing `SpinePort` are themselves shape-agnostic — they just
+  forward whatever envelope they're given — so neither needs a change.
 - **Clipboard (solo mode)**: `public/game.js`. The existing `play-button` class handling
   (`htmx:beforeRequest` listener, ~lines 97-119) reads `button.dataset.cardId` /
   `button.dataset.currentFace` and calls `copyCardToClipboard(cardId, face)`, which
@@ -82,7 +93,7 @@ Either way, moves the card to `Table` in the Shuffler's own game state exactly l
   `buildCardPlayedFaceDownEvent` test file/section — same assertions as the existing
   suite, `name: "card.played-face-down"`.
 - A Jest test on `POST /play-card` asserting that a face-down request makes
-  `FakeTabletopGateway` record an envelope named `card.played-face-down`, and a plain
+  `FakeSpineGateway` record an envelope named `card.played-face-down`, and a plain
   request still records `card.played` (regression guard).
 - Playwright: the hand card modal shows a "Play Face Down" button; clicking it in solo
   mode triggers the clipboard-copy code path (however the existing `play-button` clipboard

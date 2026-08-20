@@ -50,13 +50,14 @@ player sits down.
   out of the Shuffler's `Table` location, including undo of a play or discard — now tells
   the table, and the shape poofs (attachments stay, detached).
 
-**The plumbing that carries it:** the Tabletop learns, per seat, where its Shuffler lives —
-two Shuffler-minted URLs ride the seating message. One is public (the library furniture
-becomes a clickable link back to the game); one is a server-to-server **event inbox** that
-speaks the `contracts/` envelope, so pointing the Tabletop at the Spine later is a URL
-swap, not a redesign. Contract validation becomes real on every receiver this work
-touches. Send-then-commit in both directions: neither side commits its state change until
-the other confirms delivery.
+**The plumbing that carries it:** the return direction routes through the Spine, the same
+way `card.played` does — the Shuffler opens its own Spine SSE subscription and receives
+`card.returned` there, matching the Tabletop's existing subscriber
+(`.scratch/shuffler-spine-sse-subscriber/`). The library furniture's public link back to
+the game still rides `gameUrl`, minted by the Shuffler and carried on `seat.joined`.
+Contract validation becomes real on every receiver this work touches. Delivery is
+best-effort in both directions, matching `card.played`: a down or unreachable receiver
+never blocks the sender's own state change.
 
 ## User Stories
 
@@ -129,42 +130,30 @@ the other confirms delivery.
 
 ### Transport and channel (ticket 01)
 
-- **Transport stays direct** Shuffler↔Tabletop for this mountain. Every message conforms
-  to the `contracts/` envelope (`name.vN`, validated payload) so re-pointing at the Spine
-  later changes a URL, not the vocabulary.
-- **`seat.joined` grows two Shuffler-minted URL fields:**
-  - `gameUrl` — public, player-clickable address of the game; becomes the library
-    furniture's link target.
-  - `eventsUrl` — where the Tabletop *server* POSTs events back; the Shuffler mints it
-    from the environment-appropriate base (localhost in dev, cluster-internal name in
-    prod).
-  - `gameId` may cross the boundary freely, same as `gameCardIndex` — there's no
-    boundary guard to reason about here.
-- **The Tabletop stores both URLs per seat**, in memory, never composes URLs, and needs
-  zero Shuffler config. `seat.joined` replay on start/restart re-establishes the mapping
-  after a Tabletop redeploy.
-- **`eventsUrl` is a generic event inbox**, not a card-return endpoint: contracts-enveloped
-  events dispatched on `name`, unknown name/version rejected loudly. Today it hears
-  exactly one kind (`card.returned.v1`).
-- **The table name IS the id.** No Spine-minted UUID exists; the return channel doesn't
-  pretend otherwise.
-- **Send-then-commit, mirrored both directions.** Tabletop→Shuffler: the card's shape is
-  not deleted until the Shuffler returns 2xx — no 2xx, no poof; on failure the card
-  visibly stays. This mirrors the Shuffler's existing send-to-table-first behavior.
-- **No guard on the inbox.** Nothing in this app has logins; a capability-URL scheme was
-  considered and rejected.
-- The Shuffler has no inbound path addressed by `instanceId` today; the inbox handler
-  must map `card.instanceId → GameCard` itself.
+- **Transport routes through the Spine**, matching `card.played`. The Shuffler opens its
+  own Spine SSE subscription (`.scratch/shuffler-spine-sse-subscriber/`) and receives
+  `card.returned` there; the Tabletop POSTs `card.returned` to the Spine's generic
+  `POST /tables/:tableId/events`, the same send shape `card.played` already uses. Every
+  message conforms to the `contracts/` envelope (`name.vN`, validated payload).
+- **`seat.joined` grows one Shuffler-minted field:** `gameUrl` — public, player-clickable
+  address of the game; becomes the library furniture's link target.
+  `gameId` may cross the boundary freely, same as `gameCardIndex` — there's no
+  boundary guard to reason about here.
+- **`tableId` is the Spine's real table id** (`<name-slug>-<8-hex-random>`, minted at table
+  creation — `services/spine/CLAUDE.md`), same as every other Spine event; the return
+  channel needs no id scheme of its own.
+- **Best-effort, mirrored both directions**, matching `card.played`: neither side blocks
+  its own state change on the other side's delivery. A down or unreachable Spine/receiver
+  is a span attribute + `log.warn`, never a reason to fail the gesture.
+- The Shuffler has no inbound path addressed by `instanceId` today; the Spine subscriber's
+  handler must map `card.instanceId → GameCard` itself.
 
-### Envelope amendments (`envelope.v1`, amended in place — ticket 02)
+### Envelope amendments (`envelope.v1`)
 
-Free exactly now, with zero conforming producers or consumers; never again after this
-ships.
-
-- `tableId` drops `format: uuid`; pre-Spine, the table name is the id — one value, both
-  roles, 1-1. Description rewritten to say so.
-- `initiator` becomes the object `{ seatId?, playerName }`, matching what the fleet
-  already speaks. `seatId` optional (a spectator has none).
+`contracts/envelope.v1.json` already carries a real `tableId` (the Spine's minted id, not
+a UUID-formatted field) and an `initiator` object (`{ seatId?, sessionId?, playerName }`,
+`playerName` required) — no amendment needed here; this section's earlier plan already
+landed as part of the Spine integration.
 
 ### Event kinds (ticket 02)
 
@@ -246,8 +235,8 @@ ships.
 - **Owner-gated: only your own library.** Same gate shape as the command zone's, sharing
   the `owner` card-prop dependency from table-layout ticket 18. Rationale: the return
   channel lands the card in the *owner's* Reveal zone, so a foreign card has nowhere to go.
-- Send-then-commit sequences the gesture: swallow animation may play, but the shape's
-  deletion is committed only on the Shuffler's 2xx; on failure the card visibly stays.
+- The swallow animation and the shape's deletion happen together, best-effort: the send
+  to the Spine never blocks the gesture.
 - Mechanics constraints learned from the prototype (they are decisions about *how*, made
   by tldraw's behavior):
   - The translate-end hook fires once per moving shape in a multi-select, and tldraw
@@ -290,8 +279,8 @@ fake gateways in both ships' suites.
    seam's behavior, not a separate unit.
 2. **GameState transitions** (Shuffler unit tests, existing suite): any transition out of
    `Table` produces the outbound notification; undo of play/discard produces the undo
-   events; send-then-commit ordering (no 2xx from the table → no location change is
-   committed… and mirrored on the other side). Prior art: the existing GameState and
+   events; the send to the Spine is best-effort and never blocks the location change,
+   mirrored on the other side. Prior art: the existing GameState and
    port-tabletop test suites, including the event-builder tests
    (`cardPlayedEvent.test.ts` pattern for the `backImageUrl`-from-`twoFaced` treatment,
    which the commanders payload must repeat).
