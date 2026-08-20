@@ -6,6 +6,8 @@ Status: ready-for-agent
 
 ## Problem Statement
 
+Events on the tabletop affect the shuffler, and vice versa. The Spine is in charge of the events, and it needs to notify both the other ships of what's happening. Currently the tabletop opens an SSE stream and listens for events (such as card.played) that the spine sends. The shuffler needs that too. When this is done, the tabletop will be able to return a card to the shuffler (the reverse of card.played, pretty much).
+
 `.scratch/spine-in-the-middle/map.md` names the card-return channel — a player dragging a
 card off the Tabletop's canvas onto the library portal, which should move that card into
 the Shuffler's Revealed zone — as fully vocabulary-specced but never implemented. The
@@ -28,9 +30,7 @@ implementation.
 
 ## Solution
 
-Route the card-return channel through the Spine from day one, superseding the earlier
-direct-POST `eventsUrl` design (`spine-in-the-middle/map.md`'s 2026-08-11 decision that
-card-return reroutes through the Spine). Build both legs:
+Route the card-return channel through the Spine. Build both legs:
 
 1. **Tabletop → Spine**: when a player drags a card onto the library portal, the Tabletop
    POSTs a `card.returned.v1` event to the Spine's existing generic
