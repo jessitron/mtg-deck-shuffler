@@ -242,18 +242,6 @@ furniture's link target and never composes or parses it. The Shuffler's integer 
 never crosses the table boundary — the id is the Shuffler's private business; the URL is
 the address. (Decided 2026-08-08, cards-come-and-go ticket 01.)
 
-Events URL (Shuffler → contract): where the Tabletop *server* POSTs events back
-(`eventsUrl` on `seat.joined`) — the address of that seat's Event Inbox. Minted by the
-Shuffler from whatever base suits the environment (localhost in dev, cluster-internal
-service name in prod). Re-pointing it at the Spine later changes nothing on the Tabletop.
-(Decided 2026-08-08, cards-come-and-go ticket 01.)
-
-Event Inbox: a generic endpoint that receives `contracts/`-enveloped events, dispatches
-on `name`, and rejects unknown name/version loudly. The Tabletop has one per table; the
-Shuffler grows one per game (its first inbound machine-to-machine surface, hearing only
-the events it cares about). No guard — nothing in this app has logins. (Decided
-2026-08-08, cards-come-and-go ticket 01.)
-
 Spectator: someone at a Table without a Seat. Sees the public projection of the event log: what's happening, the commentary, hand counts but never hands. In some modes, may comment in chat.
 
 Event Log: the append-only record of everything that happened at a Table. One per table. Never rewritten — see Supersession.

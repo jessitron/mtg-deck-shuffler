@@ -157,11 +157,9 @@ Charted with `/wayfinder`, one at a time. Each map's own `map.md` links back to 
 furniture that behaves, and rebuilding the shape layer underneath finished geometry is the
 expensive way round. Several of map 2's tickets (deck name on the seat label, sleeve and playmat
 picker) genuinely don't touch the shape architecture and can be worked in parallel if you want
-motion. **Map 3 depends on Map 5**: several of map 3's remaining tickets need contract payloads
-(`card.returned.v1`, a discard-specific schema, the `eventsUrl` inbox shape) that only map 5
-designs, and map 5 hasn't reached them yet. **Map 5 in turn depends on the Spine being real** —
-Mountain 2 — since map 5's undesigned work (the Tabletop→Spine sender, the rest of the payload
-vocabulary) needs something real on the other end of the wire. Map 4 has no charted dependency yet.
+motion. Several of map 3's remaining tickets need contract payloads (`card.returned.v1`, a
+discard-specific schema) that route through the Spine — see `.scratch/tabletop-cards-come-and-go/`
+and `.scratch/shuffler-spine-sse-subscriber/`. Map 4 has no charted dependency yet.
 
 **Parked tickets** live at `.scratch/tabletop-replaces-mural/parked/`: written work that belongs
 to a map that doesn't exist yet. It sits outside any `issues/` directory so no frontier scan
