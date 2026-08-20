@@ -159,7 +159,7 @@ module Spine
         raise SeatOccupied, "table position #{table_position} at table #{name.inspect} is already taken"
       end
 
-      seat_id = SecureRandom.uuid
+      seat_id = "#{TableSlug.name_slug(player_name)}-#{SecureRandom.hex(4)}"
       initiator = { "seatId" => seat_id, "playerName" => player_name }
       common = {
         "tableId" => id,

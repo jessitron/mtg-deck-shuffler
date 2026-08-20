@@ -533,6 +533,14 @@ Spine-minted `seat.id`.** See the `POST /join` wiring-table row above; `Table#pr
 `Table.join!` (`services/spine/models/table.rb`) stay free of tracing calls on purpose, per the
 house rule of stamping in the HTTP layer, not the model.
 
+**`seat.id`'s shape (seat-session-attribution ticket 03):** `Table#prepare_seat`
+(`services/spine/models/table.rb`) mints it as `"#{TableSlug.name_slug(player_name)}-#{SecureRandom.hex(4)}"`
+— `<player-name-slug>-<8hex>` — reusing `Spine::TableSlug.name_slug` (`services/spine/lib/table_slug.rb`)
+rather than a bare `SecureRandom.uuid`. This mirrors `table.id`'s own shape from `TableSlug.mint`
+(`<table-name-slug>-<8hex>`, see the route-param note above) — both ids are now
+`<name-slug>-<8hex>`, just slugging a different name. No format was documented here before this
+change; a Honeycomb query filtering `seat.id` can now expect this shape rather than a bare UUID.
+
 ### session.id: a fresh per-page-load id, not per-tab
 
 `initiator.sessionId` (contracts/envelope.v1.json, seat-session-attribution ticket 04) is the
