@@ -408,7 +408,14 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `tracer.startActiveSpan("...", { kind: SpanKind.INTERNAL, attributes: {...} }, async (span) =>
   { try {...} finally { span.end(); } })`. The dedup/rejection early-returns and the final
   `entry.seenEventIds.add(...)` stay **outside** that span, touching only the ambient request
-  span via `trace.getActiveSpan()?.setAttribute(...)`. A new handler should copy this shape:
+  span via `trace.getActiveSpan()?.setAttribute(...)`. **`seatJoined.ts`'s five rejection
+  early-returns now each stamp a `seat_joined.rejected` reason plus whatever inputs explain it**
+  (2026-08-20) — `table-name-required` gets the raw route param, `invalid-event` gets the
+  validator's error and the raw `req.body`, `tableid-mismatch`/`seatid-missing`/`table-full` get
+  `table.slug`/`event.id` plus their own specifics (`envelope.tableId`, `player.name`,
+  `seat.id`+`room.seats`+`room.max_seats` respectively) — this is the reference shape for
+  enriching a single-attribute rejection stamp anywhere else in the fleet: reason *and* inputs,
+  not just the reason. A new handler should copy this shape:
   identifying attributes re-stamped on the child span's initial `attributes`, result attributes
   set just before `span.end()`, guards left off the manual span entirely. **Also stamp `table.name`
   via `tableNameFromSlug(tableName)` (`apps/tabletop/src/shared/slugify.ts`), never the raw route
@@ -429,6 +436,14 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   span name. Filter by tldraw's `source` option, not by re-deriving "was this me." If the new event
   can fire from a diff tldraw writes repeatedly during a drag, it needs the same debounce the
   generic fallback uses (`GENERIC_SETTLE_MS` = 300ms per shape id).
+- **`apps/tabletop/src/server/spineEventDispatch.ts`'s catch block still calls
+  `span.recordException(error as Error)`**: this is pre-existing Invariant-2 drift (`recordException`
+  is `addEvent` under the hood), noted but deliberately left untouched by the seatJoined.ts
+  rejection-attributes change (2026-08-20) since it was out of scope. It predates
+  `cardReturnedDispatch.ts`'s "deliberately no `span.recordException`" precedent and won't show up
+  in the `grep -rn "addEvent"` self-check since it doesn't say `addEvent` literally. Whoever next
+  touches this file: drop the call, the following `log.error(...)` already carries the exception
+  attributes on the same trace.
 - **Callbacks and timers**: they outlive the span that scheduled them. AsyncLocalStorage still
   hands you the *context*, so `getActiveSpan()` returns an **ended** span — `addEvent` throws there
   rather than no-op'ing. Use a log; it still carries the trace id, so it lands on the trace anyway.

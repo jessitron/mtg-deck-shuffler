@@ -254,12 +254,23 @@ below. `card_return.outcome` is stamped on every branch: `applied`, `duplicate`,
 `applyGameCommand` outcome kind (`not-found`/`not-active`/`version-conflict`), or `error` for a
 thrown exception.
 
+**Known Invariant-2 drift, not yet fixed**: `apps/tabletop/src/server/spineEventDispatch.ts`'s
+catch block calls `span.recordException(error as Error)` before `log.error(...)` —
+`recordException` is `addEvent` under the hood, the exact thing Invariant 2 forbids, and it
+predates the "deliberately no `span.recordException`" line above (which describes
+`cardReturnedDispatch.ts`, not this file). Flagged here for whoever next touches
+`spineEventDispatch.ts`'s catch block: drop the `recordException` call — the following
+`log.error("spine sse: card.played dispatch failed", ..., error)` already carries
+`exception.type`/`.message`/`.stacktrace` and lands on the same trace, so nothing is lost by
+removing it. `grep -rn "addEvent" apps/*/src services/spine` (the Invariant-2 self-check) does
+not catch this because `recordException` doesn't literally say `addEvent`.
+
 **The Tabletop's server has a repeated shape for its two SCAFFOLDING event handlers**
 (`handleSeatJoined` in `seatJoined.ts`, `handleCardArrival` in `cardArrival.ts`): parse and
 validate the envelope, stamp identifying attributes onto the **ambient** request span
 (`trace.getActiveSpan()?.setAttributes(...)`), run the dedup/rejection early-returns *outside*
-any manual span (each just sets one attribute on the ambient span and returns), then wrap only
-the actual placement/furniture-creation work — the part that touches `entry.room.updateStore` —
+any manual span (each sets one or more attributes on the ambient span and returns — see below),
+then wrap only the actual placement/furniture-creation work — the part that touches `entry.room.updateStore` —
 in its own child span via `tracer.startActiveSpan(name, { kind: SpanKind.INTERNAL, attributes:
 {...} }, async (span) => { try { ... } finally { span.end(); } })`. Initial attributes on the
 child span re-stamp the same identifying fields already on the ambient span (`event.id`,
@@ -272,6 +283,19 @@ the pattern for a third such handler, not a coincidence to re-derive. **`seatJoi
 stamps `event.name: envelope.name`** next to `event.id`, on both the ambient and the "add player
 furniture" child span (2026-08-19) — `cardArrival.ts` does **not** yet have the matching stamp;
 that's a known gap, not a signal the two handlers diverged on purpose.
+
+**`seatJoined.ts`'s five rejection early-returns each carry a `seat_joined.rejected` reason plus
+the offending inputs, not just the reason string** (2026-08-20) — matching the richer shape
+`"seat_joined.deduped"` already used one attribute for, but going further: `table-name-required`
+(the raw, possibly-empty `req.params.tableName`), `invalid-event` (the validator's error message
+and the raw `req.body`, JSON-stringified — the request never produced a usable envelope, so
+there's no `table.slug`/`event.id` yet to stamp instead), `tableid-mismatch` (`table.slug`,
+`envelope.tableId`, `event.id`), `seatid-missing` (`table.slug`, `event.id`, `player.name`), and
+`table-full` (`table.slug`, `event.id`, `seat.id`, `room.seats`, `room.max_seats`). All via
+`trace.getActiveSpan()?.setAttributes({...})` on the ambient span — no manual span, consistent
+with the rest of this paragraph. This is the reference shape for enriching any other
+single-attribute rejection stamp in the fleet: add the reason *and* whatever inputs explain it,
+not just the reason.
 
 **`usePhysicsAnnouncements.ts` generalizes the same pattern from one span to a whole vocabulary.**
 Where `useCardArrivalSpans.ts` is `store.listen()` → `inSpan()` for exactly one named event, the
