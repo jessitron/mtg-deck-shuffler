@@ -25,16 +25,41 @@ said otherwise was a corrected error; don't reintroduce it.
 
 **Status:** ready-for-agent
 
-- [ ] `Table#prepare_seat` mints seat ids shaped `<player-name-slug>-<8hex>`, not a bare
+- [x] `Table#prepare_seat` mints seat ids shaped `<player-name-slug>-<8hex>`, not a bare
       UUID
-- [ ] Slugification is shared with (not duplicated from) `TableSlug.mint`'s `name_slug`
+- [x] Slugification is shared with (not duplicated from) `TableSlug.mint`'s `name_slug`
       helper
-- [ ] `services/spine/test/models/table_test.rb`'s seat.taken/seat.joined event-shape test
+- [x] `services/spine/test/models/table_test.rb`'s seat.taken/seat.joined event-shape test
       asserts the new format (`<slug>-<8hex>`, not a bare UUID)
-- [ ] `services/spine/test/test_helper.rb`'s envelope-building helpers updated if they
+- [x] `services/spine/test/test_helper.rb`'s envelope-building helpers updated if they
       construct seat ids
-- [ ] Contract-level test (Shuffler side, `apps/shuffler/test/port-spine/
+- [x] Contract-level test (Shuffler side, `apps/shuffler/test/port-spine/
       cardPlayedContract.test.ts`, mirroring the `544c932b` fix) still validates with the
       new format
 
 ## Comments
+
+`Table#prepare_seat` (`services/spine/models/table.rb`) now mints
+`seat_id = "#{TableSlug.name_slug(player_name)}-#{SecureRandom.hex(4)}"`, reusing
+`Spine::TableSlug.name_slug` (already required by `table.rb` for `TableSlug.mint`) rather
+than duplicating slugification. Added a new test to `table_test.rb`,
+`test_take_seat_mints_a_seat_id_shaped_like_a_player_name_slug_plus_hex_suffix`, asserting
+`seat.id` matches `/\Ajess-[0-9a-f]{8}\z/`; confirmed it failed against the old bare-UUID
+mint before the change, and passes after.
+
+`test_helper.rb` needed no change — its `SecureRandom.uuid` usages build arbitrary
+envelope/initiator values for tests unrelated to `prepare_seat`'s minting (e.g. gameId,
+event id, an `initiator.seatId` used only to check that `append_event!` preserves
+whatever value it's given), not seat ids constructed to mirror the new format.
+
+The Shuffler's `cardPlayedContract.test.ts` needed no change either: `FakeSpineGateway`
+already mints its own `fake-seat-<tableId>-<seatNumber>` seatId independent of the real
+Spine, and `contracts/payloads/card.played.v1.json`'s `seatId` is a bare non-empty-string
+check with no format constraint — both already validate against the new shape.
+Full suites green: Spine (`bin/test`, 85 runs/238 assertions) and Shuffler
+(`npx jest`, 43 suites/364 tests), plus `npm run build`.
+
+Consulted `fleet-is-observable-context` before implementing (seat.id feeds a Honeycomb
+span attribute per the game.id/seat.id correlation work) — no format contract existed to
+violate, and the change is a legibility upside for that owner. Ran
+`fleet-is-observable-update` after landing to record the new shape.

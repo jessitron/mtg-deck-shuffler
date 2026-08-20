@@ -55,6 +55,13 @@ class TableTest < Minitest::Test
     assert_equal "Jess", payload["playerName"]
   end
 
+  def test_take_seat_mints_a_seat_id_shaped_like_a_player_name_slug_plus_hex_suffix
+    table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
+    seat = take_seat(table, player_name: "Jess")
+
+    assert_match(/\Ajess-[0-9a-f]{8}\z/, seat.id)
+  end
+
   def test_taking_an_already_occupied_seat_is_rejected
     table = Spine::Table.create_with_event!(name: "kitchen table", creator: "Jess")
     take_seat(table, player_name: "Jess", table_position: 2)
