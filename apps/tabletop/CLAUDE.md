@@ -19,49 +19,45 @@ yourself, and never settle for a symptomatic fix here when the real fix is elsew
 ## What this is
 
 Vite + React + tldraw synced canvas with an Express/ws sync server.
-`/t/:tableSlug` is a shared board. One SCAFFOLDING endpoint (for the Spine's
-future feed) places things on it: `POST /api/tables/:tableSlug/events`
-(`seat.joined`, `src/server/seatJoined.ts`) draws a seat's player area at
-Shuffle Up. `card.played` has no HTTP entry point anymore — see the SSE
-subscription below.
+`/t/:tableSlug` is a shared board. The Spine administers seat joins: it POSTs
+`POST /api/tables/:tableSlug/events` (`seat.joined`, `src/server/seatJoined.ts`) to draw a
+seat's player area at Shuffle Up. `card.played` has no HTTP entry point — it arrives only
+over the SSE subscription below.
 
-**The server opens one live Spine SSE subscription per room** (tabletop-spine-sse-subscriber
-ticket 01), against `GET /tables/:tableId/events/stream`. `handleSeatJoined` opens it the first
+**The server opens one live Spine SSE subscription per room**, against
+`GET /tables/:tableId/events/stream`. `handleSeatJoined` opens it the first
 time a room hears `seat.joined` — the room's Spine `tableId` and the subscription handle live on
 `RoomEntry` (`rooms.ts`); a second seat joining the same room is a no-op, since the room already
 has one. `spineSubscriber.ts` is a small hand-rolled SSE client (streamed `fetch`, parsing the
 Spine's `data: <json>\n\n` frames — no `EventSource`, since one server process holds many
 concurrent per-table streams) that reconnects on its own after a drop, with no catch-up/replay of
 missed events. **The fetch's `dispatcher` is a per-subscription `undici.Agent` with bounded
-`headersTimeout`/`bodyTimeout`** (2026-08-19, `createHeartbeatAwareDispatcher`) — Node's global
-`fetch` defaults both to 300000ms, which is far too patient for a genuine hang, so a hung Spine
-went undetected; the fix isn't disabling the timeouts, it's shortening them, which only works
-because the Spine now sends a `: heartbeat\n\n` comment frame immediately on connect and every
-`HEARTBEAT_INTERVAL_SECONDS` while quiet (`services/spine/lib/sse_stream.rb`) — this parser
-already ignores any frame without a `data: ` line, so heartbeats needed no parsing change, only
-the timeout values. `undici` is pinned to major version 7 in `package.json`
-(`Agent`/`Dispatcher` aren't Node built-ins) — it **must** match `process.versions.undici` for
-whatever Node version is running; undici 8 redesigned the Dispatcher's internal handler interface
-and silently breaks every `fetch()` call through a custom dispatcher. `spineEventDispatch.ts`
-inspects each received envelope's `name`; only
+`headersTimeout`/`bodyTimeout`** (`createHeartbeatAwareDispatcher`) — Node's global
+`fetch` defaults both to 300000ms, far too patient for a genuine hang, so a hung Spine would go
+undetected; shortening them only works because the Spine sends a `: heartbeat\n\n` comment frame
+immediately on connect and every `HEARTBEAT_INTERVAL_SECONDS` while quiet
+(`services/spine/lib/sse_stream.rb`) — this parser ignores any frame without a `data: ` line, so
+heartbeats need no parsing change, only bounded timeout values. `undici` is pinned to major
+version 7 in `package.json` (`Agent`/`Dispatcher` aren't Node built-ins) — it **must** match
+`process.versions.undici` for whatever Node version is running; undici 8 redesigned the
+Dispatcher's internal handler interface and silently breaks every `fetch()` call through a custom
+dispatcher. `spineEventDispatch.ts` inspects each received envelope's `name`; only
 `card.played` has a consumer today (routed to `cardArrival.ts`'s `applyCardArrival` — dedup,
 placement). Every other kind on the stream (`seat.taken`,
 `table.created`, …) is ignored. Each dispatched event continues the trace from the broadcast
 envelope's `traceparent` (injected fresh at publish time by the Spine's `Table#broadcast`) as a
 CHILD span, not an unlinked one. **Env**: `SPINE_URL`, default `http://localhost:4600` (same
 variable and default as the Shuffler's — see its `CLAUDE.md`). **This SSE subscription is the
-only way `card.played` reaches this ship** (`tabletop-spine-sse-subscriber` ticket 02,
-2026-08-18): the Shuffler's old direct POST to `/api/tables/:tableSlug/cards`, and this ship's
-`handleCardArrival` HTTP route that received it, are both gone. **`applyCardArrival` no longer
-self-heals a missing player area** — a `card.played` for a seat that hasn't `seat.joined` yet is
+only way `card.played` reaches this ship.** `applyCardArrival` does not
+self-heal a missing player area — a `card.played` for a seat that hasn't `seat.joined` yet is
 an ordering bug, not something to paper over by minting furniture (playmat, library, graveyard…)
 from whatever scraps the payload happens to carry. It's rejected (`{status: "rejected", reason:
 "seat-not-joined"}`) and logged as an error (`spineEventDispatch.ts`) instead of placed.
 `src/server/testSeedRoute.ts` is a **test-only** HTTP seam (only mounted when
-`ENABLE_TEST_SEED_ROUTE=true`, at `POST /test/tables/:tableSlug/cards` — a different path, on
-purpose, from the retired production route) that calls `applyCardArrival` directly, for specs
-and `cardArrival.test.ts` that drive a server spawned as its own process and have no live Spine
-to seed a card through. Never mounted without that env var, and never in production.
+`ENABLE_TEST_SEED_ROUTE=true`, at `POST /test/tables/:tableSlug/cards`) that calls
+`applyCardArrival` directly, for specs and `cardArrival.test.ts` that drive a server spawned as
+its own process and have no live Spine to seed a card through. Never mounted without that env
+var, and never in production.
 
 **`tableSlug` is an opaque literal string, not a lookup key — it *is* the Spine's real
 table id**, not a display name derived from one (`<name-slug>-<8-hex-random>`, minted
@@ -70,10 +66,9 @@ but not guessable from the bare name alone. Nothing on this ship resolves an id 
 anything — `getOrCreateRoom(slug)` (`rooms.ts`) uses the whole string as the
 room-registry key, and the `/connect/:roomSlug` websocket upgrade does the same, so the
 browser, the Spine's event POSTs, and the room registry only ever need to agree on the
-same opaque string, letter for letter. `seatJoined.ts`/`cardArrival.ts` still validate
+same opaque string, letter for letter. `seatJoined.ts`/`cardArrival.ts` validate
 that the envelope's `tableId` matches the URL's slug (`slugifyTableName(envelope.tableId)
-!== tableName` — unchanged from before the Spine minted real ids) — a straight equality
-check now that both sides carry the same real id, not a partial/prefix check.
+!== tableName`) — a straight equality check, since both sides carry the same real id.
 **`table.name` on any span/log here is the bare name with that suffix stripped back off**
 (`tableNameFromSlug`, `src/shared/slugify.ts`) — it must match what the Shuffler stamps
 under the same key so a filter can follow one table across ships (see
