@@ -107,19 +107,28 @@ Concretely:
   `props.faceDown` already exists; the only change on the Tabletop is which literal
   (`true` vs `false`) `cardArrival.ts` passes to `mtgCardShape(...)` for this event kind,
   gated by which endpoint/handler received it. The Spine needs no code at all.
-- **Ordering matters for table mode**: the Tabletop must accept
-  `card.played-face-down` (ticket 02) before the Shuffler starts sending it (ticket 03).
-  The Shuffler's send is send-then-commit and table-mode blocking — sending an event kind
-  the Tabletop doesn't recognize yet would 422 there and 502 here, blocking the play with
-  the existing `TableSendFailedError` modal, card stays in hand. Ticket 03 is `Blocked
-  by: 01, 02`.
-- **The Shuffler's existing per-card endpoint carries the new kind too** — `sendCardToTable`
-  posts the whole envelope (any `name`) to `POST /api/tables/:tableName/cards`; no new
-  Shuffler-side HTTP route is needed. The Tabletop's `cardArrival.ts` currently
-  hard-validates `expectedName = "card.played"` on that one endpoint (there's no
-  generic name-driven dispatch on the Tabletop the way the Spine has) — ticket 02 has to
-  decide whether that endpoint grows a second accepted name or a sibling handler branches
-  on `envelope.name` before validating; either is fine, left to whoever picks up ticket 02.
+- **Ordering matters for table mode, but not for blocking-failure reasons any more.**
+  The Shuffler's Spine send (`sendCardPlayedToSpineBestEffort`) is best-effort and never
+  blocks the play — game state mutates and persists regardless of whether the Spine
+  accepts the event, so there's no `TableSendFailedError`/502 failure mode left to worry
+  about. The real reason ticket 03 still waits on 02 is delivery, not correctness of the
+  play: if the Shuffler starts emitting `card.played-face-down` before the Tabletop's SSE
+  dispatcher (`spineEventDispatch.ts`) and `cardArrival.ts` recognize that name, the Spine
+  will log the event fine (it's schema-generic) but the Tabletop will silently ignore it
+  — the card plays in the Shuffler and never arrives concealed at the table. Ticket 03 is
+  `Blocked by: 01, 02` to avoid landing a button that quietly does nothing at the table.
+- **The Shuffler's existing Spine-send path carries the new kind too** —
+  `sendCardPlayedToSpineBestEffort` posts whatever envelope it's given (any `name`) to the
+  Spine's event log via `spinePort.sendEvent(tableId, event)`; no new Shuffler-side HTTP
+  route is needed, same as `card.played` today. On the Tabletop side there is no HTTP
+  route at all any more — `card.played` arrives only over the Spine SSE subscription,
+  dispatched by `spineEventDispatch.ts`'s `dispatchSpineEvent`, which currently only acts
+  on `event.name === "card.played"` (everything else on the stream is ignored) before
+  handing off to `cardArrival.ts`'s `applyCardArrival`, which itself hard-validates
+  `expectedName = "card.played"` (there's no generic name-driven dispatch on the Tabletop
+  the way the Spine has). Ticket 02 has to decide whether `dispatchSpineEvent`/
+  `applyCardArrival` grow a second accepted name or a sibling handler branches on
+  `envelope.name` before validating; either is fine, left to whoever picks up ticket 02.
 - **Solo/clipboard mode needs its own button wiring**, not a byproduct of the table-mode
   event. `public/game.js`'s `copyCardToClipboard(cardId, face)` fetches
   `/proxy-image?cardId=...&face=...` (a real Scryfall-backed image) — "Play face down"
@@ -148,9 +157,9 @@ Concretely:
 - **Shuffler**: a Jest test on `buildCardPlayedFaceDownEvent` (mirroring
   `test/port-tabletop/cardPlayedEvent.test.ts`'s coverage of `buildCardPlayedEvent`) —
   same assertions, different event name. A test on `POST /play-card` (or a new
-  endpoint/param, whichever ticket 03 lands on) asserting `tabletopPort.sendCardToTable`
+  endpoint/param, whichever ticket 03 lands on) asserting `spinePort.sendEvent`
   receives an envelope with `name: "card.played-face-down"` when face-down was
-  requested, using `FakeTabletopGateway`. A Playwright check that the modal's "Play Face
+  requested, using `FakeSpineGateway`. A Playwright check that the modal's "Play Face
   Down" button exists on a hand card and that clicking it (solo mode) triggers the
   clipboard-copy path — likely by extending an existing `verify-*.spec.ts` rather than a
   new spec file.
@@ -186,4 +195,5 @@ Concretely:
 - The three tickets are ordered by their `Blocked by:` lines: 01 (contract) unblocks both
   02 (Tabletop) and 03 (Shuffler); 02 also unblocks 03, so 03 is the last to implement.
   01 and 02 can be worked in either order relative to each other once 01 exists, but 03
-  must come last for table mode not to 502 on a real game.
+  must come last so a real game's face-down play actually arrives concealed at the
+  table instead of silently vanishing at the Tabletop's SSE dispatcher.

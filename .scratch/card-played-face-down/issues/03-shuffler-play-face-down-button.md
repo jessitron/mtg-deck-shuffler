@@ -10,9 +10,11 @@ Blocked by: 01, 02
 
 Add a "Play Face Down" action to the hand card's modal, alongside "Play"/"Discard".
 Solo/clipboard mode: copies the generic card-back image to the clipboard. Table mode:
-sends `card.played-face-down` (send-then-commit, same failure protocol as "Play")
-instead of `card.played`. Either way, moves the card to `Table` in the Shuffler's own
-game state exactly like "Play" does — no new domain/persisted state for concealment.
+sends `card.played-face-down` to the Spine's event log instead of `card.played` —
+best-effort, same as "Play" today (never blocks or fails the play; the game state
+mutates and persists immediately regardless of whether the Spine accepts the event).
+Either way, moves the card to `Table` in the Shuffler's own game state exactly like
+"Play" does — no new domain/persisted state for concealment.
 
 ## Where each piece lives today (verified against the current code)
 
