@@ -256,6 +256,14 @@ These are specific things that could break two-faced cards if changed elsewhere:
     `cardPlayedEvent.test.ts`. They are on-schema and required for every commander;
     `backImageUrl` itself must be present and may be either a string or `null`.
 
+    **Hardened, not just decided (shuffler-spine-sse-subscriber ticket 01, 2026-08-20):**
+    `contracts/payloads/card.returned.v1.json` now exists and enforces this rule at the
+    schema level — `"face": false` in `properties` explicitly blacklists the field, rather
+    than relying on it being merely undeclared under the schema's `additionalProperties:
+    true` policy. Guards against a sender that copies `card.played`'s shape by habit. See
+    [contract.md](contract.md#cardreturnedv1--the-faceless-removal-events-schema-built).
+    Contract-only: no sender or subscriber wired to this schema yet.
+
 20. **The library-entry face/faceDown reset only covers "library" — there is no "hand"
     zone to also cover** (physics ticket 17, 2026-08-09). Ticket 06 phrased the reset
     as "a card returning to hand or library" resets both axes; `MtgCardShapeUtil`'s
