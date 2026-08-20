@@ -4,23 +4,17 @@ Mountain: tabletop-replaces-mural
 Ship: fleet
 Status: ready-for-agent
 
-**What to build:** `seat.joined.v1` gains two Shuffler-minted URL fields: `gameUrl` (public,
-player-clickable — becomes the library furniture's link target) and `eventsUrl` (where the
-Tabletop *server* will POST events back; minted from the environment-appropriate base —
-localhost in dev, cluster-internal name in prod). The Shuffler sends both on every
-`seat.joined`. The Tabletop stores both per seat in memory, composes no URLs itself, and
-needs zero Shuffler-related configuration. Replaying `seat.joined` on Tabletop start/restart
-re-establishes the mapping. The library furniture on the table becomes a clickable link to
-`gameUrl`.
+**`gameUrl` already shipped** as part of the Spine join work: `seat.joined.v1` carries it,
+the Shuffler mints it and stores it on `TableInfo`/`GameState`, and the Tabletop uses it
+for the library furniture's clickable link. That part of this ticket is done.
 
-`gameId` may cross the boundary freely, same as `gameCardIndex` — there's no boundary
-guard to reason about here.
+**What's left:** this ticket originally also planned an `eventsUrl` field — a
+Shuffler-minted inbox URL the Tabletop server would POST events back to. That transport
+is superseded: the return channel routes through the Spine instead (see
+`.scratch/shuffler-spine-sse-subscriber/`, where the Shuffler opens its own Spine SSE
+subscription rather than exposing an HTTP inbox). No `eventsUrl` field is needed. Confirm
+with that spec's design before doing any further work here — this ticket may be fully
+subsumed by it.
 
-**Blocked by:** 05 — needs contract validation in place for the amended `seat.joined.v1`.
-
-- [ ] `seat.joined.v1.json` gains required `gameUrl` and `eventsUrl` fields
-- [ ] The Shuffler mints both URLs correctly in dev and prod
-- [ ] The Tabletop stores `gameUrl`/`eventsUrl` per seat in memory
-- [ ] Restarting the Tabletop and replaying `seat.joined` re-establishes the per-seat URLs
-- [ ] The library furniture on the table links to that seat's `gameUrl`
-- [ ] Clicking the library link from a running table opens the correct Shuffler game
+- [x] `gameUrl` on `seat.joined`, minted by the Shuffler, used for the library link
+- [ ] Confirm no remaining work in this ticket once `shuffler-spine-sse-subscriber` lands

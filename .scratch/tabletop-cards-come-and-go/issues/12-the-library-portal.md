@@ -30,16 +30,16 @@ merged from `prototype/portal-gesture-ticket-04`, kept for reference only):
   self-deletion past settle; the shrink needs the ShapeUtil's interpolation hook since
   tldraw's shape animation only interpolates x/y/rotation/opacity natively.
 
-**Blocked by:** 11 (the inbox and Revealed-landing must exist for the swallow to send
-anywhere). Externally blocked from shipping un-gated by `tabletop-table-layout` ticket 18's
-`owner` card prop (in flight) — the gesture may be built ahead of it but must not ship
-without the gate.
+**Blocked by:** 11 (superseded — see that ticket; the Revealed-landing must exist via the
+Shuffler's Spine SSE subscriber for the swallow to send anywhere). Externally blocked from
+shipping un-gated by `tabletop-table-layout` ticket 18's `owner` card prop (in flight) —
+the gesture may be built ahead of it but must not ship without the gate.
 
 - [ ] Arming swirl renders over a library while a card shape drags over it, local to the
       dragger, gated to card shapes and to the player's own library
 - [ ] Drop plays the spin-and-shrink swallow (~500ms), visible to everyone at the table
-- [ ] Swallow sends `card.returned.v1` (`occurredIn: "tabletop"`) to the seat's
-      `eventsUrl`; shape deletion commits only on 2xx; on failure the shape stays
+- [ ] Swallow POSTs `card.returned.v1` (`occurredIn: "tabletop"`) to the Spine's
+      `POST /tables/:tableId/events`, best-effort — the send never blocks the swallow
 - [ ] Attachments fall off and remain on the table on swallow (via the Physics map's
       existing mechanism)
 - [ ] Multi-select dropped on the library swallows the whole group, one gesture
