@@ -31,7 +31,7 @@ I would like to make a clearer chain of events in Honeycomb. I want a custom spa
 
 ## Next
 
-- major bug: played cards should not keep appearing to the right of the previous location, after the other one has been moved! That's only for when the prior card is still on the stack right where it landed.
+- irritating bug: played cards should not keep appearing to the right of the previous location, after the other one has been moved! That's only for when the prior card is still on the stack right where it landed.
 
 - RETEST post-tldraw upgrade: weird bug: occasionally, for no discernable reason, a bunch of cards return to the stack where they were initially played 😭
 

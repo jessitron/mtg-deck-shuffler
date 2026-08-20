@@ -53,9 +53,7 @@ shapes, not a guard standing at the door.
 
 ## Sea Monster
 
-Right now (8/18/26), we are not in harbor! We are assailed by problems!
-The last thing implemented was the tabletop-sse-stream. These changes are super buggy.
-There are major bugs listed in TODO.md
+It is time to deploy and test in production again. We implemented tabletop-sse-stream and fixed bugs in it.
 
 After the game is working for existing functionality again, we can deploy - currently prod is way behind. But we won't have our mountain yet.
 
