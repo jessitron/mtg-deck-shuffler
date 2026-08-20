@@ -513,6 +513,11 @@ export function createApp(
       const game = GameState.newGame(gameId, prep.prepId, prep.version, prep.deck, undefined, tableInfo, prep.sleeveColor, prep.playmatImagePath);
       game.startGame(browserTabId);
 
+      trace.getActiveSpan()?.setAttributes({
+        "deck.name": prep.deck.name,
+        "commander.names": game.listCommanders().map((commander) => commander.card.name),
+      });
+
       if (tableInfo) {
         const spineJoin = await joinSpineBestEffort(spinePort, {
           gameId,
