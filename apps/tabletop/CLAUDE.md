@@ -145,6 +145,18 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`; the browser side is in
   span. **Reach for a span attribute first**; a log is for when there's no span to hang it
   on. Wired up by `logRecordProcessors` in `src/server/tracing.ts`; tested in
   `test/log.test.ts`.
+- **SSE event standard: a receiving span, then a doing-span if anything happens.** Every
+  event arriving over a Spine SSE subscription gets one span for receipt, carrying all the
+  details (`event.name`, `table.name`/`table.slug`, and whatever the payload has) — this is
+  `dispatchSpineEvent`'s `sse subscription: <event.name>` span in `spineEventDispatch.ts`,
+  continuing the trace from the broadcast envelope's `traceparent` as a CHILD span. If the
+  dispatcher actually acts on the event (today, only `card.played` → `applyCardArrival`),
+  that action gets its *own* span nested inside the receiving one — `applyCardArrival`'s
+  `place arrived card` span in `cardArrival.ts`, which only wraps the actual placement (the
+  `updateStore` call), not the validation/dedup/reject checks that precede it (those set
+  attributes on the receiving span instead, via `trace.getActiveSpan()`). A rejected or
+  deduped event never gets a doing-span at all — it's outcome data on the receiving span
+  only. Follow this shape for any new SSE-driven event handling.
 - **Never `span.addEvent`.** This ship is where that rule came from: `rooms.ts` calls it
   from tldraw's throttled `pruneSessions` callback, which has no ambient span, so prod logs
   fill with "Operation attempted on ended Span" and the events are dropped. `log.ts` exists
