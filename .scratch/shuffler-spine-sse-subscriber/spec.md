@@ -8,15 +8,15 @@ Status: ready-for-agent
 
 Events on the tabletop affect the shuffler, and vice versa. The Spine is in charge of the events, and it needs to notify both the other ships of what's happening. Currently the tabletop opens an SSE stream and listens for events (such as card.played) that the spine sends. The shuffler needs that too. When this is done, the tabletop will be able to return a card to the shuffler (the reverse of card.played, pretty much).
 
-`.scratch/spine-in-the-middle/map.md` names the card-return channel — a player dragging a
-card off the Tabletop's canvas onto the library portal, which should move that card into
-the Shuffler's Revealed zone — as fully vocabulary-specced but never implemented. The
-event kind it needs, `card.returned.v1`, was designed in
+The card-return channel — a player dragging a card off the Tabletop's canvas onto the
+library portal, which should move that card into the Shuffler's Revealed zone — is fully
+vocabulary-specced but never implemented. The event kind it needs, `card.returned.v1`,
+was designed in
 `.scratch/tabletop-cards-come-and-go/issues/02-event-vocabulary.md` but no `eventsUrl`, no
 handler, and no schema exist in code today.
 
-This is the reverse direction of the just-landed Tabletop subscriber
-(`.scratch/tabletop-spine-sse-subscriber/spec.md`, commit `6c6f52cc`), and it isn't a
+This is the reverse direction of the Tabletop's own Spine subscriber
+(`apps/tabletop/src/server/spineSubscriber.ts`), and it isn't a
 simple mirror image: the Tabletop is a long-running canvas process that already dispatches
 into live in-memory shape state, but the Shuffler is HTMX — a page has no live connection
 of its own today. Pushing a `card.returned` event into an open Shuffler tab needs a second
@@ -30,7 +30,8 @@ implementation.
 
 ## Solution
 
-Route the card-return channel through the Spine. Build both legs:
+Route the card-return channel through the Spine, matching how every other event kind
+reaches its consumer. Build both legs:
 
 1. **Tabletop → Spine**: when a player drags a card onto the library portal, the Tabletop
    POSTs a `card.returned.v1` event to the Spine's existing generic

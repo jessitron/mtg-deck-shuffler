@@ -293,12 +293,11 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   "not-found"/"incompatible-version" `markCurrentSpanAsError` calls for all of them — don't re-add
   per-route copies of those two. A route whose response can't be expressed as a returned string
   can still use `applyGameCommand`/`renderCommandOutcome` — `renderApplied` may return `string |
-  void`. **`TableSendFailedError` and `beforeMutate`'s send-then-commit use are gone**
-  (tabletop-spine-sse-subscriber ticket 02) — `play-card`/`discard-card` mutate+persist
-  immediately now, same as every other route; there's no more synchronous failure outcome to
-  render as a 502. `play-card`/`discard-card` still pass a `beforeMutate` — it now only calls
+  void`. `play-card`/`discard-card` mutate+persist
+  immediately, same as every other route; there's no synchronous failure outcome to
+  render as a 502. `play-card`/`discard-card` pass a `beforeMutate` that only calls
   `sendCardPlayedToSpineBestEffort`, which never throws — don't treat that live usage as
-  license to resurrect a send-then-commit protocol; that shape is deliberately gone. `applyGameCommand` also `setCommonSpanAttributes({ tableName,
+  license to build a send-then-commit protocol on top of it. `applyGameCommand` also `setCommonSpanAttributes({ tableName,
   playerName })` right after the game loads, so every mutation route gets `table.name`/`player.name`
   for free — a new mutation route needs nothing extra. The **GET fragment routes** don't share that
   choke point, so each one that reconstructs a `GameState` (`/game`, `/library-modal`,
@@ -310,16 +309,15 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   needs a durable `traceparent` field, reuse the existing minting call for that event kind rather
   than adding a new site — and remember each call site mints its own event `id`, so sending the
   "same" logical event to two destinations produces two different `id`s sharing one `traceparent`.
-- **The Shuffler has exactly one outbound gateway now: `port-spine/`.** `TabletopPort`,
-  `HttpTabletopGateway`, `FakeTabletopGateway`, `sendCardToTableFirst`, and `TABLETOP_URL`
-  (`server.ts`, `k8s/configmap.yaml`, README, CLAUDE.md) are all gone
-  (tabletop-spine-sse-subscriber ticket 02) — `card.played` travels Shuffler→Spine only, then
-  Spine→Tabletop over the Spine's own SSE broadcast. `apps/shuffler/src/port-tabletop/` still
-  exists but is envelope-shape helpers only (`buildCardPlayedEvent`, `zoneHintForPlay`, the
+- **The Shuffler has exactly one outbound gateway: `port-spine/`.** There is no `TabletopPort`,
+  `HttpTabletopGateway`, `FakeTabletopGateway`, `sendCardToTableFirst`, or `TABLETOP_URL`
+  anywhere in the ship — `card.played` travels Shuffler→Spine only, then
+  Spine→Tabletop over the Spine's own SSE broadcast. `apps/shuffler/src/port-tabletop/`
+  holds envelope-shape helpers only (`buildCardPlayedEvent`, `zoneHintForPlay`, the
   `CardPlayedEvent`/`EventEnvelope` types) — don't add an HTTP client back into it on the theory
-  the directory name implies one; that's exactly the shape that was just deleted. If a future
+  the directory name implies one. If a future
   change needs the Shuffler to reach the Tabletop directly again, that's a new decision, not a
-  revert — ask before re-adding.
+  revert — ask before adding it.
 - **Adding a Tabletop test that needs to seed a card without a live Spine**: use the existing
   test-only seam, `apps/tabletop/src/server/testSeedRoute.ts`
   (`POST /test/tables/:tableName/cards`, mounted only when `ENABLE_TEST_SEED_ROUTE=true`) — don't

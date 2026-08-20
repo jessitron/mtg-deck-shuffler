@@ -41,20 +41,19 @@ One thing here is a deliberate stand-in, marked in the source and easy to delete
    the Spine absorbs table identity later). Rooms are **in-memory only** — a redeploy
    wipes the board. Accepted for v0; durable reconstruction is a filed buoy.
 
-`card.played`'s old HTTP scaffolding (`POST /api/tables/:tableName/cards`,
-`handleCardArrival`) is gone (`tabletop-spine-sse-subscriber` ticket 02, 2026-08-18) — the
-only entry point now is the Spine SSE subscription (`src/server/spineSubscriber.ts`,
-`spineEventDispatch.ts`), which routes `card.played` through `cardArrival.ts`'s
-`applyCardArrival` — dedup, `ensurePlayerArea` self-heal, placement, unchanged. The event
-this arrives as is still the real thing: a full envelope (`contracts/envelope.v1.json`)
-carrying a card.played payload (`contracts/payloads/card.played.v1.json`), validated for
-real via ajv (`src/server/contractValidation.ts`, ticket 05 of tabletop-cards-come-and-go)
-— field-by-field comment block in `apps/shuffler/src/port-tabletop/types.ts`.
-`gameCardIndex` crosses the boundary freely now (`let-gamecardindex-out`, 2026-08-10) — it
-only decodes to a card's rank in the public decklist, so the guard that used to reject it
-traded no real secrecy for a reasoning cost nobody's threat model needed. (Payload schemas
-now use `additionalProperties: true` — contracts/README.md — so an unrecognized field is a
-no-op rather than a rejection either way.) `src/server/testSeedRoute.ts` is a **test-only**
+`card.played`'s only entry point is the Spine SSE subscription
+(`src/server/spineSubscriber.ts`, `spineEventDispatch.ts`), which routes `card.played`
+through `cardArrival.ts`'s `applyCardArrival` — dedup, placement, and rejection of a
+`card.played` for a seat that hasn't `seat.joined` yet (`{status: "rejected", reason:
+"seat-not-joined"}`; not a self-heal — an ordering bug is surfaced, not papered over). The
+event arrives as a full envelope (`contracts/envelope.v1.json`) carrying a card.played
+payload (`contracts/payloads/card.played.v1.json`), validated for real via ajv
+(`src/server/contractValidation.ts`) — field-by-field comment block in
+`apps/shuffler/src/port-tabletop/types.ts`. `gameCardIndex` crosses the boundary freely —
+it only decodes to a card's rank in the public decklist, which a trust-based table doesn't
+need guarded. (Payload schemas use `additionalProperties: true` — contracts/README.md —
+so an unrecognized field is a no-op rather than a rejection either way.)
+`src/server/testSeedRoute.ts` is a **test-only**
 HTTP seam (`POST /test/tables/:tableName/cards`, only mounted with
 `ENABLE_TEST_SEED_ROUTE=true`) that calls `applyCardArrival` directly, for Playwright specs
 and `cardArrival.test.ts` that spawn this server as its own process and have no live Spine

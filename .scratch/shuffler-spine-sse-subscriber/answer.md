@@ -7,13 +7,12 @@ Status: resolved
 
 ## Question
 
-`.scratch/spine-in-the-middle/map.md`'s last open item: "The Shuffler's own Spine SSE
-subscriber... Design not started," with a 2026-08-14 sketch that was never turned into a
-decision. Symmetric to the just-landed Tabletop subscriber
-(`.scratch/tabletop-spine-sse-subscriber/spec.md`, commit `6c6f52cc`) but for the reverse
-direction: a card returning from the Tabletop's library portal needs to reach the
-Shuffler's Revealed zone, and — unlike the Tabletop's side — push a live update to any
-open browser tab, since the Shuffler has no live connection of its own (HTMX).
+The Shuffler has no Spine SSE subscriber of its own yet. It's symmetric to the Tabletop's
+own subscriber (`apps/tabletop/src/server/spineSubscriber.ts`, subscribing to
+`card.played`) but for the reverse direction: a card returning from the Tabletop's
+library portal needs to reach the Shuffler's Revealed zone, and — unlike the Tabletop's
+side — push a live update to any open browser tab, since the Shuffler has no live
+connection of its own (HTMX).
 
 Grilled with Jess, 2026-08-18.
 
@@ -25,12 +24,11 @@ The card-return channel (Tabletop→Shuffler, library-portal drag) was fully voc
 in `.scratch/tabletop-cards-come-and-go/issues/02-event-vocabulary.md` (`card.returned.v1`,
 distinguished by envelope `occurredIn`) but **never implemented** — no `eventsUrl`, no
 `card.returned` handler, no schema file exist in code today. This design builds it for the
-first time, routed through the Spine from day one (superseding tickets 01/06/11's direct-POST
-`eventsUrl` design, per `map.md`'s 2026-08-11 decision that card-return reroutes through the
-Spine).
+first time, routed through the Spine, matching how every other event kind reaches its
+consumer.
 
-Symmetric precedent: `.scratch/tabletop-spine-sse-subscriber/spec.md` (Tabletop's own Spine
-subscriber for `card.played`, landed 2026-08-18, commit `6c6f52cc`).
+Symmetric precedent: `apps/tabletop/src/server/spineSubscriber.ts` (the Tabletop's own Spine
+subscriber for `card.played`).
 
 ## Decisions so far (grilled with Jess)
 
@@ -90,8 +88,8 @@ subscriber for `card.played`, landed 2026-08-18, commit `6c6f52cc`).
    next.
 10. **`gameId` also crosses freely now.** Reversed by Jess this session (fixed in place in
     `01-return-channel.md`, `06-seating-carries-two-urls.md`,
-    `tabletop-cards-come-and-go/spec.md`, `spine-in-the-middle/issues/01-the-join-flow.md`
-    — commits `ca78ac99`, `c5686f0e`). No boundary guard on it anywhere in the fleet.
+    `tabletop-cards-come-and-go/spec.md` — commits `ca78ac99`, `c5686f0e`). No boundary
+    guard on it anywhere in the fleet.
 11. **Tabletop→Spine send tracing**: no new server-side `traceparent`-minting helper.
     Ride the ambient request span (the gesture handler that triggers the send) plus
     undici's automatic outbound header, matching `sendCardPlayedToSpineBestEffort`'s

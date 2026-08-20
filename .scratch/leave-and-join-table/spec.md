@@ -244,18 +244,13 @@ canvas.
 
 ## Further Notes
 
-**Architecture in flux, and this spec doesn't hard-code today's shape.** As of this
-writing, joining calls the Spine best-effort (`joinSpineTableBestEffort`, catching and
-swallowing every error) and separately sends a required message to the Tabletop
-(`sendSeatJoinedBestEffort` — despite the name, treated as the message that must land).
-Jess expects this to change before this feature is implemented, with the Spine becoming
-the orchestrator: the Shuffler calls the Spine, and the Spine is responsible for
-telling the Tabletop, rather than the Shuffler making two independent calls. None of
-this spec's decisions depend on today's specific call shape — "report join/leave
-failures to the player rather than swallowing them" and "treat a partial failure as a
-total failure" should hold regardless of whether that ends up being one call or two.
-Whoever picks up implementation should check the current shape of the join/leave call
-path first, rather than building against what's described here as "today."
+**The Spine is the orchestrator.** Joining a table is one best-effort call —
+`joinSpineBestEffort()` (`src/port-spine/sendToSpine.ts`) — and the Spine itself notifies
+the Tabletop over HTTP; the Shuffler makes no separate call to the Tabletop. This spec's
+decisions — "report join/leave failures to the player rather than swallowing them" and
+"treat a partial failure as a total failure" — apply to that single call. Whoever picks up
+implementation should still check the current shape of the join/leave call path first, in
+case it's changed again since this was written.
 
 **Terminology**: "cards on the table" means cards whose location is the `Table` zone —
 `GameState.listTable()` / `isOnTable()` — not a separate concept. There is no "table

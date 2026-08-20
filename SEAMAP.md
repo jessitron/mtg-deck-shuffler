@@ -30,13 +30,12 @@ Mural, not a rewrite.
 2. **Spine Tells the Story** ← _active_ — when people play Magic in this app, the game gets
    recorded: every physical event a real game produces, from both the Shuffler and the
    Tabletop, crosses the Spine's one append-only log per table. That record is what
-   feeds development of the Interpreter, once this mountain is reached. Includes: the
-   Spine-vocabulary work `tabletop-replaces-mural`'s cards-come-and-go map left behind
-   (the eleven hidden-zone Shuffler actions — draw, shuffle, mulligan, put-on-top/bottom,
-   …); [The Spine sits in the middle](.scratch/spine-in-the-middle/map.md) — no direct
-   HTTP between the Shuffler and the Tabletop survives, everything routes through the
-   Spine; and map 5 of `tabletop-replaces-mural` (the Tabletop→Spine sender), which
-   overlaps substantially with that map and was absorbed into it.
+   feeds development of the Interpreter, once this mountain is reached. The Spine sits
+   in the middle: no direct HTTP between the Shuffler and the Tabletop exists anywhere
+   in the code, everything routes through the Spine's event log and its SSE stream out
+   to the Tabletop. Still includes: the Spine-vocabulary work `tabletop-replaces-mural`'s
+   cards-come-and-go map left behind (the eleven hidden-zone Shuffler actions — draw,
+   shuffle, mulligan, put-on-top/bottom, …).
 3. **The Interpreter learns to read the play** — guesses at unexplained physical
    events, asks in chat, is corrected; then ears (per-player transcription); then
    proactive help ("that triggers your rabbit"). Reads the record Mountain 2 built; a

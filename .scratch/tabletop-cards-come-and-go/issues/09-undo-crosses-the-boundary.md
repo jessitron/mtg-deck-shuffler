@@ -12,8 +12,15 @@ attachments stay behind, detached. Both undo kinds are informational and distinc
 other and from the opposite action — the log (and someday the Interpreter) should be able
 to tell "play was undone" from "discard was undone."
 
-**Blocked by:** 07 (poof-by-instanceId mechanism, send-then-commit pattern), 08 (discard
-must exist as its own kind before its undo can).
+**Blocked by:** 07 (poof-by-instanceId mechanism, best-effort Spine-send pattern), 08
+(discard must exist as its own kind before its undo can).
+
+These undo events should follow the same best-effort delivery as `card.played` and
+`card.returned`: sent to the Spine's event log (`sendCardPlayedToSpineBestEffort`-style,
+never blocking), with the Shuffler's own undo mutation happening regardless of whether the
+Spine accepts the event, and the Tabletop learning about it later over its Spine SSE
+subscription. There is no direct Shuffler→Tabletop HTTP call to design around here — see
+ticket 07 for why.
 
 - [ ] `undo.card.played.v1.json` and `undo.card.discarded.v1.json` schemas written
 - [ ] Undoing a play in the Shuffler emits `undo.card.played.v1`; undoing a discard emits

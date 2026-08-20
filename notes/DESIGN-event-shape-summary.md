@@ -163,12 +163,12 @@ of what happened (it's not observed/inferred), so it says so directly.
   outright — a deploy can invalidate an in-flight table. Deliberate tradeoff, not an
   oversight.
 
-## 5. What's actually live today (as of 2026-08-10)
+## 5. What's actually live today
 
 - **Real, running, verified end-to-end**: `table.created`, `seat.taken` (auto-assigned
-  number), `card.played` — all flowing from the Shuffler into a real Spine, visible on
-  `/admin/tables`.
-- **Not yet flowing to the Spine**: `seat.joined` still only goes Shuffler → Tabletop
-  directly (pre-Spine scaffolding); Tabletop's physical events (tap/flip/move) exist as
+  number), `seat.joined`, `card.played` — all flowing from the Shuffler into a real
+  Spine, visible on `/admin/tables`, and out to the Tabletop over the Spine's SSE
+  stream. There is no direct Shuffler→Tabletop HTTP call anywhere in the code.
+- **Not yet flowing to the Spine**: Tabletop's physical events (tap/flip/move) exist as
   OTel spans only, never persisted or sent anywhere; the Interpreter, voice events, and
   chat events don't exist yet.
