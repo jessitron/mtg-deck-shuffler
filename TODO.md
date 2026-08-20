@@ -27,8 +27,6 @@ Card Played not matching the seat is fixed (544c932b — it was sending the bare
 position instead of the real seatId GUID). The fuller domain model that fix prompted is
 now spec'd at `.scratch/seat-session-attribution/spec.md` (ready-for-agent).
 
-I would like to make a clearer chain of events in Honeycomb. I want a custom span in Spine for every event sent on the SSE streams. That way I can make a graph of the event sequence. There should also be one for table creation / seat join (when synchronous).
-
 ## Next
 
 - irritating bug: played cards should not keep appearing to the right of the previous location, after the other one has been moved! That's only for when the prior card is still on the stack right where it landed.
