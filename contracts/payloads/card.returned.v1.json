@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/card.returned.v1.json",
+  "title": "card.returned payload, schemaVersion 1",
+  "description": "A card left the table, headed back into the Shuffler's game state (e.g. dragged off the playmat). The table isn't authoritative for a table card's face, so unlike card.played/card.discarded this event carries no `face` field (two-faced-cards watch point 19) — `face` is explicitly blacklisted (`\"face\": false`) rather than merely undeclared, since a sender copying card.played's shape by habit is the likely mistake to guard against; every other unknown property still passes through per the fleet's additionalProperties:true policy. Identity here is scryfallId plus gameCardIndex (the Shuffler's own decklist rank) rather than the instanceId GUID card.played uses — the table doesn't mint or track instanceId, and gameCardIndex is what the Shuffler can look a card back up by.",
+  "type": "object",
+  "properties": {
+    "card": {
+      "type": "object",
+      "properties": {
+        "scryfallId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Definition: the exact printing — oracle identity, all faces, all names, all images derivable."
+        }
+      },
+      "required": ["scryfallId"],
+      "additionalProperties": true
+    },
+    "gameCardIndex": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The card's index in the Shuffler's initial decklist array (its alphabetical rank in that list) — how the Shuffler looks this card back up in its own game state."
+    },
+    "seat": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The seatId of the player this card is returning to — a bare non-empty check, matching card.played.v1's `owner` field."
+    },
+    "fromZone": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Where on the table the card was returning from. A hint — geography, not rules."
+    },
+    "face": false
+  },
+  "required": ["card", "gameCardIndex", "seat"],
+  "additionalProperties": true
+}
