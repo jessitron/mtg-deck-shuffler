@@ -23,7 +23,14 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   subscribes to Node's global `node:diagnostics_channel`, not to a specific `Dispatcher`
   instance, so passing `{ dispatcher: new Agent(...) }` to `fetch()` (e.g. to disable idle
   timeouts on a long-lived stream) still gets traced. `apps/tabletop/src/server/spineSubscriber.ts`
-  is the live example.
+  is the live example; `apps/shuffler/src/port-spine/spineSubscriber.ts` (this ship's own Spine
+  SSE subscriber, ported from the Tabletop's) is the second.
+- **A runtime file reading `contracts/` by relative path, and which Dockerfile it ships in** — the
+  Tabletop's Dockerfile preserves `/repo/apps/tabletop` nesting; the Shuffler's flattens to `/app`.
+  A dev-correct relative default silently stops resolving once flattened; the container boots
+  clean and only the first real request fails. Fix is a `CONTRACTS_DIR` env override + `COPY
+  contracts` in the flattened image, mirroring the Spine's `event_contract.rb`. See README → "A
+  runtime file that reads `contracts/` by relative path is a Docker-flattening trap".
 - **Express instrumentation config** — `ignoreLayersType: [MIDDLEWARE]` keeps traces at 2 spans,
   not 8.
 - **Samplers reading both semconv spellings** (`http.user_agent`/`user_agent.original`,
@@ -349,7 +356,16 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   **A span now exists for every event kind on the stream** (2026-08-19), not just `card.played` —
   the routing to `applyCardArrival` inside the span is still `card.played`-only, so a future
   consumer of another kind (`seat.taken`, `table.created`, …) adds its logic inside the existing
-  `if (event.name !== "...")` branch rather than adding a new span.
+  `if (event.name !== "...")` branch rather than adding a new span. **A second consumer of this
+  exact shape now exists on the Shuffler side**: `apps/shuffler/src/port-spine/cardReturnedDispatch.ts`
+  — same extract/context.with/CONSUMER/ROOT_CONTEXT-fallback shape, same "span per event kind, gate
+  the routing inside it" pattern, plus a nested `SpanKind.INTERNAL` "move returned card to
+  Revealed" span only when the event is actually applied, and a `card_return.outcome` attribute
+  stamped on every branch (`applied`/`duplicate`/`invalid`/the `applyGameCommand` outcome
+  kind/`error`) — copy this second example, not just the Tabletop's, when adding a third such
+  consumer; it's also the Shuffler's first manual span ever, so `markCurrentSpanAsError`/`log.error`
+  (never `span.recordException`) is the reference for how a Shuffler manual span should report a
+  failure.
 - **Stamping `event.name` on a span or log**: this is a fleet-wide convention, not a Tabletop-only
   spelling — the Spine's admin page minted it first (`table.event.displayed` span,
   `event.name`/`event.seq`), and the Tabletop now stamps the same key from the envelope's `name`
