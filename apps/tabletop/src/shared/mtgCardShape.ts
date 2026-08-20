@@ -17,6 +17,8 @@ export interface MtgCardShapeProps {
   owner: string;
   /** Whether this card is one of its owner's commanders (table-layout ticket 18). */
   isCommander: boolean;
+  /** The card's index in its owner's game state (card.played payload); null for cards that never carried one (e.g. a commander/ghost). Required to swallow a card back into the library — see ticket 12. */
+  gameCardIndex: number | null;
 }
 
 declare module "@tldraw/tlschema" {
@@ -42,4 +44,5 @@ export const mtgCardShapeProps: RecordProps<MtgCardShape> = {
   cardBackImageUrl: T.string.nullable(),
   owner: T.string,
   isCommander: T.boolean,
+  gameCardIndex: T.number.nullable(),
 };

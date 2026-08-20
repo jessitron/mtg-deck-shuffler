@@ -123,6 +123,8 @@ export interface MtgCardShapeArgs {
   cardBackImageUrl: string | null;
   owner: string;
   isCommander: boolean;
+  /** The card's index in its owner's game state; null for cards with no such index (e.g. a commander/ghost). */
+  gameCardIndex?: number | null;
   /** Furniture-style lock (ghost copies); ordinary cards are draggable. */
   isLocked?: boolean;
   opacity?: number;
@@ -147,6 +149,7 @@ export function mtgCardShape({
   cardBackImageUrl,
   owner,
   isCommander,
+  gameCardIndex = null,
   isLocked = false,
   opacity = 1,
 }: MtgCardShapeArgs): MtgCardShape {
@@ -176,6 +179,7 @@ export function mtgCardShape({
       cardBackImageUrl,
       owner,
       isCommander,
+      gameCardIndex,
     },
     meta: {},
   };

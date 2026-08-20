@@ -33,6 +33,9 @@ function armedZoneIdSignal(editor: Editor) {
       if (hit.zone === "command" && !allDraggedCardsAreOwnersCommander(editor, hit.seatId)) {
         return undefined;
       }
+      if (hit.zone === "library" && !allDraggedCardsBelongToOwner(editor, hit.seatId)) {
+        return undefined;
+      }
       return hit.id;
     });
     armedZoneIdByEditor.set(editor, signal);
@@ -48,6 +51,35 @@ function allDraggedCardsAreOwnersCommander(editor: Editor, seatId: string | null
   return draggedCards.every((card) => card.props.owner === seatId && card.props.isCommander);
 }
 
+/**
+ * The library portal's gate (ticket 12): only the player's own library swallows a card,
+ * and only cards — a dragged counter (or any non-card selection) must not arm it. A card
+ * with no `gameCardIndex` can never be sent as `card.returned.v1`, so it's excluded too.
+ * A mixed-ownership multi-select doesn't arm at all — one destination for the whole group,
+ * or none, same posture as the command-zone gate above.
+ */
+export function allDraggedCardsBelongToOwner(editor: Editor, seatId: string | null): boolean {
+  const selected = editor.getSelectedShapes();
+  const draggedCards = selected.filter((shape): shape is MtgCardShape => shape.type === "mtg-card");
+  if (draggedCards.length === 0 || draggedCards.length !== selected.length) return false;
+  return draggedCards.every((card) => card.props.owner === seatId && card.props.gameCardIndex !== null);
+}
+
 export function useIsZoneArmed(editor: Editor, zoneId: TLShapeId): boolean {
   return useValue("isZoneArmed", () => armedZoneIdSignal(editor).get() === zoneId, [editor, zoneId]);
+}
+
+/** The armed zone's id, but only when it's a library — for the swirl overlay (ticket 12). */
+export function useArmedLibraryZoneId(editor: Editor): TLShapeId | undefined {
+  return useValue(
+    "armedLibraryZoneId",
+    () => {
+      const id = armedZoneIdSignal(editor).get();
+      if (!id) return undefined;
+      const shape = editor.getShape(id);
+      if (!shape || shape.type !== "mtg-zone") return undefined;
+      return (shape.props as MtgZoneShapeProps).zone === "library" ? id : undefined;
+    },
+    [editor]
+  );
 }

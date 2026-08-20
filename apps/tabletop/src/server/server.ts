@@ -7,6 +7,7 @@ import { trace, context, propagation, SpanKind } from "@opentelemetry/api";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { handleSeatJoined } from "./seatJoined.js";
+import { handleCardReturned } from "./cardReturned.js";
 import { handleTestCardSeed } from "./testSeedRoute.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -43,6 +44,9 @@ export function createApp() {
 
   // The seat-joined seam (JES-140) — SCAFFOLDING the Spine absorbs; see seatJoined.ts
   app.post("/api/tables/:tableName/events", handleSeatJoined);
+
+  // The library-portal swallow's send leg (ticket 12) — see cardReturned.ts
+  app.post("/api/tables/:tableName/cards/return", handleCardReturned);
 
   // Test-only seam: lets Playwright/vitest seed a card without a live Spine. Never
   // mounted in production — card.played only arrives via the Spine SSE subscription.

@@ -68,7 +68,7 @@ function zoneAt(editor: Editor, shape: MtgCardShape): ZoneHit | undefined {
   return bounds ? topmostZoneAt(editor, bounds.center) : undefined;
 }
 
-function evictPassengers(editor: Editor, card: MtgCardShape, zoneHit: ZoneHit): void {
+export function evictPassengers(editor: Editor, card: MtgCardShape, zoneHit: ZoneHit): void {
   const passengers = editor
     .getSortedChildIdsForParent(card.id)
     .map((id) => editor.getShape(id))
