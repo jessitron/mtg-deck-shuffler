@@ -6,10 +6,10 @@ Status: ready-for-agent
 
 ## Problem Statement
 
-`.scratch/spine-in-the-middle/map.md` names the card-return channel — a player dragging a
-card off the Tabletop's canvas onto the library portal, which should move that card into
-the Shuffler's Revealed zone — as fully vocabulary-specced but never implemented. The
-event kind it needs, `card.returned.v1`, was designed in
+The card-return channel — a player dragging a card off the Tabletop's canvas onto the
+library portal, which should move that card into the Shuffler's Revealed zone — is fully
+vocabulary-specced but never implemented. The event kind it needs, `card.returned.v1`,
+was designed in
 `.scratch/tabletop-cards-come-and-go/issues/02-event-vocabulary.md` but no `eventsUrl`, no
 handler, and no schema exist in code today.
 
@@ -28,9 +28,8 @@ implementation.
 
 ## Solution
 
-Route the card-return channel through the Spine from day one, superseding the earlier
-direct-POST `eventsUrl` design (`spine-in-the-middle/map.md`'s 2026-08-11 decision that
-card-return reroutes through the Spine). Build both legs:
+Route the card-return channel through the Spine, matching how every other event kind
+reaches its consumer. Build both legs:
 
 1. **Tabletop → Spine**: when a player drags a card onto the library portal, the Tabletop
    POSTs a `card.returned.v1` event to the Spine's existing generic

@@ -88,8 +88,8 @@ subscriber for `card.played`).
    next.
 10. **`gameId` also crosses freely now.** Reversed by Jess this session (fixed in place in
     `01-return-channel.md`, `06-seating-carries-two-urls.md`,
-    `tabletop-cards-come-and-go/spec.md`, `spine-in-the-middle/issues/01-the-join-flow.md`
-    — commits `ca78ac99`, `c5686f0e`). No boundary guard on it anywhere in the fleet.
+    `tabletop-cards-come-and-go/spec.md` — commits `ca78ac99`, `c5686f0e`). No boundary
+    guard on it anywhere in the fleet.
 11. **Tabletop→Spine send tracing**: no new server-side `traceparent`-minting helper.
     Ride the ambient request span (the gesture handler that triggers the send) plus
     undici's automatic outbound header, matching `sendCardPlayedToSpineBestEffort`'s

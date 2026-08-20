@@ -42,8 +42,11 @@ Concretely:
   In solo/clipboard mode, it copies the fleet's existing generic card-back image
   (`CARD_BACK` / `cardBackImageUrl()`) to the clipboard instead of the real card image —
   so pasting into Mural/Miro/Discord shows a concealed card, matching what "Play"
-  already does for a real reveal. In table mode, it sends `card.played-face-down`
-  (send-then-commit, same failure protocol as `card.played`) instead of `card.played`.
+  already does for a real reveal. In table mode, it sends `card.played-face-down` to the
+  Spine's event log instead of `card.played` — best-effort, exactly like `card.played`
+  today (`sendCardPlayedToSpineBestEffort`): game state mutates and persists immediately
+  regardless of whether the Spine send succeeds, so there is no blocking send-then-commit
+  step to fail here.
   Either way, the card moves to the `Table` location in the Shuffler's own game state
   exactly as "Play" does — the Shuffler doesn't track concealment itself; it's a
   Tabletop-rendering concern (per the two-faced-cards owner, concealment is *depicted*,
