@@ -184,19 +184,19 @@ landed as part of the Spine integration.
 ### Seating (`seat.joined.v1` — ticket 02, converging with table-layout's extensions)
 
 - Gains optional **`commanders`**: an array of 0–2 entries, each
-  `{ card: { scryfallId, instanceId } }`, alongside `gameUrl`/`eventsUrl`. Commanders are
+  `{ card: { scryfallId, instanceId } }`, alongside `gameUrl`. Commanders are
   ordinary GameCards in the Shuffler's CommandZone location with real instanceIds.
 - **No `face` per commander** — a commander always arrives in the command zone face up;
   flipping it there afterward is table-local.
-- On the pre-Spine wire the scaffolding fields ride along off-schema (`cardName`,
-  `frontImageUrl`, `backImageUrl`), with the two-faced-cards owner's sharp edge honored:
-  `backImageUrl` derived from the card's `twoFaced` flag, never from stored-URI presence.
+- The scaffolding fields ride along off-schema (`cardName`, `frontImageUrl`,
+  `backImageUrl`), with the two-faced-cards owner's sharp edge honored: `backImageUrl`
+  derived from the card's `twoFaced` flag, never from stored-URI presence.
 - Once seated, a commander is an ordinary card: same exits as anything else.
 - **`seat.taken` vs `seat.joined` are two different facts from two different flows**, not
-  a divergence to unify: `seat.joined` (Shuffler→Tabletop) means a seat's game connected;
-  `seat.taken` (Spine context) means someone sat down via the Spine's own join endpoint.
-  Document the distinction in `contracts/README.md` and the glossary; convergence is
-  map-5 work.
+  a divergence to unify: `seat.joined` means a seat's Shuffler game connected — the Spine
+  administers the join and notifies the Tabletop itself; `seat.taken` means someone sat
+  down via the Spine's own join endpoint. Document the distinction in
+  `contracts/README.md` and the glossary.
 
 ### Validation gets real (this map, not map 5 — ticket 02)
 
@@ -303,7 +303,6 @@ sits at seam 1, which both ships already use.
 - **Tokens and duplicated cards** — table-only physics; their events go to the Spine
   someday, never to the Shuffler.
 - **The Tabletop's own undo** — map 4's design question.
-- **The Spine transport itself** — map 5, The table reports.
 - **Hand or library counts on the table** — not Mural parity.
 - **Rules enforcement** — standing fleet non-goal.
 - **Unifying `seat.taken` and `seat.joined`** — documented as two facts; convergence
