@@ -120,7 +120,7 @@ export const deckName = fc.oneof(
 );
 
 export const deckProvenance: fc.Arbitrary<DeckProvenance> = fc.record({
-  retrievedDate: fc.date({ min: new Date("2020-01-01"), max: new Date("2024-12-31") }),
+  retrievedDate: fc.date({ min: new Date("2020-01-01"), max: new Date("2024-12-31"), noInvalidDate: true }),
   sourceUrl: fc.oneof(
     fc.nat().map((n) => `https://archidekt.com/decks/${n}/test-deck`),
     fc.constantFrom("/deck/123", "https://example.com/deck/456", "file://local-deck.json")
