@@ -3,12 +3,11 @@
 ## Where a card shape comes from
 
 `apps/tabletop/src/server/cardArrival.ts` exports `applyCardArrival(tableName, body)` — the shared
-validation/dedup/`ensurePlayerArea`-self-heal/placement logic for a `card.played` event. It has no
-HTTP entry point of its own (the old production route, `POST /api/tables/:tableName/cards`, and its
-`handleCardArrival` handler, were deleted by the tabletop-spine-sse-subscriber ticket 02,
-2026-08-18 — see `history.md`). **In production, `applyCardArrival` is called exclusively by the
-Spine SSE dispatcher**, `apps/tabletop/src/server/spineEventDispatch.ts`'s `dispatchSpineEvent`
-(wired up by ticket 01 of the same feature) — it subscribes to the Spine's per-table SSE stream,
+validation/dedup/placement logic for a `card.played` event. A `card.played` for a seat that hasn't
+`seat.joined` yet is rejected (`{status: "rejected", reason: "seat-not-joined"}`), not self-healed —
+there's no HTTP entry point of its own. **In production, `applyCardArrival` is called exclusively by the
+Spine SSE dispatcher**, `apps/tabletop/src/server/spineEventDispatch.ts`'s `dispatchSpineEvent` — it
+subscribes to the Spine's per-table SSE stream,
 filters for `card.played`, continues the trace from the broadcast envelope's `traceparent`, and
 calls `applyCardArrival` inside that span. A second, test-only HTTP seam exists —
 `apps/tabletop/src/server/testSeedRoute.ts`'s `handleTestCardSeed`, mounted at

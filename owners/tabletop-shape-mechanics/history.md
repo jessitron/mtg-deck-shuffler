@@ -62,14 +62,12 @@ out of sync with tldraw's `tlmenus` atom. Recorded as a new, separate watch poin
 folded into watch point 15, which is about a card's selection surviving menu close, not about the
 menu itself failing to reopen.
 
-## `card.played`'s production entry point moves from HTTP to Spine SSE (2026-08-18)
+## `card.played` reaches the Tabletop only through the Spine's SSE subscription
 
-`tabletop-spine-sse-subscriber` ticket 02 (ticket 01 wired the subscription itself, a separate
-commit). `apps/tabletop/src/server/cardArrival.ts`'s old production route,
-`POST /api/tables/:tableName/cards` and its `handleCardArrival` HTTP handler, were deleted — the
-Shuffler no longer POSTs cards to the Tabletop directly. `applyCardArrival(tableName, body)` (the
-shared validation/dedup/`ensurePlayerArea`-self-heal/placement logic this KB already documented,
-unchanged in substance) is now called from two places only:
+`apps/tabletop/src/server/cardArrival.ts` has no HTTP entry point of its own — the Shuffler never
+POSTs cards to the Tabletop directly. `applyCardArrival(tableName, body)` (the shared
+validation/dedup/placement logic this KB already documented, unchanged in substance) is called
+from two places only:
 
 - **Production**: `apps/tabletop/src/server/spineEventDispatch.ts`'s `dispatchSpineEvent`,
   subscribed to the Spine's per-table SSE stream, filtering for `card.played` and continuing the
