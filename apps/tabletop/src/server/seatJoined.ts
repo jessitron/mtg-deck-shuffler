@@ -37,22 +37,44 @@ interface SeatJoinedPayload {
 export async function handleSeatJoined(req: Request, res: Response): Promise<void> {
   const tableName = slugifyTableName(req.params.tableName ?? "");
   if (!tableName) {
+    trace.getActiveSpan()?.setAttributes({
+      "seat_joined.rejected": "table-name-required",
+      "request.params.tableName": req.params.tableName ?? "",
+    });
     res.status(400).json({ error: "table name required" });
     return;
   }
 
   const result = validateIncomingEvent<SeatJoinedPayload>(req.body, "seat.joined");
   if (!result.ok) {
+    trace.getActiveSpan()?.setAttributes({
+      "seat_joined.rejected": "invalid-event",
+      "seat_joined.rejected.detail": result.error,
+      "table.slug": tableName,
+      "request.body": JSON.stringify(req.body),
+    });
     res.status(400).json({ error: result.error });
     return;
   }
   const { envelope } = result;
   if (slugifyTableName(envelope.tableId) !== tableName) {
+    trace.getActiveSpan()?.setAttributes({
+      "seat_joined.rejected": "tableid-mismatch",
+      "table.slug": tableName,
+      "envelope.tableId": envelope.tableId,
+      "event.id": envelope.id,
+    });
     res.status(400).json({ error: "envelope tableId does not match the table being posted to" });
     return;
   }
   const seatId = envelope.initiator.seatId;
   if (!seatId) {
+    trace.getActiveSpan()?.setAttributes({
+      "seat_joined.rejected": "seatid-missing",
+      "table.slug": tableName,
+      "event.id": envelope.id,
+      "player.name": envelope.initiator.playerName ?? "",
+    });
     res.status(400).json({ error: "initiator.seatId is required for seat.joined" });
     return;
   }
@@ -90,7 +112,14 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
   }
 
   if (entry.seats.size >= MAX_SEATS) {
-    trace.getActiveSpan()?.setAttribute("seat_joined.rejected", "table-full");
+    trace.getActiveSpan()?.setAttributes({
+      "seat_joined.rejected": "table-full",
+      "table.slug": tableName,
+      "event.id": envelope.id,
+      "seat.id": seatId,
+      "room.seats": entry.seats.size,
+      "room.max_seats": MAX_SEATS,
+    });
     res.status(409).json({ error: `table is full: ${MAX_SEATS} seats` });
     return;
   }
