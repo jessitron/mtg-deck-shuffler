@@ -13,8 +13,8 @@ event kind it needs, `card.returned.v1`, was designed in
 `.scratch/tabletop-cards-come-and-go/issues/02-event-vocabulary.md` but no `eventsUrl`, no
 handler, and no schema exist in code today.
 
-This is the reverse direction of the just-landed Tabletop subscriber
-(`.scratch/tabletop-spine-sse-subscriber/spec.md`, commit `6c6f52cc`), and it isn't a
+This is the reverse direction of the Tabletop's own Spine subscriber
+(`apps/tabletop/src/server/spineSubscriber.ts`), and it isn't a
 simple mirror image: the Tabletop is a long-running canvas process that already dispatches
 into live in-memory shape state, but the Shuffler is HTMX — a page has no live connection
 of its own today. Pushing a `card.returned` event into an open Shuffler tab needs a second
