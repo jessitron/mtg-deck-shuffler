@@ -29,6 +29,7 @@ import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 import { applyGameCommand, CommandOutcome } from "./apply-game-command.js";
 import { WhatHappened } from "./GameState.js";
 import { GameId, parseGameId } from "./domain-types.js";
+import { ensureGameSpineSubscription } from "./port-spine/gameSubscriptionRegistry.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -1221,6 +1222,9 @@ export function createApp(
       if (!persistedGame) {
         res.status(404).send(`<div>Game ${gameId} not found</div>`);
         return;
+      }
+      if (persistedGame.spineTableId) {
+        ensureGameSpineSubscription(gameId, persistedGame.spineTableId, { persistStatePort, cardRepository });
       }
       const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
       setCommonSpanAttributes({ tableName: game.tableName, playerName: game.playerName });

@@ -51,6 +51,15 @@ COPY --from=builder /repo/apps/shuffler/public ./public
 COPY --from=builder /repo/apps/shuffler/package.json ./
 COPY --from=builder /repo/apps/shuffler/decks ./decks
 COPY --from=builder /repo/apps/shuffler/run-in-docker ./run-in-docker
+# incomingEventValidation.ts reads these at runtime (validating a card.returned event
+# arriving over the Spine subscription). Never needed at build time, so the builder stage
+# never had them — copied straight from the build context. The flattened /app layout
+# (see the note above) means the source's own relative-path default can't reach this
+# directory the way it does in dev, so CONTRACTS_DIR below points it here directly
+# (mirroring the Spine's own CONTRACTS_DIR, services/spine/lib/event_contract.rb, and the
+# Tabletop's equivalent runtime copy of this same directory).
+COPY contracts ./contracts
+ENV CONTRACTS_DIR=/app/contracts
 
 EXPOSE 3333
 CMD ["sh", "-c", "./run-in-docker"]
