@@ -169,6 +169,36 @@ each).
   survive an image overlay the same way. Screenshot-verified the ring shows. (At the time this
   was confirmed, the same reasoning was cited for the playmat too — that citation is now stale
   for the playmat specifically, since there's no separate image shape left to ride on top of.)
+  **The consequence this bullet predicted — "any armed treatment for the library must read as
+  an outward effect, not the box-shadow ring" — is now built, not just argued (2026-08-20,
+  ticket 12, "the library portal").** `LibraryPortalOverlay.tsx` renders ticket 04's decided
+  Vortex arming (a rotating pink/amber conic-gradient swirl plus a dark veil) entirely
+  **outside** the zone shape, in viewport space, rather than trying to punch through the
+  library's opaque card-back picture with a box-shadow. See the new bullet below.
+- **`TLComponents.InFrontOfTheCanvas` is a second way to render an armed/about-to-receive
+  treatment, and it exists precisely because the box-shadow-ring pattern above can't reach
+  through an opaque picture (2026-08-20, ticket 12, `LibraryPortalOverlay.tsx` — the fleet's
+  first use of this tldraw slot, wired as `components.InFrontOfTheCanvas` in `TablePage.tsx`).**
+  It renders in **viewport space**, above the whole canvas, positioned by reading the target
+  shape's page bounds through `editor.pageToViewport()`/`editor.getZoomLevel()` each frame
+  (`useValue`) rather than being a prop on the shape itself — so it isn't clipped by, or
+  layered under, anything the shape draws. This is a **second, distinct armed-treatment
+  mechanism from `MtgZoneShapeUtil`'s `box-shadow` ring** (ticket 14, see above), not a
+  replacement for it: the ring is the default for a zone whose interior *isn't* hidden by an
+  opaque overlay (graveyard, exile, the Stack, command zone); `InFrontOfTheCanvas` is for the
+  library specifically, where the box-shadow ring rides on top of the border but the interior
+  tint it pairs with (Material green's "restate the boundary + tint the interior" shape,
+  see "Falls out of the above" in [open-choices.md](open-choices.md)) would be invisible
+  underneath the card-back picture. **Both mechanisms are real precedent now — pick the ring
+  for a zone with no opaque overlay, and this viewport-space slot only when something needs to
+  sit visibly above one.** Ticket 04's swirl uses the fleet's own tokens as-is —
+  `conic-gradient(from 0deg, var(--dark-pink), var(--armed-glow), var(--dark-pink))` — no new
+  hex, no drift; the only literal is the veil, `rgba(10, 6, 20, 0.4)`, a translucent black
+  overlay with no identity-color meaning (same posture as the two other sanctioned decorative
+  `outline`/veil literals recorded elsewhere in this KB — it darkens what's under it, it isn't
+  standing in for a token). Mechanics detail (pointer-keying, the swallow animation, the
+  `owner`-gate) belongs to the `tabletop-shape-mechanics` owner, not here — see its
+  `architecture.md` → "The library portal" and `history.md`'s 2026-08-20 entry.
 - **tldraw's `.tl-image` class escapes any intermediate wrapper — a frame around an image
   must style its `<img>` directly.** `.tl-image` is `position: absolute; inset: 0`
   (tldraw.css), anchored to `.tl-image-container` — so an `<img className="tl-image">`

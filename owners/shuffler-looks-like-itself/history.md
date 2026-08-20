@@ -1,5 +1,55 @@
 # History
 
+## 2026-08-20 — ticket 04's Vortex arming shipped, and the fleet got a second armed-treatment mechanism
+
+`apps/tabletop/src/client/shapes/LibraryPortalOverlay.tsx` (tabletop-cards-come-and-go ticket
+12, "the library portal") built the arming visual `.scratch/tabletop-cards-come-and-go/issues/04-portal-gesture.md`
+decided back on 2026-08-09: Jess reacted to three live prototype variants and picked **C,
+"Vortex"** — a rotating pink/amber conic-gradient swirl with a faint dark veil — over the
+reused armed-glow box-shadow ring (A) and a maw/veil-only look (B). ("I love option C SO
+MUCH.") Ticket 12 shipped it as decided: `conic-gradient(from 0deg, var(--dark-pink),
+var(--armed-glow), var(--dark-pink))` over `rgba(10, 6, 20, 0.4)`, spun by a plain CSS
+`@keyframes` (1.6s linear). Both named tokens are used as-is; the veil rgba is the only
+literal, and it's decorative darkening with no identity-color meaning, not a value standing in
+for a missing token — no drift.
+
+**Why it couldn't be the existing armed-glow ring, and why that's a new mechanism, not a
+one-off.** `MtgZoneShapeUtil`'s box-shadow ring (ticket 14, 2026-08-08) is a prop on the zone
+shape itself, so it renders in the shape's own stacking context — fine for graveyard, exile,
+the Stack and command zone, but the library's opaque card-back picture sits on top of the zone
+box (the "opaque picture hides the box's interior" limit this KB has carried since ticket 14).
+A ring can ride on top of that picture; an *interior tint* — the other half of the fleet's one
+existing "armed" shape, Material green's now-retired `.hand-drop-zone.drag-over`, "restate the
+boundary + tint the interior" — cannot. So the swirl renders **outside the shape entirely**, in
+viewport space, via `TLComponents.InFrontOfTheCanvas` — the fleet's first use of that tldraw
+slot (`components.InFrontOfTheCanvas = LibraryPortalOverlay` in `TablePage.tsx`). It tracks the
+armed zone by reading `editor.getShapePageBounds()` through `editor.pageToViewport()` and
+`editor.getZoomLevel()` inside a `useValue`, so it pans and zooms correctly without being a
+prop on the shape at all. **This is now recorded as a second, coequal armed-treatment
+mechanism**, not a special case: the box-shadow ring for a zone with no opaque overlay,
+`InFrontOfTheCanvas` for one that has to sit visibly above one. The next zone that needs an
+armed look picks between the two by asking whether an opaque picture would hide it, not by
+copying whichever one is closest in the file tree.
+
+**Confirmed, not assumed: no token drift.** `--dark-pink`, `--armed-glow` and the veil rgba
+were checked against `packages/design-tokens/tokens.css` and this KB's own token list — both
+named tokens resolve as documented, and the veil is exactly the kind of decorative,
+non-identity black overlay this KB has already sanctioned elsewhere (the `--deep-space`-based
+dark surfaces are a different, tokenized case; this is closer to the two remaining decorative
+`outline` literals — a one-off with no identity meaning to tokenize).
+
+**Left as a gap, on purpose:** no `/design` specimen. The counter disc, the sleeved card and
+the deck-title label all got a static mock or the real component staged on the gallery before
+or shortly after landing; this one is a rotating, pointer-armed, viewport-positioned overlay
+with no natural static representation, so it wasn't forced into one. If a labelled-mock
+approximation is ever wanted, [open-choices.md](open-choices.md) → "Fleet gaps — the Tabletop
+side" is where to pick the thread back up.
+
+Mechanics detail — pointer-keying, the `owner` gate, the swallow animation's
+`getInterpolatedProps`, send-then-commit deletion — is the `tabletop-shape-mechanics` owner's
+territory, not this one's; see its `architecture.md` → "The library portal" and `history.md`'s
+own 2026-08-20 entry.
+
 ## How the typography got settled
 
 The most consistent thing in the app was arrived at by subtraction, not decree.

@@ -97,6 +97,19 @@ always-live-input case). Its mechanics territory is exactly the life-counter pat
 appearance is a separate, unratified decision left to `shuffler-looks-like-itself`. See
 `architecture.md`'s "editable deck title" section and `history.md`.
 
+**The library portal** (`.scratch/tabletop-cards-come-and-go/issues/12-plan.md`, landed
+2026-08-20) added a pointer-keyed check ahead of `MtgCardShapeUtil.onTranslateEnd`'s existing
+center-keyed `handleTranslateEnd`: dragging every selected card (all owned by the same seat) onto
+that seat's own library swallows them off the table entirely, via a new `cardSwallow.ts` and a
+new server route relaying `card.returned.v1` to the Spine. This is the KB's first example of a
+check that can pre-empt `handleTranslateEnd` outright rather than living inside it — see
+`architecture.md`'s "The library portal" section and watch point 26 for the obligation that
+creates (re-deriving `handleTranslateEnd`'s side effects, notably passenger eviction, since none
+of them run for free once it's skipped). Also the first use of `getInterpolatedProps` (tweening a
+custom shape's own `props` during `editor.animateShapes`) and `TLComponents.InFrontOfTheCanvas`
+(an arming visual that has to render above opaque zone content a `component()`-level treatment
+can't reach).
+
 ## Design philosophy
 
 - **Extend tldraw's built-in shape utils rather than reimplementing them, where that's still
@@ -124,7 +137,10 @@ appearance is a separate, unratified decision left to `shuffler-looks-like-itsel
 | `component()`/`getIndicatorPath()` bodies + tap catch-up animation | `apps/tabletop/src/client/shapes/cardRender.tsx` (`CardFace`, `cardIndicatorPath`) |
 | `onClick` body — tap/untap toggle + ticket 16's multi-untap propagation | `apps/tabletop/src/client/shapes/cardTapClick.ts` (`handleCardClick`) |
 | Passenger hosting — `PASSENGER_TYPES`, the two `can*` gates, `onDragShapesIn`/`onDragShapesOut` bodies | `apps/tabletop/src/client/shapes/cardPassengers.ts` |
-| `onTranslateEnd` body — zone-entry detection, passenger eviction, stack-landing collision avoidance | `apps/tabletop/src/client/shapes/cardZoneEntry.ts` (`handleTranslateEnd`, plus private `zoneAt`/`evictPassengers`/`nudgeOffAnotherCard`) |
+| `onTranslateEnd` body — zone-entry detection, passenger eviction, stack-landing collision avoidance | `apps/tabletop/src/client/shapes/cardZoneEntry.ts` (`handleTranslateEnd`, plus `zoneAt`/`evictPassengers` — the latter exported — and private `nudgeOffAnotherCard`) |
+| Library-portal swallow — pointer-keyed check ahead of `handleTranslateEnd`, send-then-commit delete | `apps/tabletop/src/client/shapes/cardSwallow.ts` (`swallowCard`), checked from `MtgCardShapeUtil.onTranslateEnd` itself |
+| Library-portal arming visual (first `TLComponents.InFrontOfTheCanvas` use) | `apps/tabletop/src/client/shapes/LibraryPortalOverlay.tsx`, wired in `TablePage.tsx` |
+| Regression test for the library portal | `apps/tabletop/test/verification/verify-library-portal.spec.ts` |
 | Tap pivot math (pure, shared by `onClick` and the context menu) | `apps/tabletop/src/client/shapes/cardTap.ts` (`tapPartial`) |
 | First custom `ContextMenu` (Flip/Turn face down-up/Tap-Untap, right-click selection hazard) | `apps/tabletop/src/client/CardContextMenu.tsx`, wired via `TLComponents.ContextMenu` in `TablePage.tsx` |
 | Regression test for context-menu stale-selection hazard | `apps/tabletop/test/verification/verify-flip-face-down.spec.ts` |

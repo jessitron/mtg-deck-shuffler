@@ -29,6 +29,7 @@ import { MtgLifeCounterShapeUtil } from "./shapes/MtgLifeCounterShapeUtil";
 import { MtgTitleShapeUtil } from "./shapes/MtgTitleShapeUtil";
 import { MtgZoneShapeUtil } from "./shapes/MtgZoneShapeUtil";
 import { TableContextMenu } from "./CardContextMenu";
+import { LibraryPortalOverlay } from "./shapes/LibraryPortalOverlay";
 import { clearStaleSelectionOnPointerDown } from "./clearStaleSelectionOnPointerDown";
 import { closeContextMenuBeforeOutsideClick } from "./closeContextMenuBeforeOutsideClick";
 
@@ -111,6 +112,7 @@ function ToolbarWithCounter(props: React.ComponentProps<typeof DefaultToolbar>) 
 const components: TLComponents = {
   Toolbar: ToolbarWithCounter,
   ContextMenu: TableContextMenu,
+  InFrontOfTheCanvas: LibraryPortalOverlay,
 };
 
 

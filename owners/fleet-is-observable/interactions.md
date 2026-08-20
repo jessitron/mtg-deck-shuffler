@@ -72,6 +72,12 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   (`shuffler-spine-gateway-stale` closed). The Spine notifier separately relies on Net::HTTP
   instrumentation for the header; body and header share a trace id but may have different span ids.
 
+- **The Tabletop's Playwright verify suite depends on a fake Spine listening on `SPINE_URL`'s
+  default port (4600)** — `apps/tabletop/test/verification/support/fakeSpine.ts`, wired via
+  `globalSetup`/`globalTeardown` in `playwright.config.ts`. Added for the library-portal swallow's
+  send-then-commit flow (`sendCardReturned.ts`); any future Tabletop verify spec that awaits a real
+  Spine response should reuse this fake rather than adding a second one.
+
 ## Depended on by
 
 - **Every production diagnosis** — the North Star includes "when something breaks, Honeycomb
@@ -316,6 +322,16 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   needs a durable `traceparent` field, reuse the existing minting call for that event kind rather
   than adding a new site — and remember each call site mints its own event `id`, so sending the
   "same" logical event to two destinations produces two different `id`s sharing one `traceparent`.
+- **The Tabletop now has its own best-effort outbound send too** (`sendCardReturned.ts`,
+  library-portal ticket 12) — Tabletop-server→Spine, not the Shuffler's `port-spine/` direction.
+  It copies the never-throw + span-attribute + `log.warn` shape but **resolves `Promise<boolean>`**
+  rather than being pure fire-and-forget, because its caller (`cardReturned.ts`'s
+  `POST /api/tables/:tableName/cards/return`) is a real send-then-commit gate — a 2xx becomes the
+  browser's permission to delete a shape. Copy the boolean-return shape only when the caller
+  genuinely branches on the outcome; a fire-and-forget send should stay void, matching the
+  Shuffler's existing sends. Single-request sends should bound with `AbortSignal.timeout(...)`, not
+  the long-lived `undici.Agent`/heartbeat-aware dispatcher `spineSubscriber.ts` uses — that shape is
+  for an idle, long-lived stream, not one request.
 - **The Shuffler has exactly one outbound gateway: `port-spine/`.** There is no `TabletopPort`,
   `HttpTabletopGateway`, `FakeTabletopGateway`, `sendCardToTableFirst`, or `TABLETOP_URL`
   anywhere in the ship — `card.played` travels Shuffler→Spine only, then

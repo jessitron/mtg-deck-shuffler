@@ -48,7 +48,7 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
   if (!seatId) {
     return { status: "invalid", error: "initiator.seatId is required for card.played" };
   }
-  const { card, face, zoneHint, frontImageUrl, backImageUrl, cardName, owner, isCommander } = envelope.payload;
+  const { card, face, zoneHint, frontImageUrl, backImageUrl, cardName, owner, isCommander, gameCardIndex } = envelope.payload;
 
   trace.getActiveSpan()?.setAttributes({
     "card.instance_id": card.instanceId,
@@ -145,6 +145,7 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
               cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
               owner,
               isCommander,
+              gameCardIndex: gameCardIndex ?? null,
             })
           );
         });

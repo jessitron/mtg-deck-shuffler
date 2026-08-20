@@ -35,15 +35,19 @@ Shuffler's Spine SSE subscriber for the swallow to send anywhere). Externally bl
 shipping un-gated by `tabletop-table-layout` ticket 18's `owner` card prop (in flight) —
 the gesture may be built ahead of it but must not ship without the gate.
 
-- [ ] Arming swirl renders over a library while a card shape drags over it, local to the
+- [x] Arming swirl renders over a library while a card shape drags over it, local to the
       dragger, gated to card shapes and to the player's own library
-- [ ] Drop plays the spin-and-shrink swallow (~500ms), visible to everyone at the table
-- [ ] Swallow POSTs `card.returned.v1` (`occurredIn: "tabletop"`) to the Spine's
+- [x] Drop plays the spin-and-shrink swallow (~500ms), visible to everyone at the table
+- [x] Swallow POSTs `card.returned.v1` (`occurredIn: "tabletop"`) to the Spine's
       `POST /tables/:tableId/events`, best-effort — the send never blocks the swallow
-- [ ] Attachments fall off and remain on the table on swallow (via the Physics map's
+- [x] Attachments fall off and remain on the table on swallow (via the Physics map's
       existing mechanism)
-- [ ] Multi-select dropped on the library swallows the whole group, one gesture
-- [ ] The gate against foreign libraries is wired to table-layout ticket 18's `owner` prop
+- [x] Multi-select dropped on the library swallows the whole group, one gesture
+- [x] The gate against foreign libraries is wired to table-layout ticket 18's `owner` prop
       before this ships un-gated
-- [ ] Playwright: drag a card onto your own library, see it arm then swallow, and see it
-      land in the Shuffler's Reveal zone; multi-select smoke; foreign-library gate smoke
+- [x] Playwright: drag a card onto your own library, see it arm then swallow; multi-select
+      smoke; foreign-library gate smoke (`test/verification/verify-library-portal.spec.ts`).
+      **Not checkable yet:** "see it land in the Shuffler's Reveal zone" — that requires
+      `.scratch/shuffler-spine-sse-subscriber/issues/03-shuffler-spine-subscriber.md` (the
+      Shuffler's own Spine SSE subscriber), which is unbuilt. Scoped out of this ticket by
+      Jess's explicit choice (2026-08-20); the Tabletop send leg is done and ready for it.

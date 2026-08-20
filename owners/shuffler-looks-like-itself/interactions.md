@@ -674,6 +674,17 @@ not by recomputing new numbers.**
   hexes is **not** a token-discipline violation — it's player-chosen identity data, the same
   category the raw-hex-in-stylesheets ban explicitly doesn't govern. Precedent for reading seat
   identity color as chrome is `/game`'s `--seat-primary`/`--seat-secondary`.
+- **Two armed/about-to-receive mechanisms exist now, and they aren't interchangeable
+  (2026-08-20, ticket 12, "the library portal").** `MtgZoneShapeUtil`'s `box-shadow` ring
+  (ticket 14) is the default — it's a prop on the shape, rides on top of the border, and
+  survives being under an opaque overlay. `LibraryPortalOverlay.tsx`'s conic-gradient swirl,
+  rendered via `TLComponents.InFrontOfTheCanvas` (the app's first use of that slot, wired in
+  `TablePage.tsx`), is for the one case the ring can't cover: a zone whose opaque picture would
+  hide an *interior* tint underneath it (today, only the library — see README → tldraw limits,
+  "an opaque picture layered over a zone box hides that box's interior"). Reach for the ring
+  first; reach for a viewport-space `InFrontOfTheCanvas` overlay only when the treatment needs
+  to sit visibly above an opaque shape. The pointer-keying, gating, and animation mechanics
+  belong to the `tabletop-shape-mechanics` owner (`architecture.md` → "The library portal").
 - **Read [README.md](README.md) → "tldraw limits" first.** The list keeps growing; the hard
   limits so far: no Orbitron in the `geo`/`text` `font` enum (so on-brand canvas text
   requires a self-rendering shape), the global `:focus-visible` rule can't reach a shape

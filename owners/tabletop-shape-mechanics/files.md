@@ -22,7 +22,11 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   `TLGlobalShapePropsMap` module augmentation that registers `mtg-card` into tldraw's `TLShape`
   union, and `mtgCardShapeProps` (the `RecordProps` validators, imported by client
   `MtgCardShapeUtil.tsx`, server `rooms.ts`, and server `tableFurniture.ts`'s `mtgCardShape()`
-  builder, below).
+  builder, below). **Since the library portal (2026-08-20), gained `gameCardIndex: number |
+  null`** — the card's index in its owner's game state, required (non-null) for the library-portal
+  swallow to send `card.returned.v1`; `null` for shapes that never carried one (commander/ghost
+  mints). See `architecture.md`'s "The library portal" section and `interactions.md` watch
+  point 26.
 - `apps/tabletop/src/shared/mtgZoneShape.ts` — the same pattern for furniture (ticket 13):
   `MtgZoneShapeProps` (`w`, `h`, `zone` — a closed enum `"playmat" | "library" | "graveyard" |
   "exile" | "stack" | "command"` — `seatId`, `label`, `sleeveColor`, and, since 2026-08-11,
@@ -98,6 +102,33 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   2026-08-10 pasted-image fix, respectively). No longer needed now that
   `clearStaleSelectionOnPointerDown` covers every shape type centrally; both stock utils are back
   in the plain `defaultShapeUtils` spread with no filtering or replacement.
+- `apps/tabletop/src/client/shapes/cardSwallow.ts` — **new, the library portal (2026-08-20)**:
+  `swallowCard(editor, current, zoneHit)` — calls `evictPassengers` (now exported from
+  `cardZoneEntry.ts`) before animating the dropped card's spin/shrink/fade into the library's
+  center via `editor.animateShapes` (500ms), then defers (`setTimeout(0)`, never synchronous) an
+  async `completeSwallow`: POSTs `owner`/`scryfallId`/`gameCardIndex` to
+  `/api/tables/:tableSlug/cards/return` and only calls `editor.deleteShapes([id])` on a confirmed
+  2xx — on failure it re-`animateShapes`s the shape's pre-swallow visual snapshot back and leaves
+  it in the store. Called from `MtgCardShapeUtil.onTranslateEnd`'s new pointer-keyed check, ahead
+  of `handleTranslateEnd`. See `architecture.md`'s "The library portal" section and
+  `interactions.md` watch point 26.
+- `apps/tabletop/src/client/shapes/LibraryPortalOverlay.tsx` — **new, the library portal
+  (2026-08-20)**: the arming visual — a rotating pink/amber conic-gradient swirl plus a dark veil,
+  rendered in **viewport space** via `editor.pageToViewport` and wired as
+  `TLComponents.InFrontOfTheCanvas` in `TablePage.tsx` (the app's first use of that slot). Reads a
+  new `useArmedLibraryZoneId(editor)` (`zoneHitTest.ts`, below) — the same shared
+  `armedZoneIdSignal` every other zone's `component()`-level glow reads, narrowed to
+  `zone === "library"`, rendered through this different slot because the library's opaque
+  card-back picture would otherwise hide a `component()`-level treatment. See `architecture.md`'s
+  "The library portal" section.
+- `apps/tabletop/src/server/cardReturned.ts` — **new, the library portal (2026-08-20)**:
+  `handleCardReturned`, the new `POST /api/tables/:tableSlug/cards/return` route registered in
+  `server.ts` next to the existing `seat.joined` route. Validates `seatId`/`scryfallId`/
+  `gameCardIndex`, looks up the room's `spineTableId` and the seat's `playerName`, and calls
+  `sendCardReturnedToSpineBestEffort` — `200 { ok: true }` on a confirmed send, `502 { ok: false
+  }` otherwise. No tldraw store mutation here; the client-side `swallowCard` deletes the shape
+  itself once it sees the 2xx (send-then-commit). Not this owner's mechanics territory per se
+  (no ShapeUtil, no selection state) but the seam `swallowCard`'s completion depends on.
 - `apps/tabletop/src/client/closeContextMenuBeforeOutsideClick.ts` — **new, 2026-08-19**: exports
   `closeContextMenuBeforeOutsideClick(): () => void`, registered from `onTldrawMount` in
   `TablePage.tsx` alongside `clearStaleSelectionOnPointerDown`. A document-level capture-phase
@@ -143,7 +174,16 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
     `canRemovePassenger`; `onDragShapesIn`/`onDragShapesOut` → `handleDragShapesIn`/
     `handleDragShapesOut(editor, ...)` — all in `cardPassengers.ts`, below.
   - `onTranslateEnd(_initial, current)` → `handleTranslateEnd(editor, current)` — in
-    `cardZoneEntry.ts`, below.
+    `cardZoneEntry.ts`, below. **Since the library portal (2026-08-20)**, `onTranslateEnd` itself
+    gained a pointer-keyed check ahead of that call — `topmostZoneAt(editor,
+    editor.inputs.currentPagePoint)` against the dragger's own library — that, when it matches,
+    calls `swallowCard` (`cardSwallow.ts`, new) and returns `undefined` instead of ever calling
+    `handleTranslateEnd`. This is the one override body that's no longer a pure one-line delegate;
+    see `architecture.md`'s "The library portal" section and `interactions.md` watch point 26.
+  - **`getInterpolatedProps(startShape, endShape, progress)` — new override, the library portal
+    (2026-08-20)**: lerps `props.w`/`props.h` so `editor.animateShapes` shrinks the card smoothly
+    during the swallow instead of snapping (tldraw's built-in animation only interpolates
+    `x`/`y`/`rotation`/`opacity` for a shape's own props otherwise).
   **This was grilled, not assumed**: the ticket's original proposal was a CardPhysics/interop
   architectural seam (separate tldraw-plumbing from domain rules); grilling found no clean seam of
   that kind exists — every hook mixes a tldraw quirk with a card rule inseparably.
@@ -179,7 +219,10 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   `nudgeOffAnotherCard`/`overlapFraction`, both module-local — fired only on a fresh drag-entry
   into `"stack"`, nudging a dropped card right off another it would otherwise fully hide. See
   `architecture.md`'s "Stack landing collision avoidance" section and `interactions.md` watch
-  point 25 (the rotation/page-bounds gotcha this caught during `-review`).
+  point 25 (the rotation/page-bounds gotcha this caught during `-review`). **Since the library
+  portal (2026-08-20), `evictPassengers` is exported** (was private) so `cardSwallow.ts`'s
+  `swallowCard` — which bypasses `handleTranslateEnd` entirely on a qualifying library drop — can
+  call it directly; see `interactions.md` watch point 26.
 - `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` — extends `BaseBoxShapeUtil<MtgZoneShape>`
   (ticket 13); still defines no interaction hooks at all (`onClick`/`onTranslateEnd`/
   `onDragShapesOver` are all absent — see `architecture.md`/`interactions.md` watch point 7 for why
@@ -209,7 +252,12 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   also carries `seatId` (was just `{id, zone}`), and `armedZoneIdSignal` gates command zones on
   ownership via a new private `allDraggedCardsAreOwnersCommander(editor, seatId)` — see
   `architecture.md`'s "Command zones only arm for their owner's commander" section and
-  `interactions.md` watch point 19. Every non-command zone type is unaffected.
+  `interactions.md` watch point 19. Every non-command zone type is unaffected. **Since the library
+  portal (2026-08-20)**, `armedZoneIdSignal` gained a matching `zone === "library"` branch gated on
+  a new exported `allDraggedCardsBelongToOwner(editor, seatId)` (every selected shape a `mtg-card`
+  owned by `seatId` with a non-null `gameCardIndex`), and a new `useArmedLibraryZoneId(editor)`
+  narrows the same signal to library-only for `LibraryPortalOverlay.tsx`. See `architecture.md`'s
+  "The library portal" section and `interactions.md` watch point 26.
 - `apps/tabletop/src/client/shapes/MtgCounterShapeUtil.tsx` — **new, ticket 18**: extends
   `BaseBoxShapeUtil<MtgCounterShape>`. Deliberately no `onClick` (text editing is stock
   double-click-to-edit via `canEdit()`, avoiding the selection-deferral quirk); previously also
@@ -228,7 +276,10 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   skipping occupied rects; overlap beats failure. Used only by `evictCounters`.
 - `apps/tabletop/src/client/TablePage.tsx` — registers
   `shapeUtils = [...defaultShapeUtils, MtgCardShapeUtil, MtgZoneShapeUtil, MtgCounterShapeUtil,
-  MtgLifeCounterShapeUtil, MtgTitleShapeUtil]` (the last added editable-deck-title, 2026-08-12),
+  MtgLifeCounterShapeUtil, MtgTitleShapeUtil]` (the last added editable-deck-title, 2026-08-12).
+  **Since the library portal (2026-08-20)**, the `components` object also passes
+  `InFrontOfTheCanvas: LibraryPortalOverlay` — the app's first use of that `TLComponents` slot; see
+  `LibraryPortalOverlay.tsx`, above, and `architecture.md`'s "The library portal" section.
   passed to both `useSync` and the `<Tldraw shapeUtils={...}>` prop
   (this app uses the sync hook directly, which is why `defaultShapeUtils` must be spread in
   explicitly; see `architecture.md`). **Since ticket 05 (2026-08-11), `defaultShapeUtils` is
@@ -276,7 +327,10 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   of `meta` by ticket 12) at shape creation (`createShapeId`; no longer mints a tldraw asset
   record — flip is a pure `props.face` write now). Since table-layout ticket 18 (2026-08-09),
   builds the record via `tableFurniture.ts`'s `mtgCardShape()` instead of its own `store.put`
-  literal. This file has no HTTP entry point of its own — `card.played` reaches it only through
+  literal. **Since the library portal (2026-08-20), also threads `gameCardIndex` through from
+  `envelope.payload.gameCardIndex`** (already on the wire in `card.played`, previously dropped) —
+  see `architecture.md`'s "The library portal" section. This file has no HTTP entry point of its
+  own — `card.played` reaches it only through
   the Spine's SSE subscription. `applyCardArrival` is called by
   `spineEventDispatch.ts`'s `dispatchSpineEvent` in production, and by `testSeedRoute.ts`'s
   `handleTestCardSeed` (a test-only HTTP seam, `ENABLE_TEST_SEED_ROUTE=true` only) in tests. Not
@@ -356,7 +410,11 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   ticket 18 (2026-08-09), also home to **`mtgCardShape(args: MtgCardShapeArgs)`** (next to
   `zoneShape()`) — the single place every required `mtg-card` prop is listed when building a
   shape record; called by both `cardArrival.ts` and `seatJoined.ts` instead of each writing its
-  own `store.put` literal. See watch point 15. **Since tabletop-architecture ticket 02
+  own `store.put` literal. See watch point 15. **Since the library portal (2026-08-20),
+  `mtgCardShape()`'s signature gained `gameCardIndex?: number | null` (default `null`)** — the
+  canonical one-place-not-per-call-site route watch point 16 already established; `cardArrival.ts`
+  passes it through from `envelope.payload.gameCardIndex`, `seatJoined.ts`'s commander/ghost mints
+  get the `null` default. **Since tabletop-architecture ticket 02
   (2026-08-11), `zoneShape()`/`mtgCardShape()` (and the private `imageShape()`) return real
   types — `MtgZoneShape`/`MtgCardShape`/tldraw's own `TLImageShape` — instead of casting their
   literal to `any`; type-only, no mechanics changed.** See `history.md`'s ticket 02 entry;
@@ -509,6 +567,11 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   regression test for the Stack-landing collision check (`nudgeOffAnotherCard`,
   `cardZoneEntry.ts`). Confirmed red (99.98% overlap) pre-fix, green after.
 
+- `apps/tabletop/test/verification/verify-library-portal.spec.ts` — **new, the library portal
+  (2026-08-20)**: own-library arm-then-swallow (the swirl overlay appears mid-drag, the card
+  vanishes after a confirmed 2xx), a multi-select group swallow (rubber-band two cards, drag one,
+  both vanish), and a foreign-library gate smoke test (dragging toward another seat's library never
+  arms). See `architecture.md`'s "The library portal" section and `interactions.md` watch point 26.
 - `apps/tabletop/test/verification/verify-rightclick-reopen.spec.ts` — **new, 2026-08-19**: two
   loops of open/dismiss/reopen ×5 on the card context menu — one dismissing via Escape (passes even
   pre-fix, proving that path was never broken), one via an outside left-click (failed after the

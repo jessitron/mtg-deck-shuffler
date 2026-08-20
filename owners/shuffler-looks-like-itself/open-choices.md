@@ -588,6 +588,21 @@ self-rendering custom shape.
   same dashed-pink/armed-glow family as graveyard/exile, per the ticket. See
   [history.md](history.md) for the verification detail (Playwright, both single- and
   two-client).
+- **The library portal's arming treatment (tabletop-cards-come-and-go ticket 04, decided
+  2026-08-09) is now BUILT, not just decided (2026-08-20, ticket 12).** Ticket 04's prototype
+  review picked **Variant C, "Vortex"** — a rotating pink/amber conic-gradient swirl with a
+  faint dark veil — over the reused armed-glow ring (Variant A) and the maw/veil-only Variant
+  B. `LibraryPortalOverlay.tsx` ships it verbatim: `conic-gradient(from 0deg, var(--dark-pink),
+  var(--armed-glow), var(--dark-pink))` plus `rgba(10, 6, 20, 0.4)`, both tokens used as-is, no
+  new hex, no drift. See [README.md](README.md) → tldraw limits for why it has to render via
+  `TLComponents.InFrontOfTheCanvas` (viewport space) rather than the box-shadow ring
+  `MtgZoneShapeUtil` uses for the other zones — the library's opaque card-back picture is the
+  same "opaque picture hides the box's interior" limit that already governs this zone, and
+  this is the first mechanism built specifically to work around it. **Still owed: a `/design`
+  specimen**, same gap this KB has recorded for the counter disc, the sleeved card and the
+  deck-title label before it — a rotating, pointer-armed, viewport-positioned overlay doesn't
+  reduce to a static mock the way those did, so it wasn't attempted here; buoy it if a static
+  approximation (labelled a mock, per the existing convention) is ever wanted on the gallery.
 - **Coming to this owner: the tap motion's tempo** (`.scratch/tabletop-physics/issues/05-rotate-to-tap.md`,
   opened by ticket 04 on 2026-08-07). A card tapping is a 90° rotation played as a local
   catch-up transform. **Ticket 04 decided no duration, easing, colour or literal** — that is

@@ -69,8 +69,9 @@ describe("sendCardReturnedToSpineBestEffort", () => {
     fakeServer = createFakeSpineServer();
     const port = await fakeServer.listen();
 
-    await sendCardReturnedToSpineBestEffort(baseParams, `http://localhost:${port}`);
+    const ok = await sendCardReturnedToSpineBestEffort(baseParams, `http://localhost:${port}`);
 
+    expect(ok).toBe(true);
     expect(fakeServer.receivedRequests).toHaveLength(1);
     const { path, body } = fakeServer.receivedRequests[0] as { path: string; body: any };
     expect(path).toBe(`/tables/${baseParams.tableId}/events`);
@@ -101,15 +102,31 @@ describe("sendCardReturnedToSpineBestEffort", () => {
     expect(body.payload.fromZone).toBe("battlefield");
   });
 
-  it("never throws when the Spine is down — best-effort", async () => {
-    await expect(sendCardReturnedToSpineBestEffort(baseParams, "http://localhost:1")).resolves.toBeUndefined();
+  it("never throws when the Spine is down — best-effort — and resolves false", async () => {
+    await expect(sendCardReturnedToSpineBestEffort(baseParams, "http://localhost:1")).resolves.toBe(false);
   });
 
-  it("never throws when the Spine rejects the event — best-effort", async () => {
+  it("never throws when the Spine rejects the event — best-effort — and resolves false", async () => {
     fakeServer = createFakeSpineServer();
     fakeServer.failWith(500);
     const port = await fakeServer.listen();
 
-    await expect(sendCardReturnedToSpineBestEffort(baseParams, `http://localhost:${port}`)).resolves.toBeUndefined();
+    await expect(sendCardReturnedToSpineBestEffort(baseParams, `http://localhost:${port}`)).resolves.toBe(false);
   });
+
+  it("times out rather than hanging when the Spine accepts the connection but never responds", async () => {
+    const server = http.createServer(() => {
+      // Never responds — the client must give up rather than hang.
+    });
+    await new Promise<void>((resolve) => server.listen(0, resolve));
+    const address = server.address();
+    const port = typeof address === "object" && address ? address.port : 0;
+
+    const start = Date.now();
+    const ok = await sendCardReturnedToSpineBestEffort(baseParams, `http://localhost:${port}`);
+    expect(ok).toBe(false);
+    expect(Date.now() - start).toBeLessThan(10_000);
+
+    await new Promise<void>((resolve) => server.close(() => resolve()));
+  }, 15_000);
 });
