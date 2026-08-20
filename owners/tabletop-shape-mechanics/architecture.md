@@ -87,6 +87,114 @@ body lives in moved:
 `onClick` is declared *at all* — regardless of what it does — because its mere presence changes
 how tldraw's own `SelectTool` behaves. See below.
 
+## The library portal (2026-08-20)
+
+`.scratch/tabletop-cards-come-and-go/issues/12-plan.md` — dragging a card onto its owner's
+library swallows it off the table (send-then-commit against a new Tabletop server route,
+`POST /api/tables/:tableSlug/cards/return`, relaying `card.returned.v1` to the Spine). A
+**third** ticket 12 in this KB's numbering, distinct from both `tabletop-physics` ticket 12 (the
+`mtg-card` rewrite) and any other map's ticket 12 — same two-maps-same-number trap `history.md`
+already warns about elsewhere.
+
+**A pointer-keyed check runs ahead of `handleTranslateEnd` and can pre-empt it entirely**:
+
+```
+override onTranslateEnd(_initial, current): TLShapePartial<MtgCardShape> | undefined {
+  const pointerHit = topmostZoneAt(this.editor, this.editor.inputs.currentPagePoint);
+  if (pointerHit?.zone === "library" && allDraggedCardsBelongToOwner(this.editor, pointerHit.seatId)) {
+    swallowCard(this.editor, current, pointerHit);
+    return undefined;
+  }
+  return handleTranslateEnd(this.editor, current);
+}
+```
+
+Every existing `onTranslateEnd` consumer (zone-entry logging, passenger eviction, stack-landing
+nudge, all inside `handleTranslateEnd`) resolves its zone from the dropped shape's own *center*
+(`zoneAt()` → `getShapePageBounds(shape).center`). This new check instead reuses
+`editor.inputs.currentPagePoint` — the same pointer-keyed read `armedZoneIdSignal` (ticket 14)
+already uses for the live arming glow — so "what glowed during the drag" and "what swallows on
+drop" are answered by the identical point, not two different ones that could disagree at the
+zone's edge.
+
+**Because a qualifying drop returns `undefined` without ever calling `handleTranslateEnd`, none
+of that function's own zone-change side effects run** — no `meta.zone` stamp, no zone-entry log,
+and, critically, no passenger eviction. `evictPassengers` (`cardZoneEntry.ts`) was a private
+helper; it's now exported specifically so `swallowCard` (`cardSwallow.ts`, new) can call it
+directly before starting the swallow animation — otherwise a counter or note riding the swallowed
+card would be silently deleted with its host, orphaned, or left parented to a shape that no
+longer exists. **Any future check that intercepts `onTranslateEnd` ahead of `handleTranslateEnd`
+and short-circuits it inherits this obligation**: re-derive whichever of that function's side
+effects still apply for the intercepted case: nothing is free just because the old code path
+used to run it. See `interactions.md` watch point 27.
+
+**`swallowCard` (`cardSwallow.ts`) is send-then-commit, not fire-and-forget delete.** It calls
+`evictPassengers`, then `editor.animateShapes` — spin twice (`rotation + 2·2π·SWALLOW_SPINS`)
+while shrinking (`w`/`h` → 1) and fading (`opacity` → 0) into the library zone's page-space
+center over 500ms — then defers, via `setTimeout(0)` (never synchronous — tldraw non-null-asserts
+every still-settling shape mid multi-select-drag, so nothing here may run before the drag gesture
+itself has fully unwound), an async completion: `POST /api/tables/:tableSlug/cards/return` with
+the card's `owner`/`scryfallId`/`gameCardIndex`. Only a confirmed 2xx calls
+`editor.deleteShapes([id])`; any failure (network error, non-2xx, or a null `gameCardIndex`
+slipping through) re-`animateShapes`s the shape's pre-swallow snapshot (`x`/`y`/`rotation`/
+`opacity`/`props`) back over 200ms and leaves it in the store. An `editor.getShape(id)`
+existence guard on the completion handles the shape having vanished for an unrelated reason
+(store reset) mid-flight.
+
+**Two new tldraw mechanics facts, both firsts for this KB:**
+
+- **`BaseBoxShapeUtil.getInterpolatedProps` — `editor.animateShapes` only interpolates
+  `x`/`y`/`rotation`/`opacity` out of the box; a custom shape's own `props` need an explicit
+  override to tween instead of snapping at the animation's end.** `MtgCardShapeUtil` adds:
+  ```
+  override getInterpolatedProps(startShape, endShape, progress): MtgCardShape["props"] {
+    return { ...endShape.props, w: lerp(startShape.props.w, endShape.props.w, progress), h: lerp(startShape.props.h, endShape.props.h, progress) };
+  }
+  ```
+  used here to shrink `w`/`h` smoothly to `1` during the swallow. Confirmed against tldraw
+  source during this owner's `-review`, not assumed. **Any future animation tweening a custom
+  shape's own props (not just position/rotation/opacity) needs this override.**
+- **`TLComponents.InFrontOfTheCanvas` — the app's first use of this slot.** The library's own
+  card-back picture is a stock `image` shape stacked on top of its `mtg-zone` outline (the
+  "playmat's own picture" precedent above), so a `component()`-level arming glow (the way every
+  other zone's `--armed-glow` ring works, ticket 14) would render underneath that opaque picture
+  and never be seen. `LibraryPortalOverlay.tsx` instead renders in **viewport space**
+  (`editor.pageToViewport`, following the armed zone's page bounds through zoom/pan), wired via
+  `TLComponents.InFrontOfTheCanvas` in `TablePage.tsx`'s `components` object next to the existing
+  `Toolbar`/`ContextMenu` overrides. It reads a new `useArmedLibraryZoneId(editor)` — a thin
+  narrowing of the same `armedZoneIdSignal` every other zone's glow reads, filtered to
+  `zone === "library"` — so it's the identical arm/disarm decision, rendered through a different
+  slot because this one shape has opaque content stacked on top of it that a `component()`-level
+  treatment can't paint over. **Any future arming visual that needs to render above opaque
+  content layered on a zone should reach for `InFrontOfTheCanvas`, not fight `component()`'s
+  z-order.**
+
+**The library gate lives inside the existing shared `armedZoneIdSignal` (`zoneHitTest.ts`), not
+a parallel signal** — per this owner's prior review, consistent with how the command-zone gate
+(2026-08-10) was folded in rather than kept separate. One more branch, same shape:
+```
+if (hit.zone === "library" && !allDraggedCardsBelongToOwner(editor, hit.seatId)) {
+  return undefined;
+}
+```
+`allDraggedCardsBelongToOwner(editor, seatId)` requires **every** currently selected shape to be
+a `mtg-card` (a non-card anywhere in the selection disarms the whole group — no partial match,
+same posture watch point 9/19 already established), owned by `seatId`, with a non-null
+`gameCardIndex` (a card with none — a commander/ghost — can never be sent as `card.returned.v1`,
+so it can't arm the portal). Same "one destination for the whole rigid group, or none" rule as
+the command-zone gate; a third instance of the pattern, not a new one.
+
+**`gameCardIndex: number | null` — a new required `mtg-card` prop, threaded the canonical way**
+(watch point 16): added to `mtgCardShape()`'s signature in `tableFurniture.ts` rather than each
+call site, read off `envelope.payload.gameCardIndex` in `cardArrival.ts` (already on the wire in
+`card.played`, previously silently dropped), defaulting to `null` — which is what
+`seatJoined.ts`'s commander/ghost mints get, since they never pass it explicitly.
+
+**Test**: `apps/tabletop/test/verification/verify-library-portal.spec.ts` — own-library arm and
+swallow, multi-select group swallow (rubber-band two cards, drag one, both vanish), and a
+foreign-library gate smoke test (dragging toward another seat's library never arms). Full
+existing 53-spec Playwright suite passes unaffected.
+
 ## Stack landing collision avoidance (2026-08-16)
 
 A human dragging any card onto the Stack had zero collision handling before this: the

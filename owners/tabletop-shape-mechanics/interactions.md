@@ -782,7 +782,46 @@
     tapped card is in the mix. See `architecture.md`'s "Stack landing collision avoidance"
     section.
 
-26. **A third-party dialog library's own internal open-state can desync from tldraw's `tlmenus`
+26. **A pointer-keyed check placed ahead of `handleTranslateEnd` inside `onTranslateEnd` can
+    pre-empt it entirely — and inherits the obligation to re-derive whichever of its side effects
+    still apply.** (The library portal, 2026-08-20.) `MtgCardShapeUtil.onTranslateEnd` now checks
+    `topmostZoneAt(editor, editor.inputs.currentPagePoint)` — the pointer's own page point, the
+    same one `armedZoneIdSignal` (watch point 9) already keys the live arming glow on — *before*
+    calling `handleTranslateEnd`, and if the pointer is over the dragger's own library with every
+    selected shape a `mtg-card` owned by that seat, it calls `swallowCard` and returns
+    `undefined`, skipping `handleTranslateEnd` (and its zone-change branch — `meta.zone` stamping,
+    zone-entry logging, passenger eviction, stack-landing nudge) entirely for that gesture.
+    `swallowCard` (`cardSwallow.ts`) has to call `evictPassengers` (now exported from
+    `cardZoneEntry.ts`, was private) itself before animating the swallow, or a counter/note riding
+    the card would be silently deleted with its host, orphaned, or left parented to a deleted
+    shape — none of which the skipped `handleTranslateEnd` branch was ever going to catch on this
+    path. **Any future check added ahead of `handleTranslateEnd` that can return before calling
+    it must audit every side effect `handleTranslateEnd`'s zone-change branch normally provides
+    and re-derive the ones that still apply** — nothing carries over for free just because the
+    old code path used to run it unconditionally.
+    - **Two new mechanics facts landed alongside this, both firsts for the KB**: `getInterpolatedProps`
+      (`BaseBoxShapeUtil`) is required to tween a custom shape's own `props` during
+      `editor.animateShapes` — the built-in animation only interpolates `x`/`y`/`rotation`/
+      `opacity`, so shrinking `w`/`h` smoothly (rather than snapping) needs this override, added
+      to `MtgCardShapeUtil` for the swallow's shrink-to-nothing effect; and `TLComponents.
+      InFrontOfTheCanvas` (`LibraryPortalOverlay.tsx`, wired in `TablePage.tsx`) is the app's
+      first use of that slot, needed because the library's opaque card-back picture (a stock
+      `image` shape stacked on the `mtg-zone` outline) would hide a `component()`-level arming
+      glow the way every other zone's `--armed-glow` ring gets away with.
+    - **The library-arming gate folds into the existing shared `armedZoneIdSignal`
+      (`zoneHitTest.ts`), not a parallel signal** — a third instance of the "one destination for
+      the whole rigid group, or none" rule watch points 9 and 19 already established:
+      `allDraggedCardsBelongToOwner(editor, seatId)` requires every selected shape to be a
+      `mtg-card` (any non-card in the selection disarms the whole group), owned by `seatId`, with
+      a non-null `gameCardIndex` (a commander/ghost, which never carries one, can't arm it).
+    - **`gameCardIndex: number | null` is a new required `mtg-card` prop**, threaded via the
+      canonical route watch point 16 already established (`mtgCardShape()`'s signature in
+      `tableFurniture.ts`, not per call site) — read from `envelope.payload.gameCardIndex` in
+      `cardArrival.ts` (already on the wire, previously dropped), `null` by default for
+      `seatJoined.ts`'s commander/ghost mints.
+    - See `architecture.md`'s "The library portal" section and `history.md`'s 2026-08-20 entry.
+
+27. **A third-party dialog library's own internal open-state can desync from tldraw's `tlmenus`
     atom when tldraw closes a menu through a side channel instead of that library's own handshake
     — a different hazard from watch points 1/15's stale-*selection* family, not a member of it.**
     (2026-08-19.) `DefaultContextMenu` is built on Radix's `ContextMenu.Root`, which tracks its own
