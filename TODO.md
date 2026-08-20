@@ -4,28 +4,7 @@ The fleet's inbox: raw captures, pre-decision. Jess writes here; so do agents (`
 Format: the seamapping plugin's `INBOX.md`. Committed work lives in the tracker — see
 `SEAMAP.md` § Tracking.
 
-Nothing here is triaged. When an item turns out to be real, promote it with `/to-tickets` (or
-`/to-spec` first, if it's a multi-session build) and **delete the line**. When an item turns out
-not to be real, delete the line. Done work leaves no trace here — git remembers, and a `## Done`
-section is just a wall between Jess and the live work.
-
-## In progress
-
-Schema Schemes: mostly by Jess
-
-[] Make a new skill for updating schema versions
-
-[] Recreate the Spine's production PVC as part of deploying this — dropping the
-`visibility` column changed the `events` table shape, and there's no migration
-tooling yet, so the clean path is deleting `services/spine/k8s/pvc.yaml`'s claim and
-letting it recreate empty on next deploy. Confirm with Jess before running it; low-stakes
-early dev data, but still a real prod-data-wiping action.
-
-## Right Effing Now
-
-Card Played not matching the seat is fixed (544c932b — it was sending the bare table
-position instead of the real seatId GUID). The fuller domain model that fix prompted is
-now spec'd at `.scratch/seat-session-attribution/spec.md` (ready-for-agent).
+Work here is untriaged or lightly triaged (big things marked GRILLING). Some things are small enough to not need a ticket. Delete anything that's done or no longer applicable.
 
 ## Next
 
@@ -35,15 +14,13 @@ now spec'd at `.scratch/seat-session-attribution/spec.md` (ready-for-agent).
 
 - bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation
 
-- before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game!
-
-- Tabletop needs to ignore the same player joining again, make it idempotent by seat number (and report the skip to Honeycomb loudly.)
+- before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game! Board: https://ui.honeycomb.io/modernity/environments/mtg-deck-shuffler/board/iFWhpa9AFeC/Is-Someone-Playing-Right-Now ... how can I make that part of the procedure?
 
 - Cards in the graveyard or exile do not tap on click. Instead, they come to the front.
 
 - Consider removing the animations owner, since the animations don't do much now.
 
-- Consider timeout and restart on the SSE streams, and tabletops in memory. 30m-1h with no events or clicks is reasonable. This needs to be easy to change. Also add a way in both apps (in debug mode or by special URL) to timeout the stream immediately, for testing.
+- Consider timeout and restart on the SSE streams, and tabletops in memory. 30m-1h with no events or clicks is a reasonable time to unsubscribe. This needs to be easy to change. Also add a way in both apps (in debug mode or by special URL) to timeout the stream immediately, for testing.
 
 - the Tabletop's tests should be able to receive a stream of events and applying them. Right now it has a cardPlayed HTTP shim, do not like.
 
@@ -54,32 +31,13 @@ now spec'd at `.scratch/seat-session-attribution/spec.md` (ready-for-agent).
   the 2026-08-13 restyle rather than reached across from that Tabletop-scoped change. See
   `owners/shuffler-looks-like-itself/open-choices.md` → the deck-title `mtg-title` entry.
 
-- `editable-deck-title` On the Tabletop, let the deck title be editable. It's currently a
-  locked tldraw `text` shape reading `${playerName} 〜 ${deckName}`. It's locked on purpose —
-  a live bug was that any player could drag/delete another player's name — and tldraw ties
-  editing to the same unlocked state as drag/delete. So making it editable needs a design
-  that unlocks _editing the text only_ (custom shape, or double-click-to-edit) while keeping
-  drag/delete off, plus a decision on whether the edit persists/syncs and who's allowed to
-  edit whose title. Code pointers (all in `apps/tabletop/src/server/`):
-  - **The label shape** — `tableFurniture.ts`, `ensurePlayerArea`, the `labelId` block: id is
-    `name-label-${tableName}-${seatId}`, `isLocked: true`, text built by `toRichText(...)`.
-  - **Where the text comes from** — `deckName` flows in on the `seat.joined` payload
-    (`seatJoined.ts`) → `PlayerAreaLook.deckName` (`tableFurniture.ts`) → the richText line.
-    An edit that should survive a reload has to get back into that flow, not just the shape.
-  - **Position** — `nameLabelPosition` / `NAME_LABEL_HEIGHT` in `cardLayout.ts`.
-  - **Z-order coupling — don't break the fix we just landed.** The life counter and the
-    commander damage counters are deliberately drawn _above_ this label so a long title can't
-    cover them: the life counter is `put` just before the label, and
-    `addCommanderDamageCounters` (`tableFurniture.ts`) anchors each counter's index with
-    `getIndexAbove(label.index)`, looked up by the `name-label-...` id. If you replace the
-    text shape with a custom shape, **keep that id and its relative index** or the counters
-    fall behind the title again.
-
 - GRILLING: Tokens support. Archidekt lets you add tokens to your deck. We could bring them in and make them available on the board. They can tap like cards, they hold counters etc. but if you drag them to the graveyard, they go back to their place under your playmat (or wherever we decide to line them up). Oh and if you drag a token from its spot where it was drawn to the board it immediately creates another one in the spot it left; each token is an infinite pile. Then: people need to add tokens as the game is going, because we rarely have them all prepped before hand. Paste any image, right-click and say "make token." A token (infinite pile) appears next to the others. Now they can be clicked to tap.
 
-- The Shuffler's game page needs to display in-hand and revealed cards as sleeved, when the player has chosen sleevers. They need to be on a sleeve-colored rectangle, like in Tabletop.
+- The Shuffler's game page should display in-hand and revealed cards as sleeved, when the player has chosen sleevers. They need to be on a sleeve-colored rectangle, like in Tabletop.
 
 - `commander-tax-tracker` on the Tabletop, Above the Command Zone, above each commander, add a Play Count tracker. It is a number that starts at 0. It can be incremented or decremented (down to 0) or typed in. When the commander leaves the command zone, it increments! (This is commander tax — how many times the commander has been cast.)
+
+- when commander damage is incremented, decrement the life counter.
 
 - `commander-snap` When I put my commander back in my command zone, it snaps to its starting position, covering its shadow.
 
@@ -93,6 +51,7 @@ D 👋🏾
 and I want to drop a card in between C and D, then the drop zone between them is either after C or before D, it isn't both, and it isn't predictable. I want it to be both. What if instead of `[dropzone, card, dropzone, card, dropzone]` the flexbox contained `[[dropzone, card, dropzone],  [dropzone, card, dropzone]] such that two adjacent dropzones overlap completely and function the same as one? Then both C and D would have dropzones on either side.
 
 - GRILLING: `card-zoom-modal` Give a Tabletop card a modal overlay that shows its text really big, and offers flip
+  - this is dependent on Table Rotation, because that'll put something we own around tldraw.
   - Jess, verbatim, 2026-08-07: _"Something cards do need to offer: a modal overlay that displays
     the card text really big, and offers flip, similar to Deck Shuffler. This is not needed to
     replace Mural though, it's later."_
@@ -114,7 +73,7 @@ and I want to drop a card in between C and D, then the drop zone between them is
 
 ## Backlog
 
-- GRILLING: `exile-and-table-provenance` Add an exile action, and show in the table list how each card got there ← was: JES-85
+- GRILLING: `exile-and-table-provenance` Add an exile action to Shuffler, and show in the table list how each card got there ← was: JES-85
   - > For cards on the table, track how they got there. Give players 'discard' and 'exile' buttons
     > that move a card to the table, and display how it got there in the list of cards on the table.
   - Half of this already shipped: Discard exists end to end (`POST /discard-card`,
