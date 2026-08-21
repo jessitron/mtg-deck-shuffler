@@ -603,6 +603,10 @@ self-rendering custom shape.
   deck-title label before it — a rotating, pointer-armed, viewport-positioned overlay doesn't
   reduce to a static mock the way those did, so it wasn't attempted here; buoy it if a static
   approximation (labelled a mock, per the existing convention) is ever wanted on the gallery.
+  **Arming shape is now a circle, not a rectangle (2026-08-20, same-day follow-up):** the
+  swirl clips to a circle (diameter = the zone's longer side, centered on the zone) instead
+  of the zone's rectangular bounding box — Jess found the rectangle "hard to see... big and
+  clipped by the library." Same tokens, geometry-only.
 - **Coming to this owner: the tap motion's tempo** (`.scratch/tabletop-physics/issues/05-rotate-to-tap.md`,
   opened by ticket 04 on 2026-08-07). A card tapping is a 90° rotation played as a local
   catch-up transform. **Ticket 04 decided no duration, easing, colour or literal** — that is
