@@ -253,7 +253,6 @@ export async function ensurePlayerArea(
     primaryColor: look.primaryColor,
     secondaryColor: look.secondaryColor,
     graveyardCount: 0,
-    stackCount: 0,
     commanderNames: [],
     damageCounterCount: 0,
   };

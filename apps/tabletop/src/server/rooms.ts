@@ -4,6 +4,7 @@ import { trace } from "@opentelemetry/api";
 import { log } from "./log.js";
 import { tableNameFromSlug } from "../shared/slugify.js";
 import { SpineSubscription } from "./spineSubscriber.js";
+import { stackBounds } from "./cardLayout.js";
 import { mtgCardShapeProps } from "../shared/mtgCardShape.js";
 import { mtgCounterShapeProps } from "../shared/mtgCounterShape.js";
 import { mtgLifeCounterShapeProps } from "../shared/mtgLifeCounterShape.js";
@@ -34,7 +35,6 @@ export interface PlayerArea {
   primaryColor?: string;
   secondaryColor?: string;
   graveyardCount: number;
-  stackCount: number;
   /** This seat's commander names (partners = 2 entries) — table-layout ticket 21, one damage counter per name, labeled with it. */
   commanderNames: string[];
   /** How many commander-damage counters already sit on this seat's own name row — next one's position. */
@@ -51,6 +51,13 @@ export interface RoomEntry {
   createdAt: Date;
   /** Is a card shape with this instanceId already on the table? A second arrival of the same instance is a physical no-op. */
   hasInstance(instanceId: string): boolean;
+  /**
+   * How many of this owner's cards are currently sitting in the Stack zone, right now — not a
+   * running total of how many have ever arrived. A card counts only while it's still within
+   * `stackBounds()`; once a human drags it off (to the playmat, graveyard, wherever), it no
+   * longer holds its slot, so a later arrival doesn't keep cascading past it.
+   */
+  stackCardCount(owner: string): number;
   /** The Spine's own id for this table — learned from the first `seat.joined` envelope's `tableId` (tabletop-spine-sse-subscriber ticket 01). Same string as `tableName`. */
   spineTableId?: string;
   /**
@@ -67,6 +74,23 @@ function hasInstance(this: RoomEntry, instanceId: string): boolean {
   return this.room
     .getCurrentSnapshot()
     .documents.some((d) => (d.state as any).typeName === "shape" && (d.state as any).props?.instanceId === instanceId);
+}
+
+/**
+ * Reads live, in-flight shape positions — tldraw's Translating tool writes to the store on
+ * every pointer-move, not just on drop — so a card mid-drag through the Stack counts while it's
+ * transiently there. That's a real (if rare) race with a concurrent card.played arrival, since
+ * arrivals never run the overlap-nudge that a human drag's onTranslateEnd does
+ * (nudgeOffAnotherCard in cardZoneEntry.ts); accepted as a narrow edge case rather than adding
+ * server-side nudging for it.
+ */
+function stackCardCount(this: RoomEntry, owner: string): number {
+  const stack = stackBounds();
+  return this.room.getCurrentSnapshot().documents.filter((d) => {
+    const state = d.state as any;
+    if (state.typeName !== "shape" || state.type !== "mtg-card" || state.props?.owner !== owner) return false;
+    return state.x >= stack.x && state.x <= stack.x + stack.w && state.y >= stack.y && state.y <= stack.y + stack.h;
+  }).length;
 }
 
 const registry = new Map<string, RoomEntry>();
@@ -108,6 +132,7 @@ export function getOrCreateRoom(tableName: string): RoomEntry {
     seats: new Map(),
     createdAt: new Date(),
     hasInstance,
+    stackCardCount,
   };
   registry.set(tableName, entry);
   trace.getActiveSpan()?.setAttributes({ "room.created": true, "table.name": tableNameFromSlug(tableName), "table.slug": tableName });
