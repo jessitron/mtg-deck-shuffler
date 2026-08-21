@@ -18,6 +18,29 @@ function listFiles(dir: string): string[] {
   });
 }
 
+/**
+ * Every `fetch(...)` call's full argument list, matched by counting parens rather than
+ * stopping at the first `)` — a naive `fetch\([^)]*\)` regex truncates (and so silently
+ * clears) any call whose target expression itself contains a nested call, e.g.
+ * `fetch(buildUrl(), { headers: { "x-target": SHUFFLER_URL } })`.
+ */
+function fetchCalls(content: string): string[] {
+  const calls: string[] = [];
+  const callStart = /fetch\(/g;
+  let match: RegExpExecArray | null;
+  while ((match = callStart.exec(content)) !== null) {
+    let depth = 1;
+    let end = match.index + match[0].length;
+    while (end < content.length && depth > 0) {
+      if (content[end] === "(") depth++;
+      else if (content[end] === ")") depth--;
+      end++;
+    }
+    calls.push(content.slice(match.index, end));
+  }
+  return calls;
+}
+
 describe("no direct Tabletop->Shuffler HTTP call", () => {
   const tabletopSrc = path.resolve(__dirname, "..", "..", "tabletop", "src");
 
@@ -25,8 +48,7 @@ describe("no direct Tabletop->Shuffler HTTP call", () => {
     const offenders: string[] = [];
     for (const file of listFiles(tabletopSrc)) {
       const content = fs.readFileSync(file, "utf8");
-      const fetchCalls = content.match(/fetch\([^)]*\)/g) ?? [];
-      for (const call of fetchCalls) {
+      for (const call of fetchCalls(content)) {
         if (/shuffler|SHUFFLER_URL|:3344|:3001/i.test(call)) {
           offenders.push(`${path.relative(tabletopSrc, file)}: ${call}`);
         }
