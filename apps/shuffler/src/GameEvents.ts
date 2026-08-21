@@ -34,7 +34,7 @@ export const StartGameEvent: StartEvent = {
 export type MoveCardEvent = {
   eventName: "move card";
   move: CardMove;
-  verb?: "discard";
+  verb?: "discard" | "play-face-down";
 };
 
 
@@ -72,6 +72,9 @@ export function compactShuffleMoves(moves: CardMove[]): [number, number, number]
 export function nameMoveCardEvent(event: MoveCardEvent): string {
   if (event.verb === "discard") {
     return "Discard";
+  }
+  if (event.verb === "play-face-down") {
+    return "Play Face Down";
   }
   return nameMove(event.move);
 }

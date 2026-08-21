@@ -60,6 +60,21 @@ describe("GameState.discardCard", () => {
     expect(nameMoveCardEvent(lastEvent)).toBe("Play");
   });
 
+  test("a card played face down records a move-card event with the play-face-down verb", () => {
+    const game = gameWithHand();
+    const bolt = game.getCards().find((gc) => gc.card.name === "Lightning Bolt")!;
+
+    game.playCard(bolt.gameCardIndex, undefined, true);
+
+    expect(bolt.location.type).toBe("Table");
+
+    const events = game.getEventLog().getEvents();
+    const lastEvent = events[events.length - 1] as MoveCardEvent & { gameEventIndex: number };
+    expect(lastEvent.eventName).toBe("move card");
+    expect(lastEvent.verb).toBe("play-face-down");
+    expect(nameMoveCardEvent(lastEvent)).toBe("Play Face Down");
+  });
+
   test("discard is undoable like any move: the card returns to hand", () => {
     const game = gameWithHand();
     const bolt = game.getCards().find((gc) => gc.card.name === "Lightning Bolt")!;

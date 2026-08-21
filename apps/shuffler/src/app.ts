@@ -1419,7 +1419,7 @@ export function createApp(
         gameId,
         expectedVersionFromRequest(req),
         (game) => {
-          const whatHappened = game.playCard(gameCardIndex, browserTabId);
+          const whatHappened = game.playCard(gameCardIndex, browserTabId, faceDown);
           trace.getActiveSpan()?.setAttributes({
             "game.gameStatus()": game.gameStatus(),
             "game.cardsInLibrary": game.listLibrary().length,

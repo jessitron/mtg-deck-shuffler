@@ -421,7 +421,7 @@ export class GameState {
     return { shuffling: true };
   }
 
-  private executeMove(move: CardMove, recording: boolean = true, browserTabId?: string, verb?: "discard") {
+  private executeMove(move: CardMove, recording: boolean = true, browserTabId?: string, verb?: "discard" | "play-face-down") {
     function verifyLocationsAreIdentical(expected: CardLocation, actual: CardLocation) {
       // hmm, this only matters for UNDO, or any sort of move replay. When I have that, move it
       const identical = expected.type == actual.type && (expected as any).position == (expected as any).position;
@@ -448,7 +448,7 @@ export class GameState {
   }
   // TODO: parallel moveCard for flipCard
 
-  private moveCard(gameCard: GameCard, toLocation: CardLocation, browserTabId?: string, verb?: "discard") {
+  private moveCard(gameCard: GameCard, toLocation: CardLocation, browserTabId?: string, verb?: "discard" | "play-face-down") {
     const move = {
       gameCardIndex: gameCard.gameCardIndex,
       fromLocation: gameCard.location,
@@ -511,7 +511,7 @@ export class GameState {
     return this;
   }
 
-  public playCard(gameCardIndex: number, browserTabId?: string): WhatHappened {
+  public playCard(gameCardIndex: number, browserTabId?: string, faceDown: boolean = false): WhatHappened {
     if (gameCardIndex < 0 || gameCardIndex >= this.gameCards.length) {
       throw new Error(`Invalid gameCardIndex: ${gameCardIndex}`);
     }
@@ -528,7 +528,7 @@ export class GameState {
       .filter((gc) => gc.location.position > cardToPlay.location.position);
 
     // Move card to table
-    this.moveCard(cardToPlay, { type: "Table" }, browserTabId);
+    this.moveCard(cardToPlay, { type: "Table" }, browserTabId, faceDown ? "play-face-down" : undefined);
 
     this.validateInvariants();
 
