@@ -369,6 +369,24 @@ String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.pl
     populates, or the schema's constraint on it, run this test — it's the fast way to catch
     a mismatch before a live Spine does.
 
+24. **A sibling event kind, `card.played-face-down`, mints a card concealed from birth
+    (card-played-face-down ticket 01+02, landed).** Same payload shape as `card.played`
+    (identical required fields), different `name` — a deliberate separate event kind, not
+    a `faceDown` flag on `card.played` (Jess: "this isn't a variant of 'play,' it's a
+    different thing, game-wise"). The Tabletop's `spineEventDispatch.ts` routes both
+    names to `applyCardArrival`; `contractValidation.ts` registers a second payload
+    validator (`"card.played-face-down:1"`); `cardArrival.ts` peeks at the envelope name
+    before validating and mints `faceDown: true` instead of the previous hard-coded
+    `false` — no other field changes, nothing is nulled for concealment (identity and
+    both image URLs still travel in `props`, per this owner's "concealment is depicted,
+    not enforced" rule). No shape-type or render change was needed; the existing
+    `faceDown` branch in `MtgCardShapeUtil.component()` already covered it. **Fixing this
+    surfaced a fleet-wide contract bug**: `envelope.v1.json`'s `name` pattern didn't allow
+    hyphens, so `card.played-face-down` itself failed envelope validation — widened to
+    allow `-` in name segments (backward compatible, affects the Spine and both TS apps).
+    Full detail in [contract.md](contract.md) and [tabletop.md](tabletop.md). **Not yet
+    built**: a Shuffler sender (ticket 03) — nothing produces this event today.
+
 ## Not Related To
 
 ### Sleeve carries to the game screen (`sleeve-carries-to-game`, 2026-08-09)
