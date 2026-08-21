@@ -292,7 +292,7 @@ body {
 
 .library-buttons {
   display: grid;
-  grid-template-areas: "draw draw" "reveal mill" "search shuffle";
+  grid-template-areas: "draw draw" "reveal mill" "play-face-down play-face-down" "search shuffle";
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   max-width: 216px;
@@ -318,6 +318,11 @@ body {
 
 .library-buttons .mill-button {
   grid-area: mill;
+}
+
+.library-buttons .table-face-down-button,
+.library-buttons .play-face-down-button {
+  grid-area: play-face-down;
 }
 
 .revealed-cards-section {

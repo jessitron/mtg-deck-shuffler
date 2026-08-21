@@ -643,7 +643,14 @@ not by recomputing new numbers.**
   `--dark-pink,` which is correct — don't "fix" that by extending the selector.
   `.playmat-game .card-buttons button, .playmat-game .library-buttons button` is the same
   shape for the bare-black rule in `playmat.css`, scoped so `/prepare`'s identical bare rule
-  is untouched.
+  is untouched. **Confirmed extending automatically to a new button (2026-08-21, ticket 04 of
+  `card-played-face-down`):** the library grid's new "Play Face Down" button
+  (`library-components.ts`) is a plain `<button>` inside `.library-buttons` with no
+  `.modal-action-button`/`.face-down-button` class, so it picked up the seat-color override
+  with zero extra plumbing — same free ride as any other `.library-buttons button`. If a
+  future library-grid button instead needs `.modal-action-button`-style semantic color (like
+  the hand-card modal's grey `.face-down-button`), it has to opt **out** of this rule, not
+  into it.
 - **The `var(--seat-primary, <fallback>)` fallback is the pre-existing fixed value** at each
   site (`--playmat-one`, `--dark-pink`, or `black`, depending which rule it's replacing) —
   keep that pattern for any new seat-colored site, so a page that never sets the custom

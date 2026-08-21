@@ -153,6 +153,17 @@ to a `.choice` block) — an eighth row there would have silently biased that st
 keep-vs-collapse question — so it only got a plain specimen alongside `.play-button`/
 `.secondary` in `design.ejs`.
 
+**A same-named-purpose button landed on the library grid (2026-08-21, ticket 04 of
+`card-played-face-down`) and deliberately did NOT inherit this grey.** The library's "Play
+Face Down" button (`library-components.ts`) reuses `table-face-down-button`/
+`play-face-down-button` for JS wiring only, not `.modal-action-button.face-down-button`, so
+it renders as a plain `.library-buttons button` (black/seat-color, like Reveal/Mill) rather
+than the grey above. This is scoped, not a resolution of this choice — see
+[history.md](history.md)'s 2026-08-21 entry for the reasoning (no plain "Play" button in that
+grid to contrast against). If choice 3 is ever resolved into token-based families, that
+resolution only touches the modal's `.modal-action-button.face-down-button` rule; it says
+nothing about the library button, which was never in this family's styling.
+
 ---
 
 ## 4. Corner radius on chrome

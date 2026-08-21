@@ -116,4 +116,37 @@ test.describe('Table mode', () => {
     ]);
     expect(cardBackRequest.url()).toContain('/images/mtg-card-back.jpg');
   });
+
+  test('the library "Play Face Down" button plays the top card of the library without revealing it, and disables when the library is empty', async ({ page }) => {
+    const prepId = await seedPrep(page);
+    const gameId = await startGame(page, prepId, { tableName: 'spine-unreachable-library-face-down-table', playerName: 'Foretelling Jess' });
+    await page.goto(`${BASE_URL}/game/${gameId}`);
+
+    const libraryFaceDownButton = page.locator('#play-top-face-down-button');
+    await expect(libraryFaceDownButton).toBeVisible();
+    await expect(libraryFaceDownButton).toHaveClass(/table-face-down-button/);
+    await expect(libraryFaceDownButton).toBeEnabled();
+
+    await libraryFaceDownButton.click();
+
+    // Succeeds locally regardless of the Spine: the card leaves the library and
+    // lands on the (local, Shuffler-side) table — same as any other play.
+    await expect(page.locator('.table-cards-button')).toContainText('1 Cards on table');
+  });
+
+  test('solo mode: the library "Play Face Down" button copies the generic card back to the clipboard', async ({ page }) => {
+    const prepId = await seedPrep(page);
+    const gameId = await startGame(page, prepId); // no table: solo/clipboard mode
+    await page.goto(`${BASE_URL}/game/${gameId}`);
+
+    const libraryFaceDownButton = page.locator('#play-top-face-down-button');
+    await expect(libraryFaceDownButton).toBeVisible();
+    await expect(libraryFaceDownButton).toHaveClass(/play-face-down-button/);
+
+    const [cardBackRequest] = await Promise.all([
+      page.waitForRequest((req) => req.url().includes('/images/mtg-card-back.jpg')),
+      libraryFaceDownButton.click(),
+    ]);
+    expect(cardBackRequest.url()).toContain('/images/mtg-card-back.jpg');
+  });
 });
