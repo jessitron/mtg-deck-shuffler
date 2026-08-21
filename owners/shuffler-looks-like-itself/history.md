@@ -50,6 +50,15 @@ Mechanics detail — pointer-keying, the `owner` gate, the swallow animation's
 territory, not this one's; see its `architecture.md` → "The library portal" and `history.md`'s
 own 2026-08-20 entry.
 
+**Same-day follow-up: the arming shape went from a rectangle to a circle.** Jess: the swirl
+was "hard to see... big and clipped by the library." `LibraryPortalOverlay.tsx` now clips to
+a circle — diameter = the zone's longer side (`Math.max(width, height)` in viewport px after
+zoom), centered on the zone's center — via `borderRadius: "50%"` on the clipping div, in
+place of the zone's own rectangular bounding box. Same conic-gradient tokens, same veil, same
+1.6s spin; geometry-only change. Verified visually (screenshot) and by the existing
+`verify-library-portal.spec.ts`, which only asserts the `data-testid` attaches and is
+unaffected by the clip shape.
+
 ## How the typography got settled
 
 The most consistent thing in the app was arrived at by subtraction, not decree.

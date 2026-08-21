@@ -175,6 +175,11 @@ each).
   Vortex arming (a rotating pink/amber conic-gradient swirl plus a dark veil) entirely
   **outside** the zone shape, in viewport space, rather than trying to punch through the
   library's opaque card-back picture with a box-shadow. See the new bullet below.
+  **Arming shape is now a circle, not a rectangle (2026-08-20, same ticket, follow-up):**
+  `LibraryPortalOverlay.tsx` clips the swirl to a circle (diameter = the zone's longer
+  side, centered on the zone) instead of the zone's own rectangular bounding box — Jess
+  found the rectangular clip "hard to see... big and clipped by the library." Geometry-only,
+  same tokens.
 - **`TLComponents.InFrontOfTheCanvas` is a second way to render an armed/about-to-receive
   treatment, and it exists precisely because the box-shadow-ring pattern above can't reach
   through an opaque picture (2026-08-20, ticket 12, `LibraryPortalOverlay.tsx` — the fleet's
