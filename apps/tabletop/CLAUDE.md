@@ -145,6 +145,24 @@ All from `apps/tabletop/`:
 To run the whole fleet (Spine + Tabletop + Shuffler together), use `./run` from the
 repo root — see the root `CLAUDE.md`.
 
+## Testing
+
+**The suite traces itself**, same as the Shuffler's. `test/harness-telemetry/` holds a
+Playwright reporter that sends spans about the *run* — one trace per run, a span per
+spec, test and step — to service **`mtg-fleet-verify`**, team `modernity`, env `local`.
+`verify.sh` prints the run id; group by `verify.run.id` to isolate one run, and
+`verify.ship: "tabletop"` picks this ship's spans out from the Shuffler's in the same
+dataset. `harnessTracing.ts` and `spanPlan.ts` are copied unchanged from
+`apps/shuffler/test/harness-telemetry/` (both are fleet-neutral); `otelReporter.ts` is
+the same file with `VERIFY_SHIP` defaulting to `"tabletop"`. Scope is run/spec/step
+tracing only — harness spans correlate with the app's own request spans by
+`verify.run.id` and timestamp, never by trace-context propagation (that would bypass
+`BackgroundChatterSampler` and trace every static asset at 100%, worse here than on the
+Shuffler since this ship's sampler has no static-asset-by-extension downsampling). See
+`apps/shuffler/CLAUDE.md`'s own "suite traces itself" note for the fuller reasoning
+(never swap the provider for `NodeSDK`, telemetry is never fatal or blocking, etc.) — it
+applies here unchanged.
+
 ## Observability
 
 Fleet-level Honeycomb setup is in the root `CLAUDE.md`; the browser side is in

@@ -10,7 +10,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 0,
   workers: 1,
-  reporter: "list",
+  reporter: [["list"], ["./test/harness-telemetry/otelReporter.ts"]],
   use: {
     baseURL: process.env.TABLETOP_BASE_URL ?? "http://localhost:5183",
     trace: "on-first-retry",
