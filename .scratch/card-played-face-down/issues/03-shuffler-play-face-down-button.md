@@ -2,7 +2,7 @@
 
 Mountain: spine-gathers-data
 Ship: shuffler
-Status: ready-for-agent
+Status: done
 
 Blocked by: 01, 02
 
