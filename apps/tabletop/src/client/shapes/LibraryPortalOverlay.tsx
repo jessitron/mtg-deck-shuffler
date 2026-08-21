@@ -4,8 +4,9 @@ import { useArmedLibraryZoneId } from "./zoneHitTest";
 /**
  * The library portal's arming visual (ticket 12) — a rotating pink/amber conic-gradient
  * swirl with a faint dark veil, rendered over the library while a card drags over it.
- * Clipped to a circle (diameter = the zone's longer side) centered on the zone, rather
- * than the zone's own rectangle, so the swirl reads as a vortex instead of a clipped box.
+ * Clipped to a circle (diameter = the zone's shorter side) centered on the zone, rather
+ * than the zone's own rectangle, so the swirl fits inside the zone and reads as a vortex
+ * instead of a clipped box.
  * Local to the dragger (each browser computes its own armed state). Rendered via
  * `TLComponents.InFrontOfTheCanvas` (viewport space, in front of the canvas layer)
  * because the library's own opaque card-back picture sits on top of the zone shape
@@ -26,7 +27,7 @@ export function LibraryPortalOverlay() {
       const zoom = editor.getZoomLevel();
       const width = bounds.w * zoom;
       const height = bounds.h * zoom;
-      const diameter = Math.max(width, height);
+      const diameter = Math.min(width, height);
       return {
         left: topLeft.x + width / 2 - diameter / 2,
         top: topLeft.y + height / 2 - diameter / 2,
