@@ -319,6 +319,21 @@ wired side by side in `TablePage.tsx`. Rules worth keeping for a third such hook
   (`MtgCardShapeUtil`) — this listener only translates the resulting mutation, never re-implements
   gesture detection.
 
+**`TablePage.tsx`'s `uiOverrides.actions` now wraps tldraw's stock `undo`/`redo` in `inSpan()`,
+next to the existing `copy` override** (2026-08-20) — diagnostic telemetry for a suspected bug
+where a player's cards jump back to the Stack zone with no `card.played` event and no "place
+arrived card" server span, suspected cause being tldraw's stock undo/redo (never scoped or
+disabled) reverting shapes on the shared multiplayer document. Each span carries
+`trigger.source` (tldraw's `TLUiEventSource` for the action) and `undo.had_history`/
+`redo.had_history` (`editor.getCanUndo()`/`getCanRedo()`, captured **before** calling through to
+the original `onSelect`, so a redundant undo/redo with nothing to do is distinguishable from one
+that reverted something). Because `usePhysicsAnnouncements.ts`'s `store.listen()` callback fires
+**synchronously** inside `editor.undo()`/`editor.redo()`, its `card.zoneMoved` spans nest as
+children of `"undo"`/`"redo"` when that's the trigger — so a Honeycomb trace directly shows "undo
+caused N cards to change zone" if/when the bug recurs, no correlation-by-timestamp needed. This
+is the same "wrap a tldraw UI action in `inSpan`" shape the `copy` override already established,
+now proven to compose with the physics-announcements hook's synchronous-listener trick.
+
 ### Trace context embedded in event bodies
 
 Two mechanisms carry trace context on this fleet, and both are live now:

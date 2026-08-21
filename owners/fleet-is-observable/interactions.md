@@ -452,6 +452,19 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   span name. Filter by tldraw's `source` option, not by re-deriving "was this me." If the new event
   can fire from a diff tldraw writes repeatedly during a drag, it needs the same debounce the
   generic fallback uses (`GENERIC_SETTLE_MS` = 300ms per shape id).
+- **Wrapping another tldraw stock UI action (`uiOverrides.actions` in `TablePage.tsx`) in
+  `inSpan()`**: `undo`/`redo` are now wrapped alongside the pre-existing `copy` override
+  (2026-08-20) — capture the `TLUiEventSource` as `trigger.source` and any pre-call editor state
+  worth knowing (`editor.getCanUndo()`/`getCanRedo()` before calling through, as `<name>.had_history`)
+  so a no-op call is distinguishable from one that changed something. Call the original
+  `onSelect` **inside** `inSpan`'s callback, not before it, or nested spans from callbacks the
+  action triggers synchronously (see the next point) won't parent correctly.
+- **A tldraw editor call that runs `store.listen()` callbacks synchronously** (e.g.
+  `editor.undo()`/`editor.redo()`): `usePhysicsAnnouncements.ts`'s listener fires inside the
+  call, so if the call site is itself wrapped in `inSpan()` (as `undo`/`redo` now are), the
+  resulting `card.zoneMoved`/etc. spans nest as children for free — no extra wiring needed
+  beyond wrapping the outer call. This is why `undo caused N cards to change zone` shows up as
+  one trace rather than needing timestamp correlation across two unrelated spans.
 - **`apps/tabletop/src/server/spineEventDispatch.ts`'s catch block still calls
   `span.recordException(error as Error)`**: this is pre-existing Invariant-2 drift (`recordException`
   is `addEvent` under the hood), noted but deliberately left untouched by the seatJoined.ts
