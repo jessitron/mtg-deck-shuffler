@@ -12,7 +12,7 @@ beforeAll(async () => {
 });
 
 afterAll(() => {
-  server.close();
+  return new Promise<void>((resolve) => server.close(() => resolve()));
 });
 
 describe("the root route", () => {

@@ -22,8 +22,12 @@ beforeAll(async () => {
 });
 
 afterAll(() => {
-  server.close();
-  logs.disable();
+  return new Promise<void>((resolve) =>
+    server.close(() => {
+      logs.disable();
+      resolve();
+    })
+  );
 });
 
 /** Poll until the predicate holds; tldraw's session pruning is throttled, so this can take a beat. */
