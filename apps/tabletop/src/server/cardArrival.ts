@@ -11,6 +11,13 @@ const tracer = trace.getTracer("mtg-tabletop");
 
 type ZoneHint = "stack" | "battlefield" | "graveyard";
 
+/** Sibling of card.played — identical payload shape, but means "mint this concealed." */
+const FACE_DOWN_EVENT_NAME = "card.played-face-down";
+
+function isFaceDownEnvelope(body: unknown): boolean {
+  return typeof body === "object" && body !== null && "name" in body && (body as { name: unknown }).name === FACE_DOWN_EVENT_NAME;
+}
+
 interface CardPlayedPayload {
   card: { scryfallId: string; instanceId: string };
   face: "front" | "back";
@@ -36,7 +43,8 @@ export type CardArrivalOutcome =
  * without a live Spine.
  */
 export async function applyCardArrival(tableName: string, body: unknown): Promise<CardArrivalOutcome> {
-  const result = validateIncomingEvent<CardPlayedPayload>(body, "card.played");
+  const faceDown = isFaceDownEnvelope(body);
+  const result = validateIncomingEvent<CardPlayedPayload>(body, faceDown ? FACE_DOWN_EVENT_NAME : "card.played");
   if (!result.ok) {
     return { status: "invalid", error: result.error };
   }
@@ -46,7 +54,7 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
   }
   const seatId = envelope.initiator.seatId;
   if (!seatId) {
-    return { status: "invalid", error: "initiator.seatId is required for card.played" };
+    return { status: "invalid", error: `initiator.seatId is required for ${envelope.name}` };
   }
   const { card, face, zoneHint, frontImageUrl, backImageUrl, cardName, owner, isCommander, gameCardIndex } = envelope.payload;
 
@@ -142,7 +150,7 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
               frontImageUrl: frontImageUrl,
               backImageUrl: backImageUrl,
               face: face,
-              faceDown: false,
+              faceDown,
               sleeveColor: playerArea.sleeveColor ?? null,
               cardBackImageUrl: playerArea.cardBackImageUrl ?? null,
               owner,
