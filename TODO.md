@@ -10,7 +10,7 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
 
 - irritating bug: played cards should not keep appearing to the right of the previous location, after the other one has been moved! That's only for when the prior card is still on the stack right where it landed.
 
-- RETEST post-tldraw upgrade: weird bug: occasionally, for no discernable reason, a bunch of cards return to the stack where they were initially played 😭
+- still happening post-tldraw upgrade: weird bug: occasionally, for no discernable reason, a bunch of Evelyn's cards return to the stack as if they were just played 😭. Let's make sure there's a span around putting a card on the stack? It doesn't create a "place arrived card" span when it does this.
 
 - bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation
 
