@@ -126,6 +126,9 @@ only the route is broken. Curl the running image.
   the Spine — no direct Shuffler→Tabletop call), and Spine (:4600, admin at
   `/admin/tables`) — Sources `.be` once for telemetry (Honeycomb env `local`).
   Ctrl-C stops everything. Override ports with `SHUFFLER_PORT`/`TABLETOP_PORT`/`SPINE_PORT`.
+- `./deploy.sh` **from the repo root** — deploys all three ships in order (Spine,
+  Shuffler, Tabletop), each via its own ship-level `deploy.sh`, stopping at the
+  first failure.
 
 Single-ship commands (build, test, run, deploy) are in each ship's `CLAUDE.md`.
 `npm install` runs **from the root**; the lockfile lives here.
