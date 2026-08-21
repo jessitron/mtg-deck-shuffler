@@ -53,7 +53,7 @@ field of any value rejected), and `apps/shuffler/test/port-spine/contractValidat
 registers it as `"card.returned:1"`. No sender or subscriber is wired to this schema yet —
 that's later tickets in the same series.
 
-## `card.played-face-down.v1` — sibling to `card.played`, for concealed plays (card-played-face-down ticket 01, landed; ticket 02 landed on the Tabletop)
+## `card.played-face-down.v1` — concealment as its own event kind, built end to end (card-played-face-down tickets 01–03, all landed 2026-08-21)
 
 `contracts/payloads/card.played-face-down.v1.json` is a **field-for-field duplicate** of
 `card.played.v1.json` — same required fields (`card`, `face`, `zoneHint`,
@@ -69,8 +69,8 @@ stay orthogonal per this owner's two-axis model even for a concealed play: a mor
 played face down *with a chosen face underneath*. `backImageUrl` keeps the same
 `twoFaced`-derived-null rule as `card.played` (watch point 17/interactions.md #18).
 
-**Found and fixed a contract bug while landing this**: `envelope.v1.json`'s `name` field
-pattern (`^[a-z]+(\.[a-z_]+)+$`) didn't allow hyphens, so the chosen event name
+**Found and fixed a contract bug while landing ticket 02**: `envelope.v1.json`'s `name`
+field pattern (`^[a-z]+(\.[a-z_]+)+$`) didn't allow hyphens, so the chosen event name
 `card.played-face-down` itself failed **envelope** validation (not the payload schema —
 the envelope's own `name` pattern). Widened to `^[a-z]+(\.[a-z_-]+)+$` (segment character
 class gained `-`). This is a fleet-wide file — affects the Spine's Ruby validation and
@@ -81,8 +81,25 @@ with a hyphen in its name, it will validate fine against the envelope, but you s
 a payload schema for it (the envelope pattern only gates the *name*, not the payload
 lookup).
 
-On the Tabletop side (ticket 02, landed): see
-[tabletop.md](tabletop.md#card-played-face-down-mints-concealed-at-birth-card-played-face-down-ticket-02).
-Ticket 03 (a Shuffler "Play Face Down" button that actually sends this event) has not
-landed — today the schema and the Tabletop's receiving side exist, but nothing produces
-this event yet.
+On the Tabletop side (ticket 02): see
+[tabletop.md](tabletop.md#card-played-face-down-mints-concealed-at-birth-card-played-face-down-ticket-02)
+— `dispatchSpineEvent`/`applyCardArrival` accept the new name and mint `faceDown: true`.
+
+On the Shuffler side (ticket 03): `CardPlayedFaceDownPayload`/
+`buildCardPlayedFaceDownEvent` in `apps/shuffler/src/port-tabletop/types.ts` are a
+**deliberate duplicate** of `CardPlayedPayload`/`buildCardPlayedEvent`, except for `name`
+(`card.played-face-down`) and `origin` (`shuffler.playCardFaceDownSubmit`). The
+face/image computation (`face`/`frontImageUrl`/`backImageUrl`, including the
+`twoFaced`-gate on `backImageUrl`) is factored into one shared private helper,
+`cardFaceFields(gameCard)`, called by both builders — so that invariant lives in one
+place even though the two builders themselves stay separate, divergeable functions.
+`sendCardPlayedToSpineBestEffort` (`apps/shuffler/src/port-spine/sendToSpine.ts`) picks
+the builder via a trailing `faceDown = false` parameter, threaded from `POST
+/play-card`'s `req.body["face-down"] === "true"` (`apps/shuffler/src/app.ts`).
+
+All three tickets landed the same day, in the order 01 → {02, 03 in parallel} — the
+"Blocked by: 02" on ticket 03 turned out to be a runtime-delivery concern (an emitted
+event the Tabletop couldn't yet parse would silently vanish at the table), not a code
+dependency: ticket 03 only builds and sends the envelope, it never validates or consumes
+Tabletop code. The full loop (Shuffler button → Spine → Tabletop mint) is live end to
+end.

@@ -66,7 +66,7 @@ test.describe('Table mode', () => {
 
     // Open the first hand card's modal and play it
     await page.locator('#hand-cards .card-container img').first().click();
-    const playButton = page.locator('.card-modal-overlay button:has-text("Play")');
+    const playButton = page.locator('.card-modal-overlay').getByRole('button', { name: 'Play', exact: true });
     await expect(playButton).toBeVisible({ timeout: 5000 });
     await expect(playButton).toHaveClass(/table-play-button/);
     await playButton.click();
@@ -75,5 +75,45 @@ test.describe('Table mode', () => {
     // the card lands on the (local, Shuffler-side) table count
     await expect(page.locator('.hand-count')).toHaveText('6');
     await expect(page.locator('.table-cards-button')).toContainText('1 Cards on table');
+  });
+
+  test('the hand card modal offers "Play Face Down", and in table mode it sends card.played-face-down to the (unreachable) Spine without blocking the play', async ({ page }) => {
+    const prepId = await seedPrep(page);
+    const gameId = await startGame(page, prepId, { tableName: 'spine-unreachable-face-down-table', playerName: 'Concealed Jess' });
+    await page.goto(`${BASE_URL}/game/${gameId}`);
+
+    await expect(page.locator('.hand-count')).toHaveText('7');
+
+    await page.locator('#hand-cards .card-container img').first().click();
+    const faceDownButton = page.locator('.card-modal-overlay button:has-text("Play Face Down")');
+    await expect(faceDownButton).toBeVisible({ timeout: 5000 });
+    await expect(faceDownButton).toHaveClass(/table-face-down-button/);
+    await faceDownButton.click();
+
+    // Same as a plain "Play": succeeds locally regardless of the Spine, hand shrinks,
+    // the card lands on the table — concealment is a Tabletop-rendering concern only.
+    await expect(page.locator('.hand-count')).toHaveText('6');
+    await expect(page.locator('.table-cards-button')).toContainText('1 Cards on table');
+  });
+
+  test('solo mode: "Play Face Down" copies the generic card back to the clipboard (not a real card image)', async ({ page }) => {
+    const prepId = await seedPrep(page);
+    const gameId = await startGame(page, prepId); // no table: solo/clipboard mode
+    await page.goto(`${BASE_URL}/game/${gameId}`);
+
+    await page.locator('#hand-cards .card-container img').first().click();
+    const faceDownButton = page.locator('.card-modal-overlay button:has-text("Play Face Down")');
+    await expect(faceDownButton).toBeVisible({ timeout: 5000 });
+    await expect(faceDownButton).toHaveClass(/play-face-down-button/);
+
+    // The modal closes itself right after the POST completes (hx-on::after-request), so
+    // the button's own text/disabled feedback is a race we can't assert reliably here —
+    // instead, confirm the clipboard-copy path that actually distinguishes "Play Face
+    // Down" from "Play" fired: a request for the static card-back asset, not /proxy-image.
+    const [cardBackRequest] = await Promise.all([
+      page.waitForRequest((req) => req.url().includes('/images/mtg-card-back.jpg')),
+      faceDownButton.click(),
+    ]);
+    expect(cardBackRequest.url()).toContain('/images/mtg-card-back.jpg');
   });
 });

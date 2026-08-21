@@ -370,22 +370,45 @@ String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.pl
     a mismatch before a live Spine does.
 
 24. **A sibling event kind, `card.played-face-down`, mints a card concealed from birth
-    (card-played-face-down ticket 01+02, landed).** Same payload shape as `card.played`
-    (identical required fields), different `name` — a deliberate separate event kind, not
-    a `faceDown` flag on `card.played` (Jess: "this isn't a variant of 'play,' it's a
-    different thing, game-wise"). The Tabletop's `spineEventDispatch.ts` routes both
-    names to `applyCardArrival`; `contractValidation.ts` registers a second payload
-    validator (`"card.played-face-down:1"`); `cardArrival.ts` peeks at the envelope name
-    before validating and mints `faceDown: true` instead of the previous hard-coded
-    `false` — no other field changes, nothing is nulled for concealment (identity and
-    both image URLs still travel in `props`, per this owner's "concealment is depicted,
-    not enforced" rule). No shape-type or render change was needed; the existing
-    `faceDown` branch in `MtgCardShapeUtil.component()` already covered it. **Fixing this
-    surfaced a fleet-wide contract bug**: `envelope.v1.json`'s `name` pattern didn't allow
-    hyphens, so `card.played-face-down` itself failed envelope validation — widened to
-    allow `-` in name segments (backward compatible, affects the Spine and both TS apps).
-    Full detail in [contract.md](contract.md) and [tabletop.md](tabletop.md). **Not yet
-    built**: a Shuffler sender (ticket 03) — nothing produces this event today.
+    (card-played-face-down tickets 01–03, all landed).** Same payload shape as
+    `card.played` (identical required fields), different `name` — a deliberate separate
+    event kind, not a `faceDown` flag on `card.played` (Jess: "this isn't a variant of
+    'play,' it's a different thing, game-wise"). The Tabletop's `spineEventDispatch.ts`
+    routes both names to `applyCardArrival`; `contractValidation.ts` registers a second
+    payload validator (`"card.played-face-down:1"`); `cardArrival.ts` peeks at the
+    envelope name before validating and mints `faceDown: true` instead of the previous
+    hard-coded `false` — no other field changes, nothing is nulled for concealment
+    (identity and both image URLs still travel in `props`, per this owner's "concealment
+    is depicted, not enforced" rule). No shape-type or render change was needed; the
+    existing `faceDown` branch in `MtgCardShapeUtil.component()` already covered it.
+    **Fixing this surfaced a fleet-wide contract bug**: `envelope.v1.json`'s `name`
+    pattern didn't allow hyphens, so `card.played-face-down` itself failed envelope
+    validation — widened to allow `-` in name segments (backward compatible, affects the
+    Spine and both TS apps). Full detail in [contract.md](contract.md) and
+    [tabletop.md](tabletop.md).
+25. **`card.played-face-down` is a third sender site bound by the `backImageUrl`-derived-
+    from-`twoFaced` rule — built card-played-face-down ticket 03, 2026-08-21.**
+    `apps/shuffler/src/port-tabletop/types.ts` gained `CardPlayedFaceDownPayload` +
+    `buildCardPlayedFaceDownEvent` alongside `CardPlayedPayload`/`buildCardPlayedEvent`
+    — a deliberate field-for-field duplicate (per `.scratch/card-played-face-down/spec.md`,
+    kept separate so the two event kinds can diverge later without a retroactive schema
+    bump), but the face/image computation itself (`face`, `frontImageUrl`, and the
+    `twoFaced`-gated `backImageUrl`) is factored into one shared private helper,
+    `cardFaceFields(gameCard)`, called by both builders. **If you add a fourth
+    face-carrying sender site, extend `cardFaceFields` (or replace it with something both
+    call) rather than re-copying the `twoFaced ? … : null` gate a third time** — this is
+    now the second time watch point 19/#18's sharp edge showed up as copy-paste risk (the
+    first was `seat.joined`'s `commanders` array, watch point 21). Trigger: a "Play Face
+    Down" button on the hand card modal only (`formatModalCardActionsForHand`,
+    `apps/shuffler/src/view/play-game/game-modals.ts`) — not on Revealed, per spec.md —
+    sends `req.body["face-down"] === "true"` through `sendCardBeforeMutate` →
+    `sendCardPlayedToSpineBestEffort`'s new trailing `faceDown` param
+    (`apps/shuffler/src/port-spine/sendToSpine.ts`), which picks the builder. `GameState`/
+    `GameCard`/`game.playCard()` are untouched — concealment is not domain state on the
+    Shuffler, only which event kind got sent. See [contract.md](contract.md) for the
+    schema and the "why a separate event kind, not a flag" rationale. With tickets 01–03
+    all landed, the full loop (Shuffler button → Spine → Tabletop mint) is live end to
+    end.
 
 ## Not Related To
 

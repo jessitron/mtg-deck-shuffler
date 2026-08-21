@@ -69,14 +69,16 @@ function formatModalActionButton(
   cssClass = "modal-action-button",
   cardId?: string,
   currentFace?: "front" | "back",
-  inTableMode = false
+  inTableMode = false,
+  faceDown = false
 ): string {
-  const leavesHand = action === "Play" || action === "Discard";
+  const leavesHand = action === "Play" || action === "Discard" || action === "Play Face Down";
   const cardIdAttr = leavesHand && !inTableMode && cardId ? `data-card-id="${cardId}"` : "";
   const faceAttr = leavesHand && !inTableMode && currentFace ? `data-current-face="${currentFace}"` : "";
   const extraAttrs = [cardIdAttr, faceAttr].filter(Boolean).join(" ");
   const swapAttr = `hx-swap="outerHTML"`;
   const actionId = `card-action-${action.toLowerCase().replace(/\s+/g, "-")}`;
+  const hxVals = faceDown ? `{"expected-version": ${expectedVersion}, "face-down": true}` : `{"expected-version": ${expectedVersion}}`;
 
   const afterRequest =
     leavesHand && inTableMode
@@ -85,7 +87,7 @@ function formatModalActionButton(
 
   return `<button id="${actionId}" class="${cssClass}"
                     hx-post="${endpoint}/${gameId}/${cardIndex}"
-                    hx-vals='{"expected-version": ${expectedVersion}}'
+                    hx-vals='${hxVals}'
                     hx-target="#game-container"
                     ${swapAttr}
                     ${extraAttrs}
@@ -97,10 +99,13 @@ function formatModalActionButton(
 
 function formatModalCardActionsForHand(gameId: GameId, gameCard: GameCard, expectedVersion: number, inTableMode: boolean): string {
   const playishClass = inTableMode ? "table-play-button" : "play-button";
+  const faceDownClass = inTableMode ? "table-face-down-button" : "play-face-down-button";
   const playTitle = inTableMode ? "Send to the table and remove from hand" : "Copy image and remove from hand";
   const discardTitle = inTableMode ? "Send to the graveyard on the table" : "Copy image and discard from hand";
+  const faceDownTitle = inTableMode ? "Send face down to the table and remove from hand" : "Copy card back and remove from hand";
   const actions: CardAction[] = [
     { action: "Play", endpoint: "/play-card", title: playTitle, cssClass: `modal-action-button ${playishClass}` },
+    { action: "Play Face Down", endpoint: "/play-card", title: faceDownTitle, cssClass: `modal-action-button face-down-button ${faceDownClass}`, faceDown: true },
     { action: "Discard", endpoint: "/discard-card", title: discardTitle, cssClass: `modal-action-button discard-button ${playishClass}` },
     { action: "Put on Top", endpoint: "/put-on-top", title: "Move card to top of library", cssClass: "modal-action-button put-on-top-button" },
     { action: "Put on Bottom", endpoint: "/put-on-bottom", title: "Move card to bottom of library", cssClass: "modal-action-button put-on-bottom-button" },
@@ -118,7 +123,8 @@ function formatModalCardActionsForHand(gameId: GameId, gameCard: GameCard, expec
         action.cssClass,
         gameCard.card.scryfallId,
         gameCard.currentFace,
-        inTableMode
+        inTableMode,
+        action.faceDown
       )
     )
     .join("");

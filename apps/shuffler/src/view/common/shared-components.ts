@@ -174,4 +174,5 @@ export type CardAction = {
   endpoint: string;
   title: string;
   cssClass?: string;
+  faceDown?: boolean;
 };

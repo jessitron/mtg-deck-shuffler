@@ -606,6 +606,20 @@
   box-shadow: 0 2px 0 #90123d, 0 3px 3px hsl(0deg 0% 0% / 0.25);
 }
 
+.modal-action-button.face-down-button {
+  background-color: #5c6b73;
+  color: white;
+  box-shadow: 0 4px 0 #33393d, 0 7px 7px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.face-down-button:hover {
+  box-shadow: 0 6px 0 #33393d, 0 10px 10px hsl(0deg 0% 0% / 0.25);
+}
+
+.modal-action-button.face-down-button:active {
+  box-shadow: 0 2px 0 #33393d, 0 3px 3px hsl(0deg 0% 0% / 0.25);
+}
+
 .modal-action-button.put-in-hand-button {
   background-color: #9c27b0;
   color: white;

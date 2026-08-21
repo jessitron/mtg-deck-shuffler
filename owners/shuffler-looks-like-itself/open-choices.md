@@ -122,6 +122,7 @@ Seven unrelated Material hues, none of them brand colors. All eight rules are in
 | `.put-on-top-button` | `#3f51b5` indigo |
 | `.put-on-bottom-button` | `#673ab7` deep purple |
 | `.secondary` | `var(--deep-space)` — already settled by choice 2 |
+| `.face-down-button` | `#5c6b73` / shadow `#33393d` — added 2026-08-21, ticket 03 of `card-played-face-down`; see note below |
 
 | Option | Tradeoff |
 | --- | --- |
@@ -134,6 +135,23 @@ moves the card* vs *this is a tool*. Don't go looking for it on the old options 
 
 If B, the `.modal-action-button.*` variant rules collapse into two classes; update
 `views/partials/card-modal.ejs` and `src/view/play-game/game-modals.ts` accordingly.
+
+**An eighth sibling joined the family before this choice shipped (2026-08-21, ticket 03 of
+`card-played-face-down`) — hardcoded like every existing member, and its color is a first
+cut, not Jess's pick.** The new "Play Face Down" button on the hand-card modal
+(`playmat.css` → `.modal-action-button.face-down-button`, base/`:hover`/`:active`) reproduces
+the exact box-shadow bevel pattern of `.play-button`/`.put-in-hand-button`/etc. with its own
+hand-tuned blue-grey (`#5c6b73` fill, `#33393d` shadow) — deliberately not `#607d8b` or
+`#6c757d` (this KB's own Material/Bootstrap-drift warning) and distinct from all seven
+existing hues, but **unreviewed**: nobody has staged it against alternatives or asked Jess to
+eyeball it. This owner's `-review` pass told the implementer to hardcode it like its siblings
+rather than invent a ninth token, so the color choice itself stays an open item, not a shipped
+decision — check it on `/design` § "Modal action — `.modal-action-button`" and give it the
+same "staged, not decided" treatment as the counter-disc/life-counter entries below if it
+needs a resolution pass. It was **not** added to the seven-rainbow comparison table above (or
+to a `.choice` block) — an eighth row there would have silently biased that still-open
+keep-vs-collapse question — so it only got a plain specimen alongside `.play-button`/
+`.secondary` in `design.ejs`.
 
 ---
 

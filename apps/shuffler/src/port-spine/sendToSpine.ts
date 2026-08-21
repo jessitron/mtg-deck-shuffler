@@ -1,7 +1,7 @@
 import { trace } from "@opentelemetry/api";
 import { GameState, GameCard } from "../GameState.js";
 import { GameId } from "../domain-types.js";
-import { CardPlayedEvent, ZoneHint, buildCardPlayedEvent } from "../port-tabletop/types.js";
+import { CardPlayedEvent, CardPlayedFaceDownEvent, ZoneHint, buildCardPlayedEvent, buildCardPlayedFaceDownEvent } from "../port-tabletop/types.js";
 import { SpinePort, buildSeatJoinedPayload, defaultPlaymatImageUrl, playmatImageUrlFromPath, cardBackImageUrl, shufflerPublicUrl } from "./types.js";
 import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../table-look.js";
 import { log } from "../log.js";
@@ -53,18 +53,21 @@ export async function joinSpineBestEffort(spinePort: SpinePort | undefined, para
   }
 }
 
-export async function sendCardPlayedToSpineBestEffort(spinePort: SpinePort | undefined, game: GameState, gameCard: GameCard, zoneHint: ZoneHint, sessionId?: string): Promise<void> {
+export async function sendCardPlayedToSpineBestEffort(
+  spinePort: SpinePort | undefined,
+  game: GameState,
+  gameCard: GameCard,
+  zoneHint: ZoneHint,
+  sessionId?: string,
+  faceDown = false
+): Promise<void> {
   if (!spinePort || !game.spineTableId || !game.seatId || !gameCard.cardInstanceId) return;
   const tableId = game.spineTableId;
   try {
-    const event: CardPlayedEvent = buildCardPlayedEvent(
-      gameCard,
-      gameCard.cardInstanceId,
-      { seatId: game.seatId, playerName: game.playerName ?? "player", sessionId },
-      game.seatId,
-      zoneHint,
-      tableId
-    );
+    const initiator = { seatId: game.seatId, playerName: game.playerName ?? "player", sessionId };
+    const event: CardPlayedEvent | CardPlayedFaceDownEvent = faceDown
+      ? buildCardPlayedFaceDownEvent(gameCard, gameCard.cardInstanceId, initiator, game.seatId, zoneHint, tableId)
+      : buildCardPlayedEvent(gameCard, gameCard.cardInstanceId, initiator, game.seatId, zoneHint, tableId);
     await spinePort.sendEvent(tableId, event);
   } catch (error) {
     trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });

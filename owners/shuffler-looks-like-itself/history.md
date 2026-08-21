@@ -1,5 +1,40 @@
 # History
 
+## 2026-08-21 — a "Play Face Down" button joined the modal-action-button family, hardcoded on purpose
+
+`card-played-face-down` ticket 03 added a fifth action to the hand-card modal: `playmat.css` →
+`.modal-action-button.face-down-button` (base/`:hover`/`:active`), styled by
+`src/view/play-game/game-modals.ts`'s `formatModalCardActionsForHand`, only on the hand-card
+modal (not Revealed/Library/Table) per spec.
+
+**This owner's `-review` pass, before implementation, made three calls worth recording:**
+
+1. **Hardcode the hex like every other sibling — don't reach for a token.** Choice 3 (card-modal
+   action buttons) is answered but unshipped: the family is still seven off-brand hardcoded
+   hues waiting on a collapse into two token-based classes. Introducing a token for an eighth
+   member would have pre-empted that still-open convergence with a one-off exception.
+2. **No layout change needed.** The modal's action buttons are a flex column stack; a fifth
+   button just adds another row.
+3. **The `/design` specimen was a real gap to close, not optional.** `design.ejs`'s "Modal
+   action — `.modal-action-button`" section now shows Play / Play Face Down / Cancel — the new
+   button lives next to its siblings in the same commit, per the "adding a component" watch
+   point in [interactions.md](interactions.md).
+
+**What shipped:** `#5c6b73` fill / `#33393d` shadow, the identical box-shadow bevel structure
+as `.play-button` and kin — hand-picked, deliberately distinct from `#607d8b`/`#6c757d` (this
+KB's own Material/Bootstrap warning) and from all seven existing hues. **The color is
+explicitly a first cut, not Jess's pick** — nobody staged alternatives or asked her to eyeball
+it, so it's recorded as an open item in [open-choices.md](open-choices.md) → choice 3, the
+same "staged, not decided" posture as the counter-disc and life-counter radius questions.
+**Deliberately not added to choice 3's seven-rainbow comparison table** — that table frames a
+still-open keep-vs-collapse A/B, and an eighth row would have silently weighted it — so the
+new button got a plain specimen instead of a `.choice` entry.
+
+The button's *class* split follows the existing play-button precedent: `face-down-button` is
+the shared visual class (the only one with a CSS rule), while `play-face-down-button`/
+`table-face-down-button` are mode-specific JS behavior hooks with no styling of their own —
+same separation `.play-button`/`.table-play-button` already used.
+
 ## 2026-08-20 — ticket 04's Vortex arming shipped, and the fleet got a second armed-treatment mechanism
 
 `apps/tabletop/src/client/shapes/LibraryPortalOverlay.tsx` (tabletop-cards-come-and-go ticket
