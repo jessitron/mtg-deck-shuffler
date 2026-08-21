@@ -21,8 +21,8 @@
     },
     "name": {
       "type": "string",
-      "pattern": "^[a-z]+(\\.[a-z_]+)+$",
-      "description": "The event's kind, namespaced (e.g. card.played). Determines which payload schema applies."
+      "pattern": "^[a-z]+(\\.[a-z_-]+)+$",
+      "description": "The event's kind, namespaced (e.g. card.played, card.played-face-down). Determines which payload schema applies."
     },
     "acceptedAt": {
       "type": "string",
