@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/card.played-face-down.v1.json",
+  "title": "card.played-face-down payload, schemaVersion 1",
+  "description": "A game event from the Shuffler: it deterministically knows a card was played concealed (morph, manifest, foretell, and similar effects), so it says so. Sibling to card.played — same facts (card identity, chosen face, destination), but the meaning to a receiver is 'mint this concealed,' not 'mint this revealed.' Card identity is the Scryfall ID (definition) plus a Shuffler-minted instance GUID (this particular Forest, for this game). Which seat played it lives on the envelope's initiator, not repeated here. Pre-Spine exception (tabletop-cards-come-and-go, ticket 05): frontImageUrl/backImageUrl/cardName are scaffolding render conveniences, promoted into this schema so ajv can validate the whole body now that zero real senders/receivers exist yet — the same in-place-edit exception envelope.v1 uses, not a new policy. Once a real consumer exists, reshaping this needs a v2.",
+  "type": "object",
+  "properties": {
+    "card": {
+      "type": "object",
+      "properties": {
+        "scryfallId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Definition: the exact printing — oracle identity, all faces, all names, all images derivable."
+        },
+        "instanceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Instance: this particular physical-ish card, minted per game at game start. Opaque — distinct from the Shuffler's internal gameCardIndex (see the sibling `gameCardIndex` property below), which is a rank in a decklist array, not a stable per-card identity."
+        }
+      },
+      "required": ["scryfallId", "instanceId"],
+      "additionalProperties": true
+    },
+    "face": {
+      "type": "string",
+      "enum": ["front", "back"],
+      "description": "Face is card state, not identity — but MDFCs are played as a chosen face, so it rides along. Independent of concealment: a card played face down still has a chosen face underneath."
+    },
+    "zoneHint": {
+      "type": "string",
+      "enum": ["stack", "battlefield", "graveyard"],
+      "description": "Where the card is headed on the table. A hint — geography, not rules."
+    },
+    "frontImageUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Blessed scaffolding convenience: render without a Scryfall lookup."
+    },
+    "backImageUrl": {
+      "type": ["string", "null"],
+      "description": "Present (non-null) exactly when the card has a printed back face — null, never omitted, when it doesn't (two-faced-cards watch point 17)."
+    },
+    "cardName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Blessed scaffolding convenience: display without a Scryfall lookup."
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The seatId of the player this card belongs to — under the Spine's join, that's the seat number (e.g. \"1\"-\"4\") as a string, not a GUID, so this stays a bare non-empty check. Grants no capability — any player can still move any card; it makes 'whose card is this' a fact the shape carries."
+    },
+    "isCommander": {
+      "type": "boolean",
+      "description": "Whether this card is one of its owner's commanders."
+    },
+    "gameCardIndex": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The card's index in the Shuffler's initial decklist array (its alphabetical rank in that list) — not library order, which is shuffled. Used to be withheld here as a 'decodable secret' (let-gamecardindex-out, 2026-08-10 reversed that call): decklists are public on Archidekt anyway, the app doesn't police what a trust-based table can see, and the cost of the old guard was every future payload having to carry a model of what may cross. Optional: older senders may omit it, and no receiver is required to use it."
+    }
+  },
+  "required": ["card", "face", "zoneHint", "frontImageUrl", "backImageUrl", "cardName", "owner", "isCommander"],
+  "additionalProperties": true
+}
