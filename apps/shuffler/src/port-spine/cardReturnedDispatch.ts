@@ -38,6 +38,7 @@ export interface CardReturnedDispatchDeps {
 export function dispatchSpineEventForGame(
   gameId: GameId,
   spineTableId: string,
+  gameSeatId: string | undefined,
   seenEventIds: Set<string>,
   deps: CardReturnedDispatchDeps,
   event: unknown
@@ -74,6 +75,12 @@ export function dispatchSpineEventForGame(
           }
           const { envelope } = result;
           span.setAttribute("event.id", envelope.id);
+          span.setAttribute("seat.id", envelope.payload.seat);
+
+          if (envelope.payload.seat !== gameSeatId) {
+            span.setAttribute("card_return.outcome", "other-seat");
+            return;
+          }
 
           if (seenEventIds.has(envelope.id)) {
             span.setAttribute("card_return.outcome", "duplicate");

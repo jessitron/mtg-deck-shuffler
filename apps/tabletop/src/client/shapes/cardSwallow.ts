@@ -52,10 +52,10 @@ export function swallowCard(editor: Editor, current: MtgCardShape, zoneHit: Zone
   );
 
   const id = current.id;
-  const { owner, scryfallId, gameCardIndex } = current.props;
+  const { scryfallId, gameCardIndex } = current.props;
 
   setTimeout(() => {
-    void completeSwallow(editor, id, before, { owner, scryfallId, gameCardIndex });
+    void completeSwallow(editor, id, before, { seatId: zoneHit.seatId, scryfallId, gameCardIndex });
   }, 0);
 }
 
@@ -63,7 +63,7 @@ async function completeSwallow(
   editor: Editor,
   id: TLShapeId,
   before: SwallowSnapshot,
-  send: { owner: string; scryfallId: string; gameCardIndex: number | null }
+  send: { seatId: string | null; scryfallId: string; gameCardIndex: number | null }
 ): Promise<void> {
   const [ok] = await Promise.all([postCardReturned(send), sleep(SWALLOW_DURATION_MS)]);
 
@@ -88,8 +88,8 @@ function tableSlugFromLocation(): string | undefined {
   return match ? decodeURIComponent(match[1]) : undefined;
 }
 
-async function postCardReturned(send: { owner: string; scryfallId: string; gameCardIndex: number | null }): Promise<boolean> {
-  if (send.gameCardIndex === null) return false;
+async function postCardReturned(send: { seatId: string | null; scryfallId: string; gameCardIndex: number | null }): Promise<boolean> {
+  if (send.seatId === null || send.gameCardIndex === null) return false;
   const tableSlug = tableSlugFromLocation();
   if (!tableSlug) return false;
 
@@ -97,7 +97,7 @@ async function postCardReturned(send: { owner: string; scryfallId: string; gameC
     const response = await fetch(`/api/tables/${encodeURIComponent(tableSlug)}/cards/return`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ seatId: send.owner, scryfallId: send.scryfallId, gameCardIndex: send.gameCardIndex }),
+      body: JSON.stringify({ seatId: send.seatId, scryfallId: send.scryfallId, gameCardIndex: send.gameCardIndex }),
     });
     return response.ok;
   } catch {

@@ -87,6 +87,7 @@ export function broadcastGameStateUpdated(gameId: GameId): void {
 export function ensureGameSpineSubscription(
   gameId: GameId,
   spineTableId: string,
+  gameSeatId: string | undefined,
   deps: { persistStatePort: PersistStatePort; cardRepository: CardRepositoryPort },
   /** Defaults to the real Spine (`subscribeToSpine`'s own default) — overridable so tests can point this at a fake SSE server. */
   baseUrl?: string
@@ -95,7 +96,7 @@ export function ensureGameSpineSubscription(
   if (registry.has(key)) return;
 
   const seenEventIds = new Set<string>();
-  const onEvent = (event: unknown) => dispatchSpineEventForGame(gameId, spineTableId, seenEventIds, deps, event);
+  const onEvent = (event: unknown) => dispatchSpineEventForGame(gameId, spineTableId, gameSeatId, seenEventIds, deps, event);
   const subscription = baseUrl ? subscribeToSpine(spineTableId, onEvent, baseUrl) : subscribeToSpine(spineTableId, onEvent);
 
   registry.set(key, { gameId, spineTableId, subscription, seenEventIds });

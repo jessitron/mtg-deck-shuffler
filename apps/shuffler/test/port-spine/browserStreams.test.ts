@@ -65,7 +65,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     const tableId = `table-${randomUUID()}`;
     const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-    ensureGameSpineSubscription(gameId, tableId, { persistStatePort, cardRepository }, `http://localhost:${port}`);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, `http://localhost:${port}`);
     openGameIds.push(gameId);
     await waitUntil(() => fakeServer!.connectionCount() === 1);
 
@@ -90,7 +90,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     const tableId = `table-${randomUUID()}`;
     const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-    ensureGameSpineSubscription(gameId, tableId, { persistStatePort, cardRepository }, `http://localhost:${port}`);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, `http://localhost:${port}`);
     openGameIds.push(gameId);
     await waitUntil(() => fakeServer!.connectionCount() === 1);
 
@@ -114,7 +114,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     const tableId = `table-${randomUUID()}`;
     const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-    ensureGameSpineSubscription(gameId, tableId, { persistStatePort, cardRepository }, `http://localhost:${port}`);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, `http://localhost:${port}`);
     openGameIds.push(gameId);
     await waitUntil(() => fakeServer!.connectionsAcceptedCount() === 1);
 
@@ -123,7 +123,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     removeBrowserStream(gameId, tab);
     await waitUntil(() => fakeServer!.connectionCount() === 0);
 
-    ensureGameSpineSubscription(gameId, tableId, { persistStatePort, cardRepository }, `http://localhost:${port}`);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, `http://localhost:${port}`);
     await waitUntil(() => fakeServer!.connectionsAcceptedCount() === 2);
     expect(getGameSubscriptionRegistry().has(String(gameId))).toBe(true);
   }, 10000);

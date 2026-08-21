@@ -174,18 +174,28 @@ async function firstLibraryCard(page: Page, gameId: string): Promise<{ gameCardI
 }
 
 /** A minimal valid card.returned.v1 envelope, posted directly to the real Spine's event log. */
-function cardReturnedEnvelope(tableId: string, gameCardIndex: number, scryfallId: string) {
+function cardReturnedEnvelope(tableId: string, gameCardIndex: number, scryfallId: string, seatId: string) {
   return {
     id: randomUUID(),
     tableId,
     name: 'card.returned',
-    initiator: { seatId: 'seat-test0001', playerName: 'Table Ghost' },
+    initiator: { seatId, playerName: 'Table Ghost' },
     occurredIn: 'tabletop',
     origin: 'tabletop.cardShapeHook',
     significance: 'domain',
     schemaVersion: 1,
-    payload: { card: { scryfallId }, gameCardIndex, seat: 'seat-test0001', fromZone: 'battlefield' },
+    payload: { card: { scryfallId }, gameCardIndex, seat: seatId, fromZone: 'battlefield' },
   };
+}
+
+/** A game's own seatId, read from /debug-state/:gameId's dumped JSON. */
+async function gameSeatId(page: Page, gameId: string): Promise<string> {
+  const html = await page.request.get(`${BASE_URL}/debug-state/${gameId}`).then((r) => r.text());
+  const match = html.match(/<pre class="hidden">([\s\S]*?)<\/pre>/);
+  if (!match) throw new Error('could not find the debug-state JSON dump');
+  const persisted = JSON.parse(match[1]) as { seatId?: string };
+  if (!persisted.seatId) throw new Error('game has no seatId in its debug-state dump');
+  return persisted.seatId;
 }
 
 test.describe('Browser push: a card.returned event reaches every open tab on the game (ticket 04)', () => {
@@ -198,6 +208,7 @@ test.describe('Browser push: a card.returned event reaches every open tab on the
     const tableName = `sse-table-${Date.now()}`;
     const { tableSlug, gameId } = await startGameAtTable(page, tableName);
     const { gameCardIndex, scryfallId } = await firstLibraryCard(page, gameId);
+    const seatId = await gameSeatId(page, gameId);
 
     // A second browser tab on the same game — the scenario ticket 04 exists for.
     const secondTab = await context.newPage();
@@ -207,7 +218,7 @@ test.describe('Browser push: a card.returned event reaches every open tab on the
     // Deliver the fake card.returned directly at the Spine — the real path a Tabletop
     // portal-swallow gesture would take, without needing that gesture here.
     const response = await page.request.post(`${SPINE_URL}/tables/${tableSlug}/events`, {
-      data: cardReturnedEnvelope(tableSlug, gameCardIndex, scryfallId),
+      data: cardReturnedEnvelope(tableSlug, gameCardIndex, scryfallId, seatId),
     });
     expect(response.ok()).toBe(true);
 
@@ -216,16 +227,6 @@ test.describe('Browser push: a card.returned event reaches every open tab on the
     await expect(secondTab.locator('#revealed-cards-area .card-container')).toHaveCount(1, { timeout: 15000 });
   });
 });
-
-/** A game's own seatId, read from /debug-state/:gameId's dumped JSON (see firstLibraryCard above). */
-async function gameSeatId(page: Page, gameId: string): Promise<string> {
-  const html = await page.request.get(`${BASE_URL}/debug-state/${gameId}`).then((r) => r.text());
-  const match = html.match(/<pre class="hidden">([\s\S]*?)<\/pre>/);
-  if (!match) throw new Error('could not find the debug-state JSON dump');
-  const persisted = JSON.parse(match[1]) as { seatId?: string };
-  if (!persisted.seatId) throw new Error('game has no seatId in its debug-state dump');
-  return persisted.seatId;
-}
 
 test.describe('Cross-ship: a card return travels Tabletop → Spine → Shuffler → browser, with no direct Tabletop→Shuffler HTTP call (ticket 05)', () => {
   test.skip(!tabletopBuilt, 'apps/tabletop is not built — run `cd apps/tabletop && npm run build` for this flow');

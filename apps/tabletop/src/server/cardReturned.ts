@@ -14,11 +14,11 @@ interface CardReturnedRequestBody {
 /**
  * The library-portal swallow's send leg (ticket 12): the client has already decided to
  * swallow a card and needs a 2xx before it commits the shape's deletion (send-then-commit).
- * The client only knows the card's own props (`owner`, `scryfallId`, `gameCardIndex`) — it
- * has no notion of its own player identity, matching the rest of this ship's shared-canvas
- * design — so `seatId` here is the card's owner, and `playerName`/the Spine's real
- * `tableId` are resolved server-side from the room registry, the same lookup
- * `handleSeatJoined` already does.
+ * `seatId` here is the library zone the card was dropped on (`ZoneHit.seatId`), not
+ * necessarily the card's own owner — today the swallow gate only arms a library for its
+ * own owner's cards, so the two coincide, but this route addresses the drop target.
+ * `playerName`/the Spine's real `tableId` are resolved server-side from the room registry,
+ * the same lookup `handleSeatJoined` already does.
  */
 export async function handleCardReturned(req: Request, res: Response): Promise<void> {
   const tableName = slugifyTableName(req.params.tableName ?? "");
