@@ -317,4 +317,25 @@ describe("card arrival", () => {
     expect(shapesOf("arrival-no-seat")).toHaveLength(0);
     expect(furnitureShapesOf("arrival-no-seat")).toHaveLength(0);
   });
+
+  it("mints card.played-face-down shapes with faceDown:true, images populated exactly as card.played would", async () => {
+    await joinSeat("arrival-face-down", "seat-0000001", "Jess");
+    const event = cardPlayed("arrival-face-down", { name: "card.played-face-down" }, { backImageUrl: "https://cards.scryfall.io/normal/back/1/1/11111111.jpg" });
+    const response = await post("arrival-face-down", event);
+    expect(response.status).toBe(201);
+
+    const [card] = shapesOf("arrival-face-down");
+    expect(card.props).toMatchObject({
+      faceDown: true,
+      frontImageUrl: event.payload.frontImageUrl,
+      backImageUrl: event.payload.backImageUrl,
+      cardName: "Lightning Bolt",
+    });
+  });
+
+  it("rejects a card.played-face-down envelope that fails payload validation — the sibling name doesn't loosen validation", async () => {
+    const event = cardPlayed("arrival-face-down-invalid", { name: "card.played-face-down" }, { owner: undefined });
+    const response = await post("arrival-face-down-invalid", event);
+    expect(response.status).toBe(400);
+  });
 });

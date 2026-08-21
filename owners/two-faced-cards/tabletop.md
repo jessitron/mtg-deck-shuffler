@@ -441,6 +441,43 @@ question. If a table-flip event is ever minted for the *Spine's* log, it must st
 **which axis** moved (transform of `face` vs change of `faceDown`) — that rule stands. Do
 NOT bake "front-ness" into shape identity.
 
+## `card.played-face-down` mints concealed at birth — card-played-face-down ticket 02 (landed)
+
+A second inbound event kind, sibling to `card.played`, for cards the Shuffler
+deterministically knows were played concealed (morph, manifest, foretell). Same payload
+shape as `card.played` (see [contract.md](contract.md)); only the envelope `name` and the
+minted shape's `faceDown` differ.
+
+- **`spineEventDispatch.ts`** now routes both names to `applyCardArrival`:
+  `CARD_ARRIVAL_EVENT_NAMES = new Set(["card.played", "card.played-face-down"])`, checked
+  before the dispatch acts (validation/dedup/placement all happen inside
+  `applyCardArrival` regardless of which name got it there).
+- **`contractValidation.ts`**'s `payloadValidators` map gained
+  `"card.played-face-down:1"` → `contracts/payloads/card.played-face-down.v1.json`
+  (identical shape to `card.played.v1.json` — see [contract.md](contract.md)).
+- **`cardArrival.ts`**'s `applyCardArrival(tableName, body)` peeks at `body.name` via a
+  small `isFaceDownEnvelope()` helper *before* validating, picks the right
+  `expectedName` for `validateIncomingEvent`, and mints `faceDown: true` on the
+  `mtg-card` shape instead of the previous hard-coded `false` — every other field
+  (`frontImageUrl`, `backImageUrl`, `cardName`, `face`, `sleeveColor`,
+  `cardBackImageUrl`, `owner`, `isCommander`, `gameCardIndex`) flows through identically
+  to `card.played`. **Nothing is nulled out for concealment** — a face-down card still
+  carries its real identity and both image URLs in synced `props`, matching this owner's
+  standing "concealment is depicted, not enforced" rule (watch point 15/tabletop.md
+  above). Turning it face-up later via the existing `CardContextMenu.tsx` toggle reveals
+  the real card for free — no new render code, no new context-menu item.
+- **No shape-type or render change was needed.** `MtgCardShapeUtil.component()`'s
+  existing `faceDown` branch already covers `faceDown === true` regardless of how the
+  shape arrived at that state — this ticket only changes which literal gets passed in at
+  mint.
+- **Test**: `apps/tabletop/test/cardArrival.test.ts` gained two cases — a
+  `card.played-face-down` envelope mints `faceDown: true` with images populated exactly
+  as `card.played` would, and a malformed `card.played-face-down` envelope (missing
+  `owner`) still fails validation, proving the sibling name doesn't loosen validation.
+- **Not yet built**: a Shuffler-side sender (ticket 03, `.scratch/card-played-face-down/`)
+  — nothing produces this event today. The contract and the Tabletop's receiving path
+  are ready and tested; a real concealed play from the Shuffler is still future work.
+
 ## Watch points
 
 - Any new Tabletop rendering path for cards must honor the payload's `face` — never
