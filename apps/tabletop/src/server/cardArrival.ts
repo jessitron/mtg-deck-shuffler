@@ -116,10 +116,12 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
             span.setAttribute("zone.graveyard_count", playerArea.graveyardCount);
             break;
           case "battlefield": // a land — arrives on the Stack with everything else; a human drags it to the playmat
-          case "stack":
-            position = stackCardPosition(playerArea.seatIndex, playerArea.stackCount++);
-            span.setAttribute("zone.stack_count", playerArea.stackCount);
+          case "stack": {
+            const stackCount = entry.stackCardCount(owner);
+            position = stackCardPosition(playerArea.seatIndex, stackCount);
+            span.setAttribute("zone.stack_count", stackCount);
             break;
+          }
         }
 
         const shapeId = createShapeId(`card-${card.instanceId}`);

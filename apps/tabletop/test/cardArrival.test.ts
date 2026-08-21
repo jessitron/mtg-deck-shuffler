@@ -172,6 +172,27 @@ describe("card arrival", () => {
     expect({ x: stackCard.x, y: stackCard.y }).not.toEqual({ x: land.x, y: land.y }); // both cascade into the stack, not on top of each other
   });
 
+  it("doesn't keep cascading rightward past a stack card that has since been dragged away", async () => {
+    await joinSeat("arrival-stack-reflow", "seat-0000001", "Jess");
+    await post("arrival-stack-reflow", cardPlayed("arrival-stack-reflow", {}, { cardName: "Card One" }));
+    await post("arrival-stack-reflow", cardPlayed("arrival-stack-reflow", {}, { cardName: "Card Two" }));
+
+    // "Card One" is dragged off the Stack — same as a human moving it to the playmat.
+    const entry = getRoomRegistry().get(slugFor("arrival-stack-reflow"))!;
+    const cardOne = shapesOf("arrival-stack-reflow").find((s) => s.props.cardName === "Card One")!;
+    await entry.room.updateStore((store) => {
+      const record = store.get(cardOne.id) as any;
+      store.put({ ...record, x: 5000, y: 5000 });
+    });
+
+    await post("arrival-stack-reflow", cardPlayed("arrival-stack-reflow", {}, { cardName: "Card Three" }));
+    const cardThree = shapesOf("arrival-stack-reflow").find((s) => s.props.cardName === "Card Three")!;
+
+    // Only "Card Two" is still on the Stack (count 1), so "Card Three" lands right after it —
+    // not two slots out, as it would if the placement counter never noticed Card One left.
+    expect({ x: cardThree.x, y: cardThree.y }).toEqual(stackCardPosition(0, 1));
+  });
+
   it("allocates player areas per seatId in join order, keyed by seat not name", async () => {
     await joinSeat("arrival-rows", "seat-AAAAAAA", "Sam");
     await joinSeat("arrival-rows", "seat-BBBBBBB", "Sam");

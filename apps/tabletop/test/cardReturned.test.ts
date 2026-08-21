@@ -59,7 +59,6 @@ function seedRoom(tableName: string, seatId: string, playerName: string): void {
     seatIndex: 0,
     playerName,
     graveyardCount: 0,
-    stackCount: 0,
     commanderNames: [],
     damageCounterCount: 0,
   });

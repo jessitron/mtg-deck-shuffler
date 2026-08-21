@@ -329,7 +329,11 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   builds the record via `tableFurniture.ts`'s `mtgCardShape()` instead of its own `store.put`
   literal. **Since the library portal (2026-08-20), also threads `gameCardIndex` through from
   `envelope.payload.gameCardIndex`** (already on the wire in `card.played`, previously dropped) —
-  see `architecture.md`'s "The library portal" section. This file has no HTTP entry point of its
+  see `architecture.md`'s "The library portal" section. **Since 2026-08-20, the `"stack"`/
+  `"battlefield"` placement case calls `entry.stackCardCount(owner)` (`rooms.ts`, below) instead of
+  incrementing the deleted `PlayerArea.stackCount`** — fixes a bug where a seat's cascade never
+  stopped advancing even after every earlier Stack card had been dragged away. See `history.md`'s
+  "Stack-arrival placement stopped trusting a monotonic counter" entry. This file has no HTTP entry point of its
   own — `card.played` reaches it only through
   the Spine's SSE subscription. `applyCardArrival` is called by
   `spineEventDispatch.ts`'s `dispatchSpineEvent` in production, and by `testSeedRoute.ts`'s
@@ -360,6 +364,14 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   editable-deck-title, 2026-08-12).
   The server-side twin of `TablePage.tsx`'s client registration; same "must spread the defaults
   explicitly" gotcha applies here, on the schema-validation side (see `architecture.md`).
+  **Since 2026-08-20, also exports `RoomEntry.stackCardCount(owner)`** — replaces the deleted
+  `PlayerArea.stackCount` monotonic counter with a live count, taken fresh on every `card.played`
+  arrival, of how many `mtg-card` shapes owned by `owner` currently have `(x, y)` inside
+  `stackBounds()` (`cardLayout.ts`), read via `this.room.getCurrentSnapshot().documents`. A
+  server-side point-in-time snapshot consumer of the same "`Translating.ts` writes in-flight
+  position on every pointer-move" fact watch point 20 already documents for client-side
+  `store.listen()` consumers — see `interactions.md` watch point 20's new paragraph and
+  `history.md` for the full bug writeup and the accepted mid-drag-transit race.
 - `apps/tabletop/src/server/tableFurniture.ts` — **new exported `FURNITURE_IMAGE_ID_MARKER =
   "furniture-image-"` constant (2026-08-11)**: prefixed onto every locked background-picture
   furniture shape's id (`matImageId`, `libraryImageId` in `ensurePlayerArea`) so a Playwright spec
