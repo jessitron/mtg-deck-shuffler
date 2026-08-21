@@ -61,13 +61,39 @@ const uiOverrides: TLUiOverrides = {
     };
     return toolItems;
   },
-  actions(_editor, actions, { addToast }) {
+  actions(editor, actions, { addToast }) {
     actions.copy = {
       ...actions.copy,
       onSelect: () => {
         addToast(COPY_DISABLED_TOAST);
       },
     };
+
+    // tldraw's undo/redo run against the shared synced store, not a local-only
+    // history — wrapping them in a span lets usePhysicsAnnouncements' card.zoneMoved
+    // spans (fired synchronously from the store.listen callback these trigger) nest
+    // underneath, so Honeycomb can show whether a batch of cards jumping zones was
+    // caused by someone hitting undo/redo.
+    const originalUndo = actions.undo.onSelect;
+    actions.undo = {
+      ...actions.undo,
+      onSelect: (source) =>
+        inSpan("undo", () => originalUndo(source), {
+          "trigger.source": source,
+          "undo.had_history": editor.getCanUndo(),
+        }),
+    };
+
+    const originalRedo = actions.redo.onSelect;
+    actions.redo = {
+      ...actions.redo,
+      onSelect: (source) =>
+        inSpan("redo", () => originalRedo(source), {
+          "trigger.source": source,
+          "redo.had_history": editor.getCanRedo(),
+        }),
+    };
+
     return actions;
   },
 };
