@@ -668,6 +668,21 @@
     branch. **Any future store-level listener this KB's mechanics feed into inherits this same
     obligation** — it is not something this owner's hooks can or should absorb, since the noise
     only exists at the store layer, not the hook layer.
+    **A second consumer shape hit the same fact from the server side (2026-08-20):**
+    `RoomEntry.stackCardCount(owner)` (`apps/tabletop/src/server/rooms.ts`) takes a **point-in-time
+    snapshot read** (`this.room.getCurrentSnapshot().documents`) of which `mtg-card` shapes
+    currently sit inside `stackBounds()`, to derive a `card.played` arrival's cascade slot — not a
+    `store.listen()` at all, so the 300ms-debounce fix doesn't apply here. But the same underlying
+    fact still reaches it: because `Translating.ts` writes in-flight `x`/`y` on every pointer-move,
+    a snapshot taken at the exact instant another player's drag is mid-transit through that seat's
+    Stack area can transiently count a still-moving card as "in the Stack," misplacing the new
+    arrival's slot. **Accepted as a narrow edge case rather than fixed** — a server-side arrival
+    runs no overlap-nudge to self-correct afterward the way a human drag's own `onTranslateEnd`
+    does (`nudgeOffAnotherCard`, watch point 25) — documented with a comment directly on
+    `stackCardCount`, not built around. See `history.md`'s "Stack-arrival placement stopped
+    trusting a monotonic counter" entry for the full writeup and the bug this replaced
+    (`PlayerArea.stackCount`, a monotonic per-seat counter that never noticed a card leaving the
+    Stack).
 
 21. **Furniture must always be beneath everything — now structurally enforced via a separate
     index band, not just an accident of draw order or a per-move patch.** (2026-08-10.) Cards and

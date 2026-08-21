@@ -1,5 +1,58 @@
 # History
 
+## Stack-arrival placement stopped trusting a monotonic counter — `RoomEntry.stackCardCount(owner)` reads live occupancy instead (2026-08-20)
+
+**Bug**: a seat's `card.played` arrivals onto the Stack cascaded further right forever, never
+resetting even after every earlier card had been dragged off. Root cause: `applyCardArrival`
+(`apps/tabletop/src/server/cardArrival.ts`) derived each new arrival's cascade slot from
+`playerArea.stackCount++` — a per-seat counter (`rooms.ts`'s `PlayerArea.stackCount`, minted at
+0 in `tableFurniture.ts`'s `ensurePlayerArea`) that only ever incremented, dating to the "stack
+cards land on their seat's side of the square" change (`history.md`, same-day-as-ticket-14 entry
+above) that first introduced it as `PlayerArea.stackCount`. It had no way to notice a card
+leaving the Stack — dragging a card off (to the playmat, graveyard, anywhere) never decremented
+it, so the tenth card to ever land on a seat's Stack side always cascaded to slot 10, even if
+only one card was still physically there.
+
+**Fix**: replaced the counter with `RoomEntry.stackCardCount(owner)` (new, `rooms.ts`) — a live
+count, taken fresh on every arrival, of how many `mtg-card` shapes owned by that seat currently
+sit with `(x, y)` inside `stackBounds()` (`cardLayout.ts`). `cardArrival.ts`'s `"stack"`/
+`"battlefield"` case now calls `entry.stackCardCount(owner)` in place of
+`playerArea.stackCount++`; `stackCardPosition(seatIndex, stackCount)` itself (`cardLayout.ts`)
+is unchanged — only what's passed as its second argument changed, from a monotonic tally to a
+point-in-time occupancy count. `PlayerArea.stackCount` — the field, its zero-initializer in
+`tableFurniture.ts`, and the fixture in `test/cardReturned.test.ts` — was deleted outright, not
+deprecated; nothing else read it (`graveyardCount` is untouched — a card leaving the graveyard
+via the library portal already goes through `cardReturned.ts`'s send-then-commit delete, not a
+counter this bug's mechanism could have affected).
+
+**A new consumer of the fact watch point 20 already established, from a new angle.**
+`Translating.ts` writes every dragged shape's in-flight `x`/`y` to the document store on each
+raw pointer-move, not just at drag-settle (confirmed against that source during ticket 21's
+`-context` consult, 2026-08-10 — see `interactions.md`'s "Depends On" section). Watch point 20
+covers a *client-side `store.listen()`* consumer seeing that noise as repeated events;
+`stackCardCount` is a **server-side, point-in-time snapshot read** (`this.room
+.getCurrentSnapshot().documents`) instead — a different consumer shape, but the same underlying
+fact bites it the same way: if a `card.played` arrival for one seat lands in the exact instant
+another player's drag is mid-transit *through* that seat's Stack area (a rotated card's page
+bounds sweeping across it, e.g.), `stackCardCount` can transiently count that still-in-flight
+card as "in the Stack," and the new arrival's slot could come out wrong. **Accepted as an edge
+case, not fixed**: unlike a human drag's own `onTranslateEnd` (`nudgeOffAnotherCard`,
+`cardZoneEntry.ts`), a server-side arrival runs no overlap-nudge to self-correct afterward, and
+building one was ruled out of scope for this bug fix (per this owner's `-review`). Documented
+with a comment directly on `stackCardCount` in `rooms.ts` rather than a new watch point of its
+own, since it's the same root fact watch point 20 already names, just reached through a second
+kind of consumer (a snapshot read, not a listener) — worth a line in watch point 20 rather than
+a duplicate entry.
+
+**Test**: `apps/tabletop/test/cardArrival.test.ts`'s "doesn't keep cascading rightward past a
+stack card that has since been dragged away" — plays two cards onto a seat's Stack, drags the
+first one off (a direct `room.updateStore` write to `x`/`y`, standing in for a human drag), plays
+a third, and asserts the third lands at `stackCardPosition(0, 1)` — right after the one card
+still actually there, not at slot 2 as the old monotonic counter would have placed it.
+
+Full detail in `interactions.md` watch point 20 (new paragraph) and `files.md`'s `cardArrival.ts`
+and `rooms.ts` entries.
+
 ## The library portal — a pointer-keyed check ahead of `handleTranslateEnd`, first `getInterpolatedProps`, first `InFrontOfTheCanvas` (2026-08-20)
 
 **Ticket-number collision warning, same shape as the two "ticket 12"s already in this KB**:
