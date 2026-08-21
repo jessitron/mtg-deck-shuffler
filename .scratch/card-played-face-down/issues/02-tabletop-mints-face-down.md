@@ -2,7 +2,7 @@
 
 Mountain: spine-gathers-data
 Ship: tabletop
-Status: ready-for-agent
+Status: done
 
 Blocked by: 01
 
