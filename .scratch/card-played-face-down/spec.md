@@ -2,7 +2,7 @@
 
 Mountain: spine-gathers-data
 Ship: fleet
-Status: ready-for-agent
+Status: done
 
 ## Problem Statement
 
