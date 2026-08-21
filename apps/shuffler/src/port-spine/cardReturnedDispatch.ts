@@ -5,6 +5,7 @@ import { CardRepositoryPort } from "../port-card-repository/types.js";
 import { applyGameCommand } from "../apply-game-command.js";
 import { validateIncomingEvent } from "./incomingEventValidation.js";
 import { markCurrentSpanAsError } from "../tracing_util.js";
+import { broadcastGameStateUpdated } from "./gameSubscriptionRegistry.js";
 import { log } from "../log.js";
 
 const tracer = trace.getTracer("mtg-deck-shuffler");
@@ -102,6 +103,7 @@ export function dispatchSpineEventForGame(
                 if (outcome.kind === "applied") {
                   seenEventIds.add(envelope.id);
                   span.setAttribute("card_return.outcome", "applied");
+                  broadcastGameStateUpdated(gameId);
                 } else {
                   span.setAttribute("card_return.outcome", outcome.kind);
                   markCurrentSpanAsError(`card.returned could not be applied: ${outcome.kind}`, {

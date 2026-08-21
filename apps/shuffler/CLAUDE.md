@@ -299,10 +299,11 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   Tabletop's `spineSubscriber.ts`/`spineEventDispatch.ts`) is the reverse leg — a card
   dragged off the Tabletop's canvas onto the library portal reaches the Shuffler as a
   `card.returned.v1` event. `gameSubscriptionRegistry.ts` holds one live subscription per
-  active game, in-memory, keyed by `gameId`; `GET /game-section/:gameId`
-  (`app.ts`) opens it idempotently whenever the persisted game has a `spineTableId` but no
-  live registry entry — the same single check covers first load, HTMX re-fetch, and "came
-  back after a while" (server restart, new tab). `spineSubscriber.ts` is the same
+  active game, in-memory, keyed by `gameId`; both `GET /game/:gameId` (full page load) and
+  `GET /game-section/:gameId` (`app.ts`) open it idempotently whenever the persisted game
+  has a `spineTableId` but no live registry entry — the same single check covers first
+  load, HTMX re-fetch, and "came back after a while" (server restart, new tab).
+  `spineSubscriber.ts` is the same
   hand-rolled SSE client shape as the Tabletop's (streamed `fetch`, `data: <json>\n\n`
   frames, the same heartbeat-aware bounded `headersTimeout`/`bodyTimeout` dispatcher — this
   is the Shuffler's first `undici` dependency, pinned to major version 7 to match what Node
@@ -318,13 +319,34 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   gate (validates what arrives, mirroring the Tabletop's `contractValidation.ts`) —
   distinct from `test/port-spine/contractValidation.ts`, which only validates what this
   ship *sends*. `face` is never read from the payload (the schema blacklists it) — the
-  card keeps whatever `currentFace` it already had. **Teardown (closing the subscription
-  when the last browser tab disconnects) and the browser-facing `GET /game-events/:gameId`
-  push are a later ticket** — this registry entry, once opened, stays open.
+  card keeps whatever `currentFace` it already had.
   **Env**: `CONTRACTS_DIR` overrides `incomingEventValidation.ts`'s default
   `contracts/`-relative path (works locally without it; the Docker image flattens the
   workspace to `/app`, so the `Dockerfile` sets `CONTRACTS_DIR=/app/contracts` and copies
   the directory in directly, mirroring the Spine's own `CONTRACTS_DIR`).
+- **Browser push + tab lifecycle**: `GET /game-events/:gameId` (`app.ts`) is a native
+  browser `EventSource` route — one connection per open tab, unlike the game-wide Spine
+  subscription above. `active-game-page.ts` stamps `#game-container` with
+  `data-spine-table-id` (only present for a table-mode game); `game.js` opens one
+  `EventSource` per full page load when that attribute is present and, on message,
+  dispatches `document.body.dispatchEvent(new CustomEvent("game-state-updated",
+  {bubbles:true}))` — the same event `#game-container`'s own `hx-trigger` already listens
+  for, so a returned card re-fetches through the identical path any other
+  externally-triggered update uses (no entrance animation — known, accepted; an
+  SSE-triggered swap can also land mid-gesture during a player's own unfinished
+  hand-reorder drag — the browser just cancels that drag, no state corruption, per
+  `owners/animations`). `gameSubscriptionRegistry.ts` tracks the open browser streams per
+  game (`addBrowserStream`/`removeBrowserStream`, separately from the Spine-subscription
+  map, since a tab can open before any Spine subscription exists — e.g. a solo game);
+  `cardReturnedDispatch.ts` calls `broadcastGameStateUpdated` after a `card.returned` is
+  actually applied. When the last open tab for a game disconnects, `removeBrowserStream`
+  tears down that game's Spine subscription — the next `GET /game/:gameId` or
+  `GET /game-section/:gameId` hit re-opens it. The route deliberately holds **no
+  lifetime-spanning span** (the connection lives as long as the tab does) — suppressed via
+  `isGameEventsStreamPath` (`game-events-route-filter.ts`), wired into
+  `@opentelemetry/instrumentation-http`'s `ignoreIncomingRequestHook` in `tracing.ts`; open
+  and close are `log.info`'d instead, and (having no active span) land as standalone log
+  rows with no trace/span id.
 - **Three-ship verification**: `test/verification/verify-tabletop-integration.spec.ts`
   spawns both a real Spine (`bundle exec puma`, `services/spine/`) and the real
   Tabletop (`apps/tabletop/dist` — build it first), proving `card.played` reaches
