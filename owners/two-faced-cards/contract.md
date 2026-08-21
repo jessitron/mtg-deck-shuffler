@@ -52,3 +52,33 @@ the schema (well-formed payload validates, missing `gameCardIndex` rejected, a `
 field of any value rejected), and `apps/shuffler/test/port-spine/contractValidation.ts`
 registers it as `"card.returned:1"`. No sender or subscriber is wired to this schema yet —
 that's later tickets in the same series.
+
+## `card.played-face-down.v1` — concealment as its own event kind, built (ticket 03, 2026-08-21)
+
+`contracts/payloads/card.played-face-down.v1.json` (landed by card-played-face-down
+ticket 01, built against by ticket 03) is field-for-field identical to
+`card.played.v1.json` — same `card`/`face`/`zoneHint`/`frontImageUrl`/`backImageUrl`/
+`cardName`/`owner`/`isCommander`/`gameCardIndex` — but is a **separate event kind**
+(`name: "card.played-face-down"`), not a `faceDown` boolean bolted onto `card.played`.
+Rationale (per spec.md): concealment changes what a receiver should *do* with the
+payload ("mint this concealed" vs "mint this revealed"), which reads better as a
+different event name than a field a naive consumer could ignore. The two schemas are
+deliberately free to diverge later without a retroactive version bump on either.
+
+On the Shuffler side: `CardPlayedFaceDownPayload`/`buildCardPlayedFaceDownEvent` in
+`apps/shuffler/src/port-tabletop/types.ts` are a **deliberate duplicate** of
+`CardPlayedPayload`/`buildCardPlayedEvent`, except for `name` (`card.played-face-down`)
+and `origin` (`shuffler.playCardFaceDownSubmit`). The face/image computation
+(`face`/`frontImageUrl`/`backImageUrl`, including the `twoFaced`-gate on `backImageUrl`
+— the sharp edge tabletop.md's watch points already document) is factored into one
+shared private helper, `cardFaceFields(gameCard)`, called by both builders — so that
+invariant lives in one place even though the two builders themselves stay separate,
+divergeable functions. `sendCardPlayedToSpineBestEffort`
+(`apps/shuffler/src/port-spine/sendToSpine.ts`) picks the builder via a trailing
+`faceDown = false` parameter, threaded from `POST /play-card`'s
+`req.body["face-down"] === "true"` (`apps/shuffler/src/app.ts`).
+
+**No consumer on the Tabletop/Spine side yet** — this ticket is Shuffler-only. A future
+ticket that makes the Tabletop or Spine *do* something with `card.played-face-down`
+should apply the same `cardFaceFields`-equivalent question this schema's description
+already answers: it's the same facts as `card.played`, meaning "mint concealed."

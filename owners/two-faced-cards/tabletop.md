@@ -166,10 +166,18 @@ The Shuffler's behavior is **unchanged** by this decision; the asymmetry is the 
 So: a Tabletop gesture that "flips" a card has to decide *which* axis it moves, and for a
 one-faced card only the face-down axis exists.
 
-The Shuffler has **no face-down concept at all** today — nothing in `CardDefinition`,
-`GameCard`, or the contract expresses concealment. A "Play Face-Down" button for the
-Shuffler was considered and **dropped** (2026-08-07) onto the Mural-parity list as a
-buoy; `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md` already lists "flip a card over (MDFC,
+The Shuffler has **no face-down concept as domain state** — nothing in `CardDefinition`
+or `GameCard` expresses concealment, and playing a card face down doesn't change where it
+is (still just moves to Table). What's built instead (card-played-face-down ticket 03,
+2026-08-21): a **distinct event kind**, `card.played-face-down` (own contract schema,
+own builder `buildCardPlayedFaceDownEvent`), sent by a "Play Face Down" button on the
+**hand card modal only** (`formatModalCardActionsForHand` in
+`apps/shuffler/src/view/play-game/game-modals.ts`) — not on Revealed, per spec.md.
+Concealment lives entirely in *which event kind was sent*, not in a flag or a new field
+on `GameCard`. This supersedes the 2026-08-07 "dropped to the Mural-parity buoy list"
+note below, which described the button before it existed; the button/event-kind is now
+built, but the Shuffler still tracks no face-down *state* — see contract.md for the
+event-kind rationale. `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md` already lists "flip a card over (MDFC,
 and face-down)" as parity work and puts playing from the library face-down out of scope.
 Don't confuse this with the "Card Back" note in [interactions.md](interactions.md) — the
 Shuffler's `CARD_BACK` image is *library stack decoration*, not modeled concealment. When

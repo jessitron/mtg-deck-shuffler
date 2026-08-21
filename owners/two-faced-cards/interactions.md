@@ -369,6 +369,29 @@ String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.pl
     populates, or the schema's constraint on it, run this test — it's the fast way to catch
     a mismatch before a live Spine does.
 
+24. **`card.played-face-down` is a third sender site bound by the `backImageUrl`-derived-
+    from-`twoFaced` rule — built card-played-face-down ticket 03, 2026-08-21.**
+    `apps/shuffler/src/port-tabletop/types.ts` gained `CardPlayedFaceDownPayload` +
+    `buildCardPlayedFaceDownEvent` alongside `CardPlayedPayload`/`buildCardPlayedEvent`
+    — a deliberate field-for-field duplicate (per `.scratch/card-played-face-down/spec.md`,
+    kept separate so the two event kinds can diverge later without a retroactive schema
+    bump), but the face/image computation itself (`face`, `frontImageUrl`, and the
+    `twoFaced`-gated `backImageUrl`) is factored into one shared private helper,
+    `cardFaceFields(gameCard)`, called by both builders. **If you add a fourth
+    face-carrying sender site, extend `cardFaceFields` (or replace it with something both
+    call) rather than re-copying the `twoFaced ? … : null` gate a third time** — this is
+    now the second time watch point 19/#18's sharp edge showed up as copy-paste risk (the
+    first was `seat.joined`'s `commanders` array, watch point 21). Trigger: a "Play Face
+    Down" button on the hand card modal only (`formatModalCardActionsForHand`,
+    `apps/shuffler/src/view/play-game/game-modals.ts`) — not on Revealed, per spec.md —
+    sends `req.body["face-down"] === "true"` through `sendCardBeforeMutate` →
+    `sendCardPlayedToSpineBestEffort`'s new trailing `faceDown` param
+    (`apps/shuffler/src/port-spine/sendToSpine.ts`), which picks the builder. `GameState`/
+    `GameCard`/`game.playCard()` are untouched — concealment is not domain state on the
+    Shuffler, only which event kind got sent. See
+    [contract.md](contract.md#cardplayed-face-downv1--concealment-as-its-own-event-kind-built-ticket-03-2026-08-21)
+    for the schema and the "why a separate event kind, not a flag" rationale.
+
 ## Not Related To
 
 ### Sleeve carries to the game screen (`sleeve-carries-to-game`, 2026-08-09)
