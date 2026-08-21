@@ -32,7 +32,11 @@ test.beforeAll(async () => {
   // needs a live Spine to subscribe to, and card.played now only reaches the
   // Tabletop by traveling through it: Shuffler → Spine → SSE → Tabletop, with
   // zero direct Shuffler→Tabletop HTTP left in the code.
-  spine = spawn('bundle', ['exec', 'puma', '-p', SPINE_PORT], {
+  // -t 5:20: Puma's default max of 5 threads is exhausted by this file's own long-lived
+  // real Spine SSE subscriptions (one per describe block's table, held open for the whole
+  // spawned process's life) — a later test's short-lived requests then queue behind them
+  // and can time out. Raised only for this test-only Puma process, not the app's own config.
+  spine = spawn('bundle', ['exec', 'puma', '-p', SPINE_PORT, '-t', '5:20'], {
     cwd: SPINE_DIR,
     env: { ...process.env, SPINE_DB_PATH, TABLETOP_URL, RACK_ENV: 'development' },
     stdio: 'ignore',
@@ -210,5 +214,44 @@ test.describe('Browser push: a card.returned event reaches every open tab on the
     // The second tab's own EventSource, not the first tab's, is what re-fetches this —
     // no page reload, no action taken on this tab at all.
     await expect(secondTab.locator('#revealed-cards-area .card-container')).toHaveCount(1, { timeout: 15000 });
+  });
+});
+
+/** A game's own seatId, read from /debug-state/:gameId's dumped JSON (see firstLibraryCard above). */
+async function gameSeatId(page: Page, gameId: string): Promise<string> {
+  const html = await page.request.get(`${BASE_URL}/debug-state/${gameId}`).then((r) => r.text());
+  const match = html.match(/<pre class="hidden">([\s\S]*?)<\/pre>/);
+  if (!match) throw new Error('could not find the debug-state JSON dump');
+  const persisted = JSON.parse(match[1]) as { seatId?: string };
+  if (!persisted.seatId) throw new Error('game has no seatId in its debug-state dump');
+  return persisted.seatId;
+}
+
+test.describe('Cross-ship: a card return travels Tabletop → Spine → Shuffler → browser, with no direct Tabletop→Shuffler HTTP call (ticket 05)', () => {
+  test.skip(!tabletopBuilt, 'apps/tabletop is not built — run `cd apps/tabletop && npm run build` for this flow');
+
+  test('a card.returned sent through the Tabletop\'s own real send route (the library-portal swallow\'s server-side leg, ticket 12) lands in the Shuffler\'s Revealed zone', async ({
+    page,
+  }) => {
+    const tableName = `e2e-return-${Date.now()}`;
+    const { tableSlug, gameId } = await startGameAtTable(page, tableName);
+    const { gameCardIndex, scryfallId } = await firstLibraryCard(page, gameId);
+    const seatId = await gameSeatId(page, gameId);
+
+    // The library-portal swallow's actual client call (cardSwallow.ts's postCardReturned) —
+    // exercised here directly rather than via a simulated canvas drag (that drag gesture's
+    // own mechanics are covered by apps/tabletop's verify-library-portal.spec.ts). This still
+    // drives the real Tabletop server's handleCardReturned, which calls
+    // sendCardReturnedToSpineBestEffort to POST to the real Spine — the same server-side path
+    // ticket 12's drag ends in.
+    const response = await page.request.post(`${TABLETOP_URL}/api/tables/${tableSlug}/cards/return`, {
+      data: { seatId, scryfallId, gameCardIndex },
+    });
+    expect(response.ok()).toBe(true);
+
+    // The card.returned event, delivered to the Shuffler over its own Spine SSE subscription,
+    // lands it in Revealed — no manual reload, no direct Tabletop→Shuffler HTTP call anywhere
+    // in this path (confirmed statically by no-direct-tabletop-shuffler-http.test.ts).
+    await expect(page.locator('#revealed-cards-area .card-container')).toHaveCount(1, { timeout: 15000 });
   });
 });
