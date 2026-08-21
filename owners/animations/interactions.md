@@ -4,6 +4,17 @@
 
 - **GameState / WhatHappened**: `src/GameState.ts` defines `WhatHappened` interface. Animation classes are chosen based on its properties. If `WhatHappened` changes, `getAnimationClassHelper()` must be updated to match.
 - **HTMX**: Animations depend on HTMX swap behavior. All game actions use immediate `hx-swap="outerHTML"`.
+- **The Spine's SSE push (2026-08-20, shuffler-spine-sse-subscriber ticket 04)**: `#game-container`'s
+  `hx-trigger="game-state-updated from:body"` re-fetch — the entry point for every entrance
+  animation in this file — can now fire from an **out-of-band server push**, not just direct
+  player action. `active-game-page.ts` stamps `data-spine-table-id` on `#game-container` when the
+  game is table-mode; `public/game.js`'s `DOMContentLoaded` handler opens one native `EventSource`
+  per full page load against `GET /game-events/:gameId` when that attribute is present, and on
+  every message dispatches `document.body.dispatchEvent(new CustomEvent("game-state-updated",
+  {bubbles:true}))` — the *exact same* event, so it reuses the existing HTMX path unchanged (no
+  new swap target, no new animation class). This means a card returned from the Tabletop can
+  trigger the swap **at any time**, including mid-gesture during a player's own unfinished
+  native-HTML5 hand-reorder drag inside `#hand-cards`.
 - **View rendering**: `shared-components.ts` applies animation classes during HTML generation. Changes to card rendering (container structure, class names, nesting) can break CSS selectors that target animated elements.
 - **Two-faced cards**: The flip animation uses `.flip-container-outer`, `.flip-container-inner`, `.card-flipped`. Changes to two-faced card DOM structure will break flip animations.
 - **The Tabletop's `mtg-card` shape (built, `65276e6`)**: the tap animation's trigger is
@@ -124,6 +135,15 @@
   future change lets a counter keep an independent tilt, `offsetLocal` is no longer constant
   and this math breaks silently (wrong orbit direction/magnitude, not a crash). The combined
   transform's double-tap gap (see architecture.md) now spans both rotation and translate.
+- **Server-pushed swap mid-drag (checked 2026-08-20, ticket 04 above)**: an SSE-triggered
+  `#game-container` swap can now land while a player has an unfinished native-HTML5 hand-reorder
+  drag in progress inside `#hand-cards`. Checked and found safe, not a new hazard: `game.js`'s drag
+  cleanup runs at `dragstart` (not `dragend`), so there's no stale `.dragging`/animation class left
+  behind; the browser simply cancels an in-flight native drag when its source element is removed
+  from the DOM (no `drop` event fires), and `handleDrop`'s `sessionStorage` write for the
+  hand-symbol easter egg only happens on a completed drop, so no corrupted state either. No guard
+  was added. If a future non-card draggable's drop handler ever does something *other* than a
+  same-tick DOM/sessionStorage write (e.g. an async request), re-check this assumption.
 - **`evt.detail.elt` is not the triggering element inside `htmx:afterSettle` (fixed 2026-08-11,
   `public/table-look-focus.js`)**: htmx's `triggerEvent` always overwrites `detail.elt` to be
   the element the event is dispatched *on*; `afterSettle` fires once per settling element in

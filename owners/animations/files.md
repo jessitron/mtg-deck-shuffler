@@ -85,6 +85,11 @@ of value that gets tokenized into a custom property.
     check the sentinel before falling into the real-card logic; the drop path does a
     plain DOM `insertBefore` + `sessionStorage` write instead of the `/move-hand-card`
     POST. See architecture.md "New shape: a draggable non-card element."
+  - `DOMContentLoaded` handler near the bottom (2026-08-20, ticket 04) — opens one native
+    `EventSource` against `/game-events/:gameId` when `#game-container` carries
+    `data-spine-table-id` (table-mode only); on message, dispatches `"game-state-updated"`
+    on `document.body` — the same event `#game-container`'s own `hx-trigger` listens for.
+    New animation *trigger*, not a new mechanism; no CSS/class changes. See interactions.md.
   - (Line numbers shifted down ~55 lines after the hamburger-menu code was added at the top.)
 - `public/deck-selection.js`
   - Lines 35-78: Manages `search-active` class to disable/enable tile fade-in
