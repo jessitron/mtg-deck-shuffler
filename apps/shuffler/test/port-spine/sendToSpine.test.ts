@@ -244,6 +244,30 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     await expect(sendCardPlayedToSpineBestEffort(fake, game, bolt, "stack")).resolves.toBeUndefined();
     expect(fake.sentEvents).toHaveLength(0);
   });
+
+  it("sends card.played-face-down instead of card.played when faceDown is requested — this is exactly what /play-card's sendCardBeforeMutate branches on", async () => {
+    const fake = new FakeSpineGateway();
+    const tableInfo = await joinedTableInfo(fake);
+    const game = GameState.newGame(107, 1, 1, testDeck, undefined, tableInfo);
+    const bolt = cardNamed(game, "Lightning Bolt");
+
+    await sendCardPlayedToSpineBestEffort(fake, game, bolt, "stack", undefined, true);
+
+    expect(fake.sentEvents).toHaveLength(1);
+    expect(fake.sentEvents[0].event.name).toBe("card.played-face-down");
+  });
+
+  it("still sends card.played when faceDown is omitted (regression guard: the default stays a normal play)", async () => {
+    const fake = new FakeSpineGateway();
+    const tableInfo = await joinedTableInfo(fake);
+    const game = GameState.newGame(108, 1, 1, testDeck, undefined, tableInfo);
+    const bolt = cardNamed(game, "Lightning Bolt");
+
+    await sendCardPlayedToSpineBestEffort(fake, game, bolt, "stack");
+
+    expect(fake.sentEvents).toHaveLength(1);
+    expect(fake.sentEvents[0].event.name).toBe("card.played");
+  });
 });
 
 describe("buildCardPlayedEvent", () => {

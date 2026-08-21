@@ -87,8 +87,35 @@ async function copyCardToClipboard(cardId, face) {
   });
 }
 
+// Function to copy the fleet's generic card-back image to the clipboard — used for
+// "Play Face Down": no Scryfall lookup needed, the card back is already a local file.
+async function copyCardBackToClipboard() {
+  Hny = Hny || {
+    inSpanAsync: (a, b, fn, c) => {
+      console.log("warning: no tracing");
+      return fn();
+    },
+  };
+  return Hny.inSpanAsync("mtg-deck-shuffler-web", "copy card back to clipboard", async (span) => {
+    const response = await fetch("/images/mtg-card-back.jpg");
+    span?.setAttribute("app.response.ok", response.ok);
+    if (response.ok) {
+      const blob = await response.blob();
+      span?.setAttribute("app.blob.type", blob.type);
+      span?.setAttribute("app.blob.size", blob.size);
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          [blob.type]: blob,
+        }),
+      ]);
+      return true;
+    }
+    return false;
+  });
+}
+
 document.addEventListener("htmx:beforeRequest", function (evt) {
-  if (evt.detail.elt.classList.contains("table-play-button")) {
+  if (evt.detail.elt.classList.contains("table-play-button") || evt.detail.elt.classList.contains("table-face-down-button")) {
     evt.detail.elt.textContent = "Sent to table";
     evt.detail.elt.disabled = true;
   }
@@ -111,6 +138,27 @@ document.addEventListener("htmx:beforeRequest", async function (evt) {
       }
     } catch (clipboardErr) {
       console.warn("Failed to copy image to clipboard:", clipboardErr);
+      button.textContent = "Copy failed 😨";
+    }
+
+    button.disabled = true;
+  }
+});
+
+// Handle clipboard copying of the generic card back when "Play Face Down" is used solo
+document.addEventListener("htmx:beforeRequest", async function (evt) {
+  if (evt.detail.elt.classList.contains("play-face-down-button")) {
+    const button = evt.detail.elt;
+
+    try {
+      const success = await copyCardBackToClipboard();
+      if (success) {
+        button.textContent = "Copied!";
+      } else {
+        button.textContent = "Copy failed 😨";
+      }
+    } catch (clipboardErr) {
+      console.warn("Failed to copy card back to clipboard:", clipboardErr);
       button.textContent = "Copy failed 😨";
     }
 

@@ -127,10 +127,10 @@ export function createApp(
     return expectedVersionStr === undefined ? undefined : parseInt(expectedVersionStr);
   }
 
-  async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint, sessionId?: string): Promise<void> {
+  async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint, sessionId?: string, faceDown = false): Promise<void> {
     setCommonSpanAttributes({ tableName: game.tableName });
-    trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing", "zone.hint": zoneHint });
-    await sendCardPlayedToSpineBestEffort(spinePort, game, card, zoneHint, sessionId);
+    trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing", "zone.hint": zoneHint, "card.face_down": faceDown });
+    await sendCardPlayedToSpineBestEffort(spinePort, game, card, zoneHint, sessionId, faceDown);
   }
 
   function renderCommandOutcome(
@@ -1410,6 +1410,8 @@ export function createApp(
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
     const sessionId = res.locals.sessionId as string | undefined;
+    // htmx's default form encoding sends the hx-vals boolean as the string "true", not a JS boolean.
+    const faceDown = req.body["face-down"] === "true";
 
     try {
       const outcome = await applyGameCommand(
@@ -1431,7 +1433,7 @@ export function createApp(
           if (!game.tableName || !cardToPlay || (cardToPlay.location.type !== "Hand" && cardToPlay.location.type !== "Revealed")) {
             return;
           }
-          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay), sessionId);
+          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay), sessionId, faceDown);
         }
       );
 
