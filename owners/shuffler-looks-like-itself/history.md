@@ -1,5 +1,37 @@
 # History
 
+## 2026-08-21 — ticket 04's library "Play Face Down" button deliberately skipped the grey styling its own JS-hook classes came from
+
+`card-played-face-down` ticket 04 added a "Play Face Down" button to the library-buttons
+grid on the game page (`library-components.ts`'s `formatLibrarySectionHtmlFragment`), a
+full-width row between Reveal/Mill and Search/Shuffle (`game.css`'s
+`.library-buttons` `grid-template-areas` gained a `"play-face-down play-face-down"` row, and
+`.library-buttons .table-face-down-button, .library-buttons .play-face-down-button {
+grid-area: play-face-down; }` places it there).
+
+It reuses ticket 03's `table-face-down-button`/`play-face-down-button` classes — but **only**
+for their JS-wiring role (mode-switch between table play and solo play, same as
+`.play-button`/`.table-play-button` elsewhere), not their look. Ticket 03 built those two
+classes as pure behavior hooks with no CSS rule of their own; the grey fill comes from a
+*third* class, `.modal-action-button.face-down-button`, that only the hand-card modal's
+button carries. The library button carries neither `.modal-action-button` nor
+`.face-down-button`, so it falls through to the plain `.library-buttons button` rule in
+`playmat.css` — the same black/seat-color fill as Reveal and Mill — and, because that rule is
+inside the `.playmat-game .library-buttons button` seat-color override (see
+[architecture.md](architecture.md)'s `game.css` row), it also picks up the seat's resolved
+color like its neighbors.
+
+**This was a deliberate choice, made at this owner's `-context` consult before
+implementation, not an oversight:** the library grid has no plain "Play" button next to it
+to contrast a grey "Play Face Down" against — Reveal/Mill/Search/Shuffle are all the same
+plain style — so the grey scheme choice 3 is still sitting on (open, unshipped) had nothing
+to differentiate itself from here. Giving the library button the modal's grey would have been
+a second, unreviewed instance of an already-unreviewed color, in a context where the modal's
+own reasoning (distinguish this destructive-ish action from the neutral "Play") doesn't
+transfer. `/design`'s "Playmat button — `.library-buttons button`" specimen was updated in the
+same change to show the new row in the grid (plain specimen, not a `.choice` block — same
+posture as the modal sibling's specimen).
+
 ## 2026-08-21 — a "Play Face Down" button joined the modal-action-button family, hardcoded on purpose
 
 `card-played-face-down` ticket 03 added a fifth action to the hand-card modal: `playmat.css` →

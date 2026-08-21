@@ -3,6 +3,9 @@ import { formatLibraryStack } from "../common/shared-components.js";
 
 export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: WhatHappened): string {
   const expectedVersion = game.getStateVersion();
+  const inTableMode = !!game.tableName;
+  const faceDownClass = inTableMode ? "table-face-down-button" : "play-face-down-button";
+  const faceDownTitle = inTableMode ? "Send face down to the table" : "Copy card back";
   return `<div id="library-section" data-testid="library-section">
         ${formatLibraryStack(whatHappened, game.listLibrary().length, game.sleeveColor)}
         <div class="library-buttons">
@@ -41,6 +44,17 @@ export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: 
                       : "disabled"
                   }
                   >Mill</button>
+          <button id="play-top-face-down-button" class="${faceDownClass}"
+                  title="${faceDownTitle}"
+                  ${
+                    game.listLibrary().length > 0
+                      ? `hx-post="/play-top-card-face-down/${game.gameId}"
+                       hx-vals='{"expected-version": ${expectedVersion}}'
+                       hx-target="#game-container"
+                       hx-swap="outerHTML"`
+                      : "disabled"
+                  }
+                  >Play Face Down</button>
         </div>
       </div>`;
 }

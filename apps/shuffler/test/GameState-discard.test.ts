@@ -130,3 +130,42 @@ describe("GameState.mill", () => {
     expect(() => game.mill()).toThrow(/Library is empty/);
   });
 });
+
+describe("GameState.playTopCardOfLibrary", () => {
+  test("moves the top library card to the table with the play-face-down verb", () => {
+    const game = GameState.newGame(6, 1, 1, testDeck); // everything in library
+    const topCard = game.listLibrary()[0];
+
+    game.playTopCardOfLibrary();
+
+    expect(topCard.location.type).toBe("Table");
+    expect(game.listTable()).toHaveLength(1);
+
+    const events = game.getEventLog().getEvents();
+    const lastEvent = events[events.length - 1] as MoveCardEvent & { gameEventIndex: number };
+    expect(lastEvent.eventName).toBe("move card");
+    expect(lastEvent.verb).toBe("play-face-down");
+    expect(nameMoveCardEvent(lastEvent)).toBe("Play Face Down");
+  });
+
+  test("plays from the top: a second call takes the next card down", () => {
+    const game = GameState.newGame(7, 1, 1, testDeck);
+    const [first, second] = game.listLibrary();
+
+    game.playTopCardOfLibrary();
+    game.playTopCardOfLibrary();
+
+    expect(first.location.type).toBe("Table");
+    expect(second.location.type).toBe("Table");
+    expect(game.listTable()).toHaveLength(2);
+  });
+
+  test("refuses to play the top of an empty library", () => {
+    const game = GameState.newGame(8, 1, 1, testDeck);
+    const startingCount = game.listLibrary().length;
+    for (let i = 0; i < startingCount; i++) {
+      game.playTopCardOfLibrary();
+    }
+    expect(() => game.playTopCardOfLibrary()).toThrow(/Library is empty/);
+  });
+});

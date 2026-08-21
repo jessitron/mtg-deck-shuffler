@@ -2,7 +2,7 @@
 
 Mountain: spine-gathers-data
 Ship: shuffler
-Status: not started
+Status: done
 
 Blocked by: 03
 
