@@ -600,7 +600,7 @@ export function createApp(
       // EventSource) — opening the Spine subscription any earlier would leak one for a
       // non-Active game that never gets a browser tab to close it.
       if (persistedGame.spineTableId) {
-        ensureGameSpineSubscription(gameId, persistedGame.spineTableId, { persistStatePort, cardRepository });
+        ensureGameSpineSubscription(gameId, persistedGame.spineTableId, game.seatId, { persistStatePort, cardRepository });
       }
 
       const html = formatGamePageHtmlPage(game, {}, res.locals.devMode);
@@ -1231,7 +1231,7 @@ export function createApp(
         return;
       }
       if (persistedGame.spineTableId) {
-        ensureGameSpineSubscription(gameId, persistedGame.spineTableId, { persistStatePort, cardRepository });
+        ensureGameSpineSubscription(gameId, persistedGame.spineTableId, persistedGame.seatId, { persistStatePort, cardRepository });
       }
       const game = await GameState.fromPersistedGameState(persistedGame, cardRepository);
       setCommonSpanAttributes({ tableName: game.tableName, playerName: game.playerName });
