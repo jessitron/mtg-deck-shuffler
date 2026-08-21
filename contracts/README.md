@@ -60,6 +60,7 @@ These are sent from Spine to the other ships over the event stream. Most of thes
 
 - seat.joined (this one might be an API call the first time a seat is joined, but it'll be reproduced if we use the Spine for tabletop persistence, which is my current plan)
 - card.played. Initiator: shuffler
+- card.played-face-down. Initiator: shuffler. Sibling to card.played — identical payload shape, but the receiver mints the card concealed.
 - card.discarded Initiator: shuffler
 - card.returned Initiator: tabletop or shuffler
 
