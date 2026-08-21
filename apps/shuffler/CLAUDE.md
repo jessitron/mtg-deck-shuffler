@@ -348,13 +348,26 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   and close are `log.info`'d instead, and (having no active span) land as standalone log
   rows with no trace/span id.
 - **Three-ship verification**: `test/verification/verify-tabletop-integration.spec.ts`
-  spawns both a real Spine (`bundle exec puma`, `services/spine/`) and the real
-  Tabletop (`apps/tabletop/dist` — build it first), proving `card.played` reaches
-  the canvas with zero direct Shuffler→Tabletop HTTP call anywhere in the code.
-  `verify.sh` gives each its own random port (`SPINE_URL`/`TABLETOP_URL`) per run;
-  `playwright.config.ts`'s `two-app` project (depending on `chromium`) keeps this
-  spec from running alongside `verify-table-mode.spec.ts`'s Spine-unreachable case,
-  which needs that same `SPINE_URL` to have nothing listening on it.
+  spawns both a real Spine (`bundle exec puma`, `services/spine/`, started with `-t 5:20` —
+  the default 5-thread pool is exhausted once this file's own describe blocks have opened a
+  couple of long-lived real Spine SSE subscriptions each, and a later block's short request
+  can then queue behind them long enough to time out) and the real Tabletop
+  (`apps/tabletop/dist` — build it first), proving `card.played` reaches the canvas with
+  zero direct Shuffler→Tabletop HTTP call anywhere in the code. `verify.sh` gives each its
+  own random port (`SPINE_URL`/`TABLETOP_URL`) per run; `playwright.config.ts`'s `two-app`
+  project (depending on `chromium`) keeps this spec from running alongside
+  `verify-table-mode.spec.ts`'s Spine-unreachable case, which needs that same `SPINE_URL` to
+  have nothing listening on it. A third describe block (shuffler-spine-sse-subscriber ticket
+  05) closes the loop the other way: it drives the Tabletop's real
+  `POST /api/tables/:tableSlug/cards/return` (the library-portal swallow's server-side leg)
+  directly rather than simulating ticket 12's canvas drag — that drag's own mechanics are
+  covered by the Tabletop's own `verify-library-portal.spec.ts` against a fake Spine, and a
+  real mouse-simulated drag proved unreliable across three concurrently-spawned real
+  processes in one headed browser — and asserts the card lands in the Shuffler's Revealed
+  zone via the real Spine and the Shuffler's own subscriber.
+- **Static check**: `test/no-direct-tabletop-shuffler-http.test.ts` (Jest) scans the
+  Tabletop's own source for any `fetch()` call naming the Shuffler, so a future direct
+  Tabletop→Shuffler shortcut on this event trips a test rather than only a code review.
 
 ## Data Sources & Adapters
 

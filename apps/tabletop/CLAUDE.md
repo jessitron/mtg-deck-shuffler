@@ -24,6 +24,24 @@ Vite + React + tldraw synced canvas with an Express/ws sync server.
 seat's player area at Shuffle Up. `card.played` has no HTTP entry point — it arrives only
 over the SSE subscription below.
 
+**Sending `card.returned.v1` — the reverse leg** (shuffler-spine-sse-subscriber ticket 02):
+the library-portal swallow (ticket 12, `src/client/shapes/cardSwallow.ts`) is send-then-commit
+— it POSTs `POST /api/tables/:tableSlug/cards/return` (`handleCardReturned`,
+`src/server/cardReturned.ts`) and only deletes the card shape once that call resolves `ok`;
+on failure the card's visuals revert and it stays on the table. That route resolves
+`playerName`/the Spine's real `tableId` from the room registry (the client only knows the
+card's own `owner`/`scryfallId`/`gameCardIndex`, matching this ship's shared-canvas design —
+it has no notion of its own player identity) and calls
+`sendCardReturnedToSpineBestEffort` (`src/server/sendCardReturned.ts`), which POSTs to the
+Spine's generic `POST /tables/:tableId/events` — same send shape and same address-is-simply-
+"the Spine" posture as `seat.joined`/`card.played` above, no `eventsUrl` introduced. Rides
+the ambient request span plus undici's automatic outbound `traceparent` header (no
+server-side `traceparent`-minting helper); best-effort — never throws — with a bounded 5s
+`AbortSignal.timeout` (a single request, unlike the SSE subscription's long-lived
+`undici.Agent`, so a plain abort signal is enough). Both outcomes are stamped on the active
+span (`card.returned.spine_confirmed`); failure also sets `spine_send.send_failed` (the
+fleet's existing attribute name for this outcome, reused verbatim) and logs a warning.
+
 **The server opens one live Spine SSE subscription per room**, against
 `GET /tables/:tableId/events/stream`. `handleSeatJoined` opens it the first
 time a room hears `seat.joined` — the room's Spine `tableId` and the subscription handle live on
