@@ -29,7 +29,7 @@ import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 import { applyGameCommand, CommandOutcome } from "./apply-game-command.js";
 import { WhatHappened } from "./GameState.js";
 import { GameId, parseGameId } from "./domain-types.js";
-import { ensureGameSpineSubscription } from "./port-spine/gameSubscriptionRegistry.js";
+import { ensureGameSpineSubscription, addBrowserStream, removeBrowserStream, BrowserStream } from "./port-spine/gameSubscriptionRegistry.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -594,6 +594,13 @@ export function createApp(
           })
         );
         return;
+      }
+
+      // Only past this point does the page actually render #game-container (and its
+      // EventSource) — opening the Spine subscription any earlier would leak one for a
+      // non-Active game that never gets a browser tab to close it.
+      if (persistedGame.spineTableId) {
+        ensureGameSpineSubscription(gameId, persistedGame.spineTableId, { persistStatePort, cardRepository });
       }
 
       const html = formatGamePageHtmlPage(game, {}, res.locals.devMode);
@@ -1236,6 +1243,29 @@ export function createApp(
       log.error("game section load failed", { "game.game_id": gameId }, error);
       res.status(500).send(`<div>Error loading game section</div>`);
     }
+  });
+
+  // Native browser EventSource, one connection per open tab — see game.js. Deliberately
+  // holds no lifetime-spanning span (suppressed via isGameEventsStreamPath in tracing.ts);
+  // open/close are logged instead.
+  app.get("/game-events/:gameId", (req, res) => {
+    const gameId = parseGameId(req.params.gameId);
+
+    res.writeHead(200, {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive",
+    });
+    res.write(": connected\n\n");
+
+    const stream: BrowserStream = { write: (chunk) => res.write(chunk) };
+    addBrowserStream(gameId, stream);
+    log.info("game-events: browser tab opened", { "game.game_id": String(gameId) });
+
+    req.on("close", () => {
+      removeBrowserStream(gameId, stream);
+      log.info("game-events: browser tab closed", { "game.game_id": String(gameId) });
+    });
   });
 
   app.post("/reveal-card/:gameId/:gameCardIndex", async (req, res) => {

@@ -481,6 +481,28 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   "help"** — the installed undici and Net::HTTP instrumentations own those headers; a hand-set value
   risks duplication or staleness.
 
+- **Any future long-lived inbound connection route (SSE, WebSocket upgrade, anything that outlives
+  a normal request/response)**: don't let its incoming-request span span the connection's whole
+  lifetime — that span never has a natural end and dwarfs everything else in any trace it touches.
+  Reference shape now exists: `apps/shuffler/src/app.ts`'s `GET /game-events/:gameId` (a browser
+  `EventSource`, one per open tab) suppresses its span via
+  `@opentelemetry/instrumentation-http`'s `ignoreIncomingRequestHook` in `tracing.ts`, matched by
+  a small pure predicate in its own file (`apps/shuffler/src/game-events-route-filter.ts`,
+  `isGameEventsStreamPath(url)`, unit-tested) rather than an inline lambda in `tracing.ts` — keep
+  the match logic in its own tested file for the same reason `telemetry-sampler.ts`'s matchers are.
+  Open/close go through `log.info`/`log.warn`, not span attributes, since there's no span to hang
+  them on — confirmed live: those logs land with no trace/span id, which is correct, not a bug.
+  This is the fleet's first use of `ignoreIncomingRequestHook`; copy this shape, don't invent a new
+  suppression mechanism, for the next such route.
+- **The Spine's own `GET /tables/:table_id/events/stream` (`services/spine/app.rb`) almost
+  certainly has the same unbounded-incoming-request-span problem, and it is still
+  undocumented/unaddressed** — flagged during the Shuffler's `GET /game-events/:gameId` work
+  (ticket 04) but not fixed there; that ticket touched only the Shuffler. Rack's instrumentation
+  has no direct equivalent of `ignoreIncomingRequestHook` documented yet in this KB — whoever picks
+  this up should check what `opentelemetry-instrumentation-rack` offers for span suppression (or
+  fall back to marking the span's duration as expected/filtering it in queries) before assuming the
+  Node-side shape ports directly.
+
 ## Not related to
 
 - **The Honeycomb MCP server config** (`honeycomb-modernity`) — that's the query side; this owner

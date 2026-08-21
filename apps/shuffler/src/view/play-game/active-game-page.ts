@@ -89,6 +89,7 @@ export function formatActiveGameHtmlSection(game: GameState, whatHappened: WhatH
   return `<div id="game-container"
            data-game-id="${game.gameId}"
            data-expected-version="${game.getStateVersion()}"
+           ${game.spineTableId ? `data-spine-table-id="${escapeHtml(game.spineTableId)}"` : ""}
            hx-trigger="game-state-updated from:body"
            hx-get="/game-section/${game.gameId}"
            hx-target="#game-container"

@@ -408,6 +408,25 @@ current rendered angle, on a fast re-tap) now covers the translate component as 
 rotation, since both live in the same combined transform. Plan:
 `.scratch/counter-orbit-animation/plan.md`.
 
+### 2026-08-20: `#game-container`'s swap trigger gains an out-of-band server-push source (shuffler-spine-sse-subscriber ticket 04)
+
+**No new animation mechanism — a new *trigger* for the existing one.** `active-game-page.ts`
+stamps `data-spine-table-id` on `#game-container` for table-mode games; `public/game.js` opens
+one native `EventSource` per full page load against the new `GET /game-events/:gameId` route
+(added in `app.ts`) when that attribute is present, and on message dispatches the same
+`"game-state-updated"` `CustomEvent` on `document.body` that `#game-container`'s own
+`hx-trigger="game-state-updated from:body"` already listens for — reusing the existing HTMX
+re-fetch/entrance-animation path unchanged, with no new swap target and no new animation class.
+
+Consulted during planning: this owner (`animations-context`) confirmed the one live risk — an
+SSE-triggered swap landing mid-drag during a player's own native-HTML5 hand-reorder drag inside
+`#hand-cards` — is not a hazard, since `game.js`'s drag cleanup runs at `dragstart` (not
+`dragend`) and `handleDrop`'s `sessionStorage` write only happens on a completed drop; the
+browser just cancels an in-flight native drag when its source element is removed from the DOM.
+No guard/debounce pattern existed to reuse, and none was added. Verified in a real Playwright run
+(two tabs on the same table-mode game, a fake `card.returned` event delivered to a real Spine,
+the second tab's Revealed area updates via its own `EventSource` with no manual reload).
+
 ## Design Decisions
 
 - **No animation library**: Animations are pure CSS. This was never explicitly decided, it just evolved that way.

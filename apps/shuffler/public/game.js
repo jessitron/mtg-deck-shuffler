@@ -325,6 +325,25 @@ function handleDrop(e) {
   return false;
 }
 
+// Opens one native EventSource per tab against /game-events/:gameId (only for a
+// table-mode game — data-spine-table-id is absent for solo games, which have nothing to
+// push). On message, dispatches the same "game-state-updated" CustomEvent the page's
+// own #game-container hx-trigger already listens for, so a card returned from the table
+// re-fetches through the identical path any other externally-triggered update uses.
+// Opened once per full page load (this script isn't re-injected on an HTMX swap), and
+// left open across #game-container swaps — only closing the tab closes it.
+document.addEventListener("DOMContentLoaded", function () {
+  const gameContainer = document.querySelector("#game-container");
+  const gameId = gameContainer?.dataset.gameId;
+  const spineTableId = gameContainer?.dataset.spineTableId;
+  if (!gameId || !spineTableId) return;
+
+  const source = new EventSource(`/game-events/${gameId}`);
+  source.onmessage = function () {
+    document.body.dispatchEvent(new CustomEvent("game-state-updated", { bubbles: true }));
+  };
+});
+
 document.addEventListener('keydown', (event) => {
   const isUndo = (event.ctrlKey || event.metaKey) && !event.shiftKey && !event.altKey && event.key.toLowerCase() === 'z';
   if (!isUndo) return;

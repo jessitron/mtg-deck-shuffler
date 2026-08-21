@@ -8,6 +8,7 @@ import { ParentBasedSampler } from "@opentelemetry/sdk-trace-node";
 import { ExpressLayerType } from "@opentelemetry/instrumentation-express";
 import { BackgroundChatterSampler } from "./telemetry-sampler.js";
 import { installShutdownHandlers } from "./shutdownHooks.js";
+import { isGameEventsStreamPath } from "./game-events-route-filter.js";
 import { log } from "./log.js";
 
 register("@opentelemetry/instrumentation/hook.mjs", import.meta.url);
@@ -26,6 +27,12 @@ const sdk: NodeSDK = new NodeSDK({
       },
       "@opentelemetry/instrumentation-express": {
         ignoreLayersType: [ExpressLayerType.MIDDLEWARE],
+      },
+      // /game-events/:gameId holds its connection open for a browser tab's whole
+      // lifetime — the incoming-request span would otherwise span that too. Open/close
+      // are logged instead (app.ts).
+      "@opentelemetry/instrumentation-http": {
+        ignoreIncomingRequestHook: (req) => isGameEventsStreamPath(req.url),
       },
     }),
   ],

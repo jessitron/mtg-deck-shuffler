@@ -81,7 +81,7 @@ const PICKED_MAT = '/images/playmats/aeoe-6-seam-rip.png';
  * the bare tableName the caller picked. A spectator must navigate to this slug,
  * not the bare name, or it watches an empty room while events land elsewhere.
  */
-async function startGameAtTable(page: Page, tableName: string): Promise<string> {
+async function startGameAtTable(page: Page, tableName: string): Promise<{ tableSlug: string; gameId: string }> {
   const prepId = await seedPrep(page);
   await page.request.post(`${BASE_URL}/prep-table-look/${prepId}`, { form: { 'playmat-path': PICKED_MAT } });
   const gameId = await startGame(page, prepId, { tableName, playerName: 'E2E Jess' });
@@ -90,7 +90,7 @@ async function startGameAtTable(page: Page, tableName: string): Promise<string> 
   const href = await page.locator('.go-to-table-button').getAttribute('href');
   const match = href?.match(/\/t\/([^/?#]+)/);
   if (!match) throw new Error(`could not find the Spine-minted table slug in "Go to Table" href: ${href}`);
-  return match[1];
+  return { tableSlug: match[1], gameId };
 }
 
 async function actOnFirstHandCard(page: Page, buttonText: string, expectedHandCount: string): Promise<void> {
@@ -117,7 +117,7 @@ test.describe('Three-ship flow: Shuffler plays to the Tabletop via the Spine', (
 
   test('a played card and a discarded card arrive on the table canvas — Shuffler → Spine → SSE → Tabletop, with no direct Shuffler→Tabletop HTTP call left in the code', async ({ page, context }) => {
     const tableName = `e2e-table-${Date.now()}`;
-    const tableSlug = await startGameAtTable(page, tableName);
+    const { tableSlug } = await startGameAtTable(page, tableName);
 
     // A spectator watches the table via the "at table" link's URL
     const spectator = await context.newPage();
@@ -153,5 +153,62 @@ test.describe('Three-ship flow: Shuffler plays to the Tabletop via the Spine', (
     await page.locator('button.history-button').click();
     await expect(page.locator('.modal-overlay .history-list')).toContainText('Play:');
     await expect(page.locator('.modal-overlay .history-list')).toContainText('Discard:');
+  });
+});
+
+/** A library card's gameCardIndex + scryfallId, read from /debug-state/:gameId's dumped JSON. */
+async function firstLibraryCard(page: Page, gameId: string): Promise<{ gameCardIndex: number; scryfallId: string }> {
+  const html = await page.request.get(`${BASE_URL}/debug-state/${gameId}`).then((r) => r.text());
+  const match = html.match(/<pre class="hidden">([\s\S]*?)<\/pre>/);
+  if (!match) throw new Error('could not find the debug-state JSON dump');
+  const persisted = JSON.parse(match[1]);
+  const libraryCard = (persisted.gameCards as Array<{ location: { type: string }; gameCardIndex: number; scryfallId: string }>).find(
+    (gc) => gc.location.type === 'Library'
+  );
+  if (!libraryCard) throw new Error('no library card found in debug-state dump');
+  return { gameCardIndex: libraryCard.gameCardIndex, scryfallId: libraryCard.scryfallId };
+}
+
+/** A minimal valid card.returned.v1 envelope, posted directly to the real Spine's event log. */
+function cardReturnedEnvelope(tableId: string, gameCardIndex: number, scryfallId: string) {
+  return {
+    id: randomUUID(),
+    tableId,
+    name: 'card.returned',
+    initiator: { seatId: 'seat-test0001', playerName: 'Table Ghost' },
+    occurredIn: 'tabletop',
+    origin: 'tabletop.cardShapeHook',
+    significance: 'domain',
+    schemaVersion: 1,
+    payload: { card: { scryfallId }, gameCardIndex, seat: 'seat-test0001', fromZone: 'battlefield' },
+  };
+}
+
+test.describe('Browser push: a card.returned event reaches every open tab on the game (ticket 04)', () => {
+  test.skip(!tabletopBuilt, 'apps/tabletop is not built — run `cd apps/tabletop && npm run build` for this flow');
+
+  test('two tabs open on the same table-mode game: a card.returned event delivered to the Spine shows up in Revealed on the second tab, with no manual reload', async ({
+    page,
+    context,
+  }) => {
+    const tableName = `sse-table-${Date.now()}`;
+    const { tableSlug, gameId } = await startGameAtTable(page, tableName);
+    const { gameCardIndex, scryfallId } = await firstLibraryCard(page, gameId);
+
+    // A second browser tab on the same game — the scenario ticket 04 exists for.
+    const secondTab = await context.newPage();
+    await secondTab.goto(`${BASE_URL}/game/${gameId}`);
+    await expect(secondTab.locator('#revealed-cards-area .card-container')).toHaveCount(0);
+
+    // Deliver the fake card.returned directly at the Spine — the real path a Tabletop
+    // portal-swallow gesture would take, without needing that gesture here.
+    const response = await page.request.post(`${SPINE_URL}/tables/${tableSlug}/events`, {
+      data: cardReturnedEnvelope(tableSlug, gameCardIndex, scryfallId),
+    });
+    expect(response.ok()).toBe(true);
+
+    // The second tab's own EventSource, not the first tab's, is what re-fetches this —
+    // no page reload, no action taken on this tab at all.
+    await expect(secondTab.locator('#revealed-cards-area .card-container')).toHaveCount(1, { timeout: 15000 });
   });
 });
