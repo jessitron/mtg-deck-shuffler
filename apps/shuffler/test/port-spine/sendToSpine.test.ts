@@ -1,6 +1,6 @@
 import { GameState, TableInfo, GameCard } from "../../src/GameState.js";
 import { FakeSpineGateway } from "../../src/port-spine/FakeSpineGateway.js";
-import { joinSpineBestEffort, sendCardPlayedToSpineBestEffort } from "../../src/port-spine/sendToSpine.js";
+import { joinSpineBestEffort, sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort } from "../../src/port-spine/sendToSpine.js";
 import { CardPlayedEvent, buildCardPlayedEvent } from "../../src/port-tabletop/types.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
 import { lightningBolt, nicolBolas, testProvenance } from "../generators.js";
@@ -267,6 +267,65 @@ describe("sendCardPlayedToSpineBestEffort", () => {
 
     expect(fake.sentEvents).toHaveLength(1);
     expect(fake.sentEvents[0].event.name).toBe("card.played");
+  });
+});
+
+describe("sendCardReturnedToSpineBestEffort", () => {
+  async function joinedTableInfo(fake: FakeSpineGateway): Promise<TableInfo> {
+    const { seatId, spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
+      gameId: "joined-game-returned",
+      tableName: "Friday Night",
+      playerName: "Jess",
+      deckName: "Test Deck",
+    });
+    return { tableName: "Friday Night", playerName: "Jess", seatId: seatId ?? "no-real-seat-id-was-returned", spineTableId, spineSeatNumber };
+  }
+
+  it("sends card.returned with occurredIn: shuffler, addressed to the Spine tableId, carrying both instanceId and gameCardIndex", async () => {
+    const fake = new FakeSpineGateway();
+    const tableInfo = await joinedTableInfo(fake);
+    const game = GameState.newGame(201, 1, 1, testDeck, undefined, tableInfo);
+    const bolt = cardNamed(game, "Lightning Bolt");
+
+    await sendCardReturnedToSpineBestEffort(fake, game, bolt);
+
+    expect(fake.sentEvents).toHaveLength(1);
+    const { tableId, event } = fake.sentEvents[0] as { tableId: string; event: { name: string; occurredIn: string; payload: any } };
+    expect(tableId).toBe(tableInfo.spineTableId);
+    expect(event.name).toBe("card.returned");
+    expect(event.occurredIn).toBe("shuffler");
+    expect(event.payload.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: bolt.cardInstanceId });
+    expect(event.payload.gameCardIndex).toBe(bolt.gameCardIndex);
+    expect(event.payload.seat).toBe(tableInfo.seatId);
+  });
+
+  it("is a no-op when no Spine is configured", async () => {
+    const tableInfo: TableInfo = { tableName: "Friday Night", playerName: "Jess", seatId: "abc12345" };
+    const game = GameState.newGame(202, 1, 1, testDeck, undefined, tableInfo);
+    const bolt = cardNamed(game, "Lightning Bolt");
+
+    await expect(sendCardReturnedToSpineBestEffort(undefined, game, bolt)).resolves.toBeUndefined();
+  });
+
+  it("is a no-op for a solo game (no table)", async () => {
+    const soloGame = GameState.newGame(203, 1, 1, testDeck);
+    const bolt = cardNamed(soloGame, "Lightning Bolt");
+    const fake = new FakeSpineGateway();
+
+    await sendCardReturnedToSpineBestEffort(fake, soloGame, bolt);
+
+    expect(fake.sentEvents).toHaveLength(0);
+  });
+
+  it("swallows a gateway failure — best-effort, must not throw, never blocks the Return action", async () => {
+    const fake = new FakeSpineGateway();
+    const tableInfo = await joinedTableInfo(fake);
+    const game = GameState.newGame(204, 1, 1, testDeck, undefined, tableInfo);
+    const bolt = cardNamed(game, "Lightning Bolt");
+    fake.failWith(new Error("connection refused"));
+
+    await expect(sendCardReturnedToSpineBestEffort(fake, game, bolt)).resolves.toBeUndefined();
+    expect(fake.sentEvents).toHaveLength(0);
   });
 });
 

@@ -8,7 +8,7 @@ import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { handleSeatJoined } from "./seatJoined.js";
 import { handleCardReturned } from "./cardReturned.js";
-import { handleTestCardSeed } from "./testSeedRoute.js";
+import { handleTestCardSeed, handleTestCardRemoval } from "./testSeedRoute.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -52,6 +52,7 @@ export function createApp() {
   // mounted in production — card.played only arrives via the Spine SSE subscription.
   if (process.env.ENABLE_TEST_SEED_ROUTE === "true") {
     app.post("/test/tables/:tableName/cards", handleTestCardSeed);
+    app.post("/test/tables/:tableName/cards/remove", handleTestCardRemoval);
   }
 
   // Static app (Vite build output)

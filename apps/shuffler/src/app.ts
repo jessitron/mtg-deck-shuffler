@@ -14,7 +14,7 @@ import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
 import { ZoneHint, zoneHintForPlay } from "./port-tabletop/types.js";
 import { SpinePort } from "./port-spine/types.js";
-import { sendCardPlayedToSpineBestEffort, joinSpineBestEffort } from "./port-spine/sendToSpine.js";
+import { sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort, joinSpineBestEffort } from "./port-spine/sendToSpine.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { log } from "./log.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -131,6 +131,12 @@ export function createApp(
     setCommonSpanAttributes({ tableName: game.tableName });
     trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing", "zone.hint": zoneHint, "card.face_down": faceDown });
     await sendCardPlayedToSpineBestEffort(spinePort, game, card, zoneHint, sessionId, faceDown);
+  }
+
+  async function sendCardReturnedBeforeMutate(game: GameState, card: GameCard, sessionId?: string): Promise<void> {
+    setCommonSpanAttributes({ tableName: game.tableName });
+    trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing" });
+    await sendCardReturnedToSpineBestEffort(spinePort, game, card, sessionId);
   }
 
   function renderCommandOutcome(
@@ -1281,11 +1287,22 @@ export function createApp(
     if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
+    const sessionId = res.locals.sessionId as string | undefined;
 
     try {
-      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
-        game.moveByGameCardIndex(gameCardIndex, "Revealed", browserTabId);
-      });
+      const outcome = await applyGameCommand(
+        { persistStatePort, cardRepository },
+        gameId,
+        expectedVersionFromRequest(req),
+        (game) => {
+          game.moveByGameCardIndex(gameCardIndex, "Revealed", browserTabId);
+        },
+        async (game) => {
+          const cardToReveal = game.findCardByIndex(gameCardIndex);
+          if (!game.tableName || !cardToReveal || cardToReveal.location.type !== "Table") return;
+          await sendCardReturnedBeforeMutate(game, cardToReveal, sessionId);
+        }
+      );
 
       renderCommandOutcome(res, gameId, outcome, "Cannot reveal card: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
@@ -1307,11 +1324,22 @@ export function createApp(
     if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
+    const sessionId = res.locals.sessionId as string | undefined;
 
     try {
-      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
-        game.moveByGameCardIndex(gameCardIndex, "Hand", browserTabId);
-      });
+      const outcome = await applyGameCommand(
+        { persistStatePort, cardRepository },
+        gameId,
+        expectedVersionFromRequest(req),
+        (game) => {
+          game.moveByGameCardIndex(gameCardIndex, "Hand", browserTabId);
+        },
+        async (game) => {
+          const cardToMove = game.findCardByIndex(gameCardIndex);
+          if (!game.tableName || !cardToMove || cardToMove.location.type !== "Table") return;
+          await sendCardReturnedBeforeMutate(game, cardToMove, sessionId);
+        }
+      );
 
       renderCommandOutcome(res, gameId, outcome, "Cannot put card in hand: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
@@ -1333,11 +1361,22 @@ export function createApp(
     if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
+    const sessionId = res.locals.sessionId as string | undefined;
 
     try {
-      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
-        game.moveByGameCardIndex(gameCardIndex, "LibraryTop", browserTabId);
-      });
+      const outcome = await applyGameCommand(
+        { persistStatePort, cardRepository },
+        gameId,
+        expectedVersionFromRequest(req),
+        (game) => {
+          game.moveByGameCardIndex(gameCardIndex, "LibraryTop", browserTabId);
+        },
+        async (game) => {
+          const cardToMove = game.findCardByIndex(gameCardIndex);
+          if (!game.tableName || !cardToMove || cardToMove.location.type !== "Table") return;
+          await sendCardReturnedBeforeMutate(game, cardToMove, sessionId);
+        }
+      );
 
       renderCommandOutcome(res, gameId, outcome, "Cannot put card on top: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {
@@ -1359,11 +1398,22 @@ export function createApp(
     if (gameId === null) return;
     const gameCardIndex = parseInt(req.params.gameCardIndex);
     const browserTabId = res.locals.browserTabId as string | undefined;
+    const sessionId = res.locals.sessionId as string | undefined;
 
     try {
-      const outcome = await applyGameCommand({ persistStatePort, cardRepository }, gameId, expectedVersionFromRequest(req), (game) => {
-        game.moveByGameCardIndex(gameCardIndex, "LibraryBottom", browserTabId);
-      });
+      const outcome = await applyGameCommand(
+        { persistStatePort, cardRepository },
+        gameId,
+        expectedVersionFromRequest(req),
+        (game) => {
+          game.moveByGameCardIndex(gameCardIndex, "LibraryBottom", browserTabId);
+        },
+        async (game) => {
+          const cardToMove = game.findCardByIndex(gameCardIndex);
+          if (!game.tableName || !cardToMove || cardToMove.location.type !== "Table") return;
+          await sendCardReturnedBeforeMutate(game, cardToMove, sessionId);
+        }
+      );
 
       renderCommandOutcome(res, gameId, outcome, "Cannot put card on bottom: Game is not active", (game) => formatActiveGameHtmlSection(game));
     } catch (error) {

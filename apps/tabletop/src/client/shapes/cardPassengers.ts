@@ -1,9 +1,9 @@
 import { Editor, TLDragShapesOutInfo, TLShape } from "tldraw";
 import { MtgCardShape } from "../../shared/mtgCardShape";
 import { Vec } from "tldraw";
+import { PASSENGER_TYPES } from "../../shared/passengerTypes";
 
-
-export const PASSENGER_TYPES = new Set(["mtg-counter", "note"]);
+export { PASSENGER_TYPES };
 
 export function canReceivePassenger(shape: MtgCardShape, type: TLShape["type"]): boolean {
   return !shape.isLocked && PASSENGER_TYPES.has(type);
