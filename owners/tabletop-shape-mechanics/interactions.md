@@ -191,7 +191,9 @@
   inside `MtgCardShapeUtil.onTranslateEnd`'s zone-change branch — changing the zone-entry
   debounce or the `NON_BATTLEFIELD_ZONES` set changes when counters detach. The Stack is
   deliberately not an evicting zone (cards *arrive* there; see `architecture.md`'s Ticket 18
-  section).
+  section). **A second, independent eviction implementation exists since ticket 07 (2026-08-21)**:
+  `cardRemoval.ts`'s server-side `applyCardRemoval` reparents passengers in place (no `Editor`, no
+  spot-finding) rather than detaching them to an open spot — see watch point 28.
 
 ## Watch Points
 
@@ -864,6 +866,37 @@
     `apps/tabletop/test/verification/verify-rightclick-reopen.spec.ts`'s two open/dismiss/reopen ×5
     loops (Escape-dismiss, which passed even pre-fix; outside-left-click-dismiss, which failed after
     one cycle pre-fix). See `architecture.md`'s "The right-click context menu going dead" section.
+
+28. **A second card-removal path can exist with no `Editor` at all — server-side, raw
+    `store.delete`/`store.put` — and it needs its own passenger-eviction logic, not a share of the
+    client-side one.** (Ticket 07, shuffler-side-exits-tell-the-table, 2026-08-21.) Until now every
+    card-removal-with-passengers case in this KB ran client-side, inside a ShapeUtil hook with a
+    live `Editor` (`swallowCard`'s call to `evictPassengers`, watch point 26). `card.returned`
+    arriving from the *Shuffler* side (Return button, crafted put-in-hand/top/bottom) is handled
+    entirely server-side, in `apps/tabletop/src/server/cardRemoval.ts`'s `applyCardRemoval` — no
+    `Editor`, just `room.updateStore((store) => ...)` raw record manipulation, the same posture
+    `cardArrival.ts`'s `store.put` already established for minting. It reparents any passenger
+    shapes (`PASSENGER_TYPES.has(type)`, filtered by `parentId === card.id`) to the card's own
+    `parentId` in place, using hand-rolled `cos`/`sin` rotation math to hold each passenger's page
+    position fixed, then `store.delete`s the card. **Two consequences worth remembering:**
+    - **This is now a second, independent implementation of "evict a card's passengers," and the
+      two are deliberately not shared.** `evictPassengers` (client-side, `cardZoneEntry.ts`)
+      spot-finds open positions near a zone's edge and detaches to the page — appropriate when the
+      card is landing *somewhere else on the table* (graveyard/exile/library) and a passenger
+      needs a place to land too. `applyCardRemoval`'s reparent-in-place has no such landing-spot
+      concern, because the card is leaving the table *entirely* — there's nothing for the passenger
+      to collide with once it's the only thing left where the card was. **If `PASSENGER_TYPES` or
+      the passenger rotation contract (currently: hold page position fixed under the host's own
+      rotation) ever changes, both implementations need the update — there is no shared helper
+      enforcing that today.**
+    - **The reparent math assumes `card.parentId` is always the page, and does not compose a
+      parent's own rotation.** It rotates a passenger's local offset by `card.rotation` only. Every
+      `mtg-card` is page-parented today (no frame-nesting exists in this app), so this is correct
+      as written — but it would silently misplace a passenger if a card were ever nested under a
+      rotated frame shape. Flagged during this owner's `-review`, accepted as out of scope rather
+      than generalized ahead of a need that doesn't exist yet.
+    - See `history.md`'s "Ticket 07" entry and `architecture.md`'s matching section for the full
+      writeup, and `files.md`'s `cardRemoval.ts` entry.
 
 ## Not Related To
 

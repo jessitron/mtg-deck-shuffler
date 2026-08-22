@@ -1,5 +1,41 @@
 # History
 
+## Ticket 07 (shuffler-side-exits-tell-the-table): a second, server-side card-removal path — `applyCardRemoval` in `cardRemoval.ts` (2026-08-21)
+
+`card.returned` can now arrive from the *Shuffler* side too — the Return button, or a crafted
+put-in-hand/top/bottom — not only from the Tabletop's own library-portal swallow (`cardSwallow.ts`,
+2026-08-20). `apps/tabletop/src/server/cardRemoval.ts` (new): `applyCardRemoval(tableName, body)`
+filters on `envelope.occurredIn === "shuffler"` (so the Tabletop's own portal-initiated sends, which
+already deleted the shape client-side, don't bounce back and try to remove it again), finds the
+`mtg-card` shape by exact `props.instanceId` match, and deletes it with a raw `store.delete` — no
+`Editor` instance, mirroring `cardArrival.ts`'s `store.put` pattern for the same reason: this is a
+server-side event handler, not a browser gesture.
+
+**This is the second independent passenger-eviction implementation in the codebase, deliberately
+simpler than the first, and the two are not mechanically linked.** `evictPassengers`/
+`cardZoneEntry.ts`'s swallow path (client-side, watch point 26) *spot-finds* open positions near a
+zone's edge via `findOpenSpotsNearZoneEdge` and detaches passengers to the page there.
+`applyCardRemoval` instead **reparents passengers in place**: it walks `store.getAll()` for shapes
+with `parentId === card.id` and `PASSENGER_TYPES.has(type)`, and for each one rewrites `parentId` to
+the card's own `parentId` while rotating its local `x`/`y`/`rotation` by the card's rotation
+(`cos`/`sin` on `card.rotation`) to hold its page position fixed — no spot-finding, since there's no
+"other card is here" collision concern for a card that's simply vanishing from the table entirely.
+**Both eviction paths must be kept in sync if `PASSENGER_TYPES` (`apps/tabletop/src/shared/
+passengerTypes.ts`) or the passenger rotation contract ever changes** — there is no shared helper
+between them today, by choice (this owner's `-review`), because the two operate in different
+contexts (one has an `Editor`, spot-finds, and detaches to the page; the other has no `Editor`,
+reparents in place, and holds position via rotation math instead).
+
+**Known limit, flagged and accepted rather than fixed**: the reparent math assumes `card.parentId`
+is always the page — it composes the passenger's local offset against the *card's* rotation only,
+never composing a parent shape's own rotation on top. This is correct today because every `mtg-card`
+is always top-level, page-parented (no frame-nesting exists anywhere in this app); it would need
+revisiting if cards were ever nested under a frame shape. Recorded rather than generalized, since
+building for a nesting case that doesn't exist yet was ruled out of scope.
+
+Full detail in `architecture.md`'s new "Ticket 07: a second, server-side card-removal path" section,
+`interactions.md` watch point 28, and `files.md`'s `cardRemoval.ts` entry.
+
 ## Stack-arrival placement stopped trusting a monotonic counter — `RoomEntry.stackCardCount(owner)` reads live occupancy instead (2026-08-20)
 
 **Bug**: a seat's `card.played` arrivals onto the Stack cascaded further right forever, never
