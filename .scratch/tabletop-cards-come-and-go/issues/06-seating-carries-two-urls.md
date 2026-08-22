@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Ship: fleet
-Status: ready-for-agent
+Status: canceled
 
 **`gameUrl` already shipped** as part of the Spine join work: `seat.joined.v1` carries it,
 the Shuffler mints it and stores it on `TableInfo`/`GameState`, and the Tabletop uses it

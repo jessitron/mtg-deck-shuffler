@@ -11,10 +11,9 @@ change lands). See CLAUDE.md → Task Implementation Process. Each entry stamps 
 scope is a ship, or _fleet_ when the charge crosses ships; a change confined to one ship may skip
 owners stamped with a different ship, never the fleet-scoped ones.
 
-- [two-faced cards](two-faced-cards/README.md) — _feature, fleet_ — consult me before changes to card face
-  display/rendering, CardDefinition/CardFace types, deck adapters, card persistence, flip buttons,
-  card modals, library search grouping. On Tabletop, ask me about
-  _face/image_ rendering, or the event contract's card/face fields.
+- [two-faced cards](two-faced-cards/README.md) — _feature, fleet_ — consult me before changes to
+  display/rendering of a particular card face, CardDefinition/CardFace types, deck adapters, card persistence, flip buttons,
+  card modals, library search grouping. On Tabletop, ask me about _face/image_ rendering, or the event contract's card/face fields. Do not ask me about domain events that don't involve flipping cards over.
 - [tabletop shape mechanics](tabletop-shape-mechanics/README.md) — _capability, Tabletop_ — consult
   me before changes to tldraw `ShapeUtil` hooks (`onClick`, `onTranslateEnd`, drag/drop), custom
   shape types under `apps/tabletop/src/client/shapes/`, shape selection state, or zone detection —
