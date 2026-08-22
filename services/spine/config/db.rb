@@ -52,5 +52,12 @@ end
 
 table_columns = DB.schema(:tables).map(&:first)
 unless table_columns.include?(:created_at)
-  DB.alter_table(:tables) { add_column :created_at, Time, default: Time.now.utc }
+  DB.alter_table(:tables) { add_column :created_at, Time }
+  DB.run(<<~SQL)
+    UPDATE tables SET created_at = COALESCE(
+      (SELECT accepted_at FROM events WHERE events.table_id = tables.id AND events.name = 'table.created'),
+      (SELECT MIN(accepted_at) FROM events WHERE events.table_id = tables.id)
+    )
+  SQL
+  DB[:tables].where(created_at: nil).update(created_at: Time.now.utc)
 end
