@@ -404,6 +404,42 @@ so it needed no update.
 
 ---
 
+## 8. Exclusive two-way toggle pair (Library order: A-Z / Position)
+
+Not one of the original seven — a new candidate opened 2026-08-21 by the Library Search order
+toggle (`library-search-order-toggle`). Jess asked directly for a way to switch the library
+modal's card order between alphabetical (the default since the earlier "alphabetical, full
+stop" decision — see the `library-search` owner's history) and library position. That's a
+second exclusive-choice control, distinct in *shape* from the app's one existing example.
+
+**What shipped, staged as a candidate, not decided:** `.library-order-toggle` /
+`.order-toggle-btn` in `playmat.css` — a pair of bordered pill buttons (`var(--radius-soft)`,
+`var(--font-chrome)`), the active one marked by a `var(--dark-pink)` `::after` underline at a
+smaller scale, next to the existing independent `.group-by-type-toggle` inside a new
+`.modal-subtitle-controls` wrapper in `library-modal.ejs`. No raw hex; all tokens.
+
+**Why it isn't just `.hero-button.active` (the app's existing exclusive-pair idiom, decided
+2026-08-02 standalone) reused verbatim:** `.hero-button` is a full-size tab, sized for
+`/choose-any-deck`'s Precon/Archidekt pair; this needed a compact pill that fits inside a
+modal's one-line subtitle row alongside another control. So the underline-marks-the-active-side
+*idea* was borrowed, but the sizing/border/shape is a new rendering of it — an unreviewed one.
+
+**Why it isn't `.group-by-type-toggle` either:** that toggle is a single on/off switch, not a
+two-way exclusive pair, and it's pre-token-sweep drift (`#f0f0f0` fill, `#ccc` border) — not
+something to extend or match.
+
+**Staged on `/design` § Surfaces → "Library order toggle"** (`design.ejs`, badge `candidate`),
+with a `section-note` naming it unreviewed. The existing "Modal dialog" specimen in the same
+section was also updated to show the toggle in its real position next to Group by Type, so the
+gallery doesn't show a stale subtitle row.
+
+**Decision needed from Jess:** does the pill+underline shape become the fleet's standard
+exclusive-two-way-toggle idiom (retag `badge-standard`, promote to the design language), or
+does she want something else? Until then, don't copy this shape to a third site citing it as
+precedent.
+
+---
+
 ## Deferred by Jess — raised, consciously not done
 
 Not choices staged on `/design`; just things she looked at and said "not now." Recorded so

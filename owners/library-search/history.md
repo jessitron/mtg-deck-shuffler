@@ -101,6 +101,11 @@ tabletop-failure error modal is another `#modal-container` co-tenant.
 
 ## Game Library Search and Cards on Table → Alphabetical, Always
 
+**Superseded 2026-08-21** (see below): the "no toggle back to position order" part of this
+decision was reversed at Jess's direct request. Alphabetical is now the *default* rather
+than the only option. The rest of this entry — why alphabetical was chosen, the sort key,
+`GameState.listLibrary()` staying position-ordered internally — is still accurate.
+
 Real-game feedback: the game screen's library modal wasn't alphabetical and Jess
 expected it to be. Investigation found position order was always the intended,
 documented behavior on the game page — the alphabetical impression came from the
@@ -162,6 +167,43 @@ the library modal is one of its consumers and its main verification target.
 - Owned primarily by `shuffler-looks-like-itself` (see its docs, commit `e2a97f1`) since
   it's a fleet-wide UI mechanism; recorded here so future library-modal changes know
   focus/inert lifecycle is already covered and shouldn't be reimplemented locally.
+
+## 2026-08-21: Order Toggle — Reversal of "No Toggle" Decision
+
+Jess asked directly for a way to see the library in position order again. This reverses
+the "Game Library Search and Cards on Table → Alphabetical, Always" decision above, whose
+own words were "**this is alphabetical, full stop — no toggle back to position order was
+wanted or built.**" That line is now wrong; alphabetical is the *default*, not the only
+option. Left the earlier entry in place rather than rewriting it — it accurately records
+what was decided and why, at the time.
+
+- `src/app.ts`: both `/library-modal/:gameId` and `/prep-library-modal/:prepId` now read
+  `?order=alphabetical|position` (`order === "position" ? "position" : "alphabetical"` —
+  default alphabetical). The alphabetical `.sort(...)` on the mapped-card copy only runs
+  when `order === "alphabetical"`; when `order === "position"` the mapped copy is passed
+  through unsorted, i.e. in `listLibrary()`'s position order. `order` is now also passed
+  to the template. `GameState.listLibrary()` itself is untouched — still always
+  position-ordered; the route is what decides whether to re-sort its own copy.
+- `views/partials/library-modal.ejs`: two new buttons, `#library-order-alphabetical`
+  ("A-Z") and `#library-order-position` ("Position"), in a new `.library-order-toggle`
+  group alongside the existing `#library-group-by-type-toggle` inside a new
+  `.modal-subtitle-controls` wrapper. Built via the same `buildModalUrl(groupBy, order)`
+  helper the grouping toggle already used, extended to carry both params so switching
+  one preserves the other.
+- `public/playmat.css`: new `.modal-subtitle-controls` / `.library-order-toggle` /
+  `.order-toggle-btn` / `.order-toggle-btn.active` rules, token-based — written fresh
+  rather than extending `.group-by-type-toggle`, which `shuffler-looks-like-itself`
+  already flags as visual drift to eventually reconcile.
+- `public/modal-query-params.js`: threads `order` through auto-open on page load for both
+  game and prep pages, same pattern as the existing `groupBy` threading.
+- Tests: `test/verification/verify-library-alphabetical-order.spec.ts` — the existing
+  "always alphabetical" tests are untouched (still true, since alphabetical is still the
+  default) plus a new "Library Search - Order Toggle" describe block: default state is
+  alphabetical, switching to Position order is stable and differs from alphabetical after
+  a shuffle, and the order toggle survives the Group by Type toggle (and vice versa).
+- Sort key, position source (`GameState.listLibrary()`), and the "internal position order
+  is never gone" point from the prior decision all still hold — only the "no UI toggle"
+  part of that decision changed.
 
 ## Design Decision: EJS vs TypeScript Template
 

@@ -10,6 +10,8 @@
  * Game page:
  * - ?openCard=N - Opens card modal for card index N
  * - ?openLibrary=true - Opens library search modal
+ * - ?groupBy=type - Groups the opened library modal by card type
+ * - ?order=position - Orders the opened library modal by library position (default: alphabetical)
  * - ?openTable=true - Opens table contents modal
  * - ?openHistory=true - Opens action history modal
  * - ?openDebug=true - Opens debug state JSON modal
@@ -36,17 +38,25 @@ function planAutoOpenActions(search, pathname) {
   const openCard = urlParams.get('openCard');
   const openLibrary = urlParams.get('openLibrary');
   const groupBy = urlParams.get('groupBy');
+  const order = urlParams.get('order');
   const openTable = urlParams.get('openTable');
   const openHistory = urlParams.get('openHistory');
   const openDebug = urlParams.get('openDebug');
+
+  function libraryModalParams() {
+    const parts = [];
+    if (groupBy) parts.push(`groupBy=${groupBy}`);
+    if (order) parts.push(`order=${order}`);
+    return parts.length ? `?${parts.join('&')}` : '';
+  }
 
   const actions = [];
 
   // Card modal overlays on other modals, so it's always planned last.
   if (isGamePage) {
     if (openLibrary === 'true') {
-      actions.push(groupBy
-        ? { type: 'ajax', method: 'GET', path: `/library-modal/${id}?groupBy=${groupBy}`, target: '#modal-container', withExpectedVersion: true }
+      actions.push((groupBy || order)
+        ? { type: 'ajax', method: 'GET', path: `/library-modal/${id}${libraryModalParams()}`, target: '#modal-container', withExpectedVersion: true }
         : { type: 'click', selector: '.search-button' });
     } else if (openTable === 'true') {
       actions.push({ type: 'click', selector: '.table-cards-button' });
@@ -62,8 +72,8 @@ function planAutoOpenActions(search, pathname) {
     }
   } else {
     if (openLibrary === 'true') {
-      actions.push(groupBy
-        ? { type: 'ajax', method: 'GET', path: `/prep-library-modal/${id}?groupBy=${groupBy}`, target: '#modal-container' }
+      actions.push((groupBy || order)
+        ? { type: 'ajax', method: 'GET', path: `/prep-library-modal/${id}${libraryModalParams()}`, target: '#modal-container' }
         : { type: 'click', selector: '.search-button' });
     }
 

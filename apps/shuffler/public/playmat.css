@@ -223,6 +223,43 @@
   gap: 1rem;
 }
 
+.modal-subtitle-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.library-order-toggle {
+  display: flex;
+  gap: 2px;
+}
+
+.order-toggle-btn {
+  position: relative;
+  background: none;
+  border: 1px solid var(--deep-space);
+  border-radius: var(--radius-soft);
+  padding: 6px 10px;
+  font-family: var(--font-chrome);
+  font-size: 0.8rem;
+  color: var(--deep-space);
+  cursor: pointer;
+}
+
+.order-toggle-btn.active {
+  font-weight: 600;
+}
+
+.order-toggle-btn.active::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: -4px;
+  height: 3px;
+  background: var(--dark-pink);
+}
+
 .group-by-type-toggle {
   background-color: #f0f0f0;
   border: 1px solid #ccc;

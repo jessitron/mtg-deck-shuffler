@@ -5,6 +5,7 @@
   - cards: Array of card objects with { name, gameCardIndex, types }
   - cardModalUrlTemplate: URL template with {cardIndex} placeholder (e.g., "/card-modal/123/{cardIndex}?expected-version=5")
   - groupBy: Optional string ("type") to group cards by type
+  - order: "alphabetical" (default) or "position" — display order of cards
   - gameId: Optional game ID (for game pages)
   - prepId: Optional prep ID (for prep pages)
   - expectedVersion: Optional expected version (for game pages)
@@ -12,12 +13,22 @@
 <%
   const modalBaseUrl = gameId ? `/library-modal/${gameId}` : `/prep-library-modal/${prepId}`;
   const isGrouped = groupBy === 'type';
-  const versionParam = expectedVersion ? `&expected-version=${expectedVersion}` : '';
+  const isPositionOrder = order === 'position';
 
-  // Build toggle URL: if currently grouped, go ungrouped; if ungrouped, go grouped
-  const toggleUrl = isGrouped
-    ? `${modalBaseUrl}?${expectedVersion ? `expected-version=${expectedVersion}` : ''}`
-    : `${modalBaseUrl}?groupBy=type${versionParam}`;
+  // Build a modal URL carrying the given groupBy/order, plus whatever expectedVersion applies.
+  function buildModalUrl(nextGroupBy, nextOrder) {
+    const params = [];
+    if (nextGroupBy) params.push(`groupBy=${nextGroupBy}`);
+    if (nextOrder === 'position') params.push('order=position');
+    if (expectedVersion) params.push(`expected-version=${expectedVersion}`);
+    return params.length ? `${modalBaseUrl}?${params.join('&')}` : modalBaseUrl;
+  }
+
+  // Build toggle URL: if currently grouped, go ungrouped; if ungrouped, go grouped. Preserve order.
+  const toggleUrl = buildModalUrl(isGrouped ? undefined : 'type', order);
+
+  const alphabeticalOrderUrl = buildModalUrl(groupBy, 'alphabetical');
+  const positionOrderUrl = buildModalUrl(groupBy, 'position');
 
   const KNOWN_TYPE_ORDER = ['Creature', 'Planeswalker', 'Instant', 'Sorcery', 'Enchantment', 'Artifact', 'Battle', 'Land'];
 
@@ -70,10 +81,22 @@
     <div class="modal-body">
       <p class="modal-subtitle">
         <span><%= cards.length %> cards</span>
-        <button id="library-group-by-type-toggle" class="group-by-type-toggle<%= isGrouped ? ' active' : '' %>"
-                hx-get="<%= toggleUrl %>"
-                hx-target="#modal-container"
-                hx-swap="innerHTML"><%= isGrouped ? '✓ ' : '' %>Group by Type</button>
+        <span class="modal-subtitle-controls">
+          <span class="library-order-toggle" role="group" aria-label="Card order">
+            <button id="library-order-alphabetical" class="order-toggle-btn<%= !isPositionOrder ? ' active' : '' %>"
+                    hx-get="<%= alphabeticalOrderUrl %>"
+                    hx-target="#modal-container"
+                    hx-swap="innerHTML">A-Z</button>
+            <button id="library-order-position" class="order-toggle-btn<%= isPositionOrder ? ' active' : '' %>"
+                    hx-get="<%= positionOrderUrl %>"
+                    hx-target="#modal-container"
+                    hx-swap="innerHTML">Position</button>
+          </span>
+          <button id="library-group-by-type-toggle" class="group-by-type-toggle<%= isGrouped ? ' active' : '' %>"
+                  hx-get="<%= toggleUrl %>"
+                  hx-target="#modal-container"
+                  hx-swap="innerHTML"><%= isGrouped ? '✓ ' : '' %>Group by Type</button>
+        </span>
       </p>
       <% if (isGrouped) { %>
         <%

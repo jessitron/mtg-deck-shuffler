@@ -1,5 +1,35 @@
 # History
 
+## 2026-08-21 — the library modal's order toggle opened a new, unreviewed exclusive-pair idiom
+
+`library-search-order-toggle`: Jess asked directly for a way to switch the Library Search
+modal's card order between alphabetical and library position — a reversal of the earlier
+"alphabetical, full stop" decision recorded by the `library-search` owner. Alphabetical stays
+the default; a new A-Z/Position toggle sits next to the existing `.group-by-type-toggle`.
+
+**Consulted this owner mid-implementation, via `-review`, before shipping.** The review flagged
+that a two-way exclusive toggle needed its own idiom — reusing `.hero-button.active` verbatim
+would have brought a full-size tab into a one-line modal subtitle row, and `.group-by-type-toggle`
+is a single on/off switch (plus pre-token-sweep drift: `#f0f0f0`/`#ccc`), not an exclusive pair
+in the first place. The shipped shape (`.library-order-toggle`/`.order-toggle-btn` in
+`playmat.css`) borrows the *idea* from `.hero-button.active` — an underline marks the active
+side — but renders it as a smaller bordered pill, on tokens (`--radius-soft`, `--font-chrome`,
+`--dark-pink`), because nothing that size existed to copy outright.
+
+**Staged as a `/design` candidate, not shipped as decided.** `design.ejs` § Surfaces gained a
+"Library order toggle" specimen (badge `candidate`) with a `section-note` naming the shape
+unreviewed, and the existing "Modal dialog" specimen in the same section was updated to show
+the toggle in its real position (next to Group by Type) rather than the stale prior markup.
+Recorded as [open-choices.md](open-choices.md) choice 8 — a decision still owed to Jess: does
+this pill+underline shape become the fleet's standard exclusive-two-way-toggle idiom, or does
+she want something else. `.group-by-type-toggle` was deliberately left untouched (still drift)
+— restyling it was never in scope for this change.
+
+Markup: `library-modal.ejs` gained a `.modal-subtitle-controls` wrapper holding both toggles,
+so `.modal-subtitle` keeps exactly the two flex children its `space-between` layout expects.
+Gallery test suite (7/7, `verify-design-gallery`) passed unchanged — no new stylesheet, no
+computed-value assertion this candidate touches.
+
 ## 2026-08-21 — ticket 04's library "Play Face Down" button deliberately skipped the grey styling its own JS-hook classes came from
 
 `card-played-face-down` ticket 04 added a "Play Face Down" button to the library-buttons
