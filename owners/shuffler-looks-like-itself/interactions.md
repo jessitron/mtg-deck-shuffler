@@ -330,6 +330,26 @@ Concrete, in rough order of how often they bite.
   === 0` renders exactly one of them, never both. Don't "tidy" them back into alignment
   without re-checking that mutual exclusivity still holds.
 
+**Touching the library modal's order toggle** (added 2026-08-21, `library-search-order-toggle`)
+
+- **`.library-order-toggle`/`.order-toggle-btn` (`playmat.css`) is a NEW exclusive-pair shape,
+  staged as a `/design` candidate, not decided.** See
+  [open-choices.md](open-choices.md#8-exclusive-two-way-toggle-pair-library-order-a-z--position).
+  Don't copy it elsewhere citing it as precedent until Jess signs off.
+- **It lives inside a new `.modal-subtitle-controls` wrapper**, sibling to the pre-existing
+  `.group-by-type-toggle` — both sit inside `.modal-subtitle` in `library-modal.ejs`, so
+  `.modal-subtitle` keeps exactly two flex children (its `space-between` layout depends on
+  that). If a third subtitle control is ever added, it goes inside
+  `.modal-subtitle-controls`, not as a third direct child of `.modal-subtitle`.
+- **`.group-by-type-toggle` itself was left untouched** — still `#f0f0f0`/`#ccc`, pre-token-sweep
+  drift, not restyled as part of this change. Don't read its continued presence next to a
+  tokenized sibling as sanctioning the old look; it's an open cleanup item, not resolved here.
+- **Server-side, `order` is a third query param alongside `groupBy`** on both `/library-modal/:gameId`
+  and `/prep-library-modal/:prepId` (`src/app.ts`), and `modal-query-params.js`'s auto-open
+  logic (`?openLibrary=true`) carries it through the same way it already carried `groupBy`. Not
+  a CSS concern, but the two params travel together through the same URL-building helpers in
+  both `app.ts` and `library-modal.ejs` — if you add a fourth modal option, follow that shape.
+
 **Touching the table-look picker (`/prepare`) or its previews** (added 2026-08-09, ticket 16, `8995c1a`; converted from client JS to pure HTMX the same day, `cabf85b`)
 
 - **The swatches' press physics are a THIRD press behaviour** — rest 0, hover
