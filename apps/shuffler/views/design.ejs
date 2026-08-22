@@ -746,8 +746,14 @@
             </div>
             <div class="modal-body">
               <p class="modal-subtitle">
-                <span>99 cards in library, ordered by position</span>
-                <button class="group-by-type-toggle">Group by type</button>
+                <span>99 cards</span>
+                <span class="modal-subtitle-controls">
+                  <span class="library-order-toggle" role="group" aria-label="Card order">
+                    <button class="order-toggle-btn active">A-Z</button>
+                    <button class="order-toggle-btn">Position</button>
+                  </span>
+                  <button class="group-by-type-toggle">Group by type</button>
+                </span>
               </p>
               <h4 class="card-type-header"><span class="card-type-header-icon" data-icon="creature"></span> Creature</h4>
               <ul class="library-search-list">
@@ -757,6 +763,27 @@
               </ul>
             </div>
           </div>
+        </div>
+
+        <h3>Library order toggle <span class="badge badge-candidate">candidate</span></h3>
+        <p class="section-note">
+          A-Z / Position — the two-way exclusive choice for the Library Search modal's card
+          order (added alongside the always-independent "Group by type" toggle above). Built on
+          tokens (<code>--radius-soft</code>, <code>--font-chrome</code>, a
+          <code>--dark-pink</code> underline for the active side, borrowed from
+          <code>.hero-button.active</code> at a much smaller scale) rather than extending
+          <code>.group-by-type-toggle</code>, which predates the token sweep and is drift, not
+          precedent. There was no existing idiom in this app for a small exclusive-choice
+          toggle pair, so this specific shape — bordered pill buttons with an underline marking
+          the active one — is unreviewed and staged here as a candidate, not yet a standard.
+        </p>
+        <div class="stage stage-dark" style="display: block;">
+          <span class="modal-subtitle-controls">
+            <span class="library-order-toggle" role="group" aria-label="Card order">
+              <button class="order-toggle-btn active">A-Z</button>
+              <button class="order-toggle-btn">Position</button>
+            </span>
+          </span>
         </div>
 
         <h3>Command zone surround</h3>

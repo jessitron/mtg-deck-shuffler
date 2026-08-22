@@ -726,20 +726,24 @@ export function createApp(
       const cardModalUrlTemplate = `/card-modal/${gameId}/{cardIndex}?expected-version=${expectedVersion}`;
 
       const groupBy = req.query.groupBy as string | undefined;
+      const order = req.query.order === "position" ? "position" : "alphabetical";
 
-      const cards = libraryCards
-        .map(gc => ({
-          name: gc.card.name,
-          gameCardIndex: gc.gameCardIndex,
-          cardTypes: gc.card.cardTypes,
-          colorIdentity: gc.card.colorIdentity
-        }))
-        .sort((a, b) => a.name.localeCompare(b.name));
+      const mappedCards = libraryCards.map(gc => ({
+        name: gc.card.name,
+        gameCardIndex: gc.gameCardIndex,
+        cardTypes: gc.card.cardTypes,
+        colorIdentity: gc.card.colorIdentity
+      }));
+
+      const cards = order === "alphabetical"
+        ? mappedCards.sort((a, b) => a.name.localeCompare(b.name))
+        : mappedCards;
 
       res.render("partials/library-modal", {
         cards,
         cardModalUrlTemplate,
         groupBy,
+        order,
         gameId,
         prepId: undefined,
         expectedVersion
@@ -1085,23 +1089,27 @@ export function createApp(
       const { libraryCards } = createPrepViewHelpers(prep);
 
       const groupBy = req.query.groupBy as string | undefined;
+      const order = req.query.order === "position" ? "position" : "alphabetical";
 
       // Build card modal URL template (no expected version for prep page)
       const cardModalUrlTemplate = `/prep-card-modal/${prepId}/{cardIndex}`;
 
-      const cards = libraryCards
-        .map(gc => ({
-          name: gc.card.name,
-          gameCardIndex: gc.gameCardIndex,
-          cardTypes: gc.card.cardTypes,
-          colorIdentity: gc.card.colorIdentity
-        }))
-        .sort((a, b) => a.name.localeCompare(b.name));
+      const mappedCards = libraryCards.map(gc => ({
+        name: gc.card.name,
+        gameCardIndex: gc.gameCardIndex,
+        cardTypes: gc.card.cardTypes,
+        colorIdentity: gc.card.colorIdentity
+      }));
+
+      const cards = order === "alphabetical"
+        ? mappedCards.sort((a, b) => a.name.localeCompare(b.name))
+        : mappedCards;
 
       res.render("partials/library-modal", {
         cards,
         cardModalUrlTemplate,
         groupBy,
+        order,
         gameId: undefined,
         prepId,
         expectedVersion: undefined
