@@ -24,6 +24,18 @@ class AdminScreenTest < Minitest::Test
     assert_includes last_response.body, "/admin/tables/#{garage["tableId"]}"
   end
 
+  def test_the_index_lists_tables_newest_first
+    older = join(name: "older table #{SecureRandom.uuid}")
+    newer = join(name: "newer table #{SecureRandom.uuid}")
+
+    get "/admin/tables"
+
+    body = last_response.body
+    newer_index = body.index("/admin/tables/#{newer["tableId"]}")
+    older_index = body.index("/admin/tables/#{older["tableId"]}")
+    assert newer_index < older_index
+  end
+
   def test_a_tables_show_page_lists_its_full_event_log_in_order
     table_id = join(name: "kitchen table #{SecureRandom.uuid}")["tableId"]
     envelope = valid_envelope("tableId" => table_id, "initiator" => { "playerName" => "Robin" })

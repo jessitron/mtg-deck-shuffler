@@ -7,6 +7,7 @@ DB = Sequel.sqlite(ENV.fetch("SPINE_DB_PATH", "spine.db"))
 DB.create_table? :tables do
   String :id, primary_key: true
   String :name, null: false, unique: true
+  Time :created_at, null: false
 end
 
 DB.create_table? :seats do
@@ -47,4 +48,9 @@ DB.run("CREATE UNIQUE INDEX IF NOT EXISTS seats_game_id_unique ON seats(game_id)
 event_columns = DB.schema(:events).map(&:first)
 unless event_columns.include?(:initiator_seat_id)
   DB.alter_table(:events) { add_column :initiator_seat_id, String }
+end
+
+table_columns = DB.schema(:tables).map(&:first)
+unless table_columns.include?(:created_at)
+  DB.alter_table(:tables) { add_column :created_at, Time, default: Time.now.utc }
 end

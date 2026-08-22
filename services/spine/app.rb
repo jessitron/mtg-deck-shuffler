@@ -83,7 +83,7 @@ module Spine
 
       r.get "admin", "tables" do
         response["Content-Type"] = "text/html"
-        tables = Table.order(:name).all
+        tables = Table.order(Sequel.desc(:created_at)).all
         current_span.add_attributes("admin.table_count" => tables.size)
         render_admin("admin/tables/index", tables: tables, base_path: self.class.base_path)
       end
