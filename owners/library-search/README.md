@@ -26,7 +26,7 @@ The app is public but currently used by people Jessitron invites for remote MTG 
 
 ## Design Philosophy
 
-The app assists gameplay without enforcing MTG rules. Library search is sorted alphabetically by canonical card name, always, on both the game and prep pages — a card effect says "search your library for a Forest," and you're finding, not reading positions, and you shuffle afterward anyway. There is no toggle back to position order; that's a deliberate choice, not a gap. Position order is preserved internally (`GameState.listLibrary()` still sorts by `location.position` — draw/Put on Top/Put on Bottom depend on it), but nothing surfaces it in the UI. No auto-shuffle, no restrictions on what you can pick.
+The app assists gameplay without enforcing MTG rules. Library search defaults to alphabetical order by canonical card name on both the game and prep pages — a card effect says "search your library for a Forest," and you're finding, not reading positions, and you shuffle afterward anyway. Alphabetical is the default, but as of 2026-08-21 there's a UI toggle back to position order (`?order=position`), reversing an earlier deliberate "no toggle wanted or built" decision — Jess asked for it directly; see history.md. Position order is still the one true order internally (`GameState.listLibrary()` sorts by `location.position` — draw/Put on Top/Put on Bottom depend on it); the routes only stop re-sorting their display copy when `order=position` is requested. No auto-shuffle, no restrictions on what you can pick.
 
 ## Feature Summary
 
@@ -34,12 +34,13 @@ The app assists gameplay without enforcing MTG rules. Library search is sorted a
 |--------|--------|
 | Entry points | "Search" button on game page and prep page; on the prep page the library stack itself is also clickable |
 | Modal type | HTMX-loaded EJS partial into `#modal-container` |
-| URL params | `?openLibrary=true`, `?groupBy=type` |
+| URL params | `?openLibrary=true`, `?groupBy=type`, `?order=alphabetical\|position` (default alphabetical) |
 | Two routes | `/library-modal/:gameId` (game), `/prep-library-modal/:prepId` (prep) |
 | Template | Single shared EJS template: `views/partials/library-modal.ejs` |
-| Cards shown | All cards with `location.type === "Library"`, sorted alphabetically by canonical card name for display, always; `GameState.listLibrary()` itself stays position-ordered |
+| Cards shown | All cards with `location.type === "Library"`; sorted alphabetically by canonical card name for display unless `?order=position` is requested; `GameState.listLibrary()` itself stays position-ordered |
 | Auto-shuffle | No. The app doesn't enforce MTG rules; player shuffles manually if needed |
 | Grouping | Toggle to group cards by MTG card type (Creature, Instant, etc.) |
+| Order toggle | "A-Z" / "Position" buttons in the modal subtitle; defaults to A-Z; survives the Group by Type toggle |
 | Type icons | SVG icons for each card type, colored for lands |
 | Card types source | `CardDefinition.cardTypes` — pre-unioned across all faces/parts at ingestion |
 | Multi-face cards | Appear in every group their faces/parts belong to (transform, MDFC, split, adventure, prepare) |

@@ -8,9 +8,9 @@ All files involved in the library search feature, grouped by role.
 
 | File | Lines | Role |
 |------|-------|------|
-| `src/app.ts` | 501-541 | Game library modal route (`/library-modal/:gameId`) |
-| `src/app.ts` | 780-819 | Prep library modal route (`/prep-library-modal/:prepId`) |
-| `views/partials/library-modal.ejs` | all | Modal template (grouping logic, type icons, card list) |
+| `src/app.ts` | search `/library-modal/:gameId` | Game library modal route — reads `?groupBy=`/`?order=`, sorts alphabetically unless `order=position` (line numbers drift; other routes are interleaved) |
+| `src/app.ts` | search `/prep-library-modal/:prepId` | Prep library modal route — same `?groupBy=`/`?order=` handling |
+| `views/partials/library-modal.ejs` | all | Modal template (grouping logic, order-toggle buttons, type icons, card list) |
 
 ## Navigation (navList)
 
@@ -30,14 +30,14 @@ All files involved in the library search feature, grouped by role.
 
 | File | Role |
 |------|------|
-| `public/modal-query-params.js` | Auto-open library modal from URL params |
+| `public/modal-query-params.js` | Auto-open library modal from URL params, threading `groupBy` and `order` |
 | `public/modal-focus.js` | Generic focus trap/inert/restore for all `#modal-container`/`#card-modal-container` consumers (library modal included) — not library-search-specific, owned jointly with every other modal co-tenant. See interactions.md. |
 
 ## Styling
 
 | File | Key Selectors |
 |------|---------------|
-| `public/playmat.css` | `.group-by-type-toggle`, `.card-type-group`, `.card-type-header`, `.card-type-icon`, `.card-type-header-icon`, `.library-search-list`, `.library-card-item` |
+| `public/playmat.css` | `.group-by-type-toggle`, `.modal-subtitle-controls`, `.library-order-toggle`, `.order-toggle-btn`, `.order-toggle-btn.active`, `.card-type-group`, `.card-type-header`, `.card-type-icon`, `.card-type-header-icon`, `.library-search-list`, `.library-card-item` |
 
 ## Assets
 
@@ -59,7 +59,7 @@ All files involved in the library search feature, grouped by role.
 |------|---------------|
 | `test/verification/verify-library-grouping.spec.ts` | E2E: toggle button, grouped headers, group-scoped nav, flip preserves navList (game + prep) |
 | `test/verification/verify-prep-library-click.spec.ts` | E2E: clicking the library stack on the prep page opens the search modal |
-| `test/verification/verify-library-alphabetical-order.spec.ts` | E2E: library modal is alphabetical by name — ungrouped and within each type group — on both game and prep routes, including after a shuffle |
+| `test/verification/verify-library-alphabetical-order.spec.ts` | E2E: default-state alphabetical order by name — ungrouped and within each type group — on both game and prep routes, including after a shuffle; plus a "Library Search - Order Toggle" block covering default state, switching to Position order (stable, differs from alphabetical after a shuffle), and that the order toggle survives the Group by Type toggle |
 | `test/game-modals.test.ts` | Unit — not library search itself, but pins `formatTableCardListHtmlFragment()`'s alphabetical order (Cards on Table); see "Related, Not Library Search" below |
 | `test/verification/verify-modal-focus.spec.ts` | E2E (generic focus mechanism, exercised via the library modal): open → Tab-trap → close → focus-restore |
 
@@ -70,6 +70,7 @@ All files involved in the library search feature, grouped by role.
 | `notes/FEATURE-card-type-grouping.md` | Task notes for implementing grouping |
 | `notes/DESIGN-card-type-symbols.md` | Available SVG icons and which types have them |
 | `apps/shuffler/notes/pages-and-modals.md` | Query parameter states including library modal |
+| `views/design.ejs` | `/design` gallery: stages the order-toggle markup, flagged `badge-candidate` (unreviewed pattern) — see interactions.md |
 
 ## Related, Not Library Search
 

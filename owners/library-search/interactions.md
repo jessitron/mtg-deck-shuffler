@@ -50,6 +50,16 @@ How library search connects to other parts of the app.
 - CSS mask technique in `public/playmat.css`
 - Mana color CSS custom properties (`--mana-W`, `--mana-U`, etc.)
 
+### /design Gallery
+- `views/design.ejs` stages the order-toggle markup (`.library-order-toggle`,
+  `.order-toggle-btn`) both inline in the library-modal mockup and as its own "Library
+  order toggle" section, flagged `badge-candidate` — the small bordered-pill,
+  underline-marks-active-side shape has no prior idiom in this app and is unreviewed by
+  `shuffler-looks-like-itself` as of 2026-08-21. Deliberately built fresh on tokens rather
+  than extending `.group-by-type-toggle` (called out there as pre-token-sweep drift).
+  Consult `shuffler-looks-like-itself` before reusing this pattern elsewhere or promoting
+  it out of candidate status.
+
 ## Depended On By
 
 ### Card Modal (from Library) - Critical Coupling
@@ -60,7 +70,8 @@ How library search connects to other parts of the app.
 - On the prep page, the card modal is view-only (no game actions available)
 
 ### URL Query Parameter System
-- `public/modal-query-params.js` auto-opens library modal on page load
+- `public/modal-query-params.js` auto-opens library modal on page load, threading both
+  `groupBy` and (since 2026-08-21) `order` through
 - Used for testing: direct URLs to specific modal states
 - Documented in `apps/shuffler/notes/pages-and-modals.md`
 
@@ -69,7 +80,15 @@ How library search connects to other parts of the app.
 When making changes elsewhere, consider these interactions:
 
 ### CardDefinition Changes
-If `CardDefinition` fields change (especially `cardTypes`, `colorIdentity`), the library search template mapping in `src/app.ts` needs updating (game ~523-528 and prep ~825-830). Note: `cardTypes` is the pre-unioned set of all faces'/parts' types (there is no separate `backFace`); the merge that used to happen here was removed once adapters started unioning at ingestion (commit `f76b49c`).
+If `CardDefinition` fields change (especially `cardTypes`, `colorIdentity`), the library search template mapping in `src/app.ts` needs updating (search for `app.get("/library-modal/:gameId"` and `app.get("/prep-library-modal/:prepId"` — line numbers drift). Note: `cardTypes` is the pre-unioned set of all faces'/parts' types (there is no separate `backFace`); the merge that used to happen here was removed once adapters started unioning at ingestion (commit `f76b49c`).
+
+### Order Toggle vs. Group by Type Toggle
+The two toggles (`?order=`, `?groupBy=`) are independent and orthogonal — either route
+handler reads both params separately, and the template's `buildModalUrl(groupBy, order)`
+always carries both forward. Changing one toggle's markup/URL-building logic without
+threading the other param through will silently reset the other toggle's state when
+clicked. If either toggle set (order or groupBy) grows a third state, revisit
+`buildModalUrl` together.
 
 ### New Card Locations
 If new card locations are added (beyond Library, Hand, Table, Revealed), `listLibrary()` filtering still works since it checks `location.type === "Library"`.
