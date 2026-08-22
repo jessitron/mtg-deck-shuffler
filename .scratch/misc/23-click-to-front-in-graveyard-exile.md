@@ -13,6 +13,8 @@ document state, so the reorder travels to every browser like any other change. E
 behaves the same (there it matters most — its cards stack directly on top of each
 other).
 
+This is INSTEAD of click-to-tap. Cards in the graveyard or exile don't get tapped.
+
 Scoped to the graveyard and exile zones, not the whole board. This composes with —
 never replaces — whatever click already does on a card.
 

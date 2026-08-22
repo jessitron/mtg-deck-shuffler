@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Ship: fleet
-Status: ready-for-agent
+Status: done
 
 **What to build:** The full portal gesture, rebuilt properly at implementation time (not
 merged from `prototype/portal-gesture-ticket-04`, kept for reference only):

@@ -2,8 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Ship: fleet
-Status: ready-for-agent
-
+Status: done
 **Superseded.** This ticket planned an HTTP POST inbox on the Shuffler, addressed by an
 `eventsUrl` minted per seat. That transport was replaced before implementation: the
 Shuffler receives `card.returned` (and every other event kind it needs) by opening its
