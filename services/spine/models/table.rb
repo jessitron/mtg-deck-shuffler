@@ -43,7 +43,7 @@ module Spine
 
     def self.create_with_event!(name:, creator:, id: TableSlug.mint(name))
       DB.transaction do
-        table = create(id: id, name: name)
+        table = create(id: id, name: name, created_at: Time.now.utc)
         table.mint_event!(
           name: "table.created",
           initiator: creator,
