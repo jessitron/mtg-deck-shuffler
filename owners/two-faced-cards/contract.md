@@ -47,11 +47,24 @@ into a validation failure instead. This is a stronger, schema-enforced version o
 "faceless by decision" rule; use the same `"face": false` pattern for any other removal
 schema (`undo.card.played.v1`, `undo.card.discarded.v1`) when those get built.
 
-Contract-only so far: `apps/shuffler/test/port-spine/cardReturnedContract.test.ts` proves
+Contract-only at first: `apps/shuffler/test/port-spine/cardReturnedContract.test.ts` proves
 the schema (well-formed payload validates, missing `gameCardIndex` rejected, a `face`
 field of any value rejected), and `apps/shuffler/test/port-spine/contractValidation.ts`
-registers it as `"card.returned:1"`. No sender or subscriber is wired to this schema yet —
-that's later tickets in the same series.
+registers it as `"card.returned:1"`.
+
+**Now bidirectional (shuffler-side-exits ticket 07):** `card.returned.v1` is sent
+tabletop→shuffler (ticket 12's library portal drag) and, as of this ticket, also
+shuffler→tabletop — any transition out of the Shuffler's own Table location (the Return
+button, or a future put-in-hand/top/bottom), via `buildCardReturnedEvent` +
+`sendCardReturnedToSpineBestEffort` in `apps/shuffler/src/port-tabletop/types.ts` /
+`apps/shuffler/src/port-spine/sendToSpine.ts`. Direction is distinguished by the envelope's
+`occurredIn`, not by any payload field — a consumer must branch on that, not assume a
+direction. The face blacklist (`"face": false`) is unchanged, and the new send carries no
+face fields, consistent with the faceless-removal rule. The schema gained one field for
+this: `card.instanceId` (optional) — the Shuffler always has it for a Table card and now
+sends it so the Tabletop can find the matching shape to remove by its `instanceId` prop; a
+tabletop-initiated send may still omit it. No `CardDefinition`/`CardFace`/persistence
+changes.
 
 ## `card.played-face-down.v1` — concealment as its own event kind, built end to end (card-played-face-down tickets 01–03, all landed 2026-08-21)
 
