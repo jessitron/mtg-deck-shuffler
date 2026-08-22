@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { slugifyTableName } from "../shared/slugify.js";
 import { applyCardArrival } from "./cardArrival.js";
+import { applyCardRemoval } from "./cardRemoval.js";
 import { MAX_SEATS } from "./cardLayout.js";
 
 /** Express route pattern for the test-only seed seam — register this, don't hand-type it. */
@@ -39,6 +40,46 @@ export async function handleTestCardSeed(req: Request, res: Response): Promise<v
       res
         .status(409)
         .json({ error: outcome.reason === "table-full" ? `table is full: ${MAX_SEATS} seats` : "seat has not joined the table" });
+      return;
+  }
+}
+
+/** Express route pattern for the test-only removal seed seam — register this, don't hand-type it. */
+export const TEST_CARD_REMOVAL_ROUTE = "/test/tables/:tableName/cards/remove";
+
+/** Builds the concrete URL a test/spec posts a card.returned envelope to. */
+export function testCardRemovalUrl(tableSlug: string): string {
+  return `/test/tables/${tableSlug}/cards/remove`;
+}
+
+/**
+ * Test-only seam mirroring `handleTestCardSeed`, but for the removal path (ticket 07):
+ * drives `applyCardRemoval` directly, standing in for a card.returned arriving over the
+ * Spine SSE subscription. Only mounted when ENABLE_TEST_SEED_ROUTE=true.
+ */
+export async function handleTestCardRemoval(req: Request, res: Response): Promise<void> {
+  const tableName = slugifyTableName(req.params.tableName ?? "");
+  if (!tableName) {
+    res.status(400).json({ error: "table name required" });
+    return;
+  }
+
+  const outcome = await applyCardRemoval(tableName, req.body);
+  switch (outcome.status) {
+    case "invalid":
+      res.status(400).json({ error: outcome.error });
+      return;
+    case "removed":
+      res.status(200).json({ ok: true, removed: true });
+      return;
+    case "not-found":
+      res.status(200).json({ ok: true, removed: false });
+      return;
+    case "deduped":
+      res.status(200).json({ ok: true, deduped: true });
+      return;
+    case "ignored":
+      res.status(200).json({ ok: true, ignored: outcome.reason });
       return;
   }
 }

@@ -119,6 +119,43 @@ export interface CardPlayedFaceDownPayload {
 
 export type CardPlayedFaceDownEvent = EventEnvelope<CardPlayedFaceDownPayload>;
 
+export const CARD_RETURNED_EVENT_NAME = "card.returned" as const;
+
+export interface CardReturnedPayload {
+  card: {
+    scryfallId: string;
+    instanceId: string;
+  };
+  gameCardIndex: number;
+  seat: string;
+}
+
+export type CardReturnedEvent = EventEnvelope<CardReturnedPayload>;
+
+/** Any transition out of the Shuffler's own Table location — Return button, put-in-hand/top/bottom. */
+export function buildCardReturnedEvent(gameCard: GameCard, instanceId: string, initiator: Initiator, seat: string, tableName: string): CardReturnedEvent {
+  return {
+    id: randomUUID(),
+    tableId: tableName,
+    name: CARD_RETURNED_EVENT_NAME,
+    occurredAt: new Date().toISOString(),
+    initiator: { seatId: initiator.seatId, playerName: initiator.playerName, sessionId: initiator.sessionId },
+    occurredIn: "shuffler",
+    origin: "shuffler.returnCardSubmit",
+    significance: "domain",
+    traceparent: currentTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      card: {
+        scryfallId: gameCard.card.scryfallId,
+        instanceId,
+      },
+      gameCardIndex: gameCard.gameCardIndex,
+      seat,
+    },
+  };
+}
+
 export function buildCardPlayedFaceDownEvent(
   gameCard: GameCard,
   instanceId: string,

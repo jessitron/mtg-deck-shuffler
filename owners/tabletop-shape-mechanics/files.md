@@ -121,6 +121,19 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   `zone === "library"`, rendered through this different slot because the library's opaque
   card-back picture would otherwise hide a `component()`-level treatment. See `architecture.md`'s
   "The library portal" section.
+- `apps/tabletop/src/server/cardRemoval.ts` — **new, ticket 07
+  (shuffler-side-exits-tell-the-table, 2026-08-21)**: `applyCardRemoval(tableName, body)` —
+  handles `card.returned` arriving from the *Shuffler* side (Return button, crafted
+  put-in-hand/top/bottom), filtering on `envelope.occurredIn === "shuffler"` so the Tabletop's own
+  library-portal-initiated sends (`cardSwallow.ts`, below) don't loop back. Finds the `mtg-card`
+  shape by exact `props.instanceId` match and deletes it via a raw `store.delete` inside
+  `room.updateStore` — no `Editor`, mirroring `cardArrival.ts`'s `store.put` pattern. Reparents any
+  passenger shapes (`PASSENGER_TYPES`) to the card's own `parentId` in place, using hand-rolled
+  `cos`/`sin` rotation math to hold each passenger's page position fixed — a **second, independent
+  passenger-eviction implementation**, deliberately simpler than `evictPassengers`
+  (`cardZoneEntry.ts`, below), which spot-finds an open landing position because that card is
+  moving elsewhere on the table rather than leaving it. See `architecture.md`'s "Ticket 07" section
+  and `interactions.md` watch point 28.
 - `apps/tabletop/src/server/cardReturned.ts` — **new, the library portal (2026-08-20)**:
   `handleCardReturned`, the new `POST /api/tables/:tableSlug/cards/return` route registered in
   `server.ts` next to the existing `seat.joined` route. Validates `seatId`/`scryfallId`/

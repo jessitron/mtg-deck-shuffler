@@ -2,7 +2,7 @@
 
 Mountain: tabletop-replaces-mural
 Ship: fleet
-Status: ready-for-agent
+Status: done
 
 **What to build:**
 The shuffler can initiate `card.returned` with its existing `return` functionality for cards on the table.
@@ -20,18 +20,25 @@ same `instanceId` passes dedup and lands as a fresh shape.
 
 **Blocked by:** 05 — needs contract validation in place for the new schema.
 
-- [ ] `card.returned.v1.json` schema written per the payload above
-- [ ] Every Shuffler transition out of `Table` (Return button, and crafted
+- [x] `card.returned.v1.json` schema written per the payload above
+- [x] Every Shuffler transition out of `Table` (Return button, and crafted
       put-in-hand/top/bottom) sends `card.returned.v1` with `occurredIn: "shuffler"` to
       the Spine's event log, best-effort — same pattern as
       `sendCardPlayedToSpineBestEffort`
-- [ ] The Shuffler's own location-change mutation is not gated on Spine delivery
+- [x] The Shuffler's own location-change mutation is not gated on Spine delivery
       succeeding (best-effort — a down Spine must not block the Return action, matching
       how `card.played` already works)
-- [ ] The Tabletop poofs the shape by `instanceId` prop on receipt over its Spine SSE
+- [x] The Tabletop poofs the shape by `instanceId` prop on receipt over its Spine SSE
       subscription; attachments remain, detached
-- [ ] Regression test: return a card via the modal, then play it again — it actually
+- [x] Regression test: return a card via the modal, then play it again — it actually
       lands on the table (today it's silently swallowed)
-- [ ] Test coverage for the best-effort send (failure to reach the Spine is logged, not
+- [x] Test coverage for the best-effort send (failure to reach the Spine is logged, not
       thrown, and never blocks the Return action) — mirroring existing coverage of
       `sendCardPlayedToSpineBestEffort`
+
+**Landed (2026-08-21):** `card.returned.v1.json` already existed (ticket 12's tabletop→shuffler
+library-portal direction, keyed on `scryfallId`+`gameCardIndex`, no `instanceId`) — this ticket's
+event is the reverse direction, distinguished by `occurredIn`. Jess's call: add `card.instanceId`
+as an additional optional field (no version bump), sent alongside `gameCardIndex` in both
+directions going forward, rather than forcing the existing tabletop→shuffler direction to adopt
+`instanceId` as its identity too. `gameCardIndex`/`seat` stay required, unchanged.

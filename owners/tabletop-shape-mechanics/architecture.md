@@ -87,6 +87,64 @@ body lives in moved:
 `onClick` is declared *at all* — regardless of what it does — because its mere presence changes
 how tldraw's own `SelectTool` behaves. See below.
 
+## Ticket 07: a second, server-side card-removal path (2026-08-21)
+
+`.scratch/shuffler-side-exits-tell-the-table/` — `card.returned` can now arrive from the
+*Shuffler* side (Return button, or a crafted put-in-hand/top/bottom), not only from the
+Tabletop's own library-portal swallow (above). New file `apps/tabletop/src/server/cardRemoval.ts`,
+`applyCardRemoval(tableName, body)`: filters on `envelope.occurredIn === "shuffler"` so the
+Tabletop's own portal-initiated `card.returned` sends (which already deleted the shape
+client-side) don't loop back and try to remove it again, finds the `mtg-card` shape by exact
+`props.instanceId` match, and deletes it with a raw `store.delete` inside `room.updateStore`.
+**No `Editor` instance** — this is a server-side event handler reacting to an HTTP-relayed
+event, not a browser gesture, mirroring `cardArrival.ts`'s `store.put` pattern for shape minting.
+
+**Passengers are reparented in place, using hand-rolled rotation math, not
+`evictPassengers`.** Before deleting the card, `applyCardRemoval` walks `store.getAll()` for
+shapes with `parentId === card.id` and `PASSENGER_TYPES.has(type)`, and rewrites each one's
+`parentId` to the card's own `parentId`, translating its local `x`/`y` by the card's own
+`cos`/`sin(rotation)` and adding the card's rotation to the passenger's own — holding the
+passenger's page position fixed as it's freed from the deleted card:
+
+```
+const cos = Math.cos(card.rotation);
+const sin = Math.sin(card.rotation);
+for (const passenger of passengers) {
+  const newX = card.x + passenger.x * cos - passenger.y * sin;
+  const newY = card.y + passenger.x * sin + passenger.y * cos;
+  store.put({ ...passenger, parentId: card.parentId, x: newX, y: newY, rotation: card.rotation + passenger.rotation });
+}
+```
+
+This is the same category of rotation-composition math `onDragShapesIn`'s reparent-zeroing
+(watch point 12) and `nudgeOffAnotherCard`'s page-bounds read (watch point 25) both lean on, but
+worked out independently here rather than reused — there's no `Editor` to call
+`editor.getShapePageBounds()`/`reparentShapes` on server-side, so this is hand-rolled trig against
+the raw store records instead.
+
+**Second independent passenger-eviction implementation in the codebase — deliberately simpler,
+not shared with the first.** `evictPassengers` (`cardZoneEntry.ts`, client-side, watch point 26)
+*spot-finds* an open position near a zone's edge and detaches passengers there, because the card
+is landing somewhere else *on the table* and a passenger needs a place to land too.
+`applyCardRemoval`'s reparent-in-place has no landing-spot concern — the card is leaving the
+table entirely, so there's nothing left for the passenger to collide with once it's the only
+thing occupying the card's old spot. **If `PASSENGER_TYPES` (`apps/tabletop/src/shared/
+passengerTypes.ts`) or the passenger rotation contract ever changes, both implementations need
+the update — there is no shared helper enforcing that today**, a deliberate choice (this owner's
+`-review`) given the two operate in genuinely different contexts (one has an `Editor` and
+spot-finds; the other doesn't and reparents in place).
+
+**Known limit, flagged and accepted rather than fixed**: the reparent math assumes
+`card.parentId` is always the page — it composes the passenger's local offset against the
+*card's* own rotation only, never composing a parent shape's own rotation on top of that. This is
+correct today because every `mtg-card` is always top-level, page-parented (no frame-nesting
+exists anywhere in this app); it would need revisiting if cards were ever nested under a rotated
+frame shape. Recorded rather than generalized, since building for a nesting case that doesn't
+exist yet was ruled out of scope by this owner's `-review`.
+
+See `history.md`'s "Ticket 07" entry, `interactions.md` watch point 28, and `files.md`'s
+`cardRemoval.ts` entry.
+
 ## The library portal (2026-08-20)
 
 `.scratch/tabletop-cards-come-and-go/issues/12-plan.md` — dragging a card onto its owner's

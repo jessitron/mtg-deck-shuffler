@@ -1,7 +1,14 @@
 import { trace } from "@opentelemetry/api";
 import { GameState, GameCard } from "../GameState.js";
 import { GameId } from "../domain-types.js";
-import { CardPlayedEvent, CardPlayedFaceDownEvent, ZoneHint, buildCardPlayedEvent, buildCardPlayedFaceDownEvent } from "../port-tabletop/types.js";
+import {
+  CardPlayedEvent,
+  CardPlayedFaceDownEvent,
+  ZoneHint,
+  buildCardPlayedEvent,
+  buildCardPlayedFaceDownEvent,
+  buildCardReturnedEvent,
+} from "../port-tabletop/types.js";
 import { SpinePort, buildSeatJoinedPayload, defaultPlaymatImageUrl, playmatImageUrlFromPath, cardBackImageUrl, shufflerPublicUrl } from "./types.js";
 import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../table-look.js";
 import { log } from "../log.js";
@@ -72,5 +79,28 @@ export async function sendCardPlayedToSpineBestEffort(
   } catch (error) {
     trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });
     log.warn("card.played send to Spine failed (best-effort; the Spine observes the log, it doesn't gate gameplay yet)", { "table.name": game.tableName ?? "" }, error as Error);
+  }
+}
+
+/**
+ * Any transition out of the Shuffler's Table location (Return button, put-in-hand/top/bottom)
+ * tells the Tabletop the card left, so it can poof the matching shape (ticket 07). Best-effort,
+ * mirroring `sendCardPlayedToSpineBestEffort` — a down Spine must not block the Return action.
+ */
+export async function sendCardReturnedToSpineBestEffort(
+  spinePort: SpinePort | undefined,
+  game: GameState,
+  gameCard: GameCard,
+  sessionId?: string
+): Promise<void> {
+  if (!spinePort || !game.spineTableId || !game.seatId || !gameCard.cardInstanceId) return;
+  const tableId = game.spineTableId;
+  try {
+    const initiator = { seatId: game.seatId, playerName: game.playerName ?? "player", sessionId };
+    const event = buildCardReturnedEvent(gameCard, gameCard.cardInstanceId, initiator, game.seatId, tableId);
+    await spinePort.sendEvent(tableId, event);
+  } catch (error) {
+    trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });
+    log.warn("card.returned send to Spine failed (best-effort; the Spine observes the log, it doesn't gate gameplay yet)", { "table.name": game.tableName ?? "" }, error as Error);
   }
 }

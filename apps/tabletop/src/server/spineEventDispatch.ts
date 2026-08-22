@@ -1,5 +1,6 @@
 import { context, propagation, ROOT_CONTEXT, trace, SpanKind } from "@opentelemetry/api";
 import { applyCardArrival } from "./cardArrival.js";
+import { applyCardRemoval } from "./cardRemoval.js";
 import { tableNameFromSlug } from "../shared/slugify.js";
 import { log } from "./log.js";
 
@@ -20,6 +21,7 @@ function isEnvelopeLike(value: unknown): value is { name: string; traceparent?: 
  * through Tabletop placement, not an unlinked new one.
  */
 const CARD_ARRIVAL_EVENT_NAMES = new Set(["card.played", "card.played-face-down"]);
+const CARD_REMOVAL_EVENT_NAMES = new Set(["card.returned"]);
 
 export function dispatchSpineEvent(tableName: string, event: unknown): void {
   if (!isEnvelopeLike(event)) return;
@@ -40,22 +42,35 @@ export function dispatchSpineEvent(tableName: string, event: unknown): void {
       },
       async (span) => {
         try {
-          if (!CARD_ARRIVAL_EVENT_NAMES.has(event.name)) return;
-
-          const outcome = await applyCardArrival(tableName, event);
-          span.setAttribute("arrival.outcome", outcome.status);
-          if (outcome.status === "invalid") {
-            log.warn(`spine sse: ${event.name} event failed validation`, {
-              "table.slug": tableName,
-              "arrival.error": outcome.error,
-            });
+          if (CARD_ARRIVAL_EVENT_NAMES.has(event.name)) {
+            const outcome = await applyCardArrival(tableName, event);
+            span.setAttribute("arrival.outcome", outcome.status);
+            if (outcome.status === "invalid") {
+              log.warn(`spine sse: ${event.name} event failed validation`, {
+                "table.slug": tableName,
+                "arrival.error": outcome.error,
+              });
+            }
+            if (outcome.status === "rejected" && outcome.reason === "seat-not-joined") {
+              span.setAttribute("error", true);
+              log.error(`spine sse: ${event.name} arrived before seat.joined — dropping, not fabricating furniture`, {
+                "table.slug": tableName,
+                error: true,
+              });
+            }
+            return;
           }
-          if (outcome.status === "rejected" && outcome.reason === "seat-not-joined") {
-            span.setAttribute("error", true);
-            log.error(`spine sse: ${event.name} arrived before seat.joined — dropping, not fabricating furniture`, {
-              "table.slug": tableName,
-              error: true,
-            });
+
+          if (CARD_REMOVAL_EVENT_NAMES.has(event.name)) {
+            const outcome = await applyCardRemoval(tableName, event);
+            span.setAttribute("removal.outcome", outcome.status);
+            if (outcome.status === "invalid") {
+              log.warn(`spine sse: ${event.name} event failed validation`, {
+                "table.slug": tableName,
+                "removal.error": outcome.error,
+              });
+            }
+            return;
           }
         } catch (error) {
           span.recordException(error as Error);
