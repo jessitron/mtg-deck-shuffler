@@ -9,8 +9,6 @@ import { validateIncomingEvent } from "./contractValidation.js";
 const tracer = trace.getTracer("mtg-tabletop");
 
 
-type ZoneHint = "stack" | "battlefield";
-
 /** Sibling of card.played — identical payload shape, but means "mint this concealed." */
 const FACE_DOWN_EVENT_NAME = "card.played-face-down";
 const DISCARD_EVENT_NAME = "card.discarded";
@@ -30,9 +28,7 @@ interface CardArrivalPayloadCommon {
   gameCardIndex?: number;
 }
 
-interface CardPlayedPayload extends CardArrivalPayloadCommon {
-  zoneHint: ZoneHint;
-}
+type CardPlayedPayload = CardArrivalPayloadCommon;
 
 type CardDiscardedPayload = CardArrivalPayloadCommon;
 
@@ -44,7 +40,7 @@ export type CardArrivalOutcome =
 
 /**
  * The shared core of "a card arrives on the table" — validation-independent: dedup, seat
- * checks, and shape placement. Both card.played/-face-down (positioned via zoneHint) and
+ * checks, and shape placement. Both card.played/-face-down (always the Stack) and
  * card.discarded (always the graveyard) funnel through here once they've resolved a
  * position, so dedup/placement never drifts between the two event kinds.
  */
@@ -161,10 +157,10 @@ async function placeArrivedCard(
 }
 
 /**
- * card.played / card.played-face-down: validation, dedup, and placement onto the stack or
- * battlefield per zoneHint. The only production entry point is the Spine SSE dispatcher
- * (`spineEventDispatch.ts`); `testSeedRoute.ts` calls this directly too, as a test-only HTTP
- * seam for specs that need to seed a card without a live Spine.
+ * card.played / card.played-face-down: validation, dedup, and placement onto the Stack. The
+ * only production entry point is the Spine SSE dispatcher (`spineEventDispatch.ts`);
+ * `testSeedRoute.ts` calls this directly too, as a test-only HTTP seam for specs that need
+ * to seed a card without a live Spine.
  */
 export async function applyCardArrival(tableName: string, body: unknown): Promise<CardArrivalOutcome> {
   const faceDown = isFaceDownEnvelope(body);
@@ -177,12 +173,9 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
     return { status: "invalid", error: "envelope tableId does not match the table being posted to" };
   }
 
-  const { zoneHint } = envelope.payload;
-  trace.getActiveSpan()?.setAttribute("zone.hint", zoneHint);
-
   return placeArrivedCard(tableName, envelope, envelope.payload, faceDown, (entry, playerArea, span) => {
-    // battlefield (a land) arrives on the Stack with everything else; a human drags it to
-    // the playmat. stack/battlefield both land here — zoneHint is otherwise unused now.
+    // Every played card, lands included, arrives on the Stack; a human drags it to the
+    // playmat from there (2026-08-16).
     const stackCount = entry.stackCardCount(envelope.payload.owner);
     span.setAttribute("zone.stack_count", stackCount);
     return stackCardPosition(playerArea.seatIndex, stackCount);
@@ -192,8 +185,7 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
 /**
  * card.discarded: validation, dedup, and placement onto the graveyard cascade. Discard
  * traffic (discard-from-hand, mill) has its own event kind rather than a card.played with
- * a graveyard zoneHint (tabletop-cards-come-and-go ticket 08) — routed here by event kind,
- * not by a zone hint the payload no longer carries.
+ * a graveyard zoneHint (tabletop-cards-come-and-go ticket 08) — routed here by event kind.
  */
 export async function applyCardDiscard(tableName: string, body: unknown): Promise<CardArrivalOutcome> {
   const result = validateIncomingEvent<CardDiscardedPayload>(body, DISCARD_EVENT_NAME);

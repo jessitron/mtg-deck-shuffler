@@ -232,7 +232,10 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   send to the Tabletop to block on. `card.played` reaches the Tabletop via
   `sendCardPlayedToSpineBestEffort` (below) — best-effort, never blocking, never a
   reason to fail the play/discard. Solo mode (no table): clipboard flow, untouched.
-  Zone hints: land→battlefield, nonland→stack, discard→graveyard.
+  `card.played`'s `zoneHint` (land→battlefield, nonland→stack) is deprecated — every
+  played card lands on the Stack regardless (2026-08-16) — but still required, so
+  `zoneHintForPlay()` keeps populating it. Discard sends `card.discarded`, which carries
+  no `zoneHint` at all (tabletop-cards-come-and-go ticket 08).
 - **Joining a table is one call to the Spine**: `/start-game`, `/restart-game`, and
   `/yo` all call `joinSpineBestEffort()` (`src/port-spine/sendToSpine.ts`) once,
   carrying identity (`gameId`, table name, player name) *and* the full seat
