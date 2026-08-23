@@ -442,6 +442,26 @@ String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.pl
     all landed, the full loop (Shuffler button → Spine → Tabletop mint) is live end to
     end.
 
+26. **`card.played.v1`/`card.played-face-down.v1`'s `zoneHint` is now marked
+    `"deprecated": true` in the contract, still required — `zonehint-deprecation`,
+    2026-08-23.** Every played card has landed on the Stack regardless of `zoneHint`
+    since 2026-08-16 (`applyCardArrival` in `apps/tabletop/src/server/cardArrival.ts`
+    always calls `stackCardPosition`), and `card.discarded.v1` never carried the field
+    at all — so no receiver has read `zoneHint` for a while; this change only makes that
+    inertness explicit in the schema and removes the now-pointless read-side plumbing.
+    Senders keep populating it (`zoneHintForPlay()` in
+    `apps/shuffler/src/port-tabletop/types.ts` is unchanged — still computed, still
+    threaded into `buildCardPlayedEvent`/`buildCardPlayedFaceDownEvent`), so this is a
+    read-side-only change: `apps/shuffler/src/app.ts`'s `sendCardBeforeMutate` no longer
+    sets a `"zone.hint"` span attribute; `apps/tabletop/src/server/cardArrival.ts` no
+    longer destructures `zoneHint` off the incoming envelope or sets a `"zone.hint"` span
+    attribute, and its now-unused local `ZoneHint` type and `CardPlayedPayload.zoneHint`
+    field were deleted (`CardPlayedPayload` is now just a type alias for
+    `CardArrivalPayloadCommon`, which never had `zoneHint`). No behavior change. **If a
+    future ticket wants to actually remove `zoneHint` from the wire**, this is prep work
+    for it, not the removal itself — the field is still required and still sent; don't
+    assume this change dropped it.
+
 ## Not Related To
 
 ### Sleeve carries to the game screen (`sleeve-carries-to-game`, 2026-08-09)

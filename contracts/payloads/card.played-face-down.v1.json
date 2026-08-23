@@ -30,7 +30,8 @@
     "zoneHint": {
       "type": "string",
       "enum": ["stack", "battlefield"],
-      "description": "Where the card is headed on the table. A hint — geography, not rules. Narrowed alongside card.played.v1 (tabletop-cards-come-and-go ticket 08): a face-down play is never a discard, so graveyard traffic never used this kind anyway."
+      "deprecated": true,
+      "description": "Deprecated: every played card lands on the Stack regardless of this value (2026-08-16), so no receiver reads this anymore. Still required — senders keep populating it — but treat it as inert geography, not a signal to branch on."
     },
     "frontImageUrl": {
       "type": "string",

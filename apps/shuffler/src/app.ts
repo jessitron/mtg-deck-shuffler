@@ -129,7 +129,7 @@ export function createApp(
 
   async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint, sessionId?: string, faceDown = false): Promise<void> {
     setCommonSpanAttributes({ tableName: game.tableName });
-    trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing", "zone.hint": zoneHint, "card.face_down": faceDown });
+    trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing", "card.face_down": faceDown });
     await sendCardPlayedToSpineBestEffort(spinePort, game, card, zoneHint, sessionId, faceDown);
   }
 

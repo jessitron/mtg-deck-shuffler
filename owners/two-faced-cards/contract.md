@@ -109,6 +109,23 @@ No Tabletop-side receiver yet: nothing in `apps/tabletop/` consumes `card.discar
 today — this ticket is Shuffler + contract only, same posture `card.played-face-down`
 was in after its ticket 02 before ticket 03 landed the sender.
 
+## `zoneHint` deprecated on `card.played.v1`/`card.played-face-down.v1` (2026-08-23)
+
+Both schemas now mark `zoneHint` `"deprecated": true` in its property description, while
+keeping it `required`. It's a documentation-only schema change — no receiver has read the
+field for a while (`applyCardArrival` in `apps/tabletop/src/server/cardArrival.ts` has
+placed every arriving card on the Stack regardless of `zoneHint` since 2026-08-16, and
+`card.discarded.v1` — the schema graveyard traffic moved to, ticket 08 above — never
+carried `zoneHint` at all). Still required because senders (`zoneHintForPlay()` in
+`apps/shuffler/src/port-tabletop/types.ts`) keep populating it unchanged; removing the
+requirement or the field itself is a separate, not-yet-done step. Paired read-side
+cleanup, no behavior change: the Shuffler's `sendCardBeforeMutate`
+(`apps/shuffler/src/app.ts`) stopped setting a `"zone.hint"` span attribute, and the
+Tabletop's `cardArrival.ts` stopped destructuring `zoneHint` off the envelope and setting
+its own `"zone.hint"` span attribute — its local `ZoneHint` type and
+`CardPlayedPayload.zoneHint` field are gone (`CardPlayedPayload` is now just an alias for
+`CardArrivalPayloadCommon`).
+
 ## `card.played-face-down.v1` — concealment as its own event kind, built end to end (card-played-face-down tickets 01–03, all landed 2026-08-21)
 
 `contracts/payloads/card.played-face-down.v1.json` is a **field-for-field duplicate** of
