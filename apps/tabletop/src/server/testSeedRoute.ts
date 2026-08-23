@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { slugifyTableName } from "../shared/slugify.js";
-import { applyCardArrival } from "./cardArrival.js";
+import { applyCardArrival, applyCardDiscard } from "./cardArrival.js";
 import { applyCardRemoval } from "./cardRemoval.js";
 import { MAX_SEATS } from "./cardLayout.js";
 
@@ -16,7 +16,9 @@ export function testCardSeedUrl(tableSlug: string): string {
  * Test-only seam: verification specs and cardArrival.test.ts drive a server spawned as
  * its own process, so they need HTTP to seed a card onto a table without a live Spine.
  * Only mounted when ENABLE_TEST_SEED_ROUTE=true (set by verify.sh and cardArrival.test.ts) —
- * never in production, where card.played only arrives via the Spine SSE subscription.
+ * never in production, where card.played/card.discarded only arrive via the Spine SSE
+ * subscription. Dispatches by the posted envelope's `name`, same as spineEventDispatch.ts,
+ * so this seam can seed either a played or a discarded card.
  */
 export async function handleTestCardSeed(req: Request, res: Response): Promise<void> {
   const tableName = slugifyTableName(req.params.tableName ?? "");
@@ -25,7 +27,8 @@ export async function handleTestCardSeed(req: Request, res: Response): Promise<v
     return;
   }
 
-  const outcome = await applyCardArrival(tableName, req.body);
+  const isDiscard = typeof req.body === "object" && req.body !== null && (req.body as { name?: unknown }).name === "card.discarded";
+  const outcome = isDiscard ? await applyCardDiscard(tableName, req.body) : await applyCardArrival(tableName, req.body);
   switch (outcome.status) {
     case "invalid":
       res.status(400).json({ error: outcome.error });

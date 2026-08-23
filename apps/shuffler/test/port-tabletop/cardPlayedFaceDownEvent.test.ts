@@ -72,7 +72,7 @@ describe("buildCardPlayedFaceDownEvent (the card.played-face-down envelope)", ()
   });
 
   it("carries gameCardIndex", () => {
-    const event = buildCardPlayedFaceDownEvent(handCard(lightningBolt, 7), "i-3", initiator, initiator.seatId, "graveyard", tableName);
+    const event = buildCardPlayedFaceDownEvent(handCard(lightningBolt, 7), "i-3", initiator, initiator.seatId, "battlefield", tableName);
     expect(event.payload.gameCardIndex).toBe(7);
   });
 });

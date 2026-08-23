@@ -1,6 +1,6 @@
-import { trace, SpanKind } from "@opentelemetry/api";
+import { trace, SpanKind, Span } from "@opentelemetry/api";
 import { createShapeId } from "@tldraw/tlschema";
-import { getOrCreateRoom } from "./rooms.js";
+import { getOrCreateRoom, RoomEntry, PlayerArea } from "./rooms.js";
 import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { CARD_W, CARD_H, MAX_SEATS, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
 import { pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
@@ -9,19 +9,19 @@ import { validateIncomingEvent } from "./contractValidation.js";
 const tracer = trace.getTracer("mtg-tabletop");
 
 
-type ZoneHint = "stack" | "battlefield" | "graveyard";
+type ZoneHint = "stack" | "battlefield";
 
 /** Sibling of card.played — identical payload shape, but means "mint this concealed." */
 const FACE_DOWN_EVENT_NAME = "card.played-face-down";
+const DISCARD_EVENT_NAME = "card.discarded";
 
 function isFaceDownEnvelope(body: unknown): boolean {
   return typeof body === "object" && body !== null && "name" in body && (body as { name: unknown }).name === FACE_DOWN_EVENT_NAME;
 }
 
-interface CardPlayedPayload {
+interface CardArrivalPayloadCommon {
   card: { scryfallId: string; instanceId: string };
   face: "front" | "back";
-  zoneHint: ZoneHint;
   frontImageUrl: string;
   backImageUrl: string | null;
   cardName: string;
@@ -30,6 +30,12 @@ interface CardPlayedPayload {
   gameCardIndex?: number;
 }
 
+interface CardPlayedPayload extends CardArrivalPayloadCommon {
+  zoneHint: ZoneHint;
+}
+
+type CardDiscardedPayload = CardArrivalPayloadCommon;
+
 export type CardArrivalOutcome =
   | { status: "invalid"; error: string }
   | { status: "placed" }
@@ -37,26 +43,23 @@ export type CardArrivalOutcome =
   | { status: "rejected"; reason: "table-full" | "seat-not-joined" };
 
 /**
- * The core of card arrival — validation, dedup, and placement. The only production
- * entry point is the Spine SSE dispatcher (`spineEventDispatch.ts`); `testSeedRoute.ts`
- * calls this directly too, as a test-only HTTP seam for specs that need to seed a card
- * without a live Spine.
+ * The shared core of "a card arrives on the table" — validation-independent: dedup, seat
+ * checks, and shape placement. Both card.played/-face-down (positioned via zoneHint) and
+ * card.discarded (always the graveyard) funnel through here once they've resolved a
+ * position, so dedup/placement never drifts between the two event kinds.
  */
-export async function applyCardArrival(tableName: string, body: unknown): Promise<CardArrivalOutcome> {
-  const faceDown = isFaceDownEnvelope(body);
-  const result = validateIncomingEvent<CardPlayedPayload>(body, faceDown ? FACE_DOWN_EVENT_NAME : "card.played");
-  if (!result.ok) {
-    return { status: "invalid", error: result.error };
-  }
-  const { envelope } = result;
-  if (slugifyTableName(envelope.tableId) !== tableName) {
-    return { status: "invalid", error: "envelope tableId does not match the table being posted to" };
-  }
+async function placeArrivedCard(
+  tableName: string,
+  envelope: { id: string; name: string; initiator: { seatId?: string } },
+  payload: CardArrivalPayloadCommon,
+  faceDown: boolean,
+  resolvePosition: (entry: RoomEntry, playerArea: PlayerArea, span: Span) => { x: number; y: number }
+): Promise<CardArrivalOutcome> {
   const seatId = envelope.initiator.seatId;
   if (!seatId) {
     return { status: "invalid", error: `initiator.seatId is required for ${envelope.name}` };
   }
-  const { card, face, zoneHint, frontImageUrl, backImageUrl, cardName, owner, isCommander, gameCardIndex } = envelope.payload;
+  const { card, face, frontImageUrl, backImageUrl, cardName, owner, isCommander, gameCardIndex } = payload;
 
   trace.getActiveSpan()?.setAttributes({
     "card.instance_id": card.instanceId,
@@ -66,7 +69,6 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
     "event.name": envelope.name,
     "table.name": tableNameFromSlug(tableName),
     "table.slug": tableName,
-    "zone.hint": zoneHint,
     "seat.id": seatId,
   });
 
@@ -90,7 +92,7 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
 
   const playerArea = entry.seats.get(owner);
   if (!playerArea) {
-    // A card.played for a seat with no player area means seat.joined hasn't landed yet —
+    // A card arrival for a seat with no player area means seat.joined hasn't landed yet —
     // an ordering bug upstream, not something to paper over by minting furniture from
     // whatever scraps this payload happens to carry (no deck name, no sleeve, no playmat).
     trace.getActiveSpan()?.setAttribute("arrival.rejected", "seat-not-joined");
@@ -112,25 +114,11 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
         "card.instance_id": card.instanceId,
         "card.scryfall_id": card.scryfallId,
         "card.name": cardName,
-        "zone.hint": zoneHint,
       },
     },
     async (span) => {
       try {
-        let position: { x: number; y: number };
-        switch (zoneHint) {
-          case "graveyard":
-            position = graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++);
-            span.setAttribute("zone.graveyard_count", playerArea.graveyardCount);
-            break;
-          case "battlefield": // a land — arrives on the Stack with everything else; a human drags it to the playmat
-          case "stack": {
-            const stackCount = entry.stackCardCount(owner);
-            position = stackCardPosition(playerArea.seatIndex, stackCount);
-            span.setAttribute("zone.stack_count", stackCount);
-            break;
-          }
-        }
+        const position = resolvePosition(entry, playerArea, span);
 
         const shapeId = createShapeId(`card-${card.instanceId}`);
 
@@ -170,4 +158,56 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
 
   entry.seenEventIds.add(envelope.id);
   return { status: "placed" };
+}
+
+/**
+ * card.played / card.played-face-down: validation, dedup, and placement onto the stack or
+ * battlefield per zoneHint. The only production entry point is the Spine SSE dispatcher
+ * (`spineEventDispatch.ts`); `testSeedRoute.ts` calls this directly too, as a test-only HTTP
+ * seam for specs that need to seed a card without a live Spine.
+ */
+export async function applyCardArrival(tableName: string, body: unknown): Promise<CardArrivalOutcome> {
+  const faceDown = isFaceDownEnvelope(body);
+  const result = validateIncomingEvent<CardPlayedPayload>(body, faceDown ? FACE_DOWN_EVENT_NAME : "card.played");
+  if (!result.ok) {
+    return { status: "invalid", error: result.error };
+  }
+  const { envelope } = result;
+  if (slugifyTableName(envelope.tableId) !== tableName) {
+    return { status: "invalid", error: "envelope tableId does not match the table being posted to" };
+  }
+
+  const { zoneHint } = envelope.payload;
+  trace.getActiveSpan()?.setAttribute("zone.hint", zoneHint);
+
+  return placeArrivedCard(tableName, envelope, envelope.payload, faceDown, (entry, playerArea, span) => {
+    // battlefield (a land) arrives on the Stack with everything else; a human drags it to
+    // the playmat. stack/battlefield both land here — zoneHint is otherwise unused now.
+    const stackCount = entry.stackCardCount(envelope.payload.owner);
+    span.setAttribute("zone.stack_count", stackCount);
+    return stackCardPosition(playerArea.seatIndex, stackCount);
+  });
+}
+
+/**
+ * card.discarded: validation, dedup, and placement onto the graveyard cascade. Discard
+ * traffic (discard-from-hand, mill) has its own event kind rather than a card.played with
+ * a graveyard zoneHint (tabletop-cards-come-and-go ticket 08) — routed here by event kind,
+ * not by a zone hint the payload no longer carries.
+ */
+export async function applyCardDiscard(tableName: string, body: unknown): Promise<CardArrivalOutcome> {
+  const result = validateIncomingEvent<CardDiscardedPayload>(body, DISCARD_EVENT_NAME);
+  if (!result.ok) {
+    return { status: "invalid", error: result.error };
+  }
+  const { envelope } = result;
+  if (slugifyTableName(envelope.tableId) !== tableName) {
+    return { status: "invalid", error: "envelope tableId does not match the table being posted to" };
+  }
+
+  return placeArrivedCard(tableName, envelope, envelope.payload, false, (_entry, playerArea, span) => {
+    const position = graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++);
+    span.setAttribute("zone.graveyard_count", playerArea.graveyardCount);
+    return position;
+  });
 }

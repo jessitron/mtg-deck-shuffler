@@ -8,6 +8,7 @@ import {
   buildCardPlayedEvent,
   buildCardPlayedFaceDownEvent,
   buildCardReturnedEvent,
+  buildCardDiscardedEvent,
 } from "../port-tabletop/types.js";
 import { SpinePort, buildSeatJoinedPayload, defaultPlaymatImageUrl, playmatImageUrlFromPath, cardBackImageUrl, shufflerPublicUrl } from "./types.js";
 import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../table-look.js";
@@ -79,6 +80,24 @@ export async function sendCardPlayedToSpineBestEffort(
   } catch (error) {
     trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });
     log.warn("card.played send to Spine failed (best-effort; the Spine observes the log, it doesn't gate gameplay yet)", { "table.name": game.tableName ?? "" }, error as Error);
+  }
+}
+
+/**
+ * A card went to the graveyard (discard-from-hand or mill) — its own event kind, not a
+ * card.played with a graveyard zoneHint (tabletop-cards-come-and-go ticket 08). Best-effort,
+ * mirroring sendCardPlayedToSpineBestEffort.
+ */
+export async function sendCardDiscardedToSpineBestEffort(spinePort: SpinePort | undefined, game: GameState, gameCard: GameCard, sessionId?: string): Promise<void> {
+  if (!spinePort || !game.spineTableId || !game.seatId || !gameCard.cardInstanceId) return;
+  const tableId = game.spineTableId;
+  try {
+    const initiator = { seatId: game.seatId, playerName: game.playerName ?? "player", sessionId };
+    const event = buildCardDiscardedEvent(gameCard, gameCard.cardInstanceId, initiator, game.seatId, tableId);
+    await spinePort.sendEvent(tableId, event);
+  } catch (error) {
+    trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });
+    log.warn("card.discarded send to Spine failed (best-effort; the Spine observes the log, it doesn't gate gameplay yet)", { "table.name": game.tableName ?? "" }, error as Error);
   }
 }
 

@@ -57,6 +57,37 @@ function cardPlayed(tableName: string, envelopeOverrides: Record<string, unknown
   };
 }
 
+function cardDiscarded(tableName: string, envelopeOverrides: Record<string, unknown> = {}, payloadOverrides: Record<string, unknown> = {}) {
+  eventCounter++;
+  const initiator = (envelopeOverrides.initiator as { seatId: string; playerName: string } | undefined) ?? {
+    seatId: "seat-0000001",
+    playerName: "Jess",
+  };
+  return {
+    id: randomUUID(),
+    tableId: slugFor(tableName),
+    name: "card.discarded",
+    occurredAt: new Date().toISOString(),
+    initiator,
+    occurredIn: "shuffler",
+    origin: "shuffler.discardCardSubmit",
+    significance: "domain",
+    traceparent: fakeTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
+      face: "front",
+      frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
+      backImageUrl: null,
+      cardName: "Doomed Dissenter",
+      owner: initiator.seatId,
+      isCommander: false,
+      ...payloadOverrides,
+    },
+    ...envelopeOverrides,
+  };
+}
+
 async function post(tableName: string, body: unknown): Promise<Response> {
   return fetch(`http://localhost:${port}/test/tables/${slugFor(tableName)}/cards`, {
     method: "POST",
@@ -229,12 +260,36 @@ describe("card arrival", () => {
     expect({ x: card.x, y: card.y }).not.toEqual(initiatorPosition);
   });
 
-  it("puts a graveyard-hinted card in the player's graveyard box", async () => {
+  it("puts a discarded card in the player's graveyard box, routed by event kind (card.discarded), not a zone hint", async () => {
     await joinSeat("arrival-graveyard", "seat-0000001", "Jess");
-    await post("arrival-graveyard", cardPlayed("arrival-graveyard", {}, { zoneHint: "graveyard", cardName: "Doomed Dissenter" }));
+    await post("arrival-graveyard", cardDiscarded("arrival-graveyard", {}, { cardName: "Doomed Dissenter" }));
     const [card] = shapesOf("arrival-graveyard");
     const graveyard = graveyardBounds(0);
     expect(card.x).toBeGreaterThanOrEqual(graveyard.x);
+  });
+
+  it("dedups a retried discard (same event id): physical no-op", async () => {
+    await joinSeat("discard-dedup-id", "seat-0000001", "Jess");
+    const event = cardDiscarded("discard-dedup-id");
+    await post("discard-dedup-id", event);
+    const retry = await post("discard-dedup-id", event);
+    expect(retry.status).toBe(200);
+    expect((await retry.json()).deduped).toBe(true);
+    expect(shapesOf("discard-dedup-id")).toHaveLength(1);
+  });
+
+  it("rejects a card.discarded envelope that fails payload validation (missing owner)", async () => {
+    const response = await post("discard-invalid", cardDiscarded("discard-invalid", {}, { owner: undefined }));
+    expect(response.status).toBe(400);
+  });
+
+  it("rejects a card.discarded for a seat that hasn't joined — no furniture, no card, just a rejection", async () => {
+    const response = await post(
+      "discard-no-seat",
+      cardDiscarded("discard-no-seat", { initiator: { seatId: "seat-ghost", playerName: "Ghost" } })
+    );
+    expect(response.status).toBe(409);
+    expect(shapesOf("discard-no-seat")).toHaveLength(0);
   });
 
   it("bakes the seat's sleeve color into the minted card's props (ticket 17)", async () => {
@@ -283,10 +338,10 @@ describe("card arrival", () => {
   });
 
   it("rejects an unknown event name — fail loudly, never silently drop", async () => {
-    const event = cardPlayed("arrival-unknown-name", { name: "card.discarded" });
+    const event = cardPlayed("arrival-unknown-name", { name: "card.transmogrified" });
     const response = await post("arrival-unknown-name", event);
     expect(response.status).toBe(400);
-    expect((await response.json()).error).toContain("card.discarded");
+    expect((await response.json()).error).toContain("card.transmogrified");
   });
 
   it("rejects an unknown schemaVersion — fail loudly, never silently drop", async () => {

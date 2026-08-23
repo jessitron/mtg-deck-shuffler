@@ -10,7 +10,7 @@ export function zoneHintForPlay(gameCard: GameCard): ZoneHint {
 
 export const CARD_PLAYED_EVENT_NAME = "card.played" as const;
 
-export type ZoneHint = "stack" | "battlefield" | "graveyard";
+export type ZoneHint = "stack" | "battlefield";
 
 export interface Initiator {
   seatId: string;
@@ -152,6 +152,53 @@ export function buildCardReturnedEvent(gameCard: GameCard, instanceId: string, i
       },
       gameCardIndex: gameCard.gameCardIndex,
       seat,
+    },
+  };
+}
+
+export const CARD_DISCARDED_EVENT_NAME = "card.discarded" as const;
+
+// card.played minus zoneHint (graveyard *is* this event's meaning — two-faced-cards watch
+// point 19), keeping face/frontImageUrl/backImageUrl/cardName/owner/isCommander/gameCardIndex
+// since the Tabletop needs the same facts to mint a graveyard card shape as a played one.
+export interface CardDiscardedPayload {
+  card: {
+    scryfallId: string;
+    instanceId: string;
+  };
+  face: "front" | "back";
+  frontImageUrl: string;
+  backImageUrl: string | null;
+  cardName: string;
+  owner: string;
+  isCommander: boolean;
+  gameCardIndex: number;
+}
+
+export type CardDiscardedEvent = EventEnvelope<CardDiscardedPayload>;
+
+export function buildCardDiscardedEvent(gameCard: GameCard, instanceId: string, initiator: Initiator, owner: string, tableName: string): CardDiscardedEvent {
+  return {
+    id: randomUUID(),
+    tableId: tableName,
+    name: CARD_DISCARDED_EVENT_NAME,
+    occurredAt: new Date().toISOString(),
+    initiator: { seatId: initiator.seatId, playerName: initiator.playerName, sessionId: initiator.sessionId },
+    occurredIn: "shuffler",
+    origin: "shuffler.discardCardSubmit",
+    significance: "domain",
+    traceparent: currentTraceparent(),
+    schemaVersion: 1,
+    payload: {
+      card: {
+        scryfallId: gameCard.card.scryfallId,
+        instanceId,
+      },
+      ...cardFaceFields(gameCard),
+      cardName: gameCard.card.name,
+      owner,
+      isCommander: gameCard.isCommander,
+      gameCardIndex: gameCard.gameCardIndex,
     },
   };
 }

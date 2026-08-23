@@ -14,7 +14,7 @@ import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
 import { ZoneHint, zoneHintForPlay } from "./port-tabletop/types.js";
 import { SpinePort } from "./port-spine/types.js";
-import { sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort, joinSpineBestEffort } from "./port-spine/sendToSpine.js";
+import { sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort, sendCardDiscardedToSpineBestEffort, joinSpineBestEffort } from "./port-spine/sendToSpine.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { log } from "./log.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -137,6 +137,12 @@ export function createApp(
     setCommonSpanAttributes({ tableName: game.tableName });
     trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing" });
     await sendCardReturnedToSpineBestEffort(spinePort, game, card, sessionId);
+  }
+
+  async function sendCardDiscardedBeforeMutate(game: GameState, card: GameCard, sessionId?: string): Promise<void> {
+    setCommonSpanAttributes({ tableName: game.tableName });
+    trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing" });
+    await sendCardDiscardedToSpineBestEffort(spinePort, game, card, sessionId);
   }
 
   function renderCommandOutcome(
@@ -1527,7 +1533,7 @@ export function createApp(
           if (!game.tableName || !cardToDiscard || cardToDiscard.location.type !== "Hand") {
             return;
           }
-          await sendCardBeforeMutate(game, cardToDiscard, "graveyard", sessionId);
+          await sendCardDiscardedBeforeMutate(game, cardToDiscard, sessionId);
         }
       );
 
@@ -1596,7 +1602,7 @@ export function createApp(
           if (!game.tableName || !topCard) {
             return;
           }
-          await sendCardBeforeMutate(game, topCard, "graveyard", sessionId);
+          await sendCardDiscardedBeforeMutate(game, topCard, sessionId);
         }
       );
 

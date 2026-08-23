@@ -29,8 +29,8 @@
     },
     "zoneHint": {
       "type": "string",
-      "enum": ["stack", "battlefield", "graveyard"],
-      "description": "Where the card is headed on the table. A hint — geography, not rules."
+      "enum": ["stack", "battlefield"],
+      "description": "Where the card is headed on the table. A hint — geography, not rules. Narrowed alongside card.played.v1 (tabletop-cards-come-and-go ticket 08): a face-down play is never a discard, so graveyard traffic never used this kind anyway."
     },
     "frontImageUrl": {
       "type": "string",

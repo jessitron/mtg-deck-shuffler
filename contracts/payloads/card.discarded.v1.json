@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/card.discarded.v1.json",
+  "title": "card.discarded payload, schemaVersion 1",
+  "description": "A game event from the Shuffler: a card was discarded to the graveyard. Same shape as card.played.v1 minus zoneHint — graveyard *is* this event's meaning, so there's no zone to hint at. Keeps face (unlike card.returned.v1) because a discard is public: it shows the card, it doesn't just remove it (two-faced-cards watch point 19). Card identity is the Scryfall ID (definition) plus a Shuffler-minted instance GUID (this particular Forest, for this game). Which seat discarded it lives on the envelope's initiator, not repeated here.",
+  "type": "object",
+  "properties": {
+    "card": {
+      "type": "object",
+      "properties": {
+        "scryfallId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Definition: the exact printing — oracle identity, all faces, all names, all images derivable."
+        },
+        "instanceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Instance: this particular physical-ish card, minted per game at game start. Opaque — distinct from the Shuffler's internal gameCardIndex (see the sibling `gameCardIndex` property below), which is a rank in a decklist array, not a stable per-card identity."
+        }
+      },
+      "required": ["scryfallId", "instanceId"],
+      "additionalProperties": true
+    },
+    "face": {
+      "type": "string",
+      "enum": ["front", "back"],
+      "description": "Face is card state, not identity — but MDFCs are discarded as a chosen face, so it rides along."
+    },
+    "frontImageUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Blessed scaffolding convenience: render without a Scryfall lookup."
+    },
+    "backImageUrl": {
+      "type": ["string", "null"],
+      "description": "Present (non-null) exactly when the card has a printed back face — null, never omitted, when it doesn't (two-faced-cards watch point 17)."
+    },
+    "cardName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Blessed scaffolding convenience: display without a Scryfall lookup."
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The seatId of the player this card belongs to — matching card.played.v1's `owner` field. Grants no capability — any player can still move any card; it makes 'whose card is this' a fact the shape carries."
+    },
+    "isCommander": {
+      "type": "boolean",
+      "description": "Whether this card is one of its owner's commanders."
+    },
+    "gameCardIndex": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The card's index in the Shuffler's initial decklist array (its alphabetical rank in that list) — not library order, which is shuffled. Optional: older senders may omit it, and no receiver is required to use it."
+    }
+  },
+  "required": ["card", "face", "frontImageUrl", "backImageUrl", "cardName", "owner", "isCommander"],
+  "additionalProperties": true
+}
