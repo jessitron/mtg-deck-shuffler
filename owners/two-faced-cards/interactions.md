@@ -92,7 +92,7 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 
 ### The Tabletop port (card.played sender, JES-127)
 
-- `src/port-tabletop/types.ts` `buildCardPlayedEvent` is the ONE door where a GameCard is serialized for the table.
+- `src/port-tabletop/types.ts` `buildCardPlayedEvent` is the ONE door where a GameCard is serialized for the table. As of cards-come-and-go ticket 08 (2026-08-23), `buildCardPlayedEvent`, `buildCardPlayedFaceDownEvent`, and the new `buildCardDiscardedEvent` all share one private helper, `cardFaceFields(gameCard)`, for the `face`/`frontImageUrl`/`backImageUrl` computation — see watch point 19 and 25.
 
 ## Watch Points
 
@@ -239,8 +239,9 @@ These are specific things that could break two-faced cards if changed elsewhere:
     **No `card.played` rev** — held. Jess's stated future (not v1): a sleeve may someday
     carry an image URL and two colors (front border vs back).
 
-19. **`face` rides only events that show a card; removal events are faceless — decided,
-    not built (cards-come-and-go ticket 02, 2026-08-08).** The event vocabulary sorts
+19. **`face` rides only events that show a card; removal events are faceless — decided
+    (cards-come-and-go ticket 02, 2026-08-08), and `card.discarded` is now built
+    (cards-come-and-go ticket 08, 2026-08-23).** The event vocabulary sorts
     card events into face-carrying and faceless by one question: does this event reveal
     or choose a face? `card.played` and the new `card.discarded.v1` carry `face` (a
     discard shows the card publicly); `card.returned.v1`, `undo.card.played.v1`,
@@ -263,6 +264,28 @@ These are specific things that could break two-faced cards if changed elsewhere:
     true` policy. Guards against a sender that copies `card.played`'s shape by habit. See
     [contract.md](contract.md#cardreturnedv1--the-faceless-removal-events-schema-built).
     Contract-only: no sender or subscriber wired to this schema yet.
+
+    **`card.discarded.v1` built end to end, Shuffler side (cards-come-and-go ticket 08,
+    2026-08-23).** `contracts/payloads/card.discarded.v1.json` is `card.played.v1`'s shape
+    minus `zoneHint` — required `card`, `face`, `frontImageUrl`, `backImageUrl`,
+    `cardName`, `owner`, `isCommander`; optional `gameCardIndex` — since graveyard *is*
+    this event's meaning, there's no zone left to hint at. `buildCardDiscardedEvent` +
+    `sendCardDiscardedToSpineBestEffort` (`src/port-tabletop/types.ts` /
+    `src/port-spine/sendToSpine.ts`) are best-effort, mirroring the `card.played` senders.
+    Two call sites switched from `sendCardBeforeMutate(...,"graveyard",...)` to this new
+    sender: `POST /discard-card/:gameId/:gameCardIndex` (discard-from-hand) and `POST
+    /mill/:gameId` (mill the top library card) in `src/app.ts`. **Corollary landed
+    alongside**: `card.played.v1.json`'s `zoneHint` enum narrowed from
+    `stack | battlefield | graveyard` to `stack | battlefield` — graveyard traffic now
+    only ever travels as `card.discarded`, never as a `card.played` with a graveyard hint.
+    `card.played-face-down.v1.json`'s `zoneHint` was narrowed the same way for consistency
+    (a face-down play was never a discard anyway). `GameState`/`GameCard` are untouched —
+    this is purely which event kind gets sent to the Spine. Tests:
+    `test/port-tabletop/cardDiscardedEvent.test.ts` (envelope shape, no `zoneHint`
+    property at all — not just narrowed) and `test/port-spine/cardDiscardedContract.test.ts`
+    (schema conformance, both a directly-built event and the real
+    `sendCardDiscardedToSpineBestEffort` send), mirroring the `card.played` equivalents.
+    See [contract.md](contract.md).
 
 20. **The library-entry face/faceDown reset only covers "library" — there is no "hand"
     zone to also cover** (physics ticket 17, 2026-08-09). Ticket 06 phrased the reset
@@ -398,7 +421,16 @@ String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.pl
     face-carrying sender site, extend `cardFaceFields` (or replace it with something both
     call) rather than re-copying the `twoFaced ? … : null` gate a third time** — this is
     now the second time watch point 19/#18's sharp edge showed up as copy-paste risk (the
-    first was `seat.joined`'s `commanders` array, watch point 21). Trigger: a "Play Face
+    first was `seat.joined`'s `commanders` array, watch point 21). **Ticket 08 (2026-08-23)
+    followed this advice for the fourth face-carrying sender site**: `buildCardDiscardedEvent`
+    also calls `cardFaceFields(gameCard)`, so `card.played`, `card.played-face-down`, and
+    `card.discarded` now all share the one computation in `src/port-tabletop/types.ts`.
+    `seat.joined`'s `buildSeatJoinedCommander` (`src/port-spine/types.ts`, a **different
+    file**) still carries its own independent copy of the `twoFaced ? ... : null` gate,
+    not a call to `cardFaceFields` — "four sender sites share the rule" does not mean all
+    four call one function; two functions implement it today (`cardFaceFields` for the
+    three `port-tabletop/types.ts` builders, `buildSeatJoinedCommander` for
+    `seat.joined`), and both must be kept honest against `card.twoFaced`. Trigger: a "Play Face
     Down" button on the hand card modal only (`formatModalCardActionsForHand`,
     `apps/shuffler/src/view/play-game/game-modals.ts`) — not on Revealed, per spec.md —
     sends `req.body["face-down"] === "true"` through `sendCardBeforeMutate` →
