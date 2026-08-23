@@ -335,24 +335,33 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
 
 ## Server (identity is minted here, mechanics is not)
 
-- `apps/tabletop/src/server/cardArrival.ts` — exports `applyCardArrival(tableName, body)`, the
-  shared validation/dedup/`ensurePlayerArea`/placement logic; mints `props.instanceId` (moved out
-  of `meta` by ticket 12) at shape creation (`createShapeId`; no longer mints a tldraw asset
-  record — flip is a pure `props.face` write now). Since table-layout ticket 18 (2026-08-09),
-  builds the record via `tableFurniture.ts`'s `mtgCardShape()` instead of its own `store.put`
-  literal. **Since the library portal (2026-08-20), also threads `gameCardIndex` through from
-  `envelope.payload.gameCardIndex`** (already on the wire in `card.played`, previously dropped) —
-  see `architecture.md`'s "The library portal" section. **Since 2026-08-20, the `"stack"`/
-  `"battlefield"` placement case calls `entry.stackCardCount(owner)` (`rooms.ts`, below) instead of
-  incrementing the deleted `PlayerArea.stackCount`** — fixes a bug where a seat's cascade never
-  stopped advancing even after every earlier Stack card had been dragged away. See `history.md`'s
-  "Stack-arrival placement stopped trusting a monotonic counter" entry. This file has no HTTP entry point of its
-  own — `card.played` reaches it only through
-  the Spine's SSE subscription. `applyCardArrival` is called by
-  `spineEventDispatch.ts`'s `dispatchSpineEvent` in production, and by `testSeedRoute.ts`'s
-  `handleTestCardSeed` (a test-only HTTP seam, `ENABLE_TEST_SEED_ROUTE=true` only) in tests. Not
-  this owner's mechanics territory per se, but the identity contract every hook in
-  `MtgCardShapeUtil` depends on.
+- `apps/tabletop/src/server/cardArrival.ts` — **split into a shared core plus two entry points,
+  ticket 08 (tabletop-cards-come-and-go, 2026-08-23)**: `placeArrivedCard(tableName, envelope,
+  payload, faceDown, resolvePosition)` (private) now holds the dedup/seat-check/span/mint/
+  `store.put` logic every arrival shares — mints `props.instanceId` (moved out of `meta` by
+  ticket 12) at shape creation (`createShapeId`; no longer mints a tldraw asset record — flip is a
+  pure `props.face` write now), builds the record via `tableFurniture.ts`'s `mtgCardShape()`. Two
+  exported entry points call it with different position-resolvers: `applyCardArrival` (for
+  `card.played`/`card.played-face-down`, positioned via `stackCardPosition` using
+  `entry.stackCardCount(owner)`, `zoneHint` now narrowed to `"stack" | "battlefield"` only — the
+  `"graveyard"` arm moved out) and the new `applyCardDiscard` (for `card.discarded`, always
+  positioned via `graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++)`, no
+  `zoneHint` in that payload at all — routed by event kind, not a zone hint). **Since the library
+  portal (2026-08-20), also threads `gameCardIndex` through from `envelope.payload.gameCardIndex`**
+  (already on the wire in `card.played`, previously dropped) — see `architecture.md`'s "The
+  library portal" section. **Since 2026-08-20, the stack placement case calls
+  `entry.stackCardCount(owner)` (`rooms.ts`, below) instead of incrementing the deleted
+  `PlayerArea.stackCount`** — fixes a bug where a seat's cascade never stopped advancing even after
+  every earlier Stack card had been dragged away. See `history.md`'s "Stack-arrival placement
+  stopped trusting a monotonic counter" entry. This file has no HTTP entry point of its own —
+  `card.played`/`card.discarded` reach it only through the Spine's SSE subscription.
+  `applyCardArrival`/`applyCardDiscard` are called by `spineEventDispatch.ts`'s
+  `dispatchSpineEvent` in production, and by `testSeedRoute.ts`'s `handleTestCardSeed` (a
+  test-only HTTP seam, `ENABLE_TEST_SEED_ROUTE=true` only, now dispatching to one or the other
+  based on the posted envelope's `name`) in tests. **No ShapeUtil, no client-side selection/drag
+  mechanics touched** — this split is pure server-side event routing and mint-position logic, the
+  same "identity contract every hook in `MtgCardShapeUtil` depends on, not this owner's mechanics
+  territory per se" category this file was already in.
 - `apps/tabletop/src/server/spineEventDispatch.ts` — `dispatchSpineEvent(tableName, event)`, the
   production entry point for `card.played` — filters the Spine's per-table SSE stream for that
   event name, continues the trace from the broadcast envelope's `traceparent`, and calls

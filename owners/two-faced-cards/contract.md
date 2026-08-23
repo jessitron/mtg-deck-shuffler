@@ -66,6 +66,49 @@ sends it so the Tabletop can find the matching shape to remove by its `instanceI
 tabletop-initiated send may still omit it. No `CardDefinition`/`CardFace`/persistence
 changes.
 
+## `card.discarded.v1` — the graveyard event's own schema, built (cards-come-and-go ticket 08, 2026-08-23)
+
+`contracts/payloads/card.discarded.v1.json` is `card.played.v1`'s shape **minus
+`zoneHint`** — graveyard *is* this event's meaning, so there's nothing left to hint at.
+Required: `card`, `face`, `frontImageUrl`, `backImageUrl`, `cardName`, `owner`,
+`isCommander`; optional `gameCardIndex` — same fields, same rules, as `card.played.v1`
+(watch point 17/interactions.md #18 for the `backImageUrl`-derived-from-`twoFaced` rule).
+It **keeps `face`**, unlike `card.returned.v1`: this owner's watch point 19 sorts card
+events into face-carrying and faceless by asking "does this event reveal or choose a
+face?" — a discard shows the card publicly (to the graveyard, face up), so `face` rides
+along the same way it does on `card.played`.
+
+Sender: `buildCardDiscardedEvent` in `apps/shuffler/src/port-tabletop/types.ts`, using the
+same `cardFaceFields(gameCard)` private helper `card.played`/`card.played-face-down`
+already used (see [interactions.md](interactions.md#watch-points) watch point 25) —
+so the face/image computation is not a third copy-paste of the `twoFaced`-gate.
+`sendCardDiscardedToSpineBestEffort` (`apps/shuffler/src/port-spine/sendToSpine.ts`)
+sends it best-effort, mirroring `sendCardPlayedToSpineBestEffort`. Two call sites in
+`apps/shuffler/src/app.ts` switched to it: `POST /discard-card/:gameId/:gameCardIndex`
+(discard from hand) and `POST /mill/:gameId` (mill the top library card) — both
+previously called `sendCardBeforeMutate(...,"graveyard",...)`, i.e. `card.played` with a
+`graveyard` zoneHint.
+
+**Corollary: `card.played.v1.json`'s `zoneHint` enum narrowed** from
+`stack | battlefield | graveyard` to `stack | battlefield` — graveyard traffic now only
+ever travels as `card.discarded`, never as a `card.played` with a graveyard hint.
+`card.played-face-down.v1.json`'s `zoneHint` was narrowed the same way for consistency (a
+face-down play was never a discard anyway, so this is cosmetic there, not a behavior
+change). No schemaVersion bump on either — zero real consumers of the removed enum value
+existed (the same "zero conforming producers/consumers yet" exception used elsewhere in
+this file), and narrowing an enum a sender never actually emitted isn't a breaking change
+for anyone who validated against it.
+
+Tests: `apps/shuffler/test/port-tabletop/cardDiscardedEvent.test.ts` (envelope shape —
+asserts `payload` has **no** `zoneHint` property at all, not just a narrowed one) and
+`apps/shuffler/test/port-spine/cardDiscardedContract.test.ts` (schema conformance for
+both a directly-built event and the real `sendCardDiscardedToSpineBestEffort` send,
+through a joined seat) — mirroring the `card.played` equivalents.
+
+No Tabletop-side receiver yet: nothing in `apps/tabletop/` consumes `card.discarded`
+today — this ticket is Shuffler + contract only, same posture `card.played-face-down`
+was in after its ticket 02 before ticket 03 landed the sender.
+
 ## `card.played-face-down.v1` — concealment as its own event kind, built end to end (card-played-face-down tickets 01–03, all landed 2026-08-21)
 
 `contracts/payloads/card.played-face-down.v1.json` is a **field-for-field duplicate** of

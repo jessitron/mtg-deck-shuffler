@@ -29,8 +29,8 @@
     },
     "zoneHint": {
       "type": "string",
-      "enum": ["stack", "battlefield", "graveyard"],
-      "description": "Where the card is headed on the table. A hint — geography, not rules."
+      "enum": ["stack", "battlefield"],
+      "description": "Where the card is headed on the table. A hint — geography, not rules. Narrowed (tabletop-cards-come-and-go ticket 08): graveyard traffic moved to card.discarded.v1, since graveyard *is* that event's meaning."
     },
     "frontImageUrl": {
       "type": "string",

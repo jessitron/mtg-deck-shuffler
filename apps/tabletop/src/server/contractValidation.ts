@@ -24,6 +24,7 @@ const payloadValidators: Record<string, ValidateFunction> = {
   "card.played-face-down:1": ajv.compile(loadSchema("payloads/card.played-face-down.v1.json")),
   "seat.joined:1": ajv.compile(loadSchema("payloads/seat.joined.v1.json")),
   "card.returned:1": ajv.compile(loadSchema("payloads/card.returned.v1.json")),
+  "card.discarded:1": ajv.compile(loadSchema("payloads/card.discarded.v1.json")),
 };
 
 export interface Initiator {

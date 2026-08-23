@@ -49,8 +49,9 @@ Every component of the fleet that touches cards must hold this:
   resets both axes to `face:'front', faceDown:false` in `MtgCardShapeUtil.onTranslateEnd`.
   See [tabletop.md](tabletop.md).
 - **Contract** — every event that *reveals or chooses* a face carries `face` beside
-  `card: { scryfallId, instanceId }` (`card.played`, and `card.discarded` once built —
-  a discard shows the card publicly). Events that remove a card from view carry **no**
+  `card: { scryfallId, instanceId }` (`card.played`, and `card.discarded`, built
+  cards-come-and-go ticket 08, 2026-08-23 — a discard shows the card publicly). Events
+  that remove a card from view carry **no**
   face: `card.returned`, the `undo.*` kinds, and commanders riding `seat.joined` are all
   faceless by decision (cards-come-and-go ticket 02, 2026-08-08 — Jess: "cards removed
   from play no longer have a face up"). Names and image URLs are derivable
@@ -96,12 +97,11 @@ Players encounter two-faced cards throughout the app:
 | Image fetch | `src/port-card-images/` (`ScryfallCardImagesGateway`, `enrichDeckWithImages`) — fetches Scryfall image URLs at ingestion |
 | Adapters | `src/port-deck-retrieval/archidektAdapter/`, `src/port-deck-retrieval/mtgjsonAdapter/` |
 | Persistence | `SqliteCardRepositoryAdapter` stores `card_types`, `image_uris`, `back_image_uris` as JSON (no back_face column); `PersistedGameCard.currentFace` |
+| `card.discarded` (Spine event) | **Built** (cards-come-and-go ticket 08, 2026-08-23): `buildCardDiscardedEvent`/`sendCardDiscardedToSpineBestEffort` (`src/port-tabletop/types.ts` / `src/port-spine/sendToSpine.ts`), sent from `POST /discard-card/:gameId/:gameCardIndex` and `POST /mill/:gameId` instead of `card.played` with a `graveyard` zoneHint. Same face-carrying shape as `card.played` minus `zoneHint` (graveyard *is* the meaning). Face/image computation shared with `card.played`/`card.played-face-down` via the private `cardFaceFields(gameCard)` helper in `src/port-tabletop/types.ts`. See [contract.md](contract.md). |
 
 ## Other Docs
 
 - [Architecture](architecture.md) - Data flow and technical details (Shuffler)
-- [History](history.md) - How the feature evolved (Shuffler)
 - [Interactions](interactions.md) - Dependencies and watch points (Shuffler)
-- [Files](files.md) - Every file involved (Shuffler)
 - [Tabletop](tabletop.md) - The Tabletop component's face knowledge
 - [Contract](contract.md) - How face appears in the event contract

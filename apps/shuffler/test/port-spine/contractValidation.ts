@@ -20,6 +20,7 @@ const validateEnvelopeSchema = ajv.compile(loadSchema("envelope.v1.json"));
 const payloadValidators: Record<string, ValidateFunction> = {
   "card.played:1": ajv.compile(loadSchema("payloads/card.played.v1.json")),
   "card.returned:1": ajv.compile(loadSchema("payloads/card.returned.v1.json")),
+  "card.discarded:1": ajv.compile(loadSchema("payloads/card.discarded.v1.json")),
 };
 
 /**
