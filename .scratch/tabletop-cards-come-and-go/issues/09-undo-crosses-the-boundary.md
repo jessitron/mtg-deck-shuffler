@@ -12,8 +12,7 @@ attachments stay behind, detached. Both undo kinds are informational and distinc
 other and from the opposite action — the log (and someday the Interpreter) should be able
 to tell "play was undone" from "discard was undone."
 
-**Blocked by:** 07 (poof-by-instanceId mechanism, best-effort Spine-send pattern), 08
-(discard must exist as its own kind before its undo can).
+**Blocked by:** 08 (discard must exist as its own kind before its undo can).
 
 These undo events should follow the same best-effort delivery as `card.played` and
 `card.returned`: sent to the Spine's event log (`sendCardPlayedToSpineBestEffort`-style,

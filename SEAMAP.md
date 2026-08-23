@@ -17,16 +17,9 @@ and the table; you adjudicate the game; an agent gradually learns to interpret t
 
 ## The Mountains
 
-The ladder — playable at all times, increasingly useful and fun. A strangler fig over
-Mural, not a rewrite.
+The ladder — playable at all times, increasingly useful and fun.
 
-1. **The Tabletop replaces Mural** ← _achieved (2026-08-11)_ — a synced tldraw canvas
-   where cards arrive from the Shuffler instead of the clipboard, with card shapes and
-   gestures (tap, counters, zone areas) that make common movements easy. Better than
-   Mural — more fragile, and worth it. The full parity list and the five maps that
-   climbed it: `apps/tabletop/notes/DESIGN-tabletop-replaces-mural.md`. Some of its maps
-   (e.g. table layout) still carry open tickets; they're fun follow-ons, not blockers,
-   and don't unwind the achievement.
+1. **Every mechanic is possible** ← this is a gradual ascent; every once in a while we add one. The basics are there, and we support everything that playing on Mural supported. I want every rule to be supported (while none are enforced). For instance: support tokens, both from Archidekt and paste-in, so that counters follow them. Weird rules like looking at an opponent's top card, without them seeing it. I'd like to support attaching cards, such as equipment, so that they move with the card like counters do
 2. **Spine Tells the Story** ← _active_ — when people play Magic in this app, the game gets
    recorded: every physical event a real game produces, from both the Shuffler and the
    Tabletop, crosses the Spine's one append-only log per table. That record is what
@@ -42,28 +35,11 @@ Mural, not a rewrite.
    narration panel showing what happened is part of how it shows its work.
 4. **Someday: it asks to play.**
 
-Spectator mode is a constraint on every mountain, not a mountain: anyone can join a
-table to look — public events, commentary, hand counts but never hands. That promise is
-about what the app _volunteers_ on public/shadow events — a shadow event simply
-shouldn't carry a card identity in its payload design — not about policing every
-boundary a payload crosses. Removing a boundary check (e.g. `let-gamecardindex-out`)
-doesn't touch it; the promise's owner is whoever designs the public/shadow payload
-shapes, not a guard standing at the door.
-
 ## Sea Monster
 
-It is time to deploy and test in production again. We implemented tabletop-sse-stream and fixed bugs in it.
+Someday we are gonna have to replace tldraw, since their hobby license application produces no response. Right now it's fine to run the tabletop on http, nobody cares (except that copy doesn't work).
 
-After the game is working for existing functionality again, we can deploy - currently prod is way behind. But we won't have our mountain yet.
-
-Then we can start on the shuffler SSE stream, there's a map for that.
-
-Then cards-come-and-go, which has been specced out, needs reworked considering the spine is in the middle now.
-
-That will get us to somewhere slightly better than today's production, because you'll be able to return cards from the shuffler. We can call that safe harbor.
-
-From there we can move forward on a few features (like "play face down"), but we'll need to get to tabletop persistence soon for stability.
-I am concerned that our event streams are not resilient yet.
+Tabletop has no persistence. Yikes. We'll get to that after Spine Tells the Story.
 
 ## Safe Harbor
 
@@ -76,10 +52,8 @@ A change is home when:
 
 ## Success looks like
 
-- Playing a real game with your sister feels natural, not fiddly — and the cards
-  arrive themselves.
-- The running narration is good company: "wait, what just happened?" has an answer.
-- The humans teach the AI in public, during play, at exactly the rate they enjoy.
+- Playing a real game with my sister feels natural, not fiddly
+- In-game narration helps people understand what's going on, and helps them learn to play
 - The code stays expressive of the domain — reading it teaches you the game.
 - When something breaks, Honeycomb shows you why.
 
@@ -105,6 +79,7 @@ A change is home when:
 
 ## Non-goals
 
+- Right now, it's plenty that this works for me and my family. It makes no attempt at security or scale.
 - Not a rules engine — the human adjudicates; consensus is expressed physically.
 - Not a deck builder — decks come from Archidekt/MTGJSON.
 - Not a voice-transport service — Discord carries the call.
@@ -127,5 +102,3 @@ every ticket names the Mountain it serves — or `overhead` for upkeep that clim
 or `none` with a reason. Safe Harbor is a **state**, not a Mountain, so it is never a value on
 that line. So there are no milestones to keep in sync — `grep -r 'Mountain: ' .scratch/` is the
 roll-up.
-
-There is no external tracker — see `CLAUDE.md` § Seamap.
