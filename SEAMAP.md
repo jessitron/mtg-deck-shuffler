@@ -9,11 +9,9 @@ to an agent that learns the game. Each major component (ship) has its own seamap
 
 The full vision: `notes/DESIGN-the-table-vision.md`. Vocabulary: `notes/GLOSSARY.md`.
 
-## North Star
+## Quest
 
-Play Magic together, remotely, at a table the system can see. The apps manage the deck
-and the table; you adjudicate the game; an agent gradually learns to interpret the play
-— and someday, to play.
+I want to play magic with my friends, remotely, using any deck. I want to do the playing, including adjudicating all rules, NOT have the app enforce them. I do want the app to learn the rules, and then help me follow what's going on, and eventually maybe suggest some triggers I forgot, and teach me more about how the game works.
 
 ## The Mountains
 
