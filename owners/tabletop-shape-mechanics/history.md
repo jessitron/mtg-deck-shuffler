@@ -1,5 +1,30 @@
 # History
 
+## Ticket 08 (tabletop-cards-come-and-go): discard becomes its own event, not a `card.played` with a graveyard `zoneHint` — no mechanics change (2026-08-23)
+
+`apps/tabletop/src/server/cardArrival.ts` was refactored to extract a shared
+`placeArrivedCard(tableName, envelope, payload, faceDown, resolvePosition)` helper — the
+dedup/seat-check/span-setup/`mtgCardShape()`-mint/`store.put` logic every card arrival needs —
+used by two exported entry points: `applyCardArrival` (unchanged behavior for
+`card.played`/`card.played-face-down`, `zoneHint` narrowed from `"stack" | "battlefield" |
+"graveyard"` to `"stack" | "battlefield"` only, both positioned via `stackCardPosition`) and a new
+`applyCardDiscard` (for the new `card.discarded` event, always positioned via
+`graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++)`, no `zoneHint` in that
+payload at all — routing is by event *kind* now, not a zone hint the payload no longer carries).
+`spineEventDispatch.ts` added a `CARD_DISCARD_EVENT_NAMES = Set(["card.discarded"])` branch calling
+`applyCardDiscard`, mirrored in `testSeedRoute.ts`'s `handleTestCardSeed` (dispatches to
+`applyCardDiscard` vs. `applyCardArrival` based on the posted envelope's `name`) and
+`contractValidation.ts` (registers `"card.discarded:1"` against the new
+`contracts/payloads/card.discarded.v1.json`).
+
+**No ShapeUtil hook, custom shape type, or client-side selection/drag mechanics changed.** This is
+pure server-side event routing and mint-*position* logic — which zone a card's `x`/`y` resolves to
+at arrival, not how a player's pointer interacts with it once it's there. Recorded here only
+because `cardArrival.ts` is the identity-minting seam every `MtgCardShapeUtil` hook's `props`
+depend on (see "Where a card shape comes from" in `architecture.md`), the same reason the
+2026-08-20 stack-cascade fix got a `history.md` entry despite being equally outside this owner's
+core charge. `files.md`'s `cardArrival.ts` entry rewritten for the split.
+
 ## Ticket 07 (shuffler-side-exits-tell-the-table): a second, server-side card-removal path — `applyCardRemoval` in `cardRemoval.ts` (2026-08-21)
 
 `card.returned` can now arrive from the *Shuffler* side too — the Return button, or a crafted
