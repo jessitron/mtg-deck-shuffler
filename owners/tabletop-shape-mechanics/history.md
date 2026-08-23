@@ -1,5 +1,29 @@
 # History
 
+## `zoneHint` deprecated fleet-wide — dropped from `CardPlayedPayload` entirely, no mechanics change (2026-08-23)
+
+Follow-on to the ticket 08 entry immediately below, same day. `contracts/payloads/card.played.v1.json`
+and `card.played-face-down.v1.json` now mark `zoneHint` `"deprecated": true` (still required on the
+wire — existing senders and test payloads are unaffected). `apps/tabletop/src/server/cardArrival.ts`
+stopped reading it at all: the `ZoneHint` type alias, the `zoneHint` field on `CardPlayedPayload`
+(making it identical to `CardArrivalPayloadCommon` — `CardPlayedPayload` is now just a type alias for
+that shared interface, same as `CardDiscardedPayload` already was), the destructure in
+`applyCardArrival`, and the `"zone.hint"` span attribute are all gone.
+
+**No placement-logic change — this confirms, rather than causes, an existing fact.**
+`placeArrivedCard`'s `resolvePosition` for `applyCardArrival` was already unconditionally returning
+`stackCardPosition(...)` regardless of `zoneHint`'s value (see the ticket 08 entry below and the
+2026-08-16 "every played card...arrives on the Stack" decision) — `zoneHint` was already inert for
+placement before this change, just still being read onto a span for observability. Deleting the
+dead read is a cleanup, not a behavior change: `applyCardArrival`'s only remaining position source is
+`entry.stackCardCount(owner)`, same as before.
+
+**Test payloads are unaffected.** `test/verification/helpers.ts`'s `placeCard`/`cardPlayed` and the
+specs that override `zoneHint: "battlefield"` (`verify-drag-identity.spec.ts`,
+`verify-zone-armed.spec.ts`) still send the field — the contract still requires it, deprecated or
+not — it's just now guaranteed-ignored server-side rather than read-then-ignored. `files.md`'s
+`cardArrival.ts` entry updated to describe the field as gone, not narrowed.
+
 ## Ticket 08 (tabletop-cards-come-and-go): discard becomes its own event, not a `card.played` with a graveyard `zoneHint` — no mechanics change (2026-08-23)
 
 `apps/tabletop/src/server/cardArrival.ts` was refactored to extract a shared

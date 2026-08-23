@@ -343,8 +343,8 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   pure `props.face` write now), builds the record via `tableFurniture.ts`'s `mtgCardShape()`. Two
   exported entry points call it with different position-resolvers: `applyCardArrival` (for
   `card.played`/`card.played-face-down`, positioned via `stackCardPosition` using
-  `entry.stackCardCount(owner)`, `zoneHint` now narrowed to `"stack" | "battlefield"` only — the
-  `"graveyard"` arm moved out) and the new `applyCardDiscard` (for `card.discarded`, always
+  `entry.stackCardCount(owner)` — unconditionally, every played card lands on the Stack) and the
+  new `applyCardDiscard` (for `card.discarded`, always
   positioned via `graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++)`, no
   `zoneHint` in that payload at all — routed by event kind, not a zone hint). **Since the library
   portal (2026-08-20), also threads `gameCardIndex` through from `envelope.payload.gameCardIndex`**
@@ -353,7 +353,12 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   `entry.stackCardCount(owner)` (`rooms.ts`, below) instead of incrementing the deleted
   `PlayerArea.stackCount`** — fixes a bug where a seat's cascade never stopped advancing even after
   every earlier Stack card had been dragged away. See `history.md`'s "Stack-arrival placement
-  stopped trusting a monotonic counter" entry. This file has no HTTP entry point of its own —
+  stopped trusting a monotonic counter" entry. **Since `zoneHint` deprecation (2026-08-23, same
+  day as ticket 08): `CardPlayedPayload`'s own `zoneHint` field, the `ZoneHint` type alias, and the
+  `"zone.hint"` span attribute are gone — `CardPlayedPayload` is now just a type alias for
+  `CardArrivalPayloadCommon`, same as `CardDiscardedPayload`.** Cleanup, not a behavior change:
+  `resolvePosition` for `applyCardArrival` was already ignoring the field's value. See `history.md`'s
+  "`zoneHint` deprecated fleet-wide" entry. This file has no HTTP entry point of its own —
   `card.played`/`card.discarded` reach it only through the Spine's SSE subscription.
   `applyCardArrival`/`applyCardDiscard` are called by `spineEventDispatch.ts`'s
   `dispatchSpineEvent` in production, and by `testSeedRoute.ts`'s `handleTestCardSeed` (a
