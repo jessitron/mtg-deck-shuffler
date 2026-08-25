@@ -182,6 +182,19 @@
   `fleet-is-observable`'s territory — consult that owner for changes to what gets announced or
   how; this owner only cares that the listener reads gesture results, never drives them.
 
+### Remote-arrival telemetry (`useCardArrivalSpans.ts`, 2026-08-25)
+- **Second store-level `store.listen()` consumer of this owner's gesture detection, and the first
+  scoped to `{source: "remote"}` rather than `{source: "user"}`.** `apps/tabletop/src/client/
+  useCardArrivalSpans.ts` (also `fleet-is-observable`'s territory) already listened for new
+  `mtg-card` shapes arriving; it now also watches `change.changes.updated` for an *existing*
+  `mtg-card`'s `x`/`y` changing as a result of a remote-sourced write (sync server or another
+  client's tab), emitting a `"card moved by remote change"` span — instrumentation for TODO.md's
+  "cards-jump-to-entry-position" bug, not a fix for it. Same watch-point-20 hazard as
+  `usePhysicsAnnouncements`, same fix shape: a 300ms per-shape-id debounce. **This owner's
+  detection logic is untouched** — same posture as the `usePhysicsAnnouncements` entry above, this
+  listener reads mutations this owner's hooks (and tldraw's own `Translating.ts`, for remote
+  peers) already produce. See watch point 20's new paragraph above and `history.md`.
+
 ### Counter attachment (`mtg-counter`, ticket 18, 2026-08-08)
 - A counter's attachment to a card IS tldraw parenting (`parentId`) — there is no attachment
   prop on either shape. So anything that reparents shapes (tldraw's own group/frame machinery,
@@ -685,6 +698,20 @@
     trusting a monotonic counter" entry for the full writeup and the bug this replaced
     (`PlayerArea.stackCount`, a monotonic per-seat counter that never noticed a card leaving the
     Stack).
+    **A third consumer, and the first keyed on `{source: "remote"}` rather than `{source:
+    "user"}` or a snapshot read (2026-08-25):** `apps/tabletop/src/client/useCardArrivalSpans.ts`
+    (`fleet-is-observable`'s territory, instrumenting TODO.md's "cards-jump-to-entry-position"
+    bug) extended its existing `store.listen(..., {source: "remote", scope: "document"})` to also
+    watch `change.changes.updated` for an existing `mtg-card`'s `x`/`y` changing, emitting a
+    diagnostic span. This confirms the fact generalizes to the `source: "remote"` scope, not just
+    `source: "user"` (`usePhysicsAnnouncements.ts`) — a *remote* drag (another client's tab, or the
+    sync server relaying it) replicates the same per-pointer-move write volume over `sync-core`, so
+    this listener needed the identical mitigation: a 300ms per-shape-id debounce (a
+    `Map<shapeId, {before, after, timer}>`, each new update for the same shape clearing the prior
+    timer and keeping the earliest `before` seen in the window), mirroring
+    `usePhysicsAnnouncements`' `GENERIC_SETTLE_MS` pattern rather than inventing a new one. **Any
+    future store-level listener on remote-sourced updates for a draggable shape type needs this
+    same per-shape-id debounce, exactly as the existing `source: "user"` case already required.**
 
 21. **Furniture must always be beneath everything — now structurally enforced via a separate
     index band, not just an accident of draw order or a per-move patch.** (2026-08-10.) Cards and
