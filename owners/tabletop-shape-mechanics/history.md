@@ -1,5 +1,33 @@
 # History
 
+## Remote-arrival telemetry watches existing-shape moves too — third `store.listen()` consumer of watch point 20's per-move-write fact, first at `{source: "remote"}` (2026-08-25)
+
+`apps/tabletop/src/client/useCardArrivalSpans.ts` (`fleet-is-observable`'s territory — telemetry
+wiring, not this owner's gesture detection) already listened for brand-new `mtg-card` shapes
+arriving via `store.listen(..., {source: "remote", scope: "document"})`. Extended to also watch
+`change.changes.updated` for an *existing* `mtg-card`'s `x`/`y` changing, emitting a new
+`"card moved by remote change"` span (`card.instance_id`/`scryfall_id`/`name`, `shape.id`,
+`position.before.x/y`, `position.after.x/y`) — purely diagnostic instrumentation for TODO.md's
+"cards-jump-to-entry-position" bug (confirmed not undo/redo, already instrumented separately in
+`TablePage.tsx`; confirmed no server-side code path in `cardArrival.ts` overwrites an existing
+card's `x`/`y`, since every server write there is a fresh mint gated by `instanceId` dedup) — not
+a fix for it. The root cause of the actual jump is still unknown.
+
+**No mechanics changed — this is watch point 20's per-move-write fact reaching a third kind of
+consumer.** `Translating.ts` writes a dragged shape's in-flight `x`/`y` to the document store on
+every raw pointer-move, and that volume replicates over `sync-core` to every other client's copy
+of the store — so a remote-sourced `store.listen()` sees the identical per-frame noise a
+local-drag `store.listen()` already does (watch point 20, `usePhysicsAnnouncements.ts`'s
+`{source: "user"}` case) and a server-side snapshot read already does
+(`RoomEntry.stackCardCount`). Fixed the same way: a 300ms per-shape-id debounce — a
+`Map<shapeId, {before, after, timer}>` where each new update for the same shape clears the prior
+timer and keeps the earliest `before` seen in the window, so a remote drag's per-frame writes
+collapse into one span per completed move — mirroring `usePhysicsAnnouncements`' `GENERIC_SETTLE_MS`
+pattern rather than inventing a new one.
+
+Full detail in `interactions.md` watch point 20's new paragraph and the new "Remote-arrival
+telemetry" subsection under "Depended On By."
+
 ## `zoneHint` deprecated fleet-wide — dropped from `CardPlayedPayload` entirely, no mechanics change (2026-08-23)
 
 Follow-on to the ticket 08 entry immediately below, same day. `contracts/payloads/card.played.v1.json`
