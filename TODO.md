@@ -8,7 +8,7 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
 
 ## Next
 
-- still happening post-tldraw upgrade: weird bug: `cards-jump-to-entry-position` occasionally, for no discernable reason, a bunch of Evelyn's cards return to the stack as if they were just played 😭. Ruled out: undo/redo (already spanned separately, doesn't fire), and every server-side write of a card's x/y (`cardArrival.ts` only mints new shapes, gated by instanceId dedup — no code path overwrites an existing one). Added telemetry for the one remaining gap: `useCardArrivalSpans.ts` now emits a "card moved by remote change" span whenever an existing card shape's position changes via a remote-sourced update (debounced per shape so a real drag doesn't spam it). Still waiting for it to fire next time the bug happens — that'll tell us who/what actually moved the card.
+- still happening post-tldraw upgrade: weird bug: `cards-jump-to-entry-position` occasionally, for no discernable reason, a bunch of Evelyn's cards return to the stack as if they were just played 😭. Full investigation log, ruled-out causes, and current instrumentation: `apps/tabletop/notes/RESEARCH-cards-jump-to-entry-position.md`.
 
 - bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation
 
