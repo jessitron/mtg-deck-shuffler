@@ -155,3 +155,41 @@ and I want to drop a card in between C and D, then the drop zone between them is
     would erase `.pushable-flat`'s two-layer press bevel on every focused button. Taking it means
     re-declaring the bevel inside `:focus-visible` for `.pushable-flat` and `.pushable-flat.pushable-dark`.
     See `owners/shuffler-looks-like-itself/open-choices.md` choice 5.
+
+- [ ] `spine-puma-thread-ceiling` The Spine can only hold ~4 SSE streams before starving itself
+  - `config/puma.rb` sets no `threads`; Puma 8/MRI defaults to `max_threads: 5`. Each open SSE
+    stream pins one thread for its whole life (`SseStream#each` blocks on `@queue.pop`).
+  - One 4-player table = 4 Shuffler subscriptions + 1 Tabletop subscription = 5. At that point
+    `GET /spine/up` has no thread, which is very likely the 470 readiness failures in
+    `INCIDENT-sse-shutdown-crashloop-2026-08-26.md`. Thread starvation was the *trigger*; the
+    shutdown hang was the amplifier that turned it into a crash loop.
+  - Set `threads` explicitly, and cap concurrent streams with a visible `503` rather than letting
+    overflow show up as a health-probe blip.
+  - Full reasoning: `services/spine/notes/ANALYSIS-connection-lifecycle-2026-08-26.md`.
+
+- [ ] `tabletop-room-registry-never-freed` One leaked Spine stream per table, forever
+  - `getOrCreateRoom`'s module-level `registry` is never pruned; `onSessionRemoved` logs
+    `room emptied` and does nothing. Streams (and `TLSocketRoom` documents) accumulate for every
+    table name visited since the last Tabletop restart.
+  - The Shuffler already has the pattern to copy: `removeBrowserStream` closes the Spine
+    subscription when the last tab goes, and re-opening is idempotent. Wants a short grace delay
+    so a page refresh doesn't churn.
+
+- [ ] `sse-streams-have-no-timeout` Nothing bounds a connection's lifetime at any layer
+  - The Spine's heartbeat keeps streams alive but never expires them; a table is never "over".
+  - The Shuffler's browser SSE route sends `: connected` once and then never writes again, so a
+    slept laptop or a tab that dies without a clean FIN may never fire `req.on("close")`.
+  - Cheapest ordering: heartbeat the Shuffler's browser route; close Tabletop subs on room-empty;
+    then a Spine-side max stream age (both subscribers already reconnect with backoff, so this is
+    nearly free and doesn't depend on any other ship behaving).
+
+- [ ] `spine-open-stream-count-visibility` We can't see how many streams are open
+  - `OTEL_METRICS_EXPORTER: "none"`; the Spine emits no metrics. And the stream's `GET` span only
+    exports when the stream *ends* (Rack::Events `on_finish`), so open streams are invisible in
+    Honeycomb by construction — the incident was diagnosed via the Tabletop's `ECONNREFUSED`.
+  - Cheapest first step, no metrics pipeline needed: put `spine.open_streams` as an attribute on
+    every request span the Spine already emits. Consult `owners/fleet-is-observable/` first.
+
+- [ ] `table-broadcaster-key-leak` `@subscribers` keys are never pruned
+  - `publish` reads through a `Hash.new { |h, k| h[k] = [] }`, creating a permanent entry per table
+    id; `unsubscribe` removes the queue but leaves the empty array. Small, but unbounded.
