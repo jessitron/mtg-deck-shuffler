@@ -1,3 +1,14 @@
+# Every open SSE stream (`GET /tables/:table_id/events/stream`) pins one Puma
+# thread for its whole life — `SseStream#each` blocks on `Queue#pop`, a real
+# thread wait, not an event loop. Puma's undeclared default (`max_threads: 5`)
+# meant a single 4-player table (4 Shuffler subscriptions + 1 Tabletop
+# subscription = 5 streams) could fill every thread, leaving none for the
+# readiness probe — which is what actually produced the
+# `ECONNREFUSED` storm in `notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md`;
+# the shutdown hang below was an amplifier, not the trigger. See
+# `notes/ANALYSIS-connection-lifecycle-2026-08-26.md` for the full reasoning.
+threads 8, 64
+
 # Despite its name, Puma fires `after_stopped` right when it starts graceful
 # shutdown (before it blocks waiting for in-flight requests to finish) — see
 # Puma::Launcher#do_graceful_stop, which calls `@events.fire_after_stopped!`

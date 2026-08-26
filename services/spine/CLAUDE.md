@@ -47,7 +47,19 @@ a quiet-but-healthy table is indistinguishable from a hung connection to anyone 
 `EventSource` (the admin page, below) and the Tabletop's hand-rolled parser
 (`apps/tabletop/src/server/spineSubscriber.ts`) already ignore comment lines, so this needed no
 client-side parsing change — only the Tabletop's fetch timeouts, which had been disabled outright
-before heartbeats existed, went back to being bounded. **On shutdown, `config/puma.rb`'s `after_stopped` hook closes every open SSE
+before heartbeats existed, went back to being bounded. **Every open SSE stream pins one Puma thread for its whole life** (`SseStream#each`
+blocks on `Queue#pop`, a real thread wait, not an event loop), so `config/puma.rb`
+sets `threads 8, 64` explicitly — Puma 8/MRI's undeclared default is
+`max_threads: 5`, which a single 4-player table (4 Shuffler subscriptions + 1
+Tabletop subscription) already reaches, starving `GET /spine/up` of a thread to
+run on. That thread starvation, not the shutdown hang below, was the actual
+trigger for the `ECONNREFUSED` storm in
+`notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md` (readiness failures pull the
+pod's endpoint, which is what produces `ECONNREFUSED` downstream). See
+`notes/ANALYSIS-connection-lifecycle-2026-08-26.md`. The pool is raised, not
+capped — nothing yet refuses stream #N+1 (`spine-stream-cap-503` in `TODO.md`).
+
+**On shutdown, `config/puma.rb`'s `after_stopped` hook closes every open SSE
 stream before Puma waits for in-flight requests to finish** — without it, a
 held-open stream never finishes on its own, Puma's graceful shutdown hangs
 forever, and Kubernetes eventually `SIGKILL`s the pod (see
