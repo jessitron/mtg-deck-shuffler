@@ -180,13 +180,6 @@ and I want to drop a card in between C and D, then the drop zone between them is
     then a Spine-side max stream age (both subscribers already reconnect with backoff, so this is
     nearly free and doesn't depend on any other ship behaving).
 
-- [ ] `spine-open-stream-count-visibility` We can't see how many streams are open
-  - `OTEL_METRICS_EXPORTER: "none"`; the Spine emits no metrics. And the stream's `GET` span only
-    exports when the stream *ends* (Rack::Events `on_finish`), so open streams are invisible in
-    Honeycomb by construction — the incident was diagnosed via the Tabletop's `ECONNREFUSED`.
-  - Cheapest first step, no metrics pipeline needed: put `spine.open_streams` as an attribute on
-    every request span the Spine already emits. Consult `owners/fleet-is-observable/` first.
-
 - [ ] `table-broadcaster-key-leak` `@subscribers` keys are never pruned
   - `publish` reads through a `Hash.new { |h, k| h[k] = [] }`, creating a permanent entry per table
     id; `unsubscribe` removes the queue but leaves the empty array. Small, but unbounded.
