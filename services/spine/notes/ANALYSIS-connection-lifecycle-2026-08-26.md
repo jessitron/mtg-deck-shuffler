@@ -57,9 +57,8 @@ raise the ceiling.
 
 - Set `threads` explicitly in `config/puma.rb` — a stream-holding server should
   size its pool to `expected_streams + headroom_for_normal_requests`, not accept
-  a default tuned for short requests. Something like `threads 8, 64` is cheap
-  (Ruby threads blocked on a queue cost memory, not CPU) and buys roughly a
-  dozen concurrent tables.
+  a default tuned for short requests. Something like `threads 8, 64` is cheap;
+  see the measurement below.
 - **Bound it anyway.** Whatever the number is, it is finite, and nothing today
   refuses stream #N+1 — it just quietly starves the health probe. Better: cap
   concurrent streams in `TableBroadcaster`, and return `503` past the cap so the
@@ -67,6 +66,31 @@ raise the ceiling.
 - Consider giving the probes a route that cannot be starved, or accept that
   "readiness fails" is a *legitimate* signal of stream saturation and alert on it
   as such.
+
+### Is raising the pool reckless? Measured: no
+
+MRI threads are 1:1 native pthreads, and `RubyVM::DEFAULT_PARAMS` reserves 1 MB
+of VM stack plus 1 MB of machine stack each — ~2 MB of *virtual* address space
+per thread. That reservation is what makes "Ruby threads are heavy" sound true.
+Resident cost is not the same number. Measured on Ruby 3.4.9 with 200 threads
+parked on `Queue#pop` (exactly what `SseStream#each` does):
+
+- **~72 KB RSS per idle thread** (14.4 MB total for 200).
+- **No measurable CPU cost** — a 1M-iteration busy loop took 26.7 ms with 200
+  threads parked versus 32.3 ms with none, i.e. noise. A thread blocked on
+  `Queue#pop` has released the GVL; it's parked in a futex, not spinning.
+
+So `threads 8, 64` costs roughly 4.6 MB resident against the pod's 512 Mi limit.
+**The ceiling is an accounting limit, not a resource limit**: `max_threads` is a
+count, defaulted for short request/response work, and nothing about the machine
+objects to a much larger one. We simply never told Puma this server holds
+connections open.
+
+What stays true at any pool size is that a thread is a *linear* per-connection
+cost, so an MRI server holding streams always has some hard N — Roda/Puma has no
+evented path that would change that. Which is why Findings 2 and 3 matter more
+than the pool number: they keep N proportional to *live* tables rather than to
+every table ever visited.
 
 ## Finding 2 — the Tabletop leaks a stream per table, forever
 
