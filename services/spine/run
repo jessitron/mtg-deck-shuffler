@@ -33,4 +33,4 @@ APP_PORT=${port_override:-${PORT}}
   done
 ) &
 
-bundle exec puma -p "$APP_PORT"
+bundle exec puma -C config/puma.rb -p "$APP_PORT"

@@ -45,4 +45,4 @@ EXPOSE 4600
 
 # config/db.rb creates the SQLite schema (create_table?, idempotent) against
 # SPINE_DB_PATH on the mounted PVC the first time it boots against an empty volume.
-CMD ["bash", "-c", "bundle exec puma -p ${PORT:-4600}"]
+CMD ["bash", "-c", "bundle exec puma -C config/puma.rb -p ${PORT:-4600}"]
