@@ -4,11 +4,13 @@ Scope: `apps/tabletop`, tldraw `5.2.5` (the pinned version, confirmed via
 `node_modules/tldraw/package.json` at the fleet root — this monorepo has one
 `node_modules` for all workspaces).
 
+A Canvas about one occurrence of this: https://ui.honeycomb.io/modernity/v2/canvas/investigations/hcaiv_01m0zp21z0xp3d6jnq0bajcsxv
+
 **Bottom line up front:** this is a real, maintainer-acknowledged tldraw bug
 (GitHub issue [tldraw/tldraw#5613](https://github.com/tldraw/tldraw/issues/5613)).
-It was *partially* fixed by a merged PR, and **the app's installed version
+It was _partially_ fixed by a merged PR, and **the app's installed version
 (5.2.5) already contains that partial fix** — so there is nothing to gain by
-upgrading. The specific case this app hits (a *different* shape already
+upgrading. The specific case this app hits (a _different_ shape already
 selected, not "nothing selected") is the exact residual gap the fix's own
 author flagged as unaddressed, and it is **still unaddressed in the latest
 released version, `v5.3.0`** (published 2026-08-05). There is no config flag,
@@ -46,18 +48,18 @@ from `onPointerMove` once the drag threshold is crossed (or from
 ```ts
 // PointingShape.ts:251-254
 if (!this.didSelectOnEnter && !this.editor.getSelectedShapeIds().length) {
-    this.editor.markHistoryStoppingPoint('selecting shape')
-    this.editor.setSelectedShapes([this.hitShapeForPointerUp.id])
+  this.editor.markHistoryStoppingPoint("selecting shape");
+  this.editor.setSelectedShapes([this.hitShapeForPointerUp.id]);
 }
 ```
 
 This only force-selects the actually-hit shape when the current selection is
 **completely empty**. tldraw leaves the most-recently-interacted-with shape
 selected after any gesture ends (`onClick`'s own `updateShapes` path doesn't
-clear it either; see `PointingShape.onPointerUp:93-101`), so on the *next*
+clear it either; see `PointingShape.onPointerUp:93-101`), so on the _next_
 interaction the selection is non-empty — the guard is `false` — and
-`Translating` (the child state entered next) moves whatever is *currently
-selected*, not the shape the pointer actually landed on.
+`Translating` (the child state entered next) moves whatever is _currently
+selected_, not the shape the pointer actually landed on.
 
 This is exactly what the five patch sites work around, by calling
 `this.editor.setSelectedShapes([])` on every gesture-settle they can hook:
@@ -88,7 +90,7 @@ Maintainer `steveruizok` replied same day:
 > nothing OR should be selected when the user long presses or starts to
 > drag."
 
-That description is the precise diagnosis: *some* signal (a long-press or a
+That description is the precise diagnosis: _some_ signal (a long-press or a
 drag-start) should force a reselect of the actually-hit shape, regardless of
 what else happens to be selected. The issue was inactive, auto-marked stale
 by a GitHub Action on 2025-10-01, and **auto-closed** on 2025-11-01 with no
@@ -99,7 +101,7 @@ point.
 
 [tldraw/tldraw#7936 — "fix(select): allow dragging shapes that have an onClick handler"](https://github.com/tldraw/tldraw/pull/7936),
 `Closes #5613`, **merged 2026-03-10**. Its diff to `PointingShape.ts` is
-exactly the `startTranslating` guard quoted above — it *added* that whole
+exactly the `startTranslating` guard quoted above — it _added_ that whole
 `if` block, which did not exist before:
 
 ```diff
@@ -118,16 +120,16 @@ exactly the `startTranslating` guard quoted above — it *added* that whole
      this.parent.transition('translating', info)
 ```
 
-Before this PR, dragging an *unselected* `onClick` shape (nothing else
+Before this PR, dragging an _unselected_ `onClick` shape (nothing else
 selected either) apparently did nothing useful — `Translating` had no
 selection to move. The PR's fix is narrow and correct for that specific
 case: "nothing was selected." It does **not** address `steveruizok`'s own
-broader diagnosis about drags started while something *else* is selected —
+broader diagnosis about drags started while something _else_ is selected —
 which is exactly the case this app's five workarounds paper over.
 
 **Confirmed via version dates that the fix is already in what's installed:**
 `v5.2.0` released 2026-07-01, `v5.2.5` (installed) released 2026-07-15, both
-*after* the 2026-03-10 merge of #7936 — so `MtgCardShapeUtil`'s installed
+_after_ the 2026-03-10 merge of #7936 — so `MtgCardShapeUtil`'s installed
 tldraw already contains this fix. There is nothing to gain from upgrading on
 this front.
 
@@ -166,7 +168,7 @@ There is **no config option** on `ShapeUtil`, `Editor`, or `<Tldraw>` (e.g. no
 ## 4. Is there a more central seam than patching every shape type?
 
 **Partially, yes — but it's a monkey-patch, not an exposed API.** tldraw's
-own official docs demonstrate exactly this technique for a *different* piece
+own official docs demonstrate exactly this technique for a _different_ piece
 of `SelectTool`'s behavior, which means it's a sanctioned pattern rather than
 reaching into internals nobody expects you to touch:
 
@@ -175,9 +177,9 @@ overrides `SelectTool`'s stock double-click-creates-text-shape behavior by,
 inside `onMount`, doing:
 
 ```ts
-const selectIdleState = editor.getStateDescendant<IdleStateNode>('select.idle')
+const selectIdleState = editor.getStateDescendant<IdleStateNode>("select.idle");
 selectIdleState.handleDoubleClickOnCanvas =
-    customDoubleClickOnCanvasHandler.bind(selectIdleState)
+  customDoubleClickOnCanvasHandler.bind(selectIdleState);
 ```
 
 `Editor.getStateDescendant(path)` walks the tool state chart by dotted path
@@ -212,14 +214,14 @@ most central seam I found. Caveats worth weighing before adopting it:
   silently (no deprecation, no semver signal — it's not public API). The
   five-`onTranslateEnd` approach only touches genuinely-documented
   `ShapeUtil` hooks, which is more upgrade-safe even though it's duplicated.
-- The *official* example only patches a public method (`handleDoubleClickOnCanvas`)
+- The _official_ example only patches a public method (`handleDoubleClickOnCanvas`)
   on `select.idle`; patching a `private`-annotated method one level deeper
   (`select.pointing_shape.startTranslating`) is a step further from what
   tldraw's own docs actually demonstrate, even though the mechanism
   (`getStateDescendant` + method replacement) is the same.
 - `getStateDescendant` itself is public, documented API on `Editor`
-  ([reference](https://tldraw.dev/sdk-features/editor)) — so the *seam* is
-  sanctioned even if the *specific method* being patched isn't.
+  ([reference](https://tldraw.dev/sdk-features/editor)) — so the _seam_ is
+  sanctioned even if the _specific method_ being patched isn't.
 
 ## A gap the current workaround can't close (matches Jess's "other circumstances")
 
@@ -229,7 +231,7 @@ explains the "selecting an image then a card" report:
 
 All five patches clear selection **after a completed drag** (`onTranslateEnd`
 only fires once a shape has actually been translated). But the buggy guard
-in `startTranslating` is checked the moment a *drag starts* on a *different*
+in `startTranslating` is checked the moment a _drag starts_ on a _different_
 shape — and a shape can become "selected" without ever being dragged, via a
 plain click. Trace:
 
@@ -262,8 +264,8 @@ inside a translate).
   residual case. Upgrading tldraw would not help today.
 - The app's current five-site `onTranslateEnd`-clears-selection workaround
   is, as far as this research found, the best mitigation available for the
-  "stale selection carries into the next *drag*" case — but it has a
-  confirmed gap for "stale selection from a plain *click*, then an
+  "stale selection carries into the next _drag_" case — but it has a
+  confirmed gap for "stale selection from a plain _click_, then an
   immediate drag of something else," which the five sites cannot close by
   adding a sixth `onTranslateEnd` anywhere.
 - A more central (but less officially-sanctioned) seam exists:
