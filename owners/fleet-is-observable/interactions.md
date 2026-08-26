@@ -359,6 +359,25 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `apps/shuffler/src/shutdownHooks.ts` is the reference shape: bound the drain with a
   `Promise.race` against an `unref()`'d timer, and guard idempotency so a second signal doesn't
   fire twice. Both ships have their own copy — a verbatim port, not a shared module.
+  **The Spine's version of this problem is Puma, not a hand-rolled Node handler, and it has its
+  own gotcha**: `services/spine/config/puma.rb`'s `after_stopped` hook (wired via `-C
+  config/puma.rb` on both `services/spine/run` and the `Dockerfile`'s `CMD` — keep the two in
+  sync) closes every open SSE stream (`TableBroadcaster#close_all`,
+  `services/spine/lib/table_broadcaster.rb`) so Puma's graceful shutdown doesn't hang forever on
+  a held-open stream (Kubernetes then `SIGKILL`s the pod once `terminationGracePeriodSeconds`
+  expires — the crash loop documented in
+  `services/spine/notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md`). Despite the name,
+  **`after_stopped` fires at the *start* of graceful shutdown**, before Puma waits on in-flight
+  requests (`Puma::Launcher#do_graceful_stop` fires it before `@runner.stop_blocked`) — the
+  right hook for this, but a misleading one to guess at from the name alone. **The hook body runs
+  inside Ruby's actual SIGTERM trap** (Puma traps SIGTERM directly to `do_graceful_stop`, not on
+  a separate thread), where `Mutex#synchronize` is illegal ("can't be called from trap context")
+  — calling `close_all` directly crashed Puma outright; the fix wraps the call in `Thread.new`.
+  **This class of bug does not reproduce in unit tests** — it only shows up inside Puma's real
+  signal trap, so it was caught only by starting `bundle exec puma -C config/puma.rb` for real,
+  opening an SSE stream, and sending it `SIGTERM`. Any future Ruby-service shutdown hook that
+  touches a mutex (or anything else trap-context forbids) should verify the same way, not trust
+  green tests.
 - **Adding a Node-side streaming consumer that continues a trace from a body-embedded
   `traceparent`**: `apps/tabletop/src/server/spineEventDispatch.ts`'s `dispatchSpineEvent` is now
   the precedent — `propagation.extract(ROOT_CONTEXT, { traceparent })` then `context.with(parentContext,
