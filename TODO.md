@@ -156,15 +156,12 @@ and I want to drop a card in between C and D, then the drop zone between them is
     re-declaring the bevel inside `:focus-visible` for `.pushable-flat` and `.pushable-flat.pushable-dark`.
     See `owners/shuffler-looks-like-itself/open-choices.md` choice 5.
 
-- [ ] `spine-puma-thread-ceiling` The Spine can only hold ~4 SSE streams before starving itself
-  - `config/puma.rb` sets no `threads`; Puma 8/MRI defaults to `max_threads: 5`. Each open SSE
-    stream pins one thread for its whole life (`SseStream#each` blocks on `@queue.pop`).
-  - One 4-player table = 4 Shuffler subscriptions + 1 Tabletop subscription = 5. At that point
-    `GET /spine/up` has no thread, which is very likely the 470 readiness failures in
-    `INCIDENT-sse-shutdown-crashloop-2026-08-26.md`. Thread starvation was the *trigger*; the
-    shutdown hang was the amplifier that turned it into a crash loop.
-  - Set `threads` explicitly, and cap concurrent streams with a visible `503` rather than letting
-    overflow show up as a health-probe blip.
+- [ ] `spine-stream-cap-503` Nothing refuses stream #N+1 with a visible error
+  - `config/puma.rb` now sets `threads 8, 64` (was an undeclared default of 5, which is what
+    actually starved the readiness probe and caused the ECONNREFUSED storm in
+    `INCIDENT-sse-shutdown-crashloop-2026-08-26.md`). That raises the ceiling; it doesn't remove
+    it. Cap concurrent streams in `TableBroadcaster` and return `503` past the cap, so saturation
+    is visible and attributable instead of appearing as a readiness blip.
   - Full reasoning: `services/spine/notes/ANALYSIS-connection-lifecycle-2026-08-26.md`.
 
 - [ ] `tabletop-room-registry-never-freed` One leaked Spine stream per table, forever
