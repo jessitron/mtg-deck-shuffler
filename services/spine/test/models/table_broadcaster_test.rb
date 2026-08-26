@@ -39,4 +39,14 @@ class TableBroadcasterTest < Minitest::Test
 
     assert queue.empty?
   end
+
+  def test_close_all_reaches_every_subscriber_across_every_table
+    first_table = @broadcaster.subscribe("table-1")
+    second_table = @broadcaster.subscribe("table-2")
+
+    @broadcaster.close_all("shutting down")
+
+    assert_equal "shutting down", first_table.pop
+    assert_equal "shutting down", second_table.pop
+  end
 end

@@ -19,6 +19,13 @@ module Spine
       listeners = @mutex.synchronize { @subscribers[table_id].dup }
       listeners.each { |queue| queue << message }
     end
+
+    # Pushes message to every open subscriber across every table, so a single
+    # server-shutdown signal can unblock every held-open SSE stream at once.
+    def close_all(message)
+      listeners = @mutex.synchronize { @subscribers.values.flatten }
+      listeners.each { |queue| queue << message }
+    end
   end
 
   def self.broadcaster

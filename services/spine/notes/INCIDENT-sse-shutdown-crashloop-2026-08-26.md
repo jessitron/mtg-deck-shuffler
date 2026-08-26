@@ -69,16 +69,35 @@ seat-join → furniture-draw path itself is fine.
 - Not corrupted or missing `seat.joined` delivery — the events that did land
   were applied correctly.
 
-## Suggested fix (not yet implemented)
+## Fix implemented
 
-Make the Spine actually close open SSE streams when it receives a shutdown
-signal, e.g. a shutdown hook in `app.rb` that pushes `SseStream::CLOSE`
-through `Spine.broadcaster` to every open subscriber so Puma's graceful
-shutdown can actually complete before the grace period expires. Shortening
-`terminationGracePeriodSeconds` alone would only paper over the hang, not fix
-it.
+`config/puma.rb` (new) registers an `after_stopped` hook. Despite the name,
+Puma fires this right when graceful shutdown *starts* — `Launcher#do_graceful_stop`
+calls `@events.fire_after_stopped!` before `@runner.stop_blocked`, so it's the
+right moment to close every stream before Puma starts waiting. The hook pushes
+`SseStream::CLOSE` through a new `TableBroadcaster#close_all`, which reaches
+every subscriber on every table (not just one), unblocking each `SseStream#each`
+loop so its response finishes and Puma's graceful wait has nothing left to wait
+for.
+
+**Gotcha, caught by manually sending SIGTERM to a running Puma before trusting
+this:** the hook body runs *inside Ruby's SIGTERM signal trap itself* —
+`Launcher#setup_signals` traps `SIGTERM` directly to `do_graceful_stop`, not on
+a separate thread. Ruby forbids `Mutex#synchronize` from trap context
+(`ThreadError: can't be called from trap context`), and `close_all` needs one
+to read `@subscribers` safely — calling it directly crashed Puma outright
+instead of shutting down cleanly. The fix wraps the call in `Thread.new`, which
+*is* permitted from trap context; the spawned thread runs outside the trap and
+can take the mutex normally. Unit tests alone would not have caught this — the
+crash only happens when Puma's own SIGTERM trap actually invokes the hook — so
+this was verified by starting a real `bundle exec puma -C config/puma.rb`,
+opening an SSE stream, sending `SIGTERM`, and confirming both a clean exit and
+a clean log (no trap-context exception).
+
+Both `run` (local) and `Dockerfile`'s `CMD` (prod) now pass `-C config/puma.rb`
+to `bundle exec puma`.
 
 ## Status
 
-Diagnosed, not yet fixed. Jess to decide whether to implement the shutdown
-hook now or later.
+Fixed, verified locally (unit tests + manual SIGTERM against a running
+instance). Not yet deployed to prod — run `./deploy.sh` when ready.

@@ -38,6 +38,21 @@ class SseStreamTest < Minitest::Test
     thread&.join(1)
   end
 
+  def test_broadcaster_close_all_ends_the_stream
+    stream = Spine::SseStream.new(@table_id, heartbeat_interval_seconds: 5)
+    frames = Queue.new
+    thread = Thread.new { stream.each { |frame| frames << frame } }
+    frames.pop(timeout: 1) # the immediate heartbeat
+
+    Spine.broadcaster.close_all(Spine::SseStream::CLOSE)
+
+    thread.join(1)
+    refute thread.alive?, "each should return once every stream is told to close"
+  ensure
+    stream&.close
+    thread&.join(1)
+  end
+
   private
 
   def collect_frames(stream, count:)

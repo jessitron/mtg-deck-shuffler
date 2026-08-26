@@ -47,7 +47,20 @@ a quiet-but-healthy table is indistinguishable from a hung connection to anyone 
 `EventSource` (the admin page, below) and the Tabletop's hand-rolled parser
 (`apps/tabletop/src/server/spineSubscriber.ts`) already ignore comment lines, so this needed no
 client-side parsing change — only the Tabletop's fetch timeouts, which had been disabled outright
-before heartbeats existed, went back to being bounded. `GET /admin/tables` and
+before heartbeats existed, went back to being bounded. **On shutdown, `config/puma.rb`'s `after_stopped` hook closes every open SSE
+stream before Puma waits for in-flight requests to finish** — without it, a
+held-open stream never finishes on its own, Puma's graceful shutdown hangs
+forever, and Kubernetes eventually `SIGKILL`s the pod (see
+`notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md`). The hook runs inside
+Puma's SIGTERM trap itself, where `Mutex#synchronize` is illegal, so it defers
+the actual `TableBroadcaster#close_all` call to a `Thread.new` rather than
+calling it directly. Both `run` and `Dockerfile`'s `CMD` pass
+`-C config/puma.rb` to `bundle exec puma` — keep both in sync if this changes.
+A change here can't be trusted from unit tests alone (the crash only
+reproduces inside Puma's real signal trap); verify by starting the app for
+real, opening an SSE stream, and sending it `SIGTERM`.
+
+`GET /admin/tables` and
 `GET /admin/tables/:id` are the developer's window into the log: plain ERB views
 (`views/admin/tables/*.html.erb`, rendered by `lib/admin_view.rb` — no Tilt/Rails
 render plugin, just `ERB.new(...).result(binding)`), no framework helpers. The show
