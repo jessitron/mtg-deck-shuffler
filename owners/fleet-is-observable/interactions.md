@@ -131,7 +131,15 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   free. Don't reintroduce it, and don't let its absence read as license to be cautious.
 - **Adding a span type to a high-volume emitter**: ask "what would I learn from this span?", never
   "what does it cost?". If nothing, by construction, roll it into a count attribute on the span
-  that already exists.
+  that already exists. `services/spine/app.rb`'s `spine.open_streams` attribute (stamped on every
+  request span via `Spine.broadcaster.open_stream_count`) is the worked example: rather than a new
+  metric or span, the Spine's already-open-stream count rides the request span that already exists
+  for every hit.
+- **`services/spine/lib/table_broadcaster.rb`'s `TableBroadcaster`**: `open_stream_count` (sums
+  subscriber-queue sizes across all tables) shares the one `@mutex` with `subscribe`/`unsubscribe`/
+  `close_all` — it's read-only, so it can't deadlock against them, but any future method added to
+  this class should keep using that same mutex rather than introducing a second lock around
+  `@subscribers`.
 - **Deciding whether a trace is "too big"**: ~10,000 spans is where a waterfall gets hard to read;
   ~1,000 is comfortable. That's a usability ceiling, unaffected by ingestion cost.
 - **Lowering `EXPECT_THRESHOLD_MS` in `otelReporter.ts`**: owner's call is keep it at 100ms. Lower
