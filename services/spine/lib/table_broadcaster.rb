@@ -26,6 +26,10 @@ module Spine
       listeners = @mutex.synchronize { @subscribers.values.flatten }
       listeners.each { |queue| queue << message }
     end
+
+    def open_stream_count
+      @mutex.synchronize { @subscribers.values.sum(&:size) }
+    end
   end
 
   def self.broadcaster

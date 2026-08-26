@@ -40,6 +40,23 @@ class TableBroadcasterTest < Minitest::Test
     assert queue.empty?
   end
 
+  def test_open_stream_count_counts_subscribers_across_all_tables
+    assert_equal 0, @broadcaster.open_stream_count
+
+    @broadcaster.subscribe("table-1")
+    @broadcaster.subscribe("table-1")
+    @broadcaster.subscribe("table-2")
+
+    assert_equal 3, @broadcaster.open_stream_count
+  end
+
+  def test_open_stream_count_drops_after_unsubscribe
+    queue = @broadcaster.subscribe("table-1")
+    @broadcaster.unsubscribe("table-1", queue)
+
+    assert_equal 0, @broadcaster.open_stream_count
+  end
+
   def test_close_all_reaches_every_subscriber_across_every_table
     first_table = @broadcaster.subscribe("table-1")
     second_table = @broadcaster.subscribe("table-2")

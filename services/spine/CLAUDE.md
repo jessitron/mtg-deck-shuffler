@@ -155,6 +155,14 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
 
 - **Sampling**: `KeepItDownSampler` keeps 1% of production `/spine/up` probes and 100% of
   everything else.
+- **Open SSE stream count is a span attribute, not a metric.** `OTEL_METRICS_EXPORTER` is
+  unset (`"none"`), and the stream's own request span only exports when the stream *ends*
+  (Rack::Events `on_finish`), so open streams were invisible in Honeycomb by construction —
+  the `ECONNREFUSED` incident (`notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md`) had to
+  be diagnosed from the Tabletop's side instead. `app.rb`'s `route do |r|` block now stamps
+  `spine.open_streams` (from `TableBroadcaster#open_stream_count`) on every request span
+  before dispatch, so any request made while streams are open carries the count — cheapest
+  possible visibility, no metrics pipeline needed.
 - **Wiring**: `config/telemetry.rb`, required first thing in `app.rb`. Uses
   `OpenTelemetry::SDK.configure` with `opentelemetry-exporter-otlp` (env-var driven,
   same `OTEL_EXPORTER_OTLP_*` vars as the other ships),

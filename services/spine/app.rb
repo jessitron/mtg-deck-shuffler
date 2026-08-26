@@ -24,6 +24,8 @@ module Spine
     route do |r|
       prefix = self.class.base_path.delete_prefix("/")
 
+      current_span.add_attributes("spine.open_streams" => Spine.broadcaster.open_stream_count)
+
       if prefix.empty?
         r.public
         dispatch(r)
