@@ -1,5 +1,11 @@
 GOAL: Make a named cross-ship flow (e.g. discard-card) fully traceable end-to-end in Honeycomb, so its actual runtime behavior — not just its code — is visible for debugging.
 
+@AI: I said no examples
+
+@AI: start with finding out what tracing is already available. There exists tracing in this project, so research in Honeycomb what is already there. Rewrite these steps existing-tracing-aware. Also, I don't want to inventory the whole thing first. I want to add the tracing bit by bit, starting with the trigger of the flow (if not already traced) and then test it, find that trace, see where it needs to be extended next.
+
+@AI: This workflow document needs to work for any arbitrary tracing request I may make in the future, so don't use things specific to this situation.
+
 1. Name the flow in one phrase (e.g. "discard card") and identify every ship it touches, in hop order, by grepping each ship's routes/handlers for the flow's trigger (route name, event kind, or button action). Record the ordered list of ships (subset of Shuffler, Tabletop, Spine).
 2. For each pair of adjacent ships in that list, find the code that carries the flow from one to the next (an HTTP call, an SSE event envelope, a browser `fetch`) and confirm it propagates trace context:
    - If it's a `fetch()`/`Net::HTTP` call, confirm OTel auto-instrumentation is active for that client (no manual `traceparent` header set by hand).
