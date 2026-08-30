@@ -21,6 +21,14 @@ commands, and gotchas — read it when working on that ship.
   on-ramps — consult it to know what "next" actually is (main flow vs. on-ramp vs.
   standalone) rather than guessing.
 
+## Workflow documents
+
+When Jess says "create a new workflow" (or similar), follow
+`.meta/workflow/make-a-new-workflow.md` — it's a workflow document about creating and
+iterating on workflow documents. Workflow documents themselves live in `.meta/workflow/`:
+each is a `GOAL:` line followed by a numbered list of concrete steps, no rationale, no
+examples.
+
 ## Seamap
 
 This repo's seamap — the chart (North Star, Mountains, Safe Harbor) plus pointers to where the
