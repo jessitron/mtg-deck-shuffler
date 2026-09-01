@@ -163,6 +163,51 @@ See also: `owners/tabletop-shape-mechanics/interactions.md` watch point 20 (the
 per-pointer-move noise fact this debounce works around) and `history.md` for the
 implementation record.
 
+## What's instrumented now (2026-09-01): reconnect detection
+
+Jess's own reconnect hypothesis was that a reconnect leaves zero trace anywhere in the
+fleet — not even a "the socket dropped" fact. `useSync`'s returned store only exposes
+`status: "loading" | "error" | "synced-remote"` at the top level, but while
+`status === "synced-remote"` it also carries `connectionStatus: "offline" | "online"`
+(`useSync.js`, backed by `ClientWebSocketAdapter`'s `connectionStatus` via
+`onStatusChange`) — there is no separate "reconnecting" state exposed at this level, so
+a transition to `"offline"` and back to `"online"` is the closest observable proxy for a
+disconnect/reconnect cycle.
+
+New hook `useReconnectSpans.ts` (`apps/tabletop/src/client/useReconnectSpans.ts`),
+wired into `TablePage.tsx` alongside `useCardArrivalSpans`/`usePhysicsAnnouncements`,
+watches that `connectionStatus` and emits two spans on transitions (following the same
+`void inSpan("name", () => {}, {attrs})` idiom as "card arrived on canvas"/"card moved by
+remote change" — a store-driven callback has no ambient span to hang attributes on):
+
+- **"sync connection lost"** when `connectionStatus` flips to `"offline"`.
+- **"sync connection reconnected"** when it flips back to `"online"` — carries
+  `reconnect.offline_duration_ms` (client-side timestamp diff between the two
+  transitions) and `reconnect.card_count` (a one-shot `store.allRecords()` count of
+  `mtg-card` shapes at that moment — a cheap summary, not a per-shape snapshot; not
+  guaranteed complete the instant `connectionStatus` flips, since there's no confirmed
+  guarantee the store has finished catching up on missed updates by then).
+
+`table.name`/`table.slug` need no extra attribute — `setGlobalAttrs` already stamps them
+on every span. The first observation after mount just establishes a baseline; only a real
+transition fires a span, so a normal, uninterrupted session emits neither.
+
+**Verified live** (2026-09-01): ran the fleet locally, joined a real table via the
+Shuffler's "Join a table" flow, then killed and restarted the Tabletop server process to
+force a real socket drop/reconnect. Queried Honeycomb (`local` env, `mtg-tabletop-web`)
+afterward and confirmed both spans fired: "sync connection lost" at 14:05:31Z, "sync
+connection reconnected" at 14:05:35Z with `reconnect.offline_duration_ms: 4000`,
+`reconnect.card_count: 2`, `table.name`/`table.slug` correctly stamped. This also
+reconfirmed the "Open hypotheses" bullet above about a server/process restart wiping
+in-memory room state — the canvas came back empty of its original shapes after the
+process restart (tldraw's own reconnected UI still rendered, so this was a real
+reconnect, not a fresh page load).
+
+This does not explain the bug — it's here so the *next* occurrence can be checked
+against "did a reconnect happen around this time," the same way "card moved by remote
+change" already lets an occurrence be checked against "did a remote store update happen
+around this time."
+
 ## Next steps
 
 1. Trace what actually triggers a client reconnect in this ship's real usage
@@ -179,4 +224,6 @@ implementation record.
    last-server-confirmed (i.e. Stack entry) position.
 4. For any *future* occurrence: query Honeycomb (`mtg-tabletop-web`) for
    `card moved by remote change` spans around the reported time first (cheap,
-   already wired up) before returning to sync-core internals.
+   already wired up), and now also for "sync connection lost"/"sync connection
+   reconnected" spans — a reconnect near the reported time is now directly
+   visible instead of inferred.

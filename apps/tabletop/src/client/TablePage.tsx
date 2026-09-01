@@ -22,6 +22,7 @@ import { tableNameFromSlug } from "../shared/slugify";
 import { chooseLicenseKey } from "./chooseLicenseKey";
 import { useCardArrivalSpans } from "./useCardArrivalSpans";
 import { usePhysicsAnnouncements } from "./usePhysicsAnnouncements";
+import { useReconnectSpans } from "./useReconnectSpans";
 import { MtgCardShapeUtil } from "./shapes/MtgCardShapeUtil";
 import { MtgCounterShapeUtil } from "./shapes/MtgCounterShapeUtil";
 import { MtgCounterTool } from "./shapes/MtgCounterTool";
@@ -191,6 +192,7 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
 
   useCardArrivalSpans(store);
   usePhysicsAnnouncements(store);
+  useReconnectSpans(store);
 
   if (store.status === "error") {
     return (

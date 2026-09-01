@@ -1,5 +1,38 @@
 # History
 
+## Reconnect instrumentation — a one-shot `store.allRecords()` read on `connectionStatus` flipping to "online", not a `store.listen()` consumer, no mechanics change (2026-09-01)
+
+`apps/tabletop/src/client/useReconnectSpans.ts` (new, `fleet-is-observable`'s territory, not
+this owner's — instrumentation wiring, not a ShapeUtil hook or gesture) watches `useSync`'s
+returned `store.connectionStatus` (`"offline" | "online"`, only meaningful while
+`store.status === "synced-remote"`) and, on a transition to `"online"`, does a single
+`store.allRecords().filter(r => r.typeName === "shape" && r.type === "mtg-card").length` read to
+attach a card count to a `"sync connection reconnected"` Honeycomb span. Part of the
+`cards-jump-to-entry-position` investigation (see `apps/tabletop/notes/
+RESEARCH-cards-jump-to-entry-position.md`) — the hook's own doc comment records the actual lead:
+`TLSyncClient.didReconnect()` silently reverts any shape with an in-flight unconfirmed edit back
+to its last server-confirmed value on every socket reconnect, with `{ runCallbacks: false }` —
+invisible to `store.listen`, so neither this owner's own hooks nor either existing
+`store.listen()` consumer (`usePhysicsAnnouncements.ts`, `useCardArrivalSpans.ts`) would ever see
+it. This hook doesn't close that gap either — it's a one-shot summary read on the
+`offline`→`online` edge, not a listener, and it does not explain the bug, only gives the next
+occurrence a "did a reconnect happen around this time" signal.
+
+**No writes, no ShapeUtil or gesture involvement — confirmed by reading the file, not just the
+summary.** `useReconnectSpans` never calls `editor.updateShapes`/`store.put`/anything that
+mutates a shape; the only store interaction is the single `allRecords()` snapshot read, gated
+behind `store.status === "synced-remote"` the same way `RoomEntry.stackCardCount`'s server-side
+snapshot read is (see the 2026-08-20 "Stack-arrival placement" entry below) — a point-in-time
+count, not a subscription. Verified live: killed/restarted the Tabletop server to force a real
+reconnect and confirmed the read executed and produced a sane count (2) via Honeycomb.
+
+**Not a fourth `store.listen()` consumer of this owner's gesture detection** — it reads no shape
+mutation this owner's hooks (or tldraw's own `Translating.ts`) produce; it reads `useSync`'s own
+connection-status signal, a fact this KB does not otherwise track. **`store.connectionStatus` and
+reconnect-timing are outside this owner's charge** — confirmed during context-gathering for this
+change, recorded here so a future `-context` call doesn't have to re-derive it: this KB covers
+tldraw's `SelectTool`/`ShapeUtil` gesture mechanics, not `@tldraw/sync`'s own connection lifecycle.
+
 ## Remote-arrival telemetry watches existing-shape moves too — third `store.listen()` consumer of watch point 20's per-move-write fact, first at `{source: "remote"}` (2026-08-25)
 
 `apps/tabletop/src/client/useCardArrivalSpans.ts` (`fleet-is-observable`'s territory — telemetry
