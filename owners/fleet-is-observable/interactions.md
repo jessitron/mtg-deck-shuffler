@@ -479,6 +479,23 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   span name. Filter by tldraw's `source` option, not by re-deriving "was this me." If the new event
   can fire from a diff tldraw writes repeatedly during a drag, it needs the same debounce the
   generic fallback uses (`GENERIC_SETTLE_MS` = 300ms per shape id).
+- **`store.connectionStatus` from `useSync`'s `RemoteTLStoreWithStatus`** (`"offline"` |
+  `"online"`, populated only while `store.status === "synced-remote"`, sourced from
+  `@tldraw/sync`'s `ClientWebSocketAdapter` via `onStatusChange`): first documented here by
+  `apps/tabletop/src/client/useReconnectSpans.ts` — no separate "reconnecting" state exists at
+  this level, so a disconnect/reconnect cycle is only observable as an offline→online transition
+  pair. Wired into `TablePage.tsx` alongside `useCardArrivalSpans`/`usePhysicsAnnouncements`,
+  same `inSpan()` idiom. Emits `"sync connection lost"` (offline edge, no attributes) and `"sync
+  connection reconnected"` (online edge, `reconnect.offline_duration_ms` + a one-shot
+  `reconnect.card_count` from `store.allRecords()`). Built to give the cards-jump-to-entry-position
+  investigation (`apps/tabletop/notes/RESEARCH-cards-jump-to-entry-position.md`) a way to check a
+  future occurrence against "did a reconnect happen around this time" — `TLSyncClient.didReconnect()`
+  reverts in-flight shape edits with `{ runCallbacks: false }`, invisible to `store.listen()` and
+  therefore to `useCardArrivalSpans.ts`. Verified live against a real socket drop+reconnect
+  (Tabletop server process killed/restarted), both spans confirmed in Honeycomb (`local`,
+  `mtg-tabletop-web`) 4000ms apart. **Out of `tabletop-shape-mechanics`' territory** (that owner's
+  KB records this explicitly, 2026-09-01): no `ShapeUtil` hooks, no writes, no `store.listen()` —
+  a one-shot read on a status flip, this owner's territory.
 - **Wrapping another tldraw stock UI action (`uiOverrides.actions` in `TablePage.tsx`) in
   `inSpan()`**: `undo`/`redo` are now wrapped alongside the pre-existing `copy` override
   (2026-08-20) — capture the `TLUiEventSource` as `trigger.source` and any pre-call editor state

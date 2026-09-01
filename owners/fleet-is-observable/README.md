@@ -239,7 +239,8 @@ duplicate onto the log what's already on the span.
 sites: `apps/tabletop/src/server/server.ts` (`tracer.startActiveSpan("ws connect", ...)`),
 `apps/tabletop/src/server/seatJoined.ts` (`"add player furniture"`),
 `apps/tabletop/src/server/cardArrival.ts` (`"place arrived card"`),
-`apps/tabletop/src/client/TablePage.tsx`, `apps/tabletop/src/client/useCardArrivalSpans.ts`, plus
+`apps/tabletop/src/client/TablePage.tsx`, `apps/tabletop/src/client/useCardArrivalSpans.ts`,
+`apps/tabletop/src/client/useReconnectSpans.ts` (below), plus
 `inSpan` itself, and now **the Shuffler's first two manual spans**:
 `apps/shuffler/src/port-spine/cardReturnedDispatch.ts`'s `` `sse subscription: ${event.name}` ``
 (`SpanKind.CONSUMER`) and its nested `"move returned card to Revealed"` (`SpanKind.INTERNAL`,
@@ -334,6 +335,35 @@ children of `"undo"`/`"redo"` when that's the trigger — so a Honeycomb trace d
 caused N cards to change zone" if/when the bug recurs, no correlation-by-timestamp needed. This
 is the same "wrap a tldraw UI action in `inSpan`" shape the `copy` override already established,
 now proven to compose with the physics-announcements hook's synchronous-listener trick.
+
+**`useReconnectSpans.ts` — the fleet's first documented use of tldraw sync's
+`connectionStatus` signal.** `useSync`'s returned `RemoteTLStoreWithStatus` exposes
+`store.connectionStatus: "offline" | "online"`, populated only while `store.status ===
+"synced-remote"` — sourced from `@tldraw/sync`'s `ClientWebSocketAdapter` via
+`onStatusChange`; there is no separate "reconnecting" state at this level. No prior KB entry
+documented this signal. Wired into `TablePage.tsx` alongside `useCardArrivalSpans`/
+`usePhysicsAnnouncements`, using the same `inSpan("name", () => {}, {attrs})` idiom as
+`useCardArrivalSpans.ts`. Two point-in-time spans, on the offline↔online transition (a
+same-value or first-observation "transition" is not spanned):
+
+- **`"sync connection lost"`** on the online→offline edge. No attributes.
+- **`"sync connection reconnected"`** on the offline→online edge, carrying
+  `reconnect.offline_duration_ms` (a client-side `Date.now()` diff, not a server timestamp) and
+  `reconnect.card_count` (a one-shot `store.allRecords()` count of `mtg-card` shapes at the
+  moment `connectionStatus` flips back — a cheap summary, not a per-shape enumeration, and not
+  guaranteed to be post-catch-up).
+
+Built for the cards-jump-to-entry-position bug investigation
+(`apps/tabletop/notes/RESEARCH-cards-jump-to-entry-position.md`) — `TLSyncClient.didReconnect()`
+silently reverts any shape with an in-flight unconfirmed edit on every socket reconnect, with
+`{ runCallbacks: false }`, invisible to `store.listen()` and therefore to
+`useCardArrivalSpans.ts`'s "card moved by remote change" span. This hook doesn't explain the
+bug; it exists so the *next* occurrence can be checked against "did a reconnect happen around
+this time," same purpose as the "card moved by remote change" span. Verified live: ran the fleet
+locally, joined a real table, killed/restarted the Tabletop server process to force a genuine
+socket drop+reconnect, confirmed via Honeycomb (env `local`, `mtg-tabletop-web`) both spans
+fired with correct attributes 4000ms apart. `table.name`/`table.slug` are not re-passed on
+either span — already stamped globally via `setGlobalAttrs` + `GlobalAttributesSpanProcessor`.
 
 ### Trace context embedded in event bodies
 
