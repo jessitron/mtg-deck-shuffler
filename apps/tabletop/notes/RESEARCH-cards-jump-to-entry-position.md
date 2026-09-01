@@ -8,8 +8,11 @@ doesn't repeat the same dead ends.
 one player's card shapes reset to their Stack entry position — as if the cards
 had just been freshly played. Still happening post-tldraw-upgrade (the upgrade
 was tried as a possible fix; it wasn't one). Root cause is still unknown as of
-2026-08-25. Two hypotheses have been ruled out, and telemetry now exists for the
-one code path that had none.
+2026-09-01. Two hypotheses ruled out; the instrumentation added 2026-08-25 was
+checked against two real incidents and came back clean (no signal) on one of
+them, ruling out both instrumented store-listener paths for that occurrence;
+`TLSyncClient.didReconnect()` is a real candidate mechanism but doesn't fully
+match the observed silence — see below.
 
 ## Symptom
 
@@ -49,15 +52,73 @@ So no known server code path finds an existing card shape by id and overwrites
 its x/y. If this is a server-caused reset, it isn't coming through any of the
 paths this ship's own code controls.
 
+## Real incident checked against the instrumentation (2026-09-01)
+
+Jess built a Honeycomb board ("Collection of Evil Glitches") pinning two times
+Evelyn reported the glitch. Checked both against `mtg-tabletop-web` (only one
+table ever runs at a time, so no cross-table dilution to worry about):
+
+- **Incident 1** ("1:27 am", 2026-08-31 ~06:25-06:29 UTC): 43 "card moved by
+  remote change" spans fired, but the before/after deltas (~150-350px) read as
+  ordinary drags spread across the whole window — no burst, nothing that looks
+  like a batch snap-back.
+- **Incident 2** ("reported at 3:49", 2026-08-29 ~20:47-20:51 UTC): **zero**
+  "card moved by remote change" spans, and only 2 "card arrived on canvas"
+  spans (both ordinary new lands being played, not a batch reset). Neither
+  instrumented path — the `updated` listener or the `added` listener — saw
+  anything during this occurrence.
+
+Incident 2 is the clean result: it confirms the reset is not reaching the
+client's tldraw store as an `updated` or `added` event on the affected tab.
+Whatever moves the card back, it bypasses `store.listen` entirely.
+
+## `TLSyncClient.didReconnect()` — a mechanism that would bypass the store listeners
+
+Read `@tldraw/sync-core`'s `TLSyncClient.js` (`didReconnect()`, lines
+333-385) — this is a real candidate that would explain the zero-telemetry
+result, though not perfectly.
+
+On every socket reconnect (soft or hard), the client:
+
+1. Reverses `speculativeChanges` (the diff for local edits not yet
+   server-confirmed) directly on the store **with `{ runCallbacks: false }`**
+   — this snaps any shape with an in-flight, unacknowledged edit back to its
+   last server-confirmed value with **no store listener firing at all**,
+   invisible to `store.listen`, including this ship's `source: "remote"`
+   instrumentation.
+2. Applies the server's diff-since-last-clock (or, on a hard reset, the full
+   document) via `applyNetworkDiff(..., true)` — this step *does* fire
+   listeners.
+3. Re-applies the original speculative diff on top and re-pushes it as a
+   fresh request, restoring the local edit — this time observed.
+
+All three run inside one `transact()`, so normally this collapses into one
+invisible frame with no flicker: engineered specifically not to leave a
+trace, and it self-heals via step 3's re-push. The failure mode that would
+produce the bug: if step 3's re-push is dropped, rejected, or never re-fires
+(e.g. an empty/squashed diff), the shape is left at step 2's "last-confirmed"
+value — which, for a card whose first edit after being played is still
+unconfirmed at disconnect time, **is its Stack entry position**. That matches
+the bug's shape exactly (a batch of a player's cards reset "as if just
+played").
+
+**Doesn't fully match incident 2's silence**, though: step 2's
+`applyNetworkDiff(..., true)` does fire store listeners, so this path
+predicts *some* signal, not the observed zero. Two things weren't checked in
+this pass and are the natural next step:
+
+- `ClientWebSocketAdapter.js`'s reconnect/backoff triggers, and this ship's
+  own `useSync`/`TLSocketRoom` wiring in `apps/tabletop/src` — what actually
+  causes a reconnect in practice here (network blip, tab backgrounding,
+  server restart)?
+- Whether a **full page reload** is the closer match instead of a same-tab
+  reconnect — a reload wouldn't go through `didReconnect()` at all, it'd go
+  through this ship's own initial-load path, a third, still-uninstrumented
+  code path distinct from both the `updated` and `added` listeners this
+  session has been checking.
+
 ## Open hypotheses (not investigated)
 
-- **tldraw sync-core / `TLSocketRoom` reconciliation** doing an unexpected
-  full-document re-broadcast or reconciliation that re-applies a shape's
-  original creation props over a since-moved shape. Nobody has read
-  `@tldraw/sync-core`'s wire protocol or `TLSocketRoom` internals for this —
-  the `tabletop-shape-mechanics` owner's KB covers client-side
-  `SelectTool`/`ShapeUtil` behavior, not sync-core, so this is genuinely
-  unexamined territory, not a checked-and-clear one.
 - **`cardSwallow.ts:70`** has a defensive guard comment — `if
   (!editor.getShape(id)) return; // already gone (e.g. store reset mid-flight)`
   — that names a "store reset" as a possibility without anyone having traced
@@ -102,16 +163,20 @@ See also: `owners/tabletop-shape-mechanics/interactions.md` watch point 20 (the
 per-pointer-move noise fact this debounce works around) and `history.md` for the
 implementation record.
 
-## Next steps, when this recurs
+## Next steps
 
-1. Query Honeycomb (`mtg-tabletop-web`) for `card moved by remote change` spans
-   around the reported time. If none fire, the reset isn't a store `updated`
-   event at all — reconsider a `deleted`+`added` pair (i.e. the "brand new
-   shape" path, which would mean the dedup is somehow failing) or something
-   outside tldraw's store entirely.
-2. If spans do fire, check `trace.trace_id`/session context to identify which
-   client or server process produced the write, and go from there.
-3. If it's still a dead end, read `@tldraw/sync-core`'s `TLSocketRoom`
-   reconciliation path directly (unexamined territory — see above) rather than
-   continuing to guess from this ship's own code, which has now been
-   fully inventoried.
+1. Trace what actually triggers a client reconnect in this ship's real usage
+   — read `ClientWebSocketAdapter.js`'s backoff/reconnect triggers and this
+   ship's own `useSync`/`TLSocketRoom` wiring in `apps/tabletop/src`. Network
+   blip, tab backgrounding, and server restart all plausibly happen during a
+   multi-hour game night; which one is common enough to explain "occasionally"?
+2. Check whether a full page reload (bypassing `didReconnect()` for this
+   ship's own initial-load path) fits incident 2's silence better than a
+   same-tab reconnect — that's a third, still-uninstrumented code path.
+3. If reconnect/reload traffic is found near a reported time, look for
+   `didReconnect()`'s step 3 (the speculative-diff re-push) failing to fire —
+   that's the specific failure mode that would leave a card at its
+   last-server-confirmed (i.e. Stack entry) position.
+4. For any *future* occurrence: query Honeycomb (`mtg-tabletop-web`) for
+   `card moved by remote change` spans around the reported time first (cheap,
+   already wired up) before returning to sync-core internals.
