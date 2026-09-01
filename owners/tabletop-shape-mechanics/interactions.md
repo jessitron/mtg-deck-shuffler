@@ -182,6 +182,15 @@
   `fleet-is-observable`'s territory — consult that owner for changes to what gets announced or
   how; this owner only cares that the listener reads gesture results, never drives them.
 
+### Reconnect instrumentation (`useReconnectSpans.ts`, 2026-09-01) — not a consumer of this owner's mutations, recorded only as a boundary marker
+- `apps/tabletop/src/client/useReconnectSpans.ts` (also `fleet-is-observable`'s territory) does a
+  single `store.allRecords()` count on `useSync`'s `connectionStatus` flipping `"offline"` →
+  `"online"` — no `store.listen()`, no write, no ShapeUtil/gesture involvement, so unlike
+  `usePhysicsAnnouncements`/`useCardArrivalSpans` above it isn't a consumer of anything this
+  owner's hooks produce. `store.connectionStatus` and reconnect timing are outside this KB's
+  charge. See `history.md`'s 2026-09-01 entry for the full writeup and why it exists (the
+  `cards-jump-to-entry-position` investigation).
+
 ### Remote-arrival telemetry (`useCardArrivalSpans.ts`, 2026-08-25)
 - **Second store-level `store.listen()` consumer of this owner's gesture detection, and the first
   scoped to `{source: "remote"}` rather than `{source: "user"}`.** `apps/tabletop/src/client/
