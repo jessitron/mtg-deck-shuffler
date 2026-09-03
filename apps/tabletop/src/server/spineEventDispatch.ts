@@ -24,14 +24,19 @@ const CARD_ARRIVAL_EVENT_NAMES = new Set(["card.played", "card.played-face-down"
 const CARD_DISCARD_EVENT_NAMES = new Set(["card.discarded"]);
 const CARD_REMOVAL_EVENT_NAMES = new Set(["card.returned"]);
 
-export function dispatchSpineEvent(tableName: string, event: unknown): void {
-  if (!isEnvelopeLike(event)) return;
+/**
+ * Returns once the event has actually been applied (or rejected/deduped/failed) — not
+ * merely received — so `spineSubscriber.ts`'s connect loop can track the highest seq it
+ * has confirmed processed and send it back as `Last-Event-ID` on reconnect.
+ */
+export function dispatchSpineEvent(tableName: string, event: unknown): Promise<void> {
+  if (!isEnvelopeLike(event)) return Promise.resolve();
 
   const traceparent = typeof event.traceparent === "string" ? event.traceparent : undefined;
   const parentContext = traceparent ? propagation.extract(ROOT_CONTEXT, { traceparent }) : ROOT_CONTEXT;
 
-  context.with(parentContext, () => {
-    void tracer.startActiveSpan(
+  return context.with(parentContext, () => {
+    return tracer.startActiveSpan(
       `sse subscription: ${event.name}`,
       {
         kind: SpanKind.CONSUMER,

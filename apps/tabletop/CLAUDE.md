@@ -48,8 +48,12 @@ time a room hears `seat.joined` — the room's Spine `tableId` and the subscript
 `RoomEntry` (`rooms.ts`); a second seat joining the same room is a no-op, since the room already
 has one. `spineSubscriber.ts` is a small hand-rolled SSE client (streamed `fetch`, parsing the
 Spine's `data: <json>\n\n` frames — no `EventSource`, since one server process holds many
-concurrent per-table streams) that reconnects on its own after a drop, with no catch-up/replay of
-missed events. **The fetch's `dispatcher` is a per-subscription `undici.Agent` with bounded
+concurrent per-table streams) that reconnects on its own after a drop. Every reconnect sends
+the highest `seq` it has confirmed applied (via `onEvent`'s returned promise, not merely
+received) as the standard `Last-Event-ID` header, so the Spine's replay-on-connect
+(`services/spine/lib/sse_stream.rb`) catches this table up on whatever was published during
+the gap; replayed events flow through the same dedup-by-event-id path as live ones
+(`spineEventDispatch.ts`), so nothing double-applies. **The fetch's `dispatcher` is a per-subscription `undici.Agent` with bounded
 `headersTimeout`/`bodyTimeout`** (`createHeartbeatAwareDispatcher`) — Node's global
 `fetch` defaults both to 300000ms, far too patient for a genuine hang, so a hung Spine would go
 undetected; shortening them only works because the Spine sends a `: heartbeat\n\n` comment frame

@@ -18,11 +18,14 @@ function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
 }
 
+let nextSeq = 1;
+
 function cardPlayedEvent(tableName: string, overrides: Record<string, unknown> = {}) {
   const initiator = { seatId: "seat-0000001", playerName: "Jess" };
   return {
     id: randomUUID(),
     tableId: slugFor(tableName),
+    seq: nextSeq++,
     name: "card.played",
     occurredAt: new Date().toISOString(),
     initiator,
@@ -72,9 +75,22 @@ async function waitUntil(predicate: () => boolean, timeoutMs = 5000): Promise<vo
 function createFakeSpineServer() {
   let clients: http.ServerResponse[] = [];
   let connectionsAccepted = 0;
+  const published: unknown[] = [];
+  const lastEventIdHeaders: (string | undefined)[] = [];
   const server = http.createServer((req, res) => {
     connectionsAccepted++;
+    const lastEventId = req.headers["last-event-id"];
+    lastEventIdHeaders.push(typeof lastEventId === "string" ? lastEventId : undefined);
     res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache", connection: "keep-alive" });
+    // Mirrors the Spine's own order (`services/spine/lib/sse_stream.rb`): replay missed
+    // events first, then the immediate connect heartbeat, then live delivery.
+    const sinceSeq = typeof lastEventId === "string" ? Number(lastEventId) : undefined;
+    if (sinceSeq !== undefined && Number.isFinite(sinceSeq)) {
+      for (const event of published) {
+        const seq = (event as { seq?: number }).seq;
+        if (typeof seq === "number" && seq > sinceSeq) res.write(`data: ${JSON.stringify({ event })}\n\n`);
+      }
+    }
     res.write(": heartbeat\n\n");
     clients.push(res);
     req.on("close", () => {
@@ -83,9 +99,14 @@ function createFakeSpineServer() {
   });
 
   return {
+    /** Recorded even if published while every client is disconnected — that's what makes replay possible on the next connect. */
     publish(event: unknown): void {
+      published.push(event);
       const frame = `data: ${JSON.stringify({ event })}\n\n`;
       for (const res of clients) res.write(frame);
+    },
+    lastEventIdHeaders(): (string | undefined)[] {
+      return lastEventIdHeaders;
     },
     sendHeartbeat(): void {
       for (const res of clients) res.write(": heartbeat\n\n");
@@ -183,7 +204,72 @@ describe("Spine SSE subscriber", () => {
     expect(shapesOf(tableName)).toHaveLength(1);
   });
 
-  it("reconnects after a dropped connection and keeps placing cards, with no catch-up", async () => {
+  it("sends no Last-Event-ID on the very first connection", async () => {
+    fakeServer = createFakeSpineServer();
+    const port = await fakeServer.listen();
+    const tableName = "sse-first-connect";
+    const tableId = slugFor(tableName);
+
+    subscription = subscribeToSpine(tableId, (event) => dispatchSpineEvent(tableId, event), `http://localhost:${port}`);
+    await waitUntil(() => fakeServer!.connectionCount() === 1);
+
+    expect(fakeServer.lastEventIdHeaders()).toEqual([undefined]);
+  });
+
+  it("applies an event published while disconnected exactly once, via replay on reconnect", async () => {
+    fakeServer = createFakeSpineServer();
+    const port = await fakeServer.listen();
+    const tableName = "sse-replay";
+    const tableId = slugFor(tableName);
+
+    subscription = subscribeToSpine(tableId, (event) => dispatchSpineEvent(tableId, event), `http://localhost:${port}`);
+    await waitUntil(() => fakeServer!.connectionCount() === 1);
+    await seatUp(tableName, "seat-0000001", "Jess");
+
+    const first = cardPlayedEvent(tableName);
+    fakeServer.publish(first);
+    await waitUntil(() => shapesOf(tableName).length === 1);
+
+    fakeServer.dropConnections();
+    const missedWhileDisconnected = cardPlayedEvent(tableName);
+    fakeServer.publish(missedWhileDisconnected); // no client connected — the fake just records it, mirroring the Spine's persisted log
+
+    await waitUntil(() => fakeServer!.connectionCount() === 1); // reconnected
+    await waitUntil(() => shapesOf(tableName).length === 2);
+
+    expect(fakeServer.lastEventIdHeaders()).toEqual([undefined, String(first.seq)]);
+    const instanceIds = shapesOf(tableName).map((s: any) => s.props.instanceId);
+    expect(instanceIds).toEqual(expect.arrayContaining([first.payload.card.instanceId, missedWhileDisconnected.payload.card.instanceId]));
+
+    // A redelivery of the same replayed event (e.g. a second reconnect) must not double-apply.
+    fakeServer.dropConnections();
+    await waitUntil(() => fakeServer!.connectionCount() === 1);
+    await new Promise((r) => setTimeout(r, 150));
+    expect(shapesOf(tableName)).toHaveLength(2);
+  });
+
+  it("still replays a missed event on reconnect even when the drop happened before anything was ever applied", async () => {
+    fakeServer = createFakeSpineServer();
+    const port = await fakeServer.listen();
+    const tableName = "sse-replay-before-first-apply";
+    const tableId = slugFor(tableName);
+
+    subscription = subscribeToSpine(tableId, (event) => dispatchSpineEvent(tableId, event), `http://localhost:${port}`);
+    await waitUntil(() => fakeServer!.connectionCount() === 1);
+    await seatUp(tableName, "seat-0000001", "Jess");
+
+    fakeServer.dropConnections(); // drops before a single event has ever been applied
+    const missedWhileDisconnected = cardPlayedEvent(tableName);
+    fakeServer.publish(missedWhileDisconnected);
+
+    await waitUntil(() => fakeServer!.connectionCount() === 1); // reconnected
+    await waitUntil(() => shapesOf(tableName).length === 1);
+
+    expect(fakeServer.lastEventIdHeaders()).toEqual([undefined, "0"]);
+    expect(shapesOf(tableName)[0].props.instanceId).toBe(missedWhileDisconnected.payload.card.instanceId);
+  });
+
+  it("reconnects after a dropped connection and keeps placing cards, with nothing missed to replay", async () => {
     fakeServer = createFakeSpineServer();
     const port = await fakeServer.listen();
     const tableName = "sse-reconnect";
