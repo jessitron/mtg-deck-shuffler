@@ -59,6 +59,26 @@ class SseStreamTest < Minitest::Test
     reconnected_body&.close
   end
 
+  def test_last_event_id_replays_missed_events_before_whatever_is_published_live
+    table_id = join_table
+    body, chunks = open_stream(table_id)
+    post_event(table_id, envelope_for(table_id, "payload" => { "deckName" => "baseline" }))
+    baseline = next_message(chunks)["event"]
+    body.close
+
+    post_event(table_id, envelope_for(table_id, "payload" => { "deckName" => "missed" })) # while disconnected
+
+    reconnected_body, reconnected_chunks = open_stream(table_id, last_event_id: baseline["seq"])
+    replayed = next_message(reconnected_chunks)
+    assert_equal "missed", replayed["event"]["payload"]["deckName"]
+
+    post_event(table_id, envelope_for(table_id, "payload" => { "deckName" => "live" }))
+    live = next_message(reconnected_chunks)
+    assert_equal "live", live["event"]["payload"]["deckName"]
+  ensure
+    reconnected_body&.close
+  end
+
   def test_streaming_an_unknown_table_is_not_found
     status, _headers, _body = raw_get("/tables/no-such-table/events/stream")
 
@@ -80,13 +100,14 @@ class SseStreamTest < Minitest::Test
     post "/tables/#{table_id}/events", JSON.generate(envelope), "CONTENT_TYPE" => "application/json"
   end
 
-  def raw_get(path)
-    env = Rack::MockRequest.env_for(path, method: "GET")
+  def raw_get(path, headers = {})
+    env = Rack::MockRequest.env_for(path, method: "GET", **headers)
     app.call(env)
   end
 
-  def open_stream(table_id)
-    _status, _headers, body = raw_get("/tables/#{table_id}/events/stream")
+  def open_stream(table_id, last_event_id: nil)
+    headers = last_event_id ? { "HTTP_LAST_EVENT_ID" => last_event_id.to_s } : {}
+    _status, _headers, body = raw_get("/tables/#{table_id}/events/stream", headers)
     chunks = Queue.new
     Thread.new { body.each { |chunk| chunks << chunk } }
     [body, chunks]
