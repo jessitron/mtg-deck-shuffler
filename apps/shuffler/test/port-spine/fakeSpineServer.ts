@@ -40,14 +40,33 @@ export async function waitUntil(predicate: () => boolean | Promise<boolean>, tim
 /**
  * A minimal fake SSE server standing in for the Spine's `GET /tables/:tableId/events/stream`,
  * mirroring `apps/tabletop/test/spineSubscriber.test.ts`'s fake server (including the Spine's
- * heartbeat behavior, `services/spine/lib/sse_stream.rb`).
+ * heartbeat behavior and, now, its replay-on-connect behavior, `services/spine/lib/sse_stream.rb`).
+ *
+ * `publish` mints an ever-increasing `seq` on each event, matching the Spine's own
+ * assign-on-append — every published event is kept so a later connection carrying
+ * `Last-Event-ID` can be replayed exactly what it missed, in order, before the usual
+ * heartbeat and live delivery.
  */
 export function createFakeSpineServer() {
   let clients: http.ServerResponse[] = [];
   let connectionsAccepted = 0;
+  let nextSeq = 1;
+  const publishedEvents: Array<{ seq: number; event: unknown }> = [];
+  const lastEventIdHeaders: Array<string | undefined> = [];
+
   const server = http.createServer((req, res) => {
     connectionsAccepted++;
+    const rawHeader = req.headers["last-event-id"];
+    const headerValue = Array.isArray(rawHeader) ? rawHeader[0] : rawHeader;
+    lastEventIdHeaders.push(headerValue);
+    const lastSeenSeq = headerValue !== undefined ? Number(headerValue) : undefined;
+
     res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache", connection: "keep-alive" });
+    if (lastSeenSeq !== undefined && Number.isFinite(lastSeenSeq)) {
+      for (const stored of publishedEvents) {
+        if (stored.seq > lastSeenSeq) res.write(`data: ${JSON.stringify({ event: stored.event })}\n\n`);
+      }
+    }
     res.write(": heartbeat\n\n");
     clients.push(res);
     req.on("close", () => {
@@ -57,7 +76,10 @@ export function createFakeSpineServer() {
 
   return {
     publish(event: unknown): void {
-      const frame = `data: ${JSON.stringify({ event })}\n\n`;
+      const seq = nextSeq++;
+      const stamped = { ...(event as Record<string, unknown>), seq };
+      publishedEvents.push({ seq, event: stamped });
+      const frame = `data: ${JSON.stringify({ event: stamped })}\n\n`;
       for (const res of clients) res.write(frame);
     },
     connectionCount(): number {
@@ -65,6 +87,10 @@ export function createFakeSpineServer() {
     },
     connectionsAcceptedCount(): number {
       return connectionsAccepted;
+    },
+    /** `Last-Event-ID` header value recorded on each accepted connection, in order — `undefined` where absent. */
+    lastEventIdHeadersSeen(): Array<string | undefined> {
+      return lastEventIdHeaders;
     },
     dropConnections(): void {
       for (const res of clients.splice(0)) res.destroy();
