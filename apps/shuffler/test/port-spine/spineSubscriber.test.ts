@@ -107,7 +107,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
   );
 
   test(
-    "reconnects after a dropped connection and keeps applying events, with no catch-up of what was missed",
+    "reconnects after a dropped connection and catches up on an event published while disconnected",
     async () => {
       fakeServer = createFakeSpineServer();
       const port = await fakeServer.listen();
@@ -120,20 +120,28 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, `http://localhost:${port}`);
       openGameIds.push(gameId);
       await waitUntil(() => fakeServer!.connectionCount() === 1);
+      expect(fakeServer.lastEventIdHeadersSeen()).toEqual([undefined]); // first connection: nothing applied yet
 
       fakeServer.publish(cardReturnedEvent(tableId, firstCard.gameCardIndex, firstCard.card.scryfallId));
       await waitUntil(async () => (await loadGame(persistStatePort, cardRepository, gameId)).listRevealed().length === 1);
 
       fakeServer.dropConnections();
-      await waitUntil(() => fakeServer!.connectionCount() === 1); // reconnected on its own
-
+      // Published while the subscriber has no live connection — the Spine's stream has
+      // this stored regardless, so it's available for the next connect to replay.
       fakeServer.publish(cardReturnedEvent(tableId, secondCard.gameCardIndex, secondCard.card.scryfallId));
+
+      await waitUntil(() => fakeServer!.connectionCount() === 1); // reconnected on its own
       await waitUntil(async () => (await loadGame(persistStatePort, cardRepository, gameId)).listRevealed().length === 2);
 
       const gameAfter = await loadGame(persistStatePort, cardRepository, gameId);
       const revealedIndexes = gameAfter.listRevealed().map((gc) => gc.gameCardIndex);
       expect(revealedIndexes).toContain(firstCard.gameCardIndex);
       expect(revealedIndexes).toContain(secondCard.gameCardIndex);
+
+      // The reconnect sent back the seq of the first (already-applied) event.
+      const headersSeen = fakeServer.lastEventIdHeadersSeen();
+      expect(headersSeen).toHaveLength(2);
+      expect(headersSeen[1]).toBe("1");
     },
     10000
   );

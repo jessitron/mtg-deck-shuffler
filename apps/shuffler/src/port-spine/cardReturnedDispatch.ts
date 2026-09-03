@@ -21,6 +21,13 @@ function isEnvelopeLike(value: unknown): value is { name: string; traceparent?: 
   return typeof value === "object" && value !== null && "name" in value && typeof (value as { name: unknown }).name === "string";
 }
 
+/** The Spine assigns `seq` on append and stamps it on every broadcast envelope — read here, not by `subscribeToSpine`, per the seq-tracking contract described there. */
+function extractSeq(value: unknown): number | undefined {
+  if (typeof value !== "object" || value === null || !("seq" in value)) return undefined;
+  const seq = (value as { seq: unknown }).seq;
+  return typeof seq === "number" ? seq : undefined;
+}
+
 export interface CardReturnedDispatchDeps {
   persistStatePort: PersistStatePort;
   cardRepository: CardRepositoryPort;
@@ -34,22 +41,29 @@ export interface CardReturnedDispatchDeps {
  * broadcast envelope's `traceparent` (injected fresh at publish time by the Spine's
  * `Table#broadcast`) as a CHILD span — one Honeycomb trace covering the Tabletop's portal
  * drag through the Spine to this move into Revealed, not an unlinked new one.
+ *
+ * Resolves with the event's `seq` once it's been fully handled and confirmed to have
+ * actually landed (applied, or correctly skipped as a duplicate/other-seat/invalid event)
+ * — `subscribeToSpine` uses that to track the high-water mark it sends back as
+ * `Last-Event-ID` on reconnect. Resolves with `undefined` when the apply itself threw, so
+ * that event gets replayed rather than silently skipped on the next reconnect.
  */
-export function dispatchSpineEventForGame(
+export async function dispatchSpineEventForGame(
   gameId: GameId,
   spineTableId: string,
   gameSeatId: string | undefined,
   seenEventIds: Set<string>,
   deps: CardReturnedDispatchDeps,
   event: unknown
-): void {
-  if (!isEnvelopeLike(event)) return;
+): Promise<number | undefined> {
+  const seq = extractSeq(event);
+  if (!isEnvelopeLike(event)) return seq;
 
   const traceparent = typeof event.traceparent === "string" ? event.traceparent : undefined;
   const parentContext = traceparent ? propagation.extract(ROOT_CONTEXT, { traceparent }) : ROOT_CONTEXT;
 
-  context.with(parentContext, () => {
-    void tracer.startActiveSpan(
+  return context.with(parentContext, () =>
+    tracer.startActiveSpan(
       `sse subscription: ${event.name}`,
       {
         kind: SpanKind.CONSUMER,
@@ -59,9 +73,9 @@ export function dispatchSpineEventForGame(
           "table.slug": spineTableId,
         },
       },
-      async (span) => {
+      async (span): Promise<number | undefined> => {
         try {
-          if (event.name !== "card.returned") return;
+          if (event.name !== "card.returned") return seq;
 
           const result = validateIncomingEvent<CardReturnedPayload>(event, "card.returned");
           if (!result.ok) {
@@ -71,7 +85,7 @@ export function dispatchSpineEventForGame(
               "table.slug": spineTableId,
               "card_return.error": result.error,
             });
-            return;
+            return seq;
           }
           const { envelope } = result;
           span.setAttribute("event.id", envelope.id);
@@ -79,14 +93,17 @@ export function dispatchSpineEventForGame(
 
           if (envelope.payload.seat !== gameSeatId) {
             span.setAttribute("card_return.outcome", "other-seat");
-            return;
+            return seq;
           }
 
           if (seenEventIds.has(envelope.id)) {
             span.setAttribute("card_return.outcome", "duplicate");
-            return;
+            return seq;
           }
 
+          // An error here means the event never actually landed — the seq high-water mark
+          // must not advance past it, or a replayed reconnect would skip it for good.
+          let applyThrew = false;
           await tracer.startActiveSpan(
             "move returned card to Revealed",
             {
@@ -123,6 +140,7 @@ export function dispatchSpineEventForGame(
                   });
                 }
               } catch (error) {
+                applyThrew = true;
                 span.setAttribute("card_return.outcome", "error");
                 markCurrentSpanAsError(error instanceof Error ? error.message : String(error));
                 log.error("spine sse: card.returned dispatch failed", { "game.game_id": String(gameId), "table.slug": spineTableId }, error);
@@ -131,10 +149,11 @@ export function dispatchSpineEventForGame(
               }
             }
           );
+          return applyThrew ? undefined : seq;
         } finally {
           span.end();
         }
       }
-    );
-  });
+    )
+  );
 }
