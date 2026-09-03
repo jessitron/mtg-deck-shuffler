@@ -76,10 +76,11 @@ module Spine
         end
 
         current_span.add_attributes("table.id" => table.id)
+        last_seen_seq = Integer(env["HTTP_LAST_EVENT_ID"], exception: false)
         request.halt [
           200,
           { "Content-Type" => "text/event-stream", "Cache-Control" => "no-cache" },
-          SseStream.new(table_id)
+          SseStream.new(table_id, last_seen_seq: last_seen_seq)
         ]
       end
 
