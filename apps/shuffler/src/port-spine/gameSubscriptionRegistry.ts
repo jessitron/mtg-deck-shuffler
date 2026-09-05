@@ -2,6 +2,7 @@ import { GameId } from "../domain-types.js";
 import { PersistStatePort } from "../port-persist-state/types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
 import { subscribeToSpine, SpineSubscription } from "./spineSubscriber.js";
+import { SpineConnectionPort } from "./SpineConnectionPort.js";
 import { dispatchSpineEventForGame } from "./cardReturnedDispatch.js";
 
 export interface GameSubscriptionEntry {
@@ -89,15 +90,15 @@ export function ensureGameSpineSubscription(
   spineTableId: string,
   gameSeatId: string | undefined,
   deps: { persistStatePort: PersistStatePort; cardRepository: CardRepositoryPort },
-  /** Defaults to the real Spine (`subscribeToSpine`'s own default) — overridable so tests can point this at a fake SSE server. */
-  baseUrl?: string
+  /** Defaults to the real Spine (`subscribeToSpine`'s own default) — overridable so tests can hand it a `FakeSpineConnection`. */
+  connection?: SpineConnectionPort
 ): void {
   const key = String(gameId);
   if (registry.has(key)) return;
 
   const seenEventIds = new Set<string>();
   const onEvent = (event: unknown) => dispatchSpineEventForGame(gameId, spineTableId, gameSeatId, seenEventIds, deps, event);
-  const subscription = baseUrl ? subscribeToSpine(spineTableId, onEvent, baseUrl) : subscribeToSpine(spineTableId, onEvent);
+  const subscription = connection ? subscribeToSpine(spineTableId, onEvent, connection) : subscribeToSpine(spineTableId, onEvent);
 
   registry.set(key, { gameId, spineTableId, subscription, seenEventIds });
 }

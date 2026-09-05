@@ -2,7 +2,7 @@
 
 Mountain: spine-gathers-data
 Ship: shuffler
-Status: ready-for-agent
+Status: resolved
 
 **What to build:** `spineSubscriber.ts` currently does transport (raw `fetch`/SSE framing),
 reconnect orchestration (backoff, `Last-Event-ID` tracking), and replay-visibility logging
