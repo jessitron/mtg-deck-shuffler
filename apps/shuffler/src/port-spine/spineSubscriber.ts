@@ -7,9 +7,7 @@ import { log } from "../log.js";
  * game at once and EventSource isn't built for that. The wire format
  * (`services/spine/lib/sse_stream.rb`) is exactly `data: <json>\n\n`, one line,
  * plus a `: heartbeat\n\n` comment frame sent immediately on connect and every
- * `HEARTBEAT_INTERVAL_SECONDS` (`sse_stream.rb`) while nothing's been published — no
- * `id:`/`retry:`. Ported from `apps/tabletop/src/server/spineSubscriber.ts`, which has
- * this shape's full rationale.
+ * `HEARTBEAT_INTERVAL_SECONDS` (`sse_stream.rb`) while nothing's been published.
  *
  * Reconnects replay what was missed: every connect attempt (including the first, where
  * the header is simply absent) sends the highest `seq` this subscriber has actually

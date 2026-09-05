@@ -1,0 +1,11 @@
+
+flowchart BT
+   A[Convert the spine connection into P-A-G pattern in Shuffler ⛵️. Ticket 4 in spine-replay] --> B[Test dropped connections]
+   A --> C["Test resume game (will fail)"]
+   C --> D[Save spine events in the Shuffler event log, with their keys]
+   A --> E[Also do this conversion in Tabletop]
+   E --> F{{Tabletop has better architecture}}
+   D --> I[implement resume game]
+   I --> G([Games are resumable])
+   B --> J[Spine Replay]
+   J --> H([The app works])
