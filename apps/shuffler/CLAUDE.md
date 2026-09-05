@@ -306,19 +306,32 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   `GET /game-section/:gameId` (`app.ts`) open it idempotently whenever the persisted game
   has a `spineTableId` but no live registry entry — the same single check covers first
   load, HTMX re-fetch, and "came back after a while" (server restart, new tab).
-  `spineSubscriber.ts` is the same
-  hand-rolled SSE client shape as the Tabletop's (streamed `fetch`, `data: <json>\n\n`
-  frames, the same heartbeat-aware bounded `headersTimeout`/`bodyTimeout` dispatcher — this
-  is the Shuffler's first `undici` dependency, pinned to major version 7 to match what Node
-  vendors internally, same reasoning as the Tabletop's pin). `cardReturnedDispatch.ts` is
+  `spineSubscriber.ts` (`subscribeToSpine`) is port/adapter/gateway-shaped, like the
+  outbound leg's `SpinePort`/`HttpSpineGateway`/`FakeSpineGateway` (`types.ts`): a
+  `SpineConnectionPort` (`SpineConnectionPort.ts`) models **one connection attempt**
+  (open, yield frames, end/drop) — `HttpSpineConnection.ts` is the real adapter (streamed
+  `fetch`, `data: <json>\n\n` frames, the same heartbeat-aware bounded
+  `headersTimeout`/`bodyTimeout` dispatcher as the Tabletop's — this is the Shuffler's
+  first `undici` dependency, pinned to major version 7 to match what Node vendors
+  internally, same reasoning as the Tabletop's pin), `FakeSpineConnection.ts` a
+  scriptable in-memory double (emit a frame, end the stream, simulate a drop — no
+  socket). `subscribeToSpine` itself is plain reconnect orchestration sitting above that
+  port — backoff, and resending the highest applied `seq` as `lastEventId` on every
+  connect (including the first, where it's simply absent) so the Spine
+  (`services/spine/lib/sse_stream.rb`) replays whatever was missed, in order, before
+  continuing into live delivery; frames are chained onto one promise so a replay burst is
+  still applied strictly in arrival order. A resumed subscription that was fully torn down
+  (every browser tab closed, or a server restart) starts this tracking from scratch —
+  a known gap, since nothing durable seeds it yet (`.scratch/spine-event-replay/issues/05-durable-last-applied-seq.md`).
+  `cardReturnedDispatch.ts` is
   this ship's **first manual span** — `"sse subscription: card.returned"`,
   `SpanKind.CONSUMER`, parent context extracted from the envelope's `traceparent`, a
   `card_return.outcome` attribute on every branch (`applied`/`duplicate`/`invalid`/the
   `applyGameCommand` outcome kind/`error`), and a nested `SpanKind.INTERNAL` "move returned
   card to Revealed" span only when the event is actually applied — the fleet's SSE event
   standard (`apps/tabletop/CLAUDE.md`), now with a second consumer. Dedup is on the
-  envelope's event id, same as the Tabletop's; a redelivered event is a no-op. No
-  reconnect catch-up. `incomingEventValidation.ts` is this ship's first *inbound* contract
+  envelope's event id, same as the Tabletop's; a redelivered event is a no-op.
+  `incomingEventValidation.ts` is this ship's first *inbound* contract
   gate (validates what arrives, mirroring the Tabletop's `contractValidation.ts`) —
   distinct from `test/port-spine/contractValidation.ts`, which only validates what this
   ship *sends*. `face` is never read from the payload (the schema blacklists it) — the
