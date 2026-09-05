@@ -33,6 +33,20 @@ real server.
   to the Tabletop's parallel `spineSubscriber.ts` afterward (this ship first, then port the
   pattern there — not the other way around, since the Shuffler's version is where this
   design work is happening).
+- **`test/port-spine/fakeSpineServer.ts` (a real HTTP server standing in for the Spine)
+  retires once this lands. Fake what we own, not what we don't.** The adapter is ours; the
+  Spine is someone else's system, and standing up a real server to impersonate it is exactly
+  the thing a port boundary is supposed to make unnecessary. Every unit-level reconnect/drop/
+  replay test drives `FakeSpineConnection` directly — no socket, no HTTP, no server process.
+  This mirrors precedent already in this codebase on the outbound leg: `HttpSpineGateway` has
+  **zero** unit tests today (confirmed by grep) — its fidelity to the real Spine's wire
+  protocol is verified only by `test/verification/verify-tabletop-integration.spec.ts`, which
+  runs a real Spine process. `HttpSpineConnection` (the new real inbound adapter) gets the
+  same treatment: no unit test asserts it parses real SSE frames correctly — that's the job
+  of a real integration test against a real Spine (the existing fleet-level spec, or a new
+  thin one), never a unit test with a fake server pretending to be one. If a test still needs
+  a real HTTP server to pass after this ticket, that's a sign the port boundary was drawn in
+  the wrong place, not a reason to keep `fakeSpineServer.ts` around.
 
 **Conditions to reify for faking** (each needs to be independently triggerable in a test,
 not just implied by fake-server plumbing):
@@ -78,9 +92,17 @@ not just implied by fake-server plumbing):
 - [ ] Condition (3) above is investigated and the finding (wired vs. gap) is written up as
       a test — a failing one if the gap is confirmed, with a follow-up ticket filed for the
       fix, not silently patched as a side effect of this refactor.
-- [ ] `apps/shuffler/test/port-spine/spineSubscriber.test.ts` and its existing
-      `fakeSpineServer.ts`-based tests still pass, or are deliberately superseded by
-      equivalent tests against the new fake adapter (not just duplicated).
+- [ ] **`test/port-spine/fakeSpineServer.ts` is deleted.** Every test it used to serve is
+      rewritten against `FakeSpineConnection` instead. This is not optional and not
+      "or equivalent" — a real HTTP server standing in for the Spine is precisely the thing
+      this refactor exists to remove. If any test still needs `fakeSpineServer.ts` (or any
+      other real listening server) to pass, the port boundary was drawn wrong and needs to
+      move, not be left with a leftover fake server as a workaround.
+- [ ] No unit test asserts anything about real SSE-over-HTTP wire behavior (frame parsing,
+      real `fetch`, real socket timing) — that coverage lives only in the real-Spine
+      integration spec (`verify-tabletop-integration.spec.ts` or a new thin equivalent),
+      matching the zero-unit-tests precedent already set by `HttpSpineGateway` on the
+      outbound leg.
 - [ ] `HttpSpineGateway`/`FakeSpineGateway`/`SpinePort` (`types.ts`) are left untouched —
       this ticket only touches the inbound subscriber side.
 
