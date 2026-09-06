@@ -1,10 +1,10 @@
 ---
-name: shuffler-looks-like-itself
+name: fleet-design-language
 kind: capability
 scope: fleet
 ---
 
-# The Shuffler looks like itself
+# The fleet design language
 
 *(The slug predates the fleet scope. The charge is now fleet-wide: Shuffler and
 Tabletop are one app with two faces, and they should feel like the same app.)*

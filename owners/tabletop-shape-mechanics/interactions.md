@@ -943,7 +943,7 @@ A bug where the wrong *image* shows is that owner's; a bug where the wrong *shap
 or gets dragged is this owner's.
 
 ### Fleet visual design (colors, fonts, CSS)
-`shuffler-looks-like-itself` owns the Tabletop's visual identity, including its own "tldraw
+`fleet-design-language` owns the Tabletop's visual identity, including its own "tldraw
 limits" list (font enum, focus rings, locked-shape drop targets, opaque-image z-order) — those
 are *rendering/styling* limits, distinct from this owner's *interaction/selection* limits, even
 though both are "things tldraw won't let us do." Consult that owner for appearance; this one for

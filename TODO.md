@@ -27,7 +27,7 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
   lives in `apps/tabletop`, the gallery lives in `apps/shuffler/views/design.ejs` — stage it
   as a `.stage-white` Tabletop mock, per precedent (counter-disc, sleeved-card). Buoyed from
   the 2026-08-13 restyle rather than reached across from that Tabletop-scoped change. See
-  `owners/shuffler-looks-like-itself/open-choices.md` → the deck-title `mtg-title` entry.
+  `owners/fleet-design-language/open-choices.md` → the deck-title `mtg-title` entry.
 
 - GRILLING: Tokens support. Archidekt lets you add tokens to your deck. We could bring them in and make them available on the board. They can tap like cards, they hold counters etc. but if you drag them to the graveyard, they go back to their place under your playmat (or wherever we decide to line them up). Oh and if you drag a token from its spot where it was drawn to the board it immediately creates another one in the spot it left; each token is an infinite pile. Then: people need to add tokens as the game is going, because we rarely have them all prepped before hand. Paste any image, right-click and say "make token." A token (infinite pile) appears next to the others. Now they can be clicked to tap.
 
@@ -119,7 +119,7 @@ and I want to drop a card in between C and D, then the drop zone between them is
     to those matters more than its own priority does.
   - The concrete cost is two `<head>`s that have already drifted: `views/partials/head.ejs` and
     `formatHtmlHead()` in `src/view/common/html-layout.ts` load different stylesheets and set
-    conflicting `body` fonts (Ovo vs Orbitron). Consult the `shuffler-looks-like-itself` owner.
+    conflicting `body` fonts (Ovo vs Orbitron). Consult the `fleet-design-language` owner.
 
 - add the number of cards in the library and the hand to the tabletop. This is blocked by schema change monster and spine-in-the-middle.
 
@@ -154,7 +154,7 @@ and I want to drop a card in between C and D, then the drop zone between them is
     companion) can only be drawn with `box-shadow`, which doesn't accumulate across rules — so it
     would erase `.pushable-flat`'s two-layer press bevel on every focused button. Taking it means
     re-declaring the bevel inside `:focus-visible` for `.pushable-flat` and `.pushable-flat.pushable-dark`.
-    See `owners/shuffler-looks-like-itself/open-choices.md` choice 5.
+    See `owners/fleet-design-language/open-choices.md` choice 5.
 
 - [ ] `spine-stream-cap-503` Nothing refuses stream #N+1 with a visible error
   - `config/puma.rb` now sets `threads 8, 64` (was an undeclared default of 5, which is what

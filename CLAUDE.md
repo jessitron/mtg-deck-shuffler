@@ -109,7 +109,7 @@ The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and
 - `packages/design-tokens/` — the fleet's shared visual vocabulary (`@fleet/design-tokens`):
   the identity palette, `--narrow-border`, and Magic's colour pie. One dictionary, both ships
   — the Shuffler serves it at `/fleet/tokens.css`, the Tabletop imports it through Vite.
-  Owned by `owners/shuffler-looks-like-itself/`; consult that owner before changing a value.
+  Owned by `owners/fleet-design-language/`; consult that owner before changing a value.
 - `contracts/` — the fleet's published language: JSON Schema for the event
   envelope and per-kind payloads. Both the Spine (Ruby) and the TS apps validate
   on receipt. See `contracts/README.md`.

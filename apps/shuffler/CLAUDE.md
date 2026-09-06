@@ -48,7 +48,7 @@ MTG deck shuffler web app for remote Magic play. Loads precon Commander Decks fr
 ## UI Style
 
 **Before adding or changing any UI, consult the design owner** —
-`owners/shuffler-looks-like-itself/` and its `-context` / `-review` / `-update` skills.
+`owners/fleet-design-language/` and its `-context` / `-review` / `-update` skills.
 Look at **`/design`** first: the component gallery renders every component using the
 app's own stylesheets, so it can't drift from the app. Add a specimen there in the same
 commit that adds a component.

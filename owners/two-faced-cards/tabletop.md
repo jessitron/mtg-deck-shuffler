@@ -430,7 +430,7 @@ The four decisions, all now built exactly as specified:
    cards-come-and-go ticket 02** (2026-08-08, `7b7f868`): `card.returned.v1` carries no
    `face` and no `faceDown` — Jess: "cards removed from play no longer have a face up."
 3. **`faceDown` renders as a plain image swap** — the card-back/sleeve rendering, no
-   border/dimming/badge (confirmed with `shuffler-looks-like-itself`: no concealment
+   border/dimming/badge (confirmed with `fleet-design-language`: no concealment
    idiom exists anywhere in the fleet).
 4. **Leaving the table resets both axes**: a card returning to hand or library goes back
    to `face:'front'`, `faceDown:false`, however it sat on the table. Matches the

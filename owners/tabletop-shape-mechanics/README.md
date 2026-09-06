@@ -94,7 +94,7 @@ after `mtg-life-counter` — a `BaseBoxShapeUtil` with no interaction hooks whos
 a live DOM `<input>` writing to its own `text` prop through `editor.run(..., { ignoreShapeLock:
 true })` (watch point 22), and shielding keystrokes from tldraw's tool hotkeys (watch point 10b,
 always-live-input case). Its mechanics territory is exactly the life-counter pattern; the on-brand
-appearance is a separate, unratified decision left to `shuffler-looks-like-itself`. See
+appearance is a separate, unratified decision left to `fleet-design-language`. See
 `architecture.md`'s "editable deck title" section and `history.md`.
 
 **The library portal** (`.scratch/tabletop-cards-come-and-go/issues/12-plan.md`, landed
@@ -124,7 +124,7 @@ can't reach).
   `TLGlobalShapePropsMap` augmentation mechanism and the `useSync`/`createTLSchema`
   default-shapes gap documented in `architecture.md`.
 - **Record tldraw limits rather than fighting them.** This mirrors the convention already
-  established in `owners/shuffler-looks-like-itself/README.md`'s "tldraw limits" section (no
+  established in `owners/fleet-design-language/README.md`'s "tldraw limits" section (no
   Orbitron in the `geo` font enum, `:focus-visible` can't reach canvas shapes, a locked shape can
   never be a drop target, an opaque image hides a box's interior underneath). This owner's watch
   points are the shape-*interaction* analog of that list.

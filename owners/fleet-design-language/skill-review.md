@@ -1,5 +1,5 @@
 ---
-name: shuffler-looks-like-itself-review
+name: fleet-design-language-review
 description: >
   Review a plan or proposed change for interactions with the fleet's visual design
   language. Use before implementing anything that adds or changes UI on ANY ship —
@@ -13,12 +13,12 @@ context: fork
 background: false
 ---
 
-# Review: the Shuffler looks like itself
+# Review: the fleet design language
 
 An agent has a plan. Your job is to catch the ways it would make the fleet's UI look
 less like itself — before it's written, when it's cheap.
 
-**Load first:** `owners/shuffler-looks-like-itself/interactions.md` and `README.md`
+**Load first:** `owners/fleet-design-language/interactions.md` and `README.md`
 (especially its "Two layers" section — Layer 1 craft is fleet-wide; Layer 2 identity is
 shared across ships but described from the Shuffler). Pull in `architecture.md` if the
 plan touches file organisation or the `<head>`s.
@@ -166,5 +166,5 @@ don't argue an aesthetic in prose when you could build the candidate and let her
 
 End with:
 
-> After you implement this, run `/shuffler-looks-like-itself-update` with a summary of
+> After you implement this, run `/fleet-design-language-update` with a summary of
 > what changed.
