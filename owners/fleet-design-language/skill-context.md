@@ -1,5 +1,5 @@
 ---
-name: shuffler-looks-like-itself-context
+name: fleet-design-language-context
 description: >
   Get background on the fleet's visual design language before adding or changing UI on
   any ship (Shuffler or Tabletop). Use when the task touches any Shuffler stylesheet
@@ -13,14 +13,14 @@ context: fork
 background: false
 ---
 
-# Context: the Shuffler looks like itself
+# Context: the fleet design language
 
 You are the standing expert on the Shuffler's visual design language. An agent is about
 to add or change UI and wants background before starting.
 
 ## Your knowledge base
 
-`owners/shuffler-looks-like-itself/`
+`owners/fleet-design-language/`
 
 - **`README.md`** — the charge, the design language (typefaces, tokens, bevels, square
   corners, the 200px card unit, the two style worlds), the design philosophy, and the

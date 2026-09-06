@@ -1,5 +1,5 @@
 ---
-name: shuffler-looks-like-itself-update
+name: fleet-design-language-update
 description: >
   Update the fleet design-language knowledge base after a change landed. Use after
   implementing anything that added or changed UI on any ship, edited a Shuffler
@@ -12,14 +12,14 @@ context: fork
 background: false
 ---
 
-# Update: the Shuffler looks like itself
+# Update: the fleet design language
 
 A change has landed. Bring the knowledge base back in line with reality — a KB that
 drifts becomes a confident lie, which is worse than no owner.
 
 ## Procedure
 
-1. **Read all five KB files first:** `owners/shuffler-looks-like-itself/README.md`,
+1. **Read all five KB files first:** `owners/fleet-design-language/README.md`,
    `open-choices.md`, `interactions.md`, `architecture.md`, `history.md`.
 
 2. **Read the actual diff, not the summary.** `git diff` / `git show` on the changed

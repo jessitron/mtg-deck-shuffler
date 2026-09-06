@@ -55,9 +55,9 @@ How library search connects to other parts of the app.
   `.order-toggle-btn`) both inline in the library-modal mockup and as its own "Library
   order toggle" section, flagged `badge-candidate` — the small bordered-pill,
   underline-marks-active-side shape has no prior idiom in this app and is unreviewed by
-  `shuffler-looks-like-itself` as of 2026-08-21. Deliberately built fresh on tokens rather
+  `fleet-design-language` as of 2026-08-21. Deliberately built fresh on tokens rather
   than extending `.group-by-type-toggle` (called out there as pre-token-sweep drift).
-  Consult `shuffler-looks-like-itself` before reusing this pattern elsewhere or promoting
+  Consult `fleet-design-language` before reusing this pattern elsewhere or promoting
   it out of candidate status.
 
 ## Depended On By

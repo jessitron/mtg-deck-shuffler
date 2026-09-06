@@ -106,7 +106,7 @@ drags it wherever it goes from there (2026-08-16).
 
 ## UI Style
 
-**The Tabletop is in scope for the fleet's design owner** — `owners/shuffler-looks-like-itself/`
+**The Tabletop is in scope for the fleet's design owner** — `owners/fleet-design-language/`
 (the slug predates the fleet scope) and its `-context` / `-review` / `-update` skills. The
 Shuffler and Tabletop are meant to feel like **one app with two faces**, so pull toward the
 Shuffler's purple-and-pink tokens, Orbitron-for-chrome typography and square corners rather than

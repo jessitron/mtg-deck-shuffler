@@ -23,7 +23,7 @@ owners stamped with a different ship, never the fleet-scoped ones.
 - [animations](animations/README.md) — _feature, Shuffler_ — consult me before changes to card
   display/rendering, game.css, HTMX swap attributes, card containers, drag-and-drop,
   game.js event handlers, or CSS keyframes/transitions.
-- [the Shuffler looks like itself](shuffler-looks-like-itself/README.md) — _capability, fleet_ —
+- [the fleet design language](fleet-design-language/README.md) — _capability, fleet_ —
   consult me before adding or changing UI on Shuffler, or the appearance of custom elements on Tabletop: new
   buttons/panels/inputs/states, any stylesheet, CSS tokens, colors, fonts, corner radius, spacing,
   alignment, focus states, or the `/design` gallery. **One
