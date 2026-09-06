@@ -785,6 +785,11 @@ body.dev-mode .menu-debug {
   font-size: 0.8rem;
 }
 
+.undo-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .debug-container {
   position: relative;
   padding: 16px;

@@ -18,9 +18,9 @@ export function formatGameMenuHtmlFragment(game: GameState): string {
 
 function formatUndoAndHistoryHtmlFragment(game: GameState): string {
   const eventLog = game.getEventLog();
+  const events = eventLog.getEvents();
 
-  const mostRecentUndoableEvent = eventLog
-    .getEvents()
+  const mostRecentUndoableEvent = events
     .slice()
     .reverse()
     .find((event) => eventLog.canBeUndone(event.gameEventIndex));
@@ -28,7 +28,10 @@ function formatUndoAndHistoryHtmlFragment(game: GameState): string {
   const historyButton = `<button id="history-button" class="history-button"
                   hx-get="/history-modal/${game.gameId}"
                   hx-target="#modal-container"
-                  hx-swap="innerHTML">Action History (${eventLog.getEvents().length})</button>`;
+                  hx-swap="innerHTML">Action History (${events.length})</button>`;
+
+  const mostRecentEvent = events[events.length - 1];
+  const blockedByTableReturn = mostRecentEvent?.eventName === "move card" && mostRecentEvent.verb === "returned";
 
   const undoButton = mostRecentUndoableEvent
     ? `<button id="undo-button" class="undo-button"
@@ -36,6 +39,9 @@ function formatUndoAndHistoryHtmlFragment(game: GameState): string {
         hx-vals='{"expected-version": ${game.getStateVersion()}}'
         hx-target="#game-container"
         hx-swap="outerHTML">UNDO ${formatGameEventHtmlFragment(mostRecentUndoableEvent, game)}</button>`
+    : blockedByTableReturn
+    ? `<button id="undo-button" class="undo-button" disabled
+        title="Can't undo tabletop-initiated card return yet, sorry">UNDO</button>`
     : "";
 
   return `<div class="menu-section history-actions">
