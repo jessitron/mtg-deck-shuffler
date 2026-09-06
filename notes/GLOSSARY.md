@@ -85,6 +85,10 @@ Location (MTG Deck Shuffler, game scope): where a card is. A card is in exactly 
 
 Game State (MTG Deck Shuffler, game scope): all the state that is local to a game. This includes a list of Game Cards.
 
+GameStateVersion (Shuffler): a pointer into the Game State for the current game, showing where we are.
+
+Spine Seq (Shuffler): the Spine's `seq` pointer into its event log. An event can be represented in both the Spine's event log for a Table, and the Shuffler's game state log.
+
 Hand (MTG Deck Shuffler, UI): a set of cards that are visible to a player. They represent cards a player has access to; the player can reorder them, or move a card to the table.
 
 Draw: move a card from the Library to the Hand

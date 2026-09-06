@@ -1,8 +1,7 @@
-
 flowchart BT
-   A[Convert the spine connection into P-A-G pattern in Shuffler ⛵️. Ticket 4 in spine-replay] --> B[Test dropped connections]
+   A[Convert the spine connection into P-A-G pattern in Shuffler. Ticket 4 in spine-replay] --> B[Test dropped connections]
    A --> C["Test resume game (will fail)"]
-   C --> D[Save spine events in the Shuffler event log, with their keys]
+   C --> D[ ⛵️ Save spine events in the Shuffler event log, with their keys]
    D --> L[Make sure that the UI gets updated with the Last Event Number]
    D --> K[Implement rebasing of player actions?]
    A --> E[Also do this conversion in Tabletop]
@@ -11,3 +10,7 @@ flowchart BT
    I --> G([Games are resumable])
    B --> J[Spine Replay]
    J --> H([The app works])
+
+classDef reached stroke:#333,stroke-width:2px;
+class A reached;
+class B reached;
