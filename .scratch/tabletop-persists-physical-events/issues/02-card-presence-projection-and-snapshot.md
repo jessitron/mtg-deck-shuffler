@@ -9,20 +9,20 @@ this ticket proves the diagnostic can work at all, on the smallest possible slic
 
 **Blocked by:** None — can start immediately (parallel to ticket 01).
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] `TableState` type defined in `apps/tabletop`, independent of tldraw and Spine types,
+- [x] `TableState` type defined in `apps/tabletop`, independent of tldraw and Spine types,
       modeling (for now) just which card instanceIds are present.
-- [ ] `projectEvents(events) -> TableState` is a pure function (no I/O, no editor
+- [x] `projectEvents(events) -> TableState` is a pure function (no I/O, no editor
       instance, no Spine client) that folds `card.played` (add) and `card.returned`
       (remove) events into a `TableState`.
-- [ ] `snapshotCanvas(editor) -> TableState` reads card shape records from a live tldraw
+- [x] `snapshotCanvas(editor) -> TableState` reads card shape records from a live tldraw
       editor into the same `TableState` shape.
-- [ ] A diff function compares two `TableState` values and reports discrepancies (cards
+- [x] A diff function compares two `TableState` values and reports discrepancies (cards
       present in one but not the other).
-- [ ] `projectEvents` is tested with hand-built event lists only — no server, no live
+- [x] `projectEvents` is tested with hand-built event lists only — no server, no live
       Spine, no tldraw editor — covering a card arriving and a card returning, plus
       interleaved events for multiple cards.
-- [ ] `snapshotCanvas` is tested against a real in-memory tldraw editor instance (no fake
+- [x] `snapshotCanvas` is tested against a real in-memory tldraw editor instance (no fake
       tldraw) — create card shapes via the editor's own API, snapshot, assert the result.
-- [ ] The diff is tested for both a matching pair and a deliberately desynced pair.
+- [x] The diff is tested for both a matching pair and a deliberately desynced pair.
