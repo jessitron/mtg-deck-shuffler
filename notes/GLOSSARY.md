@@ -29,15 +29,7 @@ Player (MTG Deck Shuffler): this is what we call the user of the app. They're he
 Sleeve: the colored cover a player puts their whole deck in before the game. On the Tabletop
 it renders as a rectangle of solid color slightly larger than the card: a face-down card or
 the library pile shows only the sleeve; a face-up card shows its image centered inside the
-sleeve rectangle. The sleeve color is that player's visual identity on the table (commander
-damage is tracked by opponent name + sleeve color). It is a game constant — chosen before the
-game, never changed mid-game. Real sleeves have distinct front and back colors; v1 models one
-color. Sleeves are optional; an unsleeved deck shows the standard Magic card back. (Decided
-2026-08-08, table-layout tickets 09/11/12.) The same rectangle rule now holds in the Shuffler
-too: the library stack on both `/prepare` and `/game` renders each back as a bare flat-hex
-square-cornered rectangle when a sleeve is chosen (its box-shadow — a pile-depth cue, not a
-card-face decoration — stays either way). Deliberately no sheen; that stays flat like the
-Tabletop's rendering. (2026-08-09.)
+sleeve rectangle. The sleeve color is that player's visual identity on the table. Sleeves are optional; an unsleeved deck shows the standard Magic card back.
 
 Card - this is ambiguous. Are we talking about a card conceptually, or a particular card in a deck? A card by name, or a particular edition of it? This word by itself does not have a specific meaning.
 
@@ -48,28 +40,8 @@ Card Name: this is ambiguous in the Archidekt and Scryfall domains. Usually the 
 Card vs Face: cards have names, and faces have names. A two-faced card's canonical (Display) Name contains both face names, joined by `//` — e.g. "Eiganjo Dynastorian // Replenish". Deck Shuffler zones contain cards, not faces: the library, the hand, and the table hold cards. So anything that identifies or orders cards — sorting a list, matching a name — uses the canonical card name.
 
 Face-down: concealment — showing the shared card back (or sleeve) instead of either printed
-face. This is a second axis, independent of Face. Face is which *printed* side of a card is
-up, and it only ranges over sides that exist on that card — unreachable/meaningless on a
-one-faced card, since there's no second printed side to choose. Face-down and Face compose
-rather than collapse into one bit: a two-faced card **can** be face down — a two-faced card can
-be *played* face down, or turned face down later on the table via the same generic gesture a
-one-faced card uses — and once it is, its `face` is irrelevant to what's shown, the card back
-appears regardless of which face the card "is." What a two-faced card *cannot* do is turn face
-down *as its Flip action*: Flip and Turn-face-down/up are two separate gestures/operations —
-Flip swaps which printed side is up (meaningless without a second printed side, so it's gated
-on having one), while Turn-face-down/up toggles concealment uniformly, with no such gate,
-because face-down is meant to apply the same way regardless of face count. A one-bit "which
-side is up" model was considered and rejected: it can't express "two-faced card, face down"
-(neither printed side is visible), and it makes concealment indistinguishable from a
-printed-face transform.
-
-The two ships model this differently, **on purpose**, not as a bug to reconcile: in the
-Shuffler, a one-faced card cannot be flipped at all — flip only means anything for two-faced
-cards there, and face-down has no home anywhere in the Shuffler's domain model (`CardDefinition`,
-`GameCard`, and the event contract carry nothing for it today). On the Tabletop, *any* card
-can be turned over, because a card on the table is a physical object with two sides — and a
-turned-over one-faced card *is* face-down there, a real domain event, not just a picture. See
-`CONTEXT-MAP.md`'s flip/face-down translation table for the full ship-by-ship comparison.
+face. This is possible only on the Tabletop. This independent of Face. A two-faced card **can** be played face down — and once it is, the card back
+appears regardless. Flip swaps which printed side is up (on two-faced cards), while Turn-face-down/up toggles concealment.
 
 Scryfall ID: Scryfall's card ID. This is a UUID. From this, we can derive a card image URL on Scryfall. Archidekt calls it `uid`.
 
@@ -97,7 +69,7 @@ Library (MTG Deck Shuffler UI): an ordered collection of cards, a subset of thos
 
 Game Prep (MTG Deck Shuffler): the preparation phase before a game starts. This is where deck review happens. A GamePrep stores the deck and configuration settings, including the chosen playmat and sleeve color. GamePrep has its own URL space (/prepare/:prepId) and persistence layer separate from Game. Immutable once created.
 
-Playmat: the surface a player's stuff sits on. In real Magic it's the mat on the table; in the Shuffler it's the big art-backed panel that holds the library stack, command zone and hand. **Both play screens have one** — `/prepare` and `/game` — and it is the same domain object on each, even though the two are dressed differently (the prepare mat is a grid of Cascading Cataracts art with a 20px radius; the game mat is a giant Magic card with an 80px radius). In the markup both carry the bare class `playmat`, plus a page modifier: `playmat-prepare` / `playmat-game`. **The game one used to be called `.page-container`**, which led at least one reader to conclude the game screen had no playmat; if you see that name anywhere, it's stale. As of 2026-08-09, the `/prepare` pick is snapshotted onto the game at start and actually renders on `/game` too — before that date this entry described the intent, not the code. In the Tabletop, each seat's player area has its own playmat, sent as `playmatImageUrl` on `seat.joined`.
+Playmat: the surface a player's stuff sits on. In real Magic it's the mat on the table; in the Shuffler it's the big art-backed panel that holds the library stack, command zone and hand; in Tabletop it's the background of the player's battlefield.
 
 Prep ID: a unique identifier for a GamePrep. Used in URLs and to link Games back to their originating prep.
 
@@ -119,15 +91,15 @@ Draw: move a card from the Library to the Hand
 
 Opening Hand: the seven cards dealt automatically when a game starts (fewer only for tiny test decks).
 
-Mulligan Stage / Hand Acceptance Stage (MTG Deck Shuffler, game scope): the stage right after the opening hand is dealt, before play begins, while the player decides whether to keep their hand. It is **derived from the event log** (not stored): a "deal opening hand"/"mulligan" marker event is recorded after the deal, and the stage is active while that marker is the most-recent "live" event (hand rearrangement is transparent). It ends as soon as the player takes any action other than rearranging their hand (draw, play, reveal, ...) — and undoing that action brings the stage back automatically.
+Mulligan Stage / Hand Acceptance Stage (MTG Deck Shuffler, game scope): the stage right after the opening hand is dealt, before play begins, while the player decides whether to keep their hand.
 
-Mulligan: during the Mulligan Stage, return the whole hand to the Library, shuffle, and redraw an Opening Hand. Each mulligan increments the mulligan count; the button is labeled "Mulligan", then "Mulligan #2", "#3", and so on. A mulligan is recorded as a single atomic event carrying all its moves, so it can be undone in one step (restoring the previous hand and library exactly).
+Mulligan: during the Mulligan Stage, return the whole hand to the Library, shuffle, and redraw an Opening Hand. A mulligan is recorded as a single atomic event carrying all its moves, so it can be undone in one step (restoring the previous hand and library exactly).
 
 Reveal (MTG Deck Shuffler UI): flip a card from the top of the Library so that the player can look at it. _Naming caution: in MTG rules language this is actually "look at" — private to the player. MTG's "reveal" means showing a card to everyone (or a chosen subset). The Shuffler's Reveal button is a look-at. This subtlety is not yet handled in the larger system; see "Look At vs Reveal (Spine)" below._
 
 Revealed cards (MTG Deck Shuffler, UI): a few cards that a player is looking at. Each one may be returned to the top of the library, put on the bottom of the library, moved into the hand, or put on the table.
 
-Table (MTG Deck Shuffler, game scope): where cards go when they are played. The table is where the game happens, but we don't track it in MTG Deck Shuffler. That is mysterious to us. It is possible for a player to return a card from the Table to the library or hand. _(The Table Vision is the plan for the table to stop being mysterious: this Location converges with the Spine's Table — see below.)_
+Table (MTG Deck Shuffler, game scope): where cards go when they are played. The table is where the game happens, but we don't track it in MTG Deck Shuffler.
 
 Included Card (Archidekt): a card that is played in a deck. We keep these.
 
@@ -142,126 +114,44 @@ stale — see `GameState.ts` `CommandZoneLocation`.) Commanders always arrive at
 face up; a two-faced commander can be flipped in the command zone afterward, which is
 table-local play, not seating data. (Confirmed 2026-08-08, cards-come-and-go ticket 02.)
 
-## Spine terms (planned — see DESIGN-the-table-vision.md)
-
-Table (Spine): the shared thing itself — 1–4 hands plus a tabletop plus an event log plus whoever's watching. You join a table (by typing its name on the Prep screen, for now). A table has exactly one event log.
-
-Seat: a player's place at a Table. A Shuffler Game connects to a Seat; a table has 1–4 of them. A seat shows its public shadow (card counts); only the player sees the cards.
+Seat (spine): a player's place at a Table. A Shuffler Game connects to a Seat; a table has 1–4 of them.
 
 Seat ID (Spine-minted): the identity of an **occupancy** — a Shuffler game's connection to a
-table position at a table — minted by the Spine (`SecureRandom.uuid` in `Table#prepare_seat`)
-when a seat is taken, never by the Shuffler (an earlier version of this entry said otherwise;
-that was wrong). Necessary because player names aren't unique and Table Position (below) gets
-reused across occupancies over time, so neither is a safe identity key on its own. Travels as
-`initiator.seatId` on every event a seated player causes, and — decided 2026-08-19, not yet
-built — as the `?seat=` query param on the Player URL (below). Format decided but not yet
-built: `<player-name-slug>-<8hex>`, mirroring the Table's own slug format (`TableSlug.mint`),
-so a seatId reads as a name in traces the same way a table id already does. Once "leave a
-table" ships (`.scratch/leave-and-join-table/`), a released seatId's occupancy ends and it
-stops resolving to a live seat — freeing its table position for reuse, but the seatId itself
-is retired, not reassigned.
+table position at a table — minted by the Spine
+when a seat is taken.
 
-Table Position (Spine; was "seat number" — renamed 2026-08-19): the 1-4 slot a seat occupies
-at a table, assigned sequentially by `Table#next_available_seat_number`. Purely a
-placement/layout fact — what the Tabletop uses to place a PlayerArea, and what
-`TableFull`/`SeatOccupied` check against. Reused across occupancies over time (one occupant
-leaves position 3, a later one takes it), so it is not an identity — that's what Seat ID is
-for. Renamed from "seat number" so the word "seat" stops doing double duty for both the
-occupancy (Seat ID) and the slot (this).
+Table Position (Spine): the 1-4 slot a seat occupies
+at a table
 
-Session ID (per-context; decided 2026-08-19, not yet built): identifies one browser
-tab/connection's participation, distinct from Seat ID — a player can hold one seatId across
-several concurrent sessions (two devices, or a refresh), and interpretation needs to tell
-those apart, so `initiator` needs both. Each bounded context anchors it differently. In the
-**Shuffler**, `initiator` is `{ gameId, seatId, sessionId }` — `gameId` is already the durable
-anchor (survives a refresh), so `sessionId` is free to reset on every page load; its only job
-is distinguishing concurrent page loads under one `gameId`. In the **Tabletop**, `initiator` is
-`{ seatId?, sessionId }` — there is no `gameId`-equivalent anchor, so `sessionId` (or its
-anonymous form, below) must itself persist across a refresh, or an anonymous visitor loses
-continuity with their own prior actions mid-visit. Not yet built anywhere — `sessionId` doesn't
-exist in the fleet today, and needs adding to `contracts/envelope.v1.json`'s `initiator` shape
-before anything can carry it on the wire.
+Session ID (Tabletop): identifies one browser
+tab/connection's participation
 
-Anonymous Session (Tabletop; decided 2026-08-19, not yet built): a session with no seatId — a
-spectator, or anyone who opened a Tabletop URL without a `?seat=` param. Client-generates a
-pseudonym like `anonymous-hippo-234134tr` (word-word-random — deliberately a different shape
-than a real seatId's name-slug-hex) that doubles as both the session's identity token and its
-display label, stable across a refresh (client-side storage) but not meant to be permanent. The
-`anonymous-` prefix lets interpretation tell a real occupant from a pseudonymous visitor without
-a separate flag.
+Anonymous Session (Tabletop): a session with no seatId — a
+spectator, or anyone who opened a Tabletop URL without a `?seat=` param.
 
-Owner vs Initiator (contract; decided 2026-08-19, not yet built): two different questions that
-today's code conflates. `initiator` (envelope-level, every event kind) answers "who caused
-this" — attribution for interpretation and traces, **never authority**: this app doesn't
-police, anyone (a seated player, or an anonymous session) is allowed to do anything, so
-`seatId`/`sessionId` convey provenance, not permission. `owner` (payload-level, `card.played`
-only) answers a different question — "whose PlayerArea does this card belong in," a placement
-fact about the card, independent of who moved it. Today `buildCardPlayedEvent`
-(`apps/shuffler/src/port-tabletop/types.ts`) derives `owner` directly from `initiator.seatId`,
-which forecloses any case where the two would diverge (a player moving a card into an
-opponent's zone; an anonymous facilitator arranging someone else's cards). The two should be
-independently specified, not one derived from the other.
+Solo Mode (Shuffler): the default — no table name. Play/Discard copy the card image to the clipboard for Mural-style play.
 
-Player URL (Shuffler → Tabletop; decided 2026-08-19, not yet built): the `?seat=<seatId>` query
-param on the Tabletop link a player clicks from the Shuffler's "Go to Table" button — needed so
-the Tabletop knows which occupancy is viewing (for a future seat-relative view; see
-`.scratch/tabletop-view-rotation/spec.md`'s deferred "client-side which seat is this browser"
-scope). A query param, not a path segment: the table (`/t/<slug>`) is still the one resource
-being addressed, the seat only scopes this visitor's view of it. Today's `tableUrl`
-(`services/spine/app.rb:201-204`) carries only the table slug, no seat information at all.
+Table Mode / At a Table (Shuffler): a game whose Prep supplied a table name + player name.
 
-Solo Mode (Shuffler): the default — no table name. Play/Discard copy the card image to the clipboard for Mural-style play. Unchanged by table mode.
-
-Table Mode / At a Table (Shuffler): a game whose Prep supplied a table name + player name. Play and Discard mutate and persist the Shuffler's own game state immediately, and reach the Tabletop via a best-effort `card.played` send to the Spine's event log — a Spine or Tabletop that's unreachable never blocks the play/discard. The game page's "at table _name_" link is the spectator-share URL.
-
-Discard (Shuffler): identical to Play except the verb — the card lands in the Table location (the graveyard is table geography, not Shuffler state). At a table it is its own event kind, `card.discarded` — split from `card.played` because the Tabletop routes on the difference and the Interpreter will someday find the two very different, even though the Shuffler barely feels it. (`card.played`'s zoneHint narrows to stack|battlefield accordingly. Decided 2026-08-08, cards-come-and-go ticket 02; the wire previously sent `card.played` with zone hint "graveyard".)
+Discard: In the shuffler, it is identical to Play except the verb. On the Tabletop, the card lands in the graveyard.
 
 Undo event (contract): the undo of a logged event is named by prefixing `undo.` to the
 full name of the event being undone — `undo.card.played`, `undo.card.discarded` — so
-adding undo never removes information. Informational, distinct from the opposite action:
-the Tabletop poofs the card wherever people moved it; attachments stay, detached.
-(Decided 2026-08-08, cards-come-and-go ticket 02.)
+adding undo never removes information.
 
 Card Returned (contract): `card.returned` — a card left the table for its player's
-Reveal zone. One event kind for both exits, distinguished by the envelope's `occurredIn`:
-the library portal swallowed it (tabletop) or the Shuffler's Return button recalled it
-(shuffler). Carries no face — a card removed from play no longer has a face up, so the
-table is never authoritative for a card's face. Optionally carries `fromZone` (table
-geography) when the table knows it. (Decided 2026-08-08, cards-come-and-go ticket 02.)
+Reveal zone.
 
-seat.joined vs seat.taken: two facts from two flows, not two names for one fact.
-`seat.joined` (Shuffler→Tabletop) — a seat's game connected, carrying how the player's
-stuff looks (deck name, playmat, sleeve, commanders). `seat.taken` (Spine only, never on
-the Shuffler↔Tabletop boundary) — someone sat down via the Spine's join endpoint, which
-mints the seatId and appends to the log. (Documented 2026-08-08, cards-come-and-go
-ticket 02.)
+Spectator (Tabletop): someone at a Table without a Seat. They should be able to draw but not move cards. Not implemented
 
-Game URL (Shuffler → contract): the public, player-clickable address of a Shuffler game
-(`gameUrl` on `seat.joined`). Minted by the Shuffler; the Tabletop uses it as the library
-furniture's link target and never composes or parses it. The Shuffler's integer game id
-never crosses the table boundary — the id is the Shuffler's private business; the URL is
-the address. (Decided 2026-08-08, cards-come-and-go ticket 01.)
+Event Log (spine): the append-only record of everything that happened at a Table. One per table.
 
-Spectator: someone at a Table without a Seat. Sees the public projection of the event log: what's happening, the commentary, hand counts but never hands. In some modes, may comment in chat.
+Look At vs Reveal (Spine, not yet designed): _look at_ is private — a player sees hidden information (top of library, an opponent's hand via an effect); its public shadow says only that the looking happened. _Reveal_ is deliberate publication of a card's identity, with an audience scope (everyone, or chosen players). The Shuffler's Reveal button is a look-at. Later, we will implement a proper Reveal.
 
-Event Log: the append-only record of everything that happened at a Table. One per table. Never rewritten — see Supersession.
-
-Visibility: an attribute of every event. Public events are seen by everyone at the table; private events belong to a player.
-
-Public Shadow: the public event cast by a private one. "Jess drew a card" (hand count 6→7) is the public shadow of "Jess drew Lyra Dawnbringer." **The shadow is created at the source**: the Shuffler sends only the shadow; the Spine never receives hidden-zone card identities. The Spine's log knows exactly what a person standing at the table would know. (Visibility in the Spine is for audience scoping — reveals to some players, private tutor-chats — not zone secrecy.)
-
-Look At vs Reveal (Spine, not yet designed): _look at_ is private — a player sees hidden information (top of library, an opponent's hand via an effect); its public shadow says only that the looking happened. _Reveal_ is deliberate publication of a card's identity, with an audience scope (everyone, or chosen players). The Shuffler's Reveal button is a look-at.
-
-Table Event (Spine): joining a table, taking a seat, someday matching. Not a game event.
-
-Chat Event (Spine): a message in the narration/chat panel, including player answers to the interpreter's questions.
+Table Event (Spine): joining a table, taking a seat, someday matching. Not a game event. Administrative.
 
 Physical Event (Spine, emitted by Tabletop): what happened spatially, uninterpreted. "Card rotated to tapped." "A note was placed on Lyra Dawnbringer; the text says 'flying until end of turn'."
 
-Game Event (Spine): meaning. "This spell was cast, targeting card A." Mostly born as interpretations of physical events; some born directly (the Shuffler's "drew a card" needs no interpreting). The fallback game event is "Player A moved this card and we don't know why."
+Game Event (Spine): an event that impacts the flow of the game. Draw a card, play a card.
 
-Interpretation (Spine): an event that covers one or more physical events with meaning. Carries provenance (pointers to the events it was inferred from), causality ("because [ref: Acrobatic Leap cast]"), confidence, and commentary ("Lyra already had flying").
-
-Correction (Spine): a chat event in which a player says an interpretation is wrong (or answers the interpreter's question). Triggers a superseding interpretation. An interpretation followed by its correction is a labeled training example — the log is the eval dataset.
-
-Supersession: how interpretations change without rewriting the log. A new interpretation supersedes an old one; physical events are evidence and are never replaced. The Current Reading of a game is a projection: each physical event's latest surviving interpretation.
+Interpretation (not implemented): an event that covers one or more physical events with meaning. Carries provenance (pointers to the events it was inferred from), causality ("because [ref: Acrobatic Leap cast]"), confidence, and commentary ("Lyra already had flying").
