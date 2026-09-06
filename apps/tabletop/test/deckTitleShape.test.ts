@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 import { startServer } from "../src/server/server";
 import { getRoomRegistry } from "../src/server/rooms";
 import { slugFor } from "./support/tableSlug";
+import { closeAllSpineSubscriptions } from "./support/closeSpineSubscriptions";
 
 let server: Server;
 let port: number;
@@ -15,6 +16,7 @@ beforeAll(async () => {
 });
 
 afterAll(() => {
+  closeAllSpineSubscriptions();
   return new Promise<void>((resolve) => server.close(() => resolve()));
 });
 
