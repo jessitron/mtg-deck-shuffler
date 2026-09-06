@@ -31,10 +31,14 @@ export const StartGameEvent: StartEvent = {
   eventName: "start game",
 };
 
+export type MoveCardVerb = "discard" | "play-face-down" | "returned";
+
 export type MoveCardEvent = {
   eventName: "move card";
   move: CardMove;
-  verb?: "discard" | "play-face-down";
+  verb?: MoveCardVerb;
+  /** Set when this move applies a Spine event — the envelope's `seq`, for the durable replay-cursor seed (`ensureGameSpineSubscription`). */
+  spineSeq?: number;
 };
 
 
@@ -75,6 +79,9 @@ export function nameMoveCardEvent(event: MoveCardEvent): string {
   }
   if (event.verb === "play-face-down") {
     return "Play Face Down";
+  }
+  if (event.verb === "returned") {
+    return "Return from table";
   }
   return nameMove(event.move);
 }
@@ -193,7 +200,12 @@ export class GameEventLog {
     if (!event) return false;
 
     // Cannot undo these event types ("mulligan" IS undoable)
-    if (event.eventName === "undo" || event.eventName === "start game" || event.eventName === "deal opening hand") {
+    if (
+      event.eventName === "undo" ||
+      event.eventName === "start game" ||
+      event.eventName === "deal opening hand" ||
+      (event.eventName === "move card" && event.verb === "returned")
+    ) {
       return false;
     }
 

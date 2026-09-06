@@ -2,7 +2,7 @@
 
 Mountain: spine-gathers-data
 Ship: shuffler
-Status: needs-triage
+Status: resolved
 
 **What's wrong:** `subscribeToSpine`'s `lastAppliedSeq` (`src/port-spine/spineSubscriber.ts`)
 lives only in that call's closure. `ensureGameSpineSubscription`

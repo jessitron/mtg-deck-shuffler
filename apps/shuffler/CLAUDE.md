@@ -321,8 +321,14 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   (`services/spine/lib/sse_stream.rb`) replays whatever was missed, in order, before
   continuing into live delivery; frames are chained onto one promise so a replay burst is
   still applied strictly in arrival order. A resumed subscription that was fully torn down
-  (every browser tab closed, or a server restart) starts this tracking from scratch —
-  a known gap, since nothing durable seeds it yet (`.scratch/spine-event-replay/issues/05-durable-last-applied-seq.md`).
+  (every browser tab closed, or a server restart) seeds `lastAppliedSeq` from the highest
+  `spineSeq` already recorded on the game's own `GameEventLog` (`ensureGameSpineSubscription`
+  scans `persistedGame.events` before opening it) rather than starting from scratch — every
+  Spine event that mutates a game is a real `MoveCardEvent` carrying that `seq`, not a
+  side-channel field. `extractSeq` (reading the envelope's `seq`) lives here as a generic
+  helper; `handleFrame` also uses it as a replay-contract guard, skipping (and `log.warn`ing)
+  any incoming `seq` at or before the cursor already sent — the Spine should never replay
+  something we've told it we have.
   `cardReturnedDispatch.ts` is
   this ship's **first manual span** — `"sse subscription: card.returned"`,
   `SpanKind.CONSUMER`, parent context extracted from the envelope's `traceparent`, a

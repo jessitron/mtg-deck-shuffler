@@ -64,7 +64,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     const tableId = `table-${randomUUID()}`;
     const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
     openGameIds.push(gameId);
     await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -76,11 +76,17 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
 
     const game = await loadGame(persistStatePort, cardRepository, gameId);
     const libraryCard = game.listLibrary()[0];
+    const versionBefore = game.getStateVersion();
     fakeTable.publish(cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.scryfallId));
 
     await waitUntil(() => tabOne.received.length === 1 && tabTwo.received.length === 1);
     expect(tabOne.received[0]).toContain("game-state-updated");
     expect(tabTwo.received[0]).toContain("game-state-updated");
+
+    // The push already means the applied move was persisted first — the fragment a
+    // browser fetches after this push reflects the incremented state version.
+    const gameAfter = await loadGame(persistStatePort, cardRepository, gameId);
+    expect(gameAfter.getStateVersion()).toBe(versionBefore + 1);
   }, 10000);
 
   test("closing the last open browser tab for a game tears down its Spine subscription", async () => {
@@ -88,7 +94,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     const tableId = `table-${randomUUID()}`;
     const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
     openGameIds.push(gameId);
     await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -111,7 +117,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     const tableId = `table-${randomUUID()}`;
     const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
     openGameIds.push(gameId);
     await waitUntil(() => fakeTable!.connectionsAcceptedCount() === 1);
 
@@ -120,7 +126,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     removeBrowserStream(gameId, tab);
     await waitUntil(() => fakeTable!.connectionCount() === 0);
 
-    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
     await waitUntil(() => fakeTable!.connectionsAcceptedCount() === 2);
     expect(getGameSubscriptionRegistry().has(String(gameId))).toBe(true);
   }, 10000);

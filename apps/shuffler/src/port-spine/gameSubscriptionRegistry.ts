@@ -1,9 +1,20 @@
 import { GameId } from "../domain-types.js";
+import { GameEvent } from "../GameEvents.js";
 import { PersistStatePort } from "../port-persist-state/types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
 import { subscribeToSpine, SpineSubscription } from "./spineSubscriber.js";
 import { SpineConnectionPort } from "./SpineConnectionPort.js";
 import { dispatchSpineEventForGame } from "./cardReturnedDispatch.js";
+
+/** Highest `spineSeq` recorded on any event in the game's own log — the durable seed for a resumed subscription's `lastEventId`. `undefined` when the log has no recorded `spineSeq` at all (never applied a Spine event), same as today's true first-ever connection. */
+function highestSpineSeq(events: GameEvent[]): number | undefined {
+  let highest: number | undefined;
+  for (const event of events) {
+    if (event.eventName !== "move card" || event.spineSeq === undefined) continue;
+    if (highest === undefined || event.spineSeq > highest) highest = event.spineSeq;
+  }
+  return highest;
+}
 
 export interface GameSubscriptionEntry {
   gameId: GameId;
@@ -89,6 +100,8 @@ export function ensureGameSpineSubscription(
   gameId: GameId,
   spineTableId: string,
   gameSeatId: string | undefined,
+  /** The persisted game's own event log — scanned for the highest recorded `spineSeq`, the durable seed for this subscription's `lastEventId`. */
+  persistedEvents: GameEvent[],
   deps: { persistStatePort: PersistStatePort; cardRepository: CardRepositoryPort },
   /** Defaults to the real Spine (`subscribeToSpine`'s own default) — overridable so tests can hand it a `FakeSpineConnection`. */
   connection?: SpineConnectionPort
@@ -98,7 +111,10 @@ export function ensureGameSpineSubscription(
 
   const seenEventIds = new Set<string>();
   const onEvent = (event: unknown) => dispatchSpineEventForGame(gameId, spineTableId, gameSeatId, seenEventIds, deps, event);
-  const subscription = connection ? subscribeToSpine(spineTableId, onEvent, connection) : subscribeToSpine(spineTableId, onEvent);
+  const seed = highestSpineSeq(persistedEvents);
+  const subscription = connection
+    ? subscribeToSpine(spineTableId, onEvent, connection, seed)
+    : subscribeToSpine(spineTableId, onEvent, undefined, seed);
 
   registry.set(key, { gameId, spineTableId, subscription, seenEventIds });
 }

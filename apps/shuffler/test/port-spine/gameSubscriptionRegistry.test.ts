@@ -64,7 +64,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, gameId);
       const libraryCard = gameBefore.listLibrary()[0];
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -87,7 +87,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, gameId);
       const libraryCard = gameBefore.listLibrary()[0];
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -114,7 +114,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, gameId);
       const [firstCard, secondCard] = gameBefore.listLibrary();
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
       expect(fakeTable.lastEventIdsSeen()).toEqual([undefined]); // first connection: nothing applied yet
@@ -154,9 +154,9 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, ownGameId);
       const libraryCard = gameBefore.listLibrary()[0];
 
-      ensureGameSpineSubscription(ownGameId, tableId, "seat-owner", { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(ownGameId, tableId, "seat-owner", [], { persistStatePort, cardRepository }, fakeTable);
       openGameIds.push(ownGameId);
-      ensureGameSpineSubscription(otherGameId, tableId, "seat-other", { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(otherGameId, tableId, "seat-other", [], { persistStatePort, cardRepository }, fakeTable);
       openGameIds.push(otherGameId);
       await waitUntil(() => fakeTable!.connectionCount() === 2);
 
@@ -182,11 +182,11 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
 
       const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionsAcceptedCount() === 1);
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
       await new Promise((r) => setTimeout(r, 150)); // give a would-be second connection time to land
 
       expect(fakeTable.connectionsAcceptedCount()).toBe(1);
@@ -195,11 +195,8 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
     10000
   );
 
-  // test.failing: documents a known gap (see .scratch/spine-event-replay/issues/05-durable-last-applied-seq.md)
-  // rather than a regression — Jest fails the suite if this ever starts passing unexpectedly,
-  // which is exactly the signal that ticket 05's fix has landed.
-  test.failing(
-    "a game resumed after its Spine subscription was fully torn down connects with no lastEventId — silently missing anything published in the gap",
+  test(
+    "a game resumed after its Spine subscription was fully torn down still resumes from its last applied seq (ticket 05's durable seed)",
     async () => {
       fakeTable = createFakeSpineTable();
       const tableId = `table-${randomUUID()}`;
@@ -208,7 +205,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, gameId);
       const [firstCard, secondCard] = gameBefore.listLibrary();
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -224,14 +221,20 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       fakeTable.publish(cardReturnedEvent(tableId, secondCard.gameCardIndex, secondCard.card.scryfallId));
 
       // A resumed game (server restart, or every tab closed then a new one opened) starts a
-      // fresh subscription — desired behavior is that it resumes from the last seq this game
-      // actually applied, so it catches up on the gap above. That durable seed doesn't exist
-      // yet (in-memory `lastAppliedSeq` dies with the torn-down closure), so this fails today.
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", { persistStatePort, cardRepository }, fakeTable);
+      // fresh subscription, seeded from the highest `spineSeq` recorded in the persisted
+      // game's own event log — the durable seed from ticket 05.
+      const persistedAfterFirst = await persistStatePort.retrieve(gameId);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", persistedAfterFirst!.events, { persistStatePort, cardRepository }, fakeTable);
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
       expect(fakeTable.lastEventIdsSeen()[1]).toBe(1);
+
+      await waitUntil(async () => (await loadGame(persistStatePort, cardRepository, gameId)).listRevealed().length === 2);
+      const gameAfter = await loadGame(persistStatePort, cardRepository, gameId);
+      const revealedIndexes = gameAfter.listRevealed().map((gc) => gc.gameCardIndex);
+      expect(revealedIndexes).toContain(firstCard.gameCardIndex);
+      expect(revealedIndexes).toContain(secondCard.gameCardIndex);
     },
     10000
   );
