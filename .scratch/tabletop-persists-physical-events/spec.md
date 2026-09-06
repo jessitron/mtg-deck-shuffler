@@ -13,7 +13,9 @@ Spine) owns the log-to-state projection, and a card's arrival gets two events
 ## Problem Statement
 
 Right now the Tabletop's card moves, taps, flips, and freeform shape edits are pure local
-canvas mutations. None of them reach the Spine's event log. That means Mountain 2's
+canvas mutations. None of them reach the Spine's event log. There is also no way to trigger
+a check when the bug is suspected in the moment — a player who notices it has no button to
+push and no record is kept of the fact that they noticed. That means Mountain 2's
 promise — "every physical event a real game produces... crosses the Spine's one
 append-only log per table" — is only half true today: `card.played`/`card.returned`
 cross it, but everything a player's hands do to a card *after* it lands does not.
@@ -33,6 +35,13 @@ Tabletop also gains a pure, headless projection from that log to a `TableState`,
 pure snapshot of the live canvas into that same `TableState` shape, so the two can be
 diffed to answer "does the live table match its own history?" — turning an invisible
 discrepancy into a visible, attributable one.
+
+A player triggers that diagnostic directly: a small button floating over the canvas
+(an angry-face 😠, spinning briefly to confirm the click registered, nothing more shown
+on screen) runs the diff and reports it as telemetry — the full projected `TableState`,
+the full live `TableState`, and the full discrepancy list, dumped as large JSON payloads
+rather than summarized, since this is a targeted diagnostic tool, not routine
+instrumentation.
 
 ## User Stories
 
@@ -86,6 +95,36 @@ discrepancy into a visible, attributable one.
 16. As a player whose Tabletop session drops and reconnects, I want physical events to
     replay through the same dedup-by-event-id path `card.played` already uses
     (`spineEventDispatch.ts`), so a reconnect never double-applies a tap or a move.
+17. As a developer, I want every new Tabletop-originated event kind to skip itself when the
+    Spine broadcasts it back over the Tabletop's own SSE subscription (the same
+    `occurredIn === "tabletop"` self-echo skip the `card.returned` fix already uses), so the
+    Tabletop never re-applies its own move/tap/flip/shape events to itself.
+18. As Evelyn (a player, not a developer — the whole app is dev/admin-facing right now), I
+    want a button on the Tabletop canvas I can push the moment I notice cards have piled up,
+    so the diagnostic runs at the exact moment the bug is visible instead of after the fact.
+    It's a floating button over the canvas (not a toolbar tool — a one-shot action, not a
+    drawing tool), labeled with an angry-face emoji, available to any player with no gating.
+    Clicking it spins the icon briefly as the only feedback — it doesn't show me the
+    diagnosis, just confirms the click registered.
+19. As Jess investigating a report Evelyn just filed, I want that button's click to run the
+    full diagnostic (`projectEvents` + `snapshotCanvas` + diff) and record the result as
+    telemetry: a span with summary attributes (shape count, discrepancy count, a match
+    boolean, and a short list of discrepancy kinds), plus — when there is a discrepancy —
+    the complete projected `TableState`, the complete live `TableState`, and the complete
+    discrepancy list, each logged in full (not summarized down to fit a span; Honeycomb
+    accepts up to ~1MB per event, and each of these three gets its own log entry so each
+    can use that budget independently).
+20. As a developer, I want `card.tapped`/`card.untapped`, `card.flipped`, and
+    `card.turnedFaceDown` to carry `significance: "domain"` — these are always
+    game-significant (it's *why* the menu actions to trigger them exist) — while
+    `card.arrived`, `card.moved`, and the generic `shape.*` events default to
+    `significance: "physical"` (per story 14's deferred zone-based refinement for
+    `card.moved` specifically).
+21. As a developer, I want every move-type event (`card.moved`, `shape.moved`) to carry
+    both the prior and the new position (and zone, where the shape type has one) — not just
+    the destination — so the diagnostic can also catch a gap (a logged move whose "from"
+    doesn't match the end of the previous logged move for that shape), not only a final
+    mismatch.
 
 ## Implementation Decisions
 
@@ -110,29 +149,50 @@ discrepancy into a visible, attributable one.
 - **The diagnostic check** replays a table's full event history through
   `projectEvents`, snapshots the live canvas through `snapshotCanvas`, and diffs the two
   `TableState` values. Headless: no new Spine endpoint, no wire format for shipping
-  `TableState` between ships. Where it's surfaced (a debug route, a CLI script, a
-  `/admin`-adjacent view) is an open implementation choice, not fixed here — pick the
-  cheapest thing that lets Jess run it against a live table.
+  `TableState` between ships.
   - **Not built in this pass**: a `TableState -> tldraw shape records` renderer. That
     direction is needed for the later "load an existing table by replaying the log"
     feature (including its planned animated catch-up), not for this diagnostic, and is
     explicitly out of scope below.
+- **The diagnostic's trigger is a floating button over the canvas**, wired via tldraw's
+  `InFrontOfTheCanvas` component slot (the same slot `LibraryPortalOverlay.tsx` already
+  uses — a plain React element in viewport space, not a tldraw shape, not a toolbar tool,
+  so it never touches shape selection/drag machinery). Labeled with a 😠 emoji (no custom
+  icon asset for v1), rendered unconditionally for any player (no dev/admin gating — the
+  whole app is currently dev/admin-facing), and spins briefly on click as the only visible
+  feedback. Consulted `owners/fleet-design-language` and `owners/tabletop-shape-mechanics`
+  during design; both confirmed this placement and that a player-facing affordance gets no
+  special "debug" visual treatment.
+- **The diagnostic's telemetry** wraps the run in a manual span (the Tabletop's `inSpan()`
+  helper, per `owners/fleet-is-observable`), with summary attributes
+  (`diagnostic.shape_count`, `diagnostic.discrepancy_count`, `diagnostic.match`,
+  `diagnostic.discrepancy_kinds`). When `diagnostic.match` is false, additionally log (via
+  the Tabletop's logger, one log call each) the full projected `TableState`, the full live
+  `TableState`, and the full discrepancy list — deliberately as complete JSON dumps rather
+  than the fleet's usual "cheap summary" span discipline, since this is a one-shot
+  diagnostic tool (not routine instrumentation) and Honeycomb accepts up to ~1MB per
+  event, with each log call getting its own budget.
+- **Self-echo**: every new Tabletop-originated event kind reuses the `occurredIn ===
+  "tabletop"` skip that the `card.returned` self-echo fix established
+  (`apps/shuffler/src/port-spine/cardReturnedDispatch.ts`'s pattern, mirrored on the
+  Tabletop's own dispatch) — an event the Tabletop just sent must not be re-applied when
+  the Spine broadcasts it back over the same SSE subscription.
 - **New contract payloads** under `contracts/payloads/`, each versioned independently per
-  `contracts/README.md`'s policy, envelope `significance: "physical"`,
-  `occurredIn: "tabletop"`:
-  - `card.arrived.v1.json` — Tabletop-originated; carries the landing position. Sibling
-    to `card.played`, not a replacement for it.
-  - `card.moved.v1.json` — carries the new position; `significance` defaulted per user
-    story 14.
+  `contracts/README.md`'s policy, `occurredIn: "tabletop"`:
+  - `card.arrived.v1.json` — Tabletop-originated; carries the landing position,
+    `significance: "physical"`. Sibling to `card.played`, not a replacement for it.
+  - `card.moved.v1.json` — carries both the prior and the new position (and zone),
+    `significance: "physical"` defaulted per user story 14/20.
   - `card.tapped.v1.json` / `card.untapped.v1.json` (or one event with a boolean — match
     whichever precedent `card.played`/`card.played-face-down`'s sibling-events pattern
-    favors).
-  - `card.flipped.v1.json` — records the resulting face.
+    favors) — `significance: "domain"` (story 20: these are always game-significant).
+  - `card.flipped.v1.json` — records the resulting face, `significance: "domain"`.
   - `card.turnedFaceDown.v1.json` — covers both directions (down and back up); the
-    resulting concealment state rides on the payload.
+    resulting concealment state rides on the payload, `significance: "domain"`.
   - `shape.created.v1.json` / `shape.moved.v1.json` / `shape.removed.v1.json` — the
     generic fallback for any tldraw shape type without its own dedicated event; carries
-    shape id, tldraw shape type, and raw position/props.
+    shape id, tldraw shape type, and raw position/props (`shape.moved` carries both prior
+    and new position), `significance: "physical"`.
   - All card-identity fields follow `card.played.v1.json`'s precedent
     (`scryfallId` + `instanceId`), per `contracts/README.md`'s "Card Identity" section.
 - **Emission seam**: extend the existing send-then-commit pattern
@@ -174,6 +234,15 @@ discrepancy into a visible, attributable one.
   no real Spine) — assert the right payload shape is POSTed on the right trigger.
 - **Contract schemas** are validated the same way `card.played.v1.json` already is —
   ajv against example payloads — no new validation approach needed.
+- **The diagnostic button and its telemetry** are tested by invoking the click handler
+  directly (no real click simulation needed) against a captured span/log recorder, for
+  both outcomes: a matching `TableState` pair (span only, `diagnostic.match: true`, no
+  logs) and a deliberately desynced pair (span plus all three full-JSON log calls,
+  `diagnostic.match: false`). Assert the spin animation is triggered on click regardless
+  of outcome — it's the only feedback a player gets.
+- **Self-echo skip** is tested the same way `card.returned`'s self-echo fix is: dispatch
+  an event with `occurredIn: "tabletop"` back through the Tabletop's own event handling
+  and assert it's a no-op, for each new event kind.
 
 ## Out of Scope
 
@@ -187,9 +256,6 @@ discrepancy into a visible, attributable one.
   State reconstruction — interpretation only.
 - **The Interpreter reading these new events.** Mountain 3's territory; this spec only
   ensures the events exist and are correctly reconstructable.
-- **A UI surface for running the diagnostic check.** Where/how Jess triggers it (debug
-  route, script, admin view) is left as an implementation choice for whoever picks this
-  up, not specified here.
 - **Any change to how `card.played` or `card.returned` are shaped or sent.** Untouched;
   `card.arrived` is additive.
 
