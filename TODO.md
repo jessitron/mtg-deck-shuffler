@@ -183,3 +183,12 @@ and I want to drop a card in between C and D, then the drop zone between them is
 - [ ] `table-broadcaster-key-leak` `@subscribers` keys are never pruned
   - `publish` reads through a `Hash.new { |h, k| h[k] = [] }`, creating a permanent entry per table
     id; `unsubscribe` removes the queue but leaves the empty array. Small, but unbounded.
+
+- [ ] `spine-return-undo-round-trip` Undoing a Spine-returned card should tell the table
+  - Ticket 05 (`.scratch/spine-event-replay/issues/05-durable-last-applied-seq.md`) disables
+    undo for a `card.returned`-caused move rather than round-tripping it, since undo never
+    calls out to the Spine and the Tabletop would be left showing the card as returned.
+  - The real fix: an UNDO event sent to the Spine, which tells the Tabletop what to restore.
+    That requires the original `card.returned` event to carry *where the card was before* (its
+    prior position/zone on the canvas), which it doesn't today — the Tabletop needs that to put
+    the card back rather than just removing it again.
