@@ -55,15 +55,17 @@ if [ -n "$(git status --porcelain)" ]; then
   STASHED=1
 fi
 
-if ! git merge --no-ff "$BRANCH" -m "$MSG"; then
+if git merge --ff-only "$BRANCH" 2>/dev/null; then
+  echo "Fast-forwarded main to '$BRANCH' (no merge commit needed)."
+elif ! git merge --no-ff "$BRANCH" -m "$MSG"; then
   echo "Error: merge of '$BRANCH' failed." >&2
   if [ "$STASHED" -eq 1 ]; then
     echo "Your uncommitted changes are untouched, safe in the stash — see 'git stash list' / 'git stash pop'." >&2
   fi
   exit 1
+else
+  echo "Merged '$BRANCH' into main."
 fi
-
-echo "Merged '$BRANCH' into main."
 
 echo "Running fleet tests before cleanup..."
 TESTS_FAILED=0
