@@ -1,5 +1,27 @@
 # History
 
+## 2026-09-06 — the Undo button's new disabled state reused an existing pattern, not a new decision
+
+`undo-button-table-return`: when the game's most recent event is a tabletop-initiated card
+return (`move card` / verb `returned`) and there's no other undoable event, the Undo button
+used to be omitted entirely. It's now rendered visibly but disabled (`title="Can't undo
+tabletop-initiated card return yet, sorry"`), so a player sees *why* Undo is unavailable
+instead of wondering where the button went.
+
+**No new visual decision — converged onto `.play-button:disabled`'s exact recipe.**
+`game.css` gained `.undo-button:disabled { opacity: 0.6; cursor: not-allowed; }`, the same two
+declarations as `.play-button:disabled` (`game.css`, line ~507), which already exists for the
+"disabled during copy" case. Same posture as the 2026-08-07 Mulligan-button entry above:
+applying a settled disabled-button treatment to a newly-noticed case is convergence, nothing
+to stage on `/design`, nothing to ask Jess. `.undo-button` still inherits its enabled-state
+colors from `.history-actions button`'s seat-color rule (`--seat-secondary`/
+`--seat-primary`); the `:disabled` rule only touches opacity/cursor, so seat colors are
+unaffected by disabling it.
+
+No raw hex, no new token, no radius or focus-ring change. `npx playwright test
+verify-design-gallery` — 7/7 pass, unchanged (this button has no gallery specimen, matching
+`.play-button:disabled`, which also has none).
+
 ## 2026-08-21 — the library modal's order toggle opened a new, unreviewed exclusive-pair idiom
 
 `library-search-order-toggle`: Jess asked directly for a way to switch the Library Search
