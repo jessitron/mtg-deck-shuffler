@@ -105,18 +105,25 @@ export async function sendCardDiscardedToSpineBestEffort(spinePort: SpinePort | 
  * Any transition out of the Shuffler's Table location (Return button, put-in-hand/top/bottom)
  * tells the Tabletop the card left, so it can poof the matching shape (ticket 07). Best-effort,
  * mirroring `sendCardPlayedToSpineBestEffort` — a down Spine must not block the Return action.
+ *
+ * `onEventBuilt`, if given, is called with the event's id synchronously, before the event is
+ * sent — the Spine broadcasts every event back to every subscriber of its table, including
+ * this game's own SSE subscription, so the caller uses this to pre-register the id as
+ * already-seen (`markEventSeenForGame`) before that echo can possibly arrive.
  */
 export async function sendCardReturnedToSpineBestEffort(
   spinePort: SpinePort | undefined,
   game: GameState,
   gameCard: GameCard,
-  sessionId?: string
+  sessionId?: string,
+  onEventBuilt?: (eventId: string) => void
 ): Promise<void> {
   if (!spinePort || !game.spineTableId || !game.seatId || !gameCard.cardInstanceId) return;
   const tableId = game.spineTableId;
   try {
     const initiator = { seatId: game.seatId, playerName: game.playerName ?? "player", sessionId };
     const event = buildCardReturnedEvent(gameCard, gameCard.cardInstanceId, initiator, game.seatId, tableId);
+    onEventBuilt?.(event.id);
     await spinePort.sendEvent(tableId, event);
   } catch (error) {
     trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });
