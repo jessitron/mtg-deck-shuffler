@@ -6,6 +6,7 @@ import { applyGameCommand } from "../apply-game-command.js";
 import { validateIncomingEvent } from "./incomingEventValidation.js";
 import { markCurrentSpanAsError } from "../tracing_util.js";
 import { broadcastGameStateUpdated } from "./gameSubscriptionRegistry.js";
+import { extractSeq } from "./spineSubscriber.js";
 import { log } from "../log.js";
 
 const tracer = trace.getTracer("mtg-deck-shuffler");
@@ -19,13 +20,6 @@ interface CardReturnedPayload {
 
 function isEnvelopeLike(value: unknown): value is { name: string; traceparent?: unknown } {
   return typeof value === "object" && value !== null && "name" in value && typeof (value as { name: unknown }).name === "string";
-}
-
-/** The Spine assigns `seq` on append and stamps it on every broadcast envelope — read here, not by `subscribeToSpine`, per the seq-tracking contract described there. */
-function extractSeq(value: unknown): number | undefined {
-  if (typeof value !== "object" || value === null || !("seq" in value)) return undefined;
-  const seq = (value as { seq: unknown }).seq;
-  return typeof seq === "number" ? seq : undefined;
 }
 
 export interface CardReturnedDispatchDeps {
@@ -121,7 +115,7 @@ export async function dispatchSpineEventForGame(
             async (doingSpan) => {
               try {
                 const outcome = await applyGameCommand(deps, gameId, undefined, (game) => {
-                  game.moveByGameCardIndex(envelope.payload.gameCardIndex, "Revealed");
+                  game.moveByGameCardIndex(envelope.payload.gameCardIndex, "Revealed", undefined, "returned", seq);
                 });
 
                 if (outcome.kind === "applied") {

@@ -1,5 +1,5 @@
 import { describe, test, expect } from "@jest/globals";
-import { GameEventLog, GameStartedEvent, StartGameEvent } from "../src/GameEvents.js";
+import { GameEventLog, GameStartedEvent, StartGameEvent, MoveCardEvent, nameMoveCardEvent } from "../src/GameEvents.js";
 import { CardLocation } from "../src/domain-types.js";
 
 describe("GameEventLog", () => {
@@ -128,6 +128,22 @@ describe("GameEventLog", () => {
       expect(log.canBeUndone(startEvent.gameEventIndex)).toBe(false);
     });
 
+    test("returns false for a move card event with verb 'returned' (a card returned from the table by the Spine)", () => {
+      const log = GameEventLog.newLog();
+      const returnedEvent = log.record({
+        eventName: "move card",
+        move: {
+          gameCardIndex: 1,
+          fromLocation: { type: "Table" },
+          toLocation: { type: "Revealed", position: 0 },
+        },
+        verb: "returned",
+        spineSeq: 3,
+      });
+
+      expect(log.canBeUndone(returnedEvent.gameEventIndex)).toBe(false);
+    });
+
     test("returns false for undo events", () => {
       const log = GameEventLog.newLog();
       const moveEvent = log.record({
@@ -185,5 +201,21 @@ describe("GameEventLog", () => {
   });
 
   describe("reverse", () => {
+  });
+
+  describe("nameMoveCardEvent", () => {
+    test("labels verb 'returned' as 'Return from table'", () => {
+      const event: MoveCardEvent = {
+        eventName: "move card",
+        move: {
+          gameCardIndex: 1,
+          fromLocation: { type: "Table" },
+          toLocation: { type: "Revealed", position: 0 },
+        },
+        verb: "returned",
+      };
+
+      expect(nameMoveCardEvent(event)).toBe("Return from table");
+    });
   });
 });

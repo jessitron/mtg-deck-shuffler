@@ -26,6 +26,13 @@ export interface SpineSubscription {
   close(): void;
 }
 
+/** The Spine assigns `seq` on append and stamps it on every broadcast envelope. */
+export function extractSeq(value: unknown): number | undefined {
+  if (typeof value !== "object" || value === null || !("seq" in value)) return undefined;
+  const seq = (value as { seq: unknown }).seq;
+  return typeof seq === "number" ? seq : undefined;
+}
+
 /**
  * Called with each event as it's parsed off the stream. Returns (possibly async) the
  * event's `seq` once it's been fully handled and confirmed to have actually landed, so
@@ -40,14 +47,16 @@ export type SpineEventHandler = (event: unknown) => number | undefined | Promise
 export function subscribeToSpine(
   tableId: string,
   onEvent: SpineEventHandler,
-  connection: SpineConnectionPort = new HttpSpineConnection()
+  connection: SpineConnectionPort = new HttpSpineConnection(),
+  /** Durable seed for a resumed subscription — the highest `spineSeq` already recorded in the game's own event log, so a subscription re-created after a full teardown doesn't start from scratch. Absent for a true first-ever connection. */
+  initialLastAppliedSeq?: number
 ): SpineSubscription {
   let closed = false;
   let current: OpenSpineConnection | null = null;
   let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
   let reconnectDelayMs = RECONNECT_DELAY_MS;
   /** Highest `seq` confirmed applied via `onEvent` — sent as `lastEventId` on every subsequent connect attempt. Absent on the very first connection. */
-  let lastAppliedSeq: number | undefined;
+  let lastAppliedSeq: number | undefined = initialLastAppliedSeq;
 
   function connectOnce(): void {
     const startingSeq = lastAppliedSeq;
@@ -67,6 +76,15 @@ export function subscribeToSpine(
 
     async function handleFrame(frame: SpineFrame): Promise<void> {
       try {
+        const frameSeq = extractSeq(frame.event);
+        if (frameSeq !== undefined && lastAppliedSeq !== undefined && frameSeq <= lastAppliedSeq) {
+          log.warn("spine sse: replayed an event at or before our cursor, skipping", {
+            "spine.table_id": tableId,
+            "spine.seq": frameSeq,
+            "spine.last_applied_seq": lastAppliedSeq,
+          });
+          return;
+        }
         const applied = await onEvent(frame.event);
         if (typeof applied === "number" && (lastAppliedSeq === undefined || applied > lastAppliedSeq)) {
           lastAppliedSeq = applied;

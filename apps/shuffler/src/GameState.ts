@@ -14,7 +14,7 @@ import {
 } from "./domain-types.js";
 import { PersistedGameState, PERSISTED_GAME_STATE_VERSION, IncompatibleStateVersionError } from "./port-persist-state/types.js";
 import { PrepId } from "./port-persist-prep/types.js";
-import { CardMove, GameEvent, GameEventLog, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
+import { CardMove, GameEvent, GameEventLog, MoveCardVerb, StartGameEvent, compactShuffleMoves, expandCompactShuffleMoves } from "./GameEvents.js";
 import { trace } from "@opentelemetry/api";
 import { log } from "./log.js";
 import { CardRepositoryPort } from "./port-card-repository/types.js";
@@ -421,7 +421,7 @@ export class GameState {
     return { shuffling: true };
   }
 
-  private executeMove(move: CardMove, recording: boolean = true, browserTabId?: string, verb?: "discard" | "play-face-down") {
+  private executeMove(move: CardMove, recording: boolean = true, browserTabId?: string, verb?: MoveCardVerb, spineSeq?: number) {
     function verifyLocationsAreIdentical(expected: CardLocation, actual: CardLocation) {
       // hmm, this only matters for UNDO, or any sort of move replay. When I have that, move it
       const identical = expected.type == actual.type && (expected as any).position == (expected as any).position;
@@ -443,25 +443,31 @@ export class GameState {
     verifyLocationsAreIdentical(move.fromLocation, gameCard.location);
     gameCard.location = move.toLocation;
     if (recording) {
-      this.eventLog.record({ eventName: "move card", move, browserTabId, ...(verb ? { verb } : {}) });
+      this.eventLog.record({
+        eventName: "move card",
+        move,
+        browserTabId,
+        ...(verb ? { verb } : {}),
+        ...(spineSeq !== undefined ? { spineSeq } : {}),
+      });
     }
   }
   // TODO: parallel moveCard for flipCard
 
-  private moveCard(gameCard: GameCard, toLocation: CardLocation, browserTabId?: string, verb?: "discard" | "play-face-down") {
+  private moveCard(gameCard: GameCard, toLocation: CardLocation, browserTabId?: string, verb?: MoveCardVerb, spineSeq?: number) {
     const move = {
       gameCardIndex: gameCard.gameCardIndex,
       fromLocation: gameCard.location,
       toLocation,
     };
-    return this.executeMove(move, true, browserTabId, verb);
+    return this.executeMove(move, true, browserTabId, verb, spineSeq);
   }
 
-  private addToRevealed(gameCard: GameCard, browserTabId?: string): this {
+  private addToRevealed(gameCard: GameCard, browserTabId?: string, verb?: MoveCardVerb, spineSeq?: number): this {
     const revealedCards = this.listRevealed();
     const maxPosition = revealedCards.length > 0 ? Math.max(...revealedCards.map((gc) => gc.location.position)) : -1;
     const nextPosition = maxPosition + 1;
-    this.moveCard(gameCard, { type: "Revealed", position: nextPosition }, browserTabId);
+    this.moveCard(gameCard, { type: "Revealed", position: nextPosition }, browserTabId, verb, spineSeq);
     return this;
   }
 
@@ -605,7 +611,13 @@ export class GameState {
     return this;
   }
 
-  public moveByGameCardIndex(gameCardIndex: number, destination: CardMoveDestination, browserTabId?: string): this {
+  public moveByGameCardIndex(
+    gameCardIndex: number,
+    destination: CardMoveDestination,
+    browserTabId?: string,
+    verb?: MoveCardVerb,
+    spineSeq?: number
+  ): this {
     const allCards = this.getCards();
     if (gameCardIndex < 0 || gameCardIndex >= allCards.length) {
       throw new Error(`Invalid game card index: ${gameCardIndex}`);
@@ -615,7 +627,7 @@ export class GameState {
 
     switch (destination) {
       case "Revealed":
-        this.addToRevealed(cardToMove, browserTabId);
+        this.addToRevealed(cardToMove, browserTabId, verb, spineSeq);
         break;
       case "Hand":
         this.addToHand(cardToMove, browserTabId);
