@@ -7,7 +7,7 @@ import { CardRepositoryPort } from "../../src/port-card-repository/types.js";
 import { GameState } from "../../src/GameState.js";
 import { deckWithOneCommander, createTestPersistedGameState } from "../generators.js";
 import { GameStatus } from "../../src/domain-types.js";
-import { ensureGameSpineSubscription, getGameSubscriptionRegistry, markEventSeenForGame } from "../../src/port-spine/gameSubscriptionRegistry.js";
+import { ensureGameSpineSubscription, getGameSubscriptionRegistry } from "../../src/port-spine/gameSubscriptionRegistry.js";
 import { createFakeSpineTable, cardReturnedEvent, waitUntil, FakeSpineTable } from "./FakeSpineTable.js";
 
 let nextGameId = 900000;
@@ -175,7 +175,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
   );
 
   test(
-    "an event pre-registered via markEventSeenForGame (a self-initiated return, e.g. the Return button) is a no-op when the Spine echoes it back",
+    "a card.returned.v1 the Shuffler sent itself (occurredIn: 'shuffler') is a no-op when the Spine echoes it back — the Return button's own send already applied the move locally",
     async () => {
       fakeTable = createFakeSpineTable();
       const tableId = `table-${randomUUID()}`;
@@ -188,12 +188,9 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
-      // Mirrors sendCardReturnedBeforeMutate: the id is registered as seen (as it would be
-      // right before the outbound send) before the Spine ever echoes the event back.
-      const event = cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.scryfallId);
-      markEventSeenForGame(gameId, event.id);
-
-      fakeTable.publish(event);
+      // Mirrors buildCardReturnedEvent (src/port-tabletop/types.ts) — every event the
+      // Shuffler itself builds and sends carries occurredIn: "shuffler".
+      fakeTable.publish(cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.scryfallId, { occurredIn: "shuffler" }));
       await new Promise((r) => setTimeout(r, 150)); // give a would-be apply time to land
 
       const gameAfter = await loadGame(persistStatePort, cardRepository, gameId);

@@ -90,6 +90,16 @@ export async function dispatchSpineEventForGame(
             return seq;
           }
 
+          // The Shuffler's own Return/Put-in-Hand/Put-on-Top/Put-on-Bottom actions apply the
+          // move locally *and* send this same card.returned to the Spine (so the Tabletop can
+          // poof the shape) — which the Spine then broadcasts straight back over this same
+          // subscription. `occurredIn` says which ship actually built the event: "shuffler"
+          // means we already applied it before sending, so this arrival is just our own echo.
+          if (envelope.occurredIn === "shuffler") {
+            span.setAttribute("card_return.outcome", "self-initiated");
+            return seq;
+          }
+
           if (seenEventIds.has(envelope.id)) {
             span.setAttribute("card_return.outcome", "duplicate");
             return seq;
