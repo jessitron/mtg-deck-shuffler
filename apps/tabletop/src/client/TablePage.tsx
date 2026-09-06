@@ -176,6 +176,7 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
     const tableName = tableNameFromSlug(tableSlug);
     setGlobalAttrs({ "table.name": tableName, "table.slug": tableSlug });
     void inSpan("table page opened", () => {}, { "table.name": tableName, "table.slug": tableSlug });
+    document.title = `${tableName} — The Tabletop`;
   }, [tableSlug]);
 
   const uri = useMemo(() => {
