@@ -76,6 +76,18 @@ export function removeBrowserStream(gameId: GameId, stream: BrowserStream): void
   }
 }
 
+/**
+ * Records an event id as already-applied for a game's Spine subscription, before that
+ * event is even sent — so when the Spine broadcasts it straight back to us (we're
+ * subscribed to our own table), `dispatchSpineEventForGame`'s existing redelivery dedup
+ * treats it as a duplicate and skips it, instead of re-applying a move the initiating
+ * request already made locally. A no-op if the game has no live subscription (solo game,
+ * or the subscription hasn't been opened yet) — nothing to dedup against in that case.
+ */
+export function markEventSeenForGame(gameId: GameId, eventId: string): void {
+  registry.get(String(gameId))?.seenEventIds.add(eventId);
+}
+
 /** Number of currently-open browser tabs for a game — test/diagnostic use. */
 export function browserStreamCountForGame(gameId: GameId): number {
   return browserStreamsByGame.get(String(gameId))?.size ?? 0;

@@ -7,7 +7,7 @@ import { CardRepositoryPort } from "../../src/port-card-repository/types.js";
 import { GameState } from "../../src/GameState.js";
 import { deckWithOneCommander, createTestPersistedGameState } from "../generators.js";
 import { GameStatus } from "../../src/domain-types.js";
-import { ensureGameSpineSubscription, getGameSubscriptionRegistry } from "../../src/port-spine/gameSubscriptionRegistry.js";
+import { ensureGameSpineSubscription, getGameSubscriptionRegistry, markEventSeenForGame } from "../../src/port-spine/gameSubscriptionRegistry.js";
 import { createFakeSpineTable, cardReturnedEvent, waitUntil, FakeSpineTable } from "./FakeSpineTable.js";
 
 let nextGameId = 900000;
@@ -170,6 +170,34 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       await waitUntil(async () => (await loadGame(persistStatePort, cardRepository, ownGameId)).listRevealed().length === 1);
       const otherGameAfter = await loadGame(persistStatePort, cardRepository, otherGameId);
       expect(otherGameAfter.listRevealed()).toHaveLength(0);
+    },
+    10000
+  );
+
+  test(
+    "an event pre-registered via markEventSeenForGame (a self-initiated return, e.g. the Return button) is a no-op when the Spine echoes it back",
+    async () => {
+      fakeTable = createFakeSpineTable();
+      const tableId = `table-${randomUUID()}`;
+
+      const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
+      const gameBefore = await loadGame(persistStatePort, cardRepository, gameId);
+      const libraryCard = gameBefore.listLibrary()[0];
+
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+      openGameIds.push(gameId);
+      await waitUntil(() => fakeTable!.connectionCount() === 1);
+
+      // Mirrors sendCardReturnedBeforeMutate: the id is registered as seen (as it would be
+      // right before the outbound send) before the Spine ever echoes the event back.
+      const event = cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.scryfallId);
+      markEventSeenForGame(gameId, event.id);
+
+      fakeTable.publish(event);
+      await new Promise((r) => setTimeout(r, 150)); // give a would-be apply time to land
+
+      const gameAfter = await loadGame(persistStatePort, cardRepository, gameId);
+      expect(gameAfter.listRevealed()).toHaveLength(0);
     },
     10000
   );

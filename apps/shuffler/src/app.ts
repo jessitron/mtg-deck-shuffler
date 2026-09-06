@@ -29,7 +29,7 @@ import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 import { applyGameCommand, CommandOutcome } from "./apply-game-command.js";
 import { WhatHappened } from "./GameState.js";
 import { GameId, parseGameId } from "./domain-types.js";
-import { ensureGameSpineSubscription, addBrowserStream, removeBrowserStream, BrowserStream } from "./port-spine/gameSubscriptionRegistry.js";
+import { ensureGameSpineSubscription, addBrowserStream, removeBrowserStream, markEventSeenForGame, BrowserStream } from "./port-spine/gameSubscriptionRegistry.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -136,7 +136,7 @@ export function createApp(
   async function sendCardReturnedBeforeMutate(game: GameState, card: GameCard, sessionId?: string): Promise<void> {
     setCommonSpanAttributes({ tableName: game.tableName });
     trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing" });
-    await sendCardReturnedToSpineBestEffort(spinePort, game, card, sessionId);
+    await sendCardReturnedToSpineBestEffort(spinePort, game, card, sessionId, (eventId) => markEventSeenForGame(game.gameId, eventId));
   }
 
   async function sendCardDiscardedBeforeMutate(game: GameState, card: GameCard, sessionId?: string): Promise<void> {
