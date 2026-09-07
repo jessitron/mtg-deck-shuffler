@@ -1,5 +1,5 @@
 import { GameState, TableInfo } from "../../src/GameState.js";
-import { FakeSpineGateway } from "../../src/port-spine/outbound/FakeSpineGateway.js";
+import { FakeSpineAdapter } from "../../src/port-spine/outbound/FakeSpineAdapter.js";
 import { joinSpineBestEffort, sendCardDiscardedToSpineBestEffort } from "../../src/table-sync/sendToSpine.js";
 import { buildCardDiscardedEvent } from "../../src/port-tabletop/types.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
@@ -45,7 +45,7 @@ describe("card.discarded events validate against the Spine's own contracts (cont
   });
 
   it("the event actually sent by sendCardDiscardedToSpineBestEffort, end to end through a joined seat, validates", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
     const { spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
       gameId: "discard-contract-test-game",
       tableName: "Friday Night",

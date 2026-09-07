@@ -12,6 +12,7 @@ import { SqliteCardRepositoryAdapter } from "./port-card-repository/SqliteCardRe
 import { ScryfallCardImagesGateway } from "./port-card-images/ScryfallCardImagesGateway.js";
 import { SpinePort } from "./port-spine/outbound/types.js";
 import { HttpSpineGateway } from "./port-spine/outbound/HttpSpineGateway.js";
+import { HttpSpineAdapter } from "./port-spine/outbound/HttpSpineAdapter.js";
 import { createApp } from "./app.js";
 import { log } from "./log.js";
 
@@ -64,7 +65,7 @@ const persistPrepPort: PersistPrepPort = createPersistPrepAdapter(cardRepository
 
 const spineUrl = process.env.SPINE_URL || "http://localhost:4600";
 log.info("Sending card.played to the Spine's event log (for games at a table)", { "spine.url": spineUrl });
-const spinePort: SpinePort = new HttpSpineGateway(spineUrl);
+const spinePort: SpinePort = new HttpSpineAdapter(new HttpSpineGateway(spineUrl));
 
 const app = createApp(deckRetriever, persistStatePort, persistPrepPort, cardRepository, spinePort);
 const PORT = process.env.PORT || 3333;

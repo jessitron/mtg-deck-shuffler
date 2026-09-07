@@ -1,5 +1,5 @@
 import { GameState, TableInfo, GameCard } from "../../src/GameState.js";
-import { FakeSpineGateway } from "../../src/port-spine/outbound/FakeSpineGateway.js";
+import { FakeSpineAdapter } from "../../src/port-spine/outbound/FakeSpineAdapter.js";
 import { joinSpineBestEffort, sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort } from "../../src/table-sync/sendToSpine.js";
 import { CardPlayedEvent, buildCardPlayedEvent } from "../../src/port-tabletop/types.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
@@ -44,7 +44,7 @@ function commanderCard(card = nicolBolas, cardInstanceId = "cmdr-instance-1"): G
 
 describe("joinSpineBestEffort", () => {
   it("joins the table with one call carrying identity plus full decoration, returning the tableId, seat number, and tableUrl", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
 
     const result = await joinSpineBestEffort(fake, { gameId: "game-1", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck" });
 
@@ -66,7 +66,7 @@ describe("joinSpineBestEffort", () => {
   });
 
   it("a picked sleeve travels as sleeveColor, and the card back is omitted — sleeveColor wins", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
 
     await joinSpineBestEffort(fake, { gameId: "game-2", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck", sleeveColor: "#8b2f5c" });
 
@@ -77,7 +77,7 @@ describe("joinSpineBestEffort", () => {
   });
 
   it("a picked playmat travels as an absolute URL", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
 
     await joinSpineBestEffort(fake, {
       gameId: "game-3",
@@ -92,7 +92,7 @@ describe("joinSpineBestEffort", () => {
   });
 
   it("carries 0-2 commanders as {card:{scryfallId,instanceId}} plus scaffolding cardName/frontImageUrl/backImageUrl", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
 
     await joinSpineBestEffort(fake, {
       gameId: "game-4",
@@ -110,7 +110,7 @@ describe("joinSpineBestEffort", () => {
   });
 
   it("is idempotent by gameId — a retry (network blip) or a restart resending the same join returns the same seat, minting no new one", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
 
     const first = await joinSpineBestEffort(fake, { gameId: "same-game", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck" });
     const second = await joinSpineBestEffort(fake, { gameId: "same-game", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck" });
@@ -120,7 +120,7 @@ describe("joinSpineBestEffort", () => {
   });
 
   it("a different gameId at the same table takes a fresh seat", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
 
     const first = await joinSpineBestEffort(fake, { gameId: "game-a", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck" });
     const second = await joinSpineBestEffort(fake, { gameId: "game-b", tableName: "Friday Night", playerName: "Robin", deckName: "Test Deck" });
@@ -134,7 +134,7 @@ describe("joinSpineBestEffort", () => {
   });
 
   it("swallows a gateway failure — best-effort, must not throw", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
     fake.failWith(new Error("connection refused"));
 
     await expect(joinSpineBestEffort(fake, { gameId: "game-6", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck" })).resolves.toEqual({});
@@ -143,7 +143,7 @@ describe("joinSpineBestEffort", () => {
 
 describe("game.recordSpineJoin", () => {
   it("adopts the Spine's assigned seatId, replacing the Shuffler's own guess", async () => {
-    const spine = new FakeSpineGateway();
+    const spine = new FakeSpineAdapter();
     const tableInfo: TableInfo = { tableName: "Friday Night", playerName: "Jess", seatId: "shuffler-guessed-this" };
     const game = GameState.newGame(201, 1, 1, testDeck, undefined, tableInfo);
     game.startGame();
@@ -156,7 +156,7 @@ describe("game.recordSpineJoin", () => {
   });
 
   it("keeps the placeholder seatId when the Spine join fails — best-effort must not erase it", async () => {
-    const spine = new FakeSpineGateway();
+    const spine = new FakeSpineAdapter();
     spine.failWith(new Error("connection refused"));
     const tableInfo: TableInfo = { tableName: "Friday Night", playerName: "Jess", seatId: "shuffler-guessed-this" };
     const game = GameState.newGame(202, 1, 1, testDeck, undefined, tableInfo);
@@ -169,7 +169,7 @@ describe("game.recordSpineJoin", () => {
 });
 
 describe("sendCardPlayedToSpineBestEffort", () => {
-  async function joinedTableInfo(fake: FakeSpineGateway): Promise<TableInfo> {
+  async function joinedTableInfo(fake: FakeSpineAdapter): Promise<TableInfo> {
     const { seatId, spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
       gameId: "joined-game",
       tableName: "Friday Night",
@@ -184,7 +184,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
   }
 
   it("sends card.played addressed to the Spine tableId, from the joined Spine seat — using the real seat.joined seatId, not the seat number", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
     const tableInfo = await joinedTableInfo(fake);
     const game = GameState.newGame(101, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
@@ -216,7 +216,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
   it("is a no-op for a solo game (no table)", async () => {
     const soloGame = GameState.newGame(104, 1, 1, testDeck);
     const bolt = cardNamed(soloGame, "Lightning Bolt");
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
 
     await sendCardPlayedToSpineBestEffort(fake, soloGame, bolt, "stack");
 
@@ -227,7 +227,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     const tableInfo: TableInfo = { tableName: "Friday Night", playerName: "Jess", seatId: "abc12345" };
     const game = GameState.newGame(105, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
 
     await sendCardPlayedToSpineBestEffort(fake, game, bolt, "stack");
 
@@ -235,7 +235,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
   });
 
   it("swallows a gateway failure — best-effort, must not throw", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
     const tableInfo = await joinedTableInfo(fake);
     const game = GameState.newGame(106, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
@@ -246,7 +246,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
   });
 
   it("sends card.played-face-down instead of card.played when faceDown is requested — this is exactly what /play-card's sendCardBeforeMutate branches on", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
     const tableInfo = await joinedTableInfo(fake);
     const game = GameState.newGame(107, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
@@ -258,7 +258,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
   });
 
   it("still sends card.played when faceDown is omitted (regression guard: the default stays a normal play)", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
     const tableInfo = await joinedTableInfo(fake);
     const game = GameState.newGame(108, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
@@ -271,7 +271,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
 });
 
 describe("sendCardReturnedToSpineBestEffort", () => {
-  async function joinedTableInfo(fake: FakeSpineGateway): Promise<TableInfo> {
+  async function joinedTableInfo(fake: FakeSpineAdapter): Promise<TableInfo> {
     const { seatId, spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
       gameId: "joined-game-returned",
       tableName: "Friday Night",
@@ -282,7 +282,7 @@ describe("sendCardReturnedToSpineBestEffort", () => {
   }
 
   it("sends card.returned with occurredIn: shuffler, addressed to the Spine tableId, carrying both instanceId and gameCardIndex", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
     const tableInfo = await joinedTableInfo(fake);
     const game = GameState.newGame(201, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
@@ -310,7 +310,7 @@ describe("sendCardReturnedToSpineBestEffort", () => {
   it("is a no-op for a solo game (no table)", async () => {
     const soloGame = GameState.newGame(203, 1, 1, testDeck);
     const bolt = cardNamed(soloGame, "Lightning Bolt");
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
 
     await sendCardReturnedToSpineBestEffort(fake, soloGame, bolt);
 
@@ -318,7 +318,7 @@ describe("sendCardReturnedToSpineBestEffort", () => {
   });
 
   it("swallows a gateway failure — best-effort, must not throw, never blocks the Return action", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
     const tableInfo = await joinedTableInfo(fake);
     const game = GameState.newGame(204, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
@@ -350,7 +350,7 @@ describe("buildCardPlayedEvent", () => {
 
 describe("colorsForPlaymat used by joinSpineBestEffort", () => {
   it("no sleeve picked → primary/secondary still resolve from the playmat's curated pair", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
 
     await joinSpineBestEffort(fake, { gameId: "game-7", tableName: "Friday Night", playerName: "Jess", deckName: "Test Deck" });
 

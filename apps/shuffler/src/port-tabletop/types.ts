@@ -1,6 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { getCardImageUrl } from "../types.js";
-import { GameCard } from "../domain-types.js";
+import { GameCard, getCardImageUrl } from "../domain-types.js";
 import { currentTraceparent } from "./traceparent.js";
 
 export function zoneHintForPlay(gameCard: GameCard): ZoneHint {

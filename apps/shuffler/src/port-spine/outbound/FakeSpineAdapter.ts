@@ -1,7 +1,14 @@
 import { EventEnvelope } from "../../port-tabletop/types.js";
-import { SpineJoinRequest, SpineJoinResult, SpinePort } from "./types.js";
+import { SpineAdapter } from "./SpineAdapter.js";
+import { SpineJoinRequest, SpineJoinResult } from "./spineWire.js";
 
-export class FakeSpineGateway implements SpinePort {
+/**
+ * An in-memory table: it administers seats the way the Spine does (one table per name,
+ * seats numbered 1-4, a repeat of the same gameId gets its old seat back) and remembers
+ * everything it was told, so a test can read back exactly the bytes the Spine would have
+ * seen — the translation is inherited from `SpineAdapter`, not re-implemented here.
+ */
+export class FakeSpineAdapter extends SpineAdapter {
   public readonly sentEvents: { tableId: string; event: EventEnvelope<unknown> }[] = [];
   public readonly joinRequests: SpineJoinRequest[] = [];
   private readonly tableIdsByName = new Map<string, string>();
@@ -18,7 +25,7 @@ export class FakeSpineGateway implements SpinePort {
     this.failure = null;
   }
 
-  async join(request: SpineJoinRequest): Promise<SpineJoinResult> {
+  protected async submitJoin(request: SpineJoinRequest): Promise<SpineJoinResult> {
     if (this.failure) {
       throw this.failure;
     }
@@ -46,10 +53,10 @@ export class FakeSpineGateway implements SpinePort {
     return result;
   }
 
-  async sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void> {
+  protected async deliverEvent(tableId: string, event: EventEnvelope<unknown>): Promise<void> {
     if (this.failure) {
       throw this.failure;
     }
-    this.sentEvents.push({ tableId, event: event as EventEnvelope<unknown> });
+    this.sentEvents.push({ tableId, event });
   }
 }

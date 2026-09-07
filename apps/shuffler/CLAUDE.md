@@ -237,7 +237,7 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   `zoneHintForPlay()` keeps populating it. Discard sends `card.discarded`, which carries
   no `zoneHint` at all (tabletop-cards-come-and-go ticket 08).
 - **Joining a table is one call to the Spine**: `/start-game`, `/restart-game`, and
-  `/yo` all call `joinSpineBestEffort()` (`src/port-spine/sendToSpine.ts`) once,
+  `/yo` all call `joinSpineBestEffort()` (`src/table-sync/sendToSpine.ts`) once,
   carrying identity (`gameId`, table name, player name) *and* the full seat
   decoration (deck name, playmat, card-back, sleeve, resolved primary/secondary
   colors, commanders, and this game's own `gameUrl`). The Spine administers the whole
@@ -278,8 +278,17 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   `seat.joined` minted (via `recordSpineJoin`), **not** `String(spineSeatNumber)`
   (the bare 1-4 table position — the Tabletop compares `initiator.seatId` against
   the seat it saw join, and a table position never matches a seat GUID). Also
-  best-effort. `HttpSpineGateway` (real) / `FakeSpineGateway` (tests) implement
-  `SpinePort`. **Env**: `SPINE_URL`, default `http://localhost:4600`.
+  best-effort. The outbound leg is port/adapter/gateway-layered
+  (`notes/PATTERN-port-adapter-gateway.md`): `SpinePort` (`src/port-spine/outbound/types.ts`)
+  speaks the Shuffler's domain — `join(JoinTableRequest)`, `announceCardPlayed/Returned/Discarded`
+  taking a `TableSeat` and a `GameCard`; the abstract `SpineAdapter` owns *all* translation into
+  the Spine's wire vocabulary (`spineWire.ts`) and the `port-tabletop` envelope builders;
+  `HttpSpineAdapter` (real) and `FakeSpineAdapter` (tests, and the in-memory seat-allocation
+  policy) subclass it and supply only delivery. `HttpSpineGateway` is a thin, domain-ignorant
+  `POST /join` + `POST /tables/:id/events` that wraps every failure in `SpineGatewayError`.
+  `table-sync/sendToSpine.ts` above it holds only the best-effort guards, the Shuffler-side URL
+  and colour resolution, and the failure telemetry.
+  **Env**: `SPINE_URL`, default `http://localhost:4600`.
   **Envelope version**: both the Spine and the Tabletop validate against
   the same `contracts/envelope.v1.json` — `sendEvent` posts the full
   `EventEnvelope` unchanged, `traceparent` included. That field is optional
@@ -307,7 +316,7 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   has a `spineTableId` but no live registry entry — the same single check covers first
   load, HTMX re-fetch, and "came back after a while" (server restart, new tab).
   `spineSubscriber.ts` (`subscribeToSpine`) is port/adapter/gateway-shaped, like the
-  outbound leg's `SpinePort`/`HttpSpineGateway`/`FakeSpineGateway` (`types.ts`): a
+  outbound leg's `SpinePort`/`SpineAdapter`/`HttpSpineGateway`: a
   `SpineConnectionPort` (`SpineConnectionPort.ts`) models **one connection attempt**
   (open, yield frames, end/drop) — `HttpSpineConnection.ts` is the real adapter (streamed
   `fetch`, `data: <json>\n\n` frames, the same heartbeat-aware bounded

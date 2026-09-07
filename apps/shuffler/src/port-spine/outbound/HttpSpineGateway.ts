@@ -1,5 +1,22 @@
 import { EventEnvelope } from "../../port-tabletop/types.js";
-import { SpineJoinRequest, SpineJoinResult, SpinePort } from "./types.js";
+import { SpineJoinRequest, SpineJoinResult } from "./spineWire.js";
+
+/** Every failure reaching the Spine, in our own words — undici's errors stop at the gateway. */
+export class SpineGatewayError extends Error {
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
+    this.name = "SpineGatewayError";
+  }
+}
+
+/**
+ * The two Spine calls we make, narrowed to plain data. Nothing here knows what a
+ * `GameCard` is; `SpineAdapter` is where the Shuffler's domain stops.
+ */
+export interface SpineGateway {
+  join(request: SpineJoinRequest): Promise<SpineJoinResult>;
+  sendEvent(tableId: string, event: EventEnvelope<unknown>): Promise<void>;
+}
 
 /**
  * Real Spine client (services/spine): joins a table by name (creating it if
@@ -15,33 +32,37 @@ import { SpineJoinRequest, SpineJoinResult, SpinePort } from "./types.js";
  * unconditionally, so a hand-set value would just duplicate (or, worse, diverge
  * from) the one it injects from the live active span.
  */
-export class HttpSpineGateway implements SpinePort {
+export class HttpSpineGateway implements SpineGateway {
   constructor(private readonly baseUrl: string) {}
 
   async join(request: SpineJoinRequest): Promise<SpineJoinResult> {
-    const response = await fetch(`${this.baseUrl}/join`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(request),
-    });
+    const response = await post(`${this.baseUrl}/join`, request);
     if (!response.ok) {
       const bodyText = await response.text().catch(() => "");
-      throw new Error(`Spine rejected the join: ${response.status} ${response.statusText} ${bodyText}`.trim());
+      throw new SpineGatewayError(`Spine rejected the join: ${response.status} ${response.statusText} ${bodyText}`.trim());
     }
     const body = (await response.json()) as SpineJoinResult;
     return { tableId: body.tableId, seatId: body.seatId, seatNumber: body.seatNumber, tableUrl: body.tableUrl };
   }
 
-  async sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void> {
-    const url = `${this.baseUrl}/tables/${encodeURIComponent(tableId)}/events`;
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(event),
-    });
+  async sendEvent(tableId: string, event: EventEnvelope<unknown>): Promise<void> {
+    const response = await post(`${this.baseUrl}/tables/${encodeURIComponent(tableId)}/events`, event);
     if (!response.ok) {
       const bodyText = await response.text().catch(() => "");
-      throw new Error(`Spine rejected the event: ${response.status} ${response.statusText} ${bodyText}`.trim());
+      throw new SpineGatewayError(`Spine rejected the event: ${response.status} ${response.statusText} ${bodyText}`.trim());
     }
+  }
+}
+
+/** Wraps a failure to reach the Spine at all — DNS, refused connection, socket reset. */
+async function post(url: string, body: unknown): Promise<Response> {
+  try {
+    return await fetch(url, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    });
+  } catch (error) {
+    throw new SpineGatewayError(error instanceof Error ? error.message : String(error), { cause: error });
   }
 }

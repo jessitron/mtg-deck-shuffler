@@ -1,5 +1,5 @@
 import { GameState, TableInfo } from "../../src/GameState.js";
-import { FakeSpineGateway } from "../../src/port-spine/outbound/FakeSpineGateway.js";
+import { FakeSpineAdapter } from "../../src/port-spine/outbound/FakeSpineAdapter.js";
 import { joinSpineBestEffort, sendCardPlayedToSpineBestEffort } from "../../src/table-sync/sendToSpine.js";
 import { buildCardPlayedEvent } from "../../src/port-tabletop/types.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
@@ -63,7 +63,7 @@ describe("card.played events validate against the Spine's own contracts (contrac
   });
 
   it("the event actually sent by sendCardPlayedToSpineBestEffort, end to end through a joined seat, validates", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
     const { spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
       gameId: "contract-test-game",
       tableName: "Friday Night",
@@ -96,7 +96,7 @@ describe("card.played events validate against the Spine's own contracts (contrac
   });
 
   it("the event sent by sendCardPlayedToSpineBestEffort carries the page-load sessionId passed to it, and still validates", async () => {
-    const fake = new FakeSpineGateway();
+    const fake = new FakeSpineAdapter();
     const { spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
       gameId: "contract-test-game-session",
       tableName: "Friday Night",

@@ -23,7 +23,7 @@ import { PersistPrepPort, PersistedGamePrep, PERSISTED_GAME_PREP_VERSION, Incomp
 import { PLAYMATS, DEFAULT_PLAYMAT_PATH, sleeveQuickPicksForPlaymat, isKnownPlaymatPath, isValidSleeveColor } from "./table-look.js";
 import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { trace } from "@opentelemetry/api";
-import { getCardImageUrl, constructCardImageUrl } from "./types.js";
+import { getCardImageUrl, constructCardImageUrl } from "./domain-types.js";
 import { fetchScryfall } from "./scryfall-http.js";
 import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 import { applyGameCommand, CommandOutcome } from "./apply-game-command.js";
