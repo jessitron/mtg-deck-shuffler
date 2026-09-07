@@ -16,9 +16,8 @@ ship has terms of its own, and a few terms mean different things in different sh
    `<ship>/docs/adr/` for ship-scoped ones.
 
 If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest
-creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and
-`/improve-codebase-architecture`) creates them lazily when terms or decisions actually get
-resolved. `notes/GLOSSARY.md` already exists and is the one to extend.
+creating them upfront — create them lazily when terms or decisions actually get resolved.
+`notes/GLOSSARY.md` already exists and is the one to extend.
 
 `contracts/` is the fleet's **published language** — JSON Schema for the event envelope and
 per-kind payloads. Where a term appears there, the contract is authoritative over any prose.
@@ -43,8 +42,7 @@ test name), use the term as defined in `notes/GLOSSARY.md`, or in the ship's `CO
 the term is ship-local. Don't drift to synonyms the glossary explicitly avoids.
 
 If the concept you need isn't in the glossary yet, that's a signal — either you're inventing
-language the project doesn't use (reconsider) or there's a real gap (note it for
-`/domain-modeling`).
+language the project doesn't use (reconsider) or there's a real gap (add it to the glossary).
 
 ## When a term means different things in two ships
 
