@@ -1,7 +1,5 @@
 # Implementation plan: the Tabletop tells the Spine what happened
 
-Hand this to an agent and say **"use subagents for the steps."**
-
 ## The goal
 
 The tldraw room stays the source of truth. The Tabletop starts sending every physical
@@ -20,7 +18,7 @@ It is expected to start wrong. The work is to close the gap one gesture at a tim
 | `contracts/README.md` | Envelope conventions and the Card Identity section every payload follows. |
 | `.scratch/tabletop-persists-physical-events/spec.md` | **Decisions already made** — payload significance, the two-origins split, testing choices. Mine it for what's settled; it is not a work breakdown and its issue files are not the unit of work. |
 
-Three decisions from that spec are load-bearing and easy to miss:
+Three decisions from that spec:
 
 - **`card.played` and `card.returned` are untouched.** A card landing on the canvas gets a
   *new* `card.arrived` event, because two different origins are involved: the Shuffler
@@ -69,25 +67,7 @@ of the job.
 
 ---
 
-## Phase 0 — The Tabletop can read a table's history
-
-**One subagent, starting immediately, in parallel with Phase 1.**
-
-The 😠 button exists but runs against a stub: there is currently no way for the Tabletop to
-ask the Spine what has happened on a table. The Spine's only read path for a table's events
-is its HTML admin page, and the Tabletop server accumulates nothing of its own.
-
-The Shuffler already knows how to replay a table's log; that capability was never ported.
-Investigate how it does it, then build the Tabletop's equivalent — client, server, or Spine
-side, as the investigation determines. No prescribed design.
-
-**Done when:** `projectEvents` can be handed a real table's event history and the 😠 button
-reports on a real game.
-
 ## Phase 1 — The ports
-
-**Blocks Phase 2.** Steps 1–2 are one subagent and land first; 3 and 4 then run as two
-subagents in parallel.
 
 Read `DESIGN-spine-projection.md` and the fleet's `notes/PATTERN-port-adapter-gateway.md`.
 The Shuffler's landed version (`apps/shuffler/notes/DESIGN-layering.md`,
