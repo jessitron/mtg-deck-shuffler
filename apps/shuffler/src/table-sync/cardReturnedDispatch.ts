@@ -3,10 +3,10 @@ import { GameId } from "../domain-types.js";
 import { PersistStatePort } from "../port-persist-state/types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
 import { applyGameCommand } from "../apply-game-command.js";
-import { validateIncomingEvent } from "../port-spine/incomingEventValidation.js";
+import { validateIncomingEvent } from "../port-spine/inbound/incomingEventValidation.js";
 import { markCurrentSpanAsError } from "../tracing_util.js";
 import { broadcastGameStateUpdated } from "./gameSubscriptionRegistry.js";
-import { extractSeq } from "../port-spine/spineSubscriber.js";
+import { extractSeq } from "../port-spine/inbound/spineSubscriber.js";
 import { log } from "../log.js";
 
 const tracer = trace.getTracer("mtg-deck-shuffler");

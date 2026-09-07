@@ -1,5 +1,5 @@
 import { Agent, type Dispatcher } from "undici";
-import { log } from "../log.js";
+import { log } from "../../log.js";
 import { OpenSpineConnection, SpineConnectionHandlers, SpineConnectionPort } from "./SpineConnectionPort.js";
 
 const SPINE_URL = process.env.SPINE_URL || "http://localhost:4600";

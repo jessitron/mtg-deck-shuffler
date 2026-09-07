@@ -10,7 +10,9 @@ import {
   buildCardReturnedEvent,
   buildCardDiscardedEvent,
 } from "../port-tabletop/types.js";
-import { SpinePort, buildSeatJoinedPayload, defaultPlaymatImageUrl, playmatImageUrlFromPath, cardBackImageUrl, shufflerPublicUrl } from "../port-spine/types.js";
+import { SpinePort } from "../port-spine/outbound/types.js";
+import { buildSeatJoinedPayload } from "../port-spine/outbound/seatJoinedPayload.js";
+import { defaultPlaymatImageUrl, playmatImageUrlFromPath, cardBackImageUrl, shufflerPublicUrl } from "../shufflerUrls.js";
 import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../table-look.js";
 import { log } from "../log.js";
 

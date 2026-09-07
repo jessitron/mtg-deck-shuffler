@@ -13,7 +13,7 @@ import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play
 import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
 import { ZoneHint, zoneHintForPlay } from "./port-tabletop/types.js";
-import { SpinePort } from "./port-spine/types.js";
+import { SpinePort } from "./port-spine/outbound/types.js";
 import { sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort, sendCardDiscardedToSpineBestEffort, joinSpineBestEffort } from "./table-sync/sendToSpine.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { log } from "./log.js";

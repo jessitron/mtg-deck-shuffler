@@ -1,4 +1,4 @@
-import { log } from "../log.js";
+import { log } from "../../log.js";
 import { HttpSpineConnection } from "./HttpSpineConnection.js";
 import { OpenSpineConnection, SpineConnectionPort, SpineFrame } from "./SpineConnectionPort.js";
 

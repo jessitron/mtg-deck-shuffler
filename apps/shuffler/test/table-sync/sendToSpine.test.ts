@@ -1,5 +1,5 @@
 import { GameState, TableInfo, GameCard } from "../../src/GameState.js";
-import { FakeSpineGateway } from "../../src/port-spine/FakeSpineGateway.js";
+import { FakeSpineGateway } from "../../src/port-spine/outbound/FakeSpineGateway.js";
 import { joinSpineBestEffort, sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort } from "../../src/table-sync/sendToSpine.js";
 import { CardPlayedEvent, buildCardPlayedEvent } from "../../src/port-tabletop/types.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";

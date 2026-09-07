@@ -8,7 +8,7 @@ import { GameState } from "../../src/GameState.js";
 import { deckWithOneCommander, createTestPersistedGameState } from "../generators.js";
 import { GameStatus } from "../../src/domain-types.js";
 import { ensureGameSpineSubscription, getGameSubscriptionRegistry } from "../../src/table-sync/gameSubscriptionRegistry.js";
-import { createFakeSpineTable, cardReturnedEvent, waitUntil, FakeSpineTable } from "../port-spine/FakeSpineTable.js";
+import { createFakeSpineTable, cardReturnedEvent, waitUntil, FakeSpineTable } from "../port-spine/inbound/FakeSpineTable.js";
 
 let nextGameId = 900000;
 

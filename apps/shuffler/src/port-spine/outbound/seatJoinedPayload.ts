@@ -1,25 +1,5 @@
-import { EventEnvelope } from "../port-tabletop/types.js";
-import { GameCard } from "../domain-types.js";
-import { getCardImageUrl } from "../types.js";
-import { CARD_BACK } from "../view/common/shared-components.js";
-import { DEFAULT_PLAYMAT_PATH } from "../table-look.js";
-
-export function shufflerPublicUrl(): string {
-  return process.env.SHUFFLER_PUBLIC_URL || "https://mtg.jessitron.honeydemo.io";
-}
-
-/** The standard Magic card back (an unsleeved seat's look), as an absolute URL. Omitted from the join request when the seat has a sleeve. */
-export function cardBackImageUrl(): string {
-  return `${shufflerPublicUrl()}${CARD_BACK}`;
-}
-
-export function defaultPlaymatImageUrl(): string {
-  return playmatImageUrlFromPath(DEFAULT_PLAYMAT_PATH);
-}
-
-export function playmatImageUrlFromPath(path: string): string {
-  return `${shufflerPublicUrl()}${path}`;
-}
+import { GameCard } from "../../domain-types.js";
+import { getCardImageUrl } from "../../types.js";
 
 export interface SeatJoinedCommander {
   card: {
@@ -75,23 +55,4 @@ export function buildSeatJoinedPayload(
     gameUrl,
     commanders: commanders?.length ? commanders.map(buildSeatJoinedCommander) : undefined,
   };
-}
-
-/** Request body for the Spine's `POST /join` — identity plus everything needed to fully decorate the seat, in one call. */
-export interface SpineJoinRequest extends SeatJoinedPayload {
-  gameId: string;
-  name: string;
-  playerName: string;
-}
-
-export interface SpineJoinResult {
-  tableId: string;
-  seatId: string;
-  seatNumber: number;
-  tableUrl: string;
-}
-
-export interface SpinePort {
-  join(request: SpineJoinRequest): Promise<SpineJoinResult>;
-  sendEvent<Payload>(tableId: string, event: EventEnvelope<Payload>): Promise<void>;
 }

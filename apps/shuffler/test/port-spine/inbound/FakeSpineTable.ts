@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { OpenSpineConnection, SpineConnectionHandlers, SpineConnectionPort } from "../../src/port-spine/SpineConnectionPort.js";
+import { OpenSpineConnection, SpineConnectionHandlers, SpineConnectionPort } from "../../../src/port-spine/inbound/SpineConnectionPort.js";
 
 /** W3C traceparent, syntactically valid but otherwise meaningless — good enough for a test envelope. */
 export function fakeTraceparent(): string {
@@ -58,7 +58,7 @@ export interface FakeSpineTable extends SpineConnectionPort {
  * multiple `open()` calls (one per game's `subscribeToSpine`), fanning a single `publish()`
  * out to every live connection, with replay-on-connect for whatever a `lastEventId` missed.
  * No socket, no HTTP: this is the multi-connection test-harness analog of
- * `src/port-spine/FakeSpineConnection.ts`, which models a single attempt.
+ * `src/port-spine/inbound/FakeSpineConnection.ts`, which models a single attempt.
  */
 export function createFakeSpineTable(): FakeSpineTable {
   let clients: FakeClient[] = [];

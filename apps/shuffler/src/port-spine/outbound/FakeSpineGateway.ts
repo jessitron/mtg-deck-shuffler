@@ -1,4 +1,4 @@
-import { EventEnvelope } from "../port-tabletop/types.js";
+import { EventEnvelope } from "../../port-tabletop/types.js";
 import { SpineJoinRequest, SpineJoinResult, SpinePort } from "./types.js";
 
 export class FakeSpineGateway implements SpinePort {

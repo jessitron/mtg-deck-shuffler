@@ -10,8 +10,8 @@ import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { InMemoryCardRepositoryAdapter } from "./port-card-repository/InMemoryCardRepositoryAdapter.js";
 import { SqliteCardRepositoryAdapter } from "./port-card-repository/SqliteCardRepositoryAdapter.js";
 import { ScryfallCardImagesGateway } from "./port-card-images/ScryfallCardImagesGateway.js";
-import { SpinePort } from "./port-spine/types.js";
-import { HttpSpineGateway } from "./port-spine/HttpSpineGateway.js";
+import { SpinePort } from "./port-spine/outbound/types.js";
+import { HttpSpineGateway } from "./port-spine/outbound/HttpSpineGateway.js";
 import { createApp } from "./app.js";
 import { log } from "./log.js";
 

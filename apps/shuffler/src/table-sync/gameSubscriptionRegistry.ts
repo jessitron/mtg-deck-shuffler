@@ -2,8 +2,8 @@ import { GameId } from "../domain-types.js";
 import { GameEvent } from "../GameEvents.js";
 import { PersistStatePort } from "../port-persist-state/types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
-import { subscribeToSpine, SpineSubscription } from "../port-spine/spineSubscriber.js";
-import { SpineConnectionPort } from "../port-spine/SpineConnectionPort.js";
+import { subscribeToSpine, SpineSubscription } from "../port-spine/inbound/spineSubscriber.js";
+import { SpineConnectionPort } from "../port-spine/inbound/SpineConnectionPort.js";
 import { dispatchSpineEventForGame } from "./cardReturnedDispatch.js";
 
 /** Highest `spineSeq` recorded on any event in the game's own log — the durable seed for a resumed subscription's `lastEventId`. `undefined` when the log has no recorded `spineSeq` at all (never applied a Spine event), same as today's true first-ever connection. */
