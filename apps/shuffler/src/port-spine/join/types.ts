@@ -1,5 +1,4 @@
 import { GameCard } from "../../domain-types.js";
-import { ZoneHint } from "../../port-tabletop/types.js";
 
 /**
  * Everything the Shuffler knows when it asks for a seat: who is sitting down, at which
@@ -30,22 +29,10 @@ export interface SeatAtTable {
   tableUrl: string;
 }
 
-/** The seat an announcement comes from — enough to say "this happened, and I did it". */
-export interface TableSeat {
-  tableId: string;
-  seatId: string;
-  playerName: string;
-  /** Minted fresh per page load; lets the table tell one of this player's tabs from another. */
-  sessionId?: string;
-}
-
 /**
- * The Shuffler's table, in the Shuffler's own words: take a seat, then say what happened
- * to a card. Implementations translate these into whatever the Spine wants to hear.
+ * Table administration, in the Shuffler's own words: seat this game at a table (creating
+ * the table if it doesn't exist yet), and say where it ended up. One capability, one call.
  */
-export interface SpinePort {
+export interface JoinTablePort {
   join(request: JoinTableRequest): Promise<SeatAtTable>;
-  announceCardPlayed(seat: TableSeat, gameCard: GameCard, zoneHint: ZoneHint, faceDown: boolean): Promise<void>;
-  announceCardReturned(seat: TableSeat, gameCard: GameCard): Promise<void>;
-  announceCardDiscarded(seat: TableSeat, gameCard: GameCard): Promise<void>;
 }

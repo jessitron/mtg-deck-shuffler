@@ -1,5 +1,5 @@
 import { GameState, TableInfo } from "../../src/GameState.js";
-import { FakeSpineAdapter } from "../../src/port-spine/outbound/FakeSpineAdapter.js";
+import { FakeSpine } from "./fakeSpine.js";
 import { joinSpineBestEffort, sendCardPlayedToSpineBestEffort } from "../../src/table-sync/sendToSpine.js";
 import { buildCardPlayedEvent } from "../../src/port-tabletop/types.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
@@ -63,8 +63,8 @@ describe("card.played events validate against the Spine's own contracts (contrac
   });
 
   it("the event actually sent by sendCardPlayedToSpineBestEffort, end to end through a joined seat, validates", async () => {
-    const fake = new FakeSpineAdapter();
-    const { spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
+    const fake = new FakeSpine();
+    const { spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake.join, {
       gameId: "contract-test-game",
       tableName: "Friday Night",
       playerName: "Jess",
@@ -74,7 +74,7 @@ describe("card.played events validate against the Spine's own contracts (contrac
     const game = GameState.newGame(201, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
 
-    await sendCardPlayedToSpineBestEffort(fake, game, bolt, "stack");
+    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt, "stack");
 
     expect(fake.sentEvents).toHaveLength(1);
     const { event } = fake.sentEvents[0];
@@ -96,8 +96,8 @@ describe("card.played events validate against the Spine's own contracts (contrac
   });
 
   it("the event sent by sendCardPlayedToSpineBestEffort carries the page-load sessionId passed to it, and still validates", async () => {
-    const fake = new FakeSpineAdapter();
-    const { spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
+    const fake = new FakeSpine();
+    const { spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake.join, {
       gameId: "contract-test-game-session",
       tableName: "Friday Night",
       playerName: "Jess",
@@ -107,7 +107,7 @@ describe("card.played events validate against the Spine's own contracts (contrac
     const game = GameState.newGame(202, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
 
-    await sendCardPlayedToSpineBestEffort(fake, game, bolt, "stack", "44444444-4444-4444-4444-444444444444");
+    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt, "stack", "44444444-4444-4444-4444-444444444444");
 
     expect(fake.sentEvents).toHaveLength(1);
     const { event } = fake.sentEvents[0];

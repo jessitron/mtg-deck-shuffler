@@ -13,7 +13,8 @@ import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play
 import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
 import { ZoneHint, zoneHintForPlay } from "./port-tabletop/types.js";
-import { SpinePort } from "./port-spine/outbound/types.js";
+import { JoinTablePort } from "./port-spine/join/types.js";
+import { SpineEventsPort } from "./port-spine/events/types.js";
 import { sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort, sendCardDiscardedToSpineBestEffort, joinSpineBestEffort } from "./table-sync/sendToSpine.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { log } from "./log.js";
@@ -39,7 +40,8 @@ export function createApp(
   persistStatePort: PersistStatePort,
   persistPrepPort: PersistPrepPort,
   cardRepository: CardRepositoryPort,
-  spinePort?: SpinePort
+  spineJoinPort?: JoinTablePort,
+  spineEventsPort?: SpineEventsPort
 ): express.Application {
   const app = express();
 
@@ -130,19 +132,19 @@ export function createApp(
   async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint, sessionId?: string, faceDown = false): Promise<void> {
     setCommonSpanAttributes({ tableName: game.tableName });
     trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing", "card.face_down": faceDown });
-    await sendCardPlayedToSpineBestEffort(spinePort, game, card, zoneHint, sessionId, faceDown);
+    await sendCardPlayedToSpineBestEffort(spineEventsPort, game, card, zoneHint, sessionId, faceDown);
   }
 
   async function sendCardReturnedBeforeMutate(game: GameState, card: GameCard, sessionId?: string): Promise<void> {
     setCommonSpanAttributes({ tableName: game.tableName });
     trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing" });
-    await sendCardReturnedToSpineBestEffort(spinePort, game, card, sessionId);
+    await sendCardReturnedToSpineBestEffort(spineEventsPort, game, card, sessionId);
   }
 
   async function sendCardDiscardedBeforeMutate(game: GameState, card: GameCard, sessionId?: string): Promise<void> {
     setCommonSpanAttributes({ tableName: game.tableName });
     trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing" });
-    await sendCardDiscardedToSpineBestEffort(spinePort, game, card, sessionId);
+    await sendCardDiscardedToSpineBestEffort(spineEventsPort, game, card, sessionId);
   }
 
   function renderCommandOutcome(
@@ -532,7 +534,7 @@ export function createApp(
       });
 
       if (tableInfo) {
-        const spineJoin = await joinSpineBestEffort(spinePort, {
+        const spineJoin = await joinSpineBestEffort(spineJoinPort, {
           gameId,
           tableName: tableInfo.tableName,
           playerName: tableInfo.playerName,
@@ -686,7 +688,7 @@ export function createApp(
       newGame.startGame(browserTabId);
 
       if (tableInfo && !tableInfo.spineSeatNumber) {
-        const spineJoin = await joinSpineBestEffort(spinePort, {
+        const spineJoin = await joinSpineBestEffort(spineJoinPort, {
           gameId: newGameId,
           tableName: tableInfo.tableName,
           playerName: tableInfo.playerName,
@@ -1924,7 +1926,7 @@ export function createApp(
       const game = GameState.newGame(gameId, prepId, PERSISTED_GAME_PREP_VERSION, sortedDeck, undefined, tableInfo, sleeveColor, playmat.path);
       game.startGame(res.locals.browserTabId as string | undefined);
 
-      const spineJoin = await joinSpineBestEffort(spinePort, {
+      const spineJoin = await joinSpineBestEffort(spineJoinPort, {
         gameId,
         tableName: tableInfo.tableName,
         playerName: tableInfo.playerName,

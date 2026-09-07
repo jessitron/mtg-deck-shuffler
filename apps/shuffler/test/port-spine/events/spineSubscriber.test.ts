@@ -1,6 +1,6 @@
 import { describe, test, expect } from "@jest/globals";
-import { subscribeToSpine } from "../../../src/port-spine/inbound/spineSubscriber.js";
-import { FakeSpineConnection } from "../../../src/port-spine/inbound/FakeSpineConnection.js";
+import { subscribeToSpine } from "../../../src/port-spine/events/spineSubscriber.js";
+import { FakeSpineConnection } from "../../../src/port-spine/events/FakeSpineConnection.js";
 import { waitUntil } from "./FakeSpineTable.js";
 
 /**

@@ -1,5 +1,5 @@
 import { GameState, TableInfo } from "../../src/GameState.js";
-import { FakeSpineAdapter } from "../../src/port-spine/outbound/FakeSpineAdapter.js";
+import { FakeSpine } from "./fakeSpine.js";
 import { joinSpineBestEffort, sendCardReturnedToSpineBestEffort } from "../../src/table-sync/sendToSpine.js";
 import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js";
 import { testProvenance } from "../generators.js";
@@ -95,8 +95,8 @@ describe("sendCardReturnedToSpineBestEffort's actual send validates against the 
   };
 
   it("the event actually sent by sendCardReturnedToSpineBestEffort, end to end through a joined seat, validates and carries occurredIn: shuffler", async () => {
-    const fake = new FakeSpineAdapter();
-    const { seatId, spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake, {
+    const fake = new FakeSpine();
+    const { seatId, spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake.join, {
       gameId: "contract-test-game-returned",
       tableName: "Friday Night",
       playerName: "Jess",
@@ -106,7 +106,7 @@ describe("sendCardReturnedToSpineBestEffort's actual send validates against the 
     const game = GameState.newGame(203, 1, 1, testDeck, undefined, tableInfo);
     const bolt = game.getCards()[0];
 
-    await sendCardReturnedToSpineBestEffort(fake, game, bolt);
+    await sendCardReturnedToSpineBestEffort(fake.events, game, bolt);
 
     expect(fake.sentEvents).toHaveLength(1);
     const { event } = fake.sentEvents[0];

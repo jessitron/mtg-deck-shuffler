@@ -1,15 +1,13 @@
-import { EventEnvelope } from "../../port-tabletop/types.js";
-import { SpineAdapter } from "./SpineAdapter.js";
+import { SpineJoinAdapter } from "./SpineJoinAdapter.js";
 import { SpineJoinRequest, SpineJoinResult } from "./spineWire.js";
 
 /**
- * An in-memory table: it administers seats the way the Spine does (one table per name,
- * seats numbered 1-4, a repeat of the same gameId gets its old seat back) and remembers
- * everything it was told, so a test can read back exactly the bytes the Spine would have
- * seen — the translation is inherited from `SpineAdapter`, not re-implemented here.
+ * An in-memory table registry: it administers seats the way the Spine does (one table per
+ * name, seats numbered 1-4, a repeat of the same gameId gets its old seat back) and
+ * remembers every request, so a test can read back exactly the bytes the Spine would have
+ * seen — the translation is inherited from `SpineJoinAdapter`, not re-implemented here.
  */
-export class FakeSpineAdapter extends SpineAdapter {
-  public readonly sentEvents: { tableId: string; event: EventEnvelope<unknown> }[] = [];
+export class FakeSpineJoinAdapter extends SpineJoinAdapter {
   public readonly joinRequests: SpineJoinRequest[] = [];
   private readonly tableIdsByName = new Map<string, string>();
   private readonly seatCountByTableId = new Map<string, number>();
@@ -51,12 +49,5 @@ export class FakeSpineAdapter extends SpineAdapter {
     const result: SpineJoinResult = { tableId, seatId, seatNumber, tableUrl: `http://fake-tabletop.test/t/${encodeURIComponent(request.name)}` };
     this.resultsByGameId.set(request.gameId, result);
     return result;
-  }
-
-  protected async deliverEvent(tableId: string, event: EventEnvelope<unknown>): Promise<void> {
-    if (this.failure) {
-      throw this.failure;
-    }
-    this.sentEvents.push({ tableId, event });
   }
 }

@@ -2,7 +2,8 @@ import { trace } from "@opentelemetry/api";
 import { GameState, GameCard } from "../GameState.js";
 import { GameId } from "../domain-types.js";
 import { ZoneHint } from "../port-tabletop/types.js";
-import { SpinePort, TableSeat } from "../port-spine/outbound/types.js";
+import { JoinTablePort } from "../port-spine/join/types.js";
+import { SpineEventsPort, TableSeat } from "../port-spine/events/types.js";
 import { defaultPlaymatImageUrl, playmatImageUrlFromPath, cardBackImageUrl, shufflerPublicUrl } from "../shufflerUrls.js";
 import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../table-look.js";
 import { log } from "../log.js";
@@ -29,13 +30,13 @@ export interface SpineJoinOutcome {
  * mints seat.taken + seat.joined on the Spine's own log, and has the Spine notify the
  * Tabletop. Best-effort — a down Spine must not block starting a game.
  */
-export async function joinSpineBestEffort(spinePort: SpinePort | undefined, params: JoinSpineParams): Promise<SpineJoinOutcome> {
-  if (!spinePort) return {};
+export async function joinSpineBestEffort(joinPort: JoinTablePort | undefined, params: JoinSpineParams): Promise<SpineJoinOutcome> {
+  if (!joinPort) return {};
   const { gameId, tableName, playerName, deckName, sleeveColor, playmatImagePath, commanders } = params;
   const playmatImageUrl = playmatImagePath ? playmatImageUrlFromPath(playmatImagePath) : defaultPlaymatImageUrl();
   const { primaryColor, secondaryColor } = colorsForPlaymat(playmatImagePath ?? DEFAULT_PLAYMAT_PATH, sleeveColor);
   try {
-    const seat = await spinePort.join({
+    const seat = await joinPort.join({
       gameId: String(gameId),
       tableName,
       playerName,
@@ -66,18 +67,18 @@ function seatOf(game: GameState, gameCard: GameCard, sessionId?: string): TableS
 }
 
 export async function sendCardPlayedToSpineBestEffort(
-  spinePort: SpinePort | undefined,
+  eventsPort: SpineEventsPort | undefined,
   game: GameState,
   gameCard: GameCard,
   zoneHint: ZoneHint,
   sessionId?: string,
   faceDown = false
 ): Promise<void> {
-  if (!spinePort) return;
+  if (!eventsPort) return;
   const seat = seatOf(game, gameCard, sessionId);
   if (!seat) return;
   try {
-    await spinePort.announceCardPlayed(seat, gameCard, zoneHint, faceDown);
+    await eventsPort.announceCardPlayed(seat, gameCard, zoneHint, faceDown);
   } catch (error) {
     trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });
     log.warn("card.played send to Spine failed (best-effort; the Spine observes the log, it doesn't gate gameplay yet)", { "table.name": game.tableName ?? "" }, error as Error);
@@ -89,12 +90,12 @@ export async function sendCardPlayedToSpineBestEffort(
  * card.played with a graveyard zoneHint (tabletop-cards-come-and-go ticket 08). Best-effort,
  * mirroring sendCardPlayedToSpineBestEffort.
  */
-export async function sendCardDiscardedToSpineBestEffort(spinePort: SpinePort | undefined, game: GameState, gameCard: GameCard, sessionId?: string): Promise<void> {
-  if (!spinePort) return;
+export async function sendCardDiscardedToSpineBestEffort(eventsPort: SpineEventsPort | undefined, game: GameState, gameCard: GameCard, sessionId?: string): Promise<void> {
+  if (!eventsPort) return;
   const seat = seatOf(game, gameCard, sessionId);
   if (!seat) return;
   try {
-    await spinePort.announceCardDiscarded(seat, gameCard);
+    await eventsPort.announceCardDiscarded(seat, gameCard);
   } catch (error) {
     trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });
     log.warn("card.discarded send to Spine failed (best-effort; the Spine observes the log, it doesn't gate gameplay yet)", { "table.name": game.tableName ?? "" }, error as Error);
@@ -107,16 +108,16 @@ export async function sendCardDiscardedToSpineBestEffort(spinePort: SpinePort | 
  * mirroring `sendCardPlayedToSpineBestEffort` — a down Spine must not block the Return action.
  */
 export async function sendCardReturnedToSpineBestEffort(
-  spinePort: SpinePort | undefined,
+  eventsPort: SpineEventsPort | undefined,
   game: GameState,
   gameCard: GameCard,
   sessionId?: string
 ): Promise<void> {
-  if (!spinePort) return;
+  if (!eventsPort) return;
   const seat = seatOf(game, gameCard, sessionId);
   if (!seat) return;
   try {
-    await spinePort.announceCardReturned(seat, gameCard);
+    await eventsPort.announceCardReturned(seat, gameCard);
   } catch (error) {
     trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });
     log.warn("card.returned send to Spine failed (best-effort; the Spine observes the log, it doesn't gate gameplay yet)", { "table.name": game.tableName ?? "" }, error as Error);

@@ -278,16 +278,29 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   `seat.joined` minted (via `recordSpineJoin`), **not** `String(spineSeatNumber)`
   (the bare 1-4 table position — the Tabletop compares `initiator.seatId` against
   the seat it saw join, and a table position never matches a seat GUID). Also
-  best-effort. The outbound leg is port/adapter/gateway-layered
-  (`notes/PATTERN-port-adapter-gateway.md`): `SpinePort` (`src/port-spine/outbound/types.ts`)
-  speaks the Shuffler's domain — `join(JoinTableRequest)`, `announceCardPlayed/Returned/Discarded`
-  taking a `TableSeat` and a `GameCard`; the abstract `SpineAdapter` owns *all* translation into
-  the Spine's wire vocabulary (`spineWire.ts`) and the `port-tabletop` envelope builders;
-  `HttpSpineAdapter` (real) and `FakeSpineAdapter` (tests, and the in-memory seat-allocation
-  policy) subclass it and supply only delivery. `HttpSpineGateway` is a thin, domain-ignorant
-  `POST /join` + `POST /tables/:id/events` that wraps every failure in `SpineGatewayError`.
-  `table-sync/sendToSpine.ts` above it holds only the best-effort guards, the Shuffler-side URL
-  and colour resolution, and the failure telemetry.
+  best-effort. **`src/port-spine/` is split by capability, not by direction**
+  (Jess, 2026-09-06) — every other port in this ship is named for a capability, and
+  "inbound/outbound" would name a transport fact:
+  - **`port-spine/join/`** — table administration. `JoinTablePort` (`types.ts`) speaks the
+    Shuffler's domain: `join(JoinTableRequest)` answering a `SeatAtTable`. The abstract
+    `SpineJoinAdapter` owns the translation into the Spine's `/join` wire vocabulary
+    (`spineWire.ts`), including the seat-decoration builders; `HttpSpineJoinAdapter` (real)
+    and `FakeSpineJoinAdapter` (tests, and the in-memory seat-allocation policy — one table
+    per name, seats 1-4, gameId idempotence) subclass it and supply only submission.
+    `HttpSpineJoinGateway` is a thin, domain-ignorant `POST /join`.
+  - **`port-spine/events/`** — the event bus, **one port for both directions**.
+    `SpineEventsPort` (`types.ts`) carries the send half today —
+    `announceCardPlayed`/`announceCardReturned`/`announceCardDiscarded`, taking a `TableSeat`
+    and a `GameCard` — with the abstract `SpineEventsAdapter` owning the translation into the
+    `port-tabletop` envelope builders, `HttpSpineEventsAdapter`/`FakeSpineEventsAdapter`
+    supplying delivery, and `HttpSpineEventsGateway` doing the thin
+    `POST /tables/:id/events`. The receive half (`SpineConnectionPort` + `spineSubscriber`,
+    same directory) folds into that same port as one more method — not yet done.
+
+  Both gateways wrap every failure in the shared `SpineGatewayError`
+  (`port-spine/SpineGatewayError.ts`), so undici's errors and HTTP status codes stop there.
+  `table-sync/sendToSpine.ts` above them holds only the best-effort guards, the Shuffler-side
+  URL and colour resolution, and the failure telemetry.
   **Env**: `SPINE_URL`, default `http://localhost:4600`.
   **Envelope version**: both the Spine and the Tabletop validate against
   the same `contracts/envelope.v1.json` — `sendEvent` posts the full
@@ -307,7 +320,7 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   — `card.played` sends it (`buildCardPlayedEvent`, `src/port-tabletop/types.ts`);
   the index only decodes to a card's rank in the public decklist, which a
   trust-based table doesn't need guarded.
-- **Inbound: the Shuffler's own Spine SSE subscriber** (`src/port-spine/`, mirroring the
+- **The receive half of the event bus: the Shuffler's own Spine SSE subscriber** (`src/port-spine/events/`, mirroring the
   Tabletop's `spineSubscriber.ts`/`spineEventDispatch.ts`) is the reverse leg — a card
   dragged off the Tabletop's canvas onto the library portal reaches the Shuffler as a
   `card.returned.v1` event. `gameSubscriptionRegistry.ts` holds one live subscription per
@@ -316,7 +329,7 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   has a `spineTableId` but no live registry entry — the same single check covers first
   load, HTMX re-fetch, and "came back after a while" (server restart, new tab).
   `spineSubscriber.ts` (`subscribeToSpine`) is port/adapter/gateway-shaped, like the
-  outbound leg's `SpinePort`/`SpineAdapter`/`HttpSpineGateway`: a
+  join capability's `JoinTablePort`/`SpineJoinAdapter`/`HttpSpineJoinGateway`: a
   `SpineConnectionPort` (`SpineConnectionPort.ts`) models **one connection attempt**
   (open, yield frames, end/drop) — `HttpSpineConnection.ts` is the real adapter (streamed
   `fetch`, `data: <json>\n\n` frames, the same heartbeat-aware bounded
