@@ -7,6 +7,9 @@ import { LoggerProvider, BatchLogRecordProcessor } from "@opentelemetry/sdk-logs
 import { logs, SeverityNumber, LogAttributes } from "@opentelemetry/api-logs";
 import { resourceFromAttributes } from "@opentelemetry/resources";
 import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
+import { registerInstrumentations } from "@opentelemetry/instrumentation";
+import { FetchInstrumentation } from "@opentelemetry/instrumentation-fetch";
+import { XMLHttpRequestInstrumentation } from "@opentelemetry/instrumentation-xml-http-request";
 
 export const WEB_SERVICE_NAME = "mtg-tabletop-web";
 const TRACER_NAME = WEB_SERVICE_NAME;
@@ -72,6 +75,13 @@ export async function initTracing(): Promise<void> {
   provider.register();
   console.log(`Tabletop tracing: exporting to ${config.tracesUrl}`);
 
+  const ignoreUrls = buildExportDestinationIgnoreUrls(config, window.location.href);
+
+  registerInstrumentations({
+    instrumentations: [new FetchInstrumentation({ ignoreUrls }), new XMLHttpRequestInstrumentation({ ignoreUrls })],
+  });
+  console.log("Tabletop tracing: fetch/XHR auto-instrumentation registered");
+
   if (config.logsUrl) {
     logs.setGlobalLoggerProvider(
       new LoggerProvider({
@@ -82,6 +92,25 @@ export async function initTracing(): Promise<void> {
     reportUncaughtErrors();
     console.log(`Tabletop logging: exporting to ${config.logsUrl}`);
   }
+}
+
+function escapeRegExp(literal: string): string {
+  return literal.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * Fetch/XHR auto-instrumentation would otherwise trace the exporter's own outbound
+ * requests to the collector (or, with ALLOW_BROWSER_DIRECT_HONEYCOMB, straight to
+ * Honeycomb's ingest domain) — those spans would themselves get exported, producing
+ * more spans, forever. The returned patterns must exclude both possible destinations.
+ * Each URL is resolved against `origin` so a relative config value (a same-origin path,
+ * e.g. `/v1/traces`) and an absolute one (cross-origin, e.g. the Honeycomb fallback) are
+ * both matched exactly regardless of which shape the config happens to use.
+ */
+export function buildExportDestinationIgnoreUrls(config: OtelBrowserConfig, origin: string): RegExp[] {
+  return [config.tracesUrl, config.logsUrl]
+    .filter((url): url is string => !!url)
+    .map((url) => new RegExp(`^${escapeRegExp(new URL(url, origin).href)}$`));
 }
 
 export function logError(message: string, attributes: LogAttributes = {}, error?: unknown): void {
