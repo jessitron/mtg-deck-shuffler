@@ -8,6 +8,7 @@ import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { handleSeatJoined } from "./seatJoined.js";
 import { handleCardReturned } from "./cardReturned.js";
+import { handleDiagnostic } from "./diagnostic.js";
 import { handleTestCardSeed, handleTestCardRemoval } from "./testSeedRoute.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -47,6 +48,9 @@ export function createApp() {
 
   // The library-portal swallow's send leg (ticket 12) — see cardReturned.ts
   app.post("/api/tables/:tableName/cards/return", handleCardReturned);
+
+  // The diagnostic button's server leg (ticket 01) — see diagnostic.ts
+  app.post("/api/tables/:tableName/diagnostic", handleDiagnostic);
 
   // Test-only seam: lets Playwright/vitest seed a card without a live Spine. Never
   // mounted in production — card.played only arrives via the Spine SSE subscription.

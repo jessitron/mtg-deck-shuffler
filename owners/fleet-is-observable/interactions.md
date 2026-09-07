@@ -593,6 +593,17 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   them on — confirmed live: those logs land with no trace/span id, which is correct, not a bug.
   This is the fleet's first use of `ignoreIncomingRequestHook`; copy this shape, don't invent a new
   suppression mechanism, for the next such route.
+- **Adding any new browser-side `fetch()` in the Tabletop that needs to join a server
+  trace**: `apps/tabletop/src/client/observability/index.ts`'s `initTracing()` registers **no
+  fetch/XHR auto-instrumentation** — only a bare `WebTracerProvider` +
+  `GlobalAttributesSpanProcessor` + `BatchSpanProcessor`, no `registerInstrumentations()` call.
+  Nothing injects a `traceparent` header automatically on this ship's browser side. You must
+  call `currentTraceparent()` synchronously, **before** the `await fetch`, and attach it as a
+  header by hand — `DiagnosticButton.tsx`'s POST is now the second call site doing this, after
+  `TablePage.tsx`'s WS-URI query-param precedent. This is a real gap (most OTel web SDK setups
+  register `FetchInstrumentation` for exactly this), not an oversight to silently work around
+  again on a third call site — copy the manual-header shape, and if it keeps recurring,
+  consider raising whether to add the instrumentation instead.
 - **The Spine's own `GET /tables/:table_id/events/stream` (`services/spine/app.rb`) almost
   certainly has the same unbounded-incoming-request-span problem, and it is still
   undocumented/unaddressed** — flagged during the Shuffler's `GET /game-events/:gameId` work
