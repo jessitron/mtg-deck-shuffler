@@ -425,7 +425,7 @@ String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.pl
     followed this advice for the fourth face-carrying sender site**: `buildCardDiscardedEvent`
     also calls `cardFaceFields(gameCard)`, so `card.played`, `card.played-face-down`, and
     `card.discarded` now all share the one computation in `src/port-tabletop/types.ts`.
-    `seat.joined`'s `buildSeatJoinedCommander` (`src/port-spine/types.ts`, a **different
+    `seat.joined`'s `buildSeatJoinedCommander` (`src/port-spine/join/SpineJoinAdapter.ts`, a **different
     file**) still carries its own independent copy of the `twoFaced ? ... : null` gate,
     not a call to `cardFaceFields` — "four sender sites share the rule" does not mean all
     four call one function; two functions implement it today (`cardFaceFields` for the

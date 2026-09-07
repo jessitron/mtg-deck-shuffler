@@ -1,4 +1,4 @@
-import { getCardImageUrl } from "../../types.js";
+import { getCardImageUrl } from "../../domain-types.js";
 import { GameCard, GameState, WhatHappened } from "../../GameState.js";
 import { GameId } from "../../domain-types.js";
 import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH, luminance } from "../../table-look.js";

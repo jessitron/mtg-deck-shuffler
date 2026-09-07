@@ -23,8 +23,9 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   subscribes to Node's global `node:diagnostics_channel`, not to a specific `Dispatcher`
   instance, so passing `{ dispatcher: new Agent(...) }` to `fetch()` (e.g. to disable idle
   timeouts on a long-lived stream) still gets traced. `apps/tabletop/src/server/spineSubscriber.ts`
-  is the live example; `apps/shuffler/src/port-spine/spineSubscriber.ts` (this ship's own Spine
-  SSE subscriber, ported from the Tabletop's) is the second.
+  is the live example; `apps/shuffler/src/port-spine/events/HttpSpineStreamGateway.ts` (this ship's
+  own Spine SSE subscriber, ported from the Tabletop's, and the **only** file in the Shuffler that
+  imports `undici`) is the second.
 - **A runtime file reading `contracts/` by relative path, and which Dockerfile it ships in** — the
   Tabletop's Dockerfile preserves `/repo/apps/tabletop` nesting; the Shuffler's flattens to `/app`.
   A dev-correct relative default silently stops resolving once flattened; the container boots
@@ -44,8 +45,11 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   (tab-id script → `hny.js` → guarded `Hny.initializeTracing`, in that order) comes from this one
   function; EJS pages reach it through `views/partials/head.ejs`. The `X-Browser-Tab-Id`/
   `game.browser_tab_id` browser↔server correlation depends on it.
-- **Auto-instrumentation carrying the trace** — the Shuffler creates zero manual spans; everything
-  hangs off the ambient request span.
+- **Auto-instrumentation carrying the trace** — the Shuffler creates almost no manual spans;
+  everything hangs off the ambient request span. The two exceptions are both in
+  `apps/shuffler/src/table-sync/cardReturnedDispatch.ts` (the `sse subscription: <name>` CONSUMER
+  span and its nested `move returned card to Revealed` INTERNAL span), where there is no ambient
+  request to hang off.
 - **The NodeSDK owning logs as well as traces** (`logRecordProcessors`) — that shared wiring is
   what gives log records the same resource (`service.name`, so the same dataset) and shutdown path
   as spans. It also means `OTEL_LOGS_EXPORTER` is inert on those ships.
@@ -64,7 +68,7 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   (optional, transient post-commit `seat.joined` copy). The Spine's event contract
   (`contracts/envelope.v1.json`) carries `traceparent` as a real, **optional** top-level field —
   never required, so a missing or malformed value is never a reason to reject an event.
-  `HttpSpineGateway.sendEvent` reuses the Shuffler's Tabletop-facing helper to build the envelope
+  `HttpSpineEventsGateway.sendEvent` reuses the Shuffler's Tabletop-facing helper to build the envelope
   (shared `buildCardPlayedEvent`) and **posts the full envelope as-is**, `traceparent` included —
   the HTTP header carries trace context too (undici's OTel auto-instrumentation, automatic and
   unconditional), redundant with the body field for this single-event POST but load-bearing once
@@ -340,7 +344,16 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   Shuffler's existing sends. Single-request sends should bound with `AbortSignal.timeout(...)`, not
   the long-lived `undici.Agent`/heartbeat-aware dispatcher `spineSubscriber.ts` uses — that shape is
   for an idle, long-lived stream, not one request.
-- **The Shuffler has exactly one outbound gateway: `port-spine/`.** There is no `TabletopPort`,
+- **The Shuffler reaches exactly one other ship, through one directory: `port-spine/`.** Since the
+  2026-09-06 layering refactor that directory holds **two** ports, one per capability —
+  `join/` (`JoinTablePort`) and `events/` (`SpineEventsPort`, both directions) — each with an
+  adapter (domain↔envelope translation, reconnect orchestration) over a gateway (the actual
+  `fetch`). The old flat names `SpinePort`/`HttpSpineGateway`/`FakeSpineGateway`/`spineSubscriber.ts`
+  no longer exist; the application code that used to sit alongside them now lives in
+  `apps/shuffler/src/table-sync/` (`sendToSpine.ts`, `gameSubscriptionRegistry.ts`,
+  `cardReturnedDispatch.ts`). **Spans and best-effort `log.warn`s live in `table-sync/`; nothing
+  under `port-spine/` opens a span.** Keep it that way — a span opened in the port would not
+  enclose the caller's work. There is no `TabletopPort`,
   `HttpTabletopGateway`, `FakeTabletopGateway`, `sendCardToTableFirst`, or `TABLETOP_URL`
   anywhere in the ship — `card.played` travels Shuffler→Spine only, then
   Spine→Tabletop over the Spine's own SSE broadcast. `apps/shuffler/src/port-tabletop/`
@@ -349,6 +362,31 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   the directory name implies one. If a future
   change needs the Shuffler to reach the Tabletop directly again, that's a new decision, not a
   revert — ask before adding it.
+- **Filtering Shuffler→Spine failures on `exception.type`**: as of 2026-09-06 it is
+  `SpineGatewayError` for **all** of them — join, event send, and SSE connection drop — where it
+  used to be `Error` (non-2xx) or `TypeError` (unreachable host, undici timeout). All three
+  gateways wrap, preserving `message` verbatim and the original as `cause`; span names, attribute
+  keys, and log strings are byte-identical. Filter on the log message or on the span attributes
+  (`spine_join.failed`, `spine_send.send_failed`) instead — those didn't change and are the more
+  durable handle. Any saved Honeycomb query/board/trigger on the old `exception.type` values needs
+  updating. README → "Every Shuffler→Spine failure now reports `exception.type: SpineGatewayError`".
+- **Adding a gateway to any ship, or wrapping a provider error**: the Shuffler's `port-spine/`
+  now says a gateway must not leak its provider's error types (`SpineGatewayError.ts`, shared by
+  the join and events gateways — one Spine, one error class). That is a real telemetry decision,
+  not just a typing one: it collapses the `exception.type` vocabulary a query could previously
+  discriminate on. Pair a new wrapper with a bounded `*.failure_reason` attribute
+  (`timeout`/`non_2xx`/`network_error`) so the *why* stays queryable — outstanding for both the
+  Shuffler's sends and the Tabletop's `sendCardReturned.ts`.
+- **`undici.Agent` lifetime under the port/adapter/gateway layering**: `createHeartbeatAwareDispatcher()`
+  is a constructor default on `HttpSpineStreamGateway`, which is itself a constructor default on
+  `HttpSpineEventsAdapter`, of which `server.ts` builds exactly one — **one connection pool per
+  process**, down from one per subscription. Both classes document it. Never build a gateway per
+  connection attempt or per subscription: a Spine outage would then leak a socket pool per retry.
+- **`SPINE_URL` is still frozen at module load in the Shuffler** — `const SPINE_URL =
+  process.env.SPINE_URL || "http://localhost:4600"` at `port-spine/events/HttpSpineStreamGateway.ts:5`,
+  moved verbatim by the layering refactor, **not** fixed by it. The Tabletop's `sendCardReturned.ts`
+  reads it at call time (a default parameter) instead, so the two ships still disagree. Unresolved
+  and needs Jess's nod before changing — don't "make them consistent" on your own.
 - **Adding a Tabletop test that needs to seed a card without a live Spine**: use the existing
   test-only seam, `apps/tabletop/src/server/testSeedRoute.ts`
   (`POST /test/tables/:tableName/cards`, mounted only when `ENABLE_TEST_SEED_ROUTE=true`) — don't
@@ -400,12 +438,16 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   the routing to `applyCardArrival` inside the span is still `card.played`-only, so a future
   consumer of another kind (`seat.taken`, `table.created`, …) adds its logic inside the existing
   `if (event.name !== "...")` branch rather than adding a new span. **A second consumer of this
-  exact shape now exists on the Shuffler side**: `apps/shuffler/src/port-spine/cardReturnedDispatch.ts`
+  exact shape now exists on the Shuffler side**: `apps/shuffler/src/table-sync/cardReturnedDispatch.ts`
   — same extract/context.with/CONSUMER/ROOT_CONTEXT-fallback shape, same "span per event kind, gate
   the routing inside it" pattern, plus a nested `SpanKind.INTERNAL` "move returned card to
   Revealed" span only when the event is actually applied, and a `card_return.outcome` attribute
-  stamped on every branch (`applied`/`duplicate`/`invalid`/the `applyGameCommand` outcome
-  kind/`error`) — copy this second example, not just the Tabletop's, when adding a third such
+  stamped on every branch (`applied`/`duplicate`/`invalid`/`other-seat`/`self-initiated`/the
+  `applyGameCommand` outcome kind/`error`). **`card_return.outcome` goes on the OUTER `CONSUMER`
+  span**, written through the closure over `span` from inside the inner span's callback, while
+  `markCurrentSpanAsError` targets the inner active span — that asymmetry is deliberate and
+  survived the 2026-09-06 layering refactor untouched; don't collapse it into
+  `trace.getActiveSpan()`. Copy this second example, not just the Tabletop's, when adding a third such
   consumer; it's also the Shuffler's first manual span ever, so `markCurrentSpanAsError`/`log.error`
   (never `span.recordException`) is the reference for how a Shuffler manual span should report a
   failure.
@@ -528,7 +570,7 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   the active span (`traceparent.synthesized: true`) so a real occurrence in production is visible.
   If the field is optional and only used for point-to-point propagation, `undefined`-on-no-span is
   correct and no flag is needed. **`envelope.v1.json` carries `traceparent` as a real, optional
-  envelope field** (never required — "it's rude to fail on tracing"), so `HttpSpineGateway.sendEvent`
+  envelope field** (never required — "it's rude to fail on tracing"), so `HttpSpineEventsGateway.sendEvent`
   no longer strips it: it builds the envelope via the Tabletop-facing helper (shared plumbing,
   `buildCardPlayedEvent`) and posts it as-is. Don't reintroduce a strip-before-send step — the
   contract accepts the field now. **The Spine itself never persists `traceparent`**

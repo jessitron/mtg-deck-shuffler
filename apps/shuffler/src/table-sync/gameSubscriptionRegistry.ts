@@ -2,11 +2,10 @@ import { GameId } from "../domain-types.js";
 import { GameEvent } from "../GameEvents.js";
 import { PersistStatePort } from "../port-persist-state/types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
-import { subscribeToSpine, SpineSubscription } from "./spineSubscriber.js";
-import { SpineConnectionPort } from "./SpineConnectionPort.js";
+import { SpineEventsPort, TableEventStream } from "../port-spine/events/types.js";
 import { dispatchSpineEventForGame } from "./cardReturnedDispatch.js";
 
-/** Highest `spineSeq` recorded on any event in the game's own log — the durable seed for a resumed subscription's `lastEventId`. `undefined` when the log has no recorded `spineSeq` at all (never applied a Spine event), same as today's true first-ever connection. */
+/** Highest `spineSeq` recorded on any event in the game's own log — the durable mark of how far this game has applied its table's events. `undefined` when the log has no recorded `spineSeq` at all (it has never applied one). */
 function highestSpineSeq(events: GameEvent[]): number | undefined {
   let highest: number | undefined;
   for (const event of events) {
@@ -19,7 +18,7 @@ function highestSpineSeq(events: GameEvent[]): number | undefined {
 export interface GameSubscriptionEntry {
   gameId: GameId;
   spineTableId: string;
-  subscription: SpineSubscription;
+  subscription: TableEventStream;
   /** event ids already applied — dedup for a redelivered event (reconnect landing on an already-seen event). */
   seenEventIds: Set<string>;
 }
@@ -71,7 +70,7 @@ export function removeBrowserStream(gameId: GameId, stream: BrowserStream): void
   browserStreamsByGame.delete(key);
   const entry = registry.get(key);
   if (entry) {
-    entry.subscription.close();
+    entry.subscription.stop();
     registry.delete(key);
   }
 }
@@ -100,21 +99,22 @@ export function ensureGameSpineSubscription(
   gameId: GameId,
   spineTableId: string,
   gameSeatId: string | undefined,
-  /** The persisted game's own event log — scanned for the highest recorded `spineSeq`, the durable seed for this subscription's `lastEventId`. */
+  /** The persisted game's own event log — scanned for the highest recorded `spineSeq`, so a re-created subscription resumes where the game left off. */
   persistedEvents: GameEvent[],
   deps: { persistStatePort: PersistStatePort; cardRepository: CardRepositoryPort },
-  /** Defaults to the real Spine (`subscribeToSpine`'s own default) — overridable so tests can hand it a `FakeSpineConnection`. */
-  connection?: SpineConnectionPort
+  /** The table's event bus. Absent for a Shuffler running without a Spine — then there is nothing to subscribe to. */
+  eventsPort: SpineEventsPort | undefined
 ): void {
+  if (!eventsPort) return;
   const key = String(gameId);
   if (registry.has(key)) return;
 
   const seenEventIds = new Set<string>();
-  const onEvent = (event: unknown) => dispatchSpineEventForGame(gameId, spineTableId, gameSeatId, seenEventIds, deps, event);
-  const seed = highestSpineSeq(persistedEvents);
-  const subscription = connection
-    ? subscribeToSpine(spineTableId, onEvent, connection, seed)
-    : subscribeToSpine(spineTableId, onEvent, undefined, seed);
+  const subscription = eventsPort.followTable(
+    spineTableId,
+    (event) => dispatchSpineEventForGame(gameId, spineTableId, gameSeatId, seenEventIds, deps, event),
+    highestSpineSeq(persistedEvents)
+  );
 
   registry.set(key, { gameId, spineTableId, subscription, seenEventIds });
 }

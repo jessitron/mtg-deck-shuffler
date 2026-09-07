@@ -1,4 +1,5 @@
-import { getCardImageUrl, constructCardImageUrl, CardDefinition } from "../src/types.js";
+import { CardDefinition } from "../src/types.js";
+import { getCardImageUrl, constructCardImageUrl } from "../src/domain-types.js";
 
 const baseCard: CardDefinition = {
   name: "Arcane Signet",

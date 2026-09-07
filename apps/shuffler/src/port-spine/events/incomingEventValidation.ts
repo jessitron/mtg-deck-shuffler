@@ -5,7 +5,7 @@ import addFormats from "ajv-formats";
 
 // No `import.meta.url` here (unlike the Tabletop's `src/server/contractValidation.ts`) —
 // ts-jest's ESM transform can't resolve it reliably, and this file is reached transitively
-// by `test/port-spine/spineSubscriber.test.ts` (see `test/port-spine/contractValidation.ts`
+// by `test/port-spine/events/SpineEventsSubscription.test.ts` (see `test/table-sync/contractValidation.ts`
 // for the same workaround). `process.cwd()` is `apps/shuffler/` for every way this process
 // starts locally (jest, `./run`, `npm start`) — but the Docker image flattens the workspace
 // to `/app` (see Dockerfile), where that relative walk no longer reaches `contracts/`, so
@@ -39,6 +39,8 @@ export interface Envelope<Payload> {
   occurredIn: string;
   origin: string;
   significance: "physical" | "domain" | "administrative";
+  /** The table's event ordinal, assigned by the Spine on append (absent at submission, present on everything broadcast). */
+  seq?: number;
   occurredAt?: string;
   traceparent?: string;
   schemaVersion: number;
@@ -51,7 +53,7 @@ export type ValidationResult<Payload> = { ok: true; envelope: Envelope<Payload> 
  * Validates an event arriving over the Spine SSE subscription, mirroring the
  * Tabletop's own `src/server/contractValidation.ts` — this ship's first consumer of
  * events it didn't itself send, so this is its first gate against the committed
- * contracts on the way in rather than only on the way out (`test/port-spine/contractValidation.ts`).
+ * contracts on the way in rather than only on the way out (`test/table-sync/contractValidation.ts`).
  */
 export function validateIncomingEvent<Payload>(body: unknown, expectedName: string): ValidationResult<Payload> {
   if (!validateEnvelopeSchema(body)) {

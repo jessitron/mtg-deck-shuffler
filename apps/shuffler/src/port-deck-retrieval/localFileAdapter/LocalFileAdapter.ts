@@ -1,5 +1,6 @@
 import { RetrieveDeckPort, DeckRetrievalRequest, isLocalFileRetrievalRequest, AvailableDecks, AvailableDeck, DeckVersionMismatchError } from "../types.js";
-import { Deck, PERSISTED_DECK_VERSION, getCardImageUrl } from "../../types.js";
+import { Deck, PERSISTED_DECK_VERSION } from "../../types.js";
+import { getCardImageUrl } from "../../domain-types.js";
 import fs from "fs";
 
 export class LocalFileAdapter implements RetrieveDeckPort {

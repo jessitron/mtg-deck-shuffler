@@ -1,16 +1,17 @@
-import { OpenSpineConnection, SpineConnectionHandlers, SpineConnectionPort } from "./SpineConnectionPort.js";
+import { OpenSpineStream, SpineStreamGateway, SpineStreamHandlers } from "./HttpSpineStreamGateway.js";
 
 /**
  * A scriptable in-memory double for one Spine SSE connection attempt — no socket, no HTTP.
- * Tests drive it directly: `open()` records the attempt, then `connect()`/`emitFrame()`/
- * `endStream()`/`dropConnection()` trigger exactly one of the four `SpineConnectionHandlers`
+ * It fakes the *transport*, so it stands where a gateway stands, not where a port does.
+ * Tests drive it directly: `openStream()` records the attempt, then `connect()`/`emitFrame()`/
+ * `endStream()`/`dropConnection()` trigger exactly one of the four `SpineStreamHandlers`
  * outcomes for whichever attempt is currently live.
  */
-export class FakeSpineConnection implements SpineConnectionPort {
+export class FakeSpineStreamGateway implements SpineStreamGateway {
   readonly openCalls: Array<{ tableId: string; lastEventId: number | undefined }> = [];
-  private live?: SpineConnectionHandlers;
+  private live?: SpineStreamHandlers;
 
-  open(tableId: string, lastEventId: number | undefined, handlers: SpineConnectionHandlers): OpenSpineConnection {
+  openStream(tableId: string, lastEventId: number | undefined, handlers: SpineStreamHandlers): OpenSpineStream {
     this.openCalls.push({ tableId, lastEventId });
     this.live = handlers;
     return {
@@ -20,7 +21,7 @@ export class FakeSpineConnection implements SpineConnectionPort {
     };
   }
 
-  /** The most recent attempt's `lastEventId`, or `undefined` if `open()` hasn't been called yet. */
+  /** The most recent attempt's `lastEventId`, or `undefined` if `openStream()` hasn't been called yet. */
   lastOpenLastEventId(): number | undefined {
     return this.openCalls[this.openCalls.length - 1]?.lastEventId;
   }
