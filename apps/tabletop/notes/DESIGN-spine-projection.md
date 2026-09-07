@@ -14,7 +14,13 @@ moves it.
 What changes is that the Tabletop starts *telling the Spine what happened*. Every
 physical event — a card taps, flips, moves zone, gains a counter, leaves the table —
 goes to the Spine's append-only log, alongside the arrivals that already come the other
-way. The Spine can then fold that log into a **projection** of the table.
+way. That log can then be folded into a **projection** of the table.
+
+**The Tabletop owns that projection, not the Spine** — decided in
+`.scratch/tabletop-persists-physical-events/spec.md`. `projectEvents(events) ->
+TableState` is a pure function on this ship, and the Spine makes no code change beyond
+registering the new payload schemas. The Spine stores, replays and broadcasts; it does
+not interpret.
 
 The projection starts wrong. It is expected to start wrong. The work is to add
 event-sends, one gesture at a time, until the projection matches the room — and to
@@ -37,6 +43,37 @@ TableSurfaceState = events.reduce(apply, empty)
 in the log that reconstructs it. So the vocabulary cannot be designed twice, once per
 port. It is designed once, and both ports quote it. That is why step 1 below is neither
 of the ports.
+
+## Relationship to the existing spec
+
+This design is **not** a replacement for
+`.scratch/tabletop-persists-physical-events/spec.md` (2026-09-06). That spec owns the
+*goal*; this document owns the *layering underneath it*. Where they disagree, the spec
+wins on what gets built and this document wins on where the seams go.
+
+Already built (tickets 01–03): the 😠 diagnostic button, `snapshotCanvas`, and the
+projection-plus-diff wired into it. Remaining: tickets 04–10, the event kinds themselves
+and the replay.
+
+The spec independently arrived at most of the replayability rules below —
+`card.moved` carrying prior *and* new position, `shape.removed` existing at all,
+`card.turnedFaceDown` covering both directions, card identity by `scryfallId` +
+`instanceId`, and a generic `shape.*` fallback carrying raw props for shapes with no
+dedicated event. That fallback **is** tier 3 below, and its raw props are the
+`tldrawRecord` quarantine. Two passes converging on the same rules is good evidence the
+rules are right.
+
+**The one open disagreement is sequencing.** The spec's Emission Decisions say to extend
+the existing send-then-commit path — `sendCardReturnedToSpineBestEffort`, one send
+function per new event kind. Taken literally across tickets 04–09 that is roughly eight
+hand-rolled send functions, each with its own envelope construction, which step 5 of the
+sequence below then has to absorb into one outbound port. The alternative is to do steps
+1–2 first so those tickets land on a port that already exists.
+
+Either is defensible: the spec's way ships observable events sooner and pays later; this
+document's way pays first and ships every event kind onto a finished seam. **This is Jess's
+call and is not yet made.** Until it is, treat the sequence below as the layering target,
+not as an instruction to pause tickets 04–10.
 
 ## Two ports
 
@@ -212,11 +249,13 @@ assumes a single inbound path. `CLAUDE.md` needs updating to match.
 **In production, during real play.** The convergence is the deliverable, so it is the
 thing measured:
 
-- Emit the Spine's projected state and the live room's state as comparable
-  observations, and put the **drift** — things in one and not the other, per tier — on a
-  span attribute. A game where drift trends to zero is the acceptance criterion for a
-  gesture being fully modeled.
+- **The mechanism already exists and is built.** `projectEvents(events) -> TableState`
+  and `snapshotCanvas(editor) -> TableState` produce the same shape so they can be
+  diffed, and the 😠 `DiagnosticButton` over the canvas runs that diff on demand and
+  reports it as a span with the full state dumps attached. A game where the discrepancy
+  count trends to zero is the acceptance criterion for a gesture being fully modeled.
 - A replay test: run a session, replay its log into a fresh room, diff the card set.
+  (Ticket 10, `10-replay-events-from-spine.md`.)
 
 **Do not switch anything onto the projection until that test passes.** A partial log that
 looks authoritative is worse than no log, because the first time it silently drops a card
@@ -321,8 +360,9 @@ the graveyard. Today that fan-in is smeared across three `Set` constants in
 near-identical `applyCard*` functions. Under a port it is one arrival with a destination
 and a concealment flag, translated once, in the adapter, where it is visible and testable.
 
-This is genuinely multi-session work and belongs in the tracker as a spec with
-dependency-ordered tickets.
+This is genuinely multi-session work. The goal already has a spec and tickets
+(`.scratch/tabletop-persists-physical-events/`); the layering steps above are not yet
+ticketed, and shouldn't be until the sequencing question is settled.
 
 ---
 
