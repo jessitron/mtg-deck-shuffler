@@ -2,18 +2,46 @@
 # Merge a finished worktree branch into local main. No push, no PR — just a
 # local merge commit, pre-authorized (see fleet CLAUDE.md, step 12).
 #
-# Usage: scripts/merge-worktree.sh <branch-name> ["merge commit message"]
+# Usage: scripts/merge-worktree.sh [--keep-merge-commit] <branch-name> ["merge commit message"]
+#
+# By default main fast-forwards when it can. Pass --keep-merge-commit to force a
+# merge commit (--no-ff) so the branch's commits stay grouped in the history.
 #
 # Run this from the main checkout (repo root), not from inside the worktree.
 set -euo pipefail
 
+usage() {
+  echo "Usage: $0 [--keep-merge-commit] <branch-name> [\"merge commit message\"]" >&2
+}
+
+KEEP_MERGE_COMMIT=0
+POSITIONAL=()
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --keep-merge-commit) KEEP_MERGE_COMMIT=1 ;;
+    -h|--help) usage; exit 0 ;;
+    --) shift; POSITIONAL+=("$@"); break ;;
+    -*) echo "Error: unknown option '$1'." >&2; usage; exit 1 ;;
+    *) POSITIONAL+=("$1") ;;
+  esac
+  shift
+done
+set -- ${POSITIONAL+"${POSITIONAL[@]}"}
+
 if [ $# -lt 1 ]; then
-  echo "Usage: $0 <branch-name> [\"merge commit message\"]" >&2
+  usage
   exit 1
 fi
 
 BRANCH="$1"
 MSG="${2:-Merge worktree branch '$BRANCH' - claude}"
+
+CURRENT_BRANCH=$(git branch --show-current)
+if [ "$CURRENT_BRANCH" != "main" ]; then
+  echo "Error: run this from the main checkout, on branch 'main' (currently on '$CURRENT_BRANCH')." >&2
+  echo "Use ExitWorktree, or 'cd' to the repo root, first." >&2
+  exit 1
+fi
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 LOCK_DIR="$REPO_ROOT/.git/merge-worktree.lock"
@@ -41,13 +69,6 @@ done
 echo "branch=$BRANCH pid=$$ started=$(date)" > "$LOCK_DIR/owner"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
-CURRENT_BRANCH=$(git branch --show-current)
-if [ "$CURRENT_BRANCH" != "main" ]; then
-  echo "Error: run this from the main checkout, on branch 'main' (currently on '$CURRENT_BRANCH')." >&2
-  echo "Use ExitWorktree, or 'cd' to the repo root, first." >&2
-  exit 1
-fi
-
 STASHED=0
 if [ -n "$(git status --porcelain)" ]; then
   echo "main checkout has uncommitted changes — stashing them before merging."
@@ -55,7 +76,7 @@ if [ -n "$(git status --porcelain)" ]; then
   STASHED=1
 fi
 
-if git merge --ff-only "$BRANCH" 2>/dev/null; then
+if [ "$KEEP_MERGE_COMMIT" -eq 0 ] && git merge --ff-only "$BRANCH" 2>/dev/null; then
   echo "Fast-forwarded main to '$BRANCH' (no merge commit needed)."
 elif ! git merge --no-ff "$BRANCH" -m "$MSG"; then
   echo "Error: merge of '$BRANCH' failed." >&2
