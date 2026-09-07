@@ -593,17 +593,26 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   them on — confirmed live: those logs land with no trace/span id, which is correct, not a bug.
   This is the fleet's first use of `ignoreIncomingRequestHook`; copy this shape, don't invent a new
   suppression mechanism, for the next such route.
-- **Adding any new browser-side `fetch()` in the Tabletop that needs to join a server
-  trace**: `apps/tabletop/src/client/observability/index.ts`'s `initTracing()` registers **no
-  fetch/XHR auto-instrumentation** — only a bare `WebTracerProvider` +
-  `GlobalAttributesSpanProcessor` + `BatchSpanProcessor`, no `registerInstrumentations()` call.
-  Nothing injects a `traceparent` header automatically on this ship's browser side. You must
-  call `currentTraceparent()` synchronously, **before** the `await fetch`, and attach it as a
-  header by hand — `DiagnosticButton.tsx`'s POST is now the second call site doing this, after
-  `TablePage.tsx`'s WS-URI query-param precedent. This is a real gap (most OTel web SDK setups
-  register `FetchInstrumentation` for exactly this), not an oversight to silently work around
-  again on a third call site — copy the manual-header shape, and if it keeps recurring,
-  consider raising whether to add the instrumentation instead.
+- **Adding any new browser-side `fetch()`/XHR in the Tabletop**: as of 2026-09-07,
+  `apps/tabletop/src/client/observability/index.ts`'s `initTracing()` **does** register fetch/XHR
+  auto-instrumentation (`registerInstrumentations()` with `FetchInstrumentation`/
+  `XMLHttpRequestInstrumentation`, `ignoreUrls` built by `buildExportDestinationIgnoreUrls`) — a
+  new call automatically gets a `traceparent` header with no manual work. Don't add a manual
+  `currentTraceparent()` + header-attach for a new fetch/XHR call site; that shape is retired
+  (`DiagnosticButton.tsx` no longer does it) and copying it now would be redundant with what
+  auto-instrumentation already does. **The one exception**: a call that isn't a fetch/XHR at
+  all — `TablePage.tsx`'s WebSocket connection URI is the standing example, since fetch/XHR
+  instrumentation cannot touch a WS handshake URL. For that shape, `currentTraceparent()` is
+  still the right tool and is still exported for exactly this caller. See README → "Fetch/XHR
+  browser auto-instrumentation now registered" for the full story, including why the Shuffler
+  never had this gap (`apps/shuffler/public/hny.js`'s vendored SDK already calls
+  `getWebAutoInstrumentations()`).
+- **Adding a new service or a new client-side library to the fleet**: ask whether it ships
+  auto-instrumentation and, if so, install and register it — don't default to a hand-rolled
+  manual-header/manual-span workaround the way `DiagnosticButton.tsx` originally had to. That
+  retired workaround is the reference example of what skipping this check costs. This is a
+  standing question for this owner to raise, not a one-time fix tied to the Tabletop's fetch/XHR
+  gap specifically.
 - **The Spine's own `GET /tables/:table_id/events/stream` (`services/spine/app.rb`) almost
   certainly has the same unbounded-incoming-request-span problem, and it is still
   undocumented/unaddressed** — flagged during the Shuffler's `GET /game-events/:gameId` work
