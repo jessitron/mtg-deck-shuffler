@@ -7,7 +7,7 @@ telemetry — a summary span plus, on mismatch, full JSON dumps. This is the fir
 end-to-end "does the log match the canvas?" answer a player can trigger, even though it
 only checks card presence so far.
 
-**Blocked by:** 01, 02.
+**Blocked by:** 01, 02, 10 (needs a way to fetch a table's real event history to replay).
 
 **Status:** ready-for-agent
 
