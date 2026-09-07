@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { inSpan, currentTraceparent } from "../observability";
+import { inSpan } from "../observability";
 
 /**
  * Floating diagnostic trigger (tabletop-persists-physical-events ticket 01) — a player's
@@ -10,10 +10,9 @@ import { inSpan, currentTraceparent } from "../observability";
  * nested under it); the real projectEvents/snapshotCanvas diff lands in a later ticket in
  * the same spec.
  *
- * The browser tracer here has no fetch/XHR auto-instrumentation registered (see
- * `observability/index.ts`), so nothing injects a `traceparent` header automatically —
- * `currentTraceparent()` is called synchronously, before the `await fetch`, so it reads
- * off this span while it's still the active context, and the header is attached by hand.
+ * The browser tracer registers fetch auto-instrumentation (`observability/index.ts`),
+ * which injects the `traceparent` header into this `fetch()` call automatically — no
+ * manual header attachment needed.
  *
  * tldraw's `.tl-canvas__in-front` wrapper sets `pointer-events: none` (so the overlay
  * layer doesn't block canvas interactions by default) and that's an inherited CSS
@@ -28,11 +27,7 @@ export function DiagnosticButton({ tableSlug }: { tableSlug: string }) {
     void inSpan(
       "diagnostic button clicked",
       async () => {
-        const traceparent = currentTraceparent();
-        await fetch(`/api/tables/${encodeURIComponent(tableSlug)}/diagnostic`, {
-          method: "POST",
-          headers: traceparent ? { traceparent } : {},
-        });
+        await fetch(`/api/tables/${encodeURIComponent(tableSlug)}/diagnostic`, { method: "POST" });
       },
       { "diagnostic.triggered": true, "table.slug": tableSlug }
     );
