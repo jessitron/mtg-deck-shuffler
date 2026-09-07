@@ -13,8 +13,8 @@ Tabletop's version should say — because the Tabletop's language is not the Shu
 ## The verdict up front
 
 The Tabletop is not a mess. The code is careful, and it is documented far past the usual
-standard. What it lacks is a **layer boundary**: it is organised by *event kind* rather
-than by *layer*, so the Spine's wire vocabulary reaches all the way into the code that
+standard. (JESS: that means it has too many comments.) What it lacks is a **layer boundary**: it is organised by _event kind_ rather
+than by _layer_, so the Spine's wire vocabulary reaches all the way into the code that
 places tldraw shapes. There is no port, no adapter, and no gateway; there is a set of
 peer modules that each know the Spine's URL, envelope shape and event names.
 
@@ -24,13 +24,13 @@ That means the work is a refactor with a clear shape, not a rescue.
 
 Five modules carry the Spine connection, none of them separated from the domain:
 
-| File | What it holds |
-|---|---|
-| `src/server/spineSubscriber.ts` | SSE transport, reconnect, exponential backoff, the `Last-Event-ID` cursor, frame parsing, and the `undici.Agent` — one function, calling `fetch` inline |
-| `src/server/sendCardReturned.ts` | a hand-built `card.returned` envelope and the POST that sends it, with its own copy of `SPINE_URL` and its default |
-| `src/server/spineEventDispatch.ts` | routing by *wire* event name, plus the receiving span, plus outcome logging |
-| `src/server/contractValidation.ts` | Ajv envelope and payload validation — but invoked *from* the application code, not at the boundary |
-| `src/server/seatJoined.ts` | an Express route that is really an inbound Spine event, and which opens the SSE subscription as a side effect |
+| File                               | What it holds                                                                                                                                           |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/server/spineSubscriber.ts`    | SSE transport, reconnect, exponential backoff, the `Last-Event-ID` cursor, frame parsing, and the `undici.Agent` — one function, calling `fetch` inline |
+| `src/server/sendCardReturned.ts`   | a hand-built `card.returned` envelope and the POST that sends it, with its own copy of `SPINE_URL` and its default                                      |
+| `src/server/spineEventDispatch.ts` | routing by _wire_ event name, plus the receiving span, plus outcome logging                                                                             |
+| `src/server/contractValidation.ts` | Ajv envelope and payload validation — but invoked _from_ the application code, not at the boundary                                                      |
+| `src/server/seatJoined.ts`         | an Express route that is really an inbound Spine event, and which opens the SSE subscription as a side effect                                           |
 
 The clearest tell is `applyCardArrival(tableName, body: unknown)` in
 `src/server/cardArrival.ts`. It accepts a raw envelope, runs Ajv against it, checks
@@ -49,8 +49,8 @@ tested, without the wire format in scope.
 
 This is the real design work, and it is where the payoff is.
 
-`CONTEXT-MAP.md` says the Tabletop's language is *the physics of Magic — card identity,
-zone geography, gestures — never card meaning*. So the port must not say "event", and
+`CONTEXT-MAP.md` says the Tabletop's language is _the physics of Magic — card identity,
+zone geography, gestures — never card meaning_. So the port must not say "event", and
 must not say "card.played". Those are the Spine's published language, which is exactly
 what an adapter exists to translate out of. The port should say things like: a card
 **arrives** at a seat; a card **vanishes**; a seat's area is **set up**; a player
@@ -84,12 +84,16 @@ cards depart — is closer to what this ship actually thinks about. Decide this 
 port is a vocabulary before it is an interface, and every other file in the refactor
 quotes it.
 
+JESS Q3: It isn't about the spine, yeah. It also isn't traffic. There's a "Event or it didn't happen" aspect to this. Event is a real word, not just the spine's. These events are both physical and game events. It's sort of a WhatsHappeningPort although that sounds kind of silly. We do need to name it - but I'm okay with a silly name that's easy to search-and-replace. Let's call it WhatsHappeningPort rn.
+
 ## Three gateways, not two
 
 The Shuffler needs two gateways under its events port, because a long-lived SSE stream
 shares nothing with a one-shot POST. The Tabletop needs a third, because it has an
 inbound transport the Shuffler doesn't: **the Spine POSTs `seat.joined` to us** at
 `POST /api/tables/:tableName/events`.
+
+JESS Q1: Something has to trigger the opening of the SSE stream. however, that _could_ be the opening of a client. Could we redesign this, now that the Spine has event-replay, so that seat.joined is a regular event in the stream? I think we could eliminate this entirely.
 
 That is an unusual gateway — driven rather than driving; it doesn't call the Spine, the
 Spine calls it. It still belongs at the boundary: the Express handler becomes thin and
@@ -101,19 +105,23 @@ Spine absorbs". Is it converging onto the SSE stream? If it is, the port design 
 assume a single inbound path and treat the route as a temporary second gateway that gets
 deleted, rather than as a permanent part of the shape.
 
+JESS: I don't really know what it's talking about there. CLAUDE.md is eligible for changing. We didn't always have the SSE stream, and I think now that we have it (and it has replay, that's new), we can get rid of the post.
+
 ## The actual blocker: there is no composition point
 
 This is the largest mechanical change, and it is prerequisite to everything else.
 
 Every module here reaches for `getOrCreateRoom` — a module-level singleton registry in
 `src/server/rooms.ts` — by import, and `seatJoined.ts` reaches for `subscribeToSpine` by
-import too. Nothing in this ship can be *handed* an adapter, because nothing is
+import too. Nothing in this ship can be _handed_ an adapter, because nothing is
 constructed anywhere; it is all wired by `import`. `SPINE_URL` is read in two separate
 modules, each with its own duplicated `http://localhost:4600` default.
 
 Until `src/server/server.ts` builds the adapter once and passes it down, "swap in a fake
 adapter" is not expressible, and the port is decoration. Doing this first also fixes the
 duplicated env-var default for free.
+
+JESS Q2: It bothers me that the Room concept is top here. Consider this: what would it take to make a port-adapter-gateway for tldraw itself? Because chances of us having to swap that out for another implementation are... very high. Its "hobby license program" seems to be a fiction, no response to my application. Now, this port can be limited to parts of tldraw -- for instance, the Shape API is its own thing. But the _sync_ part in particular, the part where there are Rooms while we have Tables -- could that part be behind a port?
 
 ## The test-only HTTP route exists only because there is no port
 
@@ -127,12 +135,16 @@ without an HTTP hole in the production build, and retires both the route and the
 server-spawning in those tests. This is one of the more concrete prizes in the whole
 refactor, and worth naming in the spec so it doesn't get dropped as a nice-to-have.
 
-Note the existing boundary tests are *good* and mostly survive: `test/spineSubscriber.test.ts`
+JESS: this is beautiful, I'm so happy about this
+
+Note the existing boundary tests are _good_ and mostly survive: `test/spineSubscriber.test.ts`
 and `test/sendCardReturned.test.ts` already stand up real `http.createServer` fake Spines.
 Under P-A-G those become **gateway-level** tests, which is exactly where they belong.
 What gets added is a second, port-level fake for the application tests — the same
 two-levels-of-fakes arrangement the Shuffler's `DESIGN-layering.md` calls out as the
 point of the pattern.
+
+JESS: All application tests should fake adapters, not gateways. Only adapter tests use a fake gateway.
 
 ## Reconnect logic moves up
 
@@ -145,6 +157,8 @@ HTTP gateway keeps only `fetch`, the `undici.Agent` with its bounded
 This is the part of `spineSubscriber.ts` that is currently untestable except against a
 real socket, and it is the part most likely to harbour a bug, so the split earns its keep
 immediately.
+
+JESS: love it
 
 ## Telemetry is load-bearing here — do not lose it
 
@@ -162,6 +176,8 @@ handing domain values inward.
 Get `fleet-is-observable-review` on the plan before implementing. The span shape is
 documented in two `CLAUDE.md` files and in the owner's knowledge base; changing where the
 spans are opened without telling the owner is how those docs go stale.
+
+JESS: Telemetry on the outgoing events is interesting too. See your own note below about the telemetry-only adapter as one implementation of the outgoing spine port.
 
 ## One more thing the adapter should absorb
 
@@ -193,9 +209,7 @@ adapter rather than in a module the application calls directly.
 and leave the outbound `card.returned` POST for a second pass. All the leakage is inbound;
 the outbound side is one small function that is already nearly a gateway.
 
-This is genuinely multi-session work, so by the repo's own size threshold it earns the
-freight crane: `/to-spec`, then `/to-tickets`. Both are disable-agent-invocation, so Jess
-has to invoke them.
+This is genuinely multi-session work.
 
 ---
 
@@ -245,9 +259,11 @@ every module mutates it directly — `entry.seenEventIds.add`, `playerArea.grave
 set, its Spine subscription and its zone geography — and exposes physics operations
 (`aCardArrives`, `aCardLeaves`, `aSeatSitsDown`) rather than fields — would let the port's
 inbound side call one method instead of five modules reaching into one struct. Note that
-this is also the thing that makes the port's application side *small*: without it, the
+this is also the thing that makes the port's application side _small_: without it, the
 "application layer" the adapter hands values to is still just loose functions over a
 shared mutable map.
+
+JESS: Super strong agree!!! You say later to do this after the Spine port extraction. Okay.
 
 **2. Make the client's physics vocabulary real.** `src/client/usePhysicsAnnouncements.ts`
 already names this ship's physics in its own language — `card.tapped`, `card.untapped`,
@@ -274,6 +290,8 @@ drop and zone hit-testing carry the tldraw-specific knowledge above and are cove
 owner (`owners/tabletop-shape-mechanics`). There is no layering win available there that
 justifies disturbing them.
 
+JESS: agree, all the shape stuff is its own thing. But let's put a port around, like, where we get notifications about shapes moving?
+
 ## The rule I'd apply
 
 Every one of those four is reachable **incrementally, behind the port**, and each is
@@ -282,5 +300,5 @@ irreversible bet and adds the cost of rediscovering the tldraw, undici and Puma 
 the current comments already record.
 
 So: no rewrite. Take the port refactor as step one, then take the `Table` domain object as
-step two — because that is the change a rewrite would be *for*, and it can be had without
+step two — because that is the change a rewrite would be _for_, and it can be had without
 one.

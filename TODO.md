@@ -69,6 +69,8 @@ and I want to drop a card in between C and D, then the drop zone between them is
     ← priority: later
   - Let's do this after rotation, so that we have the option of the modal being outside of tldraw.
 
+- Shuffler: rename "Reveal" section to "Look at". This serves to clarify concepts.
+
 - `card-images-needs-adapter` Give `port-card-images` the adapter layer it's missing
   - `apps/shuffler/src/port-card-images/` has exactly the violation we just finished fixing in
     `port-spine`: the gateway implements the port directly, with no adapter in between.

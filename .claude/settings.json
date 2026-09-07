@@ -5,11 +5,10 @@
     ]
   },
   "hooks": {},
-  "enabledPlugins": {
-    "seamapping@tronijess-skills": true,
-    "mattpocock-skills@claude-plugins-official": true
-  },
   "worktree": {
     "baseRef": "head"
+  },
+  "enabledPlugins": {
+    "seamapping@tronijess-skills": true
   }
 }

@@ -86,12 +86,6 @@ the fields meaningful to the recipient cross a boundary onto the wire.
 | `sessionId` lifetime | free to reset every page load, since `gameId` already anchors identity | passthrough | must persist across a refresh (client-side storage) |
 | Unseated case | n/a — every Shuffler game has a `gameId` | n/a | **Anonymous Session** — no `seatId`, a client-generated pseudonym (`anonymous-hippo-234134tr`) serves as both `sessionId` and display label |
 
-See `notes/GLOSSARY.md`'s Seat ID, Table Position, Session ID, Anonymous Session, and
-Owner vs Initiator entries for the full reasoning. Two points worth repeating here because
-they're easy to get backwards at a boundary:
-
-- **`seatId` is minted by the Spine**, never the Shuffler (an earlier version of this file's
-  sibling `notes/GLOSSARY.md` entry said otherwise; that was wrong and has been corrected).
 - **`initiator` conveys attribution, never authority.** This fleet has no permission system —
   a seated player, an anonymous Tabletop visitor, or a stranger with a stale link can all act
   freely. `seatId`/`sessionId` exist so later interpretation can say who did what, not to
@@ -99,9 +93,4 @@ they're easy to get backwards at a boundary:
 
 ### Owner (Tabletop payload) ≠ Initiator (envelope)
 
-`owner` on the `card.played` payload answers "whose PlayerArea does this card belong in" — a
-placement fact about the card. `initiator` answers "who caused this event." Today
-`buildCardPlayedEvent` (`apps/shuffler/src/port-tabletop/types.ts`) derives `owner` directly
-from `initiator.seatId`, which forecloses any case where they'd diverge (a player moving a
-card into an opponent's zone; an anonymous facilitator arranging someone else's cards).
-Decided 2026-08-19 that the two should be independently specified — not yet built.
+`owner` on the `card.played` payload answers "whose deck is this card in". `initiator` answers "who caused this event."

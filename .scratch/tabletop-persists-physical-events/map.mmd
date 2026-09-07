@@ -1,7 +1,7 @@
 flowchart BT
-   t1[Port the Shuffler's spine connection code to Tabletop] --> joy1{{Improved architecture}}
+   t1[⛵️ Port the Shuffler's spine connection code to Tabletop] --> joy1{{Improved architecture}}
    t1 --> t2[The tabletop can retrieve events from the beginning]
-   t3[⛵️ Improve the Shuffler's spine connection code OMFG] --> t1
+   t3[Improve the Shuffler's spine connection code OMFG] --> t1
    t3 --> joy2{{Improved architecture}}
    t2 --> t4[03: project table state from spine events]
    g1([See whether the bug shows up as a difference between projected events and table state])
@@ -24,3 +24,6 @@ class t5 tabletop;
 class g1 tabletop;
 class g2 tabletop;
 class t6 tabletop;
+
+classDef complete color:#000000,stroke:#000000;
+class t3 complete;
