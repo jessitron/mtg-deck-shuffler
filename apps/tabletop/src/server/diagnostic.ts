@@ -20,9 +20,18 @@ const tracer = trace.getTracer("mtg-tabletop");
 export async function handleDiagnostic(req: Request, res: Response): Promise<void> {
   const tableName = slugifyTableName(req.params.tableName ?? "");
   if (!tableName) {
+    trace.getActiveSpan()?.setAttributes({
+      "diagnostic.rejected": "table-name-required",
+      "request.params.tableName": req.params.tableName ?? "",
+    });
     res.status(400).json({ error: "table name required" });
     return;
   }
+
+  trace.getActiveSpan()?.setAttributes({
+    "table.name": tableNameFromSlug(tableName),
+    "table.slug": tableName,
+  });
 
   await tracer.startActiveSpan(
     "diagnostic: diff projection vs live table",
