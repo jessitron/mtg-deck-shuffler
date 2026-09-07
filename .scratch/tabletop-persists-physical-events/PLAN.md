@@ -64,6 +64,13 @@ Three decisions from that spec:
   touched Ruby. `merge-worktree.sh` is what normally runs that gate, and the manual path
   skips it. Do not merge on a red suite. (Phase 2 spawns four subagents in parallel; each
   needs its own branch name.)
+- **Verify on main after each merge, not just in the worktree.** A worktree has its own
+  `node_modules`. A subagent that adds a dependency installs it there; the merge carries
+  `package.json` and the lockfile but not the install, and removing the worktree deletes
+  the only copy — so main goes red while the subagent truthfully reports green. **After any
+  merge touching a `package.json`: `npm install` from the repo root, then re-run the suite
+  on main.** This already happened once, on the browser auto-instrumentation change.
+  Phase 2's four subagents each publish payload schemas and may add deps, so expect it.
 - **Delete newly-unused code**, especially CSS, after each change.
 
 ## Why the ports come first
