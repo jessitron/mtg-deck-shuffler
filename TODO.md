@@ -69,6 +69,23 @@ and I want to drop a card in between C and D, then the drop zone between them is
     ← priority: later
   - Let's do this after rotation, so that we have the option of the modal being outside of tldraw.
 
+- `card-images-needs-adapter` Give `port-card-images` the adapter layer it's missing
+  - `apps/shuffler/src/port-card-images/` has exactly the violation we just finished fixing in
+    `port-spine`: the gateway implements the port directly, with no adapter in between.
+    `ScryfallCardImagesGateway implements CardImagesPort`
+    (`src/port-card-images/ScryfallCardImagesGateway.ts:57`) and `FakeCardImagesGateway implements
+    CardImagesPort` (`src/port-card-images/FakeCardImagesGateway.ts:3`).
+  - Per `notes/PATTERN-port-adapter-gateway.md` a gateway must not implement the port, and a fake
+    belongs at adapter level, never gateway level — so `FakeCardImagesGateway` is misnamed the same
+    way `FakeSpineGateway` was. Without an adapter there is nothing translating, which is what lets
+    the provider's vocabulary reach the domain.
+  - **The port-spine refactor is the worked template**, and `apps/shuffler/notes/DESIGN-layering.md`
+    now documents that shape end to end (capability-named ports, an abstract adapter base with
+    `Http*`/`Fake*` subclasses, fakes at two levels, one shared gateway error type).
+  - Likely much smaller than the port-spine job: one capability, not two, and no SSE/reconnect half.
+  - Found incidentally while verifying the port-spine layering refactor (2026-09-06), not by a
+    failure — nothing is broken today, this is a latent design debt.
+
 ## Backlog
 
 - GRILLING: `exile-and-table-provenance` Add an exile action to Shuffler, and show in the table list how each card got there ← was: JES-85
