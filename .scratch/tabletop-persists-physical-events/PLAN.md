@@ -116,7 +116,7 @@ this exists, "hand it a fake adapter" is not expressible and the ports are decor
 
 Mostly naming what exists.
 
-- Extend `TableState` to its full field set in **one edit** — position, tapped, face,
+- Extend `TableState` to its full field set — position, tapped, face,
   concealment, generic shapes — so no Phase 2 subagent ever touches its shape.
   `projectEvents` and `snapshotCanvas` grow with it.
 - **The generic-shape rule:** a shape with no dedicated event carries `id`, position and
@@ -131,8 +131,7 @@ Mostly naming what exists.
 two `CLAUDE.md` files; after the move the receiving span belongs on the adapter and the
 doing-span stays in the application.
 
-**Done when:** a new gesture is a payload schema plus one call site, and an application
-test can run against a fake adapter with no HTTP anywhere.
+**Done when:** Ports and application code are in Table's vocabulary, not Spine or HTTP or tldraw-sync. (Shapes and client code still use TLDraw concepts.) Tests use fake adapters, not fake HTTP servers. (Tests of the adapters can use fake gateways.) 
 
 **Checkpoint — stop and report to Jess.**
 
