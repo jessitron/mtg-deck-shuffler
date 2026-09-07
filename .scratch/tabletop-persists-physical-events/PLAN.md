@@ -34,8 +34,8 @@ Three decisions from that spec:
 
 ## Ground rules
 
-- **Fakes, never mocks.** `snapshotCanvas` tests against a real in-memory tldraw editor —
-  tldraw is cheap to construct and must not be faked.
+- **Fakes, never mocks.** The `TableState` snapshot tests against a real in-memory tldraw
+  `TLSocketRoom` — tldraw is cheap to construct and must not be faked.
 - **Application tests fake the adapter. Only adapter tests fake a gateway.**
 - **Owner consults**: `owners/INDEX.md`. Match the consult to the question, not to the
   file list — usually one owner, sometimes none. The phases below name the ones that
@@ -62,8 +62,14 @@ With the port, one endpoint accepts the physics-event union and each gesture is 
 schema plus a call site. **The port makes the gesture work smaller.**
 
 And much of it already exists unnamed: `TableState` *is* `TableSurfacePort`'s domain model,
-and `snapshotCanvas(editor) -> TableState` *is* its read-side adapter. Naming them is most
-of the job.
+and its read-side adapter is a read off `room.getCurrentSnapshot().documents` — which
+`hasInstance` and `stackCardCount` in `src/server/rooms.ts` already do, one field at a
+time. Naming them is most of the job.
+
+(`snapshotCanvas(editor)` is today's version of that read, but it lives in
+`src/client/` and reads a client `Editor`. **The diff runs on the server** — decided
+2026-09-07; see the section of that name in `DESIGN-spine-projection.md`. So this
+function moves to the server as part of Phase 1 rather than being kept where it is.)
 
 ---
 
@@ -118,7 +124,12 @@ Mostly naming what exists.
 
 - Extend `TableState` to its full field set — position, tapped, face,
   concealment, generic shapes — so no Phase 2 subagent ever touches its shape.
-  `projectEvents` and `snapshotCanvas` grow with it.
+  `projectEvents` and the room snapshot grow with it.
+- **Move the snapshot to the server.** `src/client/snapshotCanvas.ts` becomes
+  `snapshotRoom(entry) -> TableState`, reading `room.getCurrentSnapshot().documents`
+  instead of `editor.getCurrentPageShapes()`; `test/snapshotCanvas.test.ts` moves with it
+  and becomes a room test shaped like `test/updateStore.test.ts`. This is the read side of
+  `TableSurfacePort`.
 - **The generic-shape rule:** a shape with no dedicated event carries `id`, position and
   its `ridesOn` parent hoisted out; everything else is quarantined in a field named
   `tldrawRecord`. **The domain may hold, move, reparent and delete that record; it may
@@ -160,6 +171,12 @@ fleet root.
 ## Phase 3 — Convergence
 
 **With Jess.** This is the point of the project and it is not a coding step.
+
+**Prerequisite, and it is coding:** the 😠 button is a stub today — it emits a
+`diagnostic button clicked` span and nothing else. It must become a POST to a Tabletop
+route that runs `diffTableStates(projectEvents(log), snapshotRoom(entry))` and mints the
+span server-side, with the state dumps attached. Until that lands there is nothing to
+read. It needs the log retained server-side, so it follows the inbound port.
 
 Play a real game. Push the 😠 button. Read the span in Honeycomb (environment
 `mtg-deck-shuffler`): `diagnostic.discrepancy_count` and `diagnostic.discrepancy_kinds`.

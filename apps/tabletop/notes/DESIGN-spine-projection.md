@@ -51,9 +51,10 @@ This design is **not** a replacement for
 *goal*; this document owns the *layering underneath it*. Where they disagree, the spec
 wins on what gets built and this document wins on where the seams go.
 
-Already built (tickets 01–03): the 😠 diagnostic button, `snapshotCanvas`, and the
-projection-plus-diff wired into it. Remaining: tickets 04–10, the event kinds themselves
-and the replay.
+Already built (tickets 01–03): the 😠 diagnostic button, `projectEvents`, `diffTableStates`,
+and `snapshotCanvas`. The button is **not** yet wired to the diff — it emits a
+`diagnostic button clicked` span and nothing more (`src/client/shapes/DiagnosticButton.tsx`).
+Remaining: wiring the diff, tickets 04–10, the event kinds themselves and the replay.
 
 The spec independently arrived at most of the replayability rules below —
 `card.moved` carrying prior *and* new position, `shape.removed` existing at all,
@@ -249,13 +250,42 @@ assumes a single inbound path. `CLAUDE.md` needs updating to match.
 **In production, during real play.** The convergence is the deliverable, so it is the
 thing measured:
 
-- **The mechanism already exists and is built.** `projectEvents(events) -> TableState`
+- **The pure functions exist; the wiring does not.** `projectEvents(events) -> TableState`
   and `snapshotCanvas(editor) -> TableState` produce the same shape so they can be
-  diffed, and the 😠 `DiagnosticButton` over the canvas runs that diff on demand and
-  reports it as a span with the full state dumps attached. A game where the discrepancy
-  count trends to zero is the acceptance criterion for a gesture being fully modeled.
+  diffed, and `diffTableStates` diffs them. Nothing calls them together yet. A game where
+  the discrepancy count trends to zero is the acceptance criterion for a gesture being
+  fully modeled.
 - A replay test: run a session, replay its log into a fresh room, diff the card set.
   (Ticket 10, `10-replay-events-from-spine.md`.)
+
+### The diff runs on the server
+
+**Decided 2026-09-07 (Jess).** Both halves of the diff are server-side facts, so the
+comparison happens on the server and the 😠 button is a *request* for it, not the place
+it happens.
+
+The server holds the Spine subscription, so it is the only place the event log arrives.
+It also already reads live table state out of the room — `hasInstance` and
+`stackCardCount` in `src/server/rooms.ts` both walk
+`room.getCurrentSnapshot().documents`, filtering `typeName === "shape"` and reading
+`props`. A `TableState` snapshot off the room is a third function of exactly that shape,
+and those two are its proto-versions.
+
+Putting the diff in the browser would mean shipping the whole event log to every client
+so each tab could recompute an answer the server already has, and it would make the
+diagnostic depend on which tab pushed the button. Neither is wanted.
+
+Consequences:
+
+- **`snapshotCanvas(editor)` is in the wrong layer.** It reads
+  `editor.getCurrentPageShapes()` from a client `Editor`. It becomes a server-side read
+  off `TLSocketRoom` — `snapshotRoom(entry) -> TableState`, the read side of
+  `TableSurfacePort`. `test/snapshotCanvas.test.ts` moves with it and becomes a room test
+  in the shape of `test/updateStore.test.ts`.
+- **The 😠 button becomes a POST**, and the diagnostic span is minted on the server where
+  the receiving-span convention already lives.
+- **No client-side event feed is needed.** This removes a step that would otherwise have
+  been required and was never named in the plan.
 
 **Do not switch anything onto the projection until that test passes.** A partial log that
 looks authoritative is worse than no log, because the first time it silently drops a card
