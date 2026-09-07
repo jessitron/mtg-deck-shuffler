@@ -5,7 +5,7 @@ import addFormats from "ajv-formats";
 
 // No `import.meta.url` here (unlike the Tabletop's `src/server/contractValidation.ts`) —
 // ts-jest's ESM transform can't resolve it reliably, and this file is reached transitively
-// by `test/port-spine/events/spineSubscriber.test.ts` (see `test/table-sync/contractValidation.ts`
+// by `test/port-spine/events/SpineEventsSubscription.test.ts` (see `test/table-sync/contractValidation.ts`
 // for the same workaround). `process.cwd()` is `apps/shuffler/` for every way this process
 // starts locally (jest, `./run`, `npm start`) — but the Docker image flattens the workspace
 // to `/app` (see Dockerfile), where that relative walk no longer reaches `contracts/`, so

@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { OpenSpineConnection, SpineConnectionHandlers, SpineConnectionPort } from "../../../src/port-spine/events/SpineConnectionPort.js";
+import { OpenSpineStream, SpineStreamGateway, SpineStreamHandlers } from "../../../src/port-spine/events/HttpSpineStreamGateway.js";
 
 /** W3C traceparent, syntactically valid but otherwise meaningless — good enough for a test envelope. */
 export function fakeTraceparent(): string {
@@ -38,10 +38,10 @@ export async function waitUntil(predicate: () => boolean | Promise<boolean>, tim
 }
 
 interface FakeClient {
-  handlers: SpineConnectionHandlers;
+  handlers: SpineStreamHandlers;
 }
 
-export interface FakeSpineTable extends SpineConnectionPort {
+export interface FakeSpineTable extends SpineStreamGateway {
   /** Mints an ever-increasing `seq` and broadcasts to every open connection — mirroring the Spine's own assign-on-append, so a later connection carrying `lastEventId` can be replayed exactly what it missed. */
   publish(event: unknown): void;
   connectionCount(): number;
@@ -55,10 +55,10 @@ export interface FakeSpineTable extends SpineConnectionPort {
 
 /**
  * A scriptable in-memory double standing in for the Spine's whole per-table SSE broadcast —
- * multiple `open()` calls (one per game's `subscribeToSpine`), fanning a single `publish()`
+ * multiple `openStream()` calls (one per game's `followTable`), fanning a single `publish()`
  * out to every live connection, with replay-on-connect for whatever a `lastEventId` missed.
  * No socket, no HTTP: this is the multi-connection test-harness analog of
- * `src/port-spine/events/FakeSpineConnection.ts`, which models a single attempt.
+ * `src/port-spine/events/FakeSpineStreamGateway.ts`, which models a single attempt.
  */
 export function createFakeSpineTable(): FakeSpineTable {
   let clients: FakeClient[] = [];
@@ -68,7 +68,7 @@ export function createFakeSpineTable(): FakeSpineTable {
   const lastEventIdsSeen: Array<number | undefined> = [];
 
   return {
-    open(_tableId: string, lastEventId: number | undefined, handlers: SpineConnectionHandlers): OpenSpineConnection {
+    openStream(_tableId: string, lastEventId: number | undefined, handlers: SpineStreamHandlers): OpenSpineStream {
       connectionsAccepted++;
       lastEventIdsSeen.push(lastEventId);
       const client: FakeClient = { handlers };

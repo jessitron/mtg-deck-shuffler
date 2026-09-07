@@ -11,18 +11,43 @@ export interface TableSeat {
 }
 
 /**
+ * Called with each event from the table, one at a time, in arrival order. Answers with the
+ * event's `seq` once it has durably landed, so the implementation can resume from there.
+ */
+export type ApplyTableEvent = (event: unknown) => number | undefined | Promise<number | undefined>;
+
+/** A live delivery of a table's events, until the Shuffler stops caring about that table. */
+export interface TableEventStream {
+  stop(): void;
+}
+
+/**
  * The table's event bus, in the Shuffler's own words — one capability, both directions.
  *
- * The send half is here: the Shuffler says what happened to a card at its seat, and
- * implementations translate that into whatever the Spine wants to hear.
+ * Send: the Shuffler says what happened to a card at its seat, and implementations
+ * translate that into whatever the Spine wants to hear.
  *
- * The receive half — "give me the events at this table, from where I left off" — still
- * lives in `SpineConnectionPort` + `spineSubscriber` in this directory, and folds in here
- * (step 4 of `.scratch/port-spine-layering/plan.md`). It joins as one more method on this
- * interface; nothing about the send half has to move to make room for it.
+ * Receive: the Shuffler asks for the events at a table and says which ones it applied.
+ * Staying connected, catching up on what was missed, and not re-delivering what was
+ * already applied are the implementation's problem, not the caller's.
  */
 export interface SpineEventsPort {
   announceCardPlayed(seat: TableSeat, gameCard: GameCard, zoneHint: ZoneHint, faceDown: boolean): Promise<void>;
   announceCardReturned(seat: TableSeat, gameCard: GameCard): Promise<void>;
   announceCardDiscarded(seat: TableSeat, gameCard: GameCard): Promise<void>;
+
+  /**
+   * Deliver me the events at this table, resuming after the last one I applied, and keep
+   * delivering until I `stop()`.
+   *
+   * `appliedThrough` is the table event ordinal this caller has *durably* applied through
+   * — read back from the Shuffler's own game log, so a subscription re-created after a
+   * full teardown (server restart, all tabs closed and reopened) doesn't start over.
+   * Absent for a game that has never applied an event from its table.
+   *
+   * `applyEvent` is awaited before the next event is delivered, so events are applied in
+   * arrival order, and whatever `applyEvent` does happens inside the caller's own control
+   * flow — including any span it opens around the work.
+   */
+  followTable(tableId: string, applyEvent: ApplyTableEvent, appliedThrough?: number): TableEventStream;
 }

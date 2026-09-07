@@ -6,7 +6,7 @@ import { applyGameCommand } from "../apply-game-command.js";
 import { validateIncomingEvent } from "../port-spine/events/incomingEventValidation.js";
 import { markCurrentSpanAsError } from "../tracing_util.js";
 import { broadcastGameStateUpdated } from "./gameSubscriptionRegistry.js";
-import { extractSeq } from "../port-spine/events/spineSubscriber.js";
+import { extractSeq } from "../port-spine/events/SpineEventsAdapter.js";
 import { log } from "../log.js";
 
 const tracer = trace.getTracer("mtg-deck-shuffler");
@@ -38,7 +38,7 @@ export interface CardReturnedDispatchDeps {
  *
  * Resolves with the event's `seq` once it's been fully handled and confirmed to have
  * actually landed (applied, or correctly skipped as a duplicate/other-seat/invalid event)
- * — `subscribeToSpine` uses that to track the high-water mark it sends back as
+ * — `followTable` uses that to track the high-water mark it sends back as
  * `Last-Event-ID` on reconnect. Resolves with `undefined` when the apply itself threw, so
  * that event gets replayed rather than silently skipped on the next reconnect.
  */

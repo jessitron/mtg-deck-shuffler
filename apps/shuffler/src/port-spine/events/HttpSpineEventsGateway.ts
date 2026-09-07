@@ -5,8 +5,8 @@ import { SpineGatewayError } from "../SpineGatewayError.js";
  * Appending to a table's event log, narrowed to plain data. Nothing here knows what a
  * `GameCard` is; `SpineEventsAdapter` is where the Shuffler's domain stops.
  *
- * Step 4's SSE connection is the receive half of the same conversation and gets its own
- * gateway (today's `HttpSpineConnection`) — a stream has nothing in common with a POST.
+ * The SSE connection is the receive half of the same conversation and has its own gateway
+ * (`HttpSpineStreamGateway`) — a stream has nothing in common with a POST.
  */
 export interface SpineEventsGateway {
   sendEvent(tableId: string, event: EventEnvelope<unknown>): Promise<void>;

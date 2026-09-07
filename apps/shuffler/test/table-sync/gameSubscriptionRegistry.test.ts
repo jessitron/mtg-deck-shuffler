@@ -9,6 +9,7 @@ import { deckWithOneCommander, createTestPersistedGameState } from "../generator
 import { GameStatus } from "../../src/domain-types.js";
 import { ensureGameSpineSubscription, getGameSubscriptionRegistry } from "../../src/table-sync/gameSubscriptionRegistry.js";
 import { createFakeSpineTable, cardReturnedEvent, waitUntil, FakeSpineTable } from "../port-spine/events/FakeSpineTable.js";
+import { FakeSpineEventsAdapter } from "../../src/port-spine/events/FakeSpineEventsAdapter.js";
 
 let nextGameId = 900000;
 
@@ -47,7 +48,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
 
   afterEach(() => {
     for (const gameId of openGameIds) {
-      getGameSubscriptionRegistry().get(String(gameId))?.subscription.close();
+      getGameSubscriptionRegistry().get(String(gameId))?.subscription.stop();
     }
     openGameIds = [];
     fakeTable?.close();
@@ -64,7 +65,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, gameId);
       const libraryCard = gameBefore.listLibrary()[0];
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -87,7 +88,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, gameId);
       const libraryCard = gameBefore.listLibrary()[0];
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -114,7 +115,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, gameId);
       const [firstCard, secondCard] = gameBefore.listLibrary();
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
       expect(fakeTable.lastEventIdsSeen()).toEqual([undefined]); // first connection: nothing applied yet
@@ -154,9 +155,9 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, ownGameId);
       const libraryCard = gameBefore.listLibrary()[0];
 
-      ensureGameSpineSubscription(ownGameId, tableId, "seat-owner", [], { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(ownGameId, tableId, "seat-owner", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
       openGameIds.push(ownGameId);
-      ensureGameSpineSubscription(otherGameId, tableId, "seat-other", [], { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(otherGameId, tableId, "seat-other", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
       openGameIds.push(otherGameId);
       await waitUntil(() => fakeTable!.connectionCount() === 2);
 
@@ -184,7 +185,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, gameId);
       const libraryCard = gameBefore.listLibrary()[0];
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -207,11 +208,11 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
 
       const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionsAcceptedCount() === 1);
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
       await new Promise((r) => setTimeout(r, 150)); // give a would-be second connection time to land
 
       expect(fakeTable.connectionsAcceptedCount()).toBe(1);
@@ -230,7 +231,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       const gameBefore = await loadGame(persistStatePort, cardRepository, gameId);
       const [firstCard, secondCard] = gameBefore.listLibrary();
 
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -238,7 +239,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       await waitUntil(async () => (await loadGame(persistStatePort, cardRepository, gameId)).listRevealed().length === 1);
 
       // Full teardown — every browser tab closed, registry entry gone — not a mid-stream drop.
-      getGameSubscriptionRegistry().get(String(gameId))?.subscription.close();
+      getGameSubscriptionRegistry().get(String(gameId))?.subscription.stop();
       getGameSubscriptionRegistry().delete(String(gameId));
       openGameIds = openGameIds.filter((id) => id !== gameId);
 
@@ -249,7 +250,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       // fresh subscription, seeded from the highest `spineSeq` recorded in the persisted
       // game's own event log — the durable seed from ticket 05.
       const persistedAfterFirst = await persistStatePort.retrieve(gameId);
-      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", persistedAfterFirst!.events, { persistStatePort, cardRepository }, fakeTable);
+      ensureGameSpineSubscription(gameId, tableId, "seat-0000001", persistedAfterFirst!.events, { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 

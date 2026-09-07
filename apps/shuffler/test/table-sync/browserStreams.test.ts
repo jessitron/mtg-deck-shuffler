@@ -16,6 +16,7 @@ import {
   BrowserStream,
 } from "../../src/table-sync/gameSubscriptionRegistry.js";
 import { createFakeSpineTable, cardReturnedEvent, waitUntil, FakeSpineTable } from "../port-spine/events/FakeSpineTable.js";
+import { FakeSpineEventsAdapter } from "../../src/port-spine/events/FakeSpineEventsAdapter.js";
 
 let nextGameId = 950000;
 
@@ -52,7 +53,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
 
   afterEach(() => {
     for (const gameId of openGameIds) {
-      getGameSubscriptionRegistry().get(String(gameId))?.subscription.close();
+      getGameSubscriptionRegistry().get(String(gameId))?.subscription.stop();
     }
     openGameIds = [];
     fakeTable?.close();
@@ -64,7 +65,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     const tableId = `table-${randomUUID()}`;
     const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
     openGameIds.push(gameId);
     await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -94,7 +95,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     const tableId = `table-${randomUUID()}`;
     const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
     openGameIds.push(gameId);
     await waitUntil(() => fakeTable!.connectionCount() === 1);
 
@@ -117,7 +118,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     const tableId = `table-${randomUUID()}`;
     const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
 
-    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
     openGameIds.push(gameId);
     await waitUntil(() => fakeTable!.connectionsAcceptedCount() === 1);
 
@@ -126,7 +127,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     removeBrowserStream(gameId, tab);
     await waitUntil(() => fakeTable!.connectionCount() === 0);
 
-    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, fakeTable);
+    ensureGameSpineSubscription(gameId, tableId, "seat-0000001", [], { persistStatePort, cardRepository }, new FakeSpineEventsAdapter(fakeTable));
     await waitUntil(() => fakeTable!.connectionsAcceptedCount() === 2);
     expect(getGameSubscriptionRegistry().has(String(gameId))).toBe(true);
   }, 10000);
