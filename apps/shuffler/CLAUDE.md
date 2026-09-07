@@ -289,15 +289,18 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
     per name, seats 1-4, gameId idempotence) subclass it and supply only submission.
     `HttpSpineJoinGateway` is a thin, domain-ignorant `POST /join`.
   - **`port-spine/events/`** — the event bus, **one port for both directions**.
-    `SpineEventsPort` (`types.ts`) carries the send half today —
+    `SpineEventsPort` (`types.ts`) carries the send half —
     `announceCardPlayed`/`announceCardReturned`/`announceCardDiscarded`, taking a `TableSeat`
     and a `GameCard` — with the abstract `SpineEventsAdapter` owning the translation into the
     `port-tabletop` envelope builders, `HttpSpineEventsAdapter`/`FakeSpineEventsAdapter`
-    supplying delivery, and `HttpSpineEventsGateway` doing the thin
-    `POST /tables/:id/events`. The receive half (`SpineConnectionPort` + `spineSubscriber`,
-    same directory) folds into that same port as one more method — not yet done.
+    supplying only transport, and `HttpSpineEventsGateway` doing the thin
+    `POST /tables/:id/events`. The receive half is **one more method on the same port**:
+    `followTable(tableId, applyEvent, appliedThrough)` — "deliver me the events at this
+    table, resuming after what I applied". `SpineEventsAdapter` owns the reconnect/backoff/
+    cursor orchestration above a second gateway, `HttpSpineStreamGateway` (the SSE read
+    loop); `FakeSpineStreamGateway` is its gateway-level double. See the SSE bullet below.
 
-  Both gateways wrap every failure in the shared `SpineGatewayError`
+  All three gateways wrap every failure in the shared `SpineGatewayError`
   (`port-spine/SpineGatewayError.ts`), so undici's errors and HTTP status codes stop there.
   `table-sync/sendToSpine.ts` above them holds only the best-effort guards, the Shuffler-side
   URL and colour resolution, and the failure telemetry.
@@ -328,29 +331,38 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   `GET /game-section/:gameId` (`app.ts`) open it idempotently whenever the persisted game
   has a `spineTableId` but no live registry entry — the same single check covers first
   load, HTMX re-fetch, and "came back after a while" (server restart, new tab).
-  `spineSubscriber.ts` (`subscribeToSpine`) is port/adapter/gateway-shaped, like the
-  join capability's `JoinTablePort`/`SpineJoinAdapter`/`HttpSpineJoinGateway`: a
-  `SpineConnectionPort` (`SpineConnectionPort.ts`) models **one connection attempt**
-  (open, yield frames, end/drop) — `HttpSpineConnection.ts` is the real adapter (streamed
-  `fetch`, `data: <json>\n\n` frames, the same heartbeat-aware bounded
-  `headersTimeout`/`bodyTimeout` dispatcher as the Tabletop's — this is the Shuffler's
-  first `undici` dependency, pinned to major version 7 to match what Node vendors
-  internally, same reasoning as the Tabletop's pin), `FakeSpineConnection.ts` a
-  scriptable in-memory double (emit a frame, end the stream, simulate a drop — no
-  socket). `subscribeToSpine` itself is plain reconnect orchestration sitting above that
-  port — backoff, and resending the highest applied `seq` as `lastEventId` on every
-  connect (including the first, where it's simply absent) so the Spine
-  (`services/spine/lib/sse_stream.rb`) replays whatever was missed, in order, before
-  continuing into live delivery; frames are chained onto one promise so a replay burst is
-  still applied strictly in arrival order. A resumed subscription that was fully torn down
-  (every browser tab closed, or a server restart) seeds `lastAppliedSeq` from the highest
-  `spineSeq` already recorded on the game's own `GameEventLog` (`ensureGameSpineSubscription`
-  scans `persistedGame.events` before opening it) rather than starting from scratch — every
-  Spine event that mutates a game is a real `MoveCardEvent` carrying that `seq`, not a
-  side-channel field. `extractSeq` (reading the envelope's `seq`) lives here as a generic
-  helper; `handleFrame` also uses it as a replay-contract guard, skipping (and `log.warn`ing)
-  any incoming `seq` at or before the cursor already sent — the Spine should never replay
-  something we've told it we have.
+  Nothing above the port speaks SSE. `SpineEventsPort.followTable(tableId, applyEvent,
+  appliedThrough)` is the whole inbound contract: `applyEvent` is called with each event in
+  arrival order and answers `{ applied: boolean }` — true once the event has durably landed
+  (applied, or deliberately passed over: another seat, our own echo, a duplicate, a kind we
+  don't act on), false when the apply threw and the table should deliver it again.
+  **The application never tracks a reconnect cursor.** `SpineEventsAdapter` reads the `seq`
+  off each event it delivered (`extractSeq`, private to that file) and advances its own
+  high-water mark, resending it as `lastEventId` on every connect (including the first, where
+  it's simply absent) so the Spine (`services/spine/lib/sse_stream.rb`) replays whatever was
+  missed, in order, before continuing into live delivery. Frames are chained onto one promise
+  so a replay burst is still applied strictly in arrival order, and `applyEvent` is awaited
+  inside that chain so the consumer span below wraps all of its own work. The adapter also
+  uses `extractSeq` as a replay-contract guard, skipping (and `log.warn`ing) any incoming
+  `seq` at or before the cursor already sent — the Spine should never replay something we've
+  told it we have.
+  Below the adapter, `HttpSpineStreamGateway.ts` is the thin transport: streamed `fetch`,
+  `data: <json>\n\n` frames, and the same heartbeat-aware bounded
+  `headersTimeout`/`bodyTimeout` `undici` `Agent` as the Tabletop's (this is the Shuffler's
+  first `undici` dependency, pinned to major version 7 to match what Node vendors internally,
+  same reasoning as the Tabletop's pin). **One gateway instance is held for the adapter's
+  whole life** — it owns that `Agent`, so a per-attempt instance would leak a connection pool
+  per retry during a Spine outage. `FakeSpineStreamGateway.ts` is its scriptable in-memory
+  double (emit a frame, end the stream, simulate a drop — no socket), and it fakes the
+  *transport*, so it stands where a gateway stands; `FakeSpineEventsAdapter` is the
+  port-level fake for both directions and takes a stream gateway.
+  `appliedThrough` is the durable resume seed: a subscription that was fully torn down (every
+  browser tab closed, or a server restart) starts from the highest `spineSeq` already recorded
+  on the game's own `GameEventLog` (`ensureGameSpineSubscription` scans `persistedGame.events`)
+  rather than from scratch — every Spine event that mutates a game is a real `MoveCardEvent`
+  carrying that `seq`, not a side-channel field. `seq` is legitimately domain data here: it's a
+  field of the published envelope contract, typed on the validated `Envelope`, and persisted.
+  It's the reconnect *protocol* that stops at the adapter, not the value.
   `cardReturnedDispatch.ts` is
   this ship's **first manual span** — `"sse subscription: card.returned"`,
   `SpanKind.CONSUMER`, parent context extracted from the envelope's `traceparent`, a
@@ -361,7 +373,7 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   envelope's event id, same as the Tabletop's; a redelivered event is a no-op.
   `incomingEventValidation.ts` is this ship's first *inbound* contract
   gate (validates what arrives, mirroring the Tabletop's `contractValidation.ts`) —
-  distinct from `test/port-spine/contractValidation.ts`, which only validates what this
+  distinct from `test/table-sync/contractValidation.ts`, which only validates what this
   ship *sends*. `face` is never read from the payload (the schema blacklists it) — the
   card keeps whatever `currentFace` it already had.
   **Env**: `CONTRACTS_DIR` overrides `incomingEventValidation.ts`'s default

@@ -182,3 +182,18 @@ merely happen to share an HTTP host.
 Consequence: today's `SpinePort` (join + sendEvent) is split. `join` goes to the join port;
 `sendEvent` becomes the send half of `SpineEventsPort`, whose receive half is today's
 `SpineConnectionPort` + `spineSubscriber`. One port, two directions, one adapter.
+
+## Principle (Jess): carry an identifier you didn't mint; don't learn to construct it
+
+`tableUrl` stays on `SeatAtTable` in the join port, and that is deliberate. It looks like
+transport vocabulary surviving in a port, but it isn't: the Spine *mints* the table's URL, and
+the Shuffler persists it and renders it as the "Go to Table" link.
+
+The reason to keep it is not convenience — it's that absorbing it into the adapter would force
+the Shuffler to **reconstruct** the URL, which means learning the Spine's URL scheme. That
+duplicates knowledge that belongs to another service, and it silently breaks the day the Spine
+changes its routes.
+
+The general rule: when another service mints an identifier, address, or URL, **carry the value
+through**. Do not teach this ship how to build it. A port hiding such a value is doing harm,
+not encapsulation — the leak to avoid is the *construction rule*, not the string.
