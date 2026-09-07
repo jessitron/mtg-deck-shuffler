@@ -13,13 +13,10 @@ commands, and gotchas — read it when working on that ship.
 - **Done work leaves no trace.** Don't keep `## Done` sections, tombstones, or "decided
   not to do this because…" lines in `TODO.md`. Delete the line; git remembers. Records of
   finished work are a wall between Jess and the live work.
-- **Every skill run ends with "here's how to keep going."** The pocock skills (and others)
-  finish without saying what comes next, which strands Jess mid-pipeline. Whenever a skill
-  completes, close your message with the concrete next command or action — "now run
-  `/to-tickets` on that spec", "say 'do ticket 01' to start it" — so the thread never dies
-  at a skill boundary. `/mattpocock-skills:ask-matt` is the map of the main flow and its
-  on-ramps — consult it to know what "next" actually is (main flow vs. on-ramp vs.
-  standalone) rather than guessing.
+- **Every skill run ends with "here's how to keep going."** A skill that finishes without
+  saying what comes next strands Jess mid-pipeline. Whenever a skill completes, close your
+  message with the concrete next command or action so the thread never dies at a skill
+  boundary.
 
 ## Workflow documents
 
@@ -43,18 +40,16 @@ Work lives in three places, and only the last one varies per repo:
   and so does Jess. Everything in it is untriaged by definition.
 - **The tracker** — `docs/agents/issue-tracker.md` names it: committed markdown under
   `.scratch/<feature>/`, one file per spec and per ticket, each carrying a `Mountain:` line.
-  That file is written by `/setup-matt-pocock-skills` and read by both his engineering skills
-  and the seamap skills; **read it, never write it.**
+  Written and read by the seamap skills; **read it, never write it** outside those skills.
 
-An inbox item becomes real work via `/triage`, or `/to-spec` + `/to-tickets`; delete the line from TODO.md.
+An inbox item becomes real work by hand: write the spec/ticket files under `.scratch/<feature>/`
+following `docs/agents/issue-tracker.md`, then delete the line from TODO.md.
 
-**Size threshold — the spec→tickets pipeline is a freight crane, not a grocery bag.**
+**Size threshold — the tracker is a freight crane, not a grocery bag.**
 Work that fits in one sitting goes: TODO.md line → do it → delete the line. No spec, no
 ticket, no ceremony. Only genuinely multi-session features (dependency-ordered work,
-survives across computers) earn `/to-spec` + `/to-tickets`. When in doubt, skip the
+survives across computers) earn a spec + tickets under `.scratch/`. When in doubt, skip the
 tracker; if the work turns out bigger than a sitting, promote it then.
-
-Watch out! /to-spec, /to-tickets, and /triage are disable-agent-invocation, so you MUST ask the user to invoke them.
 
 **There is no external tracker.** `SEAMAP.md`, `TODO.md` and `.scratch/` are the whole system —
 a file round-trip beats an API call, and git carries the state between Jess's computers. If a
@@ -193,10 +188,10 @@ trigger; scan it when planning any change. Owners never close. Create new ones w
 
 **Consulting owners — at three moments**
 
-- **When a decision is being formed** — including mid-interview, while a design skill like
-  `/grilling` has you putting questions to Jess. A recommended answer that lands in an
-  owner's territory needs that owner's `-context` **first**. Finding facts is the agent's
-  job, and an owner is a fact source.
+- **When a decision is being formed** — including mid-interview, while you're putting
+  clarifying questions to Jess. A recommended answer that lands in an owner's territory
+  needs that owner's `-context` **first**. Finding facts is the agent's job, and an owner
+  is a fact source.
 - **On the plan** — `-review` before implementing (step 5 below).
 - **After the change** — `-update` with what actually landed (step 9 below).
 
