@@ -14,7 +14,7 @@ import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
 import { ZoneHint, zoneHintForPlay } from "./port-tabletop/types.js";
 import { SpinePort } from "./port-spine/types.js";
-import { sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort, sendCardDiscardedToSpineBestEffort, joinSpineBestEffort } from "./port-spine/sendToSpine.js";
+import { sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort, sendCardDiscardedToSpineBestEffort, joinSpineBestEffort } from "./table-sync/sendToSpine.js";
 import { markCurrentSpanAsError, setCommonSpanAttributes, stampRouteParamsOnSpan } from "./tracing_util.js";
 import { log } from "./log.js";
 import { DeckRetrievalRequest, RetrieveDeckPort } from "./port-deck-retrieval/types.js";
@@ -29,7 +29,7 @@ import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 import { applyGameCommand, CommandOutcome } from "./apply-game-command.js";
 import { WhatHappened } from "./GameState.js";
 import { GameId, parseGameId } from "./domain-types.js";
-import { ensureGameSpineSubscription, addBrowserStream, removeBrowserStream, BrowserStream } from "./port-spine/gameSubscriptionRegistry.js";
+import { ensureGameSpineSubscription, addBrowserStream, removeBrowserStream, BrowserStream } from "./table-sync/gameSubscriptionRegistry.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

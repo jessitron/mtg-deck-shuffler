@@ -7,8 +7,8 @@ import { CardRepositoryPort } from "../../src/port-card-repository/types.js";
 import { GameState } from "../../src/GameState.js";
 import { deckWithOneCommander, createTestPersistedGameState } from "../generators.js";
 import { GameStatus } from "../../src/domain-types.js";
-import { ensureGameSpineSubscription, getGameSubscriptionRegistry } from "../../src/port-spine/gameSubscriptionRegistry.js";
-import { createFakeSpineTable, cardReturnedEvent, waitUntil, FakeSpineTable } from "./FakeSpineTable.js";
+import { ensureGameSpineSubscription, getGameSubscriptionRegistry } from "../../src/table-sync/gameSubscriptionRegistry.js";
+import { createFakeSpineTable, cardReturnedEvent, waitUntil, FakeSpineTable } from "../port-spine/FakeSpineTable.js";
 
 let nextGameId = 900000;
 

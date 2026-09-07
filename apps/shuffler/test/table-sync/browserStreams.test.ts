@@ -14,8 +14,8 @@ import {
   browserStreamCountForGame,
   getGameSubscriptionRegistry,
   BrowserStream,
-} from "../../src/port-spine/gameSubscriptionRegistry.js";
-import { createFakeSpineTable, cardReturnedEvent, waitUntil, FakeSpineTable } from "./FakeSpineTable.js";
+} from "../../src/table-sync/gameSubscriptionRegistry.js";
+import { createFakeSpineTable, cardReturnedEvent, waitUntil, FakeSpineTable } from "../port-spine/FakeSpineTable.js";
 
 let nextGameId = 950000;
 
