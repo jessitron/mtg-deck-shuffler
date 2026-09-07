@@ -1,155 +1,199 @@
-# Implementation plan: Tabletop persists physical events
+# Implementation plan: the Tabletop tells the Spine what happened
 
 Hand this to an agent and say **"use subagents for the steps."**
 
-Everything here is already decided. The agent's job is to run the phases in order, fan
-each phase out to subagents where this plan says to, and stop at the checkpoints.
+## The goal
 
-## What to read first
+The tldraw room stays the source of truth. The Tabletop starts sending every physical
+gesture to the Spine's log, and a projection of that log gradually converges on the live
+canvas. The gap is measured **in production, during real games**, by pushing the 😠 button
+and reading the span.
 
-| Document | What it gives you |
+It is expected to start wrong. The work is to close the gap one gesture at a time.
+
+## What to read
+
+| Document | Read it for |
 | --- | --- |
-| `.scratch/tabletop-persists-physical-events/spec.md` | The goal, 21 user stories, contract and testing decisions. **This is the authority on what gets built.** |
-| `.scratch/tabletop-persists-physical-events/issues/*.md` | Ten tickets with acceptance checklists. 01–03 are done. |
-| `apps/tabletop/notes/DESIGN-spine-projection.md` | Where the seams go, and why. Authority on *shape*, not on scope. |
-| `apps/tabletop/CLAUDE.md` | The ship's commands, telemetry standard, gotchas. Read before touching it. |
+| `apps/tabletop/notes/DESIGN-spine-projection.md` | Where the seams go and why. The shape of the whole thing. |
+| `apps/tabletop/CLAUDE.md` | Commands, the SSE telemetry standard, the ship's gotchas. |
 | `contracts/README.md` | Envelope conventions and the Card Identity section every payload follows. |
+| `.scratch/tabletop-persists-physical-events/spec.md` | **Decisions already made** — payload significance, the two-origins split, testing choices. Mine it for what's settled; it is not a work breakdown and its issue files are not the unit of work. |
 
-The goal in one line: **the tldraw room stays the source of truth; the Tabletop sends its
-physical events to the Spine until a projection of that log matches the live canvas, and
-the gap is measured in production with the 😠 button.**
+Three decisions from that spec are load-bearing and easy to miss:
+
+- **`card.played` and `card.returned` are untouched.** A card landing on the canvas gets a
+  *new* `card.arrived` event, because two different origins are involved: the Shuffler
+  decides a card is played and has no canvas position; the Tabletop decides where it
+  lands. Two origins, two events.
+- **Move events carry the prior position as well as the new one**, so the diagnostic can
+  catch a gap in the chain — a move whose "from" doesn't match where the last move left
+  the card — not only a final mismatch.
+- **`significance` is `"domain"`** for tap/untap, flip and face-down (they are always
+  game-significant), **`"physical"`** for arrivals, moves and generic shapes. Do not try
+  to refine `card.moved`'s: that is blocked on "designated zone" being pinned down in
+  `notes/GLOSSARY.md`.
 
 ## Ground rules
 
 - **Fakes, never mocks.** `snapshotCanvas` tests against a real in-memory tldraw editor —
   tldraw is cheap to construct and must not be faked.
-- **Owner consults are not optional.** `owners/INDEX.md` lists them. Match the consult to
-  the question, not to the file list — usually one owner, sometimes none. Every phase
-  below names the ones it actually needs.
-- **Telemetry discipline**: attributes on spans first; the ship's logger when there is no
-  live span. Never `span.addEvent`.
-- **Commit after each conceptual change**, tagged `- claude`. Subagents working in
-  worktrees exit with `ExitWorktree({action: "keep"})` then `scripts/merge-worktree.sh
-  <branch>`. Local main only — no push, no PR.
+- **Application tests fake the adapter. Only adapter tests fake a gateway.**
+- **Owner consults**: `owners/INDEX.md`. Match the consult to the question, not to the
+  file list — usually one owner, sometimes none. The phases below name the ones that
+  actually apply.
+- **Telemetry**: attributes on spans first; the ship's logger when there is no live span.
+  Never `span.addEvent`.
+- **Commit after each conceptual change**, tagged `- claude`. Subagents finish with
+  `ExitWorktree({action: "keep"})` then `scripts/merge-worktree.sh <branch>`. Local main
+  only — no push, no PR.
 - **Delete newly-unused code**, especially CSS, after each change.
 
-## The sequencing decision this plan makes
+## Why the ports come first
 
-Tickets 04–09 each independently call for a contract payload, a send function, a
-self-echo skip, dedup wiring, and a `TableState`/`projectEvents`/`snapshotCanvas`
-extension. Written six times that is six near-identical send functions — and, more
-urgently, **six subagents editing the same three files at once**: `TableState`, the
-dispatch switch, and the self-echo filter. They would collide.
+They are a prerequisite, not a cleanup afterwards.
 
-So Phase 1 builds that shared seam **once**, before the fan-out. This is deliberately the
-*narrow* version of `DESIGN-spine-projection.md`'s step 1 — the vocabulary and one send
-path. It is **not** the port refactor: no composition point, no `Table` object, no
-gateways. Those stay deferred (see the last section).
+Outbound is a two-hop path today: the client `fetch`es a Tabletop Express route
+(`cardSwallow.ts:97` → `/api/tables/:slug/cards/return`), and that route calls
+`sendCardReturnedToSpineBestEffort`, which builds its own envelope and POSTs to the Spine.
+Add six gestures that way and you get **six new Express routes, six client fetches and six
+send functions** — every one a fresh instance of the structure the port exists to collapse,
+written onto the layering we are trying to remove.
 
-## Phase 0 — Replay (ticket 10)
+With the port, one endpoint accepts the physics-event union and each gesture is a payload
+schema plus a call site. **The port makes the gesture work smaller.**
 
-**One subagent. Starts immediately, runs alongside Phase 1.**
+And much of it already exists unnamed: `TableState` *is* `TableSurfacePort`'s domain model,
+and `snapshotCanvas(editor) -> TableState` *is* its read-side adapter. Naming them is most
+of the job.
 
-Ticket 10 is `needs-triage` and has no blockers, but it **blocks the diagnostic being
-real**: ticket 03 shipped against a stub, so the 😠 button currently has no way to fetch a
-table's actual event history. Until this lands, nothing in this plan can be verified
-against a live game.
+---
 
-The ticket is deliberately underspecified — the Shuffler already knows how to replay a
-table's log and that capability was never ported. The subagent investigates how the
-Shuffler does it and decides the right shape for the Tabletop, rather than following a
-prescribed design.
+## Phase 0 — The Tabletop can read a table's history
 
-**Done when:** `projectEvents` can be handed a real table's event history, and the 😠
-button runs on real data instead of a stub.
+**One subagent, starting immediately, in parallel with Phase 1.**
 
-## Phase 1 — The shared seam
+The 😠 button exists but runs against a stub: there is currently no way for the Tabletop to
+ask the Spine what has happened on a table. The Spine's only read path for a table's events
+is its HTML admin page, and the Tabletop server accumulates nothing of its own.
 
-**One subagent. Blocks Phase 2. Keep it small.**
+The Shuffler already knows how to replay a table's log; that capability was never ported.
+Investigate how it does it, then build the Tabletop's equivalent — client, server, or Spine
+side, as the investigation determines. No prescribed design.
 
-1. **The physics event vocabulary, as types.** One union covering every kind tickets
-   04–09 will add, plus the inbound kinds already flowing. Check each against the six
-   replayability rules in `DESIGN-spine-projection.md` — the two that bite hardest here
-   are *move events carry prior **and** new position* (spec story 21, so the diff can
-   catch a gap in the chain, not just an end-state mismatch) and *pairs are symmetric*.
-2. **One outbound send path**, parameterized by kind, extending
-   `sendCardReturned.ts`'s send-then-commit pattern. Envelope construction
-   (`randomUUID`, `occurredAt`, `significance`, `origin`, `schemaVersion`) lives here
-   once, not in six copies. It must report whether the send landed — the library-portal
-   swallow depends on that.
-3. **Self-echo and dedup applied once**, at the dispatch boundary: `occurredIn ===
-   "tabletop"` skip, and dedup-by-event-id through the existing `spineEventDispatch.ts`
-   path. Tickets 04–09 then inherit both instead of each re-implementing them.
-4. **Extend `TableState` in one edit** to its full field set — position, tapped, face,
-   concealment, and generic shapes — so the Phase 2 subagents never touch its shape.
-   `projectEvents` and `snapshotCanvas` grow with it.
-5. **The generic-shape rule** (from `DESIGN-spine-projection.md`): a shape with no
-   dedicated event carries `id`, position, and its `ridesOn` parent hoisted out, with
-   everything else quarantined in a field named `tldrawRecord`. **The domain may hold,
-   move, reparent and delete that record; it may never read inside it.** The first time
-   something needs to read inside, that shape has earned its own event kind — that is the
-   promotion path, and it is how tokens and notes get modeled later.
+**Done when:** `projectEvents` can be handed a real table's event history and the 😠 button
+reports on a real game.
 
-**Consult:** `fleet-is-observable-context` before writing the send path — the receiving
-span / doing-span nesting is load-bearing and documented in two `CLAUDE.md` files.
+## Phase 1 — The ports
 
-**Done when:** a new event kind can be added by writing a payload schema and one call
-site, with self-echo, dedup, and `TableState` already handled.
+**Blocks Phase 2.** Steps 1–2 are one subagent and land first; 3 and 4 then run as two
+subagents in parallel.
 
-**Checkpoint — stop and report to Jess before Phase 2.**
+Read `DESIGN-spine-projection.md` and the fleet's `notes/PATTERN-port-adapter-gateway.md`.
+The Shuffler's landed version (`apps/shuffler/notes/DESIGN-layering.md`,
+`apps/shuffler/src/port-spine/`) is the worked example.
 
-## Phase 2 — The event kinds, in parallel
+### 1. The vocabulary
 
-**Four subagents at once.** Each reads the spec, its ticket, and the Phase 1 seam, then
-works in its own worktree.
+One union covering every gesture below plus the inbound kinds already flowing. Both ports
+quote it, so nothing else starts until it is settled. Check each kind against the six
+replayability rules in the design doc — removals exist, geometry travels, identity is by
+reference, creation carries a payload, pairs are symmetric, nothing is dropped on unmount.
 
-| Subagent | Tickets | Notes |
+### 2. The composition point
+
+`src/server/server.ts` constructs the adapters once and passes them down; `SPINE_URL` is
+read in one place instead of two with duplicated `http://localhost:4600` defaults. Until
+this exists, "hand it a fake adapter" is not expressible and the ports are decoration.
+
+### 3. `WhatsHappeningPort` — the Spine, both directions
+
+- **Inbound:** move Ajv validation, the `slugifyTableName(envelope.tableId) !== tableName`
+  check (copy-pasted into three files today), the `occurredIn` self-echo filter and the
+  event-kind sniffing out of `cardArrival.ts`, `cardRemoval.ts` and `seatJoined.ts` into an
+  abstract adapter. Self-echo and dedup-by-event-id are applied **once, here**, so every
+  gesture inherits them.
+- **Outbound:** one path parameterized by kind. Envelope construction (`randomUUID`,
+  `occurredAt`, `significance`, `origin`, `schemaVersion`) lives here once. It must report
+  whether the send landed — the library-portal swallow is send-then-commit and reverts the
+  card's visuals when it fails.
+- **The client→server hop is part of this port.** One endpoint that accepts a physics event
+  from the browser, so gestures add call sites rather than routes.
+- **Gateways:** the SSE stream and the outbound POST. Reconnect, backoff, the
+  `Last-Event-ID` cursor and frame parsing move up into the abstract adapter; the gateway
+  keeps only `fetch`, the `undici.Agent` with its bounded timeouts, and `data: <json>\n\n`
+  parsing. `test/spineSubscriber.test.ts` and `test/sendCardReturned.test.ts` become
+  gateway tests, which is where they already belong.
+- **Delete the `seat.joined` POST route.** The Spine has replay, so `seat.joined` is just
+  another event in the stream and the subscription can open when a client does. This
+  *removes* a gateway. `apps/tabletop/CLAUDE.md` calls the route "SCAFFOLDING the Spine
+  absorbs" — update it.
+- **Add the port-level fake** and retire `testSeedRoute.ts` wherever it now serves. That
+  route is an HTTP hole in the production build that exists only because there was no seam
+  at the boundary.
+
+### 4. `TableSurfacePort` — tldraw sync
+
+Mostly naming what exists.
+
+- Extend `TableState` to its full field set in **one edit** — position, tapped, face,
+  concealment, generic shapes — so no Phase 2 subagent ever touches its shape.
+  `projectEvents` and `snapshotCanvas` grow with it.
+- **The generic-shape rule:** a shape with no dedicated event carries `id`, position and
+  its `ridesOn` parent hoisted out; everything else is quarantined in a field named
+  `tldrawRecord`. **The domain may hold, move, reparent and delete that record; it may
+  never read inside it.** The first time something needs to read inside, that shape has
+  earned its own event kind — that is how tokens and notes get modeled later.
+- The write side (`TableState -> tldraw records`) is not built here.
+
+**Consult:** `fleet-is-observable-context` before moving any span, `-review` on the plan,
+`-update` after. The receiving-span / doing-span nesting is load-bearing and documented in
+two `CLAUDE.md` files; after the move the receiving span belongs on the adapter and the
+doing-span stays in the application.
+
+**Done when:** a new gesture is a payload schema plus one call site, and an application
+test can run against a fake adapter with no HTTP anywhere.
+
+**Checkpoint — stop and report to Jess.**
+
+## Phase 2 — The gestures
+
+**Four subagents in parallel**, each in its own worktree. Each publishes a payload schema
+under `contracts/payloads/`, registers it for validation on the Spine
+(`services/spine/lib/event_contract.rb` — schema registration only, no Ruby logic), wires
+the call site, and extends `projectEvents` with a test.
+
+| Subagent | Gestures | Where it hooks |
 | --- | --- | --- |
-| A | **04** `card.arrived`, then **05** `card.moved` | Sequential — 05 extends 04's position field. 04 wires the existing arrival hook; 05 wires `MtgCardShapeUtil.onTranslateEnd` / `handleTranslateEnd` in `cardZoneEntry.ts`. Do not add new hooks. |
-| B | **06** `card.tapped` / `card.untapped` | Wires the existing `cardTapClick.ts` `handleCardClick`. No new UI. |
-| C | **07** `card.flipped` + **08** `card.turnedFaceDown` | **Paired on purpose**: both need a new card-menu affordance and would collide in `CardContextMenu.tsx`. One agent, one affordance pass, two events. |
-| D | **09** generic `shape.*` fallback | Implements the Phase 1 quarantine rule for real. Needs new hooks scoped to shape types with no dedicated event. |
+| A | a card **arrives**, then a card **moves** | Sequential: moves extend the position field arrivals introduce. Existing arrival hook, then `MtgCardShapeUtil.onTranslateEnd` / `handleTranslateEnd` in `cardZoneEntry.ts`. **Do not add new hooks.** |
+| B | a card **taps** and **untaps** | Existing `cardTapClick.ts` `handleCardClick`. No new UI. |
+| C | a card **flips**; a card **turns face down** and back up | **Paired deliberately** — both need a new card-menu affordance and would collide in `CardContextMenu.tsx`. One agent, one affordance pass, two gestures. |
+| D | **everything else on the canvas** — created, moved, removed | The generic fallback, scoped to shape types with no dedicated event. Implements Phase 1's quarantine rule for real, so the freeform layer stops being a blind spot. |
 
-**Subagent C must consult** `fleet-design-language-context` and
+**Subagent C consults** `fleet-design-language-context` and
 `tabletop-shape-mechanics-context` before designing the affordances, and the matching
-`-review` skills on its plan. New player-visible UI is exactly their territory, and a
-placement decision and a styling decision are two separate sign-offs.
+`-review` skills on its plan. New player-visible UI is their territory, and placement and
+styling are two separate sign-offs.
 
-**Everyone:** `significance` is `"domain"` for tap/untap, flip and face-down;
-`"physical"` for arrived, moved and the generic shapes. Do not refine `card.moved`'s —
-that is explicitly out of scope, blocked on "designated zone" in `notes/GLOSSARY.md`.
-
-**Everyone:** `card.played` and `card.returned` are untouched. `card.arrived` is
-additive — two origins, two events.
-
-**Done when:** every gesture a player makes reaches the Spine's log, all tickets' checklists
-are ticked, and `npm test` passes at the fleet root.
+**Done when:** every gesture a player makes reaches the log, and `npm test` passes at the
+fleet root.
 
 ## Phase 3 — Convergence
 
-**Solo, with Jess.** This is the actual point of the project and it is not a code step.
+**With Jess.** This is the point of the project and it is not a coding step.
 
-Run a real game. Push the 😠 button. Read the span in Honeycomb (environment
-`mtg-deck-shuffler`) and look at `diagnostic.discrepancy_count` and
-`diagnostic.discrepancy_kinds`. Every remaining discrepancy kind names a gesture that is
-still unmodeled or an event that is still lossy. Fix, re-run, repeat until it trends to
-zero.
+Play a real game. Push the 😠 button. Read the span in Honeycomb (environment
+`mtg-deck-shuffler`): `diagnostic.discrepancy_count` and `diagnostic.discrepancy_kinds`.
+Every remaining kind names a gesture still unmodeled or an event still lossy. Fix, re-run,
+repeat until it trends to zero.
 
-Then, and only then, ticket 10's replay can be trusted for the "load an existing table by
-replaying the log" feature — which is out of scope here and needs the
-`TableState -> tldraw records` renderer that this plan does not build.
+## Deferred
 
-## Deliberately deferred
-
-Not part of this plan. Revisit after the events are flowing, when the shape of the
-repetition is visible in real code rather than predicted:
-
-- The composition point in `src/server/server.ts` (construct adapters once, read
-  `SPINE_URL` once).
-- `WhatsHappeningPort` and `TableSurfacePort` proper, with their gateways.
-- The `Table` domain object replacing the `RoomEntry` struct in `rooms.ts`.
-- Deleting the `seat.joined` POST route now that the Spine has replay.
-- Retiring `testSeedRoute.ts` behind a port-level fake.
-
-All five are argued in `apps/tabletop/notes/DESIGN-spine-projection.md`. Phase 1 is
-scoped so that none of them is made harder by doing the events first.
+- **The `Table` domain object**, replacing the mutable `RoomEntry` struct in
+  `src/server/rooms.ts` that every module reaches into directly
+  (`entry.seenEventIds.add`, `playerArea.graveyardCount++`, `entry.seats.set`). Agreed to
+  follow the port extraction; genuinely separable, since the outbound physics path never
+  touches the room registry. Phase 1 leaves it strictly easier — a `Table` will hold a
+  `TableSurfacePort` rather than a raw `TLSocketRoom`.
+- **`TableState -> tldraw records`**, the write-side renderer, and the "load a table by
+  replaying its log" feature it enables — including the animated catch-up.
