@@ -11,10 +11,19 @@ export interface TableSeat {
 }
 
 /**
- * Called with each event from the table, one at a time, in arrival order. Answers with the
- * event's `seq` once it has durably landed, so the implementation can resume from there.
+ * What the Shuffler did with one event that arrived from its table.
+ *
+ * `applied: true` means the event has durably landed and never needs to be sent again —
+ * whether that meant changing the game or deliberately passing it over (someone else's
+ * seat, our own echo, a duplicate, a kind we don't act on). `applied: false` means it did
+ * *not* land, so it should arrive again rather than be silently skipped.
  */
-export type ApplyTableEvent = (event: unknown) => number | undefined | Promise<number | undefined>;
+export interface EventApplication {
+  applied: boolean;
+}
+
+/** Called with each event from the table, one at a time, in arrival order. */
+export type ApplyTableEvent = (event: unknown) => EventApplication | Promise<EventApplication>;
 
 /** A live delivery of a table's events, until the Shuffler stops caring about that table. */
 export interface TableEventStream {

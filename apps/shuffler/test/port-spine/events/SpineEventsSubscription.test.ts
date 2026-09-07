@@ -16,7 +16,7 @@ describe("SpineEventsPort.followTable reconnect orchestration", () => {
     const applied: unknown[] = [];
     const subscription = new FakeSpineEventsAdapter(stream).followTable("table-1", (event) => {
       applied.push(event);
-      return 1;
+      return { applied: true };
     });
 
     stream.connect();
@@ -32,7 +32,7 @@ describe("SpineEventsPort.followTable reconnect orchestration", () => {
 
   test("connect → mid-stream drop → reconnects with lastEventId set to the highest applied seq", async () => {
     const stream = new FakeSpineStreamGateway();
-    const subscription = new FakeSpineEventsAdapter(stream).followTable("table-1", (event) => (event as { seq: number }).seq);
+    const subscription = new FakeSpineEventsAdapter(stream).followTable("table-1", () => ({ applied: true }));
 
     stream.connect();
     expect(stream.lastOpenLastEventId()).toBeUndefined(); // first connect: nothing applied yet
@@ -48,7 +48,7 @@ describe("SpineEventsPort.followTable reconnect orchestration", () => {
 
   test("an event the caller could not apply does not advance the cursor — the reconnect asks for it again", async () => {
     const stream = new FakeSpineStreamGateway();
-    const subscription = new FakeSpineEventsAdapter(stream).followTable("table-1", () => undefined);
+    const subscription = new FakeSpineEventsAdapter(stream).followTable("table-1", () => ({ applied: false }));
 
     stream.connect();
     stream.emitFrame({ seq: 7 });
@@ -68,7 +68,7 @@ describe("SpineEventsPort.followTable reconnect orchestration", () => {
       const { seq, delayMs } = event as { seq: number; delayMs: number };
       await new Promise((r) => setTimeout(r, delayMs));
       appliedOrder.push(seq);
-      return seq;
+      return { applied: true };
     });
 
     stream.connect();
@@ -86,7 +86,7 @@ describe("SpineEventsPort.followTable reconnect orchestration", () => {
 
   test("a clean stream end (not a drop) also reconnects, carrying the applied seq forward", async () => {
     const stream = new FakeSpineStreamGateway();
-    const subscription = new FakeSpineEventsAdapter(stream).followTable("table-1", (event) => (event as { seq: number }).seq);
+    const subscription = new FakeSpineEventsAdapter(stream).followTable("table-1", () => ({ applied: true }));
 
     stream.connect();
     stream.emitFrame({ seq: 5 });
@@ -101,7 +101,7 @@ describe("SpineEventsPort.followTable reconnect orchestration", () => {
 
   test("a subscription resumed from the game's own log asks the table to start after what it already applied", async () => {
     const stream = new FakeSpineStreamGateway();
-    const subscription = new FakeSpineEventsAdapter(stream).followTable("table-1", (event) => (event as { seq: number }).seq, 12);
+    const subscription = new FakeSpineEventsAdapter(stream).followTable("table-1", () => ({ applied: true }), 12);
 
     stream.connect();
     expect(stream.lastOpenLastEventId()).toBe(12);

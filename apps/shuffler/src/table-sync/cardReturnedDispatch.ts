@@ -6,10 +6,13 @@ import { applyGameCommand } from "../apply-game-command.js";
 import { validateIncomingEvent } from "../port-spine/events/incomingEventValidation.js";
 import { markCurrentSpanAsError } from "../tracing_util.js";
 import { broadcastGameStateUpdated } from "./gameSubscriptionRegistry.js";
-import { extractSeq } from "../port-spine/events/SpineEventsAdapter.js";
+import { EventApplication } from "../port-spine/events/types.js";
 import { log } from "../log.js";
 
 const tracer = trace.getTracer("mtg-deck-shuffler");
+
+/** Nothing more will change by seeing this event again. */
+const APPLIED: EventApplication = { applied: true };
 
 interface CardReturnedPayload {
   card: { scryfallId: string };
@@ -36,11 +39,10 @@ export interface CardReturnedDispatchDeps {
  * `Table#broadcast`) as a CHILD span — one Honeycomb trace covering the Tabletop's portal
  * drag through the Spine to this move into Revealed, not an unlinked new one.
  *
- * Resolves with the event's `seq` once it's been fully handled and confirmed to have
- * actually landed (applied, or correctly skipped as a duplicate/other-seat/invalid event)
- * — `followTable` uses that to track the high-water mark it sends back as
- * `Last-Event-ID` on reconnect. Resolves with `undefined` when the apply itself threw, so
- * that event gets replayed rather than silently skipped on the next reconnect.
+ * Resolves with `applied: true` once the event has been fully handled and confirmed to
+ * have actually landed — applied, or correctly passed over as a duplicate/other-seat/
+ * self-initiated/invalid event. Resolves with `applied: false` when the apply itself threw,
+ * so the table delivers that event again rather than it being silently skipped.
  */
 export async function dispatchSpineEventForGame(
   gameId: GameId,
@@ -49,9 +51,8 @@ export async function dispatchSpineEventForGame(
   seenEventIds: Set<string>,
   deps: CardReturnedDispatchDeps,
   event: unknown
-): Promise<number | undefined> {
-  const seq = extractSeq(event);
-  if (!isEnvelopeLike(event)) return seq;
+): Promise<EventApplication> {
+  if (!isEnvelopeLike(event)) return APPLIED;
 
   const traceparent = typeof event.traceparent === "string" ? event.traceparent : undefined;
   const parentContext = traceparent ? propagation.extract(ROOT_CONTEXT, { traceparent }) : ROOT_CONTEXT;
@@ -67,9 +68,9 @@ export async function dispatchSpineEventForGame(
           "table.slug": spineTableId,
         },
       },
-      async (span): Promise<number | undefined> => {
+      async (span): Promise<EventApplication> => {
         try {
-          if (event.name !== "card.returned") return seq;
+          if (event.name !== "card.returned") return APPLIED;
 
           const result = validateIncomingEvent<CardReturnedPayload>(event, "card.returned");
           if (!result.ok) {
@@ -79,7 +80,7 @@ export async function dispatchSpineEventForGame(
               "table.slug": spineTableId,
               "card_return.error": result.error,
             });
-            return seq;
+            return APPLIED;
           }
           const { envelope } = result;
           span.setAttribute("event.id", envelope.id);
@@ -87,7 +88,7 @@ export async function dispatchSpineEventForGame(
 
           if (envelope.payload.seat !== gameSeatId) {
             span.setAttribute("card_return.outcome", "other-seat");
-            return seq;
+            return APPLIED;
           }
 
           // The Shuffler's own Return/Put-in-Hand/Put-on-Top/Put-on-Bottom actions apply the
@@ -97,16 +98,16 @@ export async function dispatchSpineEventForGame(
           // means we already applied it before sending, so this arrival is just our own echo.
           if (envelope.occurredIn === "shuffler") {
             span.setAttribute("card_return.outcome", "self-initiated");
-            return seq;
+            return APPLIED;
           }
 
           if (seenEventIds.has(envelope.id)) {
             span.setAttribute("card_return.outcome", "duplicate");
-            return seq;
+            return APPLIED;
           }
 
-          // An error here means the event never actually landed — the seq high-water mark
-          // must not advance past it, or a replayed reconnect would skip it for good.
+          // An error here means the event never actually landed — saying so keeps the table
+          // delivering it again, instead of it being skipped for good.
           let applyThrew = false;
           await tracer.startActiveSpan(
             "move returned card to Revealed",
@@ -125,7 +126,7 @@ export async function dispatchSpineEventForGame(
             async (doingSpan) => {
               try {
                 const outcome = await applyGameCommand(deps, gameId, undefined, (game) => {
-                  game.moveByGameCardIndex(envelope.payload.gameCardIndex, "Revealed", undefined, "returned", seq);
+                  game.moveByGameCardIndex(envelope.payload.gameCardIndex, "Revealed", undefined, "returned", envelope.seq);
                 });
 
                 if (outcome.kind === "applied") {
@@ -153,7 +154,7 @@ export async function dispatchSpineEventForGame(
               }
             }
           );
-          return applyThrew ? undefined : seq;
+          return applyThrew ? { applied: false } : APPLIED;
         } finally {
           span.end();
         }

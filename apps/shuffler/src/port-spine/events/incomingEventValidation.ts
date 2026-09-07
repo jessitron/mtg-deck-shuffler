@@ -39,6 +39,8 @@ export interface Envelope<Payload> {
   occurredIn: string;
   origin: string;
   significance: "physical" | "domain" | "administrative";
+  /** The table's event ordinal, assigned by the Spine on append (absent at submission, present on everything broadcast). */
+  seq?: number;
   occurredAt?: string;
   traceparent?: string;
   schemaVersion: number;

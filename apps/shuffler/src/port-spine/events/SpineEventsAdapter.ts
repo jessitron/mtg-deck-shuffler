@@ -17,7 +17,7 @@ const RECONNECT_DELAY_MS = 250;
 const MAX_RECONNECT_DELAY_MS = 5_000;
 
 /** The Spine assigns `seq` on append and stamps it on every broadcast envelope. */
-export function extractSeq(value: unknown): number | undefined {
+function extractSeq(value: unknown): number | undefined {
   if (typeof value !== "object" || value === null || !("seq" in value)) return undefined;
   const seq = (value as { seq: unknown }).seq;
   return typeof seq === "number" ? seq : undefined;
@@ -30,8 +30,9 @@ export function extractSeq(value: unknown): number | undefined {
  * Going out: a `GameCard` at a `TableSeat` becomes a `card.played` / `card.returned` /
  * `card.discarded` envelope. Coming in: "deliver me this table's events, resuming from what
  * I applied" becomes a stream of connection attempts, each carrying a `Last-Event-ID`
- * cursor that this class maintains. Frames, backoff and `Last-Event-ID` stop here; above
- * this line nobody reconnects.
+ * cursor that this class maintains from the `seq` on the events it delivered and the
+ * caller's plain applied/not-applied answer. `seq`-as-reconnect-cursor stops here; above
+ * this line nobody counts frames or reconnects.
  *
  * Subclasses supply only *transport* — the real one over HTTP through gateways, the fake one
  * in memory — so both go through the identical translation and a test watching the fake
@@ -110,9 +111,9 @@ export abstract class SpineEventsAdapter implements SpineEventsPort {
           }
           // Awaited right here: whatever the caller does with the event — including the span
           // it opens around the work — happens inside this call, not after it returns.
-          const applied = await applyEvent(frame.event);
-          if (typeof applied === "number" && (lastAppliedSeq === undefined || applied > lastAppliedSeq)) {
-            lastAppliedSeq = applied;
+          const { applied } = await applyEvent(frame.event);
+          if (applied && frameSeq !== undefined && (lastAppliedSeq === undefined || frameSeq > lastAppliedSeq)) {
+            lastAppliedSeq = frameSeq;
           }
         } catch (error) {
           log.warn("spine sse: event handler threw", { "spine.table_id": tableId }, error);
