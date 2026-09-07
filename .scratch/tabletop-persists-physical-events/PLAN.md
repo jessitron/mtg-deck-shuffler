@@ -42,9 +42,28 @@ Three decisions from that spec:
   actually apply.
 - **Telemetry**: attributes on spans first; the ship's logger when there is no live span.
   Never `span.addEvent`.
-- **Commit after each conceptual change**, tagged `- claude`. Subagents finish with
-  `ExitWorktree({action: "keep"})` then `scripts/merge-worktree.sh <branch>`. Local main
-  only — no push, no PR.
+- **Commit after each conceptual change**, tagged `- claude`. Local main only — no push,
+  no PR.
+- **Isolation, and how it differs for you and for a subagent.** Working in this session:
+  `EnterWorktree`, then `ExitWorktree({action: "keep"})` and
+  `scripts/merge-worktree.sh <branch>`, which runs the full fleet gate before merging.
+
+  **`EnterWorktree` refuses for a subagent** — subagents run with a pinned cwd. A subagent
+  does it by hand instead:
+
+  ```
+  git worktree add -b <branch> .claude/worktrees/<branch>
+  # …work, commit…
+  # from the repo root, on main:
+  git merge --no-ff <branch>
+  git worktree remove .claude/worktrees/<branch>
+  ```
+
+  **A subagent taking that path must run the fleet suite itself before merging** — `npm test`
+  from the root, `npx vitest run` in `apps/tabletop`, and the Spine's Ruby tests if it
+  touched Ruby. `merge-worktree.sh` is what normally runs that gate, and the manual path
+  skips it. Do not merge on a red suite. (Phase 2 spawns four subagents in parallel; each
+  needs its own branch name.)
 - **Delete newly-unused code**, especially CSS, after each change.
 
 ## Why the ports come first
