@@ -137,20 +137,22 @@ function ToolbarWithCounter(props: React.ComponentProps<typeof DefaultToolbar>) 
   );
 }
 
-function InFrontOfTheCanvasOverlays() {
+function InFrontOfTheCanvasOverlays({ tableSlug }: { tableSlug: string }) {
   return (
     <>
       <LibraryPortalOverlay />
-      <DiagnosticButton />
+      <DiagnosticButton tableSlug={tableSlug} />
     </>
   );
 }
 
-const components: TLComponents = {
-  Toolbar: ToolbarWithCounter,
-  ContextMenu: TableContextMenu,
-  InFrontOfTheCanvas: InFrontOfTheCanvasOverlays,
-};
+function makeComponents(tableSlug: string): TLComponents {
+  return {
+    Toolbar: ToolbarWithCounter,
+    ContextMenu: TableContextMenu,
+    InFrontOfTheCanvas: () => <InFrontOfTheCanvasOverlays tableSlug={tableSlug} />,
+  };
+}
 
 
 const bakedLicenseKey = import.meta.env.VITE_TLDRAW_LICENSE_KEY || undefined;
@@ -200,6 +202,7 @@ export function TablePage({ tableSlug }: { tableSlug: string }) {
   }, [tableSlug]);
 
   const store = useSync({ uri, assets: inlineAssets, shapeUtils });
+  const components = useMemo(() => makeComponents(tableSlug), [tableSlug]);
 
   useCardArrivalSpans(store);
   usePhysicsAnnouncements(store);
