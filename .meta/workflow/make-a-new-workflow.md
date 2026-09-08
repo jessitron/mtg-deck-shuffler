@@ -2,7 +2,9 @@ GOAL: Create and iteratively refine a workflow document in .meta/workflow/, so i
 
 When working through this process, you will work in a worktree on a branch. This explicitly overrides our default way of working. The steps below state exactly when to merge to main. DO NOT merge otherwise.
 
-1. Ask the user to just word vomit, talking about anything they want related to the intent, the success criteria, any critical steps, or anything else they want. Based on that, pick a name for the workflow. Create a markdown file containing exactly their words, just as they said them. Commit.
+1a. Ask the user to just word vomit, talking about anything they want related to the intent, the success criteria, any critical steps, or anything else they want. 
+1b. Ask them whether there is any more. Continue until they say no.
+1c. Based on that, pick a name for the workflow. Create a markdown file containing exactly their words, just as they said them. Commit.
 2. In place, clean up that text. Ask any clarifying questions to understand their intention with the text. Commit your cleaned text.
 3. Ask curious, non-leading questions that make me articulate what I actually want, notice assumptions and tensions, and discover implications I haven’t considered. Prefer one incisive question over a questionnaire. Think about the answer, and then ask another one if helpful. Don’t rush to solve the problem for me.
 4. Write the document in .meta/workflow/title-in-snake-case.md, in this format: a single sentence starting with `GOAL:`, followed by a numbered list of concrete steps. Do not include rationale, explanations, or historical examples. Remove all the text from the word vomit and interview; leave only the goal, steps, and success criteria (optional).
