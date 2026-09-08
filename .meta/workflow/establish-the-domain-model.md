@@ -170,8 +170,7 @@ Conventions that apply to every step below:
     any code.
 42. Commit.
 43. Iterate on the file over the whole document.
-44. Print ASCII art something like this, using this context's real terms and paths — it is
-    incomplete, a few examples only:
+44. Print ASCII art something like this, using this context's real terms and paths:
 
     ```
        CUSTOMER  ---------> customer.rb:12 (aka Account)
