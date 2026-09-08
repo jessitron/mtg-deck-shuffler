@@ -12,7 +12,7 @@ Conventions that apply to every step below:
   subagent to research the question, then present the findings for confirmation.
 - Every step that reads code, docs, or telemetry runs in a subagent.
 - Every phase ends by printing ASCII art. The art shown below is a sketch of the shape;
-  wherever it holds domain content, fill it in with this run's real content.
+  wherever it holds domain content, fill it in with this run's real content. They are only illustrations, not diagrams. Be cute, not complete.
 
 ## Phase 0 — Scope and file
 
