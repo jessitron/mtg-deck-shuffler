@@ -82,15 +82,23 @@ Conventions that apply to every step below:
 18. Add the purpose of the domain at the top, before Concrete Examples.
 19. Iterate on the file, asking the user to check whether the examples are right and
     whether the correct words are capitalized.
-20. Print ASCII art something like this:
+20. Print this ASCII art:
 
-    ```
-       one real thing:
-
-       ● ──▶ ◇ ──▶ ◆ ──▶ ◇ ──▶ ✓
-
-            follow it through
-    ```
+```
+                 .        .           -     _
+             .       .  ~   . ~  -  ~  . = .  ~
+         ~        ~  __.---~~_~~_~~_~~_~ ~ ~~_~~~
+       .    .     .-'  ` . ~_ = ~ _ =  . ~ .    ~
+                .'  `. ~  -   =      ~  -  _ ~ `
+       ~    .  }` =  - _ ~  -  . ~  ` =  ~  _ . ~
+             }`   . ~   =    ~  =  ~   -  ~    - _
+   .        }   ~ .__,_O     ` ~ _   ~  ^  ~  -
+          `}` - =    /#/`-'     -   ~   =   ~  _ ~
+     ~ .   }   ~ -   |^\   _ ~ _  - ~ -_  =  _
+          }`  _____ /_  /____ - ~ _   ~ _
+  jgs   }`   `~~~~~~~~~~~~~~~`_ = _ ~ -
+_ _ _ }` `. ~ . - _ = ~. ~ = .   -   =
+```
 
 ## Phase 2 — Boundaries
 
