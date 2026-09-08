@@ -28,6 +28,21 @@ Conventions that apply to every step below:
 7. Create `<NAME>_DOMAIN_MODEL.md` at that location containing the user's answers to these
    steps so far, verbatim, under a heading `# <NAME>`. Commit.
 
+Print an ASCII art something like this:
+
+```
+        (         )
+      (   domain    )
+        (         )
+
+             |
+             v
+
+   +----------------------+
+   | FOO_DOMAIN_MODEL.md  |
+   +----------------------+
+```
+
 ## Phase 1 — Concrete example
 
 8. Ask the user for a concrete example: one specific thing that happens in this context,
@@ -46,6 +61,16 @@ Conventions that apply to every step below:
     expressing something new. Commit.
 16. Iterate on the file, asking the user to check whether the examples are right and
     whether the correct words are capitalized.
+
+Print an ASCII art something like this:
+
+```
+   one real thing:
+
+   ● ──▶ ◇ ──▶ ◆ ──▶ ◇ ──▶ ✓
+
+        follow it through
+```
 
 ## Phase 2 — Boundaries
 
@@ -78,8 +103,26 @@ Conventions that apply to every step below:
       translate at the edge.
 
     Commit.
+
 25. Iterate on the file, asking the user to check the boundaries and the interface language
     at each one.
+
+Print an ASCII art something like this:
+
+```
+         outside
+            |
+            v
+
+    .-------------------.
+   /                     \
+  |      our context      | ---> other system
+   \                     /
+    '-------------------'
+            ^
+            |
+         outside
+```
 
 ## Phase 3 — Words
 
@@ -103,6 +146,21 @@ Conventions that apply to every step below:
     a time. Record the answers. Commit.
 34. Iterate on the file over the whole `## Terms` section.
 
+Print an ASCII art something like this:
+
+```
+      invoice
+  account    plan
+     customer
+ payment   subscription
+       \   |   /
+        \  |  /
+         \ | /
+      +---------+
+      |  TERMS  |
+      +---------+
+```
+
 ## Phase 4 — Relationship to code
 
 35. In a subagent, for each term, find the type, function, or module in the code that
@@ -115,11 +173,35 @@ Conventions that apply to every step below:
 38. Commit.
 39. Iterate on the file over the whole document.
 
+Print an ASCII art something like this (it is incomplete! a few examples only!)
+
+```
+   CUSTOMER  ---------> customer.rb:12 (aka Account)
+   PLAN      ---------> billing/plan.ts:44
+   PAYMENT   ---------> ???
+   ...
+```
+
 ## Phase 5 — Finish
 
 40. Ask the user to approve the document.
 41. Call `ExitWorktree({action: "keep"})`, then run
     `scripts/merge-worktree.sh --keep-merge-commit <branch-name>`.
+
+Print an ASCII art something like this:
+
+```
+   +----------------------+
+   |   DOMAIN MODEL       |
+   +----------------------+
+   | ✅ examples          |
+   | ✅ boundaries        |
+   | ✅ terms             |
+   | ✅ code links        |
+   +----------------------+
+
+      ✨ APPROVED ✨
+```
 
 ## Success criteria
 
