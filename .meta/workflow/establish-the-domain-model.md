@@ -30,15 +30,22 @@ Conventions that apply to every step below:
    boundary is not yet clear-cut. State your choice and why in one sentence.
 7. Create `<NAME>_DOMAIN_MODEL.md` at that location containing the user's answers to these
    steps so far, verbatim, under a heading `# <NAME>`. Commit.
-8. At the bottom of the file, make sections (heading only) for what we will add:
+8. Now summarize what they said into a nice, concise purpose at the top of the file. Include auxiliary purposes,
+   and anything they mentioned as excluded. Describe
+   the scope of the bounded context as it corresponds to code.
+9. At the bottom of the file, make sections (heading only) for what we will add:
 
 ```
 ## Concrete Examples
+
+## Boundaries
 
 ## Domain Rules
 
 ## Terms
 ```
+
+7. Iterate on the file until the user approves the summary.
 
 8. Print ASCII art something like this:
 
