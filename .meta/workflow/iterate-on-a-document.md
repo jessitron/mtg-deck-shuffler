@@ -1,8 +1,5 @@
 GOAL: Hand a document back and forth with the user until they say it is good enough, applying their edits as normative and executing their inline commands.
 
-This is a subprocess. Another workflow invokes it, naming the document and the section
-under review.
-
 1. Tell the user to take their turn. Give them the full path to the file.
    Instruct them to make any normative edits
    they like, and to add `@AI: <command>` annotations anywhere in the document.
