@@ -1,8 +1,8 @@
-# sharpen-the-domain-model (cleaned notes, pre-draft)
+# establish-the-domain-model (cleaned notes, pre-draft)
 
 ## Goal
 
-Sharpen the domain model in one bounded context. The domain model may be documented, or
+Establish the domain model of one bounded context, for the first time. The domain model may be documented, or
 it may be implicit in the code — if there is code, there IS a domain model, it might just
 be fuzzy. At the end of this process it is as consistent and sharp as we can get it at
 the moment: a clear language, and clear boundaries where that language applies.
