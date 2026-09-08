@@ -13,6 +13,7 @@ Conventions that apply to every step below:
 - Every step that reads code, docs, or telemetry runs in a subagent.
 - Every phase ends by printing ASCII art. The art shown below is a sketch of the shape;
   wherever it holds domain content, fill it in with this run's real content. They are only illustrations, not diagrams. Be cute, not complete.
+- the Domain Rules section doesn't have an explicit step to fill it. Instead, populate it as you pick up information. The user can also add or correct it at any time.
 
 ## Phase 0 — Scope and file
 
@@ -29,6 +30,16 @@ Conventions that apply to every step below:
    boundary is not yet clear-cut. State your choice and why in one sentence.
 7. Create `<NAME>_DOMAIN_MODEL.md` at that location containing the user's answers to these
    steps so far, verbatim, under a heading `# <NAME>`. Commit.
+8. At the bottom of the file, make sections (heading only) for what we will add:
+
+```
+## Concrete Examples
+
+## Domain Rules
+
+## Terms
+```
+
 8. Print ASCII art something like this:
 
    ```
@@ -60,9 +71,11 @@ Conventions that apply to every step below:
     concepts CAPITALIZED.
 16. If any examples are repetitive, cut down the number to the ones that are each
     expressing something new. Commit.
-17. Iterate on the file, asking the user to check whether the examples are right and
+17. Add any Domain Rules you have picked up on so far to that section. Commit.
+18. Add the purpose of the domain at the top, before Concrete Examples.
+19. Iterate on the file, asking the user to check whether the examples are right and
     whether the correct words are capitalized.
-18. Print ASCII art something like this:
+20. Print ASCII art something like this:
 
     ```
        one real thing:
