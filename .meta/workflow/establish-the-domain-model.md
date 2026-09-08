@@ -102,21 +102,21 @@ _ _ _ }` `. ~ . - _ = ~. ~ = .   -   =
 
 ## Phase 2 — Boundaries
 
-19. Ask the user an open question about this context's boundaries: where it ends, and what
-    it talks to. Repeat until they can't think of any more.
-20. In a subagent, read the code. Look for boundaries the user did not mention, including
+20. In a subagent, read the code. Look for boundaries to reconcile against the user's list, including
     boundaries that are not between separate processes: libraries and frameworks have their
     own terms, which we may adopt or may insulate our code from.
 21. If you have access to tracing, then in a subagent, look at production tracing. If there
     is a service map, query it. If there are traces, see if you can query for "what services
     call into this one?" and "what services does this one call?" (this is possible in
     Honeycomb).
-22. In a subagent, check documentation and any other sources you have access to.
-23. Present the boundaries you found that the user did not mention, and ask which are real.
-24. For each boundary, ask what language is used to communicate: ours, theirs, or a third.
-25. Write everything the user said into the file, verbatim, along with your findings, under
+22. Meanwhile, Ask the user an open question about this context's boundaries: where it ends, and what
+    it talks to. Repeat until they can't think of any more.
+23. In a subagent, check documentation and any other sources you have access to.
+24. Present the boundaries you found that the user did not mention, and ask which are real.
+25. For each boundary, ask what language is used to communicate: ours, theirs, or a third.
+26. Write everything the user said into the file, verbatim, along with your findings, under
     `## Boundaries`. Commit.
-26. Rewrite the boundaries section in place as a list. Give each boundary: its name, the
+27. Rewrite the boundaries section in place as a list. Give each boundary: its name, the
     direction (entry, exit, or both), what is on the other side, and its interface language,
     chosen from the context-mapping patterns:
     - Partnership — two contexts succeed or fail together and coordinate their models.
@@ -132,9 +132,9 @@ _ _ _ }` `. ~ . - _ = ~. ~ = .   -   =
 
     Commit.
 
-27. Iterate on the file, asking the user to check the boundaries and the interface language
+28. Iterate on the file, asking the user to check the boundaries and the interface language
     at each one.
-28. Print ASCII art something like this:
+29. Print ASCII art something like this:
 
     ```
              outside
