@@ -9,7 +9,10 @@ the moment: a clear language, and clear boundaries where that language applies.
 
 ## The artifact
 
-`DOMAIN_MODEL.md` in the root of the module. The workflow specifies its format. It answers:
+`<NAME>_DOMAIN_MODEL.md`, where `<NAME>` is the name of the bounded context. It lives in
+the module's root when the bounded context corresponds to one module, and higher up when
+the context spans more than one module or when the boundary isn't clear-cut yet. The
+workflow specifies its format. It answers:
 
 - What is the name of this bounded context?
 - What words are important in this bounded context?
@@ -53,7 +56,7 @@ Be curious about it so it becomes specific. Multiple examples are fine, so that 
 they cover the gist of the domain including the major ins and outs. Find out which kind of
 thing is persisted — that's what's hard to change later, in production.
 
-Before writing `DOMAIN_MODEL.md` in the chosen format: ask the user stuff, write
+Before writing `<NAME>_DOMAIN_MODEL.md` in the chosen format: ask the user stuff, write
 everything they say into the file verbatim, commit. Then start modifying what they said.
 Put the concrete example (or a few) at the top and CAPITALIZE the most important domain
 concepts. Then give the user a turn to edit, to check whether the example is right and
