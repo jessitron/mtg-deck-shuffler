@@ -3,8 +3,8 @@ GOAL: Hand a document back and forth with the user until they say it is good eno
 This is a subprocess. Another workflow invokes it, naming the document and the section
 under review.
 
-1. Tell the user to take their turn. Give them the path to the file, name the section
-   under review, and say what to look for in it. Instruct them to make any normative edits
+1. Tell the user to take their turn. Give them the full path to the file.
+   Instruct them to make any normative edits
    they like, and to add `@AI: <command>` annotations anywhere in the document.
 2. Wait. The user's turn ends when they respond.
 3. If the user says "good enough", "move on", or equivalent, stop; the subprocess is done.
