@@ -150,7 +150,7 @@ How will you know it's working?
 - Unit tests, you know how to do this already
 - Playwright scripts for UI tests, the ships have their own when necessary
 - When a test is broken, unrelated to your work, fork a subagent off to fix it! Do not waste your time and every future agent's time with it. Tell the subagent to first check whether the test is still valid, and if not, delete it.
-- If you want to verify in a browser, you can use the chrome extension. If the extension is broken, please STOP AND ASK THE USER to fix it.
+- If you want to verify in a browser, you can use the chrome extension. If it isn't connected, stop, and walk the user through connecting it again — don't just ask them to fix it and move on.
 - To make sure it's working as you expect, check traces and span attributes in Honeycomb. If the MCP is not found, then stop and ask the user to authorize it.
 
 ## Observability
