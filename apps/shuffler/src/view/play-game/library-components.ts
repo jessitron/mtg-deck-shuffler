@@ -55,6 +55,17 @@ export function formatLibrarySectionHtmlFragment(game: GameState, whatHappened: 
                       : "disabled"
                   }
                   >Play Face Down</button>
+          <button id="play-bottom-face-down-button" class="${faceDownClass}"
+                  title="${faceDownTitle}"
+                  ${
+                    game.listLibrary().length > 0
+                      ? `hx-post="/play-bottom-card-face-down/${game.gameId}"
+                       hx-vals='{"expected-version": ${expectedVersion}}'
+                       hx-target="#game-container"
+                       hx-swap="outerHTML"`
+                      : "disabled"
+                  }
+                  >Play Bottom Face Down</button>
         </div>
       </div>`;
 }

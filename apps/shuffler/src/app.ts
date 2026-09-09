@@ -1586,6 +1586,40 @@ export function createApp(
     }
   });
 
+  // Returns active game fragment - plays the bottom card of the library face down
+  app.post("/play-bottom-card-face-down/:gameId", async (req, res) => {
+    const gameId = parseGameIdParam(req, res);
+    if (gameId === null) return;
+    const browserTabId = res.locals.browserTabId as string | undefined;
+    const sessionId = res.locals.sessionId as string | undefined;
+
+    try {
+      const outcome = await applyGameCommand(
+        { persistStatePort, cardRepository },
+        gameId,
+        expectedVersionFromRequest(req),
+        (game) => game.playBottomCardOfLibrary(browserTabId),
+        async (game) => {
+          const libraryCards = game.listLibrary();
+          const cardToPlay = libraryCards[libraryCards.length - 1];
+          if (!game.tableName || !cardToPlay) return;
+          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay), sessionId, true);
+        }
+      );
+
+      renderCommandOutcome(res, gameId, outcome, "Cannot play bottom card of library: Game is not active", (game, whatHappened) => formatActiveGameHtmlSection(game, whatHappened));
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      markCurrentSpanAsError(errorMessage, {
+        "error.message": errorMessage,
+        "error.type": error instanceof Error ? error.name : typeof error,
+        "game.game_id": gameId,
+      });
+      log.error("play bottom card of library face down failed", { "game.game_id": gameId }, error);
+      res.status(500).send(`<div>Error: ${error instanceof Error ? error.message : "Could not play bottom card of library"}</div>`);
+    }
+  });
+
   // Returns active game fragment - discards the top card of the library to the graveyard
   app.post("/mill/:gameId", async (req, res) => {
     const gameId = parseGameIdParam(req, res);

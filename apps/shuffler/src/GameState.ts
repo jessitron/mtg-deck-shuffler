@@ -582,6 +582,21 @@ export class GameState {
     return {};
   }
 
+  public playBottomCardOfLibrary(browserTabId?: string): WhatHappened {
+    const libraryCards = this.listLibrary();
+
+    if (libraryCards.length === 0) {
+      throw new Error("Cannot play bottom card of library: Library is empty");
+    }
+
+    const bottomCard = libraryCards[libraryCards.length - 1];
+    this.moveCard(bottomCard, { type: "Table" }, browserTabId, "play-face-down");
+
+    this.validateInvariants();
+
+    return {};
+  }
+
   public mill(browserTabId?: string): WhatHappened {
     const libraryCards = this.listLibrary();
 

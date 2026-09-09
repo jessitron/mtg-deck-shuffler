@@ -292,7 +292,7 @@ body {
 
 .library-buttons {
   display: grid;
-  grid-template-areas: "draw draw" "reveal mill" "play-face-down play-face-down" "search shuffle";
+  grid-template-areas: "draw draw" "reveal mill" "play-top-face-down play-top-face-down" "play-bottom-face-down play-bottom-face-down" "search shuffle";
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   max-width: 216px;
@@ -320,9 +320,12 @@ body {
   grid-area: mill;
 }
 
-.library-buttons .table-face-down-button,
-.library-buttons .play-face-down-button {
-  grid-area: play-face-down;
+.library-buttons #play-top-face-down-button {
+  grid-area: play-top-face-down;
+}
+
+.library-buttons #play-bottom-face-down-button {
+  grid-area: play-bottom-face-down;
 }
 
 .revealed-cards-section {

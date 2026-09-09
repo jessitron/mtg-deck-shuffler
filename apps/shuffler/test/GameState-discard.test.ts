@@ -169,3 +169,45 @@ describe("GameState.playTopCardOfLibrary", () => {
     expect(() => game.playTopCardOfLibrary()).toThrow(/Library is empty/);
   });
 });
+
+describe("GameState.playBottomCardOfLibrary", () => {
+  test("moves the bottom library card to the table with the play-face-down verb", () => {
+    const game = GameState.newGame(9, 1, 1, testDeck); // everything in library
+    const libraryCards = game.listLibrary();
+    const bottomCard = libraryCards[libraryCards.length - 1];
+
+    game.playBottomCardOfLibrary();
+
+    expect(bottomCard.location.type).toBe("Table");
+    expect(game.listTable()).toHaveLength(1);
+
+    const events = game.getEventLog().getEvents();
+    const lastEvent = events[events.length - 1] as MoveCardEvent & { gameEventIndex: number };
+    expect(lastEvent.eventName).toBe("move card");
+    expect(lastEvent.verb).toBe("play-face-down");
+    expect(nameMoveCardEvent(lastEvent)).toBe("Play Face Down");
+  });
+
+  test("plays from the bottom: a second call takes the next card up", () => {
+    const game = GameState.newGame(10, 1, 1, testDeck);
+    const libraryCards = game.listLibrary();
+    const last = libraryCards[libraryCards.length - 1];
+    const secondToLast = libraryCards[libraryCards.length - 2];
+
+    game.playBottomCardOfLibrary();
+    game.playBottomCardOfLibrary();
+
+    expect(last.location.type).toBe("Table");
+    expect(secondToLast.location.type).toBe("Table");
+    expect(game.listTable()).toHaveLength(2);
+  });
+
+  test("refuses to play the bottom of an empty library", () => {
+    const game = GameState.newGame(11, 1, 1, testDeck);
+    const startingCount = game.listLibrary().length;
+    for (let i = 0; i < startingCount; i++) {
+      game.playBottomCardOfLibrary();
+    }
+    expect(() => game.playBottomCardOfLibrary()).toThrow(/Library is empty/);
+  });
+});
