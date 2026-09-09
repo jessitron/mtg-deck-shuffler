@@ -1,5 +1,31 @@
 # History
 
+## 2026-09-09 — a second library face-down button, pure convergence, but it moved grid placement off the shared class
+
+`play-bottom-face-down-button` added "Play Bottom Face Down" next to the existing "Play Face
+Down" button in the library grid — a way to play the library's bottom card face down,
+alongside the pre-existing top-card action. **No new visual decision**, same posture as the
+Mulligan and Undo entries above: it reuses the identical `faceDownClass` (`table-face-down-button`
+solo mode / `play-face-down-button` table mode) as `#play-top-face-down-button`, so it's the
+same fill, same colors, same seat-color free ride via `.playmat-game .library-buttons button`
+(see [interactions.md](interactions.md)'s "Touching `/game`'s chrome-button colors"). No raw
+hex, no new token.
+
+**What did change: `grid-area` placement had to move off the shared class.** With one button,
+`.library-buttons .table-face-down-button, .library-buttons .play-face-down-button { grid-area:
+play-face-down }` was enough — only one element ever carried those classes. With two buttons
+sharing the same class, that rule can no longer tell them apart, so it was replaced with two
+id-based rules, `.library-buttons #play-top-face-down-button` / `.library-buttons
+#play-bottom-face-down-button` (`game.css`), and `grid-template-areas` grew a second row
+(`"play-top-face-down play-top-face-down" "play-bottom-face-down play-bottom-face-down"`,
+replacing the old single `"play-face-down play-face-down"` row). `views/design.ejs`'s
+"Playmat button — `.library-buttons button`" specimen was updated in the same change to show
+both buttons with their ids, matching the app.
+
+Verified visually on `/design` (Chrome): "Play Bottom Face Down" fits on one line at the
+existing button width/font-size, no wrapping — so no size/typography adjustment was needed
+for the longer label.
+
 ## 2026-09-06 — the Undo button's new disabled state reused an existing pattern, not a new decision
 
 `undo-button-table-return`: when the game's most recent event is a tabletop-initiated card

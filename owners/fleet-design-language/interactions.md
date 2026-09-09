@@ -671,6 +671,20 @@ not by recomputing new numbers.**
   future library-grid button instead needs `.modal-action-button`-style semantic color (like
   the hand-card modal's grey `.face-down-button`), it has to opt **out** of this rule, not
   into it.
+- **A second library face-down button confirmed the free ride again, and forced grid-area
+  placement off the shared class (2026-09-09, "Play Bottom Face Down").** `#play-bottom-face-down-button`
+  reuses the identical `faceDownClass` (`table-face-down-button` solo / `play-face-down-button`
+  table mode) as the pre-existing `#play-top-face-down-button` — same class, same colors, no
+  new token, so it picks up the `.playmat-game .library-buttons button` seat-color override
+  the same free way. **But once two buttons share that one class, `grid-area` can no longer be
+  keyed on it**: the old `.library-buttons .table-face-down-button, .library-buttons
+  .play-face-down-button { grid-area: play-face-down }` rule (which placed exactly one button)
+  was replaced with two id-based rules, `.library-buttons #play-top-face-down-button` /
+  `.library-buttons #play-bottom-face-down-button` (`game.css`), and `grid-template-areas`
+  grew a second row (`play-top-face-down` / `play-bottom-face-down`). Colour/seat-override
+  selectors stay class-based (still shared); **grid placement is now id-based** for this pair.
+  If a third button ever reuses `faceDownClass`, its placement needs a third id rule too —
+  don't try to fold placement back onto the shared class.
 - **The `var(--seat-primary, <fallback>)` fallback is the pre-existing fixed value** at each
   site (`--playmat-one`, `--dark-pink`, or `black`, depending which rule it's replacing) —
   keep that pattern for any new seat-colored site, so a page that never sets the custom
