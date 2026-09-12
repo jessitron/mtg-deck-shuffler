@@ -29,6 +29,17 @@ describe("POST /api/tables/:tableName/diagnostic", () => {
     expect(await response.json()).toEqual({ ok: true, implemented: false });
   });
 
+  it("accepts an optional free-text message describing what's wrong", async () => {
+    const response = await fetch(`http://localhost:${port}/api/tables/${slugFor("diag-table")}/diagnostic`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ message: "the graveyard is empty but I have three cards in it" }),
+    });
+
+    expect(response.status).toBe(202);
+    expect(await response.json()).toEqual({ ok: true, implemented: false });
+  });
+
   it("rejects a blank table name", async () => {
     const response = await fetch(`http://localhost:${port}/api/tables/%20/diagnostic`, {
       method: "POST",

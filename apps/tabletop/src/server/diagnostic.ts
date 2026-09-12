@@ -14,8 +14,9 @@ const tracer = trace.getTracer("mtg-tabletop");
  * The actual diff — a projection of the Spine's event log compared against a snapshot of
  * the live tldraw room — depends on the server retaining the event log, which follows a
  * port extraction that hasn't happened yet (see `notes/DESIGN-spine-projection.md`, "The
- * diff runs on the server"). This span is deliberately empty of findings: it exists to
- * prove the trace connects end to end from click to server.
+ * diff runs on the server"). This span carries no automated findings yet — the only
+ * content it records is whatever free-text `message` the player typed into the button's
+ * popover, stamped as `diagnostic.message` for someone to read in Honeycomb.
  */
 export async function handleDiagnostic(req: Request, res: Response): Promise<void> {
   const tableName = slugifyTableName(req.params.tableName ?? "");
@@ -28,9 +29,12 @@ export async function handleDiagnostic(req: Request, res: Response): Promise<voi
     return;
   }
 
+  const message = typeof req.body?.message === "string" ? req.body.message.trim() : "";
+
   trace.getActiveSpan()?.setAttributes({
     "table.name": tableNameFromSlug(tableName),
     "table.slug": tableName,
+    ...(message ? { "diagnostic.message": message } : {}),
   });
 
   await tracer.startActiveSpan(
