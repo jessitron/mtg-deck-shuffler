@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { inSpan } from "../observability";
+import { useRef, useState } from "react";
+import { context, propagation } from "@opentelemetry/api";
+import { currentTraceparent, inSpan } from "../observability";
 
 /**
  * Floating diagnostic trigger (tabletop-persists-physical-events ticket 01) — a player's
@@ -11,6 +12,16 @@ import { inSpan } from "../observability";
  * the same spec. Clicking opens a small popover so the player can describe what's wrong
  * before it's sent — that text rides along as `diagnostic.message` on the span, since
  * there's nowhere durable for it to go yet (see `diagnostic.ts`).
+ *
+ * **Two connected spans, not one.** Opening the popover emits `diagnostic button opened`
+ * immediately — a player who opens it and walks away, or hits Escape, still leaves a trace
+ * of "something bothered someone here". Its `traceparent` is captured (`currentTraceparent`)
+ * and remembered in a ref; if Send is later clicked, `diagnostic message sent` is started as
+ * a *child* of that remembered span via `propagation.extract` + `context.with`, even though
+ * the parent span already ended and real time has passed between the two clicks — OTel spans
+ * only need a parent span id, not overlapping wall-clock ranges, so this still assembles into
+ * one trace in Honeycomb. A `useRef` (not state) holds it: it's plumbing for the next click,
+ * not something a render should react to.
  *
  * The browser tracer registers fetch auto-instrumentation (`observability/index.ts`),
  * which injects the `traceparent` header into this `fetch()` call automatically — no
@@ -29,23 +40,40 @@ export function DiagnosticButton({ tableSlug }: { tableSlug: string }) {
   const [spinning, setSpinning] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const openedTraceparent = useRef<string | undefined>(undefined);
+
+  const openPopover = () => {
+    void inSpan(
+      "diagnostic button opened",
+      () => {
+        openedTraceparent.current = currentTraceparent();
+      },
+      { "table.slug": tableSlug }
+    );
+    setOpen(true);
+  };
 
   const send = () => {
     const trimmed = message.trim();
     setOpen(false);
     setMessage("");
     setSpinning(true);
-    void inSpan(
-      "diagnostic button clicked",
-      async () => {
-        await fetch(`/api/tables/${encodeURIComponent(tableSlug)}/diagnostic`, {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ message: trimmed }),
-        });
-      },
-      { "diagnostic.triggered": true, "table.slug": tableSlug, ...(trimmed ? { "diagnostic.message": trimmed } : {}) }
-    );
+    const parentContext = openedTraceparent.current
+      ? propagation.extract(context.active(), { traceparent: openedTraceparent.current })
+      : context.active();
+    context.with(parentContext, () => {
+      void inSpan(
+        "diagnostic message sent",
+        async () => {
+          await fetch(`/api/tables/${encodeURIComponent(tableSlug)}/diagnostic`, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ message: trimmed }),
+          });
+        },
+        { "diagnostic.triggered": true, "table.slug": tableSlug, ...(trimmed ? { "diagnostic.message": trimmed } : {}) }
+      );
+    });
   };
 
   return (
@@ -124,7 +152,7 @@ export function DiagnosticButton({ tableSlug }: { tableSlug: string }) {
         type="button"
         aria-label="Report something wrong with this table"
         data-testid="diagnostic-button"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => (open ? setOpen(false) : openPopover())}
         onAnimationEnd={() => setSpinning(false)}
         style={{
           width: 40,

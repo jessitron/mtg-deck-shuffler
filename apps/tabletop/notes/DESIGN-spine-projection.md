@@ -53,7 +53,9 @@ wins on what gets built and this document wins on where the seams go.
 
 Already built (tickets 01–03): the 😠 diagnostic button, `projectEvents`, `diffTableStates`,
 and `snapshotCanvas`. The button is **not** yet wired to the diff — it emits a
-`diagnostic button clicked` span and nothing more (`src/client/shapes/DiagnosticButton.tsx`).
+`diagnostic button opened` span when clicked and (if the player types a message and hits
+Send) a connected `diagnostic message sent` span carrying `diagnostic.message`, and nothing
+more (`src/client/shapes/DiagnosticButton.tsx`).
 Remaining: wiring the diff, tickets 04–10, the event kinds themselves and the replay.
 
 The spec independently arrived at most of the replayability rules below —
