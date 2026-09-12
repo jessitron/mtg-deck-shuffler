@@ -1,5 +1,33 @@
 # History
 
+## 2026-09-11 — the diagnostic button grew a popover, the fleet's first floating expansion off a canvas overlay control
+
+`DiagnosticButton.tsx` (`tabletop-persists-physical-events` ticket 01 follow-up) turned the
+diagnostic trigger into a small popover: clicking it now opens a textarea + Send button so
+a player can describe what's wrong before the message rides along as `diagnostic.message`
+on the span. **No new visual decision** — every value is a token already in the identity
+(`--deep-space`, `--dark-pink`, `--light-pink`, `--font-chrome`, `--narrow-border`,
+`--radius-soft`) — but it's the fleet's first floating popover/expansion triggered from a
+viewport-anchored overlay button, and that placement pattern was worth recording (see
+[README.md](README.md) → tldraw limits and [interactions.md](interactions.md)):
+
+- Anchors `bottom: 100%; right: 0` inside the trigger's own positioned wrapper, growing
+  up-and-left — forced by the trigger's `right/bottom`-pinned viewport position with no
+  scroll/reflow to save a wrong-direction expansion.
+- The popover is a DOM sibling of the trigger, not a child, so it needs its own explicit
+  `pointerEvents: "auto"` against tldraw's inherited `pointer-events: none` from
+  `.tl-canvas__in-front` — opting in on the shared wrapper alone wouldn't cover it.
+- Choice 5's focus-visible values are reproduced verbatim via a scoped inline `<style>`, the
+  same pattern `MtgLifeCounterShapeUtil.tsx` used — now the third such duplicate, tracked as
+  a concrete fold-in target if the Tabletop ever gets a ship-local stylesheet.
+- The popover panel is square-cornered (chrome, not pressable); its Send button gets
+  `--radius-soft` (it is pressable). Ordinary application of choice 4.
+
+**Surfaced, not fixed:** this button (and `MtgLifeCounterShapeUtil`'s +/- buttons before it)
+still don't reproduce `.pushable-flat`'s lift-on-hover/press-on-click physics — already
+tracked as `tabletop-canvas-button-physics` in the repo-root `TODO.md`, flagged again by
+this review rather than duplicated as a second entry.
+
 ## 2026-09-09 — a second library face-down button, pure convergence, but it moved grid placement off the shared class
 
 `play-bottom-face-down-button` added "Play Bottom Face Down" next to the existing "Play Face

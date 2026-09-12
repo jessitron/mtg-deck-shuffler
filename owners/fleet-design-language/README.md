@@ -253,6 +253,33 @@ each).
   size, or box height ever changes again. This is placement geometry, decided by eye with Jess
   and living in `cardLayout.ts`, not a stylesheet or a `/design` specimen — the gallery has no
   Tabletop canvas stage to stage it on.
+- **First floating popover/expansion off a viewport-anchored overlay button (2026-09-11,
+  `DiagnosticButton.tsx`, ticket 01 follow-up).** Clicking the trigger opens a small
+  textarea + Send popover so the player can type a message before it fires. Three things
+  worth naming, none of them a new design decision — every value is a token already in the
+  identity, this is a *placement* pattern:
+  - **The popover anchors `bottom: 100%; right: 0` inside the trigger's own positioned
+    wrapper**, so it grows up-and-left. That direction is forced, not chosen: the trigger
+    sits pinned `right: 12px; bottom: 12px` in viewport space (`InFrontOfTheCanvas`, no
+    page scroll/reflow), so any other anchor would expand off-screen or over the trigger
+    itself. The next viewport-anchored overlay control that wants to expand must anchor
+    off *its own* pinned corner the same way, not copy `bottom: 100%; right: 0` verbatim.
+  - **The popover is a DOM *sibling* of the trigger button, not a child of it** — both live
+    in a shared positioned wrapper div. Each needs its **own** explicit
+    `pointerEvents: "auto"` against tldraw's inherited `pointer-events: none` from
+    `.tl-canvas__in-front`; opting in on the wrapper alone does not automatically cover a
+    sibling that renders conditionally.
+  - **Focus-visible is reproduced verbatim a third time, same posture as
+    `MtgLifeCounterShapeUtil.tsx`'s** (see the bullet above): `3px solid var(--light-pink)`,
+    `outline-offset: 3px`, scoped to `.diagnostic-message-input`/`.diagnostic-send-btn` via
+    an inline `<style>` tag, because the Tabletop still has no ship-local stylesheet for the
+    global rule to reach through. Not a new focus treatment; the same "duplicated because
+    the delivery mechanism can't reach this surface" shape — see
+    [interactions.md](interactions.md).
+  - The popover panel itself is square-cornered (`border: var(--narrow-border) solid
+    var(--dark-pink)`, no radius) because it's chrome, not a pressable — the Send button
+    inside it gets `var(--radius-soft)` because it is. Ordinary application of choice 4, no
+    new call.
 
 ## Why this owner exists
 

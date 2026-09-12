@@ -185,6 +185,13 @@ Concrete, in rough order of how often they bite.
   One sanctioned exception exists, and it's on the canvas, not in any stylesheet:
   `MtgCounterShapeUtil.tsx`'s editing textarea (2026-08-08) — see README → tldraw limits.
   It is not precedent for DOM pages.
+  **Concrete watch point: choice 5's exact values are now duplicated a third time** —
+  `styles.css`'s global rule, `MtgLifeCounterShapeUtil.tsx`'s scoped inline `<style>`, and
+  (2026-09-11) `DiagnosticButton.tsx`'s scoped inline `<style>` for its popover's textarea
+  and Send button — each a separate literal `3px solid var(--light-pink)` /
+  `outline-offset: 3px` because the Tabletop still has no ship-local stylesheet. If the
+  Tabletop ever gets one, fold all three into it in the same change; until then, a fourth
+  canvas surface needing focus-visible copies this pattern rather than inventing a new one.
   **The four modal overlays' `[tabindex]` now does more than take the global ring — it's
   the focus-trap landing spot too (2026-08-10, `modal-focus-trap`)**: `modal-focus.js`
   calls `.focus()` on the overlay itself when its container gains a dialog. See
@@ -736,7 +743,12 @@ not by recomputing new numbers.**
   padded wrapper (added 2026-08-08, ticket 17 — a frame must style its `<img>` directly),
   and **tldraw cannot rotate the view per viewer on a shared board** (added 2026-08-08) —
   every player area is upright for everyone, always, which is why the square/compass layout
-  repositions player areas without ever rotating them.
+  repositions player areas without ever rotating them. **First floating popover off a
+  viewport-anchored overlay button (added 2026-09-11)**: it anchors off the trigger's own
+  pinned corner (`bottom: 100%; right: 0`, growing up-left because the trigger is pinned
+  `right/bottom` with no scroll to save a wrong-direction expansion), and — being a DOM
+  sibling of the trigger, not a child — needs its own `pointerEvents: "auto"` opt-in against
+  `.tl-canvas__in-front`'s inherited `pointer-events: none`. See README → tldraw limits.
 - **A self-rendering shape needs its own `toSvg`, or it vanishes from canvas exports.** The cost
   scales with the treatment — gradients, shadows and a webfont all have to be hand-written into
   the SVG. **Budget it inside the option comparison**, not after Jess has picked.
