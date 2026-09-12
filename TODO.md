@@ -71,6 +71,17 @@ and I want to drop a card in between C and D, then the drop zone between them is
 
 - Shuffler: rename "Reveal" section to "Look at". This serves to clarify concepts.
 
+- `tabletop-canvas-button-physics` Tabletop canvas buttons don't have the fleet's button feel
+  - The DiagnosticButton's trigger and its new Send button, and `MtgLifeCounterShapeUtil`'s +/-
+    buttons before it, don't reproduce `.pushable-flat`'s lift-on-hover/press-on-click physics
+    (choice 1, decided 2026-08-02) — that button feel hasn't reached canvas buttons yet, since
+    the Tabletop has no ship-local stylesheet to hold it.
+  - Flagged by `fleet-design-language-review` during the diagnostic-button popover change
+    (2026-09-11); not a regression from that change, a pre-existing gap.
+  - Worth fixing whenever a Tabletop stylesheet lands — reproduce the physics the same
+    "duplicated because the mechanism can't reach it" way the focus-visible rule already is
+    (see `MtgLifeCounterShapeUtil`'s scoped `:focus-visible` block for the pattern).
+
 - `card-images-needs-adapter` Give `port-card-images` the adapter layer it's missing
   - `apps/shuffler/src/port-card-images/` has exactly the violation we just finished fixing in
     `port-spine`: the gateway implements the port directly, with no adapter in between.
