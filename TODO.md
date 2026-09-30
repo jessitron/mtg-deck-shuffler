@@ -8,6 +8,8 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
 
 ## Next
 
+- ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨ **START HERE NEXT SESSION** ✨🌟⭐✨🌟⭐✨🌟⭐✨🌟⭐ 🗺️🧭 Go over `notes/fleet-domain-map.html` with Jess and get it right! 🎯🔥 ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨
+
 - still happening post-tldraw upgrade: weird bug: `cards-jump-to-entry-position` occasionally, for no discernable reason, a bunch of Evelyn's cards return to the stack as if they were just played 😭. Full investigation log, ruled-out causes, and current instrumentation: `apps/tabletop/notes/RESEARCH-cards-jump-to-entry-position.md`.
 
 - bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation
