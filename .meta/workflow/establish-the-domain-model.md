@@ -114,7 +114,7 @@ _ _ _ }` `. ~ . - _ = ~. ~ = .   -   =
 23. In a subagent, check documentation and any other sources you have access to.
 24. Present the boundaries you found that the user did not mention, and ask which are real.
 25. For each boundary, ask what language is used to communicate: ours, theirs, or a third.
-26. Write everything the user said into the file, verbatim, along with your findings, under
+26. Write everything the user said into the boundaries section, verbatim, along with your findings, under
     `## Boundaries`. Commit.
 27. Rewrite the boundaries section in place as a list. Give each boundary: its name, the
     direction (entry, exit, or both), what is on the other side, and its interface language,
