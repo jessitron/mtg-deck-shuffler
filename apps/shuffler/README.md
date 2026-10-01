@@ -90,7 +90,9 @@ Options:
 - `--skip-existing` - Convert only decks that aren't already in `decks/`; existing files stay untouched, so the diff is clean. Without it, every file is rewritten, including a fresh `provenance.retrievedDate` (a noisy diff).
 - `--keep-temp` - Keep temporary downloaded files for inspection
 
-### Fixing up decks after a fetch
+### Repairing existing decks
+
+The fetch already adds image URLs and full set names to every deck it converts, so a `--skip-existing` run needs no follow-up. These commands repair decks that are already in `decks/`. Backfill-images rewrites the cache-busting `?timestamp` on every image URL it touches, so run it on specific files unless you want churn across all decks.
 
 - `npm run decks:backfill-images [-- <file>...]` - Add or refresh Scryfall `imageUris` on existing `decks/*.json` without re-downloading from MTGJSON or Archidekt. The diff is additive (only image-URL fields). Defaults to all decks; pass filenames to target specific ones. Throttled, with retries on Scryfall 429s. Use it to pick up image URLs for freshly released cards.
 - `npm run decks:backfill-set-names` - Rewrite the `set` field in `precon-mtgjson-*.json` from set codes to full set names (e.g. `SLD` → `Secret Lair Drop`) using Scryfall's `/sets`. Deck tiles display the commander's `set`; MTGJSON gives only codes. Idempotent, with a clean diff (only `set` lines), and Archidekt decks are left untouched. The fetch script already produces set names, so you only need this for old files.
