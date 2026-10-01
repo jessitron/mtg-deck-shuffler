@@ -78,15 +78,22 @@ We will eventually deploy to a toy EKS cluster.
 
 ### From MTGJSON (Recommended)
 
-`npm run precons:fetch-mtgjson -- --convert`
+To pick up newly released precons, run from the repo root (or this directory):
 
-This downloads all Commander Deck precons from MTGJSON and saves them to the decks directory. MTGJSON provides accurate release dates and complete metadata without rate limiting.
+`npm run precons:fetch-mtgjson -- --convert --skip-existing`
+
+This downloads `https://mtgjson.com/api/v5/AllDeckFiles.tar.gz` (plus `AllIdentifiers.json`, stream-parsed, for two-faced back-face lookups), converts each Commander Deck to our internal format (`cardTypes`, `twoFaced`, etc.), fetches Scryfall image URLs (`imageUris`/`backImageUris`) via `port-card-images/`, and saves the result to `decks/`. MTGJSON provides accurate release dates and complete metadata without rate limiting.
 
 Options:
 
-- `--convert` - Convert and save decks to the decks directory
-- `--force` - Overwrite existing deck files
+- `--convert` - Convert and save decks to the decks directory (without it, the script only lists what it found)
+- `--skip-existing` - Convert only decks that aren't already in `decks/`; existing files stay untouched, so the diff is clean. Without it, every file is rewritten, including a fresh `provenance.retrievedDate` (a noisy diff).
 - `--keep-temp` - Keep temporary downloaded files for inspection
+
+### Fixing up decks after a fetch
+
+- `npm run decks:backfill-images [-- <file>...]` - Add or refresh Scryfall `imageUris` on existing `decks/*.json` without re-downloading from MTGJSON or Archidekt. The diff is additive (only image-URL fields). Defaults to all decks; pass filenames to target specific ones. Throttled, with retries on Scryfall 429s. Use it to pick up image URLs for freshly released cards.
+- `npm run decks:backfill-set-names` - Rewrite the `set` field in `precon-mtgjson-*.json` from set codes to full set names (e.g. `SLD` → `Secret Lair Drop`) using Scryfall's `/sets`. Deck tiles display the commander's `set`; MTGJSON gives only codes. Idempotent, with a clean diff (only `set` lines), and Archidekt decks are left untouched. The fetch script already produces set names, so you only need this for old files.
 
 ### From a specific Archidekt deck
 

@@ -164,20 +164,10 @@ repo root — see the root `CLAUDE.md`.
 
 **Deck Management Scripts:**
 
-- `npm run precons:fetch-mtgjson -- --convert` - Download and convert all MTGJSON Commander precon decks to `decks/` directory
-  - Default: **replaces all** existing deck files (rewrites every file, including a fresh `provenance.retrievedDate` — a noisy diff)
-  - Add `--skip-existing` to convert only newly-released precons and leave existing files untouched (clean diff — use this when just picking up new precons)
-  - Downloads from https://mtgjson.com/api/v5/AllDeckFiles.tar.gz, plus AllIdentifiers.json for two-faced back-face lookups (stream-parsed, since it exceeds Node's max string length)
-  - Converts to internal format (`cardTypes`, `twoFaced`, etc.) and fetches Scryfall image URLs (`imageUris`/`backImageUris`) via `port-card-images/`
+- Updating the precon list (`precons:fetch-mtgjson`, `decks:backfill-images`, `decks:backfill-set-names`): see "Downloading precon decks" in `README.md`. Use `--skip-existing` to keep the diff clean.
 - `npm run deck:download -- <deckId>` - Download a specific Archidekt deck by ID
   - Example: `npm run deck:download -- 14669648`
   - Saves to `decks/deck-<deckId>.json` in internal format (includes Scryfall image URLs)
-- `npm run decks:backfill-images [-- <file>...]` - Add/refresh Scryfall `imageUris` on existing `decks/*.json` **without** re-downloading from MTGJSON/Archidekt
-  - Clean, additive diff (only adds image-URL fields; no `retrievedDate` churn), unlike the full `precons:fetch-mtgjson` rewrite
-  - Defaults to all decks; pass filenames to target specific ones. Throttled + retries on Scryfall 429s. Use this to pick up image URLs for freshly-released cards.
-- `npm run decks:backfill-set-names` - Rewrite the `set` field in `precon-mtgjson-*.json` from set codes to full set names (e.g. `SLD` → `Secret Lair Drop`) using Scryfall's `/sets`
-  - The displayed set text comes from the commander's `set` (deck tiles). MTGJSON gives only codes; Archidekt decks already store names. This aligns the precons. Clean diff (only `set` lines). Idempotent and Archidekt decks are left untouched.
-  - The MTGJSON adapter also takes set names now, so `precons:fetch-mtgjson -- --convert` produces names directly going forward.
 - `npm run card:inspect -- <deckId> <nameSubstring>` - Dump raw Archidekt `oracleCard` data for matching cards
   - Example: `npm run card:inspect -- 23735063 Studious`
   - Useful for diagnosing layout/faces issues (e.g. why a single-faced card is treated as two-faced)
