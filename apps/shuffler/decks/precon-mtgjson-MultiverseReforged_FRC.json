@@ -1,0 +1,1940 @@
+{
+  "version": 3,
+  "id": 340662740,
+  "name": "Multiverse Reforged",
+  "totalCards": 100,
+  "commanders": [
+    {
+      "name": "Jace, Multiverse Architect",
+      "scryfallId": "55cd03d9-2535-4cf3-a8b2-1418e1190f4a",
+      "twoFaced": false,
+      "oracleCardName": "Jace, Multiverse Architect",
+      "colorIdentity": [
+        "B",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Planeswalker"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/5/5/55cd03d9-2535-4cf3-a8b2-1418e1190f4a.jpg?1789644316",
+        "large": "https://cards.scryfall.io/large/front/5/5/55cd03d9-2535-4cf3-a8b2-1418e1190f4a.jpg?1789644316",
+        "png": "https://cards.scryfall.io/png/front/5/5/55cd03d9-2535-4cf3-a8b2-1418e1190f4a.png?1789644316",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/5/5/55cd03d9-2535-4cf3-a8b2-1418e1190f4a.jpg?1789644316"
+      }
+    }
+  ],
+  "cards": [
+    {
+      "name": "Nissa, Leyline Tamer",
+      "scryfallId": "e969d1f3-9595-498b-81cb-6cf4df2cad5d",
+      "twoFaced": false,
+      "oracleCardName": "Nissa, Leyline Tamer",
+      "colorIdentity": [
+        "B",
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/9/e969d1f3-9595-498b-81cb-6cf4df2cad5d.jpg?1789644323",
+        "large": "https://cards.scryfall.io/large/front/e/9/e969d1f3-9595-498b-81cb-6cf4df2cad5d.jpg?1789644323",
+        "png": "https://cards.scryfall.io/png/front/e/9/e969d1f3-9595-498b-81cb-6cf4df2cad5d.png?1789644323",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/9/e969d1f3-9595-498b-81cb-6cf4df2cad5d.jpg?1789644323"
+      }
+    },
+    {
+      "name": "Omnath, Locus of the Void",
+      "scryfallId": "727511d8-be1a-4c2e-92f6-5cc9d67a2b0c",
+      "twoFaced": false,
+      "oracleCardName": "Omnath, Locus of the Void",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/7/2/727511d8-be1a-4c2e-92f6-5cc9d67a2b0c.jpg?1789644395",
+        "large": "https://cards.scryfall.io/large/front/7/2/727511d8-be1a-4c2e-92f6-5cc9d67a2b0c.jpg?1789644395",
+        "png": "https://cards.scryfall.io/png/front/7/2/727511d8-be1a-4c2e-92f6-5cc9d67a2b0c.png?1789644395",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/2/727511d8-be1a-4c2e-92f6-5cc9d67a2b0c.jpg?1789644395"
+      }
+    },
+    {
+      "name": "Dack Fayden, Helping Hand",
+      "scryfallId": "b0db02cb-d029-46d5-9df2-dee980047758",
+      "twoFaced": false,
+      "oracleCardName": "Dack Fayden, Helping Hand",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/0/b0db02cb-d029-46d5-9df2-dee980047758.jpg?1789644199",
+        "large": "https://cards.scryfall.io/large/front/b/0/b0db02cb-d029-46d5-9df2-dee980047758.jpg?1789644199",
+        "png": "https://cards.scryfall.io/png/front/b/0/b0db02cb-d029-46d5-9df2-dee980047758.png?1789644199",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/0/b0db02cb-d029-46d5-9df2-dee980047758.jpg?1789644199"
+      }
+    },
+    {
+      "name": "Ob Nixilis, the Ascended",
+      "scryfallId": "a022d35a-9d24-4818-9ff3-a522cfcb178e",
+      "twoFaced": false,
+      "oracleCardName": "Ob Nixilis, the Ascended",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/0/a022d35a-9d24-4818-9ff3-a522cfcb178e.jpg?1789644205",
+        "large": "https://cards.scryfall.io/large/front/a/0/a022d35a-9d24-4818-9ff3-a522cfcb178e.jpg?1789644205",
+        "png": "https://cards.scryfall.io/png/front/a/0/a022d35a-9d24-4818-9ff3-a522cfcb178e.png?1789644205",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/0/a022d35a-9d24-4818-9ff3-a522cfcb178e.jpg?1789644205"
+      }
+    },
+    {
+      "name": "Teferi's Reproach",
+      "scryfallId": "fb4a1f07-4c1f-4d08-af5d-17f1bb77f9e5",
+      "twoFaced": false,
+      "oracleCardName": "Teferi's Reproach",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/b/fb4a1f07-4c1f-4d08-af5d-17f1bb77f9e5.jpg?1789644215",
+        "large": "https://cards.scryfall.io/large/front/f/b/fb4a1f07-4c1f-4d08-af5d-17f1bb77f9e5.jpg?1789644215",
+        "png": "https://cards.scryfall.io/png/front/f/b/fb4a1f07-4c1f-4d08-af5d-17f1bb77f9e5.png?1789644215",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/b/fb4a1f07-4c1f-4d08-af5d-17f1bb77f9e5.jpg?1789644215"
+      }
+    },
+    {
+      "name": "Avacyn, Angel of Horror",
+      "scryfallId": "ff65f46b-0f82-49b8-93b9-7ac0243ce941",
+      "twoFaced": false,
+      "oracleCardName": "Avacyn, Angel of Horror",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/f/ff65f46b-0f82-49b8-93b9-7ac0243ce941.jpg?1789644252",
+        "large": "https://cards.scryfall.io/large/front/f/f/ff65f46b-0f82-49b8-93b9-7ac0243ce941.jpg?1789644252",
+        "png": "https://cards.scryfall.io/png/front/f/f/ff65f46b-0f82-49b8-93b9-7ac0243ce941.png?1789644252",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/f/ff65f46b-0f82-49b8-93b9-7ac0243ce941.jpg?1789644252"
+      }
+    },
+    {
+      "name": "Jhoira, Weatherlight Corsair",
+      "scryfallId": "1874c58d-00ce-4973-a318-50ce21d1a675",
+      "twoFaced": false,
+      "oracleCardName": "Jhoira, Weatherlight Corsair",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/8/1874c58d-00ce-4973-a318-50ce21d1a675.jpg?1789644258",
+        "large": "https://cards.scryfall.io/large/front/1/8/1874c58d-00ce-4973-a318-50ce21d1a675.jpg?1789644258",
+        "png": "https://cards.scryfall.io/png/front/1/8/1874c58d-00ce-4973-a318-50ce21d1a675.png?1789644258",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/8/1874c58d-00ce-4973-a318-50ce21d1a675.jpg?1789644258"
+      }
+    },
+    {
+      "name": "Venser, Fervent Forger",
+      "scryfallId": "0de6353b-5c19-40f7-951a-2b600db21846",
+      "twoFaced": false,
+      "oracleCardName": "Venser, Fervent Forger",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/d/0de6353b-5c19-40f7-951a-2b600db21846.jpg?1790242646",
+        "large": "https://cards.scryfall.io/large/front/0/d/0de6353b-5c19-40f7-951a-2b600db21846.jpg?1790242646",
+        "png": "https://cards.scryfall.io/png/front/0/d/0de6353b-5c19-40f7-951a-2b600db21846.png?1790242646",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/d/0de6353b-5c19-40f7-951a-2b600db21846.jpg?1790242646"
+      }
+    },
+    {
+      "name": "Niv-Mizzet, Ghost Counsel",
+      "scryfallId": "0ad0e168-ac5c-4e1b-83f2-0488067a58d7",
+      "twoFaced": false,
+      "oracleCardName": "Niv-Mizzet, Ghost Counsel",
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/a/0ad0e168-ac5c-4e1b-83f2-0488067a58d7.jpg?1789644348",
+        "large": "https://cards.scryfall.io/large/front/0/a/0ad0e168-ac5c-4e1b-83f2-0488067a58d7.jpg?1789644348",
+        "png": "https://cards.scryfall.io/png/front/0/a/0ad0e168-ac5c-4e1b-83f2-0488067a58d7.png?1789644348",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/a/0ad0e168-ac5c-4e1b-83f2-0488067a58d7.jpg?1789644348"
+      }
+    },
+    {
+      "name": "Tamiyo, Upriser Crowned",
+      "scryfallId": "0d52b0fd-60a4-4e90-bc4a-3200493779d3",
+      "twoFaced": false,
+      "oracleCardName": "Tamiyo, Upriser Crowned",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/d/0d52b0fd-60a4-4e90-bc4a-3200493779d3.jpg?1789644358",
+        "large": "https://cards.scryfall.io/large/front/0/d/0d52b0fd-60a4-4e90-bc4a-3200493779d3.jpg?1789644358",
+        "png": "https://cards.scryfall.io/png/front/0/d/0d52b0fd-60a4-4e90-bc4a-3200493779d3.png?1789644358",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/d/0d52b0fd-60a4-4e90-bc4a-3200493779d3.jpg?1789644358"
+      }
+    },
+    {
+      "name": "The Ur-Sphinx",
+      "scryfallId": "d9e9d9a8-86c2-4e58-b818-466247725259",
+      "twoFaced": false,
+      "oracleCardName": "The Ur-Sphinx",
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/9/d9e9d9a8-86c2-4e58-b818-466247725259.jpg?1789644369",
+        "large": "https://cards.scryfall.io/large/front/d/9/d9e9d9a8-86c2-4e58-b818-466247725259.jpg?1789644369",
+        "png": "https://cards.scryfall.io/png/front/d/9/d9e9d9a8-86c2-4e58-b818-466247725259.png?1789644369",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/9/d9e9d9a8-86c2-4e58-b818-466247725259.jpg?1789644369"
+      }
+    },
+    {
+      "name": "Darksteel Angel",
+      "scryfallId": "0c33024e-9473-4d5b-8433-9898380282c4",
+      "twoFaced": false,
+      "oracleCardName": "Darksteel Angel",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact",
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/c/0c33024e-9473-4d5b-8433-9898380282c4.jpg?1784325693",
+        "large": "https://cards.scryfall.io/large/front/0/c/0c33024e-9473-4d5b-8433-9898380282c4.jpg?1784325693",
+        "png": "https://cards.scryfall.io/png/front/0/c/0c33024e-9473-4d5b-8433-9898380282c4.png?1784325693",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/c/0c33024e-9473-4d5b-8433-9898380282c4.jpg?1784325693"
+      }
+    },
+    {
+      "name": "Ginger, Queen of Sweets",
+      "scryfallId": "f4ff6bf9-89a9-4c2a-84a2-d4ceb7168adf",
+      "twoFaced": false,
+      "oracleCardName": "Ginger, Queen of Sweets",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact",
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/4/f4ff6bf9-89a9-4c2a-84a2-d4ceb7168adf.jpg?1790343341",
+        "large": "https://cards.scryfall.io/large/front/f/4/f4ff6bf9-89a9-4c2a-84a2-d4ceb7168adf.jpg?1790343341",
+        "png": "https://cards.scryfall.io/png/front/f/4/f4ff6bf9-89a9-4c2a-84a2-d4ceb7168adf.png?1790343341",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/4/f4ff6bf9-89a9-4c2a-84a2-d4ceb7168adf.jpg?1790343341"
+      }
+    },
+    {
+      "name": "Memnarch, the Warden",
+      "scryfallId": "60d05210-c2b1-4248-a470-e0f8123d33f8",
+      "twoFaced": false,
+      "oracleCardName": "Memnarch, the Warden",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact",
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/0/60d05210-c2b1-4248-a470-e0f8123d33f8.jpg?1789644424",
+        "large": "https://cards.scryfall.io/large/front/6/0/60d05210-c2b1-4248-a470-e0f8123d33f8.jpg?1789644424",
+        "png": "https://cards.scryfall.io/png/front/6/0/60d05210-c2b1-4248-a470-e0f8123d33f8.png?1789644424",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/0/60d05210-c2b1-4248-a470-e0f8123d33f8.jpg?1789644424"
+      }
+    },
+    {
+      "name": "Turbulent Crater",
+      "scryfallId": "0cb04417-063e-45f7-86d3-7648111d04d7",
+      "twoFaced": false,
+      "oracleCardName": "Turbulent Crater",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/c/0cb04417-063e-45f7-86d3-7648111d04d7.jpg?1789644165",
+        "large": "https://cards.scryfall.io/large/front/0/c/0cb04417-063e-45f7-86d3-7648111d04d7.jpg?1789644165",
+        "png": "https://cards.scryfall.io/png/front/0/c/0cb04417-063e-45f7-86d3-7648111d04d7.png?1789644165",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/c/0cb04417-063e-45f7-86d3-7648111d04d7.jpg?1789644165"
+      }
+    },
+    {
+      "name": "Turbulent Shore",
+      "scryfallId": "92039341-152a-4797-a3df-e89e8d5145d3",
+      "twoFaced": false,
+      "oracleCardName": "Turbulent Shore",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/9/2/92039341-152a-4797-a3df-e89e8d5145d3.jpg?1789644173",
+        "large": "https://cards.scryfall.io/large/front/9/2/92039341-152a-4797-a3df-e89e8d5145d3.jpg?1789644173",
+        "png": "https://cards.scryfall.io/png/front/9/2/92039341-152a-4797-a3df-e89e8d5145d3.png?1789644173",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/9/2/92039341-152a-4797-a3df-e89e8d5145d3.jpg?1789644173"
+      }
+    },
+    {
+      "name": "Turbulent Wetlands",
+      "scryfallId": "8d86f7f8-492d-4e19-8b61-39084c6299ac",
+      "twoFaced": false,
+      "oracleCardName": "Turbulent Wetlands",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/d/8d86f7f8-492d-4e19-8b61-39084c6299ac.jpg?1789644179",
+        "large": "https://cards.scryfall.io/large/front/8/d/8d86f7f8-492d-4e19-8b61-39084c6299ac.jpg?1789644179",
+        "png": "https://cards.scryfall.io/png/front/8/d/8d86f7f8-492d-4e19-8b61-39084c6299ac.png?1789644179",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/d/8d86f7f8-492d-4e19-8b61-39084c6299ac.jpg?1789644179"
+      }
+    },
+    {
+      "name": "Akroma, Angel of Fury",
+      "scryfallId": "2b5ac7bd-3788-4c8b-b945-c1105986807a",
+      "twoFaced": false,
+      "oracleCardName": "Akroma, Angel of Fury",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/b/2b5ac7bd-3788-4c8b-b945-c1105986807a.jpg?1789644294",
+        "large": "https://cards.scryfall.io/large/front/2/b/2b5ac7bd-3788-4c8b-b945-c1105986807a.jpg?1789644294",
+        "png": "https://cards.scryfall.io/png/front/2/b/2b5ac7bd-3788-4c8b-b945-c1105986807a.png?1789644294",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/b/2b5ac7bd-3788-4c8b-b945-c1105986807a.jpg?1789644294"
+      }
+    },
+    {
+      "name": "Reflecting Pool",
+      "scryfallId": "cbc4281a-b70d-4f96-b309-38e986484829",
+      "twoFaced": false,
+      "oracleCardName": "Reflecting Pool",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/b/cbc4281a-b70d-4f96-b309-38e986484829.jpg?1789644471",
+        "large": "https://cards.scryfall.io/large/front/c/b/cbc4281a-b70d-4f96-b309-38e986484829.jpg?1789644471",
+        "png": "https://cards.scryfall.io/png/front/c/b/cbc4281a-b70d-4f96-b309-38e986484829.png?1789644471",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/b/cbc4281a-b70d-4f96-b309-38e986484829.jpg?1789644471"
+      }
+    },
+    {
+      "name": "Elspeth, Sun's Champion",
+      "scryfallId": "a91d9163-c1f2-4eae-acab-5dabbc71d7d4",
+      "twoFaced": false,
+      "oracleCardName": "Elspeth, Sun's Champion",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Planeswalker"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/9/a91d9163-c1f2-4eae-acab-5dabbc71d7d4.jpg?1789613307",
+        "large": "https://cards.scryfall.io/large/front/a/9/a91d9163-c1f2-4eae-acab-5dabbc71d7d4.jpg?1789613307",
+        "png": "https://cards.scryfall.io/png/front/a/9/a91d9163-c1f2-4eae-acab-5dabbc71d7d4.png?1789613307",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/9/a91d9163-c1f2-4eae-acab-5dabbc71d7d4.jpg?1789613307"
+      }
+    },
+    {
+      "name": "Flawless Maneuver",
+      "scryfallId": "3ffe82a4-584e-4ebd-9551-a745bed01e26",
+      "twoFaced": false,
+      "oracleCardName": "Flawless Maneuver",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/3/f/3ffe82a4-584e-4ebd-9551-a745bed01e26.jpg?1789599786",
+        "large": "https://cards.scryfall.io/large/front/3/f/3ffe82a4-584e-4ebd-9551-a745bed01e26.jpg?1789599786",
+        "png": "https://cards.scryfall.io/png/front/3/f/3ffe82a4-584e-4ebd-9551-a745bed01e26.png?1789599786",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/3/f/3ffe82a4-584e-4ebd-9551-a745bed01e26.jpg?1789599786"
+      }
+    },
+    {
+      "name": "Grand Crescendo",
+      "scryfallId": "a60834b0-38ab-40c9-9fd9-db3a23b13076",
+      "twoFaced": false,
+      "oracleCardName": "Grand Crescendo",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/6/a60834b0-38ab-40c9-9fd9-db3a23b13076.jpg?1789599802",
+        "large": "https://cards.scryfall.io/large/front/a/6/a60834b0-38ab-40c9-9fd9-db3a23b13076.jpg?1789599802",
+        "png": "https://cards.scryfall.io/png/front/a/6/a60834b0-38ab-40c9-9fd9-db3a23b13076.png?1789599802",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/6/a60834b0-38ab-40c9-9fd9-db3a23b13076.jpg?1789599802"
+      }
+    },
+    {
+      "name": "Martial Coup",
+      "scryfallId": "5c4d0ad9-4d57-4e5c-b478-059220f5b1dd",
+      "twoFaced": false,
+      "oracleCardName": "Martial Coup",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Sorcery"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/5/c/5c4d0ad9-4d57-4e5c-b478-059220f5b1dd.jpg?1789599791",
+        "large": "https://cards.scryfall.io/large/front/5/c/5c4d0ad9-4d57-4e5c-b478-059220f5b1dd.jpg?1789599791",
+        "png": "https://cards.scryfall.io/png/front/5/c/5c4d0ad9-4d57-4e5c-b478-059220f5b1dd.png?1789599791",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/5/c/5c4d0ad9-4d57-4e5c-b478-059220f5b1dd.jpg?1789599791"
+      }
+    },
+    {
+      "name": "Overlord of the Mistmoors",
+      "scryfallId": "152d9e61-40f4-489a-b94d-af17a3674441",
+      "twoFaced": false,
+      "oracleCardName": "Overlord of the Mistmoors",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Enchantment",
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/5/152d9e61-40f4-489a-b94d-af17a3674441.jpg?1789599797",
+        "large": "https://cards.scryfall.io/large/front/1/5/152d9e61-40f4-489a-b94d-af17a3674441.jpg?1789599797",
+        "png": "https://cards.scryfall.io/png/front/1/5/152d9e61-40f4-489a-b94d-af17a3674441.png?1789599797",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/5/152d9e61-40f4-489a-b94d-af17a3674441.jpg?1789599797"
+      }
+    },
+    {
+      "name": "Secure the Wastes",
+      "scryfallId": "83a01121-e5cd-45ba-97c2-7bd7d50158e6",
+      "twoFaced": false,
+      "oracleCardName": "Secure the Wastes",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/3/83a01121-e5cd-45ba-97c2-7bd7d50158e6.jpg?1789599800",
+        "large": "https://cards.scryfall.io/large/front/8/3/83a01121-e5cd-45ba-97c2-7bd7d50158e6.jpg?1789599800",
+        "png": "https://cards.scryfall.io/png/front/8/3/83a01121-e5cd-45ba-97c2-7bd7d50158e6.png?1789599800",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/3/83a01121-e5cd-45ba-97c2-7bd7d50158e6.jpg?1789599800"
+      }
+    },
+    {
+      "name": "Serra's Emissary",
+      "scryfallId": "0a69b668-7b7c-4da9-af49-e8cbc13797cc",
+      "twoFaced": false,
+      "oracleCardName": "Serra's Emissary",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/a/0a69b668-7b7c-4da9-af49-e8cbc13797cc.jpg?1789599789",
+        "large": "https://cards.scryfall.io/large/front/0/a/0a69b668-7b7c-4da9-af49-e8cbc13797cc.jpg?1789599789",
+        "png": "https://cards.scryfall.io/png/front/0/a/0a69b668-7b7c-4da9-af49-e8cbc13797cc.png?1789599789",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/a/0a69b668-7b7c-4da9-af49-e8cbc13797cc.jpg?1789599789"
+      }
+    },
+    {
+      "name": "Skrelv's Hive",
+      "scryfallId": "e2652c4d-38a7-4014-94bb-7efd277de992",
+      "twoFaced": false,
+      "oracleCardName": "Skrelv's Hive",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Enchantment"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/2/e2652c4d-38a7-4014-94bb-7efd277de992.jpg?1789599795",
+        "large": "https://cards.scryfall.io/large/front/e/2/e2652c4d-38a7-4014-94bb-7efd277de992.jpg?1789599795",
+        "png": "https://cards.scryfall.io/png/front/e/2/e2652c4d-38a7-4014-94bb-7efd277de992.png?1789599795",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/2/e2652c4d-38a7-4014-94bb-7efd277de992.jpg?1789599795"
+      }
+    },
+    {
+      "name": "Staff of the Storyteller",
+      "scryfallId": "f9321060-c1bf-4190-aaf6-253d6df64237",
+      "twoFaced": false,
+      "oracleCardName": "Staff of the Storyteller",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/9/f9321060-c1bf-4190-aaf6-253d6df64237.jpg?1789599795",
+        "large": "https://cards.scryfall.io/large/front/f/9/f9321060-c1bf-4190-aaf6-253d6df64237.jpg?1789599795",
+        "png": "https://cards.scryfall.io/png/front/f/9/f9321060-c1bf-4190-aaf6-253d6df64237.png?1789599795",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/9/f9321060-c1bf-4190-aaf6-253d6df64237.jpg?1789599795"
+      }
+    },
+    {
+      "name": "Sunfall",
+      "scryfallId": "a560b9a7-4c00-4c0c-b63d-774d3f6b9aa9",
+      "twoFaced": false,
+      "oracleCardName": "Sunfall",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Sorcery"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/5/a560b9a7-4c00-4c0c-b63d-774d3f6b9aa9.jpg?1789611521",
+        "large": "https://cards.scryfall.io/large/front/a/5/a560b9a7-4c00-4c0c-b63d-774d3f6b9aa9.jpg?1789611521",
+        "png": "https://cards.scryfall.io/png/front/a/5/a560b9a7-4c00-4c0c-b63d-774d3f6b9aa9.png?1789611521",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/5/a560b9a7-4c00-4c0c-b63d-774d3f6b9aa9.jpg?1789611521"
+      }
+    },
+    {
+      "name": "White Sun's Twilight",
+      "scryfallId": "ae7a778c-f4a7-447f-90f0-146997e03398",
+      "twoFaced": false,
+      "oracleCardName": "White Sun's Twilight",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Sorcery"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/e/ae7a778c-f4a7-447f-90f0-146997e03398.jpg?1789599802",
+        "large": "https://cards.scryfall.io/large/front/a/e/ae7a778c-f4a7-447f-90f0-146997e03398.jpg?1789599802",
+        "png": "https://cards.scryfall.io/png/front/a/e/ae7a778c-f4a7-447f-90f0-146997e03398.png?1789599802",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/e/ae7a778c-f4a7-447f-90f0-146997e03398.jpg?1789599802"
+      }
+    },
+    {
+      "name": "Mass Polymorph",
+      "scryfallId": "b29db023-28d0-411d-864a-8f1e22ae1f74",
+      "twoFaced": false,
+      "oracleCardName": "Mass Polymorph",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Sorcery"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/2/b29db023-28d0-411d-864a-8f1e22ae1f74.jpg?1789599820",
+        "large": "https://cards.scryfall.io/large/front/b/2/b29db023-28d0-411d-864a-8f1e22ae1f74.jpg?1789599820",
+        "png": "https://cards.scryfall.io/png/front/b/2/b29db023-28d0-411d-864a-8f1e22ae1f74.png?1789599820",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/2/b29db023-28d0-411d-864a-8f1e22ae1f74.jpg?1789599820"
+      }
+    },
+    {
+      "name": "Occult Epiphany",
+      "scryfallId": "e5fcfaff-2fd0-46d8-b863-ad25558c9e95",
+      "twoFaced": false,
+      "oracleCardName": "Occult Epiphany",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/5/e5fcfaff-2fd0-46d8-b863-ad25558c9e95.jpg?1789599813",
+        "large": "https://cards.scryfall.io/large/front/e/5/e5fcfaff-2fd0-46d8-b863-ad25558c9e95.jpg?1789599813",
+        "png": "https://cards.scryfall.io/png/front/e/5/e5fcfaff-2fd0-46d8-b863-ad25558c9e95.png?1789599813",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/5/e5fcfaff-2fd0-46d8-b863-ad25558c9e95.jpg?1789599813"
+      }
+    },
+    {
+      "name": "Shark Typhoon",
+      "scryfallId": "605ca3c0-7c9a-4bc1-9795-82aeb6f552ee",
+      "twoFaced": false,
+      "oracleCardName": "Shark Typhoon",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Enchantment"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/6/0/605ca3c0-7c9a-4bc1-9795-82aeb6f552ee.jpg?1789599836",
+        "large": "https://cards.scryfall.io/large/front/6/0/605ca3c0-7c9a-4bc1-9795-82aeb6f552ee.jpg?1789599836",
+        "png": "https://cards.scryfall.io/png/front/6/0/605ca3c0-7c9a-4bc1-9795-82aeb6f552ee.png?1789599836",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/6/0/605ca3c0-7c9a-4bc1-9795-82aeb6f552ee.jpg?1789599836"
+      }
+    },
+    {
+      "name": "Synthetic Destiny",
+      "scryfallId": "78ab1d69-da01-424b-9d09-ef985aef4cbd",
+      "twoFaced": false,
+      "oracleCardName": "Synthetic Destiny",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/7/8/78ab1d69-da01-424b-9d09-ef985aef4cbd.jpg?1789599820",
+        "large": "https://cards.scryfall.io/large/front/7/8/78ab1d69-da01-424b-9d09-ef985aef4cbd.jpg?1789599820",
+        "png": "https://cards.scryfall.io/png/front/7/8/78ab1d69-da01-424b-9d09-ef985aef4cbd.png?1789599820",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/8/78ab1d69-da01-424b-9d09-ef985aef4cbd.jpg?1789599820"
+      }
+    },
+    {
+      "name": "Archfiend of Despair",
+      "scryfallId": "137b69ad-3296-49f1-bddf-24818a03830f",
+      "twoFaced": false,
+      "oracleCardName": "Archfiend of Despair",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/3/137b69ad-3296-49f1-bddf-24818a03830f.jpg?1789599815",
+        "large": "https://cards.scryfall.io/large/front/1/3/137b69ad-3296-49f1-bddf-24818a03830f.jpg?1789599815",
+        "png": "https://cards.scryfall.io/png/front/1/3/137b69ad-3296-49f1-bddf-24818a03830f.png?1789599815",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/3/137b69ad-3296-49f1-bddf-24818a03830f.jpg?1789599815"
+      }
+    },
+    {
+      "name": "Archon of Cruelty",
+      "scryfallId": "95ff951b-a098-409c-86c8-373b6c9f8331",
+      "twoFaced": false,
+      "oracleCardName": "Archon of Cruelty",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Creature"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/9/5/95ff951b-a098-409c-86c8-373b6c9f8331.jpg?1789599818",
+        "large": "https://cards.scryfall.io/large/front/9/5/95ff951b-a098-409c-86c8-373b6c9f8331.jpg?1789599818",
+        "png": "https://cards.scryfall.io/png/front/9/5/95ff951b-a098-409c-86c8-373b6c9f8331.png?1789599818",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/9/5/95ff951b-a098-409c-86c8-373b6c9f8331.jpg?1789599818"
+      }
+    },
+    {
+      "name": "Dreadhorde Invasion",
+      "scryfallId": "9bbfad2d-a3b5-4119-aea4-0793b7a9da88",
+      "twoFaced": false,
+      "oracleCardName": "Dreadhorde Invasion",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Enchantment"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/9/b/9bbfad2d-a3b5-4119-aea4-0793b7a9da88.jpg?1789599825",
+        "large": "https://cards.scryfall.io/large/front/9/b/9bbfad2d-a3b5-4119-aea4-0793b7a9da88.jpg?1789599825",
+        "png": "https://cards.scryfall.io/png/front/9/b/9bbfad2d-a3b5-4119-aea4-0793b7a9da88.png?1789599825",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/9/b/9bbfad2d-a3b5-4119-aea4-0793b7a9da88.jpg?1789599825"
+      }
+    },
+    {
+      "name": "Cursed Mirror",
+      "scryfallId": "1e82aa17-1eac-49e8-8a63-50357e564997",
+      "twoFaced": false,
+      "oracleCardName": "Cursed Mirror",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/e/1e82aa17-1eac-49e8-8a63-50357e564997.jpg?1789599820",
+        "large": "https://cards.scryfall.io/large/front/1/e/1e82aa17-1eac-49e8-8a63-50357e564997.jpg?1789599820",
+        "png": "https://cards.scryfall.io/png/front/1/e/1e82aa17-1eac-49e8-8a63-50357e564997.png?1789599820",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/e/1e82aa17-1eac-49e8-8a63-50357e564997.jpg?1789599820"
+      }
+    },
+    {
+      "name": "Whirlwind of Thought",
+      "scryfallId": "e1de5fb8-7206-44a6-b827-5c6a21c25296",
+      "twoFaced": false,
+      "oracleCardName": "Whirlwind of Thought",
+      "colorIdentity": [
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Enchantment"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/1/e1de5fb8-7206-44a6-b827-5c6a21c25296.jpg?1789599828",
+        "large": "https://cards.scryfall.io/large/front/e/1/e1de5fb8-7206-44a6-b827-5c6a21c25296.jpg?1789599828",
+        "png": "https://cards.scryfall.io/png/front/e/1/e1de5fb8-7206-44a6-b827-5c6a21c25296.png?1789599828",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/1/e1de5fb8-7206-44a6-b827-5c6a21c25296.jpg?1789599828"
+      }
+    },
+    {
+      "name": "Windcrag Siege",
+      "scryfallId": "235f5564-0928-411f-ade8-53838890f720",
+      "twoFaced": false,
+      "oracleCardName": "Windcrag Siege",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Enchantment"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/3/235f5564-0928-411f-ade8-53838890f720.jpg?1789599828",
+        "large": "https://cards.scryfall.io/large/front/2/3/235f5564-0928-411f-ade8-53838890f720.jpg?1789599828",
+        "png": "https://cards.scryfall.io/png/front/2/3/235f5564-0928-411f-ade8-53838890f720.png?1789599828",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/3/235f5564-0928-411f-ade8-53838890f720.jpg?1789599828"
+      }
+    },
+    {
+      "name": "Chromatic Lantern",
+      "scryfallId": "424c40b0-49d8-4a6f-a0ef-545738224ec9",
+      "twoFaced": false,
+      "oracleCardName": "Chromatic Lantern",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/4/2/424c40b0-49d8-4a6f-a0ef-545738224ec9.jpg?1789599834",
+        "large": "https://cards.scryfall.io/large/front/4/2/424c40b0-49d8-4a6f-a0ef-545738224ec9.jpg?1789599834",
+        "png": "https://cards.scryfall.io/png/front/4/2/424c40b0-49d8-4a6f-a0ef-545738224ec9.png?1789599834",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/4/2/424c40b0-49d8-4a6f-a0ef-545738224ec9.jpg?1789599834"
+      }
+    },
+    {
+      "name": "Currency Converter",
+      "scryfallId": "f91b18ef-ac8a-4d4c-9586-b101681d33e2",
+      "twoFaced": false,
+      "oracleCardName": "Currency Converter",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/9/f91b18ef-ac8a-4d4c-9586-b101681d33e2.jpg?1789599836",
+        "large": "https://cards.scryfall.io/large/front/f/9/f91b18ef-ac8a-4d4c-9586-b101681d33e2.jpg?1789599836",
+        "png": "https://cards.scryfall.io/png/front/f/9/f91b18ef-ac8a-4d4c-9586-b101681d33e2.png?1789599836",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/9/f91b18ef-ac8a-4d4c-9586-b101681d33e2.jpg?1789599836"
+      }
+    },
+    {
+      "name": "Proteus Staff",
+      "scryfallId": "e6fcedb4-4152-47c3-a97e-34f4483ff94d",
+      "twoFaced": false,
+      "oracleCardName": "Proteus Staff",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/6/e6fcedb4-4152-47c3-a97e-34f4483ff94d.jpg?1789599838",
+        "large": "https://cards.scryfall.io/large/front/e/6/e6fcedb4-4152-47c3-a97e-34f4483ff94d.jpg?1789599838",
+        "png": "https://cards.scryfall.io/png/front/e/6/e6fcedb4-4152-47c3-a97e-34f4483ff94d.png?1789599838",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/6/e6fcedb4-4152-47c3-a97e-34f4483ff94d.jpg?1789599838"
+      }
+    },
+    {
+      "name": "Battlefield Forge",
+      "scryfallId": "ef7d3676-b1db-4329-9201-18f8a6c54ea6",
+      "twoFaced": false,
+      "oracleCardName": "Battlefield Forge",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/f/ef7d3676-b1db-4329-9201-18f8a6c54ea6.jpg?1789599856",
+        "large": "https://cards.scryfall.io/large/front/e/f/ef7d3676-b1db-4329-9201-18f8a6c54ea6.jpg?1789599856",
+        "png": "https://cards.scryfall.io/png/front/e/f/ef7d3676-b1db-4329-9201-18f8a6c54ea6.png?1789599856",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/f/ef7d3676-b1db-4329-9201-18f8a6c54ea6.jpg?1789599856"
+      }
+    },
+    {
+      "name": "Caves of Koilos",
+      "scryfallId": "ca814c7c-9908-4727-b556-3f85bfd653ca",
+      "twoFaced": false,
+      "oracleCardName": "Caves of Koilos",
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/a/ca814c7c-9908-4727-b556-3f85bfd653ca.jpg?1789599896",
+        "large": "https://cards.scryfall.io/large/front/c/a/ca814c7c-9908-4727-b556-3f85bfd653ca.jpg?1789599896",
+        "png": "https://cards.scryfall.io/png/front/c/a/ca814c7c-9908-4727-b556-3f85bfd653ca.png?1789599896",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/a/ca814c7c-9908-4727-b556-3f85bfd653ca.jpg?1789599896"
+      }
+    },
+    {
+      "name": "Clifftop Retreat",
+      "scryfallId": "cd112d5c-102f-45a6-b26c-f80cc97d4df2",
+      "twoFaced": false,
+      "oracleCardName": "Clifftop Retreat",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/d/cd112d5c-102f-45a6-b26c-f80cc97d4df2.jpg?1789599889",
+        "large": "https://cards.scryfall.io/large/front/c/d/cd112d5c-102f-45a6-b26c-f80cc97d4df2.jpg?1789599889",
+        "png": "https://cards.scryfall.io/png/front/c/d/cd112d5c-102f-45a6-b26c-f80cc97d4df2.png?1789599889",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/d/cd112d5c-102f-45a6-b26c-f80cc97d4df2.jpg?1789599889"
+      }
+    },
+    {
+      "name": "Drowned Catacomb",
+      "scryfallId": "4acb0f92-74be-40e8-b70e-61c4aaaeb47b",
+      "twoFaced": false,
+      "oracleCardName": "Drowned Catacomb",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/4/a/4acb0f92-74be-40e8-b70e-61c4aaaeb47b.jpg?1789599912",
+        "large": "https://cards.scryfall.io/large/front/4/a/4acb0f92-74be-40e8-b70e-61c4aaaeb47b.jpg?1789599912",
+        "png": "https://cards.scryfall.io/png/front/4/a/4acb0f92-74be-40e8-b70e-61c4aaaeb47b.png?1789599912",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/4/a/4acb0f92-74be-40e8-b70e-61c4aaaeb47b.jpg?1789599912"
+      }
+    },
+    {
+      "name": "Exotic Orchard",
+      "scryfallId": "cc14b1ee-5def-42df-8ef6-0d91dba39e3a",
+      "twoFaced": false,
+      "oracleCardName": "Exotic Orchard",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/c/cc14b1ee-5def-42df-8ef6-0d91dba39e3a.jpg?1789599911",
+        "large": "https://cards.scryfall.io/large/front/c/c/cc14b1ee-5def-42df-8ef6-0d91dba39e3a.jpg?1789599911",
+        "png": "https://cards.scryfall.io/png/front/c/c/cc14b1ee-5def-42df-8ef6-0d91dba39e3a.png?1789599911",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/c/cc14b1ee-5def-42df-8ef6-0d91dba39e3a.jpg?1789599911"
+      }
+    },
+    {
+      "name": "Fabled Passage",
+      "scryfallId": "76edd22f-808e-4a7c-b941-13c0f5e30418",
+      "twoFaced": false,
+      "oracleCardName": "Fabled Passage",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/7/6/76edd22f-808e-4a7c-b941-13c0f5e30418.jpg?1789599905",
+        "large": "https://cards.scryfall.io/large/front/7/6/76edd22f-808e-4a7c-b941-13c0f5e30418.jpg?1789599905",
+        "png": "https://cards.scryfall.io/png/front/7/6/76edd22f-808e-4a7c-b941-13c0f5e30418.png?1789599905",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/6/76edd22f-808e-4a7c-b941-13c0f5e30418.jpg?1789599905"
+      }
+    },
+    {
+      "name": "Fetid Heath",
+      "scryfallId": "ae07ff9f-d5a8-4220-b08f-fe8fad5adcb7",
+      "twoFaced": false,
+      "oracleCardName": "Fetid Heath",
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/e/ae07ff9f-d5a8-4220-b08f-fe8fad5adcb7.jpg?1789599906",
+        "large": "https://cards.scryfall.io/large/front/a/e/ae07ff9f-d5a8-4220-b08f-fe8fad5adcb7.jpg?1789599906",
+        "png": "https://cards.scryfall.io/png/front/a/e/ae07ff9f-d5a8-4220-b08f-fe8fad5adcb7.png?1789599906",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/e/ae07ff9f-d5a8-4220-b08f-fe8fad5adcb7.jpg?1789599906"
+      }
+    },
+    {
+      "name": "Glacial Fortress",
+      "scryfallId": "3c726a60-8de7-4d5e-8ad5-8405e6ac36b5",
+      "twoFaced": false,
+      "oracleCardName": "Glacial Fortress",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/3/c/3c726a60-8de7-4d5e-8ad5-8405e6ac36b5.jpg?1789599901",
+        "large": "https://cards.scryfall.io/large/front/3/c/3c726a60-8de7-4d5e-8ad5-8405e6ac36b5.jpg?1789599901",
+        "png": "https://cards.scryfall.io/png/front/3/c/3c726a60-8de7-4d5e-8ad5-8405e6ac36b5.png?1789599901",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/3/c/3c726a60-8de7-4d5e-8ad5-8405e6ac36b5.jpg?1789599901"
+      }
+    },
+    {
+      "name": "Isolated Chapel",
+      "scryfallId": "b3169b9a-f5e3-402e-883a-08274d0c7b12",
+      "twoFaced": false,
+      "oracleCardName": "Isolated Chapel",
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/3/b3169b9a-f5e3-402e-883a-08274d0c7b12.jpg?1789599905",
+        "large": "https://cards.scryfall.io/large/front/b/3/b3169b9a-f5e3-402e-883a-08274d0c7b12.jpg?1789599905",
+        "png": "https://cards.scryfall.io/png/front/b/3/b3169b9a-f5e3-402e-883a-08274d0c7b12.png?1789599905",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/3/b3169b9a-f5e3-402e-883a-08274d0c7b12.jpg?1789599905"
+      }
+    },
+    {
+      "name": "Kher Keep",
+      "scryfallId": "15ca0b68-33a1-4d25-b622-d3f5ba05b0a5",
+      "twoFaced": false,
+      "oracleCardName": "Kher Keep",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/5/15ca0b68-33a1-4d25-b622-d3f5ba05b0a5.jpg?1789599901",
+        "large": "https://cards.scryfall.io/large/front/1/5/15ca0b68-33a1-4d25-b622-d3f5ba05b0a5.jpg?1789599901",
+        "png": "https://cards.scryfall.io/png/front/1/5/15ca0b68-33a1-4d25-b622-d3f5ba05b0a5.png?1789599901",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/5/15ca0b68-33a1-4d25-b622-d3f5ba05b0a5.jpg?1789599901"
+      }
+    },
+    {
+      "name": "Mystic Gate",
+      "scryfallId": "fa32d90e-1153-42ab-b8ff-0eb82698692c",
+      "twoFaced": false,
+      "oracleCardName": "Mystic Gate",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/a/fa32d90e-1153-42ab-b8ff-0eb82698692c.jpg?1789599906",
+        "large": "https://cards.scryfall.io/large/front/f/a/fa32d90e-1153-42ab-b8ff-0eb82698692c.jpg?1789599906",
+        "png": "https://cards.scryfall.io/png/front/f/a/fa32d90e-1153-42ab-b8ff-0eb82698692c.png?1789599906",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/a/fa32d90e-1153-42ab-b8ff-0eb82698692c.jpg?1789599906"
+      }
+    },
+    {
+      "name": "Prairie Stream",
+      "scryfallId": "a93c2e0b-3fca-476e-ae5b-a331ccacae19",
+      "twoFaced": false,
+      "oracleCardName": "Prairie Stream",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/9/a93c2e0b-3fca-476e-ae5b-a331ccacae19.jpg?1789599913",
+        "large": "https://cards.scryfall.io/large/front/a/9/a93c2e0b-3fca-476e-ae5b-a331ccacae19.jpg?1789599913",
+        "png": "https://cards.scryfall.io/png/front/a/9/a93c2e0b-3fca-476e-ae5b-a331ccacae19.png?1789599913",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/9/a93c2e0b-3fca-476e-ae5b-a331ccacae19.jpg?1789599913"
+      }
+    },
+    {
+      "name": "Radiant Summit",
+      "scryfallId": "f8cd6aae-a1cb-43b1-aca9-09fe2778969f",
+      "twoFaced": false,
+      "oracleCardName": "Radiant Summit",
+      "colorIdentity": [
+        "R",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/8/f8cd6aae-a1cb-43b1-aca9-09fe2778969f.jpg?1790063310",
+        "large": "https://cards.scryfall.io/large/front/f/8/f8cd6aae-a1cb-43b1-aca9-09fe2778969f.jpg?1790063310",
+        "png": "https://cards.scryfall.io/png/front/f/8/f8cd6aae-a1cb-43b1-aca9-09fe2778969f.png?1790063310",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/8/f8cd6aae-a1cb-43b1-aca9-09fe2778969f.jpg?1790063310"
+      }
+    },
+    {
+      "name": "Restless Anchorage",
+      "scryfallId": "109900a9-6dcb-4f89-b84c-0ce0a0175e8f",
+      "twoFaced": false,
+      "oracleCardName": "Restless Anchorage",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/0/109900a9-6dcb-4f89-b84c-0ce0a0175e8f.jpg?1789599913",
+        "large": "https://cards.scryfall.io/large/front/1/0/109900a9-6dcb-4f89-b84c-0ce0a0175e8f.jpg?1789599913",
+        "png": "https://cards.scryfall.io/png/front/1/0/109900a9-6dcb-4f89-b84c-0ce0a0175e8f.png?1789599913",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/0/109900a9-6dcb-4f89-b84c-0ce0a0175e8f.jpg?1789599913"
+      }
+    },
+    {
+      "name": "Restless Spire",
+      "scryfallId": "30ecfd44-8dd4-4ae3-9076-14799f8a9a14",
+      "twoFaced": false,
+      "oracleCardName": "Restless Spire",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/3/0/30ecfd44-8dd4-4ae3-9076-14799f8a9a14.jpg?1789599918",
+        "large": "https://cards.scryfall.io/large/front/3/0/30ecfd44-8dd4-4ae3-9076-14799f8a9a14.jpg?1789599918",
+        "png": "https://cards.scryfall.io/png/front/3/0/30ecfd44-8dd4-4ae3-9076-14799f8a9a14.png?1789599918",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/3/0/30ecfd44-8dd4-4ae3-9076-14799f8a9a14.jpg?1789599918"
+      }
+    },
+    {
+      "name": "Shivan Reef",
+      "scryfallId": "9fb3938c-9ecf-46cc-865a-0091455419f9",
+      "twoFaced": false,
+      "oracleCardName": "Shivan Reef",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/9/f/9fb3938c-9ecf-46cc-865a-0091455419f9.jpg?1789599919",
+        "large": "https://cards.scryfall.io/large/front/9/f/9fb3938c-9ecf-46cc-865a-0091455419f9.jpg?1789599919",
+        "png": "https://cards.scryfall.io/png/front/9/f/9fb3938c-9ecf-46cc-865a-0091455419f9.png?1789599919",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/9/f/9fb3938c-9ecf-46cc-865a-0091455419f9.jpg?1789599919"
+      }
+    },
+    {
+      "name": "Sulfur Falls",
+      "scryfallId": "2b20fa73-c6de-49c1-b3d0-6ebd543a00d0",
+      "twoFaced": false,
+      "oracleCardName": "Sulfur Falls",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/b/2b20fa73-c6de-49c1-b3d0-6ebd543a00d0.jpg?1789599921",
+        "large": "https://cards.scryfall.io/large/front/2/b/2b20fa73-c6de-49c1-b3d0-6ebd543a00d0.jpg?1789599921",
+        "png": "https://cards.scryfall.io/png/front/2/b/2b20fa73-c6de-49c1-b3d0-6ebd543a00d0.png?1789599921",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/b/2b20fa73-c6de-49c1-b3d0-6ebd543a00d0.jpg?1789599921"
+      }
+    },
+    {
+      "name": "Sulfurous Springs",
+      "scryfallId": "be340a1c-f1e7-446e-ae91-86ecb884479c",
+      "twoFaced": false,
+      "oracleCardName": "Sulfurous Springs",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/e/be340a1c-f1e7-446e-ae91-86ecb884479c.jpg?1789599923",
+        "large": "https://cards.scryfall.io/large/front/b/e/be340a1c-f1e7-446e-ae91-86ecb884479c.jpg?1789599923",
+        "png": "https://cards.scryfall.io/png/front/b/e/be340a1c-f1e7-446e-ae91-86ecb884479c.png?1789599923",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/e/be340a1c-f1e7-446e-ae91-86ecb884479c.jpg?1789599923"
+      }
+    },
+    {
+      "name": "Sunken Ruins",
+      "scryfallId": "b8652a52-d9f6-42ad-9746-6827845b540e",
+      "twoFaced": false,
+      "oracleCardName": "Sunken Ruins",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/8/b8652a52-d9f6-42ad-9746-6827845b540e.jpg?1789599920",
+        "large": "https://cards.scryfall.io/large/front/b/8/b8652a52-d9f6-42ad-9746-6827845b540e.jpg?1789599920",
+        "png": "https://cards.scryfall.io/png/front/b/8/b8652a52-d9f6-42ad-9746-6827845b540e.png?1789599920",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/8/b8652a52-d9f6-42ad-9746-6827845b540e.jpg?1789599920"
+      }
+    },
+    {
+      "name": "Underground River",
+      "scryfallId": "e8b05f37-815f-4854-bf82-ca544ca67532",
+      "twoFaced": false,
+      "oracleCardName": "Underground River",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/8/e8b05f37-815f-4854-bf82-ca544ca67532.jpg?1789599935",
+        "large": "https://cards.scryfall.io/large/front/e/8/e8b05f37-815f-4854-bf82-ca544ca67532.jpg?1789599935",
+        "png": "https://cards.scryfall.io/png/front/e/8/e8b05f37-815f-4854-bf82-ca544ca67532.png?1789599935",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/8/e8b05f37-815f-4854-bf82-ca544ca67532.jpg?1789599935"
+      }
+    },
+    {
+      "name": "Plan for All Outcomes",
+      "scryfallId": "c4effc17-0d0e-423a-b5f2-597ea6c71f67",
+      "twoFaced": false,
+      "oracleCardName": "Plan for All Outcomes",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Enchantment"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/4/c4effc17-0d0e-423a-b5f2-597ea6c71f67.jpg?1790746542",
+        "large": "https://cards.scryfall.io/large/front/c/4/c4effc17-0d0e-423a-b5f2-597ea6c71f67.jpg?1790746542",
+        "png": "https://cards.scryfall.io/png/front/c/4/c4effc17-0d0e-423a-b5f2-597ea6c71f67.png?1790746542",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/4/c4effc17-0d0e-423a-b5f2-597ea6c71f67.jpg?1790746542"
+      }
+    },
+    {
+      "name": "Fatehold Charm",
+      "scryfallId": "cfc54011-647e-4428-bcdb-59400e1da49d",
+      "twoFaced": false,
+      "oracleCardName": "Fatehold Charm",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/f/cfc54011-647e-4428-bcdb-59400e1da49d.jpg?1789127637",
+        "large": "https://cards.scryfall.io/large/front/c/f/cfc54011-647e-4428-bcdb-59400e1da49d.jpg?1789127637",
+        "png": "https://cards.scryfall.io/png/front/c/f/cfc54011-647e-4428-bcdb-59400e1da49d.png?1789127637",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/f/cfc54011-647e-4428-bcdb-59400e1da49d.jpg?1789127637"
+      }
+    },
+    {
+      "name": "Arcane Signet",
+      "scryfallId": "c6b6117c-faab-4bbb-b851-07bd8061ef03",
+      "twoFaced": false,
+      "oracleCardName": "Arcane Signet",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/6/c6b6117c-faab-4bbb-b851-07bd8061ef03.jpg?1789644435",
+        "large": "https://cards.scryfall.io/large/front/c/6/c6b6117c-faab-4bbb-b851-07bd8061ef03.jpg?1789644435",
+        "png": "https://cards.scryfall.io/png/front/c/6/c6b6117c-faab-4bbb-b851-07bd8061ef03.png?1789644435",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/6/c6b6117c-faab-4bbb-b851-07bd8061ef03.jpg?1789644435"
+      }
+    },
+    {
+      "name": "Sol Ring",
+      "scryfallId": "8ee443cc-e17a-493b-9c93-1f9e141a30e4",
+      "twoFaced": false,
+      "oracleCardName": "Sol Ring",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/8/e/8ee443cc-e17a-493b-9c93-1f9e141a30e4.jpg?1789644446",
+        "large": "https://cards.scryfall.io/large/front/8/e/8ee443cc-e17a-493b-9c93-1f9e141a30e4.jpg?1789644446",
+        "png": "https://cards.scryfall.io/png/front/8/e/8ee443cc-e17a-493b-9c93-1f9e141a30e4.png?1789644446",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/e/8ee443cc-e17a-493b-9c93-1f9e141a30e4.jpg?1789644446"
+      }
+    },
+    {
+      "name": "Command Tower",
+      "scryfallId": "1ac6cb62-45da-4e9a-84c6-09e6eacf0664",
+      "twoFaced": false,
+      "oracleCardName": "Command Tower",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/a/1ac6cb62-45da-4e9a-84c6-09e6eacf0664.jpg?1789644465",
+        "large": "https://cards.scryfall.io/large/front/1/a/1ac6cb62-45da-4e9a-84c6-09e6eacf0664.jpg?1789644465",
+        "png": "https://cards.scryfall.io/png/front/1/a/1ac6cb62-45da-4e9a-84c6-09e6eacf0664.png?1789644465",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/a/1ac6cb62-45da-4e9a-84c6-09e6eacf0664.jpg?1789644465"
+      }
+    },
+    {
+      "name": "Lingering Souls",
+      "scryfallId": "e5b16141-d185-4be2-97c1-5b0ef5483728",
+      "twoFaced": false,
+      "oracleCardName": "Lingering Souls",
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Sorcery"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/5/e5b16141-d185-4be2-97c1-5b0ef5483728.jpg?1789599791",
+        "large": "https://cards.scryfall.io/large/front/e/5/e5b16141-d185-4be2-97c1-5b0ef5483728.jpg?1789599791",
+        "png": "https://cards.scryfall.io/png/front/e/5/e5b16141-d185-4be2-97c1-5b0ef5483728.png?1789599791",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/5/e5b16141-d185-4be2-97c1-5b0ef5483728.jpg?1789599791"
+      }
+    },
+    {
+      "name": "Path to Exile",
+      "scryfallId": "22e08a78-55b7-46b0-bd1a-a51548fc1861",
+      "twoFaced": false,
+      "oracleCardName": "Path to Exile",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/2/22e08a78-55b7-46b0-bd1a-a51548fc1861.jpg?1789599789",
+        "large": "https://cards.scryfall.io/large/front/2/2/22e08a78-55b7-46b0-bd1a-a51548fc1861.jpg?1789599789",
+        "png": "https://cards.scryfall.io/png/front/2/2/22e08a78-55b7-46b0-bd1a-a51548fc1861.png?1789599789",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/2/22e08a78-55b7-46b0-bd1a-a51548fc1861.jpg?1789599789"
+      }
+    },
+    {
+      "name": "Stroke of Midnight",
+      "scryfallId": "d42b9f9e-2df2-491e-b6ac-3b2bac8a8d8e",
+      "twoFaced": false,
+      "oracleCardName": "Stroke of Midnight",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/4/d42b9f9e-2df2-491e-b6ac-3b2bac8a8d8e.jpg?1789599799",
+        "large": "https://cards.scryfall.io/large/front/d/4/d42b9f9e-2df2-491e-b6ac-3b2bac8a8d8e.jpg?1789599799",
+        "png": "https://cards.scryfall.io/png/front/d/4/d42b9f9e-2df2-491e-b6ac-3b2bac8a8d8e.png?1789599799",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/4/d42b9f9e-2df2-491e-b6ac-3b2bac8a8d8e.jpg?1789599799"
+      }
+    },
+    {
+      "name": "Swords to Plowshares",
+      "scryfallId": "f7e12477-d59f-442b-a678-1be746d0b7be",
+      "twoFaced": false,
+      "oracleCardName": "Swords to Plowshares",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/7/f7e12477-d59f-442b-a678-1be746d0b7be.jpg?1789599810",
+        "large": "https://cards.scryfall.io/large/front/f/7/f7e12477-d59f-442b-a678-1be746d0b7be.jpg?1789599810",
+        "png": "https://cards.scryfall.io/png/front/f/7/f7e12477-d59f-442b-a678-1be746d0b7be.png?1789599810",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/7/f7e12477-d59f-442b-a678-1be746d0b7be.jpg?1789599810"
+      }
+    },
+    {
+      "name": "Brainstorm",
+      "scryfallId": "ec7d6864-7b6b-4f74-8474-9b9ec96b1d33",
+      "twoFaced": false,
+      "oracleCardName": "Brainstorm",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/c/ec7d6864-7b6b-4f74-8474-9b9ec96b1d33.jpg?1789599806",
+        "large": "https://cards.scryfall.io/large/front/e/c/ec7d6864-7b6b-4f74-8474-9b9ec96b1d33.jpg?1789599806",
+        "png": "https://cards.scryfall.io/png/front/e/c/ec7d6864-7b6b-4f74-8474-9b9ec96b1d33.png?1789599806",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/c/ec7d6864-7b6b-4f74-8474-9b9ec96b1d33.jpg?1789599806"
+      }
+    },
+    {
+      "name": "Brainsurge",
+      "scryfallId": "2dc20172-4cf0-4ada-a4f3-4ef951cb8207",
+      "twoFaced": false,
+      "oracleCardName": "Brainsurge",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/d/2dc20172-4cf0-4ada-a4f3-4ef951cb8207.jpg?1789599807",
+        "large": "https://cards.scryfall.io/large/front/2/d/2dc20172-4cf0-4ada-a4f3-4ef951cb8207.jpg?1789599807",
+        "png": "https://cards.scryfall.io/png/front/2/d/2dc20172-4cf0-4ada-a4f3-4ef951cb8207.png?1789599807",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/d/2dc20172-4cf0-4ada-a4f3-4ef951cb8207.jpg?1789599807"
+      }
+    },
+    {
+      "name": "Fact or Fiction",
+      "scryfallId": "eb1a25c5-1918-40f3-b54f-5d31cf6b4eb2",
+      "twoFaced": false,
+      "oracleCardName": "Fact or Fiction",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/b/eb1a25c5-1918-40f3-b54f-5d31cf6b4eb2.jpg?1789599811",
+        "large": "https://cards.scryfall.io/large/front/e/b/eb1a25c5-1918-40f3-b54f-5d31cf6b4eb2.jpg?1789599811",
+        "png": "https://cards.scryfall.io/png/front/e/b/eb1a25c5-1918-40f3-b54f-5d31cf6b4eb2.png?1789599811",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/b/eb1a25c5-1918-40f3-b54f-5d31cf6b4eb2.jpg?1789599811"
+      }
+    },
+    {
+      "name": "Despark",
+      "scryfallId": "2c09f45f-54a5-47b5-afd7-9ac7c05438e7",
+      "twoFaced": false,
+      "oracleCardName": "Despark",
+      "colorIdentity": [
+        "B",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Instant"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/2/c/2c09f45f-54a5-47b5-afd7-9ac7c05438e7.jpg?1789599827",
+        "large": "https://cards.scryfall.io/large/front/2/c/2c09f45f-54a5-47b5-afd7-9ac7c05438e7.jpg?1789599827",
+        "png": "https://cards.scryfall.io/png/front/2/c/2c09f45f-54a5-47b5-afd7-9ac7c05438e7.png?1789599827",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/c/2c09f45f-54a5-47b5-afd7-9ac7c05438e7.jpg?1789599827"
+      }
+    },
+    {
+      "name": "Azorius Signet",
+      "scryfallId": "af690536-b0bc-4d85-8bb8-f6856b9f927b",
+      "twoFaced": false,
+      "oracleCardName": "Azorius Signet",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/f/af690536-b0bc-4d85-8bb8-f6856b9f927b.jpg?1789599829",
+        "large": "https://cards.scryfall.io/large/front/a/f/af690536-b0bc-4d85-8bb8-f6856b9f927b.jpg?1789599829",
+        "png": "https://cards.scryfall.io/png/front/a/f/af690536-b0bc-4d85-8bb8-f6856b9f927b.png?1789599829",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/f/af690536-b0bc-4d85-8bb8-f6856b9f927b.jpg?1789599829"
+      }
+    },
+    {
+      "name": "Dimir Signet",
+      "scryfallId": "0862060d-3198-4eeb-af8c-efeb27f42a99",
+      "twoFaced": false,
+      "oracleCardName": "Dimir Signet",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/8/0862060d-3198-4eeb-af8c-efeb27f42a99.jpg?1789599833",
+        "large": "https://cards.scryfall.io/large/front/0/8/0862060d-3198-4eeb-af8c-efeb27f42a99.jpg?1789599833",
+        "png": "https://cards.scryfall.io/png/front/0/8/0862060d-3198-4eeb-af8c-efeb27f42a99.png?1789599833",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/8/0862060d-3198-4eeb-af8c-efeb27f42a99.jpg?1789599833"
+      }
+    },
+    {
+      "name": "Fellwar Stone",
+      "scryfallId": "bc99f300-29c0-44e7-9560-7bbd1dda7556",
+      "twoFaced": false,
+      "oracleCardName": "Fellwar Stone",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/b/c/bc99f300-29c0-44e7-9560-7bbd1dda7556.jpg?1789599840",
+        "large": "https://cards.scryfall.io/large/front/b/c/bc99f300-29c0-44e7-9560-7bbd1dda7556.jpg?1789599840",
+        "png": "https://cards.scryfall.io/png/front/b/c/bc99f300-29c0-44e7-9560-7bbd1dda7556.png?1789599840",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/b/c/bc99f300-29c0-44e7-9560-7bbd1dda7556.jpg?1789599840"
+      }
+    },
+    {
+      "name": "Izzet Signet",
+      "scryfallId": "d5e141ad-5cb8-416b-9acf-bce1baeb6b6b",
+      "twoFaced": false,
+      "oracleCardName": "Izzet Signet",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/5/d5e141ad-5cb8-416b-9acf-bce1baeb6b6b.jpg?1789599844",
+        "large": "https://cards.scryfall.io/large/front/d/5/d5e141ad-5cb8-416b-9acf-bce1baeb6b6b.jpg?1789599844",
+        "png": "https://cards.scryfall.io/png/front/d/5/d5e141ad-5cb8-416b-9acf-bce1baeb6b6b.png?1789599844",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/5/d5e141ad-5cb8-416b-9acf-bce1baeb6b6b.jpg?1789599844"
+      }
+    },
+    {
+      "name": "Rakdos Signet",
+      "scryfallId": "a263e71d-953f-4648-b326-33133cfa7e00",
+      "twoFaced": false,
+      "oracleCardName": "Rakdos Signet",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/2/a263e71d-953f-4648-b326-33133cfa7e00.jpg?1789599847",
+        "large": "https://cards.scryfall.io/large/front/a/2/a263e71d-953f-4648-b326-33133cfa7e00.jpg?1789599847",
+        "png": "https://cards.scryfall.io/png/front/a/2/a263e71d-953f-4648-b326-33133cfa7e00.png?1789599847",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/2/a263e71d-953f-4648-b326-33133cfa7e00.jpg?1789599847"
+      }
+    },
+    {
+      "name": "Talisman of Creativity",
+      "scryfallId": "d4ba86c8-8052-4c9e-a0d0-ac6ad0b2679c",
+      "twoFaced": false,
+      "oracleCardName": "Talisman of Creativity",
+      "colorIdentity": [
+        "R",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/4/d4ba86c8-8052-4c9e-a0d0-ac6ad0b2679c.jpg?1789599844",
+        "large": "https://cards.scryfall.io/large/front/d/4/d4ba86c8-8052-4c9e-a0d0-ac6ad0b2679c.jpg?1789599844",
+        "png": "https://cards.scryfall.io/png/front/d/4/d4ba86c8-8052-4c9e-a0d0-ac6ad0b2679c.png?1789599844",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/4/d4ba86c8-8052-4c9e-a0d0-ac6ad0b2679c.jpg?1789599844"
+      }
+    },
+    {
+      "name": "Talisman of Dominance",
+      "scryfallId": "78d5366f-eb6d-4ec1-880b-111872863766",
+      "twoFaced": false,
+      "oracleCardName": "Talisman of Dominance",
+      "colorIdentity": [
+        "B",
+        "U"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/7/8/78d5366f-eb6d-4ec1-880b-111872863766.jpg?1789599840",
+        "large": "https://cards.scryfall.io/large/front/7/8/78d5366f-eb6d-4ec1-880b-111872863766.jpg?1789599840",
+        "png": "https://cards.scryfall.io/png/front/7/8/78d5366f-eb6d-4ec1-880b-111872863766.png?1789599840",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/8/78d5366f-eb6d-4ec1-880b-111872863766.jpg?1789599840"
+      }
+    },
+    {
+      "name": "Talisman of Indulgence",
+      "scryfallId": "36bd614f-ab3b-4ad1-ab5c-a7ca0a641f32",
+      "twoFaced": false,
+      "oracleCardName": "Talisman of Indulgence",
+      "colorIdentity": [
+        "B",
+        "R"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/3/6/36bd614f-ab3b-4ad1-ab5c-a7ca0a641f32.jpg?1789599847",
+        "large": "https://cards.scryfall.io/large/front/3/6/36bd614f-ab3b-4ad1-ab5c-a7ca0a641f32.jpg?1789599847",
+        "png": "https://cards.scryfall.io/png/front/3/6/36bd614f-ab3b-4ad1-ab5c-a7ca0a641f32.png?1789599847",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/3/6/36bd614f-ab3b-4ad1-ab5c-a7ca0a641f32.jpg?1789599847"
+      }
+    },
+    {
+      "name": "Talisman of Progress",
+      "scryfallId": "454ed9c8-3ec1-4b65-bf3f-29a186742aed",
+      "twoFaced": false,
+      "oracleCardName": "Talisman of Progress",
+      "colorIdentity": [
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Artifact"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/4/5/454ed9c8-3ec1-4b65-bf3f-29a186742aed.jpg?1789599848",
+        "large": "https://cards.scryfall.io/large/front/4/5/454ed9c8-3ec1-4b65-bf3f-29a186742aed.jpg?1789599848",
+        "png": "https://cards.scryfall.io/png/front/4/5/454ed9c8-3ec1-4b65-bf3f-29a186742aed.png?1789599848",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/4/5/454ed9c8-3ec1-4b65-bf3f-29a186742aed.jpg?1789599848"
+      }
+    },
+    {
+      "name": "Contaminated Landscape",
+      "scryfallId": "f9274fad-3f30-454a-8d61-d487165090d7",
+      "twoFaced": false,
+      "oracleCardName": "Contaminated Landscape",
+      "colorIdentity": [
+        "B",
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/9/f9274fad-3f30-454a-8d61-d487165090d7.jpg?1789599890",
+        "large": "https://cards.scryfall.io/large/front/f/9/f9274fad-3f30-454a-8d61-d487165090d7.jpg?1789599890",
+        "png": "https://cards.scryfall.io/png/front/f/9/f9274fad-3f30-454a-8d61-d487165090d7.png?1789599890",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/9/f9274fad-3f30-454a-8d61-d487165090d7.jpg?1789599890"
+      }
+    },
+    {
+      "name": "Path of Ancestry",
+      "scryfallId": "c047dedc-43bc-4a7c-bca4-182283c89069",
+      "twoFaced": false,
+      "oracleCardName": "Path of Ancestry",
+      "colorIdentity": [],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/c/0/c047dedc-43bc-4a7c-bca4-182283c89069.jpg?1789599910",
+        "large": "https://cards.scryfall.io/large/front/c/0/c047dedc-43bc-4a7c-bca4-182283c89069.jpg?1789599910",
+        "png": "https://cards.scryfall.io/png/front/c/0/c047dedc-43bc-4a7c-bca4-182283c89069.png?1789599910",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/c/0/c047dedc-43bc-4a7c-bca4-182283c89069.jpg?1789599910"
+      }
+    },
+    {
+      "name": "Perilous Landscape",
+      "scryfallId": "fec4ca25-ef4c-4500-9bec-60d29c060b83",
+      "twoFaced": false,
+      "oracleCardName": "Perilous Landscape",
+      "colorIdentity": [
+        "R",
+        "U",
+        "W"
+      ],
+      "set": "Reality Fracture Commander",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/f/e/fec4ca25-ef4c-4500-9bec-60d29c060b83.jpg?1789599914",
+        "large": "https://cards.scryfall.io/large/front/f/e/fec4ca25-ef4c-4500-9bec-60d29c060b83.jpg?1789599914",
+        "png": "https://cards.scryfall.io/png/front/f/e/fec4ca25-ef4c-4500-9bec-60d29c060b83.png?1789599914",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/f/e/fec4ca25-ef4c-4500-9bec-60d29c060b83.jpg?1789599914"
+      }
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "a4eaecb8-066a-4c72-aa5d-5ed0614ba537",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/4/a4eaecb8-066a-4c72-aa5d-5ed0614ba537.jpg?1789599702",
+        "large": "https://cards.scryfall.io/large/front/a/4/a4eaecb8-066a-4c72-aa5d-5ed0614ba537.jpg?1789599702",
+        "png": "https://cards.scryfall.io/png/front/a/4/a4eaecb8-066a-4c72-aa5d-5ed0614ba537.png?1789599702",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/4/a4eaecb8-066a-4c72-aa5d-5ed0614ba537.jpg?1789599702"
+      }
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "a4eaecb8-066a-4c72-aa5d-5ed0614ba537",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/a/4/a4eaecb8-066a-4c72-aa5d-5ed0614ba537.jpg?1789599702",
+        "large": "https://cards.scryfall.io/large/front/a/4/a4eaecb8-066a-4c72-aa5d-5ed0614ba537.jpg?1789599702",
+        "png": "https://cards.scryfall.io/png/front/a/4/a4eaecb8-066a-4c72-aa5d-5ed0614ba537.png?1789599702",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/a/4/a4eaecb8-066a-4c72-aa5d-5ed0614ba537.jpg?1789599702"
+      }
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "d5955c78-83ec-43d1-b7d6-214ab5d32ff2",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/5/d5955c78-83ec-43d1-b7d6-214ab5d32ff2.jpg?1789599732",
+        "large": "https://cards.scryfall.io/large/front/d/5/d5955c78-83ec-43d1-b7d6-214ab5d32ff2.jpg?1789599732",
+        "png": "https://cards.scryfall.io/png/front/d/5/d5955c78-83ec-43d1-b7d6-214ab5d32ff2.png?1789599732",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/5/d5955c78-83ec-43d1-b7d6-214ab5d32ff2.jpg?1789599732"
+      }
+    },
+    {
+      "name": "Plains",
+      "scryfallId": "d5955c78-83ec-43d1-b7d6-214ab5d32ff2",
+      "twoFaced": false,
+      "oracleCardName": "Plains",
+      "colorIdentity": [
+        "W"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/5/d5955c78-83ec-43d1-b7d6-214ab5d32ff2.jpg?1789599732",
+        "large": "https://cards.scryfall.io/large/front/d/5/d5955c78-83ec-43d1-b7d6-214ab5d32ff2.jpg?1789599732",
+        "png": "https://cards.scryfall.io/png/front/d/5/d5955c78-83ec-43d1-b7d6-214ab5d32ff2.png?1789599732",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/5/d5955c78-83ec-43d1-b7d6-214ab5d32ff2.jpg?1789599732"
+      }
+    },
+    {
+      "name": "Island",
+      "scryfallId": "d8184e92-54e6-4ddc-86e8-67f5c5eb079d",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/8/d8184e92-54e6-4ddc-86e8-67f5c5eb079d.jpg?1789599732",
+        "large": "https://cards.scryfall.io/large/front/d/8/d8184e92-54e6-4ddc-86e8-67f5c5eb079d.jpg?1789599732",
+        "png": "https://cards.scryfall.io/png/front/d/8/d8184e92-54e6-4ddc-86e8-67f5c5eb079d.png?1789599732",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/8/d8184e92-54e6-4ddc-86e8-67f5c5eb079d.jpg?1789599732"
+      }
+    },
+    {
+      "name": "Island",
+      "scryfallId": "d8184e92-54e6-4ddc-86e8-67f5c5eb079d",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/d/8/d8184e92-54e6-4ddc-86e8-67f5c5eb079d.jpg?1789599732",
+        "large": "https://cards.scryfall.io/large/front/d/8/d8184e92-54e6-4ddc-86e8-67f5c5eb079d.jpg?1789599732",
+        "png": "https://cards.scryfall.io/png/front/d/8/d8184e92-54e6-4ddc-86e8-67f5c5eb079d.png?1789599732",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/d/8/d8184e92-54e6-4ddc-86e8-67f5c5eb079d.jpg?1789599732"
+      }
+    },
+    {
+      "name": "Island",
+      "scryfallId": "1c1b233f-ade1-40c8-a91f-e9d8cc63179b",
+      "twoFaced": false,
+      "oracleCardName": "Island",
+      "colorIdentity": [
+        "U"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/c/1c1b233f-ade1-40c8-a91f-e9d8cc63179b.jpg?1789599692",
+        "large": "https://cards.scryfall.io/large/front/1/c/1c1b233f-ade1-40c8-a91f-e9d8cc63179b.jpg?1789599692",
+        "png": "https://cards.scryfall.io/png/front/1/c/1c1b233f-ade1-40c8-a91f-e9d8cc63179b.png?1789599692",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/c/1c1b233f-ade1-40c8-a91f-e9d8cc63179b.jpg?1789599692"
+      }
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "30693b85-550d-4c98-8c5b-4fd4e91c9f28",
+      "twoFaced": false,
+      "oracleCardName": "Swamp",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/3/0/30693b85-550d-4c98-8c5b-4fd4e91c9f28.jpg?1789599699",
+        "large": "https://cards.scryfall.io/large/front/3/0/30693b85-550d-4c98-8c5b-4fd4e91c9f28.jpg?1789599699",
+        "png": "https://cards.scryfall.io/png/front/3/0/30693b85-550d-4c98-8c5b-4fd4e91c9f28.png?1789599699",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/3/0/30693b85-550d-4c98-8c5b-4fd4e91c9f28.jpg?1789599699"
+      }
+    },
+    {
+      "name": "Swamp",
+      "scryfallId": "05465ed0-f511-4e6f-9561-49bf6608fb80",
+      "twoFaced": false,
+      "oracleCardName": "Swamp",
+      "colorIdentity": [
+        "B"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/0/5/05465ed0-f511-4e6f-9561-49bf6608fb80.jpg?1789599687",
+        "large": "https://cards.scryfall.io/large/front/0/5/05465ed0-f511-4e6f-9561-49bf6608fb80.jpg?1789599687",
+        "png": "https://cards.scryfall.io/png/front/0/5/05465ed0-f511-4e6f-9561-49bf6608fb80.png?1789599687",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/0/5/05465ed0-f511-4e6f-9561-49bf6608fb80.jpg?1789599687"
+      }
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "16671d98-6f00-477b-a010-d2905c94eb65",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/1/6/16671d98-6f00-477b-a010-d2905c94eb65.jpg?1789599693",
+        "large": "https://cards.scryfall.io/large/front/1/6/16671d98-6f00-477b-a010-d2905c94eb65.jpg?1789599693",
+        "png": "https://cards.scryfall.io/png/front/1/6/16671d98-6f00-477b-a010-d2905c94eb65.png?1789599693",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/6/16671d98-6f00-477b-a010-d2905c94eb65.jpg?1789599693"
+      }
+    },
+    {
+      "name": "Mountain",
+      "scryfallId": "ed8ebf4a-2879-4da2-93d8-b63d782a7786",
+      "twoFaced": false,
+      "oracleCardName": "Mountain",
+      "colorIdentity": [
+        "R"
+      ],
+      "set": "Reality Fracture",
+      "cardTypes": [
+        "Land"
+      ],
+      "imageUris": {
+        "normal": "https://cards.scryfall.io/normal/front/e/d/ed8ebf4a-2879-4da2-93d8-b63d782a7786.jpg?1789599698",
+        "large": "https://cards.scryfall.io/large/front/e/d/ed8ebf4a-2879-4da2-93d8-b63d782a7786.jpg?1789599698",
+        "png": "https://cards.scryfall.io/png/front/e/d/ed8ebf4a-2879-4da2-93d8-b63d782a7786.png?1789599698",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/e/d/ed8ebf4a-2879-4da2-93d8-b63d782a7786.jpg?1789599698"
+      }
+    }
+  ],
+  "provenance": {
+    "retrievedDate": "2026-10-01T21:39:51.401Z",
+    "sourceUrl": "MultiverseReforged_FRC.json",
+    "deckSource": "precon",
+    "createdAt": "2026-10-02T00:00:00.000Z"
+  }
+}
