@@ -5,7 +5,7 @@ export type CardImageUris = Partial<Record<ImageFormat, string>>;
 
 export interface CardDefinition {
   name: string;
-  scryfallId: string;
+  cardDefinitionId: string;
   multiverseid?: number;
   twoFaced: boolean;
   oracleCardName: string;
@@ -24,7 +24,7 @@ export interface DeckProvenance {
   createdAt?: Date;
 }
 
-export const PERSISTED_DECK_VERSION: 3 = 3;
+export const PERSISTED_DECK_VERSION: 4 = 4;
 
 export interface Deck {
   version: typeof PERSISTED_DECK_VERSION;

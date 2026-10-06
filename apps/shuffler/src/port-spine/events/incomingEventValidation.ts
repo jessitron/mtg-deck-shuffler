@@ -23,7 +23,7 @@ addFormats(ajv);
 const validateEnvelopeSchema = ajv.compile(loadSchema("envelope.v1.json"));
 
 const payloadValidators: Record<string, ValidateFunction> = {
-  "card.returned:1": ajv.compile(loadSchema("payloads/card.returned.v1.json")),
+  "card.returned:2": ajv.compile(loadSchema("payloads/card.returned.v2.json")),
 };
 
 export interface Initiator {

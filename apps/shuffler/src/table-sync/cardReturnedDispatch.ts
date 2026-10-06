@@ -15,7 +15,7 @@ const tracer = trace.getTracer("mtg-deck-shuffler");
 const APPLIED: EventApplication = { applied: true };
 
 interface CardReturnedPayload {
-  card: { scryfallId: string };
+  card: { cardDefinitionId: string };
   gameCardIndex: number;
   seat: string;
   fromZone?: string;
@@ -118,7 +118,7 @@ export async function dispatchSpineEventForGame(
                 "event.name": envelope.name,
                 "game.game_id": String(gameId),
                 "table.slug": spineTableId,
-                "card.scryfall_id": envelope.payload.card.scryfallId,
+                "card.definition_id": envelope.payload.card.cardDefinitionId,
                 "game.game_card_index": envelope.payload.gameCardIndex,
                 "seat.id": envelope.payload.seat,
               },

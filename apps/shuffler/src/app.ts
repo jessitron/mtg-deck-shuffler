@@ -417,8 +417,11 @@ export function createApp(
   app.post("/prep-table-look/:prepId", async (req, res) => {
     const prepId = parseInt(req.params.prepId, 10);
 
-    const prep = await persistPrepPort.retrievePrep(prepId);
-    if (!prep || prep.version !== PERSISTED_GAME_PREP_VERSION) {
+    const prep = await persistPrepPort.retrievePrep(prepId).catch((error) => {
+      if (error instanceof IncompatiblePrepVersionError) return null;
+      throw error;
+    });
+    if (!prep) {
       res.status(404).send("prep not found");
       return;
     }

@@ -6,7 +6,7 @@ export function fakeTraceparent(): string {
   return `00-${randomUUID().replace(/-/g, "")}-${randomUUID().replace(/-/g, "").slice(0, 16)}-01`;
 }
 
-export function cardReturnedEvent(tableId: string, gameCardIndex: number, scryfallId: string, overrides: Record<string, unknown> = {}) {
+export function cardReturnedEvent(tableId: string, gameCardIndex: number, cardDefinitionId: string, overrides: Record<string, unknown> = {}) {
   return {
     id: randomUUID(),
     tableId,
@@ -17,9 +17,9 @@ export function cardReturnedEvent(tableId: string, gameCardIndex: number, scryfa
     origin: "tabletop.cardShapeHook",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
-      card: { scryfallId },
+      card: { cardDefinitionId },
       gameCardIndex,
       seat: "seat-0000001",
       fromZone: "battlefield",

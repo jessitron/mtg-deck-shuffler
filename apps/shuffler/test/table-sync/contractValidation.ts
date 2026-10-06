@@ -18,9 +18,9 @@ addFormats(ajv);
 const validateEnvelopeSchema = ajv.compile(loadSchema("envelope.v1.json"));
 
 const payloadValidators: Record<string, ValidateFunction> = {
-  "card.played:1": ajv.compile(loadSchema("payloads/card.played.v1.json")),
-  "card.returned:1": ajv.compile(loadSchema("payloads/card.returned.v1.json")),
-  "card.discarded:1": ajv.compile(loadSchema("payloads/card.discarded.v1.json")),
+  "card.played:2": ajv.compile(loadSchema("payloads/card.played.v2.json")),
+  "card.returned:2": ajv.compile(loadSchema("payloads/card.returned.v2.json")),
+  "card.discarded:2": ajv.compile(loadSchema("payloads/card.discarded.v2.json")),
 };
 
 const validateJoinRequestSchema = ajv.compile(loadSchema("requests/join.v1.json"));

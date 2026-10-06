@@ -15,7 +15,7 @@ describe("InMemoryCardRepositoryAdapter", () => {
 
     await adapter.saveCards([testCard]);
 
-    const retrieved = await adapter.getCard(testCard.scryfallId);
+    const retrieved = await adapter.getCard(testCard.cardDefinitionId);
 
     expect(retrieved).not.toBe(null);
     expect(retrieved).toEqual(testCard);
@@ -31,14 +31,14 @@ describe("InMemoryCardRepositoryAdapter", () => {
 
     await adapter.saveCards(testCards);
 
-    const scryfallIds = testCards.map((c) => c.scryfallId);
-    const retrieved = await adapter.getCards(scryfallIds);
+    const cardDefinitionIds = testCards.map((c) => c.cardDefinitionId);
+    const retrieved = await adapter.getCards(cardDefinitionIds);
 
     expect(retrieved.length).toBe(testCards.length);
     
-    // Sort both arrays by scryfallId for comparison
-    const sortedRetrieved = retrieved.sort((a, b) => a.scryfallId.localeCompare(b.scryfallId));
-    const sortedTestCards = testCards.sort((a, b) => a.scryfallId.localeCompare(b.scryfallId));
+    // Sort both arrays by cardDefinitionId for comparison
+    const sortedRetrieved = retrieved.sort((a, b) => a.cardDefinitionId.localeCompare(b.cardDefinitionId));
+    const sortedTestCards = testCards.sort((a, b) => a.cardDefinitionId.localeCompare(b.cardDefinitionId));
     
     expect(sortedRetrieved).toEqual(sortedTestCards);
   });
@@ -46,7 +46,7 @@ describe("InMemoryCardRepositoryAdapter", () => {
   it("should upsert cards (update existing cards)", async () => {
     const testCard: CardDefinition = {
       name: "Lightning Bolt",
-      scryfallId: "test-scryfall-id",
+      cardDefinitionId: "test-scryfall-id",
       multiverseid: 12345,
       twoFaced: false,
       oracleCardName: "Lightning Bolt",
@@ -68,7 +68,7 @@ describe("InMemoryCardRepositoryAdapter", () => {
     await adapter.saveCards([updatedCard]);
 
     // Retrieve and verify it was updated
-    const retrieved = await adapter.getCard(testCard.scryfallId);
+    const retrieved = await adapter.getCard(testCard.cardDefinitionId);
 
     expect(retrieved).not.toBe(null);
     expect(retrieved?.name).toBe("Lightning Bolt (Updated)");
@@ -78,7 +78,7 @@ describe("InMemoryCardRepositoryAdapter", () => {
   it("should handle cards with optional fields", async () => {
     const cardWithoutOptionals: CardDefinition = {
       name: "Test Card",
-      scryfallId: "test-id-no-optionals",
+      cardDefinitionId: "test-id-no-optionals",
       twoFaced: false,
       oracleCardName: "Test Card",
       colorIdentity: [],
@@ -89,7 +89,7 @@ describe("InMemoryCardRepositoryAdapter", () => {
 
     await adapter.saveCards([cardWithoutOptionals]);
 
-    const retrieved = await adapter.getCard(cardWithoutOptionals.scryfallId);
+    const retrieved = await adapter.getCard(cardWithoutOptionals.cardDefinitionId);
 
     expect(retrieved).not.toBe(null);
     expect(retrieved?.multiverseid).toBeUndefined();
@@ -106,7 +106,7 @@ describe("InMemoryCardRepositoryAdapter", () => {
 
     await adapter.saveCards([testCard]);
 
-    const retrieved = await adapter.getCards([testCard.scryfallId, "non-existent-id-1", "non-existent-id-2"]);
+    const retrieved = await adapter.getCards([testCard.cardDefinitionId, "non-existent-id-1", "non-existent-id-2"]);
 
     expect(retrieved.length).toBe(1);
     expect(retrieved[0]).toEqual(testCard);
@@ -115,7 +115,7 @@ describe("InMemoryCardRepositoryAdapter", () => {
   it("should save and retrieve a two-faced card with all faces' types", async () => {
     await adapter.saveCards([nicolBolas]);
 
-    const retrieved = await adapter.getCard(nicolBolas.scryfallId);
+    const retrieved = await adapter.getCard(nicolBolas.cardDefinitionId);
 
     expect(retrieved).toEqual(nicolBolas);
     expect(retrieved?.twoFaced).toBe(true);
@@ -131,7 +131,7 @@ describe("InMemoryCardRepositoryAdapter", () => {
     adapter.clear();
     expect(adapter.size()).toBe(0);
 
-    const retrieved = await adapter.getCard(testCards[0].scryfallId);
+    const retrieved = await adapter.getCard(testCards[0].cardDefinitionId);
     expect(retrieved).toBe(null);
   });
 

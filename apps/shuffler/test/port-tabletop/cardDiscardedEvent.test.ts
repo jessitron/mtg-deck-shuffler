@@ -27,11 +27,11 @@ describe("buildCardDiscardedEvent (the card.discarded envelope, ticket 08)", () 
     expect(event.initiator).toEqual({ seatId: "abc123", playerName: "Jess" });
     expect(event.occurredIn).toBe("shuffler");
     expect(event.traceparent).toMatch(/^00-[0-9a-f]{32}-[0-9a-f]{16}-[0-9a-f]{2}$/);
-    expect(event.schemaVersion).toBe(1);
-    expect(event.payload.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: "instance-guid-1" });
+    expect(event.schemaVersion).toBe(2);
+    expect(event.payload.card).toEqual({ cardDefinitionId: lightningBolt.cardDefinitionId, instanceId: "instance-guid-1" });
     expect(event.payload.face).toBe("front");
     expect(event.payload.cardName).toBe(lightningBolt.name);
-    expect(event.payload.frontImageUrl).toContain(lightningBolt.scryfallId.substring(0, 1));
+    expect(event.payload.frontImageUrl).toContain(lightningBolt.cardDefinitionId.substring(0, 1));
     expect(event.payload.backImageUrl).toBeNull(); // not twoFaced
     expect(event.payload.owner).toBe("abc123");
     expect(event.payload.isCommander).toBe(false);

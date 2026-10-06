@@ -93,7 +93,7 @@ describe("SpineJoinAdapter", () => {
 
     const { commanders } = gateway.joinRequests[0];
     expect(commanders).toHaveLength(2);
-    expect(commanders![0].card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: "i-1" });
+    expect(commanders![0].card).toEqual({ cardDefinitionId: lightningBolt.cardDefinitionId, instanceId: "i-1" });
     expect(commanders![0].cardName).toBe(lightningBolt.name);
     expect(commanders![0].backImageUrl).toBeNull();
     expect(commanders![1].backImageUrl).toContain("/back/");

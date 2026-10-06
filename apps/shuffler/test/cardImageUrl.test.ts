@@ -3,7 +3,7 @@ import { getCardImageUrl, constructCardImageUrl } from "../src/domain-types.js";
 
 const baseCard: CardDefinition = {
   name: "Arcane Signet",
-  scryfallId: "a5dc8c3f-c8a3-4bea-9874-4bf9b221408b",
+  cardDefinitionId: "a5dc8c3f-c8a3-4bea-9874-4bf9b221408b",
   twoFaced: false,
   oracleCardName: "Arcane Signet",
   colorIdentity: [],
@@ -12,14 +12,14 @@ const baseCard: CardDefinition = {
 };
 
 describe("constructCardImageUrl (fallback / legacy construction)", () => {
-  it("builds the Scryfall CDN path from the scryfallId", () => {
-    expect(constructCardImageUrl(baseCard.scryfallId, "normal", "front")).toBe(
+  it("builds the Scryfall CDN path from the cardDefinitionId", () => {
+    expect(constructCardImageUrl(baseCard.cardDefinitionId, "normal", "front")).toBe(
       "https://cards.scryfall.io/normal/front/a/5/a5dc8c3f-c8a3-4bea-9874-4bf9b221408b.jpg"
     );
   });
 
   it("uses the png extension for png format and the back path segment", () => {
-    expect(constructCardImageUrl(baseCard.scryfallId, "png", "back")).toBe(
+    expect(constructCardImageUrl(baseCard.cardDefinitionId, "png", "back")).toBe(
       "https://cards.scryfall.io/png/back/a/5/a5dc8c3f-c8a3-4bea-9874-4bf9b221408b.png"
     );
   });
@@ -45,11 +45,11 @@ describe("getCardImageUrl", () => {
       ...baseCard,
       imageUris: { large: "https://example.com/large.jpg?1" },
     };
-    expect(getCardImageUrl(card, "png", "front")).toBe(constructCardImageUrl(card.scryfallId, "png", "front"));
+    expect(getCardImageUrl(card, "png", "front")).toBe(constructCardImageUrl(card.cardDefinitionId, "png", "front"));
   });
 
   it("falls back entirely when the card has no stored imageUris (legacy data)", () => {
-    expect(getCardImageUrl(baseCard, "normal", "front")).toBe(constructCardImageUrl(baseCard.scryfallId, "normal", "front"));
+    expect(getCardImageUrl(baseCard, "normal", "front")).toBe(constructCardImageUrl(baseCard.cardDefinitionId, "normal", "front"));
   });
 
   it("uses backImageUris for the back face of a two-faced card", () => {
@@ -65,6 +65,6 @@ describe("getCardImageUrl", () => {
 
   it("falls back to constructed back URL when a two-faced card lacks stored back URLs", () => {
     const dfc: CardDefinition = { ...baseCard, twoFaced: true, imageUris: { normal: "https://example.com/front.jpg?9" } };
-    expect(getCardImageUrl(dfc, "normal", "back")).toBe(constructCardImageUrl(dfc.scryfallId, "normal", "back"));
+    expect(getCardImageUrl(dfc, "normal", "back")).toBe(constructCardImageUrl(dfc.cardDefinitionId, "normal", "back"));
   });
 });

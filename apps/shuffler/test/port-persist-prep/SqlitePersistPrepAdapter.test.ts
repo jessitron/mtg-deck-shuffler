@@ -1,5 +1,5 @@
 import { SqlitePersistPrepAdapter } from "../../src/port-persist-prep/SqlitePersistPrepAdapter.js";
-import { PersistedGamePrep } from "../../src/port-persist-prep/types.js";
+import { IncompatiblePrepVersionError, PersistedGamePrep, PERSISTED_GAME_PREP_VERSION } from "../../src/port-persist-prep/types.js";
 import fs from "node:fs";
 import path from "node:path";
 import * as fc from "fast-check";
@@ -27,7 +27,7 @@ describe("SqlitePersistPrepAdapter", () => {
     await cardRepository.saveCards([...testDeck.cards, ...testDeck.commanders]);
 
     testPrep = {
-      version: 3,
+      version: PERSISTED_GAME_PREP_VERSION,
       prepId: 1,
       deck: testDeck,
       createdAt: new Date("2024-01-15T10:00:00.000Z"),
@@ -41,6 +41,13 @@ describe("SqlitePersistPrepAdapter", () => {
     if (fs.existsSync(testDbPath)) {
       fs.unlinkSync(testDbPath);
     }
+  });
+
+  it("rejects a prep saved in an older format before looking its cards up", async () => {
+    const deckWithUncachedCards = fc.sample(deckWithOneCommander, { numRuns: 1 })[0];
+    await adapter.savePrep({ ...testPrep, prepId: 7, deck: deckWithUncachedCards, version: 3 as unknown as typeof PERSISTED_GAME_PREP_VERSION });
+
+    await expect(adapter.retrievePrep(7)).rejects.toBeInstanceOf(IncompatiblePrepVersionError);
   });
 
   it("should generate new prep IDs incrementally", () => {
@@ -77,7 +84,7 @@ describe("SqlitePersistPrepAdapter", () => {
     await cardRepository.saveCards([...testDeck2.cards, ...testDeck2.commanders]);
 
     const prep2: PersistedGamePrep = {
-      version: 3,
+      version: PERSISTED_GAME_PREP_VERSION,
       prepId: 2,
       deck: testDeck2,
       createdAt: new Date("2024-01-16T10:00:00.000Z"),
@@ -99,7 +106,7 @@ describe("SqlitePersistPrepAdapter", () => {
 
     const updatedPrep: PersistedGamePrep = {
       ...testPrep,
-      version: 3,
+      version: PERSISTED_GAME_PREP_VERSION,
       updatedAt: new Date("2024-01-15T11:00:00.000Z"),
     };
 
@@ -107,7 +114,7 @@ describe("SqlitePersistPrepAdapter", () => {
 
     const retrieved = await adapter.retrievePrep(testPrep.prepId);
 
-    expect(retrieved?.version).toBe(3);
+    expect(retrieved?.version).toBe(PERSISTED_GAME_PREP_VERSION);
     expect(retrieved?.updatedAt).toEqual(new Date("2024-01-15T11:00:00.000Z"));
   });
 

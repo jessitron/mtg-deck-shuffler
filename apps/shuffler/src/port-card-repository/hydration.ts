@@ -13,7 +13,7 @@ export async function hydrateDeck(
   // Convert array to map for efficient lookup
   const cardMap = new Map<string, CardDefinition>();
   for (const card of cardArray) {
-    cardMap.set(card.scryfallId, card);
+    cardMap.set(card.cardDefinitionId, card);
   }
 
   const commanders = persistedDeck.commanderIds.map((id) => {
@@ -49,8 +49,8 @@ export function dehydrateDeck(deck: Deck): PersistedDeck {
     id: deck.id,
     name: deck.name,
     totalCards: deck.totalCards,
-    commanderIds: deck.commanders.map((c) => c.scryfallId),
-    cardIds: deck.cards.map((c) => c.scryfallId),
+    commanderIds: deck.commanders.map((c) => c.cardDefinitionId),
+    cardIds: deck.cards.map((c) => c.cardDefinitionId),
     provenance: deck.provenance,
   };
 }
@@ -59,19 +59,19 @@ export async function hydrateGameCards(
   persistedGameCards: PersistedGameCard[],
   cardRepo: CardRepositoryPort
 ): Promise<GameCard[]> {
-  const scryfallIds = persistedGameCards.map((gc) => gc.scryfallId);
-  const cardArray = await cardRepo.getCards(scryfallIds);
+  const cardDefinitionIds = persistedGameCards.map((gc) => gc.cardDefinitionId);
+  const cardArray = await cardRepo.getCards(cardDefinitionIds);
   
   // Convert array to map for efficient lookup
   const cardMap = new Map<string, CardDefinition>();
   for (const card of cardArray) {
-    cardMap.set(card.scryfallId, card);
+    cardMap.set(card.cardDefinitionId, card);
   }
 
   return persistedGameCards.map((pgc) => {
-    const card = cardMap.get(pgc.scryfallId);
+    const card = cardMap.get(pgc.cardDefinitionId);
     if (!card) {
-      throw new Error(`Card ${pgc.scryfallId} not found in repository`);
+      throw new Error(`Card ${pgc.cardDefinitionId} not found in repository`);
     }
 
     return {
@@ -87,7 +87,7 @@ export async function hydrateGameCards(
 
 export function dehydrateGameCards(gameCards: GameCard[]): PersistedGameCard[] {
   return gameCards.map((gc) => ({
-    scryfallId: gc.card.scryfallId,
+    cardDefinitionId: gc.card.cardDefinitionId,
     location: gc.location,
     gameCardIndex: gc.gameCardIndex,
     isCommander: gc.isCommander,

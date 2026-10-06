@@ -6,13 +6,13 @@ export interface PersistedDeck {
   id: number;
   name: string;
   totalCards: number;
-  commanderIds: string[]; // scryfallIds
-  cardIds: string[]; // scryfallIds
+  commanderIds: string[]; // cardDefinitionIds
+  cardIds: string[]; // cardDefinitionIds
   provenance: DeckProvenance;
 }
 
 export interface PersistedGameCard {
-  scryfallId: string; // reference to card in repository
+  cardDefinitionId: string; // reference to card in repository
   location: CardLocation;
   gameCardIndex: number;
   isCommander: boolean;

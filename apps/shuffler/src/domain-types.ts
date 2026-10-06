@@ -76,5 +76,5 @@ export function constructCardImageUrl(scryfallId: string, format: ImageFormat = 
 
 export function getCardImageUrl(card: CardDefinition, format: ImageFormat = "png", face: "front" | "back" = "front"): string {
   const stored = face === "back" ? card.backImageUris : card.imageUris;
-  return stored?.[format] ?? constructCardImageUrl(card.scryfallId, format, face);
+  return stored?.[format] ?? constructCardImageUrl(card.cardDefinitionId, format, face);
 }

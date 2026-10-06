@@ -8,7 +8,7 @@ import { colorsForPlaymat, DEFAULT_PLAYMAT_PATH } from "../../src/table-look.js"
 
 const forest: CardDefinition = {
   name: "Forest",
-  scryfallId: "def456",
+  cardDefinitionId: "def456",
   multiverseid: 54321,
   twoFaced: false,
   oracleCardName: "Forest",
@@ -91,7 +91,7 @@ describe("joinSpineBestEffort", () => {
     expect(request.playmatImageUrl).toMatch(/^https:\/\/.*\/images\/playmats\/aeoe-6-seam-rip\.png$/);
   });
 
-  it("carries 0-2 commanders as {card:{scryfallId,instanceId}} plus scaffolding cardName/frontImageUrl/backImageUrl", async () => {
+  it("carries 0-2 commanders as {card:{cardDefinitionId,instanceId}} plus scaffolding cardName/frontImageUrl/backImageUrl", async () => {
     const fake = new FakeSpine();
 
     await joinSpineBestEffort(fake.join, {
@@ -104,7 +104,7 @@ describe("joinSpineBestEffort", () => {
 
     const { commanders } = fake.joinRequests[0];
     expect(commanders).toHaveLength(2);
-    expect(commanders![0].card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: "i-1" });
+    expect(commanders![0].card).toEqual({ cardDefinitionId: lightningBolt.cardDefinitionId, instanceId: "i-1" });
     expect(commanders![0].backImageUrl).toBeNull(); // not twoFaced
     expect(commanders![1].backImageUrl).toContain("/back/"); // nicolBolas is twoFaced
   });
@@ -201,7 +201,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     // the Tabletop rejects card.played when the two don't match (seat-not-joined).
     expect(event.initiator).toEqual({ seatId: tableInfo.seatId, playerName: "Jess" });
     expect(event.initiator.seatId).not.toBe(String(tableInfo.spineSeatNumber));
-    expect(event.payload.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: bolt.cardInstanceId });
+    expect(event.payload.card).toEqual({ cardDefinitionId: lightningBolt.cardDefinitionId, instanceId: bolt.cardInstanceId });
   });
 
   it("is a no-op when no Spine is configured", async () => {
@@ -293,7 +293,7 @@ describe("sendCardReturnedToSpineBestEffort", () => {
     expect(tableId).toBe(tableInfo.spineTableId);
     expect(event.name).toBe("card.returned");
     expect(event.occurredIn).toBe("shuffler");
-    expect(event.payload.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: bolt.cardInstanceId });
+    expect(event.payload.card).toEqual({ cardDefinitionId: lightningBolt.cardDefinitionId, instanceId: bolt.cardInstanceId });
     expect(event.payload.gameCardIndex).toBe(bolt.gameCardIndex);
     expect(event.payload.seat).toBe(tableInfo.seatId);
   });

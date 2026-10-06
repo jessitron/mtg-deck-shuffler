@@ -2,7 +2,7 @@ import { describe, test, expect } from "@jest/globals";
 import * as fc from "fast-check";
 import { GameState } from "../src/GameState.js";
 import { GameStatus, GameCard, LibraryLocation, HandLocation, RevealedLocation, TableLocation } from "../src/domain-types.js";
-import { CardDefinition, Deck, DeckProvenance } from "../src/types.js";
+import { CardDefinition, Deck, DeckProvenance, PERSISTED_DECK_VERSION } from "../src/types.js";
 import {
   lightningBolt,
   ancestralRecall,
@@ -544,7 +544,7 @@ describe("GameState", () => {
       fc.property(
         fc.record({
           name: fc.string(),
-          scryfallId: fc.uuid(),
+          cardDefinitionId: fc.uuid(),
           multiverseid: fc.integer({ min: 1, max: 999999 }),
           twoFaced: fc.constant(true),
           oracleCardName: fc.string(),
@@ -554,7 +554,7 @@ describe("GameState", () => {
         }),
         (twoFacedCard) => {
           const deck: Deck = {
-            version: 3,
+            version: PERSISTED_DECK_VERSION,
             name: "Test Deck",
             commanders: [],
             cards: [twoFacedCard],
@@ -602,7 +602,7 @@ describe("GameState", () => {
       fc.property(
         fc.record({
           name: fc.string(),
-          scryfallId: fc.uuid(),
+          cardDefinitionId: fc.uuid(),
           multiverseid: fc.integer({ min: 1, max: 999999 }),
           twoFaced: fc.constant(false),
           oracleCardName: fc.string(),
@@ -612,7 +612,7 @@ describe("GameState", () => {
         }),
         (singleFacedCard) => {
           const deck: Deck = {
-            version: 3,
+            version: PERSISTED_DECK_VERSION,
             name: "Test Deck",
             commanders: [],
             cards: [singleFacedCard],
@@ -961,7 +961,7 @@ describe("GameState", () => {
     function tenCardDeck(): Deck {
       const cards: CardDefinition[] = Array.from({ length: 10 }, (_, i) => ({
         name: `Card ${String.fromCharCode(65 + i)}`,
-        scryfallId: `card-${i}`,
+        cardDefinitionId: `card-${i}`,
         multiverseid: i + 1,
         twoFaced: false,
         oracleCardName: `Card ${String.fromCharCode(65 + i)}`,
@@ -970,7 +970,7 @@ describe("GameState", () => {
         cardTypes: ["Creature"],
       }));
       return {
-        version: 3,
+        version: PERSISTED_DECK_VERSION,
         id: 999,
         name: "Ten Card Deck",
         totalCards: 10,

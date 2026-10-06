@@ -6,18 +6,18 @@ export class InMemoryCardRepositoryAdapter implements CardRepositoryPort {
 
   async saveCards(cards: CardDefinition[]): Promise<void> {
     for (const card of cards) {
-      this.cards.set(card.scryfallId, card);
+      this.cards.set(card.cardDefinitionId, card);
     }
   }
 
-  async getCard(scryfallId: string): Promise<CardDefinition | null> {
-    return this.cards.get(scryfallId) ?? null;
+  async getCard(cardDefinitionId: string): Promise<CardDefinition | null> {
+    return this.cards.get(cardDefinitionId) ?? null;
   }
 
-  async getCards(scryfallIds: string[]): Promise<CardDefinition[]> {
+  async getCards(cardDefinitionIds: string[]): Promise<CardDefinition[]> {
     const result: CardDefinition[] = [];
-    for (const scryfallId of scryfallIds) {
-      const card = this.cards.get(scryfallId);
+    for (const cardDefinitionId of cardDefinitionIds) {
+      const card = this.cards.get(cardDefinitionId);
       if (card) {
         result.push(card);
       }

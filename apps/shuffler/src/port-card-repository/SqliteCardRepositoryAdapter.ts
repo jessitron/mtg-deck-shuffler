@@ -3,7 +3,7 @@ import { CardRepositoryPort } from "./types.js";
 import { CardDefinition, CardImageUris } from "../types.js";
 
 interface CardRow {
-  scryfall_id: string;
+  card_definition_id: string;
   name: string;
   multiverseid: number | null;
   two_faced: number;
@@ -26,14 +26,14 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
 
   private initializeDatabase(): void {
     const columns = this.db.prepare(`PRAGMA table_info(cards)`).all() as Array<{ name: string }>;
-    const isStaleSchema = columns.length > 0 && !columns.some(c => c.name === "card_types");
+    const isStaleSchema = columns.length > 0 && !columns.some(c => c.name === "card_definition_id");
     if (isStaleSchema) {
       this.db.exec(`DROP TABLE cards`);
     }
 
     const createTableSQL = `
       CREATE TABLE IF NOT EXISTS cards (
-        scryfall_id TEXT PRIMARY KEY,
+        card_definition_id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
         multiverseid INTEGER,
         two_faced INTEGER NOT NULL,
@@ -62,7 +62,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
   async saveCards(cards: CardDefinition[]): Promise<void> {
     const insertOrUpdateSQL = `
       INSERT OR REPLACE INTO cards (
-        scryfall_id, name, multiverseid, two_faced, oracle_card_name,
+        card_definition_id, name, multiverseid, two_faced, oracle_card_name,
         color_identity, set_code, card_types, image_uris, back_image_uris, updated_at
       )
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
@@ -74,7 +74,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
     const insertMany = this.db.transaction((cardsToInsert: CardDefinition[]) => {
       for (const card of cardsToInsert) {
         stmt.run(
-          card.scryfallId,
+          card.cardDefinitionId,
           card.name,
           card.multiverseid ?? null,
           card.twoFaced ? 1 : 0,
@@ -91,12 +91,12 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
     insertMany(cards);
   }
 
-  async getCard(scryfallId: string): Promise<CardDefinition | null> {
+  async getCard(cardDefinitionId: string): Promise<CardDefinition | null> {
     const selectSQL = `
-      SELECT * FROM cards WHERE scryfall_id = ?
+      SELECT * FROM cards WHERE card_definition_id = ?
     `;
 
-    const row = this.db.prepare(selectSQL).get(scryfallId) as
+    const row = this.db.prepare(selectSQL).get(cardDefinitionId) as
       | CardRow
       | undefined;
 
@@ -107,25 +107,25 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
     return this.rowToCardDefinition(row);
   }
 
-  async getCards(scryfallIds: string[]): Promise<CardDefinition[]> {
-    if (scryfallIds.length === 0) {
+  async getCards(cardDefinitionIds: string[]): Promise<CardDefinition[]> {
+    if (cardDefinitionIds.length === 0) {
       return [];
     }
 
     // Build a parameterized query with the right number of placeholders
-    const placeholders = scryfallIds.map(() => "?").join(", ");
+    const placeholders = cardDefinitionIds.map(() => "?").join(", ");
     const selectSQL = `
-      SELECT * FROM cards WHERE scryfall_id IN (${placeholders})
+      SELECT * FROM cards WHERE card_definition_id IN (${placeholders})
     `;
 
-    const rows = this.db.prepare(selectSQL).all(...scryfallIds) as CardRow[];
+    const rows = this.db.prepare(selectSQL).all(...cardDefinitionIds) as CardRow[];
 
     return rows.map((row) => this.rowToCardDefinition(row));
   }
 
   private rowToCardDefinition(row: CardRow): CardDefinition {
     return {
-      scryfallId: row.scryfall_id,
+      cardDefinitionId: row.card_definition_id,
       name: row.name,
       multiverseid: row.multiverseid ?? undefined,
       twoFaced: row.two_faced === 1,

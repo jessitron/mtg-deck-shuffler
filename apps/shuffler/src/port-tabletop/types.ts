@@ -28,7 +28,7 @@ export interface EventEnvelope<Payload> {
 
 export interface CardPlayedPayload {
   card: {
-    scryfallId: string;
+    cardDefinitionId: string;
     instanceId: string;
   };
   face: "front" | "back";
@@ -71,10 +71,10 @@ export function buildCardPlayedEvent(
     origin: "shuffler.playCardSubmit",
     significance: "domain",
     traceparent: currentTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       card: {
-        scryfallId: gameCard.card.scryfallId,
+        cardDefinitionId: gameCard.card.cardDefinitionId,
         instanceId,
       },
       ...cardFaceFields(gameCard),
@@ -93,7 +93,7 @@ export const CARD_PLAYED_FACE_DOWN_EVENT_NAME = "card.played-face-down" as const
 // without a retroactive schema version bump.
 export interface CardPlayedFaceDownPayload {
   card: {
-    scryfallId: string;
+    cardDefinitionId: string;
     instanceId: string;
   };
   face: "front" | "back";
@@ -111,7 +111,7 @@ export const CARD_RETURNED_EVENT_NAME = "card.returned" as const;
 
 export interface CardReturnedPayload {
   card: {
-    scryfallId: string;
+    cardDefinitionId: string;
     instanceId: string;
   };
   gameCardIndex: number;
@@ -132,10 +132,10 @@ export function buildCardReturnedEvent(gameCard: GameCard, instanceId: string, i
     origin: "shuffler.returnCardSubmit",
     significance: "domain",
     traceparent: currentTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       card: {
-        scryfallId: gameCard.card.scryfallId,
+        cardDefinitionId: gameCard.card.cardDefinitionId,
         instanceId,
       },
       gameCardIndex: gameCard.gameCardIndex,
@@ -151,7 +151,7 @@ export const CARD_DISCARDED_EVENT_NAME = "card.discarded" as const;
 // since the Tabletop needs the same facts to mint a graveyard card shape as a played one.
 export interface CardDiscardedPayload {
   card: {
-    scryfallId: string;
+    cardDefinitionId: string;
     instanceId: string;
   };
   face: "front" | "back";
@@ -176,10 +176,10 @@ export function buildCardDiscardedEvent(gameCard: GameCard, instanceId: string, 
     origin: "shuffler.discardCardSubmit",
     significance: "domain",
     traceparent: currentTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       card: {
-        scryfallId: gameCard.card.scryfallId,
+        cardDefinitionId: gameCard.card.cardDefinitionId,
         instanceId,
       },
       ...cardFaceFields(gameCard),
@@ -208,10 +208,10 @@ export function buildCardPlayedFaceDownEvent(
     origin: "shuffler.playCardFaceDownSubmit",
     significance: "domain",
     traceparent: currentTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       card: {
-        scryfallId: gameCard.card.scryfallId,
+        cardDefinitionId: gameCard.card.cardDefinitionId,
         instanceId,
       },
       ...cardFaceFields(gameCard),

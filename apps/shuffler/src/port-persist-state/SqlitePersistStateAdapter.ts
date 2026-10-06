@@ -101,8 +101,8 @@ export class SqlitePersistStateAdapter implements PersistStatePort {
       try {
         const gameState = JSON.parse(row.state) as PersistedGameState;
 
-        // Extract commander scryfallIds
-        const commanderIds = gameState.gameCards.filter((gc) => gc.isCommander).map((gc) => gc.scryfallId);
+        // Extract commander cardDefinitionIds
+        const commanderIds = gameState.gameCards.filter((gc) => gc.isCommander).map((gc) => gc.cardDefinitionId);
 
         // Hydrate commander cards to get names
         const commanderCards = await this.cardRepository.getCards(commanderIds);

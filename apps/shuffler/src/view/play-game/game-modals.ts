@@ -121,7 +121,7 @@ function formatModalCardActionsForHand(gameId: GameId, gameCard: GameCard, expec
         expectedVersion,
         action.title,
         action.cssClass,
-        gameCard.card.scryfallId,
+        gameCard.card.cardDefinitionId,
         gameCard.currentFace,
         inTableMode,
         action.faceDown
@@ -151,7 +151,7 @@ function formatModalCardActionsForRevealed(gameId: GameId, gameCard: GameCard, e
         expectedVersion,
         action.title,
         action.cssClass,
-        gameCard.card.scryfallId,
+        gameCard.card.cardDefinitionId,
         gameCard.currentFace,
         inTableMode
       )
@@ -176,7 +176,7 @@ function formatModalCardActionsForLibrary(gameId: GameId, gameCard: GameCard, ex
         expectedVersion,
         action.title,
         action.cssClass,
-        gameCard.card.scryfallId,
+        gameCard.card.cardDefinitionId,
         gameCard.currentFace
       )
     )
@@ -193,7 +193,7 @@ function formatModalCardActionsForTable(gameId: GameId, gameCard: GameCard, expe
     expectedVersion,
     "Return to revealed cards",
     "modal-action-button",
-    gameCard.card.scryfallId,
+    gameCard.card.cardDefinitionId,
     gameCard.currentFace
   );
 }

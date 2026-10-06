@@ -1,12 +1,12 @@
 {
-  "version": 3,
+  "version": 4,
   "id": 1282380485,
   "name": "Abzan Armor",
   "totalCards": 100,
   "commanders": [
     {
       "name": "Felothar the Steadfast",
-      "scryfallId": "2c3549f6-25df-4ea7-84ad-922ccd4af6b2",
+      "cardDefinitionId": "2c3549f6-25df-4ea7-84ad-922ccd4af6b2",
       "multiverseid": 695723,
       "twoFaced": false,
       "oracleCardName": "Felothar the Steadfast",
@@ -30,7 +30,7 @@
   "cards": [
     {
       "name": "Betor, Ancestor's Voice",
-      "scryfallId": "2e261489-8dde-4594-8868-69f432f03d03",
+      "cardDefinitionId": "2e261489-8dde-4594-8868-69f432f03d03",
       "multiverseid": 695720,
       "twoFaced": false,
       "oracleCardName": "Betor, Ancestor's Voice",
@@ -52,7 +52,7 @@
     },
     {
       "name": "Protector of the Wastes",
-      "scryfallId": "fd68208b-761f-4aa0-bc8e-59977d784211",
+      "cardDefinitionId": "fd68208b-761f-4aa0-bc8e-59977d784211",
       "multiverseid": 695943,
       "twoFaced": false,
       "oracleCardName": "Protector of the Wastes",
@@ -72,7 +72,7 @@
     },
     {
       "name": "Reunion of the House",
-      "scryfallId": "71e4a360-89dd-4f25-9b85-75d0b131e208",
+      "cardDefinitionId": "71e4a360-89dd-4f25-9b85-75d0b131e208",
       "multiverseid": 695944,
       "twoFaced": false,
       "oracleCardName": "Reunion of the House",
@@ -92,7 +92,7 @@
     },
     {
       "name": "Jaws of Defeat",
-      "scryfallId": "c495f3bf-86a4-4d2f-821f-c01515f084c9",
+      "cardDefinitionId": "c495f3bf-86a4-4d2f-821f-c01515f084c9",
       "multiverseid": 695956,
       "twoFaced": false,
       "oracleCardName": "Jaws of Defeat",
@@ -112,7 +112,7 @@
     },
     {
       "name": "Tip the Scales",
-      "scryfallId": "00b492ca-9cba-4d51-91b9-41430c6933a1",
+      "cardDefinitionId": "00b492ca-9cba-4d51-91b9-41430c6933a1",
       "multiverseid": 695958,
       "twoFaced": false,
       "oracleCardName": "Tip the Scales",
@@ -132,7 +132,7 @@
     },
     {
       "name": "Will of the Abzan",
-      "scryfallId": "e7e92b6b-ec63-477b-8a83-18c0e52615cc",
+      "cardDefinitionId": "e7e92b6b-ec63-477b-8a83-18c0e52615cc",
       "multiverseid": 695960,
       "twoFaced": false,
       "oracleCardName": "Will of the Abzan",
@@ -152,7 +152,7 @@
     },
     {
       "name": "Arbor Adherent",
-      "scryfallId": "57d0502f-5ae8-40b6-9f2b-cd4418016219",
+      "cardDefinitionId": "57d0502f-5ae8-40b6-9f2b-cd4418016219",
       "multiverseid": 695971,
       "twoFaced": false,
       "oracleCardName": "Arbor Adherent",
@@ -172,7 +172,7 @@
     },
     {
       "name": "Canopy Gargantuan",
-      "scryfallId": "87736547-7534-4f0a-86e0-be9b0428be1e",
+      "cardDefinitionId": "87736547-7534-4f0a-86e0-be9b0428be1e",
       "multiverseid": 695974,
       "twoFaced": false,
       "oracleCardName": "Canopy Gargantuan",
@@ -192,7 +192,7 @@
     },
     {
       "name": "Rampart Architect",
-      "scryfallId": "20f533fc-51d0-49bd-afcc-81b8b3ff9749",
+      "cardDefinitionId": "20f533fc-51d0-49bd-afcc-81b8b3ff9749",
       "multiverseid": 695976,
       "twoFaced": false,
       "oracleCardName": "Rampart Architect",
@@ -212,7 +212,7 @@
     },
     {
       "name": "Tree of Redemption",
-      "scryfallId": "4f55dae2-e6b4-4498-8abd-86d9717691f4",
+      "cardDefinitionId": "4f55dae2-e6b4-4498-8abd-86d9717691f4",
       "multiverseid": 696186,
       "twoFaced": false,
       "oracleCardName": "Tree of Redemption",
@@ -232,7 +232,7 @@
     },
     {
       "name": "Ikra Shidiqi, the Usurper",
-      "scryfallId": "a6fd7a8c-e0cd-4fb5-b492-8f3ef7579682",
+      "cardDefinitionId": "a6fd7a8c-e0cd-4fb5-b492-8f3ef7579682",
       "multiverseid": 696189,
       "twoFaced": false,
       "oracleCardName": "Ikra Shidiqi, the Usurper",
@@ -253,7 +253,7 @@
     },
     {
       "name": "Baldin, Century Herdmaster",
-      "scryfallId": "fc018483-69a7-4c4c-adfe-44071f53a7de",
+      "cardDefinitionId": "fc018483-69a7-4c4c-adfe-44071f53a7de",
       "multiverseid": 696266,
       "twoFaced": false,
       "oracleCardName": "Baldin, Century Herdmaster",
@@ -273,7 +273,7 @@
     },
     {
       "name": "Expel the Interlopers",
-      "scryfallId": "bbdf088c-3067-4df2-92f7-95fed5b304b8",
+      "cardDefinitionId": "bbdf088c-3067-4df2-92f7-95fed5b304b8",
       "multiverseid": 696271,
       "twoFaced": false,
       "oracleCardName": "Expel the Interlopers",
@@ -293,7 +293,7 @@
     },
     {
       "name": "Indomitable Ancients",
-      "scryfallId": "a4e20d78-8c01-40ed-bc69-89d4d5028552",
+      "cardDefinitionId": "a4e20d78-8c01-40ed-bc69-89d4d5028552",
       "multiverseid": 696277,
       "twoFaced": false,
       "oracleCardName": "Indomitable Ancients",
@@ -313,7 +313,7 @@
     },
     {
       "name": "Rhox Faithmender",
-      "scryfallId": "c79a8938-aae6-42ff-888c-2783e11a8d4f",
+      "cardDefinitionId": "c79a8938-aae6-42ff-888c-2783e11a8d4f",
       "multiverseid": 696284,
       "twoFaced": false,
       "oracleCardName": "Rhox Faithmender",
@@ -333,7 +333,7 @@
     },
     {
       "name": "Shalai, Voice of Plenty",
-      "scryfallId": "53876046-cdb8-4157-96cd-7832d3ad2549",
+      "cardDefinitionId": "53876046-cdb8-4157-96cd-7832d3ad2549",
       "multiverseid": 696286,
       "twoFaced": false,
       "oracleCardName": "Shalai, Voice of Plenty",
@@ -354,7 +354,7 @@
     },
     {
       "name": "Wakestone Gargoyle",
-      "scryfallId": "4d5f0939-6b99-401d-99c9-e4339a9c5822",
+      "cardDefinitionId": "4d5f0939-6b99-401d-99c9-e4339a9c5822",
       "multiverseid": 696293,
       "twoFaced": false,
       "oracleCardName": "Wakestone Gargoyle",
@@ -374,7 +374,7 @@
     },
     {
       "name": "Wall of Reverence",
-      "scryfallId": "f23e6f3f-4776-4015-8ee8-8e679ec7ce02",
+      "cardDefinitionId": "f23e6f3f-4776-4015-8ee8-8e679ec7ce02",
       "multiverseid": 696295,
       "twoFaced": false,
       "oracleCardName": "Wall of Reverence",
@@ -394,7 +394,7 @@
     },
     {
       "name": "Welcoming Vampire",
-      "scryfallId": "35a69bb5-b8e6-4558-9563-10c7a3662f93",
+      "cardDefinitionId": "35a69bb5-b8e6-4558-9563-10c7a3662f93",
       "multiverseid": 696296,
       "twoFaced": false,
       "oracleCardName": "Welcoming Vampire",
@@ -414,7 +414,7 @@
     },
     {
       "name": "Zetalpa, Primal Dawn",
-      "scryfallId": "78c71a23-8e73-406e-bbd0-4474c17c1d04",
+      "cardDefinitionId": "78c71a23-8e73-406e-bbd0-4474c17c1d04",
       "multiverseid": 696298,
       "twoFaced": false,
       "oracleCardName": "Zetalpa, Primal Dawn",
@@ -434,7 +434,7 @@
     },
     {
       "name": "Arasta of the Endless Web",
-      "scryfallId": "95a87b4e-f0ea-457c-9517-4acf313c4ca6",
+      "cardDefinitionId": "95a87b4e-f0ea-457c-9517-4acf313c4ca6",
       "multiverseid": 696400,
       "twoFaced": false,
       "oracleCardName": "Arasta of the Endless Web",
@@ -455,7 +455,7 @@
     },
     {
       "name": "Assault Formation",
-      "scryfallId": "40452217-9d8c-48e7-b5b4-2740b97bea2a",
+      "cardDefinitionId": "40452217-9d8c-48e7-b5b4-2740b97bea2a",
       "multiverseid": 696402,
       "twoFaced": false,
       "oracleCardName": "Assault Formation",
@@ -475,7 +475,7 @@
     },
     {
       "name": "Hornet Nest",
-      "scryfallId": "cc4693c6-f532-4726-b51a-21b04f820448",
+      "cardDefinitionId": "cc4693c6-f532-4726-b51a-21b04f820448",
       "multiverseid": 696415,
       "twoFaced": false,
       "oracleCardName": "Hornet Nest",
@@ -495,7 +495,7 @@
     },
     {
       "name": "Seedborn Muse",
-      "scryfallId": "76f58441-5674-4f1e-af9b-94e14ab7e619",
+      "cardDefinitionId": "76f58441-5674-4f1e-af9b-94e14ab7e619",
       "multiverseid": 696424,
       "twoFaced": false,
       "oracleCardName": "Seedborn Muse",
@@ -515,7 +515,7 @@
     },
     {
       "name": "Sylvan Caryatid",
-      "scryfallId": "2662837c-3837-4da9-80b4-79edb0b6c289",
+      "cardDefinitionId": "2662837c-3837-4da9-80b4-79edb0b6c289",
       "multiverseid": 696428,
       "twoFaced": false,
       "oracleCardName": "Sylvan Caryatid",
@@ -535,7 +535,7 @@
     },
     {
       "name": "Towering Titan",
-      "scryfallId": "2f75be32-0e5a-4d4f-93b4-149892df381c",
+      "cardDefinitionId": "2f75be32-0e5a-4d4f-93b4-149892df381c",
       "multiverseid": 696432,
       "twoFaced": false,
       "oracleCardName": "Towering Titan",
@@ -555,7 +555,7 @@
     },
     {
       "name": "Anguished Unmaking",
-      "scryfallId": "c7ce164c-3437-440c-b462-acca491bfd91",
+      "cardDefinitionId": "c7ce164c-3437-440c-b462-acca491bfd91",
       "multiverseid": 696435,
       "twoFaced": false,
       "oracleCardName": "Anguished Unmaking",
@@ -576,7 +576,7 @@
     },
     {
       "name": "Dragonlord Dromoka",
-      "scryfallId": "4452d99e-23c2-408d-9eb8-ef31aefafa9d",
+      "cardDefinitionId": "4452d99e-23c2-408d-9eb8-ef31aefafa9d",
       "multiverseid": 696442,
       "twoFaced": false,
       "oracleCardName": "Dragonlord Dromoka",
@@ -597,7 +597,7 @@
     },
     {
       "name": "Faeburrow Elder",
-      "scryfallId": "4d7fc4e6-e229-431f-8f8d-8464fb410724",
+      "cardDefinitionId": "4d7fc4e6-e229-431f-8f8d-8464fb410724",
       "multiverseid": 696445,
       "twoFaced": false,
       "oracleCardName": "Faeburrow Elder",
@@ -618,7 +618,7 @@
     },
     {
       "name": "Shadrix Silverquill",
-      "scryfallId": "23111dba-89f4-4663-aca6-953a209e1bd9",
+      "cardDefinitionId": "23111dba-89f4-4663-aca6-953a209e1bd9",
       "multiverseid": 696458,
       "twoFaced": false,
       "oracleCardName": "Shadrix Silverquill",
@@ -639,7 +639,7 @@
     },
     {
       "name": "Sidar Kondo of Jamuraa",
-      "scryfallId": "755cf134-e91e-4aa4-be44-b7a53a7f9e20",
+      "cardDefinitionId": "755cf134-e91e-4aa4-be44-b7a53a7f9e20",
       "multiverseid": 696459,
       "twoFaced": false,
       "oracleCardName": "Sidar Kondo of Jamuraa",
@@ -660,7 +660,7 @@
     },
     {
       "name": "Colfenor's Urn",
-      "scryfallId": "753c8720-b45c-47a0-8f25-87813660d14e",
+      "cardDefinitionId": "753c8720-b45c-47a0-8f25-87813660d14e",
       "multiverseid": 696471,
       "twoFaced": false,
       "oracleCardName": "Colfenor's Urn",
@@ -678,7 +678,7 @@
     },
     {
       "name": "Staff of Compleation",
-      "scryfallId": "0c475639-1368-4e29-adeb-8973e343bca5",
+      "cardDefinitionId": "0c475639-1368-4e29-adeb-8973e343bca5",
       "multiverseid": 696482,
       "twoFaced": false,
       "oracleCardName": "Staff of Compleation",
@@ -696,7 +696,7 @@
     },
     {
       "name": "Weathered Sentinels",
-      "scryfallId": "24a3df0f-071e-4639-b425-9f65ec6d4fc0",
+      "cardDefinitionId": "24a3df0f-071e-4639-b425-9f65ec6d4fc0",
       "multiverseid": 696492,
       "twoFaced": false,
       "oracleCardName": "Weathered Sentinels",
@@ -715,7 +715,7 @@
     },
     {
       "name": "Canopy Vista",
-      "scryfallId": "c2a85a8e-28bb-4899-a922-13a03dec844c",
+      "cardDefinitionId": "c2a85a8e-28bb-4899-a922-13a03dec844c",
       "multiverseid": 696499,
       "twoFaced": false,
       "oracleCardName": "Canopy Vista",
@@ -736,7 +736,7 @@
     },
     {
       "name": "Exotic Orchard",
-      "scryfallId": "c2ea2395-4518-4683-8eed-59c43fb3328a",
+      "cardDefinitionId": "c2ea2395-4518-4683-8eed-59c43fb3328a",
       "multiverseid": 696516,
       "twoFaced": false,
       "oracleCardName": "Exotic Orchard",
@@ -754,7 +754,7 @@
     },
     {
       "name": "Fortified Village",
-      "scryfallId": "4a0aeb3a-923a-4b97-9d27-ea7e0b57de75",
+      "cardDefinitionId": "4a0aeb3a-923a-4b97-9d27-ea7e0b57de75",
       "multiverseid": 696522,
       "twoFaced": false,
       "oracleCardName": "Fortified Village",
@@ -775,7 +775,7 @@
     },
     {
       "name": "Isolated Chapel",
-      "scryfallId": "2358a441-4ef7-469c-bb9c-c6ff4d719658",
+      "cardDefinitionId": "2358a441-4ef7-469c-bb9c-c6ff4d719658",
       "multiverseid": 696529,
       "twoFaced": false,
       "oracleCardName": "Isolated Chapel",
@@ -796,7 +796,7 @@
     },
     {
       "name": "Overgrown Farmland",
-      "scryfallId": "644fb0ed-f434-4cc4-b7e9-a60db5ece2b7",
+      "cardDefinitionId": "644fb0ed-f434-4cc4-b7e9-a60db5ece2b7",
       "multiverseid": 696537,
       "twoFaced": false,
       "oracleCardName": "Overgrown Farmland",
@@ -817,7 +817,7 @@
     },
     {
       "name": "Sungrass Prairie",
-      "scryfallId": "8005828b-807a-43fc-98aa-20f76c47662c",
+      "cardDefinitionId": "8005828b-807a-43fc-98aa-20f76c47662c",
       "multiverseid": 696553,
       "twoFaced": false,
       "oracleCardName": "Sungrass Prairie",
@@ -838,7 +838,7 @@
     },
     {
       "name": "Sunpetal Grove",
-      "scryfallId": "565b4aaa-1990-4cb2-b519-2c0b1c9d5d18",
+      "cardDefinitionId": "565b4aaa-1990-4cb2-b519-2c0b1c9d5d18",
       "multiverseid": 696555,
       "twoFaced": false,
       "oracleCardName": "Sunpetal Grove",
@@ -859,7 +859,7 @@
     },
     {
       "name": "Temple of Malady",
-      "scryfallId": "e60eb891-c06b-4a98-be3c-73e244405b45",
+      "cardDefinitionId": "e60eb891-c06b-4a98-be3c-73e244405b45",
       "multiverseid": 696559,
       "twoFaced": false,
       "oracleCardName": "Temple of Malady",
@@ -880,7 +880,7 @@
     },
     {
       "name": "Temple of Plenty",
-      "scryfallId": "de1f7e5e-a503-4f99-91a1-2fdabb7d5e89",
+      "cardDefinitionId": "de1f7e5e-a503-4f99-91a1-2fdabb7d5e89",
       "multiverseid": 696561,
       "twoFaced": false,
       "oracleCardName": "Temple of Plenty",
@@ -901,7 +901,7 @@
     },
     {
       "name": "Temple of Silence",
-      "scryfallId": "41393bce-01c1-4268-907e-de0fa8a76719",
+      "cardDefinitionId": "41393bce-01c1-4268-907e-de0fa8a76719",
       "multiverseid": 696562,
       "twoFaced": false,
       "oracleCardName": "Temple of Silence",
@@ -922,7 +922,7 @@
     },
     {
       "name": "Twilight Mire",
-      "scryfallId": "f0be6226-fd9f-4214-8a81-c563744991c4",
+      "cardDefinitionId": "f0be6226-fd9f-4214-8a81-c563744991c4",
       "multiverseid": 696565,
       "twoFaced": false,
       "oracleCardName": "Twilight Mire",
@@ -943,7 +943,7 @@
     },
     {
       "name": "Woodland Cemetery",
-      "scryfallId": "49fd1af7-b53c-4347-a912-7493aa6e55c3",
+      "cardDefinitionId": "49fd1af7-b53c-4347-a912-7493aa6e55c3",
       "multiverseid": 696568,
       "twoFaced": false,
       "oracleCardName": "Woodland Cemetery",
@@ -964,7 +964,7 @@
     },
     {
       "name": "Arcane Signet",
-      "scryfallId": "935644d4-a140-4f24-b8ab-d5e79a682a9b",
+      "cardDefinitionId": "935644d4-a140-4f24-b8ab-d5e79a682a9b",
       "twoFaced": false,
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
@@ -981,7 +981,7 @@
     },
     {
       "name": "Sol Ring",
-      "scryfallId": "7b0ccfd4-f118-4497-9c5a-54cf12000e16",
+      "cardDefinitionId": "7b0ccfd4-f118-4497-9c5a-54cf12000e16",
       "twoFaced": false,
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
@@ -998,7 +998,7 @@
     },
     {
       "name": "Command Tower",
-      "scryfallId": "5fc770b6-03ac-45c3-a2ca-bd508096384e",
+      "cardDefinitionId": "5fc770b6-03ac-45c3-a2ca-bd508096384e",
       "twoFaced": false,
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
@@ -1015,7 +1015,7 @@
     },
     {
       "name": "Nyx-Fleece Ram",
-      "scryfallId": "771fcea9-1007-4ff6-8000-99017978ac1c",
+      "cardDefinitionId": "771fcea9-1007-4ff6-8000-99017978ac1c",
       "multiverseid": 696282,
       "twoFaced": false,
       "oracleCardName": "Nyx-Fleece Ram",
@@ -1036,7 +1036,7 @@
     },
     {
       "name": "Slaughter the Strong",
-      "scryfallId": "9b4a42d9-4568-414d-8caf-9a7c33073059",
+      "cardDefinitionId": "9b4a42d9-4568-414d-8caf-9a7c33073059",
       "multiverseid": 696287,
       "twoFaced": false,
       "oracleCardName": "Slaughter the Strong",
@@ -1056,7 +1056,7 @@
     },
     {
       "name": "Swords to Plowshares",
-      "scryfallId": "f87cf997-14b5-4a2c-a7d1-34b7de6561a2",
+      "cardDefinitionId": "f87cf997-14b5-4a2c-a7d1-34b7de6561a2",
       "multiverseid": 696290,
       "twoFaced": false,
       "oracleCardName": "Swords to Plowshares",
@@ -1076,7 +1076,7 @@
     },
     {
       "name": "Wall of Omens",
-      "scryfallId": "3d134bb2-17ec-4e65-976e-f06fa983f3fb",
+      "cardDefinitionId": "3d134bb2-17ec-4e65-976e-f06fa983f3fb",
       "multiverseid": 696294,
       "twoFaced": false,
       "oracleCardName": "Wall of Omens",
@@ -1096,7 +1096,7 @@
     },
     {
       "name": "Wingmantle Chaplain",
-      "scryfallId": "9ab1ed2c-f248-4d2a-a0c3-6c7763f71a93",
+      "cardDefinitionId": "9ab1ed2c-f248-4d2a-a0c3-6c7763f71a93",
       "multiverseid": 696297,
       "twoFaced": false,
       "oracleCardName": "Wingmantle Chaplain",
@@ -1116,7 +1116,7 @@
     },
     {
       "name": "Behind the Scenes",
-      "scryfallId": "514d1c07-e559-49c7-a95c-2fa55fa65042",
+      "cardDefinitionId": "514d1c07-e559-49c7-a95c-2fa55fa65042",
       "multiverseid": 696328,
       "twoFaced": false,
       "oracleCardName": "Behind the Scenes",
@@ -1137,7 +1137,7 @@
     },
     {
       "name": "Blight Pile",
-      "scryfallId": "9dd5bcec-b766-41cd-8809-eeec7e31b39c",
+      "cardDefinitionId": "9dd5bcec-b766-41cd-8809-eeec7e31b39c",
       "multiverseid": 696330,
       "twoFaced": false,
       "oracleCardName": "Blight Pile",
@@ -1157,7 +1157,7 @@
     },
     {
       "name": "Feed the Swarm",
-      "scryfallId": "a776f96b-01bf-430a-b1ad-9f4651070610",
+      "cardDefinitionId": "a776f96b-01bf-430a-b1ad-9f4651070610",
       "multiverseid": 696336,
       "twoFaced": false,
       "oracleCardName": "Feed the Swarm",
@@ -1177,7 +1177,7 @@
     },
     {
       "name": "Infernal Grasp",
-      "scryfallId": "a8b6ef8c-3c8c-4b37-9122-6188591e3a65",
+      "cardDefinitionId": "a8b6ef8c-3c8c-4b37-9122-6188591e3a65",
       "multiverseid": 696338,
       "twoFaced": false,
       "oracleCardName": "Infernal Grasp",
@@ -1197,7 +1197,7 @@
     },
     {
       "name": "Wall of Limbs",
-      "scryfallId": "9b87e9a8-17d5-49dd-9c69-7c080c089320",
+      "cardDefinitionId": "9b87e9a8-17d5-49dd-9c69-7c080c089320",
       "multiverseid": 696356,
       "twoFaced": false,
       "oracleCardName": "Wall of Limbs",
@@ -1217,7 +1217,7 @@
     },
     {
       "name": "Arboreal Grazer",
-      "scryfallId": "9eb7b2ae-a364-485b-ae75-10dbb0af5541",
+      "cardDefinitionId": "9eb7b2ae-a364-485b-ae75-10dbb0af5541",
       "multiverseid": 696401,
       "twoFaced": false,
       "oracleCardName": "Arboreal Grazer",
@@ -1237,7 +1237,7 @@
     },
     {
       "name": "Axebane Guardian",
-      "scryfallId": "f0282af2-9b3f-4335-92ea-9db9267e8cd2",
+      "cardDefinitionId": "f0282af2-9b3f-4335-92ea-9db9267e8cd2",
       "multiverseid": 696404,
       "twoFaced": false,
       "oracleCardName": "Axebane Guardian",
@@ -1257,7 +1257,7 @@
     },
     {
       "name": "Carven Caryatid",
-      "scryfallId": "f65260d1-9802-4e46-95d3-9d6c2e211338",
+      "cardDefinitionId": "f65260d1-9802-4e46-95d3-9d6c2e211338",
       "multiverseid": 696406,
       "twoFaced": false,
       "oracleCardName": "Carven Caryatid",
@@ -1277,7 +1277,7 @@
     },
     {
       "name": "Evolving Wilds",
-      "scryfallId": "62209251-4118-4843-895b-46afb7284c75",
+      "cardDefinitionId": "62209251-4118-4843-895b-46afb7284c75",
       "multiverseid": 693735,
       "twoFaced": false,
       "oracleCardName": "Evolving Wilds",
@@ -1295,7 +1295,7 @@
     },
     {
       "name": "Jaddi Offshoot",
-      "scryfallId": "3ed79f15-beeb-4157-a567-eac0772f950a",
+      "cardDefinitionId": "3ed79f15-beeb-4157-a567-eac0772f950a",
       "multiverseid": 696416,
       "twoFaced": false,
       "oracleCardName": "Jaddi Offshoot",
@@ -1315,7 +1315,7 @@
     },
     {
       "name": "Overgrown Battlement",
-      "scryfallId": "680f6308-4469-4565-873e-40fb5aaef27d",
+      "cardDefinitionId": "680f6308-4469-4565-873e-40fb5aaef27d",
       "multiverseid": 696420,
       "twoFaced": false,
       "oracleCardName": "Overgrown Battlement",
@@ -1335,7 +1335,7 @@
     },
     {
       "name": "Sandsteppe Citadel",
-      "scryfallId": "47f47e7f-39ba-4807-8e32-7262a61dfbba",
+      "cardDefinitionId": "47f47e7f-39ba-4807-8e32-7262a61dfbba",
       "multiverseid": 693746,
       "twoFaced": false,
       "oracleCardName": "Sandsteppe Citadel",
@@ -1357,7 +1357,7 @@
     },
     {
       "name": "Tower Defense",
-      "scryfallId": "adacc68a-0bc5-49ee-b5f8-d61024952ce9",
+      "cardDefinitionId": "adacc68a-0bc5-49ee-b5f8-d61024952ce9",
       "multiverseid": 696431,
       "twoFaced": false,
       "oracleCardName": "Tower Defense",
@@ -1377,7 +1377,7 @@
     },
     {
       "name": "Wall of Blossoms",
-      "scryfallId": "df901113-e273-4fe0-a264-8e9e26e70905",
+      "cardDefinitionId": "df901113-e273-4fe0-a264-8e9e26e70905",
       "multiverseid": 696433,
       "twoFaced": false,
       "oracleCardName": "Wall of Blossoms",
@@ -1397,7 +1397,7 @@
     },
     {
       "name": "Wall of Roots",
-      "scryfallId": "e4e7d3b7-9b0c-463d-975c-ef81d7fd8dad",
+      "cardDefinitionId": "e4e7d3b7-9b0c-463d-975c-ef81d7fd8dad",
       "multiverseid": 696434,
       "twoFaced": false,
       "oracleCardName": "Wall of Roots",
@@ -1417,7 +1417,7 @@
     },
     {
       "name": "Despark",
-      "scryfallId": "f37a4bc1-3702-44d7-8b29-dca99b563c6b",
+      "cardDefinitionId": "f37a4bc1-3702-44d7-8b29-dca99b563c6b",
       "multiverseid": 696440,
       "twoFaced": false,
       "oracleCardName": "Despark",
@@ -1438,7 +1438,7 @@
     },
     {
       "name": "Indulging Patrician",
-      "scryfallId": "a2c1765c-0054-4c9f-a6b3-5e54189b44c3",
+      "cardDefinitionId": "a2c1765c-0054-4c9f-a6b3-5e54189b44c3",
       "multiverseid": 696448,
       "twoFaced": false,
       "oracleCardName": "Indulging Patrician",
@@ -1459,7 +1459,7 @@
     },
     {
       "name": "Crashing Drawbridge",
-      "scryfallId": "018257cf-8981-4691-92ab-6a33f77c9680",
+      "cardDefinitionId": "018257cf-8981-4691-92ab-6a33f77c9680",
       "multiverseid": 696472,
       "twoFaced": false,
       "oracleCardName": "Crashing Drawbridge",
@@ -1478,7 +1478,7 @@
     },
     {
       "name": "Orzhov Signet",
-      "scryfallId": "90894726-1940-4291-a05c-b85cefbfa344",
+      "cardDefinitionId": "90894726-1940-4291-a05c-b85cefbfa344",
       "multiverseid": 696479,
       "twoFaced": false,
       "oracleCardName": "Orzhov Signet",
@@ -1499,7 +1499,7 @@
     },
     {
       "name": "Selesnya Signet",
-      "scryfallId": "4e21a028-0f06-4124-bd0f-04989a1f9481",
+      "cardDefinitionId": "4e21a028-0f06-4124-bd0f-04989a1f9481",
       "multiverseid": 696480,
       "twoFaced": false,
       "oracleCardName": "Selesnya Signet",
@@ -1520,7 +1520,7 @@
     },
     {
       "name": "Swiftfoot Boots",
-      "scryfallId": "1969b151-3192-4d35-80ca-c4e180601ec8",
+      "cardDefinitionId": "1969b151-3192-4d35-80ca-c4e180601ec8",
       "multiverseid": 696484,
       "twoFaced": false,
       "oracleCardName": "Swiftfoot Boots",
@@ -1538,7 +1538,7 @@
     },
     {
       "name": "Walking Bulwark",
-      "scryfallId": "33e94caa-30cb-4f38-b240-7893dd2dc94d",
+      "cardDefinitionId": "33e94caa-30cb-4f38-b240-7893dd2dc94d",
       "multiverseid": 696490,
       "twoFaced": false,
       "oracleCardName": "Walking Bulwark",
@@ -1557,7 +1557,7 @@
     },
     {
       "name": "Access Tunnel",
-      "scryfallId": "4bef5957-71a4-4fe0-b2ce-dff8e8690bd9",
+      "cardDefinitionId": "4bef5957-71a4-4fe0-b2ce-dff8e8690bd9",
       "multiverseid": 696493,
       "twoFaced": false,
       "oracleCardName": "Access Tunnel",
@@ -1575,7 +1575,7 @@
     },
     {
       "name": "Bojuka Bog",
-      "scryfallId": "38834333-f9ea-43a8-b00a-17935d59eaea",
+      "cardDefinitionId": "38834333-f9ea-43a8-b00a-17935d59eaea",
       "multiverseid": 696497,
       "twoFaced": false,
       "oracleCardName": "Bojuka Bog",
@@ -1595,7 +1595,7 @@
     },
     {
       "name": "Deceptive Landscape",
-      "scryfallId": "ba863744-929b-43f3-a773-342ba3437b18",
+      "cardDefinitionId": "ba863744-929b-43f3-a773-342ba3437b18",
       "multiverseid": 696512,
       "twoFaced": false,
       "oracleCardName": "Deceptive Landscape",
@@ -1617,7 +1617,7 @@
     },
     {
       "name": "Path of Ancestry",
-      "scryfallId": "b8504812-fcf5-47d3-977d-1d9a11231fd0",
+      "cardDefinitionId": "b8504812-fcf5-47d3-977d-1d9a11231fd0",
       "multiverseid": 696538,
       "twoFaced": false,
       "oracleCardName": "Path of Ancestry",
@@ -1635,7 +1635,7 @@
     },
     {
       "name": "Radiant Grove",
-      "scryfallId": "466fd4e6-f1dd-40c9-92df-1da48ab729d6",
+      "cardDefinitionId": "466fd4e6-f1dd-40c9-92df-1da48ab729d6",
       "multiverseid": 696541,
       "twoFaced": false,
       "oracleCardName": "Radiant Grove",
@@ -1656,7 +1656,7 @@
     },
     {
       "name": "Plains",
-      "scryfallId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
+      "cardDefinitionId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
       "multiverseid": 693320,
       "twoFaced": false,
       "oracleCardName": "Plains",
@@ -1676,7 +1676,7 @@
     },
     {
       "name": "Plains",
-      "scryfallId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
+      "cardDefinitionId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
       "multiverseid": 693320,
       "twoFaced": false,
       "oracleCardName": "Plains",
@@ -1696,7 +1696,7 @@
     },
     {
       "name": "Plains",
-      "scryfallId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
+      "cardDefinitionId": "12cff32a-a365-43ee-a196-8ce32b3bb9fd",
       "multiverseid": 693320,
       "twoFaced": false,
       "oracleCardName": "Plains",
@@ -1716,7 +1716,7 @@
     },
     {
       "name": "Plains",
-      "scryfallId": "b8c391f2-b340-43c7-89e6-afac5b70491f",
+      "cardDefinitionId": "b8c391f2-b340-43c7-89e6-afac5b70491f",
       "multiverseid": 693321,
       "twoFaced": false,
       "oracleCardName": "Plains",
@@ -1736,7 +1736,7 @@
     },
     {
       "name": "Plains",
-      "scryfallId": "b8c391f2-b340-43c7-89e6-afac5b70491f",
+      "cardDefinitionId": "b8c391f2-b340-43c7-89e6-afac5b70491f",
       "multiverseid": 693321,
       "twoFaced": false,
       "oracleCardName": "Plains",
@@ -1756,7 +1756,7 @@
     },
     {
       "name": "Plains",
-      "scryfallId": "b8c391f2-b340-43c7-89e6-afac5b70491f",
+      "cardDefinitionId": "b8c391f2-b340-43c7-89e6-afac5b70491f",
       "multiverseid": 693321,
       "twoFaced": false,
       "oracleCardName": "Plains",
@@ -1776,7 +1776,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
+      "cardDefinitionId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
       "multiverseid": 693324,
       "twoFaced": false,
       "oracleCardName": "Swamp",
@@ -1796,7 +1796,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
+      "cardDefinitionId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
       "multiverseid": 693324,
       "twoFaced": false,
       "oracleCardName": "Swamp",
@@ -1816,7 +1816,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
+      "cardDefinitionId": "f0bfdb9e-318f-4acd-9fbd-41b98a8875d6",
       "multiverseid": 693324,
       "twoFaced": false,
       "oracleCardName": "Swamp",
@@ -1836,7 +1836,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "ac885eb7-9dae-4c48-b45c-97ef9c62c99e",
+      "cardDefinitionId": "ac885eb7-9dae-4c48-b45c-97ef9c62c99e",
       "multiverseid": 693325,
       "twoFaced": false,
       "oracleCardName": "Swamp",
@@ -1856,7 +1856,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "ac885eb7-9dae-4c48-b45c-97ef9c62c99e",
+      "cardDefinitionId": "ac885eb7-9dae-4c48-b45c-97ef9c62c99e",
       "multiverseid": 693325,
       "twoFaced": false,
       "oracleCardName": "Swamp",
@@ -1876,7 +1876,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
+      "cardDefinitionId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
       "multiverseid": 693328,
       "twoFaced": false,
       "oracleCardName": "Forest",
@@ -1896,7 +1896,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
+      "cardDefinitionId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
       "multiverseid": 693328,
       "twoFaced": false,
       "oracleCardName": "Forest",
@@ -1916,7 +1916,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
+      "cardDefinitionId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
       "multiverseid": 693328,
       "twoFaced": false,
       "oracleCardName": "Forest",
@@ -1936,7 +1936,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
+      "cardDefinitionId": "8100bceb-ffba-487a-bb45-4fe2a156a8dc",
       "multiverseid": 693328,
       "twoFaced": false,
       "oracleCardName": "Forest",
@@ -1956,7 +1956,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "8e3e83d2-96ba-4d5c-a1ed-6c08a90b339c",
+      "cardDefinitionId": "8e3e83d2-96ba-4d5c-a1ed-6c08a90b339c",
       "multiverseid": 693329,
       "twoFaced": false,
       "oracleCardName": "Forest",
@@ -1976,7 +1976,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "8e3e83d2-96ba-4d5c-a1ed-6c08a90b339c",
+      "cardDefinitionId": "8e3e83d2-96ba-4d5c-a1ed-6c08a90b339c",
       "multiverseid": 693329,
       "twoFaced": false,
       "oracleCardName": "Forest",
@@ -1996,7 +1996,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "8e3e83d2-96ba-4d5c-a1ed-6c08a90b339c",
+      "cardDefinitionId": "8e3e83d2-96ba-4d5c-a1ed-6c08a90b339c",
       "multiverseid": 693329,
       "twoFaced": false,
       "oracleCardName": "Forest",

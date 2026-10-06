@@ -26,8 +26,8 @@ test("should convert GameState to PersistedGameState and back", async () => {
     expect(persistedGameState.totalCards).toBe(testDeck.cards.length + testDeck.commanders.length);
     const commanderCards = persistedGameState.gameCards.filter(gc => gc.isCommander);
     expect(commanderCards.length).toBe(1);
-    // PersistedGameCard only has scryfallId, not full card
-    expect(commanderCards[0].scryfallId).toBe(testDeck.commanders[0].scryfallId);
+    // PersistedGameCard only has cardDefinitionId, not full card
+    expect(commanderCards[0].cardDefinitionId).toBe(testDeck.commanders[0].cardDefinitionId);
     expect(persistedGameState.gameCards.length).toBe(testDeck.cards.length + testDeck.commanders.length);
 
     // Convert back to GameState

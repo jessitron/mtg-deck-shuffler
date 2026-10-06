@@ -56,7 +56,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
   });
 
   test(
-    "a card.returned.v1 arrival moves the identified card into Revealed",
+    "a card.returned.v2 arrival moves the identified card into Revealed",
     async () => {
       fakeTable = createFakeSpineTable();
       const tableId = `table-${randomUUID()}`;
@@ -69,7 +69,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
-      fakeTable.publish(cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.scryfallId));
+      fakeTable.publish(cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.cardDefinitionId));
 
       await waitUntil(async () => (await loadGame(persistStatePort, cardRepository, gameId)).listRevealed().length === 1);
       const gameAfter = await loadGame(persistStatePort, cardRepository, gameId);
@@ -92,7 +92,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
-      const event = cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.scryfallId);
+      const event = cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.cardDefinitionId);
       fakeTable.publish(event);
       await waitUntil(async () => (await loadGame(persistStatePort, cardRepository, gameId)).listRevealed().length === 1);
 
@@ -120,13 +120,13 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       await waitUntil(() => fakeTable!.connectionCount() === 1);
       expect(fakeTable.lastEventIdsSeen()).toEqual([undefined]); // first connection: nothing applied yet
 
-      fakeTable.publish(cardReturnedEvent(tableId, firstCard.gameCardIndex, firstCard.card.scryfallId));
+      fakeTable.publish(cardReturnedEvent(tableId, firstCard.gameCardIndex, firstCard.card.cardDefinitionId));
       await waitUntil(async () => (await loadGame(persistStatePort, cardRepository, gameId)).listRevealed().length === 1);
 
       fakeTable.dropConnections();
       // Published while the subscriber has no live connection — the Spine's stream has
       // this stored regardless, so it's available for the next connect to replay.
-      fakeTable.publish(cardReturnedEvent(tableId, secondCard.gameCardIndex, secondCard.card.scryfallId));
+      fakeTable.publish(cardReturnedEvent(tableId, secondCard.gameCardIndex, secondCard.card.cardDefinitionId));
 
       await waitUntil(() => fakeTable!.connectionCount() === 1); // reconnected on its own
       await waitUntil(async () => (await loadGame(persistStatePort, cardRepository, gameId)).listRevealed().length === 2);
@@ -145,7 +145,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
   );
 
   test(
-    "a card.returned.v1 for another seat on the same table is ignored: only the matching game's Shuffler applies it",
+    "a card.returned.v2 for another seat on the same table is ignored: only the matching game's Shuffler applies it",
     async () => {
       fakeTable = createFakeSpineTable();
       const tableId = `table-${randomUUID()}`;
@@ -162,9 +162,9 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       await waitUntil(() => fakeTable!.connectionCount() === 2);
 
       fakeTable.publish(
-        cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.scryfallId, {
+        cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.cardDefinitionId, {
           initiator: { seatId: "seat-owner", playerName: "Jess" },
-          payload: { card: { scryfallId: libraryCard.card.scryfallId }, gameCardIndex: libraryCard.gameCardIndex, seat: "seat-owner", fromZone: "battlefield" },
+          payload: { card: { cardDefinitionId: libraryCard.card.cardDefinitionId }, gameCardIndex: libraryCard.gameCardIndex, seat: "seat-owner", fromZone: "battlefield" },
         })
       );
 
@@ -176,7 +176,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
   );
 
   test(
-    "a card.returned.v1 the Shuffler sent itself (occurredIn: 'shuffler') is a no-op when the Spine echoes it back — the Return button's own send already applied the move locally",
+    "a card.returned.v2 the Shuffler sent itself (occurredIn: 'shuffler') is a no-op when the Spine echoes it back — the Return button's own send already applied the move locally",
     async () => {
       fakeTable = createFakeSpineTable();
       const tableId = `table-${randomUUID()}`;
@@ -191,7 +191,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
 
       // Mirrors buildCardReturnedEvent (src/port-tabletop/types.ts) — every event the
       // Shuffler itself builds and sends carries occurredIn: "shuffler".
-      fakeTable.publish(cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.scryfallId, { occurredIn: "shuffler" }));
+      fakeTable.publish(cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.cardDefinitionId, { occurredIn: "shuffler" }));
       await new Promise((r) => setTimeout(r, 150)); // give a would-be apply time to land
 
       const gameAfter = await loadGame(persistStatePort, cardRepository, gameId);
@@ -235,7 +235,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       openGameIds.push(gameId);
       await waitUntil(() => fakeTable!.connectionCount() === 1);
 
-      fakeTable.publish(cardReturnedEvent(tableId, firstCard.gameCardIndex, firstCard.card.scryfallId));
+      fakeTable.publish(cardReturnedEvent(tableId, firstCard.gameCardIndex, firstCard.card.cardDefinitionId));
       await waitUntil(async () => (await loadGame(persistStatePort, cardRepository, gameId)).listRevealed().length === 1);
 
       // Full teardown — every browser tab closed, registry entry gone — not a mid-stream drop.
@@ -244,7 +244,7 @@ describe("the Shuffler's Spine SSE subscriber + registry", () => {
       openGameIds = openGameIds.filter((id) => id !== gameId);
 
       // Published while nobody is subscribed — the Spine keeps it regardless.
-      fakeTable.publish(cardReturnedEvent(tableId, secondCard.gameCardIndex, secondCard.card.scryfallId));
+      fakeTable.publish(cardReturnedEvent(tableId, secondCard.gameCardIndex, secondCard.card.cardDefinitionId));
 
       // A resumed game (server restart, or every tab closed then a new one opened) starts a
       // fresh subscription, seeded from the highest `spineSeq` recorded in the persisted
