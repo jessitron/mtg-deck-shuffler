@@ -1,5 +1,18 @@
 # History
 
+## `mtg-card` prop `scryfallId` becomes `cardDefinitionId`, with the first custom-shape props migration (2026-10-06)
+
+Part of the fleet-wide `cardDefinitionId` rename (`.scratch/card-definition-id/plan.md`, commit
+`70b10265`). `MtgCardShapeProps.scryfallId` is now `cardDefinitionId`, and the swallow's
+`POST /api/tables/:tableSlug/cards/return` body key followed (`cardSwallow.ts`,
+`cardReturned.ts`). No hook, guard, or gesture changed. The new piece is
+`mtgCardShapeMigrations` in `src/shared/mtgCardShape.ts`
+(`createShapePropsMigrationIds("mtg-card", { RenameScryfallId: 1 })`, `up`/`down` rename the
+key), registered in `src/server/rooms.ts` (`"mtg-card": { props, migrations }`) and as
+`static override migrations` on `MtgCardShapeUtil.tsx`. Rule recorded in `architecture.md`: a
+props rename needs a props migration registered in both places. Older entries below say
+`scryfallId` and describe the code as it was.
+
 ## Flip becomes Transform in the Tabletop — rename only, no mechanics change (2026-10-05)
 
 The context-menu item "Flip" is now "Transform" (menu id `mtg-card-transform`, stopping-point

@@ -50,7 +50,7 @@ Every component of the fleet that touches cards must hold this:
   resets both axes to `face:'front', faceDown:false` in `MtgCardShapeUtil.onTranslateEnd`.
   See [tabletop.md](tabletop.md).
 - **Contract** — every event that *reveals or chooses* a face carries `face` beside
-  `card: { scryfallId, instanceId }` (`card.played`, and `card.discarded`, built
+  `card: { cardDefinitionId, instanceId }` (`card.played`, and `card.discarded`, built
   cards-come-and-go ticket 08, 2026-08-23 — a discard shows the card publicly). Events
   that remove a card from view carry **no**
   face: `card.returned`, the `undo.*` kinds, and commanders riding `seat.joined` are all
@@ -62,7 +62,7 @@ The sections below are the Shuffler-component view (the feature's birthplace).
 
 ## Why This Feature Exists
 
-Many Magic: The Gathering cards have two faces (transform, modal double-faced, reversible). In remote play via Mural/Discord, players need to see both sides of these cards. This feature flags such cards (`twoFaced`), shows a flip button backed by a flip animation, and tracks which face is currently showing. The back image is fetched from Scryfall on demand (same `scryfallId`, `face=back`) — no back-face data is stored.
+Many Magic: The Gathering cards have two faces (transform, modal double-faced, reversible). In remote play via Mural/Discord, players need to see both sides of these cards. This feature flags such cards (`twoFaced`), shows a flip button backed by a flip animation, and tracks which face is currently showing. The back image is fetched from Scryfall on demand (same `cardDefinitionId` — a Scryfall printing id — `face=back`) — no back-face data is stored.
 
 ## Who Uses It and How
 
@@ -75,7 +75,7 @@ Players encounter two-faced cards throughout the app:
 
 - **Flip is a UI concern, not a game event.** The app tracks where cards are (Library, Hand, Table, etc.) but doesn't model battlefield state. Flipping doesn't change where a card is, so it's not recorded in the event log. (An earlier attempt to record `FlipCardEvent` was added and removed.)
 - **Same Scryfall ID, both faces' URLs stored.** Both faces of a two-faced card share one Scryfall ID. Image URLs are now **fetched from Scryfall at ingestion and stored** on the card (`imageUris` front, `backImageUris` back) — because bare constructed URLs 404 for freshly-released cards. `getCardImageUrl` prefers the stored URL and falls back to constructing `face=front`/`face=back` paths when absent.
-- **The card image is the source of truth; we store almost no card text.** `CardDefinition` carries only identity/grouping data (`name`, `scryfallId`, `twoFaced`, `cardTypes`, `colorIdentity`, `set`, …). The old `backFace`/`CardFace` and `manaCost`/`cmc`/`oracleText` fields were removed (commit `f76b49c`) — they were never displayed. The only face data any feature consumes is `cardTypes`, the union of all faces' types, used by library-search grouping. A future "is this hand worth keeping?" feature should read canonical card data from MTGJSON/Scryfall rather than re-storing it.
+- **The card image is the source of truth; we store almost no card text.** `CardDefinition` carries only identity/grouping data (`name`, `cardDefinitionId`, `twoFaced`, `cardTypes`, `colorIdentity`, `set`, …). The old `backFace`/`CardFace` and `manaCost`/`cmc`/`oracleText` fields were removed (commit `f76b49c`) — they were never displayed. The only face data any feature consumes is `cardTypes`, the union of all faces' types, used by library-search grouping. A future "is this hand worth keeping?" feature should read canonical card data from MTGJSON/Scryfall rather than re-storing it.
 - **Prep page flip may gain persistence.** Currently prep page flip uses a query parameter (`?face=back`) and doesn't persist. When we need it to persist, we'll save flip state in the prep.
 
 ## Quick Reference
@@ -97,7 +97,7 @@ Players encounter two-faced cards throughout the app:
 | Image URLs | `getCardImageUrl(card, format, face)` (prefers stored) + `constructCardImageUrl(scryfallId, format, face)` (fallback) in `src/types.ts`; stored in `CardDefinition.imageUris`/`backImageUris` |
 | Image fetch | `src/port-card-images/` (`ScryfallCardImagesGateway`, `enrichDeckWithImages`) — fetches Scryfall image URLs at ingestion |
 | Adapters | `src/port-deck-retrieval/archidektAdapter/`, `src/port-deck-retrieval/mtgjsonAdapter/` |
-| Persistence | `SqliteCardRepositoryAdapter` stores `card_types`, `image_uris`, `back_image_uris` as JSON (no back_face column); `PersistedGameCard.currentFace` |
+| Persistence | `SqliteCardRepositoryAdapter` keys on `card_definition_id` and stores `card_types`, `image_uris`, `back_image_uris` as JSON (no back_face column); `PersistedGameCard.currentFace` |
 | `card.discarded` (Spine event) | **Built** (cards-come-and-go ticket 08, 2026-08-23): `buildCardDiscardedEvent`/`sendCardDiscardedToSpineBestEffort` (`src/port-tabletop/types.ts` / `src/port-spine/sendToSpine.ts`), sent from `POST /discard-card/:gameId/:gameCardIndex` and `POST /mill/:gameId` instead of `card.played` with a graveyard hint. Same face-carrying shape as `card.played` (graveyard *is* the meaning). Face/image computation shared with `card.played`/`card.played-face-down` via the private `cardFaceFields(gameCard)` helper in `src/port-tabletop/types.ts`. See [contract.md](contract.md). |
 
 ## Other Docs

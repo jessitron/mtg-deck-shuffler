@@ -216,3 +216,12 @@ Card type grouping logic lives in the EJS template itself, not in a separate Typ
 ## Recurring Challenge: Data Availability
 
 The grouping feature was blocked once because `types` wasn't in persisted card data. This was resolved by ensuring `CardDefinition` always includes `types: string[]`. Any future features depending on card metadata should verify the data is present in persisted state.
+
+## 2026-10-06: Card identity renamed to cardDefinitionId — no library-search behavior change
+
+- **`0a6c52dd`** - `CardDefinition.scryfallId` → `cardDefinitionId`; the card repository is keyed by
+  column `card_definition_id`. Persistence versions bumped (game state 12, prep 4, deck 4) as a clean
+  break: old saves/preps throw `IncompatibleStateVersionError`/`IncompatiblePrepVersionError` on load.
+  `cardTypes` and `colorIdentity` are unchanged and were preserved through the rewrite of every deck
+  file. The library modal routes, template mapping, and `library-modal.ejs` never read the id, so
+  nothing in this feature changed.

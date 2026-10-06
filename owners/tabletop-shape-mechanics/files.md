@@ -16,7 +16,7 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
 ## Shared (each shape's type/props definition)
 
 - `apps/tabletop/src/shared/mtgCardShape.ts` — `MtgCardShapeProps` (the validated prop shape:
-  `w`, `h`, `instanceId`, `scryfallId`, `cardName`, `frontImageUrl`, `backImageUrl`, `face`,
+  `w`, `h`, `instanceId`, `cardDefinitionId`, `cardName`, `frontImageUrl`, `backImageUrl`, `face`,
   `faceDown`, `tapped`, `sleeveColor`, and, since table-layout ticket 18 (2026-08-09), `owner`
   (seatId) and `isCommander` — facts the shape carries, granting no capability), the
   `TLGlobalShapePropsMap` module augmentation that registers `mtg-card` into tldraw's `TLShape`
@@ -26,7 +26,10 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   null`** — the card's index in its owner's game state, required (non-null) for the library-portal
   swallow to send `card.returned.v1`; `null` for shapes that never carried one (commander/ghost
   mints). See `architecture.md`'s "The library portal" section and `interactions.md` watch
-  point 26.
+  point 26. **Also exports `mtgCardShapeMigrations`** — the first props migration on any custom
+  shape here (`RenameScryfallId: 1`, `scryfallId` → `cardDefinitionId`), registered in server
+  `rooms.ts` and as `MtgCardShapeUtil.migrations`. See `architecture.md`'s schema-registration
+  section.
 - `apps/tabletop/src/shared/mtgZoneShape.ts` — the same pattern for furniture (ticket 13):
   `MtgZoneShapeProps` (`w`, `h`, `zone` — a closed enum `"playmat" | "library" | "graveyard" |
   "exile" | "stack" | "command"` — `seatId`, `label`, `sleeveColor`, and, since 2026-08-11,
@@ -106,7 +109,7 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   `swallowCard(editor, current, zoneHit)` — calls `evictPassengers` (now exported from
   `cardZoneEntry.ts`) before animating the dropped card's spin/shrink/fade into the library's
   center via `editor.animateShapes` (500ms), then defers (`setTimeout(0)`, never synchronous) an
-  async `completeSwallow`: POSTs `owner`/`scryfallId`/`gameCardIndex` to
+  async `completeSwallow`: POSTs `owner`/`cardDefinitionId`/`gameCardIndex` to
   `/api/tables/:tableSlug/cards/return` and only calls `editor.deleteShapes([id])` on a confirmed
   2xx — on failure it re-`animateShapes`s the shape's pre-swallow visual snapshot back and leaves
   it in the store. Called from `MtgCardShapeUtil.onTranslateEnd`'s new pointer-keyed check, ahead
@@ -136,7 +139,7 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   and `interactions.md` watch point 28.
 - `apps/tabletop/src/server/cardReturned.ts` — **new, the library portal (2026-08-20)**:
   `handleCardReturned`, the new `POST /api/tables/:tableSlug/cards/return` route registered in
-  `server.ts` next to the existing `seat.joined` route. Validates `seatId`/`scryfallId`/
+  `server.ts` next to the existing `seat.joined` route. Validates `seatId`/`cardDefinitionId`/
   `gameCardIndex`, looks up the room's `spineTableId` and the seat's `playerName`, and calls
   `sendCardReturnedToSpineBestEffort` — `200 { ok: true }` on a confirmed send, `502 { ok: false
   }` otherwise. No tldraw store mutation here; the client-side `swallowCard` deletes the shape

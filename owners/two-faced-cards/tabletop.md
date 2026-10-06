@@ -45,7 +45,7 @@ transport that delivers it to `applyCardArrival` changed.
 - The card-arrival payload (the `card.played` event, frozen in F0/JES-128; delivered via
   the Spine SSE subscription since tabletop-sse ticket 02, 2026-08-18 — see the transport
   note above; formerly `POST /api/tables/:tableName/cards`, now deleted)
-  carries `face: "front" | "back"` beside `card: { scryfallId, instanceId }`, plus (since
+  carries `face: "front" | "back"` beside `card: { cardDefinitionId, instanceId }` (`scryfallId` before contracts v2), plus (since
   ticket 12, 2026-08-08) `frontImageUrl: string` and `backImageUrl: string | null`
   (replacing the old baked `imageUrl`).
 - The Shuffler always sends `frontImageUrl` (`getCardImageUrl(card, "normal", "front")`)
@@ -63,7 +63,7 @@ transport that delivers it to `applyCardArrival` changed.
   built the gesture" below; this is no longer a "still open" item.)
 - The shape's `meta` is now `{}` at arrival — genuinely empty, not `{ instanceId,
   scryfallId, cardName }` as before. Identity moved into validated `props` (`instanceId`,
-  `scryfallId`, `cardName`, alongside the image URLs and face state); `meta` is reserved
+  `cardDefinitionId` — `scryfallId` until `70b10265` — `cardName`, alongside the image URLs and face state); `meta` is reserved
   for zone membership, written later by `onTranslateEnd` (`meta.zone`) — see "What a card
   is" below.
 
@@ -208,7 +208,7 @@ and the ticket's "Blast radius" — and it landed clean; no disconnects reported
 'mtg-card': {
   w, h,                          // from BaseBoxShapeUtil
   instanceId: string,            // this card in this game; the dedup key, never composite
-  scryfallId: string,            // the printing (all faces)
+  cardDefinitionId: string,      // the printing (all faces); a Scryfall id
   cardName: string,              // rendering: alt text / a11y
   frontImageUrl: string,
   backImageUrl: string | null,   // the PRINTED back face. null = no printed back exists
@@ -221,6 +221,14 @@ and the ticket's "Blast radius" — and it landed clean; no disconnects reported
   isCommander: boolean,          // whether this is one of owner's commanders (table-layout ticket 18)
 }
 ```
+
+**`scryfallId` → `cardDefinitionId` — a props migration (`70b10265`).** The prop rename is
+the `mtg-card` shape's first tldraw props migration: `mtgCardShapeMigrations`
+(`createShapePropsMigrationIds("mtg-card", { RenameScryfallId: 1 })`, up/down rename) in
+`apps/tabletop/src/shared/mtgCardShape.ts`, registered in `rooms.ts` and on
+`MtgCardShapeUtil.migrations`. Cards already on stored tables keep their faces and URLs —
+only the key moves. The next prop change adds a step to this sequence; it doesn't start a
+new one.
 
 **`owner`/`isCommander` added — table-layout ticket 18 (2026-08-09).** First-class,
 schema'd, synced props, set via the ordinary card-arrival path (`buildCardPlayedEvent` on
@@ -387,7 +395,7 @@ Jess stated and which now lives in `notes/DESIGN-the-table-vision.md` § Princip
 
 So, binding on all future Tabletop face work:
 
-- Identity (`scryfallId`, `cardName`, both image URLs) **stays in `props`** on a face-down
+- Identity (`cardDefinitionId`, `cardName`, both image URLs) **stays in `props`** on a face-down
   card. Guarding it is theatre: any player can just turn the card over.
 - **Never gate a Transform / turn-over / peek gesture on who controls the card.** This kills a
   whole class of design before it starts — "only the controller may reveal" is not
@@ -502,7 +510,7 @@ minted shape's `faceDown` differ.
   consult that owner for anything about the menu's *mechanics*, this owner only for its
   *face*-related items.
 - Dedup is on `instanceId` (the card exists once on the table), NOT on
-  scryfallId+face — two Forests are two instances; one MDFC transformed is still one
+  cardDefinitionId+face — two Forests are two instances; one MDFC transformed is still one
   instance. **Since ticket 12, `instanceAlreadyOnTable` reads `props.instanceId`**
   (was `meta.instanceId` when identity lived in `meta`) — if a future change moves
   identity again, this dedup check has to move with it. The coming **removal handlers**
