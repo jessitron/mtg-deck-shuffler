@@ -554,7 +554,8 @@ describe("ArchidektDeckToDeckAdapter", () => {
       const deck = await squidSwordDeck();
       const customNames = deck.cards.filter((c) => c.cardSource === "archidekt-custom").map((c) => c.name);
       expect(customNames.sort()).toEqual(["Cat Throwing a Tomato", "Don't Stop in Stagnance", "Squid Sword"]);
-      expect(deck.commanders.map((c) => [c.name, cardSourceOf(c)])).toEqual([["Glarb, Calamity's Augur", "scryfall"]]);
+      expect(deck.cards.filter((c) => cardSourceOf(c) === "scryfall").map((c) => c.name)).toEqual(["Glarb, Calamity's Augur"]);
+      expect(deck.commanders.map((c) => [c.name, cardSourceOf(c)])).toEqual([["Horrible Nasty Pumpkin", "archidekt-custom"]]);
       expect(deck.totalCards).toBe(deck.cards.length + deck.commanders.length);
     });
 
@@ -650,7 +651,8 @@ describe("ArchidektDeckToDeckAdapter", () => {
       const imagesPort = new FakeCardImagesGateway();
       const adapter = new ArchidektDeckToDeckAdapter(new FilesystemArchidektGateway("./test/decks"), undefined, imagesPort);
       const deck = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "14716273" });
-      expect(imagesPort.requestedIds).toEqual([deck.commanders[0].cardDefinitionId]);
+      const glarb = deck.cards.find((c) => c.name === "Glarb, Calamity's Augur")!;
+      expect(imagesPort.requestedIds).toEqual([glarb.cardDefinitionId]);
       expect(deck.cards.find((c) => c.name === "Squid Sword")!.imageUris?.normal).toBe(SQUID_SWORD_FRONT);
     });
   });

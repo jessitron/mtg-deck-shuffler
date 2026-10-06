@@ -2,13 +2,13 @@
   "id": 14716273,
   "name": "Ren's Frogs & Faeries",
   "createdAt": "2025-07-22T21:22:23.059755Z",
-  "updatedAt": "2026-10-06T17:46:49.310836Z",
+  "updatedAt": "2026-10-06T20:56:42.424743Z",
   "deckFormat": 3,
   "edhBracket": null,
   "game": null,
   "description": "",
-  "viewCount": 84,
-  "featured": "https://card-images.archidekt.com/art/front/f/f/ffc70b2d-5a3a-49ea-97db-175a62248302.webp",
+  "viewCount": 87,
+  "featured": "",
   "customFeatured": "",
   "hasPrimer": false,
   "private": false,
@@ -240,7 +240,7 @@
     {
       "id": 2347778563,
       "categories": [
-        "Commander"
+        "Custom Card"
       ],
       "companion": false,
       "flippedDefault": false,
@@ -250,7 +250,7 @@
       "customCmc": null,
       "removedCategories": null,
       "createdAt": "2025-07-22T21:22:23.069956Z",
-      "updatedAt": "2025-07-22T21:22:27.429266Z",
+      "updatedAt": "2026-10-06T20:56:27.992410Z",
       "deletedAt": null,
       "notes": null,
       "card": {
@@ -573,6 +573,53 @@
         "backSuperTypes": null,
         "backImageUrl": "https://storage.googleapis.com/topdekt-user/images/uploads/a7/a78d3635-1d1e-4c00-92a3-bb3e37fd69ab.png",
         "backArtistName": "Evelyn Kerr"
+      }
+    },
+    {
+      "id": 3548769093,
+      "categories": [
+        "Commander"
+      ],
+      "companion": false,
+      "flippedDefault": false,
+      "label": ",#656565",
+      "modifier": "Normal",
+      "quantity": 1,
+      "customCmc": null,
+      "removedCategories": null,
+      "createdAt": "2026-10-06T20:56:23.421129Z",
+      "updatedAt": "2026-10-06T20:56:42.404529Z",
+      "deletedAt": null,
+      "notes": null,
+      "card": {
+        "id": 231491,
+        "owner": 733430,
+        "cmc": 2,
+        "setCode": "YAS",
+        "collectorNumber": "006",
+        "frontName": "Horrible Nasty Pumpkin",
+        "frontManaCost": "{B}{G}",
+        "frontText": "Whenever Horrible Nasty Pumpkin takes damage, it asplodes. Sacrifice it, create 3 1/1 pest tokens, and each player takes 1 damage and 1 poison counter.",
+        "frontPower": "0",
+        "frontToughness": "2",
+        "frontLoyalty": null,
+        "frontTypes": "Creature",
+        "frontSubTypes": "Plant",
+        "frontSuperTypes": "Legendary",
+        "frontImageUrl": "https://storage.googleapis.com/topdekt-user/images/uploads/09/090a6d28-2c5a-4433-a5d6-4a94bf63878c.png",
+        "frontArtistName": "Tyler Wilson",
+        "hasBack": false,
+        "backName": null,
+        "backManaCost": null,
+        "backText": null,
+        "backPower": null,
+        "backToughness": null,
+        "backLoyalty": null,
+        "backTypes": null,
+        "backSubTypes": null,
+        "backSuperTypes": null,
+        "backImageUrl": null,
+        "backArtistName": null
       }
     }
   ],
