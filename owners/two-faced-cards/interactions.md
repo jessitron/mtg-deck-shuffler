@@ -457,10 +457,9 @@ String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.pl
     longer destructures `zoneHint` off the incoming envelope or sets a `"zone.hint"` span
     attribute, and its now-unused local `ZoneHint` type and `CardPlayedPayload.zoneHint`
     field were deleted (`CardPlayedPayload` is now just a type alias for
-    `CardArrivalPayloadCommon`, which never had `zoneHint`). No behavior change. **If a
-    future ticket wants to actually remove `zoneHint` from the wire**, this is prep work
-    for it, not the removal itself — the field is still required and still sent; don't
-    assume this change dropped it.
+    `CardArrivalPayloadCommon`, which never had `zoneHint`). No behavior change. The field
+    was later removed from the wire entirely (schemas, Shuffler builders, test payloads);
+    see `contract.md`'s "`zoneHint` removed" section.
 
 ## Not Related To
 

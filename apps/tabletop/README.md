@@ -65,7 +65,6 @@ A fixed **Stack area**, plus a **battlefield row per seat** allocated in first-p
 order — keyed by `seatId`, labeled with the player name — each row ending in a
 **Graveyard spot** and a smaller **Exile spot**. Every played card, land or not,
 arrives on the Stack and a person drags it on; the Tabletop stays meaning-free.
-(`zoneHint` on `card.played` is deprecated and ignored.)
 Dedup: on event `id` (retried request) and on `instanceId` already present (a second
 arrival of one instance is a physical no-op).
 

@@ -136,7 +136,6 @@ of what happened (it's not observed/inferred), so it says so directly.
   "payload": {
     "card": { "scryfallId": "11111111-...", "instanceId": "22222222-..." },
     "face": "front",
-    "zoneHint": "stack",
     "frontImageUrl": "https://cards.scryfall.io/normal/front/1/1/11111111-....jpg",
     "backImageUrl": null,
     "cardName": "Lightning Bolt",

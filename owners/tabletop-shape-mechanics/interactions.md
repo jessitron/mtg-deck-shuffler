@@ -422,9 +422,7 @@
    drags both arm exactly one zone, the one under the cursor, with no dependence on selection
    size or order. See `architecture.md`'s "Corrected, 2026-08-08" subsection and
    `verify-zone-armed.spec.ts`'s "dragging a multi-card selection arms only the one zone under the
-   pointer, not one per card" for the regression test (uses `zoneHint: "battlefield"`, not
-   `"stack"`, so the two selected cards land at distinct positions instead of stacking exactly on
-   top of each other — same-position stacking made click-selecting the second card ambiguous).
+   pointer, not one per card" for the regression test (the two selected cards cascade across the Stack at distinct positions).
    **Lesson for future code-review findings against this signal**: a finding that argues for
    *more* granularity (one armed zone per shape) needs to be checked against what a multi-select
    drag is actually supposed to do in this app, not assumed correct because it covers more cases

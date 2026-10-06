@@ -126,10 +126,21 @@ its own `"zone.hint"` span attribute — its local `ZoneHint` type and
 `CardPlayedPayload.zoneHint` field are gone (`CardPlayedPayload` is now just an alias for
 `CardArrivalPayloadCommon`).
 
+## `zoneHint` removed from `card.played.v1`/`card.played-face-down.v1`
+
+The field is gone from both schemas' `properties` and `required`, from the Shuffler's
+`buildCardPlayedEvent`/`buildCardPlayedFaceDownEvent`/`announceCardPlayed` signatures
+(`zoneHintForPlay` and the `ZoneHint` type are deleted), and from every Tabletop test
+payload. In-place edit, no version bump: no receiver read the field, and
+`additionalProperties: true` lets a sender that still includes it validate. The
+deprecation section above describes the state before this removal. The required fields of
+`card.played.v1` are now `card`, `face`, `frontImageUrl`, `backImageUrl`, `cardName`,
+`owner`, `isCommander`.
+
 ## `card.played-face-down.v1` — concealment as its own event kind, built end to end (card-played-face-down tickets 01–03, all landed 2026-08-21)
 
 `contracts/payloads/card.played-face-down.v1.json` is a **field-for-field duplicate** of
-`card.played.v1.json` — same required fields (`card`, `face`, `zoneHint`,
+`card.played.v1.json` — same required fields (`card`, `face`,
 `frontImageUrl`, `backImageUrl`, `cardName`, `owner`, `isCommander`), same optional
 `gameCardIndex`. Only the `name`/`title`/`description` differ. This is a deliberate
 **separate event kind, not a `faceDown` flag on `card.played`** (Jess, 2026-08-12: "this

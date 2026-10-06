@@ -222,10 +222,8 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   send to the Tabletop to block on. `card.played` reaches the Tabletop via
   `sendCardPlayedToSpineBestEffort` (below) — best-effort, never blocking, never a
   reason to fail the play/discard. Solo mode (no table): clipboard flow, untouched.
-  `card.played`'s `zoneHint` (land→battlefield, nonland→stack) is deprecated — every
-  played card lands on the Stack regardless (2026-08-16) — but still required, so
-  `zoneHintForPlay()` keeps populating it. Discard sends `card.discarded`, which carries
-  no `zoneHint` at all (tabletop-cards-come-and-go ticket 08).
+  Every played card lands on the Stack; the payload names no zone. Discard sends
+  `card.discarded` (tabletop-cards-come-and-go ticket 08).
 - **Joining a table is one call to the Spine**: `/start-game`, `/restart-game`, and
   `/yo` all call `joinSpineBestEffort()` (`src/table-sync/sendToSpine.ts`) once,
   carrying identity (`gameId`, table name, player name) *and* the full seat
@@ -235,7 +233,7 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   into its own log, and notifies the Tabletop itself over HTTP — and hands back
   `{tableId, seatNumber, tableUrl}`. There is no `TabletopPort`, `HttpTabletopGateway`,
   or `FakeTabletopGateway` in this ship; `src/port-tabletop/` holds only the
-  `card.played` envelope shape (`buildCardPlayedEvent`, `zoneHintForPlay`) that both
+  `card.played` envelope shape (`buildCardPlayedEvent`) that both
   `sendCardPlayedToSpineBestEffort` and the Spine join's decoration payload build
   against. This is **best-effort** — a Spine that's down must not block starting the
   game, failure is a span attribute + `log.warn` — and still **awaited** before the

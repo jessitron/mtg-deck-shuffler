@@ -568,9 +568,8 @@ depended on to pick "the" shape when there were several). Regression test:
 `verify-zone-armed.spec.ts`'s "dragging a multi-card selection arms only the one zone under the
 pointer, not one per card" — selects two cards via shift-click and drags the group, asserting the
 zone under the pointer arms and a second zone (that one of the other selected cards' own bounds
-would otherwise have overlapped) does not. Uses `zoneHint: "battlefield"` rather than `"stack"` for
-the two cards, because same-position stacking made click-selection of the second card ambiguous in
-the test.
+would otherwise have overlapped) does not. The two cards cascade across the Stack at distinct
+positions, so click-selecting the second card is unambiguous.
 
 **First "read reactively, write nothing" hook in this KB.** Every prior `ShapeUtil.component()`
 hook documented here (`onClick`, `onTranslateEnd`) *writes* to the store — a tap, a zone stamp, a
@@ -854,7 +853,7 @@ this narrowing is load-bearing, not tidiness:
 ### Battlefield-exit eviction
 
 `NON_BATTLEFIELD_ZONES = {graveyard, exile, library}` — **NOT the stack, deliberately**: cards
-ARRIVE on the Stack (`zoneHint`), so their first settled move fires a *stack* zone-entry, and
+ARRIVE on the Stack, so their first settled move fires a *stack* zone-entry, and
 including it would strip counters attached there. Found empirically — the plan's first draft
 included stack, and the Playwright test caught it.
 

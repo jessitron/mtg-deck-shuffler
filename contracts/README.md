@@ -35,6 +35,11 @@ This is narrower than "fail loudly" — known fields still type-check (wrong typ
 pattern, missing `required` all still reject); only genuinely unrecognized properties
 pass through unexamined.
 
+Removing `zoneHint` from `card.played.v1` and `card.played-face-down.v1` (every played card
+arrives on the Stack) was an in-place edit with no version bump: the field was already
+ignored by every receiver, and `additionalProperties: true` lets a sender that still
+includes it validate.
+
 ## Files
 
 - `envelope.v1.json` — the envelope every event wears, whatever its `name`. Bumped only

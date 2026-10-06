@@ -346,7 +346,7 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   `entry.stackCardCount(owner)` — unconditionally, every played card lands on the Stack) and the
   new `applyCardDiscard` (for `card.discarded`, always
   positioned via `graveyardCardPosition(playerArea.seatIndex, playerArea.graveyardCount++)`, no
-  `zoneHint` in that payload at all — routed by event kind, not a zone hint). **Since the library
+  zone field in that payload — routed by event kind). **Since the library
   portal (2026-08-20), also threads `gameCardIndex` through from `envelope.payload.gameCardIndex`**
   (already on the wire in `card.played`, previously dropped) — see `architecture.md`'s "The
   library portal" section. **Since 2026-08-20, the stack placement case calls
@@ -499,17 +499,13 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   above, confirmed during this owner's `-context` consult, not a per-spec calibration),
   `placeCard(page, baseURL, tableSlug, instanceId, payloadOverrides?)` (POSTs `card.played`,
   waits for `#shape\:card-<id>` to attach, returns the `Locator`; defaults `cardName` to
-  "Llanowar Elves" with `payloadOverrides` spread last so a caller's `zoneHint` always wins
-  over the default `"stack"`), `center(locator)`, and the drag primitives `dragPointTo`/
+  "Llanowar Elves" with `payloadOverrides` spread last so a caller's overrides always win), `center(locator)`, and the drag primitives `dragPointTo`/
   `dragCenterTo` (the canonical `move → down → move(steps: 10) → up` sequence), with
   `dragBy`/`dragCardTo` now thin wrappers over `dragPointTo`/`center` instead of each
   re-implementing the mouse sequence. **New specs should reach for this module instead of
   re-deriving `cardPlayed`/`placeCard`/drag helpers.**
-  - `verify-drag-identity.spec.ts`'s two-card setup goes through the shared `placeCard` but
-    keeps its own `zoneHint: "battlefield"` override (not the shared default `"stack"`),
-    called out in a comment at the call site: `"stack"` places both cards at the same
-    position, making click-selection of the second card ambiguous — exactly the
-    drag-identity regression's own setup precondition (see `959831c` above).
+  - `verify-drag-identity.spec.ts`'s two-card setup goes through the shared `placeCard` with
+    no payload override; both cards cascade across the Stack at distinct positions.
   - `steps: 10` was confirmed uniform across all four drag-using specs' call sites (no
     hidden per-spec drift found during the extraction). The one `steps: 5` in
     `verify-zone-entry.spec.ts` is a small in-zone repositioning nudge, not part of a shared

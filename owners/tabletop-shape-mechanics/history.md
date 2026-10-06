@@ -1,5 +1,15 @@
 # History
 
+## `zoneHint` removed from the contract and every fixture — no mechanics change
+
+`zoneHint` is gone from `card.played.v1.json`, `card.played-face-down.v1.json`, the Shuffler's
+envelope builders, and every Tabletop test payload. The specs that overrode
+`zoneHint: "battlefield"` (`verify-drag-identity`, `verify-zone-armed`'s multi-card spec,
+`verify-multi-untap`, `verify-flip-face-down`) now send the default payload; the field was
+already ignored, so the cards cascade across the Stack at distinct positions as before and the
+full Playwright suite passes unchanged. Older entries below that mention the override describe a
+setup that no longer exists.
+
 ## Reconnect instrumentation — a one-shot `store.allRecords()` read on `connectionStatus` flipping to "online", not a `store.listen()` consumer, no mechanics change (2026-09-01)
 
 `apps/tabletop/src/client/useReconnectSpans.ts` (new, `fleet-is-observable`'s territory, not

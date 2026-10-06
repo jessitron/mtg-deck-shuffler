@@ -357,7 +357,7 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `HttpTabletopGateway`, `FakeTabletopGateway`, `sendCardToTableFirst`, or `TABLETOP_URL`
   anywhere in the ship — `card.played` travels Shuffler→Spine only, then
   Spine→Tabletop over the Spine's own SSE broadcast. `apps/shuffler/src/port-tabletop/`
-  holds envelope-shape helpers only (`buildCardPlayedEvent`, `zoneHintForPlay`, the
+  holds envelope-shape helpers only (`buildCardPlayedEvent`, the
   `CardPlayedEvent`/`EventEnvelope` types) — don't add an HTTP client back into it on the theory
   the directory name implies one. If a future
   change needs the Shuffler to reach the Tabletop directly again, that's a new decision, not a
