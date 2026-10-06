@@ -221,8 +221,8 @@ Discord anyway, I'll tell you the table name."
   continues as-is.
 - **Play and Discard buttons** (today there is only Play). Both are born-semantic game
   events — "Jess played Lyra" / "Jess discarded Lyra" — no interpretation needed. The
-  verb implies the landing zone on the table: Play → the Stack for nonlands, straight
-  to battlefield for lands; Discard → the Graveyard area. Clipboard mode presumably
+  verb implies the landing zone on the table: Play → the Stack, for every card,
+  lands included; Discard → the Graveyard area. Clipboard mode presumably
   survives as a fallback / solo mode.
 - **Prep screen** gains "type a table name to join."
 - Emits public shadows of hidden-zone events to the Spine: drew a card, mulliganed,

@@ -267,10 +267,9 @@ happens to have a picture; the picture is the optional part.
 
 One arrival rule (2026-08-16 — was two; see the delta table, below): **every played
 card**, lands included, **arrives on the Stack**, at the center of the table where
-everyone can see it. The Shuffler still tells the Tabletop `zoneHint: "battlefield"`
-for a land (it knows land vs. non-land; the Tabletop doesn't need to) — the Tabletop
-just no longer treats that hint as "skip the Stack." A discard still carries its own
-distinct `zoneHint: "graveyard"` and lands in the graveyard box directly, unaffected.
+everyone can see it. The Shuffler still fills in the deprecated `zoneHint`
+(`"battlefield"` for a land), but no receiver reads it. A discard is its own event,
+`card.discarded`, and lands in the graveyard box directly.
 
 From the stack, a human drags it where it goes: a land or creature/artifact/enchantment
 onto the battlefield, instant/sorcery into the graveyard. **That's a person's job, not
@@ -306,7 +305,7 @@ Nobody is restricted from moving anybody else's cards. That's not an oversight.
 | Stack: a fixed box at top-left                                          | A fixed square at the center of the table, compass seats (S, N, E, W) around it (ticket 14; was a widening strip above a row until then) |
 | No library on the canvas                                                | Library as a card back with a shadow                                                    |
 | Card arrival is the only Shuffler → Tabletop message                    | Plus a seat-joined message carrying the playmat image                                   |
-| `zoneHint: battlefield` auto-places in a row                            | Lands auto-place; nothing else is auto-arranged                                         |
+| `zoneHint: battlefield` auto-places in a row                            | Every card arrives on the Stack; nothing is auto-arranged                               |
 
 ## Open questions
 

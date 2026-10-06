@@ -435,7 +435,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
     <li>The Tabletop's taps, flips and moves reach Honeycomb as spans but never the Spine.</li>
     <li><code>table.created</code> is named in docs but has no payload schema and is not sent.</li>
     <li>The Tabletop's CLAUDE.md says only card.played has a consumer. The dispatch code also handles card.played-face-down, card.discarded and card.returned.</li>
-    <li>The Shuffler's SEAMAP says a played land goes to the battlefield. Its CLAUDE.md says every card goes to the Stack, and <code>zoneHint</code> is deprecated but still required.</li>
+    <li><code>zoneHint</code> on card.played is deprecated and ignored by receivers, but the contract still requires it.</li>
     <li>The Shuffler's CLAUDE.md names <code>sendCardPlayedToSpineBestEffort</code>. The code calls <code>sendCard{Played,Returned,Discarded}BeforeMutate</code>.</li>
   </ul>
 </section>

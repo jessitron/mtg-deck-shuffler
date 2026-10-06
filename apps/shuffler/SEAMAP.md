@@ -19,8 +19,8 @@ hidden zones so your hands are free to play.
    minted at join, prep records table info for rejoining); joining and Play/Discard
    both go through the Spine, never straight to the Tabletop — mutate and persist
    happen immediately, and `card.played` reaches the table best-effort via the
-   Spine's event log, the verb implying the landing zone (land→battlefield,
-   nonland→stack, discard→graveyard; clipboard survives as solo mode). Still ahead:
+   Spine's event log, the verb implying the landing zone (play→Stack,
+   discard→graveyard; clipboard survives as solo mode). Still ahead:
    hidden-zone events cast public shadows to the Spine (drew a card, hand count,
    mulligan) — the shadow logic lives here, at the source._
 3. **A tray, not a tab** — someday the hand renders inside the Tabletop page, and the
