@@ -15,9 +15,9 @@ DB.create_table? :seats do
   String :table_id, null: false
   Integer :number, null: false
   String :player_name, null: false
-  String :game_id
+  String :join_request_id
   index %i[table_id number], unique: true
-  index :game_id, unique: true, name: :seats_game_id_unique
+  index :join_request_id, unique: true, name: :seats_join_request_id_unique
 end
 
 DB.create_table? :events do
@@ -40,10 +40,13 @@ DB.create_table? :events do
 end
 
 seat_columns = DB.schema(:seats).map(&:first)
-unless seat_columns.include?(:game_id)
-  DB.alter_table(:seats) { add_column :game_id, String }
+if seat_columns.include?(:game_id)
+  DB.run("DROP INDEX IF EXISTS seats_game_id_unique")
+  DB.alter_table(:seats) { rename_column :game_id, :join_request_id }
+elsif !seat_columns.include?(:join_request_id)
+  DB.alter_table(:seats) { add_column :join_request_id, String }
 end
-DB.run("CREATE UNIQUE INDEX IF NOT EXISTS seats_game_id_unique ON seats(game_id)")
+DB.run("CREATE UNIQUE INDEX IF NOT EXISTS seats_join_request_id_unique ON seats(join_request_id)")
 
 event_columns = DB.schema(:events).map(&:first)
 unless event_columns.include?(:initiator_seat_id)

@@ -19,23 +19,23 @@ module Spine
     one_to_many :seats, key: :table_id
     one_to_many :events, key: :table_id
 
-    def self.join!(name:, game_id:, player_name:, decoration:)
+    def self.join!(name:, join_request_id:, player_name:, decoration:)
       DB.transaction do
-        existing = Seat.first(game_id: game_id)
+        existing = Seat.first(join_request_id: join_request_id)
         next replay_outcome(existing) if existing
 
         table = first(name: name)
         created = table.nil?
         candidate = table || new(id: TableSlug.mint(name), name: name)
-        preparation = candidate.send(:prepare_seat, game_id: game_id,
+        preparation = candidate.send(:prepare_seat, join_request_id: join_request_id,
           player_name: player_name, decoration: decoration)
         table ||= create_with_event!(id: candidate.id, name: name, creator: player_name)
-        seat = table.take_seat!(game_id: game_id, player_name: player_name,
+        seat = table.take_seat!(join_request_id: join_request_id, player_name: player_name,
           decoration: decoration, preparation: preparation)
         join_outcome(table, seat, created: created, replayed: false)
       end
     rescue Sequel::UniqueConstraintViolation
-      existing = Seat.first(game_id: game_id)
+      existing = Seat.first(join_request_id: join_request_id)
       raise unless existing
 
       replay_outcome(existing)
@@ -57,8 +57,8 @@ module Spine
       raise NameTaken, "an active table is already named #{name.inspect}"
     end
 
-    def take_seat!(game_id:, player_name:, decoration:, table_position: nil, preparation: nil)
-      preparation ||= prepare_seat(game_id: game_id, player_name: player_name,
+    def take_seat!(join_request_id:, player_name:, decoration:, table_position: nil, preparation: nil)
+      preparation ||= prepare_seat(join_request_id: join_request_id, player_name: player_name,
         decoration: decoration, table_position: table_position)
 
       DB.transaction do
@@ -68,7 +68,7 @@ module Spine
 
         seat = Seat.create(
           id: preparation[:seat_id], table_id: id, number: preparation[:table_position],
-          player_name: player_name, game_id: game_id
+          player_name: player_name, join_request_id: join_request_id
         )
         persist_envelope!(preparation[:taken])
         persist_envelope!(preparation[:joined])
@@ -153,7 +153,7 @@ module Spine
       join_outcome(table, seat, created: false, replayed: true)
     end
 
-    def prepare_seat(game_id:, player_name:, decoration:, table_position: nil)
+    def prepare_seat(join_request_id:, player_name:, decoration:, table_position: nil)
       table_position ||= next_available_table_position
       if seats_dataset.where(number: table_position).any?
         raise SeatOccupied, "table position #{table_position} at table #{name.inspect} is already taken"

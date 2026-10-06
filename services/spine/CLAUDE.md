@@ -23,10 +23,18 @@ ActiveRecord), SQLite, Minitest. Rewritten from a Rails 8 app for the reasons in
 `.scratch/spine-roda-rewrite/spec.md` (repo root) — Jess wants to learn plain Ruby, and
 Rails' magic was in the way of seeing where things actually happen.
 
-`GET /up` is health. `POST /join` accepts a Shuffler game id, table/player/deck names,
+`GET /up` is health. `POST /join` accepts an opaque `joinRequestId`, table/player/deck names,
 and optional seat decoration; it creates a table on an unseen name, idempotently assigns
-one seat per game id, and atomically records `seat.taken` + `seat.joined`. It returns
-`{tableId, seatNumber, tableUrl}` and then best-effort POSTs the persisted `seat.joined`
+one seat per `joinRequestId` (a retry sends the same value and gets the same seat back), and
+atomically records `seat.taken` + `seat.joined`. The Spine never learns what the id stands
+for: a Shuffler Game is a Seat at the border, and the Shuffler happens to send its game id as
+the `joinRequestId`. The request body and the response `{tableId, seatId, seatNumber,
+tableUrl}` are published contracts (`contracts/requests/join.v1.json`,
+`contracts/responses/join.v1.json`); `lib/join_contract.rb` validates the request on receipt
+(a violation is a 400) through the same schema loader as events (`EventContract.schema_at`).
+The join span carries `join.request_id`. The `seats.join_request_id` column was `game_id`;
+`config/db.rb` renames it (and its unique index) on startup, keeping existing seats. After
+the response, the Spine best-effort POSTs the persisted `seat.joined`
 event to the Tabletop via `lib/tabletop_notifier.rb`; delivery failure never rolls back
 the join. Domain logic lives in `models/table.rb` (`Table`, `Seat`, `Event`, all
 `Sequel::Model`), schema and additive startup migrations in `config/db.rb`.

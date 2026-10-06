@@ -7,8 +7,8 @@ class EventsTest < Minitest::Test
     Spine::App
   end
 
-  def join(name:, player_name:, game_id: SecureRandom.uuid, deck_name: "Test Deck")
-    post_join("gameId" => game_id, "name" => name, "playerName" => player_name, "deckName" => deck_name)
+  def join(name:, player_name:, join_request_id: SecureRandom.uuid, deck_name: "Test Deck")
+    post_join("joinRequestId" => join_request_id, "name" => name, "playerName" => player_name, "deckName" => deck_name)
     JSON.parse(last_response.body)
   end
 

@@ -155,12 +155,12 @@ class TableTest < Minitest::Test
   private
 
   def join_table(name:, player_name:)
-    Spine::Table.join!(name: name, game_id: SecureRandom.uuid, player_name: player_name,
+    Spine::Table.join!(name: name, join_request_id: SecureRandom.uuid, player_name: player_name,
       decoration: { "deckName" => "Test Deck" })
   end
 
   def take_seat(table, player_name:, table_position: nil)
-    table.take_seat!(game_id: SecureRandom.uuid, player_name: player_name,
+    table.take_seat!(join_request_id: SecureRandom.uuid, player_name: player_name,
       decoration: { "deckName" => "Test Deck" }, table_position: table_position)
   end
 end

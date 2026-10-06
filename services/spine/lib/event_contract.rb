@@ -49,11 +49,15 @@ module Spine
             "no contract for event name=#{name.inspect} schemaVersion=#{schema_version.inspect} — " \
             "the published language fails loudly on unknown kinds"
         end
-        schema_cache[file.to_s] ||= JSONSchemer.schema(file.read, format: true)
+        schema_at("payloads", "#{name}.v#{schema_version}.json")
       end
 
       def envelope_schema
-        file = contracts_dir.join("envelope.v#{ENVELOPE_VERSION}.json")
+        schema_at("envelope.v#{ENVELOPE_VERSION}.json")
+      end
+
+      def schema_at(*path)
+        file = contracts_dir.join(*path)
         schema_cache[file.to_s] ||= JSONSchemer.schema(file.read, format: true)
       end
 

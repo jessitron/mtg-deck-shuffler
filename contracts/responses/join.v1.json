@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/responses/join.v1.json",
+  "title": "POST /join success response body, version 1",
+  "description": "The seat the Spine assigned. A repeat of a joinRequestId answers with the same values.",
+  "type": "object",
+  "properties": {
+    "tableId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The table's id, which is also its URL slug."
+    },
+    "seatId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The id of the seat just assigned; the envelope initiator's seatId on events from this seat."
+    },
+    "seatNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Which of the table's 1-4 positions the seat occupies."
+    },
+    "tableUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Absolute URL of the Tabletop page for this table, with ?seat=<seatId> naming the seat just assigned."
+    }
+  },
+  "required": ["tableId", "seatId", "seatNumber", "tableUrl"],
+  "additionalProperties": true
+}

@@ -19,7 +19,7 @@ module ClearsTablesBetweenTests
 end
 
 # Captures finished spans in-memory so tests can assert on span attributes
-# (e.g. the game.id/seat.id correlation stamped on the /join span) without
+# (e.g. the join.request_id/seat.id correlation stamped on the /join span) without
 # talking to a real OTLP collector. Added alongside whatever exporter
 # config/telemetry.rb already configured; it only ever adds spans, never
 # blocks the app's own export.
@@ -62,7 +62,7 @@ end
 module JoinRequests
   def valid_join(overrides = {})
     {
-      "gameId" => SecureRandom.uuid,
+      "joinRequestId" => SecureRandom.uuid,
       "name" => "kitchen table #{SecureRandom.uuid}",
       "playerName" => "Jess",
       "deckName" => "Test Deck"

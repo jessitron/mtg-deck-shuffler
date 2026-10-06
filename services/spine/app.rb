@@ -10,6 +10,7 @@ require_relative "models/event"
 require_relative "lib/sse_stream"
 require_relative "lib/admin_view"
 require_relative "lib/tabletop_notifier"
+require_relative "lib/join_contract"
 
 module Spine
   class App < Roda
@@ -112,16 +113,16 @@ module Spine
       r.post "join" do
         response["Content-Type"] = "application/json"
         body = JSON.parse(r.body.read)
-        raise KeyError, "body must be a JSON object" unless body.is_a?(Hash)
+        JoinContract.validate_request!(body)
 
-        game_id = required_string(body, "gameId")
-        name = required_string(body, "name")
-        player_name = required_string(body, "playerName")
-        required_string(body, "deckName")
-        decoration = body.reject { |key, _value| %w[gameId name playerName].include?(key) }
-        current_span.add_attributes("table.name" => name, "player.name" => player_name, "game.id" => game_id)
+        join_request_id = body.fetch("joinRequestId")
+        name = body.fetch("name")
+        player_name = body.fetch("playerName")
+        decoration = body.reject { |key, _value| %w[joinRequestId name playerName].include?(key) }
+        current_span.add_attributes("table.name" => name, "player.name" => player_name,
+          "join.request_id" => join_request_id)
 
-        outcome = join_table(name: name, game_id: game_id,
+        outcome = join_table(name: name, join_request_id: join_request_id,
           player_name: player_name, decoration: decoration)
         TabletopNotifier.new(span: current_span).send_joined(
           event: outcome[:joined_event],
@@ -139,10 +140,10 @@ module Spine
           seatNumber: outcome[:table_position],
           tableUrl: table_url(outcome[:table_id], outcome[:seat_id])
         )
-      rescue JSON::ParserError, KeyError => e
+      rescue JSON::ParserError, JoinContract::Violation => e
         mark_span_failed("join.result", "invalid_input", e)
         response.status = 400
-        JSON.generate(error: "gameId, name, playerName, and deckName are required")
+        JSON.generate(error: "joinRequestId, name, playerName, and deckName are required")
       rescue EventContract::Violation => e
         mark_span_failed("join.result", "contract_violation", e)
         response.status = 422
@@ -154,11 +155,11 @@ module Spine
       end
     end
 
-    def join_table(name:, game_id:, player_name:, decoration:)
-      Table.join!(name: name, game_id: game_id,
+    def join_table(name:, join_request_id:, player_name:, decoration:)
+      Table.join!(name: name, join_request_id: join_request_id,
         player_name: player_name, decoration: decoration)
     rescue Table::NameTaken
-      Table.join!(name: name, game_id: game_id,
+      Table.join!(name: name, join_request_id: join_request_id,
         player_name: player_name, decoration: decoration)
     end
 
@@ -184,15 +185,6 @@ module Spine
 
     def render_admin(template, locals)
       AdminView.new(locals).render(template)
-    end
-
-    def required_string(hash, key)
-      value = hash.fetch(key)
-      unless value.is_a?(String) && !value.strip.empty?
-        raise KeyError, "#{key} must be a non-blank string"
-      end
-
-      value
     end
 
     def join_result(outcome)

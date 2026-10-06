@@ -19,17 +19,18 @@ class JoinTest < Minitest::Test
     assert_match(/\Arich-table-[0-9a-f]{8}\z/, response["tableId"])
     assert_equal({ "tableId" => response["tableId"], "seatId" => seat[:id], "seatNumber" => 1,
       "tableUrl" => "http://table.example/t/#{response["tableId"]}?seat=#{seat[:id]}" }, response)
+    Spine::JoinContract.validate_response!(response)
 
     assert_equal 1, DB[:tables].count
     assert_equal 1, DB[:seats].count
     assert_equal response["tableId"], seat[:table_id]
-    assert_equal submission["gameId"], seat[:game_id]
+    assert_equal submission["joinRequestId"], seat[:join_request_id]
     events = DB[:events].order(:seq).all
     assert_equal %w[table.created seat.taken seat.joined], events.map { |event| event[:name] }
     assert_equal [1, 2, 3], events.map { |event| event[:seq] }
 
     joined = Spine::Event[events.last[:id]].as_envelope
-    decoration = submission.reject { |key, _| %w[gameId name playerName].include?(key) }
+    decoration = submission.reject { |key, _| %w[joinRequestId name playerName].include?(key) }
     assert_equal decoration, JSON.parse(events.last[:payload])
     assert_equal decoration, joined["payload"]
     assert_equal({ "seatId" => seat[:id], "playerName" => submission["playerName"] }, joined["initiator"])
@@ -62,7 +63,7 @@ class JoinTest < Minitest::Test
     tabletop&.stop
   end
 
-  def test_join_span_correlates_the_incoming_game_id_with_the_minted_seat_id
+  def test_join_span_correlates_the_incoming_join_request_id_with_the_minted_seat_id
     tabletop = FakeTabletopServer.new
     submission = rich_join
 
@@ -72,7 +73,7 @@ class JoinTest < Minitest::Test
     join_span = finished_spans.find { |span| span.attributes && span.attributes["seat.id"] }
     refute_nil join_span, "expected a finished span carrying seat.id"
     assert_equal seat[:id], join_span.attributes["seat.id"]
-    assert_equal submission["gameId"], join_span.attributes["game.id"]
+    assert_equal submission["joinRequestId"], join_span.attributes["join.request_id"]
   ensure
     tabletop&.stop
   end
@@ -87,7 +88,7 @@ class JoinTest < Minitest::Test
     tabletop.wait_for_requests(1)
 
     conflicting = rich_join.merge(
-      "gameId" => original["gameId"], "name" => "other table", "playerName" => "Alex",
+      "joinRequestId" => original["joinRequestId"], "name" => "other table", "playerName" => "Alex",
       "deckName" => "Conflicting Deck", "commanders" => [], "gameUrl" => "https://game.example/other"
     )
     with_tabletop(tabletop) { post_join(conflicting) }
@@ -106,17 +107,17 @@ class JoinTest < Minitest::Test
     tabletop&.stop
   end
 
-  def test_different_games_at_the_same_table_get_distinct_seats
+  def test_different_join_requests_at_the_same_table_get_distinct_seats
     tabletop = FakeTabletopServer.new
     with_tabletop(tabletop) do
-      post_join("gameId" => "game-one", "name" => "shared table")
+      post_join("joinRequestId" => "game-one", "name" => "shared table")
       first = JSON.parse(last_response.body)
-      post_join("gameId" => "game-two", "name" => "shared table", "playerName" => "Alex")
+      post_join("joinRequestId" => "game-two", "name" => "shared table", "playerName" => "Alex")
       second = JSON.parse(last_response.body)
 
       assert_equal first["tableId"], second["tableId"]
       assert_equal [1, 2], [first["seatNumber"], second["seatNumber"]]
-      assert_equal %w[game-one game-two], DB[:seats].order(:number).select_map(:game_id)
+      assert_equal %w[game-one game-two], DB[:seats].order(:number).select_map(:join_request_id)
     end
   ensure
     tabletop&.stop
@@ -125,8 +126,8 @@ class JoinTest < Minitest::Test
   def test_omitted_commanders_and_an_explicit_empty_list_remain_distinct
     tabletop = FakeTabletopServer.new
     with_tabletop(tabletop) do
-      post_join("gameId" => "omitted-commanders", "name" => "shared table")
-      post_join("gameId" => "empty-commanders", "name" => "shared table", "commanders" => [])
+      post_join("joinRequestId" => "omitted-commanders", "name" => "shared table")
+      post_join("joinRequestId" => "empty-commanders", "name" => "shared table", "commanders" => [])
     end
 
     payloads = DB[:events].where(name: "seat.joined").order(:seq).select_map(:payload).map { |json| JSON.parse(json) }
@@ -143,9 +144,9 @@ class JoinTest < Minitest::Test
     tabletop = FakeTabletopServer.new
     with_tabletop(tabletop) do
       %w[Jess Alex Sam Robin].each_with_index do |player, index|
-        post_join("gameId" => "game-#{index}", "name" => "kitchen table", "playerName" => player)
+        post_join("joinRequestId" => "game-#{index}", "name" => "kitchen table", "playerName" => player)
       end
-      post_join("gameId" => "game-5", "name" => "kitchen table", "playerName" => "One too many")
+      post_join("joinRequestId" => "game-5", "name" => "kitchen table", "playerName" => "One too many")
     end
 
     assert_equal 409, last_response.status
@@ -164,7 +165,7 @@ class JoinTest < Minitest::Test
 
   def test_required_strings_reject_whitespace_without_side_effects
     tabletop = FakeTabletopServer.new
-    %w[gameId name playerName deckName].each do |field|
+    %w[joinRequestId name playerName deckName].each do |field|
       with_tabletop(tabletop) { post_join(field => " \t ") }
       assert_equal 400, last_response.status, field
     end
@@ -206,7 +207,7 @@ class JoinTest < Minitest::Test
 
   def rich_join
     valid_join(
-      "gameId" => "rich-game", "name" => "rich table", "playerName" => "Jess",
+      "joinRequestId" => "rich-game", "name" => "rich table", "playerName" => "Jess",
       "deckName" => "Two commanders", "playmatImageUrl" => "https://images.example/playmat.jpg",
       "cardBackImageUrl" => "https://images.example/card-back.jpg", "sleeveColor" => "#12Ab34",
       "primaryColor" => "#112233", "secondaryColor" => "#ddeeff",

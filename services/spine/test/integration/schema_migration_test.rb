@@ -6,14 +6,31 @@ require "tmpdir"
 class SchemaMigrationTest < Minitest::Test
   CONFIG_PATH = File.expand_path("../../config/db.rb", __dir__)
 
-  def test_an_old_database_gains_idempotent_join_columns_and_unique_game_ids
+  def test_an_old_database_gains_idempotent_join_columns_and_unique_join_request_ids
     with_database(seats_have_game_id: false) do |path|
       2.times { migrate(path) }
 
       db = Sequel.sqlite(path)
-      assert_includes db.schema(:seats).map(&:first), :game_id
-      assert db.indexes(:seats).values.any? { |index| index[:unique] && index[:columns] == [:game_id] }
+      assert_includes db.schema(:seats).map(&:first), :join_request_id
+      assert db.indexes(:seats).values.any? { |index| index[:unique] && index[:columns] == [:join_request_id] }
       assert_includes db.schema(:events).map(&:first), :initiator_seat_id
+      db.disconnect
+    end
+  end
+
+  def test_a_database_keyed_by_game_id_keeps_its_seats_under_join_request_id
+    with_database(seats_have_game_id: true) do |path|
+      db = Sequel.sqlite(path)
+      db[:seats].insert(id: "jess-1234abcd", table_id: "t", number: 1, player_name: "Jess", game_id: "old-game")
+      db.disconnect
+      2.times { migrate(path) }
+
+      db = Sequel.sqlite(path)
+      columns = db.schema(:seats).map(&:first)
+      assert_includes columns, :join_request_id
+      refute_includes columns, :game_id
+      assert_equal ["old-game"], db[:seats].select_map(:join_request_id)
+      assert db.indexes(:seats).values.any? { |index| index[:unique] && index[:columns] == [:join_request_id] }
       db.disconnect
     end
   end
@@ -23,7 +40,7 @@ class SchemaMigrationTest < Minitest::Test
       migrate(path)
 
       db = Sequel.sqlite(path)
-      assert_equal 1, db.schema(:seats).map(&:first).count(:game_id)
+      assert_equal 1, db.schema(:seats).map(&:first).count(:join_request_id)
       assert_includes db.schema(:events).map(&:first), :initiator_seat_id
       db.disconnect
     end

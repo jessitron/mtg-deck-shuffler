@@ -10,7 +10,7 @@ class JoinDeliveryTest < Minitest::Test
 
   def test_missing_tabletop_configuration_does_not_roll_back_the_join
     with_env("TABLETOP_URL" => nil, "TABLETOP_PUBLIC_URL" => "http://table.example") do
-      post_join("gameId" => "missing-config", "name" => "offline table")
+      post_join("joinRequestId" => "missing-config", "name" => "offline table")
     end
 
     assert_committed_join
@@ -22,7 +22,7 @@ class JoinDeliveryTest < Minitest::Test
     tabletop.stop
 
     with_env("TABLETOP_URL" => url, "TABLETOP_PUBLIC_URL" => "http://table.example") do
-      post_join("gameId" => "connection-refused", "name" => "offline table")
+      post_join("joinRequestId" => "connection-refused", "name" => "offline table")
     end
 
     assert_committed_join
@@ -31,7 +31,7 @@ class JoinDeliveryTest < Minitest::Test
   def test_a_non_success_tabletop_response_does_not_roll_back_the_join
     tabletop = FakeTabletopServer.new(status: 503)
 
-    with_tabletop(tabletop) { post_join("gameId" => "non-2xx", "name" => "offline table") }
+    with_tabletop(tabletop) { post_join("joinRequestId" => "non-2xx", "name" => "offline table") }
 
     assert_committed_join
     assert_equal 1, tabletop.wait_for_requests(1).length
@@ -43,7 +43,7 @@ class JoinDeliveryTest < Minitest::Test
     tabletop = FakeTabletopServer.new(delay: 30)
 
     Timeout.timeout(3) do
-      with_tabletop(tabletop) { post_join("gameId" => "timeout", "name" => "offline table") }
+      with_tabletop(tabletop) { post_join("joinRequestId" => "timeout", "name" => "offline table") }
     end
 
     assert_committed_join
