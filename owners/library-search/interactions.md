@@ -105,6 +105,12 @@ The game-screen **hamburger menu** (`src/view/play-game/game-menu.ts`, `#game-me
 ### Deck Data Sources
 New deck adapters (beyond MTGJSON, Archidekt, local files) must ensure `cardTypes` is populated in `CardDefinition` (unioned across all faces) or grouping will put cards in "Other".
 
+**Archidekt custom cards** (`ArchidektDeckToDeckAdapter.convertCustomCard`, deck API `customCards`) carry no Scryfall data, so the adapter builds the two fields library search reads:
+- `cardTypes` = whitespace split of `frontTypes` + `backTypes`, union deduped. Supertypes (Legendary, Kindred, ...) live in a separate Archidekt field and are never included, which matches Scryfall-backed cards (`oracleCard.types` excludes "Legendary"). "Artifact Creature" → `["Artifact", "Creature"]`. If Archidekt ever folds supertypes into `frontTypes`, a "Legendary" group would appear in the modal.
+- `colorIdentity` = the W/U/B/R/G letters found inside `{..}` symbols in both faces' mana costs and rules text.
+- `name` is the front name only — no `"Front // Back"` — so a two-faced custom card sorts by its front name.
+- `cardSource: "archidekt-custom"` (optional on `CardDefinition`, absent = scryfall; card repository column `card_source`). Library search does not read it; the card modal opened from the library uses it to omit the Gatherer link.
+
 ### Precon Deck Regeneration
 When precon decks are regenerated, `cardTypes` must include every face's/part's types (the MTGJSON adapter unions them via `otherFaceIds`). Missing face types degrade grouping accuracy for multi-face cards. Regeneration requires AllIdentifiers data so the adapter can resolve other faces.
 

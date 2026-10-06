@@ -225,3 +225,15 @@ The grouping feature was blocked once because `types` wasn't in persisted card d
   `cardTypes` and `colorIdentity` are unchanged and were preserved through the rewrite of every deck
   file. The library modal routes, template mapping, and `library-modal.ejs` never read the id, so
   nothing in this feature changed.
+
+## 2026-10-06: Archidekt custom cards enter the library — no library-search code change
+
+- **`bc9203e8`** - `ArchidektDeckToDeckAdapter.convertCustomCard` turns the deck API's `customCards` into
+  `CardDefinition`s. `cardTypes` = whitespace split of `frontTypes`/`backTypes`, union deduped, no
+  supertypes (test: "Cat Throwing a Tomato", Instant with supertype Kindred → `["Instant"]`).
+  `colorIdentity` comes from `{..}` symbols in mana costs and rules text.
+- **`779c7314`** - optional `CardDefinition.cardSource` (`"scryfall" | "archidekt-custom"`, absent =
+  scryfall; no version bump); card repository gained a `card_source` column.
+- **`abca0193`** - the card modal (opened from library rows) shows no Gatherer link for custom cards.
+- Library modal routes and `library-modal.ejs` unchanged. Verified live: `/prep-library-modal` lists the
+  three custom cards of the test deck.
