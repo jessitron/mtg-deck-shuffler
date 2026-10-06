@@ -605,6 +605,39 @@ describe("ArchidektDeckToDeckAdapter", () => {
       expect(deck.cards[0]).toMatchObject({ cardTypes: ["Artifact", "Creature"], colorIdentity: ["W", "U"] });
     });
 
+    it("puts a custom card in the Commander category among the commanders", async () => {
+      const gateway: ArchidektGatewayInterface = {
+        fetchDeck: async () => ({
+          id: 2,
+          name: "Custom Commander",
+          createdAt: "2026-10-06T00:00:00Z",
+          categories: [{ id: 1, name: "Commander", isPremier: true, includedInDeck: true, includedInPrice: true }],
+          cards: [],
+          customCards: [
+            {
+              quantity: 1,
+              categories: ["Commander"],
+              card: {
+                id: 7,
+                frontName: "Squid Captain",
+                frontTypes: "Creature",
+                frontImageUrl: "https://example.com/captain-front.png",
+                hasBack: true,
+                backTypes: "Creature",
+                backImageUrl: "https://example.com/captain-back.png",
+              },
+            },
+          ],
+        }),
+      };
+      const deck = await new ArchidektDeckToDeckAdapter(gateway).retrieveDeck({ deckSource: "archidekt", archidektDeckId: "2" });
+      expect(deck.cards).toEqual([]);
+      expect(deck.commanders).toHaveLength(1);
+      expect(deck.commanders[0]).toMatchObject({ name: "Squid Captain", cardSource: "archidekt-custom", twoFaced: true });
+      expect(deck.commanders[0].backImageUris?.normal).toBe("https://example.com/captain-back.png");
+      expect(deck.totalCards).toBe(1);
+    });
+
     it("makes a custom card with a back image two-faced", async () => {
       const deck = await squidSwordDeck();
       const stagnance = deck.cards.find((c) => c.name === "Don't Stop in Stagnance")!;
