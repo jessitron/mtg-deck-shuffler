@@ -426,7 +426,10 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
 **Adapters** in `src/port-deck-retrieval/`:
 
 - `mtgjsonAdapter/` - MTGJSON → internal format
-- `archidektAdapter/` - Archidekt → internal format (enriches with Scryfall images when given an images port)
+- `archidektAdapter/` - Archidekt → internal format (enriches with Scryfall images when given an images port).
+  Also reads the deck's `customCards` (user-made cards): `cardSource: "archidekt-custom"`, a UUIDv5
+  `cardDefinitionId`, the Archidekt image URL stored under every `ImageFormat`, never sent to Scryfall.
+  `getCardImageUrl` never builds a Scryfall URL for them. Fixture: `test/decks/14716273.json`.
 - `localFileAdapter/` - Read `decks/` files
 - `compositeAdapters/` - Combine adapters with fallback
 

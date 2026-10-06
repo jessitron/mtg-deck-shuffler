@@ -51,6 +51,8 @@ Scryfall ID: Scryfall's card ID. This is a UUID. From this, we can derive a card
 
 Card Definition ID: the UUID that identifies a Card Definition — `cardDefinitionId` in code, contracts and persistence, `card.definition_id` on spans. Scryfall is one source of definitions; the name stays put when another source arrives.
 
+Card Source: where a Card Definition comes from — `scryfall` (absent means this) or `archidekt-custom`, a card a user made on Archidekt. `cardSource` in code and contracts, `card.source` on spans. An Archidekt custom card's Card Definition ID is a UUIDv5 of `archidekt-custom:<archidekt id>`; its images are Archidekt-hosted URLs, never derivable from the id.
+
 Multiverse ID: Gatherer's card ID. This is an integer. From this, we can derive a link to the card's page on Gatherer.
 
 Display Name (Scryfall): at the top of a card. This is the name that we use in MTG Deck Shuffler.

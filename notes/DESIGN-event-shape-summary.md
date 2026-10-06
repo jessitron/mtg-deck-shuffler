@@ -33,7 +33,7 @@ truth-of-order and truth-of-time stay with the log (Spine-assigned `seq`, `accep
 ## 2. Card identity — two levels, used in every card-carrying payload
 
 - **Definition** — `cardDefinitionId`: the exact printing (oracle identity, all faces/names, all
-  images derivable). Two players' Forests share one `cardDefinitionId`. A UUID; for a Scryfall card, its Scryfall id.
+  images derivable). Two players' Forests share one `cardDefinitionId`. A UUID; for a Scryfall card, its Scryfall id; for an Archidekt custom card (`card.cardSource: "archidekt-custom"`), a UUIDv5.
 - **Instance** — `instanceId`: _this particular_ Forest — a GUID minted per card, per game,
   at game start. Game-mechanically interchangeable; log-wise a distinct individual,
   trackable through played → tapped → graveyard.
