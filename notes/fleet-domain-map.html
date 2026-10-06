@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<title>Fleet Domain Map</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&amp;family=Ovo&amp;display=swap">
-<style>
+<html>
+  <head>
+    <title>Fleet Domain Map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&amp;family=Ovo&amp;display=swap">
+    <style>
 /* Layout: one column of figures, each with a one-line claim; ship colours match the fleet identity palette. */
 :root {
   --bg: #f6eff7;
@@ -76,357 +78,364 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
 .gaps li::marker { color: var(--warn); }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
 </style>
-<main>
-  <header>
-    <h1>Fleet Domain Map</h1>
-    <p class="lede">
-      Three ships and the contracts between them: who speaks which language, what crosses each border, and what the code holds true. Drawn from the docs and checked against the code on 2026-09-30.
-    </p>
-  </header>
-  <section>
-    <h2>Context map</h2>
-    <figure>
-      <div class="scroll">
-        <svg viewBox="0 0 940 440" role="img" aria-label="Context map: the Shuffler and Tabletop both talk only to the Spine, through the published event contract. The Shuffler also calls Archidekt and Scryfall.">
-          <defs> <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path></marker> </defs>
-          <!-- externals -->
-          <rect class="ext" x="20" y="20" width="150" height="54"></rect><text class="h" x="95" y="43" text-anchor="middle">Archidekt</text><text class="m" x="95" y="61" text-anchor="middle">deck lists · external</text> <rect class="ext" x="200" y="20" width="150" height="54"></rect><text class="h" x="275" y="43" text-anchor="middle">Scryfall</text><text class="m" x="275" y="61" text-anchor="middle">card database · standard</text> <line class="arrow" x1="95" y1="74" x2="95" y2="168" marker-end="url(#ah)"></line><text class="m" x="103" y="124">Anticorruption Layer</text> <line class="arrow" x1="275" y1="74" x2="200" y2="168" marker-end="url(#ah)"></line><text class="m" x="250" y="112">Conformist</text>
-          <!-- ships -->
-          <rect class="shuf" x="20" y="170" width="200" height="130"></rect> <text class="h" x="120" y="196" text-anchor="middle">SHUFFLER</text> <text x="120" y="220" text-anchor="middle">Game · Library · Hand</text> <text class="m" x="120" y="240" text-anchor="middle">hidden zones, one player</text> <text class="m" x="120" y="258" text-anchor="middle">TypeScript · Express · HTMX</text> <text class="m" x="120" y="276" text-anchor="middle">SQLite</text> <rect class="spn" x="390" y="140" width="220" height="170"></rect> <text class="h spn-t" x="500" y="166" text-anchor="middle">SPINE</text> <text class="spn-t" x="500" y="188" text-anchor="middle">Table · Seat · Event log</text> <text class="spn-t" x="500" y="206" text-anchor="middle" style="font-size:11px">Ruby · Roda · SQLite</text> <rect class="plan" x="410" y="236" width="180" height="56"></rect> <text class="spn-t" x="500" y="258" text-anchor="middle" style="font-size:12px">Interpreter</text> <text class="spn-t" x="500" y="277" text-anchor="middle" style="font-size:11px">planned · physics in, meaning out</text> <rect class="tab" x="780" y="170" width="140" height="130"></rect> <text class="h" x="850" y="196" text-anchor="middle">TABLETOP</text> <text x="850" y="220" text-anchor="middle">Card · Zone · Gesture</text> <text class="m" x="850" y="240" text-anchor="middle">physics, not meaning</text> <text class="m" x="850" y="258" text-anchor="middle">React · tldraw</text> <text class="m" x="850" y="276" text-anchor="middle">no persistence</text>
-          <!-- shuffler <-> spine -->
-          <line class="arrow" x1="220" y1="205" x2="390" y2="205" marker-end="url(#ah)"></line> <text class="h" x="305" y="230" text-anchor="middle" style="font-size:10px">PUBLISHED LANGUAGE</text> <text class="m" x="305" y="184" text-anchor="middle">/join</text> <text class="m" x="305" y="198" text-anchor="middle">card.played · discarded</text> <line class="arrow" x1="390" y1="262" x2="220" y2="262" marker-end="url(#ah)"></line> <text class="m" x="305" y="248" text-anchor="middle">SSE stream</text> <text class="m" x="305" y="282" text-anchor="middle">card.returned</text>
-          <!-- spine <-> tabletop -->
-          <line class="arrow" x1="610" y1="205" x2="780" y2="205" marker-end="url(#ah)"></line> <text class="h" x="695" y="230" text-anchor="middle" style="font-size:10px">PUBLISHED LANGUAGE</text> <text class="m" x="695" y="184" text-anchor="middle">SSE: card.played</text> <text class="m" x="695" y="198" text-anchor="middle">POST seat.joined</text> <line class="arrow" x1="780" y1="262" x2="610" y2="262" marker-end="url(#ah)"></line> <text class="m" x="695" y="256" text-anchor="middle">card.returned</text> <text class="warn" x="695" y="280" text-anchor="middle" style="fill:var(--warn);font-size:11px">planned: tap · transform · move</text>
-          <!-- separate ways -->
-          <path class="dash" d="M120 300 V322 H850 V300"></path> <rect x="330" y="312" width="280" height="20" fill="var(--bg)"></rect> <text class="warn" x="470" y="326" text-anchor="middle" style="fill:var(--warn)">Separate Ways: no direct HTTP (a test enforces it)</text>
-          <!-- contract + honeycomb -->
-          <rect class="band" x="20" y="350" width="900" height="32"></rect> <text x="470" y="371" text-anchor="middle"><tspan class="h">contracts/</tspan> JSON Schema envelope + per-event payloads: the Published Language, validated on both sides</text> <rect class="band" x="20" y="394" width="900" height="32"></rect> <text x="470" y="415" text-anchor="middle"><tspan class="h">Honeycomb</tspan> every ship exports OpenTelemetry; traceparent rides every hop</text>
-        </svg>
-      </div>
-      <figcaption>
-        The Spine is the middle. Ships and Spine speak only the Published Language in <code>contracts/</code>; each ship translates itself into it at its own border. The Shuffler and Tabletop never call each other.
-      </figcaption>
-    </figure>
-    <div class="key">
-      <span style="--c: var(--shuffler)">Shuffler</span> <span style="--c: var(--tabletop)">Tabletop</span> <span style="--c: var(--spine-bg)">Spine</span> <span style="--c: var(--line)">outside our code</span>
-    </div>
-  </section>
-  <section>
-    <h2>One card, round trip</h2>
-    <figure>
-      <div class="scroll">
-        <svg viewBox="0 0 760 330" role="img" aria-label="Sequence: Shuffler posts card.played to the Spine, the Spine appends it and streams it to the Tabletop where it lands on the Stack. Later the Tabletop posts card.returned, and the Shuffler applies it as a move.">
-          <rect class="shuf" x="30" y="8" width="140" height="34"></rect><text class="h" x="100" y="30" text-anchor="middle">SHUFFLER</text> <rect class="spn" x="310" y="8" width="140" height="34"></rect><text class="h spn-t" x="380" y="30" text-anchor="middle">SPINE</text> <rect class="tab" x="590" y="8" width="140" height="34"></rect><text class="h" x="660" y="30" text-anchor="middle">TABLETOP</text> <line class="life" x1="100" y1="42" x2="100" y2="325"></line><line class="life" x1="380" y1="42" x2="380" y2="325"></line><line class="life" x1="660" y1="42" x2="660" y2="325"></line> <text x="240" y="66" text-anchor="middle">Play → card.played</text> <line class="arrow" x1="100" y1="74" x2="380" y2="74" marker-end="url(#ah)"></line> <text class="m" x="240" y="90" text-anchor="middle">today: sent before the Shuffler mutates; best-effort</text> <text class="warn" x="112" y="114" style="fill:var(--warn);font-size:11px">planned: if the Spine</text> <text class="warn" x="112" y="128" style="fill:var(--warn);font-size:11px">can't be told, the card</text> <text class="warn" x="112" y="142" style="fill:var(--warn);font-size:11px">is not played</text> <rect class="box" x="272" y="102" width="216" height="36"></rect> <text class="m" x="380" y="118" text-anchor="middle">validate schema · dedup by event id</text> <text class="m" x="380" y="132" text-anchor="middle">assign seq · append</text> <text x="520" y="162" text-anchor="middle">SSE, replayed from Last-Event-ID</text> <line class="arrow" x1="380" y1="170" x2="660" y2="170" marker-end="url(#ah)"></line> <rect class="box" x="560" y="184" width="200" height="30"></rect> <text class="m" x="660" y="203" text-anchor="middle">card lands on the Stack</text> <text x="520" y="240" text-anchor="middle">library portal → card.returned</text> <line class="arrow" x1="660" y1="248" x2="380" y2="248" marker-end="url(#ah)"></line> <text class="m" x="520" y="264" text-anchor="middle">card shape deleted only after Spine confirms</text> <text x="240" y="284" text-anchor="middle">SSE: card.returned</text> <line class="arrow" x1="380" y1="292" x2="100" y2="292" marker-end="url(#ah)"></line> <rect class="box" x="10" y="300" width="200" height="24"></rect> <text class="m" x="110" y="316" text-anchor="middle">applied as a move, verb "returned"</text>
-        </svg>
-      </div>
-      <figcaption>
-        Every hop leaves a row in the Spine's log. Neither ship holds a connection to the other.
-      </figcaption>
-    </figure>
-  </section>
-  <section>
-    <h2>Shuffler: one player's game</h2>
-    <figure>
-      <div class="scroll">
-        <svg viewBox="0 0 760 310" role="img" aria-label="A game card is in exactly one location: Library, Hand, Revealed, Table or Command Zone. Arrows show the moves between them.">
-          <rect class="shuf" x="30" y="110" width="130" height="60"></rect><text class="h" x="95" y="136" text-anchor="middle">Library</text><text class="m" x="95" y="154" text-anchor="middle">ordered, hidden</text> <rect class="shuf" x="300" y="16" width="140" height="54"></rect><text class="h" x="370" y="40" text-anchor="middle">Revealed</text><text class="m" x="370" y="57" text-anchor="middle">looked at, private</text> <rect class="shuf" x="300" y="216" width="140" height="60"></rect><text class="h" x="370" y="242" text-anchor="middle">Hand</text><text class="m" x="370" y="260" text-anchor="middle">ordered, hidden</text> <rect class="shuf" x="600" y="110" width="130" height="60"></rect><text class="h" x="665" y="136" text-anchor="middle">Table</text><text class="m" x="665" y="154" text-anchor="middle">not tracked here</text> <rect class="shuf" x="600" y="230" width="130" height="52"></rect><text class="h" x="665" y="252" text-anchor="middle">Command Zone</text><text class="m" x="665" y="270" text-anchor="middle">commanders</text> <path class="arrow" d="M160 128 L300 50" marker-end="url(#ah)"></path><text class="m" x="205" y="76">reveal</text> <path class="arrow" d="M160 155 L300 232" marker-end="url(#ah)"></path><text class="m" x="200" y="205">draw</text> <path class="arrow" d="M300 262 Q95 300 95 172" marker-end="url(#ah)"></path><text class="m" x="150" y="290">mulligan</text> <line class="arrow" x1="370" y1="70" x2="370" y2="216" marker-end="url(#ah)"></line><text class="m" x="378" y="150">put in hand</text> <path class="arrow" d="M440 36 L650 108" marker-end="url(#ah)"></path><text class="m" x="520" y="58">play / discard</text> <path class="arrow" d="M440 250 L650 172" marker-end="url(#ah)"></path><text class="m" x="520" y="238">play / discard</text> <line class="arrow" x1="665" y1="230" x2="665" y2="172" marker-end="url(#ah)"></line><text class="m" x="673" y="204">cast</text> <path class="dash" d="M612 110 L440 62" marker-end="url(#ah)"></path><text class="warn" x="520" y="102" style="fill:var(--warn);font-size:11px">returned (from Tabletop)</text> <text class="m" x="30" y="60">Revealed → top or bottom of Library also</text>
-        </svg>
-      </div>
-      <figcaption>
-        A card is in exactly one location. Replaying a move whose "from" does not match where the card is throws.
-      </figcaption>
-    </figure>
-    <div class="grid">
-      <div class="card" style="--c: var(--shuffler)">
-        <h3>Build-up</h3>
-        <ul>
-          <li><b>Deck</b> · immutable, with provenance (archidekt, precon, test)</li>
-          <li><b>GamePrep</b> · a Deck plus sleeve, playmat, table name. Immutable</li>
-          <li><b>Game</b> · a prep plus its own shuffler event log</li>
-          <li><b>GameCard</b> · CardDefinition + Location + face + instance id</li>
-        </ul>
-      </div>
-      <div class="card" style="--c: var(--shuffler)">
-        <h3>Shuffler event log kinds</h3>
-        <ul>
-          <li>start game · deal opening hand</li>
-          <li>shuffle library · mulligan (one atomic event)</li>
-          <li>move card (discard, play face-down, returned)</li>
-          <li>undo</li>
-        </ul>
-      </div>
-      <div class="card" style="--c: var(--shuffler)">
-        <h3>Layers</h3>
-        <ul>
-          <li>Express routes + HTMX views</li>
-          <li><code>apply-game-command</code>: load, version check, mutate, persist</li>
-          <li><code>GameState</code>: the domain</li>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Fleet Domain Map</h1>
+        <p class="lede">
+          Three ships and the contracts between them: who speaks which language, what crosses each border, and what the code holds true. Drawn from the docs and checked against the code on 2026-09-30.
+        </p>
+      </header>
+      <section>
+        <h2>Context map</h2>
+        <figure>
+          <div class="scroll">
+            <svg viewBox="0 0 940 440" role="img" aria-label="Context map: the Shuffler and Tabletop both talk only to the Spine, through the published event contract. The Shuffler also calls Archidekt and Scryfall.">
+              <defs> <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path></marker> </defs>
+              <!-- externals -->
+              <rect class="ext" x="20" y="20" width="150" height="54"></rect><text class="h" x="95" y="43" text-anchor="middle">Archidekt</text><text class="m" x="95" y="61" text-anchor="middle">deck lists · external</text> <rect class="ext" x="200" y="20" width="150" height="54"></rect><text class="h" x="275" y="43" text-anchor="middle">Scryfall</text><text class="m" x="275" y="61" text-anchor="middle">card database · standard</text> <line class="arrow" x1="95" y1="74" x2="95" y2="168" marker-end="url(#ah)"></line><text class="m" x="103" y="124">Anticorruption Layer</text> <line class="arrow" x1="275" y1="74" x2="200" y2="168" marker-end="url(#ah)"></line><text class="m" x="250" y="112">Conformist</text>
+              <!-- ships -->
+              <rect class="shuf" x="20" y="170" width="200" height="130"></rect> <text class="h" x="120" y="196" text-anchor="middle">SHUFFLER</text> <text x="120" y="220" text-anchor="middle">Game · Library · Hand</text> <text class="m" x="120" y="240" text-anchor="middle">hidden zones, one player</text> <text class="m" x="120" y="258" text-anchor="middle">TypeScript · Express · HTMX</text> <text class="m" x="120" y="276" text-anchor="middle">SQLite</text> <rect class="spn" x="390" y="140" width="220" height="170"></rect> <text class="h spn-t" x="500" y="166" text-anchor="middle">SPINE</text> <text class="spn-t" x="500" y="188" text-anchor="middle">Table · Seat · Event log</text> <text class="spn-t" x="500" y="206" text-anchor="middle" style="font-size:11px">Ruby · Roda · SQLite</text> <rect class="plan" x="410" y="236" width="180" height="56"></rect> <text class="spn-t" x="500" y="258" text-anchor="middle" style="font-size:12px">Interpreter</text> <text class="spn-t" x="500" y="277" text-anchor="middle" style="font-size:11px">planned · physics in, meaning out</text> <rect class="tab" x="780" y="170" width="140" height="130"></rect> <text class="h" x="850" y="196" text-anchor="middle">TABLETOP</text> <text x="850" y="220" text-anchor="middle">Card · Zone · Gesture</text> <text class="m" x="850" y="240" text-anchor="middle">physics, not meaning</text> <text class="m" x="850" y="258" text-anchor="middle">React · tldraw</text> <text class="m" x="850" y="276" text-anchor="middle">no persistence</text>
+              <!-- shuffler <-> spine -->
+              <line class="arrow" x1="220" y1="205" x2="390" y2="205" marker-end="url(#ah)"></line> <text class="h" x="305" y="230" text-anchor="middle" style="font-size:10px">PUBLISHED LANGUAGE</text> <text class="m" x="305" y="184" text-anchor="middle">/join</text> <text class="m" x="305" y="198" text-anchor="middle">card.played · discarded</text> <line class="arrow" x1="390" y1="262" x2="220" y2="262" marker-end="url(#ah)"></line> <text class="m" x="305" y="248" text-anchor="middle">SSE stream</text> <text class="m" x="305" y="282" text-anchor="middle">card.returned</text>
+              <!-- spine <-> tabletop -->
+              <line class="arrow" x1="610" y1="205" x2="780" y2="205" marker-end="url(#ah)"></line> <text class="h" x="695" y="230" text-anchor="middle" style="font-size:10px">PUBLISHED LANGUAGE</text> <text class="m" x="695" y="184" text-anchor="middle">SSE: card.played</text> <text class="m" x="695" y="198" text-anchor="middle">POST seat.joined</text> <line class="arrow" x1="780" y1="262" x2="610" y2="262" marker-end="url(#ah)"></line> <text class="m" x="695" y="256" text-anchor="middle">card.returned</text> <text class="warn" x="695" y="280" text-anchor="middle" style="fill:var(--warn);font-size:11px">planned: tap · transform · move</text>
+              <!-- separate ways -->
+              <path class="dash" d="M120 300 V322 H850 V300"></path> <rect x="330" y="312" width="280" height="20" fill="var(--bg)"></rect> <text class="warn" x="470" y="326" text-anchor="middle" style="fill:var(--warn)">Separate Ways: no direct HTTP (a test enforces it)</text>
+              <!-- contract + honeycomb -->
+              <rect class="band" x="20" y="350" width="900" height="32"></rect> <text x="470" y="371" text-anchor="middle"><tspan class="h">contracts/</tspan> JSON Schema envelope + per-event payloads: the Published Language, validated on both sides</text> <rect class="band" x="20" y="394" width="900" height="32"></rect> <text x="470" y="415" text-anchor="middle"><tspan class="h">Honeycomb</tspan> every ship exports OpenTelemetry; traceparent rides every hop</text>
+            </svg>
+          </div>
+          <figcaption>
+            The Spine is the middle. Ships and Spine speak only the Published Language in <code>contracts/</code>; each ship translates itself into it at its own border. The Shuffler and Tabletop never call each other.
+          </figcaption>
+        </figure>
+        <div class="key">
+          <span style="--c: var(--shuffler)">Shuffler</span> <span style="--c: var(--tabletop)">Tabletop</span> <span style="--c: var(--spine-bg)">Spine</span> <span style="--c: var(--line)"><!-- jess: @AI: what is outside our code? ... I think you mean archidekt and scryfall. But those boxes don't match this legend. Come to think of it, neither does the spine. Please make the legend match. -->outside our code</span>
+        </div>
+      </section>
+      <section>
+        <h2>One card, round trip</h2>
+        <figure>
+          <div class="scroll">
+            <svg viewBox="0 0 760 330" role="img" aria-label="Sequence: Shuffler posts card.played to the Spine, the Spine appends it and streams it to the Tabletop where it lands on the Stack. Later the Tabletop posts card.returned, and the Shuffler applies it as a move.">
+              <rect class="shuf" x="30" y="8" width="140" height="34"></rect><text class="h" x="100" y="30" text-anchor="middle">SHUFFLER</text> <rect class="spn" x="310" y="8" width="140" height="34"></rect><text class="h spn-t" x="380" y="30" text-anchor="middle">SPINE</text> <rect class="tab" x="590" y="8" width="140" height="34"></rect><text class="h" x="660" y="30" text-anchor="middle">TABLETOP</text> <line class="life" x1="100" y1="42" x2="100" y2="325"></line><line class="life" x1="380" y1="42" x2="380" y2="325"></line><line class="life" x1="660" y1="42" x2="660" y2="325"></line> <text x="240" y="66" text-anchor="middle">Play → card.played</text> <line class="arrow" x1="100" y1="74" x2="380" y2="74" marker-end="url(#ah)"></line> <text class="m" x="240" y="90" text-anchor="middle">today: sent before the Shuffler mutates; best-effort</text> <text class="warn" x="112" y="114" style="fill:var(--warn);font-size:11px">planned: if the Spine</text> <text class="warn" x="112" y="128" style="fill:var(--warn);font-size:11px">can't be told, the card</text> <text class="warn" x="112" y="142" style="fill:var(--warn);font-size:11px">is not played</text> <rect class="box" x="272" y="102" width="216" height="36"></rect> <text class="m" x="380" y="118" text-anchor="middle">validate schema · dedup by event id</text> <text class="m" x="380" y="132" text-anchor="middle">assign seq · append</text> <text x="520" y="162" text-anchor="middle">SSE, replayed from Last-Event-ID</text> <line class="arrow" x1="380" y1="170" x2="660" y2="170" marker-end="url(#ah)"></line> <rect class="box" x="560" y="184" width="200" height="30"></rect> <text class="m" x="660" y="203" text-anchor="middle">card lands on the Stack</text> <text x="520" y="240" text-anchor="middle">library portal → card.returned</text> <line class="arrow" x1="660" y1="248" x2="380" y2="248" marker-end="url(#ah)"></line> <text class="m" x="520" y="264" text-anchor="middle">card shape deleted only after Spine confirms</text> <text x="240" y="284" text-anchor="middle">SSE: card.returned</text> <line class="arrow" x1="380" y1="292" x2="100" y2="292" marker-end="url(#ah)"></line> <rect class="box" x="10" y="300" width="200" height="24"></rect> <text class="m" x="110" y="316" text-anchor="middle">applied as a move, verb "returned"</text>
+            </svg>
+          </div>
+          <figcaption>
+            Every hop leaves a row in the Spine's log. Neither ship holds a connection to the other.
+          </figcaption>
+        </figure>
+      </section>
+      <section>
+        <h2>Shuffler: one player's game</h2>
+        <figure>
+          <div class="scroll">
+            <svg viewBox="0 0 760 310" role="img" aria-label="A game card is in exactly one location: Library, Hand, Revealed, Table or Command Zone. Arrows show the moves between them.">
+              <rect class="shuf" x="30" y="110" width="130" height="60"></rect><text class="h" x="95" y="136" text-anchor="middle">Library</text><text class="m" x="95" y="154" text-anchor="middle">ordered, hidden</text> <rect class="shuf" x="300" y="16" width="140" height="54"></rect><text class="h" x="370" y="40" text-anchor="middle">Revealed</text><text class="m" x="370" y="57" text-anchor="middle">looked at, private</text> <rect class="shuf" x="300" y="216" width="140" height="60"></rect><text class="h" x="370" y="242" text-anchor="middle">Hand</text><text class="m" x="370" y="260" text-anchor="middle">ordered, hidden</text> <rect class="shuf" x="600" y="110" width="130" height="60"></rect><text class="h" x="665" y="136" text-anchor="middle">Table</text><text class="m" x="665" y="154" text-anchor="middle">not tracked here</text> <rect class="shuf" x="600" y="230" width="130" height="52"></rect><text class="h" x="665" y="252" text-anchor="middle">Command Zone</text><text class="m" x="665" y="270" text-anchor="middle">commanders</text> <path class="arrow" d="M160 128 L300 50" marker-end="url(#ah)"></path><text class="m" x="205" y="76">reveal</text> <path class="arrow" d="M160 155 L300 232" marker-end="url(#ah)"></path><text class="m" x="200" y="205">draw</text> <path class="arrow" d="M300 262 Q95 300 95 172" marker-end="url(#ah)"></path><text class="m" x="150" y="290">mulligan</text> <line class="arrow" x1="370" y1="70" x2="370" y2="216" marker-end="url(#ah)"></line><text class="m" x="378" y="150">put in hand</text> <path class="arrow" d="M440 36 L650 108" marker-end="url(#ah)"></path><text class="m" x="520" y="58">play / discard</text> <path class="arrow" d="M440 250 L650 172" marker-end="url(#ah)"></path><text class="m" x="520" y="238">play / discard</text> <line class="arrow" x1="665" y1="230" x2="665" y2="172" marker-end="url(#ah)"></line><text class="m" x="673" y="204">cast</text> <path class="dash" d="M612 110 L440 62" marker-end="url(#ah)"></path><text class="warn" x="520" y="102" style="fill:var(--warn);font-size:11px">returned (from Tabletop)</text> <text class="m" x="30" y="60">Revealed → top or bottom of Library also</text>
+            </svg>
+          </div>
+          <figcaption>
+            A card is in exactly one location. Replaying a move whose "from" does not match where the card is throws.
+          </figcaption>
+        </figure>
+        <div class="grid">
+          <div class="card" style="--c: var(--shuffler)">
+            <h3>Build-up</h3>
+            <ul>
+              <li><b>Deck</b> · immutable, with provenance (archidekt, precon, test)</li>
+              <li><b>GamePrep</b> · a Deck plus sleeve, playmat, table name. Immutable</li>
+              <li><b>Game</b> · a prep plus its own shuffler event log</li>
+              <li><b>GameCard</b> · CardDefinition + Location + face + instance id</li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--shuffler)">
+            <h3>
+              <!-- jess: "Kind" is not a term here. These are examples -->
+              Shuffler event log kinds
+            </h3>
+            <ul>
+              <li>start game · deal opening hand</li>
+              <li>shuffle library · mulligan (one atomic event)</li>
+              <li>move card (discard, play face-down, returned)</li>
+              <li>undo</li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--shuffler)">
+            <h3>Layers</h3>
+            <ul>
+              <li>Express routes + HTMX views</li>
+              <li><code>apply-game-command</code>: load, version check, mutate, persist</li>
+              <li><code>GameState</code>: the domain</li>
+              <li>
+                Ports with real adapters and fakes: decks, persistence, card cache, images, Spine
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>Tabletop: the shared room</h2>
+        <p class="lede" style="margin-top:-8px">
+          The current Tabletop code is a prototype slated for re-implementation. This section describes the intended domain; the vocabulary and the contracts carry over.
+        </p>
+        <figure>
+          <div class="scroll">
+            <svg viewBox="0 0 760 300" role="img" aria-label="Left: a table with a central Stack and up to four seats in compass positions. Right: one player area with playmat, library, graveyard, exile and command zone.">
+              <text class="h" x="20" y="14">TABLE (one tldraw room)</text> <rect class="tab" x="100" y="115" width="80" height="70"></rect><text class="h" x="140" y="155" text-anchor="middle">Stack</text> <rect class="box" x="75" y="26" width="130" height="60"></rect><text x="140" y="60" text-anchor="middle">seat N</text> <rect class="box" x="75" y="214" width="130" height="60"></rect><text x="140" y="248" text-anchor="middle">seat S</text> <rect class="box" x="20" y="90" width="50" height="120"></rect><text x="45" y="154" text-anchor="middle">W</text> <rect class="box" x="230" y="90" width="50" height="120"></rect><text x="255" y="154" text-anchor="middle">E</text> <text class="m" x="20" y="292">seats fill S, N, E, W by join order</text> <text class="h" x="330" y="14">PLAYER AREA (one per seat)</text> <rect class="box" x="330" y="26" width="410" height="250"></rect> <rect class="tab" x="342" y="38" width="268" height="226"></rect><text class="h" x="476" y="150" text-anchor="middle">playmat</text><text class="m" x="476" y="168" text-anchor="middle">cards, counters, notes</text> <rect class="tab" x="624" y="38" width="104" height="60"></rect><text x="676" y="72" text-anchor="middle">library</text> <rect class="tab" x="624" y="106" width="104" height="52"></rect><text x="676" y="136" text-anchor="middle">graveyard</text> <rect class="tab" x="624" y="166" width="104" height="44"></rect><text x="676" y="193" text-anchor="middle">exile</text> <rect class="tab" x="624" y="218" width="104" height="46"><!-- jess: technically the command zone is next to the library. I kinda get what you're going for here --></rect><text x="676" y="246" text-anchor="middle">command</text>
+            </svg>
+          </div>
+          <figcaption>
+            Zones are geography: a card's zone is whichever box its bounds land in. Every played card arrives on the Stack and a human drags it on.
+          </figcaption>
+        </figure>
+        <div class="grid">
+          <div class="card" style="--c: var(--tabletop)">
+            <h3>Shapes</h3>
+            <ul>
+              <li><code>mtg-card</code>: instance, scryfall id, face, faceDown, tapped, owner</li>
+              <li>
+                <code>mtg-zone</code> · <code>mtg-counter</code> · <code>mtg-life-counter</code> · <code>mtg-title</code>
+              </li>
+              <li>Counters and notes ride a card as <b>passengers</b></li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--tabletop)">
+            <h3>Gestures</h3>
+            <ul>
+              <li>tap · drag to zone · transform · turn face down/up</li>
+              <li>attach counter or note</li>
+              <li>library portal swallow (the only gesture sent to the Spine so far)</li>
+              <li>
+                every other gesture sent to the Spine as a physical event <span class="tag plan">planned</span>
+              </li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--tabletop)">
+            <h3>Identity</h3>
+            <ul>
+              <li>Room slug <b>is</b> the Spine's table id, opaque</li>
+              <li>Session: <code>?seat=</code> or an anonymous pseudonym kept in localStorage</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>Spine: the log</h2>
+        <figure>
+          <div class="scroll">
+            <svg viewBox="0 0 760 150" role="img" aria-label="An append-only strip of events numbered by seq. Each is an envelope with sender-set and Spine-set fields.">
+              <text class="m" x="10" y="20">one Spine event log per table, ordered by seq the Spine assigns</text> <g> <rect class="spn" x="10" y="34" width="106" height="52"></rect><text class="spn-t" x="63" y="56" text-anchor="middle" style="font-size:11px">1 · seat.taken</text><text class="spn-t" x="63" y="74" text-anchor="middle" style="font-size:10px">by Spine</text> <rect class="spn" x="126" y="34" width="106" height="52"></rect><text class="spn-t" x="179" y="56" text-anchor="middle" style="font-size:11px">2 · seat.joined</text><text class="spn-t" x="179" y="74" text-anchor="middle" style="font-size:10px">by Spine</text> <rect class="spn" x="242" y="34" width="106" height="52"></rect><text class="spn-t" x="295" y="56" text-anchor="middle" style="font-size:11px">3 · card.played</text><text class="spn-t" x="295" y="74" text-anchor="middle" style="font-size:10px">by Shuffler</text> <rect class="spn" x="358" y="34" width="106" height="52"></rect><text class="spn-t" x="411" y="56" text-anchor="middle" style="font-size:11px">4 · card.discarded</text><text class="spn-t" x="411" y="74" text-anchor="middle" style="font-size:10px">by Shuffler</text> <rect class="spn" x="474" y="34" width="106" height="52"></rect><text class="spn-t" x="527" y="56" text-anchor="middle" style="font-size:11px">5 · card.returned</text><text class="spn-t" x="527" y="74" text-anchor="middle" style="font-size:10px">by Tabletop</text> <rect class="plan" x="590" y="34" width="106" height="52" style="stroke:var(--warn)"></rect><text class="warn" x="643" y="56" text-anchor="middle" style="fill:var(--warn);font-size:11px">Tabletop gestures,</text><text class="warn" x="643" y="74" text-anchor="middle" style="fill:var(--warn);font-size:11px">interpretations…</text> </g> <line class="arrow" x1="700" y1="60" x2="750" y2="60" marker-end="url(#ah)"></line> <text class="m" x="10" y="118">Also in the contract: card.played-face-down. Nothing is edited or removed. A duplicate send is dropped by its event id.</text> <text class="m" x="10" y="138">Dashed: designed, not built.</text>
+            </svg>
+          </div>
+          <figcaption>
+            The Spine event log is the record of the table: what a person standing at it would know.
+          </figcaption>
+        </figure>
+        <div class="grid">
+          <div class="card" style="--c: var(--spine-bg)">
+            <h3>Sender sets</h3>
+            <ul>
+              <li><code>id</code> (dedup key) · <code>tableId</code> · <code>name</code></li>
+              <li><code>initiator</code> {playerName, seatId?, sessionId?}</li>
+              <li><code>occurredIn</code> shuffler | tabletop | spine · <code>origin</code></li>
+              <li><code>significance</code> physical | domain | administrative</li>
+              <li><code>schemaVersion</code> · <code>payload</code></li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--spine-bg)">
+            <h3>Spine sets</h3>
+            <ul>
+              <li><code>seq</code>: the order, unique per table</li>
+              <li><code>acceptedAt</code></li>
+              <li><code>traceparent</code>: attached fresh at broadcast, never stored</li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--spine-bg)">
+            <h3>Entities</h3>
+            <ul>
+              <li><b>Table</b>: slug <code>&lt;name&gt;-&lt;8hex&gt;</code>, unique name</li>
+              <li>
+                <b>Seat</b>: number 1 to 4, keyed by an opaque <code>joinRequestId</code> so join is idempotent
+              </li>
+              <li><b>Event</b>: one row per envelope</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>Same word, different meaning</h2>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Term</th>
+                <th>Shuffler</th>
+                <th>Tabletop</th>
+                <th>Spine</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Game / Seat</b></td>
+                <td>Game: one player's play session</td>
+                <td>Seat: a player's place at the table</td>
+                <td>
+                  Seat, 1 to 4 per Table. The Shuffler translates Game to Seat at the border and sends its game id as the Spine's opaque <code>joinRequestId</code>
+                </td>
+              </tr>
+              <tr>
+                <td><b>Flip / Transform / Face-down</b></td>
+                <td>
+                  "flip": private inspection of the other printed face, never leaves the Shuffler. Impossible on a one-faced card. Face-down is not modeled
+                </td>
+                <td>
+                  "Transform": swap the printed face of a two-faced card, a physical event. Separately, "Turn face down/up": concealment (<code>faceDown</code> on the card shape), on every card
+                </td>
+                <td><code>card.played-face-down</code> today; Tabletop gestures are not modeled yet</td>
+              </tr>
+              <tr>
+                <td><b>Initiator</b></td>
+                <td colspan="2">
+                  <code>seatId</code>: the saved state, a player's place at the table. <code>sessionId</code>: one browser tab, whatever value each ship uses. <code>playerName</code>: for human readability. A Tabletop initiator without a seat is anonymous.
+                </td>
+                <td>Validates the wire shape. Attribution, never authority</td>
+              </tr>
+              <tr>
+                <td><b>Table</b></td>
+                <td>
+                  A card location: the cards on the shared table. The Shuffler tracks that a card is there, never what it does there (tapped, counters, position). The table name is data it carries and never interprets
+                </td>
+                <td>The shared canvas, the same table the player sees</td>
+                <td>The unit that owns a log</td>
+              </tr>
+              <tr>
+                <td><b>card.owner and event.initiator</b></td>
+                <td colspan="3">
+                  Unrelated concepts. <code>card.owner</code> on card.played: whose deck the card is from. <code>event.initiator</code>: who caused the event. The two can name different players.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <h2>Principles and invariants</h2>
+        <p class="lede" style="margin-top:-8px">
+          Tags say where each one lives: <span class="tag test">test</span> a test fails if broken · <span class="tag code">code</span> the code enforces it · <span class="tag">stated</span> docs and habit only · <span class="tag plan">planned</span> designed, not built.
+        </p>
+        <div class="grid">
+          <div class="card" style="--c: var(--fg)">
+            <h3>Whole fleet</h3>
+            <ul>
+              <li>Shuffler and Tabletop never talk directly <span class="tag test">test</span></li>
+              <li>
+                Events are JSON Schema, validated by sender and receiver <span class="tag code">code</span>
+              </li>
+              <li>
+                Physics on the Tabletop, meaning in the Interpreter <span class="tag">stated</span>
+              </li>
+              <li>
+                Players adjudicate. The app supports play and enforces nothing <span class="tag">stated</span>
+              </li>
+              <li>No privileged actor on the canvas <span class="tag">stated</span></li>
+              <li>
+                Trace context on every hop; facts go on spans, never <code>addEvent</code> <span class="tag">stated</span>
+              </li>
+              <li>Fakes, never mocks <span class="tag">stated</span></li>
+              <li>Corners square except on round things <span class="tag">stated</span></li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--shuffler)">
+            <h3>Shuffler</h3>
+            <ul>
+              <li>A card is in exactly one location <span class="tag code">code</span></li>
+              <li>Hidden zones stay hidden; only shadows go public <span class="tag">stated</span></li>
+              <li>
+                State version = shuffler event log length; stale writes get 409 <span class="tag code">code</span>
+              </li>
+              <li>
+                Everything persisted is versioned; old data fails loudly (HTTP 410) <span class="tag code">code</span>
+              </li>
+              <li>Decks and preps are immutable <span class="tag code">code</span></li>
+              <li>
+                Spine calls are best-effort and never block play <span class="tag code">code</span>
+              </li>
+              <li>Carry the Spine's ids and URLs; never build them <span class="tag">stated</span></li>
+              <li>
+                A card is played only if the Spine accepted the event first <span class="tag plan">planned</span>
+              </li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--tabletop)">
+            <h3>Tabletop</h3>
+            <ul>
+              <li>
+                The sync server replicates presentation only; it holds no game authority <span class="tag">stated</span>
+              </li>
+              <li>
+                A card.played for an unseated player is rejected, not patched over <span class="tag code">code</span>
+              </li>
+              <li>
+                Duplicate events dropped by event id and instance id <span class="tag code">code</span>
+              </li>
+              <li>
+                Send-then-commit: a returned card vanishes only after the Spine confirms <span class="tag code">code</span>
+              </li>
+              <li>Every played card arrives on the Stack <span class="tag code">code</span></li>
+              <li>
+                Zones never touch: an empty gap sits between every pair <span class="tag test">test</span>
+              </li>
+              <li>No persistence yet; the room lives in memory <span class="tag code">code</span></li>
+            </ul>
+          </div>
+          <div class="card" style="--c: var(--spine-bg)">
+            <h3>Spine</h3>
+            <ul>
+              <li>One append-only Spine event log per table <span class="tag code">code</span></li>
+              <li>The Spine alone assigns seq and acceptedAt <span class="tag code">code</span></li>
+              <li>
+                Join is idempotent per <code>joinRequestId</code> <span class="tag code">code</span>
+              </li>
+              <li>
+                Extra fields allowed, so ships deploy independently <span class="tag code">code</span>
+              </li>
+              <li>Never replace, supersede <span class="tag plan">planned</span></li>
+              <li>
+                Visibility on every event, private events cast public shadows <span class="tag plan">planned</span>
+              </li>
+              <li>
+                Provenance and confidence on inferred events <span class="tag plan">planned</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>Where the story and the code disagree</h2>
+        <ul class="gaps">
           <li>
-            Ports with real adapters and fakes: decks, persistence, card cache, images, Spine
+            "Spine calls are best-effort and never block play" is today's rule. The planned rule is the opposite: no Spine, no play.
+          </li>
+          <li>
+            The envelope has no <code>visibility</code> field, and the design summary still says it does.
+          </li>
+          <li>Nothing implements supersede. It is a principle only.</li>
+          <li>
+            The Tabletop's taps, transforms and moves reach Honeycomb as spans but never the Spine. They will; shown as planned.
+          </li>
+          <li>
+            <code>table.created</code> is named in docs but has no payload schema and is not sent.
+          </li>
+          <li>
+            The Tabletop's CLAUDE.md says only card.played has a consumer. The dispatch code also handles card.played-face-down, card.discarded and card.returned.
+          </li>
+          <li>
+            The Shuffler's CLAUDE.md names <code>sendCardPlayedToSpineBestEffort</code>. The code calls <code>sendCard{Played,Returned,Discarded}BeforeMutate</code>.
           </li>
         </ul>
-      </div>
-    </div>
-  </section>
-  <section>
-    <h2>Tabletop: the shared room</h2>
-    <p class="lede" style="margin-top:-8px">
-      The current Tabletop code is a prototype slated for re-implementation. This section describes the intended domain; the vocabulary and the contracts carry over.
-    </p>
-    <figure>
-      <div class="scroll">
-        <svg viewBox="0 0 760 300" role="img" aria-label="Left: a table with a central Stack and up to four seats in compass positions. Right: one player area with playmat, library, graveyard, exile and command zone.">
-          <text class="h" x="20" y="14">TABLE (one tldraw room)</text> <rect class="tab" x="100" y="115" width="80" height="70"></rect><text class="h" x="140" y="155" text-anchor="middle">Stack</text> <rect class="box" x="75" y="26" width="130" height="60"></rect><text x="140" y="60" text-anchor="middle">seat N</text> <rect class="box" x="75" y="214" width="130" height="60"></rect><text x="140" y="248" text-anchor="middle">seat S</text> <rect class="box" x="20" y="90" width="50" height="120"></rect><text x="45" y="154" text-anchor="middle">W</text> <rect class="box" x="230" y="90" width="50" height="120"></rect><text x="255" y="154" text-anchor="middle">E</text> <text class="m" x="20" y="292">seats fill S, N, E, W by join order</text> <text class="h" x="330" y="14">PLAYER AREA (one per seat)</text> <rect class="box" x="330" y="26" width="410" height="250"></rect> <rect class="tab" x="342" y="38" width="268" height="226"></rect><text class="h" x="476" y="150" text-anchor="middle">playmat</text><text class="m" x="476" y="168" text-anchor="middle">cards, counters, notes</text> <rect class="tab" x="624" y="38" width="104" height="60"></rect><text x="676" y="72" text-anchor="middle">library</text> <rect class="tab" x="624" y="106" width="104" height="52"></rect><text x="676" y="136" text-anchor="middle">graveyard</text> <rect class="tab" x="624" y="166" width="104" height="44"></rect><text x="676" y="193" text-anchor="middle">exile</text> <rect class="tab" x="624" y="218" width="104" height="46"></rect><text x="676" y="246" text-anchor="middle">command</text>
-        </svg>
-      </div>
-      <figcaption>
-        Zones are geography: a card's zone is whichever box its bounds land in. Every played card arrives on the Stack and a human drags it on.
-      </figcaption>
-    </figure>
-    <div class="grid">
-      <div class="card" style="--c: var(--tabletop)">
-        <h3>Shapes</h3>
-        <ul>
-          <li><code>mtg-card</code>: instance, scryfall id, face, faceDown, tapped, owner</li>
-          <li>
-            <code>mtg-zone</code> · <code>mtg-counter</code> · <code>mtg-life-counter</code> · <code>mtg-title</code>
-          </li>
-          <li>Counters and notes ride a card as <b>passengers</b></li>
-        </ul>
-      </div>
-      <div class="card" style="--c: var(--tabletop)">
-        <h3>Gestures</h3>
-        <ul>
-          <li>tap · drag to zone · transform · turn face down/up</li>
-          <li>attach counter or note</li>
-          <li>library portal swallow (the only gesture sent to the Spine so far)</li>
-          <li>
-            every other gesture sent to the Spine as a physical event <span class="tag plan">planned</span>
-          </li>
-        </ul>
-      </div>
-      <div class="card" style="--c: var(--tabletop)">
-        <h3>Identity</h3>
-        <ul>
-          <li>Room slug <b>is</b> the Spine's table id, opaque</li>
-          <li>Session: <code>?seat=</code> or an anonymous pseudonym kept in localStorage</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <section>
-    <h2>Spine: the log</h2>
-    <figure>
-      <div class="scroll">
-        <svg viewBox="0 0 760 150" role="img" aria-label="An append-only strip of events numbered by seq. Each is an envelope with sender-set and Spine-set fields.">
-          <text class="m" x="10" y="20">one Spine event log per table, ordered by seq the Spine assigns</text> <g> <rect class="spn" x="10" y="34" width="106" height="52"></rect><text class="spn-t" x="63" y="56" text-anchor="middle" style="font-size:11px">1 · seat.taken</text><text class="spn-t" x="63" y="74" text-anchor="middle" style="font-size:10px">by Spine</text> <rect class="spn" x="126" y="34" width="106" height="52"></rect><text class="spn-t" x="179" y="56" text-anchor="middle" style="font-size:11px">2 · seat.joined</text><text class="spn-t" x="179" y="74" text-anchor="middle" style="font-size:10px">by Spine</text> <rect class="spn" x="242" y="34" width="106" height="52"></rect><text class="spn-t" x="295" y="56" text-anchor="middle" style="font-size:11px">3 · card.played</text><text class="spn-t" x="295" y="74" text-anchor="middle" style="font-size:10px">by Shuffler</text> <rect class="spn" x="358" y="34" width="106" height="52"></rect><text class="spn-t" x="411" y="56" text-anchor="middle" style="font-size:11px">4 · card.discarded</text><text class="spn-t" x="411" y="74" text-anchor="middle" style="font-size:10px">by Shuffler</text> <rect class="spn" x="474" y="34" width="106" height="52"></rect><text class="spn-t" x="527" y="56" text-anchor="middle" style="font-size:11px">5 · card.returned</text><text class="spn-t" x="527" y="74" text-anchor="middle" style="font-size:10px">by Tabletop</text> <rect class="plan" x="590" y="34" width="106" height="52" style="stroke:var(--warn)"></rect><text class="warn" x="643" y="56" text-anchor="middle" style="fill:var(--warn);font-size:11px">Tabletop gestures,</text><text class="warn" x="643" y="74" text-anchor="middle" style="fill:var(--warn);font-size:11px">interpretations…</text> </g> <line class="arrow" x1="700" y1="60" x2="750" y2="60" marker-end="url(#ah)"></line> <text class="m" x="10" y="118">Also in the contract: card.played-face-down. Nothing is edited or removed. A duplicate send is dropped by its event id.</text> <text class="m" x="10" y="138">Dashed: designed, not built.</text>
-        </svg>
-      </div>
-      <figcaption>
-        The Spine event log is the record of the table: what a person standing at it would know.
-      </figcaption>
-    </figure>
-    <div class="grid">
-      <div class="card" style="--c: var(--spine-bg)">
-        <h3>Sender sets</h3>
-        <ul>
-          <li><code>id</code> (dedup key) · <code>tableId</code> · <code>name</code></li>
-          <li><code>initiator</code> {playerName, seatId?, sessionId?}</li>
-          <li><code>occurredIn</code> shuffler | tabletop | spine · <code>origin</code></li>
-          <li><code>significance</code> physical | domain | administrative</li>
-          <li><code>schemaVersion</code> · <code>payload</code></li>
-        </ul>
-      </div>
-      <div class="card" style="--c: var(--spine-bg)">
-        <h3>Spine sets</h3>
-        <ul>
-          <li><code>seq</code>: the order, unique per table</li>
-          <li><code>acceptedAt</code></li>
-          <li><code>traceparent</code>: attached fresh at broadcast, never stored</li>
-        </ul>
-      </div>
-      <div class="card" style="--c: var(--spine-bg)">
-        <h3>Entities</h3>
-        <ul>
-          <li><b>Table</b>: slug <code>&lt;name&gt;-&lt;8hex&gt;</code>, unique name</li>
-          <li>
-            <b>Seat</b>: number 1 to 4, keyed by an opaque <code>joinRequestId</code> so join is idempotent
-          </li>
-          <li><b>Event</b>: one row per envelope</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <section>
-    <h2>Same word, different meaning</h2>
-    <div class="scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Term</th>
-            <th>Shuffler</th>
-            <th>Tabletop</th>
-            <th>Spine</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><b>Game / Seat</b></td>
-            <td>Game: one player's play session</td>
-            <td>Seat: a player's place at the table</td>
-            <td>
-              Seat, 1 to 4 per Table. The Shuffler translates Game to Seat at the border and sends its game id as the Spine's opaque <code>joinRequestId</code>
-            </td>
-          </tr>
-          <tr>
-            <td><b>Flip / Transform / Face-down</b></td>
-            <td>
-              "flip": private inspection of the other printed face, never leaves the Shuffler. Impossible on a one-faced card. Face-down is not modeled
-            </td>
-            <td>
-              "Transform": swap the printed face of a two-faced card, a physical event. Separately, "Turn face down/up": concealment (<code>faceDown</code> on the card shape), on every card
-            </td>
-            <td><code>card.played-face-down</code> today; Tabletop gestures are not modeled yet</td>
-          </tr>
-          <tr>
-            <td><b>Initiator</b></td>
-            <td colspan="2">
-              <code>seatId</code>: the saved state, a player's place at the table. <code>sessionId</code>: one browser tab, whatever value each ship uses. <code>playerName</code>: for human readability. A Tabletop initiator without a seat is anonymous.
-            </td>
-            <td>Validates the wire shape. Attribution, never authority</td>
-          </tr>
-          <tr>
-            <td><b>Table</b></td>
-            <td>
-              A card location: the cards on the shared table. The Shuffler tracks that a card is there, never what it does there (tapped, counters, position). The table name is data it carries and never interprets
-            </td>
-            <td>The shared canvas, the same table the player sees</td>
-            <td>The unit that owns a log</td>
-          </tr>
-          <tr>
-            <td><b>card.owner and event.initiator</b></td>
-            <td colspan="3">
-              Unrelated concepts. <code>card.owner</code> on card.played: whose deck the card is from. <code>event.initiator</code>: who caused the event. The two can name different players.
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-  <section>
-    <h2>Principles and invariants</h2>
-    <p class="lede" style="margin-top:-8px">
-      Tags say where each one lives: <span class="tag test">test</span> a test fails if broken · <span class="tag code">code</span> the code enforces it · <span class="tag">stated</span> docs and habit only · <span class="tag plan">planned</span> designed, not built.
-    </p>
-    <div class="grid">
-      <div class="card" style="--c: var(--fg)">
-        <h3>Whole fleet</h3>
-        <ul>
-          <li>Shuffler and Tabletop never talk directly <span class="tag test">test</span></li>
-          <li>
-            Events are JSON Schema, validated by sender and receiver <span class="tag code">code</span>
-          </li>
-          <li>
-            Physics on the Tabletop, meaning in the Interpreter <span class="tag">stated</span>
-          </li>
-          <li>
-            Players adjudicate. The app supports play and enforces nothing <span class="tag">stated</span>
-          </li>
-          <li>No privileged actor on the canvas <span class="tag">stated</span></li>
-          <li>
-            Trace context on every hop; facts go on spans, never <code>addEvent</code> <span class="tag">stated</span>
-          </li>
-          <li>Fakes, never mocks <span class="tag">stated</span></li>
-          <li>Corners square except on round things <span class="tag">stated</span></li>
-        </ul>
-      </div>
-      <div class="card" style="--c: var(--shuffler)">
-        <h3>Shuffler</h3>
-        <ul>
-          <li>A card is in exactly one location <span class="tag code">code</span></li>
-          <li>Hidden zones stay hidden; only shadows go public <span class="tag">stated</span></li>
-          <li>
-            State version = shuffler event log length; stale writes get 409 <span class="tag code">code</span>
-          </li>
-          <li>
-            Everything persisted is versioned; old data fails loudly (HTTP 410) <span class="tag code">code</span>
-          </li>
-          <li>Decks and preps are immutable <span class="tag code">code</span></li>
-          <li>
-            Spine calls are best-effort and never block play <span class="tag code">code</span>
-          </li>
-          <li>Carry the Spine's ids and URLs; never build them <span class="tag">stated</span></li>
-          <li>
-            A card is played only if the Spine accepted the event first <span class="tag plan">planned</span>
-          </li>
-        </ul>
-      </div>
-      <div class="card" style="--c: var(--tabletop)">
-        <h3>Tabletop</h3>
-        <ul>
-          <li>
-            The sync server replicates presentation only; it holds no game authority <span class="tag">stated</span>
-          </li>
-          <li>
-            A card.played for an unseated player is rejected, not patched over <span class="tag code">code</span>
-          </li>
-          <li>
-            Duplicate events dropped by event id and instance id <span class="tag code">code</span>
-          </li>
-          <li>
-            Send-then-commit: a returned card vanishes only after the Spine confirms <span class="tag code">code</span>
-          </li>
-          <li>Every played card arrives on the Stack <span class="tag code">code</span></li>
-          <li>
-            Zones never touch: an empty gap sits between every pair <span class="tag test">test</span>
-          </li>
-          <li>No persistence yet; the room lives in memory <span class="tag code">code</span></li>
-        </ul>
-      </div>
-      <div class="card" style="--c: var(--spine-bg)">
-        <h3>Spine</h3>
-        <ul>
-          <li>One append-only Spine event log per table <span class="tag code">code</span></li>
-          <li>The Spine alone assigns seq and acceptedAt <span class="tag code">code</span></li>
-          <li>
-            Join is idempotent per <code>joinRequestId</code> <span class="tag code">code</span>
-          </li>
-          <li>
-            Extra fields allowed, so ships deploy independently <span class="tag code">code</span>
-          </li>
-          <li>Never replace, supersede <span class="tag plan">planned</span></li>
-          <li>
-            Visibility on every event, private events cast public shadows <span class="tag plan">planned</span>
-          </li>
-          <li>
-            Provenance and confidence on inferred events <span class="tag plan">planned</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <section>
-    <h2>Where the story and the code disagree</h2>
-    <ul class="gaps">
-      <li>
-        "Spine calls are best-effort and never block play" is today's rule. The planned rule is the opposite: no Spine, no play.
-      </li>
-      <li>
-        The envelope has no <code>visibility</code> field, and the design summary still says it does.
-      </li>
-      <li>Nothing implements supersede. It is a principle only.</li>
-      <li>
-        The Tabletop's taps, transforms and moves reach Honeycomb as spans but never the Spine. They will; shown as planned.
-      </li>
-      <li>
-        <code>table.created</code> is named in docs but has no payload schema and is not sent.
-      </li>
-      <li>
-        The Tabletop's CLAUDE.md says only card.played has a consumer. The dispatch code also handles card.played-face-down, card.discarded and card.returned.
-      </li>
-      <li>
-        The Shuffler's CLAUDE.md names <code>sendCardPlayedToSpineBestEffort</code>. The code calls <code>sendCard{Played,Returned,Discarded}BeforeMutate</code>.
-      </li>
-    </ul>
-  </section>
-</main>
+      </section>
+    </main>
+  </body>
+</html>
