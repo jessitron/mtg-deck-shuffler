@@ -3,6 +3,22 @@ import { formatCardNameAsModalLink, CardAction } from "../common/shared-componen
 import { GameEvent } from "../../GameEvents.js";
 import { formatGameEventHtmlFragment } from "./history-components.js";
 import { GameId } from "../../domain-types.js";
+import { CardDefinition, cardSourceOf } from "../../types.js";
+
+/** Gatherer link (Scryfall cards only) and the Copy button; the caller closes the wrapping div. */
+export function formatCardModalUtilityLinks(card: CardDefinition, face: "front" | "back"): string {
+  const gathererUrl = card.multiverseid
+    ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${card.multiverseid}`
+    : `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${card.oracleCardName || card.name}"`)}`;
+  const gathererLink =
+    cardSourceOf(card) === "scryfall"
+      ? `<a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>`
+      : "";
+  return `<div class="card-modal-utility-buttons">
+        ${gathererLink}
+        <button id="card-modal-copy-button" class="modal-action-button copy-button"
+                onclick="copyCardImageToClipboard(event, '${card.cardDefinitionId}', '${face}')">Copy</button>`;
+}
 
 export function formatModalHtmlFragment(title: string, bodyContent: string): string {
   return `<div class="modal-overlay"

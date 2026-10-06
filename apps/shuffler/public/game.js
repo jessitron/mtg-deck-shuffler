@@ -167,13 +167,8 @@ document.addEventListener("htmx:beforeRequest", async function (evt) {
 });
 
 // Function to copy card image to clipboard from modal
-window.copyCardImageToClipboard = async function (event, imageUrl, cardName) {
+window.copyCardImageToClipboard = async function (event, cardId, face) {
   try {
-    const urlParts = imageUrl.split("/");
-    const filename = urlParts[urlParts.length - 1];
-    const cardId = filename.split(".")[0];
-    const face = urlParts.includes("/back/") ? "back" : "front";
-
     const success = await copyCardToClipboard(cardId, face);
 
     // Show feedback to user

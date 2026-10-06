@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { formatErrorPageHtmlPage } from "./view/error-view.js";
 import { createPrepViewHelpers } from "./view/common/prep-view-helpers.js";
-import { formatLossModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment, getModalCardActionsByLocation } from "./view/play-game/game-modals.js";
+import { formatCardModalUtilityLinks, formatLossModalHtmlFragment, formatStaleStateErrorModal, formatTableModalHtmlFragment, getModalCardActionsByLocation } from "./view/play-game/game-modals.js";
 import { formatFlippingContainer } from "./view/common/shared-components.js";
 import { formatHistoryModalHtmlFragment } from "./view/play-game/history-components.js";
 import { formatDebugStateModalHtmlFragment } from "./view/debug/state-copy.js";
@@ -25,6 +25,7 @@ import { CardRepositoryPort } from "./port-card-repository/types.js";
 import { trace } from "@opentelemetry/api";
 import { getCardImageUrl, constructCardImageUrl } from "./domain-types.js";
 import { fetchScryfall } from "./scryfall-http.js";
+import { cardSourceOf } from "./types.js";
 import { resolveNavListNavigation, navListQueryParam } from "./navList.js";
 import { applyGameCommand, CommandOutcome } from "./apply-game-command.js";
 import { WhatHappened } from "./GameState.js";
@@ -876,16 +877,7 @@ export function createApp(
 
       const expectedVersion = game.getStateVersion();
       const imageUrl = getCardImageUrl(gameCard.card, "large", gameCard.currentFace);
-      const gathererUrl =
-        gameCard.card.multiverseid
-          ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${gameCard.card.multiverseid}`
-          : `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${gameCard.card.oracleCardName || gameCard.card.name}"`)}`;
-
-      // Build utility buttons HTML
-      let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
-        <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
-        <button id="card-modal-copy-button" class="modal-action-button copy-button"
-                onclick="copyCardImageToClipboard(event, '${imageUrl}', '${gameCard.card.name}')">Copy</button>`;
+      let utilityButtonsHtml = formatCardModalUtilityLinks(gameCard.card, gameCard.currentFace);
 
       if (gameCard.card.twoFaced) {
         const flipVals: Record<string, string | number> = { "expected-version": expectedVersion };
@@ -913,7 +905,6 @@ export function createApp(
       res.render("partials/card-modal", {
         card: gameCard.card,
         imageUrl,
-        gathererUrl,
         currentFace: gameCard.currentFace,
         prevCardIndex,
         nextCardIndex,
@@ -996,16 +987,7 @@ export function createApp(
       const currentFace: "front" | "back" = faceParam === "back" ? "back" : "front";
 
       const imageUrl = getCardImageUrl(cardDef, "large", currentFace);
-      const gathererUrl =
-        cardDef.multiverseid
-          ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${cardDef.multiverseid}`
-          : `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${cardDef.oracleCardName || cardDef.name}"`)}`;
-
-      // Build utility buttons HTML (no expectedVersion for prep page)
-      let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
-        <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
-        <button id="card-modal-copy-button" class="modal-action-button copy-button"
-                onclick="copyCardImageToClipboard(event, '${imageUrl}', '${cardDef.name}')">Copy</button>`;
+      let utilityButtonsHtml = formatCardModalUtilityLinks(cardDef, currentFace);
 
       if (cardDef.twoFaced) {
         const newFace = currentFace === "front" ? "back" : "front";
@@ -1028,7 +1010,6 @@ export function createApp(
       res.render("partials/card-modal", {
         card: cardDef,
         imageUrl,
-        gathererUrl,
         currentFace,
         prevCardIndex,
         nextCardIndex,
@@ -1833,16 +1814,7 @@ export function createApp(
 
         const expectedVersion = game.getStateVersion();
         const imageUrl = getCardImageUrl(flippedCard.card, "large", flippedCard.currentFace);
-        const gathererUrl =
-          flippedCard.card.multiverseid
-            ? `https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=${flippedCard.card.multiverseid}`
-            : `https://gatherer.wizards.com/Pages/Search/Default.aspx?name=${encodeURIComponent(`"${flippedCard.card.oracleCardName || flippedCard.card.name}"`)}`;
-
-        // Build utility buttons HTML
-        let utilityButtonsHtml = `<div class="card-modal-utility-buttons">
-        <a href="${gathererUrl}" target="_blank" class="modal-action-button gatherer-button">See on Gatherer</a>
-        <button id="card-modal-copy-button" class="modal-action-button copy-button"
-                onclick="copyCardImageToClipboard(event, '${imageUrl}', '${flippedCard.card.name}')">Copy</button>`;
+        let utilityButtonsHtml = formatCardModalUtilityLinks(flippedCard.card, flippedCard.currentFace);
 
         if (flippedCard.card.twoFaced) {
           const flipVals: Record<string, string | number> = { "expected-version": expectedVersion };
@@ -1870,7 +1842,6 @@ export function createApp(
         res.render("partials/card-modal", {
           card: flippedCard.card,
           imageUrl,
-          gathererUrl,
           currentFace: flippedCard.currentFace,
           prevCardIndex,
           nextCardIndex,
@@ -1910,8 +1881,10 @@ export function createApp(
     try {
       const card = await cardRepository.getCard(cardId);
       const imageUrl = card ? getCardImageUrl(card, "png", cardFace) : constructCardImageUrl(cardId, "png", cardFace);
+      const cardSource = card ? cardSourceOf(card) : "scryfall";
+      trace.getActiveSpan()?.setAttributes({ "card.definition_id": cardId, "card.source": cardSource });
 
-      const response = await fetchScryfall(imageUrl);
+      const response = cardSource === "scryfall" ? await fetchScryfall(imageUrl) : await fetch(imageUrl);
       if (!response.ok) {
         return res.status(response.status).send("Failed to fetch image");
       }
