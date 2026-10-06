@@ -32,7 +32,7 @@ function cardNamed(game: GameState, name: string) {
 }
 
 describe("card.discarded events validate against the Spine's own contracts (contracts/envelope.v1.json, contracts/payloads/card.discarded.v1.json)", () => {
-  it("a directly-built event validates, with no zoneHint field to begin with", () => {
+  it("a directly-built event validates", () => {
     const event = buildCardDiscardedEvent(
       { card: lightningBolt, location: { type: "Hand", position: 0 }, gameCardIndex: 0, isCommander: false, currentFace: "front" },
       "11111111-1111-1111-1111-111111111111",

@@ -147,7 +147,7 @@ test.describe('Three-ship flow: Shuffler plays to the Tabletop via the Spine', (
 
     await expect(cardShapes(spectator)).toHaveCount(baselineShapes + 1, { timeout: 15000 });
 
-    // Discard the next card: zoneHint graveyard, also lands on the canvas
+    // Discard the next card: graveyard, also lands on the canvas
     await actOnFirstHandCard(page, 'Discard', '5');
     await expect(page.locator('.table-cards-button')).toContainText('2 Cards on table');
     await expect(cardShapes(spectator)).toHaveCount(baselineShapes + 2, { timeout: 15000 });

@@ -97,7 +97,7 @@ Players encounter two-faced cards throughout the app:
 | Image fetch | `src/port-card-images/` (`ScryfallCardImagesGateway`, `enrichDeckWithImages`) — fetches Scryfall image URLs at ingestion |
 | Adapters | `src/port-deck-retrieval/archidektAdapter/`, `src/port-deck-retrieval/mtgjsonAdapter/` |
 | Persistence | `SqliteCardRepositoryAdapter` stores `card_types`, `image_uris`, `back_image_uris` as JSON (no back_face column); `PersistedGameCard.currentFace` |
-| `card.discarded` (Spine event) | **Built** (cards-come-and-go ticket 08, 2026-08-23): `buildCardDiscardedEvent`/`sendCardDiscardedToSpineBestEffort` (`src/port-tabletop/types.ts` / `src/port-spine/sendToSpine.ts`), sent from `POST /discard-card/:gameId/:gameCardIndex` and `POST /mill/:gameId` instead of `card.played` with a `graveyard` zoneHint. Same face-carrying shape as `card.played` minus `zoneHint` (graveyard *is* the meaning). Face/image computation shared with `card.played`/`card.played-face-down` via the private `cardFaceFields(gameCard)` helper in `src/port-tabletop/types.ts`. See [contract.md](contract.md). |
+| `card.discarded` (Spine event) | **Built** (cards-come-and-go ticket 08, 2026-08-23): `buildCardDiscardedEvent`/`sendCardDiscardedToSpineBestEffort` (`src/port-tabletop/types.ts` / `src/port-spine/sendToSpine.ts`), sent from `POST /discard-card/:gameId/:gameCardIndex` and `POST /mill/:gameId` instead of `card.played` with a graveyard hint. Same face-carrying shape as `card.played` (graveyard *is* the meaning). Face/image computation shared with `card.played`/`card.played-face-down` via the private `cardFaceFields(gameCard)` helper in `src/port-tabletop/types.ts`. See [contract.md](contract.md). |
 
 ## Other Docs
 

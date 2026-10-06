@@ -65,14 +65,13 @@ describe("SpineEventsAdapter announcements", () => {
     expect(event.payload).toMatchObject({ gameCardIndex: 3, seat: "seat-abc" });
   });
 
-  it("announceCardDiscarded builds card.discarded, which carries no zoneHint at all", async () => {
+  it("announceCardDiscarded builds card.discarded", async () => {
     const { adapter, gateway } = adapterWithGateway();
 
     await adapter.announceCardDiscarded(seat, gameCard());
 
     const { event } = gateway.sentEvents[0];
     expect(event.name).toBe("card.discarded");
-    expect(event.payload).not.toHaveProperty("zoneHint");
   });
 
   it("refuses a card with no cardInstanceId — the table could not tell which copy it was", async () => {

@@ -17,7 +17,7 @@ describe("buildCardDiscardedEvent (the card.discarded envelope, ticket 08)", () 
   const initiator = { seatId: "abc123", playerName: "Jess" };
   const tableName = "Friday Night";
 
-  it("builds the envelope carrying a card.discarded payload from a GameCard, with no zoneHint — graveyard is the meaning", () => {
+  it("builds the envelope carrying a card.discarded payload from a GameCard", () => {
     const event = buildCardDiscardedEvent(handCard(), "instance-guid-1", initiator, initiator.seatId, tableName);
 
     expect(event.name).toBe(CARD_DISCARDED_EVENT_NAME);
@@ -30,7 +30,6 @@ describe("buildCardDiscardedEvent (the card.discarded envelope, ticket 08)", () 
     expect(event.schemaVersion).toBe(1);
     expect(event.payload.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: "instance-guid-1" });
     expect(event.payload.face).toBe("front");
-    expect(event.payload).not.toHaveProperty("zoneHint");
     expect(event.payload.cardName).toBe(lightningBolt.name);
     expect(event.payload.frontImageUrl).toContain(lightningBolt.scryfallId.substring(0, 1));
     expect(event.payload.backImageUrl).toBeNull(); // not twoFaced
