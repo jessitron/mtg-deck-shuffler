@@ -16,7 +16,7 @@ event the Spine can hear.
    card-arrival API with per-seat battlefield rows + graveyard/exile spots, OTel on
    server and browser, deployed at table.jessitron.honeydemo.io. Remaining for this
    mountain: the Shuffler-side integration (Part B — prep inputs, play/discard send)._
-2. **The physics of Magic** — a custom CardShape that taps (rotate), flips, holds
+2. **The physics of Magic** — a custom CardShape that taps (rotate), transforms, holds
    counters and notes; zone areas for Graveyard, Exile, and the Stack (geography, not
    rules). Common movements become gestures; every gesture is a physical event.
    _Geometry and behavior specified in `DESIGN.md` (in this directory) — a full player
@@ -35,7 +35,7 @@ event the Spine can hear.
 ## Enabling Constraints
 
 - **Physics, not meaning.** Knows which card is which (identity), where the zones are
-  (geography), what hands do (tap, flip, counters, notes — it can report a note's text
+  (geography), what hands do (tap, transform, counters, notes — it can report a note's text
   without knowing what it means). Never interprets cards.
 - The freeform layer survives: arrows, scribbles, sticky notes — the Mural joy — stay
   possible, and their uninterpreted residue is what the interpreter learns to read.

@@ -12,7 +12,7 @@ Shuffler's version of it landed as `apps/shuffler/notes/DESIGN-layering.md`.
 moves it.
 
 What changes is that the Tabletop starts *telling the Spine what happened*. Every
-physical event — a card taps, flips, moves zone, gains a counter, leaves the table —
+physical event — a card taps, transforms, moves zone, gains a counter, leaves the table —
 goes to the Spine's append-only log, alongside the arrivals that already come the other
 way. That log can then be folded into a **projection** of the table.
 
@@ -136,7 +136,7 @@ An event is replayable when it satisfies all six:
 
 `src/client/usePhysicsAnnouncements.ts` is the seed of this vocabulary — it already names
 this ship's physics in this ship's language (`card.tapped`, `card.untapped`,
-`card.flipped`, `card.turnedFaceDown`, `card.zoneMoved`, `counter.attached`) and sends it
+`card.transformed`, `card.turnedFaceDown`, `card.zoneMoved`, `counter.attached`) and sends it
 only to Honeycomb. **It currently fails all six.** That is the gap step 1 closes, and it
 is cheap to close now and expensive to close once a production log holds the old shapes.
 

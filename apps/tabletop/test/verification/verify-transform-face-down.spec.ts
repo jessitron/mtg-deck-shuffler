@@ -92,8 +92,8 @@ async function spreadCardApart(page: Page, instanceId: string, dx: number, dy: n
   await page.waitForTimeout(200);
 }
 
-test("flipping and turning face down both sync to a second client", async ({ browser, baseURL }) => {
-  const tableSlug = `verify-flip-2client-${Date.now()}`;
+test("transforming and turning face down both sync to a second client", async ({ browser, baseURL }) => {
+  const tableSlug = `verify-transform-2client-${Date.now()}`;
   const contexts: BrowserContext[] = [];
   try {
     const seatResponse = await fetch(`${baseURL}/api/tables/${tableSlug}/events`, {
@@ -119,7 +119,7 @@ test("flipping and turning face down both sync to a second client", async ({ bro
     await Promise.all([zoomToFit(alice), zoomToFit(bob)]);
 
     await openCardMenu(alice, instanceId);
-    await chooseMenuItem(alice, "Flip");
+    await chooseMenuItem(alice, "Transform");
 
     await expect(async () => {
       expect(await cardSrc(alice, instanceId)).toBe(backImageUrl);
@@ -142,8 +142,8 @@ test("flipping and turning face down both sync to a second client", async ({ bro
   }
 });
 
-test("a one-faced card has no Flip item, only Turn face down", async ({ page, baseURL }) => {
-  const tableSlug = `verify-flip-gate-${Date.now()}`;
+test("a one-faced card has no Transform item, only Turn face down", async ({ page, baseURL }) => {
+  const tableSlug = `verify-transform-gate-${Date.now()}`;
   const seatResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, {
     data: seatJoined(tableSlug, {}),
   });
@@ -158,7 +158,7 @@ test("a one-faced card has no Flip item, only Turn face down", async ({ page, ba
 
   await openCardMenu(page, instanceId);
   await expect(page.getByRole("menuitem", { name: "Turn face down", exact: true })).toBeVisible();
-  await expect(page.getByRole("menuitem", { name: "Flip", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("menuitem", { name: "Transform", exact: true })).toHaveCount(0);
 });
 
 test("turning a card face down shows the table's card back, unsleeved", async ({ page, baseURL }) => {
@@ -232,8 +232,8 @@ test("a card entering the library resets face and face-down", async ({ page, bas
   }).toPass({ timeout: 5000 });
 });
 
-test("flipping card A does not leave a stale selection that hijacks a later drag of card B", async ({ page, baseURL }) => {
-  const tableSlug = `verify-flip-selection-${Date.now()}`;
+test("transforming card A does not leave a stale selection that hijacks a later drag of card B", async ({ page, baseURL }) => {
+  const tableSlug = `verify-transform-selection-${Date.now()}`;
   const seatResponse = await page.request.post(`${baseURL}/api/tables/${tableSlug}/events`, {
     data: seatJoined(tableSlug, {}),
   });
@@ -252,7 +252,7 @@ test("flipping card A does not leave a stale selection that hijacks a later drag
   await spreadCardApart(page, idB, 150, 0);
 
   await openCardMenu(page, idA);
-  await chooseMenuItem(page, "Flip");
+  await chooseMenuItem(page, "Transform");
   await expect(async () => {
     expect(await cardSrc(page, idA)).toBe("https://example.com/back-a.jpg");
   }).toPass({ timeout: 5000 });

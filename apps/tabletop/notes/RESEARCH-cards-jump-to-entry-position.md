@@ -132,7 +132,7 @@ this pass and are the natural next step:
 ## What's instrumented now (2026-08-25)
 
 The gap: `usePhysicsAnnouncements.ts` (the hook that announces card taps,
-flips, zone moves, etc. as spans) only listens with `store.listen(callback,
+transforms, zone moves, etc. as spans) only listens with `store.listen(callback,
 { source: "user", scope: "document" })` — tldraw's `source: "user"` filter
 means "changes this tab's own actions made." It **never sees a position change
 that arrives via the sync protocol** from the server or another client's tab
@@ -180,12 +180,12 @@ watches that `connectionStatus` and emits two spans on transitions (following th
 `void inSpan("name", () => {}, {attrs})` idiom as "card arrived on canvas"/"card moved by
 remote change" — a store-driven callback has no ambient span to hang attributes on):
 
-- **"sync connection lost"** when `connectionStatus` flips to `"offline"`.
-- **"sync connection reconnected"** when it flips back to `"online"` — carries
+- **"sync connection lost"** when `connectionStatus` changes to `"offline"`.
+- **"sync connection reconnected"** when it returns to `"online"` — carries
   `reconnect.offline_duration_ms` (client-side timestamp diff between the two
   transitions) and `reconnect.card_count` (a one-shot `store.allRecords()` count of
   `mtg-card` shapes at that moment — a cheap summary, not a per-shape snapshot; not
-  guaranteed complete the instant `connectionStatus` flips, since there's no confirmed
+  guaranteed complete the instant `connectionStatus` changes, since there's no confirmed
   guarantee the store has finished catching up on missed updates by then).
 
 `table.name`/`table.slug` need no extra attribute — `setGlobalAttrs` already stamps them

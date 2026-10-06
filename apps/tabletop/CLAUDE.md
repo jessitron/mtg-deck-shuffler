@@ -104,6 +104,10 @@ The player area (playmat, library, command zone, graveyard, exile, Stack) is spe
 `seatJoined.ts`. Every played card, lands included, arrives on the Stack; a human
 drags it wherever it goes from there (2026-08-16).
 
+## Vocabulary
+
+Never say "flip" in Tabletop code, UI labels, telemetry names, tests or docs (tldraw's own `flipX`/`flipY` image props are not ours). Two-faced cards **Transform** (swap which printed face is up, `card.transformed`); every card can **Turn Face Down / Turn Face Up** (concealment, `faceDown`, `card.turnedFaceDown`). "Flip" meant different things on each ship and hid that these are two independent axes; the Shuffler keeps its own "flip" (private inspection of the other face) on purpose.
+
 ## UI Style
 
 **The Tabletop is in scope for the fleet's design owner** — `owners/fleet-design-language/`

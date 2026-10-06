@@ -40,24 +40,24 @@ function CardMenuItems() {
     editor.updateShapes(partials);
   }
 
-  const flippable = cards.filter((c) => c.props.backImageUrl !== null);
+  const transformable = cards.filter((c) => c.props.backImageUrl !== null);
   const anyFaceUp = cards.some((c) => !c.props.faceDown);
   const anyUntapped = cards.some((c) => !c.props.tapped);
 
   return (
     <TldrawUiMenuGroup id="mtg-card-actions">
-      {flippable.length > 0 && (
+      {transformable.length > 0 && (
         <TldrawUiMenuItem
-          id="mtg-card-flip"
-          label="Flip"
+          id="mtg-card-transform"
+          label="Transform"
           onSelect={() =>
             commit(
-              flippable.map((c) => ({
+              transformable.map((c) => ({
                 id: c.id,
                 type: c.type,
                 props: { ...c.props, face: c.props.face === "front" ? ("back" as const) : ("front" as const) },
               })),
-              "flip",
+              "transform",
             )
           }
         />

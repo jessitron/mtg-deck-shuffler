@@ -43,7 +43,7 @@ export function useReconnectSpans(store: RemoteTLStoreWithStatus): void {
     // couldn't previously see completing. Snapshot how many mtg-card shapes exist right now —
     // a cheap summary (not per-shape) to correlate against a reported card reset. This is a
     // one-shot read, not a guaranteed-complete one: there's no confirmed guarantee the store
-    // has finished catching up on missed updates the instant connectionStatus flips to "online".
+    // has finished catching up on missed updates the instant connectionStatus becomes "online".
     const offlineDurationMs = offlineSince.current ? Date.now() - offlineSince.current : -1;
     offlineSince.current = undefined;
     const cardCount =

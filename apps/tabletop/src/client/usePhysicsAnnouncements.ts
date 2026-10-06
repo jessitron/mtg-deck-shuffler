@@ -71,7 +71,7 @@ export function usePhysicsAnnouncements(store: RemoteTLStoreWithStatus): void {
               named = true;
             }
             if (beforeProps.face !== afterProps.face) {
-              announce("card.flipped", { ...cardAttrs(after), "card.face": afterProps.face });
+              announce("card.transformed", { ...cardAttrs(after), "card.face": afterProps.face });
               named = true;
             }
             if (!beforeProps.faceDown && afterProps.faceDown) {
