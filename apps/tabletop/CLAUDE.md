@@ -30,7 +30,7 @@ the library-portal swallow (ticket 12, `src/client/shapes/cardSwallow.ts`) is se
 `src/server/cardReturned.ts`) and only deletes the card shape once that call resolves `ok`;
 on failure the card's visuals revert and it stays on the table. That route resolves
 `playerName`/the Spine's real `tableId` from the room registry (the client only knows the
-card's own `owner`/`cardDefinitionId`/`gameCardIndex`, matching this ship's shared-canvas design —
+card's own `owner`/`cardDefinitionId`/`cardSource`/`gameCardIndex`, matching this ship's shared-canvas design —
 it has no notion of its own player identity) and calls
 `sendCardReturnedToSpineBestEffort` (`src/server/sendCardReturned.ts`), which POSTs to the
 Spine's generic `POST /tables/:tableId/events` — same send shape and same address-is-simply-

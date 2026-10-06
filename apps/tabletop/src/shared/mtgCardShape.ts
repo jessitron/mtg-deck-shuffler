@@ -1,11 +1,13 @@
 import { createShapePropsMigrationIds, createShapePropsMigrationSequence, RecordProps, TLShape } from "@tldraw/tlschema";
 import { T } from "@tldraw/validate";
+import type { CardSource } from "./cardSource.js";
 
 export interface MtgCardShapeProps {
   w: number;
   h: number;
   instanceId: string;
   cardDefinitionId: string;
+  cardSource: CardSource;
   cardName: string;
   frontImageUrl: string;
   backImageUrl: string | null;
@@ -34,6 +36,7 @@ export const mtgCardShapeProps: RecordProps<MtgCardShape> = {
   h: T.nonZeroNumber,
   instanceId: T.string,
   cardDefinitionId: T.string,
+  cardSource: T.literalEnum("scryfall", "archidekt-custom"),
   cardName: T.string,
   frontImageUrl: T.string,
   backImageUrl: T.string.nullable(),
@@ -47,7 +50,7 @@ export const mtgCardShapeProps: RecordProps<MtgCardShape> = {
   gameCardIndex: T.number.nullable(),
 };
 
-const mtgCardVersions = createShapePropsMigrationIds("mtg-card", { RenameScryfallId: 1 });
+const mtgCardVersions = createShapePropsMigrationIds("mtg-card", { RenameScryfallId: 1, AddCardSource: 2 });
 
 export const mtgCardShapeMigrations = createShapePropsMigrationSequence({
   sequence: [
@@ -60,6 +63,15 @@ export const mtgCardShapeMigrations = createShapePropsMigrationSequence({
       down(props) {
         props.scryfallId = props.cardDefinitionId;
         delete props.cardDefinitionId;
+      },
+    },
+    {
+      id: mtgCardVersions.AddCardSource,
+      up(props) {
+        props.cardSource = "scryfall";
+      },
+      down(props) {
+        delete props.cardSource;
       },
     },
   ],

@@ -3,6 +3,7 @@ import { AssetRecordType, createShapeId, TLAssetId, TLImageShape, TLPageId, TLSh
 import { IndexKey, getIndexAbove, getIndexBelow, ZERO_INDEX_KEY } from "@tldraw/utils";
 import { RoomEntry, PlayerArea } from "./rooms.js";
 import { MtgCardShape } from "../shared/mtgCardShape.js";
+import type { CardSource } from "../shared/cardSource.js";
 import { MtgZoneShape, MtgZoneShapeProps, LIBRARY_PILE_INSET, ZONE_LABEL_BAND } from "../shared/mtgZoneShape.js";
 import {
   playmatBounds,
@@ -113,6 +114,7 @@ export interface MtgCardShapeArgs {
   index: IndexKey;
   instanceId: string;
   cardDefinitionId: string;
+  cardSource: CardSource;
   cardName: string;
   frontImageUrl: string;
   backImageUrl: string | null;
@@ -140,6 +142,7 @@ export function mtgCardShape({
   index,
   instanceId,
   cardDefinitionId,
+  cardSource,
   cardName,
   frontImageUrl,
   backImageUrl,
@@ -169,6 +172,7 @@ export function mtgCardShape({
       h,
       instanceId,
       cardDefinitionId,
+      cardSource,
       cardName,
       frontImageUrl,
       backImageUrl,

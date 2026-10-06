@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { RemoteTLStoreWithStatus } from "@tldraw/sync";
 import { inSpan } from "./observability";
+import { CardSource, cardSpanAttributes } from "../shared/cardSource";
 
 type CardShapeRecord = { typeName?: string; type?: string; id?: string; x?: number; y?: number; props?: Record<string, unknown> };
 
@@ -24,7 +25,7 @@ export function useCardArrivalSpans(store: RemoteTLStoreWithStatus): void {
           if (asAny.typeName === "shape" && asAny.type === "mtg-card" && typeof asAny.props?.instanceId === "string") {
             void inSpan("card arrived on canvas", () => {}, {
               "card.instance_id": asAny.props.instanceId as string,
-              "card.definition_id": (asAny.props.cardDefinitionId as string) ?? "",
+              ...cardSpanAttributes(asAny.props as { cardDefinitionId?: string; cardSource?: CardSource }),
               "card.name": (asAny.props.cardName as string) ?? "",
             });
           }
@@ -53,7 +54,7 @@ export function useCardArrivalSpans(store: RemoteTLStoreWithStatus): void {
             pendingMoves.delete(after.id!);
             void inSpan("card moved by remote change", () => {}, {
               "card.instance_id": (after.props?.instanceId as string) ?? "",
-              "card.definition_id": (after.props?.cardDefinitionId as string) ?? "",
+              ...cardSpanAttributes((after.props ?? {}) as { cardDefinitionId?: string; cardSource?: CardSource }),
               "card.name": (after.props?.cardName as string) ?? "",
               "shape.id": after.id ?? "",
               "position.before.x": windowBefore.x ?? -1,

@@ -3,10 +3,13 @@ import { trace } from "@opentelemetry/api";
 import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { sendCardReturnedToSpineBestEffort } from "./sendCardReturned.js";
+import { CardSource, cardSourceOf, cardSpanAttributes } from "../shared/cardSource.js";
 
 interface CardReturnedRequestBody {
   seatId?: string;
   cardDefinitionId?: string;
+  /** Optional: tabs loaded before this field existed don't send it. */
+  cardSource?: CardSource;
   gameCardIndex?: number;
   fromZone?: string;
 }
@@ -29,6 +32,7 @@ export async function handleCardReturned(req: Request, res: Response): Promise<v
 
   const body = req.body as CardReturnedRequestBody;
   const { seatId, cardDefinitionId, gameCardIndex, fromZone } = body;
+  const cardSource = cardSourceOf(body);
   if (!seatId || !cardDefinitionId || typeof gameCardIndex !== "number") {
     res.status(400).json({ error: "seatId, cardDefinitionId, and gameCardIndex are required" });
     return;
@@ -49,7 +53,7 @@ export async function handleCardReturned(req: Request, res: Response): Promise<v
     "table.name": tableNameFromSlug(tableName),
     "table.slug": tableName,
     "seat.id": seatId,
-    "card.definition_id": cardDefinitionId,
+    ...cardSpanAttributes({ cardDefinitionId, cardSource }),
     "card.game_card_index": gameCardIndex,
   });
 
@@ -58,6 +62,7 @@ export async function handleCardReturned(req: Request, res: Response): Promise<v
     seatId,
     playerName: playerArea.playerName,
     cardDefinitionId,
+    cardSource,
     gameCardIndex,
     ...(fromZone !== undefined ? { fromZone } : {}),
   });

@@ -54,6 +54,7 @@ const baseParams: CardReturnedParams = {
   seatId: "seat-0000001",
   playerName: "Jess",
   cardDefinitionId: "11111111-1111-4111-8111-111111111111",
+  cardSource: "scryfall",
   gameCardIndex: 3,
 };
 
@@ -89,6 +90,17 @@ describe("sendCardReturnedToSpineBestEffort", () => {
     expect(typeof body.id).toBe("string");
 
     expect(validateEnvelope(body)).toBe(true);
+    expect(validateCardReturnedPayload(body.payload)).toBe(true);
+  });
+
+  it("names an Archidekt custom card's cardSource, and the payload still satisfies the contract", async () => {
+    fakeServer = createFakeSpineServer();
+    const port = await fakeServer.listen();
+
+    await sendCardReturnedToSpineBestEffort({ ...baseParams, cardSource: "archidekt-custom" }, `http://localhost:${port}`);
+
+    const { body } = fakeServer.receivedRequests[0] as { body: any };
+    expect(body.payload.card).toEqual({ cardDefinitionId: baseParams.cardDefinitionId, cardSource: "archidekt-custom" });
     expect(validateCardReturnedPayload(body.payload)).toBe(true);
   });
 

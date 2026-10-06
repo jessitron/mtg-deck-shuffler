@@ -19,6 +19,7 @@ export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
       h: 238,
       instanceId: "",
       cardDefinitionId: "",
+      cardSource: "scryfall",
       cardName: "",
       frontImageUrl: "",
       backImageUrl: null,

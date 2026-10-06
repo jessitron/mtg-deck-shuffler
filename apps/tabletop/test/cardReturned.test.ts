@@ -101,6 +101,41 @@ describe("POST /api/tables/:tableName/cards/return", () => {
     expect(body.payload.gameCardIndex).toBe(4);
   });
 
+  it("forwards an Archidekt custom card's cardSource to the Spine", async () => {
+    fakeSpine = createFakeSpineServer();
+    const spinePort = await fakeSpine.listen();
+    process.env.SPINE_URL = `http://localhost:${spinePort}`;
+
+    seedRoom("Portal Test Custom", "seat-custom", "Jess");
+    const response = await postReturn("Portal Test Custom", {
+      seatId: "seat-custom",
+      cardDefinitionId: "22222222-2222-5222-8222-222222222222",
+      cardSource: "archidekt-custom",
+      gameCardIndex: 5,
+    });
+
+    expect(response.status).toBe(200);
+    const body = fakeSpine.receivedRequests[0] as any;
+    expect(body.payload.card).toEqual({ cardDefinitionId: "22222222-2222-5222-8222-222222222222", cardSource: "archidekt-custom" });
+  });
+
+  it("accepts a request with no cardSource (a tab loaded before it existed) and sends none for a Scryfall card", async () => {
+    fakeSpine = createFakeSpineServer();
+    const spinePort = await fakeSpine.listen();
+    process.env.SPINE_URL = `http://localhost:${spinePort}`;
+
+    seedRoom("Portal Test Old Tab", "seat-old-tab", "Jess");
+    const response = await postReturn("Portal Test Old Tab", {
+      seatId: "seat-old-tab",
+      cardDefinitionId: "11111111-1111-4111-8111-111111111111",
+      gameCardIndex: 6,
+    });
+
+    expect(response.status).toBe(200);
+    const body = fakeSpine.receivedRequests[0] as any;
+    expect(body.payload.card).toEqual({ cardDefinitionId: "11111111-1111-4111-8111-111111111111" });
+  });
+
   it("returns 502 when the Spine does not confirm", async () => {
     fakeSpine = createFakeSpineServer();
     fakeSpine.failWith(500);

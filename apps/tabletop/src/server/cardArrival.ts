@@ -5,6 +5,7 @@ import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { CARD_W, CARD_H, MAX_SEATS, graveyardCardPosition, stackCardPosition } from "./cardLayout.js";
 import { pageIdOf, nextIndex, mtgCardShape } from "./tableFurniture.js";
 import { validateIncomingEvent } from "./contractValidation.js";
+import { CardSource, cardSourceOf, cardSpanAttributes } from "../shared/cardSource.js";
 
 const tracer = trace.getTracer("mtg-tabletop");
 
@@ -18,7 +19,7 @@ function isFaceDownEnvelope(body: unknown): boolean {
 }
 
 interface CardArrivalPayloadCommon {
-  card: { cardDefinitionId: string; instanceId: string };
+  card: { cardDefinitionId: string; cardSource?: CardSource; instanceId: string };
   face: "front" | "back";
   frontImageUrl: string;
   backImageUrl: string | null;
@@ -59,7 +60,7 @@ async function placeArrivedCard(
 
   trace.getActiveSpan()?.setAttributes({
     "card.instance_id": card.instanceId,
-    "card.definition_id": card.cardDefinitionId,
+    ...cardSpanAttributes(card),
     "card.name": cardName,
     "event.id": envelope.id,
     "event.name": envelope.name,
@@ -108,7 +109,7 @@ async function placeArrivedCard(
         "table.slug": tableName,
         "seat.id": seatId,
         "card.instance_id": card.instanceId,
-        "card.definition_id": card.cardDefinitionId,
+        ...cardSpanAttributes(card),
         "card.name": cardName,
       },
     },
@@ -130,6 +131,7 @@ async function placeArrivedCard(
               index: nextIndex(tableName),
               instanceId: card.instanceId,
               cardDefinitionId: card.cardDefinitionId,
+              cardSource: cardSourceOf(card),
               cardName: cardName,
               frontImageUrl: frontImageUrl,
               backImageUrl: backImageUrl,

@@ -3,13 +3,14 @@ import { getOrCreateRoom } from "./rooms.js";
 import { slugifyTableName, tableNameFromSlug } from "../shared/slugify.js";
 import { validateIncomingEvent } from "./contractValidation.js";
 import { PASSENGER_TYPES } from "../shared/passengerTypes.js";
+import { CardSource, cardSpanAttributes } from "../shared/cardSource.js";
 
 const tracer = trace.getTracer("mtg-tabletop");
 
 export const CARD_RETURNED_EVENT_NAME = "card.returned";
 
 interface CardReturnedPayload {
-  card: { cardDefinitionId: string; instanceId?: string };
+  card: { cardDefinitionId: string; cardSource?: CardSource; instanceId?: string };
   gameCardIndex: number;
   seat: string;
 }
@@ -58,7 +59,7 @@ export async function applyCardRemoval(tableName: string, body: unknown): Promis
 
   trace.getActiveSpan()?.setAttributes({
     "card.instance_id": instanceId,
-    "card.definition_id": envelope.payload.card.cardDefinitionId,
+    ...cardSpanAttributes(envelope.payload.card),
     "event.id": envelope.id,
     "event.name": envelope.name,
     "table.name": tableNameFromSlug(tableName),

@@ -418,6 +418,30 @@ describe("seat joined — commanders", () => {
     }
   });
 
+  it("carries a custom commander's cardSource onto both the real commander and its ghost", async () => {
+    const pumpkin = commanderEntry("Horrible Nasty Pumpkin", "https://example.com/pumpkin.jpg");
+    const custom = { ...pumpkin, card: { ...pumpkin.card, cardSource: "archidekt-custom" } };
+    const response = await post("seat-commander-custom", seatJoinedWithCommanders("seat-commander-custom", [custom]));
+    expect(response.status).toBe(201);
+
+    const cards = shapesOf("seat-commander-custom").filter((s) => s.type === "mtg-card");
+    expect(cards).toHaveLength(2);
+    for (const card of cards) {
+      expect(card.props.cardSource).toBe("archidekt-custom");
+    }
+  });
+
+  it("a Scryfall commander and its ghost default to cardSource 'scryfall'", async () => {
+    const zur = commanderEntry("Zur", "https://example.com/zur.jpg");
+    await post("seat-commander-scryfall", seatJoinedWithCommanders("seat-commander-scryfall", [zur]));
+
+    const cards = shapesOf("seat-commander-scryfall").filter((s) => s.type === "mtg-card");
+    expect(cards).toHaveLength(2);
+    for (const card of cards) {
+      expect(card.props.cardSource).toBe("scryfall");
+    }
+  });
+
   it("a second seat.joined for an already-seated seat is a no-op — commanders are minted once", async () => {
     const kaalia = commanderEntry("Kaalia", "https://example.com/kaalia.jpg");
     const event = seatJoinedWithCommanders("seat-commander-dedup", [kaalia]);

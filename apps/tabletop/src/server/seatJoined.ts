@@ -8,12 +8,13 @@ import { MAX_SEATS, CARD_W, CARD_H, commandZoneCardPosition } from "./cardLayout
 import { validateIncomingEvent } from "./contractValidation.js";
 import { subscribeToSpine } from "./spineSubscriber.js";
 import { dispatchSpineEvent } from "./spineEventDispatch.js";
+import { CardSource, cardSourceOf } from "../shared/cardSource.js";
 
 const tracer = trace.getTracer("mtg-tabletop");
 
 /** A commander riding seat.joined (ticket 18) — always face up, no `face` field on the wire. */
 interface SeatJoinedCommander {
-  card: { cardDefinitionId: string; instanceId: string };
+  card: { cardDefinitionId: string; cardSource?: CardSource; instanceId: string };
   cardName: string;
   frontImageUrl: string;
   backImageUrl: string | null;
@@ -172,6 +173,7 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
                 w: CARD_W,
                 h: CARD_H,
                 cardDefinitionId: commander.card.cardDefinitionId,
+                cardSource: cardSourceOf(commander.card),
                 cardName: commander.cardName,
                 frontImageUrl: commander.frontImageUrl,
                 backImageUrl: commander.backImageUrl,

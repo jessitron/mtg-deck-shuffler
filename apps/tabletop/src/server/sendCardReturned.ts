@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { trace } from "@opentelemetry/api";
 import { tableNameFromSlug } from "../shared/slugify.js";
 import { log } from "./log.js";
+import type { CardSource } from "../shared/cardSource.js";
 
 export const CARD_RETURNED_EVENT_NAME = "card.returned" as const;
 
@@ -11,6 +12,7 @@ export interface CardReturnedParams {
   seatId: string;
   playerName: string;
   cardDefinitionId: string;
+  cardSource: CardSource;
   gameCardIndex: number;
   fromZone?: string;
 }
@@ -32,7 +34,7 @@ export async function sendCardReturnedToSpineBestEffort(
   params: CardReturnedParams,
   baseUrl: string = process.env.SPINE_URL || "http://localhost:4600"
 ): Promise<boolean> {
-  const { tableId, seatId, playerName, cardDefinitionId, gameCardIndex, fromZone } = params;
+  const { tableId, seatId, playerName, cardDefinitionId, cardSource, gameCardIndex, fromZone } = params;
   const event = {
     id: randomUUID(),
     tableId,
@@ -44,7 +46,7 @@ export async function sendCardReturnedToSpineBestEffort(
     significance: "domain" as const,
     schemaVersion: 2,
     payload: {
-      card: { cardDefinitionId },
+      card: { cardDefinitionId, ...(cardSource !== "scryfall" ? { cardSource } : {}) },
       gameCardIndex,
       seat: seatId,
       ...(fromZone !== undefined ? { fromZone } : {}),

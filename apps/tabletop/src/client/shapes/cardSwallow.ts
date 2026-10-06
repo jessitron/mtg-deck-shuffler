@@ -2,9 +2,17 @@ import { Editor, TLShapeId } from "tldraw";
 import { MtgCardShape } from "../../shared/mtgCardShape";
 import { ZoneHit } from "./zoneHitTest";
 import { evictPassengers } from "./cardZoneEntry";
+import { CardSource, cardSourceOf } from "../../shared/cardSource";
 
 const SWALLOW_DURATION_MS = 500;
 const SWALLOW_SPINS = 2;
+
+interface ReturnSend {
+  seatId: string | null;
+  cardDefinitionId: string;
+  cardSource: CardSource;
+  gameCardIndex: number | null;
+}
 
 interface SwallowSnapshot {
   x: number;
@@ -53,9 +61,10 @@ export function swallowCard(editor: Editor, current: MtgCardShape, zoneHit: Zone
 
   const id = current.id;
   const { cardDefinitionId, gameCardIndex } = current.props;
+  const cardSource = cardSourceOf(current.props);
 
   setTimeout(() => {
-    void completeSwallow(editor, id, before, { seatId: zoneHit.seatId, cardDefinitionId, gameCardIndex });
+    void completeSwallow(editor, id, before, { seatId: zoneHit.seatId, cardDefinitionId, cardSource, gameCardIndex });
   }, 0);
 }
 
@@ -63,7 +72,7 @@ async function completeSwallow(
   editor: Editor,
   id: TLShapeId,
   before: SwallowSnapshot,
-  send: { seatId: string | null; cardDefinitionId: string; gameCardIndex: number | null }
+  send: ReturnSend
 ): Promise<void> {
   const [ok] = await Promise.all([postCardReturned(send), sleep(SWALLOW_DURATION_MS)]);
 
@@ -88,7 +97,7 @@ function tableSlugFromLocation(): string | undefined {
   return match ? decodeURIComponent(match[1]) : undefined;
 }
 
-async function postCardReturned(send: { seatId: string | null; cardDefinitionId: string; gameCardIndex: number | null }): Promise<boolean> {
+async function postCardReturned(send: ReturnSend): Promise<boolean> {
   if (send.seatId === null || send.gameCardIndex === null) return false;
   const tableSlug = tableSlugFromLocation();
   if (!tableSlug) return false;
@@ -97,7 +106,12 @@ async function postCardReturned(send: { seatId: string | null; cardDefinitionId:
     const response = await fetch(`/api/tables/${encodeURIComponent(tableSlug)}/cards/return`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ seatId: send.seatId, cardDefinitionId: send.cardDefinitionId, gameCardIndex: send.gameCardIndex }),
+      body: JSON.stringify({
+        seatId: send.seatId,
+        cardDefinitionId: send.cardDefinitionId,
+        cardSource: send.cardSource,
+        gameCardIndex: send.gameCardIndex,
+      }),
     });
     return response.ok;
   } catch {

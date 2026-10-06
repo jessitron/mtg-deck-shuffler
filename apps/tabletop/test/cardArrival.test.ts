@@ -338,6 +338,26 @@ describe("card arrival", () => {
     expect(card).toBeDefined();
   });
 
+  it("mints cardSource 'scryfall' when the payload's card carries none", async () => {
+    await joinSeat("arrival-source-default", "seat-0000001", "Jess");
+    await post("arrival-source-default", cardPlayed("arrival-source-default"));
+    const [card] = shapesOf("arrival-source-default");
+    expect(card.props.cardSource).toBe("scryfall");
+  });
+
+  it("mints an Archidekt custom card's cardSource onto the shape", async () => {
+    await joinSeat("arrival-source-custom", "seat-0000001", "Jess");
+    const event = cardPlayed("arrival-source-custom");
+    const custom = {
+      ...event,
+      payload: { ...event.payload, card: { ...event.payload.card, cardSource: "archidekt-custom" } },
+    };
+    const response = await post("arrival-source-custom", custom);
+    expect(response.status).toBe(201);
+    const [card] = shapesOf("arrival-source-custom");
+    expect(card.props.cardSource).toBe("archidekt-custom");
+  });
+
   it("rejects an unknown event name — fail loudly, never silently drop", async () => {
     const event = cardPlayed("arrival-unknown-name", { name: "card.transmogrified" });
     const response = await post("arrival-unknown-name", event);
