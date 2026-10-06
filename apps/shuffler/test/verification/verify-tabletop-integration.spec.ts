@@ -101,7 +101,7 @@ async function actOnFirstHandCard(page: Page, buttonText: string, expectedHandCo
   const handCount = page.locator('.hand-count');
   await expect(async () => {
     if ((await handCount.textContent()) === expectedHandCount) return;
-    const button = page.locator(`.card-modal-overlay button:has-text("${buttonText}")`);
+    const button = page.locator('.card-modal-overlay').getByRole('button', { name: buttonText, exact: true });
     if ((await button.count()) === 0) {
       await page.locator('#hand-cards .card-container img').first().click();
       await expect(button).toBeVisible({ timeout: 3000 });
