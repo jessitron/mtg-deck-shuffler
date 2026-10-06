@@ -18,7 +18,7 @@ export function cardPlayed(tableId: string, payloadOverrides: Record<string, unk
     origin: "shuffler.playCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
@@ -42,7 +42,7 @@ export function seatJoined(tableId: string, seatId: string, playerName: string, 
     origin: "shuffler.shuffleUp",
     significance: "administrative",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: { deckName: "Blame Game", ...payloadOverrides },
   };
 }
@@ -88,7 +88,7 @@ export async function placeCard(
 ): Promise<Locator> {
   const event = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: randomUUID(), instanceId },
+    card: { cardDefinitionId: randomUUID(), instanceId },
     ...payloadOverrides,
   });
   await joinSeat(page, baseURL, tableSlug, event.initiator.seatId, event.initiator.playerName);

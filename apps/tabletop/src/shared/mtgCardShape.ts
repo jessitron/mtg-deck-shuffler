@@ -1,11 +1,11 @@
-import { RecordProps, TLShape } from "@tldraw/tlschema";
+import { createShapePropsMigrationIds, createShapePropsMigrationSequence, RecordProps, TLShape } from "@tldraw/tlschema";
 import { T } from "@tldraw/validate";
 
 export interface MtgCardShapeProps {
   w: number;
   h: number;
   instanceId: string;
-  scryfallId: string;
+  cardDefinitionId: string;
   cardName: string;
   frontImageUrl: string;
   backImageUrl: string | null;
@@ -33,7 +33,7 @@ export const mtgCardShapeProps: RecordProps<MtgCardShape> = {
   w: T.nonZeroNumber,
   h: T.nonZeroNumber,
   instanceId: T.string,
-  scryfallId: T.string,
+  cardDefinitionId: T.string,
   cardName: T.string,
   frontImageUrl: T.string,
   backImageUrl: T.string.nullable(),
@@ -46,3 +46,21 @@ export const mtgCardShapeProps: RecordProps<MtgCardShape> = {
   isCommander: T.boolean,
   gameCardIndex: T.number.nullable(),
 };
+
+const mtgCardVersions = createShapePropsMigrationIds("mtg-card", { RenameScryfallId: 1 });
+
+export const mtgCardShapeMigrations = createShapePropsMigrationSequence({
+  sequence: [
+    {
+      id: mtgCardVersions.RenameScryfallId,
+      up(props) {
+        props.cardDefinitionId = props.scryfallId;
+        delete props.scryfallId;
+      },
+      down(props) {
+        props.scryfallId = props.cardDefinitionId;
+        delete props.cardDefinitionId;
+      },
+    },
+  ],
+});

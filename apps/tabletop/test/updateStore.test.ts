@@ -48,7 +48,7 @@ describe("TLSocketRoom.updateStore (server-side shape injection)", () => {
           flipY: false,
           altText: "Lightning Bolt",
         },
-        meta: { instanceId: "instance-1", scryfallId: "xyz", cardName: "Lightning Bolt" },
+        meta: { instanceId: "instance-1", cardDefinitionId: "xyz", cardName: "Lightning Bolt" },
       } as any);
     });
 

@@ -16,7 +16,7 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
     origin: "shuffler.playCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
@@ -40,7 +40,7 @@ function seatJoined(tableId: string, payloadOverrides: Record<string, unknown>) 
     origin: "shuffler.shuffleUp",
     significance: "administrative",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       deckName: "Blame Game",
       ...payloadOverrides,
@@ -56,7 +56,7 @@ async function zoomToFit(page: Page) {
 async function placeCard(page: Page, baseURL: string | undefined, tableSlug: string, instanceId: string, overrides: Record<string, unknown> = {}) {
   const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, {
     data: cardPlayed(tableSlug, {
-      card: { scryfallId: randomUUID(), instanceId },
+      card: { cardDefinitionId: randomUUID(), instanceId },
       ...overrides,
     }),
   });

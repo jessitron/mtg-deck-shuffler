@@ -37,9 +37,9 @@ function cardPlayed(tableName: string, instanceId: string, envelopeOverrides: Re
     origin: "shuffler.playCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
-      card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId },
+      card: { cardDefinitionId: "11111111-1111-4111-8111-111111111111", instanceId },
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
       backImageUrl: null,
@@ -62,9 +62,9 @@ function cardReturned(tableName: string, instanceId: string, envelopeOverrides: 
     origin: "shuffler.returnCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
-      card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId },
+      card: { cardDefinitionId: "11111111-1111-4111-8111-111111111111", instanceId },
       gameCardIndex: 3,
       seat: "seat-0000001",
       ...payloadOverrides,
@@ -103,7 +103,7 @@ async function joinSeat(tableName: string, seatId: string, playerName: string): 
       origin: "shuffler.shuffleUp",
       significance: "administrative",
       traceparent: fakeTraceparent(),
-      schemaVersion: 1,
+      schemaVersion: 2,
       payload: { deckName: "Blame Game" },
     }),
   });
@@ -171,6 +171,18 @@ describe("card removal (ticket 07)", () => {
     await postRemoval("removal-dedup", event);
     const retry = await postRemoval("removal-dedup", event);
     expect((await retry.json()).deduped).toBe(true);
+  });
+
+  it("rejects a v1 card.returned, which named the card scryfallId", async () => {
+    const instanceId = randomUUID();
+    await joinSeat("removal-v1", "seat-0000001", "Jess");
+    await postArrival("removal-v1", cardPlayed("removal-v1", instanceId));
+    const response = await postRemoval(
+      "removal-v1",
+      cardReturned("removal-v1", instanceId, { schemaVersion: 1 }, { card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId } })
+    );
+    expect(response.status).toBe(400);
+    expect(shapesOf("removal-v1")).toHaveLength(1);
   });
 
   it("rejects a payload missing required fields", async () => {

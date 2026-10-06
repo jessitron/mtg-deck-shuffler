@@ -10,7 +10,7 @@ export interface CardReturnedParams {
   tableId: string;
   seatId: string;
   playerName: string;
-  scryfallId: string;
+  cardDefinitionId: string;
   gameCardIndex: number;
   fromZone?: string;
 }
@@ -32,7 +32,7 @@ export async function sendCardReturnedToSpineBestEffort(
   params: CardReturnedParams,
   baseUrl: string = process.env.SPINE_URL || "http://localhost:4600"
 ): Promise<boolean> {
-  const { tableId, seatId, playerName, scryfallId, gameCardIndex, fromZone } = params;
+  const { tableId, seatId, playerName, cardDefinitionId, gameCardIndex, fromZone } = params;
   const event = {
     id: randomUUID(),
     tableId,
@@ -42,9 +42,9 @@ export async function sendCardReturnedToSpineBestEffort(
     occurredIn: "tabletop" as const,
     origin: "tabletop.cardShapeHook",
     significance: "domain" as const,
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
-      card: { scryfallId },
+      card: { cardDefinitionId },
       gameCardIndex,
       seat: seatId,
       ...(fromZone !== undefined ? { fromZone } : {}),

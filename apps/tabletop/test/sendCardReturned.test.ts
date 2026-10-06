@@ -13,7 +13,7 @@ function loadSchema(relativePath: string): object {
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 addFormats(ajv);
 const validateEnvelope = ajv.compile(loadSchema("envelope.v1.json"));
-const validateCardReturnedPayload = ajv.compile(loadSchema("payloads/card.returned.v1.json"));
+const validateCardReturnedPayload = ajv.compile(loadSchema("payloads/card.returned.v2.json"));
 
 /** A minimal fake Spine standing in for `POST /tables/:tableId/events`. */
 function createFakeSpineServer() {
@@ -53,7 +53,7 @@ const baseParams: CardReturnedParams = {
   tableId: "friday-night-abc12345",
   seatId: "seat-0000001",
   playerName: "Jess",
-  scryfallId: "11111111-1111-4111-8111-111111111111",
+  cardDefinitionId: "11111111-1111-4111-8111-111111111111",
   gameCardIndex: 3,
 };
 
@@ -79,10 +79,10 @@ describe("sendCardReturnedToSpineBestEffort", () => {
     expect(body.tableId).toBe(baseParams.tableId);
     expect(body.occurredIn).toBe("tabletop");
     expect(body.significance).toBe("domain");
-    expect(body.schemaVersion).toBe(1);
+    expect(body.schemaVersion).toBe(2);
     expect(body.initiator).toEqual({ seatId: baseParams.seatId, playerName: baseParams.playerName });
     expect(body.payload).toEqual({
-      card: { scryfallId: baseParams.scryfallId },
+      card: { cardDefinitionId: baseParams.cardDefinitionId },
       gameCardIndex: baseParams.gameCardIndex,
       seat: baseParams.seatId,
     });

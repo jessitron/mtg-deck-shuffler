@@ -6,7 +6,7 @@ import { sendCardReturnedToSpineBestEffort } from "./sendCardReturned.js";
 
 interface CardReturnedRequestBody {
   seatId?: string;
-  scryfallId?: string;
+  cardDefinitionId?: string;
   gameCardIndex?: number;
   fromZone?: string;
 }
@@ -28,9 +28,9 @@ export async function handleCardReturned(req: Request, res: Response): Promise<v
   }
 
   const body = req.body as CardReturnedRequestBody;
-  const { seatId, scryfallId, gameCardIndex, fromZone } = body;
-  if (!seatId || !scryfallId || typeof gameCardIndex !== "number") {
-    res.status(400).json({ error: "seatId, scryfallId, and gameCardIndex are required" });
+  const { seatId, cardDefinitionId, gameCardIndex, fromZone } = body;
+  if (!seatId || !cardDefinitionId || typeof gameCardIndex !== "number") {
+    res.status(400).json({ error: "seatId, cardDefinitionId, and gameCardIndex are required" });
     return;
   }
 
@@ -49,7 +49,7 @@ export async function handleCardReturned(req: Request, res: Response): Promise<v
     "table.name": tableNameFromSlug(tableName),
     "table.slug": tableName,
     "seat.id": seatId,
-    "card.scryfall_id": scryfallId,
+    "card.definition_id": cardDefinitionId,
     "card.game_card_index": gameCardIndex,
   });
 
@@ -57,7 +57,7 @@ export async function handleCardReturned(req: Request, res: Response): Promise<v
     tableId: entry.spineTableId,
     seatId,
     playerName: playerArea.playerName,
-    scryfallId,
+    cardDefinitionId,
     gameCardIndex,
     ...(fromZone !== undefined ? { fromZone } : {}),
   });

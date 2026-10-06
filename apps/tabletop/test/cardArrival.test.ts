@@ -43,9 +43,9 @@ function cardPlayed(tableName: string, envelopeOverrides: Record<string, unknown
     origin: "shuffler.playCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
-      card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
+      card: { cardDefinitionId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
       backImageUrl: null,
@@ -74,9 +74,9 @@ function cardDiscarded(tableName: string, envelopeOverrides: Record<string, unkn
     origin: "shuffler.discardCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
-      card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
+      card: { cardDefinitionId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
       backImageUrl: null,
@@ -135,7 +135,7 @@ async function joinSeat(
       origin: "shuffler.shuffleUp",
       significance: "administrative",
       traceparent: fakeTraceparent(),
-      schemaVersion: 1,
+      schemaVersion: 2,
       payload: { deckName: "Blame Game", ...payloadOverrides },
     }),
   });
@@ -152,7 +152,7 @@ describe("card arrival", () => {
     expect(shapes).toHaveLength(1);
     expect(shapes[0].props).toMatchObject({
       instanceId: event.payload.card.instanceId,
-      scryfallId: event.payload.card.scryfallId,
+      cardDefinitionId: event.payload.card.cardDefinitionId,
       cardName: "Lightning Bolt",
       frontImageUrl: event.payload.frontImageUrl,
       backImageUrl: null,
@@ -350,6 +350,22 @@ describe("card arrival", () => {
     const response = await post("arrival-unknown-version", event);
     expect(response.status).toBe(400);
     expect((await response.json()).error).toContain("99");
+  });
+
+  it("rejects a v1 card.played, which named the card scryfallId", async () => {
+    await joinSeat("arrival-v1", "seat-0000001", "Jess");
+    const event = cardPlayed("arrival-v1", { schemaVersion: 1 }, { card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() } });
+    const response = await post("arrival-v1", event);
+    expect(response.status).toBe(400);
+    expect((await response.json()).error).toContain("unknown schemaVersion 1");
+    expect(shapesOf("arrival-v1")).toHaveLength(0);
+  });
+
+  it("rejects a v2 card.played whose card has no cardDefinitionId", async () => {
+    const event = cardPlayed("arrival-v2-old-key", {}, { card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() } });
+    const response = await post("arrival-v2-old-key", event);
+    expect(response.status).toBe(400);
+    expect((await response.json()).error).toContain("cardDefinitionId");
   });
 
   it("rejects a payload missing owner or isCommander (ticket 18)", async () => {

@@ -18,7 +18,7 @@ function isFaceDownEnvelope(body: unknown): boolean {
 }
 
 interface CardArrivalPayloadCommon {
-  card: { scryfallId: string; instanceId: string };
+  card: { cardDefinitionId: string; instanceId: string };
   face: "front" | "back";
   frontImageUrl: string;
   backImageUrl: string | null;
@@ -59,7 +59,7 @@ async function placeArrivedCard(
 
   trace.getActiveSpan()?.setAttributes({
     "card.instance_id": card.instanceId,
-    "card.scryfall_id": card.scryfallId,
+    "card.definition_id": card.cardDefinitionId,
     "card.name": cardName,
     "event.id": envelope.id,
     "event.name": envelope.name,
@@ -108,7 +108,7 @@ async function placeArrivedCard(
         "table.slug": tableName,
         "seat.id": seatId,
         "card.instance_id": card.instanceId,
-        "card.scryfall_id": card.scryfallId,
+        "card.definition_id": card.cardDefinitionId,
         "card.name": cardName,
       },
     },
@@ -129,7 +129,7 @@ async function placeArrivedCard(
               h: CARD_H,
               index: nextIndex(tableName),
               instanceId: card.instanceId,
-              scryfallId: card.scryfallId,
+              cardDefinitionId: card.cardDefinitionId,
               cardName: cardName,
               frontImageUrl: frontImageUrl,
               backImageUrl: backImageUrl,

@@ -5,7 +5,7 @@ import { log } from "./log.js";
 import { tableNameFromSlug } from "../shared/slugify.js";
 import { SpineSubscription } from "./spineSubscriber.js";
 import { stackBounds } from "./cardLayout.js";
-import { mtgCardShapeProps } from "../shared/mtgCardShape.js";
+import { mtgCardShapeMigrations, mtgCardShapeProps } from "../shared/mtgCardShape.js";
 import { mtgCounterShapeProps } from "../shared/mtgCounterShape.js";
 import { mtgLifeCounterShapeProps } from "../shared/mtgLifeCounterShape.js";
 import { mtgTitleShapeProps } from "../shared/mtgTitleShape.js";
@@ -14,7 +14,7 @@ import { mtgZoneShapeProps } from "../shared/mtgZoneShape.js";
 const tableSchema = createTLSchema({
   shapes: {
     ...defaultShapeSchemas,
-    "mtg-card": { props: mtgCardShapeProps },
+    "mtg-card": { props: mtgCardShapeProps, migrations: mtgCardShapeMigrations },
     "mtg-counter": { props: mtgCounterShapeProps },
     "mtg-life-counter": { props: mtgLifeCounterShapeProps },
     "mtg-title": { props: mtgTitleShapeProps },
