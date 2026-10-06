@@ -208,7 +208,8 @@ and the ticket's "Blast radius" — and it landed clean; no disconnects reported
 'mtg-card': {
   w, h,                          // from BaseBoxShapeUtil
   instanceId: string,            // this card in this game; the dedup key, never composite
-  cardDefinitionId: string,      // the printing (all faces); a Scryfall id
+  cardDefinitionId: string,      // the printing (all faces); a Scryfall id, or a UUIDv5 for an archidekt-custom card
+  cardSource: 'scryfall' | 'archidekt-custom', // required; migration step 2 (AddCardSource) backfills "scryfall"
   cardName: string,              // rendering: alt text / a11y
   frontImageUrl: string,
   backImageUrl: string | null,   // the PRINTED back face. null = no printed back exists
@@ -219,6 +220,7 @@ and the ticket's "Blast radius" — and it landed clean; no disconnects reported
   cardBackImageUrl: string | null, // the seat's generic card back, baked at mint (physics ticket 17); used only when unsleeved + faceDown
   owner: string,                 // seatId this card belongs to (table-layout ticket 18); grants no capability
   isCommander: boolean,          // whether this is one of owner's commanders (table-layout ticket 18)
+  gameCardIndex: number | null,  // the card's index in its owner's game state; null for commanders/ghosts
 }
 ```
 
@@ -229,6 +231,22 @@ the `mtg-card` shape's first tldraw props migration: `mtgCardShapeMigrations`
 `MtgCardShapeUtil.migrations`. Cards already on stored tables keep their faces and URLs —
 only the key moves. The next prop change adds a step to this sequence; it doesn't start a
 new one.
+
+**`cardSource` added — migration step 2, `AddCardSource` (`07d700dc`, archidekt-custom-cards).**
+The sequence is now `{ RenameScryfallId: 1, AddCardSource: 2 }`. `cardSource` is a
+**required** prop (`T.literalEnum("scryfall", "archidekt-custom")`); `up` sets
+`"scryfall"` on every stored card, `down` deletes it (load-bearing: an old-build client
+mid-deploy would otherwise be rejected `CLIENT_TOO_OLD`). Every mint site goes through
+`mtgCardShape()` in `tableFurniture.ts`, which requires `cardSource`, so the compiler
+finds them all: `card.played`, `card.played-face-down`, `card.discarded`, `seat.joined`
+commanders and their ghosts. The value is read from the optional wire field
+`card.cardSource` via `cardSourceOf()` (`apps/tabletop/src/shared/cardSource.ts`; absent
+= `"scryfall"`). Going the other way, `card.returned` (`sendCardReturned.ts`) sends
+`card.cardSource` only for non-scryfall cards — the same omit-when-scryfall rule as the
+Shuffler's `cardSourceField()`. **Rendering does not branch on it**: a custom card's
+`frontImageUrl`/`backImageUrl` arrive as absolute Archidekt URLs, so a two-faced custom
+card Transforms through the same `props.face` swap. Spans that set `card.definition_id`
+now set `card.source` too, through `cardSpanAttributes()` in the same file.
 
 **`owner`/`isCommander` added — table-layout ticket 18 (2026-08-09).** First-class,
 schema'd, synced props, set via the ordinary card-arrival path (`buildCardPlayedEvent` on
@@ -478,7 +496,8 @@ minted shape's `faceDown` differ.
   `expectedName` for `validateIncomingEvent`, and mints `faceDown: true` on the
   `mtg-card` shape instead of the previous hard-coded `false` — every other field
   (`frontImageUrl`, `backImageUrl`, `cardName`, `face`, `sleeveColor`,
-  `cardBackImageUrl`, `owner`, `isCommander`, `gameCardIndex`) flows through identically
+  `cardBackImageUrl`, `owner`, `isCommander`, `gameCardIndex`, and since `07d700dc`
+  `cardSource`) flows through identically
   to `card.played`. **Nothing is nulled out for concealment** — a face-down card still
   carries its real identity and both image URLs in synced `props`, matching this owner's
   standing "concealment is depicted, not enforced" rule (watch point 15/tabletop.md
