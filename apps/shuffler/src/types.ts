@@ -3,9 +3,15 @@ export type ImageFormat = "small" | "normal" | "large" | "png" | "art_crop" | "b
 
 export type CardImageUris = Partial<Record<ImageFormat, string>>;
 
+export const IMAGE_FORMATS: ImageFormat[] = ["small", "normal", "large", "png", "art_crop", "border_crop"];
+
+export type CardSource = "scryfall" | "archidekt-custom";
+
 export interface CardDefinition {
   name: string;
   cardDefinitionId: string;
+  /** Absent means "scryfall"; read it through cardSourceOf. */
+  cardSource?: CardSource;
   multiverseid?: number;
   twoFaced: boolean;
   oracleCardName: string;
@@ -13,8 +19,12 @@ export interface CardDefinition {
   set: string;
   cardTypes: string[];
   imageUris?: CardImageUris;
-  /** Scryfall image URLs for the back face; present only for two-faced cards. */
+  /** Image URLs for the back face; present only for two-faced cards. */
   backImageUris?: CardImageUris;
+}
+
+export function cardSourceOf(card: CardDefinition): CardSource {
+  return card.cardSource ?? "scryfall";
 }
 
 export interface DeckProvenance {

@@ -1,4 +1,4 @@
-import { CardDefinition, ImageFormat } from "./types.js";
+import { CardDefinition, ImageFormat, cardSourceOf } from "./types.js";
 
 
 export type GameId = number | string;
@@ -76,5 +76,8 @@ export function constructCardImageUrl(scryfallId: string, format: ImageFormat = 
 
 export function getCardImageUrl(card: CardDefinition, format: ImageFormat = "png", face: "front" | "back" = "front"): string {
   const stored = face === "back" ? card.backImageUris : card.imageUris;
+  if (cardSourceOf(card) !== "scryfall") {
+    return stored?.[format] ?? card.imageUris?.[format] ?? Object.values(card.imageUris ?? {})[0] ?? "";
+  }
   return stored?.[format] ?? constructCardImageUrl(card.cardDefinitionId, format, face);
 }

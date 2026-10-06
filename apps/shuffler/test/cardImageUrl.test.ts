@@ -67,4 +67,14 @@ describe("getCardImageUrl", () => {
     const dfc: CardDefinition = { ...baseCard, twoFaced: true, imageUris: { normal: "https://example.com/front.jpg?9" } };
     expect(getCardImageUrl(dfc, "normal", "back")).toBe(constructCardImageUrl(dfc.cardDefinitionId, "normal", "back"));
   });
+
+  it("never builds a Scryfall URL for an Archidekt custom card", () => {
+    const custom: CardDefinition = {
+      ...baseCard,
+      cardSource: "archidekt-custom",
+      imageUris: { normal: "https://storage.googleapis.com/topdekt-user/front.png" },
+    };
+    expect(getCardImageUrl(custom, "png", "front")).toBe("https://storage.googleapis.com/topdekt-user/front.png");
+    expect(getCardImageUrl(custom, "normal", "back")).toBe("https://storage.googleapis.com/topdekt-user/front.png");
+  });
 });

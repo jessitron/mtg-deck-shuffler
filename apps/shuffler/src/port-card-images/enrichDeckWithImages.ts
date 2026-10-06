@@ -1,8 +1,8 @@
-import { Deck, CardDefinition } from "../types.js";
+import { Deck, CardDefinition, cardSourceOf } from "../types.js";
 import { CardImagesPort } from "./types.js";
 
 export async function enrichDeckWithImages(deck: Deck, imagesPort: CardImagesPort): Promise<void> {
-  const allCards: CardDefinition[] = [...deck.commanders, ...deck.cards];
+  const allCards: CardDefinition[] = [...deck.commanders, ...deck.cards].filter((c) => cardSourceOf(c) === "scryfall");
   const uniqueIds = [...new Set(allCards.map((c) => c.cardDefinitionId).filter((id) => id && id.length > 0))];
 
   const images = await imagesPort.fetchImages(uniqueIds);

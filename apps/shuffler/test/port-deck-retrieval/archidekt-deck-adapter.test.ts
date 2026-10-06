@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { Deck } from "../../src/types.js";
+import { Deck, cardSourceOf } from "../../src/types.js";
 import { ArchidektGateway, FilesystemArchidektGateway, ArchidektDeckToDeckAdapter, ArchidektGatewayInterface } from "../../src/port-deck-retrieval/implementations.js";
 import { ArchidektDeck } from "../../src/port-deck-retrieval/archidektAdapter/archidektTypes.js";
 import { ArchidektDeckRetrievalRequest } from "../../src/port-deck-retrieval/types.js";
@@ -554,7 +554,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
       const deck = await squidSwordDeck();
       const customNames = deck.cards.filter((c) => c.cardSource === "archidekt-custom").map((c) => c.name);
       expect(customNames.sort()).toEqual(["Cat Throwing a Tomato", "Don't Stop in Stagnance", "Squid Sword"]);
-      expect(deck.commanders.map((c) => [c.name, c.cardSource])).toEqual([["Glarb, Calamity's Augur", "scryfall"]]);
+      expect(deck.commanders.map((c) => [c.name, cardSourceOf(c)])).toEqual([["Glarb, Calamity's Augur", "scryfall"]]);
       expect(deck.totalCards).toBe(deck.cards.length + deck.commanders.length);
     });
 
@@ -575,6 +575,34 @@ describe("ArchidektDeckToDeckAdapter", () => {
         expect(squidSword.imageUris?.[format]).toBe(SQUID_SWORD_FRONT);
       }
       expect(squidSword.backImageUris).toBeUndefined();
+    });
+
+    it("takes card types from the type line words, leaving out supertypes", async () => {
+      const deck = await squidSwordDeck();
+      const typesOf = (name: string) => deck.cards.find((c) => c.name === name)!.cardTypes;
+      expect(typesOf("Cat Throwing a Tomato")).toEqual(["Instant"]);
+      expect(typesOf("Don't Stop in Stagnance")).toEqual(["Enchantment"]);
+    });
+
+    it("splits a multi-word custom type line into separate card types", async () => {
+      const gateway: ArchidektGatewayInterface = {
+        fetchDeck: async () => ({
+          id: 1,
+          name: "Custom",
+          createdAt: "2026-10-06T00:00:00Z",
+          categories: null,
+          cards: [],
+          customCards: [
+            {
+              quantity: 1,
+              categories: ["Custom Card"],
+              card: { id: 42, frontName: "Robo Cat", frontTypes: "Artifact Creature", frontManaCost: "{1}{W/U}", frontImageUrl: "https://example.com/robo.png", hasBack: false },
+            },
+          ],
+        }),
+      };
+      const deck = await new ArchidektDeckToDeckAdapter(gateway).retrieveDeck({ deckSource: "archidekt", archidektDeckId: "1" });
+      expect(deck.cards[0]).toMatchObject({ cardTypes: ["Artifact", "Creature"], colorIdentity: ["W", "U"] });
     });
 
     it("makes a custom card with a back image two-faced", async () => {

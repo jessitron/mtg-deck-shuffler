@@ -1,12 +1,26 @@
 import { trace } from "@opentelemetry/api";
 import { RetrieveDeckPort, DeckRetrievalRequest, isArchidektDeckRetrievalRequest } from "../types.js";
 import { ArchidektGatewayInterface } from "./ArchidektGatewayInterface.js";
-import { Deck, CardDefinition, PERSISTED_DECK_VERSION } from "../../types.js";
-import { ArchidektCard, ArchidektDeck } from "./archidektTypes.js";
-import { isDoubleSidedLayout } from "../twoFacedLayouts.js";
+import { Deck, CardDefinition, CardImageUris, IMAGE_FORMATS, PERSISTED_DECK_VERSION } from "../../types.js";
+import { ArchidektCard, ArchidektCustomCard, ArchidektDeck } from "./archidektTypes.js";
+import { isDoubleSidedCustomCard, isDoubleSidedLayout } from "../twoFacedLayouts.js";
+import { uuidv5 } from "../../uuidv5.js";
 import { CardImagesPort } from "../../port-card-images/types.js";
 import { enrichDeckWithImages } from "../../port-card-images/enrichDeckWithImages.js";
 import { log } from "../../log.js";
+
+const ARCHIDEKT_CUSTOM_CARD_NAMESPACE = "c7098215-3654-4327-9f21-28953b7f6d07";
+const MANA_COLOR_CODES = ["W", "U", "B", "R", "G"];
+
+type DeckEntry = { quantity: number; categories: string[] };
+
+export function customCardDefinitionId(archidektCustomCardId: number): string {
+  return uuidv5(`archidekt-custom:${archidektCustomCardId}`, ARCHIDEKT_CUSTOM_CARD_NAMESPACE);
+}
+
+function sameUrlInEveryFormat(url: string): CardImageUris {
+  return Object.fromEntries(IMAGE_FORMATS.map((format) => [format, url]));
+}
 
 export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   constructor(private gateway: ArchidektGatewayInterface, private retrievedDate?: Date, private imagesPort?: CardImagesPort) {}
@@ -52,7 +66,7 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
   private convertArchidektToDeck(archidektDeck: ArchidektDeck, archidektDeckId: string): Deck {
     const categoryInclusionMap = new Map((archidektDeck.categories || []).map((cat) => [cat.name, cat.includedInDeck]));
 
-    const isCardIncluded = (card: ArchidektCard) => {
+    const isCardIncluded = (card: DeckEntry) => {
       const primaryCategory = (card.categories || [])[0];
 
       if (primaryCategory === "Sideboard") {
@@ -61,23 +75,23 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
 
       return categoryInclusionMap.get(primaryCategory) ?? true;
     };
+    const isCommander = (card: DeckEntry) => (card.categories || []).includes("Commander");
+
+    const entries: Array<{ entry: DeckEntry; card: CardDefinition }> = [
+      ...archidektDeck.cards.map((entry) => ({ entry, card: this.convertArchidektToCard(entry) })),
+      ...(archidektDeck.customCards || []).map((entry) => ({ entry, card: this.convertCustomCard(entry) })),
+    ];
 
     const includedCards: CardDefinition[] = [];
-    for (const archidektCard of archidektDeck.cards) {
-      if (isCardIncluded(archidektCard) && !(archidektCard.categories || []).includes("Commander")) {
-        const card = this.convertArchidektToCard(archidektCard);
-        if (card) {
-          for (let i = 0; i < archidektCard.quantity; i++) {
-            includedCards.push(card);
-          }
+    for (const { entry, card } of entries) {
+      if (isCardIncluded(entry) && !isCommander(entry)) {
+        for (let i = 0; i < entry.quantity; i++) {
+          includedCards.push(card);
         }
       }
     }
 
-    const commanderCards = archidektDeck.cards
-      .filter((card) => (card.categories || []).includes("Commander"))
-      .map((card) => this.convertArchidektToCard(card))
-      .filter((card): card is CardDefinition => card !== undefined);
+    const commanderCards = entries.filter(({ entry }) => isCommander(entry)).map(({ card }) => card);
 
     const now = this.retrievedDate ?? new Date();
     return {
@@ -96,7 +110,28 @@ export class ArchidektDeckToDeckAdapter implements RetrieveDeckPort {
     };
   }
 
-  private convertArchidektToCard(archidektCard: ArchidektCard): CardDefinition | undefined {
+  private convertCustomCard(customCard: ArchidektCustomCard): CardDefinition {
+    const c = customCard.card;
+    const twoFaced = isDoubleSidedCustomCard(c.hasBack, c.backImageUrl);
+    const typeWords = (types: string | null | undefined) => (types || "").split(/\s+/).filter((t) => t.length > 0);
+    const colorSymbols = [c.frontManaCost, c.frontText, c.backManaCost, c.backText].join(" ").match(/\{[^}]*\}/g) || [];
+    const colorIdentity = MANA_COLOR_CODES.filter((code) => colorSymbols.some((symbol) => symbol.includes(code)));
+
+    return {
+      name: c.frontName,
+      cardDefinitionId: customCardDefinitionId(c.id),
+      cardSource: "archidekt-custom",
+      twoFaced,
+      oracleCardName: c.frontName,
+      colorIdentity,
+      set: c.setCode || "Custom",
+      cardTypes: [...new Set([...typeWords(c.frontTypes), ...typeWords(c.backTypes)])],
+      imageUris: sameUrlInEveryFormat(c.frontImageUrl),
+      ...(twoFaced ? { backImageUris: sameUrlInEveryFormat(c.backImageUrl!) } : {}),
+    };
+  }
+
+  private convertArchidektToCard(archidektCard: ArchidektCard): CardDefinition {
     const cardName = archidektCard.card.displayName || archidektCard.card.oracleCard.name;
     const oracleCardName = archidektCard.card.oracleCard.name;
     const faces = archidektCard.card.oracleCard.faces || [];

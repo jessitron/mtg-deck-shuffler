@@ -30,6 +30,26 @@ export interface ArchidektCard {
   categories: string[];
 }
 
+/** A card a user made on Archidekt: no Scryfall printing, images hosted by Archidekt. */
+export interface ArchidektCustomCard {
+  card: {
+    id: number;
+    setCode?: string | null;
+    frontName: string;
+    frontManaCost?: string | null;
+    frontText?: string | null;
+    frontTypes?: string | null;
+    frontImageUrl: string;
+    hasBack: boolean;
+    backManaCost?: string | null;
+    backText?: string | null;
+    backTypes?: string | null;
+    backImageUrl?: string | null;
+  };
+  quantity: number;
+  categories: string[];
+}
+
 export interface ArchidektDeck {
   id: number;
   name: string;
@@ -42,4 +62,5 @@ export interface ArchidektDeck {
     includedInPrice: boolean;
   }> | null;
   cards: ArchidektCard[];
+  customCards?: ArchidektCustomCard[];
 }
