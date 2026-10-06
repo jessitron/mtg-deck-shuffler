@@ -41,7 +41,11 @@ Card vs Face: cards have names, and faces have names. A two-faced card's canonic
 
 Face-down: concealment — showing the shared card back (or sleeve) instead of either printed
 face. This is possible only on the Tabletop. This independent of Face. A two-faced card **can** be played face down — and once it is, the card back
-appears regardless. Flip swaps which printed side is up (on two-faced cards), while Turn-face-down/up toggles concealment.
+appears regardless. Transform swaps which printed side is up (on two-faced cards), while Turn Face Down/Up toggles concealment. These are the Tabletop's only two card gestures.
+
+Transform (Tabletop): swap which printed face of a two-faced card is up, front to back or back to front. A physical event (`card.transformed`). Offered only on two-faced cards; a one-faced card cannot Transform, it can only Turn Face Down. Independent of Face-down.
+
+Flip (Shuffler only): private inspection of the other printed face of a two-faced card. It never leaves the Shuffler and is not an event. The Tabletop never says "flip"; its equivalent is Transform, a physical event the table can see.
 
 Scryfall ID: Scryfall's card ID. This is a UUID. From this, we can derive a card image URL on Scryfall. Archidekt calls it `uid`.
 
@@ -115,7 +119,7 @@ Command Zone: a Location (MTG Deck Shuffler, game scope) — commanders are ordi
 cards at `CommandZone(position)`, with card instance IDs like everything else. (An older
 version of this entry claimed commanders were stored separately from game cards; that was
 stale — see `GameState.ts` `CommandZoneLocation`.) Commanders always arrive at a table
-face up; a two-faced commander can be flipped in the command zone afterward, which is
+face up; a two-faced commander can be transformed in the command zone afterward, which is
 table-local play, not seating data. (Confirmed 2026-08-08, cards-come-and-go ticket 02.)
 
 Seat (spine): a player's place at a Table. A Shuffler Game connects to a Seat; a table has 1–4 of them. A seat is keyed by an opaque Join Request ID, so a retried join returns the same seat.
@@ -168,6 +172,6 @@ Projection (Tabletop): computing a Table State by replaying a Table's Event Log,
 
 Card Arrived (contract, planned): `card.arrived` — the Tabletop's own event recording where a card actually landed on the canvas when it was placed there. Distinct from `card.played`, which is the Shuffler's domain-level decision to play the card and carries no canvas position — the Shuffler doesn't know where cards land; the Tabletop decides that separately.
 
-Shape events (contract, planned): `shape.created`, `shape.moved`, `shape.removed` — physical events for canvas objects that don't have a more specific event of their own; the fallback carries the raw tldraw shape JSON for shape types without dedicated tooling. Where a shape type has a more meaningful name for the same fact, that name is used instead of the generic one — `card.moved`, `card.tapped`/`card.untapped`, `card.flipped`, `card.turnedFaceDown`, `card.arrived`, and (planned) `counter.moved`/`counter.created` — never both the specific and the generic event for the same fact.
+Shape events (contract, planned): `shape.created`, `shape.moved`, `shape.removed` — physical events for canvas objects that don't have a more specific event of their own; the fallback carries the raw tldraw shape JSON for shape types without dedicated tooling. Where a shape type has a more meaningful name for the same fact, that name is used instead of the generic one — `card.moved`, `card.tapped`/`card.untapped`, `card.transformed`, `card.turnedFaceDown`, `card.arrived`, and (planned) `counter.moved`/`counter.created` — never both the specific and the generic event for the same fact.
 
-Designated Zone vs Undesignated Space (Tabletop, not yet decided): whether a card's move is a Physical Event or a Game Event depends on whether it crosses into or out of a zone the game cares about — library, hand, graveyard, and exile are designated zones (crossing them is game-significant, which is why menu-driven actions like Flip and Turn-face-down exist for them); a player's general battlefield space may be undesignated. The exact boundary isn't pinned down yet; `card.moved`'s `significance` field (see envelope contract) can be computed per-instance from it once it is — this doesn't block reconstructing Table State, which only needs positions, not significance.
+Designated Zone vs Undesignated Space (Tabletop, not yet decided): whether a card's move is a Physical Event or a Game Event depends on whether it crosses into or out of a zone the game cares about — library, hand, graveyard, and exile are designated zones (crossing them is game-significant, which is why menu-driven actions like Transform and Turn Face Down exist for them); a player's general battlefield space may be undesignated. The exact boundary isn't pinned down yet; `card.moved`'s `significance` field (see envelope contract) can be computed per-instance from it once it is — this doesn't block reconstructing Table State, which only needs positions, not significance.

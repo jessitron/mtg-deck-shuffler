@@ -36,38 +36,36 @@ place at the shared table. "Game" keeps its Shuffler meaning inside that context
 translates itself into "seat" at the boundary (`seat.joined`, `seatId`). The Spine never sees the word Game: the Shuffler sends its game id as `/join`'s opaque `joinRequestId`, an idempotency key meaning "this join attempt" (`contracts/requests/join.v1.json`). See `notes/GLOSSARY.md`'s
 "Game (MTG Deck Shuffler)" and "Seat" entries.
 
-### Flip / Face-down
+### Flip / Transform / Face-down
 
-Two independent axes — see `notes/GLOSSARY.md`'s "Face-down" entry for the full model:
+Two independent axes on the Tabletop — see `notes/GLOSSARY.md`'s "Transform" and "Face-down" entries:
 
 - **`face`** — which *printed* side of a card is up (`front`/`back`). Ranges only over sides that
-  actually exist on the card; unreachable/meaningless on a one-faced card.
+  actually exist on the card; unreachable/meaningless on a one-faced card. The gesture that moves
+  it is **Transform**, offered only on two-faced cards.
 - **face-down / concealment** — showing the shared card back instead of either printed face. An
-  independent axis that composes with `face`: Flip and Turn-face-down/up are two separate
-  gestures — Flip swaps the printed face (gated on having a second printed side), while
-  Turn-face-down/up toggles concealment uniformly with no such gate. So a two-faced card
-  *cannot* turn face down as part of its Flip action, but it absolutely **can** be turned
-  face down (or played face down) via the generic gesture — and once face-down, its `face`
-  is irrelevant to what's rendered.
+  independent axis that composes with `face`: **Turn Face Down / Turn Face Up** works on every card,
+  with no second-side gate. A two-faced card can be turned face down (or played face down), and
+  once face-down its `face` is irrelevant to what's rendered.
 
-**"Flip" does not mean the same thing on the two ships — deliberately, not a bug to reconcile:**
+**"Flip" is a Shuffler-only word.** The Tabletop never says it — deliberately, not a bug to reconcile:
 
 | | Shuffler | Tabletop |
 |---|---|---|
-| What "flip" is | **inspection** of a two-faced card | **turning over** a physical object |
-| One-faced card | **cannot** flip — nothing to flip to, no flip affordance rendered (`formatCardContainer()` branches on `card.twoFaced`; `GameState.flipCard()` throws on a single-faced card) | **can** be turned over — every card on a table has two sides |
-| Turning over a one-faced card | not a thing | shows the card back → **the card is now face down**, a real domain event in game terms |
-| Turning over a two-faced card | swaps `currentFace`; not persisted on prep, persisted in game; **not** an event | a **transform** to the other printed face — NOT face-down |
+| Word | "flip" | **Transform**, and separately **Turn Face Down / Up** |
+| What it is | private **inspection** of the other printed face of a two-faced card; never leaves the Shuffler | Transform: swap the printed face of a two-faced card, a **physical event** (`card.transformed`). Turn Face Down/Up: **concealment** |
+| One-faced card | **cannot** flip — nothing to flip to, no affordance rendered (`formatCardContainer()` branches on `card.twoFaced`; `GameState.flipCard()` throws on a single-faced card) | **cannot** Transform; it can only Turn Face Down — every card on a table has a back |
+| Two-faced card | swaps `currentFace`; not persisted on prep, persisted in game; **not** an event | Transform swaps `face` — NOT face-down; Turn Face Down is separate |
 | Face-down modeled at all? | **no** — nothing in `CardDefinition`, `GameCard`, or the event contract expresses concealment | **yes** — `faceDown: boolean` on the `mtg-card` shape's `props`, toggled via the card's context menu |
-| Recorded as an event? | no — flip is a UI concern | yes, intended: turning over on the table is physical, so the Spine can hear it |
+| Recorded as an event? | no — flip is a UI concern | yes, intended: both gestures are physical, so the Spine can hear them |
 
-The Shuffler's behavior is unchanged by this decision; the asymmetry is the point. A Tabletop
-gesture that "flips" a card has to decide *which* axis it moves — for a one-faced card only the
-face-down axis exists.
+The Shuffler's behavior is unchanged by this decision; the asymmetry is the point. Face-down is
+concealment and exists only on the Tabletop; Transform is the Tabletop's physical counterpart of
+what the Shuffler calls flip.
 
 Source of record for the Tabletop side of this table: `owners/two-faced-cards/tabletop.md` § "Face
-and face-down are two axes" and § "The two ships mean different things by 'flip'". Consult the
-`two-faced-cards` owner before changing card-face/face-down behavior on either ship.
+and face-down are two axes". Consult the `two-faced-cards` owner before changing
+card-face/face-down behavior on either ship.
 
 A "Play Face-Down" button for the Shuffler was considered and dropped as out of scope (tracked
 separately, not part of this translation) — the Shuffler's lack of a face-down concept is a

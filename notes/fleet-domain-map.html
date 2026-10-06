@@ -133,7 +133,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
       <text class="m" x="695" y="198" text-anchor="middle">POST seat.joined</text>
       <line class="arrow" x1="780" y1="262" x2="610" y2="262" marker-end="url(#ah)"/>
       <text class="m" x="695" y="256" text-anchor="middle">card.returned</text>
-      <text class="warn" x="695" y="280" text-anchor="middle" style="fill:var(--warn);font-size:11px">planned: tap · flip · move</text>
+      <text class="warn" x="695" y="280" text-anchor="middle" style="fill:var(--warn);font-size:11px">planned: tap · transform · move</text>
       <!-- separate ways -->
       <path class="dash" d="M120 300 V322 H850 V300"/>
       <rect x="330" y="312" width="280" height="20" fill="var(--bg)"/>
@@ -288,7 +288,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
     <div class="card" style="--c: var(--tabletop)">
       <h3>Gestures</h3>
       <ul>
-        <li>tap · drag to zone · flip · turn face-down</li>
+        <li>tap · drag to zone · transform · turn face down/up</li>
         <li>attach counter or note</li>
         <li>library portal swallow (the only gesture sent to the Spine so far)</li>
         <li>every other gesture sent to the Spine as a physical event <span class="tag plan">planned</span></li>
@@ -356,8 +356,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
     <thead><tr><th>Term</th><th>Shuffler</th><th>Tabletop</th><th>Spine</th></tr></thead>
     <tbody>
       <tr><td><b>Game / Seat</b></td><td>Game: one player's play session</td><td>Seat: a player's place at the table</td><td>Seat, 1 to 4 per Table. The Shuffler translates Game to Seat at the border and sends its game id as the Spine's opaque <code>joinRequestId</code></td></tr>
-      <tr><td><b>Flip</b></td><td>Inspect the other printed face. Impossible on a one-faced card</td><td>Turn the object over. On a one-faced card, that means face-down</td><td>Not an event yet</td></tr>
-      <tr><td><b>Face-down</b></td><td>Not modeled</td><td><code>faceDown</code> on the card shape</td><td><code>card.played-face-down</code></td></tr>
+      <tr><td><b>Flip / Transform / Face-down</b></td><td>"flip": private inspection of the other printed face, never leaves the Shuffler. Impossible on a one-faced card. Face-down is not modeled</td><td>"Transform": swap the printed face of a two-faced card, a physical event. Separately, "Turn face down/up": concealment (<code>faceDown</code> on the card shape), on every card</td><td><code>card.played-face-down</code> today; a transform event is planned</td></tr>
       <tr><td><b>Initiator</b></td><td>{gameId, seatId, sessionId}</td><td>{seatId?, sessionId}, anonymous when unseated</td><td>Validates the wire shape. Attribution, never authority</td></tr>
       <tr><td><b>Table</b></td><td>Where played cards go. Not tracked</td><td>The shared canvas</td><td>The unit that owns a log</td></tr>
       <tr><td><b>Owner vs Initiator</b></td><td colspan="3"><code>owner</code> on card.played: whose deck the card is from. <code>initiator</code>: who caused the event.</td></tr>
@@ -434,7 +433,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
     <li>"Best-effort, never blocks play" (code) and "Playable at all times" (stated) are today's rule. The planned rule is the opposite: no Spine, no play.</li>
     <li>The envelope has no <code>visibility</code> field, and the design summary still says it does.</li>
     <li>Nothing implements supersede. It is a principle only.</li>
-    <li>The Tabletop's taps, flips and moves reach Honeycomb as spans but never the Spine. They will; shown as planned.</li>
+    <li>The Tabletop's taps, transforms and moves reach Honeycomb as spans but never the Spine. They will; shown as planned.</li>
     <li><code>table.created</code> is named in docs but has no payload schema and is not sent.</li>
     <li>The Tabletop's CLAUDE.md says only card.played has a consumer. The dispatch code also handles card.played-face-down, card.discarded and card.returned.</li>
     <li>The Shuffler's CLAUDE.md names <code>sendCardPlayedToSpineBestEffort</code>. The code calls <code>sendCard{Played,Returned,Discarded}BeforeMutate</code>.</li>
