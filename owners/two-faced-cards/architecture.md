@@ -7,7 +7,9 @@ Every card has:
 - `twoFaced: boolean` — whether the card has a separate back image (drives the flip button)
 - `cardTypes: string[]` — the union of every face's/part's types (e.g. `["Legendary","Creature","Planeswalker"]`)
 
-Plus identity fields: `name`, `cardDefinitionId` (a Scryfall printing id; renamed from `scryfallId` in `0a6c52dd`), `multiverseid?`, `oracleCardName`, `colorIdentity`, `set`. There is **no** `CardFace`/`backFace` and no `manaCost`/`cmc`/`oracleText` — those were removed (commit `f76b49c`) since the card is displayed as a Scryfall image and nothing read them. The flip button needs only `twoFaced` + `cardDefinitionId`; library grouping needs only `cardTypes`.
+Plus `cardSource?: "scryfall" | "archidekt-custom"` — optional, absent means scryfall, always read through `cardSourceOf(card)`; added without a version bump (optional field, graceful default).
+
+Plus identity fields: `name`, `cardDefinitionId` (a Scryfall printing id for scryfall cards, a UUIDv5 for custom cards; renamed from `scryfallId` in `0a6c52dd`), `multiverseid?`, `oracleCardName`, `colorIdentity`, `set`. There is **no** `CardFace`/`backFace` and no `manaCost`/`cmc`/`oracleText` — those were removed (commit `f76b49c`) since the card is displayed as a Scryfall image and nothing read them. The flip button needs only `twoFaced` + `cardDefinitionId`; library grouping needs only `cardTypes`.
 
 ### GameCard (`src/port-persist-state/types.ts:72-78`)
 Runtime game state tracks:
@@ -26,6 +28,20 @@ The single source of truth is `src/port-deck-retrieval/twoFacedLayouts.ts`:
 
 Both adapters use it, so they agree on what's flippable.
 
+Custom cards have no layout, so the same file holds a second decider:
+- `isDoubleSidedCustomCard(hasBack, backImageUrl)` — true only when Archidekt says the card has a back **and** gives a back image URL. Same meaning of `twoFaced`: a second image exists.
+
+## Data Flow: Ingestion — Archidekt custom cards
+
+`ArchidektDeckToDeckAdapter.convertCustomCard` reads the deck API's `customCards` array (types in `archidektTypes.ts`, `ArchidektCustomCard`). Custom entries share the category/inclusion/Commander logic with regular cards, so a custom card in the Commander category becomes a commander.
+- `cardSource: "archidekt-custom"`
+- `cardDefinitionId = customCardDefinitionId(id)` = `uuidv5("archidekt-custom:<id>", fixed namespace)` (hand-rolled `src/uuidv5.ts`) — stable across re-downloads, uuid-shaped for the contracts
+- `twoFaced = isDoubleSidedCustomCard(hasBack, backImageUrl)`
+- `imageUris` = the Archidekt front URL under **every** `ImageFormat` (`IMAGE_FORMATS` in `types.ts`); `backImageUris` likewise, set only when `twoFaced`
+- `cardTypes` = whitespace split of `frontTypes` + `backTypes` strings, deduped (supertypes like "Legendary" come along as words — there is no separate supertype field)
+- `colorIdentity` scraped from `{W}`-style symbols in mana costs and text
+- Not enriched: `enrichDeckWithImages` filters to scryfall cards before calling Scryfall
+
 ## Data Flow: Ingestion
 
 ### Archidekt Adapter (`src/port-deck-retrieval/archidektAdapter/ArchidektDeckToDeckAdapter.ts:84-110`)
@@ -42,6 +58,7 @@ Both adapters use it, so they agree on what's flippable.
 ### Card Repository Storage (`src/port-card-repository/SqliteCardRepositoryAdapter.ts`)
 - `card_types` column stores JSON-serialized `string[]`; `two_faced` stores 0/1
 - `image_uris` / `back_image_uris` columns store JSON-serialized `CardImageUris` (nullable). Added via non-destructive `ALTER TABLE ADD COLUMN` (existing rows get NULL → fallback to constructed URLs).
+- `card_source` column (nullable TEXT, same ALTER migration pattern). NULL reads back as no `cardSource` → scryfall.
 - No `back_face`/`mana_cost`/`cmc`/`oracle_text` columns. The table is a gitignored cache; on startup an old-schema table (one lacking `card_types`) is DROPped and recreated.
 
 ## Data Flow: Flip in Game
@@ -145,10 +162,10 @@ div.flip-container-with-button
 ```
 Both face images are always in the DOM. CSS 3D transforms with `backface-visibility: hidden` show only the current face. The `.card-flipped` class triggers a 180-degree Y rotation.
 
-### Image URLs (`src/types.ts`)
+### Image URLs (`src/domain-types.ts`)
 Two functions now exist:
-- **`getCardImageUrl(card: CardDefinition, format, face)`** — the one views call. Prefers the **stored** Scryfall URL on the card (`card.imageUris` for front, `card.backImageUris` for back), falling back to construction when absent.
-- **`constructCardImageUrl(scryfallId, format, face)`** — the old by-hand construction (`https://cards.scryfall.io/{format}/{face}/{id[0]}/{id[1]}/{scryfallId}.{ext}`), kept as the fallback. The `face` (`"front"`/`"back"`) is part of the path.
+- **`getCardImageUrl(card: CardDefinition, format, face)`** — the one views call. Prefers the **stored** URL on the card (`card.imageUris` for front, `card.backImageUris` for back), falling back to construction when absent — **for scryfall cards only**. A non-scryfall card falls back to its stored front URL in that format, then any stored front URL, then `""`; it never calls `constructCardImageUrl` (a custom card's id is not a Scryfall id).
+- **`constructCardImageUrl(scryfallId, format, face)`** — Scryfall-only; the old by-hand construction (`https://cards.scryfall.io/{format}/{face}/{id[0]}/{id[1]}/{scryfallId}.{ext}`), kept as the fallback. The `face` (`"front"`/`"back"`) is part of the path.
 
 **Why stored URLs:** the bare constructed `normal` URL 404s for very recently released cards (e.g. Arcane Signet, set ECC) — Scryfall only serves them at the **versioned** URL (`...jpg?<timestamp>`). The stored URLs are copied verbatim from Scryfall (so they carry the `?<version>` tag).
 
@@ -205,7 +222,8 @@ Face state is observable in the DOM, differently on each surface.
   - **`img.modal-card-image`'s `src`** — `getCardImageUrl(card, "large", currentFace)`, so it
     differs between faces on both pages. With stored URLs the two faces are different Scryfall
     files (`card_faces[0]` vs `[1]`); with the constructed fallback the path segment is
-    `/large/front/` vs `/large/back/`. Same URL also appears in the Copy button's `onclick`.
+    `/large/front/` vs `/large/back/`.
+  - **The Copy button's `onclick`** — `copyCardImageToClipboard(event, '<cardDefinitionId>', '<face>')`, built by `formatCardModalUtilityLinks(card, face)`. It carries the face explicitly (it used to carry the image URL).
   - **Prep only: the flip button's own `hx-get`** carries the *target* face —
     `/prep-card-modal/:prepId/:i?face=<other>` (`app.ts:945-951`). Showing the front ⇒ the
     button reads `?face=back`, and vice versa. The **game** flip button is a `hx-post` to a

@@ -22,9 +22,24 @@ in Spine logs, unreadable on replay. `seat.taken` and `join` stay v1.
 The sections below are named for the schema version current when each was built; read
 `.v1` there as "this kind," and `scryfallId` in them as today's `cardDefinitionId`.
 
-**The value is still a Scryfall printing id.** `cardDefinitionId` names *our* card identity;
+**For a scryfall card the value is a Scryfall printing id.** `cardDefinitionId` names *our* card identity;
 `scryfallId` survives only where it names Scryfall's own id — `constructCardImageUrl`'s
 param, the `port-card-images` port, MTGJSON identifiers.
+
+## Optional `card.cardSource` (archidekt-custom-cards, `54b022f4`)
+
+The `card` object in `card.played`, `card.played-face-down`, `card.discarded`,
+`card.returned`, and `seat.joined`'s commanders gained an optional
+`cardSource: enum ["scryfall", "archidekt-custom"]`. **Absent means scryfall.** No version
+bump — optional, and every existing event already means scryfall. The Shuffler sends it only
+for non-scryfall cards (`cardSourceField(card)` in `apps/shuffler/src/types.ts`), so a
+scryfall card's payload is byte-identical to before. For an `archidekt-custom` card,
+`cardDefinitionId` is a UUIDv5 of `archidekt-custom:<archidekt id>` and **no image is
+derivable from it** — receivers must use `frontImageUrl`/`backImageUrl` as sent. The `face`
+rules are unchanged: a two-faced custom card plays with `face` like any MDFC, and its
+`backImageUrl` is non-null exactly when it is two-faced. The Shuffler's own receive path
+(`cardReturnedDispatch.ts`) records `card.source` on its span; the Tabletop side is being
+done separately.
 
 ## The rule
 

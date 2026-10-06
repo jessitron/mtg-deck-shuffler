@@ -10,11 +10,18 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - Both faces still share the same `cardDefinitionId`. At render the back is read from `card.backImageUris`; at ingestion it comes from `card_faces[1].image_uris`. When stored URLs are absent (legacy data, Scryfall miss), the back falls back to the constructed `face=back` path — so the old "same id, swap the path segment" behavior still exists as the fallback.
 - **Why stored:** bare constructed `normal` URLs 404 for freshly-released cards; Scryfall only serves them at the versioned URL (`...jpg?<timestamp>`).
 - Scryfall requires a real `User-Agent` (else 400 — Node's default `User-Agent: node` is rejected by their Cloudflare front end, on the image CDN as well as the API). All outbound Scryfall calls go through `fetchScryfall()` in `src/scryfall-http.ts`, which sets it; `/proxy-image` shipped without one and 400'd every card copy until JES-136. Use `fetchScryfall`, not bare `fetch`, for any new Scryfall request.
-- If Scryfall's path scheme changes, the stored URLs still work (verbatim from Scryfall); only the fallback `constructCardImageUrl()` in `src/types.ts` would need updating.
+- If Scryfall's path scheme changes, the stored URLs still work (verbatim from Scryfall); only the fallback `constructCardImageUrl()` in `src/domain-types.ts` would need updating.
+- **Only scryfall cards depend on Scryfall.** Archidekt custom cards (`cardSource: "archidekt-custom"`) carry Archidekt-hosted URLs, skip `enrichDeckWithImages`, never hit `constructCardImageUrl`, and `/proxy-image` fetches them with plain `fetch` (no `fetchScryfall`).
+
+### Archidekt custom cards (`cardSource`)
+
+- `convertCustomCard` in `ArchidektDeckToDeckAdapter.ts` builds them from the deck API's `customCards`; id is `uuidv5("archidekt-custom:<id>")` (`src/uuidv5.ts`); two-faced via `isDoubleSidedCustomCard(hasBack, backImageUrl)`.
+- One URL per face, copied under every `ImageFormat` (`IMAGE_FORMATS`), so any `getCardImageUrl(card, format, face)` lookup finds a stored value.
+- Every Scryfall-specific path must branch on `cardSourceOf(card)`: `getCardImageUrl`, `enrichDeckWithImages`, `/proxy-image`, the Gatherer link.
 
 ### Card Repository
 
-- `SqliteCardRepositoryAdapter` stores `card_types` as JSON text column (no `back_face`/`mana_cost`/`cmc`/`oracle_text`)
+- `SqliteCardRepositoryAdapter` stores `card_types` as JSON text column (no `back_face`/`mana_cost`/`cmc`/`oracle_text`), and `card_source` (nullable, ALTER-added; NULL = scryfall)
 - The cards table is a gitignored cache; on startup an old-schema table (lacking `card_types`) is DROPped and recreated
 - Hydration/dehydration in `src/port-card-repository/hydration.ts` preserves `currentFace`
 
@@ -24,12 +31,14 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - Archidekt adapter: `twoFaced = faces.length === 2 && isDoubleSidedLayout(layout)`. `cardTypes` = union of all faces' types. Single-image layouts (`prepare`, `adventure`, `split`, `aftermath`, `flip`) are NOT two-faced but still contribute all their parts' types to `cardTypes`.
 - MTGJSON adapter: `twoFaced = isDoubleSidedLayout(layout)`; `cardTypes` = union of the card's types + all `otherFaceIds` faces' types (any layout)
 - MTGJSON requires AllIdentifiers data to resolve other faces by UUID (for `cardTypes` and the double-sided guard)
+- Archidekt custom cards have no layout: `twoFaced = isDoubleSidedCustomCard(hasBack, backImageUrl)` (same file); `cardTypes` = whitespace split of `frontTypes`/`backTypes`
 
 ### Modal System
 
 - Card modal (`views/partials/card-modal.ejs`) receives `currentFace` and renders the flip button conditionally
 - Game flip uses `POST /flip-card-modal/` replacing `#card-modal-container`
 - Prep flip uses `GET /prep-card-modal/` with `?face=` query parameter
+- The Gatherer + Copy utility block comes from one helper, `formatCardModalUtilityLinks(card, face)` (`src/view/play-game/game-modals.ts`), called by all three modal routes (`/card-modal`, `/prep-card-modal`, `/flip-card-modal`). It opens `<div class="card-modal-utility-buttons">` and the caller appends the flip button and closes the div. Change it there, not per route.
 
 ### Prep vs Game Id Spaces
 
@@ -76,11 +85,9 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 
 ### Copy-to-Clipboard
 
-- Card copy uses the current face's image URL
-- The `copyCardImageToClipboard()` call in the modal receives the face-specific image URL
-- The `/proxy-image` route (CORS proxy for copy) now **looks up the card** from `cardRepository` to use its stored URL, falling back to `constructCardImageUrl(cardId, "png", face)` when the card isn't cached
-- **Known bug (pre-existing, unfixed):** `copyCardImageToClipboard` in `public/game.js` (~line 175) picks the face with `urlParts.includes("/back/")`, but `urlParts` is `imageUrl.split("/")`, so no part contains a slash and the check is always false — a back-face copy asks `/proxy-image` for `face=front` and copies the front image, stored URLs or not. Fix: `urlParts.includes("back")`, or read the face from the caller.
-- `/proxy-image` fetches from Scryfall via `fetchScryfall()` — see the Scryfall section above. Covered end-to-end (both faces, live CDN) by `test/verification/verify-proxy-image.sh`
+- The modal's Copy button calls `copyCardImageToClipboard(event, cardDefinitionId, face)` (`public/game.js`) with the modal's current face, rendered server-side by `formatCardModalUtilityLinks`. The client no longer parses id or face out of an image URL — that parse always picked the front face, and a custom card's Archidekt URL has no Scryfall id in it to parse. The card name is no longer interpolated into the `onclick`, which also removed an unescaped-apostrophe break.
+- The `/proxy-image` route (CORS proxy for copy) **looks up the card** from `cardRepository` to use its stored URL, falling back to `constructCardImageUrl(cardId, "png", face)` when the card isn't cached. It records `card.definition_id` and `card.source` on the span.
+- `/proxy-image` fetches scryfall cards via `fetchScryfall()` — see the Scryfall section above — and non-scryfall cards via plain `fetch`. Covered end-to-end (both faces, live CDN) by `test/verification/verify-proxy-image.sh`
 
 ### Being-Played Animation
 
@@ -99,7 +106,7 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 
 These are specific things that could break two-faced cards if changed elsewhere:
 
-1. **CardDefinition changes**: `CardDefinition` is intentionally minimal — identity fields, `twoFaced`, `cardTypes`, plus the optional `imageUris`/`backImageUris` (Scryfall image URLs). Don't re-add per-face card _text_ (`manaCost`/`oracleText`/`cmc`/`backFace`); the card image is the source of truth and a future "is this hand worth keeping?" feature should read canonical data from MTGJSON/Scryfall. Image URLs are the deliberate exception — they're read on every render and _are_ the image. If you add a field, both adapters and the SQLite cache schema must populate it. **An optional field with a graceful fallback (like `imageUris`) does NOT require a version bump** — see watch point #9 and the "optional fields" exception in `DESIGN-persistence-versioning.md`.
+1. **CardDefinition changes**: `CardDefinition` is intentionally minimal — identity fields, `twoFaced`, `cardTypes`, plus the optional `imageUris`/`backImageUris` (image URLs) and `cardSource` (absent = scryfall; read via `cardSourceOf`, never `card.cardSource` directly). Don't re-add per-face card _text_ (`manaCost`/`oracleText`/`cmc`/`backFace`); the card image is the source of truth and a future "is this hand worth keeping?" feature should read canonical data from MTGJSON/Scryfall. Image URLs are the deliberate exception — they're read on every render and _are_ the image. If you add a field, both adapters and the SQLite cache schema must populate it. **An optional field with a graceful fallback (like `imageUris`) does NOT require a version bump** — see watch point #9 and the "optional fields" exception in `DESIGN-persistence-versioning.md`.
 
 2. **New card display contexts**: Any new place that renders a card image must handle `twoFaced === true`. Use `formatCardContainer()` rather than building card HTML directly.
 
@@ -117,7 +124,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
 
 6b. **Don't reach for `hx-vals='js:…'` to pass the face**: it looks like the obvious way to read the `card-flipped` class at click time, and it breaks. `hx-vals` is inherited by descendants (the flip button is one), and htmx appends GET params to an existing query string, producing `?face=back&face=front`. Express reads a repeated key as an array, so a `req.query.face === "back"` check silently falls through to the front face. The face travels in the re-rendered container's URL instead. Full reasoning in [architecture.md](architecture.md#data-flow-flip-on-prep-page).
 
-7. **New deck adapters**: Must determine `twoFaced` via `isDoubleSidedLayout(layout)` (from `twoFacedLayouts.ts`) and set `cardTypes` to the union of ALL faces'/parts' types. Do NOT infer two-faced from "two faces in the data" — split/adventure/prepare cards have two faces but one image (so `twoFaced=false`) yet still contribute both parts' types to `cardTypes`.
+7. **New deck adapters**: Must determine `twoFaced` via a decider in `twoFacedLayouts.ts` — `isDoubleSidedLayout(layout)` for layout-bearing sources, `isDoubleSidedCustomCard(hasBack, backImageUrl)` for Archidekt custom cards — and a non-Scryfall source must set `cardSource` and store an image URL for every format it will be asked for (no construction fallback exists for it) and set `cardTypes` to the union of ALL faces'/parts' types. Do NOT infer two-faced from "two faces in the data" — split/adventure/prepare cards have two faces but one image (so `twoFaced=false`) yet still contribute both parts' types to `cardTypes`.
 
 8. **Precon deck regeneration**: Required whenever the deck file format changes (bump `PERSISTED_DECK_VERSION` — see [`apps/shuffler/notes/DESIGN-persistence-versioning.md`](../../apps/shuffler/notes/DESIGN-persistence-versioning.md)). When regenerating, AllIdentifiers data must be available for the MTGJSON adapter to resolve other faces. Without it, the adapter throws an error. AllIdentifiers.json now exceeds Node's max string length, so `fetch-mtgjson-precons.ts` stream-parses it with `stream-json` (commit `5b3e5b5`) rather than `fs.readFile` + `JSON.parse`. If you touch `loadCardDatabase()`, keep it streaming — a whole-file read will throw `RangeError: Invalid string length`.
 

@@ -14,6 +14,13 @@ all image URIs. Which face is showing is *state* that travels with the card inst
 matters at play time (MDFCs are played as a chosen face), and is never part of the
 card's identity.
 
+**Not every card comes from Scryfall** (archidekt-custom-cards, 2026-10): an Archidekt
+custom card has `cardSource: "archidekt-custom"`, a `cardDefinitionId` that is a UUIDv5 of
+`archidekt-custom:<archidekt id>`, and Archidekt-hosted images. Nothing is derivable from
+its id — its stored image URLs are the only images it has. It can be two-faced (decided by
+`isDoubleSidedCustomCard`, not by layout), and it can be a commander. Face rules are
+unchanged for it.
+
 **And face is two axes, not one** (decided 2026-08-07): **`face`** (`front`|`back` — which
 *printed side* is chosen) is orthogonal to **face-down** (concealment — the identity is
 hidden, and it looks like a card back or sleeve *even on a two-faced card*). A one-bit
@@ -74,7 +81,7 @@ Players encounter two-faced cards throughout the app:
 ## Design Philosophy
 
 - **Flip is a UI concern, not a game event.** The app tracks where cards are (Library, Hand, Table, etc.) but doesn't model battlefield state. Flipping doesn't change where a card is, so it's not recorded in the event log. (An earlier attempt to record `FlipCardEvent` was added and removed.)
-- **Same Scryfall ID, both faces' URLs stored.** Both faces of a two-faced card share one Scryfall ID. Image URLs are now **fetched from Scryfall at ingestion and stored** on the card (`imageUris` front, `backImageUris` back) — because bare constructed URLs 404 for freshly-released cards. `getCardImageUrl` prefers the stored URL and falls back to constructing `face=front`/`face=back` paths when absent.
+- **Same card id, both faces' URLs stored.** (For a custom card the stored URLs are Archidekt's and there is no construction fallback.) Both faces of a two-faced card share one Scryfall ID. Image URLs are now **fetched from Scryfall at ingestion and stored** on the card (`imageUris` front, `backImageUris` back) — because bare constructed URLs 404 for freshly-released cards. `getCardImageUrl` prefers the stored URL and falls back to constructing `face=front`/`face=back` paths when absent.
 - **The card image is the source of truth; we store almost no card text.** `CardDefinition` carries only identity/grouping data (`name`, `cardDefinitionId`, `twoFaced`, `cardTypes`, `colorIdentity`, `set`, …). The old `backFace`/`CardFace` and `manaCost`/`cmc`/`oracleText` fields were removed (commit `f76b49c`) — they were never displayed. The only face data any feature consumes is `cardTypes`, the union of all faces' types, used by library-search grouping. A future "is this hand worth keeping?" feature should read canonical card data from MTGJSON/Scryfall rather than re-storing it.
 - **Prep page flip may gain persistence.** Currently prep page flip uses a query parameter (`?face=back`) and doesn't persist. When we need it to persist, we'll save flip state in the prep.
 
@@ -94,10 +101,12 @@ Players encounter two-faced cards throughout the app:
 | View rendering | `formatFlippingContainer(gameCard, flipRequest)` in `src/view/common/shared-components.ts`; `FlipRequest` says which page is asking (game POST vs prep GET) |
 | CSS (game) | `public/game.css` lines 104-143 |
 | CSS (prep) | `public/prepare.css` lines 221-276 |
-| Image URLs | `getCardImageUrl(card, format, face)` (prefers stored) + `constructCardImageUrl(scryfallId, format, face)` (fallback) in `src/types.ts`; stored in `CardDefinition.imageUris`/`backImageUris` |
-| Image fetch | `src/port-card-images/` (`ScryfallCardImagesGateway`, `enrichDeckWithImages`) — fetches Scryfall image URLs at ingestion |
-| Adapters | `src/port-deck-retrieval/archidektAdapter/`, `src/port-deck-retrieval/mtgjsonAdapter/` |
-| Persistence | `SqliteCardRepositoryAdapter` keys on `card_definition_id` and stores `card_types`, `image_uris`, `back_image_uris` as JSON (no back_face column); `PersistedGameCard.currentFace` |
+| Card source | `CardDefinition.cardSource?: "scryfall" \| "archidekt-custom"` (absent = scryfall; read through `cardSourceOf()`; `cardSourceField()` for wire payloads) in `src/types.ts` |
+| Image URLs | `getCardImageUrl(card, format, face)` (prefers stored) + `constructCardImageUrl(scryfallId, format, face)` (Scryfall-only fallback) in `src/domain-types.ts`; stored in `CardDefinition.imageUris`/`backImageUris`. A non-scryfall card never reaches `constructCardImageUrl` |
+| Image fetch | `src/port-card-images/` (`ScryfallCardImagesGateway`, `enrichDeckWithImages`) — fetches Scryfall image URLs at ingestion; skips non-scryfall cards |
+| Adapters | `src/port-deck-retrieval/archidektAdapter/` (incl. `convertCustomCard` for the deck's `customCards`), `src/port-deck-retrieval/mtgjsonAdapter/` |
+| Persistence | `SqliteCardRepositoryAdapter` keys on `card_definition_id` and stores `card_types`, `image_uris`, `back_image_uris` as JSON, plus `card_source` (nullable; no back_face column); `PersistedGameCard.currentFace` |
+| Card modal Copy / Gatherer | `formatCardModalUtilityLinks(card, face)` in `src/view/play-game/game-modals.ts` — used by all three modal routes; Copy passes `cardDefinitionId` + face; Gatherer hidden for non-scryfall cards |
 | `card.discarded` (Spine event) | **Built** (cards-come-and-go ticket 08, 2026-08-23): `buildCardDiscardedEvent`/`sendCardDiscardedToSpineBestEffort` (`src/port-tabletop/types.ts` / `src/port-spine/sendToSpine.ts`), sent from `POST /discard-card/:gameId/:gameCardIndex` and `POST /mill/:gameId` instead of `card.played` with a graveyard hint. Same face-carrying shape as `card.played` (graveyard *is* the meaning). Face/image computation shared with `card.played`/`card.played-face-down` via the private `cardFaceFields(gameCard)` helper in `src/port-tabletop/types.ts`. See [contract.md](contract.md). |
 
 ## Other Docs
