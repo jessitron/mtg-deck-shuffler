@@ -314,7 +314,7 @@ not just the reason.
 **`usePhysicsAnnouncements.ts` generalizes the same pattern from one span to a whole vocabulary.**
 Where `useCardArrivalSpans.ts` is `store.listen()` → `inSpan()` for exactly one named event, the
 newer hook fans the same shape across many kinds of tldraw store mutations
-(`card.tapped`/`untapped`, `card.flipped`, `card.turnedFaceDown`, `card.zoneMoved`,
+(`card.tapped`/`untapped`, `card.transformed` (formerly `card.flipped`; renamed 2026-10-05, no board or trigger referenced it), `card.turnedFaceDown`, `card.zoneMoved`,
 `counter.attached`, plus a generic `shape.created`/`moved`/`changed` fallback). Both hooks are
 wired side by side in `TablePage.tsx`. Rules worth keeping for a third such hook:
 
@@ -323,7 +323,7 @@ wired side by side in `TablePage.tsx`. Rules worth keeping for a third such hook
   actor, so no cross-client attribution logic is needed.
 - **Every span carries `actor: TAB_ID`** (tldraw's per-session sync id) — the same per-tab
   correlation idea as the Shuffler's `game.browser_tab_id`, different mechanism, same purpose.
-- **Not every store diff can announce immediately.** Named gestures (tap, flip, zone move) come
+- **Not every store diff can announce immediately.** Named gestures (tap, transform, zone move) come
   from single-shot writes and fire straight off the diff. `Translating.ts` writes fresh x/y on
   **every pointer-move** during a drag, with no batching to settle — so only the generic
   `shape.moved`/`changed` fallback debounces (`GENERIC_SETTLE_MS` = 300ms per shape id); named

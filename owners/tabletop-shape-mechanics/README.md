@@ -21,7 +21,7 @@ exists to prevent from recurring, and to catch when someone else's change reopen
 Born 2026-08-07 out of a bug fix (`959831c`, "drag picks up the wrong card after a previous
 drag"). The finding — a genuine tldraw quirk in its `SelectTool` state machine — initially landed
 in `owners/two-faced-cards/` purely because that owner's trigger was broad enough to match "the
-Tabletop's card rendering." It has nothing to do with card faces, flip, or `CardDefinition`. Jess
+Tabletop's card rendering." It has nothing to do with card faces, transform, or `CardDefinition`. Jess
 called out that shape-selection mechanics is complex enough to deserve its own standing owner, so
 future bugs in this territory route here instead of being caught incidentally by a
 card-rendering owner. See `history.md` for the full migration note.
@@ -54,7 +54,7 @@ and the tldraw registration gotchas both rewrites surfaced.
 **Ticket 17** (`.scratch/tabletop-physics/issues/17-flip-and-face-down.md`, landed 2026-08-09,
 `eb24a4f`/`ff5d58a`) added the app's **first custom tldraw `ContextMenu`** —
 `apps/tabletop/src/client/CardContextMenu.tsx`, wired via `TLComponents.ContextMenu` in
-`TablePage.tsx` — carrying Flip/Turn face-down/Tap-Untap menu items for `mtg-card`. Mechanics
+`TablePage.tsx` — carrying Transform/Turn face-down/Tap-Untap menu items for `mtg-card`. Mechanics
 territory here is narrow but real: right-clicking a card selects it exactly like `PointingShape`
 does, and unlike a locked shape's selection (which tldraw clears when the context menu closes),
 an **unlocked card's selection survives menu close** — reopening watch point 1's stale-selection
@@ -142,8 +142,8 @@ can't reach).
 | Library-portal arming visual (first `TLComponents.InFrontOfTheCanvas` use) | `apps/tabletop/src/client/shapes/LibraryPortalOverlay.tsx`, wired in `TablePage.tsx` |
 | Regression test for the library portal | `apps/tabletop/test/verification/verify-library-portal.spec.ts` |
 | Tap pivot math (pure, shared by `onClick` and the context menu) | `apps/tabletop/src/client/shapes/cardTap.ts` (`tapPartial`) |
-| First custom `ContextMenu` (Flip/Turn face down-up/Tap-Untap, right-click selection hazard) | `apps/tabletop/src/client/CardContextMenu.tsx`, wired via `TLComponents.ContextMenu` in `TablePage.tsx` |
-| Regression test for context-menu stale-selection hazard | `apps/tabletop/test/verification/verify-flip-face-down.spec.ts` |
+| First custom `ContextMenu` (Transform/Turn face down-up/Tap-Untap, right-click selection hazard) | `apps/tabletop/src/client/CardContextMenu.tsx`, wired via `TLComponents.ContextMenu` in `TablePage.tsx` |
+| Regression test for context-menu stale-selection hazard | `apps/tabletop/test/verification/verify-transform-face-down.spec.ts` |
 | Card shape's props/type definition | `apps/tabletop/src/shared/mtgCardShape.ts` (`MtgCardShapeProps`, `TLGlobalShapePropsMap` augmentation) |
 | Zone ShapeUtil (furniture — no interaction hooks) | `apps/tabletop/src/client/shapes/MtgZoneShapeUtil.tsx` |
 | Zone shape's props/type definition | `apps/tabletop/src/shared/mtgZoneShape.ts` (`MtgZoneShapeProps`, `TLGlobalShapePropsMap` augmentation) |

@@ -1080,8 +1080,8 @@ zeroing) — three conceptual call sites of that math exist, two via `tapPartial
 
 ## Ticket 17: first custom `ContextMenu` — right-click selection outlives the menu (landed 2026-08-09, `eb24a4f`/`ff5d58a`)
 
-`.scratch/tabletop-physics/issues/17-flip-and-face-down.md` (plan in `plan-17.md`) added Flip,
-Turn face down/up, and Tap/Untap as right-click menu items on `mtg-card`. Face/flip semantics
+`.scratch/tabletop-physics/issues/17-flip-and-face-down.md` (plan in `plan-17.md`) added Transform,
+Turn face down/up, and Tap/Untap as right-click menu items on `mtg-card`. Face/transform semantics
 (what `faceDown`/`face` mean, the library-entry reset) are `two-faced-cards` territory; this
 owner's stake is the **new interaction surface** — a context menu — and one hazard it reopens.
 
@@ -1135,7 +1135,7 @@ does — the card becomes selected. `DefaultContextMenu`'s close callback clears
 **locked** shape (tldraw's own behavior, presumably because a locked shape's context menu is the
 only way it ever gets selected at all) but does **not** clear an **unlocked** shape's selection
 when the menu closes without an action, or after most actions either. Without `commit()`'s
-trailing `editor.setSelectedShapes([])`, a right-click-then-flip (or right-click-then-dismiss)
+trailing `editor.setSelectedShapes([])`, a right-click-then-transform (or right-click-then-dismiss)
 would leave the card selected exactly the way `onTranslateEnd`'s pre-existing
 `setSelectedShapes([])` workaround exists to prevent after a drag (watch point 1) — the *next*
 drag of a *different* card would silently hijack this one instead, because
@@ -1162,8 +1162,8 @@ of the three share the extracted function.
 
 ### Regression test
 
-`apps/tabletop/test/verification/verify-flip-face-down.spec.ts` — "flipping card A does not leave
-a stale selection that hijacks a later drag of card B." Right-clicks card A, flips it via the
+`apps/tabletop/test/verification/verify-transform-face-down.spec.ts` — "transforming card A does not leave
+a stale selection that hijacks a later drag of card B." Right-clicks card A, transforms it via the
 context menu, then drags card B, and asserts B (not A) moved. Failed before `commit`'s trailing
 `setSelectedShapes([])` was added, passes after — the same shape of proof `verify-drag-identity`
 established for the drag-only version of this bug.
@@ -1188,7 +1188,7 @@ cards, locked furniture, *and* stray dropped JPEGs, none of which shared meaning
   Two additional tldraw registration mechanics turned up during implementation that weren't
   anticipated when ticket 02 was scoped — the `TLGlobalShapePropsMap` augmentation and the
   `useSync`/`createTLSchema` default-shapes gap, both documented above.
-- The per-instance tldraw image *asset* is gone — flip is now a pure `props.face` write (no
+- The per-instance tldraw image *asset* is gone — transform is now a pure `props.face` write (no
   asset mutation, no re-fetch; both faces' URLs travel with the card from arrival). This affects
   card-rendering territory (`two-faced-cards`), not this owner's selection mechanics.
 

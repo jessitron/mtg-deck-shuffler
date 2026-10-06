@@ -76,7 +76,7 @@ instrumentation.
     two origins (domain decision vs. physical placement) stay two events instead of one
     event straddling two authors.
 12. As a developer, I want every other new physical event (`card.moved`,
-    `card.tapped`/`card.untapped`, `card.flipped`, `card.turnedFaceDown` — including the
+    `card.tapped`/`card.untapped`, `card.transformed`, `card.turnedFaceDown` — including the
     "back up" case, `shape.created`/`shape.moved`/`shape.removed`) to carry its position
     directly on the one event, since for these there's only one origin deciding it.
 13. As a developer, I want the generic `shape.*` fallback to fire for any tldraw shape
@@ -114,7 +114,7 @@ instrumentation.
     discrepancy list, each logged in full (not summarized down to fit a span; Honeycomb
     accepts up to ~1MB per event, and each of these three gets its own log entry so each
     can use that budget independently).
-20. As a developer, I want `card.tapped`/`card.untapped`, `card.flipped`, and
+20. As a developer, I want `card.tapped`/`card.untapped`, `card.transformed`, and
     `card.turnedFaceDown` to carry `significance: "domain"` — these are always
     game-significant (it's *why* the menu actions to trigger them exist) — while
     `card.arrived`, `card.moved`, and the generic `shape.*` events default to
@@ -186,7 +186,7 @@ instrumentation.
   - `card.tapped.v1.json` / `card.untapped.v1.json` (or one event with a boolean — match
     whichever precedent `card.played`/`card.played-face-down`'s sibling-events pattern
     favors) — `significance: "domain"` (story 20: these are always game-significant).
-  - `card.flipped.v1.json` — records the resulting face, `significance: "domain"`.
+  - `card.transformed.v1.json` — records the resulting face, `significance: "domain"`.
   - `card.turnedFaceDown.v1.json` — covers both directions (down and back up); the
     resulting concealment state rides on the payload, `significance: "domain"`.
   - `shape.created.v1.json` / `shape.moved.v1.json` / `shape.removed.v1.json` — the

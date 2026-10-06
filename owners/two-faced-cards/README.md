@@ -20,11 +20,12 @@ hidden, and it looks like a card back or sleeve *even on a two-faced card*). A o
 "which side is up" model was proposed and rejected. So `face: "back"` is unreachable on a
 one-faced card; a one-faced card turned over is **face-down**, not `face: back`.
 
-**"Flip" does not mean the same thing on the two ships.** On the Shuffler, flip is
-*inspection of a two-faced card* — a one-faced card cannot be flipped and shows no flip
-affordance. On the Tabletop, *any* card can be turned over, because a card on a table is a
-physical object with two sides; turning over a one-faced card puts it **face down**, which
-is a real domain event. Full table in `CONTEXT-MAP.md`'s "Flip / Face-down" translation (root
+**"Flip" is a Shuffler-only word.** On the Shuffler, flip is *private inspection of the other
+printed face of a two-faced card* — a one-faced card cannot be flipped and shows no flip
+affordance. The Tabletop never says "flip": it has **Transform** (swap the printed face of a
+two-faced card, a physical event) and, separately, **Turn Face Down / Up** (concealment, on any
+card, because a card on a table is a physical object with a back). A one-faced card cannot
+Transform; it can only be turned face down. Full table in `CONTEXT-MAP.md`'s "Flip / Transform / Face-down" translation (root
 of the repo); this owner's own copy of it lives in [tabletop.md](tabletop.md).
 
 Every component of the fleet that touches cards must hold this:
@@ -40,10 +41,10 @@ Every component of the fleet that touches cards must hold this:
   `imageUrl` field is gone, replaced by `frontImageUrl` + `backImageUrl: string | null`
   (`buildCardPlayedEvent` in `apps/shuffler/src/port-tabletop/types.ts`). **Physics ticket 06
   resolved (2026-08-08)** the two questions that were open here: the trigger is two separate
-  context-menu items ("Flip" / "Turn face down"), and `currentFace` authority stays with the
-  Shuffler — flip-on-table is table-local, the divergence knowingly accepted. **Physics
+  context-menu items ("Transform" / "Turn face down"), and `currentFace` authority stays with the
+  Shuffler — transform-on-table is table-local, the divergence knowingly accepted. **Physics
   ticket 17 built both gestures (2026-08-09, `eb24a4f`/`ff5d58a`)**: the Tabletop's first
-  custom tldraw `ContextMenu` (`CardContextMenu.tsx`) offers "Flip" (per-card `props.face`
+  custom tldraw `ContextMenu` (`CardContextMenu.tsx`) offers "Transform" (per-card `props.face`
   swap, shown only when `backImageUrl !== null`) and "Turn face down"/"Turn face up" (a
   convergent toggle of `props.faceDown` across the selection). A card entering the library
   resets both axes to `face:'front', faceDown:false` in `MtgCardShapeUtil.onTranslateEnd`.
@@ -83,7 +84,7 @@ Players encounter two-faced cards throughout the app:
 |---|---|
 | Data type | `CardDefinition.twoFaced` flag, `CardDefinition.cardTypes` (union of all faces' types), `GameCard.currentFace` |
 | Face-down (concealment) | Tabletop-only: `faceDown: boolean` in the `mtg-card` shape's `props` (ticket 02, `c956949`). **Both the gesture and both renderings are now built** (tabletop-physics ticket 17, 2026-08-09, `eb24a4f`/`ff5d58a`): a right-click/long-press "Turn face down"/"Turn face up" context-menu item toggles `faceDown` across the selection (convergent, skips no-ops). A sleeved seat's face-down card renders as a solid `sleeveColor` rectangle (table-layout ticket 17, still baked at mint); an unsleeved seat's face-down card renders the seat's `cardBackImageUrl` (also baked into `mtg-card` props at mint time, same "game constant" argument as `sleeveColor`), falling back to a flat `#3a3a3a` rectangle when no card back was baked in (e.g. a seat that predates the prop, or redeploy-wiped seat memory). **A card can also arrive already concealed**: `card.played-face-down` (contract + Tabletop receiving side landed, card-played-face-down tickets 01+02) is a sibling event kind to `card.played`, identical payload shape, that mints the `mtg-card` shape with `faceDown: true` from birth — no Shuffler sender yet (ticket 03). See [tabletop.md](tabletop.md) and [contract.md](contract.md). Nothing on `CardDefinition`/`GameCard` — a Shuffler "Play Face-Down" button (the sender) is ticket 03, not yet built. The Shuffler's `CARD_BACK` image is library-stack decoration, not modeled state |
-| Flip (which printed side) | Tabletop: a "Flip" context-menu item swaps `props.face`, shown only when at least one selected card has `backImageUrl !== null` (built ticket 17, 2026-08-09) |
+| Transform (which printed side) | Tabletop: a "Transform" context-menu item swaps `props.face`, shown only when at least one selected card has `backImageUrl !== null` (built ticket 17, 2026-08-09) |
 | Concealment is depicted, not enforced | A face-down card keeps its identity in synced tldraw `props`; no permission model, and **no gesture may be gated on who controls a card** (`notes/DESIGN-the-table-vision.md` § Principles, 2026-08-07) |
 | Shuffler "Play Face Down" button | **Built** (card-played-face-down ticket 03, 2026-08-21): a `Play Face Down` action on the **hand card modal only** (`formatModalCardActionsForHand` in `apps/shuffler/src/view/play-game/game-modals.ts`) sends `card.played-face-down` instead of `card.played` — a distinct event kind, not a `faceDown` flag on `card.played`. `GameState`/`GameCard` are untouched; concealment is not domain state on the Shuffler side, the card just moves to Table as always. Solo mode copies the generic card back image to the clipboard instead of the card's own image. Not on Revealed, per spec.md. |
 | Type definitions | `src/types.ts` (CardDefinition), `src/port-persist-state/types.ts` (GameCard) |

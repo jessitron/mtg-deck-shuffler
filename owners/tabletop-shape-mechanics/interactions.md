@@ -103,7 +103,7 @@
 - **Ticket 12's `mtg-card` rewrite landed as a joint change** (2026-08-08): the
   `setSelectedShapes([])` selection-cleanup was carried forward into the new ShapeUtil unchanged
   (any ShapeUtil with `onClick` inherits the tldraw quirk — watch point 1 below), and
-  `two-faced-cards`'s props-based flip/identity model landed alongside it (flip is now a pure
+  `two-faced-cards`'s props-based face/identity model landed alongside it (Transform is now a pure
   `props.face` write, no per-instance tldraw asset). Both owners' territory changed in the same
   commit; consult `owners/two-faced-cards/` for anything about *which face renders*, this owner
   for anything about *what responds to the pointer*.
@@ -166,7 +166,7 @@
   owner) watches the shape mutations this owner's ShapeUtil hooks already produce — `mtg-card`'s
   `props.tapped`/`face`/`faceDown`/`meta.zone` changes from `onClick`/`onTranslateEnd`, and
   `parentId` changes from `onDragShapesIn` — and translates each into a named Honeycomb span
-  (`card.tapped`/`card.untapped`, `card.flipped`, `card.turnedFaceDown`, `card.zoneMoved`,
+  (`card.tapped`/`card.untapped`, `card.transformed`, `card.turnedFaceDown`, `card.zoneMoved`,
   `counter.attached`, `noteAttached`). It reads this owner's mutations; it does not call into any
   ShapeUtil or change detection logic here. **Detection logic in `MtgCardShapeUtil.tsx` is
   unchanged** — the only change on this owner's side of the line was deleting the old
@@ -556,7 +556,7 @@
     shape**: route every write through a `commit(partials, label)` helper that ends with
     `editor.setSelectedShapes([])`, unconditionally, after `markHistoryStoppingPoint` +
     `updateShapes` — see `CardContextMenu.tsx`'s `commit()`. Regression test:
-    `verify-flip-face-down.spec.ts`'s "flipping card A does not leave a stale selection that
+    `verify-transform-face-down.spec.ts`'s "transforming card A does not leave a stale selection that
     hijacks a later drag of card B." This is now the third documented entry point into the
     family: drag-settle (watch point 1, `onTranslateEnd`), the multi-untap click-batch (watch
     point 14, inside `onClick`), and now context-menu actions (here, at the menu's exit rather

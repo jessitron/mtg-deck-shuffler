@@ -136,13 +136,14 @@ These are specific things that could break two-faced cards if changed elsewhere:
     one-faced card turned over is face-down. If you find yourself wanting `face: "back"`
     for a card with one printed side, you want face-down instead.
 
-13. **"Flip" means different things on the Shuffler and the Tabletop — on purpose.** On the
+13. **"Flip" is a Shuffler-only word; the Tabletop says Transform.** On the
     Shuffler a one-faced card **cannot** be flipped (no affordance; `GameState.flipCard()`
-    throws). On the Tabletop **any** card can be turned over, because it's a physical
-    object. Do not "fix" the Shuffler to allow flipping one-faced cards for consistency,
-    and do not port the Shuffler's `twoFaced` gate onto a Tabletop turn-over gesture. Full
-    translation table now lives in `CONTEXT-MAP.md`'s "Flip / Face-down" section (root of the
-    repo, added 2026-08-10); this owner's own copy is in [tabletop.md](tabletop.md).
+    throws). On the Tabletop a two-faced card Transforms (a physical event) and **any** card
+    can Turn Face Down, because it's a physical object. Never write "flip" in Tabletop code,
+    UI, telemetry, tests or docs. Do not "fix" the Shuffler to allow flipping one-faced cards,
+    and do not port the Shuffler's `twoFaced` gate onto Turn Face Down. Full
+    translation table lives in `CONTEXT-MAP.md`'s "Flip / Transform / Face-down" section (root of the
+    repo); this owner's own copy is in [tabletop.md](tabletop.md).
 
 14. **Face-down is modeled only on the Tabletop — and both the gesture and both
     renderings are now built.** Ticket 02 (2026-08-07, `c956949`) gave it a home:
@@ -156,7 +157,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
     (same game-constant argument), and the **unsleeved** faceDown branch now renders it
     as an `<img>` — falling back to a flat `#3a3a3a` rectangle when no card back was
     baked in (a seat that predates the prop, or redeploy-wiped seat memory). A new
-    tldraw `ContextMenu` (`CardContextMenu.tsx`) provides "Flip" (`props.face` swap,
+    tldraw `ContextMenu` (`CardContextMenu.tsx`) provides "Transform" (`props.face` swap,
     gated on `backImageUrl !== null`) and "Turn face down"/"Turn face up" (convergent
     `props.faceDown` toggle across the selection) — the first code anywhere in the
     Tabletop to write either field. `faceDown` is no longer hardcoded `false` after
@@ -246,7 +247,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
     or choose a face? `card.played` and the new `card.discarded.v1` carry `face` (a
     discard shows the card publicly); `card.returned.v1`, `undo.card.played.v1`,
     `undo.card.discarded.v1`, and the `commanders` entries on `seat.joined` carry
-    **none** (commanders always arrive in the command zone face up; table-flipping one
+    **none** (commanders always arrive in the command zone face up; transforming one
     afterward is table-local). When adding a new card event kind, apply the same
     question — don't cargo-cult `face` onto it. Two corollaries: `card.played.v1`'s
     `zoneHint` narrows to `stack | battlefield` (graveyard traffic moves to

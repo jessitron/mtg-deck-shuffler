@@ -1,11 +1,20 @@
 # History
 
+## Flip becomes Transform in the Tabletop — rename only, no mechanics change (2026-10-05)
+
+The context-menu item "Flip" is now "Transform" (menu id `mtg-card-transform`, stopping-point
+label "transform"), the announcement `card.flipped` is now `card.transformed`, and
+`verify-flip-face-down.spec.ts` is now `verify-transform-face-down.spec.ts` (its stale-selection
+test reads "transforming card A does not leave a stale selection..."). The Tabletop never says
+"flip"; the Shuffler keeps its own word. Older entries below use the old names and describe the
+code as it was.
+
 ## `zoneHint` removed from the contract and every fixture — no mechanics change
 
 `zoneHint` is gone from `card.played.v1.json`, `card.played-face-down.v1.json`, the Shuffler's
 envelope builders, and every Tabletop test payload. The specs that overrode
 `zoneHint: "battlefield"` (`verify-drag-identity`, `verify-zone-armed`'s multi-card spec,
-`verify-multi-untap`, `verify-flip-face-down`) now send the default payload; the field was
+`verify-multi-untap`, `verify-transform-face-down`) now send the default payload; the field was
 already ignored, so the cards cascade across the Stack at distinct positions as before and the
 full Playwright suite passes unchanged. Older entries below that mention the override describe a
 setup that no longer exists.
@@ -1041,7 +1050,7 @@ custom tldraw `ContextMenu`**, `apps/tabletop/src/client/CardContextMenu.tsx`, w
   through a `commit(partials, label)` helper (`markHistoryStoppingPoint` → `updateShapes` →
   `editor.setSelectedShapes([])`, the clear unconditional and always last). New watch point 15
   records this as the general pattern for any future menu/toolbar/UI surface that mutates a card.
-  Regression test: `verify-flip-face-down.spec.ts`'s "flipping card A does not leave a stale
+  Regression test: `verify-transform-face-down.spec.ts`'s "flipping card A does not leave a stale
   selection that hijacks a later drag of card B."
 - **`tapPartial` extracted from `MtgCardShapeUtil` into a standalone pure function**,
   `apps/tabletop/src/client/shapes/cardTap.ts`, because the new Tap/Untap menu item needs the
@@ -1909,7 +1918,7 @@ without a major-version signal."
   `verify-multi-untap.spec.ts` (all 3 cases; watch point 14's `PointingShape.onPointerUp`
   ordering/undo-coalescing tripwire), `verify-zone-armed.spec.ts` (all 6 cases; the
   `"select.translating"` string check the "Depends On" section calls out by name),
-  `verify-image-selection.spec.ts`/`verify-note.spec.ts`/`verify-flip-face-down.spec.ts` (the
+  `verify-image-selection.spec.ts`/`verify-note.spec.ts`/`verify-transform-face-down.spec.ts` (the
   stale-selection regressions watch point 1's centralized fix guards),
   `verify-click-then-drag-selection.spec.ts`, `verify-counter.spec.ts`,
   `verify-life-counter.spec.ts`, and `verify-tap-animation.spec.ts`. Everything passed unchanged.

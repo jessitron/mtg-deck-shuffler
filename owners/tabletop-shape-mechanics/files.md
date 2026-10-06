@@ -153,7 +153,7 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
 - `apps/tabletop/src/client/CardContextMenu.tsx` — **new, ticket 17 (2026-08-09, `eb24a4f`)**:
   the app's first custom `TLComponents.ContextMenu`, wired in `TablePage.tsx`. `TableContextMenu`
   wraps `DefaultContextMenu`, replacing its default content (children replace, not add) with the
-  new `mtg-card-actions` group (Flip/Turn face down-up/Tap-Untap, via `CardMenuItems`) plus a
+  new `mtg-card-actions` group (Transform/Turn face down-up/Tap-Untap, via `CardMenuItems`) plus a
   trimmed stock menu (`ReorderMenuSubmenu` + `ClipboardMenuGroup`). `CardMenuItems` reads the
   selection reactively (`useEditor()` + `useValue(getSelectedShapes().filter(mtg-card))`) and
   routes every action through a `commit(partials, label)` helper
@@ -339,7 +339,7 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   ticket 08 (tabletop-cards-come-and-go, 2026-08-23)**: `placeArrivedCard(tableName, envelope,
   payload, faceDown, resolvePosition)` (private) now holds the dedup/seat-check/span/mint/
   `store.put` logic every arrival shares — mints `props.instanceId` (moved out of `meta` by
-  ticket 12) at shape creation (`createShapeId`; no longer mints a tldraw asset record — flip is a
+  ticket 12) at shape creation (`createShapeId`; no longer mints a tldraw asset record — Transform is a
   pure `props.face` write now), builds the record via `tableFurniture.ts`'s `mtgCardShape()`. Two
   exported entry points call it with different position-resolvers: `applyCardArrival` (for
   `card.played`/`card.played-face-down`, positioned via `stackCardPosition` using
@@ -547,10 +547,10 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   post-creation cooldown (tldraw's double-click window; see watch point 13).
 - `apps/tabletop/test/openSpotNearZoneEdge.test.ts` — **new, ticket 18**: unit tests for the
   pure eviction geometry.
-- `apps/tabletop/test/verification/verify-flip-face-down.spec.ts` — **new, ticket 17
-  (2026-08-09, `eb24a4f`/`ff5d58a`)**: mostly `two-faced-cards` coverage (flip/face-down
+- `apps/tabletop/test/verification/verify-transform-face-down.spec.ts` — **new, ticket 17
+  (2026-08-09, `eb24a4f`/`ff5d58a`)**: mostly `two-faced-cards` coverage (transform/face-down
   behavior, two-client sync convergence for both), but includes this owner's regression test —
-  "flipping card A does not leave a stale selection that hijacks a later drag of card B" (watch
+  "transforming card A does not leave a stale selection that hijacks a later drag of card B" (watch
   point 15).
 - `apps/tabletop/test/verification/verify-note.spec.ts` — **new, ticket 19 (2026-08-10)**: notes
   as passengers — attach/ride/detach, battlefield-exit eviction to the graveyard's edge, an
