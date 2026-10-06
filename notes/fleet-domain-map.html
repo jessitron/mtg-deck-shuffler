@@ -166,7 +166,10 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
 
       <text x="240" y="66" text-anchor="middle">Play → card.played</text>
       <line class="arrow" x1="100" y1="74" x2="380" y2="74" marker-end="url(#ah)"/>
-      <text class="m" x="240" y="90" text-anchor="middle">sent before the Shuffler mutates; best-effort</text>
+      <text class="m" x="240" y="90" text-anchor="middle">today: sent before the Shuffler mutates; best-effort</text>
+      <text class="warn" x="112" y="114" style="fill:var(--warn);font-size:11px">planned: if the Spine</text>
+      <text class="warn" x="112" y="128" style="fill:var(--warn);font-size:11px">can't be told, the card</text>
+      <text class="warn" x="112" y="142" style="fill:var(--warn);font-size:11px">is not played</text>
 
       <rect class="box" x="272" y="102" width="216" height="36"/>
       <text class="m" x="380" y="118" text-anchor="middle">validate schema · dedup by event id</text>
@@ -393,6 +396,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
         <li>Decks and preps are immutable <span class="tag code">code</span></li>
         <li>Spine calls are best-effort and never block play <span class="tag code">code</span></li>
         <li>Carry the Spine's ids and URLs; never build them <span class="tag">stated</span></li>
+        <li>A card is played only if the Spine accepted the event first <span class="tag plan">planned</span></li>
       </ul>
     </div>
     <div class="card" style="--c: var(--tabletop)">
@@ -425,6 +429,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
 <section>
   <h2>Where the story and the code disagree</h2>
   <ul class="gaps">
+    <li>"Best-effort, never blocks play" (code) and "Playable at all times" (stated) are today's rule. The planned rule is the opposite for card.played: no Spine, no play.</li>
     <li>The envelope has no <code>visibility</code> field, and the design summary still says it does.</li>
     <li>Nothing implements supersede. It is a principle only.</li>
     <li>The Tabletop's taps, flips and moves reach Honeycomb as spans but never the Spine.</li>

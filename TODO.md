@@ -1,6 +1,6 @@
 # TODO
 
-The fleet's inbox: raw captures, pre-decision. Jess writes here; so do agents (`drop-buoy`).
+This file is an inbox: raw captures, pre-decision. Jess writes here; so do agents (`drop-buoy`).
 Format: the seamapping plugin's `INBOX.md`. Committed work lives in the tracker — see
 `SEAMAP.md` § Tracking.
 
@@ -11,6 +11,8 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
 - ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨ **START HERE NEXT SESSION** ✨🌟⭐✨🌟⭐✨🌟⭐✨🌟⭐ 🗺️🧭 Go over `notes/fleet-domain-map.html` with Jess and get it right! 🎯🔥 ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨
 
 - still happening post-tldraw upgrade: weird bug: `cards-jump-to-entry-position` occasionally, for no discernable reason, a bunch of Evelyn's cards return to the stack as if they were just played 😭. Full investigation log, ruled-out causes, and current instrumentation: `apps/tabletop/notes/RESEARCH-cards-jump-to-entry-position.md`.
+
+- `play-requires-spine` The Shuffler should fail to play a card when it can't tell the Spine (today `sendCardPlayed…BeforeMutate` is best-effort and play proceeds). Reverses "Spine calls never block play" and "Playable at all times"; decide what the player sees on failure, and whether `card.discarded`/`card.returned` follow. Shown as planned in `notes/fleet-domain-map.html`.
 
 - bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation
 
@@ -89,7 +91,7 @@ and I want to drop a card in between C and D, then the drop zone between them is
     `port-spine`: the gateway implements the port directly, with no adapter in between.
     `ScryfallCardImagesGateway implements CardImagesPort`
     (`src/port-card-images/ScryfallCardImagesGateway.ts:57`) and `FakeCardImagesGateway implements
-    CardImagesPort` (`src/port-card-images/FakeCardImagesGateway.ts:3`).
+CardImagesPort` (`src/port-card-images/FakeCardImagesGateway.ts:3`).
   - Per `notes/PATTERN-port-adapter-gateway.md` a gateway must not implement the port, and a fake
     belongs at adapter level, never gateway level — so `FakeCardImagesGateway` is misnamed the same
     way `FakeSpineGateway` was. Without an adapter there is nothing translating, which is what lets
@@ -221,6 +223,10 @@ and I want to drop a card in between C and D, then the drop zone between them is
     undo for a `card.returned`-caused move rather than round-tripping it, since undo never
     calls out to the Spine and the Tabletop would be left showing the card as returned.
   - The real fix: an UNDO event sent to the Spine, which tells the Tabletop what to restore.
-    That requires the original `card.returned` event to carry *where the card was before* (its
+    That requires the original `card.returned` event to carry _where the card was before_ (its
     prior position/zone on the canvas), which it doesn't today — the Tabletop needs that to put
     the card back rather than just removing it again.
+
+- someday when I re-implement the canvas library OK so restrict the size of the table so it ends at the edges of the play mats but at a right click option for enlarge table and when you do that it you know add some space around everybody's play mat in case you play 7000 fucking and when you click that it plays a sound we're gonna need a bigger table the end
+  - also choose table colors. Default to the cheesy fake wood pattern of Game Nite tables
+  - when you can scroll down w/o the infinite canvas, then your hand can be below the table and you can scroll down to see your hand.
