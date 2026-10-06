@@ -359,7 +359,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
       <tr><td><b>Flip / Transform / Face-down</b></td><td>"flip": private inspection of the other printed face, never leaves the Shuffler. Impossible on a one-faced card. Face-down is not modeled</td><td>"Transform": swap the printed face of a two-faced card, a physical event. Separately, "Turn face down/up": concealment (<code>faceDown</code> on the card shape), on every card</td><td><code>card.played-face-down</code> today; Tabletop gestures are not modeled yet</td></tr>
       <tr><td><b>Initiator</b></td><td colspan="2"><code>seatId</code>: the saved state, a player's place at the table. <code>sessionId</code>: one browser tab, whatever value each ship uses. <code>playerName</code>: for human readability. A Tabletop initiator without a seat is anonymous.</td><td>Validates the wire shape. Attribution, never authority</td></tr>
       <tr><td><b>Table</b></td><td>A card location: the cards on the shared table. The Shuffler tracks that a card is there, never what it does there (tapped, counters, position). The table name is data it carries and never interprets</td><td>The shared canvas, the same table the player sees</td><td>The unit that owns a log</td></tr>
-      <tr><td><b>Owner vs Initiator</b></td><td colspan="3"><code>owner</code> on card.played: whose deck the card is from. <code>initiator</code>: who caused the event.</td></tr>
+      <tr><td><b>card.owner and event.initiator</b></td><td colspan="3">Unrelated concepts. <code>card.owner</code> on card.played: whose deck the card is from. <code>event.initiator</code>: who caused the event. The two can name different players.</td></tr>
     </tbody>
   </table>
   </div>
