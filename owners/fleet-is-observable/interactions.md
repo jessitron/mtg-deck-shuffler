@@ -187,16 +187,18 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   `app.rb`; extract to a shared file if it keeps growing. `join.result` now distinguishes
   `"created"`, `"joined"`, and idempotent `"replayed"`; `event.result`'s dedup path remains
   `"duplicate"`, distinct from `"accepted"`. Don't collapse either vocabulary. **`POST /join`'s
-  input-attributes call also stamps `"game.id" => game_id`** on the same span that later gets
-  `seat.id`/`table.position`, correlating the Shuffler's incoming id with the Spine-minted seat id
-  on one span — asserted by `test_join_span_correlates_the_incoming_game_id_with_the_minted_seat_id`.
+  input-attributes call also stamps `"join.request_id" => join_request_id`** on the same span that later gets
+  `seat.id`/`table.position`, correlating the sender's opaque idempotency key (the Shuffler sends its
+  game id) with the Spine-minted seat id on one span — asserted by
+  `test_join_span_correlates_the_incoming_join_request_id_with_the_minted_seat_id`. Not `game.id`:
+  the Spine does not speak Shuffler.
 - **Asserting on Spine span attributes in a test**: use `CapturesSpans` (mixed into every
   `Minitest::Test` via `services/spine/test/test_helper.rb`) and read `finished_spans` — the
   Spine's first span-assertion test infra, an additive `InMemorySpanExporter` +
   `SimpleSpanProcessor` registered alongside `config/telemetry.rb`'s real exporter, reset in
   `before_setup`. Don't stand up a second exporter or hand-roll a fake span for this; reuse the
   pattern (`services/spine/test/integration/join_test.rb`'s
-  `test_join_span_correlates_the_incoming_game_id_with_the_minted_seat_id` is the first consumer).
+  `test_join_span_correlates_the_incoming_join_request_id_with_the_minted_seat_id` is the first consumer).
 - **The Spine's post-commit Tabletop notification** (`services/spine/lib/tabletop_notifier.rb`):
   keep it outside the join transaction and best-effort. Net::HTTP instrumentation owns the header;
   never hand-set `traceparent`. Inject body context only into the transient outbound copy, directly

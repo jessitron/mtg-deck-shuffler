@@ -6,7 +6,7 @@ Plain Ruby — Roda (routing only) + Sequel + SQLite + Minitest, no Rails. See
 rewrite from Rails, and `../../notes/DESIGN-event-contract-v0.md` for the contract this
 service enforces (schemas in `../../contracts/`).
 
-**Current status:** `GET /up`; idempotent, fully administered `POST /join`; contract-
+**Current status:** `GET /up`; idempotent (keyed by `joinRequestId`), fully administered `POST /join`, whose request and response are published contracts; contract-
 validated event ingestion (`POST /tables/:table_id/events`); live outbound delivery over
 SSE (`GET /tables/:table_id/events/stream`); and `/admin/tables` for reading the log.
 Joining records both seat identity and decoration in the Spine, then best-effort notifies

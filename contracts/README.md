@@ -1,6 +1,6 @@
 # contracts/ — the fleet's published language
 
-This documents events flowing between the Spine and each other ship.
+This documents what crosses the wire between the Spine and each other ship: the events flowing between them, and the request and response bodies of the Spine's HTTP calls (today, `POST /join`).
 
 Events are published to the Spine with a POST. Events are received from the Spine by SSE (server-sent events) subscription.
 
@@ -50,6 +50,13 @@ includes it validate.
   `traceparent` (optional W3C trace context, carried on the envelope itself since the
   outbound SSE stream has no header to ride — see the field's own description for why
   it's never required and never persisted).
+- `requests/<call>.v<version>.json` and `responses/<call>.v<version>.json` — the body a caller
+  sends to a Spine HTTP endpoint and the body it answers with, one schema per call per version,
+  named for the call (`join`). Versioned and extended by the same rules as payloads, with
+  `additionalProperties: true`. The Spine validates the request on receipt; the Shuffler's
+  tests validate its outgoing request and the response. `join.v1` documents `POST /join`:
+  `joinRequestId` is an opaque idempotency key ("this join attempt"), and the Spine never
+  learns what the sender's id stands for.
 - `payloads/<name>.v<schemaVersion>.json` — one schema per event kind per version. Each
   `name` versions its payload independently of the envelope and of every other `name`;
   the envelope's `schemaVersion` field says which payload schema applies to this event.
@@ -57,6 +64,8 @@ includes it validate.
 Related validation code:
 
 - apps/tabletop/src/server/contractValidation.ts
+- apps/shuffler/test/table-sync/contractValidation.ts
+- services/spine/lib/join_contract.rb
 - services/spine/lib/event_contract.rb
 
 ## Examples of events

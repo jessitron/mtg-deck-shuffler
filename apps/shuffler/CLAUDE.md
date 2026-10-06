@@ -253,7 +253,9 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   `https://mtg.jessitron.honeydemo.io`). Nothing on this ship talks to the Tabletop
   directly (see `SPINE_URL` below).
 - **Spine (`src/port-spine/`)**: the join request is idempotent, keyed by the
-  Shuffler's own `gameId` — a retry (network blip) or a resend of the same
+  Shuffler's own `gameId`, sent on the wire as the Spine's opaque `joinRequestId`
+  (never a fresh value per attempt, so it stays the same across retries and
+  `/restart-game`) — a retry (network blip) or a resend of the same
   `gameId` returns the same seat instead of minting a second one; the Spine does
   the recognizing, not the Shuffler. `/start-game` and `/yo` always join (one
   join per fresh game). `/restart-game` guards on `!tableInfo.spineSeatNumber`
@@ -274,8 +276,8 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
     `SpineJoinAdapter` owns the translation into the Spine's `/join` wire vocabulary
     (`spineWire.ts`), including the seat-decoration builders; `HttpSpineJoinAdapter` (real)
     and `FakeSpineJoinAdapter` (tests, and the in-memory seat-allocation policy — one table
-    per name, seats 1-4, gameId idempotence) subclass it and supply only submission.
-    `HttpSpineJoinGateway` is a thin, domain-ignorant `POST /join`.
+    per name, seats 1-4, idempotence by the request's `joinRequestId`) subclass it and supply only submission.
+    `HttpSpineJoinGateway` is a thin, domain-ignorant `POST /join`. The request and response bodies are published contracts (`contracts/requests/join.v1.json`, `contracts/responses/join.v1.json`); `test/table-sync/contractValidation.ts` validates them in `test/port-spine/join/`.
   - **`port-spine/events/`** — the event bus, **one port for both directions**.
     `SpineEventsPort` (`types.ts`) carries the send half —
     `announceCardPlayed`/`announceCardReturned`/`announceCardDiscarded`, taking a `TableSeat`

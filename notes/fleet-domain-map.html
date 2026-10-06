@@ -343,7 +343,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
     <div class="card" style="--c: var(--spine-bg)">
       <h3>Entities</h3>
       <ul><li><b>Table</b>: slug <code>&lt;name&gt;-&lt;8hex&gt;</code>, unique name</li>
-      <li><b>Seat</b>: number 1 to 4, tied to one Shuffler game id, so join is idempotent</li>
+      <li><b>Seat</b>: number 1 to 4, keyed by an opaque <code>joinRequestId</code> so join is idempotent</li>
       <li><b>Event</b>: one row per envelope</li></ul>
     </div>
   </div>
@@ -355,7 +355,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
   <table>
     <thead><tr><th>Term</th><th>Shuffler</th><th>Tabletop</th><th>Spine</th></tr></thead>
     <tbody>
-      <tr><td><b>Game / Seat</b></td><td>Game: one player's play session</td><td>Seat: a player's place at the table</td><td>Seat, 1 to 4 per Table. The Shuffler translates Game to Seat at the border</td></tr>
+      <tr><td><b>Game / Seat</b></td><td>Game: one player's play session</td><td>Seat: a player's place at the table</td><td>Seat, 1 to 4 per Table. The Shuffler translates Game to Seat at the border and sends its game id as the Spine's opaque <code>joinRequestId</code></td></tr>
       <tr><td><b>Flip</b></td><td>Inspect the other printed face. Impossible on a one-faced card</td><td>Turn the object over. On a one-faced card, that means face-down</td><td>Not an event yet</td></tr>
       <tr><td><b>Face-down</b></td><td>Not modeled</td><td><code>faceDown</code> on the card shape</td><td><code>card.played-face-down</code></td></tr>
       <tr><td><b>Initiator</b></td><td>{gameId, seatId, sessionId}</td><td>{seatId?, sessionId}, anonymous when unseated</td><td>Validates the wire shape. Attribution, never authority</td></tr>
@@ -418,7 +418,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
       <ul>
         <li>One append-only Spine event log per table <span class="tag code">code</span></li>
         <li>The Spine alone assigns seq and acceptedAt <span class="tag code">code</span></li>
-        <li>Join is idempotent per Shuffler game <span class="tag code">code</span></li>
+        <li>Join is idempotent per <code>joinRequestId</code> <span class="tag code">code</span></li>
         <li>Extra fields allowed, so ships deploy independently <span class="tag code">code</span></li>
         <li>Never replace, supersede <span class="tag plan">planned</span></li>
         <li>Visibility on every event, private events cast public shadows <span class="tag plan">planned</span></li>

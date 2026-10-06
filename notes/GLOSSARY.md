@@ -118,7 +118,9 @@ stale — see `GameState.ts` `CommandZoneLocation`.) Commanders always arrive at
 face up; a two-faced commander can be flipped in the command zone afterward, which is
 table-local play, not seating data. (Confirmed 2026-08-08, cards-come-and-go ticket 02.)
 
-Seat (spine): a player's place at a Table. A Shuffler Game connects to a Seat; a table has 1–4 of them.
+Seat (spine): a player's place at a Table. A Shuffler Game connects to a Seat; a table has 1–4 of them. A seat is keyed by an opaque Join Request ID, so a retried join returns the same seat.
+
+Join Request ID (spine): the opaque idempotency key on `POST /join` — "this particular join attempt". The Spine attaches no other meaning to it; the Shuffler sends its game id.
 
 Seat ID (Spine-minted): the identity of an **occupancy** — a Shuffler game's connection to a
 table position at a table — minted by the Spine

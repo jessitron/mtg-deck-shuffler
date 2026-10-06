@@ -33,7 +33,7 @@ lazily as terms get resolved).
 A **Game** in the Shuffler is the active gameplay session tracking one player's card positions.
 It corresponds to a **Seat** at a **Table** in the Spine and Tabletop's vocabulary — a player's
 place at the shared table. "Game" keeps its Shuffler meaning inside that context; the Shuffler
-translates itself into "seat" at the boundary (`seat.joined`, `seatId`). See `notes/GLOSSARY.md`'s
+translates itself into "seat" at the boundary (`seat.joined`, `seatId`). The Spine never sees the word Game: the Shuffler sends its game id as `/join`'s opaque `joinRequestId`, an idempotency key meaning "this join attempt" (`contracts/requests/join.v1.json`). See `notes/GLOSSARY.md`'s
 "Game (MTG Deck Shuffler)" and "Seat" entries.
 
 ### Flip / Face-down
