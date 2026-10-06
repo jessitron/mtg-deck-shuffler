@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>scryfallId → cardDefinitionId: the plan & the deploy</title>
+<style>
+  :root {
+    --ink: #1f2430; --muted: #6b7080; --paper: #fbfaf7; --line: #d9d6cf;
+    --shuffler: #3d6fb6; --spine: #8a5a2b; --tabletop: #2f8a5f;
+    --old: #b54747; --new: #2f8a5f; --warn: #c98a16;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; color: var(--ink); background: var(--paper);
+         max-width: 1040px; margin: 0 auto; padding: 32px 24px 80px; line-height: 1.4; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  h2 { font-size: 20px; margin: 48px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  .sub { color: var(--muted); margin: 0 0 24px; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: 0.92em; background: #efece5; padding: 1px 5px; border-radius: 4px; }
+  svg { display: block; width: 100%; height: auto; }
+  svg text { font-family: system-ui, -apple-system, sans-serif; }
+  .mono { font-family: ui-monospace, Menlo, monospace; }
+  .card { background: white; border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+  .grid { display: grid; gap: 12px; }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  .tile { border-radius: 10px; padding: 14px; color: white; min-height: 110px; }
+  .tile b { display: block; font-size: 15px; margin-bottom: 6px; }
+  .tile small { opacity: 0.9; font-size: 13px; }
+  pre { background: #1f2430; color: #e9e6df; padding: 12px 14px; border-radius: 8px; overflow-x: auto; font-size: 13px; margin: 8px 0 0; }
+  .step { display: grid; grid-template-columns: 48px 1fr; gap: 14px; align-items: start; margin: 14px 0; }
+  .num { width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: white; display: grid;
+         place-items: center; font-weight: 700; font-size: 18px; }
+  .step .what { font-weight: 600; }
+  .step .why { color: var(--muted); font-size: 14px; }
+  .pill { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 99px; color: white; vertical-align: middle; }
+  .opt { background: var(--muted); }
+  .must { background: var(--old); }
+  .check li { list-style: none; margin: 4px 0; }
+  .check li::before { content: "☐ "; }
+</style>
+</head>
+<body>
+
+<h1>🃏 <span class="mono">scryfallId</span> → <span class="mono">cardDefinitionId</span></h1>
+<p class="sub">A card's identity is its <b>card definition</b>. Scryfall is one place definitions come from. Custom cards from Archidekt come later.</p>
+
+<!-- ============ 1. THE IDEA ============ -->
+<h2>1 · The idea</h2>
+<div class="card">
+<svg viewBox="0 0 960 230" role="img" aria-label="Before: scryfallId everywhere. After: cardDefinitionId inside, scryfallId only at the Scryfall edge.">
+  <!-- before -->
+  <text x="20" y="28" font-size="15" font-weight="700" fill="var(--old)">BEFORE</text>
+  <rect x="20" y="40" width="420" height="170" rx="12" fill="#fbeeee" stroke="var(--old)"/>
+  <text x="230" y="70" text-anchor="middle" font-size="13" fill="var(--muted)">our whole fleet</text>
+  <g font-size="13" class="mono" fill="var(--old)">
+    <text x="50" y="105">scryfallId</text><text x="180" y="125">scryfallId</text>
+    <text x="300" y="100">scryfallId</text><text x="80" y="160">scryfallId</text>
+    <text x="230" y="175">scryfallId</text><text x="330" y="150">scryfallId</text>
+  </g>
+  <text x="230" y="200" text-anchor="middle" font-size="12" fill="var(--muted)">code · SQLite · events · spans · shapes</text>
+
+  <!-- arrow -->
+  <path d="M455 125 L505 125" stroke="var(--ink)" stroke-width="3" marker-end="url(#a)"/>
+
+  <!-- after -->
+  <text x="520" y="28" font-size="15" font-weight="700" fill="var(--new)">AFTER</text>
+  <rect x="520" y="40" width="300" height="170" rx="12" fill="#ecf6f0" stroke="var(--new)"/>
+  <text x="670" y="70" text-anchor="middle" font-size="13" fill="var(--muted)">our whole fleet</text>
+  <text x="670" y="125" text-anchor="middle" font-size="18" font-weight="700" class="mono" fill="var(--new)">cardDefinitionId</text>
+  <text x="670" y="150" text-anchor="middle" font-size="12" fill="var(--muted)">(still a UUID — same value for Scryfall cards)</text>
+  <!-- edge -->
+  <rect x="830" y="85" width="115" height="80" rx="10" fill="white" stroke="var(--line)" stroke-dasharray="4 3"/>
+  <text x="887" y="112" text-anchor="middle" font-size="12" fill="var(--muted)">edges</text>
+  <text x="887" y="132" text-anchor="middle" font-size="11" class="mono">Scryfall API</text>
+  <text x="887" y="148" text-anchor="middle" font-size="11" class="mono">MTGJSON, Archidekt</text>
+  <path d="M820 125 L830 125" stroke="var(--muted)" stroke-width="2"/>
+  <text x="887" y="185" text-anchor="middle" font-size="11" class="mono" fill="var(--old)">scryfallId stays here</text>
+
+  <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0 0 L10 5 L0 10 z" fill="var(--ink)"/></marker></defs>
+</svg>
+</div>
+
+<!-- ============ 2. WHAT CHANGES WHERE ============ -->
+<h2>2 · What changes where</h2>
+<div class="card">
+<svg viewBox="0 0 960 330" role="img" aria-label="Three ships and the events between them, with what changes in each.">
+  <defs><marker id="b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0 0 L10 5 L0 10 z" fill="var(--ink)"/></marker></defs>
+
+  <!-- ships -->
+  <rect x="20" y="20" width="250" height="290" rx="14" fill="#edf2fa" stroke="var(--shuffler)" stroke-width="2"/>
+  <text x="145" y="50" text-anchor="middle" font-size="17" font-weight="700" fill="var(--shuffler)">🃏 Shuffler</text>
+  <g font-size="13" fill="var(--ink)">
+    <text x="40" y="85">▸ CardDefinition type</text>
+    <text x="40" y="110">▸ card repository column</text>
+    <text x="40" y="135">▸ saved games  v11 → v12</text>
+    <text x="40" y="160">▸ preps  v3 → v4</text>
+    <text x="40" y="185">▸ decks  v3 → v4</text>
+    <text x="40" y="210">▸ 198 deck files rewritten</text>
+    <text x="40" y="235">▸ views, game.js</text>
+    <text x="40" y="260">▸ span attributes</text>
+  </g>
+
+  <rect x="355" y="90" width="250" height="150" rx="14" fill="#f6efe7" stroke="var(--spine)" stroke-width="2"/>
+  <text x="480" y="120" text-anchor="middle" font-size="17" font-weight="700" fill="var(--spine)">🦴 Spine</text>
+  <g font-size="13" fill="var(--ink)">
+    <text x="375" y="155">▸ knows v2 schemas</text>
+    <text x="375" y="180">▸ stamps seat.joined v2</text>
+    <text x="375" y="205">▸ (barely touched)</text>
+  </g>
+
+  <rect x="690" y="20" width="250" height="290" rx="14" fill="#eaf5ef" stroke="var(--tabletop)" stroke-width="2"/>
+  <text x="815" y="50" text-anchor="middle" font-size="17" font-weight="700" fill="var(--tabletop)">🪵 Tabletop</text>
+  <g font-size="13" fill="var(--ink)">
+    <text x="710" y="85">▸ mtg-card shape prop</text>
+    <text x="710" y="110">▸ validators: v2 only</text>
+    <text x="710" y="135">▸ card.returned sender</text>
+    <text x="710" y="160">▸ span attributes</text>
+    <text x="710" y="210" fill="var(--muted)">images: unchanged —</text>
+    <text x="710" y="230" fill="var(--muted)">URLs arrive in payload</text>
+  </g>
+
+  <!-- arrows -->
+  <path d="M270 140 L352 140" stroke="var(--ink)" stroke-width="2" marker-end="url(#b)"/>
+  <path d="M605 140 L687 140" stroke="var(--ink)" stroke-width="2" marker-end="url(#b)"/>
+  <path d="M687 200 L605 200" stroke="var(--ink)" stroke-width="2" marker-end="url(#b)"/>
+  <path d="M352 200 L270 200" stroke="var(--ink)" stroke-width="2" marker-end="url(#b)"/>
+  <text x="311" y="130" text-anchor="middle" font-size="11" fill="var(--muted)">played</text>
+  <text x="646" y="130" text-anchor="middle" font-size="11" fill="var(--muted)">played</text>
+  <text x="646" y="220" text-anchor="middle" font-size="11" fill="var(--muted)">returned</text>
+  <text x="311" y="220" text-anchor="middle" font-size="11" fill="var(--muted)">returned</text>
+
+  <!-- contracts band -->
+  <rect x="300" y="268" width="360" height="48" rx="10" fill="white" stroke="var(--ink)" stroke-dasharray="5 3"/>
+  <text x="480" y="288" text-anchor="middle" font-size="13" font-weight="700">📜 contracts → v2 (v1 deleted)</text>
+  <text x="480" y="306" text-anchor="middle" font-size="11" class="mono" fill="var(--muted)">played · played-face-down · discarded · returned · seat.joined</text>
+</svg>
+</div>
+
+<!-- ============ 3. CLEAN BREAK ============ -->
+<h2>3 · Clean break — what resets</h2>
+<div class="grid g4">
+  <div class="tile" style="background:var(--shuffler)"><b>💾 Saved games</b><small>"older, incompatible format — start a new game"</small></div>
+  <div class="tile" style="background:var(--shuffler)"><b>📋 Preps</b><small>refused as old version</small></div>
+  <div class="tile" style="background:var(--shuffler)"><b>🗃️ Card cache</b><small>dropped &amp; rebuilt by itself</small></div>
+  <div class="tile" style="background:var(--spine)"><b>📜 Old v1 events</b><small>unreadable — wipe the Spine DB</small></div>
+</div>
+<p style="color:var(--muted);font-size:14px">No v1 compatibility anywhere. Nobody is playing during the deploy, so nothing is lost that matters.</p>
+
+<!-- ============ 4. STATUS ============ -->
+<h2>4 · Where it stands</h2>
+<div class="card">
+<svg viewBox="0 0 960 120" role="img" aria-label="Progress: plan done, owner review and implementation in progress, merge and deploy pending.">
+  <g font-size="13" text-anchor="middle">
+    <line x1="80" y1="45" x2="880" y2="45" stroke="var(--line)" stroke-width="4"/>
+    <line x1="80" y1="45" x2="240" y2="45" stroke="var(--new)" stroke-width="4"/>
+    <circle cx="80" cy="45" r="16" fill="var(--new)"/><text x="80" y="50" fill="white" font-weight="700">✓</text>
+    <text x="80" y="88">plan</text>
+    <circle cx="240" cy="45" r="16" fill="var(--warn)"/><text x="240" y="50" fill="white" font-weight="700">…</text>
+    <text x="240" y="88">owner reviews</text>
+    <circle cx="400" cy="45" r="16" fill="var(--warn)"/><text x="400" y="50" fill="white" font-weight="700">…</text>
+    <text x="400" y="88">rename + tests</text>
+    <circle cx="560" cy="45" r="16" fill="white" stroke="var(--line)" stroke-width="3"/>
+    <text x="560" y="88">merge to main</text>
+    <circle cx="720" cy="45" r="16" fill="white" stroke="var(--line)" stroke-width="3"/>
+    <text x="720" y="88">suite green on main</text>
+    <circle cx="880" cy="45" r="16" fill="white" stroke="var(--line)" stroke-width="3"/>
+    <text x="880" y="88" font-weight="700">🚀 you deploy</text>
+  </g>
+  <text x="320" y="112" text-anchor="middle" font-size="11" fill="var(--muted)">a subagent is doing this in its own worktree</text>
+</svg>
+</div>
+
+<!-- ============ 5. DEPLOY ============ -->
+<h2>5 · Deploy runbook</h2>
+
+<div class="card">
+<svg viewBox="0 0 960 110" role="img" aria-label="Deploy order: quiet table check, Spine, Shuffler, Tabletop, wipe databases, smoke test.">
+  <defs><marker id="c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0 0 L10 5 L0 10 z" fill="var(--ink)"/></marker></defs>
+  <g font-size="13" text-anchor="middle" font-weight="600">
+    <rect x="10"  y="25" width="130" height="56" rx="10" fill="#efece5"/><text x="75"  y="58">🤫 nobody playing</text>
+    <rect x="170" y="25" width="130" height="56" rx="10" fill="var(--spine)"/><text x="235" y="58" fill="white">🦴 Spine</text>
+    <rect x="330" y="25" width="130" height="56" rx="10" fill="var(--shuffler)"/><text x="395" y="58" fill="white">🃏 Shuffler</text>
+    <rect x="490" y="25" width="130" height="56" rx="10" fill="var(--tabletop)"/><text x="555" y="58" fill="white">🪵 Tabletop</text>
+    <rect x="650" y="25" width="130" height="56" rx="10" fill="var(--old)"/><text x="715" y="58" fill="white">🧹 wipe DBs</text>
+    <rect x="810" y="25" width="140" height="56" rx="10" fill="var(--new)"/><text x="880" y="58" fill="white">✅ smoke test</text>
+  </g>
+  <g stroke="var(--ink)" stroke-width="2">
+    <path d="M140 53 L167 53" marker-end="url(#c)"/><path d="M300 53 L327 53" marker-end="url(#c)"/>
+    <path d="M460 53 L487 53" marker-end="url(#c)"/><path d="M620 53 L647 53" marker-end="url(#c)"/>
+    <path d="M780 53 L807 53" marker-end="url(#c)"/>
+  </g>
+  <path d="M170 95 L620 95" stroke="var(--muted)" stroke-width="1.5"/>
+  <text x="395" y="108" text-anchor="middle" font-size="11" fill="var(--muted)">one command: ./deploy.sh — ships disagree for a few minutes; that's fine with no one playing</text>
+</svg>
+</div>
+
+<div class="step"><div class="num">1</div><div>
+  <div class="what">Make sure main is green and nobody is at a table</div>
+  <pre>git log --oneline -5      # the rename merge is there
+npm test                  # from the repo root</pre>
+</div></div>
+
+<div class="step"><div class="num">2</div><div>
+  <div class="what">Deploy the fleet</div>
+  <pre>./deploy.sh               # Spine → Shuffler → Tabletop, stops on first failure</pre>
+</div></div>
+
+<div class="step"><div class="num">3</div><div>
+  <div class="what">Wipe the databases <span class="pill must">Spine: do it</span> <span class="pill opt">Shuffler: optional</span></div>
+  <div class="why">Spine's log holds v1 events nothing can read now. The Shuffler cleans itself up; wipe it only for a fresh start.</div>
+  <pre>kubectl exec deploy/spine -- sh -c 'rm -f /data/spine.db /data/spine.db-wal /data/spine.db-shm'
+kubectl rollout restart deploy/spine
+
+# optional
+kubectl exec deploy/mtg-deck-shuffler -- sh -c 'rm -f /data/data.db /data/data.db-wal /data/data.db-shm'
+kubectl rollout restart deploy/mtg-deck-shuffler</pre>
+</div></div>
+
+<div class="step"><div class="num">4</div><div>
+  <div class="what">Smoke test</div>
+  <ul class="check">
+    <li>load a precon, start a game, cards show images</li>
+    <li>join a table, commander lands on the Tabletop</li>
+    <li>play a card to the table → it appears</li>
+    <li>drag it back off the table → Shuffler gets it</li>
+    <li>flip a two-faced card</li>
+  </ul>
+</div></div>
+
+<div class="step"><div class="num">5</div><div>
+  <div class="what">Check Honeycomb <span class="mono" style="font-size:13px">env: mtg-deck-shuffler</span></div>
+  <div class="card" style="margin-top:8px">
+  <svg viewBox="0 0 700 90" role="img" aria-label="Expect card.definition_id present and card.scryfall_id absent on new spans, and no contract validation failures.">
+    <g font-size="13">
+      <text x="10"  y="25" class="mono">card.definition_id</text><text x="260" y="25" fill="var(--new)" font-weight="700">✓ on new spans</text>
+      <text x="10"  y="52" class="mono">card.scryfall_id</text><text x="260" y="52" fill="var(--old)" font-weight="700">✗ gone after deploy</text>
+      <text x="10"  y="79" class="mono">contract validation failures</text><text x="260" y="79" fill="var(--new)" font-weight="700">0</text>
+    </g>
+  </svg>
+  </div>
+  <div class="why">Any board or query that groups by <code>card.scryfall_id</code> needs the new name.</div>
+</div></div>
+
+<!-- ============ 6. AFTER ============ -->
+<h2>6 · Then</h2>
+<div class="card">
+<svg viewBox="0 0 960 90" role="img" aria-label="Next: custom Archidekt cards, with cardSource attribute.">
+  <rect x="20" y="15" width="260" height="60" rx="10" fill="var(--new)"/>
+  <text x="150" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="white">✓ cardDefinitionId</text>
+  <path d="M285 45 L345 45" stroke="var(--ink)" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="350" y="15" width="300" height="60" rx="10" fill="white" stroke="var(--ink)" stroke-dasharray="5 3"/>
+  <text x="500" y="40" text-anchor="middle" font-size="14" font-weight="700">🐸 Archidekt custom cards</text>
+  <text x="500" y="60" text-anchor="middle" font-size="12" fill="var(--muted)">UUIDv5 id · cardSource · Archidekt images</text>
+  <text x="680" y="50" font-size="12" fill="var(--muted)">Squid Sword ⚔️ gets to the table</text>
+</svg>
+</div>
+
+</body>
+</html>
