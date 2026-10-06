@@ -159,6 +159,11 @@ Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernit
 
 - **Local tests**: environment `local`.
 - **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).**before** `.env`, or OTLP export silently 401s ("unknown API key"). The `verify.sh` scripts source both in that order; if you start a server by hand for telemetry, do the same.
+- **Is anyone playing?** Check the board "Is Someone Playing Right Now?" (`list_boards`
+  board_id `iFWhpa9AFeC`, env `mtg-deck-shuffler`) before deploying. Its saved results
+  go stale — re-run its panels over `-2h` with `run_query`. "Who is playing?"
+  (`mtg-tabletop`, COUNT by `table.name`, `player.name` where `table.name` exists) is the
+  direct answer; empty means nobody's at a table.
 
 - **Recording that something happened**: put it on the span as **attributes** — always the
   first choice, and free in Honeycomb. When there's no live span to hang it on (startup,
