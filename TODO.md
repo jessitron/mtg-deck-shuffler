@@ -14,6 +14,8 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
 
 - `play-requires-spine` The Shuffler should fail to play a card when it can't tell the Spine (today `sendCardPlayed…BeforeMutate` is best-effort and play proceeds). Reverses "Spine calls never block play" and "Playable at all times"; decide what the player sees on failure, and whether `card.discarded`/`card.returned` follow. Shown as planned in `notes/fleet-domain-map.html`.
 
+- `seat-id-on-every-span` The Shuffler should stamp `seat.id` on every game-scoped Honeycomb span next to `game.game_id`, so one seat can be followed across ships. Today `seat.id` is set once, at join (`apps/shuffler/src/app.ts`, join handler); the other spans carry only `game.game_id`. Likewise `player.name` where known.
+
 - bug: when a card is tapped, the counter on it animates... wrong. It does weird wiggly things instead of rotating properly with the card. Maybe rethink the card animation
 
 - before I deploy Tabletop, I need to check whether anyone is playing! Because it will lose their game! Board: https://ui.honeycomb.io/modernity/environments/mtg-deck-shuffler/board/iFWhpa9AFeC/Is-Someone-Playing-Right-Now ... how can I make that part of the procedure?
