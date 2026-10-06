@@ -8,7 +8,7 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
 
 ## Next
 
-- ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨ **START HERE NEXT SESSION** ✨🌟⭐✨🌟⭐✨🌟⭐✨🌟⭐ 🗺️🧭 Go over `notes/fleet-domain-map.html` with Jess and get it right! 🎯🔥 ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨
+- ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨ **START HERE NEXT SESSION** ✨🌟⭐✨🌟⭐✨🌟⭐✨🌟⭐ 🗺️🧭 Go over `notes/fleet-domain-map.html` with Jess and get it right! 🎯🔥 Reviewed through the "Same word, different meaning" table; resume at "Principles and invariants" (start with the two `stated` fleet principles: players adjudicate; physics on the Tabletop, meaning in the Interpreter), then "Where the story and the code disagree". Also owed: smoke-test the three-ship flow with `./run` from the root after the `joinRequestId` rename. ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨
 
 - still happening post-tldraw upgrade: weird bug: `cards-jump-to-entry-position` occasionally, for no discernable reason, a bunch of Evelyn's cards return to the stack as if they were just played 😭. Full investigation log, ruled-out causes, and current instrumentation: `apps/tabletop/notes/RESEARCH-cards-jump-to-entry-position.md`.
 
