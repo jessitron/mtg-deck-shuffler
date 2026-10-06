@@ -48,7 +48,7 @@ function seatJoined(tableName: string, envelopeOverrides: Record<string, unknown
     origin: "shuffler.shuffleUp",
     significance: "administrative",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       deckName: "Blame Game",
       playmatImageUrl: "https://example.com/playmat.png",
@@ -319,11 +319,25 @@ describe("seat joined", () => {
     expect(response.status).toBe(400);
     expect((await response.json()).error).toContain("99");
   });
+
+  it("rejects a v1 seat.joined, whose commanders named the card scryfallId", async () => {
+    const commanders = [
+      {
+        card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
+        cardName: "Atraxa",
+        frontImageUrl: "https://example.com/atraxa.jpg",
+        backImageUrl: null,
+      },
+    ];
+    const response = await post("seat-v1", seatJoined("seat-v1", { schemaVersion: 1 }, { commanders }));
+    expect(response.status).toBe(400);
+    expect((await response.json()).error).toContain("unknown schemaVersion 1");
+  });
 });
 
 describe("seat joined — commanders", () => {
   function commanderEntry(cardName: string, frontImageUrl: string) {
-    return { card: { scryfallId: randomUUID(), instanceId: randomUUID() }, cardName, frontImageUrl, backImageUrl: null };
+    return { card: { cardDefinitionId: randomUUID(), instanceId: randomUUID() }, cardName, frontImageUrl, backImageUrl: null };
   }
 
   function seatJoinedWithCommanders(tableName: string, commanders: unknown[], payloadOverrides: Record<string, unknown> = {}) {
@@ -417,7 +431,7 @@ describe("seat joined — commanders", () => {
 
 describe("seat joined — commander damage counters", () => {
   function commanderEntry(cardName: string, frontImageUrl: string) {
-    return { card: { scryfallId: randomUUID(), instanceId: randomUUID() }, cardName, frontImageUrl, backImageUrl: null };
+    return { card: { cardDefinitionId: randomUUID(), instanceId: randomUUID() }, cardName, frontImageUrl, backImageUrl: null };
   }
 
   function damageCountersOf(tableName: string) {

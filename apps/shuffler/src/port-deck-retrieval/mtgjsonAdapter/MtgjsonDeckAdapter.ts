@@ -71,7 +71,7 @@ export class MtgjsonDeckAdapter {
 
     const cardDefinition: CardDefinition = {
       name: mtgjsonCard.name,
-      scryfallId: mtgjsonCard.identifiers.scryfallId || "",
+      cardDefinitionId: mtgjsonCard.identifiers.scryfallId || "",
       multiverseid: mtgjsonCard.identifiers.multiverseId
         ? parseInt(mtgjsonCard.identifiers.multiverseId, 10)
         : undefined,

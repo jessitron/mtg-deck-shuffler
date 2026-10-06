@@ -60,7 +60,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     fakeTable = undefined;
   });
 
-  test("a card.returned.v1 arrival, once applied, pushes game-state-updated to every open browser tab for that game", async () => {
+  test("a card.returned.v2 arrival, once applied, pushes game-state-updated to every open browser tab for that game", async () => {
     fakeTable = createFakeSpineTable();
     const tableId = `table-${randomUUID()}`;
     const { persistStatePort, cardRepository, gameId } = await setUp(tableId);
@@ -78,7 +78,7 @@ describe("browser SSE tab tracking + Spine subscription teardown (ticket 04)", (
     const game = await loadGame(persistStatePort, cardRepository, gameId);
     const libraryCard = game.listLibrary()[0];
     const versionBefore = game.getStateVersion();
-    fakeTable.publish(cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.scryfallId));
+    fakeTable.publish(cardReturnedEvent(tableId, libraryCard.gameCardIndex, libraryCard.card.cardDefinitionId));
 
     await waitUntil(() => tabOne.received.length === 1 && tabTwo.received.length === 1);
     expect(tabOne.received[0]).toContain("game-state-updated");

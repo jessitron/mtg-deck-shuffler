@@ -16,7 +16,7 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
     origin: "shuffler.playCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
@@ -39,7 +39,7 @@ function seatJoined(tableId: string, seatId: string, playerName: string) {
     origin: "shuffler.shuffleUp",
     significance: "administrative",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: { deckName: "Blame Game" },
   };
 }
@@ -86,7 +86,7 @@ test("dragging a card over a zone arms it (box-shadow ring), and disarms it once
   const instanceId = randomUUID();
   const event = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: randomUUID(), instanceId },
+    card: { cardDefinitionId: randomUUID(), instanceId },
   });
   const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);
@@ -134,7 +134,7 @@ test("dragging your own commander over your command zone arms it", async ({ page
   const instanceId = randomUUID();
   const event = cardPlayed(tableSlug, {
     cardName: "Atraxa, Praetors' Voice",
-    card: { scryfallId: randomUUID(), instanceId },
+    card: { cardDefinitionId: randomUUID(), instanceId },
     isCommander: true,
   });
   const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
@@ -173,7 +173,7 @@ test("dragging a non-commander card over your command zone does not arm it", asy
   const instanceId = randomUUID();
   const event = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: randomUUID(), instanceId },
+    card: { cardDefinitionId: randomUUID(), instanceId },
     isCommander: false,
   });
   const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
@@ -218,7 +218,7 @@ test("dragging another player's commander over your command zone does not arm it
   const instanceId = randomUUID();
   const event = cardPlayed(tableSlug, {
     cardName: "Atraxa, Praetors' Voice",
-    card: { scryfallId: randomUUID(), instanceId },
+    card: { cardDefinitionId: randomUUID(), instanceId },
     isCommander: true,
     owner: otherSeatId,
   });
@@ -231,7 +231,7 @@ test("dragging another player's commander over your command zone does not arm it
 
   const ownEvent = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: randomUUID(), instanceId: randomUUID() },
+    card: { cardDefinitionId: randomUUID(), instanceId: randomUUID() },
   });
   const ownResponse = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: ownEvent });
   expect(ownResponse.status()).toBe(201);
@@ -271,12 +271,12 @@ test("dragging a multi-card selection arms only the one zone under the pointer, 
 
   const instanceIdA = randomUUID();
   const instanceIdB = randomUUID();
-  for (const [instanceId, scryfallId] of [
+  for (const [instanceId, cardDefinitionId] of [
     [instanceIdA, randomUUID()],
     [instanceIdB, randomUUID()],
   ]) {
     const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, {
-      data: cardPlayed(tableSlug, { cardName: "Llanowar Elves", card: { scryfallId, instanceId } }),
+      data: cardPlayed(tableSlug, { cardName: "Llanowar Elves", card: { cardDefinitionId, instanceId } }),
     });
     expect(response.status()).toBe(201);
   }
@@ -333,7 +333,7 @@ test("the armed glow is local to the dragging player, never synced to another cl
     const instanceId = randomUUID();
     const event = cardPlayed(tableSlug, {
       cardName: "Llanowar Elves",
-      card: { scryfallId: randomUUID(), instanceId },
+      card: { cardDefinitionId: randomUUID(), instanceId },
     });
     const response = await pageA.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
     expect(response.status()).toBe(201);

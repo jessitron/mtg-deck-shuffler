@@ -64,7 +64,7 @@ class AdminScreenTest < Minitest::Test
       "deckName" => "Admin Deck", "playmatImageUrl" => "https://images.example/playmat.jpg",
       "sleeveColor" => "#a1b2c3", "gameUrl" => "https://shuffler.example/game/admin",
       "commanders" => [{
-        "card" => { "scryfallId" => "00000000-0000-4000-8000-000000000001",
+        "card" => { "cardDefinitionId" => "00000000-0000-4000-8000-000000000001",
           "instanceId" => "10000000-0000-4000-8000-000000000001" },
         "cardName" => "Commander", "frontImageUrl" => "https://images.example/front.jpg",
         "backImageUrl" => nil

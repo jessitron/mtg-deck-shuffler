@@ -7,7 +7,7 @@ Every card has:
 - `twoFaced: boolean` — whether the card has a separate back image (drives the flip button)
 - `cardTypes: string[]` — the union of every face's/part's types (e.g. `["Legendary","Creature","Planeswalker"]`)
 
-Plus identity fields: `name`, `scryfallId`, `multiverseid?`, `oracleCardName`, `colorIdentity`, `set`. There is **no** `CardFace`/`backFace` and no `manaCost`/`cmc`/`oracleText` — those were removed (commit `f76b49c`) since the card is displayed as a Scryfall image and nothing read them. The flip button needs only `twoFaced` + `scryfallId`; library grouping needs only `cardTypes`.
+Plus identity fields: `name`, `cardDefinitionId` (a Scryfall printing id; renamed from `scryfallId` in `0a6c52dd`), `multiverseid?`, `oracleCardName`, `colorIdentity`, `set`. There is **no** `CardFace`/`backFace` and no `manaCost`/`cmc`/`oracleText` — those were removed (commit `f76b49c`) since the card is displayed as a Scryfall image and nothing read them. The flip button needs only `twoFaced` + `cardDefinitionId`; library grouping needs only `cardTypes`.
 
 ### GameCard (`src/port-persist-state/types.ts:72-78`)
 Runtime game state tracks:
@@ -152,14 +152,14 @@ Two functions now exist:
 
 **Why stored URLs:** the bare constructed `normal` URL 404s for very recently released cards (e.g. Arcane Signet, set ECC) — Scryfall only serves them at the **versioned** URL (`...jpg?<timestamp>`). The stored URLs are copied verbatim from Scryfall (so they carry the `?<version>` tag).
 
-`CardDefinition` carries two **optional** fields for this: `imageUris?: CardImageUris` (front/only face) and `backImageUris?: CardImageUris` (present only when `twoFaced`). `CardImageUris = Partial<Record<ImageFormat, string>>`, storing only the formats the app uses (`normal`, `large`, `png`, `art_crop`). Both faces still share **one** `scryfallId`; the back is no longer derived by path-swapping the same id at render — it comes from `card_faces[1].image_uris` at ingestion. The fields are optional with a graceful fallback, so legacy data (no stored URLs) still renders via construction.
+`CardDefinition` carries two **optional** fields for this: `imageUris?: CardImageUris` (front/only face) and `backImageUris?: CardImageUris` (present only when `twoFaced`). `CardImageUris = Partial<Record<ImageFormat, string>>`, storing only the formats the app uses (`normal`, `large`, `png`, `art_crop`). Both faces still share **one** `cardDefinitionId`; the back is no longer derived by path-swapping the same id at render — it comes from `card_faces[1].image_uris` at ingestion. The fields are optional with a graceful fallback, so legacy data (no stored URLs) still renders via construction.
 
 ### Image enrichment at ingestion (`src/port-card-images/`)
 A new port fetches Scryfall image URLs by scryfallId:
 - `CardImagesPort` / `FetchedCardImages` (`{front, back?}`) — `types.ts`
 - `ScryfallCardImagesGateway` — batches `POST https://api.scryfall.com/cards/collection` (75 ids/request, caches across calls, sends `User-Agent`+`Accept` headers Scryfall requires). Pure mapper `mapScryfallCardToImages`: single-faced reads top-level `image_uris`; genuine DFCs read `card_faces[0].image_uris` (front) and `card_faces[1].image_uris` (back).
 - `FakeCardImagesGateway` — test fake (synthesizes deterministic versioned URLs, or seed specific ids).
-- `enrichDeckWithImages(deck, port)` — collects unique scryfallIds, fetches, attaches `imageUris` to every card and `backImageUris` only to `twoFaced` cards. Best-effort: cards Scryfall doesn't return are left unset → fallback.
+- `enrichDeckWithImages(deck, port)` — collects unique `cardDefinitionId`s, passes them to the port as Scryfall ids, fetches, attaches `imageUris` to every card and `backImageUris` only to `twoFaced` cards. Best-effort: cards Scryfall doesn't return are left unset → fallback.
 
 Enrichment runs: Archidekt adapter (optional injected `imagesPort`, wired in `server.ts` + `download-deck` script), and the `fetch-mtgjson-precons` script after conversion. The MTGJSON adapter's `convertMtgjsonToDeck` stays synchronous (enrichment is a separate post-pass).
 

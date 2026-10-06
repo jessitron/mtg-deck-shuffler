@@ -8,6 +8,8 @@ How library search connects to other parts of the app.
 - Game route needs `persistStatePort.retrieve(gameId)` to load game state
 - Prep route needs `persistPrepPort.retrievePrep(prepId)` to load prep
 - Game route reconstructs `GameState` via `GameState.fromPersistedGameState(persisted, cardRepository)` — since JES-127 this also mints `cardInstanceId` on load for old saves (optional field, no version bump, signature unchanged). Harmless to library search: reads that never save just re-mint until some action persists.
+- Card repository is keyed by `card_definition_id` (`CardDefinition.cardDefinitionId`, formerly `scryfallId`); library search never reads the id.
+- An old-version game or prep throws on load: `IncompatibleStateVersionError` from `GameState.fromPersistedGameState`, `IncompatiblePrepVersionError` from `retrievePrep`. The library modal routes have no special case for these, so a stale id reaching `/library-modal` or `/prep-library-modal` gets the generic 500 "Error loading library", not a 404. The prep page 404s first (`/prep-table-look`), so the prep modal is hard to reach.
 - Card data must include `cardTypes: string[]` (union of all faces' types) and optionally `colorIdentity`
 
 ### GameState Model

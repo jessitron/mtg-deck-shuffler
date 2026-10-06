@@ -20,13 +20,13 @@ describe("enrichDeckWithImages", () => {
     const deck = deckOf([], [{ ...lightningBolt }]);
     await enrichDeckWithImages(deck, new FakeCardImagesGateway());
 
-    expect(deck.cards[0].imageUris?.normal).toBe(`https://fake.scryfall/normal/${lightningBolt.scryfallId}.jpg?fake`);
+    expect(deck.cards[0].imageUris?.normal).toBe(`https://fake.scryfall/normal/${lightningBolt.cardDefinitionId}.jpg?fake`);
     expect(deck.cards[0].backImageUris).toBeUndefined();
   });
 
   it("attaches back image URLs only to two-faced cards", async () => {
     const seeded = new Map([
-      [nicolBolas.scryfallId, { front: { normal: "front.jpg?1" }, back: { normal: "back.jpg?1" } }],
+      [nicolBolas.cardDefinitionId, { front: { normal: "front.jpg?1" }, back: { normal: "back.jpg?1" } }],
     ]);
     const deck = deckOf([], [{ ...nicolBolas }]);
     await enrichDeckWithImages(deck, new FakeCardImagesGateway(seeded));
@@ -38,7 +38,7 @@ describe("enrichDeckWithImages", () => {
   it("does not attach back URLs to a single-faced card even if the gateway returns them", async () => {
     const single = { ...lightningBolt, twoFaced: false };
     const seeded = new Map([
-      [single.scryfallId, { front: { normal: "front.jpg?1" }, back: { normal: "back.jpg?1" } }],
+      [single.cardDefinitionId, { front: { normal: "front.jpg?1" }, back: { normal: "back.jpg?1" } }],
     ]);
     const deck = deckOf([], [single]);
     await enrichDeckWithImages(deck, new FakeCardImagesGateway(seeded));
@@ -55,7 +55,7 @@ describe("enrichDeckWithImages", () => {
     expect(deck.cards[0].imageUris).toBeUndefined();
   });
 
-  it("fetches each unique scryfallId once across commanders and cards", async () => {
+  it("fetches each unique cardDefinitionId once across commanders and cards", async () => {
     const gateway = new FakeCardImagesGateway();
     const dup = { ...lightningBolt };
     const deck = deckOf([{ ...nicolBolas }], [dup, dup, { ...lightningBolt }]);

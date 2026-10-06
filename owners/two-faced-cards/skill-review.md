@@ -23,15 +23,15 @@ Given the agent's plan (in $ARGUMENTS), check for:
 
 1. **Card display changes**: Does it render card images or create card HTML? It must handle `twoFaced === true` cards — use `formatCardContainer()` rather than building card HTML directly. The flip container has 3 levels of nesting that affect CSS selectors.
 
-2. **CardDefinition or type changes**: Does it add/remove/rename fields on `CardDefinition`? Check if `CardFace` needs parallel changes (they share: name, types, manaCost, cmc, oracleText). Also check if `PersistedGameCard` or hydration logic needs updating.
+2. **CardDefinition or type changes**: Does it add/remove/rename fields on `CardDefinition`? There is no `CardFace`/`backFace` (removed in `f76b49c`); don't re-add per-face card text. Card identity is `cardDefinitionId` — don't reintroduce `scryfallId` except at Scryfall edges. Also check if `PersistedGameCard` or hydration logic needs updating.
 
-3. **Deck adapter changes**: New or modified adapters must determine `twoFaced` and populate `backFace` with a `CardFace`. Missing back-face data means no flip button and degraded library search grouping.
+3. **Deck adapter changes**: New or modified adapters must determine `twoFaced` (layout allowlist) and compute `cardTypes` as the union of every face's types. Getting `twoFaced` wrong means no flip button; missing back-face types degrade library search grouping.
 
 4. **Card modal changes**: The modal flip route (`/flip-card-modal/`) re-renders the ENTIRE modal. If the card modal template gains new data requirements, the flip-card-modal route must also provide them. Check that `navList` is preserved through flip.
 
 5. **CSS animation changes**: Animations targeting `.mtg-card-image` must account for the flip container's nested structure. The "being-played" animation already hit this issue (commit `e904a8c`).
 
-6. **Library search / type grouping**: Changes to how types are used must account for merged back-face types: `[...new Set([...card.types, ...(card.backFace?.types || [])])]`.
+6. **Library search / type grouping**: Changes to how types are used must use `card.cardTypes`, which is already the deduplicated union of all faces' types (computed at ingestion).
 
 7. **Game state or persistence changes**: `currentFace` is persisted in `PersistedGameCard`. Version migrations must preserve or default it. The `flipCard()` method on `GameState` must stay consistent with the persisted format.
 

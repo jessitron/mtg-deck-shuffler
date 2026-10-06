@@ -316,7 +316,7 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
 - **The receive half of the event bus: the Shuffler's own Spine SSE subscriber** (`src/port-spine/events/`, mirroring the
   Tabletop's `spineSubscriber.ts`/`spineEventDispatch.ts`) is the reverse leg — a card
   dragged off the Tabletop's canvas onto the library portal reaches the Shuffler as a
-  `card.returned.v1` event. `gameSubscriptionRegistry.ts` holds one live subscription per
+  `card.returned.v2` event. `gameSubscriptionRegistry.ts` holds one live subscription per
   active game, in-memory, keyed by `gameId`; both `GET /game/:gameId` (full page load) and
   `GET /game-section/:gameId` (`app.ts`) open it idempotently whenever the persisted game
   has a `spineTableId` but no live registry entry — the same single check covers first

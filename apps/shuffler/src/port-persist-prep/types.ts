@@ -2,7 +2,7 @@ import { Deck } from "../types.js";
 
 export type PrepId = number;
 
-export const PERSISTED_GAME_PREP_VERSION: 3 = 3;
+export const PERSISTED_GAME_PREP_VERSION: 4 = 4;
 
 /** Thrown when a persisted prep was saved in a format this build can't load. */
 export class IncompatiblePrepVersionError extends Error {

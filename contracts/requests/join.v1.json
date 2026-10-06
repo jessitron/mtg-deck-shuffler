@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/requests/join.v1.json",
   "title": "POST /join request body, version 1",
-  "description": "A player asks the Spine for a seat at a named table, creating the table if the name is new. Besides the four fields below, every other property is the seat's decoration: it becomes the payload of the seat.joined event and is validated against payloads/seat.joined.v1.json (deckName is both a field here and part of that payload).",
+  "description": "A player asks the Spine for a seat at a named table, creating the table if the name is new. Besides the four fields below, every other property is the seat's decoration: it becomes the payload of the seat.joined event and is validated against payloads/seat.joined.v2.json (deckName is both a field here and part of that payload).",
   "type": "object",
   "properties": {
     "joinRequestId": {

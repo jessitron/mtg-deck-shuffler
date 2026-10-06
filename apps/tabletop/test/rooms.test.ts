@@ -107,7 +107,7 @@ describe("RoomEntry.hasInstance", () => {
           h: 238,
           index: "a1" as any,
           instanceId: "instance-present",
-          scryfallId: "xyz",
+          cardDefinitionId: "xyz",
           cardName: "Lightning Bolt",
           frontImageUrl: "https://cards.scryfall.io/normal/front/x/y/xyz.jpg",
           backImageUrl: null,

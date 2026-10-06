@@ -40,10 +40,10 @@ export class InMemoryPersistStateAdapter implements PersistStatePort {
     const summaries: GameHistorySummary[] = [];
 
     for (const [gameId, gameState] of this.storage.entries()) {
-      // Extract commander scryfallIds
+      // Extract commander cardDefinitionIds
       const commanderIds = gameState.gameCards
         .filter(gc => gc.isCommander)
-        .map(gc => gc.scryfallId);
+        .map(gc => gc.cardDefinitionId);
 
       // Hydrate commander cards to get names
       const commanderCards = await this.cardRepository.getCards(commanderIds);

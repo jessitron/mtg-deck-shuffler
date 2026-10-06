@@ -16,7 +16,7 @@ function seatJoined(tableId: string, payloadOverrides: Record<string, unknown> =
     origin: "shuffler.shuffleUp",
     significance: "administrative",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       deckName: "Blame Game",
       ...payloadOverrides,
@@ -35,7 +35,7 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
     origin: "shuffler.playCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
@@ -57,11 +57,11 @@ test("a land and a nonland both arrive on the Stack", async ({ page, baseURL }) 
 
   const land = cardPlayed(tableSlug, {
     cardName: "Forest",
-    card: { scryfallId: "aaaaaaaa-1111-4111-8111-000000000001", instanceId: randomUUID() },
+    card: { cardDefinitionId: "aaaaaaaa-1111-4111-8111-000000000001", instanceId: randomUUID() },
   });
   const nonland = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: "aaaaaaaa-1111-4111-8111-000000000002", instanceId: randomUUID() },
+    card: { cardDefinitionId: "aaaaaaaa-1111-4111-8111-000000000002", instanceId: randomUUID() },
   });
 
   for (const event of [land, nonland]) {

@@ -34,7 +34,7 @@ class JoinTest < Minitest::Test
     assert_equal decoration, JSON.parse(events.last[:payload])
     assert_equal decoration, joined["payload"]
     assert_equal({ "seatId" => seat[:id], "playerName" => submission["playerName"] }, joined["initiator"])
-    assert_equal 1, joined["schemaVersion"]
+    assert_equal 2, joined["schemaVersion"]
     refute joined.key?("traceparent")
 
     request = tabletop.wait_for_requests(1).fetch(0)
@@ -220,7 +220,7 @@ class JoinTest < Minitest::Test
 
   def commander(name, back_image_url, index)
     {
-      "card" => { "scryfallId" => "00000000-0000-4000-8000-00000000000#{index}",
+      "card" => { "cardDefinitionId" => "00000000-0000-4000-8000-00000000000#{index}",
         "instanceId" => "10000000-0000-4000-8000-00000000000#{index}", "printingExtension" => index },
       "cardName" => name, "frontImageUrl" => "https://images.example/#{index}-front.jpg",
       "backImageUrl" => back_image_url, "commanderExtension" => { "position" => index }

@@ -24,7 +24,7 @@ export function useCardArrivalSpans(store: RemoteTLStoreWithStatus): void {
           if (asAny.typeName === "shape" && asAny.type === "mtg-card" && typeof asAny.props?.instanceId === "string") {
             void inSpan("card arrived on canvas", () => {}, {
               "card.instance_id": asAny.props.instanceId as string,
-              "card.scryfall_id": (asAny.props.scryfallId as string) ?? "",
+              "card.definition_id": (asAny.props.cardDefinitionId as string) ?? "",
               "card.name": (asAny.props.cardName as string) ?? "",
             });
           }
@@ -53,7 +53,7 @@ export function useCardArrivalSpans(store: RemoteTLStoreWithStatus): void {
             pendingMoves.delete(after.id!);
             void inSpan("card moved by remote change", () => {}, {
               "card.instance_id": (after.props?.instanceId as string) ?? "",
-              "card.scryfall_id": (after.props?.scryfallId as string) ?? "",
+              "card.definition_id": (after.props?.cardDefinitionId as string) ?? "",
               "card.name": (after.props?.cardName as string) ?? "",
               "shape.id": after.id ?? "",
               "position.before.x": windowBefore.x ?? -1,

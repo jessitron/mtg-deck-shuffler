@@ -41,7 +41,7 @@ function seatJoined(
     origin: "shuffler.shuffleUp",
     significance: "administrative",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       deckName,
       playmatImageUrl: "https://example.com/playmat.png",

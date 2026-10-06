@@ -13,7 +13,7 @@ const tracer = trace.getTracer("mtg-tabletop");
 
 /** A commander riding seat.joined (ticket 18) — always face up, no `face` field on the wire. */
 interface SeatJoinedCommander {
-  card: { scryfallId: string; instanceId: string };
+  card: { cardDefinitionId: string; instanceId: string };
   cardName: string;
   frontImageUrl: string;
   backImageUrl: string | null;
@@ -171,7 +171,7 @@ export async function handleSeatJoined(req: Request, res: Response): Promise<voi
                 y: position.y,
                 w: CARD_W,
                 h: CARD_H,
-                scryfallId: commander.card.scryfallId,
+                cardDefinitionId: commander.card.cardDefinitionId,
                 cardName: commander.cardName,
                 frontImageUrl: commander.frontImageUrl,
                 backImageUrl: commander.backImageUrl,

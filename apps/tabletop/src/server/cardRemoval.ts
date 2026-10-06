@@ -9,7 +9,7 @@ const tracer = trace.getTracer("mtg-tabletop");
 export const CARD_RETURNED_EVENT_NAME = "card.returned";
 
 interface CardReturnedPayload {
-  card: { scryfallId: string; instanceId?: string };
+  card: { cardDefinitionId: string; instanceId?: string };
   gameCardIndex: number;
   seat: string;
 }
@@ -58,7 +58,7 @@ export async function applyCardRemoval(tableName: string, body: unknown): Promis
 
   trace.getActiveSpan()?.setAttributes({
     "card.instance_id": instanceId,
-    "card.scryfall_id": envelope.payload.card.scryfallId,
+    "card.definition_id": envelope.payload.card.cardDefinitionId,
     "event.id": envelope.id,
     "event.name": envelope.name,
     "table.name": tableNameFromSlug(tableName),

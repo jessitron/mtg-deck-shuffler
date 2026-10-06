@@ -15,6 +15,7 @@ module Spine
     class TableFull < StandardError; end
 
     SEAT_NUMBERS = (1..4).freeze
+    SEAT_JOINED_SCHEMA_VERSION = 2
 
     one_to_many :seats, key: :table_id
     one_to_many :events, key: :table_id
@@ -178,6 +179,7 @@ module Spine
         "id" => SecureRandom.uuid,
         "name" => "seat.joined",
         "origin" => "spine.seatJoined",
+        "schemaVersion" => SEAT_JOINED_SCHEMA_VERSION,
         "payload" => decoration
       )
       EventContract.validate!(taken)

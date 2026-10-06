@@ -18,7 +18,7 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
     origin: "shuffler.playCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
@@ -56,7 +56,7 @@ async function topGrip(card: Locator): Promise<{ x: number; y: number }> {
 async function placeCard(page: Page, baseURL: string | undefined, tableSlug: string, instanceId: string) {
   const event = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
-    card: { scryfallId: "aaaaaaaa-1111-4111-8111-000000000019", instanceId },
+    card: { cardDefinitionId: "aaaaaaaa-1111-4111-8111-000000000019", instanceId },
   });
   const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);

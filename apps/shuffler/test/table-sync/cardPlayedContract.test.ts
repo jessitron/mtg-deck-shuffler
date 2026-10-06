@@ -6,12 +6,12 @@ import { CardDefinition, Deck, PERSISTED_DECK_VERSION } from "../../src/types.js
 import { testProvenance } from "../generators.js";
 import { assertValidatesAsSpineEvent } from "./contractValidation.js";
 
-// The shared `lightningBolt` fixture in generators.ts uses "abc123" for scryfallId —
+// The shared `lightningBolt` fixture in generators.ts uses "abc123" for cardDefinitionId —
 // fine for tests that don't care about its shape, but the contract requires a real
 // Scryfall UUID, so these tests use their own card fixtures with realistic ids.
 const lightningBolt: CardDefinition = {
   name: "Lightning Bolt",
-  scryfallId: "e6f2c1a4-2222-4a22-9e33-000000000002",
+  cardDefinitionId: "e6f2c1a4-2222-4a22-9e33-000000000002",
   multiverseid: 12345,
   twoFaced: false,
   oracleCardName: "Lightning Bolt",
@@ -22,7 +22,7 @@ const lightningBolt: CardDefinition = {
 
 const forest: CardDefinition = {
   name: "Forest",
-  scryfallId: "5f6b2c9a-1111-4a22-9e33-000000000001",
+  cardDefinitionId: "5f6b2c9a-1111-4a22-9e33-000000000001",
   multiverseid: 54321,
   twoFaced: false,
   oracleCardName: "Forest",
@@ -45,7 +45,7 @@ function cardNamed(game: GameState, name: string) {
   return game.getCards().find((gc) => gc.card.name === name)!;
 }
 
-describe("card.played events validate against the Spine's own contracts (contracts/envelope.v1.json, contracts/payloads/card.played.v1.json)", () => {
+describe("card.played events validate against the Spine's own contracts (contracts/envelope.v1.json, contracts/payloads/card.played.v2.json)", () => {
   it("a directly-built event, with a realistic short numeric seatId, validates", () => {
     // The contract only requires a non-empty string; this checks that a short bare
     // seat number still validates even though a real send now uses game.seatId (the

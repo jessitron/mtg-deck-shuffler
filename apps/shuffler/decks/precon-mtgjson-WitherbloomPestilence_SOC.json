@@ -1,12 +1,12 @@
 {
-  "version": 3,
+  "version": 4,
   "id": 1891219084,
   "name": "Witherbloom Pestilence",
   "totalCards": 100,
   "commanders": [
     {
       "name": "Dina, Essence Brewer",
-      "scryfallId": "9fe237b8-c02c-41ea-9fc4-b771b91d2157",
+      "cardDefinitionId": "9fe237b8-c02c-41ea-9fc4-b771b91d2157",
       "twoFaced": false,
       "oracleCardName": "Dina, Essence Brewer",
       "colorIdentity": [
@@ -28,7 +28,7 @@
   "cards": [
     {
       "name": "Gorma, the Gullet",
-      "scryfallId": "86f97dd8-8647-4938-aee0-690bb715f88b",
+      "cardDefinitionId": "86f97dd8-8647-4938-aee0-690bb715f88b",
       "twoFaced": false,
       "oracleCardName": "Gorma, the Gullet",
       "colorIdentity": [
@@ -48,7 +48,7 @@
     },
     {
       "name": "Merchant of Venom",
-      "scryfallId": "d60cf719-d5ce-46c3-bf92-24682b1c53bd",
+      "cardDefinitionId": "d60cf719-d5ce-46c3-bf92-24682b1c53bd",
       "twoFaced": false,
       "oracleCardName": "Merchant of Venom",
       "colorIdentity": [
@@ -67,7 +67,7 @@
     },
     {
       "name": "Defiling Daemogoth",
-      "scryfallId": "2cde79eb-91c3-4a42-a2d3-e733e3b56846",
+      "cardDefinitionId": "2cde79eb-91c3-4a42-a2d3-e733e3b56846",
       "twoFaced": false,
       "oracleCardName": "Defiling Daemogoth",
       "colorIdentity": [
@@ -86,7 +86,7 @@
     },
     {
       "name": "Ominous Harvest",
-      "scryfallId": "2271184b-08eb-4d2a-8ebf-a1807d51dd2a",
+      "cardDefinitionId": "2271184b-08eb-4d2a-8ebf-a1807d51dd2a",
       "twoFaced": false,
       "oracleCardName": "Ominous Harvest",
       "colorIdentity": [
@@ -105,7 +105,7 @@
     },
     {
       "name": "Stensian Sanguinist // Exsanguinate",
-      "scryfallId": "909a52bc-53f6-4654-9db7-e8f48333d765",
+      "cardDefinitionId": "909a52bc-53f6-4654-9db7-e8f48333d765",
       "twoFaced": false,
       "oracleCardName": "Stensian Sanguinist // Exsanguinate",
       "colorIdentity": [
@@ -125,7 +125,7 @@
     },
     {
       "name": "Feral Appetite",
-      "scryfallId": "69dda877-c176-456c-8cd8-5a1ea288e4c9",
+      "cardDefinitionId": "69dda877-c176-456c-8cd8-5a1ea288e4c9",
       "twoFaced": false,
       "oracleCardName": "Feral Appetite",
       "colorIdentity": [
@@ -144,7 +144,7 @@
     },
     {
       "name": "Pest Rescuer",
-      "scryfallId": "1f2a066a-7bcd-4e9d-8e52-0769cd6c8124",
+      "cardDefinitionId": "1f2a066a-7bcd-4e9d-8e52-0769cd6c8124",
       "twoFaced": false,
       "oracleCardName": "Pest Rescuer",
       "colorIdentity": [
@@ -163,7 +163,7 @@
     },
     {
       "name": "Ribtruss Roaster",
-      "scryfallId": "8217100d-8244-4565-97bd-6c0f38c3e2f0",
+      "cardDefinitionId": "8217100d-8244-4565-97bd-6c0f38c3e2f0",
       "twoFaced": false,
       "oracleCardName": "Ribtruss Roaster",
       "colorIdentity": [
@@ -182,7 +182,7 @@
     },
     {
       "name": "Eccentric Pestfinder // Turn Stones",
-      "scryfallId": "508e1dd7-edbd-4b76-90bc-ff58c55b58a3",
+      "cardDefinitionId": "508e1dd7-edbd-4b76-90bc-ff58c55b58a3",
       "twoFaced": false,
       "oracleCardName": "Eccentric Pestfinder // Turn Stones",
       "colorIdentity": [
@@ -203,7 +203,7 @@
     },
     {
       "name": "Immoral Bargain",
-      "scryfallId": "fc01f092-80fb-4643-8ada-c2e5aeb68658",
+      "cardDefinitionId": "fc01f092-80fb-4643-8ada-c2e5aeb68658",
       "twoFaced": false,
       "oracleCardName": "Immoral Bargain",
       "colorIdentity": [
@@ -223,7 +223,7 @@
     },
     {
       "name": "Turbulent Fen",
-      "scryfallId": "9737159b-256c-4004-ba5f-0417c35e1b30",
+      "cardDefinitionId": "9737159b-256c-4004-ba5f-0417c35e1b30",
       "twoFaced": false,
       "oracleCardName": "Turbulent Fen",
       "colorIdentity": [
@@ -243,7 +243,7 @@
     },
     {
       "name": "Ophiomancer",
-      "scryfallId": "baf793b6-9612-43f3-9f1b-2e53e81cb89f",
+      "cardDefinitionId": "baf793b6-9612-43f3-9f1b-2e53e81cb89f",
       "twoFaced": false,
       "oracleCardName": "Ophiomancer",
       "colorIdentity": [
@@ -262,7 +262,7 @@
     },
     {
       "name": "Toxic Deluge",
-      "scryfallId": "a1c2a8da-56b0-4cab-b07b-10cac92c72c5",
+      "cardDefinitionId": "a1c2a8da-56b0-4cab-b07b-10cac92c72c5",
       "twoFaced": false,
       "oracleCardName": "Toxic Deluge",
       "colorIdentity": [
@@ -281,7 +281,7 @@
     },
     {
       "name": "Tendershoot Dryad",
-      "scryfallId": "def3571c-01dd-4eee-8f60-0ac4d1928d33",
+      "cardDefinitionId": "def3571c-01dd-4eee-8f60-0ac4d1928d33",
       "twoFaced": false,
       "oracleCardName": "Tendershoot Dryad",
       "colorIdentity": [
@@ -300,7 +300,7 @@
     },
     {
       "name": "Fabled Passage",
-      "scryfallId": "8119d329-6ee5-433c-bd81-8579bb061162",
+      "cardDefinitionId": "8119d329-6ee5-433c-bd81-8579bb061162",
       "twoFaced": false,
       "oracleCardName": "Fabled Passage",
       "colorIdentity": [],
@@ -317,7 +317,7 @@
     },
     {
       "name": "Blight Mound",
-      "scryfallId": "dc060028-e01c-4bc7-8b52-7d0e2a350061",
+      "cardDefinitionId": "dc060028-e01c-4bc7-8b52-7d0e2a350061",
       "twoFaced": false,
       "oracleCardName": "Blight Mound",
       "colorIdentity": [
@@ -336,7 +336,7 @@
     },
     {
       "name": "Bloodghast",
-      "scryfallId": "cee85485-598f-4dfc-aa0b-7b1de86c7788",
+      "cardDefinitionId": "cee85485-598f-4dfc-aa0b-7b1de86c7788",
       "twoFaced": false,
       "oracleCardName": "Bloodghast",
       "colorIdentity": [
@@ -355,7 +355,7 @@
     },
     {
       "name": "Final Act",
-      "scryfallId": "a86671d1-4f4b-486e-a0b3-671608974a82",
+      "cardDefinitionId": "a86671d1-4f4b-486e-a0b3-671608974a82",
       "twoFaced": false,
       "oracleCardName": "Final Act",
       "colorIdentity": [
@@ -374,7 +374,7 @@
     },
     {
       "name": "Jadar, Ghoulcaller of Nephalia",
-      "scryfallId": "49d5d62b-72ed-446a-b280-ad04c38bdd0c",
+      "cardDefinitionId": "49d5d62b-72ed-446a-b280-ad04c38bdd0c",
       "twoFaced": false,
       "oracleCardName": "Jadar, Ghoulcaller of Nephalia",
       "colorIdentity": [
@@ -393,7 +393,7 @@
     },
     {
       "name": "Nether Traitor",
-      "scryfallId": "fae5d1cb-ead9-41e1-84ce-2f06dc8cf6ba",
+      "cardDefinitionId": "fae5d1cb-ead9-41e1-84ce-2f06dc8cf6ba",
       "twoFaced": false,
       "oracleCardName": "Nether Traitor",
       "colorIdentity": [
@@ -412,7 +412,7 @@
     },
     {
       "name": "Priest of Forgotten Gods",
-      "scryfallId": "363f8761-91a7-47e8-9e15-3b73d59bc020",
+      "cardDefinitionId": "363f8761-91a7-47e8-9e15-3b73d59bc020",
       "twoFaced": false,
       "oracleCardName": "Priest of Forgotten Gods",
       "colorIdentity": [
@@ -431,7 +431,7 @@
     },
     {
       "name": "Smothering Abomination",
-      "scryfallId": "aac33238-e4bd-4c72-aecc-9905232c3ab4",
+      "cardDefinitionId": "aac33238-e4bd-4c72-aecc-9905232c3ab4",
       "twoFaced": false,
       "oracleCardName": "Smothering Abomination",
       "colorIdentity": [
@@ -450,7 +450,7 @@
     },
     {
       "name": "Veinwitch Coven",
-      "scryfallId": "c5cc7d88-b9d3-425e-bef2-f1e3a85a3e4d",
+      "cardDefinitionId": "c5cc7d88-b9d3-425e-bef2-f1e3a85a3e4d",
       "twoFaced": false,
       "oracleCardName": "Veinwitch Coven",
       "colorIdentity": [
@@ -469,7 +469,7 @@
     },
     {
       "name": "Witch of the Moors",
-      "scryfallId": "d9367aa0-2da2-4ed5-b52a-c52e40a00adf",
+      "cardDefinitionId": "d9367aa0-2da2-4ed5-b52a-c52e40a00adf",
       "twoFaced": false,
       "oracleCardName": "Witch of the Moors",
       "colorIdentity": [
@@ -488,7 +488,7 @@
     },
     {
       "name": "Woe Strider",
-      "scryfallId": "f458ae68-5cda-4c40-a348-47b4196fba02",
+      "cardDefinitionId": "f458ae68-5cda-4c40-a348-47b4196fba02",
       "twoFaced": false,
       "oracleCardName": "Woe Strider",
       "colorIdentity": [
@@ -507,7 +507,7 @@
     },
     {
       "name": "Yahenni, Undying Partisan",
-      "scryfallId": "518b155a-cb84-48d3-9aba-07577f60f091",
+      "cardDefinitionId": "518b155a-cb84-48d3-9aba-07577f60f091",
       "twoFaced": false,
       "oracleCardName": "Yahenni, Undying Partisan",
       "colorIdentity": [
@@ -526,7 +526,7 @@
     },
     {
       "name": "Awakening Zone",
-      "scryfallId": "13724768-83d3-4da2-82d7-35787c4f9877",
+      "cardDefinitionId": "13724768-83d3-4da2-82d7-35787c4f9877",
       "twoFaced": false,
       "oracleCardName": "Awakening Zone",
       "colorIdentity": [
@@ -545,7 +545,7 @@
     },
     {
       "name": "Blossoming Bogbeast",
-      "scryfallId": "764054f1-e848-4cee-b623-4861ce15c370",
+      "cardDefinitionId": "764054f1-e848-4cee-b623-4861ce15c370",
       "twoFaced": false,
       "oracleCardName": "Blossoming Bogbeast",
       "colorIdentity": [
@@ -564,7 +564,7 @@
     },
     {
       "name": "Gilded Goose",
-      "scryfallId": "5ea59511-24b1-4925-9948-9d4c0d27d1c5",
+      "cardDefinitionId": "5ea59511-24b1-4925-9948-9d4c0d27d1c5",
       "twoFaced": false,
       "oracleCardName": "Gilded Goose",
       "colorIdentity": [
@@ -583,7 +583,7 @@
     },
     {
       "name": "Mycoloth",
-      "scryfallId": "924976cf-9b46-4cbf-ab27-07ca72a21608",
+      "cardDefinitionId": "924976cf-9b46-4cbf-ab27-07ca72a21608",
       "twoFaced": false,
       "oracleCardName": "Mycoloth",
       "colorIdentity": [
@@ -602,7 +602,7 @@
     },
     {
       "name": "Ohran Frostfang",
-      "scryfallId": "55fb93e6-d057-4b70-ad12-e98291fd4a2c",
+      "cardDefinitionId": "55fb93e6-d057-4b70-ad12-e98291fd4a2c",
       "twoFaced": false,
       "oracleCardName": "Ohran Frostfang",
       "colorIdentity": [
@@ -621,7 +621,7 @@
     },
     {
       "name": "Pest Infestation",
-      "scryfallId": "c9b8626d-d3d8-4460-9adf-112f48f173f6",
+      "cardDefinitionId": "c9b8626d-d3d8-4460-9adf-112f48f173f6",
       "twoFaced": false,
       "oracleCardName": "Pest Infestation",
       "colorIdentity": [
@@ -640,7 +640,7 @@
     },
     {
       "name": "Trudge Garden",
-      "scryfallId": "80dd8180-668a-41e4-a4e9-ebdd71345841",
+      "cardDefinitionId": "80dd8180-668a-41e4-a4e9-ebdd71345841",
       "twoFaced": false,
       "oracleCardName": "Trudge Garden",
       "colorIdentity": [
@@ -659,7 +659,7 @@
     },
     {
       "name": "Assassin's Trophy",
-      "scryfallId": "aaf258fc-3ba4-4b83-bdbf-10a07e0b6c03",
+      "cardDefinitionId": "aaf258fc-3ba4-4b83-bdbf-10a07e0b6c03",
       "twoFaced": false,
       "oracleCardName": "Assassin's Trophy",
       "colorIdentity": [
@@ -679,7 +679,7 @@
     },
     {
       "name": "Beledros Witherbloom",
-      "scryfallId": "144c2886-3d37-4a8a-8e37-99ccff66599e",
+      "cardDefinitionId": "144c2886-3d37-4a8a-8e37-99ccff66599e",
       "twoFaced": false,
       "oracleCardName": "Beledros Witherbloom",
       "colorIdentity": [
@@ -699,7 +699,7 @@
     },
     {
       "name": "Casualties of War",
-      "scryfallId": "2467f50a-bf45-4046-9086-1bfcf3438af4",
+      "cardDefinitionId": "2467f50a-bf45-4046-9086-1bfcf3438af4",
       "twoFaced": false,
       "oracleCardName": "Casualties of War",
       "colorIdentity": [
@@ -719,7 +719,7 @@
     },
     {
       "name": "Creakwood Liege",
-      "scryfallId": "9a05c8f9-e810-498d-ab51-632661dd000d",
+      "cardDefinitionId": "9a05c8f9-e810-498d-ab51-632661dd000d",
       "twoFaced": false,
       "oracleCardName": "Creakwood Liege",
       "colorIdentity": [
@@ -739,7 +739,7 @@
     },
     {
       "name": "Culling Ritual",
-      "scryfallId": "abaad8c5-763d-4276-9b19-623cd19f59b9",
+      "cardDefinitionId": "abaad8c5-763d-4276-9b19-623cd19f59b9",
       "twoFaced": false,
       "oracleCardName": "Culling Ritual",
       "colorIdentity": [
@@ -759,7 +759,7 @@
     },
     {
       "name": "Gyome, Master Chef",
-      "scryfallId": "8279d421-dd86-49d1-93f7-65f6046c542d",
+      "cardDefinitionId": "8279d421-dd86-49d1-93f7-65f6046c542d",
       "twoFaced": false,
       "oracleCardName": "Gyome, Master Chef",
       "colorIdentity": [
@@ -779,7 +779,7 @@
     },
     {
       "name": "Mazirek, Kraul Death Priest",
-      "scryfallId": "940ae3c2-7ac2-412b-afd0-c8b0099bc3aa",
+      "cardDefinitionId": "940ae3c2-7ac2-412b-afd0-c8b0099bc3aa",
       "twoFaced": false,
       "oracleCardName": "Mazirek, Kraul Death Priest",
       "colorIdentity": [
@@ -799,7 +799,7 @@
     },
     {
       "name": "Wight of the Reliquary",
-      "scryfallId": "a8c6ee26-fa74-4859-9a94-89b476d218d2",
+      "cardDefinitionId": "a8c6ee26-fa74-4859-9a94-89b476d218d2",
       "twoFaced": false,
       "oracleCardName": "Wight of the Reliquary",
       "colorIdentity": [
@@ -819,7 +819,7 @@
     },
     {
       "name": "Witherbloom Command",
-      "scryfallId": "0d68dee5-56ff-45bb-a37e-9e2dfc07c5a7",
+      "cardDefinitionId": "0d68dee5-56ff-45bb-a37e-9e2dfc07c5a7",
       "twoFaced": false,
       "oracleCardName": "Witherbloom Command",
       "colorIdentity": [
@@ -839,7 +839,7 @@
     },
     {
       "name": "Exotic Orchard",
-      "scryfallId": "7db2934a-43a0-46ad-8380-ff6703f8fd6d",
+      "cardDefinitionId": "7db2934a-43a0-46ad-8380-ff6703f8fd6d",
       "twoFaced": false,
       "oracleCardName": "Exotic Orchard",
       "colorIdentity": [],
@@ -856,7 +856,7 @@
     },
     {
       "name": "Festering Thicket",
-      "scryfallId": "f71c87db-54ea-4611-8692-096d9714d854",
+      "cardDefinitionId": "f71c87db-54ea-4611-8692-096d9714d854",
       "twoFaced": false,
       "oracleCardName": "Festering Thicket",
       "colorIdentity": [
@@ -876,7 +876,7 @@
     },
     {
       "name": "Grim Backwoods",
-      "scryfallId": "606c5f42-fe5f-4dcd-b8f4-b67beabe3f0a",
+      "cardDefinitionId": "606c5f42-fe5f-4dcd-b8f4-b67beabe3f0a",
       "twoFaced": false,
       "oracleCardName": "Grim Backwoods",
       "colorIdentity": [
@@ -896,7 +896,7 @@
     },
     {
       "name": "High Market",
-      "scryfallId": "894aa6b6-0d08-4c43-8734-9cb7b31359c6",
+      "cardDefinitionId": "894aa6b6-0d08-4c43-8734-9cb7b31359c6",
       "twoFaced": false,
       "oracleCardName": "High Market",
       "colorIdentity": [],
@@ -913,7 +913,7 @@
     },
     {
       "name": "Llanowar Wastes",
-      "scryfallId": "266316d3-3bbc-4283-aab8-69629855909f",
+      "cardDefinitionId": "266316d3-3bbc-4283-aab8-69629855909f",
       "twoFaced": false,
       "oracleCardName": "Llanowar Wastes",
       "colorIdentity": [
@@ -933,7 +933,7 @@
     },
     {
       "name": "Necroblossom Snarl",
-      "scryfallId": "4355ba23-de6a-4f18-baf4-82ae47cc2965",
+      "cardDefinitionId": "4355ba23-de6a-4f18-baf4-82ae47cc2965",
       "twoFaced": false,
       "oracleCardName": "Necroblossom Snarl",
       "colorIdentity": [
@@ -953,7 +953,7 @@
     },
     {
       "name": "Temple of Malady",
-      "scryfallId": "1ca36218-db87-4e44-8606-2a516504ed20",
+      "cardDefinitionId": "1ca36218-db87-4e44-8606-2a516504ed20",
       "twoFaced": false,
       "oracleCardName": "Temple of Malady",
       "colorIdentity": [
@@ -973,7 +973,7 @@
     },
     {
       "name": "Twilight Mire",
-      "scryfallId": "3cc8186b-b46f-46c0-8dfb-9e423e430048",
+      "cardDefinitionId": "3cc8186b-b46f-46c0-8dfb-9e423e430048",
       "twoFaced": false,
       "oracleCardName": "Twilight Mire",
       "colorIdentity": [
@@ -993,7 +993,7 @@
     },
     {
       "name": "Vernal Fen",
-      "scryfallId": "0466cf57-bb3e-4359-8fe8-d6cc1288fdc6",
+      "cardDefinitionId": "0466cf57-bb3e-4359-8fe8-d6cc1288fdc6",
       "twoFaced": false,
       "oracleCardName": "Vernal Fen",
       "colorIdentity": [
@@ -1013,7 +1013,7 @@
     },
     {
       "name": "Viridescent Bog",
-      "scryfallId": "54d852fc-0f3a-4791-a147-b21ca6964763",
+      "cardDefinitionId": "54d852fc-0f3a-4791-a147-b21ca6964763",
       "twoFaced": false,
       "oracleCardName": "Viridescent Bog",
       "colorIdentity": [
@@ -1033,7 +1033,7 @@
     },
     {
       "name": "Woodland Cemetery",
-      "scryfallId": "4d6f6c96-f813-4864-b4e1-b2a0aa8be1e8",
+      "cardDefinitionId": "4d6f6c96-f813-4864-b4e1-b2a0aa8be1e8",
       "twoFaced": false,
       "oracleCardName": "Woodland Cemetery",
       "colorIdentity": [
@@ -1053,7 +1053,7 @@
     },
     {
       "name": "Arcane Signet",
-      "scryfallId": "7811dd72-61b9-4067-ac20-cea153e625d2",
+      "cardDefinitionId": "7811dd72-61b9-4067-ac20-cea153e625d2",
       "twoFaced": false,
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
@@ -1070,7 +1070,7 @@
     },
     {
       "name": "Sol Ring",
-      "scryfallId": "870ec754-a76c-40ea-9b81-81b3dca1f62c",
+      "cardDefinitionId": "870ec754-a76c-40ea-9b81-81b3dca1f62c",
       "twoFaced": false,
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
@@ -1087,7 +1087,7 @@
     },
     {
       "name": "Command Tower",
-      "scryfallId": "c46a217c-0ed2-4b3c-9a01-ee38d12d76f3",
+      "cardDefinitionId": "c46a217c-0ed2-4b3c-9a01-ee38d12d76f3",
       "twoFaced": false,
       "oracleCardName": "Command Tower",
       "colorIdentity": [],
@@ -1104,7 +1104,7 @@
     },
     {
       "name": "Teacher's Pest",
-      "scryfallId": "eaa358ac-761d-4507-aa15-3d4684027207",
+      "cardDefinitionId": "eaa358ac-761d-4507-aa15-3d4684027207",
       "twoFaced": false,
       "oracleCardName": "Teacher's Pest",
       "colorIdentity": [
@@ -1124,7 +1124,7 @@
     },
     {
       "name": "Witherbloom Charm",
-      "scryfallId": "254437f7-7a8a-4b11-9cea-e8e7ea23c59e",
+      "cardDefinitionId": "254437f7-7a8a-4b11-9cea-e8e7ea23c59e",
       "twoFaced": false,
       "oracleCardName": "Witherbloom Charm",
       "colorIdentity": [
@@ -1144,7 +1144,7 @@
     },
     {
       "name": "Terramorphic Expanse",
-      "scryfallId": "9a4c5629-fadd-42b9-850f-9f8586a2ca50",
+      "cardDefinitionId": "9a4c5629-fadd-42b9-850f-9f8586a2ca50",
       "twoFaced": false,
       "oracleCardName": "Terramorphic Expanse",
       "colorIdentity": [],
@@ -1161,7 +1161,7 @@
     },
     {
       "name": "Titan's Grave",
-      "scryfallId": "a9ab41c8-3ee2-4676-9b8b-20c34d9f5f21",
+      "cardDefinitionId": "a9ab41c8-3ee2-4676-9b8b-20c34d9f5f21",
       "twoFaced": false,
       "oracleCardName": "Titan's Grave",
       "colorIdentity": [
@@ -1181,7 +1181,7 @@
     },
     {
       "name": "Blood Artist",
-      "scryfallId": "b5275d76-2947-4219-be21-614c7421614a",
+      "cardDefinitionId": "b5275d76-2947-4219-be21-614c7421614a",
       "twoFaced": false,
       "oracleCardName": "Blood Artist",
       "colorIdentity": [
@@ -1200,7 +1200,7 @@
     },
     {
       "name": "Infernal Grasp",
-      "scryfallId": "f67b323d-0dda-45f8-84b7-d883ce5045a8",
+      "cardDefinitionId": "f67b323d-0dda-45f8-84b7-d883ce5045a8",
       "twoFaced": false,
       "oracleCardName": "Infernal Grasp",
       "colorIdentity": [
@@ -1219,7 +1219,7 @@
     },
     {
       "name": "Morbid Opportunist",
-      "scryfallId": "08838865-a9b6-4323-96a2-0d3a7aba9d3d",
+      "cardDefinitionId": "08838865-a9b6-4323-96a2-0d3a7aba9d3d",
       "twoFaced": false,
       "oracleCardName": "Morbid Opportunist",
       "colorIdentity": [
@@ -1238,7 +1238,7 @@
     },
     {
       "name": "Night's Whisper",
-      "scryfallId": "d12fefdf-d13f-4638-ac8d-112fa7c6f970",
+      "cardDefinitionId": "d12fefdf-d13f-4638-ac8d-112fa7c6f970",
       "twoFaced": false,
       "oracleCardName": "Night's Whisper",
       "colorIdentity": [
@@ -1257,7 +1257,7 @@
     },
     {
       "name": "Pawn of Ulamog",
-      "scryfallId": "c1b0377c-efd6-4fab-89f0-b219ca2c4c22",
+      "cardDefinitionId": "c1b0377c-efd6-4fab-89f0-b219ca2c4c22",
       "twoFaced": false,
       "oracleCardName": "Pawn of Ulamog",
       "colorIdentity": [
@@ -1276,7 +1276,7 @@
     },
     {
       "name": "Plumb the Forbidden",
-      "scryfallId": "79c27df1-0c05-4208-a80c-73185ab35424",
+      "cardDefinitionId": "79c27df1-0c05-4208-a80c-73185ab35424",
       "twoFaced": false,
       "oracleCardName": "Plumb the Forbidden",
       "colorIdentity": [
@@ -1295,7 +1295,7 @@
     },
     {
       "name": "Umbral Collar Zealot",
-      "scryfallId": "98648b8a-2cf0-4c10-ab13-c88b2e03fc15",
+      "cardDefinitionId": "98648b8a-2cf0-4c10-ab13-c88b2e03fc15",
       "twoFaced": false,
       "oracleCardName": "Umbral Collar Zealot",
       "colorIdentity": [
@@ -1314,7 +1314,7 @@
     },
     {
       "name": "Viscera Seer",
-      "scryfallId": "f511830b-1c1f-4d30-aa5d-4314726d142e",
+      "cardDefinitionId": "f511830b-1c1f-4d30-aa5d-4314726d142e",
       "twoFaced": false,
       "oracleCardName": "Viscera Seer",
       "colorIdentity": [
@@ -1333,7 +1333,7 @@
     },
     {
       "name": "Zulaport Cutthroat",
-      "scryfallId": "c43609fb-3cee-44e0-98d0-3ecaba1d5767",
+      "cardDefinitionId": "c43609fb-3cee-44e0-98d0-3ecaba1d5767",
       "twoFaced": false,
       "oracleCardName": "Zulaport Cutthroat",
       "colorIdentity": [
@@ -1352,7 +1352,7 @@
     },
     {
       "name": "Cultivate",
-      "scryfallId": "f1cc00f9-ae7b-4f7b-95f2-bc5c00e4bd72",
+      "cardDefinitionId": "f1cc00f9-ae7b-4f7b-95f2-bc5c00e4bd72",
       "twoFaced": false,
       "oracleCardName": "Cultivate",
       "colorIdentity": [
@@ -1371,7 +1371,7 @@
     },
     {
       "name": "Elvish Mystic",
-      "scryfallId": "eb654a76-62ee-4fd8-83d4-cb912211a9a0",
+      "cardDefinitionId": "eb654a76-62ee-4fd8-83d4-cb912211a9a0",
       "twoFaced": false,
       "oracleCardName": "Elvish Mystic",
       "colorIdentity": [
@@ -1390,7 +1390,7 @@
     },
     {
       "name": "Sakura-Tribe Elder",
-      "scryfallId": "7a8b1c49-8594-426d-b585-41140235bb0e",
+      "cardDefinitionId": "7a8b1c49-8594-426d-b585-41140235bb0e",
       "twoFaced": false,
       "oracleCardName": "Sakura-Tribe Elder",
       "colorIdentity": [
@@ -1409,7 +1409,7 @@
     },
     {
       "name": "Springbloom Druid",
-      "scryfallId": "c7b7d415-d9b4-49b7-ab31-b2fc91d57fe3",
+      "cardDefinitionId": "c7b7d415-d9b4-49b7-ab31-b2fc91d57fe3",
       "twoFaced": false,
       "oracleCardName": "Springbloom Druid",
       "colorIdentity": [
@@ -1428,7 +1428,7 @@
     },
     {
       "name": "Deadly Brew",
-      "scryfallId": "3e5493c3-0be2-467c-82f0-3ee1ca909d0c",
+      "cardDefinitionId": "3e5493c3-0be2-467c-82f0-3ee1ca909d0c",
       "twoFaced": false,
       "oracleCardName": "Deadly Brew",
       "colorIdentity": [
@@ -1448,7 +1448,7 @@
     },
     {
       "name": "Dina, Soul Steeper",
-      "scryfallId": "6ae992b6-506b-4667-884f-4f7fc075b71e",
+      "cardDefinitionId": "6ae992b6-506b-4667-884f-4f7fc075b71e",
       "twoFaced": false,
       "oracleCardName": "Dina, Soul Steeper",
       "colorIdentity": [
@@ -1468,7 +1468,7 @@
     },
     {
       "name": "Moldervine Reclamation",
-      "scryfallId": "f3e93085-ffcb-4f48-8649-3fcbc5e97699",
+      "cardDefinitionId": "f3e93085-ffcb-4f48-8649-3fcbc5e97699",
       "twoFaced": false,
       "oracleCardName": "Moldervine Reclamation",
       "colorIdentity": [
@@ -1488,7 +1488,7 @@
     },
     {
       "name": "Mortality Spear",
-      "scryfallId": "f6cdff9b-bb09-45b9-aa3c-16a3136d183c",
+      "cardDefinitionId": "f6cdff9b-bb09-45b9-aa3c-16a3136d183c",
       "twoFaced": false,
       "oracleCardName": "Mortality Spear",
       "colorIdentity": [
@@ -1508,7 +1508,7 @@
     },
     {
       "name": "Haywire Mite",
-      "scryfallId": "6f813bc3-6d81-4555-8e4b-6ecd9a6757b7",
+      "cardDefinitionId": "6f813bc3-6d81-4555-8e4b-6ecd9a6757b7",
       "twoFaced": false,
       "oracleCardName": "Haywire Mite",
       "colorIdentity": [
@@ -1528,7 +1528,7 @@
     },
     {
       "name": "Bojuka Bog",
-      "scryfallId": "55b5b094-9d2d-4d96-b90c-78fecdae725a",
+      "cardDefinitionId": "55b5b094-9d2d-4d96-b90c-78fecdae725a",
       "twoFaced": false,
       "oracleCardName": "Bojuka Bog",
       "colorIdentity": [
@@ -1547,7 +1547,7 @@
     },
     {
       "name": "Haunted Mire",
-      "scryfallId": "3e041aef-5771-4a3f-af07-e85a66c48979",
+      "cardDefinitionId": "3e041aef-5771-4a3f-af07-e85a66c48979",
       "twoFaced": false,
       "oracleCardName": "Haunted Mire",
       "colorIdentity": [
@@ -1567,7 +1567,7 @@
     },
     {
       "name": "Path of Ancestry",
-      "scryfallId": "9335e773-4b45-4b91-8140-5159fe7e0395",
+      "cardDefinitionId": "9335e773-4b45-4b91-8140-5159fe7e0395",
       "twoFaced": false,
       "oracleCardName": "Path of Ancestry",
       "colorIdentity": [],
@@ -1584,7 +1584,7 @@
     },
     {
       "name": "Study Hall",
-      "scryfallId": "93f812bc-7663-4504-b566-79e2c0a0f845",
+      "cardDefinitionId": "93f812bc-7663-4504-b566-79e2c0a0f845",
       "twoFaced": false,
       "oracleCardName": "Study Hall",
       "colorIdentity": [],
@@ -1601,7 +1601,7 @@
     },
     {
       "name": "Witherbloom Campus",
-      "scryfallId": "e5af06c8-86ab-4731-aa4a-2eec2c664488",
+      "cardDefinitionId": "e5af06c8-86ab-4731-aa4a-2eec2c664488",
       "twoFaced": false,
       "oracleCardName": "Witherbloom Campus",
       "colorIdentity": [
@@ -1621,7 +1621,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "51fe930f-2b5a-4b1e-9007-6ee74fb44715",
+      "cardDefinitionId": "51fe930f-2b5a-4b1e-9007-6ee74fb44715",
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1640,7 +1640,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "51fe930f-2b5a-4b1e-9007-6ee74fb44715",
+      "cardDefinitionId": "51fe930f-2b5a-4b1e-9007-6ee74fb44715",
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1659,7 +1659,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "51fe930f-2b5a-4b1e-9007-6ee74fb44715",
+      "cardDefinitionId": "51fe930f-2b5a-4b1e-9007-6ee74fb44715",
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1678,7 +1678,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "51fe930f-2b5a-4b1e-9007-6ee74fb44715",
+      "cardDefinitionId": "51fe930f-2b5a-4b1e-9007-6ee74fb44715",
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1697,7 +1697,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "36af939c-11d9-43a5-bd69-c915a62e972b",
+      "cardDefinitionId": "36af939c-11d9-43a5-bd69-c915a62e972b",
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1716,7 +1716,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "36af939c-11d9-43a5-bd69-c915a62e972b",
+      "cardDefinitionId": "36af939c-11d9-43a5-bd69-c915a62e972b",
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1735,7 +1735,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "36af939c-11d9-43a5-bd69-c915a62e972b",
+      "cardDefinitionId": "36af939c-11d9-43a5-bd69-c915a62e972b",
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1754,7 +1754,7 @@
     },
     {
       "name": "Swamp",
-      "scryfallId": "36af939c-11d9-43a5-bd69-c915a62e972b",
+      "cardDefinitionId": "36af939c-11d9-43a5-bd69-c915a62e972b",
       "twoFaced": false,
       "oracleCardName": "Swamp",
       "colorIdentity": [
@@ -1773,7 +1773,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "f169dfb2-e4c8-46e9-8591-e51bb82da082",
+      "cardDefinitionId": "f169dfb2-e4c8-46e9-8591-e51bb82da082",
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1792,7 +1792,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "f169dfb2-e4c8-46e9-8591-e51bb82da082",
+      "cardDefinitionId": "f169dfb2-e4c8-46e9-8591-e51bb82da082",
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1811,7 +1811,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "f169dfb2-e4c8-46e9-8591-e51bb82da082",
+      "cardDefinitionId": "f169dfb2-e4c8-46e9-8591-e51bb82da082",
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1830,7 +1830,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "f169dfb2-e4c8-46e9-8591-e51bb82da082",
+      "cardDefinitionId": "f169dfb2-e4c8-46e9-8591-e51bb82da082",
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1849,7 +1849,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "3041d539-4f15-4836-a215-afa19a5cc23f",
+      "cardDefinitionId": "3041d539-4f15-4836-a215-afa19a5cc23f",
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1868,7 +1868,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "3041d539-4f15-4836-a215-afa19a5cc23f",
+      "cardDefinitionId": "3041d539-4f15-4836-a215-afa19a5cc23f",
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1887,7 +1887,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "3041d539-4f15-4836-a215-afa19a5cc23f",
+      "cardDefinitionId": "3041d539-4f15-4836-a215-afa19a5cc23f",
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [
@@ -1906,7 +1906,7 @@
     },
     {
       "name": "Forest",
-      "scryfallId": "3041d539-4f15-4836-a215-afa19a5cc23f",
+      "cardDefinitionId": "3041d539-4f15-4836-a215-afa19a5cc23f",
       "twoFaced": false,
       "oracleCardName": "Forest",
       "colorIdentity": [

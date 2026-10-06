@@ -35,7 +35,7 @@ export const cardName = fc.oneof(
 );
 
 // Generator for Scryfall IDs (UUID format)
-export const scryfallId = fc.uuid();
+export const cardDefinitionId = fc.uuid();
 
 // Generator for multiverse IDs (optional)
 export const multiverseId = fc.option(fc.integer({ min: 1, max: 999999 }), { nil: undefined });
@@ -65,7 +65,7 @@ export const cardTypes = fc.oneof(
 // Generator for CardDefinition
 export const cardDefinition: fc.Arbitrary<CardDefinition> = fc.record({
   name: cardName,
-  scryfallId: scryfallId,
+  cardDefinitionId: cardDefinitionId,
   multiverseid: multiverseId,
   twoFaced: fc.boolean(),
   oracleCardName: cardName,
@@ -99,7 +99,7 @@ export const commanderName = fc.oneof(
 // Generator for commander cards
 export const commanderCard: fc.Arbitrary<CardDefinition> = fc.record({
   name: commanderName,
-  scryfallId: scryfallId,
+  cardDefinitionId: cardDefinitionId,
   multiverseid: multiverseId,
   twoFaced: fc.boolean(),
   oracleCardName: commanderName,
@@ -238,7 +238,7 @@ export const deckWithTwoCommanders: fc.Arbitrary<Deck> = fc.tuple(deckId, deckNa
 // Convenience exports for common card patterns from existing tests
 export const lightningBolt: CardDefinition = {
   name: "Lightning Bolt",
-  scryfallId: "abc123",
+  cardDefinitionId: "abc123",
   multiverseid: 12345,
   twoFaced: false,
   oracleCardName: "Lightning Bolt",
@@ -249,7 +249,7 @@ export const lightningBolt: CardDefinition = {
 
 export const ancestralRecall: CardDefinition = {
   name: "Ancestral Recall",
-  scryfallId: "def456",
+  cardDefinitionId: "def456",
   multiverseid: 67890,
   twoFaced: false,
   oracleCardName: "Ancestral Recall",
@@ -260,7 +260,7 @@ export const ancestralRecall: CardDefinition = {
 
 export const blackLotus: CardDefinition = {
   name: "Black Lotus",
-  scryfallId: "ghi789",
+  cardDefinitionId: "ghi789",
   multiverseid: 11111,
   twoFaced: false,
   oracleCardName: "Black Lotus",
@@ -271,7 +271,7 @@ export const blackLotus: CardDefinition = {
 
 export const atraxa: CardDefinition = {
   name: "Atraxa, Praetors' Voice",
-  scryfallId: "cmd001",
+  cardDefinitionId: "cmd001",
   multiverseid: 22222,
   twoFaced: false,
   oracleCardName: "Atraxa, Praetors' Voice",
@@ -283,7 +283,7 @@ export const atraxa: CardDefinition = {
 // A transforming card: cardTypes is the union of both faces' types.
 export const nicolBolas: CardDefinition = {
   name: "Nicol Bolas, the Ravager",
-  scryfallId: "nicol001",
+  cardDefinitionId: "nicol001",
   multiverseid: 33333,
   twoFaced: true,
   oracleCardName: "Nicol Bolas, the Ravager // Nicol Bolas, the Arisen",
@@ -308,9 +308,9 @@ export const createTestPersistedGameState = (gameId: number, deck: Deck, status:
   let commanderPositionCounter = 0;
   let libraryPositionCounter = 0;
 
-  // Create PersistedGameCard objects (with scryfallId only, not full card)
+  // Create PersistedGameCard objects (with cardDefinitionId only, not full card)
   const gameCards: PersistedGameCard[] = allCards.map((item, index) => ({
-    scryfallId: item.card.scryfallId,
+    cardDefinitionId: item.card.cardDefinitionId,
     isCommander: item.isCommander,
     location: item.isCommander
       ? { type: "CommandZone" as const, position: commanderPositionCounter++ }

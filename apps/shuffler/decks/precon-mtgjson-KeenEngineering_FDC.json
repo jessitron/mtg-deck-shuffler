@@ -1,12 +1,12 @@
 {
-  "version": 3,
+  "version": 4,
   "id": 512662026,
   "name": "Keen Engineering",
   "totalCards": 100,
   "commanders": [
     {
       "name": "Sai, Master Thopterist",
-      "scryfallId": "5650587a-27a5-4d68-97e2-5745627bd094",
+      "cardDefinitionId": "5650587a-27a5-4d68-97e2-5745627bd094",
       "twoFaced": false,
       "oracleCardName": "Sai, Master Thopterist",
       "colorIdentity": [
@@ -27,7 +27,7 @@
   "cards": [
     {
       "name": "All Is Dust",
-      "scryfallId": "8764ca43-bbbb-43b5-895b-c7049cc76580",
+      "cardDefinitionId": "8764ca43-bbbb-43b5-895b-c7049cc76580",
       "twoFaced": false,
       "oracleCardName": "All Is Dust",
       "colorIdentity": [],
@@ -45,7 +45,7 @@
     },
     {
       "name": "Broodstar",
-      "scryfallId": "77c699c3-c534-4ffa-bcaf-63c221e49243",
+      "cardDefinitionId": "77c699c3-c534-4ffa-bcaf-63c221e49243",
       "twoFaced": false,
       "oracleCardName": "Broodstar",
       "colorIdentity": [
@@ -64,7 +64,7 @@
     },
     {
       "name": "Kappa Cannoneer",
-      "scryfallId": "d644be98-83df-4546-a448-247f40299993",
+      "cardDefinitionId": "d644be98-83df-4546-a448-247f40299993",
       "twoFaced": false,
       "oracleCardName": "Kappa Cannoneer",
       "colorIdentity": [
@@ -84,7 +84,7 @@
     },
     {
       "name": "Master of Etherium",
-      "scryfallId": "b5b7a5df-c926-45ea-af5a-008abc1f0f28",
+      "cardDefinitionId": "b5b7a5df-c926-45ea-af5a-008abc1f0f28",
       "twoFaced": false,
       "oracleCardName": "Master of Etherium",
       "colorIdentity": [
@@ -104,7 +104,7 @@
     },
     {
       "name": "Master Transmuter",
-      "scryfallId": "300fe2eb-fcaf-4888-9e44-a1718ac16f6c",
+      "cardDefinitionId": "300fe2eb-fcaf-4888-9e44-a1718ac16f6c",
       "twoFaced": false,
       "oracleCardName": "Master Transmuter",
       "colorIdentity": [
@@ -124,7 +124,7 @@
     },
     {
       "name": "Misleading Signpost",
-      "scryfallId": "74774cba-89b9-43c3-9648-df5a5e28a71b",
+      "cardDefinitionId": "74774cba-89b9-43c3-9648-df5a5e28a71b",
       "twoFaced": false,
       "oracleCardName": "Misleading Signpost",
       "colorIdentity": [
@@ -143,7 +143,7 @@
     },
     {
       "name": "Pull from Tomorrow",
-      "scryfallId": "99d9d3a9-442b-485c-88e7-91de7278bde9",
+      "cardDefinitionId": "99d9d3a9-442b-485c-88e7-91de7278bde9",
       "twoFaced": false,
       "oracleCardName": "Pull from Tomorrow",
       "colorIdentity": [
@@ -162,7 +162,7 @@
     },
     {
       "name": "Research Thief",
-      "scryfallId": "f6287354-4503-43c6-bfc0-39efb6179428",
+      "cardDefinitionId": "f6287354-4503-43c6-bfc0-39efb6179428",
       "twoFaced": false,
       "oracleCardName": "Research Thief",
       "colorIdentity": [
@@ -182,7 +182,7 @@
     },
     {
       "name": "Shimmer Dragon",
-      "scryfallId": "826201fc-f7cb-43b5-988a-6b668d19fc2f",
+      "cardDefinitionId": "826201fc-f7cb-43b5-988a-6b668d19fc2f",
       "twoFaced": false,
       "oracleCardName": "Shimmer Dragon",
       "colorIdentity": [
@@ -201,7 +201,7 @@
     },
     {
       "name": "Thopter Fabricator",
-      "scryfallId": "36123651-430b-4ae3-a055-713f81bb0f53",
+      "cardDefinitionId": "36123651-430b-4ae3-a055-713f81bb0f53",
       "twoFaced": false,
       "oracleCardName": "Thopter Fabricator",
       "colorIdentity": [
@@ -220,7 +220,7 @@
     },
     {
       "name": "Thopter Spy Network",
-      "scryfallId": "8628d622-d682-4264-87d7-ad8434bb4328",
+      "cardDefinitionId": "8628d622-d682-4264-87d7-ad8434bb4328",
       "twoFaced": false,
       "oracleCardName": "Thopter Spy Network",
       "colorIdentity": [
@@ -239,7 +239,7 @@
     },
     {
       "name": "Thought Monitor",
-      "scryfallId": "03fd75f3-e545-4a07-ab1d-9b51612a1463",
+      "cardDefinitionId": "03fd75f3-e545-4a07-ab1d-9b51612a1463",
       "twoFaced": false,
       "oracleCardName": "Thought Monitor",
       "colorIdentity": [
@@ -259,7 +259,7 @@
     },
     {
       "name": "Vedalken Archmage",
-      "scryfallId": "cb57430d-a799-4036-aee2-6b5162035a7f",
+      "cardDefinitionId": "cb57430d-a799-4036-aee2-6b5162035a7f",
       "twoFaced": false,
       "oracleCardName": "Vedalken Archmage",
       "colorIdentity": [
@@ -278,7 +278,7 @@
     },
     {
       "name": "Adaptive Omnitool",
-      "scryfallId": "9e84f840-d7c6-4a82-8891-3d12281020ee",
+      "cardDefinitionId": "9e84f840-d7c6-4a82-8891-3d12281020ee",
       "twoFaced": false,
       "oracleCardName": "Adaptive Omnitool",
       "colorIdentity": [],
@@ -295,7 +295,7 @@
     },
     {
       "name": "Cultivator's Caravan",
-      "scryfallId": "f5ec4e50-b667-4376-913c-715959840850",
+      "cardDefinitionId": "f5ec4e50-b667-4376-913c-715959840850",
       "twoFaced": false,
       "oracleCardName": "Cultivator's Caravan",
       "colorIdentity": [],
@@ -312,7 +312,7 @@
     },
     {
       "name": "Darksteel Juggernaut",
-      "scryfallId": "79202c72-ffb3-4b00-811f-01814e117689",
+      "cardDefinitionId": "79202c72-ffb3-4b00-811f-01814e117689",
       "twoFaced": false,
       "oracleCardName": "Darksteel Juggernaut",
       "colorIdentity": [],
@@ -330,7 +330,7 @@
     },
     {
       "name": "Duplicant",
-      "scryfallId": "74e04402-dbc3-4646-9857-fc42ecd8cc43",
+      "cardDefinitionId": "74e04402-dbc3-4646-9857-fc42ecd8cc43",
       "twoFaced": false,
       "oracleCardName": "Duplicant",
       "colorIdentity": [],
@@ -348,7 +348,7 @@
     },
     {
       "name": "Forsaken Monument",
-      "scryfallId": "5f9e232e-39d0-4890-b935-98a1c14ef344",
+      "cardDefinitionId": "5f9e232e-39d0-4890-b935-98a1c14ef344",
       "twoFaced": false,
       "oracleCardName": "Forsaken Monument",
       "colorIdentity": [],
@@ -365,7 +365,7 @@
     },
     {
       "name": "Graaz, Unstoppable Juggernaut",
-      "scryfallId": "08947a4e-03cd-4e02-8eba-8f4087fad414",
+      "cardDefinitionId": "08947a4e-03cd-4e02-8eba-8f4087fad414",
       "twoFaced": false,
       "oracleCardName": "Graaz, Unstoppable Juggernaut",
       "colorIdentity": [],
@@ -383,7 +383,7 @@
     },
     {
       "name": "Mazemind Tome",
-      "scryfallId": "fbae0603-fdc3-488a-8917-08edf0884e1d",
+      "cardDefinitionId": "fbae0603-fdc3-488a-8917-08edf0884e1d",
       "twoFaced": false,
       "oracleCardName": "Mazemind Tome",
       "colorIdentity": [],
@@ -400,7 +400,7 @@
     },
     {
       "name": "Mind's Eye",
-      "scryfallId": "b3390599-8fa6-4962-b762-f558a75945cc",
+      "cardDefinitionId": "b3390599-8fa6-4962-b762-f558a75945cc",
       "twoFaced": false,
       "oracleCardName": "Mind's Eye",
       "colorIdentity": [],
@@ -417,7 +417,7 @@
     },
     {
       "name": "Myr Battlesphere",
-      "scryfallId": "7d2ca7dc-a999-4708-aeec-9f8e0f0db1e5",
+      "cardDefinitionId": "7d2ca7dc-a999-4708-aeec-9f8e0f0db1e5",
       "twoFaced": false,
       "oracleCardName": "Myr Battlesphere",
       "colorIdentity": [],
@@ -435,7 +435,7 @@
     },
     {
       "name": "Nettlecyst",
-      "scryfallId": "91ef92af-de6b-4dc4-81ab-8e527cb96fdd",
+      "cardDefinitionId": "91ef92af-de6b-4dc4-81ab-8e527cb96fdd",
       "twoFaced": false,
       "oracleCardName": "Nettlecyst",
       "colorIdentity": [],
@@ -452,7 +452,7 @@
     },
     {
       "name": "Nevinyrral's Disk",
-      "scryfallId": "a8d65c8e-984b-4cc2-8dc4-c8a7dd65be71",
+      "cardDefinitionId": "a8d65c8e-984b-4cc2-8dc4-c8a7dd65be71",
       "twoFaced": false,
       "oracleCardName": "Nevinyrral's Disk",
       "colorIdentity": [],
@@ -469,7 +469,7 @@
     },
     {
       "name": "Psychosis Crawler",
-      "scryfallId": "450a680b-a2fb-495b-b22e-8c799a495fdf",
+      "cardDefinitionId": "450a680b-a2fb-495b-b22e-8c799a495fdf",
       "twoFaced": false,
       "oracleCardName": "Psychosis Crawler",
       "colorIdentity": [],
@@ -487,7 +487,7 @@
     },
     {
       "name": "Scrawling Crawler",
-      "scryfallId": "09565ec6-dbb0-4ec8-bd75-781400f0dbe0",
+      "cardDefinitionId": "09565ec6-dbb0-4ec8-bd75-781400f0dbe0",
       "twoFaced": false,
       "oracleCardName": "Scrawling Crawler",
       "colorIdentity": [],
@@ -505,7 +505,7 @@
     },
     {
       "name": "Skysovereign, Consul Flagship",
-      "scryfallId": "0c254f4d-31ed-436a-92cb-85bb3709743e",
+      "cardDefinitionId": "0c254f4d-31ed-436a-92cb-85bb3709743e",
       "twoFaced": false,
       "oracleCardName": "Skysovereign, Consul Flagship",
       "colorIdentity": [],
@@ -522,7 +522,7 @@
     },
     {
       "name": "Steel Hellkite",
-      "scryfallId": "7ce14b48-34db-4308-8f5a-7b62d0e97d0e",
+      "cardDefinitionId": "7ce14b48-34db-4308-8f5a-7b62d0e97d0e",
       "twoFaced": false,
       "oracleCardName": "Steel Hellkite",
       "colorIdentity": [],
@@ -540,7 +540,7 @@
     },
     {
       "name": "Steel Overseer",
-      "scryfallId": "d306b8c9-7a7f-4238-8496-6df10782afaa",
+      "cardDefinitionId": "d306b8c9-7a7f-4238-8496-6df10782afaa",
       "twoFaced": false,
       "oracleCardName": "Steel Overseer",
       "colorIdentity": [],
@@ -558,7 +558,7 @@
     },
     {
       "name": "War Room",
-      "scryfallId": "b2593c45-585f-4eaf-bb08-e91a4fc2d425",
+      "cardDefinitionId": "b2593c45-585f-4eaf-bb08-e91a4fc2d425",
       "twoFaced": false,
       "oracleCardName": "War Room",
       "colorIdentity": [],
@@ -575,7 +575,7 @@
     },
     {
       "name": "Aetherize",
-      "scryfallId": "55c94e96-6563-43d5-8787-17868846e010",
+      "cardDefinitionId": "55c94e96-6563-43d5-8787-17868846e010",
       "twoFaced": false,
       "oracleCardName": "Aetherize",
       "colorIdentity": [
@@ -594,7 +594,7 @@
     },
     {
       "name": "Counterspell",
-      "scryfallId": "83390164-f00b-4be1-9cec-5de088c9debc",
+      "cardDefinitionId": "83390164-f00b-4be1-9cec-5de088c9debc",
       "twoFaced": false,
       "oracleCardName": "Counterspell",
       "colorIdentity": [
@@ -613,7 +613,7 @@
     },
     {
       "name": "Etherium Sculptor",
-      "scryfallId": "438aca09-34c2-4dac-8008-1862109443b5",
+      "cardDefinitionId": "438aca09-34c2-4dac-8008-1862109443b5",
       "twoFaced": false,
       "oracleCardName": "Etherium Sculptor",
       "colorIdentity": [
@@ -633,7 +633,7 @@
     },
     {
       "name": "Fall from Favor",
-      "scryfallId": "cd200502-84ad-40af-829d-ccb15859c226",
+      "cardDefinitionId": "cd200502-84ad-40af-829d-ccb15859c226",
       "twoFaced": false,
       "oracleCardName": "Fall from Favor",
       "colorIdentity": [
@@ -652,7 +652,7 @@
     },
     {
       "name": "Launch Mishap",
-      "scryfallId": "803c058c-4ccc-40cd-a74d-1bda5a4c453b",
+      "cardDefinitionId": "803c058c-4ccc-40cd-a74d-1bda5a4c453b",
       "twoFaced": false,
       "oracleCardName": "Launch Mishap",
       "colorIdentity": [
@@ -671,7 +671,7 @@
     },
     {
       "name": "Memory Guardian",
-      "scryfallId": "ce1aa5e5-a3b7-4a9d-9afd-b7c52aa2364c",
+      "cardDefinitionId": "ce1aa5e5-a3b7-4a9d-9afd-b7c52aa2364c",
       "twoFaced": false,
       "oracleCardName": "Memory Guardian",
       "colorIdentity": [
@@ -691,7 +691,7 @@
     },
     {
       "name": "Negate",
-      "scryfallId": "40b33b38-8591-4e0c-8f3a-0249da977821",
+      "cardDefinitionId": "40b33b38-8591-4e0c-8f3a-0249da977821",
       "twoFaced": false,
       "oracleCardName": "Negate",
       "colorIdentity": [
@@ -710,7 +710,7 @@
     },
     {
       "name": "Padeem, Consul of Innovation",
-      "scryfallId": "6303997b-784d-4710-9c56-a92b7d5a8786",
+      "cardDefinitionId": "6303997b-784d-4710-9c56-a92b7d5a8786",
       "twoFaced": false,
       "oracleCardName": "Padeem, Consul of Innovation",
       "colorIdentity": [
@@ -729,7 +729,7 @@
     },
     {
       "name": "Propaganda",
-      "scryfallId": "efc52d02-7d22-4ff6-b104-a6fe704e8ef2",
+      "cardDefinitionId": "efc52d02-7d22-4ff6-b104-a6fe704e8ef2",
       "twoFaced": false,
       "oracleCardName": "Propaganda",
       "colorIdentity": [
@@ -748,7 +748,7 @@
     },
     {
       "name": "Tamiyo's Logbook",
-      "scryfallId": "e5cef092-de95-4cc6-9426-908ca0b44c95",
+      "cardDefinitionId": "e5cef092-de95-4cc6-9426-908ca0b44c95",
       "twoFaced": false,
       "oracleCardName": "Tamiyo's Logbook",
       "colorIdentity": [
@@ -767,7 +767,7 @@
     },
     {
       "name": "Thirst for Knowledge",
-      "scryfallId": "f784f025-2798-4112-9768-39c8e3572b25",
+      "cardDefinitionId": "f784f025-2798-4112-9768-39c8e3572b25",
       "twoFaced": false,
       "oracleCardName": "Thirst for Knowledge",
       "colorIdentity": [
@@ -786,7 +786,7 @@
     },
     {
       "name": "Thoughtcast",
-      "scryfallId": "0baa33b1-c37c-4d62-a7c9-c08e5ac9724a",
+      "cardDefinitionId": "0baa33b1-c37c-4d62-a7c9-c08e5ac9724a",
       "twoFaced": false,
       "oracleCardName": "Thoughtcast",
       "colorIdentity": [
@@ -805,7 +805,7 @@
     },
     {
       "name": "Whirler Rogue",
-      "scryfallId": "51505039-b6f6-4dd6-9a09-5494e030deff",
+      "cardDefinitionId": "51505039-b6f6-4dd6-9a09-5494e030deff",
       "twoFaced": false,
       "oracleCardName": "Whirler Rogue",
       "colorIdentity": [
@@ -824,7 +824,7 @@
     },
     {
       "name": "Aether Spellbomb",
-      "scryfallId": "05647867-77a0-4f1c-afb9-6054f1f65f5f",
+      "cardDefinitionId": "05647867-77a0-4f1c-afb9-6054f1f65f5f",
       "twoFaced": false,
       "oracleCardName": "Aether Spellbomb",
       "colorIdentity": [
@@ -843,7 +843,7 @@
     },
     {
       "name": "Arcane Signet",
-      "scryfallId": "ee7710cf-e73d-479f-bc8d-0e78a0e324d9",
+      "cardDefinitionId": "ee7710cf-e73d-479f-bc8d-0e78a0e324d9",
       "twoFaced": false,
       "oracleCardName": "Arcane Signet",
       "colorIdentity": [],
@@ -860,7 +860,7 @@
     },
     {
       "name": "Chief of the Foundry",
-      "scryfallId": "19bdccb3-d85a-4b9a-9d5e-6f8add7a3c77",
+      "cardDefinitionId": "19bdccb3-d85a-4b9a-9d5e-6f8add7a3c77",
       "twoFaced": false,
       "oracleCardName": "Chief of the Foundry",
       "colorIdentity": [],
@@ -878,7 +878,7 @@
     },
     {
       "name": "Foundry Inspector",
-      "scryfallId": "9ff34a25-85f9-40a4-a3fd-c27148bf7429",
+      "cardDefinitionId": "9ff34a25-85f9-40a4-a3fd-c27148bf7429",
       "twoFaced": false,
       "oracleCardName": "Foundry Inspector",
       "colorIdentity": [],
@@ -896,7 +896,7 @@
     },
     {
       "name": "Hedron Archive",
-      "scryfallId": "068a365c-157c-4af4-9b17-4854d696c19d",
+      "cardDefinitionId": "068a365c-157c-4af4-9b17-4854d696c19d",
       "twoFaced": false,
       "oracleCardName": "Hedron Archive",
       "colorIdentity": [],
@@ -913,7 +913,7 @@
     },
     {
       "name": "Ichor Wellspring",
-      "scryfallId": "c904cd73-b3bf-4fbd-a0a0-1b2aaaf880b0",
+      "cardDefinitionId": "c904cd73-b3bf-4fbd-a0a0-1b2aaaf880b0",
       "twoFaced": false,
       "oracleCardName": "Ichor Wellspring",
       "colorIdentity": [],
@@ -930,7 +930,7 @@
     },
     {
       "name": "Meteor Golem",
-      "scryfallId": "9e72f3f6-7420-4d5c-bddb-7ea972adce81",
+      "cardDefinitionId": "9e72f3f6-7420-4d5c-bddb-7ea972adce81",
       "twoFaced": false,
       "oracleCardName": "Meteor Golem",
       "colorIdentity": [],
@@ -948,7 +948,7 @@
     },
     {
       "name": "Mind Stone",
-      "scryfallId": "62901ae9-98dd-466b-8358-f5abd765b3c0",
+      "cardDefinitionId": "62901ae9-98dd-466b-8358-f5abd765b3c0",
       "twoFaced": false,
       "oracleCardName": "Mind Stone",
       "colorIdentity": [],
@@ -965,7 +965,7 @@
     },
     {
       "name": "Myr Retriever",
-      "scryfallId": "9bc01feb-9e14-40f1-ba4b-87e109c672e7",
+      "cardDefinitionId": "9bc01feb-9e14-40f1-ba4b-87e109c672e7",
       "twoFaced": false,
       "oracleCardName": "Myr Retriever",
       "colorIdentity": [],
@@ -983,7 +983,7 @@
     },
     {
       "name": "Ornithopter of Paradise",
-      "scryfallId": "9e5c677e-397d-4a0c-994e-2f35eadb8a33",
+      "cardDefinitionId": "9e5c677e-397d-4a0c-994e-2f35eadb8a33",
       "twoFaced": false,
       "oracleCardName": "Ornithopter of Paradise",
       "colorIdentity": [],
@@ -1001,7 +1001,7 @@
     },
     {
       "name": "Palladium Myr",
-      "scryfallId": "3679933e-6880-41e3-b9e0-43d002722d4e",
+      "cardDefinitionId": "3679933e-6880-41e3-b9e0-43d002722d4e",
       "twoFaced": false,
       "oracleCardName": "Palladium Myr",
       "colorIdentity": [],
@@ -1019,7 +1019,7 @@
     },
     {
       "name": "Shimmer Myr",
-      "scryfallId": "8eb0c2fc-c7e0-41f2-b532-e4cac30d2ac7",
+      "cardDefinitionId": "8eb0c2fc-c7e0-41f2-b532-e4cac30d2ac7",
       "twoFaced": false,
       "oracleCardName": "Shimmer Myr",
       "colorIdentity": [],
@@ -1037,7 +1037,7 @@
     },
     {
       "name": "Silver Myr",
-      "scryfallId": "13d8a661-8e06-4625-8543-2c6ce7aaf03a",
+      "cardDefinitionId": "13d8a661-8e06-4625-8543-2c6ce7aaf03a",
       "twoFaced": false,
       "oracleCardName": "Silver Myr",
       "colorIdentity": [
@@ -1057,7 +1057,7 @@
     },
     {
       "name": "Sol Ring",
-      "scryfallId": "4f152dd9-2b35-45b2-90fe-8c71d0634226",
+      "cardDefinitionId": "4f152dd9-2b35-45b2-90fe-8c71d0634226",
       "twoFaced": false,
       "oracleCardName": "Sol Ring",
       "colorIdentity": [],
@@ -1074,7 +1074,7 @@
     },
     {
       "name": "Soul-Guide Lantern",
-      "scryfallId": "b005223d-aa57-4238-8c25-290141851177",
+      "cardDefinitionId": "b005223d-aa57-4238-8c25-290141851177",
       "twoFaced": false,
       "oracleCardName": "Soul-Guide Lantern",
       "colorIdentity": [],
@@ -1091,7 +1091,7 @@
     },
     {
       "name": "Spire Golem",
-      "scryfallId": "50ef252f-02c3-4b79-8e1b-d42db37e9fc4",
+      "cardDefinitionId": "50ef252f-02c3-4b79-8e1b-d42db37e9fc4",
       "twoFaced": false,
       "oracleCardName": "Spire Golem",
       "colorIdentity": [],
@@ -1109,7 +1109,7 @@
     },
     {
       "name": "Thought Vessel",
-      "scryfallId": "ddd26152-5e1f-4c48-99e0-a4fdc5155d98",
+      "cardDefinitionId": "ddd26152-5e1f-4c48-99e0-a4fdc5155d98",
       "twoFaced": false,
       "oracleCardName": "Thought Vessel",
       "colorIdentity": [],
@@ -1126,7 +1126,7 @@
     },
     {
       "name": "Buried Ruin",
-      "scryfallId": "1e57d7ee-78d8-4e02-b3a8-a4b16ec0cdaf",
+      "cardDefinitionId": "1e57d7ee-78d8-4e02-b3a8-a4b16ec0cdaf",
       "twoFaced": false,
       "oracleCardName": "Buried Ruin",
       "colorIdentity": [],
@@ -1143,7 +1143,7 @@
     },
     {
       "name": "Darksteel Citadel",
-      "scryfallId": "b379ba64-adf5-4a64-9f28-ace36f1b887b",
+      "cardDefinitionId": "b379ba64-adf5-4a64-9f28-ace36f1b887b",
       "twoFaced": false,
       "oracleCardName": "Darksteel Citadel",
       "colorIdentity": [],
@@ -1161,7 +1161,7 @@
     },
     {
       "name": "Foundry of the Consuls",
-      "scryfallId": "0087b1ea-beba-49e6-924c-b792c473a8ce",
+      "cardDefinitionId": "0087b1ea-beba-49e6-924c-b792c473a8ce",
       "twoFaced": false,
       "oracleCardName": "Foundry of the Consuls",
       "colorIdentity": [],
@@ -1178,7 +1178,7 @@
     },
     {
       "name": "Lonely Sandbar",
-      "scryfallId": "6c8281c0-161b-45c9-abe0-5527b644b7d0",
+      "cardDefinitionId": "6c8281c0-161b-45c9-abe0-5527b644b7d0",
       "twoFaced": false,
       "oracleCardName": "Lonely Sandbar",
       "colorIdentity": [
@@ -1197,7 +1197,7 @@
     },
     {
       "name": "Remote Isle",
-      "scryfallId": "444425b6-8529-430d-b74c-407ce462ad92",
+      "cardDefinitionId": "444425b6-8529-430d-b74c-407ce462ad92",
       "twoFaced": false,
       "oracleCardName": "Remote Isle",
       "colorIdentity": [
@@ -1216,7 +1216,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1236,7 +1236,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1256,7 +1256,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1276,7 +1276,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1296,7 +1296,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1316,7 +1316,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1336,7 +1336,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1356,7 +1356,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1376,7 +1376,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1396,7 +1396,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1416,7 +1416,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1436,7 +1436,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1456,7 +1456,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1476,7 +1476,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1496,7 +1496,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1516,7 +1516,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1536,7 +1536,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "17e2b637-72b1-4457-aaba-66d51107be4c",
+      "cardDefinitionId": "17e2b637-72b1-4457-aaba-66d51107be4c",
       "multiverseid": 677863,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1556,7 +1556,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1576,7 +1576,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1596,7 +1596,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1616,7 +1616,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1636,7 +1636,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1656,7 +1656,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1676,7 +1676,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1696,7 +1696,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1716,7 +1716,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1736,7 +1736,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1756,7 +1756,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1776,7 +1776,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1796,7 +1796,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1816,7 +1816,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1836,7 +1836,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1856,7 +1856,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",
@@ -1876,7 +1876,7 @@
     },
     {
       "name": "Island",
-      "scryfallId": "23635e40-d040-40b7-8b98-90ed362aa028",
+      "cardDefinitionId": "23635e40-d040-40b7-8b98-90ed362aa028",
       "multiverseid": 677864,
       "twoFaced": false,
       "oracleCardName": "Island",

@@ -7,7 +7,7 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 ### Scryfall (image URLs + image API)
 
 - Image URLs are **stored** on the card (`imageUris`/`backImageUris`), fetched from Scryfall at ingestion via `src/port-card-images/` (`ScryfallCardImagesGateway` → `POST /cards/collection`). `getCardImageUrl(card, format, face)` prefers the stored URL; `constructCardImageUrl(scryfallId, format, face)` is the fallback.
-- Both faces still share the same `scryfallId`. At render the back is read from `card.backImageUris`; at ingestion it comes from `card_faces[1].image_uris`. When stored URLs are absent (legacy data, Scryfall miss), the back falls back to the constructed `face=back` path — so the old "same id, swap the path segment" behavior still exists as the fallback.
+- Both faces still share the same `cardDefinitionId`. At render the back is read from `card.backImageUris`; at ingestion it comes from `card_faces[1].image_uris`. When stored URLs are absent (legacy data, Scryfall miss), the back falls back to the constructed `face=back` path — so the old "same id, swap the path segment" behavior still exists as the fallback.
 - **Why stored:** bare constructed `normal` URLs 404 for freshly-released cards; Scryfall only serves them at the versioned URL (`...jpg?<timestamp>`).
 - Scryfall requires a real `User-Agent` (else 400 — Node's default `User-Agent: node` is rejected by their Cloudflare front end, on the image CDN as well as the API). All outbound Scryfall calls go through `fetchScryfall()` in `src/scryfall-http.ts`, which sets it; `/proxy-image` shipped without one and 400'd every card copy until JES-136. Use `fetchScryfall`, not bare `fetch`, for any new Scryfall request.
 - If Scryfall's path scheme changes, the stored URLs still work (verbatim from Scryfall); only the fallback `constructCardImageUrl()` in `src/types.ts` would need updating.
@@ -79,6 +79,7 @@ This is the most cross-cutting feature in the app. Two-faced cards add complexit
 - Card copy uses the current face's image URL
 - The `copyCardImageToClipboard()` call in the modal receives the face-specific image URL
 - The `/proxy-image` route (CORS proxy for copy) now **looks up the card** from `cardRepository` to use its stored URL, falling back to `constructCardImageUrl(cardId, "png", face)` when the card isn't cached
+- **Known bug (pre-existing, unfixed):** `copyCardImageToClipboard` in `public/game.js` (~line 175) picks the face with `urlParts.includes("/back/")`, but `urlParts` is `imageUrl.split("/")`, so no part contains a slash and the check is always false — a back-face copy asks `/proxy-image` for `face=front` and copies the front image, stored URLs or not. Fix: `urlParts.includes("back")`, or read the face from the caller.
 - `/proxy-image` fetches from Scryfall via `fetchScryfall()` — see the Scryfall section above. Covered end-to-end (both faces, live CDN) by `test/verification/verify-proxy-image.sh`
 
 ### Being-Played Animation
@@ -120,13 +121,13 @@ These are specific things that could break two-faced cards if changed elsewhere:
 
 8. **Precon deck regeneration**: Required whenever the deck file format changes (bump `PERSISTED_DECK_VERSION` — see [`apps/shuffler/notes/DESIGN-persistence-versioning.md`](../../apps/shuffler/notes/DESIGN-persistence-versioning.md)). When regenerating, AllIdentifiers data must be available for the MTGJSON adapter to resolve other faces. Without it, the adapter throws an error. AllIdentifiers.json now exceeds Node's max string length, so `fetch-mtgjson-precons.ts` stream-parses it with `stream-json` (commit `5b3e5b5`) rather than `fs.readFile` + `JSON.parse`. If you touch `loadCardDatabase()`, keep it streaming — a whole-file read will throw `RangeError: Invalid string length`.
 
-9. **Game/prep state version**: `currentFace` is persisted on `PersistedGameCard`. Persisted state is now version-gated and **rejected** rather than migrated: `PERSISTED_GAME_STATE_VERSION` (now **10**) and `PERSISTED_GAME_PREP_VERSION` (3), and `fromPersistedGameState` / the prep routes throw `IncompatibleStateVersionError` / `IncompatiblePrepVersionError` (clear 410 page) for older versions. (8→9 added `mulliganStage`/`mulliganCount` to the envelope; 9→10 removed them again — the mulligan stage/count are now DERIVED from the event log via "deal opening hand"/"mulligan" events; 10→11 made those events atomic with their `moves` so a mulligan is one undoable event.) **If you change the card-data or persisted shapes again, follow the runbook: [`apps/shuffler/notes/DESIGN-persistence-versioning.md`](../../apps/shuffler/notes/DESIGN-persistence-versioning.md)** — a `CardDefinition` field change normally means bumping all three version constants, **unless** the field is optional with a graceful fallback (like `imageUris`/`backImageUris`), in which case old data stays valid and no bump is needed (see the runbook's "optional fields" exception).
+9. **Game/prep state version**: `currentFace` is persisted on `PersistedGameCard`. Persisted state is now version-gated and **rejected** rather than migrated: `PERSISTED_GAME_STATE_VERSION` (now **12**) and `PERSISTED_GAME_PREP_VERSION` (4), and `fromPersistedGameState` / the prep routes throw `IncompatibleStateVersionError` / `IncompatiblePrepVersionError` (clear 410 page) for older versions. (8→9 added `mulliganStage`/`mulliganCount` to the envelope; 9→10 removed them again — the mulligan stage/count are now DERIVED from the event log via "deal opening hand"/"mulligan" events; 10→11 made those events atomic with their `moves` so a mulligan is one undoable event; 11→12 renamed `PersistedGameCard.scryfallId` → `cardDefinitionId`, prep 3→4 likewise.) **If you change the card-data or persisted shapes again, follow the runbook: [`apps/shuffler/notes/DESIGN-persistence-versioning.md`](../../apps/shuffler/notes/DESIGN-persistence-versioning.md)** — a `CardDefinition` field change normally means bumping all three version constants, **unless** the field is optional with a graceful fallback (like `imageUris`/`backImageUris`), in which case old data stays valid and no bump is needed (see the runbook's "optional fields" exception).
 
    Also: `GameState.mulligan()` resets each returning hand card's `currentFace` to `"front"` as it goes back to the library, so a redrawn two-faced card starts on its front (matching `newGame`). If you add more zone-moving operations that should "reset" a card, consider whether they too should clear `currentFace`.
 
 10. **Single-image multi-face layouts** (`prepare`, `adventure`, `split`, `aftermath`, `flip`): These are deliberately NOT two-faced (no flip button) but DO contribute all their parts' types to `cardTypes`, so they appear under every relevant group in library search (e.g. a Prepared creature shows under both Creature and Sorcery). If a future feature needs both halves shown as images, that's a display feature, not a flip — don't reach for `twoFaced`.
 
-11. **Stale cached deck files**: `twoFaced`/`cardTypes` are baked into `decks/*.json` at download time. Changing adapter logic does NOT retroactively fix already-downloaded decks — they keep their old values until re-downloaded (`npm run deck:download -- <id>` for Archidekt, `npm run precons:fetch-mtgjson -- --convert` for MTGJSON). The deck-file format is version-gated (`PERSISTED_DECK_VERSION`, currently 3); `LocalFileAdapter` rejects mismatched files, so a format change means regenerating all decks.
+11. **Stale cached deck files**: `twoFaced`/`cardTypes` are baked into `decks/*.json` at download time. Changing adapter logic does NOT retroactively fix already-downloaded decks — they keep their old values until re-downloaded (`npm run deck:download -- <id>` for Archidekt, `npm run precons:fetch-mtgjson -- --convert` for MTGJSON). The deck-file format is version-gated (`PERSISTED_DECK_VERSION`, currently 4 — bumped by the `cardDefinitionId` rename); `LocalFileAdapter` rejects mismatched files, so a format change means regenerating all decks.
 
 12. **Don't collapse `face` and face-down into one bit** (decided 2026-08-07). `face`
     (`front`|`back`) is _which printed side_; face-down is _concealment_, and a two-faced
@@ -461,6 +462,30 @@ String(game.spineSeatNumber)` — a bare 1-4 seat number — every real `card.pl
     `CardArrivalPayloadCommon`, which never had `zoneHint`). No behavior change. The field
     was later removed from the wire entirely (schemas, Shuffler builders, test payloads);
     see `contract.md`'s "`zoneHint` removed" section.
+
+27. **Card identity is `cardDefinitionId`, fleet-wide — a clean break (branch
+    `card-definition-id`: `c9b5e942` contracts, `70b10265` Tabletop, `0a6c52dd` Shuffler).**
+    The field that names our card identity is `cardDefinitionId` everywhere:
+    `CardDefinition`, `PersistedGameCard`, the card repository's `card_definition_id`
+    column, the `mtg-card` shape prop, and `card.cardDefinitionId` in the v2 schemas. The
+    value is still a Scryfall printing id, so `scryfallId` stays only where it names
+    Scryfall's id: `constructCardImageUrl`'s param, `src/port-card-images/`, MTGJSON types.
+    **Don't reintroduce `scryfallId` as our identity name**, and when you pass a
+    `cardDefinitionId` to a Scryfall edge, the rename happens at that call.
+    - **No reader accepts v1** card-bearing events (Spine rejects as `UnknownEvent`,
+      Tabletop answers 400 / `arrival.outcome=invalid` + `log.warn`). `face` rules are
+      unchanged in v2. See [contract.md](contract.md).
+    - **Shuffler persistence:** game state 12, prep 4, deck 4 (`PersistedDeck.version` stays
+      2). Older state is rejected, not migrated; prep adapters throw
+      `IncompatiblePrepVersionError` before hydrating, and `/prep-table-look` maps it to
+      404. The card repository's stale-schema check tests for `card_definition_id`. The
+      198 deck files were rewritten (key + version) with `cardTypes` unchanged, so
+      `twoFaced`/`cardTypes` survived — no re-download.
+    - **Tabletop:** the stored-shape rename runs as a tldraw props migration
+      (`mtgCardShapeMigrations`, `RenameScryfallId: 1`, in `src/shared/mtgCardShape.ts`) —
+      see [tabletop.md](tabletop.md). `POST /api/tables/:slug/cards/return` takes
+      `cardDefinitionId`.
+    - Span attribute is `card.definition_id` on both ships.
 
 ## Not Related To
 

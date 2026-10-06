@@ -11,7 +11,7 @@ function formatRevealedCardActionsHtmlFragment(game: GameState, gameCard: GameCa
   ];
 
   return `<div class="card-buttons">
-    ${formatCardActionsGroupHtmlFragment(actions, game.gameId, gameCard.gameCardIndex, game.getStateVersion(), gameCard.card.scryfallId, gameCard.currentFace)}
+    ${formatCardActionsGroupHtmlFragment(actions, game.gameId, gameCard.gameCardIndex, game.getStateVersion(), gameCard.card.cardDefinitionId, gameCard.currentFace)}
   </div>`;
 }
 

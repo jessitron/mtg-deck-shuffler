@@ -53,7 +53,7 @@ module ValidEnvelope
       "occurredIn" => "shuffler",
       "origin" => "shuffler.test",
       "significance" => "administrative",
-      "schemaVersion" => 1,
+      "schemaVersion" => 2,
       "payload" => { "deckName" => "Test Deck" }
     }.merge(overrides)
   end

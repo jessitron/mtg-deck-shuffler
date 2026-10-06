@@ -22,7 +22,7 @@ the server as its own process with no live Spine to seed a card through; it call
 ```
 const shapeId = createShapeId(`card-${arrival.card.instanceId}`);
 ...
-props: { ..., instanceId: arrival.card.instanceId, scryfallId: arrival.card.scryfallId, cardName: arrival.cardName, ... }
+props: { ..., instanceId: arrival.card.instanceId, cardDefinitionId: arrival.card.cardDefinitionId, cardName: arrival.cardName, ... }
 meta: {} // empty at arrival; zone gets stamped here once the card is dragged
 ```
 
@@ -192,7 +192,7 @@ while shrinking (`w`/`h` → 1) and fading (`opacity` → 0) into the library zo
 center over 500ms — then defers, via `setTimeout(0)` (never synchronous — tldraw non-null-asserts
 every still-settling shape mid multi-select-drag, so nothing here may run before the drag gesture
 itself has fully unwound), an async completion: `POST /api/tables/:tableSlug/cards/return` with
-the card's `owner`/`scryfallId`/`gameCardIndex`. Only a confirmed 2xx calls
+the card's `owner`/`cardDefinitionId`/`gameCardIndex`. Only a confirmed 2xx calls
 `editor.deleteShapes([id])`; any failure (network error, non-2xx, or a null `gameCardIndex`
 slipping through) re-`animateShapes`s the shape's pre-swallow snapshot (`x`/`y`/`rotation`/
 `opacity`/`props`) back over 200ms and leaves it in the store. An `editor.getShape(id)`
@@ -306,7 +306,7 @@ The old `MtgCardImageShapeUtil` shared tldraw's `type: "image"` with furniture b
 stray dropped JPEGs, so every hook opened with `if (!shape.meta?.instanceId) return undefined` to
 tell a real card apart from those. `mtg-card` is now its own exclusive shape type — every instance
 *is* a real card — so that guard was dead weight and was removed from `onClick`/`onTranslateEnd`.
-Identity now lives in validated `props` (`instanceId`/`scryfallId`/`cardName`), not `meta`. `meta`
+Identity now lives in validated `props` (`instanceId`/`cardDefinitionId`/`cardName`), not `meta`. `meta`
 survives only for the zone-entry dedup described above.
 
 ## The tldraw quirk: `onClick` defers selection to pointer-up
@@ -371,7 +371,7 @@ store's validation schema — any furniture using those types would fail to sync
 **Server** — `apps/tabletop/src/server/rooms.ts`:
 ```
 const tableSchema = createTLSchema({
-  shapes: { ...defaultShapeSchemas, "mtg-card": { props: mtgCardShapeProps } },
+  shapes: { ...defaultShapeSchemas, "mtg-card": { props: mtgCardShapeProps, migrations: mtgCardShapeMigrations } },
 });
 ...
 room: new TLSocketRoom({ schema: tableSchema, ... })
@@ -380,6 +380,17 @@ room: new TLSocketRoom({ schema: tableSchema, ... })
 shapes either. Miss `...defaultShapeSchemas` here and the *server's* schema rejects furniture,
 not just cards — and unlike the client-side gap, this one disconnects the client outright rather
 than degrading quietly, since `TLSocketRoom` validates every incoming record against `schema`.
+
+**A props rename needs a props migration, registered in both places.** Rooms persist shapes, so
+a renamed prop leaves old records carrying the old key, and the validators reject them. The
+`scryfallId` → `cardDefinitionId` rename added the first migration on any custom shape here:
+`mtgCardShapeMigrations` in `src/shared/mtgCardShape.ts`
+(`createShapePropsMigrationIds("mtg-card", { RenameScryfallId: 1 })`, `up`/`down` move the
+value between keys). It is wired into the server schema above (`migrations:`) and the client as
+`static override migrations` on `MtgCardShapeUtil`. Miss the server side and stored rooms fail
+to load; miss the client side and client and server disagree on the schema version. The next
+rename appends a step to the same sequence (`RenameScryfallId: 1`, then `: 2`, ...); never edit a
+landed step.
 
 Zones/furniture used to be drawn as stock, locked `geo`/`image` shapes with no custom ShapeUtil of
 their own — ticket 13 (below) gave them one, `mtg-zone`. `MtgCardShapeUtil.tsx`'s own comment

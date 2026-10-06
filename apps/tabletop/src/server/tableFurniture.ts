@@ -112,7 +112,7 @@ export interface MtgCardShapeArgs {
   h: number;
   index: IndexKey;
   instanceId: string;
-  scryfallId: string;
+  cardDefinitionId: string;
   cardName: string;
   frontImageUrl: string;
   backImageUrl: string | null;
@@ -139,7 +139,7 @@ export function mtgCardShape({
   h,
   index,
   instanceId,
-  scryfallId,
+  cardDefinitionId,
   cardName,
   frontImageUrl,
   backImageUrl,
@@ -168,7 +168,7 @@ export function mtgCardShape({
       w,
       h,
       instanceId,
-      scryfallId,
+      cardDefinitionId,
       cardName,
       frontImageUrl,
       backImageUrl,

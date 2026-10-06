@@ -35,6 +35,11 @@ This is narrower than "fail loudly" — known fields still type-check (wrong typ
 pattern, missing `required` all still reject); only genuinely unrecognized properties
 pass through unexamined.
 
+Renaming the card identity `scryfallId` → `cardDefinitionId` took `card.played`,
+`card.played-face-down`, `card.discarded`, `card.returned` and `seat.joined` to v2 as a clean
+break: readers know v2 only and reject v1. Events stored in a Spine log before that change
+are still there, but no ship can read them on replay.
+
 Removing `zoneHint` from `card.played.v1` and `card.played-face-down.v1` (every played card
 arrives on the Stack) was an in-place edit with no version bump: the field was already
 ignored by every receiver, and `additionalProperties: true` lets a sender that still
@@ -96,8 +101,9 @@ How a card is serialized in any event payload, ever:
 
 **Identity of cards has two levels** : the _definition_ and the _instance_.
 
-- **The Scryfall ID identifies the card definition.** It captures the exact printing: oracle identity,
-  all faces, all names (oracle name and the vanity/flavor name), all image URIs.
+- **`cardDefinitionId` identifies the card definition.** It captures the exact printing: oracle
+  identity, all faces, all names (oracle name and the vanity/flavor name), all image URIs. It is
+  a UUID; for a Scryfall card its value is the Scryfall id.
 - **Instance** — `cardInstanceId`: _this particular Forest_, the way a physical deck
   has one. This is currently a GUID minted by the Shuffler, but actually, I'd rather it were gameCardIndexGame-mechanically two Forests are equivalent; log-wise they are
   distinct individuals, so a single card can be followed through played → tapped →

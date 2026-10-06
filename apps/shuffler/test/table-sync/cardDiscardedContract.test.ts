@@ -8,7 +8,7 @@ import { assertValidatesAsSpineEvent } from "./contractValidation.js";
 
 const lightningBolt: CardDefinition = {
   name: "Lightning Bolt",
-  scryfallId: "e6f2c1a4-2222-4a22-9e33-000000000002",
+  cardDefinitionId: "e6f2c1a4-2222-4a22-9e33-000000000002",
   multiverseid: 12345,
   twoFaced: false,
   oracleCardName: "Lightning Bolt",
@@ -31,7 +31,7 @@ function cardNamed(game: GameState, name: string) {
   return game.getCards().find((gc) => gc.card.name === name)!;
 }
 
-describe("card.discarded events validate against the Spine's own contracts (contracts/envelope.v1.json, contracts/payloads/card.discarded.v1.json)", () => {
+describe("card.discarded events validate against the Spine's own contracts (contracts/envelope.v1.json, contracts/payloads/card.discarded.v2.json)", () => {
   it("a directly-built event validates", () => {
     const event = buildCardDiscardedEvent(
       { card: lightningBolt, location: { type: "Hand", position: 0 }, gameCardIndex: 0, isCommander: false, currentFace: "front" },

@@ -4,7 +4,7 @@ import { PrepId } from "../port-persist-prep/types.js";
 import { GameId, GameStatus } from "../domain-types.js";
 import { PersistedGameCard } from "./persisted-types.js";
 
-export const PERSISTED_GAME_STATE_VERSION: 11 = 11;
+export const PERSISTED_GAME_STATE_VERSION: 12 = 12;
 
 /** Thrown when a persisted game was saved in a format this build can't load. */
 export class IncompatibleStateVersionError extends Error {

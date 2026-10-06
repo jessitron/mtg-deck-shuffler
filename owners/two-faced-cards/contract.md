@@ -2,15 +2,33 @@
 
 How faces appear in the fleet's published language (`notes/DESIGN-event-contract-v0.md`,
 JES-128). **Landed** (JES-129, `9e3ca60`): the JSON Schema lives at
-`contracts/payloads/card.played.v1.json` — `card: { scryfallId, instanceId }` (both
+`contracts/payloads/card.played.v2.json` — `card: { cardDefinitionId, instanceId }` (both
 uuid-format) with a required sibling `face: enum ["front","back"]`. The Spine
 (`services/spine/`, Ruby) validates generic ingested events and the `seat.joined` event
 minted by its administered `/join` against these schemas via `lib/event_contract.rb`.
 Invalid join decoration fails with 422 before persistence or delivery.
 
+## Card-bearing schemas are v2 — a clean break (card-definition-id, `c9b5e942`)
+
+`card.played`, `card.played-face-down`, `card.discarded`, `card.returned`, and `seat.joined`
+are now `.v2.json`; the v1 files are deleted. The only change: `card.scryfallId` →
+`card.cardDefinitionId` (required, uuid). The **`face` rules did not change** — `face` is
+still required on `card.played`/`card.played-face-down`/`card.discarded`, and
+`card.returned.v2` still has `"face": false`. No reader accepts v1: the Spine's
+`EventContract` rejects a v1 append as `UnknownEvent`; the Tabletop's `contractValidation.ts`
+returns `unknown schemaVersion 1` (→ 400 / `arrival.outcome=invalid`). Stored v1 events stay
+in Spine logs, unreadable on replay. `seat.taken` and `join` stay v1.
+
+The sections below are named for the schema version current when each was built; read
+`.v1` there as "this kind," and `scryfallId` in them as today's `cardDefinitionId`.
+
+**The value is still a Scryfall printing id.** `cardDefinitionId` names *our* card identity;
+`scryfallId` survives only where it names Scryfall's own id — `constructCardImageUrl`'s
+param, the `port-card-images` port, MTGJSON identifiers.
+
 ## The rule
 
-- **Identity is `card: { scryfallId, instanceId }`.** `scryfallId` is the definition
+- **Identity is `card: { cardDefinitionId, instanceId }`.** `cardDefinitionId` is the definition
   (the exact printing, all faces); `instanceId` is *this particular card* in *this
   game* (opaque GUID minted by the Shuffler).
 - **`face` is a sibling field, not part of the card reference.** Events about
@@ -33,7 +51,7 @@ Invalid join decoration fails with 422 before persistence or delivery.
 `contracts/payloads/card.returned.v1.json` (shuffler-spine-sse-subscriber ticket 01,
 2026-08-20) is the first payload schema to actually build the "faceless removal event"
 rule that watch point 19 in [interactions.md](interactions.md) had only decided. Identity
-here is `card: { scryfallId }` plus a top-level `gameCardIndex` (the Shuffler's own
+here is `card: { cardDefinitionId }` (was `scryfallId` in v1) plus a top-level `gameCardIndex` (the Shuffler's own
 decklist rank) and `seat` — not `instanceId`, because the table doesn't mint or track one
 and `gameCardIndex` is what the Shuffler looks the card back up by. `fromZone` is an
 optional hint.

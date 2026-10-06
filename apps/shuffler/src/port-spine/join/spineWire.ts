@@ -6,7 +6,7 @@
 
 export interface SeatJoinedCommander {
   card: {
-    scryfallId: string;
+    cardDefinitionId: string;
     instanceId: string;
   };
   cardName: string;

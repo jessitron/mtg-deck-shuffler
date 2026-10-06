@@ -14,15 +14,15 @@ function baseEnvelope(payload: unknown) {
     occurredIn: "tabletop",
     origin: "tabletop.cardShapeHook",
     significance: "domain",
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload,
   };
 }
 
-describe("card.returned events validate against the Spine's own contracts (contracts/envelope.v1.json, contracts/payloads/card.returned.v1.json)", () => {
+describe("card.returned events validate against the Spine's own contracts (contracts/envelope.v1.json, contracts/payloads/card.returned.v2.json)", () => {
   it("a well-formed payload validates", () => {
     const event = baseEnvelope({
-      card: { scryfallId: "e6f2c1a4-2222-4a22-9e33-000000000002" },
+      card: { cardDefinitionId: "e6f2c1a4-2222-4a22-9e33-000000000002" },
       gameCardIndex: 0,
       seat: "1",
       fromZone: "battlefield",
@@ -33,7 +33,7 @@ describe("card.returned events validate against the Spine's own contracts (contr
 
   it("a well-formed payload without the optional fromZone still validates", () => {
     const event = baseEnvelope({
-      card: { scryfallId: "e6f2c1a4-2222-4a22-9e33-000000000002" },
+      card: { cardDefinitionId: "e6f2c1a4-2222-4a22-9e33-000000000002" },
       gameCardIndex: 0,
       seat: "1",
     });
@@ -43,7 +43,7 @@ describe("card.returned events validate against the Spine's own contracts (contr
 
   it("a payload missing gameCardIndex is rejected", () => {
     const event = baseEnvelope({
-      card: { scryfallId: "e6f2c1a4-2222-4a22-9e33-000000000002" },
+      card: { cardDefinitionId: "e6f2c1a4-2222-4a22-9e33-000000000002" },
       seat: "1",
     });
 
@@ -52,7 +52,7 @@ describe("card.returned events validate against the Spine's own contracts (contr
 
   it("a payload carrying an unexpected face field is rejected", () => {
     const event = baseEnvelope({
-      card: { scryfallId: "e6f2c1a4-2222-4a22-9e33-000000000002" },
+      card: { cardDefinitionId: "e6f2c1a4-2222-4a22-9e33-000000000002" },
       gameCardIndex: 0,
       seat: "1",
       face: "front",
@@ -63,7 +63,7 @@ describe("card.returned events validate against the Spine's own contracts (contr
 
   it("a shuffler-initiated payload carrying instanceId (ticket 07) validates too — instanceId is additive, not exclusive", () => {
     const event = baseEnvelope({
-      card: { scryfallId: "e6f2c1a4-2222-4a22-9e33-000000000002", instanceId: "11111111-1111-1111-1111-111111111111" },
+      card: { cardDefinitionId: "e6f2c1a4-2222-4a22-9e33-000000000002", instanceId: "11111111-1111-1111-1111-111111111111" },
       gameCardIndex: 0,
       seat: "1",
     });
@@ -75,7 +75,7 @@ describe("card.returned events validate against the Spine's own contracts (contr
 describe("sendCardReturnedToSpineBestEffort's actual send validates against the same contracts", () => {
   const lightningBolt: CardDefinition = {
     name: "Lightning Bolt",
-    scryfallId: "e6f2c1a4-2222-4a22-9e33-000000000002",
+    cardDefinitionId: "e6f2c1a4-2222-4a22-9e33-000000000002",
     multiverseid: 12345,
     twoFaced: false,
     oracleCardName: "Lightning Bolt",

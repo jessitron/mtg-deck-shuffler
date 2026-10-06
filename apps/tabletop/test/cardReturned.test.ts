@@ -90,7 +90,7 @@ describe("POST /api/tables/:tableName/cards/return", () => {
     seedRoom("Portal Test A", "seat-a", "Jess");
     const response = await postReturn("Portal Test A", {
       seatId: "seat-a",
-      scryfallId: "11111111-1111-4111-8111-111111111111",
+      cardDefinitionId: "11111111-1111-4111-8111-111111111111",
       gameCardIndex: 4,
     });
 
@@ -110,7 +110,7 @@ describe("POST /api/tables/:tableName/cards/return", () => {
     seedRoom("Portal Test B", "seat-b", "Jess");
     const response = await postReturn("Portal Test B", {
       seatId: "seat-b",
-      scryfallId: "11111111-1111-4111-8111-111111111111",
+      cardDefinitionId: "11111111-1111-4111-8111-111111111111",
       gameCardIndex: 2,
     });
 
@@ -127,7 +127,7 @@ describe("POST /api/tables/:tableName/cards/return", () => {
     seedRoom("Portal Test D", "seat-d", "Jess");
     const response = await postReturn("Portal Test D", {
       seatId: "someone-else",
-      scryfallId: "11111111-1111-4111-8111-111111111111",
+      cardDefinitionId: "11111111-1111-4111-8111-111111111111",
       gameCardIndex: 1,
     });
     expect(response.status).toBe(404);

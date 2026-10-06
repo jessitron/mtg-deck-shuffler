@@ -1,5 +1,5 @@
 import { BaseBoxShapeUtil, TLDragShapesOutInfo, TLShape, TLShapePartial } from "tldraw";
-import { MtgCardShape, mtgCardShapeProps } from "../../shared/mtgCardShape";
+import { MtgCardShape, mtgCardShapeMigrations, mtgCardShapeProps } from "../../shared/mtgCardShape";
 import { CardFace, cardIndicatorPath } from "./cardRender";
 import { handleCardClick } from "./cardTapClick";
 import { canReceivePassenger, canRemovePassenger, handleDragShapesIn, handleDragShapesOut } from "./cardPassengers";
@@ -11,13 +11,14 @@ import { lerp } from "tldraw";
 export class MtgCardShapeUtil extends BaseBoxShapeUtil<MtgCardShape> {
   static override type = "mtg-card" as const;
   static override props = mtgCardShapeProps;
+  static override migrations = mtgCardShapeMigrations;
 
   override getDefaultProps(): MtgCardShape["props"] {
     return {
       w: 170,
       h: 238,
       instanceId: "",
-      scryfallId: "",
+      cardDefinitionId: "",
       cardName: "",
       frontImageUrl: "",
       backImageUrl: null,

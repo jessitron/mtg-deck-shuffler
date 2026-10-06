@@ -36,7 +36,7 @@ function seatJoined(tableName: string, seatId: string, playerName: string) {
     origin: "shuffler.shuffleUp",
     significance: "administrative",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: { deckName: "Deck", playmatImageUrl: "https://example.com/playmat.png", cardBackImageUrl: "https://example.com/card-back.jpg" },
   };
 }
@@ -52,9 +52,9 @@ function cardPlayed(tableName: string, seatId: string, playerName: string) {
     origin: "shuffler.playCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
-      card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
+      card: { cardDefinitionId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
       backImageUrl: null,

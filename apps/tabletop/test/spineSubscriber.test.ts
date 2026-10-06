@@ -33,9 +33,9 @@ function cardPlayedEvent(tableName: string, overrides: Record<string, unknown> =
     origin: "shuffler.playCardSubmit",
     significance: "domain",
     traceparent: fakeTraceparent(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     payload: {
-      card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
+      card: { cardDefinitionId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
       backImageUrl: null,

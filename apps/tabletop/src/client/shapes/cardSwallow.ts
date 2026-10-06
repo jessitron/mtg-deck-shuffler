@@ -17,7 +17,7 @@ interface SwallowSnapshot {
 /**
  * The library portal's swallow (ticket 12): spins the card twice while shrinking and
  * fading it into the library's center over ~500ms, then — send-then-commit — deletes it
- * only once the Tabletop server confirms the Spine accepted `card.returned.v1`. On
+ * only once the Tabletop server confirms the Spine accepted `card.returned.v2`. On
  * failure the card's visuals revert and it stays on the table; nothing here deletes
  * synchronously, since tldraw non-null-asserts every still-settling shape in a
  * multi-select drag (see `owners/tabletop-shape-mechanics`).
@@ -52,10 +52,10 @@ export function swallowCard(editor: Editor, current: MtgCardShape, zoneHit: Zone
   );
 
   const id = current.id;
-  const { scryfallId, gameCardIndex } = current.props;
+  const { cardDefinitionId, gameCardIndex } = current.props;
 
   setTimeout(() => {
-    void completeSwallow(editor, id, before, { seatId: zoneHit.seatId, scryfallId, gameCardIndex });
+    void completeSwallow(editor, id, before, { seatId: zoneHit.seatId, cardDefinitionId, gameCardIndex });
   }, 0);
 }
 
@@ -63,7 +63,7 @@ async function completeSwallow(
   editor: Editor,
   id: TLShapeId,
   before: SwallowSnapshot,
-  send: { seatId: string | null; scryfallId: string; gameCardIndex: number | null }
+  send: { seatId: string | null; cardDefinitionId: string; gameCardIndex: number | null }
 ): Promise<void> {
   const [ok] = await Promise.all([postCardReturned(send), sleep(SWALLOW_DURATION_MS)]);
 
@@ -88,7 +88,7 @@ function tableSlugFromLocation(): string | undefined {
   return match ? decodeURIComponent(match[1]) : undefined;
 }
 
-async function postCardReturned(send: { seatId: string | null; scryfallId: string; gameCardIndex: number | null }): Promise<boolean> {
+async function postCardReturned(send: { seatId: string | null; cardDefinitionId: string; gameCardIndex: number | null }): Promise<boolean> {
   if (send.seatId === null || send.gameCardIndex === null) return false;
   const tableSlug = tableSlugFromLocation();
   if (!tableSlug) return false;
@@ -97,7 +97,7 @@ async function postCardReturned(send: { seatId: string | null; scryfallId: strin
     const response = await fetch(`/api/tables/${encodeURIComponent(tableSlug)}/cards/return`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ seatId: send.seatId, scryfallId: send.scryfallId, gameCardIndex: send.gameCardIndex }),
+      body: JSON.stringify({ seatId: send.seatId, cardDefinitionId: send.cardDefinitionId, gameCardIndex: send.gameCardIndex }),
     });
     return response.ok;
   } catch {

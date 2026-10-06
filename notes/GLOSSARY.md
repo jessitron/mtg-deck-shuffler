@@ -47,7 +47,9 @@ Transform (Tabletop): swap which printed face of a two-faced card is up, front t
 
 Flip (Shuffler only): private inspection of the other printed face of a two-faced card. It never leaves the Shuffler and is not an event. The Tabletop never says "flip"; its equivalent is Transform, a physical event the table can see.
 
-Scryfall ID: Scryfall's card ID. This is a UUID. From this, we can derive a card image URL on Scryfall. Archidekt calls it `uid`.
+Scryfall ID: Scryfall's card ID. This is a UUID. From this, we can derive a card image URL on Scryfall. Archidekt calls it `uid`. For a Scryfall card, it is the value of the Card Definition ID.
+
+Card Definition ID: the UUID that identifies a Card Definition — `cardDefinitionId` in code, contracts and persistence, `card.definition_id` on spans. Scryfall is one source of definitions; the name stays put when another source arrives.
 
 Multiverse ID: Gatherer's card ID. This is an integer. From this, we can derive a link to the card's page on Gatherer.
 
@@ -81,7 +83,7 @@ Game (MTG Deck Shuffler): an active gameplay session. During a game, the positio
 
 Game Status (MTG Deck Shuffler): the state of a game. Can be Active (gameplay in progress) or Ended (game finished). The NotStarted status was removed - prep phase is now handled by GamePrep.
 
-Card Definition (MTG Deck Shuffler): a definition of a card, including name (from Display Name), Scryfall ID, and Multiverse ID. Immutable.
+Card Definition (MTG Deck Shuffler): a definition of a card, including name (from Display Name), Card Definition ID, and Multiverse ID. Immutable.
 
 Game Card (MTG Deck Shuffler, game scope): a card involved in a game. It has a Card Definition and a Location.
 

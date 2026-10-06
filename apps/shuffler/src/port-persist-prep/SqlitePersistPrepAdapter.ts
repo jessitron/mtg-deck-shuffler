@@ -1,5 +1,5 @@
 import Database from "better-sqlite3";
-import { PersistPrepPort, PersistedGamePrep, PrepId, PERSISTED_GAME_PREP_VERSION } from "./types.js";
+import { IncompatiblePrepVersionError, PersistPrepPort, PersistedGamePrep, PrepId, PERSISTED_GAME_PREP_VERSION } from "./types.js";
 import { CardRepositoryPort } from "../port-card-repository/types.js";
 import { PersistedDeck } from "../port-persist-state/persisted-types.js";
 import { hydrateDeck, dehydrateDeck } from "../port-card-repository/hydration.js";
@@ -85,6 +85,10 @@ export class SqlitePersistPrepAdapter implements PersistPrepPort {
       }
       if (storedPrep.updatedAt) {
         storedPrep.updatedAt = new Date(storedPrep.updatedAt);
+      }
+
+      if (storedPrep.version !== PERSISTED_GAME_PREP_VERSION) {
+        throw new IncompatiblePrepVersionError(storedPrep.version, PERSISTED_GAME_PREP_VERSION);
       }
 
       // Hydrate the deck before returning

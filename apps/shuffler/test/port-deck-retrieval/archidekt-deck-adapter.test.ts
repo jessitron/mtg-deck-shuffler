@@ -150,7 +150,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.totalCards).toBe(32); // 31 non-commander cards + 1 commander
     expect(result.commanders).toEqual([{
       name: "Urza, Lord High Artificer",
-      scryfallId: "urza-uid",
+      cardDefinitionId: "urza-uid",
       multiverseid: 333333,
       twoFaced: false,
       oracleCardName: "Urza, Lord High Artificer",
@@ -283,7 +283,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     expect(result.id).toBe(14669648);
     expect(result.name).toBe("Ygra EATS IT ALL");
-    expect(result.commanders[0]).toMatchObject({ name: "Ygra, Eater of All", scryfallId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155, twoFaced: false });
+    expect(result.commanders[0]).toMatchObject({ name: "Ygra, Eater of All", cardDefinitionId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155, twoFaced: false });
     expect(result.commanders[0].colorIdentity).toBeDefined();
     expect(result.commanders[0].set).toBeDefined();
     expect(result.totalCards).toBe(4); // 3 non-commander cards + 1 commander
@@ -330,7 +330,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.cards.length).toBe(1);
     expect(result.cards[0]).toEqual({
       name: "Oracle Name",
-      scryfallId: "test-uid",
+      cardDefinitionId: "test-uid",
       multiverseid: 123456,
       twoFaced: false,
       oracleCardName: "Oracle Name",
@@ -382,7 +382,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.cards.length).toBe(1);
     expect(result.cards[0]).toEqual({
       name: "Display Name",
-      scryfallId: "test-uid-2",
+      cardDefinitionId: "test-uid-2",
       multiverseid: 789012,
       twoFaced: false,
       oracleCardName: "Oracle Name",
@@ -459,7 +459,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.commanders.length).toBe(2);
     expect(result.commanders[0]).toEqual({
       name: "Jaheira, Friend of the Forest",
-      scryfallId: "jaheira-uid",
+      cardDefinitionId: "jaheira-uid",
       multiverseid: 111111,
       twoFaced: false,
       oracleCardName: "Jaheira, Friend of the Forest",
@@ -469,7 +469,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
     });
     expect(result.commanders[1]).toEqual({
       name: "Agent of the Iron Throne",
-      scryfallId: "agent-uid",
+      cardDefinitionId: "agent-uid",
       multiverseid: 222222,
       twoFaced: false,
       oracleCardName: "Agent of the Iron Throne",
@@ -531,7 +531,7 @@ describe("ArchidektDeckToDeckAdapter", () => {
 
     expect(result.id).toBe(14669648);
     expect(result.name).toBe("Ygra EATS IT ALL");
-    expect(result.commanders[0]).toMatchObject({ name: "Ygra, Eater of All", scryfallId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155, twoFaced: false });
+    expect(result.commanders[0]).toMatchObject({ name: "Ygra, Eater of All", cardDefinitionId: "b9ac7673-eae8-4c4b-889e-5025213a6151", multiverseid: 669155, twoFaced: false });
     expect(result.commanders[0].colorIdentity).toBeDefined();
     expect(result.commanders[0].set).toBeDefined();
     expect(result.totalCards).toBe(4); // 3 non-commander cards + 1 commander

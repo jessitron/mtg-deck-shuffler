@@ -49,7 +49,7 @@ function buildSeatJoinedCommander(gameCard: GameCard): SeatJoinedCommander {
     throw new Error(`Commander ${gameCard.card.name} has no cardInstanceId; cannot send it with the join`);
   }
   return {
-    card: { scryfallId: gameCard.card.scryfallId, instanceId: gameCard.cardInstanceId },
+    card: { cardDefinitionId: gameCard.card.cardDefinitionId, instanceId: gameCard.cardInstanceId },
     cardName: gameCard.card.name,
     frontImageUrl: getCardImageUrl(gameCard.card, "normal", "front"),
     backImageUrl: gameCard.card.twoFaced ? getCardImageUrl(gameCard.card, "normal", "back") : null,
