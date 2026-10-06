@@ -54,7 +54,7 @@ describe("joinSpineBestEffort", () => {
     expect(result.tableUrl).toBeDefined();
     expect(fake.joinRequests).toHaveLength(1);
     const request = fake.joinRequests[0];
-    expect(request.gameId).toBe("game-1");
+    expect(request.joinRequestId).toBe("game-1");
     expect(request.name).toBe("Friday Night");
     expect(request.playerName).toBe("Jess");
     expect(request.deckName).toBe("Test Deck");

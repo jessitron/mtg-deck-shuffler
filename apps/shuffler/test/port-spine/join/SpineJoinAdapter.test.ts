@@ -3,6 +3,7 @@ import { SpineJoinGateway } from "../../../src/port-spine/join/HttpSpineJoinGate
 import { SpineJoinRequest, SpineJoinResult } from "../../../src/port-spine/join/spineWire.js";
 import { GameCard } from "../../../src/domain-types.js";
 import { lightningBolt, nicolBolas } from "../../generators.js";
+import { assertValidatesAsSpineJoinRequest } from "../../table-sync/contractValidation.js";
 
 /** A Spine that only remembers. The adapter is what's under test; this stands in for the wire. */
 class RecordingSpineJoinGateway implements SpineJoinGateway {
@@ -45,8 +46,9 @@ describe("SpineJoinAdapter", () => {
       secondaryColor: "#222222",
     });
 
+    assertValidatesAsSpineJoinRequest(JSON.parse(JSON.stringify(gateway.joinRequests[0])));
     expect(gateway.joinRequests[0]).toEqual({
-      gameId: "game-1",
+      joinRequestId: "game-1",
       name: "Friday Night",
       playerName: "Jess",
       deckName: "Test Deck",

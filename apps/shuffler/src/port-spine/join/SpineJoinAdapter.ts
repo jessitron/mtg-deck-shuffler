@@ -23,7 +23,7 @@ export abstract class SpineJoinAdapter implements JoinTablePort {
 
 function buildSpineJoinRequest(request: JoinTableRequest): SpineJoinRequest {
   return {
-    gameId: request.gameId,
+    joinRequestId: request.gameId,
     name: request.tableName,
     playerName: request.playerName,
     ...buildSeatJoinedPayload(request),

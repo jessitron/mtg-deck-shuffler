@@ -28,12 +28,13 @@ export interface SeatJoinedPayload {
 
 /** Request body for the Spine's `POST /join` — identity plus everything needed to fully decorate the seat, in one call. */
 export interface SpineJoinRequest extends SeatJoinedPayload {
-  gameId: string;
+  /** Opaque idempotency key: a retry with the same value gets the same seat back. */
+  joinRequestId: string;
   name: string;
   playerName: string;
 }
 
-/** Response body of the Spine's `POST /join`. */
+/** Response body of the Spine's `POST /join` (contracts/responses/join.v1.json). */
 export interface SpineJoinResult {
   tableId: string;
   seatId: string;

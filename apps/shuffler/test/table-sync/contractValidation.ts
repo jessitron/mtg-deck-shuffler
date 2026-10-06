@@ -23,6 +23,23 @@ const payloadValidators: Record<string, ValidateFunction> = {
   "card.discarded:1": ajv.compile(loadSchema("payloads/card.discarded.v1.json")),
 };
 
+const validateJoinRequestSchema = ajv.compile(loadSchema("requests/join.v1.json"));
+const validateJoinResponseSchema = ajv.compile(loadSchema("responses/join.v1.json"));
+
+/** Validate a `POST /join` body this ship sends against the published request contract. */
+export function assertValidatesAsSpineJoinRequest(body: unknown): void {
+  if (!validateJoinRequestSchema(body)) {
+    throw new Error(`invalid join request: ${ajv.errorsText(validateJoinRequestSchema.errors)}`);
+  }
+}
+
+/** Validate a `POST /join` response body against the published response contract. */
+export function assertValidatesAsSpineJoinResponse(body: unknown): void {
+  if (!validateJoinResponseSchema(body)) {
+    throw new Error(`invalid join response: ${ajv.errorsText(validateJoinResponseSchema.errors)}`);
+  }
+}
+
 /**
  * Mirrors the Spine's own gate (the Tabletop's `contractValidation.ts` does the same
  * thing): validate an outbound envelope + its kind-specific payload against the
