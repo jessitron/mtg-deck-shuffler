@@ -109,6 +109,10 @@ All from `services/spine/`:
   running prod pod via `kubectl cp` (a snapshot, not a live connection — see the
   script's comment on why a mid-write copy is still safe to read). Default
   destination is `spine-prod-<timestamp>.db` in the current directory.
+- Wipe the prod database (a clean break — every table's log is gone):
+  `kubectl exec deploy/spine -- sh -c 'rm -f /data/spine.db /data/spine.db-wal /data/spine.db-shm'`
+  then `kubectl rollout restart deploy/spine`. Not during a rollout: the `Recreate`
+  strategy leaves a gap with no container, and exec fails with `container not found ("spine")`.
 
 ## Base path (`SPINE_BASE_PATH`)
 

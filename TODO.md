@@ -9,11 +9,9 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
 ## Next
 
 - ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨ **START HERE NEXT SESSION** ✨🌟⭐✨🌟⭐✨🌟⭐✨🌟⭐ 🗺️🧭 Go over `notes/fleet-domain-map.html` with Jess and get it right! 🎯🔥 Reviewed through the "Same word, different meaning" table; resume at "Principles and invariants" (start with the two `stated` fleet principles: players adjudicate; physics on the Tabletop, meaning in the Interpreter), then "Where the story and the code disagree". Also owed: smoke-test the three-ship flow with `./run` from the root after the `joinRequestId` rename. ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨
-- 🚀 Deploy the `scryfallId` → `cardDefinitionId` rename (merged at `1a8577b7`) while nobody is playing; wipe the Spine DB. Runbook: `.scratch/card-definition-id-deploy/deploy-plan.html`. Delete that directory after the deploy.
 - 🐸 Archidekt custom cards (urgent from Jess): read the deck API's `customCards` array; `cardDefinitionId` = UUIDv5 of `archidekt-custom:<id>`; add `cardSource` (`scryfall` | `archidekt-custom`) and record it as span attribute `card.source` everywhere `card.definition_id` goes; store Archidekt image URLs under every format callers ask for (`normal`, `large`, `png`, front and back); skip Scryfall enrichment and Scryfall URL fallback for custom cards. Example deck: https://archidekt.com/decks/14716273 (Squid Sword).
 - 🐛 Copying a card's back face from the modal copies the front: `apps/shuffler/public/game.js` checks `urlParts.includes("/back/")` after splitting on `/`. It also parses the card id out of the image URL; pass `cardDefinitionId` and the face instead.
 - The library modals (`/library-modal/:gameId`, `/prep-library-modal/:prepId`) answer a generic 500 for an old-version game or prep; return the incompatible-version 404.
-- `notes/fleet-domain-map.html` ~line 190 still says "scryfall id"; it should say card definition id.
 
 - still happening post-tldraw upgrade: weird bug: `cards-jump-to-entry-position` occasionally, for no discernable reason, a bunch of Evelyn's cards return to the stack as if they were just played 😭. Full investigation log, ruled-out causes, and current instrumentation: `apps/tabletop/notes/RESEARCH-cards-jump-to-entry-position.md`.
 

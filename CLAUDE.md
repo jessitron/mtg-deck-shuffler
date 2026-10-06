@@ -158,7 +158,8 @@ How will you know it's working?
 Honeycomb telemetry (use the `honeycomb-modernity` MCP server — team `modernity`):
 
 - **Local tests**: environment `local`.
-- **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).**before** `.env`, or OTLP export silently 401s ("unknown API key"). The `verify.sh` scripts source both in that order; if you start a server by hand for telemetry, do the same.
+- **Production**: environment `mtg-deck-shuffler` (the orion cluster in jessitron-sandbox).
+- **API key sourcing**: `.be` holds `HONEYCOMB_API_KEY`; source it **before** `.env`, or OTLP export silently 401s ("unknown API key"). The `verify.sh` scripts source both in that order; if you start a server by hand for telemetry, do the same.
 - **Is anyone playing?** Check the board "Is Someone Playing Right Now?" (`list_boards`
   board_id `iFWhpa9AFeC`, env `mtg-deck-shuffler`) before deploying. Its saved results
   go stale — re-run its panels over `-2h` with `run_query`. "Who is playing?"
