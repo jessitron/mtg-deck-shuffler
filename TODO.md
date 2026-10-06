@@ -9,6 +9,9 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
 ## Next
 
 - ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨ **START HERE NEXT SESSION** ✨🌟⭐✨🌟⭐✨🌟⭐✨🌟⭐ 🗺️🧭 Go over `notes/fleet-domain-map.html` with Jess and get it right! 🎯🔥 Reviewed through the "Same word, different meaning" table; resume at "Principles and invariants" (start with the two `stated` fleet principles: players adjudicate; physics on the Tabletop, meaning in the Interpreter), then "Where the story and the code disagree". Also owed: smoke-test the three-ship flow with `./run` from the root after the `joinRequestId` rename. ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨
+- Tabletop `POST .../cards/return` (`apps/tabletop/src/server/cardReturned.ts`) doesn't check `cardSource` against the enum; a bad value comes back as the Spine's 502 instead of a 400.
+- Does tldraw copy-as-PNG re-fetch card images? If so, Archidekt-hosted custom card images (storage.googleapis.com) may lack CORS headers. Plain display works.
+- `owners/two-faced-cards/tabletop.md` ~line 406 says "`gameCardIndex` never leaves the Shuffler", but it's a Tabletop shape prop. Also that owner's `-update` skill expects `files.md`/`history.md`, which its KB lacks.
 - The library modals (`/library-modal/:gameId`, `/prep-library-modal/:prepId`) answer a generic 500 for an old-version game or prep; return the incompatible-version 404.
 
 - still happening post-tldraw upgrade: weird bug: `cards-jump-to-entry-position` occasionally, for no discernable reason, a bunch of Evelyn's cards return to the stack as if they were just played 😭. Full investigation log, ruled-out causes, and current instrumentation: `apps/tabletop/notes/RESEARCH-cards-jump-to-entry-position.md`.
