@@ -1,6 +1,6 @@
 import Database from "better-sqlite3";
 import { CardRepositoryPort } from "./types.js";
-import { CardDefinition, CardImageUris } from "../types.js";
+import { CardDefinition, CardImageUris, CardSource } from "../types.js";
 
 interface CardRow {
   card_definition_id: string;
@@ -13,6 +13,7 @@ interface CardRow {
   card_types: string;
   image_uris: string | null;
   back_image_uris: string | null;
+  card_source: string | null;
 }
 
 export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
@@ -43,6 +44,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
         card_types TEXT NOT NULL,
         image_uris TEXT,
         back_image_uris TEXT,
+        card_source TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
@@ -57,15 +59,18 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
     if (!cols.some(c => c.name === "back_image_uris")) {
       this.db.exec(`ALTER TABLE cards ADD COLUMN back_image_uris TEXT`);
     }
+    if (!cols.some(c => c.name === "card_source")) {
+      this.db.exec(`ALTER TABLE cards ADD COLUMN card_source TEXT`);
+    }
   }
 
   async saveCards(cards: CardDefinition[]): Promise<void> {
     const insertOrUpdateSQL = `
       INSERT OR REPLACE INTO cards (
         card_definition_id, name, multiverseid, two_faced, oracle_card_name,
-        color_identity, set_code, card_types, image_uris, back_image_uris, updated_at
+        color_identity, set_code, card_types, image_uris, back_image_uris, card_source, updated_at
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
     `;
 
     const stmt = this.db.prepare(insertOrUpdateSQL);
@@ -83,7 +88,8 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
           card.set,
           JSON.stringify(card.cardTypes),
           card.imageUris ? JSON.stringify(card.imageUris) : null,
-          card.backImageUris ? JSON.stringify(card.backImageUris) : null
+          card.backImageUris ? JSON.stringify(card.backImageUris) : null,
+          card.cardSource ?? null
         );
       }
     });
@@ -135,6 +141,7 @@ export class SqliteCardRepositoryAdapter implements CardRepositoryPort {
       cardTypes: JSON.parse(row.card_types) as string[],
       imageUris: row.image_uris ? (JSON.parse(row.image_uris) as CardImageUris) : undefined,
       backImageUris: row.back_image_uris ? (JSON.parse(row.back_image_uris) as CardImageUris) : undefined,
+      ...(row.card_source ? { cardSource: row.card_source as CardSource } : {}),
     };
   }
 

@@ -158,6 +158,14 @@ describe("SqliteCardRepositoryAdapter", () => {
     expect(retrieved?.cardTypes).toEqual(["Legendary", "Creature", "Planeswalker"]);
   });
 
+  it("remembers that a card is an Archidekt custom card", async () => {
+    const testCard: CardDefinition = { ...fc.sample(cardDefinition, { numRuns: 1 })[0], cardSource: "archidekt-custom" };
+
+    await adapter.saveCards([testCard]);
+
+    expect((await adapter.getCard(testCard.cardDefinitionId))?.cardSource).toBe("archidekt-custom");
+  });
+
   it("should handle saving many cards in a transaction", async () => {
     const testCards = fc.sample(cardDefinition, { numRuns: 100 });
 
