@@ -17,7 +17,7 @@ interface SwallowSnapshot {
 /**
  * The library portal's swallow (ticket 12): spins the card twice while shrinking and
  * fading it into the library's center over ~500ms, then — send-then-commit — deletes it
- * only once the Tabletop server confirms the Spine accepted `card.returned.v1`. On
+ * only once the Tabletop server confirms the Spine accepted `card.returned.v2`. On
  * failure the card's visuals revert and it stays on the table; nothing here deletes
  * synchronously, since tldraw non-null-asserts every still-settling shape in a
  * multi-select drag (see `owners/tabletop-shape-mechanics`).

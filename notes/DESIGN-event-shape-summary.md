@@ -32,15 +32,15 @@ truth-of-order and truth-of-time stay with the log (Spine-assigned `seq`, `accep
 
 ## 2. Card identity — two levels, used in every card-carrying payload
 
-- **Definition** — `scryfallId`: the exact printing (oracle identity, all faces/names, all
-  images derivable). Two players' Forests share one `scryfallId`.
+- **Definition** — `cardDefinitionId`: the exact printing (oracle identity, all faces/names, all
+  images derivable). Two players' Forests share one `cardDefinitionId`. A UUID; for a Scryfall card, its Scryfall id.
 - **Instance** — `instanceId`: _this particular_ Forest — a GUID minted per card, per game,
   at game start. Game-mechanically interchangeable; log-wise a distinct individual,
   trackable through played → tapped → graveyard.
 - **Face** rides alongside as its own field (`front`/`back`) — card _state_, not identity
   (MDFCs are played as a chosen face).
 
-`card: { scryfallId, instanceId }` + sibling `face` wherever the event needs it.
+`card: { cardDefinitionId, instanceId }` + sibling `face` wherever the event needs it.
 
 ## 3. The v0 event catalog — 4 kinds
 
@@ -108,7 +108,7 @@ whole player area first.
     "sleeveColor": "#8b2f5c",
     "commanders": [
       {
-        "card": { "scryfallId": "11111111-...", "instanceId": "22222222-..." },
+        "card": { "cardDefinitionId": "11111111-...", "instanceId": "22222222-..." },
         "cardName": "The Tenth Doctor",
         "frontImageUrl": "https://...",
         "backImageUrl": null
@@ -134,7 +134,7 @@ of what happened (it's not observed/inferred), so it says so directly.
   "traceparent": "00-1680bb...-01",
   "schemaVersion": 1,
   "payload": {
-    "card": { "scryfallId": "11111111-...", "instanceId": "22222222-..." },
+    "card": { "cardDefinitionId": "11111111-...", "instanceId": "22222222-..." },
     "face": "front",
     "frontImageUrl": "https://cards.scryfall.io/normal/front/1/1/11111111-....jpg",
     "backImageUrl": null,

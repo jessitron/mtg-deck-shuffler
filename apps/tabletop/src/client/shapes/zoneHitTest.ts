@@ -54,7 +54,7 @@ function allDraggedCardsAreOwnersCommander(editor: Editor, seatId: string | null
 /**
  * The library portal's gate (ticket 12): only the player's own library swallows a card,
  * and only cards — a dragged counter (or any non-card selection) must not arm it. A card
- * with no `gameCardIndex` can never be sent as `card.returned.v1`, so it's excluded too.
+ * with no `gameCardIndex` can never be sent as `card.returned.v2`, so it's excluded too.
  * A mixed-ownership multi-select doesn't arm at all — one destination for the whole group,
  * or none, same posture as the command-zone gate above.
  */

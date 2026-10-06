@@ -165,7 +165,7 @@ CardImagesPort` (`src/port-card-images/FakeCardImagesGateway.ts:3`).
     > the Squirrel Girl deck (Archidekt 23735063).
   - Two halves, one cause, both in `ArchidektDeckToDeckAdapter.ts`: the name comes from
     `card.displayName || oracleCard.name` (line 101) and `displayName` is the _printed_ name, and
-    `scryfallId: card.uid` (line 118) is t hat same localized printing, so the image is foreign too.
+    `cardDefinitionId: card.uid` (line 112) is t hat same localized printing, so the image is foreign too.
   - `oracleCardName` is already on `CardDefinition`, so the name half is nearly free; the image half
     needs resolving the English printing of the same oracle card.
 

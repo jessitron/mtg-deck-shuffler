@@ -16,7 +16,7 @@ export interface CardReturnedParams {
 }
 
 /**
- * Sends a `card.returned.v1` event to the Spine's generic events endpoint — the same send
+ * Sends a `card.returned.v2` event to the Spine's generic events endpoint — the same send
  * shape `sendCardPlayedToSpineBestEffort` (Shuffler) already uses for `card.played`, and
  * `eventsUrl` is not introduced: the address is simply "the Spine". Rides the ambient
  * request/gesture span plus undici's automatic outbound `traceparent` header; no envelope

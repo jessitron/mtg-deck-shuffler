@@ -60,7 +60,7 @@ Remaining: wiring the diff, tickets 04–10, the event kinds themselves and the 
 
 The spec independently arrived at most of the replayability rules below —
 `card.moved` carrying prior *and* new position, `shape.removed` existing at all,
-`card.turnedFaceDown` covering both directions, card identity by `scryfallId` +
+`card.turnedFaceDown` covering both directions, card identity by `cardDefinitionId` +
 `instanceId`, and a generic `shape.*` fallback carrying raw props for shapes with no
 dedicated event. That fallback **is** tier 3 below, and its raw props are the
 `tldrawRecord` quarantine. Two passes converging on the same rules is good evidence the

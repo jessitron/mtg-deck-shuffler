@@ -145,7 +145,7 @@ had a second, `source: "remote"` listener (previously only used to emit "card
 arrived on canvas" for brand-new shapes). Extended it to also watch
 `change.changes.updated` for an existing `mtg-card` shape's x/y changing,
 emitting a new span **"card moved by remote change"** — `card.instance_id`,
-`card.scryfall_id`, `card.name`, `shape.id`, `position.before.x/y`,
+`card.definition_id`, `card.name`, `shape.id`, `position.before.x/y`,
 `position.after.x/y`. Debounced 300ms per `shape.id` (mirroring
 `usePhysicsAnnouncements`'s `GENERIC_SETTLE_MS` pattern) — tldraw's
 `Translating.ts` writes to the store on every pointer-move during a drag, not

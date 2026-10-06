@@ -65,7 +65,7 @@ describe("sendCardReturnedToSpineBestEffort", () => {
     fakeServer = undefined;
   });
 
-  it("POSTs a card.returned.v1 envelope to the Spine's generic events endpoint", async () => {
+  it("POSTs a card.returned.v2 envelope to the Spine's generic events endpoint", async () => {
     fakeServer = createFakeSpineServer();
     const port = await fakeServer.listen();
 
