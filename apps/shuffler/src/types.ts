@@ -27,6 +27,12 @@ export function cardSourceOf(card: CardDefinition): CardSource {
   return card.cardSource ?? "scryfall";
 }
 
+/** For wire payloads, where absent means scryfall: names the source only when it isn't. */
+export function cardSourceField(card: CardDefinition): { cardSource?: CardSource } {
+  const source = cardSourceOf(card);
+  return source === "scryfall" ? {} : { cardSource: source };
+}
+
 export interface DeckProvenance {
   retrievedDate: Date;
   sourceUrl: string;

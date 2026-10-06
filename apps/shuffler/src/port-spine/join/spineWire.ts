@@ -7,6 +7,7 @@
 export interface SeatJoinedCommander {
   card: {
     cardDefinitionId: string;
+    cardSource?: "scryfall" | "archidekt-custom";
     instanceId: string;
   };
   cardName: string;

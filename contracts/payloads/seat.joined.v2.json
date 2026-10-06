@@ -54,7 +54,12 @@
               "cardDefinitionId": {
                 "type": "string",
                 "format": "uuid",
-                "description": "The card definition: the exact printing — oracle identity, all faces, all names, all images derivable. A UUID; for a Scryfall card it is the Scryfall id."
+                "description": "The card definition: the exact printing — oracle identity, all faces, all names, all images derivable. A UUID; for a Scryfall card it is the Scryfall id, for an Archidekt custom card a UUIDv5 of `archidekt-custom:<archidekt id>` (its images are not derivable from it; read the image URLs)."
+              },
+              "cardSource": {
+                "type": "string",
+                "enum": ["scryfall", "archidekt-custom"],
+                "description": "Where the card definition comes from. Absent means scryfall."
               },
               "instanceId": {
                 "type": "string",

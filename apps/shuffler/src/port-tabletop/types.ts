@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { GameCard, getCardImageUrl } from "../domain-types.js";
+import { CardSource, cardSourceField } from "../types.js";
 import { currentTraceparent } from "./traceparent.js";
 
 export const CARD_PLAYED_EVENT_NAME = "card.played" as const;
@@ -29,6 +30,7 @@ export interface EventEnvelope<Payload> {
 export interface CardPlayedPayload {
   card: {
     cardDefinitionId: string;
+    cardSource?: CardSource;
     instanceId: string;
   };
   face: "front" | "back";
@@ -75,6 +77,7 @@ export function buildCardPlayedEvent(
     payload: {
       card: {
         cardDefinitionId: gameCard.card.cardDefinitionId,
+        ...cardSourceField(gameCard.card),
         instanceId,
       },
       ...cardFaceFields(gameCard),
@@ -94,6 +97,7 @@ export const CARD_PLAYED_FACE_DOWN_EVENT_NAME = "card.played-face-down" as const
 export interface CardPlayedFaceDownPayload {
   card: {
     cardDefinitionId: string;
+    cardSource?: CardSource;
     instanceId: string;
   };
   face: "front" | "back";
@@ -112,6 +116,7 @@ export const CARD_RETURNED_EVENT_NAME = "card.returned" as const;
 export interface CardReturnedPayload {
   card: {
     cardDefinitionId: string;
+    cardSource?: CardSource;
     instanceId: string;
   };
   gameCardIndex: number;
@@ -136,6 +141,7 @@ export function buildCardReturnedEvent(gameCard: GameCard, instanceId: string, i
     payload: {
       card: {
         cardDefinitionId: gameCard.card.cardDefinitionId,
+        ...cardSourceField(gameCard.card),
         instanceId,
       },
       gameCardIndex: gameCard.gameCardIndex,
@@ -152,6 +158,7 @@ export const CARD_DISCARDED_EVENT_NAME = "card.discarded" as const;
 export interface CardDiscardedPayload {
   card: {
     cardDefinitionId: string;
+    cardSource?: CardSource;
     instanceId: string;
   };
   face: "front" | "back";
@@ -180,6 +187,7 @@ export function buildCardDiscardedEvent(gameCard: GameCard, instanceId: string, 
     payload: {
       card: {
         cardDefinitionId: gameCard.card.cardDefinitionId,
+        ...cardSourceField(gameCard.card),
         instanceId,
       },
       ...cardFaceFields(gameCard),
@@ -212,6 +220,7 @@ export function buildCardPlayedFaceDownEvent(
     payload: {
       card: {
         cardDefinitionId: gameCard.card.cardDefinitionId,
+        ...cardSourceField(gameCard.card),
         instanceId,
       },
       ...cardFaceFields(gameCard),

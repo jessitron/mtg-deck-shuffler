@@ -1,4 +1,5 @@
 import { GameCard, getCardImageUrl } from "../../domain-types.js";
+import { cardSourceField } from "../../types.js";
 import { SeatJoinedCommander, SeatJoinedPayload, SpineJoinRequest, SpineJoinResult } from "./spineWire.js";
 import { JoinTablePort, JoinTableRequest, SeatAtTable } from "./types.js";
 
@@ -49,7 +50,7 @@ function buildSeatJoinedCommander(gameCard: GameCard): SeatJoinedCommander {
     throw new Error(`Commander ${gameCard.card.name} has no cardInstanceId; cannot send it with the join`);
   }
   return {
-    card: { cardDefinitionId: gameCard.card.cardDefinitionId, instanceId: gameCard.cardInstanceId },
+    card: { cardDefinitionId: gameCard.card.cardDefinitionId, ...cardSourceField(gameCard.card), instanceId: gameCard.cardInstanceId },
     cardName: gameCard.card.name,
     frontImageUrl: getCardImageUrl(gameCard.card, "normal", "front"),
     backImageUrl: gameCard.card.twoFaced ? getCardImageUrl(gameCard.card, "normal", "back") : null,

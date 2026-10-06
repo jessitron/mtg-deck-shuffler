@@ -61,6 +61,31 @@ describe("card.played events validate against the Spine's own contracts (contrac
     expect(() => assertValidatesAsSpineEvent(event)).not.toThrow();
   });
 
+  it("an Archidekt custom card names its source and carries its Archidekt images", () => {
+    const front = "https://storage.googleapis.com/topdekt-user/images/uploads/a7/front.png";
+    const back = "https://storage.googleapis.com/topdekt-user/images/uploads/a7/back.png";
+    const custom: CardDefinition = {
+      ...lightningBolt,
+      name: "Don't Stop in Stagnance",
+      cardDefinitionId: "0b6a4c1e-5d1f-5a3e-9c1d-2f4e6a8b0c1d",
+      cardSource: "archidekt-custom",
+      multiverseid: undefined,
+      twoFaced: true,
+      imageUris: { normal: front },
+      backImageUris: { normal: back },
+    };
+    const event = buildCardPlayedEvent(
+      { card: custom, location: { type: "Hand", position: 0 }, gameCardIndex: 0, isCommander: false, currentFace: "front" },
+      "11111111-1111-1111-1111-111111111111",
+      { seatId: "1", playerName: "Jess" },
+      "1",
+      "some-table-id"
+    );
+    expect(event.payload.card.cardSource).toBe("archidekt-custom");
+    expect(event.payload).toMatchObject({ frontImageUrl: front, backImageUrl: back });
+    expect(() => assertValidatesAsSpineEvent(event)).not.toThrow();
+  });
+
   it("the event actually sent by sendCardPlayedToSpineBestEffort, end to end through a joined seat, validates", async () => {
     const fake = new FakeSpine();
     const { spineTableId, spineSeatNumber } = await joinSpineBestEffort(fake.join, {
