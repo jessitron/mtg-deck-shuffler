@@ -226,12 +226,12 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
       <ul>
         <li><b>Deck</b> · immutable, with provenance (archidekt, precon, test)</li>
         <li><b>GamePrep</b> · a Deck plus sleeve, playmat, table name. Immutable</li>
-        <li><b>Game</b> · a prep plus an event log</li>
+        <li><b>Game</b> · a prep plus its own shuffler event log</li>
         <li><b>GameCard</b> · CardDefinition + Location + face + instance id</li>
       </ul>
     </div>
     <div class="card" style="--c: var(--shuffler)">
-      <h3>Event log kinds</h3>
+      <h3>Shuffler event log kinds</h3>
       <ul>
         <li>start game · deal opening hand</li>
         <li>shuffle library · mulligan (one atomic event)</li>
@@ -307,7 +307,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
   <figure>
     <div class="scroll">
     <svg viewBox="0 0 760 150" role="img" aria-label="An append-only strip of events numbered by seq. Each is an envelope with sender-set and Spine-set fields.">
-      <text class="m" x="10" y="20">one log per table, ordered by seq the Spine assigns</text>
+      <text class="m" x="10" y="20">one Spine event log per table, ordered by seq the Spine assigns</text>
       <g>
         <rect class="spn" x="10" y="34" width="106" height="52"/><text class="spn-t" x="63" y="56" text-anchor="middle" style="font-size:11px">1 · seat.taken</text><text class="spn-t" x="63" y="74" text-anchor="middle" style="font-size:10px">by Spine</text>
         <rect class="spn" x="126" y="34" width="106" height="52"/><text class="spn-t" x="179" y="56" text-anchor="middle" style="font-size:11px">2 · seat.joined</text><text class="spn-t" x="179" y="74" text-anchor="middle" style="font-size:10px">by Spine</text>
@@ -321,7 +321,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
       <text class="m" x="10" y="138">Dashed: designed, not built.</text>
     </svg>
     </div>
-    <figcaption>The log is the record of the table: what a person standing at it would know.</figcaption>
+    <figcaption>The Spine event log is the record of the table: what a person standing at it would know.</figcaption>
   </figure>
   <div class="grid">
     <div class="card" style="--c: var(--spine-bg)">
@@ -391,7 +391,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
       <ul>
         <li>A card is in exactly one location <span class="tag code">code</span></li>
         <li>Hidden zones stay hidden; only shadows go public <span class="tag">stated</span></li>
-        <li>State version = event log length; stale writes get 409 <span class="tag code">code</span></li>
+        <li>State version = shuffler event log length; stale writes get 409 <span class="tag code">code</span></li>
         <li>Everything persisted is versioned; old data fails loudly (HTTP 410) <span class="tag code">code</span></li>
         <li>Decks and preps are immutable <span class="tag code">code</span></li>
         <li>Spine calls are best-effort and never block play <span class="tag code">code</span></li>
@@ -414,7 +414,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
     <div class="card" style="--c: var(--spine-bg)">
       <h3>Spine</h3>
       <ul>
-        <li>One append-only log per table <span class="tag code">code</span></li>
+        <li>One append-only Spine event log per table <span class="tag code">code</span></li>
         <li>The Spine alone assigns seq and acceptedAt <span class="tag code">code</span></li>
         <li>Join is idempotent per Shuffler game <span class="tag code">code</span></li>
         <li>Extra fields allowed, so ships deploy independently <span class="tag code">code</span></li>
