@@ -1,17 +1,17 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/card.played-face-down.v1.json",
-  "title": "card.played-face-down payload, schemaVersion 1",
-  "description": "A game event from the Shuffler: it deterministically knows a card was played concealed (morph, manifest, foretell, and similar effects), so it says so. Sibling to card.played — same facts (card identity, chosen face, destination), but the meaning to a receiver is 'mint this concealed,' not 'mint this revealed.' Card identity is the Scryfall ID (definition) plus a Shuffler-minted instance GUID (this particular Forest, for this game). Which seat played it lives on the envelope's initiator, not repeated here. Pre-Spine exception (tabletop-cards-come-and-go, ticket 05): frontImageUrl/backImageUrl/cardName are scaffolding render conveniences, promoted into this schema so ajv can validate the whole body now that zero real senders/receivers exist yet — the same in-place-edit exception envelope.v1 uses, not a new policy. Once a real consumer exists, reshaping this needs a v2.",
+  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/card.played-face-down.v2.json",
+  "title": "card.played-face-down payload, schemaVersion 2",
+  "description": "A game event from the Shuffler: it deterministically knows a card was played concealed (morph, manifest, foretell, and similar effects), so it says so. Sibling to card.played — same facts (card identity, chosen face, destination), but the meaning to a receiver is 'mint this concealed,' not 'mint this revealed.' Card identity is the card definition id plus a Shuffler-minted instance GUID (this particular Forest, for this game). Which seat played it lives on the envelope's initiator, not repeated here. Pre-Spine exception (tabletop-cards-come-and-go, ticket 05): frontImageUrl/backImageUrl/cardName are scaffolding render conveniences, promoted into this schema so ajv can validate the whole body now that zero real senders/receivers exist yet — the same in-place-edit exception envelope.v1 uses, not a new policy. Reshaping it needs a version bump.",
   "type": "object",
   "properties": {
     "card": {
       "type": "object",
       "properties": {
-        "scryfallId": {
+        "cardDefinitionId": {
           "type": "string",
           "format": "uuid",
-          "description": "Definition: the exact printing — oracle identity, all faces, all names, all images derivable."
+          "description": "The card definition: the exact printing — oracle identity, all faces, all names, all images derivable. A UUID; for a Scryfall card it is the Scryfall id."
         },
         "instanceId": {
           "type": "string",
@@ -19,7 +19,7 @@
           "description": "Instance: this particular physical-ish card, minted per game at game start. Opaque — distinct from the Shuffler's internal gameCardIndex (see the sibling `gameCardIndex` property below), which is a rank in a decklist array, not a stable per-card identity."
         }
       },
-      "required": ["scryfallId", "instanceId"],
+      "required": ["cardDefinitionId", "instanceId"],
       "additionalProperties": true
     },
     "face": {

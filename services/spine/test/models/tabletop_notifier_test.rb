@@ -38,7 +38,7 @@ class FakeJoinedEvent
       "occurredIn" => "spine",
       "origin" => "spine.seatJoined",
       "significance" => "administrative",
-      "schemaVersion" => 1,
+      "schemaVersion" => 2,
       "payload" => { "deckName" => "Test Deck" }
     }
   end

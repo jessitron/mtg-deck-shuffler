@@ -38,6 +38,27 @@ class EventContractTest < Minitest::Test
     end
   end
 
+  def test_a_v1_card_played_is_rejected_after_the_card_definition_id_break
+    envelope = valid_envelope(
+      "name" => "card.played", "schemaVersion" => 1,
+      "payload" => {
+        "card" => { "scryfallId" => "11111111-1111-4111-8111-111111111111", "instanceId" => "instance-1" },
+        "face" => "front", "frontImageUrl" => "https://images.example/front.jpg", "backImageUrl" => nil,
+        "cardName" => "Lightning Bolt", "owner" => "seat-0000001", "isCommander" => false
+      }
+    )
+
+    assert_raises(Spine::EventContract::UnknownEvent) do
+      Spine::EventContract.validate!(envelope)
+    end
+  end
+
+  def test_a_v1_seat_joined_is_rejected
+    assert_raises(Spine::EventContract::UnknownEvent) do
+      Spine::EventContract.validate!(valid_envelope("schemaVersion" => 1))
+    end
+  end
+
   def test_a_payload_that_does_not_match_its_schema_is_rejected
     assert_raises(Spine::EventContract::Violation) do
       Spine::EventContract.validate!(valid_envelope("payload" => { "name" => "kitchen table" }))

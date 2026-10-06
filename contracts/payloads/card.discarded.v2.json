@@ -1,17 +1,17 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/card.discarded.v1.json",
-  "title": "card.discarded payload, schemaVersion 1",
-  "description": "A game event from the Shuffler: a card was discarded to the graveyard. Same shape as card.played.v1 — graveyard *is* this event's meaning. Keeps face (unlike card.returned.v1) because a discard is public: it shows the card, it doesn't just remove it (two-faced-cards watch point 19). Card identity is the Scryfall ID (definition) plus a Shuffler-minted instance GUID (this particular Forest, for this game). Which seat discarded it lives on the envelope's initiator, not repeated here.",
+  "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/card.discarded.v2.json",
+  "title": "card.discarded payload, schemaVersion 2",
+  "description": "A game event from the Shuffler: a card was discarded to the graveyard. Same shape as card.played.v2 — graveyard *is* this event's meaning. Keeps face (unlike card.returned.v2) because a discard is public: it shows the card, it doesn't just remove it (two-faced-cards watch point 19). Card identity is the card definition id plus a Shuffler-minted instance GUID (this particular Forest, for this game). Which seat discarded it lives on the envelope's initiator, not repeated here.",
   "type": "object",
   "properties": {
     "card": {
       "type": "object",
       "properties": {
-        "scryfallId": {
+        "cardDefinitionId": {
           "type": "string",
           "format": "uuid",
-          "description": "Definition: the exact printing — oracle identity, all faces, all names, all images derivable."
+          "description": "The card definition: the exact printing — oracle identity, all faces, all names, all images derivable. A UUID; for a Scryfall card it is the Scryfall id."
         },
         "instanceId": {
           "type": "string",
@@ -19,7 +19,7 @@
           "description": "Instance: this particular physical-ish card, minted per game at game start. Opaque — distinct from the Shuffler's internal gameCardIndex (see the sibling `gameCardIndex` property below), which is a rank in a decklist array, not a stable per-card identity."
         }
       },
-      "required": ["scryfallId", "instanceId"],
+      "required": ["cardDefinitionId", "instanceId"],
       "additionalProperties": true
     },
     "face": {
@@ -44,7 +44,7 @@
     "owner": {
       "type": "string",
       "minLength": 1,
-      "description": "The seatId of the player this card belongs to — matching card.played.v1's `owner` field. Grants no capability — any player can still move any card; it makes 'whose card is this' a fact the shape carries."
+      "description": "The seatId of the player this card belongs to — matching card.played.v2's `owner` field. Grants no capability — any player can still move any card; it makes 'whose card is this' a fact the shape carries."
     },
     "isCommander": {
       "type": "boolean",
