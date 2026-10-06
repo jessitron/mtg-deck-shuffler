@@ -381,7 +381,6 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
         <li>Physics on the Tabletop, meaning in the Interpreter <span class="tag">stated</span></li>
         <li>Players adjudicate. The app supports play and enforces nothing <span class="tag">stated</span></li>
         <li>No privileged actor on the canvas <span class="tag">stated</span></li>
-        <li>Playable at all times <span class="tag">stated</span></li>
         <li>Trace context on every hop; facts go on spans, never <code>addEvent</code> <span class="tag">stated</span></li>
         <li>Fakes, never mocks <span class="tag">stated</span></li>
         <li>Corners square except on round things <span class="tag">stated</span></li>
@@ -430,7 +429,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
 <section>
   <h2>Where the story and the code disagree</h2>
   <ul class="gaps">
-    <li>"Best-effort, never blocks play" (code) and "Playable at all times" (stated) are today's rule. The planned rule is the opposite: no Spine, no play.</li>
+    <li>"Spine calls are best-effort and never block play" is today's rule. The planned rule is the opposite: no Spine, no play.</li>
     <li>The envelope has no <code>visibility</code> field, and the design summary still says it does.</li>
     <li>Nothing implements supersede. It is a principle only.</li>
     <li>The Tabletop's taps, transforms and moves reach Honeycomb as spans but never the Spine. They will; shown as planned.</li>
