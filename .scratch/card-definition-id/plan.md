@@ -113,3 +113,32 @@ Owners' KBs, `notes/`, ship `CLAUDE.md`s, `contracts/README.md`, `notes/GLOSSARY
 - New tests: each reader accepts a v2 payload and rejects a v1 payload cleanly (recorded
   failure, no throw). Spine stamps `seat.joined` v2 and rejects a v1 `card.played` append.
 - `grep -rn scryfallId` afterwards hits only the Scryfall/MTGJSON edges and history docs.
+
+## What landed (branch card-definition-id)
+
+- c9b5e942 contracts: `card.played`, `card.played-face-down`, `card.discarded`, `card.returned`,
+  `seat.joined` are `.v2.json` (v1 files deleted). Only change: `card.scryfallId` →
+  `card.cardDefinitionId` (required, uuid). `face` rules unchanged (`"face": false` still on
+  card.returned.v2). `join.v1` unchanged except its description now points at seat.joined.v2.
+  README notes the break: stored v1 events stay in Spine logs, unreadable on replay.
+  Spine: `Table::SEAT_JOINED_SCHEMA_VERSION = 2` stamps seat.joined; seat.taken stays v1;
+  `EventContract` rejects v1 appends as `UnknownEvent`. No Spine data touched.
+- 70b10265 Tabletop: `mtg-card` prop `cardDefinitionId`; tldraw props migration
+  `mtgCardShapeMigrations` (`createShapePropsMigrationIds("mtg-card", { RenameScryfallId: 1 })`,
+  up/down rename) in `src/shared/mtgCardShape.ts`, registered in `rooms.ts` and
+  `MtgCardShapeUtil.migrations`. Readers (`contractValidation.ts`) know v2 only; a v1 event
+  gets `{ok:false, "unknown schemaVersion 1 …"}` → 400 / `arrival.outcome=invalid` + log.warn.
+  `sendCardReturned.ts` sends v2. `POST /api/tables/:slug/cards/return` body key is
+  `cardDefinitionId` (no read-both). Span attr `card.definition_id` at cardArrival.ts (x2),
+  cardRemoval.ts, cardReturned.ts, client/useCardArrivalSpans.ts (x2). No `event.schema_version`
+  attribute added (no v1 tail to watch after the clean break).
+- 0a6c52dd Shuffler: `CardDefinition.cardDefinitionId`, `PersistedGameCard.cardDefinitionId`,
+  card repository column `card_definition_id` (stale-schema check now tests for that column).
+  Versions: game state 12, prep 4, deck 4; `PersistedDeck.version` stays 2 (keys `commanderIds`/
+  `cardIds` unchanged). Prep adapters throw `IncompatiblePrepVersionError` before hydrating;
+  `/prep-table-look` maps that to 404. 198 decks rewritten as text (key + version), cardTypes
+  count 19800 before and after. Scryfall edges keep `scryfallId`: port-card-images/*,
+  `constructCardImageUrl` param, MTGJSON types. Span attr `card.definition_id` in
+  `table-sync/cardReturnedDispatch.ts`. Incoming validation v2 only.
+- b852f550 docs: GLOSSARY (Card Definition ID entry), DESIGN-event-shape-summary,
+  Tabletop CLAUDE/notes, DESIGN-persistence-versioning.
