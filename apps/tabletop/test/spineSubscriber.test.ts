@@ -37,7 +37,6 @@ function cardPlayedEvent(tableName: string, overrides: Record<string, unknown> =
     payload: {
       card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
       face: "front",
-      zoneHint: "stack",
       frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
       backImageUrl: null,
       cardName: "Lightning Bolt",

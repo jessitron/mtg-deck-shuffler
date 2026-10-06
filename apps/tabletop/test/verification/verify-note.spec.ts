@@ -70,7 +70,6 @@ async function placeCard(page: Page, baseURL: string | undefined, tableSlug: str
   const event = cardPlayed(tableSlug, {
     cardName: "Llanowar Elves",
     card: { scryfallId: "aaaaaaaa-1111-4111-8111-000000000019", instanceId },
-    zoneHint: "stack",
   });
   const response = await page.request.post(`${baseURL}/test/tables/${tableSlug}/cards`, { data: event });
   expect(response.status()).toBe(201);

@@ -55,7 +55,6 @@ describe("card.played events validate against the Spine's own contracts (contrac
       "11111111-1111-1111-1111-111111111111",
       { seatId: "1", playerName: "Jess" },
       "1",
-      "stack",
       "some-table-id"
     );
 
@@ -74,7 +73,7 @@ describe("card.played events validate against the Spine's own contracts (contrac
     const game = GameState.newGame(201, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
 
-    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt, "stack");
+    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt);
 
     expect(fake.sentEvents).toHaveLength(1);
     const { event } = fake.sentEvents[0];
@@ -87,7 +86,6 @@ describe("card.played events validate against the Spine's own contracts (contrac
       "22222222-2222-2222-2222-222222222222",
       { seatId: "1", playerName: "Jess", sessionId: "33333333-3333-3333-3333-333333333333" },
       "1",
-      "stack",
       "some-table-id"
     );
 
@@ -107,7 +105,7 @@ describe("card.played events validate against the Spine's own contracts (contrac
     const game = GameState.newGame(202, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
 
-    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt, "stack", "44444444-4444-4444-4444-444444444444");
+    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt, "44444444-4444-4444-4444-444444444444");
 
     expect(fake.sentEvents).toHaveLength(1);
     const { event } = fake.sentEvents[0];

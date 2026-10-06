@@ -1,7 +1,6 @@
 import { trace } from "@opentelemetry/api";
 import { GameState, GameCard } from "../GameState.js";
 import { GameId } from "../domain-types.js";
-import { ZoneHint } from "../port-tabletop/types.js";
 import { JoinTablePort } from "../port-spine/join/types.js";
 import { SpineEventsPort, TableSeat } from "../port-spine/events/types.js";
 import { defaultPlaymatImageUrl, playmatImageUrlFromPath, cardBackImageUrl, shufflerPublicUrl } from "../shufflerUrls.js";
@@ -70,7 +69,6 @@ export async function sendCardPlayedToSpineBestEffort(
   eventsPort: SpineEventsPort | undefined,
   game: GameState,
   gameCard: GameCard,
-  zoneHint: ZoneHint,
   sessionId?: string,
   faceDown = false
 ): Promise<void> {
@@ -78,7 +76,7 @@ export async function sendCardPlayedToSpineBestEffort(
   const seat = seatOf(game, gameCard, sessionId);
   if (!seat) return;
   try {
-    await eventsPort.announceCardPlayed(seat, gameCard, zoneHint, faceDown);
+    await eventsPort.announceCardPlayed(seat, gameCard, faceDown);
   } catch (error) {
     trace.getActiveSpan()?.setAttributes({ "spine_send.send_failed": true, "table.name": game.tableName ?? "" });
     log.warn("card.played send to Spine failed (best-effort; the Spine observes the log, it doesn't gate gameplay yet)", { "table.name": game.tableName ?? "" }, error as Error);
@@ -87,7 +85,7 @@ export async function sendCardPlayedToSpineBestEffort(
 
 /**
  * A card went to the graveyard (discard-from-hand or mill) — its own event kind, not a
- * card.played with a graveyard zoneHint (tabletop-cards-come-and-go ticket 08). Best-effort,
+ * card.played with a graveyard hint (tabletop-cards-come-and-go ticket 08). Best-effort,
  * mirroring sendCardPlayedToSpineBestEffort.
  */
 export async function sendCardDiscardedToSpineBestEffort(eventsPort: SpineEventsPort | undefined, game: GameState, gameCard: GameCard, sessionId?: string): Promise<void> {

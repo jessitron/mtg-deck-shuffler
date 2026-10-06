@@ -1,7 +1,6 @@
 import { GameCard } from "../../domain-types.js";
 import {
   EventEnvelope,
-  ZoneHint,
   buildCardPlayedEvent,
   buildCardPlayedFaceDownEvent,
   buildCardReturnedEvent,
@@ -45,11 +44,11 @@ export abstract class SpineEventsAdapter implements SpineEventsPort {
   /** Open ONE connection attempt to the table's stream; the reconnecting is done here. */
   protected abstract openStream(tableId: string, lastEventId: number | undefined, handlers: SpineStreamHandlers): OpenSpineStream;
 
-  async announceCardPlayed(seat: TableSeat, gameCard: GameCard, zoneHint: ZoneHint, faceDown: boolean): Promise<void> {
+  async announceCardPlayed(seat: TableSeat, gameCard: GameCard, faceDown: boolean): Promise<void> {
     const instanceId = requireCardInstanceId(gameCard);
     const event = faceDown
-      ? buildCardPlayedFaceDownEvent(gameCard, instanceId, initiatorFor(seat), seat.seatId, zoneHint, seat.tableId)
-      : buildCardPlayedEvent(gameCard, instanceId, initiatorFor(seat), seat.seatId, zoneHint, seat.tableId);
+      ? buildCardPlayedFaceDownEvent(gameCard, instanceId, initiatorFor(seat), seat.seatId, seat.tableId)
+      : buildCardPlayedEvent(gameCard, instanceId, initiatorFor(seat), seat.seatId, seat.tableId);
     await this.deliverEvent(seat.tableId, event);
   }
 

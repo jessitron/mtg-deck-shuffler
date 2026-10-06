@@ -1,5 +1,4 @@
 import { GameCard } from "../../domain-types.js";
-import { ZoneHint } from "../../port-tabletop/types.js";
 
 /** The seat an announcement comes from — enough to say "this happened, and I did it". */
 export interface TableSeat {
@@ -41,7 +40,7 @@ export interface TableEventStream {
  * already applied are the implementation's problem, not the caller's.
  */
 export interface SpineEventsPort {
-  announceCardPlayed(seat: TableSeat, gameCard: GameCard, zoneHint: ZoneHint, faceDown: boolean): Promise<void>;
+  announceCardPlayed(seat: TableSeat, gameCard: GameCard, faceDown: boolean): Promise<void>;
   announceCardReturned(seat: TableSeat, gameCard: GameCard): Promise<void>;
   announceCardDiscarded(seat: TableSeat, gameCard: GameCard): Promise<void>;
 

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/jessitron/mtg-deck-shuffler/contracts/payloads/card.discarded.v1.json",
   "title": "card.discarded payload, schemaVersion 1",
-  "description": "A game event from the Shuffler: a card was discarded to the graveyard. Same shape as card.played.v1 minus zoneHint — graveyard *is* this event's meaning, so there's no zone to hint at. Keeps face (unlike card.returned.v1) because a discard is public: it shows the card, it doesn't just remove it (two-faced-cards watch point 19). Card identity is the Scryfall ID (definition) plus a Shuffler-minted instance GUID (this particular Forest, for this game). Which seat discarded it lives on the envelope's initiator, not repeated here.",
+  "description": "A game event from the Shuffler: a card was discarded to the graveyard. Same shape as card.played.v1 — graveyard *is* this event's meaning. Keeps face (unlike card.returned.v1) because a discard is public: it shows the card, it doesn't just remove it (two-faced-cards watch point 19). Card identity is the Scryfall ID (definition) plus a Shuffler-minted instance GUID (this particular Forest, for this game). Which seat discarded it lives on the envelope's initiator, not repeated here.",
   "type": "object",
   "properties": {
     "card": {

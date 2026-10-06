@@ -2,14 +2,7 @@ import { randomUUID } from "node:crypto";
 import { GameCard, getCardImageUrl } from "../domain-types.js";
 import { currentTraceparent } from "./traceparent.js";
 
-export function zoneHintForPlay(gameCard: GameCard): ZoneHint {
-  return gameCard.card.cardTypes.includes("Land") ? "battlefield" : "stack";
-}
-
-
 export const CARD_PLAYED_EVENT_NAME = "card.played" as const;
-
-export type ZoneHint = "stack" | "battlefield";
 
 export interface Initiator {
   seatId: string;
@@ -39,7 +32,6 @@ export interface CardPlayedPayload {
     instanceId: string;
   };
   face: "front" | "back";
-  zoneHint: ZoneHint;
   frontImageUrl: string;
   backImageUrl: string | null;
   cardName: string;
@@ -67,7 +59,6 @@ export function buildCardPlayedEvent(
   instanceId: string,
   initiator: Initiator,
   owner: string,
-  zoneHint: ZoneHint,
   tableName: string
 ): CardPlayedEvent {
   return {
@@ -87,7 +78,6 @@ export function buildCardPlayedEvent(
         instanceId,
       },
       ...cardFaceFields(gameCard),
-      zoneHint,
       cardName: gameCard.card.name,
       owner,
       isCommander: gameCard.isCommander,
@@ -107,7 +97,6 @@ export interface CardPlayedFaceDownPayload {
     instanceId: string;
   };
   face: "front" | "back";
-  zoneHint: ZoneHint;
   frontImageUrl: string;
   backImageUrl: string | null;
   cardName: string;
@@ -157,7 +146,7 @@ export function buildCardReturnedEvent(gameCard: GameCard, instanceId: string, i
 
 export const CARD_DISCARDED_EVENT_NAME = "card.discarded" as const;
 
-// card.played minus zoneHint (graveyard *is* this event's meaning — two-faced-cards watch
+// card.played shape (graveyard *is* this event's meaning — two-faced-cards watch
 // point 19), keeping face/frontImageUrl/backImageUrl/cardName/owner/isCommander/gameCardIndex
 // since the Tabletop needs the same facts to mint a graveyard card shape as a played one.
 export interface CardDiscardedPayload {
@@ -207,7 +196,6 @@ export function buildCardPlayedFaceDownEvent(
   instanceId: string,
   initiator: Initiator,
   owner: string,
-  zoneHint: ZoneHint,
   tableName: string
 ): CardPlayedFaceDownEvent {
   return {
@@ -227,7 +215,6 @@ export function buildCardPlayedFaceDownEvent(
         instanceId,
       },
       ...cardFaceFields(gameCard),
-      zoneHint,
       cardName: gameCard.card.name,
       owner,
       isCommander: gameCard.isCommander,

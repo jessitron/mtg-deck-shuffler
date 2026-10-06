@@ -9,11 +9,9 @@ test("dragging the second card moves the second card, not the first", async ({ p
 
   const firstCard = await placeCard(page, baseURL, tableSlug, randomUUID(), {
     cardName: "Forest",
-    zoneHint: "battlefield",
   });
   const secondCard = await placeCard(page, baseURL, tableSlug, randomUUID(), {
     cardName: "Island",
-    zoneHint: "battlefield",
   });
 
   await zoomToFit(page);

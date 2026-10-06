@@ -21,7 +21,6 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
       backImageUrl: null,
-      zoneHint: "stack",
       cardName: "Llanowar Elves",
       owner: "e2e-seat",
       isCommander: false,
@@ -245,8 +244,8 @@ test("flipping card A does not leave a stale selection that hijacks a later drag
 
   const idA = randomUUID();
   const idB = randomUUID();
-  await placeCard(page, baseURL, tableSlug, idA, { backImageUrl: "https://example.com/back-a.jpg", zoneHint: "battlefield" });
-  await placeCard(page, baseURL, tableSlug, idB, { zoneHint: "battlefield" });
+  await placeCard(page, baseURL, tableSlug, idA, { backImageUrl: "https://example.com/back-a.jpg" });
+  await placeCard(page, baseURL, tableSlug, idB);
   await zoomToFit(page);
   // Both cards cascade onto the Stack now that lands no longer auto-place on the
   // playmat, so they arrive overlapping — separate them before targeting either one.

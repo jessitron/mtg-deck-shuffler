@@ -56,12 +56,10 @@ test("a land and a nonland both arrive on the Stack", async ({ page, baseURL }) 
   await expect(page.locator(".tl-canvas")).toBeVisible({ timeout: 15000 });
 
   const land = cardPlayed(tableSlug, {
-    zoneHint: "battlefield",
     cardName: "Forest",
     card: { scryfallId: "aaaaaaaa-1111-4111-8111-000000000001", instanceId: randomUUID() },
   });
   const nonland = cardPlayed(tableSlug, {
-    zoneHint: "stack",
     cardName: "Llanowar Elves",
     card: { scryfallId: "aaaaaaaa-1111-4111-8111-000000000002", instanceId: randomUUID() },
   });

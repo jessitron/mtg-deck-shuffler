@@ -21,7 +21,6 @@ function cardPlayed(tableId: string, payloadOverrides: Record<string, unknown>) 
       face: "front",
       frontImageUrl: "https://cards.scryfall.io/normal/front/6/8/688b73bb-7952-4a1b-a878-49f13cf3ba25.jpg",
       backImageUrl: null,
-      zoneHint: "battlefield",
       owner: "e2e-seat",
       isCommander: false,
       ...payloadOverrides,
@@ -130,7 +129,7 @@ test("clicking one selected card taps the whole selection, and one Ctrl+Z revert
   const idA = randomUUID();
   const idB = randomUUID();
   const idC = randomUUID();
-  await placeCard(page, baseURL, tableSlug, idA, { zoneHint: "stack" });
+  await placeCard(page, baseURL, tableSlug, idA);
   await placeCard(page, baseURL, tableSlug, idB);
   await placeCard(page, baseURL, tableSlug, idC);
   await zoomToFit(page);

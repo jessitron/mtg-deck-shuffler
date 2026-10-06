@@ -35,7 +35,7 @@ describe("SpineEventsAdapter announcements", () => {
   it("announceCardPlayed builds card.played addressed to the seat's table, carrying the session id", async () => {
     const { adapter, gateway } = adapterWithGateway();
 
-    await adapter.announceCardPlayed(seat, gameCard(), "stack", false);
+    await adapter.announceCardPlayed(seat, gameCard(), false);
 
     expect(gateway.sentEvents).toHaveLength(1);
     const { tableId, event } = gateway.sentEvents[0];
@@ -43,13 +43,13 @@ describe("SpineEventsAdapter announcements", () => {
     expect(event.name).toBe("card.played");
     expect(event.tableId).toBe("table-9");
     expect(event.initiator).toEqual({ seatId: "seat-abc", playerName: "Jess", sessionId: "session-1" });
-    expect(event.payload).toMatchObject({ card: { scryfallId: lightningBolt.scryfallId, instanceId: "instance-1" }, zoneHint: "stack", owner: "seat-abc" });
+    expect(event.payload).toMatchObject({ card: { scryfallId: lightningBolt.scryfallId, instanceId: "instance-1" }, owner: "seat-abc" });
   });
 
   it("announceCardPlayed with faceDown builds the separate card.played-face-down kind", async () => {
     const { adapter, gateway } = adapterWithGateway();
 
-    await adapter.announceCardPlayed(seat, gameCard(), "stack", true);
+    await adapter.announceCardPlayed(seat, gameCard(), true);
 
     expect(gateway.sentEvents[0].event.name).toBe("card.played-face-down");
   });

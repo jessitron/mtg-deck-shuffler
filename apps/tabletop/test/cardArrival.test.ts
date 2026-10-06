@@ -47,7 +47,6 @@ function cardPlayed(tableName: string, envelopeOverrides: Record<string, unknown
     payload: {
       card: { scryfallId: "11111111-1111-4111-8111-111111111111", instanceId: randomUUID() },
       face: "front",
-      zoneHint: "stack",
       frontImageUrl: "https://cards.scryfall.io/normal/front/1/1/11111111.jpg",
       backImageUrl: null,
       cardName: "Lightning Bolt",
@@ -190,15 +189,15 @@ describe("card arrival", () => {
     expect(shapesOf("arrival-dedup-instance")).toHaveLength(1);
   });
 
-  it("puts a battlefield-hinted card (a land) on the Stack, same as everything else played", async () => {
+  it("puts every played card on the Stack, cascading rather than overlapping", async () => {
     await joinSeat("arrival-zones", "seat-0000001", "Jess");
-    await post("arrival-zones", cardPlayed("arrival-zones", {}, { zoneHint: "battlefield", cardName: "Forest" }));
+    await post("arrival-zones", cardPlayed("arrival-zones", {}, { cardName: "Forest" }));
     const [land] = shapesOf("arrival-zones");
     const stack = stackBounds();
     expect(land.x).toBeGreaterThanOrEqual(stack.x);
     expect(land.y).toBeGreaterThanOrEqual(stack.y);
 
-    await post("arrival-zones", cardPlayed("arrival-zones", {}, { zoneHint: "stack", cardName: "Llanowar Elves" }));
+    await post("arrival-zones", cardPlayed("arrival-zones", {}, { cardName: "Llanowar Elves" }));
     const stackCard = shapesOf("arrival-zones").find((s) => s.props.cardName === "Llanowar Elves")!;
     expect(stackCard.x).toBeGreaterThanOrEqual(stack.x);
     expect(stackCard.y).toBeGreaterThanOrEqual(stack.y);
@@ -231,11 +230,11 @@ describe("card arrival", () => {
     await joinSeat("arrival-rows", "seat-BBBBBBB", "Sam");
     await post(
       "arrival-rows",
-      cardPlayed("arrival-rows", { initiator: { seatId: "seat-AAAAAAA", playerName: "Sam" } }, { zoneHint: "battlefield" })
+      cardPlayed("arrival-rows", { initiator: { seatId: "seat-AAAAAAA", playerName: "Sam" } })
     );
     await post(
       "arrival-rows",
-      cardPlayed("arrival-rows", { initiator: { seatId: "seat-BBBBBBB", playerName: "Sam" } }, { zoneHint: "battlefield" })
+      cardPlayed("arrival-rows", { initiator: { seatId: "seat-BBBBBBB", playerName: "Sam" } })
     );
     const shapes = shapesOf("arrival-rows");
     expect(shapes).toHaveLength(2);
@@ -251,7 +250,7 @@ describe("card arrival", () => {
       cardPlayed(
         "arrival-owner-vs-initiator",
         { initiator: { seatId: "seat-AAAAAAA", playerName: "Sam" } },
-        { owner: "seat-BBBBBBB", zoneHint: "stack" }
+        { owner: "seat-BBBBBBB" }
       )
     );
     const [card] = shapesOf("arrival-owner-vs-initiator");
@@ -362,7 +361,7 @@ describe("card arrival", () => {
 
   it("carries isCommander:true through to the minted shape — owner grants no capability, it's a fact the shape carries", async () => {
     await joinSeat("arrival-commander-flag", "seat-0000001", "Jess");
-    await post("arrival-commander-flag", cardPlayed("arrival-commander-flag", {}, { isCommander: true, zoneHint: "battlefield" }));
+    await post("arrival-commander-flag", cardPlayed("arrival-commander-flag", {}, { isCommander: true }));
     const [card] = shapesOf("arrival-commander-flag");
     expect(card.props.isCommander).toBe(true);
     expect(card.isLocked).toBe(false); // owner/isCommander gate nothing; the card is still draggable

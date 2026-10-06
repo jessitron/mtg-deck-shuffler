@@ -27,12 +27,6 @@
       "enum": ["front", "back"],
       "description": "Face is card state, not identity — but MDFCs are played as a chosen face, so it rides along."
     },
-    "zoneHint": {
-      "type": "string",
-      "enum": ["stack", "battlefield"],
-      "deprecated": true,
-      "description": "Deprecated: every played card lands on the Stack regardless of this value (2026-08-16) and card.discarded.v1 carries no zoneHint at all, so no receiver reads this anymore. Still required — senders keep populating it — but treat it as inert geography, not a signal to branch on."
-    },
     "frontImageUrl": {
       "type": "string",
       "format": "uri",
@@ -62,6 +56,6 @@
       "description": "The card's index in the Shuffler's initial decklist array (its alphabetical rank in that list) — not library order, which is shuffled. Used to be withheld here as a 'decodable secret' (let-gamecardindex-out, 2026-08-10 reversed that call): decklists are public on Archidekt anyway, the app doesn't police what a trust-based table can see, and the cost of the old guard was every future payload having to carry a model of what may cross. Optional: older senders may omit it, and no receiver is required to use it."
     }
   },
-  "required": ["card", "face", "zoneHint", "frontImageUrl", "backImageUrl", "cardName", "owner", "isCommander"],
+  "required": ["card", "face", "frontImageUrl", "backImageUrl", "cardName", "owner", "isCommander"],
   "additionalProperties": true
 }

@@ -185,7 +185,7 @@ export async function applyCardArrival(tableName: string, body: unknown): Promis
 /**
  * card.discarded: validation, dedup, and placement onto the graveyard cascade. Discard
  * traffic (discard-from-hand, mill) has its own event kind rather than a card.played with
- * a graveyard zoneHint (tabletop-cards-come-and-go ticket 08) — routed here by event kind.
+ * a graveyard hint — routed here by event kind.
  */
 export async function applyCardDiscard(tableName: string, body: unknown): Promise<CardArrivalOutcome> {
   const result = validateIncomingEvent<CardDiscardedPayload>(body, DISCARD_EVENT_NAME);

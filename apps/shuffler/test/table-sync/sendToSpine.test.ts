@@ -189,7 +189,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     const game = GameState.newGame(101, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
 
-    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt, "stack");
+    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt);
 
     expect(fake.sentEvents).toHaveLength(1);
     const { tableId, event } = fake.sentEvents[0] as { tableId: string; event: CardPlayedEvent };
@@ -202,7 +202,6 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     expect(event.initiator).toEqual({ seatId: tableInfo.seatId, playerName: "Jess" });
     expect(event.initiator.seatId).not.toBe(String(tableInfo.spineSeatNumber));
     expect(event.payload.card).toEqual({ scryfallId: lightningBolt.scryfallId, instanceId: bolt.cardInstanceId });
-    expect(event.payload.zoneHint).toBe("stack");
   });
 
   it("is a no-op when no Spine is configured", async () => {
@@ -210,7 +209,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     const game = GameState.newGame(103, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
 
-    await expect(sendCardPlayedToSpineBestEffort(undefined, game, bolt, "stack")).resolves.toBeUndefined();
+    await expect(sendCardPlayedToSpineBestEffort(undefined, game, bolt)).resolves.toBeUndefined();
   });
 
   it("is a no-op for a solo game (no table)", async () => {
@@ -218,7 +217,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     const bolt = cardNamed(soloGame, "Lightning Bolt");
     const fake = new FakeSpine();
 
-    await sendCardPlayedToSpineBestEffort(fake.events, soloGame, bolt, "stack");
+    await sendCardPlayedToSpineBestEffort(fake.events, soloGame, bolt);
 
     expect(fake.sentEvents).toHaveLength(0);
   });
@@ -229,7 +228,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     const bolt = cardNamed(game, "Lightning Bolt");
     const fake = new FakeSpine();
 
-    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt, "stack");
+    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt);
 
     expect(fake.sentEvents).toHaveLength(0);
   });
@@ -241,7 +240,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     const bolt = cardNamed(game, "Lightning Bolt");
     fake.failWith(new Error("connection refused"));
 
-    await expect(sendCardPlayedToSpineBestEffort(fake.events, game, bolt, "stack")).resolves.toBeUndefined();
+    await expect(sendCardPlayedToSpineBestEffort(fake.events, game, bolt)).resolves.toBeUndefined();
     expect(fake.sentEvents).toHaveLength(0);
   });
 
@@ -251,7 +250,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     const game = GameState.newGame(107, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
 
-    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt, "stack", undefined, true);
+    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt, undefined, true);
 
     expect(fake.sentEvents).toHaveLength(1);
     expect(fake.sentEvents[0].event.name).toBe("card.played-face-down");
@@ -263,7 +262,7 @@ describe("sendCardPlayedToSpineBestEffort", () => {
     const game = GameState.newGame(108, 1, 1, testDeck, undefined, tableInfo);
     const bolt = cardNamed(game, "Lightning Bolt");
 
-    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt, "stack");
+    await sendCardPlayedToSpineBestEffort(fake.events, game, bolt);
 
     expect(fake.sentEvents).toHaveLength(1);
     expect(fake.sentEvents[0].event.name).toBe("card.played");
@@ -339,7 +338,6 @@ describe("buildCardPlayedEvent", () => {
       bolt.cardInstanceId!,
       { seatId: "initiator-seat", playerName: "Jess" },
       "someone-elses-seat",
-      "stack",
       "table-1"
     );
 

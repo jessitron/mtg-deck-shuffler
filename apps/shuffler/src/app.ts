@@ -12,7 +12,6 @@ import { formatHtmlHead } from "./view/common/html-layout.js";
 import { formatActiveGameHtmlSection, formatGamePageHtmlPage } from "./view/play-game/active-game-page.js";
 import { GameState, GameCard, TableInfo } from "./GameState.js";
 import { randomUUID } from "node:crypto";
-import { ZoneHint, zoneHintForPlay } from "./port-tabletop/types.js";
 import { JoinTablePort } from "./port-spine/join/types.js";
 import { SpineEventsPort } from "./port-spine/events/types.js";
 import { sendCardPlayedToSpineBestEffort, sendCardReturnedToSpineBestEffort, sendCardDiscardedToSpineBestEffort, joinSpineBestEffort } from "./table-sync/sendToSpine.js";
@@ -129,10 +128,10 @@ export function createApp(
     return expectedVersionStr === undefined ? undefined : parseInt(expectedVersionStr);
   }
 
-  async function sendCardBeforeMutate(game: GameState, card: GameCard, zoneHint: ZoneHint, sessionId?: string, faceDown = false): Promise<void> {
+  async function sendCardBeforeMutate(game: GameState, card: GameCard, sessionId?: string, faceDown = false): Promise<void> {
     setCommonSpanAttributes({ tableName: game.tableName });
     trace.getActiveSpan()?.setAttributes({ "card.instance_id": card.cardInstanceId ?? "missing", "card.face_down": faceDown });
-    await sendCardPlayedToSpineBestEffort(spineEventsPort, game, card, zoneHint, sessionId, faceDown);
+    await sendCardPlayedToSpineBestEffort(spineEventsPort, game, card, sessionId, faceDown);
   }
 
   async function sendCardReturnedBeforeMutate(game: GameState, card: GameCard, sessionId?: string): Promise<void> {
@@ -1499,7 +1498,7 @@ export function createApp(
           if (!game.tableName || !cardToPlay || (cardToPlay.location.type !== "Hand" && cardToPlay.location.type !== "Revealed")) {
             return;
           }
-          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay), sessionId, faceDown);
+          await sendCardBeforeMutate(game, cardToPlay, sessionId, faceDown);
         }
       );
 
@@ -1569,7 +1568,7 @@ export function createApp(
         async (game) => {
           const cardToPlay = game.listLibrary()[0];
           if (!game.tableName || !cardToPlay) return;
-          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay), sessionId, true);
+          await sendCardBeforeMutate(game, cardToPlay, sessionId, true);
         }
       );
 
@@ -1603,7 +1602,7 @@ export function createApp(
           const libraryCards = game.listLibrary();
           const cardToPlay = libraryCards[libraryCards.length - 1];
           if (!game.tableName || !cardToPlay) return;
-          await sendCardBeforeMutate(game, cardToPlay, zoneHintForPlay(cardToPlay), sessionId, true);
+          await sendCardBeforeMutate(game, cardToPlay, sessionId, true);
         }
       );
 
