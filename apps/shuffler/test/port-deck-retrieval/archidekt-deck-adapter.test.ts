@@ -3,6 +3,7 @@ import { Deck } from "../../src/types.js";
 import { ArchidektGateway, FilesystemArchidektGateway, ArchidektDeckToDeckAdapter, ArchidektGatewayInterface } from "../../src/port-deck-retrieval/implementations.js";
 import { ArchidektDeck } from "../../src/port-deck-retrieval/archidektAdapter/archidektTypes.js";
 import { ArchidektDeckRetrievalRequest } from "../../src/port-deck-retrieval/types.js";
+import { FakeCardImagesGateway } from "../../src/port-card-images/FakeCardImagesGateway.js";
 
 describe("ArchidektDeckToDeckAdapter", () => {
   let adapter: ArchidektDeckToDeckAdapter;
@@ -537,6 +538,60 @@ describe("ArchidektDeckToDeckAdapter", () => {
     expect(result.totalCards).toBe(4); // 3 non-commander cards + 1 commander
     expect(result.provenance.sourceUrl).toBe("https://archidekt.com/decks/14669648");
     expect(result.provenance.deckSource).toBe("archidekt");
+  });
+
+  describe("custom cards (Squid Sword deck)", () => {
+    const UUID_V5 = /^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+    const SQUID_SWORD_FRONT = "https://storage.googleapis.com/topdekt-user/images/uploads/40/40bfdf1c-216f-4851-a254-4b474d4d1769.png";
+    const STAGNANCE_BACK = "https://storage.googleapis.com/topdekt-user/images/uploads/a7/a78d3635-1d1e-4c00-92a3-bb3e37fd69ab.png";
+
+    async function squidSwordDeck(): Promise<Deck> {
+      const adapter = new ArchidektDeckToDeckAdapter(new FilesystemArchidektGateway("./test/decks"));
+      return adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "14716273" });
+    }
+
+    it("includes the deck's custom cards alongside its Scryfall cards", async () => {
+      const deck = await squidSwordDeck();
+      const customNames = deck.cards.filter((c) => c.cardSource === "archidekt-custom").map((c) => c.name);
+      expect(customNames.sort()).toEqual(["Cat Throwing a Tomato", "Don't Stop in Stagnance", "Squid Sword"]);
+      expect(deck.commanders.map((c) => [c.name, c.cardSource])).toEqual([["Glarb, Calamity's Augur", "scryfall"]]);
+      expect(deck.totalCards).toBe(deck.cards.length + deck.commanders.length);
+    });
+
+    it("gives each custom card a stable UUIDv5 cardDefinitionId", async () => {
+      const first = await squidSwordDeck();
+      const second = await squidSwordDeck();
+      const ids = first.cards.filter((c) => c.cardSource === "archidekt-custom").map((c) => c.cardDefinitionId);
+      ids.forEach((id) => expect(id).toMatch(UUID_V5));
+      expect(new Set(ids).size).toBe(3);
+      expect(second.cards.filter((c) => c.cardSource === "archidekt-custom").map((c) => c.cardDefinitionId)).toEqual(ids);
+    });
+
+    it("stores the Archidekt image under every image format", async () => {
+      const deck = await squidSwordDeck();
+      const squidSword = deck.cards.find((c) => c.name === "Squid Sword")!;
+      expect(squidSword).toMatchObject({ twoFaced: false, cardTypes: ["Artifact"], set: "YAS" });
+      for (const format of ["small", "normal", "large", "png", "art_crop", "border_crop"] as const) {
+        expect(squidSword.imageUris?.[format]).toBe(SQUID_SWORD_FRONT);
+      }
+      expect(squidSword.backImageUris).toBeUndefined();
+    });
+
+    it("makes a custom card with a back image two-faced", async () => {
+      const deck = await squidSwordDeck();
+      const stagnance = deck.cards.find((c) => c.name === "Don't Stop in Stagnance")!;
+      expect(stagnance.twoFaced).toBe(true);
+      expect(stagnance.backImageUris?.normal).toBe(STAGNANCE_BACK);
+      expect(stagnance.backImageUris?.png).toBe(STAGNANCE_BACK);
+    });
+
+    it("never asks Scryfall about custom cards", async () => {
+      const imagesPort = new FakeCardImagesGateway();
+      const adapter = new ArchidektDeckToDeckAdapter(new FilesystemArchidektGateway("./test/decks"), undefined, imagesPort);
+      const deck = await adapter.retrieveDeck({ deckSource: "archidekt", archidektDeckId: "14716273" });
+      expect(imagesPort.requestedIds).toEqual([deck.commanders[0].cardDefinitionId]);
+      expect(deck.cards.find((c) => c.name === "Squid Sword")!.imageUris?.normal).toBe(SQUID_SWORD_FRONT);
+    });
   });
 
   it("extracts single card type correctly", async () => {
