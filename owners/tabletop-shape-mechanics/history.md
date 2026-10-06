@@ -1,5 +1,30 @@
 # History
 
+## `mtg-card` gains required `cardSource`, through migration step 2: the first added-prop migration (2026-10-06)
+
+Archidekt custom cards (commit `07d700dc`). `MtgCardShapeProps` gained
+`cardSource: T.literalEnum("scryfall", "archidekt-custom")` in `src/shared/mtgCardShape.ts`,
+added by a new step `AddCardSource: 2` after `RenameScryfallId: 1`: `up` sets `"scryfall"`,
+`down` deletes the prop. `MtgCardShapeUtil.getDefaultProps` defaults it to `"scryfall"`.
+`MtgCardShapeArgs`/`mtgCardShape()` in `src/server/tableFurniture.ts` takes `cardSource` as a
+**required** argument (no default) so the compiler finds every mint site: `cardArrival.ts`, and
+`seatJoined.ts`'s real commander plus its ghost (which shares the commander's fields). New helper
+`src/shared/cardSource.ts`: `CardSource`, `cardSourceOf(card)` (absent means `"scryfall"`), and
+`cardSpanAttributes(card)` (`card.definition_id` + `card.source`), used at every span site.
+`cardSwallow.ts` reads `cardSource` off `current.props` and posts it to
+`/api/tables/:tableSlug/cards/return`. `test/mtgCardShape.test.ts` covers step 2 `up` and `down`.
+No hook, guard, or gesture changed.
+
+Three things to carry forward, recorded in `architecture.md` and watch point 29:
+
+- **This is the first added-prop migration on `mtg-card`.** `owner`, `isCommander`, and
+  `gameCardIndex` were added without one. Don't copy that precedent: every new prop gets a step.
+- **The `down` is load-bearing.** Without it, the sync server rejects an old-build client with
+  `CLIENT_TOO_OLD` during a deploy rollout; the `down` keeps older tabs connected.
+- **Accepted risk:** an old-build tab that edits a custom card writes the shape back without
+  `cardSource`, which migrates `up` to `"scryfall"`. Impact is telemetry (`card.source`) and the
+  `card.returned` POST's `cardSource`; rendering uses absolute image URLs and is unaffected.
+
 ## `mtg-card` prop `scryfallId` becomes `cardDefinitionId`, with the first custom-shape props migration (2026-10-06)
 
 Part of the fleet-wide `cardDefinitionId` rename (`.scratch/card-definition-id/plan.md`, commit

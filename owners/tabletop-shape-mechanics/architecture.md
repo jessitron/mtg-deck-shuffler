@@ -389,8 +389,17 @@ a renamed prop leaves old records carrying the old key, and the validators rejec
 value between keys). It is wired into the server schema above (`migrations:`) and the client as
 `static override migrations` on `MtgCardShapeUtil`. Miss the server side and stored rooms fail
 to load; miss the client side and client and server disagree on the schema version. The next
-rename appends a step to the same sequence (`RenameScryfallId: 1`, then `: 2`, ...); never edit a
-landed step.
+change appends a step to the same sequence; never edit a landed step.
+
+**An added prop needs a migration step too.** `AddCardSource: 2` (Archidekt custom cards) is the
+first: `up` sets `cardSource = "scryfall"`, `down` deletes it. `owner`, `isCommander`, and
+`gameCardIndex` were added without a step; don't copy that precedent. Write the `down`, and
+mean it: the sync server rejects a client whose schema is behind with `CLIENT_TOO_OLD` unless the
+sequence can migrate records down to that client's version, so during a deploy rollout the `down`
+is what keeps old-build tabs connected. The cost is a round trip: an old-build tab that edits a
+shape writes it back without the new prop, and `up` re-fills the default. For `cardSource` that
+means a custom card can reset to `"scryfall"` — accepted, since it affects only telemetry
+(`card.source`) and the `card.returned` POST, not rendering (image URLs are absolute).
 
 Zones/furniture used to be drawn as stock, locked `geo`/`image` shapes with no custom ShapeUtil of
 their own — ticket 13 (below) gave them one, `mtg-zone`. `MtgCardShapeUtil.tsx`'s own comment

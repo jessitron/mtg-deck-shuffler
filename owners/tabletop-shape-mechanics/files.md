@@ -27,9 +27,13 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   swallow to send `card.returned.v1`; `null` for shapes that never carried one (commander/ghost
   mints). See `architecture.md`'s "The library portal" section and `interactions.md` watch
   point 26. **Also exports `mtgCardShapeMigrations`** — the first props migration on any custom
-  shape here (`RenameScryfallId: 1`, `scryfallId` → `cardDefinitionId`), registered in server
+  shape here (`RenameScryfallId: 1`, `scryfallId` → `cardDefinitionId`; `AddCardSource: 2`, the
+  required `cardSource: "scryfall" | "archidekt-custom"` prop), registered in server
   `rooms.ts` and as `MtgCardShapeUtil.migrations`. See `architecture.md`'s schema-registration
-  section.
+  section and watch point 29.
+- `apps/tabletop/src/shared/cardSource.ts` — `CardSource` type; `cardSourceOf(card)` (absent
+  means `"scryfall"`); `cardSpanAttributes(card)`, the one place spans get `card.definition_id`
+  + `card.source`. Used by `cardArrival.ts`, `seatJoined.ts`, `cardSwallow.ts`, and the span sites.
 - `apps/tabletop/src/shared/mtgZoneShape.ts` — the same pattern for furniture (ticket 13):
   `MtgZoneShapeProps` (`w`, `h`, `zone` — a closed enum `"playmat" | "library" | "graveyard" |
   "exile" | "stack" | "command"` — `seatId`, `label`, `sleeveColor`, and, since 2026-08-11,
@@ -456,7 +460,8 @@ split by hook, tabletop-architecture ticket 01 (2026-08-11)**: `cardRender.tsx`,
   `mtgCardShape()`'s signature gained `gameCardIndex?: number | null` (default `null`)** — the
   canonical one-place-not-per-call-site route watch point 16 already established; `cardArrival.ts`
   passes it through from `envelope.payload.gameCardIndex`, `seatJoined.ts`'s commander/ghost mints
-  get the `null` default. **Since tabletop-architecture ticket 02
+  get the `null` default. **`MtgCardShapeArgs.cardSource` is required with no default**, so the
+  compiler finds every mint site. **Since tabletop-architecture ticket 02
   (2026-08-11), `zoneShape()`/`mtgCardShape()` (and the private `imageShape()`) return real
   types — `MtgZoneShape`/`MtgCardShape`/tldraw's own `TLImageShape` — instead of casting their
   literal to `any`; type-only, no mechanics changed.** See `history.md`'s ticket 02 entry;

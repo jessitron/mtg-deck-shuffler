@@ -582,6 +582,8 @@
     call site.** This is a narrower, `mtg-card`-specific instance of the general "registering a
     shape needs the props enumerated in one place" pressure watch point 6 already tracks for the
     `TLGlobalShapePropsMap`/schema layer — this is the mint-time layer, not the registration layer.
+    **Make the new argument required, with no default** (as `cardSource` is), so the compiler
+    names every mint site; and add a migration step for it — see watch point 29.
 
 17. **A decoy/shadow shape can share a type with the real thing, distinguished by a prefixed
     `instanceId` and locked-vs-not — the KB's first example of this pattern.** (Table-layout
@@ -931,6 +933,21 @@
       than generalized ahead of a need that doesn't exist yet.
     - See `history.md`'s "Ticket 07" entry and `architecture.md`'s matching section for the full
       writeup, and `files.md`'s `cardRemoval.ts` entry.
+
+29. **Every new `mtg-card` prop needs a migration step with a real `down`.** (Archidekt custom
+    cards, `cardSource`, commit `07d700dc`.) `AddCardSource: 2` in `src/shared/mtgCardShape.ts`
+    is the first added-prop step; `owner`, `isCommander`, and `gameCardIndex` landed without one,
+    and that precedent is wrong. Watch for:
+    - **A missing or empty `down`.** The sync server rejects an old-build client with
+      `CLIENT_TOO_OLD` during a deploy rollout unless records can migrate down to its version.
+    - **Round-trip loss.** An old-build tab editing a shape writes it back without the new prop;
+      `up` re-fills the default. For `cardSource` a custom card can reset to `"scryfall"` —
+      accepted, as only telemetry (`card.source`) and the `card.returned` POST read it. A future
+      prop that drives rendering or a gesture guard would not get off so light; weigh that before
+      shipping it.
+    - **Code reading the prop off the wire, not the shape.** Payloads from older senders omit
+      `cardSource`; go through `cardSourceOf()` (`src/shared/cardSource.ts`), which maps absent to
+      `"scryfall"`.
 
 ## Not Related To
 
