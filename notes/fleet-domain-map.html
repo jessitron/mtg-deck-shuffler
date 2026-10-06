@@ -120,6 +120,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
 
       <!-- shuffler <-> spine -->
       <line class="arrow" x1="220" y1="205" x2="390" y2="205" marker-end="url(#ah)"/>
+      <text class="h" x="305" y="230" text-anchor="middle" style="font-size:10px">PUBLISHED LANGUAGE</text>
       <text class="m" x="305" y="184" text-anchor="middle">/join</text>
       <text class="m" x="305" y="198" text-anchor="middle">card.played · discarded</text>
       <line class="arrow" x1="390" y1="262" x2="220" y2="262" marker-end="url(#ah)"/>
@@ -127,6 +128,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
       <text class="m" x="305" y="282" text-anchor="middle">card.returned</text>
       <!-- spine <-> tabletop -->
       <line class="arrow" x1="610" y1="205" x2="780" y2="205" marker-end="url(#ah)"/>
+      <text class="h" x="695" y="230" text-anchor="middle" style="font-size:10px">PUBLISHED LANGUAGE</text>
       <text class="m" x="695" y="184" text-anchor="middle">SSE: card.played</text>
       <text class="m" x="695" y="198" text-anchor="middle">POST seat.joined</text>
       <line class="arrow" x1="780" y1="262" x2="610" y2="262" marker-end="url(#ah)"/>
@@ -142,7 +144,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
       <text x="470" y="415" text-anchor="middle"><tspan class="h">Honeycomb</tspan>  every ship exports OpenTelemetry; traceparent rides every hop</text>
     </svg>
     </div>
-    <figcaption>The Spine is the middle. Each ship translates itself into the Spine's language at its own border. The Shuffler and Tabletop never call each other.</figcaption>
+    <figcaption>The Spine is the middle. Ships and Spine speak only the Published Language in <code>contracts/</code>; each ship translates itself into it at its own border. The Shuffler and Tabletop never call each other.</figcaption>
   </figure>
   <div class="key">
     <span style="--c: var(--shuffler)">Shuffler</span>
