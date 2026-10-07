@@ -38,15 +38,14 @@ This is a strangler fig over Mural, not a rewrite.
 
 Spectator mode (from the Multiplayer-aware mountain) is a constraint on every rung, not
 a rung of its own: anyone can join a table to look — see what's happening, the
-commentary, the public info about hands (counts, not contents), and in some modes
-comment in chat. Long-goal: a spectator's own private chat with the agent, for learning
+commentary, and in some modes comment in chat. Long-goal: a spectator's own chat with the agent, for learning
 to play.
 
 ## The components
 
 | Component | Language | Owns |
 |---|---|---|
-| **Shuffler** (this app today) | TypeScript | Hidden zones: library, hand. One player's game. |
+| **Shuffler** (this app today) | TypeScript | Library, hand. One player's game. |
 | **Tabletop** (new) | TypeScript, React, tldraw | The spatial world: card positions, zone areas, gestures, notes. Multiplayer sync. |
 | **Spine** (new) | Ruby | Tables, Seats, the event log, interpretations, evals. The central domain language. |
 | **Interpreter** (later) | inside Spine for now | Translation from physical events to game events. An AI. |
@@ -89,29 +88,6 @@ See GLOSSARY.md for the full context map. The short version:
 
 One append-only log per table. Constraints, baked in from the first event:
 
-- **Visibility on every event.** Public events (card played, land tapped) everyone
-  sees. Private events (you drew *Lyra*) belong to a player — and each casts a
-  **public shadow** ("Jess drew a card", hand count 6→7). A spectator is a consumer of
-  the public projection; so is the narration panel, mostly.
-- **Shadow logic lives at the source.** The Shuffler creates the shadow; the Spine
-  never receives the card's identity. Deciding what's public is part of translating
-  into the published language, and it belongs to the context that owns the secret.
-  The Spine can't leak what it doesn't hold (which matters pre-auth), it doesn't need
-  hidden contents (the Shuffler persists its own events for recovery), and the someday
-  modes that need more — spectators see hands, a hand-recommendation agent — become
-  the Shuffler *choosing to publish more*, per table mode: same translation point,
-  wider aperture. Consequence: the Spine's log is the story of *the table* — it knows
-  exactly what a person standing at the table would know. Also: if the agent someday
-  plays, it structurally cannot have seen opponents' hands along the way.
-- **Visibility in the Spine means audience scoping**, not zone secrecy: a card
-  revealed to one opponent, a spectator's private tutor-chat, a seat-directed
-  interpreter whisper. Two mechanisms, two jobs.
-- **Open subtlety: "look at" vs "reveal."** The Shuffler's current Reveal button is
-  really *look at* (private — flip the top of your library so *you* can see it).
-  MTG's *reveal* means showing a card to everyone (or to a chosen subset: "look at
-  target player's hand"). Look-at is a private event with a public shadow ("Jess is
-  looking at the top 3 cards of her library"); reveal is the Shuffler deliberately
-  publishing identity with an audience scope. Not yet designed.
 - **Never replace, supersede.** Physical events are evidence; you don't rewrite
   evidence. Interpretations are themselves events, appended later, that **cover**
   earlier events. A correction (from a player, in chat) triggers a superseding
@@ -146,8 +122,6 @@ Not all Spine events are game events:
 - **Interpretation / correction events** — the layer tying physical to game, and the
   record of the agent being taught.
 
-Visibility cuts across all kinds orthogonally.
-
 ## Principles
 
 - **Playable at all times.** Every rung of the ladder is a game you'd actually play.
@@ -173,28 +147,11 @@ Visibility cuts across all kinds orthogonally.
     card" needed no feature: turning it over already does it, and nothing stops them.
   - **Don't reach for "only the controller may…"** when designing gestures. If a
     restriction seems necessary, ask whether the players would rather just be trusted.
-  **The Shuffler still holds hidden zones** — library and hand — but that's because hidden
-  zones *are* the product, not because a boundary is being policed. Where the two ships
-  meet, prefer the simple thing: **don't make anyone reason about what may cross.** Jess,
-  reversing her own earlier call the same day: _"I don't want you to have to reason about
-  what is hidden and what isn't."_ The `gameCardIndex`-may-not-cross guard that lived in
-  the `card.played`/`seat.joined` contract schemas was the last of that kind, and was
-  removed at `let-gamecardindex-out` (2026-08-10); the constraint it was standing in for
-  — `SEAMAP.md`'s "hand counts but never hands" — is about what the app *volunteers*, so it
-  belongs on the payloads that could actually leak a hand, not on every door in the fleet.
-  The harder and still-open question is the opposite one: **how hidden information gets
-  shared when it _should_ be** (reveal the top card; look at target player's hand). The
-  likely shape is that *symmetric* reveals are physical and belong on the Tabletop — you
-  reveal by putting cards where everyone can see them — while *asymmetric* ones can't live
-  on a canvas with no privileged actor. See `sharing-hidden-zones` in `TODO.md`.
   **Extended past the Tabletop's canvas to the whole fleet, 2026-08-18** (same session
   `gameId` was let cross the Shuffler↔Tabletop boundary): _"If people want to peek at each
   others' hands, by digging around in the network tab and getting super clever about it,
   well, that's the game they choose to play. This game is adjudicated by the players, not
-  by this app. This app supports play, it does not enforce."_ The Shuffler's hidden zones
-  stay hidden because that's the product, not because the wire is hardened against a
-  determined player reading it — so a design question here is never "could a clever player
-  extract this," it's "does this app volunteer it in the ordinary course of play."
+  by this app. This app supports play, it does not enforce."_
 - **The humans teach the AI in public, during play.** The chat panel is the eval
   machine, and the teaching is part of the game record.
 - **Don't carry what you can listen to.** Discord keeps the voice call; we transcribe.
@@ -217,7 +174,7 @@ Discord anyway, I'll tell you the table name."
 
 ### Shuffler (changes to this app)
 
-- Stays the owner of hidden zones and its own language. Its event-sourced GameState
+- Stays the owner of the library, the hand, and its own language. Its event-sourced GameState
   continues as-is.
 - **Play and Discard buttons** (today there is only Play). Both are born-semantic game
   events — "Jess played Lyra" / "Jess discarded Lyra" — no interpretation needed. The
@@ -225,9 +182,6 @@ Discord anyway, I'll tell you the table name."
   lands included; Discard → the Graveyard area. Clipboard mode presumably
   survives as a fallback / solo mode.
 - **Prep screen** gains "type a table name to join."
-- Emits public shadows of hidden-zone events to the Spine: drew a card, mulliganed,
-  hand count changes, library count. **The shadow logic lives here**, at the source —
-  the Spine never sees hidden-zone card identities (see the event model above).
 - Someday the hand renders as a tray inside the Tabletop page; for now, separate
   browser tabs are fine. The Shuffler gradually becomes a service behind the tabletop
   rather than a destination page.
@@ -249,7 +203,7 @@ Discord anyway, I'll tell you the table name."
 ### Spine
 
 - Ruby service. Owns table identity, seats, membership, the event log, projections
-  (current reading, public projection, evals), and — for now — the interpreter.
+  (current reading, evals), and — for now — the interpreter.
 - Plain domain code for tables, seats, and the log; the Journeys pattern belongs to
   the Interpreter (below).
 - The event schema is versioned and language-neutral; both TS apps validate against it.

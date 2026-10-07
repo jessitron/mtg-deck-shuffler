@@ -3,7 +3,7 @@
 This is the fleet-level map: the whole voyage from deck management to playing together
 to an agent that learns the game. Each major component (ship) has its own seamap:
 
-- [Shuffler](apps/shuffler/SEAMAP.md) — hidden zones: library and hand
+- [Shuffler](apps/shuffler/SEAMAP.md) — library and hand
 - [Tabletop](apps/tabletop/SEAMAP.md) — the shared tldraw canvas
 - [Spine](services/spine/SEAMAP.md) — tables, seats, the event log, the interpreter
 
@@ -25,7 +25,7 @@ The ladder — playable at all times, increasingly useful and fun.
    in the middle: no direct HTTP between the Shuffler and the Tabletop exists anywhere
    in the code, everything routes through the Spine's event log and its SSE stream out
    to the Tabletop. Still includes: the Spine-vocabulary work `tabletop-replaces-mural`'s
-   cards-come-and-go map left behind (the eleven hidden-zone Shuffler actions — draw,
+   cards-come-and-go map left behind (the eleven Shuffler-only actions — draw,
    shuffle, mulligan, put-on-top/bottom, …).
 3. **The Interpreter learns to read the play** — guesses at unexplained physical
    events, asks in chat, is corrected; then ears (per-player transcription); then
@@ -60,8 +60,7 @@ A change is home when:
 - **Playable at all times.** Every safe harbor is a game you'd actually play.
 - **Physics vs meaning.** The Tabletop knows what got moved around at a table; only the
   interpreter knows what it means. Both make it into the Table's event log.
-- **One append-only event log per table.** Visibility on every event; private events
-  cast public shadows. Never replace — supersede. Provenance on every inferred event.
+- **One append-only event log per table.** Never replace — supersede. Provenance on every inferred event.
   The log is the eval dataset.
 - **The Spine's language is the published language**; the event contract is
   programming-language-neutral (JSON Schema), versioned, validated on both sides.

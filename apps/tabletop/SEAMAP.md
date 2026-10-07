@@ -24,7 +24,6 @@ event the Spine can hear.
    played. Not yet built._
 3. **The window on the game** — the collapsible narration/chat panel: the running
    interpretation, the interpreter's questions, players' answers and corrections.
-   Spectators get the public view.
 
 ## Safe Harbor
 

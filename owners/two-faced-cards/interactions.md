@@ -183,10 +183,7 @@ These are specific things that could break two-faced cards if changed elsewhere:
     card, and **never gate a flip / turn-over / peek on who controls the card** — that
     design space is closed, not unexplored. Related: the old "`gameCardIndex` never leaves
     the Shuffler" rule **was reversed and is now built** (buoy `let-gamecardindex-out`,
-    landed 2026-08-10 — see watch point 21) — don't cite the old rule as binding. What
-    survives is that payloads should say what happened and no more (SEAMAP's "hand counts
-    but never hands"), which is a constraint on payload _design_, not a check on every
-    boundary. Full reasoning in [contract.md](contract.md) and [tabletop.md](tabletop.md).
+    landed 2026-08-10 — see watch point 21) — don't cite the old rule as binding. Full reasoning in [contract.md](contract.md) and [tabletop.md](tabletop.md).
 
 16. **Face state in the card modal is now strongly observable — resolved 2026-08-07.**
     Previously there was no `data-face`, no class, and no face-dependent text in the modal (a

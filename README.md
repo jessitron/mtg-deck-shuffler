@@ -9,7 +9,7 @@ The full vision is in [notes/DESIGN-the-table-vision.md](notes/DESIGN-the-table-
 
 | Ship                                  | What it owns                                | State                    |
 | ------------------------------------- | ------------------------------------------- | ------------------------ |
-| [Shuffler](apps/shuffler/)            | The hidden zones: your library and hand     | Deployed, in use         |
+| [Shuffler](apps/shuffler/)            | Your library and hand                        | Deployed, in use         |
 | [Tabletop](apps/tabletop/)            | The shared tldraw canvas where play happens | Not built yet (seamap only) |
 | [Spine](services/spine/)              | Tables, seats, the event log, the interpreter | Not built yet (seamap only) |
 

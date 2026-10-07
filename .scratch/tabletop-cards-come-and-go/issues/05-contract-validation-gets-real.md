@@ -27,7 +27,7 @@ again after this ships.
 
 **Landed (2026-08-09), wider than the checklist above — the mismatch was real, not
 cosmetic:** today's Shuffler→Tabletop body was a flat "envelope-lite" shape (no
-`tableId`/`occurredIn`/`visibility`/`traceparent`/`schemaVersion`, no nested `payload`,
+`tableId`/`occurredIn`/`traceparent`/`schemaVersion`, no nested `payload`,
 plus convenience fields the contract's payload schemas explicitly excluded). Validating
 that body against the real contract as written would reject every request. Jess's call:
 make both ends actually conform now, while it's free. So this ticket also:

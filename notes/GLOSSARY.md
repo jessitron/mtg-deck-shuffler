@@ -160,7 +160,7 @@ Spectator (Tabletop): someone at a Table without a Seat. They should be able to 
 
 Event Log (spine): the append-only record of everything that happened at a Table. One per table.
 
-Look At vs Reveal (Spine, not yet designed): _look at_ is private — a player sees hidden information (top of library, an opponent's hand via an effect); its public shadow says only that the looking happened. _Reveal_ is deliberate publication of a card's identity, with an audience scope (everyone, or chosen players). The Shuffler's Reveal button is a look-at. Later, we will implement a proper Reveal.
+Look At vs Reveal (Spine, not yet designed): _look at_ — a player sees a card (top of library, an opponent's hand via an effect). _Reveal_ shows a card to everyone, or to chosen players. The Shuffler's Reveal button is a look-at. Later, we will implement a proper Reveal.
 
 Table Event (Spine): joining a table, taking a seat, someday matching. Not a game event. Administrative.
 

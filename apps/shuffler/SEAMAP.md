@@ -1,16 +1,16 @@
 # SEAMAP — Shuffler (ship)
 
-One ship in [the fleet](../../SEAMAP.md). The Shuffler owns the hidden zones — library
-and hand — for one player. Its code is this directory.
+One ship in [the fleet](../../SEAMAP.md). The Shuffler owns the library
+and hand for one player. Its code is this directory.
 
 ## North Star
 
 Your library and hand, effortless and true. Shuffle up any deck; the app tracks the
-hidden zones so your hands are free to play.
+library and hand so your hands are free to play.
 
 ## The Mountains
 
-1. **Good play experience** ← _active_ — the hidden zones feel real and fun.
+1. **Good play experience** ← _active_ — library and hand feel real and fun.
    _Next peak: table fidelity — animations of cards moving, playmats, sleeves.
    (Discard/exile tracking and "library on the right" are migrating to the Tabletop's
    chart — the table stops being mysterious.)_
@@ -20,9 +20,7 @@ hidden zones so your hands are free to play.
    both go through the Spine, never straight to the Tabletop — mutate and persist
    happen immediately, and `card.played` reaches the table best-effort via the
    Spine's event log, the verb implying the landing zone (play→Stack,
-   discard→graveyard; clipboard survives as solo mode). Still ahead:
-   hidden-zone events cast public shadows to the Spine (drew a card, hand count,
-   mulligan) — the shadow logic lives here, at the source._
+   discard→graveyard; clipboard survives as solo mode)._
 3. **A tray, not a tab** — someday the hand renders inside the Tabletop page, and the
    Shuffler becomes a service behind the table rather than a destination. Separate
    browser tabs are fine for now.
@@ -47,5 +45,4 @@ hidden zones so your hands are free to play.
 
 ## Non-goals
 
-- Never shows another player's hand. Hidden means hidden; only shadows are public.
 - Not the place where play happens — that's the Tabletop's chart.

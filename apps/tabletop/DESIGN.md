@@ -36,7 +36,7 @@ and the stack — before a single card is played.**
 | **Seat**        | a player at the table. Identity is `seatId`; `playerName` is display-only.                                           |
 | **Player area** | everything belonging to one seat: playmat + library + command zone + graveyard + exile + name label. A rectangle.    |
 | **Playmat**     | the horizontal rectangle with the picture on it. On the Tabletop it _is_ the battlefield — nothing else lives on it. |
-| **Library**     | the deck. Modeled in the Shuffler (hidden zone); pictured here as a card back with a shadow.                         |
+| **Library**     | the deck. Modeled in the Shuffler; pictured here as a card back with a shadow.                         |
 | **Command Zone**| a labeled box beside the library, sized for **two** cards side by side (partner commanders). Home for the commander(s) when not on the battlefield. |
 | **Graveyard**   | a labeled grey box you can drag cards into.                                                                          |
 | **Exile**       | a labeled black box. Physically a sideways pile; here just a smaller box.                                            |
@@ -231,7 +231,6 @@ POST /api/tables/:tableName/events
   occurredAt: "<ISO 8601, the Shuffler's clock>",
   initiator: { seatId, playerName },
   occurredIn: "shuffler",
-  visibility: "public",
   traceparent: "<W3C trace context>",
   schemaVersion: 1,
   payload: {

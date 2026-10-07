@@ -422,9 +422,7 @@ So, binding on all future Tabletop face work:
 
 Related, and a softening of this owner's own framing: Jess **reversed** the rule that
 `gameCardIndex` never leaves the Shuffler — *"I don't want you to have to reason about what
-is hidden and what isn't."* Buoy `let-gamecardindex-out` in the repo-root `TODO.md`. The
-*reason* the guard existed (SEAMAP's "hand counts but never hands") still holds — it just
-belongs on **payload design**, not as a boundary check on every door. See
+is hidden and what isn't."* Buoy `let-gamecardindex-out` in the repo-root `TODO.md`. See
 [contract.md](contract.md).
 
 ## Resolved: ticket 06 — Transform gesture and face authority (2026-08-08, `575416b`); built: physics ticket 17 (2026-08-09, `eb24a4f` + `ff5d58a`)

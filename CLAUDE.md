@@ -96,7 +96,7 @@ plus `check-fleet-tokens.sh` (a fast smoke check that the shared palette reaches
 The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and `./deploy.sh`):
 
 - `apps/shuffler/` — the Shuffler: Express + HTMX deck manager and game screen;
-  hidden zones (library, hand). The original app.
+  library and hand. The original app.
 - `apps/tabletop/` — the Tabletop: Vite + React + tldraw synced canvas
   (`/t/:tableName` is a shared board) where cards arrive from the Shuffler.
 - `services/spine/` — the Spine: Ruby; table administration, persistence and event bus, one append-only

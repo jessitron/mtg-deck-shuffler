@@ -19,16 +19,15 @@ believe it.
    _Being rebuilt on Roda/Sequel (`.scratch/spine-roda-rewrite/`) as a single `join`
    endpoint (name a table, get a seat; creates the table if it doesn't exist yet).
    The Shuffler's Prep screen doesn't call it yet._
-2. **The event log** — append-only, one per table; visibility on every event; private
-   events cast public shadows; projections (current reading, public view for
-   spectators, narration feed).
+2. **The event log** — append-only, one per table; projections (current reading, spectator
+   view, narration feed).
    _Rebuilt on Roda/Sequel through ticket 05: append-only log, dedup on sender id, loud
    contract validation (`POST /tables/:table_id/events`, envelope v3 — `traceparent`
    moved out of the body entirely, header-only inbound), and live outbound delivery
    over SSE (`GET /tables/:table_id/events/stream`, one stream per table, fed by a
    plain-Ruby broadcaster), and an `/admin/tables` screen (ticket 06) that dogfoods
    that same stream to append new rows live, no reload. Still ahead overall:
-   public-only is the whole visibility story so far; richer projections._
+   richer projections._
 3. **The Interpreter** — physical events in, game events out, with provenance,
    causality, confidence, and commentary. Guesses; asks in chat; is corrected;
    supersedes itself. Later: ears (transcript events join the evidence), then
@@ -56,7 +55,7 @@ believe it.
   (physical events in, game events out) is sacred even while it lives inside this app,
   so extraction later is a deployment decision, not a design one.
 - Not all Spine events are game events: table events, chat events, physical events,
-  game events, interpretations/corrections — visibility cuts across them all.
+  game events, interpretations/corrections.
 - Observability is mandatory: telemetry to Honeycomb via OpenTelemetry, trace context
   propagated in and out (arriving events carry it; interpretations link back through
   it), all interesting info on spans. From the first commit.

@@ -9,7 +9,7 @@ ship's meaning holds in another is the failure this file exists to prevent.
 
 ## Contexts
 
-- **Shuffler** (`apps/shuffler/`) — the original app: deck manager and game screen, hidden zones
+- **Shuffler** (`apps/shuffler/`) — the original app: deck manager and game screen
   (library, hand). Its vocabulary is presented to players (UI subdomain) and optimized to make
   invalid state unrepresentable (Game State subdomain).
 - **Tabletop** (`apps/tabletop/`) — the tldraw-based shared canvas. Its language is the *physics*

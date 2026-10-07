@@ -102,11 +102,11 @@ never blocks the sender's own state change.
     returnable to hand or library through the same exits as anything else — so that
     there's no special-case physics to learn.
 17. As a player at the table, I want the library furniture to link back to its seat's
-    Shuffler game, so that I can jump from the shared board to my private zones in one
+    Shuffler game, so that I can jump from the shared board to my library and hand in one
     click.
 18. As a player, I want a returned card to show the Shuffler's remembered face (the table
-    is not authoritative for face), so that hidden-zone information never leaks from
-    table-side flipping.
+    is not authoritative for face), so that table-side flipping
+    doesn't carry into the Shuffler.
 19. As a player whose discard is undone, I want the event to be distinct from "play was
     undone", so that the log — and someday the Interpreter — knows what actually happened.
 20. As a deck owner, I want a crafted request that moves a table card out of the `Table`
