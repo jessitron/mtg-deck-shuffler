@@ -96,7 +96,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
               <!-- externals -->
               <rect class="ext" x="20" y="20" width="150" height="54"></rect><text class="h" x="95" y="43" text-anchor="middle">Archidekt</text><text class="m" x="95" y="61" text-anchor="middle">deck lists · external</text> <rect class="ext" x="200" y="20" width="150" height="54"></rect><text class="h" x="275" y="43" text-anchor="middle">Scryfall</text><text class="m" x="275" y="61" text-anchor="middle">card database · standard</text> <line class="arrow" x1="95" y1="74" x2="95" y2="168" marker-end="url(#ah)"></line><text class="m" x="103" y="124">Anticorruption Layer</text> <line class="arrow" x1="275" y1="74" x2="200" y2="168" marker-end="url(#ah)"></line><text class="m" x="250" y="112">Conformist</text>
               <!-- ships -->
-              <rect class="shuf" x="20" y="170" width="200" height="130"></rect> <text class="h" x="120" y="196" text-anchor="middle">SHUFFLER</text> <text x="120" y="220" text-anchor="middle">Game · Library · Hand</text> <text class="m" x="120" y="240" text-anchor="middle">hidden zones, one player</text> <text class="m" x="120" y="258" text-anchor="middle">TypeScript · Express · HTMX</text> <text class="m" x="120" y="276" text-anchor="middle">SQLite</text> <rect class="spn" x="390" y="140" width="220" height="170"></rect> <text class="h spn-t" x="500" y="166" text-anchor="middle">SPINE</text> <text class="spn-t" x="500" y="188" text-anchor="middle">Table · Seat · Event log</text> <text class="spn-t" x="500" y="206" text-anchor="middle" style="font-size:11px">Ruby · Roda · SQLite</text> <rect class="plan" x="410" y="236" width="180" height="56"></rect> <text class="spn-t" x="500" y="258" text-anchor="middle" style="font-size:12px">Interpreter</text> <text class="spn-t" x="500" y="277" text-anchor="middle" style="font-size:11px">planned · physics in, meaning out</text> <rect class="tab" x="780" y="170" width="140" height="130"><!-- jess: Let's add tldraw as a domain. Right now it's all snarled inside the tabletop, but I want to pull it out. Picture it as overlapping now, and note that we want an interface between. --></rect> <text class="h" x="850" y="196" text-anchor="middle">TABLETOP</text> <text x="850" y="220" text-anchor="middle">Card · Zone · Gesture</text> <text class="m" x="850" y="240" text-anchor="middle">physics, not meaning</text> <text class="m" x="850" y="258" text-anchor="middle">React · tldraw</text> <text class="m" x="850" y="276" text-anchor="middle">no persistence</text>
+              <rect class="shuf" x="20" y="170" width="200" height="130"></rect> <text class="h" x="120" y="196" text-anchor="middle">SHUFFLER</text> <text x="120" y="220" text-anchor="middle">Game · Library · Hand</text> <text class="m" x="120" y="240" text-anchor="middle">one player</text> <text class="m" x="120" y="258" text-anchor="middle">TypeScript · Express · HTMX</text> <text class="m" x="120" y="276" text-anchor="middle">SQLite</text> <rect class="spn" x="390" y="140" width="220" height="170"></rect> <text class="h spn-t" x="500" y="166" text-anchor="middle">SPINE</text> <text class="spn-t" x="500" y="188" text-anchor="middle">Table · Seat · Event log</text> <text class="spn-t" x="500" y="206" text-anchor="middle" style="font-size:11px">Ruby · Roda · SQLite</text> <rect class="plan" x="410" y="236" width="180" height="56"></rect> <text class="spn-t" x="500" y="258" text-anchor="middle" style="font-size:12px">Interpreter</text> <text class="spn-t" x="500" y="277" text-anchor="middle" style="font-size:11px">planned · physics in, meaning out</text> <rect class="tab" x="780" y="170" width="140" height="130"><!-- jess: Let's add tldraw as a domain. Right now it's all snarled inside the tabletop, but I want to pull it out. Picture it as overlapping now, and note that we want an interface between. --></rect> <text class="h" x="850" y="196" text-anchor="middle">TABLETOP</text> <text x="850" y="220" text-anchor="middle">Card · Zone · Gesture</text> <text class="m" x="850" y="240" text-anchor="middle">physics, not meaning</text> <text class="m" x="850" y="258" text-anchor="middle">React · tldraw</text> <text class="m" x="850" y="276" text-anchor="middle">no persistence</text>
               <!-- shuffler <-> spine -->
               <line class="arrow" x1="220" y1="205" x2="390" y2="205" marker-end="url(#ah)"></line> <text class="h" x="305" y="230" text-anchor="middle" style="font-size:10px">PUBLISHED LANGUAGE</text> <text class="m" x="305" y="184" text-anchor="middle">/join</text> <text class="m" x="305" y="198" text-anchor="middle">card.played · discarded</text> <line class="arrow" x1="390" y1="262" x2="220" y2="262" marker-end="url(#ah)"></line> <text class="m" x="305" y="248" text-anchor="middle">SSE stream</text> <text class="m" x="305" y="282" text-anchor="middle">card.returned</text>
               <!-- spine <-> tabletop -->
@@ -133,7 +133,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
         <figure>
           <div class="scroll">
             <svg viewBox="0 0 760 310" role="img" aria-label="A game card is in exactly one location: Library, Hand, Revealed, Table or Command Zone. Arrows show the moves between them.">
-              <rect class="shuf" x="30" y="110" width="130" height="60"></rect><text class="h" x="95" y="136" text-anchor="middle">Library</text><text class="m" x="95" y="154" text-anchor="middle">ordered, hidden</text> <rect class="shuf" x="300" y="16" width="140" height="54"></rect><text class="h" x="370" y="40" text-anchor="middle">Revealed</text><text class="m" x="370" y="57" text-anchor="middle">looked at, private</text> <rect class="shuf" x="300" y="216" width="140" height="60"></rect><text class="h" x="370" y="242" text-anchor="middle">Hand</text><text class="m" x="370" y="260" text-anchor="middle">ordered, hidden</text> <rect class="shuf" x="600" y="110" width="130" height="60"></rect><text class="h" x="665" y="136" text-anchor="middle">Table</text><text class="m" x="665" y="154" text-anchor="middle">not tracked here</text> <rect class="shuf" x="600" y="230" width="130" height="52"></rect><text class="h" x="665" y="252" text-anchor="middle">Command Zone</text><text class="m" x="665" y="270" text-anchor="middle">commanders</text> <path class="arrow" d="M160 128 L300 50" marker-end="url(#ah)"></path><text class="m" x="205" y="76">reveal</text> <path class="arrow" d="M160 155 L300 232" marker-end="url(#ah)"></path><text class="m" x="200" y="205">draw</text> <path class="arrow" d="M300 262 Q95 300 95 172" marker-end="url(#ah)"></path><text class="m" x="150" y="290">mulligan</text> <line class="arrow" x1="370" y1="70" x2="370" y2="216" marker-end="url(#ah)"></line><text class="m" x="378" y="150">put in hand</text> <path class="arrow" d="M440 36 L650 108" marker-end="url(#ah)"></path><text class="m" x="520" y="58">play / discard</text> <path class="arrow" d="M440 250 L650 172" marker-end="url(#ah)"></path><text class="m" x="520" y="238">play / discard</text> <line class="arrow" x1="665" y1="230" x2="665" y2="172" marker-end="url(#ah)"></line><text class="m" x="673" y="204">cast</text> <path class="dash" d="M612 110 L440 62" marker-end="url(#ah)"></path><text class="warn" x="520" y="102" style="fill:var(--warn);font-size:11px">returned (from Tabletop)</text> <text class="m" x="30" y="60">Revealed → top or bottom of Library also</text>
+              <rect class="shuf" x="30" y="110" width="130" height="60"></rect><text class="h" x="95" y="136" text-anchor="middle">Library</text><text class="m" x="95" y="154" text-anchor="middle">ordered</text> <rect class="shuf" x="300" y="16" width="140" height="54"></rect><text class="h" x="370" y="40" text-anchor="middle">Revealed</text><text class="m" x="370" y="57" text-anchor="middle">looked at</text> <rect class="shuf" x="300" y="216" width="140" height="60"></rect><text class="h" x="370" y="242" text-anchor="middle">Hand</text><text class="m" x="370" y="260" text-anchor="middle">ordered</text> <rect class="shuf" x="600" y="110" width="130" height="60"></rect><text class="h" x="665" y="136" text-anchor="middle">Table</text><text class="m" x="665" y="154" text-anchor="middle">not tracked here</text> <rect class="shuf" x="600" y="230" width="130" height="52"></rect><text class="h" x="665" y="252" text-anchor="middle">Command Zone</text><text class="m" x="665" y="270" text-anchor="middle">commanders</text> <path class="arrow" d="M160 128 L300 50" marker-end="url(#ah)"></path><text class="m" x="205" y="76">reveal</text> <path class="arrow" d="M160 155 L300 232" marker-end="url(#ah)"></path><text class="m" x="200" y="205">draw</text> <path class="arrow" d="M300 262 Q95 300 95 172" marker-end="url(#ah)"></path><text class="m" x="150" y="290">mulligan</text> <line class="arrow" x1="370" y1="70" x2="370" y2="216" marker-end="url(#ah)"></line><text class="m" x="378" y="150">put in hand</text> <path class="arrow" d="M440 36 L650 108" marker-end="url(#ah)"></path><text class="m" x="520" y="58">play / discard</text> <path class="arrow" d="M440 250 L650 172" marker-end="url(#ah)"></path><text class="m" x="520" y="238">play / discard</text> <line class="arrow" x1="665" y1="230" x2="665" y2="172" marker-end="url(#ah)"></line><text class="m" x="673" y="204">cast</text> <path class="dash" d="M612 110 L440 62" marker-end="url(#ah)"></path><text class="warn" x="520" y="102" style="fill:var(--warn);font-size:11px">returned (from Tabletop)</text> <text class="m" x="30" y="60">Revealed → top or bottom of Library also</text>
             </svg>
           </div>
           <figcaption>
@@ -232,8 +232,8 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
         <h2>Spine: the log</h2>
         <figure>
           <div class="scroll">
-            <svg viewBox="0 0 760 150" role="img" aria-label="An append-only strip of events numbered by seq. Each is an envelope with sender-set and Spine-set fields.">
-              <text class="m" x="10" y="20">one Spine event log per Table, ordered by seq the Spine assigns</text> <g> <rect class="spn" x="10" y="34" width="106" height="52"></rect><text class="spn-t" x="63" y="56" text-anchor="middle" style="font-size:11px">1 · seat.taken</text><text class="spn-t" x="63" y="74" text-anchor="middle" style="font-size:10px">by Spine</text> <rect class="spn" x="126" y="34" width="106" height="52"><!-- jess: honestly I'm not sure why we have two of these, both taken and joined --></rect><text class="spn-t" x="179" y="56" text-anchor="middle" style="font-size:11px">2 · seat.joined</text><text class="spn-t" x="179" y="74" text-anchor="middle" style="font-size:10px">by Spine</text> <rect class="spn" x="242" y="34" width="106" height="52"></rect><text class="spn-t" x="295" y="56" text-anchor="middle" style="font-size:11px">3 · card.played</text><text class="spn-t" x="295" y="74" text-anchor="middle" style="font-size:10px">by Shuffler</text> <rect class="spn" x="358" y="34" width="106" height="52"></rect><text class="spn-t" x="411" y="56" text-anchor="middle" style="font-size:11px">4 · card.discarded</text><text class="spn-t" x="411" y="74" text-anchor="middle" style="font-size:10px">by Shuffler</text> <rect class="spn" x="474" y="34" width="106" height="52"></rect><text class="spn-t" x="527" y="56" text-anchor="middle" style="font-size:11px">5 · card.returned</text><text class="spn-t" x="527" y="74" text-anchor="middle" style="font-size:10px">by Tabletop</text> <rect class="plan" x="590" y="34" width="106" height="52" style="stroke:var(--warn)"></rect><text class="warn" x="643" y="56" text-anchor="middle" style="fill:var(--warn);font-size:11px">Tabletop gestures,</text><text class="warn" x="643" y="74" text-anchor="middle" style="fill:var(--warn);font-size:11px">interpretations…</text> </g> <line class="arrow" x1="700" y1="60" x2="750" y2="60" marker-end="url(#ah)"></line> <text class="m" x="10" y="118">Also in the contract: card.played-face-down. Nothing is edited or removed. A duplicate send is dropped by its event id.</text> <text class="m" x="10" y="138"><!-- jess: yeah, I got that, it's super clear. remove this line -->Dashed: designed, not built.</text>
+            <svg viewBox="0 0 760 130" role="img" aria-label="An append-only strip of events numbered by seq. Each is an envelope with sender-set and Spine-set fields.">
+              <text class="m" x="10" y="20">one Spine event log per Table, ordered by seq the Spine assigns</text> <g> <rect class="spn" x="10" y="34" width="106" height="52"></rect><text class="spn-t" x="63" y="56" text-anchor="middle" style="font-size:11px">1 · seat.taken</text><text class="spn-t" x="63" y="74" text-anchor="middle" style="font-size:10px">by Spine</text> <rect class="spn" x="126" y="34" width="106" height="52"><!-- jess: honestly I'm not sure why we have two of these, both taken and joined --></rect><text class="spn-t" x="179" y="56" text-anchor="middle" style="font-size:11px">2 · seat.joined</text><text class="spn-t" x="179" y="74" text-anchor="middle" style="font-size:10px">by Spine</text> <rect class="spn" x="242" y="34" width="106" height="52"></rect><text class="spn-t" x="295" y="56" text-anchor="middle" style="font-size:11px">3 · card.played</text><text class="spn-t" x="295" y="74" text-anchor="middle" style="font-size:10px">by Shuffler</text> <rect class="spn" x="358" y="34" width="106" height="52"></rect><text class="spn-t" x="411" y="56" text-anchor="middle" style="font-size:11px">4 · card.discarded</text><text class="spn-t" x="411" y="74" text-anchor="middle" style="font-size:10px">by Shuffler</text> <rect class="spn" x="474" y="34" width="106" height="52"></rect><text class="spn-t" x="527" y="56" text-anchor="middle" style="font-size:11px">5 · card.returned</text><text class="spn-t" x="527" y="74" text-anchor="middle" style="font-size:10px">by Tabletop</text> <rect class="plan" x="590" y="34" width="106" height="52" style="stroke:var(--warn)"></rect><text class="warn" x="643" y="56" text-anchor="middle" style="fill:var(--warn);font-size:11px">Tabletop gestures,</text><text class="warn" x="643" y="74" text-anchor="middle" style="fill:var(--warn);font-size:11px">interpretations…</text> </g> <line class="arrow" x1="700" y1="60" x2="750" y2="60" marker-end="url(#ah)"></line> <text class="m" x="10" y="118">Also in the contract: card.played-face-down. Nothing is edited or removed. A duplicate send is dropped by its event id.</text>
             </svg>
           </div>
           <figcaption>
@@ -306,7 +306,7 @@ Honestly this whole entities part is weak, which is a problem -->
               <tr>
                 <td><b>Flip / Transform / Face-down</b></td>
                 <td>
-                  "flip": private inspection of the other printed face, never leaves the Shuffler. Impossible on a one-faced card. Face-down is not modeled
+                  "flip": look at the other printed face; never leaves the Shuffler. Impossible on a one-faced card. Face-down is not modeled
                 </td>
                 <td>
                   "Transform": swap the printed face of a two-faced card, a physical event. Separately, "Turn face down/up": concealment (<code>faceDown</code> on the card shape), on every card
@@ -329,13 +329,6 @@ Honestly this whole entities part is weak, which is a problem -->
                 <td>
                   <!-- jess: nice -->
                   The unit that owns a log
-                </td>
-              </tr>
-              <tr>
-                <td><b>card.owner and event.initiator</b></td>
-                <td colspan="3">
-                  <!-- jess: yeah delete this row -->
-                  Unrelated concepts. <code>card.owner</code> on card.played: whose deck the card is from. <code>event.initiator</code>: who caused the event. The two can name different players.
                 </td>
               </tr>
             </tbody>
@@ -378,20 +371,12 @@ Honestly this whole entities part is weak, which is a problem -->
             <ul>
               <li>A card is in exactly one location <span class="tag code">code</span></li>
               <li>
-                <!-- jess: delete this. The whole hidden zones/private public thing should be DELETED EVERYWHERE it is not a thing. -->
-                Hidden zones stay hidden; only shadows go public <span class="tag">stated</span>
-              </li>
-              <li>
                 State version = shuffler event log length; stale writes get 409 <span class="tag code">code</span>
               </li>
               <li>
                 Everything persisted is versioned; old data fails loudly (HTTP 410) <span class="tag code">code</span>
               </li>
               <li>Decks and preps are immutable <span class="tag code">code</span></li>
-              <li>
-                <!-- jess: remove this. We want this to be different -->
-                Spine calls are best-effort and never block play <span class="tag code">code</span>
-              </li>
               <li>Carry the Spine's ids and URLs; never build them <span class="tag">stated</span></li>
               <li>
                 In a shared-table game, a card is played only if the Spine accepted the event first <span class="tag plan">planned</span>
@@ -403,10 +388,6 @@ Honestly this whole entities part is weak, which is a problem -->
             <ul>
               <li>
                 The sync server replicates presentation only; it holds no game authority <span class="tag">stated</span>
-              </li>
-              <li>
-                <!-- jess: what does this even mean, remove it -->
-                A card.played for an unseated player is rejected, not patched over <span class="tag code">code</span>
               </li>
               <li>
                 <!-- jess: what even is instance id? -->
@@ -433,17 +414,6 @@ Honestly this whole entities part is weak, which is a problem -->
               <li>
                 Extra fields allowed, so ships deploy independently <span class="tag code">code</span>
               </li>
-              <li>
-                <!-- jess: what does that mean? ... oh this is for interpreted events. that's far in the future. -->
-                Never replace, supersede <span class="tag plan">planned</span>
-              </li>
-              <li>
-                <!-- jess: DELETE DELETE DELETE -->
-                Visibility on every event, private events cast public shadows <span class="tag plan">planned</span>
-              </li>
-              <li>
-                Provenance and confidence on inferred events <span class="tag plan">planned</span>
-              </li>
             </ul>
           </div>
         </div>
@@ -456,26 +426,7 @@ Honestly this whole entities part is weak, which is a problem -->
             "Spine calls are best-effort and never block play" is today's rule. The planned rule is the opposite: no Spine, no play on shared-table games.
           </li>
           <li>
-            <!-- jess: DELETE everything about visibility -->
-            The envelope has no <code>visibility</code> field, and the design summary still says it does.
-          </li>
-          <li>
-            <!-- jess: yeah I don't think we should talk about it. The interpreter is not documented here, only mentioned as a plan. I do like mentioning it but it's silly to document its principles, so we should remove those (including 'provenance and confidence') -->
-            Nothing implements supersede. It is a principle only.
-          </li>
-          <li>
             The Tabletop's taps, transforms and moves reach Honeycomb as spans but never the Spine. They will; shown as planned.
-          </li>
-          <li>
-            <!-- jess: let's delete it from docs. Or where we can, delete the whole doc. too many docs in this project. -->
-            <code>table.created</code> is named in docs but has no payload schema and is not sent.
-          </li>
-          <li>
-            <!-- jess: delete such statements -->
-            The Tabletop's CLAUDE.md says only card.played has a consumer. The dispatch code also handles card.played-face-down, card.discarded and card.returned.
-          </li>
-          <li>
-            The Shuffler's CLAUDE.md names <code><!-- jess: delete such statements. The less that's in CLAUDE.md the better -->sendCardPlayedToSpineBestEffort</code>. The code calls <code>sendCard{Played,Returned,Discarded}BeforeMutate</code>.
           </li>
         </ul>
       </section>
