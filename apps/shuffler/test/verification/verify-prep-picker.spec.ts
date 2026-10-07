@@ -190,7 +190,6 @@ test.describe('Prepare screen — table-look panel', () => {
   test('typed table/player name survives a mat pick (unsaved text is not wiped by the swap)', async ({ page }) => {
     await gotoPrep(page);
 
-    await page.locator('.join-table-summary').click();
     await page.locator('input[name="table-name"]').fill('Friday Night');
     await page.locator('input[name="player-name"]').fill('Jess');
 
@@ -199,6 +198,5 @@ test.describe('Prepare screen — table-look panel', () => {
 
     await expect(page.locator('input[name="table-name"]')).toHaveValue('Friday Night');
     await expect(page.locator('input[name="player-name"]')).toHaveValue('Jess');
-    await expect(page.locator('.join-table-details')).toHaveJSProperty('open', true);
   });
 });

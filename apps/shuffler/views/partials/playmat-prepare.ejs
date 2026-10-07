@@ -38,8 +38,8 @@
     <form method="post" action="/start-game" class="inline-form">
       <input type="hidden" name="prep-id" value="<%= prep.prepId %>" />
       <input type="hidden" name="expected-version" value="<%= prep.version %>" />
-      <details id="join-table-details" hx-preserve="true" class="join-table-details" <%= (prep.tableName || prep.playerName) ? 'open' : '' %>>
-        <summary class="join-table-summary">Join a table</summary>
+      <div id="join-table-details" hx-preserve="true" class="join-table-details">
+        <div class="join-table-summary">Join a table</div>
         <div class="join-table-fields">
           <label class="join-table-label">table name
             <input type="text" name="table-name" value="<%= prep.tableName || '' %>"
@@ -50,7 +50,7 @@
                    placeholder="your name at the table" autocomplete="off" />
           </label>
         </div>
-      </details>
+      </div>
       <button type="submit" id="shuffle-up-button" class="button-base pushable-flat begin-button">Shuffle Up</button>
     </form>
   </div>

@@ -13,10 +13,6 @@ async function goToPrepare(page: any): Promise<string> {
 }
 
 async function openJoinTable(page: any): Promise<void> {
-  const details = page.locator('details.join-table-details');
-  if (!(await details.evaluate((el: HTMLDetailsElement) => el.open))) {
-    await page.locator('summary.join-table-summary').click();
-  }
   await expect(page.locator('input[name="table-name"]')).toBeVisible();
 }
 

@@ -270,12 +270,6 @@
   font-size: 0.85rem;
   font-weight: 700;
   color: #222;
-  cursor: pointer;
-  user-select: none;
-}
-
-.join-table-summary:hover {
-  background-color: #f0f0f0;
 }
 
 .join-table-fields {
