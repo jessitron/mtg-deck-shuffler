@@ -446,7 +446,7 @@ Concrete, in rough order of how often they bite.
     happen at all. If a future htmx route in this app looks like it should be "just persist,
     no content," check whether it needs a swap before reaching for 204.
   - **`hx-preserve` goes on the outermost element that needs it, never on its descendants
-    too.** The join-table `<details>` (unsaved typed text, an opened accordion) carries
+    too.** The join-table panel `div` (unsaved typed text) carries
     `hx-preserve="true"`; the two `<input>`s inside it deliberately do **not** — marking both
     broke it, because htmx detaches a preserved element from the live DOM *before* resolving
     any of its descendants' own separate `hx-preserve` entries, so their
