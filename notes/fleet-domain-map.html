@@ -222,7 +222,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
             <!-- jess: let's remark that mtg-card holds identity -->
             <h3>Identity</h3>
             <ul>
-              <li>Room slug <b>is</b> the Spine's table id, opaque</li>
+              <li>The Table's URL slug <b>is</b> the Spine's Table id, opaque</li>
               <li>Session: <code>?seat=</code> or an anonymous pseudonym kept in localStorage</li>
             </ul>
           </div>
@@ -256,7 +256,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
             <ul>
               <li>
                 <!-- jess: (for seats) -->
-                <code>seq</code>: the order, unique per table
+                <code>seq</code>: the order, unique per Table
               </li>
               <li><code>acceptedAt</code></li>
               <li>
@@ -298,7 +298,7 @@ Honestly this whole entities part is weak, which is a problem -->
               <tr>
                 <td><b>Game / Seat</b></td>
                 <td>Game: one player's play session</td>
-                <td>Seat: a player's place at the table</td>
+                <td>Seat: a player's place at the Table</td>
                 <td>
                   Seat, 1 to 4 per Table. The Shuffler translates Game to Seat at the border and sends its game id as the Spine's opaque <code>joinRequestId</code>
                 </td>
@@ -316,7 +316,7 @@ Honestly this whole entities part is weak, which is a problem -->
               <tr>
                 <td><b>Initiator</b></td>
                 <td colspan="2">
-                  <code>seatId</code>: the saved state, a player's place at the table. <code>sessionId</code>: one browser tab, whatever value each ship uses. <code>playerName</code>: for human readability. A Tabletop initiator without a seat is anonymous.
+                  <code>seatId</code>: the saved state, a player's place at the Table. <code>sessionId</code>: one browser tab, whatever value each ship uses. <code>playerName</code>: for human readability. A Tabletop initiator without a seat is anonymous.
                 </td>
                 <td>Validates the wire shape.</td>
               </tr>
@@ -394,7 +394,7 @@ Honestly this whole entities part is weak, which is a problem -->
               </li>
               <li>Carry the Spine's ids and URLs; never build them <span class="tag">stated</span></li>
               <li>
-                A card is played only if the Spine accepted the event first <span class="tag plan">planned</span>
+                In a shared-table game, a card is played only if the Spine accepted the event first <span class="tag plan">planned</span>
               </li>
             </ul>
           </div>
@@ -419,13 +419,13 @@ Honestly this whole entities part is weak, which is a problem -->
               <li>
                 Zones never touch: an empty gap sits between every pair <span class="tag test">test</span>
               </li>
-              <li>No persistence yet; the room lives in memory <span class="tag code">code</span></li>
+              <li>No persistence yet; the Table lives in memory <span class="tag code">code</span></li>
             </ul>
           </div>
           <div class="card" style="--c: var(--spine-bg)">
             <h3>Spine</h3>
             <ul>
-              <li>One append-only Spine event log per table <span class="tag code">code</span></li>
+              <li>One append-only Spine event log per Table <span class="tag code">code</span></li>
               <li>The Spine alone assigns seq and acceptedAt <span class="tag code">code</span></li>
               <li>
                 Join is idempotent per <code>joinRequestId</code> <span class="tag code">code</span>
