@@ -252,28 +252,25 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
             <h3>Spine sets</h3>
             <ul>
               <li>
-                <!-- jess: (for seats) -->
-                <code>seq</code>: the order, unique per Table
+                <code>seq</code>: the order within a Table's log, one counter across every event and seat
               </li>
               <li><code>acceptedAt</code></li>
               <li>
-                <!-- jess: broadcast is by the sender, isn't it?? This is not set by the spine afaik, it's set by the sender, at least for most events -->
-                <code>traceparent</code>: attached fresh at broadcast, never stored
+                <code>traceparent</code>: the sender's arrives on the HTTP request; the Spine drops any in the envelope and attaches its own, a child in the same trace, when it broadcasts. Never stored, so a replay carries none
               </li>
             </ul>
           </div>
           <div class="card" style="--c: var(--spine-bg)">
             <h3>Entities</h3>
             <ul>
-              <li><b>Table</b>: slug <code>&lt;name&gt;-&lt;8hex&gt;</code>, unique name</li>
               <li>
-                <b>Seat</b>: number 1 to 4, keyed by an opaque <code>joinRequestId</code> so join is idempotent
+                <b>Table</b>: a unique name and an id, the slug <code>&lt;name&gt;-&lt;8hex&gt;</code>, which is also the Tabletop's URL. Owns one event log and up to four Seats. Creating one appends <code>table.created</code>
               </li>
               <li>
-                <!-- jess: "row" ?
-
-Honestly this whole entities part is weak, which is a problem -->
-                <b>Event</b>: one row per envelope
+                <b>Seat</b>: a player's place at a Table, numbered 1 to 4 in join order. Holds the player's name. Joining again with the same <code>joinRequestId</code> (the Shuffler sends its game id) gets the same Seat back
+              </li>
+              <li>
+                <b>Event</b>: an envelope the Spine accepted, with its <code>seq</code>. One per sender event id per Table: a resend gets the original back
               </li>
             </ul>
           </div>
@@ -382,8 +379,7 @@ Honestly this whole entities part is weak, which is a problem -->
                 The sync server replicates presentation only; it holds no game authority <span class="tag">stated</span>
               </li>
               <li>
-                <!-- jess: what even is instance id? -->
-                Duplicate events dropped by event id and instance id <span class="tag code">code</span>
+                Duplicate arrivals dropped: by event id, or by the card's instance id (the Shuffler mints one per card at game start) <span class="tag code">code</span>
               </li>
               <li>
                 Send-then-commit: a returned card vanishes only after the Spine confirms <span class="tag code">code</span>
@@ -415,6 +411,9 @@ Honestly this whole entities part is weak, which is a problem -->
         <ul class="gaps">
           <li>
             "Spine calls are best-effort and never block play" is today's rule. The planned rule is the opposite: no Spine, no play on shared-table games.
+          </li>
+          <li>
+            Every join appends both <code>seat.taken</code> (Seat number) and <code>seat.joined</code> (deck, playmat, sleeve, game URL). Only <code>seat.joined</code> has a consumer; the two could fold into one.
           </li>
           <li>
             The Tabletop's taps, transforms and moves reach Honeycomb as spans but never the Spine. They will; shown as planned.
