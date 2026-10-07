@@ -217,11 +217,8 @@ takes optional table name + player name; the Shuffler mints a short-GUID `seatId
 join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
 (optional fields, no version bumps). `/restart-game` carries them forward.
 
-- **Routes**: `POST /play-card/:gameId/:gameCardIndex` and `POST /discard-card/:gameId/:gameCardIndex`
-  mutate + persist immediately in table mode, same as solo — there is no synchronous
-  send to the Tabletop to block on. `card.played` reaches the Tabletop via
-  `sendCardPlayedToSpineBestEffort` (below) — best-effort, never blocking, never a
-  reason to fail the play/discard. Solo mode (no table): clipboard flow, untouched.
+- **Routes**: `POST /play-card/:gameId/:gameCardIndex` and `POST /discard-card/:gameId/:gameCardIndex`.
+  Solo mode (no table): clipboard flow, untouched.
   Every played card lands on the Stack; the payload names no zone. Discard sends
   `card.discarded` (tabletop-cards-come-and-go ticket 08).
 - **Joining a table is one call to the Spine**: `/start-game`, `/restart-game`, and
@@ -264,7 +261,7 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   Spine call) and only re-joins when the original join never succeeded. Alongside
   the join, `/play-card`/`/discard-card` also send `card.played` to the Spine's
   event log, addressed to that real tableId, with `initiator.seatId` set to
-  `game.seatId` (`sendCardPlayedToSpineBestEffort`) — the real seat GUID
+  `game.seatId` — the real seat GUID
   `seat.joined` minted (via `recordSpineJoin`), **not** `String(spineSeatNumber)`
   (the bare 1-4 table position — the Tabletop compares `initiator.seatId` against
   the seat it saw join, and a table position never matches a seat GUID). Also

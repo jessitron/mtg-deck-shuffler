@@ -63,10 +63,7 @@ heartbeats need no parsing change, only bounded timeout values. `undici` is pinn
 version 7 in `package.json` (`Agent`/`Dispatcher` aren't Node built-ins) — it **must** match
 `process.versions.undici` for whatever Node version is running; undici 8 redesigned the
 Dispatcher's internal handler interface and silently breaks every `fetch()` call through a custom
-dispatcher. `spineEventDispatch.ts` inspects each received envelope's `name`; only
-`card.played` has a consumer today (routed to `cardArrival.ts`'s `applyCardArrival` — dedup,
-placement). Every other kind on the stream (`seat.taken`,
-`table.created`, …) is ignored. Each dispatched event continues the trace from the broadcast
+dispatcher. `spineEventDispatch.ts` inspects each received envelope's `name`. Each dispatched event continues the trace from the broadcast
 envelope's `traceparent` (injected fresh at publish time by the Spine's `Table#broadcast`) as a
 CHILD span, not an unlinked one. **Env**: `SPINE_URL`, default `http://localhost:4600` (same
 variable and default as the Shuffler's — see its `CLAUDE.md`). **This SSE subscription is the
@@ -189,8 +186,7 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`; the browser side is in
   details (`event.name`, `table.name`/`table.slug`, and whatever the payload has) — this is
   `dispatchSpineEvent`'s `sse subscription: <event.name>` span in `spineEventDispatch.ts`,
   continuing the trace from the broadcast envelope's `traceparent` as a CHILD span. If the
-  dispatcher actually acts on the event (today, only `card.played` → `applyCardArrival`),
-  that action gets its *own* span nested inside the receiving one — `applyCardArrival`'s
+  dispatcher actually acts on the event, that action gets its *own* span nested inside the receiving one — `applyCardArrival`'s
   `place arrived card` span in `cardArrival.ts`, which only wraps the actual placement (the
   `updateStore` call), not the validation/dedup/reject checks that precede it (those set
   attributes on the receiving span instead, via `trace.getActiveSpan()`). A rejected or
