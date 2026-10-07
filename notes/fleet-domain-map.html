@@ -62,7 +62,7 @@ svg .dash { stroke: var(--warn); stroke-width: 2; fill: none; stroke-dasharray: 
 svg .life { stroke: var(--line); stroke-width: 2; stroke-dasharray: 3 5; }
 svg .warn { fill: var(--warn); }
 .key { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: .85rem; color: var(--muted); }
-.key span::before { content: ""; display: inline-block; width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; border: 3px solid var(--c); background: var(--surface); }
+.key span::before { content: ""; display: inline-block; width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; border: 3px solid var(--c); background: var(--b, var(--surface)); }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
 .card { background: var(--surface); border-top: 4px solid var(--c, var(--line)); padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .card ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 6px; font-size: .92rem; }
@@ -91,12 +91,12 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
         <h2>Context map</h2>
         <figure>
           <div class="scroll">
-            <svg viewBox="0 0 940 440" role="img" aria-label="Context map: the Shuffler and Tabletop both talk only to the Spine, through the published event contract. The Shuffler also calls Archidekt and Scryfall.">
+            <svg viewBox="0 0 940 440" role="img" aria-label="Context map: the Shuffler and Tabletop both talk only to the Spine, through the published event contract. The Shuffler also calls Archidekt and Scryfall. The Tabletop overlaps tldraw today; an interface between them is wanted.">
               <defs> <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path></marker> </defs>
               <!-- externals -->
               <rect class="ext" x="20" y="20" width="150" height="54"></rect><text class="h" x="95" y="43" text-anchor="middle">Archidekt</text><text class="m" x="95" y="61" text-anchor="middle">deck lists · external</text> <rect class="ext" x="200" y="20" width="150" height="54"></rect><text class="h" x="275" y="43" text-anchor="middle">Scryfall</text><text class="m" x="275" y="61" text-anchor="middle">card database · standard</text> <line class="arrow" x1="95" y1="74" x2="95" y2="168" marker-end="url(#ah)"></line><text class="m" x="103" y="124">Anticorruption Layer</text> <line class="arrow" x1="275" y1="74" x2="200" y2="168" marker-end="url(#ah)"></line><text class="m" x="250" y="112">Conformist</text>
               <!-- ships -->
-              <rect class="shuf" x="20" y="170" width="200" height="130"></rect> <text class="h" x="120" y="196" text-anchor="middle">SHUFFLER</text> <text x="120" y="220" text-anchor="middle">Game · Library · Hand</text> <text class="m" x="120" y="240" text-anchor="middle">one player</text> <text class="m" x="120" y="258" text-anchor="middle">TypeScript · Express · HTMX</text> <text class="m" x="120" y="276" text-anchor="middle">SQLite</text> <rect class="spn" x="390" y="140" width="220" height="170"></rect> <text class="h spn-t" x="500" y="166" text-anchor="middle">SPINE</text> <text class="spn-t" x="500" y="188" text-anchor="middle">Table · Seat · Event log</text> <text class="spn-t" x="500" y="206" text-anchor="middle" style="font-size:11px">Ruby · Roda · SQLite</text> <rect class="plan" x="410" y="236" width="180" height="56"></rect> <text class="spn-t" x="500" y="258" text-anchor="middle" style="font-size:12px">Interpreter</text> <text class="spn-t" x="500" y="277" text-anchor="middle" style="font-size:11px">planned · physics in, meaning out</text> <rect class="tab" x="780" y="170" width="140" height="130"><!-- jess: Let's add tldraw as a domain. Right now it's all snarled inside the tabletop, but I want to pull it out. Picture it as overlapping now, and note that we want an interface between. --></rect> <text class="h" x="850" y="196" text-anchor="middle">TABLETOP</text> <text x="850" y="220" text-anchor="middle">Card · Zone · Gesture</text> <text class="m" x="850" y="240" text-anchor="middle">physics, not meaning</text> <text class="m" x="850" y="258" text-anchor="middle">React · tldraw</text> <text class="m" x="850" y="276" text-anchor="middle">no persistence</text>
+              <rect class="shuf" x="20" y="170" width="200" height="130"></rect> <text class="h" x="120" y="196" text-anchor="middle">SHUFFLER</text> <text x="120" y="220" text-anchor="middle">Game · Library · Hand</text> <text class="m" x="120" y="240" text-anchor="middle">one player</text> <text class="m" x="120" y="258" text-anchor="middle">TypeScript · Express · HTMX</text> <text class="m" x="120" y="276" text-anchor="middle">SQLite</text> <rect class="spn" x="390" y="140" width="220" height="170"></rect> <text class="h spn-t" x="500" y="166" text-anchor="middle">SPINE</text> <text class="spn-t" x="500" y="188" text-anchor="middle">Table · Seat · Event log</text> <text class="spn-t" x="500" y="206" text-anchor="middle" style="font-size:11px">Ruby · Roda · SQLite</text> <rect class="plan" x="410" y="236" width="180" height="56"></rect> <text class="spn-t" x="500" y="258" text-anchor="middle" style="font-size:12px">Interpreter</text> <text class="spn-t" x="500" y="277" text-anchor="middle" style="font-size:11px">planned · physics in, meaning out</text> <rect class="ext" x="770" y="96" width="160" height="96"></rect><text class="h" x="850" y="118" text-anchor="middle">tldraw</text><text class="m" x="850" y="136" text-anchor="middle">canvas · shapes · sync</text><text class="m" x="850" y="152" text-anchor="middle">library · Conformist</text> <text class="warn" x="760" y="116" text-anchor="end" style="fill:var(--warn);font-size:11px">today: tangled together</text><text class="warn" x="760" y="130" text-anchor="end" style="fill:var(--warn);font-size:11px">wanted: an interface between</text> <rect class="tab" x="780" y="170" width="140" height="130" style="fill-opacity:.85"></rect> <text class="h" x="850" y="196" text-anchor="middle">TABLETOP</text> <text x="850" y="220" text-anchor="middle">Card · Zone · Gesture</text> <text class="m" x="850" y="240" text-anchor="middle">physics, not meaning</text> <text class="m" x="850" y="258" text-anchor="middle">React</text> <text class="m" x="850" y="276" text-anchor="middle">no persistence</text>
               <!-- shuffler <-> spine -->
               <line class="arrow" x1="220" y1="205" x2="390" y2="205" marker-end="url(#ah)"></line> <text class="h" x="305" y="230" text-anchor="middle" style="font-size:10px">PUBLISHED LANGUAGE</text> <text class="m" x="305" y="184" text-anchor="middle">/join</text> <text class="m" x="305" y="198" text-anchor="middle">card.played · discarded</text> <line class="arrow" x1="390" y1="262" x2="220" y2="262" marker-end="url(#ah)"></line> <text class="m" x="305" y="248" text-anchor="middle">SSE stream</text> <text class="m" x="305" y="282" text-anchor="middle">card.returned</text>
               <!-- spine <-> tabletop -->
@@ -112,7 +112,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
           </figcaption>
         </figure>
         <div class="key">
-          <span style="--c: var(--shuffler)">Shuffler</span> <span style="--c: var(--tabletop)">Tabletop</span> <span style="--c: var(--spine-bg)">Spine</span> <span style="--c: var(--line)"><!-- jess: @AI: what is outside our code? ... I think you mean archidekt and scryfall. But those boxes don't match this legend. Come to think of it, neither does the spine. Please make the legend match. -->outside our code</span>
+          <span style="--c: var(--shuffler)">Shuffler</span> <span style="--c: var(--tabletop)">Tabletop</span> <span style="--c: var(--spine-bg); --b: var(--spine-bg)">Spine</span> <span style="--c: var(--line); --b: var(--external)">outside the fleet: Archidekt, Scryfall, tldraw</span>
         </div>
       </section>
       <section>
@@ -130,6 +130,9 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
       </section>
       <section>
         <h2>Shuffler: one player's game</h2>
+        <p class="lede" style="margin-top:-8px">
+          The Shuffler also runs alone, with no Table: single-player mode, for people who play on a shared whiteboard like Miro or Mural. The Spine and Tabletop matter only in shared-table games.
+        </p>
         <figure>
           <div class="scroll">
             <svg viewBox="0 0 760 310" role="img" aria-label="A game card is in exactly one location: Library, Hand, Revealed, Table or Command Zone. Arrows show the moves between them.">
@@ -151,10 +154,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
             </ul>
           </div>
           <div class="card" style="--c: var(--shuffler)">
-            <h3>
-              <!-- jess: "Kind" is not a term here. These are examples -->
-              Shuffler event log kinds
-            </h3>
+            <h3>Shuffler event log, for example</h3>
             <ul>
               <li>start game · deal opening hand</li>
               <li>shuffle library · mulligan (one atomic event)</li>
@@ -163,10 +163,7 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
             </ul>
           </div>
           <div class="card" style="--c: var(--shuffler)">
-            <h3>
-              <!-- jess: these layers could be stronger. Let's remark on that. The interface layer is decent, but orchestration and domain is not well separated. -->
-              Layers
-            </h3>
+            <h3>Layers</h3>
             <ul>
               <li>Express routes + HTMX views</li>
               <li><code>apply-game-command</code>: load, version check, mutate, persist</li>
@@ -175,21 +172,21 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
                 Ports with real adapters and fakes: decks, persistence, card cache, images, Spine
               </li>
             </ul>
+            <p>
+              Weak spot: the interface layer holds up, but orchestration and domain are not well separated.
+            </p>
           </div>
         </div>
       </section>
       <section>
-        <h2>
-          <!-- jess: we don't say "room" because that's a tldraw term -->
-          Tabletop: the shared gameplay space
-        </h2>
+        <h2>Tabletop: the shared gameplay space</h2>
         <p class="lede" style="margin-top:-8px">
           The current Tabletop code is a prototype slated for re-implementation. This section describes the intended domain; the vocabulary and the contracts carry over.
         </p>
         <figure>
           <div class="scroll">
             <svg viewBox="0 0 760 300" role="img" aria-label="Left: a table with a central Stack and up to four seats in compass positions. Right: one player area with playmat, library, graveyard, exile and command zone.">
-              <text class="h" x="20" y="14">TABLE (one tldraw room)</text> <rect class="tab" x="100" y="115" width="80" height="70"></rect><text class="h" x="140" y="155" text-anchor="middle">Stack</text> <rect class="box" x="75" y="26" width="130" height="60"></rect><text x="140" y="60" text-anchor="middle">seat N</text> <rect class="box" x="75" y="214" width="130" height="60"></rect><text x="140" y="248" text-anchor="middle">seat S</text> <rect class="box" x="20" y="90" width="50" height="120"></rect><text x="45" y="154" text-anchor="middle">W</text> <rect class="box" x="230" y="90" width="50" height="120"></rect><text x="255" y="154" text-anchor="middle">E</text> <text class="m" x="20" y="292">seats fill S, N, E, W by join order</text> <text class="h" x="330" y="14">PLAYER AREA (one per seat)</text> <rect class="box" x="330" y="26" width="410" height="250"></rect> <rect class="tab" x="342" y="38" width="268" height="226"></rect><text class="h" x="476" y="150" text-anchor="middle">playmat</text><text class="m" x="476" y="168" text-anchor="middle">cards, counters, notes</text> <rect class="tab" x="624" y="38" width="104" height="60"></rect><text x="676" y="72" text-anchor="middle">library</text> <rect class="tab" x="624" y="106" width="104" height="52"></rect><text x="676" y="136" text-anchor="middle">graveyard</text> <rect class="tab" x="624" y="166" width="104" height="44"></rect><text x="676" y="193" text-anchor="middle">exile</text> <rect class="tab" x="624" y="218" width="104" height="46"><!-- jess: technically the command zone is next to the library. I kinda get what you're going for here --></rect><text x="676" y="246" text-anchor="middle">command</text>
+              <text class="h" x="20" y="14">TABLE (one tldraw room)</text> <rect class="tab" x="100" y="115" width="80" height="70"></rect><text class="h" x="140" y="155" text-anchor="middle">Stack</text> <rect class="box" x="75" y="26" width="130" height="60"></rect><text x="140" y="60" text-anchor="middle">seat N</text> <rect class="box" x="75" y="214" width="130" height="60"></rect><text x="140" y="248" text-anchor="middle">seat S</text> <rect class="box" x="20" y="90" width="50" height="120"></rect><text x="45" y="154" text-anchor="middle">W</text> <rect class="box" x="230" y="90" width="50" height="120"></rect><text x="255" y="154" text-anchor="middle">E</text> <text class="m" x="20" y="292">seats fill S, N, E, W by join order</text> <text class="h" x="330" y="14">PLAYER AREA (one per seat)</text> <rect class="box" x="330" y="26" width="410" height="250"></rect> <rect class="tab" x="342" y="38" width="268" height="226"></rect><text class="h" x="476" y="150" text-anchor="middle">playmat</text><text class="m" x="476" y="168" text-anchor="middle">cards, counters, notes</text> <rect class="tab" x="624" y="38" width="104" height="60"></rect><text x="676" y="72" text-anchor="middle">library</text> <rect class="tab" x="624" y="106" width="104" height="52"></rect><text x="676" y="136" text-anchor="middle">graveyard</text> <rect class="tab" x="624" y="166" width="104" height="44"></rect><text x="676" y="193" text-anchor="middle">exile</text> <rect class="tab" x="624" y="218" width="104" height="46"></rect><text x="676" y="246" text-anchor="middle">command</text>
             </svg>
           </div>
           <figcaption>
@@ -219,9 +216,9 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
             </ul>
           </div>
           <div class="card" style="--c: var(--tabletop)">
-            <!-- jess: let's remark that mtg-card holds identity -->
             <h3>Identity</h3>
             <ul>
+              <li>A card's identity rides on its <code>mtg-card</code> shape: instance, cardDefinitionId, owner</li>
               <li>The Table's URL slug <b>is</b> the Spine's Table id, opaque</li>
               <li>Session: <code>?seat=</code> or an anonymous pseudonym kept in localStorage</li>
             </ul>
@@ -326,10 +323,7 @@ Honestly this whole entities part is weak, which is a problem -->
                   A card location: the cards on the shared table. The Shuffler tracks that a card is there, never what it does there (tapped, counters, position). The table name is data it carries and never interprets
                 </td>
                 <td>The state of the game. It is represented on the canvas (tldraw's Room).</td>
-                <td>
-                  <!-- jess: nice -->
-                  The unit that owns a log
-                </td>
+                <td>The unit that owns a log</td>
               </tr>
             </tbody>
           </table>
@@ -344,6 +338,9 @@ Honestly this whole entities part is weak, which is a problem -->
           <div class="card" style="--c: var(--fg)">
             <h3>Whole fleet</h3>
             <ul>
+              <li>
+                <b>Players adjudicate. The app supports play and enforces nothing</b> <span class="tag">stated</span>
+              </li>
               <li>Shuffler and Tabletop never talk directly <span class="tag test">test</span></li>
               <li>
                 Events are JSON Schema, validated by sender and receiver <span class="tag code">code</span>
@@ -351,17 +348,12 @@ Honestly this whole entities part is weak, which is a problem -->
               <li>
                 Physics on the Tabletop, meaning in the Interpreter <span class="tag">stated</span>
               </li>
-              <li>
-                <!-- jess: this one is SO important. Put it at the top -->
-                Players adjudicate. The app supports play and enforces nothing <span class="tag">stated</span>
-              </li>
               <li>No privileged actor on the canvas <span class="tag">stated</span></li>
               <li>
                 Trace context on every hop; facts go on spans, never <code>addEvent</code> <span class="tag">stated</span>
               </li>
               <li>
-                <!-- jess: is this true in the code too? (subagent task) -->
-                Fakes, never mocks <span class="tag">stated</span>
+                Fakes, never mocks <span class="tag">stated</span>. Holds, except two Shuffler tracing tests that use jest spies
               </li>
               <li>Corners square except on round things <span class="tag">stated</span></li>
             </ul>
@@ -422,7 +414,6 @@ Honestly this whole entities part is weak, which is a problem -->
         <h2>Where the story and the code disagree</h2>
         <ul class="gaps">
           <li>
-            <!-- jess: There is such a thing as single-player Shuffler, which allows people to play in Miro or Mural, old-style. We should document that somewhere. All the interesting games we're talking about here are ones with a Table. -->
             "Spine calls are best-effort and never block play" is today's rule. The planned rule is the opposite: no Spine, no play on shared-table games.
           </li>
           <li>
