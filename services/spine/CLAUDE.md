@@ -20,9 +20,8 @@ yourself, and never settle for a symptomatic fix here when the real fix is elsew
 ## What this is
 
 Plain Ruby: Roda for routing (no Rails-style MVC), Sequel for persistence (not
-ActiveRecord), SQLite, Minitest. Rewritten from a Rails 8 app for the reasons in
-`.scratch/spine-roda-rewrite/spec.md` (repo root) — Jess wants to learn plain Ruby, and
-Rails' magic was in the way of seeing where things actually happen.
+ActiveRecord), SQLite, Minitest. Rewritten from a Rails 8 app: Jess wants to learn plain
+Ruby, and Rails' magic was in the way of seeing where things happen.
 
 What `/join` and event ingestion promise (join idempotency, Game→Seat at the border,
 dedup, `seq`/`acceptedAt`) is on the domain map; here is where it lives in code.
@@ -76,7 +75,7 @@ real, opening an SSE stream, and sending it `SIGTERM`.
 (`views/admin/tables/*.html.erb`, rendered by `lib/admin_view.rb` — no Tilt/Rails
 render plugin, just `ERB.new(...).result(binding)`), no framework helpers. The show
 page's page load renders the log as it stands, then a plain `<script>` block opens an
-`EventSource` on that table's SSE stream (dogfooding ticket 05's delivery mechanism)
+`EventSource` on that table's SSE stream (dogfooding the delivery mechanism)
 and appends new rows as they arrive, building each row's Honeycomb trace link
 client-side from that message's `event.traceparent` — see Observability below.
 
@@ -187,6 +186,6 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
   the trace id; team/env slugs come from `HONEYCOMB_TEAM_SLUG`/`HONEYCOMB_ENV_SLUG`,
   defaulting to `modernity`/`local`, injected into the page at render time). Rows
   already in the log when the page opened render with an empty trace cell — expected,
-  not a bug, per the rewrite spec's "Trace context — envelope contract change".
+  not a bug.
 
 Update this file when anything in it changes.

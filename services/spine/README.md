@@ -2,9 +2,9 @@
 
 The fleet's event hub: Tables, Seats, and one append-only event log per table.
 Plain Ruby — Roda (routing only) + Sequel + SQLite + Minitest, no Rails. See
-`SEAMAP.md` for the map, `../../.scratch/spine-roda-rewrite/spec.md` for why this is a
-rewrite from Rails, and `../../notes/DESIGN-event-contract-v0.md` for the contract this
-service enforces (schemas in `../../contracts/`).
+`SEAMAP.md` for the ship's chart, `../../notes/fleet-domain-map.html` for the fleet's
+architecture, boundaries and invariants, and `../../contracts/README.md` for the contract
+this service enforces.
 
 **Current status:** `GET /up`; idempotent (keyed by `joinRequestId`), fully administered `POST /join`, whose request and response are published contracts; contract-
 validated event ingestion (`POST /tables/:table_id/events`); live outbound delivery over
