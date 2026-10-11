@@ -150,8 +150,9 @@ These are specific things that could break two-faced cards if changed elsewhere:
     can Turn Face Down, because it's a physical object. Never write "flip" in Tabletop code,
     UI, telemetry, tests or docs. Do not "fix" the Shuffler to allow flipping one-faced cards,
     and do not port the Shuffler's `twoFaced` gate onto Turn Face Down. Full
-    translation table lives in `CONTEXT-MAP.md`'s "Flip / Transform / Face-down" section (root of the
-    repo); this owner's own copy is in [tabletop.md](tabletop.md).
+    table lives in [tabletop.md](tabletop.md) § "Face and face-down are two axes" (source of
+    record); the fleet-wide summary is the "Flip / Transform / Face-down" row of
+    `notes/fleet-domain-map.html` § Translations at the borders.
 
 14. **Face-down is modeled only on the Tabletop — and both the gesture and both
     renderings are now built.** Ticket 02 (2026-08-07, `c956949`) gave it a home:
@@ -318,8 +319,12 @@ These are specific things that could break two-faced cards if changed elsewhere:
     cannot turn face down _as its Flip action_, but it absolutely can via the generic
     Turn-face-down/up gesture, same as a one-faced card. - `apps/shuffler/src/port-tabletop/types.ts` gained a documentation-only comment after the
     `CardPlayedPayload` doc block, noting no field there models face-down, pointing readers at
-    `notes/GLOSSARY.md`/`CONTEXT-MAP.md`, and stating this is Tabletop-side physics-map work,
+    `notes/GLOSSARY.md`/`CONTEXT-MAP.md` (both since superseded — see 20b), and stating this is Tabletop-side physics-map work,
     not a Shuffler TODO. No field, type, or schema changed.
+    20b. **`CONTEXT-MAP.md` was deleted and GLOSSARY's Face-down / Transform / Flip entries
+    removed (2026-10-11).** The fleet-wide translation is now the "Flip / Transform /
+    Face-down" row of `notes/fleet-domain-map.html` § Translations at the borders; the
+    detailed table's home is [tabletop.md](tabletop.md) § "Face and face-down are two axes".
 
 21. **`mtg-card` gained `owner` and `isCommander` — table-layout ticket 18 (2026-08-09).**
     `mtg-card.props` gained `owner: string` (seatId) and `isCommander: boolean`

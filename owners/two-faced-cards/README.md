@@ -32,8 +32,9 @@ printed face of a two-faced card* — a one-faced card cannot be flipped and sho
 affordance. The Tabletop never says "flip": it has **Transform** (swap the printed face of a
 two-faced card, a physical event) and, separately, **Turn Face Down / Up** (concealment, on any
 card, because a card on a table is a physical object with a back). A one-faced card cannot
-Transform; it can only be turned face down. Full table in `CONTEXT-MAP.md`'s "Flip / Transform / Face-down" translation (root
-of the repo); this owner's own copy of it lives in [tabletop.md](tabletop.md).
+Transform; it can only be turned face down. Full table in [tabletop.md](tabletop.md) § "Face and face-down are two axes" (this owner's
+source of record); the fleet-wide summary is the "Flip / Transform / Face-down" row of
+`notes/fleet-domain-map.html` § Translations at the borders.
 
 Every component of the fleet that touches cards must hold this:
 

@@ -151,10 +151,9 @@ Jess: *"in Deck Shuffler, a one-faced card cannot be flipped. On Tabletop, it ca
 need to be very clear on that."* She then settled the vocabulary: the Tabletop never says
 "flip" (it hid that Transform and Turn Face Down are two independent axes). The two Tabletop
 gestures are **Transform** (swap the printed face of a two-faced card) and **Turn Face Down /
-Turn Face Up** (concealment, on any card). **The table lives in `CONTEXT-MAP.md`'s "Flip /
-Transform / Face-down" translation** (root of the repo); the copy below is kept as this
-owner's own source-of-record detail, but the fleet-wide translation is the one to cite from
-outside this KB.
+Turn Face Up** (concealment, on any card). **The table below is the source of record** for this
+distinction; the fleet-wide one-line summary is the "Flip / Transform / Face-down" row of
+`notes/fleet-domain-map.html` § Translations at the borders — cite that from outside this KB.
 
 | | Shuffler | Tabletop |
 |---|---|---|

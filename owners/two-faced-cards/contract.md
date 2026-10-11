@@ -1,7 +1,6 @@
 # Two-Faced Cards — Contract component
 
-How faces appear in the fleet's published language (`notes/DESIGN-event-contract-v0.md`,
-JES-128). **Landed** (JES-129, `9e3ca60`): the JSON Schema lives at
+How faces appear in the fleet's published language (`contracts/README.md` § Card Identity). **Landed** (JES-129, `9e3ca60`): the JSON Schema lives at
 `contracts/payloads/card.played.v2.json` — `card: { cardDefinitionId, instanceId }` (both
 uuid-format) with a required sibling `face: enum ["front","back"]`. The Spine
 (`services/spine/`, Ruby) validates generic ingested events and the `seat.joined` event
