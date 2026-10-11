@@ -100,8 +100,8 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
 ## Watch points
 
 - **Editing any `run`/`verify.sh`/`deploy.sh`**: preserve `.be`-then-`.env` sourcing. Exception:
-  `apps/shuffler/run` deliberately skips `.be` (documented in `notes/AGENT-NOTES.md`) — don't "fix"
-  it. All three `deploy.sh` source `.be` because the deploy marker's key lives there; that's not
+  `apps/shuffler/run` deliberately skips `.be` (README → "How it works now" is that fact's only
+  home now) — don't "fix" it. All three `deploy.sh` source `.be` because the deploy marker's key lives there; that's not
   the `run` exception and shouldn't be "made consistent" with it. **`services/spine/deploy.sh` is
   also an exception on the `.env` side**: it never sources a `.env` at all — `ECR_REPO` lives in
   `.be` and the Spine's prod OTEL config is baked into `k8s/configmap.yaml` instead of read from a
@@ -413,8 +413,10 @@ _Distilled edges; the full story (invariants, per-ship wiring table) is in `READ
   sync) closes every open SSE stream (`TableBroadcaster#close_all`,
   `services/spine/lib/table_broadcaster.rb`) so Puma's graceful shutdown doesn't hang forever on
   a held-open stream (Kubernetes then `SIGKILL`s the pod once `terminationGracePeriodSeconds`
-  expires — the crash loop documented in
-  `services/spine/notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md`). Despite the name,
+  expires — the crash loop whose gotchas now live in `services/spine/CLAUDE.md` and the
+  `config/puma.rb` comment; the open connection-lifecycle findings are `TODO.md` items
+  `spine-stream-cap-503`, `sse-streams-have-no-timeout`, `table-broadcaster-key-leak`,
+  `tabletop-room-registry-never-freed`). Despite the name,
   **`after_stopped` fires at the *start* of graceful shutdown**, before Puma waits on in-flight
   requests (`Puma::Launcher#do_graceful_stop` fires it before `@runner.stop_blocked`) — the
   right hook for this, but a misleading one to guess at from the name alone. **The hook body runs

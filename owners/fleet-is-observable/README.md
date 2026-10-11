@@ -749,7 +749,9 @@ change; a Honeycomb query filtering `seat.id` can now expect this shape rather t
 Shuffler's own per-page-load identifier, minted fresh every time — unlike `seat.id`, it's not
 tied to a Spine join, and unlike `browserTabId` it's never persisted client-side
 (`sessionId` is free to reset every page load because `gameId` already anchors identity
-durably; see `CONTEXT-MAP.md`'s "Initiator" table).
+durably; the per-ship `sessionId` lifetimes are in `contracts/envelope.v1.json`'s
+`initiator.sessionId` description, the cross-ship translations in `notes/fleet-domain-map.html` →
+"Translations at the borders").
 
 - **Client side.** A new `apps/shuffler/public/session-id.js`, loaded via the shared head
   (`formatHtmlHead`, `src/view/common/html-layout.ts`) right after `browser-tab-id.js`, sets
@@ -1003,7 +1005,7 @@ must be sourced **before** `.env`, or export silently 401s ("unknown API key").
   is sourced, not an oversight.
 - **`apps/shuffler/run` deliberately does NOT source `.be`** — only `.env`. `.be` also runs
   `kubectl config use-context orion`, a side effect on your kube context that's wrong for an
-  ordinary app start. Documented in `notes/AGENT-NOTES.md` → "Don't source `.be` from `./run`". If
+  ordinary app start. This KB is the fact's only written home. If
   a hand-started Shuffler 401s, source `.be` in your shell first, or use the repo-root `run`.
 
 **"Configured" is not "present": `.env` alone produces a keyless header.** Without `.be`, `.env`
@@ -1057,7 +1059,9 @@ Worked example of what "verified in Honeycomb" looks like for this fleet (team `
 ## Related reading
 
 `SEAMAP.md` + the three ship SEAMAPs (the "Observability is mandatory" line), root `CLAUDE.md` →
-Observability, `notes/AGENT-NOTES.md` (`.be` ordering, browser collector, the worktree
-`node_modules` phantom-error mechanism), `notes/add-opentelemetry.md` (the runbook for a new TS
-service, tracing and logs both), `notes/instrument-essential-fields.md`,
-`services/spine/interpreter/docs/journeys/guide/15-listeners-and-telemetry.md`.
+Observability (`.be` ordering), `notes/AGENT-NOTES.md` → "Harness gotchas" (the worktree
+`node_modules` phantom-error mechanism), `notes/fleet-domain-map.html` (the fleet hub; its
+invariants include "Trace context on every hop": `traceparent` arrives as an HTTP header, leaves
+the Spine as a fresh envelope field, never persisted), `notes/add-opentelemetry.md` (the runbook
+for a new TS service, tracing and logs both), `notes/instrument-essential-fields.md`,
+`notes/interpreter/docs/journeys/guide/15-listeners-and-telemetry.md`.
