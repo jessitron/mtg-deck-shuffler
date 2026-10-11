@@ -2,9 +2,12 @@
 
 status: current
 
-# External interfaces are behind ports, adapters, and gateways.
+The layer stack and the fleet's invariants (including "carry the Spine's ids and URLs; never
+build them") are in the [fleet domain map](../../../notes/fleet-domain-map.html). The pattern
+is in [PATTERN-port-adapter-gateway.md](../../../notes/PATTERN-port-adapter-gateway.md). This
+file holds the Shuffler's worked examples.
 
-See the fleet's `notes/PATTERN-port-adapter-gateway.md`
+# External interfaces are behind ports, adapters, and gateways.
 
 For a good example of this in the code, see @src/port-deck-retrieval/index.ts and the files it references.
 
@@ -45,20 +48,9 @@ stream, drop the connection), so the adapter's own reconnect logic can be tested
 read loop, the undici `Agent`, the frame parsing). All three gateways wrap their failures in
 one shared `SpineGatewayError` — one service, one error type.
 
-# Carry an identifier you didn't mint; don't learn to construct it
+# Carried, not constructed
 
-`tableUrl` stays on `SeatAtTable` in the join port, deliberately. It looks like transport
-vocabulary surviving in a port, but it isn't: the Spine *mints* the table's URL, and the
-Shuffler persists it and renders it as the "Go to Table" link.
-
-Absorbing it into the adapter would force the Shuffler to **reconstruct** the URL, which means
-learning the Spine's URL scheme — duplicating knowledge that belongs to another service, and
-silently breaking the day the Spine changes its routes.
-
-The general rule: when another service mints an identifier, address, or URL, **carry the value
-through**. Do not teach this ship how to build it. A port hiding such a value is doing harm,
-not encapsulation — the leak to avoid is the *construction rule*, not the string.
-
-Applied to `seq`: the reconnect *cursor protocol* stops inside `SpineEventsAdapter`, but the
-`seq` value itself is carried through — it is on the published envelope contract, and the
-Shuffler durably records it as `GameEvent.spineSeq` so a torn-down subscription can resume.
+Two values cross `port-spine` untouched because the Spine mints them: `tableUrl` on
+`SeatAtTable` (rendered as the "Go to Table" link) and `seq` (recorded as
+`GameEvent.spineSeq` so a torn-down subscription can resume). The reconnect cursor protocol
+stops inside `SpineEventsAdapter`; the value does not.
