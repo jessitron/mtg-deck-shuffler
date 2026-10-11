@@ -207,6 +207,8 @@ every `waitForTimeout`) — to service **`mtg-fleet-verify`**, team `modernity`,
 
 Requires `apps/shuffler/.env` for OpenTelemetry config. SQLite persistence by default — `data.db` is created in the server's cwd, so `apps/shuffler/data.db`. Set `PORT_PERSIST_STATE=in-memory` for ephemeral state.
 
+**Stale writes**: a mutation that sends `expected-version` (the game's event-log length) gets 409 when it doesn't match; a request with no `expected-version` is applied without the check (`expectedVersionFromRequest` in `src/app.ts`, `src/apply-game-command.ts`).
+
 Changing the shape of anything persisted (a `CardDefinition` field, `Deck`, `PersistedGameState`, `PersistedGamePrep`)? Follow `apps/shuffler/notes/DESIGN-persistence-versioning.md` — it covers which of the version constants to bump and how to fail loudly on old data.
 
 ## Table Mode (Tabletop integration)
