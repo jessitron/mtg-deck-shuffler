@@ -1,7 +1,8 @@
 # SEAMAP — Shuffler (ship)
 
 One ship in [the fleet](../../SEAMAP.md). The Shuffler owns the library
-and hand for one player. Its code is this directory.
+and hand for one player. Its code is this directory. Architecture, boundaries and
+invariants: the [fleet domain map](../../notes/fleet-domain-map.html).
 
 ## North Star
 
@@ -15,12 +16,8 @@ library and hand so your hands are free to play.
    (Discard/exile tracking and "library on the right" are migrating to the Tabletop's
    chart — the table stops being mysterious.)_
 2. **Join a table** — a Shuffler Game connects to a Seat at a Table (Spine context).
-   _Peaks: **reached** — table + player name on the Prep screen (seatId
-   minted at join, prep records table info for rejoining); joining and Play/Discard
-   both go through the Spine, never straight to the Tabletop — mutate and persist
-   happen immediately, and `card.played` reaches the table best-effort via the
-   Spine's event log, the verb implying the landing zone (play→Stack,
-   discard→graveyard; clipboard survives as solo mode)._
+   _Peaks: **reached** — table + player name on the Prep screen; the round trip
+   through the Spine is drawn in the domain map. Clipboard survives as solo mode._
 3. **A tray, not a tab** — someday the hand renders inside the Tabletop page, and the
    Shuffler becomes a service behind the table rather than a destination. Separate
    browser tabs are fine for now.
@@ -38,7 +35,7 @@ library and hand so your hands are free to play.
 - HTMX for interactivity; custom JS only when HTMX can't do it (OTel, animations).
 - EJS templates for pre-game pages and any new pages. The TypeScript view functions on
   the gameplay pages are historical, not an intention to preserve.
-- Ports, adapters, gateways (`notes/PATTERN-port-adapter-gateway.md`). Fakes, never mocks.
+- Ports, adapters, gateways (`../../notes/PATTERN-port-adapter-gateway.md`). Fakes, never mocks.
 - Games are tracked as a series of events; everything persisted is versioned.
 - Observability is mandatory: telemetry to Honeycomb via OpenTelemetry, trace context
   propagated (including into Spine events), all interesting info on spans.
