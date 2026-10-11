@@ -3,7 +3,8 @@
 Guidance for Claude Code when working in `services/spine/`. Fleet-level guidance
 (owners, workflow, telemetry key sourcing) is in the repo-root `CLAUDE.md`.
 
-This ship's seamap: `SEAMAP.md` (in this directory).
+This ship's seamap: `SEAMAP.md` (in this directory). Architecture, boundaries and
+invariants live in the domain map, `../../notes/fleet-domain-map.html`.
 
 **All paths in this file are relative to `services/spine/`**, except `contracts/`, which
 is explicitly called out as repo-root below.
@@ -23,25 +24,18 @@ ActiveRecord), SQLite, Minitest. Rewritten from a Rails 8 app for the reasons in
 `.scratch/spine-roda-rewrite/spec.md` (repo root) — Jess wants to learn plain Ruby, and
 Rails' magic was in the way of seeing where things actually happen.
 
-`GET /up` is health. `POST /join` accepts an opaque `joinRequestId`, table/player/deck names,
-and optional seat decoration; it creates a table on an unseen name, idempotently assigns
-one seat per `joinRequestId` (a retry sends the same value and gets the same seat back), and
-atomically records `seat.taken` + `seat.joined`. The Spine never learns what the id stands
-for: a Shuffler Game is a Seat at the border, and the Shuffler happens to send its game id as
-the `joinRequestId`. The request body and the response `{tableId, seatId, seatNumber,
-tableUrl}` are published contracts (`contracts/requests/join.v1.json`,
-`contracts/responses/join.v1.json`); `lib/join_contract.rb` validates the request on receipt
-(a violation is a 400) through the same schema loader as events (`EventContract.schema_at`).
-The join span carries `join.request_id`. The `seats.join_request_id` column was `game_id`;
-`config/db.rb` renames it (and its unique index) on startup, keeping existing seats. After
-the response, the Spine best-effort POSTs the persisted `seat.joined`
-event to the Tabletop via `lib/tabletop_notifier.rb`; delivery failure never rolls back
-the join. Domain logic lives in `models/table.rb` (`Table`, `Seat`, `Event`, all
+What `/join` and event ingestion promise (join idempotency, Game→Seat at the border,
+dedup, `seq`/`acceptedAt`) is on the domain map; here is where it lives in code.
+`GET /up` is health. `POST /join`: `lib/join_contract.rb` validates the request against
+`contracts/requests/join.v1.json` (a violation is a 400) through the event schema loader
+(`EventContract.schema_at`); the join span carries `join.request_id`. The
+`seats.join_request_id` column was `game_id`; `config/db.rb` renames it (and its unique
+index) on startup, keeping existing seats. After the response, `lib/tabletop_notifier.rb`
+best-effort POSTs `seat.joined` to the Tabletop; delivery failure never rolls back the
+join. Domain logic lives in `models/table.rb` (`Table`, `Seat`, `Event`, all
 `Sequel::Model`), schema and additive startup migrations in `config/db.rb`.
-`POST /tables/:table_id/events` is the generic ingestion
-endpoint: contract-validated against `contracts/` via `lib/event_contract.rb`
-(json_schemer, envelope v1), dedups on the sender's event id, assigns `seq`/`acceptedAt`
-server-side. `GET /tables/:table_id/events/stream` is the outbound side: one SSE stream
+`POST /tables/:table_id/events` ingests through `lib/event_contract.rb` (json_schemer).
+`GET /tables/:table_id/events/stream` is the outbound side: one SSE stream
 per table, fed by `lib/table_broadcaster.rb` (a plain-Ruby pub/sub object every
 `Table#append_event!`/`#mint_event!` publishes to after its transaction commits) and
 formatted into `data:` frames by `lib/sse_stream.rb`. **The stream sends a `: heartbeat\n\n`
@@ -142,21 +136,13 @@ repo root — see the root `CLAUDE.md`.
   runs default to `http://localhost:5180`; the root fleet runner and production set it.
 - Production values live in `k8s/configmap.yaml`; the public URL deliberately uses HTTP
   because the Tabletop ALB has no 443 listener.
-- **A table's `id` *is* its slug — `<name-slug>-<8-hex-random>`** (`lib/table_slug.rb`,
-  `TableSlug.mint`, called from `Table.join!`/`Table.create_with_event!` — not a separate
-  id with a slug derived from it). The name makes the URL identifiable to a human; the
-  random suffix makes it unguessable — a bare table name is not enough to land on
-  someone else's table. Because the id itself is already the friendly slug, `table_url`
-  (`app.rb`) and `TabletopNotifier#event_uri` do nothing but escape `table.id` into a
-  path — no separate slug-construction step, and nothing to keep in sync, since on the
-  Tabletop side that same string is the literal room-registry key (see
-  `apps/tabletop/CLAUDE.md`). `name` keeps its own unique DB constraint (`config/db.rb`),
-  so the existing `NameTaken` retry in `join_table` already covers the (vanishing) risk
-  of an id collision — it can only happen alongside a name collision, which raises first.
-  `table_url` also appends `?seat=<seatId>` (the seat just minted for this join) so the URL
-  handed to the Shuffler already identifies which seat the joining player holds.
-  `Event#as_envelope`'s `tableId` carries this same id verbatim, never rewritten on the
-  way out to the Tabletop (see `contracts/envelope.v1.json`'s `tableId` description).
+- The table id is the `<name-slug>-<8-hex-random>` slug and the Tabletop URL (see the
+  domain map). Minted by `TableSlug.mint` (`lib/table_slug.rb`); `table_url` (`app.rb`)
+  and `TabletopNotifier#event_uri` only escape `table.id` into a path. `name` keeps its
+  own unique constraint (`config/db.rb`), so the `NameTaken` retry in `join_table` covers
+  an id collision too — one can only happen alongside a name collision, which raises
+  first. `table_url` appends `?seat=<seatId>` so the URL handed to the Shuffler names the
+  joining player's seat.
 
 ## Observability
 
@@ -182,34 +168,17 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
   Skip this and requests boot fine but produce zero spans — no error, just silence. If a
   future OTel-instrumented gem shows the same "installed successfully, no spans"
   symptom, check whether it's Rack-style (needs manual `use`) vs Rails-style (auto).
-- **The `/join` Tabletop POST is auto-instrumented by Net::HTTP.** The instrumentation
-  creates the client span and injects the HTTP `traceparent` header; never set that header
-  manually. `TabletopNotifier` also puts the ambient context on the transient envelope
-  body immediately before serialization so it can later survive non-header transports.
-  The two values share a trace id but may correctly name different spans. No trace context
-  is persisted. Delivery outcome is bounded in `tabletop.send.result`; notifier failures
-  do not mark the successful `/join` span as failed.
-- **`traceparent` rides on the envelope itself, as an optional field** (`contracts/envelope.v1.json`
-  — reset from v3 on `schema-schemes`, 2026-08-16). Inbound, the Rack instrumentation
-  still extracts a header-carried `traceparent` automatically — no code needed for
-  `POST /tables/:table_id/events` to continue a sender's trace — but a sender may also
-  put it in the body, which matters once events travel a path with no header at all
-  (the outbound SSE stream, or a future batched `sendEvent`). It's optional and never
-  validated for correctness: tracing is best-effort and must never be the reason an
-  event is rejected. The persisted `Event` row still has no trace column at all —
-  `Event#as_envelope` never includes `traceparent` — trace context is
-  observability-only and expires (~60d), so it's deliberately not durable. This means
-  an event minted before someone's watching its table's SSE stream (ticket 05) has no
-  way to link back to the trace that created it — accepted tradeoff, not a bug (see
-  `.scratch/spine-roda-rewrite/spec.md`, "Trace context — envelope contract change").
-- **Outbound, trace context is inlined onto the broadcast envelope, fresh each time.**
-  `GET /tables/:table_id/events/stream` delivers `{event: {...«envelope fields»,
-  traceparent}}` — no separate wrapper. `Table#broadcast` (private, `models/table.rb`)
-  captures the *appending* request's trace context via `OpenTelemetry.propagation.inject`
-  at the moment the event is created, deferred via `DB.after_commit`, and merges it onto
-  `event.as_envelope` — so a subscriber's own spans can link back to whichever trace
-  actually produced the event, and a rolled-back append never reaches a subscriber at
-  all.
+- **Trace context: header in, envelope field out** (the domain map has the rule). Inbound,
+  the Rack instrumentation continues the sender's trace from the HTTP `traceparent`
+  header; the Spine ignores any `traceparent` in the envelope body and never persists
+  one. Outbound there are two paths, and both inject a fresh `traceparent` into the
+  envelope via `OpenTelemetry.propagation.inject`: the SSE broadcast (`Table#broadcast`,
+  `models/table.rb`, captured in the appending request's context and deferred to
+  `DB.after_commit`, so a rolled-back append reaches no subscriber) and the `seat.joined`
+  POST to the Tabletop (`lib/tabletop_notifier.rb`). That POST is also auto-instrumented
+  by Net::HTTP, which sets the `traceparent` header; never set it by hand. Header and body
+  share a trace id but may name different spans. Delivery outcome is
+  `tabletop.send.result`; notifier failures don't mark the `/join` span as failed.
 - **The admin show page builds trace links client-side, not server-side.** The `Event`
   row has no trace column (see above), so a page-load render of existing rows has
   nothing to link from — only rows arriving live over the SSE stream carry
