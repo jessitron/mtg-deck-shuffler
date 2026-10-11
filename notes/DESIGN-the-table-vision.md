@@ -43,22 +43,16 @@ to play.
 
 ## The components
 
+The Shuffler, Tabletop, Spine and `contracts/` as built — what each owns, what crosses each
+border, and the invariants — are in `fleet-domain-map.html`. The vision adds:
+
 | Component | Language | Owns |
 |---|---|---|
-| **Shuffler** (this app today) | TypeScript | Library, hand. One player's game. |
-| **Tabletop** (new) | TypeScript, React, tldraw | The spatial world: card positions, zone areas, gestures, notes. Multiplayer sync. |
-| **Spine** (new) | Ruby | Tables, Seats, the event log, interpretations, evals. The central domain language. |
 | **Interpreter** (later) | inside Spine for now | Translation from physical events to game events. An AI. |
 | **Chat / narration panel** (later) | UI in Tabletop, logic in Spine | The running interpretation, player corrections, the agent's questions. |
 
-The tldraw sync server stays deliberately dumb — presentation replication only. Domain
-authority lives in the Spine.
-
 Architecture notes:
 
-- The Spine is the **core domain**; its event schema is a **published language** that
-  the other contexts translate themselves into. The event contract is language-neutral
-  (JSON Schema or similar), versioned, validated on both sides — not shared TS types.
 - The **Interpreter** takes the **Journeys** architecture pattern (Avdi is
   inventing it) as its architectural direction. The tour has arrived: README, guide,
   ADRs, and glossary live at `services/spine/interpreter/docs/journeys/`. Journeys
@@ -68,21 +62,12 @@ Architecture notes:
   inside the Spine app, so extracting it later is a deployment decision, not a design
   one. The interpreter can add events to the logs, so both the explanans and explanandum show up in the log.
 
-## Bounded contexts and their languages
+## Meaning belongs to the Interpreter
 
-See GLOSSARY.md for the full context map. The short version:
-
-- **Shuffler** keeps its language (Game, Library, Hand, Mulligan). No renames — a
-  Shuffler *Game* connects to a *Seat* at a *Table* (Spine context). One translation
-  sentence, not a vocabulary churn.
-- **Tabletop** speaks *physics, not meaning*. It knows which card is which (identity),
-  where the zone areas are (geography), and the physical gesture vocabulary of Magic —
-  tap, flip, face-down, counters, notes. It can say "a note was placed on Lyra
-  Dawnbringer; the text says 'flying until end of turn'". It can never say "Lyra
-  gained flying" — that's meaning, and meaning belongs to the interpreter.
-- **The Stack is geography**: a zone area where non-land cards arrive when played from
-  hand. Moving a creature from Stack to battlefield signals the cast went undisputed.
-- **Spine** speaks the central language: Tables, Seats, and every kind of event.
+The Tabletop speaks physics (see the map). It can say "a note was placed on Lyra
+Dawnbringer; the text says 'flying until end of turn'". It can never say "Lyra gained
+flying" — that's meaning, and meaning belongs to the interpreter. Moving a creature from
+the Stack to the battlefield signals the cast went undisputed.
 
 ## The event model
 
@@ -125,8 +110,6 @@ Not all Spine events are game events:
 ## Principles
 
 - **Playable at all times.** Every rung of the ladder is a game you'd actually play.
-- **Physics vs meaning.** The Tabletop knows what hands do at a table; the interpreter
-  knows what it means.
 - **Consensus is expressed physically.** At a real table, agreement looks like nobody
   stopping you. The interpreter reads the players, not the rules — it can never be a
   rules engine (still a non-goal).
@@ -155,12 +138,6 @@ Not all Spine events are game events:
 - **The humans teach the AI in public, during play.** The chat panel is the eval
   machine, and the teaching is part of the game record.
 - **Don't carry what you can listen to.** Discord keeps the voice call; we transcribe.
-- **Observability is mandatory.** Every component sends telemetry to Honeycomb via
-  OpenTelemetry and propagates trace context (also via OpenTelemetry) — across HTTP,
-  websockets, and the event log alike, so one trace can follow a card from the Play
-  button through the Spine to every player's canvas. All interesting info is added to
-  spans. "When something breaks, Honeycomb shows you why" applies to every ship, from
-  its first commit — not retrofitted.
 - **Made with tldraw** — we wear the watermark happily.
 
 ## Joining a table (for now)
@@ -174,39 +151,25 @@ Discord anyway, I'll tell you the table name."
 
 ### Shuffler (changes to this app)
 
-- Stays the owner of the library, the hand, and its own language. Its event-sourced GameState
-  continues as-is.
-- **Play and Discard buttons** (today there is only Play). Both are born-semantic game
-  events — "Jess played Lyra" / "Jess discarded Lyra" — no interpretation needed. The
-  verb implies the landing zone on the table: Play → the Stack, for every card,
-  lands included; Discard → the Graveyard area. Clipboard mode presumably
-  survives as a fallback / solo mode.
-- **Prep screen** gains "type a table name to join."
+- Stays the owner of the library, the hand, and its own language.
+- Clipboard mode survives as solo mode.
 - Someday the hand renders as a tray inside the Tabletop page; for now, separate
   browser tabs are fine. The Shuffler gradually becomes a service behind the tabletop
   rather than a destination page.
 
 ### Tabletop
 
-- A tldraw-based infinite canvas, synced between players (tldraw sync).
-- Custom `CardShape`: tap/untap rotation, flip, counters, notes. Common movements easy —
-  the reason we're replacing Mural.
-- Zone areas: Graveyard, Exile, Stack (geography, not rules).
 - The freeform layer survives: arrows, sticky notes, scribbles — the Mural joy — comes
   free because it's still a whiteboard underneath. Freeform residue is exactly what the
   interpreter gradually learns to read.
-- Emits physical events to the Spine. Knows card identity, never card meaning.
+- Emits every gesture to the Spine as a physical event.
 - Hosts the collapsible narration/chat panel UI.
-- Geometry and behavior of the player area (playmat, library, graveyard, exile, Stack):
-  `apps/tabletop/DESIGN.md`.
 
 ### Spine
 
-- Ruby service. Owns table identity, seats, membership, the event log, projections
-  (current reading, evals), and — for now — the interpreter.
+- Owns projections (current reading, evals) and, for now, the interpreter.
 - Plain domain code for tables, seats, and the log; the Journeys pattern belongs to
   the Interpreter (below).
-- The event schema is versioned and language-neutral; both TS apps validate against it.
 
 ### Interpreter
 
@@ -220,15 +183,7 @@ Discord anyway, I'll tell you the table name."
 
 ## Repo shape
 
-Monorepo (this repo grows into it), polyglot:
-
-- `apps/shuffler/` — this app, moved.
-- `apps/tabletop/` — React + tldraw.
-- `services/spine/` — Ruby.
-- `contracts/` — the event schema (JSON Schema), the published language.
-- `notes/`, `SEAMAP.md`, `.claude/` stay at the root; feature owners span components.
-- The root `SEAMAP.md` is the fleet-level map; each ship carries its own
-  (`apps/shuffler/SEAMAP.md`, `apps/tabletop/SEAMAP.md`, `services/spine/SEAMAP.md`).
+Polyglot monorepo; the layout is on the map.
 
 Why monorepo: one person on multiple computers; the event schema churns constantly in
 early rungs and cross-component changes should be one commit; notes and feature owners
@@ -237,9 +192,7 @@ one working tree.
 
 Deployment: **each app is its own container with its own k8s deployment** — this is
 NOT one Docker image. The Shuffler, Tabletop (app + sync server), and Spine build,
-ship, and scale independently (shared namespace is fine). The existing `Dockerfile`
-and `k8s/` manifests become the Shuffler's and move with it; restructuring must keep
-the Shuffler deploying (Safe Harbor requires it).
+ship, and scale independently (shared namespace is fine).
 
 ## Non-goals (unchanged, plus)
 
