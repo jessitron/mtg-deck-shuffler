@@ -44,7 +44,7 @@ believe it.
 
 - **Ruby**. The **Journeys** pattern (Avdi is inventing it) is the architectural
   direction for the **Interpreter** component — its docs (README, guide, ADRs,
-  glossary) live at `interpreter/docs/journeys/`. Journeys implement an actor model,
+  glossary) live at `../../notes/interpreter/docs/journeys/`. Journeys implement an actor model,
   which resonates with modeling cards on the table as actors. The rest of the Spine
   (tables, seats, the log) is plain domain code that journeys read from and append to.
 - The Spine's language is the fleet's published language: the event contract is
