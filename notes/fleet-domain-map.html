@@ -39,6 +39,7 @@ h1, h2, h3 { font-family: var(--font-chrome); font-weight: 700; text-wrap: balan
 h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--tabletop); }
 h2 { font-size: 1.15rem; text-transform: uppercase; letter-spacing: .12em; border-bottom: 3px solid var(--tabletop); padding-bottom: 6px; }
 h3 { font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; }
+h4 { font-family: var(--font-chrome); font-size: .68rem; font-weight: 500; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 4px 0 0; }
 p { margin: 0; }
 .lede { color: var(--muted); max-width: 62ch; margin-top: 8px; }
 section { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
@@ -335,27 +336,33 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
         </p>
         <div class="grid">
           <div class="card" style="--c: var(--fg)">
-            <h3>
-              <!-- @AI: can we organize this somehow - I notice that some of these are domain invariants (Players Adjudicate; no privileged actor), some are architecture (events go through the spine), design (corners square), some are code style (fakes). I would like them in that order and like tagged i guess -->
-              Whole fleet
-            </h3>
+            <h3>Whole fleet</h3>
+            <h4>Domain</h4>
             <ul>
               <li>
                 <b>Players adjudicate. The app supports play and enforces nothing</b> <span class="tag">stated</span>
               </li>
+              <li>No privileged actor on the canvas <span class="tag">stated</span></li>
+              <li>The Tabletop records physics, not meaning <span class="tag">stated</span></li>
+            </ul>
+            <h4>Architecture</h4>
+            <ul>
               <li>Shuffler and Tabletop never talk directly <span class="tag test">test</span></li>
               <li>
                 Events are JSON Schema, validated by sender and receiver <span class="tag code">code</span>
               </li>
-              <li>The Tabletop records physics, not meaning <span class="tag">stated</span></li>
-              <li>No privileged actor on the canvas <span class="tag">stated</span></li>
-              <li>
-                Trace context on every hop; facts go on spans, never <code>addEvent</code> <span class="tag">stated</span>
-              </li>
+              <li>Trace context on every hop <span class="tag">stated</span></li>
+            </ul>
+            <h4>Design</h4>
+            <ul>
+              <li>Corners square except on round things <span class="tag">stated</span></li>
+            </ul>
+            <h4>Code style</h4>
+            <ul>
+              <li>Facts go on spans, never <code>addEvent</code> <span class="tag">stated</span></li>
               <li>
                 Fakes, never mocks <span class="tag">stated</span>. Holds, except two Shuffler tracing tests that use jest spies
               </li>
-              <li>Corners square except on round things <span class="tag">stated</span></li>
             </ul>
           </div>
           <div class="card" style="--c: var(--shuffler)">
