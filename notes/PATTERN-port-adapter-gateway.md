@@ -37,7 +37,7 @@ An Adapter represents an abstraction of the type of service it adapts to. For in
 
 Service redundancy, logging, flag-based switchover, retry logic, and other elaborations of Adapter behavior can all be implemented as compositional wrapper objects to Adapter objects.
 
-Fake adapters and very simple adapters don't need a Gateway, but adapters that connect to real services do. Provide the Gateway at construction or via dependency injection, so that the Gateway can be mocked in tests.
+Fake adapters and very simple adapters don't need a Gateway, but adapters that connect to real services do. Provide the Gateway at construction or via dependency injection, so that tests can swap in a fake Gateway.
 
 Examples:
 
@@ -80,7 +80,7 @@ When testing our app, we would use a FakeCRMAdapter.
 
 ## Gateway
 
-An adapter MAY in turn be implemented in terms of a Gateway which is a thin, mock-able layer over the service/SDK.
+An adapter MAY in turn be implemented in terms of a Gateway which is a thin layer over the service/SDK, replaceable by a fake.
 
 A Gateway exposes only the slice of the external API that we actually use. It uses the external service's terminology/concepts, but reduced to "plain old data".
 
@@ -97,7 +97,7 @@ A gateway must always be tested in terms of real interactions with the external 
 
 The Port keeps the rest of our application's code in its own domain language. The Adapter is fully testable in isolation, which matters because it's doing important translation logic. It takes the necessary information from the service provider's domain language and populates ours, and vice versa.
 
-The Gateway has the job of hiding everything in the service provider's API that we do not use. The Gateway enables us to test the adapter while holding to the principle of "only mock what you own."
+The Gateway has the job of hiding everything in the service provider's API that we do not use. The Gateway enables us to test the adapter while holding to the principle of "only fake what you own." Fakes, never mocks.
 
 ```
 
