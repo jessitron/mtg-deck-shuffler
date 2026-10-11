@@ -2,6 +2,8 @@
 
 **Deployed at: https://mtg.jessitron.honeydemo.io**
 
+How this ship fits with the Spine and the Tabletop: the [fleet domain map](../../notes/fleet-domain-map.html).
+
 My real objective is to play Magic with my sister remotely. Here's our simplest-possible plan:
 We create a Mural and paste pictures of the cards in there. Then we move them around the same way as when we're playing.
 We have VC open so we're talking to each other as we do this, so we can communicate about what is happening.
@@ -21,9 +23,10 @@ So, given a deck in archidekt.com, this web app will
 
 - **Solo (default)** — no table name. Play/Discard copy the card image to the
   clipboard; play in Mural or wherever. The original workflow, unchanged.
-- **At a table** — enter a table name + player name on the Prep screen. Play and
-  Discard mutate immediately and send `card.played` to the Spine's event log,
-  best-effort (`src/port-spine/`) — never blocking on the Tabletop. The Tabletop
+- **At a table** — enter a table name + player name on the Prep screen. Play sends
+  `card.played` (Discard sends `card.discarded`) to the Spine's event log before the
+  Shuffler mutates the game. Best-effort (`src/port-spine/`): a Spine that's down
+  doesn't block the move. The Tabletop
   picks the card up over its own live subscription to the Spine's per-table SSE
   stream (`apps/tabletop`, `/t/:tableName`); there is no direct Shuffler→Tabletop
   call anymore. The game page shows an "at table _name_" link — share that URL
@@ -52,27 +55,21 @@ Install from the repo root, run from here:
 
 ### Verification Tests
 
-`./verify.sh` - Build, start the app on port 3001, run the Playwright specs in
+`./verify.sh` - Build, start the app on a random high port, run the Playwright specs in
 `test/verification/`, shut down. This is how user-visible changes get verified.
 
 ### No snapshot tests
 
 There used to be HTML snapshot tests and `npm run test:snapshot*` scripts. They were
-removed in January 2026 — high maintenance, unclear signal, and the end-to-end
-verification tests cover user-facing behavior better. See
-[notes/snapshot-tests-removed.md](../../notes/snapshot-tests-removed.md).
+removed — high maintenance, unclear signal, and the end-to-end verification tests cover
+user-facing behavior better.
 
 ## Technical notes
 
-This app uses TypeScript, with tsc for converting to JS. It's a toy.
-
-It will use htmx only, and no JS unless absolutely necessary (such as for OTel instrumentation).
-
-For that, it'll need a Node backend with express.
-
-We'll use npm for dependencies and for running its scripts.
-
-We will eventually deploy to a toy EKS cluster.
+TypeScript compiled with tsc, an Express backend, HTMX in the browser. Browser JS
+(`public/game.js`) covers what HTMX can't: drag-and-drop, clipboard, the per-tab event
+stream, and tracing. Game state persists in SQLite. `./deploy.sh` builds the image, pushes
+it to ECR, and applies `k8s/` to an EKS cluster; see [k8s/README.md](k8s/README.md).
 
 ## Downloading precon decks
 
