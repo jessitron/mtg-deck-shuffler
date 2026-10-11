@@ -3,19 +3,18 @@
 A polyglot monorepo for playing Magic together, remotely, at a table the system can see.
 
 The fleet map — North Star, Mountains, Safe Harbor — is in [SEAMAP.md](SEAMAP.md).
+Architecture, context boundaries and invariants are in [notes/fleet-domain-map.html](notes/fleet-domain-map.html).
 The full vision is in [notes/DESIGN-the-table-vision.md](notes/DESIGN-the-table-vision.md).
 
 ## The ships
 
-| Ship                                  | What it owns                                | State                    |
-| ------------------------------------- | ------------------------------------------- | ------------------------ |
-| [Shuffler](apps/shuffler/)            | Your library and hand                        | Deployed, in use         |
-| [Tabletop](apps/tabletop/)            | The shared tldraw canvas where play happens | Not built yet (seamap only) |
-| [Spine](services/spine/)              | Tables, seats, the event log, the interpreter | Not built yet (seamap only) |
+- [Shuffler](apps/shuffler/): your library and hand
+- [Tabletop](apps/tabletop/): the shared tldraw canvas where play happens
+- [Spine](services/spine/): tables, seats, the event log
 
-Each ship has its own `SEAMAP.md`.
+All three are deployed. Each has its own `README.md` and `SEAMAP.md`.
 
-**Deployed Shuffler: https://mtg.jessitron.honeydemo.io**
+**Play: https://mtg.jessitron.honeydemo.io**
 
 ## Working in here
 
@@ -28,14 +27,11 @@ npm run build        # pass-through to the Shuffler
 npm test             # pass-through to the Shuffler
 ```
 
-Anything Shuffler-specific — running it, verifying it, deploying it — happens from
-its own directory:
-
 ```bash
-cd apps/shuffler
-PORT=3344 ./run      # run locally
-./verify.sh          # Playwright verification
+./run                # the whole fleet: Tabletop :5180, Shuffler :3344, Spine :4600
+./deploy.sh          # deploy all three ships
 ```
 
-See [apps/shuffler/README.md](apps/shuffler/README.md) for the Shuffler itself, and
-[notes/](notes/) for design docs, vocabulary, and feature-owner knowledge bases.
+Running, verifying or deploying one ship happens from its own directory; see its README.
+[notes/](notes/) holds fleet-wide design docs and vocabulary; [owners/](owners/) holds the
+feature-owner knowledge bases.
