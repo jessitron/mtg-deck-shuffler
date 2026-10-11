@@ -5,6 +5,8 @@ Guidance for Claude Code when working in `apps/tabletop/`. Fleet-level guidance
 
 This ship's seamap: `SEAMAP.md` (in this directory).
 
+Architecture, boundaries and invariants live in the [fleet domain map](../../notes/fleet-domain-map.html).
+
 **All paths in this file — and every path in `apps/tabletop/notes/` — are relative to
 `apps/tabletop/`.** So `src/server/seatJoined.ts` means `apps/tabletop/src/server/seatJoined.ts`.
 
@@ -78,32 +80,23 @@ from whatever scraps the payload happens to carry. It's rejected (`{status: "rej
 its own process and have no live Spine to seed a card through. Never mounted without that env
 var, and never in production.
 
-**`tableSlug` is an opaque literal string, not a lookup key — it *is* the Spine's real
-table id**, not a display name derived from one (`<name-slug>-<8-hex-random>`, minted
-once at table creation — see `services/spine/CLAUDE.md`), so a URL is human-identifiable
-but not guessable from the bare name alone. Nothing on this ship resolves an id to
-anything — `getOrCreateRoom(slug)` (`rooms.ts`) uses the whole string as the
-room-registry key, and the `/connect/:roomSlug` websocket upgrade does the same, so the
-browser, the Spine's event POSTs, and the room registry only ever need to agree on the
-same opaque string, letter for letter. `seatJoined.ts`/`cardArrival.ts` validate
-that the envelope's `tableId` matches the URL's slug (`slugifyTableName(envelope.tableId)
-!== tableName`) — a straight equality check, since both sides carry the same real id.
-**`table.name` on any span/log here is the bare name with that suffix stripped back off**
+**`tableSlug` is the Spine's table id, opaque** — see the domain map. Nothing here
+resolves it; the room registry, the websocket upgrade and the event POSTs agree on the
+same string letter for letter.
+**`table.name` on any span/log here is the bare name with the id suffix stripped back off**
 (`tableNameFromSlug`, `src/shared/slugify.ts`) — it must match what the Shuffler stamps
 under the same key so a filter can follow one table across ships (see
 `owners/fleet-is-observable`); the full slug goes out separately as `table.slug`.
 
 See `README.md` (in this directory) for Modes and SCAFFOLDING callouts.
 
-The player area (playmat, library, command zone, graveyard, exile, Stack) is specified in
-`DESIGN.md` (in this directory) — read it before touching
-`src/server/cardLayout.ts`, `tableFurniture.ts`, `cardArrival.ts`, or
-`seatJoined.ts`. Every played card, lands included, arrives on the Stack; a human
-drags it wherever it goes from there (2026-08-16).
+Zones, seats and the Stack are in the domain map; the numbers are in `DESIGN.md` (in this
+directory) — read it before touching `src/server/cardLayout.ts` or `tableFurniture.ts`.
 
 ## Vocabulary
 
-Never say "flip" in Tabletop code, UI labels, telemetry names, tests or docs (tldraw's own `flipX`/`flipY` image props are not ours). Two-faced cards **Transform** (swap which printed face is up, `card.transformed`); every card can **Turn Face Down / Turn Face Up** (concealment, `faceDown`, `card.turnedFaceDown`). "Flip" meant different things on each ship and hid that these are two independent axes; the Shuffler keeps its own "flip" (private inspection of the other face) on purpose.
+Never say "flip" in Tabletop code, UI labels, telemetry names, tests or docs; see the
+domain map's "Translations at the borders" for Transform and Turn Face Down.
 
 ## UI Style
 
