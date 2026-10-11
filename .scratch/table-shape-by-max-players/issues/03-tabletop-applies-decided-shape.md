@@ -9,8 +9,8 @@ first `seat.joined` event a table ever receives (defaulting to 4 if a stored val
 missing). `ensureStackDrawn` keeps its existing "only once, guarded by
 `entry.seats.size === 0`" behavior — the change is that the shape it draws now comes from
 `entry.maxPlayers` via ticket 01's `stackBounds(maxPlayers)`/`playerAreaOrigin(maxPlayers, ...)`
-instead of the fixed constant. `apps/tabletop/DESIGN.md`'s "How a table comes into being"
-section is updated to describe the max-players-carrying `seat.joined` call.
+instead of the fixed constant. `apps/tabletop/DESIGN.md`'s geometry is updated to
+describe the shape per max players.
 
 Consult `owners/tabletop-shape-mechanics` before finalizing the plan — the draw-once guard
 is exactly its territory, and this ticket changes what it draws from.
@@ -25,5 +25,4 @@ is exactly its territory, and this ticket changes what it draws from.
 - [ ] Posting `seat.joined` with `maxPlayers: 2` directly to the Tabletop's HTTP seam
       (`POST /api/tables/:tableSlug/events`) results in the narrower rectangle being drawn,
       provable without the Shuffler UI
-- [ ] `apps/tabletop/DESIGN.md`'s "How a table comes into being" section reflects the new
-      contract field
+- [ ] `apps/tabletop/DESIGN.md`'s geometry reflects the shape per max players

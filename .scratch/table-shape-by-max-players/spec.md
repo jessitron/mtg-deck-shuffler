@@ -211,7 +211,7 @@ this spec deliberately does not build any live reshaping for that case.
 - Consult `owners/fleet-is-observable` on the new Spine migration and the new
   `seat.joined` contract version, following the same pattern as other schema/version
   bumps in this repo.
-- `apps/tabletop/DESIGN.md`'s "square" section and "How a table comes into being"
-  section, and `apps/shuffler/CLAUDE.md`'s Table Mode section, describe the current
+- `apps/tabletop/DESIGN.md`'s geometry (Stack size, player-area origins), the fleet
+  domain map's Tabletop section, and `apps/shuffler/CLAUDE.md`'s Table Mode section, describe the current
   fixed-square, two-call reality in detail and will need updating once this lands —
   that's the implementing ticket's job, not a separate one.
