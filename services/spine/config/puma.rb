@@ -4,8 +4,8 @@
 # meant a single 4-player table (4 Shuffler subscriptions + 1 Tabletop
 # subscription = 5 streams) could fill every thread, leaving none for the
 # readiness probe — which is what produced a past `ECONNREFUSED` storm;
-# the shutdown hang below was an amplifier, not the trigger. See
-# `notes/ANALYSIS-connection-lifecycle-2026-08-26.md` for the full reasoning.
+# the shutdown hang below was an amplifier, not the trigger.
+# A parked thread costs ~72 KB RSS and no measurable CPU.
 threads 8, 64
 
 # Despite its name, Puma fires `after_stopped` right when it starts graceful

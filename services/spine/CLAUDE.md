@@ -62,8 +62,7 @@ sets `threads 8, 64` explicitly — Puma 8/MRI's undeclared default is
 Tabletop subscription) already reaches, starving `GET /spine/up` of a thread to
 run on. That thread starvation, not the shutdown hang below, was the trigger
 for a past `ECONNREFUSED` storm (readiness failures pull the pod's endpoint,
-which is what produces `ECONNREFUSED` downstream). See
-`notes/ANALYSIS-connection-lifecycle-2026-08-26.md`. The pool is raised, not
+which is what produces `ECONNREFUSED` downstream). The pool is raised, not
 capped — nothing yet refuses stream #N+1 (`spine-stream-cap-503` in `TODO.md`).
 
 **On shutdown, `config/puma.rb`'s `after_stopped` hook closes every open SSE
