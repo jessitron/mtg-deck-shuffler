@@ -40,11 +40,6 @@ Renaming the card identity `scryfallId` → `cardDefinitionId` took `card.played
 break: readers know v2 only and reject v1. Events stored in a Spine log before that change
 are still there, but no ship can read them on replay.
 
-Removing `zoneHint` from `card.played.v1` and `card.played-face-down.v1` (every played card
-arrives on the Stack) was an in-place edit with no version bump: the field was already
-ignored by every receiver, and `additionalProperties: true` lets a sender that still
-includes it validate.
-
 ## Files
 
 - `envelope.v1.json` — the envelope every event wears, whatever its `name`. Bumped only
@@ -73,15 +68,9 @@ Related validation code:
 - services/spine/lib/join_contract.rb
 - services/spine/lib/event_contract.rb
 
-## Examples of events
+## Events
 
-These are sent from Spine to the other ships over the event stream. Most of these are planned, and not fleshed out yet. This is not a complete list!
-
-- seat.joined (this one might be an API call the first time a seat is joined, but it'll be reproduced if we use the Spine for tabletop persistence, which is my current plan)
-- card.played. Initiator: shuffler
-- card.played-face-down. Initiator: shuffler. Sibling to card.played — identical payload shape, but the receiver mints the card concealed.
-- card.discarded Initiator: shuffler
-- card.returned Initiator: tabletop or shuffler
+One `payloads/<name>.v<n>.json` per event kind. The domain map (`notes/fleet-domain-map.html`) shows which ship sends each and where it goes.
 
 ### Events not covered by these contracts
 
