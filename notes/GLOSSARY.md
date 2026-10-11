@@ -4,23 +4,11 @@ We are in the domain of MTG, Magic: the Gathering. This is a card game published
 
 Our app is called MTG Deck Shuffler.
 
-## Bounded Contexts
+Bounded contexts, what crosses each border, the translations between ships (Game/Seat, Flip/Transform/Face-down, Initiator, Table), and the invariants: `fleet-domain-map.html`. This file holds the terms the map doesn't.
 
-Archidekt: this is an external domain, a particular API we call.
+MTG Deck Shuffler UI: the Shuffler's user interface subdomain. The vocabulary here is presented to the user.
 
-Scryfall: this is an industry standard domain, standardized by Wizards at scryfall.com. It provides a database of all cards every published, including images of them. https://scryfall.com/docs/api
-
-MTG Deck Shuffler (also: Shuffler): this is our original bounded context, one component of the larger system (see `DESIGN-the-table-vision.md`). There are two subdomains:
-
-MTG Deck Shuffler UI: this is the user interface. The vocabulary here is presented to the user.
-
-MTG Deck Shuffler Game State: this is where we track the game state. The vocabulary here is for developers, optimized for making invalid state unrepresentable.
-
-Spine: the central bounded context of the larger system (Ruby service, planned). Its language — Tables, Seats, events of every kind — is the published language the other contexts translate themselves into. See "Spine terms" below.
-
-Tabletop: the tldraw-based shared canvas (planned). Its language is the _physics_ of Magic — card identity, zone geography, gestures, notes — never card meaning. It emits Physical Events to the Spine.
-
-Interpreter: the translation layer from Tabletop physics to Spine meaning — an anti-corruption layer that happens to be an AI. Lives inside the Spine app for now; its boundary (physical events in, game events out) is sacred regardless.
+MTG Deck Shuffler Game State: the Shuffler's game-state subdomain. The vocabulary here is for developers, optimized for making invalid state unrepresentable.
 
 ## Definitions
 
@@ -38,14 +26,6 @@ Oracle Card: this word is defined by Archidekt, referring to a definition in the
 Card Name: this is ambiguous in the Archidekt and Scryfall domains. Usually the Card Display Name and the Card Oracle Name are the same, but not always. The Card Oracle Name is the unique identifier for a card. The Card Display Name is at the very top of the card, and this is what we use in MTG Deck Shuffler.
 
 Card vs Face: cards have names, and faces have names. A two-faced card's canonical (Display) Name contains both face names, joined by `//` — e.g. "Eiganjo Dynastorian // Replenish". Deck Shuffler zones contain cards, not faces: the library, the hand, and the table hold cards. So anything that identifies or orders cards — sorting a list, matching a name — uses the canonical card name.
-
-Face-down: concealment — showing the shared card back (or sleeve) instead of either printed
-face. This is possible only on the Tabletop. This independent of Face. A two-faced card **can** be played face down — and once it is, the card back
-appears regardless. Transform swaps which printed side is up (on two-faced cards), while Turn Face Down/Up toggles concealment. These are the Tabletop's only two card gestures.
-
-Transform (Tabletop): swap which printed face of a two-faced card is up, front to back or back to front. A physical event (`card.transformed`). Offered only on two-faced cards; a one-faced card cannot Transform, it can only Turn Face Down. Independent of Face-down.
-
-Flip (Shuffler only): private inspection of the other printed face of a two-faced card. It never leaves the Shuffler and is not an event. The Tabletop never says "flip"; its equivalent is Transform, a physical event the table can see.
 
 Scryfall ID: Scryfall's card ID. This is a UUID. From this, we can derive a card image URL on Scryfall. Archidekt calls it `uid`. For a Scryfall card, it is the value of the Card Definition ID.
 
@@ -81,9 +61,9 @@ Playmat: the surface a player's stuff sits on. In real Magic it's the mat on the
 
 Prep ID: a unique identifier for a GamePrep. Used in URLs and to link Games back to their originating prep.
 
-Game (MTG Deck Shuffler): an active gameplay session. During a game, the position of each card is tracked. Games are created from a GamePrep and are always in Active status. A game references its prepId and prepVersion for restart functionality. In the larger system, a Shuffler Game connects to a **Seat** at a **Table** (Spine context) — "game" keeps its meaning inside this context; the translation happens at the boundary.
+Game (MTG Deck Shuffler): an active gameplay session. During a game, the position of each card is tracked. Games are created from a GamePrep and are always in Active status. A game references its prepId and prepVersion for restart functionality.
 
-Game Status (MTG Deck Shuffler): the state of a game. Can be Active (gameplay in progress) or Ended (game finished). The NotStarted status was removed - prep phase is now handled by GamePrep.
+Game Status (MTG Deck Shuffler): the state of a game. Can be Active (gameplay in progress) or Ended (game finished).
 
 Card Definition (MTG Deck Shuffler): a definition of a card, including name (from Display Name), Card Definition ID, and Multiverse ID. Immutable.
 
@@ -120,15 +100,9 @@ Excluded Card (Archidekt): a card that is associated with a deck, but not curren
 Commander: a card (or two) in a deck that has the "Commander" category. There may be zero, one, or two commanders in a deck, and in this app, they're always in the Command Zone.
 
 Command Zone: a Location (MTG Deck Shuffler, game scope) — commanders are ordinary game
-cards at `CommandZone(position)`, with card instance IDs like everything else. (An older
-version of this entry claimed commanders were stored separately from game cards; that was
-stale — see `GameState.ts` `CommandZoneLocation`.) Commanders always arrive at a table
+cards at `CommandZone(position)`, with card instance IDs like everything else. Commanders always arrive at a table
 face up; a two-faced commander can be transformed in the command zone afterward, which is
-table-local play, not seating data. (Confirmed 2026-08-08, cards-come-and-go ticket 02.)
-
-Seat (spine): a player's place at a Table. A Shuffler Game connects to a Seat; a table has 1–4 of them. A seat is keyed by an opaque Join Request ID, so a retried join returns the same seat.
-
-Join Request ID (spine): the opaque idempotency key on `POST /join` — "this particular join attempt". The Spine attaches no other meaning to it; the Shuffler sends its game id.
+table-local play, not seating data.
 
 Seat ID (Spine-minted): the identity of an **occupancy** — a Shuffler game's connection to a
 table position at a table — minted by the Spine
@@ -158,11 +132,7 @@ Reveal zone.
 
 Spectator (Tabletop): someone at a Table without a Seat. They should be able to draw but not move cards. Not implemented
 
-Event Log (spine): the append-only record of everything that happened at a Table. One per table.
-
 Look At vs Reveal (Spine, not yet designed): _look at_ — a player sees a card (top of library, an opponent's hand via an effect). _Reveal_ shows a card to everyone, or to chosen players. The Shuffler's Reveal button is a look-at. Later, we will implement a proper Reveal.
-
-Table Event (Spine): joining a table, taking a seat, someday matching. Not a game event. Administrative.
 
 Physical Event (Spine, emitted by Tabletop): what happened spatially, uninterpreted. "Card rotated to tapped." "A note was placed on Lyra Dawnbringer; the text says 'flying until end of turn'."
 
@@ -172,10 +142,6 @@ Interpretation (not implemented): an event that covers one or more physical even
 
 Table State (fleet): the full state of a table at a point in time — every shape's identity, type, position, and type-specific attributes (tapped, face, zone, etc). Two independent things can each produce one: reading the live Tabletop canvas, or replaying a Table's Event Log from the start (a Projection). Comparing two independently-produced Table States is how a discrepancy between the table and its own history gets caught, instead of staying a mystery.
 
-Projection (Tabletop): computing a Table State by replaying a Table's Event Log, in `seq` order. This logic lives in the Tabletop, not the Spine — the Tabletop already has to do this on reconnect, and will do it again (planned) to draw a table from scratch when a client loads an existing game. The Spine stays purely the log: it validates, stores, and replays events, but never computes a Table State of its own. See `docs/adr/0001-tabletop-persists-physical-events-and-owns-projection.md`.
-
-Card Arrived (contract, planned): `card.arrived` — the Tabletop's own event recording where a card actually landed on the canvas when it was placed there. Distinct from `card.played`, which is the Shuffler's domain-level decision to play the card and carries no canvas position — the Shuffler doesn't know where cards land; the Tabletop decides that separately.
-
-Shape events (contract, planned): `shape.created`, `shape.moved`, `shape.removed` — physical events for canvas objects that don't have a more specific event of their own; the fallback carries the raw tldraw shape JSON for shape types without dedicated tooling. Where a shape type has a more meaningful name for the same fact, that name is used instead of the generic one — `card.moved`, `card.tapped`/`card.untapped`, `card.transformed`, `card.turnedFaceDown`, `card.arrived`, and (planned) `counter.moved`/`counter.created` — never both the specific and the generic event for the same fact.
+Projection (Tabletop): computing a Table State by replaying a Table's Event Log, in `seq` order. This logic lives in the Tabletop, not the Spine — the Tabletop already has to do this on reconnect, and will do it again (planned) to draw a table from scratch when a client loads an existing game. The Spine stays purely the log: it validates, stores, and replays events, but never computes a Table State of its own. See `apps/tabletop/notes/DESIGN-spine-projection.md`.
 
 Designated Zone vs Undesignated Space (Tabletop, not yet decided): whether a card's move is a Physical Event or a Game Event depends on whether it crosses into or out of a zone the game cares about — library, hand, graveyard, and exile are designated zones (crossing them is game-significant, which is why menu-driven actions like Transform and Turn Face Down exist for them); a player's general battlefield space may be undesignated. The exact boundary isn't pinned down yet; `card.moved`'s `significance` field (see envelope contract) can be computed per-instance from it once it is — this doesn't block reconstructing Table State, which only needs positions, not significance.
