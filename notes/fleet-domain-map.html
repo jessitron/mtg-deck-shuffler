@@ -223,7 +223,9 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
                 A card's identity rides on its <code>mtg-card</code> shape: instance, cardDefinitionId, owner
               </li>
               <li>The Table's URL slug <b>is</b> the Spine's Table id, opaque</li>
-              <li>Session: <code>?seat=</code> or an anonymous pseudonym kept in localStorage</li>
+              <li>
+                Session: <code>?seat=</code> or an anonymous pseudonym kept in localStorage <span class="tag plan">planned</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -439,6 +441,9 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
           </li>
           <li>
             Every join appends both <code>seat.taken</code> (Seat number) and <code>seat.joined</code> (deck, playmat, sleeve, game URL). Only <code>seat.joined</code> has a consumer; the two could fold into one.
+          </li>
+          <li>
+            The Spine puts <code>?seat=</code> on each player's Table URL, but the Tabletop never reads it: <code>getOrCreateSessionId</code> exists and only tests call it.
           </li>
           <li>
             The Tabletop's taps, transforms and moves reach Honeycomb as spans but never the Spine. They will; shown as planned.
