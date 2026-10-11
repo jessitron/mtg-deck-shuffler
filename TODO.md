@@ -198,11 +198,9 @@ CardImagesPort` (`src/port-card-images/FakeCardImagesGateway.ts:3`).
 
 - [ ] `spine-stream-cap-503` Nothing refuses stream #N+1 with a visible error
   - `config/puma.rb` now sets `threads 8, 64` (was an undeclared default of 5, which is what
-    actually starved the readiness probe and caused the ECONNREFUSED storm in
-    `INCIDENT-sse-shutdown-crashloop-2026-08-26.md`). That raises the ceiling; it doesn't remove
+    actually starved the readiness probe and caused a past ECONNREFUSED storm). That raises the ceiling; it doesn't remove
     it. Cap concurrent streams in `TableBroadcaster` and return `503` past the cap, so saturation
     is visible and attributable instead of appearing as a readiness blip.
-  - Full reasoning: `services/spine/notes/ANALYSIS-connection-lifecycle-2026-08-26.md`.
 
 - [ ] `tabletop-room-registry-never-freed` One leaked Spine stream per table, forever
   - `getOrCreateRoom`'s module-level `registry` is never pruned; `onSessionRemoved` logs

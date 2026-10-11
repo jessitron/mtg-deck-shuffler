@@ -55,7 +55,7 @@ Architecture notes:
 
 - The **Interpreter** takes the **Journeys** architecture pattern (Avdi is
   inventing it) as its architectural direction. The tour has arrived: README, guide,
-  ADRs, and glossary live at `services/spine/interpreter/docs/journeys/`. Journeys
+  ADRs, and glossary live at `notes/interpreter/docs/journeys/`. Journeys
   implement an actor model, a natural fit for modeling cards on the table as actors.
 - The interpreter is an **anti-corruption layer that happens to be an AI**: physical
   events in, game events out. Its boundary is sacred from day one even while it lives
@@ -174,7 +174,7 @@ Discord anyway, I'll tell you the table name."
 ### Interpreter
 
 - Architectural direction: the **Journeys** pattern. Docs (README, guide, ADRs,
-  glossary) at `services/spine/interpreter/docs/journeys/`.
+  glossary) at `notes/interpreter/docs/journeys/`.
 - Consumes physical + voice + chat events; produces interpretation events with
   provenance, causality, confidence, and commentary.
 - Asks questions in chat when interpretation fails; corrections supersede.
