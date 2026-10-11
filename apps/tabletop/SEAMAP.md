@@ -1,7 +1,8 @@
 # SEAMAP — Tabletop (ship)
 
 One ship in [the fleet](../../SEAMAP.md). The Tabletop is the shared canvas where play
-happens — Mural's freedom with Magic's physics.
+happens — Mural's freedom with Magic's physics. How it fits with the other ships:
+the [fleet domain map](../../notes/fleet-domain-map.html).
 
 ## North Star
 
@@ -12,16 +13,14 @@ event the Spine can hear.
 
 1. **A playable canvas** ← _active_ — a synced tldraw board; cards arrive from the
    Shuffler instead of the clipboard. Playable day one: Mural where the cards arrive
-   themselves. _Landed (JES-127, 2026-07-27): synced canvas at `/t/:tableName`,
-   card-arrival API with per-seat battlefield rows + graveyard/exile spots, OTel on
-   server and browser, deployed at table.jessitron.honeydemo.io. Remaining for this
-   mountain: the Shuffler-side integration (Part B — prep inputs, play/discard send)._
+   themselves.
 2. **The physics of Magic** — a custom CardShape that taps (rotate), transforms, holds
    counters and notes; zone areas for Graveyard, Exile, and the Stack (geography, not
    rules). Common movements become gestures; every gesture is a physical event.
-   _Geometry and behavior specified in `DESIGN.md` (in this directory) — a full player
-   area (playmat, library, graveyard, exile) drawn at shuffle-up, before any card is
-   played. Not yet built._
+   _Built: the card shape (tap, transform, face down, counters, notes), zones, the
+   Stack, and the player area drawn at shuffle-up (numbers in `DESIGN.md`). Not yet
+   built: gestures sent to the Spine as physical events (only the library-portal
+   swallow is), and persistence — a redeploy wipes the board._
 3. **The window on the game** — the collapsible narration/chat panel: the running
    interpretation, the interpreter's questions, players' answers and corrections.
 
