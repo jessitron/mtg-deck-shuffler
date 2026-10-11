@@ -43,5 +43,6 @@ Check the plan against each of these; only report on ones that actually apply.
   (the checklist above).
 - For each interaction found, state the risk concretely and suggest the specific fix (file/line
   if you can point to one), not just "be careful."
-- End with: "after you implement this, run `/tabletop-shape-mechanics-update` with a summary of
+- End with: "after you implement this, spawn a tabletop-shape-mechanics update
+  (`owners/tabletop-shape-mechanics/update.md`, per `owners/PROTOCOL.md`) with a summary of
   what changed."

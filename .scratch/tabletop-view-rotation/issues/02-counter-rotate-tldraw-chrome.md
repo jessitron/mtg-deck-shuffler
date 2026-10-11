@@ -26,6 +26,6 @@ and rotation state to exist)
       `verify-view-rotation.spec.ts` from ticket 01) at each of the four states — this is
       explicitly the risky/non-trivial part of the spec, budget real implementation time rather
       than treating it as a quick fix.
-- [ ] Update `tabletop-shape-mechanics-update` with what actually landed, since this is the
+- [ ] Spawn a tabletop-shape-mechanics owner update with what actually landed, since this is the
       first time the canvas wrapper carries a real transform and future shape-mechanics work
       will need to know how tldraw's own chrome was compensated.

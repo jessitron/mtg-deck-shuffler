@@ -25,7 +25,7 @@ interaction/selection mechanics before starting related work.
    defining `onClick` inherits the selection-deferral quirk and needs the matching
    `setSelectedShapes([])` cleanup).
 5. Note any knowledge gaps you find while answering — this owner is new and thin; gaps are
-   expected and worth recording back via `-update`.
+   expected and worth recording back via the owner update (`update.md`).
 
 If the question is really about what image/face a card shows rather than how it responds to
 clicks/drags, say so and point to `two-faced-cards` instead — see `architecture.md`'s "How to

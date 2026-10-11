@@ -4,7 +4,7 @@ Mountain: overhead
 Status: ready-for-agent
 
 No spec — single ticket, born from a conversation with Jess (2026-08-06): the
-design owner's review skill only fires when an agent remembers to invoke it. The
+design owner's review only happens when an agent remembers to ask for it. The
 mechanically checkable rules should be a script that never forgets.
 
 ## What
@@ -46,4 +46,4 @@ on day one. Count violations per rule, compare against a committed baseline file
 - Adding `color: #4caf50` to `playmat.css` makes it fail with a message naming the
   file, line, and the token to use instead.
 - Both verify scripts call it.
-- The design owner's KB mentions it (run `/shuffler-looks-like-itself-update`).
+- The design owner's KB mentions it (spawn a fleet-design-language update, `owners/fleet-design-language/update.md`, per `owners/PROTOCOL.md`).

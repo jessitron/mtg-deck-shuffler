@@ -11,7 +11,7 @@ commands, layout) go there instead — this file is for the "oh, _that's_ why" f
   but merging a worktree branch to local main *requires* touching the shared checkout
   when it conflicts. Workaround: resolve via a small script written to the job's tmp dir
   (`$CLAUDE_JOB_DIR/tmp`) and run with Bash, then `git add` + `git commit`. Hit 2026-08-08
-  on a tail-append conflict in an owner's `history.md` (owner `-update` subagents commit
+  on a tail-append conflict in an owner's `history.md` (owner update subagents commit
   to the worktree branch, so two sessions appending entries conflict routinely — keep
   both entries, HEAD's first).
 

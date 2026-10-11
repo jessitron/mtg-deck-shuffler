@@ -24,5 +24,5 @@ Given the agent's plan (in your brief), check for:
 
 - If no interactions: say so clearly, noting what you checked.
 - If interactions found: describe each, the risk, and an actionable suggestion.
-- Remind the agent: "After you implement this, run `/fleet-is-observable-update` with a summary of what changed."
+- Remind the agent: "After you implement this, spawn a fleet-is-observable update (`owners/fleet-is-observable/update.md`, per `owners/PROTOCOL.md`) with a summary of what changed."
 - Keep it concise and actionable.

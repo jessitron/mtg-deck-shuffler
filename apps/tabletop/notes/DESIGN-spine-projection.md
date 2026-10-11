@@ -347,7 +347,7 @@ domain interface — and it means truth and observability leave from one call si
 cannot drift apart. It is also the natural home for the Interpreter work in
 `notes/DESIGN-the-table-vision.md`.
 
-Get `fleet-is-observable-review` on the plan before implementing, and again on the drift
+Get a fleet-is-observable owner review (`owners/fleet-is-observable/review.md`) on the plan before implementing, and again on the drift
 measurement. The span shape is documented in two `CLAUDE.md` files and in that owner's
 knowledge base.
 

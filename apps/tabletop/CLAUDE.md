@@ -101,7 +101,7 @@ domain map's "Translations at the borders" for Transform and Turn Face Down.
 ## UI Style
 
 **The Tabletop is in scope for the fleet's design owner** — `owners/fleet-design-language/`
-(the slug predates the fleet scope) and its `-context` / `-review` / `-update` skills. The
+(the slug predates the fleet scope), consulted per `owners/PROTOCOL.md`. The
 Shuffler and Tabletop are meant to feel like **one app with two faces**, so pull toward the
 Shuffler's purple-and-pink tokens, Orbitron-for-chrome typography and square corners rather than
 inventing a look here. `/design` on the Shuffler is the gallery; look at it first.

@@ -40,7 +40,7 @@ to add or change UI and wants background before starting.
    table, say so: don't invent a resolution, and don't let them invent one either. The
    right move is to follow the nearest existing treatment and flag the choice for Jess.
 7. **Note knowledge gaps.** If you discover the KB is wrong or missing something while
-   answering, say so in your response so it gets fixed by `-update`.
+   answering, say so in your response so it gets fixed by the owner update (`update.md`).
 
 ## The one thing to always say
 

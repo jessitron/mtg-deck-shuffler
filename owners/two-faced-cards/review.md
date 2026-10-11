@@ -36,5 +36,5 @@ Given the agent's plan (in your brief), check for:
 
 - If no interactions: say so clearly, noting what you checked.
 - If interactions found: describe each one, explain the risk, and suggest how to handle it.
-- Remind the agent: "After you implement this, run `/two-faced-cards-update` with a summary of what changed."
+- Remind the agent: "After you implement this, spawn a two-faced-cards update (`owners/two-faced-cards/update.md`, per `owners/PROTOCOL.md`) with a summary of what changed."
 - Keep it concise and actionable.

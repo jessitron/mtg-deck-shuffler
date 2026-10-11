@@ -163,8 +163,8 @@ Mostly naming what exists.
   earned its own event kind — that is how tokens and notes get modeled later.
 - The write side (`TableState -> tldraw records`) is not built here.
 
-**Consult:** `fleet-is-observable-context` before moving any span, `-review` on the plan,
-`-update` after. The receiving-span / doing-span nesting is load-bearing and documented in
+**Consult** the fleet-is-observable owner (per `owners/PROTOCOL.md`): context before moving
+any span, review on the plan, update after. The receiving-span / doing-span nesting is load-bearing and documented in
 two `CLAUDE.md` files; after the move the receiving span belongs on the adapter and the
 doing-span stays in the application.
 
@@ -186,9 +186,9 @@ the call site, and extends `projectEvents` with a test.
 | C | a card **flips**; a card **turns face down** and back up | **Paired deliberately** — both need a new card-menu affordance and would collide in `CardContextMenu.tsx`. One agent, one affordance pass, two gestures. |
 | D | **everything else on the canvas** — created, moved, removed | The generic fallback, scoped to shape types with no dedicated event. Implements Phase 1's quarantine rule for real, so the freeform layer stops being a blind spot. |
 
-**Subagent C consults** `fleet-design-language-context` and
-`tabletop-shape-mechanics-context` before designing the affordances, and the matching
-`-review` skills on its plan. New player-visible UI is their territory, and placement and
+**Subagent C consults** the fleet-design-language and tabletop-shape-mechanics owners
+(per `owners/PROTOCOL.md`) for context before designing the affordances, and for review
+on its plan. New player-visible UI is their territory, and placement and
 styling are two separate sign-offs.
 
 **Done when:** every gesture a player makes reaches the log, and `npm test` passes at the

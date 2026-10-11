@@ -97,7 +97,7 @@ of it. The step most likely to be skipped and most costly to skip is the last on
 **re-verify the `file:line` citations in every remaining choice.** That has already rotted
 twice, and issue 03 will shift everything below it in `playmat.css`.
 
-Consult the owner's `-review` skill before implementing each, and `-update` after.
+Consult the owner for a review before implementing each, and an update after (per `owners/PROTOCOL.md`).
 
 ## Verification
 

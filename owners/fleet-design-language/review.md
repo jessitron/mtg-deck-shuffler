@@ -124,7 +124,7 @@ you skipped. These are written from the Shuffler's files; on the Tabletop, apply
 **Neighbours**
 
 - [ ] Touching `game.css`, transitions, or card containers? The **animations** owner
-      shares that ground — recommend consulting `animations-review` too.
+      shares that ground — recommend an animations review (`owners/animations/review.md`) too.
 - [ ] Flip buttons or `.flip-container-*`? **two-faced-cards** owner.
 - [ ] Modal or library list styling? **library-search** owner.
 
@@ -152,5 +152,6 @@ don't argue an aesthetic in prose when you could build the candidate and let her
 
 End with:
 
-> After you implement this, run `/fleet-design-language-update` with a summary of
+> After you implement this, spawn a fleet-design-language update
+> (`owners/fleet-design-language/update.md`, per `owners/PROTOCOL.md`) with a summary of
 > what changed.

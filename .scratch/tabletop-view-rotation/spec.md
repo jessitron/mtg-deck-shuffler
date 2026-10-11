@@ -126,8 +126,8 @@ out or oriented in the shared document — see "Out of Scope."
   an absolutely-positioned child visually lands in, even after counter-rotating its content
   back upright) applies to `ToolbarWithCounter`/`TableContextMenu` at all four rotation states,
   not just one — budget real implementation time for this, it's not a one-line fix.
-- Consult `tabletop-shape-mechanics` (`-review`) before implementing, and `shuffler-looks-like-itself`
-  (`-review`) for the control strip's design-exempt treatment and corner placement, per the
+- Get a `tabletop-shape-mechanics` owner review before implementing, and a `fleet-design-language`
+  owner review for the control strip's design-exempt treatment and corner placement, per the
   fleet-level `CLAUDE.md` owner-consultation process.
 
 ## Comments

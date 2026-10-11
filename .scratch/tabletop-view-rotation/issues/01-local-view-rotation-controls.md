@@ -21,11 +21,11 @@ that's ticket 02.
 
 **Status:** ready-for-agent
 
-- [ ] Consult `tabletop-shape-mechanics-review` before implementing: confirm the CSS rotation on
+- [ ] Get a tabletop-shape-mechanics owner review (`owners/PROTOCOL.md`) before implementing: confirm the CSS rotation on
       the wrapper doesn't disturb `zoneHitTest.ts` or the `MtgCardShapeUtil` drag/translate
       hooks (spec's read: they use page-space coordinates only, so it shouldn't — verify before
       building).
-- [ ] Consult `shuffler-looks-like-itself-review` for the control strip's placeholder styling:
+- [ ] Get a fleet-design-language owner review for the control strip's placeholder styling:
       check whether a "design-exempt" convention already exists to reuse, or whether this
       establishes the first one (grep confirmed none exists yet in either ship). Style is
       deliberately jarring (an "ugly pink," per direction), flagged as temporary.
@@ -48,5 +48,5 @@ that's ticket 02.
   - [ ] Home resetting to 0° from each of the four states
   - [ ] A fresh join already sitting at 0°/Home with no interaction
   - [ ] The control strip's bounding box staying constant across all four canvas rotation states
-- [ ] Update `tabletop-shape-mechanics-update` and `shuffler-looks-like-itself-update` with what
+- [ ] Spawn tabletop-shape-mechanics and fleet-design-language owner updates with what
       actually landed.

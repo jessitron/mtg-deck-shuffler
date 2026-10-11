@@ -16,7 +16,7 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
   - Surfaced by the fleet-design-language owner's update after the docs consolidation; its `interactions.md` "Depended on by" records the dependency.
 - Tabletop `POST .../cards/return` (`apps/tabletop/src/server/cardReturned.ts`) doesn't check `cardSource` against the enum; a bad value comes back as the Spine's 502 instead of a 400.
 - Does tldraw copy-as-PNG re-fetch card images? If so, Archidekt-hosted custom card images (storage.googleapis.com) may lack CORS headers. Plain display works.
-- `owners/two-faced-cards/tabletop.md` ~line 406 says "`gameCardIndex` never leaves the Shuffler", but it's a Tabletop shape prop. Also that owner's `-update` skill expects `files.md`/`history.md`, which its KB lacks.
+- `owners/two-faced-cards/tabletop.md` ~line 406 says "`gameCardIndex` never leaves the Shuffler", but it's a Tabletop shape prop. Also that owner's `update.md` expects `files.md`/`history.md`, which its KB lacks.
 - The library modals (`/library-modal/:gameId`, `/prep-library-modal/:prepId`) answer a generic 500 for an old-version game or prep; return the incompatible-version 404.
 
 - still happening post-tldraw upgrade: weird bug: `cards-jump-to-entry-position` occasionally, for no discernable reason, a bunch of Evelyn's cards return to the stack as if they were just played 😭. Full investigation log, ruled-out causes, and current instrumentation: `apps/tabletop/notes/RESEARCH-cards-jump-to-entry-position.md`.
@@ -91,7 +91,7 @@ and I want to drop a card in between C and D, then the drop zone between them is
     buttons before it, don't reproduce `.pushable-flat`'s lift-on-hover/press-on-click physics
     (choice 1, decided 2026-08-02) — that button feel hasn't reached canvas buttons yet, since
     the Tabletop has no ship-local stylesheet to hold it.
-  - Flagged by `fleet-design-language-review` during the diagnostic-button popover change
+  - Flagged by the fleet-design-language owner's review during the diagnostic-button popover change
     (2026-09-11); not a regression from that change, a pre-existing gap.
   - Worth fixing whenever a Tabletop stylesheet lands — reproduce the physics the same
     "duplicated because the mechanism can't reach it" way the focus-visible rule already is
