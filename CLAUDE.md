@@ -98,13 +98,13 @@ The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and
 - `apps/shuffler/` — the Shuffler
 - `apps/tabletop/` — the Tabletop
 - `services/spine/` — the Spine
-
-What each one owns and how they talk: `notes/fleet-domain-map.html`.
 - `packages/design-tokens/` — the fleet's shared visual vocabulary (`@fleet/design-tokens`):
   the identity palette, `--narrow-border`, and Magic's colour pie. One dictionary, both ships
   — the Shuffler serves it at `/fleet/tokens.css`, the Tabletop imports it through Vite.
   Owned by `owners/fleet-design-language/`; consult that owner before changing a value.
 - `contracts/` — the fleet's published language. See `contracts/README.md`.
+
+What each one owns and how they talk: `notes/fleet-domain-map.html`.
 
 **`notes/` at the fleet level holds only genuinely fleet-wide docs.** Ship-specific notes
 live under each ship's own `notes/` (e.g. `apps/shuffler/notes/`, `apps/tabletop/notes/`),
