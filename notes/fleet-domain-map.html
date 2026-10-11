@@ -367,15 +367,19 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
           </div>
           <div class="card" style="--c: var(--shuffler)">
             <h3>Shuffler</h3>
+            <h4>Domain</h4>
             <ul>
               <li>A card is in exactly one location <span class="tag code">code</span></li>
+              <li>Decks and preps are immutable <span class="tag code">code</span></li>
+            </ul>
+            <h4>Architecture</h4>
+            <ul>
               <li>
                 State version = shuffler event log length; stale writes get 409 <span class="tag code">code</span>
               </li>
               <li>
                 Everything persisted is versioned; old data fails loudly (HTTP 410) <span class="tag code">code</span>
               </li>
-              <li>Decks and preps are immutable <span class="tag code">code</span></li>
               <li>Carry the Spine's ids and URLs; never build them <span class="tag">stated</span></li>
               <li>
                 In a shared-table game, a card is played only if the Spine accepted the event first <span class="tag plan">planned</span>
@@ -384,6 +388,11 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
           </div>
           <div class="card" style="--c: var(--tabletop)">
             <h3>Tabletop</h3>
+            <h4>Domain</h4>
+            <ul>
+              <li>Every played card arrives on the Stack <span class="tag code">code</span></li>
+            </ul>
+            <h4>Architecture</h4>
             <ul>
               <li>
                 The sync server replicates presentation only; it holds no game authority <span class="tag">stated</span>
@@ -394,17 +403,23 @@ code { font-size: .85em; background: var(--external); padding: 0 4px; }
               <li>
                 Send-then-commit: a returned card vanishes only after the Spine confirms <span class="tag code">code</span>
               </li>
-              <li>Every played card arrives on the Stack <span class="tag code">code</span></li>
+              <li>No persistence yet; the Table lives in memory <span class="tag code">code</span></li>
+            </ul>
+            <h4>Design</h4>
+            <ul>
               <li>
                 Zones never touch: an empty gap sits between every pair <span class="tag test">test</span>
               </li>
-              <li>No persistence yet; the Table lives in memory <span class="tag code">code</span></li>
             </ul>
           </div>
           <div class="card" style="--c: var(--spine-bg)">
             <h3>Spine</h3>
+            <h4>Domain</h4>
             <ul>
               <li>One append-only Spine event log per Table <span class="tag code">code</span></li>
+            </ul>
+            <h4>Architecture</h4>
+            <ul>
               <li>The Spine alone assigns seq and acceptedAt <span class="tag code">code</span></li>
               <li>
                 Join is idempotent per <code>joinRequestId</code> <span class="tag code">code</span>
