@@ -60,18 +60,16 @@ blocks on `Queue#pop`, a real thread wait, not an event loop), so `config/puma.r
 sets `threads 8, 64` explicitly — Puma 8/MRI's undeclared default is
 `max_threads: 5`, which a single 4-player table (4 Shuffler subscriptions + 1
 Tabletop subscription) already reaches, starving `GET /spine/up` of a thread to
-run on. That thread starvation, not the shutdown hang below, was the actual
-trigger for the `ECONNREFUSED` storm in
-`notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md` (readiness failures pull the
-pod's endpoint, which is what produces `ECONNREFUSED` downstream). See
+run on. That thread starvation, not the shutdown hang below, was the trigger
+for a past `ECONNREFUSED` storm (readiness failures pull the pod's endpoint,
+which is what produces `ECONNREFUSED` downstream). See
 `notes/ANALYSIS-connection-lifecycle-2026-08-26.md`. The pool is raised, not
 capped — nothing yet refuses stream #N+1 (`spine-stream-cap-503` in `TODO.md`).
 
 **On shutdown, `config/puma.rb`'s `after_stopped` hook closes every open SSE
 stream before Puma waits for in-flight requests to finish** — without it, a
 held-open stream never finishes on its own, Puma's graceful shutdown hangs
-forever, and Kubernetes eventually `SIGKILL`s the pod (see
-`notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md`). The hook runs inside
+forever, and Kubernetes `SIGKILL`s the pod. The hook runs inside
 Puma's SIGTERM trap itself, where `Mutex#synchronize` is illegal, so it defers
 the actual `TableBroadcaster#close_all` call to a `Thread.new` rather than
 calling it directly. Both `run` and `Dockerfile`'s `CMD` pass
@@ -170,8 +168,7 @@ Fleet-level Honeycomb setup is in the root `CLAUDE.md`. Spine specifics:
 - **Open SSE stream count is a span attribute, not a metric.** `OTEL_METRICS_EXPORTER` is
   unset (`"none"`), and the stream's own request span only exports when the stream *ends*
   (Rack::Events `on_finish`), so open streams were invisible in Honeycomb by construction —
-  the `ECONNREFUSED` incident (`notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md`) had to
-  be diagnosed from the Tabletop's side instead. `app.rb`'s `route do |r|` block now stamps
+  the `ECONNREFUSED` incident had to be diagnosed from the Tabletop's side instead. `app.rb`'s `route do |r|` block now stamps
   `spine.open_streams` (from `TableBroadcaster#open_stream_count`) on every request span
   before dispatch, so any request made while streams are open carries the count — cheapest
   possible visibility, no metrics pipeline needed.

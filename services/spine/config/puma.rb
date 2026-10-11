@@ -3,8 +3,7 @@
 # thread wait, not an event loop. Puma's undeclared default (`max_threads: 5`)
 # meant a single 4-player table (4 Shuffler subscriptions + 1 Tabletop
 # subscription = 5 streams) could fill every thread, leaving none for the
-# readiness probe — which is what actually produced the
-# `ECONNREFUSED` storm in `notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md`;
+# readiness probe — which is what produced a past `ECONNREFUSED` storm;
 # the shutdown hang below was an amplifier, not the trigger. See
 # `notes/ANALYSIS-connection-lifecycle-2026-08-26.md` for the full reasoning.
 threads 8, 64
@@ -15,8 +14,7 @@ threads 8, 64
 # before `@runner.stop_blocked`. That makes it the right hook to close every
 # open SSE stream: without this, a held-open stream never finishes on its
 # own, Puma waits forever, and Kubernetes SIGKILLs the pod once
-# terminationGracePeriodSeconds expires (see
-# notes/INCIDENT-sse-shutdown-crashloop-2026-08-26.md).
+# terminationGracePeriodSeconds expires.
 #
 # The hook body runs inside Puma's SIGTERM signal trap itself
 # (Launcher#setup_signals traps SIGTERM directly to do_graceful_stop), where
