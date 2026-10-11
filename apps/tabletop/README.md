@@ -2,7 +2,8 @@
 
 The shared canvas where play happens — Mural's freedom with Magic's physics. A synced
 [tldraw](https://tldraw.dev) board (watermark worn happily) where cards arrive from the
-Shuffler instead of the clipboard. See `SEAMAP.md` for where this ship is headed.
+Shuffler instead of the clipboard. See `SEAMAP.md` for where this ship is headed, and the
+[fleet domain map](../../notes/fleet-domain-map.html) for how it fits with the other ships.
 
 > **Prod serves plain http:// on purpose.** tldraw's license gate blanks an unlicensed
 > canvas **5 seconds after load** — but only on HTTPS non-loopback origins, so the
@@ -17,9 +18,10 @@ Shuffler instead of the clipboard. See `SEAMAP.md` for where this ship is headed
   Play/Discard reach here only via the Spine: `card.played` travels Shuffler → Spine
   → this ship's SSE subscription (`spineSubscriber.ts`); no clipboard, no direct
   Shuffler→Tabletop call.
-- **Spectating** — open `/t/:tableName` with no Shuffler game at all. Full canvas
-  access in v0 (there is no seat concept on the canvas; seats live in the arriving
-  events).
+- **Spectating** — open `/t/:tableName` without the `?seat=<seatId>` the Spine puts on
+  a player's link. Full canvas access. Nothing on the canvas tells a spectator from a
+  player yet: `src/client/sessionId.ts` defines the session (`?seat=` or an `anonymous-`
+  pseudonym), but the client doesn't call it.
 
 ## Routes
 
@@ -37,8 +39,8 @@ Shuffler instead of the clipboard. See `SEAMAP.md` for where this ship is headed
 
 One thing here is a deliberate stand-in, marked in the source and easy to delete:
 
-1. **The in-memory room registry** (`src/server/rooms.ts`). Name-only (no table ids;
-   the Spine absorbs table identity later). Rooms are **in-memory only** — a redeploy
+1. **The in-memory room registry** (`src/server/rooms.ts`), keyed by the table slug,
+   which is the Spine's table id. Rooms are **in-memory only** — a redeploy
    wipes the board. Accepted for v0; durable reconstruction is a filed buoy.
 
 `card.played`'s only entry point is the Spine SSE subscription
@@ -59,14 +61,14 @@ HTTP seam (`POST /test/tables/:tableName/cards`, only mounted with
 and `cardArrival.test.ts` that spawn this server as its own process and have no live Spine
 to seed a card through — never mounted without that env var, never in production.
 
-## Arrival layout (v0-minimal geography)
+## Arrival layout
 
-A fixed **Stack area**, plus a **battlefield row per seat** allocated in first-play
-order — keyed by `seatId`, labeled with the player name — each row ending in a
-**Graveyard spot** and a smaller **Exile spot**. Every played card, land or not,
-arrives on the Stack and a person drags it on; the Tabletop stays meaning-free.
-Dedup: on event `id` (retried request) and on `instanceId` already present (a second
-arrival of one instance is a physical no-op).
+A seat's player area — playmat, library, command zone, graveyard, exile, name label — is
+drawn when its `seat.joined` arrives, in the next compass slot (S, N, E, W) around a
+fixed Stack square at the center. Every played card, land or not, arrives on the Stack
+and a person drags it on; the Tabletop stays meaning-free. Dedup: on event `id` and on
+`instanceId` already present (a second arrival of one instance is a physical no-op).
+Numbers in `DESIGN.md`.
 
 ## Develop
 
@@ -88,7 +90,8 @@ you want the browser path to match prod.
 
 `./deploy.sh` — mirrors the Shuffler's: docker build (repo-root context), push to ECR,
 `kubectl apply k8s/` on the orion cluster. Serves at
-**https://table.jessitron.honeydemo.io** (shared ALB group `only-one-alb-please`).
+**http://table.jessitron.honeydemo.io** (its own ALB group `tabletop-http`; see
+[Licensing](#licensing)).
 Browser spans go same-origin to `/v1/traces`, routed by the ALB to a minimal dedicated
 OTel Collector (`k8s/collector.yaml`) — no API key in the page, no CORS drama. The
 Shuffler never talks to this ship directly anymore; `card.played` arrives over this
@@ -108,10 +111,9 @@ when the license state is `unlicensed-production` — replacing the canvas with 
 **That's why the deployed table is http-only** (decided 2026-08-09, after the evaluation
 key expired with the hobby-license application stuck in tldraw's queue): plain http is
 exempt from the gate, and this app has no auth to protect anyway. The main ingress
-serves a single HTTP:80 listener; a companion ingress (`k8s/ingress-https-downgrade.yaml`)
-owns the 443 listener and 301s https-first browsers down to http — Firefox and Chrome
-try https:// for typed URLs, and with no 443 listener at all they showed "can't
-connect" instead of falling back (`k8s/ingress.yaml` has the IngressGroup story).
+serves a single HTTP:80 listener (`k8s/ingress.yaml` has the IngressGroup story).
+Firefox and Chrome try https:// first for typed URLs and show "can't connect" instead
+of falling back; that's open. An ALB can't redirect HTTPS to HTTP.
 `chooseLicenseKey`
 (`src/client/chooseLicenseKey.ts`, unit-tested) withholds any baked key wherever the
 gate can't fire, so a stale key in `.be` can't blank anything.
