@@ -359,8 +359,9 @@
    reason — an overlap would resolve by draw order, deterministic but semantically meaningless.
    So today "first match" and "correct match" are the same thing by asserted construction.
    **"The square" is built now** (table-layout ticket 14, `5eeac70`, 2026-08-08 — designed in
-   `.scratch/tabletop-table-layout/issues/10-the-square.md`, built by `issues/14-*.md`; see
-   `apps/tabletop/DESIGN.md`): player areas sit in compass slots (S/N/E/W by join order) around a
+   `.scratch/tabletop-table-layout/issues/10-the-square.md`, built by `issues/14-*.md`; numbers in
+   `apps/tabletop/DESIGN.md`'s "Geometry" section, picture and the "Zones never touch" invariant
+   in `notes/fleet-domain-map.html`): player areas sit in compass slots (S/N/E/W by join order) around a
    fixed 1000×1000 Stack square centered on the board origin (`playerAreaOrigin(seatIndex)` /
    `stackBounds()` in `cardLayout.ts`). **The tiebreak question this watch point raised never had
    to be answered** — the square's geometry keeps every zone AABB at least a `GAP`-wide (20-unit)
@@ -966,6 +967,8 @@ gesture correctness.
 
 ### The Spine's event feed / table furniture placement
 Where a card or zone gets *placed* on first arrival (`cardArrival.ts`, `tableFurniture.ts`,
-`seatJoined.ts`) is the Tabletop's server-side geography, covered by `DESIGN.md` and the
+`seatJoined.ts`) is the Tabletop's server-side geography, covered by `apps/tabletop/DESIGN.md`
+("Geometry"), the fleet domain map (`notes/fleet-domain-map.html` — seats, the Stack, "Every
+played card arrives on the Stack"), and the
 `tabletop-physics` planning map — not this owner. This owner starts once a shape already exists
 on the board and something clicks or drags it.

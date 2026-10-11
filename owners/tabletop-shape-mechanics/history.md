@@ -683,7 +683,9 @@ point 9 (rewritten to describe the pointer-based approach, not the per-selected-
 `.scratch/tabletop-table-layout/issues/10-the-square.md` resolved the wayfinder ticket "Design
 the square — seats around the Stack instead of a row." **Design only — no code changed.**
 `apps/tabletop/src/server/cardLayout.ts` and `tableFurniture.ts` are untouched; building this is
-separate future work. Decision recorded in `apps/tabletop/DESIGN.md`'s new "The square" section:
+separate future work. Decision recorded in `apps/tabletop/DESIGN.md`'s then-new "The square" section
+(since rewritten: `DESIGN.md` is now a geometry note — "Geometry" and "No per-viewer rotation" —
+and seats, zones and the Stack are drawn in the fleet domain map, `notes/fleet-domain-map.html`):
 player areas move from a row into compass slots (N/E/S/W) around a fixed-size centered Stack, by
 join order (1→S, 2→S,N, 3→S,N,E, 4→S,N,E,W). No per-viewer rotation (reconfirmed hard tldraw/
 platform limit, out of scope). Every player area stays upright/unrotated in world space — same
@@ -865,7 +867,8 @@ earlier arrivals visible. Purely placement territory, but three record-keeping c
 Tests: 5 new cases in `apps/tabletop/test/cardLayout.test.ts` (one per compass side asserting
 the centered-on-the-facing-edge landing, plus a four-seat cascade test asserting each seat's
 inward direction and containment), replacing the old single top-left cascade test. 51 unit +
-19 Playwright pass. `DESIGN.md`'s square section updated to match.
+19 Playwright pass. `DESIGN.md`'s square section updated to match (that content now lives in
+`DESIGN.md`'s "Geometry" section — "Stack-side cascade").
 
 ## Ticket 18: `mtg-counter` — counters ride on cards (2026-08-08, `4c64ef2`)
 
@@ -1541,7 +1544,7 @@ built") and `interactions.md`'s rewritten watch point 10 plus new watch points 2
 
 ## Ticket 05: five distributed workaround sites replaced by one centralized listener (2026-08-11)
 
-Research doc: `notes/RESEARCH-stale-selection-bug.md`, referencing tldraw's own upstream issue
+Research doc: `apps/tabletop/notes/RESEARCH-stale-selection-bug.md`, referencing tldraw's own upstream issue
 tldraw/tldraw#5613. Every prior fix for watch point 1's stale-selection quirk had lived on the
 shape being dragged — `MtgCardShapeUtil.onTranslateEnd`, `MtgCounterShapeUtil.onTranslateEnd`,
 `CardContextMenu.tsx`'s `commit()`, plus two ShapeUtil subclasses that existed solely to carry the
@@ -1654,16 +1657,45 @@ convention, not a mechanics change.
 ## What Was Tried and Abandoned
 
 **Ticket 20, card-tucking (2026-08-10, abandoned same day as `ac27a99`).** Two implementations
-were built and reverted: real tldraw parenting (a tucked card could never render or reorder
-behind its own parent — confirmed against `Editor.getUnorderedRenderingShapes`/
-`getReorderingShapesChanges`), then a `meta.tuckedWith` link between sibling cards, which broke
-worse in production (cards flying to/away from each other via an unguarded `onDragShapesIn`
-hover side effect, with no matching un-tuck). Both were backed out entirely — no tuck link, no
-`mtg-card`-as-passenger, nothing remains in the codebase. Full postmortem, plus a group-based
-redesign that was discussed but never built, is at
-`apps/tabletop/notes/DESIGN-card-tucking-abandoned.md` — read it first if this is ever
-revisited; it has real prior art on where a group-based approach would hit tldraw's
-click-resolution and selection quirks.
+of "one card rides under/with another" were built and reverted; nothing remains in the codebase —
+no tuck link, no `mtg-card`-as-passenger. Cards can be reordered and grouped with tldraw's stock
+UI, and that's all. This section is the only home of the lessons; the design doc that held the
+postmortem (`apps/tabletop/notes/DESIGN-card-tucking-abandoned.md`) is deleted — see git history
+(`fb93838a^`). Read this first if card attach is ever revisited.
+
+- **Attempt 1, real parenting (`dada48a`): a child always paints above its parent.**
+  `Editor.getUnorderedRenderingShapes` gives every descendant a strictly higher z-index than its
+  ancestor, unconditionally, and tldraw's reorder actions (`getReorderingShapesChanges`) only
+  reorder siblings — so "send to back" on a tucked child was a silent no-op. Parenting one card
+  to another makes "tuck behind" structurally impossible.
+- **Attempt 2, `meta.tuckedWith` link between page siblings (`8e39b0d`): `onDragShapesIn` fires on
+  hover, not on drop.** Per `DragAndDropManager.ts`, it fires each time the hovered shape changes
+  during *any* drag. Dragging card A past card B tucked them together and called
+  `bringToFront(A)`, which corrupted the z-order the live "who's the host" check read. With no
+  un-tuck on hover exit (`canRemoveChildrenOfType` only ever covered counters/notes), the
+  accidental link stuck, and a later drag of either card yanked its partner along. Lesson:
+  **writing persistent state from a live-hover hook needs an exit path symmetric to the entry
+  path** — counters/notes have one (`onDragShapesOut` reparents to the page); this didn't.
+- **Redesign discussed, never built: attach via a tldraw `group`.** Explicit Attach/Detach
+  context-menu actions (no hover side effect, so attempt 2's failure can't happen), joining or
+  creating a real `group` with the attached card at the back — neither card is the other's
+  ancestor, sidestepping attempt 1. Blockers this owner's review raised:
+  1. A click on any group member resolves to the group unless drilled in, and stock
+     `GroupShapeUtil` has no `onClick` — tapping a creature with anything attached would stop
+     working. Fix: a subclassed `GroupShapeUtil` whose `onClick` re-queries
+     `editor.getShapeAtPoint()` (tldraw doesn't pass the point) and forwards to the hit member.
+  2. Dragging an undrilled group fires `onTranslateEnd` on the group only, never on members —
+     zone entry/eviction would need the group's hook to delegate to the top member's.
+  3. Unresolved: native Ctrl+G leaves the new group selected with no drag, so a
+     translate-based selection clear doesn't cover it — disable the shortcut or clear right
+     after it.
+  Detach was designed as: double-click to drill in, drag one card, and if its position *at
+  settle* (never mid-drag) lands more than a card's width from the other members' combined
+  bounds, it detaches.
+- **Why abandoned rather than fixed a third time:** it was blocking deploys of unrelated
+  features, had cost a full build-and-revert cycle, and the group design had enough open tldraw
+  edge cases to need more thought and Jess's input. Ticket:
+  `.scratch/tabletop-physics/issues/20-cards-behind-cards.md` (wontfix).
 
 If a future fix attempt for a similar quirk is tried and reverted, record it here so the next
 person doesn't repeat it.
