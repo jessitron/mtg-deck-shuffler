@@ -38,7 +38,7 @@ on day one. Count violations per rule, compare against a committed baseline file
 
 - Runnable standalone: `scripts/design-lint.sh` from repo root.
 - Called from the Shuffler's and Tabletop's `verify.sh` so it runs where tests run.
-- On failure, point at the design owner: `owners/shuffler-looks-like-itself/README.md`.
+- On failure, point at the design owner: `owners/fleet-design-language/README.md`.
 
 ## Done when
 

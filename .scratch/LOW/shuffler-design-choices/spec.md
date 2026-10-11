@@ -8,7 +8,7 @@ This spec records the decisions and their reasoning; the four issues execute the
 commit each.
 
 The authority on options, call sites and the resolve checklist remains
-`owners/shuffler-looks-like-itself/open-choices.md`. This spec does not replace it — it
+`owners/fleet-design-language/open-choices.md`. This spec does not replace it — it
 supplies the answers it was waiting for, and corrects its stale citations (below).
 
 ## The decisions

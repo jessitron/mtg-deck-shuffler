@@ -74,7 +74,7 @@ out or oriented in the shared document — see "Out of Scope."
 - **Control strip styling is explicitly design-exempt**: styled with a deliberately jarring
   color (an "ugly pink," per direction) rather than a considered design, and flagged as
   temporary/placeholder — it stands in for a future real sidebar (a separate, bigger idea, out
-  of scope here). Check with the `shuffler-looks-like-itself` owner on whether the repo already
+  of scope here). Check with the `fleet-design-language` owner on whether the repo already
   has a "design-exempt" convention to reuse, or whether this establishes the first one.
 - **Hit-testing risk, already checked**: `zoneHitTest.ts` and the `MtgCardShapeUtil`
   translate/drag hooks use only tldraw page-space coordinates (`getShapePageBounds`,

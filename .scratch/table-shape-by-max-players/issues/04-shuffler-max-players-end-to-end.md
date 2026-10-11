@@ -11,7 +11,7 @@ single call's request payload to both the Spine join call (ticket 02) and the Ta
 `seat.joined` call (ticket 03); no new call is introduced. `apps/shuffler/CLAUDE.md`'s
 Table Mode section is updated to mention the new field alongside table name/player name.
 
-Consult `owners/shuffler-looks-like-itself` on the new prep-page control's placement and
+Consult `owners/fleet-design-language` on the new prep-page control's placement and
 appearance before finalizing the plan.
 
 **Blocked by:** 02, 03

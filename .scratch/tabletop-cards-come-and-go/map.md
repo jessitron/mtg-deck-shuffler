@@ -31,7 +31,7 @@ resolved tickets, `Status: ready-for-agent`. Next: `/to-tickets` on it.
 - The Shuffler's receiving machinery already exists: `GameState.ts` has the `Revealed`
   location and `CardMoveDestination = "Revealed" | "Hand" | "LibraryTop" | "LibraryBottom"`.
 - Owners likely relevant: `tabletop-shape-mechanics` (portal drag/drop mechanics),
-  `two-faced-cards` (event contract's card/face fields), `shuffler-looks-like-itself`
+  `two-faced-cards` (event contract's card/face fields), `fleet-design-language`
   (anything a player sees).
 - The parked ticket `library-links-to-shuffler` (from the old
   `tabletop-card-physics-starter` map) was folded into

@@ -65,7 +65,7 @@ behaviour across both. Check the modal on `/prepare` too — it loads `playmat.c
 ## Then
 
 Run the "When a choice is resolved" checklist in
-`owners/shuffler-looks-like-itself/open-choices.md`. **The citation re-verification matters
+`owners/fleet-design-language/open-choices.md`. **The citation re-verification matters
 most after this issue** — collapsing seven rules into two moves everything below them in
 `playmat.css`, and choices' `file:line` references have already rotted twice for exactly this
 reason.

@@ -324,7 +324,7 @@ sits at seam 1, which both ships already use.
   when next touched; implementers of the portal should read that owner's context first.
 - Owners to consult during implementation: `tabletop-shape-mechanics` (portal, removal,
   settle-time deletion), `two-faced-cards` (face fields, `backImageUrl` derivation,
-  contract card/face payloads), `shuffler-looks-like-itself` (anything a player sees:
+  contract card/face payloads), `fleet-design-language` (anything a player sees:
   vortex colors, library link affordance), `fleet-is-observable` (the new inbox route and
   outbound gateway are new places where something happens),
   `animations-*` (Shuffler-side, if the Reveal-zone arrival animates).

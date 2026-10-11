@@ -58,6 +58,6 @@ different color. The decision stands.
 ## Then
 
 Run the "When a choice is resolved" checklist in
-`owners/shuffler-looks-like-itself/open-choices.md`, including the citation re-verification.
+`owners/fleet-design-language/open-choices.md`, including the citation re-verification.
 `apps/shuffler/CLAUDE.md` → UI Style already states the focus-visible rule; make sure it now
 names the actual treatment.

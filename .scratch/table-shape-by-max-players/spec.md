@@ -205,7 +205,7 @@ this spec deliberately does not build any live reshaping for that case.
 - Consult `owners/tabletop-shape-mechanics` before finalizing the plan — the
   disjointness invariant and the draw-once guard are exactly its territory, and this
   spec changes what both of them check against.
-- Consult `owners/shuffler-looks-like-itself` on the new prep-page control (a 2/3/4
+- Consult `owners/fleet-design-language` on the new prep-page control (a 2/3/4
   choice next to `table-name`/`player-name`) — placement and appearance, not just
   wiring.
 - Consult `owners/fleet-is-observable` on the new Spine migration and the new

@@ -54,4 +54,4 @@ the light-pink ring on keyboard focus and **not** on mouse click.
 ## Then
 
 Run the "When a choice is resolved" checklist in
-`owners/shuffler-looks-like-itself/open-choices.md`, including the citation re-verification.
+`owners/fleet-design-language/open-choices.md`, including the citation re-verification.

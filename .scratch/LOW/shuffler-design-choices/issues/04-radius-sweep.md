@@ -69,7 +69,7 @@ Cards and both playmats unchanged.
 ## Then
 
 Run the "When a choice is resolved" checklist in
-`owners/shuffler-looks-like-itself/open-choices.md`. This one closes the last open choice, so
+`owners/fleet-design-language/open-choices.md`. This one closes the last open choice, so
 the table in the owner's `README.md` empties out — state the standing rule in its
 design-language section, and put it in `apps/shuffler/CLAUDE.md` → UI Style, replacing the
 bare "square corners except physical" line with the three-way rule.
