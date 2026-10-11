@@ -80,9 +80,9 @@ instead. See `docs/agents/coding-standards.md`.
 
 ### Domain docs
 
-Multi-context: shared vocabulary in `notes/GLOSSARY.md`, per-ship `CONTEXT.md`, and a
-translations table in `CONTEXT-MAP.md` for terms that differ between ships.
-See `docs/agents/domain.md`.
+`notes/fleet-domain-map.html` holds the bounded contexts, what crosses each border, the
+translations between ships, and the invariants. `notes/GLOSSARY.md` holds the card-identity and
+naming terms the map doesn't. See `docs/agents/domain.md`.
 
 ## Repo Layout
 
@@ -95,19 +95,16 @@ plus `check-fleet-tokens.sh` (a fast smoke check that the shared palette reaches
 
 The ships (each with its own `CLAUDE.md`, `SEAMAP.md`, `README.md`, `./run`, and `./deploy.sh`):
 
-- `apps/shuffler/` — the Shuffler: Express + HTMX deck manager and game screen;
-  library and hand. The original app.
-- `apps/tabletop/` — the Tabletop: Vite + React + tldraw synced canvas
-  (`/t/:tableName` is a shared board) where cards arrive from the Shuffler.
-- `services/spine/` — the Spine: Ruby; table administration, persistence and event bus, one append-only
-  event log per table.
+- `apps/shuffler/` — the Shuffler
+- `apps/tabletop/` — the Tabletop
+- `services/spine/` — the Spine
+
+What each one owns and how they talk: `notes/fleet-domain-map.html`.
 - `packages/design-tokens/` — the fleet's shared visual vocabulary (`@fleet/design-tokens`):
   the identity palette, `--narrow-border`, and Magic's colour pie. One dictionary, both ships
   — the Shuffler serves it at `/fleet/tokens.css`, the Tabletop imports it through Vite.
   Owned by `owners/fleet-design-language/`; consult that owner before changing a value.
-- `contracts/` — the fleet's published language: JSON Schema for the event
-  envelope and per-kind payloads. Both the Spine (Ruby) and the TS apps validate
-  on receipt. See `contracts/README.md`.
+- `contracts/` — the fleet's published language. See `contracts/README.md`.
 
 **`notes/` at the fleet level holds only genuinely fleet-wide docs.** Ship-specific notes
 live under each ship's own `notes/` (e.g. `apps/shuffler/notes/`, `apps/tabletop/notes/`),
@@ -125,8 +122,7 @@ only the route is broken. Curl the running image.
 ## Run the whole fleet locally
 
 - `./run` **from the repo root** — starts the fleet with prefixed logs: Tabletop
-  (:5180, tables at `/t/<name>`), Shuffler (:3344, card.played travels only through
-  the Spine — no direct Shuffler→Tabletop call), and Spine (:4600, admin at
+  (:5180, tables at `/t/<name>`), Shuffler (:3344), and Spine (:4600, admin at
   `/admin/tables`) — Sources `.be` once for telemetry (Honeycomb env `local`).
   Ctrl-C stops everything. Override ports with `SHUFFLER_PORT`/`TABLETOP_PORT`/`SPINE_PORT`.
 - `./deploy.sh` **from the repo root** — deploys all three ships in order (Spine,
