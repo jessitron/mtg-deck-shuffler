@@ -1,1 +1,0 @@
-../../../owners/fleet-is-observable/skill-review.md

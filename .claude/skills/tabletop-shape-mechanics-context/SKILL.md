@@ -1,1 +1,0 @@
-../../../owners/tabletop-shape-mechanics/skill-context.md

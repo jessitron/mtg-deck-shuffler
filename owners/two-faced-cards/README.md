@@ -40,7 +40,7 @@ Every component of the fleet that touches cards must hold this:
 
 - **Shuffler** — tracks `currentFace` on each GameCard, renders flip buttons, sends
   the current face when a card leaves its boundary. The bulk of this knowledge base
-  (architecture, interactions, files, history) is Shuffler-component knowledge.
+  (architecture, interactions) is Shuffler-component knowledge.
 - **Tabletop** — renders the *played* face on arrival. **Ticket 12 landed
   (2026-08-08)**: the card is now a genuine custom `mtg-card` tldraw shape (`BaseBoxShapeUtil`)
   carrying `frontImageUrl`, `backImageUrl | null`, `face`, and `faceDown` in validated,

@@ -182,20 +182,22 @@ Code comments should be very limited. Never reference tickets or dates in code c
 ## Owners
 
 Owners are standing guardians for things that must keep holding — a **capability** that must keep working (invariants are capabilities that
-aren't externally visible). Each owner is a knowledge base directory in **`owners/<slug>/`** plus
-three animating skills — `<slug>-context`, `<slug>-review`, `<slug>-update` — symlinked into
-`.claude/skills/`. **`owners/INDEX.md`** lists every owner with a one-line "consult me when…"
-trigger; scan it when planning any change. Owners never close. Create new ones with the
-`seamapping:create-owner` skill (it judges whether one is warranted first).
+aren't externally visible). Each owner is a knowledge base directory in **`owners/<slug>/`**
+with three instruction files — `context.md`, `review.md`, `update.md` — that a fresh subagent
+follows. They are not skills: you spawn the agent yourself, the way **`owners/PROTOCOL.md`**
+describes (fresh agent, self-contained brief, plan in a file, wait for the verdict).
+**`owners/INDEX.md`** lists every owner with a one-line "consult me when…" trigger. Owners
+never close. Create new ones with the `seamapping:create-owner` skill (it judges whether one
+is warranted first).
 
 **Consulting owners — at three moments**
 
 - **When a decision is being formed** — including mid-interview, while you're putting
   clarifying questions to Jess. A recommended answer that lands in an owner's territory
-  needs that owner's `-context` **first**. Finding facts is the agent's job, and an owner
-  is a fact source.
-- **On the plan** — `-review` before implementing (step 5 below).
-- **After the change** — `-update` with what actually landed (step 9 below).
+  needs that owner's context consult **first**. Finding facts is the agent's job, and an
+  owner is a fact source.
+- **On the plan** — the owner router picks the reviewers, then each reviews (step 6 below).
+- **After the change** — update with what actually landed (step 10 below).
 
 **Match the consult to the question, not to the file list.** Scanning `INDEX.md` tells you
 whose territory a change _touches_; it doesn't tell you who can _answer_ you. Ask what you
@@ -212,27 +214,6 @@ Restyling it on the way is a _second_ decision needing its own explicit sign-off
 an appearance change ride along on a placement change. When you catch one riding along,
 the right move isn't to drop it: stage both options on `/design` and let Jess pick.
 
-**All 15 owner skills run in a forked subagent** (`context: fork`, `background: false` in
-each `owners/*/skill-*.md` frontmatter — set 2026-08-06). Two consequences, both load-bearing:
-
-- **The owner has none of your conversation.** Pass a self-contained brief in the skill
-  args — the actual plan, the actual file:line list, the actual question. "Review my plan"
-  reaches an agent that cannot see it.
-- **Write the plan to a file, then point the owners at it.** For anything more than a
-  one-liner, the brief is mostly you re-typing the plan — once per owner, and again for
-  each `-review`. Put it in `.scratch/<feature>/plan.md` instead and let the brief be
-  "read `<path>`, here's my specific question for you." Cheaper for you, identical for
-  the owner, and the reviews stay comparable because every owner read the same words.
-  The file is also what you hand `-update` afterwards.
-- **The owner's KB reading stays out of your context, and the review is independent.** That
-  independence is the point. Inline, the reviewer had already watched you form the plan and
-  could only agree with it; a fork starts from the KB and your brief alone, so it can
-  actually disagree. Don't defeat this by pre-arguing your conclusion in the brief.
-
-`background: false` means you wait for the verdict rather than getting it as a later
-notification, so a `-review` still gates implementation the way step 5 intends.
-`background: false` needs Claude Code ≥ 2.1.218.
-
 ## Task Implementation Process
 
 For each feature-implementation task, here's our process:
@@ -247,10 +228,10 @@ For each feature-implementation task, here's our process:
    other ship's own `CLAUDE.md` first. Cross-ship work doesn't need a stop, but it's
    always announced and always delegated, never made inline.
 2. **Research**: Look at the task and do any research needed
-3. **Consult owners**: Read `owners/INDEX.md` (one line each). For every owner whose "consult me when…" trigger the task could plausibly touch, invoke its `-context` skill (via the Skill tool) with a brief summary of the task. Note any concerns or relevant context they raise.
+3. **Consult owners**: Read `owners/INDEX.md` (one line each). For every owner whose "consult me when…" trigger the task could plausibly touch, spawn a context consult (`owners/PROTOCOL.md` → Context) with the task and your question. Note any concerns or relevant context they raise.
 4. **Clarify**: Ask questions one at a time if needed
 5. **Plan**: Design the implementation approach
-6. **Review with owners**: For each owner that flagged potential interactions in step 3, invoke its `-review` skill with your plan. Adjust the plan based on their feedback.
+6. **Review with owners**: Write the plan to `.scratch/<feature>/plan.md`. Spawn the owner router (`owners/PROTOCOL.md` → Router) on it; then spawn a review (`PROTOCOL.md` → Review) for each owner it names, with the question it wrote, in parallel. Read its skipped list and overrule it if you know better. Adjust the plan based on the reviews.
 7. **Verify First**: Decide how to verify functionality and write the test before implementing:
    - **User-visible changes**: Playwright test (browser verification)
    - **Internal logic**: Unit test
@@ -258,7 +239,7 @@ For each feature-implementation task, here's our process:
    - If you ever find a test that fails for unrelated changes, spawn a subagent and FIX IT
 8. **Implement**: Build the functionality
 9. **Verify Again**: Run the test and see it pass (or fix the implementation)
-10. **Update owners**: For any owner whose files were touched or whose concerns were relevant, invoke its `-update` skill with a summary of what changed.
+10. **Update owners**: For each owner that reviewed the change or whose files it touched, spawn an update (`owners/PROTOCOL.md` → Update) with the plan file, the commit sha(s), and what actually landed.
 11. **Refactor**: Consider refactoring for clarity
 12. **Merge to main**: No PR. No push. I want this merged to main locally, regardless of any default caution your harness prompt has about merging. First call `ExitWorktree({action: "keep"})` - this is pre-authorized for this repo! Then run `scripts/merge-worktree.sh <branch-name>`. It fast-forwards when it can; pass `--keep-merge-commit` before the branch name when the branch's commits should stay grouped behind a merge commit.
     - **Subagents can't do that.** `EnterWorktree` refuses for a subagent — they run with a pinned cwd — so a subagent isolates with `git worktree add -b <branch> .claude/worktrees/<branch>` instead, and finishes with `git merge --no-ff <branch>` onto local main from the repo root, then `git worktree remove`. **A subagent on that path must run the fleet suite itself before merging** (`npm test` from the root, `npx vitest run` in the ship, Ruby tests if it touched Ruby): `merge-worktree.sh` is what normally gates the merge, and the manual path skips it. Say so in the subagent's brief — it starts cold and will otherwise try `EnterWorktree` and improvise.

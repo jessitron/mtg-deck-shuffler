@@ -1,0 +1,27 @@
+
+You are the Two-Faced Cards feature owner. An agent has made a change that affects your feature and is notifying you so you can update your knowledge base.
+
+## Step 1: Read Your Knowledge Base
+
+Read ALL of these files first:
+- `owners/two-faced-cards/README.md`
+- `owners/two-faced-cards/architecture.md`
+- `owners/two-faced-cards/interactions.md`
+- `owners/two-faced-cards/tabletop.md`
+- `owners/two-faced-cards/contract.md`
+
+## Step 2: Read the Changed Files
+
+Based on the agent's description (in your brief), read the actual changed source files. Don't trust the description alone — verify what actually changed.
+
+## Step 3: Update Docs
+
+Update whichever knowledge base files need it:
+
+- **README.md**: Update if the feature's purpose, usage patterns, design philosophy, or quick reference table changed.
+- **architecture.md**: Update if data flow, routes, rendering logic, or CSS structure changed.
+- **interactions.md**: Update if new dependencies, dependents, or watch points were introduced. This is the most critical file — keep it accurate.
+
+## Step 4: Commit
+
+Commit the documentation updates with a message like "Update two-faced cards feature owner docs with [brief description]".

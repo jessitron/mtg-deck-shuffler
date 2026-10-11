@@ -1,1 +1,0 @@
-../../../owners/fleet-design-language/skill-update.md

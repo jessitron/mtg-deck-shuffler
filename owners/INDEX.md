@@ -2,14 +2,16 @@
 
 Standing guardians for things that must keep holding as this fleet grows — a **capability** that must keep working (invariants are capabilities
 that aren't externally visible). Each owner is a knowledge base in `owners/<slug>/` plus three
-animating skills — `<slug>-context`, `<slug>-review`, `<slug>-update` — symlinked into
-`.claude/skills/`. Owners never close. Created by the `seamapping:create-owner` skill.
+instruction files — `context.md`, `review.md`, `update.md` — that a fresh subagent follows.
+`PROTOCOL.md` says how to spawn one; `router.md` is the owner-owner that picks reviewers for a
+plan. Owners never close. Created by the `seamapping:create-owner` skill.
 
-When you plan a change, scan the one-liners below; for any owner whose trigger matches, invoke its
-`-context` skill (research), its `-review` skill (on the plan), and its `-update` skill (after the
-change lands). See CLAUDE.md → Task Implementation Process. Each entry stamps _kind, scope_ —
-scope is a ship, or _fleet_ when the charge crosses ships; a change confined to one ship may skip
-owners stamped with a different ship, never the fleet-scoped ones.
+When you plan a change, scan the one-liners below; for any owner whose trigger matches, consult
+it for context (research). Before implementing, the router picks which owners review the plan.
+After the change lands, each of those owners updates its KB. See CLAUDE.md → Task
+Implementation Process. Each entry stamps _kind, scope_ — scope is a ship, or _fleet_ when the
+charge crosses ships; a change confined to one ship may skip owners stamped with a different
+ship, never the fleet-scoped ones.
 
 - [two-faced cards](two-faced-cards/README.md) — _feature, fleet_ — consult me before changes to
   display/rendering of a particular card face, CardDefinition/CardFace types, deck adapters, card persistence, flip buttons,

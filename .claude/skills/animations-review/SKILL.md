@@ -1,1 +1,0 @@
-../../../owners/animations/skill-review.md

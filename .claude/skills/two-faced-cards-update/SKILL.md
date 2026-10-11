@@ -1,1 +1,0 @@
-../../../owners/two-faced-cards/skill-update.md
