@@ -1,11 +1,8 @@
 # SEAMAP — Spine (ship)
 
 One ship in [the fleet](../../SEAMAP.md). The Spine is the event hub and the central
-domain language: Tables, Seats, the log, and — for now — the Interpreter. _(Rewritten
-from the JES-129 Rails walking skeleton to plain Ruby — Roda + Sequel + SQLite +
-Minitest, see `.scratch/spine-roda-rewrite/` at repo root. Through ticket 06: OTel to
-Honeycomb, join-by-name, contract-validated generic event ingestion, SSE outbound
-delivery, and an `/admin/tables` screen that live-appends via that same SSE stream.)_
+domain language: Tables, Seats, the log, and — for now — the Interpreter.
+Architecture, boundaries and invariants: [the domain map](../../notes/fleet-domain-map.html).
 
 ## North Star
 
@@ -16,18 +13,10 @@ believe it.
 
 1. **Tables and Seats** ← _active_ — a table you can join by name (from the Shuffler's
    Prep screen); seats for 1–4 players; spectators welcome without one.
-   _Being rebuilt on Roda/Sequel (`.scratch/spine-roda-rewrite/`) as a single `join`
-   endpoint (name a table, get a seat; creates the table if it doesn't exist yet).
-   The Shuffler's Prep screen doesn't call it yet._
 2. **The event log** — append-only, one per table; projections (current reading, spectator
    view, narration feed).
-   _Rebuilt on Roda/Sequel through ticket 05: append-only log, dedup on sender id, loud
-   contract validation (`POST /tables/:table_id/events`, envelope v3 — `traceparent`
-   moved out of the body entirely, header-only inbound), and live outbound delivery
-   over SSE (`GET /tables/:table_id/events/stream`, one stream per table, fed by a
-   plain-Ruby broadcaster), and an `/admin/tables` screen (ticket 06) that dogfoods
-   that same stream to append new rows live, no reload. Still ahead overall:
-   richer projections._
+   _The envelope, trace context and SSE delivery are on the
+   [domain map](../../notes/fleet-domain-map.html). Still ahead: richer projections._
 3. **The Interpreter** — physical events in, game events out, with provenance,
    causality, confidence, and commentary. Guesses; asks in chat; is corrected;
    supersedes itself. Later: ears (transcript events join the evidence), then
