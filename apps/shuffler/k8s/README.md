@@ -12,7 +12,16 @@ This directory contains Kubernetes manifests for deploying the MTG Deck Shuffler
 
 ## Initial Setup
 
-### 1. Create the Honeycomb API Key Secret
+### 1. Create the ECR Repository
+
+**One-time.** `../deploy.sh` pushes to `$ECR_REPO`, read from `.env`:
+
+```bash
+aws ecr create-repository --repository-name mtg-deck-shuffler --region us-west-2
+echo 'export ECR_REPO=<account-id>.dkr.ecr.us-west-2.amazonaws.com/mtg-deck-shuffler' >> ../.env
+```
+
+### 2. Create the Honeycomb API Key Secret
 
 **This is a one-time setup step.** The application requires a Kubernetes secret containing your Honeycomb API key:
 
@@ -21,7 +30,7 @@ kubectl create secret generic mtg-deck-shuffler-secret \
     --from-literal=HONEYCOMB_API_KEY="your-honeycomb-api-key-here"
 ```
 
-### 2. Deploy the Application
+### 3. Deploy the Application
 
 Use the `../deploy.sh` script for automated deployment, or apply manifests manually:
 
