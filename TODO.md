@@ -8,7 +8,7 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
 
 ## Next
 
-- ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨ **START HERE NEXT SESSION** ✨🌟⭐✨🌟⭐✨🌟⭐✨🌟⭐ 🗺️🧭 Go over `notes/fleet-domain-map.html` with Jess and get it right! 🎯🔥 Reviewed through the "Same word, different meaning" table; resume at "Principles and invariants" (start with the two `stated` fleet principles: players adjudicate; physics on the Tabletop, meaning in the Interpreter), then "Where the story and the code disagree". Also owed: smoke-test the three-ship flow with `./run` from the root after the `joinRequestId` rename. ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨
+- `smoke-three-ships` Smoke-test the three-ship flow with `./run` from the root after the `joinRequestId` rename.
 - `domain-map-palette-drift` Check the domain map's colours against tokens.css
   - `notes/fleet-domain-map.html` is standalone HTML, so its `<style>` `:root` copies the identity palette as raw hex: `#bb5277` = `--dark-pink`, `#9134d2` = `--cute-heading-color`, `#221534` = `--deep-space` (`packages/design-tokens/tokens.css`).
   - Nothing links them; a token change drifts the map unnoticed.
