@@ -437,8 +437,7 @@ sourcing) is in the root `CLAUDE.md`. Shuffler specifics:
 - **Sampling**: `src/telemetry-sampler.ts` keeps 1% of "background chatter" — health-check
   probes (by user agent, and the `/health` route) and static assets (by file extension) —
   and 100% of everything else. Kept at 1% rather than dropped so you can still confirm from
-  traces that the app is up and serving. Unit tested in `test/telemetry-sampler.test.ts`;
-  see `notes/AGENT-NOTES.md` for why that test exists.
+  traces that the app is up and serving. Unit tested in `test/telemetry-sampler.test.ts`.
 - **Express middleware spans are off** (`ignoreLayersType`), so a normal trace is the root
   server span plus `request handler - <route>`, not eight spans of parser middleware.
 - **`/health`** is the probe endpoint (k8s liveness/readiness and the ALB) — deliberately

@@ -74,7 +74,7 @@ Numbers in `DESIGN.md`.
 
 ```bash
 npm install        # from the repo root (npm workspaces)
-./run              # dev server on PORT (default 5180); does NOT source .be — see AGENT-NOTES
+./run              # dev server on PORT (default 5180); does NOT source .be
 npx vitest run     # unit tests (Vitest here; the Shuffler stays Jest)
 ./verify.sh        # build + real server on 5183 + Playwright (two-context sync, card arrival)
 ```

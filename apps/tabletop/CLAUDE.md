@@ -163,8 +163,8 @@ applies here unchanged.
 
 ## Observability
 
-Fleet-level Honeycomb setup is in the root `CLAUDE.md`; the browser side is in
-`notes/AGENT-NOTES.md` (spans go to a collector, not the server). Server side:
+Fleet-level Honeycomb setup is in the root `CLAUDE.md`; browser spans go to a
+collector, not the server. Server side:
 
 - **Express middleware spans are off** (`ignoreLayersType` in `src/server/tracing.ts`,
   matching the Shuffler), so a normal trace is the root server span plus
@@ -224,7 +224,7 @@ absolute-URL config spots must agree on the scheme: `k8s/configmap.yaml` (browse
 OTLP ×2), `k8s/collector.yaml` (CORS origin), and the Shuffler's
 `TABLETOP_PUBLIC_URL`. `chooseLicenseKey` (`src/client/chooseLicenseKey.ts`)
 withholds any baked key wherever the gate can't fire, so a stale key in `.be` can't
-blank local dev or http prod. See README → Licensing and `notes/AGENT-NOTES.md`.
+blank local dev or http prod. See README → Licensing.
 
 **`k8s/ingress-https-downgrade.yaml` existed briefly (2026-08-09 to 2026-08-10) to 301
 https-first browsers down to http, sharing the `tabletop-http` group on 443 only. Removed:

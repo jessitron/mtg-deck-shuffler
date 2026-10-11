@@ -10,7 +10,7 @@
 #     wouldn't say which of them moved.
 #  2. It verifies the key's environment before posting. Markers are environment-scoped and
 #     a marker in the wrong environment fails silently -- it succeeds, just somewhere you
-#     won't look. See notes/AGENT-NOTES.md on silent-success bugs; we've had enough.
+#     won't look.
 #
 # Best-effort by design: the deploy has already happened by the time this runs, so nothing
 # here should fail the deploy. Exits non-zero on trouble; callers warn and carry on.
