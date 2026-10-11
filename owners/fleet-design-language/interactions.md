@@ -143,6 +143,15 @@
   focus ring's color or width, that spec is the thing that will tell you** — it reads the
   computed style off specimens carrying no candidate classes.
 
+- **`notes/fleet-domain-map.html`** — standalone fleet doc with its own inline `<style>`.
+  It **copies** the identity palette as raw hex instead of loading `@fleet/design-tokens`:
+  `--shuffler: #bb5277` (= `--dark-pink`), `--tabletop: #9134d2` (= `--cute-heading-color`),
+  `--spine-bg`/`--fg: #221534` (= `--deep-space`), plus its own dark-mode variants and
+  supporting hexes. Orbitron chrome, Ovo body, square corners; it states "Corners square
+  except on round things" under its design invariants. **If an identity hex changes in
+  `packages/design-tokens/tokens.css`, update the `:root` block at the top of
+  `notes/fleet-domain-map.html` by hand** — nothing links them and no test checks it.
+
 ## Watch points
 
 Concrete, in rough order of how often they bite.

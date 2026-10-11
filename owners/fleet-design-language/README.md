@@ -221,7 +221,8 @@ each).
   area on the Tabletop stays upright and unrotated in world space, for everyone, always. A
   design that wants "my mat faces me" (the physical-table framing Jess keeps returning to)
   cannot have it without the canvas in an iframe or similar — out of scope for this fleet.
-  Consequence recorded in `apps/tabletop/DESIGN.md` → "The square": seats can move into
+  Consequence recorded in `apps/tabletop/DESIGN.md` → "No per-viewer rotation" (seat
+  slots and player-area origins are under its "Geometry"): seats can move into
   compass slots (N/E/S/W) around a centered Stack, but a wide-short player-area rectangle
   parked at an E/W slot reads "sideways" rather than rotating to face the Stack — an accepted
   cosmetic quirk, not a bug, until (if ever) this limit lifts.
