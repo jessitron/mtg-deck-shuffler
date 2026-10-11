@@ -9,6 +9,11 @@ Work here is untriaged or lightly triaged (big things marked GRILLING). Some thi
 ## Next
 
 - ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨ **START HERE NEXT SESSION** ✨🌟⭐✨🌟⭐✨🌟⭐✨🌟⭐ 🗺️🧭 Go over `notes/fleet-domain-map.html` with Jess and get it right! 🎯🔥 Reviewed through the "Same word, different meaning" table; resume at "Principles and invariants" (start with the two `stated` fleet principles: players adjudicate; physics on the Tabletop, meaning in the Interpreter), then "Where the story and the code disagree". Also owed: smoke-test the three-ship flow with `./run` from the root after the `joinRequestId` rename. ⭐🌟✨⭐🌟✨⭐🌟✨⭐🌟✨
+- `domain-map-palette-drift` Check the domain map's colours against tokens.css
+  - `notes/fleet-domain-map.html` is standalone HTML, so its `<style>` `:root` copies the identity palette as raw hex: `#bb5277` = `--dark-pink`, `#9134d2` = `--cute-heading-color`, `#221534` = `--deep-space` (`packages/design-tokens/tokens.css`).
+  - Nothing links them; a token change drifts the map unnoticed.
+  - Idea: a small check beside `scripts/check-fleet-tokens.sh` (or a test) that parses the map's light-mode `:root` and compares to tokens.css.
+  - Surfaced by the fleet-design-language owner's update after the docs consolidation; its `interactions.md` "Depended on by" records the dependency.
 - Tabletop `POST .../cards/return` (`apps/tabletop/src/server/cardReturned.ts`) doesn't check `cardSource` against the enum; a bad value comes back as the Spine's 502 instead of a 400.
 - Does tldraw copy-as-PNG re-fetch card images? If so, Archidekt-hosted custom card images (storage.googleapis.com) may lack CORS headers. Plain display works.
 - `owners/two-faced-cards/tabletop.md` ~line 406 says "`gameCardIndex` never leaves the Shuffler", but it's a Tabletop shape prop. Also that owner's `-update` skill expects `files.md`/`history.md`, which its KB lacks.
