@@ -44,7 +44,7 @@
         },
         "sessionId": {
           "type": "string",
-          "description": "Per-context, per CONTEXT-MAP.md's \"Initiator\" table: the Shuffler mints one fresh per page load (gameId already anchors identity durably, so it's free to reset); the Tabletop mints one that must persist across a refresh (no durable anchor of its own) and, for an Anonymous Session, doubles as the client-generated pseudonym display label; the Spine only passes it through. Optional here; absent for an initiator that hasn't minted one."
+          "description": "Per-context: the Shuffler mints one fresh per page load (gameId already anchors identity durably, so it's free to reset); the Tabletop mints one that must persist across a refresh (no durable anchor of its own) and, for an Anonymous Session, doubles as the client-generated pseudonym display label; the Spine only passes it through. Optional here; absent for an initiator that hasn't minted one."
         },
         "playerName": {
           "type": "string",

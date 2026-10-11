@@ -90,7 +90,7 @@ class EventContractTest < Minitest::Test
   end
 
   def test_an_initiator_missing_session_id_is_still_accepted
-    # sessionId is optional (per CONTEXT-MAP.md's "Initiator" table): the Spine only
+    # sessionId is optional: the Spine only
     # passes it through, it never requires it.
     Spine::EventContract.validate!(valid_envelope("initiator" => { "playerName" => "Jess" }))
   end
