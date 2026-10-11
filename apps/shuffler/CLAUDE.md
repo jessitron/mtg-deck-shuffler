@@ -11,6 +11,8 @@ to the workspace.
 
 This ship's seamap: `SEAMAP.md` (in this directory).
 
+Architecture, boundaries and invariants live in the domain map: `../../notes/fleet-domain-map.html`.
+
 **Don't work around a problem that actually belongs in another ship.** If a bug's root
 cause lives in the Tabletop or the Spine, fix it there — don't paper over it locally (e.g.
 loosening a timeout in one ship instead of having another send a heartbeat, which is what
@@ -213,16 +215,16 @@ Changing the shape of anything persisted (a `CardDefinition` field, `Deck`, `Per
 
 ## Table Mode (Tabletop integration)
 
-Games can join a table on the Tabletop (`apps/tabletop`), always by way of the Spine
-(`services/spine`) — the Shuffler never talks to the Tabletop directly. Prep screen
-takes optional table name + player name; the Shuffler mints a short-GUID `seatId` at
+Games can join a table on the Tabletop (`apps/tabletop`) by way of the Spine
+(`services/spine`). The domain rules — no direct Shuffler↔Tabletop call, every played card
+lands on the Stack, join idempotent per `joinRequestId`, carry the Spine's `tableUrl`,
+Spine calls best-effort — are in the domain map. Prep screen takes optional table name + player name; the Shuffler mints a short-GUID `seatId` at
 join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
 (optional fields, no version bumps). `/restart-game` carries them forward.
 
 - **Routes**: `POST /play-card/:gameId/:gameCardIndex` and `POST /discard-card/:gameId/:gameCardIndex`.
   Solo mode (no table): clipboard flow, untouched.
-  Every played card lands on the Stack; the payload names no zone. Discard sends
-  `card.discarded` (tabletop-cards-come-and-go ticket 08).
+  The `card.played` payload names no zone (see the map). Discard sends `card.discarded`.
 - **Joining a table is one call to the Spine**: `/start-game`, `/restart-game`, and
   `/yo` all call `joinSpineBestEffort()` (`src/table-sync/sendToSpine.ts`) once,
   carrying identity (`gameId`, table name, player name) *and* the full seat
@@ -234,29 +236,22 @@ join and records all three on BOTH `PersistedGamePrep` and `PersistedGameState`
   or `FakeTabletopGateway` in this ship; `src/port-tabletop/` holds only the
   `card.played` envelope shape (`buildCardPlayedEvent`) that both
   `sendCardPlayedToSpineBestEffort` and the Spine join's decoration payload build
-  against. This is **best-effort** — a Spine that's down must not block starting the
-  game, failure is a span attribute + `log.warn` — and still **awaited** before the
-  `/game` redirect. The call happens *after* `GameState.newGame()` so
+  against. Best-effort (see the map): failure is a span attribute + `log.warn`, and the
+  call is still **awaited** before the `/game` redirect. The call happens *after* `GameState.newGame()` so
   `game.listCommanders()` has minted `cardInstanceId`s to send; `game.recordSpineJoin()`
   then stamps the returned `spineTableId`/`spineSeatNumber`/`tableUrl` onto the
   already-built `GameState` before it's persisted. `TableInfo`, `GameState`, and the
   persisted game/prep all carry `tableUrl` alongside `spineTableId`/`spineSeatNumber`
-  (optional, no version bump) — the Shuffler stores the Spine's `tableUrl` and uses it
-  for the `/game` page's "Go to Table" link instead of constructing
-  `TABLETOP_PUBLIC_URL/t/<name>` itself (that construction is only a fallback, for a
-  game that never got a `tableUrl`).
+  (optional, no version bump). The `/game` page's "Go to Table" link uses the stored
+  `tableUrl`; `TABLETOP_PUBLIC_URL/t/<name>` is only a fallback, for a game that never
+  got one.
 - **Env**: `TABLETOP_PUBLIC_URL` (fallback "at table" link when a game has no
   stored `tableUrl`; default `https://table.jessitron.honeydemo.io`) and
   `SHUFFLER_PUBLIC_URL` (lets the Tabletop hotlink the standard card-back image as an
   absolute URL, and builds each seat's `gameUrl`; default
-  `https://mtg.jessitron.honeydemo.io`). Nothing on this ship talks to the Tabletop
-  directly (see `SPINE_URL` below).
-- **Spine (`src/port-spine/`)**: the join request is idempotent, keyed by the
-  Shuffler's own `gameId`, sent on the wire as the Spine's opaque `joinRequestId`
-  (never a fresh value per attempt, so it stays the same across retries and
-  `/restart-game`) — a retry (network blip) or a resend of the same
-  `gameId` returns the same seat instead of minting a second one; the Spine does
-  the recognizing, not the Shuffler. `/start-game` and `/yo` always join (one
+  `https://mtg.jessitron.honeydemo.io`).
+- **Spine (`src/port-spine/`)**: the join sends `gameId` as `joinRequestId` (idempotence:
+  see the map). `/start-game` and `/yo` always join (one
   join per fresh game). `/restart-game` guards on `!tableInfo.spineSeatNumber`
   before calling `/join` — a restart normally carries the previous game's
   `spineTableId`/`spineSeatNumber`/`tableUrl` forward unchanged (same seat, no new
